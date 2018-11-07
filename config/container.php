@@ -3,7 +3,10 @@
 declare(strict_types=1);
 
 use Doctrine\ORM\EntityManager;
+use GraphQL\Doctrine\Types;
 use Zend\ServiceManager\ServiceManager;
+
+require_once 'server/Debug.php';
 
 // Load configuration
 $config = require __DIR__ . '/config.php';
@@ -14,6 +17,18 @@ $dependencies['services']['config'] = $config;
 // Build container
 global $container;
 $container = new ServiceManager($dependencies);
+
+/**
+ * Returns the type registry
+ *
+ * @return Types
+ */
+function _types(): Types
+{
+    global $container;
+
+    return $container->get(Types::class);
+}
 
 /**
  * Returns the EM

@@ -36,11 +36,12 @@ return [
                 'proxy_dir' => 'data/cache/DoctrineORMModule/Proxy',
                 'generate_proxies' => false,
                 'filters' => [
-//                    \Application\ORM\Query\Filter\AclFilter::class => \Application\ORM\Query\Filter\AclFilter::class,
+                    \Application\ORM\Query\Filter\AclFilter::class => \Application\ORM\Query\Filter\AclFilter::class,
                 ],
             ],
         ],
         'types' => [
+            'UserRole' => Application\DBAL\Types\UserRoleType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

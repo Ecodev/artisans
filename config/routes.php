@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+use Application\Action\GraphQLAction;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
+use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
 use Zend\Expressive\MiddlewareFactory;
 
 /**
@@ -35,4 +37,9 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->get('/', \Application\Handler\HomePageHandler::class, 'home');
     $app->get('/api/ping', \Application\Handler\PingHandler::class, 'api.ping');
+
+    $app->post('/graphql', [
+        BodyParamsMiddleware::class,
+        GraphQLAction::class,
+    ], 'graphql');
 };

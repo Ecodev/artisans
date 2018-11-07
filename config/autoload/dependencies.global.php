@@ -20,7 +20,10 @@ return [
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
-            'doctrine.entity_manager.orm_default' => ContainerInteropDoctrine\EntityManagerFactory::class,
+            \Application\Middleware\AuthenticationMiddleware::class => \Application\Middleware\AuthenticationFactory::class,
+            'doctrine.entity_manager.orm_default' => \Application\ORM\EntityManagerFactory::class,
+            \Application\Action\GraphQLAction::class => \Application\Action\GraphQLFactory::class,
+            \GraphQL\Doctrine\Types::class => \Application\Api\TypesFactory::class,
         ],
     ],
 ];

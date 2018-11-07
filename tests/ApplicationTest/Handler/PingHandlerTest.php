@@ -11,7 +11,7 @@ use Zend\Diactoros\Response\JsonResponse;
 
 class PingHandlerTest extends TestCase
 {
-    public function testResponse()
+    public function testResponse(): void
     {
         $pingHandler = new PingHandler();
         $response = $pingHandler->handle(

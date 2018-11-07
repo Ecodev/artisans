@@ -20,16 +20,16 @@ class HomePageHandlerTest extends TestCase
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    /** @var RouterInterface|ObjectProphecy */
+    /** @var ObjectProphecy|RouterInterface */
     protected $router;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
         $this->router = $this->prophesize(RouterInterface::class);
     }
 
-    public function testReturnsJsonResponseWhenNoTemplateRendererProvided()
+    public function testReturnsJsonResponseWhenNoTemplateRendererProvided(): void
     {
         $homePage = new HomePageHandler(
             get_class($this->container->reveal()),
@@ -43,7 +43,7 @@ class HomePageHandlerTest extends TestCase
         $this->assertInstanceOf(JsonResponse::class, $response);
     }
 
-    public function testReturnsHtmlResponseWhenTemplateRendererProvided()
+    public function testReturnsHtmlResponseWhenTemplateRendererProvided(): void
     {
         $renderer = $this->prophesize(TemplateRendererInterface::class);
         $renderer

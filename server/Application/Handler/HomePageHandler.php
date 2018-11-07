@@ -30,8 +30,7 @@ class HomePageHandler implements RequestHandlerInterface
         string $containerName,
         Router\RouterInterface $router,
         ?TemplateRendererInterface $template = null
-    )
-    {
+    ) {
         $this->containerName = $containerName;
         $this->router = $router;
         $this->template = $template;
@@ -52,27 +51,33 @@ class HomePageHandler implements RequestHandlerInterface
             case 'Aura\Di\Container':
                 $data['containerName'] = 'Aura.Di';
                 $data['containerDocs'] = 'http://auraphp.com/packages/2.x/Di.html';
+
                 break;
             case 'Pimple\Container':
                 $data['containerName'] = 'Pimple';
                 $data['containerDocs'] = 'https://pimple.symfony.com/';
+
                 break;
             case 'Zend\ServiceManager\ServiceManager':
                 $data['containerName'] = 'Zend Servicemanager';
                 $data['containerDocs'] = 'https://docs.zendframework.com/zend-servicemanager/';
+
                 break;
             case 'Auryn\Injector':
                 $data['containerName'] = 'Auryn';
                 $data['containerDocs'] = 'https://github.com/rdlowrey/Auryn';
+
                 break;
             case 'Symfony\Component\DependencyInjection\ContainerBuilder':
                 $data['containerName'] = 'Symfony DI Container';
                 $data['containerDocs'] = 'https://symfony.com/doc/current/service_container.html';
+
                 break;
             case 'Zend\DI\Config\ContainerWrapper':
             case 'DI\Container':
                 $data['containerName'] = 'PHP-DI';
                 $data['containerDocs'] = 'http://php-di.org';
+
                 break;
         }
 

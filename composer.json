@@ -46,9 +46,8 @@
         "zendframework/zend-expressive-fastroute": "^3.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.13",
         "phpunit/phpunit": "^7.0.1",
-        "roave/security-advisories": "dev-master",
-        "squizlabs/php_codesniffer": "^2.9.1",
         "zendframework/zend-expressive-tooling": "^1.0",
         "zfcampus/zf-development-mode": "^3.1"
     },

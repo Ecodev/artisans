@@ -17,7 +17,7 @@ class HomePageHandlerFactoryTest extends TestCase
     /** @var ContainerInterface|ObjectProphecy */
     protected $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
         $router = $this->prophesize(RouterInterface::class);
@@ -25,7 +25,7 @@ class HomePageHandlerFactoryTest extends TestCase
         $this->container->get(RouterInterface::class)->willReturn($router);
     }
 
-    public function testFactoryWithoutTemplate()
+    public function testFactoryWithoutTemplate(): void
     {
         $factory = new HomePageHandlerFactory();
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
@@ -37,7 +37,7 @@ class HomePageHandlerFactoryTest extends TestCase
         $this->assertInstanceOf(HomePageHandler::class, $homePage);
     }
 
-    public function testFactoryWithTemplate()
+    public function testFactoryWithTemplate(): void
     {
         $this->container->has(TemplateRendererInterface::class)->willReturn(true);
         $this->container

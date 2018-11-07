@@ -26,8 +26,8 @@ $aggregator = new ConfigAggregator([
     class_exists(\Zend\Expressive\Swoole\ConfigProvider::class)
         ? \Zend\Expressive\Swoole\ConfigProvider::class
         : function () {
-        return [];
-    },
+            return [];
+        },
 
     // Default App module config
     Application\ConfigProvider::class,

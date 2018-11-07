@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Handler;
+namespace ApplicationTest\Handler;
 
-use App\Handler\PingHandler;
+use Application\Handler\PingHandler;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;

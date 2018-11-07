@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Handler;
+namespace ApplicationTest\Handler;
 
-use App\Handler\HomePageHandler;
+use Application\Handler\HomePageHandler;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -26,7 +26,7 @@ class HomePageHandlerTest extends TestCase
     protected function setUp()
     {
         $this->container = $this->prophesize(ContainerInterface::class);
-        $this->router    = $this->prophesize(RouterInterface::class);
+        $this->router = $this->prophesize(RouterInterface::class);
     }
 
     public function testReturnsJsonResponseWhenNoTemplateRendererProvided()

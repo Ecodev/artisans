@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Handler;
+namespace Application\Handler;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -30,13 +30,14 @@ class HomePageHandler implements RequestHandlerInterface
         string $containerName,
         Router\RouterInterface $router,
         ?TemplateRendererInterface $template = null
-    ) {
+    )
+    {
         $this->containerName = $containerName;
-        $this->router        = $router;
-        $this->template      = $template;
+        $this->router = $router;
+        $this->template = $template;
     }
 
-    public function handle(ServerRequestInterface $request) : ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if ($this->template === null) {
             return new JsonResponse([

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AppTest\Handler;
+namespace ApplicationTest\Handler;
 
-use App\Handler\HomePageHandler;
-use App\Handler\HomePageHandlerFactory;
+use Application\Handler\HomePageHandler;
+use Application\Handler\HomePageHandlerFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;

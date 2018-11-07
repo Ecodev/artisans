@@ -16,5 +16,5 @@
     </rule>
 
     <!-- Paths to check -->
-    <file>src</file>
+    <file>server</file>
 </ruleset>

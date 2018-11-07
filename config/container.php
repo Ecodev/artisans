@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Doctrine\ORM\EntityManager;
 use Zend\ServiceManager\ServiceManager;
 
 // Load configuration
@@ -11,4 +12,19 @@ $dependencies = $config['dependencies'];
 $dependencies['services']['config'] = $config;
 
 // Build container
-return new ServiceManager($dependencies);
+global $container;
+$container = new ServiceManager($dependencies);
+
+/**
+ * Returns the EM
+ *
+ * @return EntityManager
+ */
+function _em(): EntityManager
+{
+    global $container;
+
+    return $container->get(EntityManager::class);
+}
+
+return $container;

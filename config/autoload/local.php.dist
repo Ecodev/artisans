@@ -9,4 +9,17 @@
 declare(strict_types=1);
 
 return [
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
+                'params' => [
+                    'host' => 'localhost',
+                    'dbname' => 'ichtus',
+                    'user' => 'root',
+                    'password' => '',
+                    'port' => 3306,
+                ],
+            ],
+        ],
+    ],
 ];

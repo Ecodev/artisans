@@ -26,5 +26,8 @@ require 'vendor/autoload.php';
     (require 'config/pipeline.php')($app, $factory, $container);
     (require 'config/routes.php')($app, $factory, $container);
 
-    $app->run();
+    // we only run the application if this file was NOT included (otherwise, the file was included to access misc functions)
+    if (realpath(__FILE__) === realpath($_SERVER['SCRIPT_FILENAME'])) {
+        $app->run();
+    }
 })();

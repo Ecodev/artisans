@@ -10,17 +10,17 @@ return [
         // Use 'aliases' to alias a service name to another service. The
         // key is the alias name, the value is the service to which it points.
         'aliases' => [
-            // Fully\Qualified\ClassOrInterfaceName::class => Fully\Qualified\ClassName::class,
+            \Doctrine\ORM\EntityManager::class => 'doctrine.entity_manager.orm_default',
         ],
         // Use 'invokables' for constructor-less services, or services that do
         // not require arguments to the constructor. Map a service name to the
         // class name.
         'invokables' => [
-            // Fully\Qualified\InterfaceName::class => Fully\Qualified\ClassName::class,
+            \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class => \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
-            // Fully\Qualified\ClassName::class => Fully\Qualified\FactoryName::class,
+            'doctrine.entity_manager.orm_default' => ContainerInteropDoctrine\EntityManagerFactory::class,
         ],
     ],
 ];

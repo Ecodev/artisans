@@ -6,10 +6,10 @@ namespace ApplicationTest\Handler;
 
 use Application\Handler\HomePageHandler;
 use Application\Handler\HomePageHandlerFactory;
+use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Router\RouterInterface;
 use Zend\Expressive\Template\TemplateRendererInterface;
 
 class HomePageHandlerFactoryTest extends TestCase
@@ -20,9 +20,9 @@ class HomePageHandlerFactoryTest extends TestCase
     protected function setUp(): void
     {
         $this->container = $this->prophesize(ContainerInterface::class);
-        $router = $this->prophesize(RouterInterface::class);
+        $em = $this->prophesize(EntityManager::class);
 
-        $this->container->get(RouterInterface::class)->willReturn($router);
+        $this->container->get(EntityManager::class)->willReturn($em);
     }
 
     public function testFactoryWithoutTemplate(): void
@@ -31,20 +31,6 @@ class HomePageHandlerFactoryTest extends TestCase
         $this->container->has(TemplateRendererInterface::class)->willReturn(false);
 
         $this->assertInstanceOf(HomePageHandlerFactory::class, $factory);
-
-        $homePage = $factory($this->container->reveal());
-
-        $this->assertInstanceOf(HomePageHandler::class, $homePage);
-    }
-
-    public function testFactoryWithTemplate(): void
-    {
-        $this->container->has(TemplateRendererInterface::class)->willReturn(true);
-        $this->container
-            ->get(TemplateRendererInterface::class)
-            ->willReturn($this->prophesize(TemplateRendererInterface::class));
-
-        $factory = new HomePageHandlerFactory();
 
         $homePage = $factory($this->container->reveal());
 

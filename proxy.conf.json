@@ -1,0 +1,6 @@
+{
+  "/graphql": {
+    "target": "https://my-ichtus.lan",
+    "secure": false
+  }
+}

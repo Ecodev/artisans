@@ -17,6 +17,7 @@ return [
         // class name.
         'invokables' => [
             \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class => \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class,
+            \Application\DBAL\FileLogger::class => \Application\DBAL\FileLogger::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [

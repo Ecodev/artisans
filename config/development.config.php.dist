@@ -27,4 +27,13 @@ use Zend\ConfigAggregator\ConfigAggregator;
 return [
     'debug' => true,
     ConfigAggregator::ENABLE_CACHE => false,
+    'doctrine' => [
+        'configuration' => [
+            'orm_default' => [
+                // Log all SQL queries from Doctrine (to logs/all.log)
+                'sql_logger' => Application\DBAL\FileLogger::class,
+                'generate_proxies' => true,
+            ],
+        ],
+    ],
 ];

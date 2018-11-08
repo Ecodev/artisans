@@ -35,9 +35,6 @@ use Zend\Expressive\MiddlewareFactory;
  * );
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
-    $app->get('/', \Application\Handler\HomePageHandler::class, 'home');
-    $app->get('/api/ping', \Application\Handler\PingHandler::class, 'api.ping');
-
     $app->post('/graphql', [
         BodyParamsMiddleware::class,
         GraphQLAction::class,

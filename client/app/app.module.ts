@@ -54,10 +54,15 @@ export class AppModule {
 
         const middleware = new ApolloLink((operation, forward) => {
             networkActivitySvc.increase();
-            return forward(operation).map(response => {
-                networkActivitySvc.decrease();
-                return response;
-            });
+
+            if (forward) {
+                return forward(operation).map(response => {
+                    networkActivitySvc.decrease();
+                    return response;
+                });
+            }
+
+            return null;
         });
 
         const errorLink = onError(({graphQLErrors, networkError}) => {

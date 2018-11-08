@@ -12,7 +12,7 @@ export class AlertService {
     }
 
     public info(message: string, duration: number = 1500): MatSnackBarRef<SimpleSnackBar> {
-        return this.snackBar.open(message, null, {
+        return this.snackBar.open(message, undefined, {
             duration: duration,
             verticalPosition: 'top',
             horizontalPosition: 'end',
@@ -20,7 +20,7 @@ export class AlertService {
     }
 
     public error(message: string, duration: number = 1500): MatSnackBarRef<SimpleSnackBar> {
-        return this.snackBar.open(message, null, {
+        return this.snackBar.open(message, undefined, {
             duration: duration,
             panelClass: ['snackbar-error'],
             verticalPosition: 'top',

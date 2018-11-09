@@ -44,7 +44,6 @@ export class AppModule {
                 networkActivitySvc: NetworkActivityService,
                 alertSvc: AlertService,
                 private dateAdapter: DateAdapter<Date>) {
-
         dateAdapter.setLocale('fr-ch');
 
         const link = createUploadLink({

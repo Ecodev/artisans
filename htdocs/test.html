@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+
+<script type="text/javascript" src="vanilla/runtime.js"></script>
+<script type="text/javascript" src="vanilla/main.js"></script>
+
+<h1>Test</h1>
+<pre id="test"></pre>
+<script>
+    const apollo = window.apollo;
+    const query = window.query;
+
+    apollo.query({
+        query: query,
+    }).subscribe(result => {
+        console.log(result);
+
+        const a = JSON.stringify(result, null, 2);
+        document.getElementById('test').innerHTML = a;
+    });
+</script>
+</body>
+</html>

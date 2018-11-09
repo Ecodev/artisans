@@ -83,7 +83,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "client/test.ts",
-            "polyfills": "client/polyfills.ts",
+//            "polyfills": "client/polyfills.ts",
             "tsConfig": "client/tsconfig.spec.json",
             "karmaConfig": "client/karma.conf.js",
             "styles": [
@@ -135,6 +135,44 @@
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        }
+      }
+    },
+    "vanilla": {
+      "root": "client/vanilla/",
+      "sourceRoot": "client/vanilla",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "htdocs/vanilla",
+            "index": "client/vanilla/index.html",
+            "main": "client/vanilla/main.ts",
+            "tsConfig": "client/vanilla/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "outputHashing": "none",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
           }
         }
       }

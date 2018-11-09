@@ -18,6 +18,7 @@
 /htdocs/*.woff2
 /htdocs/*.ttf
 /htdocs/*.eot
+/htdocs/vanilla/
 /htdocs/assets
 /.idea/
 /logs/

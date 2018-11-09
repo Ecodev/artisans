@@ -44,7 +44,7 @@ STRING;
         $password = $dbConfig['password'];
 
         echo "dumping $dumpFile...\n";
-        $dumpCmd = "mysqldump -v --user=$username --password=$password --host=$host $database | gzip > data/dump/$dumpFile";
+        $dumpCmd = "mysqldump -v --user=$username --password=$password --host=$host $database | gzip > $dumpFile";
         self::executeLocalCommand($dumpCmd);
     }
 
@@ -91,7 +91,7 @@ STRING;
 
     public static function loadRemoteData($remote): void
     {
-        $dumpFile = "/tmp/$remote." . exec('whoami') . '.backup.gz';
+        $dumpFile = "/tmp/$remote." . exec('whoami') . '.backup.sql.gz';
         self::dumpDataRemotely($remote, $dumpFile);
         self::copyFile($remote, $dumpFile);
         self::loadData($dumpFile);

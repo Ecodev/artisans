@@ -30,10 +30,10 @@ import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 export class VanillaModule implements DoBootstrap {
 
     constructor(apollo: Apollo) {
-        console.log('CHOCOLAT');
+        console.log('Vanilla API loaded');
         window['apollo'] = apollo;
         const query = gql`
-            query Countries {
+            query CountriesVanilla {
                 countries {
                     items {
                         code

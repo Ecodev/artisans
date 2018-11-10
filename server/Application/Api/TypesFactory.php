@@ -23,14 +23,15 @@ class TypesFactory
             \Application\Api\Output\GlobalPermissionsType::class,
             \Application\Api\Output\PermissionsType::class,
             \Application\Api\QueryType::class,
-            \Application\Api\Scalar\DateTimeType::class,
+            \Application\Api\Scalar\ChronosType::class,
+            \Application\Api\Scalar\DateType::class,
             \Application\Api\Scalar\EmailType::class,
             \Application\Api\Scalar\LoginType::class,
         ];
 
         $aliases = [
-            \DateTimeImmutable::class => \Application\Api\Scalar\DateTimeType::class,
-            'datetime_immutable' => \Application\Api\Scalar\DateTimeType::class,
+            'datetime' => \Application\Api\Scalar\ChronosType::class,
+            'date' => \Application\Api\Scalar\DateType::class,
         ];
 
         // Automatically add aliases for GraphQL type name from the invokable types

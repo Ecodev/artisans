@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Api\Scalar;
 
-use Application\Api\Scalar\DateTimeType;
+use Application\Api\Scalar\ChronosType;
 use PHPUnit\Framework\TestCase;
 
-class DateTimeTypeTest extends TestCase
+class ChronosTypeTest extends TestCase
 {
     private $timezone;
 
@@ -30,7 +30,7 @@ class DateTimeTypeTest extends TestCase
      */
     public function testParseValue(string $input, ?string $expected): void
     {
-        $type = new DateTimeType();
+        $type = new ChronosType();
         $actual = $type->parseValue($input);
         if ($actual) {
             $actual = $actual->format('c');

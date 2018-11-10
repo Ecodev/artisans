@@ -42,6 +42,8 @@ return [
         ],
         'types' => [
             'UserRole' => Application\DBAL\Types\UserRoleType::class,
+            'datetime' => Application\DBAL\Types\ChronosType::class,
+            'date' => Application\DBAL\Types\DateType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

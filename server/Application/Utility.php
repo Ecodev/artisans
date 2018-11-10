@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace Application;
 
-use DateTimeImmutable;
+use Cake\Chronos\Chronos;
 
 abstract class Utility
 {
     /**
-     * @var DateTimeImmutable
+     * @var Chronos
      */
     private static $now;
 
     /**
      * Returns now, always same value for a single PHP execution
      *
-     * @return DateTimeImmutable
+     * @return Chronos
      */
-    public static function getNow(): DateTimeImmutable
+    public static function getNow(): Chronos
     {
         if (!self::$now) {
-            self::$now = new DateTimeImmutable();
+            self::$now = new Chronos();
         }
 
         return self::$now;

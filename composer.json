@@ -36,6 +36,7 @@
     },
     "require": {
         "php": "^7.2",
+        "cakephp/chronos": "^1.2",
         "dasprid/container-interop-doctrine": "^1.1",
         "doctrine/migrations": "^1.8",
         "ecodev/graphql-doctrine": "^5.0",

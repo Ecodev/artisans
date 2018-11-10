@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Repository;
 
 use Application\Model\User;
-use DateTimeImmutable;
+use Cake\Chronos\Chronos;
 
 class UserRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
 {
@@ -22,7 +22,7 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
         /** @var User $user */
         $user = $this->getByLogin($login);
 
-        if (!$user || ($user->getActiveUntil() && $user->getActiveUntil() < new DateTimeImmutable())) {
+        if (!$user || ($user->getActiveUntil() && $user->getActiveUntil() < new Chronos())) {
             return null;
         }
 

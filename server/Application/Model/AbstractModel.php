@@ -6,7 +6,7 @@ namespace Application\Model;
 
 use Application\Acl\Acl;
 use Application\Utility;
-use DateTimeImmutable;
+use Cake\Chronos\Chronos;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
@@ -33,16 +33,16 @@ abstract class AbstractModel
     private $id;
 
     /**
-     * @var DateTimeImmutable
+     * @var Chronos
      *
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $creationDate;
 
     /**
-     * @var DateTimeImmutable
+     * @var Chronos
      *
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updateDate;
 
@@ -80,9 +80,9 @@ abstract class AbstractModel
     /**
      * Set creation date
      *
-     * @param DateTimeImmutable $creationDate
+     * @param Chronos $creationDate
      */
-    private function setCreationDate(DateTimeImmutable $creationDate = null): void
+    private function setCreationDate(Chronos $creationDate = null): void
     {
         $this->creationDate = $creationDate;
     }
@@ -90,9 +90,9 @@ abstract class AbstractModel
     /**
      * Get creation date
      *
-     * @return null|DateTimeImmutable
+     * @return null|Chronos
      */
-    public function getCreationDate(): ?DateTimeImmutable
+    public function getCreationDate(): ?Chronos
     {
         return $this->creationDate;
     }
@@ -100,9 +100,9 @@ abstract class AbstractModel
     /**
      * Set update date
      *
-     * @param DateTimeImmutable $updateDate
+     * @param Chronos $updateDate
      */
-    private function setUpdateDate(DateTimeImmutable $updateDate = null): void
+    private function setUpdateDate(Chronos $updateDate = null): void
     {
         $this->updateDate = $updateDate;
     }
@@ -110,9 +110,9 @@ abstract class AbstractModel
     /**
      * Get update date
      *
-     * @return null|DateTimeImmutable
+     * @return null|Chronos
      */
-    public function getUpdateDate(): ?DateTimeImmutable
+    public function getUpdateDate(): ?Chronos
     {
         return $this->updateDate;
     }

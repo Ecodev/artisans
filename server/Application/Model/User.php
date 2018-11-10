@@ -8,8 +8,12 @@ use Application\Acl\Acl;
 use Application\Api\Exception;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasName;
+use Application\Traits\HasResponsible;
 use Application\Utility;
-use DateTimeImmutable;
+use Cake\Chronos\Chronos;
+use Cake\Chronos\Date;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
@@ -25,6 +29,7 @@ class User extends AbstractModel
     const ROLE_ADMINISTRATOR = 'administrator';
 
     use HasName;
+    use HasResponsible;
 
     /**
      * @var User
@@ -82,16 +87,28 @@ class User extends AbstractModel
     private $role = self::ROLE_MEMBER;
 
     /**
-     * @var DateTimeImmutable
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @var Chronos
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $activeUntil;
 
     /**
-     * @var DateTimeImmutable
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @var string
+     * @ORM\Column(type="string", length=25, options={"default" = ""})
      */
-    private $termsAgreement;
+    private $phone = '';
+
+    /**
+     * @var null|Date
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birthday;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="responsible")
+     */
+    private $bookings;
 
     /**
      * Constructor
@@ -101,6 +118,7 @@ class User extends AbstractModel
     public function __construct(string $role = self::ROLE_MEMBER)
     {
         $this->role = $role;
+        $this->bookings = new ArrayCollection();
     }
 
     /**
@@ -236,9 +254,9 @@ class User extends AbstractModel
     /**
      * The date until the user is active. Or `null` if there is not limit in time
      *
-     * @return null|DateTimeImmutable
+     * @return null|Chronos
      */
-    public function getActiveUntil(): ?DateTimeImmutable
+    public function getActiveUntil(): ?Chronos
     {
         return $this->activeUntil;
     }
@@ -246,9 +264,9 @@ class User extends AbstractModel
     /**
      * The date until the user is active. Or `null` if there is not limit in time
      *
-     * @param null|DateTimeImmutable $activeUntil
+     * @param null|Chronos $activeUntil
      */
-    public function setActiveUntil(?DateTimeImmutable $activeUntil): void
+    public function setActiveUntil(?Chronos $activeUntil): void
     {
         $this->activeUntil = $activeUntil;
     }
@@ -287,5 +305,58 @@ class User extends AbstractModel
         self::setCurrent($previousUser);
 
         return $result;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @return null|Date
+     */
+    public function getBirthday(): ?Date
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param null|Date $birthday
+     */
+    public function setBirthday(?Date $birthday): void
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
+     * Get bookings
+     *
+     * @return Collection
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    /**
+     * Notify the user that it has a new booking.
+     * This should only be called by Booking::setResponsible()
+     *
+     * @param Booking $booking
+     */
+    public function bookingAdded(Booking $booking): void
+    {
+        $this->bookings->add($booking);
     }
 }

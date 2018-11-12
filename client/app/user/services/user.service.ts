@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
 import { AbstractModelService } from '../../shared/services/abstract-model.service';
 import {
+    createUserMutation,
     currentUserForProfileQuery,
     loginMutation,
     logoutMutation,
@@ -47,7 +48,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             'user',
             userQuery,
             usersQuery,
-            null,
+            createUserMutation,
             updateUserMutation,
             null);
     }
@@ -68,10 +69,9 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
         return pick(input, [
             'id',
-            'firstname',
-            'lastname',
-            'title',
-            'function',
+            'name',
+            'birthday',
+            'email',
         ]);
     }
 

@@ -1,15 +1,26 @@
 import { Apollo } from 'apollo-angular';
-import { Observable, OperatorFunction, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, OperatorFunction, Subject } from 'rxjs';
+import { debounceTime, filter, map } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
 import { debounce, defaults, isArray, merge, mergeWith, pick } from 'lodash';
 import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
+import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
 
 interface VariablesWithInput {
     input: Literal;
+}
+
+interface WatchableResult<Tall> {
+    valueChanges: Observable<Tall>;
+    unsubscribe: () => void;
+}
+
+interface AppRefetchQueryDescription {
+    query: DocumentNode;
+    variables: BehaviorSubject<Literal>;
 }
 
 export abstract class AbstractModelService<Tone,
@@ -21,6 +32,11 @@ export abstract class AbstractModelService<Tone,
     Tupdate,
     Vupdate extends { id: string; input: Literal; },
     Tdelete> {
+
+    /**
+     *
+     */
+    protected static refetchVariables: Map<string, AppRefetchQueryDescription> = new Map();
 
     /**
      * Stores the debounced update function
@@ -38,6 +54,28 @@ export abstract class AbstractModelService<Tone,
         if (isArray(src)) {
             return src;
         }
+    }
+
+    /**
+     * Returns the query to refetch the watchAll if it was ever used at some point in the past.
+     *
+     * This allow us to easily refresh a list of items after create/update/delete operations.
+     *
+     * @returns RefetchQueryDescription
+     */
+    private static getRefetchQueries(): RefetchQueryDescription {
+
+        const queries: RefetchQueryDescription = [];
+
+        AbstractModelService.refetchVariables.forEach(appRefetchQueryDescription => {
+                queries.push({
+                    query: appRefetchQueryDescription.query,
+                    variables: appRefetchQueryDescription.variables.value,
+                });
+            },
+        );
+
+        return queries;
     }
 
     constructor(protected readonly apollo: Apollo,
@@ -81,6 +119,58 @@ export abstract class AbstractModelService<Tone,
             query: this.allQuery,
             variables: manager.variables.value,
         }).pipe(this.mapAll());
+    }
+
+    /**
+     * Watch query considering an observable variables set
+     * Only sends query when variables are different of undefined.
+     */
+    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, autoRefetch: boolean = false): WatchableResult<Tall> {
+        this.throwIfNotQuery(this.allQuery);
+
+        const refetchKey = Math.random() + '';
+        const resultObservable = new Subject<Tall>();
+        let queryIsSubscribed = false;
+
+        const queryRef = this.apollo.watchQuery<Tall, Vall>({
+            query: this.allQuery,
+        });
+
+        // Wait for variables to be defined (different from undefined)
+        // Null is accepted value for "no variables"
+        queryVariablesManager.variables.pipe(debounceTime(20)).subscribe(variables => {
+
+            if (typeof variables !== 'undefined') {
+
+                // Subscribe to queryRef.valueChanges only after a first non-undefined value is retrieved
+                // Subscribe to it only one time
+                if (!queryIsSubscribed) {
+                    queryRef.valueChanges.pipe(filter((result) => !result.loading), this.mapAll()).subscribe(result => {
+                        resultObservable.next(result);
+                    });
+                    queryIsSubscribed = true;
+                }
+
+                // Copy manager to prevent internal context from services to update the "variables" observable on original manager
+                const manager = new QueryVariablesManager<Vall>(queryVariablesManager);
+                manager.merge('context', this.getContextForAll());
+                queryRef.refetch(manager.variables.value);
+
+                // Add query to refetch list
+                if (autoRefetch) {
+                    AbstractModelService.refetchVariables.set(refetchKey, {
+                        query: this.allQuery,
+                        variables: manager.variables as BehaviorSubject<Literal>,
+                    });
+                }
+            }
+
+        });
+
+        return {
+            valueChanges: resultObservable.asObservable() as Observable<Tall>,
+            unsubscribe: () => AbstractModelService.refetchVariables.delete(refetchKey),
+        };
     }
 
     /**
@@ -146,11 +236,14 @@ export abstract class AbstractModelService<Tone,
 
         const variables = merge({}, {input: this.getInput(object)}, this.getContextForCreation(object));
 
+        console.log('variables', object);
+
         const observable = new Subject<Tcreate>();
 
         this.apollo.mutate<Tcreate, Vcreate>({
             mutation: this.createMutation,
             variables: variables,
+            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe(result => {
             const newObject = this.mapCreation(result);
             observable.next(mergeWith(object, newObject, AbstractModelService.mergeOverrideArray));
@@ -217,6 +310,7 @@ export abstract class AbstractModelService<Tone,
         this.apollo.mutate<Tupdate, Vupdate>({
             mutation: this.updateMutation,
             variables: variables,
+            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe((result: any) => {
             result = this.mapUpdate(result);
             mergeWith(object, result, AbstractModelService.mergeOverrideArray);
@@ -243,6 +337,7 @@ export abstract class AbstractModelService<Tone,
             variables: {
                 ids: ids,
             },
+            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe((result: any) => {
             result = this.mapDelete(result);
             observable.next(result);
@@ -369,5 +464,3 @@ export abstract class AbstractModelService<Tone,
     }
 
 }
-
-

@@ -49,6 +49,19 @@ mutation UpdateUser($id: UserID!, $input: UserPartialInput!) {
 ${userMetaFragment}
 `;
 
+export const createUserMutation = gql`
+    mutation CreateUser ($input: UserInput!) {
+        createUser (input: $input) {
+            id
+            name
+            creator {
+                ...userMeta
+            }
+        }
+    }
+    ${userMetaFragment}
+`;
+
 export const logoutMutation = gql`
 mutation Logout {
     logout

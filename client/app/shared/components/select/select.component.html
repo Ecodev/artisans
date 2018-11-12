@@ -1,0 +1,53 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px" (click)="openDialog()">
+
+    <mat-form-field class="width-auto"
+                    [ngClass]="{'clear-top-spacing':clearTopSpacing, 'clear-bottom-spacing': clearBottomSpacing}"
+                    [floatLabel]="floatPlaceholder"
+    >
+        <mat-label>{{ placeholder }}</mat-label>
+
+        <!-- Input for autocomplete -->
+        <input matInput
+               #input
+               (keydown.esc)="clear()"
+               [formControl]="formCtrl"
+               [matAutocomplete]="ac"
+               (change)="onInnerFormChange()"
+               (blur)="blur.emit()"
+               (focus)="onFocus()"
+               aria-label="Recherche et sélection"
+               i18n-aria-label
+        >
+
+
+        <!-- Meta data -->
+        <app-icon matPrefix *ngIf="!loading && showIcon" [name]="icon"></app-icon>
+        <mat-progress-spinner matPrefix *ngIf="loading" [diameter]="21" [strokeWidth]="5" mode="indeterminate"></mat-progress-spinner>
+
+        <!-- Clear button -->
+        <button *ngIf="formCtrl.value && formCtrl.enabled"
+                (click)="clear()"
+                mat-icon-button
+                matSuffix
+                i18n-matTooltip
+                matTooltip="Désélectionner"
+        >
+            <app-icon name="close"></app-icon>
+        </button>
+
+        <ng-template #defaultACItem let-item="item">
+            <span>{{ getDisplayFn()(item) }}</span>
+        </ng-template>
+
+        <mat-error *ngIf="formCtrl.hasError('required')" i18n>Ce champ est requis</mat-error>
+    </mat-form-field>
+</div>
+
+<!-- Autocomplete menu -->
+<mat-autocomplete #ac="matAutocomplete" [displayWith]="getDisplayFn()" (optionSelected)="propagateValue($event?.option?.value)">
+    <mat-option *ngFor="let item of items | async" [value]="item">
+        <ng-template [ngTemplateOutlet]="itemTemplate ? itemTemplate : defaultACItem" [ngTemplateOutletContext]="{ item: item }"
+        ></ng-template>
+    </mat-option>
+    <div style="padding:5px 10px" class="mat-caption" *ngIf="moreNbItems > 0" i18n>{{ moreNbItems }} élément(s) supplémentaire(s)</div>
+</mat-autocomplete>

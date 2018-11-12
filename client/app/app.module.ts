@@ -4,7 +4,7 @@ import { Apollo, ApolloModule } from 'apollo-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DateAdapter, MatButtonModule, MatCheckboxModule, MatDialogModule, MatSnackBarModule } from '@angular/material';
+import { DateAdapter, MatButtonModule, MatCheckboxModule, MatDialogModule, MatSnackBarModule, MatTableModule } from '@angular/material';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { AlertService } from './shared/components/alert/alert.service';
@@ -14,6 +14,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { apolloDefaultOptions } from './shared/config/apollo.default.options';
 import { TimezonePreservingDateAdapter } from './shared/services/timezone.preserving.date.adapter';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
     declarations: [
@@ -29,6 +30,8 @@ import { TimezonePreservingDateAdapter } from './shared/services/timezone.preser
         MatCheckboxModule,
         MatDialogModule,
         MatSnackBarModule,
+        FlexLayoutModule,
+        MatTableModule,
     ],
     providers: [
         {

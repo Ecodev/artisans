@@ -1,0 +1,67 @@
+<div fxLayout="column" fxLayoutGap="20px">
+
+    <div fxLayout="column">
+        <mat-form-field class="width-auto" *ngIf="!value">
+            <mat-label i18n>Rechercher</mat-label>
+            <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
+            <app-icon name="search" matPrefix></app-icon>
+        </mat-form-field>
+
+        <table mat-table class="app-row-click" [dataSource]="dataSource">
+
+            <ng-template #defaultNameCell let-item="item">
+                {{ getDisplayFn()(item) }}
+            </ng-template>
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef i18n>Titre</th>
+                <td mat-cell *matCellDef="let item">
+                    <ng-template [ngTemplateOutlet]="itemTemplate ? itemTemplate : defaultNameCell"
+                                 [ngTemplateOutletContext]="{ item: item }"
+                    ></ng-template>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="unlink">
+                <th mat-header-cell *matHeaderCellDef>
+                    <mat-progress-spinner *ngIf="loadingRemove"
+                                          mode="indeterminate"
+                                          [diameter]="24"
+                                          [strokeWidth]="5"
+                                          color="warn"
+                    ></mat-progress-spinner>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button (click)="remove(element)" color="warn" matTooltip="Dissocier">
+                        <app-icon name="link_off"></app-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="getLength() === 0">
+            <div i18n>Pas de résultats</div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="loading">
+            <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
+        </div>
+
+        <mat-paginator *ngIf="!value && getLength()"
+                       [length]="getLength()"
+                       [pageSize]="dataSource?.pagination?.pageSize"
+                       [pageIndex]="dataSource?.pagination?.pageIndex"
+                       [pageSizeOptions]="dataSource?.pageSizeOptions"
+                       (page)="dataSource?.paging($event)"
+        ></mat-paginator>
+    </div>
+
+
+
+    <div *ngIf="!disabled">
+        <button mat-raised-button color="primary" (click)="openHierarchicSelector()">{{ placeholder }}</button>
+    </div>
+</div>

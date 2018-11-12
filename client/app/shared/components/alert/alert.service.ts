@@ -11,7 +11,7 @@ export class AlertService {
     constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
     }
 
-    public info(message: string, duration: number = 1500): MatSnackBarRef<SimpleSnackBar> {
+    public info(message: string, duration: number = 2500): MatSnackBarRef<SimpleSnackBar> {
         return this.snackBar.open(message, undefined, {
             duration: duration,
             verticalPosition: 'top',
@@ -19,7 +19,7 @@ export class AlertService {
         });
     }
 
-    public error(message: string, duration: number = 1500): MatSnackBarRef<SimpleSnackBar> {
+    public error(message: string, duration: number = 2500): MatSnackBarRef<SimpleSnackBar> {
         return this.snackBar.open(message, undefined, {
             duration: duration,
             panelClass: ['snackbar-error'],

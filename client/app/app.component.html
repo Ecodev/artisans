@@ -1,18 +1,74 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-    <h1>
-        Welcome to {{ title }}!
-    </h1>
-    <img width="300" alt="Angular Logo"
-         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    <br>
-    <button type="submit"
-            mat-button
-            mat-raised-button
-            color="primary"
-            (click)="fetch()"
-    >Youpie
-    </button>
+    <h1>Welcome to {{ title }}! </h1>
+    <img width="300"
+         alt="Angular Logo"
+         src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+    >
+</div>
+
+<div fxLayout="column" style="padding:30px;">
+
+    <div fxLayout="column" fxLayoutGap="100px">
+
+        <div fxLayout="column">
+            <h1 class="mat-title">
+                Users
+                <button mat-raised-button color="primary" (click)="addUser()">add</button>
+            </h1>
+            <table mat-table [dataSource]="userDS">
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef i18n>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+            </table>
+        </div>
+
+        <div fxLayout="column">
+            <h1 class="mat-title">
+                Ressources
+                <button mat-raised-button color="primary" (click)="addItem()">add</button>
+            </h1>
+            <table mat-table [dataSource]="itemDS">
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef i18n>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+            </table>
+        </div>
+
+        <div fxLayout="column">
+            <h1 class="mat-title">
+                Bookings
+                <button mat-raised-button color="primary" (click)="addBooking()">add</button>
+            </h1>
+            <table mat-table [dataSource]="bookingDS">
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef i18n>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+            </table>
+        </div>
+    </div>
+
 </div>
 
 <pre>{{ data | json }}</pre>

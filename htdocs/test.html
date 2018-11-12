@@ -3,26 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Test</title>
+    <style>
+        pre {
+            display: inline-block;
+            vertical-align: top;
+            background-color: lightblue;
+        }
+    </style>
 </head>
 <body>
 
-<script type="text/javascript" src="vanilla/runtime.js"></script>
-<script type="text/javascript" src="vanilla/main.js"></script>
+<script type="text/javascript" src="https://my-ichtus.lan/vanilla/runtime.js"></script>
+<script type="text/javascript" src="https://my-ichtus.lan/vanilla/main.js"></script>
 
 <h1>Test</h1>
-<pre id="test"></pre>
+<pre id="test1"></pre>
+<pre id="test2"></pre>
 <script>
-    const apollo = window.apollo;
-    const query = window.query;
+    // For debugging purpose only
+    function prettyJson(data) {
+        return JSON.stringify(data, null, 2);
+    }
 
-    apollo.query({
-        query: query,
-    }).subscribe(result => {
+    // Get the API
+    const api = window.ichtusApi;
+    console.log(api);
+
+    // Use predefined service to get one user
+    api.userService.getAll().subscribe(result => {
         console.log(result);
-
-        const a = JSON.stringify(result, null, 2);
-        document.getElementById('test').innerHTML = a;
+        document.getElementById('test1').innerHTML = prettyJson(result);
     });
+
+    // Create custom GraphQL query
+    const customQuery = api.gql`
+    query Countries {
+        countries {
+            items {
+                code
+                name
+            }
+        }
+    }`;
+
+    // Execute custom query
+    api.apollo.query({query: customQuery}).subscribe(result => {
+        console.log(result);
+        document.getElementById('test2').innerHTML = prettyJson(result);
+    });
+
+    // Get currently logged in user
+    // api.userService.getCurrentUser().subscribe(user => console.log(user));
+
+    // Login new user
+    // api.userService.login({login: 'administrator', password: 'administrator'}).subscribe(result => console.log(result));
 </script>
 </body>
 </html>

@@ -3,9 +3,10 @@ import { ApplicationRef, DoBootstrap, NgModule } from '@angular/core';
 import { Apollo, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client';
-import gql from 'graphql-tag';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
+import { UserService } from '../app/user/services/user.service';
+import gql from 'graphql-tag';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
             return {
                 cache: new InMemoryCache(),
                 link: httpLink.create({
-                    uri: '/graphql',
+                    uri: 'https://my-ichtus.lan/graphql',
+                    withCredentials: true,
                 }),
             };
         },
@@ -29,24 +31,18 @@ import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 })
 export class VanillaModule implements DoBootstrap {
 
-    constructor(apollo: Apollo) {
-        console.log('Vanilla API loaded');
-        window['apollo'] = apollo;
-        const query = gql`
-            query CountriesVanilla {
-                countries {
-                    items {
-                        code
-                        name
-                    }
-                }
-            }
-        `;
-
-        window['query'] = query;
+    constructor(apollo: Apollo,
+                userService: UserService,
+    ) {
+        const api = {
+            gql,
+            apollo,
+            userService,
+        };
+        window['ichtusApi'] = api;
     }
 
-    ngDoBootstrap(appRef: ApplicationRef) {
-        console.log('empty bootstrap');
+    ngDoBootstrap(appRef: ApplicationRef): void {
+        // Nothing to do at all here
     }
 }

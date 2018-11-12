@@ -21,7 +21,7 @@ import gql from 'graphql-tag';
             return {
                 cache: new InMemoryCache(),
                 link: httpLink.create({
-                    uri: 'https://my-ichtus.lan/graphql',
+                    uri: 'https://my.ichtus.ch/graphql',
                     withCredentials: true,
                 }),
             };

@@ -16,6 +16,18 @@ if id "$DEPLOY_USER" >/dev/null 2>&1; then
     export HOME="/tmp/$DEPLOY_USER"
 fi
 
+# Try to use PHP 7.2, or fallback to default version
+PHP=`which php7.2` || PHP='php'
+
+# Because Travis has several composer installed in parallel we
+# cannot prefix it with the correct PHP, but luckily it doesn't matter
+# since Travis has only one (accessible) PHP version
+if [ -z "$TRAVIS_PHP_VERSION"  ]; then
+    COMPOSER="$PHP `which composer`"
+else
+    COMPOSER="composer"
+fi
+
 # Exit script on any error
 set -e
 
@@ -37,14 +49,14 @@ echo "Updating Node.js packages..."
 yarn install $NO_PROGRESS
 
 echo "Updating all PHP dependencies via composer..."
-composer install --classmap-authoritative $NO_PROGRESS
+$COMPOSER install --classmap-authoritative $NO_PROGRESS
 
 echo "Clear cache"
-composer clear-config-cache
+$COMPOSER clear-config-cache
 
 echo "Updating database..."
-./vendor/bin/doctrine-migrations migrations:migrate --no-interaction
-./vendor/bin/doctrine orm:generate-proxies
+$PHP ./vendor/bin/doctrine-migrations migrations:migrate --no-interaction
+$PHP ./vendor/bin/doctrine orm:generate-proxies
 
 echo "Building Angular application..."
 yarn run prod

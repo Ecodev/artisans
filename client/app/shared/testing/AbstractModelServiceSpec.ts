@@ -17,7 +17,7 @@ export abstract class AbstractModelServiceSpec {
                                               newVariables?: string | Literal): Observable<any> {
         let actual = null;
         let count = 0;
-        let result = null;
+        let result: Observable<any>;
 
         const getActual = () => {
             result = getObservable(variables);
@@ -120,7 +120,6 @@ export abstract class AbstractModelServiceSpec {
                     new QueryVariablesManager());
             })),
         );
-
 
         it('should create',
             fakeAsync(inject([serviceClass], (service: ModelService) => {

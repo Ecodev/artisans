@@ -36,7 +36,7 @@ describe('UserService', () => {
     AbstractModelServiceSpec.test(UserService, true, true, true, false, true, false);
 
     it('should get current user', fakeAsync(inject([UserService], (service: UserService) => {
-        let actual = null;
+        let actual: any = null;
         service.getCurrentUser().subscribe(v => actual = v);
         tick();
 
@@ -51,7 +51,7 @@ describe('UserService', () => {
             // Spy on resetStore
             const resetStore = spyOn(apollo.getClient(), 'resetStore').and.callThrough();
 
-            let actual = null;
+            let actual: any = null;
             service.login({
                 login: 'foo',
                 password: 'bar',
@@ -70,7 +70,7 @@ describe('UserService', () => {
         // Spy on resetStore
         const resetStore = spyOn(apollo.getClient(), 'resetStore').and.callThrough();
 
-        let actual = null;
+        let actual: any = null;
         service.logout().subscribe(v => actual = v);
         tick();
 

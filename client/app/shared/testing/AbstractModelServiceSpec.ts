@@ -14,10 +14,10 @@ export abstract class AbstractModelServiceSpec {
     private static expectNotConfiguredOrEqual(expectSuccess: boolean,
                                               getObservable: (any) => Observable<any>,
                                               variables: string | Literal | BehaviorSubject<string | Literal>,
-                                              newVariables?: string | Literal): Observable<any> {
+                                              newVariables?: string | Literal): Observable<any> | null {
         let actual = null;
         let count = 0;
-        let result: Observable<any>;
+        let result: Observable<any> | null = null;
 
         const getActual = () => {
             result = getObservable(variables);
@@ -49,10 +49,10 @@ export abstract class AbstractModelServiceSpec {
     private static expectNotConfiguredOrEqualForQueryVariablesManager(expectSuccess: boolean,
                                                                       getObservable: (any) => Observable<any>,
                                                                       qvm: QueryVariablesManager<any>,
-                                                                      newVariables?: any): Observable<any> {
+                                                                      newVariables?: any): Observable<any> | null {
         let actual = null;
         let count = 0;
-        let result = null;
+        let result: Observable<any> | null = null;
         const tickDelay = 20; // should match AbstractModel.watchAll debounceTime value
 
         const getActual = () => {
@@ -170,12 +170,6 @@ export abstract class AbstractModelServiceSpec {
             fakeAsync(inject([serviceClass], (service: ModelService) => {
                 tick();
                 expect(() => service.delete(new BehaviorSubject({id: 123}) as any).subscribe()).toThrowError(error);
-            })),
-        );
-
-        it('should resolve to model and optional enums',
-            fakeAsync(inject([serviceClass], (service: ModelService) => {
-                this.expectNotConfiguredOrEqual(expectedResolve, (id) => service.resolve(id), '123');
             })),
         );
 

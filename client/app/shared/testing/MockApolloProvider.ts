@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -15,8 +15,8 @@ import { schema as introspectionResult } from './../../../../data/tmp/schema';
     providedIn: 'root',
 })
 class MockApollo extends Apollo {
-    constructor() {
-        super();
+    constructor(ngZone: NgZone) {
+        super(ngZone);
         const mockClient = this.createMockClient();
         super.setClient(mockClient);
     }
@@ -25,7 +25,7 @@ class MockApollo extends Apollo {
      * This will create a fake ApolloClient who can responds to queries
      * against our real schema with random values
      */
-    private createMockClient(): ApolloClient {
+    private createMockClient() {
         const schema = buildClientSchema(introspectionResult.data as any);
 
         // Configure hardcoded mocked values on a type basis.

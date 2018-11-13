@@ -1,6 +1,6 @@
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, OperatorFunction, Subject } from 'rxjs';
-import { debounceTime, filter, map } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
 import { debounce, defaults, isArray, merge, mergeWith, pick } from 'lodash';
@@ -128,31 +128,35 @@ export abstract class AbstractModelService<Tone,
 
         const refetchKey = AbstractModelService.watchedQueriesCount++;
         const resultObservable = new Subject<Tall>();
-        let queryIsSubscribed = false;
+        let firstValidRun = false; // in other words : if we've already subscribed to queryRef
 
         const queryRef = this.apollo.watchQuery<Tall, Vall>({
             query: this.allQuery,
         });
 
+        const expiration = new Subject();
+
         // Wait for variables to be defined (different from undefined)
         // Null is accepted value for "no variables"
-        queryVariablesManager.variables.pipe(debounceTime(20)).subscribe(variables => {
+        queryVariablesManager.variables.pipe(takeUntil(expiration), debounceTime(20)).subscribe(variables => {
 
             if (typeof variables !== 'undefined') {
 
-                // Subscribe to queryRef.valueChanges only after a first non-undefined value is retrieved
-                // Subscribe to it only one time
-                if (!queryIsSubscribed) {
-                    queryRef.valueChanges.pipe(filter((result) => !result.loading), this.mapAll()).subscribe(result => {
-                        resultObservable.next(result);
-                    });
-                    queryIsSubscribed = true;
-                }
-
-                // Copy manager to prevent internal context from services to update the "variables" observable on original manager
+                // Apply context from service
+                // Copy manager to prevent to apply internal context to external QueryVariablesManager
                 const manager = new QueryVariablesManager<Vall>(queryVariablesManager);
                 manager.merge('context', this.getContextForAll());
                 queryRef.refetch(manager.variables.value);
+
+                // Subscription cause query to be sent
+                // First run (after refetch) to prevent duplicate query : with and without variables
+                if (!firstValidRun) {
+                    queryRef.valueChanges.pipe(takeUntil(expiration), filter((result) => !result.loading), this.mapAll())
+                            .subscribe(result => {
+                                resultObservable.next(result);
+                            });
+                    firstValidRun = true;
+                }
 
                 // Add query to refetch list
                 if (autoRefetch) {
@@ -167,7 +171,11 @@ export abstract class AbstractModelService<Tone,
 
         return {
             valueChanges: resultObservable.asObservable() as Observable<Tall>,
-            unsubscribe: () => AbstractModelService.autoRefetchQueries.delete(refetchKey),
+            unsubscribe: () => {
+                AbstractModelService.autoRefetchQueries.delete(refetchKey);
+                expiration.next();
+                expiration.complete();
+            },
         };
     }
 

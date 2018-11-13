@@ -1,6 +1,6 @@
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, OperatorFunction, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
 import { debounce, defaults, isArray, merge, mergeWith, pick } from 'lodash';
@@ -8,6 +8,7 @@ import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
 import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
+import { QueryRef } from 'apollo-angular/QueryRef';
 
 interface VariablesWithInput {
     input: Literal;
@@ -128,13 +129,9 @@ export abstract class AbstractModelService<Tone,
 
         const refetchKey = AbstractModelService.watchedQueriesCount++;
         const resultObservable = new Subject<Tall>();
-        let firstValidRun = false; // in other words : if we've already subscribed to queryRef
-
-        const queryRef = this.apollo.watchQuery<Tall, Vall>({
-            query: this.allQuery,
-        });
 
         const expiration = new Subject();
+        let lastQueryRef: QueryRef<Tall, Vall> | null = null;
 
         // Wait for variables to be defined (different from undefined)
         // Null is accepted value for "no variables"
@@ -146,17 +143,18 @@ export abstract class AbstractModelService<Tone,
                 // Copy manager to prevent to apply internal context to external QueryVariablesManager
                 const manager = new QueryVariablesManager<Vall>(queryVariablesManager);
                 manager.merge('context', this.getContextForAll());
-                queryRef.refetch(manager.variables.value);
+
+                lastQueryRef = this.apollo.watchQuery<Tall, Vall>({
+                    query: this.allQuery,
+                    variables: manager.variables.value,
+                });
 
                 // Subscription cause query to be sent
                 // First run (after refetch) to prevent duplicate query : with and without variables
-                if (!firstValidRun) {
-                    queryRef.valueChanges.pipe(takeUntil(expiration), filter((result) => !result.loading), this.mapAll())
+                lastQueryRef.valueChanges.pipe(takeUntil(expiration), this.mapAll())
                             .subscribe(result => {
                                 resultObservable.next(result);
                             });
-                    firstValidRun = true;
-                }
 
                 // Add query to refetch list
                 if (autoRefetch) {
@@ -166,7 +164,6 @@ export abstract class AbstractModelService<Tone,
                     });
                 }
             }
-
         });
 
         return {
@@ -363,10 +360,9 @@ export abstract class AbstractModelService<Tone,
      * This is used to extract only the array of fetched objects out of the entire fetched data
      */
     protected mapAll(): OperatorFunction<FetchResult<any>, Tall> {
-
         const plural = Utility.makePlural(this.name);
         return map(result => {
-            return result.data[plural];
+            return result.data ? result.data[plural] : result.data;
         });
     }
 

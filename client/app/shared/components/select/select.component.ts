@@ -258,12 +258,12 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         // When query results arrive, start loading, and count items
         this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any) => {
             this.loading = false;
-            const nbTotal = data.length;
-            const nbListed = Math.min(data.length, this.pageSize);
+            const nbTotal = data ? data.length : 0;
+            const nbListed = data ? Math.min(data.length, this.pageSize) : 0;
             this.moreNbItems = nbTotal - nbListed;
         });
 
-        this.items = this.queryRef.valueChanges.pipe(map((data: any) => data.items ? data.items : data));
+        this.items = this.queryRef.valueChanges.pipe(map((data: any) => data && data.items ? data.items : data));
     }
 
     public propagateValue(ev) {

@@ -166,7 +166,10 @@ export class RelationsComponent extends AbstractController implements OnInit, On
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        this.queryRef.unsubscribe();
+
+        if (this.queryRef) {
+            this.queryRef.unsubscribe();
+        }
     }
 
     writeValue(value) {

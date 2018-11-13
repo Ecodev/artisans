@@ -174,7 +174,10 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        this.queryRef.unsubscribe();
+
+        if (this.queryRef) {
+            this.queryRef.unsubscribe();
+        }
     }
 
     writeValue(value) {

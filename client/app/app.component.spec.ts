@@ -5,7 +5,8 @@ import { ApolloModule } from 'apollo-angular';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatDialogModule, MatSnackBarModule } from '@angular/material';
+import { MockApolloProvider } from './shared/testing/MockApolloProvider';
+import { AppMaterialModule } from './app-material/app-material.module';
 
 describe('AppComponent', () => {
     beforeEach(async(() => {
@@ -16,13 +17,13 @@ describe('AppComponent', () => {
                 ApolloModule,
                 BrowserModule,
                 BrowserAnimationsModule,
-                MatButtonModule,
-                MatCheckboxModule,
-                MatDialogModule,
-                MatSnackBarModule,
+                AppMaterialModule,
             ],
             declarations: [
                 AppComponent,
+            ],
+            providers: [
+                MockApolloProvider,
             ],
         }).compileComponents();
     }));

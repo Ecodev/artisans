@@ -11,67 +11,67 @@ describe('LinkMutationService', () => {
         });
     });
 
-    const action = {__typename: 'Action'};
-    const document = {__typename: 'Document'};
+    const booking = {__typename: 'Booking'};
+    const item = {__typename: 'Item'};
     const company = {__typename: 'Company'};
 
-    const expectAction = {
+    const expectBooking = {
         id: '456',
-        __typename: 'Action',
+        __typename: 'Booking',
     };
 
     const expectedLink = {
         data: {
-            linkActionDocument: expectAction,
+            linkBookingItem: expectBooking,
         },
     };
 
     const expectedUnlink = {
         data: {
-            unlinkActionDocument: expectAction,
+            unlinkBookingItem: expectBooking,
         },
     };
 
     it('should be able to link', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual = null;
+        let actual: any = null;
         tick();
-        service.link(action, document).subscribe(v => actual = v);
+        service.link(booking, item).subscribe(v => actual = v);
         tick();
 
         expect(actual).toEqual(expectedLink);
     })));
 
     it('should be able to link in reverse order', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual = null;
+        let actual: any = null;
         tick();
-        service.link(document, action).subscribe(v => actual = v);
+        service.link(item, booking).subscribe(v => actual = v);
         tick();
 
         expect(actual).toEqual(expectedLink);
     })));
 
     it('should be able to link with extra variables', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual = null;
+        let actual: any = null;
         tick();
-        service.link(action, document, {isMain: true}).subscribe(v => actual = v);
+        service.link(booking, item, {isMain: true}).subscribe(v => actual = v);
         tick();
 
         expect(actual).toEqual(expectedLink);
     })));
 
     it('should be able to unlink', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual = null;
+        let actual: any = null;
         tick();
-        service.unlink(action, document).subscribe(v => actual = v);
+        service.unlink(booking, item).subscribe(v => actual = v);
         tick();
 
         expect(actual).toEqual(expectedUnlink);
     })));
 
     it('should be able to unlink in reverse order', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual = null;
+        let actual: any = null;
         tick();
-        service.unlink(document, action).subscribe(v => actual = v);
+        service.unlink(item, booking).subscribe(v => actual = v);
         tick();
 
         expect(actual).toEqual(expectedUnlink);
@@ -79,34 +79,13 @@ describe('LinkMutationService', () => {
 
     it('should throw for non-existing link mutation', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
         tick();
-        expect(() => service.link(action, company).subscribe()).toThrowError('API does not allow to link Company and Action');
+        expect(() => service.link(booking, company).subscribe()).toThrowError('API does not allow to link Company and Booking');
         tick();
     })));
 
     it('should throw for non-existing unlink mutation', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
         tick();
-        expect(() => service.unlink(action, company).subscribe()).toThrowError('API does not allow to unlink Company and Action');
+        expect(() => service.unlink(booking, company).subscribe()).toThrowError('API does not allow to unlink Company and Booking');
         tick();
-    })));
-
-    it('should be able to link composed name models', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-
-        const groupDocument = {__typename: 'GroupDocument'};
-        const taxonomy = {__typename: 'Taxonomy'};
-        const expected = {
-            data: {
-                linkGroupDocumentTaxonomy: {
-                    id: '456',
-                    __typename: 'GroupDocument',
-                },
-            },
-        };
-
-        let actual = null;
-        tick();
-        service.link(groupDocument, taxonomy).subscribe(v => actual = v);
-        tick();
-
-        expect(actual).toEqual(expected);
     })));
 });

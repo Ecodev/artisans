@@ -33,7 +33,7 @@ describe('UserService', () => {
         });
     });
 
-    AbstractModelServiceSpec.test(UserService, true, true, true, false, true, false);
+    AbstractModelServiceSpec.test(UserService, true, true, true, true, true, false);
 
     it('should get current user', fakeAsync(inject([UserService], (service: UserService) => {
         let actual: any = null;

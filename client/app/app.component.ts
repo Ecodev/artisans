@@ -35,11 +35,11 @@ export class AppComponent implements OnInit {
         this.bookingDS = this.getList(this.bookingService);
 
         this.userService.login({
-            login: 'sam',
-            password: 'sam',
-        }).subscribe((res) => {
-            console.log('logué en tant que ', res);
-            this.alertService.info('Connecté en tant que sam');
+            login: 'administrator',
+            password: 'administrator',
+        }).subscribe(user => {
+            console.log('logged in as', user);
+            this.alertService.info('Connecté en tant que ' + user.name);
         });
 
     }
@@ -57,23 +57,23 @@ export class AppComponent implements OnInit {
             email: 'sam@' + Math.random() + '.com',
             password: 'sam',
         };
-        this.userService.create(userInput).subscribe(result => {
-            console.log('user created', result);
+        this.userService.create(userInput).subscribe(user => {
+            console.log('user created', user);
             this.alertService.info('user créé');
         });
     }
 
     public addItem() {
-        this.itemService.create({name: 'item' + Math.random()}).subscribe(result => {
-            console.log('item created', result);
-            this.alertService.info('user créé');
+        this.itemService.create({name: 'item' + Math.random()}).subscribe(item => {
+            console.log('item created', item);
+            this.alertService.info('item créé');
         });
     }
 
     public addBooking() {
-        this.bookingService.create({}).subscribe(result => {
-            console.log('bookin created', result);
-            this.alertService.info('user créé');
+        this.bookingService.create({}).subscribe(booking => {
+            console.log('booking created', booking);
+            this.alertService.info('booking créé');
         });
     }
 }

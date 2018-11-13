@@ -1,0 +1,4 @@
+<mat-icon [class]="icon?.class" *ngIf="icon?.font">{{ icon.font }}</mat-icon>
+<mat-icon [class]="icon?.class" *ngIf="icon?.svg" [svgIcon]="icon.name" class="svg-icon"></mat-icon>
+
+<div *ngIf="label" class="label" [ngClass]="labelColor + ' ' + labelPosition">{{ label }}</div>

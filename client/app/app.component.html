@@ -66,6 +66,34 @@
                 </ng-container>
             </table>
         </div>
+
+        <div fxLayout="column" *ngIf="itemDS?.data">
+            <h1 class="mat-title">
+                Relation ressource (id: {{ itemDS.data[0].id }}) and bookings
+                <button mat-raised-button color="primary" (click)="show = !show">Toggle second app-relations</button>
+            </h1>
+
+            <div fxLayout="row" fxLayoutGap="20px">
+                <app-relations fxFlex="50"
+                               [service]="bookingService"
+                               [main]="itemDS.data[0]"
+                               [filter]="{groups: [{conditions: [{items: {have: {values: [itemDS.data[0].id]}}}]}]}"
+                               placeholder="Associer une réservation"
+                               [displayWith]="getId"
+                ></app-relations>
+
+                <app-relations fxFlex="50"
+                               *ngIf="show"
+                               [service]="bookingService"
+                               [main]="itemDS.data[0]"
+                               [filter]="{groups: [{conditions: [{items: {have: {values: [itemDS.data[0].id]}}}]}]}"
+                               placeholder="Associer une réservation"
+                               [displayWith]="getId"
+                ></app-relations>
+
+            </div>
+        </div>
+
     </div>
 
 </div>

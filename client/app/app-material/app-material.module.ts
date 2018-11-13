@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import {
+    MatAutocompleteModule,
     MatButtonModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatIconModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
     MatSnackBarModule,
     MatTableModule,
+    MatToolbarModule,
 } from '@angular/material';
 
 /**
@@ -18,6 +25,13 @@ import {
         MatDialogModule,
         MatSnackBarModule,
         MatTableModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatAutocompleteModule,
+        MatToolbarModule,
+        MatSelectModule,
     ],
     exports: [
         MatButtonModule,
@@ -25,6 +39,13 @@ import {
         MatDialogModule,
         MatSnackBarModule,
         MatTableModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatAutocompleteModule,
+        MatToolbarModule,
+        MatSelectModule,
     ],
 })
 export class AppMaterialModule {

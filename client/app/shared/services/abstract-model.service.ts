@@ -13,12 +13,12 @@ interface VariablesWithInput {
     input: Literal;
 }
 
-interface WatchableResult<Tall> {
+export interface AutoRefetchQueryRef<Tall> {
     valueChanges: Observable<Tall>;
     unsubscribe: () => void;
 }
 
-interface AppRefetchQueryDescription {
+interface AutoRefetchQueryDescription {
     query: DocumentNode;
     variables: BehaviorSubject<Literal>;
 }
@@ -33,10 +33,8 @@ export abstract class AbstractModelService<Tone,
     Vupdate extends { id: string; input: Literal; },
     Tdelete> {
 
-    /**
-     *
-     */
-    protected static refetchVariables: Map<string, AppRefetchQueryDescription> = new Map();
+    public static watchedQueriesCount = 1;
+    public static autoRefetchQueries: Map<number, AutoRefetchQueryDescription> = new Map();
 
     /**
      * Stores the debounced update function
@@ -63,14 +61,14 @@ export abstract class AbstractModelService<Tone,
      *
      * @returns RefetchQueryDescription
      */
-    private static getRefetchQueries(): RefetchQueryDescription {
+    public static getRefetchQueries(): RefetchQueryDescription {
 
         const queries: RefetchQueryDescription = [];
 
-        AbstractModelService.refetchVariables.forEach(appRefetchQueryDescription => {
+        AbstractModelService.autoRefetchQueries.forEach(autoRefetchQueryDescription => {
                 queries.push({
-                    query: appRefetchQueryDescription.query,
-                    variables: appRefetchQueryDescription.variables.value,
+                    query: autoRefetchQueryDescription.query,
+                    variables: autoRefetchQueryDescription.variables.value,
                 });
             },
         );
@@ -125,10 +123,10 @@ export abstract class AbstractModelService<Tone,
      * Watch query considering an observable variables set
      * Only sends query when variables are different of undefined.
      */
-    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, autoRefetch: boolean = false): WatchableResult<Tall> {
+    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, autoRefetch: boolean = false): AutoRefetchQueryRef<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
-        const refetchKey = Math.random() + '';
+        const refetchKey = AbstractModelService.watchedQueriesCount++;
         const resultObservable = new Subject<Tall>();
         let queryIsSubscribed = false;
 
@@ -158,7 +156,7 @@ export abstract class AbstractModelService<Tone,
 
                 // Add query to refetch list
                 if (autoRefetch) {
-                    AbstractModelService.refetchVariables.set(refetchKey, {
+                    AbstractModelService.autoRefetchQueries.set(refetchKey, {
                         query: this.allQuery,
                         variables: manager.variables as BehaviorSubject<Literal>,
                     });
@@ -169,7 +167,7 @@ export abstract class AbstractModelService<Tone,
 
         return {
             valueChanges: resultObservable.asObservable() as Observable<Tall>,
-            unsubscribe: () => AbstractModelService.refetchVariables.delete(refetchKey),
+            unsubscribe: () => AbstractModelService.autoRefetchQueries.delete(refetchKey),
         };
     }
 
@@ -235,9 +233,6 @@ export abstract class AbstractModelService<Tone,
         this.throwIfNotQuery(this.createMutation);
 
         const variables = merge({}, {input: this.getInput(object)}, this.getContextForCreation(object));
-
-        console.log('variables', object);
-
         const observable = new Subject<Tcreate>();
 
         this.apollo.mutate<Tcreate, Vcreate>({

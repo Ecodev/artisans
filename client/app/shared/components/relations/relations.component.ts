@@ -4,6 +4,7 @@ import {
     EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -13,7 +14,6 @@ import {
 } from '@angular/core';
 import { PaginatedDataSource } from '../../services/paginated.data.source';
 import { LinkMutationService } from '../../services/link-mutation.service';
-import { QueryRef } from 'apollo-angular';
 import { BasicDataSource } from '../../services/basic.data.source';
 import { forkJoin, Observable } from 'rxjs';
 
@@ -22,6 +22,7 @@ import { AbstractController } from '../AbstractController';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
 import { FetchResult } from 'apollo-link';
+import { AbstractModelService, AutoRefetchQueryRef } from '../../services/abstract-model.service';
 
 /**
  * Custom template usage :
@@ -37,7 +38,7 @@ import { FetchResult } from 'apollo-link';
     templateUrl: './relations.component.html',
     styleUrls: ['./relations.component.scss'],
 })
-export class RelationsComponent extends AbstractController implements OnInit, OnChanges, ControlValueAccessor {
+export class RelationsComponent extends AbstractController implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
 
     @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
@@ -102,9 +103,9 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     private variablesManager: QueryVariablesManager<QueryVariables> = new QueryVariablesManager();
 
     /**
-     * Apollo observable (for refetch())
+     * Own auto refetchable query
      */
-    private dataQueryRef: QueryRef<any>;
+    private queryRef: AutoRefetchQueryRef<any>;
 
     /**
      * Manages spinning progress for add action
@@ -122,6 +123,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Table columns
      */
     public displayedColumns = [
+        'id',
         'name',
     ];
 
@@ -162,6 +164,11 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         }
     }
 
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.queryRef.unsubscribe();
+    }
+
     writeValue(value) {
         this.value = value;
     }
@@ -181,11 +188,14 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Get list from database
      */
     private queryItems() {
+
         this.loading = true;
-        this.dataQueryRef = this.service.watchAll(this.variablesManager);
+        this.queryRef = this.service.watchAll(this.variablesManager, true);
+
         this.dataSource =
-            new PaginatedDataSource(this.dataQueryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)), this.variablesManager);
-        this.dataQueryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+            new PaginatedDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)), this.variablesManager);
+
+        this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             this.loading = false;
             this.relation = null;
             this.loadingAdd = false;
@@ -241,7 +251,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         const b = !this.reverseRelation ? relation : this.main;
 
         this.linkMutationService.unlink(a, b).subscribe(() => {
-            this.dataQueryRef.refetch();
             this.loadingRemove = false;
             this.relation = null;
 
@@ -283,7 +292,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         });
 
         forkJoin(observables).subscribe(() => {
-            this.dataQueryRef.refetch();
             this.loadingAdd = false;
             this.relation = null;
 
@@ -291,7 +299,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
             // Parent may be interested by update status, but we don't have the official list yet (as it arrives only after the .refetch())
             // and there is no "then()" or "subscribe()" function on refetch().
             // There is no update() to do after collection change as relations are already created, but no value propagation for now
-
         });
     }
 

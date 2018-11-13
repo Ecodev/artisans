@@ -7,6 +7,7 @@ import { FetchResult } from 'apollo-link';
 import { Literal } from '../types';
 import { Utility } from '../classes/utility';
 import { clone } from 'lodash';
+import { AbstractModelService } from './abstract-model.service';
 
 @Injectable({
     providedIn: 'root',
@@ -95,6 +96,7 @@ export class LinkMutationService {
     private execute(mutation: string): Observable<FetchResult<{ id: string }>> {
         return this.apollo.mutate({
             mutation: gql(mutation),
+            refetchQueries: AbstractModelService.getRefetchQueries(),
         });
     }
 

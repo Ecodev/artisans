@@ -1,0 +1,24 @@
+@mixin icon($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+
+    .label {
+
+        &.primary {
+            background: mat-color($primary);
+            color: mat-color($primary, default-contrast);
+        }
+
+        &.accent {
+            background: mat-color($accent);
+            color: mat-color($accent, default-contrast);
+        }
+
+        &.warn {
+            background: mat-color($warn);
+            color: mat-color($warn, default-contrast);
+        }
+
+    }
+}

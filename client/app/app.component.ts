@@ -20,17 +20,18 @@ export class AppComponent implements OnInit {
     public itemDS;
     public bookingDS;
 
+    public show = true;
+
     public columns = ['id', 'name'];
 
     constructor(private apollo: Apollo,
                 private alertService: AlertService,
                 private userService: UserService,
-                private bookingService: BookingService,
+                public bookingService: BookingService,
                 private itemService: ItemService) {
     }
 
     public ngOnInit(): void {
-
         this.userDS = this.getList(this.userService);
         this.itemDS = this.getList(this.itemService);
         this.bookingDS = this.getList(this.bookingService);
@@ -68,22 +69,23 @@ export class AppComponent implements OnInit {
         };
 
         this.userService.create(userInput).subscribe(user => {
-            console.log('user created', user);
             this.alertService.info('user créé: ' + user.name);
         });
     }
 
     public addItem(): void {
         this.itemService.create({name: 'item' + new Date().getTime()}).subscribe(item => {
-            console.log('item created', item);
             this.alertService.info('item créé: ' + item.name);
         });
     }
 
     public addBooking(): void {
         this.bookingService.create({}).subscribe(booking => {
-            console.log('booking created', booking);
             this.alertService.info('booking créé: ' + booking.id);
         });
+    }
+
+    public getId(object): string {
+        return object ? object.id : null;
     }
 }

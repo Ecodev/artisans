@@ -5,6 +5,7 @@ import {
     ElementRef,
     EventEmitter,
     Input,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
@@ -16,11 +17,11 @@ import { Observable } from 'rxjs';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { isObject, merge } from 'lodash';
 import { distinctUntilChanged, map, sampleTime, takeUntil } from 'rxjs/operators';
-import { QueryRef } from 'apollo-angular';
 import { MatAutocompleteTrigger } from '@angular/material';
 import { AbstractController } from '../AbstractController';
 import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
+import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 
 /**
  * Default usage:
@@ -52,7 +53,7 @@ import { QueryVariables, QueryVariablesManager } from '../../classes/query-varia
     selector: 'app-select',
     templateUrl: './select.component.html',
 })
-export class SelectComponent extends AbstractController implements OnInit, ControlValueAccessor, AfterViewInit {
+export class SelectComponent extends AbstractController implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
 
     @ViewChild(MatAutocompleteTrigger) autoTrigger: MatAutocompleteTrigger;
     @ViewChild('input') input: ElementRef;
@@ -110,7 +111,7 @@ export class SelectComponent extends AbstractController implements OnInit, Contr
     public formCtrl: FormControl = new FormControl();
     public loading = false;
     public ac;
-    private queryRef: QueryRef<any>;
+    private queryRef: AutoRefetchQueryRef<any>;
 
     /**
      * Default page size
@@ -135,7 +136,7 @@ export class SelectComponent extends AbstractController implements OnInit, Contr
 
     public onChange;
 
-    constructor(@Optional() @Self() public ngControl: NgControl | null) {
+    constructor(@Optional() @Self() public ngControl: NgControl) {
 
         super();
 
@@ -169,6 +170,11 @@ export class SelectComponent extends AbstractController implements OnInit, Contr
         if (value && !this.optionRequired) {
             this.propagateValue(value);
         }
+    }
+
+    ngOnDestroy() {
+        super.ngOnDestroy();
+        this.queryRef.unsubscribe();
     }
 
     writeValue(value) {
@@ -244,7 +250,7 @@ export class SelectComponent extends AbstractController implements OnInit, Contr
         }
 
         // Init query
-        this.queryRef = this.service.watchAll(this.variablesManager);
+        this.queryRef = this.service.watchAll(this.variablesManager, true);
 
         // When query results arrive, start loading, and count items
         this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any) => {
@@ -277,7 +283,7 @@ export class SelectComponent extends AbstractController implements OnInit, Contr
             return this.displayWith;
         }
 
-        return (item) => !item ? null : item.fullName || item.name || item[this.searchField] || item;
+        return (item) => !item ? null : item.fullName || item.name || item[this.searchField] || item.id || item;
     }
 
     public clear(preventChangeValue = false) {

@@ -1,62 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Test</title>
-    <style>
-        pre {
-            display: inline-block;
-            vertical-align: top;
-            background-color: lightblue;
-        }
-    </style>
-</head>
-<body>
-
-<script type="text/javascript" src="https://my.ichtus.ch/vanilla/runtime.js"></script>
-<script type="text/javascript" src="https://my.ichtus.ch/vanilla/main.js"></script>
-
-<h1>Test</h1>
-<pre id="test1"></pre>
-<pre id="test2"></pre>
-<script>
-    // For debugging purpose only
-    function prettyJson(data) {
-        return JSON.stringify(data, null, 2);
-    }
-
-    // Get the API
-    const api = window.ichtusApi;
-    console.log(api);
-
-    // Use predefined service to get one user
-    api.userService.getAll().subscribe(result => {
-        console.log(result);
-        document.getElementById('test1').innerHTML = prettyJson(result);
-    });
-
-    // Create custom GraphQL query
-    const customQuery = api.gql`
-    query Countries {
-        countries {
-            items {
-                code
-                name
+    <head>
+        <meta charset="UTF-8">
+        <title>Test</title>
+        <style>
+            body {
+                font-size: 16px;
             }
-        }
-    }`;
 
-    // Execute custom query
-    api.apollo.query({query: customQuery}).subscribe(result => {
-        console.log(result);
-        document.getElementById('test2').innerHTML = prettyJson(result);
-    });
+            pre {
+                display: inline-block;
+                vertical-align: top;
+                background-color: lightblue;
+            }
+        </style>
+        <script type="text/javascript" src="https://my.ichtus.ch/vanilla/runtime.js"></script>
+        <script type="text/javascript" src="https://my.ichtus.ch/vanilla/main.js"></script>
+    </head>
+    <body>
 
-    // Get currently logged in user
-    // api.userService.getCurrentUser().subscribe(user => console.log(user));
+        <h1>Demo de l'api
+            <button onclick="login()">Login</button>
+        </h1>
 
-    // Login new user
-    // api.userService.login({login: 'administrator', password: 'administrator'}).subscribe(result => console.log(result));
-</script>
-</body>
+        <div>
+            Ressources
+            <button onclick="addItem()">Ajouter</button>
+            <pre id="items"></pre>
+        </div>
+
+        <script>
+
+          // For debugging purpose only
+          function prettyJson(data) {
+            return JSON.stringify(data, null, 2);
+          }
+
+          // Get the API
+          const api = window.ichtusApi;
+          console.warn('API : ', api);
+
+          // Use predefined service to get one user
+          function getItemList() {
+            api.itemService.getAll().subscribe(result => {
+              console.log('Items list : ', result);
+              document.getElementById('items').innerHTML = prettyJson(result);
+            });
+          }
+
+          // Get Item list at page loading
+          getItemList();
+
+          // Add an item
+          function addItem() {
+            const item = {name: 'Ma ressource ' + Date.now()};
+            api.itemService.create(item).subscribe(result => {
+              console.log('Item created', result);
+              getItemList();
+            })
+          }
+
+          // Create custom GraphQL query
+          function getCountries() {
+            const customQuery = api.gql`
+                query Countries {
+                    countries {
+                        items {
+                            code
+                            name
+                        }
+                    }
+                }`;
+
+            // Execute custom query
+            api.apollo.query({query: customQuery}).subscribe(result => {
+              console.log(result);
+              document.getElementById('test2').innerHTML = prettyJson(result);
+            });
+          }
+
+          // Get currently logged in user
+          // api.userService.getCurrentUser().subscribe(user => console.log(user));
+
+          // Login new user
+          function login() {
+            api.userService.login({
+              login: 'administrator',
+              password: 'administrator'
+            }).subscribe(result => console.log(result));
+          }
+
+        </script>
+    </body>
 </html>

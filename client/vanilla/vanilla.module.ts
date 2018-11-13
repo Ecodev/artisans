@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { UserService } from '../app/user/services/user.service';
 import gql from 'graphql-tag';
+import { ItemService } from '../app/item/services/item.service';
+import { BookingService } from '../app/booking/services/booking.service';
 
 @NgModule({
     imports: [
@@ -15,30 +17,42 @@ import gql from 'graphql-tag';
         ApolloModule,
         HttpLinkModule,
     ],
-    providers: [{
-        provide: APOLLO_OPTIONS,
-        useFactory: (httpLink: HttpLink) => {
-            return {
-                cache: new InMemoryCache(),
-                link: httpLink.create({
-                    uri: 'https://my.ichtus.ch/graphql',
-                    withCredentials: true,
-                }),
-            };
+    providers: [
+        {
+            provide: APOLLO_OPTIONS,
+            useFactory: (httpLink: HttpLink) => {
+                return {
+                    cache: new InMemoryCache(),
+                    link: httpLink.create({
+                        uri: 'https://my.ichtus.ch/graphql',
+                        withCredentials: true,
+                    }),
+                    defaultOptions: {
+                        query: {fetchPolicy: 'network-only'},
+                        watchQuery: {fetchPolicy: 'network-only'},
+                    },
+                };
+            },
+            deps: [HttpLink],
         },
-        deps: [HttpLink],
-    }],
+    ],
 })
 export class VanillaModule implements DoBootstrap {
 
     constructor(apollo: Apollo,
                 userService: UserService,
+                itemService: ItemService,
+                bookingService: BookingService,
     ) {
+
         const api = {
             gql,
             apollo,
             userService,
+            itemService,
+            bookingService,
         };
+
         window['ichtusApi'] = api;
     }
 

@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
 
     public show = true;
 
+    public userQueryRef;
+    public itemQueryRef;
+    public itemQVM;
+
     public columns = ['id', 'name'];
 
     constructor(private apollo: Apollo,
@@ -32,9 +36,21 @@ export class AppComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-        this.userDS = this.getList(this.userService);
-        this.itemDS = this.getList(this.itemService);
-        this.bookingDS = this.getList(this.bookingService);
+
+        const userList = this.getList(this.userService);
+        this.userQueryRef = userList.queryRef;
+        this.userDS = userList.dataSource;
+
+        const itemList = this.getList(this.itemService);
+        this.itemQueryRef = itemList.queryRef;
+        this.itemDS = itemList.dataSource;
+        this.itemQVM = itemList.variables;
+
+        this.bookingDS = this.getList(this.bookingService).dataSource;
+    }
+
+    public changeItemQVM(nb) {
+        this.itemQVM.set('pagination', {pagination: {pageIndex: 0, pageSize: nb}});
     }
 
     public login(): void {
@@ -55,8 +71,13 @@ export class AppComponent implements OnInit {
 
     public getList(service) {
         const variables = new QueryVariablesManager();
-        variables.set('variables', {});
-        return new PaginatedDataSource(service.watchAll(variables, true).valueChanges, variables);
+        variables.set('variables', {pagination: {pageIndex: 0, pageSize: 10}});
+        const queryRef = service.watchAll(variables, true);
+        return {
+            dataSource: new PaginatedDataSource(queryRef.valueChanges, variables),
+            queryRef: queryRef,
+            variables: variables,
+        };
     }
 
     public addUser(): void {

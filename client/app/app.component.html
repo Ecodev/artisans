@@ -13,7 +13,8 @@
         <div fxLayout="column">
             <h1 class="mat-title">
                 Users
-                <button mat-raised-button color="primary" (click)="addUser()">add</button>
+                <button mat-raised-button color="primary" (click)="addUser()">add</button> -
+                <button mat-raised-button color="primary" (click)="userQueryRef.unsubscribe()">unsubscribe</button>
             </h1>
             <table mat-table [dataSource]="userDS">
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>
@@ -32,7 +33,10 @@
         <div fxLayout="column">
             <h1 class="mat-title">
                 Ressources
-                <button mat-raised-button color="primary" (click)="addItem()">add</button>
+                <button mat-raised-button color="primary" (click)="addItem()">add</button> -
+                <button mat-raised-button color="primary" (click)="itemQueryRef.unsubscribe()">unsubscribe</button> -
+                <button mat-raised-button color="primary" (click)="changeItemQVM(3)">3 per page</button> -
+                <button mat-raised-button color="primary" (click)="changeItemQVM(4)">4 per page</button>
             </h1>
             <table mat-table [dataSource]="itemDS">
                 <tr mat-header-row *matHeaderRowDef="columns"></tr>

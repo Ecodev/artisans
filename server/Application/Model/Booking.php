@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * A booking linking a user and several items
  *
  * @ORM\Entity(repositoryClass="Application\Repository\BookingRepository")
  */
@@ -104,7 +104,7 @@ class Booking extends AbstractModel
     private $endDate;
 
     /**
-     * @var Chronos
+     * @var string
      *
      * @ORM\Column(type="string", length=50, options={"default" = ""})
      */
@@ -209,17 +209,17 @@ class Booking extends AbstractModel
     }
 
     /**
-     * @return Chronos
+     * @return string
      */
-    public function getEstimatedEndDate(): Chronos
+    public function getEstimatedEndDate(): string
     {
         return $this->estimatedEndDate;
     }
 
     /**
-     * @param Chronos $estimatedEndDate
+     * @param string $estimatedEndDate
      */
-    public function setEstimatedEndDate(Chronos $estimatedEndDate): void
+    public function setEstimatedEndDate(string $estimatedEndDate): void
     {
         $this->estimatedEndDate = $estimatedEndDate;
     }

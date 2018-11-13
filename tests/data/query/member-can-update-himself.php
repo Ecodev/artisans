@@ -16,7 +16,7 @@ return [
         'variables' => [
             'inputUser' => [
                 'name' => 'test name',
-                'email' => 'test email',
+                'email' => 'test@example.com',
                 'role' => User::ROLE_MEMBER,
             ],
         ],
@@ -26,7 +26,7 @@ return [
             'updateUser' => [
                 'id' => 1001,
                 'name' => 'test name',
-                'email' => 'test email',
+                'email' => 'test@example.com',
             ],
         ],
     ],

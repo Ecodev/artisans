@@ -6,7 +6,9 @@ namespace Application\Acl;
 
 use Application\Acl\Assertion\IsMyself;
 use Application\Model\AbstractModel;
+use Application\Model\Booking;
 use Application\Model\Country;
+use Application\Model\Item;
 use Application\Model\Tag;
 use Application\Model\User;
 use Doctrine\Common\Util\ClassUtils;
@@ -29,6 +31,8 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource(new ModelResource(Tag::class));
         $this->addResource(new ModelResource(User::class));
         $this->addResource(new ModelResource(Country::class));
+        $this->addResource(new ModelResource(Booking::class));
+        $this->addResource(new ModelResource(Item::class));
 
         $this->allow(User::ROLE_ANONYMOUS, new ModelResource(Tag::class), 'read');
         $this->allow(User::ROLE_ANONYMOUS, new ModelResource(Country::class), 'read');
@@ -37,10 +41,8 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_MEMBER, new ModelResource(User::class), 'read');
         $this->allow(User::ROLE_MEMBER, new ModelResource(User::class), ['update', 'delete'], new IsMyself());
 
-        // Administrator inherits nothing, but is allowed almost all privileges
-        $this->allow(User::ROLE_ADMINISTRATOR, new ModelResource(Country::class));
-        $this->allow(User::ROLE_ADMINISTRATOR, new ModelResource(Tag::class));
-        $this->allow(User::ROLE_ADMINISTRATOR, new ModelResource(User::class));
+        // Administrator inherits nothing, but is allowed all privileges
+        $this->allow(User::ROLE_ADMINISTRATOR);
     }
 
     /**

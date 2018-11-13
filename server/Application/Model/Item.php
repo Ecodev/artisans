@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * An item that can be booked by a user
  *
  * @ORM\Entity(repositoryClass="Application\Repository\ItemRepository")
  */

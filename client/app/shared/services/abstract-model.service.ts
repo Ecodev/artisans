@@ -230,7 +230,7 @@ export abstract class AbstractModelService<Tone,
      * When creation starts, object receives an unique negative ID and the mutation observable is stored in a cache
      * When creation is ready, the cache is removed and the model received his real ID
      */
-    public create(object: Literal): Observable<Tcreate> {
+    public create(object: Vcreate['input']): Observable<Tcreate> {
         this.throwIfObservable(object);
         this.throwIfNotQuery(this.createMutation);
 
@@ -268,7 +268,7 @@ export abstract class AbstractModelService<Tone,
     /**
      * Update an object
      */
-    public update(object: Literal): Observable<Tupdate> {
+    public update(object: Vupdate['input']): Observable<Tupdate> {
         this.throwIfObservable(object);
         this.throwIfNotQuery(this.updateMutation);
 
@@ -297,7 +297,7 @@ export abstract class AbstractModelService<Tone,
     /**
      * Update an object
      */
-    public updateNow(object: Literal): Observable<Tupdate> {
+    public updateNow(object: Vupdate['input']): Observable<Tupdate> {
         this.throwIfObservable(object);
         this.throwIfNotQuery(this.updateMutation);
 

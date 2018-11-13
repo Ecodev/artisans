@@ -4,6 +4,8 @@ import { pick } from 'lodash';
 import { AbstractModelService } from '../../shared/services/abstract-model.service';
 import { createItemMutation, itemQuery, itemsQuery, updateItemMutation } from './item.queries';
 import {
+    CreateItemMutation,
+    CreateItemMutationVariables, ItemInput,
     ItemPartialInput,
     ItemQuery,
     ItemQueryVariables,
@@ -20,12 +22,11 @@ export class ItemService extends AbstractModelService<ItemQuery['item'],
     ItemQueryVariables,
     ItemsQuery['items'],
     ItemsQueryVariables,
-    any,
-    any,
+    CreateItemMutation['createItem'],
+    CreateItemMutationVariables,
     UpdateItemMutation['updateItem'],
     UpdateItemMutationVariables,
     any> {
-
 
     constructor(apollo: Apollo) {
         super(apollo,
@@ -37,10 +38,10 @@ export class ItemService extends AbstractModelService<ItemQuery['item'],
             null);
     }
 
-    public getEmptyObject(): ItemPartialInput {
+    public getEmptyObject(): ItemInput {
         return {
             name: '',
-            description: ''
+            description: '',
         };
     }
 

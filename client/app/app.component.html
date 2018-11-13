@@ -2,6 +2,8 @@
 <div style="text-align:center">
     <h1>Welcome to {{ title }}! </h1>
     <img alt="Logo" src="assets/logo.png" style="position: absolute;top: 10px;right: 10px;">
+    <button mat-raised-button color="primary" (click)="login()">login</button>
+    <button mat-raised-button (click)="logout()">logout</button>
 </div>
 
 <div fxLayout="column" style="padding:30px;">

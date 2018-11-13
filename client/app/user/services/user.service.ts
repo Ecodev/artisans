@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
-import { Literal } from '../../shared/types';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
 import { AbstractModelService } from '../../shared/services/abstract-model.service';
@@ -16,12 +15,15 @@ import {
     usersQuery,
 } from './user.queries';
 import {
+    CreateUserMutation,
+    CreateUserMutationVariables,
     CurrentUserForProfileQuery,
-    LoginMutation, LoginMutationVariables,
+    LoginMutation,
+    LoginMutationVariables,
     LogoutMutation,
     UpdateUserMutation,
     UpdateUserMutationVariables,
-    UserPartialInput,
+    UserInput,
     UserQuery,
     UserQueryVariables,
     UsersQuery,
@@ -35,8 +37,8 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     UserQueryVariables,
     UsersQuery['users'],
     UsersQueryVariables,
-    any,
-    any,
+    CreateUserMutation['createUser'],
+    CreateUserMutationVariables,
     UpdateUserMutation['updateUser'],
     UpdateUserMutationVariables,
     any> {
@@ -53,26 +55,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             null);
     }
 
-    public getEmptyObject(): UserPartialInput {
+    public getEmptyObject(): UserInput {
         return {
+            login: '',
+            password: '',
+            email: '',
             name: '',
             birthday: null,
-            email: '',
         };
-    }
-
-    /**
-     * Override parent to allow only a very restricted mutation
-     */
-    protected getInput(object: Literal): Literal {
-        const input = super.getInput(object);
-
-        return pick(input, [
-            'id',
-            'name',
-            'birthday',
-            'email',
-        ]);
     }
 
     public getCurrentUser(): Observable<CurrentUserForProfileQuery['viewer']> {

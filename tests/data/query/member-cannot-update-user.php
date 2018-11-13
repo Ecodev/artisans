@@ -12,7 +12,7 @@ return [
         }',
         'variables' => [
             'inputUser' => [
-                'email' => 'test email',
+                'email' => 'test@example.com',
             ],
         ],
     ],

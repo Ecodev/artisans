@@ -65,14 +65,14 @@ class User extends AbstractModel
      *
      * @ORM\Column(type="string", length=50, unique=true)
      */
-    private $login = '';
+    private $login;
 
     /**
-     * @var string
+     * @var null|string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $password = '';
+    private $password;
 
     /**
      * @var string
@@ -166,15 +166,17 @@ class User extends AbstractModel
      *
      * @API\Exclude
      *
-     * @return string
+     * @return null|string
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
     /**
      * Set email
+     *
+     * @API\Input(type="Email")
      *
      * @param string $email
      */

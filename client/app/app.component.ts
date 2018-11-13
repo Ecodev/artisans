@@ -6,6 +6,7 @@ import { ItemService } from './item/services/item.service';
 import { QueryVariablesManager } from './shared/classes/query-variables-manager';
 import { AlertService } from './shared/components/alert/alert.service';
 import { PaginatedDataSource } from './shared/services/paginated.data.source';
+import { UserInput } from './shared/generated-types';
 
 @Component({
     selector: 'app-root',
@@ -33,7 +34,9 @@ export class AppComponent implements OnInit {
         this.userDS = this.getList(this.userService);
         this.itemDS = this.getList(this.itemService);
         this.bookingDS = this.getList(this.bookingService);
+    }
 
+    public login(): void {
         this.userService.login({
             login: 'administrator',
             password: 'administrator',
@@ -41,7 +44,12 @@ export class AppComponent implements OnInit {
             console.log('logged in as', user);
             this.alertService.info('Connecté en tant que ' + user.name);
         });
+    }
 
+    public logout(): void {
+        this.userService.logout().subscribe(() => {
+            this.alertService.info('Déconnecté');
+        });
     }
 
     public getList(service) {
@@ -50,30 +58,32 @@ export class AppComponent implements OnInit {
         return new PaginatedDataSource(service.watchAll(variables, true).valueChanges, variables);
     }
 
-    public addUser() {
-        const userInput = {
-            name: 'user' + Math.random(),
-            login: 'user' + Math.random(),
-            email: 'sam@' + Math.random() + '.com',
-            password: 'sam',
+    public addUser(): void {
+        const unique = 'user' + new Date().getTime();
+        const userInput: UserInput = {
+            login: unique,
+            password: unique,
+            name: unique,
+            email: unique + '@example.com',
         };
+
         this.userService.create(userInput).subscribe(user => {
             console.log('user created', user);
-            this.alertService.info('user créé');
+            this.alertService.info('user créé: ' + user.name);
         });
     }
 
-    public addItem() {
-        this.itemService.create({name: 'item' + Math.random()}).subscribe(item => {
+    public addItem(): void {
+        this.itemService.create({name: 'item' + new Date().getTime()}).subscribe(item => {
             console.log('item created', item);
-            this.alertService.info('item créé');
+            this.alertService.info('item créé: ' + item.name);
         });
     }
 
-    public addBooking() {
+    public addBooking(): void {
         this.bookingService.create({}).subscribe(booking => {
             console.log('booking created', booking);
-            this.alertService.info('booking créé');
+            this.alertService.info('booking créé: ' + booking.id);
         });
     }
 }

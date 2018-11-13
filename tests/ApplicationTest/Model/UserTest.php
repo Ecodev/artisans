@@ -97,7 +97,7 @@ class UserTest extends TestCase
     public function testSetPassword(): void
     {
         $user = new User();
-        self::assertSame('', $user->getPassword(), 'should have no password at first');
+        self::assertNull($user->getPassword(), 'should have no password at first');
 
         $user->setPassword('12345');
         $actual1 = $user->getPassword();

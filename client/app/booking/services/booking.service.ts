@@ -4,6 +4,7 @@ import { pick } from 'lodash';
 import { AbstractModelService } from '../../shared/services/abstract-model.service';
 import { bookingQuery, bookingsQuery, createBookingMutation, updateBookingMutation } from './booking.queries';
 import {
+    BookingInput,
     BookingPartialInput,
     BookingQuery,
     BookingQueryVariables,
@@ -36,7 +37,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
             null);
     }
 
-    public getEmptyObject(): BookingPartialInput {
+    public getEmptyObject(): BookingInput {
         return {
             startDate: '2018',
             endDate: '2018',

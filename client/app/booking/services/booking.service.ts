@@ -5,7 +5,6 @@ import { AbstractModelService } from '../../shared/services/abstract-model.servi
 import { bookingQuery, bookingsQuery, createBookingMutation, updateBookingMutation } from './booking.queries';
 import {
     BookingInput,
-    BookingPartialInput,
     BookingQuery,
     BookingQueryVariables,
     BookingsQuery,

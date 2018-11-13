@@ -22,7 +22,7 @@ import { AbstractController } from '../AbstractController';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
 import { FetchResult } from 'apollo-link';
-import { AbstractModelService, AutoRefetchQueryRef } from '../../services/abstract-model.service';
+import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 
 /**
  * Custom template usage :

@@ -5,8 +5,8 @@ import { AbstractModelService } from '../../shared/services/abstract-model.servi
 import { createItemMutation, itemQuery, itemsQuery, updateItemMutation } from './item.queries';
 import {
     CreateItemMutation,
-    CreateItemMutationVariables, ItemInput,
-    ItemPartialInput,
+    CreateItemMutationVariables,
+    ItemInput,
     ItemQuery,
     ItemQueryVariables,
     ItemsQuery,

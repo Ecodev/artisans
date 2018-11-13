@@ -32,7 +32,7 @@ import { SelectComponent } from './shared/components/select/select.component';
     declarations: [
         AppComponent,
         RelationsComponent,
-        SelectComponent
+        SelectComponent,
     ],
     imports: [
         BrowserModule,

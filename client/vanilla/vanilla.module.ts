@@ -9,6 +9,7 @@ import { UserService } from '../app/user/services/user.service';
 import gql from 'graphql-tag';
 import { ItemService } from '../app/item/services/item.service';
 import { BookingService } from '../app/booking/services/booking.service';
+import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
 
 @NgModule({
     imports: [
@@ -51,6 +52,7 @@ export class VanillaModule implements DoBootstrap {
             userService,
             itemService,
             bookingService,
+            QueryVariablesManager
         };
 
         window['ichtusApi'] = api;

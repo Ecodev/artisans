@@ -20,13 +20,23 @@
     <body>
 
         <h1>Demo de l'api
-            <button onclick="login()">Login</button>
+            <button onclick="login()">Login (requis pour utiliser les autres requêtes)</button>
         </h1>
 
-        <div>
-            Ressources
+        <h2>Ressources
             <button onclick="addItem()">Ajouter</button>
-            <pre id="items"></pre>
+        </h2>
+
+        <div style="display: flex;flex-direction:row;">
+            <div style="display: flex;flex-direction:column;margin-right:30px;">
+                Non filtrées
+                <pre id="items"></pre>
+            </div>
+
+            <div style="display: flex;flex-direction:column;">
+                Ressources that contain "81" string
+                <pre id="filteredItems"></pre>
+            </div>
         </div>
 
         <script>
@@ -41,15 +51,34 @@
           console.warn('API : ', api);
 
           // Use predefined service to get one user
-          function getItemList() {
-            api.itemService.getAll().subscribe(result => {
+          function getItemList(filter = {}, resultDiv = 'items') {
+
+            // Config filters
+            const variables = new api.QueryVariablesManager();
+            variables.set('variables', filter);
+
+            // Get all items
+            api.itemService.getAll(variables).subscribe(result => {
               console.log('Items list : ', result);
-              document.getElementById('items').innerHTML = prettyJson(result);
+              document.getElementById(resultDiv).innerHTML = prettyJson(result);
             });
           }
 
           // Get Item list at page loading
           getItemList();
+
+          // Get filtered items
+          getItemList({
+            filter: {
+              groups: [
+                {conditions: [{name: {like: {value: '%81%'}}}]}
+              ]
+            },
+            pagination: {
+              pageSize: 5,
+              pageIndex: 0
+            }
+          }, 'filteredItems');
 
           // Add an item
           function addItem() {

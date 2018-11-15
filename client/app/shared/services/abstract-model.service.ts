@@ -1,6 +1,6 @@
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, OperatorFunction, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
 import { debounce, defaults, isArray, merge, mergeWith, pick } from 'lodash';
@@ -8,7 +8,6 @@ import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
 import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
-import { QueryRef } from 'apollo-angular/QueryRef';
 
 interface VariablesWithInput {
     input: Literal;
@@ -124,18 +123,25 @@ export abstract class AbstractModelService<Tone,
      * Watch query considering an observable variables set
      * Only sends query when variables are different of undefined.
      */
+    /**
+     * Watch query considering an observable variables set
+     * Only sends query when variables are different of undefined.
+     */
     public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, autoRefetch: boolean = false): AutoRefetchQueryRef<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
+        // Get unique ID to identify the query
         const refetchKey = AbstractModelService.watchedQueriesCount++;
+
+        // Observable where we update the result value
         const resultObservable = new Subject<Tall>();
 
-        const expiration = new Subject();
-        let lastQueryRef: QueryRef<Tall, Vall> | null = null;
+        // Expire all subscriptions when completed (when calling result.unsubscribe())
+        const expire = new Subject();
 
         // Wait for variables to be defined (different from undefined)
         // Null is accepted value for "no variables"
-        queryVariablesManager.variables.pipe(takeUntil(expiration), debounceTime(20)).subscribe(variables => {
+        queryVariablesManager.variables.pipe(debounceTime(20), takeUntil(expire)).subscribe(variables => {
 
             if (typeof variables !== 'undefined') {
 
@@ -144,34 +150,33 @@ export abstract class AbstractModelService<Tone,
                 const manager = new QueryVariablesManager<Vall>(queryVariablesManager);
                 manager.merge('context', this.getContextForAll());
 
-                lastQueryRef = this.apollo.watchQuery<Tall, Vall>({
+                if (autoRefetch) {
+                    AbstractModelService.autoRefetchQueries.set(refetchKey, {
+                        query: this.allQuery,
+                        variables: manager.variables as BehaviorSubject<Vall>,
+                    });
+                    window['watchedQueries'] = AbstractModelService.autoRefetchQueries.size;
+                }
+
+                const lastQueryRef = this.apollo.watchQuery<Tall, Vall>({
                     query: this.allQuery,
                     variables: manager.variables.value,
                 });
 
                 // Subscription cause query to be sent
                 // First run (after refetch) to prevent duplicate query : with and without variables
-                lastQueryRef.valueChanges.pipe(takeUntil(expiration), this.mapAll())
-                            .subscribe(result => {
-                                resultObservable.next(result);
-                            });
-
-                // Add query to refetch list
-                if (autoRefetch) {
-                    AbstractModelService.autoRefetchQueries.set(refetchKey, {
-                        query: this.allQuery,
-                        variables: manager.variables as BehaviorSubject<Literal>,
-                    });
-                }
+                lastQueryRef.valueChanges.pipe(takeUntil(expire), filter(r => !!r.data), this.mapAll())
+                            .subscribe(result => resultObservable.next(result));
             }
         });
 
         return {
-            valueChanges: resultObservable.asObservable() as Observable<Tall>,
+            valueChanges: resultObservable.pipe(takeUntil(expire)) as Observable<Tall>,
             unsubscribe: () => {
                 AbstractModelService.autoRefetchQueries.delete(refetchKey);
-                expiration.next();
-                expiration.complete();
+                expire.next();
+                expire.complete();
+                window['watchedQueries'] = AbstractModelService.autoRefetchQueries.size;
             },
         };
     }

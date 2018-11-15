@@ -1,13 +1,13 @@
 <div fxLayout="column" fxLayoutGap="20px">
 
-    <div fxLayout="column">
+    <div fxLayout="column" *ngIf="getLength() > 0">
         <mat-form-field class="width-auto" *ngIf="!value">
             <mat-label i18n>Rechercher</mat-label>
             <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
             <app-icon name="search" matPrefix></app-icon>
         </mat-form-field>
 
-        <table mat-table class="app-row-click" [dataSource]="dataSource">
+        <table mat-table class="app-row-click" [dataSource]="dataSource" >
 
             <ng-template #defaultNameCell let-item="item">
                 {{ getDisplayFn()(item) }}

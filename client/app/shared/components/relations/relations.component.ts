@@ -123,17 +123,11 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Table columns
      */
     public displayedColumns = [
-        'id',
         'name',
     ];
 
-    // @off
-    public onChange: (value: any) => void = () => {
-    }
-
-    public onTouched: (value: any) => void = () => {
-    }
-    // @on
+    public onChange;
+    public onTouched;
 
     constructor(private linkMutationService: LinkMutationService,
                 @Optional() @Self() public ngControl: NgControl) {

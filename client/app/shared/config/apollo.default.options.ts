@@ -2,7 +2,7 @@ import { DefaultOptions } from 'apollo-client/ApolloClient';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
-        fetchPolicy: 'network-only',
+        fetchPolicy: 'cache-first',
     },
     watchQuery: {
         fetchPolicy: 'cache-and-network',

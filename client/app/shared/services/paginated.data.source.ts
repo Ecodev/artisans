@@ -7,7 +7,7 @@
 
 import { Observable } from 'rxjs';
 import { BasicDataSource } from './basic.data.source';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
 
 export class PaginatedDataSource extends BasicDataSource<any> {
@@ -15,8 +15,8 @@ export class PaginatedDataSource extends BasicDataSource<any> {
     public length = null;
 
     constructor(data: Observable<any>, private variablesManager: QueryVariablesManager) {
-        super(data.pipe(filter(v => v && v.items), map(v => v.items)));
-        data.subscribe(result => this.length = result ? result.length : undefined);
+        super(data.pipe(map(v => v.items)));
+        data.subscribe(result => (this.length = result.length));
     }
 
     get pagination() {

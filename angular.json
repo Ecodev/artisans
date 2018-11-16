@@ -63,6 +63,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "ssl": true,
+            "port": 4300,
             "browserTarget": "my-ichtus:build",
             "host": "my-ichtus.lan",
             "proxyConfig": "proxy.conf.json"

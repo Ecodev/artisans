@@ -6,6 +6,16 @@ export const bookingsQuery = gql`
         bookings(filter: $filter, pagination: $pagination) {
             items {
                 id
+                destination
+                endComment
+                endDate
+                estimatedEndDate
+                creationDate
+                updateDate
+                items {
+                    id
+                    name
+                }
             }
             pageSize
             pageIndex

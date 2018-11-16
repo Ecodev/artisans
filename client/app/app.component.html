@@ -10,10 +10,25 @@
 
     <div fxLayout="column" fxLayoutGap="100px">
 
+        <div>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <button mat-raised-button color="accent" (click)="smyle()">Smyle :)</button>
+                <button mat-raised-button color="accent" (click)="capture()">Smyle better :)</button>
+            </div>
+            <div fxLayout="row">
+                <video fxFlex="50" autoplay #video></video>
+                <div fxFlex="50">
+                    <img #image src="">
+                    <canvas #canvas style="display:none;"></canvas>
+                </div>
+            </div>
+        </div>
+
         <div fxLayout="column">
             <h1 class="mat-title">
                 Users
-                <button mat-raised-button color="primary" (click)="addUser()">add</button> -
+                <button mat-raised-button color="primary" (click)="addUser()">add</button>
+                -
                 <button mat-raised-button color="primary" (click)="userQueryRef.unsubscribe()">unsubscribe</button>
             </h1>
             <table mat-table [dataSource]="userDS">
@@ -33,9 +48,12 @@
         <div fxLayout="column">
             <h1 class="mat-title">
                 Ressources
-                <button mat-raised-button color="primary" (click)="addItem()">add</button> -
-                <button mat-raised-button color="primary" (click)="itemQueryRef.unsubscribe()">unsubscribe</button> -
-                <button mat-raised-button color="primary" (click)="changeItemQVM(3)">3 per page</button> -
+                <button mat-raised-button color="primary" (click)="addItem()">add</button>
+                -
+                <button mat-raised-button color="primary" (click)="itemQueryRef.unsubscribe()">unsubscribe</button>
+                -
+                <button mat-raised-button color="primary" (click)="changeItemQVM(3)">3 per page</button>
+                -
                 <button mat-raised-button color="primary" (click)="changeItemQVM(4)">4 per page</button>
             </h1>
             <table mat-table [dataSource]="itemDS">

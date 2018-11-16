@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { UserService } from './user/services/user.service';
 import { BookingService } from './booking/services/booking.service';
@@ -14,6 +14,11 @@ import { UserInput } from './shared/generated-types';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+
+    @ViewChild('video') videoRef: ElementRef;
+    @ViewChild('image') imageRef: ElementRef;
+    @ViewChild('canvas') canvasRef: ElementRef;
+
     title = 'my-ichtus';
 
     public userDS;
@@ -47,6 +52,23 @@ export class AppComponent implements OnInit {
         this.itemQVM = itemList.variables;
 
         this.bookingDS = this.getList(this.bookingService).dataSource;
+    }
+
+
+    public smyle() {
+        const mediaConstraints: MediaStreamConstraints = {video: true};
+        navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
+            console.log(stream);
+            this.videoRef.nativeElement.srcObject = stream;
+        });
+    }
+
+    public capture() {
+        this.canvasRef.nativeElement.width = this.videoRef.nativeElement.videoWidth;
+        this.canvasRef.nativeElement.height = this.videoRef.nativeElement.videoHeight;
+        this.canvasRef.nativeElement.getContext('2d').drawImage(this.videoRef.nativeElement, 0, 0);
+        // Other browsers will fall back to image/png
+        this.imageRef.nativeElement.src = this.canvasRef.nativeElement.toDataURL('image/webp');
     }
 
     public changeItemQVM(nb) {

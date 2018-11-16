@@ -10,6 +10,7 @@ import gql from 'graphql-tag';
 import { ItemService } from '../app/item/services/item.service';
 import { BookingService } from '../app/booking/services/booking.service';
 import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
+import { LinkMutationService } from '../app/shared/services/link-mutation.service';
 
 @NgModule({
     imports: [
@@ -44,6 +45,7 @@ export class VanillaModule implements DoBootstrap {
                 userService: UserService,
                 itemService: ItemService,
                 bookingService: BookingService,
+                linkMutation: LinkMutationService
     ) {
 
         const api = {
@@ -52,7 +54,8 @@ export class VanillaModule implements DoBootstrap {
             userService,
             itemService,
             bookingService,
-            QueryVariablesManager
+            QueryVariablesManager,
+            linkMutation
         };
 
         window['ichtusApi'] = api;

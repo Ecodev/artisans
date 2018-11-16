@@ -118,13 +118,13 @@ export class AppComponent implements OnInit {
 
     public addItem(): void {
         this.itemService.create({name: 'item' + new Date().getTime()}).subscribe(item => {
-            this.alertService.info('item créé: ' + item.name);
+            this.alertService.info('item créé: ' + item);
         });
     }
 
     public addBooking(): void {
         this.bookingService.create({}).subscribe(booking => {
-            this.alertService.info('booking créé: ' + booking.id);
+            this.alertService.info('booking créé: ' + booking);
         });
     }
 

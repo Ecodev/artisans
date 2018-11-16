@@ -25,7 +25,7 @@
 
         <div style="display: flex;flex-direction:row;">
 
-            <div style="flex:1; display: flex;flex-direction:column;margin-right:30px;">
+            <div style="flex:1; display: flex;flex-direction:column;margin-right:30px;overflow:auto">
 
                 <h2>Ressources
                     <button onclick="addItem()">Ajouter</button>
@@ -41,7 +41,7 @@
                 </div>
             </div>
 
-            <div style="flex:1; display: flex;flex-direction:column;">
+            <div style="flex:1; display: flex;flex-direction:column;overflow:auto">
                 <h2>Sorties
                     <button onclick="createBooking(1)">Ajouter avec la ressource 1</button>
                     <button onclick="createBooking(2)">Ajouter avec la ressource 2</button>
@@ -72,7 +72,7 @@
             // Get all items
             api.itemService.getAll(variables).subscribe(result => {
               console.log('Items list : ', result);
-              document.getElementById(resultDiv).innerHTML = prettyJson(result);
+              document.getElementById(resultDiv).innerHTML = prettyJson(result.items);
             });
           }
 
@@ -111,7 +111,7 @@
             // Get all items
             api.bookingService.getAll(variables).subscribe(result => {
               console.log('Booking list : ', result);
-              document.getElementById(resultDiv).innerHTML = prettyJson(result);
+              document.getElementById(resultDiv).innerHTML = prettyJson(result.items);
             });
           }
 

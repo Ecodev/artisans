@@ -1,24 +1,32 @@
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../shared/queries/fragments';
 
+export const itemMetaFragment = gql`
+    fragment itemMeta on Item {
+        id
+        name
+        description
+    }
+`;
+
 export const itemsQuery = gql`
     query Items($filter: ItemFilter, $pagination: PaginationInput) {
         items(filter: $filter, pagination: $pagination) {
             items {
-                id
-                name
+                ...itemMeta
             }
             pageSize
             pageIndex
             length
         }
-    }`;
+    }
+${itemMetaFragment}`;
 
 export const itemQuery = gql`
     query Item($id: ItemID!) {
         item(id: $id) {
             id
-            name
+            ...itemMeta
             creator {
                 ...userMeta
             }
@@ -28,13 +36,13 @@ export const itemQuery = gql`
             }
         }
     }
+${itemMetaFragment}
 ${userMetaFragment}`;
 
 export const createItemMutation = gql`
     mutation CreateItem ($input: ItemInput!) {
         createItem (input: $input) {
             id
-            name
             creator {
                 ...userMeta
             }

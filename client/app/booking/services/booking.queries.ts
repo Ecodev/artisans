@@ -1,32 +1,50 @@
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../shared/queries/fragments';
 
+export const bookingMetaFragment = gql`
+    fragment bookingMeta on Booking {
+        id
+        destination
+        startComment
+        startDate
+        endComment
+        endDate
+        estimatedEndDate
+        creationDate
+        updateDate
+        participantCount
+        responsible {
+            id
+            ...userMeta
+        }
+        owner {
+            id
+            ...userMeta
+        }
+        items {
+            id
+            name
+        }
+    }
+${userMetaFragment}`;
+
 export const bookingsQuery = gql`
     query Bookings($filter: BookingFilter, $pagination: PaginationInput) {
         bookings(filter: $filter, pagination: $pagination) {
             items {
-                id
-                destination
-                endComment
-                endDate
-                estimatedEndDate
-                creationDate
-                updateDate
-                items {
-                    id
-                    name
-                }
+                ...bookingMeta
             }
             pageSize
             pageIndex
             length
         }
-    }`;
+    }
+${bookingMetaFragment}`;
 
 export const bookingQuery = gql`
     query Booking($id: BookingID!) {
         booking(id: $id) {
-            id
+            ...bookingMeta
             creator {
                 ...userMeta
             }

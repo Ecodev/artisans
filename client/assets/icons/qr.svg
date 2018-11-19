@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.qr-st0{fill:url(#SVGID_1_);}
+</style>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="256" y1="2" x2="256" y2="510.0482">
+	<stop  offset="0" style="stop-color:#E3B3FF"/>
+	<stop  offset="1" style="stop-color:#5BC0FD"/>
+</linearGradient>
+<path class="qr-st0" d="M256,60v40h-40V60H256z M216,295v57h40v-57H216z M336,512v-40h-40v-40h-40v80H336z M416,215H296v40h120V215z
+	 M416,295h56v-40h-56V295z M416,352v40h96v-97h-40v57H416z M296,0h-40v60h40V0z M256,180h40v-80h-40v40h-40v115h40V180z M0,215v80
+	h40v-40h60v-40H0z M296,295v-40h-40v40H296z M376,335h40v-40h-40V335z M472,255h40v-40h-40V255z M336,295h-40v57h-40v40h80V295z
+	 M216,432h40v-40h-40V432z M336,392v40h80v-40H336z M456,472v-40h-40v40H456z M512,512v-40h-56v40H512z M376,512h40v-40h-40V512z
+	 M180,255v-40h-40v40h-40v40h116v-40H180z M180,180H0V0h180V180z M140,40H40v100h100V40z M110,70H70v40h40V70z M512,0v180H332V0H512
+	z M472,40H372v100h100V40z M442,70h-40v40h40V70z M0,332h180v180H0V332z M40,472h100V372H40V472z M70,442h40v-40H70V442z"/>
+</svg>

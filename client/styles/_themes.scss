@@ -6,6 +6,7 @@
 @import '../../node_modules/@angular/material/theming';
 @import '../app/shared/components/boot-loader/boot-loader.theme';
 @import '../app/shared/components/alert/alert.theme';
+@import '../app/dashboard/dashboard.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -14,6 +15,7 @@
 @mixin components-theme($theme) {
     @include alert($theme);
     @include boot-loader($theme);
+    @include dashboard($theme);
 }
 
 $mat-ichtus: (

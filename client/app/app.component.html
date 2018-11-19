@@ -1,3 +1,5 @@
-<ng-progress [trickleSpeed]="1000" [spinner]="false"></ng-progress>
-<router-outlet (activate)="initialized = true"></router-outlet>
-<app-boot-loader *ngIf="!initialized"></app-boot-loader>
+<div fxFlexFill>
+    <ng-progress [trickleSpeed]="1000" [spinner]="false"></ng-progress>
+    <router-outlet (activate)="initialized = true"></router-outlet>
+    <app-boot-loader *ngIf="!initialized"></app-boot-loader>
+</div>

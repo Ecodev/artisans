@@ -6,6 +6,14 @@
     $fg: map-get($theme, foreground);
 
     app-dashboard {
+
+        .mat-button-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1.2em;
+            padding-top: 10px;
+        }
     }
 
 }

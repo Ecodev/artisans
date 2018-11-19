@@ -19,8 +19,11 @@ export class IconComponent {
 
     private static registered = false;
 
+    @HostBinding('style.color') fgColor = 'inherit';
     @HostBinding('class.material-icons') isMaterialIcon = true;
     @HostBinding('class.mat-icon') isIcon = true;
+    @HostBinding('style.min-width') width = '32px';
+    @HostBinding('style.min-height') height = '32px';
 
     @Input() label;
     @Input() labelColor: 'primary' | 'warn' | 'accent' = 'accent';
@@ -36,6 +39,12 @@ export class IconComponent {
         }
     }
 
+    @Input() set size(val: number) {
+        val = val == null ? 32 : val;
+        this.height = val + 'px';
+        this.width = val + 'px';
+    }
+
     private readonly svgBase = './assets/icons/';
 
     public icon: IconType;
@@ -48,9 +57,36 @@ export class IconComponent {
         //     font: 'trending_down',
         //     class: 'negative',
         // },
-        // 'qwer': {
-        //     svg : 'asterisk.svg'
-        // }
+        'qr': {
+            svg : 'qr.svg'
+        },
+        'own_resource': {
+            svg : 'swimsuit.svg'
+        },
+        'code': {
+            svg : 'input.svg'
+        },
+        'doors': {
+            svg : 'key.svg'
+        },
+        'family': {
+            svg : 'family.svg'
+        },
+        'finances': {
+            svg : 'notes.svg'
+        },
+        'browse_resources': {
+            svg : 'search.svg'
+        },
+        'search': {
+            svg : 'search.svg'
+        },
+        'administrator': {
+            svg : 'boss.svg'
+        },
+        'exit': {
+            svg : 'exit.svg'
+        }
     };
 
     constructor(public matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {

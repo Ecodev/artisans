@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { pick } from 'lodash';
-import { AbstractModelService } from '../../shared/services/abstract-model.service';
-import { createItemMutation, itemQuery, itemsQuery, updateItemMutation } from './item.queries';
+import { AbstractModelService } from '../../../shared/services/abstract-model.service';
+import { createResourceMutation, resourceQuery, resourcesQuery, updateResourceMutation } from './resource.queries';
 import {
     CreateItemMutation,
     CreateItemMutationVariables,
@@ -13,12 +12,12 @@ import {
     ItemsQueryVariables,
     UpdateItemMutation,
     UpdateItemMutationVariables,
-} from '../../shared/generated-types';
+} from '../../../shared/generated-types';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ItemService extends AbstractModelService<ItemQuery['item'],
+export class ResourceService extends AbstractModelService<ItemQuery['item'],
     ItemQueryVariables,
     ItemsQuery['items'],
     ItemsQueryVariables,
@@ -31,10 +30,10 @@ export class ItemService extends AbstractModelService<ItemQuery['item'],
     constructor(apollo: Apollo) {
         super(apollo,
             'item',
-            itemQuery,
-            itemsQuery,
-            createItemMutation,
-            updateItemMutation,
+            resourceQuery,
+            resourcesQuery,
+            createResourceMutation,
+            updateResourceMutation,
             null);
     }
 

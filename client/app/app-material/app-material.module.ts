@@ -6,6 +6,7 @@ import {
     MatDialogModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
@@ -13,6 +14,7 @@ import {
     MatTableModule,
     MatToolbarModule,
 } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 /**
  * Module to declare all Material modules to be easily
@@ -32,6 +34,8 @@ import {
         MatAutocompleteModule,
         MatToolbarModule,
         MatSelectModule,
+        FlexLayoutModule,
+        MatListModule,
     ],
     exports: [
         MatButtonModule,
@@ -46,6 +50,8 @@ import {
         MatAutocompleteModule,
         MatToolbarModule,
         MatSelectModule,
+        FlexLayoutModule,
+        MatListModule,
     ],
 })
 export class AppMaterialModule {

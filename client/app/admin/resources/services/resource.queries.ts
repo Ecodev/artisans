@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
-import { userMetaFragment } from '../../shared/queries/fragments';
+import { userMetaFragment } from '../../../shared/queries/fragments';
 
-export const itemMetaFragment = gql`
+export const resourceMetaFragment = gql`
     fragment itemMeta on Item {
         id
         name
@@ -9,7 +9,7 @@ export const itemMetaFragment = gql`
     }
 `;
 
-export const itemsQuery = gql`
+export const resourcesQuery = gql`
     query Items($filter: ItemFilter, $pagination: PaginationInput) {
         items(filter: $filter, pagination: $pagination) {
             items {
@@ -20,9 +20,9 @@ export const itemsQuery = gql`
             length
         }
     }
-${itemMetaFragment}`;
+${resourceMetaFragment}`;
 
-export const itemQuery = gql`
+export const resourceQuery = gql`
     query Item($id: ItemID!) {
         item(id: $id) {
             id
@@ -36,10 +36,10 @@ export const itemQuery = gql`
             }
         }
     }
-${itemMetaFragment}
+${resourceMetaFragment}
 ${userMetaFragment}`;
 
-export const createItemMutation = gql`
+export const createResourceMutation = gql`
     mutation CreateItem ($input: ItemInput!) {
         createItem (input: $input) {
             id
@@ -51,7 +51,7 @@ export const createItemMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateItemMutation = gql`
+export const updateResourceMutation = gql`
     mutation UpdateItem($id: ItemID!, $input: ItemPartialInput!) {
         updateItem(id:$id, input:$input) {
             id

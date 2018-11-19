@@ -21,7 +21,6 @@ import { createUploadLink } from 'apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { apolloDefaultOptions } from './shared/config/apollo.default.options';
 import { TimezonePreservingDateAdapter } from './shared/services/timezone.preserving.date.adapter';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { RelationsComponent } from './shared/components/relations/relations.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from './app-material/app-material.module';
@@ -51,7 +50,6 @@ import { HttpClientModule } from '@angular/common/http';
         NgProgressModule.forRoot(),
         ApolloModule,
         AppRoutingModule,
-        FlexLayoutModule,
         AppMaterialModule,
         IconModule,
         HttpClientModule

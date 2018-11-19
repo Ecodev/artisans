@@ -2,7 +2,7 @@
 
     <img src="assets/ichtus.svg" style="width:200px">
 
-    <div fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="column" fxLayoutAlign="start center" style="opacity:0.3">
 
         <h1 class="mat-display-2 margin-bottom">Annoncer une sortie</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
@@ -13,7 +13,7 @@
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
                 <app-icon name="code" [size]="100"></app-icon>
-                en saisissant un son code
+                en saisissant un code
             </a>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
@@ -23,7 +23,7 @@
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
                 <app-icon name="own_resource" [size]="100"></app-icon>
-                avec mon matériel
+                avec mon propre matériel
             </a>
         </div>
     </div>
@@ -32,22 +32,22 @@
 
         <h1 class="mat-display-2 margin-bottom">Autres</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
                 <app-icon name="doors" [size]="100"></app-icon>
                 Accéder au local
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
                 <app-icon name="family" [size]="100"></app-icon>
                 Mon compte
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
                 <app-icon name="finances" [size]="100"></app-icon>
                 Mes finances
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="admin">
                 <app-icon name="administrator" [size]="100"></app-icon>
                 Administration
             </a>

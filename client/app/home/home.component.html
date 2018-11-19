@@ -1,3 +1,12 @@
-<div fxFlexFill fxLayout="column">
-    <router-outlet></router-outlet>
+<div fxLayout="column" fxFlexFill>
+
+    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+        <a routerLink="/" style="width:60px; height:60px">
+            <img src="assets/ichtus.svg" style="width:60px; height:60px">
+        </a>
+    </mat-toolbar>
+
+    <div fxFlex fxLayout="column" style="overflow:auto;">
+        <router-outlet></router-outlet>
+    </div>
 </div>

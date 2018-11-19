@@ -7,10 +7,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { UserService } from '../app/user/services/user.service';
 import gql from 'graphql-tag';
-import { ItemService } from '../app/item/services/item.service';
 import { BookingService } from '../app/booking/services/booking.service';
 import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
 import { LinkMutationService } from '../app/shared/services/link-mutation.service';
+import { ResourceService } from '../app/admin/resources/services/resource.service';
 
 @NgModule({
     imports: [
@@ -43,19 +43,19 @@ export class VanillaModule implements DoBootstrap {
 
     constructor(apollo: Apollo,
                 userService: UserService,
-                itemService: ItemService,
+                resourceService: ResourceService,
                 bookingService: BookingService,
-                linkMutation: LinkMutationService
+                linkMutation: LinkMutationService,
     ) {
 
         const api = {
             gql,
             apollo,
             userService,
-            itemService,
+            resourceService,
             bookingService,
             QueryVariablesManager,
-            linkMutation
+            linkMutation,
         };
 
         window['ichtusApi'] = api;

@@ -1,0 +1,13 @@
+<mat-card>
+    <mat-card-header>
+
+        <mat-card-title><mat-icon>mood_bad</mat-icon> <span i18n>Oups, une erreur est survenue</span></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <p *ngIf="error">{{ error.message }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <a [routerLink]="['/']" mat-button>Retourner au menu</a>
+    </mat-card-actions>
+
+</mat-card>

@@ -27,12 +27,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppMaterialModule } from './app-material/app-material.module';
 import { IconModule } from './shared/components/icon/icon.module';
 import { SelectComponent } from './shared/components/select/select.component';
+import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         RelationsComponent,
         SelectComponent,
+        LoginComponent,
+        HomeComponent,
+        DashboardComponent,
+        BootLoaderComponent
     ],
     imports: [
         BrowserModule,

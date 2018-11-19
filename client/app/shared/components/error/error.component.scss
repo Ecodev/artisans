@@ -1,0 +1,14 @@
+@import '../../../../styles/utils';
+
+.mat-card-title {
+    font-size: 24px;
+    font-weight: 500;
+    @include mat-icon-size(60px);
+
+}
+
+mat-card {
+    max-width: 700px;
+}
+
+

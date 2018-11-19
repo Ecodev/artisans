@@ -1,0 +1,54 @@
+<form fxLayout="column" fxFlexFill>
+
+    <div fxFlex fxLayout="row" fxFlexAlign="center center">
+
+        <div class="login padding-v centered-content" fxFlex fxLayout="column" fxLayoutAlign="center center">
+
+            <div fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px">
+
+                <img src="assets/ichtus.svg" />
+
+                <mat-form-field class="width-auto">
+                    <input matInput
+                           autofocus
+                           name="login"
+                           [(ngModel)]="loginForm.login"
+                           i18n-placeholder
+                           placeholder="login"
+                           required="required"
+                           [disabled]="loading"
+                           (focus)="snackBar.dismiss()"
+                    >
+                </mat-form-field>
+
+                <mat-form-field class="width-auto">
+                    <input matInput
+                           type="password"
+                           name="password"
+                           color="warn"
+                           [(ngModel)]="loginForm.password"
+                           i18n-placeholder
+                           placeholder="password"
+                           required="required"
+                           [disabled]="loading"
+                           (focus)="snackBar.dismiss()"
+                    >
+                </mat-form-field>
+
+                <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+                    <a mat-button href="/user/request-password-change" i18n>Mot de passe oublié ?</a>
+                    <button type="submit"
+                            mat-button
+                            mat-raised-button
+                            color="primary"
+                            (click)="login()"
+                            [disabled]="loading || !loginForm.login || !loginForm.password"
+                            i18n
+                    >Se connecter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

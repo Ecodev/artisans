@@ -29,6 +29,7 @@ import {
     UsersQuery,
     UsersQueryVariables,
 } from '../../shared/generated-types';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root',
@@ -45,7 +46,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
 
-    constructor(apollo: Apollo) {
+    constructor(apollo: Apollo, private router: Router) {
         super(apollo,
             'user',
             userQuery,
@@ -110,12 +111,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     public logout(): Observable<LogoutMutation['logout']> {
         const subject = new Subject<LogoutMutation['logout']>();
 
-        this.apollo.mutate<LogoutMutation>({
-            mutation: logoutMutation,
-        }).pipe(map(({data: {logout}}) => logout)).subscribe((v) => {
-            this.currentUser = null;
-            (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
-                subject.next(v);
+        this.router.navigate(['/login'], {queryParams: {logout: true}}).then(() => {
+            this.apollo.mutate<LogoutMutation>({
+                mutation: logoutMutation,
+            }).pipe(map(({data: {logout}}) => logout)).subscribe((v) => {
+                this.currentUser = null;
+                (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
+                    subject.next(v);
+                });
             });
         });
 

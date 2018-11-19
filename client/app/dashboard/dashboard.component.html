@@ -1,0 +1,119 @@
+
+<div style="text-align:center">
+    <h1>Welcome to {{ title }}! </h1>
+    <img alt="Logo" src="assets/ichtus.svg" style="position: absolute;top: 10px;right: 10px;">
+    <button mat-raised-button (click)="userService.logout()">logout</button>
+</div>
+
+<div fxLayout="column" style="padding:30px;">
+
+    <div fxLayout="column" fxLayoutGap="100px">
+
+        <div>
+            <div fxLayout="row" fxLayoutGap="20px">
+                <button mat-raised-button color="accent" (click)="smyle()">Smyle :)</button>
+                <button mat-raised-button color="accent" (click)="capture()">Smyle better :)</button>
+            </div>
+            <div fxLayout="row">
+                <video fxFlex="50" autoplay #video></video>
+                <div fxFlex="50">
+                    <img #image src="">
+                    <canvas #canvas style="display:none;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="column">
+            <h1 class="mat-title">
+                Users
+                <button mat-raised-button color="primary" (click)="addUser()">add</button>
+                -
+                <button mat-raised-button color="primary" (click)="userQueryRef.unsubscribe()">unsubscribe</button>
+            </h1>
+            <table mat-table [dataSource]="userDS">
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef i18n>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+            </table>
+        </div>
+
+        <div fxLayout="column">
+            <h1 class="mat-title">
+                Ressources
+                <button mat-raised-button color="primary" (click)="addItem()">add</button>
+                -
+                <button mat-raised-button color="primary" (click)="itemQueryRef.unsubscribe()">unsubscribe</button>
+                -
+                <button mat-raised-button color="primary" (click)="changeItemQVM(3)">3 per page</button>
+                -
+                <button mat-raised-button color="primary" (click)="changeItemQVM(4)">4 per page</button>
+            </h1>
+            <table mat-table [dataSource]="itemDS">
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef i18n>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+            </table>
+        </div>
+
+        <div fxLayout="column">
+            <h1 class="mat-title">
+                Bookings
+                <button mat-raised-button color="primary" (click)="addBooking()">add</button>
+            </h1>
+            <table mat-table [dataSource]="bookingDS">
+                <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef i18n>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
+            </table>
+        </div>
+
+        <div fxLayout="column" *ngIf="itemDS?.data">
+            <h1 class="mat-title">
+                Relation ressource (id: {{ itemDS.data[0].id }}) and bookings
+                <button mat-raised-button color="primary" (click)="show = !show">Toggle second app-relations</button>
+            </h1>
+
+            <div fxLayout="row" fxLayoutGap="20px">
+                <app-relations fxFlex="50"
+                               [service]="bookingService"
+                               [main]="itemDS.data[0]"
+                               [filter]="{groups: [{conditions: [{items: {have: {values: [itemDS.data[0].id]}}}]}]}"
+                               placeholder="Associer une réservation"
+                               [displayWith]="getId"
+                ></app-relations>
+
+                <app-relations fxFlex="50"
+                               *ngIf="show"
+                               [service]="bookingService"
+                               [main]="itemDS.data[0]"
+                               [filter]="{groups: [{conditions: [{items: {have: {values: [itemDS.data[0].id]}}}]}]}"
+                               placeholder="Associer une réservation"
+                               [displayWith]="getId"
+                ></app-relations>
+
+            </div>
+        </div>
+
+    </div>
+</div>

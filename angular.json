@@ -28,7 +28,7 @@
               "client/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "client/styles/_themes.scss",
               "client/styles.scss"
             ],
             "scripts": []
@@ -64,6 +64,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "ssl": true,
+            "sslCert": "/sites/self-signed-certificate.crt",
+            "sslKey": "/sites/self-signed-certificate.key",
             "port": 4300,
             "browserTarget": "my-ichtus:build",
             "host": "my-ichtus.lan",

@@ -19,7 +19,6 @@
 
             <app-columns-picker (selectionChange)="selectedColumns = $event">
                 <span appColumnsPickerColumn="id" i18n>id</span>
-                <span appColumnsPickerColumn="avatar" i18n>Initiales</span>
                 <span appColumnsPickerColumn="name" i18n>Nom</span>
                 <span appColumnsPickerColumn="login" i18n>Login</span>
             </app-columns-picker>
@@ -31,22 +30,17 @@
             <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>ID</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
                 <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="avatar">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n></th>
-                <td mat-cell *matCellDef="let element">
-                    <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
-                </td>
             </ng-container>
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
                 <td mat-cell *matCellDef="let element">
-                    <app-table-button [label]="element.name" [navigate]="[element.id]" i18n-matTooltip matTooltip="Éditer"
-                    ></app-table-button>
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
+                        <app-table-button [label]="element.name" [navigate]="[element.id]" i18n-matTooltip matTooltip="Éditer"></app-table-button>
+                    </div>
                 </td>
             </ng-container>
 

@@ -1,9 +1,12 @@
 <div fxLayout="row" fxLayoutGap="20px">
-    <mat-nav-list fxFlex="200px">
-        <a mat-list-item routerLink="/admin">Sorties en cours</a>
-        <a mat-list-item routerLink="resources">Matériel</a>
-        <a mat-list-item routerLink="users">Utilisateurs</a>
-    </mat-nav-list>
+    <div fxFlex="200px" fxLayout="column">
+        <div class="mat-headline">&nbsp;</div>
+        <mat-nav-list>
+            <a mat-list-item routerLink="/admin">Sorties en cours</a>
+            <a mat-list-item routerLink="resources">Matériel</a>
+            <a mat-list-item routerLink="users">Utilisateurs</a>
+        </mat-nav-list>
+    </div>
     <div fxLayout="column" fxFlex>
         <router-outlet></router-outlet>
     </div>

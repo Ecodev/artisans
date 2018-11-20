@@ -1,0 +1,47 @@
+@mixin table($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    [mat-table] {
+
+        //width: 100%;
+
+        [mat-cell] {
+            justify-content: center;
+        }
+
+        [mat-row] {
+            &.selected {
+                background: mat-color($background, selected-button);
+            }
+        }
+
+        [mat-header-row] {
+            background: mat-color($background, app-bar);
+        }
+
+        [app-1em-column] {
+            width: 1em;
+        }
+
+        [app-2em-column] {
+            width: 2em;
+        }
+
+        [app-3em-column] {
+            width: 3em;
+        }
+
+        [app-4em-column] {
+            width: 4em;
+        }
+
+        [app-5em-column] {
+            width: 5em;
+        }
+
+    }
+
+}

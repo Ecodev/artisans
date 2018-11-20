@@ -4,11 +4,12 @@
  */
 // Import theming files full relative way or karma will display warning
 @import '~@angular/material/theming';
+@import '~@ecodev/natural-search/theming/natural-search.theme';
 @import '../app/shared/components/boot-loader/boot-loader.theme';
 @import '../app/app.theme';
 @import '../app/shared/components/alert/alert.theme';
 @import '../app/dashboard/dashboard.theme';
-@import '../../node_modules/@ecodev/natural-search/theming/natural-search.theme';
+@import 'table';
 
 // Include material core (only once !)
 @include mat-core();
@@ -19,6 +20,7 @@
     @include alert($theme);
     @include boot-loader($theme);
     @include dashboard($theme);
+    @include table($theme);
     @include natural-search-theme($theme);
 }
 

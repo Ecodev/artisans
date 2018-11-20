@@ -193,9 +193,9 @@ class Booking extends AbstractModel
     }
 
     /**
-     * @return Chronos
+     * @return null|Chronos
      */
-    public function getEndDate(): Chronos
+    public function getEndDate(): ?Chronos
     {
         return $this->endDate;
     }

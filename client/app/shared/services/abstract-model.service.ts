@@ -8,8 +8,14 @@ import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
 import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
+import { ExtendedFormControl } from '../classes/ExtendedFormControl';
+import { ValidatorFn } from '@angular/forms';
 
-interface VariablesWithInput {
+export interface FormValidators {
+    [key: string]: ValidatorFn[];
+}
+
+export interface VariablesWithInput {
     input: Literal;
 }
 
@@ -92,6 +98,43 @@ export abstract class AbstractModelService<Tone,
      */
     public getEmptyObject(): Vcreate['input'] | Vupdate['input'] {
         return {};
+    }
+
+    public getFormValidators(): FormValidators {
+        return {};
+    }
+
+    public getFormConfig(model): Literal {
+        const values = this.getEmptyObject();
+        const validators = this.getFormValidators();
+        const config = {};
+        const disabled = model.permissions ? !model.permissions.update : false;
+
+        // Configure form for each field of model
+        for (const key of Object.keys(values)) {
+            const value = model[key] !== undefined ? model[key] : values[key];
+            const formState = {
+                value: value,
+                disabled: disabled,
+            };
+            const validator = typeof validators[key] !== 'undefined' ? validators[key] : null;
+
+            config[key] = new ExtendedFormControl(formState, validator);
+        }
+
+        // Configure form for extra validators that are not on a specific field
+        for (const key of Object.keys(validators)) {
+            if (!config[key]) {
+                const formState = {
+                    value: model[key] ? model[key] : null,
+                    disabled: disabled,
+                };
+
+                config[key] = new ExtendedFormControl(formState, validators[key]);
+            }
+        }
+
+        return config;
     }
 
     /**

@@ -11,6 +11,8 @@ import { BookingService } from '../app/booking/services/booking.service';
 import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
 import { LinkMutationService } from '../app/shared/services/link-mutation.service';
 import { ResourceService } from '../app/admin/resources/services/resource.service';
+import { VanillaRoutingModule } from './vanilla-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
     imports: [
@@ -18,8 +20,10 @@ import { ResourceService } from '../app/admin/resources/services/resource.servic
         HttpClientModule,
         ApolloModule,
         HttpLinkModule,
+        VanillaRoutingModule,
     ],
     providers: [
+        {provide: APP_BASE_HREF, useValue: '/'},
         {
             provide: APOLLO_OPTIONS,
             useFactory: (httpLink: HttpLink) => {

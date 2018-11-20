@@ -28,7 +28,7 @@
             <div style="flex:1; display: flex;flex-direction:column;margin-right:30px;overflow:auto">
 
                 <h2>Ressources
-                    <button onclick="addItem()">Ajouter</button>
+                    <button onclick="addResource()">Ajouter</button>
                 </h2>
                 <div style="display: flex;flex-direction:column;">
                     Non filtrées
@@ -36,15 +36,15 @@
                 </div>
 
                 <div style="display: flex;flex-direction:column;">
-                    Ressources that contain "81" string
-                    <pre id="filteredItems"></pre>
+                    Ressources that contain "01" string
+                    <pre id="filteredResources"></pre>
                 </div>
             </div>
 
             <div style="flex:1; display: flex;flex-direction:column;overflow:auto">
                 <h2>Sorties
-                    <button onclick="createBooking(1)">Ajouter avec la ressource 1</button>
-                    <button onclick="createBooking(2)">Ajouter avec la ressource 2</button>
+                    <button onclick="createBooking(3000)">Ajouter avec la ressource 3000</button>
+                    <button onclick="createBooking(3001)">Ajouter avec la ressource 3001</button>
                 </h2>
                 <pre id="bookings"></pre>
             </div>
@@ -63,41 +63,41 @@
           console.warn('API : ', api);
 
           // Use predefined service to get one user
-          function getItemList(filter = {}, resultDiv = 'items') {
+          function getResourceList(filter = {}, resultDiv = 'items') {
 
             // Config filters
             const variables = new api.QueryVariablesManager();
             variables.set('variables', filter);
 
             // Get all items
-            api.itemService.getAll(variables).subscribe(result => {
-              console.log('Items list : ', result);
+            api.resourceService.getAll(variables).subscribe(result => {
+              console.log('Resources list : ', result);
               document.getElementById(resultDiv).innerHTML = prettyJson(result.items);
             });
           }
 
-          // Get Item list at page loading
-          getItemList();
+          // Get Resource list at page loading
+          getResourceList();
 
           // Get filtered items
-          getItemList({
+          getResourceList({
             filter: {
               groups: [
-                {conditions: [{name: {like: {value: '%81%'}}}]}
+                {conditions: [{name: {like: {value: '%01%'}}}]}
               ]
             },
             pagination: {
               pageSize: 5,
               pageIndex: 0
             }
-          }, 'filteredItems');
+          }, 'filteredResources');
 
           // Add an item
-          function addItem() {
+          function addResource() {
             const item = {name: 'Ma ressource ' + Date.now()};
-            api.itemService.create(item).subscribe(result => {
-              console.log('Item created', result);
-              getItemList();
+            api.resourceService.create(item).subscribe(result => {
+              console.log('Resource created', result);
+              getResourceList();
             })
           }
 
@@ -125,7 +125,7 @@
               console.log('Created booking : ', booking);
               api.linkMutation.link(booking, {
                 id: itemId,
-                __typename: 'Item'
+                __typename: 'Resource'
               }).subscribe(() => {
                 getBookingList();
               });

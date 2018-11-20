@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A booking linking a user and several items
+ * A booking linking a user and several resources
  *
  * @ORM\Entity(repositoryClass="Application\Repository\BookingRepository")
  */
@@ -29,16 +29,16 @@ class Booking extends AbstractModel
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Application\Model\Item", inversedBy="bookings")
+     * @ORM\ManyToMany(targetEntity="Application\Model\Resource", inversedBy="bookings")
      */
-    private $items;
+    private $resources;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->resources = new ArrayCollection();
     }
 
     /**
@@ -227,20 +227,20 @@ class Booking extends AbstractModel
     /**
      * @return Collection
      */
-    public function getItems(): Collection
+    public function getResources(): Collection
     {
-        return $this->items;
+        return $this->resources;
     }
 
     /**
-     * Add item
+     * Add resource
      *
-     * @param Item $item
+     * @param resource $resource
      */
-    public function addItem(Item $item): void
+    public function addResource(Resource $resource): void
     {
-        if (!$this->items->contains($item)) {
-            $this->items->add($item);
+        if (!$this->resources->contains($resource)) {
+            $this->resources->add($resource);
         }
     }
 }

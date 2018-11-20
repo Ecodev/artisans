@@ -3,33 +3,33 @@ import { Apollo } from 'apollo-angular';
 import { AbstractModelService } from '../../../shared/services/abstract-model.service';
 import { createResourceMutation, resourceQuery, resourcesQuery, updateResourceMutation } from './resource.queries';
 import {
-    CreateItemMutation,
-    CreateItemMutationVariables,
-    ItemInput,
-    ItemQuery,
-    ItemQueryVariables,
-    ItemsQuery,
-    ItemsQueryVariables,
-    UpdateItemMutation,
-    UpdateItemMutationVariables,
+    CreateResourceMutation,
+    CreateResourceMutationVariables,
+    ResourceInput,
+    ResourceQuery,
+    ResourceQueryVariables,
+    ResourcesQuery,
+    ResourcesQueryVariables,
+    UpdateResourceMutation,
+    UpdateResourceMutationVariables,
 } from '../../../shared/generated-types';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ResourceService extends AbstractModelService<ItemQuery['item'],
-    ItemQueryVariables,
-    ItemsQuery['items'],
-    ItemsQueryVariables,
-    CreateItemMutation['createItem'],
-    CreateItemMutationVariables,
-    UpdateItemMutation['updateItem'],
-    UpdateItemMutationVariables,
+export class ResourceService extends AbstractModelService<ResourceQuery['resource'],
+    ResourceQueryVariables,
+    ResourcesQuery['resources'],
+    ResourcesQueryVariables,
+    CreateResourceMutation['createResource'],
+    CreateResourceMutationVariables,
+    UpdateResourceMutation['updateResource'],
+    UpdateResourceMutationVariables,
     any> {
 
     constructor(apollo: Apollo) {
         super(apollo,
-            'item',
+            'resource',
             resourceQuery,
             resourcesQuery,
             createResourceMutation,
@@ -37,7 +37,7 @@ export class ResourceService extends AbstractModelService<ItemQuery['item'],
             null);
     }
 
-    public getEmptyObject(): ItemInput {
+    public getEmptyObject(): ResourceInput {
         return {
             name: '',
             description: '',

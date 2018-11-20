@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
 
 export const resourceMetaFragment = gql`
-    fragment itemMeta on Item {
+    fragment resourceMeta on Resource {
         id
         name
         description
@@ -10,10 +10,10 @@ export const resourceMetaFragment = gql`
 `;
 
 export const resourcesQuery = gql`
-    query Items($filter: ItemFilter, $pagination: PaginationInput) {
-        items(filter: $filter, pagination: $pagination) {
+    query Resources($filter: ResourceFilter, $pagination: PaginationInput) {
+        resources(filter: $filter, pagination: $pagination) {
             items {
-                ...itemMeta
+                ...resourceMeta
             }
             pageSize
             pageIndex
@@ -23,10 +23,10 @@ export const resourcesQuery = gql`
 ${resourceMetaFragment}`;
 
 export const resourceQuery = gql`
-    query Item($id: ItemID!) {
-        item(id: $id) {
+    query Resource($id: ResourceID!) {
+        resource(id: $id) {
             id
-            ...itemMeta
+            ...resourceMeta
             creator {
                 ...userMeta
             }
@@ -40,8 +40,8 @@ ${resourceMetaFragment}
 ${userMetaFragment}`;
 
 export const createResourceMutation = gql`
-    mutation CreateItem ($input: ItemInput!) {
-        createItem (input: $input) {
+    mutation CreateResource($input: ResourceInput!) {
+        createResource(input: $input) {
             id
             creator {
                 ...userMeta
@@ -52,8 +52,8 @@ export const createResourceMutation = gql`
 `;
 
 export const updateResourceMutation = gql`
-    mutation UpdateItem($id: ItemID!, $input: ItemPartialInput!) {
-        updateItem(id:$id, input:$input) {
+    mutation UpdateResource($id: ResourceID!, $input: ResourcePartialInput!) {
+        updateResource(id:$id, input:$input) {
             id
             updateDate
             updater {

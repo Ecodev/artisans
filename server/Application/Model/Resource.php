@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * An item that can be booked by a user
  *
- * @ORM\Entity(repositoryClass="Application\Repository\ItemRepository")
+ * @ORM\Entity(repositoryClass="Application\Repository\ResourceRepository")
  */
-class Item extends AbstractModel
+class Resource extends AbstractModel
 {
     use HasName;
     use HasDescription;
@@ -23,7 +23,7 @@ class Item extends AbstractModel
     /**
      * @var Collection
      *
-     * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="items")
+     * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="resources")
      */
     private $bookings;
 

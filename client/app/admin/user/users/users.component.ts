@@ -1,29 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractList } from '../../shared/components/AbstractList';
+import { UsersQuery, UsersQueryVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../user/services/user.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
-import { AbstractList } from '../../shared/components/AbstractList';
-import { ItemsQuery, ItemsQueryVariables } from '../../../shared/generated-types';
-import { ResourceService } from '../services/resource.service';
+import { UserService } from '../services/user.service';
 
 @Component({
-    selector: 'app-resources',
-    templateUrl: './resources.component.html',
-    styleUrls: ['./resources.component.scss'],
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss'],
 })
-export class ResourcesComponent extends AbstractList<ItemsQuery['items'], ItemsQueryVariables>  implements OnInit {
+export class UsersComponent extends AbstractList<UsersQuery['users'], UsersQueryVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,
-                resourceService: ResourceService,
+                userService: UserService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService) {
 
-        super('resources',
-            resourceService,
+        super('users',
+            userService,
             router,
             route,
             alertService,
@@ -32,4 +31,5 @@ export class ResourcesComponent extends AbstractList<ItemsQuery['items'], ItemsQ
         );
 
     }
+
 }

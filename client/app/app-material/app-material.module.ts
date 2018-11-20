@@ -7,6 +7,7 @@ import {
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatMenuModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
@@ -36,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatSelectModule,
         FlexLayoutModule,
         MatListModule,
+        MatMenuModule,
     ],
     exports: [
         MatButtonModule,
@@ -52,6 +54,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         MatSelectModule,
         FlexLayoutModule,
         MatListModule,
+        MatMenuModule,
     ],
 })
 export class AppMaterialModule {

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { UserService } from '../user/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkActivityService } from '../shared/services/network-activity.service';
 import { MatSnackBar } from '@angular/material';
 import { AlertService } from '../shared/components/alert/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { AbstractController } from '../shared/components/AbstractController';
+import { UserService } from '../admin/user/services/user.service';
 
 @Component({
     selector: 'app-login',

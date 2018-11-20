@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CurrentUserForProfileQuery } from '../../shared/generated-types';
+import { CurrentUserForProfileQuery } from '../../../shared/generated-types';
 import { UserService } from './user.service';
-import { ErrorService } from '../../shared/components/error/error.service';
+import { ErrorService } from '../../../shared/components/error/error.service';
 
 @Injectable({
     providedIn: 'root',

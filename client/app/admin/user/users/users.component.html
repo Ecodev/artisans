@@ -2,7 +2,7 @@
 
     <div fxLayout="column">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span i18n>Matériel</span>
+            <span i18n>Utilisateurs</span>
         </div>
     </div>
 
@@ -20,6 +20,7 @@
             <app-columns-picker (selectionChange)="selectedColumns = $event">
                 <span appColumnsPickerColumn="id" i18n>id</span>
                 <span appColumnsPickerColumn="name" i18n>Nom</span>
+                <span appColumnsPickerColumn="login" i18n>Nom</span>
             </app-columns-picker>
         </div>
 
@@ -36,12 +37,14 @@
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
                 <td mat-cell *matCellDef="let element">
-                    <app-table-button [label]="element.name"
-                                      [navigate]="[element.id]"
-                                      i18n-matTooltip
-                                      matTooltip="Éditer"
+                    <app-table-button [label]="element.name" [navigate]="[element.id]" i18n-matTooltip matTooltip="Éditer"
                     ></app-table-button>
                 </td>
+            </ng-container>
+
+            <ng-container matColumnDef="login">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Login</th>
+                <td mat-cell *matCellDef="let element">{{ element.login }}</td>
             </ng-container>
 
         </table>

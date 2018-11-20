@@ -1,35 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractList } from '../../shared/components/AbstractList';
+import { BookingsQuery, BookingsQueryVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from '../../user/services/user.service';
+import { BookingService } from '../../../booking/services/booking.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
-import { AbstractList } from '../../shared/components/AbstractList';
-import { ItemsQuery, ItemsQueryVariables } from '../../../shared/generated-types';
-import { ResourceService } from '../services/resource.service';
 
 @Component({
-    selector: 'app-resources',
-    templateUrl: './resources.component.html',
-    styleUrls: ['./resources.component.scss'],
+    selector: 'app-bookings',
+    templateUrl: './bookings.component.html',
+    styleUrls: ['./bookings.component.scss'],
 })
-export class ResourcesComponent extends AbstractList<ItemsQuery['items'], ItemsQueryVariables>  implements OnInit {
+export class BookingsComponent extends AbstractList<BookingsQuery['bookings'], BookingsQueryVariables> implements OnInit {
+
+
 
     constructor(route: ActivatedRoute,
                 router: Router,
-                resourceService: ResourceService,
+                bookingService: BookingService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService) {
 
-        super('resources',
-            resourceService,
+        super('bookings',
+            bookingService,
             router,
             route,
             alertService,
             persistenceService,
             naturalSearchConfigurationService,
         );
-
     }
 }

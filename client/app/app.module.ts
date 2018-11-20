@@ -40,7 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
         LoginComponent,
         HomeComponent,
         DashboardComponent,
-        BootLoaderComponent
+        BootLoaderComponent,
     ],
     imports: [
         BrowserModule,

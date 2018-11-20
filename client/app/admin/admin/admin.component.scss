@@ -1,7 +1,5 @@
 :host {
-    width:100%;
-    max-width: 1130px;
-    //padding: 20px 20px 100px 20px; // 100px to have a gap to prevent fab-button overlap
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px 100px 20px; // 100px to have a gap to prevent fab-button overlap
 }

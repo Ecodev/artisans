@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import {
-    ItemConfiguration,
-    NaturalSearchConfiguration,
-    Selection,
-} from '@ecodev/natural-search';
+import { ItemConfiguration, NaturalSearchConfiguration, Selection } from '@ecodev/natural-search';
 import { SelectNaturalComponent } from './select-natural/select-natural.component';
-import { UserService } from '../../user/services/user.service';
+import { UserService } from '../../admin/user/services/user.service';
 
 function wrapLike(s: Selection): Selection {
     if (s.condition.like) {
@@ -70,9 +66,7 @@ export class NaturalSearchConfigurationService {
 
     private readonly allConfigurations: { [key: string]: NaturalSearchConfiguration } = {};
 
-    constructor(
-        private readonly userService: UserService,
-    ) {
+    constructor(private readonly userService: UserService) {
     }
 
     /**

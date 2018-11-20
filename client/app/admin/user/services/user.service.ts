@@ -4,7 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import { AbstractModelService } from '../../shared/services/abstract-model.service';
+import { AbstractModelService } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery,
@@ -28,7 +28,7 @@ import {
     UserQueryVariables,
     UsersQuery,
     UsersQueryVariables,
-} from '../../shared/generated-types';
+} from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 
 @Injectable({

@@ -31,6 +31,7 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorComponent } from './shared/components/error/error.component';
 
 @NgModule({
     declarations: [
@@ -41,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
         HomeComponent,
         DashboardComponent,
         BootLoaderComponent,
+        ErrorComponent
     ],
     imports: [
         BrowserModule,

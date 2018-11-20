@@ -1,7 +1,9 @@
 <mat-card>
     <mat-card-header>
-
-        <mat-card-title><mat-icon>mood_bad</mat-icon> <span i18n>Oups, une erreur est survenue</span></mat-card-title>
+        <mat-card-title>
+            <app-icon name="mood_bad" [size]="60"></app-icon>
+            <span i18n>Oups, une erreur est survenue</span>
+        </mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <p *ngIf="error">{{ error.message }}</p>

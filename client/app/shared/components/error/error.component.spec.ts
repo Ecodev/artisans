@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ErrorComponent } from './error.component';
-import { MatButtonModule, MatCardModule, MatIconModule } from '@angular/material';
+import { MatButtonModule, MatCardModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
+import { IconModule } from '../icon/icon.module';
 
 describe('ErrorComponent', () => {
     let component: ErrorComponent;
@@ -14,11 +15,11 @@ describe('ErrorComponent', () => {
             imports: [
                 MatCardModule,
                 MatButtonModule,
-                MatIconModule,
+                IconModule,
                 RouterTestingModule,
             ],
         })
-            .compileComponents();
+               .compileComponents();
     }));
 
     beforeEach(() => {

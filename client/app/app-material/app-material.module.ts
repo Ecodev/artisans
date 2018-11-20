@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {
     MatAutocompleteModule,
-    MatButtonModule,
+    MatButtonModule, MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
     MatIconModule,
@@ -38,6 +38,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
         MatListModule,
         MatMenuModule,
+        MatCardModule
     ],
     exports: [
         MatButtonModule,
@@ -55,6 +56,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
         MatListModule,
         MatMenuModule,
+        MatCardModule
     ],
 })
 export class AppMaterialModule {

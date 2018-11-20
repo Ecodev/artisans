@@ -19,6 +19,7 @@
 
             <app-columns-picker (selectionChange)="selectedColumns = $event">
                 <span appColumnsPickerColumn="id" i18n>id</span>
+                <span appColumnsPickerColumn="avatar" i18n>Initiales</span>
                 <span appColumnsPickerColumn="responsible" i18n>Responsable</span>
                 <span appColumnsPickerColumn="destination" i18n>Destination</span>
                 <span appColumnsPickerColumn="startDate" i18n>Début</span>
@@ -36,6 +37,13 @@
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>ID</th>
                 <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="avatar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>ID</th>
+                <td mat-cell *matCellDef="let element">
+                    <ngx-avatar [name]="element.responsible?.name" [size]="36"></ngx-avatar>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="responsible">

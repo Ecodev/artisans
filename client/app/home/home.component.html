@@ -4,6 +4,11 @@
         <a routerLink="/" style="width:60px; height:60px">
             <img src="assets/ichtus.svg" style="width:60px; height:60px">
         </a>
+
+        <div fxFlex></div>
+
+        <ngx-avatar [name]="userService.getCurrentUser().value?.name"></ngx-avatar>
+
     </mat-toolbar>
 
     <div fxFlex fxLayout="column" style="overflow:auto;">

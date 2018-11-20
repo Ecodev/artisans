@@ -32,6 +32,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from './shared/components/error/error.component';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
     declarations: [
@@ -54,7 +55,8 @@ import { ErrorComponent } from './shared/components/error/error.component';
         AppRoutingModule,
         AppMaterialModule,
         IconModule,
-        HttpClientModule
+        HttpClientModule,
+        AvatarModule.forRoot()
     ],
     providers: [
         MatIconRegistry,

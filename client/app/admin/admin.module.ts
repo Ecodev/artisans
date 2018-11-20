@@ -14,6 +14,7 @@ import { TableButtonComponent } from './shared/components/table-button/table-but
 import { FixedButtonComponent } from '../shared/components/fixed-button/fixed-button.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ColumnsPickerColumnDirective } from '../shared/components/columns-picker/columns-picker-column.directive';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { ColumnsPickerColumnDirective } from '../shared/components/columns-picke
         NaturalSearchModule,
         FormsModule,
         ReactiveFormsModule,
+        AvatarModule
     ],
 })
 export class AdminModule {

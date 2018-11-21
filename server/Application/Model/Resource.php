@@ -22,10 +22,15 @@ class Resource extends AbstractModel
 
     /**
      * @var Collection
-     *
      * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="resources")
      */
     private $bookings;
+
+    /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="resources")
+     */
+    private $tags;
 
     /**
      * Constructor
@@ -33,6 +38,7 @@ class Resource extends AbstractModel
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -41,5 +47,13 @@ class Resource extends AbstractModel
     public function getBookings(): Collection
     {
         return $this->bookings;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
     }
 }

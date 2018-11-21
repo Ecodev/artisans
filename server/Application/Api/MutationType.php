@@ -9,6 +9,7 @@ use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Standard;
 use Application\Model\Booking;
 use Application\Model\Resource;
+use Application\Model\Tag;
 use Application\Model\User;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -27,7 +28,8 @@ class MutationType extends ObjectType
             Standard::buildMutation(Booking::class),
             Standard::buildMutation(Resource::class),
             Standard::buildMutation(User::class),
-            Standard::buildRelationMutation(Booking::class, Resource::class)
+            Standard::buildRelationMutation(Booking::class, Resource::class),
+            Standard::buildRelationMutation(Tag::class, Resource::class)
         );
 
         $config = [

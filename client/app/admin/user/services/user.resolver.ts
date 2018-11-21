@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CurrentUserForProfileQuery } from '../../../shared/generated-types';
 import { UserService } from './user.service';
 import { ErrorService } from '../../../shared/components/error/error.service';
+import { UserResolve } from '../user';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UserResolver implements Resolve<CurrentUserForProfileQuery['viewer']> {
+export class UserResolver implements Resolve<UserResolve> {
 
     constructor(private userService: UserService,
                 private errorService: ErrorService) {
@@ -17,8 +17,8 @@ export class UserResolver implements Resolve<CurrentUserForProfileQuery['viewer'
     /**
      * Resolve sites for routing service only at the moment
      */
-    public resolve(route: ActivatedRouteSnapshot): Observable<CurrentUserForProfileQuery['viewer']> {
-        const observable = this.userService.resolve();
+    public resolve(route: ActivatedRouteSnapshot): Observable<UserResolve> {
+        const observable = this.userService.resolve(route.params.userId);
 
         return this.errorService.redirectIfError(observable);
     }

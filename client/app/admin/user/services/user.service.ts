@@ -125,12 +125,5 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return subject;
     }
 
-    /**
-     * Resolve items related to users, and the user if the id is provided, in order to show a form
-     */
-    public resolve(): Observable<any> {
-        return this.getCurrentUser().pipe(map(result => {
-            return {model: result};
-        }));
-    }
+
 }

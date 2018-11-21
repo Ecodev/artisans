@@ -10,6 +10,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { ResourceComponent } from './resources/resource/resource.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
+import { UserComponent } from './user/user/user.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { IchtusModule } from '../shared/modules/ichtus.module';
         AdminComponent,
         BookingsComponent,
         UsersComponent,
+        UserComponent
     ],
     imports: [
         CommonModule,

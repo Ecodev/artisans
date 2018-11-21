@@ -5,9 +5,10 @@
             <a mat-icon-button [routerLink]="['..']">
                 <app-icon name="arrow_back"></app-icon>
             </a>
-            <span *ngIf="!form.get('name').value">Nouveau matériel</span>
+            <ngx-avatar [name]="form.get('name').value" [size]="40"></ngx-avatar>
+            <span *ngIf="!form.get('name').value">Nouvel utilisateur</span>
             <span *ngIf="form.get('name').value" class="pageTitle">
-                <span i18n>Matériel</span>
+                <span i18n>Utilisateur</span>
                 {{ form.get('name').value }}
             </span>
         </div>
@@ -22,21 +23,14 @@
                         <mat-form-field class="width-auto">
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>Maximum {{ form.get('name').errors.maxlength.requiredLength }} caractères
-                            </mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>Maximum {{ form.get('name').errors.maxlength.requiredLength }} caractères</mat-error>
                             <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
-
-                        <mat-form-field class="width-auto">
-                            <mat-label i18n>Description</mat-label>
-                            <textarea matInput formControlName="description" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
-                            ></textarea>
-                        </mat-form-field>
-
                     </div>
 
                     <div fxFlex="33">
-                        <app-relations [main]="data.model" [service]="tagService" [filter]="{groups: [{conditions: [{resources: {have: {values: [data.model.id]}}}]}]}" i18n-placeholder placeholder="Associer à un tag">
+                        <app-relations [main]="data.model" [service]="tagService" [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}" i18n-placeholder placeholder="Associer à un tag"
+                        >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                     <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
@@ -48,8 +42,31 @@
 
                 </div>
 
+                <app-relations [main]="data.model" [service]="bookingService" [filter]="{groups: [{conditions: [{owner: {have: {values: [data.model.id]}}}]}]}" [disabled]="true">
+                    <ng-template let-item="item">
+                        <div fxLayout="row" fxLayoutGap="20px">
+                            <span>
+                                <span class="mat-body-2">de</span>
+                                {{ item.startDate }},
+                            </span>
+                            <span *ngIf="item.endDate">
+                                <span class="mat-body-2">à</span>
+                                {{item.endDate}},
+                            </span>
+                            <span *ngIf="item.estimatedEndDate">
+                                <span class="mat-body-2">retour prévu</span>
+                                {{ item.estimatedEndDate}}
+                            </span>
+                            <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="!item.endDate">
+                                <button mat-button color="warn" (click)="bookingService.flagEndDate(item.id)">Terminer</button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </app-relations>
+
                 <!--<app-common-fields [form]="form" (change)="update()" [data]="data" [showVisas]="false"></app-common-fields>-->
             </div>
+
         </mat-tab>
 
     </mat-tab-group>

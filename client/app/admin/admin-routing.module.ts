@@ -6,6 +6,8 @@ import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { UsersComponent } from './user/users/users.component';
 import { ResourceComponent } from './resources/resource/resource.component';
 import { ResourceResolver } from './resources/resources/resource.resolver';
+import { UserComponent } from './user/user/user.component';
+import { UserResolver } from './user/services/user.resolver';
 
 const routes: Routes = [
     {
@@ -30,6 +32,13 @@ const routes: Routes = [
             {
                 path: 'user',
                 component: UsersComponent,
+            },
+            {
+                path: 'user/:userId',
+                component: UserComponent,
+                resolve: {
+                    user: UserResolver,
+                },
             },
         ],
     },

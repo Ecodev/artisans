@@ -14,7 +14,7 @@ import {
 import { TagService } from '../../tags/services/tag.service';
 
 @Component({
-    selector: 'app-action',
+    selector: 'app-resurce',
     templateUrl: './resource.component.html',
     styleUrls: ['./resource.component.scss'],
 })

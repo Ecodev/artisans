@@ -18,7 +18,7 @@ export class BookingsComponent extends AbstractList<BookingsQuery['bookings'], B
 
     constructor(route: ActivatedRoute,
                 router: Router,
-                bookingService: BookingService,
+                public bookingService: BookingService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService) {

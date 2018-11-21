@@ -12,7 +12,7 @@ import {
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatTableModule,
+    MatTableModule, MatTabsModule,
     MatToolbarModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,7 +38,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
         MatListModule,
         MatMenuModule,
-        MatCardModule
+        MatCardModule,
+        MatTabsModule
     ],
     exports: [
         MatButtonModule,
@@ -56,8 +57,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
         FlexLayoutModule,
         MatListModule,
         MatMenuModule,
-        MatCardModule
+        MatCardModule,
+        MatTabsModule
     ],
 })
-export class AppMaterialModule {
+export class MaterialModule {
 }

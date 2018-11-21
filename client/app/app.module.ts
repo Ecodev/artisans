@@ -21,11 +21,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { apolloDefaultOptions } from './shared/config/apollo.default.options';
 import { TimezonePreservingDateAdapter } from './shared/services/timezone.preserving.date.adapter';
-import { RelationsComponent } from './shared/components/relations/relations.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppMaterialModule } from './app-material/app-material.module';
 import { IconModule } from './shared/components/icon/icon.module';
-import { SelectComponent } from './shared/components/select/select.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -33,30 +29,29 @@ import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { AvatarModule } from 'ngx-avatar';
+import { MaterialModule } from './shared/modules/material.module';
+import { IchtusModule } from './shared/modules/ichtus.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        RelationsComponent,
-        SelectComponent,
         LoginComponent,
         HomeComponent,
         DashboardComponent,
         BootLoaderComponent,
-        ErrorComponent
+        ErrorComponent,
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
         NgProgressModule.forRoot(),
         ApolloModule,
         AppRoutingModule,
-        AppMaterialModule,
+        MaterialModule,
+        IchtusModule,
         IconModule,
         HttpClientModule,
-        AvatarModule.forRoot()
+        AvatarModule.forRoot(),
     ],
     providers: [
         MatIconRegistry,

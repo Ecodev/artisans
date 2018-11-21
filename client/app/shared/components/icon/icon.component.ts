@@ -22,8 +22,8 @@ export class IconComponent {
     @HostBinding('style.color') fgColor = 'inherit';
     @HostBinding('class.material-icons') isMaterialIcon = true;
     @HostBinding('class.mat-icon') isIcon = true;
-    @HostBinding('style.min-width') width = '32px';
-    @HostBinding('style.min-height') height = '32px';
+    @HostBinding('style.min-width') width = '12px';
+    @HostBinding('style.min-height') height = '12px';
 
     @Input() label;
     @Input() labelColor: 'primary' | 'warn' | 'accent' = 'accent';

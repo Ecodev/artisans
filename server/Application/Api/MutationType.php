@@ -29,7 +29,8 @@ class MutationType extends ObjectType
             Standard::buildMutation(Resource::class),
             Standard::buildMutation(User::class),
             Standard::buildRelationMutation(Booking::class, Resource::class),
-            Standard::buildRelationMutation(Tag::class, Resource::class)
+            Standard::buildRelationMutation(Tag::class, Resource::class),
+            Standard::buildRelationMutation(Tag::class, User::class)
         );
 
         $config = [

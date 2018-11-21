@@ -36,11 +36,18 @@ class Tag extends AbstractModel
     private $resources;
 
     /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="Application\Model\User", inversedBy="tags")
+     */
+    private $users;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->resources = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -61,6 +68,36 @@ class Tag extends AbstractModel
         if (!$this->resources->contains($resource)) {
             $this->resources->add($resource);
         }
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add user
+     *
+     * @param user $user
+     */
+    public function addUser(User $user): void
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+        }
+    }
+
+    /**
+     * Remove user
+     *
+     * @param user $user
+     */
+    public function removeUser(User $user): void
+    {
+        $this->users->removeElement($user);
     }
 
     /**

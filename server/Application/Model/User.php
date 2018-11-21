@@ -111,6 +111,12 @@ class User extends AbstractModel
     private $bookings;
 
     /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="users")
+     */
+    private $tags;
+
+    /**
      * Constructor
      *
      * @param string $role role for new user
@@ -119,6 +125,7 @@ class User extends AbstractModel
     {
         $this->role = $role;
         $this->bookings = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -360,5 +367,13 @@ class User extends AbstractModel
     public function bookingAdded(Booking $booking): void
     {
         $this->bookings->add($booking);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTags(): Collection
+    {
+        return $this->tags;
     }
 }

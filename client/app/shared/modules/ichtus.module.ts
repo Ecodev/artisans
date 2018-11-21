@@ -13,7 +13,6 @@ import { IconModule } from '../components/icon/icon.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 
 @NgModule({
     declarations: [
@@ -33,7 +32,6 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        EcoFabSpeedDialModule,
     ],
     exports: [
         RelationsComponent,
@@ -48,7 +46,6 @@ import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
         IconComponent,
         FormsModule,
         ReactiveFormsModule,
-        EcoFabSpeedDialModule,
     ],
 })
 export class IchtusModule {

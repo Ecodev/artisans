@@ -1,5 +1,5 @@
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject, Observable, OperatorFunction, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, OperatorFunction, Subject } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
@@ -508,6 +508,24 @@ export abstract class AbstractModelService<Tone,
         if (value instanceof Observable) {
             throw new Error('Cannot use Observable as variables. Instead you should use .subscribe() to call the method with a real value');
         }
+    }
+
+    /**
+     * Resolve model and items related to the model, if the id is provided, in order to show a form
+     */
+    public resolve(id: string): Observable<{ model: Tone }> {
+
+        // Load model if id is given
+        let observable;
+        if (id) {
+            observable = this.getOne(id);
+        } else {
+            observable = of(this.getEmptyObject() as Tone);
+        }
+
+        return observable.pipe(map(result => {
+            return {model: result};
+        }));
     }
 
 }

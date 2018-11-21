@@ -78,9 +78,6 @@ export class IconComponent {
         'browse_resources': {
             svg : 'search.svg'
         },
-        'search': {
-            svg : 'search.svg'
-        },
         'administrator': {
             svg : 'boss.svg'
         },

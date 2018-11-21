@@ -8,7 +8,6 @@ import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { UsersComponent } from './user/users/users.component';
 import { AvatarModule } from 'ngx-avatar';
 import { ResourceComponent } from './resources/resource/resource.component';
-import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
 
@@ -26,7 +25,6 @@ import { IchtusModule } from '../shared/modules/ichtus.module';
         MaterialModule,
         IchtusModule,
         AvatarModule,
-        EcoFabSpeedDialModule,
     ],
 })
 export class AdminModule {

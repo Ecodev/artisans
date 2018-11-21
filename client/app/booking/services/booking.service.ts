@@ -5,6 +5,7 @@ import { AbstractModelService } from '../../shared/services/abstract-model.servi
 import { bookingQuery, bookingsQuery, createBookingMutation, updateBookingMutation } from './booking.queries';
 import {
     BookingInput,
+    BookingPartialInput,
     BookingQuery,
     BookingQueryVariables,
     BookingsQuery,
@@ -41,6 +42,13 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
             startDate: '2018',
             endDate: '2018',
         };
+    }
+
+    public flagEndDate(id: string) {
+        const date = (new Date()).toISOString();
+        const booking = {id : id, endDate: date};
+        this.updateNow(booking).subscribe(() => {
+        });
     }
 
 }

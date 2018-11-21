@@ -28,7 +28,7 @@ class Resource extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="resources")
+     * @ORM\ManyToMany(targetEntity="Application\Model\Tag", mappedBy="resources")
      */
     private $tags;
 

@@ -112,7 +112,7 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\Booking", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="Application\Model\Tag", mappedBy="users")
      */
     private $tags;
 

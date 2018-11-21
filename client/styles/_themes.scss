@@ -10,6 +10,7 @@
 @import '../app/shared/components/alert/alert.theme';
 @import '../app/dashboard/dashboard.theme';
 @import 'table';
+@import 'page-header';
 
 // Include material core (only once !)
 @include mat-core();
@@ -22,6 +23,7 @@
     @include dashboard($theme);
     @include table($theme);
     @include natural-search-theme($theme);
+    @include page-header($theme);
 }
 
 $mat-ichtus: (

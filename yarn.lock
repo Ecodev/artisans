@@ -192,11 +192,6 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/language-service@~7.0.0":
-  version "7.0.3"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-7.0.3.tgz#e43512ad801f7ecfd5625c34e50d27ce245a32ce"
-  integrity sha512-a8S/kTK/f7QaA7Nwm0KmfR+e7p4ZJ1keotfQD8r9Zq73+DD6yS+DSc+NBikmHui9mn9zY1C08C4SJQ5/5HtVhA==
-
 "@angular/material@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@angular/material/-/material-7.0.3.tgz#81df814ab4da7df4f0f7241852950795936d3cd5"
@@ -333,10 +328,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@ecodev/natural-search@^0.0.25":
-  version "0.0.25"
-  resolved "https://registry.yarnpkg.com/@ecodev/natural-search/-/natural-search-0.0.25.tgz#3f564e98647c04812d4c30ff4f60a9c784144351"
-  integrity sha512-ev/y8vSu584Z05zWQFq2co0ptJoxUFf5BO7jlUkY7BZ56z1hKGcvwPbMAr6Ep5ZsT6YExDJEob/DH4DTk11klg==
+"@ecodev/natural-search@^0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@ecodev/natural-search/-/natural-search-0.0.26.tgz#3493ff33f76461db4e2cad6135ee7910020bc4c4"
+  integrity sha512-6NThYlie7X8ziKWQgRMbD9AoNOW/IWyJ6D8qkPNEjIhvuMaFbRxiFLbzvaQYOz0ryOkSfnt8sRvh5AM01S86WQ==
   dependencies:
     tslib "^1.9.0"
 

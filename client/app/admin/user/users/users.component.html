@@ -15,13 +15,14 @@
                             [(selections)]="naturalSearchSelections"
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
-            ></natural-search>
+            >
+                <app-columns-picker (selectionChange)="selectedColumns = $event">
+                    <span appColumnsPickerColumn="id" i18n>id</span>
+                    <span appColumnsPickerColumn="name" i18n>Nom</span>
+                    <span appColumnsPickerColumn="login" i18n>Login</span>
+                </app-columns-picker>
+            </natural-search>
 
-            <app-columns-picker (selectionChange)="selectedColumns = $event">
-                <span appColumnsPickerColumn="id" i18n>id</span>
-                <span appColumnsPickerColumn="name" i18n>Nom</span>
-                <span appColumnsPickerColumn="login" i18n>Login</span>
-            </app-columns-picker>
         </div>
 
         <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">

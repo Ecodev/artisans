@@ -15,18 +15,19 @@
                             [(selections)]="naturalSearchSelections"
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
-            ></natural-search>
+            >
+                <app-columns-picker (selectionChange)="selectedColumns = $event">
+                    <span appColumnsPickerColumn="id" i18n>id</span>
+                    <span appColumnsPickerColumn="responsible" i18n>Responsable</span>
+                    <span appColumnsPickerColumn="destination" i18n>Destination</span>
+                    <span appColumnsPickerColumn="startDate" i18n>Début</span>
+                    <span appColumnsPickerColumn="endDate" i18n>Fin</span>
+                    <span appColumnsPickerColumn="estimatedEndDate" i18n>Retour prévu</span>
+                    <span appColumnsPickerColumn="participantCount" i18n>Nb participants</span>
+                    <span appColumnsPickerColumn="flagEndDate" i18n>Terminer</span>
+                </app-columns-picker>
+            </natural-search>
 
-            <app-columns-picker (selectionChange)="selectedColumns = $event">
-                <span appColumnsPickerColumn="id" i18n>id</span>
-                <span appColumnsPickerColumn="responsible" i18n>Responsable</span>
-                <span appColumnsPickerColumn="destination" i18n>Destination</span>
-                <span appColumnsPickerColumn="startDate" i18n>Début</span>
-                <span appColumnsPickerColumn="endDate" i18n>Fin</span>
-                <span appColumnsPickerColumn="estimatedEndDate" i18n>Retour prévu</span>
-                <span appColumnsPickerColumn="participantCount" i18n>Nb participants</span>
-                <span appColumnsPickerColumn="flagEndDate" i18n>Terminer</span>
-            </app-columns-picker>
         </div>
 
         <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">

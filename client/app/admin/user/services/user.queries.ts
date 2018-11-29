@@ -2,8 +2,8 @@ import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
 
 export const usersQuery = gql`
-    query Users($filter: UserFilter, $pagination: PaginationInput) {
-        users(filter: $filter, pagination: $pagination) {
+    query Users($filter: UserFilter, $sorting: [UserSorting!], $pagination: PaginationInput) {
+        users(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 id
                 login

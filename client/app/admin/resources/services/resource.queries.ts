@@ -10,8 +10,8 @@ export const resourceMetaFragment = gql`
 `;
 
 export const resourcesQuery = gql`
-    query Resources($filter: ResourceFilter, $pagination: PaginationInput) {
-        resources(filter: $filter, pagination: $pagination) {
+    query Resources($filter: ResourceFilter, $sorting: [ResourceSorting!], $pagination: PaginationInput) {
+        resources(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...resourceMeta
             }

@@ -29,8 +29,8 @@ export const bookingMetaFragment = gql`
 ${userMetaFragment}`;
 
 export const bookingsQuery = gql`
-    query Bookings($filter: BookingFilter, $pagination: PaginationInput) {
-        bookings(filter: $filter, pagination: $pagination) {
+    query Bookings($filter: BookingFilter, $sorting: [BookingSorting!], $pagination: PaginationInput) {
+        bookings(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...bookingMeta
             }

@@ -112,7 +112,13 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\Tag", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="License", mappedBy="users")
+     */
+    private $licenses;
+
+    /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="UserTag", mappedBy="users")
      */
     private $tags;
 
@@ -125,6 +131,7 @@ class User extends AbstractModel
     {
         $this->role = $role;
         $this->bookings = new ArrayCollection();
+        $this->licenses = new ArrayCollection();
         $this->tags = new ArrayCollection();
     }
 
@@ -292,7 +299,7 @@ class User extends AbstractModel
         $acl = new Acl();
         $types = [
             Country::class,
-            Tag::class,
+            License::class,
             self::class,
         ];
 
@@ -367,6 +374,14 @@ class User extends AbstractModel
     public function bookingAdded(Booking $booking): void
     {
         $this->bookings->add($booking);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getLicenses(): Collection
+    {
+        return $this->licenses;
     }
 
     /**

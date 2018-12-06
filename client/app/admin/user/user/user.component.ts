@@ -11,8 +11,8 @@ import {
     UpdateUserMutation,
     UpdateUserMutationVariables,
 } from '../../../shared/generated-types';
-import { TagService } from '../../tags/services/tag.service';
 import { BookingService } from '../../../booking/services/booking.service';
+import { LicenseService } from '../../licenses/services/license.service';
 
 @Component({
     selector: 'app-user',
@@ -32,7 +32,7 @@ export class UserComponent
                 userService: UserService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: TagService,
+                public tagService: LicenseService,
                 public bookingService: BookingService
     ) {
         super('user', userService, alertService, router, route);

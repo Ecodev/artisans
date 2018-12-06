@@ -10,7 +10,7 @@ import gql from 'graphql-tag';
 import { BookingService } from '../app/booking/services/booking.service';
 import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
 import { LinkMutationService } from '../app/shared/services/link-mutation.service';
-import { ResourceService } from '../app/admin/resources/services/resource.service';
+import { BookableService } from '../app/admin/bookables/services/bookable.service';
 import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 
@@ -47,7 +47,7 @@ export class VanillaModule implements DoBootstrap {
 
     constructor(apollo: Apollo,
                 userService: UserService,
-                resourceService: ResourceService,
+                bookableService: BookableService,
                 bookingService: BookingService,
                 linkMutation: LinkMutationService,
     ) {
@@ -56,7 +56,7 @@ export class VanillaModule implements DoBootstrap {
             gql,
             apollo,
             userService,
-            resourceService,
+            bookableService,
             bookingService,
             QueryVariablesManager,
             linkMutation,

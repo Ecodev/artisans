@@ -12,7 +12,7 @@ describe('LinkMutationService', () => {
     });
 
     const booking = {__typename: 'Booking'};
-    const item = {__typename: 'Resource'};
+    const item = {__typename: 'Bookable'};
     const company = {__typename: 'Company'};
 
     const expectBooking = {
@@ -22,13 +22,13 @@ describe('LinkMutationService', () => {
 
     const expectedLink = {
         data: {
-            linkBookingResource: expectBooking,
+            linkBookingBookable: expectBooking,
         },
     };
 
     const expectedUnlink = {
         data: {
-            unlinkBookingResource: expectBooking,
+            unlinkBookingBookable: expectBooking,
         },
     };
 

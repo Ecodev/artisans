@@ -10,34 +10,26 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A tag
+ * A license that is required for a booking and can be owned by a user.
  *
- * @ORM\Entity(repositoryClass="Application\Repository\TagRepository")
+ * @ORM\Entity(repositoryClass="Application\Repository\LicenseRepository")
  * @ORM\Table(uniqueConstraints={
  *     @ORM\UniqueConstraint(name="unique_name", columns={"name"})
  * })
  */
-class Tag extends AbstractModel
+class License extends AbstractModel
 {
     use HasName;
 
     /**
-     * Hexadecimal code
-     *
-     * @var string
-     * @ORM\Column(type="string", length=25, options={"default" = ""})
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="Bookable", inversedBy="tags")
      */
-    private $color = '';
+    private $bookables;
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\Resource", inversedBy="tags")
-     */
-    private $resources;
-
-    /**
-     * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\User", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Application\Model\User", inversedBy="licenses")
      */
     private $users;
 
@@ -46,27 +38,27 @@ class Tag extends AbstractModel
      */
     public function __construct()
     {
-        $this->resources = new ArrayCollection();
+        $this->bookables = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
     /**
      * @return Collection
      */
-    public function getResources(): Collection
+    public function getBookables(): Collection
     {
-        return $this->resources;
+        return $this->bookables;
     }
 
     /**
-     * Add resource
+     * Add bookable
      *
-     * @param resource $resource
+     * @param Bookable $bookable
      */
-    public function addResource(Resource $resource): void
+    public function addBookable(Bookable $bookable): void
     {
-        if (!$this->resources->contains($resource)) {
-            $this->resources->add($resource);
+        if (!$this->bookables->contains($bookable)) {
+            $this->bookables->add($bookable);
         }
     }
 
@@ -101,28 +93,12 @@ class Tag extends AbstractModel
     }
 
     /**
-     * @param string $color
-     */
-    public function setColor(string $color): void
-    {
-        $this->color = $color;
-    }
-
-    /**
-     * @return string
-     */
-    public function getColor(): string
-    {
-        return $this->color;
-    }
-
-    /**
-     * Remove resource
+     * Remove bookable
      *
-     * @param resource $resource
+     * @param Bookable $bookable
      */
-    public function removeResource(Resource $resource): void
+    public function removeBookable(Bookable $bookable): void
     {
-        $this->resources->removeElement($resource);
+        $this->bookables->removeElement($bookable);
     }
 }

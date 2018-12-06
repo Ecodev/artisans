@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { ResourcesComponent } from './resources/resources/resources.component';
+import { BookablesComponent } from './bookables/bookables/bookables.component';
 import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { UsersComponent } from './user/users/users.component';
-import { ResourceComponent } from './resources/resource/resource.component';
-import { ResourceResolver } from './resources/resources/resource.resolver';
+import { BookableComponent } from './bookables/bookable/bookable.component';
+import { BookableResolver } from './bookables/bookables/bookable.resolver';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './user/services/user.resolver';
 
@@ -19,14 +19,14 @@ const routes: Routes = [
                 component: BookingsComponent,
             },
             {
-                path: 'resource',
-                component: ResourcesComponent,
+                path: 'bookable',
+                component: BookablesComponent,
             },
             {
-                path: 'resource/:resourceId',
-                component: ResourceComponent,
+                path: 'bookable/:bookableId',
+                component: BookableComponent,
                 resolve: {
-                    resource: ResourceResolver,
+                    bookable: BookableResolver,
                 },
             },
             {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\ORM\Query\Filter;
 
-use Application\Model\Tag;
+use Application\Model\License;
 use Application\Model\User;
 
 use Application\ORM\Query\Filter\AclFilter;
@@ -17,7 +17,7 @@ class AclFilterTest extends TestCase
         return [
             'tag is totally public public class, access everything' => [
                 null,
-                Tag::class,
+                License::class,
                 '',
             ],
             'users are invisible to anonymous' => [

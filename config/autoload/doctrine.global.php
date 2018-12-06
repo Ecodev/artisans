@@ -42,6 +42,8 @@ return [
         ],
         'types' => [
             'UserRole' => Application\DBAL\Types\UserRoleType::class,
+            'BookingType' => Application\DBAL\Types\BookingTypeType::class,
+            'BookingStatus' => Application\DBAL\Types\BookingStatusType::class,
             'datetime' => Application\DBAL\Types\ChronosType::class,
             'date' => Application\DBAL\Types\DateType::class,
         ],

@@ -4,63 +4,26 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\DBAL\Types\BookingStatusType;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A booking linking a user and several resources
+ * A booking linking a user and several bookables
  *
  * @ORM\Entity(repositoryClass="Application\Repository\BookingRepository")
  */
 class Booking extends AbstractModel
 {
     /**
-     * @var User
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Application\Model\User", inversedBy="bookings")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(onDelete="SET NULL")
-     * })
+     * @ORM\Column(type="BookingStatus", length=10, options={"default" = BookingStatusType::APPLICATION})
      */
-    private $responsible;
-
-    /**
-     * @var Collection
-     *
-     * @ORM\ManyToMany(targetEntity="Application\Model\Resource", inversedBy="bookings")
-     */
-    private $resources;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->resources = new ArrayCollection();
-    }
-
-    /**
-     * Set responsible
-     *
-     * @param null|User $responsible
-     */
-    public function setResponsible(?User $responsible): void
-    {
-        $this->responsible = $responsible;
-        $this->responsible->bookingAdded($this);
-    }
-
-    /**
-     * Get responsible
-     *
-     * @return null|User
-     */
-    public function getResponsible(): ?User
-    {
-        return $this->responsible;
-    }
+    private $status = BookingStatusType::APPLICATION;
 
     /**
      * @var int
@@ -109,6 +72,52 @@ class Booking extends AbstractModel
      * @ORM\Column(type="string", length=50, options={"default" = ""})
      */
     private $estimatedEndDate = '';
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="Application\Model\User", inversedBy="bookings")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(onDelete="SET NULL")
+     * })
+     */
+    private $responsible;
+
+    /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Bookable", inversedBy="bookings")
+     */
+    private $bookables;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->bookables = new ArrayCollection();
+    }
+
+    /**
+     * Set responsible
+     *
+     * @param null|User $responsible
+     */
+    public function setResponsible(?User $responsible): void
+    {
+        $this->responsible = $responsible;
+        $this->responsible->bookingAdded($this);
+    }
+
+    /**
+     * Get responsible
+     *
+     * @return null|User
+     */
+    public function getResponsible(): ?User
+    {
+        return $this->responsible;
+    }
 
     /**
      * Total count of participant, at least 1.
@@ -227,20 +236,40 @@ class Booking extends AbstractModel
     /**
      * @return Collection
      */
-    public function getResources(): Collection
+    public function getBookables(): Collection
     {
-        return $this->resources;
+        return $this->bookables;
     }
 
     /**
-     * Add resource
+     * Add bookable
      *
-     * @param resource $resource
+     * @param Bookable $bookable
      */
-    public function addResource(Resource $resource): void
+    public function addBookable(Bookable $bookable): void
     {
-        if (!$this->resources->contains($resource)) {
-            $this->resources->add($resource);
+        if (!$this->bookables->contains($bookable)) {
+            $this->bookables->add($bookable);
         }
+    }
+
+    /**
+     * @API\Field(type="BookingStatus")
+     *
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @API\Input(type="BookingStatus")
+     *
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 }

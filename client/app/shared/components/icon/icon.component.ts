@@ -60,7 +60,7 @@ export class IconComponent {
         'qr': {
             svg : 'qr.svg'
         },
-        'own_resource': {
+        'own_bookable': {
             svg : 'swimsuit.svg'
         },
         'code': {
@@ -75,7 +75,7 @@ export class IconComponent {
         'finances': {
             svg : 'notes.svg'
         },
-        'browse_resources': {
+        'browse_bookables': {
             svg : 'search.svg'
         },
         'administrator': {

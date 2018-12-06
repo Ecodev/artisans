@@ -36,7 +36,7 @@
                     </div>
 
                     <div fxFlex="33">
-                        <app-relations [main]="data.model" [service]="tagService" [filter]="{groups: [{conditions: [{resources: {have: {values: [data.model.id]}}}]}]}" i18n-placeholder placeholder="Associer à un tag">
+                        <app-relations [main]="data.model" [service]="tagService" [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}" i18n-placeholder placeholder="Associer à un tag">
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                     <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>

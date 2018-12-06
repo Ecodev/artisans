@@ -21,7 +21,7 @@ export const bookingMetaFragment = gql`
             id
             ...userMeta
         }
-        resources {
+        bookables {
             id
             name
         }

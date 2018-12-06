@@ -17,6 +17,8 @@ class TypesFactory
 
         $invokables = [
             \Application\Api\Enum\UserRoleType::class,
+            \Application\Api\Enum\BookingStatusType::class,
+            \Application\Api\Enum\BookingTypeType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\MutationType::class,
             \Application\Api\Output\GlobalPermissionsListType::class,
@@ -27,6 +29,7 @@ class TypesFactory
             \Application\Api\Scalar\DateType::class,
             \Application\Api\Scalar\EmailType::class,
             \Application\Api\Scalar\LoginType::class,
+            \Application\Api\Scalar\ColorType::class,
         ];
 
         $aliases = [

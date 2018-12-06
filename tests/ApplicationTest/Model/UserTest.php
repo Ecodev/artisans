@@ -22,7 +22,7 @@ class UserTest extends TestCase
             'country' => [
                 'create' => false,
             ],
-            'tag' => [
+            'license' => [
                 'create' => true,
             ],
             'user' => [
@@ -36,7 +36,7 @@ class UserTest extends TestCase
             'country' => [
                 'create' => true,
             ],
-            'tag' => [
+            'license' => [
                 'create' => true,
             ],
             'user' => [

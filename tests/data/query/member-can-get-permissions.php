@@ -8,7 +8,7 @@ return [
             viewer {
                 globalPermissions {
                 country { create }
-                tag { create }
+                license { create }
                 user { create }
                 }
             }
@@ -30,7 +30,7 @@ return [
                     'country' => [
                         'create' => false,
                     ],
-                    'tag' => [
+                    'license' => [
                         'create' => true,
                     ],
                     'user' => [

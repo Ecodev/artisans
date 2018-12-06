@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
-class TagRepository extends AbstractRepository
+class LicenseRepository extends AbstractRepository
 {
 }

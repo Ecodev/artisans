@@ -6,11 +6,12 @@ namespace Application\Api;
 
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
+use Application\Model\Bookable;
 use Application\Model\Booking;
 use Application\Model\Country;
-use Application\Model\Resource;
-use Application\Model\Tag;
+use Application\Model\License;
 use Application\Model\User;
+use Application\Model\UserTag;
 use GraphQL\Type\Definition\ObjectType;
 
 class QueryType extends ObjectType
@@ -26,9 +27,10 @@ class QueryType extends ObjectType
 
             Standard::buildQuery(Booking::class),
             Standard::buildQuery(Country::class),
-            Standard::buildQuery(Resource::class),
-            Standard::buildQuery(Tag::class),
-            Standard::buildQuery(User::class)
+            Standard::buildQuery(Bookable::class),
+            Standard::buildQuery(License::class),
+            Standard::buildQuery(User::class),
+            Standard::buildQuery(UserTag::class)
         );
 
         $config = [

@@ -21,9 +21,10 @@ export class NetworkActivityService {
     constructor(private progressService: NgProgress) {
     }
 
-    public increase() {
+    public increase(): void {
 
         if (this.pending === 0) {
+            console.log('STARTED');
             this.progressService.ref().start();
         }
 
@@ -31,8 +32,12 @@ export class NetworkActivityService {
         this.isPending.next(this.pending > 0);
     }
 
-    public decrease() {
+    public decrease(): void {
         this.pending--;
+        if (this.pending < 0) {
+            this.pending = 0;
+        }
+
         this.isPending.next(this.pending > 0);
 
         // Mark progress a completed, after waiting 20ms in case a refetchQueries would be used
@@ -40,16 +45,16 @@ export class NetworkActivityService {
             setTimeout(() => {
                 if (this.pending === 0) {
                     this.progressService.ref().complete();
+                    console.log('COMPELE');
                 }
             }, 20);
 
         }
     }
 
-    public updateErrors(errors) {
+    public updateErrors(errors): void {
         if (errors && errors.length) {
             this.errors.next(errors);
         }
     }
-
 }

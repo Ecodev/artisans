@@ -5,7 +5,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { SchemaLink } from 'apollo-link-schema';
 import { buildClientSchema } from 'graphql';
 import { addMockFunctionsToSchema } from 'graphql-tools';
-import { apolloDefaultOptions } from '../config/apollo.default.options';
+import { apolloLinkCreator } from '../config/apollo.default.options';
 import { schema as introspectionResult } from './../../../../data/tmp/schema';
 
 /**
@@ -51,7 +51,7 @@ class MockApollo extends Apollo {
         return new ApolloClient({
             cache: apolloCache,
             link: new SchemaLink({schema}),
-            defaultOptions: apolloDefaultOptions,
+            defaultOptions: apolloLinkCreator,
         });
     }
 }

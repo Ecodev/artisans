@@ -38,9 +38,9 @@ class Server
     /**
      * @param ServerRequestInterface $request
      *
-     * @return ExecutionResult
+     * @return ExecutionResult|ExecutionResult[]
      */
-    public function execute(ServerRequestInterface $request): ExecutionResult
+    public function execute(ServerRequestInterface $request)
     {
         if (!$request->getParsedBody()) {
             $request = $request->withParsedBody(json_decode($request->getBody()->getContents(), true));

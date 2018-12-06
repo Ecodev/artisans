@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use GraphQL\Doctrine\Annotation as API;
+
 trait HasColor
 {
     /**

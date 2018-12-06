@@ -24,7 +24,6 @@ export class NetworkActivityService {
     public increase(): void {
 
         if (this.pending === 0) {
-            console.log('STARTED');
             this.progressService.ref().start();
         }
 
@@ -45,7 +44,6 @@ export class NetworkActivityService {
             setTimeout(() => {
                 if (this.pending === 0) {
                     this.progressService.ref().complete();
-                    console.log('COMPELE');
                 }
             }, 20);
 

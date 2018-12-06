@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
-class ResourceRepository extends AbstractRepository
+class BookableRepository extends AbstractRepository
 {
 }

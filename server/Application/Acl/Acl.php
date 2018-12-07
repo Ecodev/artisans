@@ -7,10 +7,12 @@ namespace Application\Acl;
 use Application\Acl\Assertion\IsMyself;
 use Application\Model\AbstractModel;
 use Application\Model\Bookable;
+use Application\Model\BookableType;
 use Application\Model\Booking;
 use Application\Model\Country;
 use Application\Model\License;
 use Application\Model\User;
+use Application\Model\UserTag;
 use Doctrine\Common\Util\ClassUtils;
 
 class Acl extends \Zend\Permissions\Acl\Acl
@@ -28,11 +30,13 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addRole(User::ROLE_MEMBER, User::ROLE_ANONYMOUS);
         $this->addRole(User::ROLE_ADMINISTRATOR);
 
+        $this->addResource(new ModelResource(Bookable::class));
+        $this->addResource(new ModelResource(BookableType::class));
+        $this->addResource(new ModelResource(Booking::class));
         $this->addResource(new ModelResource(License::class));
         $this->addResource(new ModelResource(User::class));
+        $this->addResource(new ModelResource(UserTag::class));
         $this->addResource(new ModelResource(Country::class));
-        $this->addResource(new ModelResource(Booking::class));
-        $this->addResource(new ModelResource(Bookable::class));
 
         $this->allow(User::ROLE_ANONYMOUS, new ModelResource(License::class), 'read');
         $this->allow(User::ROLE_ANONYMOUS, new ModelResource(Country::class), 'read');

@@ -11,8 +11,11 @@ class UserRoleType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            User::ROLE_MEMBER => 'Member',
-            User::ROLE_ADMINISTRATOR => 'An administrator',
+            User::ROLE_INACTIVE => 'Inactif',
+            User::ROLE_BOOKING_ONLY => 'Uniquement cahier de sortie (spécial)',
+            User::ROLE_MEMBER => 'Membre',
+            User::ROLE_RESPONSIBLE => 'Responsable de secteur',
+            User::ROLE_ADMINISTRATOR => 'Administrateur',
         ];
 
         parent::__construct($config);

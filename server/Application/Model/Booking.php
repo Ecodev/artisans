@@ -105,8 +105,13 @@ class Booking extends AbstractModel
      */
     public function setResponsible(?User $responsible): void
     {
+        if ($this->responsible) {
+            $this->responsible->bookingRemoved($this);
+        }
         $this->responsible = $responsible;
-        $this->responsible->bookingAdded($this);
+        if ($this->responsible) {
+            $this->responsible->bookingAdded($this);
+        }
     }
 
     /**
@@ -250,7 +255,19 @@ class Booking extends AbstractModel
     {
         if (!$this->bookables->contains($bookable)) {
             $this->bookables->add($bookable);
+            $bookable->bookingAdded($this);
         }
+    }
+
+    /**
+     * Remove bookable
+     *
+     * @param Bookable $bookable
+     */
+    public function removeBookable(Bookable $bookable): void
+    {
+        $this->bookables->removeElement($bookable);
+        $bookable->bookingRemoved($this);
     }
 
     /**

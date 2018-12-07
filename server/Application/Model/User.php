@@ -125,7 +125,7 @@ class User extends AbstractModel
      * @var Collection
      * @ORM\ManyToMany(targetEntity="UserTag", mappedBy="users")
      */
-    private $tags;
+    private $userTags;
 
     /**
      * Constructor
@@ -137,7 +137,7 @@ class User extends AbstractModel
         $this->role = $role;
         $this->bookings = new ArrayCollection();
         $this->licenses = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->userTags = new ArrayCollection();
     }
 
     /**
@@ -382,6 +382,17 @@ class User extends AbstractModel
     }
 
     /**
+     * Notify the user that it has a booking was removed.
+     * This should only be called by Booking::setResponsible()
+     *
+     * @param Booking $booking
+     */
+    public function bookingRemoved(Booking $booking): void
+    {
+        $this->bookings->removeElement($booking);
+    }
+
+    /**
      * @return Collection
      */
     public function getLicenses(): Collection
@@ -392,8 +403,52 @@ class User extends AbstractModel
     /**
      * @return Collection
      */
-    public function getTags(): Collection
+    public function getUserTags(): Collection
     {
-        return $this->tags;
+        return $this->userTags;
+    }
+
+    /**
+     * Notify the user that it has a new license.
+     * This should only be called by License::addUser()
+     *
+     * @param License $license
+     */
+    public function licenseAdded(License $license): void
+    {
+        $this->licenses->add($license);
+    }
+
+    /**
+     * Notify the user that it a license was removed.
+     * This should only be called by License::removeUser()
+     *
+     * @param License $license
+     */
+    public function licenseRemoved(License $license): void
+    {
+        $this->licenses->removeElement($license);
+    }
+
+    /**
+     * Notify the user that it has a new userTag.
+     * This should only be called by UserTag::addUser()
+     *
+     * @param UserTag $userTag
+     */
+    public function userTagAdded(UserTag $userTag): void
+    {
+        $this->userTags->add($userTag);
+    }
+
+    /**
+     * Notify the user that it a userTag was removed.
+     * This should only be called by UserTag::removeUser()
+     *
+     * @param UserTag $userTag
+     */
+    public function userTagRemoved(UserTag $userTag): void
+    {
+        $this->userTags->removeElement($userTag);
     }
 }

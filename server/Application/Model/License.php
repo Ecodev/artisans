@@ -23,7 +23,7 @@ class License extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Bookable", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="Bookable", inversedBy="licenses")
      */
     private $bookables;
 
@@ -59,6 +59,7 @@ class License extends AbstractModel
     {
         if (!$this->bookables->contains($bookable)) {
             $this->bookables->add($bookable);
+            $bookable->licenseAdded($this);
         }
     }
 
@@ -79,6 +80,7 @@ class License extends AbstractModel
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
+            $user->licenseAdded($this);
         }
     }
 
@@ -90,6 +92,7 @@ class License extends AbstractModel
     public function removeUser(User $user): void
     {
         $this->users->removeElement($user);
+        $user->licenseRemoved($this);
     }
 
     /**
@@ -100,5 +103,6 @@ class License extends AbstractModel
     public function removeBookable(Bookable $bookable): void
     {
         $this->bookables->removeElement($bookable);
+        $bookable->licenseRemoved($this);
     }
 }

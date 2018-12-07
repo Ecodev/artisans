@@ -68,7 +68,7 @@ class Bookable extends AbstractModel
      * @var Collection
      * @ORM\ManyToMany(targetEntity="License", mappedBy="bookables")
      */
-    private $tags;
+    private $licenses;
 
     /**
      * Constructor
@@ -76,7 +76,7 @@ class Bookable extends AbstractModel
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
-        $this->tags = new ArrayCollection();
+        $this->licenses = new ArrayCollection();
     }
 
     /**
@@ -88,11 +88,55 @@ class Bookable extends AbstractModel
     }
 
     /**
+     * Notify the bookable that it has a new booking.
+     * This should only be called by Booking::addBookable()
+     *
+     * @param Booking $booking
+     */
+    public function bookingAdded(Booking $booking): void
+    {
+        $this->bookings->add($booking);
+    }
+
+    /**
+     * Notify the bookable that it a booking was removed.
+     * This should only be called by Booking::removeBookable()
+     *
+     * @param Booking $booking
+     */
+    public function bookingRemoved(Booking $booking): void
+    {
+        $this->bookings->removeElement($booking);
+    }
+
+    /**
      * @return Collection
      */
-    public function getTags(): Collection
+    public function getLicenses(): Collection
     {
-        return $this->tags;
+        return $this->licenses;
+    }
+
+    /**
+     * Notify the bookable that it has a new license.
+     * This should only be called by License::addBookable()
+     *
+     * @param License $license
+     */
+    public function licenseAdded(License $license): void
+    {
+        $this->licenses->add($license);
+    }
+
+    /**
+     * Notify the bookable that it a license was removed.
+     * This should only be called by License::removeBookable()
+     *
+     * @param License $license
+     */
+    public function licenseRemoved(License $license): void
+    {
+        $this->licenses->removeElement($license);
     }
 
     /**

@@ -25,7 +25,7 @@ class UserTag extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="userTags")
      */
     private $users;
 
@@ -54,6 +54,7 @@ class UserTag extends AbstractModel
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
+            $user->userTagAdded($this);
         }
     }
 
@@ -65,5 +66,6 @@ class UserTag extends AbstractModel
     public function removeUser(User $user): void
     {
         $this->users->removeElement($user);
+        $user->userTagRemoved($this);
     }
 }

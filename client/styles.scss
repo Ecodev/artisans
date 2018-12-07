@@ -34,7 +34,7 @@ pre.debug {
 }
 
 /* Disable login autofill background color */
-input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     transition-delay: 3600s;
 }
 
@@ -43,4 +43,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
     bottom: 20px;
     right: 20px;
     z-index: 999; // < than 1000 that is the z-index of overlay contents
+}
+
+[overflow] {
+    overflow: auto;
 }

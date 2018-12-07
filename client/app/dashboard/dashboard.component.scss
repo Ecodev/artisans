@@ -1,14 +1,5 @@
 :host {
     display: flex;
     flex: 1;
-
-    h2 {
-        margin-bottom: 0.5em;
-    }
-
-    .deadlines .mat-subheading-2 {
-        margin-top: 30px;
-        margin-bottom: 0;
-    }
-
+    flex-direction: column;
 }

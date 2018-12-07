@@ -115,4 +115,36 @@ STRING;
             throw new \Exception('FAILED executing: ' . $command);
         }
     }
+
+    /**
+     * Load test data
+     */
+    public static function loadTestData(): void
+    {
+        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
+        self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
+        self::importFile('tests/data/fixture.sql');
+    }
+
+    /**
+     * Import a SQL file into DB
+     *
+     * This use mysql command, instead of DBAL methods, to allow to see errors if any, and
+     * also because it seems trigger creation do not work with DBAL for some unclear reasons.
+     *
+     * @param string $file
+     */
+    private static function importFile(string $file): void
+    {
+        $file = realpath($file);
+        echo 'importing ' . $file . "\n";
+        $connection = _em()->getConnection();
+        $database = $connection->getDatabase();
+        $username = $connection->getUsername();
+        $password = empty($connection->getPassword()) ? '' : '-p' . $connection->getPassword();
+
+        $importCommand = "more $file | mysql -u $username $password $database";
+
+        self::executeLocalCommand($importCommand);
+    }
 }

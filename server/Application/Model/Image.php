@@ -164,7 +164,7 @@ class Image extends AbstractModel
     }
 
     /**
-     * Generate unique filename while trying to preserver original extension
+     * Generate unique filename while trying to preserve original extension
      *
      * @param string $originalFilename
      */

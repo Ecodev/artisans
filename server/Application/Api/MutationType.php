@@ -8,6 +8,7 @@ use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Standard;
 use Application\Model\Bookable;
+use Application\Model\BookableMetadata;
 use Application\Model\BookableType;
 use Application\Model\Booking;
 use Application\Model\Image;
@@ -29,6 +30,7 @@ class MutationType extends ObjectType
             $specializedFields,
 
             Standard::buildMutation(Bookable::class),
+            Standard::buildMutation(BookableMetadata::class),
             Standard::buildMutation(BookableType::class),
             Standard::buildMutation(Booking::class),
             Standard::buildMutation(Image::class),

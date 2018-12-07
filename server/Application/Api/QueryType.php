@@ -7,6 +7,7 @@ namespace Application\Api;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
 use Application\Model\Bookable;
+use Application\Model\BookableMetadata;
 use Application\Model\BookableType;
 use Application\Model\Booking;
 use Application\Model\Country;
@@ -28,6 +29,7 @@ class QueryType extends ObjectType
             $specializedFields,
 
             Standard::buildQuery(Bookable::class),
+            Standard::buildQuery(BookableMetadata::class),
             Standard::buildQuery(BookableType::class),
             Standard::buildQuery(Booking::class),
             Standard::buildQuery(Country::class),

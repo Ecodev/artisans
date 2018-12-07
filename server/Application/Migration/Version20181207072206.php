@@ -60,6 +60,11 @@ class Version20181207072206 extends AbstractMigration
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D6497E3C61F9 FOREIGN KEY (owner_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649E37ECFB0 FOREIGN KEY (updater_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649602AD315 FOREIGN KEY (responsible_id) REFERENCES user (id) ON DELETE SET NULL');
+        $this->addSql('CREATE TABLE bookable_metadata (id INT AUTO_INCREMENT NOT NULL, creator_id INT DEFAULT NULL, owner_id INT DEFAULT NULL, updater_id INT DEFAULT NULL, bookable_id INT DEFAULT NULL, creation_date DATETIME DEFAULT NULL, update_date DATETIME DEFAULT NULL, value VARCHAR(191) DEFAULT \'\' NOT NULL, name VARCHAR(191) NOT NULL, INDEX IDX_F11FB12E61220EA6 (creator_id), INDEX IDX_F11FB12E7E3C61F9 (owner_id), INDEX IDX_F11FB12EE37ECFB0 (updater_id), INDEX IDX_F11FB12EEC4F5B2F (bookable_id), UNIQUE INDEX unique_name (name, bookable_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE bookable_metadata ADD CONSTRAINT FK_F11FB12E61220EA6 FOREIGN KEY (creator_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE bookable_metadata ADD CONSTRAINT FK_F11FB12E7E3C61F9 FOREIGN KEY (owner_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE bookable_metadata ADD CONSTRAINT FK_F11FB12EE37ECFB0 FOREIGN KEY (updater_id) REFERENCES user (id)');
+        $this->addSql('ALTER TABLE bookable_metadata ADD CONSTRAINT FK_F11FB12EEC4F5B2F FOREIGN KEY (bookable_id) REFERENCES bookable (id) ON DELETE CASCADE');
 
         $this->addSql('INSERT INTO country (id, code, name) VALUES
 (1, "CH", "Suisse"),

@@ -25,6 +25,7 @@ return [
             'doctrine.entity_manager.orm_default' => \Application\ORM\EntityManagerFactory::class,
             \Application\Action\GraphQLAction::class => \Application\Action\GraphQLFactory::class,
             \GraphQL\Doctrine\Types::class => \Application\Api\TypesFactory::class,
+            \Application\Action\ImageAction::class => \Application\Action\ImageFactory::class,
             \Application\Service\ImageResizer::class => \Application\Service\ImageResizerFactory::class,
             \Imagine\Image\ImagineInterface::class => \Application\Service\ImagineFactory::class,
         ],

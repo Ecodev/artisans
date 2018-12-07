@@ -23,4 +23,7 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4000, 3001),
 (4001, 3000);
 
+REPLACE INTO image (id, bookable_id, filename, width, height) VALUES
+(5000, 3000,'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg',  500, 374);
+
 COMMIT;

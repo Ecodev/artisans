@@ -41,4 +41,8 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         UploadMiddleware::class,
         GraphQLAction::class,
     ], 'graphql');
+
+    $app->get('/image/{id:\d+}[/{maxHeight:\d+}]', [
+        \Application\Action\ImageAction::class,
+    ], 'image');
 };

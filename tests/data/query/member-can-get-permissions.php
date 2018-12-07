@@ -31,16 +31,16 @@ return [
                         'create' => false,
                     ],
                     'license' => [
-                        'create' => true,
+                        'create' => false,
                     ],
                     'user' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                 ],
             ],
             'user' => [
                 'permissions' => [
-                    'create' => false,
+                    'create' => true,
                     'read' => true,
                     'update' => false,
                     'delete' => false,

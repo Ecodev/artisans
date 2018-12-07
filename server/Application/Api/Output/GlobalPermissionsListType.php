@@ -16,7 +16,6 @@ class GlobalPermissionsListType extends ObjectType
             'description' => 'Describe permissions for current user',
             'fields' => function (): array {
                 $user = new User();
-                $user->setName('fake user');
                 $globalPermissions = $user->getGlobalPermissions();
 
                 $fields = [];

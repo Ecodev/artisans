@@ -10,6 +10,7 @@ use Application\Api\Field\Standard;
 use Application\Model\Bookable;
 use Application\Model\BookableType;
 use Application\Model\Booking;
+use Application\Model\Image;
 use Application\Model\License;
 use Application\Model\User;
 use Application\Model\UserTag;
@@ -30,6 +31,7 @@ class MutationType extends ObjectType
             Standard::buildMutation(Bookable::class),
             Standard::buildMutation(BookableType::class),
             Standard::buildMutation(Booking::class),
+            Standard::buildMutation(Image::class),
             Standard::buildMutation(License::class),
             Standard::buildMutation(User::class),
             Standard::buildMutation(UserTag::class),

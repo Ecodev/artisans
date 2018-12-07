@@ -17,17 +17,16 @@ class UserTest extends TestCase
     public function testGetGlobalPermissions(): void
     {
         $user = new User();
-        $user->setName('fake user');
         $actual = $user->getGlobalPermissions();
         $expected = [
             'country' => [
                 'create' => false,
             ],
             'license' => [
-                'create' => true,
+                'create' => false,
             ],
             'user' => [
-                'create' => false,
+                'create' => true,
             ],
         ];
 
@@ -35,7 +34,7 @@ class UserTest extends TestCase
 
         $expectedForAdmin = [
             'country' => [
-                'create' => true,
+                'create' => false,
             ],
             'license' => [
                 'create' => true,

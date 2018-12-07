@@ -30,11 +30,13 @@ class TypesFactory
             \Application\Api\Scalar\EmailType::class,
             \Application\Api\Scalar\LoginType::class,
             \Application\Api\Scalar\ColorType::class,
+            \GraphQL\Upload\UploadType::class,
         ];
 
         $aliases = [
             'datetime' => \Application\Api\Scalar\ChronosType::class,
             'date' => \Application\Api\Scalar\DateType::class,
+            'UploadedFileInterface' => \GraphQL\Upload\UploadType::class,
         ];
 
         // Automatically add aliases for GraphQL type name from the invokable types

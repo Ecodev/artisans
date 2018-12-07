@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Application\Action\GraphQLAction;
+use GraphQL\Upload\UploadMiddleware;
 use Psr\Container\ContainerInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware;
@@ -37,6 +38,7 @@ use Zend\Expressive\MiddlewareFactory;
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
     $app->post('/graphql', [
         BodyParamsMiddleware::class,
+        UploadMiddleware::class,
         GraphQLAction::class,
     ], 'graphql');
 };

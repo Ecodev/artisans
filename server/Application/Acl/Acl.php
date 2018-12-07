@@ -10,6 +10,7 @@ use Application\Model\Bookable;
 use Application\Model\BookableType;
 use Application\Model\Booking;
 use Application\Model\Country;
+use Application\Model\Image;
 use Application\Model\License;
 use Application\Model\User;
 use Application\Model\UserTag;
@@ -26,27 +27,44 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
     public function __construct()
     {
+        // Each role is strictly "stronger" than the last one
         $this->addRole(User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_MEMBER, User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_ADMINISTRATOR);
+        $this->addRole(User::ROLE_INACTIVE, User::ROLE_ANONYMOUS);
+        $this->addRole(User::ROLE_BOOKING_ONLY, User::ROLE_INACTIVE);
+        $this->addRole(User::ROLE_MEMBER, User::ROLE_BOOKING_ONLY);
+        $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_MEMBER);
+        $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_RESPONSIBLE);
 
-        $this->addResource(new ModelResource(Bookable::class));
-        $this->addResource(new ModelResource(BookableType::class));
-        $this->addResource(new ModelResource(Booking::class));
-        $this->addResource(new ModelResource(License::class));
-        $this->addResource(new ModelResource(User::class));
-        $this->addResource(new ModelResource(UserTag::class));
-        $this->addResource(new ModelResource(Country::class));
+        $bookable = new ModelResource(Bookable::class);
+        $bookableType = new ModelResource(BookableType::class);
+        $booking = new ModelResource(Booking::class);
+        $image = new ModelResource(Image::class);
+        $license = new ModelResource(License::class);
+        $user = new ModelResource(User::class);
+        $userTag = new ModelResource(UserTag::class);
+        $country = new ModelResource(Country::class);
 
-        $this->allow(User::ROLE_ANONYMOUS, new ModelResource(License::class), 'read');
-        $this->allow(User::ROLE_ANONYMOUS, new ModelResource(Country::class), 'read');
+        $this->addResource($bookable);
+        $this->addResource($bookableType);
+        $this->addResource($booking);
+        $this->addResource($image);
+        $this->addResource($license);
+        $this->addResource($user);
+        $this->addResource($userTag);
+        $this->addResource($country);
 
-        $this->allow(User::ROLE_MEMBER, new ModelResource(License::class), 'create');
-        $this->allow(User::ROLE_MEMBER, new ModelResource(User::class), 'read');
-        $this->allow(User::ROLE_MEMBER, new ModelResource(User::class), ['update', 'delete'], new IsMyself());
+        $this->allow(User::ROLE_ANONYMOUS, [$license, $country, $bookable, $bookableType, $image], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, $user, ['create']);
 
-        // Administrator inherits nothing, but is allowed all privileges
-        $this->allow(User::ROLE_ADMINISTRATOR);
+        $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['read', 'create', 'update']);
+
+        $this->allow(User::ROLE_MEMBER, $user, ['read']);
+        $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsMyself());
+
+        $this->allow(User::ROLE_RESPONSIBLE, $user, ['update']);
+        $this->allow(User::ROLE_RESPONSIBLE, $userTag, ['create', 'read', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, $image, ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, $license, ['create', 'update', 'delete']);
     }
 
     /**

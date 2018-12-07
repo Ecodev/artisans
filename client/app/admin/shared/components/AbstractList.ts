@@ -68,6 +68,11 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
      */
     ngOnInit() {
         this.initFromPersisted();
+
+        if (this.route.snapshot.data.routeFilter) {
+            this.variablesManager.set('routeFilters', this.route.snapshot.data.routeFilter);
+        }
+
         this.dataSource = new PaginatedDataSource(this.getDataObservable(), this.variablesManager);
         this.selection = new SelectionModel<Tall>(true, []);
     }

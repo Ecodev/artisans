@@ -8,6 +8,7 @@ import { BookableComponent } from './bookables/bookable/bookable.component';
 import { BookableResolver } from './bookables/bookables/bookable.resolver';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './user/services/user.resolver';
+import { BookableFilter, BookingType } from '../shared/generated-types';
 
 const routes: Routes = [
     {
@@ -20,14 +21,55 @@ const routes: Routes = [
             },
             {
                 path: 'bookable',
-                component: BookablesComponent,
-            },
-            {
-                path: 'bookable/:bookableId',
-                component: BookableComponent,
-                resolve: {
-                    bookable: BookableResolver,
-                },
+                children: [
+                    {
+                        path: 'self-approved',
+                        component: BookablesComponent,
+                        data: {
+                            title: 'Matériel carnet de sortie',
+                            routeFilter: {
+                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}]},
+                            } as BookableFilter,
+                        },
+                    },
+                    {
+                        path: 'admin-approved',
+                        component: BookablesComponent,
+                        data: {
+                            title: 'Matériel sur demande',
+                            routeFilter: {
+                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_approved}}}]}]},
+                            } as BookableFilter,
+                        },
+                    },
+                    {
+                        path: 'admin-only',
+                        component: BookablesComponent,
+                        data: {
+                            title: 'Inventaire et services',
+                            routeFilter: {
+                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_only}}}]}]},
+                            } as BookableFilter,
+                        },
+                    },
+                    {
+                        path: 'mandatory',
+                        component: BookablesComponent,
+                        data: {
+                            title: 'Services obligatoire',
+                            routeFilter: {
+                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}]},
+                            } as BookableFilter,
+                        },
+                    },
+                    {
+                        path: ':bookableId',
+                        component: BookableComponent,
+                        resolve: {
+                            bookable: BookableResolver,
+                        },
+                    },
+                ],
             },
             {
                 path: 'user',

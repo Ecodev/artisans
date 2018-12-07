@@ -6,6 +6,14 @@ export const bookableMetaFragment = gql`
         id
         name
         description
+        licenses {
+            name
+        }
+        initialPrice
+        periodicPrice
+        code
+        simultaneousBookingMaximum
+        bookingType
     }
 `;
 

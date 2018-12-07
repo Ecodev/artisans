@@ -11,7 +11,7 @@ trait HasResponsible
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Application\Model\User")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="SET NULL")
      * })

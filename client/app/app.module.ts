@@ -17,7 +17,7 @@ import { NetworkActivityService } from './shared/services/network-activity.servi
 import { AlertService } from './shared/components/alert/alert.service';
 import { createUploadLink } from 'apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { apolloLinkCreator, createApolloLink } from './shared/config/apollo.link.creator';
+import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
 import { TimezonePreservingDateAdapter } from './shared/services/timezone.preserving.date.adapter';
 import { IconModule } from './shared/components/icon/icon.module';
 import { LoginComponent } from './login/login.component';
@@ -93,7 +93,7 @@ export class AppModule {
         apollo.create({
             link: link,
             cache: new InMemoryCache(),
-            defaultOptions: apolloLinkCreator,
+            defaultOptions: apolloDefaultOptions,
         });
     }
 }

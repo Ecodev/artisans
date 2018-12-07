@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService } from '../../../shared/services/abstract-model.service';
-import { createBookableMutation, bookableQuery, bookablesQuery, updateBookableMutation } from './bookable.queries';
+import { bookableQuery, bookablesQuery, createBookableMutation, updateBookableMutation } from './bookable.queries';
 import {
-    CreateBookableMutation,
-    CreateBookableMutationVariables,
     BookableInput,
     BookableQuery,
     BookableQueryVariables,
     BookablesQuery,
     BookablesQueryVariables,
+    BookingType,
+    CreateBookableMutation,
+    CreateBookableMutationVariables,
     UpdateBookableMutation,
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
@@ -41,6 +42,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         return {
             name: '',
             description: '',
+            type: BookingType.self_approved,
         };
     }
 

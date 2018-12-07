@@ -76,7 +76,7 @@ class Booking extends AbstractModel
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="Application\Model\User", inversedBy="bookings")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="bookings")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="SET NULL")
      * })

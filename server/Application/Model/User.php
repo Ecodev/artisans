@@ -7,6 +7,7 @@ namespace Application\Model;
 use Application\Acl\Acl;
 use Application\Api\Exception;
 use Application\ORM\Query\Filter\AclFilter;
+use Application\Traits\HasDoorAccess;
 use Application\Traits\HasName;
 use Application\Traits\HasResponsible;
 use Application\Utility;
@@ -30,6 +31,7 @@ class User extends AbstractModel
 
     use HasName;
     use HasResponsible;
+    use HasDoorAccess;
 
     /**
      * @var User

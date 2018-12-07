@@ -17,6 +17,7 @@ class UserTest extends TestCase
     public function testGetGlobalPermissions(): void
     {
         $user = new User();
+        $user->setName('fake user');
         $actual = $user->getGlobalPermissions();
         $expected = [
             'country' => [

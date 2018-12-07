@@ -25,7 +25,7 @@ class UserTag extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\User", inversedBy="tags")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="tags")
      */
     private $users;
 

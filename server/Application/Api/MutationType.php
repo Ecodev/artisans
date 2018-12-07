@@ -8,9 +8,11 @@ use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Standard;
 use Application\Model\Bookable;
+use Application\Model\BookableType;
 use Application\Model\Booking;
 use Application\Model\License;
 use Application\Model\User;
+use Application\Model\UserTag;
 use GraphQL\Type\Definition\ObjectType;
 
 class MutationType extends ObjectType
@@ -25,12 +27,16 @@ class MutationType extends ObjectType
         $fields = array_merge(
             $specializedFields,
 
-            Standard::buildMutation(Booking::class),
             Standard::buildMutation(Bookable::class),
+            Standard::buildMutation(BookableType::class),
+            Standard::buildMutation(Booking::class),
+            Standard::buildMutation(License::class),
             Standard::buildMutation(User::class),
+            Standard::buildMutation(UserTag::class),
             Standard::buildRelationMutation(Booking::class, Bookable::class),
             Standard::buildRelationMutation(License::class, Bookable::class),
-            Standard::buildRelationMutation(License::class, User::class)
+            Standard::buildRelationMutation(License::class, User::class),
+            Standard::buildRelationMutation(UserTag::class, User::class)
         );
 
         $config = [

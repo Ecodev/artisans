@@ -15,7 +15,7 @@ trait HasName
      * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $name = '';
+    private $name;
 
     /**
      * Constructor

@@ -8,7 +8,7 @@ import { createUploadLink } from 'apollo-upload-client';
 import { isObject } from 'lodash';
 import { Literal } from '../types';
 
-export const apolloLinkCreator: DefaultOptions = {
+export const apolloDefaultOptions: DefaultOptions = {
     query: {
         fetchPolicy: 'cache-first',
     },

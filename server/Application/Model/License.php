@@ -29,7 +29,7 @@ class License extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Application\Model\User", inversedBy="licenses")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="licenses")
      */
     private $users;
 

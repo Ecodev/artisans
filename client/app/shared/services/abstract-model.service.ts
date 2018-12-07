@@ -45,7 +45,7 @@ export abstract class AbstractModelService<Tone,
     /**
      * Stores the debounced update function
      */
-    protected debouncedUpdateCache = {};
+    protected debouncedUpdateCache = new Map<string, (object: Literal, resultObservable: Subject<Tupdate>) => void>();
 
     private creatingIdTmp = 1;
 
@@ -320,14 +320,13 @@ export abstract class AbstractModelService<Tone,
         this.throwIfObservable(object);
         this.throwIfNotQuery(this.updateMutation);
 
-        const resultObservable = new Subject<Tupdate>();
         const objectKey = this.getKey(object);
 
         // Keep a single instance of the debounced update function
         if (!this.debouncedUpdateCache[objectKey]) {
 
             // Create debounced update function
-            this.debouncedUpdateCache[objectKey] = debounce(o => {
+            this.debouncedUpdateCache[objectKey] = debounce((o: Literal, resultObservable: Subject<Tupdate>) => {
                 this.updateNow(o).subscribe(data => {
                     resultObservable.next(data);
                     resultObservable.complete();
@@ -336,10 +335,11 @@ export abstract class AbstractModelService<Tone,
         }
 
         // Call debounced update function each time we call this update() function
-        this.debouncedUpdateCache[objectKey](object);
+        const result = new Subject<Tupdate>();
+        this.debouncedUpdateCache[objectKey](object, result);
 
         // Return and observable that is updated when mutation is done
-        return resultObservable;
+        return result;
     }
 
     /**

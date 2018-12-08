@@ -35,8 +35,9 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             // Update the hash in DB, if we are still MD5, or if PHP default options changed
             if ($isMd5 || password_needs_rehash($hashFromDb, PASSWORD_DEFAULT)) {
                 $user->setPassword($password);
-                _em()->flush();
             }
+            $user->setLastLogin(new Chronos());
+            _em()->flush();
 
             return $user;
         }

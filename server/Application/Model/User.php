@@ -6,9 +6,12 @@ namespace Application\Model;
 
 use Application\Acl\Acl;
 use Application\Api\Exception;
+use Application\DBAL\Types\BillingTypeType;
+use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasDoorAccess;
 use Application\Traits\HasName;
+use Application\Traits\HasRemarks;
 use Application\Traits\HasResponsible;
 use Application\Utility;
 use Cake\Chronos\Chronos;
@@ -35,6 +38,7 @@ class User extends AbstractModel
     use HasName;
     use HasResponsible;
     use HasDoorAccess;
+    use HasRemarks;
 
     /**
      * @var User
@@ -92,10 +96,34 @@ class User extends AbstractModel
     private $role = self::ROLE_MEMBER;
 
     /**
-     * @var Chronos
+     * @var null|Chronos
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLogin;
+
+    /**
+     * @var null|Chronos
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $activeFrom;
+
+    /**
+     * @var null|Chronos
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $activeUntil;
+
+    /**
+     * @var null|Chronos
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $welcomeSessionDate;
+
+    /**
+     * @var int sex according to ISO/IEC 5218
+     * @ORM\Column(type="smallint", options={"default" = 0}))
+     */
+    private $sex = 0;
 
     /**
      * @var string
@@ -104,10 +132,52 @@ class User extends AbstractModel
     private $phone = '';
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=25, options={"default" = ""})
+     */
+    private $mobilePhone = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=25, options={"default" = ""})
+     */
+    private $ichtusSwissSailing = '';
+
+    /**
      * @var null|Date
      * @ORM\Column(type="date", nullable=true)
      */
     private $birthday;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $termsAgreement = false;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $hasInsurance = false;
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $receivesNewsletter = false;
+
+    /**
+     * @var string
+     * @ORM\Column(type="Relationship", options={"default" = RelationshipType::HOUSEHOLDER})
+     */
+    private $familyRelationship = RelationshipType::HOUSEHOLDER;
+
+    /**
+     * @var string
+     * @ORM\Column(type="BillingType", options={"default" = BillingTypeType::ALL_ELECTRONIC})
+     */
+    private $billingType = BillingTypeType::ALL_ELECTRONIC;
 
     /**
      * @var Collection
@@ -273,6 +343,26 @@ class User extends AbstractModel
     }
 
     /**
+     * The date from when the user is active.
+     *
+     * @return null|Chronos
+     */
+    public function getActiveFrom(): ?Chronos
+    {
+        return $this->activeFrom;
+    }
+
+    /**
+     * The date from when the user is active.
+     *
+     * @param null|Chronos $activeFrom
+     */
+    public function setActiveFrom(?Chronos $activeFrom): void
+    {
+        $this->activeFrom = $activeFrom;
+    }
+
+    /**
      * The date until the user is active. Or `null` if there is not limit in time
      *
      * @return null|Chronos
@@ -342,6 +432,22 @@ class User extends AbstractModel
     public function setPhone(string $phone): void
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMobilePhone(): string
+    {
+        return $this->mobilePhone;
+    }
+
+    /**
+     * @param string $mobilePhone
+     */
+    public function setMobilePhone(string $mobilePhone): void
+    {
+        $this->mobilePhone = $mobilePhone;
     }
 
     /**
@@ -450,5 +556,163 @@ class User extends AbstractModel
     public function userTagRemoved(UserTag $userTag): void
     {
         $this->userTags->removeElement($userTag);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTermsAgreement(): bool
+    {
+        return $this->termsAgreement;
+    }
+
+    /**
+     * @param bool $termsAgreement
+     */
+    public function setTermsAgreement(bool $termsAgreement): void
+    {
+        $this->termsAgreement = $termsAgreement;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasInsurance(): bool
+    {
+        return $this->hasInsurance;
+    }
+
+    /**
+     * @param bool $hasInsurance
+     */
+    public function setHasInsurance(bool $hasInsurance): void
+    {
+        $this->hasInsurance = $hasInsurance;
+    }
+
+    /**
+     * @return null|Chronos
+     */
+    public function getWelcomeSessionDate(): ?Chronos
+    {
+        return $this->welcomeSessionDate;
+    }
+
+    /**
+     * @param null|Chronos $welcomeSessionDate
+     */
+    public function setWelcomeSessionDate(?Chronos $welcomeSessionDate): void
+    {
+        $this->welcomeSessionDate = $welcomeSessionDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReceivesNewsletter(): bool
+    {
+        return $this->receivesNewsletter;
+    }
+
+    /**
+     * @param bool $receivesNewsletter
+     */
+    public function setReceivesNewsletter(bool $receivesNewsletter): void
+    {
+        $this->receivesNewsletter = $receivesNewsletter;
+    }
+
+    /**
+     * Get the ISO/IEC 5218 sex
+     *
+     * @API\Field(type="Sex")
+     *
+     * @return int
+     */
+    public function getSex(): int
+    {
+        return $this->sex;
+    }
+
+    /**
+     * Set the ISO/IEC 5218 sex
+     *
+     * @API\Input(type="Sex")
+     *
+     * @param int $sex
+     */
+    public function setSex(int $sex): void
+    {
+        $this->sex = $sex;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIchtusSwissSailing(): string
+    {
+        return $this->ichtusSwissSailing;
+    }
+
+    /**
+     * @param string $ichtusSwissSailing
+     */
+    public function setIchtusSwissSailing(string $ichtusSwissSailing): void
+    {
+        $this->ichtusSwissSailing = $ichtusSwissSailing;
+    }
+
+    /**
+     * Get the last login
+     *
+     * @return null|Chronos
+     */
+    public function getLastLogin(): ?Chronos
+    {
+        return $this->lastLogin;
+    }
+
+    /**
+     * @param null|Chronos $lastLogin
+     */
+    public function setLastLogin(?Chronos $lastLogin): void
+    {
+        $this->lastLogin = $lastLogin;
+    }
+
+    /**
+     * @API\Field(type="Relationship")
+     *
+     * @return string
+     */
+    public function getFamilyRelationship(): string
+    {
+        return $this->familyRelationship;
+    }
+
+    /**
+     * @API\Input(type="Relationship")
+     *
+     * @param string $familyRelationship
+     */
+    public function setFamilyRelationship(string $familyRelationship): void
+    {
+        $this->familyRelationship = $familyRelationship;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBillingType(): string
+    {
+        return $this->billingType;
+    }
+
+    /**
+     * @param string $billingType
+     */
+    public function setBillingType(string $billingType): void
+    {
+        $this->billingType = $billingType;
     }
 }

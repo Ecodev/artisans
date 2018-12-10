@@ -4,6 +4,7 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
+    BookingStatus,
     CreateUserMutation,
     CreateUserMutationVariables,
     UpdateUserMutation,
@@ -28,6 +29,8 @@ export class UserComponent
         UpdateUserMutation['updateUser'],
         UpdateUserMutationVariables,
         any> {
+
+    public bookingStatus = BookingStatus;
 
     constructor(alertService: AlertService,
                 userService: UserService,

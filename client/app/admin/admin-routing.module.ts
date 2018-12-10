@@ -7,7 +7,7 @@ import { UsersComponent } from './user/users/users.component';
 import { BookableComponent } from './bookables/bookable/bookable.component';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './user/services/user.resolver';
-import { BookableFilter, BookingType } from '../shared/generated-types';
+import { BookablesQueryVariables, BookingsQueryVariables, BookingStatus, BookingType } from '../shared/generated-types';
 import { LicenseResolver } from './licenses/services/license.resolver';
 import { BookableResolver } from './bookables/services/bookable.resolver';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
@@ -24,9 +24,42 @@ const routes: Routes = [
             {
                 path: '',
                 component: BookingsComponent,
-                data : {
-                    title: 'Sorties en cours'
-                }
+                data: {
+                    title: 'Sorties en cours',
+                    queryVariables: {
+                        filter: {
+                            groups: [
+                                {
+                                    conditions: [{endDate: {null: {not: false}}}],
+                                    joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
+                                },
+                            ],
+                        },
+                    } as BookingsQueryVariables,
+                },
+            },
+            {
+                path: 'booking',
+                component: BookingsComponent,
+                data: {
+                    title: 'Réservations',
+                },
+            },
+            {
+                path: 'booking/application',
+                component: BookingsComponent,
+                data: {
+                    title: 'Demandes',
+                    queryVariables: {
+                        filter: {
+                            groups: [
+                                {
+                                    conditions: [{status: {equal: {value: BookingStatus.application}}}],
+                                },
+                            ],
+                        },
+                    } as BookingsQueryVariables,
+                },
             },
             {
                 path: 'bookable',
@@ -36,9 +69,9 @@ const routes: Routes = [
                         component: BookablesComponent,
                         data: {
                             title: 'Matériel carnet de sortie',
-                            routeFilter: {
+                            queryVariables: {
                                 filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}]},
-                            } as BookableFilter,
+                            } as BookablesQueryVariables,
                         },
                     },
                     {
@@ -46,9 +79,9 @@ const routes: Routes = [
                         component: BookablesComponent,
                         data: {
                             title: 'Matériel sur demande',
-                            routeFilter: {
+                            queryVariables: {
                                 filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_approved}}}]}]},
-                            } as BookableFilter,
+                            } as BookablesQueryVariables,
                         },
                     },
                     {
@@ -56,9 +89,9 @@ const routes: Routes = [
                         component: BookablesComponent,
                         data: {
                             title: 'Inventaire et services',
-                            routeFilter: {
+                            queryVariables: {
                                 filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_only}}}]}]},
-                            } as BookableFilter,
+                            } as BookablesQueryVariables,
                         },
                     },
                     {
@@ -66,9 +99,9 @@ const routes: Routes = [
                         component: BookablesComponent,
                         data: {
                             title: 'Services obligatoire',
-                            routeFilter: {
+                            queryVariables: {
                                 filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}]},
-                            } as BookableFilter,
+                            } as BookablesQueryVariables,
                         },
                     },
                     {
@@ -92,8 +125,8 @@ const routes: Routes = [
                 path: 'license',
                 component: LicensesComponent,
                 data: {
-                    title: 'Certifications'
-                }
+                    title: 'Certifications',
+                },
             },
             {
                 path: 'license/new',
@@ -113,8 +146,8 @@ const routes: Routes = [
                 path: 'user-tag',
                 component: UserTagsComponent,
                 data: {
-                    title: 'Tags d\'utilisateurs'
-                }
+                    title: 'Tags d\'utilisateurs',
+                },
             },
             {
                 path: 'user-tag/new',

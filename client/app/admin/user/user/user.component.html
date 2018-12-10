@@ -30,7 +30,17 @@
                         </mat-form-field>
                     </div>
                     <div fxFlex="33">
-
+                        <h2 class="mat-title">Demandes en attente</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="bookingService"
+                                       [filter]="{groups: [{conditions: [{responsible: {have: {values: [data.model.id]}}, status: {equal: {value: bookingStatus.application}}}]}]}"
+                                       [disabled]="true"
+                        >
+                            <ng-template let-item="item">
+                                <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
+                                ></app-table-button>
+                            </ng-template>
+                        </app-relations>
                     </div>
                 </div>
 
@@ -47,9 +57,7 @@
                                        placeholder="Attribuer une certification"
                         >
                             <ng-template let-item="item">
-                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
-                                </div>
+                                <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
                             </ng-template>
                         </app-relations>
                     </div>

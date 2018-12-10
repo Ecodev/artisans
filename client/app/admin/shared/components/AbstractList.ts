@@ -73,8 +73,8 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
 
         this.routeData = this.route.snapshot.data;
 
-        if (this.route.snapshot.data.routeFilter) {
-            this.variablesManager.set('routeFilters', this.route.snapshot.data.routeFilter);
+        if (this.route.snapshot.data.queryVariables) {
+            this.variablesManager.set('routeFilters', this.route.snapshot.data.queryVariables);
         }
 
         this.dataSource = new PaginatedDataSource(this.getDataObservable(), this.variablesManager);

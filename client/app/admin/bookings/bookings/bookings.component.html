@@ -19,6 +19,7 @@
                 <app-columns-picker (selectionChange)="selectedColumns = $event">
                     <span appColumnsPickerColumn="id" i18n>id</span>
                     <span appColumnsPickerColumn="responsible" i18n>Responsable</span>
+                    <span appColumnsPickerColumn="bookable" i18n>Réservable</span>
                     <span appColumnsPickerColumn="destination" i18n>Destination</span>
                     <span appColumnsPickerColumn="startDate" i18n>Début</span>
                     <span appColumnsPickerColumn="endDate" i18n>Fin</span>
@@ -47,6 +48,19 @@
                         <ngx-avatar [name]="element.responsible?.name" [size]="36"></ngx-avatar>
                         <app-table-button [label]="element.responsible?.name"
                                           [navigate]="['/admin/user/', element.responsible?.id]"
+                                          i18n-matTooltip
+                                          matTooltip="Éditer"
+                        ></app-table-button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="bookable">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Réservable</th>
+                <td mat-cell *matCellDef="let element">
+                    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.bookables.length">
+                        <app-table-button [label]="element.bookables[0].name"
+                                          [navigate]="['/admin/bookable/', element.bookables[0].id]"
                                           i18n-matTooltip
                                           matTooltip="Éditer"
                         ></app-table-button>

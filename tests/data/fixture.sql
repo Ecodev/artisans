@@ -24,14 +24,18 @@ REPLACE INTO bookable (id, periodic_price, initial_price, type_id, name, code, b
 (3005, 0, 10, 6002, 'Test bookable mandatory  3005 (initial)', 'f', 'mandatory', 'Pour adhésion et cotisation. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
 (3006, 90, 0, 6000, 'Test bookable mandatory 3006 (periodic)', 'g', 'mandatory', 'Pour adhésion et cotisation. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.');
 
-REPLACE INTO booking (id, responsible_id, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
-(4000, 1002, '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
-(4001, 1002, '2018-01-02 13:32:51', NULL, 'tonight', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.');
+REPLACE INTO booking (id, responsible_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
+(4000, 1002, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
+(4001, 1002, 'booked', '2018-01-02 13:32:51', NULL, 'tonight', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.');
+
+REPLACE INTO booking (id, responsible_id, status) VALUE
+(4003, 1002, 'application');
 
 REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4000, 3000),
 (4000, 3001),
-(4001, 3000);
+(4001, 3000),
+(4003, 3002);
 
 REPLACE INTO image (id, bookable_id, filename, width, height) VALUES
 (5000, 3000,'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg',  500, 374);

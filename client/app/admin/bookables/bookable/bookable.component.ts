@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
-    CreateBookableMutation,
-    CreateBookableMutationVariables,
     BookableQuery,
     BookableQueryVariables,
+    CreateBookableMutation,
+    CreateBookableMutationVariables,
     UpdateBookableMutation,
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
+import { BookableTypeService } from '../services/bookableType.service';
 
 @Component({
     selector: 'app-resurce',
@@ -31,7 +32,8 @@ export class BookableComponent
                 bookableService: BookableService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: LicenseService
+                public tagService: LicenseService,
+                public bookableTypeService: BookableTypeService,
     ) {
         super('bookable', bookableService, alertService, router, route);
     }

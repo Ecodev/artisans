@@ -14,6 +14,10 @@ export const bookableMetaFragment = gql`
         code
         simultaneousBookingMaximum
         bookingType
+        type {
+            id
+            name
+        }
     }
 `;
 
@@ -35,6 +39,7 @@ export const bookableQuery = gql`
         bookable(id: $id) {
             id
             ...bookableMeta
+            creationDate
             creator {
                 ...userMeta
             }
@@ -44,7 +49,7 @@ export const bookableQuery = gql`
             }
         }
     }
-${bookableMetaFragment}
+    ${bookableMetaFragment}
 ${userMetaFragment}`;
 
 export const createBookableMutation = gql`

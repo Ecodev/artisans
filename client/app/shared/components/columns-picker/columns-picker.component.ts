@@ -1,7 +1,14 @@
-import { Component, EventEmitter, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { isUndefined, isString } from 'lodash';
-import { QueryList } from '@angular/core';
-import { AfterViewInit, ContentChildren } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    ContentChildren,
+    EventEmitter,
+    Output,
+    QueryList,
+} from '@angular/core';
+import { isString, isUndefined } from 'lodash';
 import { ColumnsPickerColumnDirective } from './columns-picker-column.directive';
 
 @Component({

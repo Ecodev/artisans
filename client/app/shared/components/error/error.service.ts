@@ -22,7 +22,7 @@ export class ErrorService {
     public redirectError(error: Error): void {
         this.lastError = error;
 
-        this.router.navigateByUrl('/error');
+        this.router.navigateByUrl('/error', {skipLocationChange: true});
     }
 
     public getLastError(): Error | null {

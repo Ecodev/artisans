@@ -10,7 +10,7 @@ describe('BootLoaderComponent', () => {
         TestBed.configureTestingModule({
             declarations: [BootLoaderComponent],
         })
-            .compileComponents();
+               .compileComponents();
     }));
 
     beforeEach(() => {

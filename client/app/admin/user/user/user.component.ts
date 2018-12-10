@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
@@ -6,10 +6,10 @@ import { UserService } from '../services/user.service';
 import {
     CreateUserMutation,
     CreateUserMutationVariables,
-    UserQuery,
-    UserQueryVariables,
     UpdateUserMutation,
     UpdateUserMutationVariables,
+    UserQuery,
+    UserQueryVariables,
 } from '../../../shared/generated-types';
 import { BookingService } from '../../../booking/services/booking.service';
 import { LicenseService } from '../../licenses/services/license.service';
@@ -33,7 +33,7 @@ export class UserComponent
                 router: Router,
                 route: ActivatedRoute,
                 public tagService: LicenseService,
-                public bookingService: BookingService
+                public bookingService: BookingService,
     ) {
         super('user', userService, alertService, router, route);
     }

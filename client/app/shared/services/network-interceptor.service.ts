@@ -17,10 +17,10 @@ export class NetworkInterceptorService implements HttpInterceptor {
         this.networkActivityService.increase();
 
         return next.handle(req)
-            .pipe(
-                finalize(() => {
-                    this.networkActivityService.decrease();
-                }),
-            );
+                   .pipe(
+                       finalize(() => {
+                           this.networkActivityService.decrease();
+                       }),
+                   );
     }
 }

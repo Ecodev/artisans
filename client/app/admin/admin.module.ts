@@ -11,6 +11,9 @@ import { BookableComponent } from './bookables/bookable/bookable.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
 import { UserComponent } from './user/user/user.component';
+import { StampComponent } from './shared/components/stamp/stamp.component';
+import { EnumPipe } from '../shared/pipes/enum.pipe';
+import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
 
 @NgModule({
     declarations: [
@@ -19,7 +22,10 @@ import { UserComponent } from './user/user/user.component';
         AdminComponent,
         BookingsComponent,
         UsersComponent,
-        UserComponent
+        UserComponent,
+        StampComponent,
+        EnumPipe,
+        CapitalizePipe,
     ],
     imports: [
         CommonModule,

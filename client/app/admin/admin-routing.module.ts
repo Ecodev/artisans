@@ -28,7 +28,7 @@ const routes: Routes = [
                         data: {
                             title: 'Matériel carnet de sortie',
                             routeFilter: {
-                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}]},
+                                filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}]},
                             } as BookableFilter,
                         },
                     },
@@ -38,7 +38,7 @@ const routes: Routes = [
                         data: {
                             title: 'Matériel sur demande',
                             routeFilter: {
-                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_approved}}}]}]},
+                                filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_approved}}}]}]},
                             } as BookableFilter,
                         },
                     },
@@ -48,7 +48,7 @@ const routes: Routes = [
                         data: {
                             title: 'Inventaire et services',
                             routeFilter: {
-                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_only}}}]}]},
+                                filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.admin_only}}}]}]},
                             } as BookableFilter,
                         },
                     },
@@ -58,11 +58,19 @@ const routes: Routes = [
                         data: {
                             title: 'Services obligatoire',
                             routeFilter: {
-                                filter : {groups: [{conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}]},
+                                filter: {groups: [{conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}]},
                             } as BookableFilter,
                         },
                     },
                     {
+                        path: 'new',
+                        component: BookableComponent,
+                        resolve: {
+                            bookable: BookableResolver,
+                        },
+                    },
+                    {
+                        // Doit venir après les autres routes, sinon l':bookableId intercepte tout.
                         path: ':bookableId',
                         component: BookableComponent,
                         resolve: {

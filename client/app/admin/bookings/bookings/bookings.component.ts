@@ -14,8 +14,6 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 })
 export class BookingsComponent extends AbstractList<BookingsQuery['bookings'], BookingsQueryVariables> implements OnInit {
 
-
-
     constructor(route: ActivatedRoute,
                 router: Router,
                 public bookingService: BookingService,

@@ -125,5 +125,4 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return subject;
     }
 
-
 }

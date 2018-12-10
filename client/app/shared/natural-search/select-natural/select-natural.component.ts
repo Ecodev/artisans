@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import { DropdownComponent, NaturalDropdownData, NaturalDropdownRef, NATURAL_DROPDOWN_DATA } from '@ecodev/natural-search';
+import { Component, Inject } from '@angular/core';
+import { DropdownComponent, NATURAL_DROPDOWN_DATA, NaturalDropdownData, NaturalDropdownRef } from '@ecodev/natural-search';
 import { FilterGroupConditionField } from '@ecodev/natural-search/lib/classes/graphql-doctrine.types';
 import { BehaviorSubject } from 'rxjs';
 import { AbstractModelService } from '../../services/abstract-model.service';
-import { Inject } from '@angular/core';
 
 export interface SelectNaturalConfiguration {
     service: AbstractModelService<any, any, any, any, any, any, any, any, any>;

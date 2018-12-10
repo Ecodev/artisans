@@ -7,8 +7,7 @@ import { LicensesQuery, LicensesQueryVariables } from '../../../shared/generated
 @Injectable({
     providedIn: 'root',
 })
-export class LicenseService extends AbstractModelService<
-    any,
+export class LicenseService extends AbstractModelService<any,
     any,
     LicensesQuery['licenses'],
     LicensesQueryVariables,

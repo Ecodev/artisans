@@ -1,8 +1,4 @@
-<app-fixed-button *ngIf="!model.id"
-                  class="detail-speed-dial"
-                  (click)="create.emit()"
-                  icon="save"
-                  [color]="form.invalid ? 'warn' : 'accent'"
+<app-fixed-button *ngIf="!model.id" class="detail-speed-dial" (click)="create.emit()" icon="save" [color]="form.invalid ? 'warn' : 'accent'"
 ></app-fixed-button>
 
 <app-fixed-button *ngIf="model.id"

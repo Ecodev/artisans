@@ -7,7 +7,7 @@
             <app-icon name="search" matPrefix></app-icon>
         </mat-form-field>
 
-        <table mat-table class="app-row-click" [dataSource]="dataSource" >
+        <table mat-table class="app-row-click" [dataSource]="dataSource">
 
             <ng-template #defaultNameCell let-item="item">
                 {{ getDisplayFn()(item) }}

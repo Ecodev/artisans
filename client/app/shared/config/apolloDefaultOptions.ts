@@ -29,9 +29,9 @@ function hasFiles(node: Literal): boolean {
         const value = node[key];
 
         return (typeof File !== 'undefined' && value instanceof File) ||
-            (typeof Blob !== 'undefined' && value instanceof Blob) ||
-            (typeof FileList !== 'undefined' && node[key] instanceof FileList) ||
-            hasFiles(value);
+               (typeof Blob !== 'undefined' && value instanceof Blob) ||
+               (typeof FileList !== 'undefined' && node[key] instanceof FileList) ||
+               hasFiles(value);
     });
 }
 

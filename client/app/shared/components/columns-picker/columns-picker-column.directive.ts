@@ -1,8 +1,4 @@
-import { Directive } from '@angular/core';
-import { Input } from '@angular/core';
-import { AfterViewInit } from '@angular/core';
-import { ElementRef } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
     selector: '[appColumnsPickerColumn]',

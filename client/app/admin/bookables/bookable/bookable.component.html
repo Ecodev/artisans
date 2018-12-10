@@ -2,12 +2,9 @@
 
     <div fxLayout="column" class="pageHeader">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <a mat-icon-button [routerLink]="['..']">
-                <app-icon name="arrow_back"></app-icon>
-            </a>
-            <span *ngIf="!form.get('name').value">Nouveau matériel</span>
+            <span *ngIf="!form.get('name').value">Nouveau réservable</span>
             <span *ngIf="form.get('name').value" class="pageTitle">
-                <span i18n>Matériel</span>
+                <span i18n>Réservable</span>
                 {{ form.get('name').value }}
             </span>
         </div>
@@ -22,33 +19,81 @@
                         <mat-form-field class="width-auto">
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>Maximum {{ form.get('name').errors.maxlength.requiredLength }} caractères
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="width-auto">
                             <mat-label i18n>Description</mat-label>
-                            <textarea matInput formControlName="description" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
+                            <textarea matInput
+                                      formControlName="description"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
 
                     </div>
 
-                    <div fxFlex="33">
-                        <app-relations [main]="data.model" [service]="tagService" [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}" i18n-placeholder placeholder="Associer à un tag">
-                            <ng-template let-item="item">
-                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                    <span>{{ item.name }}</span>
-                                </div>
-                            </ng-template>
-                        </app-relations>
-                    </div>
+                    <div fxFlex="33" fxLayout="column" *ngIf="data.bookingType">
 
+                        <mat-form-field class="width-auto">
+                            <input matInput formControlName="code" (change)="update()">
+                            <mat-label i18n>Code</mat-label>
+                            <mat-error *ngIf="form.get('code').hasError('maxlength')" i18n>
+                                Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('code').hasError('required')" i18n>Requis</mat-error>
+                        </mat-form-field>
+
+                        <app-select formControlName="type"
+                                    placeholder="Type"
+                                    [service]="bookableTypeService"
+                                    (selectionChange)="update()"
+                        ></app-select>
+
+                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom">
+                            <span class="mat-body-2" i18n>Type de réservation</span>
+                            <mat-button-toggle-group #group="matButtonToggleGroup"
+                                                     formControlName="bookingType"
+                                                     (change)="update()"
+                                                     [vertical]="true"
+                            >
+                                <mat-button-toggle *ngFor="let type of data.bookingType" [value]="type.value">
+                                    {{ type.name }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
                 </div>
 
-                <!--<app-common-fields [form]="form" (change)="update()" [data]="data" [showVisas]="false"></app-common-fields>-->
+                <mat-divider></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+                        <div *ngIf="data.model.id">
+                            <h2 class="mat-title">Licences</h2>
+                            <app-relations [main]="data.model"
+                                           [service]="tagService"
+                                           [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
+                                           i18n-placeholder
+                                           placeholder="Associer à une licence"
+                            >
+                                <ng-template let-item="item">
+                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                        <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
+                                        <span>{{ item.name }}</span>
+                                    </div>
+                                </ng-template>
+                            </app-relations>
+                        </div>
+                    </div>
+                </div>
+
+                <app-stamp [item]="data.model"></app-stamp>
+
             </div>
         </mat-tab>
 

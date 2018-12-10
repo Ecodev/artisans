@@ -58,32 +58,32 @@ export class IconComponent {
         //     class: 'negative',
         // },
         'qr': {
-            svg : 'qr.svg'
+            svg: 'qr.svg',
         },
         'own_bookable': {
-            svg : 'swimsuit.svg'
+            svg: 'swimsuit.svg',
         },
         'code': {
-            svg : 'input.svg'
+            svg: 'input.svg',
         },
         'doors': {
-            svg : 'key.svg'
+            svg: 'key.svg',
         },
         'family': {
-            svg : 'family.svg'
+            svg: 'family.svg',
         },
         'finances': {
-            svg : 'notes.svg'
+            svg: 'notes.svg',
         },
         'browse_bookables': {
-            svg : 'search.svg'
+            svg: 'search.svg',
         },
         'administrator': {
-            svg : 'boss.svg'
+            svg: 'boss.svg',
         },
         'exit': {
-            svg : 'exit.svg'
-        }
+            svg: 'exit.svg',
+        },
     };
 
     constructor(public matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {

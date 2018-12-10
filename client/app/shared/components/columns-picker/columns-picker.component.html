@@ -1,9 +1,7 @@
 <div>
     <mat-menu #appMenu="matMenu">
         <div *ngFor="let column of availableColumns" class="mat-menu-item" (click)="$event.stopPropagation()">
-            <mat-checkbox
-                    [(ngModel)]="column.show"
-                    (ngModelChange)="updateColumns()"
+            <mat-checkbox [(ngModel)]="column.show" (ngModelChange)="updateColumns()"
             >{{ column.label }}
             </mat-checkbox>
         </div>

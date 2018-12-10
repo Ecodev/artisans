@@ -5,7 +5,6 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
     BookingFilter,
-    BookingFilterGroupCondition,
     BookingStatus,
     BookingType,
     CreateUserMutation,
@@ -85,22 +84,18 @@ export class UserComponent
      */
     public getRunningActive(): BookingFilter {
 
-        const activeForCurrentUser: BookingFilterGroupCondition = {
-            responsible: {have: {values: [this.data.model.id]}},
-            status: {equal: {value: BookingStatus.booked}},
-            endDate: {null: {not: false}},
-        };
-
         const filter: BookingFilter = {
             groups: [
                 {
-                    conditions: [activeForCurrentUser],
+                    conditions: [
+                        {
+                            responsible: {have: {values: [this.data.model.id]}},
+                            status: {equal: {value: BookingStatus.booked}},
+                            endDate: {null: {not: false}},
+                        },
+                    ],
                     joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}},
                 },
-                // {
-                //     conditions: [activeForCurrentUser],
-                //     joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_only]}}}]}},
-                // },
             ],
         };
 

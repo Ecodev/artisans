@@ -22,6 +22,7 @@ export const userQuery = gql`
             id
             login
             name
+            email
             activeUntil
             birthday
             phone

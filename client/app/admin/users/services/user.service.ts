@@ -4,7 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import { AbstractModelService } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery,
@@ -30,6 +30,7 @@ import {
     UsersQueryVariables,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
@@ -63,6 +64,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             email: '',
             name: '',
             birthday: null,
+        };
+    }
+
+    public getFormValidators(): FormValidators {
+        return {
+            name: [Validators.required, Validators.maxLength(100)],
+            login: [Validators.required],
+            email: [Validators.required],
         };
     }
 

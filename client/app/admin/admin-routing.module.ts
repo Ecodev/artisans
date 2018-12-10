@@ -142,7 +142,7 @@ const routes: Routes = [
                 },
             },
             {
-                path: 'license/:licenseId', // last
+                path: 'license/:licenseId',
                 component: LicenseComponent,
                 resolve: {
                     license: LicenseResolver,
@@ -163,7 +163,7 @@ const routes: Routes = [
                 },
             },
             {
-                path: 'user-tag/:userTagId', // last
+                path: 'user-tag/:userTagId',
                 component: UserTagComponent,
                 resolve: {
                     userTag: UserTagResolver,
@@ -181,7 +181,7 @@ const routes: Routes = [
                 },
             },
             {
-                path: 'user/:userId', // last
+                path: 'user/:userId',
                 component: UserComponent,
                 resolve: {
                     user: UserResolver,

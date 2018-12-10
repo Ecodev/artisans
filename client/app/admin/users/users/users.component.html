@@ -40,7 +40,10 @@
                 <td mat-cell *matCellDef="let element">
                     <div fxLayout="row" fxLayoutAlign="start center">
                         <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
-                        <app-table-button [label]="element.name" [navigate]="[element.id]" i18n-matTooltip matTooltip="Éditer"
+                        <app-table-button [label]="element.name"
+                                          [navigate]="['/admin/user', element.id]"
+                                          i18n-matTooltip
+                                          matTooltip="Éditer"
                         ></app-table-button>
                     </div>
                 </td>
@@ -72,4 +75,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/user/new']" icon="add"></app-fixed-button>

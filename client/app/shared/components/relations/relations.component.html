@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="20px">
 
     <div fxLayout="column" *ngIf="getLength() > 0">
-        <mat-form-field class="width-auto" *ngIf="!value">
+        <mat-form-field  *ngIf="!value">
             <mat-label i18n>Rechercher</mat-label>
             <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
             <app-icon name="search" matPrefix></app-icon>

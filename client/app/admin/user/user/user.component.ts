@@ -13,6 +13,7 @@ import {
 } from '../../../shared/generated-types';
 import { BookingService } from '../../../booking/services/booking.service';
 import { LicenseService } from '../../licenses/services/license.service';
+import { UserTagService } from '../../userTags/services/userTag.service';
 
 @Component({
     selector: 'app-user',
@@ -32,7 +33,8 @@ export class UserComponent
                 userService: UserService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: LicenseService,
+                public userTagService: UserTagService,
+                public licenseService: LicenseService,
                 public bookingService: BookingService,
     ) {
         super('user', userService, alertService, router, route);

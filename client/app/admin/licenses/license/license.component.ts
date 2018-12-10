@@ -13,7 +13,7 @@ import { LicenseService } from '../services/license.service';
 
 
 @Component({
-    selector: 'app-resurce',
+    selector: 'app-license',
     templateUrl: './license.component.html',
     styleUrls: ['./license.component.scss'],
 })

@@ -12,6 +12,9 @@ import { LicenseResolver } from './licenses/services/license.resolver';
 import { BookableResolver } from './bookables/services/bookable.resolver';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
 import { LicenseComponent } from './licenses/license/license.component';
+import { UserTagsComponent } from './userTags/userTags/userTags.component';
+import { UserTagComponent } from './userTags/userTag/userTag.component';
+import { UserTagResolver } from './userTags/services/userTag.resolver';
 
 const routes: Routes = [
     {
@@ -100,10 +103,31 @@ const routes: Routes = [
                 },
             },
             {
-                path: 'license/:licenseId',
+                path: 'license/:licenseId', // last
                 component: LicenseComponent,
                 resolve: {
                     license: LicenseResolver,
+                },
+            },
+            {
+                path: 'user-tag',
+                component: UserTagsComponent,
+                data: {
+                    title: 'Tags d\'utilisateurs'
+                }
+            },
+            {
+                path: 'user-tag/new',
+                component: UserTagComponent,
+                resolve: {
+                    userTag: UserTagResolver,
+                },
+            },
+            {
+                path: 'user-tag/:userTagId', // last
+                component: UserTagComponent,
+                resolve: {
+                    userTag: UserTagResolver,
                 },
             },
             {
@@ -111,7 +135,14 @@ const routes: Routes = [
                 component: UsersComponent,
             },
             {
-                path: 'user/:userId',
+                path: 'user/new',
+                component: UserComponent,
+                resolve: {
+                    user: UserResolver,
+                },
+            },
+            {
+                path: 'user/:userId', // last
                 component: UserComponent,
                 resolve: {
                     user: UserResolver,

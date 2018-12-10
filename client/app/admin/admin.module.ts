@@ -16,6 +16,8 @@ import { EnumPipe } from '../shared/pipes/enum.pipe';
 import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
 import { LicenseComponent } from './licenses/license/license.component';
+import { UserTagsComponent } from './userTags/userTags/userTags.component';
+import { UserTagComponent } from './userTags/userTag/userTag.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,9 @@ import { LicenseComponent } from './licenses/license/license.component';
         EnumPipe,
         CapitalizePipe,
         LicensesComponent,
-        LicenseComponent
+        LicenseComponent,
+        UserTagsComponent,
+        UserTagComponent
     ],
     imports: [
         CommonModule,

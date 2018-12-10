@@ -15,7 +15,7 @@ import { LicenseService } from '../../licenses/services/license.service';
 import { BookableTypeService } from '../services/bookableType.service';
 
 @Component({
-    selector: 'app-resurce',
+    selector: 'app-bookable',
     templateUrl: './bookable.component.html',
     styleUrls: ['./bookable.component.scss'],
 })

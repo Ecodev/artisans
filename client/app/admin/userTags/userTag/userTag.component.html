@@ -5,9 +5,9 @@
             <a mat-icon-button [routerLink]="['..']">
                 <app-icon name="arrow_back"></app-icon>
             </a>
-            <span *ngIf="!form.get('name').value">Nouvelle certification</span>
+            <span *ngIf="!form.get('name').value">Nouveau tag d'utilisateur</span>
             <span *ngIf="form.get('name').value" class="pageTitle">
-                <span i18n>Certification</span>
+                <span i18n>Tag d'utilisateur</span>
                 {{ form.get('name').value }}
             </span>
         </div>
@@ -19,7 +19,7 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <mat-form-field >
+                        <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
                             <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
@@ -30,7 +30,9 @@
 
                     </div>
 
-                    <div fxFlex="33" fxLayout="column"></div>
+                    <div fxFlex="33" fxLayout="column">
+                        <input matInput type="color" formControlName="color" (change)="update()" style="height:50px; width:50px;">
+                    </div>
                 </div>
 
                 <app-stamp [item]="data.model"></app-stamp>

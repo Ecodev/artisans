@@ -20,20 +20,44 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <mat-form-field class="width-auto">
+                        <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>Maximum {{
-                                                                                           form.get('name').errors.maxlength.requiredLength
-                                                                                           }} caractères
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                                Maximum {{form.get('name').errors.maxlength.requiredLength}} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
                     </div>
-
                     <div fxFlex="33">
+
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
+
+                    <div fxFlex="50" fxLayout="column">
+                        <h2 class="mat-title">Certifications</h2>
                         <app-relations [main]="data.model"
-                                       [service]="tagService"
+                                       [service]="licenseService"
+                                       [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
+                                       i18n-placeholder
+                                       placeholder="Attribuer une certification"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </ng-template>
+                        </app-relations>
+                    </div>
+
+                    <div fxFlex="50" fxLayout="column">
+                        <h2 class="mat-title">Tags</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="userTagService"
                                        [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
                                        i18n-placeholder
                                        placeholder="Associer à un tag"
@@ -46,8 +70,9 @@
                             </ng-template>
                         </app-relations>
                     </div>
-
                 </div>
+
+                <mat-divider></mat-divider>
 
                 <app-relations [main]="data.model"
                                [service]="bookingService"

@@ -16,7 +16,7 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <mat-form-field class="width-auto">
+                        <mat-form-field >
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
                             <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
@@ -25,7 +25,7 @@
                             <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field class="width-auto">
+                        <mat-form-field >
                             <mat-label i18n>Description</mat-label>
                             <textarea matInput
                                       formControlName="description"
@@ -39,7 +39,7 @@
 
                     <div fxFlex="33" fxLayout="column" *ngIf="data.bookingType">
 
-                        <mat-form-field class="width-auto">
+                        <mat-form-field >
                             <input matInput formControlName="code" (change)="update()">
                             <mat-label i18n>Code</mat-label>
                             <mat-error *ngIf="form.get('code').hasError('maxlength')" i18n>
@@ -74,12 +74,12 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
                         <div *ngIf="data.model.id">
-                            <h2 class="mat-title">Licences</h2>
+                            <h2 class="mat-title">Certifications</h2>
                             <app-relations [main]="data.model"
-                                           [service]="tagService"
+                                           [service]="licenseService"
                                            [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
                                            i18n-placeholder
-                                           placeholder="Associer à une licence"
+                                           placeholder="Associer à une certification"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">

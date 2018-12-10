@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ItemConfiguration, NaturalSearchConfiguration, Selection } from '@ecodev/natural-search';
 import { SelectNaturalComponent } from './select-natural/select-natural.component';
-import { UserService } from '../../admin/user/services/user.service';
+import { UserService } from '../../admin/users/services/user.service';
 
 function wrapLike(s: Selection): Selection {
     if (s.condition.like) {

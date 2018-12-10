@@ -16,7 +16,7 @@ import {
 import { Observable } from 'rxjs';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { isObject, merge } from 'lodash';
-import { distinctUntilChanged, map, sampleTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { MatAutocompleteTrigger } from '@angular/material';
 import { AbstractController } from '../AbstractController';
 import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
@@ -158,7 +158,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
             this.formCtrl.setValidators(this.ngControl.control.validator);
         }
 
-        this.formCtrl.valueChanges.pipe(takeUntil(this.ngUnsubscribe), distinctUntilChanged(), sampleTime(400)).subscribe((val) => {
+        this.formCtrl.valueChanges.pipe(takeUntil(this.ngUnsubscribe), distinctUntilChanged(), debounceTime(300)).subscribe((val) => {
             this.search(val);
             this.propagateErrors();
         });

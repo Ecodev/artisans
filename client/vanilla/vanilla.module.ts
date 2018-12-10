@@ -5,14 +5,14 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createUploadLink } from 'apollo-upload-client';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
-import { UserService } from '../app/admin/user/services/user.service';
 import gql from 'graphql-tag';
-import { BookingService } from '../app/booking/services/booking.service';
 import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
 import { LinkMutationService } from '../app/shared/services/link-mutation.service';
 import { BookableService } from '../app/admin/bookables/services/bookable.service';
 import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
+import { UserService } from '../app/admin/users/services/user.service';
+import { BookingService } from '../app/bookings/services/booking.service';
 
 @NgModule({
     imports: [

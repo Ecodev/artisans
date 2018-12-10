@@ -16,26 +16,32 @@ REPLACE INTO bookable_type (id, name) VALUES
 (6002, 'Tristique Euismod Pellentesque');
 
 REPLACE INTO bookable (id, periodic_price, initial_price, type_id, name, code, booking_type, description) VALUES
-(3000, 0, 0, 6000, 'Test bookable self-approved  3000 (free)', 'a', 'self_approved', 'Pour carnet de sortie. No, no, no, no. You gotta listen to the way people talk. You don''t say "affirmative," or some shit like that. You say "no problemo." And if someone comes on to you with an attitude you say "eat me." And if you want to shine them on it''s "hasta la vista, baby."'),
-(3001, 0, 0, 6001, 'Test bookable self-approved  3001 (free)', 'b', 'self_approved', 'Pour carnet de sortie. Crom, I have never prayed to you before. I have no tongue for it. No one, not even you, will remember if we were good men or bad. Why we fought, or why we died. All that matters is that two stood against many. That''s what''s important! Valor pleases you, Crom... so grant me one request. Grant me revenge! And if you do not listen, then the HELL with you!'),
-(3002, 10, 0, 6002, 'Test bookable admin-approved  3002 (periodic)', 'c', 'admin_approved', 'Pour demande de stockage. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
-(3003, 10, 0, 6000, 'Test bookable admin-only  3003 (Cashier 18, periodic)', 'd', 'admin_only', 'Casier XYZ. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-(3004, 20, 0, 6001, 'Test bookable admin-only  3004 (NTF, periodic)', 'e', 'admin_only', 'Service supplémentaire. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-(3005, 0, 10, 6002, 'Test bookable mandatory  3005 (initial)', 'f', 'mandatory', 'Pour adhésion et cotisation. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
-(3006, 90, 0, 6000, 'Test bookable mandatory 3006 (periodic)', 'g', 'mandatory', 'Pour adhésion et cotisation. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.');
+(3000, 0, 0, 6000, 'Stand up S28 (3000, self-approved, free)', 'S28', 'self_approved', 'Pour carnet de sortie. No, no, no, no. You gotta listen to the way people talk. You don''t say "affirmative," or some shit like that. You say "no problemo." And if someone comes on to you with an attitude you say "eat me." And if you want to shine them on it''s "hasta la vista, baby."'),
+(3001, 0, 0, 6001, 'Canoe C32 (3001, self-approved, free)', 'C32', 'self_approved', 'Pour carnet de sortie. Crom, I have never prayed to you before. I have no tongue for it. No one, not even you, will remember if we were good men or bad. Why we fought, or why we died. All that matters is that two stood against many. That''s what''s important! Valor pleases you, Crom... so grant me one request. Grant me revenge! And if you do not listen, then the HELL with you!'),
+(3002, 10, 0, 6002, 'Casier (3002, admin-approved, periodic)', 'casier', 'admin_approved', 'Pour demande de stockage. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
+(3003, 10, 0, 6000, 'Casier 1012 (3003, admin-only, periodic)', 'CA1012', 'admin_only', 'Casier XYZ. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(3004, 20, 0, 6001, 'Membre NFT (3004, admin-only, periodic)', 'e', 'admin_only', 'Service supplémentaire. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(3005, 0, 10, 6002, 'Frais ouverture (3005, mandatory, initial)', 'f', 'mandatory', 'Pour adhésion et cotisation. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
+(3006, 90, 0, 6000, 'Côtisation (3006, mandatory, periodic)', 'g', 'mandatory', 'Pour adhésion et cotisation. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.');
 
+-- Bookings for self-approved bookables
 REPLACE INTO booking (id, responsible_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
 (4000, 1002, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
 (4001, 1002, 'booked', '2018-01-02 13:32:51', NULL, 'tonight', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.');
 
+-- Bookings for admin-approved or mandatory bookables
 REPLACE INTO booking (id, responsible_id, status) VALUE
-(4003, 1002, 'application');
+(4003, 1002, 'application'),
+(4004, 1002, 'booked'),
+(4005, 1002, 'booked');
 
 REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4000, 3000),
 (4000, 3001),
 (4001, 3000),
-(4003, 3002);
+(4003, 3002),
+(4004, 3003),
+(4005, 3006);
 
 REPLACE INTO image (id, bookable_id, filename, width, height) VALUES
 (5000, 3000,'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg',  500, 374);

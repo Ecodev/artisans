@@ -10,8 +10,8 @@ import {
     UpdateLicenseMutation, UpdateLicenseMutationVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../services/license.service';
-import { UserService } from '../../user/services/user.service';
 import { BookableService } from '../../bookables/services/bookable.service';
+import { UserService } from '../../users/services/user.service';
 
 
 @Component({

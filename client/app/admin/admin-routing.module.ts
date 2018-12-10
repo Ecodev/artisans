@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
 import { BookablesComponent } from './bookables/bookables/bookables.component';
-import { BookingsComponent } from './bookings/bookings/bookings.component';
-import { UsersComponent } from './user/users/users.component';
 import { BookableComponent } from './bookables/bookable/bookable.component';
-import { UserComponent } from './user/user/user.component';
-import { UserResolver } from './user/services/user.resolver';
 import {
     BookablesQueryVariables,
     BookingsQueryVariables,
@@ -21,6 +17,10 @@ import { LicenseComponent } from './licenses/license/license.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagResolver } from './userTags/services/userTag.resolver';
+import { BookingsComponent } from '../bookings/bookings/bookings.component';
+import { UsersComponent } from './users/users/users.component';
+import { UserComponent } from './users/user/user.component';
+import { UserResolver } from './users/services/user.resolver';
 
 const routes: Routes = [
     {

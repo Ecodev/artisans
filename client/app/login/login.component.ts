@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material';
 import { AlertService } from '../shared/components/alert/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { AbstractController } from '../shared/components/AbstractController';
-import { UserService } from '../admin/user/services/user.service';
+import { UserService } from '../admin/users/services/user.service';
 
 @Component({
     selector: 'app-login',

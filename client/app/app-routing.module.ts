@@ -4,8 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './shared/services/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { UserResolver } from './admin/user/services/user.resolver';
 import { ErrorComponent } from './shared/components/error/error.component';
+import { UserResolver } from './admin/users/services/user.resolver';
 
 export const routes: Routes = [
     {

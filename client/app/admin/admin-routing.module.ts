@@ -7,7 +7,13 @@ import { UsersComponent } from './user/users/users.component';
 import { BookableComponent } from './bookables/bookable/bookable.component';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './user/services/user.resolver';
-import { BookablesQueryVariables, BookingsQueryVariables, BookingStatus, BookingType } from '../shared/generated-types';
+import {
+    BookablesQueryVariables,
+    BookingsQueryVariables,
+    BookingStatus,
+    BookingType,
+    UsersQueryVariables,
+} from '../shared/generated-types';
 import { LicenseResolver } from './licenses/services/license.resolver';
 import { BookableResolver } from './bookables/services/bookable.resolver';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
@@ -179,6 +185,35 @@ const routes: Routes = [
                 component: UserComponent,
                 resolve: {
                     user: UserResolver,
+                },
+            },
+            {
+                path: 'member',
+                component: UsersComponent,
+                data: {
+                    title: 'Membres',
+                    queryVariables: {
+                        filter: {
+                            groups: [
+                                {
+                                    conditions: [{responsible: {null: {not: false}}}],
+                                    joins: {
+                                        bookings: {
+                                            joins: {
+                                                bookables: {
+                                                    conditions: [
+                                                        {
+                                                            bookingType: {equal: {value: BookingType.mandatory}},
+                                                        },
+                                                    ],
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    } as UsersQueryVariables,
                 },
             },
         ],

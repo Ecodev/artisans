@@ -32,7 +32,7 @@ export class BookableComponent
                 bookableService: BookableService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: LicenseService,
+                public licenseService: LicenseService,
                 public bookableTypeService: BookableTypeService,
     ) {
         super('bookable', bookableService, alertService, router, route);

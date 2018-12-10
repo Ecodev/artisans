@@ -10,6 +10,8 @@ import {
     UpdateLicenseMutation, UpdateLicenseMutationVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../services/license.service';
+import { UserService } from '../../user/services/user.service';
+import { BookableService } from '../../bookables/services/bookable.service';
 
 
 @Component({
@@ -30,7 +32,8 @@ export class LicenseComponent
                 licenseService: LicenseService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: LicenseService,
+                public userService: UserService,
+                public bookableService: BookableService
     ) {
         super('license', licenseService, alertService, router, route);
     }

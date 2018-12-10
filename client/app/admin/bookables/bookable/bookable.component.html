@@ -16,7 +16,7 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <mat-form-field >
+                        <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
                             <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
@@ -25,7 +25,7 @@
                             <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field >
+                        <mat-form-field>
                             <mat-label i18n>Description</mat-label>
                             <textarea matInput
                                       formControlName="description"
@@ -39,7 +39,7 @@
 
                     <div fxFlex="33" fxLayout="column" *ngIf="data.bookingType">
 
-                        <mat-form-field >
+                        <mat-form-field>
                             <input matInput formControlName="code" (change)="update()">
                             <mat-label i18n>Code</mat-label>
                             <mat-error *ngIf="form.get('code').hasError('maxlength')" i18n>
@@ -48,24 +48,9 @@
                             <mat-error *ngIf="form.get('code').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
-                        <app-select formControlName="type"
-                                    placeholder="Type"
-                                    [service]="bookableTypeService"
-                                    (selectionChange)="update()"
+                        <app-select formControlName="type" placeholder="Type" [service]="bookableTypeService" (selectionChange)="update()"
                         ></app-select>
 
-                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom">
-                            <span class="mat-body-2" i18n>Type de réservation</span>
-                            <mat-button-toggle-group #group="matButtonToggleGroup"
-                                                     formControlName="bookingType"
-                                                     (change)="update()"
-                                                     [vertical]="true"
-                            >
-                                <mat-button-toggle *ngFor="let type of data.bookingType" [value]="type.value">
-                                    {{ type.name }}
-                                </mat-button-toggle>
-                            </mat-button-toggle-group>
-                        </div>
                     </div>
                 </div>
 
@@ -83,11 +68,24 @@
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                        <span>{{ item.name }}</span>
+                                        <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
                                     </div>
                                 </ng-template>
                             </app-relations>
+                        </div>
+                    </div>
+                    <div fxFlex="33" fxLayout="column">
+                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom">
+                            <h2 class="mat-title">Type de réservation</h2>
+                            <mat-button-toggle-group #group="matButtonToggleGroup"
+                                                     formControlName="bookingType"
+                                                     (change)="update()"
+                                                     [vertical]="true"
+                            >
+                                <mat-button-toggle *ngFor="let type of data.bookingType" [value]="type.value">
+                                    {{ type.name }}
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
                         </div>
                     </div>
                 </div>

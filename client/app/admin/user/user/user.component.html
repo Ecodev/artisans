@@ -48,7 +48,7 @@
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <span>{{ item.name }}</span>
+                                    <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
                                 </div>
                             </ng-template>
                         </app-relations>
@@ -65,7 +65,7 @@
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                     <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                    <span>{{ item.name }}</span>
+                                    <app-table-button [navigate]="['/admin/user-tag/', item.id]" [label]="item.name"></app-table-button>
                                 </div>
                             </ng-template>
                         </app-relations>

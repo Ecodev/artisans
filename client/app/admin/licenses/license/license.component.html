@@ -19,7 +19,7 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <mat-form-field >
+                        <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
                             <mat-label i18n>Nom</mat-label>
                             <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
@@ -33,8 +33,45 @@
                     <div fxFlex="33" fxLayout="column"></div>
                 </div>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <mat-divider></mat-divider>
 
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
+                    <div fxFlex="50" fxLayout="column">
+                        <h2 class="mat-title">Utilisateurs certifiés</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="userService"
+                                       [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
+                                       i18n-placeholder
+                                       placeholder="Certifier un utilisateur"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <app-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></app-table-button>
+                                </div>
+                            </ng-template>
+                        </app-relations>
+                    </div>
+
+                    <div fxFlex="50" fxLayout="column">
+                        <h2 class="mat-title">Réservables certifiés</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="bookableService"
+                                       [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
+                                       i18n-placeholder
+                                       placeholder="Associer à un réservable"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <app-table-button [navigate]="['/admin/bookable/', item.id]" [label]="item.name"></app-table-button>
+                                </div>
+                            </ng-template>
+                        </app-relations>
+                    </div>
+
+                </div>
+
+                <mat-divider></mat-divider>
+                <app-stamp [item]="data.model"></app-stamp>
             </div>
         </mat-tab>
 

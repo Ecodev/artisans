@@ -18,6 +18,9 @@ const routes: Routes = [
             {
                 path: '',
                 component: BookingsComponent,
+                data : {
+                    title: 'Sorties en cours'
+                }
             },
             {
                 path: 'bookable',

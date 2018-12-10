@@ -33,6 +33,8 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
 
     public naturalSearchSelections: NaturalSearchSelections = [[]];
 
+    public routeData;
+
     /**
      * List of pagination options
      */
@@ -68,6 +70,8 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
      */
     ngOnInit() {
         this.initFromPersisted();
+
+        this.routeData = this.route.snapshot.data;
 
         if (this.route.snapshot.data.routeFilter) {
             this.variablesManager.set('routeFilters', this.route.snapshot.data.routeFilter);

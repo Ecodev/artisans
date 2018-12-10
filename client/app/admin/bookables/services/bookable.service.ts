@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import { bookableQuery, bookablesQuery, createBookableMutation, updateBookableMutation } from './bookable.queries';
+import { bookableQuery, bookablesQuery, createBookableMutation, deleteBookablesMutation, updateBookableMutation } from './bookable.queries';
 import {
     BookableInput,
     BookableQuery,
@@ -11,6 +11,7 @@ import {
     BookingType,
     CreateBookableMutation,
     CreateBookableMutationVariables,
+    DeleteBookablesMutation,
     UpdateBookableMutation,
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
@@ -31,7 +32,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
     CreateBookableMutationVariables,
     UpdateBookableMutation['updateBookable'],
     UpdateBookableMutationVariables,
-    any> {
+    DeleteBookablesMutation> {
 
     constructor(apollo: Apollo, private enumService: EnumService) {
         super(apollo,
@@ -40,7 +41,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             bookablesQuery,
             createBookableMutation,
             updateBookableMutation,
-            null);
+            deleteBookablesMutation);
     }
 
     public getEmptyObject(): BookableInput {

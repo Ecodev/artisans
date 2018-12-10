@@ -76,3 +76,8 @@ export const updateBookableMutation = gql`
     }
     ${userMetaFragment}
 `;
+
+export const deleteBookablesMutation = gql`
+    mutation DeleteBookables ($ids: [BookableID!]!){
+        deleteBookables(ids: $ids)
+    }`;

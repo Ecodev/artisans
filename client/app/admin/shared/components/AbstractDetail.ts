@@ -85,6 +85,9 @@ export class AbstractDetail<Tone,
             return null;
         }
 
+        console.log('this.form.value', this.form.value);
+        console.log('this.data.model', this.data.model);
+
         if (this.form) {
             this.formToData();
         }

@@ -5,10 +5,13 @@ import { BookablesComponent } from './bookables/bookables/bookables.component';
 import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { UsersComponent } from './user/users/users.component';
 import { BookableComponent } from './bookables/bookable/bookable.component';
-import { BookableResolver } from './bookables/bookables/bookable.resolver';
 import { UserComponent } from './user/user/user.component';
 import { UserResolver } from './user/services/user.resolver';
 import { BookableFilter, BookingType } from '../shared/generated-types';
+import { LicenseResolver } from './licenses/services/license.resolver';
+import { BookableResolver } from './bookables/services/bookable.resolver';
+import { LicensesComponent } from './licenses/licenses/licenses.component';
+import { LicenseComponent } from './licenses/license/license.component';
 
 const routes: Routes = [
     {
@@ -81,6 +84,27 @@ const routes: Routes = [
                         },
                     },
                 ],
+            },
+            {
+                path: 'license',
+                component: LicensesComponent,
+                data: {
+                    title: 'Certifications'
+                }
+            },
+            {
+                path: 'license/new',
+                component: LicenseComponent,
+                resolve: {
+                    license: LicenseResolver,
+                },
+            },
+            {
+                path: 'license/:licenseId',
+                component: LicenseComponent,
+                resolve: {
+                    license: LicenseResolver,
+                },
             },
             {
                 path: 'user',

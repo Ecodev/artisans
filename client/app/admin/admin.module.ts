@@ -14,6 +14,8 @@ import { UserComponent } from './user/user/user.component';
 import { StampComponent } from './shared/components/stamp/stamp.component';
 import { EnumPipe } from '../shared/pipes/enum.pipe';
 import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
+import { LicensesComponent } from './licenses/licenses/licenses.component';
+import { LicenseComponent } from './licenses/license/license.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +28,8 @@ import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
         StampComponent,
         EnumPipe,
         CapitalizePipe,
+        LicensesComponent,
+        LicenseComponent
     ],
     imports: [
         CommonModule,

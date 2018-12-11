@@ -12,7 +12,7 @@ import { BookableService } from '../app/admin/bookables/services/bookable.servic
 import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { UserService } from '../app/admin/users/services/user.service';
-import { BookingService } from '../app/bookings/services/booking.service';
+import { BookingService } from '../app/admin/bookings/services/booking.service';
 
 @NgModule({
     imports: [

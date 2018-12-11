@@ -16,7 +16,7 @@ import {
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
-import { BookingService } from '../../../bookings/services/booking.service';
+import { BookingService } from '../../bookings/services/booking.service';
 
 @Component({
     selector: 'app-user',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { pick } from 'lodash';
-import { AbstractModelService } from '../../shared/services/abstract-model.service';
+import { AbstractModelService } from '../../../shared/services/abstract-model.service';
 import { bookingQuery, bookingsQuery, createBookingMutation, updateBookingMutation } from './booking.queries';
 import {
     BookingInput,
@@ -11,7 +11,7 @@ import {
     BookingsQueryVariables,
     UpdateBookingMutation,
     UpdateBookingMutationVariables,
-} from '../../shared/generated-types';
+} from '../../../shared/generated-types';
 
 @Injectable({
     providedIn: 'root',

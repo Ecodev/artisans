@@ -17,7 +17,7 @@ import { LicenseComponent } from './licenses/license/license.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagResolver } from './userTags/services/userTag.resolver';
-import { BookingsComponent } from '../bookings/bookings/bookings.component';
+import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { UsersComponent } from './users/users/users.component';
 import { UserComponent } from './users/user/user.component';
 import { UserResolver } from './users/services/user.resolver';

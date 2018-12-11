@@ -17,7 +17,7 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
-import { BookingsComponent } from '../bookings/bookings/bookings.component';
+import { BookingsComponent } from './bookings/bookings/bookings.component';
 
 @NgModule({
     declarations: [

@@ -6,6 +6,7 @@ import {
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatExpansionModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
@@ -39,6 +40,7 @@ const list = [
     MatCardModule,
     MatTabsModule,
     MatButtonToggleModule,
+    MatExpansionModule,
 ];
 
 /**

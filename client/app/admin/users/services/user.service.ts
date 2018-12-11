@@ -15,6 +15,7 @@ import {
     usersQuery,
 } from './user.queries';
 import {
+    BookingType,
     CreateUserMutation,
     CreateUserMutationVariables,
     CurrentUserForProfileQuery,
@@ -44,6 +45,17 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     UpdateUserMutation['updateUser'],
     UpdateUserMutationVariables,
     any> {
+
+    public static readonly membersQV: UsersQueryVariables = {
+        filter: {
+            groups: [
+                {
+                    conditions: [{responsible: {null: {not: false}}}],
+                    joins: {bookings: {joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}}}},
+                },
+            ],
+        },
+    };
 
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
 

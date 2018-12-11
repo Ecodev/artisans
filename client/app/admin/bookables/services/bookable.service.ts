@@ -34,6 +34,10 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
     UpdateBookableMutationVariables,
     DeleteBookablesMutation> {
 
+    public static readonly adminAndMandatory: BookablesQueryVariables = {
+        filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}]},
+    };
+
     constructor(apollo: Apollo, private enumService: EnumService) {
         super(apollo,
             'bookable',

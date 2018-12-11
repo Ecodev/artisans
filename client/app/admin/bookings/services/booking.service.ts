@@ -10,6 +10,7 @@ import {
     BookingsQuery,
     BookingsQueryVariables,
     BookingStatus,
+    BookingType,
     UpdateBookingMutation,
     UpdateBookingMutationVariables,
 } from '../../../shared/generated-types';
@@ -31,6 +32,29 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     UpdateBookingMutation['updateBooking'],
     UpdateBookingMutationVariables,
     any> {
+
+    public static readonly runningSelfApprovedQV: BookingsQueryVariables = {
+        filter: {
+            groups: [
+                {
+                    conditions: [{endDate: {null: {not: false}}}],
+                    joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
+                },
+            ],
+        },
+    };
+
+    public static readonly selfApprovedQV: BookingsQueryVariables = {
+        filter: {groups: [{joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}}}]},
+    };
+
+    public static readonly storageApplication: BookingsQueryVariables = {
+        filter: {groups: [{conditions: [{status: {equal: {value: BookingStatus.application}}}]}]},
+    };
+
+    public static readonly notStorageApplication: BookingsQueryVariables = {
+        filter: {groups: [{conditions: [{status: {equal: {value: BookingStatus.application}}}]}]},
+    };
 
     constructor(apollo: Apollo, private enumService: EnumService) {
         super(apollo,

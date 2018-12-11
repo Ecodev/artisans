@@ -62,7 +62,11 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
                     <div fxFlex="33" fxLayout="column">
                         <h2 class="mat-title">Sorties en cours</h2>
-                        <app-relations [main]="data.model" [service]="bookingService" [filter]="runningSelfApproved" [disabled]="true"
+                        <app-relations [main]="data.model"
+                                       [service]="bookingService"
+                                       [filter]="runningSelfApproved"
+                                       [disabled]="true"
+                                       [hideSearch]="true"
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutGap="20px">
@@ -87,7 +91,11 @@
                     </div>
                     <div fxFlex="33" fxLayout="column">
                         <h2 class="mat-title">Cotisation, stockage et services</h2>
-                        <app-relations [main]="data.model" [service]="bookingService" [filter]="runningActive" [disabled]="true"
+                        <app-relations [main]="data.model"
+                                       [service]="bookingService"
+                                       [filter]="runningActive"
+                                       [disabled]="true"
+                                       [hideSearch]="true"
                         >
                             <ng-template let-item="item">
                                 <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
@@ -97,7 +105,12 @@
                     </div>
                     <div fxFlex="33">
                         <h2 class="mat-title">Demandes en attente</h2>
-                        <app-relations [main]="data.model" [service]="bookingService" [filter]="pendingDemands" [disabled]="true">
+                        <app-relations [main]="data.model"
+                                       [service]="bookingService"
+                                       [filter]="pendingDemands"
+                                       [disabled]="true"
+                                       [hideSearch]="true"
+                        >
                             <ng-template let-item="item">
                                 <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
                                 ></app-table-button>
@@ -116,6 +129,7 @@
                                        [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
                                        i18n-placeholder
                                        placeholder="Attribuer une certification"
+                                       [hideSearch]="true"
                         >
                             <ng-template let-item="item">
                                 <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>

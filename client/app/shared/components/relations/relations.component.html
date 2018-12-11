@@ -1,17 +1,20 @@
 <div fxLayout="column" fxLayoutGap="20px">
 
     <div fxLayout="column" *ngIf="getLength() > 0">
-        <mat-form-field  *ngIf="!value">
+        <mat-form-field *ngIf="!value && !hideSearch">
             <mat-label i18n>Rechercher</mat-label>
             <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
             <app-icon name="search" matPrefix></app-icon>
         </mat-form-field>
 
-        <table mat-table class="app-row-click" [dataSource]="dataSource">
+        <ng-template #defaultNameCell let-item="item">
+            {{ getDisplayFn()(item) }}
+        </ng-template>
 
-            <ng-template #defaultNameCell let-item="item">
-                {{ getDisplayFn()(item) }}
-            </ng-template>
+
+        <table mat-table class="app-row-click" [dataSource]="dataSource">
+            <tr mat-header-row *matHeaderRowDef="displayedColumns" style="display:none"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef i18n>id</th>
@@ -38,9 +41,6 @@
                     </button>
                 </td>
             </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="getLength() === 0">
@@ -51,7 +51,7 @@
             <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
         </div>
 
-        <mat-paginator *ngIf="!value && getLength()"
+        <mat-paginator *ngIf="!value && getLength() && dataSource?.pagination?.pageSize > getLength()"
                        [length]="getLength()"
                        [pageSize]="dataSource?.pagination?.pageSize"
                        [pageIndex]="dataSource?.pagination?.pageIndex"

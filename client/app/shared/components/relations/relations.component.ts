@@ -82,6 +82,11 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     @Input() autocompleteSelectorService: any;
 
     /**
+     *  Hide search field
+     */
+    @Input() hideSearch = false;
+
+    /**
      * LinkMutationService uses to find the right combinations to find a matching with possible mutations
      * But in some cases it's not enough (linkEquipmentEquipment has source and target and reversing the relation is required).
      */

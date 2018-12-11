@@ -60,14 +60,12 @@
         ></mat-paginator>
     </div>
 
-    <div fxLayout="column"
-         fxLayout.gt-sm="row"
-         fxLayoutAlign.gt-sm="start start"
+    <div fxLayout="row"
+         fxLayoutAlign="start baseline"
          fxLayoutGap="10px"
          *ngIf="(autocompleteSelectorService || service) && !disabled"
     >
         <app-select fxFlex
-                    fxFlex.gt-sm="none"
                     *ngIf="!disabled"
                     [service]="autocompleteSelectorService || service"
                     [filter]="autocompleteSelectorFilter"

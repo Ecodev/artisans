@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BookableResolve } from '../bookable';
 import { ErrorService } from '../../../shared/components/error/error.service';
-import { BookableService } from '../services/bookable.service';
+import { BookableService } from './bookable.service';
 
 @Injectable({
     providedIn: 'root',

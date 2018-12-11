@@ -13,6 +13,7 @@ export const bookingMetaFragment = gql`
         creationDate
         updateDate
         participantCount
+        status
         responsible {
             id
             ...userMeta
@@ -54,6 +55,7 @@ export const bookingQuery = gql`
             }
         }
     }
+${bookingMetaFragment}
 ${userMetaFragment}`;
 
 export const createBookingMutation = gql`

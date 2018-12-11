@@ -26,6 +26,7 @@
                     <span appColumnsPickerColumn="estimatedEndDate" i18n>Retour prévu</span>
                     <span appColumnsPickerColumn="participantCount" i18n>Nb participants</span>
                     <span appColumnsPickerColumn="flagEndDate" i18n>Terminer</span>
+                    <span appColumnsPickerColumn="edit" i18n>Editer</span>
                 </app-columns-picker>
             </natural-search>
 
@@ -39,6 +40,18 @@
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
                 <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="edit">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n></th>
+                <td mat-cell *matCellDef="let element">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <app-table-button icon="edit"
+                                          [navigate]="['/admin/booking/', element.id]"
+                                          matTooltip="Éditer"
+                        ></app-table-button>
+                    </div>
+                </td>
             </ng-container>
 
             <ng-container matColumnDef="responsible">
@@ -121,4 +134,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/booking/new']" icon="add"></app-fixed-button>

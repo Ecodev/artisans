@@ -21,6 +21,8 @@ import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { UsersComponent } from './users/users/users.component';
 import { UserComponent } from './users/user/user.component';
 import { UserResolver } from './users/services/user.resolver';
+import { BookingComponent } from './bookings/booking/booking.component';
+import { BookingResolver } from './bookings/services/booking.resolver';
 
 const routes: Routes = [
     {
@@ -65,6 +67,20 @@ const routes: Routes = [
                             ],
                         },
                     } as BookingsQueryVariables,
+                },
+            },
+            {
+                path: 'booking/new',
+                component: BookingComponent,
+                resolve: {
+                    booking: BookingResolver,
+                },
+            },
+            {
+                path: 'booking/:bookingId',
+                component: BookingComponent,
+                resolve: {
+                    booking: BookingResolver,
                 },
             },
             {

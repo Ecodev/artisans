@@ -215,9 +215,9 @@ class Booking extends AbstractModel
     }
 
     /**
-     * @param Chronos $endDate
+     * @param null|Chronos $endDate
      */
-    public function setEndDate(Chronos $endDate): void
+    public function setEndDate(?Chronos $endDate): void
     {
         $this->endDate = $endDate;
     }

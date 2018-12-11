@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +31,10 @@ import { MaterialModule } from './shared/modules/material.module';
 import { IchtusModule } from './shared/modules/ichtus.module';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
+import localeFRCH from '@angular/common/locales/fr-CH';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeFRCH);
 
 @NgModule({
     declarations: [
@@ -76,6 +80,7 @@ import { NetworkInterceptorService } from './shared/services/network-interceptor
             useClass: NetworkInterceptorService,
             multi: true,
         },
+        { provide: LOCALE_ID, useValue: 'fr-CH' }
     ],
     bootstrap: [AppComponent],
 })

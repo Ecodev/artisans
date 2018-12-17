@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../shared/components/alert/alert.service';
+import { PersistenceService } from '../../shared/services/persistence.service';
+import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { AbstractList } from '../../shared/components/AbstractList';
+import { BookableTagsQuery, BookableTagsQueryVariables } from '../../../shared/generated-types';
+import { BookableTagService } from '../services/bookableTag.service';
+
+@Component({
+    selector: 'app-bookable-tags',
+    templateUrl: './bookableTags.component.html',
+    styleUrls: ['./bookableTags.component.scss'],
+})
+export class BookableTagsComponent extends AbstractList<BookableTagsQuery['bookableTags'], BookableTagsQueryVariables> implements OnInit {
+
+    constructor(route: ActivatedRoute,
+                router: Router,
+                bookableTagService: BookableTagService,
+                alertService: AlertService,
+                persistenceService: PersistenceService,
+                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+
+        super('bookableTags',
+            bookableTagService,
+            router,
+            route,
+            alertService,
+            persistenceService,
+            naturalSearchConfigurationService,
+        );
+
+    }
+}

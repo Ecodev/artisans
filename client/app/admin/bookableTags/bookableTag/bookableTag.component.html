@@ -1,0 +1,48 @@
+<div [formGroup]="form">
+
+    <div fxLayout="column" class="pageHeader">
+        <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            <a mat-icon-button [routerLink]="['..']">
+                <app-icon name="arrow_back"></app-icon>
+            </a>
+            <span *ngIf="!form.get('name').value">Nouveau tag de réservable</span>
+            <span *ngIf="form.get('name').value" class="pageTitle">
+                <span i18n>Tag de réservable</span>
+                {{ form.get('name').value }}
+            </span>
+        </div>
+    </div>
+
+    <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
+        <mat-tab i18n-label label="Général">
+            <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+
+                        <mat-form-field>
+                            <input matInput formControlName="name" (change)="update()">
+                            <mat-label i18n>Nom</mat-label>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+                        <input matInput type="color" formControlName="color" (change)="update()" style="height:50px; width:50px;">
+                    </div>
+                </div>
+
+                <app-stamp [item]="data.model"></app-stamp>
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></app-detail-fixed-button>
+
+</div>

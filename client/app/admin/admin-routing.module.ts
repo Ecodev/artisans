@@ -19,6 +19,9 @@ import { BookingResolver } from './bookings/services/booking.resolver';
 import { BookingService } from './bookings/services/booking.service';
 import { UserService } from './users/services/user.service';
 import { BookableService } from './bookables/services/bookable.service';
+import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
+import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
+import { BookableTagResolver } from './bookableTags/services/bookableTag.resolver';
 
 const routes: Routes = [
         {
@@ -252,7 +255,6 @@ const routes: Routes = [
                         },
                     ],
                 },
-
                 {
                     path: 'user-tag',
                     data: {
@@ -280,7 +282,33 @@ const routes: Routes = [
                         },
                     ],
                 },
+                {
+                    path: 'bookable-tag',
+                    data: {
+                        title: 'Tags de réservables',
+                    },
+                    children: [
+                        {
+                            path: '',
+                            component: BookableTagsComponent,
 
+                        },
+                        {
+                            path: 'new',
+                            component: BookableTagComponent,
+                            resolve: {
+                                bookableTag: BookableTagResolver,
+                            },
+                        },
+                        {
+                            path: ':bookableTagId', // last
+                            component: BookableTagComponent,
+                            resolve: {
+                                bookableTag: BookableTagResolver,
+                            },
+                        },
+                    ],
+                },
             ],
         },
     ]

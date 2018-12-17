@@ -19,6 +19,8 @@ import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
 import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { BookingComponent } from './bookings/booking/booking.component';
+import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
+import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +37,9 @@ import { BookingComponent } from './bookings/booking/booking.component';
         LicenseComponent,
         UserTagsComponent,
         UserTagComponent,
-        BookingComponent
+        BookingComponent,
+        BookableTagsComponent,
+        BookableTagComponent,
     ],
     imports: [
         CommonModule,

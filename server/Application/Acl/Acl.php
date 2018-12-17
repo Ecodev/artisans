@@ -8,7 +8,7 @@ use Application\Acl\Assertion\IsMyself;
 use Application\Model\AbstractModel;
 use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
-use Application\Model\BookableType;
+use Application\Model\BookableTag;
 use Application\Model\Booking;
 use Application\Model\Country;
 use Application\Model\Image;
@@ -38,7 +38,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
         $bookable = new ModelResource(Bookable::class);
         $bookableMetadata = new ModelResource(BookableMetadata::class);
-        $bookableType = new ModelResource(BookableType::class);
+        $bookableTag = new ModelResource(BookableTag::class);
         $booking = new ModelResource(Booking::class);
         $image = new ModelResource(Image::class);
         $license = new ModelResource(License::class);
@@ -48,7 +48,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
         $this->addResource($bookable);
         $this->addResource($bookableMetadata);
-        $this->addResource($bookableType);
+        $this->addResource($bookableTag);
         $this->addResource($booking);
         $this->addResource($image);
         $this->addResource($license);
@@ -56,7 +56,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($userTag);
         $this->addResource($country);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableType, $image, $license], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license], ['read']);
         $this->allow(User::ROLE_ANONYMOUS, $user, ['create']);
 
         $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['create', 'read', 'update']);
@@ -66,7 +66,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
         $this->allow(User::ROLE_RESPONSIBLE, $user, ['update']);
         $this->allow(User::ROLE_RESPONSIBLE, $userTag, ['create', 'read', 'update', 'delete']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$bookable, $bookableMetadata, $bookableType, $image, $license], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$bookable, $bookableMetadata, $bookableTag, $image, $license], ['create', 'update', 'delete']);
     }
 
     /**

@@ -8,7 +8,7 @@ use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
 use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
-use Application\Model\BookableType;
+use Application\Model\BookableTag;
 use Application\Model\Booking;
 use Application\Model\Country;
 use Application\Model\Image;
@@ -30,7 +30,7 @@ class QueryType extends ObjectType
 
             Standard::buildQuery(Bookable::class),
             Standard::buildQuery(BookableMetadata::class),
-            Standard::buildQuery(BookableType::class),
+            Standard::buildQuery(BookableTag::class),
             Standard::buildQuery(Booking::class),
             Standard::buildQuery(Country::class),
             Standard::buildQuery(Image::class),

@@ -55,10 +55,11 @@ class Bookable extends AbstractModel
     private $bookingType = BookingTypeType::SELF_APPROVED;
 
     /**
-     * @var BookableType
-     * @ORM\ManyToOne(targetEntity="BookableType")
+     * @var BookableTag
+     *
+     * @ORM\ManyToMany(targetEntity="BookableTag", mappedBy="bookables")
      */
-    private $type;
+    private $bookableTags;
 
     /**
      * @var Collection
@@ -79,6 +80,7 @@ class Bookable extends AbstractModel
     {
         $this->bookings = new ArrayCollection();
         $this->licenses = new ArrayCollection();
+        $this->bookableTags = new ArrayCollection();
     }
 
     /**
@@ -139,22 +141,6 @@ class Bookable extends AbstractModel
     public function licenseRemoved(License $license): void
     {
         $this->licenses->removeElement($license);
-    }
-
-    /**
-     * @return BookableType
-     */
-    public function getType(): BookableType
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param BookableType $type
-     */
-    public function setType(BookableType $type): void
-    {
-        $this->type = $type;
     }
 
     /**
@@ -223,5 +209,35 @@ class Bookable extends AbstractModel
     public function setBookingType(string $bookingType): void
     {
         $this->bookingType = $bookingType;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getBookableTags(): Collection
+    {
+        return $this->bookableTags;
+    }
+
+    /**
+     * Notify the user that it has a new bookableTag.
+     * This should only be called by BookableTag::addUser()
+     *
+     * @param BookableTag $bookableTag
+     */
+    public function bookableTagAdded(BookableTag $bookableTag): void
+    {
+        $this->bookableTags->add($bookableTag);
+    }
+
+    /**
+     * Notify the user that it a bookableTag was removed.
+     * This should only be called by BookableTag::removeUser()
+     *
+     * @param BookableTag $bookableTag
+     */
+    public function bookableTagRemoved(BookableTag $bookableTag): void
+    {
+        $this->bookableTags->removeElement($bookableTag);
     }
 }

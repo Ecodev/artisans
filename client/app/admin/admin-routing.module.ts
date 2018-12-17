@@ -94,7 +94,87 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Cotisations',
-                                queryVariables: BookableService.adminAndMandatory,
+                                queryVariables: BookableService.membershipServices,
+                            },
+                        },
+                        {
+                            path: 'sup',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Stand up paddle',
+                                queryVariables: BookableService.byTag(6000),
+                            },
+                        },
+                        {
+                            path: 'planche',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Planches',
+                                queryVariables: BookableService.byTag(6001),
+                            },
+                        },
+                        {
+                            path: 'canoe',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Canoës',
+                                queryVariables: BookableService.byTag(6002),
+                            },
+                        },
+                        {
+                            path: 'kayak',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Kayaks',
+                                queryVariables: BookableService.byTag(6003),
+                            },
+                        },
+                        {
+                            path: 'aviron',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Aviron',
+                                queryVariables: BookableService.byTag(6004),
+                            },
+                        },
+                        {
+                            path: 'voile-legere',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Voile légère',
+                                queryVariables: BookableService.byTag(6005),
+                            },
+                        },
+                        {
+                            path: 'voile-lestee',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Voile lestée',
+                                queryVariables: BookableService.byTag(6006),
+                            },
+                        },
+                        {
+                            path: 'armoire',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Armoires',
+                                queryVariables: BookableService.adminByTag(6009),
+                            },
+                        },
+                        {
+                            path: 'casier',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Casiers',
+                                queryVariables: BookableService.adminByTag(6010),
+                            },
+                        },
+                        {
+                            path: 'flotteur',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Flotteurs',
+                                queryVariables: BookableService.adminByTag(6011),
                             },
                         },
                         {

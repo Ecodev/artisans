@@ -49,11 +49,25 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     };
 
     public static readonly storageApplication: BookingsQueryVariables = {
-        filter: {groups: [{conditions: [{status: {equal: {value: BookingStatus.application}}}]}]},
+        filter: {
+            groups: [
+                {
+                    conditions: [{status: {equal: {value: BookingStatus.application}}}],
+                    joins: {bookables: {conditions: [{bookableTags: {have: {values: ['6008'], not: false}}}]}},
+                },
+            ],
+        },
     };
 
     public static readonly notStorageApplication: BookingsQueryVariables = {
-        filter: {groups: [{conditions: [{status: {equal: {value: BookingStatus.application}}}]}]},
+        filter: {
+            groups: [
+                {
+                    conditions: [{status: {equal: {value: BookingStatus.application}}}],
+                    joins: {bookables: {conditions: [{bookableTags: {have: {values: ['6008'], not: true}}}]}},
+                },
+            ],
+        },
     };
 
     constructor(apollo: Apollo, private enumService: EnumService) {

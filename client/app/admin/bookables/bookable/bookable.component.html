@@ -48,9 +48,6 @@
                             <mat-error *ngIf="form.get('code').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
-                        <app-select formControlName="type" placeholder="Type" [service]="bookableTypeService" (selectionChange)="update()"
-                        ></app-select>
-
                     </div>
                 </div>
 

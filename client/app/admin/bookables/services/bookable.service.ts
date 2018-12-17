@@ -34,9 +34,41 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
     UpdateBookableMutationVariables,
     DeleteBookablesMutation> {
 
-    public static readonly adminAndMandatory: BookablesQueryVariables = {
-        filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}]},
+    public static readonly membershipServices: BookablesQueryVariables = {
+        filter: {
+            groups: [
+                {
+                    conditions: [
+                        {
+                            bookingType: {in: {values: [BookingType.admin_approved, BookingType.admin_only, BookingType.mandatory]}},
+                            bookableTags: {have: {values: ['6007']}},
+                        },
+                    ],
+                },
+            ],
+        },
     };
+
+    public static byTag(tagId): BookablesQueryVariables {
+        return {filter: {groups: [{conditions: [{bookableTags: {have: {values: [tagId]}}}]}]}};
+    }
+
+    public static adminByTag(tagId): BookablesQueryVariables {
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                bookingType: {in: {values: [BookingType.admin_only]}},
+                                bookableTags: {have: {values: [tagId]}},
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+    }
 
     constructor(apollo: Apollo, private enumService: EnumService) {
         super(apollo,
@@ -53,7 +85,6 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             name: '',
             code: '',
             description: '',
-            type: '',
             initialPrice: '',
             periodicPrice: '',
             simultaneousBookingMaximum: -1,
@@ -65,7 +96,6 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         return {
             name: [Validators.required, Validators.maxLength(100)],
             code: [Validators.required, Validators.maxLength(100)],
-            type: [Validators.required],
         };
     }
 

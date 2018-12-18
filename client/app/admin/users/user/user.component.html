@@ -142,13 +142,14 @@
                         <app-relations [main]="data.model"
                                        [service]="userTagService"
                                        [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                       i18n-placeholder
-                                       placeholder="Associer à un tag"
+                                       [hideSearch]="true"
+                                       placeholder="Ajouter un tag"
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <!-- TODO : link to users list filtred by tag -->
                                     <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                    <app-table-button [navigate]="['/admin/user-tag/', item.id]" [label]="item.name"></app-table-button>
+                                    <app-table-button [navigate]="['/admin/user', item.id]" [label]="item.name"></app-table-button>
                                 </div>
                             </ng-template>
                         </app-relations>

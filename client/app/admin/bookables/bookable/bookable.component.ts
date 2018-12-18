@@ -12,6 +12,7 @@ import {
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
+import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Component({
     selector: 'app-bookable',
@@ -31,6 +32,7 @@ export class BookableComponent
                 bookableService: BookableService,
                 router: Router,
                 route: ActivatedRoute,
+                public bookableTagService: BookableTagService,
                 public licenseService: LicenseService,
     ) {
         super('bookable', bookableService, alertService, router, route);

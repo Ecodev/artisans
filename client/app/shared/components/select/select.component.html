@@ -3,8 +3,17 @@
     <mat-form-field [floatLabel]="floatPlaceholder">
         <mat-label>{{ placeholder }}</mat-label>
 
+        <!--
+            mat-autocomplete [displayWith] conflicts with input display value when using Hierarchical selector.
+            Applying [matAutocomplete] conditionally don't work because directives cant be conditional
+                [matAutocomplete]="hierarchicSelectorConfig ? undefined : ac"
+
+            To prevent this, the quicker solution is to have two conditional input tags
+        -->
+
         <!-- Input for autocomplete -->
-        <input matInput
+        <input *ngIf="!hierarchicSelectorConfig"
+               matInput
                (keydown.esc)="clear()"
                [formControl]="formCtrl"
                [matAutocomplete]="ac"
@@ -16,12 +25,25 @@
                i18n-aria-label
         >
 
+        <!-- Input for hierarchical selector -->
+        <input *ngIf="hierarchicSelectorConfig"
+               matInput
+               #input
+               (click)="openDialog()"
+               (keydown.esc)="clear()"
+               [formControl]="formCtrl"
+               (blur)="blur.emit()"
+               (focus)="onFocus()"
+               aria-label="Recherche et sélection"
+               i18n-aria-label
+        >
+
         <!-- Meta data -->
         <app-icon matPrefix *ngIf="!loading && showIcon" [name]="icon"></app-icon>
         <mat-progress-spinner matPrefix *ngIf="loading" [diameter]="21" [strokeWidth]="5" mode="indeterminate"></mat-progress-spinner>
 
         <!-- Clear button -->
-        <button *ngIf="formCtrl.value && formCtrl.enabled"
+        <button *ngIf="formCtrl.value && formCtrl.enabled && !clearLabel"
                 (click)="clear()"
                 mat-icon-button
                 matSuffix
@@ -37,6 +59,12 @@
 
         <mat-error *ngIf="formCtrl.hasError('required')" i18n>Ce champ est requis</mat-error>
     </mat-form-field>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+        <button mat-raised-button *ngIf="hierarchicSelectorConfig && formCtrl.enabled && selectLabel" color="primary" (click)="openDialog()" i18n >{{ selectLabel }}</button>
+        <button mat-button *ngIf="formCtrl.value && formCtrl.enabled && clearLabel" color="warn" (click)="clear()" i18n >{{ clearLabel }}</button>
+    </div>
+
 </div>
 
 <!-- Autocomplete menu -->

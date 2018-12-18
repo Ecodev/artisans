@@ -22,19 +22,24 @@ import { AbstractController } from '../AbstractController';
 import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
 import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
+import { HierarchicFiltersConfiguration } from '../../hierarchic-selector/classes/HierarchicFiltersConfiguration';
+import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
+import { OrganizedModelSelection } from '../../hierarchic-selector/services/hierarchic-selector.service';
+import { HierarchicConfiguration } from '../../hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
  * Default usage:
  * <app-select [service]="amazingServiceInstance" [(model)]="amazingModel" (modelChange)=amazingChangeFn($event)></app-select>
+ * <app-select [hierarchicSelectorConfig]="myConfig" [(ngModel)]="amazingModel" (ngModelChange)=amazingChangeFn($event)></app-select>
  *
  * Custom template usage :
- * <app-select [service]="svc" [(model)]="model">
+ * <app-select [service]="svc" [(ngModel)]="model">
  *     <ng-template let-item="item">
  *         <span>{{ item.xxx }}</span>
  *     </ng-template>
  * </app-select>
  *
- * [(model)] and (modelChange) are optional
+ * [(ngModel)] and (ngModelChange) are optional
  *
  * Placeholder :
  * <app-select placeholder="amazing placeholder">
@@ -69,6 +74,16 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     @Input() optionRequired = true;
 
     /**
+     * If provided cause a new clear button to appear
+     */
+    @Input() clearLabel: string;
+
+    /**
+     * If provided cause a new select button to appear
+     */
+    @Input() selectLabel: string;
+
+    /**
      * The filter attribute to bind when searching for a term
      */
     @Input() searchField: 'custom' | string = 'custom';
@@ -78,6 +93,13 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
      */
     @Input() showIcon = true;
     @Input() icon = 'search';
+
+    /**
+     * Filters formatted for hierarchic selector
+     */
+    @Input() hierarchicSelectorFilters: HierarchicFiltersConfiguration;
+
+    @Input() hierarchicSelectorConfig: HierarchicConfiguration[];
 
     /**
      * Additional filter for query
@@ -97,7 +119,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     }
 
     @Output() selectionChange = new EventEmitter();
-    @Output() optionSelected = new EventEmitter();
 
     @Output() blur = new EventEmitter();
 
@@ -134,7 +155,8 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
 
     public onChange;
 
-    constructor(@Optional() @Self() public ngControl: NgControl) {
+    constructor(private hierarchicSelectorDialogService: HierarchicSelectorDialogService,
+                @Optional() @Self() public ngControl: NgControl) {
 
         super();
 
@@ -289,19 +311,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         return (item) => !item ? null : item.fullName || item.name || item[this.searchField] || item.id || item;
     }
 
-    public reset(preventChangeValue = false) {
-
-        this.search(null);
-
-        // Empty input
-        this.formCtrl.setValue(null);
-
-        // propagateValue change
-        if (!preventChangeValue) {
-            this.propagateValue(null);
-        }
-    }
-
     public clear(preventChangeValue = false) {
 
         this.search(null);
@@ -325,6 +334,46 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
 
     public setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+    }
+
+    private getSelectKey() {
+        return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
+    }
+
+    public openDialog(): void {
+
+        if (this.formCtrl.disabled || !this.hierarchicSelectorConfig) {
+            return;
+        }
+
+        const selectAtKey = this.getSelectKey();
+
+        if (!selectAtKey) {
+            return;
+        }
+
+        const selected = {};
+
+        if (this.value) {
+            selected[selectAtKey] = [this.value];
+        }
+
+        this.hierarchicSelectorDialogService.open(this.hierarchicSelectorConfig,
+            false,
+            selected,
+            true,
+            this.hierarchicSelectorFilters)
+            .afterClosed()
+            .subscribe((selection: OrganizedModelSelection) => {
+                if (selection) {
+                    // Find the only selection amongst all possible keys
+                    const keyWithSelection = Object.keys(selection).find(key => selection[key][0]);
+                    const singleSelection = keyWithSelection ? selection[keyWithSelection][0] : null;
+
+                    this.formCtrl.setValue(this.getDisplayFn()(singleSelection));
+                    this.propagateValue(singleSelection);
+                }
+            });
     }
 
 }

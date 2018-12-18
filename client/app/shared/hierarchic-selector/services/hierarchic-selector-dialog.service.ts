@@ -13,7 +13,7 @@ export class HierarchicSelectorDialogService {
 
     public open(config: HierarchicConfiguration[],
                 multiple: boolean,
-                selected: OrganizedModelSelection = null,
+                selected: OrganizedModelSelection | null = null,
                 allowUnselect: boolean = true,
                 filters: any = null): MatDialogRef<HierarchicSelectorDialogComponent, OrganizedModelSelection> {
 

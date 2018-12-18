@@ -1,4 +1,5 @@
 import { QueryVariables } from '../../classes/query-variables-manager';
+import { AbstractModelService } from '../../services/abstract-model.service';
 
 export interface HierarchicConfiguration {
 
@@ -47,7 +48,7 @@ export interface HierarchicConfiguration {
      * Displayed icon for items retrieved for that config
      */
     icon?: string;
-    injectedService?: any;
+    injectedService?: AbstractModelService<any, any, any, any, any, any, any, any, any>;
 
     /**
      * Callback function that returns boolean. If true the item is selectable, if false, it's not.

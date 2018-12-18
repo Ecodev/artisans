@@ -35,7 +35,7 @@ export class HierarchicSelectorService {
      * Init component by saving the complete configuration, and then retrieving root elements.
      * Updates **another** observable (this.dataChange) when data is retrieved.
      */
-    public init(config: HierarchicConfiguration[], contextFilter: HierarchicFiltersConfiguration = null): Observable<any> {
+    public init(config: HierarchicConfiguration[], contextFilter: HierarchicFiltersConfiguration | null = null): Observable<any> {
 
         this.validateConfiguration(config);
         this.configuration = this.injectServicesInConfiguration(config);
@@ -58,21 +58,25 @@ export class HierarchicSelectorService {
     }
 
     /**
-     * Checks that each configuration.selectableAtKey attribute is uniq
+     * Checks that each configuration.selectableAtKey attribute is unique
      */
     private validateConfiguration(configurations: HierarchicConfiguration[]) {
-        const selectableAtKeyAttributes = [];
+        const selectableAtKeyAttributes: string[] = [];
         for (const config of configurations) {
-            const keyIndex = selectableAtKeyAttributes.indexOf(config.selectableAtKey);
 
-            if (keyIndex === -1 && config.selectableAtKey) {
-                selectableAtKeyAttributes.push(config.selectableAtKey);
-            }
+            if (config.selectableAtKey) {
+                const keyIndex = selectableAtKeyAttributes.indexOf(config.selectableAtKey);
 
-            // TODO : remove ?
-            // This behavior maybe dangerous in case we re-open hierarchical selector with the last returned config having non-unique keys
-            if (keyIndex < -1) {
-                console.warn('Invalid hierarchic configuration : selectableAtKey attribute should be unique');
+                if (keyIndex === -1 && config.selectableAtKey) {
+                    selectableAtKeyAttributes.push(config.selectableAtKey);
+                }
+
+                // TODO : remove ?
+                // This behavior maybe dangerous in case we re-open hierarchical selector with the last returned config having non-unique
+                // keys
+                if (keyIndex < -1) {
+                    console.warn('Invalid hierarchic configuration : selectableAtKey attribute should be unique');
+                }
             }
 
         }
@@ -82,7 +86,7 @@ export class HierarchicSelectorService {
      * Get list of children, considering given FlatNode id as a parent.
      * Mark loading status individually on nodes.
      */
-    public loadChildren(flatNode: FlatNode, contextFilter: HierarchicFiltersConfiguration = null) {
+    public loadChildren(flatNode: FlatNode, contextFilter: HierarchicFiltersConfiguration | null = null) {
         flatNode.loading = true;
         this.getList(flatNode, contextFilter).subscribe(items => {
             flatNode.node.childrenChange.next(items);
@@ -95,10 +99,10 @@ export class HierarchicSelectorService {
      * Retrieve elements from the server
      * Get root elements if node is null, or child elements if node is given
      */
-    public getList(node: FlatNode = null, contextFilters: HierarchicFiltersConfiguration = null): Observable<any> {
+    public getList(node: FlatNode | null = null, contextFilters: HierarchicFiltersConfiguration | null = null): Observable<any> {
 
-        const configurations = [];
-        const observables = [];
+        const configurations: HierarchicConfiguration[] = [];
+        const observables: Observable<any>[] = [];
 
         // Considering the whole configuration may cause queries with no/wrong results we have imperatively to avoid !
         // e.g there are cross dependencies between equipments and taxonomies filters. Both have "parents" and "taxonomies" filters...
@@ -116,7 +120,7 @@ export class HierarchicSelectorService {
         for (const config of configs) {
             const contextFilter = this.getServiceContextFilter(config, contextFilters);
             const filter = this.getServiceFilter(node, config, contextFilter);
-            if (filter) {
+            if (filter && config.injectedService) {
                 configurations.push(config);
                 const variablesManager = new QueryVariablesManager();
 
@@ -135,7 +139,7 @@ export class HierarchicSelectorService {
 
         // Fire queries, and merge results, transforming apollo items into Node Object.
         return forkJoin(observables).pipe(map((results: any) => {
-            const listing = [];
+            const listing: ModelNode[] = [];
 
             const totalItems = results.reduce((stack, val) => stack + val.items.length, 0);
             if (totalItems === 0 && node) {
@@ -166,9 +170,10 @@ export class HierarchicSelectorService {
     /**
      * Builds queryVariables filter for children query
      */
-    private getServiceFilter(flatNode: FlatNode,
+    private getServiceFilter(flatNode: FlatNode | null,
                              config: HierarchicConfiguration,
-                             contextFilter: HierarchicFilterConfiguration['filter'] = null): HierarchicFilterConfiguration['filter'] {
+                             contextFilter: HierarchicFilterConfiguration['filter'] | null = null,
+    ): HierarchicFilterConfiguration['filter'] | null {
 
         const fieldCondition = {};
 
@@ -206,7 +211,9 @@ export class HierarchicSelectorService {
         return filters;
     }
 
-    private getServiceContextFilter(config, contextFilters: HierarchicFilterConfiguration[]): HierarchicFilterConfiguration['filter'] {
+    private getServiceContextFilter(config: HierarchicConfiguration,
+                                    contextFilters: HierarchicFilterConfiguration[] | null,
+    ): HierarchicFilterConfiguration['filter'] | null {
 
         if (!contextFilters || !config) {
             return null;
@@ -237,7 +244,9 @@ export class HierarchicSelectorService {
         }, {});
 
         for (const node of nodes) {
-            selection[node.config.selectableAtKey].push(node.model);
+            if (node.config.selectableAtKey) {
+                selection[node.config.selectableAtKey].push(node.model);
+            }
         }
 
         return selection;
@@ -252,7 +261,7 @@ export class HierarchicSelectorService {
             return [];
         }
 
-        const result = [];
+        const result: ModelNode[] = [];
         for (const selectableAtKey of Object.keys(organizedModelSelection)) {
             const config = this.getConfigurationBySelectableKey(selectableAtKey);
             if (config) {
@@ -267,13 +276,13 @@ export class HierarchicSelectorService {
     /**
      * Search in configurations.selectableAtKey attribute to find given key and return the configuration
      */
-    private getConfigurationBySelectableKey(key: HierarchicConfiguration['selectableAtKey']): HierarchicConfiguration {
+    private getConfigurationBySelectableKey(key: HierarchicConfiguration['selectableAtKey']): HierarchicConfiguration | null {
 
         if (!this.configuration) {
             return null;
         }
 
-        return this.configuration.find(conf => conf.selectableAtKey === key);
+        return this.configuration.find(conf => conf.selectableAtKey === key) || null;
     }
 
 }

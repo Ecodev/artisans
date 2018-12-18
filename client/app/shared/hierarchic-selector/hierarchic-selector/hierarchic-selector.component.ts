@@ -311,13 +311,9 @@ export class HierarchicSelectorComponent extends AbstractController implements O
         return this.createFlatNode(node, level);
     }
 
-    private getFlatNode(node: ModelNode): FlatNode {
+    private getFlatNode(node: ModelNode): FlatNode | null {
         const key = this.getMapKey(node.model);
-        if (this.flatNodeMap.has(key)) {
-            return this.flatNodeMap.get(key);
-        }
-
-        return null;
+        return this.flatNodeMap.get(key) || null;
     }
 
     private createFlatNode(node: ModelNode, level: number): FlatNode {

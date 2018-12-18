@@ -23,6 +23,8 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
 import { FetchResult } from 'apollo-link';
 import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
+import { HierarchicConfiguration } from '../../hierarchic-selector/classes/HierarchicConfiguration';
+import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
 
 /**
  * Custom template usage :
@@ -75,6 +77,16 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     @Input() value: any[];
 
     @Output() selectionChange: EventEmitter<any> = new EventEmitter();
+
+    /**
+     * Context filters for hierarchic selector
+     */
+    @Input() hierarchicSelectorFilters;
+
+    /**
+     * Configuration in case we prefer hierarchic selection over autocomplete search
+     */
+    @Input() hierarchicSelectorConfig: HierarchicConfiguration[];
 
     /**
      * Provide service for autocomplete search
@@ -135,6 +147,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     public onTouched;
 
     constructor(private linkMutationService: LinkMutationService,
+                private hierarchicSelectorDialog: HierarchicSelectorDialogService,
                 @Optional() @Self() public ngControl: NgControl) {
         super();
 
@@ -322,6 +335,35 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         } else {
             return this.dataSource.data === null ? 0 : this.dataSource.data.length; // consider total (no pagination) -> BasicDataSource
         }
+    }
+
+    private getSelectKey(): string | undefined {
+        return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
+    }
+
+    public openHierarchicSelector() {
+        const selectAtKey = this.getSelectKey();
+
+        if (!selectAtKey) {
+            return;
+        }
+
+        const selected = {};
+        if (this.value) {
+            selected[selectAtKey] = this.value;
+        }
+
+        this.hierarchicSelectorDialog.open(this.hierarchicSelectorConfig, true, selected, true, this.hierarchicSelectorFilters)
+            .afterClosed()
+            .subscribe(selection => {
+                if (selection !== undefined) {
+                    if (this.value) {
+                        this.propagateValue(selection[selectAtKey]);
+                    } else if (!this.value && selection[selectAtKey].length) {
+                        this.addRelations(selection[selectAtKey]);
+                    }
+                }
+            });
     }
 
 }

@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Sélection</h2>
+
+<mat-dialog-content>
+    <app-hierarchic-selector [multiple]="multiple"
+                             [config]="config"
+                             [selected]="selected"
+                             [filters]="filters"
+                             (selectionChange)="selected = $event"
+                             [allowUnselect]="allowUnselect"
+    ></app-hierarchic-selector>
+</mat-dialog-content>
+
+<mat-dialog-actions style="display:flex;flex-direction:row;justify-content: flex-end;">
+    <button mat-button [mat-dialog-close] i18n>Annuler</button>
+    <button mat-raised-button color="primary" (click)="close(selected)" i18n>Valider</button>
+</mat-dialog-actions>

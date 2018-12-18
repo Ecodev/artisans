@@ -33,6 +33,7 @@ import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-bat
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { registerLocaleData } from '@angular/common';
+import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchic-selector.module';
 
 registerLocaleData(localeFRCH);
 
@@ -57,6 +58,7 @@ registerLocaleData(localeFRCH);
         HttpClientModule,
         AvatarModule.forRoot(),
         HttpBatchLinkModule,
+        HierarchicSelectorModule
     ],
     providers: [
         MatIconRegistry,
@@ -80,7 +82,7 @@ registerLocaleData(localeFRCH);
             useClass: NetworkInterceptorService,
             multi: true,
         },
-        { provide: LOCALE_ID, useValue: 'fr-CH' }
+        {provide: LOCALE_ID, useValue: 'fr-CH'},
     ],
     bootstrap: [AppComponent],
 })

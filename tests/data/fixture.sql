@@ -50,11 +50,11 @@ REPLACE INTO booking (id, responsible_id, status, start_date, end_date, estimate
 (4001, 1002, 'booked', '2018-01-02 13:32:51', NULL, 'tonight', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.');
 
 -- Bookings for admin-approved or mandatory bookables
-REPLACE INTO booking (id, responsible_id, status) VALUE
-(4003, 1002, 'application'),
-(4004, 1002, 'booked'),
-(4005, 1002, 'booked'),
-(4006, 1002, 'application');
+REPLACE INTO booking (id, responsible_id, start_date, end_date, status) VALUE
+(4003, 1002, '2018-01-02 13:32:51', NULL, 'application'),
+(4004, 1002, '2018-01-02 13:32:51', NULL, 'booked'),
+(4005, 1002, '2018-01-02 13:32:51', NULL, 'booked'),
+(4006, 1002, '2018-01-02 13:32:51', NULL, 'application');
 
 REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4000, 3000),

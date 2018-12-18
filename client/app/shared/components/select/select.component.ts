@@ -96,9 +96,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         disabled ? this.formCtrl.disable() : this.formCtrl.enable();
     }
 
-    @Input() clearBottomSpacing = false;
-    @Input() clearTopSpacing = false;
-
     @Output() selectionChange = new EventEmitter();
 
     @Output() blur = new EventEmitter();

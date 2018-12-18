@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutGap="20px">
 
-    <div fxLayout="column" *ngIf="getLength() > 0">
+    <div fxLayout="column">
         <mat-form-field *ngIf="!value && !hideSearch">
             <mat-label i18n>Rechercher</mat-label>
             <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
@@ -75,8 +75,6 @@
                     [(ngModel)]="relation"
                     [placeholder]="placeholder"
                     [displayWith]="getDisplayFn()"
-                    [clearTopSpacing]="true"
-                    [clearBottomSpacing]="true"
         ></app-select>
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
             <button mat-raised-button color="primary" *ngIf="!disabled" (click)="add(relation)" [disabled]="!relation" fxLayout="row">

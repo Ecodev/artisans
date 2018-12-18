@@ -11,6 +11,7 @@ import {
     Self,
     SimpleChanges,
     TemplateRef,
+    ViewChild,
 } from '@angular/core';
 import { PaginatedDataSource } from '../../services/paginated.data.source';
 import { LinkMutationService } from '../../services/link-mutation.service';
@@ -25,6 +26,7 @@ import { FetchResult } from 'apollo-link';
 import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { HierarchicConfiguration } from '../../hierarchic-selector/classes/HierarchicConfiguration';
 import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
+import { SelectComponent } from '../select/select.component';
 
 /**
  * Custom template usage :
@@ -42,6 +44,7 @@ import { HierarchicSelectorDialogService } from '../../hierarchic-selector/servi
 })
 export class RelationsComponent extends AbstractController implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
 
+    @ViewChild(SelectComponent) select: SelectComponent;
     @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
     @Input() service;
@@ -105,11 +108,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     @Input() reverseRelation: any;
 
     /**
-     * Selected relation (setted by app-select component)
-     */
-    public relation;
-
-    /**
      * Listing service instance
      */
     public dataSource: PaginatedDataSource | BasicDataSource<any>;
@@ -123,16 +121,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Own auto refetchable query
      */
     private queryRef: AutoRefetchQueryRef<any>;
-
-    /**
-     * Manages spinning progress for add action
-     */
-    public loadingAdd: boolean;
-
-    /**
-     * Manages spinning progress for remove action
-     */
-    public loadingRemove: boolean;
 
     public loading = false;
 
@@ -207,14 +195,10 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         this.loading = true;
         this.queryRef = this.service.watchAll(this.variablesManager, true);
 
-        this.dataSource =
-            new PaginatedDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)), this.variablesManager);
+        this.dataSource = new PaginatedDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)), this.variablesManager);
 
         this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             this.loading = false;
-            this.relation = null;
-            this.loadingAdd = false;
-            this.loadingRemove = false;
         });
     }
 
@@ -257,22 +241,11 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     /**
      * Unlink action
      * Refetch result to display it in table
-     * TODO : could maybe use "update" attribute of apollo.mutate function to update table faster (but hard to do it here)
      */
     public removeRelation(relation) {
-        this.loadingRemove = true;
-
         const a = !this.reverseRelation ? this.main : relation;
         const b = !this.reverseRelation ? relation : this.main;
-
         this.linkMutationService.unlink(a, b).subscribe(() => {
-            this.loadingRemove = false;
-            this.relation = null;
-
-            // TODO : propagateValue here ? relations is already done and list refreshed, is this really needed
-            // Parent may be interested by update status, but we don't have the official list yet (as it arrives only after the .refetch())
-            // and there is no "then()" or "subscribe()" function on refetch().
-            // There is no update() to do after collection change as relations are already created, but no value propagation for now
         });
     }
 
@@ -296,7 +269,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * TODO : could maybe use "update" attribute of apollo.mutate function to update table faster (but hard to do it here)
      */
     public addRelations(relations: any[]) {
-        this.loadingAdd = true;
         const observables: Observable<FetchResult<{ id: string }>>[] = [];
         relations.forEach(relation => {
             if (!this.reverseRelation) {
@@ -307,13 +279,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         });
 
         forkJoin(observables).subscribe(() => {
-            this.loadingAdd = false;
-            this.relation = null;
-
-            // TODO : propagateValue here ? relations is already done and list refreshed, is this really needed
-            // Parent may be interested by update status, but we don't have the official list yet (as it arrives only after the .refetch())
-            // and there is no "then()" or "subscribe()" function on refetch().
-            // There is no update() to do after collection change as relations are already created, but no value propagation for now
+            this.select.clear(true);
         });
     }
 

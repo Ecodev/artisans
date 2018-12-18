@@ -56,7 +56,7 @@ import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 export class SelectComponent extends AbstractController implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
 
     @ViewChild(MatAutocompleteTrigger) autoTrigger: MatAutocompleteTrigger;
-    @ViewChild('input') input: ElementRef;
+    @ViewChild('input') input: ElementRef<HTMLInputElement>;
     @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
     /**
@@ -97,6 +97,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     }
 
     @Output() selectionChange = new EventEmitter();
+    @Output() optionSelected = new EventEmitter();
 
     @Output() blur = new EventEmitter();
 
@@ -271,7 +272,9 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         }
 
         this.value = val;
-        this.onChange(val); // before selectionChange to grant formControl is updated before change is effectively emitted
+        if (this.onChange) {
+            this.onChange(val); // before selectionChange to grant formControl is updated before change is effectively emitted
+        }
         this.selectionChange.emit(val);
     }
 
@@ -286,12 +289,25 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         return (item) => !item ? null : item.fullName || item.name || item[this.searchField] || item.id || item;
     }
 
-    public clear(preventChangeValue = false) {
+    public reset(preventChangeValue = false) {
 
         this.search(null);
 
         // Empty input
         this.formCtrl.setValue(null);
+
+        // propagateValue change
+        if (!preventChangeValue) {
+            this.propagateValue(null);
+        }
+    }
+
+    public clear(preventChangeValue = false) {
+
+        this.search(null);
+
+        // Empty input
+        this.formCtrl.setValue(null, {emitEvent: !preventChangeValue});
 
         // propagateValue change
         if (!preventChangeValue) {

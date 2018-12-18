@@ -5,11 +5,11 @@
 
         <!-- Input for autocomplete -->
         <input matInput
-               #input
                (keydown.esc)="clear()"
                [formControl]="formCtrl"
                [matAutocomplete]="ac"
                (change)="onInnerFormChange()"
+               (click)="autoTrigger.openPanel()"
                (blur)="blur.emit()"
                (focus)="onFocus()"
                aria-label="Recherche et sélection"

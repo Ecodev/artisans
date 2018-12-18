@@ -16,24 +16,20 @@ describe('EnumService', () => {
 
         const expected = [
             {
-                value: 'none',
-                name: ' ',
+                value: 'application',
+                name: 'Demande en attente',
             },
             {
-                value: 'to_verify',
-                name: '? - À vérifier',
+                value: 'processed',
+                name: 'Demande traitée',
             },
             {
-                value: 'ok',
-                name: '✓ - OK',
-            },
-            {
-                value: 'confirmed',
-                name: '✓✓ - Confirmé',
+                value: 'booked',
+                name: 'Réservé',
             },
         ];
 
-        const actual = service.get('Visa');
+        const actual = service.get('BookingStatus');
         actual.subscribe(v => expect(v).toEqual(expected));
     }));
 });

@@ -19,7 +19,7 @@ describe('CapitalizePipe', () => {
 
     it('do not crash with null', () => {
         const pipe = new CapitalizePipe();
-        expect(pipe.transform(null)).toBe(null);
+        expect(pipe.transform(null)).toBeNull();
     });
 
     it('capitalize a string within an observable', () => {
@@ -35,6 +35,6 @@ describe('CapitalizePipe', () => {
         const obs1 = new BehaviorSubject(null);
         let actual1 = 'initial';
         (pipe.transform(obs1) as Observable<string>).subscribe(v => actual1 = v);
-        expect(actual1).toBe(null);
+        expect(actual1).toBeNull();
     });
 });

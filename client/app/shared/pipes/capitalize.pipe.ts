@@ -6,7 +6,7 @@ import { Utility } from '../classes/utility';
 @Pipe({name: 'capitalize'})
 export class CapitalizePipe implements PipeTransform {
 
-    public transform(value: string | Observable<string>): string | Observable<string> {
+    public transform(value: string | null | Observable<string | null>): string | null | Observable<string | null> {
 
         if (value instanceof Observable) {
             return value.pipe(map(val => this.getValue(val)));
@@ -16,7 +16,7 @@ export class CapitalizePipe implements PipeTransform {
 
     }
 
-    private getValue(value: string): string {
+    private getValue(value: string | null): string | null {
         if (value) {
             return Utility.upperCaseFirstLetter(value);
         }

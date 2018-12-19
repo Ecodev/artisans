@@ -7,6 +7,7 @@ namespace Application\Api;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\OpenDoor;
+use Application\Api\Field\Mutation\TerminateBooking;
 use Application\Api\Field\Standard;
 use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
@@ -26,6 +27,7 @@ class MutationType extends ObjectType
             Login::build(),
             Logout::build(),
             OpenDoor::build(),
+            TerminateBooking::build(),
         ];
 
         $fields = array_merge(

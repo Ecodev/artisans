@@ -22,4 +22,8 @@ return [
             ],
         ],
     ],
+    'doorsApi' => [
+        'endpoint' => 'http://localhost:8888',
+        'token' => 'letmein'
+    ],
 ];

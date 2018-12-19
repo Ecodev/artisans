@@ -383,6 +383,16 @@ class User extends AbstractModel
     }
 
     /**
+     * The user account is active
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return ($this->getActiveFrom() === null || Chronos::now() > $this->getActiveFrom()) && ($this->getActiveFrom() === null || Chronos::now() < $this->getActiveUntil());
+    }
+
+    /**
      * Get a list of global permissions for this user
      *
      * @API\Field(type="GlobalPermissionsList")

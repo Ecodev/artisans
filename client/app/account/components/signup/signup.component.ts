@@ -18,7 +18,7 @@ import { BookingService } from '../../../admin/bookings/services/booking.service
 import { AnonymousUserService, ConfirmPasswordStateMatcher } from './anonymous-user.service';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { LinkMutationService } from '../../../shared/services/link-mutation.service';
-import { BasicDataSource } from '../../../shared/services/basic.data.source';
+import { AppDataSource } from '../../../shared/services/data.source';
 
 @Component({
     selector: 'app-signup',
@@ -34,7 +34,7 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
     any> implements OnInit {
 
     public confirmPasswordStateMatcher = new ConfirmPasswordStateMatcher();
-    private mandatoryBookables: BasicDataSource;
+    private mandatoryBookables: AppDataSource;
 
     constructor(alertService: AlertService,
                 private userService: AnonymousUserService,
@@ -54,7 +54,7 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
 
         this.bookableService.getMandatoryBookables().subscribe(bookables => {
             if (bookables) {
-                this.mandatoryBookables = new BasicDataSource(bookables.items);
+                this.mandatoryBookables = new AppDataSource(bookables);
             }
         });
 

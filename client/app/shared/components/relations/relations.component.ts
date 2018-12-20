@@ -13,9 +13,7 @@ import {
     TemplateRef,
     ViewChild,
 } from '@angular/core';
-import { PaginatedDataSource } from '../../services/paginated.data.source';
 import { LinkMutationService } from '../../services/link-mutation.service';
-import { BasicDataSource } from '../../services/basic.data.source';
 import { forkJoin, Observable } from 'rxjs';
 
 import { takeUntil } from 'rxjs/operators';
@@ -27,6 +25,7 @@ import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { HierarchicConfiguration } from '../../hierarchic-selector/classes/HierarchicConfiguration';
 import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { SelectComponent } from '../select/select.component';
+import { AppDataSource } from '../../services/data.source';
 
 /**
  * Custom template usage :
@@ -77,7 +76,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     /**
      * Cause the component to work as one-to-many instead of many-to-many
      */
-    @Input() value: any[];
+    @Input() value: any;
 
     @Output() selectionChange: EventEmitter<any> = new EventEmitter();
 
@@ -110,7 +109,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     /**
      * Listing service instance
      */
-    public dataSource: PaginatedDataSource | BasicDataSource<any>;
+    public dataSource: AppDataSource;
 
     /**
      * Observable variables/options for listing service usage and apollo watchQuery
@@ -184,7 +183,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     }
 
     private initItems() {
-        this.dataSource = new BasicDataSource(this.value);
+        this.dataSource = new AppDataSource(this.value);
     }
 
     /**
@@ -195,7 +194,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         this.loading = true;
         this.queryRef = this.service.watchAll(this.variablesManager, true);
 
-        this.dataSource = new PaginatedDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)), this.variablesManager);
+        this.dataSource = new AppDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)));
 
         this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             this.loading = false;
@@ -291,16 +290,13 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         return (item) => item ? item.fullName || item.name : '';
     }
 
-    public getLength() {
+    public getLength(): number | null {
+
         if (!this.dataSource) {
             return null;
         }
 
-        if (this.dataSource instanceof PaginatedDataSource) {
-            return this.dataSource.length; // consider total, instead of number in page -> PaginatedDataSource
-        } else {
-            return this.dataSource.data === null ? 0 : this.dataSource.data.length; // consider total (no pagination) -> BasicDataSource
-        }
+        return this.dataSource.data.length;
     }
 
     private getSelectKey(): string | undefined {

@@ -7,21 +7,23 @@ import { PageEvent, Sort } from '@angular/material';
 import { fromUrl, NaturalSearchConfiguration, NaturalSearchSelections, toGraphQLDoctrineFilter, toUrl } from '@ecodev/natural-search';
 import { PersistenceService } from '../services/persistence.service';
 import { AbstractController } from '../../../shared/components/AbstractController';
-import { PaginatedDataSource } from '../../../shared/services/paginated.data.source';
 import { AbstractModelService, AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { QueryVariables, QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { PaginationInput } from '../../../shared/generated-types';
+import { AppDataSource } from '../../../shared/services/data.source';
 
 /**
  * This class helps managing a list of paginated items that can be filtered,
  * selected, and then bulk actions can be performed on selection.
  */
-export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractController implements OnInit, OnDestroy {
+export class AbstractList<Tall, Vall extends QueryVariables>
+    extends AbstractController
+    implements OnInit, OnDestroy {
 
     public selectedColumns: string[] = [];
-    public dataSource: PaginatedDataSource;
+    public dataSource: AppDataSource;
     public selection: SelectionModel<Tall>;
     public bulkActionSelected: string | null;
 
@@ -77,7 +79,7 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
             this.variablesManager.set('routeFilters', this.route.snapshot.data.queryVariables);
         }
 
-        this.dataSource = new PaginatedDataSource(this.getDataObservable(), this.variablesManager);
+        this.dataSource = new AppDataSource(this.getDataObservable());
         this.selection = new SelectionModel<Tall>(true, []);
     }
 
@@ -168,7 +170,7 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
     /**
      * Selects all rows if they are not all selected; otherwise clear selection
      */
-    public masterToggle(selection: SelectionModel<Tall>, dataSource: PaginatedDataSource): void {
+    public masterToggle(selection: SelectionModel<Tall>, dataSource: AppDataSource): void {
         if (this.isAllSelected(selection, dataSource)) {
             selection.clear();
         } else {
@@ -186,7 +188,7 @@ export class AbstractList<Tall, Vall extends QueryVariables> extends AbstractCon
     /**
      * Whether the number of selected elements matches the total number of rows
      */
-    public isAllSelected(selection: SelectionModel<Tall>, dataSource: PaginatedDataSource): boolean {
+    public isAllSelected(selection: SelectionModel<Tall>, dataSource: AppDataSource): boolean {
         const numSelected = selection.selected.length;
         let numRows = 0;
         if (dataSource.data) {

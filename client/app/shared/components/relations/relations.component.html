@@ -47,10 +47,10 @@
             <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
         </div>
 
-        <mat-paginator *ngIf="!value && getLength() && dataSource?.pagination?.pageSize > getLength()"
+        <mat-paginator *ngIf="!value && getLength() && dataSource?.pageSize > getLength()"
                        [length]="getLength()"
-                       [pageSize]="dataSource?.pagination?.pageSize"
-                       [pageIndex]="dataSource?.pagination?.pageIndex"
+                       [pageSize]="dataSource?.pageSize"
+                       [pageIndex]="dataSource?.pageIndex"
                        [pageSizeOptions]="dataSource?.pageSizeOptions"
                        (page)="dataSource?.paging($event)"
         ></mat-paginator>

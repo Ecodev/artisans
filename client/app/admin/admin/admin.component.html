@@ -1,8 +1,7 @@
-<div fxLayout="row" fxLayoutGap="20px">
+<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start start">
     <div fxFlex="300px" fxLayout="column">
 
         <mat-accordion>
-
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>Carnet de sorties</mat-panel-title>
@@ -89,7 +88,7 @@
         </mat-accordion>
 
     </div>
-    <div fxLayout="column" fxFlex>
+    <div fxLayout="column" fxFlex overflow-x>
         <router-outlet></router-outlet>
     </div>
 </div>

@@ -8,7 +8,7 @@
 
     <div fxLayout="column">
 
-        <div fxLayout="row" class="margin-v">
+        <div fxLayout="row" class="margin-v" overflow>
 
             <natural-search fxFlex
                             [configurations]="naturalSearchConfig"
@@ -31,92 +31,91 @@
             </natural-search>
 
         </div>
+        <div class="responsive-table">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">
 
-        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">
+                <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
-            <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
-                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-            </ng-container>
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n></th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <app-table-button icon="edit" [navigate]="['/admin/booking/', element.id]" matTooltip="Éditer"
+                            ></app-table-button>
+                        </div>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="edit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n></th>
-                <td mat-cell *matCellDef="let element">
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                        <app-table-button icon="edit"
-                                          [navigate]="['/admin/booking/', element.id]"
-                                          matTooltip="Éditer"
-                        ></app-table-button>
-                    </div>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="responsible">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Responsable</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <ngx-avatar [name]="element.responsible?.name" [size]="36"></ngx-avatar>
+                            <app-table-button [label]="element.responsible?.name"
+                                              [navigate]="['/admin/user/', element.responsible?.id]"
+                                              i18n-matTooltip
+                                              matTooltip="Éditer"
+                            ></app-table-button>
+                        </div>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="responsible">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Responsable</th>
-                <td mat-cell *matCellDef="let element">
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                        <ngx-avatar [name]="element.responsible?.name" [size]="36"></ngx-avatar>
-                        <app-table-button [label]="element.responsible?.name"
-                                          [navigate]="['/admin/user/', element.responsible?.id]"
-                                          i18n-matTooltip
-                                          matTooltip="Éditer"
-                        ></app-table-button>
-                    </div>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="bookable">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Réservable</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.bookables.length">
+                            <app-table-button [label]="element.bookables[0].name"
+                                              [navigate]="['/admin/bookable/', element.bookables[0].id]"
+                                              i18n-matTooltip
+                                              matTooltip="Éditer"
+                            ></app-table-button>
+                        </div>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="bookable">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Réservable</th>
-                <td mat-cell *matCellDef="let element">
-                    <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.bookables.length">
-                        <app-table-button [label]="element.bookables[0].name"
-                                          [navigate]="['/admin/bookable/', element.bookables[0].id]"
-                                          i18n-matTooltip
-                                          matTooltip="Éditer"
-                        ></app-table-button>
-                    </div>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="destination">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Destination</th>
+                    <td mat-cell *matCellDef="let element">{{ element.destination }}</td>
+                </ng-container>
+                <ng-container matColumnDef="startDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Début</th>
+                    <td mat-cell *matCellDef="let element">{{ element.startDate | date: 'short' }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="destination">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Destination</th>
-                <td mat-cell *matCellDef="let element">{{ element.destination }}</td>
-            </ng-container>
-            <ng-container matColumnDef="startDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Début</th>
-                <td mat-cell *matCellDef="let element">{{ element.startDate | date: 'short' }}</td>
-            </ng-container>
+                <ng-container matColumnDef="endDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Fin</th>
+                    <td mat-cell *matCellDef="let element">{{ element.endDate | date: 'short' }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="endDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Fin</th>
-                <td mat-cell *matCellDef="let element">{{ element.endDate | date: 'short' }}</td>
-            </ng-container>
+                <ng-container matColumnDef="estimatedEndDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Retour prévu</th>
+                    <td mat-cell *matCellDef="let element">{{ element.estimatedEndDate }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="estimatedEndDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Retour prévu</th>
-                <td mat-cell *matCellDef="let element">{{ element.estimatedEndDate }}</td>
-            </ng-container>
+                <ng-container matColumnDef="participantCount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>
+                        <app-icon name="group" matTooltip="Nombre de participants"></app-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element">{{ element.participantCount }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="participantCount">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>
-                    <app-icon name="group" matTooltip="Nombre de participants"></app-icon>
-                </th>
-                <td mat-cell *matCellDef="let element">{{ element.participantCount }}</td>
-            </ng-container>
+                <ng-container matColumnDef="flagEndDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-5em-column></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button *ngIf="!element.endDate" mat-button color="warn" (click)="bookingService.flagEndDate(element.id)">
+                            Terminer
+                        </button>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="flagEndDate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-5em-column></th>
-                <td mat-cell *matCellDef="let element">
-                    <button *ngIf="!element.endDate" mat-button color="warn" (click)="bookingService.flagEndDate(element.id)">
-                        Terminer
-                    </button>
-                </td>
-            </ng-container>
-
-        </table>
+            </table>
+        </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
             <div i18n>Pas de résultats</div>

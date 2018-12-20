@@ -4,9 +4,14 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    [mat-table] {
+    .responsive-table {
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
 
-        //width: 100%;
+    [mat-table] {
+        width: 100%;
+        max-width: 100%;
 
         [mat-cell] {
             justify-content: center;
@@ -20,6 +25,10 @@
 
         [mat-header-row] {
             background: mat-color($background, app-bar);
+        }
+
+        .mat-footer-cell {
+            font-weight: bold;
         }
 
         [app-1em-column] {
@@ -40,6 +49,14 @@
 
         [app-5em-column] {
             width: 5em;
+        }
+
+        [app-6em-column] {
+            width: 6em;
+        }
+
+        [app-7em-column] {
+            width: 7em;
         }
 
     }

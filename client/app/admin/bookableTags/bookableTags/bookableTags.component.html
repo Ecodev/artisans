@@ -8,7 +8,7 @@
 
     <div fxLayout="column">
 
-        <div fxLayout="row" class="margin-v">
+        <div fxLayout="row" class="margin-v" overflow>
             <natural-search fxFlex
                             [configurations]="naturalSearchConfig"
                             [(selections)]="naturalSearchSelections"
@@ -23,35 +23,37 @@
             </natural-search>
         </div>
 
-        <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">
+        <div class="responsive-table">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">
 
-            <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
-                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-            </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                </ng-container>
 
-            <ng-container matColumnDef="color">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-3em-column></th>
-                <td mat-cell *matCellDef="let element">
-                    <ngx-avatar [bgColor]="element.color" [size]="32" [name]="element.name"></ngx-avatar>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-3em-column></th>
+                    <td mat-cell *matCellDef="let element">
+                        <ngx-avatar [bgColor]="element.color" [size]="32" [name]="element.name"></ngx-avatar>
+                    </td>
+                </ng-container>
 
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
-                <td mat-cell *matCellDef="let element">
-                    <app-table-button [label]="element.name"
-                                      [navigate]="['/admin/bookable-tag', element.id]"
-                                      i18n-matTooltip
-                                      matTooltip="Éditer"
-                    ></app-table-button>
-                </td>
-            </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                    <td mat-cell *matCellDef="let element">
+                        <app-table-button [label]="element.name"
+                                          [navigate]="['/admin/bookable-tag', element.id]"
+                                          i18n-matTooltip
+                                          matTooltip="Éditer"
+                        ></app-table-button>
+                    </td>
+                </ng-container>
 
-        </table>
+            </table>
+        </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
             <div i18n>Pas de résultats</div>

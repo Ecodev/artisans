@@ -404,6 +404,23 @@ export abstract class AbstractModelService<Tone,
         return observable.asObservable();
     }
 
+    public mutate(mutation, variables: any): Observable<any> {
+
+        const observable = new Subject();
+
+        this.apollo.mutate<Tupdate, Vupdate>({
+            mutation: mutation,
+            variables: variables,
+            refetchQueries: AbstractModelService.getRefetchQueries(),
+        }).subscribe((result: any) => {
+            result = this.mapUpdate(result);
+            observable.next(result);
+            observable.complete(); // unsubscribe all after first emit, nothing more will come;
+        });
+
+        return observable.asObservable();  // hide type Subject and prevent user to miss use .next() or .complete() functions
+    }
+
     /**
      * This is used to extract only the fetched object out of the entire fetched data
      */

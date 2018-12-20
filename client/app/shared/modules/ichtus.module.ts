@@ -13,6 +13,7 @@ import { IconModule } from '../components/icon/icon.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AddressComponent } from '../components/address/address.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { RouterModule } from '@angular/router';
         TableButtonComponent,
         FixedButtonComponent,
         DetailFixedButtonComponent,
+        AddressComponent,
     ],
     imports: [
         CommonModule,
@@ -46,6 +48,7 @@ import { RouterModule } from '@angular/router';
         IconComponent,
         FormsModule,
         ReactiveFormsModule,
+        AddressComponent
     ],
 })
 export class IchtusModule {

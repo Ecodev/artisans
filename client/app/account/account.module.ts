@@ -6,10 +6,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountRoutingModule } from './account-routing.module';
 import { SignupComponent } from './components/signup/signup.component';
-import { AccountWrapperComponent } from './components/account-wrapper/account-wrapper.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
-import { AddressComponent } from '../shared/components/address/address.component';
 
 @NgModule({
     declarations: [
@@ -18,14 +16,12 @@ import { AddressComponent } from '../shared/components/address/address.component
         ProfileComponent,
         AccountComponent,
         SignupComponent,
-        AccountWrapperComponent,
-        AddressComponent
     ],
     imports: [
         CommonModule,
         AccountRoutingModule,
         MaterialModule,
-        IchtusModule
+        IchtusModule,
     ],
 })
 export class AccountModule {

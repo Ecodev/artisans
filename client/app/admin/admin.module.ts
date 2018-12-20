@@ -21,7 +21,6 @@ import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { BookingComponent } from './bookings/booking/booking.component';
 import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
-import { AddressComponent } from '../shared/components/address/address.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +40,7 @@ import { AddressComponent } from '../shared/components/address/address.component
         BookingComponent,
         BookableTagsComponent,
         BookableTagComponent,
-        AddressComponent
+
     ],
     imports: [
         CommonModule,

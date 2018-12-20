@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FamillyComponent } from './components/familly/familly.component';
 import { FamillyMemberComponent } from './components/familly-member/familly-member.component';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AccountComponent } from './components/account/account.component';
 import { AccountRoutingModule } from './account-routing.module';
 import { SignupComponent } from './components/signup/signup.component';
@@ -13,7 +12,6 @@ import { IchtusModule } from '../shared/modules/ichtus.module';
     declarations: [
         FamillyComponent,
         FamillyMemberComponent,
-        ProfileComponent,
         AccountComponent,
         SignupComponent,
     ],

@@ -11,9 +11,9 @@ describe('LinkMutationService', () => {
         });
     });
 
-    const booking = {__typename: 'Booking'};
-    const item = {__typename: 'Bookable'};
-    const company = {__typename: 'Company'};
+    const booking = {id : '456', __typename: 'Booking'};
+    const item = {id : '456', __typename: 'Bookable'};
+    const company = {id : '456', __typename: 'Company'};
 
     const expectBooking = {
         id: '456',

@@ -9,6 +9,11 @@ import { Utility } from '../classes/utility';
 import { clone } from 'lodash';
 import { AbstractModelService } from './abstract-model.service';
 
+export interface LinkableObject {
+    id: string;
+    __typename: string;
+}
+
 @Injectable({
     providedIn: 'root',
 })
@@ -42,7 +47,7 @@ export class LinkMutationService {
     /**
      * Link two objects together
      */
-    public link(obj1: Literal, obj2: Literal, variables: Literal = {}): Observable<FetchResult<{ id: string }>> {
+    public link(obj1: LinkableObject, obj2: LinkableObject, variables: Literal = {}): Observable<FetchResult<{ id: string }>> {
         const mutation = this.getMutation('link', obj1, obj2, clone(variables)); // clone prevents to affect the original reference
 
         return this.execute(mutation);
@@ -51,7 +56,7 @@ export class LinkMutationService {
     /**
      * Link many objects
      */
-    public linkMany(obj1: Literal, objSet: Literal[], variables: Literal = {}): Observable<FetchResult<{ id: string }>[]> {
+    public linkMany(obj1: LinkableObject, objSet: LinkableObject[], variables: Literal = {}): Observable<FetchResult<{ id: string }>[]> {
 
         const observables: Observable<FetchResult<{ id: string }>[]>[] = [];
 
@@ -65,7 +70,7 @@ export class LinkMutationService {
     /**
      * Unlink two objects
      */
-    public unlink(obj1: Literal, obj2: Literal): Observable<FetchResult<{ id: string }>> {
+    public unlink(obj1: LinkableObject, obj2: LinkableObject): Observable<FetchResult<{ id: string }>> {
         const mutation = this.getMutation('unlink', obj1, obj2);
 
         return this.execute(mutation);

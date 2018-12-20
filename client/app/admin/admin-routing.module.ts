@@ -221,12 +221,35 @@ const routes: Routes = [
                 },
                 {
                     path: 'member',
-                    component: UsersComponent,
-                    data: {
-                        title: 'Membres',
-                        queryVariables: UserService.membersQV,
-                    },
+
+                    children : [
+                        {
+                            path: '',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Membres actifs',
+                                queryVariables: UserService.membersQueryVariables,
+                            },
+                        },
+                        {
+                            path: 'fresh',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Nouveaux membres',
+                                queryVariables: UserService.freshMembersQueryVariables,
+                            },
+                        },
+                        {
+                            path: 'invited (todo)',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Nouveaux membres invités à la séance d\'accueil',
+                                // queryVariables: UserService.xxx,
+                            },
+                        },
+                    ]
                 },
+
 
                 {
                     path: 'license',

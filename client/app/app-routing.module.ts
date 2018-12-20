@@ -12,6 +12,10 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent,
     },
+    {
+        path: 'signup',
+        loadChildren: './account/account.module#AccountModule',
+    },
     // Auth required routes
     {
         path: '',
@@ -26,6 +30,10 @@ export const routes: Routes = [
             {
                 path: 'admin',
                 loadChildren: './admin/admin.module#AdminModule',
+            },
+            {
+                path: 'account',
+                loadChildren: './account/account.module#AccountModule',
             },
             {
                 path: 'error',

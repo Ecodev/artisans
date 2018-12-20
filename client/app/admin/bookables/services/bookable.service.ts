@@ -20,6 +20,7 @@ import { BookableResolve } from '../bookable';
 import { forkJoin, Observable } from 'rxjs';
 import { EnumService } from '../../../shared/services/enum.service';
 import { map } from 'rxjs/operators';
+import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 
 @Injectable({
     providedIn: 'root',
@@ -115,6 +116,16 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
                 bookingType: data[1],
             };
         }));
+    }
+
+    public getMandatoryBookables(): Observable<BookablesQuery['bookables']> {
+        const mandatoryBookablesFilter: BookablesQueryVariables = {
+            filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.mandatory]}}}]}]},
+        };
+
+        const qvm = new QueryVariablesManager<BookablesQueryVariables>();
+        qvm.set('variables', mandatoryBookablesFilter);
+        return this.getAll(qvm);
     }
 
 }

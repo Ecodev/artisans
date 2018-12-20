@@ -1,11 +1,12 @@
 START TRANSACTION;
 
-REPLACE INTO user (id, login, name, email, password, role) VALUES
-(1000, 'administrator', 'administrator', 'administrator@example.com', MD5('administrator'), 'administrator'),
-(1001, 'responsible', 'responsible', 'responsible@example.com', MD5('responsible'), 'responsible'),
-(1002, 'member', 'member', 'member@example.com', MD5('member'), 'member'),
-(1003, 'booking_only', 'booking_only', 'booking_only@example.com', MD5('booking_only'), 'booking_only'),
-(1004, 'inactive', 'inactive', 'inactive@example.com', MD5('inactive'), 'inactive');
+REPLACE INTO user (id, login, name, email, password, role, welcome_session_date) VALUES
+(1000, 'administrator', 'administrator', 'administrator@example.com', MD5('administrator'), 'administrator', '2018-01-01 12:00:00'),
+(1001, 'responsible', 'responsible', 'responsible@example.com', MD5('responsible'), 'responsible', '2018-01-01 12:00:00'),
+(1002, 'member', 'active member', 'member@example.com', MD5('member'), 'member', '2018-01-01 12:00:00'),
+(1003, 'booking_only', 'booking_only', 'booking_only@example.com', MD5('booking_only'), 'booking_only', '2018-01-01 12:00:00'),
+(1004, 'inactive', 'inactive', 'inactive@example.com', MD5('inactive'), 'inactive', NULL),
+(1005, 'fresh', 'fresh member (inactive)', 'fresh@example.com', MD5('fresh'), 'inactive', NULL);
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');
@@ -54,7 +55,8 @@ REPLACE INTO booking (id, responsible_id, start_date, end_date, status) VALUE
 (4003, 1002, '2018-01-02 13:32:51', NULL, 'application'),
 (4004, 1002, '2018-01-02 13:32:51', NULL, 'booked'),
 (4005, 1002, '2018-01-02 13:32:51', NULL, 'booked'),
-(4006, 1002, '2018-01-02 13:32:51', NULL, 'application');
+(4006, 1002, '2018-01-02 13:32:51', NULL, 'application'),
+(4007, 1005, '2018-01-02 13:32:51', NULL, 'booked');
 
 REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4000, 3000),
@@ -63,7 +65,9 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4003, 3002),
 (4004, 3003),
 (4005, 3006),
-(4006, 3004);
+(4006, 3004),
+(4007, 3006);
+
 
 REPLACE INTO image (id, bookable_id, filename, width, height) VALUES
 (5000, 3000,'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg',  500, 374);

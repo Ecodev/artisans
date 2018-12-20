@@ -53,7 +53,7 @@ export class AbstractDetail<Tone,
 
     private initForm() {
         const formConfig = this.service.getFormConfig(this.data.model);
-        this.form = new FormGroup(formConfig);
+        this.form = new FormGroup(formConfig, {validators: this.service.getFormGroupValidators()});
     }
 
     public update(): void {
@@ -78,7 +78,7 @@ export class AbstractDetail<Tone,
         });
     }
 
-    public create(): Observable<Tcreate> | null {
+    public create(redirect: boolean = true): Observable<Tcreate> | null {
 
         this.validateAllFormFields(this.form);
         if (this.form && this.form.invalid) {
@@ -95,7 +95,10 @@ export class AbstractDetail<Tone,
             obs.next(model);
             this.form.patchValue(model);
             this.postCreate(model);
-            this.router.navigate(['..', model.id], {relativeTo: this.route});
+
+            if (redirect) {
+                this.router.navigate(['..', model.id], {relativeTo: this.route});
+            }
         });
 
         return obs;
@@ -114,6 +117,7 @@ export class AbstractDetail<Tone,
             const control = formGroup.get(field);
             if (control instanceof FormControl) {
                 control.markAsDirty({onlySelf: true});
+                control.markAsTouched({onlySelf: true});
             } else if (control instanceof FormGroup) {
                 this.validateAllFormFields(control);
             }

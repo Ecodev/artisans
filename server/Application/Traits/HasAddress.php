@@ -13,18 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 trait HasAddress
 {
     /**
-     * @var float
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $latitude;
-
-    /**
-     * @var float
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $longitude;
-
-    /**
      * @var string
      * @ORM\Column(type="string")
      */
@@ -43,57 +31,11 @@ trait HasAddress
     private $locality = '';
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=255)
-     */
-    private $area = '';
-
-    /**
      * @var Country
      * @ORM\ManyToOne(targetEntity="Country")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $country;
-
-    /**
-     * Get latitude
-     *
-     * @return null|float
-     */
-    public function getLatitude(): ?float
-    {
-        return $this->latitude;
-    }
-
-    /**
-     * Set latitude
-     *
-     * @param null|float $latitude
-     */
-    public function setLatitude(?float $latitude): void
-    {
-        $this->latitude = $latitude;
-    }
-
-    /**
-     * Get longitude
-     *
-     * @return null|float
-     */
-    public function getLongitude(): ?float
-    {
-        return $this->longitude;
-    }
-
-    /**
-     * Set longitude
-     *
-     * @param null|float $longitude
-     */
-    public function setLongitude(?float $longitude): void
-    {
-        $this->longitude = $longitude;
-    }
 
     /**
      * @return string
@@ -141,22 +83,6 @@ trait HasAddress
     public function setLocality(string $locality): void
     {
         $this->locality = $locality;
-    }
-
-    /**
-     * @return string
-     */
-    public function getArea(): string
-    {
-        return $this->area;
-    }
-
-    /**
-     * @param string $area
-     */
-    public function setArea(string $area): void
-    {
-        $this->area = $area;
     }
 
     /**

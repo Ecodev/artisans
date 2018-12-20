@@ -22,16 +22,20 @@ import {
     LoginMutation,
     LoginMutationVariables,
     LogoutMutation,
+    Relationship,
     UpdateUserMutation,
     UpdateUserMutationVariables,
     UserInput,
     UserQuery,
     UserQueryVariables,
+    UserRole,
     UsersQuery,
     UsersQueryVariables,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
-import { Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material';
+import { Literal } from '../../../shared/types';
 
 @Injectable({
     providedIn: 'root',
@@ -46,11 +50,40 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     UpdateUserMutationVariables,
     any> {
 
-    public static readonly membersQV: UsersQueryVariables = {
+    /**
+     * TODO : define criters that explicits a member is active
+     */
+    public static readonly membersQueryVariables: UsersQueryVariables = {
         filter: {
             groups: [
                 {
-                    conditions: [{responsible: {null: {not: false}}}],
+                    conditions: [
+                        {
+                            responsible: {null: {not: false}},
+                            welcomeSessionDate: {null: {not: true}},
+                            role: {in: {values: [UserRole.member]}},
+                        },
+                    ],
+                    joins: {bookings: {joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}}}},
+                },
+            ],
+        },
+    };
+
+    /**
+     * TODO : define all criters that explicits a member is fresh
+     */
+    public static readonly freshMembersQueryVariables: UsersQueryVariables = {
+        filter: {
+            groups: [
+                {
+                    conditions: [
+                        {
+                            responsible: {null: {not: false}},
+                            welcomeSessionDate: {null: {not: false}},
+                            role: {in: {values: [UserRole.inactive]}},
+                        },
+                    ],
                     joins: {bookings: {joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}}}},
                 },
             ],
@@ -58,6 +91,17 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     };
 
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
+
+    public static checkPassword(formGroup: FormGroup): Literal | null {
+        if (!formGroup) {
+            return null;
+        }
+
+        const pass = formGroup.controls.password.value;
+        const confirmPass = formGroup.controls.confirmPassword.value;
+
+        return pass === confirmPass ? null : {notSame: true};
+    }
 
     constructor(apollo: Apollo, private router: Router) {
         super(apollo,
@@ -76,6 +120,18 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             email: '',
             name: '',
             birthday: null,
+            street: '',
+            postcode: '',
+            locality: '',
+            country: null,
+            familyRelationship: Relationship.householder,
+            // role: UserRole.inactive : // TODO : cannot by set by anonymous, but should be
+        };
+    }
+
+    public getDefaultValues(): Literal {
+        return {
+            country: {id: 1, name: 'Suisse'},
         };
     }
 

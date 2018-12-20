@@ -8,7 +8,7 @@ export const usersQuery = gql`
                 id
                 login
                 name
-                activeUntil
+                activeFrom
             }
             pageSize
             pageIndex
@@ -24,8 +24,16 @@ export const userQuery = gql`
             name
             email
             activeUntil
+            activeFrom
             birthday
             phone
+            postcode
+            street
+            locality
+            country {
+                id
+                name
+            }
             creator {
                 ...userMeta
             }

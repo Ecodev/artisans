@@ -9,6 +9,7 @@ use Application\Api\Exception;
 use Application\DBAL\Types\BillingTypeType;
 use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
+use Application\Traits\HasAddress;
 use Application\Traits\HasDoorAccess;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
@@ -39,6 +40,7 @@ class User extends AbstractModel
     use HasResponsible;
     use HasDoorAccess;
     use HasRemarks;
+    use HasAddress;
 
     /**
      * @var User

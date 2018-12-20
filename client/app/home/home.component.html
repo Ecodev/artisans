@@ -7,7 +7,9 @@
 
         <div fxFlex></div>
 
-        <ngx-avatar [name]="userService.getCurrentUser().value?.name"></ngx-avatar>
+        <a mat-icon-button routerLink="/account">
+            <ngx-avatar [name]="userService.getCurrentUser().value?.name" ></ngx-avatar>
+        </a>
 
     </mat-toolbar>
 

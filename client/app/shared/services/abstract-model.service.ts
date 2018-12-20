@@ -92,7 +92,7 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
-     * Return empty object with some default values
+     * Return empty object with some default values from server perspective
      *
      * This is typically useful when showing a form for creation
      */
@@ -100,12 +100,25 @@ export abstract class AbstractModelService<Tone,
         return {};
     }
 
+    /**
+     * Return empty object with some default values from frontend perspective
+     *
+     * Where empty object must respect graphql XXXInput type, may need some default values form other fields
+     */
+    public getDefaultValues(): Literal {
+        return {};
+    }
+
     public getFormValidators(): FormValidators {
         return {};
     }
 
+    public getFormGroupValidators(): ValidatorFn[] {
+        return [];
+    }
+
     public getFormConfig(model): Literal {
-        const values = this.getEmptyObject();
+        const values = Object.assign(this.getEmptyObject(), this.getDefaultValues());
         const validators = this.getFormValidators();
         const config = {};
         const disabled = model.permissions ? !model.permissions.update : false;
@@ -162,10 +175,6 @@ export abstract class AbstractModelService<Tone,
         }).pipe(this.mapAll());
     }
 
-    /**
-     * Watch query considering an observable variables set
-     * Only sends query when variables are different of undefined.
-     */
     /**
      * Watch query considering an observable variables set
      * Only sends query when variables are different of undefined.

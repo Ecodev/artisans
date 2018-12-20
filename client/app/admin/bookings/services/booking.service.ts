@@ -2,7 +2,14 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { pick } from 'lodash';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import { bookingQuery, bookingsQuery, createBookingMutation, updateBookingMutation } from './booking.queries';
+import {
+    bookingQuery,
+    bookingsQuery,
+    createBookingMutation,
+    deleteBookingsMutation,
+    terminateBookingMutation,
+    updateBookingMutation,
+} from './booking.queries';
 import {
     BookingInput,
     BookingQuery,
@@ -11,14 +18,18 @@ import {
     BookingsQueryVariables,
     BookingStatus,
     BookingType,
+    CreateBookingMutation,
+    DeleteBookingsMutation,
+    TerminateBookingMutation,
     UpdateBookingMutation,
     UpdateBookingMutationVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { forkJoin, Observable } from 'rxjs';
+import { forkJoin, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EnumService } from '../../../shared/services/enum.service';
 import { BookingResolve } from '../booking';
+import { LinkableObject, LinkMutationService } from '../../../shared/services/link-mutation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -31,7 +42,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     any,
     UpdateBookingMutation['updateBooking'],
     UpdateBookingMutationVariables,
-    any> {
+    DeleteBookingsMutation> {
 
     public static readonly runningSelfApprovedQV: BookingsQueryVariables = {
         filter: {
@@ -70,14 +81,14 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
         },
     };
 
-    constructor(apollo: Apollo, private enumService: EnumService) {
+    constructor(apollo: Apollo, private enumService: EnumService, private linkMutationService: LinkMutationService) {
         super(apollo,
             'booking',
             bookingQuery,
             bookingsQuery,
             createBookingMutation,
             updateBookingMutation,
-            null);
+            deleteBookingsMutation);
     }
 
     public getEmptyObject(): BookingInput {
@@ -100,11 +111,11 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
         };
     }
 
-    public flagEndDate(id: string): void {
-        const date = (new Date()).toISOString();
-        const booking = {id: id, endDate: date};
-        this.updateNow(booking).subscribe(() => {
-        });
+    /**
+     * TODO : implement confirm (modal maybe or from controller text)
+     */
+    public flagEndDate(id: string, confirm: boolean = false): Observable<TerminateBookingMutation['terminateBooking']> {
+        return this.mutate(terminateBookingMutation, {id: id});
     }
 
     public resolve(id: string): Observable<BookingResolve> {
@@ -120,6 +131,29 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
                 status: data[1],
             };
         }));
+    }
+
+    public createWithBookable(bookable: LinkableObject,
+                              user: { id: string },
+                              status: BookingStatus = BookingStatus.application): Observable<CreateBookingMutation['createBooking']> {
+
+        const subject = new Subject<CreateBookingMutation['createBooking']>();
+
+        const booking: BookingInput = {
+            status: status,
+            startDate: (new Date()).toISOString(),
+            responsible: user.id,
+        };
+
+        this.create(booking).subscribe(newBoooking => {
+            this.linkMutationService.link(newBoooking, bookable).subscribe(() => {
+                subject.next(newBoooking);
+                subject.complete();
+            });
+        });
+
+        return subject.asObservable();
+
     }
 
 }

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
+import { bookableMetaFragment } from '../../bookables/services/bookable.queries';
 
 export const bookingMetaFragment = gql`
     fragment bookingMeta on Booking {
@@ -18,15 +19,13 @@ export const bookingMetaFragment = gql`
             id
             ...userMeta
         }
-        owner {
-            id
-            ...userMeta
-        }
         bookables {
             id
             name
+            ...bookableMeta
         }
     }
+    ${bookableMetaFragment}
 ${userMetaFragment}`;
 
 export const bookingsQuery = gql`
@@ -55,7 +54,7 @@ export const bookingQuery = gql`
             }
         }
     }
-${bookingMetaFragment}
+    ${bookingMetaFragment}
 ${userMetaFragment}`;
 
 export const createBookingMutation = gql`
@@ -81,4 +80,19 @@ export const updateBookingMutation = gql`
         }
     }
     ${userMetaFragment}
+`;
+
+export const deleteBookingsMutation = gql`
+    mutation DeleteBookings ($ids: [BookingID!]!){
+        deleteBookings(ids: $ids)
+    }
+`;
+
+export const terminateBookingMutation = gql`
+    mutation TerminateBooking ($id: BookingID!, $comment: String) {
+        terminateBooking(id: $id, comment: $comment) {
+            id
+            status
+        }
+    }
 `;

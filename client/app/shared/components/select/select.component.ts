@@ -234,6 +234,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         variables = merge(variables, this.getSearchFilter(null));
 
         this.variablesManager = new QueryVariablesManager<QueryVariables>();
+        this.variablesManager.merge('additional-filter', {filter: this.filter});
         this.variablesManager.set('variables', variables);
     }
 
@@ -327,7 +328,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     public search(term) {
         if (this.service && !isObject(term)) {
             this.loading = !!this.queryRef;
-            this.variablesManager.merge('additional-filter', {filter: this.filter});
             this.variablesManager.merge('variables', this.getSearchFilter(term));
         }
     }

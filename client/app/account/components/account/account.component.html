@@ -1,3 +1,146 @@
-<p>
-  account works!
-</p>
+<div fxLayout="column" style="margin:auto; max-width:1300px; padding-top:30px">
+
+    <h1 class="mat-display-1">Profil</h1>
+
+    <div fxLayout="column" fxLayoutGap="30px">
+
+        <div fxLayout="row" fxLayoutGap="30px">
+
+            <div fxFlex>
+                <h2 class="mat-headline">Solde</h2>
+            </div>
+
+            <div fxFlex>
+                <h2 class="mat-headline">Identité</h2>
+                nom : {{ data.model.name }}
+                <br />
+                login : {{ data.model.login}}
+                <br />
+                email : {{ data.model.email }}
+                <br />
+            </div>
+
+            <div fxFlex>
+                <h2 class="mat-headline">Famille</h2>
+
+                <!-- TODO : family component -->
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>John Conor</mat-panel-title>
+                            <mat-panel-description>Chef de la résistance</mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div>
+                            formulaire
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>John McClane</mat-panel-title>
+                            <mat-panel-description>Chef de la police</mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <div>
+                            formulaire
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div fxLayout="row" fxLayoutGap="30px" fxFlex>
+            <div fxFlex>
+                <h2 class="mat-headline">Cotisation</h2>
+
+                <table mat-table *ngIf="runningServicesDS" [dataSource]="runningServicesDS">
+                    <tr mat-header-row *matHeaderRowDef="servicesColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: servicesColumns;"></tr>
+                    <tr mat-footer-row *matFooterRowDef="servicesColumns"></tr>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                        <td mat-cell *matCellDef="let booking">{{ booking.bookables[0].name }}</td>
+                        <td mat-footer-cell *matFooterCellDef> Totaux</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="periodicPrice">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix périodique</th>
+                        <td mat-cell *matCellDef="let booking">
+                            <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice }} CHF</span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="initialPrice">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix initial</th>
+                        <td mat-cell *matCellDef="let booking">
+                            <span *ngIf="booking.bookables[0].initialPrice"> {{ booking.bookables[0].initialPrice }} CHF</span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ totalInitial }} CHF</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="revoke">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header app-1em-column></th>
+                        <td mat-cell *matCellDef="let booking">
+                            <button mat-icon-button color="warn" (click)="revokeBooking(booking)" *ngIf="canRevoke(booking)">
+                                <app-icon name="delete"></app-icon>
+                            </button>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+
+                </table>
+            </div>
+
+            <div fxFlex fxLayout="column" fxLayoutGap="10px">
+                <h2 class="mat-headline">Demandes en attente</h2>
+                <table mat-table *ngIf="runningServicesDS" [dataSource]="pendingApplicationsDS">
+                    <tr mat-header-row *matHeaderRowDef="applicationsColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: applicationsColumns;"></tr>
+                    <tr mat-footer-row *matFooterRowDef="applicationsColumns"></tr>
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                        <td mat-cell *matCellDef="let booking">{{ booking.bookables[0].name }}</td>
+                        <td mat-footer-cell *matFooterCellDef> Totaux</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="periodicPrice">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix périodique</th>
+                        <td mat-cell *matCellDef="let booking">
+                            <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice }} CHF</span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="initialPrice">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix initial</th>
+                        <td mat-cell *matCellDef="let booking">
+                            <span *ngIf="booking.bookables[0].initialPrice"> {{ booking.bookables[0].initialPrice }} CHF</span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ totalInitial }} CHF</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="cancel">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header app-1em-column></th>
+                        <td mat-cell *matCellDef="let booking">
+                            <button mat-icon-button color="warn" (click)="cancelApplication(booking)">
+                                <app-icon name="delete"></app-icon>
+                            </button>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef></td>
+                    </ng-container>
+                </table>
+                <app-select [service]="bookableService"
+                            [filter]="BookableService.adminApproved.filter"
+                            (selectionChange)="addApplication($event)"
+                            placeholder="Demander un espace de stockage"
+                ></app-select>
+            </div>
+        </div>
+
+    </div>
+
+</div>

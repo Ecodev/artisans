@@ -4,7 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery,
@@ -15,6 +15,9 @@ import {
     usersQuery,
 } from './user.queries';
 import {
+    BookingsQuery,
+    BookingsQueryVariables,
+    BookingStatus,
     BookingType,
     CreateUserMutation,
     CreateUserMutationVariables,
@@ -33,9 +36,10 @@ import {
     UsersQueryVariables,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material';
+import { FormGroup, Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
+import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { BookingService } from '../../bookings/services/booking.service';
 
 @Injectable({
     providedIn: 'root',
@@ -103,7 +107,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return pass === confirmPass ? null : {notSame: true};
     }
 
-    constructor(apollo: Apollo, private router: Router) {
+    constructor(apollo: Apollo, protected router: Router, protected bookingService: BookingService) {
         super(apollo,
             'user',
             userQuery,
@@ -200,6 +204,79 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         });
 
         return subject;
+    }
+
+    /**
+     * Resolve items related to users, and the user if the id is provided, in order to show a form
+     */
+    public resolveViewer(): Observable<any> {
+        return this.getCurrentUser().pipe(map(result => {
+            return {model: result};
+        }));
+    }
+
+    public getRunningNavigations(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
+        const variables: BookingsQueryVariables = {
+            filter: {
+                groups: [
+                    {
+                        conditions: [{responsible: {equal: {value: user.id}}}],
+                        joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}]}},
+                    },
+                ],
+            },
+        };
+
+        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
+        qvm.set('variables', variables);
+        return this.bookingService.watchAll(qvm, true);
+    }
+
+    /**
+     * Impact members
+     */
+    public getRunningServices(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
+        const variables: BookingsQueryVariables = {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                responsible: {equal: {value: user.id}},
+                                status: {equal: {value: BookingStatus.booked}},
+                            },
+                        ],
+                        joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.self_approved], not: true}}}]}},
+                    },
+                ],
+            },
+        };
+
+        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
+        qvm.set('variables', variables);
+        return this.bookingService.watchAll(qvm, true);
+    }
+
+    public getPendingApplications(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
+        const variables: BookingsQueryVariables = {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                responsible: {equal: {value: user.id}},
+                                status: {equal: {value: BookingStatus.application}},
+                            },
+                        ],
+                        joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
+                    },
+                ],
+            },
+        };
+
+        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
+        qvm.set('variables', variables);
+        return this.bookingService.watchAll(qvm, true);
     }
 
 }

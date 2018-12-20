@@ -7,6 +7,7 @@ import { FormValidators } from '../../../shared/services/abstract-model.service'
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ValidatorFn } from '@angular/forms/src/directives/validators';
 import { ErrorStateMatcher } from '@angular/material';
+import { BookingService } from '../../../admin/bookings/services/booking.service';
 
 export class ConfirmPasswordStateMatcher implements ErrorStateMatcher {
     isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,8 +25,8 @@ export class ConfirmPasswordStateMatcher implements ErrorStateMatcher {
 })
 export class AnonymousUserService extends UserService {
 
-    constructor(apollo: Apollo, router: Router) {
-        super(apollo, router);
+    constructor(apollo: Apollo, router: Router, bookingService: BookingService) {
+        super(apollo, router, bookingService);
     }
 
     public getDefaultValues(): Literal {

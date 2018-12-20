@@ -8,6 +8,7 @@ import {
     BookableQueryVariables,
     BookablesQuery,
     BookablesQueryVariables,
+    BookingStatus,
     BookingType,
     CreateBookableMutation,
     CreateBookableMutationVariables,
@@ -21,6 +22,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { EnumService } from '../../../shared/services/enum.service';
 import { map } from 'rxjs/operators';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { LinkableObject } from '../../../shared/services/link-mutation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -41,13 +43,17 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
                 {
                     conditions: [
                         {
-                            bookingType: {in: {values: [BookingType.admin_approved, BookingType.admin_only, BookingType.mandatory]}},
+                            bookingType: {in: {values: [BookingType.self_approved], not: true}},
                             bookableTags: {have: {values: ['6007']}},
                         },
                     ],
                 },
             ],
         },
+    };
+
+    public static readonly adminApproved: BookablesQueryVariables = {
+        filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}]},
     };
 
     public static byTag(tagId): BookablesQueryVariables {

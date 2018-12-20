@@ -46,11 +46,11 @@ export class HierarchicSelectorService {
         }));
     }
 
-    private injectServicesInConfiguration(configurations): HierarchicConfiguration[] {
+    private injectServicesInConfiguration(configurations: HierarchicConfiguration[]): HierarchicConfiguration[] {
 
         for (const config of configurations) {
             if (!config.injectedService) {
-                config.injectedService = this.injector.get(config.service);
+                config.injectedService = this.injector.get<HierarchicConfiguration['service']>(config.service as any);
             }
         }
 

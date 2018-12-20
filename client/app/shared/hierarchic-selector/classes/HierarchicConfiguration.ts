@@ -6,7 +6,7 @@ export interface HierarchicConfiguration {
     /**
      * An AbstractModelService to be used to fetch items
      */
-    service: any;
+    service: AbstractModelService<any, any, any, any, any, any, any, any, any>;
 
     /**
      * A list of FilterConditionField name to filter items

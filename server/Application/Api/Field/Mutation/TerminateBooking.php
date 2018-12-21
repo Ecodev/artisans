@@ -6,7 +6,6 @@ namespace Application\Api\Field\Mutation;
 
 use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
-use Application\DBAL\Types\BookingStatusType;
 use Application\Model\Booking;
 use Application\Utility;
 use GraphQL\Type\Definition\Type;
@@ -33,7 +32,6 @@ abstract class TerminateBooking implements FieldInterface
                 // Booking can only be terminated once
                 if (!$booking->getEndDate()) {
                     $booking->setEndDate(Utility::getNow());
-                    $booking->setStatus(BookingStatusType::BOOKED);
                     if (@$args['comment']) {
                         $booking->setEndComment($args['comment']);
                     }

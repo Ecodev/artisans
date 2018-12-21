@@ -47,6 +47,7 @@ export class BookableTagService extends AbstractModelService<BookableTagQuery['b
     public getEmptyObject(): BookableTagInput {
         return {
             name: '',
+            color: '',
         };
     }
 

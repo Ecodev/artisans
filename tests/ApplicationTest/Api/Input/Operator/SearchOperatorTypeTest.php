@@ -37,9 +37,9 @@ class SearchOperatorTypeTest extends \PHPUnit\Framework\TestCase
     public function providerSearch(): array
     {
         return [
-            'search predefined fields' => [User::class, 'john', '((a.email LIKE :filter1 OR a.name LIKE :filter1))'],
-            'split words' => [User::class, 'john doe', '((a.email LIKE :filter1 OR a.name LIKE :filter1) AND (a.email LIKE :filter2 OR a.name LIKE :filter2))'],
-            'trimmed split words' => [User::class, '  foo   bar   ', '((a.email LIKE :filter1 OR a.name LIKE :filter1) AND (a.email LIKE :filter2 OR a.name LIKE :filter2))'],
+            'search predefined fields' => [User::class, 'john', '((a.email LIKE :filter1 OR a.name LIKE :filter1 OR a.locality LIKE :filter1))'],
+            'split words' => [User::class, 'john doe', '((a.email LIKE :filter1 OR a.name LIKE :filter1 OR a.locality LIKE :filter1) AND (a.email LIKE :filter2 OR a.name LIKE :filter2 OR a.locality LIKE :filter2))'],
+            'trimmed split words' => [User::class, '  foo   bar   ', '((a.email LIKE :filter1 OR a.name LIKE :filter1 OR a.locality LIKE :filter1) AND (a.email LIKE :filter2 OR a.name LIKE :filter2 OR a.locality LIKE :filter2))'],
         ];
     }
 }

@@ -19,7 +19,7 @@ return [
     [
         'errors' => [
             [
-                'message' => 'User "member" with role member is not allowed on resource "User#1000" with privilege "update"',
+                'message' => 'User "active member" with role member is not allowed on resource "User#1000" with privilege "update"',
                 'extensions' => [
                     'category' => 'Permissions',
                 ],

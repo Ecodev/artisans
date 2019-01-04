@@ -11,9 +11,9 @@ describe('LinkMutationService', () => {
         });
     });
 
-    const booking = {id : '456', __typename: 'Booking'};
-    const item = {id : '456', __typename: 'Bookable'};
-    const company = {id : '456', __typename: 'Company'};
+    const booking = {id: '456', __typename: 'Booking'};
+    const item = {id: '456', __typename: 'Bookable'};
+    const company = {id: '456', __typename: 'Company'};
 
     const expectBooking = {
         id: '456',
@@ -78,14 +78,22 @@ describe('LinkMutationService', () => {
     })));
 
     it('should throw for non-existing link mutation', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+        let error: any = null;
         tick();
-        expect(() => service.link(booking, company).subscribe()).toThrowError('API does not allow to link Company and Booking');
+        service.link(booking, company).subscribe(() => null, (e) => error = e);
         tick();
+
+        expect(error).not.toBeNull();
+        expect(error.message).toEqual('API does not allow to link Booking and Company');
     })));
 
     it('should throw for non-existing unlink mutation', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+        let error: any = null;
         tick();
-        expect(() => service.unlink(booking, company).subscribe()).toThrowError('API does not allow to unlink Company and Booking');
+        service.unlink(booking, company).subscribe(() => null, (e) => error = e);
         tick();
+
+        expect(error).not.toBeNull();
+        expect(error.message).toEqual('API does not allow to unlink Booking and Company');
     })));
 });

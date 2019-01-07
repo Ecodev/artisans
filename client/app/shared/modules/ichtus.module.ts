@@ -48,7 +48,7 @@ import { AddressComponent } from '../components/address/address.component';
         IconComponent,
         FormsModule,
         ReactiveFormsModule,
-        AddressComponent
+        AddressComponent,
     ],
 })
 export class IchtusModule {

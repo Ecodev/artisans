@@ -14,6 +14,7 @@ import {
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatSidenavModule,
     MatSnackBarModule,
     MatTableModule,
     MatTabsModule,
@@ -41,6 +42,7 @@ const list = [
     MatTabsModule,
     MatButtonToggleModule,
     MatExpansionModule,
+    MatSidenavModule,
 ];
 
 /**
@@ -48,8 +50,8 @@ const list = [
  * re-used in tests too
  */
 @NgModule({
-    imports: list,
-    exports: list,
+    imports: [...list],
+    exports: [...list],
 })
 export class MaterialModule {
 }

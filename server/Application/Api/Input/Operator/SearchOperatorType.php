@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Input\Operator;
 
+use Application\Api\Exception;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
 use GraphQL\Doctrine\Definition\Operator\AbstractOperator;
@@ -62,6 +63,9 @@ class SearchOperatorType extends AbstractOperator
             'name',
             'locality',
             'email',
+            'destination',
+            'startComment',
+            'endComment ',
         ];
 
         // Find most textual fields for the entity
@@ -73,6 +77,10 @@ class SearchOperatorType extends AbstractOperator
 
                 $fields[] = $field;
             }
+        }
+
+        if (!$fields) {
+            throw new Exception('Cannot find fields to search on for entity ' . $metadata->name);
         }
 
         return $fields;

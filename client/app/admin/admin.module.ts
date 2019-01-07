@@ -21,6 +21,7 @@ import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { BookingComponent } from './bookings/booking/booking.component';
 import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
+import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,6 @@ import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.com
         BookingComponent,
         BookableTagsComponent,
         BookableTagComponent,
-
     ],
     imports: [
         CommonModule,
@@ -48,6 +48,7 @@ import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.com
         MaterialModule,
         IchtusModule,
         AvatarModule,
+        SidenavModule,
     ],
 })
 export class AdminModule {

@@ -1,3 +1,5 @@
 :host {
-    padding: 20px 20px 100px 20px; // 100px to have a gap to prevent fab-button overlap
+    display: flex;
+    flex: 1;
+    flex-direction:column;
 }

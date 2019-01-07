@@ -1,94 +1,94 @@
-<div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start start">
-    <div fxFlex="300px" fxLayout="column">
+<app-sidenav-container name="adminMenu" [noScroll]="true" fxFlex>
+    <app-sidenav>
+        <div overflow class="margin">
+            <mat-accordion displayMode="flat">
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Carnet de sorties</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="/admin">En cours</a>
+                        <a mat-list-item routerLink="booking/self-approved">Toutes</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
 
-        <mat-accordion>
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Carnet de sorties</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="/admin">En cours</a>
-                    <a mat-list-item routerLink="booking/self-approved">Toutes</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Utilisateurs</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="member">Membres</a>
+                        <a mat-list-item routerLink="member/fresh">Nouveaux membres</a>
+                        <a mat-list-item routerLink="user">Individus</a>
+                        <a mat-list-item routerLink="user-tag">Tags</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Utilisateurs</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="member">Membres</a>
-                    <a mat-list-item routerLink="member/fresh">Nouveaux membres</a>
-                    <a mat-list-item routerLink="user">Individus</a>
-                    <a mat-list-item routerLink="user-tag">Tags</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Matériel nautique</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="bookable/sup">SUP</a>
+                        <a mat-list-item routerLink="bookable/planche">Planches</a>
+                        <a mat-list-item routerLink="bookable/canoe">Canoës</a>
+                        <a mat-list-item routerLink="bookable/kayak">Kayaks</a>
+                        <a mat-list-item routerLink="bookable/aviron">Aviron</a>
+                        <a mat-list-item routerLink="bookable/voile-legere">Voile légère</a>
+                        <a mat-list-item routerLink="bookable/voile-lestee">Voile lestée</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Matériel nautique</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="bookable/sup">SUP</a>
-                    <a mat-list-item routerLink="bookable/planche">Planches</a>
-                    <a mat-list-item routerLink="bookable/canoe">Canoës</a>
-                    <a mat-list-item routerLink="bookable/kayak">Kayaks</a>
-                    <a mat-list-item routerLink="bookable/aviron">Aviron</a>
-                    <a mat-list-item routerLink="bookable/voile-legere">Voile légère</a>
-                    <a mat-list-item routerLink="bookable/voile-lestee">Voile lestée</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Stockage</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="bookable/armoire">Armoires</a>
+                        <a mat-list-item routerLink="bookable/casier">Casiers</a>
+                        <a mat-list-item routerLink="bookable/flotteur">Flotteurs</a>
+                        <a mat-list-item routerLink="booking/storage-application">Demandes en attente</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Stockage</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="bookable/armoire">Armoires</a>
-                    <a mat-list-item routerLink="bookable/casier">Casiers</a>
-                    <a mat-list-item routerLink="bookable/flotteur">Flotteurs</a>
-                    <a mat-list-item routerLink="booking/storage-application">Demandes en attente</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Administration</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="bookable/services">Cotisations</a>
+                        <a mat-list-item routerLink="booking/other-application">Demandes en attente</a>
+                        <a mat-list-item routerLink="license">Certifications</a>
+                        <a mat-list-item routerLink="bookable-tag">Tags de réservables</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Administration</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="bookable/services">Cotisations</a>
-                    <a mat-list-item routerLink="booking/other-application">Demandes en attente</a>
-                    <a mat-list-item routerLink="license">Certifications</a>
-                    <a mat-list-item routerLink="bookable-tag">Tags de réservables</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Comptabilité</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="transactions">Transactions (todo)</a>
+                        <a mat-list-item routerLink="expense-claim">Notes de frais (todo)</a>
+                        <a mat-list-item routerLink="transactions/summary">Rapport comptable (todo)</a>
+                        <a mat-list-item routerLink="category">Catégories (todo)</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
 
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Comptabilité</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="transactions">Transactions (todo)</a>
-                    <a mat-list-item routerLink="expense-claim">Notes de frais (todo)</a>
-                    <a mat-list-item routerLink="transactions/summary">Rapport comptable (todo)</a>
-                    <a mat-list-item routerLink="category">Catégories (todo)</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
-
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Listes</mat-panel-title>
-                </mat-expansion-panel-header>
-                <mat-nav-list>
-                    <a mat-list-item routerLink="bookable">Réservables</a>
-                    <a mat-list-item routerLink="booking">Réservations</a>
-                </mat-nav-list>
-            </mat-expansion-panel>
-
-        </mat-accordion>
-
-    </div>
-    <div fxLayout="column" fxFlex overflow-x>
+                <mat-expansion-panel class="mat-elevation-z0">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>Listes</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="bookable">Réservables</a>
+                        <a mat-list-item routerLink="booking">Réservations</a>
+                    </mat-nav-list>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </app-sidenav>
+    <app-sidenav-content>
         <router-outlet></router-outlet>
-    </div>
-</div>
+    </app-sidenav-content>
+</app-sidenav-container>
+

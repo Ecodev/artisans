@@ -11,6 +11,7 @@
 @import '../app/dashboard/dashboard.theme';
 @import 'table';
 @import 'page-header';
+@import '../app/shared/modules/sidenav/sidenav.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -24,6 +25,7 @@
     @include table($theme);
     @include natural-search-theme($theme);
     @include page-header($theme);
+    @include sidenav($theme);
 }
 
 $mat-ichtus: (

@@ -1,6 +1,11 @@
 <div fxLayout="column" fxFlexFill>
 
-    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+
+        <button mat-icon-button *ngIf="menu" (click)="menu.toggle()">
+            <app-icon name="menu"></app-icon>
+        </button>
+
         <a routerLink="/" style="width:60px; height:60px">
             <img src="assets/ichtus.svg" style="width:60px; height:60px">
         </a>

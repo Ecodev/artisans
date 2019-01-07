@@ -80,9 +80,7 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
                 };
 
                 this.bookingService.create(newBooking).subscribe(createdBooking => {
-                    console.log('createdBooking', createdBooking);
                     this.linkService.link(createdBooking, bookable).subscribe(result => {
-                        console.log('result', result);
                         this.router.navigateByUrl('/account');
                     });
                 });

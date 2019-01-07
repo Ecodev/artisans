@@ -73,9 +73,7 @@ export class AccountComponent extends AbstractDetail<UserQuery['user'],
     }
 
     public addApplication(bookable) {
-        console.log('bookable', bookable);
         this.bookingService.createWithBookable(bookable, this.data.model).subscribe((newBooking) => {
-            console.log('newBooking', newBooking);
         });
     }
 

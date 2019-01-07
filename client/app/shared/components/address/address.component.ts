@@ -6,10 +6,8 @@ import { FormGroup } from '@angular/forms';
 export const markFormGroupTouched = (formGroup) => {
 
     (<any>Object).values(formGroup.controls).forEach(control => {
-        console.log(control.controls);
         control.markAsTouched();
         if (control.controls) {
-            console.log('a');
             markFormGroupTouched(control);
         }
     });

@@ -32,7 +32,6 @@ export class AppDataSource extends DataSource<any> {
             this.ngUnsubscribe = new Subject();
             this._data = new BehaviorSubject<any>({items: [], length: 0, pageSize: 0} as any);
             value.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-                console.log('res', res);
                 this.data = res;
             });
         } else {

@@ -38,7 +38,7 @@ abstract class Standard
         return [
             [
                 'name' => $plural,
-                'type' => _types()->get($shortName . 'Pagination'),
+                'type' => Type::nonNull(_types()->get($shortName . 'Pagination')),
                 'args' => $listArgs,
                 'resolve' => function ($root, array $args) use ($class): array {
                     if (($args['filters'] ?? false) && ($args['filter'] ?? false)) {
@@ -60,7 +60,7 @@ abstract class Standard
             ],
             [
                 'name' => $name,
-                'type' => _types()->getOutput($class),
+                'type' => Type::nonNull(_types()->getOutput($class)),
                 'args' => $singleArgs,
                 'resolve' => function ($root, array $args): ?AbstractModel {
                     $object = $args['id']->getEntity();

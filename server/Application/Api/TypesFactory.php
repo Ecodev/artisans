@@ -23,6 +23,8 @@ class TypesFactory
             \Application\Api\Enum\RelationshipType::class,
             \Application\Api\Enum\BillingTypeType::class,
             \Application\Api\Enum\DoorType::class,
+            \Application\Api\Enum\ExpenseClaimStatusType::class,
+            \Application\Api\Enum\MessageTypeType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\MutationType::class,
             \Application\Api\Output\GlobalPermissionsListType::class,

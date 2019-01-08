@@ -1,12 +1,13 @@
 START TRANSACTION;
 
-REPLACE INTO user (id, login, name, email, password, role, welcome_session_date) VALUES
-(1000, 'administrator', 'administrator', 'administrator@example.com', MD5('administrator'), 'administrator', '2018-01-01 12:00:00'),
-(1001, 'responsible', 'responsible', 'responsible@example.com', MD5('responsible'), 'responsible', '2018-01-01 12:00:00'),
-(1002, 'member', 'active member', 'member@example.com', MD5('member'), 'member', '2018-01-01 12:00:00'),
-(1003, 'booking_only', 'booking_only', 'booking_only@example.com', MD5('booking_only'), 'booking_only', '2018-01-01 12:00:00'),
-(1004, 'inactive', 'inactive', 'inactive@example.com', MD5('inactive'), 'inactive', NULL),
-(1005, 'fresh', 'fresh member (inactive)', 'fresh@example.com', MD5('fresh'), 'inactive', NULL);
+REPLACE INTO user (id, login, name, email, password, role, family_relationship, responsible_id, welcome_session_date) VALUES
+(1000, 'administrator', 'administrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'householder', NULL, '2018-01-01 12:00:00'),
+(1001, 'responsible', 'responsible', 'responsible@example.com', MD5('responsible'), 'responsible', 'householder', NULL, '2018-01-01 12:00:00'),
+(1002, 'member', 'active member', 'member@example.com', MD5('member'), 'member', 'householder', NULL, '2018-01-01 12:00:00'),
+(1003, 'booking_only', 'booking_only', 'booking_only@example.com', MD5('booking_only'), 'booking_only', 'householder', NULL, '2018-01-01 12:00:00'),
+(1004, 'inactive', 'inactive', 'inactive@example.com', MD5('inactive'), 'inactive', 'householder', NULL, NULL),
+(1005, 'child', 'child', 'child@example.com', MD5('child'), 'member', 'child', 1002, NULL),
+(1006, 'fresh', 'fresh member (inactive)', 'fresh@example.com', MD5('fresh'), 'inactive', NULL, NULL, NULL);
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');
@@ -71,5 +72,39 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 
 REPLACE INTO image (id, bookable_id, filename, width, height) VALUES
 (5000, 3000,'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg',  500, 374);
+
+REPLACE INTO account (id, user_id, balance, iban, name) VALUES
+(6000, 1002, 100.00, 'CH1909000000177406305', 'Compte de membre'),
+(6001, NULL, 1000.00, 'CH0980241000004014701', 'Raiffeisen'),
+(6002, NULL, 500.00, NULL, 'Caisse');
+
+REPLACE INTO expense_claim (id, user_id, amount, status, name, description, remarks) VALUES
+(7000, 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', ''),
+(7001, 1002, 100.00, 'processed', 'flyers', 'Cighelio', '');
+
+REPLACE INTO transaction (id, transactionDate, amount, account_id, name, remarks) VALUES
+(8000, '2017-12-06', 360.00, 6001, 'Cours nautique', 'Cours 190'),
+(8001, '2017-12-29', -11.15, 6001, 'Comité', 'Photocopies'),
+(8002, '2017-03-10', 90, 6001, 'Cotisation 2017', ''),
+(8003, '2017-03-15', 90, 6002, 'Cotisation 2017', ''),
+(8004, '2017-04-01', 100.00, 6000, 'Remboursement flyers', '');
+
+REPLACE INTO accounting_document (id, expense_claim_id, filename) VALUES
+(9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf');
+
+REPLACE INTO category (id, name) VALUES
+(10000, 'Administratif'),
+(10001, 'Voilier'),
+(10002, 'SUP'),
+(10003, 'NFT'),
+(10004, 'Entretien');
+
+REPLACE INTO category_category (category_source, category_target) VALUES
+(10001, 10004),
+(10002, 10004),
+(10003, 10004);
+
+REPLACE INTO message (id, recipient_id, type, date_sent, subject, body) VALUES
+(11001, 1002, 'monthly_reminder', '2019-01-01 12:00:00', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte  Ichtus présente un solde négatif');
 
 COMMIT;

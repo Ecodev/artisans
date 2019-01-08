@@ -4,15 +4,23 @@ declare(strict_types=1);
 
 namespace Application\Acl;
 
+use Application\Acl\Assertion\IsCreator;
 use Application\Acl\Assertion\IsMyself;
+use Application\Acl\Assertion\IsOwner;
 use Application\Model\AbstractModel;
+use Application\Model\Account;
+use Application\Model\AccountingDocument;
 use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
 use Application\Model\BookableTag;
 use Application\Model\Booking;
+use Application\Model\Category;
 use Application\Model\Country;
+use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
+use Application\Model\Message;
+use Application\Model\Transaction;
 use Application\Model\User;
 use Application\Model\UserTag;
 use Doctrine\Common\Util\ClassUtils;
@@ -45,6 +53,12 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $user = new ModelResource(User::class);
         $userTag = new ModelResource(UserTag::class);
         $country = new ModelResource(Country::class);
+        $account = new ModelResource(Account::class);
+        $accountingDocument = new ModelResource(AccountingDocument::class);
+        $category = new ModelResource(Category::class);
+        $expenseClaim = new ModelResource(ExpenseClaim::class);
+        $message = new ModelResource(Message::class);
+        $transaction = new ModelResource(Transaction::class);
 
         $this->addResource($bookable);
         $this->addResource($bookableMetadata);
@@ -55,17 +69,27 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($user);
         $this->addResource($userTag);
         $this->addResource($country);
+        $this->addResource($account);
+        $this->addResource($accountingDocument);
+        $this->addResource($category);
+        $this->addResource($expenseClaim);
+        $this->addResource($message);
+        $this->addResource($transaction);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license, $category], ['read']);
         $this->allow(User::ROLE_ANONYMOUS, $user, ['create']);
 
         $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['create', 'read', 'update']);
 
         $this->allow(User::ROLE_MEMBER, $user, ['read']);
         $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsMyself());
+        $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['create']);
+        $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsCreator());
+        $this->allow(User::ROLE_MEMBER, $message, ['read'], new IsOwner());
 
+        $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
         $this->allow(User::ROLE_RESPONSIBLE, $user, ['update']);
-        $this->allow(User::ROLE_RESPONSIBLE, $userTag, ['create', 'read', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$userTag, $transaction], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_RESPONSIBLE, [$bookable, $bookableMetadata, $bookableTag, $image, $license], ['create', 'update', 'delete']);
     }
 

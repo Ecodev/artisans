@@ -6,6 +6,7 @@
 /data/cache/DoctrineORMModule/*
 /data/cache/images/*
 /data/images/
+/data/accounting/
 !/data/images/dw4jV3zYSPsqE2CB8BcP8ABD0.jpg
 /*.backup.sql.gz
 /htdocs/favicon.ico

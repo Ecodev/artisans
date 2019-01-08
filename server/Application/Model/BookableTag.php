@@ -50,7 +50,7 @@ class BookableTag extends AbstractModel
     /**
      * Add bookable
      *
-     * @param bookable $bookable
+     * @param Bookable $bookable
      */
     public function addBookable(Bookable $bookable): void
     {
@@ -63,7 +63,7 @@ class BookableTag extends AbstractModel
     /**
      * Remove bookable
      *
-     * @param bookable $bookable
+     * @param Bookable $bookable
      */
     public function removeBookable(Bookable $bookable): void
     {

@@ -16,15 +16,25 @@ use Psr\Http\Message\UploadedFileInterface;
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Application\Repository\ImageRepository")
  */
-class Image extends AbstractModel
+class Image extends AbstractFile
 {
-    private const IMAGE_PATH = 'data/images/';
+    /**
+     * @const string BASE_PATH where the files are stored in the server
+     */
+    const BASE_PATH = 'data/images/';
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=2000)
+     * @const array ACCEPTED_MIME_TYPES
      */
-    private $filename = '';
+    const ACCEPTED_MIME_TYPES = [
+    'image/bmp',
+    'image/gif',
+    'image/jpeg',
+    'image/pjpeg',
+    'image/png',
+    'image/svg+xml',
+    'image/webp',
+    ];
 
     /**
      * @var int
@@ -46,78 +56,6 @@ class Image extends AbstractModel
      * })
      */
     private $bookable;
-
-    /**
-     * Set the image file
-     *
-     * @param UploadedFileInterface $file
-     *
-     * @throws \Exception
-     */
-    public function setFile(UploadedFileInterface $file): void
-    {
-        $this->generateUniqueFilename($file->getClientFilename());
-
-        $path = $this->getPath();
-        if (file_exists($path)) {
-            throw new \Exception('A file already exist with the same name: ' . $this->getFilename());
-        }
-        $file->moveTo($path);
-
-        $this->validateMimeType();
-        $this->readFileInfo();
-    }
-
-    /**
-     * Set filename (without path)
-     *
-     * @API\Exclude
-     *
-     * @param string $filename
-     */
-    public function setFilename(string $filename): void
-    {
-        $this->filename = $filename;
-    }
-
-    /**
-     * Get filename (without path)
-     *
-     * @API\Exclude
-     *
-     * @return string
-     */
-    public function getFilename(): string
-    {
-        return $this->filename;
-    }
-
-    /**
-     * Get absolute path to image on disk
-     *
-     * @API\Exclude
-     *
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return realpath('.') . '/' . self::IMAGE_PATH . $this->getFilename();
-    }
-
-    /**
-     * Automatically called by Doctrine when the object is deleted
-     * Is called after database update because we can have issues on remove operation (like integrity test)
-     * and it's preferable to keep a related file on drive before removing it definitely.
-     *
-     * @ORM\PostRemove
-     */
-    public function deleteFile(): void
-    {
-        $path = $this->getPath();
-        if (file_exists($path) && is_file($path) && $this->getFilename() !== 'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg') {
-            unlink($path);
-        }
-    }
 
     /**
      * Get image width
@@ -164,43 +102,16 @@ class Image extends AbstractModel
     }
 
     /**
-     * Generate unique filename while trying to preserve original extension
+     * Set the file
      *
-     * @param string $originalFilename
-     */
-    private function generateUniqueFilename(string $originalFilename): void
-    {
-        $extension = pathinfo($originalFilename, PATHINFO_EXTENSION);
-        $filename = uniqid() . ($extension ? '.' . $extension : '');
-        $this->setFilename($filename);
-    }
-
-    /**
-     * Delete file and throw exception if MIME type is invalid
+     * @param UploadedFileInterface $file
      *
      * @throws \Exception
      */
-    private function validateMimeType(): void
+    public function setFile(UploadedFileInterface $file): void
     {
-        $path = $this->getPath();
-        $mime = mime_content_type($path);
-
-        // Validate image mimetype
-        $acceptedMimeTypes = [
-            'image/bmp',
-            'image/gif',
-            'image/jpeg',
-            'image/pjpeg',
-            'image/png',
-            'image/svg+xml',
-            'image/webp',
-        ];
-
-        if (!in_array($mime, $acceptedMimeTypes, true)) {
-            unlink($path);
-
-            throw new \Exception('Invalid file type of: ' . $mime);
-        }
+        parent::setFile($file);
+        $this->readFileInfo();
     }
 
     /**

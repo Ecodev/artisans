@@ -49,7 +49,7 @@ class User extends AbstractModel
 
     /**
      * Set currently logged in user
-     * WARNING: this method should only be called from \Application\Authentication\AuthenticationListener
+     * WARNING: this method should only be called from \Application\Autgtfdrhentication\AuthenticationListener
      *
      * @param \Application\Model\User $user
      */
@@ -200,6 +200,28 @@ class User extends AbstractModel
     private $userTags;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="ExpenseClaim", mappedBy="user")
+     */
+    private $expenseClaims;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient")
+     */
+    private $messages;
+
+    /**
+     * @var Account
+     *
+     * @ORM\OneToOne(targetEntity="Account", inversedBy="user")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(onDelete="SET NULL")
+     * })
+     */
+    private $account;
+
+    /**
      * Constructor
      *
      * @param string $role role for new user
@@ -210,6 +232,8 @@ class User extends AbstractModel
         $this->bookings = new ArrayCollection();
         $this->licenses = new ArrayCollection();
         $this->userTags = new ArrayCollection();
+        $this->expenseClaims = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
 
     /**
@@ -560,7 +584,7 @@ class User extends AbstractModel
     }
 
     /**
-     * Notify the user that it a userTag was removed.
+     * Notify the user that a userTag was removed.
      * This should only be called by UserTag::removeUser()
      *
      * @param UserTag $userTag
@@ -726,5 +750,102 @@ class User extends AbstractModel
     public function setBillingType(string $billingType): void
     {
         $this->billingType = $billingType;
+    }
+
+    /**
+     * Get the user transaction account
+     *
+     * @return null|Account
+     */
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    /**
+     * Assign a transaction account to the user
+     *
+     * @param null|Account $account
+     */
+    public function setAccount(?Account $account): void
+    {
+        $previousAccount = $this->getAccount();
+
+        if ($account) {
+            if ($this->getFamilyRelationship() !== RelationshipType::HOUSEHOLDER) {
+                throw new Exception('Only the house holder can have an account');
+            }
+            $account->userAdded($this);
+        }
+
+        if ($previousAccount) {
+            $previousAccount->setUser(null);
+        }
+
+        $this->account = $account;
+    }
+
+    /**
+     * Get messages sent to the user
+     *
+     * @return Collection
+     */
+    public function getMessages(): Collection
+    {
+        return $this->messages;
+    }
+
+    /**
+     * Notify the user that it has a new message
+     * This should only be called by Message::setRecipient()
+     *
+     * @param Message $message
+     */
+    public function messageAdded(Message $message): void
+    {
+        $this->messages->add($message);
+    }
+
+    /**
+     * Notify the user that a message was removed
+     * This should only be called by Message::setRecipient()
+     *
+     * @param Message $message
+     */
+    public function messageRemoved(Message $message): void
+    {
+        $this->messages->removeElement($message);
+    }
+
+    /**
+     * Get expense claims submitted by the user
+     *
+     * @return Collection
+     */
+    public function getExpenseClaims(): Collection
+    {
+        return $this->expenseClaims;
+    }
+
+    /**
+     * Notify the user when a new expense claim was added
+     * This should only be called by ExpenseClaim::setUser()
+     *
+     * @param ExpenseClaim $expense
+     */
+    public function expenseClaimAdded(ExpenseClaim $expense): void
+    {
+        $this->expenseClaims->add($expense);
+    }
+
+    /**
+     * Notify the user that when an expense claim was removed
+     * This should only be called by ExpenseClaim::setUser()
+     *
+     * @param ExpenseClaim $expense
+     */
+    public function expenseClaimRemoved(ExpenseClaim $expense): void
+    {
+        $this->expenseClaims->removeElement($expense);
     }
 }

@@ -14,7 +14,7 @@ trait HasRemarks
     private $remarks = '';
 
     /**
-     * Set remarks for internal use
+     * Set remarks
      *
      * @param string $remarks
      */
@@ -24,7 +24,7 @@ trait HasRemarks
     }
 
     /**
-     * Get remarks for internal use
+     * Get remarks
      *
      * @return string
      */

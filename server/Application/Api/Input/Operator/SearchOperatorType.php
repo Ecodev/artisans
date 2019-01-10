@@ -60,6 +60,8 @@ class SearchOperatorType extends AbstractOperator
     protected function getSearchableFields(UniqueNameFactory $uniqueNameFactory, ClassMetadata $metadata, QueryBuilder $queryBuilder, string $alias): array
     {
         $whitelistedFields = [
+            'firstName',
+            'lastName',
             'name',
             'locality',
             'email',

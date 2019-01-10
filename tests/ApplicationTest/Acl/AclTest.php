@@ -16,7 +16,7 @@ class AclTest extends TestCase
         $user = new User();
 
         $ownerMember = new User();
-        $ownerMember->setName('Sarah');
+        $ownerMember->setLogin('sarah');
         User::setCurrent($ownerMember);
         $user->timestampCreation();
 
@@ -26,16 +26,16 @@ class AclTest extends TestCase
 
         User::setCurrent($ownerMember);
         self::assertFalse($acl->isCurrentUserAllowed($user, 'update'), 'student cannot update even if owner');
-        self::assertSame('User "Sarah" with role member is not allowed on resource "User#" with privilege "update"', $acl->getLastDenialMessage());
+        self::assertSame('User "sarah" with role member is not allowed on resource "User#" with privilege "update"', $acl->getLastDenialMessage());
 
         $otherMember = new User();
-        $otherMember->setName('John');
+        $otherMember->setLogin('john');
         User::setCurrent($otherMember);
         self::assertFalse($acl->isCurrentUserAllowed($user, 'update'), 'other user cannot update');
-        self::assertSame('User "John" with role member is not allowed on resource "User#" with privilege "update"', $acl->getLastDenialMessage());
+        self::assertSame('User "john" with role member is not allowed on resource "User#" with privilege "update"', $acl->getLastDenialMessage());
 
         $administrator = new User(User::ROLE_ADMINISTRATOR);
-        $administrator->setName('Jane');
+        $administrator->setLogin('jane');
         User::setCurrent($administrator);
         self::assertTrue($acl->isCurrentUserAllowed($user, 'update'), 'admin can do anything');
         self::assertNull($acl->getLastDenialMessage());

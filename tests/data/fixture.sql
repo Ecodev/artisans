@@ -1,13 +1,13 @@
 START TRANSACTION;
 
-REPLACE INTO user (id, login, name, email, password, role, family_relationship, responsible_id, welcome_session_date) VALUES
-(1000, 'administrator', 'administrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'householder', NULL, '2018-01-01 12:00:00'),
-(1001, 'responsible', 'responsible', 'responsible@example.com', MD5('responsible'), 'responsible', 'householder', NULL, '2018-01-01 12:00:00'),
-(1002, 'member', 'active member', 'member@example.com', MD5('member'), 'member', 'householder', NULL, '2018-01-01 12:00:00'),
-(1003, 'booking_only', 'booking_only', 'booking_only@example.com', MD5('booking_only'), 'booking_only', 'householder', NULL, '2018-01-01 12:00:00'),
-(1004, 'inactive', 'inactive', 'inactive@example.com', MD5('inactive'), 'inactive', 'householder', NULL, NULL),
-(1005, 'child', 'child', 'child@example.com', MD5('child'), 'member', 'child', 1002, NULL),
-(1006, 'fresh', 'fresh member (inactive)', 'fresh@example.com', MD5('fresh'), 'inactive', NULL, NULL, NULL);
+REPLACE INTO user (id, login, first_name, last_name, email, password, role, family_relationship, responsible_id, welcome_session_date) VALUES
+(1000, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'householder', NULL, '2018-01-01 12:00:00'),
+(1001, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'householder', NULL, '2018-01-01 12:00:00'),
+(1002, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'householder', NULL, '2018-01-01 12:00:00'),
+(1003, 'booking_only', 'Booking', 'Only', 'booking_only@example.com', MD5('booking_only'), 'booking_only', 'householder', NULL, '2018-01-01 12:00:00'),
+(1004, 'inactive', 'Ina', 'Ctive', 'inactive@example.com', MD5('inactive'), 'inactive', 'householder', NULL, NULL),
+(1005, 'child', 'En', 'Fant', 'child@example.com', MD5('child'), 'member', 'child', 1002, NULL),
+(1006, 'fresh', 'Fresh', 'Member (inactive)', 'fresh@example.com', MD5('fresh'), 'inactive', NULL, NULL, NULL);
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');
@@ -82,12 +82,13 @@ REPLACE INTO expense_claim (id, user_id, amount, status, name, description, rema
 (7000, 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', ''),
 (7001, 1002, 100.00, 'processed', 'flyers', 'Cighelio', '');
 
-REPLACE INTO transaction (id, transactionDate, amount, account_id, name, remarks) VALUES
-(8000, '2017-12-06', 360.00, 6001, 'Cours nautique', 'Cours 190'),
-(8001, '2017-12-29', -11.15, 6001, 'Comité', 'Photocopies'),
-(8002, '2017-03-10', 90, 6001, 'Cotisation 2017', ''),
-(8003, '2017-03-15', 90, 6002, 'Cotisation 2017', ''),
-(8004, '2017-04-01', 100.00, 6000, 'Remboursement flyers', '');
+REPLACE INTO transaction (id, transactionDate, amount, account_id, name, remarks, bookable_id) VALUES
+(8000, '2017-12-06', 360.00, 6001, 'Cours nautique', 'Cours 190', NULL),
+(8001, '2017-12-29', -11.15, 6001, 'Comité', 'Photocopies', NULL),
+(8002, '2017-03-10', 90, 6001, 'Cotisation 2017', '', NULL),
+(8003, '2017-03-15', 90, 6002, 'Cotisation 2017', '', NULL),
+(8004, '2017-04-01', 100.00, 6000, 'Remboursement flyers', '', NULL),
+(8005, '2018-03-01', -50.00, 6002, 'Location casier 1012', '', 3003);
 
 REPLACE INTO accounting_document (id, expense_claim_id, filename) VALUES
 (9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf');
@@ -104,7 +105,12 @@ REPLACE INTO category_category (category_source, category_target) VALUES
 (10002, 10004),
 (10003, 10004);
 
-REPLACE INTO message (id, recipient_id, type, date_sent, subject, body) VALUES
-(11001, 1002, 'monthly_reminder', '2019-01-01 12:00:00', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte  Ichtus présente un solde négatif');
+REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, subject, body) VALUES
+(11001, 1000, 1000, 1002, 'monthly_reminder', '2019-01-01 12:00:00', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
+(11002, 1001, 1001, 1005, 'yearly_reminder', '2019-03-01 12:00:00', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
+
+REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
+(12000, 1000, 1000, 'Moniteur voile', '0000FF'),
+(12001, 1000, 1000, 'Moniteur SUP', 'FF0000');
 
 COMMIT;

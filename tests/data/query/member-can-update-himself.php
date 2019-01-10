@@ -15,7 +15,8 @@ return [
         }',
         'variables' => [
             'inputUser' => [
-                'name' => 'test name',
+                'firstName' => 'test',
+                'lastName' => 'name',
                 'email' => 'test@example.com',
                 'role' => User::ROLE_MEMBER,
             ],

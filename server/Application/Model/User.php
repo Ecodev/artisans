@@ -11,7 +11,6 @@ use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
 use Application\Traits\HasDoorAccess;
-use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
 use Application\Traits\HasResponsible;
 use Application\Utility;
@@ -36,7 +35,6 @@ class User extends AbstractModel
     const ROLE_RESPONSIBLE = 'responsible';
     const ROLE_ADMINISTRATOR = 'administrator';
 
-    use HasName;
     use HasResponsible;
     use HasDoorAccess;
     use HasRemarks;
@@ -77,6 +75,18 @@ class User extends AbstractModel
      * @ORM\Column(type="string", length=50, unique=true)
      */
     private $login;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=191)
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=191)
+     */
+    private $lastName;
 
     /**
      * @var null|string
@@ -257,7 +267,7 @@ class User extends AbstractModel
      */
     public function getLogin(): string
     {
-        return $this->login;
+        return (string) $this->login;
     }
 
     /**
@@ -286,6 +296,56 @@ class User extends AbstractModel
     public function getPassword(): ?string
     {
         return $this->password;
+    }
+
+    /**
+     * Set first name
+     *
+     * @param string $firstName
+     */
+    public function setFirstName($firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * Get first name
+     *
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return (string) $this->firstName;
+    }
+
+    /**
+     * Set last name
+     *
+     * @param string $lastName
+     */
+    public function setLastName($lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Get last name
+     *
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return (string) $this->lastName;
+    }
+
+    /**
+     * Get full name
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return implode(' ', [$this->getFirstName(), $this->getLastName()]);
     }
 
     /**

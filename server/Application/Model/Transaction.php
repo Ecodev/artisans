@@ -30,6 +30,16 @@ class Transaction extends AbstractModel
     private $account;
 
     /**
+     * @var Bookable
+     *
+     * @ORM\ManyToOne(targetEntity="Bookable", inversedBy="transactions")
+     * @ORM\JoinColumns({
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * })
+     */
+    private $bookable;
+
+    /**
      * @var float
      *
      * @ORM\Column(type="decimal", precision=7, scale=2)
@@ -91,6 +101,20 @@ class Transaction extends AbstractModel
     public function getAccount(): Account
     {
         return $this->account;
+    }
+
+    /**
+     * Set bookable
+     *
+     * @param null|Bookable $bookable
+     */
+    public function setBookable(?Bookable $bookable): void
+    {
+        if ($this->bookable) {
+            $this->bookable->transactionRemoved($this);
+        }
+        $this->bookable = $bookable;
+        $this->bookable && $this->bookable->transactionAdded($this);
     }
 
     /**

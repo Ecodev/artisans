@@ -6,7 +6,7 @@ namespace Application\Acl;
 
 use Application\Acl\Assertion\IsCreator;
 use Application\Acl\Assertion\IsMyself;
-use Application\Acl\Assertion\IsOwner;
+use Application\Acl\Assertion\IsRecipient;
 use Application\Model\AbstractModel;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
@@ -85,7 +85,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsMyself());
         $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['create']);
         $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsCreator());
-        $this->allow(User::ROLE_MEMBER, $message, ['read'], new IsOwner());
+        $this->allow(User::ROLE_MEMBER, $message, ['read'], new IsRecipient());
 
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
         $this->allow(User::ROLE_RESPONSIBLE, $user, ['update']);
@@ -141,7 +141,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
             $resource = $resource->getName();
         }
 
-        $user = User::getCurrent() ? 'User "' . User::getCurrent()->getName() . '"' : 'Non-logged user';
+        $user = User::getCurrent() ? 'User "' . User::getCurrent()->getLogin() . '"' : 'Non-logged user';
         $privilege = $privilege === null ? 'NULL' : $privilege;
 
         return "$user with role $role is not allowed on resource \"$resource\" with privilege \"$privilege\"";

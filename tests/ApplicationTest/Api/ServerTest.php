@@ -34,7 +34,9 @@ class ServerTest extends TestCase
         $server = new Server($debug);
 
         // Execute query
-        $actual = $server->execute($request)->toArray();
+        $result = $server->execute($request);
+
+        $actual = $this->resultToArray($result, $debug);
 
         if ($debug) {
             ve($actual);
@@ -69,5 +71,33 @@ class ServerTest extends TestCase
         }
 
         return $data;
+    }
+
+    /**
+     * @param ExecutionResult|ExecutionResult[] $result
+     * @param bool $debug
+     *
+     * @return array
+     */
+    private function resultToArray($result, bool $debug): array
+    {
+        $isSingle = !is_array($result);
+        if ($isSingle) {
+            $result = [$result];
+        }
+
+        foreach ($result as &$one) {
+            $one = $one->toArray();
+            if ($debug) {
+                ve($one);
+                unset($one['errors'][0]['trace']);
+            }
+        }
+
+        if ($isSingle) {
+            $result = reset($result);
+        }
+
+        return $result;
     }
 }

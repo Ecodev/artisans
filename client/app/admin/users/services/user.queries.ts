@@ -1,6 +1,35 @@
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
 
+// Fragment for single display usage. Too much data for listings, and unused fields for mutations.
+export const userFieldsFragment = gql`
+    fragment userFields on User {
+        id
+        login
+        firstName
+        lastName
+        name
+        email
+        birthday
+        phone
+        postcode
+        street
+        locality
+        familyRelationship
+        country {
+            id
+            name
+        }
+        creator {
+            ...userMeta
+        }
+        updateDate
+        updater {
+            ...userMeta
+        }
+    }
+`;
+
 export const usersQuery = gql`
     query Users($filter: UserFilter, $sorting: [UserSorting!], $pagination: PaginationInput) {
         users(filter: $filter, sorting: $sorting, pagination: $pagination) {
@@ -8,42 +37,24 @@ export const usersQuery = gql`
                 id
                 login
                 name
-                activeFrom
+                familyRelationship
             }
             pageSize
             pageIndex
             length
         }
-    }`;
+    }
+`;
 
 export const userQuery = gql`
     query User($id: UserID!) {
         user(id: $id) {
-            id
-            login
-            name
-            email
-            activeUntil
-            activeFrom
-            birthday
-            phone
-            postcode
-            street
-            locality
-            country {
-                id
-                name
-            }
-            creator {
-                ...userMeta
-            }
-            updateDate
-            updater {
-                ...userMeta
-            }
+            ...userFields
         }
     }
-${userMetaFragment}`;
+    ${userFieldsFragment}
+    ${userMetaFragment}
+`;
 
 export const updateUserMutation = gql`
     mutation UpdateUser($id: UserID!, $input: UserPartialInput!) {
@@ -79,42 +90,20 @@ export const logoutMutation = gql`
 export const loginMutation = gql`
     mutation Login($login: Login!, $password: String!) {
         login(login:$login, password:$password) {
-            id
-            login
-            name
-            email
-            phone
-            birthday
-            creator {
-                ...userMeta
-            }
-            updateDate
-            updater {
-                ...userMeta
-            }
+            ...userFields
         }
     }
+    ${userFieldsFragment}
     ${userMetaFragment}
 `;
 
 export const currentUserForProfileQuery = gql`
     query CurrentUserForProfile {
         viewer {
-            id
-            login
-            name
-            email
-            phone
-            birthday
-            creator {
-                ...userMeta
-            }
-            updateDate
-            updater {
-                ...userMeta
-            }
+            ...userFields
         }
     }
+    ${userFieldsFragment}
     ${userMetaFragment}
 `;
 

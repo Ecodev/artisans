@@ -9,8 +9,6 @@ import { BookableComponent } from './bookables/bookable/bookable.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
 import { StampComponent } from './shared/components/stamp/stamp.component';
-import { EnumPipe } from '../shared/pipes/enum.pipe';
-import { CapitalizePipe } from '../shared/pipes/capitalize.pipe';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
 import { LicenseComponent } from './licenses/license/license.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
@@ -32,8 +30,6 @@ import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
         UsersComponent,
         UserComponent,
         StampComponent,
-        EnumPipe,
-        CapitalizePipe,
         LicensesComponent,
         LicenseComponent,
         UserTagsComponent,

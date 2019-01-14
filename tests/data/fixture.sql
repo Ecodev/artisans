@@ -9,6 +9,12 @@ REPLACE INTO user (id, login, first_name, last_name, email, password, role, fami
 (1005, 'child', 'En', 'Fant', 'child@example.com', MD5('child'), 'member', 'child', 1002, NULL),
 (1006, 'fresh', 'Fresh', 'Member (inactive)', 'fresh@example.com', MD5('fresh'), 'inactive', NULL, NULL, NULL);
 
+-- Family members account
+REPLACE INTO user (id, responsible_id, login, first_name, last_name, email, password, role, family_relationship) VALUES
+(1006, 1002, 'conjoint', 'Con', 'Joint', 'conjoint@example.com', MD5('conjoint'), 'booking_only', 'partner'),
+(1007, 1002, 'fils', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'booking_only', 'child'),
+(1008, 1002, 'fille', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'booking_only', 'child');
+
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');
 

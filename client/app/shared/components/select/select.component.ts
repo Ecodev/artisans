@@ -186,9 +186,8 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     }
 
     public onInnerFormChange() {
-        const value = this.formCtrl.value;
-        if (value && !this.optionRequired) {
-            this.propagateValue(value);
+        if (this.formCtrl.value && !this.optionRequired) {
+            this.propagateValue(this.formCtrl.value);
         }
     }
 

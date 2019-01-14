@@ -142,9 +142,11 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
     public getFormValidators(): FormValidators {
         return {
-            name: [Validators.required, Validators.maxLength(100)],
+            firstName: [Validators.required, Validators.maxLength(100)],
+            lastName: [Validators.required, Validators.maxLength(100)],
             login: [Validators.required],
             email: [Validators.required],
+            familyRelationship: [Validators.required],
         };
     }
 

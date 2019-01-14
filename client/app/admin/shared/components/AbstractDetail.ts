@@ -51,12 +51,13 @@ export class AbstractDetail<Tone,
     protected postCreate(res: any) {
     }
 
-    private initForm() {
+    protected initForm() {
         const formConfig = this.service.getFormConfig(this.data.model);
         this.form = new FormGroup(formConfig, {validators: this.service.getFormGroupValidators()});
     }
 
     public update(): void {
+
         if (!this.data.model.id) {
             return;
         }

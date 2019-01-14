@@ -1,0 +1,13 @@
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let familyMember of familyMembers">
+        <mat-expansion-panel-header>
+            <mat-panel-title> {{ familyMember?.name || 'Nouveau'}}</mat-panel-title>
+            <mat-panel-description>{{ familyMember.familyRelationship | enum: 'Relationship' | capitalize | async }}
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-family-member [user]="familyMember"></app-family-member>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<button mat-raised-button color="primary" (click)="add()" class="margin-top">Ajouter</button>
+

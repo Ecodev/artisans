@@ -14,17 +14,23 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddressComponent } from '../components/address/address.component';
+import { EnumPipe } from '../pipes/enum.pipe';
+import { CapitalizePipe } from '../pipes/capitalize.pipe';
+import { SelectEnumComponent } from '../components/select-enum/select-enum.component';
 
 @NgModule({
     declarations: [
         RelationsComponent,
         SelectComponent,
+        SelectEnumComponent,
         ColumnsPickerComponent,
         ColumnsPickerColumnDirective,
         TableButtonComponent,
         FixedButtonComponent,
         DetailFixedButtonComponent,
         AddressComponent,
+        EnumPipe,
+        CapitalizePipe
     ],
     imports: [
         CommonModule,
@@ -38,6 +44,7 @@ import { AddressComponent } from '../components/address/address.component';
     exports: [
         RelationsComponent,
         SelectComponent,
+        SelectEnumComponent,
         ColumnsPickerComponent,
         ColumnsPickerColumnDirective,
         TableButtonComponent,
@@ -49,6 +56,8 @@ import { AddressComponent } from '../components/address/address.component';
         FormsModule,
         ReactiveFormsModule,
         AddressComponent,
+        EnumPipe,
+        CapitalizePipe
     ],
 })
 export class IchtusModule {

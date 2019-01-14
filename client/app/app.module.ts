@@ -58,7 +58,7 @@ registerLocaleData(localeFRCH);
         HttpClientModule,
         AvatarModule.forRoot(),
         HttpBatchLinkModule,
-        HierarchicSelectorModule
+        HierarchicSelectorModule,
     ],
     providers: [
         MatIconRegistry,

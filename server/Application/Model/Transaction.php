@@ -34,7 +34,7 @@ class Transaction extends AbstractModel
      *
      * @ORM\ManyToOne(targetEntity="Bookable", inversedBy="transactions")
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
     private $bookable;

@@ -16,6 +16,8 @@ export const userFieldsFragment = gql`
         street
         locality
         familyRelationship
+        role
+        status
         country {
             id
             name

@@ -34,6 +34,11 @@ class User extends AbstractModel
     const ROLE_RESPONSIBLE = 'responsible';
     const ROLE_ADMINISTRATOR = 'administrator';
 
+    const STATUS_INACTIVE = 'inactive';
+    const STATUS_NEW = 'new';
+    const STATUS_ACTIVE = 'active';
+    const STATUS_ARCHIVED = 'archived';
+
     use HasResponsible;
     use HasDoorAccess;
     use HasRemarks;
@@ -46,7 +51,7 @@ class User extends AbstractModel
 
     /**
      * Set currently logged in user
-     * WARNING: this method should only be called from \Application\Autgtfdrhentication\AuthenticationListener
+     * WARNING: this method should only be called from \Application\Authentication\AuthenticationListener
      *
      * @param \Application\Model\User $user
      */
@@ -105,6 +110,12 @@ class User extends AbstractModel
      * @ORM\Column(type="UserRole", options={"default" = User::ROLE_MEMBER})
      */
     private $role = self::ROLE_MEMBER;
+
+    /**
+     * @var string
+     * @ORM\Column(type="UserStatus", options={"default" = User::STATUS_NEW})
+     */
+    private $status = self::STATUS_NEW;
 
     /**
      * @var null|Chronos
@@ -425,6 +436,26 @@ class User extends AbstractModel
         }
 
         $this->role = $role;
+    }
+
+    /**
+     * @API\Field(type="Application\Api\Enum\UserStatusType")
+     *
+     * @return string
+     */
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    /**
+     * @API\Input(type="Application\Api\Enum\UserStatusType")
+     *
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
     }
 
     /**

@@ -221,7 +221,6 @@ const routes: Routes = [
                 },
                 {
                     path: 'member',
-
                     children : [
                         {
                             path: '',

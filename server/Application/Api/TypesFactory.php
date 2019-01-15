@@ -16,6 +16,7 @@ class TypesFactory
         $entityManager = $container->get(EntityManager::class);
 
         $invokables = [
+            \Application\Api\Enum\UserStatusType::class,
             \Application\Api\Enum\UserRoleType::class,
             \Application\Api\Enum\BookingStatusType::class,
             \Application\Api\Enum\BookingTypeType::class,

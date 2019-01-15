@@ -72,7 +72,7 @@ export class LinkMutationService {
      */
     public linkMany(obj1: LinkableObject, objSet: LinkableObject[], variables: Literal = {}): Observable<FetchResult<{ id: string }>[]> {
 
-        const observables: Observable<FetchResult<{ id: string }>[]>[] = [];
+        const observables: Observable<FetchResult<{ id: string }>>[] = [];
 
         objSet.forEach(obj2 => {
             observables.push(this.link(obj1, obj2, variables));

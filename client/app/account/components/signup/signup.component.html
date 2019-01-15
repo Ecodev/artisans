@@ -6,14 +6,26 @@
 
         <div fxLayout="column">
             <h2 class="mat-title">Coordonnées</h2>
-            <mat-form-field>
-                <mat-label>Nom</mat-label>
-                <input matInput formControlName="name">
-                <mat-error *ngIf="form.get('name').hasError('maxlength')">
-                    Maximum {{form.get('name').errors.maxlength.requiredLength}} caractères
-                </mat-error>
-                <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
-            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutGap="10px">
+                <mat-form-field fxFlex>
+                    <mat-label i18n>Prénom</mat-label>
+                    <input matInput formControlName="firstName" (change)="update()">
+                    <mat-error *ngIf="form.get('firstName').hasError('maxlength')" i18n>
+                        Maximum {{form.get('firstName').errors.maxlength.requiredLength}} caractères
+                    </mat-error>
+                    <mat-error *ngIf="form.get('firstName').hasError('required')" i18n>Requis</mat-error>
+                </mat-form-field>
+
+                <mat-form-field fxFlex>
+                    <mat-label i18n>Nom de famille</mat-label>
+                    <input matInput formControlName="lastName" (change)="update()">
+                    <mat-error *ngIf="form.get('lastName').hasError('maxlength')" i18n>
+                        Maximum {{form.get('lastName').errors.maxlength.requiredLength}} caractères
+                    </mat-error>
+                    <mat-error *ngIf="form.get('lastName').hasError('required')" i18n>Requis</mat-error>
+                </mat-form-field>
+            </div>
 
             <app-address [form]="form"></app-address>
         </div>
@@ -27,7 +39,7 @@
                     <mat-label>email</mat-label>
                     <input matInput formControlName="email">
                     <app-icon matPrefix name="alternate_email"></app-icon>
-                    <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
+                    <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
                 </mat-form-field>
 
                 <mat-form-field fxFlex>
@@ -79,7 +91,7 @@
                         <td mat-cell *matCellDef="let bookable">
                             {{ bookable.name }}
                         </td>
-                        <td mat-footer-cell *matFooterCellDef> Totaux </td>
+                        <td mat-footer-cell *matFooterCellDef> Totaux</td>
 
                     </ng-container>
 
@@ -88,7 +100,7 @@
                         <td mat-cell *matCellDef="let bookable">
                             <span *ngIf="bookable.periodicPrice"> {{ bookable.periodicPrice }} CHF</span>
                         </td>
-                        <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF </td>
+                        <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF</td>
 
                     </ng-container>
 
@@ -110,13 +122,17 @@
             <div fxFlex>
                 <mat-checkbox formControlName="hasInsurance" required>J'ai une super assurance !</mat-checkbox>
                 <mat-error *ngIf="form.get('hasInsurance').touched && form.get('hasInsurance').hasError('required')">Requis</mat-error>
-                <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at
+                                      lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit
+                                      sit amet non magna.</p>
             </div>
             <mat-divider [vertical]="true"></mat-divider>
             <div fxFlex>
                 <mat-checkbox formControlName="termsAgreement" required>J'ai tout lu !</mat-checkbox>
                 <mat-error *ngIf="form.get('termsAgreement').touched && form.get('termsAgreement').hasError('required')">Requis</mat-error>
-                <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at
+                                      lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit
+                                      sit amet non magna.</p>
             </div>
         </div>
 

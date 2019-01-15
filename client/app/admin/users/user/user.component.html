@@ -5,11 +5,11 @@
             <a mat-icon-button [routerLink]="['..']">
                 <app-icon name="arrow_back"></app-icon>
             </a>
-            <ngx-avatar [name]="form.get('name').value" [size]="40"></ngx-avatar>
-            <span *ngIf="!form.get('name').value">Nouvel utilisateur</span>
-            <span *ngIf="form.get('name').value" class="pageTitle">
+            <ngx-avatar [name]="data.model.name" [size]="40"></ngx-avatar>
+            <span *ngIf="!data.model.name">Nouvel utilisateur</span>
+            <span *ngIf="data.model.name" class="pageTitle">
                 <span i18n>Utilisateur</span>
-                {{ form.get('name').value }}
+                {{ data.model.name }}
             </span>
         </div>
     </div>
@@ -18,18 +18,32 @@
         <mat-tab i18n-label label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
+                    <div fxFlex="66">
 
                         <h2 class="mat-title">Coordonnées</h2>
-                        <mat-form-field>
-                            <mat-label i18n>Nom</mat-label>
-                            <input matInput formControlName="name" (change)="update()">
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
-                                Maximum {{form.get('name').errors.maxlength.requiredLength}} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
-                        </mat-form-field>
+
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <mat-form-field fxFlex>
+                                <mat-label i18n>Prénom</mat-label>
+                                <input matInput formControlName="firstName" (change)="update()">
+                                <mat-error *ngIf="form.get('firstName').hasError('maxlength')" i18n>
+                                    Maximum {{form.get('firstName').errors.maxlength.requiredLength}} caractères
+                                </mat-error>
+                                <mat-error *ngIf="form.get('firstName').hasError('required')" i18n>Requis</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex>
+                                <mat-label i18n>Nom de famille</mat-label>
+                                <input matInput formControlName="lastName" (change)="update()">
+                                <mat-error *ngIf="form.get('lastName').hasError('maxlength')" i18n>
+                                    Maximum {{form.get('lastName').errors.maxlength.requiredLength}} caractères
+                                </mat-error>
+                                <mat-error *ngIf="form.get('lastName').hasError('required')" i18n>Requis</mat-error>
+                            </mat-form-field>
+                        </div>
+
                         <app-address [form]="form" (change)="update()"></app-address>
+
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
@@ -37,7 +51,7 @@
                         <mat-form-field>
                             <mat-label i18n>email</mat-label>
                             <input matInput formControlName="email" (change)="update()">
-                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('email').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>

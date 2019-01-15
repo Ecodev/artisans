@@ -37,6 +37,7 @@ export const usersQuery = gql`
                 id
                 login
                 name
+                status
                 familyRelationship
             }
             pageSize
@@ -60,6 +61,7 @@ export const updateUserMutation = gql`
     mutation UpdateUser($id: UserID!, $input: UserPartialInput!) {
         updateUser(id:$id, input:$input) {
             id
+            name
             updateDate
             updater {
                 ...userMeta

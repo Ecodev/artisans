@@ -9,7 +9,7 @@ class MessageTypeType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            \Application\DBAL\Types\MessageTypeType::MONTLY_REMINDER => 'rappel mensuel',
+            \Application\DBAL\Types\MessageTypeType::MONTHLY_REMINDER => 'rappel mensuel',
             \Application\DBAL\Types\MessageTypeType::YEARLY_REMINDER => 'rappel annuel',
         ];
 

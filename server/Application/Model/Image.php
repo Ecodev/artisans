@@ -18,23 +18,23 @@ use Psr\Http\Message\UploadedFileInterface;
  */
 class Image extends AbstractFile
 {
-    /**
-     * @const string BASE_PATH where the files are stored in the server
-     */
-    const BASE_PATH = 'data/images/';
+    protected function getBasePath(): string
+    {
+        return 'data/images/';
+    }
 
-    /**
-     * @const array ACCEPTED_MIME_TYPES
-     */
-    const ACCEPTED_MIME_TYPES = [
-    'image/bmp',
-    'image/gif',
-    'image/jpeg',
-    'image/pjpeg',
-    'image/png',
-    'image/svg+xml',
-    'image/webp',
-    ];
+    protected function getAcceptedMimeTypes(): array
+    {
+        return [
+            'image/bmp',
+            'image/gif',
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/svg+xml',
+            'image/webp',
+        ];
+    }
 
     /**
      * @var int

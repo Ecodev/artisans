@@ -19,14 +19,18 @@ use Psr\Http\Message\UploadedFileInterface;
 abstract class AbstractFile extends AbstractModel
 {
     /**
-     * @const string BASE_PATH where the files are stored in the server
+     * Get base path where the files are stored in the server
+     *
+     * @return string
      */
-    const BASE_PATH = 'data/';
+    abstract protected function getBasePath(): string;
 
     /**
-     * @const array ACCEPTED_MIME_TYPES
+     * Get list of accepted MIME types
+     *
+     * @return string[]
      */
-    const ACCEPTED_MIME_TYPES = [];
+    abstract protected function getAcceptedMimeTypes(): array;
 
     /**
      * @var string
@@ -87,7 +91,7 @@ abstract class AbstractFile extends AbstractModel
      */
     public function getPath(): string
     {
-        return realpath('.') . '/' . get_called_class()::BASE_PATH . $this->getFilename();
+        return realpath('.') . '/' . $this->getBasePath() . $this->getFilename();
     }
 
     /**
@@ -128,7 +132,7 @@ abstract class AbstractFile extends AbstractModel
         $mime = mime_content_type($path);
 
         // Validate mimetype
-        if (!in_array($mime, static::ACCEPTED_MIME_TYPES, true)) {
+        if (!in_array($mime, $this->getAcceptedMimeTypes(), true)) {
             unlink($path);
 
             throw new \Exception('Invalid file type of: ' . $mime);

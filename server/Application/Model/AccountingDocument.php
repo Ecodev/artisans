@@ -13,24 +13,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AccountingDocument extends AbstractFile
 {
-    /**
-     * @const string BASE_PATH where the files are stored in the server
-     */
-    const BASE_PATH = 'data/accounting/';
+    protected function getBasePath(): string
+    {
+        return 'data/accounting/';
+    }
 
-    /**
-     * @const array ACCEPTED_MIME_TYPES
-     */
-    const ACCEPTED_MIME_TYPES = [
-        'image/bmp',
-        'image/gif',
-        'image/jpeg',
-        'image/pjpeg',
-        'image/png',
-        'image/webp',
-        'application/pdf',
-        'application/x-pdf',
-    ];
+    protected function getAcceptedMimeTypes(): array
+    {
+        return [
+            'image/bmp',
+            'image/gif',
+            'image/jpeg',
+            'image/pjpeg',
+            'image/png',
+            'image/webp',
+            'application/pdf',
+            'application/x-pdf',
+        ];
+    }
 
     /**
      * @var ExpenseClaim

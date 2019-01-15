@@ -30,7 +30,7 @@ class UserRoleTypeTest extends TestCase
 
     public function testEnum(): void
     {
-        self::assertSame("ENUM('inactive', 'booking_only', 'member', 'responsible', 'administrator')", $this->type->getSqlDeclaration(['foo'], $this->platform));
+        self::assertSame("ENUM('booking_only', 'member', 'responsible', 'administrator')", $this->type->getSqlDeclaration(['foo'], $this->platform));
 
         // Should always return string
         self::assertSame('member', $this->type->convertToPHPValue('member', $this->platform));

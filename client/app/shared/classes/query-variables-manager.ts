@@ -1,7 +1,7 @@
 import { Literal } from '../types';
 import { BehaviorSubject } from 'rxjs';
 import { cloneDeep, defaultsDeep, isArray, mergeWith, omit } from 'lodash';
-import { UserFilter } from '../generated-types';
+import { BookableFilter, BookingFilter, UserFilter, UserTagFilter } from '../generated-types';
 
 export interface QueryVariables {
     filter?: Filter | null;
@@ -10,7 +10,10 @@ export interface QueryVariables {
 }
 
 type Filter =
-    UserFilter;
+    UserFilter |
+    BookingFilter |
+    BookableFilter |
+    UserTagFilter;
 
 export interface PaginationInput {
     offset?: number | null;

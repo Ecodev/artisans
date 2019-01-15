@@ -22,6 +22,7 @@ import { BookableService } from './bookables/services/bookable.service';
 import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
 import { BookableTagResolver } from './bookableTags/services/bookableTag.resolver';
+import { UserRole, UserStatus } from '../shared/generated-types';
 
 const routes: Routes = [
         {
@@ -105,7 +106,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Stand up paddle',
-                                queryVariables: BookableService.byTag(6000),
+                                queryVariables: BookableService.getFiltersByTagId(6000),
                             },
                         },
                         {
@@ -113,7 +114,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Planches',
-                                queryVariables: BookableService.byTag(6001),
+                                queryVariables: BookableService.getFiltersByTagId(6001),
                             },
                         },
                         {
@@ -121,7 +122,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Canoës',
-                                queryVariables: BookableService.byTag(6002),
+                                queryVariables: BookableService.getFiltersByTagId(6002),
                             },
                         },
                         {
@@ -129,7 +130,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Kayaks',
-                                queryVariables: BookableService.byTag(6003),
+                                queryVariables: BookableService.getFiltersByTagId(6003),
                             },
                         },
                         {
@@ -137,7 +138,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Aviron',
-                                queryVariables: BookableService.byTag(6004),
+                                queryVariables: BookableService.getFiltersByTagId(6004),
                             },
                         },
                         {
@@ -145,7 +146,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Voile légère',
-                                queryVariables: BookableService.byTag(6005),
+                                queryVariables: BookableService.getFiltersByTagId(6005),
                             },
                         },
                         {
@@ -153,7 +154,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Voile lestée',
-                                queryVariables: BookableService.byTag(6006),
+                                queryVariables: BookableService.getFiltersByTagId(6006),
                             },
                         },
                         {
@@ -202,7 +203,43 @@ const routes: Routes = [
                         {
                             path: '',
                             component: UsersComponent,
+                            data: {
+                                title: 'Tous les utilisateurs',
+                            },
                         },
+                        {
+                            path: 'member',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Membres actifs',
+                                queryVariables: UserService.getFiltersByRoleAndResponsible([UserRole.member]),
+                            },
+                        },
+                        {
+                            path: 'newcomer',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Nouveaux membres',
+                                queryVariables: UserService.getFiltersByStatusAndResponsible([UserStatus.new]),
+                            },
+                        },
+                        {
+                            path: 'staff',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Staff',
+                                queryVariables: UserService.getFiltersByRoleAndResponsible([UserRole.responsible, UserRole.administrator]),
+                            },
+                        },
+                        {
+                            path: 'non-active',
+                            component: UsersComponent,
+                            data: {
+                                title: 'Utilisateurs inactifs, nouveaux et archivés',
+                                queryVariables: UserService.nonActivesMembersQueryVariables,
+                            },
+                        },
+
                         {
                             path: 'new',
                             component: UserComponent,
@@ -219,37 +256,6 @@ const routes: Routes = [
                         },
                     ],
                 },
-                {
-                    path: 'member',
-                    children : [
-                        {
-                            path: '',
-                            component: UsersComponent,
-                            data: {
-                                title: 'Membres actifs',
-                                queryVariables: UserService.membersQueryVariables,
-                            },
-                        },
-                        {
-                            path: 'fresh',
-                            component: UsersComponent,
-                            data: {
-                                title: 'Nouveaux membres',
-                                queryVariables: UserService.freshMembersQueryVariables,
-                            },
-                        },
-                        {
-                            path: 'invited (todo)',
-                            component: UsersComponent,
-                            data: {
-                                title: 'Nouveaux membres invités à la séance d\'accueil',
-                                // queryVariables: UserService.xxx,
-                            },
-                        },
-                    ]
-                },
-
-
                 {
                     path: 'license',
                     data: {

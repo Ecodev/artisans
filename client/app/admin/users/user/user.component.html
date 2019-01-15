@@ -62,6 +62,20 @@
                             </mat-error>
                             <mat-error *ngIf="form.get('login').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
+
+
+                        <app-select-enum enumName="UserStatus"
+                                         formControlName="status"
+                                         (selectionChange)="update()"
+                                         placeholder="Status"
+                        ></app-select-enum>
+
+                        <app-select-enum enumName="UserRole"
+                                         formControlName="role"
+                                         (selectionChange)="update()"
+                                         placeholder="Rôle"
+                        ></app-select-enum>
+
                     </div>
                 </div>
 

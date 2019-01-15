@@ -34,6 +34,7 @@ import {
     UserRole,
     UsersQuery,
     UsersQueryVariables,
+    UserStatus,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { FormGroup, Validators } from '@angular/forms';
@@ -54,47 +55,64 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     UpdateUserMutationVariables,
     any> {
 
-    /**
-     * TODO : define criters that explicits a member is active
-     */
-    public static readonly membersQueryVariables: UsersQueryVariables = {
+    public static readonly nonActivesMembersQueryVariables: UsersQueryVariables = {
         filter: {
             groups: [
                 {
                     conditions: [
                         {
                             responsible: {null: {not: false}},
-                            welcomeSessionDate: {null: {not: true}},
-                            role: {in: {values: [UserRole.member]}},
+                            status: {in: {values: [UserStatus.inactive, UserStatus.new, UserStatus.archived]}},
                         },
                     ],
-                    joins: {bookings: {joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}}}},
-                },
-            ],
-        },
-    };
-
-    /**
-     * TODO : define all criters that explicits a member is fresh
-     */
-    public static readonly freshMembersQueryVariables: UsersQueryVariables = {
-        filter: {
-            groups: [
-                {
-                    conditions: [
-                        {
-                            responsible: {null: {not: false}},
-                            welcomeSessionDate: {null: {not: false}},
-                            role: {in: {values: [UserRole.inactive]}},
-                        },
-                    ],
-                    joins: {bookings: {joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.mandatory}}}]}}}},
                 },
             ],
         },
     };
 
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
+
+    /**
+     * Return filters for users with or without responsible for given roles
+     */
+    public static getFiltersByRoleAndResponsible(roles: UserRole[], withResponsible: boolean = false): UsersQueryVariables {
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+
+                                responsible: {null: {not: withResponsible}},
+                                role: roles && roles.length ? {in: {values: roles}} : null,
+                                status: {equal: {value: UserStatus.active}},
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+    }
+
+    /**
+     * Return filters for users with or without responsible for given statuses
+     */
+    public static getFiltersByStatusAndResponsible(status: UserStatus[], withResponsible: boolean = false): UsersQueryVariables {
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                responsible: {null: {not: withResponsible}},
+                                status: {in: {values: status}},
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+    }
 
     public static checkPassword(formGroup: FormGroup): Literal | null {
         if (!formGroup) {
@@ -129,8 +147,9 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             postcode: '',
             locality: '',
             country: null,
+            status: UserStatus.new,
+            role: UserRole.member,
             familyRelationship: Relationship.householder,
-            // role: UserRole.inactive : // TODO : cannot by set by anonymous, but should be
         };
     }
 
@@ -218,6 +237,9 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         }));
     }
 
+    /**
+     * Carnet de sorties (sorties en cours)
+     */
     public getRunningNavigations(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
         const variables: BookingsQueryVariables = {
             filter: {

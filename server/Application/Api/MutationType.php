@@ -19,7 +19,6 @@ use Application\Model\Category;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
-use Application\Model\Message;
 use Application\Model\Transaction;
 use Application\Model\User;
 use Application\Model\UserTag;
@@ -52,7 +51,6 @@ class MutationType extends ObjectType
             Standard::buildMutation(Category::class),
             Standard::buildMutation(ExpenseClaim::class),
             Standard::buildMutation(AccountingDocument::class),
-            Standard::buildMutation(Message::class),
             Standard::buildRelationMutation(Booking::class, Bookable::class),
             Standard::buildRelationMutation(License::class, Bookable::class),
             Standard::buildRelationMutation(License::class, User::class),

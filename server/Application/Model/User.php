@@ -29,7 +29,6 @@ use GraphQL\Doctrine\Annotation as API;
 class User extends AbstractModel
 {
     const ROLE_ANONYMOUS = 'anonymous';
-    const ROLE_INACTIVE = 'inactive';
     const ROLE_BOOKING_ONLY = 'booking_only';
     const ROLE_MEMBER = 'member';
     const ROLE_RESPONSIBLE = 'responsible';

@@ -11,7 +11,6 @@ class UserRoleType extends AbstractEnumType
     protected function getPossibleValues(): array
     {
         return [
-            User::ROLE_INACTIVE,
             User::ROLE_BOOKING_ONLY,
             User::ROLE_MEMBER,
             User::ROLE_RESPONSIBLE,

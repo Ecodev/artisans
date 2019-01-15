@@ -38,8 +38,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
     {
         // Each role is strictly "stronger" than the last one
         $this->addRole(User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_INACTIVE, User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_BOOKING_ONLY, User::ROLE_INACTIVE);
+        $this->addRole(User::ROLE_BOOKING_ONLY, User::ROLE_ANONYMOUS);
         $this->addRole(User::ROLE_MEMBER, User::ROLE_BOOKING_ONLY);
         $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_MEMBER);
         $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_RESPONSIBLE);

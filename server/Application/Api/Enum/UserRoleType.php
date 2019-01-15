@@ -11,7 +11,6 @@ class UserRoleType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            User::ROLE_INACTIVE => 'Inactif',
             User::ROLE_BOOKING_ONLY => 'Uniquement cahier de sortie (spécial)',
             User::ROLE_MEMBER => 'Membre',
             User::ROLE_RESPONSIBLE => 'Responsable de secteur',

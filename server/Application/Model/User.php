@@ -413,6 +413,7 @@ class User extends AbstractModel
         $orderedRoles = [
             self::ROLE_ANONYMOUS,
             self::ROLE_MEMBER,
+            self::ROLE_RESPONSIBLE,
             self::ROLE_ADMINISTRATOR,
         ];
 

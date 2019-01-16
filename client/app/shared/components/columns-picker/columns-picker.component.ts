@@ -5,6 +5,7 @@ import {
     Component,
     ContentChildren,
     EventEmitter,
+    Input,
     Output,
     QueryList,
 } from '@angular/core';
@@ -23,6 +24,11 @@ export class ColumnsPickerComponent implements AfterViewInit {
      */
     @Output() selectionChange = new EventEmitter<Iterable<string>>();
 
+    /**
+     * Filter available columns
+     */
+    @Input() initialSelection: string[];
+
     @ContentChildren(ColumnsPickerColumnDirective)
     public availableColumns: QueryList<ColumnsPickerColumnDirective>;
 
@@ -32,8 +38,15 @@ export class ColumnsPickerComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
         setTimeout(() => {
+            this.initColumns();
             this.updateColumns();
             this.changeDetectorRef.detectChanges();
+        });
+    }
+
+    initColumns(): void {
+        this.availableColumns.forEach(col => {
+            col.show = this.initialSelection && this.initialSelection.indexOf(col.key) === -1  ? false : col.show;
         });
     }
 

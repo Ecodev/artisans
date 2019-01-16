@@ -243,6 +243,12 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     }
 
     /**
+     * Todo : create specific mutation endpoint to flag current date on welcomeSessionDate and if user has paid, active him
+     */
+    // public flagWelcomeSessionDate(id: string): Observable<UpdateUserMutation['updateUser']> {
+    // }
+
+    /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
     public resolveViewer(): Observable<any> {

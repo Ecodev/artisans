@@ -23,6 +23,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     implements OnInit, OnDestroy {
 
     public selectedColumns: string[] = [];
+    public routerColumns: string[];
     public dataSource: AppDataSource;
     public selection: SelectionModel<Tall>;
     public bulkActionSelected: string | null;
@@ -71,16 +72,27 @@ export class AbstractList<Tall, Vall extends QueryVariables>
      * If change, check DocumentsComponent that overrides this function without calling super.ngOnInit().
      */
     ngOnInit() {
-        this.initFromPersisted();
-
         this.routeData = this.route.snapshot.data;
+
+        this.initFromPersisted();
+        this.initFromRouting();
+
+        this.dataSource = new AppDataSource(this.getDataObservable());
+        this.selection = new SelectionModel<Tall>(true, []);
+    }
+
+    /**
+     * Uses data from routing data.columns: string[]
+     */
+    protected initFromRouting() {
 
         if (this.route.snapshot.data.queryVariables) {
             this.variablesManager.set('routeFilters', this.route.snapshot.data.queryVariables);
         }
 
-        this.dataSource = new AppDataSource(this.getDataObservable());
-        this.selection = new SelectionModel<Tall>(true, []);
+        if (this.route.snapshot.data.columns) {
+            this.routerColumns = this.route.snapshot.data.columns;
+        }
     }
 
     protected getDataObservable(): Observable<Tall> {

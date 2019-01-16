@@ -14,10 +14,13 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event">
-                    <span appColumnsPickerColumn="id" i18n>id</span>
-                    <span appColumnsPickerColumn="name" i18n>Nom</span>
-                    <span appColumnsPickerColumn="login" i18n>Login</span>
+                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
+                    <span appColumnsPickerColumn="name" >Nom</span>
+                    <span appColumnsPickerColumn="login" >Login</span>
+                    <span appColumnsPickerColumn="status" >Status</span>
+                    <span appColumnsPickerColumn="creationDate" >Créé le</span>
+                    <span appColumnsPickerColumn="updateDate" >Modifié le</span>
+                    <span appColumnsPickerColumn="flagWelcomeSessionDate" >Accueil</span>
                 </app-columns-picker>
             </natural-search>
 
@@ -29,19 +32,13 @@
                 <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
-                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-                </ng-container>
-
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
                             <app-table-button [label]="element.name"
                                               [navigate]="['/admin/user', element.id]"
-                                              i18n-matTooltip
                                               matTooltip="Éditer"
                             ></app-table-button>
                         </div>
@@ -49,15 +46,37 @@
                 </ng-container>
 
                 <ng-container matColumnDef="login">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Login</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
                     <td mat-cell *matCellDef="let element">{{ element.login }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+                    <td mat-cell *matCellDef="let element">{{ element.status | enum: 'UserStatus' | capitalize | async }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Créé le</th>
+                    <td mat-cell *matCellDef="let element">{{ element.creationDate }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="updateDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Modifié le</th>
+                    <td mat-cell *matCellDef="let element">{{ element.updateDate }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="flagWelcomeSessionDate" >
+                    <th mat-header-cell *matHeaderCellDef app-6em-column>Accueilli le</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-raised-button color="primary">A participé</button>
+                    </td>
                 </ng-container>
 
             </table>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
-            <div i18n>Pas de résultats</div>
+            <div>Pas de résultats</div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">

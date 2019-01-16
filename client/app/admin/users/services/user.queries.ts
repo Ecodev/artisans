@@ -40,6 +40,7 @@ export const userFieldsFragment = gql`
             id
             name
         }
+        creationDate
         creator {
             ...userMeta
         }

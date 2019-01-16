@@ -221,6 +221,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Nouveaux membres',
                                 queryVariables: UserService.getFiltersByStatusAndResponsible([UserStatus.new]),
+                                columns: ['name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
                             },
                         },
                         {

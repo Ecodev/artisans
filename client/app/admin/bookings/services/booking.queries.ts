@@ -45,6 +45,7 @@ export const bookingQuery = gql`
     query Booking($id: BookingID!) {
         booking(id: $id) {
             ...bookingMeta
+            creationDate
             creator {
                 ...userMeta
             }

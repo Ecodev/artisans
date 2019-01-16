@@ -3,8 +3,8 @@
         <mat-label>{{ placeholder }}</mat-label>
         <mat-select [formControl]="formCtrl" (selectionChange)="propagateValue($event)">
             <mat-option *ngIf="nullLabel" [value]="null">{{ nullLabel }}</mat-option>
-            <mat-option *ngFor="let item of items | capitalize | async" [value]="item.value">
-                {{ item.name }}
+            <mat-option *ngFor="let item of items | async" [value]="item.value">
+                {{ item.name | capitalize }}
             </mat-option>
         </mat-select>
     </mat-form-field>

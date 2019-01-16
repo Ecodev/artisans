@@ -20,6 +20,7 @@ import { BookingComponent } from './bookings/booking/booking.component';
 import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
 import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
+import { DetailHeaderComponent } from '../shared/components/detail-header/detail-header.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
         BookingComponent,
         BookableTagsComponent,
         BookableTagComponent,
+        DetailHeaderComponent
     ],
     imports: [
         CommonModule,

@@ -1,8 +1,10 @@
 <div [formGroup]="form">
 
-    <div fxLayout="column" class="pageHeader">
-        <div class="mat-headline no-margin">Réservation</div>
-    </div>
+    <app-detail-header newLabel="Nouvelle réservation"
+                       label="Réservation"
+                       [model]="data.model"
+                       [listRoute]="['admin', 'booking']"
+    ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab i18n-label label="Général">

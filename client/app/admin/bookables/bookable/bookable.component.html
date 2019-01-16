@@ -1,14 +1,10 @@
 <div [formGroup]="form">
 
-    <div fxLayout="column" class="pageHeader">
-        <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span *ngIf="!form.get('name').value">Nouveau réservable</span>
-            <span *ngIf="form.get('name').value" class="pageTitle">
-                <span i18n>Réservable</span>
-                {{ form.get('name').value }}
-            </span>
-        </div>
-    </div>
+    <app-detail-header newLabel="Nouvel réservable"
+                       label="Réservable"
+                       [model]="data.model"
+                       [listRoute]="['admin', 'bookable']"
+    ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab i18n-label label="Général">

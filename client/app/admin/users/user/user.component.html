@@ -1,18 +1,11 @@
 <div [formGroup]="form">
 
-    <div fxLayout="column" class="pageHeader">
-        <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <a mat-icon-button [routerLink]="['..']">
-                <app-icon name="arrow_back"></app-icon>
-            </a>
-            <ngx-avatar [name]="data.model.name" [size]="40"></ngx-avatar>
-            <span *ngIf="!data.model.name">Nouvel utilisateur</span>
-            <span *ngIf="data.model.name" class="pageTitle">
-                <span i18n>Utilisateur</span>
-                {{ data.model.name }}
-            </span>
-        </div>
-    </div>
+    <app-detail-header newLabel="Nouvel utilisateur"
+                       label="Utilisateur"
+                       [model]="data.model"
+                       [listRoute]="['admin', 'user']"
+                       [showAvatar]="true"
+    ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab i18n-label label="Général">

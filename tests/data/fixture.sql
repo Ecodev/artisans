@@ -65,9 +65,9 @@ REPLACE INTO booking (id, responsible_id, start_date, end_date, status) VALUE
 (4006, 1002, '2018-01-02 13:32:51', NULL, 'application'),
 (4007, 1005, '2018-01-02 13:32:51', NULL, 'booked');
 
+-- Only a bookable by booking
 REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4000, 3000),
-(4000, 3001),
 (4001, 3000),
 (4003, 3002),
 (4004, 3003),

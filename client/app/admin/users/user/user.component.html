@@ -11,7 +11,7 @@
         <mat-tab i18n-label label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66">
+                    <div fxFlex="66" fxLayout="column">
 
                         <h2 class="mat-title">Coordonnées</h2>
 
@@ -33,9 +33,25 @@
                                 </mat-error>
                                 <mat-error *ngIf="form.get('lastName').hasError('required')" i18n>Requis</mat-error>
                             </mat-form-field>
+
+                            <app-select-enum enumName="Sex" formControlName="sex" placeholder="Genre"></app-select-enum>
                         </div>
 
                         <app-address [form]="form" (change)="update()"></app-address>
+
+                        <div fxLayout="row" fxLayoutGap="10px">
+
+                            <mat-form-field fxFlex>
+                                <mat-label i18n>Téléphone fixe</mat-label>
+                                <input matInput formControlName="phone" (change)="update()">
+                            </mat-form-field>
+
+                            <mat-form-field fxFlex>
+                                <mat-label i18n>Téléphone mobile</mat-label>
+                                <input matInput formControlName="mobilePhone" (change)="update()">
+                            </mat-form-field>
+
+                        </div>
 
                     </div>
 
@@ -56,19 +72,59 @@
                             <mat-error *ngIf="form.get('login').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
+                    </div>
+                </div>
 
-                        <app-select-enum enumName="UserStatus"
-                                         formControlName="status"
-                                         (selectionChange)="update()"
-                                         placeholder="Status"
+                <mat-divider></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+                        <h2 class="mat-title">Autres</h2>
+
+                        <app-select [service]="service"
+                                    formControlName="responsible"
+                                    placeholder="Chef de famille"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                        ></app-select>
+
+                        <mat-form-field fxFlex>
+                            <mat-label i18n>Swiss sailling</mat-label>
+                            <input matInput formControlName="ichtusSwissSailing" (change)="update()">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label i18n>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
+                            ></textarea>
+                        </mat-form-field>
+
+                        <div class="mat-body-1">
+                            <p>Dernière connexion : {{ data.model.lastLogin | date: 'fullDate'}}</p>
+                            <p>Séance d'accueil le : {{ data.model.welcomeSessionDate | date: 'fullDate'}}</p>
+                        </div>
+
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+
+                        <h2 class="mat-title">État</h2>
+
+                        <app-select-enum enumName="UserStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
                         ></app-select-enum>
 
-                        <app-select-enum enumName="UserRole"
-                                         formControlName="role"
-                                         (selectionChange)="update()"
-                                         placeholder="Rôle"
+                        <app-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
                         ></app-select-enum>
 
+                        <!-- TODO : Remove [ngModel] because it conflicts with ReactiveForm. See console warn -->
+                        <!-- TODO : if server perserves that asymetric logic for booleans, ...-->
+                        <!-- TODO : ...we have to update AbstractModelService.getFormConfig to manage that -->
+                        <div fxlayout="column" fxLayoutGap="10px">
+                            <mat-checkbox formControlName="door1" [ngModel]="data.model.isDoor1" (change)="update()">Porte 1</mat-checkbox>
+                            <mat-checkbox formControlName="door2" [ngModel]="data.model.isDoor2" (change)="update()">Porte 2</mat-checkbox>
+                            <mat-checkbox formControlName="door3" [ngModel]="data.model.isDoor3" (change)="update()">Porte 3</mat-checkbox>
+                            <mat-checkbox formControlName="door4" [ngModel]="data.model.isDoor4" (change)="update()">Porte 4</mat-checkbox>
+                        </div>
                     </div>
                 </div>
 

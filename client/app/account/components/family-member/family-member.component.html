@@ -26,7 +26,20 @@
             <mat-error *ngIf="form.get('lastName').hasError('required')">Requis</mat-error>
         </mat-form-field>
 
+        <app-select-enum enumName="Sex" formControlName="sex" placeholder="Genre"></app-select-enum>
+
         <app-address [form]="form" [vertical]="true" (change)="update()"></app-address>
+
+        <mat-form-field fxFlex>
+            <mat-label i18n>Téléphone fixe</mat-label>
+            <input matInput formControlName="phone" (change)="update()">
+        </mat-form-field>
+
+        <mat-form-field fxFlex>
+            <mat-label i18n>Téléphone mobile</mat-label>
+            <input matInput formControlName="mobilePhone" (change)="update()">
+        </mat-form-field>
+
     </div>
 
     <mat-divider class="margin-bottom"></mat-divider>
@@ -49,25 +62,6 @@
             </mat-error>
             <mat-error *ngIf="form.get('login').hasError('required')">Requis</mat-error>
         </mat-form-field>
-
-        <!--        <mat-form-field fxFlex>
-                    <mat-label>Mot de passe</mat-label>
-                    <input type="password" matInput formControlName="password">
-                    <app-icon matPrefix name="lock"></app-icon>
-                    <mat-error *ngIf="form.get('password').hasError('minlength')">
-                        Minimum {{form.get('password').errors.minlength.requiredLength}} caractères
-                    </mat-error>
-                    <mat-error *ngIf="form.get('password').hasError('required')">Requis</mat-error>
-                </mat-form-field>
-
-                <mat-form-field fxFlex>
-                    <mat-label>Confirmation du mot de passe</mat-label>
-                    <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="confirmPasswordStateMatcher">
-                    <app-icon matPrefix name="lock"></app-icon>
-                    <mat-error *ngIf="form.hasError('notSame')">
-                        Les mot de passe ne sont pas identiques
-                    </mat-error>
-                </mat-form-field>-->
 
         <button mat-button color="primary">Demander un nouveau mot de passe</button>
     </div>

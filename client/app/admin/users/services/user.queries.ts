@@ -18,6 +18,24 @@ export const userFieldsFragment = gql`
         familyRelationship
         role
         status
+        ichtusSwissSailing
+        mobilePhone
+        isDoor1
+        isDoor2
+        isDoor3
+        isDoor4
+        account {
+            id
+            balance
+        }
+        billingType
+        remarks
+        responsible {
+            id
+            name
+        }
+        sex
+        welcomeSessionDate
         country {
             id
             name

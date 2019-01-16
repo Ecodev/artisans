@@ -58,15 +58,15 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
             }
         });
 
-        // TODO : set role / status "inactive"
-        // this.form.setControl('status', new FormControl(UserStatus.inactive))
-
     }
 
     public register() {
         this.create(false);
     }
 
+    /**
+     * TODO : replace by specific mutation
+     */
     public postCreate(user) {
 
         this.userService.login({login: this.data.model.login, password: this.data.model.password}).subscribe(() => {

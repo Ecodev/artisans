@@ -22,7 +22,7 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
         /** @var User $user */
         $user = $this->getByLogin($login);
 
-        if (!$user || ($user->getActiveUntil() && $user->getActiveUntil() < new Chronos())) {
+        if (!$user) {
             return null;
         }
 

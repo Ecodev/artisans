@@ -127,18 +127,6 @@ class User extends AbstractModel
      * @var null|Chronos
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $activeFrom;
-
-    /**
-     * @var null|Chronos
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $activeUntil;
-
-    /**
-     * @var null|Chronos
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     private $welcomeSessionDate;
 
     /**
@@ -457,56 +445,6 @@ class User extends AbstractModel
     public function setStatus(string $status): void
     {
         $this->status = $status;
-    }
-
-    /**
-     * The date from when the user is active.
-     *
-     * @return null|Chronos
-     */
-    public function getActiveFrom(): ?Chronos
-    {
-        return $this->activeFrom;
-    }
-
-    /**
-     * The date from when the user is active.
-     *
-     * @param null|Chronos $activeFrom
-     */
-    public function setActiveFrom(?Chronos $activeFrom): void
-    {
-        $this->activeFrom = $activeFrom;
-    }
-
-    /**
-     * The date until the user is active. Or `null` if there is not limit in time
-     *
-     * @return null|Chronos
-     */
-    public function getActiveUntil(): ?Chronos
-    {
-        return $this->activeUntil;
-    }
-
-    /**
-     * The date until the user is active. Or `null` if there is not limit in time
-     *
-     * @param null|Chronos $activeUntil
-     */
-    public function setActiveUntil(?Chronos $activeUntil): void
-    {
-        $this->activeUntil = $activeUntil;
-    }
-
-    /**
-     * The user account is active
-     *
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return ($this->getActiveFrom() === null || Chronos::now() > $this->getActiveFrom()) && ($this->getActiveFrom() === null || Chronos::now() < $this->getActiveUntil());
     }
 
     /**

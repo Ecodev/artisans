@@ -6,7 +6,6 @@ namespace Application\Middleware;
 
 use Application\Model\User;
 use Application\Repository\UserRepository;
-use Cake\Chronos\Chronos;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -42,7 +41,7 @@ class AuthenticationMiddleware implements MiddlewareInterface
         if ($session->has('user')) {
             $user = $this->userRepository->getOneById($session->get('user'));
 
-            if ($user && (!$user->getActiveUntil() || $user->getActiveUntil() > new Chronos())) {
+            if ($user) {
                 User::setCurrent($user);
             }
         }

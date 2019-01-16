@@ -23,6 +23,8 @@ describe('UserService', () => {
         updateDate: '2018-01-18T11:43:31',
         login: 'test string',
         familyRelationship: 'householder',
+        role: 'member',
+        status: 'active',
         country: {
             id: '456',
             name: 'test string',

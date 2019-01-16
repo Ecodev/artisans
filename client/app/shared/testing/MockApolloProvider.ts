@@ -43,6 +43,8 @@ class MockApollo extends Apollo {
             Login: () => 'test string',
             Email: () => 'test@example.com',
             Relationship: () => 'householder',
+            UserRole: () => 'member',
+            UserStatus: () => 'active',
         };
 
         addMockFunctionsToSchema({schema, mocks});

@@ -132,7 +132,7 @@ class Transaction extends AbstractModel
      */
     public function getAmount(): float
     {
-        return $this->amount;
+        return (float) $this->amount;
     }
 
     /**

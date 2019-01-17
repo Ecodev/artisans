@@ -90,8 +90,8 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             name: '',
             code: '',
             description: '',
-            initialPrice: '',
-            periodicPrice: '',
+            initialPrice: 0,
+            periodicPrice: 0,
             simultaneousBookingMaximum: -1,
             bookingType: BookingType.admin_only,
         };

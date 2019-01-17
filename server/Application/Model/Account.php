@@ -33,7 +33,7 @@ class Account extends AbstractModel
      *
      * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
      */
-    private $balance = 0;
+    private $balance = '0.00';
 
     /**
      * @var string
@@ -97,7 +97,7 @@ class Account extends AbstractModel
      */
     public function getBalance(): float
     {
-        return $this->balance;
+        return (float) $this->balance;
     }
 
     /**

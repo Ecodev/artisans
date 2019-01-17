@@ -125,8 +125,8 @@ export class LinkMutationService {
         let name1;
         let name2;
         if (obj1.__typename === obj2.__typename) {
-            name1 = 'source' + obj1.__typename;
-            name2 = 'target' + obj2.__typename;
+            name1 = Utility.lowerCaseFirstLetter(obj1.__typename) + '1';
+            name2 = Utility.lowerCaseFirstLetter(obj1.__typename) + '2';
         } else {
             name1 = Utility.lowerCaseFirstLetter(obj1.__typename);
             name2 = Utility.lowerCaseFirstLetter(obj2.__typename);

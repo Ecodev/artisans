@@ -34,7 +34,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
 
     public naturalSearchConfig: NaturalSearchConfiguration | null;
 
-    public naturalSearchSelections: NaturalSearchSelections = [[]];
+    public naturalSearchSelections: NaturalSearchSelections | null = [[]];
 
     public routeData;
 

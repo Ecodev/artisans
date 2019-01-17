@@ -7,8 +7,7 @@
 </a>
 
 <!-- ... and without label -->
-<a *ngIf="!href && !label" mat-icon-button [routerLink]="navigate" [queryParams]="queryParams" [queryParamsHandling]="queryParamsHandling"
->
+<a *ngIf="!href && !label" mat-icon-button [routerLink]="navigate" [queryParams]="queryParams" [queryParamsHandling]="queryParamsHandling">
     <app-icon *ngIf="icon" [name]="icon"></app-icon>
 </a>
 

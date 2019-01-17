@@ -16,7 +16,6 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="id" i18n>id</span>
                     <span appColumnsPickerColumn="color" i18n>Couleur</span>
                     <span appColumnsPickerColumn="name" i18n>Nom</span>
                 </app-columns-picker>
@@ -28,11 +27,6 @@
 
                 <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
-
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-4em-column>ID</th>
-                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-                </ng-container>
 
                 <ng-container matColumnDef="color">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-3em-column></th>

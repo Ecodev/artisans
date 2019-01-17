@@ -1,0 +1,84 @@
+<div [formGroup]="form">
+
+    <app-detail-header newLabel="Nouvelle catégorie"
+                       label="Catégorie"
+                       [model]="data.model"
+                       [listRoute]="['admin', 'category', 'list']"
+                       [showAvatar]="true"
+    ></app-detail-header>
+
+    <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
+        <mat-tab i18n-label label="Général">
+            <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+
+                        <mat-form-field>
+                            <input matInput formControlName="name" (change)="update()">
+                            <mat-label i18n>Nom</mat-label>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+                        <input matInput type="color" formControlName="color" (change)="update()" style="height:50px; width:50px;">
+                    </div>
+                </div>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="50" fxLayout="column">
+
+                        <h2 class="mat-title">Catégories enfant</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="service"
+                                       [filter]="{groups: [{conditions: [{parents: {have: {values: [data.model.id]}}}]}]}"
+                                       i18n-placeholder
+                                       placeholder="Ajouter une catégorie enfant"
+                                       [hideSearch]="true"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
+                                    <app-table-button [navigate]="['..', item.id]" [label]="item.name"></app-table-button>
+                                </div>
+                            </ng-template>
+                        </app-relations>
+
+                    </div>
+                    <div fxFlex="50" fxLayout="column">
+
+                        <h2 class="mat-title">Catégories parentes</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="service"
+                                       [filter]="{groups: [{conditions: [{children: {have: {values: [data.model.id]}}}]}]}"
+                                       i18n-placeholder
+                                       placeholder="Ajouter une catégorie enfant"
+                                       [hideSearch]="true"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
+                                    <app-table-button [navigate]="['..', item.id]" [label]="item.name"></app-table-button>
+                                </div>
+                            </ng-template>
+                        </app-relations>
+
+                    </div>
+
+                </div>
+
+                <app-stamp [item]="data.model"></app-stamp>
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></app-detail-fixed-button>
+
+</div>

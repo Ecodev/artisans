@@ -86,13 +86,13 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsCreator());
         $this->allow(User::ROLE_MEMBER, $message, ['read'], new IsRecipient());
 
-        $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account], ['read']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $category], ['read']);
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$user], ['update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$userTag], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_RESPONSIBLE, [$bookable, $bookableMetadata, $bookableTag, $image, $license], ['create', 'update', 'delete']);
 
-        $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $category], ['create', 'update', 'delete']);
     }
 
     /**

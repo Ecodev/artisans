@@ -32,6 +32,9 @@ import { AccountResolver } from './accounts/services/account.resolver';
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
 import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
 import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resolver';
+import { CategoriesComponent } from './categories/categories/categories.component';
+import { CategoryComponent } from './categories/category/category.component';
+import { CategoryResolver } from './categories/services/category.resolver';
 
 const routes: Routes = [
         {
@@ -419,6 +422,32 @@ const routes: Routes = [
                             component: ExpenseClaimComponent,
                             resolve: {
                                 expenseClaim: ExpenseClaimResolver,
+                            },
+                        },
+                    ],
+                },
+                {
+                    path: 'category',
+                    children: [
+                        // TODO : /list segment is temporarily required due to https://github.com/angular/angular/issues/27674
+                        // TODO : when removing /list, be careful with category.component.html (header) hardcoded url
+                        {
+                            path: 'list', // cannot be empty tue to above bug
+                            component: CategoriesComponent,
+                            data: {title: 'Catégories'},
+                        },
+                        {
+                            path: 'list/new',
+                            component: CategoryComponent,
+                            resolve: {
+                                category: CategoryResolver,
+                            },
+                        },
+                        {
+                            path: 'list/:categoryId', // last
+                            component: CategoryComponent,
+                            resolve: {
+                                category: CategoryResolver,
                             },
                         },
                     ],

@@ -1,7 +1,16 @@
 import { Literal } from '../types';
 import { BehaviorSubject } from 'rxjs';
 import { cloneDeep, defaultsDeep, isArray, mergeWith, omit } from 'lodash';
-import { BookableFilter, BookingFilter, UserFilter, UserTagFilter } from '../generated-types';
+import {
+    AccountFilter,
+    BookableFilter,
+    BookableTagFilter,
+    BookingFilter,
+    CategoryFilter,
+    ExpenseClaimFilter, TransactionFilter,
+    UserFilter,
+    UserTagFilter,
+} from '../generated-types';
 
 export interface QueryVariables {
     filter?: Filter | null;
@@ -13,7 +22,12 @@ type Filter =
     UserFilter |
     BookingFilter |
     BookableFilter |
-    UserTagFilter;
+    UserTagFilter |
+    BookableTagFilter |
+    CategoryFilter |
+    ExpenseClaimFilter |
+    TransactionFilter |
+    AccountFilter;
 
 export interface PaginationInput {
     offset?: number | null;
@@ -90,7 +104,7 @@ export class QueryVariablesManager<T extends QueryVariables = QueryVariables> {
     /**
      * Set or override all the variables that may exist in the given channel
      */
-    public set(channelName: string, variables: T) {
+    public set(channelName: string, variables: T | null) {
         this.channels.set(channelName, cloneDeep(variables)); // cloneDeep to change reference and prevent some interactions when merge
         this.updateVariables();
     }

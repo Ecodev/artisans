@@ -27,6 +27,8 @@ import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
 import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
+import { CategoriesComponent } from './categories/categories/categories.component';
+import { CategoryComponent } from './categories/category/category.component';
 
 @NgModule({
     declarations: [
@@ -51,6 +53,8 @@ import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.
         AccountComponent,
         ExpenseClaimsComponent,
         ExpenseClaimComponent,
+        CategoriesComponent,
+        CategoryComponent,
     ],
     imports: [
         CommonModule,

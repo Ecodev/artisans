@@ -23,6 +23,9 @@ import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
 import { BookableTagResolver } from './bookableTags/services/bookableTag.resolver';
 import { UserRole, UserStatus } from '../shared/generated-types';
+import { TransactionResolver } from './transactions/services/transaction.resolver';
+import { TransactionComponent } from './transactions/transaction/transaction.component';
+import { TransactionsComponent } from './transactions/transactions/transactions.component';
 
 const routes: Routes = [
         {
@@ -334,6 +337,34 @@ const routes: Routes = [
                             component: BookableTagComponent,
                             resolve: {
                                 bookableTag: BookableTagResolver,
+                            },
+                        },
+                    ],
+                },
+                {
+                    path: 'transaction',
+                    children: [
+                        {
+                            path: '',
+                            component: TransactionsComponent,
+                            data: {title: 'Transactions'},
+                        },
+                        // {
+                        //     path: 'summary',
+                        //     component: ???,
+                        // },
+                        {
+                            path: 'new',
+                            component: TransactionComponent,
+                            resolve: {
+                                transaction: TransactionResolver,
+                            },
+                        },
+                        {
+                            path: ':transactionId', // last
+                            component: TransactionComponent,
+                            resolve: {
+                                transaction: TransactionResolver,
                             },
                         },
                     ],

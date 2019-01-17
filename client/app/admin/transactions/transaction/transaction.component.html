@@ -1,0 +1,73 @@
+<div [formGroup]="form">
+
+    <app-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'transaction']"
+    ></app-detail-header>
+
+    <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
+        <mat-tab i18n-label label="Général">
+            <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+
+                        <mat-form-field>
+                            <mat-label i18n>Nom</mat-label>
+                            <input matInput formControlName="name" (change)="update()">
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label i18n>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
+                            ></textarea>
+                        </mat-form-field>
+
+                        <!-- TODO : FOR ADMINS ONLY -->
+                        <mat-form-field>
+                            <mat-label i18n>Remarques internes</mat-label>
+                            <textarea matInput
+                                      formControlName="internalRemarks"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="1"
+                            ></textarea>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+
+                        <mat-form-field>
+                            <mat-label i18n>Montant</mat-label>
+                            <input matInput formControlName="amount" (change)="update()">
+                            <span matSuffix>CHF</span>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label i18n>Date de la transaction</mat-label>
+                            <input matInput formControlName="transactionDate" [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+
+                </div>
+
+                <!-- TODO : add selectors for Account, ExpanseClaim and Categories -->
+
+                <mat-divider></mat-divider>
+
+                <app-stamp [item]="data.model"></app-stamp>
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></app-detail-fixed-button>
+
+</div>

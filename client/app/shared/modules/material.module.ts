@@ -5,12 +5,14 @@ import {
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatExpansionModule,
     MatIconModule,
     MatInputModule,
     MatListModule,
     MatMenuModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
@@ -43,6 +45,8 @@ const list = [
     MatButtonToggleModule,
     MatExpansionModule,
     MatSidenavModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
 ];
 
 /**

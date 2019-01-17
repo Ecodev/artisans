@@ -1,6 +1,9 @@
 <div [formGroup]="form">
 
-    <app-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'transaction']"
+    <app-detail-header newLabel="Nouvelle transaction"
+                       label="Transaction"
+                       [model]="data.model"
+                       [listRoute]="['admin', 'transaction']"
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">

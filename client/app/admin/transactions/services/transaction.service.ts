@@ -60,7 +60,6 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
-            code: [Validators.required, Validators.maxLength(100)],
         };
     }
 

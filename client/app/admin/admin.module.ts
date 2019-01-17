@@ -23,6 +23,8 @@ import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
 import { DetailHeaderComponent } from '../shared/components/detail-header/detail-header.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
 import { TransactionsComponent } from './transactions/transactions/transactions.component';
+import { AccountsComponent } from './accounts/accounts/accounts.component';
+import { AccountComponent } from './accounts/account/account.component';
 
 @NgModule({
     declarations: [
@@ -43,6 +45,8 @@ import { TransactionsComponent } from './transactions/transactions/transactions.
         DetailHeaderComponent,
         TransactionComponent,
         TransactionsComponent,
+        AccountsComponent,
+        AccountComponent
     ],
     imports: [
         CommonModule,

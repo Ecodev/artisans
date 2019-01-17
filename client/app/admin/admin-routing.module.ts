@@ -26,6 +26,9 @@ import { UserRole, UserStatus } from '../shared/generated-types';
 import { TransactionResolver } from './transactions/services/transaction.resolver';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
 import { TransactionsComponent } from './transactions/transactions/transactions.component';
+import { AccountsComponent } from './accounts/accounts/accounts.component';
+import { AccountComponent } from './accounts/account/account.component';
+import { AccountResolver } from './accounts/services/account.resolver';
 
 const routes: Routes = [
         {
@@ -365,6 +368,30 @@ const routes: Routes = [
                             component: TransactionComponent,
                             resolve: {
                                 transaction: TransactionResolver,
+                            },
+                        },
+                    ],
+                },
+                {
+                    path: 'account',
+                    children: [
+                        {
+                            path: '',
+                            component: AccountsComponent,
+                            data: {title: 'Comptes bancaires'},
+                        },
+                        {
+                            path: 'new',
+                            component: AccountComponent,
+                            resolve: {
+                                account: AccountResolver,
+                            },
+                        },
+                        {
+                            path: ':accountId', // last
+                            component: AccountComponent,
+                            resolve: {
+                                account: AccountResolver,
                             },
                         },
                     ],

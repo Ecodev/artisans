@@ -43,7 +43,7 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
                 let parentCondition: ParentRelationType | null = null;
                 if (params.parent) {
 
-                    // parentCondition = {equal: {value: params.parent}};
+                    // parentCondition = {equal: {value: params.parent}}; // todo : remove if verything ok with bellow version
                     parentCondition = {have: {values: [params.parent]}};
                     this.service.getOne(params.parent).subscribe(parent => {
                         this.breadcrumbs = this.getBreadcrumb(parent);
@@ -52,13 +52,15 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
                     this.clearSearch();
 
                 } else {
-                    // parentCondition = {null: {not: false}};
-                    parentCondition = {empty: {}};
+                    // parentCondition = {null: {not: false}}; // todo : remove if verything ok with bellow version
+                    parentCondition = {empty: {not: false}};
                     this.breadcrumbs = [];
                 }
 
                 const filter: QueryVariables = {filter: {groups: [{conditions: [{parents: parentCondition}]}]}};
-                this.variablesManager.set('navigation', filter);
+
+                // todo : check why without "as Vall" it errors. Vall is supposed to be QueryVariables, and filter too.
+                this.variablesManager.set('navigation', filter as Vall);
             }
         });
 
@@ -79,12 +81,15 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
 
             // If there is no search, restore only root elements
             this.variablesManager.set('navigation', {
-                filter: {groups: [{conditions: [{parents: {empty: {}}}]}]},
-            });
+                filter: {groups: [{conditions: [{parents: {empty: {not: false}}}]}]},
+            } as Vall);
+            // todo : check why without "as Vall" it errors. Vall is supposed to be QueryVariables, and filter too.
         }
 
         const translatedSelection = toGraphQLDoctrineFilter(this.naturalSearchConfig, naturalSearchSelections);
-        this.variablesManager.set('natural-search', {filter: translatedSelection});
+
+        // todo : check why without "as Vall" it errors.  Vall is supposed to be QueryVariables, and filter too.
+        this.variablesManager.set('natural-search', {filter: translatedSelection} as Vall);
     }
 
     public goToChildLink(parent) {

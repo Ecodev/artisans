@@ -111,7 +111,7 @@ export class QueryVariablesManager<T extends QueryVariables = QueryVariables> {
 
     public get(channelName: string) {
         // Avoid to return the same reference to prevent an attribute change, then another channel update that would used this changed
-        // attribute without having explicitely asked QueryVariablesManager to update it.
+        // attribute without having explicitly asked QueryVariablesManager to update it.
         return cloneDeep(this.channels.get(channelName));
     }
 

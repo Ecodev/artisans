@@ -14,7 +14,7 @@ export const routes: Routes = [
     },
     {
         path: 'signup',
-        loadChildren: './account/account.module#AccountModule',
+        loadChildren: './profile/profile.module#ProfileModule',
     },
     // Auth required routes
     {
@@ -32,8 +32,8 @@ export const routes: Routes = [
                 loadChildren: './admin/admin.module#AdminModule',
             },
             {
-                path: 'account',
-                loadChildren: './account/account.module#AccountModule',
+                path: 'profile',
+                loadChildren: './profile/profile.module#ProfileModule',
             },
             {
                 path: 'error',

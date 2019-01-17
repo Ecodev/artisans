@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './components/signup/signup.component';
-import { AccountComponent } from './components/account/account.component';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: AccountComponent,
+        component: ProfileComponent,
         resolve: {
             user: ViewerResolver,
         },
@@ -22,5 +22,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class AccountRoutingModule {
+export class ProfileRoutingModule {
 }

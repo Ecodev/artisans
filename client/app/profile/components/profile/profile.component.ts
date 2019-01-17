@@ -19,11 +19,11 @@ import { BookingService } from '../../../admin/bookings/services/booking.service
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 
 @Component({
-    selector: 'app-account',
-    templateUrl: './account.component.html',
-    styleUrls: ['./account.component.scss'],
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
 })
-export class AccountComponent extends AbstractDetail<UserQuery['user'],
+export class ProfileComponent extends AbstractDetail<UserQuery['user'],
     UserQueryVariables,
     CreateUserMutation['createUser'],
     CreateUserMutationVariables,

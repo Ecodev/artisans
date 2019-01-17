@@ -60,6 +60,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaimQuery[
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
+            amount: [Validators.min(0)]
         };
     }
 

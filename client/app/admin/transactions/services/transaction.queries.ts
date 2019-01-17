@@ -8,6 +8,7 @@ export const transactionMetaFragment = gql`
         transactionDate
         remarks
         internalRemarks
+        amount
         account {
             id
             name

@@ -8,6 +8,7 @@ export const expenseClaimMetaFragment = gql`
         description
         remarks
         status
+        amount
         user {
             id
             name

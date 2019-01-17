@@ -59,7 +59,7 @@
 
                 <ng-container matColumnDef="amount">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
-                    <td mat-cell *matCellDef="let element">{{ element.amount }}</td>
+                    <td mat-cell *matCellDef="let element">{{ element.amount | currency: 'CHF'}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="creationDate">

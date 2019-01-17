@@ -25,6 +25,8 @@ import { TransactionComponent } from './transactions/transaction/transaction.com
 import { TransactionsComponent } from './transactions/transactions/transactions.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
+import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
+import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +48,9 @@ import { AccountComponent } from './accounts/account/account.component';
         TransactionComponent,
         TransactionsComponent,
         AccountsComponent,
-        AccountComponent
+        AccountComponent,
+        ExpenseClaimsComponent,
+        ExpenseClaimComponent,
     ],
     imports: [
         CommonModule,

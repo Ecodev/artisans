@@ -1,0 +1,71 @@
+<div [formGroup]="form">
+
+    <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'expenseClaim']"
+    ></app-detail-header>
+
+    <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
+        <mat-tab i18n-label label="Général">
+            <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+
+                        <mat-form-field>
+                            <mat-label i18n>Nom</mat-label>
+                            <input matInput formControlName="name" (change)="update()">
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label i18n>Description</mat-label>
+                            <textarea matInput
+                                      formControlName="description"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="1"
+                            ></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label i18n>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
+                            ></textarea>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+
+                        <app-select formControlName="user" placeholder="Membre" [service]="userService" (selectionChange)="update()"
+                        ></app-select>
+
+                        <mat-form-field>
+                            <mat-label i18n>Montant</mat-label>
+                            <input matInput formControlName="amount" (change)="update()">
+                            <div matSuffix>CHF</div>
+                            <mat-error *ngIf="form.get('amount').hasError('required')" i18n>Requis</mat-error>
+                        </mat-form-field>
+
+                        <app-select-enum enumName="ExpenseClaimStatus"
+                                         formControlName="status"
+                                         (selectionChange)="update()"
+                                         placeholder="Status"
+                        ></app-select-enum>
+                    </div>
+
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <app-stamp [item]="data.model"></app-stamp>
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></app-detail-fixed-button>
+
+</div>

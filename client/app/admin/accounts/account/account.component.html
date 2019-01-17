@@ -30,7 +30,13 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <h2 class="mat-title">Coordonnées</h2>
+                        <app-select formControlName="user"
+                                    placeholder="Membre"
+                                    [service]="userService"
+                                    (selectionChange)="update()"
+                        ></app-select>
+
+                        <h2 class="mat-title">Solde</h2>
                         {{ data.model.balance }} CHF
 
                     </div>

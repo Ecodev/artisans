@@ -29,6 +29,9 @@ import { TransactionsComponent } from './transactions/transactions/transactions.
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
 import { AccountResolver } from './accounts/services/account.resolver';
+import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
+import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
+import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resolver';
 
 const routes: Routes = [
         {
@@ -392,6 +395,30 @@ const routes: Routes = [
                             component: AccountComponent,
                             resolve: {
                                 account: AccountResolver,
+                            },
+                        },
+                    ],
+                },
+                {
+                    path: 'expense-claim',
+                    children: [
+                        {
+                            path: '',
+                            component: ExpenseClaimsComponent,
+                            data: {title: 'Notes de frais'},
+                        },
+                        {
+                            path: 'new',
+                            component: ExpenseClaimComponent,
+                            resolve: {
+                                expenseClaim: ExpenseClaimResolver,
+                            },
+                        },
+                        {
+                            path: ':expenseClaimId', // last
+                            component: ExpenseClaimComponent,
+                            resolve: {
+                                expenseClaim: ExpenseClaimResolver,
                             },
                         },
                     ],

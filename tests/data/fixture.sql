@@ -116,8 +116,8 @@ REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, s
 (11002, 1001, 1001, 1005, 'yearly_reminder', '2019-03-01 12:00:00', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
-(12000, 1000, 1000, 'Moniteur voile', '0000FF'),
-(12001, 1000, 1000, 'Moniteur SUP', 'FF0000');
+(12000, 1000, 1000, 'Moniteur voile', '#0000FF'),
+(12001, 1000, 1000, 'Moniteur SUP', '#FF0000');
 
 REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 (12000, 1008),

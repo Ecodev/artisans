@@ -101,6 +101,8 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         return {
             name: [Validators.required, Validators.maxLength(100)],
             code: [Validators.required, Validators.maxLength(100)],
+            initialPrice: [Validators.min(0)],
+            periodicPrice: [Validators.min(0)],
         };
     }
 

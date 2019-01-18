@@ -47,13 +47,16 @@
                 <ng-container matColumnDef="responsible">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Responsable</th>
                     <td mat-cell *matCellDef="let element">
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <ngx-avatar [name]="element.responsible?.name" [size]="36"></ngx-avatar>
-                            <app-table-button [label]="element.responsible?.name"
-                                              [navigate]="['/admin/user/', element.responsible?.id]"
-                                              i18n-matTooltip
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.responsible">
+                            <ngx-avatar [name]="element.responsible.name" [size]="36"></ngx-avatar>
+                            <app-table-button [label]="element.responsible.name"
+                                              [navigate]="['/admin/user/', element.responsible.id]"
                                               matTooltip="Éditer"
                             ></app-table-button>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.responsible">
+                            <ngx-avatar name="invité" [size]="36"></ngx-avatar>
+                            <button mat-button>Invité</button>
                         </div>
                     </td>
                 </ng-container>
@@ -61,13 +64,12 @@
                 <ng-container matColumnDef="bookable">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Réservable</th>
                     <td mat-cell *matCellDef="let element">
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.bookables.length">
-                            <app-table-button [label]="element.bookables[0].name"
-                                              [navigate]="['/admin/bookable/', element.bookables[0].id]"
-                                              i18n-matTooltip
-                                              matTooltip="Éditer"
-                            ></app-table-button>
-                        </div>
+                        <app-table-button *ngIf="element.bookables.length"
+                                          [label]="element.bookables[0].name"
+                                          [navigate]="['/admin/bookable/', element.bookables[0].id]"
+                                          matTooltip="Éditer"
+                        ></app-table-button>
+                        <button *ngIf="!element.bookables.length" mat-button>Matériel personnel</button>
                     </td>
                 </ng-container>
 

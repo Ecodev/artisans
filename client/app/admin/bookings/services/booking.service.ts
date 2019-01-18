@@ -20,6 +20,8 @@ import {
     BookingType,
     CreateBookingMutation,
     DeleteBookingsMutation,
+    JoinType,
+    LogicalOperator,
     TerminateBookingMutation,
     UpdateBookingMutation,
     UpdateBookingMutationVariables,
@@ -44,19 +46,41 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     UpdateBookingMutationVariables,
     DeleteBookingsMutation> {
 
+    /**
+     * Filters for bookings with endDate with self-approved bookables or no bookable linked
+     */
     public static readonly runningSelfApprovedQV: BookingsQueryVariables = {
         filter: {
             groups: [
                 {
+
                     conditions: [{endDate: {null: {not: false}}}],
-                    joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
+                    joins: {bookables: {type: JoinType.leftJoin, conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
+                },
+                {
+                    groupLogic: LogicalOperator.OR,
+                    conditions: [
+                        {
+                            endDate: {null: {not: false}},
+                            bookables: {empty: {}},
+                        },
+                    ],
                 },
             ],
         },
     };
 
     public static readonly selfApprovedQV: BookingsQueryVariables = {
-        filter: {groups: [{joins: {bookables: {conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}}}]},
+        filter: {
+            groups: [
+                {joins: {bookables: {type: JoinType.leftJoin, conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}}},
+                {
+                    groupLogic: LogicalOperator.OR,
+                    conditions: [{bookables: {empty: {}}}],
+                },
+            ],
+
+        },
     };
 
     public static readonly storageApplication: BookingsQueryVariables = {

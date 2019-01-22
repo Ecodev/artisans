@@ -26,6 +26,8 @@ export const userFieldsFragment = gql`
         isDoor4
         account {
             id
+            name
+            iban
             balance
         }
         billingType

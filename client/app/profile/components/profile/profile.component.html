@@ -1,10 +1,22 @@
-<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px" style="max-width:1300px; margin:auto; padding:30px">
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px" style="max-width:1300px; margin:auto; padding:30px" [formGroup]="form">
 
     <div fxFlex="66" fxLayout="column" fxLayoutGap="30px">
 
         <div>
             <h2 class="mat-headline">Solde</h2>
-            Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.
+            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo
+               risus, porta ac consectetur ac, vestibulum at eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+               ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+               condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>
+
+            <mat-form-field>
+                <mat-label>IBAN</mat-label>
+                <input matInput formControlName="iban" (change)="updateOrCreateAccount()">
+                <button mat-icon-button matSuffix (click)="unlockIBAN()">
+                    <app-icon *ngIf="form.get('iban').disabled" name="lock"></app-icon>
+                </button>
+            </mat-form-field>
+
         </div>
 
         <div>

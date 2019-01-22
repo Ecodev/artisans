@@ -12,6 +12,10 @@ export const transactionMetaFragment = gql`
         account {
             id
             name
+            user {
+                id
+                name
+            }
         }
         expenseClaim {
             id

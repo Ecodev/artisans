@@ -72,6 +72,16 @@
                             <mat-error *ngIf="form.get('login').hasError('required')" i18n>Requis</mat-error>
                         </mat-form-field>
 
+                        <mat-divider class="margin-bottom"></mat-divider>
+                        <h2 class="mat-title">Finances</h2>
+                        <app-select formControlName="account"
+                                    placeholder="Compte"
+                                    [service]="accountService"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                                    [navigateTo]="['/admin/account', form.get('account').value?.id]"
+                        ></app-select>
+
                     </div>
                 </div>
 

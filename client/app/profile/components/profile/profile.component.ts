@@ -17,6 +17,8 @@ import { AppDataSource } from '../../../shared/services/data.source';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
+import { AccountService } from '../../../admin/accounts/services/account.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-profile',
@@ -48,7 +50,8 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
                 router: Router,
                 route: ActivatedRoute,
                 private bookingService: BookingService,
-                public bookableService: BookableService) {
+                public bookableService: BookableService,
+                public accountService: AccountService) {
 
         super('user', userService, alertService, router, route);
     }
@@ -63,6 +66,15 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
         this.runningNavigationsDS = new AppDataSource(this.runningNavigations.valueChanges);
         this.runningServicesDS = new AppDataSource(this.runningServices.valueChanges);
         this.pendingApplicationsDS = new AppDataSource(this.pendingApplications.valueChanges);
+
+        const account = this.form.get('account');
+        const formState = {
+            value: account && account.value ? account.value.iban : null,
+            disabled: account && account.value && !!account.value.iban,
+        };
+
+        this.form.addControl('iban', new FormControl(formState));
+
     }
 
     ngOnDestroy() {
@@ -90,6 +102,40 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
 
     public cancelApplication(booking) {
         this.bookingService.delete([booking]);
+    }
+
+    /**
+     * Manages account transparently just by setting the iban.
+     * If no account exists when an iban is created, then the account is created for current user and setted iban
+     * If account exists and iban changes, the account is updated
+     * TODO : test once server accepts to update/create accounts without balance amount error
+     */
+    public updateOrCreateAccount() {
+        const iban = this.form.get('iban');
+        const account = this.form.get('account');
+
+        const confirmAndLock = () => {
+            this.alertService.info('Votre compte IBAN a été mis à jour');
+
+            if (iban) {
+                iban.disable();
+            }
+        };
+
+        if (iban && iban.value && account && account.value) {
+            const newAccount = {id: account.value.id, iban: iban.value};
+            this.accountService.updateNow(newAccount).subscribe(confirmAndLock);
+        } else if (iban && iban.value && account && !account.value) {
+            this.accountService.create({iban: iban.value, user: this.data.model.id, name: 'User account'}).subscribe(confirmAndLock);
+        }
+    }
+
+    public unlockIBAN() {
+        const iban = this.form.get('iban');
+
+        if (iban) {
+            iban.enable();
+        }
     }
 
 }

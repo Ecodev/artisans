@@ -4,13 +4,14 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
-    TransactionQuery,
-    TransactionQueryVariables,
     CreateTransactionMutation,
     CreateTransactionMutationVariables,
+    TransactionQuery,
+    TransactionQueryVariables,
     UpdateTransactionMutation,
     UpdateTransactionMutationVariables,
 } from '../../../shared/generated-types';
+import { AccountService } from '../../accounts/services/account.service';
 
 @Component({
     selector: 'app-transaction',
@@ -30,7 +31,17 @@ export class TransactionComponent
                 transactionService: TransactionService,
                 router: Router,
                 route: ActivatedRoute,
+                public accountService: AccountService,
     ) {
         super('transaction', transactionService, alertService, router, route);
+    }
+
+    public showAccountName(item) {
+
+        if (!item) {
+            return '';
+        }
+
+        return item.user ? item.user.name : item.name || item;
     }
 }

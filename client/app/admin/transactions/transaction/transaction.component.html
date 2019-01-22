@@ -1,9 +1,6 @@
 <div [formGroup]="form">
 
-    <app-detail-header newLabel="Nouvelle transaction"
-                       label="Transaction"
-                       [model]="data.model"
-                       [listRoute]="['admin', 'transaction']"
+    <app-detail-header newLabel="Nouvelle transaction" label="Transaction" [model]="data.model" [listRoute]="['admin', 'transaction']"
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
@@ -42,6 +39,14 @@
 
                     <div fxFlex="33" fxLayout="column">
 
+                        <app-select formControlName="account"
+                                    [displayWith]="showAccountName"
+                                    placeholder="Compte"
+                                    [service]="accountService"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                        ></app-select>
+
                         <mat-form-field>
                             <mat-label i18n>Montant</mat-label>
                             <input matInput formControlName="amount" (change)="update()">
@@ -59,7 +64,7 @@
 
                 </div>
 
-                <!-- TODO : add selectors for Account, ExpanseClaim and Categories -->
+                <!-- TODO : add selectors for ExpanseClaim and Categories -->
 
                 <mat-divider></mat-divider>
 

@@ -17,6 +17,7 @@ import {
 import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
 import { BookingService } from '../../bookings/services/booking.service';
+import { AccountService } from '../../accounts/services/account.service';
 
 @Component({
     selector: 'app-user',
@@ -43,6 +44,7 @@ export class UserComponent
                 public userTagService: UserTagService,
                 public licenseService: LicenseService,
                 public bookingService: BookingService,
+                public accountService: AccountService,
     ) {
         super('user', userService, alertService, router, route);
     }

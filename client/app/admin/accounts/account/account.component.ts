@@ -11,6 +11,7 @@ import {
     UpdateAccountMutation,
     UpdateAccountMutationVariables,
 } from '../../../shared/generated-types';
+import { UserService } from '../../users/services/user.service';
 
 @Component({
     selector: 'app-account',
@@ -30,6 +31,7 @@ export class AccountComponent
                 accountService: AccountService,
                 router: Router,
                 route: ActivatedRoute,
+                public userService: UserService,
     ) {
         super('account', accountService, alertService, router, route);
     }

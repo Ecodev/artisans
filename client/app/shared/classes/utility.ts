@@ -12,7 +12,7 @@ export class Utility {
                 value = object[key].id;
             } else if (isArray(value)) {
                 value = value.map(i => isObject(i) && i.id ? i.id : i);
-            } else if (isObject(value) && !(value instanceof File)) {
+            } else if (isObject(value) && !(value instanceof File) && !(value instanceof Date)) {
                 value = pickBy(value, (v, k) => k !== '__typename'); // omit(value, ['__typename']) ?
             }
 

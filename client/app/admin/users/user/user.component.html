@@ -8,7 +8,7 @@
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab i18n-label label="Général">
+        <mat-tab  label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
@@ -17,21 +17,21 @@
 
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex>
-                                <mat-label i18n>Prénom</mat-label>
+                                <mat-label  >Prénom</mat-label>
                                 <input matInput formControlName="firstName" (change)="update()">
-                                <mat-error *ngIf="form.get('firstName').hasError('maxlength')" i18n>
+                                <mat-error *ngIf="form.get('firstName').hasError('maxlength')"  >
                                     Maximum {{form.get('firstName').errors.maxlength.requiredLength}} caractères
                                 </mat-error>
-                                <mat-error *ngIf="form.get('firstName').hasError('required')" i18n>Requis</mat-error>
+                                <mat-error *ngIf="form.get('firstName').hasError('required')"  >Requis</mat-error>
                             </mat-form-field>
 
                             <mat-form-field fxFlex>
-                                <mat-label i18n>Nom de famille</mat-label>
+                                <mat-label  >Nom de famille</mat-label>
                                 <input matInput formControlName="lastName" (change)="update()">
-                                <mat-error *ngIf="form.get('lastName').hasError('maxlength')" i18n>
+                                <mat-error *ngIf="form.get('lastName').hasError('maxlength')"  >
                                     Maximum {{form.get('lastName').errors.maxlength.requiredLength}} caractères
                                 </mat-error>
-                                <mat-error *ngIf="form.get('lastName').hasError('required')" i18n>Requis</mat-error>
+                                <mat-error *ngIf="form.get('lastName').hasError('required')"  >Requis</mat-error>
                             </mat-form-field>
 
                             <app-select-enum enumName="Sex" formControlName="sex" placeholder="Genre"></app-select-enum>
@@ -42,12 +42,12 @@
                         <div fxLayout="row" fxLayoutGap="10px">
 
                             <mat-form-field fxFlex>
-                                <mat-label i18n>Téléphone fixe</mat-label>
+                                <mat-label  >Téléphone fixe</mat-label>
                                 <input matInput formControlName="phone" (change)="update()">
                             </mat-form-field>
 
                             <mat-form-field fxFlex>
-                                <mat-label i18n>Téléphone mobile</mat-label>
+                                <mat-label  >Téléphone mobile</mat-label>
                                 <input matInput formControlName="mobilePhone" (change)="update()">
                             </mat-form-field>
 
@@ -58,18 +58,18 @@
                     <div fxFlex="33" fxLayout="column">
                         <h2 class="mat-title">Compte</h2>
                         <mat-form-field>
-                            <mat-label i18n>email</mat-label>
+                            <mat-label  >email</mat-label>
                             <input matInput formControlName="email" (change)="update()">
-                            <mat-error *ngIf="form.get('email').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('email').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>Nom d'utilisateur</mat-label>
+                            <mat-label  >Nom d'utilisateur</mat-label>
                             <input matInput formControlName="login" (change)="update()">
-                            <mat-error *ngIf="form.get('login').hasError('maxlength')" i18n>
+                            <mat-error *ngIf="form.get('login').hasError('maxlength')"  >
                                 Maximum {{form.get('login').errors.maxlength.requiredLength}} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('login').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('login').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>
@@ -99,12 +99,12 @@
                         ></app-select>
 
                         <mat-form-field fxFlex>
-                            <mat-label i18n>Swiss sailling</mat-label>
+                            <mat-label  >Swiss sailling</mat-label>
                             <input matInput formControlName="ichtusSwissSailing" (change)="update()">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>Remarques</mat-label>
+                            <mat-label  >Remarques</mat-label>
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
@@ -206,7 +206,7 @@
                         <app-relations [main]="data.model"
                                        [service]="licenseService"
                                        [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                       i18n-placeholder
+
                                        placeholder="Attribuer une certification"
                                        [hideSearch]="true"
                         >

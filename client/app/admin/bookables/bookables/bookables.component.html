@@ -14,9 +14,9 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="name" i18n>Nom</span>
-                    <span appColumnsPickerColumn="initialPrice" i18n>Prix initial</span>
-                    <span appColumnsPickerColumn="periodicPrice" i18n>Prix périodique</span>
+                    <span appColumnsPickerColumn="name"  >Nom</span>
+                    <span appColumnsPickerColumn="initialPrice"  >Prix initial</span>
+                    <span appColumnsPickerColumn="periodicPrice"  >Prix périodique</span>
                     <span appColumnsPickerColumn="creationDate">Créé le</span>
                     <span appColumnsPickerColumn="updateDate">Modifié le</span>
                 </app-columns-picker>
@@ -30,11 +30,11 @@
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Nom</th>
                     <td mat-cell *matCellDef="let element">
                         <app-table-button [label]="element.name"
                                           [navigate]="['/admin/bookable', element.id]"
-                                          i18n-matTooltip
+
                                           matTooltip="Éditer"
                         ></app-table-button>
                     </td>
@@ -64,7 +64,7 @@
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
-            <div i18n>Pas de résultats</div>
+            <div  >Pas de résultats</div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">

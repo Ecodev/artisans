@@ -7,7 +7,7 @@
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab i18n-label label="Général">
+        <mat-tab  label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="80" fxLayout="column">
@@ -21,7 +21,7 @@
                             ></app-select>
 
                             <mat-form-field fxFlex="20">
-                                <mat-label i18n>Nombre de participants</mat-label>
+                                <mat-label  >Nombre de participants</mat-label>
                                 <input matInput formControlName="participantCount" (change)="update()">
                             </mat-form-field>
                         </div>
@@ -73,12 +73,12 @@
                         </div>
 
                         <mat-form-field>
-                            <mat-label i18n>Destination</mat-label>
+                            <mat-label  >Destination</mat-label>
                             <input matInput formControlName="destination" (change)="update()" />
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>Commentaire de départ</mat-label>
+                            <mat-label  >Commentaire de départ</mat-label>
                             <textarea matInput
                                       formControlName="startComment"
                                       (change)="update()"
@@ -108,12 +108,12 @@
                         </div>
 
                         <mat-form-field>
-                            <mat-label i18n>Heure estimée de retour</mat-label>
+                            <mat-label  >Heure estimée de retour</mat-label>
                             <input matInput formControlName="estimatedEndDate" (change)="update()">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>Commentaire d'arrivée</mat-label>
+                            <mat-label  >Commentaire d'arrivée</mat-label>
                             <textarea matInput
                                       formControlName="endComment"
                                       (change)="update()"

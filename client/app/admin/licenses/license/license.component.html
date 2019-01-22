@@ -7,25 +7,25 @@
             </a>
             <span *ngIf="!form.get('name').value">Nouvelle certification</span>
             <span *ngIf="form.get('name').value" class="pageTitle">
-                <span i18n>Certification</span>
+                <span  >Certification</span>
                 {{ form.get('name').value }}
             </span>
         </div>
     </div>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab i18n-label label="Général">
+        <mat-tab  label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
-                            <mat-label i18n>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                            <mat-label  >Nom</mat-label>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')"  >
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                     </div>
@@ -41,7 +41,7 @@
                         <app-relations [main]="data.model"
                                        [service]="userService"
                                        [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
-                                       i18n-placeholder
+
                                        placeholder="Certifier un utilisateur"
                         >
                             <ng-template let-item="item">
@@ -57,7 +57,7 @@
                         <app-relations [main]="data.model"
                                        [service]="bookableService"
                                        [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
-                                       i18n-placeholder
+
                                        placeholder="Associer à un réservable"
                         >
                             <ng-template let-item="item">

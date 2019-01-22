@@ -14,10 +14,10 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="name" i18n>Nom</span>
-                    <span appColumnsPickerColumn="user" i18n>Utilisateur</span>
-                    <span appColumnsPickerColumn="balance" i18n>Solde</span>
-                    <span appColumnsPickerColumn="iban" i18n>IBAN</span>
+                    <span appColumnsPickerColumn="name"  >Nom</span>
+                    <span appColumnsPickerColumn="user"  >Utilisateur</span>
+                    <span appColumnsPickerColumn="balance"  >Solde</span>
+                    <span appColumnsPickerColumn="iban"  >IBAN</span>
                     <span appColumnsPickerColumn="creationDate">Créé le</span>
                     <span appColumnsPickerColumn="updateDate">Modifié le</span>
                 </app-columns-picker>
@@ -31,21 +31,21 @@
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Nom</th>
                     <td mat-cell *matCellDef="let element">
                         <app-table-button [label]="element.name" [navigate]="[element.id]" matTooltip="Éditer"></app-table-button>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="user">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Membre</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Membre</th>
                     <td mat-cell *matCellDef="let element">
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.user">
                             <ngx-avatar [name]="element.user?.name" [size]="36"></ngx-avatar>
                             <app-table-button [label]="element.user?.name"
                                               [navigate]="['/admin/user/', element.user?.id]"
-                                              i18n-matTooltip
+
                                               matTooltip="Éditer"
                             ></app-table-button>
                         </div>
@@ -81,7 +81,7 @@
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
-            <div i18n>Pas de résultats</div>
+            <div  >Pas de résultats</div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">

@@ -2,7 +2,7 @@
 
     <div fxLayout="column">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span i18n>{{routeData.title}}</span>
+            <span  >{{routeData.title}}</span>
         </div>
     </div>
 
@@ -16,8 +16,8 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="color" i18n>Couleur</span>
-                    <span appColumnsPickerColumn="name" i18n>Nom</span>
+                    <span appColumnsPickerColumn="color"  >Couleur</span>
+                    <span appColumnsPickerColumn="name"  >Nom</span>
                 </app-columns-picker>
             </natural-search>
         </div>
@@ -28,18 +28,18 @@
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
                 <ng-container matColumnDef="color">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n app-3em-column></th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-3em-column></th>
                     <td mat-cell *matCellDef="let element">
                         <ngx-avatar [bgColor]="element.color" [size]="32" [name]="element.name"></ngx-avatar>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header i18n>Nom</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Nom</th>
                     <td mat-cell *matCellDef="let element">
                         <app-table-button [label]="element.name"
                                           [navigate]="['/admin/user-tag', element.id]"
-                                          i18n-matTooltip
+
                                           matTooltip="Éditer"
                         ></app-table-button>
                     </td>
@@ -49,7 +49,7 @@
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
-            <div i18n>Pas de résultats</div>
+            <div  >Pas de résultats</div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">

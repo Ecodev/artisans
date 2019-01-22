@@ -7,22 +7,22 @@
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab i18n-label label="Général">
+        <mat-tab  label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
-                            <mat-label i18n>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                            <mat-label  >Nom</mat-label>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')"  >
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>Description</mat-label>
+                            <mat-label  >Description</mat-label>
                             <textarea matInput
                                       formControlName="description"
                                       (change)="update()"
@@ -37,27 +37,27 @@
 
                         <mat-form-field>
                             <input matInput formControlName="code" (change)="update()">
-                            <mat-label i18n>Code</mat-label>
-                            <mat-error *ngIf="form.get('code').hasError('maxlength')" i18n>
+                            <mat-label  >Code</mat-label>
+                            <mat-error *ngIf="form.get('code').hasError('maxlength')"  >
                                 Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('code').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('code').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>
 
                         <mat-form-field>
-                            <mat-label i18n>Prix initial</mat-label>
+                            <mat-label  >Prix initial</mat-label>
                             <input matInput formControlName="initialPrice" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('initialPrice').hasError('min')" i18n>Le montant doit être positif</mat-error>
+                            <mat-error *ngIf="form.get('initialPrice').hasError('min')"  >Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>Prix périodique</mat-label>
+                            <mat-label  >Prix périodique</mat-label>
                             <input matInput formControlName="periodicPrice" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('periodicPrice').hasError('min')" i18n>Le montant doit être positif</mat-error>
+                            <mat-error *ngIf="form.get('periodicPrice').hasError('min')"  >Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>
@@ -92,7 +92,7 @@
                             <app-relations [main]="data.model"
                                            [service]="licenseService"
                                            [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
-                                           i18n-placeholder
+
                                            placeholder="Associer à une certification"
                             >
                                 <ng-template let-item="item">

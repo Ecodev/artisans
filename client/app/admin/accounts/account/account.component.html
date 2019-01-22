@@ -3,27 +3,27 @@
     <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'account']"></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab i18n-label label="Général">
+        <mat-tab  label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
-                            <mat-label i18n>Nom</mat-label>
+                            <mat-label  >Nom</mat-label>
                             <input matInput formControlName="name" (change)="update()">
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')" i18n>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')"  >
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label i18n>IBAN</mat-label>
+                            <mat-label  >IBAN</mat-label>
                             <input matInput formControlName="iban" (change)="update()">
-                            <mat-error *ngIf="form.get('iban').hasError('maxlength')" i18n>
+                            <mat-error *ngIf="form.get('iban').hasError('maxlength')"  >
                                 Maximum {{form.get('iban').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('iban').hasError('required')" i18n>Requis</mat-error>
+                            <mat-error *ngIf="form.get('iban').hasError('required')"  >Requis</mat-error>
                         </mat-form-field>
 
                     </div>

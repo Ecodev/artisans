@@ -3,7 +3,7 @@ import { CategoryService } from '../../../admin/categories/services/category.ser
 
 export const CategoryConfiguration: HierarchicConfiguration[] = [
     {
-        service: CategoryService,
+        service: CategoryService as any,
         parentsFilters: ['parents'],
         childrenFilters: ['parents'],
         selectableAtKey: 'category',

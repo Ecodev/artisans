@@ -9,6 +9,10 @@ export const transactionMetaFragment = gql`
         remarks
         internalRemarks
         amount
+        category {
+            id
+            name
+        }
         account {
             id
             name

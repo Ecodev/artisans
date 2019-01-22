@@ -39,6 +39,13 @@
 
                     <div fxFlex="33" fxLayout="column">
 
+                        <app-select formControlName="category"
+                                    placeholder="Catégorie"
+                                    [hierarchicSelectorConfig]="hierarchicConfig"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                        ></app-select>
+
                         <app-select formControlName="account"
                                     [displayWith]="showAccountName"
                                     placeholder="Compte"

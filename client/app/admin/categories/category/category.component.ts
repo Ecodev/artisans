@@ -10,6 +10,7 @@ import {
     UpdateCategoryMutation, UpdateCategoryMutationVariables,
 } from '../../../shared/generated-types';
 import { CategoryService } from '../services/category.service';
+import { CategoryConfiguration } from '../../../shared/hierarchic-selector/configurations/CategoryConfiguration';
 
 
 @Component({
@@ -26,11 +27,12 @@ export class CategoryComponent
         UpdateCategoryMutationVariables,
         DeleteCategoriesMutation> {
 
+    public hierarchicConfig = CategoryConfiguration;
+
     constructor(alertService: AlertService,
                 categoryService: CategoryService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: CategoryService,
     ) {
         super('category', categoryService, alertService, router, route);
     }

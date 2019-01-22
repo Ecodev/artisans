@@ -36,7 +36,7 @@
                         <app-relations [main]="data.model"
                                        [service]="service"
                                        [filter]="{groups: [{conditions: [{parents: {have: {values: [data.model.id]}}}]}]}"
-                                       i18n-placeholder
+                                       [hierarchicSelectorConfig]="hierarchicConfig"
                                        placeholder="Ajouter une catégorie enfant"
                                        [hideSearch]="true"
                         >
@@ -55,7 +55,7 @@
                         <app-relations [main]="data.model"
                                        [service]="service"
                                        [filter]="{groups: [{conditions: [{children: {have: {values: [data.model.id]}}}]}]}"
-                                       i18n-placeholder
+                                       [hierarchicSelectorConfig]="hierarchicConfig"
                                        placeholder="Ajouter une catégorie enfant"
                                        [hideSearch]="true"
                         >

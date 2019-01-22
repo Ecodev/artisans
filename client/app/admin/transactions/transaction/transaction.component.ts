@@ -12,6 +12,7 @@ import {
     UpdateTransactionMutationVariables,
 } from '../../../shared/generated-types';
 import { AccountService } from '../../accounts/services/account.service';
+import { CategoryConfiguration } from '../../../shared/hierarchic-selector/configurations/CategoryConfiguration';
 
 @Component({
     selector: 'app-transaction',
@@ -26,6 +27,8 @@ export class TransactionComponent
         UpdateTransactionMutation['updateTransaction'],
         UpdateTransactionMutationVariables,
         any> {
+
+    public hierarchicConfig = CategoryConfiguration;
 
     constructor(alertService: AlertService,
                 transactionService: TransactionService,

@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
-    categoryQuery,
     categoriesQuery,
+    categoryQuery,
     createCategoryMutation,
     deleteCategoriesMutation,
     updateCategoryMutation,
 } from './category.queries';
 import {
+    CategoriesQuery,
+    CategoriesQueryVariables,
     CategoryInput,
     CategoryQuery,
     CategoryQueryVariables,
-    CategoriesQuery,
-    CategoriesQueryVariables,
     CreateCategoryMutation,
     CreateCategoryMutationVariables,
     UpdateCategoryMutation,

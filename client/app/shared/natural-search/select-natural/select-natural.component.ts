@@ -33,14 +33,6 @@ export class SelectNaturalComponent implements DropdownComponent {
         }
     }
 
-    private getRenderedValue(): string {
-        if (this.selected) {
-            return this.selected.fullName || this.selected.name;
-        }
-
-        return '';
-    }
-
     public isValid(): boolean {
         return this.selected !== null;
     }
@@ -65,5 +57,13 @@ export class SelectNaturalComponent implements DropdownComponent {
                 condition: this.getCondition(),
             });
         }
+    }
+
+    private getRenderedValue(): string {
+        if (this.selected) {
+            return this.selected.fullName || this.selected.name;
+        }
+
+        return '';
     }
 }

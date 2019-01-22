@@ -54,6 +54,15 @@ export abstract class AbstractModelService<Tone,
      */
     private creatingCache: Literal = {};
 
+    constructor(protected readonly apollo: Apollo,
+                protected readonly name: string,
+                protected readonly oneQuery: DocumentNode | null,
+                protected readonly allQuery: DocumentNode | null,
+                protected readonly createMutation: DocumentNode | null,
+                protected readonly updateMutation: DocumentNode | null,
+                protected readonly deleteMutation: DocumentNode | null) {
+    }
+
     public static mergeOverrideArray(dest, src) {
         if (isArray(src)) {
             return src;
@@ -80,15 +89,6 @@ export abstract class AbstractModelService<Tone,
         );
 
         return queries;
-    }
-
-    constructor(protected readonly apollo: Apollo,
-                protected readonly name: string,
-                protected readonly oneQuery: DocumentNode | null,
-                protected readonly allQuery: DocumentNode | null,
-                protected readonly createMutation: DocumentNode | null,
-                protected readonly updateMutation: DocumentNode | null,
-                protected readonly deleteMutation: DocumentNode | null) {
     }
 
     /**
@@ -311,18 +311,6 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
-     * Get item key to be used as cache index : action-123
-     */
-    protected getKey(object: Literal) {
-
-        if (!object.__typename) {
-            return 'default' + '-' + object.id;
-        }
-
-        return object.__typename + '-' + object.id;
-    }
-
-    /**
      * Update an object
      */
     public update(object: Vupdate['input']): Observable<Tupdate> {
@@ -422,6 +410,36 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
+     * Resolve model and items related to the model, if the id is provided, in order to show a form
+     */
+    public resolve(id: string): Observable<{ model: Tone }> {
+
+        // Load model if id is given
+        let observable;
+        if (id) {
+            observable = this.getOne(id);
+        } else {
+            observable = of(this.getEmptyObject() as Tone);
+        }
+
+        return observable.pipe(map(result => {
+            return {model: result};
+        }));
+    }
+
+    /**
+     * Get item key to be used as cache index : action-123
+     */
+    protected getKey(object: Literal) {
+
+        if (!object.__typename) {
+            return 'default' + '-' + object.id;
+        }
+
+        return object.__typename + '-' + object.id;
+    }
+
+    /**
      * This is used to extract only the fetched object out of the entire fetched data
      */
     protected mapOne(): OperatorFunction<FetchResult<Tone>, Tone> {
@@ -485,13 +503,6 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
-     * Merge given ID with context if there is any
-     */
-    private getVariablesForOne(id: string): Vone {
-        return merge({}, {id: id}, this.getContextForOne());
-    }
-
-    /**
      * Returns an additional context to be used in variables when getting a single object
      *
      * This is typically a site or state ID, and is needed to get appropriate access rights
@@ -521,15 +532,6 @@ export abstract class AbstractModelService<Tone,
     /**
      * Throw exception to prevent executing null queries
      */
-    private throwIfNotQuery(query): void {
-        if (!query) {
-            throw new Error('GraphQL query for this method was not configured in this service constructor');
-        }
-    }
-
-    /**
-     * Throw exception to prevent executing null queries
-     */
     protected throwIfObservable(value): void {
         if (value instanceof Observable) {
             throw new Error('Cannot use Observable as variables. Instead you should use .subscribe() to call the method with a real value');
@@ -537,21 +539,19 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
-     * Resolve model and items related to the model, if the id is provided, in order to show a form
+     * Merge given ID with context if there is any
      */
-    public resolve(id: string): Observable<{ model: Tone }> {
+    private getVariablesForOne(id: string): Vone {
+        return merge({}, {id: id}, this.getContextForOne());
+    }
 
-        // Load model if id is given
-        let observable;
-        if (id) {
-            observable = this.getOne(id);
-        } else {
-            observable = of(this.getEmptyObject() as Tone);
+    /**
+     * Throw exception to prevent executing null queries
+     */
+    private throwIfNotQuery(query): void {
+        if (!query) {
+            throw new Error('GraphQL query for this method was not configured in this service constructor');
         }
-
-        return observable.pipe(map(result => {
-            return {model: result};
-        }));
     }
 
 }

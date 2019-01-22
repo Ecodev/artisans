@@ -54,7 +54,7 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
             transactionDate: '',
             internalRemarks: '',
             remarks: '',
-            category: null
+            category: null,
         };
     }
 

@@ -72,6 +72,14 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
         this.persistenceService.persistInStorage('ns', null, this.getStorageKey());
     }
 
+    public goToChildLink(parent) {
+        if (parent && parent.id) {
+            return ['.', {parent: parent.id}];
+        } else {
+            return ['.', {}];
+        }
+    }
+
     protected translateSearchAndRefreshList(naturalSearchSelections: NaturalSearchSelections) {
 
         if (this.hasSelections(naturalSearchSelections)) {
@@ -90,14 +98,6 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
 
         // todo : check why without "as Vall" it errors.  Vall is supposed to be QueryVariables, and filter too.
         this.variablesManager.set('natural-search', {filter: translatedSelection} as Vall);
-    }
-
-    public goToChildLink(parent) {
-        if (parent && parent.id) {
-            return ['.', {parent: parent.id}];
-        } else {
-            return ['.', {}];
-        }
     }
 
     /**

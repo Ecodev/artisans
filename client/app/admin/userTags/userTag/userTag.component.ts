@@ -4,13 +4,14 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
     CreateUserTagMutation,
-    CreateUserTagMutationVariables, DeleteUserTagsMutation,
+    CreateUserTagMutationVariables,
+    DeleteUserTagsMutation,
+    UpdateUserTagMutation,
+    UpdateUserTagMutationVariables,
     UserTagQuery,
     UserTagQueryVariables,
-    UpdateUserTagMutation, UpdateUserTagMutationVariables,
 } from '../../../shared/generated-types';
 import { UserTagService } from '../services/userTag.service';
-
 
 @Component({
     selector: 'app-user-tag',

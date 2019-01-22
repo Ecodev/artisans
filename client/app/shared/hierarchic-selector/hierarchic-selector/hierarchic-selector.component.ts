@@ -121,30 +121,6 @@ export class HierarchicSelectorComponent extends AbstractController implements O
         }
     }
 
-    private loadRoots(): void {
-        this.loading = true;
-        this.hierarchicSelectorService.init(this.config, this.filters).subscribe(() => {
-            this.loading = false;
-        });
-    }
-
-    /**
-     * Sync inner selection (tree and mat-chips) according to selected input attribute
-     */
-    private updateInnerSelection(selected: OrganizedModelSelection) {
-
-        // Transform an OrganizedModelSelection into a ModelNode list that is used in the selected zone of the component (see template)
-        this.selectedNodes = this.hierarchicSelectorService.fromOrganizedSelection(selected);
-
-        this.flatNodesSelection.clear();
-        for (const node of this.selectedNodes) {
-            const flatNode = this.getFlatNode(node);
-            if (flatNode) {
-                this.flatNodesSelection.select(flatNode);
-            }
-        }
-    }
-
     /**
      * Toggle selection of a FlatNode, considering if multiple selection is activated or not
      */
@@ -180,6 +156,97 @@ export class HierarchicSelectorComponent extends AbstractController implements O
             // Remove from chips list only if no flatNode, because unselectFlatNode() already deals with it.
             this.removeModelNode(node);
             this.updateSelection(this.selectedNodes);
+        }
+    }
+
+    public isNodeTogglable(flatNode: FlatNode) {
+        if (this.isNodeSelected(flatNode.node)) {
+            return flatNode.deselectable;
+        } else {
+            return flatNode.selectable;
+        }
+    }
+
+    public getDisplayFn(): (item: any) => string {
+        if (this.displayWith) {
+            return this.displayWith;
+        }
+
+        return (item) => item ? item.fullName || item.name : '';
+    }
+
+    public loadChildren(flatNode: FlatNode) {
+        if (this.treeControl.isExpanded(flatNode)) {
+            this.hierarchicSelectorService.loadChildren(flatNode, this.filters);
+        }
+    }
+
+    public getChildren(): (node: ModelNode) => Observable<ModelNode[]> {
+        return (node: ModelNode): Observable<ModelNode[]> => {
+            return node.childrenChange;
+        };
+    }
+
+    /**
+     * Transforms a ModelNode into a FlatNode
+     */
+    public transformer(): (node: ModelNode, level: number) => FlatNode {
+        return (node: ModelNode, level: number) => {
+            return this.getOrCreateFlatNode(node, level);
+        };
+    }
+
+    /**
+     * Return deep of the node in the tree
+     */
+    public getLevel(): (node: FlatNode) => number {
+        return (node: FlatNode) => {
+            return node.level;
+        };
+    }
+
+    /**
+     * Is always expandable because we load on demand, we don't know if there are children yet
+     */
+    public isExpandable(): (node: FlatNode) => boolean {
+        return (node: FlatNode) => {
+            return node.expandable;
+        };
+    }
+
+    public getOrCreateFlatNode(node: ModelNode, level: number): FlatNode {
+
+        // Return FlatNode if exists
+        const flatNode = this.getFlatNode(node);
+        if (flatNode) {
+            return flatNode;
+        }
+
+        // Return new FlatNode
+        return this.createFlatNode(node, level);
+    }
+
+    private loadRoots(): void {
+        this.loading = true;
+        this.hierarchicSelectorService.init(this.config, this.filters).subscribe(() => {
+            this.loading = false;
+        });
+    }
+
+    /**
+     * Sync inner selection (tree and mat-chips) according to selected input attribute
+     */
+    private updateInnerSelection(selected: OrganizedModelSelection) {
+
+        // Transform an OrganizedModelSelection into a ModelNode list that is used in the selected zone of the component (see template)
+        this.selectedNodes = this.hierarchicSelectorService.fromOrganizedSelection(selected);
+
+        this.flatNodesSelection.clear();
+        for (const node of this.selectedNodes) {
+            const flatNode = this.getFlatNode(node);
+            if (flatNode) {
+                this.flatNodesSelection.select(flatNode);
+            }
         }
     }
 
@@ -238,77 +305,10 @@ export class HierarchicSelectorComponent extends AbstractController implements O
         Utility.replaceObjectKeepingReference(this.selected, organizedFlatNodesSelection);
     }
 
-    public isNodeTogglable(flatNode: FlatNode) {
-        if (this.isNodeSelected(flatNode.node)) {
-            return flatNode.deselectable;
-        } else {
-            return flatNode.selectable;
-        }
-    }
-
-    public getDisplayFn(): (item: any) => string {
-        if (this.displayWith) {
-            return this.displayWith;
-        }
-
-        return (item) => item ? item.fullName || item.name : '';
-    }
-
-    public loadChildren(flatNode: FlatNode) {
-        if (this.treeControl.isExpanded(flatNode)) {
-            this.hierarchicSelectorService.loadChildren(flatNode, this.filters);
-        }
-    }
-
-    public getChildren(): (node: ModelNode) => Observable<ModelNode[]> {
-        return (node: ModelNode): Observable<ModelNode[]> => {
-            return node.childrenChange;
-        };
-    }
-
-    /**
-     * Transforms a ModelNode into a FlatNode
-     */
-    public transformer(): (node: ModelNode, level: number) => FlatNode {
-        return (node: ModelNode, level: number) => {
-            return this.getOrCreateFlatNode(node, level);
-        };
-    }
-
-    /**
-     * Return deep of the node in the tree
-     */
-    public getLevel(): (node: FlatNode) => number {
-        return (node: FlatNode) => {
-            return node.level;
-        };
-    }
-
     private isNodeSelected(node: ModelNode): boolean {
         const key = this.getMapKey(node.model);
 
         return this.selectedNodes.some(n => this.getMapKey(n.model) === key);
-    }
-
-    /**
-     * Is always expandable because we load on demand, we don't know if there are children yet
-     */
-    public isExpandable(): (node: FlatNode) => boolean {
-        return (node: FlatNode) => {
-            return node.expandable;
-        };
-    }
-
-    public getOrCreateFlatNode(node: ModelNode, level: number): FlatNode {
-
-        // Return FlatNode if exists
-        const flatNode = this.getFlatNode(node);
-        if (flatNode) {
-            return flatNode;
-        }
-
-        // Return new FlatNode
-        return this.createFlatNode(node, level);
     }
 
     private getFlatNode(node: ModelNode): FlatNode | null {

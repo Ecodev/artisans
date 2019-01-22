@@ -111,50 +111,34 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
      * Function to customize the rendering of the selected item as text in input
      */
     @Input() displayWith: (any) => string;
-
-    /**
-     * Whether the disabled can be changed
-     */
-    @Input() set disabled(disabled: boolean) {
-        disabled ? this.formCtrl.disable() : this.formCtrl.enable();
-    }
-
     @Output() selectionChange = new EventEmitter();
-
     @Output() blur = new EventEmitter();
-
     /**
      * Items returned by server to show in listing
      */
     public items: Observable<any[]>;
-
     public formCtrl: FormControl = new FormControl();
     public loading = false;
     public ac;
-    private queryRef: AutoRefetchQueryRef<any>;
-
-    /**
-     * Default page size
-     */
-    private pageSize = 10;
-
-    /**
-     * Init search options
-     */
-    private variablesManager: QueryVariablesManager<QueryVariables>;
-
     /**
      * Number of items not shown in result list
      * Shows a message after list if positive
      */
     public moreNbItems = 0;
-
+    public onChange;
+    private queryRef: AutoRefetchQueryRef<any>;
+    /**
+     * Default page size
+     */
+    private pageSize = 10;
+    /**
+     * Init search options
+     */
+    private variablesManager: QueryVariablesManager<QueryVariables>;
     /**
      * Stores the value given from parent, it's usually an object. The inner value is formCtrl.value that is a string.
      */
     private value;
-
-    public onChange;
 
     constructor(private hierarchicSelectorDialogService: HierarchicSelectorDialogService,
                 @Optional() @Self() public ngControl: NgControl) {
@@ -164,6 +148,13 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         if (this.ngControl !== null) {
             this.ngControl.valueAccessor = this;
         }
+    }
+
+    /**
+     * Whether the disabled can be changed
+     */
+    @Input() set disabled(disabled: boolean) {
+        disabled ? this.formCtrl.disable() : this.formCtrl.enable();
     }
 
     ngAfterViewInit(): void {
@@ -248,18 +239,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         this.startSearch();
     }
 
-    private getSearchFilter(term: string | null): any {
-        let field = {};
-
-        if (this.searchField === 'custom') {
-            field = {custom: term ? {search: {value: term}} : null};
-        } else if (term) {
-            field[this.searchField] = {like: {value: '%' + term + '%'}};
-        }
-
-        return {filter: {groups: [{conditions: [field]}]}};
-    }
-
     public startSearch() {
 
         if (!this.service) {
@@ -336,10 +315,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         this.disabled = isDisabled;
     }
 
-    private getSelectKey() {
-        return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
-    }
-
     public openDialog(): void {
 
         if (this.formCtrl.disabled || !this.hierarchicSelectorConfig) {
@@ -374,6 +349,22 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
                     this.propagateValue(singleSelection);
                 }
             });
+    }
+
+    private getSearchFilter(term: string | null): any {
+        let field = {};
+
+        if (this.searchField === 'custom') {
+            field = {custom: term ? {search: {value: term}} : null};
+        } else if (term) {
+            field[this.searchField] = {like: {value: '%' + term + '%'}};
+        }
+
+        return {filter: {groups: [{conditions: [field]}]}};
+    }
+
+    private getSelectKey() {
+        return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
     }
 
 }

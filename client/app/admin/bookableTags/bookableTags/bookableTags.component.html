@@ -2,7 +2,7 @@
 
     <div fxLayout="column">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span  >{{routeData.title}}</span>
+            <span>{{routeData.title}}</span>
         </div>
     </div>
 
@@ -16,8 +16,8 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="color"  >Couleur</span>
-                    <span appColumnsPickerColumn="name"  >Nom</span>
+                    <span appColumnsPickerColumn="color">Couleur</span>
+                    <span appColumnsPickerColumn="name">Nom</span>
                 </app-columns-picker>
             </natural-search>
         </div>
@@ -36,10 +36,9 @@
                 </ng-container>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Nom</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <app-table-button [label]="element.name"
-                                          [navigate]="['/admin/bookable-tag', element.id]"
+                        <app-table-button [label]="element.name" [navigate]="['/admin/bookable-tag', element.id]"
 
                                           matTooltip="Éditer"
                         ></app-table-button>
@@ -50,7 +49,7 @@
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
-            <div  >Pas de résultats</div>
+            <div>Pas de résultats</div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">

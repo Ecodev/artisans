@@ -15,15 +15,6 @@ export class AppDataSource extends DataSource<any> {
 
     private readonly _data: BehaviorSubject<any>;
 
-    /** Array of data that should be rendered by the table, where each object represents one row. */
-    get data(): any {
-        return this._data.value;
-    }
-
-    set data(data: any) {
-        this._data.next(data);
-    }
-
     constructor(private value: Observable<any> | any) {
         super();
 
@@ -39,6 +30,15 @@ export class AppDataSource extends DataSource<any> {
         }
     }
 
+    /** Array of data that should be rendered by the table, where each object represents one row. */
+    get data(): any {
+        return this._data.value;
+    }
+
+    set data(data: any) {
+        this._data.next(data);
+    }
+
     connect(): Observable<any[]> {
         return this._data.pipe(takeUntil(this.ngUnsubscribe), map(data => data.items));
     }
@@ -47,11 +47,6 @@ export class AppDataSource extends DataSource<any> {
         this.unsubscribe();
 
         // this._data.unsubscribe(); // cause error, search what should be done here.
-    }
-
-    private unsubscribe() {
-        this.ngUnsubscribe.next(); // required or complete() will not emit
-        this.ngUnsubscribe.complete(); // unsubscribe everybody
     }
 
     public push(item: any) {
@@ -65,6 +60,11 @@ export class AppDataSource extends DataSource<any> {
         const removedElement = fullList.pop();
         this.data = Object.assign(this.data, {items: fullList, length: fullList.length});
         return removedElement;
+    }
+
+    private unsubscribe() {
+        this.ngUnsubscribe.next(); // required or complete() will not emit
+        this.ngUnsubscribe.complete(); // unsubscribe everybody
     }
 
 }

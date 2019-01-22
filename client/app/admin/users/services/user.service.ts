@@ -73,6 +73,16 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
 
+    constructor(apollo: Apollo, protected router: Router, protected bookingService: BookingService) {
+        super(apollo,
+            'user',
+            userQuery,
+            usersQuery,
+            createUserMutation,
+            updateUserMutation,
+            null);
+    }
+
     /**
      * Return filters for users with or without responsible for given roles
      */
@@ -124,16 +134,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         const confirmPass = formGroup.controls.confirmPassword.value;
 
         return pass === confirmPass ? null : {notSame: true};
-    }
-
-    constructor(apollo: Apollo, protected router: Router, protected bookingService: BookingService) {
-        super(apollo,
-            'user',
-            userQuery,
-            usersQuery,
-            createUserMutation,
-            updateUserMutation,
-            null);
     }
 
     public getEmptyObject(): UserInput {

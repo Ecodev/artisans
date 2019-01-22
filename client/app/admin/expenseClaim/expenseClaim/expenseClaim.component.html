@@ -4,22 +4,22 @@
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab  label="Général">
+        <mat-tab label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
-                            <mat-label  >Nom</mat-label>
+                            <mat-label>Nom</mat-label>
                             <input matInput formControlName="name" (change)="update()">
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')"  >
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')">
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')"  >Requis</mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Description</mat-label>
+                            <mat-label>Description</mat-label>
                             <textarea matInput
                                       formControlName="description"
                                       (change)="update()"
@@ -29,7 +29,7 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Remarques</mat-label>
+                            <mat-label>Remarques</mat-label>
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
@@ -42,11 +42,11 @@
                         ></app-select>
 
                         <mat-form-field>
-                            <mat-label  >Montant</mat-label>
+                            <mat-label>Montant</mat-label>
                             <input matInput formControlName="amount" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('amount').hasError('required')"  >Requis</mat-error>
-                            <mat-error *ngIf="form.get('amount').hasError('min')"  >Le montant doit être positif</mat-error>
+                            <mat-error *ngIf="form.get('amount').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('amount').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <app-select-enum enumName="ExpenseClaimStatus"

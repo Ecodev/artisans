@@ -10,12 +10,10 @@ import { SidenavService } from '../../sidenav.service';
 })
 export class SidenavContainerComponent implements OnInit, OnDestroy {
 
+    @Input() name: string;
     @ViewChild(MatSidenavContainer) private menuContainer: MatSidenavContainer;
     @ViewChild(MatSidenav) private menuSidenav: MatSidenav;
-
     @HostBinding('attr.no-scroll') @Input() private noScroll: boolean;
-
-    @Input() name: string;
 
     constructor(public sidenavService: SidenavService) {
     }

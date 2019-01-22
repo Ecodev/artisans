@@ -54,6 +54,16 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}]},
     };
 
+    constructor(apollo: Apollo, private enumService: EnumService) {
+        super(apollo,
+            'bookable',
+            bookableQuery,
+            bookablesQuery,
+            createBookableMutation,
+            updateBookableMutation,
+            deleteBookablesMutation);
+    }
+
     public static getFiltersByTagId(tagId): BookablesQueryVariables {
         return {filter: {groups: [{conditions: [{bookableTags: {have: {values: [tagId]}}}]}]}};
     }
@@ -73,16 +83,6 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
                 ],
             },
         };
-    }
-
-    constructor(apollo: Apollo, private enumService: EnumService) {
-        super(apollo,
-            'bookable',
-            bookableQuery,
-            bookablesQuery,
-            createBookableMutation,
-            updateBookableMutation,
-            deleteBookablesMutation);
     }
 
     public getEmptyObject(): BookableInput {

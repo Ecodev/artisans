@@ -28,27 +28,8 @@ export class IconComponent {
     @Input() label;
     @Input() labelColor: 'primary' | 'warn' | 'accent' = 'accent';
     @Input() labelPosition: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'top-right';
-
-    @Input() set name(value: string) {
-        const newIcon: IconType = {name: value};
-        if (this.mapping[value]) {
-            this.icon = merge(newIcon, this.mapping[value]);
-        } else {
-            newIcon.font = value;
-            this.icon = newIcon;
-        }
-    }
-
-    @Input() set size(val: number) {
-        val = val == null ? 32 : val;
-        this.height = val + 'px';
-        this.width = val + 'px';
-    }
-
-    private readonly svgBase = './assets/icons/';
-
     public icon: IconType;
-
+    private readonly svgBase = './assets/icons/';
     /**
      * Mapping table of internal icon aliases
      */
@@ -88,6 +69,22 @@ export class IconComponent {
 
     constructor(public matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
         this.registerIcons();
+    }
+
+    @Input() set name(value: string) {
+        const newIcon: IconType = {name: value};
+        if (this.mapping[value]) {
+            this.icon = merge(newIcon, this.mapping[value]);
+        } else {
+            newIcon.font = value;
+            this.icon = newIcon;
+        }
+    }
+
+    @Input() set size(val: number) {
+        val = val == null ? 32 : val;
+        this.height = val + 'px';
+        this.width = val + 'px';
     }
 
     private registerIcons() {

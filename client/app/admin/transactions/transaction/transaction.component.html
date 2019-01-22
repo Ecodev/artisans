@@ -4,29 +4,29 @@
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab  label="Général">
+        <mat-tab label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
-                            <mat-label  >Nom</mat-label>
+                            <mat-label>Nom</mat-label>
                             <input matInput formControlName="name" (change)="update()">
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')"  >
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')">
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')"  >Requis</mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Remarques</mat-label>
+                            <mat-label>Remarques</mat-label>
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
 
                         <!-- TODO : FOR ADMINS ONLY -->
                         <mat-form-field>
-                            <mat-label  >Remarques internes</mat-label>
+                            <mat-label>Remarques internes</mat-label>
                             <textarea matInput
                                       formControlName="internalRemarks"
                                       (change)="update()"
@@ -55,13 +55,13 @@
                         ></app-select>
 
                         <mat-form-field>
-                            <mat-label  >Montant</mat-label>
+                            <mat-label>Montant</mat-label>
                             <input matInput formControlName="amount" (change)="update()">
                             <span matSuffix>CHF</span>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Date de la transaction</mat-label>
+                            <mat-label>Date de la transaction</mat-label>
                             <input matInput formControlName="transactionDate" [matDatepicker]="picker">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>

@@ -3,15 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
-    CreateCategoryMutation,
-    CreateCategoryMutationVariables, DeleteCategoriesMutation,
     CategoryQuery,
     CategoryQueryVariables,
-    UpdateCategoryMutation, UpdateCategoryMutationVariables,
+    CreateCategoryMutation,
+    CreateCategoryMutationVariables,
+    DeleteCategoriesMutation,
+    UpdateCategoryMutation,
+    UpdateCategoryMutationVariables,
 } from '../../../shared/generated-types';
 import { CategoryService } from '../services/category.service';
 import { CategoryConfiguration } from '../../../shared/hierarchic-selector/configurations/CategoryConfiguration';
-
 
 @Component({
     selector: 'app-bookable-tag',

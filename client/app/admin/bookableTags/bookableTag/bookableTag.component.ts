@@ -3,14 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
-    CreateBookableTagMutation,
-    CreateBookableTagMutationVariables, DeleteBookableTagsMutation,
     BookableTagQuery,
     BookableTagQueryVariables,
-    UpdateBookableTagMutation, UpdateBookableTagMutationVariables,
+    CreateBookableTagMutation,
+    CreateBookableTagMutationVariables,
+    DeleteBookableTagsMutation,
+    UpdateBookableTagMutation,
+    UpdateBookableTagMutationVariables,
 } from '../../../shared/generated-types';
 import { BookableTagService } from '../services/bookableTag.service';
-
 
 @Component({
     selector: 'app-bookable-tag',

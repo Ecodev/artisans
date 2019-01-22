@@ -46,42 +46,6 @@ export class HierarchicSelectorService {
         }));
     }
 
-    private injectServicesInConfiguration(configurations: HierarchicConfiguration[]): HierarchicConfiguration[] {
-
-        for (const config of configurations) {
-            if (!config.injectedService) {
-                config.injectedService = this.injector.get<HierarchicConfiguration['service']>(config.service as any);
-            }
-        }
-
-        return configurations;
-    }
-
-    /**
-     * Checks that each configuration.selectableAtKey attribute is unique
-     */
-    private validateConfiguration(configurations: HierarchicConfiguration[]) {
-        const selectableAtKeyAttributes: string[] = [];
-        for (const config of configurations) {
-
-            if (config.selectableAtKey) {
-                const keyIndex = selectableAtKeyAttributes.indexOf(config.selectableAtKey);
-
-                if (keyIndex === -1 && config.selectableAtKey) {
-                    selectableAtKeyAttributes.push(config.selectableAtKey);
-                }
-
-                // TODO : remove ?
-                // This behavior maybe dangerous in case we re-open hierarchical selector with the last returned config having non-unique
-                // keys
-                if (keyIndex < -1) {
-                    console.warn('Invalid hierarchic configuration : selectableAtKey attribute should be unique');
-                }
-            }
-
-        }
-    }
-
     /**
      * Get list of children, considering given FlatNode id as a parent.
      * Mark loading status individually on nodes.
@@ -160,6 +124,92 @@ export class HierarchicSelectorService {
     }
 
     /**
+     * Check configuration to return a boolean that allows or denies the selection for the given element
+     */
+    public isSelectable(node: FlatNode): boolean {
+        return !!node.node.config.selectableAtKey;
+    }
+
+    /**
+     * Return models matching given FlatNodes
+     * Returns a Literal of models grouped by their configuration attribute "selectableAtKey"
+     */
+    public toOrganizedSelection(nodes: ModelNode[]): OrganizedModelSelection {
+
+        const selection = this.configuration.reduce((group, config) => {
+            if (config.selectableAtKey) {
+                group[config.selectableAtKey] = [];
+            }
+            return group;
+        }, {});
+
+        for (const node of nodes) {
+            if (node.config.selectableAtKey) {
+                selection[node.config.selectableAtKey].push(node.model);
+            }
+        }
+
+        return selection;
+    }
+
+    /**
+     * Transforms an OrganizedModelSelection into a list of ModelNodes
+     */
+    public fromOrganizedSelection(organizedModelSelection: OrganizedModelSelection): ModelNode[] {
+
+        if (!organizedModelSelection) {
+            return [];
+        }
+
+        const result: ModelNode[] = [];
+        for (const selectableAtKey of Object.keys(organizedModelSelection)) {
+            const config = this.getConfigurationBySelectableKey(selectableAtKey);
+            if (config) {
+                for (const model of organizedModelSelection[selectableAtKey]) {
+                    result.push(new ModelNode(model, config));
+                }
+            }
+        }
+        return result;
+    }
+
+    private injectServicesInConfiguration(configurations: HierarchicConfiguration[]): HierarchicConfiguration[] {
+
+        for (const config of configurations) {
+            if (!config.injectedService) {
+                config.injectedService = this.injector.get<HierarchicConfiguration['service']>(config.service as any);
+            }
+        }
+
+        return configurations;
+    }
+
+    /**
+     * Checks that each configuration.selectableAtKey attribute is unique
+     */
+    private validateConfiguration(configurations: HierarchicConfiguration[]) {
+        const selectableAtKeyAttributes: string[] = [];
+        for (const config of configurations) {
+
+            if (config.selectableAtKey) {
+                const keyIndex = selectableAtKeyAttributes.indexOf(config.selectableAtKey);
+
+                if (keyIndex === -1 && config.selectableAtKey) {
+                    selectableAtKeyAttributes.push(config.selectableAtKey);
+                }
+
+                // TODO : remove ?
+                // This behavior maybe dangerous in case we re-open hierarchical selector with the last returned config having non-unique
+                // keys
+                if (keyIndex < -1) {
+                    console.warn('Invalid hierarchic configuration : selectableAtKey attribute should be unique');
+                }
+            }
+
+        }
+    }
+
+    /**
      * Return a list of configuration from the given one until the end of configurations list
      */
     private getNextConfigs(config) {
@@ -221,56 +271,6 @@ export class HierarchicSelectorService {
 
         const filter = contextFilters.find((f) => f.service === config.service);
         return filter ? filter.filter : null;
-    }
-
-    /**
-     * Check configuration to return a boolean that allows or denies the selection for the given element
-     */
-    public isSelectable(node: FlatNode): boolean {
-        return !!node.node.config.selectableAtKey;
-    }
-
-    /**
-     * Return models matching given FlatNodes
-     * Returns a Literal of models grouped by their configuration attribute "selectableAtKey"
-     */
-    public toOrganizedSelection(nodes: ModelNode[]): OrganizedModelSelection {
-
-        const selection = this.configuration.reduce((group, config) => {
-            if (config.selectableAtKey) {
-                group[config.selectableAtKey] = [];
-            }
-            return group;
-        }, {});
-
-        for (const node of nodes) {
-            if (node.config.selectableAtKey) {
-                selection[node.config.selectableAtKey].push(node.model);
-            }
-        }
-
-        return selection;
-    }
-
-    /**
-     * Transforms an OrganizedModelSelection into a list of ModelNodes
-     */
-    public fromOrganizedSelection(organizedModelSelection: OrganizedModelSelection): ModelNode[] {
-
-        if (!organizedModelSelection) {
-            return [];
-        }
-
-        const result: ModelNode[] = [];
-        for (const selectableAtKey of Object.keys(organizedModelSelection)) {
-            const config = this.getConfigurationBySelectableKey(selectableAtKey);
-            if (config) {
-                for (const model of organizedModelSelection[selectableAtKey]) {
-                    result.push(new ModelNode(model, config));
-                }
-            }
-        }
-        return result;
     }
 
     /**

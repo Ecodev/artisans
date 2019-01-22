@@ -45,17 +45,6 @@ export class AbstractDetail<Tone,
         this.showFabButton = index === 0;
     }
 
-    protected postUpdate(res: any) {
-    }
-
-    protected postCreate(res: any) {
-    }
-
-    protected initForm() {
-        const formConfig = this.service.getFormConfig(this.data.model);
-        this.form = new FormGroup(formConfig, {validators: this.service.getFormGroupValidators()});
-    }
-
     public update(): void {
 
         if (!this.data.model.id) {
@@ -105,14 +94,6 @@ export class AbstractDetail<Tone,
         return obs;
     }
 
-    private formToData() {
-        mergeWith(this.data.model, this.form.value, (dest, src) => {
-            if (isArray(src)) {
-                return src;
-            }
-        });
-    }
-
     validateAllFormFields(formGroup: FormGroup) {
         Object.keys(formGroup.controls).forEach(field => {
             const control = formGroup.get(field);
@@ -135,5 +116,24 @@ export class AbstractDetail<Tone,
                     });
                 }
             });
+    }
+
+    protected postUpdate(res: any) {
+    }
+
+    protected postCreate(res: any) {
+    }
+
+    protected initForm() {
+        const formConfig = this.service.getFormConfig(this.data.model);
+        this.form = new FormGroup(formConfig, {validators: this.service.getFormGroupValidators()});
+    }
+
+    private formToData() {
+        mergeWith(this.data.model, this.form.value, (dest, src) => {
+            if (isArray(src)) {
+                return src;
+            }
+        });
     }
 }

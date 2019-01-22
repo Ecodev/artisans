@@ -52,12 +52,7 @@
             >
                 <app-icon name="close"></app-icon>
             </button>
-            <button *ngIf="navigateTo"
-                    [routerLink]="navigateTo"
-                    mat-button
-                    mat-icon-button
-                    i18n-matTooltip
-                    matTooltip="Naviguer vers"
+            <button *ngIf="navigateTo" [routerLink]="navigateTo" mat-button mat-icon-button i18n-matTooltip matTooltip="Naviguer vers"
             >
                 <app-icon name="open_in_browser"></app-icon>
             </button>

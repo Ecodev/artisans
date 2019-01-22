@@ -1,5 +1,9 @@
 <div fxLayout="column">
-    <div fxLayout="row" fxLayoutAlign="start center" style="position: relative; top: 5px" [style.margin-left]="showAvatar ? '30px' : '-15px'">
+    <div fxLayout="row"
+         fxLayoutAlign="start center"
+         style="position: relative; top: 5px"
+         [style.margin-left]="showAvatar ? '30px' : '-15px'"
+    >
         <a mat-button color="primary" [routerLink]="getRootLink()">{{ rootLabel || label }}</a>
         <ng-container *ngFor="let parent of breadcrumbs">
             /
@@ -7,10 +11,7 @@
         </ng-container>
     </div>
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" style="min-height: 40px;">
-        <ngx-avatar *ngIf="showAvatar"
-                    [name]="model.name"
-                    [size]="40"
-                    [bgColor]="model.color ? model.color : null"
+        <ngx-avatar *ngIf="showAvatar" [name]="model.name" [size]="40" [bgColor]="model.color ? model.color : null"
         ></ngx-avatar>
         <div fxFlex *ngIf="!model.id" class="mat-headline no-margin">{{ newLabel }}</div>
         <div fxFlex *ngIf="model.id" fxLayout="row" fxLayoutAlign="start center" class="mat-headline no-margin">

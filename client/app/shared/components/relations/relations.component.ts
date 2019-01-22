@@ -48,90 +48,69 @@ export class RelationsComponent extends AbstractController implements OnInit, On
 
     @Input() service;
     @Input() placeholder;
-
-    @Input() set filter(filter) {
-        this.variablesManager.merge('relations-context', {filter: filter});
-    }
-
     /**
      * Context filter for autocomplete selector
      */
     @Input() autocompleteSelectorFilter;
-
     /**
      * Function to customize the rendering of the selected item as text in input
      */
     @Input() displayWith: (any) => string;
-
     /**
      * Whether the relations can be changed
      */
     @Input() disabled: boolean;
-
     /**
      * Main object relations belong to
      */
     @Input() main;
-
     /**
      * Cause the component to work as one-to-many instead of many-to-many
      */
     @Input() value: any;
-
     @Output() selectionChange: EventEmitter<any> = new EventEmitter();
-
     /**
      * Context filters for hierarchic selector
      */
     @Input() hierarchicSelectorFilters;
-
     /**
      * Configuration in case we prefer hierarchic selection over autocomplete search
      */
     @Input() hierarchicSelectorConfig: HierarchicConfiguration[];
-
     /**
      * Provide service for autocomplete search
      */
     @Input() autocompleteSelectorService: any;
-
     /**
      *  Hide search field
      */
     @Input() hideSearch = false;
-
     /**
      * LinkMutationService uses to find the right combinations to find a matching with possible mutations
      * But in some cases it's not enough (linkEquipmentEquipment has source and target and reversing the relation is required).
      */
     @Input() reverseRelation: any;
-
     /**
      * Listing service instance
      */
     public dataSource: AppDataSource;
-
-    /**
-     * Observable variables/options for listing service usage and apollo watchQuery
-     */
-    private variablesManager: QueryVariablesManager<QueryVariables> = new QueryVariablesManager();
-
-    /**
-     * Own auto refetchable query
-     */
-    private queryRef: AutoRefetchQueryRef<any>;
-
     public loading = false;
-
     /**
      * Table columns
      */
     public displayedColumns = [
         'name',
     ];
-
     public onChange;
     public onTouched;
+    /**
+     * Observable variables/options for listing service usage and apollo watchQuery
+     */
+    private variablesManager: QueryVariablesManager<QueryVariables> = new QueryVariablesManager();
+    /**
+     * Own auto refetchable query
+     */
+    private queryRef: AutoRefetchQueryRef<any>;
 
     constructor(private linkMutationService: LinkMutationService,
                 private hierarchicSelectorDialog: HierarchicSelectorDialogService,
@@ -141,6 +120,10 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         if (this.ngControl !== null) {
             this.ngControl.valueAccessor = this;
         }
+    }
+
+    @Input() set filter(filter) {
+        this.variablesManager.merge('relations-context', {filter: filter});
     }
 
     ngOnInit() {
@@ -182,25 +165,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     registerOnTouched(fn) {
     }
 
-    private initItems() {
-        this.dataSource = new AppDataSource(this.value);
-    }
-
-    /**
-     * Get list from database
-     */
-    private queryItems() {
-
-        this.loading = true;
-        this.queryRef = this.service.watchAll(this.variablesManager, true);
-
-        this.dataSource = new AppDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)));
-
-        this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-            this.loading = false;
-        });
-    }
-
     /**
      * TODO : replace by natural-search
      * @deprecated when natural-search is used
@@ -208,13 +172,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     public search(searchTerm) {
         const filter = {filter: {groups: [{conditions: [{custom: {search: {value: searchTerm}}}]}]}};
         this.variablesManager.set('controller-variables', filter);
-    }
-
-    private propagateValue(value) {
-        this.value = value;
-        this.dataSource.data = value;
-        this.onChange(value); // before selectionChange to grant formControl is updated before change is effectively emitted
-        this.selectionChange.emit(value);
     }
 
     /**
@@ -299,10 +256,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         return this.dataSource.data.length;
     }
 
-    private getSelectKey(): string | undefined {
-        return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
-    }
-
     public openHierarchicSelector() {
         const selectAtKey = this.getSelectKey();
 
@@ -326,6 +279,36 @@ export class RelationsComponent extends AbstractController implements OnInit, On
                     }
                 }
             });
+    }
+
+    private initItems() {
+        this.dataSource = new AppDataSource(this.value);
+    }
+
+    /**
+     * Get list from database
+     */
+    private queryItems() {
+
+        this.loading = true;
+        this.queryRef = this.service.watchAll(this.variablesManager, true);
+
+        this.dataSource = new AppDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)));
+
+        this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+            this.loading = false;
+        });
+    }
+
+    private propagateValue(value) {
+        this.value = value;
+        this.dataSource.data = value;
+        this.onChange(value); // before selectionChange to grant formControl is updated before change is effectively emitted
+        this.selectionChange.emit(value);
+    }
+
+    private getSelectKey(): string | undefined {
+        return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
     }
 
 }

@@ -7,7 +7,8 @@ import {
     BookableTagFilter,
     BookingFilter,
     CategoryFilter,
-    ExpenseClaimFilter, TransactionFilter,
+    ExpenseClaimFilter,
+    TransactionFilter,
     UserFilter,
     UserTagFilter,
 } from '../generated-types';
@@ -19,14 +20,22 @@ export interface QueryVariables {
 }
 
 type Filter =
-    UserFilter |
-    BookingFilter |
-    BookableFilter |
-    UserTagFilter |
-    BookableTagFilter |
-    CategoryFilter |
-    ExpenseClaimFilter |
-    TransactionFilter |
+    UserFilter
+    |
+    BookingFilter
+    |
+    BookableFilter
+    |
+    UserTagFilter
+    |
+    BookableTagFilter
+    |
+    CategoryFilter
+    |
+    ExpenseClaimFilter
+    |
+    TransactionFilter
+    |
     AccountFilter;
 
 export interface PaginationInput {
@@ -90,8 +99,8 @@ function mergeConcatArray(destValue, source) {
  */
 export class QueryVariablesManager<T extends QueryVariables = QueryVariables> {
 
-    private readonly channels: Map<string, T> = new Map<string, T>();
     public readonly variables: BehaviorSubject<T | undefined> = new BehaviorSubject<T | undefined>(undefined);
+    private readonly channels: Map<string, T> = new Map<string, T>();
 
     constructor(queryVariablesManager?: QueryVariablesManager<T>) {
 
@@ -142,6 +151,10 @@ export class QueryVariablesManager<T extends QueryVariables = QueryVariables> {
         }
     }
 
+    public getChannelsCopy(): Map<string, T> {
+        return new Map<string, T>(this.channels);
+    }
+
     /**
      * Merge channels together
      * Arrays are concatenated
@@ -190,10 +203,6 @@ export class QueryVariablesManager<T extends QueryVariables = QueryVariables> {
         }
 
         return destVariables;
-    }
-
-    public getChannelsCopy(): Map<string, T> {
-        return new Map<string, T>(this.channels);
     }
 
 }

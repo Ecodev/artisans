@@ -29,15 +29,9 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     public bulkActionSelected: string | null;
 
     public variablesManager: QueryVariablesManager<Vall> = new QueryVariablesManager<Vall>();
-
-    protected queryRef: AutoRefetchQueryRef<Tall>;
-
     public naturalSearchConfig: NaturalSearchConfiguration | null;
-
     public naturalSearchSelections: NaturalSearchSelections | null = [[]];
-
     public routeData;
-
     /**
      * List of pagination options
      */
@@ -49,7 +43,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         100,
         200,
     ];
-
+    protected queryRef: AutoRefetchQueryRef<Tall>;
     protected defaultPagination: PaginationInput = {
         pageIndex: 0,
         pageSize: 25,
@@ -81,45 +75,6 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         this.selection = new SelectionModel<Tall>(true, []);
     }
 
-    /**
-     * Uses data from routing data.columns: string[]
-     */
-    protected initFromRouting() {
-
-        if (this.route.snapshot.data.queryVariables) {
-            this.variablesManager.set('routeFilters', this.route.snapshot.data.queryVariables);
-        }
-
-        if (this.route.snapshot.data.columns) {
-            this.routerColumns = this.route.snapshot.data.columns;
-        }
-    }
-
-    protected getDataObservable(): Observable<Tall> {
-        this.queryRef = this.service.watchAll(this.variablesManager, true);
-        return this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe));
-    }
-
-    protected initFromPersisted() {
-
-        const storageKey = this.getStorageKey();
-
-        // Pagination : pa
-        const pagination: QueryVariables['pagination'] = this.persistenceService.get('pa', this.route, storageKey);
-        this.variablesManager.set('pagination', {pagination: pagination ? pagination : this.defaultPagination} as Vall);
-
-        // Sorting : so
-        const sorting: QueryVariables['sorting'] = this.persistenceService.get('so', this.route, storageKey) as QueryVariables['sorting'];
-        this.variablesManager.set('sorting', {sorting} as Vall);
-
-        // Natural search : ns
-        this.naturalSearchSelections = fromUrl(this.persistenceService.get('ns', this.route, storageKey));
-        if (this.hasSelections(this.naturalSearchSelections)) {
-            this.translateSearchAndRefreshList(this.naturalSearchSelections);
-        }
-
-    }
-
     ngOnDestroy() {
         super.ngOnDestroy();
 
@@ -134,11 +89,6 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     public search(naturalSearchSelections: NaturalSearchSelections) {
         this.persistenceService.persist('ns', toUrl(naturalSearchSelections), this.route, this.getStorageKey());
         this.translateSearchAndRefreshList(naturalSearchSelections);
-    }
-
-    protected translateSearchAndRefreshList(naturalSearchSelections: NaturalSearchSelections) {
-        const translatedSelection = toGraphQLDoctrineFilter(this.naturalSearchConfig, naturalSearchSelections);
-        this.variablesManager.set('natural-search', {filter: translatedSelection} as Vall);
     }
 
     public sorting(event: Sort) {
@@ -173,10 +123,6 @@ export class AbstractList<Tall, Vall extends QueryVariables>
 
         this.variablesManager.merge('pagination', {pagination: pagination ? pagination : this.defaultPagination} as Vall);
         this.persistenceService.persist('pa', pagination, this.route, this.getStorageKey());
-    }
-
-    protected getStorageKey() {
-        return 'list-' + this.key;
     }
 
     /**
@@ -223,6 +169,54 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         }
 
         this[this.bulkActionSelected]();
+    }
+
+    /**
+     * Uses data from routing data.columns: string[]
+     */
+    protected initFromRouting() {
+
+        if (this.route.snapshot.data.queryVariables) {
+            this.variablesManager.set('routeFilters', this.route.snapshot.data.queryVariables);
+        }
+
+        if (this.route.snapshot.data.columns) {
+            this.routerColumns = this.route.snapshot.data.columns;
+        }
+    }
+
+    protected getDataObservable(): Observable<Tall> {
+        this.queryRef = this.service.watchAll(this.variablesManager, true);
+        return this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe));
+    }
+
+    protected initFromPersisted() {
+
+        const storageKey = this.getStorageKey();
+
+        // Pagination : pa
+        const pagination: QueryVariables['pagination'] = this.persistenceService.get('pa', this.route, storageKey);
+        this.variablesManager.set('pagination', {pagination: pagination ? pagination : this.defaultPagination} as Vall);
+
+        // Sorting : so
+        const sorting: QueryVariables['sorting'] = this.persistenceService.get('so', this.route, storageKey) as QueryVariables['sorting'];
+        this.variablesManager.set('sorting', {sorting} as Vall);
+
+        // Natural search : ns
+        this.naturalSearchSelections = fromUrl(this.persistenceService.get('ns', this.route, storageKey));
+        if (this.hasSelections(this.naturalSearchSelections)) {
+            this.translateSearchAndRefreshList(this.naturalSearchSelections);
+        }
+
+    }
+
+    protected translateSearchAndRefreshList(naturalSearchSelections: NaturalSearchSelections) {
+        const translatedSelection = toGraphQLDoctrineFilter(this.naturalSearchConfig, naturalSearchSelections);
+        this.variablesManager.set('natural-search', {filter: translatedSelection} as Vall);
+    }
+
+    protected getStorageKey() {
+        return 'list-' + this.key;
     }
 
     protected bulkdDeleteConfirmation(): Observable<any> {

@@ -11,78 +11,6 @@ export abstract class AbstractModelServiceSpec {
 
     private static readonly notConfiguredMessage = 'GraphQL query for this method was not configured in this service constructor';
 
-    private static expectNotConfiguredOrEqual(expectSuccess: boolean,
-                                              getObservable: (any) => Observable<any>,
-                                              variables: string | Literal | BehaviorSubject<string | Literal>,
-                                              newVariables?: string | Literal): Observable<any> | null {
-        let actual = null;
-        let count = 0;
-        let result: Observable<any> | null = null;
-
-        const getActual = () => {
-            result = getObservable(variables);
-            result.subscribe(v => {
-                count++;
-                actual = v;
-            });
-            tick();
-        };
-
-        if (expectSuccess) {
-            getActual();
-            expect(actual).toEqual(jasmine.anything());
-            expect(count).toBe(1);
-
-            // Check that the next set of variables will trigger exactly 1 callback
-            if (variables instanceof BehaviorSubject && newVariables) {
-                variables.next(newVariables);
-                tick();
-                expect(count).toBe(2);
-            }
-        } else {
-            expect(getActual).toThrowError(this.notConfiguredMessage);
-        }
-
-        return result;
-    }
-
-    private static expectNotConfiguredOrEqualForQueryVariablesManager(expectSuccess: boolean,
-                                                                      getObservable: (any) => Observable<any>,
-                                                                      qvm: QueryVariablesManager<any>,
-                                                                      newVariables?: any): Observable<any> | null {
-        let actual = null;
-        let count = 0;
-        let result: Observable<any> | null = null;
-        const tickDelay = 20; // should match AbstractModel.watchAll debounceTime value
-
-        const getActual = () => {
-            result = getObservable(qvm);
-            tick(tickDelay);
-            result.subscribe(v => {
-                count++;
-                actual = v;
-            });
-            tick(tickDelay);
-        };
-
-        if (expectSuccess) {
-            getActual();
-            expect(actual).toEqual(jasmine.anything());
-            expect(count).toBe(1);
-
-            if (newVariables) {
-                qvm.set('channel', newVariables);
-                tick(tickDelay);
-                expect(count).toBe(2);
-            }
-
-        } else {
-            expect(getActual).toThrowError(this.notConfiguredMessage);
-        }
-
-        return result;
-    }
-
     /**
      * Test all common methods defined on AbstractModelService
      */
@@ -208,5 +136,77 @@ export abstract class AbstractModelServiceSpec {
                 expect(Object.keys(object).length).toBeGreaterThan(keysAfterCreation); // should show created + updated objects merged
             })),
         );
+    }
+
+    private static expectNotConfiguredOrEqual(expectSuccess: boolean,
+                                              getObservable: (any) => Observable<any>,
+                                              variables: string | Literal | BehaviorSubject<string | Literal>,
+                                              newVariables?: string | Literal): Observable<any> | null {
+        let actual = null;
+        let count = 0;
+        let result: Observable<any> | null = null;
+
+        const getActual = () => {
+            result = getObservable(variables);
+            result.subscribe(v => {
+                count++;
+                actual = v;
+            });
+            tick();
+        };
+
+        if (expectSuccess) {
+            getActual();
+            expect(actual).toEqual(jasmine.anything());
+            expect(count).toBe(1);
+
+            // Check that the next set of variables will trigger exactly 1 callback
+            if (variables instanceof BehaviorSubject && newVariables) {
+                variables.next(newVariables);
+                tick();
+                expect(count).toBe(2);
+            }
+        } else {
+            expect(getActual).toThrowError(this.notConfiguredMessage);
+        }
+
+        return result;
+    }
+
+    private static expectNotConfiguredOrEqualForQueryVariablesManager(expectSuccess: boolean,
+                                                                      getObservable: (any) => Observable<any>,
+                                                                      qvm: QueryVariablesManager<any>,
+                                                                      newVariables?: any): Observable<any> | null {
+        let actual = null;
+        let count = 0;
+        let result: Observable<any> | null = null;
+        const tickDelay = 20; // should match AbstractModel.watchAll debounceTime value
+
+        const getActual = () => {
+            result = getObservable(qvm);
+            tick(tickDelay);
+            result.subscribe(v => {
+                count++;
+                actual = v;
+            });
+            tick(tickDelay);
+        };
+
+        if (expectSuccess) {
+            getActual();
+            expect(actual).toEqual(jasmine.anything());
+            expect(count).toBe(1);
+
+            if (newVariables) {
+                qvm.set('channel', newVariables);
+                tick(tickDelay);
+                expect(count).toBe(2);
+            }
+
+        } else {
+            expect(getActual).toThrowError(this.notConfiguredMessage);
+        }
+
+        return result;
     }
 }

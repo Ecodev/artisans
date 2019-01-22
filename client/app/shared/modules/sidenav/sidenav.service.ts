@@ -66,6 +66,18 @@ export class SidenavService {
     constructor(public media: ObservableMedia) {
     }
 
+    get activeMode(): string {
+        return this.mode;
+    }
+
+    get isOpened(): boolean {
+        return this.opened;
+    }
+
+    get isMinimized(): boolean {
+        return this.minimized;
+    }
+
     public destroy(name: string) {
         SidenavService.sideNavs.delete(name);
         SidenavService.sideNavsChange.next(null);
@@ -112,18 +124,6 @@ export class SidenavService {
                 }
             }
         });
-    }
-
-    get activeMode(): string {
-        return this.mode;
-    }
-
-    get isOpened(): boolean {
-        return this.opened;
-    }
-
-    get isMinimized(): boolean {
-        return this.minimized;
     }
 
     public isMobileView() {

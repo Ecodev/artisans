@@ -30,7 +30,7 @@ import { SelectEnumComponent } from '../components/select-enum/select-enum.compo
         DetailFixedButtonComponent,
         AddressComponent,
         EnumPipe,
-        CapitalizePipe
+        CapitalizePipe,
     ],
     imports: [
         CommonModule,
@@ -57,7 +57,7 @@ import { SelectEnumComponent } from '../components/select-enum/select-enum.compo
         ReactiveFormsModule,
         AddressComponent,
         EnumPipe,
-        CapitalizePipe
+        CapitalizePipe,
     ],
 })
 export class IchtusModule {

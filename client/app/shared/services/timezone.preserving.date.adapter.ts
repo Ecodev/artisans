@@ -6,38 +6,6 @@ import { NativeDateAdapter } from '@angular/material';
 })
 export class TimezonePreservingDateAdapter extends NativeDateAdapter {
 
-    /**
-     * Replace native toJSON() function by our own implementation that will preserve the local time zone.
-     * This allow the server side to know the day (without time) that was selected on client side.
-     */
-    private replaceJSON(date: Date): Date {
-
-        date.toJSON = function(): string {
-            const timezoneOffsetInHours = -(date.getTimezoneOffset() / 60); // UTC minus local time
-            const sign = timezoneOffsetInHours >= 0 ? '+' : '-';
-            const leadingZero = (timezoneOffsetInHours < 10) ? '0' : '';
-            const offsetMinutes = date.getTimezoneOffset() % 60;
-            const leadingZeroMinutes = (offsetMinutes < 10) ? '0' : '';
-
-            // It's a bit unfortunate that we need to construct a new Date instance
-            // (we don't want _this_ Date instance to be modified)
-            const correctedDate = new Date(date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                date.getHours(),
-                date.getMinutes(),
-                date.getSeconds(),
-                date.getMilliseconds());
-            correctedDate.setHours(date.getHours() + timezoneOffsetInHours);
-
-            const iso = correctedDate.toISOString().replace(/\.\d{3}Z/, '').replace('Z', '');
-
-            return iso + sign + leadingZero + Math.abs(timezoneOffsetInHours).toString() + ':' + leadingZeroMinutes + offsetMinutes;
-        };
-
-        return date;
-    }
-
     public clone(date: Date): Date {
         const d = super.clone(date);
 
@@ -90,5 +58,37 @@ export class TimezonePreservingDateAdapter extends NativeDateAdapter {
         }
 
         return d;
+    }
+
+    /**
+     * Replace native toJSON() function by our own implementation that will preserve the local time zone.
+     * This allow the server side to know the day (without time) that was selected on client side.
+     */
+    private replaceJSON(date: Date): Date {
+
+        date.toJSON = function(): string {
+            const timezoneOffsetInHours = -(date.getTimezoneOffset() / 60); // UTC minus local time
+            const sign = timezoneOffsetInHours >= 0 ? '+' : '-';
+            const leadingZero = (timezoneOffsetInHours < 10) ? '0' : '';
+            const offsetMinutes = date.getTimezoneOffset() % 60;
+            const leadingZeroMinutes = (offsetMinutes < 10) ? '0' : '';
+
+            // It's a bit unfortunate that we need to construct a new Date instance
+            // (we don't want _this_ Date instance to be modified)
+            const correctedDate = new Date(date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds(),
+                date.getMilliseconds());
+            correctedDate.setHours(date.getHours() + timezoneOffsetInHours);
+
+            const iso = correctedDate.toISOString().replace(/\.\d{3}Z/, '').replace('Z', '');
+
+            return iso + sign + leadingZero + Math.abs(timezoneOffsetInHours).toString() + ':' + leadingZeroMinutes + offsetMinutes;
+        };
+
+        return date;
     }
 }

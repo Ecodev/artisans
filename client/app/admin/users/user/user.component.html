@@ -8,7 +8,7 @@
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab  label="Général">
+        <mat-tab label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
@@ -17,21 +17,21 @@
 
                         <div fxLayout="row" fxLayoutGap="10px">
                             <mat-form-field fxFlex>
-                                <mat-label  >Prénom</mat-label>
+                                <mat-label>Prénom</mat-label>
                                 <input matInput formControlName="firstName" (change)="update()">
-                                <mat-error *ngIf="form.get('firstName').hasError('maxlength')"  >
+                                <mat-error *ngIf="form.get('firstName').hasError('maxlength')">
                                     Maximum {{form.get('firstName').errors.maxlength.requiredLength}} caractères
                                 </mat-error>
-                                <mat-error *ngIf="form.get('firstName').hasError('required')"  >Requis</mat-error>
+                                <mat-error *ngIf="form.get('firstName').hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
                             <mat-form-field fxFlex>
-                                <mat-label  >Nom de famille</mat-label>
+                                <mat-label>Nom de famille</mat-label>
                                 <input matInput formControlName="lastName" (change)="update()">
-                                <mat-error *ngIf="form.get('lastName').hasError('maxlength')"  >
+                                <mat-error *ngIf="form.get('lastName').hasError('maxlength')">
                                     Maximum {{form.get('lastName').errors.maxlength.requiredLength}} caractères
                                 </mat-error>
-                                <mat-error *ngIf="form.get('lastName').hasError('required')"  >Requis</mat-error>
+                                <mat-error *ngIf="form.get('lastName').hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
                             <app-select-enum enumName="Sex" formControlName="sex" placeholder="Genre"></app-select-enum>
@@ -42,12 +42,12 @@
                         <div fxLayout="row" fxLayoutGap="10px">
 
                             <mat-form-field fxFlex>
-                                <mat-label  >Téléphone fixe</mat-label>
+                                <mat-label>Téléphone fixe</mat-label>
                                 <input matInput formControlName="phone" (change)="update()">
                             </mat-form-field>
 
                             <mat-form-field fxFlex>
-                                <mat-label  >Téléphone mobile</mat-label>
+                                <mat-label>Téléphone mobile</mat-label>
                                 <input matInput formControlName="mobilePhone" (change)="update()">
                             </mat-form-field>
 
@@ -58,18 +58,18 @@
                     <div fxFlex="33" fxLayout="column">
                         <h2 class="mat-title">Compte</h2>
                         <mat-form-field>
-                            <mat-label  >email</mat-label>
+                            <mat-label>email</mat-label>
                             <input matInput formControlName="email" (change)="update()">
-                            <mat-error *ngIf="form.get('email').hasError('required')"  >Requis</mat-error>
+                            <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Nom d'utilisateur</mat-label>
+                            <mat-label>Nom d'utilisateur</mat-label>
                             <input matInput formControlName="login" (change)="update()">
-                            <mat-error *ngIf="form.get('login').hasError('maxlength')"  >
+                            <mat-error *ngIf="form.get('login').hasError('maxlength')">
                                 Maximum {{form.get('login').errors.maxlength.requiredLength}} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('login').hasError('required')"  >Requis</mat-error>
+                            <mat-error *ngIf="form.get('login').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>
@@ -99,12 +99,12 @@
                         ></app-select>
 
                         <mat-form-field fxFlex>
-                            <mat-label  >Swiss sailling</mat-label>
+                            <mat-label>Swiss sailling</mat-label>
                             <input matInput formControlName="ichtusSwissSailing" (change)="update()">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Remarques</mat-label>
+                            <mat-label>Remarques</mat-label>
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
@@ -126,12 +126,15 @@
                         <app-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
                         ></app-select-enum>
 
-
                         <div fxLayout="row wrap" fxLayoutGap="20px" class="margin-v">
-                            <mat-slide-toggle fxFlex formControlName="door1" (change)="update()" class="margin-bottom">Porte 1</mat-slide-toggle>
-                            <mat-slide-toggle fxFlex formControlName="door2" (change)="update()" class="margin-bottom">Porte 2</mat-slide-toggle>
-                            <mat-slide-toggle fxFlex formControlName="door3" (change)="update()" class="margin-bottom">Porte 3</mat-slide-toggle>
-                            <mat-slide-toggle fxFlex formControlName="door4" (change)="update()" class="margin-bottom">Porte 4</mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door1" (change)="update()" class="margin-bottom">Porte 1
+                            </mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door2" (change)="update()" class="margin-bottom">Porte 2
+                            </mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door3" (change)="update()" class="margin-bottom">Porte 3
+                            </mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door4" (change)="update()" class="margin-bottom">Porte 4
+                            </mat-slide-toggle>
                         </div>
                     </div>
                 </div>

@@ -14,9 +14,9 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="name"  >Nom</span>
-                    <span appColumnsPickerColumn="user"  >Utilisateur</span>
-                    <span appColumnsPickerColumn="amount"  >Montant</span>
+                    <span appColumnsPickerColumn="name">Nom</span>
+                    <span appColumnsPickerColumn="user">Utilisateur</span>
+                    <span appColumnsPickerColumn="amount">Montant</span>
                     <span appColumnsPickerColumn="creationDate">Créé le</span>
                     <span appColumnsPickerColumn="updateDate">Modifié le</span>
                     <span appColumnsPickerColumn="status">Status</span>
@@ -31,20 +31,19 @@
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Nom</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
                         <app-table-button [label]="element.name" [navigate]="[element.id]" matTooltip="Éditer"></app-table-button>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="user">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header  >Membre</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Membre</th>
                     <td mat-cell *matCellDef="let element">
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.user">
                             <ngx-avatar [name]="element.user?.name" [size]="36"></ngx-avatar>
-                            <app-table-button [label]="element.user?.name"
-                                              [navigate]="['/admin/user/', element.user?.id]"
+                            <app-table-button [label]="element.user?.name" [navigate]="['/admin/user/', element.user?.id]"
 
                                               matTooltip="Éditer"
                             ></app-table-button>
@@ -81,7 +80,7 @@
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
-            <div  >Pas de résultats</div>
+            <div>Pas de résultats</div>
         </div>
 
         <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">

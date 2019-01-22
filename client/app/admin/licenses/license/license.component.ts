@@ -4,15 +4,16 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
     CreateLicenseMutation,
-    CreateLicenseMutationVariables, DeleteLicensesMutation,
+    CreateLicenseMutationVariables,
+    DeleteLicensesMutation,
     LicenseQuery,
     LicenseQueryVariables,
-    UpdateLicenseMutation, UpdateLicenseMutationVariables,
+    UpdateLicenseMutation,
+    UpdateLicenseMutationVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../services/license.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { UserService } from '../../users/services/user.service';
-
 
 @Component({
     selector: 'app-license',
@@ -33,7 +34,7 @@ export class LicenseComponent
                 router: Router,
                 route: ActivatedRoute,
                 public userService: UserService,
-                public bookableService: BookableService
+                public bookableService: BookableService,
     ) {
         super('license', licenseService, alertService, router, route);
     }

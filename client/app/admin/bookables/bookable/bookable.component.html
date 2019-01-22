@@ -1,28 +1,25 @@
 <div [formGroup]="form">
 
-    <app-detail-header newLabel="Nouvel réservable"
-                       label="Réservable"
-                       [model]="data.model"
-                       [listRoute]="['admin', 'bookable']"
+    <app-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'bookable']"
     ></app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
-        <mat-tab  label="Général">
+        <mat-tab label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
                             <input matInput formControlName="name" (change)="update()">
-                            <mat-label  >Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')"  >
+                            <mat-label>Nom</mat-label>
+                            <mat-error *ngIf="form.get('name').hasError('maxlength')">
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')"  >Requis</mat-error>
+                            <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Description</mat-label>
+                            <mat-label>Description</mat-label>
                             <textarea matInput
                                       formControlName="description"
                                       (change)="update()"
@@ -37,27 +34,27 @@
 
                         <mat-form-field>
                             <input matInput formControlName="code" (change)="update()">
-                            <mat-label  >Code</mat-label>
-                            <mat-error *ngIf="form.get('code').hasError('maxlength')"  >
+                            <mat-label>Code</mat-label>
+                            <mat-error *ngIf="form.get('code').hasError('maxlength')">
                                 Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('code').hasError('required')"  >Requis</mat-error>
+                            <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>
 
                         <mat-form-field>
-                            <mat-label  >Prix initial</mat-label>
+                            <mat-label>Prix initial</mat-label>
                             <input matInput formControlName="initialPrice" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('initialPrice').hasError('min')"  >Le montant doit être positif</mat-error>
+                            <mat-error *ngIf="form.get('initialPrice').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label  >Prix périodique</mat-label>
+                            <mat-label>Prix périodique</mat-label>
                             <input matInput formControlName="periodicPrice" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('periodicPrice').hasError('min')"  >Le montant doit être positif</mat-error>
+                            <mat-error *ngIf="form.get('periodicPrice').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>

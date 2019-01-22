@@ -6,6 +6,5 @@ export interface HierarchicFilterConfiguration<T = Literal> {
     filter: T;
 }
 
-
 export interface HierarchicFiltersConfiguration<T = Literal> extends Array<HierarchicFilterConfiguration<T>> {
 }

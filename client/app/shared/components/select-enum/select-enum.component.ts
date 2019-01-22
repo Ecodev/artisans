@@ -32,18 +32,11 @@ export class SelectEnumComponent implements OnInit, ControlValueAccessor, AfterV
     @Input() required = false;
     @Input() icon = 'search';
     @Input() displayWith: (any) => string;
-
-    @Input() set disabled(disabled: boolean) {
-        disabled ? this.formCtrl.disable() : this.formCtrl.enable();
-    }
-
     @Output() selectionChange = new EventEmitter();
     @Output() blur = new EventEmitter();
-
     public items: Observable<IEnum[]>;
     public formCtrl: FormControl = new FormControl();
     public onChange;
-
     /**
      * Stores the value given from parent, it's usually an object. The inner value is formCtrl.value that is a string.
      */
@@ -53,6 +46,10 @@ export class SelectEnumComponent implements OnInit, ControlValueAccessor, AfterV
         if (this.ngControl !== null) {
             this.ngControl.valueAccessor = this;
         }
+    }
+
+    @Input() set disabled(disabled: boolean) {
+        disabled ? this.formCtrl.disable() : this.formCtrl.enable();
     }
 
     ngOnInit() {

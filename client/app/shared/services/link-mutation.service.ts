@@ -40,24 +40,6 @@ export class LinkMutationService {
     }
 
     /**
-     * Return the list of all available mutation names
-     */
-    private getAllMutationNames(): Observable<string[]> {
-        if (this.allMutationNames) {
-            return of(this.allMutationNames);
-        }
-
-        return this.apollo.query<MutationsQuery>({
-            query: this.queriesQuery,
-            fetchPolicy: 'cache-first',
-        }).pipe(map(({data}) => {
-            this.allMutationNames = data.__type && data.__type.fields ? data.__type.fields.map(v => v.name) : [];
-
-            return this.allMutationNames;
-        }));
-    }
-
-    /**
      * Link two objects together
      */
     public link(obj1: LinkableObject, obj2: LinkableObject, variables: Literal = {}): Observable<FetchResult<{ id: string }>> {
@@ -86,6 +68,24 @@ export class LinkMutationService {
      */
     public unlink(obj1: LinkableObject, obj2: LinkableObject): Observable<FetchResult<{ id: string }>> {
         return this.getMutation('unlink', obj1, obj2).pipe(switchMap(mutation => this.execute(mutation)));
+    }
+
+    /**
+     * Return the list of all available mutation names
+     */
+    private getAllMutationNames(): Observable<string[]> {
+        if (this.allMutationNames) {
+            return of(this.allMutationNames);
+        }
+
+        return this.apollo.query<MutationsQuery>({
+            query: this.queriesQuery,
+            fetchPolicy: 'cache-first',
+        }).pipe(map(({data}) => {
+            this.allMutationNames = data.__type && data.__type.fields ? data.__type.fields.map(v => v.name) : [];
+
+            return this.allMutationNames;
+        }));
     }
 
     /**

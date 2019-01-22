@@ -35,7 +35,7 @@ export class UserTagService extends AbstractModelService<UserTagQuery['userTag']
     public getEmptyObject(): UserTagInput {
         return {
             name: '',
-            color: ''
+            color: '',
         };
     }
 

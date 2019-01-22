@@ -14,7 +14,8 @@
                     *ngIf="node.expandable"
             >
 
-                <mat-progress-spinner mode="indeterminate" [diameter]="24" [strokeWidth]="5" *ngIf="node.loading" style="margin:8px"></mat-progress-spinner>
+                <mat-progress-spinner mode="indeterminate" [diameter]="24" [strokeWidth]="5" *ngIf="node.loading" style="margin:8px"
+                ></mat-progress-spinner>
                 <mat-icon *ngIf="!node.loading">
                     {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
                 </mat-icon>

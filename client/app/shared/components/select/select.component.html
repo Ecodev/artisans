@@ -43,15 +43,25 @@
         <mat-progress-spinner matPrefix *ngIf="loading" [diameter]="21" [strokeWidth]="5" mode="indeterminate"></mat-progress-spinner>
 
         <!-- Clear button -->
-        <button *ngIf="formCtrl.value && formCtrl.enabled && !clearLabel"
-                (click)="clear()"
-                mat-icon-button
-                matSuffix
-                i18n-matTooltip
-                matTooltip="Désélectionner"
-        >
-            <app-icon name="close"></app-icon>
-        </button>
+        <div matSuffix fxLayout="row" fxLayoutAlign="start center">
+            <button *ngIf="formCtrl.value && formCtrl.enabled && !clearLabel"
+                    (click)="clear()"
+                    mat-icon-button
+                    i18n-matTooltip
+                    matTooltip="Désélectionner"
+            >
+                <app-icon name="close"></app-icon>
+            </button>
+            <button *ngIf="navigateTo"
+                    [routerLink]="navigateTo"
+                    mat-button
+                    mat-icon-button
+                    i18n-matTooltip
+                    matTooltip="Naviguer vers"
+            >
+                <app-icon name="open_in_browser"></app-icon>
+            </button>
+        </div>
 
         <ng-template #defaultACItem let-item="item">
             <span>{{ getDisplayFn()(item) }}</span>
@@ -61,8 +71,15 @@
     </mat-form-field>
 
     <div fxLayout="row" fxLayoutGap="10px">
-        <button mat-raised-button *ngIf="hierarchicSelectorConfig && formCtrl.enabled && selectLabel" color="primary" (click)="openDialog()" i18n >{{ selectLabel }}</button>
-        <button mat-button *ngIf="formCtrl.value && formCtrl.enabled && clearLabel" color="warn" (click)="clear()" i18n >{{ clearLabel }}</button>
+        <button mat-raised-button
+                *ngIf="hierarchicSelectorConfig && formCtrl.enabled && selectLabel"
+                color="primary"
+                (click)="openDialog()"
+                i18n
+        >{{ selectLabel }}
+        </button>
+        <button mat-button *ngIf="formCtrl.value && formCtrl.enabled && clearLabel" color="warn" (click)="clear()" i18n>{{ clearLabel }}
+        </button>
     </div>
 
 </div>

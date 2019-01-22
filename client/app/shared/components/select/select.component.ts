@@ -72,6 +72,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     @Input() floatPlaceholder: string | null = null;
     @Input() required = false;
     @Input() optionRequired = true;
+    @Input() navigateTo;
 
     /**
      * If provided cause a new clear button to appear
@@ -308,7 +309,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
             return this.displayWith;
         }
 
-        return (item) => !item ? null : item.fullName || item.name || item[this.searchField] || item.id || item;
+        return (item) => !item ? null : item.fullName || item.iban || item.name || item[this.searchField] || item.id || item;
     }
 
     public clear(preventChangeValue = false) {

@@ -126,14 +126,12 @@
                         <app-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
                         ></app-select-enum>
 
-                        <!-- TODO : Remove [ngModel] because it conflicts with ReactiveForm. See console warn -->
-                        <!-- TODO : if server perserves that asymetric logic for booleans, ...-->
-                        <!-- TODO : ...we have to update AbstractModelService.getFormConfig to manage that -->
-                        <div fxlayout="column" fxLayoutGap="10px">
-                            <mat-checkbox formControlName="door1" [ngModel]="data.model.isDoor1" (change)="update()">Porte 1</mat-checkbox>
-                            <mat-checkbox formControlName="door2" [ngModel]="data.model.isDoor2" (change)="update()">Porte 2</mat-checkbox>
-                            <mat-checkbox formControlName="door3" [ngModel]="data.model.isDoor3" (change)="update()">Porte 3</mat-checkbox>
-                            <mat-checkbox formControlName="door4" [ngModel]="data.model.isDoor4" (change)="update()">Porte 4</mat-checkbox>
+
+                        <div fxLayout="row wrap" fxLayoutGap="20px" class="margin-v">
+                            <mat-slide-toggle fxFlex formControlName="door1" (change)="update()" class="margin-bottom">Porte 1</mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door2" (change)="update()" class="margin-bottom">Porte 2</mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door3" (change)="update()" class="margin-bottom">Porte 3</mat-slide-toggle>
+                            <mat-slide-toggle fxFlex formControlName="door4" (change)="update()" class="margin-bottom">Porte 4</mat-slide-toggle>
                         </div>
                     </div>
                 </div>

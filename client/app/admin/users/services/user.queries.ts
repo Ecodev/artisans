@@ -20,10 +20,10 @@ export const userFieldsFragment = gql`
         status
         ichtusSwissSailing
         mobilePhone
-        isDoor1
-        isDoor2
-        isDoor3
-        isDoor4
+        door1
+        door2
+        door3
+        door4
         account {
             id
             name

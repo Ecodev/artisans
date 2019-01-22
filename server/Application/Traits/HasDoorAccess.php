@@ -38,7 +38,7 @@ trait HasDoorAccess
     /**
      * @return bool
      */
-    public function isDoor1(): bool
+    public function getDoor1(): bool
     {
         return $this->door1;
     }
@@ -54,7 +54,7 @@ trait HasDoorAccess
     /**
      * @return bool
      */
-    public function isDoor2(): bool
+    public function getDoor2(): bool
     {
         return $this->door2;
     }
@@ -70,7 +70,7 @@ trait HasDoorAccess
     /**
      * @return bool
      */
-    public function isDoor3(): bool
+    public function getDoor3(): bool
     {
         return $this->door3;
     }
@@ -86,7 +86,7 @@ trait HasDoorAccess
     /**
      * @return bool
      */
-    public function isDoor4(): bool
+    public function getDoor4(): bool
     {
         return $this->door4;
     }

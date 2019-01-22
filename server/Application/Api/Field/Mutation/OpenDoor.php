@@ -34,7 +34,7 @@ abstract class OpenDoor implements FieldInterface
 
                 $user = User::getCurrent();
                 if ($user && $user->isActive()) {
-                    if (!$user->{'isDoor' . $doorIndex}()) {
+                    if (!$user->{'getDoor' . $doorIndex}()) {
                         throw new Exception("La porte demandée ne peut être ouverte par l'utilisateur");
                     }
                     $apiConfig = $container->get('config')['doorsApi'];

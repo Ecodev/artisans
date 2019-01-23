@@ -177,7 +177,7 @@ export class HierarchicSelectorService {
 
         for (const config of configurations) {
             if (!config.injectedService) {
-                config.injectedService = this.injector.get<HierarchicConfiguration['service']>(config.service as any);
+                config.injectedService = this.injector.get(config.service);
             }
         }
 

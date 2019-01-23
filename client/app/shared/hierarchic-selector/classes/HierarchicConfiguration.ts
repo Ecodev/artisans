@@ -1,12 +1,15 @@
 import { QueryVariables } from '../../classes/query-variables-manager';
 import { AbstractModelService } from '../../services/abstract-model.service';
+import { Type } from '@angular/core';
 
-export interface HierarchicConfiguration {
+type GenericModelService = AbstractModelService<any, any, any, any, any, any, any, any, any>;
+
+export interface HierarchicConfiguration<T extends GenericModelService = GenericModelService> {
 
     /**
      * An AbstractModelService to be used to fetch items
      */
-    service: AbstractModelService<any, any, any, any, any, any, any, any, any>;
+    service: Type<T>;
 
     /**
      * A list of FilterConditionField name to filter items
@@ -48,7 +51,7 @@ export interface HierarchicConfiguration {
      * Displayed icon for items retrieved for that config
      */
     icon?: string;
-    injectedService?: AbstractModelService<any, any, any, any, any, any, any, any, any>;
+    injectedService?: T;
 
     /**
      * Callback function that returns boolean. If true the item is selectable, if false, it's not.

@@ -2,8 +2,9 @@ import { Utility } from '../classes/utility';
 
 describe('Utility', () => {
 
-    it('should transform relations to id and remove __typename, but never touch File instances', () => {
+    it('should transform relations to id and remove __typename, but never touch File or Date instances', () => {
         const file = new File(['foo'], 'foo');
+        const date = new Date();
         const input = {
             prop1: 'val1',
             obj1: {
@@ -17,7 +18,13 @@ describe('Utility', () => {
                 prop6: 'val6',
                 __typename: 'some type',
             },
+            array: [
+                {id: 10},
+                {id: 20},
+                {foo: 'bar'},
+            ],
             file: file,
+            date: date,
         };
 
         const expected = {
@@ -29,7 +36,13 @@ describe('Utility', () => {
             prop5: {
                 prop6: 'val6',
             },
+            array: [
+                10,
+                20,
+                {foo: 'bar'},
+            ],
             file: file,
+            date: date,
         };
 
         const result = Utility.relationsToIds(input);

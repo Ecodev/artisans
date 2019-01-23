@@ -3,13 +3,17 @@ import { Literal } from '../types';
 
 export class Utility {
 
+    /**
+     * Relations to full objects are converted to their IDs only.
+     *
+     * So {user: {id: 123}} becomes {user: 123}
+     */
     public static relationsToIds(object: Literal): Literal {
-
         const newObj = {};
         Object.keys(object).forEach((key) => {
             let value = object[key];
             if (isObject(value) && value.id) {
-                value = object[key].id;
+                value = value.id;
             } else if (isArray(value)) {
                 value = value.map(i => isObject(i) && i.id ? i.id : i);
             } else if (isObject(value) && !(value instanceof File) && !(value instanceof Date)) {
@@ -18,6 +22,7 @@ export class Utility {
 
             newObj[key] = value;
         });
+
         return newObj;
     }
 
@@ -72,11 +77,11 @@ export class Utility {
             return;
         }
 
-        Object.keys(obj).forEach(function(key) {
+        Object.keys(obj).forEach(function (key) {
             delete obj[key];
         });
 
-        Object.keys(newObj).forEach(function(key) {
+        Object.keys(newObj).forEach(function (key) {
             obj[key] = newObj[key];
         });
 
@@ -96,7 +101,7 @@ export class Utility {
     public static hexToRgb(hex: string): { r: number, g: number, b: number } {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
         const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
             return r + r + g + g + b + b;
         });
 

@@ -22,9 +22,6 @@ class Account extends AbstractModel
      * @var User
      *
      * @ORM\OneToOne(targetEntity="User", mappedBy="account")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(onDelete="SET NULL")
-     * })
      */
     private $user;
 

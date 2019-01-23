@@ -1,6 +1,13 @@
-<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px" style="max-width:1300px; margin:auto; padding:30px" [formGroup]="form">
+<div fxLayout="column"
+     fxLayout.gt-sm="row"
+     fxLayoutAlign.gt-sm="start stretch"
+     fxLayoutGap="30px"
+     [style.padding.px]="30"
+     [formGroup]="form"
+     fxFlex
+>
 
-    <div fxFlex="66" fxLayout="column" fxLayoutGap="30px">
+    <div fxFlex="none" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px" overflow>
 
         <div>
             <h2 class="mat-headline">Solde</h2>
@@ -12,8 +19,8 @@
             <mat-form-field>
                 <mat-label>IBAN</mat-label>
                 <input matInput formControlName="iban" (change)="updateOrCreateAccount()">
-                <button mat-icon-button matSuffix (click)="unlockIBAN()">
-                    <app-icon *ngIf="form.get('iban').disabled" name="lock"></app-icon>
+                <button mat-icon-button matSuffix (click)="unlockIBAN()" *ngIf="form.get('iban').disabled">
+                    <app-icon  name="lock"></app-icon>
                 </button>
             </mat-form-field>
 
@@ -110,9 +117,9 @@
 
     </div>
 
-    <div fxFlex="33" fxLayout="column">
+    <div fxFlex="none" fxFlex.gt-sm="33" fxLayout="column">
         <h2 class="mat-headline">Famille</h2>
-        <app-family *ngIf="!data.model.responsible" [responsible]="data.model"></app-family>
+        <app-family *ngIf="!data.model.responsible" [responsible]="data.model" fxFlex fxLayout="column"></app-family>
     </div>
 
 </div>

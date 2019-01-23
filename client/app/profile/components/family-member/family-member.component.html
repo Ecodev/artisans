@@ -63,7 +63,8 @@
             <mat-error *ngIf="form.get('login').hasError('required')">Requis</mat-error>
         </mat-form-field>
 
-        <button mat-button color="primary">Demander un nouveau mot de passe</button>
+        <!-- TODO : Implement click event -->
+        <button mat-button color="primary" *ngIf="data.model.id" (click)="null">Demander un nouveau mot de passe</button>
     </div>
 
     <button mat-raised-button *ngIf="!data.model.id" (click)="create.emit()" [color]="form.invalid ? 'warn' : 'accent'"

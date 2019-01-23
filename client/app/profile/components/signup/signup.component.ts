@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
 import {
-    BookingInput,
-    BookingStatus,
     CreateUserMutation,
     CreateUserMutationVariables,
     UpdateUserMutation,
@@ -12,13 +10,10 @@ import {
 } from '../../../shared/generated-types';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserTagService } from '../../../admin/userTags/services/userTag.service';
-import { LicenseService } from '../../../admin/licenses/services/license.service';
-import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { AnonymousUserService, ConfirmPasswordStateMatcher } from './anonymous-user.service';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { LinkMutationService } from '../../../shared/services/link-mutation.service';
 import { AppDataSource } from '../../../shared/services/data.source';
+import { ConfirmPasswordStateMatcher } from '../../../admin/users/services/user.service';
+import { AnonymousUserService } from './anonymous-user.service';
 
 @Component({
     selector: 'app-signup',
@@ -36,21 +31,28 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
     public confirmPasswordStateMatcher = new ConfirmPasswordStateMatcher();
     private mandatoryBookables: AppDataSource;
 
-    constructor(alertService: AlertService,
-                private userService: AnonymousUserService,
+    public step;
+
+    constructor(userService: AnonymousUserService,
+                alertService: AlertService,
                 router: Router,
                 route: ActivatedRoute,
-                public userTagService: UserTagService,
-                public licenseService: LicenseService,
-                private bookingService: BookingService,
-                private bookableService: BookableService,
-                private linkService: LinkMutationService,
+                protected bookableService: BookableService,
     ) {
         super('user', userService, alertService, router, route);
     }
 
     ngOnInit() {
+
+        this.step = +this.route.snapshot.data.step;
+
         super.ngOnInit();
+
+        if (this.step === 1) {
+            this.initStep1();
+        } else if (this.step === 2) {
+            this.initStep2();
+        }
 
         this.bookableService.getMandatoryBookables().subscribe(bookables => {
             if (bookables) {
@@ -60,35 +62,32 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
 
     }
 
-    public register() {
-        this.create(false);
+    public initStep1() {
     }
 
-    /**
-     * TODO : replace by specific mutation
-     */
-    public postCreate(user) {
+    private initStep2() {
 
-        this.userService.login({login: this.data.model.login, password: this.data.model.password}).subscribe(() => {
+        // Lock e-mail on step 2, this field must stay sync
+        const email = this.form.get('email');
+        if (email) {
+            email.disable();
+        }
+    }
 
-            (this.mandatoryBookables.data || []).forEach(bookable => {
+    public submit() {
+        if (this.step === 1) {
+            this.submitStep1();
+        } else if (this.step === 2) {
+            this.submitStep2();
+        }
+    }
 
-                const newBooking: BookingInput = {
-                    responsible: user,
-                    startDate: (new Date()).toISOString(),
-                    status: BookingStatus.booked,
-                };
+    public submitStep1() {
+        this.validateAllFormFields(this.form);
+    }
 
-                this.bookingService.create(newBooking).subscribe(createdBooking => {
-                    this.linkService.link(createdBooking, bookable).subscribe(result => {
-                        this.router.navigateByUrl('/account');
-                    });
-                });
-
-            });
-
-        });
-
+    public submitStep2() {
+        this.validateAllFormFields(this.form); // t
     }
 
 }

@@ -7,11 +7,13 @@ import { FamilyMemberComponent } from './components/family-member/family-member.
 import { FamilyComponent } from './components/family/family.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { SignUpConfirmComponent } from './components/signup/signup-confirm.component';
 
 @NgModule({
     declarations: [
         ProfileComponent,
         SignupComponent,
+        SignUpConfirmComponent,
         FamilyMemberComponent,
         FamilyComponent,
     ],

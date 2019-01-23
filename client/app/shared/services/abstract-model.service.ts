@@ -103,21 +103,27 @@ export abstract class AbstractModelService<Tone,
     /**
      * Return empty object with some default values from frontend perspective
      *
-     * Where empty object must respect graphql XXXInput type, may need some default values form other fields
+     * Where empty object must respect graphql XXXInput type, may need some default values for other fields
      */
     public getDefaultValues(): Literal {
         return {};
     }
 
+    /**
+     * List of individual fields validators
+     */
     public getFormValidators(): FormValidators {
         return {};
     }
 
+    /**
+     * List of grouped fields validators (like password + confirm password)
+     */
     public getFormGroupValidators(): ValidatorFn[] {
         return [];
     }
 
-    public getFormConfig(model): Literal {
+    public getFormConfig(model: Literal): Literal {
         const values = Object.assign(this.getEmptyObject(), this.getDefaultValues());
         const validators = this.getFormValidators();
         const config = {};

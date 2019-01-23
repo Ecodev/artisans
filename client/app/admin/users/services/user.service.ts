@@ -38,10 +38,11 @@ import {
     UserStatus,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { BookingService } from '../../bookings/services/booking.service';
+import { ErrorStateMatcher } from '@angular/material';
 
 @Injectable({
     providedIn: 'root',
@@ -324,4 +325,15 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return this.bookingService.watchAll(qvm, true);
     }
 
+}
+
+export class ConfirmPasswordStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+
+        if (control && control.parent && control.parent instanceof FormGroup) {
+            return !!UserService.checkPassword(control.parent) && control.dirty;
+        }
+
+        return false;
+    }
 }

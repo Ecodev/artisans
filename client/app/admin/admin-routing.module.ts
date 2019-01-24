@@ -35,11 +35,13 @@ import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resol
 import { CategoriesComponent } from './categories/categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
 import { CategoryResolver } from './categories/services/category.resolver';
+import { AdministrationGuard } from '../shared/services/administration.guard';
 
 const routes: Routes = [
         {
             path: '',
             component: AdminComponent,
+            canActivate: [AdministrationGuard],
             children: [
                 {
                     path: '',

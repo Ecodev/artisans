@@ -137,6 +137,13 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return pass === confirmPass ? null : {notSame: true};
     }
 
+    public static canAccessAdmin(user: CurrentUserForProfileQuery['viewer']) {
+        if (!user) {
+            return false;
+        }
+        return [UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
+    }
+
     public getEmptyObject(): UserInput {
         return {
             login: '',
@@ -226,6 +233,12 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return subject;
     }
 
+    /**
+     * Todo : create specific mutation endpoint to flag current date on welcomeSessionDate and if user has paid, active him
+     */
+    // public flagWelcomeSessionDate(id: string): Observable<UpdateUserMutation['updateUser']> {
+    // }
+
     public logout(): Observable<LogoutMutation['logout']> {
         const subject = new Subject<LogoutMutation['logout']>();
 
@@ -242,12 +255,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
         return subject;
     }
-
-    /**
-     * Todo : create specific mutation endpoint to flag current date on welcomeSessionDate and if user has paid, active him
-     */
-    // public flagWelcomeSessionDate(id: string): Observable<UpdateUserMutation['updateUser']> {
-    // }
 
     /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form

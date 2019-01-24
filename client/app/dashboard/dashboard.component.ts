@@ -14,12 +14,17 @@ export class DashboardComponent implements OnInit {
 
     public title = 'my-ichtus';
 
-    public initialized: boolean;
+    public currentUser;
 
     constructor(public userService: UserService) {
     }
 
     public ngOnInit(): void {
+        this.userService.getCurrentUser().subscribe(user => this.currentUser = user);
+    }
+
+    public canAccessAdmin() {
+        return UserService.canAccessAdmin(this.currentUser);
     }
 
     // public smyle() {

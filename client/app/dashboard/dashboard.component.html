@@ -35,7 +35,7 @@
                 Mon compte
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="admin">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="admin" *ngIf="canAccessAdmin()">
                 <app-icon name="administrator" [size]="100"></app-icon>
                 Administration
             </a>

@@ -1,4 +1,4 @@
-<div overflow>
+<div overflow style="padding:5px">
     <mat-accordion>
         <mat-expansion-panel *ngFor="let familyMember of familyMembers">
             <mat-expansion-panel-header>
@@ -9,5 +9,5 @@
     </mat-accordion>
 </div>
 <div>
-    <button mat-raised-button color="primary" (click)="add()" class="margin-top">Ajouter une personne</button>
+    <button mat-flat-button color="primary" (click)="add()" class="margin-top">Ajouter une personne</button>
 </div>

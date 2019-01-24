@@ -8,6 +8,7 @@ import {
     UpdateUserMutationVariables,
     UserQuery,
     UserQueryVariables,
+    UserRole,
 } from '../../../shared/generated-types';
 import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
@@ -108,7 +109,7 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
      * Manages account transparently just by setting the iban.
      * If no account exists when an iban is created, then the account is created for current user and setted iban
      * If account exists and iban changes, the account is updated
-     * TODO : test once server accepts to update/create accounts without balance amount error
+     * TODO : test after fixing server error
      */
     public updateOrCreateAccount() {
         const iban = this.form.get('iban');
@@ -136,6 +137,17 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
         if (iban) {
             iban.enable();
         }
+    }
+
+    public showBecomeMember() {
+        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].indexOf(this.data.model.role) > -1;
+        const isResponsible = !this.data.model.responsible;
+
+        return !isMember && !isResponsible;
+    }
+
+    public canLeave() {
+        return !!this.data.model.responsible;
     }
 
 }

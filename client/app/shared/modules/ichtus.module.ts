@@ -17,6 +17,7 @@ import { AddressComponent } from '../components/address/address.component';
 import { EnumPipe } from '../pipes/enum.pipe';
 import { CapitalizePipe } from '../pipes/capitalize.pipe';
 import { SelectEnumComponent } from '../components/select-enum/select-enum.component';
+import { AvatarModule } from 'ngx-avatar';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { SelectEnumComponent } from '../components/select-enum/select-enum.compo
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+        AvatarModule
     ],
     exports: [
         RelationsComponent,
@@ -58,6 +60,7 @@ import { SelectEnumComponent } from '../components/select-enum/select-enum.compo
         AddressComponent,
         EnumPipe,
         CapitalizePipe,
+        AvatarModule
     ],
 })
 export class IchtusModule {

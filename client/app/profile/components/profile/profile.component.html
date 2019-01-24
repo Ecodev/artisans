@@ -2,31 +2,54 @@
      fxLayout.gt-sm="row"
      fxLayoutAlign.gt-sm="start stretch"
      fxLayoutGap="30px"
-     [style.padding.px]="30"
      [formGroup]="form"
      fxFlex
 >
 
     <div fxFlex="none" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px" overflow>
 
-        <div>
-            <h2 class="mat-headline">Solde</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit sit amet non magna. Morbi leo
-               risus, porta ac consectetur ac, vestibulum at eros. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
-               ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-               condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui.</p>
-
-            <mat-form-field>
-                <mat-label>IBAN</mat-label>
-                <input matInput formControlName="iban" (change)="updateOrCreateAccount()">
-                <button mat-icon-button matSuffix (click)="unlockIBAN()" *ngIf="form.get('iban').disabled">
-                    <app-icon  name="lock"></app-icon>
-                </button>
-            </mat-form-field>
-
+        <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+            <div fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                <ngx-avatar [name]="data.model.name" [size]="50"></ngx-avatar>
+                <div class="mat-display-1 no-margin">{{data.model.name}}</div>
+            </div>
+            <div>
+                <button mat-flat-button color="warn" [disabled]="!showBecomeMember()">Devenir membre</button>
+            </div>
         </div>
 
-        <div>
+        <mat-divider></mat-divider>
+
+        <div fxFlex="none" fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+
+            <!-- CREDIT -->
+            <div fxFlex="none" fxFlex.gt-xs fxLayout="row">
+                <div fxLayout="column" fxLayoutGap="20px">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
+                        <button mat-flat-button color="primary" class="margin-left">Approvisionner</button>
+                    </div>
+                    <div class="mat-display-2 no-margin">{{ data.model.account.balance | currency : 'CHF'}}</div>
+                </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div fxLayout="column" fxLayoutGap="10px">
+                <button mat-stroked-button color="primary">Annoncer une dépense</button>
+                <button mat-stroked-button color="primary" [disabled]="!form.get('iban').value">Demander un remboursement</button>
+                <mat-form-field>
+                    <mat-label>IBAN</mat-label>
+                    <input matInput formControlName="iban" (change)="updateOrCreateAccount()">
+                    <button mat-icon-button matSuffix (click)="unlockIBAN()" *ngIf="form.get('iban').disabled">
+                        <app-icon name="lock"></app-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div fxFlex="none">
             <h2 class="mat-headline">Cotisation</h2>
 
             <table mat-table *ngIf="runningServicesDS" [dataSource]="runningServicesDS">
@@ -69,7 +92,7 @@
             </table>
         </div>
 
-        <div fxLayout="column" fxLayoutGap="10px">
+        <div fxFlex="none" fxLayout="column" fxLayoutGap="10px">
             <h2 class="mat-headline">Demandes en attente</h2>
             <table mat-table *ngIf="runningServicesDS" [dataSource]="pendingApplicationsDS">
                 <tr mat-header-row *matHeaderRowDef="applicationsColumns"></tr>
@@ -117,9 +140,14 @@
 
     </div>
 
-    <div fxFlex="none" fxFlex.gt-sm="33" fxLayout="column">
-        <h2 class="mat-headline">Famille</h2>
-        <app-family *ngIf="!data.model.responsible" [responsible]="data.model" fxFlex fxLayout="column"></app-family>
+    <div fxFlex="none" fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="20px">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+            <h2 fxFlex class="mat-headline no-margin">Famille</h2>
+            <button mat-flat-button color="warn" [disabled]="!canLeave()">Quitter le ménage</button>
+        </div>
+
+        <app-family *ngIf="!data.model.responsible" [responsible]="data.model" fxFlex="1 0 0px" fxLayout="column"></app-family>
     </div>
 
 </div>

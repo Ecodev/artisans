@@ -26,7 +26,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { AvatarModule } from 'ngx-avatar';
 import { MaterialModule } from './shared/modules/material.module';
 import { IchtusModule } from './shared/modules/ichtus.module';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
@@ -56,7 +55,6 @@ registerLocaleData(localeFRCH);
         IchtusModule,
         IconModule,
         HttpClientModule,
-        AvatarModule.forRoot(),
         HttpBatchLinkModule,
         HierarchicSelectorModule,
     ],

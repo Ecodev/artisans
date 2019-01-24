@@ -13,6 +13,7 @@ import {
 } from '../../../shared/generated-types';
 import { AccountService } from '../../accounts/services/account.service';
 import { CategoryConfiguration } from '../../../shared/hierarchic-selector/configurations/CategoryConfiguration';
+import { BookableService } from '../../bookables/services/bookable.service';
 
 @Component({
     selector: 'app-transaction',
@@ -35,6 +36,7 @@ export class TransactionComponent
                 router: Router,
                 route: ActivatedRoute,
                 public accountService: AccountService,
+                public bookableService: BookableService
     ) {
         super('transaction', transactionService, alertService, router, route);
     }

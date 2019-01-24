@@ -28,6 +28,12 @@
                             ></textarea>
                         </mat-form-field>
 
+                        <mat-form-field>
+                            <mat-label>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
+                            ></textarea>
+                        </mat-form-field>
+
                     </div>
 
                     <div fxFlex="33" fxLayout="column" *ngIf="data.bookingType">
@@ -45,16 +51,21 @@
 
                         <mat-form-field>
                             <mat-label>Prix initial</mat-label>
-                            <input matInput formControlName="initialPrice" (change)="update()">
+                            <input matInput type="number" formControlName="initialPrice" (change)="update()">
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('initialPrice').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Prix périodique</mat-label>
-                            <input matInput formControlName="periodicPrice" (change)="update()">
+                            <input matInput type="number" formControlName="periodicPrice" (change)="update()">
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('periodicPrice').hasError('min')">Le montant doit être positif</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Nombre max. de réservations simultanées</mat-label>
+                            <input matInput type="number" formControlName="simultaneousBookingMaximum" (change)="update()">
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>

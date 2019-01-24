@@ -64,6 +64,14 @@
                                     [navigateTo]="form.get('account').value?.id ? ['/admin/account', form.get('account').value.id] : null"
                         ></app-select>
 
+                        <app-select formControlName="bookable"
+                                    placeholder="Réservable"
+                                    [service]="bookableService"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                                    [navigateTo]="form.get('bookable').value?.id ? ['/admin/bookable', form.get('bookable').value.id] : null"
+                        ></app-select>
+
                         <div *ngIf="form.get('account').value.user"
                              fxLayout="row"
                              fxLayoutAlign="start center"

@@ -55,6 +55,7 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
             internalRemarks: '',
             remarks: '',
             category: null,
+            bookable: null
         };
     }
 

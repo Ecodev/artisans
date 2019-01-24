@@ -91,7 +91,7 @@
                         <div fxLayout="row">
                             <h2 class="mat-title" fxFlex>Retour</h2>
                             <button *ngIf="data.model.id && !form.get('endDate').value"
-                                    mat-raised-button
+                                    mat-flat-button
                                     color="warn"
                                     (click)="endBooking()"
                             >Terminer

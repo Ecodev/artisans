@@ -19,6 +19,7 @@ import { CapitalizePipe } from '../pipes/capitalize.pipe';
 import { SelectEnumComponent } from '../components/select-enum/select-enum.component';
 import { AvatarModule } from 'ngx-avatar';
 import { MoneyComponent } from '../components/money/money.component';
+import { BookableMetadataComponent } from '../components/bookable-metadata/bookable-metadata.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { MoneyComponent } from '../components/money/money.component';
         EnumPipe,
         CapitalizePipe,
         MoneyComponent,
+        BookableMetadataComponent
     ],
     imports: [
         CommonModule,
@@ -64,6 +66,7 @@ import { MoneyComponent } from '../components/money/money.component';
         CapitalizePipe,
         AvatarModule,
         MoneyComponent,
+        BookableMetadataComponent
     ],
 })
 export class IchtusModule {

@@ -121,6 +121,10 @@
             </div>
         </mat-tab>
 
+        <mat-tab label="Attributs">
+            <app-bookable-metadata [bookable]="data.model" [edit]="true" class="margin"></app-bookable-metadata>
+        </mat-tab>
+
     </mat-tab-group>
 
     <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"

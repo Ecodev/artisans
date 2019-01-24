@@ -62,6 +62,15 @@ export class AppDataSource extends DataSource<any> {
         return removedElement;
     }
 
+    public remove(item: any) {
+        const index = this.data.items.indexOf(item);
+        if (index > -1) {
+            this.data.items.splice(index, 1);
+            this.data = this.data;
+        }
+
+    }
+
     private unsubscribe() {
         this.ngUnsubscribe.next(); // required or complete() will not emit
         this.ngUnsubscribe.complete(); // unsubscribe everybody

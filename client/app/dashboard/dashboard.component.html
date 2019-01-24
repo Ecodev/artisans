@@ -5,17 +5,17 @@
         <h1 class="mat-display-2 margin-bottom">Annoncer une sortie</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
-                <app-icon name="qr" [size]="100"></app-icon>
+                <app-icon name="qr" [size]="70"></app-icon>
                 en scannant dun code QR
             </a>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
-                <app-icon name="code" [size]="100"></app-icon>
+                <app-icon name="code" [size]="70"></app-icon>
                 en saisissant un code
             </a>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
-                <app-icon name="own_bookable" [size]="100"></app-icon>
+                <app-icon name="own_bookable" [size]="70"></app-icon>
                 avec mon propre matériel
             </a>
         </div>
@@ -26,22 +26,22 @@
         <h1 class="mat-display-2 margin-bottom">Autres</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
-                <app-icon name="doors" [size]="100"></app-icon>
+                <app-icon name="doors" [size]="70"></app-icon>
                 Accéder au local
             </a>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="profile">
-                <app-icon name="family" [size]="100"></app-icon>
+                <app-icon name="family" [size]="70"></app-icon>
                 Mon compte
             </a>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="admin" *ngIf="canAccessAdmin()">
-                <app-icon name="administrator" [size]="100"></app-icon>
+                <app-icon name="administrator" [size]="70"></app-icon>
                 Administration
             </a>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="userService.logout()">
-                <app-icon name="exit" [size]="100"></app-icon>
+                <app-icon name="exit" [size]="70"></app-icon>
                 Déconnexion
             </a>
         </div>

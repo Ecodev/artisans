@@ -18,6 +18,7 @@ import { EnumPipe } from '../pipes/enum.pipe';
 import { CapitalizePipe } from '../pipes/capitalize.pipe';
 import { SelectEnumComponent } from '../components/select-enum/select-enum.component';
 import { AvatarModule } from 'ngx-avatar';
+import { MoneyComponent } from '../components/money/money.component';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,7 @@ import { AvatarModule } from 'ngx-avatar';
         AddressComponent,
         EnumPipe,
         CapitalizePipe,
+        MoneyComponent,
     ],
     imports: [
         CommonModule,
@@ -41,7 +43,7 @@ import { AvatarModule } from 'ngx-avatar';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        AvatarModule
+        AvatarModule,
     ],
     exports: [
         RelationsComponent,
@@ -60,7 +62,8 @@ import { AvatarModule } from 'ngx-avatar';
         AddressComponent,
         EnumPipe,
         CapitalizePipe,
-        AvatarModule
+        AvatarModule,
+        MoneyComponent,
     ],
 })
 export class IchtusModule {

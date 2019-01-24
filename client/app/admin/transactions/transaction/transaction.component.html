@@ -1,7 +1,8 @@
 <div [formGroup]="form">
 
-    <app-detail-header newLabel="Nouvelle transaction" label="Transaction" [model]="data.model" [listRoute]="['admin', 'transaction']"
-    ></app-detail-header>
+    <app-detail-header newLabel="Nouvelle transaction" label="Transaction" [model]="data.model" [listRoute]="['admin', 'transaction']">
+        <app-money [amount]="data.model.amount" sizeClass="mat-display-1"></app-money>
+    </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -39,24 +40,9 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <app-select formControlName="category"
-                                    placeholder="Catégorie"
-                                    [hierarchicSelectorConfig]="hierarchicConfig"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                        ></app-select>
-
-                        <app-select formControlName="account"
-                                    [displayWith]="showAccountName"
-                                    placeholder="Compte"
-                                    [service]="accountService"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                        ></app-select>
-
                         <mat-form-field>
                             <mat-label>Montant</mat-label>
-                            <input matInput formControlName="amount" (change)="update()">
+                            <input matInput type="number" formControlName="amount" (change)="update()">
                             <span matSuffix>CHF</span>
                         </mat-form-field>
 
@@ -67,11 +53,42 @@
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
 
+                        <mat-divider class="margin-bottom"></mat-divider>
+
+                        <app-select formControlName="account"
+                                    [displayWith]="showAccountName"
+                                    placeholder="Compte"
+                                    [service]="accountService"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                                    [navigateTo]="form.get('account').value?.id ? ['/admin/account', form.get('account').value.id] : null"
+                        ></app-select>
+
+                        <div *ngIf="form.get('account').value.user"
+                             fxLayout="row"
+                             fxLayoutAlign="start center"
+                             class="margin-bottom"
+                        >
+                            <ngx-avatar [name]="form.get('account').value.user.name" [size]="30"></ngx-avatar>
+                            <a mat-button [routerLink]="['/admin/user', form.get('account').value.user.id]">
+                                {{form.get('account').value.user.name }}
+                            </a>
+                        </div>
+
+                        <mat-divider class="margin-bottom"></mat-divider>
+
+                        <app-select formControlName="category"
+                                    placeholder="Catégorie"
+                                    [hierarchicSelectorConfig]="hierarchicConfig"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                        ></app-select>
+
                     </div>
 
                 </div>
 
-                <!-- TODO : add selectors for ExpanseClaim and Categories -->
+                <!-- TODO : add selectors for ExpanseClaim -->
 
                 <mat-divider></mat-divider>
 

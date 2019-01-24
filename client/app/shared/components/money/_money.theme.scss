@@ -1,0 +1,26 @@
+@mixin money($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    app-money {
+
+        .positive {
+            color: #008600;
+        }
+
+        .limited {
+            color: mat-color($accent);
+        }
+
+        .negative {
+            color: mat-color($warn);
+        }
+
+    }
+
+}
+
+

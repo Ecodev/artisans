@@ -1,7 +1,8 @@
 <div [formGroup]="form">
 
-    <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'expenseClaim']"
-    ></app-detail-header>
+    <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'expense-claim']">
+        <app-money [amount]="data.model.amount" sizeClass="mat-display-1"></app-money>
+    </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">

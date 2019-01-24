@@ -1,9 +1,4 @@
-<div fxLayout="column"
-     fxLayout.gt-sm="row"
-     fxLayoutAlign.gt-sm="start stretch"
-     fxLayoutGap="30px"
-     [formGroup]="form"
-     fxFlex
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start stretch" fxLayoutGap="30px" [formGroup]="form" fxFlex
 >
 
     <div fxFlex="none" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px" overflow>
@@ -29,7 +24,7 @@
                         <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
                         <button mat-flat-button color="primary" class="margin-left">Approvisionner</button>
                     </div>
-                    <div class="mat-display-2 no-margin">{{ data.model.account.balance | currency : 'CHF'}}</div>
+                    <app-money [amount]="data.model.account?.balance" sizeClass="mat-display-2"></app-money>
                 </div>
             </div>
 

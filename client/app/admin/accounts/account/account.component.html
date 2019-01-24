@@ -1,6 +1,8 @@
 <div [formGroup]="form">
 
-    <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'account']"></app-detail-header>
+    <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'account']">
+        <app-money [amount]="data.model.balance" sizeClass="mat-display-1"></app-money>
+    </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -37,9 +39,6 @@
                                     [showIcon]="false"
                                     [navigateTo]="form.get('user').value?.id ? ['/admin/user', form.get('user').value.id] : null"
                         ></app-select>
-
-                        <h2 class="mat-title">Solde</h2>
-                        {{ data.model.balance }} CHF
 
                     </div>
 

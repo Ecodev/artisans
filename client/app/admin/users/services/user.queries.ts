@@ -62,6 +62,10 @@ export const usersQuery = gql`
                 name
                 status
                 familyRelationship
+                account {
+                    id
+                    balance
+                }
             }
             pageSize
             pageIndex

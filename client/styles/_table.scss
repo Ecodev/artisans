@@ -17,6 +17,13 @@
             justify-content: center;
         }
 
+        .mat-cell,
+        .mat-header-cell,
+        .mat-footer-cell {
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
         [mat-row] {
             &.selected {
                 background: mat-color($background, selected-button);

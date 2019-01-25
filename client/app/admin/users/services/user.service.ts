@@ -63,7 +63,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                 {
                     conditions: [
                         {
-                            responsible: {null: {not: false}},
+                            owner: {null: {not: false}},
                             status: {in: {values: [UserStatus.inactive, UserStatus.new, UserStatus.archived]}},
                         },
                     ],
@@ -85,17 +85,15 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     }
 
     /**
-     * Return filters for users with or without responsible for given roles
+     * Return filters for users for given roles
      */
-    public static getFiltersByRoleAndResponsible(roles: UserRole[], withResponsible: boolean = false): UsersQueryVariables {
+    public static getFiltersByRoles(roles: UserRole[]): UsersQueryVariables {
         return {
             filter: {
                 groups: [
                     {
                         conditions: [
                             {
-
-                                responsible: {null: {not: withResponsible}},
                                 role: roles && roles.length ? {in: {values: roles}} : null,
                                 status: {equal: {value: UserStatus.active}},
                             },
@@ -107,16 +105,15 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     }
 
     /**
-     * Return filters for users with or without responsible for given statuses
+     * Return filters for users for given statuses
      */
-    public static getFiltersByStatusAndResponsible(status: UserStatus[], withResponsible: boolean = false): UsersQueryVariables {
+    public static getFiltersByStatuses(status: UserStatus[]): UsersQueryVariables {
         return {
             filter: {
                 groups: [
                     {
                         conditions: [
                             {
-                                responsible: {null: {not: withResponsible}},
                                 status: {in: {values: status}},
                             },
                         ],

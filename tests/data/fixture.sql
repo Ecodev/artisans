@@ -15,10 +15,10 @@ REPLACE INTO user (id, login, first_name, last_name, email, password, role, stat
 (1006, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', 'householder', NULL, NULL, NULL);
 
 -- Family members accounts
-REPLACE INTO user (id, responsible_id, login, first_name, last_name, email, password, role, status, family_relationship) VALUES
-(1007, 1002, 'conjoint', 'Conj', 'Oint', 'conjoint@example.com', MD5('conjoint'), 'member', 'active', 'partner'),
-(1008, 1002, 'fils', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'member', 'active', 'child'),
-(1009, 1002, 'fille', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'member', 'active', 'child');
+REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, family_relationship) VALUES
+(1007, 1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('conjoint'), 'individual', 'active', 'partner'),
+(1008, 1002, 'son', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'individual', 'active', 'child'),
+(1009, 1002, 'daughter', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'individual', 'active', 'child');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');

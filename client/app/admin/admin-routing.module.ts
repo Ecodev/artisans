@@ -226,7 +226,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres actifs',
-                                queryVariables: UserService.getFiltersByRoleAndResponsible([UserRole.member]),
+                                queryVariables: UserService.getFiltersByRoles([UserRole.member]),
                             },
                         },
                         {
@@ -234,7 +234,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Nouveaux membres',
-                                queryVariables: UserService.getFiltersByStatusAndResponsible([UserStatus.new]),
+                                queryVariables: UserService.getFiltersByStatuses([UserStatus.new]),
                                 columns: ['name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
                             },
                         },
@@ -243,7 +243,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Staff',
-                                queryVariables: UserService.getFiltersByRoleAndResponsible([UserRole.responsible, UserRole.administrator]),
+                                queryVariables: UserService.getFiltersByRoles([UserRole.responsible, UserRole.administrator]),
                             },
                         },
                         {

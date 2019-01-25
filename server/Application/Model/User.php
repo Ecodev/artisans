@@ -30,6 +30,7 @@ class User extends AbstractModel
 {
     const ROLE_ANONYMOUS = 'anonymous';
     const ROLE_BOOKING_ONLY = 'booking_only';
+    const ROLE_INDIVIDUAL = 'individual';
     const ROLE_MEMBER = 'member';
     const ROLE_RESPONSIBLE = 'responsible';
     const ROLE_ADMINISTRATOR = 'administrator';
@@ -107,9 +108,9 @@ class User extends AbstractModel
 
     /**
      * @var string
-     * @ORM\Column(type="UserRole", options={"default" = User::ROLE_MEMBER})
+     * @ORM\Column(type="UserRole", options={"default" = User::ROLE_INDIVIDUAL})
      */
-    private $role = self::ROLE_MEMBER;
+    private $role = self::ROLE_INDIVIDUAL;
 
     /**
      * @var string
@@ -234,7 +235,7 @@ class User extends AbstractModel
      *
      * @param string $role role for new user
      */
-    public function __construct(string $role = self::ROLE_MEMBER)
+    public function __construct(string $role = self::ROLE_INDIVIDUAL)
     {
         $this->role = $role;
         $this->bookings = new ArrayCollection();
@@ -400,6 +401,7 @@ class User extends AbstractModel
         $currentRole = self::getCurrent() ? self::getCurrent()->getRole() : self::ROLE_ANONYMOUS;
         $orderedRoles = [
             self::ROLE_ANONYMOUS,
+            self::ROLE_INDIVIDUAL,
             self::ROLE_MEMBER,
             self::ROLE_RESPONSIBLE,
             self::ROLE_ADMINISTRATOR,

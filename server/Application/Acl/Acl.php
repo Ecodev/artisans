@@ -39,7 +39,8 @@ class Acl extends \Zend\Permissions\Acl\Acl
         // Each role is strictly "stronger" than the last one
         $this->addRole(User::ROLE_ANONYMOUS);
         $this->addRole(User::ROLE_BOOKING_ONLY, User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_MEMBER, User::ROLE_BOOKING_ONLY);
+        $this->addRole(User::ROLE_INDIVIDUAL, User::ROLE_BOOKING_ONLY);
+        $this->addRole(User::ROLE_MEMBER, User::ROLE_INDIVIDUAL);
         $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_MEMBER);
         $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_RESPONSIBLE);
 
@@ -80,11 +81,11 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
         $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['create', 'read', 'update']);
 
-        $this->allow(User::ROLE_MEMBER, $user, ['read']);
-        $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsMyself());
-        $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['create']);
-        $this->allow(User::ROLE_MEMBER, [$expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsCreator());
-        $this->allow(User::ROLE_MEMBER, $message, ['read'], new IsRecipient());
+        $this->allow(User::ROLE_INDIVIDUAL, $user, ['read']);
+        $this->allow(User::ROLE_INDIVIDUAL, $user, ['update'], new IsMyself());
+        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim, $accountingDocument], ['create']);
+        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsCreator());
+        $this->allow(User::ROLE_INDIVIDUAL, $message, ['read'], new IsRecipient());
 
         $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $category], ['read']);
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);

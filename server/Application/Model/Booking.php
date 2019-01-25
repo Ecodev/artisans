@@ -15,6 +15,9 @@ use GraphQL\Doctrine\Annotation as API;
  * A booking linking a user and several bookables
  *
  * @ORM\Entity(repositoryClass="Application\Repository\BookingRepository")
+ * @ORM\AssociationOverrides({
+ *     @ORM\AssociationOverride(name="owner", inversedBy="bookings")
+ * })
  */
 class Booking extends AbstractModel
 {
@@ -74,16 +77,6 @@ class Booking extends AbstractModel
     private $estimatedEndDate = '';
 
     /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="bookings")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(onDelete="SET NULL")
-     * })
-     */
-    private $responsible;
-
-    /**
      * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="Bookable", inversedBy="bookings")
@@ -98,30 +91,17 @@ class Booking extends AbstractModel
         $this->bookables = new ArrayCollection();
     }
 
-    /**
-     * Set responsible
-     *
-     * @param null|User $responsible
-     */
-    public function setResponsible(?User $responsible): void
+    public function setOwner(User $owner = null): void
     {
-        if ($this->responsible) {
-            $this->responsible->bookingRemoved($this);
+        if ($this->getOwner()) {
+            $this->getOwner()->bookingRemoved($this);
         }
-        $this->responsible = $responsible;
-        if ($this->responsible) {
-            $this->responsible->bookingAdded($this);
-        }
-    }
 
-    /**
-     * Get responsible
-     *
-     * @return null|User
-     */
-    public function getResponsible(): ?User
-    {
-        return $this->responsible;
+        parent::setOwner($owner);
+
+        if ($this->getOwner()) {
+            $this->getOwner()->bookingAdded($this);
+        }
     }
 
     /**

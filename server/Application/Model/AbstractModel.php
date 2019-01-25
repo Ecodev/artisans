@@ -152,9 +152,13 @@ abstract class AbstractModel
         $user = User::getCurrent();
         $isAdmin = $user && $user->getRole() === User::ROLE_ADMINISTRATOR;
         $isOwner = $user === $this->owner;
-//        v (!!$this->owner ,$isAdmin , $isOwner);
+
         if ($this->owner && !$isAdmin && !$isOwner) {
-            throw new Exception('not allowed to change owner to ' . $owner->getLogin());
+            $currentLogin = $user ? $user->getLogin() : '[anonymous]';
+            $currentOwnerLogin = $this->owner ? $this->owner->getLogin() : '[nobody]';
+            $futureOwnerLogin = $owner ? $owner->getLogin() : '[nobody]';
+
+            throw new Exception($currentLogin . ' is not allowed to change owner to ' . $futureOwnerLogin . ' because it belongs to ' . $currentOwnerLogin);
         }
 
         $this->owner = $owner;

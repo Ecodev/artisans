@@ -16,7 +16,7 @@
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
                     <span appColumnsPickerColumn="edit">Editer</span>
-                    <span appColumnsPickerColumn="responsible">Responsable</span>
+                    <span appColumnsPickerColumn="owner">Responsable</span>
                     <span appColumnsPickerColumn="bookable">Réservable</span>
                     <span appColumnsPickerColumn="destination">Destination</span>
                     <span appColumnsPickerColumn="startDate">Début</span>
@@ -44,7 +44,7 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="responsible">
+                <ng-container matColumnDef="owner">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsable</th>
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">

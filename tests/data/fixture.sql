@@ -5,14 +5,14 @@ REPLACE INTO account (id, balance, iban, name) VALUES
 (6001, 1000.00, 'CH0980241000004014701', 'Raiffeisen'),
 (6002, 500.00, NULL, 'Caisse');
 
-REPLACE INTO user (id, login, first_name, last_name, email, password, role, status, family_relationship, responsible_id, welcome_session_date, account_id) VALUES
-(1000, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', 'householder', NULL, '2018-01-01 12:00:00', NULL),
-(1001, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', 'householder', NULL, '2018-01-01 12:00:00', NULL),
-(1002, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', 'householder', NULL, '2018-01-01 12:00:00', 6000),
-(1003, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', 'householder', NULL, '2018-01-01 12:00:00', NULL),
-(1004, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', 'householder', NULL, NULL, NULL),
-(1005, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', 'householder', NULL, NULL, NULL),
-(1006, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', 'householder', NULL, NULL, NULL);
+REPLACE INTO user (id, login, first_name, last_name, email, password, role, status, welcome_session_date, account_id) VALUES
+(1000, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00', NULL),
+(1001, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00', NULL),
+(1002, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00', 6000),
+(1003, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00', NULL),
+(1004, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL, NULL),
+(1005, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', NULL, NULL),
+(1006, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', NULL, NULL);
 
 -- Family members accounts
 REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, family_relationship) VALUES
@@ -57,7 +57,7 @@ REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
 (6007, 3005),
 (6007, 3006);
 
-REPLACE INTO booking (id, responsible_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
+REPLACE INTO booking (id, owner_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
 (4000, 1002, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
 (4001, 1002, 'booked', '2018-01-02 13:32:51', NULL, 'tonight', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
 (4003, 1002, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),

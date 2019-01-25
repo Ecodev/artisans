@@ -15,7 +15,7 @@ export const bookingMetaFragment = gql`
         updateDate
         participantCount
         status
-        responsible {
+        owner {
             id
             ...userMeta
         }

@@ -118,7 +118,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     public getEmptyObject(): BookingInput {
         return {
             status: BookingStatus.booked,
-            responsible: null,
+            owner: null,
             destination: '',
             participantCount: 1,
             startComment: '',
@@ -131,7 +131,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
 
     public getFormValidators(): FormValidators {
         return {
-            responsible: [Validators.required],
+            owner: [Validators.required],
         };
     }
 
@@ -166,7 +166,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
         const booking: BookingInput = {
             status: status,
             startDate: (new Date()).toISOString(),
-            responsible: user.id,
+            owner: user.id,
         };
 
         this.create(booking).subscribe(newBoooking => {

@@ -153,7 +153,7 @@ class UserTest extends TestCase
             'can set owner for first time to myself' => [$u1, null, $u1],
             'can set owner for first time even if it is not myself' => [$u1, null, $u3],
             'can donate my stuff' => [$u1, $u1, $u3],
-            'cannot donate stuff that are not mine' => [$u1, $u2, $u3, 'not allowed to change owner to u3'],
+            'cannot donate stuff that are not mine' => [$u1, $u2, $u3, 'u1 is not allowed to change owner to u3 because it belongs to u2'],
             'admin cannot donate stuff that are not mine' => [$admin, $u2, $u3],
         ];
     }

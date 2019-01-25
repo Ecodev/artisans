@@ -240,7 +240,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             filter: {
                 groups: [
                     {
-                        conditions: [{responsible: {equal: {value: user.id}}}],
+                        conditions: [{owner: {equal: {value: user.id}}}],
                         joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}]}},
                     },
                 ],
@@ -262,7 +262,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                     {
                         conditions: [
                             {
-                                responsible: {equal: {value: user.id}},
+                                owner: {equal: {value: user.id}},
                                 status: {equal: {value: BookingStatus.booked}},
                             },
                         ],
@@ -295,7 +295,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                     {
                         conditions: [
                             {
-                                responsible: {equal: {value: user.id}},
+                                owner: {equal: {value: user.id}},
                                 status: {equal: {value: BookingStatus.application}},
                             },
                         ],

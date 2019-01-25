@@ -67,7 +67,7 @@ export class UserComponent
                 {
                     conditions: [
                         {
-                            responsible: {have: {values: [this.data.model.id]}},
+                            owner: {have: {values: [this.data.model.id]}},
                             status: {equal: {value: BookingStatus.booked}},
                             endDate: {null: {not: false}},
 
@@ -91,7 +91,7 @@ export class UserComponent
                 {
                     conditions: [
                         {
-                            responsible: {have: {values: [this.data.model.id]}},
+                            owner: {have: {values: [this.data.model.id]}},
                             status: {equal: {value: BookingStatus.booked}},
                             endDate: {null: {not: false}},
                         },
@@ -114,7 +114,7 @@ export class UserComponent
                 {
                     conditions: [
                         {
-                            responsible: {have: {values: [this.data.model.id]}},
+                            owner: {have: {values: [this.data.model.id]}},
                             status: {equal: {value: BookingStatus.application}},
                         },
                     ], joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},

@@ -190,7 +190,7 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Booking", mappedBy="responsible")
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="owner")
      */
     private $bookings;
 

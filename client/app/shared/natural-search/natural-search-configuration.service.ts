@@ -55,9 +55,9 @@ function replaceOperatorByName(s: Selection): Selection {
 })
 export class NaturalSearchConfigurationService {
 
-    private readonly responsible: ItemConfiguration = {
+    private readonly owner: ItemConfiguration = {
         display: 'Responsable',
-        field: 'responsible',
+        field: 'owner',
         component: SelectNaturalComponent,
         configuration: {
             service: this.userService,

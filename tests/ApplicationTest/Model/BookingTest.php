@@ -11,21 +11,18 @@ use PHPUnit\Framework\TestCase;
 
 class BookingTest extends TestCase
 {
-    public function testResponsibleRelation(): void
+    public function testOwnerRelation(): void
     {
         $booking = new Booking();
-        self::assertNull($booking->getResponsible(), 'booking should have no responsible');
+        self::assertNull($booking->getOwner(), 'booking should have no owner');
 
         $user = new User();
         self::assertCount(0, $user->getBookings(), 'user should have no bookings');
 
-        $booking->setResponsible($user);
+        $booking->setOwner($user);
         self::assertCount(1, $user->getBookings(), 'user should have the added booking');
         self::assertSame($booking, $user->getBookings()->first(), 'user should have the same booking');
-        self::assertSame($user, $booking->getResponsible(), 'booking should have responsible');
-
-        $booking->setResponsible(null);
-        self::assertNull($booking->getResponsible(), 'booking should have no responsible anymore');
+        self::assertSame($user, $booking->getOwner(), 'booking should have owner');
     }
 
     public function testBookableRelation(): void

@@ -43,7 +43,6 @@ export class AccountService extends AbstractModelService<AccountQuery['account']
         return {
             name: '',
             iban: '',
-            owner: null,
         };
     }
 

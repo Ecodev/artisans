@@ -24,7 +24,7 @@ class Account extends AbstractModel
     use HasName;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
      */
@@ -69,19 +69,19 @@ class Account extends AbstractModel
     /**
      * Set balance
      *
-     * @param float $balance
+     * @param string $balance
      */
-    public function setBalance(float $balance): void
+    public function setBalance(string $balance): void
     {
         $this->balance = $balance;
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getBalance(): float
+    public function getBalance(): string
     {
-        return (float) $this->balance;
+        return $this->balance;
     }
 
     /**

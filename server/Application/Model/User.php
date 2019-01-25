@@ -451,9 +451,20 @@ class User extends AbstractModel
     {
         $acl = new Acl();
         $types = [
+            Account::class,
+            AccountingDocument::class,
+            Bookable::class,
+            BookableMetadata::class,
+            BookableTag::class,
+            Booking::class,
+            Category::class,
             Country::class,
+            ExpenseClaim::class,
+            Image::class,
             License::class,
+            Message::class,
             self::class,
+            UserTag::class,
         ];
 
         $permissions = ['create'];

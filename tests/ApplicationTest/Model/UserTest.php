@@ -20,29 +20,96 @@ class UserTest extends TestCase
         $user = new User();
         $actual = $user->getGlobalPermissions();
         $expected = [
+            'account' => [
+                'create' => true,
+            ],
+            'accountingDocument' => [
+                'create' => true,
+            ],
+            'bookable' => [
+                'create' => false,
+            ],
+            'bookableMetadata' => [
+                'create' => false,
+            ],
+            'bookableTag' => [
+                'create' => false,
+            ],
+            'booking' => [
+                'create' => true,
+            ],
+            'category' => [
+                'create' => false,
+            ],
             'country' => [
+                'create' => false,
+            ],
+            'expenseClaim' => [
+                'create' => true,
+            ],
+            'image' => [
                 'create' => false,
             ],
             'license' => [
                 'create' => false,
             ],
+            'message' => [
+                'create' => false,
+            ],
             'user' => [
                 'create' => true,
             ],
-        ];
+            'userTag' => [
+                'create' => false,
+            ],
 
+        ];
         self::assertEquals($expected, $actual);
 
         $expectedForAdmin = [
+            'account' => [
+                'create' => true,
+            ],
+            'accountingDocument' => [
+                'create' => true,
+            ],
+            'bookable' => [
+                'create' => true,
+            ],
+            'bookableMetadata' => [
+                'create' => true,
+            ],
+            'bookableTag' => [
+                'create' => true,
+            ],
+            'booking' => [
+                'create' => true,
+            ],
+            'category' => [
+                'create' => true,
+            ],
             'country' => [
                 'create' => false,
+            ],
+            'expenseClaim' => [
+                'create' => true,
+            ],
+            'image' => [
+                'create' => true,
             ],
             'license' => [
                 'create' => true,
             ],
+            'message' => [
+                'create' => false,
+            ],
             'user' => [
                 'create' => true,
             ],
+            'userTag' => [
+                'create' => true,
+            ],
+
         ];
 
         User::setCurrent($user);

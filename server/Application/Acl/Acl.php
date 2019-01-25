@@ -6,6 +6,7 @@ namespace Application\Acl;
 
 use Application\Acl\Assertion\IsCreator;
 use Application\Acl\Assertion\IsMyself;
+use Application\Acl\Assertion\IsOwner;
 use Application\Acl\Assertion\IsRecipient;
 use Application\Model\AbstractModel;
 use Application\Model\Account;
@@ -86,6 +87,8 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim, $accountingDocument], ['create']);
         $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsCreator());
         $this->allow(User::ROLE_INDIVIDUAL, $message, ['read'], new IsRecipient());
+
+        $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsOwner());
 
         $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $category], ['read']);
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);

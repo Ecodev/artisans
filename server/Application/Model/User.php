@@ -219,14 +219,13 @@ class User extends AbstractModel
     private $messages;
 
     /**
-     * @var Account
+     * There is actually at 0 to 1 account, never more. And this is
+     * enforced by DB unique constraints
      *
-     * @ORM\OneToOne(targetEntity="Account", inversedBy="user")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(onDelete="SET NULL")
-     * })
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Account", mappedBy="owner")
      */
-    private $account;
+    private $accounts;
 
     /**
      * Constructor
@@ -237,6 +236,7 @@ class User extends AbstractModel
     {
         $this->role = $role;
         $this->bookings = new ArrayCollection();
+        $this->accounts = new ArrayCollection();
         $this->licenses = new ArrayCollection();
         $this->userTags = new ArrayCollection();
         $this->expenseClaims = new ArrayCollection();
@@ -788,30 +788,28 @@ class User extends AbstractModel
      */
     public function getAccount(): ?Account
     {
-        return $this->account;
+        return $this->accounts->count() ? $this->accounts->first() : null;
     }
 
     /**
-     * Assign a transaction account to the user
+     * Notify the user that it has a new account
+     * This should only be called by Account::setOwner()
      *
-     * @param null|Account $account
+     * @param Account $account
      */
-    public function setAccount(?Account $account): void
+    public function accountAdded(Account $account): void
     {
-        $previousAccount = $this->getAccount();
+        $this->accounts->clear();
+        $this->accounts->add($account);
+    }
 
-        if ($account) {
-            if ($this->getFamilyRelationship() !== RelationshipType::HOUSEHOLDER) {
-                throw new Exception('Only the house holder can have an account');
-            }
-            $account->userAdded($this);
-        }
-
-        if ($previousAccount) {
-            $previousAccount->setUser(null);
-        }
-
-        $this->account = $account;
+    /**
+     * Notify the user that a account was removed
+     * This should only be called by Account::setOwner()
+     */
+    public function accountRemoved(): void
+    {
+        $this->accounts->clear();
     }
 
     /**

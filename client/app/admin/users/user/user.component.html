@@ -6,7 +6,7 @@
                        [listRoute]="['admin', 'user']"
                        [showAvatar]="true"
     >
-        <app-money [amount]="data.model.account.balance" sizeClass="mat-display-1"></app-money>
+        <app-money *ngIf="data.model.account" [amount]="data.model.account.balance" sizeClass="mat-display-1"></app-money>
     </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
@@ -79,7 +79,6 @@
                         <app-select formControlName="account"
                                     placeholder="Compte"
                                     [service]="accountService"
-                                    (selectionChange)="update()"
                                     [showIcon]="false"
                                     [navigateTo]="['/admin/account', form.get('account').value?.id]"
                         ></app-select>

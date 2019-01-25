@@ -1,24 +1,24 @@
 START TRANSACTION;
 
-REPLACE INTO account (id, balance, iban, name) VALUES
-(6000, 100.00, 'CH1909000000177406305', 'Compte de membre'),
-(6001, 1000.00, 'CH0980241000004014701', 'Raiffeisen'),
-(6002, 500.00, NULL, 'Caisse');
-
-REPLACE INTO user (id, login, first_name, last_name, email, password, role, status, welcome_session_date, account_id) VALUES
-(1000, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00', NULL),
-(1001, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00', NULL),
-(1002, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00', 6000),
-(1003, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00', NULL),
-(1004, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL, NULL),
-(1005, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', NULL, NULL),
-(1006, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', NULL, NULL);
+REPLACE INTO user (id, login, first_name, last_name, email, password, role, status, welcome_session_date) VALUES
+(1000, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00'),
+(1001, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00'),
+(1002, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00'),
+(1003, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00'),
+(1004, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL),
+(1005, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', NULL),
+(1006, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', NULL);
 
 -- Family members accounts
 REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, family_relationship) VALUES
 (1007, 1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('conjoint'), 'individual', 'active', 'partner'),
 (1008, 1002, 'son', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'individual', 'active', 'child'),
 (1009, 1002, 'daughter', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'individual', 'active', 'child');
+
+REPLACE INTO account (id, owner_id, balance, iban, name) VALUES
+(6000, 1002, 100.00, 'CH1909000000177406305', 'Compte de membre'),
+(6001, NULL, 1000.00, 'CH0980241000004014701', 'Raiffeisen'),
+(6002, NULL, 500.00, NULL, 'Caisse');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');

@@ -16,7 +16,7 @@ export const transactionMetaFragment = gql`
         account {
             id
             name
-            user {
+            owner {
                 id
                 name
             }

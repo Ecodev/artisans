@@ -13,17 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
  * A transaction account held for a member, or club's bank account
  *
  * @ORM\Entity(repositoryClass="Application\Repository\AccountRepository")
+ * @ORM\AssociationOverrides({
+ *     @ORM\AssociationOverride(name="owner", inversedBy="accounts",
+ *         joinColumns=@ORM\JoinColumn(unique=true)
+ *     )
+ * })
  */
 class Account extends AbstractModel
 {
-    use hasName;
-
-    /**
-     * @var User
-     *
-     * @ORM\OneToOne(targetEntity="User", mappedBy="account")
-     */
-    private $user;
+    use HasName;
 
     /**
      * @var float
@@ -45,38 +43,27 @@ class Account extends AbstractModel
      */
     private $transactions;
 
-    public function __construct(string $name = '')
+    public function __construct()
     {
         $this->transactions = new ArrayCollection();
     }
 
     /**
-     * Assign the transaction account to an user
+     * Assign the transaction account to a user
      *
-     * @param null|User $user
+     * @param null|User $owner
      */
-    public function setUser(?User $user): void
+    public function setOwner(User $owner = null): void
     {
-        $previousUser = $this->user;
-
-        $this->user = $user;
-        if ($user) {
-            $user->setAccount($this);
+        if ($this->getOwner()) {
+            $this->getOwner()->accountRemoved();
         }
 
-        if ($previousUser && $previousUser !== $user) {
-            $previousUser->setAccount(null);
-        }
-    }
+        parent::setOwner($owner);
 
-    /**
-     * Get the user holding the account, or null we are a bank account
-     *
-     * @return null|User
-     */
-    public function getUser(): ?User
-    {
-        return $this->user;
+        if ($this->getOwner()) {
+            $owner->accountAdded($this);
+        }
     }
 
     /**

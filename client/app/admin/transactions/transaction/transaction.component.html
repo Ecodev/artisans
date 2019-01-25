@@ -72,14 +72,14 @@
                                     [navigateTo]="form.get('bookable').value?.id ? ['/admin/bookable', form.get('bookable').value.id] : null"
                         ></app-select>
 
-                        <div *ngIf="form.get('account').value.user"
+                        <div *ngIf="form.get('account').value.owner"
                              fxLayout="row"
                              fxLayoutAlign="start center"
                              class="margin-bottom"
                         >
-                            <ngx-avatar [name]="form.get('account').value.user.name" [size]="30"></ngx-avatar>
-                            <a mat-button [routerLink]="['/admin/user', form.get('account').value.user.id]">
-                                {{form.get('account').value.user.name }}
+                            <ngx-avatar [name]="form.get('account').value.owner.name" [size]="30"></ngx-avatar>
+                            <a mat-button [routerLink]="['/admin/user', form.get('account').value.owner.id]">
+                                {{form.get('account').value.owner.name }}
                             </a>
                         </div>
 

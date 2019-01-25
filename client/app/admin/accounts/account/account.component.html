@@ -32,12 +32,12 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <app-select formControlName="user"
+                        <app-select formControlName="owner"
                                     placeholder="Membre"
                                     [service]="userService"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
-                                    [navigateTo]="form.get('user').value?.id ? ['/admin/user', form.get('user').value.id] : null"
+                                    [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"
                         ></app-select>
 
                     </div>

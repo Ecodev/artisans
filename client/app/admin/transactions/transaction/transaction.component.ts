@@ -47,6 +47,6 @@ export class TransactionComponent
             return '';
         }
 
-        return item.user ? item.user.name : item.name || item;
+        return item.owner ? item.owner.name : item.name || item;
     }
 }

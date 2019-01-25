@@ -127,7 +127,7 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
             const newAccount = {id: account.value.id, iban: iban.value};
             this.accountService.updateNow(newAccount).subscribe(confirmAndLock);
         } else if (iban && iban.value && account && !account.value) {
-            this.accountService.create({iban: iban.value, user: this.data.model.id, name: 'User account'}).subscribe(confirmAndLock);
+            this.accountService.create({iban: iban.value, owner: this.data.model.id, name: 'User account'}).subscribe(confirmAndLock);
         }
     }
 

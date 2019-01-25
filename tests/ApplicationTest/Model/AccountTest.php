@@ -14,21 +14,26 @@ class AccountTest extends TestCase
     public function testUserRelation(): void
     {
         $account = new Account();
-        self::assertNull($account->getUser());
+        self::assertNull($account->getOwner());
 
         $user = new User();
-        $account->setUser($user);
+        User::setCurrent($user);
+        $account->setOwner($user);
 
-        self::assertSame($account->getUser(), $user);
+        self::assertSame($account->getOwner(), $user);
         self::assertSame($account, $user->getAccount());
 
         $otherUser = new User();
-        $account->setUser($otherUser);
+        $account->setOwner($otherUser);
+        self::assertSame($otherUser, $account->getOwner(), 'Account must have second user');
         self::assertNull($user->getAccount(), 'First user must have no account');
+        self::assertSame($account, $otherUser->getAccount(), 'second user must have account');
 
-        $account->setUser(null);
-        self::assertNull($account->getUser(), 'Account must have no user');
-        self::assertNull($user->getAccount(), 'User must have no account');
+        User::setCurrent($otherUser);
+        $account->setOwner(null);
+        self::assertNull($account->getOwner(), 'Account must have no user');
+        self::assertNull($user->getAccount(), 'First user must have no account');
+        self::assertNull($otherUser->getAccount(), 'Second user must have no account');
     }
 
     public function testTransactionRelation(): void

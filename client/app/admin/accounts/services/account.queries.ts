@@ -7,7 +7,7 @@ export const accountMetaFragment = gql`
         name
         iban
         balance
-        user {
+        owner {
             id
             name
         }

@@ -47,6 +47,7 @@ import { Literal } from '../../../shared/types';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { BookingService } from '../../bookings/services/booking.service';
 import { ErrorStateMatcher } from '@angular/material';
+import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 
 @Injectable({
     providedIn: 'root',
@@ -133,7 +134,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             door2: false,
             door3: false,
             door4: false,
-            account: null,
             billingType: '',
             remarks: '',
             owner: null,
@@ -156,6 +156,19 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             email: [Validators.required],
             familyRelationship: [Validators.required],
         };
+    }
+
+    public getFormConfig(model: Literal): Literal {
+        const config = super.getFormConfig(model);
+
+        // Inject extra form control for the account which is strictly read-only
+        const formState = {
+            value: model.account,
+            disabled: true,
+        };
+        config.account = new ExtendedFormControl(formState);
+
+        return config;
     }
 
     public getCurrentUser(): Observable<CurrentUserForProfileQuery['viewer']> {

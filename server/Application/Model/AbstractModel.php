@@ -203,7 +203,10 @@ abstract class AbstractModel
     {
         $this->setCreationDate(Utility::getNow());
         $this->setCreator(User::getCurrent());
-        $this->setOwner(User::getCurrent());
+
+        if (!$this->getOwner()) {
+            $this->setOwner(User::getCurrent());
+        }
     }
 
     /**

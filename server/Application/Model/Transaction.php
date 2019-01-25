@@ -40,7 +40,7 @@ class Transaction extends AbstractModel
     private $bookable;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(type="decimal", precision=7, scale=2)
      */
@@ -120,19 +120,19 @@ class Transaction extends AbstractModel
     /**
      * Set amount
      *
-     * @param float $amount
+     * @param string $amount
      */
-    public function setAmount(float $amount): void
+    public function setAmount(string $amount): void
     {
         $this->amount = $amount;
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getAmount(): float
+    public function getAmount(): string
     {
-        return (float) $this->amount;
+        return $this->amount;
     }
 
     /**

@@ -8,6 +8,7 @@ use Application\Traits\HasName;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
  * A transaction account held for a member, or club's bank account

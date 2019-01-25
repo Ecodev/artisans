@@ -33,7 +33,7 @@ describe('UserService', () => {
         door4: true,
         account: {
             id: '456',
-            balance: 0.5,
+            balance: 'test string',
             name: 'test string',
             iban: 'test string',
             __typename: 'Account',

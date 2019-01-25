@@ -49,7 +49,7 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
         return {
             name: '',
             expenseClaim: null,
-            amount: 0,
+            amount: '0',
             account: '',
             transactionDate: '',
             internalRemarks: '',

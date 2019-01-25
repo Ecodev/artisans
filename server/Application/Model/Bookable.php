@@ -27,18 +27,18 @@ class Bookable extends AbstractModel
     use HasRemarks;
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
      */
-    private $initialPrice = '0.00';
+    private $initialPrice = '0';
 
     /**
-     * @var float
+     * @var string
      *
      * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
      */
-    private $periodicPrice = '0.00';
+    private $periodicPrice = '0';
 
     /**
      * @var int
@@ -151,33 +151,33 @@ class Bookable extends AbstractModel
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getInitialPrice(): float
+    public function getInitialPrice(): string
     {
-        return (float) $this->initialPrice;
+        return $this->initialPrice;
     }
 
     /**
-     * @param float $initialPrice
+     * @param string $initialPrice
      */
-    public function setInitialPrice(float $initialPrice): void
+    public function setInitialPrice(string $initialPrice): void
     {
         $this->initialPrice = $initialPrice;
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getPeriodicPrice(): float
+    public function getPeriodicPrice(): string
     {
-        return (float) $this->periodicPrice;
+        return $this->periodicPrice;
     }
 
     /**
-     * @param float $periodicPrice
+     * @param string $periodicPrice
      */
-    public function setPeriodicPrice(float $periodicPrice): void
+    public function setPeriodicPrice(string $periodicPrice): void
     {
         $this->periodicPrice = $periodicPrice;
     }

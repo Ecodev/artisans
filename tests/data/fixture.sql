@@ -18,7 +18,8 @@ REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, 
 REPLACE INTO account (id, owner_id, balance, iban, name) VALUES
 (6000, 1002, 100.00, 'CH1909000000177406305', 'Compte de membre'),
 (6001, NULL, 1000.00, 'CH0980241000004014701', 'Raiffeisen'),
-(6002, NULL, 500.00, NULL, 'Caisse');
+(6002, NULL, 500.00, NULL, 'Caisse'),
+(6003, 1007, 50.00, 'CH1909000000177396305', 'Compte de conjoint');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Test license 2000');

@@ -16,7 +16,7 @@
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
                     <span appColumnsPickerColumn="amount">Montant</span>
                     <span appColumnsPickerColumn="name">Nom</span>
-                    <span appColumnsPickerColumn="user">Utilisateur</span>
+                    <span appColumnsPickerColumn="owner">Utilisateur</span>
                     <span appColumnsPickerColumn="creationDate">Créé le</span>
                     <span appColumnsPickerColumn="updateDate">Modifié le</span>
                     <span appColumnsPickerColumn="status">Status</span>
@@ -37,19 +37,19 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="user">
+                <ng-container matColumnDef="owner">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Membre</th>
                     <td mat-cell *matCellDef="let element">
 
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.user">
-                            <ngx-avatar [name]="element.user?.name" [size]="36"></ngx-avatar>
-                            <app-table-button [label]="element.user?.name" [navigate]="['/admin/user/', element.user?.id]"
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
+                            <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
+                            <app-table-button [label]="element.owner?.name" [navigate]="['/admin/user/', element.owner?.id]"
 
                                               matTooltip="Éditer"
                             ></app-table-button>
                         </div>
 
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.user">
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.owner">
                             <ngx-avatar name="ichtus" [size]="36"></ngx-avatar>
                             <button mat-button>Ichtus</button>
                         </div>

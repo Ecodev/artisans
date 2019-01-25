@@ -7,31 +7,10 @@ namespace ApplicationTest\Model;
 use Application\Model\AccountingDocument;
 use Application\Model\ExpenseClaim;
 use Application\Model\Transaction;
-use Application\Model\User;
 use PHPUnit\Framework\TestCase;
 
 class ExpenseClaimTest extends TestCase
 {
-    public function testUserRelation(): void
-    {
-        $author = new User();
-
-        $expense = new ExpenseClaim();
-        $expense->setUser($author);
-
-        $expense2 = new ExpenseClaim();
-        $expense2->setUser($author);
-
-        self::assertCount(2, $author->getExpenseClaims());
-
-        $author2 = new User();
-
-        $expense2->setUser($author2);
-
-        self::assertCount(1, $author->getExpenseClaims());
-        self::assertCount(1, $author2->getExpenseClaims());
-    }
-
     public function testDocumentRelation(): void
     {
         $document = new AccountingDocument();

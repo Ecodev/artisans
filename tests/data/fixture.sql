@@ -84,7 +84,7 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 REPLACE INTO image (id, bookable_id, filename, width, height) VALUES
 (5000, 3000,'dw4jV3zYSPsqE2CB8BcP8ABD0.jpg',  500, 374);
 
-REPLACE INTO expense_claim (id, user_id, amount, status, name, description, remarks) VALUES
+REPLACE INTO expense_claim (id, owner_id, amount, status, name, description, remarks) VALUES
 (7000, 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', ''),
 (7001, 1002, 100.00, 'processed', 'flyers', 'Cighelio', '');
 

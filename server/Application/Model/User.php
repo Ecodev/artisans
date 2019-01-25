@@ -208,12 +208,6 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="ExpenseClaim", mappedBy="user")
-     */
-    private $expenseClaims;
-
-    /**
-     * @var Collection
      * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient")
      */
     private $messages;
@@ -239,7 +233,6 @@ class User extends AbstractModel
         $this->accounts = new ArrayCollection();
         $this->licenses = new ArrayCollection();
         $this->userTags = new ArrayCollection();
-        $this->expenseClaims = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
 
@@ -842,37 +835,5 @@ class User extends AbstractModel
     public function messageRemoved(Message $message): void
     {
         $this->messages->removeElement($message);
-    }
-
-    /**
-     * Get expense claims submitted by the user
-     *
-     * @return Collection
-     */
-    public function getExpenseClaims(): Collection
-    {
-        return $this->expenseClaims;
-    }
-
-    /**
-     * Notify the user when a new expense claim was added
-     * This should only be called by ExpenseClaim::setUser()
-     *
-     * @param ExpenseClaim $expense
-     */
-    public function expenseClaimAdded(ExpenseClaim $expense): void
-    {
-        $this->expenseClaims->add($expense);
-    }
-
-    /**
-     * Notify the user that when an expense claim was removed
-     * This should only be called by ExpenseClaim::setUser()
-     *
-     * @param ExpenseClaim $expense
-     */
-    public function expenseClaimRemoved(ExpenseClaim $expense): void
-    {
-        $this->expenseClaims->removeElement($expense);
     }
 }

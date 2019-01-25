@@ -17,22 +17,17 @@ use GraphQL\Doctrine\Annotation as API;
  * An expense claim to be refunded to an user
  *
  * @ORM\Entity(repositoryClass="Application\Repository\ExpenseClaimRepository")
+ * @ORM\AssociationOverrides({
+ *     @ORM\AssociationOverride(name="owner",
+ *         joinColumns=@ORM\JoinColumn(nullable=false)
+ *     )
+ * })
  */
 class ExpenseClaim extends AbstractModel
 {
     use hasName;
     use hasDescription;
     use hasRemarks;
-
-    /**
-     * @var User
-     *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="expenseClaims")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     * })
-     */
-    private $user;
 
     /**
      * @var float
@@ -67,31 +62,6 @@ class ExpenseClaim extends AbstractModel
     {
         $this->transactions = new ArrayCollection();
         $this->accountingDocuments = new ArrayCollection();
-    }
-
-    /**
-     * Set user
-     *
-     * @param User $user
-     */
-    public function setUser(User $user): void
-    {
-        if ($this->user && $user !== $this->user) {
-            $this->user->expenseClaimRemoved($this);
-        }
-
-        $this->user = $user;
-        $user->expenseClaimAdded($this);
-    }
-
-    /**
-     * Get user
-     *
-     * @return User
-     */
-    public function getUser(): User
-    {
-        return $this->user;
     }
 
     /**

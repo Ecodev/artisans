@@ -70,6 +70,8 @@ class Account extends AbstractModel
      * Set balance
      *
      * @param string $balance
+     *
+     * @API\Exclude
      */
     public function setBalance(string $balance): void
     {

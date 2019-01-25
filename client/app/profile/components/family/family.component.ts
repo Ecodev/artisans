@@ -10,7 +10,7 @@ import { QueryVariablesManager } from '../../../shared/classes/query-variables-m
 })
 export class FamilyComponent implements OnInit {
 
-    @Input() responsible: UserQuery['user'];
+    @Input() owner: UserQuery['user'];
 
     private familyMembers;
 
@@ -19,7 +19,7 @@ export class FamilyComponent implements OnInit {
 
     ngOnInit() {
 
-        if (this.responsible) {
+        if (this.owner) {
             const variables = new QueryVariablesManager<UsersQueryVariables>();
             const filters: UsersQueryVariables = {
                 filter: {
@@ -27,8 +27,8 @@ export class FamilyComponent implements OnInit {
                         {
                             conditionsLogic: LogicalOperator.OR,
                             conditions: [
-                                {responsible: {equal: {value: this.responsible.id}}},
-                                {id: {equal: {value: this.responsible.id}}},
+                                {owner: {equal: {value: this.owner.id}}},
+                                {id: {equal: {value: this.owner.id}}},
                             ],
                         },
                     ],

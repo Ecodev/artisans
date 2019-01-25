@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Acl\Acl;
+use Application\Api\Exception;
 use Application\Utility;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\Mapping as ORM;
@@ -140,12 +141,22 @@ abstract class AbstractModel
     /**
      * Set owner
      *
-     * @API\Exclude
-     *
      * @param User $owner
      */
     public function setOwner(User $owner = null): void
     {
+        if ($owner === $this->owner) {
+            return;
+        }
+
+        $user = User::getCurrent();
+        $isAdmin = $user && $user->getRole() === User::ROLE_ADMINISTRATOR;
+        $isOwner = $user === $this->owner;
+//        v (!!$this->owner ,$isAdmin , $isOwner);
+        if ($this->owner && !$isAdmin && !$isOwner) {
+            throw new Exception('not allowed to change owner to ' . $owner->getLogin());
+        }
+
         $this->owner = $owner;
     }
 

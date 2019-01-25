@@ -32,7 +32,7 @@ export const userFieldsFragment = gql`
         }
         billingType
         remarks
-        responsible {
+        owner {
             id
             name
         }

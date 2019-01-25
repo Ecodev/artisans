@@ -40,7 +40,7 @@ describe('UserService', () => {
         },
         billingType: 'test string',
         remarks: 'test string',
-        responsible: {
+        owner: {
             id: '456',
             name: 'test string',
             __typename: 'User',

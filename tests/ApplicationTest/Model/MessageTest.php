@@ -14,6 +14,7 @@ class MessageTest extends TestCase
     {
         $message = new Message();
         $recipient = new User();
+        User::setCurrent($recipient);
         $message->setRecipient($recipient);
 
         self::assertCount(1, $recipient->getMessages());

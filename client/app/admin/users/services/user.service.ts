@@ -136,7 +136,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             account: null,
             billingType: '',
             remarks: '',
-            responsible: null,
+            owner: null,
             sex: Sex.not_known,
             welcomeSessionDate: null,
         };

@@ -12,7 +12,6 @@ use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
 use Application\Traits\HasDoorAccess;
 use Application\Traits\HasRemarks;
-use Application\Traits\HasResponsible;
 use Application\Utility;
 use Cake\Chronos\Chronos;
 use Cake\Chronos\Date;
@@ -40,7 +39,6 @@ class User extends AbstractModel
     const STATUS_ACTIVE = 'active';
     const STATUS_ARCHIVED = 'archived';
 
-    use HasResponsible;
     use HasDoorAccess;
     use HasRemarks;
     use HasAddress;

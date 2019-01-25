@@ -142,7 +142,7 @@
             <button mat-flat-button color="warn" [disabled]="!canLeave()">Quitter le ménage</button>
         </div>
 
-        <app-family *ngIf="!data.model.responsible" [responsible]="data.model" fxFlex="1 0 0px" fxLayout="column"></app-family>
+        <app-family *ngIf="!data.model.owner" [owner]="data.model" fxFlex="1 0 0px" fxLayout="column"></app-family>
     </div>
 
 </div>

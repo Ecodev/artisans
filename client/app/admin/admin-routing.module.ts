@@ -226,7 +226,10 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres actifs',
-                                queryVariables: UserService.getFiltersByRoles([UserRole.member]),
+                                queryVariables: UserService.getFilters(
+                                    [UserRole.member],
+                                    [UserStatus.active],
+                                ),
                             },
                         },
                         {
@@ -234,7 +237,10 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Nouveaux membres',
-                                queryVariables: UserService.getFiltersByStatuses([UserStatus.new]),
+                                queryVariables: UserService.getFilters(
+                                    [UserRole.member],
+                                    [UserStatus.new],
+                                ),
                                 columns: ['name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
                             },
                         },
@@ -243,15 +249,17 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Staff',
-                                queryVariables: UserService.getFiltersByRoles([UserRole.responsible, UserRole.administrator]),
                             },
                         },
                         {
                             path: 'non-active',
                             component: UsersComponent,
                             data: {
-                                title: 'Utilisateurs inactifs, nouveaux et archivés',
-                                queryVariables: UserService.nonActivesMembersQueryVariables,
+                                title: 'Membres inactifs, nouveaux et archivés',
+                                queryVariables: UserService.getFilters(
+                                    [UserRole.member],
+                                    [UserStatus.inactive, UserStatus.new, UserStatus.archived],
+                                ),
                             },
                         },
 

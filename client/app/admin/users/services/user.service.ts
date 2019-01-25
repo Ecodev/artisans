@@ -4,7 +4,11 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
+import {
+    AbstractModelService,
+    AutoRefetchQueryRef,
+    FormValidators,
+} from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery,
@@ -57,21 +61,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     UpdateUserMutationVariables,
     any> {
 
-    public static readonly nonActivesMembersQueryVariables: UsersQueryVariables = {
-        filter: {
-            groups: [
-                {
-                    conditions: [
-                        {
-                            owner: {null: {not: false}},
-                            status: {in: {values: [UserStatus.inactive, UserStatus.new, UserStatus.archived]}},
-                        },
-                    ],
-                },
-            ],
-        },
-    };
-
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
 
     constructor(apollo: Apollo, protected router: Router, protected bookingService: BookingService) {
@@ -85,9 +74,9 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     }
 
     /**
-     * Return filters for users for given roles
+     * Return filters for users for given roles and statuses
      */
-    public static getFiltersByRoles(roles: UserRole[]): UsersQueryVariables {
+    public static getFilters(roles: UserRole[], statuses: UserStatus[]): UsersQueryVariables {
         return {
             filter: {
                 groups: [
@@ -95,26 +84,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                         conditions: [
                             {
                                 role: roles && roles.length ? {in: {values: roles}} : null,
-                                status: {equal: {value: UserStatus.active}},
-                            },
-                        ],
-                    },
-                ],
-            },
-        };
-    }
-
-    /**
-     * Return filters for users for given statuses
-     */
-    public static getFiltersByStatuses(status: UserStatus[]): UsersQueryVariables {
-        return {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                status: {in: {values: status}},
+                                status: {in: {values: statuses}},
                             },
                         ],
                     },
@@ -296,7 +266,18 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                                 status: {equal: {value: BookingStatus.booked}},
                             },
                         ],
-                        joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.self_approved], not: true}}}]}},
+                        joins: {
+                            bookables: {
+                                conditions: [{
+                                    bookingType: {
+                                        in: {
+                                            values: [BookingType.self_approved],
+                                            not: true,
+                                        },
+                                    },
+                                }],
+                            },
+                        },
                     },
                 ],
             },

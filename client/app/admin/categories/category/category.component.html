@@ -34,6 +34,8 @@
 
                         <h2 class="mat-title">Catégories enfant</h2>
                         <app-relations [main]="data.model"
+                                       otherName="parent"
+                                       [reverseRelation]="true"
                                        [service]="service"
                                        [filter]="{groups: [{conditions: [{parents: {have: {values: [data.model.id]}}}]}]}"
                                        [hierarchicSelectorConfig]="hierarchicConfig"
@@ -53,10 +55,11 @@
 
                         <h2 class="mat-title">Catégories parentes</h2>
                         <app-relations [main]="data.model"
+                                       otherName="parent"
                                        [service]="service"
                                        [filter]="{groups: [{conditions: [{children: {have: {values: [data.model.id]}}}]}]}"
                                        [hierarchicSelectorConfig]="hierarchicConfig"
-                                       placeholder="Ajouter une catégorie enfant"
+                                       placeholder="Ajouter une catégorie parente"
                                        [hideSearch]="true"
                         >
                             <ng-template let-item="item">

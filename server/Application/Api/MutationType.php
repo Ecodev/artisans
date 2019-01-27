@@ -56,7 +56,7 @@ class MutationType extends ObjectType
             Standard::buildRelationMutation(License::class, User::class),
             Standard::buildRelationMutation(UserTag::class, User::class),
             Standard::buildRelationMutation(BookableTag::class, Bookable::class),
-            Standard::buildRelationMutation(Category::class, Category::class)
+            Standard::buildRelationMutation(Category::class, Category::class, 'Parent')
         );
 
         $config = [

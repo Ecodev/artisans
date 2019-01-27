@@ -86,10 +86,12 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      */
     @Input() hideSearch = false;
     /**
-     * LinkMutationService uses to find the right combinations to find a matching with possible mutations
-     * But in some cases it's not enough (linkEquipmentEquipment has source and target and reversing the relation is required).
+     * LinkMutationService usually find the right mutation, by matching type names. But it's
+     * not enough when we have the same types on both side of the relation (eg: linkEquipmentEquipment)
+     * and reversing the relation is required.
      */
     @Input() reverseRelation: any;
+    @Input() otherName: string | null;
     /**
      * Listing service instance
      */
@@ -199,10 +201,13 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Refetch result to display it in table
      */
     public removeRelation(relation) {
-        const a = !this.reverseRelation ? this.main : relation;
-        const b = !this.reverseRelation ? relation : this.main;
-        this.linkMutationService.unlink(a, b).subscribe(() => {
-        });
+        if (!this.reverseRelation) {
+            this.linkMutationService.unlink(this.main, relation, this.otherName).subscribe(() => {
+            });
+        } else {
+            this.linkMutationService.unlink(relation, this.main, this.otherName).subscribe(() => {
+            });
+        }
     }
 
     public add(item) {
@@ -228,14 +233,16 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         const observables: Observable<FetchResult<{ id: string }>>[] = [];
         relations.forEach(relation => {
             if (!this.reverseRelation) {
-                observables.push(this.linkMutationService.link(this.main, relation));
+                observables.push(this.linkMutationService.link(this.main, relation, this.otherName));
             } else {
-                observables.push(this.linkMutationService.link(relation, this.main));
+                observables.push(this.linkMutationService.link(relation, this.main, this.otherName));
             }
         });
 
         forkJoin(observables).subscribe(() => {
-            this.select.clear(true);
+            if (this.select) {
+                this.select.clear(true);
+            }
         });
     }
 

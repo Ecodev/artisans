@@ -5,14 +5,25 @@ import { forkJoin, Observable, of } from 'rxjs';
 import { MutationsQuery } from '../generated-types';
 import { FetchResult } from 'apollo-link';
 import { Literal } from '../types';
-import { Utility } from '../classes/utility';
 import { clone } from 'lodash';
 import { AbstractModelService } from './abstract-model.service';
 import { map, switchMap } from 'rxjs/operators';
+import { Utility } from '../classes/utility';
 
 export interface LinkableObject {
     id: string;
     __typename: string;
+}
+
+interface MutationArg {
+    name: string;
+    type: string;
+}
+
+interface Mutation {
+    name: string;
+    arg1: MutationArg;
+    arg2: MutationArg;
 }
 
 @Injectable({
@@ -28,13 +39,21 @@ export class LinkMutationService {
             __type(name: "Mutation") {
                 fields {
                     name
+                    args {
+                        name
+                        type {
+                            ofType {
+                                name
+                            }
+                        }
+                    }
                 }
             }
         }`;
     /**
-     * Receives the list of available mutation names
+     * Receives the list of available mutations
      */
-    private allMutationNames: string[] | null;
+    private allMutations: Mutation[] | null;
 
     constructor(private apollo: Apollo) {
     }
@@ -42,22 +61,32 @@ export class LinkMutationService {
     /**
      * Link two objects together
      */
-    public link(obj1: LinkableObject, obj2: LinkableObject, variables: Literal = {}): Observable<FetchResult<{ id: string }>> {
+    public link(
+        obj1: LinkableObject,
+        obj2: LinkableObject,
+        otherName: string | null = null,
+        variables: Literal = {},
+    ): Observable<FetchResult<{ id: string }>> {
         // clone prevents to affect the original reference
         const clonedVariables = clone(variables);
 
-        return this.getMutation('link', obj1, obj2, clonedVariables).pipe(switchMap(mutation => this.execute(mutation)));
+        return this.getMutation('link', obj1, obj2, otherName, clonedVariables).pipe(switchMap(mutation => this.execute(mutation)));
     }
 
     /**
      * Link many objects
      */
-    public linkMany(obj1: LinkableObject, objSet: LinkableObject[], variables: Literal = {}): Observable<FetchResult<{ id: string }>[]> {
+    public linkMany(
+        obj1: LinkableObject,
+        objSet: LinkableObject[],
+        otherName: string | null = null,
+        variables: Literal = {},
+    ): Observable<FetchResult<{ id: string }>[]> {
 
         const observables: Observable<FetchResult<{ id: string }>>[] = [];
 
         objSet.forEach(obj2 => {
-            observables.push(this.link(obj1, obj2, variables));
+            observables.push(this.link(obj1, obj2, otherName, variables));
         });
 
         return forkJoin(observables);
@@ -66,41 +95,66 @@ export class LinkMutationService {
     /**
      * Unlink two objects
      */
-    public unlink(obj1: LinkableObject, obj2: LinkableObject): Observable<FetchResult<{ id: string }>> {
-        return this.getMutation('unlink', obj1, obj2).pipe(switchMap(mutation => this.execute(mutation)));
+    public unlink(
+        obj1: LinkableObject,
+        obj2: LinkableObject,
+        otherName: string | null = null,
+    ): Observable<FetchResult<{ id: string }>> {
+        return this.getMutation('unlink', obj1, obj2, otherName).pipe(switchMap(mutation => this.execute(mutation)));
     }
 
     /**
      * Return the list of all available mutation names
      */
-    private getAllMutationNames(): Observable<string[]> {
-        if (this.allMutationNames) {
-            return of(this.allMutationNames);
+    private getAllMutationNames(): Observable<Mutation[]> {
+        if (this.allMutations) {
+            return of(this.allMutations);
         }
+
+        const mapArg = (arg): MutationArg => {
+            return {
+                name: arg.name,
+                type: arg.type.ofType.name.replace(/ID$/, ''),
+            };
+        };
 
         return this.apollo.query<MutationsQuery>({
             query: this.queriesQuery,
             fetchPolicy: 'cache-first',
         }).pipe(map(({data}) => {
-            this.allMutationNames = data.__type && data.__type.fields ? data.__type.fields.map(v => v.name) : [];
+            if (data.__type && data.__type.fields) {
+                this.allMutations = data.__type.fields
+                    .filter(v => v.name.match(/^(link|unlink)/))
+                    .map(v => {
+                        return {
+                            name: v.name,
+                            arg1: mapArg(v.args[0]),
+                            arg2: mapArg(v.args[1]),
+                        };
+                    });
+            } else {
+                this.allMutations = [];
+            }
 
-            return this.allMutationNames;
+            return this.allMutations;
         }));
     }
 
     /**
      * Generate mutation using patters and replacing variables
      */
-    private getMutation(action: string, obj1, obj2, variables: Literal = {}): Observable<string> {
-        const mutationName = `${action}${obj1.__typename}${obj2.__typename}`;
-        const reversedMutationName = `${action}${obj2.__typename}${obj1.__typename}`;
+    private getMutation(action: string, obj1, obj2, otherName: string | null, variables: Literal = {}): Observable<string> {
+        otherName = otherName ? Utility.upperCaseFirstLetter(otherName) : otherName;
+        const mutationName = action + obj1.__typename + (otherName || obj2.__typename);
+        const reversedMutationName = action + obj2.__typename + (otherName || obj1.__typename);
 
         return this.getAllMutationNames().pipe(map(allMutationNames => {
 
-                if (allMutationNames.find(mut => mut === mutationName)) {
-                    return this.buildTemplate(mutationName, obj1, obj2, variables);
-                } else if (allMutationNames.find(mut => mut === reversedMutationName)) {
-                    return this.buildTemplate(reversedMutationName, obj2, obj1, variables);
+                const mutation = allMutationNames.find(mut => mut.name === mutationName)
+                    || allMutationNames.find(mut => mut.name === reversedMutationName);
+
+                if (mutation) {
+                    return this.buildTemplate(mutation, obj1, obj2, variables);
                 }
 
                 throw TypeError('API does not allow to ' + action + ' ' + obj1.__typename + ' and ' + obj2.__typename);
@@ -121,15 +175,15 @@ export class LinkMutationService {
     /**
      * Build the actual mutation string
      */
-    private buildTemplate(mutationName: string, obj1, obj2, variables: Literal = {}): string {
+    private buildTemplate(mutation: Mutation, obj1, obj2, variables: Literal = {}): string {
         let name1;
         let name2;
-        if (obj1.__typename === obj2.__typename) {
-            name1 = Utility.lowerCaseFirstLetter(obj1.__typename) + '1';
-            name2 = Utility.lowerCaseFirstLetter(obj1.__typename) + '2';
+        if (obj1.__typename === mutation.arg1.type) {
+            name1 = mutation.arg1.name;
+            name2 = mutation.arg2.name;
         } else {
-            name1 = Utility.lowerCaseFirstLetter(obj1.__typename);
-            name2 = Utility.lowerCaseFirstLetter(obj2.__typename);
+            name1 = mutation.arg2.name;
+            name2 = mutation.arg1.name;
         }
         variables[name1] = obj1.id;
         variables[name2] = obj2.id;
@@ -140,10 +194,10 @@ export class LinkMutationService {
         }
 
         return `mutation linkAndUnlink {
-        ${mutationName}(${serializedVariables}) {
-            id
-        }
-    }`;
+            ${mutation.name}(${serializedVariables}) {
+                id
+            }
+        }`;
     }
 
 }

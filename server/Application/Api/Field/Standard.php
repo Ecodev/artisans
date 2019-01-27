@@ -164,17 +164,26 @@ abstract class Standard
      *
      * @param string $ownerClass The class owning the relation
      * @param string $otherClass The other class, not-owning the relation
+     * @param null|string $otherName a specific semantic, if needed, to be use as adder. If `$otherName = 'Parent'`, then we will call `addParent()`
+     *
+     * @throws \ReflectionException
      *
      * @return array
      */
-    public static function buildRelationMutation(string $ownerClass, string $otherClass): array
+    public static function buildRelationMutation(string $ownerClass, string $otherClass, ?string $otherName = null): array
     {
         $ownerReflect = new ReflectionClass($ownerClass);
         $ownerName = $ownerReflect->getShortName();
         $lowerOwnerName = lcfirst($ownerName);
 
         $otherReflect = new ReflectionClass($otherClass);
-        $otherName = $otherReflect->getShortName();
+        $otherClassName = $otherReflect->getShortName();
+        if ($otherName) {
+            $semantic = ' as ' . $otherName;
+        } else {
+            $semantic = '';
+            $otherName = $otherClassName;
+        }
         $lowerOtherName = lcfirst($otherName);
 
         if ($lowerOwnerName === $lowerOtherName) {
@@ -191,7 +200,7 @@ abstract class Standard
             [
                 'name' => 'link' . $ownerName . $otherName,
                 'type' => Type::nonNull(_types()->getOutput($ownerClass)),
-                'description' => 'Create a relation between ' . $ownerName . ' and ' . $otherName . '.' . PHP_EOL . PHP_EOL .
+                'description' => 'Create a relation between ' . $ownerName . ' and ' . $otherClassName . $semantic . '.' . PHP_EOL . PHP_EOL .
                     'If the relation already exists, it will have no effect.',
                 'args' => $args,
                 'resolve' => function ($root, array $args) use ($lowerOwnerName, $lowerOtherName, $otherName, $otherClass): AbstractModel {
@@ -212,7 +221,7 @@ abstract class Standard
             [
                 'name' => 'unlink' . $ownerName . $otherName,
                 'type' => Type::nonNull(_types()->getOutput($ownerClass)),
-                'description' => 'Delete a relation between ' . $ownerName . ' and ' . $otherName . '.' . PHP_EOL . PHP_EOL .
+                'description' => 'Delete a relation between ' . $ownerName . ' and ' . $otherClassName . $semantic . '.' . PHP_EOL . PHP_EOL .
                     'If the relation does not exist, it will have no effect.',
                 'args' => $args,
                 'resolve' => function ($root, array $args) use ($lowerOwnerName, $lowerOtherName, $otherName, $otherClass): AbstractModel {

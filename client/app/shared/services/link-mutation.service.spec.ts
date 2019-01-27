@@ -14,21 +14,24 @@ describe('LinkMutationService', () => {
     const booking = {id: '456', __typename: 'Booking'};
     const item = {id: '456', __typename: 'Bookable'};
     const company = {id: '456', __typename: 'Company'};
-
-    const expectBooking = {
-        id: '456',
-        __typename: 'Booking',
-    };
+    const category1 = {id: '456', __typename: 'Category'};
+    const category2 = {id: '789', __typename: 'Category'};
 
     const expectedLink = {
         data: {
-            linkBookingBookable: expectBooking,
+            linkBookingBookable: booking,
+        },
+    };
+
+    const expectedCategoryLink = {
+        data: {
+            linkCategoryParent: category1,
         },
     };
 
     const expectedUnlink = {
         data: {
-            unlinkBookingBookable: expectBooking,
+            unlinkBookingBookable: booking,
         },
     };
 
@@ -50,10 +53,30 @@ describe('LinkMutationService', () => {
         expect(actual).toEqual(expectedLink);
     })));
 
+    it('should be able to link with specific semantic', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+        let actual: any = null;
+        tick();
+        service.link(category1, category2, 'parent').subscribe(v => actual = v);
+        tick();
+
+        expect(actual).toEqual(expectedCategoryLink);
+    })));
+
+    it('should be able to link with specific semantic in reverse order and have different result',
+        fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+            let actual: any = null;
+            tick();
+            service.link(category2, category1, 'parent').subscribe(v => actual = v);
+            tick();
+
+            expect(actual).toEqual(expectedCategoryLink);
+        })),
+    );
+
     it('should be able to link with extra variables', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
         let actual: any = null;
         tick();
-        service.link(booking, item, {isMain: true}).subscribe(v => actual = v);
+        service.link(booking, item, null, {isMain: true}).subscribe(v => actual = v);
         tick();
 
         expect(actual).toEqual(expectedLink);

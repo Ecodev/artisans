@@ -49,7 +49,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaimQuery[
     public getEmptyObject(): ExpenseClaimInput {
         return {
             name: '',
-            user: '',
+            owner: null,
             amount: '0',
             description: '',
             remarks: '',

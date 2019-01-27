@@ -48,7 +48,7 @@ class ImageTest extends TestCase
         ];
         self::assertEquals($expected, $actual, 'should be able to get permissions as anonymous');
 
-        // Make it the current user as creator
+        // Make the current user as creator
         $user = new User();
         User::setCurrent($user);
         $image->timestampCreation();

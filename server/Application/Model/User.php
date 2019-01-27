@@ -474,6 +474,11 @@ class User extends AbstractModel
         self::setCurrent($this);
         foreach ($types as $type) {
             $instance = new $type();
+
+            if ($instance instanceof AccountingDocument) {
+                $instance->setExpenseClaim(new ExpenseClaim());
+            }
+
             $sh = lcfirst(Utility::getShortClassName($instance));
             $result[$sh] = [];
 

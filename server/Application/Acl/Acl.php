@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Application\Acl;
 
+use Application\Acl\Assertion\All;
+use Application\Acl\Assertion\ExpenseClaimStatusIsNew;
 use Application\Acl\Assertion\IsMyself;
 use Application\Acl\Assertion\IsOwner;
 use Application\Acl\Assertion\IsRecipient;
+use Application\Acl\Assertion\StatusIsNew;
 use Application\Model\AbstractModel;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
@@ -83,8 +86,13 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
         $this->allow(User::ROLE_INDIVIDUAL, $user, ['read']);
         $this->allow(User::ROLE_INDIVIDUAL, $user, ['update'], new IsMyself());
-        $this->allow(User::ROLE_INDIVIDUAL, [$account, $expenseClaim, $accountingDocument], ['create']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$account, $expenseClaim, $accountingDocument], ['read', 'update', 'delete'], new IsOwner());
+        $this->allow(User::ROLE_INDIVIDUAL, [$account, $expenseClaim], ['create']);
+        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['read'], new IsOwner());
+        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['update', 'delete'], new All(new IsOwner(), new StatusIsNew()));
+        $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['create'], new ExpenseClaimStatusIsNew());
+        $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['read'], new IsOwner());
+        $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['update', 'delete'], new All(new IsOwner(), new ExpenseClaimStatusIsNew()));
+        $this->allow(User::ROLE_INDIVIDUAL, [$account], ['read', 'update'], new IsOwner());
         $this->allow(User::ROLE_INDIVIDUAL, $message, ['read'], new IsRecipient());
 
         $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsOwner());

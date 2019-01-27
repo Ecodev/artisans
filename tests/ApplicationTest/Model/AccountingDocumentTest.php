@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Model;
 
+use Application\DBAL\Types\ExpenseClaimStatusType;
 use Application\Model\AccountingDocument;
+use Application\Model\ExpenseClaim;
 use Application\Model\User;
 use PHPUnit\Framework\TestCase;
 
@@ -29,6 +31,9 @@ class AccountingDocumentTest extends TestCase
     public function testGetPermissions(): void
     {
         $document = new AccountingDocument();
+        $expenseClaim = new ExpenseClaim();
+        $document->setExpenseClaim($expenseClaim);
+
         $actual = $document->getPermissions();
         $expected = [
             'create' => false,
@@ -38,7 +43,7 @@ class AccountingDocumentTest extends TestCase
         ];
         self::assertEquals($expected, $actual, 'should be able to get permissions as anonymous');
 
-        // Make it the current user as creator
+        // Make the current user as creator
         $user = new User();
         User::setCurrent($user);
         $document->timestampCreation();
@@ -51,5 +56,15 @@ class AccountingDocumentTest extends TestCase
             'delete' => true,
         ];
         self::assertEquals($expected2, $actual2, 'should be able to get permissions as creator');
+
+        $expenseClaim->setStatus(ExpenseClaimStatusType::PROCESSED);
+        $actual3 = $document->getPermissions();
+        $expected3 = [
+            'create' => false,
+            'read' => true,
+            'update' => false,
+            'delete' => false,
+        ];
+        self::assertEquals($expected3, $actual3, 'should be able to get permissions as creator');
     }
 }

@@ -16,8 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Transaction extends AbstractModel
 {
-    use hasName;
-    use hasRemarks;
+    use HasName;
+    use HasRemarks;
 
     /**
      * @var Account

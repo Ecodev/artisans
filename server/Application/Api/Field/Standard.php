@@ -96,13 +96,14 @@ abstract class Standard
                     'input' => Type::nonNull(_types()->getInput($class)),
                 ],
                 'resolve' => function ($root, array $args) use ($class, $lowerName): AbstractModel {
-                    // Check ACL
-                    $object = new $class();
-                    Helper::throwIfDenied($object, 'create');
-
                     // Do it
+                    $object = new $class();
                     $input = $args['input'];
                     Helper::hydrate($object, $input);
+
+                    // Check ACL
+                    Helper::throwIfDenied($object, 'create');
+
                     _em()->persist($object);
                     _em()->flush();
 

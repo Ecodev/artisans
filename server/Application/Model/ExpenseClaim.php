@@ -25,9 +25,9 @@ use GraphQL\Doctrine\Annotation as API;
  */
 class ExpenseClaim extends AbstractModel
 {
-    use hasName;
-    use hasDescription;
-    use hasRemarks;
+    use HasName;
+    use HasDescription;
+    use HasRemarks;
 
     /**
      * @var string

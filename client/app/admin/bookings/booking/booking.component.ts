@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
@@ -6,6 +6,8 @@ import { BookingService } from '../services/booking.service';
 import {
     BookingQuery,
     BookingQueryVariables,
+    BookingStatus,
+    BookingType,
     CreateBookingMutation,
     CreateBookingMutationVariables,
     UpdateBookingMutation,
@@ -26,7 +28,10 @@ export class BookingComponent
         CreateBookingMutationVariables,
         UpdateBookingMutation['updateBooking'],
         UpdateBookingMutationVariables,
-        any> {
+        any> implements OnInit {
+
+    public bookable;
+    public statuses;
 
     constructor(alertService: AlertService,
                 public bookingService: BookingService,
@@ -38,6 +43,14 @@ export class BookingComponent
         super('booking', bookingService, alertService, router, route);
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+
+        // Booked status should never change, so, don't show it in menu. But if we change bookable, it could be again applicable...
+        // Let get time to decide
+        this.statuses = this.data.status; // .filter((status: IEnum) => status.value !== BookingStatus.booked);
+    }
+
     public endBooking() {
         const endDate = this.form.get('endDate');
         if (endDate) {
@@ -45,4 +58,13 @@ export class BookingComponent
             this.update();
         }
     }
+
+    public isSelfApproved() {
+        return this.bookable ? this.bookable.bookingType === BookingType.self_approved : false;
+    }
+
+    public isApplication() {
+        return this.data.model.status !== BookingStatus.booked || this.bookable && this.bookable.bookingType === BookingType.admin_approved;
+    }
+
 }

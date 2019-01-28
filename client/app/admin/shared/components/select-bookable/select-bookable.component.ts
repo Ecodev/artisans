@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BookableService } from '../../../bookables/services/bookable.service';
 import { LinkMutationService } from '../../../../shared/services/link-mutation.service';
 
@@ -14,6 +14,8 @@ export class SelectBookableComponent implements OnInit {
 
     @Input() booking;
     @Input() placeholder: string;
+
+    @Output() selectionChange = new EventEmitter();
 
     public bookable;
 
@@ -39,6 +41,7 @@ export class SelectBookableComponent implements OnInit {
         }
 
         this.bookable = newBookable;
+        this.selectionChange.emit(newBookable);
     }
 
 }

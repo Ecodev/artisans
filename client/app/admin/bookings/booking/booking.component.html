@@ -23,20 +23,21 @@
                             </mat-form-field>
                         </div>
 
-                        <app-select-bookable placeholder="Réservable" [booking]="data.model"></app-select-bookable>
+                        <app-select-bookable placeholder="Réservable"
+                                             [booking]="data.model"
+                                             (selectionChange)="bookable = $event"
+                        ></app-select-bookable>
 
                     </div>
                     <div fxFlex="20" fxLayout="column">
-                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom">
+                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom" *ngIf="isApplication()">
                             <h2 class="mat-title">Statut</h2>
                             <mat-button-toggle-group #group="matButtonToggleGroup"
                                                      formControlName="status"
                                                      (change)="update()"
                                                      [vertical]="true"
                             >
-                                <mat-button-toggle *ngFor="let item of data.status" [value]="item.value">
-                                    {{ item.name }}
-                                </mat-button-toggle>
+                                <mat-button-toggle *ngFor="let item of statuses" [value]="item.value">{{ item.name }}</mat-button-toggle>
                             </mat-button-toggle-group>
                         </div>
                     </div>
@@ -46,22 +47,18 @@
 
                     <div fxFlex="50" fxLayout="column">
 
-                        <h2 class="mat-title">Début</h2>
-
-                        <div class="padding-bottom">
-                            &nbsp;
-                            <span *ngIf="data.model.startDate">
-                                Départ: {{ data.model.startDate | date: 'long'}}
-                            </span>
+                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="margin-bottom">
+                            <h2 class="mat-title no-margin-bottom">Début</h2>
+                            <div>{{ data.model.startDate | date: 'medium'}}</div>
                         </div>
 
-                        <mat-form-field>
+                        <mat-form-field *ngIf="isSelfApproved()">
                             <mat-label>Destination</mat-label>
                             <input matInput formControlName="destination" (change)="update()" />
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label>Commentaire de départ</mat-label>
+                            <mat-label>Commentaire de début</mat-label>
                             <textarea matInput
                                       formControlName="startComment"
                                       (change)="update()"
@@ -74,26 +71,21 @@
                     </div>
                     <div fxFlex="50" fxLayout="column">
 
-                        <div fxLayout="row">
-                            <h2 class="mat-title" fxFlex>Retour</h2>
-                            <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()"
-                            >Terminer
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="margin-bottom">
+                            <h2 class="mat-title no-margin-bottom">Fin</h2>
+                            <div fxFlex>{{ data.model.endDate | date: 'medium' }}</div>
+                            <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()">
+                                Terminer
                             </button>
                         </div>
-                        <div class="padding-bottom">
-                            &nbsp;
-                            <span *ngIf="data.model.endDate">
-                                Arrivée : {{ data.model.endDate | date: 'long'}}
-                            </span>
-                        </div>
 
-                        <mat-form-field>
+                        <mat-form-field *ngIf="isSelfApproved()">
                             <mat-label>Heure estimée de retour</mat-label>
                             <input matInput formControlName="estimatedEndDate" (change)="update()">
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label>Commentaire d'arrivée</mat-label>
+                            <mat-label>Commentaire de fin</mat-label>
                             <textarea matInput
                                       formControlName="endComment"
                                       (change)="update()"

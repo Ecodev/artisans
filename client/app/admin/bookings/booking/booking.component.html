@@ -23,21 +23,7 @@
                             </mat-form-field>
                         </div>
 
-                        <mat-card *ngIf="data.model.id">
-                            <h2 class="mat-title">Réservable</h2>
-                            <app-relations [main]="data.model"
-                                           [service]="bookableService"
-                                           [filter]="{groups: [{conditions: [{bookings: {have: {values: [data.model.id]}}}]}]}"
-                                           placeholder="Associer à un réservable"
-                                           [hideSearch]="true"
-                            >
-                                <ng-template let-item="item">
-                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <app-table-button [navigate]="['/admin/bookable/', item.id]" [label]="item.name"></app-table-button>
-                                    </div>
-                                </ng-template>
-                            </app-relations>
-                        </mat-card>
+                        <app-select-bookable placeholder="Réservable" [booking]="data.model"></app-select-bookable>
 
                     </div>
                     <div fxFlex="20" fxLayout="column">
@@ -90,10 +76,7 @@
 
                         <div fxLayout="row">
                             <h2 class="mat-title" fxFlex>Retour</h2>
-                            <button *ngIf="data.model.id && !form.get('endDate').value"
-                                    mat-flat-button
-                                    color="warn"
-                                    (click)="endBooking()"
+                            <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()"
                             >Terminer
                             </button>
                         </div>

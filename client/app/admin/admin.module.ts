@@ -29,6 +29,7 @@ import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClai
 import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
 import { CategoriesComponent } from './categories/categories/categories.component';
 import { CategoryComponent } from './categories/category/category.component';
+import { SelectBookableComponent } from './shared/components/select-bookable/select-bookable.component';
 
 @NgModule({
     declarations: [
@@ -55,6 +56,7 @@ import { CategoryComponent } from './categories/category/category.component';
         ExpenseClaimComponent,
         CategoriesComponent,
         CategoryComponent,
+        SelectBookableComponent,
     ],
     imports: [
         CommonModule,

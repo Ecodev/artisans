@@ -1,0 +1,6 @@
+<app-select [service]="bookableService"
+            [ngModel]="bookable"
+            [placeholder]="placeholder"
+            (selectionChange)="update($event)"
+            [showIcon]="false"
+></app-select>

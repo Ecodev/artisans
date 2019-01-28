@@ -39,7 +39,7 @@
             </ng-container>
         </table>
 
-        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="getLength() === 0">
+        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.data?.length === 0">
             <div i18n>Pas de résultats</div>
         </div>
 
@@ -47,13 +47,14 @@
             <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
         </div>
 
-        <mat-paginator *ngIf="!value && getLength() && dataSource?.pageSize > getLength()"
-                       [length]="getLength()"
-                       [pageSize]="dataSource?.pageSize"
-                       [pageIndex]="dataSource?.pageIndex"
-                       [pageSizeOptions]="dataSource?.pageSizeOptions"
-                       (page)="dataSource?.paging($event)"
+        <mat-paginator *ngIf="!value && dataSource.data?.length"
+                       [length]="dataSource.data?.length"
+                       [pageSize]="dataSource.data?.pageSize"
+                       [pageIndex]="dataSource.data?.pageIndex"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="pagination($event)"
         ></mat-paginator>
+
     </div>
 
     <div fxLayout="row"

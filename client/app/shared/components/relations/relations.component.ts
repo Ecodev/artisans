@@ -26,6 +26,8 @@ import { HierarchicConfiguration } from '../../hierarchic-selector/classes/Hiera
 import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { SelectComponent } from '../select/select.component';
 import { AppDataSource } from '../../services/data.source';
+import { PageEvent } from '@angular/material';
+import { PaginationInput } from '../../generated-types';
 
 /**
  * Custom template usage :
@@ -114,6 +116,13 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      */
     private queryRef: AutoRefetchQueryRef<any>;
 
+    public pageSizeOptions = [5, 10, 50, 100];
+
+    protected defaultPagination: PaginationInput = {
+        pageIndex: 0,
+        pageSize: 25,
+    };
+
     constructor(private linkMutationService: LinkMutationService,
                 private hierarchicSelectorDialog: HierarchicSelectorDialogService,
                 @Optional() @Self() public ngControl: NgControl) {
@@ -129,6 +138,8 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     }
 
     ngOnInit() {
+
+        this.pagination();
 
         // Force disabled if cannot update object
         if (this.main && this.main.permissions) {
@@ -246,21 +257,25 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         });
     }
 
+    public pagination(event?: PageEvent) {
+
+        let pagination: QueryVariables['pagination'] = null;
+        if (event && (event.pageIndex !== this.defaultPagination.pageIndex || event.pageSize !== this.defaultPagination.pageSize)) {
+            pagination = {
+                pageIndex: event.pageIndex,
+                pageSize: event.pageSize,
+            };
+        }
+
+        this.variablesManager.merge('pagination', {pagination: pagination ? pagination : this.defaultPagination});
+    }
+
     public getDisplayFn(): (item: any) => string {
         if (this.displayWith) {
             return this.displayWith;
         }
 
         return (item) => item ? item.fullName || item.name : '';
-    }
-
-    public getLength(): number | null {
-
-        if (!this.dataSource) {
-            return null;
-        }
-
-        return this.dataSource.data.length;
     }
 
     public openHierarchicSelector() {

@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\DBAL\Types\BookableStateType;
 use Application\DBAL\Types\BookingTypeType;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
+use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -53,6 +55,26 @@ class Bookable extends AbstractModel
      * @ORM\Column(type="BookingType", length=10, options={"default" = BookingTypeType::SELF_APPROVED})
      */
     private $bookingType = BookingTypeType::SELF_APPROVED;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" = 1})
+     */
+    private $isActive = true;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="BookableState", length=10, options={"default" = BookableStateType::GOOD})
+     */
+    private $state = BookableStateType::GOOD;
+
+    /**
+     * @var null|Date
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $verificationDate;
 
     /**
      * @var BookableTag
@@ -209,13 +231,77 @@ class Bookable extends AbstractModel
     }
 
     /**
+     * Whether this bookable can be booked
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Whether this bookable can be booked
+     *
+     * @param bool $isActive
+     */
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
+    }
+
+    /**
      * @API\Input(type="BookingType")
      *
-     * @param string $bookingType
+     * @param string $state
      */
-    public function setBookingType(string $bookingType): void
+    public function setBookingType(string $state): void
     {
-        $this->bookingType = $bookingType;
+        $this->bookingType = $state;
+    }
+
+    /**
+     * State of the bookable
+     *
+     * @API\Field(type="BookableState")
+     *
+     * @return string
+     */
+    public function getState(): string
+    {
+        return $this->state;
+    }
+
+    /**
+     * State of the bookable
+     *
+     * @API\Input(type="BookableState")
+     *
+     * @param string $state
+     */
+    public function setState(string $state): void
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * The date then the bookable was last checked
+     *
+     * @return null|Date
+     */
+    public function getVerificationDate(): ?Date
+    {
+        return $this->verificationDate;
+    }
+
+    /**
+     * The date then the bookable was last checked
+     *
+     * @param null|Date $verificationDate
+     */
+    public function setVerificationDate(?Date $verificationDate): void
+    {
+        $this->verificationDate = $verificationDate;
     }
 
     /**

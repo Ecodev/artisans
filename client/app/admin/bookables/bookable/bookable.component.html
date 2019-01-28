@@ -47,6 +47,17 @@
                             <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
+                        <mat-checkbox formControlName="isActive" (change)="update()" class="margin-bottom">Disponible pour réservation</mat-checkbox>
+
+                        <app-select-enum enumName="BookableState" formControlName="state" (selectionChange)="update()" placeholder="État"></app-select-enum>
+
+                        <mat-form-field>
+                            <mat-label>Date de vérification</mat-label>
+                            <input matInput formControlName="verificationDate" (dateChange)="update()" [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
                         <mat-divider class="margin-bottom"></mat-divider>
 
                         <mat-form-field>

@@ -43,6 +43,7 @@ return [
         'types' => [
             'UserRole' => Application\DBAL\Types\UserRoleType::class,
             'UserStatus' => Application\DBAL\Types\UserStatusType::class,
+            'BookableState' => Application\DBAL\Types\BookableStateType::class,
             'BookingType' => Application\DBAL\Types\BookingTypeType::class,
             'BookingStatus' => Application\DBAL\Types\BookingStatusType::class,
             'Relationship' => Application\DBAL\Types\RelationshipType::class,

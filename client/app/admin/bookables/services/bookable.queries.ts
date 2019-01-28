@@ -6,6 +6,9 @@ export const bookableMetaFragment = gql`
         id
         name
         description
+        isActive
+        state
+        verificationDate
         licenses {
             name
         }

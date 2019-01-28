@@ -36,7 +36,7 @@
                                 <mat-error *ngIf="form.get('lastName').hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
-                            <app-select-enum enumName="Sex" formControlName="sex" placeholder="Genre"></app-select-enum>
+                            <app-select-enum enumName="Sex" formControlName="sex" (selectionChange)="update()" placeholder="Genre"></app-select-enum>
                         </div>
 
                         <app-address [form]="form" (change)="update()"></app-address>

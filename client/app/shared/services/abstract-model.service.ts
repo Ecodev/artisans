@@ -1,9 +1,9 @@
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, of, OperatorFunction, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil} from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
-import { debounce, defaults, isArray, merge, mergeWith, pick } from 'lodash';
+import { debounce, defaults, isArray, merge, mergeWith, pick, omit } from 'lodash';
 import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
@@ -365,6 +365,32 @@ export abstract class AbstractModelService<Tone,
         }).subscribe((result: any) => {
             result = this.mapUpdate(result);
             mergeWith(object, result, AbstractModelService.mergeOverrideArray);
+            observable.next(result);
+            observable.complete(); // unsubscribe all after first emit, nothing more will come;
+        });
+
+        return observable.asObservable();  // hide type Subject and prevent user to miss use .next() or .complete() functions
+    }
+
+    /**
+     * Accepts a partial input for an update mutation
+     */
+    public updatePartially(object) {
+        this.throwIfObservable(object);
+        this.throwIfNotQuery(this.updateMutation);
+
+        const observable = new Subject<Tupdate>();
+        const variables = {
+            id: object.id as string,
+            input: omit(Utility.relationsToIds(object), 'id'),
+        } as Vupdate;
+
+        this.apollo.mutate<Tupdate, Vupdate>({
+            mutation: this.updateMutation,
+            variables: variables,
+            refetchQueries: AbstractModelService.getRefetchQueries(),
+        }).subscribe((result: any) => {
+            result = this.mapUpdate(result);
             observable.next(result);
             observable.complete(); // unsubscribe all after first emit, nothing more will come;
         });

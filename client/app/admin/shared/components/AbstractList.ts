@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { OnDestroy, OnInit } from '@angular/core';
+import { Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { takeUntil } from 'rxjs/operators';
@@ -17,10 +17,19 @@ import { AppDataSource } from '../../../shared/services/data.source';
 /**
  * This class helps managing a list of paginated items that can be filtered,
  * selected, and then bulk actions can be performed on selection.
+ *
+ * Components inheriting from this class can be used as standalone with input attributes.
+ *
+ * Usage :
+ * <app-my-listing [queryVariables]="{filter:...}" [columns]="['col1']" [persistSearch]="false">
  */
 export class AbstractList<Tall, Vall extends QueryVariables>
     extends AbstractController
     implements OnInit, OnDestroy {
+
+    @Input() queryVariables;
+    @Input() columns: string[];
+    @Input() persistSearch = true;
 
     public selectedColumns: string[] = [];
     public routerColumns: string[];
@@ -70,6 +79,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
 
         this.initFromPersisted();
         this.initFromRouting();
+        this.initFromAttributeInputs();
 
         this.dataSource = new AppDataSource(this.getDataObservable());
         this.selection = new SelectionModel<Tall>(true, []);
@@ -87,7 +97,9 @@ export class AbstractList<Tall, Vall extends QueryVariables>
      * Persist search and then launch whatever is required to refresh the list
      */
     public search(naturalSearchSelections: NaturalSearchSelections) {
-        this.persistenceService.persist('ns', toUrl(naturalSearchSelections), this.route, this.getStorageKey());
+        if (this.persistSearch) {
+            this.persistenceService.persist('ns', toUrl(naturalSearchSelections), this.route, this.getStorageKey());
+        }
         this.translateSearchAndRefreshList(naturalSearchSelections);
     }
 
@@ -108,7 +120,9 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         }
 
         this.variablesManager.set('sorting', {sorting} as Vall);
-        this.persistenceService.persist('so', sorting, this.route, this.getStorageKey());
+        if (this.persistSearch) {
+            this.persistenceService.persist('so', sorting, this.route, this.getStorageKey());
+        }
     }
 
     public pagination(event: PageEvent) {
@@ -122,7 +136,9 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         }
 
         this.variablesManager.merge('pagination', {pagination: pagination ? pagination : this.defaultPagination} as Vall);
-        this.persistenceService.persist('pa', pagination, this.route, this.getStorageKey());
+        if (this.persistSearch) {
+            this.persistenceService.persist('pa', pagination, this.route, this.getStorageKey());
+        }
     }
 
     /**
@@ -185,12 +201,29 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         }
     }
 
+    /**
+     * Init context query variables and visible columns from attributes [queryVariables] and [columns]
+     */
+    public initFromAttributeInputs() {
+        if (this.queryVariables) {
+            this.variablesManager.set('contextFilter', this.queryVariables);
+        }
+
+        if (this.columns) {
+            this.routerColumns = this.columns;
+        }
+    }
+
     protected getDataObservable(): Observable<Tall> {
         this.queryRef = this.service.watchAll(this.variablesManager, true);
         return this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe));
     }
 
     protected initFromPersisted() {
+
+        if (!this.persistSearch) {
+            return;
+        }
 
         const storageKey = this.getStorageKey();
 
@@ -215,7 +248,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         this.variablesManager.set('natural-search', {filter: translatedSelection} as Vall);
     }
 
-    protected getStorageKey() {
+    protected getStorageKey(): string {
         return 'list-' + this.key;
     }
 

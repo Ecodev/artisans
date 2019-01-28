@@ -9,8 +9,8 @@ REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, 
 (1005, NULL, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', '2018-01-01 12:00:00', 'householder'),
 (1006, NULL, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', '2018-01-01 12:00:00', 'householder'),
 (1007, 1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('conjoint'), 'individual', 'active', '2018-01-01 12:00:00', 'partner'),
-(1008, 1002, 'son', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'individual', 'active', '2018-01-01 12:00:00', 'child'),
-(1009, 1002, 'daughter', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'individual', 'active' ,'2018-01-01 12:00:00', 'child'),
+(1008, 1002, 'son', 'Fi', 'ls', NULL, MD5('fils'), 'individual', 'active', '2018-01-01 12:00:00', 'child'),
+(1009, 1002, 'daughter', 'Fi', 'Lle', NULL, MD5('fille'), 'individual', 'active' ,'2018-01-01 12:00:00', 'child'),
 (1010, NULL, 'voiliermember', 'Voilier', 'Member', 'voiliermember@example.com', MD5('voiliermember'), 'member', 'archived', '2018-01-01 12:00:00', 'householder'),
 (1011, 1010, 'voilierfamily', 'Voilier', 'Family', 'voilierfamily@example.com', MD5('voilierfamily'), 'individual', 'active', '2018-01-01 12:00:00', 'partner');
 

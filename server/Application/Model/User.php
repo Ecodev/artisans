@@ -102,8 +102,8 @@ class User extends AbstractModel
     private $password;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=191)
+     * @var null|string
+     * @ORM\Column(type="string", length=191, nullable=true, unique=true)
      */
     private $email;
 
@@ -216,7 +216,7 @@ class User extends AbstractModel
     private $messages;
 
     /**
-     * There is actually at 0 to 1 account, never more. And this is
+     * There is actually 0 to 1 account, never more. And this is
      * enforced by DB unique constraints
      *
      * @var Collection
@@ -351,7 +351,7 @@ class User extends AbstractModel
     /**
      * Set email
      *
-     * @API\Input(type="Email")
+     * @API\Input(type="?Email")
      *
      * @param string $email
      */
@@ -363,11 +363,11 @@ class User extends AbstractModel
     /**
      * Get email
      *
-     * @API\Field(type="Email")
+     * @API\Field(type="?Email")
      *
-     * @return string
+     * @return null|string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }

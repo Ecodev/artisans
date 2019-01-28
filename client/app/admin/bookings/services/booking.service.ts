@@ -138,7 +138,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     /**
      * TODO : implement confirm (modal maybe or from controller text)
      */
-    public flagEndDate(id: string, confirm: boolean = false): Observable<TerminateBookingMutation['terminateBooking']> {
+    public flagEndDate(id: string): Observable<TerminateBookingMutation['terminateBooking']> {
         return this.mutate(terminateBookingMutation, {id: id});
     }
 

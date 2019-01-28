@@ -8,10 +8,6 @@ import { UserService } from '../admin/users/services/user.service';
 })
 export class DashboardComponent implements OnInit {
 
-    // @ViewChild('video') videoRef: ElementRef;
-    // @ViewChild('image') imageRef: ElementRef;
-    // @ViewChild('canvas') canvasRef: ElementRef;
-
     public title = 'my-ichtus';
 
     public currentUser;
@@ -27,17 +23,4 @@ export class DashboardComponent implements OnInit {
         return UserService.canAccessAdmin(this.currentUser);
     }
 
-    // public smyle() {
-    //     const mediaConstraints: MediaStreamConstraints = {video: true};
-    //     navigator.mediaDevices.getUserMedia(mediaConstraints).then((stream) => {
-    //         this.videoRef.nativeElement.srcObject = stream;
-    //     });
-    // }
-    //
-    // public capture() {
-    //     this.canvasRef.nativeElement.width = this.videoRef.nativeElement.videoWidth;
-    //     this.canvasRef.nativeElement.height = this.videoRef.nativeElement.videoHeight;
-    //     this.canvasRef.nativeElement.getContext('2d').drawImage(this.videoRef.nativeElement, 0, 0);
-    //     this.imageRef.nativeElement.src = this.canvasRef.nativeElement.toDataURL('image/webp');
-    // }
 }

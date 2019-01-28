@@ -14,7 +14,6 @@ import {
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
-import { TransactionService } from '../../transactions/services/transaction.service';
 
 @Component({
     selector: 'app-bookable',
@@ -36,7 +35,6 @@ export class BookableComponent
                 route: ActivatedRoute,
                 public bookableTagService: BookableTagService,
                 public licenseService: LicenseService,
-                public transactionService: TransactionService,
     ) {
         super('bookable', bookableService, alertService, router, route);
     }

@@ -1,0 +1,14 @@
+:host {
+    flex: 1;
+
+    .canvasWrapper {
+        overflow: hidden;
+        background: black;
+
+        canvas {
+            display: block;
+            margin: auto;
+            height: 100%;
+        }
+    }
+}

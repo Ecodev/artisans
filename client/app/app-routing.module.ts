@@ -28,6 +28,10 @@ export const routes: Routes = [
                 component: DashboardComponent,
             },
             {
+                path: 'booking',
+                loadChildren: './booking/booking.module#BookingModule',
+            },
+            {
                 path: 'admin',
                 loadChildren: './admin/admin.module#AdminModule',
             },

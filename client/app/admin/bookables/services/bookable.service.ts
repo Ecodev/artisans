@@ -23,8 +23,9 @@ import {
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -122,6 +123,24 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         const qvm = new QueryVariablesManager<BookablesQueryVariables>();
         qvm.set('variables', mandatoryBookablesFilter);
         return this.getAll(qvm);
+    }
+
+    public resolveByCode(code: string): Observable<{ model: any }> {
+
+        if (code) {
+            const qvm = new QueryVariablesManager<BookablesQueryVariables>();
+            const variables: BookablesQueryVariables = {
+                filter: {groups: [{conditions: [{code: {equal: {value: code}}}]}]},
+            };
+            qvm.set('variables', variables);
+
+            return this.getAll(qvm).pipe(map(result => {
+                return {model: result && result.items.length ? result.items[0] : null};
+            }));
+        } else {
+            return of({model: null});
+        }
+
     }
 
 }

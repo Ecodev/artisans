@@ -1,20 +1,20 @@
 <div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="70px" fxLayoutAlign="center center">
 
-    <div fxLayout="column" fxLayoutAlign="start center" style="opacity:0.3">
+    <div fxLayout="column" fxLayoutAlign="start center">
 
         <h1 class="mat-display-2 margin-bottom">Annoncer une sortie</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/scan">
                 <app-icon name="qr" [size]="70"></app-icon>
                 en scannant un code QR
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
                 <app-icon name="code" [size]="70"></app-icon>
                 en saisissant un code
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
                 <app-icon name="own_bookable" [size]="70"></app-icon>
                 avec mon propre matériel
             </a>

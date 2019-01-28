@@ -146,6 +146,21 @@
         <mat-tab label="Attributs">
             <app-bookable-metadata [bookable]="data.model" [edit]="true" class="margin"></app-bookable-metadata>
         </mat-tab>
+        <mat-tab label="Transactions">
+            <app-relations [main]="data.model"
+                           [service]="transactionService"
+                           [filter]="{groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}"
+                           [disabled]="true"
+                           [hideSearch]="true"
+            >
+                <ng-template let-item="item">
+                    <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+                        <app-table-button [label]="item.name" [navigate]="['../../transaction',  item.id]"></app-table-button>
+                        <app-money [amount]="item.amount"></app-money>
+                    </div>
+                </ng-template>
+            </app-relations>
+        </mat-tab>
 
     </mat-tab-group>
 

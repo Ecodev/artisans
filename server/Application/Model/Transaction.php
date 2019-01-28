@@ -104,6 +104,16 @@ class Transaction extends AbstractModel
     }
 
     /**
+     * Get account
+     *
+     * @return null|Bookable
+     */
+    public function getBookable(): ?Bookable
+    {
+        return $this->bookable;
+    }
+
+    /**
      * Set bookable
      *
      * @param null|Bookable $bookable

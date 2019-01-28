@@ -13,6 +13,10 @@ export const transactionMetaFragment = gql`
             id
             name
         }
+        bookable {
+            id
+            name
+        }
         account {
             id
             name

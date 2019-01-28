@@ -24,6 +24,9 @@ use GraphQL\Doctrine\Annotation as API;
  * User
  *
  * @ORM\Entity(repositoryClass="Application\Repository\UserRepository")
+ * @ORM\AssociationOverrides({
+ *     @ORM\AssociationOverride(name="owner", inversedBy="users")
+ * })
  */
 class User extends AbstractModel
 {
@@ -222,6 +225,12 @@ class User extends AbstractModel
     private $accounts;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
+     */
+    private $users;
+
+    /**
      * Constructor
      *
      * @param string $role role for new user
@@ -234,6 +243,7 @@ class User extends AbstractModel
         $this->licenses = new ArrayCollection();
         $this->userTags = new ArrayCollection();
         $this->messages = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     /**
@@ -420,6 +430,30 @@ class User extends AbstractModel
         $this->role = $role;
     }
 
+    public function setOwner(self $owner = null): void
+    {
+        if ($owner && $owner !== $this) {
+            if ($owner->getOwner() && $owner !== $owner->getOwner()) {
+                throw new Exception('This user cannot be owned by a user who is himself owned by somebody else');
+            }
+
+            if ($this->users->count()) {
+                throw new Exception('This user owns other users, so he cannot himself be owned by somebody else');
+            }
+        }
+
+        if ($this->getOwner()) {
+            $this->getOwner()->users->removeElement($this);
+        }
+
+        parent::setOwner($owner);
+
+        if ($this->getOwner()) {
+            $this->getOwner()->users->add($this);
+            $this->setStatus($this->getOwner()->getStatus());
+        }
+    }
+
     /**
      * @API\Field(type="Application\Api\Enum\UserStatusType")
      *
@@ -438,6 +472,12 @@ class User extends AbstractModel
     public function setStatus(string $status): void
     {
         $this->status = $status;
+
+        foreach ($this->users as $user) {
+            if ($user !== $this) {
+                $user->setStatus($status);
+            }
+        }
     }
 
     /**

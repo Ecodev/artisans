@@ -224,4 +224,58 @@ class UserTest extends TestCase
             'admin cannot donate stuff that are not mine' => [$admin, $u2, $u3],
         ];
     }
+
+    public function testIndividualCannotOwnUsers(): void
+    {
+        $u1 = new User();
+        $u2 = new User();
+        $u3 = new User();
+
+        $u1->setOwner($u1);
+        $u2->setOwner($u1);
+
+        $this->expectExceptionMessage('This user cannot be owned by a user who is himself owned by somebody else');
+        $u3->setOwner($u2);
+    }
+
+    public function testIndividualCannotOwnUsers2(): void
+    {
+        $u1 = new User();
+        $u2 = new User();
+        $u3 = new User();
+
+        $u1->setOwner($u1);
+        $u3->setOwner($u2);
+
+        $this->expectExceptionMessage('This user owns other users, so he cannot himself be owned by somebody else');
+        $u2->setOwner($u1);
+    }
+
+    public function testSetStatus(): void
+    {
+        $u1 = new User();
+        $u2 = new User();
+
+        // Initial status
+        self::assertSame(User::STATUS_NEW, $u1->getStatus());
+        self::assertSame(User::STATUS_NEW, $u2->getStatus());
+
+        $u1->setOwner($u1);
+        $u2->setOwner($u1);
+        $u1->setStatus(User::STATUS_INACTIVE);
+
+        // Status is propagated to existing users
+        self::assertSame(User::STATUS_INACTIVE, $u1->getStatus());
+        self::assertSame(User::STATUS_INACTIVE, $u2->getStatus());
+
+        $u1->setStatus(user::STATUS_ACTIVE);
+        self::assertSame(User::STATUS_ACTIVE, $u1->getStatus());
+        self::assertSame(User::STATUS_ACTIVE, $u2->getStatus());
+
+        // Status is propagated on new users too
+        $u3 = new User();
+        self::assertSame(User::STATUS_NEW, $u3->getStatus());
+        $u3->setOwner($u1);
+        self::assertSame(User::STATUS_ACTIVE, $u3->getStatus());
+    }
 }

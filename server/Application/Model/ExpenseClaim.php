@@ -18,7 +18,8 @@ use GraphQL\Doctrine\Annotation as API;
  *
  * @ORM\Entity(repositoryClass="Application\Repository\ExpenseClaimRepository")
  * @ORM\AssociationOverrides({
- *     @ORM\AssociationOverride(name="owner",
+ *     @ORM\AssociationOverride(
+ *         name="owner",
  *         joinColumns=@ORM\JoinColumn(nullable=false)
  *     )
  * })

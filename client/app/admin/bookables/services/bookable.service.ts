@@ -23,10 +23,7 @@ import {
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { BookableResolve } from '../bookable';
-import { forkJoin, Observable } from 'rxjs';
-import { EnumService } from '../../../shared/services/enum.service';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 
 @Injectable({
@@ -61,7 +58,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}]},
     };
 
-    constructor(apollo: Apollo, private enumService: EnumService) {
+    constructor(apollo: Apollo) {
         super(apollo,
             'bookable',
             bookableQuery,
@@ -115,24 +112,6 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             initialPrice: [Validators.min(0)],
             periodicPrice: [Validators.min(0)],
         };
-    }
-
-    public resolve(id: string): Observable<BookableResolve> {
-
-        // Load enums
-        const bookingTypes = this.enumService.get('BookingType');
-
-        const observables = [
-            super.resolve(id),
-            bookingTypes,
-        ];
-
-        return forkJoin(observables).pipe(map((data: any) => {
-            return {
-                model: data[0].model,
-                bookingType: data[1],
-            };
-        }));
     }
 
     public getMandatoryBookables(): Observable<BookablesQuery['bookables']> {

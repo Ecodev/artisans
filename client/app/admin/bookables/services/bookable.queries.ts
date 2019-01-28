@@ -67,6 +67,7 @@ export const updateBookableMutation = gql`
     mutation UpdateBookable($id: BookableID!, $input: BookablePartialInput!) {
         updateBookable(id:$id, input:$input) {
             id
+            verificationDate
             updateDate
             updater {
                 ...userMeta

@@ -6,6 +6,7 @@ import { BookableService } from '../services/bookable.service';
 import {
     BookableQuery,
     BookableQueryVariables,
+    BookingType,
     CreateBookableMutation,
     CreateBookableMutationVariables,
     UpdateBookableMutation,
@@ -38,5 +39,25 @@ export class BookableComponent
                 public transactionService: TransactionService,
     ) {
         super('bookable', bookableService, alertService, router, route);
+    }
+
+    public verify() {
+
+        const partialBookable = {id: this.data.model.id, verificationDate: (new Date()).toISOString()};
+        this.service.updatePartially(partialBookable).subscribe((bookable) => {
+            this.form.patchValue(bookable);
+        });
+
+    }
+
+    public showVerified() {
+        return this.data.model.bookingType === BookingType.self_approved;
+    }
+
+    /**
+     * Only non-self-approved are applicable for pricing. This simplify GUI
+     */
+    public isBookingPriceApplicable() {
+        return this.data.model.bookingType !== BookingType.self_approved;
     }
 }

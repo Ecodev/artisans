@@ -237,10 +237,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Nouveaux membres',
-                                queryVariables: UserService.getFilters(
-                                    [UserRole.member],
-                                    [UserStatus.new],
-                                ),
+                                queryVariables: UserService.getFilters([UserRole.member], [UserStatus.new]),
                                 columns: ['name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
                             },
                         },
@@ -249,6 +246,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Staff',
+                                queryVariables: UserService.getFilters([UserRole.responsible, UserRole.administrator], null),
                             },
                         },
                         {
@@ -256,10 +254,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres inactifs, nouveaux et archivés',
-                                queryVariables: UserService.getFilters(
-                                    [UserRole.member],
-                                    [UserStatus.inactive, UserStatus.new, UserStatus.archived],
-                                ),
+                                queryVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
                             },
                         },
 

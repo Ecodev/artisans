@@ -4,11 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import {
-    AbstractModelService,
-    AutoRefetchQueryRef,
-    FormValidators,
-} from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery,
@@ -77,7 +73,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     /**
      * Return filters for users for given roles and statuses
      */
-    public static getFilters(roles: UserRole[], statuses: UserStatus[]): UsersQueryVariables {
+    public static getFilters(roles: UserRole[], statuses: UserStatus[] | null): UsersQueryVariables {
         return {
             filter: {
                 groups: [
@@ -85,7 +81,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                         conditions: [
                             {
                                 role: roles && roles.length ? {in: {values: roles}} : null,
-                                status: {in: {values: statuses}},
+                                status: statuses ? {in: {values: statuses}} : null,
                             },
                         ],
                     },
@@ -281,14 +277,16 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                         ],
                         joins: {
                             bookables: {
-                                conditions: [{
-                                    bookingType: {
-                                        in: {
-                                            values: [BookingType.self_approved],
-                                            not: true,
+                                conditions: [
+                                    {
+                                        bookingType: {
+                                            in: {
+                                                values: [BookingType.self_approved],
+                                                not: true,
+                                            },
                                         },
                                     },
-                                }],
+                                ],
                             },
                         },
                     },

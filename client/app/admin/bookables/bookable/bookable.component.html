@@ -1,7 +1,14 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'bookable']"
-    ></app-detail-header>
+    <app-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'bookable']">
+        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+            <div fxLayout="column" style="text-align:right" *ngIf="form.get('verificationDate').value">
+                <div class="mat-body-2">Dernière vérification</div>
+                <div>{{ form.get('verificationDate').value | date: 'longDate' }}</div>
+            </div>
+            <button mat-flat-button color="primary" (click)="verify()" *ngIf="showVerified()">Marquer comme vérifié</button>
+        </div>
+    </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -9,14 +16,25 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <mat-form-field>
-                            <input matInput formControlName="name" (change)="update()">
-                            <mat-label>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name').hasError('maxlength')">
-                                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
-                        </mat-form-field>
+                        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="30px">
+                            <mat-form-field fxFlex.gt-sm>
+                                <input matInput formControlName="name" (change)="update()">
+                                <mat-label>Nom</mat-label>
+                                <mat-error *ngIf="form.get('name').hasError('maxlength')">
+                                    Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                                </mat-error>
+                                <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <input matInput formControlName="code" (change)="update()">
+                                <mat-label>Code</mat-label>
+                                <mat-error *ngIf="form.get('code').hasError('maxlength')">
+                                    Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
+                                </mat-error>
+                                <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
+                            </mat-form-field>
+                        </div>
 
                         <mat-form-field>
                             <mat-label>Description</mat-label>
@@ -34,40 +52,39 @@
                             ></textarea>
                         </mat-form-field>
 
-                    </div>
-
-                    <div fxFlex="33" fxLayout="column" *ngIf="data.bookingType">
-
-                        <mat-form-field>
-                            <input matInput formControlName="code" (change)="update()">
-                            <mat-label>Code</mat-label>
-                            <mat-error *ngIf="form.get('code').hasError('maxlength')">
-                                Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <mat-checkbox formControlName="isActive" (change)="update()" class="margin-bottom">Disponible pour réservation</mat-checkbox>
-
-                        <app-select-enum enumName="BookableState" formControlName="state" (selectionChange)="update()" placeholder="État"></app-select-enum>
-
-                        <mat-form-field>
-                            <mat-label>Date de vérification</mat-label>
-                            <input matInput formControlName="verificationDate" (dateChange)="update()" [matDatepicker]="picker">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-
                         <mat-divider class="margin-bottom"></mat-divider>
 
-                        <mat-form-field>
+                        <div fxLayout="row">
+                            <app-select-enum enumName="BookableState"
+                                             formControlName="state"
+                                             (selectionChange)="update()"
+                                             placeholder="État"
+                            ></app-select-enum>
+                        </div>
+
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+
+                        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
+                            <h2 class="mat-title no-margin" fxFlex>Réservation</h2>
+                            <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
+                        </div>
+
+                        <app-select-enum enumName="BookingType"
+                                         formControlName="bookingType"
+                                         (selectionChange)="update()"
+                                         placeholder="Type de réservation"
+                        ></app-select-enum>
+
+                        <mat-form-field *ngIf="isBookingPriceApplicable()">
                             <mat-label>Prix initial</mat-label>
                             <input matInput type="number" formControlName="initialPrice" (change)="update()">
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('initialPrice').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field>
+                        <mat-form-field *ngIf="isBookingPriceApplicable()">
                             <mat-label>Prix périodique</mat-label>
                             <input matInput type="number" formControlName="periodicPrice" (change)="update()">
                             <div matSuffix>CHF</div>
@@ -79,7 +96,29 @@
                             <input matInput type="number" formControlName="simultaneousBookingMaximum" (change)="update()">
                         </mat-form-field>
 
-                        <mat-divider class="margin-bottom"></mat-divider>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+                        <div *ngIf="data.model.id">
+                            <h2 class="mat-title">Certifications</h2>
+                            <app-relations [main]="data.model"
+                                           [service]="licenseService"
+                                           [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
+                                           placeholder="Associer à une certification"
+                            >
+                                <ng-template let-item="item">
+                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                        <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
+                                    </div>
+                                </ng-template>
+                            </app-relations>
+                        </div>
+                    </div>
+                    <div fxFlex="33" fxLayout="column">
 
                         <div *ngIf="data.model.id">
                             <h2 class="mat-title">Tags</h2>
@@ -97,43 +136,6 @@
                                     </div>
                                 </ng-template>
                             </app-relations>
-                        </div>
-
-                    </div>
-                </div>
-
-                <mat-divider></mat-divider>
-
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
-                        <div *ngIf="data.model.id">
-                            <h2 class="mat-title">Certifications</h2>
-                            <app-relations [main]="data.model"
-                                           [service]="licenseService"
-                                           [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
-
-                                           placeholder="Associer à une certification"
-                            >
-                                <ng-template let-item="item">
-                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
-                                    </div>
-                                </ng-template>
-                            </app-relations>
-                        </div>
-                    </div>
-                    <div fxFlex="33" fxLayout="column">
-                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom">
-                            <h2 class="mat-title">Type de réservation</h2>
-                            <mat-button-toggle-group #group="matButtonToggleGroup"
-                                                     formControlName="bookingType"
-                                                     (change)="update()"
-                                                     [vertical]="true"
-                            >
-                                <mat-button-toggle *ngFor="let type of data.bookingType" [value]="type.value">
-                                    {{ type.name }}
-                                </mat-button-toggle>
-                            </mat-button-toggle-group>
                         </div>
                     </div>
                 </div>

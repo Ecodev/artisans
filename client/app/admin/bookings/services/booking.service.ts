@@ -55,14 +55,14 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
             groups: [
                 {
 
-                    conditions: [{endDate: {null: {not: false}}}],
+                    conditions: [{endDate: {null: {}}}],
                     joins: {bookables: {type: JoinType.leftJoin, conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
                 },
                 {
                     groupLogic: LogicalOperator.OR,
                     conditions: [
                         {
-                            endDate: {null: {not: false}},
+                            endDate: {null: {}},
                             bookables: {empty: {}},
                         },
                     ],
@@ -89,7 +89,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
             groups: [
                 {
                     conditions: [{status: {equal: {value: BookingStatus.application}}}],
-                    joins: {bookables: {conditions: [{bookableTags: {have: {values: ['6008'], not: false}}}]}},
+                    joins: {bookables: {conditions: [{bookableTags: {have: {values: ['6008']}}}]}},
                 },
             ],
         },

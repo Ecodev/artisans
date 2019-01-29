@@ -69,7 +69,7 @@ export class UserComponent
                         {
                             owner: {have: {values: [this.data.model.id]}},
                             status: {equal: {value: BookingStatus.booked}},
-                            endDate: {null: {not: false}},
+                            endDate: {null: {}},
 
                         },
                     ],
@@ -93,7 +93,7 @@ export class UserComponent
                         {
                             owner: {have: {values: [this.data.model.id]}},
                             status: {equal: {value: BookingStatus.booked}},
-                            endDate: {null: {not: false}},
+                            endDate: {null: {}},
                         },
                     ],
                     joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}},

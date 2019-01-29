@@ -2,42 +2,30 @@
 
     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
         <h1 class="mat-display-1" fxFlex>Nouvelle sortie</h1>
-
     </div>
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
 
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="30px">
 
-            <mat-card fxLayout="column" class="no-padding">
-
-                <div class="bookingImg"
-                     style="background-image:url(https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80)"
-                ></div>
-
-                <div class="padding" fxLayout="column" fxLayoutGap="20px">
-                    <div fxLayout="column">
-                        <h2 class="mat-title">Matériel</h2>
-                        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
-                            <div class="mat-body-2" fxFlex>{{ bookable?.name || 'Mon propre matériel'}}</div>
-                            <mat-divider [vertical]="true" *ngIf="bookable"></mat-divider>
-                            <div class="mat-body-2">{{ bookable?.code }}</div>
-                        </div>
-                    </div>
-                    <div>
-                        <!--<button mat-stroked-button>Changer</button>-->
-                    </div>
+            <app-card>
+                <h2 class="mat-title">Matériel</h2>
+                <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+                    <div class="mat-body-2" fxFlex>{{ bookable?.name || 'Mon propre matériel'}}</div>
+                    <mat-divider [vertical]="true" *ngIf="bookable"></mat-divider>
+                    <div class="mat-body-2">{{ bookable?.code }}</div>
                 </div>
+                <div>
+                    <!--<button mat-stroked-button>Changer</button>-->
+                </div>
+            </app-card>
 
-            </mat-card>
-
-            <mat-card fxLayout="column" class="no-padding">
-
-                <div class="bookingImg" fxLayout="row" fxLayoutAlign="center center">
+            <app-card>
+                <card-illustration>
                     <ngx-avatar *ngIf="!!booking.owner" [name]="booking.owner.name" [size]="150"></ngx-avatar>
                     <ngx-avatar *ngIf="!booking.owner" name="Invité" [size]="150"></ngx-avatar>
-                </div>
+                </card-illustration>
 
-                <div class="padding" fxLayout="column" fxLayoutGap="20px">
+                <div fxLayout="column" fxLayoutGap="10px">
                     <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
                         <h2 class="mat-title" *ngIf="responsible === 1">Responsable</h2>
                         <h2 class="mat-title" *ngIf="responsible === 2">Pour</h2>
@@ -53,8 +41,7 @@
                         </mat-button-toggle-group>
                     </div>
                 </div>
-
-            </mat-card>
+            </app-card>
         </div>
 
         <div fxFlex="none"

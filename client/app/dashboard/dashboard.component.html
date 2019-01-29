@@ -1,8 +1,31 @@
-<div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="70px" fxLayoutAlign="center center">
+<div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center">
 
-    <div fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="column" class="padding margin-top">
 
-        <h1 class="mat-display-2 margin-bottom">Annoncer une sortie</h1>
+        <h1 class="mat-display-2 margin-bottom text-center" *ngIf="userRunningBookings?.length">Vos sorties en cours</h1>
+
+        <div fxLayout="row" overflow-x>
+            <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="20px" style="padding:4px;margin:auto">
+                <app-card *ngFor="let booking of userRunningBookings; let i = index"
+                          class="no-padding"
+                          [style.min-width.px]="300"
+                          [@terminate]="'out'"
+                >
+                    <div fxLayout="column" fxLayoutGap="10px">
+                        <div class="mat-body-2">{{ booking.owner?.name || 'Invité'}}</div>
+                        <div class="mat-body-1">{{ booking.bookables[0]?.name || 'Matériel personnel'}}</div>
+                        <div>
+                            <button mat-flat-button color="warn" (click)="endBooking(booking, i)">Terminer</button>
+                        </div>
+                    </div>
+                </app-card>
+            </div>
+        </div>
+    </div>
+
+    <div fxLayout="column" fxLayoutAlign="start center" class="dashboardGroup">
+
+        <h1 class="mat-display-2 margin-bottom text-center">Annoncer une sortie</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
             <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-scan">
                 <app-icon name="qr" [size]="70"></app-icon>
@@ -21,9 +44,9 @@
         </div>
     </div>
 
-    <div fxLayout="column" fxLayoutAlign="start center">
+    <div fxLayout="column" fxLayoutAlign="start center" class="dashboardGroup margin-bottom padding-bottom">
 
-        <h1 class="mat-display-2 margin-bottom">Autres</h1>
+        <h1 class="mat-display-2 margin-bottom text-center">Autres</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
             <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
                 <app-icon name="doors" [size]="70"></app-icon>
@@ -39,6 +62,8 @@
                 <app-icon name="administrator" [size]="70"></app-icon>
                 Administration
             </a>
+
+            <mat-divider [vertical]="true"></mat-divider>
 
             <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="userService.logout()">
                 <app-icon name="exit" [size]="70"></app-icon>

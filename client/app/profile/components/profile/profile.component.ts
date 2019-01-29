@@ -35,11 +35,9 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
     any> implements OnInit, OnDestroy {
 
     public BookableService = BookableService; // template usage
-    public runningNavigationsDS: AppDataSource;
     public runningServicesDS: AppDataSource;
     public pendingApplicationsDS: AppDataSource;
 
-    public runningNavigations: AutoRefetchQueryRef<BookingsQuery['bookings']>;
     public runningServices: AutoRefetchQueryRef<BookingsQuery['bookings']>;
     public pendingApplications: AutoRefetchQueryRef<BookingsQuery['bookings']>;
 
@@ -60,11 +58,9 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
     ngOnInit() {
         super.ngOnInit();
 
-        this.runningNavigations = this.userService.getRunningNavigations(this.data.model);
         this.runningServices = this.userService.getRunningServices(this.data.model);
         this.pendingApplications = this.userService.getPendingApplications(this.data.model);
 
-        this.runningNavigationsDS = new AppDataSource(this.runningNavigations.valueChanges);
         this.runningServicesDS = new AppDataSource(this.runningServices.valueChanges);
         this.pendingApplicationsDS = new AppDataSource(this.pendingApplications.valueChanges);
 
@@ -80,7 +76,6 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
 
     ngOnDestroy() {
         super.ngOnDestroy();
-        this.runningNavigations.unsubscribe();
         this.runningServices.unsubscribe();
         this.pendingApplications.unsubscribe();
     }

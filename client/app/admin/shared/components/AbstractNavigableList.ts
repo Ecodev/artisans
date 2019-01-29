@@ -52,8 +52,8 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
                     this.clearSearch();
 
                 } else {
-                    // parentCondition = {null: {not: false}}; // todo : remove if verything ok with bellow version
-                    parentCondition = {empty: {not: false}};
+                    // parentCondition = {null: {}}; // todo : remove if verything ok with bellow version
+                    parentCondition = {empty: {}};
                     this.breadcrumbs = [];
                 }
 
@@ -89,7 +89,7 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
 
             // If there is no search, restore only root elements
             this.variablesManager.set('navigation', {
-                filter: {groups: [{conditions: [{parents: {empty: {not: false}}}]}]},
+                filter: {groups: [{conditions: [{parents: {empty: {}}}]}]},
             } as Vall);
             // todo : check why without "as Vall" it errors. Vall is supposed to be QueryVariables, and filter too.
         }

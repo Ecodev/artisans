@@ -10,15 +10,9 @@
         margin: auto;
     }
 
-    .bookingImg {
-        background-size: cover;
-        background-position: center;
-        height: 200px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-    }
 
-    mat-card {
+
+    app-card {
         min-width: 300px
     }
 }

@@ -21,6 +21,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { MoneyComponent } from '../components/money/money.component';
 import { BookableMetadataComponent } from '../components/bookable-metadata/bookable-metadata.component';
 import { FocusDirective } from '../directives/focus';
+import { CardComponent } from '../components/card/card.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { FocusDirective } from '../directives/focus';
         MoneyComponent,
         BookableMetadataComponent,
         FocusDirective,
+        CardComponent,
     ],
     imports: [
         CommonModule,
@@ -70,6 +72,7 @@ import { FocusDirective } from '../directives/focus';
         MoneyComponent,
         BookableMetadataComponent,
         FocusDirective,
+        CardComponent,
     ],
 })
 export class IchtusModule {

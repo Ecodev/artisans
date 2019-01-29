@@ -235,7 +235,7 @@ export class HierarchicSelectorService {
             }
 
             config.parentsFilters.forEach(f => {
-                fieldCondition[f] = {empty: {not: false}};
+                fieldCondition[f] = {empty: {}};
             });
 
         } else {

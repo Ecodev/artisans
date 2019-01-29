@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ScanComponent } from './components/scan/scan.component';
 import { BookingRoutingModule } from './booking-routing.module';
@@ -21,6 +21,8 @@ import { SelfApprovedBookingComponent } from './components/self-approved-booking
         IchtusModule,
         MaterialModule,
     ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
 })
 export class BookingModule {
 }

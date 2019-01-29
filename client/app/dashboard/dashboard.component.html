@@ -4,12 +4,12 @@
 
         <h1 class="mat-display-2 margin-bottom">Annoncer une sortie</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/scan">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-scan">
                 <app-icon name="qr" [size]="70"></app-icon>
                 en scannant un code QR
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-code">
                 <app-icon name="code" [size]="70"></app-icon>
                 en saisissant un code
             </a>

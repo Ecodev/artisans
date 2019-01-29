@@ -31,6 +31,18 @@ describe('UserService', () => {
         door2: true,
         door3: true,
         door4: true,
+        licenses: [
+            {
+                id: '456',
+                name: 'test string',
+                __typename: 'License',
+            },
+            {
+                id: '456',
+                name: 'test string',
+                __typename: 'License',
+            },
+        ],
         account: {
             id: '456',
             balance: 'test string',

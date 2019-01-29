@@ -50,7 +50,7 @@ export class ScanComponent implements OnInit, OnDestroy {
                 this.canvasRef.nativeElement.height);
 
             const imgData = this.context.getImageData(0, 0, this.canvasRef.nativeElement.width, this.canvasRef.nativeElement.height);
-            const code = jsQR(imgData.data, imgData.width, imgData.height, );
+            const code = jsQR(imgData.data, imgData.width, imgData.height);
 
             if (code && code.data) {
                 const parsedCode = code.data.toLowerCase().replace('https://ichtus.club/booking/', '');

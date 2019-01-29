@@ -12,6 +12,7 @@ import {
 } from './booking.queries';
 import {
     BookingInput,
+    BookingPartialInput,
     BookingQuery,
     BookingQueryVariables,
     BookingsQuery,
@@ -31,7 +32,7 @@ import { forkJoin, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EnumService } from '../../../shared/services/enum.service';
 import { BookingResolve } from '../booking';
-import { LinkableObject, LinkMutationService } from '../../../shared/services/link-mutation.service';
+import { LinkMutationService } from '../../../shared/services/link-mutation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -157,17 +158,26 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
         }));
     }
 
-    public createWithBookable(bookable: LinkableObject,
-                              user: { id: string },
-                              status: BookingStatus = BookingStatus.application): Observable<CreateBookingMutation['createBooking']> {
+    /**
+     * Create a booking with given owner and bookable.
+     * Accepts optional third parameter with other default fields of booking
+     * @param bookable BookableQuery['bookable'] and LinkableObject TODO : type when we can #6113
+     */
+    public createWithBookable(bookable,
+                              owner: { id: string },
+                              booking: BookingPartialInput = {}): Observable<CreateBookingMutation['createBooking']> {
 
         const subject = new Subject<CreateBookingMutation['createBooking']>();
 
-        const booking: BookingInput = {
-            status: status,
-            startDate: (new Date()).toISOString(),
-            owner: user.id,
-        };
+        if (!booking.startDate) {
+            booking.startDate = (new Date()).toISOString();
+        }
+
+        if (!booking.status) {
+            booking.status = BookingStatus.application;
+        }
+
+        booking.owner = owner ? owner.id : null;
 
         this.create(booking).subscribe(newBoooking => {
             this.linkMutationService.link(newBoooking, bookable).subscribe(() => {

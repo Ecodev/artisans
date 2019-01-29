@@ -50,4 +50,8 @@ export class BookableComponent
         }
     }
 
+    public book() {
+        this.router.navigate(['..', 'new', {bookable: this.data.model}]);
+    }
+
 }

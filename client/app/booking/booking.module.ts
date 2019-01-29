@@ -6,12 +6,14 @@ import { IchtusModule } from '../shared/modules/ichtus.module';
 import { MaterialModule } from '../shared/modules/material.module';
 import { BookableComponent } from './bookable/bookable.component';
 import { CodeInputComponent } from './components/code-input/code-input.component';
+import { SelfApprovedBookingComponent } from './components/self-approved-booking/self-approved-booking.component';
 
 @NgModule({
     declarations: [
         ScanComponent,
         BookableComponent,
         CodeInputComponent,
+        SelfApprovedBookingComponent,
     ],
     imports: [
         CommonModule,

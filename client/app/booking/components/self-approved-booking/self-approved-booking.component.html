@@ -1,0 +1,106 @@
+<div fxLayout="column" fxFlex>
+
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <h1 class="mat-display-1" fxFlex>Nouvelle sortie</h1>
+
+    </div>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
+
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="30px">
+
+            <mat-card *ngIf="bookable" fxLayout="column" class="no-padding">
+
+                <div class="bookingImg"
+                     style="background-image:url(https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80)"
+                ></div>
+
+                <div class="padding" fxLayout="column" fxLayoutGap="20px">
+                    <div fxLayout="column">
+                        <h2 class="mat-title">Matériel</h2>
+                        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
+                            <div class="mat-body-2" fxFlex>{{ bookable.name }}</div>
+                            <mat-divider [vertical]="true"></mat-divider>
+                            <div class="mat-body-2">{{ bookable.code }}</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button mat-stroked-button>Changer</button>
+                    </div>
+                </div>
+
+            </mat-card>
+
+            <mat-card *ngIf="bookable" fxLayout="column" class="no-padding">
+
+                <div class="bookingImg" fxLayout="row" fxLayoutAlign="center center">
+                    <ngx-avatar *ngIf="!!booking.owner" [name]="booking.owner.name" [size]="150"></ngx-avatar>
+                    <ngx-avatar *ngIf="!booking.owner" name="Invité" [size]="150"></ngx-avatar>
+                </div>
+
+                <div class="padding" fxLayout="column" fxLayoutGap="20px">
+                    <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
+                        <h2 class="mat-title" *ngIf="responsible === 1">Responsable</h2>
+                        <h2 class="mat-title" *ngIf="responsible === 2">Pour</h2>
+                        <div>
+                            <span class="mat-body-2 no-margin">{{ booking.owner?.name || 'Un Invité'}}</span>
+                            <span class="mat-body-1" *ngIf="responsible === 2">&nbsp;sous votre responsabilité</span>
+                        </div>
+                    </div>
+                    <div>
+                        <mat-button-toggle-group [(ngModel)]="responsible">
+                            <mat-button-toggle (click)="forMe()" [value]="1">Pour moi</mat-button-toggle>
+                            <mat-button-toggle (click)="booking.owner = null" [value]="2">Pour un invité</mat-button-toggle>
+                        </mat-button-toggle-group>
+                    </div>
+                </div>
+
+            </mat-card>
+        </div>
+
+        <div fxFlex="none"
+             fxFlex.gt-sm
+             fxLayout="column"
+             fxLayout.gt-xs="row"
+             fxLayoutGap="20px"
+             fxLayout.gt-sm="column"
+             fxLayoutGap.gt-sm="0px"
+        >
+
+            <div fxFlex="none" fxFlex.gt-xs fxFlex.gt-sm="none" fxLayout="column">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Nombre de participants</mat-label>
+                        <input matInput type="number" [(ngModel)]="booking.participantCount">
+                    </mat-form-field>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>Destination</mat-label>
+                    <input matInput [(ngModel)]="booking.destination" />
+                </mat-form-field>
+            </div>
+
+            <div fxFlex="none" fxFlex.gt-xs fxFlex.gt-sm="none" fxLayout="column">
+
+                <mat-form-field>
+                    <mat-label>Heure estimée de retour</mat-label>
+                    <input matInput [(ngModel)]="booking.estimatedEndDate">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Remarques</mat-label>
+                    <textarea matInput
+                              [(ngModel)]="booking.startComment"
+                              matTextareaAutosize
+                              [matAutosizeMinRows]="5"
+                              [matAutosizeMaxRows]="5"
+                    ></textarea>
+                </mat-form-field>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<app-fixed-button (click)="createBooking()" icon="check"></app-fixed-button>

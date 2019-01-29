@@ -14,7 +14,7 @@
 
     <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
         <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', data.model.id]">Administration</a>
-        <button mat-flat-button color="primary" *ngIf="canBook | async">Réserver</button>
+        <a mat-flat-button color="primary" *ngIf="canBook | async" [routerLink]="['../new', {bookable: data.model.id}]">Réserver</a>
         <!--<button mat-flat-button color="warn" (click)="bookingService.flagEndDate(data.model.id)">Terminer</button>-->
     </div>
 

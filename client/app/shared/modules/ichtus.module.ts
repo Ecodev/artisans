@@ -20,6 +20,7 @@ import { SelectEnumComponent } from '../components/select-enum/select-enum.compo
 import { AvatarModule } from 'ngx-avatar';
 import { MoneyComponent } from '../components/money/money.component';
 import { BookableMetadataComponent } from '../components/bookable-metadata/bookable-metadata.component';
+import { FocusDirective } from '../directives/focus';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { BookableMetadataComponent } from '../components/bookable-metadata/booka
         EnumPipe,
         CapitalizePipe,
         MoneyComponent,
-        BookableMetadataComponent
+        BookableMetadataComponent,
+        FocusDirective,
     ],
     imports: [
         CommonModule,
@@ -66,7 +68,8 @@ import { BookableMetadataComponent } from '../components/bookable-metadata/booka
         CapitalizePipe,
         AvatarModule,
         MoneyComponent,
-        BookableMetadataComponent
+        BookableMetadataComponent,
+        FocusDirective,
     ],
 })
 export class IchtusModule {

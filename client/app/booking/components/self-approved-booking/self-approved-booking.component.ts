@@ -32,9 +32,12 @@ export class SelfApprovedBookingComponent implements OnInit {
 
         this.forMe();
 
-        this.bookableService.getOne(this.route.snapshot.params.bookable).subscribe(bookable => {
-            this.bookable = bookable;
-        });
+        const bookable = this.route.snapshot.params.bookable;
+        if (bookable) {
+            this.bookableService.getOne(bookable).subscribe(newBookable => {
+                this.bookable = newBookable;
+            });
+        }
 
     }
 

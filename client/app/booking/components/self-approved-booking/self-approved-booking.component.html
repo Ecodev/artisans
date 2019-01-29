@@ -8,7 +8,7 @@
 
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="30px">
 
-            <mat-card *ngIf="bookable" fxLayout="column" class="no-padding">
+            <mat-card fxLayout="column" class="no-padding">
 
                 <div class="bookingImg"
                      style="background-image:url(https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80)"
@@ -18,9 +18,9 @@
                     <div fxLayout="column">
                         <h2 class="mat-title">Matériel</h2>
                         <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
-                            <div class="mat-body-2" fxFlex>{{ bookable.name }}</div>
-                            <mat-divider [vertical]="true"></mat-divider>
-                            <div class="mat-body-2">{{ bookable.code }}</div>
+                            <div class="mat-body-2" fxFlex>{{ bookable?.name || 'Mon propre matériel'}}</div>
+                            <mat-divider [vertical]="true" *ngIf="bookable"></mat-divider>
+                            <div class="mat-body-2">{{ bookable?.code }}</div>
                         </div>
                     </div>
                     <div>
@@ -30,7 +30,7 @@
 
             </mat-card>
 
-            <mat-card *ngIf="bookable" fxLayout="column" class="no-padding">
+            <mat-card fxLayout="column" class="no-padding">
 
                 <div class="bookingImg" fxLayout="row" fxLayoutAlign="center center">
                     <ngx-avatar *ngIf="!!booking.owner" [name]="booking.owner.name" [size]="150"></ngx-avatar>
@@ -42,7 +42,7 @@
                         <h2 class="mat-title" *ngIf="responsible === 1">Responsable</h2>
                         <h2 class="mat-title" *ngIf="responsible === 2">Pour</h2>
                         <div>
-                            <span class="mat-body-2 no-margin">{{ booking.owner?.name || 'Un Invité'}}</span>
+                            <span class="mat-body-2 no-margin">{{ booking.owner?.name || 'Un invité'}}</span>
                             <span class="mat-body-1" *ngIf="responsible === 2">&nbsp;sous votre responsabilité</span>
                         </div>
                     </div>

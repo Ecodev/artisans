@@ -161,7 +161,7 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
     /**
      * Create a booking with given owner and bookable.
      * Accepts optional third parameter with other default fields of booking
-     * @param bookable BookableQuery['bookable'] and LinkableObject TODO : type when we can #6113
+     * @param bookable null | BookableQuery['bookable'] and LinkableObject TODO : type when we can #6113
      */
     public createWithBookable(bookable,
                               owner: { id: string },
@@ -180,10 +180,15 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
         booking.owner = owner ? owner.id : null;
 
         this.create(booking).subscribe(newBoooking => {
-            this.linkMutationService.link(newBoooking, bookable).subscribe(() => {
+            if (bookable) {
+                this.linkMutationService.link(newBoooking, bookable).subscribe(() => {
+                    subject.next(newBoooking);
+                    subject.complete();
+                });
+            } else {
                 subject.next(newBoooking);
                 subject.complete();
-            });
+            }
         });
 
         return subject.asObservable();

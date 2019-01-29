@@ -1,19 +1,18 @@
 START TRANSACTION;
 
-REPLACE INTO user (id, login, first_name, last_name, email, password, role, status, welcome_session_date) VALUES
-(1000, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00'),
-(1001, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00'),
-(1002, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00'),
-(1003, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00'),
-(1004, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL),
-(1005, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', NULL),
-(1006, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', NULL);
-
--- Family members accounts
-REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, family_relationship) VALUES
-(1007, 1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('conjoint'), 'individual', 'active', 'partner'),
-(1008, 1002, 'son', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'individual', 'active', 'child'),
-(1009, 1002, 'daughter', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'individual', 'active', 'child');
+REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, welcome_session_date, family_relationship) VALUES
+(1000, NULL, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00', 'householder'),
+(1001, NULL, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00', 'householder'),
+(1002, NULL, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00', 'householder'),
+(1003, NULL, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00', 'householder'),
+(1004, NULL, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL, 'householder'),
+(1005, NULL, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', '2018-01-01 12:00:00', 'householder'),
+(1006, NULL, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', '2018-01-01 12:00:00', 'householder'),
+(1007, 1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('conjoint'), 'individual', 'active', '2018-01-01 12:00:00', 'partner'),
+(1008, 1002, 'son', 'Fi', 'ls', 'fils@example.com', MD5('fils'), 'individual', 'active', '2018-01-01 12:00:00', 'child'),
+(1009, 1002, 'daughter', 'Fi', 'Lle', 'fille@example.com', MD5('fille'), 'individual', 'active' ,'2018-01-01 12:00:00', 'child'),
+(1010, NULL, 'voiliermember', 'Voilier', 'Member', 'voiliermember@example.com', MD5('voiliermember'), 'member', 'archived', '2018-01-01 12:00:00', 'householder'),
+(1011, 1010, 'voilierfamily', 'Voilier', 'Family', 'voilierfamily@example.com', MD5('voilierfamily'), 'individual', 'active', '2018-01-01 12:00:00', 'partner');
 
 REPLACE INTO account (id, owner_id, balance, iban, name) VALUES
 (6000, 1002, 100.00, 'CH1909000000177406305', 'Compte de membre'),
@@ -22,7 +21,10 @@ REPLACE INTO account (id, owner_id, balance, iban, name) VALUES
 (6003, 1007, 50.00, 'CH1909000000177396305', 'Compte de conjoint');
 
 REPLACE INTO license (id, name) VALUES
-(2000, 'Test license 2000');
+(2000, 'Voilier');
+
+REPLACE INTO license_user (license_id, user_id) VALUES
+(2000, 1010);
 
 REPLACE INTO bookable_tag (id, name) VALUES
 (6000, 'SUP'),
@@ -39,13 +41,19 @@ REPLACE INTO bookable_tag (id, name) VALUES
 (6011, 'Flotteurs');
 
 REPLACE INTO bookable (id, periodic_price, initial_price, name, code, booking_type, description) VALUES
-(3000, 0, 0, 'Stand up S28 (3000, self-approved, free)', 'S28', 'self_approved', 'Pour carnet de sortie. No, no, no, no. You gotta listen to the way people talk. You don''t say "affirmative," or some shit like that. You say "no problemo." And if someone comes on to you with an attitude you say "eat me." And if you want to shine them on it''s "hasta la vista, baby."'),
-(3001, 0, 0, 'Canoe C32 (3001, self-approved, free)', 'C32', 'self_approved', 'Pour carnet de sortie. Crom, I have never prayed to you before. I have no tongue for it. No one, not even you, will remember if we were good men or bad. Why we fought, or why we died. All that matters is that two stood against many. That''s what''s important! Valor pleases you, Crom... so grant me one request. Grant me revenge! And if you do not listen, then the HELL with you!'),
-(3002, 10, 0, 'Casier virtuel (3002, admin-approved, periodic)', 'casier', 'admin_approved', 'Pour demande de stockage. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
-(3003, 10, 0, 'Casier 1012 (3003, admin-only, periodic)', 'CA1012', 'admin_only', 'Casier XYZ. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-(3004, 20, 0, 'Membre NFT (3004, admin-approved, periodic)', 'e', 'admin_approved', 'Service supplémentaire. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-(3005, 0, 10, 'Frais ouverture (3005, mandatory, initial)', 'f', 'mandatory', 'Pour adhésion et cotisation. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
-(3006, 90, 0, 'Cotisation (3006, mandatory, periodic)', 'g', 'mandatory', 'Pour adhésion et cotisation. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.');
+(3000, 0, 0, 'Stand up S28 (3000, carnet de sortie, occupé)', 'S1', 'self_approved', 'Pour carnet de sortie. No, no, no, no. You gotta listen to the way people talk. You don''t say "affirmative," or some shit like that. You say "no problemo." And if someone comes on to you with an attitude you say "eat me." And if you want to shine them on it''s "hasta la vista, baby."'),
+(3001, 0, 0, 'Canoe C32 (3001, carnet de sortie, libre)', 'C1', 'self_approved', 'Pour carnet de sortie. Crom, I have never prayed to you before. I have no tongue for it. No one, not even you, will remember if we were good men or bad. Why we fought, or why we died. All that matters is that two stood against many. That''s what''s important! Valor pleases you, Crom... so grant me one request. Grant me revenge! And if you do not listen, then the HELL with you!'),
+(3002, 10, 0, 'Casier virtuel (3002, sur demande, periodic)', 'casier', 'admin_approved', 'Pour demande de stockage. Cras mattis consectetur purus sit amet fermentum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
+(3003, 10, 0, 'Casier 1012 (3003, inventaire / spécifique admin, periodic)', 'CA1012', 'admin_only', 'Casier XYZ. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(3004, 20, 0, 'Membre NFT (3004, inventaire / spécifique admin, periodic)', 'e', 'admin_approved', 'Service supplémentaire. Sed posuere consectetur est at lobortis. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(3005, 0, 10, 'Frais ouverture (3005, obligatoire, initial)', 'f', 'mandatory', 'Pour adhésion et cotisation. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.'),
+(3006, 90, 0, 'Cotisation (3006, obligatoire, periodic)', 'g', 'mandatory', 'Pour adhésion et cotisation. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.'),
+(3007, 90, 0, 'Voilier 1 (3007, carnet de sortie, avec certification, occupé)', 'V1', 'self_approved', 'Pour carnet de sortie, mais avec certification'),
+(3008, 90, 0, 'Voilier 2 (3008, carnet de sortie, avec certification, libre)', 'V2', 'self_approved', 'Pour carnet de sortie, mais avec certification');
+
+REPLACE INTO license_bookable (license_id, bookable_id) VALUES
+(2000, 3007),
+(2000, 3008);
 
 REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
 (6000, 3000),
@@ -56,7 +64,9 @@ REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
 (6010, 3003),
 (6007, 3004),
 (6007, 3005),
-(6007, 3006);
+(6007, 3006),
+(6005, 3007),
+(6005, 3008);
 
 REPLACE INTO booking (id, owner_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
 (4000, 1002, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
@@ -68,7 +78,8 @@ REPLACE INTO booking (id, owner_id, status, start_date, end_date, estimated_end_
 (4007, 1005, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
 (4008, NULL, 'booked', '2018-01-02 13:32:51', NULL, 'Never', 'Land', 'Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna.'),
 (4009, 1002, 'booked', '2018-01-02 13:32:51', NULL, 'Yesterday', 'Narnia', 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'),
-(4010, NULL, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.');
+(4010, NULL, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.'),
+(4011, NULL, 'booked', '2018-01-02 13:32:51', NULL, '21 oct 2015', 'Twin Pines Mall', 'Where we go we don''t need roads');
 
 -- Only a bookable by booking
 REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
@@ -79,7 +90,8 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4005, 3006),
 (4006, 3004),
 (4007, 3006),
-(4008, 3000);
+(4008, 3000),
+(4011, 3007);
 
 
 REPLACE INTO image (id, bookable_id, filename, width, height) VALUES

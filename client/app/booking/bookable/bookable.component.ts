@@ -13,7 +13,7 @@ import { BookableService } from '../../admin/bookables/services/bookable.service
 import { AbstractDetail } from '../../admin/shared/components/AbstractDetail';
 import { BookingService } from '../../admin/bookings/services/booking.service';
 import { UserService } from '../../admin/users/services/user.service';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-bookable',
@@ -29,8 +29,11 @@ export class BookableComponent
         UpdateBookableMutationVariables,
         any> implements OnInit {
 
+    public canBook: Observable<boolean>;
+    public canAccessAdmin: boolean;
+
     constructor(alertService: AlertService,
-                bookableService: BookableService,
+                private bookableService: BookableService,
                 router: Router,
                 route: ActivatedRoute,
                 public bookingService: BookingService,
@@ -41,9 +44,10 @@ export class BookableComponent
 
     ngOnInit() {
         super.ngOnInit();
+        if (this.data.model) {
+            this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
+            this.canBook = this.bookableService.canBook(this.data.model, this.userService.getCachedCurrentUser());
+        }
     }
 
-    public isAdmin() {
-        return this.userService.getCurrentUser().pipe(map(u => UserService.canAccessAdmin(u)));
-    }
 }

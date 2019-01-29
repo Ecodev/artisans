@@ -10,6 +10,7 @@ export const bookableMetaFragment = gql`
         state
         verificationDate
         licenses {
+            id
             name
         }
         initialPrice

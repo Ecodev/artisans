@@ -1,4 +1,6 @@
 :host {
+    flex: 1;
+    overflow: auto;
     .cover {
         min-height: 400px;
         background-size: cover;

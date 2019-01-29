@@ -1,24 +1,29 @@
-<div fxLayout="column" style="max-width:1100px;margin:auto" fxLayoutGap="40px" class="padding">
+<div fxLayout="column" style="max-width:1100px;margin:auto" fxLayoutGap="40px" class="padding" *ngIf="data.model.id">
 
     <div class="cover mat-elevation-z2"
-         style="background-image:url(https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3300&q=80)"
+         style="background-image:url(https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80)"
     ></div>
 
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center">
-        <h1 class="mat-display-1 no-margin-bottom" fxFlex>{{ data.model.name }}</h1>
-        <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
-            <a mat-stroked-button color="primary" *ngIf="isAdmin() | async" [routerLink]="['/admin/bookable', data.model.id]">
-                Administration
-            </a>
-            <button mat-flat-button color="primary">Réserver</button>
+    <div fxLayout="row" fxLayoutAlign="start stretch" class="mat-display-1">
+        <div fxFlex>{{ data.model.name }}</div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxLayout="column" fxLayoutAlign="center">{{ data.model.code }}</div>
         </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+        <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', data.model.id]">Administration</a>
+        <button mat-flat-button color="primary" *ngIf="canBook | async">Réserver</button>
         <!--<button mat-flat-button color="warn" (click)="bookingService.flagEndDate(data.model.id)">Terminer</button>-->
     </div>
 
     <div class="mat-subheading-1" [innerHTML]="data.model.description"></div>
 
-    <div>
-        <h2 class="mat-title">Détails</h2>
-        <app-bookable-metadata [bookable]="data.model"></app-bookable-metadata>
-    </div>
+    <app-bookable-metadata [bookable]="data.model"></app-bookable-metadata>
+</div>
+
+<div *ngIf="!data.model.id" fxFlex fxLayout="column" fxLayoutAlign="center center" class="padding">
+    <div class="mat-display-1" style="text-align:center">Aucun matériel correspondant à ce code n'a été trouvé</div>
+    <button mat-flat-button color="primary" (click)="back()">Revenir à la page précédente</button>
 </div>

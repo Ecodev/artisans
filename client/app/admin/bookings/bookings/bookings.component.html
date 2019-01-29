@@ -56,7 +56,10 @@
                         </div>
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.owner">
                             <ngx-avatar name="invité" [size]="36"></ngx-avatar>
-                            <button mat-button>Invité</button>
+                            <button mat-button>
+                                Invité
+                                <ng-container *ngIf="element.creator">de {{ element.creator.name }}</ng-container>
+                            </button>
                         </div>
                     </td>
                 </ng-container>

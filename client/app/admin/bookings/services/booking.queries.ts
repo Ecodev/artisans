@@ -19,6 +19,10 @@ export const bookingMetaFragment = gql`
             id
             ...userMeta
         }
+        creator {
+            id
+            name
+        }
         bookables {
             id
             name

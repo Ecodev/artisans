@@ -18,4 +18,8 @@ export class AbstractController implements OnDestroy {
         this.ngUnsubscribe.complete(); // unsubscribe everybody
     }
 
+    public back() {
+        window.history.back();
+    }
+
 }

@@ -101,7 +101,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return pass === confirmPass ? null : {notSame: true};
     }
 
-    public static canAccessAdmin(user: CurrentUserForProfileQuery['viewer']) {
+    public static canAccessAdmin(user: CurrentUserForProfileQuery['viewer']): boolean {
         if (!user) {
             return false;
         }
@@ -180,6 +180,10 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
             return this.currentUser;
         }));
+    }
+
+    public getCachedCurrentUser(): CurrentUserForProfileQuery['viewer'] {
+        return this.currentUser;
     }
 
     public login(loginData: LoginMutationVariables): Observable<LoginMutation['login']> {

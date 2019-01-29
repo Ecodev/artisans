@@ -12,7 +12,7 @@
 
         <div fxFlex></div>
 
-        <div fxFlex id="searchByCode" fxLayout="row" fxLayoutAlign="start center">
+        <div fxFlex id="searchByCode" fxLayout="row" fxLayoutAlign="start center" fxHide.xs>
             <input fxFlex placeholder="Recherche par code" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
             <a mat-icon-button [routerLink]="['/booking', code]">
                 <app-icon name="search"></app-icon>
@@ -24,10 +24,6 @@
         </a>
 
         <div fxFlex></div>
-
-        <a mat-icon-button mat-flat-button (click)="userService.logout()" color="warn">
-            <app-icon name="exit_to_app"></app-icon>
-        </a>
 
         <a mat-icon-button routerLink="/profile">
             <ngx-avatar [name]="userService.getCurrentUser().value?.name" [size]="50" style="position:relative;top:-5px;left:-5px"

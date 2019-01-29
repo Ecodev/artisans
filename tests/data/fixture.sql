@@ -147,7 +147,7 @@ REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 
 REPLACE INTO bookable_metadata (id, bookable_id, name, value) VALUES
 (13000, 3000, 'Largeur', '1405 mm'),
-(13001, 3000, 'Hauteur', '160 5mm');
+(13001, 3000, 'Hauteur', '1605 mm');
 
 
 

@@ -41,6 +41,9 @@ export class IconComponent {
         'qr': {
             svg: 'qr.svg',
         },
+        'simple-qr': {
+            svg: 'simple-qr.svg',
+        },
         'own_bookable': {
             svg: 'swimsuit.svg',
         },

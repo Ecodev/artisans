@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\Model\Message;
 use Application\Model\User;
 
 class MessageRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
@@ -22,5 +23,16 @@ class MessageRepository extends AbstractRepository implements LimitedAccessSubQu
         }
 
         return '-1';
+    }
+
+    /**
+     * @return Message[]
+     */
+    public function getAllMessageToSend(): array
+    {
+        $qb = $this->createQueryBuilder('message')
+            ->where('message.dateSent IS NULL');
+
+        return $qb->getQuery()->getResult();
     }
 }

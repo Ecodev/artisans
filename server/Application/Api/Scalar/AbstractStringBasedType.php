@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace Application\Api\Scalar;
 
-use Cake\Chronos\Date;
 use GraphQL\Error\Error;
 use GraphQL\Language\AST\Node;
 use GraphQL\Language\AST\StringValueNode;
 use GraphQL\Type\Definition\ScalarType;
 use GraphQL\Utils\Utils;
 
-class DateType extends ScalarType
+abstract class AbstractStringBasedType extends ScalarType
 {
     /**
-     * @var string
+     * Validate value
+     *
+     * @param mixed $value
+     *
+     * @return bool
      */
-    public $description = 'A date without time, nor timezone.';
+    abstract protected function isValid($value): bool;
 
     /**
      * Serializes an internal value to include in a response.
@@ -27,10 +30,7 @@ class DateType extends ScalarType
      */
     public function serialize($value)
     {
-        if ($value instanceof Date) {
-            return $value->format('Y-m-d');
-        }
-
+        // Assuming internal representation of url is always correct:
         return $value;
     }
 
@@ -43,20 +43,18 @@ class DateType extends ScalarType
      */
     public function parseValue($value)
     {
-        if (!is_string($value)) {
-            throw new \UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));
+        if (!$this->isValid($value)) {
+            throw new \UnexpectedValueException('Query error: Not a valid ' . $this->name . ': ' . Utils::printSafe($value));
         }
 
-        $date = new Date($value);
-        $date = new Date($date->format('Y-m-d'));
-
-        return $date;
+        return $value;
     }
 
     /**
      * Parses an externally provided literal value to use as an input (e.g. in Query AST)
      *
      * @param $ast Node
+     * @param null|array $variables
      *
      * @return null|string
      */
@@ -66,6 +64,10 @@ class DateType extends ScalarType
         // error location in query:
         if (!($ast instanceof StringValueNode)) {
             throw new Error('Query error: Can only parse strings got: ' . $ast->kind, [$ast]);
+        }
+
+        if (!$this->isValid($ast->value)) {
+            throw new Error('Query error: Not a valid ' . $this->name, [$ast]);
         }
 
         return $ast->value;

@@ -34,7 +34,7 @@ class ColorTypeTest extends TestCase
         $type = new ColorType();
 
         if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid color');
+            $this->expectExceptionMessage('Query error: Not a valid Color');
         }
 
         $actual = $type->parseValue($input);
@@ -54,7 +54,7 @@ class ColorTypeTest extends TestCase
         $ast = new StringValueNode(['value' => $input]);
 
         if (!$isValid) {
-            $this->expectExceptionMessage('Query error: Not a valid color');
+            $this->expectExceptionMessage('Query error: Not a valid Color');
         }
 
         $actual = $type->parseLiteral($ast);

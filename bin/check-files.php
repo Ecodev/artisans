@@ -9,7 +9,7 @@
 use Application\Model\Image;
 use Application\Utility;
 
-require_once __DIR__ . '/../htdocs/index.php';
+require_once 'server/cli.php';
 
 $filesInDb = _em()->getRepository(Image::class)->getFilenames();
 $filesOnDisk = glob('data/images/*');

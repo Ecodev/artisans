@@ -33,11 +33,13 @@ class TypesFactory
             \Application\Api\Output\GlobalPermissionsType::class,
             \Application\Api\Output\PermissionsType::class,
             \Application\Api\QueryType::class,
+            \Application\Api\Scalar\ColorType::class,
             \Application\Api\Scalar\ChronosType::class,
             \Application\Api\Scalar\DateType::class,
             \Application\Api\Scalar\EmailType::class,
             \Application\Api\Scalar\LoginType::class,
-            \Application\Api\Scalar\ColorType::class,
+            \Application\Api\Scalar\PasswordType::class,
+            \Application\Api\Scalar\TokenType::class,
             \GraphQL\Upload\UploadType::class,
         ];
 

@@ -43,7 +43,7 @@ class ChronosType extends ScalarType
      */
     public function parseValue($value)
     {
-        if (!is_string($value)) { // quite naive, but after all this is example
+        if (!is_string($value)) {
             throw new \UnexpectedValueException('Cannot represent value as Chronos date: ' . Utils::printSafe($value));
         }
 

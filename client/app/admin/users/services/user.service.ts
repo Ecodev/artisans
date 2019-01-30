@@ -113,7 +113,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     public getEmptyObject(): UserInput {
         return {
             login: '',
-            password: '',
             email: '',
             firstName: '',
             lastName: '',

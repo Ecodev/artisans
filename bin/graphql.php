@@ -10,7 +10,7 @@ use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Session\Session;
 use Zend\Expressive\Session\SessionMiddleware;
 
-require_once __DIR__ . '/../htdocs/index.php';
+require_once 'server/cli.php';
 
 $server = new Server(true);
 $request = new ServerRequest();

@@ -9,6 +9,7 @@
 declare(strict_types=1);
 
 return [
+    'hostname' => 'my-ichtus.lan',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
@@ -24,6 +25,18 @@ return [
     ],
     'doorsApi' => [
         'endpoint' => 'http://localhost:8888',
-        'token' => 'letmein',
+        'token' => 'my-token-value',
+    ],
+    'emailOverride' => 'your@email.com',
+    'smtp' => [
+        'name' => 'mail.example.com',
+        'host' => 'mail.example.com',
+        'port' => 587,
+        'connection_class' => 'login',
+        'connection_config' => [
+            'username' => 'example@example.com',
+            'password' => '',
+            'ssl' => 'tls',
+        ],
     ],
 ];

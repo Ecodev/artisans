@@ -16,14 +16,17 @@ use GraphQL\Doctrine\Annotation as API;
 class Message extends AbstractModel
 {
     /**
-     * @var User
+     * @var null|User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     * })
      */
     private $recipient;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=191)
+     */
+    private $email;
 
     /**
      * @var string
@@ -33,7 +36,7 @@ class Message extends AbstractModel
     private $type;
 
     /**
-     * @var Chronos
+     * @var null|Chronos
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
@@ -56,25 +59,28 @@ class Message extends AbstractModel
     /**
      * Set recipient
      *
-     * @param User $recipient
+     * @param null|User $recipient
      */
-    public function setRecipient(User $recipient): void
+    public function setRecipient(?User $recipient): void
     {
-        if ($this->recipient && $this->recipient !== $recipient) {
+        if ($this->recipient) {
             $this->recipient->messageRemoved($this);
         }
 
         $this->recipient = $recipient;
         $this->setOwner($recipient);
-        $recipient->messageAdded($this);
+
+        if ($this->recipient) {
+            $this->recipient->messageAdded($this);
+        }
     }
 
     /**
      * Get recipient
      *
-     * @return User
+     * @return null|User
      */
-    public function getRecipient(): User
+    public function getRecipient(): ?User
     {
         return $this->recipient;
     }
@@ -148,10 +154,32 @@ class Message extends AbstractModel
     /**
      * Set sent time
      *
+     * @API\Exclude
+     *
      * @param null|Chronos $dateSent
      */
     public function setDateSent(?Chronos $dateSent): void
     {
         $this->dateSent = $dateSent;
+    }
+
+    /**
+     * Recipient email address
+     *
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * Recipient email address
+     *
+     * @param string $email
+     */
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
     }
 }

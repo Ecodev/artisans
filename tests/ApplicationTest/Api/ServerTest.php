@@ -7,6 +7,7 @@ namespace AppTest\Api;
 use Application\Api\Server;
 use Application\Model\User;
 use ApplicationTest\Traits\TestWithTransaction;
+use GraphQL\Executor\ExecutionResult;
 use PHPUnit\Framework\TestCase;
 use Zend\Diactoros\ServerRequest;
 use Zend\Expressive\Session\Session;
@@ -22,10 +23,15 @@ class ServerTest extends TestCase
      * @param null|string $user
      * @param ServerRequest $request
      * @param array $expected
+     * @param null|callable $dataPreparator
      */
-    public function testQuery(?string $user, ServerRequest $request, array $expected): void
+    public function testQuery(?string $user, ServerRequest $request, array $expected, ?callable $dataPreparator = null): void
     {
         User::setCurrent(_em()->getRepository(User::class)->getByLogin($user));
+
+        if ($dataPreparator) {
+            $dataPreparator(_em()->getConnection());
+        }
 
         // Use this flag to easily debug API test issues
         $debug = false;

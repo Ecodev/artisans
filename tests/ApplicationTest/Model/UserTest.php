@@ -6,6 +6,7 @@ namespace ApplicationTest\Model;
 
 use Application\Model\Booking;
 use Application\Model\User;
+use Cake\Chronos\Chronos;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
@@ -172,14 +173,10 @@ class UserTest extends TestCase
         self::assertNotSame('', $actual1, 'should be able to change password ');
         self::assertTrue(password_verify('12345', $actual1), 'password must have been hashed');
 
-        $user->setPassword('');
-        $actual2 = $user->getPassword();
-        self::assertSame($actual1, $actual2, 'should ignore empty password');
-
         $user->setPassword('money');
-        $actual3 = $user->getPassword();
-        self::assertNotSame($actual1, $actual3, 'should be able to change to something else');
-        self::assertTrue(password_verify('money', $actual3), 'password must have been hashed again');
+        $actual2 = $user->getPassword();
+        self::assertNotSame($actual1, $actual2, 'should be able to change to something else');
+        self::assertTrue(password_verify('money', $actual2), 'password must have been hashed again');
     }
 
     /**
@@ -277,5 +274,52 @@ class UserTest extends TestCase
         self::assertSame(User::STATUS_NEW, $u3->getStatus());
         $u3->setOwner($u1);
         self::assertSame(User::STATUS_ACTIVE, $u3->getStatus());
+    }
+
+    public function testToken(): void
+    {
+        $user = new User();
+        self::assertFalse($user->isTokenValid(), 'new user should not be valid');
+
+        $token1 = $user->createToken();
+        self::assertEquals(32, mb_strlen($token1), 'must be exactly the length of DB field');
+        self::assertTrue($user->isTokenValid(), 'brand new token is valid');
+
+        $token2 = $user->createToken();
+        self::assertEquals(32, mb_strlen($token2), 'must be exactly the length of DB field');
+        self::assertTrue($user->isTokenValid(), 'second created token is valid');
+
+        $user->setLastLogin(new Chronos());
+        self::assertFalse($user->isTokenValid(), 'once user is logged in token is invalid');
+
+        $token3 = $user->createToken();
+        self::assertEquals(32, mb_strlen($token3), 'must be exactly the length of DB field');
+        self::assertTrue($user->isTokenValid(), 'third created token is valid');
+
+        $user->setStatus(User::STATUS_ACTIVE);
+        self::assertFalse($user->isTokenValid(), 'once user is activated token is invalid');
+
+        $token4 = $user->createToken();
+        self::assertEquals(32, mb_strlen($token4), 'must be exactly the length of DB field');
+        self::assertTrue($user->isTokenValid(), 'third created token is valid');
+
+        $user->setPassword('money');
+        self::assertFalse($user->isTokenValid(), 'after password change token is invalid');
+
+        Chronos::setTestNow((new Chronos())->subDay(1));
+        $token5 = $user->createToken();
+        Chronos::setTestNow(null);
+        self::assertEquals(32, mb_strlen($token5), 'must be exactly the length of DB field');
+        self::assertFalse($user->isTokenValid(), 'too old token is invalid');
+
+        $allTokens = [
+            $token1,
+            $token2,
+            $token3,
+            $token4,
+            $token5,
+        ];
+
+        self::assertCount(5, array_unique($allTokens), 'all tokens must be unique');
     }
 }

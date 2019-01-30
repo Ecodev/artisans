@@ -1,0 +1,26 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <?php echo $this->headTitle(); ?>
+    <style type="text/css" title="text/css">
+        body, td, p {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            color: #494949;
+        }
+    </style>
+</head>
+<body>
+<h1><a href="<?php echo $this->serverUrl ?>"><img src="<?php echo $this->serverUrl ?>/assets/ichtus.svg" alt="Ichtus" border="0" width="40" height="40"/></a>
+    Ichtus
+</h1>
+
+<p>Bonjour<?php echo $this->user ? ' ' . $this->escapeHtml($this->user->getFirstName()) : '' ?>,</p>
+
+<?php echo $this->content; ?>
+
+<p style="font-size: 0.8em; color: #878787">
+    Ceci est un message automatique de notification envoyé par <a
+            href="<?php echo $this->serverUrl ?>"><?php echo $this->hostname ?></a>, n'y répondez-pas.
+</p>
+</body>
+</html>

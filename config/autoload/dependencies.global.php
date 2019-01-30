@@ -28,6 +28,9 @@ return [
             \Application\Action\ImageAction::class => \Application\Action\ImageFactory::class,
             \Application\Service\ImageResizer::class => \Application\Service\ImageResizerFactory::class,
             \Imagine\Image\ImagineInterface::class => \Application\Service\ImagineFactory::class,
+            \Application\Service\Mailer::class => \Application\Service\MailerFactory::class,
+            \Zend\View\Renderer\RendererInterface::class => \Application\Service\RendererFactory::class,
+            \Zend\Mail\Transport\TransportInterface::class => \Application\Service\TransportFactory::class,
         ],
     ],
 ];

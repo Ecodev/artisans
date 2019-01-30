@@ -3,6 +3,6 @@
 
 use Application\Service\AbstractDatabase;
 
-require_once __DIR__ . '/../htdocs/index.php';
+require_once 'server/cli.php';
 
 AbstractDatabase::loadTestData();

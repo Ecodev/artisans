@@ -133,9 +133,9 @@ REPLACE INTO category_category (category_source, category_target) VALUES
 (10002, 10004),
 (10003, 10004);
 
-REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, subject, body) VALUES
-(11001, 1000, 1000, 1002, 'monthly_reminder', '2019-01-01 12:00:00', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
-(11002, 1001, 1001, 1005, 'yearly_reminder', '2019-03-01 12:00:00', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
+REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
+(11001, 1000, 1000, 1002, 'monthly_reminder', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
+(11002, 1001, 1001, 1005, 'yearly_reminder', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
 (12000, 1000, 1000, 'Moniteur voile', '#0000FF'),

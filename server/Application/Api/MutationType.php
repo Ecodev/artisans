@@ -7,7 +7,9 @@ namespace Application\Api;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\OpenDoor;
+use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\TerminateBooking;
+use Application\Api\Field\Mutation\UpdatePassword;
 use Application\Api\Field\Standard;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
@@ -33,6 +35,8 @@ class MutationType extends ObjectType
             Logout::build(),
             OpenDoor::build(),
             TerminateBooking::build(),
+            RequestPasswordReset::build(),
+            UpdatePassword::build(),
         ];
 
         $fields = array_merge(

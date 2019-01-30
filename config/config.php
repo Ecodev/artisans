@@ -13,6 +13,7 @@ $cacheConfig = [
 ];
 
 $aggregator = new ConfigAggregator([
+    \Zend\Mail\ConfigProvider::class,
     \Zend\Validator\ConfigProvider::class,
     \Zend\Expressive\Helper\ConfigProvider::class,
     \Zend\Expressive\Router\FastRouteRouter\ConfigProvider::class,
@@ -23,12 +24,6 @@ $aggregator = new ConfigAggregator([
     \Zend\Expressive\Session\ConfigProvider::class,
     // Include cache configuration
     new ArrayProvider($cacheConfig),
-    // Swoole config to overwrite some services (if installed)
-    class_exists(\Zend\Expressive\Swoole\ConfigProvider::class)
-        ? \Zend\Expressive\Swoole\ConfigProvider::class
-        : function () {
-            return [];
-        },
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):
     //   - `global.php`

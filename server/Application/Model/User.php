@@ -192,6 +192,19 @@ class User extends AbstractModel
     private $billingType = BillingTypeType::ALL_ELECTRONIC;
 
     /**
+     * @var null|string
+     * @ORM\Column(type="string", length=32, nullable=true, unique=true)
+     */
+    private $token;
+
+    /**
+     * @var null|Chronos
+     *
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenCreationDate;
+
+    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="Booking", mappedBy="owner")
      */
@@ -271,17 +284,15 @@ class User extends AbstractModel
     }
 
     /**
-     * Encrypt and change the user password
+     * Hash and change the user password
+     *
+     * @API\Exclude
      *
      * @param string $password
      */
     public function setPassword(string $password): void
     {
-        // Ignore empty password that could be sent "by mistake" by the client
-        // when agreeing to terms
-        if ($password === '') {
-            return;
-        }
+        $this->revokeToken();
 
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
@@ -472,6 +483,7 @@ class User extends AbstractModel
     public function setStatus(string $status): void
     {
         $this->status = $status;
+        $this->revokeToken();
 
         foreach ($this->users as $user) {
             if ($user !== $this) {
@@ -792,6 +804,7 @@ class User extends AbstractModel
     public function setLastLogin(?Chronos $lastLogin): void
     {
         $this->lastLogin = $lastLogin;
+        $this->revokeToken();
     }
 
     /**
@@ -891,5 +904,43 @@ class User extends AbstractModel
     public function messageRemoved(Message $message): void
     {
         $this->messages->removeElement($message);
+    }
+
+    /**
+     * Generate a new random token to reset password
+     */
+    public function createToken(): string
+    {
+        $this->token = bin2hex(random_bytes(16));
+        $this->tokenCreationDate = new Chronos();
+
+        return $this->token;
+    }
+
+    /**
+     * Destroy existing token
+     */
+    private function revokeToken(): void
+    {
+        $this->token = null;
+        $this->tokenCreationDate = null;
+    }
+
+    /**
+     * Check if token is valid.
+     *
+     * @API\Exclude
+     *
+     * @return bool
+     */
+    public function isTokenValid(): bool
+    {
+        if (!$this->tokenCreationDate) {
+            return false;
+        }
+
+        $timeLimit = $this->tokenCreationDate->addMinutes(30);
+
+        return $timeLimit->isFuture();
     }
 }

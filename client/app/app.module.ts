@@ -33,6 +33,8 @@ import { NetworkInterceptorService } from './shared/services/network-interceptor
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { registerLocaleData } from '@angular/common';
 import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchic-selector.module';
+import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 registerLocaleData(localeFRCH);
 
@@ -44,6 +46,8 @@ registerLocaleData(localeFRCH);
         DashboardComponent,
         BootLoaderComponent,
         ErrorComponent,
+        RequestPasswordResetComponent,
+        ChangePasswordComponent,
     ],
     imports: [
         BrowserModule,

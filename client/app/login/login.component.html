@@ -20,7 +20,6 @@
                                    [(ngModel)]="loginForm.login"
                                    required="required"
                                    [disabled]="loading"
-                                   (focus)="snackBar.dismiss()"
                             >
                         </mat-form-field>
 
@@ -33,7 +32,6 @@
                                    [(ngModel)]="loginForm.password"
                                    required="required"
                                    [disabled]="loading"
-                                   (focus)="snackBar.dismiss()"
                             >
                         </mat-form-field>
 
@@ -46,7 +44,7 @@
                                     i18n
                             >Se connecter
                             </button>
-                            <a mat-button href="/user/request-password-change">Mot de passe oublié ?</a>
+                            <a mat-button routerLink="/request-password-reset">Mot de passe oublié ?</a>
                         </div>
 
                     </form>

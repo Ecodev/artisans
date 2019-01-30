@@ -6,11 +6,21 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { UserResolver } from './admin/users/services/user.resolver';
+import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+    },
+    {
+        path: 'request-password-reset',
+        component: RequestPasswordResetComponent,
+    },
+    {
+        path: 'change-password',
+        component: ChangePasswordComponent,
     },
     {
         path: 'signup',

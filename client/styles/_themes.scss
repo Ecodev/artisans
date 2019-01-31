@@ -13,6 +13,7 @@
 @import 'page-header';
 @import '../app/shared/modules/sidenav/sidenav.theme';
 @import '../app/shared/components/money/money.theme';
+@import '../app/shared/components/file/file.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -28,6 +29,7 @@
     @include page-header($theme);
     @include sidenav($theme);
     @include money($theme);
+    @include file($theme);
 }
 
 $mat-ichtus: (

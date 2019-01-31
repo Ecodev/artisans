@@ -1,0 +1,13 @@
+@mixin file($theme) {
+    $primary: map-get($theme, primary);
+
+    app-file {
+
+        .upload-overlay {
+            background-color: mat-color($primary, 0.9);
+            color: mat-color($primary, default-contrast);
+        }
+
+    }
+
+}

@@ -1,0 +1,16 @@
+<div ngfSelect
+     appFileDrop
+     [fileDropDisabled]="readonly"
+     [ngfFixOrientation]="false"
+     (fileChange)="upload($event)"
+     [style.backgroundImage]="image"
+     [style.backgroundPosition]="'center'"
+     [style.backgroundSize]="'cover'"
+     [class.readonly]="readonly"
+>
+    <div class="upload-overlay">
+        <app-icon name="cloud_upload" [size]="height * 0.66"></app-icon>
+    </div>
+
+</div>
+

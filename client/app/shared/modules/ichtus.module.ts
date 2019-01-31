@@ -22,6 +22,9 @@ import { MoneyComponent } from '../components/money/money.component';
 import { BookableMetadataComponent } from '../components/bookable-metadata/bookable-metadata.component';
 import { FocusDirective } from '../directives/focus';
 import { CardComponent } from '../components/card/card.component';
+import { ngfModule } from 'angular-file';
+import { FileComponent } from '../components/file/file.component';
+import { FileDropDirective } from '../components/file/services/file-drop.directive';
 
 @NgModule({
     declarations: [
@@ -40,6 +43,8 @@ import { CardComponent } from '../components/card/card.component';
         BookableMetadataComponent,
         FocusDirective,
         CardComponent,
+        FileDropDirective,
+        FileComponent
     ],
     imports: [
         CommonModule,
@@ -50,6 +55,7 @@ import { CardComponent } from '../components/card/card.component';
         ReactiveFormsModule,
         RouterModule,
         AvatarModule,
+        ngfModule,
     ],
     exports: [
         RelationsComponent,
@@ -73,6 +79,9 @@ import { CardComponent } from '../components/card/card.component';
         BookableMetadataComponent,
         FocusDirective,
         CardComponent,
+        ngfModule,
+        FileDropDirective,
+        FileComponent
     ],
 })
 export class IchtusModule {

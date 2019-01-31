@@ -16,24 +16,42 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="30px">
-                            <mat-form-field fxFlex.gt-sm>
-                                <input matInput formControlName="name" (change)="update()">
-                                <mat-label>Nom</mat-label>
-                                <mat-error *ngIf="form.get('name').hasError('maxlength')">
-                                    Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
-                                </mat-error>
-                                <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
-                            </mat-form-field>
+                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start start" class="margin-bottom">
 
-                            <mat-form-field>
-                                <input matInput formControlName="code" (change)="update()">
-                                <mat-label>Code</mat-label>
-                                <mat-error *ngIf="form.get('code').hasError('maxlength')">
-                                    Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
-                                </mat-error>
-                                <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
-                            </mat-form-field>
+                            <app-file fxFlex
+                                      [service]="imageService"
+                                      [file]="data.model.image"
+                                      class="mat-elevation-z2"
+                                      [style.borderRadius.px]="4"
+                                      [style.marginLeft.px]="2"
+                                      (change)="newImage($event)"
+                            ></app-file>
+
+                            <div fxLayout="column" fxFlex>
+                                <mat-form-field>
+                                    <input matInput formControlName="name" (change)="update()">
+                                    <mat-label>Nom</mat-label>
+                                    <mat-error *ngIf="form.get('name').hasError('maxlength')">
+                                        Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                                    </mat-error>
+                                    <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
+                                </mat-form-field>
+
+                                <mat-form-field>
+                                    <input matInput formControlName="code" (change)="update()">
+                                    <mat-label>Code</mat-label>
+                                    <mat-error *ngIf="form.get('code').hasError('maxlength')">
+                                        Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
+                                    </mat-error>
+                                    <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
+                                </mat-form-field>
+
+                                <app-select-enum enumName="BookableState"
+                                                 formControlName="state"
+                                                 (selectionChange)="update()"
+                                                 placeholder="État"
+                                ></app-select-enum>
+                            </div>
                         </div>
 
                         <mat-form-field>
@@ -51,16 +69,6 @@
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
-
-                        <mat-divider class="margin-bottom"></mat-divider>
-
-                        <div fxLayout="row">
-                            <app-select-enum enumName="BookableState"
-                                             formControlName="state"
-                                             (selectionChange)="update()"
-                                             placeholder="État"
-                            ></app-select-enum>
-                        </div>
 
                     </div>
 

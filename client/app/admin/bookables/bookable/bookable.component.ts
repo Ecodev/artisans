@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
@@ -9,11 +9,13 @@ import {
     BookingType,
     CreateBookableMutation,
     CreateBookableMutationVariables,
+    CreateImageMutation,
     UpdateBookableMutation,
     UpdateBookableMutationVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
+import { ImageService } from '../services/image.service';
 
 @Component({
     selector: 'app-bookable',
@@ -27,7 +29,7 @@ export class BookableComponent
         CreateBookableMutationVariables,
         UpdateBookableMutation['updateBookable'],
         UpdateBookableMutationVariables,
-        any> {
+        any> implements OnInit {
 
     constructor(alertService: AlertService,
                 bookableService: BookableService,
@@ -35,8 +37,13 @@ export class BookableComponent
                 route: ActivatedRoute,
                 public bookableTagService: BookableTagService,
                 public licenseService: LicenseService,
+                public imageService: ImageService,
     ) {
         super('bookable', bookableService, alertService, router, route);
+    }
+
+    ngOnInit(): void {
+        super.ngOnInit();
     }
 
     public verify() {
@@ -58,4 +65,18 @@ export class BookableComponent
     public isBookingPriceApplicable() {
         return this.data.model.bookingType !== BookingType.self_approved;
     }
+
+    public newImage(image: CreateImageMutation['createImage']) {
+
+        const imageField = this.form.get('image');
+        if (imageField) {
+            imageField.setValue(image);
+            if (this.data.model.id) {
+                this.update();
+            }
+        }
+    }
+
+
+
 }

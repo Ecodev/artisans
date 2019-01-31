@@ -123,6 +123,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             isActive: true,
             state: BookableState.good,
             verificationDate: null,
+            image: null,
         };
     }
 

@@ -7,20 +7,20 @@
 
         <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="center" fxLayoutGap="30px">
 
-            <app-card>
+            <app-card [file]="bookable?.image">
+                <card-illustration class="padding" *ngIf="!bookable?.image">
+                    <ngx-avatar name="?" [size]="150"></ngx-avatar>
+                </card-illustration>
                 <h2 class="mat-title">Matériel</h2>
                 <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
                     <div class="mat-body-2" fxFlex>{{ bookable?.name || 'Mon propre matériel'}}</div>
                     <mat-divider [vertical]="true" *ngIf="bookable"></mat-divider>
                     <div class="mat-body-2">{{ bookable?.code }}</div>
                 </div>
-                <div>
-                    <!--<button mat-stroked-button>Changer</button>-->
-                </div>
             </app-card>
 
             <app-card>
-                <card-illustration>
+                <card-illustration class="padding">
                     <ngx-avatar *ngIf="!!booking.owner" [name]="booking.owner.name" [size]="150"></ngx-avatar>
                     <ngx-avatar *ngIf="!booking.owner" name="Invité" [size]="150"></ngx-avatar>
                 </card-illustration>

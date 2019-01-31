@@ -7,7 +7,7 @@
         <div fxLayout="row" overflow-x>
             <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="20px" style="padding:4px;margin:auto">
                 <app-card *ngFor="let booking of userRunningBookings; let i = index"
-                          class="no-padding"
+                          [file]="booking.bookables[0]?.image"
                           [style.min-width.px]="300"
                           [@terminate]="'out'"
                 >

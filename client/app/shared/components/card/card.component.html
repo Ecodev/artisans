@@ -1,10 +1,15 @@
 <mat-card fxLayout="column" class="no-padding">
 
-    <div class="illustration"
-         [style.height.px]="illustrationHeight"
-         [style.backgroundImage]="illustration"
-    >
-        <ng-content select="card-illustration"></ng-content>
+    <app-file *ngIf="file"
+              [file]="file"
+              [height]="illustrationHeight"
+              [readonly]="true"
+              [style.border-top-left-radius.px]="4"
+              [style.border-top-right-radius.px]="4"
+    ></app-file>
+
+    <div class="illustration">
+        <ng-content select="card-illustration" [style.height.px]="illustrationHeight"></ng-content>
     </div>
 
     <div class="padding" fxLayoutGap="column">

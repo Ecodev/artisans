@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-card',
@@ -9,18 +8,18 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class CardComponent implements OnInit {
 
     @Input() illustrationHeight = 200;
+    @Input() file; // todo : type same as FileComponent.file
+    @Input() illustrationUrl: string;
 
-    private image =
-'https://images.unsplash.com/photo-1500917832468-298fa6292e2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80';
-
-    public illustration;
-
-    constructor(private sanitizer: DomSanitizer) {
+    constructor() {
     }
 
     ngOnInit() {
 
-        this.illustration = this.sanitizer.bypassSecurityTrustStyle('url(' + this.image + ')');
+        if (!this.file && this.illustrationUrl) {
+            this.file = {src: this.illustrationUrl};
+        }
+
     }
 
 }

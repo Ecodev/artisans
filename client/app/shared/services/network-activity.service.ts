@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { NgProgress } from '@ngx-progressbar/core';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class NetworkActivityService {
      * Observable specifying if app is loading or not
      */
     public readonly isPending = new BehaviorSubject<boolean>(false);
-    public readonly errors = new BehaviorSubject<any[]>([]);
+    public readonly errors = new Subject<any[]>();
 
     constructor(private progressService: NgProgress) {
     }

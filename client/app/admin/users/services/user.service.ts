@@ -4,13 +4,18 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
+import {
+    AbstractModelService,
+    AutoRefetchQueryRef,
+    FormValidators,
+} from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery,
     loginMutation,
     logoutMutation,
     updateUserMutation,
+    userByTokenQuery,
     userQuery,
     usersQuery,
 } from './user.queries';
@@ -31,6 +36,8 @@ import {
     Sex,
     UpdateUserMutation,
     UpdateUserMutationVariables,
+    UserByTokenQuery,
+    UserByTokenQueryVariables,
     UserInput,
     UserQuery,
     UserQueryVariables,
@@ -392,6 +399,17 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return this.bookingService.watchAll(qvm, true);
     }
 
+    resolveByToken(token: string): Observable<{ model: UserByTokenQuery['userByToken'] }> {
+
+        return this.apollo.query<UserByTokenQuery, UserByTokenQueryVariables>({
+            query: userByTokenQuery,
+            variables: {
+                token: token,
+            },
+        }).pipe(map(result => {
+            return {model: result.data.userByToken};
+        }));
+    }
 }
 
 export class ConfirmPasswordStateMatcher implements ErrorStateMatcher {

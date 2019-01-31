@@ -14,13 +14,15 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { AppDataSource } from '../../../shared/services/data.source';
 import { ConfirmPasswordStateMatcher } from '../../../admin/users/services/user.service';
 import { AnonymousUserService } from './anonymous-user.service';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
 
 @Component({
-    selector: 'app-signup',
-    templateUrl: './signup.component.html',
-    styleUrls: ['./signup.component.scss'],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
 })
-export class SignupComponent extends AbstractDetail<UserQuery['user'],
+export class RegisterComponent extends AbstractDetail<UserQuery['user'],
     UserQueryVariables,
     CreateUserMutation['createUser'],
     CreateUserMutationVariables,
@@ -32,12 +34,14 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
     private mandatoryBookables: AppDataSource;
 
     public step;
+    public sending = false;
 
     constructor(userService: AnonymousUserService,
                 alertService: AlertService,
                 router: Router,
                 route: ActivatedRoute,
                 protected bookableService: BookableService,
+                private apollo: Apollo,
     ) {
         super('user', userService, alertService, router, route);
     }
@@ -84,10 +88,33 @@ export class SignupComponent extends AbstractDetail<UserQuery['user'],
 
     public submitStep1() {
         this.validateAllFormFields(this.form);
+        if (this.form.invalid) {
+            return;
+        }
+
+        this.sending = true;
+        const mutation = gql`
+            mutation Register($email: Email!, $hasInsurance: Boolean!, $termsAgreement: Boolean!) {
+                register(email: $email, hasInsurance: $hasInsurance, termsAgreement: $termsAgreement)
+            }
+        `;
+
+        this.apollo.mutate({
+            mutation: mutation,
+            variables: this.form.value,
+        }).subscribe(() => {
+            this.sending = false;
+
+            const message = 'Un email avec des instructions a été envoyé';
+
+            this.alertService.info(message, 5000);
+            this.router.navigate(['/login']);
+        }, () => this.sending = false);
     }
 
     public submitStep2() {
-        this.validateAllFormFields(this.form); // t
+        this.validateAllFormFields(this.form);
+
     }
 
 }

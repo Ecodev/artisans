@@ -1,0 +1,11 @@
+<?php declare(strict_types=1);
+$url = $this->serverUrl . '/register/confirm/' . $this->token;
+?>
+<p>Une demande de création de compte Ichtus a été faite pour cet email (<?php echo $this->email ?>). Pour terminer la création du compte, merci de suivre le lien suivant :</p>
+
+<p><a href="<?php echo $url ?>"><?php echo $url ?></a></p>
+
+<p>
+    Si vous n'êtes pas à l'origine de cette demande, vous pouvez simplement ignorer cet email.
+</p>
+

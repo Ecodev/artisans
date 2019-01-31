@@ -29,6 +29,15 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         return $mailer;
     }
 
+    public function testQueueRegister(): void
+    {
+        $user = $this->createMockUser(true);
+        $mailer = $this->createMockMailer();
+        $message = $mailer->queueRegister($user);
+
+        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::REGISTER, 'Demande de création de compte Ichtus');
+    }
+
     public function testQueueResetPassword(): void
     {
         $user = $this->createMockUser();
@@ -49,12 +58,19 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         self::assertNotNull($message->getDateSent());
     }
 
-    private function createMockUser(): User
+    private function createMockUser(bool $minimal = false): User
     {
         $prophecy = $this->prophesize(User::class);
-        $prophecy->getLogin()->willReturn('john.doe');
-        $prophecy->getFirstName()->willReturn('John');
-        $prophecy->getLastName()->willReturn('Doe');
+        if ($minimal) {
+            $prophecy->getLogin();
+            $prophecy->getFirstName();
+            $prophecy->getLastName();
+        } else {
+            $prophecy->getLogin()->willReturn('john.doe');
+            $prophecy->getFirstName()->willReturn('John');
+            $prophecy->getLastName()->willReturn('Doe');
+        }
+
         $prophecy->getEmail()->willReturn('john.doe@example.com');
         $prophecy->createToken()->willReturn(str_repeat('X', 32));
         $prophecy->messageAdded(Argument::type(Message::class));

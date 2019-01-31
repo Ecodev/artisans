@@ -52,6 +52,18 @@ class Mailer
         $this->viewRendered = $viewRenderer;
     }
 
+    public function queueRegister(User $user): Message
+    {
+        $subject = 'Demande de création de compte Ichtus';
+        $mailParams = [
+            'token' => $user->createToken(),
+        ];
+
+        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::REGISTER, new ViewModel($mailParams));
+
+        return $message;
+    }
+
     /**
      * Queue a reset password email to specified user
      *

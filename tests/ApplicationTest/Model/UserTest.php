@@ -166,17 +166,21 @@ class UserTest extends TestCase
     public function testSetPassword(): void
     {
         $user = new User();
-        self::assertNull($user->getPassword(), 'should have no password at first');
+        self::assertSame('', $user->getPassword(), 'should have no password at first');
 
         $user->setPassword('12345');
         $actual1 = $user->getPassword();
         self::assertNotSame('', $actual1, 'should be able to change password ');
         self::assertTrue(password_verify('12345', $actual1), 'password must have been hashed');
 
-        $user->setPassword('money');
+        $user->setPassword('');
         $actual2 = $user->getPassword();
-        self::assertNotSame($actual1, $actual2, 'should be able to change to something else');
-        self::assertTrue(password_verify('money', $actual2), 'password must have been hashed again');
+        self::assertSame($actual1, $actual2, 'should ignore empty password');
+
+        $user->setPassword('money');
+        $actual3 = $user->getPassword();
+        self::assertNotSame($actual1, $actual3, 'should be able to change to something else');
+        self::assertTrue(password_verify('money', $actual3), 'password must have been hashed again');
     }
 
     /**

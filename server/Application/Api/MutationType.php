@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Application\Api;
 
+use Application\Api\Field\Mutation\ConfirmRegistration;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\OpenDoor;
+use Application\Api\Field\Mutation\Register;
 use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\TerminateBooking;
 use Application\Api\Field\Mutation\UpdatePassword;
@@ -37,6 +39,8 @@ class MutationType extends ObjectType
             TerminateBooking::build(),
             RequestPasswordReset::build(),
             UpdatePassword::build(),
+            Register::build(),
+            ConfirmRegistration::build(),
         ];
 
         $fields = array_merge(

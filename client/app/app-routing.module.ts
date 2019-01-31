@@ -23,7 +23,7 @@ export const routes: Routes = [
         component: ChangePasswordComponent,
     },
     {
-        path: 'signup',
+        path: 'register',
         loadChildren: './profile/profile.module#ProfileModule',
     },
     // Auth required routes

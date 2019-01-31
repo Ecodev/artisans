@@ -88,6 +88,16 @@ export const userQuery = gql`
     ${userMetaFragment}
 `;
 
+export const userByTokenQuery = gql`
+    query UserByToken($token: Token!) {
+        userByToken(token: $token) {
+            ...userFields
+        }
+    }
+    ${userFieldsFragment}
+    ${userMetaFragment}
+`;
+
 export const updateUserMutation = gql`
     mutation UpdateUser($id: UserID!, $input: UserPartialInput!) {
         updateUser(id:$id, input:$input) {

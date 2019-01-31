@@ -76,9 +76,9 @@ class User extends AbstractModel
     }
 
     /**
-     * @var string
+     * @var null|string
      *
-     * @ORM\Column(type="string", length=50, unique=true)
+     * @ORM\Column(type="string", length=50, nullable=true, unique=true)
      */
     private $login;
 
@@ -86,20 +86,20 @@ class User extends AbstractModel
      * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $firstName;
+    private $firstName = '';
 
     /**
      * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $lastName;
+    private $lastName = '';
 
     /**
-     * @var null|string
+     * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private $password = '';
 
     /**
      * @var null|string
@@ -262,7 +262,7 @@ class User extends AbstractModel
     /**
      * Set login (eg: johndoe)
      *
-     * @API\Input(type="Application\Api\Scalar\LoginType")
+     * @API\Input(type="Login")
      *
      * @param string $login
      */
@@ -274,24 +274,28 @@ class User extends AbstractModel
     /**
      * Get login (eg: johndoe)
      *
-     * @API\Field(type="Application\Api\Scalar\LoginType")
+     * @API\Field(type="?Login")
      *
-     * @return string
+     * @return null|string
      */
-    public function getLogin(): string
+    public function getLogin(): ?string
     {
-        return (string) $this->login;
+        return $this->login;
     }
 
     /**
      * Hash and change the user password
      *
-     * @API\Exclude
-     *
      * @param string $password
      */
     public function setPassword(string $password): void
     {
+        // Ignore empty password that could be sent "by mistake" by the client
+        // when agreeing to terms
+        if ($password === '') {
+            return;
+        }
+
         $this->revokeToken();
 
         $this->password = password_hash($password, PASSWORD_DEFAULT);
@@ -302,9 +306,9 @@ class User extends AbstractModel
      *
      * @API\Exclude
      *
-     * @return null|string
+     * @return string
      */
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->password;
     }

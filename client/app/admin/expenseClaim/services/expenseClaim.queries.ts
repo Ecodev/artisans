@@ -9,6 +9,9 @@ export const expenseClaimMetaFragment = gql`
         remarks
         status
         amount
+        accountingDocuments {
+            id
+        }
         owner {
             id
             name

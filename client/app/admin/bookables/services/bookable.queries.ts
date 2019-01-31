@@ -18,6 +18,9 @@ export const bookableMetaFragment = gql`
         code
         simultaneousBookingMaximum
         bookingType
+        image {
+            id
+        }
     }
 `;
 

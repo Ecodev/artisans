@@ -26,6 +26,9 @@ export const bookingMetaFragment = gql`
         bookables {
             id
             name
+            image {
+                id
+            }
             ...bookableMeta
         }
     }

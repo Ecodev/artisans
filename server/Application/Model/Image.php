@@ -49,15 +49,6 @@ class Image extends AbstractFile
     private $height = 0;
 
     /**
-     * @var Bookable
-     * @ORM\ManyToOne(targetEntity="Bookable")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(onDelete="CASCADE")
-     * })
-     */
-    private $bookable;
-
-    /**
      * Get image width
      *
      * @return int
@@ -135,21 +126,5 @@ class Image extends AbstractFile
 
         $this->setWidth($size->getWidth());
         $this->setHeight($size->getHeight());
-    }
-
-    /**
-     * @return Bookable
-     */
-    public function getBookable(): Bookable
-    {
-        return $this->bookable;
-    }
-
-    /**
-     * @param Bookable $bookable
-     */
-    public function setBookable(Bookable $bookable): void
-    {
-        $this->bookable = $bookable;
     }
 }

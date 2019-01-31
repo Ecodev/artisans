@@ -7,8 +7,15 @@
 /data/cache/images/*
 /data/accounting/
 !/data/accounting/dw4jV3zYSPsqE2CB8BcP8ABD0.pdf
-/data/images/
-!/data/images/dw4jV3zYSPsqE2CB8BcP8ABD0.jpg
+/data/images/*
+!/data/images/chat1.jpg
+!/data/images/chat2.jpg
+!/data/images/chat3.jpg
+!/data/images/chat4.jpg
+!/data/images/chat5.jpg
+!/data/images/chat6.jpg
+!/data/images/chat7.jpg
+!/data/images/chat8.jpg
 /*.backup.sql.gz
 /htdocs/favicon.ico
 /htdocs/*.html

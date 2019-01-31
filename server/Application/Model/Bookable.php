@@ -102,6 +102,13 @@ class Bookable extends AbstractModel
     private $licenses;
 
     /**
+     * @var null|Image
+     * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    private $image;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -362,5 +369,21 @@ class Bookable extends AbstractModel
     public function transactionRemoved(Transaction $transaction): void
     {
         $this->transactions->removeElement($transaction);
+    }
+
+    /**
+     * @return null|Image
+     */
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param null|Image $image
+     */
+    public function setImage(?Image $image): void
+    {
+        $this->image = $image;
     }
 }

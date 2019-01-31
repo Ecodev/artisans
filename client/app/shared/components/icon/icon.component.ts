@@ -22,12 +22,14 @@ export class IconComponent {
     @HostBinding('style.color') fgColor = 'inherit';
     @HostBinding('class.material-icons') isMaterialIcon = true;
     @HostBinding('class.mat-icon') isIcon = true;
-    @HostBinding('style.min-width') width = '12px';
-    @HostBinding('style.min-height') height = '12px';
+    @HostBinding('style.min-width.px') width = 24;
+    @HostBinding('style.min-height.px') height = 24;
+    @HostBinding('style.font-size.px') fontSize = 24;
 
     @Input() label;
     @Input() labelColor: 'primary' | 'warn' | 'accent' = 'accent';
     @Input() labelPosition: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'top-right';
+
     public icon: IconType;
     private readonly svgBase = './assets/icons/';
     /**
@@ -85,9 +87,10 @@ export class IconComponent {
     }
 
     @Input() set size(val: number) {
-        val = val == null ? 32 : val;
-        this.height = val + 'px';
-        this.width = val + 'px';
+        val = val == null ? 24 : val;
+        this.height = val;
+        this.width = val;
+        this.fontSize = val;
     }
 
     private registerIcons() {

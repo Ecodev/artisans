@@ -21,7 +21,7 @@ const routes: Routes = [
         },
     },
     {
-        path: 'confirm/:userHash',
+        path: 'confirm/:userToken',
         component: SignUpConfirmComponent,
         data: {
             step: 2,
@@ -29,7 +29,7 @@ const routes: Routes = [
         },
         resolve: {
             // TODO : Need a way resolve a user from FE (that has no permissions, considering parameter sent by confirmation e-mail)
-            // user: UserHashResolver
+            // user: UserTokenResolver
         },
     },
 ];

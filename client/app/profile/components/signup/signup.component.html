@@ -121,12 +121,12 @@
         </div>
 
         <!-- Spacer-->
-        <div></div>
+        <div *ngIf="step === 1"></div>
 
-        <div fxLayout="row" fxLayoutGap="30px">
+        <div fxLayout="row" fxLayoutGap="30px" *ngIf="step === 1">
             <div fxFlex>
                 <mat-checkbox formControlName="hasInsurance" required>J'ai une super assurance !</mat-checkbox>
-                <mat-error *ngIf="form.get('hasInsurance').touched && form.get('hasInsurance').hasError('required')">Requis</mat-error>
+                <mat-error class="mat-body-1" *ngIf="form.get('hasInsurance').touched && form.get('hasInsurance').hasError('required')">Requis</mat-error>
                 <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at
                                       lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit
                                       sit amet non magna.</p>
@@ -134,7 +134,7 @@
             <mat-divider [vertical]="true"></mat-divider>
             <div fxFlex>
                 <mat-checkbox formControlName="termsAgreement" required>J'ai tout lu !</mat-checkbox>
-                <mat-error *ngIf="form.get('termsAgreement').touched && form.get('termsAgreement').hasError('required')">Requis</mat-error>
+                <mat-error class="mat-body-1" *ngIf="form.get('termsAgreement').touched && form.get('termsAgreement').hasError('required')">Requis</mat-error>
                 <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at
                                       lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit
                                       sit amet non magna.</p>

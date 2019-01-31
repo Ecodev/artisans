@@ -19,7 +19,7 @@ export const routes: Routes = [
         component: RequestPasswordResetComponent,
     },
     {
-        path: 'change-password',
+        path: 'change-password/:token',
         component: ChangePasswordComponent,
     },
     {

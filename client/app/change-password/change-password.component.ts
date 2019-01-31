@@ -21,7 +21,7 @@ export class ChangePasswordComponent {
                 private apollo: Apollo,
                 private alertService: AlertService,
                 private router: Router) {
-        this.token = route.snapshot.queryParams.token;
+        this.token = route.snapshot.params.token;
 
         const tokenControl = new ExtendedFormControl(this.token, [Validators.required]);
         tokenControl.markAsDirty();

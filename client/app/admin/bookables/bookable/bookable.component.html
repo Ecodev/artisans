@@ -156,10 +156,18 @@
         <mat-tab label="Attributs">
             <app-bookable-metadata [bookable]="data.model" [edit]="true" class="margin"></app-bookable-metadata>
         </mat-tab>
-        <mat-tab label="Transactions">
+
+        <mat-tab label="Transactions" *ngIf="data.model.id">
             <app-transactions [persistSearch]="false"
                               [queryVariables]="{filter: {groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}}"
             ></app-transactions>
+        </mat-tab>
+
+        <mat-tab label="Utilisations" *ngIf="data.model.id">
+            <app-bookings [persistSearch]="false"
+                          [queryVariables]="{filter: {groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}}"
+                          [columns]="['edit', 'owner', 'destination', 'startDate', 'estimatedEndDate', 'participantCount', 'flagEndDate']"
+            ></app-bookings>
         </mat-tab>
 
     </mat-tab-group>

@@ -24,6 +24,7 @@ export const userFieldsFragment = gql`
         door2
         door3
         door4
+        canOpenDoor
         licenses {
             id
             name

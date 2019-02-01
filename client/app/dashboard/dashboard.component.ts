@@ -51,6 +51,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         return UserService.canAccessAdmin(this.currentUser);
     }
 
+    public canAccessDoor() {
+        return UserService.canAccessDoor(this.currentUser);
+    }
+
     public endBooking(booking, index) {
         this.bookingService.flagEndDate(booking.id);
         this.userRunningBookings.splice(index, 1);

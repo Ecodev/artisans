@@ -22,6 +22,7 @@ import { TimezonePreservingDateAdapter } from './shared/services/timezone.preser
 import { IconModule } from './shared/components/icon/icon.module';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { DoorComponent } from './door/door.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -43,6 +44,7 @@ registerLocaleData(localeFRCH);
         AppComponent,
         LoginComponent,
         HomeComponent,
+        DoorComponent,
         DashboardComponent,
         BootLoaderComponent,
         ErrorComponent,

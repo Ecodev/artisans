@@ -9,6 +9,7 @@
 @import '../app/app.theme';
 @import '../app/shared/components/alert/alert.theme';
 @import '../app/dashboard/dashboard.theme';
+@import '../app/door/door.theme';
 @import 'table';
 @import 'page-header';
 @import '../app/shared/modules/sidenav/sidenav.theme';
@@ -24,6 +25,7 @@
     @include alert($theme);
     @include boot-loader($theme);
     @include dashboard($theme);
+    @include door($theme);
     @include table($theme);
     @include natural-search-theme($theme);
     @include page-header($theme);

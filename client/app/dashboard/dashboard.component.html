@@ -48,7 +48,7 @@
 
         <h1 class="mat-display-2 margin-bottom text-center">Autres</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" [routerLink]="" style="opacity:0.3">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="door" *ngIf="canAccessDoor()">
                 <app-icon name="doors" [size]="70"></app-icon>
                 Accéder au local
             </a>

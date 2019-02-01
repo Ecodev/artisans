@@ -1,0 +1,12 @@
+@mixin door($theme) {
+
+  app-door {
+    .mat-flat-button{
+      background-color: lightgray;
+    }
+    .mat-flat-button.opened {
+      background-color: lawngreen !important;
+    }
+  }
+
+}

@@ -1,0 +1,29 @@
+<div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center">
+
+    <div fxLayout="column" class="padding margin-top">
+
+        <h1 class="mat-display-2 margin-bottom text-center">Sélectionnez la porte du local à ouvrir</h1>
+
+        <div fxLayout="row wrap" fxLayoutAlign="start stretch" fxLayoutGap="20px" style="padding:4px;margin:auto">
+            <div *ngFor="let door of doorService.doors; let i = index">
+                <app-card class="no-padding"
+                          *ngIf="currentUser[door.id]"
+                          (click)="open(door)"
+                          illustrationUrl="assets/images/{{door.image}}"
+                          [style.min-width.px]="300"
+                >
+                    <div fxLayout="column" fxLayoutGap="10px">
+                        <div class="mat-body-2">{{ door.name }}</div>
+                        <div>
+                            <button mat-flat-button [ngClass]="{'opened': door.opened}" [disabled]="door.opened">
+                                <app-icon [name]="door.opened ? 'lock_open' : 'lock'"></app-icon> Ouvrir
+                            </button>
+                        </div>
+                    </div>
+                </app-card>
+            <div>
+        </div>
+
+    </div>
+
+</div>

@@ -7,6 +7,7 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Enum\DoorType;
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
+use Application\Api\Output\OpenDoorType;
 use Application\Model\User;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
@@ -19,49 +20,48 @@ abstract class OpenDoor implements FieldInterface
     {
         return [
             'name' => 'openDoor',
-            'type' => Type::nonNull(Type::string()),
+            'type' => Type::nonNull(_types()->get(OpenDoorType::class)),
             'description' => 'Open a door at the premises',
             'args' => [
                 'door' => Type::nonNull(_types()->get(DoorType::class)),
             ],
-            'resolve' => function ($root, array $args, SessionInterface $session): string {
+            'resolve' => function ($root, array $args, SessionInterface $session): array {
                 global $container;
 
-                if (!preg_match('/door([0-9]+)/', $args['door'], $m)) {
+                if (!preg_match('/door([1-4])/', $args['door'], $m)) {
                     throw new Exception("La porte demandée n'existe pas");
                 }
                 $doorIndex = $m[1];
 
                 $user = User::getCurrent();
-                if ($user && $user->isActive()) {
-                    if (!$user->{'getDoor' . $doorIndex}()) {
-                        throw new Exception("La porte demandée ne peut être ouverte par l'utilisateur");
-                    }
-                    $apiConfig = $container->get('config')['doorsApi'];
-                    $request = new Request();
-                    $request->getHeaders()->addHeaders(['Content-Type' => 'application/json']);
-                    $request->setUri($apiConfig['endpoint'] . '/open');
-                    $request->setMethod(Request::METHOD_POST);
-                    $request->setContent(json_encode([
-                        'door' => $doorIndex,
-                        'token' => $apiConfig['token'],
-                    ]));
-
-                    $client = new Client();
-
-                    try {
-                        $response = $client->dispatch($request);
-                    } catch (\Zend\Http\Client\Exception\RuntimeException $e) {
-                        throw new Exception('Commande de porte inaccessible: ' . $e->getMessage());
-                    }
-                    $content = json_decode($response->getContent());
-                    if ($response->getStatusCode() === 200) {
-                        return $content->message;
-                    }
-                    $errorMsg = $content->message ?? 'Erreur de commande de porte: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase();
-
-                    throw new Exception($errorMsg);
+                if (!$user || !$user->getCanOpenDoor($args['door'])) {
+                    throw new Exception("La porte demandée ne peut être ouverte par l'utilisateur");
                 }
+
+                $apiConfig = $container->get('config')['doorsApi'];
+                $request = new Request();
+                $request->getHeaders()->addHeaders(['Content-Type' => 'application/json']);
+                $request->setUri($apiConfig['endpoint'] . '/open');
+                $request->setMethod(Request::METHOD_POST);
+                $request->setContent(json_encode([
+                    'door' => $doorIndex,
+                    'token' => $apiConfig['token'],
+                ]));
+
+                $client = new Client();
+
+                try {
+                    $response = $client->dispatch($request);
+                } catch (\Zend\Http\Client\Exception\RuntimeException $e) {
+                    throw new Exception('Commande de porte inaccessible: ' . $e->getMessage());
+                }
+                $content = json_decode($response->getContent(), true);
+                if ($response->getStatusCode() === 200) {
+                    return $content;
+                }
+                $errorMsg = $content['message'] ?? 'Erreur de commande de porte: ' . $response->getStatusCode() . ' ' . $response->getReasonPhrase();
+
+                throw new Exception($errorMsg);
             },
         ];
     }

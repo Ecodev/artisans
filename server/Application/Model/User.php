@@ -947,4 +947,39 @@ class User extends AbstractModel
 
         return $timeLimit->isFuture();
     }
+
+    /**
+     * Check if the user can *really* open a door
+     * This also takes into account the user status, role and IP address
+     *
+     * @API\Field(args={@API\Argument(name="door", type="?Application\Api\Enum\DoorType")})
+     *
+     * @param null|string $door a particular door, or null for any
+     *
+     * @return bool
+     */
+    public function getCanOpenDoor(?string $door = null): bool
+    {
+        global $container;
+
+        $allowedStatus = [self::STATUS_ACTIVE];
+        $allowedRoles = [self::ROLE_MEMBER, self::ROLE_RESPONSIBLE, self::ROLE_ADMINISTRATOR];
+        if ($door && !$this->$door) {
+            return false;
+        }
+        if (!in_array($this->status, $allowedStatus, true) || !in_array($this->role, $allowedRoles, true)) {
+            return false;
+        }
+        $apiConfig = $container->get('config')['doorsApi'];
+        foreach ($apiConfig['authorizedIps'] as $host) {
+            if (filter_var($host, FILTER_VALIDATE_DOMAIN) && in_array($_SERVER['REMOTE_ADDR'], gethostbynamel($host), true)) {
+                return true;
+            }
+            if (filter_var($host, FILTER_VALIDATE_IP) && $_SERVER['REMOTE_ADDR'] === $host) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

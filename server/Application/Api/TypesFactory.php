@@ -31,6 +31,7 @@ class TypesFactory
             \Application\Api\MutationType::class,
             \Application\Api\Output\GlobalPermissionsListType::class,
             \Application\Api\Output\GlobalPermissionsType::class,
+            \Application\Api\Output\OpenDoorType::class,
             \Application\Api\Output\PermissionsType::class,
             \Application\Api\QueryType::class,
             \Application\Api\Scalar\ColorType::class,

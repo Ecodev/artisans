@@ -31,6 +31,7 @@ describe('UserService', () => {
         door2: true,
         door3: true,
         door4: true,
+        canOpenDoor: true,
         licenses: [
             {
                 id: '456',

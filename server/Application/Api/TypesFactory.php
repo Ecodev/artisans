@@ -27,6 +27,7 @@ class TypesFactory
             \Application\Api\Enum\DoorType::class,
             \Application\Api\Enum\ExpenseClaimStatusType::class,
             \Application\Api\Enum\MessageTypeType::class,
+            \Application\Api\Input\ConfirmRegistrationInputType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\MutationType::class,
             \Application\Api\Output\GlobalPermissionsListType::class,

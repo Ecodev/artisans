@@ -27,7 +27,7 @@ abstract class ConfirmRegistration implements FieldInterface
             'description' => 'First step to register as a new user.',
             'args' => [
                 'token' => Type::nonNull(_types()->get('Token')),
-                'input' => Type::nonNull(_types()->getPartialInput(User::class)),
+                'input' => Type::nonNull(_types()->get('ConfirmRegistrationInput')),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
 
@@ -48,8 +48,7 @@ abstract class ConfirmRegistration implements FieldInterface
                 Helper::hydrate($user, $input);
 
                 // Active the member
-                $user->setRole(User::ROLE_MEMBER);
-                $user->setStatus(User::STATUS_ACTIVE);
+                $user->activate();
 
                 // Create mandatory booking for him
                 User::setCurrent($user);

@@ -16,6 +16,8 @@ import { ConfirmPasswordStateMatcher } from '../../../admin/users/services/user.
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { omit } from 'lodash';
+import { Utility } from '../../../shared/classes/utility';
 
 @Component({
     selector: 'app-register',
@@ -78,20 +80,20 @@ export class RegisterComponent extends AbstractDetail<UserQuery['user'],
         }
     }
 
-    public submit() {
-        if (this.step === 1) {
-            this.submitStep1();
-        } else if (this.step === 2) {
-            this.submitStep2();
-        }
-    }
-
-    public submitStep1() {
+    public submit(): void {
         this.validateAllFormFields(this.form);
         if (this.form.invalid) {
             return;
         }
 
+        if (this.step === 1) {
+            this.register();
+        } else if (this.step === 2) {
+            this.confirmRegistration();
+        }
+    }
+
+    private register(): void {
         this.sending = true;
         const mutation = gql`
             mutation Register($email: Email!, $hasInsurance: Boolean!, $termsAgreement: Boolean!) {
@@ -112,9 +114,28 @@ export class RegisterComponent extends AbstractDetail<UserQuery['user'],
         }, () => this.sending = false);
     }
 
-    public submitStep2() {
-        this.validateAllFormFields(this.form);
+    private confirmRegistration(): void {
+        this.sending = true;
+        const mutation = gql`
+            mutation ConfirmRegistration($token: Token!, $input: ConfirmRegistrationInput!) {
+                confirmRegistration(token: $token, input: $input)
+            }
+        `;
 
+        this.apollo.mutate({
+            mutation: mutation,
+            variables: {
+                token: this.route.snapshot.params.token,
+                input: omit(Utility.relationsToIds(this.form.value), 'confirmPassword'),
+            },
+        }).subscribe(() => {
+            this.sending = false;
+
+            const message = 'Vous pouvez maintenant vous connecter avec le login et mot de passe que vous avez choisi';
+
+            this.alertService.info(message, 5000);
+            this.router.navigate(['/login']);
+        }, () => this.sending = false);
     }
 
 }

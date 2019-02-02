@@ -401,10 +401,10 @@ class User extends AbstractModel
      * Sets the user role
      *
      * The current user is allowed to promote another user up to the same role as himself. So
-     * a Senior can promote a Student to Senior. Or an Admin can promote a Junior to Admin.
+     * a Responsible can promote a Member to Responsible. Or an Admin can promote a Individual to Admin.
      *
      * But the current user is **not** allowed to demote a user who has a higher role than himself.
-     * That means that a Senior cannot demote an Admin to Student.
+     * That means that a Responsible cannot demote an Admin to Individual.
      *
      * @param string $role
      */
@@ -439,7 +439,7 @@ class User extends AbstractModel
         }
 
         if (!$newFound || !$oldFound) {
-            throw new Exception($currentRole . ' is not allowed to change role to ' . $role);
+            throw new Exception($currentRole . ' is not allowed to change role from ' . $this->role . ' to ' . $role);
         }
 
         $this->role = $role;
@@ -494,6 +494,12 @@ class User extends AbstractModel
                 $user->setStatus($status);
             }
         }
+    }
+
+    public function activate(): void
+    {
+        $this->role = self::ROLE_MEMBER; // Bypass security
+        $this->setStatus(self::STATUS_ACTIVE);
     }
 
     /**

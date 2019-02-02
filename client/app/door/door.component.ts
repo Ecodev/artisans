@@ -30,7 +30,7 @@ export class DoorComponent extends AbstractController implements OnInit {
                 setTimeout(() => door.opened = false, res.timer * 1000);
             },
             err => {
-                this.alertService.error(err.message);
+                this.alertService.error(err.message, 5000);
             }
         );
     }

@@ -8,8 +8,6 @@ import { DoorGuard } from './shared/services/door.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { UserResolver } from './admin/users/services/user.resolver';
-import { RequestPasswordResetComponent } from './request-password-reset/request-password-reset.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 
 export const routes: Routes = [
     {
@@ -17,16 +15,9 @@ export const routes: Routes = [
         component: LoginComponent,
     },
     {
-        path: 'request-password-reset',
-        component: RequestPasswordResetComponent,
-    },
-    {
-        path: 'change-password/:token',
-        component: ChangePasswordComponent,
-    },
-    {
-        path: 'register',
-        loadChildren: './profile/profile.module#ProfileModule',
+        path: 'user',
+        component: HomeComponent,
+                loadChildren: './user/user.module#UserModule',
     },
     // Auth required routes
     {

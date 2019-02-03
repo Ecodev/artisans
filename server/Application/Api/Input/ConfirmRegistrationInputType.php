@@ -33,6 +33,9 @@ class ConfirmRegistrationInputType extends InputObjectType
                     'postcode' => [
                         'type' => self::nonNull(self::string()),
                     ],
+                    'locality' => [
+                        'type' => self::nonNull(self::string()),
+                    ],
                     'country' => [
                         'type' => _types()->getId(Country::class),
                     ],

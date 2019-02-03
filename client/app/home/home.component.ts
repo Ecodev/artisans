@@ -19,13 +19,15 @@ export class HomeComponent extends AbstractController implements OnInit {
      * Model for header code search
      */
     public code;
+    public user;
 
-    constructor(public userService: UserService, private router: Router) {
+    constructor(private userService: UserService, private router: Router) {
         super();
     }
 
     ngOnInit() {
 
+        this.user = this.userService.getCurrentUser();
         SidenavService.sideNavsChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             setTimeout(() => {
                 this.menu = SidenavService.sideNavs.get('adminMenu');

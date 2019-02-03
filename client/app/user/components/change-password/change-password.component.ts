@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { AlertService } from '../shared/components/alert/alert.service';
+import { AlertService } from '../../../shared/components/alert/alert.service';
 import { FormGroup, Validators } from '@angular/forms';
 import gql from 'graphql-tag';
-import { ExtendedFormControl } from '../shared/classes/ExtendedFormControl';
+import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 
 @Component({
     selector: 'app-change-password',
@@ -56,7 +56,7 @@ export class ChangePasswordComponent {
             } else {
                 const message = 'Le token utilisé est invalide. Il est probablement expiré. Faites une nouvelle demande de modification.';
                 this.alertService.error(message, 5000);
-                this.router.navigate(['/request-password-reset']);
+                this.router.navigate(['/user/request-password-reset']);
             }
         }, () => this.sending = false);
     }

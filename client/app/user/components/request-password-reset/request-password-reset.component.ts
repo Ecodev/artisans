@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { ExtendedFormControl } from '../shared/classes/ExtendedFormControl';
+import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { AlertService } from '../shared/components/alert/alert.service';
-import { Relationship } from '../shared/generated-types';
+import { AlertService } from '../../../shared/components/alert/alert.service';
+import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 
 @Component({

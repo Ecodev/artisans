@@ -14,6 +14,7 @@ return [
                 'firstName' => 'John',
                 'lastName' => 'Doe',
                 'street' => 'Wallstreet',
+                'locality' => 'New York',
                 'postcode' => '2000',
             ],
         ],

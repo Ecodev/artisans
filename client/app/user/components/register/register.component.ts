@@ -16,7 +16,7 @@ import { ConfirmPasswordStateMatcher } from '../../../admin/users/services/user.
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { omit } from 'lodash';
+import { pick } from 'lodash';
 import { Utility } from '../../../shared/classes/utility';
 
 @Component({
@@ -122,11 +122,23 @@ export class RegisterComponent extends AbstractDetail<UserQuery['user'],
             }
         `;
 
+        const fieldWhitelist = [
+            'login',
+            'password',
+            'firstName',
+            'lastName',
+            'street',
+            'postcode',
+            'locality',
+            'country',
+        ];
+
+        const input = pick(Utility.relationsToIds(this.form.value), fieldWhitelist);
         this.apollo.mutate({
             mutation: mutation,
             variables: {
                 token: this.route.snapshot.params.token,
-                input: omit(Utility.relationsToIds(this.form.value), 'confirmPassword'),
+                input: input,
             },
         }).subscribe(() => {
             this.sending = false;

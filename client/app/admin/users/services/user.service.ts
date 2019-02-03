@@ -47,7 +47,7 @@ import {
     UserStatus,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { BookingService } from '../../bookings/services/booking.service';
@@ -161,9 +161,17 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
     public getFormValidators(): FormValidators {
         return {
+            login: [Validators.required, (control: FormControl): ValidationErrors | null => {
+                if (!control.value.toString().match(/^[a-zA-Z0-9\\.-]+$/)) {
+                    return {
+                        invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
+                    };
+                }
+
+                return null;
+            }],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
-            login: [Validators.required],
             email: [Validators.required],
             familyRelationship: [Validators.required],
         };

@@ -61,6 +61,7 @@
                 Maximum {{form.get('login').errors.maxlength.requiredLength}} caractères
             </mat-error>
             <mat-error *ngIf="form.get('login').hasError('required')">Requis</mat-error>
+            <mat-error *ngIf="form.get('login').hasError('invalid')">{{ form.get('login').getError('invalid') }}</mat-error>
         </mat-form-field>
 
         <!-- TODO : Implement click event -->

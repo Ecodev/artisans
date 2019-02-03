@@ -27,7 +27,7 @@ export class AnonymousUserService extends UserService {
 
     public getFormValidators(): FormValidators {
         return {
-            email: [Validators.required],
+            email: [Validators.required, Validators.email],
             hasInsurance: [],
             termsAgreement: [],
         };

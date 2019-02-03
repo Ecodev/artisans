@@ -51,6 +51,7 @@
             <input matInput formControlName="email" (change)="update()">
             <app-icon matPrefix name="alternate_email"></app-icon>
             <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
+            <mat-error *ngIf="form.get('email').hasError('email')">Adresse email invalide</mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex>

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
+import { UserService } from '../../../admin/users/services/user.service';
 
 @Component({
     selector: 'app-request-password-reset',
@@ -19,8 +20,9 @@ export class RequestPasswordResetComponent {
 
     constructor(private apollo: Apollo,
                 private alertService: AlertService,
-                private router: Router) {
-        this.form = new FormGroup({login: new ExtendedFormControl('', [Validators.required])});
+                private router: Router,
+                userService: UserService) {
+        this.form = new FormGroup({login: new ExtendedFormControl('', userService.getFormValidators().login)});
     }
 
     submit(): void {

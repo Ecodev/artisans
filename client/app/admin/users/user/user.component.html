@@ -63,6 +63,7 @@
                             <mat-label>email</mat-label>
                             <input matInput formControlName="email" (change)="update()">
                             <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('email').hasError('email')">Adresse email invalide</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>

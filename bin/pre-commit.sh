@@ -6,7 +6,6 @@ files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '\.(ts|html)$
 if [ "$files" != "" ]; then
 
     # Run TypeScript syntax check before commit
-    # TODO: For now we run on the entire project, it would be best to only run on changed files
     ./node_modules/.bin/lint-staged
     if [ $? -ne 0 ]; then
         pass=false

@@ -22,13 +22,9 @@ class CrudPermissionsType extends ObjectType
                     'type' => self::nonNull(self::boolean()),
                     'description' => 'Whether the user can create',
                     'resolve' => function (array $root, array $args, $context, ResolveInfo $info): bool {
-                        $contexts = $root['contexts'];
                         $type = $root['type'];
 
                         $instance = new $type();
-
-                        // Simulate an owner
-//                        $instance->timestampCreation();
 
                         if ($instance instanceof AccountingDocument) {
                             $instance->setExpenseClaim(new ExpenseClaim());

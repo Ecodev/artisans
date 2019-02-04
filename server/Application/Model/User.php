@@ -12,7 +12,6 @@ use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
 use Application\Traits\HasDoorAccess;
 use Application\Traits\HasRemarks;
-use Application\Utility;
 use Cake\Chronos\Chronos;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -500,58 +499,6 @@ class User extends AbstractModel
     {
         $this->role = self::ROLE_MEMBER; // Bypass security
         $this->setStatus(self::STATUS_ACTIVE);
-    }
-
-    /**
-     * Get a list of global permissions for this user
-     *
-     * @API\Field(type="GlobalPermissionsList")
-     *
-     * @return array
-     */
-    public function getGlobalPermissions(): array
-    {
-        $acl = new Acl();
-        $types = [
-            Account::class,
-            AccountingDocument::class,
-            Bookable::class,
-            BookableMetadata::class,
-            BookableTag::class,
-            Booking::class,
-            Category::class,
-            Country::class,
-            ExpenseClaim::class,
-            Image::class,
-            License::class,
-            Message::class,
-            self::class,
-            UserTag::class,
-        ];
-
-        $permissions = ['create'];
-        $result = [];
-
-        $previousUser = self::getCurrent();
-        self::setCurrent($this);
-        foreach ($types as $type) {
-            $instance = new $type();
-
-            if ($instance instanceof AccountingDocument) {
-                $instance->setExpenseClaim(new ExpenseClaim());
-            }
-
-            $sh = lcfirst(Utility::getShortClassName($instance));
-            $result[$sh] = [];
-
-            foreach ($permissions as $p) {
-                $result[$sh][$p] = $acl->isCurrentUserAllowed($instance, $p);
-            }
-        }
-
-        self::setCurrent($previousUser);
-
-        return $result;
     }
 
     /**

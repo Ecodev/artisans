@@ -47,12 +47,12 @@ import {
     UserStatus,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { BookingService } from '../../bookings/services/booking.service';
-import { ErrorStateMatcher } from '@angular/material';
 import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Injectable({
     providedIn: 'root',
@@ -69,7 +69,11 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
     private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
 
-    constructor(apollo: Apollo, protected router: Router, protected bookingService: BookingService) {
+    constructor(apollo: Apollo,
+                protected router: Router,
+                protected bookingService: BookingService,
+                private permissionsService: PermissionsService,
+    ) {
         super(apollo,
             'user',
             userQuery,
@@ -219,6 +223,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                         query: currentUserForProfileQuery,
                         data,
                     });
+                    this.permissionsService.setUser(this.currentUser);
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);
         });
@@ -404,7 +409,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return this.bookingService.watchAll(qvm, true);
     }
 
-    resolveByToken(token: string): Observable<{ model: UserByTokenQuery['userByToken'] }> {
+    public resolveByToken(token: string): Observable<{ model: UserByTokenQuery['userByToken'] }> {
 
         return this.apollo.query<UserByTokenQuery, UserByTokenQueryVariables>({
             query: userByTokenQuery,

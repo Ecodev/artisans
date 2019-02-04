@@ -16,114 +16,6 @@ class UserTest extends TestCase
         User::setCurrent(null);
     }
 
-    public function testGetGlobalPermissions(): void
-    {
-        $user = new User();
-        $actual = $user->getGlobalPermissions();
-        $expected = [
-            'account' => [
-                'create' => true,
-            ],
-            'accountingDocument' => [
-                'create' => true,
-            ],
-            'bookable' => [
-                'create' => false,
-            ],
-            'bookableMetadata' => [
-                'create' => false,
-            ],
-            'bookableTag' => [
-                'create' => false,
-            ],
-            'booking' => [
-                'create' => true,
-            ],
-            'category' => [
-                'create' => false,
-            ],
-            'country' => [
-                'create' => false,
-            ],
-            'expenseClaim' => [
-                'create' => true,
-            ],
-            'image' => [
-                'create' => false,
-            ],
-            'license' => [
-                'create' => false,
-            ],
-            'message' => [
-                'create' => false,
-            ],
-            'user' => [
-                'create' => true,
-            ],
-            'userTag' => [
-                'create' => false,
-            ],
-
-        ];
-        self::assertEquals($expected, $actual);
-
-        $expectedForAdmin = [
-            'account' => [
-                'create' => true,
-            ],
-            'accountingDocument' => [
-                'create' => true,
-            ],
-            'bookable' => [
-                'create' => true,
-            ],
-            'bookableMetadata' => [
-                'create' => true,
-            ],
-            'bookableTag' => [
-                'create' => true,
-            ],
-            'booking' => [
-                'create' => true,
-            ],
-            'category' => [
-                'create' => true,
-            ],
-            'country' => [
-                'create' => false,
-            ],
-            'expenseClaim' => [
-                'create' => true,
-            ],
-            'image' => [
-                'create' => true,
-            ],
-            'license' => [
-                'create' => true,
-            ],
-            'message' => [
-                'create' => false,
-            ],
-            'user' => [
-                'create' => true,
-            ],
-            'userTag' => [
-                'create' => true,
-            ],
-
-        ];
-
-        User::setCurrent($user);
-        self::assertSame($user, User::getCurrent());
-
-        $admin = new User(User::ROLE_ADMINISTRATOR);
-        $actualForAdmin = $admin->getGlobalPermissions();
-
-        self::assertEquals($expectedForAdmin, $actualForAdmin);
-        self::assertSame($user, User::getCurrent());
-        self::assertNotEquals($expectedForAdmin, $expected);
-    }
-
     /**
      * @dataProvider providerSetRole
      *
@@ -134,6 +26,7 @@ class UserTest extends TestCase
      */
     public function testSetRole(string $currentRole, string $oldRole, string $newRole, ?string $exception): void
     {
+        User::setCurrent(null);
         if ($currentRole !== User::ROLE_ANONYMOUS) {
             $currentUser = new User($currentRole);
             User::setCurrent($currentUser);

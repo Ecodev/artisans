@@ -80,7 +80,6 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($transaction);
 
         $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license, $category], ['read']);
-        $this->allow(User::ROLE_ANONYMOUS, $user, ['create']);
 
         $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['create', 'read', 'update']);
 
@@ -95,6 +94,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_INDIVIDUAL, [$account], ['read', 'update'], new IsOwner());
         $this->allow(User::ROLE_INDIVIDUAL, $message, ['read'], new IsRecipient());
 
+        $this->allow(User::ROLE_MEMBER, $user, ['create']);
         $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsOwner());
 
         $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $category], ['read']);

@@ -6,14 +6,19 @@ import { Literal } from '../../../shared/types';
 import { FormValidators } from '../../../shared/services/abstract-model.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { Validators } from '@angular/forms';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AnonymousUserService extends UserService {
 
-    constructor(apollo: Apollo, router: Router, bookingService: BookingService) {
-        super(apollo, router, bookingService);
+    constructor(apollo: Apollo,
+                router: Router,
+                bookingService: BookingService,
+                permissionsService: PermissionsService,
+    ) {
+        super(apollo, router, bookingService, permissionsService);
     }
 
     public getDefaultValues(): Literal {

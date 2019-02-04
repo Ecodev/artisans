@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api;
 
+use Application\Api\Field\Query\Permissions;
 use Application\Api\Field\Query\UserByToken;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
@@ -31,6 +32,7 @@ class QueryType extends ObjectType
         $specializedFields = [
             Viewer::build(),
             UserByToken::build(),
+            Permissions::build(),
         ];
 
         $fields = array_merge(

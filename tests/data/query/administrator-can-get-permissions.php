@@ -39,19 +39,19 @@ return [
                         'create' => true,
                     ],
                     'bookable' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'bookableMetadata' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'bookableTag' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'booking' => [
                         'create' => true,
                     ],
                     'category' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'country' => [
                         'create' => false,
@@ -60,22 +60,22 @@ return [
                         'create' => true,
                     ],
                     'image' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'license' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'message' => [
                         'create' => false,
                     ],
                     'transaction' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'user' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'userTag' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                 ],
             ],

@@ -33,10 +33,10 @@ return [
             'permissions' => [
                 'crud' => [
                     'account' => [
-                        'create' => true,
+                        'create' => false,
                     ],
                     'accountingDocument' => [
-                        'create' => true,
+                        'create' => false,
                     ],
                     'bookable' => [
                         'create' => false,
@@ -48,7 +48,7 @@ return [
                         'create' => false,
                     ],
                     'booking' => [
-                        'create' => true,
+                        'create' => false,
                     ],
                     'category' => [
                         'create' => false,
@@ -57,7 +57,7 @@ return [
                         'create' => false,
                     ],
                     'expenseClaim' => [
-                        'create' => true,
+                        'create' => false,
                     ],
                     'image' => [
                         'create' => false,

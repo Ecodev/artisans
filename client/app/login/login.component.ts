@@ -86,7 +86,7 @@ export class LoginComponent extends AbstractController implements OnInit, OnDest
             .subscribe(() => {
                 this.redirect();
                 this.loading = false;
-            });
+            }, () => this.loading = false);
     }
 
     /**

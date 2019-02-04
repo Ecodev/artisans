@@ -31,6 +31,9 @@ const routes: Routes = [
     {
         path: 'change-password/:token',
         component: ChangePasswordComponent,
+        resolve: {
+            user: UserByTokenResolver
+        },
     },
 ];
 

@@ -93,4 +93,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/bookable/new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/bookable/new']" icon="add" *ngIf="permissionsService.crud?.bookable.create"></app-fixed-button>

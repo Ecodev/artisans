@@ -63,4 +63,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/license/new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/license/new']" icon="add" *ngIf="permissionsService.crud?.license.create"></app-fixed-button>

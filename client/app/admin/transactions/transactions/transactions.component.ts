@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { AbstractList } from '../../shared/components/AbstractList';
 import { TransactionsQuery, TransactionsQueryVariables } from '../../../shared/generated-types';
 import { TransactionService } from '../services/transaction.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-transactions',
@@ -19,7 +20,9 @@ export class TransactionsComponent extends AbstractList<TransactionsQuery['trans
                 transactionService: TransactionService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('transactions',
             transactionService,

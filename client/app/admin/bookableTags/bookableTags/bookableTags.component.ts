@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { AbstractList } from '../../shared/components/AbstractList';
 import { BookableTagsQuery, BookableTagsQueryVariables } from '../../../shared/generated-types';
 import { BookableTagService } from '../services/bookableTag.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-bookable-tags',
@@ -19,7 +20,9 @@ export class BookableTagsComponent extends AbstractList<BookableTagsQuery['booka
                 bookableTagService: BookableTagService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('bookableTags',
             bookableTagService,

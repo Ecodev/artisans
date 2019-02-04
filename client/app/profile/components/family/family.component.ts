@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { LogicalOperator, UserQuery, UsersQueryVariables } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-family',
@@ -14,7 +15,9 @@ export class FamilyComponent implements OnInit {
 
     private familyMembers;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService,
+                public permissionsService: PermissionsService,
+    ) {
     }
 
     ngOnInit() {

@@ -66,4 +66,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/user-tag/new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/user-tag/new']" icon="add" *ngIf="permissionsService.crud?.userTag.create"></app-fixed-button>

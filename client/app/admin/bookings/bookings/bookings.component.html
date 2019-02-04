@@ -140,4 +140,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/booking/new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/booking/new']" icon="add" *ngIf="permissionsService.crud?.booking.create"></app-fixed-button>

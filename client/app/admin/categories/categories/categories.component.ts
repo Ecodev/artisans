@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { CategoriesQuery, CategoriesQueryVariables } from '../../../shared/generated-types';
 import { CategoryService } from '../services/category.service';
 import { AbstractNavigableList } from '../../shared/components/AbstractNavigableList';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-bookable-tags',
@@ -19,7 +20,9 @@ export class CategoriesComponent extends AbstractNavigableList<CategoriesQuery['
                 categoryService: CategoryService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('categories',
             categoryService,

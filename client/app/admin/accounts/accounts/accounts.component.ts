@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { AbstractList } from '../../shared/components/AbstractList';
 import { AccountsQuery, AccountsQueryVariables } from '../../../shared/generated-types';
 import { AccountService } from '../services/account.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-accounts',
@@ -19,7 +20,9 @@ export class AccountsComponent extends AbstractList<AccountsQuery['accounts'], A
                 accountService: AccountService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('accounts',
             accountService,

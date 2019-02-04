@@ -103,4 +103,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/transaction/new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/transaction/new']" icon="add" *ngIf="permissionsService.crud?.transaction.create"></app-fixed-button>

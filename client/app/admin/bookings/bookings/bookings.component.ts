@@ -6,6 +6,7 @@ import { BookingService } from '../services/booking.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-bookings',
@@ -19,7 +20,9 @@ export class BookingsComponent extends AbstractList<BookingsQuery['bookings'], B
                 public bookingService: BookingService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('bookings',
             bookingService,

@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { AbstractList } from '../../shared/components/AbstractList';
 import { UserTagsQuery, UserTagsQueryVariables } from '../../../shared/generated-types';
 import { UserTagService } from '../services/userTag.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-user-tags',
@@ -19,7 +20,9 @@ export class UserTagsComponent extends AbstractList<UserTagsQuery['userTags'], U
                 userTagService: UserTagService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('userTags',
             userTagService,

@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { AbstractList } from '../../shared/components/AbstractList';
 import { ExpenseClaimsQuery, ExpenseClaimsQueryVariables } from '../../../shared/generated-types';
 import { ExpenseClaimService } from '../services/expenseClaim.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-expense-claims',
@@ -20,7 +21,9 @@ export class ExpenseClaimsComponent extends AbstractList<ExpenseClaimsQuery['exp
                 expenseClaimService: ExpenseClaimService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('expenseClaims',
             expenseClaimService,

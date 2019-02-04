@@ -100,4 +100,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/expense-claim/new']" icon="add"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/expense-claim/new']" icon="add" *ngIf="permissionsService.crud?.expenseClaim.create"></app-fixed-button>

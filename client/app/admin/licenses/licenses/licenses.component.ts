@@ -6,6 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { AbstractList } from '../../shared/components/AbstractList';
 import { LicensesQuery, LicensesQueryVariables } from '../../../shared/generated-types';
 import { LicenseService } from '../services/license.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-licenses',
@@ -19,7 +20,9 @@ export class LicensesComponent extends AbstractList<LicensesQuery['licenses'], L
                 licenseService: LicenseService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                public permissionsService: PermissionsService,
+    ) {
 
         super('licenses',
             licenseService,

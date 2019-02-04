@@ -219,4 +219,63 @@ class UserTest extends TestCase
 
         self::assertCount(5, array_unique($allTokens), 'all tokens must be unique');
     }
+
+    public function providerCanOpenDoor(): array
+    {
+        return [
+            'anonymous cannot open' => [User::ROLE_ANONYMOUS, User::STATUS_ACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+                '127.0.0.1',
+                ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
+            ],
+            'active member can open from premise' => [User::ROLE_MEMBER, User::STATUS_ACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+                '127.0.0.1',
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+            ],
+            'active member not at premise cannot open' => [User::ROLE_MEMBER, User::STATUS_ACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+                '192.168.1.1',
+                ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
+            ],
+            'inactive member cannot open' => [User::ROLE_MEMBER, User::STATUS_INACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+                '127.0.0.1',
+                ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
+            ],
+            'responsible can open' => [User::ROLE_RESPONSIBLE, User::STATUS_ACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+                '127.0.0.1',
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+            ],
+            'administrator can open' => [User::ROLE_ADMINISTRATOR, User::STATUS_ACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+                '127.0.0.1',
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerCanOpenDoor,
+     *
+     * @param string $role
+     * @param string $status
+     * @param array $doors
+     * @param string $remoteHost
+     * @param array $result
+     */
+    public function testCanOpenDoor(string $role, string $status, array $doors, string $remoteHost, array $result): void
+    {
+        $_SERVER['REMOTE_ADDR'] = $remoteHost;
+        $user = new User($role);
+        $user->setStatus($status);
+        foreach ($doors as $door => $value) {
+            $setter = 'set' . ucfirst($door);
+            $user->$setter($value);
+        }
+        foreach ($result as $door => $canOpen) {
+            self::assertSame($canOpen, $user->getCanOpenDoor($door));
+        }
+    }
 }

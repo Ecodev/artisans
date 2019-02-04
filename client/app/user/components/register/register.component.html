@@ -37,24 +37,7 @@
                     <mat-error *ngIf="form.get('login').hasError('invalid')">{{ form.get('login').getError('invalid') }}</mat-error>
                 </mat-form-field>
 
-                <mat-form-field fxFlex>
-                    <mat-label>Mot de passe</mat-label>
-                    <input type="password" matInput formControlName="password">
-                    <app-icon matPrefix name="lock"></app-icon>
-                    <mat-error *ngIf="form.get('password').hasError('minlength')">
-                        Minimum {{form.get('password').errors.minlength.requiredLength}} caractères
-                    </mat-error>
-                    <mat-error *ngIf="form.get('password').hasError('required')">Requis</mat-error>
-                </mat-form-field>
-
-                <mat-form-field fxFlex>
-                    <mat-label>Confirmation du mot de passe</mat-label>
-                    <input type="password" matInput formControlName="confirmPassword" [errorStateMatcher]="confirmPasswordStateMatcher">
-                    <app-icon matPrefix name="lock"></app-icon>
-                    <mat-error *ngIf="form.hasError('notSame')">
-                        Les mot de passe ne sont pas identiques
-                    </mat-error>
-                </mat-form-field>
+                <app-password [form]="form"></app-password>
             </div>
 
             <mat-divider></mat-divider>

@@ -7,6 +7,7 @@ import { FormValidators } from '../../../shared/services/abstract-model.service'
 import { Validators } from '@angular/forms';
 import { ValidatorFn } from '@angular/forms/src/directives/validators';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
+import { PasswordComponent } from '../password/password.component';
 
 @Injectable({
     providedIn: 'root',
@@ -19,7 +20,7 @@ export class NewUserService extends UserService {
 
     public getDefaultValues(): Literal {
         const values = {
-            confirmPassword: '',
+            password: '',
             hasInsurance: true, // already accepted on step 1
             termsAgreement: true,  // already accepted on step 1
         };
@@ -30,8 +31,6 @@ export class NewUserService extends UserService {
     public getFormValidators(): FormValidators {
 
         const validators = {
-            password: [Validators.required, Validators.minLength(9)],
-            confirmPassword: [],
             hasInsurance: [],
             termsAgreement: [],
             locality: [Validators.required],
@@ -41,9 +40,5 @@ export class NewUserService extends UserService {
         };
 
         return Object.assign(super.getFormValidators(), validators);
-    }
-
-    public getFormGroupValidators(): ValidatorFn[] {
-        return [UserService.checkPassword];
     }
 }

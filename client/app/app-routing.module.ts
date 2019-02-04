@@ -17,7 +17,7 @@ export const routes: Routes = [
     {
         path: 'user',
         component: HomeComponent,
-                loadChildren: './user/user.module#UserModule',
+        loadChildren: './user/user.module#UserModule',
     },
     // Auth required routes
     {
@@ -47,8 +47,14 @@ export const routes: Routes = [
                 component: DoorComponent,
                 canActivate: [DoorGuard],
             },
+        ],
+    },
+    {
+        path: 'error',
+        component: HomeComponent,
+        children: [
             {
-                path: 'error',
+                path: '',
                 component: ErrorComponent,
             },
         ],

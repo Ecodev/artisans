@@ -127,7 +127,7 @@ export class AbstractDetail<Tone,
     protected postCreate(res: any) {
     }
 
-    protected initForm() {
+    protected initForm(): void {
         const formConfig = this.service.getFormConfig(this.data.model);
         this.form = new FormGroup(formConfig, {validators: this.service.getFormGroupValidators()});
     }

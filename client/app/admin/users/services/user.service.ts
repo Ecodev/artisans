@@ -99,17 +99,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         };
     }
 
-    public static checkPassword(formGroup: FormGroup): Literal | null {
-        if (!formGroup) {
-            return null;
-        }
-
-        const pass = formGroup.controls.password.value;
-        const confirmPass = formGroup.controls.confirmPassword.value;
-
-        return pass === confirmPass ? null : {notSame: true};
-    }
-
     public static canAccessAdmin(user: CurrentUserForProfileQuery['viewer']): boolean {
         if (!user) {
             return false;
@@ -162,7 +151,8 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     public getFormValidators(): FormValidators {
         return {
             login: [Validators.required, (control: FormControl): ValidationErrors | null => {
-                if (!control.value.toString().match(/^[a-zA-Z0-9\\.-]+$/)) {
+                const value = control.value || '';
+                if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
                     return {
                         invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
                     };
@@ -424,16 +414,5 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         }).pipe(map(result => {
             return {model: result.data.userByToken};
         }));
-    }
-}
-
-export class ConfirmPasswordStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-
-        if (control && control.parent && control.parent instanceof FormGroup) {
-            return !!UserService.checkPassword(control.parent) && control.dirty;
-        }
-
-        return false;
     }
 }

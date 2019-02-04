@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Query;
 
+use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
 use Application\Model\User;
 use Application\Repository\UserRepository;
@@ -16,12 +17,12 @@ abstract class UserByToken implements FieldInterface
         return
             [
                 'name' => 'userByToken',
-                'type' => _types()->getOutput(User::class),
+                'type' => Type::nonNull(_types()->getOutput(User::class)),
                 'description' => 'Get a user by its temporary token',
                 'args' => [
                     'token' => Type::nonNull(_types()->get('Token')),
                 ],
-                'resolve' => function ($root, array $args): ?User {
+                'resolve' => function ($root, array $args): User {
                     /** @var UserRepository $repository */
                     $repository = _em()->getRepository(User::class);
 
@@ -30,8 +31,8 @@ abstract class UserByToken implements FieldInterface
                     $user = $repository->findOneByToken($args['token']);
                     $repository->getAclFilter()->setEnabled(true);
 
-                    if ($user && !$user->isTokenValid()) {
-                        $user = null;
+                    if (!$user || !$user->isTokenValid()) {
+                        throw new Exception('User not found for token `' . $args['token'] . '`.');
                     }
 
                     return $user;

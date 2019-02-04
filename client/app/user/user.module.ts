@@ -7,6 +7,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { RegisterConfirmComponent } from './components/register/register-confirm.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
+import { PasswordComponent } from './components/password/password.component';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { IchtusModule } from '../shared/modules/ichtus.module';
         RegisterConfirmComponent,
         RequestPasswordResetComponent,
         ChangePasswordComponent,
+        PasswordComponent,
     ],
     imports: [
         CommonModule,

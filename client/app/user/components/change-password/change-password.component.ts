@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { AlertService } from '../../../shared/components/alert/alert.service';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
-import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 
 @Component({
     selector: 'app-change-password',
@@ -23,14 +22,7 @@ export class ChangePasswordComponent {
                 private router: Router) {
         this.token = route.snapshot.params.token;
 
-        const tokenControl = new ExtendedFormControl(this.token, [Validators.required]);
-        tokenControl.markAsDirty();
-        this.form = new FormGroup({
-            password: new ExtendedFormControl('', [Validators.required]),
-            confirmPassword: new ExtendedFormControl('', [Validators.required]),
-            token: tokenControl,
-        });
-
+        this.form = new FormGroup({});
     }
 
     submit(): void {

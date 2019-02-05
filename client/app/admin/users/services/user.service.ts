@@ -4,11 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import {
-    AbstractModelService,
-    AutoRefetchQueryRef,
-    FormValidators,
-} from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
     currentUserForProfileQuery, leaveFamilyMutation,
@@ -21,6 +17,7 @@ import {
     usersQuery,
 } from './user.queries';
 import {
+    BookingSortingField,
     BookingsQuery,
     BookingsQueryVariables,
     BookingStatus,
@@ -37,6 +34,7 @@ import {
     Sex,
     UnregisterMutation,
     UnregisterMutationVariables,
+    SortingOrder,
     UpdateUserMutation,
     UpdateUserMutationVariables,
     UserByTokenQuery,
@@ -266,91 +264,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         }));
     }
 
-    /**
-     * Carnet de sorties (sorties en cours)
-     */
-    public getRunningNavigations(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
 
-        // User is responsible and has ichtus bookable
-        const ownerWithSelfApproved = {
-            conditions: [
-                {
-                    owner: {equal: {value: user.id}},
-                    endDate: {null: {}},
-                },
-            ],
-            joins: {
-                bookables: {
-                    type: JoinType.leftJoin,
-                    conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}],
-                },
-            },
-        };
-
-        // User is responsible and has own material
-        const ownerWithoutBookable = {
-            conditions: [
-                {
-                    owner: {equal: {value: user.id}},
-                    endDate: {null: {}},
-                    bookables: {empty: {}},
-                },
-            ],
-        };
-
-        // User has guest and has ichtus material
-        const creatorWithGuestAndSelfApproved = {
-            conditions: [
-                {
-                    creator: {equal: {value: user.id}},
-                    owner: {null: {}},
-                    endDate: {null: {}},
-                },
-            ],
-            joins: {
-                bookables: {
-                    type: JoinType.leftJoin,
-                    conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}],
-                },
-            },
-        };
-
-        // User has guest with own material
-        const creatorWithGuestWithoutBookable = {
-            conditions: [
-                {
-                    creator: {equal: {value: user.id}},
-                    owner: {null: {}},
-                    endDate: {null: {}},
-                    bookables: {empty: {}},
-                },
-            ],
-        };
-
-        const variables: BookingsQueryVariables = {
-            filter: {
-                groups: [
-                    ownerWithSelfApproved,
-                    {
-                        groupLogic: LogicalOperator.OR,
-                        ...ownerWithoutBookable,
-                    },
-                    {
-                        groupLogic: LogicalOperator.OR,
-                        ...creatorWithGuestAndSelfApproved,
-                    },
-                    {
-                        groupLogic: LogicalOperator.OR,
-                        ...creatorWithGuestWithoutBookable,
-                    },
-                ],
-            },
-        };
-
-        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
-        qvm.set('variables', variables);
-        return this.bookingService.watchAll(qvm, true);
-    }
 
     /**
      * Impact members

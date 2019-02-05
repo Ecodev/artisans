@@ -110,7 +110,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         if (!user) {
             return false;
         }
-        return [UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
+        return [UserRole.responsible, UserRole.administrator].includes(user.role);
     }
 
     public static canAccessDoor(user: CurrentUserForProfileQuery['viewer']): boolean {

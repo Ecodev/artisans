@@ -139,7 +139,7 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
     }
 
     public showBecomeMember() {
-        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].indexOf(this.data.model.role) > -1;
+        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].includes(this.data.model.role);
         const isOwner = !this.data.model.owner;
 
         return !isMember && !isOwner;

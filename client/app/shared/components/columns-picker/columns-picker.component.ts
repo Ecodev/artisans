@@ -46,7 +46,7 @@ export class ColumnsPickerComponent implements AfterViewInit {
 
     initColumns(): void {
         this.availableColumns.forEach(col => {
-            col.show = this.initialSelection && this.initialSelection.indexOf(col.key) === -1 ? false : col.show;
+            col.show = this.initialSelection && !this.initialSelection.includes(col.key) ? false : col.show;
         });
     }
 

@@ -3,6 +3,7 @@ import { LogicalOperator, UserQuery, UsersQueryVariables } from '../../../shared
 import { UserService } from '../../../admin/users/services/user.service';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-family',
@@ -16,11 +17,16 @@ export class FamilyComponent implements OnInit {
     private familyMembers;
 
     constructor(private userService: UserService,
-                public permissionsService: PermissionsService,
-    ) {
+                private route: ActivatedRoute,
+                public permissionsService: PermissionsService) {
+
     }
 
     ngOnInit() {
+
+        if (this.route.snapshot.data.user) {
+            this.owner = this.route.snapshot.data.user.model;
+        }
 
         if (this.owner) {
             const variables = new QueryVariablesManager<UsersQueryVariables>();
@@ -48,4 +54,7 @@ export class FamilyComponent implements OnInit {
         this.familyMembers.push(emptyUser);
     }
 
+    public canLeave() {
+        return !!this.owner;
+    }
 }

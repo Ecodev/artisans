@@ -19,8 +19,10 @@ import {
     TransactionsQueryVariables,
     UpdateTransactionMutation,
     UpdateTransactionMutationVariables,
+    UserQuery,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
+import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 
 @Injectable({
     providedIn: 'root',
@@ -55,7 +57,7 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
             internalRemarks: '',
             remarks: '',
             category: null,
-            bookable: null
+            bookable: null,
         };
     }
 
@@ -64,6 +66,16 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
             name: [Validators.required, Validators.maxLength(100)],
             account: [Validators.required],
         };
+    }
+
+    public getForUser(user: UserQuery['user']) {
+        const variables: TransactionsQueryVariables = {
+            filter: {groups: [{conditions: [{owner: {in: {values: [user.id]}}}]}]},
+        };
+
+        const qvm = new QueryVariablesManager<TransactionsQueryVariables>();
+        qvm.set('variables', variables);
+        return this.watchAll(qvm);
     }
 
 }

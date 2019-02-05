@@ -1,0 +1,100 @@
+<div fxLayout="column" fxLayoutGap="30px">
+
+
+    <mat-form-field>
+        <mat-label>IBAN</mat-label>
+        <input matInput [(ngModel)]="user.account.iban" (change)="updateOrCreateAccount()">
+        <!--*ngIf="form.get('iban').disabled"-->
+        <button mat-icon-button matSuffix (click)="unlockIBAN()" >
+            <app-icon name="lock"></app-icon>
+        </button>
+    </mat-form-field>
+
+    <div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="10px" >
+            <h2 fxFlex class="mat-headline no-margin-bottom">Dépenses annoncées</h2>
+            <!--[disabled]="!form.get('iban').value"-->
+            <button mat-stroked-button color="primary">Demander un remboursement</button>
+            <button mat-stroked-button color="primary">Annoncer une dépense</button>
+        </div>
+
+        <div class="responsive-table">
+            <table mat-table *ngIf="runningExpenseClaimsDS" [dataSource]="runningExpenseClaimsDS">
+                <tr mat-header-row *matHeaderRowDef="expenseClaimsColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: expenseClaimsColumns;"></tr>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                    <td mat-cell *matCellDef="let expenseClaim">{{ expenseClaim.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+                    <td mat-cell *matCellDef="let expenseClaim">{{ expenseClaim.description }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+                    <td mat-cell *matCellDef="let expenseClaim">
+                        <app-money [amount]="expenseClaim.amount"></app-money>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cancel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-1em-column></th>
+                    <td mat-cell *matCellDef="let expenseClaim">
+                        <button mat-icon-button
+                                color="warn"
+                                (click)="cancelExpenseClaim(expenseClaim)"
+                                *ngIf="canCancelExpenseClaim(expenseClaim)"
+                        >
+                            <app-icon name="delete"></app-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+            </table>
+        </div>
+
+    </div>
+    <div *ngIf="transactionsDS && transactionsDS.length">
+        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
+            <h2 fxFlex class="mat-headline no-margin-bottom">Transactions</h2>
+            <button mat-stroked-button color="primary">Annoncer une dépense</button>
+        </div>
+
+        <div class="responsive-table">
+            <table mat-table *ngIf="transactionsDS" [dataSource]="transactionsDS">
+                <tr mat-header-row *matHeaderRowDef="transactionsColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: transactionsColumns;"></tr>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                    <td mat-cell *matCellDef="let transaction">{{ transaction.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Montant</th>
+                    <td mat-cell *matCellDef="let transaction">
+                        <app-money [amount]="transaction.amount"></app-money>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cancel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-1em-column></th>
+                    <td mat-cell *matCellDef="let transaction">
+                        <button mat-icon-button
+                                color="warn"
+                                (click)="cancelExpenseClaim(transaction)"
+                                *ngIf="canCancelExpenseClaim(transaction)"
+                        >
+                            <app-icon name="delete"></app-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+            </table>
+        </div>
+
+    </div>
+</div>

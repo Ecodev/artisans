@@ -1,4 +1,8 @@
-<div overflow style="padding:5px">
+<div [style.max-width.px]="1130" [style.margin]="'auto'" class="padding">
+    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="margin-bottom">
+        <h2 class="mat-headline no-margin-bottom" fxFlex>Données personelles du ménage</h2>
+        <button mat-flat-button color="warn" [disabled]="!canLeave()">Quitter le ménage</button>
+    </div>
     <mat-accordion>
         <mat-expansion-panel *ngFor="let familyMember of familyMembers">
             <mat-expansion-panel-header>
@@ -9,5 +13,7 @@
     </mat-accordion>
 </div>
 <div>
-    <button mat-flat-button color="primary" (click)="add()" class="margin-top" *ngIf="permissionsService.crud?.user.create">Ajouter une personne</button>
+    <button mat-flat-button color="primary" (click)="add()" class="margin-top" *ngIf="permissionsService.crud?.user.create">
+        Ajouter une personne
+    </button>
 </div>

@@ -1,27 +1,14 @@
 <div fxLayout="column" fxLayoutGap="30px" class="padding">
 
-<<<<<<< HEAD
-    <div fxFlex="none" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px" overflow>
-
-        <div fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
-            <div fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                <ngx-avatar [name]="data.model.name" [size]="50"></ngx-avatar>
-                <div class="mat-display-1 no-margin">{{data.model.name}}</div>
-            </div>
-            <div fxLayoutGap="10px">
-                <button mat-flat-button color="warn" (click)="unregister()">Démissioner</button>
-            </div>
-=======
     <div fxLayout="column" fxLayout.gt-xs="row" class="padding" fxLayoutGap.gt-xs="0px" fxLayoutGap="30px">
         <div fxFlex="none" fxFlex.gt-xs fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
             <ngx-avatar [name]="user.name" [size]="50"></ngx-avatar>
             <div class="mat-display-1 no-margin-bottom">{{ user.name }}</div>
             <button mat-flat-button color="warn" [disabled]="!showBecomeMember()">Devenir membre</button>
->>>>>>> Review profile page #6038
         </div>
 
         <!-- CREDIT -->
-        <div fxFlex="none" fxLayout="row" fxLayoutAlign="center" >
+        <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
             <div fxLayout="column" fxLayoutGap="20px">
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
@@ -61,18 +48,8 @@
 
         </div>
 
-<<<<<<< HEAD
-    </div>
-
-    <div fxFlex="none" fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="20px">
-
-        <div fxLayout="row" fxLayoutAlign="start center">
-            <h2 fxFlex class="mat-headline no-margin">Famille</h2>
-            <button mat-flat-button color="warn" [disabled]="!canLeaveFamily()" (click)="leaveFamily()">Quitter le ménage</button>
-=======
         <div fxFlex>
             <router-outlet></router-outlet>
->>>>>>> Review profile page #6038
         </div>
 
     </div>

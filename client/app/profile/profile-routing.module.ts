@@ -42,28 +42,6 @@ const routes: Routes = [
             },
         ],
     },
-
-    {
-        path: 'new',
-        component: RegisterComponent,
-        data: {
-            step: 1,
-        },
-    },
-    {
-        path: 'confirm/:token',
-        component: RegisterConfirmComponent,
-        data: {
-            step: 2,
-        },
-        resolve: {
-            user: UserByTokenResolver,
-        },
-    },
-    {
-        path: 'expense-claim/new',
-        component: CreateExpenseClaimComponent,
-    },
 ];
 
 @NgModule({

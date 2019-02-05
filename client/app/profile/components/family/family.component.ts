@@ -1,9 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { LogicalOperator, UserQuery, UsersQueryVariables } from '../../../shared/generated-types';
+import { Component, OnInit } from '@angular/core';
+import { LogicalOperator, UsersQueryVariables } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { ActivatedRoute } from '@angular/router';
+import { AbstractModelService } from '../../../shared/services/abstract-model.service';
+import { AlertService } from '../../../shared/components/alert/alert.service';
+import { mergeWith } from 'lodash';
 
 @Component({
     selector: 'app-family',
@@ -12,23 +15,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FamilyComponent implements OnInit {
 
-    @Input() owner: UserQuery['user'];
-
+    public user;
     private familyMembers;
 
     constructor(private userService: UserService,
                 private route: ActivatedRoute,
+                private alertService: AlertService,
                 public permissionsService: PermissionsService) {
 
     }
 
     ngOnInit() {
 
-        if (this.route.snapshot.data.user) {
-            this.owner = this.route.snapshot.data.user.model;
-        }
+        this.user = this.route.snapshot.data.user.model;
 
-        if (this.owner) {
+        if (this.user) {
             const variables = new QueryVariablesManager<UsersQueryVariables>();
             const filters: UsersQueryVariables = {
                 filter: {
@@ -36,8 +37,8 @@ export class FamilyComponent implements OnInit {
                         {
                             conditionsLogic: LogicalOperator.OR,
                             conditions: [
-                                {owner: {equal: {value: this.owner.id}}},
-                                {id: {equal: {value: this.owner.id}}},
+                                {owner: {equal: {value: this.user.id}}},
+                                {id: {equal: {value: this.user.id}}},
                             ],
                         },
                     ],
@@ -54,7 +55,23 @@ export class FamilyComponent implements OnInit {
         this.familyMembers.push(emptyUser);
     }
 
-    public canLeave() {
-        return !!this.owner;
+    public canLeaveFamily() {
+        return this.user.owner && this.user.owner.id !== this.user.id;
+    }
+
+    public leaveFamily(): void {
+        const explanation = `En quittant le ménage vous perdrez les privilèges associés au ménage.
+        Il vous faudra alors faire une demande d'adhésion en tant que membre indépendant pour retrouver ces privilièges.`;
+        this.alertService.confirm('Quitter le ménage', explanation, 'Quitter le ménage')
+            .subscribe(confirmed => {
+                if (confirmed) {
+                    this.userService.leaveFamily(this.user).subscribe(user => {
+
+                        mergeWith(this.user, user, AbstractModelService.mergeOverrideArray);
+                        const message = 'Vous avez quitté le ménage';
+                        this.alertService.info(message, 5000);
+                    });
+                }
+            });
     }
 }

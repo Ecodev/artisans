@@ -89,7 +89,7 @@ class Booking extends AbstractModel
      *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $guest;
+    private $guest = false;
 
     /**
      * Constructor

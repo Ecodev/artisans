@@ -7,7 +7,8 @@ import { pick } from 'lodash';
 import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
-    currentUserForProfileQuery, leaveFamilyMutation,
+    currentUserForProfileQuery,
+    leaveFamilyMutation,
     loginMutation,
     logoutMutation,
     unregisterMutation,
@@ -17,7 +18,6 @@ import {
     usersQuery,
 } from './user.queries';
 import {
-    BookingSortingField,
     BookingsQuery,
     BookingsQueryVariables,
     BookingStatus,
@@ -25,8 +25,8 @@ import {
     CreateUserMutation,
     CreateUserMutationVariables,
     CurrentUserForProfileQuery,
-    JoinType, LeaveFamilyMutation, LeaveFamilyMutationVariables,
-    LogicalOperator,
+    LeaveFamilyMutation,
+    LeaveFamilyMutationVariables,
     LoginMutation,
     LoginMutationVariables,
     LogoutMutation,
@@ -34,7 +34,6 @@ import {
     Sex,
     UnregisterMutation,
     UnregisterMutationVariables,
-    SortingOrder,
     UpdateUserMutation,
     UpdateUserMutationVariables,
     UserByTokenQuery,
@@ -263,8 +262,6 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             return {model: result};
         }));
     }
-
-
 
     /**
      * Impact members

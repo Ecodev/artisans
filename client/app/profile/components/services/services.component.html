@@ -57,7 +57,7 @@
 
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
             <h2 fxFlex class="mat-headline no-margin-bottom">Cotisation / Prestations souscrites</h2>
-            <button mat-flat-button color="warn" [disabled]="true">Démissionner</button>
+            <button mat-flat-button color="warn" (click)="unregister()">Démissioner</button>
         </div>
 
         <div class="responsive-table">

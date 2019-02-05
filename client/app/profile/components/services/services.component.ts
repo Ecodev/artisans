@@ -6,6 +6,7 @@ import { BookingsQuery, BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
+import { AlertService } from '../../../shared/components/alert/alert.service';
 
 @Component({
     selector: 'app-services',
@@ -28,6 +29,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
 
     constructor(private userService: UserService,
                 private route: ActivatedRoute,
+                private alertService: AlertService,
                 private bookingService: BookingService) {
     }
 
@@ -62,9 +64,21 @@ export class ServicesComponent implements OnInit, OnDestroy {
         this.bookingService.delete([booking]);
     }
 
-
     public addApplication(bookable) {
         this.bookingService.createWithBookable(bookable, this.user).subscribe(() => {
         });
+    }
+
+    public unregister(): void {
+        this.alertService.confirm('Démission', 'Voulez-vous quitter le club Ichtus ?', 'Démissioner définitivement')
+            .subscribe(confirmed => {
+                if (confirmed) {
+                    this.userService.unregister(this.user).subscribe(() => {
+                        const message = 'Vous avez démissioné';
+                        this.alertService.info(message, 5000);
+                        this.userService.logout();
+                    });
+                }
+            });
     }
 }

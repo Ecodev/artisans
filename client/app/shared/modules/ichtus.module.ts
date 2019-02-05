@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RelationsComponent } from '../components/relations/relations.component';
 import { SelectComponent } from '../components/select/select.component';
 import { MaterialModule } from './material.module';
@@ -8,7 +8,6 @@ import { TableButtonComponent } from '../../admin/shared/components/table-button
 import { FixedButtonComponent } from '../components/fixed-button/fixed-button.component';
 import { DetailFixedButtonComponent } from '../components/detail-fixed-button/detail-fixed-button.component';
 import { NaturalSearchModule } from '@ecodev/natural-search';
-import { IconComponent } from '../components/icon/icon.component';
 import { IconModule } from '../components/icon/icon.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -25,64 +24,46 @@ import { CardComponent } from '../components/card/card.component';
 import { ngfModule } from 'angular-file';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
+import { NavigationsComponent } from '../components/navigations/navigations.component';
+
+const declarations = [
+    RelationsComponent,
+    SelectComponent,
+    SelectEnumComponent,
+    ColumnsPickerComponent,
+    ColumnsPickerColumnDirective,
+    TableButtonComponent,
+    FixedButtonComponent,
+    DetailFixedButtonComponent,
+    AddressComponent,
+    EnumPipe,
+    CapitalizePipe,
+    MoneyComponent,
+    BookableMetadataComponent,
+    FocusDirective,
+    CardComponent,
+    FileDropDirective,
+    FileComponent,
+    NavigationsComponent,
+];
+
+const imports = [
+    CommonModule,
+    MaterialModule,
+    NaturalSearchModule,
+    IconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AvatarModule,
+    ngfModule,
+];
 
 @NgModule({
-    declarations: [
-        RelationsComponent,
-        SelectComponent,
-        SelectEnumComponent,
-        ColumnsPickerComponent,
-        ColumnsPickerColumnDirective,
-        TableButtonComponent,
-        FixedButtonComponent,
-        DetailFixedButtonComponent,
-        AddressComponent,
-        EnumPipe,
-        CapitalizePipe,
-        MoneyComponent,
-        BookableMetadataComponent,
-        FocusDirective,
-        CardComponent,
-        FileDropDirective,
-        FileComponent
-    ],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        NaturalSearchModule,
-        IconModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule,
-        AvatarModule,
-        ngfModule,
-    ],
-    exports: [
-        RelationsComponent,
-        SelectComponent,
-        SelectEnumComponent,
-        ColumnsPickerComponent,
-        ColumnsPickerColumnDirective,
-        TableButtonComponent,
-        FixedButtonComponent,
-        DetailFixedButtonComponent,
-        MaterialModule,
-        NaturalSearchModule,
-        IconComponent,
-        FormsModule,
-        ReactiveFormsModule,
-        AddressComponent,
-        EnumPipe,
-        CapitalizePipe,
-        AvatarModule,
-        MoneyComponent,
-        BookableMetadataComponent,
-        FocusDirective,
-        CardComponent,
-        ngfModule,
-        FileDropDirective,
-        FileComponent
-    ],
+    declarations: [...declarations],
+    imports: [...imports],
+    exports: [...imports, ...declarations],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class IchtusModule {
 }

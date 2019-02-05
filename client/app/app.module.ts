@@ -89,7 +89,6 @@ registerLocaleData(localeFRCH);
         },
         {provide: LOCALE_ID, useValue: 'fr-CH'},
     ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap: [AppComponent],
 })
 export class AppModule {

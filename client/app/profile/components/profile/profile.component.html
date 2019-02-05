@@ -9,7 +9,6 @@
             </div>
             <div fxLayoutGap="10px">
                 <button mat-flat-button color="warn" (click)="unregister()">Démissioner</button>
-                <button mat-flat-button color="warn" [disabled]="!showBecomeMember()">Devenir membre</button>
             </div>
         </div>
 
@@ -139,7 +138,7 @@
 
         <div fxLayout="row" fxLayoutAlign="start center">
             <h2 fxFlex class="mat-headline no-margin">Famille</h2>
-            <button mat-flat-button color="warn" [disabled]="!canLeave()">Quitter le ménage</button>
+            <button mat-flat-button color="warn" [disabled]="!canLeaveFamily()" (click)="leaveFamily()">Quitter le ménage</button>
         </div>
 
         <app-family *ngIf="!data.model.owner" [owner]="data.model" fxFlex="1 0 0px" fxLayout="column"></app-family>

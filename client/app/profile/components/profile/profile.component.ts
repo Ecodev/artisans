@@ -17,9 +17,10 @@ import { UserService } from '../../../admin/users/services/user.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { AccountService } from '../../../admin/accounts/services/account.service';
 import { FormControl } from '@angular/forms';
+import { mergeWith } from 'lodash';
 
 @Component({
     selector: 'app-profile',
@@ -138,15 +139,8 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
         }
     }
 
-    public showBecomeMember() {
-        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].includes(this.data.model.role);
-        const isOwner = !this.data.model.owner;
-
-        return !isMember && !isOwner;
-    }
-
-    public canLeave() {
-        return !!this.data.model.owner;
+    public canLeaveFamily() {
+        return this.data.model.owner && this.data.model.owner.id !== this.data.model.id;
     }
 
     public unregister(): void {
@@ -154,9 +148,25 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
             .subscribe(confirmed => {
                 if (confirmed) {
                     this.userService.unregister(this.data.model).subscribe(() => {
-                        const message = 'Vous avez démissioné avec succès';
+                        const message = 'Vous avez démissioné';
                         this.alertService.info(message, 5000);
                         this.userService.logout();
+                    });
+                }
+            });
+    }
+
+    public leaveFamily(): void {
+        const explanation = `En quittant le ménage vous perdrez les privilèges associés au ménage.
+        Il vous faudra alors faire une demande d'adhésion en tant que membre indépendant pour retrouver ces privilièges.`;
+        this.alertService.confirm('Quitter le ménage', explanation, 'Quitter le ménage')
+            .subscribe(confirmed => {
+                if (confirmed) {
+                    this.userService.leaveFamily(this.data.model).subscribe(user => {
+
+                        mergeWith(this.data.model, user, AbstractModelService.mergeOverrideArray);
+                        const message = 'Vous avez quitté le ménage';
+                        this.alertService.info(message, 5000);
                     });
                 }
             });

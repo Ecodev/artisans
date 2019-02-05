@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\Acl\Acl;
 use Application\Api\Exception;
 use Application\DBAL\Types\BillingTypeType;
 use Application\DBAL\Types\RelationshipType;
@@ -457,12 +456,14 @@ class User extends AbstractModel
         }
 
         if ($this->getOwner()) {
+            $this->getOwner()->getEmail(); // Trigger lazy loading
             $this->getOwner()->users->removeElement($this);
         }
 
         parent::setOwner($owner);
 
         if ($this->getOwner()) {
+            $this->getOwner()->getEmail(); // Trigger lazy loading
             $this->getOwner()->users->add($this);
             $this->setStatus($this->getOwner()->getStatus());
         }

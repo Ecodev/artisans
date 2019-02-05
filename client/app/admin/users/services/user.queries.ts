@@ -156,3 +156,13 @@ export const unregisterMutation = gql`
         unregister(id: $id)
     }
 `;
+
+export const leaveFamilyMutation = gql`
+    mutation LeaveFamily($id: UserID!) {
+        leaveFamily(id: $id) {
+            ...userFields
+        }
+    }
+    ${userFieldsFragment}
+    ${userMetaFragment}
+`;

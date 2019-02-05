@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api;
 
 use Application\Api\Field\Mutation\ConfirmRegistration;
+use Application\Api\Field\Mutation\LeaveFamily;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\OpenDoor;
@@ -43,6 +44,7 @@ class MutationType extends ObjectType
             Register::build(),
             ConfirmRegistration::build(),
             Unregister::build(),
+            LeaveFamily::build(),
         ];
 
         $fields = array_merge(

@@ -11,7 +11,7 @@ import {
 } from '../../../shared/services/abstract-model.service';
 import {
     createUserMutation,
-    currentUserForProfileQuery,
+    currentUserForProfileQuery, leaveFamilyMutation,
     loginMutation,
     logoutMutation,
     unregisterMutation,
@@ -28,7 +28,7 @@ import {
     CreateUserMutation,
     CreateUserMutationVariables,
     CurrentUserForProfileQuery,
-    JoinType,
+    JoinType, LeaveFamilyMutation, LeaveFamilyMutationVariables,
     LogicalOperator,
     LoginMutation,
     LoginMutationVariables,
@@ -431,6 +431,15 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                 id: user.id,
             },
         }).pipe(map(result => result.data.unregister));
+    }
+
+    public leaveFamily(user): Observable<{ model: LeaveFamilyMutation['leaveFamily'] }> {
+        return this.apollo.mutate<LeaveFamilyMutation, LeaveFamilyMutationVariables>({
+            mutation: leaveFamilyMutation,
+            variables: {
+                id: user.id,
+            },
+        }).pipe(map(result => result.data.leaveFamily));
     }
 
 }

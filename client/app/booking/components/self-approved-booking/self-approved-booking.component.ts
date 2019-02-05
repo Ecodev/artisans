@@ -15,7 +15,6 @@ export class SelfApprovedBookingComponent implements OnInit {
 
     public bookable: BookableQuery['bookable'];
     public booking;
-    public responsible = 1;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -29,6 +28,7 @@ export class SelfApprovedBookingComponent implements OnInit {
 
         this.booking = Object.assign(this.bookingService.getEmptyObject(), this.bookingService.getDefaultValues());
         this.booking.status = BookingStatus.booked;
+        this.booking.guest = false;
 
         this.forMe();
 

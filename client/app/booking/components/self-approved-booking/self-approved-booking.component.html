@@ -9,7 +9,7 @@
 
             <app-card [file]="bookable?.image">
                 <card-illustration class="padding" *ngIf="!bookable?.image">
-                    <ngx-avatar name="?" [size]="150"></ngx-avatar>
+                    <ngx-avatar name="?" [size]="160"></ngx-avatar>
                 </card-illustration>
                 <h2 class="mat-title">Matériel</h2>
                 <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="10px">
@@ -22,22 +22,22 @@
             <app-card>
                 <card-illustration class="padding">
                     <ngx-avatar *ngIf="!!booking.owner" [name]="booking.owner.name" [size]="150"></ngx-avatar>
-                    <ngx-avatar *ngIf="!booking.owner" name="Invité" [size]="150"></ngx-avatar>
+                    <ngx-avatar *ngIf="!booking.owner" name="Invité" [size]="160"></ngx-avatar>
                 </card-illustration>
 
                 <div fxLayout="column" fxLayoutGap="10px">
                     <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
-                        <h2 class="mat-title" *ngIf="responsible === 1">Responsable</h2>
-                        <h2 class="mat-title" *ngIf="responsible === 2">Pour</h2>
+                        <h2 class="mat-title" *ngIf="!booking.guest">Responsable</h2>
+                        <h2 class="mat-title" *ngIf="!!booking.guest">Pour</h2>
                         <div>
-                            <span class="mat-body-2 no-margin">{{ booking.owner?.name || 'Un invité'}}</span>
-                            <span class="mat-body-1" *ngIf="responsible === 2">&nbsp;sous votre responsabilité</span>
+                            <span class="mat-body-2 no-margin">{{ booking.guest ? booking.owner.name : 'Un invité' }}</span>
+                            <span class="mat-body-1" *ngIf="!!booking.guest">&nbsp;sous votre responsabilité</span>
                         </div>
                     </div>
                     <div>
-                        <mat-button-toggle-group [(ngModel)]="responsible">
-                            <mat-button-toggle (click)="forMe()" [value]="1">Pour moi</mat-button-toggle>
-                            <mat-button-toggle (click)="booking.owner = null" [value]="2">Pour un invité</mat-button-toggle>
+                        <mat-button-toggle-group [(ngModel)]="booking.guest">
+                            <mat-button-toggle (click)="forMe()" [value]="false">Pour moi</mat-button-toggle>
+                            <mat-button-toggle (click)="booking.owner = null" [value]="true">Pour un invité</mat-button-toggle>
                         </mat-button-toggle-group>
                     </div>
                 </div>

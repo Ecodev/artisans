@@ -31,11 +31,21 @@ class MailerTest extends \PHPUnit\Framework\TestCase
 
     public function testQueueRegister(): void
     {
-        $user = $this->createMockUser(true);
+        $user = $this->createMockUserMinimal();
         $mailer = $this->createMockMailer();
         $message = $mailer->queueRegister($user);
 
-        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::REGISTER, 'Demande de création de compte Ichtus');
+        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte Ichtus');
+    }
+
+    public function testQueueUnregister(): void
+    {
+        $unregisteredUser = $this->createMockUser();
+        $admin = $this->createMockUserAdmin();
+        $mailer = $this->createMockMailer();
+        $message = $mailer->queueUnregister($admin, $unregisteredUser);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::UNREGISTER, 'Démission');
     }
 
     public function testQueueResetPassword(): void
@@ -58,20 +68,44 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         self::assertNotNull($message->getDateSent());
     }
 
-    private function createMockUser(bool $minimal = false): User
+    private function createMockUser(): User
     {
         $prophecy = $this->prophesize(User::class);
-        if ($minimal) {
-            $prophecy->getLogin();
-            $prophecy->getFirstName();
-            $prophecy->getLastName();
-        } else {
-            $prophecy->getLogin()->willReturn('john.doe');
-            $prophecy->getFirstName()->willReturn('John');
-            $prophecy->getLastName()->willReturn('Doe');
-        }
-
+        $prophecy->getId()->willReturn(123);
+        $prophecy->getLogin()->willReturn('john.doe');
+        $prophecy->getFirstName()->willReturn('John');
+        $prophecy->getLastName()->willReturn('Doe');
+        $prophecy->getName()->willReturn('John Doe');
         $prophecy->getEmail()->willReturn('john.doe@example.com');
+        $prophecy->createToken()->willReturn(str_repeat('X', 32));
+        $prophecy->messageAdded(Argument::type(Message::class));
+
+        $user = $prophecy->reveal();
+
+        return $user;
+    }
+
+    private function createMockUserAdmin(): User
+    {
+        $prophecy = $this->prophesize(User::class);
+        $prophecy->getLogin()->willReturn('admin');
+        $prophecy->getFirstName()->willReturn('Admin');
+        $prophecy->getLastName()->willReturn('Istrator');
+        $prophecy->getEmail()->willReturn('administrator@example.com');
+        $prophecy->messageAdded(Argument::type(Message::class));
+
+        $user = $prophecy->reveal();
+
+        return $user;
+    }
+
+    private function createMockUserMinimal(): User
+    {
+        $prophecy = $this->prophesize(User::class);
+        $prophecy->getLogin();
+        $prophecy->getFirstName();
+        $prophecy->getLastName();
+        $prophecy->getEmail()->willReturn('minimal@example.com');
         $prophecy->createToken()->willReturn(str_repeat('X', 32));
         $prophecy->messageAdded(Argument::type(Message::class));
         $user = $prophecy->reveal();

@@ -34,6 +34,7 @@ import { NetworkInterceptorService } from './shared/services/network-interceptor
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { registerLocaleData } from '@angular/common';
 import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchic-selector.module';
+import { ConfirmComponent } from './shared/components/alert/confirm.component';
 
 registerLocaleData(localeFRCH);
 
@@ -46,6 +47,10 @@ registerLocaleData(localeFRCH);
         DashboardComponent,
         BootLoaderComponent,
         ErrorComponent,
+        ConfirmComponent,
+    ],
+    entryComponents: [
+        ConfirmComponent,
     ],
     imports: [
         BrowserModule,

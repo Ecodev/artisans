@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\DBAL\Types\BookingStatusType;
+use Application\Utility;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -268,5 +269,22 @@ class Booking extends AbstractModel
     public function setStatus(string $status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * Mark the booking as terminated with an optional comment,
+     * but only if not already terminated
+     *
+     * @param null|string $comment
+     */
+    public function terminate(?string $comment): void
+    {
+        // Booking can only be terminated once
+        if (!$this->getEndDate()) {
+            $this->setEndDate(Utility::getNow());
+            if ($comment) {
+                $this->setEndComment($comment);
+            }
+        }
     }
 }

@@ -122,7 +122,11 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
             const newAccount = {id: account.value.id, iban: iban.value};
             this.accountService.updateNow(newAccount).subscribe(confirmAndLock);
         } else if (iban && iban.value && account && !account.value) {
-            this.accountService.create({iban: iban.value, owner: this.data.model.id, name: 'User account'}).subscribe(confirmAndLock);
+            this.accountService.create({
+                iban: iban.value,
+                owner: this.data.model.id,
+                name: 'User account',
+            }).subscribe(confirmAndLock);
         }
     }
 
@@ -145,4 +149,16 @@ export class ProfileComponent extends AbstractDetail<UserQuery['user'],
         return !!this.data.model.owner;
     }
 
+    public unregister(): void {
+        this.alertService.confirm('Démission', 'Voulez-vous quitter le club Ichtus ?', 'Démissioner définitivement')
+            .subscribe(confirmed => {
+                if (confirmed) {
+                    this.userService.unregister(this.data.model).subscribe(() => {
+                        const message = 'Vous avez démissioné avec succès';
+                        this.alertService.info(message, 5000);
+                        this.userService.logout();
+                    });
+                }
+            });
+    }
 }

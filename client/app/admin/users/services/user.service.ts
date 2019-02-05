@@ -14,6 +14,7 @@ import {
     currentUserForProfileQuery,
     loginMutation,
     logoutMutation,
+    unregisterMutation,
     updateUserMutation,
     userByTokenQuery,
     userQuery,
@@ -34,6 +35,8 @@ import {
     LogoutMutation,
     Relationship,
     Sex,
+    UnregisterMutation,
+    UnregisterMutationVariables,
     UpdateUserMutation,
     UpdateUserMutationVariables,
     UserByTokenQuery,
@@ -420,4 +423,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             return {model: result.data.userByToken};
         }));
     }
+
+    public unregister(user): Observable<{ model: UnregisterMutation['unregister'] }> {
+        return this.apollo.mutate<UnregisterMutation, UnregisterMutationVariables>({
+            mutation: unregisterMutation,
+            variables: {
+                id: user.id,
+            },
+        }).pipe(map(result => result.data.unregister));
+    }
+
 }

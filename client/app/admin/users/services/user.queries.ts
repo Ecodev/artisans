@@ -151,3 +151,8 @@ export const currentUserForProfileQuery = gql`
     ${userMetaFragment}
 `;
 
+export const unregisterMutation = gql`
+    mutation Unregister($id: UserID!) {
+        unregister(id: $id)
+    }
+`;

@@ -59,7 +59,19 @@ class Mailer
             'token' => $user->createToken(),
         ];
 
-        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::REGISTER, new ViewModel($mailParams));
+        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::REGISTER, $mailParams);
+
+        return $message;
+    }
+
+    public function queueUnregister(User $admin, User $unregisteredUser): Message
+    {
+        $subject = 'Démission';
+        $mailParams = [
+            'unregisteredUser' => $unregisteredUser,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::UNREGISTER, $mailParams);
 
         return $message;
     }
@@ -74,14 +86,12 @@ class Mailer
      */
     public function queueResetPassword(User $user, string $email): Message
     {
-        $user->createToken();
-
         $subject = 'Demande de modification de mot de passe';
         $mailParams = [
             'token' => $user->createToken(),
         ];
 
-        $message = $this->createMessage($user, $email, $subject, MessageTypeType::RESET_PASSWORD, new ViewModel($mailParams));
+        $message = $this->createMessage($user, $email, $subject, MessageTypeType::RESET_PASSWORD, $mailParams);
 
         return $message;
     }
@@ -93,14 +103,16 @@ class Mailer
      * @param string $email
      * @param string $subject
      * @param string $type
-     * @param ViewModel $model
+     * @param array $mailParams
      *
      * @return Message
      */
-    private function createMessage(?User $user, string $email, string $subject, string $type, ViewModel $model): Message
+    private function createMessage(?User $user, string $email, string $subject, string $type, array $mailParams): Message
     {
+
         // First render the view
         $serverUrl = 'https://' . $this->hostname;
+        $model = new ViewModel($mailParams);
         $model->setTemplate(str_replace('_', '-', $type));
         $model->setVariable('email', $email);
         $model->setVariable('user', $user);

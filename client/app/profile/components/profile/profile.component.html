@@ -7,7 +7,8 @@
                 <ngx-avatar [name]="data.model.name" [size]="50"></ngx-avatar>
                 <div class="mat-display-1 no-margin">{{data.model.name}}</div>
             </div>
-            <div>
+            <div fxLayoutGap="10px">
+                <button mat-flat-button color="warn" (click)="unregister()">Démissioner</button>
                 <button mat-flat-button color="warn" [disabled]="!showBecomeMember()">Devenir membre</button>
             </div>
         </div>

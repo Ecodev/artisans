@@ -7,6 +7,7 @@ namespace Application\DBAL\Types;
 class MessageTypeType extends AbstractEnumType
 {
     const REGISTER = 'register';
+    const UNREGISTER = 'unregister';
     const RESET_PASSWORD = 'reset_password';
     const MONTHLY_REMINDER = 'monthly_reminder';
     const YEARLY_REMINDER = 'yearly_reminder';
@@ -15,6 +16,7 @@ class MessageTypeType extends AbstractEnumType
     {
         return [
             self::REGISTER,
+            self::UNREGISTER,
             self::RESET_PASSWORD,
             self::MONTHLY_REMINDER,
             self::YEARLY_REMINDER,

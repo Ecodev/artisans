@@ -7,7 +7,6 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
 use Application\Model\Booking;
-use Application\Utility;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
@@ -24,19 +23,14 @@ abstract class TerminateBooking implements FieldInterface
                 'comment' => Type::string(),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): Booking {
+                /** @var Booking $booking */
                 $booking = $args['id']->getEntity();
 
                 // Check ACL
                 Helper::throwIfDenied($booking, 'update');
 
-                // Booking can only be terminated once
-                if (!$booking->getEndDate()) {
-                    $booking->setEndDate(Utility::getNow());
-                    if (@$args['comment']) {
-                        $booking->setEndComment($args['comment']);
-                    }
-                    _em()->flush();
-                }
+                $booking->terminate($args['comment']);
+                _em()->flush();
 
                 return $booking;
             },

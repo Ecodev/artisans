@@ -26,6 +26,11 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             return null;
         }
 
+        // Check user status
+        if (!in_array($user->getStatus(), [User::STATUS_ACTIVE, User::STATUS_INACTIVE], true)) {
+            return null;
+        }
+
         $hashFromDb = $user->getPassword();
         $isMd5 = mb_strlen($hashFromDb) === 32 && ctype_xdigit($hashFromDb);
 
@@ -79,6 +84,27 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
         $this->getAclFilter()->setEnabled(true);
 
         return $user;
+    }
+
+    /**
+     * Get all administrators to notify by email
+     *
+     * @return User[]
+     */
+    public function getAllAdministratorsToNotify(): array
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->andWhere('user.status = :status')
+            ->andWhere('user.role = :role')
+            ->andWhere("user.email IS NOT NULL AND user.email != ''")
+            ->setParameter('status', User::STATUS_ACTIVE)
+            ->setParameter('role', User::ROLE_ADMINISTRATOR);
+
+        $this->getAclFilter()->setEnabled(false);
+        $result = $qb->getQuery()->getResult();
+        $this->getAclFilter()->setEnabled(true);
+
+        return $result;
     }
 
     /**

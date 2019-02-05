@@ -11,6 +11,7 @@ use Application\Api\Field\Mutation\OpenDoor;
 use Application\Api\Field\Mutation\Register;
 use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\TerminateBooking;
+use Application\Api\Field\Mutation\Unregister;
 use Application\Api\Field\Mutation\UpdatePassword;
 use Application\Api\Field\Standard;
 use Application\Model\Account;
@@ -41,6 +42,7 @@ class MutationType extends ObjectType
             UpdatePassword::build(),
             Register::build(),
             ConfirmRegistration::build(),
+            Unregister::build(),
         ];
 
         $fields = array_merge(

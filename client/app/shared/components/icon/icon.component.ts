@@ -31,7 +31,7 @@ export class IconComponent {
     @Input() labelPosition: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' = 'top-right';
 
     public icon: IconType;
-    private readonly svgBase = './assets/icons/';
+    private readonly svgBase = './assets/';
     /**
      * Mapping table of internal icon aliases
      */
@@ -41,34 +41,37 @@ export class IconComponent {
         //     class: 'negative',
         // },
         'qr': {
-            svg: 'qr.svg',
+            svg: 'icons/qr.svg',
         },
         'simple-qr': {
-            svg: 'simple-qr.svg',
+            svg: 'icons/simple-qr.svg',
         },
         'own_bookable': {
-            svg: 'swimsuit.svg',
+            svg: 'icons/swimsuit.svg',
         },
         'code': {
-            svg: 'input.svg',
+            svg: 'icons/input.svg',
         },
         'doors': {
-            svg: 'key.svg',
+            svg: 'icons/key.svg',
         },
         'family': {
-            svg: 'family.svg',
+            svg: 'icons/family.svg',
         },
         'finances': {
-            svg: 'notes.svg',
+            svg: 'icons/notes.svg',
         },
         'browse_bookables': {
-            svg: 'search.svg',
+            svg: 'icons/search.svg',
         },
         'administrator': {
-            svg: 'boss.svg',
+            svg: 'icons/boss.svg',
         },
         'exit': {
-            svg: 'exit.svg',
+            svg: 'icons/exit.svg',
+        },
+        'ichtus': {
+            svg: 'ichtus.svg',
         },
     };
 

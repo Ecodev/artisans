@@ -8,7 +8,6 @@
 @import '../app/shared/components/boot-loader/boot-loader.theme';
 @import '../app/app.theme';
 @import '../app/shared/components/alert/alert.theme';
-@import '../app/dashboard/dashboard.theme';
 @import '../app/door/door.theme';
 @import 'table';
 @import 'page-header';
@@ -24,7 +23,6 @@
     @include app($theme);
     @include alert($theme);
     @include boot-loader($theme);
-    @include dashboard($theme);
     @include door($theme);
     @include table($theme);
     @include natural-search-theme($theme);

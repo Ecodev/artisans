@@ -1,71 +1,52 @@
-<div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center">
+<div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center" class="padding">
 
-    <div fxLayout="column" class="padding margin-top">
-
-        <h1 class="mat-display-2 margin-bottom text-center" *ngIf="userRunningBookings?.length">Vos sorties en cours</h1>
-
-        <div fxLayout="row" overflow-x>
-            <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="20px" style="padding:4px;margin:auto">
-                <app-card *ngFor="let booking of userRunningBookings; let i = index"
-                          [file]="booking.bookables[0]?.image"
-                          [style.min-width.px]="300"
-                          [@terminate]="'out'"
-                >
-                    <div fxLayout="column" fxLayoutGap="10px">
-                        <div class="mat-body-2">{{ booking.owner?.name || 'Invité'}}</div>
-                        <div class="mat-body-1">{{ booking.bookables[0]?.name || 'Matériel personnel'}}</div>
-                        <div>
-                            <button mat-flat-button color="warn" (click)="endBooking(booking, i)">Terminer</button>
-                        </div>
-                    </div>
-                </app-card>
-            </div>
-        </div>
+    <div fxLayout="row" fxLayoutAlign="center" *ngIf="currentUser">
+        <app-navigations [user]="currentUser"></app-navigations>
     </div>
 
-    <div fxLayout="column" fxLayoutAlign="start center" class="dashboardGroup">
+    <div fxLayout="column" fxLayoutAlign="start center">
 
         <h1 class="mat-display-2 margin-bottom text-center">Annoncer une sortie</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-scan">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-scan" class="big-button">
                 <app-icon name="qr" [size]="70"></app-icon>
                 en scannant un code QR
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-code">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/by-code" class="big-button">
                 <app-icon name="code" [size]="70"></app-icon>
                 en saisissant un code
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/new">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/booking/new" class="big-button">
                 <app-icon name="own_bookable" [size]="70"></app-icon>
                 avec mon propre matériel
             </a>
         </div>
     </div>
 
-    <div fxLayout="column" fxLayoutAlign="start center" class="dashboardGroup margin-bottom padding-bottom">
+    <div fxLayout="column" fxLayoutAlign="start center" class=" margin-bottom padding-bottom">
 
         <h1 class="mat-display-2 margin-bottom text-center">Autres</h1>
         <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center">
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="door" *ngIf="canAccessDoor()">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="door" *ngIf="canAccessDoor()" class="big-button">
                 <app-icon name="doors" [size]="70"></app-icon>
                 Accéder au local
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="profile">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="profile" class="big-button">
                 <app-icon name="family" [size]="70"></app-icon>
                 Mon compte
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="admin" *ngIf="canAccessAdmin()">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="admin" *ngIf="canAccessAdmin()" class="big-button">
                 <app-icon name="administrator" [size]="70"></app-icon>
                 Administration
             </a>
 
             <mat-divider [vertical]="true"></mat-divider>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="userService.logout()">
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="userService.logout()" class="big-button">
                 <app-icon name="exit" [size]="70"></app-icon>
                 Déconnexion
             </a>

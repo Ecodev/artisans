@@ -70,3 +70,28 @@ mat-form-field.no-bottom-spacing {
 .text-center {
     text-align: center
 }
+
+.mat-button {
+    &.app-button-wrap,
+    &[app-button-wrap] {
+        line-height: 16px;
+
+
+        .mat-button-wrapper {
+            white-space: normal;
+        }
+    }
+}
+
+.mat-button.big-button {
+    white-space: normal;
+    line-height: 24px;
+
+    .mat-button-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 1.2em;
+        padding-top: 10px;
+    }
+}

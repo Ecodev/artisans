@@ -85,6 +85,13 @@ class Booking extends AbstractModel
     private $bookables;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $guest;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -286,5 +293,21 @@ class Booking extends AbstractModel
                 $this->setEndComment($comment);
             }
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function getGuest(): bool
+    {
+        return $this->guest;
+    }
+
+    /**
+     * @param bool $guest
+     */
+    public function setGuest(bool $guest): void
+    {
+        $this->guest = $guest;
     }
 }

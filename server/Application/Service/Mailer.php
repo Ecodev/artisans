@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManager;
 use Zend\Mail;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Mime;
 use Zend\Mime\Part as MimePart;
 use Zend\View\Model\ViewModel;
 use Zend\View\Renderer\RendererInterface;
@@ -43,13 +44,19 @@ class Mailer
      */
     private $viewRendered;
 
-    public function __construct(EntityManager $entityManager, TransportInterface $transport, RendererInterface $viewRenderer, string $hostname, ?string $emailOverride)
+    /**
+     * @var string
+     */
+    private $fromEmail;
+
+    public function __construct(EntityManager $entityManager, TransportInterface $transport, RendererInterface $viewRenderer, string $hostname, ?string $emailOverride, string $fromEmail)
     {
         $this->entityManager = $entityManager;
         $this->transport = $transport;
         $this->hostname = $hostname;
         $this->emailOverride = $emailOverride;
         $this->viewRendered = $viewRenderer;
+        $this->fromEmail = $fromEmail;
     }
 
     public function queueRegister(User $user): Message
@@ -189,24 +196,24 @@ class Mailer
     /**
      * Convert our model message to a mail message
      *
-     * @param Message $message
+     * @param Message $modelMessage
      *
      * @return Mail\Message
      */
-    private function modelMessageToMailMessage(Message $message): Mail\Message
+    private function modelMessageToMailMessage(Message $modelMessage): Mail\Message
     {
         // set Mime type html
-        $htmlPart = new MimePart($message->getBody());
-        $htmlPart->type = 'text/html';
+        $htmlPart = new MimePart($modelMessage->getBody());
+        $htmlPart->type = Mime::TYPE_HTML;
         $body = new MimeMessage();
         $body->setParts([$htmlPart]);
 
-        $message = new Mail\Message();
-        $message->setSubject($message->getSubject());
-        $message->setBody($body);
-        $message->setFrom('noreply@' . $this->hostname, 'Ichtus');
+        $mailMessage = new Mail\Message();
+        $mailMessage->setSubject($modelMessage->getSubject());
+        $mailMessage->setBody($body);
+        $mailMessage->setFrom($this->fromEmail, 'Ichtus');
 
-        return $message;
+        return $mailMessage;
     }
 
     /**

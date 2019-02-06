@@ -28,6 +28,7 @@ return [
         'token' => 'my-token-value',
         'authorizedIps' => ['localhost'],
     ],
+    'fromEmail' => 'noreply@my-ichtus.lan',
     'emailOverride' => 'your@email.com',
     'smtp' => [
         'name' => 'mail.example.com',

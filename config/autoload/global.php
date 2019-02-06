@@ -7,6 +7,8 @@ declare(strict_types=1);
  * that required keys exist with "safe" values.
  */
 return [
+    'hostname' => 'my-ichtus.lan',
+    'fromEmail' => 'noreply@my-ichtus.lan',
     'emailOverride' => null,
     'smtp' => null,
     'doorsApi' => [

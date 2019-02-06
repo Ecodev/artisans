@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Output;
 
+use Application\Model\Booking;
 use GraphQL\Type\Definition\ObjectType;
 
 class PaginationType extends ObjectType
@@ -18,13 +19,13 @@ class PaginationType extends ObjectType
             'name' => $name,
             'description' => 'Describe available pages',
             'fields' => function () use ($class): array {
-                return [
+                $fields = [
                     'offset' => [
-                        'type' => self::int(),
+                        'type' => self::nonNull(self::int()),
                         'description' => 'The zero-based index of the displayed list of items',
                     ],
                     'pageIndex' => [
-                        'type' => self::int(),
+                        'type' => self::nonNull(self::int()),
                         'description' => 'The zero-based page index of the displayed list of items',
                     ],
                     'pageSize' => [
@@ -40,6 +41,24 @@ class PaginationType extends ObjectType
                         'description' => 'Paginated items',
                     ],
                 ];
+
+                // Add specific total fields if needed
+                if ($class === Booking::class) {
+                    $fields['totalParticipantCount'] = [
+                        'type' => (self::int()),
+                        'description' => 'The total count of participant',
+                    ];
+                    $fields['totalInitialPrice'] = [
+                        'type' => (self::string()),
+                        'description' => 'The total initial price',
+                    ];
+                    $fields['totalPeriodicPrice'] = [
+                        'type' => (self::string()),
+                        'description' => 'The total periodic price',
+                    ];
+                }
+
+                return $fields;
             },
         ];
 

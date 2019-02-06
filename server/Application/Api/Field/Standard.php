@@ -42,7 +42,9 @@ abstract class Standard
                 'resolve' => function ($root, array $args) use ($class): array {
                     $qb = _types()->createFilteredQueryBuilder($class, $args['filter'] ?? [], $args['sorting'] ?? []);
 
-                    $result = Helper::paginate($args['pagination'], $qb);
+                    $items = Helper::paginate($args['pagination'], $qb);
+                    $aggregatedFields = Helper::aggregatedFields($class, $qb);
+                    $result = array_merge($aggregatedFields, $items);
 
                     return $result;
                 },

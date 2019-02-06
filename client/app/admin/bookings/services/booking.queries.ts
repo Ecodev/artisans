@@ -45,6 +45,9 @@ export const bookingsQuery = gql`
             pageSize
             pageIndex
             length
+            totalParticipantCount
+            totalInitialPrice
+            totalPeriodicPrice
         }
     }
 ${bookingMetaFragment}`;

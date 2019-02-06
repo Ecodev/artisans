@@ -136,6 +136,7 @@
                        [pageSizeOptions]="pageSizeOptions"
                        (page)="pagination($event)"
         ></mat-paginator>
+        <p class="mat-body">Total de participants: {{ dataSource.data.totalParticipantCount || 0 }}</p>
 
     </div>
 </div>

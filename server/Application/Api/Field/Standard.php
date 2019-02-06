@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Api\Field;
 
-use Application\Api\Exception;
 use Application\Api\Helper;
 use Application\Api\Input\PaginationInputType;
 use Application\Model\AbstractModel;
@@ -32,7 +31,7 @@ abstract class Standard
         $shortName = $reflect->getShortName();
         $plural = self::makePlural($name);
 
-        $listArgs = self::getListArguments($metadata, $class, $name);
+        $listArgs = self::getListArguments($metadata);
         $singleArgs = self::getSingleArguments($class);
 
         return [
@@ -41,17 +40,7 @@ abstract class Standard
                 'type' => Type::nonNull(_types()->get($shortName . 'Pagination')),
                 'args' => $listArgs,
                 'resolve' => function ($root, array $args) use ($class): array {
-                    if (($args['filters'] ?? false) && ($args['filter'] ?? false)) {
-                        throw new Exception('Cannot use `filter` and `filters` at the same time');
-                    }
-                    if ($args['filters'] ?? false) {
-                        $queryArgs = [$args['filters'] ?? []];
-                        $queryArgs[] = $args['sorting'];
-
-                        $qb = _em()->getRepository($class)->getFindAllQuery(...$queryArgs);
-                    } else {
-                        $qb = _types()->createFilteredQueryBuilder($class, $args['filter'] ?? [], $args['sorting'] ?? []);
-                    }
+                    $qb = _types()->createFilteredQueryBuilder($class, $args['filter'] ?? [], $args['sorting'] ?? []);
 
                     $result = Helper::paginate($args['pagination'], $qb);
 
@@ -263,11 +252,11 @@ abstract class Standard
     /**
      * Return arguments used for the list
      *
-     * @param string $class
+     * @param ClassMetadata $class
      *
      * @return array
      */
-    private static function getListArguments(ClassMetadata $class, string $classs, string $name): array
+    private static function getListArguments(ClassMetadata $class): array
     {
         $listArgs = [
             [
@@ -280,14 +269,6 @@ abstract class Standard
                 'defaultValue' => self::getDefaultSorting($class),
             ],
         ];
-
-        $filterTypeClass = 'Old' . $class->getReflectionClass()->getShortName() . 'Filter';
-        if (_types()->has($filterTypeClass)) {
-            $listArgs[] = [
-                'name' => 'filters',
-                'type' => _types()->get($filterTypeClass),
-            ];
-        }
 
         $listArgs[] = PaginationInputType::build();
 

@@ -22,9 +22,8 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $entityManager = $this->createMock(EntityManager::class);
         $renderer = $container->get(RendererInterface::class);
         $transport = new InMemory();
-        $config = $container->get('config');
 
-        $mailer = new Mailer($entityManager, $transport, $renderer, $config['hostname'], $config['emailOverride'] ?? null);
+        $mailer = new Mailer($entityManager, $transport, $renderer, 'my-ichtus.lan', null);
 
         return $mailer;
     }

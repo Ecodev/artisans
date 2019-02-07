@@ -1124,16 +1124,16 @@
         },
         {
             "name": "ecodev/graphql-doctrine",
-            "version": "6.0.0",
+            "version": "6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ecodev/graphql-doctrine.git",
-                "reference": "1e11044c5e5d8244db050d8e5dd0263dae05aaba"
+                "reference": "9f92ed5804db741673cef2d0e6bd3a9c44eee5cd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/1e11044c5e5d8244db050d8e5dd0263dae05aaba",
-                "reference": "1e11044c5e5d8244db050d8e5dd0263dae05aaba",
+                "url": "https://api.github.com/repos/Ecodev/graphql-doctrine/zipball/9f92ed5804db741673cef2d0e6bd3a9c44eee5cd",
+                "reference": "9f92ed5804db741673cef2d0e6bd3a9c44eee5cd",
                 "shasum": ""
             },
             "require": {
@@ -1144,7 +1144,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "@stable",
-                "phpstan/phpstan": "^0.10.5",
+                "phpstan/phpstan": "@stable",
                 "phpunit/phpunit": "@stable",
                 "zendframework/zend-servicemanager": "@stable"
             },
@@ -1165,7 +1165,7 @@
                 "doctrine-orm",
                 "graphql"
             ],
-            "time": "2018-12-04T06:37:56+00:00"
+            "time": "2019-02-07T05:19:50+00:00"
         },
         {
             "name": "ecodev/graphql-upload",

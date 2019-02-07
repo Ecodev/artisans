@@ -65,6 +65,7 @@ abstract class Helper
 
         if ($class === Booking::class) {
             $qb->resetDQLPart('select')
+                ->resetDQLPart('orderBy')
                 ->addSelect('SUM(booking1.participantCount) AS totalParticipantCount')
                 ->addSelect('SUM(bookable.periodicPrice) AS totalPeriodicPrice')
                 ->addSelect('SUM(bookable.initialPrice) AS totalInitialPrice')

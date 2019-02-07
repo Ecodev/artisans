@@ -29,7 +29,7 @@ abstract class TerminateBooking implements FieldInterface
                 // Check ACL
                 Helper::throwIfDenied($booking, 'update');
 
-                $booking->terminate($args['comment']);
+                $booking->terminate($args['comment'] ?? null);
                 _em()->flush();
 
                 return $booking;

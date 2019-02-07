@@ -32,9 +32,9 @@ export const userFieldsFragment = gql`
         account {
             id
             name
-            iban
             balance
         }
+        iban
         billingType
         remarks
         owner {

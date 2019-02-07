@@ -3,7 +3,7 @@
 
     <mat-form-field>
         <mat-label>IBAN</mat-label>
-        <input matInput [(ngModel)]="user.account.iban" (change)="updateOrCreateAccount()">
+        <input matInput [(ngModel)]="user.iban">
         <!--*ngIf="form.get('iban').disabled"-->
         <button mat-icon-button matSuffix (click)="unlockIBAN()" >
             <app-icon name="lock"></app-icon>

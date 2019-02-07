@@ -58,32 +58,6 @@ export class FinancesComponent implements OnInit, OnDestroy {
         return true;
     }
 
-    /**
-     * Manages account transparently just by setting the iban.
-     * If no account exists when an iban is created, then the account is created for current user and setted iban
-     * If account exists and iban changes, the account is updated
-     * TODO : test after fixing server error
-     */
-    public updateOrCreateAccount() {
-        // const iban = this.form.get('iban');
-        // const account = this.form.get('account');
-        //
-        // const confirmAndLock = () => {
-        //     this.alertService.info('Votre compte IBAN a été mis à jour');
-        //
-        //     if (iban) {
-        //         iban.disable();
-        //     }
-        // };
-        //
-        // if (iban && iban.value && account && account.value) {
-        //     const newAccount = {id: account.value.id, iban: iban.value};
-        //     this.accountService.updateNow(newAccount).subscribe(confirmAndLock);
-        // } else if (iban && iban.value && account && !account.value) {
-        //     this.accountService.create({iban: iban.value, owner: this.data.model.id, name: 'User account'}).subscribe(confirmAndLock);
-        // }
-    }
-
     public unlockIBAN() {
         // const iban = this.form.get('iban');
         //

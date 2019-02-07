@@ -10,6 +10,7 @@ use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
 use Application\Traits\HasDoorAccess;
+use Application\Traits\HasIban;
 use Application\Traits\HasRemarks;
 use Cake\Chronos\Chronos;
 use Cake\Chronos\Date;
@@ -43,6 +44,7 @@ class User extends AbstractModel
     use HasDoorAccess;
     use HasRemarks;
     use HasAddress;
+    use HasIban;
 
     /**
      * @var User

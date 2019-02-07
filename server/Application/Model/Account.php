@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasIban;
 use Application\Traits\HasName;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,6 +26,7 @@ use GraphQL\Doctrine\Annotation as API;
 class Account extends AbstractModel
 {
     use HasName;
+    use HasIban;
 
     /**
      * @var string
@@ -32,13 +34,6 @@ class Account extends AbstractModel
      * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
      */
     private $balance = '0.00';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=32, unique=true)
-     */
-    private $iban;
 
     /**
      * @var Collection
@@ -87,26 +82,6 @@ class Account extends AbstractModel
     public function getBalance(): string
     {
         return $this->balance;
-    }
-
-    /**
-     * Set the IBAN (international bank account number)
-     *
-     * @param string $iban
-     */
-    public function setIban(string $iban): void
-    {
-        $this->iban = $iban;
-    }
-
-    /**
-     * Get the IBAN (international bank account number)
-     *
-     * @return string
-     */
-    public function getIban(): string
-    {
-        return $this->iban;
     }
 
     /**

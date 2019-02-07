@@ -143,6 +143,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             owner: null,
             sex: Sex.not_known,
             welcomeSessionDate: null,
+            iban: '',
         };
     }
 

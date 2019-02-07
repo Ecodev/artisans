@@ -7,6 +7,7 @@ namespace ApplicationTest\Model;
 use Application\Model\Account;
 use Application\Model\Transaction;
 use Application\Model\User;
+use Doctrine\DBAL\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class AccountTest extends TestCase
@@ -51,5 +52,20 @@ class AccountTest extends TestCase
         self::assertCount(0, $account->getTransactions(), 'Original account without transaction');
 
         self::assertSame($transaction->getAccount(), $otherAccount);
+    }
+
+    public function testIban(): void
+    {
+        $account = new Account();
+
+        self::assertEmpty($account->getIban());
+
+        $iban = 'CH6303714697192579556';
+        $account->setIban($iban);
+        self::assertSame($iban, $account->getIban());
+
+        $this->expectException(InvalidArgumentException::class);
+        $invalidIban = 'CH123456789012345678';
+        $account->setIban($invalidIban);
     }
 }

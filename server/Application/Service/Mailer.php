@@ -49,7 +49,12 @@ class Mailer
      */
     private $fromEmail;
 
-    public function __construct(EntityManager $entityManager, TransportInterface $transport, RendererInterface $viewRenderer, string $hostname, ?string $emailOverride, string $fromEmail)
+    /**
+     * @var string
+     */
+    private $phpPath;
+
+    public function __construct(EntityManager $entityManager, TransportInterface $transport, RendererInterface $viewRenderer, string $hostname, ?string $emailOverride, string $fromEmail, string $phpPath)
     {
         $this->entityManager = $entityManager;
         $this->transport = $transport;
@@ -57,6 +62,7 @@ class Mailer
         $this->emailOverride = $emailOverride;
         $this->viewRendered = $viewRenderer;
         $this->fromEmail = $fromEmail;
+        $this->phpPath = $phpPath;
     }
 
     public function queueRegister(User $user): Message
@@ -160,8 +166,14 @@ class Mailer
             _em()->flush();
         }
 
-        $dispatcher = realpath('bin/send-message.php');
-        $cmd = $dispatcher . ' ' . $message->getId() . ' > /dev/null 2>&1 &';
+        $args = [
+            realpath('bin/send-message.php'),
+            $message->getId(),
+        ];
+
+        $escapedArgs = array_map('escapeshellarg', $args);
+
+        $cmd = escapeshellcmd($this->phpPath) . ' ' . implode(' ', $escapedArgs) . ' > /dev/null 2>&1 &';
         exec($cmd);
     }
 

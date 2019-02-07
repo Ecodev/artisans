@@ -25,6 +25,14 @@ class MailerFactory
         $transport = $container->get(TransportInterface::class);
         $config = $container->get('config');
 
-        return new Mailer($entityManager, $transport, $renderer, $config['hostname'], $config['emailOverride'] ?? null, $config['fromEmail']);
+        return new Mailer(
+            $entityManager,
+            $transport,
+            $renderer,
+            $config['hostname'],
+            $config['emailOverride'] ?? null,
+            $config['fromEmail'],
+            $config['phpPath']
+        );
     }
 }

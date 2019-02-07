@@ -23,7 +23,15 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $renderer = $container->get(RendererInterface::class);
         $transport = new InMemory();
 
-        $mailer = new Mailer($entityManager, $transport, $renderer, 'my-ichtus.lan', null, 'noreply@example.com');
+        $mailer = new Mailer(
+            $entityManager,
+            $transport,
+            $renderer,
+            'my-ichtus.lan',
+            null,
+            'noreply@example.com',
+            '/user/bin/php'
+        );
 
         return $mailer;
     }

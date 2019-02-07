@@ -11,6 +11,7 @@ return [
     'fromEmail' => 'noreply@my-ichtus.lan',
     'emailOverride' => null,
     'smtp' => null,
+    'phpPath' => '/usr/bin/php',
     'doorsApi' => [
         'endpoint' => 'http://localhost:8888',
         'token' => 'my-token-value',

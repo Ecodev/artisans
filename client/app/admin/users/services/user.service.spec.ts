@@ -23,6 +23,7 @@ describe('UserService', () => {
         birthday: '2018-02-27',
         updateDate: '2018-01-18T11:43:31',
         login: 'test string',
+        iban: 'test string',
         familyRelationship: 'householder',
         role: 'member',
         status: 'active',

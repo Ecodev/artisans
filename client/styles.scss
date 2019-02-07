@@ -75,7 +75,7 @@ mat-form-field.no-bottom-spacing {
     &.app-button-wrap,
     &[app-button-wrap] {
         line-height: 16px;
-
+        min-height: 36px;
 
         .mat-button-wrapper {
             white-space: normal;

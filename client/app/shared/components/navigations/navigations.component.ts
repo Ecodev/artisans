@@ -1,8 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../../admin/users/services/user.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import {
+    BookingPartialInput,
     BookingSortingField,
     BookingsQuery,
     BookingsQueryVariables,
@@ -17,6 +18,9 @@ import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { QueryVariablesManager } from '../../classes/query-variables-manager';
 import { mergeWith } from 'lodash';
 import { Observable } from 'rxjs';
+import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { CommentComponent } from './comment.component';
+import { AlertService } from '../alert/alert.service';
 
 @Component({
     selector: 'app-navigations',
@@ -43,7 +47,11 @@ export class NavigationsComponent implements OnInit, OnDestroy {
     private currentPage = 0;
     private family;
 
-    constructor(public userService: UserService, public bookingService: BookingService) {
+    constructor(public userService: UserService,
+                public bookingService: BookingService,
+                private alertService: AlertService,
+                private dialog: MatDialog,
+                private snackbar: MatSnackBar) {
     }
 
     ngOnInit() {
@@ -67,8 +75,43 @@ export class NavigationsComponent implements OnInit, OnDestroy {
     }
 
     public endBooking(booking) {
+
+        const snackbarOptions: MatSnackBarConfig = {
+            horizontalPosition: 'end',
+            verticalPosition: 'top',
+            duration: 6000,
+        };
+
+        const modalOptions = {
+            data: {
+                title: 'Commentaire de fin de sortie',
+                message: '',
+                cancelText: 'Annuler',
+                confirmText: 'Valider',
+            },
+        };
+
         this.bookingService.flagEndDate(booking.id).subscribe(() => {
             booking.endDate = new Date();
+            this.snackbar.open('La sortie est terminée', 'Faire un commentaire', snackbarOptions).onAction().subscribe(() => {
+
+                this.dialog.open(CommentComponent, modalOptions).afterClosed().subscribe(comment => {
+                    if (comment && comment !== '') {
+                        booking.endComment = comment;
+                        const partialBooking = {id: booking.id, endComment: comment} as BookingPartialInput;
+                        this.bookingService.updatePartially(partialBooking).subscribe((res) => {
+                            this.alertService.info('Merci pour votre commentaire');
+                        });
+                    }
+
+                });
+            });
+        });
+    }
+
+    public update(partialBooking) {
+        this.bookingService.updatePartially(partialBooking).subscribe(booking => {
+            console.log('booking', booking);
         });
     }
 

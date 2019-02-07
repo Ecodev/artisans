@@ -25,6 +25,7 @@ import { ngfModule } from 'angular-file';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
 import { NavigationsComponent } from '../components/navigations/navigations.component';
+import { CommentComponent } from '../components/navigations/comment.component';
 
 const declarations = [
     RelationsComponent,
@@ -45,6 +46,7 @@ const declarations = [
     FileDropDirective,
     FileComponent,
     NavigationsComponent,
+    CommentComponent,
 ];
 
 const imports = [
@@ -64,6 +66,7 @@ const imports = [
     imports: [...imports],
     exports: [...imports, ...declarations],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    entryComponents: [CommentComponent],
 })
 export class IchtusModule {
 }

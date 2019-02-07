@@ -18,7 +18,7 @@ export class FamilyComponent implements OnInit {
     public user;
     private familyMembers;
 
-    constructor(private userService: UserService,
+    constructor(public userService: UserService,
                 private route: ActivatedRoute,
                 private alertService: AlertService,
                 public permissionsService: PermissionsService) {
@@ -53,10 +53,6 @@ export class FamilyComponent implements OnInit {
     public add() {
         const emptyUser = this.userService.getEmptyObject();
         this.familyMembers.push(emptyUser);
-    }
-
-    public canLeaveFamily() {
-        return this.user.owner && this.user.owner.id !== this.user.id;
     }
 
     public leaveFamily(): void {

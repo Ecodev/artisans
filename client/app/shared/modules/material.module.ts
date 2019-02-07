@@ -22,6 +22,7 @@ import {
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
+    MatTooltipModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -49,6 +50,7 @@ const list = [
     MatNativeDateModule,
     MatDatepickerModule,
     MatSlideToggleModule,
+    MatTooltipModule,
 ];
 
 /**

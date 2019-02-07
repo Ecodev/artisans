@@ -18,6 +18,7 @@ import {
     usersQuery,
 } from './user.queries';
 import {
+    BillingType,
     BookingsQuery,
     BookingsQueryVariables,
     BookingStatus,
@@ -138,7 +139,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             door2: false,
             door3: false,
             door4: false,
-            billingType: '',
+            billingType: BillingType.all_electronic,
             remarks: '',
             owner: null,
             sex: Sex.not_known,
@@ -155,16 +156,18 @@ export class UserService extends AbstractModelService<UserQuery['user'],
 
     public getFormValidators(): FormValidators {
         return {
-            login: [Validators.required, (control: FormControl): ValidationErrors | null => {
-                const value = control.value || '';
-                if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
-                    return {
-                        invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
-                    };
-                }
+            login: [
+                Validators.required, (control: FormControl): ValidationErrors | null => {
+                    const value = control.value || '';
+                    if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
+                        return {
+                            invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
+                        };
+                    }
 
-                return null;
-            }],
+                    return null;
+                },
+            ],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.required, Validators.email],
@@ -352,6 +355,32 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                 id: user.id,
             },
         }).pipe(map(result => result.data.leaveFamily));
+    }
+
+    /**
+     * Can leave home if has an owner
+     */
+    public canLeaveFamily(user: CurrentUserForProfileQuery['viewer']): boolean {
+
+        if (!user) {
+            return false;
+        }
+
+        return !!user.owner && user.owner.id !== user.id;
+    }
+
+    /**
+     * Can become a member has no owner and is not member
+     */
+    public canBecomeMember(user: CurrentUserForProfileQuery['viewer']): boolean {
+
+        if (!user) {
+            return false;
+        }
+
+        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
+
+        return !isMember && !this.canLeaveFamily(user);
     }
 
 }

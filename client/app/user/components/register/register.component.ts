@@ -51,6 +51,11 @@ export class RegisterComponent extends AbstractDetail<UserQuery['user'],
 
         super.ngOnInit();
 
+        const email = this.form.get('email');
+        if (email && this.step === 1) {
+            email.setValue(this.route.snapshot.params.email);
+        }
+
         this.bookableService.getMandatoryBookables().subscribe(bookables => {
             if (bookables) {
                 this.mandatoryBookables = new AppDataSource(bookables);

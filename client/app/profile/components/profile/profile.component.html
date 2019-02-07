@@ -4,7 +4,16 @@
         <div fxFlex="none" fxFlex.gt-xs fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
             <ngx-avatar [name]="user.name" [size]="50"></ngx-avatar>
             <div class="mat-display-1 no-margin-bottom">{{ user.name }}</div>
-            <button mat-flat-button color="warn" [disabled]="!showBecomeMember()">Devenir membre</button>
+            <a mat-flat-button
+               color="warn"
+               *ngIf="userService.canBecomeMember(user)"
+               [disabled]="!user.email"
+               [matTooltip]="!user.email ? 'Vous devez avoir saisi une adresse e-mail dans vos données personnelles' : null"
+               [routerLink]="['/user/new', {email:user.email}]"
+            >
+                Devenir membre
+            </a>
+            <!-- TODO : UPDATE email when user add e-mail in family member component -->
         </div>
 
         <!-- CREDIT -->

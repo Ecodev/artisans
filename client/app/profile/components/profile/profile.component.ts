@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserRole } from '../../../shared/generated-types';
 import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { AccountService } from '../../../admin/accounts/services/account.service';
@@ -16,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
     public user;
 
-    constructor(private userService: UserService,
+    constructor(public userService: UserService,
                 private alertService: AlertService,
                 private route: ActivatedRoute,
                 public bookableService: BookableService,
@@ -27,13 +26,6 @@ export class ProfileComponent implements OnInit {
 
         this.user = this.route.snapshot.data.user.model;
 
-    }
-
-    public showBecomeMember() {
-        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].indexOf(this.user.role) > -1;
-        const isOwner = !this.user.owner;
-
-        return !isMember && !isOwner;
     }
 
 }

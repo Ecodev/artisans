@@ -30,7 +30,7 @@ export class FamilyMemberComponent
     @Input() user: UserQuery['user'];
 
     constructor(alertService: AlertService,
-                userService: FamilyUserService,
+                private userService: FamilyUserService,
                 router: Router,
                 route: ActivatedRoute,
     ) {
@@ -50,6 +50,15 @@ export class FamilyMemberComponent
         } else {
             this.data = {model: this.service.getEmptyObject()};
             this.initForm();
+        }
+
+    }
+
+    public postCreate(model) {
+        if (model.login) {
+            this.userService.requestPasswordReset(model.login).subscribe(() => {
+                this.alertService.info('Un mail avec les instructions a été envoyé à ' + model.email, 5000);
+            });
         }
 
     }

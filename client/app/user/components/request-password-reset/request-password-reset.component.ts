@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
@@ -21,24 +20,14 @@ export class RequestPasswordResetComponent {
     constructor(private apollo: Apollo,
                 private alertService: AlertService,
                 private router: Router,
-                userService: UserService) {
+                private userService: UserService) {
         this.form = new FormGroup({login: new ExtendedFormControl('', userService.getFormValidators().login)});
     }
 
     submit(): void {
         this.sending = true;
-        const mutation = gql`
-            mutation RequestPasswordReset($login: Login!) {
-                requestPasswordReset(login: $login)
-            }
-        `;
 
-        this.apollo.mutate({
-            mutation: mutation,
-            variables: {
-                login: this.form.value.login,
-            },
-        }).subscribe(v => {
+        this.userService.requestPasswordReset(this.form.value.login).subscribe(v => {
             this.sending = false;
 
             let message;

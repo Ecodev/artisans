@@ -65,11 +65,7 @@
             <mat-error *ngIf="form.get('login').hasError('invalid')">{{ form.get('login').getError('invalid') }}</mat-error>
         </mat-form-field>
 
-        <button mat-button color="primary" *ngIf="data.model.id" [routerLink]="['/user/request-password-reset']">Demander un nouveau mot de passe</button>
     </div>
 
-    <button mat-raised-button *ngIf="!data.model.id" (click)="create()" [color]="form.invalid ? 'warn' : 'accent'"
-    >Créer
-    </button>
-
+    <button mat-raised-button *ngIf="!data.model.id" (click)="create(false)" [color]="form.invalid ? 'warn' : 'accent'">Créer</button>
 </div>

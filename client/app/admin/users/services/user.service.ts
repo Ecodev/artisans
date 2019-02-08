@@ -54,6 +54,7 @@ import { QueryVariablesManager } from '../../../shared/classes/query-variables-m
 import { BookingService } from '../../bookings/services/booking.service';
 import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import gql from 'graphql-tag';
 
 @Injectable({
     providedIn: 'root',
@@ -381,6 +382,21 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
 
         return !isMember && !this.canLeaveFamily(user);
+    }
+
+    public requestPasswordReset(login) {
+      const mutation = gql`
+          mutation RequestPasswordReset($login: Login!) {
+              requestPasswordReset(login: $login)
+          }
+      `;
+
+        return this.apollo.mutate({
+            mutation: mutation,
+            variables: {
+                login: login,
+            },
+        });
     }
 
 }

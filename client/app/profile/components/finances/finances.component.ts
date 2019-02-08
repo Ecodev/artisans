@@ -28,6 +28,8 @@ export class FinancesComponent implements OnInit, OnDestroy {
     public transactionsQuery: AutoRefetchQueryRef<TransactionsQuery['transactions']>;
     public transactionsColumns = ['name', 'amount'];
 
+    public lockIban = true;
+
     constructor(
         private userService: UserService,
         private route: ActivatedRoute,
@@ -63,14 +65,6 @@ export class FinancesComponent implements OnInit, OnDestroy {
         return expenseClaim.status === ExpenseClaimStatus.new;
     }
 
-    public unlockIBAN() {
-        // const iban = this.form.get('iban');
-        //
-        // if (iban) {
-        //     iban.enable();
-        // }
-    }
-
     public createRefund() {
 
         this.dialog.open(CreateRefundComponent).afterClosed().subscribe(expense => {
@@ -82,6 +76,12 @@ export class FinancesComponent implements OnInit, OnDestroy {
             }
         });
 
+    }
+
+    public updateIban() {
+        this.userService.updatePartially({id: this.user.id, iban: this.user.iban}).subscribe(user => {
+            this.alertService.info('Votre IBAN a été modifié');
+        });
     }
 
 }

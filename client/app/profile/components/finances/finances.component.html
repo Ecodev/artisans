@@ -5,9 +5,8 @@
     <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="10px" fxLayoutAlign.gt-sm="start start" >
         <mat-form-field>
             <mat-label>IBAN</mat-label>
-            <input matInput [(ngModel)]="user.iban">
-            <!--*ngIf="form.get('iban').disabled"-->
-            <button mat-icon-button matSuffix (click)="unlockIBAN()">
+            <input matInput [(ngModel)]="user.iban" (change)="lockIban = true; updateIban();" [disabled]="lockIban">
+            <button mat-icon-button matSuffix (click)="lockIban = false">
                 <app-icon name="lock"></app-icon>
             </button>
         </mat-form-field>

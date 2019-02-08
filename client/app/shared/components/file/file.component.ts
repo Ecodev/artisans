@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Literal } from '../../types';
 import { UploadService } from './services/upload.service';
 import { takeUntil } from 'rxjs/operators';
@@ -22,7 +22,7 @@ import { Observable, of, Subject } from 'rxjs';
     styleUrls: ['./file.component.scss'],
     providers: [UploadService],
 })
-export class FileComponent extends AbstractController implements OnInit {
+export class FileComponent extends AbstractController implements OnInit, OnChanges {
 
     @HostBinding('style.height.px') @Input() height = 250;
 
@@ -48,6 +48,12 @@ export class FileComponent extends AbstractController implements OnInit {
         });
 
         this.updateImage();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.model && changes.model.previousValue !== changes.model.currentValue) {
+            this.updateImage();
+        }
     }
 
     public upload(file) {

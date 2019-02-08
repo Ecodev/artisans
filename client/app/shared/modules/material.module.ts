@@ -15,6 +15,7 @@ import {
     MatNativeDateModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
     MatSlideToggleModule,
@@ -51,6 +52,7 @@ const list = [
     MatDatepickerModule,
     MatSlideToggleModule,
     MatTooltipModule,
+    MatRippleModule,
 ];
 
 /**

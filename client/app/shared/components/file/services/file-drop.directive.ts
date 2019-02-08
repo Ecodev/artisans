@@ -9,7 +9,7 @@ import { UploadService } from './upload.service';
 export class FileDropDirective extends ngfDrop {
 
     private isOverlayVisible = false;
-    private overlayVisibleClass = 'show-overlay';
+    private overlayVisibleClass = 'show-action';
 
     constructor(element: ElementRef, private uploadService: UploadService) {
         super(element);

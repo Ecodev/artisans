@@ -1,16 +1,26 @@
-<div ngfSelect
-     appFileDrop
-     [fileDropDisabled]="readonly"
-     [ngfFixOrientation]="false"
-     (fileChange)="upload($event)"
-     [style.backgroundImage]="image"
-     [style.backgroundPosition]="'center'"
-     [style.backgroundSize]="'cover'"
-     [class.readonly]="readonly"
+<a matRipple
+   [matRippleDisabled]="!action"
+   ngfSelect
+   appFileDrop
+   [fileDropDisabled]="action !== 'upload'"
+   [ngfFixOrientation]="false"
+   (fileChange)="upload($event)"
+   [attr.href]="getDownloadLink()"
+   download
+   [style.backgroundImage]="imagePreview"
+   [class.has-action]="!!action"
+   [class.suggest-upload]="!model && action === 'upload'"
 >
-    <div class="upload-overlay">
-        <app-icon name="cloud_upload" [size]="height * 0.66"></app-icon>
+
+    <div class="file-preview" *ngIf="filePreview">
+        <app-icon name="attachment" [size]="height * 0.33"></app-icon>
+        {{ filePreview | uppercase }}
     </div>
 
-</div>
+    <div class="action-overlay">
+        <app-icon name="cloud_upload" [size]="height * 0.66" *ngIf="action === 'upload'"></app-icon>
+        <app-icon name="get_app" [size]="height * 0.66" *ngIf="action === 'download'"></app-icon>
+    </div>
+
+</a>
 

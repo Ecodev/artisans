@@ -1,13 +1,18 @@
 @mixin file($theme) {
     $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
 
     app-file {
 
-        .upload-overlay {
-            background-color: mat-color($primary, 0.9);
-            color: mat-color($primary, default-contrast);
+        .action-overlay {
+            background-color: mat-color($accent, 0.85);
+            color: mat-color($accent, default-contrast);
         }
 
+        .file-preview {
+            background-color: mat-color($primary, 0.85);
+            color: mat-color($primary, default-contrast);
+        }
     }
 
 }

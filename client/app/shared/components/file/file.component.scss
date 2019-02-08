@@ -4,28 +4,48 @@
     overflow: hidden;
     position: relative;
 
-    & > div {
-        flex: 1;
-    }
-
-    [appFileDrop] {
+    & > a {
         position: relative;
+        flex: 1;
+        background-size: cover;
+        background-position: center;
+
+        &.has-action {
+            cursor: pointer;
+
+            &.suggest-upload .action-overlay {
+                opacity: 0.66;
+            }
+
+            &:hover,
+            &.show-action {
+                .action-overlay {
+                    opacity: 1;
+                }
+            }
+
+        }
+
     }
 
-    .upload-overlay {
-        opacity: 0;
+    .action-overlay,
+    .file-preview {
         display: flex;
+        flex-direction: column;
         position: absolute;
-        //z-index: 100;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         justify-content: center;
         align-items: center;
-        font-size: 48px;
+        font-size: 36px;
         line-height: 1.3em;
         text-align: center;
+    }
+
+    .action-overlay {
+        opacity: 0;
 
         & > div {
             opacity: 0;
@@ -37,14 +57,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-    }
-
-    [appFileDrop]:hover:not(.readonly),
-    [appFileDrop].show-overlay {
-        cursor: pointer;
-        .upload-overlay {
-            opacity: 1;
         }
     }
 

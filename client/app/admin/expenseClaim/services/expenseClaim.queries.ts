@@ -11,6 +11,7 @@ export const expenseClaimMetaFragment = gql`
         amount
         accountingDocuments {
             id
+            mime
         }
         owner {
             id

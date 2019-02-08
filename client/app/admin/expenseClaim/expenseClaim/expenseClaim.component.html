@@ -59,6 +59,21 @@
 
                 </div>
 
+                <mat-divider *ngIf="data.model.accountingDocuments.length"></mat-divider>
+
+                <div *ngIf="data.model.accountingDocuments.length">
+                    <div class="mat-title">Pièces justificatives</div>
+
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <app-file *ngFor="let file of data.model.accountingDocuments"
+                                  [model]="file"
+                                  [height]="150"
+                                  [style.width.px]="200"
+                                  action="download"
+                        ></app-file>
+                    </div>
+                </div>
+
                 <mat-divider></mat-divider>
 
                 <app-stamp [item]="data.model"></app-stamp>

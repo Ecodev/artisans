@@ -15,6 +15,7 @@ import {
     BookablesQuery,
     BookablesQueryVariables,
     BookableState,
+    BookingsQuery,
     BookingsQueryVariables,
     BookingType,
     CreateBookableMutation,
@@ -146,15 +147,11 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         return this.getAll(qvm);
     }
 
-    public canBook(bookable: BookableQuery['bookable'],
-                   user: UserQuery['user'] | CurrentUserForProfileQuery['viewer']): Observable<boolean> {
-        return this.isAvailable(bookable).pipe(map(isAvailable => isAvailable && BookableService.isLicenceGranted(bookable, user)));
-    }
-
-    public isAvailable(bookable: BookableQuery['bookable']): Observable<boolean> {
+    public getAvailability(bookable: BookableQuery['bookable']):
+        Observable<null | { isAvailable: boolean, result: BookingsQuery['bookings'] }> {
 
         if (!bookable.isActive) {
-            return of(false);
+            return of(null);
         }
 
         // Variable for pending bookings related to given bookable
@@ -175,8 +172,12 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
 
         const qvm = new QueryVariablesManager<BookingsQueryVariables>();
         qvm.set('variables', variables);
-        return this.bookingService.getAll(qvm).pipe(map(result => {
-            return bookable.simultaneousBookingMaximum > result.length;
+
+        return this.bookingService.getAll(qvm, true).pipe(map(result => {
+            return {
+                isAvailable: bookable.simultaneousBookingMaximum > result.length,
+                result: result,
+            };
         }));
     }
 
@@ -190,7 +191,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             qvm.set('variables', variables);
 
             return this.getAll(qvm).pipe(map(result => {
-                return {model: result && result.items.length ? result.items[0] : {}};
+                return {model: result && result.items.length ? result.items[0] : null};
             }));
         } else {
             return of({model: null});

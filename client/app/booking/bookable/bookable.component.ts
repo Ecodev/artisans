@@ -1,57 +1,58 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    BookableQuery,
-    BookableQueryVariables,
-    CreateBookableMutation,
-    CreateBookableMutationVariables,
-    UpdateBookableMutation,
-    UpdateBookableMutationVariables,
-} from '../../shared/generated-types';
-import { AlertService } from '../../shared/components/alert/alert.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../admin/bookables/services/bookable.service';
-import { AbstractDetail } from '../../admin/shared/components/AbstractDetail';
 import { BookingService } from '../../admin/bookings/services/booking.service';
 import { UserService } from '../../admin/users/services/user.service';
-import { Observable } from 'rxjs';
+import { AbstractController } from '../../shared/components/AbstractController';
+import { BookingsQuery } from '../../shared/generated-types';
 
 @Component({
     selector: 'app-bookable',
     templateUrl: './bookable.component.html',
     styleUrls: ['./bookable.component.scss'],
 })
-export class BookableComponent
-    extends AbstractDetail<BookableQuery['bookable'],
-        BookableQueryVariables,
-        CreateBookableMutation['createBookable'],
-        CreateBookableMutationVariables,
-        UpdateBookableMutation['updateBookable'],
-        UpdateBookableMutationVariables,
-        any> implements OnInit {
+export class BookableComponent extends AbstractController implements OnInit {
 
-    public canBook: Observable<boolean>;
+    public hasLicence: boolean;
+    public isAvailable: boolean;
     public canAccessAdmin: boolean;
+    public runningBooking: BookingsQuery['bookings']['items'][0] | null;
 
-    constructor(alertService: AlertService,
-                private bookableService: BookableService,
-                router: Router,
-                route: ActivatedRoute,
+    public bookable;
+
+    constructor(private bookableService: BookableService,
+                private route: ActivatedRoute,
                 public bookingService: BookingService,
                 private userService: UserService,
     ) {
-        super('bookable', bookableService, alertService, router, route);
+        super();
     }
 
     ngOnInit() {
-        super.ngOnInit();
-        if (this.data.model) {
-            this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
-            this.canBook = this.bookableService.canBook(this.data.model, this.userService.getCachedCurrentUser());
+        this.route.data.subscribe(data => {
+            this.bookable = data.bookable.model;
+            if (this.bookable) {
+                this.initForBookable();
+            }
+        });
+
+    }
+
+    private initForBookable() {
+        this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
+        this.hasLicence = BookableService.isLicenceGranted(this.bookable, this.userService.getCachedCurrentUser());
+        this.bookableService.getAvailability(this.bookable).subscribe(availability => {
+            this.isAvailable = availability !== null && availability.isAvailable;
+            this.runningBooking = availability !== null ? availability.result.items[0] : null;
+        });
+    }
+
+    public endBooking() {
+
+        if (this.runningBooking) {
+            this.bookingService.flagEndDate(this.runningBooking.id).subscribe(() => {
+                this.initForBookable();
+            });
         }
     }
-
-    public book() {
-        this.router.navigate(['..', 'new', {bookable: this.data.model}]);
-    }
-
 }

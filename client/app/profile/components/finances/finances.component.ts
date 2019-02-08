@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ExpenseClaimsQuery, TransactionsQuery } from '../../../shared/generated-types';
+import { ExpenseClaimsQuery, ExpenseClaimStatus, TransactionsQuery } from '../../../shared/generated-types';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -54,11 +54,13 @@ export class FinancesComponent implements OnInit, OnDestroy {
     }
 
     public cancelExpenseClaim(expenseClaim) {
-
+        if (this.canCancelExpenseClaim(expenseClaim)) {
+            this.expenseClaimService.delete([expenseClaim]).subscribe();
+        }
     }
 
     public canCancelExpenseClaim(expenseClaim) {
-        return true;
+        return expenseClaim.status === ExpenseClaimStatus.new;
     }
 
     public unlockIBAN() {

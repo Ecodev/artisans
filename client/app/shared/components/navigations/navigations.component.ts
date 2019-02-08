@@ -111,7 +111,6 @@ export class NavigationsComponent implements OnInit, OnDestroy {
 
     public update(partialBooking) {
         this.bookingService.updatePartially(partialBooking).subscribe(booking => {
-            console.log('booking', booking);
         });
     }
 
@@ -160,7 +159,11 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                 {
                     field: BookingSortingField.endDate,
                     order: SortingOrder.DESC,
-                    nullAsHighest: true
+                    nullAsHighest: true,
+                },
+                {
+                    field: BookingSortingField.endDate,
+                    order: SortingOrder.DESC,
                 },
                 {
                     field: BookingSortingField.endDate,

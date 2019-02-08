@@ -16,14 +16,16 @@
                         <div class="mat-body-2">{{ door.name }}</div>
                         <div>
                             <button mat-flat-button [ngClass]="{'opened': door.opened}" [disabled]="door.opened">
-                                <app-icon [name]="door.opened ? 'lock_open' : 'lock'"></app-icon> Ouvrir
+                                <app-icon [name]="door.opened ? 'lock_open' : 'lock'"></app-icon>
+                                Ouvrir
                             </button>
                         </div>
                     </div>
                 </app-card>
-            <div>
+                <div></div>
+
+            </div>
+
         </div>
-
     </div>
-
 </div>

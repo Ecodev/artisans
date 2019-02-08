@@ -63,7 +63,7 @@ describe('FileDropDirective', () => {
 
             // After a short while the class must have been changed
             setTimeout(() => {
-                expect(element.className).toBe('show-overlay');
+                expect(element.className).toBe('show-action');
                 done();
             }, 220);
 

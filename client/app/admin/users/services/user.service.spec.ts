@@ -50,7 +50,6 @@ describe('UserService', () => {
             id: '456',
             balance: 'test string',
             name: 'test string',
-            iban: 'test string',
             __typename: 'Account',
         },
         billingType: 'test string',

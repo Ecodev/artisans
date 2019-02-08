@@ -1,6 +1,6 @@
 <div fxLayout="column" style="max-width:1100px;margin:auto" fxLayoutGap="40px" class="padding" *ngIf="data.model.id">
 
-    <app-file [file]="data.model.image" [height]="400" [style.borderRadius.px]="4" class="mat-elevation-z2" [readonly]="true"></app-file>
+    <app-file [model]="data.model.image" [height]="400" [style.borderRadius.px]="4" class="mat-elevation-z2"></app-file>
 
     <div fxLayout="row" fxLayoutAlign="start stretch" class="mat-display-1">
         <div fxFlex>{{ data.model.name }}</div>

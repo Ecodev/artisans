@@ -20,11 +20,12 @@
 
                             <app-file fxFlex
                                       [service]="imageService"
-                                      [file]="data.model.image"
+                                      [model]="data.model.image"
                                       class="mat-elevation-z2"
                                       [style.borderRadius.px]="4"
                                       [style.marginLeft.px]="2"
-                                      (change)="newImage($event)"
+                                      (modelChange)="newImage($event)"
+                                      action="upload"
                             ></app-file>
 
                             <div fxLayout="column" fxFlex>

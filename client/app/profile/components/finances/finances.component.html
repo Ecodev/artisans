@@ -13,7 +13,7 @@
         </mat-form-field>
 
         <!--[disabled]="!form.get('iban').value"-->
-        <a mat-stroked-button color="primary">Demander un remboursement</a>
+        <a mat-stroked-button color="primary" (click)="createRefund()">Demander un remboursement</a>
         <a mat-stroked-button color="primary" [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
     </div>
 

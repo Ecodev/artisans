@@ -10,6 +10,7 @@ import { CreateExpenseClaimComponent } from './components/create-expense-claim/c
 import { BookingHistoryComponent } from './components/booking-history/booking-history.component';
 import { FinancesComponent } from './components/finances/finances.component';
 import { ServicesComponent } from './components/services/services.component';
+import { CreateRefundComponent } from './components/create-refund/create-refund.component';
 
 @NgModule({
     declarations: [
@@ -20,12 +21,16 @@ import { ServicesComponent } from './components/services/services.component';
         BookingHistoryComponent,
         FinancesComponent,
         ServicesComponent,
+        CreateRefundComponent,
     ],
     imports: [
         CommonModule,
         ProfileRoutingModule,
         MaterialModule,
         IchtusModule,
+    ],
+    entryComponents: [
+        CreateRefundComponent,
     ],
 })
 export class ProfileModule {

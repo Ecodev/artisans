@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { TransactionService } from '../../../admin/transactions/services/transaction.service';
 import { AccountService } from '../../../admin/accounts/services/account.service';
+import { MatDialog } from '@angular/material';
+import { CreateRefundComponent } from '../create-refund/create-refund.component';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 
 @Component({
@@ -32,7 +34,8 @@ export class FinancesComponent implements OnInit, OnDestroy {
         private expenseClaimService: ExpenseClaimService,
         private transactionService: TransactionService,
         public accountService: AccountService,
-        private alertService: AlertService) {
+        private alertService: AlertService,
+        private dialog: MatDialog) {
     }
 
     ngOnInit() {
@@ -64,6 +67,19 @@ export class FinancesComponent implements OnInit, OnDestroy {
         // if (iban) {
         //     iban.enable();
         // }
+    }
+
+    public createRefund() {
+
+        this.dialog.open(CreateRefundComponent).afterClosed().subscribe(expense => {
+            if (expense) {
+                expense.amount *= -1; // refund != ExpenseClaim
+                this.expenseClaimService.create(expense).subscribe(result => {
+                    this.alertService.info('Votre demande de remboursement a bien été enregistrée');
+                });
+            }
+        });
+
     }
 
 }

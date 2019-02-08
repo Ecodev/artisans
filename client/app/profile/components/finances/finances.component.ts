@@ -20,7 +20,7 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     public runningExpenseClaimsDS: AppDataSource;
     public runningExpenseClaimsQuery: AutoRefetchQueryRef<ExpenseClaimsQuery['expenseClaims']>;
-    public expenseClaimsColumns = ['name', 'description', 'amount', 'cancel'];
+    public expenseClaimsColumns = ['name', 'type', 'status', 'amount', 'cancel'];
 
     public transactionsDS: AppDataSource;
     public transactionsQuery: AutoRefetchQueryRef<TransactionsQuery['transactions']>;

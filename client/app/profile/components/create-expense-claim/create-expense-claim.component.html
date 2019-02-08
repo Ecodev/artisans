@@ -1,3 +1,47 @@
-<p>
-  create-expense-claim works!
-</p>
+<div [formGroup]="form" class="padding" fxFlex fxLayout="column" fxLayoutGap="20px">
+
+    <h1 class="mat-display-1">Annoncez une dépense</h1>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+            <mat-label>Objet de la dépense</mat-label>
+            <input matInput formControlName="name" (change)="update()">
+            <mat-error *ngIf="form.get('name').hasError('maxlength')">
+                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+            </mat-error>
+            <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Montant</mat-label>
+            <input matInput type="number" min="0" formControlName="amount" (change)="update()">
+            <div matSuffix>CHF</div>
+            <mat-error *ngIf="form.get('amount').hasError('maxlength')">
+                Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+            </mat-error>
+            <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
+        </mat-form-field>
+    </div>
+
+    <mat-form-field>
+        <mat-label>Commentaires supplémentaires</mat-label>
+        <textarea matInput formControlName="description" matTextareaAutosize [matAutosizeMinRows]="3"
+        ></textarea>
+    </mat-form-field>
+
+    <div>
+        <h2 class="mat-title">Documents justificatifs</h2>
+        <div fxLayout="row wrap" fxLayoutGap="10px grid">
+            <ng-container *ngFor="let file of files; let i = index; trackBy: trackByFn; let last = last ">
+                <div fxLayout="column" fxLayoutAlign="start center">
+                    <app-file [model]="file" (modelChange)="fileAdded($event, i)" [height]="300" [style.width.px]="300" action="upload"
+                    ></app-file>
+                    <button mat-icon-button (click)="!last ? removeFile(i) : null">
+                        <app-icon name="clear" *ngIf="!last"></app-icon>
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<app-fixed-button icon="check" (click)="create(false)"></app-fixed-button>

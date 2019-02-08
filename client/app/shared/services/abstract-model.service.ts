@@ -1,9 +1,9 @@
 import { Apollo } from 'apollo-angular';
 import { BehaviorSubject, Observable, of, OperatorFunction, Subject } from 'rxjs';
-import { debounceTime, filter, map, takeUntil} from 'rxjs/operators';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
-import { debounce, defaults, isArray, merge, mergeWith, pick, omit } from 'lodash';
+import { debounce, defaults, isArray, merge, mergeWith, omit, pick } from 'lodash';
 import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
@@ -169,7 +169,7 @@ export abstract class AbstractModelService<Tone,
         }).pipe(this.mapOne());
     }
 
-    public getAll(queryVariablesManager: QueryVariablesManager<Vall>): Observable<Tall> {
+    public getAll(queryVariablesManager: QueryVariablesManager<Vall>, force: boolean = false): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
         const manager = new QueryVariablesManager<Vall>(queryVariablesManager); // "copy" qvm
@@ -178,6 +178,7 @@ export abstract class AbstractModelService<Tone,
         return this.apollo.query<Tall, Vall>({
             query: this.allQuery,
             variables: manager.variables.value,
+            fetchPolicy: force ? 'network-only' : undefined,
         }).pipe(this.mapAll());
     }
 

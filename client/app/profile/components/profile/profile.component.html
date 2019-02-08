@@ -29,36 +29,69 @@
 
     </div>
 
-    <mat-divider></mat-divider>
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
 
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px" fxLayoutAlign="start stretch">
+        <div fxLayout="column">
+            <mat-divider></mat-divider>
 
-        <div fxLayout="row" fxLayout.gt-sm="column" fxLayoutGap="20px" id="menu">
+            <div fxLayout="row wrap" fxLayout.gt-sm="column" fxLayoutGap="20px grid" id="menu">
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile" class="big-button">
-                <app-icon name="history" [size]="70"></app-icon>
-                Historique des sorties
-            </a>
-
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="family" class="big-button">
-                <app-icon name="family" [size]="70"></app-icon>
-                Ménage et données personnelles
-            </a>
-
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="finances" class="big-button">
-                <app-icon name="finances" [size]="70"></app-icon>
-                Notes de frais et remboursements
-            </a>
-
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="services" class="big-button">
-                <app-icon name="ichtus" [size]="70"></app-icon>
-                Cotisation et services
-            </a>
-
+                <div>
+                    <a mat-button
+                       fxLayout="column"
+                       fxLayoutAlign="start center"
+                       routerLink="/profile"
+                       class="big-button"
+                       [style.max-width.px]="150"
+                    >
+                        <app-icon name="history" [size]="50"></app-icon>
+                        Historique des sorties
+                    </a>
+                </div>
+                <div>
+                    <a mat-button
+                       fxLayout="column"
+                       fxLayoutAlign="start center"
+                       routerLink="family"
+                       class="big-button"
+                       [style.max-width.px]="150"
+                    >
+                        <app-icon name="family" [size]="50"></app-icon>
+                        Ménage et données personnelles
+                    </a>
+                </div>
+                <div>
+                    <a mat-button
+                       fxLayout="column"
+                       fxLayoutAlign="start center"
+                       routerLink="finances"
+                       class="big-button"
+                       [style.max-width.px]="150"
+                    >
+                        <app-icon name="finances" [size]="50"></app-icon>
+                        Notes de frais et remboursements
+                    </a>
+                </div>
+                <div>
+                    <a mat-button
+                       fxLayout="column"
+                       fxLayoutAlign="start center"
+                       routerLink="services"
+                       class="big-button"
+                       [style.max-width.px]="150"
+                    >
+                        <app-icon name="ichtus" [size]="50"></app-icon>
+                        Cotisation et services
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div fxFlex>
-            <router-outlet></router-outlet>
+        <div fxFlex fxLayout="column">
+            <mat-divider></mat-divider>
+            <div class="padding">
+                <router-outlet></router-outlet>
+            </div>
         </div>
 
     </div>

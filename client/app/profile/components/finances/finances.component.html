@@ -1,21 +1,25 @@
 <div fxLayout="column" fxLayoutGap="30px">
 
-    <mat-form-field>
-        <mat-label>IBAN</mat-label>
-        <input matInput [(ngModel)]="user.iban">
-        <!--*ngIf="form.get('iban').disabled"-->
-        <button mat-icon-button matSuffix (click)="unlockIBAN()">
-            <app-icon name="lock"></app-icon>
-        </button>
-    </mat-form-field>
+    <h2 class="mat-headline">Finances</h2>
 
-    <div>
-        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="10px">
-            <h2 fxFlex class="mat-headline no-margin-bottom">Dépenses annoncées</h2>
-            <!--[disabled]="!form.get('iban').value"-->
-            <a mat-stroked-button color="primary">Demander un remboursement</a>
-            <a mat-stroked-button color="primary" [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
-        </div>
+    <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="10px" fxLayoutAlign.gt-sm="start start" >
+        <mat-form-field>
+            <mat-label>IBAN</mat-label>
+            <input matInput [(ngModel)]="user.iban">
+            <!--*ngIf="form.get('iban').disabled"-->
+            <button mat-icon-button matSuffix (click)="unlockIBAN()">
+                <app-icon name="lock"></app-icon>
+            </button>
+        </mat-form-field>
+
+        <!--[disabled]="!form.get('iban').value"-->
+        <a mat-stroked-button color="primary">Demander un remboursement</a>
+        <a mat-stroked-button color="primary" [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
+    </div>
+
+    <div fxLayout="column">
+
+        <h3 fxFlex class="mat-headline">Dépenses annoncées</h3>
 
         <div class="responsive-table">
             <table mat-table *ngIf="runningExpenseClaimsDS" [dataSource]="runningExpenseClaimsDS">
@@ -72,7 +76,7 @@
     </div>
     <div *ngIf="transactionsDS && transactionsDS.length">
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
-            <h2 fxFlex class="mat-headline no-margin-bottom">Transactions</h2>
+            <h3 fxFlex class="mat-title no-margin-bottom">Transactions</h3>
             <button mat-stroked-button color="primary">Annoncer une dépense</button>
         </div>
 

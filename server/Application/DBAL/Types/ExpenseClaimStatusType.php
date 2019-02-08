@@ -7,6 +7,7 @@ namespace Application\DBAL\Types;
 class ExpenseClaimStatusType extends AbstractEnumType
 {
     const NEW = 'new';
+    const PROCESSING = 'processing';
     const PROCESSED = 'processed';
     const REJECTED = 'rejected';
 
@@ -14,6 +15,7 @@ class ExpenseClaimStatusType extends AbstractEnumType
     {
         return [
             self::NEW,
+            self::PROCESSING,
             self::PROCESSED,
             self::REJECTED,
         ];

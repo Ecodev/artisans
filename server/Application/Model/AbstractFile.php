@@ -39,6 +39,12 @@ abstract class AbstractFile extends AbstractModel
     private $filename = '';
 
     /**
+     * @var string
+     * @ORM\Column(type="string", length=255)
+     */
+    private $mime = '';
+
+    /**
      * Set the file
      *
      * @param UploadedFileInterface $file
@@ -80,6 +86,16 @@ abstract class AbstractFile extends AbstractModel
     public function getFilename(): string
     {
         return $this->filename;
+    }
+
+    /**
+     * Get mime
+     *
+     * @return string
+     */
+    public function getMime(): string
+    {
+        return $this->mime;
     }
 
     /**
@@ -137,5 +153,7 @@ abstract class AbstractFile extends AbstractModel
 
             throw new \Exception('Invalid file type of: ' . $mime);
         }
+
+        $this->mime = $mime;
     }
 }

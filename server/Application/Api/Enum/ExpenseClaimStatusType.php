@@ -10,6 +10,7 @@ class ExpenseClaimStatusType extends AbstractEnumType
     {
         $config = [
             \Application\DBAL\Types\ExpenseClaimStatusType::NEW => 'nouveau',
+            \Application\DBAL\Types\ExpenseClaimStatusType::PROCESSING => 'en traitement',
             \Application\DBAL\Types\ExpenseClaimStatusType::PROCESSED => 'traîté',
             \Application\DBAL\Types\ExpenseClaimStatusType::REJECTED => 'refusé',
         ];

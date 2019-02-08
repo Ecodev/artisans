@@ -126,8 +126,8 @@ REPLACE INTO transaction (id, transactionDate, amount, account_id, name, remarks
 (8004, '2017-04-01', 100.00, 6000, 'Remboursement flyers', '', NULL),
 (8005, '2018-03-01', -50.00, 6002, 'Location casier 1012', '', 3003);
 
-REPLACE INTO accounting_document (id, expense_claim_id, filename) VALUES
-(9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf');
+REPLACE INTO accounting_document (id, expense_claim_id, filename, mime) VALUES
+(9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
 
 REPLACE INTO category (id, name) VALUES
 (10000, 'Administratif'),

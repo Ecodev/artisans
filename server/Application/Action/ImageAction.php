@@ -59,8 +59,9 @@ class ImageAction extends AbstractAction
         }
 
         $resource = fopen($path, 'r');
+        $size = filesize($path);
         $type = mime_content_type($path);
-        $response = new Response($resource, 200, ['content-type' => $type]);
+        $response = new Response($resource, 200, ['content-type' => $type, 'content-length' => $size]);
 
         return $response;
     }

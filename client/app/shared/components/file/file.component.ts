@@ -131,7 +131,7 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
         }
 
         if (this.model && this.model.__typename === 'AccountingDocument') {
-            return '/download/accounting-document/' + this.model.id; // todo : setup correct url
+            return '/accounting-document/' + this.model.id;
         } else if (this.model && this.model.__typename === 'Image') {
             return '/image/' + this.model.id;
         }

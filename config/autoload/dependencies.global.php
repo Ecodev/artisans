@@ -26,6 +26,7 @@ return [
             \Application\Action\GraphQLAction::class => \Application\Action\GraphQLFactory::class,
             \GraphQL\Doctrine\Types::class => \Application\Api\TypesFactory::class,
             \Application\Action\ImageAction::class => \Application\Action\ImageFactory::class,
+            \Application\Action\AccountingDocumentAction::class => \Application\Action\AccountingDocumentFactory::class,
             \Application\Service\ImageResizer::class => \Application\Service\ImageResizerFactory::class,
             \Imagine\Image\ImagineInterface::class => \Application\Service\ImagineFactory::class,
             \Application\Service\Mailer::class => \Application\Service\MailerFactory::class,

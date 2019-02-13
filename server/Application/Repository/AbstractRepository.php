@@ -7,6 +7,11 @@ namespace Application\Repository;
 use Application\ORM\Query\Filter\AclFilter;
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class AbstractRepository
+ *
+ * @method null|object findOneById
+ */
 abstract class AbstractRepository extends EntityRepository
 {
     /**

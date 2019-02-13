@@ -43,10 +43,13 @@ class AccountingDocumentAction extends AbstractAction
 
         $path = $accountingDocument->getPath();
         if (!is_readable($path)) {
-            return $this->createError("File for Accounting document $id not found on disk, or not readable");
+            return $this->createError("File for accounting document $id not found on disk, or not readable");
         }
 
         $resource = fopen($path, 'r');
+        if ($resource === false) {
+            return $this->createError("Cannot open file for accounting document $id on disk");
+        }
         $size = filesize($path);
         $type = mime_content_type($path);
         $response = new Response($resource, 200, ['content-type' => $type, 'content-length' => $size]);

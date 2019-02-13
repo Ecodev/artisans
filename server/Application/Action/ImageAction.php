@@ -59,6 +59,9 @@ class ImageAction extends AbstractAction
         }
 
         $resource = fopen($path, 'r');
+        if ($resource === false) {
+            return $this->createError("Cannot open file for image $id on disk");
+        }
         $size = filesize($path);
         $type = mime_content_type($path);
         $response = new Response($resource, 200, ['content-type' => $type, 'content-length' => $size]);

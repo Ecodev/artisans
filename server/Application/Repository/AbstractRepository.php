@@ -10,7 +10,7 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class AbstractRepository
  *
- * @method null|object findOneById
+ * @method null|object findOneById(integer $id)
  */
 abstract class AbstractRepository extends EntityRepository
 {

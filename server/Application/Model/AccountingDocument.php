@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * A document attesting an expense claim
  *
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Application\Repository\AccountingDocumentRepository")
  */
 class AccountingDocument extends AbstractFile

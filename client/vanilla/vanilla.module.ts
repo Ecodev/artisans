@@ -13,6 +13,7 @@ import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { UserService } from '../app/admin/users/services/user.service';
 import { BookingService } from '../app/admin/bookings/services/booking.service';
+import { BookableMetadataService } from '../app/shared/components/bookable-metadata/bookable-metadata.service';
 
 @NgModule({
     imports: [
@@ -50,6 +51,7 @@ export class VanillaModule implements DoBootstrap {
                 bookableService: BookableService,
                 bookingService: BookingService,
                 linkMutation: LinkMutationService,
+                bookableMetaDataService: BookableMetadataService,
     ) {
 
         const api = {
@@ -60,6 +62,7 @@ export class VanillaModule implements DoBootstrap {
             bookingService,
             QueryVariablesManager,
             linkMutation,
+            bookableMetaDataService,
         };
 
         window['ichtusApi'] = api;

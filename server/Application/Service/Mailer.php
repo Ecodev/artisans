@@ -42,7 +42,7 @@ class Mailer
     /**
      * @var RendererInterface
      */
-    private $viewRendered;
+    private $viewRenderer;
 
     /**
      * @var string
@@ -60,7 +60,7 @@ class Mailer
         $this->transport = $transport;
         $this->hostname = $hostname;
         $this->emailOverride = $emailOverride;
-        $this->viewRendered = $viewRenderer;
+        $this->viewRenderer = $viewRenderer;
         $this->fromEmail = $fromEmail;
         $this->phpPath = $phpPath;
     }
@@ -130,7 +130,7 @@ class Mailer
         $model->setVariable('email', $email);
         $model->setVariable('user', $user);
         $model->setVariable('serverUrl', $serverUrl);
-        $partialContent = $this->viewRendered->render($model);
+        $partialContent = $this->viewRenderer->render($model);
 
         // Then inject it into layout
         $layoutModel = new ViewModel([$model->captureTo() => $partialContent]);
@@ -139,7 +139,7 @@ class Mailer
         $layoutModel->setVariable('user', $user);
         $layoutModel->setVariable('serverUrl', $serverUrl);
         $layoutModel->setVariable('hostname', $this->hostname);
-        $content = $this->viewRendered->render($layoutModel);
+        $content = $this->viewRenderer->render($layoutModel);
 
         $message = new Message();
         $message->setType($type);

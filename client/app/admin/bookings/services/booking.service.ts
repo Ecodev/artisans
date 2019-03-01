@@ -127,7 +127,6 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
             estimatedEndDate: '',
             startDate: (new Date()).toISOString(),
             endDate: '',
-            guest: false,
         };
     }
 

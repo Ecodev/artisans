@@ -28,7 +28,6 @@ export class SelfApprovedBookingComponent implements OnInit {
 
         this.booking = Object.assign(this.bookingService.getEmptyObject(), this.bookingService.getDefaultValues());
         this.booking.status = BookingStatus.booked;
-        this.booking.guest = false;
 
         this.forMe();
 

@@ -13,8 +13,7 @@
                     <div style="position:relative">
                         <mat-divider></mat-divider>
                     </div>
-                    <div class="mat-body-2" *ngIf="!booking.guest">{{ booking.owner.name }}</div>
-                    <div class="mat-body-2" *ngIf="booking.guest">Invité de {{ booking.owner.name }}</div>
+                    <div class="mat-body-2">{{ booking.owner.name }}</div>
                     <div class="mat-body-1" *ngIf="!booking.endDate && booking.destination">Destination : {{ booking.destination }}</div>
                     <div class="mat-body-1" *ngIf="!booking.endDate && booking.estimatedEndDate">
                         Retour prévu : {{ booking.estimatedEndDate }}

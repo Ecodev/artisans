@@ -47,19 +47,12 @@
                 <ng-container matColumnDef="owner">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Responsable</th>
                     <td mat-cell *matCellDef="let element">
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
+                        <div fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.owner.name" [size]="36"></ngx-avatar>
                             <app-table-button [label]="element.owner.name"
                                               [navigate]="['/admin/user/', element.owner.id]"
                                               matTooltip="Éditer"
                             ></app-table-button>
-                        </div>
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.owner">
-                            <ngx-avatar name="invité" [size]="36"></ngx-avatar>
-                            <button mat-button>
-                                Invité
-                                <ng-container *ngIf="element.creator">de {{ element.creator.name }}</ng-container>
-                            </button>
                         </div>
                     </td>
                 </ng-container>

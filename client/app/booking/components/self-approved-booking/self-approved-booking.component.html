@@ -27,18 +27,10 @@
 
                 <div fxLayout="column" fxLayoutGap="10px">
                     <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px">
-                        <h2 class="mat-title" *ngIf="!booking.guest">Responsable</h2>
-                        <h2 class="mat-title" *ngIf="!!booking.guest">Pour</h2>
+                        <h2 class="mat-title">Responsable</h2>
                         <div>
-                            <span class="mat-body-2 no-margin">{{ booking.guest ? booking.owner.name : 'Un invité' }}</span>
-                            <span class="mat-body-1" *ngIf="!!booking.guest">&nbsp;sous votre responsabilité</span>
+                            <span class="mat-body-2 no-margin">{{ booking.owner.name }}</span>
                         </div>
-                    </div>
-                    <div>
-                        <mat-button-toggle-group [(ngModel)]="booking.guest">
-                            <mat-button-toggle (click)="forMe()" [value]="false">Pour moi</mat-button-toggle>
-                            <mat-button-toggle (click)="booking.owner = null" [value]="true">Pour un invité</mat-button-toggle>
-                        </mat-button-toggle-group>
                     </div>
                 </div>
             </app-card>

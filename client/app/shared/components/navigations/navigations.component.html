@@ -1,73 +1,76 @@
 <div fxLayout="column" fxLayoutGap="20px">
     <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px grid" *ngIf="bookings">
-        <div *ngFor="let booking of bookings.items; let i = index">
-            <app-card [file]="booking.bookables[0]?.image" [style.width.px]="300" [class.showComments]="booking.showComments">
-                <card-illustration *ngIf="!booking.bookables[0]?.image" class="padding">
-                    <ngx-avatar name="?" [size]="160"></ngx-avatar>
-                </card-illustration>
+        <ng-container *ngFor="let booking of bookings.items; let i = index">
+            <div [@terminate] *ngIf="!activeOnly || activeOnly && !booking.endDate">
+                <app-card [file]="booking.bookables[0]?.image" [style.width.px]="300" [class.showComments]="booking.showComments">
+                    <card-illustration *ngIf="!booking.bookables[0]?.image" class="padding">
+                        <ngx-avatar name="?" [size]="160"></ngx-avatar>
+                    </card-illustration>
 
-                <div fxLayout="column" fxLayoutGap="10px" style="overflow:hidden;">
-                    <a mat-button [routerLink]="booking.bookables[0] ? ['/booking', booking.bookables[0].code] : null" app-button-wrap>
-                        {{ booking.bookables[0]?.name || 'Matériel personnel' }}
-                    </a>
-                    <div style="position:relative">
-                        <mat-divider></mat-divider>
-                    </div>
-                    <div class="mat-body-2">{{ booking.owner.name }}</div>
-                    <div class="mat-body-1" *ngIf="!booking.endDate && booking.destination">Destination : {{ booking.destination }}</div>
-                    <div class="mat-body-1" *ngIf="!booking.endDate && booking.estimatedEndDate">
-                        Retour prévu : {{ booking.estimatedEndDate }}
-                    </div>
-                    <div>Début : {{ booking.startDate | date: 'medium' }}</div>
-                    <div *ngIf="booking.endDate">Fin : {{ booking.endDate | date: 'medium' }}</div>
+                    <div fxLayout="column" fxLayoutGap="10px" style="overflow:hidden;">
+                        <a mat-button [routerLink]="booking.bookables[0] ? ['/booking', booking.bookables[0].code] : null" app-button-wrap>
+                            {{ booking.bookables[0]?.name || 'Matériel personnel' }}
+                        </a>
+                        <div style="position:relative">
+                            <mat-divider></mat-divider>
+                        </div>
+                        <div class="mat-body-2">{{ booking.owner.name }}</div>
+                        <div class="mat-body-1" *ngIf="!booking.endDate && booking.destination">Destination : {{ booking.destination }}
+                        </div>
+                        <div class="mat-body-1" *ngIf="!booking.endDate && booking.estimatedEndDate">
+                            Retour prévu : {{ booking.estimatedEndDate }}
+                        </div>
+                        <div>Début : {{ booking.startDate | date: 'medium' }}</div>
+                        <div *ngIf="booking.endDate">Fin : {{ booking.endDate | date: 'medium' }}</div>
 
-                    <div fxLayout="row" fxLayoutAlign="end center">
-                        <button mat-icon-button (click)="booking.showComments = true">
-                            <app-icon name="feedback"></app-icon>
-                        </button>
-                        <div fxFlex></div>
-                        <button mat-flat-button color="warn" (click)="endBooking(booking)" *ngIf="!booking.endDate" [@terminate]>
-                            Terminer
-                        </button>
-                    </div>
-                </div>
-
-                <div class="comment padding" fxLayout="column" fxLayoutGap="10px">
-
-                    <div fxFlex overflow fxLayout="column">
-
-                        <div class="mat-title">Commentaires</div>
-                        <mat-form-field>
-                            <mat-label>Commentaire de départ</mat-label>
-                            <textarea matInput
-                                      [ngModel]="booking.startComment"
-                                      (change)="update({id: booking.id, startComment: $event.target.value})"
-                                      matTextareaAutosize
-                                      [matAutosizeMinRows]="3"
-                            ></textarea>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Commentaire de fin</mat-label>
-                            <textarea matInput
-                                      [ngModel]="booking.endComment"
-                                      (change)="update({id: booking.id, endComment: $event.target.value})"
-                                      matTextareaAutosize
-                                      [matAutosizeMinRows]="3"
-                            ></textarea>
-                        </mat-form-field>
-
+                        <div fxLayout="row" fxLayoutAlign="end center">
+                            <button mat-icon-button (click)="booking.showComments = true">
+                                <app-icon name="feedback"></app-icon>
+                            </button>
+                            <div fxFlex></div>
+                            <button mat-flat-button color="warn" (click)="endBooking(booking)" *ngIf="!booking.endDate" [@terminate]>
+                                Terminer
+                            </button>
+                        </div>
                     </div>
 
-                    <div fxLayout="row">
-                        <button mat-icon-button color="primary" (click)="booking.showComments = false">
-                            <app-icon name="clear"></app-icon>
-                        </button>
-                    </div>
+                    <div class="comment padding" fxLayout="column" fxLayoutGap="10px">
 
-                </div>
-            </app-card>
-        </div>
+                        <div fxFlex overflow fxLayout="column">
+
+                            <div class="mat-title">Commentaires</div>
+                            <mat-form-field>
+                                <mat-label>Commentaire de départ</mat-label>
+                                <textarea matInput
+                                          [ngModel]="booking.startComment"
+                                          (change)="update({id: booking.id, startComment: $event.target.value})"
+                                          matTextareaAutosize
+                                          [matAutosizeMinRows]="3"
+                                ></textarea>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Commentaire de fin</mat-label>
+                                <textarea matInput
+                                          [ngModel]="booking.endComment"
+                                          (change)="update({id: booking.id, endComment: $event.target.value})"
+                                          matTextareaAutosize
+                                          [matAutosizeMinRows]="3"
+                                ></textarea>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div fxLayout="row">
+                            <button mat-icon-button color="primary" (click)="booking.showComments = false">
+                                <app-icon name="clear"></app-icon>
+                            </button>
+                        </div>
+
+                    </div>
+                </app-card>
+            </div>
+        </ng-container>
     </div>
 
     <button mat-button (click)="nextPage()" *ngIf="bookings && bookings.length > bookings.items.length">Voir plus</button>

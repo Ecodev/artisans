@@ -175,7 +175,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                 pageIndex: this.currentPage,
             },
         });
-        return this.bookingService.getAll(this.bookingsQVM);
+        return this.bookingService.getAll(this.bookingsQVM, true);
     }
 
 }

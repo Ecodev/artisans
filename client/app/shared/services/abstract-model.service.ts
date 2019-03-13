@@ -56,11 +56,11 @@ export abstract class AbstractModelService<Tone,
 
     constructor(protected readonly apollo: Apollo,
                 protected readonly name: string,
-                protected readonly oneQuery: DocumentNode | null,
-                protected readonly allQuery: DocumentNode | null,
-                protected readonly createMutation: DocumentNode | null,
-                protected readonly updateMutation: DocumentNode | null,
-                protected readonly deleteMutation: DocumentNode | null) {
+                protected oneQuery: DocumentNode | null,
+                protected allQuery: DocumentNode | null,
+                protected createMutation: DocumentNode | null,
+                protected updateMutation: DocumentNode | null,
+                protected deleteMutation: DocumentNode | null) {
     }
 
     public static mergeOverrideArray(dest, src) {

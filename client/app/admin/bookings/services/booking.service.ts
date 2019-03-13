@@ -54,7 +54,6 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
         filter: {
             groups: [
                 {
-
                     conditions: [{endDate: {null: {}}}],
                     joins: {bookables: {type: JoinType.leftJoin, conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
                 },
@@ -68,6 +67,9 @@ export class BookingService extends AbstractModelService<BookingQuery['booking']
                     ],
                 },
             ],
+        },
+        pagination: {
+            pageSize: 1000,
         },
     };
 

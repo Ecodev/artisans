@@ -8,6 +8,8 @@ import { DoorGuard } from './shared/services/door.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { UserResolver } from './admin/users/services/user.resolver';
+import { SafetyComponent } from './safety/safety.component';
+import { BookingService } from './admin/bookings/services/booking.service';
 
 export const routes: Routes = [
     {
@@ -18,6 +20,15 @@ export const routes: Routes = [
         path: 'user',
         component: HomeComponent,
         loadChildren: './user/user.module#UserModule',
+    },
+    {
+        path: 'safety',
+        component: SafetyComponent,
+        data: {
+            title: 'Sorties en cours',
+            queryVariables: BookingService.runningSelfApprovedQV,
+            columns: ['bookable', 'destination', 'startDate', 'estimatedEndDate', 'participantCount'],
+        },
     },
     // Auth required routes
     {

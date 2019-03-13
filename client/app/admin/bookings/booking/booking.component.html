@@ -1,4 +1,4 @@
-<div [formGroup]="form" class="detail-body">
+<div class="detail-body">
 
     <app-detail-header newLabel="Nouvelle réservation" label="Réservation" [model]="data.model" [listRoute]="['admin', 'booking']"
     ></app-detail-header>
@@ -23,9 +23,7 @@
                             </mat-form-field>
                         </div>
 
-                        <app-select-bookable placeholder="Réservable"
-                                             [booking]="data.model"
-                                             (selectionChange)="bookable = $event"
+                        <app-select-bookable placeholder="Réservable" [booking]="data.model" (selectionChange)="bookable = $event"
                         ></app-select-bookable>
 
                     </div>

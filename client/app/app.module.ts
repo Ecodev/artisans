@@ -35,6 +35,7 @@ import localeFRCH from '@angular/common/locales/fr-CH';
 import { registerLocaleData } from '@angular/common';
 import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchic-selector.module';
 import { ConfirmComponent } from './shared/components/alert/confirm.component';
+import { SafetyComponent } from './safety/safety.component';
 
 registerLocaleData(localeFRCH);
 
@@ -48,6 +49,7 @@ registerLocaleData(localeFRCH);
         BootLoaderComponent,
         ErrorComponent,
         ConfirmComponent,
+        SafetyComponent,
     ],
     entryComponents: [
         ConfirmComponent,

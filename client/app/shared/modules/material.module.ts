@@ -20,6 +20,7 @@ import {
     MatSidenavModule,
     MatSlideToggleModule,
     MatSnackBarModule,
+    MatSortModule,
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
@@ -53,6 +54,7 @@ const list = [
     MatSlideToggleModule,
     MatTooltipModule,
     MatRippleModule,
+    MatSortModule,
 ];
 
 /**

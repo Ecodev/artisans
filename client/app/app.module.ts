@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

@@ -5,7 +5,7 @@ import { AccountService } from '../../../admin/accounts/services/account.service
 import { mergeWith } from 'lodash';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../../../admin/users/services/user.service';
-import * as Datatrans from '../../../datatrans-2.0.0.sandbox.min.js';
+import * as Datatrans from '../../../datatrans-2.0.0.sandbox.js';
 
 @Component({
     selector: 'app-profile',
@@ -34,14 +34,21 @@ export class ProfileComponent implements OnInit {
                 merchantId: '1100003518',
                 sign: '190314170627759807',
                 refno: '1123',
-                amount: '100',
+                amount: '999100',
                 currency: 'CHF',
                 uppReturnTarget: '_self'
             },
-            onLoaded: (args) => console.log('datatrans loaded event', args),
-            onOpened: (args) => console.log('datatrans opened event', args),
-            onCancelled: (args) => console.warn('datatrans canceled event', args),
-            onError: (args) => console.error('datatrans error event', args),
+            // loaded: () => console.log('datatrans loaded event'),
+            // opened: () => console.log('datatrans opened event'),
+            // closed: () => console.warn('datatrans canceled event'),
+            success: (args) => {
+                console.log('succeeded payment', args.data);
+                this.alertService.info('Youpi, tu t\'es appauvri et nous nous sommes enrichis');
+            },
+            error: (args) => {
+                console.error('errored payment', args.data);
+                this.alertService.error('Echec du paiement, tu reste riche');
+            },
         });
     }
 

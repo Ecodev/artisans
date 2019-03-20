@@ -14,11 +14,112 @@ REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, 
 (1010, NULL, 'voiliermember', 'Voilier', 'Member', 'voiliermember@example.com', MD5('voiliermember'), 'member', 'archived', '2018-01-01 12:00:00', 'householder', 0, NULL),
 (1011, 1010, 'voilierfamily', 'Voilier', 'Family', 'voilierfamily@example.com', MD5('voilierfamily'), 'individual', 'active', '2018-01-01 12:00:00', 'partner', 0, NULL);
 
-REPLACE INTO account (id, owner_id, balance, iban, name) VALUES
-(6000, 1002, 100.00, NULL, 'Compte de membre'),
-(6001, NULL, 1000.00, 'CH2928416428318019724', 'Raiffeisen'),
-(6002, NULL, 500.00, NULL, 'Caisse'),
-(6003, 1007, 50.00, NULL, 'Compte de conjoint');
+REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
+(10000, NULL, NULL, 'group', '1', '', 'Actifs'),
+(10001, NULL, NULL, 'group', '2', '', 'Passifs'),
+(10002, NULL, NULL, 'group', '3', '', 'Produits'),
+(10003, NULL, NULL, 'group', '4', '', 'Charges de matériel, de marchandises et prestations de tiers'),
+(10004, NULL, NULL, 'group', '5', '', 'Charges de personnel'),
+(10005, NULL, NULL, 'group', '6', '', 'Autres charges exploitation, amortissement, ajustement de valeur'),
+(10006, NULL, NULL, 'group', '7', '', 'Résultat des activités annexes d''exploitation'),
+(10007, NULL, NULL, 'group', '8', '', 'Résultats extraordinaires et hors exploitation'),
+(10008, NULL, NULL, 'group', '9', '', 'Clôture'),
+(10009, 10000, NULL, 'group', '100', '', 'Liquidités'),
+(10010, 10000, NULL, 'group', '150', '', 'Immobilisation corporelles meubles'),
+(10011, 10001, NULL, 'group', '2030', '', 'Acomptes de clients'),
+(10013, 10002, NULL, 'revenue', '3200', '', 'Vente de matériel'),
+(10014, 10002, NULL, 'group', '3400', '', 'Vente de prestation'),
+(10015, 10003, NULL, 'expense', '4400', '', 'Prestations / travaux de tiers'),
+(10016, 10004, NULL, 'group', '5000', '', 'Salaires'),
+(10017, 10004, NULL, 'expense', '5900', '', 'Personnel temporaire'),
+(10018, 10005, NULL, 'group', '6000', '', 'Charges de locaux'),
+(10019, 10005, NULL, 'group', '6100', '', 'Entretien, réparations et remplacement des inst. servant à l’exploitation'),
+(10020, 10005, NULL, 'expense', '6200', '', 'Charges de véhicules et de transport'),
+(10021, 10005, NULL, 'group', '6500', '', 'Charges d''administration'),
+(10022, 10005, NULL, 'expense', '6600', '', 'Publicité'),
+(10023, 10009, NULL, 'asset', '1000', '', 'Caisse'),
+(10024, 10009, NULL, 'group', '1020', '', 'Banque'),
+(10025, 10024, NULL, 'asset', '10201', 'CH7609000000200061375', 'PostFinance 20-6137-5'),
+(10026, 10024, NULL, 'asset', '10202', 'CH0980241000004014701', 'Raiffeisen 4014701'),
+(10027, 10010, NULL, 'asset', '1500', '', 'Machines et appareils'),
+(10028, 10010, NULL, 'group', '1510', '', 'Mobilier et installations'),
+(10029, 10028, NULL, 'asset', '15101', '', 'Barque'),
+(10030, 10028, NULL, 'asset', '15102', '', 'Bateau à moteur'),
+(10031, 10028, NULL, 'asset', '15103', '', 'Planche à voile'),
+(10032, 10028, NULL, 'asset', '15104', '', 'SUP'),
+(10033, 10028, NULL, 'asset', '15105', '', 'Voilier - biquille'),
+(10034, 10028, NULL, 'asset', '15106', '', 'Voilier'),
+(10035, 10014, NULL, 'revenue', '34000', '', 'Cotisations'),
+(10036, 10014, NULL, 'revenue', '34001', '', 'Location casiers'),
+(10037, 10014, NULL, 'revenue', '34002', '', 'Cours nautique'),
+(10038, 10014, NULL, 'revenue', '34003', '', 'Semaine nautique'),
+(10039, 10016, NULL, 'expense', '50000', '', 'Animateurs'),
+(10040, 10018, NULL, 'expense', '60001', '', 'Loyer'),
+(10041, 10018, NULL, 'expense', '60002', '', 'Eau'),
+(10042, 10018, NULL, 'expense', '60003', '', 'Électricité'),
+(10043, 10018, NULL, 'expense', '60004', '', 'Télécom'),
+(10044, 10018, NULL, 'expense', '60005', '', 'Râtelier couvert'),
+(10045, 10018, NULL, 'expense', '60006', '', 'Assurance'),
+(10046, 10018, NULL, 'expense', '60007', '', 'Entretien'),
+(10047, 10018, NULL, 'expense', '60008', '', 'Divers'),
+(10048, 10019, NULL, 'expense', '61000', '', 'Barque'),
+(10049, 10019, NULL, 'expense', '61001', '', 'Bateau à moteur'),
+(10050, 10019, NULL, 'expense', '61002', '', 'Canoës / kayak'),
+(10051, 10019, NULL, 'expense', '61003', '', 'Planche à voile'),
+(10052, 10019, NULL, 'expense', '61004', '', 'SUP'),
+(10053, 10019, NULL, 'expense', '61005', '', 'Voilier - biquille'),
+(10054, 10019, NULL, 'expense', '61006', '', 'Voiliers'),
+(10055, 10048, NULL, 'expense', '610001', '', 'Taxe navigation'),
+(10056, 10048, NULL, 'expense', '610002', '', 'Entretien'),
+(10057, 10048, NULL, 'expense', '610002', '', 'Autres dépenses'),
+(10058, 10049, NULL, 'expense', '610011', '', 'Taxe navigation'),
+(10059, 10049, NULL, 'expense', '610012', '', 'Entretien'),
+(10060, 10049, NULL, 'expense', '610013', '', 'Assurances'),
+(10061, 10049, NULL, 'expense', '610014', '', 'Emplacement'),
+(10062, 10049, NULL, 'expense', '610015', '', 'Autres dépenses'),
+(10063, 10050, NULL, 'expense', '610021', '', 'Taxe navigation'),
+(10064, 10050, NULL, 'expense', '610022', '', 'Entretien'),
+(10065, 10050, NULL, 'expense', '610023', '', 'Emplacement'),
+(10066, 10051, NULL, 'expense', '610031', '', 'Entretien'),
+(10067, 10051, NULL, 'expense', '610032', '', 'Emplacement'),
+(10068, 10051, NULL, 'expense', '610033', '', 'Autres dépenses'),
+(10069, 10052, NULL, 'expense', '610041', '', 'Entretien'),
+(10070, 10052, NULL, 'expense', '610042', '', 'Emplacement'),
+(10071, 10052, NULL, 'expense', '610043', '', 'Autres dépenses'),
+(10072, 10053, NULL, 'expense', '610051', '', 'Taxe navigation'),
+(10073, 10053, NULL, 'expense', '610052', '', 'Entretien'),
+(10074, 10053, NULL, 'expense', '610053', '', 'Assurances'),
+(10075, 10053, NULL, 'expense', '610054', '', 'Emplacement'),
+(10076, 10053, NULL, 'expense', '610055', '', 'Transport'),
+(10077, 10053, NULL, 'expense', '610056', '', 'Autres dépenses'),
+(10078, 10054, NULL, 'expense', '610061', '', 'Taxe navigation'),
+(10079, 10054, NULL, 'expense', '610062', '', 'Entretien'),
+(10080, 10054, NULL, 'expense', '610063', '', 'Assurances'),
+(10081, 10054, NULL, 'expense', '610064', '', 'Emplacement'),
+(10082, 10054, NULL, 'expense', '610065', '', 'Transport'),
+(10083, 10054, NULL, 'expense', '610066', '', 'Inspection'),
+(10084, 10054, NULL, 'expense', '610067', '', 'Autres dépenses'),
+(10085, 10021, NULL, 'expense', '65001', '', 'Photocopies'),
+(10086, 10021, NULL, 'expense', '65002', '', 'Envois timbres'),
+(10087, 10021, NULL, 'expense', '65003', '', 'Frais bancaires'),
+(10088, 10021, NULL, 'expense', '65004', '', 'AG'),
+(10089, 10021, NULL, 'expense', '65005', '', 'Journée travail'),
+(10090, 10021, NULL, 'expense', '65006', '', 'Séance accueil'),
+(10091, 10021, NULL, 'expense', '65007', '', 'Travail pour le club'),
+(10092, 10021, NULL, 'expense', '65008', '', 'Comité'),
+(10093, 10021, NULL, 'expense', '65009', '', 'Divers'),
+(10094, 10011, 1000, 'liability', '20300001', '', 'Administrator'),
+(10095, 10011, 1001, 'liability', '20300002', '', 'Responsable'),
+(10096, 10011, 1002, 'liability', '20300003', '', 'Active Member'),
+(10097, 10011, 1007, 'liability', '20300004', '', 'Conjoint'),
+(10098, 10011, 1008, 'liability', '20300005', '', 'Son'),
+(10099, 10011, 1009, 'liability', '20300006', '', 'Daughter'),
+(10100, 10011, 1010, 'liability', '20300007', '', 'Voilier Member'),
+(10101, 10011, 1011, 'liability', '20300008', '', 'Voilier Family'),
+(10102, 10007, NULL, 'expense', '8000', '', 'Charges hors exploitation'),
+(10103, 10007, NULL, 'revenue', '8100', '', 'Produits hors exploitation'),
+(10104, 10007, NULL, 'expense', '8500', '', 'Charges extraordinaires, exceptionnelles ou hors période'),
+(10105, 10007, NULL, 'revenue', '8510', '', 'Produits extraordinaires, exceptionnels ou hors période');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Voilier');
@@ -109,32 +210,35 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4007, 3006),
 (4012, 3011);
 
-REPLACE INTO expense_claim (id, owner_id, amount, status, name, description, remarks) VALUES
-(7000, 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', ''),
-(7001, 1002, 100.00, 'processed', 'flyers', 'Cighelio', '');
+REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, remarks) VALUES
+(7000, '2019-01-10', 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', ''),
+(7001, '2019-01-14', 1002, 100.00, 'processed', 'flyers', 'Cighelio', ''),
+(7002, '2019-03-14', 1002, -50.00, 'processing', 'remboursement bancaire', '', '');
 
-REPLACE INTO transaction (id, transactionDate, amount, account_id, name, remarks, bookable_id) VALUES
-(8000, '2017-12-06', 360.00, 6001, 'Cours nautique', 'Cours 190', NULL),
-(8001, '2017-12-29', -11.15, 6001, 'Comité', 'Photocopies', NULL),
-(8002, '2017-03-10', 90, 6001, 'Cotisation 2017', '', NULL),
-(8003, '2017-03-15', 90, 6002, 'Cotisation 2017', '', NULL),
-(8004, '2017-04-01', 100.00, 6000, 'Remboursement flyers', '', NULL),
-(8005, '2018-03-01', -50.00, 6002, 'Location casier 1012', '', 3003);
+REPLACE INTO transaction (id, transactionDate, name, remarks, expense_claim_id) VALUES
+(8000, '2019-03-01', 'Active Member: inscription cours nautique', '', NULL),
+(8001, '2019-03-10', 'Photocopies pour comité', '', NULL),
+(8002, '2019-03-12', 'Cotisation 2019', '', NULL),
+(8003, '2019-01-15', 'Remboursement flyers pour cours nautique', 'Facture Cighelio du 10.01.2019', 7001),
+(8004, '2019-02-05', 'Location casier 1012', '', NULL);
+
+REPLACE INTO transaction_tag (id, name) VALUES
+(15000, 'Régate 2019'),
+(15001, 'Cours 2019'),
+(15002, 'Tombola 2019'),
+(15003, 'Camp J+S 2019'),
+(15004, 'Camp France 2019'),
+(15005, 'Semaine nautique 2019');
+
+REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable_id, transaction_tag_id, balance, transactionDate, is_reconcilied, name, remarks) VALUES
+(14000, 8000, 10096, 10037, NULL, 15001, 100.00, '2019-03-01', 1, 'Paiement depuis crédit MyIchtus', ''),
+(14001, 8001, 10085, 10025, NULL, NULL, 12.50, '2019-03-10', 1, 'Paiement par Postcard', ''),
+(14002, 8002, 10096, 10035, NULL, NULL, 90.00, '2019-03-12', 1, 'Paiement depuis crédit MyIchtus', ''),
+(14003, 8003, 10022, 10096, NULL, 15001, 100, '2019-03-15', 1, 'Remboursement sur crédit MyIchtus', ''),
+(14004, 8004, 10096, 10036, 3003, NULL, 50, '2019-02-05', 1, 'Paiement depuis crédit MyIchtus', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, filename, mime) VALUES
 (9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
-
-REPLACE INTO category (id, name) VALUES
-(10000, 'Administratif'),
-(10001, 'Voilier'),
-(10002, 'SUP'),
-(10003, 'NFT'),
-(10004, 'Entretien');
-
-REPLACE INTO category_category (category_source, category_target) VALUES
-(10001, 10004),
-(10002, 10004),
-(10003, 10004);
 
 REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
 (11001, 1000, 1000, 1002, 'monthly_reminder', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
@@ -151,7 +255,5 @@ REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 REPLACE INTO bookable_metadata (id, bookable_id, name, value) VALUES
 (13000, 3000, 'Largeur', '1405 mm'),
 (13001, 3000, 'Hauteur', '1605 mm');
-
-
 
 COMMIT;

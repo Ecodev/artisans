@@ -7,10 +7,12 @@ namespace Application\Model;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
 use Cake\Chronos\Date;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A monetary transaction
+ * An accounting journal entry (simple or compound)
  *
  * @ORM\Entity(repositoryClass="Application\Repository\TransactionRepository")
  */
@@ -18,33 +20,6 @@ class Transaction extends AbstractModel
 {
     use HasName;
     use HasRemarks;
-
-    /**
-     * @var Account
-     *
-     * @ORM\ManyToOne(targetEntity="Account", inversedBy="transactions")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     * })
-     */
-    private $account;
-
-    /**
-     * @var Bookable
-     *
-     * @ORM\ManyToOne(targetEntity="Bookable", inversedBy="transactions")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     * })
-     */
-    private $bookable;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=7, scale=2)
-     */
-    private $amount;
 
     /**
      * @var Date
@@ -60,6 +35,18 @@ class Transaction extends AbstractModel
     private $internalRemarks = '';
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="TransactionLine", mappedBy="transaction")
+     */
+    private $transactionLines;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="AccountingDocument", mappedBy="transaction")
+     */
+    private $accountingDocuments;
+
+    /**
      * @var ExpenseClaim
      *
      * @ORM\ManyToOne(targetEntity="ExpenseClaim", inversedBy="transactions")
@@ -70,79 +57,12 @@ class Transaction extends AbstractModel
     private $expenseClaim;
 
     /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(targetEntity="Category", inversedBy="transactions")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     * })
+     * Constructor
      */
-    private $category;
-
-    /**
-     * Set account
-     *
-     * @param Account $account
-     */
-    public function setAccount(Account $account): void
+    public function __construct()
     {
-        if ($this->account) {
-            $this->account->transactionRemoved($this);
-        }
-        $this->account = $account;
-        $this->account && $this->account->transactionAdded($this);
-    }
-
-    /**
-     * Get account
-     *
-     * @return Account
-     */
-    public function getAccount(): Account
-    {
-        return $this->account;
-    }
-
-    /**
-     * Get account
-     *
-     * @return null|Bookable
-     */
-    public function getBookable(): ?Bookable
-    {
-        return $this->bookable;
-    }
-
-    /**
-     * Set bookable
-     *
-     * @param null|Bookable $bookable
-     */
-    public function setBookable(?Bookable $bookable): void
-    {
-        if ($this->bookable) {
-            $this->bookable->transactionRemoved($this);
-        }
-        $this->bookable = $bookable;
-        $this->bookable && $this->bookable->transactionAdded($this);
-    }
-
-    /**
-     * Set amount
-     *
-     * @param string $amount
-     */
-    public function setAmount(string $amount): void
-    {
-        $this->amount = $amount;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAmount(): string
-    {
-        return $this->amount;
+        $this->transactionLines = new ArrayCollection();
+        $this->accountingDocuments = new ArrayCollection();
     }
 
     /**
@@ -186,6 +106,68 @@ class Transaction extends AbstractModel
     }
 
     /**
+     * Notify when a transaction line is added
+     * This should only be called by TransactionLine::setTransaction()
+     *
+     * @param TransactionLine $transactionLine
+     */
+    public function transactionLineAdded(TransactionLine $transactionLine): void
+    {
+        $this->transactionLines->add($transactionLine);
+    }
+
+    /**
+     * Notify when a transaction line is removed
+     * This should only be called by TransactionLine::setTransaction()
+     *
+     * @param TransactionLine $transactionLine
+     */
+    public function transactionLineRemoved(TransactionLine $transactionLine): void
+    {
+        $this->transactionLines->removeElement($transactionLine);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getTransactionLines(): Collection
+    {
+        return $this->transactionLines;
+    }
+
+    /**
+     * Notify the transaction that an accounting document was added
+     * This should only be called by AccountingDocument::setTransaction()
+     *
+     * @param AccountingDocument $document
+     */
+    public function accountingDocumentAdded(AccountingDocument $document): void
+    {
+        $this->accountingDocuments->add($document);
+    }
+
+    /**
+     * Notify the transaction that an accounting document was removed
+     * This should only be called by AccountingDocument::setTransaction()
+     *
+     * @param AccountingDocument $document
+     */
+    public function accountingDocumentRemoved(AccountingDocument $document): void
+    {
+        $this->accountingDocuments->removeElement($document);
+    }
+
+    /**
+     * Get accounting documents
+     *
+     * @return Collection
+     */
+    public function getAccountingDocuments(): Collection
+    {
+        return $this->accountingDocuments;
+    }
+
+    /**
      * Set expense claim
      *
      * @param null|ExpenseClaim $expenseClaim
@@ -208,30 +190,5 @@ class Transaction extends AbstractModel
     public function getExpenseClaim(): ?ExpenseClaim
     {
         return $this->expenseClaim;
-    }
-
-    /**
-     * Set category
-     *
-     * @param null|Category $category
-     */
-    public function setCategory(?Category $category): void
-    {
-        if ($this->category && $category !== $this->category) {
-            $this->category->transactionRemoved($this);
-        }
-
-        $this->category = $category;
-        $this->category && $this->category->transactionAdded($this);
-    }
-
-    /**
-     * Get category
-     *
-     * @return null|Category
-     */
-    public function getCategory(): ?Category
-    {
-        return $this->category;
     }
 }

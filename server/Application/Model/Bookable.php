@@ -91,12 +91,6 @@ class Bookable extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Transaction", mappedBy="bookable")
-     */
-    private $transactions;
-
-    /**
-     * @var Collection
      * @ORM\ManyToMany(targetEntity="License", mappedBy="bookables")
      */
     private $licenses;
@@ -116,7 +110,6 @@ class Bookable extends AbstractModel
         $this->bookings = new ArrayCollection();
         $this->licenses = new ArrayCollection();
         $this->bookableTags = new ArrayCollection();
-        $this->transactions = new ArrayCollection();
     }
 
     /**
@@ -342,33 +335,13 @@ class Bookable extends AbstractModel
     }
 
     /**
+     * @API\Field(type="TransactionLine[]")
+     *
      * @return Collection
      */
-    public function getTransactions(): Collection
+    public function getTransactionLines(): Collection
     {
-        return $this->transactions;
-    }
-
-    /**
-     * Notify the bookable that it has a new transaction.
-     * This should only be called by Transaction::setBookable()
-     *
-     * @param Transaction $transaction
-     */
-    public function transactionAdded(Transaction $transaction): void
-    {
-        $this->transactions->add($transaction);
-    }
-
-    /**
-     * Notify the bookable that one of its transactions was removed
-     * This should only be called by Transaction::setBookable()
-     *
-     * @param Transaction $transaction
-     */
-    public function transactionRemoved(Transaction $transaction): void
-    {
-        $this->transactions->removeElement($transaction);
+        _em()->getRepository(TransactionLine::class)->findByBookable($this);
     }
 
     /**

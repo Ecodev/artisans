@@ -14,13 +14,13 @@ use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
 use Application\Model\BookableTag;
 use Application\Model\Booking;
-use Application\Model\Category;
 use Application\Model\Country;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
 use Application\Model\Message;
 use Application\Model\Transaction;
+use Application\Model\TransactionTag;
 use Application\Model\User;
 use Application\Model\UserTag;
 use GraphQL\Type\Definition\ObjectType;
@@ -49,7 +49,7 @@ class QueryType extends ObjectType
             Standard::buildQuery(UserTag::class),
             Standard::buildQuery(Account::class),
             Standard::buildQuery(Transaction::class),
-            Standard::buildQuery(Category::class),
+            Standard::buildQuery(TransactionTag::class),
             Standard::buildQuery(ExpenseClaim::class),
             Standard::buildQuery(AccountingDocument::class),
             Standard::buildQuery(Message::class)

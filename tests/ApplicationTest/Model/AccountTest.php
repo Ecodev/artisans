@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ApplicationTest\Model;
 
 use Application\Model\Account;
-use Application\Model\Transaction;
+use Application\Model\TransactionLine;
 use Application\Model\User;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -37,21 +37,40 @@ class AccountTest extends TestCase
         self::assertNull($otherUser->getAccount(), 'Second user must have no account');
     }
 
+    public function testTree(): void
+    {
+        $a = new Account();
+        $b = new Account();
+        $c = new Account();
+
+        $b->setParent($a);
+        $c->setParent($a);
+
+        self::assertCount(2, $a->getChildren());
+
+        $c->setParent(null);
+
+        self::assertCount(1, $a->getChildren());
+    }
+
     public function testTransactionRelation(): void
     {
-        $account = new Account();
+        $account = _em()->getReference(Account::class, 10096);
 
-        $transaction = new Transaction();
-        $transaction->setAccount($account);
+        $transactionLine = new TransactionLine();
+        $transactionLine->setDebit($account);
 
-        self::assertCount(1, $account->getTransactions(), 'Account must have 1 transaction');
+        $transactionLine2 = new TransactionLine();
+        $transactionLine2->setCredit($account);
 
-        $otherAccount = new Account();
-        $transaction->setAccount($otherAccount);
+        self::assertCount(5, $account->getTransactionLines(), 'Account must have 5 transactions');
 
-        self::assertCount(0, $account->getTransactions(), 'Original account without transaction');
+        $otherAccount = _em()->getReference(Account::class, 10035);
+        $transactionLine->setDebit($otherAccount);
 
-        self::assertSame($transaction->getAccount(), $otherAccount);
+        self::assertCount(4, $account->getTransactionLines(), 'Original account with 4 transaction');
+
+        self::assertSame($transactionLine->getDebit(), $otherAccount);
     }
 
     public function testIban(): void

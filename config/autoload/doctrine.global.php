@@ -52,6 +52,7 @@ return [
             'date' => Application\DBAL\Types\DateType::class,
             'ExpenseClaimStatus' => Application\DBAL\Types\ExpenseClaimStatusType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
+            'AccountType' => Application\DBAL\Types\AccountTypeType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

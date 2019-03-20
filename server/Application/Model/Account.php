@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A transaction account held for a member, or club's bank account
+ * Financial account
  *
  * @ORM\Entity(repositoryClass="Application\Repository\AccountRepository")
  * @ORM\AssociationOverrides({
@@ -36,18 +36,45 @@ class Account extends AbstractModel
     private $balance = '0.00';
 
     /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="Transaction", mappedBy="account")
+     * @var Account
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="children")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(onDelete="CASCADE")
+     * })
      */
-    private $transactions;
+    private $parent;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Account", mappedBy="parent")
+     * @ORM\OrderBy({"code" = "ASC"})
+     */
+    private $children;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="AccountType", length=10)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10, nullable=false, unique=true)
+     */
+    private $code;
+
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->transactions = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
-     * Assign the transaction account to a user
+     * Assign the account to an user
      *
      * @param null|User $owner
      */
@@ -85,38 +112,6 @@ class Account extends AbstractModel
     }
 
     /**
-     * Get all transactions
-     *
-     * @return Collection
-     */
-    public function getTransactions(): Collection
-    {
-        return $this->transactions;
-    }
-
-    /**
-     * Notify the account that it has a new transaction
-     * This should only be called by Transaction::setAccount()
-     *
-     * @param Transaction $transaction
-     */
-    public function transactionAdded(Transaction $transaction): void
-    {
-        $this->transactions->add($transaction);
-    }
-
-    /**
-     * Notify the account that a transaction was removed
-     * This should only be called by Transaction::setAccount()
-     *
-     * @param Transaction $transaction
-     */
-    public function transactionRemoved(Transaction $transaction): void
-    {
-        $this->transactions->removeElement($transaction);
-    }
-
-    /**
      * Notify that an user was added
      *
      * @param null|User $user
@@ -124,5 +119,87 @@ class Account extends AbstractModel
     public function userAdded(?User $user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param null|Account $parent
+     */
+    public function setParent(?self $parent): void
+    {
+        $this->parent = $parent;
+    }
+
+    /**
+     * @return null|Account
+     */
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    /**
+     * Set type
+     *
+     * @API\Input(type="AccountType")
+     *
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @API\Field(type="AccountType")
+     *
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     */
+    public function setCode(string $code): void
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    /**
+     * Get lines of transactions
+     *
+     * @API\Field(type="TransactionLine[]")
+     *
+     * @return ArrayCollection
+     */
+    public function getTransactionLines(): ArrayCollection
+    {
+        return new ArrayCollection(_em()->getRepository(TransactionLine::class)->findByDebitOrCredit($this));
     }
 }

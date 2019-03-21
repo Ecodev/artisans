@@ -31,7 +31,7 @@ import { BookableMetadataService } from '../app/shared/components/bookable-metad
                 return {
                     cache: new InMemoryCache(),
                     link: httpLink.create({
-                        uri: 'https://my.ichtus.ch/graphql',
+                        uri: 'https://ichtus.club/graphql',
                         withCredentials: true,
                     }),
                     defaultOptions: {

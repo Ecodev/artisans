@@ -14,13 +14,13 @@
                 <tr mat-footer-row *matFooterRowDef="applicationsColumns"></tr>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                    <th mat-header-cell *matHeaderCellDef>Nom</th>
                     <td mat-cell *matCellDef="let booking">{{ booking.bookables[0].name }}</td>
                     <td mat-footer-cell *matFooterCellDef> Totaux</td>
                 </ng-container>
 
                 <ng-container matColumnDef="periodicPrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix périodique</th>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix périodique</th>
                     <td mat-cell *matCellDef="let booking">
                         <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice }} CHF</span>
                     </td>
@@ -28,7 +28,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="initialPrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix initial</th>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix initial</th>
                     <td mat-cell *matCellDef="let booking">
                         <span *ngIf="booking.bookables[0].initialPrice"> {{ booking.bookables[0].initialPrice }} CHF</span>
                     </td>
@@ -36,7 +36,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="cancel">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-1em-column></th>
+                    <th mat-header-cell *matHeaderCellDef app-1em-column></th>
                     <td mat-cell *matCellDef="let booking">
                         <button mat-icon-button color="warn" (click)="cancelApplication(booking)">
                             <app-icon name="delete"></app-icon>
@@ -67,13 +67,13 @@
                 <tr mat-footer-row *matFooterRowDef="servicesColumns"></tr>
 
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+                    <th mat-header-cell *matHeaderCellDef>Nom</th>
                     <td mat-cell *matCellDef="let booking">{{ booking.bookables[0].name }}</td>
                     <td mat-footer-cell *matFooterCellDef> Totaux</td>
                 </ng-container>
 
                 <ng-container matColumnDef="periodicPrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix périodique</th>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix périodique</th>
                     <td mat-cell *matCellDef="let booking">
                         <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice }} CHF</span>
                     </td>
@@ -81,7 +81,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="initialPrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-7em-column>Prix initial</th>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix initial</th>
                     <td mat-cell *matCellDef="let booking">
                         <span *ngIf="booking.bookables[0].initialPrice"> {{ booking.bookables[0].initialPrice }} CHF</span>
                     </td>
@@ -89,7 +89,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="revoke">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-1em-column></th>
+                    <th mat-header-cell *matHeaderCellDef app-1em-column></th>
                     <td mat-cell *matCellDef="let booking">
                         <button mat-icon-button color="warn" (click)="revokeBooking(booking)" *ngIf="canRevoke(booking)">
                             <app-icon name="delete"></app-icon>

@@ -57,6 +57,7 @@ $COMPOSER clear-config-cache
 echo "Updating database..."
 $PHP ./vendor/bin/doctrine-migrations migrations:migrate --no-interaction
 $PHP ./vendor/bin/doctrine orm:generate-proxies
+$PHP ./bin/create-triggers.php
 
 echo "Building Angular application..."
 yarn run prod

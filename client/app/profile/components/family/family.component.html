@@ -4,7 +4,7 @@
         <button mat-flat-button color="warn" [disabled]="!userService.canLeaveFamily(user)" (click)="leaveFamily()">Quitter le ménage</button>
     </div>
     <mat-accordion>
-        <mat-expansion-panel *ngFor="let familyMember of familyMembers">
+        <mat-expansion-panel *ngFor="let familyMember of familyMembers" [expanded]="!familyMember.id">
             <mat-expansion-panel-header>
                 <mat-panel-title> {{ familyMember?.name || 'Nouveau'}}</mat-panel-title>
             </mat-expansion-panel-header>

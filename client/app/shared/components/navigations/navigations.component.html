@@ -1,5 +1,8 @@
 <div fxLayout="column" fxLayoutGap="20px">
     <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px grid" *ngIf="bookings">
+
+        <div *ngIf="!bookings.items.length && showEmptyMessage" class="padding mat-body-2">Aucun résultat</div>
+
         <ng-container *ngFor="let booking of bookings.items; let i = index">
             <div [@terminate] *ngIf="!activeOnly || activeOnly && !booking.endDate">
                 <app-card [file]="booking.bookables[0]?.image" [style.width.px]="300" [class.showComments]="booking.showComments">

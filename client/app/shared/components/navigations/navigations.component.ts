@@ -38,6 +38,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
 
     @Input() user;
     @Input() activeOnly = true;
+    @Input() showEmptyMessage = false;
 
     public bookings: BookingsQuery['bookings'];
     public bookingsQueryRef: AutoRefetchQueryRef<BookingsQuery['bookings']>;

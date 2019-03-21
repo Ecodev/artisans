@@ -82,24 +82,31 @@
                         <td mat-cell *matCellDef="let bookable">
                             {{ bookable.name }}
                         </td>
-                        <td mat-footer-cell *matFooterCellDef> Totaux</td>
-
-                    </ng-container>
-
-                    <ng-container matColumnDef="periodicPrice">
-                        <th mat-header-cell *matHeaderCellDef app-7em-column>Prix initial</th>
-                        <td mat-cell *matCellDef="let bookable">
-                            <span *ngIf="bookable.periodicPrice"> {{ bookable.periodicPrice }} CHF</span>
-                        </td>
-                        <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF</td>
+                        <td mat-footer-cell *matFooterCellDef>Totaux</td>
                     </ng-container>
 
                     <ng-container matColumnDef="initialPrice">
-                        <th mat-header-cell *matHeaderCellDef app-7em-column>Prix annuel</th>
-                        <td mat-cell *matCellDef="let bookable">
-                            <span *ngIf="bookable.initialPrice"> {{ bookable.initialPrice }} CHF</span>
+                        <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix initial</th>
+                        <td mat-cell *matCellDef="let bookable" app-align-right>
+                            <span *ngIf="bookable.initialPrice > 0"> {{ bookable.initialPrice | currency: 'CHF' }}</span>
                         </td>
-                        <td mat-footer-cell *matFooterCellDef> {{ totalInitial }} CHF</td>
+                        <td mat-footer-cell *matFooterCellDef app-align-right>
+                            <span *ngIf="dataSource.data.totalInitialPrice > 0">
+                                {{ dataSource.data.totalInitialPrice | currency: 'CHF'}}
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="periodicPrice">
+                        <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix annuel</th>
+                        <td mat-cell *matCellDef="let bookable" app-align-right>
+                            <span *ngIf="bookable.periodicPrice > 0"> {{ bookable.periodicPrice | currency: 'CHF' }}</span>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef app-align-right>
+                            <span *ngIf="dataSource.data.totalPeriodicPrice > 0">
+                                {{ dataSource.data.totalPeriodicPrice | currency: 'CHF' }}
+                            </span>
+                        </td>
                     </ng-container>
                 </table>
             </div>
@@ -110,19 +117,19 @@
 
         <div fxLayout="row" fxLayoutGap="30px" *ngIf="step === 1">
             <div fxFlex>
-                <mat-checkbox formControlName="hasInsurance" required>J'ai une super assurance !</mat-checkbox>
-                <mat-error class="mat-body-1" *ngIf="form.get('hasInsurance').touched && form.get('hasInsurance').hasError('required')">Requis</mat-error>
-                <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at
-                                      lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit
-                                      sit amet non magna.</p>
+                <mat-checkbox formControlName="hasInsurance" required>Mon assurance RC couvre les embarcations.</mat-checkbox>
+                <mat-error class="mat-body-1" *ngIf="form.get('hasInsurance').touched && form.get('hasInsurance').hasError('required')">
+                    Requis
+                </mat-error>
+                <p class="mat-body-1"></p>
             </div>
             <mat-divider [vertical]="true"></mat-divider>
             <div fxFlex>
-                <mat-checkbox formControlName="termsAgreement" required>J'ai tout lu !</mat-checkbox>
-                <mat-error class="mat-body-1" *ngIf="form.get('termsAgreement').touched && form.get('termsAgreement').hasError('required')">Requis</mat-error>
-                <p class="mat-body-1">Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at
-                                      lobortis. Vestibulum id ligula porta felis euismod semper. Maecenas sed diam eget risus varius blandit
-                                      sit amet non magna.</p>
+                <mat-checkbox formControlName="termsAgreement" required>J'accepte les conditions générales !</mat-checkbox>
+                <mat-error class="mat-body-1" *ngIf="form.get('termsAgreement').touched && form.get('termsAgreement').hasError('required')">
+                    Requis
+                </mat-error>
+                <p class="mat-body-1"></p>
             </div>
         </div>
 

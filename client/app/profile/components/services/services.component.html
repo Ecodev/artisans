@@ -8,7 +8,7 @@
 
         <div class="responsive-table">
 
-            <table mat-table *ngIf="runningServicesDS" [dataSource]="pendingApplicationsDS">
+            <table mat-table *ngIf="pendingApplicationsDS" [dataSource]="pendingApplicationsDS">
                 <tr mat-header-row *matHeaderRowDef="applicationsColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: applicationsColumns;"></tr>
                 <tr mat-footer-row *matFooterRowDef="applicationsColumns"></tr>
@@ -20,19 +20,28 @@
                 </ng-container>
 
                 <ng-container matColumnDef="periodicPrice">
-                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix périodique</th>
-                    <td mat-cell *matCellDef="let booking">
-                        <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice }} CHF</span>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix périodique</th>
+                    <td mat-cell *matCellDef="let booking" app-align-right>
+                        <span *ngIf="booking.bookables[0].periodicPrice > 0"> {{ booking.bookables[0].periodicPrice | currency: 'CHF'}}
+                        </span>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF</td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        <span *ngIf="pendingApplicationsDS.data.totalPeriodicPrice > 0">
+                            {{ pendingApplicationsDS.data.totalPeriodicPrice | currency: 'CHF' }}
+                        </span>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="initialPrice">
-                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix initial</th>
-                    <td mat-cell *matCellDef="let booking">
-                        <span *ngIf="booking.bookables[0].initialPrice"> {{ booking.bookables[0].initialPrice }} CHF</span>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix initial</th>
+                    <td mat-cell *matCellDef="let booking" app-align-right>
+                        <span *ngIf="booking.bookables[0].initialPrice > 0"> {{ booking.bookables[0].initialPrice | currency: 'CHF'}}</span>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef> {{ totalInitial }} CHF</td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        <span *ngIf="pendingApplicationsDS.data.totalInitialPrice > 0">
+                            {{ pendingApplicationsDS.data.totalInitialPrice | currency: 'CHF'}}
+                        </span>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="cancel">
@@ -73,19 +82,15 @@
                 </ng-container>
 
                 <ng-container matColumnDef="periodicPrice">
-                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix périodique</th>
-                    <td mat-cell *matCellDef="let booking">
-                        <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice }} CHF</span>
+                    <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix périodique</th>
+                    <td mat-cell *matCellDef="let booking" app-align-right>
+                        <span *ngIf="booking.bookables[0].periodicPrice"> {{ booking.bookables[0].periodicPrice | currency: 'CHF'}}</span>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef> {{ totalPeriodic }} CHF</td>
-                </ng-container>
-
-                <ng-container matColumnDef="initialPrice">
-                    <th mat-header-cell *matHeaderCellDef app-7em-column>Prix initial</th>
-                    <td mat-cell *matCellDef="let booking">
-                        <span *ngIf="booking.bookables[0].initialPrice"> {{ booking.bookables[0].initialPrice }} CHF</span>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        <span *ngIf="runningServicesDS.data.totalPeriodicPrice > 0">
+                            {{ runningServicesDS.data.totalPeriodicPrice | currency: 'CHF' }}
+                        </span>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef> {{ totalInitial }} CHF</td>
                 </ng-container>
 
                 <ng-container matColumnDef="revoke">

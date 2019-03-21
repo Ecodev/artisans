@@ -23,7 +23,7 @@
                     <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
                     <button mat-flat-button color="primary" class="margin-left" (click)="pay()">Approvisionner</button>
                 </div>
-                <app-money [amount]="user.account?.balance" sizeClass="mat-display-2"></app-money>
+                <app-money [amount]="user.account?.balance || 0" sizeClass="mat-display-2"></app-money>
             </div>
         </div>
 

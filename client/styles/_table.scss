@@ -22,6 +22,14 @@
         .mat-footer-cell {
             padding-left: 3px;
             padding-right: 3px;
+
+            &[app-align-right] {
+                text-align: right
+            }
+
+            &[app-align-center] {
+                text-align: center;
+            }
         }
 
         [mat-row] {

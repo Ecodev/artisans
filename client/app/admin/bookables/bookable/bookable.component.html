@@ -103,6 +103,7 @@
                         <mat-form-field>
                             <mat-label>Nombre max. de réservations simultanées</mat-label>
                             <input matInput type="number" formControlName="simultaneousBookingMaximum" (change)="update()">
+                            <mat-hint>Saisir -1 pour aucune limite.</mat-hint>
                         </mat-form-field>
 
                     </div>
@@ -117,6 +118,7 @@
                             <app-relations [main]="data.model"
                                            [service]="licenseService"
                                            [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
+                                           [hideSearch]="true"
                                            placeholder="Associer à une certification"
                             >
                                 <ng-template let-item="item">
@@ -154,15 +156,15 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Attributs">
+        <mat-tab label="Attributs" *ngIf="data.model.id">
             <app-bookable-metadata [bookable]="data.model" [edit]="true" class="margin"></app-bookable-metadata>
         </mat-tab>
 
-        <mat-tab label="Transactions" *ngIf="data.model.id">
+<!--        <mat-tab label="Transactions" *ngIf="data.model.id">
             <app-transactions [persistSearch]="false"
                               [queryVariables]="{filter: {groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}}"
             ></app-transactions>
-        </mat-tab>
+        </mat-tab>-->
 
         <mat-tab label="Utilisations" *ngIf="data.model.id">
             <app-bookings [persistSearch]="false"

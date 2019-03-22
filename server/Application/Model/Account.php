@@ -128,7 +128,15 @@ class Account extends AbstractModel
      */
     public function setParent(?self $parent): void
     {
+        if ($this->getParent()) {
+            $this->getParent()->getChildren()->removeElement($this);
+        }
+
         $this->parent = $parent;
+
+        if ($this->getParent()) {
+            $this->getParent()->getChildren()->add($this);
+        }
     }
 
     /**
@@ -194,12 +202,10 @@ class Account extends AbstractModel
     /**
      * Get lines of transactions
      *
-     * @API\Field(type="TransactionLine[]")
-     *
-     * @return ArrayCollection
+     * @return TransactionLine[]
      */
-    public function getTransactionLines(): ArrayCollection
+    public function getTransactionLines(): array
     {
-        return new ArrayCollection(_em()->getRepository(TransactionLine::class)->findByDebitOrCredit($this));
+        return _em()->getRepository(TransactionLine::class)->findByDebitOrCredit($this);
     }
 }

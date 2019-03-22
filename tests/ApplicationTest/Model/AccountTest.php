@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ApplicationTest\Model;
 
 use Application\Model\Account;
-use Application\Model\TransactionLine;
 use Application\Model\User;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -51,26 +50,6 @@ class AccountTest extends TestCase
         $c->setParent(null);
 
         self::assertCount(1, $a->getChildren());
-    }
-
-    public function testTransactionRelation(): void
-    {
-        $account = _em()->getReference(Account::class, 10096);
-
-        $transactionLine = new TransactionLine();
-        $transactionLine->setDebit($account);
-
-        $transactionLine2 = new TransactionLine();
-        $transactionLine2->setCredit($account);
-
-        self::assertCount(5, $account->getTransactionLines(), 'Account must have 5 transactions');
-
-        $otherAccount = _em()->getReference(Account::class, 10035);
-        $transactionLine->setDebit($otherAccount);
-
-        self::assertCount(4, $account->getTransactionLines(), 'Original account with 4 transaction');
-
-        self::assertSame($transactionLine->getDebit(), $otherAccount);
     }
 
     public function testIban(): void

@@ -335,16 +335,6 @@ class Bookable extends AbstractModel
     }
 
     /**
-     * @API\Field(type="TransactionLine[]")
-     *
-     * @return Collection
-     */
-    public function getTransactionLines(): Collection
-    {
-        _em()->getRepository(TransactionLine::class)->findByBookable($this);
-    }
-
-    /**
      * @return null|Image
      */
     public function getImage(): ?Image

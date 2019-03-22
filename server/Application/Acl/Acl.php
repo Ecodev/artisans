@@ -58,7 +58,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $country = new ModelResource(Country::class);
         $account = new ModelResource(Account::class);
         $accountingDocument = new ModelResource(AccountingDocument::class);
-        $category = new ModelResource(TransactionTag::class);
+        $transactionTag = new ModelResource(TransactionTag::class);
         $expenseClaim = new ModelResource(ExpenseClaim::class);
         $message = new ModelResource(Message::class);
         $transaction = new ModelResource(Transaction::class);
@@ -74,12 +74,12 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($country);
         $this->addResource($account);
         $this->addResource($accountingDocument);
-        $this->addResource($category);
+        $this->addResource($transactionTag);
         $this->addResource($expenseClaim);
         $this->addResource($message);
         $this->addResource($transaction);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license, $category], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license, $transactionTag], ['read']);
 
         $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['create', 'read', 'update']);
 
@@ -97,13 +97,13 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_MEMBER, $user, ['create']);
         $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsOwner());
 
-        $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $category], ['read']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $transactionTag], ['read']);
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$user], ['update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$userTag], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_RESPONSIBLE, [$bookable, $bookableMetadata, $bookableTag, $image, $license], ['create', 'update', 'delete']);
 
-        $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $category], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $transactionTag], ['create', 'update', 'delete']);
     }
 
     /**

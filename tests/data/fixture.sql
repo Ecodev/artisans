@@ -220,7 +220,8 @@ REPLACE INTO transaction (id, transactionDate, name, remarks, expense_claim_id) 
 (8001, '2019-03-10', 'Photocopies pour comité', '', NULL),
 (8002, '2019-03-12', 'Cotisation 2019', '', NULL),
 (8003, '2019-01-15', 'Remboursement flyers pour cours nautique', 'Facture Cighelio du 10.01.2019', 7001),
-(8004, '2019-02-05', 'Location casier 1012', '', NULL);
+(8004, '2019-02-05', 'Location casier 1012', '', NULL),
+(8005, '2019-02-04', 'Achat d''un nouveau voilier', 'Paiement partiel par banque et poste', NULL);
 
 REPLACE INTO transaction_tag (id, name) VALUES
 (15000, 'Régate 2019'),
@@ -235,7 +236,10 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable
 (14001, 8001, 10085, 10025, NULL, NULL, 12.50, '2019-03-10', 1, 'Paiement par Postcard', ''),
 (14002, 8002, 10096, 10035, NULL, NULL, 90.00, '2019-03-12', 1, 'Paiement depuis crédit MyIchtus', ''),
 (14003, 8003, 10022, 10096, NULL, 15001, 100, '2019-03-15', 1, 'Remboursement sur crédit MyIchtus', ''),
-(14004, 8004, 10096, 10036, 3003, NULL, 50, '2019-02-05', 1, 'Paiement depuis crédit MyIchtus', '');
+(14004, 8004, 10096, 10036, 3003, NULL, 50, '2019-02-05', 1, 'Paiement depuis crédit MyIchtus', ''),
+(14005, 8005, 10054, NULL, 3007, NULL, 10000, '2019-02-03', 1, 'Acquisition voilier NE123456', ''),
+(14006, 8005, NULL, 10025, NULL, NULL, 7000, '2019-02-03', 1, 'Paiement par PostFinance', ''),
+(14007, 8005, NULL, 10026, NULL, NULL, 3000, '2019-02-04', 0, 'Paiement par Raiffeisen', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, filename, mime) VALUES
 (9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');

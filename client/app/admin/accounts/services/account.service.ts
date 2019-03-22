@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import { accountQuery, accountsQuery, createAccountMutation, deleteAccountsMutation, updateAccountMutation } from './account.queries';
+import {
+    accountQuery,
+    accountsQuery,
+    createAccountMutation,
+    deleteAccountsMutation,
+    updateAccountMutation,
+} from './account.queries';
 import {
     AccountInput,
     AccountQuery,
     AccountQueryVariables,
     AccountsQuery,
     AccountsQueryVariables,
+    AccountType,
     CreateAccountMutation,
     CreateAccountMutationVariables,
     DeleteAccountsMutation,
@@ -43,6 +50,8 @@ export class AccountService extends AbstractModelService<AccountQuery['account']
         return {
             name: '',
             iban: '',
+            type: AccountType.expense,
+            code: '',
         };
     }
 

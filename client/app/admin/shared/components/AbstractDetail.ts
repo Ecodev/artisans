@@ -1,4 +1,4 @@
-import { isArray, merge, mergeWith } from 'lodash';
+import { isArray, kebabCase, merge, mergeWith } from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
@@ -113,9 +113,9 @@ export class AbstractDetail<Tone,
         this.alertService.confirm('Suppression', 'Voulez-vous supprimer définitivement cet élément ?', 'Supprimer définitivement')
             .subscribe(confirmed => {
                 if (confirmed) {
-                    this.service.delete(this.data.model).subscribe(() => {
+                    this.service.delete([this.data.model]).subscribe(() => {
                         this.alertService.info('Supprimé');
-                        this.router.navigate(['../../' + this.key], {relativeTo: this.route});
+                        this.router.navigate(['../../' + kebabCase(this.key)], {relativeTo: this.route});
                     });
                 }
             });

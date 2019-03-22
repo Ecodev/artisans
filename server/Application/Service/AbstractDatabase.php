@@ -87,6 +87,7 @@ STRING;
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand("gunzip -c \"$dumpFile\" | mysql --user=$username --password=$password --host=$host $database");
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations --ansi migrations:migrate --no-interaction');
+        self::loadTriggers();
     }
 
     public static function loadRemoteData($remote): void
@@ -124,6 +125,15 @@ STRING;
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine orm:schema-tool:drop --ansi --full-database --force');
         self::executeLocalCommand(PHP_BINARY . ' ./vendor/bin/doctrine-migrations migrations:migrate --ansi --no-interaction');
         self::importFile('tests/data/fixture.sql');
+        self::loadTriggers();
+    }
+
+    /**
+     * Load triggers
+     */
+    public static function loadTriggers(): void
+    {
+        self::importFile('data/triggers.sql');
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api;
 
 use Application\Api\Field\Mutation\ConfirmRegistration;
+use Application\Api\Field\Mutation\CreateTransaction;
 use Application\Api\Field\Mutation\LeaveFamily;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
@@ -21,11 +22,10 @@ use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
 use Application\Model\BookableTag;
 use Application\Model\Booking;
-use Application\Model\Category;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
-use Application\Model\Transaction;
+use Application\Model\TransactionTag;
 use Application\Model\User;
 use Application\Model\UserTag;
 use GraphQL\Type\Definition\ObjectType;
@@ -45,6 +45,7 @@ class MutationType extends ObjectType
             ConfirmRegistration::build(),
             Unregister::build(),
             LeaveFamily::build(),
+            CreateTransaction::build(),
         ];
 
         $fields = array_merge(
@@ -59,8 +60,7 @@ class MutationType extends ObjectType
             Standard::buildMutation(User::class),
             Standard::buildMutation(UserTag::class),
             Standard::buildMutation(Account::class),
-            Standard::buildMutation(Transaction::class),
-            Standard::buildMutation(Category::class),
+            Standard::buildMutation(TransactionTag::class),
             Standard::buildMutation(ExpenseClaim::class),
             Standard::buildMutation(AccountingDocument::class),
             Standard::buildRelationMutation(Booking::class, Bookable::class),
@@ -68,7 +68,7 @@ class MutationType extends ObjectType
             Standard::buildRelationMutation(License::class, User::class),
             Standard::buildRelationMutation(UserTag::class, User::class),
             Standard::buildRelationMutation(BookableTag::class, Bookable::class),
-            Standard::buildRelationMutation(Category::class, Category::class, 'Parent')
+            Standard::buildRelationMutation(Account::class, Account::class, 'Parent')
         );
 
         $config = [

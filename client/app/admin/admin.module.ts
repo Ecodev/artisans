@@ -27,8 +27,8 @@ import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
 import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
-import { CategoriesComponent } from './categories/categories/categories.component';
-import { CategoryComponent } from './categories/category/category.component';
+import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
+import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { SelectBookableComponent } from './shared/components/select-bookable/select-bookable.component';
 
 @NgModule({
@@ -54,8 +54,8 @@ import { SelectBookableComponent } from './shared/components/select-bookable/sel
         AccountComponent,
         ExpenseClaimsComponent,
         ExpenseClaimComponent,
-        CategoriesComponent,
-        CategoryComponent,
+        TransactionTagsComponent,
+        TransactionTagComponent,
         SelectBookableComponent,
     ],
     imports: [

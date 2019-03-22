@@ -13,13 +13,13 @@ return [
                     bookableMetadata { create }
                     bookableTag { create }
                     booking { create }
-                    category { create }
                     country { create }
                     expenseClaim { create }
                     image { create }
                     license { create }
                     message { create }
                     transaction { create }
+                    transactionTag { create }
                     user { create }
                     userTag { create }
                 }
@@ -50,9 +50,6 @@ return [
                     'booking' => [
                         'create' => true,
                     ],
-                    'category' => [
-                        'create' => true,
-                    ],
                     'country' => [
                         'create' => false,
                     ],
@@ -69,6 +66,9 @@ return [
                         'create' => false,
                     ],
                     'transaction' => [
+                        'create' => true,
+                    ],
+                    'transactionTag' => [
                         'create' => true,
                     ],
                     'user' => [

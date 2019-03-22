@@ -8,12 +8,10 @@ import {
     CreateTransactionMutationVariables,
     TransactionQuery,
     TransactionQueryVariables,
-    UpdateTransactionMutation,
-    UpdateTransactionMutationVariables,
 } from '../../../shared/generated-types';
 import { AccountService } from '../../accounts/services/account.service';
-import { CategoryConfiguration } from '../../../shared/hierarchic-selector/configurations/CategoryConfiguration';
 import { BookableService } from '../../bookables/services/bookable.service';
+import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
 
 @Component({
     selector: 'app-transaction',
@@ -25,18 +23,17 @@ export class TransactionComponent
         TransactionQueryVariables,
         CreateTransactionMutation['createTransaction'],
         CreateTransactionMutationVariables,
-        UpdateTransactionMutation['updateTransaction'],
-        UpdateTransactionMutationVariables,
+        null,
+        any,
         any> {
-
-    public hierarchicConfig = CategoryConfiguration;
 
     constructor(alertService: AlertService,
                 transactionService: TransactionService,
                 router: Router,
                 route: ActivatedRoute,
                 public accountService: AccountService,
-                public bookableService: BookableService
+                public bookableService: BookableService,
+                public transactionTagService: TransactionTagService
     ) {
         super('transaction', transactionService, alertService, router, route);
     }

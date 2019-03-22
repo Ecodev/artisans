@@ -6,7 +6,7 @@ namespace ApplicationTest\Model;
 
 use PHPUnit\Framework\TestCase;
 
-class TransactionTest extends TestCase
+class TransactionTagTest extends TestCase
 {
     public function testNoop(): void
     {

@@ -15,9 +15,9 @@ trait HasIban
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=34, unique=true, nullable=true)
+     * @ORM\Column(type="string", length=34, options={"default" = ""})
      */
-    private $iban;
+    private $iban = '';
 
     /**
      * Set the IBAN (international bank account number)

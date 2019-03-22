@@ -32,9 +32,9 @@ import { AccountResolver } from './accounts/services/account.resolver';
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
 import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
 import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resolver';
-import { CategoriesComponent } from './categories/categories/categories.component';
-import { CategoryComponent } from './categories/category/category.component';
-import { CategoryResolver } from './categories/services/category.resolver';
+import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
+import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
+import { TransactionTagResolver } from './transactionTags/services/transactionTag-resolver.service';
 import { AdministrationGuard } from '../shared/services/administration.guard';
 
 const routes: Routes = [
@@ -426,25 +426,26 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'category', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: CategoriesComponent,
-                    data: {title: 'Catégories'},
+                    // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    path: 'transaction-tag',
+                    component: TransactionTagsComponent,
+                    data: {title: 'Tags'},
                 },
                 {
-                    path: 'category',
+                    path: 'transaction-tag',
                     children: [
                         {
                             path: 'new',
-                            component: CategoryComponent,
+                            component: TransactionTagComponent,
                             resolve: {
-                                category: CategoryResolver,
+                                transactionTag: TransactionTagResolver,
                             },
                         },
                         {
-                            path: ':categoryId', // last
-                            component: CategoryComponent,
+                            path: ':transactionTagId', // last
+                            component: TransactionTagComponent,
                             resolve: {
-                                category: CategoryResolver,
+                                transactionTag: TransactionTagResolver,
                             },
                         },
                     ],

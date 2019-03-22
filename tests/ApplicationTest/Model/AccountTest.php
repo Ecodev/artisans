@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ApplicationTest\Model;
 
 use Application\Model\Account;
-use Application\Model\Transaction;
 use Application\Model\User;
 use Doctrine\DBAL\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -37,21 +36,20 @@ class AccountTest extends TestCase
         self::assertNull($otherUser->getAccount(), 'Second user must have no account');
     }
 
-    public function testTransactionRelation(): void
+    public function testTree(): void
     {
-        $account = new Account();
+        $a = new Account();
+        $b = new Account();
+        $c = new Account();
 
-        $transaction = new Transaction();
-        $transaction->setAccount($account);
+        $b->setParent($a);
+        $c->setParent($a);
 
-        self::assertCount(1, $account->getTransactions(), 'Account must have 1 transaction');
+        self::assertCount(2, $a->getChildren());
 
-        $otherAccount = new Account();
-        $transaction->setAccount($otherAccount);
+        $c->setParent(null);
 
-        self::assertCount(0, $account->getTransactions(), 'Original account without transaction');
-
-        self::assertSame($transaction->getAccount(), $otherAccount);
+        self::assertCount(1, $a->getChildren());
     }
 
     public function testIban(): void

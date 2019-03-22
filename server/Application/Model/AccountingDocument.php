@@ -38,15 +38,25 @@ class AccountingDocument extends AbstractFile
      *
      * @ORM\ManyToOne(targetEntity="ExpenseClaim", inversedBy="accountingDocuments")
      * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * })
      */
     private $expenseClaim;
 
     /**
-     * @param ExpenseClaim $expenseClaim
+     * @var Transaction
+     *
+     * @ORM\ManyToOne(targetEntity="Transaction", inversedBy="accountingDocuments")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     * })
      */
-    public function setExpenseClaim(ExpenseClaim $expenseClaim): void
+    private $transaction;
+
+    /**
+     * @param null|ExpenseClaim $expenseClaim
+     */
+    public function setExpenseClaim(?ExpenseClaim $expenseClaim): void
     {
         if ($this->expenseClaim && $expenseClaim !== $this->expenseClaim) {
             $this->expenseClaim->accountingDocumentRemoved($this);
@@ -57,10 +67,31 @@ class AccountingDocument extends AbstractFile
     }
 
     /**
-     * @return ExpenseClaim
+     * @return null|ExpenseClaim
      */
-    public function getExpenseClaim(): ExpenseClaim
+    public function getExpenseClaim(): ?ExpenseClaim
     {
         return $this->expenseClaim;
+    }
+
+    /**
+     * @param null|Transaction $transaction
+     */
+    public function setTransaction(?Transaction $transaction): void
+    {
+        if ($this->transaction && $transaction !== $this->transaction) {
+            $this->transaction->accountingDocumentRemoved($this);
+        }
+
+        $this->transaction = $transaction;
+        $transaction->accountingDocumentAdded($this);
+    }
+
+    /**
+     * @return null|Transaction
+     */
+    public function getTransaction(): ?Transaction
+    {
+        return $this->transaction;
     }
 }

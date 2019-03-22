@@ -36,7 +36,8 @@
                                 <mat-error *ngIf="form.get('lastName').hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
-                            <app-select-enum enumName="Sex" formControlName="sex" (selectionChange)="update()" placeholder="Genre"></app-select-enum>
+                            <app-select-enum enumName="Sex" formControlName="sex" (selectionChange)="update()" placeholder="Genre"
+                            ></app-select-enum>
                         </div>
 
                         <app-address [form]="form" (change)="update()"></app-address>
@@ -77,13 +78,14 @@
                         </mat-form-field>
 
                         <mat-divider class="margin-bottom"></mat-divider>
-                        <h2 class="mat-title">Finances</h2>
-                        <app-select formControlName="account"
-                                    placeholder="Compte"
-                                    [service]="accountService"
-                                    [showIcon]="false"
-                                    [navigateTo]="['/admin/account', form.get('account').value?.id]"
-                        ></app-select>
+
+                        <h2 class="mat-title">État</h2>
+
+                        <app-select-enum enumName="UserStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
+                        ></app-select-enum>
+
+                        <app-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
+                        ></app-select-enum>
 
                     </div>
                 </div>
@@ -121,93 +123,14 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <h2 class="mat-title">État</h2>
-
-                        <app-select-enum enumName="UserStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
-                        ></app-select-enum>
-
-                        <app-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
-                        ></app-select-enum>
-
-                        <div fxLayout="row wrap" fxLayoutGap="20px" class="margin-v">
-                            <mat-slide-toggle fxFlex formControlName="door1" (change)="update()" class="margin-bottom">Porte 1
-                            </mat-slide-toggle>
-                            <mat-slide-toggle fxFlex formControlName="door2" (change)="update()" class="margin-bottom">Porte 2
-                            </mat-slide-toggle>
-                            <mat-slide-toggle fxFlex formControlName="door3" (change)="update()" class="margin-bottom">Porte 3
-                            </mat-slide-toggle>
-                            <mat-slide-toggle fxFlex formControlName="door4" (change)="update()" class="margin-bottom">Porte 4
-                            </mat-slide-toggle>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Bookings -->
                 <mat-divider *ngIf="data.model.id"></mat-divider>
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
-                    <div fxFlex="33" fxLayout="column">
-                        <h2 class="mat-title">Sorties en cours</h2>
-                        <app-relations [main]="data.model"
-                                       [service]="bookingService"
-                                       [filter]="runningSelfApproved"
-                                       [disabled]="true"
-                                       [hideSearch]="true"
-                        >
-                            <ng-template let-item="item">
-                                <div fxLayout="row" fxLayoutGap="20px">
-                                    <span>
-                                        <span class="mat-body-2">de</span>
-                                        {{ item.startDate }},
-                                    </span>
-                                    <span *ngIf="item.endDate">
-                                        <span class="mat-body-2">à</span>
-                                        {{item.endDate}},
-                                    </span>
-                                    <span *ngIf="item.estimatedEndDate">
-                                        <span class="mat-body-2">retour prévu</span>
-                                        {{ item.estimatedEndDate}}
-                                    </span>
-                                    <div fxFlex fxLayout="row" fxLayoutAlign="end" *ngIf="!item.endDate">
-                                        <button mat-button color="warn" (click)="bookingService.flagEndDate(item.id)">Terminer</button>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </app-relations>
-                    </div>
-                    <div fxFlex="33" fxLayout="column">
-                        <h2 class="mat-title">Cotisation, stockage et services</h2>
-                        <app-relations [main]="data.model"
-                                       [service]="bookingService"
-                                       [filter]="runningActive"
-                                       [disabled]="true"
-                                       [hideSearch]="true"
-                        >
-                            <ng-template let-item="item">
-                                <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
-                                ></app-table-button>
-                            </ng-template>
-                        </app-relations>
-                    </div>
-                    <div fxFlex="33">
-                        <h2 class="mat-title">Demandes en attente</h2>
-                        <app-relations [main]="data.model"
-                                       [service]="bookingService"
-                                       [filter]="pendingDemands"
-                                       [disabled]="true"
-                                       [hideSearch]="true"
-                        >
-                            <ng-template let-item="item">
-                                <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
-                                ></app-table-button>
-                            </ng-template>
-                        </app-relations>
-                    </div>
-                </div>
-
-                <mat-divider *ngIf="data.model.id"></mat-divider>
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
-                    <div fxFlex="50" fxLayout="column">
+                    <div fxFlex="45" fxLayout="column">
                         <h2 class="mat-title">Certifications</h2>
                         <app-relations [main]="data.model"
                                        [service]="licenseService"
@@ -222,7 +145,7 @@
                         </app-relations>
                     </div>
 
-                    <div fxFlex="50" fxLayout="column">
+                    <div fxFlex="40" fxLayout="column">
                         <h2 class="mat-title">Tags</h2>
                         <app-relations [main]="data.model"
                                        [service]="userTagService"
@@ -239,11 +162,70 @@
                             </ng-template>
                         </app-relations>
                     </div>
+
+                    <div fxFlex="10" fxLayout="column">
+                        <mat-slide-toggle fxFlex formControlName="door1" (change)="update()" class="margin-bottom">
+                            Porte 1
+                        </mat-slide-toggle>
+                        <mat-slide-toggle fxFlex formControlName="door2" (change)="update()" class="margin-bottom">
+                            Porte 2
+                        </mat-slide-toggle>
+                        <mat-slide-toggle fxFlex formControlName="door3" (change)="update()" class="margin-bottom">
+                            Porte 3
+                        </mat-slide-toggle>
+                        <mat-slide-toggle fxFlex formControlName="door4" (change)="update()" class="margin-bottom">
+                            Porte 4
+                        </mat-slide-toggle>
+                    </div>
                 </div>
 
                 <mat-divider></mat-divider>
 
                 <app-stamp [item]="data.model"></app-stamp>
+            </div>
+
+        </mat-tab>
+
+        <mat-tab label="Finances" *ngIf="data.model.id">
+
+            <h2 class="mat-title">Finances</h2>
+            <app-select formControlName="account"
+                        placeholder="Compte"
+                        [service]="accountService"
+                        [showIcon]="false"
+                        [navigateTo]="['/admin/account', form.get('account').value?.id]"
+            ></app-select>
+
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+
+                <div fxFlex>
+                    <h2 class="mat-title">Cotisation, stockage et services</h2>
+                    <app-relations [main]="data.model"
+                                   [service]="bookingService"
+                                   [filter]="runningActive"
+                                   [disabled]="true"
+                                   [hideSearch]="true"
+                    >
+                        <ng-template let-item="item">
+                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
+                            ></app-table-button>
+                        </ng-template>
+                    </app-relations>
+                </div>
+                <div fxFlex>
+                    <h2 class="mat-title">Demandes en attente</h2>
+                    <app-relations [main]="data.model"
+                                   [service]="bookingService"
+                                   [filter]="pendingDemands"
+                                   [disabled]="true"
+                                   [hideSearch]="true"
+                    >
+                        <ng-template let-item="item">
+                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
+                            ></app-table-button>
+                        </ng-template>
+                    </app-relations>
+                </div>
             </div>
 
         </mat-tab>

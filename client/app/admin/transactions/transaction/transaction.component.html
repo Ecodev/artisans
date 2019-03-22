@@ -85,9 +85,9 @@
 
                         <mat-divider class="margin-bottom"></mat-divider>
 
-                        <app-select formControlName="category"
-                                    placeholder="Catégorie"
-                                    [hierarchicSelectorConfig]="hierarchicConfig"
+                        <app-select formControlName="tag"
+                                    placeholder="Tag"
+                                    [service]="transactionTagService"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
                         ></app-select>

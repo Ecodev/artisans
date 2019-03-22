@@ -6,9 +6,9 @@ import {
     BookableFilter,
     BookableTagFilter,
     BookingFilter,
-    CategoryFilter,
     ExpenseClaimFilter,
     TransactionFilter,
+    TransactionTagFilter,
     UserFilter,
     UserTagFilter,
 } from '../generated-types';
@@ -30,11 +30,11 @@ type Filter =
     |
     BookableTagFilter
     |
-    CategoryFilter
-    |
     ExpenseClaimFilter
     |
     TransactionFilter
+    |
+    TransactionTagFilter
     |
     AccountFilter;
 

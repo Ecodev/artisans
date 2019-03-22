@@ -7,9 +7,9 @@ import { AbstractModelService } from '../../../shared/services/abstract-model.se
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { QueryVariables } from '../../../shared/classes/query-variables-manager';
-import { CategoryFilterGroupConditionParents } from '../../../shared/generated-types';
+import { AccountFilterGroupConditionParent } from '../../../shared/generated-types';
 
-type ParentRelationType = CategoryFilterGroupConditionParents;
+type ParentRelationType = AccountFilterGroupConditionParent;
 
 /**
  * This class helps managing a list of paginated items that can be filtered,
@@ -43,7 +43,7 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
                 let parentCondition: ParentRelationType | null = null;
                 if (params.parent) {
 
-                    // parentCondition = {equal: {value: params.parent}}; // todo : remove if verything ok with bellow version
+                    // parentCondition = {equal: {value: params.parent}}; // todo : remove if everything ok with bellow version
                     parentCondition = {have: {values: [params.parent]}};
                     this.service.getOne(params.parent).subscribe(parent => {
                         this.breadcrumbs = this.getBreadcrumb(parent);
@@ -52,12 +52,12 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
                     this.clearSearch();
 
                 } else {
-                    // parentCondition = {null: {}}; // todo : remove if verything ok with bellow version
+                    // parentCondition = {null: {}}; // todo : remove if everything ok with bellow version
                     parentCondition = {empty: {}};
                     this.breadcrumbs = [];
                 }
 
-                const filter: QueryVariables = {filter: {groups: [{conditions: [{parents: parentCondition}]}]}};
+                const filter: QueryVariables = {filter: {groups: [{conditions: [{parent: parentCondition}]}]}};
 
                 // todo : check why without "as Vall" it errors. Vall is supposed to be QueryVariables, and filter too.
                 this.variablesManager.set('navigation', filter as Vall);
@@ -89,7 +89,7 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
 
             // If there is no search, restore only root elements
             this.variablesManager.set('navigation', {
-                filter: {groups: [{conditions: [{parents: {empty: {}}}]}]},
+                filter: {groups: [{conditions: [{parent: {empty: {}}}]}]},
             } as Vall);
             // todo : check why without "as Vall" it errors. Vall is supposed to be QueryVariables, and filter too.
         }

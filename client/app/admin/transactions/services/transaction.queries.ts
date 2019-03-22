@@ -8,23 +8,23 @@ export const transactionMetaFragment = gql`
         transactionDate
         remarks
         internalRemarks
-        amount
-        category {
-            id
-            name
-        }
-        bookable {
-            id
-            name
-        }
-        account {
-            id
-            name
-            owner {
-                id
-                name
-            }
-        }
+#        amount            TODO commented out when moving to new accounting model, must be removed when migration is complete
+#        category {
+#            id
+#            name
+#        }
+#        bookable {
+#            id
+#            name
+#        }
+#        account {
+#            id
+#            name
+#            owner {
+#                id
+#                name
+#            }
+#        }
         expenseClaim {
             id
             name
@@ -64,8 +64,8 @@ export const transactionQuery = gql`
 ${userMetaFragment}`;
 
 export const createTransactionMutation = gql`
-    mutation CreateTransaction($input: TransactionInput!) {
-        createTransaction(input: $input) {
+    mutation CreateTransaction($input: TransactionInput!, $lines: [TransactionLineInput!]!) {
+        createTransaction(input: $input, lines: $lines) {
             id
             creator {
                 ...userMeta
@@ -74,21 +74,3 @@ export const createTransactionMutation = gql`
     }
     ${userMetaFragment}
 `;
-
-export const updateTransactionMutation = gql`
-    mutation UpdateTransaction($id: TransactionID!, $input: TransactionPartialInput!) {
-        updateTransaction(id:$id, input:$input) {
-            id
-            updateDate
-            updater {
-                ...userMeta
-            }
-        }
-    }
-    ${userMetaFragment}
-`;
-
-export const deleteTransactionsMutation = gql`
-    mutation DeleteTransactions ($ids: [TransactionID!]!){
-        deleteTransactions(ids: $ids)
-    }`;

@@ -45,7 +45,7 @@ class Bookable extends AbstractModel
     /**
      * @var int
      *
-     * @ORM\Column(type="smallint", options={"unsigned" = true, "default" = "1"})
+     * @ORM\Column(type="smallint", options={"default" = "-1"})
      */
     private $simultaneousBookingMaximum = 1;
 

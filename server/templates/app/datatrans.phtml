@@ -1,0 +1,5 @@
+<script>
+    var message = <?php echo json_encode($this->message, JSON_PRETTY_PRINT) ?>;
+    parent.postMessage(message, '*');
+</script>
+datatrans OK :-)

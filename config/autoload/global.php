@@ -17,4 +17,11 @@ return [
         'token' => 'my-token-value',
         'authorizedIps' => ['localhost'],
     ],
+    'templates' => [
+        'paths' => [
+            'app' => ['server/templates/app'],
+            'error' => ['server/templates/error'],
+            'layout' => ['server/templates/layout'],
+        ],
+    ],
 ];

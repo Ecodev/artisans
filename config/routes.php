@@ -49,4 +49,9 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->get('/accounting-document/{id:\d+}', [
         \Application\Action\AccountingDocumentAction::class,
     ], 'accounting-document');
+
+    $app->get('/datatrans', [
+        BodyParamsMiddleware::class,
+        \Application\Action\DatatransAction::class,
+    ], 'datatrans');
 };

@@ -22,7 +22,7 @@ class RendererFactory
     {
         $renderer = new PhpRenderer();
         $resolver = new TemplatePathStack();
-        $resolver->addPath('server/views/emails');
+        $resolver->addPath('server/templates/emails');
         $renderer->setResolver($resolver);
 
         return $renderer;

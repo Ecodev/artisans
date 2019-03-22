@@ -27,6 +27,7 @@ return [
             \GraphQL\Doctrine\Types::class => \Application\Api\TypesFactory::class,
             \Application\Action\ImageAction::class => \Application\Action\ImageFactory::class,
             \Application\Action\AccountingDocumentAction::class => \Application\Action\AccountingDocumentFactory::class,
+            \Application\Action\DatatransAction::class => \Application\Action\DatatransFactory::class,
             \Application\Service\ImageResizer::class => \Application\Service\ImageResizerFactory::class,
             \Imagine\Image\ImagineInterface::class => \Application\Service\ImagineFactory::class,
             \Application\Service\Mailer::class => \Application\Service\MailerFactory::class,

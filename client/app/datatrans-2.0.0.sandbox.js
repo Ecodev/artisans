@@ -305,12 +305,12 @@
             if (typeof event.data === 'object' && event.data.type === 'success') {
 
                 if (typeof config.success === 'function') {
-                    var errorData = {
+                    var successData = {
                         message: event.data.message,
                         detail: event.data.detail
                     };
 
-                    config.success(errorData);
+                    config.success(successData);
                 }
                 cleanup();
                 return;

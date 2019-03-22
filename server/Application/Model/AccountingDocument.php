@@ -48,7 +48,7 @@ class AccountingDocument extends AbstractFile
      *
      * @ORM\ManyToOne(targetEntity="Transaction", inversedBy="accountingDocuments")
      * @ORM\JoinColumns({
-     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * })
      */
     private $transaction;

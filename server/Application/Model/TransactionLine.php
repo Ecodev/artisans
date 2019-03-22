@@ -8,6 +8,7 @@ use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
 use Cake\Chronos\Date;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
  * A single line of accounting transaction
@@ -30,7 +31,7 @@ class TransactionLine extends AbstractModel
     private $transaction;
 
     /**
-     * @var Account
+     * @var null|Account
      *
      * @ORM\ManyToOne(targetEntity="Account")
      * @ORM\JoinColumns({
@@ -40,7 +41,7 @@ class TransactionLine extends AbstractModel
     private $debit;
 
     /**
-     * @var Account
+     * @var null|Account
      *
      * @ORM\ManyToOne(targetEntity="Account")
      * @ORM\JoinColumns({
@@ -50,7 +51,7 @@ class TransactionLine extends AbstractModel
     private $credit;
 
     /**
-     * @var Bookable
+     * @var null|Bookable
      *
      * @ORM\ManyToOne(targetEntity="Bookable")
      * @ORM\JoinColumns({
@@ -73,7 +74,7 @@ class TransactionLine extends AbstractModel
     private $transactionDate;
 
     /**
-     * @var TransactionTag
+     * @var null|TransactionTag
      *
      * @ORM\ManyToOne(targetEntity="TransactionTag")
      * @ORM\JoinColumns({
@@ -97,6 +98,8 @@ class TransactionLine extends AbstractModel
     private $isReconcilied = false;
 
     /**
+     * @API\Exclude
+     *
      * @param Transaction $transaction
      */
     public function setTransaction(Transaction $transaction): void
@@ -140,9 +143,9 @@ class TransactionLine extends AbstractModel
     /**
      * Set debit account
      *
-     * @param Account $account
+     * @param null|Account $account
      */
-    public function setDebit(Account $account): void
+    public function setDebit(?Account $account): void
     {
         $this->debit = $account;
     }
@@ -160,9 +163,9 @@ class TransactionLine extends AbstractModel
     /**
      * Set credit account
      *
-     * @param Account $account
+     * @param null|Account $account
      */
-    public function setCredit(Account $account): void
+    public function setCredit(?Account $account): void
     {
         $this->credit = $account;
     }

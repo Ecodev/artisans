@@ -50,7 +50,7 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         \Application\Action\AccountingDocumentAction::class,
     ], 'accounting-document');
 
-    $app->get('/datatrans', [
+    $app->post('/datatrans', [
         BodyParamsMiddleware::class,
         \Application\Action\DatatransAction::class,
     ], 'datatrans');

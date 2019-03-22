@@ -11,7 +11,6 @@ class RelationshipType extends AbstractEnumType
         $config = [
             \Application\DBAL\Types\RelationshipType::HOUSEHOLDER => 'chef(e) de famille',
             \Application\DBAL\Types\RelationshipType::PARTNER => 'conjoint',
-            \Application\DBAL\Types\RelationshipType::EX_PARTNER => 'ex-conjoint',
             \Application\DBAL\Types\RelationshipType::CHILD => 'enfant',
             \Application\DBAL\Types\RelationshipType::PARENT => 'parent',
             \Application\DBAL\Types\RelationshipType::SISTER => 'soeur',

@@ -69,7 +69,7 @@ export class TimezonePreservingDateAdapter extends NativeDateAdapter {
         date.toJSON = function(): string {
             const timezoneOffsetInHours = -(date.getTimezoneOffset() / 60); // UTC minus local time
             const sign = timezoneOffsetInHours >= 0 ? '+' : '-';
-            const leadingZero = (timezoneOffsetInHours < 10) ? '0' : '';
+            const leadingZero = (Math.abs(timezoneOffsetInHours) < 10) ? '0' : '';
             const offsetMinutes = date.getTimezoneOffset() % 60;
             const leadingZeroMinutes = (offsetMinutes < 10) ? '0' : '';
 

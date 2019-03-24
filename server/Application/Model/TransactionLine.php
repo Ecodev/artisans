@@ -95,7 +95,7 @@ class TransactionLine extends AbstractModel
      *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isReconcilied = false;
+    private $isReconciled = false;
 
     /**
      * @API\Exclude
@@ -259,22 +259,22 @@ class TransactionLine extends AbstractModel
     }
 
     /**
-     * Whether this line of transaction was reconcilied (e.g. from a bank statement)
+     * Whether this line of transaction was reconciled (e.g. from a bank statement)
      *
      * @return bool
      */
-    public function isReconcilied(): bool
+    public function isReconciled(): bool
     {
-        return $this->isReconcilied;
+        return $this->isReconciled;
     }
 
     /**
-     * Whether this line of transaction was reconcilied (e.g. from a bank statement)
+     * Whether this line of transaction was reconciled (e.g. from a bank statement)
      *
-     * @param bool $isReconcilied
+     * @param bool $isReconciled
      */
-    public function setIsReconcilied(bool $isReconcilied): void
+    public function setIsReconciled(bool $isReconciled): void
     {
-        $this->isReconcilied = $isReconcilied;
+        $this->isReconciled = $isReconciled;
     }
 }

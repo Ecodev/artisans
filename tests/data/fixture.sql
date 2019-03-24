@@ -231,7 +231,7 @@ REPLACE INTO transaction_tag (id, name) VALUES
 (15004, 'Camp France 2019'),
 (15005, 'Semaine nautique 2019');
 
-REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable_id, transaction_tag_id, balance, transactionDate, is_reconcilied, name, remarks) VALUES
+REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable_id, transaction_tag_id, balance, transactionDate, is_reconciled, name, remarks) VALUES
 (14000, 8000, 10096, 10037, NULL, 15001, 100.00, '2019-03-01', 1, 'Paiement depuis crédit MyIchtus', ''),
 (14001, 8001, 10085, 10025, NULL, NULL, 12.50, '2019-03-10', 1, 'Paiement par Postcard', ''),
 (14002, 8002, 10096, 10035, NULL, NULL, 90.00, '2019-03-12', 1, 'Paiement depuis crédit MyIchtus', ''),

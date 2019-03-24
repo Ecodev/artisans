@@ -16,18 +16,25 @@ class ExpenseClaimTest extends TestCase
     public function testDocumentRelation(): void
     {
         $document = new AccountingDocument();
-
-        $expense = new ExpenseClaim();
-        $document->setExpenseClaim($expense);
-
+        $expense1 = new ExpenseClaim();
         $expense2 = new ExpenseClaim();
 
-        self::assertCount(1, $expense->getAccountingDocuments());
+        self::assertCount(0, $expense1->getAccountingDocuments());
+        self::assertCount(0, $expense2->getAccountingDocuments());
+
+        $document->setExpenseClaim($expense1);
+
+        self::assertCount(1, $expense1->getAccountingDocuments());
+        self::assertCount(0, $expense2->getAccountingDocuments());
 
         $document->setExpenseClaim($expense2);
 
-        self::assertCount(0, $expense->getAccountingDocuments());
+        self::assertCount(0, $expense1->getAccountingDocuments());
         self::assertCount(1, $expense2->getAccountingDocuments());
+
+        $document->setExpenseClaim(null);
+        self::assertCount(0, $expense1->getAccountingDocuments());
+        self::assertCount(0, $expense2->getAccountingDocuments());
     }
 
     public function testTransactionRelation(): void

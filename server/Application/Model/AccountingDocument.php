@@ -58,12 +58,15 @@ class AccountingDocument extends AbstractFile
      */
     public function setExpenseClaim(?ExpenseClaim $expenseClaim): void
     {
-        if ($this->expenseClaim && $expenseClaim !== $this->expenseClaim) {
+        if ($this->expenseClaim) {
             $this->expenseClaim->accountingDocumentRemoved($this);
         }
 
         $this->expenseClaim = $expenseClaim;
-        $expenseClaim->accountingDocumentAdded($this);
+
+        if ($this->expenseClaim) {
+            $expenseClaim->accountingDocumentAdded($this);
+        }
     }
 
     /**
@@ -79,12 +82,15 @@ class AccountingDocument extends AbstractFile
      */
     public function setTransaction(?Transaction $transaction): void
     {
-        if ($this->transaction && $transaction !== $this->transaction) {
+        if ($this->transaction) {
             $this->transaction->accountingDocumentRemoved($this);
         }
 
         $this->transaction = $transaction;
-        $transaction->accountingDocumentAdded($this);
+
+        if ($this->transaction) {
+            $transaction->accountingDocumentAdded($this);
+        }
     }
 
     /**

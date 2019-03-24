@@ -4,7 +4,7 @@
         <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
             <div fxLayout="column" style="text-align:right" *ngIf="form.get('verificationDate').value">
                 <div class="mat-body-2">Dernière vérification</div>
-                <div>{{ form.get('verificationDate').value | date: 'longDate' }}</div>
+                <div class="mat-body-1">{{ form.get('verificationDate').value | date: 'longDate' }}</div>
             </div>
             <button mat-flat-button color="primary" (click)="verify()" *ngIf="showVerified()">Marquer comme vérifié</button>
         </div>
@@ -160,11 +160,11 @@
             <app-bookable-metadata [bookable]="data.model" [edit]="true" class="margin"></app-bookable-metadata>
         </mat-tab>
 
-<!--        <mat-tab label="Transactions" *ngIf="data.model.id">
-            <app-transactions [persistSearch]="false"
-                              [queryVariables]="{filter: {groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}}"
-            ></app-transactions>
-        </mat-tab>-->
+        <!--        <mat-tab label="Transactions" *ngIf="data.model.id">
+                    <app-transactions [persistSearch]="false"
+                                      [queryVariables]="{filter: {groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}}"
+                    ></app-transactions>
+                </mat-tab>-->
 
         <mat-tab label="Utilisations" *ngIf="data.model.id">
             <app-bookings [persistSearch]="false"

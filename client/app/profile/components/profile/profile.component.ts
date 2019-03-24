@@ -28,28 +28,35 @@ export class ProfileComponent implements OnInit {
     }
 
     public pay() {
-        Datatrans.startPayment({
-            params: {
-                production: false,
-                merchantId: '1100003518',
-                sign: '190314170627759807',
-                refno: '1123',
-                amount: '999100',
-                currency: 'CHF',
-                uppReturnTarget: '_self'
-            },
-            // loaded: () => console.log('datatrans loaded event'),
-            // opened: () => console.log('datatrans opened event'),
-            // closed: () => console.warn('datatrans canceled event'),
-            success: (args) => {
-                console.log('succeeded payment', args.data);
-                this.alertService.info('Youpi, tu t\'es appauvri et nous nous sommes enrichis');
-            },
-            error: (args) => {
-                console.error('errored payment', args.data);
-                this.alertService.error('Echec du paiement, tu reste riche');
-            },
-        });
+
+        const user = this.userService.getCachedCurrentUser();
+        if (user !== null) {
+
+            Datatrans.startPayment({
+                params: {
+                    production: false,
+                    merchantId: '1100003518',
+                    sign: '190314170627759807',
+                    refno: user.id,
+                    amount: '1000',
+                    currency: 'CHF',
+                },
+                // loaded: () => console.log('datatrans loaded event'),
+                // opened: () => console.log('datatrans opened event'),
+                // closed: () => console.warn('datatrans canceled event'),
+                success: (args) => {
+                    this.alertService.info('Paiement réussi');
+                    // Request user to update account.
+                    // Don't call accountService as actual user may not have one, and it couldn't be updated.
+                    this.userService.getOne(user.id, true).subscribe(updatedUser => {
+                        user.account = updatedUser.account;
+                    });
+                },
+                error: (args) => {
+                    this.alertService.error('Le paiement n\'a pas abouti');
+                },
+            });
+        }
     }
 
 }

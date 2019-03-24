@@ -37,23 +37,23 @@
         return elem;
     };
 
-    var getData = function(elem) {
-        return Array.prototype.slice.call(elem.attributes)
-                    .filter(function(item) {
-                        return item.name.indexOf('data-') === 0;
-                    })
-                    .reduce(function(result, item) {
-                        var normalizedName = item.name
-                                                 .replace(/^data-/, '')
-                                                 .replace(/-([a-z])/g, function(g) {
-                                                     return g[1].toUpperCase();
-                                                 }); // dash to camel-case
-
-                        result[normalizedName] = item.value;
-
-                        return result;
-                    }, {});
-    };
+    // var getData = function(elem) {
+    //     return Array.prototype.slice.call(elem.attributes)
+    //                 .filter(function(item) {
+    //                     return item.name.indexOf('data-') === 0;
+    //                 })
+    //                 .reduce(function(result, item) {
+    //                     var normalizedName = item.name
+    //                                              .replace(/^data-/, '')
+    //                                              .replace(/-([a-z])/g, function(g) {
+    //                                                  return g[1].toUpperCase();
+    //                                              }); // dash to camel-case
+    //
+    //                     result[normalizedName] = item.value;
+    //
+    //                     return result;
+    //                 }, {});
+    // };
 
     var stringifyReplacer = function(key, value) {
         if ((key.length > 0) && typeof value === 'object') {
@@ -134,21 +134,21 @@
 
         var params = {};
 
-        if (config.form !== undefined) {
-            var form = document.querySelector(config.form);
+        // if (config.form !== undefined) {
+        //     var form = document.querySelector(config.form);
+        //
+        //     if (form) {
+        //         form.addEventListener('submit', function(e) {
+        //             e.preventDefault();
+        //         });
+        //
+        //         params = getData(form);
+        //     }
+        // }
 
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                });
-
-                params = getData(form);
-            }
-        }
-
-        if (params !== undefined) {
-            params = extend(params, config.params);
-        }
+        // if (params !== undefined) {
+        params = extend(params, config.params);
+        // }
 
         params['theme'] = 'DT2015';
         params['version'] = datatransPaymentConfig.version;
@@ -162,17 +162,17 @@
         }
 
         var needsRedirect = false;
-        var selectedPaymentMethods = params['paymentmethod'];
-        var redirectUrl = action + '?';
-        if (selectedPaymentMethods && selectedPaymentMethods.indexOf(',') === -1) {
-            if (datatransPaymentConfig.fullscreenMethods.indexOf(selectedPaymentMethods) !== -1) {
-                needsRedirect = true;
-            }
-        }
+        // var selectedPaymentMethods = params['paymentmethod'];
+        // var redirectUrl = action + '?';
+        // if (selectedPaymentMethods && selectedPaymentMethods.indexOf(',') === -1) {
+        //     if (datatransPaymentConfig.fullscreenMethods.indexOf(selectedPaymentMethods) !== -1) {
+        //         needsRedirect = true;
+        //     }
+        // }
+        //
+        // needsRedirect = needsRedirect || isRunningInStandaloneMode();
 
-        needsRedirect = needsRedirect || isRunningInStandaloneMode();
-
-        if (!needsRedirect) {
+        // if (!needsRedirect) {
             paymentForm = createElementWithAttributes('form', {
                 id: 'datatransPaymentForm',
                 name: 'datatransPaymentForm',
@@ -182,24 +182,26 @@
                 target: 'datatransPaymentFrame'
             });
 
+            console.log('params', params)
             for (var name in params) {
                 if (name === 'paymentmethod') {
-                    var paymentMethod = params[name];
-
-                    if (!paymentMethod) {
-                        continue;
-                    }
-
-                    if (paymentMethod.indexOf(',') !== -1) {
-                        paymentMethod.split(',').forEach(function(value) {
-                            paymentForm.appendChild(createElementWithAttributes('input', {
-                                type: 'hidden',
-                                name: name,
-                                value: value
-                            }));
-                        });
-                        continue;
-                    }
+                    return;
+                    // var paymentMethod = params[name];
+                    //
+                    // if (!paymentMethod) {
+                    //     continue;
+                    // }
+                    //
+                    // if (paymentMethod.indexOf(',') !== -1) {
+                    //     paymentMethod.split(',').forEach(function(value) {
+                    //         paymentForm.appendChild(createElementWithAttributes('input', {
+                    //             type: 'hidden',
+                    //             name: name,
+                    //             value: value
+                    //         }));
+                    //     });
+                    //     continue;
+                    // }
                 }
 
                 if (typeof params[name] === 'object') {
@@ -217,13 +219,19 @@
                 }
             }
 
-            if (!params.uppReturnTarget) {
-                paymentForm.appendChild(createElementWithAttributes('input', {
-                    type: 'hidden',
-                    name: 'uppReturnTarget',
-                    value: '_top'
-                }));
-            }
+            // if (!params.uppReturnTarget) {
+            paymentForm.appendChild(createElementWithAttributes('input', {
+                type: 'hidden',
+                name: 'uppReturnTarget',
+                value: '_self' // changed
+            }));
+            // }
+
+            paymentForm.appendChild(createElementWithAttributes('input', {
+                type: 'hidden',
+                name: 'mode',
+                value: 'lightbox'
+            }));
 
             paymentFrame = createElementWithAttributes('div', {
                 id: 'paymentFrameWrapper',
@@ -238,53 +246,48 @@
                 style: 'border: 0; margin: 0; padding: 0; width: 100%; height: 100%; -webkit-transform: translate3d(0, 0, 0);'
             }));
 
-            paymentForm.appendChild(createElementWithAttributes('input', {
-                type: 'hidden',
-                name: 'mode',
-                value: 'lightbox'
-            }));
             document.body.appendChild(paymentFrame);
             document.body.appendChild(paymentForm);
-        } else {
-            var urlParams = [];
-            for (var key in params) {
-                if (typeof params[key] === 'object') {
-                    urlParams.push(key + '=' + encodeURIComponent(JSON.stringify(params[key], stringifyReplacer)));
-                } else if (key === 'paymentmethod') {
-                    var paymentMethod = params[key];
-
-                    if (!paymentMethod) {
-                        continue;
-                    }
-
-                    paymentMethod.split(',').forEach(function(value) {
-                        urlParams.push(key + '=' + encodeURIComponent(value));
-                    });
-                }
-                else {
-                    urlParams.push(key + '=' + encodeURIComponent(params[key]));
-                }
-            }
-            redirectUrl += urlParams.join('&');
-        }
+        // } else {
+        //     var urlParams = [];
+        //     for (var key in params) {
+        //         if (typeof params[key] === 'object') {
+        //             urlParams.push(key + '=' + encodeURIComponent(JSON.stringify(params[key], stringifyReplacer)));
+        //         } else if (key === 'paymentmethod') {
+        //             var paymentMethod = params[key];
+        //
+        //             if (!paymentMethod) {
+        //                 continue;
+        //             }
+        //
+        //             paymentMethod.split(',').forEach(function(value) {
+        //                 urlParams.push(key + '=' + encodeURIComponent(value));
+        //             });
+        //         }
+        //         else {
+        //             urlParams.push(key + '=' + encodeURIComponent(params[key]));
+        //         }
+        //     }
+        //     redirectUrl += urlParams.join('&');
+        // }
 
         windowEventHandler = function(event) {
             if (event.origin !== datatransPaymentConfig.endpoint) {
-                // return;
+                // return; // changed because /datatrans/ url is not endpoint
             }
 
             if (event.data === 'cancel') {
-                if (typeof config.closed === 'function') {
-                    config.closed();
-                }
+                // if (typeof config.closed === 'function') {
+                //     config.closed();
+                // }
                 cleanup();
                 return;
             }
 
             if (event.data === 'frameReady') {
-                if (typeof config.loaded === 'function') {
-                    config.loaded();
-                }
+                // if (typeof config.loaded === 'function') {
+                //     config.loaded();
+                // }
                 paymentFrame.style.display = 'block';
                 return;
             }
@@ -302,6 +305,7 @@
                 return;
             }
 
+            // Changed : Added
             if (typeof event.data === 'object' && event.data.type === 'success') {
 
                 if (typeof config.success === 'function') {
@@ -355,5 +359,5 @@
 var datatransPaymentConfig = {
     "endpoint": "https://pay.sandbox.datatrans.com",
     "version": "2.0.0",
-    "fullscreenMethods": ["PAP", "CUR", "SAM", "INT", "PFC", "SWB", "TWI", "PSC", "CFY", "REK"]
+    // "fullscreenMethods": ["PAP", "CUR", "SAM", "INT", "PFC", "SWB", "TWI", "PSC", "CFY", "REK"]
 };

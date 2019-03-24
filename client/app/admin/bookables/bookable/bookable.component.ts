@@ -77,6 +77,18 @@ export class BookableComponent
         }
     }
 
+    public update() {
 
+        // While not saved, automatically update simultaneousBookingMaximum to 1 if navigable (self-approved) or -1 if other.
+        if (!this.data.model.id) {
+            const bookingType = this.form.get('bookingType');
+            const simultaneousBookingMaximum = this.form.get('simultaneousBookingMaximum');
+            if (simultaneousBookingMaximum) {
+                simultaneousBookingMaximum.setValue(bookingType && bookingType.value === BookingType.self_approved ? 1 : -1);
+            }
+        }
+
+        super.update();
+    }
 
 }

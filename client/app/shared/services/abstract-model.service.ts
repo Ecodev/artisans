@@ -159,13 +159,14 @@ export abstract class AbstractModelService<Tone,
     /**
      * Fetch an object
      */
-    public getOne(id: string): Observable<Tone> {
+    public getOne(id: string, force: boolean = false): Observable<Tone> {
         this.throwIfObservable(id);
         this.throwIfNotQuery(this.oneQuery);
 
         return this.apollo.query<Tone, Vone>({
             query: this.oneQuery,
             variables: this.getVariablesForOne(id),
+            fetchPolicy: force ? 'network-only' : undefined,
         }).pipe(this.mapOne());
     }
 

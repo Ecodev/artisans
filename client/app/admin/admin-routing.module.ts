@@ -272,7 +272,7 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'licence', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    path: 'license', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     component: LicensesComponent,
                     data: {
                         title: 'Certifications',

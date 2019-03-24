@@ -12,10 +12,10 @@
 
     <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
         <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', bookable.id]">Administration</a>
-        <a mat-flat-button color="primary" *ngIf="hasLicence && isAvailable" [routerLink]="['../new', {bookable: bookable.id}]">
+        <a mat-flat-button color="primary" *ngIf="hasLicense && isAvailable" [routerLink]="['../new', {bookable: bookable.id}]">
             Réserver
         </a>
-        <button mat-flat-button color="warn" *ngIf="hasLicence && !isAvailable && runningBooking" (click)="endBooking()">
+        <button mat-flat-button color="warn" *ngIf="hasLicense && !isAvailable && runningBooking" (click)="endBooking()">
             Terminer
         </button>
     </div>

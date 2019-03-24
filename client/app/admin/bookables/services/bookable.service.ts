@@ -96,14 +96,14 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         };
     }
 
-    public static isLicenceGranted(bookable: BookableQuery['bookable'],
+    public static isLicenseGranted(bookable: BookableQuery['bookable'],
                                    user: UserQuery['user'] | CurrentUserForProfileQuery['viewer']): boolean {
 
         if (!bookable || !user) {
             return false;
         }
 
-        // If no constraints on bookable, there is not need for licence
+        // If no constraints on bookable, there is not need for license
         if (bookable.licenses.length === 0) {
             return true;
         }

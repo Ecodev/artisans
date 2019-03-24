@@ -13,7 +13,7 @@ import { BookingsQuery } from '../../shared/generated-types';
 })
 export class BookableComponent extends AbstractController implements OnInit {
 
-    public hasLicence: boolean;
+    public hasLicense: boolean;
     public isAvailable: boolean;
     public canAccessAdmin: boolean;
     public runningBooking: BookingsQuery['bookings']['items'][0] | null;
@@ -40,7 +40,7 @@ export class BookableComponent extends AbstractController implements OnInit {
 
     private initForBookable() {
         this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
-        this.hasLicence = BookableService.isLicenceGranted(this.bookable, this.userService.getCachedCurrentUser());
+        this.hasLicense = BookableService.isLicenseGranted(this.bookable, this.userService.getCachedCurrentUser());
         this.bookableService.getAvailability(this.bookable).subscribe(availability => {
             this.isAvailable = availability !== null && availability.isAvailable;
             this.runningBooking = availability !== null ? availability.result.items[0] : null;

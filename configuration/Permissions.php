@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 return [
     [
+        'path' => 'bin/dump-schema',
+        'permissions' => '0750',
+        'recursive' => false,
+    ],
+    [
         'path' => 'logs',
         'permissions' => '0770',
         'recursive' => true,

@@ -123,19 +123,19 @@ class TransactionLine extends AbstractModel
     /**
      * Get Datatrans payment reference number
      *
-     * @param null|string $datatransRef
+     * @param string $datatransRef
      */
-    public function setDatatransRef(?string $datatransRef): void
+    public function setDatatransRef(string $datatransRef): void
     {
-        $this->datatransRefNo = $datatransRef;
+        $this->datatransRef = $datatransRef;
     }
 
     /**
      * Set Datatrans payment reference number
      *
-     * @return null|string
+     * @return string
      */
-    public function getDatatransRef(): ?string
+    public function getDatatransRef(): string
     {
         return $this->datatransRef;
     }

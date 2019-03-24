@@ -45,6 +45,10 @@ class DatatransAction extends AbstractAction
     {
         $request->getMethod();
         $body = $request->getParsedBody();
+        if (!is_array($body)) {
+            throw new \Exception('Parsed body is expected to be an array but got: ' . gettype($body));
+        }
+
         $status = $body['status'] ?? '';
 
         switch ($status) {

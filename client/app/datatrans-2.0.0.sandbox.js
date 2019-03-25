@@ -1,5 +1,5 @@
 /* globals define module */
-(function (root, factory) {
+(function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         define([], factory);
     } else if (typeof module === 'object' && module.exports) {
@@ -7,8 +7,8 @@
     } else {
         root.Datatrans = factory();
     }
-}(typeof self !== 'undefined' ? self : this, function () {
-    var extend = function (defaults, options) {
+}(typeof self !== 'undefined' ? self : this, function() {
+    var extend = function(defaults, options) {
         var extended = {};
         var prop;
         for (prop in defaults) {
@@ -24,20 +24,20 @@
         return extended;
     };
 
-    var createElementWithAttributes = function (tag, attrs) {
+    var createElementWithAttributes = function(tag, attrs) {
         var elem = document.createElement(tag);
         if (!attrs) {
             return elem;
         }
 
-        Object.keys(attrs).forEach(function (name) {
+        Object.keys(attrs).forEach(function(name) {
             elem.setAttribute(name, attrs[name]);
         });
 
         return elem;
     };
 
-    var stringifyReplacer = function (key, value) {
+    var stringifyReplacer = function(key, value) {
         if ((key.length > 0) && typeof value === 'object') {
             return undefined;
         }
@@ -60,7 +60,7 @@
 
     var preservedStyles = {};
 
-    var toggleLockHostpage = function (toggle) {
+    var toggleLockHostpage = function(toggle) {
         var html = document.documentElement; // '<html>'
         var body = document.body;
         var lockAttr = html.getAttribute('data-datatrans-payment-lock') || 'unlocked';
@@ -74,10 +74,10 @@
                 html: html.getAttribute('style'),
                 body: body.getAttribute('style'),
             };
-            Object.keys(lockStyles.html || {}).forEach(function (key) {
+            Object.keys(lockStyles.html || {}).forEach(function(key) {
                 html.style[key] = lockStyles.html[key];
             });
-            Object.keys(lockStyles.body || {}).forEach(function (key) {
+            Object.keys(lockStyles.body || {}).forEach(function(key) {
                 body.style[key] = lockStyles.body[key];
             });
             body.style.top = -scrollPos;
@@ -96,8 +96,8 @@
     var windowEventHandler;
     var cleanup;
 
-    var startPayment = function (config) {
-        cleanup = function () {
+    var startPayment = function(config) {
+        cleanup = function() {
             toggleLockHostpage(false);
             paymentForm.parentNode.removeChild(paymentForm);
             paymentFrame.parentNode.removeChild(paymentFrame);
@@ -186,7 +186,7 @@
         document.body.appendChild(paymentFrame);
         document.body.appendChild(paymentForm);
 
-        windowEventHandler = function (event) {
+        windowEventHandler = function(event) {
 
             if (event.data === 'cancel') {
                 cleanup();
@@ -217,7 +217,7 @@
 
     return {
         startPayment: startPayment,
-        close: function () {
+        close: function() {
             if (typeof cleanup === 'function') {
                 cleanup();
             }

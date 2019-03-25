@@ -76,8 +76,20 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
 
         this.imagePreview = null;
         this.filePreview = null;
+        if (!this.model) {
+            return;
+        }
 
-        if (this.model && this.model.__typename === 'Image' && this.model.id) {
+        if (this.model.file && this.model.file.type.includes('image/')) {
+            // Model from upload (before saving)
+            this.getBase64(this.model.file).subscribe(result => {
+                this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(data:image;base64,' + result + ')');
+            });
+
+        } else if (this.model.file) {
+            this.filePreview = this.model.file.type.split('/')[1];
+
+        } else if (this.model.__typename === 'Image' && this.model.id) {
             // Model image with id, use specific API to render image by size
             const loc = window.location;
             const height = (this.height ? '/' + this.height : '');
@@ -85,25 +97,12 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
             // create image url without port to stay compatible with dev mode
             const image = loc.protocol + '//' + loc.hostname + '/image/' + this.model.id + height;
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + image + ')');
-
-        } else if (this.model && this.model.__typename === 'AccountingDocument') {
+        } else if (this.model.__typename === 'AccountingDocument') {
             this.filePreview = this.model.mime.split('/')[1];
-
-        } else if (this.model && this.model.src) {
+        } else if (this.model.src) {
             // external url
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + this.model.src + ')');
-
-        } else if (this.model && this.model.file && this.model.file.type.includes('image/') && !this.model.__typename) {
-            // Model from upload (before saving)
-            this.getBase64(this.model.file).subscribe(result => {
-                this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(data:image;base64,' + result + ')');
-            });
-
-        } else if (this.model && this.model.file) {
-            this.filePreview = this.model.file.type.split('/')[1];
-
         }
-
     }
 
     private getBase64(file): Observable<any> {

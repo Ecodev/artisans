@@ -7,8 +7,9 @@
     & > a {
         position: relative;
         flex: 1;
-        background-size: cover;
+        background-size: contain;
         background-position: center;
+        background-repeat: no-repeat;
 
         &.has-action {
             cursor: pointer;

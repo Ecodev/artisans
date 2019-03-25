@@ -20,6 +20,7 @@ use Application\Model\Image;
 use Application\Model\License;
 use Application\Model\Message;
 use Application\Model\Transaction;
+use Application\Model\TransactionLine;
 use Application\Model\TransactionTag;
 use Application\Model\User;
 use Application\Model\UserTag;
@@ -49,6 +50,7 @@ class QueryType extends ObjectType
             Standard::buildQuery(UserTag::class),
             Standard::buildQuery(Account::class),
             Standard::buildQuery(Transaction::class),
+            Standard::buildQuery(TransactionLine::class),
             Standard::buildQuery(TransactionTag::class),
             Standard::buildQuery(ExpenseClaim::class),
             Standard::buildQuery(AccountingDocument::class),

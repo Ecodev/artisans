@@ -49,7 +49,7 @@
                 <div>
                     <mat-form-field>
                         <mat-label>Nombre de participants</mat-label>
-                        <input matInput type="number" [(ngModel)]="booking.participantCount">
+                        <input matInput type="number" step="1" min="1" [(ngModel)]="booking.participantCount">
                     </mat-form-field>
                 </div>
 

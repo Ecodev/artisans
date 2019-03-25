@@ -5,8 +5,10 @@
 
     <mat-form-field style="width:100%">
         <mat-label>Montant</mat-label>
-        <input matInput type="number" [(ngModel)]="expense.amount" min="0" />
+        <input matInput type="number" step="0.01" min="1" [(ngModel)]="expense.amount" />
         <div matSuffix>CHF</div>
+        <mat-error *ngIf="form.get('amount').hasError('required')">Requis</mat-error>
+        <mat-error *ngIf="form.get('amount').hasError('min')">Le montant doit être positif</mat-error>
     </mat-form-field>
 
     <mat-form-field style="width:100%">

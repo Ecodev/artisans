@@ -88,21 +88,23 @@
 
                         <mat-form-field *ngIf="isBookingPriceApplicable()">
                             <mat-label>Prix initial</mat-label>
-                            <input matInput type="number" formControlName="initialPrice" (change)="update()">
+                            <input matInput type="number" step="0.01" min="0" formControlName="initialPrice" (change)="update()">
                             <div matSuffix>CHF</div>
+                            <mat-error *ngIf="form.get('initialPrice').hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('initialPrice').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-form-field *ngIf="isBookingPriceApplicable()">
                             <mat-label>Prix périodique</mat-label>
-                            <input matInput type="number" formControlName="periodicPrice" (change)="update()">
+                            <input matInput type="number" step="0.01" min="0" formControlName="periodicPrice" (change)="update()">
                             <div matSuffix>CHF</div>
+                            <mat-error *ngIf="form.get('periodicPrice').hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('periodicPrice').hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Nombre max. de réservations simultanées</mat-label>
-                            <input matInput type="number" formControlName="simultaneousBookingMaximum" (change)="update()">
+                            <input matInput type="number" step="1" min="-1" formControlName="simultaneousBookingMaximum" (change)="update()">
                             <mat-hint>Saisir -1 pour aucune limite.</mat-hint>
                         </mat-form-field>
 

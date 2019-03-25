@@ -347,6 +347,12 @@ class Bookable extends AbstractModel
      */
     public function setImage(?Image $image): void
     {
+        // We must trigger lazy loading, otherwise Doctrine will seriously
+        // mess up lifecycle callbacks and delete unrelated image on disk
+        if ($this->image) {
+            $this->image->getFilename();
+        }
+
         $this->image = $image;
     }
 }

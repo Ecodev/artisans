@@ -55,6 +55,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/load-remote-data.php',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/load-test-data.php',
         'permissions' => '0750',
     ],

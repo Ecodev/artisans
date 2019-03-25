@@ -19,10 +19,10 @@ abstract class AbstractDatabase
      * @param string $remote
      * @param string $dumpFile path
      */
-    private static function dumpDataRemotely($remote, $dumpFile): void
+    private static function dumpDataRemotely(string $remote, string $dumpFile): void
     {
         $sshCmd = <<<STRING
-        ssh $remote "cd /sites/$remote/ && php7.1 bin/dump-data $dumpFile"
+        ssh $remote "cd /sites/$remote/ && php7.1 bin/dump-data.php $dumpFile"
 STRING;
 
         echo "dumping data $dumpFile on $remote...\n";
@@ -34,7 +34,7 @@ STRING;
      *
      * @param string $dumpFile path
      */
-    public static function dumpData($dumpFile): void
+    public static function dumpData(string $dumpFile): void
     {
         $config = require 'config/autoload/local.php';
         $dbConfig = $config['doctrine']['connection']['orm_default']['params'];
@@ -54,7 +54,7 @@ STRING;
      * @param string $remote
      * @param string $dumpFile
      */
-    private static function copyFile($remote, $dumpFile): void
+    private static function copyFile(string $remote, string $dumpFile): void
     {
         $copyCmd = <<<STRING
         scp $remote:$dumpFile $dumpFile
@@ -69,7 +69,7 @@ STRING;
      *
      * @param string $dumpFile
      */
-    public static function loadData($dumpFile): void
+    public static function loadData(string $dumpFile): void
     {
         $config = require 'config/autoload/local.php';
         $dbConfig = $config['doctrine']['connection']['orm_default']['params'];
@@ -90,7 +90,7 @@ STRING;
         self::loadTriggers();
     }
 
-    public static function loadRemoteData($remote): void
+    public static function loadRemoteData(string $remote): void
     {
         $dumpFile = "/tmp/$remote." . exec('whoami') . '.backup.sql.gz';
         self::dumpDataRemotely($remote, $dumpFile);
@@ -107,7 +107,7 @@ STRING;
      *
      * @throws \Exception
      */
-    public static function executeLocalCommand($command): void
+    public static function executeLocalCommand(string $command): void
     {
         $return_var = null;
         $fullCommand = "$command 2>&1";

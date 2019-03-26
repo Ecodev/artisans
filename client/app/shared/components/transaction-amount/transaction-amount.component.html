@@ -4,6 +4,6 @@
      [class.background-decoration]="displayMode === 'account'"
      [class.text-decoration]="displayMode === 'amount'"
 >
-    <span *ngIf="displayMode === 'amount'">{{ isIncome ? '+' : '-' }} {{ transactionLine.balance }}</span>
+    <span *ngIf="displayMode === 'amount'">{{ isIncome ? '+' : '-' }} {{ transactionLine.balance  | currency : 'CHF'}}</span>
     <span *ngIf="displayMode === 'account'">{{ relativeToAccount.name }}</span>
 </div>

@@ -1,0 +1,9 @@
+:host {
+    .mat-cell, .mat-header-cell, .mat-footer-cell {
+        padding: 3px;
+    }
+
+    mat-form-field, app-select {
+        width: 100%;
+    }
+}

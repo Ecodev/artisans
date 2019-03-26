@@ -208,10 +208,10 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 (4007, 3006),
 (4012, 3011);
 
-REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, remarks) VALUES
-(7000, '2019-01-10', 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', ''),
-(7001, '2019-01-14', 1002, 100.00, 'processed', 'flyers', 'Cighelio', ''),
-(7002, '2019-03-14', 1002, -50.00, 'processing', 'remboursement bancaire', '', '');
+REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type, remarks) VALUES
+(7000, '2019-01-10', 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', 'expenseClaim', ''),
+(7001, '2019-01-14', 1002, 100.00, 'processed', 'flyers', 'Cighelio', 'expenseClaim', ''),
+(7002, '2019-03-14', 1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund', '');
 
 REPLACE INTO transaction (id, transactionDate, name, remarks, expense_claim_id) VALUES
 (8000, '2019-03-01', 'Active Member: inscription cours nautique', '', NULL),

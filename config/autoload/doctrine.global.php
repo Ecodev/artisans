@@ -51,6 +51,7 @@ return [
             'datetime' => Application\DBAL\Types\ChronosType::class,
             'date' => Application\DBAL\Types\DateType::class,
             'ExpenseClaimStatus' => Application\DBAL\Types\ExpenseClaimStatusType::class,
+            'ExpenseClaimType' => Application\DBAL\Types\ExpenseClaimTypeType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'AccountType' => Application\DBAL\Types\AccountTypeType::class,
         ],

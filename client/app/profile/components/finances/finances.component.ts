@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ExpenseClaimsQuery, ExpenseClaimStatus, TransactionLinesQuery } from '../../../shared/generated-types';
+import { ExpenseClaimsQuery, ExpenseClaimStatus, ExpenseClaimType, TransactionLinesQuery } from '../../../shared/generated-types';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -69,7 +69,7 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
         this.dialog.open(CreateRefundComponent).afterClosed().subscribe(expense => {
             if (expense) {
-                expense.amount *= -1; // refund != ExpenseClaim
+                expense.type = ExpenseClaimType.refund;
                 this.expenseClaimService.create(expense).subscribe(result => {
                     this.alertService.info('Votre demande de remboursement a bien été enregistrée');
                 });

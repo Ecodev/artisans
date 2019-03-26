@@ -18,7 +18,7 @@ import {
     ExpenseClaimQueryVariables,
     ExpenseClaimsQuery,
     ExpenseClaimsQueryVariables,
-    ExpenseClaimStatus,
+    ExpenseClaimStatus, ExpenseClaimType,
     UpdateExpenseClaimMutation,
     UpdateExpenseClaimMutationVariables,
 } from '../../../shared/generated-types';
@@ -56,6 +56,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaimQuery[
             description: '',
             remarks: '',
             status: ExpenseClaimStatus.new,
+            type: ExpenseClaimType.expenseClaim,
         };
     }
 

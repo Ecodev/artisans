@@ -14,12 +14,12 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
-                    <span appColumnsPickerColumn="amount">Montant</span>
                     <span appColumnsPickerColumn="name">Nom</span>
                     <span appColumnsPickerColumn="owner">Utilisateur</span>
-                    <span appColumnsPickerColumn="creationDate">Créé le</span>
-                    <span appColumnsPickerColumn="updateDate">Modifié le</span>
+                    <span appColumnsPickerColumn="date">Dernière modification</span>
                     <span appColumnsPickerColumn="status">Status</span>
+                    <span appColumnsPickerColumn="type">Type</span>
+                    <span appColumnsPickerColumn="amount">Montant</span>
                 </app-columns-picker>
             </natural-search>
         </div>
@@ -63,19 +63,19 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="creationDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Créé le</th>
-                    <td mat-cell *matCellDef="let element">{{ element.creationDate }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="updateDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Modifié le</th>
-                    <td mat-cell *matCellDef="let element">{{ element.updateDate }}</td>
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Dernière modification</th>
+                    <td mat-cell *matCellDef="let element">{{ element.updateDate || element.creationDate | date : 'longDate' }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
                     <td mat-cell *matCellDef="let element">{{ element.status | enum: 'ExpenseClaimStatus' | capitalize | async }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Type</th>
+                    <td mat-cell *matCellDef="let element">{{ element.type | enum : 'ExpenseClaimType' | capitalize | async }}</td>
                 </ng-container>
 
             </table>
@@ -100,4 +100,7 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/expense-claim/new']" icon="add" *ngIf="permissionsService.crud?.expenseClaim.create"></app-fixed-button>
+<app-fixed-button [routerLink]="['/admin/expense-claim/new']"
+                  icon="add"
+                  *ngIf="permissionsService.crud?.expenseClaim.create"
+></app-fixed-button>

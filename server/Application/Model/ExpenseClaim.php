@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\DBAL\Types\ExpenseClaimStatusType;
+use Application\DBAL\Types\ExpenseClaimTypeType;
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
@@ -57,6 +58,13 @@ class ExpenseClaim extends AbstractModel
     private $status = ExpenseClaimStatusType::NEW;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="ExpenseClaimType", length=10, options={"default" = ExpenseClaimTypeType::EXPENSE_CLAIM})
+     */
+    private $type = ExpenseClaimTypeType::EXPENSE_CLAIM;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -107,6 +115,30 @@ class ExpenseClaim extends AbstractModel
     public function getStatus(): string
     {
         return $this->status;
+    }
+
+    /**
+     * Set type
+     *
+     * @API\Input(type="ExpenseClaimType")
+     *
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @API\Field(type="ExpenseClaimType")
+     *
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 
     /**

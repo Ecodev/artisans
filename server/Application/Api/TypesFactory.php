@@ -26,6 +26,7 @@ class TypesFactory
             \Application\Api\Enum\BillingTypeType::class,
             \Application\Api\Enum\DoorType::class,
             \Application\Api\Enum\ExpenseClaimStatusType::class,
+            \Application\Api\Enum\ExpenseClaimTypeType::class,
             \Application\Api\Enum\MessageTypeType::class,
             \Application\Api\Enum\AccountTypeType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,

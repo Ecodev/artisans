@@ -15,7 +15,7 @@ class AclFilterTest extends TestCase
     public function providerFilter(): array
     {
         return [
-            'tag is totally public public class, access everything' => [
+            'tag is a totally public class, access everything' => [
                 null,
                 License::class,
                 '',

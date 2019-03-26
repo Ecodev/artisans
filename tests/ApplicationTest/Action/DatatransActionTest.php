@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ApplicationTest\Action;
 
 use Application\Action\DatatransAction;
+use Application\Model\User;
 use ApplicationTest\Traits\TestWithTransaction;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -20,9 +21,13 @@ class DatatransActionTest extends TestCase
      */
     public function testProcess(?array $data, string $expectedAmount, array $expectedViewModel): void
     {
+        $userId = $data['refno'] ?? null;
+        $user = _em()->getRepository(User::class)->getOneById((int) $userId);
+        User::setCurrent($user);
+
         // Message always include input data
         $expectedViewModel['message']['detail'] = $data;
-        $renderer = $this->prophesize(TemplateRendererInterface::class); //; $container->get(TemplateRendererInterface::class);
+        $renderer = $this->prophesize(TemplateRendererInterface::class);
         $renderer->render('app::datatrans', $expectedViewModel);
 
         $handler = $this->prophesize(RequestHandlerInterface::class);
@@ -33,7 +38,6 @@ class DatatransActionTest extends TestCase
         $action = new DatatransAction(_em(), $renderer->reveal());
         $action->process($request, $handler->reveal());
 
-        $userId = $data['refno'] ?? null;
         if ($userId) {
             $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE owner_id = ' . $userId);
             self::assertSame($expectedAmount, $actualBalance);

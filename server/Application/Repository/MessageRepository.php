@@ -18,11 +18,11 @@ class MessageRepository extends AbstractRepository implements LimitedAccessSubQu
      */
     public function getAccessibleSubQuery(?User $user): string
     {
-        if ($user) {
-            return 'SELECT id FROM message WHERE recipient_id = ' . $user->getId();
+        if (!$user) {
+            return '-1';
         }
 
-        return '-1';
+        return 'SELECT id FROM message WHERE recipient_id = ' . $user->getId();
     }
 
     /**

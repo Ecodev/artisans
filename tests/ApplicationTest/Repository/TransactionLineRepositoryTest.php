@@ -7,6 +7,9 @@ namespace ApplicationTest\Repository;
 use Application\Model\Account;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
+use Application\Model\User;
+use Application\Repository\TransactionLineRepository;
+use ApplicationTest\Traits\LimitedAccessSubQuery;
 use Cake\Chronos\Date;
 
 /**
@@ -14,8 +17,38 @@ use Cake\Chronos\Date;
  */
 class TransactionLineRepositoryTest extends AbstractRepositoryTest
 {
+    use LimitedAccessSubQuery;
+
+    /**
+     * @var TransactionLineRepository
+     */
+    private $repository;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->repository = _em()->getRepository(TransactionLine::class);
+    }
+
+    public function providerGetAccessibleSubQuery(): array
+    {
+        $all = [14000, 14001, 14002, 14003, 14004, 14005, 14006, 14007];
+
+        return [
+            ['anonymous', []],
+            ['bookingonly', []],
+            ['individual', []],
+            ['member', [14000, 14002, 14003, 14004]],
+            ['responsible', $all],
+            ['administrator', $all],
+        ];
+    }
+
     public function testFindByDebitOrCredit(): void
     {
+        $user = _em()->getRepository(User::class)->getByLogin('administrator');
+        User::setCurrent($user);
+
         $account = _em()->getReference(Account::class, 10096);
         self::assertCount(4, $account->getTransactionLines(), 'Account must have 4 transactions');
 

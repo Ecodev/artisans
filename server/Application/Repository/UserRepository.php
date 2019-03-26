@@ -10,6 +10,22 @@ use Cake\Chronos\Chronos;
 class UserRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
 {
     /**
+     * Returns pure SQL to get ID of all objects that are accessible to given user.
+     *
+     * @param null|User $user
+     *
+     * @return string
+     */
+    public function getAccessibleSubQuery(?User $user): string
+    {
+        if (!$user) {
+            return '-1';
+        }
+
+        return $this->getAllIdsQuery();
+    }
+
+    /**
      * Returns the user authenticated by its email and password
      *
      * @param string $login
@@ -105,21 +121,5 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
         $this->getAclFilter()->setEnabled(true);
 
         return $result;
-    }
-
-    /**
-     * Returns pure SQL to get ID of all objects that are accessible to given user.
-     *
-     * @param null|User $user
-     *
-     * @return string
-     */
-    public function getAccessibleSubQuery(?User $user): string
-    {
-        if ($user) {
-            return $this->getAllIdsQuery();
-        }
-
-        return '-1';
     }
 }

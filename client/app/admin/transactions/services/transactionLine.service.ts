@@ -83,7 +83,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
 
         const qvm = new QueryVariablesManager<TransactionLinesQueryVariables>();
         qvm.set('variables', variables);
-        return this.watchAll(qvm);
+        return this.watchAll(qvm, true);
     }
 
 }

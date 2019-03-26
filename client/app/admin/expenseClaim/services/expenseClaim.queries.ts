@@ -17,6 +17,8 @@ export const expenseClaimMetaFragment = gql`
             id
             name
         }
+        creationDate
+        updateDate
     }
 `;
 

@@ -69,22 +69,25 @@ export class CreateExpenseClaimComponent
     }
 
     public postCreate(model) {
-
-        const observables: Observable<any>[] = [];
-        this.files.filter(file => !!file).forEach(file => {
-            const document: AccountingDocumentInput = {
-                expenseClaim: model.id,
-                file: file.file,
-                owner: this.route.snapshot.data.user.model.id,
-            };
-
-            observables.push(this.accountingDocumentService.create(document));
-        });
-
-        forkJoin(observables).subscribe(result => {
-            this.alertService.info('Votre demande a bien été enregistrée');
+        const files = this.files.filter(file => !!file);
+        if (!files.length) {
             this.router.navigateByUrl('/profile/finances');
-        });
+        } else {
+            const observables: Observable<any>[] = [];
+            files.forEach(file => {
+                const document: AccountingDocumentInput = {
+                    expenseClaim: model.id,
+                    file: file.file,
+                    owner: this.route.snapshot.data.user.model.id,
+                };
+                observables.push(this.accountingDocumentService.create(document));
+            });
+
+            forkJoin(observables).subscribe(result => {
+                this.alertService.info('Votre demande a bien été enregistrée');
+                this.router.navigateByUrl('/profile/finances');
+            });
+        }
 
     }
 

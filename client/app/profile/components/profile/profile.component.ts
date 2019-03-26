@@ -7,6 +7,7 @@ import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0.sandbox.js';
 import { MatDialog } from '@angular/material';
 import { ProvisionComponent } from '../provision/provision.component';
+import { Apollo } from 'apollo-angular';
 
 @Component({
     selector: 'app-profile',
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit {
                 private alertService: AlertService,
                 private route: ActivatedRoute,
                 public bookableService: BookableService,
+                private apollo: Apollo,
                 private dialog: MatDialog) {
     }
 
@@ -56,6 +58,11 @@ export class ProfileComponent implements OnInit {
                 this.userService.getOne(user.id, true).subscribe(updatedUser => {
                     user.account = updatedUser.account;
                 });
+
+                // Restore store, to refetch queries that are watched
+                // this.apollo.getClient().resetStore();
+                this.apollo.getClient().reFetchObservableQueries(false);
+
             },
             error: (data) => {
                 this.alertService.error('Le paiement n\'a pas abouti: ' + data.message);

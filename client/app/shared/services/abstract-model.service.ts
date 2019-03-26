@@ -129,6 +129,10 @@ export abstract class AbstractModelService<Tone,
         const config = {};
         const disabled = model.permissions ? !model.permissions.update : false;
 
+        if (model.id) {
+            config['id'] = new ExtendedFormControl({value: model.id, disabled: true});
+        }
+
         // Configure form for each field of model
         for (const key of Object.keys(values)) {
             const value = model[key] !== undefined ? model[key] : values[key];

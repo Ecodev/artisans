@@ -2,7 +2,7 @@ import { isArray, kebabCase, merge, mergeWith } from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { AbstractController } from '../../../shared/components/AbstractController';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { AbstractModelService, VariablesWithInput } from '../../../shared/services/abstract-model.service';
@@ -34,6 +34,26 @@ export class AbstractDetail<Tone,
         super();
     }
 
+    public static getFormGroup(model, service) {
+        const formConfig = service.getFormConfig(model);
+        return new FormGroup(formConfig, {validators: service.getFormGroupValidators()});
+    }
+
+    /**
+     * Recursively mark descending form tree as dirty and touched in order to show all unvalidated fields on demand (create action mainly)
+     */
+    public static validateAllFormFields(form: FormGroup | FormArray) {
+        Object.keys(form.controls).forEach(field => {
+            const control = form.get(field);
+            if (control instanceof FormControl) {
+                control.markAsDirty({onlySelf: true});
+                control.markAsTouched({onlySelf: true});
+            } else if (control instanceof FormGroup || control instanceof FormArray) {
+                AbstractDetail.validateAllFormFields(control);
+            }
+        });
+    }
+
     ngOnInit(): void {
         this.route.data.subscribe(data => {
             this.data = merge({model: this.service.getEmptyObject()}, {model: this.service.getDefaultValues()}, data[this.key]);
@@ -45,11 +65,13 @@ export class AbstractDetail<Tone,
         this.showFabButton = index === 0;
     }
 
-    public update(): void {
+    public update(now: boolean = false): void {
 
         if (!this.data.model.id) {
             return;
         }
+
+        AbstractDetail.validateAllFormFields(this.form);
 
         if (this.form && this.form.invalid) {
             return;
@@ -58,19 +80,25 @@ export class AbstractDetail<Tone,
         if (this.form) {
             this.formToData();
         }
-
-        this.service.update(this.data.model).subscribe(model => {
+        const callback = (model) => {
             this.alertService.info('Mis à jour');
             if (this.form) {
                 this.form.patchValue(model);
             }
             this.postUpdate(model);
-        });
+        };
+
+        if (now) {
+            this.service.updateNow(this.data.model).subscribe(callback);
+        } else {
+            this.service.update(this.data.model).subscribe(callback);
+        }
     }
 
     public create(redirect: boolean = true): Observable<Tcreate> | null {
 
-        this.validateAllFormFields(this.form);
+        AbstractDetail.validateAllFormFields(this.form);
+
         if (this.form && this.form.invalid) {
             return null;
         }
@@ -94,21 +122,6 @@ export class AbstractDetail<Tone,
         return obs;
     }
 
-    /**
-     * Recursively mark descending form tree as dirty and touched in order to show all unvalidated fields on demand (create action mainly)
-     */
-    public validateAllFormFields(formGroup: FormGroup) {
-        Object.keys(formGroup.controls).forEach(field => {
-            const control = formGroup.get(field);
-            if (control instanceof FormControl) {
-                control.markAsDirty({onlySelf: true});
-                control.markAsTouched({onlySelf: true});
-            } else if (control instanceof FormGroup) {
-                this.validateAllFormFields(control);
-            }
-        });
-    }
-
     public delete(): void {
         this.alertService.confirm('Suppression', 'Voulez-vous supprimer définitivement cet élément ?', 'Supprimer définitivement')
             .subscribe(confirmed => {
@@ -128,8 +141,7 @@ export class AbstractDetail<Tone,
     }
 
     protected initForm(): void {
-        const formConfig = this.service.getFormConfig(this.data.model);
-        this.form = new FormGroup(formConfig, {validators: this.service.getFormGroupValidators()});
+        this.form = AbstractDetail.getFormGroup(this.data.model, this.service);
     }
 
     private formToData() {

@@ -43,7 +43,7 @@ class DatatransActionTest extends TestCase
     public function providerProcess(): array
     {
         return [
-            [
+            'normal' => [
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'success',
@@ -55,12 +55,12 @@ class DatatransActionTest extends TestCase
                 '100.00',
                 [
                     'message' => [
-                        'type' => 'success',
+                        'status' => 'success',
                         'message' => 'Payment was successful',
                     ],
                 ],
             ],
-            [
+            'user without account yet' => [
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'success',
@@ -72,12 +72,12 @@ class DatatransActionTest extends TestCase
                 '100.00',
                 [
                     'message' => [
-                        'type' => 'success',
+                        'status' => 'success',
                         'message' => 'Payment was successful',
                     ],
                 ],
             ],
-            [
+            'error' => [
                 [
                     'uppTransactionId' => '876543210987654321',
                     'status' => 'error',
@@ -87,12 +87,12 @@ class DatatransActionTest extends TestCase
                 '0.00',
                 [
                     'message' => [
-                        'type' => 'error',
+                        'status' => 'error',
                         'message' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
                     ],
                 ],
             ],
-            [
+            'cancel' => [
                 [
                     'uppTransactionId' => '876543210987654321',
                     'status' => 'cancel',
@@ -101,7 +101,7 @@ class DatatransActionTest extends TestCase
                 '0.00',
                 [
                     'message' => [
-                        'type' => 'error',
+                        'status' => 'error',
                         'message' => 'Cancelled',
                     ],
                 ],

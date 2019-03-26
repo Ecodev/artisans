@@ -41,10 +41,7 @@ export class ProfileComponent implements OnInit {
                     amount: '1000',
                     currency: 'CHF',
                 },
-                // loaded: () => console.log('datatrans loaded event'),
-                // opened: () => console.log('datatrans opened event'),
-                // closed: () => console.warn('datatrans canceled event'),
-                success: (args) => {
+                success: () => {
                     this.alertService.info('Paiement réussi');
                     // Request user to update account.
                     // Don't call accountService as actual user may not have one, and it couldn't be updated.
@@ -52,8 +49,11 @@ export class ProfileComponent implements OnInit {
                         user.account = updatedUser.account;
                     });
                 },
-                error: (args) => {
-                    this.alertService.error('Le paiement n\'a pas abouti');
+                error: (data) => {
+                    this.alertService.error('Le paiement n\'a pas abouti: ' + data.message);
+                },
+                cancel: () => {
+                    this.alertService.error('Le paiement a été annulé');
                 },
             });
         }

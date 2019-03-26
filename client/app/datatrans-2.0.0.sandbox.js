@@ -192,25 +192,11 @@
                 cleanup();
             } else if (event.data === 'frameReady') {
                 paymentFrame.style.display = 'block';
-            } else if (typeof event.data === 'object' && event.data.type === 'error') {
-                if (typeof config.error === 'function') {
-                    var errorData = {
-                        message: event.data.message,
-                        detail: event.data.detail,
-                    };
+            } else if (typeof event.data === 'object' && ['success', 'error', 'cancel'].includes(event.data.status)) {
 
-                    config.error(errorData);
-                }
-                cleanup();
-            } else if (typeof event.data === 'object' && event.data.type === 'success') {
-
-                if (typeof config.success === 'function') {
-                    var successData = {
-                        message: event.data.message,
-                        detail: event.data.detail,
-                    };
-
-                    config.success(successData);
+                const callback = config[event.data.status];
+                if (typeof callback === 'function') {
+                    callback(event.data);
                 }
                 cleanup();
             }

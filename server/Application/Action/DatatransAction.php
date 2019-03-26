@@ -56,7 +56,7 @@ class DatatransAction extends AbstractAction
             case 'success':
                 $this->createTransactions($body);
                 $message = [
-                    'type' => $status,
+                    'status' => $status,
                     'message' => $body['responseMessage'],
                     'detail' => $body,
                 ];
@@ -64,7 +64,7 @@ class DatatransAction extends AbstractAction
                 break;
             case 'error':
                 $message = [
-                    'type' => $status,
+                    'status' => $status,
                     'message' => $body['errorMessage'],
                     'detail' => $body,
                 ];
@@ -72,7 +72,7 @@ class DatatransAction extends AbstractAction
                 break;
             case 'cancel':
                 $message = [
-                    'type' => 'error', // Here we cheat because the JS cannot handle 'cancel' status
+                    'status' => 'error', // Here we cheat because the JS cannot handle 'cancel' status
                     'message' => 'Cancelled',
                     'detail' => $body,
                 ];

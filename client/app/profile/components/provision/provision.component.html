@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Approvisionner</h2>
+<mat-dialog-content>
+
+    <p class="mat-body">Merci d'indiquer le montant que vous souhaitez approvisionner.</p>
+
+    <mat-form-field style="width:100%">
+        <mat-label>Montant</mat-label>
+        <input matInput type="number" step="1" min="1" [(ngModel)]="amount" />
+        <div matSuffix>CHF</div>
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="display:flex;justify-content: flex-end;">
+    <button mat-button mat-dialog-close>{{ data?.cancelText || 'Annuler' }}</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="amount" [disabled]="!amount">
+        {{ data?.confirmText || 'Suivant' }}
+    </button>
+</mat-dialog-actions>

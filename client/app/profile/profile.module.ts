@@ -11,6 +11,7 @@ import { BookingHistoryComponent } from './components/booking-history/booking-hi
 import { FinancesComponent } from './components/finances/finances.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CreateRefundComponent } from './components/create-refund/create-refund.component';
+import { ProvisionComponent } from './components/provision/provision.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { CreateRefundComponent } from './components/create-refund/create-refund.
         FinancesComponent,
         ServicesComponent,
         CreateRefundComponent,
+        ProvisionComponent,
     ],
     imports: [
         CommonModule,
@@ -31,6 +33,7 @@ import { CreateRefundComponent } from './components/create-refund/create-refund.
     ],
     entryComponents: [
         CreateRefundComponent,
+        ProvisionComponent,
     ],
 })
 export class ProfileModule {

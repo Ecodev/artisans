@@ -25,7 +25,6 @@ import { BookableTagResolver } from './bookableTags/services/bookableTag.resolve
 import { UserRole, UserStatus } from '../shared/generated-types';
 import { TransactionResolver } from './transactions/services/transaction.resolver';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
-import { TransactionsComponent } from './transactions/transactions/transactions.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
 import { AccountResolver } from './accounts/services/account.resolver';
@@ -36,6 +35,7 @@ import { TransactionTagsComponent } from './transactionTags/transactionTags/tran
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { TransactionTagResolver } from './transactionTags/services/transactionTag-resolver.service';
 import { AdministrationGuard } from '../shared/services/administration.guard';
+import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 
 const routes: Routes = [
         {
@@ -350,17 +350,8 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'transaction', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: TransactionsComponent,
-                    data: {title: 'Transactions'},
-                },
-                {
                     path: 'transaction',
                     children: [
-                        // {
-                        //     path: 'summary',
-                        //     component: ???,
-                        // },
                         {
                             path: 'new',
                             component: TransactionComponent,
@@ -376,6 +367,12 @@ const routes: Routes = [
                             },
                         },
                     ],
+                },
+                {
+                    path: 'transaction-line', // Separated from other similar routes because of
+                                              // https://github.com/angular/angular/issues/27674
+                    component: TransactionLinesComponent,
+                    data: {title: 'Transactions'},
                 },
                 {
                     path: 'account', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674

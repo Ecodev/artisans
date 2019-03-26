@@ -22,7 +22,6 @@ import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.com
 import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
 import { DetailHeaderComponent } from '../shared/components/detail-header/detail-header.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
-import { TransactionsComponent } from './transactions/transactions/transactions.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
@@ -30,6 +29,8 @@ import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.
 import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { SelectBookableComponent } from './shared/components/select-bookable/select-bookable.component';
+import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
+import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,7 @@ import { SelectBookableComponent } from './shared/components/select-bookable/sel
         BookableTagComponent,
         DetailHeaderComponent,
         TransactionComponent,
-        TransactionsComponent,
+        TransactionLinesComponent,
         AccountsComponent,
         AccountComponent,
         ExpenseClaimsComponent,
@@ -57,6 +58,7 @@ import { SelectBookableComponent } from './shared/components/select-bookable/sel
         TransactionTagsComponent,
         TransactionTagComponent,
         SelectBookableComponent,
+        EditableTransactionLinesComponent,
     ],
     imports: [
         CommonModule,

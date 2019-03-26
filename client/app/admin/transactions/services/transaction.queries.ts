@@ -5,30 +5,22 @@ export const transactionMetaFragment = gql`
     fragment transactionMeta on Transaction {
         id
         name
-        transactionDate
-        remarks
-        internalRemarks
-#        amount            TODO commented out when moving to new accounting model, must be removed when migration is complete
-#        category {
-#            id
-#            name
-#        }
-#        bookable {
-#            id
-#            name
-#        }
-#        account {
-#            id
-#            name
-#            owner {
-#                id
-#                name
-#            }
-#        }
+        accountingDocuments {
+            id
+            mime
+        }
         expenseClaim {
             id
+            amount
             name
+            description
+            accountingDocuments {
+                id
+                mime
+            }
         }
+        remarks
+        internalRemarks
     }
 `;
 

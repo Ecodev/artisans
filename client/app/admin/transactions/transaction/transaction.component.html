@@ -12,28 +12,11 @@
 
                         <mat-form-field>
                             <mat-label>Nom</mat-label>
-                            <input matInput formControlName="name" (change)="update()">
+                            <input matInput formControlName="name">
                             <mat-error *ngIf="form.get('name').hasError('maxlength')">
                                 Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Remarques</mat-label>
-                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
-                            ></textarea>
-                        </mat-form-field>
-
-                        <!-- TODO : FOR ADMINS ONLY -->
-                        <mat-form-field>
-                            <mat-label>Remarques internes</mat-label>
-                            <textarea matInput
-                                      formControlName="internalRemarks"
-                                      (change)="update()"
-                                      matTextareaAutosize
-                                      [matAutosizeMinRows]="1"
-                            ></textarea>
                         </mat-form-field>
 
                     </div>
@@ -41,63 +24,40 @@
                     <div fxFlex="33" fxLayout="column">
 
                         <mat-form-field>
-                            <mat-label>Montant</mat-label>
-                            <input matInput type="number" step="0.01" formControlName="amount" (change)="update()">
-                            <span matSuffix>CHF</span>
-                            <mat-error *ngIf="form.get('amount').hasError('required')">Requis</mat-error>
+                            <mat-label>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" matTextareaAutosize [matAutosizeMinRows]="3"
+                            ></textarea>
                         </mat-form-field>
 
+                        <!-- TODO : FOR ADMINS ONLY -->
                         <mat-form-field>
-                            <mat-label>Date de la transaction</mat-label>
-                            <input matInput formControlName="transactionDate" [matDatepicker]="picker">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-label>Remarques internes</mat-label>
+                            <textarea matInput formControlName="internalRemarks" matTextareaAutosize [matAutosizeMinRows]="3"
+                            ></textarea>
                         </mat-form-field>
-
-                        <mat-divider class="margin-bottom"></mat-divider>
-
-                        <app-select formControlName="account"
-                                    [displayWith]="showAccountName"
-                                    placeholder="Compte"
-                                    [service]="accountService"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                                    [navigateTo]="form.get('account').value?.id ? ['/admin/account', form.get('account').value.id] : null"
-                        ></app-select>
-
-                        <app-select formControlName="bookable"
-                                    placeholder="Réservable"
-                                    [service]="bookableService"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                                    [navigateTo]="form.get('bookable').value?.id ? ['/admin/bookable', form.get('bookable').value.id] : null"
-                        ></app-select>
-
-                        <div *ngIf="form.get('account').value.owner"
-                             fxLayout="row"
-                             fxLayoutAlign="start center"
-                             class="margin-bottom"
-                        >
-                            <ngx-avatar [name]="form.get('account').value.owner.name" [size]="30"></ngx-avatar>
-                            <a mat-button [routerLink]="['/admin/user', form.get('account').value.owner.id]">
-                                {{form.get('account').value.owner.name }}
-                            </a>
-                        </div>
-
-                        <mat-divider class="margin-bottom"></mat-divider>
-
-                        <app-select formControlName="tag"
-                                    placeholder="Tag"
-                                    [service]="transactionTagService"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                        ></app-select>
 
                     </div>
 
                 </div>
 
                 <!-- TODO : add selectors for ExpanseClaim -->
+                <mat-divider></mat-divider>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                    <h2 class="mat-title" class="no-margin-bottom no-margin-top">Écritures</h2>
+                    <button mat-flat-button color="primary" (click)="editTransactions = true" *ngIf="!(editTransactions || !data.model.id)">
+                        Éditer
+                    </button>
+                </div>
+
+                <div *ngIf="!editTransactions && data.model.id">
+                    <app-transaction-lines [persistSearch]="false"
+                                           [queryVariables]="{filter: {groups: [{conditions:[{transaction: {equal: {value: data.model.id}}}]}]}}"
+                    ></app-transaction-lines>
+                </div>
+
+                <div *ngIf="editTransactions || !data.model.id">
+                    <app-editable-transaction-lines [transaction]="data.model"></app-editable-transaction-lines>
+                </div>
 
                 <mat-divider></mat-divider>
 
@@ -108,7 +68,14 @@
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+
+    <app-fixed-button class="detail-speed-dial"
+                      (click)="save()"
+                      icon="save"
+                      color="accent"
+                      matTooltip="Sauvegarder"
+                      matTooltipPosition="left"
+                      [color]="form.invalid ? 'warn' : 'accent'"
+    ></app-fixed-button>
 
 </div>

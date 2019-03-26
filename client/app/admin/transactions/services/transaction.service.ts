@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import {
-    createTransactionMutation,
-    transactionQuery,
-    transactionsQuery,
-} from './transaction.queries';
+import { createTransactionMutation, transactionQuery, transactionsQuery } from './transaction.queries';
 import {
     CreateTransactionMutation,
     CreateTransactionMutationVariables,
@@ -14,10 +10,8 @@ import {
     TransactionQueryVariables,
     TransactionsQuery,
     TransactionsQueryVariables,
-    UserQuery,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 
 @Injectable({
     providedIn: 'root',
@@ -45,28 +39,25 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
     public getEmptyObject(): TransactionInput {
         return {
             name: '',
-            expenseClaim: null,
-            transactionDate: '',
-            internalRemarks: '',
             remarks: '',
+            internalRemarks: '',
+            transactionDate: '',
+            expenseClaim: null,
         };
     }
 
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
-            account: [Validators.required],
         };
     }
 
-    public getForUser(user: UserQuery['user']) {
-        const variables: TransactionsQueryVariables = {
-            filter: {groups: [{conditions: [{owner: {in: {values: [user.id]}}}]}]},
-        };
+    protected getContextForUpdate(object) {
+        return {lines: object.transactionLines};
+    }
 
-        const qvm = new QueryVariablesManager<TransactionsQueryVariables>();
-        qvm.set('variables', variables);
-        return this.watchAll(qvm);
+    protected getContextForCreation(object) {
+        return {lines: object.transactionLines};
     }
 
 }

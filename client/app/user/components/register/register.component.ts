@@ -65,7 +65,7 @@ export class RegisterComponent extends AbstractDetail<UserQuery['user'],
     }
 
     public submit(): void {
-        this.validateAllFormFields(this.form);
+        AbstractDetail.validateAllFormFields(this.form);
         if (this.form.invalid) {
             return;
         }

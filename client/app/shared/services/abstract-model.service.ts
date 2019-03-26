@@ -359,10 +359,10 @@ export abstract class AbstractModelService<Tone,
         this.throwIfNotQuery(this.updateMutation);
 
         const observable = new Subject<Tupdate>();
-        const variables = {
+        const variables = merge({
             id: object.id as string,
             input: this.getInput(object),
-        } as Vupdate;
+        }, this.getContextForUpdate(object));
 
         this.apollo.mutate<Tupdate, Vupdate>({
             mutation: this.updateMutation,
@@ -524,7 +524,7 @@ export abstract class AbstractModelService<Tone,
      * Return an object that match the GraphQL input type.
      * It creates an object with manually filled data and add uncompleted data (like required attributes that can be empty strings)
      */
-    protected getInput(object: Literal): Vcreate['input'] | Vupdate['input'] {
+    public getInput(object: Literal): Vcreate['input'] | Vupdate['input'] {
 
         // Convert relations to their IDs for mutation
         object = Utility.relationsToIds(object);
@@ -563,8 +563,17 @@ export abstract class AbstractModelService<Tone,
      *
      * This is typically a site or state ID
      */
-    protected getContextForCreation(object: Literal): Vcreate {
-        return {} as Vcreate;
+    protected getContextForCreation(object: Literal): Literal {
+        return {} as Literal;
+    }
+
+    /**
+     * Returns an additional context to be used when creating an object
+     *
+     * This is typically a site or state ID
+     */
+    protected getContextForUpdate(object: Literal): Literal {
+        return {} as Literal;
     }
 
     /**

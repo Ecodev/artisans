@@ -46,40 +46,17 @@ class DatatransAction extends AbstractAction
     {
         $request->getMethod();
         $body = $request->getParsedBody();
-        if (!is_array($body)) {
-            throw new \Exception('Parsed body is expected to be an array but got: ' . gettype($body));
-        }
 
-        $status = $body['status'] ?? '';
+        try {
+            if (!is_array($body)) {
+                throw new \Exception('Parsed body is expected to be an array but got: ' . gettype($body));
+            }
 
-        switch ($status) {
-            case 'success':
-                $this->createTransactions($body);
-                $message = [
-                    'status' => $status,
-                    'message' => $body['responseMessage'],
-                    'detail' => $body,
-                ];
+            $status = $body['status'] ?? '';
 
-                break;
-            case 'error':
-                $message = [
-                    'status' => $status,
-                    'message' => $body['errorMessage'],
-                    'detail' => $body,
-                ];
-
-                break;
-            case 'cancel':
-                $message = [
-                    'status' => 'error', // Here we cheat because the JS cannot handle 'cancel' status
-                    'message' => 'Cancelled',
-                    'detail' => $body,
-                ];
-
-                break;
-            default:
-                throw new \Exception('Unsupported status in Datatrans data: ' . $status);
+            $message = $this->dispatch($status, $body);
+        } catch (\Throwable $exception) {
+            $message = $this->createMessage('error', $exception->getMessage(), is_array($body) ? $body : []);
         }
 
         $viewModel = [
@@ -89,9 +66,58 @@ class DatatransAction extends AbstractAction
         return new HtmlResponse($this->template->render('app::datatrans', $viewModel));
     }
 
+    /**
+     * Create a message in a coherent way
+     *
+     * @param string $status
+     * @param string $message
+     * @param array $detail
+     *
+     * @return array
+     */
+    private function createMessage(string $status, string $message, array $detail): array
+    {
+        return [
+            'status' => $status,
+            'message' => $message,
+            'detail' => $detail,
+        ];
+    }
+
+    /**
+     * Dispatch the data received from Datatrans to take appropriate actions
+     *
+     * @param string $status
+     * @param $body
+     *
+     * @return array
+     */
+    private function dispatch(string $status, array $body): array
+    {
+        switch ($status) {
+            case 'success':
+                $this->createTransactions($body);
+                $message = $this->createMessage($status, $body['responseMessage'], $body);
+
+                break;
+            case 'error':
+                $message = $this->createMessage($status, $body['errorMessage'], $body);
+
+                break;
+            case 'cancel':
+                $message = $this->createMessage($status, 'Cancelled', $body);
+
+                break;
+            default:
+                throw new \Exception('Unsupported status in Datatrans data: ' . $status);
+        }
+
+        return $message;
+    }
+
     private function createTransactions(array $body): void
     {
-        $userId = $body['refno'];
+        $userId = $body['refno'] ?? null;
 
         /** @var User $user */
         $user = $this->entityManager->getRepository(User::class)->getOneById((int) $userId);

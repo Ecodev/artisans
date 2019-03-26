@@ -18,7 +18,7 @@ class DatatransActionTest extends TestCase
     /**
      * @dataProvider providerProcess
      */
-    public function testProcess(array $data, string $expectedAmount, array $expectedViewModel): void
+    public function testProcess(?array $data, string $expectedAmount, array $expectedViewModel): void
     {
         // Message always include input data
         $expectedViewModel['message']['detail'] = $data;
@@ -33,11 +33,13 @@ class DatatransActionTest extends TestCase
         $action = new DatatransAction(_em(), $renderer->reveal());
         $action->process($request, $handler->reveal());
 
-        $userId = $data['refno'];
+        $userId = $data['refno'] ?? null;
         if ($userId) {
             $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE owner_id = ' . $userId);
             self::assertSame($expectedAmount, $actualBalance);
         }
+
+        self::assertTrue(true); // Workaround when we only assert via prophesize
     }
 
     public function providerProcess(): array
@@ -101,8 +103,84 @@ class DatatransActionTest extends TestCase
                 '0.00',
                 [
                     'message' => [
-                        'status' => 'error',
+                        'status' => 'cancel',
                         'message' => 'Cancelled',
+                    ],
+                ],
+            ],
+            'invalid body' => [
+                null,
+                '0.00',
+                [
+                    'message' => [
+                        'status' => 'error',
+                        'message' => 'Parsed body is expected to be an array but got: NULL',
+                    ],
+                ],
+            ],
+            'invalid status' => [
+                [
+                    'uppTransactionId' => '123456789012345678',
+                    'status' => 'non-existing-status',
+                    'refno' => '1007',
+                    'amount' => '10000',
+                    'currency' => 'CHF',
+                    'responseMessage' => 'Payment was successful',
+                ],
+                '0.00',
+                [
+                    'message' => [
+                        'status' => 'error',
+                        'message' => 'Unsupported status in Datatrans data: non-existing-status',
+                    ],
+                ],
+            ],
+            'non-existing user' => [
+                [
+                    'uppTransactionId' => '123456789012345678',
+                    'status' => 'success',
+                    'amount' => '10000',
+                    'currency' => 'CHF',
+                    'responseMessage' => 'Payment was successful',
+                ],
+                '0.00',
+                [
+                    'message' => [
+                        'status' => 'error',
+                        'message' => 'Cannot create transactions without a user',
+                    ],
+                ],
+            ],
+            'non-existing amount' => [
+                [
+                    'uppTransactionId' => '123456789012345678',
+                    'status' => 'success',
+                    'refno' => '1007',
+                    'currency' => 'CHF',
+                    'responseMessage' => 'Payment was successful',
+                ],
+                '0.00',
+                [
+                    'message' => [
+                        'status' => 'error',
+                        'message' => 'Cannot create transactions without an amount',
+                    ],
+                ],
+            ],
+            'invalid currency' => [
+                [
+                    'uppTransactionId' => '123456789012345678',
+                    'status' => 'success',
+                    'refno' => '1007',
+                    'amount' => '10000',
+                    'currency' => 'USD',
+                    'responseMessage' => 'Payment was successful',
+                ],
+                '0.00',
+                [
+                    'message' => [
+                        'status' => 'error',
+                        'message' => 'Can only create transactions for CHF, but got: USD',
                     ],
                 ],
             ],

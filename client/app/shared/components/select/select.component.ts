@@ -367,4 +367,12 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
     }
 
+    public showSelectButton() {
+        return this.hierarchicSelectorConfig && this.formCtrl.enabled && this.selectLabel;
+    }
+
+    public showClearButton() {
+        return this.formCtrl.value && this.formCtrl.enabled && this.clearLabel;
+    }
+
 }

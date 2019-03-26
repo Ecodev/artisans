@@ -52,8 +52,7 @@
             >
                 <app-icon name="close"></app-icon>
             </button>
-            <button *ngIf="navigateTo" [routerLink]="navigateTo" mat-button mat-icon-button i18n-matTooltip matTooltip="Naviguer vers"
-            >
+            <button *ngIf="navigateTo" [routerLink]="navigateTo" mat-button mat-icon-button i18n-matTooltip matTooltip="Naviguer vers">
                 <app-icon name="open_in_browser"></app-icon>
             </button>
         </div>
@@ -65,18 +64,14 @@
         <mat-error *ngIf="formCtrl.hasError('required')" i18n>Ce champ est requis</mat-error>
     </mat-form-field>
 
-    <div fxLayout="row" fxLayoutGap="10px">
-        <button mat-flat-button
-                *ngIf="hierarchicSelectorConfig && formCtrl.enabled && selectLabel"
-                color="primary"
-                (click)="openDialog()"
-                i18n
-        >{{ selectLabel }}
+    <div fxLayout="row" fxLayoutGap="10px" *ngIf="showSelectButton() || showClearButton()">
+        <button mat-flat-button *ngIf="showSelectButton()" color="primary" (click)="openDialog()" i18n>
+            {{ selectLabel }}
         </button>
-        <button mat-button *ngIf="formCtrl.value && formCtrl.enabled && clearLabel" color="warn" (click)="clear()" i18n>{{ clearLabel }}
+        <button mat-button *ngIf="showClearButton()" color="warn" (click)="clear()" i18n>
+            {{ clearLabel }}
         </button>
     </div>
-
 </div>
 
 <!-- Autocomplete menu -->

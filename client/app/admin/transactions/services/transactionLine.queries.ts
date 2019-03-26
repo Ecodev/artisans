@@ -9,14 +9,15 @@ export const transactionLineMetaFragment = gql`
         credit {
             id
             name
+            type
         }
         debit {
             id
             name
+            type
         }
         datatransRef
-        bookable
-        {
+        bookable{
             id
             name
             code

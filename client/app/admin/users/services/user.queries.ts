@@ -33,6 +33,7 @@ export const userFieldsFragment = gql`
             id
             name
             balance
+            type
         }
         iban
         billingType
@@ -70,6 +71,7 @@ export const usersQuery = gql`
                 account {
                     id
                     balance
+                    type
                 }
             }
             pageSize

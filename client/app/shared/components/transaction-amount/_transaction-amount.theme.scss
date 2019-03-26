@@ -1,0 +1,36 @@
+@mixin transaction-amount($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    app-transaction-amount {
+
+        .text-decoration {
+            &.positive {
+                color: #008600;
+            }
+
+            &.negative {
+                color: mat-color($warn);
+            }
+        }
+
+        .background-decoration {
+            &.positive {
+                background: #008600;
+                color: white;
+            }
+
+            &.negative {
+                background: mat-color($warn);
+                color: mat-color($warn, default-contrast);
+            }
+        }
+
+    }
+
+}
+
+

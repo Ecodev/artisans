@@ -45,6 +45,7 @@ class MockApollo extends Apollo {
             Relationship: () => 'householder',
             UserRole: () => 'member',
             UserStatus: () => 'active',
+            AccountType: () => 'revenue',
             Sex: () => 'not_applicable',
         };
 

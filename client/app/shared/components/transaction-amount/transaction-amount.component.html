@@ -1,0 +1,9 @@
+<div *ngIf="transactionLine && relativeToAccount && transactionLine.balance > 0 && isIncome !== null"
+     [class.positive]="isIncome === true"
+     [class.negative]="isIncome === false"
+     [class.background-decoration]="displayMode === 'account'"
+     [class.text-decoration]="displayMode === 'amount'"
+>
+    <span *ngIf="displayMode === 'amount'">{{ isIncome ? '+' : '-' }} {{ transactionLine.balance }}</span>
+    <span *ngIf="displayMode === 'account'">{{ relativeToAccount.name }}</span>
+</div>

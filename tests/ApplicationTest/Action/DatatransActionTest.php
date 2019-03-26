@@ -33,8 +33,11 @@ class DatatransActionTest extends TestCase
         $action = new DatatransAction(_em(), $renderer->reveal());
         $action->process($request, $handler->reveal());
 
-        $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE owner_id = 1007');
-        self::assertSame($expectedAmount, $actualBalance);
+        $userId = $data['refno'];
+        if ($userId) {
+            $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE owner_id = ' . $userId);
+            self::assertSame($expectedAmount, $actualBalance);
+        }
     }
 
     public function providerProcess(): array
@@ -59,8 +62,26 @@ class DatatransActionTest extends TestCase
             ],
             [
                 [
+                    'uppTransactionId' => '123456789012345678',
+                    'status' => 'success',
+                    'refno' => '1008',
+                    'amount' => '10000',
+                    'currency' => 'CHF',
+                    'responseMessage' => 'Payment was successful',
+                ],
+                '100.00',
+                [
+                    'message' => [
+                        'type' => 'success',
+                        'message' => 'Payment was successful',
+                    ],
+                ],
+            ],
+            [
+                [
                     'uppTransactionId' => '876543210987654321',
                     'status' => 'error',
+                    'refno' => '1007',
                     'errorMessage' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
                 ],
                 '0.00',
@@ -75,6 +96,7 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '876543210987654321',
                     'status' => 'cancel',
+                    'refno' => '1007',
                 ],
                 '0.00',
                 [

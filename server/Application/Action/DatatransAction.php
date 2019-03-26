@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Action;
 
+use Application\Model\Account;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
@@ -98,10 +99,7 @@ class DatatransAction extends AbstractAction
             throw new \Exception('Cannot create transactions without a user');
         }
 
-        $account = $user->getAccount();
-        if (!$account) {
-            throw new \Exception('Cannot create transactions for a user who does not have an account');
-        }
+        $account = $this->entityManager->getRepository(Account::class)->getOrCreate($user);
 
         if (!array_key_exists('amount', $body)) {
             // Do not support "registrations"

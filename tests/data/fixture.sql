@@ -112,14 +112,12 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10095, 10011, 1001, 'liability', '20300002', '', 'Responsable'),
 (10096, 10011, 1002, 'liability', '20300003', '', 'Active Member'),
 (10097, 10011, 1007, 'liability', '20300004', '', 'Conjoint'),
-(10098, 10011, 1008, 'liability', '20300005', '', 'Son'),
-(10099, 10011, 1009, 'liability', '20300006', '', 'Daughter'),
-(10100, 10011, 1010, 'liability', '20300007', '', 'Voilier Member'),
-(10101, 10011, 1011, 'liability', '20300008', '', 'Voilier Family'),
-(10102, 10007, NULL, 'expense', '8000', '', 'Charges hors exploitation'),
-(10103, 10007, NULL, 'revenue', '8100', '', 'Produits hors exploitation'),
-(10104, 10007, NULL, 'expense', '8500', '', 'Charges extraordinaires, exceptionnelles ou hors période'),
-(10105, 10007, NULL, 'revenue', '8510', '', 'Produits extraordinaires, exceptionnels ou hors période');
+(10098, 10011, 1010, 'liability', '20300007', '', 'Voilier Member'),
+(10099, 10011, 1011, 'liability', '20300008', '', 'Voilier Family'),
+(10100, 10007, NULL, 'expense', '8000', '', 'Charges hors exploitation'),
+(10101, 10007, NULL, 'revenue', '8100', '', 'Produits hors exploitation'),
+(10102, 10007, NULL, 'expense', '8500', '', 'Charges extraordinaires, exceptionnelles ou hors période'),
+(10103, 10007, NULL, 'revenue', '8510', '', 'Produits extraordinaires, exceptionnels ou hors période');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Voilier');

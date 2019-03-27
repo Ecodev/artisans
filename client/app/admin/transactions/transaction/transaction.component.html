@@ -44,8 +44,11 @@
                 <mat-divider></mat-divider>
                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                     <h2 class="mat-title" class="no-margin-bottom no-margin-top">Écritures</h2>
-                    <button mat-flat-button color="primary" (click)="updateTransactionLines = true" *ngIf="!(updateTransactionLines || !data.model.id)">
+                    <button mat-stroked-button (click)="updateTransactionLines = true" *ngIf="!(updateTransactionLines || !data.model.id)">
                         Éditer
+                    </button>
+                    <button mat-stroked-button (click)="updateTransactionLines = false" *ngIf="updateTransactionLines && data.model.id">
+                        Annuler
                     </button>
                 </div>
 

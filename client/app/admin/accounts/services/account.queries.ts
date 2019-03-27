@@ -4,6 +4,7 @@ import { userMetaFragment } from '../../../shared/queries/fragments';
 export const accountMetaFragment = gql`
     fragment accountMeta on Account {
         id
+        code
         name
         iban
         balance
@@ -33,6 +34,18 @@ export const accountQuery = gql`
         account(id: $id) {
             id
             ...accountMeta
+            parent {
+                id
+                name
+                parent {
+                    id
+                    name
+                    parent {
+                        id
+                        name
+                    }
+                }
+            }
             creationDate
             creator {
                 ...userMeta

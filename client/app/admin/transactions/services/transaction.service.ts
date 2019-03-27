@@ -3,18 +3,21 @@ import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createTransactionMutation,
+    deleteTransactionsMutation,
     transactionQuery,
     transactionsQuery,
     updateTransactionMutation,
 } from './transaction.queries';
 import {
     CreateTransactionMutation,
-    CreateTransactionMutationVariables,
+    CreateTransactionMutationVariables, DeleteTransactionsMutation,
     TransactionInput,
     TransactionQuery,
     TransactionQueryVariables,
     TransactionsQuery,
     TransactionsQueryVariables,
+    UpdateTransactionMutation,
+    UpdateTransactionMutationVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
@@ -28,9 +31,9 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
     TransactionsQueryVariables,
     CreateTransactionMutation['createTransaction'],
     CreateTransactionMutationVariables,
-    null,
-    any,
-    null> {
+    UpdateTransactionMutation['updateTransaction'],
+    UpdateTransactionMutationVariables,
+    DeleteTransactionsMutation> {
 
     constructor(apollo: Apollo) {
         super(apollo,
@@ -39,7 +42,7 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
             transactionsQuery,
             createTransactionMutation,
             updateTransactionMutation,
-            null);
+            deleteTransactionsMutation);
     }
 
     public getEmptyObject(): TransactionInput {

@@ -5,9 +5,9 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
     CreateTransactionMutation,
-    CreateTransactionMutationVariables,
+    CreateTransactionMutationVariables, DeleteTransactionsMutation,
     TransactionQuery,
-    TransactionQueryVariables,
+    TransactionQueryVariables, UpdateTransactionMutation, UpdateTransactionMutationVariables,
 } from '../../../shared/generated-types';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
@@ -23,9 +23,9 @@ export class TransactionComponent
         TransactionQueryVariables,
         CreateTransactionMutation['createTransaction'],
         CreateTransactionMutationVariables,
-        null,
-        any,
-        any> {
+        UpdateTransactionMutation['updateTransaction'],
+        UpdateTransactionMutationVariables,
+        DeleteTransactionsMutation> {
 
     @ViewChild(EditableTransactionLinesComponent) transactionLinesComponent: EditableTransactionLinesComponent;
 

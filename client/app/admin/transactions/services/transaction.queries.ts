@@ -78,3 +78,8 @@ export const updateTransactionMutation = gql`
     }
     ${userMetaFragment}
 `;
+
+export const deleteTransactionsMutation = gql`
+    mutation DeleteTransactions ($ids: [TransactionID!]!){
+        deleteTransactions(ids: $ids)
+    }`;

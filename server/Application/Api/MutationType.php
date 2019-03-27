@@ -26,6 +26,7 @@ use Application\Model\Booking;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
+use Application\Model\Transaction;
 use Application\Model\TransactionTag;
 use Application\Model\User;
 use Application\Model\UserTag;
@@ -48,6 +49,7 @@ class MutationType extends ObjectType
             LeaveFamily::build(),
             CreateTransaction::build(),
             UpdateTransaction::build(),
+            Standard::buildMutation(Transaction::class)[2], // Only delete mutation
         ];
 
         $fields = array_merge(

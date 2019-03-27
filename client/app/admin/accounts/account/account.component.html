@@ -35,6 +35,7 @@
                         <app-select formControlName="owner"
                                     placeholder="Membre"
                                     [service]="userService"
+                                    [filter]="{groups: [{conditions: [{accounts: {empty: {not: false}}}]}]}"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
                                     [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"

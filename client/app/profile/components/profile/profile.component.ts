@@ -8,6 +8,7 @@ import * as Datatrans from '../../../datatrans-2.0.0.sandbox.js';
 import { MatDialog } from '@angular/material';
 import { ProvisionComponent } from '../provision/provision.component';
 import { Apollo } from 'apollo-angular';
+import { ConfigService } from '../../../shared/services/ConfigService';
 
 @Component({
     selector: 'app-profile',
@@ -18,12 +19,23 @@ export class ProfileComponent implements OnInit {
 
     public user;
 
+    /**
+     * Install FE config
+     */
+    public config;
+
     constructor(public userService: UserService,
                 private alertService: AlertService,
                 private route: ActivatedRoute,
                 public bookableService: BookableService,
                 private apollo: Apollo,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private configService: ConfigService,
+    ) {
+
+        this.configService.get().subscribe(config => {
+            this.config = config;
+        });
     }
 
     ngOnInit() {
@@ -42,11 +54,16 @@ export class ProfileComponent implements OnInit {
     }
 
     private doPayment(user, amount): void {
+
+        if (!this.config) {
+            return;
+        }
+
         Datatrans.startPayment({
             params: {
-                production: false,
-                merchantId: '1100003518',
-                sign: '190314170627759807',
+                production: this.config.datatransProduction,
+                merchantId: this.config.datatransMerchantId,
+                sign: this.config.datatransSign,
                 refno: user.id,
                 amount: amount * 100,
                 currency: 'CHF',

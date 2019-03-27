@@ -21,7 +21,9 @@
             <div fxLayout="column" fxLayoutGap="20px">
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
-                    <button mat-flat-button color="primary" class="margin-left" (click)="pay()">Faire un versement</button>
+                    <button mat-flat-button color="primary" class="margin-left" (click)="pay()" [disabled]="!config">
+                        Faire un versement
+                    </button>
                 </div>
                 <app-money [amount]="user.account?.balance || 0" sizeClass="mat-display-2"></app-money>
             </div>

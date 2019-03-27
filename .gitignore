@@ -35,6 +35,7 @@
 /phpunit.xml
 /vendor/
 client/app/shared/generated-types.ts
+/client/assets/config/*.local.json
 .DS_Store
 
 

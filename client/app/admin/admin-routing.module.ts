@@ -372,7 +372,7 @@ const routes: Routes = [
                     path: 'transaction-line', // Separated from other similar routes because of
                                               // https://github.com/angular/angular/issues/27674
                     component: TransactionLinesComponent,
-                    data: {title: 'Transactions'},
+                    data: {title: 'Écritures'},
                 },
                 {
                     path: 'account', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674

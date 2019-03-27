@@ -139,7 +139,7 @@ class DatatransAction extends AbstractAction
 
         $now = Date::today();
         $datatransRef = $body['uppTransactionId'];
-        $name = 'Versement';
+        $name = 'Versement en ligne';
 
         $transaction = new Transaction();
         $this->entityManager->persist($transaction);

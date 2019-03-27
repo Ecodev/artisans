@@ -59,7 +59,6 @@ export class AccountService extends AbstractModelService<AccountQuery['account']
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
-            iban: [Validators.required],
         };
     }
 

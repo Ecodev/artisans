@@ -11,29 +11,34 @@ use Application\Model\TransactionLine;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
-abstract class CreateTransaction implements FieldInterface
+abstract class UpdateTransaction implements FieldInterface
 {
     public static function build(): array
     {
         return [
-            'name' => 'createTransaction',
+            'name' => 'updateTransaction',
             'type' => Type::nonNull(_types()->getOutput(Transaction::class)),
-            'description' => 'Create a transaction with all its transaction lines',
+            'description' => 'Update a transaction, and optionally replace all its transaction lines if given any',
             'args' => [
-                'input' => Type::nonNull(_types()->getInput(Transaction::class)),
-                'lines' => Type::nonNull(Type::listOf(Type::nonNull(_types()->getInput(TransactionLine::class)))),
+                'id' => Type::nonNull(_types()->getId(Transaction::class)),
+                'input' => Type::nonNull(_types()->getPartialInput(Transaction::class)),
+                'lines' => Type::listOf(Type::nonNull(_types()->getInput(TransactionLine::class))),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): Transaction {
                 // Do it
-                $transaction = new Transaction();
+                $transaction = $args['id']->getEntity();
                 $input = $args['input'];
                 Helper::hydrate($transaction, $input);
 
                 // Check ACL
-                Helper::throwIfDenied($transaction, 'create');
+                Helper::throwIfDenied($transaction, 'update');
                 $lines = $args['lines'];
 
-                _em()->getRepository(Transaction::class)->hydrateLinesAndFlush($transaction, $lines);
+                if ($lines !== null) {
+                    _em()->getRepository(Transaction::class)->hydrateLinesAndFlush($transaction, $lines);
+                } else {
+                    _em()->flush();
+                }
 
                 return $transaction;
             },

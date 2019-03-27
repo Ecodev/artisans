@@ -15,6 +15,7 @@ use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\TerminateBooking;
 use Application\Api\Field\Mutation\Unregister;
 use Application\Api\Field\Mutation\UpdatePassword;
+use Application\Api\Field\Mutation\UpdateTransaction;
 use Application\Api\Field\Standard;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
@@ -46,6 +47,7 @@ class MutationType extends ObjectType
             Unregister::build(),
             LeaveFamily::build(),
             CreateTransaction::build(),
+            UpdateTransaction::build(),
         ];
 
         $fields = array_merge(

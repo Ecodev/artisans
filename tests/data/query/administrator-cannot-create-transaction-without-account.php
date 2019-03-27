@@ -29,7 +29,7 @@ return [
     [
         'errors' => [
             [
-                'message' => 'Cannot create a transaction line without any account',
+                'message' => 'Cannot create a TransactionLine without any account',
                 'extensions' => [
                     'category' => 'Permissions',
                 ],

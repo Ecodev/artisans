@@ -66,3 +66,15 @@ export const createTransactionMutation = gql`
     }
     ${userMetaFragment}
 `;
+
+export const updateTransactionMutation = gql`
+    mutation UpdateTransaction($id: TransactionID!, $input: TransactionPartialInput!, $lines: [TransactionLineInput!]) {
+        updateTransaction(id:$id, input: $input, lines: $lines) {
+            id
+            creator {
+                ...userMeta
+            }
+        }
+    }
+    ${userMetaFragment}
+`;

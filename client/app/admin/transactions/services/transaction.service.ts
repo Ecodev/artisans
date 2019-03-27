@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import { createTransactionMutation, transactionQuery, transactionsQuery } from './transaction.queries';
+import {
+    createTransactionMutation,
+    transactionQuery,
+    transactionsQuery,
+    updateTransactionMutation,
+} from './transaction.queries';
 import {
     CreateTransactionMutation,
     CreateTransactionMutationVariables,
@@ -12,6 +17,7 @@ import {
     TransactionsQueryVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
+import { Literal } from '../../../shared/types';
 
 @Injectable({
     providedIn: 'root',
@@ -32,7 +38,7 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
             transactionQuery,
             transactionsQuery,
             createTransactionMutation,
-            null,
+            updateTransactionMutation,
             null);
     }
 
@@ -52,11 +58,11 @@ export class TransactionService extends AbstractModelService<TransactionQuery['t
         };
     }
 
-    protected getContextForUpdate(object) {
+    protected getContextForUpdate(object): Literal {
         return {lines: object.transactionLines};
     }
 
-    protected getContextForCreation(object) {
+    protected getContextForCreation(object): Literal {
         return {lines: object.transactionLines};
     }
 

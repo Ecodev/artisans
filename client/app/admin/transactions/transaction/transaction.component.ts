@@ -9,7 +9,6 @@ import {
     TransactionQuery,
     TransactionQueryVariables,
 } from '../../../shared/generated-types';
-import { AccountService } from '../../accounts/services/account.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
 import { TransactionLineService } from '../services/transactionLine.service';
@@ -30,13 +29,12 @@ export class TransactionComponent
 
     @ViewChild(EditableTransactionLinesComponent) transactionLinesComponent: EditableTransactionLinesComponent;
 
-    public editTransactions = false;
+    public updateTransactionLines = false;
 
     constructor(alertService: AlertService,
                 transactionService: TransactionService,
                 router: Router,
                 route: ActivatedRoute,
-                public accountService: AccountService,
                 public bookableService: BookableService,
                 public transactionLineService: TransactionLineService,
     ) {
@@ -44,12 +42,17 @@ export class TransactionComponent
     }
 
     public save() {
-        this.data.model.transactionLines = this.transactionLinesComponent.getList().map(line => this.transactionLineService.getInput(line));
+        if (this.transactionLinesComponent) {
+            const rawTransactionLines = this.transactionLinesComponent.getList();
+            this.data.model.transactionLines = rawTransactionLines.map(line => this.transactionLineService.getInput(line));
 
-        this.transactionLinesComponent.validateForm();
+            this.transactionLinesComponent.validateForm();
 
-        if (!this.transactionLinesComponent.form.valid) {
-            return;
+            if (!this.transactionLinesComponent.form.valid) {
+                return;
+            }
+        } else {
+            this.data.model.transactionLines = null;
         }
 
         if (this.data.model.id) {
@@ -58,5 +61,6 @@ export class TransactionComponent
             this.create();
         }
 
+        this.updateTransactionLines = false;
     }
 }

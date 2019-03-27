@@ -44,18 +44,18 @@
                 <mat-divider></mat-divider>
                 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
                     <h2 class="mat-title" class="no-margin-bottom no-margin-top">Écritures</h2>
-                    <button mat-flat-button color="primary" (click)="editTransactions = true" *ngIf="!(editTransactions || !data.model.id)">
+                    <button mat-flat-button color="primary" (click)="updateTransactionLines = true" *ngIf="!(updateTransactionLines || !data.model.id)">
                         Éditer
                     </button>
                 </div>
 
-                <div *ngIf="!editTransactions && data.model.id">
+                <div *ngIf="!updateTransactionLines && data.model.id">
                     <app-transaction-lines [persistSearch]="false"
                                            [queryVariables]="{filter: {groups: [{conditions:[{transaction: {equal: {value: data.model.id}}}]}]}}"
                     ></app-transaction-lines>
                 </div>
 
-                <div *ngIf="editTransactions || !data.model.id">
+                <div *ngIf="updateTransactionLines || !data.model.id">
                     <app-editable-transaction-lines [transaction]="data.model"></app-editable-transaction-lines>
                 </div>
 

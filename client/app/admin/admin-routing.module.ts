@@ -377,7 +377,7 @@ const routes: Routes = [
                 {
                     path: 'account', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     component: AccountsComponent,
-                    data: {title: 'Comptes bancaires'},
+                    data: {title: 'Comptes'},
                 },
                 {
                     path: 'account',

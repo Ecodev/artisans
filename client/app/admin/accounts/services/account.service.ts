@@ -52,6 +52,7 @@ export class AccountService extends AbstractModelService<AccountQuery['account']
             iban: '',
             type: AccountType.expense,
             code: '',
+            owner: null,
         };
     }
 

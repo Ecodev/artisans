@@ -27,6 +27,7 @@ class AccountingDocument extends AbstractFile
             'image/jpeg',
             'image/pjpeg',
             'image/png',
+            'image/svg+xml',
             'image/webp',
             'application/pdf',
             'application/x-pdf',

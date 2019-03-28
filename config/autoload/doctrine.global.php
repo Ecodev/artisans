@@ -38,6 +38,13 @@ return [
                 'filters' => [
                     \Application\ORM\Query\Filter\AclFilter::class => \Application\ORM\Query\Filter\AclFilter::class,
                 ],
+                'datetime_functions' => [],
+                'string_functions' => [
+                    'greatest' => \DoctrineExtensions\Query\Mysql\Greatest::class,
+                    'if' => \DoctrineExtensions\Query\Mysql\IfElse::class,
+                    'ifnull' => \DoctrineExtensions\Query\Mysql\IfNull::class,
+                ],
+                'numeric_functions' => [],
             ],
         ],
         'types' => [

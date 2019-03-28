@@ -21,6 +21,10 @@ use GraphQL\Doctrine\Annotation as API;
  * @API\Filters({
  *     @API\Filter(field="custom", operator="Application\Api\Input\Operator\SearchOperatorType", type="string"),
  * })
+ * @API\Sorting({
+ *     "Application\Api\Input\Sorting\LatestModification",
+ *     "Application\Api\Input\Sorting\Owner"
+ * })
  */
 abstract class AbstractModel
 {

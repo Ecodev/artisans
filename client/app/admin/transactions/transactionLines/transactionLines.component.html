@@ -15,8 +15,8 @@
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
                     <span appColumnsPickerColumn="name">Nom</span>
-                    <span appColumnsPickerColumn="transactionLineDate">Date</span>
-                    <span appColumnsPickerColumn="amount">Montant</span>
+                    <span appColumnsPickerColumn="transactionDate">Date</span>
+                    <span appColumnsPickerColumn="balance">Montant</span>
                     <span appColumnsPickerColumn="account">Compte</span>
                     <span appColumnsPickerColumn="bookable">Réservable</span>
                     <span appColumnsPickerColumn="expenseClaim">Quittance</span>
@@ -44,7 +44,7 @@
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
-                <ng-container matColumnDef="amount">
+                <ng-container matColumnDef="balance">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Montant</th>
                     <td mat-cell *matCellDef="let element">
                         <app-money [amount]="element.balance" [showSignal]="false"></app-money>
@@ -55,7 +55,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="account">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Compte</th>
+                    <th mat-header-cell *matHeaderCellDef>Compte</th>
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1px">
                             <app-transaction-amount displayMode="account"
@@ -72,7 +72,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="bookable">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Réservable</th>
+                    <th mat-header-cell *matHeaderCellDef>Réservable</th>
                     <td mat-cell *matCellDef="let element">
                         <app-table-button *ngIf="element.bookable"
                                           [label]="element.bookable.name"
@@ -82,7 +82,7 @@
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
-                <ng-container matColumnDef="transactionLineDate">
+                <ng-container matColumnDef="transactionDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
                     <td mat-cell *matCellDef="let element">{{ element.transactionDate | date : 'longDate' }}</td>
                     <td mat-footer-cell *matFooterCellDef></td>

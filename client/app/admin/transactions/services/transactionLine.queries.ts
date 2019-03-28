@@ -47,6 +47,7 @@ export const transactionLinesQuery = gql`
             pageSize
             pageIndex
             length
+            totalBalance
         }
     }
 ${transactionLineMetaFragment}`;

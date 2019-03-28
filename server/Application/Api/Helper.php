@@ -8,6 +8,7 @@ use Application\Acl\Acl;
 use Application\Model\AbstractModel;
 use Application\Model\Bookable;
 use Application\Model\Booking;
+use Application\Model\TransactionLine;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use GraphQL\Doctrine\Definition\EntityID;
@@ -79,6 +80,12 @@ abstract class Helper
                 ->addSelect('SUM(bookable1.purchasePrice) AS totalPurchasePrice')
                 ->addSelect('SUM(bookable1.periodicPrice) AS totalPeriodicPrice')
                 ->addSelect('SUM(bookable1.initialPrice) AS totalInitialPrice');
+
+            $result = $qb->getQuery()->getResult()[0];
+        } elseif ($class === TransactionLine::class) {
+            $qb->resetDQLPart('select')
+                ->resetDQLPart('orderBy')
+                ->addSelect('SUM(transactionLine1.balance) AS totalBalance');
 
             $result = $qb->getQuery()->getResult()[0];
         }

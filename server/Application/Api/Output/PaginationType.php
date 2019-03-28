@@ -6,6 +6,7 @@ namespace Application\Api\Output;
 
 use Application\Model\Bookable;
 use Application\Model\Booking;
+use Application\Model\TransactionLine;
 use GraphQL\Type\Definition\ObjectType;
 
 class PaginationType extends ObjectType
@@ -69,6 +70,11 @@ class PaginationType extends ObjectType
                     $fields['totalPeriodicPrice'] = [
                         'type' => self::string(),
                         'description' => 'The total periodic price',
+                    ];
+                } elseif ($class === TransactionLine::class) {
+                    $fields['totalBalance'] = [
+                        'type' => self::string(),
+                        'description' => 'The total balance',
                     ];
                 }
 

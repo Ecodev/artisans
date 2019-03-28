@@ -50,8 +50,7 @@
                         <app-money [amount]="element.balance" [showSignal]="false"></app-money>
                     </td>
                     <td mat-footer-cell *matFooterCellDef>
-                        {{0 | currency : 'CHF'}} <!--TODO : remove when implemented-->
-                        <span *ngIf="dataSource?.totalAmount > 0">{{dataSource.totalAmount | currency : 'CHF'}}</span>
+                        <span *ngIf="dataSource?.data.totalBalance > 0">{{dataSource.data.totalBalance | currency : 'CHF'}}</span>
                     </td>
                 </ng-container>
 

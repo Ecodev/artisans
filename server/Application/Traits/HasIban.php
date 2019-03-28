@@ -30,7 +30,7 @@ trait HasIban
     {
         $validator = new \Zend\Validator\Iban(['country_code' => 'CH']);
         if (empty($iban)) {
-            $this->iban = null;
+            $this->iban = '';
         } elseif ($validator->isValid($iban)) {
             $this->iban = $iban;
         } else {

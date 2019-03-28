@@ -23,7 +23,16 @@ export const bookableMetaFragment = gql`
         image {
             id
         }
+        creationDate
+        creator {
+            ...userMeta
+        }
+        updateDate
+        updater {
+            ...userMeta
+        }
     }
+    ${userMetaFragment}
 `;
 
 export const bookablesQuery = gql`
@@ -45,20 +54,11 @@ ${bookableMetaFragment}`;
 export const bookableQuery = gql`
     query Bookable($id: BookableID!) {
         bookable(id: $id) {
-            id
             ...bookableMeta
-            creationDate
-            creator {
-                ...userMeta
-            }
-            updateDate
-            updater {
-                ...userMeta
-            }
         }
     }
     ${bookableMetaFragment}
-${userMetaFragment}`;
+`;
 
 export const createBookableMutation = gql`
     mutation CreateBookable($input: BookableInput!) {

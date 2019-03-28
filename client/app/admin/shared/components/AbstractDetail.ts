@@ -106,6 +106,7 @@ export class AbstractDetail<Tone,
         if (this.form) {
             this.formToData();
         }
+        console.log('this.data.model', this.data.model);
 
         const obs = new Subject<Tcreate>();
         this.service.create(this.data.model).subscribe(model => {

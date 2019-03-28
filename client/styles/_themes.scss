@@ -10,6 +10,7 @@
 @import '../app/shared/components/alert/alert.theme';
 @import '../app/door/door.theme';
 @import 'table';
+@import 'rich-text';
 @import 'page-header';
 @import '../app/shared/modules/sidenav/sidenav.theme';
 @import '../app/shared/components/money/money.theme';
@@ -32,6 +33,7 @@
     @include money($theme);
     @include file($theme);
     @include transaction-amount($theme);
+    @include rich-text($theme);
 }
 
 $mat-ichtus: (

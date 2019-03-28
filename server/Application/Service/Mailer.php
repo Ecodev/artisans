@@ -67,7 +67,7 @@ class Mailer
 
     public function queueRegister(User $user): Message
     {
-        $subject = 'Demande de création de compte Ichtus';
+        $subject = 'Demande de création de compte au Club Nautique Ichtus';
         $mailParams = [
             'token' => $user->createToken(),
         ];

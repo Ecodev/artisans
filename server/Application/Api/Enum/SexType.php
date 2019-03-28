@@ -12,7 +12,7 @@ class SexType extends EnumType
     {
         $config = [
             'name' => 'Sex',
-            'description' => 'The ISO/IEC 5218 sex',
+            'description' => 'Genders',
             'values' => [
                 'not_known' => [
                     'value' => 0,
@@ -25,10 +25,6 @@ class SexType extends EnumType
                 'female' => [
                     'value' => 2,
                     'description' => 'féminin',
-                ],
-                'not_applicable' => [
-                    'value' => 9,
-                    'description' => 'sans objet',
                 ],
             ],
         ];

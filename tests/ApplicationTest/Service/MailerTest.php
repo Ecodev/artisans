@@ -42,7 +42,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $mailer = $this->createMockMailer();
         $message = $mailer->queueRegister($user);
 
-        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte Ichtus');
+        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte au Club Nautique Ichtus');
     }
 
     public function testQueueUnregister(): void

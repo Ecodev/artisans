@@ -1,0 +1,14 @@
+@mixin rich-text($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    .rich-text {
+        line-height: 1.6em;
+
+        a {
+            color: mat-color($primary);
+        }
+    }
+}

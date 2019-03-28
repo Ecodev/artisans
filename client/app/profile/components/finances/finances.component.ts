@@ -1,10 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-    ExpenseClaimsQuery,
-    ExpenseClaimStatus,
-    ExpenseClaimType,
-    TransactionLinesQuery,
-} from '../../../shared/generated-types';
+import { ExpenseClaimsQuery, ExpenseClaimStatus, ExpenseClaimType, TransactionLinesQuery } from '../../../shared/generated-types';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -91,18 +86,25 @@ export class FinancesComponent implements OnInit, OnDestroy {
     }
 
     public updateIban(iban: string) {
-        console.log('iban', iban);
         this.userService.updatePartially({id: this.user.id, iban: iban}).pipe(catchError(() => {
             this.alertService.error('L\'IBAN est invalide');
             return of(null);
         })).subscribe(user => {
-            console.log('user', user);
             if (user) {
                 this.ibanLocked = true;
                 this.alertService.info('Votre IBAN a été modifié');
                 this.user.iban = iban;
+                this.lockIbanIfDefined();
+            } else {
+                this.ibanLocked = false;
             }
         });
+    }
+
+    public lockIbanIfDefined() {
+        if (this.user.iban) {
+            this.ibanLocked = true;
+        }
     }
 
 }

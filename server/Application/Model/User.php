@@ -132,7 +132,7 @@ class User extends AbstractModel
     private $welcomeSessionDate;
 
     /**
-     * @var int sex according to ISO/IEC 5218
+     * @var int sex
      * @ORM\Column(type="smallint", options={"default" = 0}))
      */
     private $sex = 0;
@@ -709,7 +709,7 @@ class User extends AbstractModel
     }
 
     /**
-     * Get the ISO/IEC 5218 sex
+     * Get the sex
      *
      * @API\Field(type="Sex")
      *
@@ -721,7 +721,7 @@ class User extends AbstractModel
     }
 
     /**
-     * Set the ISO/IEC 5218 sex
+     * Set the sex
      *
      * @API\Input(type="Sex")
      *

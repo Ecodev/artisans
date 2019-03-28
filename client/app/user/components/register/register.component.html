@@ -117,7 +117,9 @@
 
         <div fxLayout="row" fxLayoutGap="30px" *ngIf="step === 1">
             <div fxFlex>
-                <mat-checkbox formControlName="hasInsurance">Mon assurance RC couvre les embarcations.</mat-checkbox>
+                <mat-checkbox formControlName="hasInsurance" wrap>
+                    Mon assurance RC couvre les dégâts commis par négligence au matériel nautique du club.
+                </mat-checkbox>
                 <mat-error class="mat-body-1" *ngIf="form.get('hasInsurance').touched && form.get('hasInsurance').hasError('required')">
                     Requis
                 </mat-error>
@@ -125,11 +127,19 @@
             </div>
             <mat-divider [vertical]="true"></mat-divider>
             <div fxFlex>
-                <mat-checkbox formControlName="termsAgreement" required>J'accepte les conditions générales !</mat-checkbox>
+                <mat-checkbox formControlName="termsAgreement" required wrap>
+                    Je m'engage à respecter :
+                </mat-checkbox>
+
+                <p class="mat-body-1 rich-text">
+                    <a href="https://ichtus.ch/oni" target="_blank">l'Ordonnance suisse sur la Navigation Intérieure (ONI)</a>
+                    <br />
+                    ainsi que tous les règlements et
+                    <a href="https://ichtus.ch/statuts" target="_blank">statuts du club nautique Ichtus</a>
+                </p>
                 <mat-error class="mat-body-1" *ngIf="form.get('termsAgreement').touched && form.get('termsAgreement').hasError('required')">
                     Requis
                 </mat-error>
-                <p class="mat-body-1"></p>
             </div>
         </div>
 

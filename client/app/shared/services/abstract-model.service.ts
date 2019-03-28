@@ -219,7 +219,6 @@ export abstract class AbstractModelService<Tone,
                         query: this.allQuery,
                         variables: manager.variables as BehaviorSubject<Vall>,
                     });
-                    window['watchedQueries'] = AbstractModelService.autoRefetchQueries.size;
                 }
 
                 const lastQueryRef = this.apollo.watchQuery<Tall, Vall>({
@@ -240,7 +239,6 @@ export abstract class AbstractModelService<Tone,
                 AbstractModelService.autoRefetchQueries.delete(refetchKey);
                 expire.next();
                 expire.complete();
-                window['watchedQueries'] = AbstractModelService.autoRefetchQueries.size;
             },
         };
     }
@@ -308,7 +306,7 @@ export abstract class AbstractModelService<Tone,
 
         const variables = merge({}, {input: this.getInput(object)}, this.getContextForCreation(object));
         const observable = new Subject<Tcreate>();
-
+        console.log('variables', variables);
         this.apollo.mutate<Tcreate, Vcreate>({
             mutation: this.createMutation,
             variables: variables,
@@ -445,11 +443,10 @@ export abstract class AbstractModelService<Tone,
      * Resolve model and items related to the model, if the id is provided, in order to show a form
      */
     public resolve(id: string): Observable<{ model: Tone }> {
-
         // Load model if id is given
         let observable;
         if (id) {
-            observable = this.getOne(id);
+            observable = this.getOne(id, true);
         } else {
             observable = of(this.getEmptyObject() as Tone);
         }

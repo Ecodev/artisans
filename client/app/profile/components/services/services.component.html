@@ -74,7 +74,7 @@
 
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
             <h2 fxFlex class="mat-headline no-margin-bottom">Cotisation / Prestations souscrites</h2>
-            <button mat-flat-button color="warn" (click)="unregister()">Démissioner</button>
+            <button mat-stroked-button color="warn" (click)="unregister()">Démissionner</button>
         </div>
 
         <div class="mat-body-1 padding margin" fxLayout="column" fxLayoutAlign="center center" *ngIf="runningServicesDS?.data?.length === 0"

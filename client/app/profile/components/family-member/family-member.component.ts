@@ -48,7 +48,7 @@ export class FamilyMemberComponent
                 this.initForm();
             });
         } else {
-            this.data = {model: this.service.getEmptyObject()};
+            this.data = {model: Object.assign(this.service.getEmptyObject(), this.service.getDefaultValues())};
             this.initForm();
         }
 

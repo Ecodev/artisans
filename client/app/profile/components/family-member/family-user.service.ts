@@ -6,6 +6,7 @@ import { Literal } from '../../../shared/types';
 import { FormValidators } from '../../../shared/services/abstract-model.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import { Relationship } from '../../../shared/generated-types';
 
 @Injectable({
     providedIn: 'root',
@@ -24,6 +25,7 @@ export class FamilyUserService extends UserService {
         const values = {
             hasInsurance: false,
             termsAgreement: false,
+            familyRelationship: Relationship.partner
         };
 
         return Object.assign(super.getDefaultValues(), values);

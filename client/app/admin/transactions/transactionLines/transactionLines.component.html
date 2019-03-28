@@ -58,13 +58,9 @@
                     <th mat-header-cell *matHeaderCellDef>Compte</th>
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1px">
-                            <app-transaction-amount displayMode="account"
-                                                    [transactionLine]="element"
-                                                    [relativeToAccount]="element.debit"
+                            <app-transaction-amount displayMode="account" [transactionLine]="element" [relativeToAccount]="element.debit"
                             ></app-transaction-amount>
-                            <app-transaction-amount displayMode="account"
-                                                    [transactionLine]="element"
-                                                    [relativeToAccount]="element.credit"
+                            <app-transaction-amount displayMode="account" [transactionLine]="element" [relativeToAccount]="element.credit"
                             ></app-transaction-amount>
                         </div>
                     </td>
@@ -83,8 +79,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="transactionDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date</th>
-                    <td mat-cell *matCellDef="let element">{{ element.transactionDate | date : 'longDate' }}</td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
+                    <td mat-cell *matCellDef="let element">{{ element.transactionDate | date : 'medium' }}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 

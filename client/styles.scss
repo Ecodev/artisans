@@ -95,3 +95,9 @@ mat-form-field.no-bottom-spacing {
         padding-top: 10px;
     }
 }
+
+mat-checkbox[wrap] {
+    .mat-checkbox-label {
+        white-space: initial;
+    }
+}

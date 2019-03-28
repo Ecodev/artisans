@@ -385,23 +385,17 @@ export abstract class AbstractModelService<Tone,
         this.throwIfObservable(object);
         this.throwIfNotQuery(this.updateMutation);
 
-        const observable = new Subject<Tupdate>();
         const variables = {
             id: object.id as string,
             input: omit(Utility.relationsToIds(object), 'id'),
         } as Vupdate;
 
-        this.apollo.mutate<Tupdate, Vupdate>({
+        return this.apollo.mutate<Tupdate, Vupdate>({
             mutation: this.updateMutation,
             variables: variables,
             refetchQueries: AbstractModelService.getRefetchQueries(),
-        }).subscribe((result: any) => {
-            result = this.mapUpdate(result);
-            observable.next(result);
-            observable.complete(); // unsubscribe all after first emit, nothing more will come;
-        });
+        }).pipe(map((result) => this.mapUpdate(result)));
 
-        return observable.asObservable();  // hide type Subject and prevent user to miss use .next() or .complete() functions
     }
 
     /**

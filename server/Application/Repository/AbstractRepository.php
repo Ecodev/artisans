@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\Model\AbstractModel;
+use Application\Model\User;
 use Application\ORM\Query\Filter\AclFilter;
 use Doctrine\ORM\EntityRepository;
 
 /**
  * Class AbstractRepository
  *
- * @method null|object findOneById(integer $id)
+ * @method null|AbstractModel findOneById(integer $id)
  */
 abstract class AbstractRepository extends EntityRepository
 {
@@ -25,7 +27,7 @@ abstract class AbstractRepository extends EntityRepository
     }
 
     /**
-     * Return all ID
+     * Return native SQL query to get all ID
      *
      * @return string
      */
@@ -38,13 +40,20 @@ abstract class AbstractRepository extends EntityRepository
         return $qb->getSQL();
     }
 
-    protected function quoteArray(array $values): string
+    /**
+     * Return native SQL query to get all ID of object owned by given user
+     *
+     * @param User $user
+     *
+     * @return string
+     */
+    protected function getAllIdsForOwnerQuery(User $user): string
     {
-        $result = [];
-        foreach ($values as $v) {
-            $result[] = $this->getEntityManager()->getConnection()->quote($v);
-        }
+        $qb = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select('id')
+            ->from($this->getClassMetadata()->getTableName())
+            ->andWhere('owner_id = ' . $user->getId());
 
-        return implode(', ', $result);
+        return $qb->getSQL();
     }
 }

@@ -29,7 +29,7 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
             return $this->getAllIdsQuery();
         }
 
-        return 'SELECT id FROM account WHERE owner_id = ' . $user->getId();
+        return $this->getAllIdsForOwnerQuery($user);
     }
 
     /**

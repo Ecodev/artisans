@@ -211,7 +211,8 @@ REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
 REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type, remarks) VALUES
 (7000, '2019-01-10', 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', 'expenseClaim', ''),
 (7001, '2019-01-14', 1002, 100.00, 'processed', 'flyers', 'Cighelio', 'expenseClaim', ''),
-(7002, '2019-03-14', 1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund', '');
+(7002, '2019-03-14', 1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund', ''),
+(7003, '2019-01-10', 1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim', '');
 
 REPLACE INTO transaction (id, transactionDate, name, remarks, expense_claim_id) VALUES
 (8000, '2019-03-01', 'Active Member: inscription cours nautique', '', NULL),
@@ -239,8 +240,8 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable
 (14006, 8005, NULL, 10025, NULL, NULL, 7000, '2019-02-03', 1, 'Paiement par PostFinance', ''),
 (14007, 8005, NULL, 10026, NULL, NULL, 3000, '2019-02-04', 0, 'Paiement par Raiffeisen', '');
 
-REPLACE INTO accounting_document (id, expense_claim_id, filename, mime) VALUES
-(9000, 7000,'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
+REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
+(9000, 7000, 1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
 
 REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
 (11001, 1000, 1000, 1002, 'monthly_reminder', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),

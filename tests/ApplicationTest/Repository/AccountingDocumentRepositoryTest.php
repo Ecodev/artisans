@@ -8,26 +8,38 @@ use Application\Model\AccountingDocument;
 use Application\Model\ExpenseClaim;
 use Application\Model\User;
 use Application\Repository\AccountingDocumentRepository;
+use ApplicationTest\Traits\LimitedAccessSubQuery;
 
 /**
  * @group Repository
  */
 class AccountingDocumentRepositoryTest extends AbstractRepositoryTest
 {
+    use LimitedAccessSubQuery;
+
     /**
      * @var AccountingDocumentRepository
      */
     private $repository;
 
-    /**
-     * @var ExpenseClaim
-     */
-    private $expenseClaim;
-
     public function setUp(): void
     {
         parent::setUp();
         $this->repository = _em()->getRepository(AccountingDocument::class);
+    }
+
+    public function providerGetAccessibleSubQuery(): array
+    {
+        $all = [9000];
+
+        return [
+            ['anonymous', []],
+            ['bookingonly', []],
+            ['individual', []],
+            ['member', [9000]],
+            ['responsible', $all],
+            ['administrator', $all],
+        ];
     }
 
     public function testFileOnDiskIsDeletedWhenRecordInDbIsDeleted(): void

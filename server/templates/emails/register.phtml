@@ -1,7 +1,12 @@
 <?php declare(strict_types=1);
 $url = $this->serverUrl . '/user/confirm/' . $this->token;
 ?>
-<p>Une demande de création de compte Ichtus a été faite pour cet email (<?php echo $this->email ?>). Pour terminer la création du compte, merci de suivre le lien suivant :</p>
+<p>
+    Une demande de création de compte au Club Nautique Ichtus
+    a été faite pour l'adresse email <?php echo $this->email ?>.
+
+    Pour terminer le processus d'adhésion, merci de cliquer sur le lien ci-dessous :
+</p>
 
 <p><a href="<?php echo $url ?>"><?php echo $url ?></a></p>
 

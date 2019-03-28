@@ -7,7 +7,7 @@ $url = $this->serverUrl . '/admin/user/' . $this->unregisteredUser->getId();
     <li><?php echo $this->unregisteredUser->getName() ?></li>
     <?php if ($this->unregisteredUser->getEmail()): ?>
         <li>
-            <a href="mailto:<?php echo $this->unregisteredUser->getEmail() ?>"</a><?php echo $this->unregisteredUser->getEmail() ?>
+            <a href="mailto:<?php echo $this->unregisteredUser->getEmail() ?>"><?php echo $this->unregisteredUser->getEmail() ?></a>
         </li>
     <?php endif; ?>
     <li><a href="<?php echo $url ?>"><?php echo $url ?></a></li>

@@ -11,17 +11,17 @@
 </head>
 <body>
 <h1 style="color: #3176a2"><a href="<?php echo $this->serverUrl ?>"><img src="<?php echo $this->serverUrl ?>/assets/ichtus.svg" alt="Ichtus" border="0" width="40" height="40"/></a>
-    Ichtus
+    Club Nautique Ichtus
 </h1>
 
-<p>Bonjour<?php echo $this->user ? ' ' . $this->escapeHtml($this->user->getFirstName()) : '' ?>,</p>
+<p><?php echo $this->user ? 'Salut ' . $this->escapeHtml($this->user->getFirstName()) . ',' : 'Bonjour,' ?></p>
 
 <?php echo $this->content; ?>
 
 <p style="font-size: 0.8em; color: #878787">
     —<br>
-    Ceci est un message automatique de notification envoyé par <a
-            href="<?php echo $this->serverUrl ?>"><?php echo $this->hostname ?></a>, n'y répondez-pas.
+    Ceci est un message automatique de notification envoyé par
+    <a href="<?php echo $this->serverUrl ?>"><?php echo $this->hostname ?></a>, n'y répondez pas.
 </p>
 </body>
 </html>

@@ -6,6 +6,7 @@ namespace Application\Api;
 
 use Application\Acl\Acl;
 use Application\Model\AbstractModel;
+use Application\Model\Bookable;
 use Application\Model\Booking;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -70,6 +71,14 @@ abstract class Helper
                 ->addSelect('SUM(bookable.periodicPrice) AS totalPeriodicPrice')
                 ->addSelect('SUM(bookable.initialPrice) AS totalInitialPrice')
                 ->leftJoin('booking1.bookables', 'bookable');
+
+            $result = $qb->getQuery()->getResult()[0];
+        } elseif ($class === Bookable::class) {
+            $qb->resetDQLPart('select')
+                ->resetDQLPart('orderBy')
+                ->addSelect('SUM(bookable1.purchasePrice) AS totalPurchasePrice')
+                ->addSelect('SUM(bookable1.periodicPrice) AS totalPeriodicPrice')
+                ->addSelect('SUM(bookable1.initialPrice) AS totalInitialPrice');
 
             $result = $qb->getQuery()->getResult()[0];
         }

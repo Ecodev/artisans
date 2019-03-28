@@ -43,6 +43,13 @@ class Bookable extends AbstractModel
     private $periodicPrice = '0';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
+     */
+    private $purchasePrice = '0';
+
+    /**
      * @var int
      *
      * @ORM\Column(type="smallint", options={"default" = "-1"})
@@ -202,6 +209,22 @@ class Bookable extends AbstractModel
     public function setPeriodicPrice(string $periodicPrice): void
     {
         $this->periodicPrice = $periodicPrice;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPurchasePrice(): string
+    {
+        return $this->purchasePrice;
+    }
+
+    /**
+     * @param string $purchasePrice
+     */
+    public function setPurchasePrice(string $purchasePrice): void
+    {
+        $this->purchasePrice = $purchasePrice;
     }
 
     /**

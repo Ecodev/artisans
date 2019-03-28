@@ -118,6 +118,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             description: '',
             initialPrice: '0',
             periodicPrice: '0',
+            purchasePrice: '0',
             simultaneousBookingMaximum: 1,
             bookingType: BookingType.self_approved,
             remarks: '',

@@ -52,6 +52,14 @@
                                                  (selectionChange)="update()"
                                                  placeholder="État"
                                 ></app-select-enum>
+
+                                <mat-form-field>
+                                    <mat-label>Prix d'achat</mat-label>
+                                    <input matInput type="number" step="0.01" min="0" formControlName="purchasePrice" (change)="update()">
+                                    <div matSuffix>CHF</div>
+                                    <mat-error *ngIf="form.get('purchasePrice').hasError('required')">Requis</mat-error>
+                                    <mat-error *ngIf="form.get('purchasePrice').hasError('min')">Le montant doit être positif</mat-error>
+                                </mat-form-field>
                             </div>
                         </div>
 

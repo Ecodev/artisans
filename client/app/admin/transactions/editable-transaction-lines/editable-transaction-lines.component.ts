@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AbstractEditableList } from '../../shared/components/AbstractEditableList';
 import { TransactionLineService } from '../services/transactionLine.service';
 import { AccountConfiguration } from '../../../shared/hierarchic-selector/configurations/AccountConfiguration';
-import { AccountService } from '../../accounts/services/account.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { TransactionLinesQueryVariables, TransactionQuery } from '../../../shared/generated-types';
 
@@ -19,7 +18,6 @@ export class EditableTransactionLinesComponent extends AbstractEditableList<any,
     public columns = ['name', 'balance', 'debit', 'credit', 'bookable', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,
-                public accountService: AccountService,
                 public bookableService: BookableService) {
         super('transactionLine', transactionLineService);
     }

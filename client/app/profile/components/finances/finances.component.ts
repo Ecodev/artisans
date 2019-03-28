@@ -1,11 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ExpenseClaimsQuery, ExpenseClaimStatus, ExpenseClaimType, TransactionLinesQuery } from '../../../shared/generated-types';
+import {
+    ExpenseClaimsQuery,
+    ExpenseClaimStatus,
+    ExpenseClaimType,
+    TransactionLinesQuery,
+} from '../../../shared/generated-types';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
-import { AccountService } from '../../../admin/accounts/services/account.service';
 import { MatDialog } from '@angular/material';
 import { CreateRefundComponent } from '../create-refund/create-refund.component';
 import { AlertService } from '../../../shared/components/alert/alert.service';
@@ -22,7 +26,7 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     public runningExpenseClaimsDS: AppDataSource;
     public runningExpenseClaimsQuery: AutoRefetchQueryRef<ExpenseClaimsQuery['expenseClaims']>;
-    public expenseClaimsColumns = ['name',  'date', 'status', 'type', 'amount', 'cancel'];
+    public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'amount', 'cancel'];
 
     public transactionLinesDS: AppDataSource;
     public transactionLinesQuery: AutoRefetchQueryRef<TransactionLinesQuery['transactionLines']>;
@@ -35,7 +39,6 @@ export class FinancesComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private expenseClaimService: ExpenseClaimService,
         private transactionLineService: TransactionLineService,
-        public accountService: AccountService,
         private alertService: AlertService,
         private dialog: MatDialog) {
     }

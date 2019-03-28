@@ -62,7 +62,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="purchasePrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Prx. achat</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-align-right>Prx. achat</th>
                     <td mat-cell *matCellDef="let element" app-align-right>
                         <span *ngIf="element.purchasePrice > 0">{{ element.purchasePrice | currency: 'CHF' }}</span>
                     </td>
@@ -74,7 +74,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="initialPrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Prx. init.</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-align-right>Prx. init.</th>
                     <td mat-cell *matCellDef="let element" app-align-right>
                         <span *ngIf="element.initialPrice > 0">{{ element.initialPrice | currency: 'CHF' }}</span>
                     </td>
@@ -86,7 +86,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="periodicPrice">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Prx. périod.</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-align-right>Prx. périod.</th>
                     <td mat-cell *matCellDef="let element" app-align-right>
                         <span *ngIf="element.periodicPrice > 0">{{ element.periodicPrice | currency: 'CHF' }}</span>
                     </td>

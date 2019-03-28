@@ -24,11 +24,17 @@
             padding-right: 3px;
 
             &[app-align-right] {
-                text-align: right
+                text-align: right;
+                .mat-sort-header-container {
+                    justify-content: flex-end;
+                }
             }
 
             &[app-align-center] {
                 text-align: center;
+                .mat-sort-header-container {
+                    justify-content: center;
+                }
             }
         }
 

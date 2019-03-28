@@ -46,7 +46,7 @@ class MockApollo extends Apollo {
             UserRole: () => 'member',
             UserStatus: () => 'active',
             AccountType: () => 'revenue',
-            Sex: () => 'not_applicable',
+            Sex: () => 'not_known',
         };
 
         addMockFunctionsToSchema({schema, mocks});

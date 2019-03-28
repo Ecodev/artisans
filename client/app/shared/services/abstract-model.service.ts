@@ -306,7 +306,7 @@ export abstract class AbstractModelService<Tone,
 
         const variables = merge({}, {input: this.getInput(object)}, this.getContextForCreation(object));
         const observable = new Subject<Tcreate>();
-        console.log('variables', variables);
+
         this.apollo.mutate<Tcreate, Vcreate>({
             mutation: this.createMutation,
             variables: variables,

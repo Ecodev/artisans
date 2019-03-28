@@ -60,7 +60,7 @@ describe('UserService', () => {
             name: 'test string',
             __typename: 'User',
         },
-        sex: 'not_applicable',
+        sex: 'not_known',
         welcomeSessionDate: '2018-01-18T11:43:31',
         creationDate: '2018-01-18T11:43:31',
         country: {

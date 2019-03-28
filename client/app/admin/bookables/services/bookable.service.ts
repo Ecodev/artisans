@@ -22,6 +22,7 @@ import {
     CreateBookableMutationVariables,
     CurrentUserForProfileQuery,
     DeleteBookablesMutation,
+    LogicalOperator,
     UpdateBookableMutation,
     UpdateBookableMutationVariables,
     UserQuery,
@@ -54,6 +55,15 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
                         {
                             bookingType: {in: {values: [BookingType.self_approved], not: true}},
                             bookableTags: {have: {values: ['6007']}},
+                        },
+                    ],
+                },
+                {
+                    groupLogic: LogicalOperator.OR,
+                    conditions: [
+                        {
+                            bookingType: {in: {values: [BookingType.admin_approved]}},
+                            bookableTags: {have: {values: ['6008']}},
                         },
                     ],
                 },

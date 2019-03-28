@@ -280,6 +280,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
                             {
                                 owner: {equal: {value: user.id}},
                                 status: {equal: {value: BookingStatus.booked}},
+                                endDate: {null: {}}
                             },
                         ],
                         joins: {

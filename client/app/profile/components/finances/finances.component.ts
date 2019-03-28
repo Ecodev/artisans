@@ -14,6 +14,8 @@ import { MatDialog } from '@angular/material';
 import { CreateRefundComponent } from '../create-refund/create-refund.component';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
     selector: 'app-finances',
@@ -32,7 +34,7 @@ export class FinancesComponent implements OnInit, OnDestroy {
     public transactionLinesQuery: AutoRefetchQueryRef<TransactionLinesQuery['transactionLines']>;
     public transactionsColumns = ['name', 'transactionDate', 'amount'];
 
-    public lockIban = true;
+    public ibanLocked = true;
 
     constructor(
         private userService: UserService,
@@ -45,6 +47,8 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.user = this.route.snapshot.data.user.model;
+
+        this.ibanLocked = !!this.user.iban;
 
         this.runningExpenseClaimsQuery = this.expenseClaimService.getForUser(this.user);
         this.runningExpenseClaimsDS = new AppDataSource(this.runningExpenseClaimsQuery.valueChanges);
@@ -70,7 +74,12 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     public createRefund() {
 
-        this.dialog.open(CreateRefundComponent).afterClosed().subscribe(expense => {
+        const config = {
+            data: {
+                confirmText: 'Envoyer la demande',
+            },
+        };
+        this.dialog.open(CreateRefundComponent, config).afterClosed().subscribe(expense => {
             if (expense) {
                 expense.type = ExpenseClaimType.refund;
                 this.expenseClaimService.create(expense).subscribe(result => {
@@ -81,9 +90,18 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     }
 
-    public updateIban() {
-        this.userService.updatePartially({id: this.user.id, iban: this.user.iban}).subscribe(user => {
-            this.alertService.info('Votre IBAN a été modifié');
+    public updateIban(iban: string) {
+        console.log('iban', iban);
+        this.userService.updatePartially({id: this.user.id, iban: iban}).pipe(catchError(() => {
+            this.alertService.error('L\'IBAN est invalide');
+            return of(null);
+        })).subscribe(user => {
+            console.log('user', user);
+            if (user) {
+                this.ibanLocked = true;
+                this.alertService.info('Votre IBAN a été modifié');
+                this.user.iban = iban;
+            }
         });
     }
 

@@ -1,26 +1,33 @@
-<div fxLayout="column" fxLayoutGap="30px">
+<div fxLayout="column" fxLayoutGap="50px">
 
     <h2 class="mat-headline">Finances</h2>
 
     <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="10px" fxLayoutAlign.gt-sm="start start">
         <mat-form-field>
             <mat-label>IBAN</mat-label>
-            <input matInput [(ngModel)]="user.iban" (change)="lockIban = true; updateIban();" [disabled]="lockIban">
-            <button mat-icon-button matSuffix (click)="lockIban = false">
+            <input matInput [ngModel]="user.iban" (change)="updateIban($event.target.value);" [disabled]="ibanLocked">
+            <button mat-icon-button matSuffix (click)="ibanLocked = false" *ngIf="ibanLocked">
                 <app-icon name="lock"></app-icon>
             </button>
         </mat-form-field>
-
-        <!--[disabled]="!form.get('iban').value"-->
-        <a mat-stroked-button color="primary" (click)="createRefund()">Demander un remboursement</a>
-        <a mat-stroked-button color="primary" [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
     </div>
 
-    <div fxLayout="column" *ngIf="runningExpenseClaimsDS && runningExpenseClaimsDS.data.length">
+    <div fxLayout="column">
 
-        <h3 fxFlex class="mat-headline">Dépenses annoncées</h3>
+        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="10px">
+            <h3 fxFlex class="mat-headline">Dépenses et remboursements</h3>
+            <button mat-stroked-button (click)="createRefund()" [disabled]="!user.iban">Demander un remboursement</button>
+            <a mat-stroked-button [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
+        </div>
 
-        <div class="responsive-table">
+        <div class="mat-body-1 padding margin"
+             fxLayout="column"
+             fxLayoutAlign="center center"
+             *ngIf="runningExpenseClaimsDS?.data?.length === 0"
+        >Aucune annonce
+        </div>
+
+        <div class="responsive-table" [fxHide]="!runningExpenseClaimsDS?.data?.length">
             <table mat-table [dataSource]="runningExpenseClaimsDS">
                 <tr mat-header-row *matHeaderRowDef="expenseClaimsColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: expenseClaimsColumns;"></tr>
@@ -58,7 +65,8 @@
 
                 <ng-container matColumnDef="type">
                     <th mat-header-cell *matHeaderCellDef>Type</th>
-                    <td mat-cell *matCellDef="let expenseClaim">{{ expenseClaim.type | enum : 'ExpenseClaimType' | capitalize | async }}</td>
+                    <td mat-cell *matCellDef="let expenseClaim">{{ expenseClaim.type | enum : 'ExpenseClaimType' | capitalize | async }}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="cancel">
@@ -79,12 +87,20 @@
 
     </div>
 
-    <div *ngIf="transactionLinesDS && transactionLinesDS.data.length">
+    <div>
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
-            <h3 fxFlex class="mat-title no-margin-bottom">Écritures</h3>
+            <h3 fxFlex class="mat-headline no-margin-bottom">Historique</h3>
         </div>
 
-        <div class="responsive-table">
+        <div class="mat-body-1 padding margin"
+             fxLayout="column"
+             fxLayoutAlign="center center"
+             *ngIf="transactionLinesDS?.data?.length === 0"
+        >
+            Aucun résultat
+        </div>
+
+        <div class="responsive-table" *ngIf="transactionLinesDS && transactionLinesDS.data.length">
             <table mat-table [dataSource]="transactionLinesDS">
                 <tr mat-header-row *matHeaderRowDef="transactionsColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: transactionsColumns;"></tr>
@@ -102,7 +118,8 @@
                 <ng-container matColumnDef="amount">
                     <th mat-header-cell *matHeaderCellDef>Montant</th>
                     <td mat-cell *matCellDef="let transactionLine">
-                        <app-transaction-amount [transactionLine]="transactionLine" [relativeToAccount]="user.account"></app-transaction-amount>
+                        <app-transaction-amount [transactionLine]="transactionLine" [relativeToAccount]="user.account"
+                        ></app-transaction-amount>
                     </td>
                 </ng-container>
 
@@ -118,7 +135,6 @@
                         </button>
                     </td>
                 </ng-container>
-
             </table>
         </div>
 

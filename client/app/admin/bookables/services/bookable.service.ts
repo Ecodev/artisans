@@ -89,6 +89,23 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         return {filter: {groups: [{conditions: [{bookableTags: {have: {values: [tagId]}}}]}]}};
     }
 
+    public static adminApprovedByTag(tagId): BookablesQueryVariables {
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                bookingType: {in: {values: [BookingType.admin_approved]}},
+                                bookableTags: {have: {values: [tagId]}},
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+    }
+
     public static adminByTag(tagId): BookablesQueryVariables {
         return {
             filter: {

@@ -25,7 +25,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
     public pendingApplications: AutoRefetchQueryRef<BookingsQuery['bookings']>;
 
     public servicesColumns = ['name', 'periodicPrice', 'revoke'];
-    public applicationsColumns = ['name', 'initialPrice', 'periodicPrice', 'cancel'];
+    public applicationsColumns = ['name', 'status', 'initialPrice', 'periodicPrice', 'cancel'];
 
     constructor(private userService: UserService,
                 private route: ActivatedRoute,
@@ -34,14 +34,13 @@ export class ServicesComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
         this.user = this.route.snapshot.data.user.model;
 
-        this.runningServices = this.userService.getRunningServices(this.user);
         this.pendingApplications = this.userService.getPendingApplications(this.user);
-
-        this.runningServicesDS = new AppDataSource(this.runningServices.valueChanges);
         this.pendingApplicationsDS = new AppDataSource(this.pendingApplications.valueChanges);
+
+        this.runningServices = this.userService.getRunningServices(this.user);
+        this.runningServicesDS = new AppDataSource(this.runningServices.valueChanges);
     }
 
     ngOnDestroy() {
@@ -53,7 +52,13 @@ export class ServicesComponent implements OnInit, OnDestroy {
      * Set end date ?
      */
     public revokeBooking(booking) {
-        this.bookingService.flagEndDate(booking.id);
+        this.alertService
+            .confirm('Résiliation de prestation', 'Voulez-vous résilier définitivement cette prestation ?', 'Confirmer la résiliation')
+            .subscribe(confirmed => {
+                if (confirmed) {
+                    this.bookingService.flagEndDate(booking.id);
+                }
+            });
     }
 
     public canRevoke(booking): boolean {
@@ -64,18 +69,12 @@ export class ServicesComponent implements OnInit, OnDestroy {
         this.bookingService.delete([booking]);
     }
 
-    public addApplication(bookable) {
-        this.bookingService.createWithBookable(bookable, this.user).subscribe(() => {
-        });
-    }
-
     public unregister(): void {
         this.alertService.confirm('Démission', 'Voulez-vous quitter le club Ichtus ?', 'Démissioner définitivement')
             .subscribe(confirmed => {
                 if (confirmed) {
                     this.userService.unregister(this.user).subscribe(() => {
-                        const message = 'Vous avez démissioné';
-                        this.alertService.info(message, 5000);
+                        this.alertService.info('Vous avez démissioné', 5000);
                         this.userService.logout();
                     });
                 }

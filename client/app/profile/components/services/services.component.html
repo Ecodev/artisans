@@ -1,14 +1,21 @@
-<div fxLayout="column" fxLayoutGap="30px">
+<div fxLayout="column" fxLayoutGap="50px">
 
     <div fxLayout="column" fxLayoutGap="10px">
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
             <h2 fxFlex class="mat-headline no-margin-bottom">Demandes en attente</h2>
-            <!--<button mat-stroked-button color="primary">Annoncer une dépense</button>-->
+            <app-select-admin-approved-button [user]="user"></app-select-admin-approved-button>
         </div>
 
-        <div class="responsive-table">
+        <div class="mat-body-1 padding margin"
+             fxLayout="column"
+             fxLayoutAlign="center center"
+             *ngIf="pendingApplicationsDS?.data?.length === 0"
+        >Aucune demande en attente
+        </div>
 
-            <table mat-table *ngIf="pendingApplicationsDS" [dataSource]="pendingApplicationsDS">
+        <div class="responsive-table" [fxHide]="!pendingApplicationsDS?.data?.length">
+
+            <table mat-table [dataSource]="pendingApplicationsDS">
                 <tr mat-header-row *matHeaderRowDef="applicationsColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: applicationsColumns;"></tr>
                 <tr mat-footer-row *matFooterRowDef="applicationsColumns"></tr>
@@ -17,6 +24,12 @@
                     <th mat-header-cell *matHeaderCellDef>Nom</th>
                     <td mat-cell *matCellDef="let booking">{{ booking.bookables[0].name }}</td>
                     <td mat-footer-cell *matFooterCellDef>Totaux</td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>Nom</th>
+                    <td mat-cell *matCellDef="let booking">{{ booking.status | enum: 'BookingStatus' | async }}</td>
+                    <td mat-footer-cell *matFooterCellDef> Totaux</td>
                 </ng-container>
 
                 <ng-container matColumnDef="periodicPrice">
@@ -55,11 +68,6 @@
                 </ng-container>
             </table>
         </div>
-        <app-select [service]="bookableService"
-                    [filter]="BookableService.adminApproved.filter"
-                    (selectionChange)="addApplication($event)"
-                    placeholder="Demander un espace de stockage"
-        ></app-select>
     </div>
 
     <div>
@@ -69,8 +77,13 @@
             <button mat-flat-button color="warn" (click)="unregister()">Démissioner</button>
         </div>
 
-        <div class="responsive-table">
-            <table mat-table *ngIf="runningServicesDS" [dataSource]="runningServicesDS">
+        <div class="mat-body-1 padding margin" fxLayout="column" fxLayoutAlign="center center" *ngIf="runningServicesDS?.data?.length === 0"
+        >
+            Aucune prestation en cours
+        </div>
+
+        <div class="responsive-table" *ngIf="runningServicesDS && runningServicesDS.data.length">
+            <table mat-table [dataSource]="runningServicesDS">
                 <tr mat-header-row *matHeaderRowDef="servicesColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: servicesColumns;"></tr>
                 <tr mat-footer-row *matFooterRowDef="servicesColumns"></tr>
@@ -97,7 +110,7 @@
                     <th mat-header-cell *matHeaderCellDef app-1em-column></th>
                     <td mat-cell *matCellDef="let booking">
                         <button mat-icon-button color="warn" (click)="revokeBooking(booking)" *ngIf="canRevoke(booking)">
-                            <app-icon name="delete"></app-icon>
+                            <app-icon name="delete_forever"></app-icon>
                         </button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>

@@ -12,6 +12,10 @@ import { FinancesComponent } from './components/finances/finances.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CreateRefundComponent } from './components/create-refund/create-refund.component';
 import { ProvisionComponent } from './components/provision/provision.component';
+import { SelectAdminApprovedModalComponent } from '../shared/components/select-admin-approved-modal/select-admin-approved-modal.component';
+import {
+    SelectAdminApprovedButtonComponent
+} from '../shared/components/select-admin-approved-button/select-admin-approved-button.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +28,8 @@ import { ProvisionComponent } from './components/provision/provision.component';
         ServicesComponent,
         CreateRefundComponent,
         ProvisionComponent,
+        SelectAdminApprovedButtonComponent,
+        SelectAdminApprovedModalComponent,
     ],
     imports: [
         CommonModule,
@@ -34,6 +40,7 @@ import { ProvisionComponent } from './components/provision/provision.component';
     entryComponents: [
         CreateRefundComponent,
         ProvisionComponent,
+        SelectAdminApprovedModalComponent,
     ],
 })
 export class ProfileModule {

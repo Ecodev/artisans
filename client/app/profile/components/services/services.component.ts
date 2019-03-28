@@ -56,7 +56,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
             .confirm('Résiliation de prestation', 'Voulez-vous résilier définitivement cette prestation ?', 'Confirmer la résiliation')
             .subscribe(confirmed => {
                 if (confirmed) {
-                    this.bookingService.flagEndDate(booking.id);
+                    this.bookingService.terminateBooking(booking.id);
                 }
             });
     }

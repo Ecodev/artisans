@@ -50,7 +50,7 @@ export class BookableComponent extends AbstractController implements OnInit {
     public endBooking() {
 
         if (this.runningBooking) {
-            this.bookingService.flagEndDate(this.runningBooking.id).subscribe(() => {
+            this.bookingService.terminateBooking(this.runningBooking.id).subscribe(() => {
                 this.initForBookable();
             });
         }

@@ -23,7 +23,7 @@
                     <span appColumnsPickerColumn="endDate">Fin</span>
                     <span appColumnsPickerColumn="estimatedEndDate">Retour prévu</span>
                     <span appColumnsPickerColumn="participantCount">Nb participants</span>
-                    <span appColumnsPickerColumn="flagEndDate">Terminer</span>
+                    <span appColumnsPickerColumn="terminateBooking">Terminer</span>
                 </app-columns-picker>
             </natural-search>
 
@@ -110,10 +110,10 @@
                     <td mat-footer-cell *matFooterCellDef>{{ dataSource.data.totalParticipantCount || 0 }}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="flagEndDate">
+                <ng-container matColumnDef="terminateBooking">
                     <th mat-header-cell *matHeaderCellDef app-5em-column></th>
                     <td mat-cell *matCellDef="let element">
-                        <button *ngIf="!element.endDate" mat-flat-button color="warn" (click)="bookingService.flagEndDate(element.id)">
+                        <button *ngIf="!element.endDate" mat-flat-button color="warn" (click)="bookingService.terminateBooking(element.id)">
                             Terminer
                         </button>
                     </td>

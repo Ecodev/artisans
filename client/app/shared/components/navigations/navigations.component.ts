@@ -92,7 +92,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
             },
         };
 
-        this.bookingService.flagEndDate(booking.id).subscribe(() => {
+        this.bookingService.terminateBooking(booking.id).subscribe(() => {
             booking.endDate = new Date();
             this.snackbar.open('La sortie est terminée', 'Faire un commentaire', snackbarOptions).onAction().subscribe(() => {
 

@@ -179,7 +179,7 @@
         <mat-tab label="Utilisations" *ngIf="data.model.id">
             <app-bookings [persistSearch]="false"
                           [queryVariables]="{filter: {groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}}"
-                          [columns]="['edit', 'owner', 'destination', 'startDate', 'estimatedEndDate', 'participantCount', 'flagEndDate']"
+                          [columns]="['edit', 'owner', 'destination', 'startDate', 'estimatedEndDate', 'participantCount', 'terminateBooking']"
             ></app-bookings>
         </mat-tab>
 

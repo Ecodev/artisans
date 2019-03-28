@@ -35,6 +35,9 @@ export const bookablesQuery = gql`
             pageSize
             pageIndex
             length
+            totalPurchasePrice
+            totalInitialPrice
+            totalPeriodicPrice
         }
     }
 ${bookableMetaFragment}`;

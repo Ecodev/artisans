@@ -6,6 +6,7 @@ namespace ApplicationTest\Api\Input\Operator;
 
 use Application\Api\Exception;
 use Application\Api\Input\Operator\SearchOperatorType;
+use Application\Model\Booking;
 use Application\Model\Image;
 use Application\Model\User;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
@@ -18,9 +19,10 @@ class SearchOperatorTypeTest extends \PHPUnit\Framework\TestCase
      *
      * @param string $class
      * @param string $term
+     * @param int $expectedJoinCount
      * @param string $expected
      */
-    public function testSearch(string $class, string $term, string $expected): void
+    public function testSearch(string $class, string $term, int $expectedJoinCount, string $expected): void
     {
         $operator = new SearchOperatorType(_types(), Type::string());
 
@@ -33,15 +35,36 @@ class SearchOperatorTypeTest extends \PHPUnit\Framework\TestCase
         self::assertSame($expected, $actual);
 
         $joins = $qb->getDQLPart('join');
-        self::assertEmpty($joins, 'should not have any joins');
+        self::assertCount($expectedJoinCount, $joins['a'] ?? []);
     }
 
     public function providerSearch(): array
     {
         return [
-            'search predefined fields' => [User::class, 'john', '((a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1))'],
-            'split words' => [User::class, 'john doe', '((a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2))'],
-            'trimmed split words' => [User::class, '  foo   bar   ', '((a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2))'],
+            'search predefined fields' => [
+                User::class,
+                'john',
+                0,
+                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1)',
+            ],
+            'split words' => [
+                User::class,
+                'john doe',
+                0,
+                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2)',
+            ],
+            'trimmed split words' => [
+                User::class,
+                '  foo   bar   ',
+                0,
+                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2)',
+            ],
+            'joined entities' => [
+                Booking::class,
+                'foo',
+                2,
+                '(a.destination LIKE :filter1 OR a.startComment LIKE :filter1 OR user1.firstName LIKE :filter1 OR user1.lastName LIKE :filter1 OR user1.email LIKE :filter1 OR user1.locality LIKE :filter1 OR bookable1.name LIKE :filter1)',
+            ],
         ];
     }
 

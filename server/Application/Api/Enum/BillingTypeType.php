@@ -9,9 +9,8 @@ class BillingTypeType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            \Application\DBAL\Types\BillingTypeType::ALL_ELECTRONIC => 'En ligne avec rappel par e-mail',
-            \Application\DBAL\Types\BillingTypeType::PAPER_BILL_ELECTRONIC_REMINDER => 'BVR avec rappel par e-mail',
-            \Application\DBAL\Types\BillingTypeType::PAPER_BILL_PAPER_REMINDER => 'BVR avec rappel par e-mail et papier',
+            \Application\DBAL\Types\BillingTypeType::ELECTRONIC => 'Par e-mail',
+            \Application\DBAL\Types\BillingTypeType::PAPER => 'Par courrier postal',
         ];
 
         parent::__construct($config);

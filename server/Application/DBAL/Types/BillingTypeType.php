@@ -6,16 +6,14 @@ namespace Application\DBAL\Types;
 
 class BillingTypeType extends AbstractEnumType
 {
-    const ALL_ELECTRONIC = 'all_electronic';
-    const PAPER_BILL_ELECTRONIC_REMINDER = 'paper_bill_electronic_reminder';
-    const PAPER_BILL_PAPER_REMINDER = 'paper_bill_paper_reminder';
+    const ELECTRONIC = 'electronic';
+    const PAPER = 'paper';
 
     protected function getPossibleValues(): array
     {
         return [
-            self::ALL_ELECTRONIC,
-            self::PAPER_BILL_ELECTRONIC_REMINDER,
-            self::PAPER_BILL_PAPER_REMINDER,
+            self::ELECTRONIC,
+            self::PAPER,
         ];
     }
 }

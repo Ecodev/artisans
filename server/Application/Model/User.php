@@ -187,9 +187,9 @@ class User extends AbstractModel
 
     /**
      * @var string
-     * @ORM\Column(type="BillingType", options={"default" = BillingTypeType::ALL_ELECTRONIC})
+     * @ORM\Column(type="BillingType", options={"default" = BillingTypeType::ELECTRONIC})
      */
-    private $billingType = BillingTypeType::ALL_ELECTRONIC;
+    private $billingType = BillingTypeType::ELECTRONIC;
 
     /**
      * @var null|string
@@ -788,6 +788,8 @@ class User extends AbstractModel
     }
 
     /**
+     * @API\Field(type="BillingType")
+     *
      * @return string
      */
     public function getBillingType(): string
@@ -796,6 +798,8 @@ class User extends AbstractModel
     }
 
     /**
+     * @API\Input(type="BillingType")
+     *
      * @param string $billingType
      */
     public function setBillingType(string $billingType): void

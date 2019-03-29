@@ -61,6 +61,8 @@ return [
             'ExpenseClaimType' => Application\DBAL\Types\ExpenseClaimTypeType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'AccountType' => Application\DBAL\Types\AccountTypeType::class,
+            'SwissSailingType' => Application\DBAL\Types\SwissSailingTypeType::class,
+            'SwissWindsurfType' => Application\DBAL\Types\SwissWindsurfTypeType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

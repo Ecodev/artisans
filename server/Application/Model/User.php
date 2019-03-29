@@ -153,7 +153,19 @@ class User extends AbstractModel
      * @var string
      * @ORM\Column(type="string", length=25, options={"default" = ""})
      */
-    private $ichtusSwissSailing = '';
+    private $swissSailing = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="SwissSailingType", nullable=true)
+     */
+    private $swissSailingType;
+
+    /**
+     * @var string
+     * @ORM\Column(type="SwissWindsurfType", nullable=true)
+     */
+    private $swissWindsurfType;
 
     /**
      * @var null|Date
@@ -733,19 +745,69 @@ class User extends AbstractModel
     }
 
     /**
+     * Get the Swiss Sailing licence number
+     *
      * @return string
      */
-    public function getIchtusSwissSailing(): string
+    public function getSwissSailing(): string
     {
-        return $this->ichtusSwissSailing;
+        return $this->swissSailing;
     }
 
     /**
-     * @param string $ichtusSwissSailing
+     * @param string $swissSailing
      */
-    public function setIchtusSwissSailing(string $ichtusSwissSailing): void
+    public function setSwissSailing(string $swissSailing): void
     {
         $this->ichtusSwissSailing = $ichtusSwissSailing;
+    }
+
+    /**
+     * Get the Swiss Sailing licence type
+     *
+     * @API\Field(type="?SwissSailingType")
+     *
+     * @return null|string
+     */
+    public function getSwissSailingType(): ?string
+    {
+        return $this->swissSailingType;
+    }
+
+    /**
+     * Set the Swiss Sailing licence type
+     *
+     * @API\Input(type="?SwissSailingType")
+     *
+     * @param null|string $swissSailingType
+     */
+    public function setSwissSailingType(?string $swissSailingType): void
+    {
+        $this->swissSailingType = $swissSailingType;
+    }
+
+    /**
+     * Get the Swiss Windsurf licence type
+     *
+     * @API\Field(type="?SwissWindsurfType")
+     *
+     * @return null|string
+     */
+    public function getSwissWindsurfType(): ?string
+    {
+        return $this->swissWindsurfType;
+    }
+
+    /**
+     * Set the Swiss Windsurf licence type
+     *
+     * @API\Input(type="?SwissWindsurfType")
+     *
+     * @param null|string $swissWindsurfType
+     */
+    public function setSwissWindsurfType(?string $swissWindsurfType): void
+    {
+        $this->swissWindsurfType = $swissWindsurfType;
     }
 
     /**

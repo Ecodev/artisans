@@ -18,7 +18,9 @@ export const userFieldsFragment = gql`
         familyRelationship
         role
         status
-        ichtusSwissSailing
+        swissSailing
+        swissSailingType,
+        swissWindsurfType,
         mobilePhone
         door1
         door2

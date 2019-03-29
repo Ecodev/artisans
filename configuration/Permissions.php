@@ -41,6 +41,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/import-filemaker.php',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/cron.php',
         'permissions' => '0750',
     ],

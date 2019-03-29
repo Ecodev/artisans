@@ -7,6 +7,7 @@ import { buildClientSchema } from 'graphql';
 import { addMockFunctionsToSchema } from 'graphql-tools';
 import { schema as introspectionResult } from './../../../../data/tmp/schema';
 import { apolloDefaultOptions } from '../config/apolloDefaultOptions';
+import { BillingType } from '../generated-types';
 
 /**
  * A mock Apollo to be used in tests only
@@ -47,6 +48,7 @@ class MockApollo extends Apollo {
             UserStatus: () => 'active',
             AccountType: () => 'revenue',
             Sex: () => 'not_known',
+            BillingType: () => 'electronic'
         };
 
         addMockFunctionsToSchema({schema, mocks});

@@ -53,7 +53,7 @@ describe('UserService', () => {
             type: 'revenue',
             __typename: 'Account',
         },
-        billingType: 'test string',
+        billingType: 'electronic',
         remarks: 'test string',
         owner: {
             id: '456',

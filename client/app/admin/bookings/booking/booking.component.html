@@ -23,7 +23,10 @@
                             </mat-form-field>
                         </div>
 
-                        <app-select-bookable placeholder="Réservable" [booking]="data.model" (selectionChange)="bookable = $event"
+                        <app-select-bookable *ngIf="data.model.id"
+                                             placeholder="Réservable"
+                                             [booking]="data.model"
+                                             (selectionChange)="bookable = $event"
                         ></app-select-bookable>
 
                     </div>

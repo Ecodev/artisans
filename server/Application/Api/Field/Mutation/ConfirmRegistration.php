@@ -52,15 +52,15 @@ abstract class ConfirmRegistration implements FieldInterface
 
                 // Create mandatory booking for him
                 User::setCurrent($user);
-                $booking = new Booking();
-                _em()->persist($booking);
-
-                $booking->setOwner($user);
-                $booking->setStatus(BookingStatusType::BOOKED);
-                $booking->setStartDate(new Chronos());
 
                 $mandatoryBookables = _em()->getRepository(Bookable::class)->findByBookingType(BookingTypeType::MANDATORY);
                 foreach ($mandatoryBookables as $bookable) {
+                    $booking = new Booking();
+                    _em()->persist($booking);
+
+                    $booking->setOwner($user);
+                    $booking->setStatus(BookingStatusType::BOOKED);
+                    $booking->setStartDate(new Chronos());
                     $booking->addBookable($bookable);
                 }
 

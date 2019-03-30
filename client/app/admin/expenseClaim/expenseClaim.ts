@@ -1,5 +1,5 @@
-import { ExpenseClaimQuery } from '../../shared/generated-types';
+import { ExpenseClaim } from '../../shared/generated-types';
 
 export interface ExpenseClaimResolve {
-    model: ExpenseClaimQuery['expenseClaim'];
+    model: ExpenseClaim['expenseClaim'];
 }

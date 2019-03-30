@@ -1,5 +1,5 @@
-import { UserTagQuery } from '../../shared/generated-types';
+import { UserTag } from '../../shared/generated-types';
 
 export interface UserTagResolve {
-    model: UserTagQuery['userTag'];
+    model: UserTag['userTag'];
 }

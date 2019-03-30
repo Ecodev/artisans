@@ -4,7 +4,7 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { AbstractList } from '../../shared/components/AbstractList';
-import { BookablesQuery, BookablesQueryVariables } from '../../../shared/generated-types';
+import { Bookables, BookablesVariables } from '../../../shared/generated-types';
 import { BookableService } from '../services/bookable.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 
@@ -13,7 +13,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     templateUrl: './bookables.component.html',
     styleUrls: ['./bookables.component.scss'],
 })
-export class BookablesComponent extends AbstractList<BookablesQuery['bookables'], BookablesQueryVariables> implements OnInit {
+export class BookablesComponent extends AbstractList<Bookables['bookables'], BookablesVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,

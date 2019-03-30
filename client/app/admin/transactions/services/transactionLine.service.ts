@@ -4,11 +4,11 @@ import { AbstractModelService, FormValidators } from '../../../shared/services/a
 import { transactionLineQuery, transactionLinesQuery } from './transactionLine.queries';
 import {
     TransactionLineInput,
-    TransactionLineQuery,
-    TransactionLineQueryVariables,
-    TransactionLinesQuery,
-    TransactionLinesQueryVariables,
-    UserQuery,
+    TransactionLine,
+    TransactionLineVariables,
+    TransactionLines,
+    TransactionLinesVariables,
+    User,
 } from '../../../shared/generated-types';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
@@ -28,10 +28,10 @@ function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
 @Injectable({
     providedIn: 'root',
 })
-export class TransactionLineService extends AbstractModelService<TransactionLineQuery['transactionLine'],
-    TransactionLineQueryVariables,
-    TransactionLinesQuery['transactionLines'],
-    TransactionLinesQueryVariables,
+export class TransactionLineService extends AbstractModelService<TransactionLine['transactionLine'],
+    TransactionLineVariables,
+    TransactionLines['transactionLines'],
+    TransactionLinesVariables,
     null,
     any,
     null,
@@ -76,12 +76,12 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
         return [atLeastOneAccount];
     }
 
-    public getForUser(user: UserQuery['user']) {
-        const variables: TransactionLinesQueryVariables = {
+    public getForUser(user: User['user']) {
+        const variables: TransactionLinesVariables = {
             filter: {groups: [{conditions: [{owner: {in: {values: [user.id]}}}]}]},
         };
 
-        const qvm = new QueryVariablesManager<TransactionLinesQueryVariables>();
+        const qvm = new QueryVariablesManager<TransactionLinesVariables>();
         qvm.set('variables', variables);
         return this.watchAll(qvm, true);
     }

@@ -9,7 +9,8 @@
         "test": "yarn codegen && ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "codegen": "./bin/dump-schema && apollo-codegen generate 'client/**/*.ts' --schema data/tmp/schema/schema.json --target typescript --output client/app/shared/generated-types.ts"
+        "codegen1": "./bin/dump-schema && apollo-codegen generate 'client/**/*.ts' --schema data/tmp/schema/schema.json --target typescript --output client/app/shared/generated-types.ts",
+        "codegen": "./bin/dump-schema && apollo client:codegen -c apollo.config.js  --outputFlat --target typescript client/app/shared/generated-types.ts"
     },
     "lint-staged": {
         "client/**/*.ts": [
@@ -33,12 +34,12 @@
         "@ecodev/natural-search": "^0.1.0",
         "@ngx-progressbar/core": "^5.2.1",
         "angular-file": "^0.5.9",
+        "apollo": "^2.6.2",
         "apollo-angular": "^1.5.0",
         "apollo-angular-link-http": "^1.4.0",
         "apollo-angular-link-http-batch": "^1.4.0",
         "apollo-cache-inmemory": "^1.3.11",
         "apollo-client": "^2.4.7",
-        "apollo-codegen": "^0.19.1",
         "apollo-link": "^1.2.4",
         "apollo-link-error": "^1.1.2",
         "apollo-link-schema": "^1.1.2",

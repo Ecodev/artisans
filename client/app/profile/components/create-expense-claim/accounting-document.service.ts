@@ -6,8 +6,8 @@ import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
 import {
     AccountingDocumentInput,
-    CreateAccountingDocumentMutation,
-    CreateAccountingDocumentMutationVariables,
+    CreateAccountingDocument,
+    CreateAccountingDocumentVariables,
 } from '../../../shared/generated-types';
 
 export const createAccountingDocumentMutation = gql`
@@ -29,8 +29,8 @@ export class AccountingDocumentService extends AbstractModelService<any,
     any,
     any,
     any,
-    CreateAccountingDocumentMutation['createAccountingDocument'],
-    CreateAccountingDocumentMutationVariables,
+    CreateAccountingDocument['createAccountingDocument'],
+    CreateAccountingDocumentVariables,
     any,
     any,
     any> {

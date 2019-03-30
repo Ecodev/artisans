@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { BookableQuery, BookingStatus } from '../../../shared/generated-types';
+import { Bookable, BookingStatus } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 
@@ -13,7 +13,7 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 })
 export class SelfApprovedBookingComponent implements OnInit {
 
-    public bookable: BookableQuery['bookable'];
+    public bookable: Bookable['bookable'];
     public booking;
 
     constructor(private route: ActivatedRoute,

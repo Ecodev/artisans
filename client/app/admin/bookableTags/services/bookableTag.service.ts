@@ -4,34 +4,34 @@ import { AbstractModelService, FormValidators } from '../../../shared/services/a
 import {
     bookableTagQuery,
     bookableTagsQuery,
-    createBookableTagMutation,
-    deleteBookableTagsMutation,
-    updateBookableTagMutation,
+    createBookableTag,
+    deleteBookableTags,
+    updateBookableTag,
 } from './bookableTag.queries';
 import {
     BookableTagInput,
-    BookableTagQuery,
-    BookableTagQueryVariables,
-    BookableTagsQuery,
-    BookableTagsQueryVariables,
-    CreateBookableTagMutation,
-    CreateBookableTagMutationVariables,
-    UpdateBookableTagMutation,
-    UpdateBookableTagMutationVariables,
+    BookableTag,
+    BookableTagVariables,
+    BookableTags,
+    BookableTagsVariables,
+    CreateBookableTag,
+    CreateBookableTagVariables,
+    UpdateBookableTag,
+    UpdateBookableTagVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
 })
-export class BookableTagService extends AbstractModelService<BookableTagQuery['bookableTag'],
-    BookableTagQueryVariables,
-    BookableTagsQuery['bookableTags'],
-    BookableTagsQueryVariables,
-    CreateBookableTagMutation['createBookableTag'],
-    CreateBookableTagMutationVariables,
-    UpdateBookableTagMutation['updateBookableTag'],
-    UpdateBookableTagMutationVariables,
+export class BookableTagService extends AbstractModelService<BookableTag['bookableTag'],
+    BookableTagVariables,
+    BookableTags['bookableTags'],
+    BookableTagsVariables,
+    CreateBookableTag['createBookableTag'],
+    CreateBookableTagVariables,
+    UpdateBookableTag['updateBookableTag'],
+    UpdateBookableTagVariables,
     any> {
 
     constructor(apollo: Apollo) {
@@ -39,9 +39,9 @@ export class BookableTagService extends AbstractModelService<BookableTagQuery['b
             'bookableTag',
             bookableTagQuery,
             bookableTagsQuery,
-            createBookableTagMutation,
-            updateBookableTagMutation,
-            deleteBookableTagsMutation);
+            createBookableTag,
+            updateBookableTag,
+            deleteBookableTags);
     }
 
     public getEmptyObject(): BookableTagInput {

@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
-    createTransactionMutation,
-    deleteTransactionsMutation,
+    createTransaction,
+    deleteTransactions,
     transactionQuery,
     transactionsQuery,
-    updateTransactionMutation,
+    updateTransaction,
 } from './transaction.queries';
 import {
-    CreateTransactionMutation,
-    CreateTransactionMutationVariables, DeleteTransactionsMutation,
+    CreateTransaction,
+    CreateTransactionVariables, DeleteTransactions,
     TransactionInput,
-    TransactionQuery,
-    TransactionQueryVariables,
-    TransactionsQuery,
-    TransactionsQueryVariables,
-    UpdateTransactionMutation,
-    UpdateTransactionMutationVariables,
+    Transaction,
+    TransactionVariables,
+    Transactions,
+    TransactionsVariables,
+    UpdateTransaction,
+    UpdateTransactionVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
@@ -25,24 +25,24 @@ import { Literal } from '../../../shared/types';
 @Injectable({
     providedIn: 'root',
 })
-export class TransactionService extends AbstractModelService<TransactionQuery['transaction'],
-    TransactionQueryVariables,
-    TransactionsQuery['transactions'],
-    TransactionsQueryVariables,
-    CreateTransactionMutation['createTransaction'],
-    CreateTransactionMutationVariables,
-    UpdateTransactionMutation['updateTransaction'],
-    UpdateTransactionMutationVariables,
-    DeleteTransactionsMutation> {
+export class TransactionService extends AbstractModelService<Transaction['transaction'],
+    TransactionVariables,
+    Transactions['transactions'],
+    TransactionsVariables,
+    CreateTransaction['createTransaction'],
+    CreateTransactionVariables,
+    UpdateTransaction['updateTransaction'],
+    UpdateTransactionVariables,
+    DeleteTransactions> {
 
     constructor(apollo: Apollo) {
         super(apollo,
             'transaction',
             transactionQuery,
             transactionsQuery,
-            createTransactionMutation,
-            updateTransactionMutation,
-            deleteTransactionsMutation);
+            createTransaction,
+            updateTransaction,
+            deleteTransactions);
     }
 
     public getEmptyObject(): TransactionInput {

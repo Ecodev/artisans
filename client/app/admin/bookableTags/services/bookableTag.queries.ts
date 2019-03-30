@@ -34,7 +34,7 @@ export const bookableTagQuery = gql`
     }
 ${userMetaFragment}`;
 
-export const createBookableTagMutation = gql`
+export const createBookableTag = gql`
     mutation CreateBookableTag($input: BookableTagInput!) {
         createBookableTag(input: $input) {
             id
@@ -46,7 +46,7 @@ export const createBookableTagMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateBookableTagMutation = gql`
+export const updateBookableTag = gql`
     mutation UpdateBookableTag($id: BookableTagID!, $input: BookableTagPartialInput!) {
         updateBookableTag(id:$id, input:$input) {
             id
@@ -59,7 +59,7 @@ export const updateBookableTagMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteBookableTagsMutation = gql`
+export const deleteBookableTags = gql`
     mutation DeleteBookableTags ($ids: [BookableTagID!]!){
         deleteBookableTags(ids: $ids)
     }`;

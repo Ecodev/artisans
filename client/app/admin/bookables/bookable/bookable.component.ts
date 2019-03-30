@@ -4,14 +4,14 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
-    BookableQuery,
-    BookableQueryVariables,
+    Bookable,
+    BookableVariables,
     BookingType,
-    CreateBookableMutation,
-    CreateBookableMutationVariables,
-    CreateImageMutation,
-    UpdateBookableMutation,
-    UpdateBookableMutationVariables,
+    CreateBookable,
+    CreateBookableVariables,
+    CreateImage,
+    UpdateBookable,
+    UpdateBookableVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
@@ -23,12 +23,12 @@ import { ImageService } from '../services/image.service';
     styleUrls: ['./bookable.component.scss'],
 })
 export class BookableComponent
-    extends AbstractDetail<BookableQuery['bookable'],
-        BookableQueryVariables,
-        CreateBookableMutation['createBookable'],
-        CreateBookableMutationVariables,
-        UpdateBookableMutation['updateBookable'],
-        UpdateBookableMutationVariables,
+    extends AbstractDetail<Bookable['bookable'],
+        BookableVariables,
+        CreateBookable['createBookable'],
+        CreateBookableVariables,
+        UpdateBookable['updateBookable'],
+        UpdateBookableVariables,
         any> implements OnInit {
 
     constructor(alertService: AlertService,
@@ -66,7 +66,7 @@ export class BookableComponent
         return this.data.model.bookingType !== BookingType.self_approved;
     }
 
-    public newImage(image: CreateImageMutation['createImage']) {
+    public newImage(image: CreateImage['createImage']) {
 
         const imageField = this.form.get('image');
         if (imageField) {

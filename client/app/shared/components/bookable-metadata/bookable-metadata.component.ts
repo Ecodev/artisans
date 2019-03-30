@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AppDataSource } from '../../services/data.source';
 import { BookableMetadataService } from './bookable-metadata.service';
 import { QueryVariablesManager } from '../../classes/query-variables-manager';
-import { BookableMetadatasQueryVariables } from '../../generated-types';
+import { BookableMetadatasVariables } from '../../generated-types';
 
 @Component({
     selector: 'app-bookable-metadata',
@@ -30,11 +30,11 @@ export class BookableMetadataComponent implements OnInit {
         }
 
         if (this.bookable) {
-            const variables: BookableMetadatasQueryVariables = {
+            const variables: BookableMetadatasVariables = {
                 filter: {groups: [{conditions: [{bookable: {equal: {value: this.bookable.id}}}]}]},
             };
 
-            const qvm = new QueryVariablesManager<BookableMetadatasQueryVariables>();
+            const qvm = new QueryVariablesManager<BookableMetadatasVariables>();
             qvm.set('variables', variables);
 
             this.bookableMetaService.getAll(qvm).subscribe(bookables => {

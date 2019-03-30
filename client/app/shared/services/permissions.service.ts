@@ -4,10 +4,10 @@ import { debounceTime, distinctUntilChanged, filter, skip, take } from 'rxjs/ope
 import { isEqual } from 'lodash';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { Apollo } from 'apollo-angular';
-import { PermissionsQuery } from '../generated-types';
+import { Permissions, Permissions_permissions, Permissions_permissions_crud } from '../generated-types';
 import { Literal } from '../types';
 
-const permissionsQuery = gql`
+const permissions = gql`
     query Permissions {
         permissions {
             crud {
@@ -35,8 +35,6 @@ interface Contexts {
     user: string | null;
 }
 
-export type Permissions = PermissionsQuery['permissions'];
-
 /**
  * A service to fetch permissions and use them in templates.
  *
@@ -50,13 +48,13 @@ export class PermissionsService {
     /**
      * CRUD permissions, usually for object creations
      */
-    public crud: Permissions['crud'] | null = null;
+    public crud: Permissions_permissions_crud | null = null;
 
     /**
      * Observable of changed permissions. Here we use a ReplaySubject so that new subscriber will get
      * the most recent available permissions (useful in route guard)
      */
-    public changes = new ReplaySubject<Permissions>(1);
+    public changes = new ReplaySubject<Permissions_permissions>(1);
 
     private readonly currentContexts = new BehaviorSubject<Contexts>({
         user: null,
@@ -66,8 +64,8 @@ export class PermissionsService {
         // Query the API when our variables changed
         this.currentContexts.pipe(distinctUntilChanged(isEqual), debounceTime(5)).subscribe(contexts => {
             // Fetch global permissions
-            apollo.query<PermissionsQuery>({
-                query: permissionsQuery,
+            apollo.query<Permissions>({
+                query: permissions,
             }).pipe(filter(result => !result.loading)).subscribe(result => {
                 this.crud = result.data.permissions.crud;
                 this.changes.next(result.data.permissions);
@@ -75,13 +73,17 @@ export class PermissionsService {
         });
     }
 
-
     /**
      * Return an observable that will complete as soon as the next permissions are available
      */
-    private setNewContexts(newContexts: Contexts): Observable<Permissions> {
+    private setNewContexts(newContexts: Contexts): Observable<Permissions_permissions> {
         if (isEqual(this.currentContexts.value, newContexts) && this.crud) {
-            return of({crud: this.crud});
+            return of({
+                // This weird casting should not be necessary anymore when we will be using
+                // https://github.com/Microsoft/TypeScript/commit/607f2ea4dedae723e5fa840e64ce4a3231c05e9a
+                __typename: 'AllPermissions' as 'AllPermissions',
+                crud: this.crud,
+            });
         } else {
             this.currentContexts.next(newContexts);
 
@@ -89,7 +91,7 @@ export class PermissionsService {
         }
     }
 
-    public setUser(user: Literal | null): Observable<Permissions> {
+    public setUser(user: Literal | null): Observable<Permissions_permissions> {
         const newContexts = {
             user: user ? user.id : null,
         };

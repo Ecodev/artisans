@@ -12,8 +12,8 @@ import { Observable, of, Subject } from 'rxjs';
 // }
 //
 // type FileType =
-//     BookableQuery['bookable']['image'] |
-//     ExpenseClaimQuery['expenseClaim']['accountingDocuments'][0] |
+//     Bookable['bookable']['image'] |
+//     ExpenseClaim['expenseClaim']['accountingDocuments'][0] |
 //     AppUrlFileType;
 
 @Component({

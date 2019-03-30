@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
-import { AccountsQuery, AccountsQueryVariables } from '../../../shared/generated-types';
+import { Accounts, AccountsVariables } from '../../../shared/generated-types';
 import { AccountService } from '../services/account.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { AbstractNavigableList } from '../../shared/components/AbstractNavigableList';
@@ -13,7 +13,7 @@ import { AbstractNavigableList } from '../../shared/components/AbstractNavigable
     templateUrl: './accounts.component.html',
     styleUrls: ['./accounts.component.scss'],
 })
-export class AccountsComponent extends AbstractNavigableList<AccountsQuery['accounts'], AccountsQueryVariables> implements OnInit {
+export class AccountsComponent extends AbstractNavigableList<Accounts['accounts'], AccountsVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,

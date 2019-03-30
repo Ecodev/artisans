@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
-    BookableTagQuery,
-    BookableTagQueryVariables,
-    CreateBookableTagMutation,
-    CreateBookableTagMutationVariables,
-    DeleteBookableTagsMutation,
-    UpdateBookableTagMutation,
-    UpdateBookableTagMutationVariables,
+    BookableTag,
+    BookableTagVariables,
+    CreateBookableTag,
+    CreateBookableTagVariables,
+    DeleteBookableTags,
+    UpdateBookableTag,
+    UpdateBookableTagVariables,
 } from '../../../shared/generated-types';
 import { BookableTagService } from '../services/bookableTag.service';
 
@@ -19,13 +19,13 @@ import { BookableTagService } from '../services/bookableTag.service';
     styleUrls: ['./bookableTag.component.scss'],
 })
 export class BookableTagComponent
-    extends AbstractDetail<BookableTagQuery['bookableTag'],
-        BookableTagQueryVariables,
-        CreateBookableTagMutation['createBookableTag'],
-        CreateBookableTagMutationVariables,
-        UpdateBookableTagMutation['updateBookableTag'],
-        UpdateBookableTagMutationVariables,
-        DeleteBookableTagsMutation> {
+    extends AbstractDetail<BookableTag['bookableTag'],
+        BookableTagVariables,
+        CreateBookableTag['createBookableTag'],
+        CreateBookableTagVariables,
+        UpdateBookableTag['updateBookableTag'],
+        UpdateBookableTagVariables,
+        DeleteBookableTags> {
 
     constructor(alertService: AlertService,
                 bookableTagService: BookableTagService,

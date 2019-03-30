@@ -4,7 +4,7 @@ import { AbstractModelService } from '../../../shared/services/abstract-model.se
 
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
-import { CreateImageMutation, CreateImageMutationVariables, ImageInput } from '../../../shared/generated-types';
+import { CreateImage, CreateImageVariables, ImageInput } from '../../../shared/generated-types';
 
 export const createImageMutation = gql`
     mutation CreateImage($input: ImageInput!) {
@@ -25,8 +25,8 @@ export class ImageService extends AbstractModelService<any,
     any,
     any,
     any,
-    CreateImageMutation['createImage'],
-    CreateImageMutationVariables,
+    CreateImage['createImage'],
+    CreateImageVariables,
     any,
     any,
     any> {

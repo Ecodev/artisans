@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractList } from '../../shared/components/AbstractList';
-import { BookingsQuery, BookingsQueryVariables } from '../../../shared/generated-types';
+import { Bookings, BookingsVariables } from '../../../shared/generated-types';
 import { BookingService } from '../services/booking.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
@@ -13,7 +13,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     templateUrl: './bookings.component.html',
     styleUrls: ['./bookings.component.scss'],
 })
-export class BookingsComponent extends AbstractList<BookingsQuery['bookings'], BookingsQueryVariables> implements OnInit {
+export class BookingsComponent extends AbstractList<Bookings['bookings'], BookingsVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,

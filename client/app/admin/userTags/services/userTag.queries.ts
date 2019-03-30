@@ -34,7 +34,7 @@ export const userTagQuery = gql`
     }
 ${userMetaFragment}`;
 
-export const createUserTagMutation = gql`
+export const createUserTag = gql`
     mutation CreateUserTag($input: UserTagInput!) {
         createUserTag(input: $input) {
             id
@@ -46,7 +46,7 @@ export const createUserTagMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateUserTagMutation = gql`
+export const updateUserTag = gql`
     mutation UpdateUserTag($id: UserTagID!, $input: UserTagPartialInput!) {
         updateUserTag(id:$id, input:$input) {
             id
@@ -59,7 +59,7 @@ export const updateUserTagMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteUserTagsMutation = gql`
+export const deleteUserTags = gql`
     mutation DeleteUserTags ($ids: [UserTagID!]!){
         deleteUserTags(ids: $ids)
     }`;

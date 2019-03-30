@@ -3,16 +3,16 @@ import { Apollo } from 'apollo-angular';
 
 import { countriesQuery, countryQuery } from './country.queries';
 import { AbstractModelService } from '../../services/abstract-model.service';
-import { CountriesQuery, CountriesQueryVariables, CountryQuery, CountryQueryVariables } from '../../generated-types';
+import { Countries, CountriesVariables, Country, CountryVariables } from '../../generated-types';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CountryService
-    extends AbstractModelService<CountryQuery['country'],
-        CountryQueryVariables,
-        CountriesQuery['countries'],
-        CountriesQueryVariables,
+    extends AbstractModelService<Country['country'],
+        CountryVariables,
+        Countries['countries'],
+        CountriesVariables,
         null,
         { input: {} },
         null,

@@ -1,5 +1,5 @@
-import { BookableTagQuery } from '../../shared/generated-types';
+import { BookableTag } from '../../shared/generated-types';
 
 export interface BookableTagResolve {
-    model: BookableTagQuery['bookableTag'];
+    model: BookableTag['bookableTag'];
 }

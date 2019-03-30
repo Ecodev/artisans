@@ -33,7 +33,7 @@ export const updateBookableMetadataMutation = gql`
     }
 `;
 
-export const deleteBookableMetadatasMutation = gql`
+export const deleteBookableMetadatas = gql`
     mutation DeleteBookableMetadatas ($ids: [BookableMetadataID!]!){
         deleteBookableMetadatas(ids: $ids)
     }

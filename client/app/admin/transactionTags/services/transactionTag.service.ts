@@ -4,34 +4,34 @@ import { AbstractModelService, FormValidators } from '../../../shared/services/a
 import {
     transactionTagsQuery,
     transactionTagQuery,
-    createTransactionTagMutation,
-    deleteTransactionTagsMutation,
-    updateTransactionTagMutation,
+    createTransactionTag,
+    deleteTransactionTags,
+    updateTransactionTag,
 } from './transactionTag.queries';
 import {
-    TransactionTagsQuery,
-    TransactionTagsQueryVariables,
+    TransactionTags,
+    TransactionTagsVariables,
     TransactionTagInput,
-    TransactionTagQuery,
-    TransactionTagQueryVariables,
-    CreateTransactionTagMutation,
-    CreateTransactionTagMutationVariables,
-    UpdateTransactionTagMutation,
-    UpdateTransactionTagMutationVariables,
+    TransactionTag,
+    TransactionTagVariables,
+    CreateTransactionTag,
+    CreateTransactionTagVariables,
+    UpdateTransactionTag,
+    UpdateTransactionTagVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
 })
-export class TransactionTagService extends AbstractModelService<TransactionTagQuery['transactionTag'],
-    TransactionTagQueryVariables,
-    TransactionTagsQuery['transactionTags'],
-    TransactionTagsQueryVariables,
-    CreateTransactionTagMutation['createTransactionTag'],
-    CreateTransactionTagMutationVariables,
-    UpdateTransactionTagMutation['updateTransactionTag'],
-    UpdateTransactionTagMutationVariables,
+export class TransactionTagService extends AbstractModelService<TransactionTag['transactionTag'],
+    TransactionTagVariables,
+    TransactionTags['transactionTags'],
+    TransactionTagsVariables,
+    CreateTransactionTag['createTransactionTag'],
+    CreateTransactionTagVariables,
+    UpdateTransactionTag['updateTransactionTag'],
+    UpdateTransactionTagVariables,
     any> {
 
     constructor(apollo: Apollo) {
@@ -39,9 +39,9 @@ export class TransactionTagService extends AbstractModelService<TransactionTagQu
             'transactionTag',
             transactionTagQuery,
             transactionTagsQuery,
-            createTransactionTagMutation,
-            updateTransactionTagMutation,
-            deleteTransactionTagsMutation);
+            createTransactionTag,
+            updateTransactionTag,
+            deleteTransactionTags);
     }
 
     public getEmptyObject(): TransactionTagInput {

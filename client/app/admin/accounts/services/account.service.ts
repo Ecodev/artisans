@@ -4,46 +4,46 @@ import { AbstractModelService, FormValidators } from '../../../shared/services/a
 import {
     accountQuery,
     accountsQuery,
-    createAccountMutation,
-    deleteAccountsMutation,
-    updateAccountMutation,
+    createAccount,
+    deleteAccounts,
+    updateAccount,
 } from './account.queries';
 import {
     AccountInput,
-    AccountQuery,
-    AccountQueryVariables,
-    AccountsQuery,
-    AccountsQueryVariables,
+    Account,
+    AccountVariables,
+    Accounts,
+    AccountsVariables,
     AccountType,
-    CreateAccountMutation,
-    CreateAccountMutationVariables,
-    DeleteAccountsMutation,
-    UpdateAccountMutation,
-    UpdateAccountMutationVariables,
+    CreateAccount,
+    CreateAccountVariables,
+    DeleteAccounts,
+    UpdateAccount,
+    UpdateAccountVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AccountService extends AbstractModelService<AccountQuery['account'],
-    AccountQueryVariables,
-    AccountsQuery['accounts'],
-    AccountsQueryVariables,
-    CreateAccountMutation['createAccount'],
-    CreateAccountMutationVariables,
-    UpdateAccountMutation['updateAccount'],
-    UpdateAccountMutationVariables,
-    DeleteAccountsMutation> {
+export class AccountService extends AbstractModelService<Account['account'],
+    AccountVariables,
+    Accounts['accounts'],
+    AccountsVariables,
+    CreateAccount['createAccount'],
+    CreateAccountVariables,
+    UpdateAccount['updateAccount'],
+    UpdateAccountVariables,
+    DeleteAccounts> {
 
     constructor(apollo: Apollo) {
         super(apollo,
             'account',
             accountQuery,
             accountsQuery,
-            createAccountMutation,
-            updateAccountMutation,
-            deleteAccountsMutation);
+            createAccount,
+            updateAccount,
+            deleteAccounts);
     }
 
     public getEmptyObject(): AccountInput {

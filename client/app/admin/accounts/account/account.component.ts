@@ -4,12 +4,12 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { AccountService } from '../services/account.service';
 import {
-    AccountQuery,
-    AccountQueryVariables,
-    CreateAccountMutation,
-    CreateAccountMutationVariables,
-    UpdateAccountMutation,
-    UpdateAccountMutationVariables,
+    Account,
+    AccountVariables,
+    CreateAccount,
+    CreateAccountVariables,
+    UpdateAccount,
+    UpdateAccountVariables,
 } from '../../../shared/generated-types';
 import { UserService } from '../../users/services/user.service';
 
@@ -19,12 +19,12 @@ import { UserService } from '../../users/services/user.service';
     styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent
-    extends AbstractDetail<AccountQuery['account'],
-        AccountQueryVariables,
-        CreateAccountMutation['createAccount'],
-        CreateAccountMutationVariables,
-        UpdateAccountMutation['updateAccount'],
-        UpdateAccountMutationVariables,
+    extends AbstractDetail<Account['account'],
+        AccountVariables,
+        CreateAccount['createAccount'],
+        CreateAccountVariables,
+        UpdateAccount['updateAccount'],
+        UpdateAccountVariables,
         any> {
 
     constructor(alertService: AlertService,

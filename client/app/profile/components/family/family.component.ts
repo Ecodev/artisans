@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LogicalOperator, UsersQueryVariables } from '../../../shared/generated-types';
+import { LogicalOperator, UsersVariables } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { PermissionsService } from '../../../shared/services/permissions.service';
@@ -30,8 +30,8 @@ export class FamilyComponent implements OnInit {
         this.user = this.route.snapshot.data.user.model;
 
         if (this.user) {
-            const variables = new QueryVariablesManager<UsersQueryVariables>();
-            const filters: UsersQueryVariables = {
+            const variables = new QueryVariablesManager<UsersVariables>();
+            const filters: UsersVariables = {
                 filter: {
                     groups: [
                         {

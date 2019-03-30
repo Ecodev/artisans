@@ -4,14 +4,14 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { BookingService } from '../services/booking.service';
 import {
-    BookingQuery,
-    BookingQueryVariables,
+    Booking,
+    BookingVariables,
     BookingStatus,
     BookingType,
-    CreateBookingMutation,
-    CreateBookingMutationVariables,
-    UpdateBookingMutation,
-    UpdateBookingMutationVariables,
+    CreateBooking,
+    CreateBookingVariables,
+    UpdateBooking,
+    UpdateBookingVariables,
 } from '../../../shared/generated-types';
 import { UserService } from '../../users/services/user.service';
 import { BookableService } from '../../bookables/services/bookable.service';
@@ -22,12 +22,12 @@ import { BookableService } from '../../bookables/services/bookable.service';
     styleUrls: ['./booking.component.scss'],
 })
 export class BookingComponent
-    extends AbstractDetail<BookingQuery['booking'],
-        BookingQueryVariables,
-        CreateBookingMutation['createBooking'],
-        CreateBookingMutationVariables,
-        UpdateBookingMutation['updateBooking'],
-        UpdateBookingMutationVariables,
+    extends AbstractDetail<Booking['booking'],
+        BookingVariables,
+        CreateBooking['createBooking'],
+        CreateBookingVariables,
+        UpdateBooking['updateBooking'],
+        UpdateBookingVariables,
         any> implements OnInit {
 
     public bookable;

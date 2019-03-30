@@ -7,12 +7,12 @@ import {
     BookingFilter,
     BookingStatus,
     BookingType,
-    CreateUserMutation,
-    CreateUserMutationVariables,
-    UpdateUserMutation,
-    UpdateUserMutationVariables,
-    UserQuery,
-    UserQueryVariables,
+    CreateUser,
+    CreateUserVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    User,
+    UserVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
@@ -25,12 +25,12 @@ import { AccountService } from '../../accounts/services/account.service';
     styleUrls: ['./user.component.scss'],
 })
 export class UserComponent
-    extends AbstractDetail<UserQuery['user'],
-        UserQueryVariables,
-        CreateUserMutation['createUser'],
-        CreateUserMutationVariables,
-        UpdateUserMutation['updateUser'],
-        UpdateUserMutationVariables,
+    extends AbstractDetail<User['user'],
+        UserVariables,
+        CreateUser['createUser'],
+        CreateUserVariables,
+        UpdateUser['updateUser'],
+        UpdateUserVariables,
         any> implements OnInit {
 
     public runningSelfApproved;

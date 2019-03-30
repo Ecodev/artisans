@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
-    CreateLicenseMutation,
-    CreateLicenseMutationVariables,
-    DeleteLicensesMutation,
-    LicenseQuery,
-    LicenseQueryVariables,
-    UpdateLicenseMutation,
-    UpdateLicenseMutationVariables,
+    CreateLicense,
+    CreateLicenseVariables,
+    DeleteLicenses,
+    License,
+    LicenseVariables,
+    UpdateLicense,
+    UpdateLicenseVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../services/license.service';
 import { BookableService } from '../../bookables/services/bookable.service';
@@ -21,13 +21,13 @@ import { UserService } from '../../users/services/user.service';
     styleUrls: ['./license.component.scss'],
 })
 export class LicenseComponent
-    extends AbstractDetail<LicenseQuery['license'],
-        LicenseQueryVariables,
-        CreateLicenseMutation['createLicense'],
-        CreateLicenseMutationVariables,
-        UpdateLicenseMutation['updateLicense'],
-        UpdateLicenseMutationVariables,
-        DeleteLicensesMutation> {
+    extends AbstractDetail<License['license'],
+        LicenseVariables,
+        CreateLicense['createLicense'],
+        CreateLicenseVariables,
+        UpdateLicense['updateLicense'],
+        UpdateLicenseVariables,
+        DeleteLicenses> {
 
     constructor(alertService: AlertService,
                 licenseService: LicenseService,

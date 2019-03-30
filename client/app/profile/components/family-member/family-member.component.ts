@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
-    CreateUserMutation,
-    CreateUserMutationVariables,
-    UpdateUserMutation,
-    UpdateUserMutationVariables,
-    UserQuery,
-    UserQueryVariables,
+    CreateUser,
+    CreateUserVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    User,
+    UserVariables,
 } from '../../../shared/generated-types';
 import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
@@ -19,15 +19,15 @@ import { FamilyUserService } from './family-user.service';
     styleUrls: ['./family-member.component.scss'],
 })
 export class FamilyMemberComponent
-    extends AbstractDetail<UserQuery['user'],
-        UserQueryVariables,
-        CreateUserMutation['createUser'],
-        CreateUserMutationVariables,
-        UpdateUserMutation['updateUser'],
-        UpdateUserMutationVariables,
+    extends AbstractDetail<User['user'],
+        UserVariables,
+        CreateUser['createUser'],
+        CreateUserVariables,
+        UpdateUser['updateUser'],
+        UpdateUserVariables,
         any> implements OnInit {
 
-    @Input() user: UserQuery['user'];
+    @Input() user: User['user'];
 
     constructor(alertService: AlertService,
                 private userService: FamilyUserService,

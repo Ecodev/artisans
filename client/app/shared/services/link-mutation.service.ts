@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { MutationsQuery } from '../generated-types';
+import { Mutations } from '../generated-types';
 import { FetchResult } from 'apollo-link';
 import { Literal } from '../types';
 import { clone } from 'lodash';
@@ -118,7 +118,7 @@ export class LinkMutationService {
             };
         };
 
-        return this.apollo.query<MutationsQuery>({
+        return this.apollo.query<Mutations>({
             query: this.queriesQuery,
             fetchPolicy: 'cache-first',
         }).pipe(map(({data}) => {

@@ -4,7 +4,7 @@ import { BookableService } from '../../admin/bookables/services/bookable.service
 import { BookingService } from '../../admin/bookings/services/booking.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { AbstractController } from '../../shared/components/AbstractController';
-import { BookingsQuery } from '../../shared/generated-types';
+import { Bookings } from '../../shared/generated-types';
 
 @Component({
     selector: 'app-bookable',
@@ -16,7 +16,7 @@ export class BookableComponent extends AbstractController implements OnInit {
     public hasLicense: boolean;
     public isAvailable: boolean;
     public canAccessAdmin: boolean;
-    public runningBooking: BookingsQuery['bookings']['items'][0] | null;
+    public runningBooking: Bookings['bookings']['items'][0] | null;
 
     public bookable;
 

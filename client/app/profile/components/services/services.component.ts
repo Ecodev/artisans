@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
-import { BookingsQuery, BookingType } from '../../../shared/generated-types';
+import { Bookings, BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
@@ -21,8 +21,8 @@ export class ServicesComponent implements OnInit, OnDestroy {
     public runningServicesDS: AppDataSource;
     public pendingApplicationsDS: AppDataSource;
 
-    public runningServices: AutoRefetchQueryRef<BookingsQuery['bookings']>;
-    public pendingApplications: AutoRefetchQueryRef<BookingsQuery['bookings']>;
+    public runningServices: AutoRefetchQueryRef<Bookings['bookings']>;
+    public pendingApplications: AutoRefetchQueryRef<Bookings['bookings']>;
 
     public servicesColumns = ['name', 'periodicPrice', 'revoke'];
     public applicationsColumns = ['name', 'status', 'initialPrice', 'periodicPrice', 'cancel'];

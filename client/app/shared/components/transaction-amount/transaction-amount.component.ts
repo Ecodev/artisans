@@ -1,5 +1,5 @@
 import { Component, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
-import { AccountQuery, AccountType, TransactionLineQuery } from '../../generated-types';
+import { Account, AccountType, TransactionLine } from '../../generated-types';
 
 @Component({
     selector: 'app-transaction-amount',
@@ -8,12 +8,12 @@ import { AccountQuery, AccountType, TransactionLineQuery } from '../../generated
 })
 export class TransactionAmountComponent implements OnInit, OnChanges {
 
-    @Input() transactionLine: TransactionLineQuery['transactionLine'];
+    @Input() transactionLine: TransactionLine['transactionLine'];
 
     /**
      * Account we want to see the amount relative to
      */
-    @Input() relativeToAccount: AccountQuery['account'];
+    @Input() relativeToAccount: Account['account'];
     @Input() displayMode: 'amount' | 'account' = 'amount';
 
     public isIncome: boolean | null = null;

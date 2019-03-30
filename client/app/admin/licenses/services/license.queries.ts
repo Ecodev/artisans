@@ -32,7 +32,7 @@ export const licenseQuery = gql`
     }
 ${userMetaFragment}`;
 
-export const createLicenseMutation = gql`
+export const createLicense = gql`
     mutation CreateLicense($input: LicenseInput!) {
         createLicense(input: $input) {
             id
@@ -44,7 +44,7 @@ export const createLicenseMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateLicenseMutation = gql`
+export const updateLicense = gql`
     mutation UpdateLicense($id: LicenseID!, $input: LicensePartialInput!) {
         updateLicense(id:$id, input:$input) {
             id
@@ -57,7 +57,7 @@ export const updateLicenseMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteLicensesMutation = gql`
+export const deleteLicenses = gql`
     mutation DeleteLicenses ($ids: [LicenseID!]!){
         deleteLicenses(ids: $ids)
     }`;

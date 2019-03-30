@@ -1,5 +1,5 @@
-import { UserQuery } from '../../shared/generated-types';
+import { User } from '../../shared/generated-types';
 
 export interface UserResolve {
-    model: UserQuery['user'];
+    model: User['user'];
 }

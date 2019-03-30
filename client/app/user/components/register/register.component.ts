@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
 import {
-    CreateUserMutation,
-    CreateUserMutationVariables,
-    UpdateUserMutation,
-    UpdateUserMutationVariables,
-    UserQuery,
-    UserQueryVariables,
+    CreateUser,
+    CreateUserVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    User,
+    UserVariables,
 } from '../../../shared/generated-types';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,12 +22,12 @@ import { pick } from 'lodash';
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent extends AbstractDetail<UserQuery['user'],
-    UserQueryVariables,
-    CreateUserMutation['createUser'],
-    CreateUserMutationVariables,
-    UpdateUserMutation['updateUser'],
-    UpdateUserMutationVariables,
+export class RegisterComponent extends AbstractDetail<User['user'],
+    UserVariables,
+    CreateUser['createUser'],
+    CreateUserVariables,
+    UpdateUser['updateUser'],
+    UpdateUserVariables,
     any> implements OnInit {
 
     private mandatoryBookables: AppDataSource;

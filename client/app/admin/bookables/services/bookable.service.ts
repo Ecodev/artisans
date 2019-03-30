@@ -4,28 +4,28 @@ import { AbstractModelService, FormValidators } from '../../../shared/services/a
 import {
     bookableQuery,
     bookablesQuery,
-    createBookableMutation,
-    deleteBookablesMutation,
-    updateBookableMutation,
+    createBookable,
+    deleteBookables,
+    updateBookable,
 } from './bookable.queries';
 import {
     BookableInput,
-    BookableQuery,
-    BookableQueryVariables,
-    BookablesQuery,
-    BookablesQueryVariables,
+    Bookable,
+    BookableVariables,
+    Bookables,
+    BookablesVariables,
     BookableState,
-    BookingsQuery,
-    BookingsQueryVariables,
+    Bookings,
+    BookingsVariables,
     BookingType,
-    CreateBookableMutation,
-    CreateBookableMutationVariables,
-    CurrentUserForProfileQuery,
-    DeleteBookablesMutation,
+    CreateBookable,
+    CreateBookableVariables,
+    CurrentUserForProfile,
+    DeleteBookables,
     LogicalOperator,
-    UpdateBookableMutation,
-    UpdateBookableMutationVariables,
-    UserQuery,
+    UpdateBookable,
+    UpdateBookableVariables,
+    User,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -37,17 +37,17 @@ import { intersectionBy } from 'lodash';
 @Injectable({
     providedIn: 'root',
 })
-export class BookableService extends AbstractModelService<BookableQuery['bookable'],
-    BookableQueryVariables,
-    BookablesQuery['bookables'],
-    BookablesQueryVariables,
-    CreateBookableMutation['createBookable'],
-    CreateBookableMutationVariables,
-    UpdateBookableMutation['updateBookable'],
-    UpdateBookableMutationVariables,
-    DeleteBookablesMutation> {
+export class BookableService extends AbstractModelService<Bookable['bookable'],
+    BookableVariables,
+    Bookables['bookables'],
+    BookablesVariables,
+    CreateBookable['createBookable'],
+    CreateBookableVariables,
+    UpdateBookable['updateBookable'],
+    UpdateBookableVariables,
+    DeleteBookables> {
 
-    public static readonly membershipServices: BookablesQueryVariables = {
+    public static readonly membershipServices: BookablesVariables = {
         filter: {
             groups: [
                 {
@@ -71,7 +71,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         },
     };
 
-    public static readonly adminApproved: BookablesQueryVariables = {
+    public static readonly adminApproved: BookablesVariables = {
         filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}]},
     };
 
@@ -80,16 +80,16 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             'bookable',
             bookableQuery,
             bookablesQuery,
-            createBookableMutation,
-            updateBookableMutation,
-            deleteBookablesMutation);
+            createBookable,
+            updateBookable,
+            deleteBookables);
     }
 
-    public static getFiltersByTagId(tagId): BookablesQueryVariables {
+    public static getFiltersByTagId(tagId): BookablesVariables {
         return {filter: {groups: [{conditions: [{bookableTags: {have: {values: [tagId]}}}]}]}};
     }
 
-    public static adminApprovedByTag(tagId): BookablesQueryVariables {
+    public static adminApprovedByTag(tagId): BookablesVariables {
         return {
             filter: {
                 groups: [
@@ -106,7 +106,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         };
     }
 
-    public static adminByTag(tagId): BookablesQueryVariables {
+    public static adminByTag(tagId): BookablesVariables {
         return {
             filter: {
                 groups: [
@@ -123,8 +123,8 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         };
     }
 
-    public static isLicenseGranted(bookable: BookableQuery['bookable'],
-                                   user: UserQuery['user'] | CurrentUserForProfileQuery['viewer']): boolean {
+    public static isLicenseGranted(bookable: Bookable['bookable'],
+                                   user: User['user'] | CurrentUserForProfile['viewer']): boolean {
 
         if (!bookable || !user) {
             return false;
@@ -165,25 +165,25 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
         };
     }
 
-    public getMandatoryBookables(): Observable<BookablesQuery['bookables']> {
-        const mandatoryBookablesFilter: BookablesQueryVariables = {
+    public getMandatoryBookables(): Observable<Bookables['bookables']> {
+        const mandatoryBookablesFilter: BookablesVariables = {
             filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.mandatory]}}}]}]},
         };
 
-        const qvm = new QueryVariablesManager<BookablesQueryVariables>();
+        const qvm = new QueryVariablesManager<BookablesVariables>();
         qvm.set('variables', mandatoryBookablesFilter);
         return this.getAll(qvm);
     }
 
-    public getAvailability(bookable: BookableQuery['bookable']):
-        Observable<null | { isAvailable: boolean, result: BookingsQuery['bookings'] }> {
+    public getAvailability(bookable: Bookable['bookable']):
+        Observable<null | { isAvailable: boolean, result: Bookings['bookings'] }> {
 
         if (!bookable.isActive) {
             return of(null);
         }
 
         // Variable for pending bookings related to given bookable
-        const variables: BookingsQueryVariables = {
+        const variables: BookingsVariables = {
             filter: {
                 groups: [
                     {
@@ -198,7 +198,7 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
             },
         };
 
-        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
+        const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
 
         return this.bookingService.getAll(qvm, true).pipe(map(result => {
@@ -212,8 +212,8 @@ export class BookableService extends AbstractModelService<BookableQuery['bookabl
     public resolveByCode(code: string): Observable<{ model: any }> {
 
         if (code) {
-            const qvm = new QueryVariablesManager<BookablesQueryVariables>();
-            const variables: BookablesQueryVariables = {
+            const qvm = new QueryVariablesManager<BookablesVariables>();
+            const variables: BookablesVariables = {
                 filter: {groups: [{conditions: [{code: {equal: {value: code}}}]}]},
             };
             qvm.set('variables', variables);

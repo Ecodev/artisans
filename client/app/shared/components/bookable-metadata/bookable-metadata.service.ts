@@ -4,18 +4,18 @@ import { pick } from 'lodash';
 import {
     bookableMetadatasQuery,
     createBookableMetadataMutation,
-    deleteBookableMetadatasMutation,
+    deleteBookableMetadatas,
     updateBookableMetadataMutation,
 } from './bookable-metadata.queries';
 import { Validators } from '@angular/forms';
 import { AbstractModelService, FormValidators } from '../../services/abstract-model.service';
 import {
     BookableMetadataInput,
-    BookableMetadatasQuery,
-    BookableMetadatasQueryVariables,
-    DeleteBookableMetadatasMutation,
-    UpdateBookableMetadataMutation,
-    UpdateBookableMetadataMutationVariables,
+    BookableMetadatas,
+    BookableMetadatasVariables,
+    DeleteBookableMetadatas,
+    UpdateBookableMetadata,
+    UpdateBookableMetadataVariables,
 } from '../../generated-types';
 
 @Injectable({
@@ -23,13 +23,13 @@ import {
 })
 export class BookableMetadataService extends AbstractModelService<any,
     any,
-    BookableMetadatasQuery['bookableMetadatas'],
-    BookableMetadatasQueryVariables,
+    BookableMetadatas['bookableMetadatas'],
+    BookableMetadatasVariables,
     any,
     any,
-    UpdateBookableMetadataMutation['updateBookableMetadata'],
-    UpdateBookableMetadataMutationVariables,
-    DeleteBookableMetadatasMutation> {
+    UpdateBookableMetadata['updateBookableMetadata'],
+    UpdateBookableMetadataVariables,
+    DeleteBookableMetadatas> {
 
     constructor(apollo: Apollo) {
         super(apollo,
@@ -38,7 +38,7 @@ export class BookableMetadataService extends AbstractModelService<any,
             bookableMetadatasQuery,
             createBookableMetadataMutation,
             updateBookableMetadataMutation,
-            deleteBookableMetadatasMutation);
+            deleteBookableMetadatas);
     }
 
     public getEmptyObject(): BookableMetadataInput {

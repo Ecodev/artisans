@@ -4,10 +4,10 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
-    CreateTransactionMutation,
-    CreateTransactionMutationVariables, DeleteTransactionsMutation,
-    TransactionQuery,
-    TransactionQueryVariables, UpdateTransactionMutation, UpdateTransactionMutationVariables,
+    CreateTransaction,
+    CreateTransactionVariables, DeleteTransactions,
+    Transaction,
+    TransactionVariables, UpdateTransaction, UpdateTransactionVariables,
 } from '../../../shared/generated-types';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
@@ -19,13 +19,13 @@ import { TransactionLineService } from '../services/transactionLine.service';
     styleUrls: ['./transaction.component.scss'],
 })
 export class TransactionComponent
-    extends AbstractDetail<TransactionQuery['transaction'],
-        TransactionQueryVariables,
-        CreateTransactionMutation['createTransaction'],
-        CreateTransactionMutationVariables,
-        UpdateTransactionMutation['updateTransaction'],
-        UpdateTransactionMutationVariables,
-        DeleteTransactionsMutation> {
+    extends AbstractDetail<Transaction['transaction'],
+        TransactionVariables,
+        CreateTransaction['createTransaction'],
+        CreateTransactionVariables,
+        UpdateTransaction['updateTransaction'],
+        UpdateTransactionVariables,
+        DeleteTransactions> {
 
     @ViewChild(EditableTransactionLinesComponent) transactionLinesComponent: EditableTransactionLinesComponent;
 

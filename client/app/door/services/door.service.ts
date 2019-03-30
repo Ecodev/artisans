@@ -8,8 +8,8 @@ import {
     openDoorMutation
 } from './door.queries';
 import {
-    OpenDoorMutation,
-    Door, OpenDoorMutationVariables
+    OpenDoor,
+    Door, OpenDoorVariables
 } from '../../shared/generated-types';
 
 @Injectable({
@@ -46,9 +46,9 @@ export class DoorService {
         },
     ];
 
-    public open(openData: OpenDoorMutationVariables): Observable<OpenDoorMutation['openDoor']> {
+    public open(openData: OpenDoorVariables): Observable<OpenDoor['openDoor']> {
 
-        return this.apollo.mutate<OpenDoorMutation, OpenDoorMutationVariables>({
+        return this.apollo.mutate<OpenDoor, OpenDoorVariables>({
             mutation: openDoorMutation,
             variables: openData,
         }).pipe(map(({data: {openDoor}}) => openDoor));

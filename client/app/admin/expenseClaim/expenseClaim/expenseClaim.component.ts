@@ -4,12 +4,12 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { ExpenseClaimService } from '../services/expenseClaim.service';
 import {
-    CreateExpenseClaimMutation,
-    CreateExpenseClaimMutationVariables,
-    ExpenseClaimQuery,
-    ExpenseClaimQueryVariables,
-    UpdateExpenseClaimMutation,
-    UpdateExpenseClaimMutationVariables,
+    CreateExpenseClaim,
+    CreateExpenseClaimVariables,
+    ExpenseClaim,
+    ExpenseClaimVariables,
+    UpdateExpenseClaim,
+    UpdateExpenseClaimVariables,
 } from '../../../shared/generated-types';
 import { UserService } from '../../users/services/user.service';
 
@@ -19,12 +19,12 @@ import { UserService } from '../../users/services/user.service';
     styleUrls: ['./expenseClaim.component.scss'],
 })
 export class ExpenseClaimComponent
-    extends AbstractDetail<ExpenseClaimQuery['expenseClaim'],
-        ExpenseClaimQueryVariables,
-        CreateExpenseClaimMutation['createExpenseClaim'],
-        CreateExpenseClaimMutationVariables,
-        UpdateExpenseClaimMutation['updateExpenseClaim'],
-        UpdateExpenseClaimMutationVariables,
+    extends AbstractDetail<ExpenseClaim['expenseClaim'],
+        ExpenseClaimVariables,
+        CreateExpenseClaim['createExpenseClaim'],
+        CreateExpenseClaimVariables,
+        UpdateExpenseClaim['updateExpenseClaim'],
+        UpdateExpenseClaimVariables,
         any> {
 
     constructor(alertService: AlertService,

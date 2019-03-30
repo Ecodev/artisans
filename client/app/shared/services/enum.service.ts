@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { enumTypeQuery } from '../queries/enum';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EnumTypeQuery } from '../generated-types';
+import { EnumType } from '../generated-types';
 
 export interface IEnum {
     value: string;
@@ -24,7 +24,7 @@ export class EnumService {
     public get(name: string): Observable<IEnum[]> {
 
         // Load possible action statuses
-        return this.apollo.query<EnumTypeQuery>({
+        return this.apollo.query<EnumType>({
             query: enumTypeQuery,
             variables: {name: name},
         }).pipe(map(result => {

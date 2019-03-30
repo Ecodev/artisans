@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ExpenseClaimsQuery, ExpenseClaimStatus, ExpenseClaimType, TransactionLinesQuery } from '../../../shared/generated-types';
+import { ExpenseClaims, ExpenseClaimStatus, ExpenseClaimType, TransactionLines } from '../../../shared/generated-types';
 import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -22,11 +22,11 @@ export class FinancesComponent implements OnInit, OnDestroy {
     public user;
 
     public runningExpenseClaimsDS: AppDataSource;
-    public runningExpenseClaimsQuery: AutoRefetchQueryRef<ExpenseClaimsQuery['expenseClaims']>;
+    public runningExpenseClaims: AutoRefetchQueryRef<ExpenseClaims['expenseClaims']>;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'amount', 'cancel'];
 
     public transactionLinesDS: AppDataSource;
-    public transactionLinesQuery: AutoRefetchQueryRef<TransactionLinesQuery['transactionLines']>;
+    public transactionLinesQuery: AutoRefetchQueryRef<TransactionLines['transactionLines']>;
     public transactionsColumns = ['name', 'transactionDate', 'amount'];
 
     public ibanLocked = true;
@@ -45,15 +45,15 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
         this.ibanLocked = !!this.user.iban;
 
-        this.runningExpenseClaimsQuery = this.expenseClaimService.getForUser(this.user);
-        this.runningExpenseClaimsDS = new AppDataSource(this.runningExpenseClaimsQuery.valueChanges);
+        this.runningExpenseClaims = this.expenseClaimService.getForUser(this.user);
+        this.runningExpenseClaimsDS = new AppDataSource(this.runningExpenseClaims.valueChanges);
 
         this.transactionLinesQuery = this.transactionLineService.getForUser(this.user);
         this.transactionLinesDS = new AppDataSource(this.transactionLinesQuery.valueChanges);
     }
 
     ngOnDestroy() {
-        this.runningExpenseClaimsQuery.unsubscribe();
+        this.runningExpenseClaims.unsubscribe();
         this.transactionLinesQuery.unsubscribe();
     }
 

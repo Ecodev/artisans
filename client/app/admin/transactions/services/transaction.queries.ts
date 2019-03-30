@@ -55,7 +55,7 @@ export const transactionQuery = gql`
     ${transactionMetaFragment}
 ${userMetaFragment}`;
 
-export const createTransactionMutation = gql`
+export const createTransaction = gql`
     mutation CreateTransaction($input: TransactionInput!, $lines: [TransactionLineInput!]!) {
         createTransaction(input: $input, lines: $lines) {
             id
@@ -67,7 +67,7 @@ export const createTransactionMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateTransactionMutation = gql`
+export const updateTransaction = gql`
     mutation UpdateTransaction($id: TransactionID!, $input: TransactionPartialInput!, $lines: [TransactionLineInput!]) {
         updateTransaction(id:$id, input: $input, lines: $lines) {
             id
@@ -79,7 +79,7 @@ export const updateTransactionMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteTransactionsMutation = gql`
+export const deleteTransactions = gql`
     mutation DeleteTransactions ($ids: [TransactionID!]!){
         deleteTransactions(ids: $ids)
     }`;

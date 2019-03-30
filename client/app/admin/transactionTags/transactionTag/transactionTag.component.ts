@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
-    TransactionTagQuery,
-    TransactionTagQueryVariables,
-    CreateTransactionTagMutation,
-    CreateTransactionTagMutationVariables,
-    DeleteTransactionTagsMutation,
-    UpdateTransactionTagMutation,
-    UpdateTransactionTagMutationVariables,
+    TransactionTag,
+    TransactionTagVariables,
+    CreateTransactionTag,
+    CreateTransactionTagVariables,
+    DeleteTransactionTags,
+    UpdateTransactionTag,
+    UpdateTransactionTagVariables,
 } from '../../../shared/generated-types';
 import { TransactionTagService } from '../services/transactionTag.service';
 
@@ -19,13 +19,13 @@ import { TransactionTagService } from '../services/transactionTag.service';
     styleUrls: ['./transactionTag.component.scss'],
 })
 export class TransactionTagComponent
-    extends AbstractDetail<TransactionTagQuery['transactionTag'],
-        TransactionTagQueryVariables,
-        CreateTransactionTagMutation['createTransactionTag'],
-        CreateTransactionTagMutationVariables,
-        UpdateTransactionTagMutation['updateTransactionTag'],
-        UpdateTransactionTagMutationVariables,
-        DeleteTransactionTagsMutation> {
+    extends AbstractDetail<TransactionTag['transactionTag'],
+        TransactionTagVariables,
+        CreateTransactionTag['createTransactionTag'],
+        CreateTransactionTagVariables,
+        UpdateTransactionTag['updateTransactionTag'],
+        UpdateTransactionTagVariables,
+        DeleteTransactionTags> {
 
 
     constructor(alertService: AlertService,

@@ -2,25 +2,25 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
-    createExpenseClaimMutation,
-    deleteExpenseClaimsMutation,
+    createExpenseClaim,
+    deleteExpenseClaims,
     expenseClaimQuery,
     expenseClaimsQuery,
-    updateExpenseClaimMutation,
+    updateExpenseClaim,
 } from './expenseClaim.queries';
 import {
-    BookingsQueryVariables,
-    CreateExpenseClaimMutation,
-    CreateExpenseClaimMutationVariables,
-    DeleteExpenseClaimsMutation,
+    BookingsVariables,
+    CreateExpenseClaim,
+    CreateExpenseClaimVariables,
+    DeleteExpenseClaims,
     ExpenseClaimInput,
-    ExpenseClaimQuery,
-    ExpenseClaimQueryVariables,
-    ExpenseClaimsQuery,
-    ExpenseClaimsQueryVariables,
+    ExpenseClaim,
+    ExpenseClaimVariables,
+    ExpenseClaims,
+    ExpenseClaimsVariables,
     ExpenseClaimStatus, ExpenseClaimType,
-    UpdateExpenseClaimMutation,
-    UpdateExpenseClaimMutationVariables,
+    UpdateExpenseClaim,
+    UpdateExpenseClaimVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
@@ -28,24 +28,24 @@ import { QueryVariablesManager } from '../../../shared/classes/query-variables-m
 @Injectable({
     providedIn: 'root',
 })
-export class ExpenseClaimService extends AbstractModelService<ExpenseClaimQuery['expenseClaim'],
-    ExpenseClaimQueryVariables,
-    ExpenseClaimsQuery['expenseClaims'],
-    ExpenseClaimsQueryVariables,
-    CreateExpenseClaimMutation['createExpenseClaim'],
-    CreateExpenseClaimMutationVariables,
-    UpdateExpenseClaimMutation['updateExpenseClaim'],
-    UpdateExpenseClaimMutationVariables,
-    DeleteExpenseClaimsMutation> {
+export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expenseClaim'],
+    ExpenseClaimVariables,
+    ExpenseClaims['expenseClaims'],
+    ExpenseClaimsVariables,
+    CreateExpenseClaim['createExpenseClaim'],
+    CreateExpenseClaimVariables,
+    UpdateExpenseClaim['updateExpenseClaim'],
+    UpdateExpenseClaimVariables,
+    DeleteExpenseClaims> {
 
     constructor(apollo: Apollo) {
         super(apollo,
             'expenseClaim',
             expenseClaimQuery,
             expenseClaimsQuery,
-            createExpenseClaimMutation,
-            updateExpenseClaimMutation,
-            deleteExpenseClaimsMutation);
+            createExpenseClaim,
+            updateExpenseClaim,
+            deleteExpenseClaims);
     }
 
     public getEmptyObject(): ExpenseClaimInput {
@@ -67,8 +67,8 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaimQuery[
         };
     }
 
-    public getForUser(user): AutoRefetchQueryRef<ExpenseClaimsQuery['expenseClaims']> {
-        const variables: ExpenseClaimsQueryVariables = {
+    public getForUser(user): AutoRefetchQueryRef<ExpenseClaims['expenseClaims']> {
+        const variables: ExpenseClaimsVariables = {
             filter: {
                 groups: [
                     {
@@ -83,7 +83,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaimQuery[
             },
         };
 
-        const qvm = new QueryVariablesManager<ExpenseClaimsQueryVariables>();
+        const qvm = new QueryVariablesManager<ExpenseClaimsVariables>();
         qvm.set('variables', variables);
         return this.watchAll(qvm, true);
     }

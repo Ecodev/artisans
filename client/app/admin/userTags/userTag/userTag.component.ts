@@ -3,13 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import {
-    CreateUserTagMutation,
-    CreateUserTagMutationVariables,
-    DeleteUserTagsMutation,
-    UpdateUserTagMutation,
-    UpdateUserTagMutationVariables,
-    UserTagQuery,
-    UserTagQueryVariables,
+    CreateUserTag,
+    CreateUserTagVariables,
+    DeleteUserTags,
+    UpdateUserTag,
+    UpdateUserTagVariables,
+    UserTag,
+    UserTagVariables,
 } from '../../../shared/generated-types';
 import { UserTagService } from '../services/userTag.service';
 
@@ -19,13 +19,13 @@ import { UserTagService } from '../services/userTag.service';
     styleUrls: ['./userTag.component.scss'],
 })
 export class UserTagComponent
-    extends AbstractDetail<UserTagQuery['userTag'],
-        UserTagQueryVariables,
-        CreateUserTagMutation['createUserTag'],
-        CreateUserTagMutationVariables,
-        UpdateUserTagMutation['updateUserTag'],
-        UpdateUserTagMutationVariables,
-        DeleteUserTagsMutation> {
+    extends AbstractDetail<UserTag['userTag'],
+        UserTagVariables,
+        CreateUserTag['createUserTag'],
+        CreateUserTagVariables,
+        UpdateUserTag['updateUserTag'],
+        UpdateUserTagVariables,
+        DeleteUserTags> {
 
     constructor(alertService: AlertService,
                 userTagService: UserTagService,

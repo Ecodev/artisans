@@ -57,7 +57,7 @@ export const expenseClaimQuery = gql`
     ${expenseClaimMetaFragment}
 ${userMetaFragment}`;
 
-export const createExpenseClaimMutation = gql`
+export const createExpenseClaim = gql`
     mutation CreateExpenseClaim($input: ExpenseClaimInput!) {
         createExpenseClaim(input: $input) {
             id
@@ -69,7 +69,7 @@ export const createExpenseClaimMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateExpenseClaimMutation = gql`
+export const updateExpenseClaim = gql`
     mutation UpdateExpenseClaim($id: ExpenseClaimID!, $input: ExpenseClaimPartialInput!) {
         updateExpenseClaim(id:$id, input:$input) {
             id
@@ -82,7 +82,7 @@ export const updateExpenseClaimMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteExpenseClaimsMutation = gql`
+export const deleteExpenseClaims = gql`
     mutation DeleteExpenseClaims ($ids: [ExpenseClaimID!]!){
         deleteExpenseClaims(ids: $ids)
     }`;

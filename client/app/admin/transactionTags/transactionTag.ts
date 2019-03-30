@@ -1,5 +1,5 @@
-import { TransactionTagQuery } from '../../shared/generated-types';
+import { TransactionTag } from '../../shared/generated-types';
 
 export interface TransactionTagResolve {
-    model: TransactionTagQuery['transactionTag'];
+    model: TransactionTag['transactionTag'];
 }

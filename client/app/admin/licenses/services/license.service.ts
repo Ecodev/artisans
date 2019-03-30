@@ -1,35 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import { createLicenseMutation, deleteLicensesMutation, licenseQuery, licensesQuery, updateLicenseMutation } from './license.queries';
+import { createLicense, deleteLicenses, licenseQuery, licensesQuery, updateLicense } from './license.queries';
 import {
-    CreateLicenseMutation,
-    CreateLicenseMutationVariables,
+    CreateLicense,
+    CreateLicenseVariables,
     LicenseInput,
-    LicenseQuery,
-    LicenseQueryVariables,
-    LicensesQuery,
-    LicensesQueryVariables,
-    UpdateLicenseMutation,
-    UpdateLicenseMutationVariables,
+    License,
+    LicenseVariables,
+    Licenses,
+    LicensesVariables,
+    UpdateLicense,
+    UpdateLicenseVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
 })
-export class LicenseService extends AbstractModelService<LicenseQuery['license'],
-    LicenseQueryVariables,
-    LicensesQuery['licenses'],
-    LicensesQueryVariables,
-    CreateLicenseMutation['createLicense'],
-    CreateLicenseMutationVariables,
-    UpdateLicenseMutation['updateLicense'],
-    UpdateLicenseMutationVariables,
+export class LicenseService extends AbstractModelService<License['license'],
+    LicenseVariables,
+    Licenses['licenses'],
+    LicensesVariables,
+    CreateLicense['createLicense'],
+    CreateLicenseVariables,
+    UpdateLicense['updateLicense'],
+    UpdateLicenseVariables,
     any> {
 
     constructor(apollo: Apollo) {
-        super(apollo, 'license', licenseQuery, licensesQuery, createLicenseMutation, updateLicenseMutation, deleteLicensesMutation);
+        super(apollo, 'license', licenseQuery, licensesQuery, createLicense, updateLicense, deleteLicenses);
     }
 
     public getEmptyObject(): LicenseInput {

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import {
     AccountingDocumentInput,
-    CreateExpenseClaimMutation,
-    CreateExpenseClaimMutationVariables,
-    ExpenseClaimQuery,
-    ExpenseClaimQueryVariables,
+    CreateExpenseClaim,
+    CreateExpenseClaimVariables,
+    ExpenseClaim,
+    ExpenseClaimVariables,
     ExpenseClaimStatus,
-    UpdateExpenseClaimMutation,
-    UpdateExpenseClaimMutationVariables,
+    UpdateExpenseClaim,
+    UpdateExpenseClaimVariables,
 } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -23,12 +23,12 @@ import { forkJoin, Observable } from 'rxjs';
     styleUrls: ['./create-expense-claim.component.scss'],
 })
 export class CreateExpenseClaimComponent
-    extends AbstractDetail<ExpenseClaimQuery['expenseClaim'],
-        ExpenseClaimQueryVariables,
-        CreateExpenseClaimMutation['createExpenseClaim'],
-        CreateExpenseClaimMutationVariables,
-        UpdateExpenseClaimMutation['updateExpenseClaim'],
-        UpdateExpenseClaimMutationVariables,
+    extends AbstractDetail<ExpenseClaim['expenseClaim'],
+        ExpenseClaimVariables,
+        CreateExpenseClaim['createExpenseClaim'],
+        CreateExpenseClaimVariables,
+        UpdateExpenseClaim['updateExpenseClaim'],
+        UpdateExpenseClaimVariables,
         any> implements OnInit {
 
     public files: any[] = [null];

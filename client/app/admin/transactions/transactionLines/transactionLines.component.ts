@@ -4,7 +4,7 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { AbstractList } from '../../shared/components/AbstractList';
-import { TransactionLinesQuery, TransactionLinesQueryVariables } from '../../../shared/generated-types';
+import { TransactionLines, TransactionLinesVariables } from '../../../shared/generated-types';
 import { TransactionLineService } from '../services/transactionLine.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 
@@ -13,7 +13,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     templateUrl: './transactionLines.component.html',
     styleUrls: ['./transactionLines.component.scss'],
 })
-export class TransactionLinesComponent extends AbstractList<TransactionLinesQuery['transactionLines'], TransactionLinesQueryVariables>
+export class TransactionLinesComponent extends AbstractList<TransactionLines['transactionLines'], TransactionLinesVariables>
     implements OnInit {
 
     constructor(route: ActivatedRoute,

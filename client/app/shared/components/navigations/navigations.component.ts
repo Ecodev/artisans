@@ -5,14 +5,14 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import {
     BookingPartialInput,
     BookingSortingField,
-    BookingsQuery,
-    BookingsQueryVariables,
+    Bookings,
+    BookingsVariables,
     BookingType,
     JoinType,
     LogicalOperator,
     SortingOrder,
-    UsersQuery,
-    UsersQueryVariables,
+    Users,
+    UsersVariables,
 } from '../../generated-types';
 import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { QueryVariablesManager } from '../../classes/query-variables-manager';
@@ -40,10 +40,10 @@ export class NavigationsComponent implements OnInit, OnDestroy {
     @Input() activeOnly = true;
     @Input() showEmptyMessage = false;
 
-    public bookings: BookingsQuery['bookings'];
-    public bookingsQueryRef: AutoRefetchQueryRef<BookingsQuery['bookings']>;
+    public bookings: Bookings['bookings'];
+    public bookingsQueryRef: AutoRefetchQueryRef<Bookings['bookings']>;
 
-    private bookingsQVM = new QueryVariablesManager<BookingsQueryVariables>();
+    private bookingsQVM = new QueryVariablesManager<BookingsVariables>();
 
     private currentPage = 0;
     private family;
@@ -57,7 +57,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        const qvm = new QueryVariablesManager<UsersQueryVariables>();
+        const qvm = new QueryVariablesManager<UsersVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{owner: {equal: {value: this.user.owner ? this.user.owner.id : this.user.id}}}]}]},
         });
@@ -122,12 +122,12 @@ export class NavigationsComponent implements OnInit, OnDestroy {
         });
     }
 
-    public getNavigations(users: UsersQuery['users']['items']): Observable<BookingsQuery['bookings']> {
+    public getNavigations(users: Users['users']['items']): Observable<Bookings['bookings']> {
 
         const owner = {in: {values: users.map(u => u.id)}};
         const endDate = this.activeOnly ? {null: {}} : null;
 
-        const variables: BookingsQueryVariables = {
+        const variables: BookingsVariables = {
             filter: {
                 groups: [
                     {

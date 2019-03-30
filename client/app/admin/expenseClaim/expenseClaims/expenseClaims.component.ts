@@ -4,7 +4,7 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { AbstractList } from '../../shared/components/AbstractList';
-import { ExpenseClaimsQuery, ExpenseClaimsQueryVariables } from '../../../shared/generated-types';
+import { ExpenseClaims, ExpenseClaimsVariables } from '../../../shared/generated-types';
 import { ExpenseClaimService } from '../services/expenseClaim.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 
@@ -13,7 +13,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     templateUrl: './expenseClaims.component.html',
     styleUrls: ['./expenseClaims.component.scss'],
 })
-export class ExpenseClaimsComponent extends AbstractList<ExpenseClaimsQuery['expenseClaims'], ExpenseClaimsQueryVariables>
+export class ExpenseClaimsComponent extends AbstractList<ExpenseClaims['expenseClaims'], ExpenseClaimsVariables>
     implements OnInit {
 
     constructor(route: ActivatedRoute,

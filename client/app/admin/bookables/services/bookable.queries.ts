@@ -60,7 +60,7 @@ export const bookableQuery = gql`
     ${bookableMetaFragment}
 `;
 
-export const createBookableMutation = gql`
+export const createBookable = gql`
     mutation CreateBookable($input: BookableInput!) {
         createBookable(input: $input) {
             id
@@ -72,7 +72,7 @@ export const createBookableMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateBookableMutation = gql`
+export const updateBookable = gql`
     mutation UpdateBookable($id: BookableID!, $input: BookablePartialInput!) {
         updateBookable(id:$id, input:$input) {
             id
@@ -86,7 +86,7 @@ export const updateBookableMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteBookablesMutation = gql`
+export const deleteBookables = gql`
     mutation DeleteBookables ($ids: [BookableID!]!){
         deleteBookables(ids: $ids)
     }`;

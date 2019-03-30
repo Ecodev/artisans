@@ -6,45 +6,45 @@ import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
 import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
-    createUserMutation,
+    createUser,
     currentUserForProfileQuery,
     leaveFamilyMutation,
     loginMutation,
     logoutMutation,
     unregisterMutation,
-    updateUserMutation,
+    updateUser,
     userByTokenQuery,
     userQuery,
     usersQuery,
 } from './user.queries';
 import {
     BillingType,
-    BookingsQuery,
-    BookingsQueryVariables,
+    Bookings,
+    BookingsVariables,
     BookingStatus,
     BookingType,
-    CreateUserMutation,
-    CreateUserMutationVariables,
-    CurrentUserForProfileQuery,
-    LeaveFamilyMutation,
-    LeaveFamilyMutationVariables,
-    LoginMutation,
-    LoginMutationVariables,
-    LogoutMutation,
+    CreateUser,
+    CreateUserVariables,
+    CurrentUserForProfile,
+    LeaveFamily,
+    LeaveFamilyVariables,
+    Login,
+    LoginVariables,
+    Logout,
     Relationship,
     Sex,
-    UnregisterMutation,
-    UnregisterMutationVariables,
-    UpdateUserMutation,
-    UpdateUserMutationVariables,
-    UserByTokenQuery,
-    UserByTokenQueryVariables,
+    Unregister,
+    UnregisterVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    UserByToken,
+    UserByTokenVariables,
     UserInput,
-    UserQuery,
-    UserQueryVariables,
+    User,
+    UserVariables,
     UserRole,
-    UsersQuery,
-    UsersQueryVariables,
+    Users,
+    UsersVariables,
     UserStatus,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
@@ -59,17 +59,17 @@ import gql from 'graphql-tag';
 @Injectable({
     providedIn: 'root',
 })
-export class UserService extends AbstractModelService<UserQuery['user'],
-    UserQueryVariables,
-    UsersQuery['users'],
-    UsersQueryVariables,
-    CreateUserMutation['createUser'],
-    CreateUserMutationVariables,
-    UpdateUserMutation['updateUser'],
-    UpdateUserMutationVariables,
+export class UserService extends AbstractModelService<User['user'],
+    UserVariables,
+    Users['users'],
+    UsersVariables,
+    CreateUser['createUser'],
+    CreateUserVariables,
+    UpdateUser['updateUser'],
+    UpdateUserVariables,
     any> {
 
-    private currentUser: CurrentUserForProfileQuery['viewer'] | null = null;
+    private currentUser: CurrentUserForProfile['viewer'] | null = null;
 
     constructor(apollo: Apollo,
                 protected router: Router,
@@ -80,15 +80,15 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             'user',
             userQuery,
             usersQuery,
-            createUserMutation,
-            updateUserMutation,
+            createUser,
+            updateUser,
             null);
     }
 
     /**
      * Return filters for users for given roles and statuses
      */
-    public static getFilters(roles: UserRole[], statuses: UserStatus[] | null): UsersQueryVariables {
+    public static getFilters(roles: UserRole[], statuses: UserStatus[] | null): UsersVariables {
         return {
             filter: {
                 groups: [
@@ -105,14 +105,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         };
     }
 
-    public static canAccessAdmin(user: CurrentUserForProfileQuery['viewer']): boolean {
+    public static canAccessAdmin(user: CurrentUserForProfile['viewer']): boolean {
         if (!user) {
             return false;
         }
         return [UserRole.responsible, UserRole.administrator].includes(user.role);
     }
 
-    public static canAccessDoor(user: CurrentUserForProfileQuery['viewer']): boolean {
+    public static canAccessDoor(user: CurrentUserForProfile['viewer']): boolean {
         if (!user) {
             return false;
         }
@@ -191,13 +191,13 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         return config;
     }
 
-    public getCurrentUser(): Observable<CurrentUserForProfileQuery['viewer']> {
+    public getCurrentUser(): Observable<CurrentUserForProfile['viewer']> {
 
         if (this.currentUser) {
             return of(this.currentUser);
         }
 
-        return this.apollo.query<CurrentUserForProfileQuery>({
+        return this.apollo.query<CurrentUserForProfile>({
             query: currentUserForProfileQuery,
         }).pipe(map(result => {
             this.currentUser = result.data.viewer;
@@ -206,18 +206,18 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         }));
     }
 
-    public getCachedCurrentUser(): CurrentUserForProfileQuery['viewer'] {
+    public getCachedCurrentUser(): CurrentUserForProfile['viewer'] {
         return this.currentUser;
     }
 
-    public login(loginData: LoginMutationVariables): Observable<LoginMutation['login']> {
+    public login(loginData: LoginVariables): Observable<Login['login']> {
 
-        const subject = new Subject<LoginMutation['login']>();
+        const subject = new Subject<Login['login']>();
 
         // Be sure to destroy all Apollo data, before changing user
         (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
 
-            this.apollo.mutate<LoginMutation, LoginMutationVariables>({
+            this.apollo.mutate<Login, LoginVariables>({
                 mutation: loginMutation,
                 variables: loginData,
                 update: (proxy: DataProxy, {data: {login}}) => {
@@ -241,14 +241,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     /**
      * Todo : create specific mutation endpoint to flag current date on welcomeSessionDate and if user has paid, active him
      */
-    // public flagWelcomeSessionDate(id: string): Observable<UpdateUserMutation['updateUser']> {
+    // public flagWelcomeSessionDate(id: string): Observable<UpdateUser['updateUser']> {
     // }
 
-    public logout(): Observable<LogoutMutation['logout']> {
-        const subject = new Subject<LogoutMutation['logout']>();
+    public logout(): Observable<Logout['logout']> {
+        const subject = new Subject<Logout['logout']>();
 
         this.router.navigate(['/login'], {queryParams: {logout: true}}).then(() => {
-            this.apollo.mutate<LogoutMutation>({
+            this.apollo.mutate<Logout>({
                 mutation: logoutMutation,
             }).pipe(map(({data: {logout}}) => logout)).subscribe((v) => {
                 this.currentUser = null;
@@ -273,8 +273,8 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     /**
      * Impact members
      */
-    public getRunningServices(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
-        const variables: BookingsQueryVariables = {
+    public getRunningServices(user): AutoRefetchQueryRef<Bookings['bookings']> {
+        const variables: BookingsVariables = {
             filter: {
                 groups: [
                     {
@@ -304,13 +304,13 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             },
         };
 
-        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
+        const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
         return this.bookingService.watchAll(qvm, true);
     }
 
-    public getPendingApplications(user): AutoRefetchQueryRef<BookingsQuery['bookings']> {
-        const variables: BookingsQueryVariables = {
+    public getPendingApplications(user): AutoRefetchQueryRef<Bookings['bookings']> {
+        const variables: BookingsVariables = {
             filter: {
                 groups: [
                     {
@@ -326,14 +326,14 @@ export class UserService extends AbstractModelService<UserQuery['user'],
             },
         };
 
-        const qvm = new QueryVariablesManager<BookingsQueryVariables>();
+        const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
         return this.bookingService.watchAll(qvm, true);
     }
 
-    public resolveByToken(token: string): Observable<{ model: UserByTokenQuery['userByToken'] }> {
+    public resolveByToken(token: string): Observable<{ model: UserByToken['userByToken'] }> {
 
-        return this.apollo.query<UserByTokenQuery, UserByTokenQueryVariables>({
+        return this.apollo.query<UserByToken, UserByTokenVariables>({
             query: userByTokenQuery,
             variables: {
                 token: token,
@@ -343,8 +343,8 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         }));
     }
 
-    public unregister(user): Observable<{ model: UnregisterMutation['unregister'] }> {
-        return this.apollo.mutate<UnregisterMutation, UnregisterMutationVariables>({
+    public unregister(user): Observable<{ model: Unregister['unregister'] }> {
+        return this.apollo.mutate<Unregister, UnregisterVariables>({
             mutation: unregisterMutation,
             variables: {
                 id: user.id,
@@ -352,8 +352,8 @@ export class UserService extends AbstractModelService<UserQuery['user'],
         }).pipe(map(result => result.data.unregister));
     }
 
-    public leaveFamily(user): Observable<{ model: LeaveFamilyMutation['leaveFamily'] }> {
-        return this.apollo.mutate<LeaveFamilyMutation, LeaveFamilyMutationVariables>({
+    public leaveFamily(user): Observable<{ model: LeaveFamily['leaveFamily'] }> {
+        return this.apollo.mutate<LeaveFamily, LeaveFamilyVariables>({
             mutation: leaveFamilyMutation,
             variables: {
                 id: user.id,
@@ -364,7 +364,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     /**
      * Can leave home if has an owner
      */
-    public canLeaveFamily(user: CurrentUserForProfileQuery['viewer']): boolean {
+    public canLeaveFamily(user: CurrentUserForProfile['viewer']): boolean {
 
         if (!user) {
             return false;
@@ -376,7 +376,7 @@ export class UserService extends AbstractModelService<UserQuery['user'],
     /**
      * Can become a member has no owner and is not member
      */
-    public canBecomeMember(user: CurrentUserForProfileQuery['viewer']): boolean {
+    public canBecomeMember(user: CurrentUserForProfile['viewer']): boolean {
 
         if (!user) {
             return false;

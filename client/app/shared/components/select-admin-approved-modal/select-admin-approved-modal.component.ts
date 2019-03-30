@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { QueryVariablesManager } from '../../classes/query-variables-manager';
 import { AppDataSource } from '../../services/data.source';
-import { BookablesQuery, BookablesQueryVariables } from '../../generated-types';
+import { Bookables, BookablesVariables } from '../../generated-types';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -13,21 +13,21 @@ export class SelectAdminApprovedModalComponent implements OnInit {
 
     public servicesDataSource;
     public storagesDataSource;
-    public selection = new SelectionModel<BookablesQuery['bookables']['items']>(true, []);
+    public selection = new SelectionModel<Bookables['bookables']['items']>(true, []);
 
     constructor(private bookableService: BookableService) {
     }
 
     ngOnInit() {
         const serviceVariables = BookableService.adminApprovedByTag('6007');
-        const qvmServices = new QueryVariablesManager<BookablesQueryVariables>();
+        const qvmServices = new QueryVariablesManager<BookablesVariables>();
         qvmServices.set('variables', serviceVariables);
         this.bookableService.getAll(qvmServices).subscribe(result => {
             this.servicesDataSource = new AppDataSource(result);
         });
 
         const storageVariables = BookableService.adminApprovedByTag('6008');
-        const qvmStorage = new QueryVariablesManager<BookablesQueryVariables>();
+        const qvmStorage = new QueryVariablesManager<BookablesVariables>();
         qvmStorage.set('variables', storageVariables);
         this.bookableService.getAll(qvmStorage).subscribe(result => {
             this.storagesDataSource = new AppDataSource(result);

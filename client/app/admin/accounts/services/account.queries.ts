@@ -59,7 +59,7 @@ export const accountQuery = gql`
     ${accountMetaFragment}
 ${userMetaFragment}`;
 
-export const createAccountMutation = gql`
+export const createAccount = gql`
     mutation CreateAccount($input: AccountInput!) {
         createAccount(input: $input) {
             id
@@ -71,7 +71,7 @@ export const createAccountMutation = gql`
     ${userMetaFragment}
 `;
 
-export const updateAccountMutation = gql`
+export const updateAccount = gql`
     mutation UpdateAccount($id: AccountID!, $input: AccountPartialInput!) {
         updateAccount(id:$id, input:$input) {
             id
@@ -84,7 +84,7 @@ export const updateAccountMutation = gql`
     ${userMetaFragment}
 `;
 
-export const deleteAccountsMutation = gql`
+export const deleteAccounts = gql`
     mutation DeleteAccounts ($ids: [AccountID!]!){
         deleteAccounts(ids: $ids)
     }`;

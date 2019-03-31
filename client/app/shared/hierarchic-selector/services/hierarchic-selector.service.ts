@@ -97,6 +97,7 @@ export class HierarchicSelectorService {
                     filter: config.filter,
                 });
 
+                // TODO : Replace getAll by watchAll
                 observables.push(config.injectedService.getAll(variablesManager));
             }
         }

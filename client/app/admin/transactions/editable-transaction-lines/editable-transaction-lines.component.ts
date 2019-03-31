@@ -31,6 +31,7 @@ export class EditableTransactionLinesComponent extends AbstractEditableList<any,
                 filter: {groups: [{conditions: [{transaction: {equal: {value: this.transaction.id}}}]}]},
             } as TransactionLinesVariables);
 
+            // TODO : Replace getAll by watchAll
             this.service.getAll(this.variablesManager, true).subscribe(results => {
                 this.add(results);
             });

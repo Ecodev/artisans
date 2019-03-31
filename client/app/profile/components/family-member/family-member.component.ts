@@ -43,6 +43,8 @@ export class FamilyMemberComponent
     ngOnInit() {
 
         if (this.user && this.user.id) {
+            // TODO : replace by watchOne (from okpilot) as two members could change data from same familly member and it would stay
+            // unchanged for the other one
             this.service.getOne(this.user.id).subscribe(user => {
                 this.data = merge({model: this.service.getEmptyObject()}, {model: user});
                 this.initForm();

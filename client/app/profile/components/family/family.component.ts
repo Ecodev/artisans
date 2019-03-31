@@ -45,6 +45,8 @@ export class FamilyComponent implements OnInit {
                 },
             };
             variables.set('variables', filters);
+
+            // TODO : replace by watchAll as some family member could change own data that would stay unchanged for another family member
             this.userService.getAll(variables).subscribe(familyMembers => this.familyMembers = familyMembers ? familyMembers.items : null);
         }
 

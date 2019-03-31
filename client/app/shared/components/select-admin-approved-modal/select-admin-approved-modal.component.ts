@@ -22,6 +22,8 @@ export class SelectAdminApprovedModalComponent implements OnInit {
         const serviceVariables = BookableService.adminApprovedByTag('6007');
         const qvmServices = new QueryVariablesManager<BookablesVariables>();
         qvmServices.set('variables', serviceVariables);
+
+        // Get all because requirable services should not change
         this.bookableService.getAll(qvmServices).subscribe(result => {
             this.servicesDataSource = new AppDataSource(result);
         });
@@ -29,6 +31,8 @@ export class SelectAdminApprovedModalComponent implements OnInit {
         const storageVariables = BookableService.adminApprovedByTag('6008');
         const qvmStorage = new QueryVariablesManager<BookablesVariables>();
         qvmStorage.set('variables', storageVariables);
+
+        // Get all because requirable storages should not change
         this.bookableService.getAll(qvmStorage).subscribe(result => {
             this.storagesDataSource = new AppDataSource(result);
         });

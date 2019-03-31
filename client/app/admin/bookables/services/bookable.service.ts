@@ -172,7 +172,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
 
         const qvm = new QueryVariablesManager<BookablesVariables>();
         qvm.set('variables', mandatoryBookablesFilter);
-        return this.getAll(qvm);
+        return this.getAll(qvm); // getAll because mandatory bookables should not change
     }
 
     public getAvailability(bookable: Bookable['bookable']):

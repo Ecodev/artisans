@@ -14,6 +14,11 @@ export const transactionMetaFragment = gql`
             amount
             name
             description
+            type
+            owner {
+                id
+                name
+            }
             accountingDocuments {
                 id
                 mime

@@ -5,13 +5,18 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
     CreateTransaction,
-    CreateTransactionVariables, DeleteTransactions,
+    CreateTransactionVariables,
+    DeleteTransactions,
+    ExpenseClaimType,
     Transaction,
-    TransactionVariables, UpdateTransaction, UpdateTransactionVariables,
+    TransactionVariables,
+    UpdateTransaction,
+    UpdateTransactionVariables,
 } from '../../../shared/generated-types';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
 import { TransactionLineService } from '../services/transactionLine.service';
+import { AccountingDocumentsComponent } from '../../accounting-documents/accounting-documents.component';
 
 @Component({
     selector: 'app-transaction',
@@ -28,8 +33,10 @@ export class TransactionComponent
         DeleteTransactions> {
 
     @ViewChild(EditableTransactionLinesComponent) transactionLinesComponent: EditableTransactionLinesComponent;
+    @ViewChild('transactionDocuments') accountingDocuments: AccountingDocumentsComponent;
 
     public updateTransactionLines = false;
+    public ExpenseClaimType = ExpenseClaimType;
 
     constructor(alertService: AlertService,
                 transactionService: TransactionService,
@@ -42,6 +49,9 @@ export class TransactionComponent
     }
 
     public save() {
+
+        this.accountingDocuments.save();
+
         if (this.transactionLinesComponent) {
             const rawTransactionLines = this.transactionLinesComponent.getList();
             this.data.model.transactionLines = rawTransactionLines.map(line => this.transactionLineService.getInput(line));

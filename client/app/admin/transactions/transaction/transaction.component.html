@@ -35,7 +35,46 @@
                             <textarea matInput formControlName="internalRemarks" matTextareaAutosize [matAutosizeMinRows]="3"
                             ></textarea>
                         </mat-form-field>
+                    </div>
+                </div>
 
+                <mat-divider></mat-divider>
+
+                <div>
+                    <div class="mat-title">Documents justificatifs</div>
+                    <app-accounting-documents #transactionDocuments [model]="data.model"></app-accounting-documents>
+                </div>
+
+                <mat-divider *ngIf="data.model.expenseClaim"></mat-divider>
+                <div *ngIf="data.model.expenseClaim">
+                    <div fxLayout="row" fxLayoutGap="20px" class="margin-bottom">
+                        <div class="mat-title no-margin-bottom">
+                            <span *ngIf="data.model.expenseClaim.type === ExpenseClaimType.refund">Annonce de remboursement</span>
+                            <span *ngIf="data.model.expenseClaim.type === ExpenseClaimType.expenseClaim">Annonce de dépense</span>
+                        </div>
+
+                        <a mat-stroked-button [routerLink]="['/admin/expense-claim', data.model.expenseClaim.id]">Voir</a>
+                    </div>
+
+                    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
+                        <div fxLayout="column" fxLayoutGap="10px" style="max-width:300px">
+                            <div class="mat-body-2">{{ data.model.expenseClaim.name }}</div>
+                            <div>
+                                <span class="mat-body-2">Montant :</span>
+                                {{ data.model.expenseClaim.amount | currency : 'CHF'}}
+                            </div>
+                            <div>
+                                <span class="mat-body-2">Utilisateur :</span>
+                                {{ data.model.expenseClaim.owner.name }}
+                            </div>
+                            <div>
+                                <span class="mat-body-2">Description :</span>
+                                {{ data.model.expenseClaim.description }}
+                            </div>
+                        </div>
+
+                        <app-accounting-documents [disabled]="true" [model]="data.model.expenseClaim" [fileHeight]="150" [fileWidth]="200"
+                        ></app-accounting-documents>
                     </div>
 
                 </div>
@@ -71,7 +110,6 @@
 
     </mat-tab-group>
 
-
     <app-fixed-button class="detail-speed-dial"
                       (click)="save()"
                       icon="save"
@@ -82,3 +120,4 @@
     ></app-fixed-button>
 
 </div>
+

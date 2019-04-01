@@ -22,22 +22,13 @@
 
     <mat-form-field>
         <mat-label>Commentaires supplémentaires</mat-label>
-        <textarea matInput formControlName="description" matTextareaAutosize [matAutosizeMinRows]="3"
-        ></textarea>
+        <textarea matInput formControlName="description" matTextareaAutosize [matAutosizeMinRows]="3"></textarea>
     </mat-form-field>
 
     <div>
         <h2 class="mat-title">Documents justificatifs</h2>
         <div fxLayout="row wrap" fxLayoutGap="10px grid">
-            <ng-container *ngFor="let file of files; let i = index; trackBy: trackByFn; let last = last ">
-                <div fxLayout="column" fxLayoutAlign="start center">
-                    <app-file [model]="file" (modelChange)="fileAdded($event, i)" [height]="300" [style.width.px]="300" action="upload"
-                    ></app-file>
-                    <button mat-icon-button (click)="!last ? removeFile(i) : null">
-                        <app-icon name="clear" *ngIf="!last"></app-icon>
-                    </button>
-                </div>
-            </ng-container>
+           <app-accounting-documents [model]="data.model"></app-accounting-documents>
         </div>
     </div>
 </div>

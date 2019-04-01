@@ -26,6 +26,11 @@ class ExpenseClaimStatusIsNew implements AssertionInterface
     public function assert(Acl $acl, RoleInterface $role = null, ResourceInterface $resource = null, $privilege = null)
     {
         $object = $resource->getInstance()->getExpenseClaim();
+
+        if (!$object) {
+            return true;
+        }
+
         $assertion = new StatusIsNew();
 
         return $assertion->assert($acl, $role, new ModelResource(ExpenseClaim::class, $object), $privilege);

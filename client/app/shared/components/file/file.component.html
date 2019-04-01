@@ -6,6 +6,7 @@
    [ngfFixOrientation]="false"
    (fileChange)="upload($event)"
    [attr.href]="getDownloadLink()"
+   target="_blank"
    download
    [style.backgroundImage]="imagePreview"
    [class.has-action]="!!action"
@@ -23,4 +24,3 @@
     </div>
 
 </a>
-

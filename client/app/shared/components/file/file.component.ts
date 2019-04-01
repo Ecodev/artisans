@@ -1,20 +1,10 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Literal } from '../../types';
 import { UploadService } from './services/upload.service';
 import { takeUntil } from 'rxjs/operators';
 import { AbstractController } from '../AbstractController';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
 import { Observable, of, Subject } from 'rxjs';
-
-// export interface AppUrlFileType {
-//     src: string;
-// }
-//
-// type FileType =
-//     Bookable['bookable']['image'] |
-//     ExpenseClaim['expenseClaim']['accountingDocuments'][0] |
-//     AppUrlFileType;
 
 @Component({
     selector: 'app-file',
@@ -29,10 +19,9 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
     @Input() action: 'upload' | 'download' | null = null;
 
     @Input() service;
-    @Input() modelContext: Literal = {};
     @Input() model; // todo : when __typename included in queries : FileType;
 
-    @Output() modelChange = new EventEmitter();
+    @Output() modelChange = new EventEmitter<{ file: File }>();
 
     public imagePreview: SafeStyle | null;
     public filePreview: string | null;
@@ -42,7 +31,7 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
     }
 
     ngOnInit() {
-        this.uploadService.filesChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe(files => {
+        this.uploadService.filesChanged.pipe(takeUntil(this.ngUnsubscribe)).subscribe((files: File[]) => {
             // subscription required to activate hover overlay. Upload function is called from fileChanged in template that
             // works for both : drag-n-drop and click select
         });
@@ -56,19 +45,18 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
         }
     }
 
-    public upload(file) {
+    public upload(file: File) {
 
-        const model = Object.assign(this.modelContext, {file: file});
-        this.model = model;
+        this.model = {file: file};
         this.updateImage();
 
         if (this.service) {
-            this.service.create(model).subscribe((result) => {
+            this.service.create(this.model).subscribe((result) => {
                 this.model = result;
                 this.modelChange.emit(result);
             });
         } else {
-            this.modelChange.emit(model);
+            this.modelChange.emit(this.model);
         }
     }
 
@@ -97,8 +85,10 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
             // create image url without port to stay compatible with dev mode
             const image = loc.protocol + '//' + loc.hostname + '/image/' + this.model.id + height;
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + image + ')');
+
         } else if (this.model.__typename === 'AccountingDocument') {
             this.filePreview = this.model.mime.split('/')[1];
+
         } else if (this.model.src) {
             // external url
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + this.model.src + ')');
@@ -129,10 +119,12 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
             return null;
         }
 
+        const hostname = window.location.protocol + '//' + window.location.hostname;
+
         if (this.model && this.model.__typename === 'AccountingDocument') {
-            return '/accounting-document/' + this.model.id;
+            return hostname + '/accounting-document/' + this.model.id;
         } else if (this.model && this.model.__typename === 'Image') {
-            return '/image/' + this.model.id;
+            return hostname + '/image/' + this.model.id;
         }
 
         return null;

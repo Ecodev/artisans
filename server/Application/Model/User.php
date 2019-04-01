@@ -759,7 +759,7 @@ class User extends AbstractModel
      */
     public function setSwissSailing(string $swissSailing): void
     {
-        $this->ichtusSwissSailing = $ichtusSwissSailing;
+        $this->swissSailing = $swissSailing;
     }
 
     /**

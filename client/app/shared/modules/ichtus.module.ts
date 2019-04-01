@@ -27,6 +27,7 @@ import { FileDropDirective } from '../components/file/services/file-drop.directi
 import { NavigationsComponent } from '../components/navigations/navigations.component';
 import { CommentComponent } from '../components/navigations/comment.component';
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
+import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
 
 const declarations = [
     RelationsComponent,
@@ -48,7 +49,8 @@ const declarations = [
     FileComponent,
     NavigationsComponent,
     CommentComponent,
-    TransactionAmountComponent
+    TransactionAmountComponent,
+    AccountingDocumentsComponent
 ];
 
 const imports = [

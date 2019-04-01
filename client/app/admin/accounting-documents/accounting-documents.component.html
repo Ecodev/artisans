@@ -1,0 +1,15 @@
+<div fxLayout="row" fxLayoutGap="10px">
+    <ng-container *ngFor="let file of _files; let i = index; trackBy: trackByFn; let last = last ">
+        <div fxLayout="column" fxLayoutAlign="start center">
+            <app-file [model]="file"
+                      (modelChange)="fileAdded($event, i)"
+                      [height]="fileHeight"
+                      [style.width.px]="fileWidth"
+                      [action]="getAction(file, i, last)"
+            ></app-file>
+            <button mat-icon-button (click)="!last ? removeFile(i) : null" *ngIf="!_disabled">
+                <app-icon name="clear" *ngIf="!last"></app-icon>
+            </button>
+        </div>
+    </ng-container>
+</div>

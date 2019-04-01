@@ -49,6 +49,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/delete-old-log',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/dump-data.php',
         'permissions' => '0750',
     ],

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Doctrine\ORM\EntityManager;
 use GraphQL\Doctrine\Types;
+use Zend\Log\LoggerInterface;
 use Zend\ServiceManager\ServiceManager;
 
 require_once 'server/Debug.php';
@@ -40,6 +41,18 @@ function _em(): EntityManager
     global $container;
 
     return $container->get(EntityManager::class);
+}
+
+/**
+ * Returns logger
+ *
+ * @return LoggerInterface
+ */
+function _log(): LoggerInterface
+{
+    global $container;
+
+    return $container->get(LoggerInterface::class);
 }
 
 return $container;

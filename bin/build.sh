@@ -59,5 +59,8 @@ $PHP ./vendor/bin/doctrine-migrations migrations:migrate --no-interaction
 $PHP ./vendor/bin/doctrine orm:generate-proxies
 $PHP ./bin/create-triggers.php
 
+echo "Delete old logs..."
+./bin/delete-old-log.php
+
 echo "Building Angular application..."
 yarn run prod

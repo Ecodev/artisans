@@ -7,7 +7,9 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Scalar\LoginType;
+use Application\Model\Log;
 use Application\Model\User;
+use Application\Repository\LogRepository;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
@@ -24,6 +26,9 @@ abstract class Login implements FieldInterface
                 'password' => Type::nonNull(Type::string()),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): User {
+                if (_em()->getRepository(Log::class)->loginFailedOften()) {
+                    throw new Exception("Trop de tentatives d'accès ont échouées. Veuillez ressayer plus tard.");
+                }
 
                 // Logout
                 $session->clear();
@@ -31,14 +36,17 @@ abstract class Login implements FieldInterface
 
                 $user = _em()->getRepository(User::class)->getByLoginPassword($args['login'], $args['password']);
 
-                // If we successfully authenticated or we already were logged in, keep going
+                // If we successfully authenticated
                 if ($user) {
                     $session->regenerate();
                     $session->set('user', $user->getId());
                     User::setCurrent($user);
+                    _log()->info(LogRepository::LOGIN);
 
                     return $user;
                 }
+
+                _log()->info(LogRepository::LOGIN_FAILED);
 
                 throw new Exception("Le nom d'utilisateur ou mot de passe est incorrect !");
             },

@@ -17,7 +17,7 @@ return [
         // class name.
         'invokables' => [
             \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class => \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class,
-            \Application\DBAL\FileLogger::class => \Application\DBAL\FileLogger::class,
+            \Application\DBAL\Logging\ForwardSQLLogger::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [
@@ -33,6 +33,7 @@ return [
             \Application\Service\Mailer::class => \Application\Service\MailerFactory::class,
             \Zend\View\Renderer\RendererInterface::class => \Application\Service\RendererFactory::class,
             \Zend\Mail\Transport\TransportInterface::class => \Application\Service\TransportFactory::class,
+            \Zend\Log\LoggerInterface::class => \Application\Log\LoggerFactory::class,
         ],
     ],
 ];

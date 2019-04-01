@@ -42,6 +42,25 @@ class LogRepositoryTest extends AbstractRepositoryTest
         self::assertTrue($result, 'is your PHP date.timezone setting correct ?');
     }
 
+    public function testUpdatePasswordFailedOften(): void
+    {
+        $this->getEntityManager()->getConnection()->exec('DELETE FROM log');
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+
+        $result = $this->repository->updatePasswordFailedOften();
+        self::assertFalse($result);
+
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+
+        $result = $this->repository->updatePasswordFailedOften();
+        self::assertTrue($result, 'is your PHP date.timezone setting correct ?');
+    }
+
     public function testDeleteOldLogs(): void
     {
         $result = $this->repository->deleteOldLogs();

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Mutation;
 
+use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Scalar\PasswordType;
 use Application\Api\Scalar\TokenType;
+use Application\Model\Log;
 use Application\Model\User;
+use Application\Repository\LogRepository;
 use Application\Repository\UserRepository;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
@@ -25,6 +28,10 @@ abstract class UpdatePassword implements FieldInterface
                 'password' => Type::nonNull(_types()->get(PasswordType::class)),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
+                if (_em()->getRepository(Log::class)->updatePasswordFailedOften()) {
+                    throw new Exception('Trop de tentatives de changement de mot de passe ont échouées. Veuillez ressayer plus tard.');
+                }
+
                 /** @var UserRepository $repository */
                 $repository = _em()->getRepository(User::class);
 
@@ -34,11 +41,14 @@ abstract class UpdatePassword implements FieldInterface
                 $repository->getAclFilter()->setEnabled(true);
 
                 if (!$user || !$user->isTokenValid()) {
+                    _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+
                     return false;
                 }
 
                 $user->setPassword($args['password']);
                 _em()->flush();
+                _log()->info(LogRepository::UPDATE_PASSWORD);
 
                 return true;
             },

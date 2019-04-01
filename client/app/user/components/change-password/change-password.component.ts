@@ -4,6 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
+import { NetworkActivityService } from '../../../shared/services/network-activity.service';
 
 @Component({
     selector: 'app-change-password',
@@ -19,10 +20,19 @@ export class ChangePasswordComponent {
     constructor(route: ActivatedRoute,
                 private apollo: Apollo,
                 private alertService: AlertService,
+                private network: NetworkActivityService,
                 private router: Router) {
         this.token = route.snapshot.params.token;
 
         this.form = new FormGroup({});
+
+        // Watch errors
+        this.network.errors.subscribe(errors => {
+            if (errors.length) {
+                this.sending = false;
+                this.alertService.error(errors[0].message, 5000);
+            }
+        });
     }
 
     submit(): void {

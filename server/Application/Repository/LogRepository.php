@@ -21,6 +21,16 @@ class LogRepository extends AbstractRepository
     const LOGIN_FAILED = 'login failed';
 
     /**
+     * Log message to be used when user change his password
+     */
+    const UPDATE_PASSWORD = 'update password';
+
+    /**
+     * Log message to be used when user cannot change his password
+     */
+    const UPDATE_PASSWORD_FAILED = 'update password failed';
+
+    /**
      * This should NOT be called directly, instead use `_log()` to log stuff
      *
      * @param array $event
@@ -40,6 +50,16 @@ class LogRepository extends AbstractRepository
      */
     public function loginFailedOften(): bool
     {
+        return $this->failedOften(self::LOGIN, self::LOGIN_FAILED);
+    }
+
+    public function updatePasswordFailedOften(): bool
+    {
+        return $this->failedOften(self::UPDATE_PASSWORD, self::UPDATE_PASSWORD_FAILED);
+    }
+
+    private function failedOften(string $success, string $failed): bool
+    {
         if (PHP_SAPI === 'cli') {
             $ip = 'script';
         } else {
@@ -52,7 +72,7 @@ class LogRepository extends AbstractRepository
             ->andWhere('priority = :priority')
             ->setParameter('priority', Logger::INFO)
             ->andWhere('message IN (:message)')
-            ->setParameter('message', [self::LOGIN_FAILED, self::LOGIN], Connection::PARAM_STR_ARRAY)
+            ->setParameter('message', [$success, $failed], Connection::PARAM_STR_ARRAY)
             ->andWhere('creation_date > DATE_SUB(NOW(), INTERVAL 30 MINUTE)')
             ->andWhere('ip = :ip')
             ->setParameter('ip', $ip)
@@ -63,7 +83,7 @@ class LogRepository extends AbstractRepository
         // Goes from present to past and count failure, until the last time we succeeded logging in
         $failureCount = 0;
         foreach ($events as $event) {
-            if ($event === self::LOGIN) {
+            if ($event === $success) {
                 break;
             }
             ++$failureCount;

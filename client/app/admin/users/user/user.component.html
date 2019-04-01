@@ -230,6 +230,11 @@
 
         </mat-tab>
 
+        <mat-tab label="Famille" *ngIf="data.model.id">
+            <app-users [queryVariables]="getFamillyIds()"></app-users>
+        </mat-tab>
+
+
     </mat-tab-group>
 
     <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()"></app-detail-fixed-button>

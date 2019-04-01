@@ -4,11 +4,13 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
+    BookablesVariables,
     BookingFilter,
     BookingStatus,
     BookingType,
     CreateUser,
     CreateUserVariables,
+    LogicalOperator,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -122,6 +124,21 @@ export class UserComponent
             ],
         };
         return filter;
+    }
+
+    public getFamillyIds(): BookablesVariables {
+        return {
+            filter: {
+
+                groups: [
+                    {conditions: [{id: {equal: {value: this.data.model.id}}}]},
+                    {
+                        groupLogic: LogicalOperator.OR,
+                        conditions: [{owner: {equal: {value: this.data.model.id}}}],
+                    },
+                ],
+            },
+        };
     }
 
 }

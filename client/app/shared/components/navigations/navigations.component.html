@@ -4,13 +4,14 @@
         <div *ngIf="!bookings.items.length && showEmptyMessage" class="padding mat-body-2">Aucun résultat</div>
 
         <ng-container *ngFor="let booking of bookings.items; let i = index">
-            <div [@terminate] *ngIf="!activeOnly || activeOnly && !booking.endDate">
+            <div [@terminate] *ngIf="!activeOnly || activeOnly && !booking.terminated">
                 <app-card [file]="booking.bookables[0]?.image" [style.width.px]="300" [class.showComments]="booking.showComments">
                     <card-illustration *ngIf="!booking.bookables[0]?.image" class="padding">
                         <ngx-avatar name="?" [size]="160"></ngx-avatar>
                     </card-illustration>
 
-                    <div fxLayout="column" fxLayoutGap="10px" style="overflow:hidden;">
+                    <!-- style="overflow:hidden;" -->
+                    <div fxLayout="column" fxLayoutGap="10px" >
                         <a mat-button [routerLink]="booking.bookables[0] ? ['/booking', booking.bookables[0].code] : null" app-button-wrap>
                             {{ booking.bookables[0]?.name || 'Matériel personnel' }}
                         </a>
@@ -31,9 +32,21 @@
                                 <app-icon name="feedback"></app-icon>
                             </button>
                             <div fxFlex></div>
-                            <button mat-flat-button color="warn" (click)="endBooking(booking)" *ngIf="!booking.endDate" [@terminate]>
-                                Terminer
-                            </button>
+
+                            <button mat-flat-button
+                                    color="warn"
+                                    (click)="endBooking(booking)"
+                                    [pHidden]="!!booking.endDate"
+                                    (pComplete)="booking.terminated = true"
+                                    libParticleEffectButton
+                                    [pParticlesAmountCoefficient]="2"
+                                    [pOscillationCoefficient]="100"
+                                    [pDuration]="500"
+                                    pEasing="easeOutQuad"
+                                    [pSpeed]="0.1"
+                                    pColor="#f44336"
+                            >Terminer</button>
+
                         </div>
                     </div>
 

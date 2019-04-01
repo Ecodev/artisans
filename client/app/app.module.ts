@@ -12,7 +12,6 @@ import {
     MatIconRegistry,
     ShowOnDirtyErrorStateMatcher,
 } from '@angular/material';
-import { NgProgressModule } from '@ngx-progressbar/core';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { AlertService } from './shared/components/alert/alert.service';
 import { createUploadLink } from 'apollo-upload-client';
@@ -36,6 +35,7 @@ import { registerLocaleData } from '@angular/common';
 import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchic-selector.module';
 import { ConfirmComponent } from './shared/components/alert/confirm.component';
 import { SafetyComponent } from './safety/safety.component';
+import { NgProgressModule } from '@ngx-progressbar/core';
 
 registerLocaleData(localeFRCH);
 
@@ -57,7 +57,7 @@ registerLocaleData(localeFRCH);
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        NgProgressModule.forRoot(),
+        NgProgressModule,
         ApolloModule,
         AppRoutingModule,
         MaterialModule,

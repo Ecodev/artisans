@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ObservableMedia } from '@angular/flex-layout';
 import { MatDrawer, MatDrawerContainer } from '@angular/material';
 import { SidenavContainerComponent } from './components/sidenav-container/sidenav-container.component';
 import { BehaviorSubject } from 'rxjs';
+import { MediaObserver } from '@angular/flex-layout';
 
 /**
  * @TODO : Fix nav minimize and maximize resize
@@ -63,7 +63,7 @@ export class SidenavService {
     private container: MatDrawerContainer;
     private drawer: MatDrawer;
 
-    constructor(public media: ObservableMedia) {
+    constructor(public mediaObserver: MediaObserver) {
     }
 
     get activeMode(): string {
@@ -102,7 +102,7 @@ export class SidenavService {
         this.tmpOpened = this.opened;
 
         let oldIsBig: boolean | null = null;
-        this.media.subscribe(() => {
+        this.mediaObserver.asObservable().subscribe(() => {
 
             const isBig = !this.isMobileView();
             this.mode = isBig ? this.modes[0] : this.modes[1];
@@ -127,7 +127,7 @@ export class SidenavService {
     }
 
     public isMobileView() {
-        return !this.media.isActive('gt-sm');
+        return !this.mediaObserver.isActive('gt-sm');
     }
 
     /**

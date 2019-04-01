@@ -48,6 +48,8 @@ export class NavigationsComponent implements OnInit, OnDestroy {
     private currentPage = 0;
     private family;
 
+    public hidden8 = false;
+
     constructor(public userService: UserService,
                 public bookingService: BookingService,
                 private alertService: AlertService,

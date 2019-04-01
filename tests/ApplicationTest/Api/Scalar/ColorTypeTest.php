@@ -72,7 +72,6 @@ class ColorTypeTest extends TestCase
             ['#01aB9F', true],
             ['#ZZZZZZ', false],
             ['AABBCC', false],
-            [123, false],
             [null, false],
             [' ', false],
         ];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ApplicationTest\ORM\Query\Filter;
+namespace ApplicationTest\Api;
 
 use Application\Api\DefaultFieldResolver;
 use Application\Api\Schema;
@@ -77,7 +77,7 @@ class DefaultFieldResolverTest extends TestCase
             }
         };
 
-        $resolve = new ResolveInfo('field', null, null, new ObjectType(['name' => 'foo']), null, new Schema(), null, null, null, null);
+        $resolve = new ResolveInfo('field', null, null, new ObjectType(['name' => 'foo']), [], new Schema(), [], null, null, []);
         $resolver = new DefaultFieldResolver();
         self::assertSame($expected, $resolver($model, [], [], $resolve));
     }

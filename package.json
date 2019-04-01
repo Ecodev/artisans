@@ -9,7 +9,6 @@
         "test": "yarn codegen && ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "codegen1": "./bin/dump-schema && apollo-codegen generate 'client/**/*.ts' --schema data/tmp/schema/schema.json --target typescript --output client/app/shared/generated-types.ts",
         "codegen": "./bin/dump-schema && apollo client:codegen -c apollo.config.js  --outputFlat --target typescript client/app/shared/generated-types.ts"
     },
     "lint-staged": {

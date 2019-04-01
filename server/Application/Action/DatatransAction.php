@@ -125,7 +125,8 @@ class DatatransAction extends AbstractAction
             throw new \Exception('Cannot create transactions without a user');
         }
 
-        $account = $this->entityManager->getRepository(Account::class)->getOrCreate($user);
+        $userAccount = $this->entityManager->getRepository(Account::class)->getOrCreate($user);
+        $bankAccount = $this->entityManager->getRepository(Account::class)->findOneById('10025');
 
         if (!array_key_exists('amount', $body)) {
             // Do not support "registrations"
@@ -153,7 +154,8 @@ class DatatransAction extends AbstractAction
         $line->setBalance((string) ($body['amount'] / 100));
         $line->setDatatransRef($datatransRef);
         $line->setTransaction($transaction);
-        $line->setCredit($account);
+        $line->setCredit($userAccount);
+        $line->setDebit($bankAccount);
 
         // This could be removed later on. For now it's mostly for debugging
         $line->setRemarks(json_encode($body, JSON_PRETTY_PRINT));

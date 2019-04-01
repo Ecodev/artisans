@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Application\Middleware\AuthenticationMiddleware;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Application;
 use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Helper\ServerUrlMiddleware;
@@ -21,9 +23,15 @@ use Zend\Stratigility\Middleware\ErrorHandler;
  * Setup middleware pipeline:
  */
 return function (Application $app, MiddlewareFactory $factory, ContainerInterface $container): void {
+    /** @var ErrorHandler $errorHandler */
+    $errorHandler = $container->get(ErrorHandler::class);
+    $errorHandler->attachListener(function (\Throwable $throwable, ServerRequestInterface $request, ResponseInterface $response): void {
+        _log()->err($throwable->getMessage() . "\n" . $throwable->getTraceAsString());
+    });
+
     // The error handler should be the first (most outer) middleware to catch
     // all Exceptions.
-    $app->pipe(ErrorHandler::class);
+    $app->pipe($errorHandler);
     $app->pipe(ServerUrlMiddleware::class);
 
     // Pipe more middleware here that you want to execute on every request:

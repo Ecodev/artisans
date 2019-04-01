@@ -40,8 +40,6 @@ class LoggerFactory implements FactoryInterface
             $dbWriter = new DbWriter($logRepository, $baseUrl);
             $dbWriter->addFilter(Logger::INFO);
             $this->logger->addWriter($dbWriter);
-
-            Logger::registerErrorHandler($this->logger, true);
         }
 
         return $this->logger;

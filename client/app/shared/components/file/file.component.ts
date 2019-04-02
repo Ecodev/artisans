@@ -18,6 +18,11 @@ export class FileComponent extends AbstractController implements OnInit, OnChang
 
     @Input() action: 'upload' | 'download' | null = null;
 
+    /**
+     * Comma separated list of accepted mimetypes
+     */
+    @Input() accept = 'image/bmp,image/gif,image/jpeg,image/pjpeg,image/png,image/svg+xml,image/webp';
+
     @Input() service;
     @Input() model; // todo : when __typename included in queries : FileType;
 

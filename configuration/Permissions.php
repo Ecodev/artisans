@@ -49,7 +49,7 @@ return [
         'permissions' => '0750',
     ],
     [
-        'path' => 'bin/delete-old-log',
+        'path' => 'bin/delete-old-log.php',
         'permissions' => '0750',
     ],
     [

@@ -29,7 +29,7 @@ import { AlertService } from '../alert/alert.service';
     animations: [
         trigger('terminate', [
             transition(':leave', [
-                animate('0.25s ease-in-out', style({transform: 'scale(0, 0)'})),
+                animate('0.2s ease-in-out', style({transform: 'scale(0, 0)'})),
             ]),
         ]),
     ],

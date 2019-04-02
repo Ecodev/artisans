@@ -7,6 +7,7 @@ import {
     CreateExpenseClaim,
     CreateExpenseClaimVariables,
     ExpenseClaim,
+    ExpenseClaimType,
     ExpenseClaimVariables,
     UpdateExpenseClaim,
     UpdateExpenseClaimVariables,
@@ -26,6 +27,8 @@ export class ExpenseClaimComponent
         UpdateExpenseClaim['updateExpenseClaim'],
         UpdateExpenseClaimVariables,
         any> {
+
+    public ExpenseClaimType = ExpenseClaimType;
 
     constructor(alertService: AlertService,
                 expenseClaimService: ExpenseClaimService,

@@ -76,6 +76,25 @@ export class AbstractEditableList<Tall extends { items: any[] }, Vall extends Qu
         }
     }
 
+    public setLines(newLines: Literal[]) {
+        const lines = this.form.get('lines') as FormArray;
+        if (lines && newLines && newLines.length) {
+            lines.controls = []; // reset list
+            this.addLines(newLines);
+        }
+    }
+
+    public addLines(newLines: Literal[]) {
+        const lines = this.form.get('lines') as FormArray;
+        if (lines && newLines && newLines.length) {
+            newLines.forEach(line => {
+                lines.push(AbstractDetail.getFormGroup(line, this.service));
+            });
+
+            this.dataSource = new MatTableDataSource(lines.controls);
+        }
+    }
+
     /**
      * Return a list of models without any treatment.
      *

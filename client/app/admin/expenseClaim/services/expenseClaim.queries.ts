@@ -17,6 +17,10 @@ export const expenseClaimMetaFragment = gql`
         owner {
             id
             name
+            account {
+                id
+                name
+            }
         }
         creationDate
         updateDate

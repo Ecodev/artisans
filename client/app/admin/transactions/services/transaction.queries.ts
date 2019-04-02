@@ -15,6 +15,7 @@ export const transactionMetaFragment = gql`
             name
             description
             type
+            status
             owner {
                 id
                 name

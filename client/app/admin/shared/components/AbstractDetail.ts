@@ -7,6 +7,7 @@ import { AbstractController } from '../../../shared/components/AbstractControlle
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { AbstractModelService, VariablesWithInput } from '../../../shared/services/abstract-model.service';
 import { Literal } from '../../../shared/types';
+import { omit } from 'lodash';
 
 export class AbstractDetail<Tone,
     Vone,
@@ -57,6 +58,7 @@ export class AbstractDetail<Tone,
     ngOnInit(): void {
         this.route.data.subscribe(data => {
             this.data = merge({model: this.service.getEmptyObject()}, {model: this.service.getDefaultValues()}, data[this.key]);
+            this.data = merge(this.data, omit(data, [this.key]));
             this.initForm();
         });
     }

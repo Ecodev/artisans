@@ -38,22 +38,31 @@
                     </div>
                 </div>
 
-                <mat-divider></mat-divider>
-
-                <div>
-                    <div class="mat-title">Documents justificatifs</div>
-                    <app-accounting-documents #transactionDocuments [model]="data.model"></app-accounting-documents>
-                </div>
-
                 <mat-divider *ngIf="data.model.expenseClaim"></mat-divider>
                 <div *ngIf="data.model.expenseClaim">
-                    <div fxLayout="row" fxLayoutGap="20px" class="margin-bottom">
+                    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center" class="margin-bottom">
                         <div class="mat-title no-margin-bottom">
-                            <span *ngIf="data.model.expenseClaim.type === ExpenseClaimType.refund">Annonce de remboursement</span>
+                            <span *ngIf="data.model.expenseClaim.type === ExpenseClaimType.refund">Demande de remboursement</span>
                             <span *ngIf="data.model.expenseClaim.type === ExpenseClaimType.expenseClaim">Annonce de dépense</span>
                         </div>
 
-                        <a mat-stroked-button [routerLink]="['/admin/expense-claim', data.model.expenseClaim.id]">Voir</a>
+                        <a mat-stroked-button [routerLink]="['/admin/expense-claim', data.model.expenseClaim.id]">Voir la demande</a>
+
+                        <mat-button-toggle-group name="fontStyle"
+                                                 [value]="data.model.expenseClaim.status"
+                                                 (change)="flagExpenseClaim($event.value)"
+                        >
+                            <mat-button-toggle [value]="ExpenseClaimStatus.new"
+                            >Nouveau
+                            </mat-button-toggle>
+                            <mat-button-toggle [value]="ExpenseClaimStatus.processing"
+                            >En traitement
+                            </mat-button-toggle>
+                            <mat-button-toggle [value]="ExpenseClaimStatus.processed"
+                            >Traité
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
+
                     </div>
 
                     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
@@ -67,10 +76,11 @@
                                 <span class="mat-body-2">Utilisateur :</span>
                                 {{ data.model.expenseClaim.owner.name }}
                             </div>
-                            <div>
+                            <div *ngIf="data.model.expenseClaim.description">
                                 <span class="mat-body-2">Description :</span>
                                 {{ data.model.expenseClaim.description }}
                             </div>
+
                         </div>
 
                         <app-accounting-documents [disabled]="true" [model]="data.model.expenseClaim" [fileHeight]="150" [fileWidth]="200"
@@ -89,7 +99,11 @@
                     <button mat-stroked-button (click)="updateTransactionLines = false" *ngIf="updateTransactionLines && data.model.id">
                         Annuler
                     </button>
-                    <button *ngIf="updateTransactionLines" mat-flat-button color="primary" (click)="transactionLinesComponent.addEmpty()">
+                    <button mat-flat-button
+                            color="primary"
+                            (click)="transactionLinesComponent.addEmpty()"
+                            *ngIf="updateTransactionLines && data.model.id"
+                    >
                         Ajouter une écriture
                     </button>
                 </div>
@@ -102,6 +116,11 @@
 
                 <div *ngIf="updateTransactionLines || !data.model.id">
                     <app-editable-transaction-lines [transaction]="data.model"></app-editable-transaction-lines>
+                </div>
+
+                <div>
+                    <div class="mat-title">Documents justificatifs de la transaction</div>
+                    <app-accounting-documents #transactionDocuments [model]="data.model"></app-accounting-documents>
                 </div>
 
                 <mat-divider></mat-divider>

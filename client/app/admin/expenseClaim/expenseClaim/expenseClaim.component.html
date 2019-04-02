@@ -1,7 +1,24 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouveau compte" label="Frais et remboursement" [model]="data.model" [listRoute]="['admin', 'expense-claim']">
-        <app-money [amount]="data.model.amount" sizeClass="mat-display-1"></app-money>
+    <app-detail-header newLabel="Nouveau compte"
+                       label="Frais et remboursement"
+                       [model]="data.model"
+                       [listRoute]="['admin', 'expense-claim']"
+    >
+
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+            <a *ngIf="data.model.id"
+               mat-flat-button
+               color="primary"
+               [routerLink]="['/admin/transaction/new', {expenseClaim: data.model.id}]"
+            >
+                <span>Valider</span> &nbsp;
+                <span *ngIf="data.model.type === ExpenseClaimType.expenseClaim">(créditer le solde)</span>
+                <span *ngIf="data.model.type === ExpenseClaimType.refund">(rembourser)</span>
+            </a>
+
+            <app-money [amount]="data.model.amount" sizeClass="mat-display-1" [showSignal]="false"></app-money>
+        </div>
     </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
@@ -39,27 +56,28 @@
 
                     <div fxFlex="33" fxLayout="column">
 
+                        <app-select-enum enumName="ExpenseClaimType" formControlName="type" (selectionChange)="update()" placeholder="Type"
+                        ></app-select-enum>
+
+                        <div fxLayout="row" fxLayoutGap="20px">
+                            <mat-form-field fxFlex="40">
+                                <mat-label>Montant</mat-label>
+                                <input matInput type="number" step="0.01" formControlName="amount" (change)="update()">
+                                <div matSuffix>CHF</div>
+                                <mat-error *ngIf="form.get('amount').hasError('required')">Requis</mat-error>
+                            </mat-form-field>
+
+                            <app-select-enum enumName="ExpenseClaimStatus"
+                                             formControlName="status"
+                                             (selectionChange)="update()"
+                                             placeholder="Status"
+                                             fxFlex
+                            ></app-select-enum>
+
+                        </div>
+
                         <app-select formControlName="owner" placeholder="Membre" [service]="userService" (selectionChange)="update()"
                         ></app-select>
-
-                        <mat-form-field>
-                            <mat-label>Montant</mat-label>
-                            <input matInput type="number" step="0.01" formControlName="amount" (change)="update()">
-                            <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('amount').hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <app-select-enum enumName="ExpenseClaimStatus"
-                                         formControlName="status"
-                                         (selectionChange)="update()"
-                                         placeholder="Status"
-                        ></app-select-enum>
-
-                        <app-select-enum enumName="ExpenseClaimType"
-                                         formControlName="type"
-                                         (selectionChange)="update()"
-                                         placeholder="Type"
-                        ></app-select-enum>
                     </div>
 
                 </div>

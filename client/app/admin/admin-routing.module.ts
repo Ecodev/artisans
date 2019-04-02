@@ -36,6 +36,7 @@ import { TransactionTagComponent } from './transactionTags/transactionTag/transa
 import { TransactionTagResolver } from './transactionTags/services/transactionTag-resolver.service';
 import { AdministrationGuard } from '../shared/services/administration.guard';
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
+import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
 
 const routes: Routes = [
         {
@@ -357,6 +358,7 @@ const routes: Routes = [
                             component: TransactionComponent,
                             resolve: {
                                 transaction: TransactionResolver,
+                                expenseClaim: ExpenseClaimParamResolver,
                             },
                         },
                         {

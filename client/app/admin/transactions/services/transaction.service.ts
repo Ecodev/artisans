@@ -1,26 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import {
-    createTransaction,
-    deleteTransactions,
-    transactionQuery,
-    transactionsQuery,
-    updateTransaction,
-} from './transaction.queries';
+import { createTransaction, deleteTransactions, transactionQuery, transactionsQuery, updateTransaction } from './transaction.queries';
 import {
     CreateTransaction,
-    CreateTransactionVariables, DeleteTransactions,
-    TransactionInput,
+    CreateTransactionVariables,
+    DeleteTransactions,
     Transaction,
-    TransactionVariables,
+    TransactionInput,
+    TransactionLineInput,
     Transactions,
     TransactionsVariables,
+    TransactionVariables,
     UpdateTransaction,
     UpdateTransactionVariables,
+    User,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';
+import { TransactionLineService } from './transactionLine.service';
 
 @Injectable({
     providedIn: 'root',
@@ -35,7 +33,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
     UpdateTransactionVariables,
     DeleteTransactions> {
 
-    constructor(apollo: Apollo) {
+    constructor(apollo: Apollo, private transactionLineService: TransactionLineService) {
         super(apollo,
             'transaction',
             transactionQuery,
@@ -43,6 +41,36 @@ export class TransactionService extends AbstractModelService<Transaction['transa
             createTransaction,
             updateTransaction,
             deleteTransactions);
+    }
+
+    public getRefundPreset(account: {id: string}, amount: string): TransactionLineInput[] {
+
+        const emptyLine = this.transactionLineService.getEmptyObject();
+
+        const line: TransactionLineInput = {
+            name: 'Remboursement du membre',
+            debit: account,
+            credit: {id: '10025', name: 'Postfinance'},
+            balance: amount,
+            transactionDate: '',
+        };
+
+        return [Object.assign(emptyLine, line)];
+    }
+
+    public getExpenseClaimPreset(account: {id: string}, amount: string): TransactionLineInput[] {
+
+        const emptyLine = this.transactionLineService.getEmptyObject();
+
+        const line: TransactionLineInput = {
+            name: 'Remboursement sur le solde',
+            debit: {id: '10025', name: 'Postfinance'},
+            credit: account,
+            balance: amount,
+            transactionDate: '',
+        };
+
+        return [Object.assign(emptyLine, line)];
     }
 
     public getEmptyObject(): TransactionInput {

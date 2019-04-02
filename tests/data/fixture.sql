@@ -117,7 +117,8 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10100, 10007, NULL, 'expense', '8000', '', 'Charges hors exploitation'),
 (10101, 10007, NULL, 'revenue', '8100', '', 'Produits hors exploitation'),
 (10102, 10007, NULL, 'expense', '8500', '', 'Charges extraordinaires, exceptionnelles ou hors période'),
-(10103, 10007, NULL, 'revenue', '8510', '', 'Produits extraordinaires, exceptionnels ou hors période');
+(10103, 10007, NULL, 'revenue', '8510', '', 'Produits extraordinaires, exceptionnels ou hors période'),
+(10104, 10001, NULL, 'liability', '2600', '', 'Provisions pour réparations');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Voilier');

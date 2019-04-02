@@ -59,6 +59,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
             datatransRef: '',
             isReconciled: false,
             transactionDate: '',
+            transactionTag: null,
         };
     }
 

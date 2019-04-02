@@ -89,6 +89,9 @@
                     <button mat-stroked-button (click)="updateTransactionLines = false" *ngIf="updateTransactionLines && data.model.id">
                         Annuler
                     </button>
+                    <button *ngIf="updateTransactionLines" mat-flat-button color="primary" (click)="transactionLinesComponent.addEmpty()">
+                        Ajouter une écriture
+                    </button>
                 </div>
 
                 <div *ngIf="!updateTransactionLines && data.model.id">

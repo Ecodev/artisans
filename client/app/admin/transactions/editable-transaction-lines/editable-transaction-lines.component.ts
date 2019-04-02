@@ -3,7 +3,8 @@ import { AbstractEditableList } from '../../shared/components/AbstractEditableLi
 import { TransactionLineService } from '../services/transactionLine.service';
 import { AccountConfiguration } from '../../../shared/hierarchic-selector/configurations/AccountConfiguration';
 import { BookableService } from '../../bookables/services/bookable.service';
-import { TransactionLinesVariables, Transaction } from '../../../shared/generated-types';
+import { Transaction, TransactionLinesVariables } from '../../../shared/generated-types';
+import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
 
 @Component({
     selector: 'app-editable-transaction-lines',
@@ -15,9 +16,10 @@ export class EditableTransactionLinesComponent extends AbstractEditableList<any,
     @Input() transaction: Transaction['transaction'];
 
     public accountHierarchicConfig = AccountConfiguration;
-    public columns = ['name', 'balance', 'debit', 'credit', 'bookable', 'remove'];
+    public columns = ['name', 'balance', 'debit', 'credit', 'bookable', 'transactionTag', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,
+                public transactionTagService: TransactionTagService,
                 public bookableService: BookableService) {
         super('transactionLine', transactionLineService);
     }

@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { bookableQuery, bookablesQuery, createBookable, deleteBookables, updateBookable } from './bookable.queries';
 import {
-    bookableQuery,
-    bookablesQuery,
-    createBookable,
-    deleteBookables,
-    updateBookable,
-} from './bookable.queries';
-import {
-    BookableInput,
     Bookable,
-    BookableVariables,
+    BookableInput,
     Bookables,
-    BookablesVariables,
     BookableState,
+    BookablesVariables,
+    BookableVariables,
     Bookings,
     BookingsVariables,
     BookingType,
@@ -153,6 +147,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
             state: BookableState.good,
             verificationDate: null,
             image: null,
+            creditAccount: null,
         };
     }
 

@@ -16,6 +16,10 @@ export const bookableMetaFragment = gql`
         initialPrice
         periodicPrice
         purchasePrice
+        creditAccount {
+            id
+            name
+        }
         code
         simultaneousBookingMaximum
         bookingType

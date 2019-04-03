@@ -16,6 +16,7 @@ import {
 import { LicenseService } from '../../licenses/services/license.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 import { ImageService } from '../services/image.service';
+import { AccountConfiguration } from '../../../shared/hierarchic-selector/configurations/AccountConfiguration';
 
 @Component({
     selector: 'app-bookable',
@@ -30,6 +31,8 @@ export class BookableComponent
         UpdateBookable['updateBookable'],
         UpdateBookableVariables,
         any> implements OnInit {
+
+    public accountHierarchicConfig = AccountConfiguration;
 
     constructor(alertService: AlertService,
                 bookableService: BookableService,

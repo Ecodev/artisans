@@ -110,6 +110,16 @@ class Bookable extends AbstractModel
     private $image;
 
     /**
+     * @var null|Account
+     *
+     * @ORM\ManyToOne(targetEntity="Account")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     * })
+     */
+    private $creditAccount;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -377,5 +387,25 @@ class Bookable extends AbstractModel
         }
 
         $this->image = $image;
+    }
+
+    /**
+     * The account to credit when booking this bookable
+     *
+     * @return null|Account
+     */
+    public function getCreditAccount(): ?Account
+    {
+        return $this->creditAccount;
+    }
+
+    /**
+     * The account to credit when booking this bookable
+     *
+     * @param null|Account $creditAccount
+     */
+    public function setCreditAccount(?Account $creditAccount): void
+    {
+        $this->creditAccount = $creditAccount;
     }
 }

@@ -116,6 +116,14 @@
                             <mat-hint>Saisir -1 pour aucune limite.</mat-hint>
                         </mat-form-field>
 
+                        <app-select formControlName="creditAccount"
+                                    placeholder="Compte à créditer lors de réservation"
+                                    [hierarchicSelectorConfig]="accountHierarchicConfig"
+                                    (selectionChange)="update()"
+                                    [showIcon]="false"
+                                    [navigateTo]="['/admin/account', form.get('creditAccount').value?.id]"
+                        ></app-select>
+
                     </div>
                 </div>
 

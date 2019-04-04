@@ -396,7 +396,7 @@ break;
                     $role = 'individual';
                     echo sprintf("WARN: individu %u (%s %s) n'a pas de statut familial", $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             }
-            if (in_array($user['uid'], [1057, 2738], true)) {
+            if (in_array((int) $user['uid'], [1057, 2738], true)) {
                 $role = 'administrator';
             } elseif (!empty($user['ichtus_comite_fonction'])) {
                 $role = 'responsible';

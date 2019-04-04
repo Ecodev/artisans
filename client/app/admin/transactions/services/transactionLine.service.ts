@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
 import { transactionLineQuery, transactionLinesQuery } from './transactionLine.queries';
 import {
-    TransactionLineInput,
+    LogicalOperator,
+    SortingOrder,
     TransactionLine,
-    TransactionLineVariables,
+    TransactionLineInput,
     TransactionLines,
+    TransactionLineSortingField,
     TransactionLinesVariables,
+    TransactionLineVariables,
     User,
 } from '../../../shared/generated-types';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
-
+import { of } from 'rxjs';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -78,8 +81,31 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
     }
 
     public getForUser(user: User['user']) {
+        const accountId = user.account ? user.account.id : null;
+
+        if (!accountId) {
+            return {
+                valueChanges: of(null),
+                unsubscribe: () => {
+                },
+            } as AutoRefetchQueryRef<any>;
+        }
+
         const variables: TransactionLinesVariables = {
-            filter: {groups: [{conditions: [{owner: {in: {values: [user.id]}}}]}]},
+            filter: {
+                groups: [
+                    {
+                        conditionsLogic: LogicalOperator.OR,
+                        conditions: [
+                            {credit: {equal: {value: accountId}}},
+                            {debit: {equal: {value: accountId}}},
+                        ],
+                    },
+
+                ],
+            },
+            sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
+            pagination: {pageIndex: 0, pageSize: 9999}
         };
 
         const qvm = new QueryVariablesManager<TransactionLinesVariables>();

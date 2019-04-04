@@ -108,6 +108,18 @@
                             <input matInput formControlName="swissSailing" (change)="update()">
                         </mat-form-field>
 
+                        <app-select-enum enumName="SwissSailingType"
+                                         formControlName="swissSailingType"
+                                         (selectionChange)="update()"
+                                         placeholder="Licence swiss sailing"
+                        ></app-select-enum>
+
+                        <app-select-enum enumName="SwissWindsurfType"
+                                         formControlName="swissWindsurfType"
+                                         (selectionChange)="update()"
+                                         placeholder="License swiss windsurfing"
+                        ></app-select-enum>
+
                         <mat-form-field>
                             <mat-label>Remarques</mat-label>
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
@@ -233,7 +245,6 @@
         <mat-tab label="Famille" *ngIf="data.model.id">
             <app-users [queryVariables]="getFamillyIds()"></app-users>
         </mat-tab>
-
 
     </mat-tab-group>
 

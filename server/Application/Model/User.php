@@ -105,7 +105,7 @@ class User extends AbstractModel
 
     /**
      * @var null|string
-     * @ORM\Column(type="string", length=191, nullable=true, unique=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     private $email;
 

@@ -29,6 +29,7 @@ import { CommentComponent } from '../components/navigations/comment.component';
 import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
+import { ParticleSwitchComponent } from '../particle-switch/particle-switch.component';
 
 const declarations = [
     RelationsComponent,
@@ -51,7 +52,8 @@ const declarations = [
     NavigationsComponent,
     CommentComponent,
     TransactionAmountComponent,
-    AccountingDocumentsComponent
+    AccountingDocumentsComponent,
+    ParticleSwitchComponent,
 ];
 
 const imports = [

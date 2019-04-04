@@ -25,7 +25,13 @@
                         Faire un versement
                     </button>
                 </div>
-                <app-money [amount]="user.account?.balance || 0" sizeClass="mat-display-2"></app-money>
+
+                <app-particle-switch [data]="user?.account?.balance || 0">
+                    <ng-template let-data="data">
+                        <app-money [amount]="data" sizeClass="mat-display-2"></app-money>
+                    </ng-template>
+                </app-particle-switch>
+
             </div>
         </div>
 

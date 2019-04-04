@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
                 // Don't call accountService as actual user may not have one, and it couldn't be updated.
                 // TODO : replace by a viewer watching architecture
                 this.userService.getOne(user.id, true).subscribe(updatedUser => {
-                    user.account = updatedUser.account;
+                    this.user.account = updatedUser.account;
                 });
 
                 // Restore store, to refetch queries that are watched

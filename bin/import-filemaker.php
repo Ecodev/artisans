@@ -1,8 +1,11 @@
 #! /usr/bin/env php
 <?php
 
-use Application\Importer;
+use Application\Service\Importer;
 
-require_once 'server/cli.php';
+$container = require_once 'server/cli.php';
 
-$importer = new Importer();
+/** @var Importer $importer */
+$importer = $container->get(Importer::class);
+
+$importer->import();

@@ -120,12 +120,6 @@
                                          placeholder="License swiss windsurfing"
                         ></app-select-enum>
 
-                        <mat-form-field>
-                            <mat-label>Remarques</mat-label>
-                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
-                            ></textarea>
-                        </mat-form-field>
-
                         <div class="mat-body-1">
                             <p>Dernière connexion : {{ data.model.lastLogin | date: 'fullDate'}}</p>
                             <p>Séance d'accueil le : {{ data.model.welcomeSessionDate | date: 'fullDate'}}</p>
@@ -134,6 +128,20 @@
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
+
+                        <h2 class="mat-title">Commentaires</h2>
+
+                        <mat-form-field>
+                            <mat-label>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="3"
+                            ></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Remarques internes</mat-label>
+                            <textarea matInput formControlName="internalRemarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="3"
+                            ></textarea>
+                        </mat-form-field>
 
                     </div>
                 </div>

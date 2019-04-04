@@ -10,15 +10,15 @@
                     <div fxFlex="80" fxLayout="column">
 
                         <div fxLayout="row" fxLayoutGap="10px">
-                            <app-select fxFlex="80"
+                            <app-select fxFlex
                                         formControlName="owner"
                                         placeholder="Responsable"
                                         [service]="userService"
                                         (selectionChange)="update()"
                             ></app-select>
 
-                            <mat-form-field fxFlex="20">
-                                <mat-label>Nombre de participants</mat-label>
+                            <mat-form-field style="width:100px">
+                                <mat-label>Nb participants</mat-label>
                                 <input matInput type="number" step="1" min="1" formControlName="participantCount" (change)="update()">
                             </mat-form-field>
                         </div>
@@ -31,20 +31,45 @@
 
                     </div>
                     <div fxFlex="20" fxLayout="column">
-                        <div fxLayout="column" fxLayoutAlign="center start" class="margin-bottom" *ngIf="isApplication()">
-                            <h2 class="mat-title">Statut</h2>
-                            <mat-button-toggle-group #group="matButtonToggleGroup"
-                                                     formControlName="status"
-                                                     (change)="update()"
-                                                     [vertical]="true"
-                            >
-                                <mat-button-toggle *ngFor="let item of statuses" [value]="item.value">{{ item.name }}</mat-button-toggle>
-                            </mat-button-toggle-group>
-                        </div>
+                        <app-select-enum enumName="BookingStatus"
+                                         formControlName="status"
+                                         (selectionChange)="update()"
+                                         placeholder="Status"
+                        ></app-select-enum>
                     </div>
                 </div>
 
+                <mat-divider></mat-divider>
+
+                <h2 class="mat-title">Commentaires</h2>
+
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+
+                    <div fxFlex fxLayout="column">
+                        <mat-form-field>
+                            <mat-label>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="3"
+                            ></textarea>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex fxLayout="column">
+
+                        <mat-form-field>
+                            <mat-label>Remarques internes</mat-label>
+                            <textarea matInput
+                                      formControlName="internalRemarks"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="3"
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="isSelfApproved()">
 
                     <div fxFlex="50" fxLayout="column">
 
@@ -53,7 +78,7 @@
                             <div>{{ data.model.startDate | date: 'medium'}}</div>
                         </div>
 
-                        <mat-form-field *ngIf="isSelfApproved()">
+                        <mat-form-field>
                             <mat-label>Destination</mat-label>
                             <input matInput formControlName="destination" (change)="update()" />
                         </mat-form-field>
@@ -80,7 +105,7 @@
                             </button>
                         </div>
 
-                        <mat-form-field *ngIf="isSelfApproved()">
+                        <mat-form-field>
                             <mat-label>Heure estimée de retour</mat-label>
                             <input matInput formControlName="estimatedEndDate" (change)="update()">
                         </mat-form-field>

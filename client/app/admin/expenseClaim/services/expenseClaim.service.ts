@@ -55,6 +55,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expe
             amount: '0',
             description: '',
             remarks: '',
+            internalRemarks: '',
             status: ExpenseClaimStatus.new,
             type: ExpenseClaimType.expenseClaim,
         };

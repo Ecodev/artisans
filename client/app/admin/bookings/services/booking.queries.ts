@@ -15,6 +15,8 @@ export const bookingMetaFragment = gql`
         updateDate
         participantCount
         status
+        remarks
+        internalRemarks
         owner {
             id
             ...userMeta

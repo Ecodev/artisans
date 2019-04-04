@@ -67,5 +67,11 @@
 
     </div>
 
+    <div *ngIf="form.get('remarks')?.value">
+        <mat-divider class="margin-v"></mat-divider>
+        <div class="mat-body-2">Remarques</div>
+        <div [innerHTML]="form.get('remarks').value" class="line-break"></div>
+    </div>
+
     <button mat-raised-button *ngIf="!data.model.id" (click)="create(false)" [color]="form.invalid ? 'warn' : 'accent'">Créer</button>
 </div>

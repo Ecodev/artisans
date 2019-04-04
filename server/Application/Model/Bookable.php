@@ -8,8 +8,8 @@ use Application\DBAL\Types\BookableStateType;
 use Application\DBAL\Types\BookingTypeType;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
+use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasName;
-use Application\Traits\HasRemarks;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +26,7 @@ class Bookable extends AbstractModel
     use HasName;
     use HasDescription;
     use HasCode;
-    use HasRemarks;
+    use HasInternalRemarks;
 
     /**
      * @var string

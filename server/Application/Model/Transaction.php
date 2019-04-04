@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
 use Cake\Chronos\Date;
@@ -20,19 +21,13 @@ class Transaction extends AbstractModel
 {
     use HasName;
     use HasRemarks;
+    use HasInternalRemarks;
 
     /**
      * @var Date
      * @ORM\Column(name="transactionDate", type="date")
      */
     private $transactionDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", length=65535)
-     */
-    private $internalRemarks = '';
 
     /**
      * @var Collection
@@ -83,26 +78,6 @@ class Transaction extends AbstractModel
     public function getTransactionDate(): Date
     {
         return $this->transactionDate;
-    }
-
-    /**
-     * Set remarks for internal use
-     *
-     * @param string $internalRemarks
-     */
-    public function setInternalRemarks(string $internalRemarks): void
-    {
-        $this->internalRemarks = $internalRemarks;
-    }
-
-    /**
-     * Get remarks for internal use
-     *
-     * @return string
-     */
-    public function getInternalRemarks(): string
-    {
-        return $this->internalRemarks;
     }
 
     /**

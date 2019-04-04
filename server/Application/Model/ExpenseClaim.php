@@ -7,6 +7,7 @@ namespace Application\Model;
 use Application\DBAL\Types\ExpenseClaimStatusType;
 use Application\DBAL\Types\ExpenseClaimTypeType;
 use Application\Traits\HasDescription;
+use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -30,6 +31,7 @@ class ExpenseClaim extends AbstractModel
     use HasName;
     use HasDescription;
     use HasRemarks;
+    use HasInternalRemarks;
 
     /**
      * @var string

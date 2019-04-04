@@ -2,23 +2,16 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { pick } from 'lodash';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { bookingQuery, bookingsQuery, createBooking, deleteBookings, terminateBooking, updateBooking } from './booking.queries';
 import {
-    bookingQuery,
-    bookingsQuery,
-    createBooking,
-    deleteBookings,
-    terminateBooking,
-    updateBooking,
-} from './booking.queries';
-import {
+    Booking,
     BookingInput,
     BookingPartialInput,
-    Booking,
-    BookingVariables,
     Bookings,
-    BookingsVariables,
     BookingStatus,
+    BookingsVariables,
     BookingType,
+    BookingVariables,
     CreateBooking,
     DeleteBookings,
     JoinType,
@@ -129,6 +122,8 @@ export class BookingService extends AbstractModelService<Booking['booking'],
             estimatedEndDate: '',
             startDate: (new Date()).toISOString(),
             endDate: '',
+            remarks: '',
+            internalRemarks: '',
         };
     }
 

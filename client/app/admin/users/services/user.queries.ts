@@ -40,6 +40,7 @@ export const userFieldsFragment = gql`
         iban
         billingType
         remarks
+        internalRemarks
         owner {
             id
             name

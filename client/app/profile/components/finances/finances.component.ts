@@ -23,11 +23,11 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     public runningExpenseClaimsDS: AppDataSource;
     public runningExpenseClaims: AutoRefetchQueryRef<ExpenseClaims['expenseClaims']>;
-    public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'amount', 'cancel'];
+    public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];
 
     public transactionLinesDS: AppDataSource;
     public transactionLinesQuery: AutoRefetchQueryRef<TransactionLines['transactionLines']>;
-    public transactionsColumns = ['name', 'transactionDate', 'amount'];
+    public transactionsColumns = ['name', 'transactionDate', 'remarks', 'amount'];
 
     public ibanLocked = true;
 

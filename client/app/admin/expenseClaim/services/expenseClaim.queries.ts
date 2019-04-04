@@ -7,6 +7,7 @@ export const expenseClaimMetaFragment = gql`
         name
         description
         remarks
+        internalRemarks
         status
         type
         amount

@@ -46,12 +46,6 @@
                             ></textarea>
                         </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Remarques</mat-label>
-                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
-                            ></textarea>
-                        </mat-form-field>
-
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
@@ -78,6 +72,36 @@
 
                         <app-select formControlName="owner" placeholder="Membre" [service]="userService" (selectionChange)="update()"
                         ></app-select>
+                    </div>
+
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <h2 class="mat-title">Commentaires</h2>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+
+                    <div fxFlex fxLayout="column">
+                        <mat-form-field>
+                            <mat-label>Remarques</mat-label>
+                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="3"
+                            ></textarea>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div fxFlex fxLayout="column">
+
+                        <mat-form-field>
+                            <mat-label>Remarques internes</mat-label>
+                            <textarea matInput
+                                      formControlName="internalRemarks"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="3"
+                            ></textarea>
+                        </mat-form-field>
                     </div>
 
                 </div>

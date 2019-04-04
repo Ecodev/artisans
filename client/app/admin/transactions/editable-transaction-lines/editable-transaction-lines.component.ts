@@ -16,7 +16,7 @@ export class EditableTransactionLinesComponent extends AbstractEditableList<any,
     @Input() transaction: Transaction['transaction'];
 
     public accountHierarchicConfig = AccountConfiguration;
-    public columns = ['name', 'balance', 'debit', 'credit', 'bookable', 'transactionTag', 'remove'];
+    public columns = ['name', 'balance', 'debit', 'credit', 'bookable', 'transactionTag', 'remarks', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,
                 public transactionTagService: TransactionTagService,

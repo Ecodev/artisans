@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\DBAL\Types\BookingStatusType;
+use Application\Traits\HasInternalRemarks;
+use Application\Traits\HasRemarks;
 use Application\Utility;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,6 +24,9 @@ use GraphQL\Doctrine\Annotation as API;
  */
 class Booking extends AbstractModel
 {
+    use HasRemarks;
+    use HasInternalRemarks;
+
     /**
      * @var string
      *

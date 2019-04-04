@@ -57,6 +57,7 @@ describe('UserService', () => {
         },
         billingType: 'electronic',
         remarks: 'test string',
+        internalRemarks: 'test string',
         owner: {
             id: '456',
             name: 'test string',

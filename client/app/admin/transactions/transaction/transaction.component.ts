@@ -60,6 +60,7 @@ export class TransactionComponent
             const expenseClaim: ExpenseClaim['expenseClaim'] = this.data.expenseClaim ? this.data.expenseClaim.model : null;
             if (expenseClaim && expenseClaim.owner && expenseClaim.owner.account) {
                 this.data.model.expenseClaim = expenseClaim;
+                this.updateTransactionLines = true;
 
                 // Set default name
                 const nameControl = this.form.get('name');

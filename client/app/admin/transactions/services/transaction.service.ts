@@ -14,7 +14,6 @@ import {
     TransactionVariables,
     UpdateTransaction,
     UpdateTransactionVariables,
-    User,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Literal } from '../../../shared/types';

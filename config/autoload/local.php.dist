@@ -45,7 +45,7 @@ return [
         'driver' => '/path/to/fmodbc.so',
         'dbname' => 'ichtus',
         'host' => 'filemaker.example.com',
-        'user' => ''
+        'user' => '',
         'password' => '',
     ],
     'typo3' => [

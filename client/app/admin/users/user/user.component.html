@@ -139,7 +139,11 @@
 
                         <mat-form-field>
                             <mat-label>Remarques internes</mat-label>
-                            <textarea matInput formControlName="internalRemarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="3"
+                            <textarea matInput
+                                      formControlName="internalRemarks"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="3"
                             ></textarea>
                         </mat-form-field>
 
@@ -155,7 +159,6 @@
                         <app-relations [main]="data.model"
                                        [service]="licenseService"
                                        [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-
                                        placeholder="Attribuer une certification"
                                        [hideSearch]="true"
                         >
@@ -209,12 +212,21 @@
         <mat-tab label="Finances" *ngIf="data.model.id">
 
             <h2 class="mat-title">Finances</h2>
-            <app-select formControlName="account"
-                        placeholder="Compte"
-                        [service]="accountService"
-                        [showIcon]="false"
-                        [navigateTo]="['/admin/account', form.get('account').value?.id]"
-            ></app-select>
+
+            <div fxLayout="row" fxLayoutGap="30px" >
+                <app-select fxFlex
+                            formControlName="account"
+                            placeholder="Compte"
+                            [service]="accountService"
+                            [showIcon]="false"
+                            [navigateTo]="['/admin/account', form.get('account').value?.id]"
+                ></app-select>
+
+                <mat-form-field fxFlex>
+                    <mat-label>IBAN</mat-label>
+                    <input matInput formControlName="iban" (change)="update()">
+                </mat-form-field>
+            </div>
 
             <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
 

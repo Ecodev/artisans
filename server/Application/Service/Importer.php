@@ -71,7 +71,7 @@ class Importer
     {
         $this->loadMembers();
         $this->loadPeople();
-        $this->deleteTestUsers();
+//        $this->deleteTestUsers();
         $this->loadStorageRequests();
         $this->insertBookables();
         $this->insertUsers();
@@ -637,7 +637,7 @@ EOT;
     private function deleteTestUsers(): void
     {
         $conn = $this->entityManager->getConnection();
-        $result = $conn->executeQuery('SELECT id FROM account a where a.owner_id >= 1000 AND a.owner_id <= 1014');
+        $result = $conn->executeQuery('SELECT id FROM account a where a.owner_id < 0');
         $accounts = $result->fetchAll(\PDO::FETCH_COLUMN);
         $stmt = $conn->prepare('DELETE tl, t FROM transaction_line tl JOIN transaction t ON tl.transaction_id = t.id WHERE FIND_IN_SET(CAST(tl.debit_id as char), :accounts) OR FIND_IN_SET(CAST(tl.credit_id as char), :accounts)');
         $stmt->bindValue('accounts', implode(',', $accounts));
@@ -645,17 +645,19 @@ EOT;
         $stmt = $conn->prepare('DELETE FROM account WHERE FIND_IN_SET(CAST(id as char), :accounts)');
         $stmt->bindValue('accounts', implode(',', $accounts));
         $stmt->execute();
-        $stmt = $conn->prepare('DELETE FROM message WHERE (creator_id >= 1000 AND creator_id <= 1014) OR (owner_id >= 1000 AND owner_id <= 1014)');
+        $stmt = $conn->prepare('DELETE FROM message WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
-        $stmt = $conn->prepare('DELETE FROM user_tag WHERE (creator_id >= 1000 AND creator_id <= 1014) OR (owner_id >= 1000 AND owner_id <= 1014)');
+        $stmt = $conn->prepare('DELETE FROM user_tag WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
-        $stmt = $conn->prepare('DELETE FROM user_tag WHERE (creator_id >= 1000 AND creator_id <= 1014) OR (owner_id >= 1000 AND owner_id <= 1014)');
+        $stmt = $conn->prepare('DELETE FROM user_tag WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
-        $stmt = $conn->prepare('DELETE FROM expense_claim WHERE (creator_id >= 1000 AND creator_id <= 1014) OR (owner_id >= 1000 AND owner_id <= 1014)');
+        $stmt = $conn->prepare('DELETE FROM expense_claim WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
-        $stmt = $conn->prepare('DELETE FROM booking WHERE (creator_id >= 1000 AND creator_id <= 1014) OR (owner_id >= 1000 AND owner_id <= 1014)');
+        $stmt = $conn->prepare('DELETE FROM booking WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
-        $stmt = $conn->prepare('SET FOREIGN_KEY_CHECKS=0; DELETE FROM user WHERE id >= 1000 AND id <= 1014; SET FOREIGN_KEY_CHECKS=1;');
+        $stmt = $conn->prepare('UPDATE user set owner_id = NULL WHERE id < 0');
+        $stmt->execute();
+        $stmt = $conn->prepare('DELETE FROM user WHERE id < 0');
         $stmt->execute();
     }
 }

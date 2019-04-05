@@ -11,6 +11,7 @@ class MessageTypeType extends AbstractEnumType
     const RESET_PASSWORD = 'reset_password';
     const MONTHLY_REMINDER = 'monthly_reminder';
     const YEARLY_REMINDER = 'yearly_reminder';
+    const INVOICE = 'invoice';
 
     protected function getPossibleValues(): array
     {
@@ -20,6 +21,7 @@ class MessageTypeType extends AbstractEnumType
             self::RESET_PASSWORD,
             self::MONTHLY_REMINDER,
             self::YEARLY_REMINDER,
+            self::INVOICE,
         ];
     }
 }

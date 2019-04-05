@@ -104,7 +104,7 @@ class TransactionLine extends AbstractModel
      */
     public function setTransaction(Transaction $transaction): void
     {
-        if ($this->transaction && $transaction !== $this->transaction) {
+        if ($this->transaction) {
             $this->transaction->transactionLineRemoved($this);
         }
 

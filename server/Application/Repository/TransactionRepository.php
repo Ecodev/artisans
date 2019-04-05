@@ -62,16 +62,16 @@ class TransactionRepository extends AbstractRepository implements LimitedAccessS
             $accounts[] = $transactionLine->getDebit();
 
             $transactionLine->setTransaction($transaction);
-            _em()->persist($transactionLine);
+            $this->getEntityManager()->persist($transactionLine);
         }
 
-        _em()->persist($transaction);
-        _em()->flush();
+        $this->getEntityManager()->persist($transaction);
+        $this->getEntityManager()->flush();
 
         // Be sure to refresh the new account balance that were computed by DB triggers
         $accounts = array_filter(array_unique($accounts, SORT_REGULAR));
         foreach ($accounts as $account) {
-            _em()->refresh($account);
+            $this->getEntityManager()->refresh($account);
         }
     }
 }

@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
+use Application\Model\Account;
+use Application\Model\Bookable;
 use Application\Model\Message;
+use Application\Model\Transaction;
+use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Service\Mailer;
 use Doctrine\ORM\EntityManager;
@@ -64,6 +68,44 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $user, 'householder@example.com', MessageTypeType::RESET_PASSWORD, 'Demande de modification de mot de passe');
     }
 
+    public function testQueueInvoicePositive(): void
+    {
+        $transaction = new Transaction();
+        $this->creatTransactionLine($transaction, 'Cotisation', '90.00');
+        $this->creatTransactionLine($transaction, 'Fonds de réparation interne', '10.00');
+
+        $this->queueInvoice($transaction, 'positive');
+    }
+
+    public function testQueueInvoiceNegative(): void
+    {
+        $transaction = new Transaction();
+        $this->creatTransactionLine($transaction, 'Cotisation', '90.00');
+        $this->creatTransactionLine($transaction, 'Fonds de réparation interne', '10.00');
+        $this->creatTransactionLine($transaction, 'Casier 1012', '20.00');
+        $this->creatTransactionLine($transaction, 'Casier 1014', '20.00');
+
+        $this->queueInvoice($transaction, 'negative');
+    }
+
+    private function queueInvoice(Transaction $transaction, string $variant): void
+    {
+        $user = new User();
+        $user->setLogin('john.doe');
+        $user->setFirstName('John');
+        $user->setLastName('Doe');
+        $user->setEmail('john.doe@example.com');
+
+        $account = new Account();
+        $account->setBalance($variant === 'positive' ? '25.00' : '-45.00');
+        $account->setOwner($user);
+
+        $mailer = $this->createMockMailer();
+        $message = $mailer->queueInvoice($user, $transaction);
+
+        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::INVOICE, 'Débit de compte', $variant);
+    }
+
     public function testSendMessage(): void
     {
         $mailer = $this->createMockMailer();
@@ -120,7 +162,7 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         return $user;
     }
 
-    private function assertMessage(Message $message, ?User $user, string $email, string $type, string $subject): void
+    private function assertMessage(Message $message, ?User $user, string $email, string $type, string $subject, ?string $variant = null): void
     {
         self::assertSame($type, $message->getType());
         self::assertSame($email, $message->getEmail());
@@ -128,7 +170,8 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         self::assertNull($message->getDateSent());
         self::assertSame($subject, $message->getSubject());
 
-        $expectedBody = 'tests/data/emails/' . str_replace('_', '-', $type) . '.html';
+        $variant = $variant ? '-' . $variant : $variant;
+        $expectedBody = 'tests/data/emails/' . str_replace('_', '-', $type . $variant) . '.html';
         $this->assertFile($expectedBody, $message->getBody());
     }
 
@@ -150,5 +193,16 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $expected = file_get_contents($file);
 
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
+    }
+
+    private function creatTransactionLine(Transaction $transaction, string $bookableName, string $balance): void
+    {
+        $bookable = new Bookable();
+        $bookable->setName($bookableName);
+
+        $transactionLine = new TransactionLine();
+        $transactionLine->setTransaction($transaction);
+        $transactionLine->setBookable($bookable);
+        $transactionLine->setBalance($balance);
     }
 }

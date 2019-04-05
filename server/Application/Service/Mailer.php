@@ -6,6 +6,7 @@ namespace Application\Service;
 
 use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Message;
+use Application\Model\Transaction;
 use Application\Model\User;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
@@ -93,7 +94,7 @@ class Mailer
      * Queue a reset password email to specified user
      *
      * @param User $user The user for which a password reset will be done
-     * @param string $email the addresse to send the email to. Might be different than the user's email
+     * @param string $email the address to send the email to. Might be different than the user's email
      *
      * @return Message
      */
@@ -105,6 +106,23 @@ class Mailer
         ];
 
         $message = $this->createMessage($user, $email, $subject, MessageTypeType::RESET_PASSWORD, $mailParams);
+
+        return $message;
+    }
+
+    public function queueInvoice(User $user, Transaction $transaction): Message
+    {
+        $total = '0';
+        foreach ($transaction->getTransactionLines() as $line) {
+            $total = bcadd($total, $line->getBalance(), 2);
+        }
+        $subject = 'Débit de compte';
+        $mailParams = [
+            'transaction' => $transaction,
+            'total' => $total,
+        ];
+
+        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::INVOICE, $mailParams);
 
         return $message;
     }

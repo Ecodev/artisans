@@ -70,5 +70,6 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         self::assertSame(AccountTypeType::LIABILITY, $account->getType());
         self::assertSame('20300009', $account->getCode());
         self::assertSame('Acomptes de clients', $account->getParent()->getName());
+        self::assertSame($account, $user->getAccount());
     }
 }

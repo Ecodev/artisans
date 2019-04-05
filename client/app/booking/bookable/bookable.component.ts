@@ -42,8 +42,8 @@ export class BookableComponent extends AbstractController implements OnInit {
         this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
         this.hasLicense = BookableService.isLicenseGranted(this.bookable, this.userService.getCachedCurrentUser());
         this.bookableService.getAvailability(this.bookable).subscribe(availability => {
-            this.isAvailable = availability !== null && availability.isAvailable;
-            this.runningBooking = availability !== null ? availability.result.items[0] : null;
+            this.isAvailable = availability.isAvailable;
+            this.runningBooking = availability.result.items[0];
         });
     }
 

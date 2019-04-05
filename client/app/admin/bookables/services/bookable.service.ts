@@ -171,11 +171,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
     }
 
     public getAvailability(bookable: Bookable['bookable']):
-        Observable<null | { isAvailable: boolean, result: Bookings['bookings'] }> {
-
-        if (!bookable.isActive) {
-            return of(null);
-        }
+        Observable<{ isAvailable: boolean, result: Bookings['bookings'] }> {
 
         // Variable for pending bookings related to given bookable
         const variables: BookingsVariables = {
@@ -184,7 +180,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
                     {
                         conditions: [
                             {
-                                bookables: {have: {values: [bookable.id]}},
+                                bookable: {have: {values: [bookable.id]}},
                                 endDate: {null: {}},
                             },
                         ],
@@ -197,8 +193,13 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
         qvm.set('variables', variables);
 
         return this.bookingService.getAll(qvm, true).pipe(map(result => {
+            const isAvailable = bookable.isActive && (
+                bookable.simultaneousBookingMaximum < 0
+                || bookable.simultaneousBookingMaximum > result.length
+            );
+
             return {
-                isAvailable: bookable.simultaneousBookingMaximum > result.length,
+                isAvailable: isAvailable,
                 result: result,
             };
         }));

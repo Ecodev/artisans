@@ -30,6 +30,7 @@ import { TransactionTagsComponent } from './transactionTags/transactionTags/tran
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
+import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin-only-modal/select-admin-only-modal.component';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import { EditableTransactionLinesComponent } from './transactions/editable-trans
         TransactionTagsComponent,
         TransactionTagComponent,
         EditableTransactionLinesComponent,
+        SelectAdminOnlyModalComponent,
     ],
     imports: [
         CommonModule,
@@ -66,6 +68,9 @@ import { EditableTransactionLinesComponent } from './transactions/editable-trans
         AvatarModule,
         SidenavModule,
     ],
+    entryComponents: [
+        SelectAdminOnlyModalComponent
+    ]
 })
 export class AdminModule {
 }

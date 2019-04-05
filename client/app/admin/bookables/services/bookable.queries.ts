@@ -13,6 +13,10 @@ export const bookableMetaFragment = gql`
             id
             name
         }
+        bookableTags {
+            id
+            name
+        }
         initialPrice
         periodicPrice
         purchasePrice

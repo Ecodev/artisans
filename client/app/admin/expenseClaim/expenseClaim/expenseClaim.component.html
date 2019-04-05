@@ -9,9 +9,10 @@
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
             <a *ngIf="data.model.id"
                mat-flat-button
-               color="primary"
+               color="warn"
                [routerLink]="['/admin/transaction/new', {expenseClaim: data.model.id}]"
             >
+                <app-icon name="check"></app-icon>
                 <span>Valider</span> &nbsp;
                 <span *ngIf="data.model.type === ExpenseClaimType.expenseClaim">(créditer le solde)</span>
                 <span *ngIf="data.model.type === ExpenseClaimType.refund">(rembourser)</span>

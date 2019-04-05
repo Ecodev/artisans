@@ -154,7 +154,7 @@ REPLACE INTO bookable (id, image_id, credit_account_id, purchase_price, periodic
 (3000, 5000, NULL, 300, 0, 0, 'Stand up S1 (3000, carnet de sortie, occupé)', 'S1', 'self_approved', 1, 'No, no, no, no. You gotta listen to the way people talk. You don''t say "affirmative," or some shit like that. You say "no problemo." And if someone comes on to you with an attitude you say "eat me." And if you want to shine them on it''s "hasta la vista, baby."'),
 (3001, 5001, NULL, 700, 0, 0, 'Canoe C1 (3001, carnet de sortie, occupé)', 'C1', 'self_approved', 1, 'La marche des vertueux est semée d’obstacles qui sont les entreprises égoïstes que fait sans fin, surgir l’œuvre du malin. Béni soit-il l’homme de bonne volonté qui, au nom de la charité se fait le berger des faibles qu’il guide dans la vallée d’ombre de la mort et des larmes, car il est le gardien de son frère et la providence des enfants égarés. J’abattrai alors le bras d’une terrible colère, d’une vengeance furieuse et effrayante sur les hordes impies qui pourchassent et réduisent à néant les brebis de Dieu. Et tu connaîtras pourquoi mon nom est l’éternel quand sur toi, s’abattra la vengeance du Tout-Puissant !'),
 (3002, NULL, NULL, 0, 10, 0, 'Casier virtuel (3002, sur demande, periodic)', 'casier', 'admin_approved', -1, 'Pour demande de stockage.'),
-(3003, NULL, NULL, 0, 10, 0, 'Casier 1012 (3003, inventaire / spécifique admin, periodic)', 'CA1012', 'admin_only', -1, 'Casier XYZ. '),
+(3003, NULL, NULL, 0, 10, 0, 'Casier 1012 (3003, inventaire / spécifique admin, periodic)', 'CA1012', 'admin_only', -1, 'Casier physique XYZ.'),
 (3004, NULL, NULL, 0, 20, 0, 'Membre NFT (3004, inventaire / spécifique admin, periodic)', 'e', 'admin_approved', -1, 'Service supplémentaire.'),
 (3005, NULL, 10035, 0, 0, 10, 'Frais ouverture (3005, obligatoire, initial)', 'f', 'mandatory', -1, 'Pour adhésion et cotisation.'),
 (3006, NULL, 10035, 0, 90, 0, 'Cotisation (3006, obligatoire, periodic)', 'g', 'mandatory', -1, 'Pour adhésion et cotisation. '),
@@ -164,7 +164,11 @@ REPLACE INTO bookable (id, image_id, credit_account_id, purchase_price, periodic
 (3010, 5005, NULL, 2050, 0, 0, 'Rame R1 (3010, carnet de sortie, libre)', 'R1', 'self_approved', 1, 'Ça pose toujours un problème de soulever un corps en un seul morceau. Apparemment, la meilleure façon de procéder est de découper le corps en 6 morceaux et de les mettre en tas. Une fois que vous avez vos 6 morceaux il faut vous en défaire rapidement parce que votre maman ne serait peut-être pas contente de les trouver dans le congélateur. Il semble que la meilleure façon soit de nourrir les porcs avec. Il faut les mettre à la diète quelques jours. Pour un porc affamé des morceaux de cadavre c’est du coq au vin pour un poivrot. Vous devez raser la tête de vos victimes et leur arracher les dents. Ce sont les seules choses que les porcs ne digèrent pas. Vous pourriez les récupérer après bien sûr mais vous n’avez pas envi de fouiller dans la merde de cochon je suppose. Ils dévorent les os comme du beurre. Il vous faut au moins 16 porcs pour finir le travail en un seule fois. Aussi je vous conseille de vous méfier des types qui élèvent les porcs parce que ces bestiaux sont capables de venir à bout d’un cadavre de 100kg en moins de 8 minutes, ce qui veut dire qu’un porc peut engloutir, en moyenne, un kilo de viande toute les minutes. D’où l’expression se goinfrer comme un porc.'),
 (3011, 5006, NULL, 1500, 0, 0, 'Dériveur D1 (3011, carnet de sortie, occupé)', 'D1', 'self_approved', 1, 'Personne ne panique quand tout se déroule selon le plan. Et ceci même si le plan est affreux. Si demain soir je dis à la presse que, un brigand va se faire descendre ou qu’un fourgon chargé de soldat va exploser... personne ne panique. Parce que tout ça, ça fait parti du plan. Mais si je dis qu’un, malheureux petit maire va mourir. Alors là... tout le monde s’affole ! On entrouvre la porte à l’anarchie, on bouscule l’ordre établi et très vite le chaos le plus total règne. Et moi j’annonce le chaos... et tu sais ce qu’il a pour lui le chaos ? ... Il est impartial !.'),
 (3012, 5007, NULL, 599, 0, 0, 'Kayak K1 (3012, carnet de sortie, libre)', 'K1', 'self_approved', 1, 'Vous savez, moi je ne crois pas qu’il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd’hui avec vous, je dirais que c’est d’abord des rencontres. Des gens qui m’ont tendu la main, peut-être à un moment où je ne pouvais pas, où j’étais seul chez moi. Et c’est assez curieux de se dire que les hasards, les rencontres forgent une destinée... Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste, parfois on ne trouve pas l’interlocuteur en face je dirais, le miroir qui vous aide à avancer. Alors ça n’est pas mon cas, comme je disais là, puisque moi au contraire, j’ai pu : et je dis merci à la vie, je lui dis merci, je chante la vie, je danse la vie... je ne suis qu’amour ! Et finalement, quand beaucoup de gens aujourd’hui me disent « Mais comment fais-tu pour avoir cette humanité ? », et bien je leur réponds très simplement, je leur dis que c’est ce goût de l’amour ce goût donc qui m’a poussé aujourd’hui à entreprendre une construction mécanique, mais demain qui sait ? Peut-être simplement à me mettre au service de la communauté, à faire le don, le don de soi...'),
-(3026, NULL, NULL, 0, 10, 0, 'Fonds de réparation interne', 'COFR', 'mandatory', -1, 'Cotisation annuelle pour assurer une couverture en cas de dégâts au matériel nautique du club');
+(3026, NULL, NULL, 0, 10, 0, 'Fonds de réparation interne', 'COFR', 'mandatory', -1, 'Cotisation annuelle pour assurer une couverture en cas de dégâts au matériel nautique du club'),
+(3027, NULL, NULL, 0, 10, 0, 'Armoire 1013 (3027, inventaire / spécifique admin, periodic)', 'A1013', 'admin_only', -1, 'Armoire physique XYZ.'),
+(3028, NULL, NULL, 0, 10, 0, 'Flotteur 1014 (3028, inventaire / spécifique admin, periodic)', 'F1014', 'admin_only', -1, 'Flotteur physique XYZ.'),
+(3030, NULL, NULL, 0, 10, 0, 'Armoire virtuelle (3030, sur demande, periodic)', 'armoire', 'admin_approved', -1, 'Pour demande de stockage.'),
+(3031, NULL, NULL, 0, 10, 0, 'Flotteur virtuel (3031, sur demande, periodic)', 'flotteur', 'admin_approved', -1, 'Pour demande de stockage.');
 
 REPLACE INTO license_bookable (license_id, bookable_id) VALUES
 (2000, 3007),
@@ -175,8 +179,16 @@ REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
 (6002, 3001),
 (6008, 3002),
 (6010, 3002),
+(6008, 3030),
+(6009, 3030),
+(6008, 3031),
+(6011, 3031),
 (6008, 3003),
 (6010, 3003),
+(6008, 3027),
+(6009, 3027),
+(6008, 3028),
+(6011, 3028),
 (6007, 3004),
 (6007, 3005),
 (6007, 3006),
@@ -197,7 +209,9 @@ REPLACE INTO booking (id, owner_id, bookable_id, status, start_date, end_date, e
 (4006, -1002, 3004, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
 (4007, -1005, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
 (4009, -1002, null, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.'),
-(4012, -1008, 3011, 'booked', '2018-01-02 13:32:51', NULL, '29 sept 3021', 'Not middle earth', 'Soron is gone');
+(4012, -1008, 3011, 'booked', '2018-01-02 13:32:51', NULL, '29 sept 3021', 'Not middle earth', 'Soron is gone'),
+(4013, -1002, 3030, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4014, -1002, 3031, 'application', '2018-01-02 13:32:51', NULL, '', '', '');
 
 REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type) VALUES
 (7000, '2019-01-10', -1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', 'expenseClaim'),

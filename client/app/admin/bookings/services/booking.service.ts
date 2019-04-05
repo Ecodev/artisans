@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import {
-    bookingQuery,
-    bookingsQuery,
-    createBooking,
-    deleteBookings,
-    terminateBooking,
-    updateBooking,
-} from './booking.queries';
+import { bookingQuery, bookingsQuery, createBooking, deleteBookings, terminateBooking, updateBooking } from './booking.queries';
 import {
     Bookable,
     Booking,
@@ -103,7 +96,16 @@ export class BookingService extends AbstractModelService<Booking['booking'],
             groups: [
                 {
                     conditions: [{status: {equal: {value: BookingStatus.application}}}],
-                    joins: {bookable: {conditions: [{bookableTags: {have: {values: ['6008']}}}]}},
+                    joins: {
+                        bookable: {
+                            conditions: [
+                                {
+                                    bookableTags: {have: {values: ['6008']}},
+                                    bookingType: {equal: {value: BookingType.admin_approved}}
+                                },
+                            ],
+                        },
+                    },
                 },
             ],
         },

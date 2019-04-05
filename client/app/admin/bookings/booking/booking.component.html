@@ -1,7 +1,21 @@
 <div class="detail-body" [formGroup]="form">
 
-    <app-detail-header newLabel="Nouvelle réservation" label="Réservation" [model]="data.model" [listRoute]="['admin', 'booking']"
-    ></app-detail-header>
+    <app-detail-header newLabel="Nouvelle réservation" label="Réservation" [model]="data.model" [listRoute]="['admin', 'booking']">
+        <div fxLayout="row" fxLayoutGap="20px">
+            <button mat-flat-button
+                    color="accent"
+                    *ngIf="isApplication() && isStorage() && form.get('status').value === BookingStatus.application"
+                    (click)="selectStorage()"
+            >
+                <app-icon name="check"></app-icon>
+                Attribuer un espace de stockage
+            </button>
+
+            <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()">
+                Terminer
+            </button>
+        </div>
+    </app-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -15,12 +29,10 @@
                                         placeholder="Responsable"
                                         [service]="userService"
                                         (selectionChange)="update()"
+                                        [showIcon]="false"
+                                        [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"
                             ></app-select>
 
-                            <mat-form-field style="width:100px">
-                                <mat-label>Nb participants</mat-label>
-                                <input matInput type="number" step="1" min="1" formControlName="participantCount" (change)="update()">
-                            </mat-form-field>
                         </div>
 
                         <app-select formControlName="bookable"
@@ -32,10 +44,7 @@
 
                     </div>
                     <div fxFlex="20" fxLayout="column">
-                        <app-select-enum enumName="BookingStatus"
-                                         formControlName="status"
-                                         (selectionChange)="update()"
-                                         placeholder="Status"
+                        <app-select-enum enumName="BookingStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
                         ></app-select-enum>
                     </div>
                 </div>
@@ -70,57 +79,66 @@
 
                 </div>
 
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="isSelfApproved()">
+                <div *ngIf="isSelfApproved()">
+                    <mat-divider></mat-divider>
 
-                    <div fxFlex="50" fxLayout="column">
+                    <h1 class="mat-title">Sorties</h1>
 
-                        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="margin-bottom">
-                            <h2 class="mat-title no-margin-bottom">Début</h2>
-                            <div>{{ data.model.startDate | date: 'medium'}}</div>
+                    <mat-form-field style="width:100px">
+                        <mat-label>Nb participants</mat-label>
+                        <input matInput type="number" step="1" min="1" formControlName="participantCount" (change)="update()">
+                    </mat-form-field>
+
+                    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+
+                        <div fxFlex="50" fxLayout="column">
+
+                            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="margin-bottom">
+                                <h2 class="mat-title no-margin-bottom">Début</h2>
+                                <div>{{ data.model.startDate | date: 'medium'}}</div>
+                            </div>
+
+                            <mat-form-field>
+                                <mat-label>Destination</mat-label>
+                                <input matInput formControlName="destination" (change)="update()" />
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Commentaire de début</mat-label>
+                                <textarea matInput
+                                          formControlName="startComment"
+                                          (change)="update()"
+                                          matTextareaAutosize
+                                          [matAutosizeMinRows]="5"
+                                          [matAutosizeMaxRows]="5"
+                                ></textarea>
+                            </mat-form-field>
+
+                        </div>
+                        <div fxFlex="50" fxLayout="column">
+
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="margin-bottom">
+                                <h2 class="mat-title no-margin-bottom">Fin</h2>
+                                <div fxFlex>{{ data.model.endDate | date: 'medium' }}</div>
+                            </div>
+
+                            <mat-form-field>
+                                <mat-label>Heure estimée de retour</mat-label>
+                                <input matInput formControlName="estimatedEndDate" (change)="update()">
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Commentaire de fin</mat-label>
+                                <textarea matInput
+                                          formControlName="endComment"
+                                          (change)="update()"
+                                          matTextareaAutosize
+                                          [matAutosizeMinRows]="5"
+                                          [matAutosizeMaxRows]="5"
+                                ></textarea>
+                            </mat-form-field>
                         </div>
 
-                        <mat-form-field>
-                            <mat-label>Destination</mat-label>
-                            <input matInput formControlName="destination" (change)="update()" />
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Commentaire de début</mat-label>
-                            <textarea matInput
-                                      formControlName="startComment"
-                                      (change)="update()"
-                                      matTextareaAutosize
-                                      [matAutosizeMinRows]="5"
-                                      [matAutosizeMaxRows]="5"
-                            ></textarea>
-                        </mat-form-field>
-
-                    </div>
-                    <div fxFlex="50" fxLayout="column">
-
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="margin-bottom">
-                            <h2 class="mat-title no-margin-bottom">Fin</h2>
-                            <div fxFlex>{{ data.model.endDate | date: 'medium' }}</div>
-                            <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()">
-                                Terminer
-                            </button>
-                        </div>
-
-                        <mat-form-field>
-                            <mat-label>Heure estimée de retour</mat-label>
-                            <input matInput formControlName="estimatedEndDate" (change)="update()">
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Commentaire de fin</mat-label>
-                            <textarea matInput
-                                      formControlName="endComment"
-                                      (change)="update()"
-                                      matTextareaAutosize
-                                      [matAutosizeMinRows]="5"
-                                      [matAutosizeMaxRows]="5"
-                            ></textarea>
-                        </mat-form-field>
                     </div>
 
                 </div>

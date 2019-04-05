@@ -317,6 +317,7 @@ export class UserService extends AbstractModelService<User['user'],
                     {
                         conditions: [
                             {
+                                endDate: {null: {}},
                                 owner: {equal: {value: user.id}},
                                 status: {equal: {value: BookingStatus.application}},
                             },

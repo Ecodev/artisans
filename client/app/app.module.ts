@@ -36,8 +36,14 @@ import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchi
 import { ConfirmComponent } from './shared/components/alert/confirm.component';
 import { SafetyComponent } from './safety/safety.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
+import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
+import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
 
 registerLocaleData(localeFRCH);
+
+export class MyIntl extends TimeagoIntl {
+    // do extra stuff here...
+}
 
 @NgModule({
     declarations: [
@@ -66,6 +72,10 @@ registerLocaleData(localeFRCH);
         HttpClientModule,
         HttpBatchLinkModule,
         HierarchicSelectorModule,
+        TimeagoModule.forRoot({
+            intl: {provide: TimeagoIntl, useClass: MyIntl},
+            formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter }
+        }),
     ],
     providers: [
         MatIconRegistry,
@@ -99,8 +109,13 @@ export class AppModule {
                 networkActivityService: NetworkActivityService,
                 alertService: AlertService,
                 httpBatchLink: HttpBatchLink,
-                dateAdapter: DateAdapter<Date>) {
+                dateAdapter: DateAdapter<Date>,
+                intl: TimeagoIntl,
+    ) {
         dateAdapter.setLocale('fr-ch');
+
+        intl.strings = frenchStrings;
+        intl.changes.next();
 
         const link = createApolloLink(networkActivityService, alertService, httpBatchLink);
 

@@ -10,14 +10,22 @@
         </div>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
-        <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', bookable.id]">Administration</a>
-        <a mat-flat-button color="primary" *ngIf="hasLicense && isAvailable" [routerLink]="['../new', {bookable: bookable.id}]">
-            Réserver
-        </a>
-        <button mat-flat-button color="warn" *ngIf="hasLicense && !isAvailable && runningBooking" (click)="endBooking()">
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+        <div *ngIf="!isAvailable && runningBooking">Sorti {{ runningBooking.startDate | timeago }}</div>
+        <div *ngIf="!hasLicense">Une licence est requise pour utiliser cette embarcation</div>
+
+        <button mat-flat-button
+                color="primary"
+                *ngIf="isNavigable && isAvailable"
+                [disabled]="!hasLicense"
+                [routerLink]="['../new', {bookable: bookable.id}]"
+        >
+            Annoncer une sortie
+        </button>
+        <button mat-flat-button color="warn" *ngIf="isNavigable && !isAvailable && runningBooking" (click)="endBooking()">
             Terminer
         </button>
+        <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', bookable.id]">Administration</a>
     </div>
 
     <div class="mat-subheading-1" [innerHTML]="bookable.description"></div>

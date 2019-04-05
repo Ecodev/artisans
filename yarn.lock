@@ -6262,6 +6262,13 @@ ngx-avatar@^3.2.0:
     ts-md5 "^1.2.4"
     tslib "^1.9.0"
 
+ngx-timeago@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-timeago/-/ngx-timeago-1.0.1.tgz#7b71615d26ab2fe843eeb2c29f3626d7c2d9b181"
+  integrity sha512-1cLrIVSJ6JRzFuSCs027uRSqQVg0x+X33WcaDt9tekvADZBxkbESnzxblOlscYIKUi15eQMRQ8KXusrqE1CXcA==
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

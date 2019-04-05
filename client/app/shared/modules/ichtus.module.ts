@@ -29,6 +29,7 @@ import { CommentComponent } from '../components/navigations/comment.component';
 import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
+import { TimeagoModule } from 'ngx-timeago';
 
 const declarations = [
     RelationsComponent,
@@ -51,7 +52,7 @@ const declarations = [
     NavigationsComponent,
     CommentComponent,
     TransactionAmountComponent,
-    AccountingDocumentsComponent
+    AccountingDocumentsComponent,
 ];
 
 const imports = [
@@ -64,13 +65,13 @@ const imports = [
     RouterModule,
     AvatarModule,
     ngfModule,
-    ParticleEffectButtonModule
+    ParticleEffectButtonModule,
 ];
 
 @NgModule({
     declarations: [...declarations],
     imports: [...imports],
-    exports: [...imports, ...declarations],
+    exports: [...imports, ...declarations, TimeagoModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [CommentComponent],
 })

@@ -4,7 +4,7 @@ import { BookableService } from '../../admin/bookables/services/bookable.service
 import { BookingService } from '../../admin/bookings/services/booking.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { AbstractController } from '../../shared/components/AbstractController';
-import { Bookings } from '../../shared/generated-types';
+import { Bookings, BookingType } from '../../shared/generated-types';
 
 @Component({
     selector: 'app-bookable',
@@ -13,8 +13,21 @@ import { Bookings } from '../../shared/generated-types';
 })
 export class BookableComponent extends AbstractController implements OnInit {
 
+    /**
+     * If the user has a required licence to use the bookable
+     */
     public hasLicense: boolean;
+
+    /**
+     * If the booking is free / available for a new navigation
+     */
     public isAvailable: boolean;
+
+    /**
+     * If is applicable for a navigation booking purpose
+     * Basically : true only for self-approved bookables.
+     */
+    public isNavigable: boolean;
     public canAccessAdmin: boolean;
     public runningBooking: Bookings['bookings']['items'][0] | null;
 
@@ -41,6 +54,7 @@ export class BookableComponent extends AbstractController implements OnInit {
     private initForBookable() {
         this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
         this.hasLicense = BookableService.isLicenseGranted(this.bookable, this.userService.getCachedCurrentUser());
+        this.isNavigable = this.bookable.bookingType === BookingType.self_approved;
         this.bookableService.getAvailability(this.bookable).subscribe(availability => {
             this.isAvailable = availability.isAvailable;
             this.runningBooking = availability.result.items[0];

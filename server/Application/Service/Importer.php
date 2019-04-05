@@ -266,6 +266,8 @@ EOT;
 EOT;
         $createAccount = $conn->prepare($createAccount);
 
+        $linkToTag = $conn->prepare('INSERT INTO user_tag_user(user_tag_id, user_id) VALUES (:user_tag_id, :user_id)');
+
         foreach ($this->users as $user) {
             echo sprintf('Insert user %u (%s %s)', $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             $insert->bindValue(':id', $user['uid']);
@@ -439,6 +441,14 @@ break;
             if ($createAccount->execute() === false) {
                 echo sprintf('ERROR: échec de création de compte débiteur n°%u pour l\'utilisateur %u (%s %s)', $accountNumber, $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             }
+
+            // Assigne les tags au membre
+            if (!empty($user['ichtus_comite_fonction'])) {
+                $userTagId = $this->insertUserTag($user['ichtus_comite_fonction']);
+                $linkToTag->bindValue(':user_id', $user['uid']);
+                $linkToTag->bindValue(':user_tag_id', $userTagId);
+                $linkToTag->execute();
+            }
         }
 
         $updateOwner = $conn->prepare('UPDATE user SET owner_id=:owner WHERE id=:id');
@@ -500,38 +510,54 @@ EOT;
 
         $insert = $conn->prepare($insert);
 
+        $linkToTag = $conn->prepare('INSERT INTO bookable_tag_bookable(bookable_tag_id, bookable_id) VALUES (:bookable_tag_id, :bookable_id)');
+
         // Armoires
         $insert->bindValue(':initial_price', 0);
         $insert->bindValue(':periodic_price', 50);
-        // Une armoire peut être partagée entre 2 membres
-        $insert->bindValue(':simultaneous_booking_maximum', 2);
-        $insert->bindValue(':booking_type', 'admin_approved');
-        $insert->bindValue(':description', 'Armoire (50 x 200 x 70 cm)');
+        // Une armoire peut être partagée entre 2 ou 3 membres
+        $insert->bindValue(':simultaneous_booking_maximum', 3);
 
+        /*
+         * admin_only, because l'attribution d'un casier particulier est faite par l'admin,
+         * bien que le membre demande un "Casier" il ne doit pas pouvoir réserver "Casier 26"
+         */
+        $insert->bindValue(':booking_type', 'admin_only');
+
+        $insert->bindValue(':description', 'Armoire (50 x 200 x 70 cm)');
+        $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Armoire'));
         for ($i = 1; $i <= 120; ++$i) {
             $insert->bindValue(':name', sprintf('Armoire %u', $i));
             $insert->bindValue(':code', sprintf('STVA%u', $i));
             $insert->execute();
+            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->execute();
         }
 
         // Casiers
         $insert->bindValue(':periodic_price', 30);
         $insert->bindValue(':simultaneous_booking_maximum', 1);
         $insert->bindValue(':description', 'Casier (50 x 50 x 70 cm)');
+        $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Casier'));
         for ($i = 1; $i <= 36; ++$i) {
             $insert->bindValue(':name', sprintf('Casier %u', $i));
             $insert->bindValue(':code', sprintf('STVC%u', $i));
             $insert->execute();
+            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->execute();
         }
 
         // Stockage flotteurs
         $insert->bindValue(':periodic_price', 50);
         $insert->bindValue(':simultaneous_booking_maximum', -1);
         $insert->bindValue(':description', 'Stockage sous le local pour un flotteur');
+        $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Flotteurs'));
         for ($i = 1; $i <= 80; ++$i) {
             $insert->bindValue(':name', sprintf('Stockage flotteur %u', $i));
             $insert->bindValue(':code', sprintf('STVF%u', $i));
             $insert->execute();
+            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->execute();
         }
     }
 
@@ -616,6 +642,56 @@ EOT;
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * Insert or find an user tag by name
+     *
+     * @param string $name
+     *
+     * @return int ID of the existing or newly tag
+     */
+    private function insertUserTag(string $name): int
+    {
+        $conn = $this->entityManager->getConnection();
+
+        $existing = $conn->prepare('SELECT id FROM user_tag WHERE name = :name');
+        $existing->bindValue(':name', $name);
+        $existing->execute();
+        if ($existing->rowCount()) {
+            return (int) $existing->fetchColumn();
+        }
+
+        $insert = $conn->prepare('INSERT INTO user_tag(creation_date, name) VALUES (NOW(), :name)');
+        $insert->bindValue(':name', $name);
+        if ($insert->execute()) {
+            return (int) $conn->lastInsertId();
+        }
+    }
+
+    /**
+     * Insert or find a bookable tag by name
+     *
+     * @param string $name
+     *
+     * @return int ID of the existing or newly tag
+     */
+    private function insertBookableTag(string $name): int
+    {
+        $conn = $this->entityManager->getConnection();
+
+        $existing = $conn->prepare('SELECT id FROM bookable_tag WHERE name = :name');
+        $existing->bindValue(':name', $name);
+        $existing->execute();
+        if ($existing->rowCount()) {
+            return (int) $existing->fetchColumn();
+        }
+
+        $insert = $conn->prepare('INSERT INTO bookable_tag(creation_date, name) VALUES (NOW(), :name)');
+        $insert->bindValue(':name', $name);
+        if ($insert->execute()) {
+            return (int) $conn->lastInsertId();
         }
     }
 

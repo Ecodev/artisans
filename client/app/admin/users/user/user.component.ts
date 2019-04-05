@@ -126,15 +126,17 @@ export class UserComponent
         return filter;
     }
 
-    public getFamillyIds(): BookablesVariables {
+    public getFamilyIds(): BookablesVariables {
+
+        const familyBoss = this.data.model.owner || this.data.model;
+
         return {
             filter: {
-
                 groups: [
-                    {conditions: [{id: {equal: {value: this.data.model.id}}}]},
+                    {conditions: [{id: {equal: {value: familyBoss.id}}}]},
                     {
                         groupLogic: LogicalOperator.OR,
-                        conditions: [{owner: {equal: {value: this.data.model.id}}}],
+                        conditions: [{owner: {equal: {value: familyBoss.id}}}],
                     },
                 ],
             },

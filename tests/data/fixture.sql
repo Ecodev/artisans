@@ -1,18 +1,18 @@
 START TRANSACTION;
 
 REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, welcome_session_date, family_relationship, door4, iban) VALUES
-(1000, NULL, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00', 'householder', 1, NULL),
-(1001, NULL, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00', 'householder', 1, NULL),
-(1002, NULL, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00', 'householder', 0, 'CH4200681926673315051'),
-(1003, NULL, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00', 'householder', 0, NULL),
-(1004, NULL, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL, 'householder', 0, NULL),
-(1005, NULL, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', '2018-01-01 12:00:00', 'householder', 0, NULL),
-(1006, NULL, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', '2018-01-01 12:00:00', 'householder', 0, NULL),
-(1007, 1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('individual'), 'individual', 'active', '2018-01-01 12:00:00', 'partner', 0, 'CH6303714697192579556'),
-(1008, 1002, 'son', 'So', 'n', NULL, MD5('son'), 'individual', 'active', '2018-01-01 12:00:00', 'child', 0, 'CH7826637586626482007'),
-(1009, 1002, 'daughter', 'daugh', 'ter', NULL, MD5('daughter'), 'individual', 'active' ,'2018-01-01 12:00:00', 'child', 0, NULL),
-(1010, NULL, 'voiliermember', 'Voilier', 'Member', 'voiliermember@example.com', MD5('voiliermember'), 'member', 'archived', '2018-01-01 12:00:00', 'householder', 0, NULL),
-(1011, 1010, 'voilierfamily', 'Voilier', 'Family', 'voilierfamily@example.com', MD5('voilierfamily'), 'individual', 'active', '2018-01-01 12:00:00', 'partner', 0, NULL);
+(-1000, NULL, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '2018-01-01 12:00:00', 'householder', 1, NULL),
+(-1001, NULL, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '2018-01-01 12:00:00', 'householder', 1, NULL),
+(-1002, NULL, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '2018-01-01 12:00:00', 'householder', 0, 'CH4200681926673315051'),
+(-1003, NULL, 'bookingonly', 'Booking', 'Only', 'bookingonly@example.com', MD5('bookingonly'), 'booking_only', 'active', '2018-01-01 12:00:00', 'householder', 0, NULL),
+(-1004, NULL, 'newmember', 'New', 'User', 'newmember@example.com', MD5('newmember'), 'member', 'new', NULL, 'householder', 0, NULL),
+(-1005, NULL, 'inactive', 'Inactive', 'Member', 'inactive@example.com', MD5('inactive'), 'member', 'inactive', '2018-01-01 12:00:00', 'householder', 0, NULL),
+(-1006, NULL, 'archived', 'Archived', 'Member', 'archived@example.com', MD5('archived'), 'member', 'archived', '2018-01-01 12:00:00', 'householder', 0, NULL),
+(-1007, -1002, 'individual', 'Conj', 'Oint', 'conjoint@example.com', MD5('individual'), 'individual', 'active', '2018-01-01 12:00:00', 'partner', 0, 'CH6303714697192579556'),
+(-1008, -1002, 'son', 'So', 'n', NULL, MD5('son'), 'individual', 'active', '2018-01-01 12:00:00', 'child', 0, 'CH7826637586626482007'),
+(-1009, -1002, 'daughter', 'daugh', 'ter', NULL, MD5('daughter'), 'individual', 'active' ,'2018-01-01 12:00:00', 'child', 0, NULL),
+(-1010, NULL, 'voiliermember', 'Voilier', 'Member', 'voiliermember@example.com', MD5('voiliermember'), 'member', 'archived', '2018-01-01 12:00:00', 'householder', 0, NULL),
+(-1011, -1010, 'voilierfamily', 'Voilier', 'Family', 'voilierfamily@example.com', MD5('voilierfamily'), 'individual', 'active', '2018-01-01 12:00:00', 'partner', 0, NULL);
 
 REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10000, NULL, NULL, 'group', '1', '', 'Actifs'),
@@ -108,12 +108,12 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10091, 10021, NULL, 'expense', '65007', '', 'Travail pour le club'),
 (10092, 10021, NULL, 'expense', '65008', '', 'Comité'),
 (10093, 10021, NULL, 'expense', '65009', '', 'Divers'),
-(10094, 10011, 1000, 'liability', '20300001', '', 'Administrator'),
-(10095, 10011, 1001, 'liability', '20300002', '', 'Responsable'),
-(10096, 10011, 1002, 'liability', '20300003', '', 'Active Member'),
-(10097, 10011, 1007, 'liability', '20300004', '', 'Conjoint'),
-(10098, 10011, 1010, 'liability', '20300007', '', 'Voilier Member'),
-(10099, 10011, 1011, 'liability', '20300008', '', 'Voilier Family'),
+(10094, 10011, -1000, 'liability', '20300001', '', 'Administrator'),
+(10095, 10011, -1001, 'liability', '20300002', '', 'Responsable'),
+(10096, 10011, -1002, 'liability', '20300003', '', 'Active Member'),
+(10097, 10011, -1007, 'liability', '20300004', '', 'Conjoint'),
+(10098, 10011, -1010, 'liability', '20300007', '', 'Voilier Member'),
+(10099, 10011, -1011, 'liability', '20300008', '', 'Voilier Family'),
 (10100, 10007, NULL, 'expense', '8000', '', 'Charges hors exploitation'),
 (10101, 10007, NULL, 'revenue', '8100', '', 'Produits hors exploitation'),
 (10102, 10007, NULL, 'expense', '8500', '', 'Charges extraordinaires, exceptionnelles ou hors période'),
@@ -124,7 +124,7 @@ REPLACE INTO license (id, name) VALUES
 (2000, 'Voilier');
 
 REPLACE INTO license_user (license_id, user_id) VALUES
-(2000, 1010);
+(2000, -1010);
 
 REPLACE INTO bookable_tag (id, name) VALUES
 (6000, 'SUP'),
@@ -189,21 +189,21 @@ REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
 (6005, 3009);
 
 REPLACE INTO booking (id, owner_id, bookable_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
-(4000, 1002, 3000, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
-(4001, 1002, 3001, 'booked', '2018-01-02 13:32:51', NULL, '21 oct 2015', 'Twin Pines Mall', 'Where we go we don''t need roads'),
-(4003, 1002, 3002, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4004, 1002, 3003, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4005, 1002, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4006, 1002, 3004, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4007, 1005, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4009, 1002, null, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.'),
-(4012, 1008, 3011, 'booked', '2018-01-02 13:32:51', NULL, '29 sept 3021', 'Not middle earth', 'Soron is gone');
+(4000, -1002, 3000, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
+(4001, -1002, 3001, 'booked', '2018-01-02 13:32:51', NULL, '21 oct 2015', 'Twin Pines Mall', 'Where we go we don''t need roads'),
+(4003, -1002, 3002, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4004, -1002, 3003, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4005, -1002, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4006, -1002, 3004, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4007, -1005, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4009, -1002, null, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.'),
+(4012, -1008, 3011, 'booked', '2018-01-02 13:32:51', NULL, '29 sept 3021', 'Not middle earth', 'Soron is gone');
 
 REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type) VALUES
-(7000, '2019-01-10', 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', 'expenseClaim'),
-(7001, '2019-01-14', 1002, 100.00, 'processed', 'flyers', 'Cighelio', 'expenseClaim'),
-(7002, '2019-03-14', 1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
-(7003, '2019-01-10', 1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim');
+(7000, '2019-01-10', -1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', 'expenseClaim'),
+(7001, '2019-01-14', -1002, 100.00, 'processed', 'flyers', 'Cighelio', 'expenseClaim'),
+(7002, '2019-03-14', -1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
+(7003, '2019-01-10', -1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim');
 
 REPLACE INTO transaction (id, transactionDate, name, remarks, expense_claim_id) VALUES
 (8000, '2019-03-01', 'Active Member: inscription cours nautique', '', NULL),
@@ -232,19 +232,19 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable
 (14007, 8005, NULL, 10026, NULL, NULL, 3000, '2019-02-04', 0, 'Paiement par Raiffeisen', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
-(9000, 7000, 1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
+(9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
 
 REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
-(11001, 1000, 1000, 1002, 'monthly_reminder', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
-(11002, 1001, 1001, 1005, 'yearly_reminder', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
+(11001, -1000, -1000, -1002, 'monthly_reminder', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
+(11002, -1001, -1001, -1005, 'yearly_reminder', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
-(12000, 1000, 1000, 'Moniteur voile', '#0000FF'),
-(12001, 1000, 1000, 'Moniteur SUP', '#FF0000');
+(12000, -1000, -1000, 'Moniteur voile', '#0000FF'),
+(12001, -1000, -1000, 'Moniteur SUP', '#FF0000');
 
 REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
-(12000, 1008),
-(12001, 1009);
+(12000, -1008),
+(12001, -1009);
 
 REPLACE INTO bookable_metadata (id, bookable_id, name, value) VALUES
 (13000, 3000, 'Largeur', '1405 mm'),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Application\Api\Exception;
 use Doctrine\DBAL\Driver\PDOConnection;
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
@@ -668,6 +669,8 @@ EOT;
         if ($insert->execute()) {
             return (int) $conn->lastInsertId();
         }
+
+        throw new Exception(sprintf('Cannot find or insert UserTag "%s"', $name));
     }
 
     /**
@@ -693,6 +696,8 @@ EOT;
         if ($insert->execute()) {
             return (int) $conn->lastInsertId();
         }
+
+        throw new Exception(sprintf('Cannot find or insert BookableTag "%s"', $name));
     }
 
     /**

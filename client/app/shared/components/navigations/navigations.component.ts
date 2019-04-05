@@ -140,7 +140,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                             },
                         ],
                         joins: {
-                            bookables: {
+                            bookable: {
                                 type: JoinType.leftJoin,
                                 conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}],
                             },
@@ -152,7 +152,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                             {
                                 owner: owner,
                                 endDate: endDate,
-                                bookables: {empty: {}},
+                                bookable: {empty: {}},
                             },
                         ],
                     },

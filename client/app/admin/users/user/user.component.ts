@@ -75,7 +75,7 @@ export class UserComponent
 
                         },
                     ],
-                    joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}]}},
+                    joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}]}},
                 },
             ],
         };
@@ -98,7 +98,7 @@ export class UserComponent
                             endDate: {null: {}},
                         },
                     ],
-                    joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}},
+                    joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}},
                 },
             ],
         };
@@ -119,7 +119,7 @@ export class UserComponent
                             owner: {have: {values: [this.data.model.id]}},
                             status: {equal: {value: BookingStatus.application}},
                         },
-                    ], joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
+                    ], joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
                 },
             ],
         };

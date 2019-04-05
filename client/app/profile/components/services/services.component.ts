@@ -62,7 +62,7 @@ export class ServicesComponent implements OnInit, OnDestroy {
     }
 
     public canRevoke(booking): boolean {
-        return booking.bookables[0].bookingType !== BookingType.mandatory;
+        return booking.bookable.bookingType !== BookingType.mandatory;
     }
 
     public cancelApplication(booking) {

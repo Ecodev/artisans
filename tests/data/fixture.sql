@@ -188,27 +188,16 @@ REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
 (6005, 3011),
 (6005, 3009);
 
-REPLACE INTO booking (id, owner_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
-(4000, 1002, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
-(4001, 1002, 'booked', '2018-01-02 13:32:51', NULL, '21 oct 2015', 'Twin Pines Mall', 'Where we go we don''t need roads'),
-(4003, 1002, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4004, 1002, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4005, 1002, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4006, 1002, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4007, 1005, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
-(4009, 1002, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.'),
-(4012, 1008, 'booked', '2018-01-02 13:32:51', NULL, '29 sept 3021', 'Not middle earth', 'Soron is gone');
-
--- Only a bookable by booking
-REPLACE INTO booking_bookable (booking_id, bookable_id) VALUES
-(4000, 3000),
-(4001, 3001),
-(4003, 3002),
-(4004, 3003),
-(4005, 3006),
-(4006, 3004),
-(4007, 3006),
-(4012, 3011);
+REPLACE INTO booking (id, owner_id, bookable_id, status, start_date, end_date, estimated_end_date, destination, start_comment) VALUE
+(4000, 1002, 3000, 'booked', '2018-01-01 14:15:00', '2018-01-01 18:21:43', '18h', 'Zamora', 'There comes a time, thief, when the jewels cease to sparkle, when the gold loses its luster, when the throne room becomes a prison, and all that is left is a father''s love for his child.'),
+(4001, 1002, 3001, 'booked', '2018-01-02 13:32:51', NULL, '21 oct 2015', 'Twin Pines Mall', 'Where we go we don''t need roads'),
+(4003, 1002, 3002, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4004, 1002, 3003, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4005, 1002, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4006, 1002, 3004, 'application', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4007, 1005, 3006, 'booked', '2018-01-02 13:32:51', NULL, '', '', ''),
+(4009, 1002, null, 'booked', '2018-01-02 13:32:51', NULL, 'Judgment day', 'Skynet bunker', 'Nulla vitae elit libero, a pharetra augue.'),
+(4012, 1008, 3011, 'booked', '2018-01-02 13:32:51', NULL, '29 sept 3021', 'Not middle earth', 'Soron is gone');
 
 REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type) VALUES
 (7000, '2019-01-10', 1002, 200.00, 'new', 'achats Jumbo', 'outils pour voilier', 'expenseClaim'),

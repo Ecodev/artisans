@@ -45,7 +45,7 @@ class SearchOperatorType extends AbstractOperator
             $fields = array_merge(
                 $fields,
                 $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, 'owner'),
-                $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, 'bookables')
+                $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, 'bookable')
             );
         }
 

@@ -61,7 +61,7 @@ abstract class ConfirmRegistration implements FieldInterface
                     $booking->setOwner($user);
                     $booking->setStatus(BookingStatusType::BOOKED);
                     $booking->setStartDate(new Chronos());
-                    $booking->addBookable($bookable);
+                    $booking->setBookable($bookable);
                 }
 
                 _em()->flush();

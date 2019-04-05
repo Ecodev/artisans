@@ -71,7 +71,7 @@ abstract class Helper
                 ->addSelect('SUM(booking1.participantCount) AS totalParticipantCount')
                 ->addSelect('SUM(bookable.periodicPrice) AS totalPeriodicPrice')
                 ->addSelect('SUM(bookable.initialPrice) AS totalInitialPrice')
-                ->leftJoin('booking1.bookables', 'bookable');
+                ->leftJoin('booking1.bookable', 'bookable');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === Bookable::class) {

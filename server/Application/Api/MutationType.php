@@ -67,7 +67,6 @@ class MutationType extends ObjectType
             Standard::buildMutation(TransactionTag::class),
             Standard::buildMutation(ExpenseClaim::class),
             Standard::buildMutation(AccountingDocument::class),
-            Standard::buildRelationMutation(Booking::class, Bookable::class),
             Standard::buildRelationMutation(License::class, Bookable::class),
             Standard::buildRelationMutation(License::class, User::class),
             Standard::buildRelationMutation(UserTag::class, User::class),

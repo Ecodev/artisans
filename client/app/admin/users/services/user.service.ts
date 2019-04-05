@@ -287,7 +287,7 @@ export class UserService extends AbstractModelService<User['user'],
                             },
                         ],
                         joins: {
-                            bookables: {
+                            bookable: {
                                 conditions: [
                                     {
                                         bookingType: {
@@ -321,7 +321,7 @@ export class UserService extends AbstractModelService<User['user'],
                                 status: {equal: {value: BookingStatus.application}},
                             },
                         ],
-                        joins: {bookables: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
+                        joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
                     },
                 ],
             },

@@ -1,9 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { pick } from 'lodash';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
-import { bookingQuery, bookingsQuery, createBooking, deleteBookings, terminateBooking, updateBooking } from './booking.queries';
 import {
+    bookingQuery,
+    bookingsQuery,
+    createBooking,
+    deleteBookings,
+    terminateBooking,
+    updateBooking,
+} from './booking.queries';
+import {
+    Bookable,
     Booking,
     BookingInput,
     BookingPartialInput,
@@ -21,7 +28,7 @@ import {
     UpdateBookingVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EnumService } from '../../../shared/services/enum.service';
 import { BookingResolve } from '../booking';
@@ -41,21 +48,26 @@ export class BookingService extends AbstractModelService<Booking['booking'],
     DeleteBookings> {
 
     /**
-     * Filters for bookings with endDate with self-approved bookables or no bookable linked
+     * Filters for bookings with endDate with self-approved bookable or no bookable linked
      */
     public static readonly runningSelfApprovedQV: BookingsVariables = {
         filter: {
             groups: [
                 {
                     conditions: [{endDate: {null: {}}}],
-                    joins: {bookables: {type: JoinType.leftJoin, conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}},
+                    joins: {
+                        bookable: {
+                            type: JoinType.leftJoin,
+                            conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}],
+                        },
+                    },
                 },
                 {
                     groupLogic: LogicalOperator.OR,
                     conditions: [
                         {
                             endDate: {null: {}},
-                            bookables: {empty: {}},
+                            bookable: {empty: {}},
                         },
                     ],
                 },
@@ -69,10 +81,17 @@ export class BookingService extends AbstractModelService<Booking['booking'],
     public static readonly selfApprovedQV: BookingsVariables = {
         filter: {
             groups: [
-                {joins: {bookables: {type: JoinType.leftJoin, conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}]}}},
+                {
+                    joins: {
+                        bookable: {
+                            type: JoinType.leftJoin,
+                            conditions: [{bookingType: {equal: {value: BookingType.self_approved}}}],
+                        },
+                    },
+                },
                 {
                     groupLogic: LogicalOperator.OR,
-                    conditions: [{bookables: {empty: {}}}],
+                    conditions: [{bookable: {empty: {}}}],
                 },
             ],
 
@@ -84,7 +103,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
             groups: [
                 {
                     conditions: [{status: {equal: {value: BookingStatus.application}}}],
-                    joins: {bookables: {conditions: [{bookableTags: {have: {values: ['6008']}}}]}},
+                    joins: {bookable: {conditions: [{bookableTags: {have: {values: ['6008']}}}]}},
                 },
             ],
         },
@@ -95,7 +114,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
             groups: [
                 {
                     conditions: [{status: {equal: {value: BookingStatus.application}}}],
-                    joins: {bookables: {conditions: [{bookableTags: {have: {values: ['6008'], not: true}}}]}},
+                    joins: {bookable: {conditions: [{bookableTags: {have: {values: ['6008'], not: true}}}]}},
                 },
             ],
         },
@@ -115,6 +134,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
         return {
             status: BookingStatus.booked,
             owner: null,
+            bookable: null,
             destination: '',
             participantCount: 1,
             startComment: '',
@@ -155,13 +175,10 @@ export class BookingService extends AbstractModelService<Booking['booking'],
     /**
      * Create a booking with given owner and bookable.
      * Accepts optional third parameter with other default fields of booking
-     * @param bookable null | Bookable['bookable'] and LinkableObject TODO : type when we can #6113
      */
-    public createWithBookable(bookable,
+    public createWithBookable(bookable: Bookable['bookable'],
                               owner: { id: string },
                               booking: BookingPartialInput = {}): Observable<CreateBooking['createBooking']> {
-
-        const subject = new Subject<CreateBooking['createBooking']>();
 
         if (!booking.startDate) {
             booking.startDate = (new Date()).toISOString();
@@ -172,21 +189,9 @@ export class BookingService extends AbstractModelService<Booking['booking'],
         }
 
         booking.owner = owner ? owner.id : null;
+        booking.bookable = bookable ? bookable.id : null;
 
-        this.create(booking).subscribe(newBoooking => {
-            if (bookable) {
-                this.linkMutationService.link(newBoooking, bookable).subscribe(() => {
-                    subject.next(newBoooking);
-                    subject.complete();
-                });
-            } else {
-                subject.next(newBoooking);
-                subject.complete();
-            }
-        });
-
-        return subject.asObservable();
-
+        return this.create(booking);
     }
 
 }

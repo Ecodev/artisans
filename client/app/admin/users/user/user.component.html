@@ -227,7 +227,7 @@
                                    [hideSearch]="true"
                     >
                         <ng-template let-item="item">
-                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
+                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookable.name"
                             ></app-table-button>
                         </ng-template>
                     </app-relations>
@@ -241,7 +241,7 @@
                                    [hideSearch]="true"
                     >
                         <ng-template let-item="item">
-                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookables[0].name"
+                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookable.name"
                             ></app-table-button>
                         </ng-template>
                     </app-relations>

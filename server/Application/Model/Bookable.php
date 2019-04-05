@@ -92,7 +92,7 @@ class Bookable extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="Booking", mappedBy="bookables")
+     * @ORM\OneToMany(targetEntity="Booking", mappedBy="bookable")
      */
     private $bookings;
 

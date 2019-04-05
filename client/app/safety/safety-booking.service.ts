@@ -21,7 +21,7 @@ const safetyBookings = gql`
                 updateDate
                 participantCount
                 status
-                bookables {
+                bookable {
                     id
                     name
                     image {

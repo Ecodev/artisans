@@ -28,7 +28,6 @@ import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClai
 import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
 import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
-import { SelectBookableComponent } from './shared/components/select-bookable/select-bookable.component';
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
 
@@ -57,7 +56,6 @@ import { EditableTransactionLinesComponent } from './transactions/editable-trans
         ExpenseClaimComponent,
         TransactionTagsComponent,
         TransactionTagComponent,
-        SelectBookableComponent,
         EditableTransactionLinesComponent,
     ],
     imports: [

@@ -28,28 +28,24 @@ class BookingTest extends TestCase
     public function testBookableRelation(): void
     {
         $booking = new Booking();
-        self::assertCount(0, $booking->getBookables(), 'booking should have no bookables');
 
         $bookable = new Bookable();
         self::assertCount(0, $bookable->getBookings(), 'bookable should have no bookings');
 
-        $booking->addBookable($bookable);
+        $booking->setBookable($bookable);
         self::assertCount(1, $bookable->getBookings(), 'bookable should have the added booking');
         self::assertSame($booking, $bookable->getBookings()->first(), 'bookable should have the same booking');
-        self::assertCount(1, $booking->getBookables(), 'booking should have the added bookable');
-        self::assertSame($bookable, $booking->getBookables()->first(), 'booking should be able to retrieve added bookable');
+        self::assertSame($bookable, $booking->getBookable(), 'booking should be able to retrieve added bookable');
 
-        $booking->addBookable($bookable);
+        $booking->setBookable($bookable);
         self::assertCount(1, $bookable->getBookings(), 'bookable should still have exactly 1 booking');
-        self::assertCount(1, $booking->getBookables(), 'booking should still have the same unique bookable');
+        self::assertSame($booking, $bookable->getBookings()->first(), 'bookable should have the same booking');
+        self::assertSame($bookable, $booking->getBookable(), 'booking should still have the same unique bookable');
 
         $bookable2 = new Bookable();
-        $booking->addBookable($bookable2);
-        self::assertCount(2, $booking->getBookables(), 'should be able to add second bookable');
-
-        $booking->removeBookable($bookable);
+        $booking->setBookable($bookable2);
         self::assertCount(0, $bookable->getBookings(), 'bookable should not have any booking anymore');
-        self::assertCount(1, $booking->getBookables(), 'booking should be able to remove first bookable');
-        self::assertSame($bookable2, $booking->getBookables()->first(), 'booking should have only the second bookable left');
+        self::assertCount(1, $bookable2->getBookings(), 'bookable2 should have a new booking');
+        self::assertSame($bookable2, $booking->getBookable(), 'booking should have only the second bookable left');
     }
 }

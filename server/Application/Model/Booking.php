@@ -9,13 +9,11 @@ use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasRemarks;
 use Application\Utility;
 use Cake\Chronos\Chronos;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A booking linking a user and several bookables
+ * A booking linking a user and a bookable
  *
  * @ORM\Entity(repositoryClass="Application\Repository\BookingRepository")
  * @ORM\AssociationOverrides({
@@ -83,18 +81,20 @@ class Booking extends AbstractModel
     private $estimatedEndDate = '';
 
     /**
-     * @var Collection
+     * @var null|Bookable
      *
-     * @ORM\ManyToMany(targetEntity="Bookable", inversedBy="bookings")
+     * @ORM\ManyToOne(targetEntity="Bookable", inversedBy="bookings")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(onDelete="CASCADE")
+     * })
      */
-    private $bookables;
+    private $bookable;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->bookables = new ArrayCollection();
     }
 
     public function setOwner(User $owner = null): void
@@ -225,35 +225,31 @@ class Booking extends AbstractModel
     }
 
     /**
-     * @return Collection
+     * Get bookable, may be null for "my own material" case
+     *
+     * @return null|Bookable
      */
-    public function getBookables(): Collection
+    public function getBookable(): ?Bookable
     {
-        return $this->bookables;
+        return $this->bookable;
     }
 
     /**
-     * Add bookable
+     * Set bookable
      *
-     * @param Bookable $bookable
+     * @param null|Bookable $bookable
      */
-    public function addBookable(Bookable $bookable): void
+    public function setBookable(?Bookable $bookable): void
     {
-        if (!$this->bookables->contains($bookable)) {
-            $this->bookables->add($bookable);
-            $bookable->bookingAdded($this);
+        if ($this->bookable) {
+            $this->bookable->bookingRemoved($this);
         }
-    }
 
-    /**
-     * Remove bookable
-     *
-     * @param Bookable $bookable
-     */
-    public function removeBookable(Bookable $bookable): void
-    {
-        $this->bookables->removeElement($bookable);
-        $bookable->bookingRemoved($this);
+        $this->bookable = $bookable;
+
+        if ($this->bookable) {
+            $this->bookable->bookingAdded($this);
+        }
     }
 
     /**

@@ -23,7 +23,7 @@ export class SelectAdminApprovedButtonComponent implements OnInit {
     public openDialog() {
         const options: MatDialogConfig = {
             minHeight: '450px',
-            width: '700px'
+            width: '700px',
         };
 
         this.dialog.open(SelectAdminApprovedModalComponent, options).afterClosed().subscribe(bookables => {
@@ -31,7 +31,8 @@ export class SelectAdminApprovedButtonComponent implements OnInit {
 
                 bookables.forEach(bookable => {
                     const booking: BookingPartialInput = {status: BookingStatus.application};
-                    this.bookingService.createWithBookable(bookable, this.user, booking);
+                    this.bookingService.createWithBookable(bookable, this.user, booking).subscribe(() => {
+                    });
                 });
             }
         });

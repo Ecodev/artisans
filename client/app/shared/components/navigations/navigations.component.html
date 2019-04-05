@@ -5,15 +5,15 @@
 
         <ng-container *ngFor="let booking of bookings.items; let i = index">
             <div [@terminate] *ngIf="!activeOnly || activeOnly && !booking.terminated">
-                <app-card [file]="booking.bookables[0]?.image" [style.width.px]="300" [class.showComments]="booking.showComments">
-                    <card-illustration *ngIf="!booking.bookables[0]?.image" class="padding">
+                <app-card [file]="booking.bookable?.image" [style.width.px]="300" [class.showComments]="booking.showComments">
+                    <card-illustration *ngIf="!booking.bookable?.image" class="padding">
                         <ngx-avatar name="?" [size]="160"></ngx-avatar>
                     </card-illustration>
 
                     <!-- style="overflow:hidden;" -->
                     <div fxLayout="column" fxLayoutGap="10px" >
-                        <a mat-button [routerLink]="booking.bookables[0] ? ['/booking', booking.bookables[0].code] : null" app-button-wrap>
-                            {{ booking.bookables[0]?.name || 'Matériel personnel' }}
+                        <a mat-button [routerLink]="booking.bookable ? ['/booking', booking.bookable.code] : null" app-button-wrap>
+                            {{ booking.bookable?.name || 'Matériel personnel' }}
                         </a>
                         <div style="position:relative">
                             <mat-divider></mat-divider>

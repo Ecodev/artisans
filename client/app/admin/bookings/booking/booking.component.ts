@@ -46,7 +46,7 @@ export class BookingComponent
     ngOnInit() {
         super.ngOnInit();
 
-        this.bookable = this.data.model.bookables[0];
+        this.bookable = this.data.model.bookable;
 
         // Booked status should never change, so, don't show it in menu. But if we change bookable, it could be again applicable...
         // Let get time to decide

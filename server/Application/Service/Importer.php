@@ -548,46 +548,38 @@ EOT;
                   creation_date,
                   status,
                   participant_count,
-                  start_date
+                  start_date,
+                  bookable_id
                 ) VALUES (
                   :owner,
                   NOW(),
                   :status,
                   :participant_count,
-                  NOW()
+                  NOW(),
+                  :bookable
                 )
 EOT;
 
         $insert = $conn->prepare($insert);
-
-        $insert2 = 'INSERT INTO booking_bookable(booking_id, bookable_id) VALUES (:booking, :bookable)';
-
-        $insert2 = $conn->prepare($insert2);
 
         foreach ($this->members as $idMember => $member) {
             // Cotisation annuelle
             $insert->bindValue(':owner', $idMember);
             $insert->bindValue(':status', 'booked');
             $insert->bindValue(':participant_count', 1);
+            $insert->bindValue(':bookable', 3006); // Cotisation annuelle
             $insert->execute();
-            $insert2->bindValue(':booking', $conn->lastInsertId());
-            $insert2->bindValue(':bookable', 3006); // Cotisation annuelle
-            $insert2->execute();
 
             // Fond de réparation (optionnel)
             if (!empty($member['assurances']) && mb_strpos($member['assurances'], 'Fonds réparation') !== false) {
+                $insert->bindValue(':bookable', 3026); // Fonds de réparation interne
                 $insert->execute();
-                $insert2->bindValue(':booking', $conn->lastInsertId());
-                $insert2->bindValue(':bookable', 3026); // Fonds de réparation interne
-                $insert2->execute();
             }
 
             // Adhésion NFT (optionnel)
             if (!empty($this->users[$idMember]['ichtus_NFT'])) {
+                $insert->bindValue(':bookable', 3004); // Cotisation NFT
                 $insert->execute();
-                $insert2->bindValue(':booking', $conn->lastInsertId());
-                $insert2->bindValue(':bookable', 3004); // Cotisation NFT
-                $insert2->execute();
             }
         }
 
@@ -608,10 +600,8 @@ EOT;
                         $bookable = $selectBookableByName->fetch(\PDO::FETCH_ASSOC);
                     }
                     if ($bookable) {
+                        $insert->bindValue(':bookable', $bookable['id']);
                         $insert->execute();
-                        $insert2->bindValue(':booking', $conn->lastInsertId());
-                        $insert2->bindValue(':bookable', $bookable['id']);
-                        $insert2->execute();
                         if (!array_key_exists($bookable['id'], $this->storageAllocated)) {
                             $this->storageAllocated[$bookable['id']] = 1;
                         } else {

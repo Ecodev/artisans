@@ -433,6 +433,7 @@ class User extends AbstractModel
             self::ROLE_ANONYMOUS,
             self::ROLE_INDIVIDUAL,
             self::ROLE_MEMBER,
+            self::ROLE_BOOKING_ONLY,
             self::ROLE_RESPONSIBLE,
             self::ROLE_ADMINISTRATOR,
         ];

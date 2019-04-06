@@ -30,6 +30,7 @@ import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
 import { TimeagoModule } from 'ngx-timeago';
+import { ParticleSwitchComponent } from '../particle-switch/particle-switch.component';
 
 const declarations = [
     RelationsComponent,
@@ -53,6 +54,7 @@ const declarations = [
     CommentComponent,
     TransactionAmountComponent,
     AccountingDocumentsComponent,
+    ParticleSwitchComponent,
 ];
 
 const imports = [

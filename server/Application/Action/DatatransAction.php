@@ -158,7 +158,7 @@ class DatatransAction extends AbstractAction
         $line->setDebit($bankAccount);
 
         // This could be removed later on. For now it's mostly for debugging
-        $line->setRemarks(json_encode($body, JSON_PRETTY_PRINT));
+        $transaction->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
 
         $this->entityManager->flush();
     }

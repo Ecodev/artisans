@@ -192,7 +192,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
         const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
 
-        return this.bookingService.getAll(qvm, true).pipe(map(result => {
+        return this.bookingService.getAll(qvm).pipe(map(result => {
             const isAvailable = bookable.isActive && (
                 bookable.simultaneousBookingMaximum < 0
                 || bookable.simultaneousBookingMaximum > result.length

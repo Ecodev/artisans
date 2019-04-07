@@ -2,12 +2,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
-import { takeUntil } from 'rxjs/operators';
 import { PageEvent, Sort } from '@angular/material';
 import { fromUrl, NaturalSearchConfiguration, NaturalSearchSelections, toGraphQLDoctrineFilter, toUrl } from '@ecodev/natural-search';
 import { PersistenceService } from '../services/persistence.service';
 import { AbstractController } from '../../../shared/components/AbstractController';
-import { AbstractModelService, AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService } from '../../../shared/services/abstract-model.service';
 import { QueryVariables, QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
@@ -52,7 +51,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         100,
         200,
     ];
-    protected queryRef: AutoRefetchQueryRef<Tall>;
+
     protected defaultPagination: PaginationInput = {
         pageIndex: 0,
         pageSize: 25,
@@ -83,14 +82,6 @@ export class AbstractList<Tall, Vall extends QueryVariables>
 
         this.dataSource = new AppDataSource(this.getDataObservable());
         this.selection = new SelectionModel<Tall>(true, []);
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-
-        if (this.queryRef) {
-            this.queryRef.unsubscribe();
-        }
     }
 
     /**
@@ -215,8 +206,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     }
 
     protected getDataObservable(): Observable<Tall> {
-        this.queryRef = this.service.watchAll(this.variablesManager, true);
-        return this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe));
+        return this.service.watchAll(this.variablesManager, this.ngUnsubscribe);
     }
 
     protected initFromPersisted() {

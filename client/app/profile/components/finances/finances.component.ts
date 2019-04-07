@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ExpenseClaims, ExpenseClaimStatus, ExpenseClaimType, TransactionLines } from '../../../shared/generated-types';
-import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
+import { ExpenseClaimStatus, ExpenseClaimType } from '../../../shared/generated-types';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,22 +10,21 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { AbstractController } from '../../../shared/components/AbstractController';
 
 @Component({
     selector: 'app-finances',
     templateUrl: './finances.component.html',
     styleUrls: ['./finances.component.scss'],
 })
-export class FinancesComponent implements OnInit, OnDestroy {
+export class FinancesComponent extends AbstractController implements OnInit, OnDestroy {
 
     public user;
 
     public runningExpenseClaimsDS: AppDataSource;
-    public runningExpenseClaims: AutoRefetchQueryRef<ExpenseClaims['expenseClaims']>;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];
 
     public transactionLinesDS: AppDataSource;
-    public transactionLinesQuery: AutoRefetchQueryRef<TransactionLines['transactionLines']>;
     public transactionsColumns = ['name', 'transactionDate', 'remarks', 'amount'];
 
     public ibanLocked = true;
@@ -38,6 +36,7 @@ export class FinancesComponent implements OnInit, OnDestroy {
         private transactionLineService: TransactionLineService,
         private alertService: AlertService,
         private dialog: MatDialog) {
+        super();
     }
 
     ngOnInit() {
@@ -45,16 +44,13 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
         this.ibanLocked = !!this.user.iban;
 
-        this.runningExpenseClaims = this.expenseClaimService.getForUser(this.user);
-        this.runningExpenseClaimsDS = new AppDataSource(this.runningExpenseClaims.valueChanges);
+        const runningExpenseClaims = this.expenseClaimService.getForUser(this.user, this.ngUnsubscribe);
+        this.runningExpenseClaimsDS = new AppDataSource(runningExpenseClaims);
 
-        this.transactionLinesQuery = this.transactionLineService.getForUser(this.user);
-        this.transactionLinesDS = new AppDataSource(this.transactionLinesQuery.valueChanges);
-    }
-
-    ngOnDestroy() {
-        this.runningExpenseClaims.unsubscribe();
-        this.transactionLinesQuery.unsubscribe();
+        if (this.user.account) {
+            const transactionLinesQuery = this.transactionLineService.getForAccount(this.user.account, this.ngUnsubscribe);
+            this.transactionLinesDS = new AppDataSource(transactionLinesQuery);
+        }
     }
 
     public cancelExpenseClaim(expenseClaim) {

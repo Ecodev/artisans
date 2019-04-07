@@ -73,7 +73,7 @@ export class ProfileComponent implements OnInit {
                 // Request user to update account.
                 // Don't call accountService as actual user may not have one, and it couldn't be updated.
                 // TODO : replace by a viewer watching architecture
-                this.userService.getOne(user.id, true).subscribe(updatedUser => {
+                this.userService.getOne(user.id).subscribe(updatedUser => {
                     this.user.account = updatedUser.account;
                 });
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { BookingService } from '../admin/bookings/services/booking.service';
-import { LinkMutationService } from '../shared/services/link-mutation.service';
 import { EnumService } from '../shared/services/enum.service';
 import gql from 'graphql-tag';
 import { bookableMetaFragment } from '../admin/bookables/services/bookable.queries';
@@ -46,8 +45,8 @@ const safetyBookings = gql`
 })
 export class SafetyBookingService extends BookingService {
 
-    constructor(apollo: Apollo, enumService: EnumService, linkMutationService: LinkMutationService) {
-        super(apollo, enumService, linkMutationService);
+    constructor(apollo: Apollo, enumService: EnumService) {
+        super(apollo, enumService);
         this.allQuery = safetyBookings;
     }
 

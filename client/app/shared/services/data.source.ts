@@ -21,9 +21,7 @@ export class AppDataSource extends DataSource<any> {
         if (value instanceof Observable) {
             this.ngUnsubscribe = new Subject();
             this._data = new BehaviorSubject<any>({items: [], length: 0, pageSize: 0} as any);
-            value.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => {
-                this.data = res;
-            });
+            value.pipe(takeUntil(this.ngUnsubscribe)).subscribe(res => this.data = res);
         } else {
             this._data = new BehaviorSubject<any>(value);
         }
@@ -44,8 +42,6 @@ export class AppDataSource extends DataSource<any> {
 
     disconnect() {
         this.unsubscribe();
-
-        // this._data.unsubscribe(); // cause error, search what should be done here.
     }
 
     public push(item: any) {

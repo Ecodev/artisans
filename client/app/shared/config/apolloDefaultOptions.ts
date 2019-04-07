@@ -10,7 +10,7 @@ import { Literal } from '../types';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
-        fetchPolicy: 'cache-first',
+        fetchPolicy: 'network-only',
     },
     watchQuery: {
         fetchPolicy: 'cache-and-network',

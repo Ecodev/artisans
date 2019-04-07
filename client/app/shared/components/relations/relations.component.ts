@@ -15,13 +15,10 @@ import {
 } from '@angular/core';
 import { LinkMutationService } from '../../services/link-mutation.service';
 import { forkJoin, Observable } from 'rxjs';
-
-import { takeUntil } from 'rxjs/operators';
 import { AbstractController } from '../AbstractController';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
 import { FetchResult } from 'apollo-link';
-import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { HierarchicConfiguration } from '../../hierarchic-selector/classes/HierarchicConfiguration';
 import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { SelectComponent } from '../select/select.component';
@@ -50,43 +47,53 @@ export class RelationsComponent extends AbstractController implements OnInit, On
 
     @Input() service;
     @Input() placeholder;
+
     /**
      * Context filter for autocomplete selector
      */
     @Input() autocompleteSelectorFilter;
+
     /**
      * Function to customize the rendering of the selected item as text in input
      */
     @Input() displayWith: (any) => string;
+
     /**
      * Whether the relations can be changed
      */
     @Input() disabled: boolean;
+
     /**
      * Main object relations belong to
      */
     @Input() main;
+
     /**
      * Cause the component to work as one-to-many instead of many-to-many
      */
     @Input() value: any;
     @Output() selectionChange: EventEmitter<any> = new EventEmitter();
+
     /**
      * Context filters for hierarchic selector
      */
     @Input() hierarchicSelectorFilters;
+
     /**
      * Configuration in case we prefer hierarchic selection over autocomplete search
      */
     @Input() hierarchicSelectorConfig: HierarchicConfiguration[];
+
     /**
      * Provide service for autocomplete search
      */
     @Input() autocompleteSelectorService: any;
+
     /**
      *  Hide search field
      */
     @Input() hideSearch = false;
+
     /**
      * LinkMutationService usually find the right mutation, by matching type names. But it's
      * not enough when we have the same types on both side of the relation (eg: linkEquipmentEquipment)
@@ -94,11 +101,13 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      */
     @Input() reverseRelation: any;
     @Input() otherName: string | null;
+
     /**
      * Listing service instance
      */
     public dataSource: AppDataSource;
     public loading = false;
+
     /**
      * Table columns
      */
@@ -107,14 +116,11 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     ];
     public onChange;
     public onTouched;
+
     /**
      * Observable variables/options for listing service usage and apollo watchQuery
      */
     private variablesManager: QueryVariablesManager<QueryVariables> = new QueryVariablesManager();
-    /**
-     * Own auto refetchable query
-     */
-    private queryRef: AutoRefetchQueryRef<any>;
 
     public pageSizeOptions = [5, 10, 50, 100];
 
@@ -156,14 +162,6 @@ export class RelationsComponent extends AbstractController implements OnInit, On
             this.queryItems();
         } else if (!this.service && this.value) {
             this.initItems();
-        }
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-
-        if (this.queryRef) {
-            this.queryRef.unsubscribe();
         }
     }
 
@@ -311,15 +309,10 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Get list from database
      */
     private queryItems() {
-
         this.loading = true;
-        this.queryRef = this.service.watchAll(this.variablesManager, true);
-
-        this.dataSource = new AppDataSource(this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)));
-
-        this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
-            this.loading = false;
-        });
+        const queryRef = this.service.watchAll(this.variablesManager, this.ngUnsubscribe);
+        queryRef.subscribe(() => this.loading = false);
+        this.dataSource = new AppDataSource(queryRef);
     }
 
     private propagateValue(value) {

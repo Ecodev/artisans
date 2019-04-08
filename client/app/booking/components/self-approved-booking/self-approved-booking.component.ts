@@ -34,8 +34,7 @@ export class SelfApprovedBookingComponent implements OnInit {
         const bookable = this.route.snapshot.params.bookable;
         if (bookable) {
 
-            // TODO: replace by watchOne (exist in okpilot) because attributes of object may have changed since last visit
-            this.bookableService.getOne(bookable).subscribe(newBookable => {
+            this.bookableService.watchOne(bookable).subscribe(newBookable => {
                 this.bookable = newBookable;
             });
         }

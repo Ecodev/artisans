@@ -138,7 +138,7 @@ export abstract class AbstractModelService<Tone,
         }).pipe(this.mapOne());
     }
 
-    public getOne2(id: string): Observable<Tone> {
+    public watchOne(id: string): Observable<Tone> {
         this.throwIfObservable(id);
         this.throwIfNotQuery(this.oneQuery);
 
@@ -433,7 +433,7 @@ export abstract class AbstractModelService<Tone,
         // Load model if id is given
         let observable;
         if (id) {
-            observable = this.getOne2(id);
+            observable = this.watchOne(id);
         } else {
             observable = of(this.getEmptyObject() as Tone);
         }

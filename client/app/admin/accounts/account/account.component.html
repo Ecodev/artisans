@@ -19,13 +19,14 @@
                             <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>IBAN</mat-label>
+                        <mat-form-field *ngIf="!form.get('owner').value">
+                            <mat-label>IBAN Ichtus</mat-label>
                             <input matInput formControlName="iban" (change)="update()">
                             <mat-error *ngIf="form.get('iban').hasError('maxlength')">
                                 Maximum {{form.get('iban').errors.maxlength.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('iban').hasError('required')">Requis</mat-error>
+                            <mat-hint>Pour les comptes bancaires ichtus uniquement</mat-hint>
                         </mat-form-field>
 
                     </div>
@@ -41,6 +42,7 @@
                                     [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"
                         ></app-select>
 
+                        <div *ngIf="form.get('owner')?.value">IBAN de l'utilisateur : {{ form.get('owner')?.value?.iban }}</div>
                     </div>
 
                 </div>

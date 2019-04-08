@@ -75,7 +75,11 @@
 
                         <mat-form-field>
                             <mat-label>Remarques</mat-label>
-                            <textarea matInput formControlName="internalRemarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
+                            <textarea matInput
+                                      formControlName="internalRemarks"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
 
@@ -112,12 +116,14 @@
 
                         <mat-form-field>
                             <mat-label>Nombre max. de réservations simultanées</mat-label>
-                            <input matInput type="number" step="1" min="-1" formControlName="simultaneousBookingMaximum" (change)="update()">
+                            <input matInput type="number" step="1" min="-1" formControlName="simultaneousBookingMaximum" (change)="update()"
+                            >
                             <mat-hint>Saisir -1 pour aucune limite.</mat-hint>
                         </mat-form-field>
 
-                        <app-select formControlName="creditAccount"
-                                    placeholder="Compte à créditer lors de réservation"
+                        <app-select *ngIf="!isSelfApproved()"
+                                    formControlName="creditAccount"
+                                    placeholder="Compte à créditer lors de la réservation"
                                     [hierarchicSelectorConfig]="accountHierarchicConfig"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
@@ -178,16 +184,16 @@
             <app-bookable-metadata [bookable]="data.model" [edit]="true" class="margin"></app-bookable-metadata>
         </mat-tab>
 
-        <!--        <mat-tab label="Écritures" *ngIf="data.model.id">
-                    <app-transactions [persistSearch]="false"
-                                      [queryVariables]="{filter: {groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}}"
-                    ></app-transactions>
-                </mat-tab>-->
+        <mat-tab label="Écritures" *ngIf="data.model.id">
+            <app-transaction-lines [persistSearch]="false"
+                              [queryVariables]="{filter: {groups: [{conditions: [{bookable: {equal: {value: data.model.id}}}]}]}}"
+            ></app-transaction-lines>
+        </mat-tab>
 
         <mat-tab label="Utilisations" *ngIf="data.model.id">
             <app-bookings [persistSearch]="false"
-                          [queryVariables]="{filter: {groups: [{conditions: [{bookable: {have: {values: [data.model.id]}}}]}]}}"
-                          [columns]="['edit', 'owner', 'destination', 'startDate', 'estimatedEndDate', 'participantCount', 'terminateBooking']"
+                          [queryVariables]="getBookingsVariables()"
+                          [columns]="['edit', 'owner', 'destination', 'startDate', 'endDate', 'estimatedEndDate']"
             ></app-bookings>
         </mat-tab>
 

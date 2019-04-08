@@ -121,8 +121,8 @@
                         ></app-select-enum>
 
                         <div class="mat-body-1">
-                            <p>Dernière connexion : {{ data.model.lastLogin | date: 'fullDate'}}</p>
-                            <p>Séance d'accueil le : {{ data.model.welcomeSessionDate | date: 'fullDate'}}</p>
+                            <p>Dernière connexion : {{ data.model.lastLogin  | date: 'longDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}</p>
+                            <p>Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }} - {{ data.model.welcomeSessionDate | date: 'shortTime' }}</p>
                         </div>
 
                     </div>

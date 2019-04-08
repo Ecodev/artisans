@@ -288,7 +288,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
             return this.displayWith;
         }
 
-        return (item) => !item ? null : item.fullName || item.iban || item.name || item[this.searchField] || item.id || item;
+        return (item) => !item ? null : item.fullName || item.name || item.iban || item[this.searchField] || item.id || item;
     }
 
     public clear(preventChangeValue = false) {

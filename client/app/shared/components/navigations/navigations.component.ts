@@ -165,7 +165,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                     nullAsHighest: true,
                 },
                 {
-                    field: BookingSortingField.endDate,
+                    field: BookingSortingField.startDate,
                     order: SortingOrder.DESC,
                 },
             ],

@@ -5,11 +5,13 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
     Bookable,
-    BookableVariables,
+    BookableVariables, BookingSortingField,
+    BookingsVariables,
     BookingType,
     CreateBookable,
     CreateBookableVariables,
     CreateImage,
+    SortingOrder,
     UpdateBookable,
     UpdateBookableVariables,
 } from '../../../shared/generated-types';
@@ -92,6 +94,17 @@ export class BookableComponent
         }
 
         super.update();
+    }
+
+    public isSelfApproved() {
+        return this.data.model.bookingType === BookingType.self_approved;
+    }
+
+    public getBookingsVariables(): BookingsVariables {
+        return {
+            filter: {groups: [{conditions: [{bookable: {have: {values: [this.data.model.id]}}}]}]},
+            sorting: [{field: BookingSortingField.startDate, order: SortingOrder.DESC}],
+        };
     }
 
 }

@@ -12,6 +12,7 @@ export const accountMetaFragment = gql`
         owner {
             id
             name
+            iban
         }
     }
 `;

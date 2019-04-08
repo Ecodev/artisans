@@ -124,12 +124,9 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
             return false;
         }
 
-        // If no constraints on bookable, there is not need for license
-        if (bookable.licenses.length === 0) {
-            return true;
-        }
+        const matching = intersectionBy(bookable.licenses, user.licenses, 'id');
 
-        return intersectionBy(bookable.licenses, user.licenses, 'id').length;
+        return matching.length === bookable.licenses.length;
     }
 
     public getEmptyObject(): BookableInput {

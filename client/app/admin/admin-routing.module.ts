@@ -50,6 +50,7 @@ const routes: Routes = [
                     data: {
                         title: 'Sorties en cours',
                         queryVariables: BookingService.runningSelfApprovedQV,
+                        columns: ['edit', 'owner', 'bookable', 'startDate', 'estimatedEndDate', 'terminateBooking'],
                     },
                 },
                 {
@@ -64,8 +65,19 @@ const routes: Routes = [
                             path: 'self-approved',
                             component: BookingsComponent,
                             data: {
-                                title: 'Toutes les sorties',
+                                title: 'Toutes terminées',
                                 queryVariables: BookingService.selfApprovedQV,
+                                columns: [
+                                    'edit',
+                                    'owner',
+                                    'bookable',
+                                    'destination',
+                                    'startDate',
+                                    'endDate',
+                                    'participantCount',
+                                    'endComment',
+                                ],
+
                             },
                         },
                         {
@@ -74,14 +86,16 @@ const routes: Routes = [
                             data: {
                                 title: 'Demandes de stockage en attente',
                                 queryVariables: BookingService.storageApplication,
+                                columns: ['edit', 'owner', 'bookable', 'startDate'],
                             },
                         },
                         {
                             path: 'other-application',
                             component: BookingsComponent,
                             data: {
-                                title: 'Demande de services en attente',
+                                title: 'Demandes de services en attente',
                                 queryVariables: BookingService.notStorageApplication,
+                                columns: ['edit', 'owner', 'bookable', 'startDate'],
                             },
                         },
                         {
@@ -122,6 +136,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Stand up paddle',
                                 queryVariables: BookableService.getFiltersByTagId(6000),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -130,6 +145,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Planches',
                                 queryVariables: BookableService.getFiltersByTagId(6001),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -138,6 +154,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Canoës',
                                 queryVariables: BookableService.getFiltersByTagId(6002),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -146,6 +163,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Kayaks',
                                 queryVariables: BookableService.getFiltersByTagId(6003),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -154,6 +172,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Aviron',
                                 queryVariables: BookableService.getFiltersByTagId(6004),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -162,6 +181,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Voile légère',
                                 queryVariables: BookableService.getFiltersByTagId(6005),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -170,6 +190,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Voile lestée',
                                 queryVariables: BookableService.getFiltersByTagId(6006),
+                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -251,7 +272,7 @@ const routes: Routes = [
                             path: 'non-active',
                             component: UsersComponent,
                             data: {
-                                title: 'Membres inactifs, nouveaux et archivés',
+                                title: 'Membres inactifs et archivés',
                                 queryVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
                             },
                         },

@@ -12,7 +12,7 @@
 
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
         <div *ngIf="!isAvailable && runningBooking">Sorti {{ runningBooking.startDate | timeago }}</div>
-        <div *ngIf="!hasLicense">Une licence est requise pour utiliser cette embarcation</div>
+        <div *ngIf="!hasLicense">Vous ne disposez pas des licences requises pour utiliser cette embarcation</div>
 
         <button mat-flat-button
                 color="primary"

@@ -31,6 +31,7 @@ import { TransactionAmountComponent } from '../components/transaction-amount/tra
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
 import { TimeagoModule } from 'ngx-timeago';
 import { ParticleSwitchComponent } from '../particle-switch/particle-switch.component';
+import { EllipsisPipe } from '../pipes/ellipsis.pipe';
 
 const declarations = [
     RelationsComponent,
@@ -55,6 +56,7 @@ const declarations = [
     TransactionAmountComponent,
     AccountingDocumentsComponent,
     ParticleSwitchComponent,
+    EllipsisPipe
 ];
 
 const imports = [

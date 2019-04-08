@@ -6,7 +6,6 @@ import { Mutations } from '../generated-types';
 import { FetchResult } from 'apollo-link';
 import { Literal } from '../types';
 import { clone } from 'lodash';
-import { AbstractModelService } from './abstract-model.service';
 import { map, switchMap } from 'rxjs/operators';
 import { Utility } from '../classes/utility';
 
@@ -124,14 +123,14 @@ export class LinkMutationService {
         }).pipe(map(({data}) => {
             if (data.__type && data.__type.fields) {
                 this.allMutations = data.__type.fields
-                    .filter(v => v.name.match(/^(link|unlink)/))
-                    .map(v => {
-                        return {
-                            name: v.name,
-                            arg1: mapArg(v.args[0]),
-                            arg2: mapArg(v.args[1]),
-                        };
-                    });
+                                        .filter(v => v.name.match(/^(link|unlink)/))
+                                        .map(v => {
+                                            return {
+                                                name: v.name,
+                                                arg1: mapArg(v.args[0]),
+                                                arg2: mapArg(v.args[1]),
+                                            };
+                                        });
             } else {
                 this.allMutations = [];
             }
@@ -151,7 +150,7 @@ export class LinkMutationService {
         return this.getAllMutationNames().pipe(map(allMutationNames => {
 
                 const mutation = allMutationNames.find(mut => mut.name === mutationName)
-                    || allMutationNames.find(mut => mut.name === reversedMutationName);
+                                 || allMutationNames.find(mut => mut.name === reversedMutationName);
 
                 if (mutation) {
                     return this.buildTemplate(mutation, obj1, obj2, variables);
@@ -168,8 +167,10 @@ export class LinkMutationService {
     private execute(mutation: string): Observable<FetchResult<{ id: string }>> {
         return this.apollo.mutate<{ id: string }>({
             mutation: gql(mutation),
-            refetchQueries: AbstractModelService.getRefetchQueries(),
-        });
+        }).pipe(map((r) => {
+            this.apollo.getClient().reFetchObservableQueries();
+            return r;
+        }));
     }
 
     /**

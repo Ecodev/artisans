@@ -21,7 +21,6 @@ import { MatAutocompleteTrigger } from '@angular/material';
 import { AbstractController } from '../AbstractController';
 import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
 import { QueryVariables, QueryVariablesManager } from '../../classes/query-variables-manager';
-import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { HierarchicFiltersConfiguration } from '../../hierarchic-selector/classes/HierarchicFiltersConfiguration';
 import { HierarchicSelectorDialogService } from '../../hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { OrganizedModelSelection } from '../../hierarchic-selector/services/hierarchic-selector.service';
@@ -126,7 +125,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
      */
     public moreNbItems = 0;
     public onChange;
-    private queryRef: AutoRefetchQueryRef<any>;
+    private queryRef: Observable<any>;
     /**
      * Default page size
      */
@@ -180,14 +179,6 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
     public onInnerFormChange() {
         if (this.formCtrl.value && !this.optionRequired) {
             this.propagateValue(this.formCtrl.value);
-        }
-    }
-
-    ngOnDestroy() {
-        super.ngOnDestroy();
-
-        if (this.queryRef) {
-            this.queryRef.unsubscribe();
         }
     }
 
@@ -253,17 +244,17 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
         }
 
         // Init query
-        this.queryRef = this.service.watchAll(this.variablesManager, true);
+        this.queryRef = this.service.watchAll(this.variablesManager, this.ngUnsubscribe);
 
         // When query results arrive, start loading, and count items
-        this.queryRef.valueChanges.pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any) => {
+        this.queryRef.pipe(takeUntil(this.ngUnsubscribe)).subscribe((data: any) => {
             this.loading = false;
             const nbTotal = data.length;
             const nbListed = Math.min(data.length, this.pageSize);
             this.moreNbItems = nbTotal - nbListed;
         });
 
-        this.items = this.queryRef.valueChanges.pipe(map((data: any) => data.items ? data.items : data));
+        this.items = this.queryRef.pipe(map((data: any) => data.items ? data.items : data));
     }
 
     public propagateValue(ev) {

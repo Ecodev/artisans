@@ -1,11 +1,11 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../../admin/users/services/user.service';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import {
     BookingPartialInput,
-    BookingSortingField,
     Bookings,
+    BookingSortingField,
     BookingsVariables,
     BookingType,
     JoinType,
@@ -14,13 +14,13 @@ import {
     Users,
     UsersVariables,
 } from '../../generated-types';
-import { AutoRefetchQueryRef } from '../../services/abstract-model.service';
 import { QueryVariablesManager } from '../../classes/query-variables-manager';
 import { mergeWith } from 'lodash';
 import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { CommentComponent } from './comment.component';
 import { AlertService } from '../alert/alert.service';
+import { AbstractController } from '../AbstractController';
 
 @Component({
     selector: 'app-navigations',
@@ -34,27 +34,25 @@ import { AlertService } from '../alert/alert.service';
         ]),
     ],
 })
-export class NavigationsComponent implements OnInit, OnDestroy {
+export class NavigationsComponent extends AbstractController implements OnInit {
 
     @Input() user;
     @Input() activeOnly = true;
     @Input() showEmptyMessage = false;
 
     public bookings: Bookings['bookings'];
-    public bookingsQueryRef: AutoRefetchQueryRef<Bookings['bookings']>;
 
     private bookingsQVM = new QueryVariablesManager<BookingsVariables>();
 
     private currentPage = 0;
     private family;
 
-    public hidden8 = false;
-
     constructor(public userService: UserService,
                 public bookingService: BookingService,
                 private alertService: AlertService,
                 private dialog: MatDialog,
                 private snackbar: MatSnackBar) {
+        super();
     }
 
     ngOnInit() {
@@ -67,13 +65,6 @@ export class NavigationsComponent implements OnInit, OnDestroy {
             this.family = [this.user, ...family.items];
             this.getNavigations(this.family).subscribe(bookings => this.bookings = bookings);
         });
-
-    }
-
-    ngOnDestroy() {
-        if (this.bookingsQueryRef) {
-            this.bookingsQueryRef.unsubscribe();
-        }
 
     }
 
@@ -113,7 +104,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
     }
 
     public update(partialBooking) {
-        this.bookingService.updatePartially(partialBooking).subscribe(booking => {
+        this.bookingService.updatePartially(partialBooking).subscribe(() => {
         });
     }
 
@@ -133,12 +124,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
             filter: {
                 groups: [
                     {
-                        conditions: [
-                            {
-                                owner: owner,
-                                endDate: endDate,
-                            },
-                        ],
+                        conditions: [{owner: owner, endDate: endDate}],
                         joins: {
                             bookable: {
                                 type: JoinType.leftJoin,
@@ -148,13 +134,7 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                     },
                     {
                         groupLogic: LogicalOperator.OR,
-                        conditions: [
-                            {
-                                owner: owner,
-                                endDate: endDate,
-                                bookable: {empty: {}},
-                            },
-                        ],
+                        conditions: [{owner: owner, endDate: endDate, bookable: {empty: {}}}],
                     },
                 ],
             },
@@ -178,7 +158,8 @@ export class NavigationsComponent implements OnInit, OnDestroy {
                 pageIndex: this.currentPage,
             },
         });
-        return this.bookingService.getAll(this.bookingsQVM, true);
+
+        return this.bookingService.getAll(this.bookingsQVM);
     }
 
 }

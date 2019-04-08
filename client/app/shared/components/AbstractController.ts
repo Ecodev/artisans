@@ -8,7 +8,7 @@ import { OnDestroy } from '@angular/core';
  */
 export class AbstractController implements OnDestroy {
 
-    protected ngUnsubscribe = new Subject();
+    protected ngUnsubscribe = new Subject<void>();
 
     constructor() {
     }

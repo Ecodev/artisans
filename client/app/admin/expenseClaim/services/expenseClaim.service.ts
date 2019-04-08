@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createExpenseClaim,
     deleteExpenseClaims,
@@ -9,21 +9,22 @@ import {
     updateExpenseClaim,
 } from './expenseClaim.queries';
 import {
-    BookingsVariables,
     CreateExpenseClaim,
     CreateExpenseClaimVariables,
     DeleteExpenseClaims,
-    ExpenseClaimInput,
     ExpenseClaim,
-    ExpenseClaimVariables,
+    ExpenseClaimInput,
     ExpenseClaims,
+    ExpenseClaimStatus,
     ExpenseClaimsVariables,
-    ExpenseClaimStatus, ExpenseClaimType,
+    ExpenseClaimType,
+    ExpenseClaimVariables,
     UpdateExpenseClaim,
     UpdateExpenseClaimVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -68,7 +69,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expe
         };
     }
 
-    public getForUser(user): AutoRefetchQueryRef<ExpenseClaims['expenseClaims']> {
+    public getForUser(user, expire: Subject<void>): Observable<ExpenseClaims['expenseClaims']> {
         const variables: ExpenseClaimsVariables = {
             filter: {
                 groups: [
@@ -86,7 +87,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expe
 
         const qvm = new QueryVariablesManager<ExpenseClaimsVariables>();
         qvm.set('variables', variables);
-        return this.watchAll(qvm, true);
+        return this.watchAll(qvm, expire);
     }
 
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import { transactionLineQuery, transactionLinesQuery } from './transactionLine.queries';
 import {
+    Account,
     LogicalOperator,
     SortingOrder,
     TransactionLine,
@@ -11,11 +12,10 @@ import {
     TransactionLineSortingField,
     TransactionLinesVariables,
     TransactionLineVariables,
-    User,
 } from '../../../shared/generated-types';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
-import { of } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -80,16 +80,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
         return [atLeastOneAccount];
     }
 
-    public getForUser(user: User['user']) {
-        const accountId = user.account ? user.account.id : null;
-
-        if (!accountId) {
-            return {
-                valueChanges: of(null),
-                unsubscribe: () => {
-                },
-            } as AutoRefetchQueryRef<any>;
-        }
+    public getForAccount(account: Account['account'], expire: Subject<void>): Observable<TransactionLines['transactionLines']> {
 
         const variables: TransactionLinesVariables = {
             filter: {
@@ -97,20 +88,20 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
                     {
                         conditionsLogic: LogicalOperator.OR,
                         conditions: [
-                            {credit: {equal: {value: accountId}}},
-                            {debit: {equal: {value: accountId}}},
+                            {credit: {equal: {value: account.id}}},
+                            {debit: {equal: {value: account.id}}},
                         ],
                     },
 
                 ],
             },
             sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
-            pagination: {pageIndex: 0, pageSize: 9999}
+            pagination: {pageIndex: 0, pageSize: 9999},
         };
 
         const qvm = new QueryVariablesManager<TransactionLinesVariables>();
         qvm.set('variables', variables);
-        return this.watchAll(qvm, true);
+        return this.watchAll(qvm, expire);
     }
 
 }

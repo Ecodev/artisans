@@ -25,7 +25,6 @@ import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EnumService } from '../../../shared/services/enum.service';
 import { BookingResolve } from '../booking';
-import { LinkMutationService } from '../../../shared/services/link-mutation.service';
 
 @Injectable({
     providedIn: 'root',
@@ -101,7 +100,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
                             conditions: [
                                 {
                                     bookableTags: {have: {values: ['6008']}},
-                                    bookingType: {equal: {value: BookingType.admin_approved}}
+                                    bookingType: {equal: {value: BookingType.admin_approved}},
                                 },
                             ],
                         },
@@ -122,7 +121,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
         },
     };
 
-    constructor(apollo: Apollo, private enumService: EnumService, private linkMutationService: LinkMutationService) {
+    constructor(apollo: Apollo, private enumService: EnumService) {
         super(apollo,
             'booking',
             bookingQuery,

@@ -4,7 +4,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import { pick } from 'lodash';
-import { AbstractModelService, AutoRefetchQueryRef, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUser,
     currentUserForProfileQuery,
@@ -20,8 +20,8 @@ import {
 import {
     BillingType,
     Bookings,
-    BookingsVariables,
     BookingStatus,
+    BookingsVariables,
     BookingType,
     CreateUser,
     CreateUserVariables,
@@ -37,15 +37,15 @@ import {
     UnregisterVariables,
     UpdateUser,
     UpdateUserVariables,
+    User,
     UserByToken,
     UserByTokenVariables,
     UserInput,
-    User,
-    UserVariables,
     UserRole,
     Users,
-    UsersVariables,
     UserStatus,
+    UsersVariables,
+    UserVariables,
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
@@ -274,7 +274,7 @@ export class UserService extends AbstractModelService<User['user'],
     /**
      * Impact members
      */
-    public getRunningServices(user): AutoRefetchQueryRef<Bookings['bookings']> {
+    public getRunningServices(user, expire: Subject<void>): Observable<Bookings['bookings']> {
         const variables: BookingsVariables = {
             filter: {
                 groups: [
@@ -283,7 +283,7 @@ export class UserService extends AbstractModelService<User['user'],
                             {
                                 owner: {equal: {value: user.id}},
                                 status: {equal: {value: BookingStatus.booked}},
-                                endDate: {null: {}}
+                                endDate: {null: {}},
                             },
                         ],
                         joins: {
@@ -307,10 +307,10 @@ export class UserService extends AbstractModelService<User['user'],
 
         const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
-        return this.bookingService.watchAll(qvm, true);
+        return this.bookingService.watchAll(qvm, expire);
     }
 
-    public getPendingApplications(user): AutoRefetchQueryRef<Bookings['bookings']> {
+    public getPendingApplications(user, expire: Subject<void>): Observable<Bookings['bookings']> {
         const variables: BookingsVariables = {
             filter: {
                 groups: [
@@ -330,7 +330,7 @@ export class UserService extends AbstractModelService<User['user'],
 
         const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
-        return this.bookingService.watchAll(qvm, true);
+        return this.bookingService.watchAll(qvm, expire);
     }
 
     public resolveByToken(token: string): Observable<{ model: UserByToken['userByToken'] }> {
@@ -390,11 +390,11 @@ export class UserService extends AbstractModelService<User['user'],
     }
 
     public requestPasswordReset(login) {
-      const mutation = gql`
-          mutation RequestPasswordReset($login: Login!) {
-              requestPasswordReset(login: $login)
-          }
-      `;
+        const mutation = gql`
+            mutation RequestPasswordReset($login: Login!) {
+                requestPasswordReset(login: $login)
+            }
+        `;
 
         return this.apollo.mutate({
             mutation: mutation,

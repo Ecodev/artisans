@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { fakeAsync, inject, tick } from '@angular/core/testing';
 import { AbstractModelService } from '../services/abstract-model.service';
 import { Literal } from '../types';
@@ -44,8 +44,18 @@ export abstract class AbstractModelServiceSpec {
         it('should get all with query variables manager',
             fakeAsync(inject([serviceClass], (service: ModelService) => {
                 this.expectNotConfiguredOrEqualForQueryVariablesManager(expectedAll,
-                    (vars) => service.getAll(vars),
+                    (qvm) => service.getAll(qvm),
                     new QueryVariablesManager());
+            })),
+        );
+
+        it('should watch all with query variables manager',
+            fakeAsync(inject([serviceClass], (service: ModelService) => {
+                this.expectNotConfiguredOrEqualForQueryVariablesManager(
+                    expectedAll,
+                    (qvm) => service.watchAll(qvm, new Subject()),
+                    new QueryVariablesManager(),
+                    {search: 'foo'});
             })),
         );
 
@@ -189,18 +199,19 @@ export abstract class AbstractModelServiceSpec {
                 count++;
                 actual = v;
             });
+            qvm.set('foo', {foo: 'bar'});
             tick(tickDelay);
         };
 
         if (expectSuccess) {
             getActual();
-            expect(actual).toEqual(jasmine.anything());
             expect(count).toBe(1);
+            expect(actual).toEqual(jasmine.anything());
 
             if (newVariables) {
                 qvm.set('channel', newVariables);
                 tick(tickDelay);
-                expect(count).toBe(2);
+                expect(count).toBe(3); // Must be 3 because we got a cached response first, then final response from network
             }
 
         } else {

@@ -34,7 +34,7 @@ export class EditableTransactionLinesComponent extends AbstractEditableList<any,
             } as TransactionLinesVariables);
 
             // TODO : Replace getAll by watchAll
-            this.service.getAll(this.variablesManager, true).subscribe(results => {
+            this.service.getAll(this.variablesManager).subscribe(results => {
                 this.add(results);
             });
         } else {

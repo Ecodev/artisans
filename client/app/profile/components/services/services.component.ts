@@ -1,28 +1,25 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { AppDataSource } from '../../../shared/services/data.source';
-import { AutoRefetchQueryRef } from '../../../shared/services/abstract-model.service';
-import { Bookings, BookingType } from '../../../shared/generated-types';
+import { BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AbstractController } from '../../../shared/components/AbstractController';
 
 @Component({
     selector: 'app-services',
     templateUrl: './services.component.html',
     styleUrls: ['./services.component.scss'],
 })
-export class ServicesComponent implements OnInit, OnDestroy {
+export class ServicesComponent extends AbstractController implements OnInit, OnDestroy {
 
     public user;
 
     public BookableService = BookableService; // template usage
     public runningServicesDS: AppDataSource;
     public pendingApplicationsDS: AppDataSource;
-
-    public runningServices: AutoRefetchQueryRef<Bookings['bookings']>;
-    public pendingApplications: AutoRefetchQueryRef<Bookings['bookings']>;
 
     public servicesColumns = ['name', 'periodicPrice', 'revoke'];
     public applicationsColumns = ['name', 'status', 'initialPrice', 'periodicPrice', 'cancel'];
@@ -31,21 +28,17 @@ export class ServicesComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private alertService: AlertService,
                 private bookingService: BookingService) {
+        super();
     }
 
     ngOnInit() {
         this.user = this.route.snapshot.data.user.model;
 
-        this.pendingApplications = this.userService.getPendingApplications(this.user);
-        this.pendingApplicationsDS = new AppDataSource(this.pendingApplications.valueChanges);
+        const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);
+        this.pendingApplicationsDS = new AppDataSource(pendingApplications);
 
-        this.runningServices = this.userService.getRunningServices(this.user);
-        this.runningServicesDS = new AppDataSource(this.runningServices.valueChanges);
-    }
-
-    ngOnDestroy() {
-        this.runningServices.unsubscribe();
-        this.pendingApplications.unsubscribe();
+        const runningServices = this.userService.getRunningServices(this.user, this.ngUnsubscribe);
+        this.runningServicesDS = new AppDataSource(runningServices);
     }
 
     /**

@@ -1,5 +1,5 @@
 import { Apollo } from 'apollo-angular';
-import { BehaviorSubject, Observable, of, OperatorFunction, Subject } from 'rxjs';
+import { Observable, of, OperatorFunction, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
@@ -7,9 +7,9 @@ import { debounce, defaults, isArray, merge, mergeWith, omit, pick } from 'lodas
 import { Utility } from '../classes/utility';
 import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
-import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
 import { ExtendedFormControl } from '../classes/ExtendedFormControl';
 import { ValidatorFn } from '@angular/forms';
+import { AbstractController } from '../components/AbstractController';
 
 export interface FormValidators {
     [key: string]: ValidatorFn[];
@@ -17,16 +17,6 @@ export interface FormValidators {
 
 export interface VariablesWithInput {
     input: Literal;
-}
-
-export interface AutoRefetchQueryRef<Tall> {
-    valueChanges: Observable<Tall>;
-    unsubscribe: () => void;
-}
-
-interface AutoRefetchQueryDescription {
-    query: DocumentNode;
-    variables: BehaviorSubject<Literal>;
 }
 
 export abstract class AbstractModelService<Tone,
@@ -38,9 +28,6 @@ export abstract class AbstractModelService<Tone,
     Tupdate,
     Vupdate extends { id: string; input: Literal; },
     Tdelete> {
-
-    public static watchedQueriesCount = 1;
-    public static autoRefetchQueries: Map<number, AutoRefetchQueryDescription> = new Map();
 
     /**
      * Stores the debounced update function
@@ -67,28 +54,6 @@ export abstract class AbstractModelService<Tone,
         if (isArray(src)) {
             return src;
         }
-    }
-
-    /**
-     * Returns the query to refetch the watchAll if it was ever used at some point in the past.
-     *
-     * This allow us to easily refresh a list of items after create/update/delete operations.
-     *
-     * @returns RefetchQueryDescription
-     */
-    public static getRefetchQueries(): RefetchQueryDescription {
-
-        const queries: RefetchQueryDescription = [];
-
-        AbstractModelService.autoRefetchQueries.forEach(autoRefetchQueryDescription => {
-                queries.push({
-                    query: autoRefetchQueryDescription.query,
-                    variables: autoRefetchQueryDescription.variables.value,
-                });
-            },
-        );
-
-        return queries;
     }
 
     /**
@@ -160,21 +125,34 @@ export abstract class AbstractModelService<Tone,
         return config;
     }
 
-    /**
-     * Fetch an object
-     */
-    public getOne(id: string, force: boolean = false): Observable<Tone> {
+
+    public getOne(id: string): Observable<Tone> {
         this.throwIfObservable(id);
         this.throwIfNotQuery(this.oneQuery);
 
-        return this.apollo.query<Tone, Vone>({
+        const resultObservable = new Subject<Tone>();
+
+        const queryRef = this.apollo.watchQuery<Tone, Vone>({
             query: this.oneQuery,
             variables: this.getVariablesForOne(id),
-            fetchPolicy: force ? 'network-only' : undefined,
-        }).pipe(this.mapOne());
+        });
+
+        const subscription = queryRef
+            .valueChanges
+            .pipe(filter(r => !!r.data))
+            .subscribe(result => {
+                const data = result.data ? result.data[this.name] : result.data;
+                resultObservable.next(data);
+                if (result.networkStatus === 7) {
+                    resultObservable.complete();
+                    subscription.unsubscribe();
+                }
+            });
+
+        return resultObservable.asObservable();
     }
 
-    public getAll(queryVariablesManager: QueryVariablesManager<Vall>, force: boolean = false): Observable<Tall> {
+    public getAll(queryVariablesManager: QueryVariablesManager<Vall>): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
         const manager = new QueryVariablesManager<Vall>(queryVariablesManager); // "copy" qvm
@@ -183,7 +161,6 @@ export abstract class AbstractModelService<Tone,
         return this.apollo.query<Tall, Vall>({
             query: this.allQuery,
             variables: manager.variables.value,
-            fetchPolicy: force ? 'network-only' : undefined,
         }).pipe(this.mapAll());
     }
 
@@ -191,17 +168,24 @@ export abstract class AbstractModelService<Tone,
      * Watch query considering an observable variables set
      * Only sends query when variables are different of undefined.
      */
-    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, autoRefetch: boolean = false): AutoRefetchQueryRef<Tall> {
+    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, expire: AbstractController['ngUnsubscribe']): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
-        // Get unique ID to identify the query
-        const refetchKey = AbstractModelService.watchedQueriesCount++;
+        // Expire all subscriptions when completed (when calling result.unsubscribe())
+        let lastSubscription: Subscription | null = null;
 
-        // Observable where we update the result value
+        // Observable that wraps the result from apollo queryRef
+        // const resultObservable = new ExpireSubject<Tall>();
         const resultObservable = new Subject<Tall>();
 
-        // Expire all subscriptions when completed (when calling result.unsubscribe())
-        const expire = new Subject();
+        const expireFn = () => {
+            if (lastSubscription) {
+                lastSubscription.unsubscribe();
+                lastSubscription = null;
+            }
+        };
+
+        expire.subscribe(expireFn);
 
         // Wait for variables to be defined (different from undefined)
         // Null is accepted value for "no variables"
@@ -209,17 +193,12 @@ export abstract class AbstractModelService<Tone,
 
             if (typeof variables !== 'undefined') {
 
+                expireFn();
+
                 // Apply context from service
                 // Copy manager to prevent to apply internal context to external QueryVariablesManager
                 const manager = new QueryVariablesManager<Vall>(queryVariablesManager);
                 manager.merge('context', this.getContextForAll());
-
-                if (autoRefetch) {
-                    AbstractModelService.autoRefetchQueries.set(refetchKey, {
-                        query: this.allQuery,
-                        variables: manager.variables as BehaviorSubject<Vall>,
-                    });
-                }
 
                 const lastQueryRef = this.apollo.watchQuery<Tall, Vall>({
                     query: this.allQuery,
@@ -227,20 +206,14 @@ export abstract class AbstractModelService<Tone,
                 });
 
                 // Subscription cause query to be sent
-                // First run (after refetch) to prevent duplicate query : with and without variables
-                lastQueryRef.valueChanges.pipe(takeUntil(expire), filter(r => !!r.data), this.mapAll())
-                            .subscribe(result => resultObservable.next(result));
+                // First run must occur after first variables changes to prevent duplicate query : with and without variables
+                lastSubscription = lastQueryRef.valueChanges
+                                               .pipe(filter(r => !!r.data), this.mapAll())
+                                               .subscribe(result => resultObservable.next(result));
             }
         });
 
-        return {
-            valueChanges: resultObservable.pipe(takeUntil(expire)) as Observable<Tall>,
-            unsubscribe: () => {
-                AbstractModelService.autoRefetchQueries.delete(refetchKey);
-                expire.next();
-                expire.complete();
-            },
-        };
+        return resultObservable.asObservable();
     }
 
     /**
@@ -310,8 +283,8 @@ export abstract class AbstractModelService<Tone,
         this.apollo.mutate<Tcreate, Vcreate>({
             mutation: this.createMutation,
             variables: variables,
-            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe(result => {
+            this.apollo.getClient().reFetchObservableQueries();
             const newObject = this.mapCreation(result);
             observable.next(mergeWith(object, newObject, AbstractModelService.mergeOverrideArray));
             observable.complete();
@@ -365,8 +338,8 @@ export abstract class AbstractModelService<Tone,
         this.apollo.mutate<Tupdate, Vupdate>({
             mutation: this.updateMutation,
             variables: variables,
-            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe((result: any) => {
+            this.apollo.getClient().reFetchObservableQueries();
             result = this.mapUpdate(result);
             mergeWith(object, result, AbstractModelService.mergeOverrideArray);
             observable.next(result);
@@ -391,8 +364,10 @@ export abstract class AbstractModelService<Tone,
         return this.apollo.mutate<Tupdate, Vupdate>({
             mutation: this.updateMutation,
             variables: variables,
-            refetchQueries: AbstractModelService.getRefetchQueries(),
-        }).pipe(map((result) => this.mapUpdate(result)));
+        }).pipe(map((result) => {
+            this.apollo.getClient().reFetchObservableQueries();
+            return this.mapUpdate(result);
+        }));
 
     }
 
@@ -412,8 +387,8 @@ export abstract class AbstractModelService<Tone,
             variables: {
                 ids: ids,
             },
-            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe((result: any) => {
+            this.apollo.getClient().reFetchObservableQueries();
             result = this.mapDelete(result);
             observable.next(result);
             observable.complete();
@@ -429,8 +404,8 @@ export abstract class AbstractModelService<Tone,
         this.apollo.mutate<Tupdate, Vupdate>({
             mutation: mutation,
             variables: variables,
-            refetchQueries: AbstractModelService.getRefetchQueries(),
         }).subscribe((result: any) => {
+            this.apollo.getClient().reFetchObservableQueries();
             result = this.mapUpdate(result);
             observable.next(result);
             observable.complete(); // unsubscribe all after first emit, nothing more will come;
@@ -446,7 +421,7 @@ export abstract class AbstractModelService<Tone,
         // Load model if id is given
         let observable;
         if (id) {
-            observable = this.getOne(id, true);
+            observable = this.getOne(id);
         } else {
             observable = of(this.getEmptyObject() as Tone);
         }
@@ -466,15 +441,6 @@ export abstract class AbstractModelService<Tone,
         }
 
         return object.__typename + '-' + object.id;
-    }
-
-    /**
-     * This is used to extract only the fetched object out of the entire fetched data
-     */
-    protected mapOne(): OperatorFunction<FetchResult<Tone>, Tone> {
-        return map((result) => {
-            return result.data[this.name];
-        });
     }
 
     /**

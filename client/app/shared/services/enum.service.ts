@@ -27,6 +27,7 @@ export class EnumService {
         return this.apollo.query<EnumType>({
             query: enumTypeQuery,
             variables: {name: name},
+            fetchPolicy: 'cache-first',
         }).pipe(map(result => {
             const values: IEnum[] = [];
             if (result.data.__type && result.data.__type.enumValues) {

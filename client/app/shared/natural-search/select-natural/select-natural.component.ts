@@ -27,7 +27,7 @@ export class SelectNaturalComponent implements DropdownComponent {
         // Reload selection
         if (data.condition && data.condition.have) {
             // Search beeing unusable without network, we can use getOne() here with force flag
-            this.configuration.service.getOne(data.condition.have.values[0], true).subscribe(v => {
+            this.configuration.service.getOne(data.condition.have.values[0]).subscribe(v => {
                 this.selected = v;
                 this.renderedValue.next(this.getRenderedValue());
             });

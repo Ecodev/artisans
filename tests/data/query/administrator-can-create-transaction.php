@@ -60,14 +60,14 @@ return [
                     [
                         'balance' => '7000',
                         'credit' => [
-                            'balance' => '-7000.00',
+                            'balance' => '1187.50',
                         ],
                         'debit' => null,
                     ],
                     [
                         'balance' => '3000',
                         'credit' => [
-                            'balance' => '-3000.00',
+                            'balance' => '14000.00',
                         ],
                         'debit' => null,
                     ],

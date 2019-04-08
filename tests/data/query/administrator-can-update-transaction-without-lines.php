@@ -33,10 +33,10 @@ return [
                     [
                         'balance' => '100.00',
                         'credit' => [
-                            'balance' => '0.00',
+                            'balance' => '100.00',
                         ],
                         'debit' => [
-                            'balance' => '0.00',
+                            'balance' => '50.00',
                         ],
                     ],
                 ],

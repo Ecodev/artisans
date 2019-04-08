@@ -15,9 +15,9 @@ return [
     [
         'data' => [
             'bookings' => [
-                'totalParticipantCount' => 11,
+                'totalParticipantCount' => 12,
                 'totalInitialPrice' => '0.00',
-                'totalPeriodicPrice' => '240.00',
+                'totalPeriodicPrice' => '250.00',
             ],
         ],
     ],

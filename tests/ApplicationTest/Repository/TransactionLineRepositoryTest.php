@@ -32,13 +32,13 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [14000, 14001, 14002, 14003, 14004, 14005, 14006, 14007];
+        $all = range(14000, 14011);
 
         return [
             ['anonymous', []],
             ['bookingonly', []],
             ['individual', []],
-            ['member', [14000, 14002, 14003, 14004]],
+            ['member', [14000, 14002, 14003, 14004, 14008, 14011]],
             ['responsible', $all],
             ['administrator', $all],
         ];
@@ -50,7 +50,7 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
         User::setCurrent($user);
 
         $account = _em()->getReference(Account::class, 10096);
-        self::assertCount(4, $account->getTransactionLines(), 'Account must have 4 transactions');
+        self::assertCount(6, $account->getTransactionLines(), 'Account must have 6 transactions');
 
         $transaction = new Transaction();
         $transaction->setName('foo');
@@ -73,13 +73,13 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
 
         _em()->flush();
 
-        self::assertCount(6, $account->getTransactionLines(), 'Account must have two new transactions');
+        self::assertCount(8, $account->getTransactionLines(), 'Account must have two new transactions');
 
         $otherAccount = _em()->getReference(Account::class, 10035);
         $transactionLine->setDebit($otherAccount);
         _em()->flush();
 
-        self::assertCount(5, $account->getTransactionLines(), 'Original account with one less transaction');
+        self::assertCount(7, $account->getTransactionLines(), 'Original account with one less transaction');
         self::assertSame($transactionLine->getDebit(), $otherAccount);
     }
 }

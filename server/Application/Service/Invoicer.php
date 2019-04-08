@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Model\Account;
-use Application\Model\Bookable;
 use Application\Model\Booking;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
@@ -42,31 +41,31 @@ class Invoicer
         $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice();
 
         $user = null;
-        $bookables = [];
+        $bookingPerUser = [];
 
         /** @var Booking $booking */
         foreach ($bookings as $booking) {
             if ($user !== $booking->getOwner()) {
-                $this->invoiceOne($user, $bookables);
+                $this->invoiceOne($user, $bookingPerUser);
 
                 $user = $booking->getOwner();
-                $bookables = [];
+                $bookingPerUser = [];
             }
 
-            $bookables[] = $booking->getBookable();
+            $bookingPerUser[] = $booking;
         }
-        $this->invoiceOne($user, $bookables);
+        $this->invoiceOne($user, $bookingPerUser);
 
         return $this->count;
     }
 
     /**
      * @param User $user
-     * @param Bookable[] $bookables
+     * @param Booking[] $bookings
      *
      * @return Transaction
      */
-    private function createTransaction(User $user, array $bookables): Transaction
+    private function createTransaction(User $user, array $bookings): Transaction
     {
         $account = $this->entityManager->getRepository(Account::class)->getOrCreate($user);
         $transaction = new Transaction();
@@ -74,7 +73,8 @@ class Invoicer
         $transaction->setName('Cotisation et services ' . Date::today()->format('Y'));
         $this->entityManager->persist($transaction);
 
-        foreach ($bookables as $bookable) {
+        foreach ($bookings as $booking) {
+            $bookable = $booking->getBookable();
             $transactionLine = new TransactionLine();
             $this->entityManager->persist($transactionLine);
 
@@ -82,7 +82,7 @@ class Invoicer
             $transactionLine->setBookable($bookable);
             $transactionLine->setDebit($account);
             $transactionLine->setCredit($bookable->getCreditAccount());
-            $transactionLine->setBalance($this->calculateBalance($bookable));
+            $transactionLine->setBalance($this->calculateBalance($booking));
             $transactionLine->setTransaction($transaction);
             $transactionLine->setTransactionDate(Date::today());
         }
@@ -91,12 +91,13 @@ class Invoicer
     }
 
     /**
-     * @param Bookable $bookable
+     * @param Booking $booking
      *
      * @return string
      */
-    private function calculateBalance(Bookable $bookable): string
+    private function calculateBalance(Booking $booking): string
     {
+        $bookable = $booking->getBookable();
         $simultaneous = $bookable->getSimultaneousBookingMaximum();
 
         // If infinite booking, pay full price
@@ -111,15 +112,15 @@ class Invoicer
 
     /**
      * @param null|User $user
-     * @param Bookable[] $bookables
+     * @param Booking[] $bookings
      */
-    private function invoiceOne(?User $user, array $bookables): void
+    private function invoiceOne(?User $user, array $bookings): void
     {
-        if (!$user || !$bookables) {
+        if (!$user || !$bookings) {
             return;
         }
 
-        $transaction = $this->createTransaction($user, $bookables);
+        $transaction = $this->createTransaction($user, $bookings);
         $this->entityManager->flush();
         $this->entityManager->refresh($user->getAccount());
 

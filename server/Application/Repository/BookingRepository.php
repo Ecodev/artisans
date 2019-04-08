@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Repository;
 
 use Application\DBAL\Types\BookingStatusType;
+use Application\DBAL\Types\BookingTypeType;
 use Application\Model\Bookable;
 use Application\Model\Booking;
 use Application\Model\User;
@@ -32,13 +33,21 @@ class BookingRepository extends AbstractRepository
         $sql = "
             SELECT $selectClause FROM booking
             JOIN bookable ON booking.bookable_id = bookable.id
-            JOIN user ON booking.owner_id = user.id AND user.role IN (:roles) AND user.status = :userStatus
+            JOIN user ON booking.owner_id = user.id AND user.role IN (:roles)
             LEFT JOIN account ON user.id = account.owner_id
-            LEFT JOIN transaction_line ON account.id = transaction_line.debit_id AND transaction_line.bookable_id = bookable.id AND transaction_line.creation_date >= :currentYear
+            LEFT JOIN transaction_line ON
+                account.id = transaction_line.debit_id
+                AND transaction_line.bookable_id = bookable.id
+                AND transaction_line.transactionDate >= :currentYear
+                AND transaction_line.transactionDate < :nextYear
             WHERE
-            booking.status = :bookingStatus
+            (
+                user.status = :userStatusActive AND bookable.booking_type IN (:bookingTypeAdminOnly, :bookingTypeMandatory)
+                OR user.status = :userStatusInactive AND bookable.booking_type IN (:bookingTypeAdminOnly)
+            )
+            AND booking.status = :bookingStatus
             AND booking.start_date < :nextYear
-            AND (booking.end_date IS NULL)
+            AND (booking.end_date IS NULL OR booking.end_date >= :nextYear)
             AND bookable.is_active
             AND bookable.periodic_price != 0
             AND transaction_line.id IS NULL
@@ -46,8 +55,11 @@ class BookingRepository extends AbstractRepository
         ";
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm)
+            ->setParameter('bookingTypeMandatory', BookingTypeType::MANDATORY)
+            ->setParameter('bookingTypeAdminOnly', BookingTypeType::ADMIN_ONLY)
             ->setParameter('bookingStatus', BookingStatusType::BOOKED)
-            ->setParameter('userStatus', User::STATUS_ACTIVE)
+            ->setParameter('userStatusActive', User::STATUS_ACTIVE)
+            ->setParameter('userStatusInactive', User::STATUS_INACTIVE)
             ->setParameter('currentYear', Date::now()->firstOfYear()->toDateString())
             ->setParameter('nextYear', Date::now()->firstOfYear()->addYear()->toDateString())
             ->setParameter('roles', [User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR], Connection::PARAM_STR_ARRAY);

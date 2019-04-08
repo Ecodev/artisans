@@ -23,7 +23,7 @@ class InvoicerTest extends TestCase
         /** @var Invoicer $invoicer */
         $invoicer = $container->get(Invoicer::class);
         $actual = $invoicer->invoice();
-        self::assertSame(1, $actual);
+        self::assertSame(2, $actual);
 
         $actual2 = $invoicer->invoice();
         self::assertSame(0, $actual2);

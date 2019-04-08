@@ -36,7 +36,8 @@ class BookingRepository extends AbstractRepository
             LEFT JOIN account ON user.id = account.owner_id
             LEFT JOIN transaction_line ON account.id = transaction_line.debit_id AND transaction_line.bookable_id = bookable.id AND transaction_line.creation_date >= :currentYear
             WHERE
-            booking.start_date < :nextYear
+            booking.status = :bookingStatus
+            AND booking.start_date < :nextYear
             AND (booking.end_date IS NULL)
             AND bookable.is_active
             AND bookable.periodic_price != 0

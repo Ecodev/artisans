@@ -34,9 +34,7 @@ class BookingRepositoryTest extends AbstractRepositoryTest
 
         $expected = [
             4004,
-            4003,
             4005,
-            4006,
         ];
 
         self::assertSame($expected, $actual);

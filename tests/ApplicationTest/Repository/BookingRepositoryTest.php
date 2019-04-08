@@ -43,6 +43,7 @@ class BookingRepositoryTest extends AbstractRepositoryTest
         }
 
         $expected = [
+            4007,
             4004,
             4005,
         ];
@@ -228,13 +229,13 @@ class BookingRepositoryTest extends AbstractRepositoryTest
         $existingTransactionNextYear[0]['account']['transaction_lines'][0]['transactionDate'] = '2021-02-01';
 
         return [
-            'normal user get cotisation and storage' => [
+            'normal user get casier and cotisation' => [
                 $normal,
                 ['casier', 'cotisation'],
             ],
-            'inactive user get only storage' => [
+            'inactive user get casier and cotisation' => [
                 $inactiveUser,
-                ['casier'],
+                ['casier', 'cotisation'],
             ],
             'archived user get nothing' => [
                 $archivedUser,
@@ -256,11 +257,11 @@ class BookingRepositoryTest extends AbstractRepositoryTest
                 $individualUser,
                 [],
             ],
-            'responsible user get cotisation and storage' => [
+            'responsible user get casier and cotisation' => [
                 $responsibleUser,
                 ['casier', 'cotisation'],
             ],
-            'administrator user get cotisation and storage' => [
+            'administrator user get casier and cotisation' => [
                 $administratorUser,
                 ['casier', 'cotisation'],
             ],

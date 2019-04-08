@@ -41,10 +41,8 @@ class BookingRepository extends AbstractRepository
                 AND transaction_line.transactionDate >= :currentYear
                 AND transaction_line.transactionDate < :nextYear
             WHERE
-            (
-                user.status = :userStatusActive AND bookable.booking_type IN (:bookingTypeAdminOnly, :bookingTypeMandatory)
-                OR user.status = :userStatusInactive AND bookable.booking_type IN (:bookingTypeAdminOnly)
-            )
+            user.status IN (:userStatus)
+            AND bookable.booking_type IN (:bookingType)
             AND booking.status = :bookingStatus
             AND booking.start_date < :nextYear
             AND (booking.end_date IS NULL OR booking.end_date >= :nextYear)
@@ -55,11 +53,9 @@ class BookingRepository extends AbstractRepository
         ";
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm)
-            ->setParameter('bookingTypeMandatory', BookingTypeType::MANDATORY)
-            ->setParameter('bookingTypeAdminOnly', BookingTypeType::ADMIN_ONLY)
+            ->setParameter('bookingType', [BookingTypeType::MANDATORY, BookingTypeType::ADMIN_ONLY], Connection::PARAM_STR_ARRAY)
             ->setParameter('bookingStatus', BookingStatusType::BOOKED)
-            ->setParameter('userStatusActive', User::STATUS_ACTIVE)
-            ->setParameter('userStatusInactive', User::STATUS_INACTIVE)
+            ->setParameter('userStatus', [User::STATUS_ACTIVE, User::STATUS_INACTIVE], Connection::PARAM_STR_ARRAY)
             ->setParameter('currentYear', Date::now()->firstOfYear()->toDateString())
             ->setParameter('nextYear', Date::now()->firstOfYear()->addYear()->toDateString())
             ->setParameter('roles', [User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR], Connection::PARAM_STR_ARRAY);

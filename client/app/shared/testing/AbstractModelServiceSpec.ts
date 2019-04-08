@@ -41,19 +41,6 @@ export abstract class AbstractModelServiceSpec {
             })),
         );
 
-        it('should watch one',
-            fakeAsync(inject([serviceClass], (service: ModelService) => {
-                this.expectNotConfiguredOrEqual(expectedOne, (vars) => service.watchOne(vars), '123');
-            })),
-        );
-
-        it('should not watch one with observable',
-            fakeAsync(inject([serviceClass], (service: ModelService) => {
-                tick();
-                expect(() => service.watchOne(new BehaviorSubject('123') as any).subscribe()).toThrowError(error);
-            })),
-        );
-
         it('should get all with query variables manager',
             fakeAsync(inject([serviceClass], (service: ModelService) => {
                 this.expectNotConfiguredOrEqualForQueryVariablesManager(expectedAll,

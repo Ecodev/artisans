@@ -125,20 +125,8 @@ export abstract class AbstractModelService<Tone,
         return config;
     }
 
-    /**
-     * Fetch an object
-     */
+
     public getOne(id: string): Observable<Tone> {
-        this.throwIfObservable(id);
-        this.throwIfNotQuery(this.oneQuery);
-
-        return this.apollo.query<Tone, Vone>({
-            query: this.oneQuery,
-            variables: this.getVariablesForOne(id),
-        }).pipe(this.mapOne());
-    }
-
-    public watchOne(id: string): Observable<Tone> {
         this.throwIfObservable(id);
         this.throwIfNotQuery(this.oneQuery);
 
@@ -433,7 +421,7 @@ export abstract class AbstractModelService<Tone,
         // Load model if id is given
         let observable;
         if (id) {
-            observable = this.watchOne(id);
+            observable = this.getOne(id);
         } else {
             observable = of(this.getEmptyObject() as Tone);
         }
@@ -453,15 +441,6 @@ export abstract class AbstractModelService<Tone,
         }
 
         return object.__typename + '-' + object.id;
-    }
-
-    /**
-     * This is used to extract only the fetched object out of the entire fetched data
-     */
-    protected mapOne(): OperatorFunction<FetchResult<Tone>, Tone> {
-        return map((result) => {
-            return result.data[this.name];
-        });
     }
 
     /**

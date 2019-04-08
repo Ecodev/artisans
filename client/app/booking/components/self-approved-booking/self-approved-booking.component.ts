@@ -34,7 +34,7 @@ export class SelfApprovedBookingComponent implements OnInit {
         const bookable = this.route.snapshot.params.bookable;
         if (bookable) {
 
-            this.bookableService.watchOne(bookable).subscribe(newBookable => {
+            this.bookableService.getOne(bookable).subscribe(newBookable => {
                 this.bookable = newBookable;
             });
         }

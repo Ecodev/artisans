@@ -43,7 +43,7 @@ export class FamilyMemberComponent
     ngOnInit() {
 
         if (this.user && this.user.id) {
-            this.service.watchOne(this.user.id).subscribe(user => {
+            this.service.getOne(this.user.id).subscribe(user => {
                 this.data = merge({model: this.service.getEmptyObject()}, {model: user});
                 this.initForm();
             });

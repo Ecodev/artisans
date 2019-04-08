@@ -131,6 +131,11 @@
                     </td>
                 </ng-container>
 
+                <ng-container matColumnDef="bookable">
+                    <th mat-header-cell *matHeaderCellDef>Réservable</th>
+                    <td mat-cell *matCellDef="let transactionLine">{{ transactionLine.bookable?.name }}</td>
+                </ng-container>
+
                 <ng-container matColumnDef="remarks">
                     <th mat-header-cell *matHeaderCellDef>Remarques</th>
                     <td mat-cell *matCellDef="let transactionLine">

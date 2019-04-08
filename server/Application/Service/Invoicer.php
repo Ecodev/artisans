@@ -25,31 +25,29 @@ class Invoicer
      */
     private $mailer;
 
+    /**
+     * @var int
+     */
+    private $count = 0;
+
     public function __construct(EntityManager $entityManager, Mailer $mailer)
     {
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;
     }
 
-    public function invoice(): void
+    public function invoice(): int
     {
+        $this->count = 0;
         $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice();
+
         $user = null;
         $bookables = [];
 
         /** @var Booking $booking */
         foreach ($bookings as $booking) {
             if ($user !== $booking->getOwner()) {
-                if ($user) {
-                    $transaction = $this->createTransaction($user, $bookables);
-
-                    $this->entityManager->flush();
-                    $this->entityManager->refresh($user->getAccount());
-
-                    if ($user->getEmail()) {
-                        $this->mailer->queueInvoice($user, $transaction);
-                    }
-                }
+                $this->invoiceOne($user, $bookables);
 
                 $user = $booking->getOwner();
                 $bookables = [];
@@ -57,6 +55,9 @@ class Invoicer
 
             $bookables[] = $booking->getBookable();
         }
+        $this->invoiceOne($user, $bookables);
+
+        return $this->count;
     }
 
     /**
@@ -69,12 +70,15 @@ class Invoicer
     {
         $account = $this->entityManager->getRepository(Account::class)->getOrCreate($user);
         $transaction = new Transaction();
+        $transaction->setTransactionDate(Date::today());
+        $transaction->setName('Cotisation et services ' . Date::today()->format('Y'));
         $this->entityManager->persist($transaction);
 
         foreach ($bookables as $bookable) {
             $transactionLine = new TransactionLine();
             $this->entityManager->persist($transactionLine);
 
+            $transactionLine->setName('Paiement depuis crédit MyIchtus');
             $transactionLine->setBookable($bookable);
             $transactionLine->setDebit($account);
             $transactionLine->setCredit($bookable->getCreditAccount());
@@ -103,5 +107,29 @@ class Invoicer
         $price = (string) ($bookable->getPeriodicPrice() / $simultaneous);
 
         return $price;
+    }
+
+    /**
+     * @param null|User $user
+     * @param Bookable[] $bookables
+     */
+    private function invoiceOne(?User $user, array $bookables): void
+    {
+        if (!$user || !$bookables) {
+            return;
+        }
+
+        $transaction = $this->createTransaction($user, $bookables);
+        $this->entityManager->flush();
+        $this->entityManager->refresh($user->getAccount());
+
+        if ($user->getEmail()) {
+            $this->mailer->queueInvoice($user, $transaction);
+            $this->entityManager->flush();
+        } else {
+            _log()->err('Cannot notify invoice for user without email', ['user' => $user->getId(), 'transaction' => $transaction->getId()]);
+        }
+
+        ++$this->count;
     }
 }

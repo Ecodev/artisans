@@ -37,6 +37,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/create-invoices.php',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/create-triggers.php',
         'permissions' => '0750',
     ],

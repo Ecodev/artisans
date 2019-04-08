@@ -27,7 +27,7 @@ export class FinancesComponent implements OnInit, OnDestroy {
 
     public transactionLinesDS: AppDataSource;
     public transactionLinesQuery: AutoRefetchQueryRef<TransactionLines['transactionLines']>;
-    public transactionsColumns = ['name', 'transactionDate', 'remarks', 'amount'];
+    public transactionsColumns = ['name', 'bookable', 'transactionDate', 'remarks', 'amount'];
 
     public ibanLocked = true;
 

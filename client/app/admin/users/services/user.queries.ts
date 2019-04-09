@@ -72,6 +72,9 @@ export const usersQuery = gql`
                 name
                 status
                 familyRelationship
+                updateDate
+                creationDate
+                lastLogin
                 account {
                     id
                     balance

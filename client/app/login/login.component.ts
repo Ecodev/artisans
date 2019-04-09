@@ -7,6 +7,8 @@ import { AlertService } from '../shared/components/alert/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { AbstractController } from '../shared/components/AbstractController';
 import { UserService } from '../admin/users/services/user.service';
+import { QueryVariablesManager } from '../shared/classes/query-variables-manager';
+import { UsersVariables } from '../shared/generated-types';
 
 @Component({
     selector: 'app-login',

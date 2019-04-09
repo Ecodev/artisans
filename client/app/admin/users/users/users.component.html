@@ -21,6 +21,7 @@
                     <span appColumnsPickerColumn="status">Status</span>
                     <span appColumnsPickerColumn="creationDate">Créé le</span>
                     <span appColumnsPickerColumn="updateDate">Modifié le</span>
+                    <span appColumnsPickerColumn="lastLogin">Dernière connexion</span>
                     <span appColumnsPickerColumn="flagWelcomeSessionDate">Séance d'accueil</span>
                 </app-columns-picker>
             </natural-search>
@@ -56,12 +57,22 @@
 
                 <ng-container matColumnDef="creationDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Créé le</th>
-                    <td mat-cell *matCellDef="let element">{{ element.creationDate }}</td>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.creationDate | date: 'mediumDate' }} - {{ element.creationDate | date: 'shortTime' }}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="updateDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Modifié le</th>
-                    <td mat-cell *matCellDef="let element">{{ element.updateDate }}</td>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.updateDate | date: 'mediumDate' }} - {{ element.updateDate | date: 'shortTime' }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="lastLogin">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Connecté le</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{ element.lastLogin | date: 'mediumDate' }} - {{ element.lastLogin | date: 'shortTime' }}
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="flagWelcomeSessionDate">

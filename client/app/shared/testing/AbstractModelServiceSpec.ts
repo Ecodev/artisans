@@ -150,32 +150,31 @@ export abstract class AbstractModelServiceSpec {
 
     private static expectNotConfiguredOrEqual(expectSuccess: boolean,
                                               getObservable: (any) => Observable<any>,
-                                              variables: string | Literal | BehaviorSubject<string | Literal>,
-                                              newVariables?: string | Literal): Observable<any> | null {
+                                              variables: string | Literal ): Observable<any> | null {
         let actual = null;
+        let completed = false;
         let count = 0;
         let result: Observable<any> | null = null;
 
         const getActual = () => {
             result = getObservable(variables);
-            result.subscribe(v => {
-                count++;
-                actual = v;
+            result.subscribe({
+                next: (v) => {
+                    count++;
+                    actual = v;
+                },
+                complete: () => {
+                    completed = true;
+                },
             });
             tick();
         };
 
         if (expectSuccess) {
             getActual();
-            expect(actual).toEqual(jasmine.anything());
             expect(count).toBe(1);
-
-            // Check that the next set of variables will trigger exactly 1 callback
-            if (variables instanceof BehaviorSubject && newVariables) {
-                variables.next(newVariables);
-                tick();
-                expect(count).toBe(2);
-            }
+            expect(completed).toBe(true);
+            expect(actual).toEqual(jasmine.anything());
         } else {
             expect(getActual).toThrowError(this.notConfiguredMessage);
         }

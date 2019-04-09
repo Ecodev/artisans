@@ -10,6 +10,7 @@ import { QueryVariablesManager } from '../classes/query-variables-manager';
 import { ExtendedFormControl } from '../classes/ExtendedFormControl';
 import { ValidatorFn } from '@angular/forms';
 import { AbstractController } from '../components/AbstractController';
+import { NetworkStatus } from 'apollo-client';
 
 export interface FormValidators {
     [key: string]: ValidatorFn[];
@@ -125,7 +126,12 @@ export abstract class AbstractModelService<Tone,
         return config;
     }
 
-
+    /**
+     * Get a single object
+     *
+     * If available it will emit object from cache immediately, then it
+     * will **always** fetch from network and then the observable will be completed
+     */
     public getOne(id: string): Observable<Tone> {
         this.throwIfObservable(id);
         this.throwIfNotQuery(this.oneQuery);
@@ -143,7 +149,7 @@ export abstract class AbstractModelService<Tone,
             .subscribe(result => {
                 const data = result.data ? result.data[this.name] : result.data;
                 resultObservable.next(data);
-                if (result.networkStatus === 7) {
+                if (result.networkStatus === NetworkStatus.ready) {
                     resultObservable.complete();
                     subscription.unsubscribe();
                 }
@@ -152,6 +158,13 @@ export abstract class AbstractModelService<Tone,
         return resultObservable.asObservable();
     }
 
+
+    /**
+     * Get a collection of objects
+     *
+     * It will **always** fetch from network and then the observable will be completed.
+     * No cache is ever used, so it's slow but correct.
+     */
     public getAll(queryVariablesManager: QueryVariablesManager<Vall>): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
@@ -165,8 +178,12 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
-     * Watch query considering an observable variables set
-     * Only sends query when variables are different of undefined.
+     * Get a collection of objects
+     *
+     * Every time the observable variables change, and they are not undefined,
+     * it will return result from cache, then it will **always** fetch from network.
+     *
+     * The observable result will only complete when expire emits.
      */
     public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, expire: AbstractController['ngUnsubscribe']): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
@@ -208,8 +225,8 @@ export abstract class AbstractModelService<Tone,
                 // Subscription cause query to be sent
                 // First run must occur after first variables changes to prevent duplicate query : with and without variables
                 lastSubscription = lastQueryRef.valueChanges
-                                               .pipe(filter(r => !!r.data), this.mapAll())
-                                               .subscribe(result => resultObservable.next(result));
+                    .pipe(filter(r => !!r.data), this.mapAll())
+                    .subscribe(result => resultObservable.next(result));
             }
         });
 
@@ -217,7 +234,8 @@ export abstract class AbstractModelService<Tone,
     }
 
     /**
-     * This functions allow to fastly create or update objects.
+     * This functions allow to quickly create or update objects.
+     *
      * Manages a "creation is pending" status, and update when creation is ready.
      * Uses regular update/updateNow and create methods.
      * Used mainly when editing multiple objects in same controller (like in editable arrays)
@@ -270,6 +288,7 @@ export abstract class AbstractModelService<Tone,
 
     /**
      * Create an object in DB and then refetch the list of objects
+     *
      * When creation starts, object receives an unique negative ID and the mutation observable is stored in a cache
      * When creation is ready, the cache is removed and the model received his real ID
      */

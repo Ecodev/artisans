@@ -33,20 +33,28 @@ class BookingRepositoryTest extends AbstractRepositoryTest
 
     public function testGetAllToInvoice(): void
     {
-        $user = _em()->getRepository(User::class)->getByLogin('administrator');
-        User::setCurrent($user);
-
         $bookings = $this->repository->getAllToInvoice();
-        $actual = [];
-        foreach ($bookings as $a) {
-            $actual[] = $a->getId();
-        }
+        $actual = $this->modelToIds($bookings);
 
         $expected = [
             4007,
             4004,
             4005,
             4015,
+        ];
+
+        self::assertSame($expected, $actual);
+    }
+
+    public function testGetAllToInvoiceForUser(): void
+    {
+        $user = _em()->getRepository(User::class)->getOneById(-1005);
+
+        $bookings = $this->repository->getAllToInvoice($user);
+        $actual = $this->modelToIds($bookings);
+
+        $expected = [
+            4007,
         ];
 
         self::assertSame($expected, $actual);
@@ -108,10 +116,6 @@ class BookingRepositoryTest extends AbstractRepositoryTest
     public function testGetAllToInvoiceAllCases(array $data, array $expected): void
     {
         $this->insertTestData($data);
-
-        $user = _em()->getRepository(User::class)->getByLogin('administrator');
-        User::setCurrent($user);
-
         $bookings = $this->repository->getAllToInvoice();
 
         $actual = [];
@@ -319,5 +323,20 @@ class BookingRepositoryTest extends AbstractRepositoryTest
                 ['casier', 'cotisation'],
             ],
         ];
+    }
+
+    /**
+     * @param Booking[] $bookings
+     *
+     * @return array
+     */
+    private function modelToIds(array $bookings): array
+    {
+        $ids = [];
+        foreach ($bookings as $a) {
+            $ids[] = $a->getId();
+        }
+
+        return $ids;
     }
 }

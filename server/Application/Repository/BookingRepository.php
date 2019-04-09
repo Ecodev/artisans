@@ -21,14 +21,18 @@ class BookingRepository extends AbstractRepository
      *     for active member/responsible/administrator
      *     but that do not already have an existing transaction_line in the user account for this year
      *
+     * @param null|User $user if given will filter only for that user
+     *
      * @return Booking[]
      */
-    public function getAllToInvoice(): array
+    public function getAllToInvoice(?User $user = null): array
     {
         $rsm = new ResultSetMappingBuilder($this->getEntityManager(), ResultSetMappingBuilder::COLUMN_RENAMING_INCREMENT);
         $rsm->addRootEntityFromClassMetadata(Booking::class, 'booking');
         $rsm->addJoinedEntityFromClassMetadata(Bookable::class, 'bookable', 'booking', 'bookable');
         $selectClause = $rsm->generateSelectClause();
+
+        $userFilter = $user ? 'AND user.id = :user' : '';
 
         $sql = "
             SELECT $selectClause FROM booking
@@ -42,6 +46,7 @@ class BookingRepository extends AbstractRepository
                 AND transaction_line.transactionDate < :nextYear
             WHERE
             user.status IN (:userStatus)
+            $userFilter
             AND bookable.booking_type IN (:bookingType)
             AND booking.status = :bookingStatus
             AND booking.start_date < :nextYear
@@ -59,6 +64,10 @@ class BookingRepository extends AbstractRepository
             ->setParameter('currentYear', Date::now()->firstOfYear()->toDateString())
             ->setParameter('nextYear', Date::now()->firstOfYear()->addYear()->toDateString())
             ->setParameter('roles', [User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR], Connection::PARAM_STR_ARRAY);
+
+        if ($user) {
+            $query->setParameter('user', $user->getId());
+        }
 
         $result = $query->getResult();
 

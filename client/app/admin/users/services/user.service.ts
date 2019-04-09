@@ -3,11 +3,11 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
-import { pick } from 'lodash';
 import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     createUser,
     currentUserForProfileQuery,
+    invoiceMutation,
     leaveFamilyMutation,
     loginMutation,
     logoutMutation,
@@ -26,6 +26,8 @@ import {
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
+    Invoice,
+    InvoiceVariables,
     LeaveFamily,
     LeaveFamilyVariables,
     Login,
@@ -404,4 +406,12 @@ export class UserService extends AbstractModelService<User['user'],
         });
     }
 
+    public invoice(user): Observable<{ model: Invoice['invoice'] }> {
+        return this.apollo.mutate<Invoice, InvoiceVariables>({
+            mutation: invoiceMutation,
+            variables: {
+                id: user.id,
+            },
+        }).pipe(map(result => result.data.invoice));
+    }
 }

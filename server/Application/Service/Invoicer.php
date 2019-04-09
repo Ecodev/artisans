@@ -29,16 +29,22 @@ class Invoicer
      */
     private $count = 0;
 
+    /**
+     * @var bool
+     */
+    private $sendEmailNow = false;
+
     public function __construct(EntityManager $entityManager, Mailer $mailer)
     {
         $this->entityManager = $entityManager;
         $this->mailer = $mailer;
     }
 
-    public function invoice(): int
+    public function invoice(?User $user = null): int
     {
+        $this->sendEmailNow = (bool) $user;
         $this->count = 0;
-        $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice();
+        $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice($user);
 
         $user = null;
         $bookingPerUser = [];
@@ -125,8 +131,12 @@ class Invoicer
         $this->entityManager->refresh($user->getAccount());
 
         if ($user->getEmail()) {
-            $this->mailer->queueInvoice($user, $transaction);
+            $message = $this->mailer->queueInvoice($user, $transaction);
             $this->entityManager->flush();
+
+            if ($this->sendEmailNow) {
+                $this->mailer->sendMessageAsync($message);
+            }
         } else {
             _log()->err('Cannot notify invoice for user without email', ['user' => $user->getId(), 'transaction' => $transaction->getId()]);
         }

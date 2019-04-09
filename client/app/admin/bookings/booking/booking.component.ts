@@ -100,6 +100,7 @@ export class BookingComponent
                 const booking: BookingPartialInput = {status: BookingStatus.booked};
                 this.bookingService.createWithBookable(bookable, this.data.model.owner, booking).subscribe(() => {
                     this.alertService.info('Le stockage sélectionné a bien été attribué à ' + this.data.model.owner.name);
+                    this.userService.invoice(this.data.model.owner).subscribe();
                     const status = this.form.get('status');
                     if (status) {
                         console.log('set as processed');

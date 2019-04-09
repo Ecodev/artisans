@@ -9,7 +9,6 @@ import { FetchResult } from 'apollo-link';
 import { QueryVariablesManager } from '../classes/query-variables-manager';
 import { ExtendedFormControl } from '../classes/ExtendedFormControl';
 import { ValidatorFn } from '@angular/forms';
-import { AbstractController } from '../components/AbstractController';
 import { NetworkStatus } from 'apollo-client';
 
 export interface FormValidators {
@@ -158,7 +157,6 @@ export abstract class AbstractModelService<Tone,
         return resultObservable.asObservable();
     }
 
-
     /**
      * Get a collection of objects
      *
@@ -185,7 +183,7 @@ export abstract class AbstractModelService<Tone,
      *
      * The observable result will only complete when expire emits.
      */
-    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, expire: AbstractController['ngUnsubscribe']): Observable<Tall> {
+    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, expire: Observable<void>): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
         // Expire all subscriptions when completed (when calling result.unsubscribe())

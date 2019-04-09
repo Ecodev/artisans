@@ -31,6 +31,7 @@ describe('UserService', () => {
         swissSailingType: 'junior',
         swissWindsurfType: 'passive',
         mobilePhone: 'test string',
+        lastLogin:  '2018-01-18T11:43:31',
         door1: true,
         door2: true,
         door3: true,

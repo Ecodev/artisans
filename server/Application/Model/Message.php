@@ -19,6 +19,9 @@ class Message extends AbstractModel
      * @var null|User
      *
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(onDelete="CASCADE")
+     * })
      */
     private $recipient;
 

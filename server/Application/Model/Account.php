@@ -19,7 +19,7 @@ use GraphQL\Doctrine\Annotation as API;
  *     @ORM\AssociationOverride(
  *         name="owner",
  *         inversedBy="accounts",
- *         joinColumns=@ORM\JoinColumn(unique=true)
+ *         joinColumns=@ORM\JoinColumn(unique=true, onDelete="SET NULL")
  *     )
  * })
  */

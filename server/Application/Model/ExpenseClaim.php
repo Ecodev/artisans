@@ -22,7 +22,7 @@ use GraphQL\Doctrine\Annotation as API;
  * @ORM\AssociationOverrides({
  *     @ORM\AssociationOverride(
  *         name="owner",
- *         joinColumns=@ORM\JoinColumn(nullable=false)
+ *         joinColumns=@ORM\JoinColumn(nullable=false, onDelete="CASCADE")
  *     )
  * })
  */

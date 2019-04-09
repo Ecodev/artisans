@@ -988,7 +988,7 @@ class User extends AbstractModel
         global $container;
 
         $allowedStatus = [self::STATUS_ACTIVE];
-        $allowedRoles = [self::ROLE_MEMBER, self::ROLE_RESPONSIBLE, self::ROLE_ADMINISTRATOR];
+        $allowedRoles = [self::ROLE_INDIVIDUAL, self::ROLE_MEMBER, self::ROLE_RESPONSIBLE, self::ROLE_ADMINISTRATOR];
         if ($door && !$this->$door) {
             return false;
         }
@@ -996,13 +996,17 @@ class User extends AbstractModel
             return false;
         }
         $apiConfig = $container->get('config')['doorsApi'];
-        foreach ($apiConfig['authorizedIps'] as $host) {
-            if (filter_var($host, FILTER_VALIDATE_DOMAIN) && in_array($_SERVER['REMOTE_ADDR'], gethostbynamel($host), true)) {
-                return true;
+        if (array_key_exists('authorizedIps', $apiConfig) && count($apiConfig['authorizedIps'])) {
+            foreach ($apiConfig['authorizedIps'] as $host) {
+                if (filter_var($host, FILTER_VALIDATE_DOMAIN) && in_array($_SERVER['REMOTE_ADDR'], gethostbynamel($host), true)) {
+                    return true;
+                }
+                if (filter_var($host, FILTER_VALIDATE_IP) && $_SERVER['REMOTE_ADDR'] === $host) {
+                    return true;
+                }
             }
-            if (filter_var($host, FILTER_VALIDATE_IP) && $_SERVER['REMOTE_ADDR'] === $host) {
-                return true;
-            }
+        } else {
+            return true;
         }
 
         return false;

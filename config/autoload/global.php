@@ -15,7 +15,6 @@ return [
     'doorsApi' => [
         'endpoint' => 'http://localhost:8888',
         'token' => 'my-token-value',
-        'authorizedIps' => ['localhost'],
     ],
     'templates' => [
         'paths' => [

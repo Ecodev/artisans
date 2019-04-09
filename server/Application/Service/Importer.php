@@ -187,10 +187,13 @@ EOT;
     {
         $conn = $this->entityManager->getConnection();
 
+        $typo3 = $this->connectTypo3();
+
         $insert = <<<EOT
                 INSERT INTO user(
                   id,
                   login,
+                  password,
                   first_name,
                   last_name,
                   birthday,
@@ -214,10 +217,12 @@ EOT;
                   billing_type,
                   welcome_session_date,
                   status,
-                  creation_date
+                  creation_date,
+                  door4
                 ) VALUES (
                   :id,
                   :login,
+                  :password,
                   :first_name,
                   :last_name,
                   :birthday,
@@ -241,7 +246,8 @@ EOT;
                   :billing_type,
                   :welcome_session_date,
                   :status,
-                  :creation_date
+                  :creation_date,
+                  :door4
                 )
 EOT;
         $insert = $conn->prepare($insert);
@@ -269,6 +275,10 @@ EOT;
 
         $linkToTag = $conn->prepare('INSERT INTO user_tag_user(user_tag_id, user_id) VALUES (:user_tag_id, :user_id)');
 
+        $linkToLicense = $conn->prepare('INSERT INTO license_user(license_id, user_id) VALUES (:license_id, :user_id)');
+
+        $exportPassword = $typo3->prepare('UPDATE fe_users SET new_password=:password WHERE uid=:user_id');
+
         foreach ($this->users as $user) {
             echo sprintf('Insert user %u (%s %s)', $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             $insert->bindValue(':id', $user['uid']);
@@ -283,24 +293,30 @@ EOT;
             $insert->bindValue(':locality', $user['city']);
 
             switch ($user['country']) {
-                case 'CH': $country_id = 1;
+                case 'CH':
+                    $country_id = 1;
 
-break;
-                case 'FR': $country_id = 2;
+                    break;
+                case 'FR':
+                case 'France':
+                    $country_id = 2;
 
-break;
-                case 'DE': $country_id = 10;
+                    break;
+                case 'DE':
+                    $country_id = 10;
 
-break;
-                case 'CA': $country_id = 6;
+                    break;
+                case 'CA':
+                    $country_id = 6;
 
-break;
-                case 'NL': $country_id = 19;
+                    break;
+                case 'NL':
+                    $country_id = 19;
 
-break;
+                    break;
                 default:
                     $country_id = null;
-                    echo sprintf("WARN: pas de correspondance pour le code pays %s de l\\'individu %u (%s &s)", $user['country'], $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
+                    echo sprintf("WARN: pas de correspondance pour le code pays %s de l\\'individu %u (%s %s)", $user['country'], $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             }
             $insert->bindValue(':country_id', $country_id);
 
@@ -319,7 +335,8 @@ break;
 
             $hasInsurance = false;
             if (empty($this->members[$user['family_uid']]['assurances'])) {
-                echo sprintf('WARN: membre %u n\'a aucune assurance', $user['family_uid']) . PHP_EOL;
+                echo sprintf('WARN: membre %u n\'a aucune assurance -> fond de réparation forcé', $user['family_uid']) . PHP_EOL;
+                $this->members[$user['family_uid']]['assurances'] = 'Fonds réparation';
             } elseif (mb_strpos($this->members[$user['family_uid']]['assurances'], 'RC privée') !== false) {
                 $hasInsurance = true;
             }
@@ -327,27 +344,34 @@ break;
 
             $insert->bindValue(':swiss_sailing', !empty($user['ichtus_swiss_sailing']) ? $user['ichtus_swiss_sailing'] : '');
             switch ($user['ichtus_swiss_sailing_type']) {
-                case 'A': $swissSailingType = 'active';
+                case 'A':
+                    $swissSailingType = 'active';
 
-break;
-                case 'P': $swissSailingType = 'passive';
+                    break;
+                case 'P':
+                    $swissSailingType = 'passive';
 
-break;
-                case 'J': $swissSailingType = 'junior';
+                    break;
+                case 'J':
+                    $swissSailingType = 'junior';
 
-break;
-                default: $swissSailingType = null;
+                    break;
+                default:
+                    $swissSailingType = null;
             }
             $insert->bindValue(':swiss_sailing_type', $swissSailingType);
 
             switch ($user['ichtus_swiss_windsurf_type']) {
-                case 'A': $swissWindsurfType = 'active';
+                case 'A':
+                    $swissWindsurfType = 'active';
 
-break;
-                case 'P': $swissWindsurfType = 'passive';
+                    break;
+                case 'P':
+                    $swissWindsurfType = 'passive';
 
-break;
-                default: $swissWindsurfType = null;
+                    break;
+                default:
+                    $swissWindsurfType = null;
             }
             $insert->bindValue(':swiss_windsurf_type', $swissWindsurfType);
 
@@ -405,6 +429,7 @@ break;
                 $role = 'responsible';
             }
             $insert->bindValue(':role', $role);
+            $insert->bindValue(':door4', (int) in_array($role, ['responsible', 'administrator'], true));
             $insert->bindValue(':family_relationship', $relationship);
 
             if ($this->members[$user['family_uid']]['envoi_papier'] && empty($user['email'])) {
@@ -418,7 +443,10 @@ break;
             if ($user['status_new'] + $user['status_actif'] + $user['status_archived'] > 1) {
                 echo sprintf('WARN individu %u (%s %s) a plus d\' un statut actif à la fois', $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             }
-            if ($user['status_actif']) {
+
+            if ($this->members[$user['family_uid']]['membre_suspension']) {
+                $userStatus = 'inactive';
+            } elseif ($user['status_actif']) {
                 $userStatus = 'active';
             } elseif ($user['status_archived']) {
                 $userStatus = 'archived';
@@ -426,6 +454,13 @@ break;
             $insert->bindValue(':status', $userStatus);
 
             $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_entrée ichtus']);
+
+            // Generate a new random password and store it in TYPO3 fe_users to send a newsletter to users
+            $password = $this->generatePassword();
+            $exportPassword->bindValue(':password', $password);
+            $exportPassword->bindValue(':user_id', $user['uid']);
+            $exportPassword->execute();
+            $insert->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
 
             if ($insert->execute() === false) {
                 echo sprintf('ERROR: création de l\'individu %u (%s %s)', $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
@@ -449,6 +484,32 @@ break;
                 $linkToTag->bindValue(':user_id', $user['uid']);
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
+            }
+            if (!empty($this->users[$user['uid']]['ichtus_NFT'])) {
+                $userTagId = $this->insertUserTag('Membre NFT');
+                $linkToTag->bindValue(':user_id', $user['uid']);
+                $linkToTag->bindValue(':user_tag_id', $userTagId);
+                $linkToTag->execute();
+            }
+
+            // Assigne les brevets au membre
+            $linkToLicense->bindValue(':user_id', $user['uid']);
+            switch ($user['ichtus_autvoile']) {
+                case 1: $idLicense = 2000;
+
+break; // Voile niveau 1
+                case 2: $idLicense = 2001;
+
+break; // Voile niveau 2
+                case 3: $idLicense = 2002;
+
+break; // Voile niveau 3
+                default: $idLicense = null;
+            }
+            if ($idLicense) {
+                echo sprintf('%s %s: brevet voile niveau %u', $user['first_name'], $user['last_name'], $user['ichtus_autvoile']) . PHP_EOL;
+                $linkToLicense->bindValue(':license_id', $idLicense);
+                $linkToLicense->execute();
             }
         }
 
@@ -496,7 +557,8 @@ break;
                   periodic_price,
                   simultaneous_booking_maximum,
                   booking_type,
-                  creation_date
+                  creation_date,
+                  credit_account_id
                 ) VALUES (
                   :code,
                   :name,
@@ -505,7 +567,8 @@ break;
                   :periodic_price,
                   :simultaneous_booking_maximum,
                   :booking_type,
-                  NOW()
+                  NOW(),
+                  10036 -- Vente de prestations -> Location casiers
                 )
 EOT;
 
@@ -526,12 +589,14 @@ EOT;
         $insert->bindValue(':booking_type', 'admin_only');
 
         $insert->bindValue(':description', 'Armoire (50 x 200 x 70 cm)');
-        $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Armoire'));
         for ($i = 1; $i <= 120; ++$i) {
             $insert->bindValue(':name', sprintf('Armoire %u', $i));
-            $insert->bindValue(':code', sprintf('STVA%u', $i));
+            $insert->bindValue(':code', sprintf('STA%u', $i));
             $insert->execute();
             $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Armoire'));
+            $linkToTag->execute();
+            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
             $linkToTag->execute();
         }
 
@@ -539,25 +604,14 @@ EOT;
         $insert->bindValue(':periodic_price', 30);
         $insert->bindValue(':simultaneous_booking_maximum', 1);
         $insert->bindValue(':description', 'Casier (50 x 50 x 70 cm)');
-        $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Casier'));
         for ($i = 1; $i <= 36; ++$i) {
             $insert->bindValue(':name', sprintf('Casier %u', $i));
-            $insert->bindValue(':code', sprintf('STVC%u', $i));
+            $insert->bindValue(':code', sprintf('STC%u', $i));
             $insert->execute();
             $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Casier'));
             $linkToTag->execute();
-        }
-
-        // Stockage flotteurs
-        $insert->bindValue(':periodic_price', 50);
-        $insert->bindValue(':simultaneous_booking_maximum', -1);
-        $insert->bindValue(':description', 'Stockage sous le local pour un flotteur');
-        $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Flotteurs'));
-        for ($i = 1; $i <= 80; ++$i) {
-            $insert->bindValue(':name', sprintf('Stockage flotteur %u', $i));
-            $insert->bindValue(':code', sprintf('STVF%u', $i));
-            $insert->execute();
-            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
             $linkToTag->execute();
         }
     }
@@ -588,12 +642,13 @@ EOT;
 EOT;
 
         $insert = $conn->prepare($insert);
+        $insert->bindValue(':status', 'booked');
+        $insert->bindValue(':participant_count', 1);
 
+        // Réservations liées au chef de famille
         foreach ($this->members as $idMember => $member) {
             // Cotisation annuelle
             $insert->bindValue(':owner', $idMember);
-            $insert->bindValue(':status', 'booked');
-            $insert->bindValue(':participant_count', 1);
             $insert->bindValue(':bookable', 3006); // Cotisation annuelle
             $insert->execute();
 
@@ -602,10 +657,39 @@ EOT;
                 $insert->bindValue(':bookable', 3026); // Fonds de réparation interne
                 $insert->execute();
             }
+        }
+
+        // Réservations liées aux individus (mais facturées au chef de famille)
+        foreach ($this->users as $idUser => $user) {
+            $insert->bindValue(':owner', $idUser);
 
             // Adhésion NFT (optionnel)
-            if (!empty($this->users[$idMember]['ichtus_NFT'])) {
+            if (!empty($user['ichtus_NFT'])) {
                 $insert->bindValue(':bookable', 3004); // Cotisation NFT
+                $insert->execute();
+            }
+
+            // Licence Swiss Sailing
+            if (!empty($user['ichtus_swiss_sailing'])) {
+                switch ($user['ichtus_swiss_sailing_type']) {
+                    case 'A':
+                        $idBookable = 3027; // Licence Swiss Sailing (voile)
+                        break;
+                    case 'J':
+                        $idBookable = 3030; // Cotisation Swiss Sailing (NFT, junior)
+                        break;
+                    default:
+                        $idBookable = null;
+                }
+                if ($idBookable) {
+                    $insert->bindValue(':bookable', $idBookable);
+                    $insert->execute();
+                }
+            }
+
+            // Licence Swiss Windsurfing
+            if (!empty($user['ichtus_swiss_windsurf_type']) && $user['ichtus_swiss_windsurf_type'] === 'A') {
+                $insert->bindValue(':bookable', 3028); // Cotisation Swiss Windsurfing (NFT)
                 $insert->execute();
             }
         }
@@ -619,7 +703,7 @@ EOT;
                 continue;
             }
             $insert->bindValue(':owner', $request['uid_link']);
-            foreach ([1 => 'Armoire %u', 2 => 'Armoire %u', 3 => 'Casier %u', 4 => 'Stockage floteur %u'] as $index => $bookableName) {
+            foreach ([1 => 'Armoire %u', 2 => 'Armoire %u', 3 => 'Casier %u'] as $index => $bookableName) {
                 if ($request["materiel{$index}"] > 0 && !empty($request["materiel{$index}attrib"])) {
                     $selectBookableByName->bindValue(':name', sprintf($bookableName, $request["materiel{$index}attrib"]));
                     $bookable = null;
@@ -740,5 +824,38 @@ EOT;
         $stmt->execute();
         $stmt = $conn->prepare('DELETE FROM user WHERE id < 0');
         $stmt->execute();
+    }
+
+    /**
+     * Generate password string which evaluate to "medium" security level by digitalspagethi mix
+     *
+     * @param int $length length of password
+     *
+     * @return string
+     */
+    private function generatePassword(int $length = 10): string
+    {
+        $numberLength = 2;
+        $vowels = 'aeuyAEUY';
+        $consonants = 'bdghjmnpqrstvzBDGHJLMNPQRSTVWXZ';
+        $numbers = '23456789';
+
+        $password = '';
+        $alt = time() % 2;
+        for ($i = 0; $i < $length - $numberLength; ++$i) {
+            if ($alt === 1) {
+                $password .= $consonants[(mt_rand() % mb_strlen($consonants))];
+                $alt = 0;
+            } else {
+                $password .= $vowels[(mt_rand() % mb_strlen($vowels))];
+                $alt = 1;
+            }
+        }
+
+        for ($i = 0; $i < $numberLength; ++$i) {
+            $password .= $numbers[(mt_rand() % mb_strlen($numbers))];
+        }
+
+        return $password;
     }
 }

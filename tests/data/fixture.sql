@@ -110,7 +110,10 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, balance, iban, name) 
 (10106, 10105, NULL, 'liability', '2800', 35000.00, '', 'Capital social');
 
 REPLACE INTO license (id, name) VALUES
-(2000, 'Voilier');
+(2000, 'Voile - niveau 1'),
+(2001, 'Voile - niveau 2'),
+(2002, 'Voile - niveau 3'),
+(2003, 'Aviron');
 
 REPLACE INTO license_user (license_id, user_id) VALUES
 (2000, -1010);

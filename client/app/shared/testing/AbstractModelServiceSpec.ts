@@ -43,9 +43,10 @@ export abstract class AbstractModelServiceSpec {
 
         it('should get all with query variables manager',
             fakeAsync(inject([serviceClass], (service: ModelService) => {
-                this.expectNotConfiguredOrEqualForQueryVariablesManager(expectedAll,
+                this.expectNotConfiguredOrEqualForQueryVariablesManager(
+                    expectedAll,
                     (qvm) => service.getAll(qvm),
-                    new QueryVariablesManager());
+                );
             })),
         );
 
@@ -54,8 +55,8 @@ export abstract class AbstractModelServiceSpec {
                 this.expectNotConfiguredOrEqualForQueryVariablesManager(
                     expectedAll,
                     (qvm) => service.watchAll(qvm, new Subject()),
-                    new QueryVariablesManager(),
-                    {search: 'foo'});
+                    true,
+                );
             })),
         );
 
@@ -150,7 +151,7 @@ export abstract class AbstractModelServiceSpec {
 
     private static expectNotConfiguredOrEqual(expectSuccess: boolean,
                                               getObservable: (any) => Observable<any>,
-                                              variables: string | Literal ): Observable<any> | null {
+                                              variables: string | Literal): Observable<any> | null {
         let actual = null;
         let completed = false;
         let count = 0;
@@ -184,33 +185,43 @@ export abstract class AbstractModelServiceSpec {
 
     private static expectNotConfiguredOrEqualForQueryVariablesManager(expectSuccess: boolean,
                                                                       getObservable: (any) => Observable<any>,
-                                                                      qvm: QueryVariablesManager<any>,
-                                                                      newVariables?: any): Observable<any> | null {
+                                                                      expectNextVariables = false): Observable<any> | null {
         let actual = null;
+        let completed = false;
         let count = 0;
         let result: Observable<any> | null = null;
         const tickDelay = 20; // should match AbstractModel.watchAll debounceTime value
+        const qvm = new QueryVariablesManager<any>();
 
         const getActual = () => {
             result = getObservable(qvm);
             tick(tickDelay);
-            result.subscribe(v => {
-                count++;
-                actual = v;
+            result.subscribe({
+                next: (v) => {
+                    count++;
+                    actual = v;
+                },
+                complete: () => {
+                    completed = true;
+                },
             });
-            qvm.set('foo', {foo: 'bar'});
-            tick(tickDelay);
         };
 
         if (expectSuccess) {
             getActual();
+            qvm.set('foo', {foo: 'initial'});
+            tick(tickDelay);
+
             expect(count).toBe(1);
             expect(actual).toEqual(jasmine.anything());
 
-            if (newVariables) {
-                qvm.set('channel', newVariables);
+            if (expectNextVariables) {
+                qvm.set('channel', {search: 'final'});
                 tick(tickDelay);
                 expect(count).toBe(3); // Must be 3 because we got a cached response first, then final response from network
+                expect(completed).toBe(false);
+            } else {
+                expect(completed).toBe(true);
             }
 
         } else {

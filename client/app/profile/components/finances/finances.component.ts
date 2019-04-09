@@ -19,7 +19,7 @@ import { AbstractController } from '../../../shared/components/AbstractControlle
 })
 export class FinancesComponent extends AbstractController implements OnInit, OnDestroy {
 
-    public user;
+    public viewer;
 
     public runningExpenseClaimsDS: AppDataSource;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];
@@ -40,15 +40,15 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
     }
 
     ngOnInit() {
-        this.user = this.route.snapshot.data.user.model;
+        this.viewer = this.route.snapshot.data.viewer.model;
 
-        this.ibanLocked = !!this.user.iban;
+        this.ibanLocked = !!this.viewer.iban;
 
-        const runningExpenseClaims = this.expenseClaimService.getForUser(this.user, this.ngUnsubscribe);
+        const runningExpenseClaims = this.expenseClaimService.getForUser(this.viewer, this.ngUnsubscribe);
         this.runningExpenseClaimsDS = new AppDataSource(runningExpenseClaims);
 
-        if (this.user.account) {
-            const transactionLinesQuery = this.transactionLineService.getForAccount(this.user.account, this.ngUnsubscribe);
+        if (this.viewer.account) {
+            const transactionLinesQuery = this.transactionLineService.getForAccount(this.viewer.account, this.ngUnsubscribe);
             this.transactionLinesDS = new AppDataSource(transactionLinesQuery);
         }
     }
@@ -73,7 +73,7 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
         this.dialog.open(CreateRefundComponent, config).afterClosed().subscribe(expense => {
             if (expense) {
                 expense.type = ExpenseClaimType.refund;
-                this.expenseClaimService.create(expense).subscribe(result => {
+                this.expenseClaimService.create(expense).subscribe(() => {
                     this.alertService.info('Votre demande de remboursement a bien été enregistrée');
                 });
             }
@@ -82,14 +82,14 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
     }
 
     public updateIban(iban: string) {
-        this.userService.updatePartially({id: this.user.id, iban: iban}).pipe(catchError(() => {
+        this.userService.updatePartially({id: this.viewer.id, iban: iban}).pipe(catchError(() => {
             this.alertService.error('L\'IBAN est invalide');
             return of(null);
         })).subscribe(user => {
             if (user) {
                 this.ibanLocked = true;
                 this.alertService.info('Votre IBAN a été modifié');
-                this.user.iban = iban;
+                this.viewer.iban = iban;
                 this.lockIbanIfDefined();
             } else {
                 this.ibanLocked = false;
@@ -98,7 +98,7 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
     }
 
     public lockIbanIfDefined() {
-        if (this.user.iban) {
+        if (this.viewer.iban) {
             this.ibanLocked = true;
         }
     }

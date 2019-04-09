@@ -71,7 +71,10 @@ export class UserService extends AbstractModelService<User['user'],
     UpdateUserVariables,
     any> {
 
-    private currentUser: CurrentUserForProfile['viewer'] | null = null;
+    /**
+     * Should be used only by getViewer and cacheViewer
+     */
+    private viewerCache: CurrentUserForProfile['viewer'] | null = null;
 
     constructor(apollo: Apollo,
                 protected router: Router,
@@ -194,25 +197,6 @@ export class UserService extends AbstractModelService<User['user'],
         return config;
     }
 
-    public getCurrentUser(): Observable<CurrentUserForProfile['viewer']> {
-
-        if (this.currentUser) {
-            return of(this.currentUser);
-        }
-
-        return this.apollo.query<CurrentUserForProfile>({
-            query: currentUserForProfileQuery,
-        }).pipe(map(result => {
-            this.currentUser = result.data.viewer;
-
-            return this.currentUser;
-        }));
-    }
-
-    public getCachedCurrentUser(): CurrentUserForProfile['viewer'] {
-        return this.currentUser;
-    }
-
     public login(loginData: LoginVariables): Observable<Login['login']> {
 
         const subject = new Subject<Login['login']>();
@@ -225,7 +209,7 @@ export class UserService extends AbstractModelService<User['user'],
                 variables: loginData,
                 update: (proxy: DataProxy, {data: {login}}) => {
 
-                    this.currentUser = login;
+                    this.cacheViewer(login);
 
                     // Inject the freshly logged in user as the current user into Apollo data store
                     const data = {viewer: login};
@@ -233,7 +217,7 @@ export class UserService extends AbstractModelService<User['user'],
                         query: currentUserForProfileQuery,
                         data,
                     });
-                    this.permissionsService.setUser(this.currentUser);
+                    this.permissionsService.setUser(login);
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);
         });
@@ -254,7 +238,7 @@ export class UserService extends AbstractModelService<User['user'],
             this.apollo.mutate<Logout>({
                 mutation: logoutMutation,
             }).pipe(map(({data: {logout}}) => logout)).subscribe((v) => {
-                this.currentUser = null;
+                this.cacheViewer(null);
                 (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
                     subject.next(v);
                 });
@@ -262,15 +246,6 @@ export class UserService extends AbstractModelService<User['user'],
         });
 
         return subject;
-    }
-
-    /**
-     * Resolve items related to users, and the user if the id is provided, in order to show a form
-     */
-    public resolveViewer(): Observable<any> {
-        return this.getCurrentUser().pipe(map(result => {
-            return {model: result};
-        }));
     }
 
     /**
@@ -333,6 +308,52 @@ export class UserService extends AbstractModelService<User['user'],
         const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
         return this.bookingService.watchAll(qvm, expire);
+    }
+
+    public getViewer(): Observable<CurrentUserForProfile['viewer']> {
+
+        if (this.viewerCache) {
+            return of(this.viewerCache);
+        }
+
+        return this.apollo.query<CurrentUserForProfile>({
+            query: currentUserForProfileQuery,
+        }).pipe(map(result => {
+            this.cacheViewer(result.data.viewer);
+            return result.data.viewer;
+        }));
+    }
+
+    /**
+     * This function caches the viewer for short duration
+     *
+     * This feature responds to two needs :
+     *   - Expire viewer to allow re-resolve for key pages
+     *     - Profile : in cache status or account balance has change
+     *     - Doors : in case permissions have changed
+     *     - Admin : in cache permissions have changed
+     *
+     *   - Serve from cache to prevent duplicate query calls when multiple services initialization queue (preventing batching):
+     *     - Route Guards, then
+     *     - Resolvers, then
+     *     - Components initialization
+     *
+     * This is kind of easiest possible "debounce" like with expiration feature
+     */
+    private cacheViewer(user) {
+        this.viewerCache = user;
+        setTimeout(() => {
+            this.viewerCache = null;
+        }, 1000);
+    }
+
+    /**
+     * Resolve items related to users, and the user if the id is provided, in order to show a form
+     */
+    public resolveViewer(): Observable<{ model: CurrentUserForProfile['viewer'] }> {
+        return this.getViewer().pipe(map(result => {
+            return {model: result};
+        }));
     }
 
     public resolveByToken(token: string): Observable<{ model: UserByToken['userByToken'] }> {

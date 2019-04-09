@@ -4,7 +4,7 @@ import { SidenavService } from '../shared/modules/sidenav/sidenav.service';
 import { SidenavContainerComponent } from '../shared/modules/sidenav/components/sidenav-container/sidenav-container.component';
 import { AbstractController } from '../shared/components/AbstractController';
 import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
@@ -19,15 +19,13 @@ export class HomeComponent extends AbstractController implements OnInit {
      * Model for header code search
      */
     public code;
-    public user;
 
-    constructor(private userService: UserService, private router: Router) {
+    constructor(private userService: UserService, private router: Router, public route: ActivatedRoute) {
         super();
     }
 
     ngOnInit() {
 
-        this.user = this.userService.getCurrentUser();
         SidenavService.sideNavsChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             setTimeout(() => {
                 this.menu = SidenavService.sideNavs.get('adminMenu');

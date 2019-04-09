@@ -18,9 +18,9 @@ export class DoorGuard implements CanActivate {
      */
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-        return this.userService.getCurrentUser().pipe(map(user => {
+        return this.userService.resolveViewer().pipe(map(user => {
 
-            const granted = UserService.canAccessDoor(user);
+            const granted = UserService.canAccessDoor(user.model);
 
             if (!granted) {
                 this.router.navigate(['/']);

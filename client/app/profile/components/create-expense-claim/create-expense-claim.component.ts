@@ -43,7 +43,7 @@ export class CreateExpenseClaimComponent
     ngOnInit() {
         super.ngOnInit();
         this.form.patchValue({
-            owner: this.route.snapshot.data.user.model.id,
+            owner: this.route.snapshot.data.viewer.model.id,
             status: ExpenseClaimStatus.new,
         });
     }

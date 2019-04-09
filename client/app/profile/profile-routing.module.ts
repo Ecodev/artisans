@@ -11,9 +11,7 @@ import { CreateExpenseClaimComponent } from './components/create-expense-claim/c
 const routes: Routes = [
     {
         path: '',
-        resolve: {
-            user: ViewerResolver,
-        },
+        resolve: {viewer: ViewerResolver},
         children: [
             {
                 path: '',

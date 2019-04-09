@@ -18,9 +18,9 @@ export class AdministrationGuard implements CanActivate {
      */
     public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-        return this.userService.getCurrentUser().pipe(map(user => {
+        return this.userService.resolveViewer().pipe(map(user => {
 
-            const granted = UserService.canAccessAdmin(user);
+            const granted = UserService.canAccessAdmin(user.model);
 
             if (!granted) {
                 this.router.navigate(['/']);

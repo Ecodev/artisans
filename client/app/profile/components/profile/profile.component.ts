@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { mergeWith } from 'lodash';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0.sandbox.js';
@@ -17,7 +16,7 @@ import { ConfigService } from '../../../shared/services/ConfigService';
 })
 export class ProfileComponent implements OnInit {
 
-    public user;
+    public viewer;
 
     /**
      * Install FE config
@@ -39,15 +38,14 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.user = this.route.snapshot.data.user.model;
+        this.viewer = this.route.snapshot.data.viewer.model;
     }
 
     public pay() {
-        const user = this.userService.getCachedCurrentUser();
-        if (user !== null) {
+        if (this.viewer !== null) {
             this.dialog.open(ProvisionComponent).afterClosed().subscribe(amount => {
                 if (amount) {
-                    this.doPayment(user, amount);
+                    this.doPayment(this.viewer, amount);
                 }
             });
         }
@@ -74,7 +72,7 @@ export class ProfileComponent implements OnInit {
                 // Don't call accountService as actual user may not have one, and it couldn't be updated.
                 // TODO : replace by a viewer watching architecture
                 this.userService.getOne(user.id).subscribe(updatedUser => {
-                    this.user.account = updatedUser.account;
+                    this.viewer.account = updatedUser.account;
                 });
 
                 // Restore store, to refetch queries that are watched

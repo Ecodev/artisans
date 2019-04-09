@@ -4,11 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkActivityService } from '../shared/services/network-activity.service';
 import { MatSnackBar } from '@angular/material';
 import { AlertService } from '../shared/components/alert/alert.service';
-import { takeUntil } from 'rxjs/operators';
 import { AbstractController } from '../shared/components/AbstractController';
 import { UserService } from '../admin/users/services/user.service';
-import { QueryVariablesManager } from '../shared/classes/query-variables-manager';
-import { UsersVariables } from '../shared/generated-types';
 
 @Component({
     selector: 'app-login',
@@ -40,11 +37,6 @@ export class LoginComponent extends AbstractController implements OnInit, OnDest
         password: '',
     };
 
-    /**
-     * Subscription to the logged in user observable
-     */
-    private currentUser: any;
-
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private userService: UserService,
@@ -60,11 +52,9 @@ export class LoginComponent extends AbstractController implements OnInit, OnDest
 
         // Attempt to skip login if user is already logged in (but not if is trying to logout)
         if (!logout) {
-            this.currentUser = this.userService.getCurrentUser().pipe(takeUntil(this.ngUnsubscribe)).subscribe(user => {
-                if (user) {
-                    this.redirect();
-                }
-            });
+            if (this.route.snapshot.data.viewer.model) {
+                this.redirect();
+            }
         }
 
         // Watch errors

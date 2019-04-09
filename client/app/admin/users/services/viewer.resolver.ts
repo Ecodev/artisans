@@ -8,7 +8,7 @@ import { CurrentUserForProfile } from '../../../shared/generated-types';
 @Injectable({
     providedIn: 'root',
 })
-export class ViewerResolver implements Resolve<CurrentUserForProfile['viewer']> {
+export class ViewerResolver implements Resolve<{ model: CurrentUserForProfile['viewer'] }> {
 
     constructor(private userService: UserService,
                 private errorService: ErrorService) {
@@ -17,7 +17,7 @@ export class ViewerResolver implements Resolve<CurrentUserForProfile['viewer']> 
     /**
      * Resolve sites for routing service only at the moment
      */
-    public resolve(route: ActivatedRouteSnapshot): Observable<CurrentUserForProfile['viewer']> {
+    public resolve(route: ActivatedRouteSnapshot): Observable<{ model: CurrentUserForProfile['viewer'] }> {
         const observable = this.userService.resolveViewer();
 
         return this.errorService.redirectIfError(observable);

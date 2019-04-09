@@ -7,16 +7,18 @@ import { AuthGuard } from './shared/services/auth.guard';
 import { DoorGuard } from './shared/services/door.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { UserResolver } from './admin/users/services/user.resolver';
 import { SafetyComponent } from './safety/safety.component';
 import { BookingService } from './admin/bookings/services/booking.service';
+import { ViewerResolver } from './admin/users/services/viewer.resolver';
 
 export const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
+        resolve: {viewer: ViewerResolver},
     },
     {
+        // Registration
         path: 'user',
         component: HomeComponent,
         loadChildren: './user/user.module#UserModule',
@@ -34,8 +36,8 @@ export const routes: Routes = [
     {
         path: '',
         component: HomeComponent,
+        resolve: {viewer: ViewerResolver},
         canActivate: [AuthGuard],
-        resolve: {user: UserResolver},
         children: [
             {
                 path: '',
@@ -57,6 +59,7 @@ export const routes: Routes = [
                 path: 'door',
                 component: DoorComponent,
                 canActivate: [DoorGuard],
+                resolve: {viewer: ViewerResolver},
             },
         ],
     },

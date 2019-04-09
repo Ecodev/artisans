@@ -15,7 +15,7 @@ import { mergeWith } from 'lodash';
 })
 export class FamilyComponent implements OnInit {
 
-    public user;
+    public viewer;
     private familyMembers;
 
     constructor(public userService: UserService,
@@ -27,9 +27,9 @@ export class FamilyComponent implements OnInit {
 
     ngOnInit() {
 
-        this.user = this.route.snapshot.data.user.model;
+        this.viewer = this.route.snapshot.data.viewer.model;
 
-        if (this.user) {
+        if (this.viewer) {
             const variables = new QueryVariablesManager<UsersVariables>();
             const filters: UsersVariables = {
                 filter: {
@@ -37,8 +37,8 @@ export class FamilyComponent implements OnInit {
                         {
                             conditionsLogic: LogicalOperator.OR,
                             conditions: [
-                                {owner: {equal: {value: this.user.id}}},
-                                {id: {equal: {value: this.user.id}}},
+                                {owner: {equal: {value: this.viewer.id}}},
+                                {id: {equal: {value: this.viewer.id}}},
                             ],
                         },
                     ],
@@ -63,9 +63,9 @@ export class FamilyComponent implements OnInit {
         this.alertService.confirm('Quitter le ménage', explanation, 'Quitter le ménage')
             .subscribe(confirmed => {
                 if (confirmed) {
-                    this.userService.leaveFamily(this.user).subscribe(user => {
+                    this.userService.leaveFamily(this.viewer).subscribe(user => {
 
-                        mergeWith(this.user, user, AbstractModelService.mergeOverrideArray);
+                        mergeWith(this.viewer, user, AbstractModelService.mergeOverrideArray);
                         const message = 'Vous avez quitté le ménage';
                         this.alertService.info(message, 5000);
                     });

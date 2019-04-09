@@ -146,7 +146,7 @@ export abstract class AbstractModelService<Tone,
             .valueChanges
             .pipe(filter(r => !!r.data))
             .subscribe(result => {
-                const data = result.data ? result.data[this.name] : result.data;
+                const data = result.data[this.name];
                 resultObservable.next(data);
                 if (result.networkStatus === NetworkStatus.ready) {
                     resultObservable.complete();
@@ -223,8 +223,8 @@ export abstract class AbstractModelService<Tone,
                 // Subscription cause query to be sent
                 // First run must occur after first variables changes to prevent duplicate query : with and without variables
                 lastSubscription = lastQueryRef.valueChanges
-                    .pipe(filter(r => !!r.data), this.mapAll())
-                    .subscribe(result => resultObservable.next(result));
+                                               .pipe(filter(r => !!r.data), this.mapAll())
+                                               .subscribe(result => resultObservable.next(result));
             }
         });
 
@@ -465,9 +465,7 @@ export abstract class AbstractModelService<Tone,
      */
     protected mapAll(): OperatorFunction<FetchResult<any>, Tall> {
         const plural = Utility.makePlural(this.name);
-        return map(result => {
-            return result.data ? result.data[plural] : result.data;
-        });
+        return map(result => result.data[plural]);
     }
 
     /**

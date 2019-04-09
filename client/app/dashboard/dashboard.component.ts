@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../admin/users/services/user.service';
 import { BookingService } from '../admin/bookings/services/booking.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
@@ -12,23 +13,21 @@ export class DashboardComponent implements OnInit {
 
     public title = 'my-ichtus';
 
-    public currentUser;
+    public viewer;
 
-    constructor(public userService: UserService, public bookingService: BookingService) {
+    constructor(public userService: UserService, public bookingService: BookingService, private route: ActivatedRoute) {
     }
 
     public ngOnInit(): void {
-        this.userService.getCurrentUser().subscribe(user => {
-            this.currentUser = user;
-        });
+        this.viewer = this.route.snapshot.data.viewer.model;
     }
 
     public canAccessAdmin() {
-        return UserService.canAccessAdmin(this.currentUser);
+        return UserService.canAccessAdmin(this.viewer);
     }
 
     public canAccessDoor() {
-        return UserService.canAccessDoor(this.currentUser);
+        return UserService.canAccessDoor(this.viewer);
     }
 
 }

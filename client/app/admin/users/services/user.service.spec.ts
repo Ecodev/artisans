@@ -99,8 +99,8 @@ describe('UserService', () => {
 
     it('should get current user', fakeAsync(inject([UserService], (service: UserService) => {
         let actual: any = null;
-        service.getCurrentUser().subscribe(v => actual = v);
-        tick();
+        service.getViewer().subscribe(v => actual = v);
+        tick(1000);
 
         expect(actual).toEqual(expectedOne);
     })));
@@ -117,7 +117,7 @@ describe('UserService', () => {
             login: 'foo',
             password: 'bar',
         }).subscribe(v => actual = v);
-        tick();
+        tick(1000);
 
         expect(actual).toEqual(expectedOne);
         expect(resetStore).toHaveBeenCalledTimes(1);
@@ -136,7 +136,7 @@ describe('UserService', () => {
 
         let actual;
         service.logout().subscribe(v => actual = v);
-        tick();
+        tick(1000);
 
         expect(actual).toBe(true);
         expect(resetStore).toHaveBeenCalledTimes(1);

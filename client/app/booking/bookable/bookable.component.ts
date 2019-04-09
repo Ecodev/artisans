@@ -36,7 +36,6 @@ export class BookableComponent extends AbstractController implements OnInit {
     constructor(private bookableService: BookableService,
                 private route: ActivatedRoute,
                 public bookingService: BookingService,
-                private userService: UserService,
     ) {
         super();
     }
@@ -52,8 +51,9 @@ export class BookableComponent extends AbstractController implements OnInit {
     }
 
     private initForBookable() {
-        this.canAccessAdmin = UserService.canAccessAdmin(this.userService.getCachedCurrentUser());
-        this.hasLicense = BookableService.isLicenseGranted(this.bookable, this.userService.getCachedCurrentUser());
+        const viewer = this.route.snapshot.data.viewer.model;
+        this.canAccessAdmin = UserService.canAccessAdmin(viewer);
+        this.hasLicense = BookableService.isLicenseGranted(this.bookable, viewer);
         this.isNavigable = this.bookable.bookingType === BookingType.self_approved;
         this.bookableService.getAvailability(this.bookable).subscribe(availability => {
             this.isAvailable = availability.isAvailable;
@@ -62,7 +62,6 @@ export class BookableComponent extends AbstractController implements OnInit {
     }
 
     public endBooking() {
-
         if (this.runningBooking) {
             this.bookingService.terminateBooking(this.runningBooking.id).subscribe(() => {
                 this.initForBookable();

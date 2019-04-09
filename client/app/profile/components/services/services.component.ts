@@ -15,7 +15,7 @@ import { AbstractController } from '../../../shared/components/AbstractControlle
 })
 export class ServicesComponent extends AbstractController implements OnInit, OnDestroy {
 
-    public user;
+    public viewer;
 
     public BookableService = BookableService; // template usage
     public runningServicesDS: AppDataSource;
@@ -32,12 +32,12 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
     }
 
     ngOnInit() {
-        this.user = this.route.snapshot.data.user.model;
+        this.viewer = this.route.snapshot.data.viewer.model;
 
-        const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);
+        const pendingApplications = this.userService.getPendingApplications(this.viewer, this.ngUnsubscribe);
         this.pendingApplicationsDS = new AppDataSource(pendingApplications);
 
-        const runningServices = this.userService.getRunningServices(this.user, this.ngUnsubscribe);
+        const runningServices = this.userService.getRunningServices(this.viewer, this.ngUnsubscribe);
         this.runningServicesDS = new AppDataSource(runningServices);
     }
 
@@ -66,7 +66,7 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
         this.alertService.confirm('Démission', 'Voulez-vous quitter le club Ichtus ?', 'Démissioner définitivement')
             .subscribe(confirmed => {
                 if (confirmed) {
-                    this.userService.unregister(this.user).subscribe(() => {
+                    this.userService.unregister(this.viewer).subscribe(() => {
                         this.alertService.info('Vous avez démissioné', 5000);
                         this.userService.logout();
                     });

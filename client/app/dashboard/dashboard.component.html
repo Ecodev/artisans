@@ -1,7 +1,7 @@
 <div overflow fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="50px" fxLayoutAlign="center" class="padding">
 
-    <div fxLayout="row" fxLayoutAlign="center" *ngIf="currentUser">
-        <app-navigations [user]="currentUser"></app-navigations>
+    <div fxLayout="row" fxLayoutAlign="center" *ngIf="viewer">
+        <app-navigations [user]="viewer"></app-navigations>
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start center">

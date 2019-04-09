@@ -28,8 +28,7 @@ export class SelfApprovedBookingComponent implements OnInit {
 
         this.booking = Object.assign(this.bookingService.getEmptyObject(), this.bookingService.getDefaultValues());
         this.booking.status = BookingStatus.booked;
-
-        this.forMe();
+        this.booking.owner = this.route.snapshot.data.viewer.model;
 
         const bookable = this.route.snapshot.params.bookable;
         if (bookable) {
@@ -40,10 +39,6 @@ export class SelfApprovedBookingComponent implements OnInit {
             });
         }
 
-    }
-
-    public forMe() {
-        this.booking.owner = this.userService.getCachedCurrentUser();
     }
 
     public createBooking() {

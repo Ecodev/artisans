@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DoorService } from './services/door.service';
 import { AbstractController } from '../shared/components/AbstractController';
-import {AlertService} from '../shared/components/alert/alert.service';
-import {UserService} from '../admin/users/services/user.service';
-import {Literal} from '../shared/types';
-import {catchError} from 'rxjs/internal/operators';
-import {of, throwError} from 'rxjs';
+import { AlertService } from '../shared/components/alert/alert.service';
+import { UserService } from '../admin/users/services/user.service';
+import { Literal } from '../shared/types';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-door',
@@ -14,11 +13,12 @@ import {of, throwError} from 'rxjs';
 })
 export class DoorComponent extends AbstractController implements OnInit {
 
-    public currentUser;
+    public viewer;
 
     constructor(public doorService: DoorService,
                 private userService: UserService,
-                private alertService: AlertService) {
+                private alertService: AlertService,
+                private route: ActivatedRoute) {
         super();
     }
 
@@ -31,14 +31,12 @@ export class DoorComponent extends AbstractController implements OnInit {
             },
             err => {
                 this.alertService.error(err.message, 5000);
-            }
+            },
         );
     }
 
     ngOnInit() {
-        this.userService.getCurrentUser().subscribe(user => {
-            this.currentUser = user;
-        });
+        this.viewer = this.route.snapshot.data.viewer.model;
     }
 
 }

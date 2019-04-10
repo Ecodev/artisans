@@ -82,6 +82,10 @@ export class SelectEnumComponent implements OnInit, ControlValueAccessor, AfterV
         this.formCtrl.setValue(this.getDisplayFn()(value));
     }
 
+    public setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
     /**
      * Very important to return something, above all if [select]='displayedValue' attribute value is used
      */

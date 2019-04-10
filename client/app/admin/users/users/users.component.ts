@@ -17,7 +17,7 @@ export class UsersComponent extends AbstractList<Users['users'], UsersVariables>
 
     constructor(route: ActivatedRoute,
                 router: Router,
-                userService: UserService,
+                private userService: UserService,
                 alertService: AlertService,
                 persistenceService: PersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
@@ -33,6 +33,12 @@ export class UsersComponent extends AbstractList<Users['users'], UsersVariables>
             naturalSearchConfigurationService,
         );
 
+    }
+
+    public flagWelcomeSessionDate(user) {
+        this.userService.flagWelcomeSessionDate(user.id).subscribe((u) => {
+            user = u;
+        });
     }
 
 }

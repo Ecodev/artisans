@@ -122,7 +122,13 @@
 
                         <div class="mat-body-1">
                             <p>Dernière connexion : {{ data.model.lastLogin  | date: 'longDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}</p>
-                            <p>Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }} - {{ data.model.welcomeSessionDate | date: 'shortTime' }}</p>
+                            <p *ngIf="data.model.welcomeSessionDate">Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }} - {{ data.model.welcomeSessionDate | date: 'shortTime' }}</p>
+                            <button mat-flat-button
+                                    color="primary"
+                                    *ngIf="!data.model.welcomeSessionDate"
+                                    (click)="flagWelcomeSessionDate(data.model)"
+                            >A participé à la session d'accueil
+                            </button>
                         </div>
 
                     </div>

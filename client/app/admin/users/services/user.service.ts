@@ -43,6 +43,7 @@ import {
     UserByToken,
     UserByTokenVariables,
     UserInput,
+    UserPartialInput,
     UserRole,
     Users,
     UserStatus,
@@ -228,8 +229,11 @@ export class UserService extends AbstractModelService<User['user'],
     /**
      * Todo : create specific mutation endpoint to flag current date on welcomeSessionDate and if user has paid, active him
      */
-    // public flagWelcomeSessionDate(id: string): Observable<UpdateUser['updateUser']> {
-    // }
+    public flagWelcomeSessionDate(id: string) {
+        const date = (new Date()).toISOString();
+        const user: UserPartialInput = {welcomeSessionDate: date};
+        return this.updatePartially({id: id, ...user});
+    }
 
     public logout(): Observable<Logout['logout']> {
         const subject = new Subject<Logout['logout']>();

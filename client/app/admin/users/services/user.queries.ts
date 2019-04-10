@@ -75,6 +75,7 @@ export const usersQuery = gql`
                 updateDate
                 creationDate
                 lastLogin
+                welcomeSessionDate
                 account {
                     id
                     balance
@@ -113,6 +114,7 @@ export const updateUser = gql`
         updateUser(id:$id, input:$input) {
             id
             name
+            welcomeSessionDate
             updateDate
             updater {
                 ...userMeta

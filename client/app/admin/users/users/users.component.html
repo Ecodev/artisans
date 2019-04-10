@@ -76,9 +76,15 @@
                 </ng-container>
 
                 <ng-container matColumnDef="flagWelcomeSessionDate">
-                    <th mat-header-cell *matHeaderCellDef app-6em-column>Accueilli le</th>
+                    <th mat-header-cell *matHeaderCellDef app-date-column>Accueil</th>
                     <td mat-cell *matCellDef="let element">
-                        <button mat-flat-button color="primary">A participé</button>
+                        <button mat-flat-button
+                                color="primary"
+                                *ngIf="!element.welcomeSessionDate"
+                                (click)="flagWelcomeSessionDate(element)"
+                        >A participé
+                        </button>
+                        <span *ngIf="element.welcomeSessionDate">{{ element.welcomeSessionDate | date: 'mediumDate' }}</span>
                     </td>
                 </ng-container>
 

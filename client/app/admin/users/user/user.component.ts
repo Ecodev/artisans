@@ -40,7 +40,7 @@ export class UserComponent
     public pendingDemands;
 
     constructor(alertService: AlertService,
-                userService: UserService,
+                private userService: UserService,
                 router: Router,
                 route: ActivatedRoute,
                 public userTagService: UserTagService,
@@ -141,6 +141,12 @@ export class UserComponent
                 ],
             },
         };
+    }
+
+    public flagWelcomeSessionDate(user) {
+        this.userService.flagWelcomeSessionDate(user.id).subscribe((u: any) => {
+            user.welcomeSessionDate = u.welcomeSessionDate;
+        });
     }
 
 }

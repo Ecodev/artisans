@@ -7,9 +7,11 @@
     >
 
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+            <app-money [amount]="data.model.amount" sizeClass="mat-display-1" [showSignal]="false"></app-money>
+
             <a *ngIf="data.model.id"
                mat-flat-button
-               color="warn"
+               color="accent"
                [routerLink]="['/admin/transaction/new', {expenseClaim: data.model.id}]"
             >
                 <app-icon name="check"></app-icon>
@@ -18,7 +20,6 @@
                 <span *ngIf="data.model.type === ExpenseClaimType.refund">(rembourser)</span>
             </a>
 
-            <app-money [amount]="data.model.amount" sizeClass="mat-display-1" [showSignal]="false"></app-money>
         </div>
     </app-detail-header>
 

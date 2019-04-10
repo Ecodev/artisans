@@ -35,7 +35,6 @@ export class UserComponent
         UpdateUserVariables,
         any> implements OnInit {
 
-    public runningSelfApproved;
     public runningActive;
     public pendingDemands;
 
@@ -54,33 +53,11 @@ export class UserComponent
     ngOnInit() {
         super.ngOnInit();
 
-        this.runningSelfApproved = this.getRunningSelfApprovedFilter();
-        this.runningActive = this.getRunningActive();
-        this.pendingDemands = this.getPendingApplicationsFilter();
-    }
+        this.route.data.subscribe(() => {
+            this.runningActive = this.getRunningActive();
+            this.pendingDemands = this.getPendingApplicationsFilter();
+        });
 
-    /**
-     * Sorties en cours
-     */
-    public getRunningSelfApprovedFilter(): BookingFilter {
-
-        const filter: BookingFilter = {
-            groups: [
-                {
-                    conditions: [
-                        {
-                            owner: {have: {values: [this.data.model.id]}},
-                            status: {equal: {value: BookingStatus.booked}},
-                            endDate: {null: {}},
-
-                        },
-                    ],
-                    joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.self_approved]}}}]}},
-                },
-            ],
-        };
-
-        return filter;
     }
 
     /**

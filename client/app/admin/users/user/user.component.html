@@ -121,14 +121,29 @@
                         ></app-select-enum>
 
                         <div class="mat-body-1">
-                            <p>Dernière connexion : {{ data.model.lastLogin  | date: 'longDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}</p>
-                            <p *ngIf="data.model.welcomeSessionDate">Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }} - {{ data.model.welcomeSessionDate | date: 'shortTime' }}</p>
-                            <button mat-flat-button
-                                    color="primary"
-                                    *ngIf="!data.model.welcomeSessionDate"
-                                    (click)="flagWelcomeSessionDate(data.model)"
-                            >A participé à la session d'accueil
-                            </button>
+                            <div>
+                                Dernière connexion : {{ data.model.lastLogin  | date: 'longDate' }}
+                                - {{ data.model.lastLogin | date: 'shortTime' }}
+                            </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" >
+                                <div *ngIf="data.model.welcomeSessionDate">
+                                    Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }}
+                                    - {{ data.model.welcomeSessionDate | date: 'shortTime' }}
+                                </div>
+                                <button mat-flat-button
+                                        color="primary"
+                                        *ngIf="!data.model.welcomeSessionDate"
+                                        (click)="flagWelcomeSessionDate(data.model)"
+                                >A participé à la session d'accueil
+                                </button>
+                                <button mat-stroked-button
+                                        color="warn"
+                                        *ngIf="data.model.welcomeSessionDate"
+                                        (click)="flagWelcomeSessionDate(data.model, null)"
+                                >N'a pas participé
+                                </button>
+                            </div>
                         </div>
 
                     </div>
@@ -219,7 +234,7 @@
 
             <h2 class="mat-title">Finances</h2>
 
-            <div fxLayout="row" fxLayoutGap="30px" >
+            <div fxLayout="row" fxLayoutGap="30px">
                 <app-select fxFlex
                             formControlName="account"
                             placeholder="Compte"

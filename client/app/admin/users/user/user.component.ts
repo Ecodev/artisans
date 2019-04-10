@@ -143,8 +143,8 @@ export class UserComponent
         };
     }
 
-    public flagWelcomeSessionDate(user) {
-        this.userService.flagWelcomeSessionDate(user.id).subscribe((u: any) => {
+    public flagWelcomeSessionDate(user, value?) {
+        this.userService.flagWelcomeSessionDate(user.id, value).subscribe((u: any) => {
             user.welcomeSessionDate = u.welcomeSessionDate;
         });
     }

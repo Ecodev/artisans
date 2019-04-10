@@ -233,9 +233,8 @@ export class UserService extends AbstractModelService<User['user'],
         return subject;
     }
 
-    public flagWelcomeSessionDate(id: string) {
-        const date = (new Date()).toISOString();
-        const user: UserPartialInput = {welcomeSessionDate: date};
+    public flagWelcomeSessionDate(id: string, value = (new Date()).toISOString()) {
+        const user: UserPartialInput = {welcomeSessionDate: value};
         return this.updatePartially({id: id, ...user});
     }
 

@@ -162,6 +162,7 @@ export class UserService extends AbstractModelService<User['user'],
             sex: Sex.not_known,
             welcomeSessionDate: null,
             iban: '',
+            hasInsurance: false,
         };
     }
 

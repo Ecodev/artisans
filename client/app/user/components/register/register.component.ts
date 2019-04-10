@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
-import {
-    CreateUser,
-    CreateUserVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    User,
-    UserVariables,
-} from '../../../shared/generated-types';
+import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
@@ -15,7 +8,6 @@ import { AppDataSource } from '../../../shared/services/data.source';
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { pick } from 'lodash';
 
 @Component({
     selector: 'app-register',

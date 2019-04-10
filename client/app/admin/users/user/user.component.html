@@ -120,13 +120,31 @@
                                          placeholder="License swiss windsurfing"
                         ></app-select-enum>
 
-                        <div class="mat-body-1">
+                        <div fxLayout="row wrap" fxLayoutGap="20px">
+                            <app-select-enum fxFlex
+                                             enumName="BillingType"
+                                             formControlName="billingType"
+                                             (selectionChange)="update()"
+                                             placeholder="Méthode de paiement"
+                            ></app-select-enum>
+
+                            <mat-form-field fxFlex>
+                                <mat-label>Date de naissance</mat-label>
+                                <input matInput formControlName="birthday" [matDatepicker]="picker" (change)="update()">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="mat-body-1" fxLayout="column" fxLayoutGap="20px">
+                            <!-- LastLogin -->
                             <div>
                                 Dernière connexion : {{ data.model.lastLogin  | date: 'longDate' }}
                                 - {{ data.model.lastLogin | date: 'shortTime' }}
                             </div>
 
-                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" >
+                            <!-- Welcome session date -->
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                                 <div *ngIf="data.model.welcomeSessionDate">
                                     Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }}
                                     - {{ data.model.welcomeSessionDate | date: 'shortTime' }}
@@ -144,6 +162,12 @@
                                 >N'a pas participé
                                 </button>
                             </div>
+
+                            <!-- Has Insurance -->
+                            <mat-checkbox formControlName="hasInsurance" (change)="update()" wrap>
+                                Assurance RC (todo : recevoir du serveur -> bug)
+                            </mat-checkbox>
+
                         </div>
 
                     </div>

@@ -29,7 +29,7 @@ import {
     Invoice,
     InvoiceVariables,
     LeaveFamily,
-    LeaveFamilyVariables,
+    LeaveFamilyVariables, LogicalOperator,
     Login,
     LoginVariables,
     Logout,
@@ -130,6 +130,23 @@ export class UserService extends AbstractModelService<User['user'],
             return false;
         }
         return user.canOpenDoor;
+    }
+
+    public static getFamilyVariables(user): UsersVariables {
+
+        const familyBoss = user.owner || user;
+
+        return {
+            filter: {
+                groups: [
+                    {conditions: [{id: {equal: {value: familyBoss.id}}}]},
+                    {
+                        groupLogic: LogicalOperator.OR,
+                        conditions: [{owner: {equal: {value: familyBoss.id}}}],
+                    },
+                ],
+            },
+        };
     }
 
     public getEmptyObject(): UserInput {

@@ -1,12 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-    CreateUser,
-    CreateUserVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    User,
-    UserVariables,
-} from '../../../shared/generated-types';
+import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
 import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,6 +21,7 @@ export class FamilyMemberComponent
         any> implements OnInit {
 
     @Input() user: User['user'];
+    @Input() readonly = false;
 
     constructor(alertService: AlertService,
                 private userService: FamilyUserService,
@@ -43,16 +37,20 @@ export class FamilyMemberComponent
     ngOnInit() {
 
         if (this.user && this.user.id) {
-
-            // TODO: replace by watchOne (from okpilot) as two members could change data from same
-            // family member and it would stay unchanged for the other one
             this.service.getOne(this.user.id).subscribe(user => {
                 this.data = merge({model: this.service.getEmptyObject()}, {model: user});
                 this.initForm();
+                if (this.readonly) {
+                    this.form.disable();
+                }
             });
+
         } else {
             this.data = {model: Object.assign(this.service.getEmptyObject(), this.service.getDefaultValues())};
             this.initForm();
+            if (this.readonly) {
+                this.form.disable();
+            }
         }
 
     }

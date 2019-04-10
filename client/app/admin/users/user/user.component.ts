@@ -39,6 +39,7 @@ export class UserComponent
     public runningActive;
     public pendingDemands;
     public showFamilyTab;
+    public UserService = UserService;
 
     constructor(alertService: AlertService,
                 private userService: UserService,
@@ -60,7 +61,7 @@ export class UserComponent
             this.pendingDemands = this.getPendingApplicationsFilter();
 
             const qvm = new QueryVariablesManager<UsersVariables>();
-            qvm.set('variables', this.getFamilyIds());
+            qvm.set('variables', UserService.getFamilyVariables(this.data.model));
             this.userService.getAll(qvm).subscribe(family => {
                 this.showFamilyTab = family.length > 1;
             });
@@ -110,23 +111,6 @@ export class UserComponent
             ],
         };
         return filter;
-    }
-
-    public getFamilyIds(): UsersVariables {
-
-        const familyBoss = this.data.model.owner || this.data.model;
-
-        return {
-            filter: {
-                groups: [
-                    {conditions: [{id: {equal: {value: familyBoss.id}}}]},
-                    {
-                        groupLogic: LogicalOperator.OR,
-                        conditions: [{owner: {equal: {value: familyBoss.id}}}],
-                    },
-                ],
-            },
-        };
     }
 
     public flagWelcomeSessionDate(user, value?) {

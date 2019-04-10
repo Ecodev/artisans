@@ -11,9 +11,9 @@ class UserStatusType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            User::STATUS_INACTIVE => 'Inactif',
-            User::STATUS_ACTIVE => 'Actif',
             User::STATUS_NEW => 'Nouveau',
+            User::STATUS_ACTIVE => 'Actif',
+            User::STATUS_INACTIVE => 'Inactif',
             User::STATUS_ARCHIVED => 'Archivé',
         ];
 

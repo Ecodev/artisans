@@ -6,7 +6,6 @@ namespace ApplicationTest\ORM\Query\Filter;
 
 use Application\Model\License;
 use Application\Model\User;
-
 use Application\ORM\Query\Filter\AclFilter;
 use PHPUnit\Framework\TestCase;
 
@@ -62,12 +61,26 @@ class AclFilterTest extends TestCase
         $filter->setUser($user);
         $targetEntity = _em()->getMetadataFactory()->getMetadataFor(User::class);
 
-        $this->assertNotSame('', $filter->addFilterConstraint($targetEntity, 'test'));
+        $this->assertNotSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'enabled by default');
 
         $filter->setEnabled(false);
-        $this->assertSame('', $filter->addFilterConstraint($targetEntity, 'test'));
+        $this->assertSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'can disable');
+
+        $filter->setEnabled(false);
+        $this->assertSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'can disable one more time and still disabled');
 
         $filter->setEnabled(true);
-        $this->assertNotSame('', $filter->addFilterConstraint($targetEntity, 'test'));
+        $this->assertSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'enable once and still disabled');
+
+        $filter->setEnabled(true);
+        $this->assertNotSame('', $filter->addFilterConstraint($targetEntity, 'test'), 'enabled a second time and really enabled');
+    }
+
+    public function testEnablingTooMuchWillThrowException(): void
+    {
+        $filter = new AclFilter(_em());
+
+        $this->expectExceptionMessage('The ACL filter must not be enabled more times that it has been disabled');
+        $filter->setEnabled(true);
     }
 }

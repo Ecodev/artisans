@@ -8,6 +8,7 @@ use Application\Model\User;
 use Application\Repository\LimitedAccessSubQueryInterface;
 use Doctrine\ORM\Mapping\ClassMetaData;
 use Doctrine\ORM\Query\Filter\SQLFilter;
+use LogicException;
 
 /**
  * Automatically filter objects according to what user is allowed to access.
@@ -34,11 +35,11 @@ class AclFilter extends SQLFilter
     private $subQueriesCache = [];
 
     /**
-     * Whether the filter is active
+     * The number of time the filter has been deactivated
      *
-     * @var bool
+     * @var int
      */
-    private $enabled = true;
+    private $disabledCount = 0;
 
     /**
      * Enable or disable the filter
@@ -51,7 +52,17 @@ class AclFilter extends SQLFilter
      */
     public function setEnabled(bool $enabled): void
     {
-        $this->enabled = $enabled;
+        if ($enabled) {
+            --$this->disabledCount;
+        } else {
+            ++$this->disabledCount;
+        }
+
+        if ($this->disabledCount < 0) {
+            $this->disabledCount = 0;
+
+            throw new LogicException('The ACL filter must not be enabled more times that it has been disabled');
+        }
     }
 
     /**
@@ -62,7 +73,7 @@ class AclFilter extends SQLFilter
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias): string
     {
-        if (!$this->enabled) {
+        if ($this->disabledCount > 0) {
             return '';
         }
 

@@ -46,7 +46,7 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
 
     public function testFindByDebitOrCredit(): void
     {
-        $user = _em()->getRepository(User::class)->getByLogin('administrator');
+        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
         User::setCurrent($user);
 
         $account = _em()->getReference(Account::class, 10096);

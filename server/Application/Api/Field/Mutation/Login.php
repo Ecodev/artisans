@@ -34,7 +34,7 @@ abstract class Login implements FieldInterface
                 $session->clear();
                 User::setCurrent(null);
 
-                $user = _em()->getRepository(User::class)->getByLoginPassword($args['login'], $args['password']);
+                $user = _em()->getRepository(User::class)->getOneByLoginPassword($args['login'], $args['password']);
 
                 // If we successfully authenticated
                 if ($user) {

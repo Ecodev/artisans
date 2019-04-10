@@ -33,7 +33,7 @@ abstract class RequestPasswordReset implements FieldInterface
                 $repository = _em()->getRepository(User::class);
 
                 /** @var User $user */
-                $user = $repository->getByLogin($args['login']);
+                $user = $repository->getOneByLogin($args['login']);
                 $relationship = RelationshipType::HOUSEHOLDER;
 
                 if ($user) {

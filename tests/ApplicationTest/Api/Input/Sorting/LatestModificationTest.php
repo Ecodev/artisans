@@ -17,7 +17,7 @@ class LatestModificationTest extends AbstractSorting
     public function testSorting(): void
     {
         /** @var User $user */
-        $user = _em()->getRepository(User::class)->getByLogin('member');
+        $user = _em()->getRepository(User::class)->getOneByLogin('member');
         User::setCurrent($user);
 
         $result = $this->getSortedQueryResult(ExpenseClaim::class, 'latestModification');

@@ -17,7 +17,7 @@ class InvoicerTest extends TestCase
     {
         global $container;
 
-        $user = _em()->getRepository(User::class)->getByLogin('administrator');
+        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
         User::setCurrent($user);
 
         /** @var Invoicer $invoicer */

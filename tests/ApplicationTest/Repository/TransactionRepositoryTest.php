@@ -46,7 +46,7 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
     public function testHydrateLinesAndFlush(): void
     {
         /** @var User $user */
-        $user = _em()->getRepository(User::class)->getByLogin('administrator');
+        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
         User::setCurrent($user);
 
         $account = $user->getAccount();

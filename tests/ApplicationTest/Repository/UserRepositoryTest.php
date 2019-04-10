@@ -40,12 +40,12 @@ class UserRepositoryTest extends AbstractRepositoryTest
         ];
     }
 
-    public function testGetByLoginPassword(): void
+    public function testGetOneByLoginPassword(): void
     {
-        self::assertNull($this->repository->getByLoginPassword('foo', 'bar'), 'wrong user');
-        self::assertNull($this->repository->getByLoginPassword('administrator', 'bar'), 'wrong password');
+        self::assertNull($this->repository->getOneByLoginPassword('foo', 'bar'), 'wrong user');
+        self::assertNull($this->repository->getOneByLoginPassword('administrator', 'bar'), 'wrong password');
 
-        $user = $this->repository->getByLoginPassword('administrator', 'administrator');
+        $user = $this->repository->getOneByLoginPassword('administrator', 'administrator');
         self::assertNotNull($user);
         self::assertSame(-1000, $user->getId());
 
@@ -54,7 +54,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
         self::assertNotSame(md5('administrator'), $hash, 'password should have been re-hashed automatically');
     }
 
-    public function testGetByLogin(): void
+    public function testgetOneByLogin(): void
     {
         self::assertNull($this->repository->getOneById(1), 'wrong user');
 

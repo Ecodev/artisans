@@ -33,10 +33,10 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      *
      * @return null|User
      */
-    public function getByLoginPassword(string $login, string $password): ?User
+    public function getOneByLoginPassword(string $login, string $password): ?User
     {
         /** @var User $user */
-        $user = $this->getByLogin($login);
+        $user = $this->getOneByLogin($login);
 
         if (!$user) {
             return null;
@@ -93,7 +93,7 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      *
      * @return null|User
      */
-    public function getByLogin(?string $login): ?User
+    public function getOneByLogin(?string $login): ?User
     {
         $this->getAclFilter()->setEnabled(false);
         $user = $this->findOneByLogin($login);

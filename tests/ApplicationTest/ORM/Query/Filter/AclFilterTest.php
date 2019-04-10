@@ -42,7 +42,7 @@ class AclFilterTest extends TestCase
      */
     public function testFilter(?string $login, string $class, string $expected): void
     {
-        $user = _em()->getRepository(User::class)->getByLogin($login);
+        $user = _em()->getRepository(User::class)->getOneByLogin($login);
         $filter = new AclFilter(_em());
         $filter->setUser($user);
         $targetEntity = _em()->getMetadataFactory()->getMetadataFor($class);

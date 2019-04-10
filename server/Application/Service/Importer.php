@@ -634,20 +634,23 @@ EOT;
                   status,
                   participant_count,
                   start_date,
-                  bookable_id
+                  bookable_id,
+                  remarks
                 ) VALUES (
                   :owner,
                   NOW(),
                   :status,
                   :participant_count,
                   NOW(),
-                  :bookable
+                  :bookable,
+                  :remarks
                 )
 EOT;
 
         $insert = $conn->prepare($insert);
         $insert->bindValue(':status', 'booked');
         $insert->bindValue(':participant_count', 1);
+        $insert->bindValue(':remarks', '');
 
         // Réservations liées au chef de famille
         foreach ($this->members as $idMember => $member) {
@@ -663,9 +666,10 @@ EOT;
             }
         }
 
-        // Réservations liées aux individus (mais facturées au chef de famille)
+        // Réservations concernant des membres du ménage, mais cependant liées et facturées au chef de famille
         foreach ($this->users as $idUser => $user) {
-            $insert->bindValue(':owner', $idUser);
+            $insert->bindValue(':owner', $user['family_uid']);
+            $insert->bindValue(':remarks', implode(' ', [$user['first_name'], $user['last_name']]));
 
             // Adhésion NFT (optionnel)
             if (!empty($user['ichtus_NFT'])) {

@@ -111,6 +111,13 @@ export class UserService extends AbstractModelService<User['user'],
         };
     }
 
+    public static canAccessServices(user: CurrentUserForProfile['viewer']): boolean {
+        if (!user) {
+            return false;
+        }
+        return !user.owner;
+    }
+
     public static canAccessAdmin(user: CurrentUserForProfile['viewer']): boolean {
         if (!user) {
             return false;

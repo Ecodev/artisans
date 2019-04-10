@@ -80,7 +80,7 @@
                         Notes de frais et remboursements
                     </a>
                 </div>
-                <div>
+                <div *ngIf="canAccessServices()">
                     <a mat-button
                        fxLayout="column"
                        fxLayoutAlign="start center"

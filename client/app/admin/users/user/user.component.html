@@ -137,31 +137,6 @@
                         </div>
 
                         <div class="mat-body-1" fxLayout="column" fxLayoutGap="20px">
-                            <!-- LastLogin -->
-                            <div>
-                                Dernière connexion : {{ data.model.lastLogin  | date: 'longDate' }}
-                                - {{ data.model.lastLogin | date: 'shortTime' }}
-                            </div>
-
-                            <!-- Welcome session date -->
-                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-                                <div *ngIf="data.model.welcomeSessionDate">
-                                    Séance d'accueil le : {{ data.model.welcomeSessionDate  | date: 'longDate' }}
-                                    - {{ data.model.welcomeSessionDate | date: 'shortTime' }}
-                                </div>
-                                <button mat-flat-button
-                                        color="primary"
-                                        *ngIf="!data.model.welcomeSessionDate"
-                                        (click)="flagWelcomeSessionDate(data.model)"
-                                >A participé à la session d'accueil
-                                </button>
-                                <button mat-stroked-button
-                                        color="warn"
-                                        *ngIf="data.model.welcomeSessionDate"
-                                        (click)="flagWelcomeSessionDate(data.model, null)"
-                                >N'a pas participé
-                                </button>
-                            </div>
 
                             <!-- Has Insurance -->
                             <mat-checkbox formControlName="hasInsurance" (change)="update()" wrap>
@@ -249,7 +224,38 @@
 
                 <mat-divider></mat-divider>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <div fxLayout="column" fxLayoutGap="20px">
+                    <app-stamp [item]="data.model"></app-stamp>
+
+                    <!-- Welcome session date -->
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+                        <div>
+                            <span class="mat-body-2">Séance d'accueil</span>
+                            <span *ngIf="data.model.welcomeSessionDate">
+                                le : {{ data.model.welcomeSessionDate  | date: 'longDate' }} - {{ data.model.welcomeSessionDate | date: 'shortTime' }}
+                            </span>
+                        </div>
+                        <button mat-button
+                                color="primary"
+                                *ngIf="!data.model.welcomeSessionDate"
+                                (click)="flagWelcomeSessionDate(data.model)"
+                        >A participé à la session d'accueil
+                        </button>
+                        <button mat-button
+                                color="warn"
+                                *ngIf="data.model.welcomeSessionDate"
+                                (click)="flagWelcomeSessionDate(data.model, null)"
+                        >N'a pas participé
+                        </button>
+                    </div>
+
+                    <!-- LastLogin -->
+                    <div>
+                        <span class="mat-body-2">Dernière connexion :</span>
+                        {{ data.model.lastLogin  | date: 'longDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}
+                    </div>
+                </div>
+
             </div>
 
         </mat-tab>

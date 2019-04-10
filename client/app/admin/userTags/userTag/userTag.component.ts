@@ -12,6 +12,7 @@ import {
     UserTagVariables,
 } from '../../../shared/generated-types';
 import { UserTagService } from '../services/userTag.service';
+import { UserService } from '../../users/services/user.service';
 
 @Component({
     selector: 'app-user-tag',
@@ -31,7 +32,7 @@ export class UserTagComponent
                 userTagService: UserTagService,
                 router: Router,
                 route: ActivatedRoute,
-                public tagService: UserTagService,
+                public userService: UserService,
     ) {
         super('userTag', userTagService, alertService, router, route);
     }

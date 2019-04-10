@@ -41,7 +41,6 @@
                         <app-relations [main]="data.model"
                                        [service]="userService"
                                        [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
-
                                        placeholder="Certifier un utilisateur"
                         >
                             <ng-template let-item="item">

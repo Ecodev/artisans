@@ -22,6 +22,19 @@
                             <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
+                        <h2 class="mat-title">Utilisateurs tagués</h2>
+                        <app-relations [main]="data.model"
+                                       [service]="userService"
+                                       [filter]="{groups: [{conditions: [{userTags: {have: {values: [data.model.id]}}}]}]}"
+                                       placeholder="Taguer un utilisateur"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <app-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></app-table-button>
+                                </div>
+                            </ng-template>
+                        </app-relations>
+
                     </div>
 
                     <div fxFlex="33" fxLayout="column">

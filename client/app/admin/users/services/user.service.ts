@@ -226,12 +226,14 @@ export class UserService extends AbstractModelService<User['user'],
         return subject;
     }
 
-    /**
-     * Todo : create specific mutation endpoint to flag current date on welcomeSessionDate and if user has paid, active him
-     */
     public flagWelcomeSessionDate(id: string) {
         const date = (new Date()).toISOString();
         const user: UserPartialInput = {welcomeSessionDate: date};
+        return this.updatePartially({id: id, ...user});
+    }
+
+    public activate(id: string) {
+        const user: UserPartialInput = {status: UserStatus.active};
         return this.updatePartially({id: id, ...user});
     }
 

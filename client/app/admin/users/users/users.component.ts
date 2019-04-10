@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractList } from '../../shared/components/AbstractList';
-import { Users, UsersVariables } from '../../../shared/generated-types';
+import { Users, UserStatus, UsersVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
@@ -39,6 +39,19 @@ export class UsersComponent extends AbstractList<Users['users'], UsersVariables>
         this.userService.flagWelcomeSessionDate(user.id).subscribe((u) => {
             user = u;
         });
+    }
+    public activate(user) {
+        this.userService.activate(user.id).subscribe((u) => {
+            user = u;
+        });
+    }
+
+    public isActive(user) {
+        return user.status === UserStatus.active;
+    }
+
+    public isNew(user) {
+        return user.status === UserStatus.new;
     }
 
 }

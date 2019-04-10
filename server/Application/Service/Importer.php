@@ -453,7 +453,11 @@ EOT;
             }
             $insert->bindValue(':status', $userStatus);
 
-            $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_entrée ichtus']);
+            if ($userStatus === 'new') {
+                $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_formulaire_adhésion']);
+            } else {
+                $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_entrée ichtus']);
+            }
 
             // Generate a new random password and store it in TYPO3 fe_users to send a newsletter to users
             $password = $this->generatePassword();

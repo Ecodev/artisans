@@ -13,16 +13,19 @@ import { of } from 'rxjs';
 import { AbstractController } from '../../../shared/components/AbstractController';
 
 @Component({
-    selector: 'app-finances',
-    templateUrl: './finances.component.html',
-    styleUrls: ['./finances.component.scss'],
+    selector: 'app-transaction-lines',
+    templateUrl: './transaction-lines.component.html',
+    styleUrls: ['./transaction-lines.component.scss'],
 })
-export class FinancesComponent extends AbstractController implements OnInit, OnDestroy {
+export class TransactionLinesComponent extends AbstractController implements OnInit, OnDestroy {
 
     public viewer;
 
     public runningExpenseClaimsDS: AppDataSource;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];
+
+    public transactionLinesDS: AppDataSource;
+    public transactionsColumns = ['name', 'bookable', 'transactionDate', 'remarks', 'amount'];
 
     public ibanLocked = true;
 
@@ -44,6 +47,10 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
         const runningExpenseClaims = this.expenseClaimService.getForUser(this.viewer, this.ngUnsubscribe);
         this.runningExpenseClaimsDS = new AppDataSource(runningExpenseClaims);
 
+        if (this.viewer.account) {
+            const transactionLinesQuery = this.transactionLineService.getForAccount(this.viewer.account, this.ngUnsubscribe);
+            this.transactionLinesDS = new AppDataSource(transactionLinesQuery);
+        }
     }
 
     public cancelExpenseClaim(expenseClaim) {

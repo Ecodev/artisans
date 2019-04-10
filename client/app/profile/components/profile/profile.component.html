@@ -40,53 +40,61 @@
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
 
         <div fxLayout="column">
-            <mat-divider></mat-divider>
+            <mat-divider class="margin-bottom"></mat-divider>
 
             <div fxLayout="row wrap" fxLayout.gt-sm="column" fxLayoutGap="20px grid" id="menu">
 
-                <div>
+                <div [style.max-width.px]="150">
                     <a mat-button
                        fxLayout="column"
                        fxLayoutAlign="start center"
                        routerLink="/profile"
                        class="big-button"
-                       [style.max-width.px]="150"
+
                     >
-                        <app-icon name="history" [size]="50"></app-icon>
-                        Historique des sorties
+                        <app-icon name="lake" [size]="50"></app-icon>
+                        Sorties
                     </a>
                 </div>
-                <div>
+                <div [style.max-width.px]="150">
                     <a mat-button
                        fxLayout="column"
                        fxLayoutAlign="start center"
                        routerLink="family"
                        class="big-button"
-                       [style.max-width.px]="150"
                     >
                         <app-icon name="family" [size]="50"></app-icon>
-                        Ménage et données personnelles
+                        Famille
                     </a>
                 </div>
-                <div>
+                <div [style.max-width.px]="150">
+                    <a mat-button
+                       fxLayout="column"
+                       fxLayoutAlign="start center"
+                       routerLink="history"
+                       class="big-button"
+                    >
+                        <app-icon name="transactionHistory" [size]="50"></app-icon>
+                        Historique des transactions
+                    </a>
+                </div>
+                <div [style.max-width.px]="150">
                     <a mat-button
                        fxLayout="column"
                        fxLayoutAlign="start center"
                        routerLink="finances"
                        class="big-button"
-                       [style.max-width.px]="150"
                     >
-                        <app-icon name="finances" [size]="50"></app-icon>
-                        Notes de frais et remboursements
+                        <app-icon name="claims" [size]="50"></app-icon>
+                        Dépenses et remboursements
                     </a>
                 </div>
-                <div *ngIf="canAccessServices()">
+                <div *ngIf="canAccessServices()" [style.max-width.px]="150">
                     <a mat-button
                        fxLayout="column"
                        fxLayoutAlign="start center"
                        routerLink="services"
                        class="big-button"
-                       [style.max-width.px]="150"
                     >
                         <app-icon name="ichtus" [size]="50"></app-icon>
                         Cotisation et services
@@ -96,7 +104,7 @@
         </div>
 
         <div fxFlex fxLayout="column">
-            <mat-divider></mat-divider>
+            <mat-divider class="margin-bottom"></mat-divider>
             <div class="padding">
                 <router-outlet></router-outlet>
             </div>

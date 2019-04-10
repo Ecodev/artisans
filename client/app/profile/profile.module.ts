@@ -16,6 +16,7 @@ import { SelectAdminApprovedModalComponent } from '../shared/components/select-a
 import {
     SelectAdminApprovedButtonComponent
 } from '../shared/components/select-admin-approved-button/select-admin-approved-button.component';
+import { TransactionLinesComponent } from './components/transaction-lines/transaction-lines.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import {
         ProvisionComponent,
         SelectAdminApprovedButtonComponent,
         SelectAdminApprovedModalComponent,
+        TransactionLinesComponent,
     ],
     imports: [
         CommonModule,

@@ -58,6 +58,15 @@ export class IconComponent {
         'family': {
             svg: 'icons/family.svg',
         },
+        'lake': {
+            svg: 'icons/lake.svg',
+        },
+        'transactionHistory': {
+            svg: 'icons/history.svg',
+        },
+        'claims': {
+            svg: 'icons/claims.svg',
+        },
         'finances': {
             svg: 'icons/notes.svg',
         },

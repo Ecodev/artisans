@@ -307,7 +307,7 @@
 
         </mat-tab>
 
-        <mat-tab label="Famille" *ngIf="data.model.id">
+        <mat-tab label="Famille" *ngIf="data.model.id && showFamilyTab">
             <app-users [queryVariables]="getFamilyIds()" [persistSearch]="false"></app-users>
         </mat-tab>
 

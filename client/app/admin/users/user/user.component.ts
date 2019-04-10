@@ -4,7 +4,6 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
-    BookablesVariables,
     BookingFilter,
     BookingStatus,
     BookingType,
@@ -14,12 +13,14 @@ import {
     UpdateUser,
     UpdateUserVariables,
     User,
+    UsersVariables,
     UserVariables,
 } from '../../../shared/generated-types';
 import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
 import { BookingService } from '../../bookings/services/booking.service';
 import { AccountService } from '../../accounts/services/account.service';
+import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 
 @Component({
     selector: 'app-user',
@@ -37,6 +38,7 @@ export class UserComponent
 
     public runningActive;
     public pendingDemands;
+    public showFamilyTab;
 
     constructor(alertService: AlertService,
                 private userService: UserService,
@@ -56,6 +58,13 @@ export class UserComponent
         this.route.data.subscribe(() => {
             this.runningActive = this.getRunningActive();
             this.pendingDemands = this.getPendingApplicationsFilter();
+
+            const qvm = new QueryVariablesManager<UsersVariables>();
+            qvm.set('variables', this.getFamilyIds());
+            this.userService.getAll(qvm).subscribe(family => {
+                this.showFamilyTab = family.length > 1;
+            });
+
         });
 
     }
@@ -103,7 +112,7 @@ export class UserComponent
         return filter;
     }
 
-    public getFamilyIds(): BookablesVariables {
+    public getFamilyIds(): UsersVariables {
 
         const familyBoss = this.data.model.owner || this.data.model;
 

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../../../admin/users/services/user.service';
-import * as Datatrans from '../../../datatrans-2.0.0.sandbox.js';
+import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
 import { MatDialog } from '@angular/material';
 import { ProvisionComponent } from '../provision/provision.component';
 import { Apollo } from 'apollo-angular';
@@ -65,6 +65,7 @@ export class ProfileComponent implements OnInit {
                 refno: user.id,
                 amount: amount * 100,
                 currency: 'CHF',
+                endpoint: this.config.datatransEndpoint,
             },
             success: () => {
                 this.alertService.info('Paiement réussi');

@@ -117,13 +117,13 @@
         var params = extend({}, config.params);
 
         params['theme'] = 'DT2015';
-        params['version'] = datatransPaymentConfig.version;
+        params['version'] = '2.0.0';
 
-        var action = datatransPaymentConfig.endpoint + '/upp/jsp/upStart.jsp';
+        var action = config.params.endpoint + '/upp/jsp/upStart.jsp';
         var method = 'post';
 
         if (config.paymentId !== undefined) {
-            action = datatransPaymentConfig.endpoint + '/upp/v1/start/' + config.paymentId;
+            action = config.params.endpoint + '/upp/v1/start/' + config.paymentId;
             method = 'get';
         }
 
@@ -224,8 +224,3 @@
         },
     };
 }));
-
-var datatransPaymentConfig = {
-    'endpoint': 'https://pay.sandbox.datatrans.com',
-    'version': '2.0.0',
-};

@@ -223,34 +223,40 @@ class UserTest extends TestCase
     public function providerCanOpenDoor(): array
     {
         return [
-            'anonymous cannot open' => [User::ROLE_ANONYMOUS, User::STATUS_ACTIVE,
+            'anonymous cannot open' => [
+                User::ROLE_ANONYMOUS,
+                User::STATUS_ACTIVE,
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
-                '127.0.0.1',
                 ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
             ],
-            'active member can open from premises' => [User::ROLE_MEMBER, User::STATUS_ACTIVE,
+            'individual member can open' => [
+                User::ROLE_INDIVIDUAL,
+                User::STATUS_ACTIVE,
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
-                '127.0.0.1',
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
             ],
-            'active member not on premises cannot open' => [User::ROLE_MEMBER, User::STATUS_ACTIVE,
+            'active member can open' => [
+                User::ROLE_MEMBER,
+                User::STATUS_ACTIVE,
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
-                '192.168.1.1',
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+            ],
+            'inactive member cannot open' => [
+                User::ROLE_MEMBER,
+                User::STATUS_INACTIVE,
+                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
                 ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
             ],
-            'inactive member cannot open' => [User::ROLE_MEMBER, User::STATUS_INACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
-                '127.0.0.1',
-                ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
-            ],
-            'responsible can open' => [User::ROLE_RESPONSIBLE, User::STATUS_ACTIVE,
+            'responsible can open' => [
+                User::ROLE_RESPONSIBLE,
+                User::STATUS_ACTIVE,
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
-                '127.0.0.1',
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
             ],
-            'administrator can open' => [User::ROLE_ADMINISTRATOR, User::STATUS_ACTIVE,
+            'administrator can open' => [
+                User::ROLE_ADMINISTRATOR,
+                User::STATUS_ACTIVE,
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
-                '127.0.0.1',
                 ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
             ],
         ];
@@ -262,18 +268,17 @@ class UserTest extends TestCase
      * @param string $role
      * @param string $status
      * @param array $doors
-     * @param string $remoteHost
      * @param array $result
      */
-    public function testCanOpenDoor(string $role, string $status, array $doors, string $remoteHost, array $result): void
+    public function testCanOpenDoor(string $role, string $status, array $doors, array $result): void
     {
-        $_SERVER['REMOTE_ADDR'] = $remoteHost;
         $user = new User($role);
         $user->setStatus($status);
         foreach ($doors as $door => $value) {
             $setter = 'set' . ucfirst($door);
             $user->$setter($value);
         }
+
         foreach ($result as $door => $canOpen) {
             self::assertSame($canOpen, $user->getCanOpenDoor($door));
         }

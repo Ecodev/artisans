@@ -26,7 +26,6 @@ return [
     'doorsApi' => [
         'endpoint' => 'http://localhost:8888',
         'token' => 'my-token-value',
-        'authorizedIps' => ['localhost'],
     ],
     'fromEmail' => 'noreply@my-ichtus.lan',
     'emailOverride' => 'your@email.com',

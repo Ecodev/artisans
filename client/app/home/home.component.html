@@ -10,25 +10,27 @@
             <app-icon name="ichtus" [size]="60"></app-icon>
         </a>
 
-        <div fxFlex></div>
+        <div *ngIf="route.snapshot.data.viewer?.model" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" fxFlex>
+            <div fxFlex></div>
 
-        <div fxFlex id="searchByCode" fxLayout="row" fxLayoutAlign="start center" fxHide.xs>
-            <input fxFlex placeholder="Recherche par code" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
-            <a mat-icon-button [routerLink]="['/booking', code]">
-                <app-icon name="search"></app-icon>
+            <div fxFlex id="searchByCode" fxLayout="row" fxLayoutAlign="start center" fxHide.xs>
+                <input fxFlex placeholder="Recherche par code" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
+                <a mat-icon-button [routerLink]="['/booking', code]">
+                    <app-icon name="search"></app-icon>
+                </a>
+            </div>
+
+            <a mat-icon-button mat-flat-button color="primary" routerLink="/booking/by-scan">
+                <app-icon name="simple-qr" [size]="24"></app-icon>
+            </a>
+
+            <div fxFlex></div>
+
+            <a mat-icon-button routerLink="/profile">
+                <ngx-avatar [name]="route.snapshot.data.viewer.model.name" [size]="50" style="position:relative;top:-5px;left:-5px"
+                ></ngx-avatar>
             </a>
         </div>
-
-        <a mat-icon-button mat-flat-button color="primary" routerLink="/booking/by-scan">
-            <app-icon name="simple-qr" [size]="24"></app-icon>
-        </a>
-
-        <div fxFlex></div>
-
-        <a mat-icon-button routerLink="/profile">
-            <ngx-avatar [name]="route.snapshot.data.viewer.model.name" [size]="50" style="position:relative;top:-5px;left:-5px"
-            ></ngx-avatar>
-        </a>
 
     </mat-toolbar>
 

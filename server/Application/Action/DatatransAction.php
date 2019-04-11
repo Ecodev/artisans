@@ -146,19 +146,19 @@ class DatatransAction extends AbstractAction
         $this->entityManager->persist($transaction);
         $transaction->setName($name);
         $transaction->setTransactionDate($now);
+        $transaction->setDatatransRef($datatransRef);
+
+        // This could be removed later on. For now it's mostly for debugging
+        $transaction->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
 
         $line = new TransactionLine();
         $this->entityManager->persist($line);
         $line->setName($name);
         $line->setTransactionDate($now);
         $line->setBalance((string) ($body['amount'] / 100));
-        $line->setDatatransRef($datatransRef);
         $line->setTransaction($transaction);
         $line->setCredit($userAccount);
         $line->setDebit($bankAccount);
-
-        // This could be removed later on. For now it's mostly for debugging
-        $transaction->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
 
         $this->entityManager->flush();
     }

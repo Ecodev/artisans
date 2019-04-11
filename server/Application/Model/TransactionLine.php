@@ -84,13 +84,6 @@ class TransactionLine extends AbstractModel
     private $transactionTag;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=18, options={"default" = ""})
-     */
-    private $datatransRef = '';
-
-    /**
      * @var bool
      *
      * @ORM\Column(type="boolean", options={"default" = 0})
@@ -118,26 +111,6 @@ class TransactionLine extends AbstractModel
     public function getTransaction(): Transaction
     {
         return $this->transaction;
-    }
-
-    /**
-     * Get Datatrans payment reference number
-     *
-     * @param string $datatransRef
-     */
-    public function setDatatransRef(string $datatransRef): void
-    {
-        $this->datatransRef = $datatransRef;
-    }
-
-    /**
-     * Set Datatrans payment reference number
-     *
-     * @return string
-     */
-    public function getDatatransRef(): string
-    {
-        return $this->datatransRef;
     }
 
     /**

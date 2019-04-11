@@ -19,6 +19,12 @@
                             <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
+
+                        <mat-form-field>
+                            <mat-label>Transaction Datatrans</mat-label>
+                            <input matInput formControlName="datatransRef">
+                        </mat-form-field>
+
                     </div>
 
                     <div fxFlex="33" fxLayout="column">

@@ -85,6 +85,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
+            datatransRef: []
         };
     }
 

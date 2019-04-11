@@ -59,7 +59,6 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
             credit: null,
             debit: null,
             bookable: null,
-            datatransRef: '',
             isReconciled: false,
             transactionDate: '',
             transactionTag: null,

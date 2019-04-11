@@ -16,7 +16,6 @@ export const transactionLineMetaFragment = gql`
             name
             type
         }
-        datatransRef
         bookable{
             id
             name

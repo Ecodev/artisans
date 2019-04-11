@@ -52,6 +52,13 @@ class Transaction extends AbstractModel
     private $expenseClaim;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=18, options={"default" = ""})
+     */
+    private $datatransRef = '';
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -165,5 +172,25 @@ class Transaction extends AbstractModel
     public function getExpenseClaim(): ?ExpenseClaim
     {
         return $this->expenseClaim;
+    }
+
+    /**
+     * Get Datatrans payment reference number
+     *
+     * @param string $datatransRef
+     */
+    public function setDatatransRef(string $datatransRef): void
+    {
+        $this->datatransRef = $datatransRef;
+    }
+
+    /**
+     * Set Datatrans payment reference number
+     *
+     * @return string
+     */
+    public function getDatatransRef(): string
+    {
+        return $this->datatransRef;
     }
 }

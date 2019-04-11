@@ -192,6 +192,7 @@ export abstract class AbstractModelServiceSpec {
         let result: Observable<any> | null = null;
         const tickDelay = 20; // should match AbstractModel.watchAll debounceTime value
         const qvm = new QueryVariablesManager<any>();
+        qvm.set('channel', {search: 'initial'});
 
         const getActual = () => {
             result = getObservable(qvm);
@@ -209,16 +210,26 @@ export abstract class AbstractModelServiceSpec {
 
         if (expectSuccess) {
             getActual();
-            qvm.set('foo', {foo: 'initial'});
-            tick(tickDelay);
 
+            tick(tickDelay);
             expect(count).toBe(1);
             expect(actual).toEqual(jasmine.anything());
 
             if (expectNextVariables) {
+                expect(completed).toBe(false);
+
+                qvm.set('channel', {search: 'intermediate'});
+                tick(tickDelay);
+
+                expect(count).toBe(3, 'Must be 3 because we got a cached response first, then final response from network');
+                expect(actual).toEqual(jasmine.anything());
+                expect(completed).toBe(false);
+
                 qvm.set('channel', {search: 'final'});
                 tick(tickDelay);
-                expect(count).toBe(3); // Must be 3 because we got a cached response first, then final response from network
+
+                expect(count).toBe(5, 'Must be 5 because we got a cached response first, then final response from network');
+                expect(actual).toEqual(jasmine.anything());
                 expect(completed).toBe(false);
             } else {
                 expect(completed).toBe(true);

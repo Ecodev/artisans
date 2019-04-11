@@ -1,5 +1,5 @@
 import { Apollo } from 'apollo-angular';
-import { Observable, of, OperatorFunction, Subject, Subscription } from 'rxjs';
+import { Observable, of, OperatorFunction, ReplaySubject, Subject, Subscription } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
@@ -190,8 +190,7 @@ export abstract class AbstractModelService<Tone,
         let lastSubscription: Subscription | null = null;
 
         // Observable that wraps the result from apollo queryRef
-        // const resultObservable = new ExpireSubject<Tall>();
-        const resultObservable = new Subject<Tall>();
+        const resultObservable = new ReplaySubject<Tall>(1);
 
         const expireFn = () => {
             if (lastSubscription) {
@@ -202,10 +201,11 @@ export abstract class AbstractModelService<Tone,
 
         expire.subscribe(expireFn);
 
-        // Wait for variables to be defined (different from undefined)
-        // Null is accepted value for "no variables"
+        // Ignore very fast variable changes
         queryVariablesManager.variables.pipe(debounceTime(20), takeUntil(expire)).subscribe(variables => {
 
+            // Wait for variables to be defined to prevent duplicate query: with and without variables
+            // Null is accepted value for "no variables"
             if (typeof variables !== 'undefined') {
 
                 expireFn();
@@ -220,11 +220,10 @@ export abstract class AbstractModelService<Tone,
                     variables: manager.variables.value,
                 });
 
-                // Subscription cause query to be sent
-                // First run must occur after first variables changes to prevent duplicate query : with and without variables
+                // Subscription cause query to be sent to server
                 lastSubscription = lastQueryRef.valueChanges
-                                               .pipe(filter(r => !!r.data), this.mapAll())
-                                               .subscribe(result => resultObservable.next(result));
+                    .pipe(filter(r => !!r.data), this.mapAll())
+                    .subscribe(result => resultObservable.next(result));
             }
         });
 

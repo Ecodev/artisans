@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Model\Message;
+use Application\Repository\LogRepository;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
+use Exception;
 use Zend\Mail;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\Mime\Message as MimeMessage;
@@ -18,6 +20,11 @@ use Zend\Mime\Part as MimePart;
  */
 class Mailer
 {
+    /**
+     * @var resource
+     */
+    private $lock;
+
     /**
      * @var EntityManager
      */
@@ -133,9 +140,36 @@ class Mailer
      */
     public function sendAllMessages(): void
     {
+        $this->acquireLock();
         $messages = $this->entityManager->getRepository(Message::class)->getAllMessageToSend();
         foreach ($messages as $message) {
             $this->sendMessage($message);
+        }
+    }
+
+    /**
+     * Acquire an exclusive lock
+     *
+     * This is to ensure only one mailer can run at any given time. This is to prevent sending the same email twice.
+     */
+    private function acquireLock(): void
+    {
+        $lockFile = 'data/tmp/mailer.lock';
+        touch($lockFile);
+        $this->lock = fopen($lockFile, 'r+');
+        if ($this->lock === false) {
+            throw new Exception('Could not read lock file. This is not normal and might be a permission issue');
+        }
+
+        if (!flock($this->lock, LOCK_EX | LOCK_NB)) {
+            $message = LogRepository::MAILER_LOCKED;
+            _log()->info($message);
+
+            echo $message . PHP_EOL;
+            echo 'If the problem persist and another mailing is not in progress, try deleting ' . $lockFile . PHP_EOL;
+
+            // Not getting the lock is not considered as error to avoid being spammed
+            die();
         }
     }
 }

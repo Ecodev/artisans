@@ -31,6 +31,11 @@ class LogRepository extends AbstractRepository
     const UPDATE_PASSWORD_FAILED = 'update password failed';
 
     /**
+     * Log message to be used when trying to send email but it's already running
+     */
+    const MAILER_LOCKED = 'Unable to obtain lock for mailer, try again later.';
+
+    /**
      * This should NOT be called directly, instead use `_log()` to log stuff
      *
      * @param array $event

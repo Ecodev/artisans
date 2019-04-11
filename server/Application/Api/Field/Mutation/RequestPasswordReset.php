@@ -10,6 +10,7 @@ use Application\DBAL\Types\RelationshipType;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
+use Application\Service\MessageQueuer;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
@@ -28,6 +29,9 @@ abstract class RequestPasswordReset implements FieldInterface
                 global $container;
                 /** @var Mailer $mailer */
                 $mailer = $container->get(Mailer::class);
+
+                /** @var MessageQueuer $messageQueuer */
+                $messageQueuer = $container->get(MessageQueuer::class);
 
                 /** @var UserRepository $repository */
                 $repository = _em()->getRepository(User::class);
@@ -49,7 +53,7 @@ abstract class RequestPasswordReset implements FieldInterface
                     }
 
                     if ($email) {
-                        $message = $mailer->queueResetPassword($user, $email);
+                        $message = $messageQueuer->queueResetPassword($user, $email);
                         $mailer->sendMessageAsync($message);
                     }
                 }

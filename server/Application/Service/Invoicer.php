@@ -12,6 +12,9 @@ use Application\Model\User;
 use Cake\Chronos\Date;
 use Doctrine\ORM\EntityManager;
 
+/**
+ * Service to create transactions for non-free booking, if needed, for all users or one user
+ */
 class Invoicer
 {
     /**

@@ -8,6 +8,7 @@ use Application\Api\Field\FieldInterface;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
+use Application\Service\MessageQueuer;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
@@ -29,6 +30,9 @@ abstract class Register implements FieldInterface
                 /** @var Mailer $mailer */
                 $mailer = $container->get(Mailer::class);
 
+                /** @var MessageQueuer $messageQueuer */
+                $messageQueuer = $container->get(MessageQueuer::class);
+
                 /** @var UserRepository $repository */
                 $repository = _em()->getRepository(User::class);
 
@@ -48,9 +52,9 @@ abstract class Register implements FieldInterface
                 $user->setTermsAgreement($args['termsAgreement']);
 
                 if ($existingUser && $user->getLogin()) {
-                    $message = $mailer->queueResetPassword($user, $user->getEmail());
+                    $message = $messageQueuer->queueResetPassword($user, $user->getEmail());
                 } else {
-                    $message = $mailer->queueRegister($user);
+                    $message = $messageQueuer->queueRegister($user);
                 }
 
                 $mailer->sendMessageAsync($message);

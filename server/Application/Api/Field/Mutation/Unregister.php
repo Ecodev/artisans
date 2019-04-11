@@ -9,6 +9,7 @@ use Application\Api\Helper;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
+use Application\Service\MessageQueuer;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
@@ -27,6 +28,9 @@ abstract class Unregister implements FieldInterface
                 global $container;
                 /** @var Mailer $mailer */
                 $mailer = $container->get(Mailer::class);
+
+                /** @var MessageQueuer $messageQueuer */
+                $messageQueuer = $container->get(MessageQueuer::class);
 
                 /** @var User $user */
                 $user = $args['id']->getEntity();
@@ -53,7 +57,7 @@ abstract class Unregister implements FieldInterface
                 $repository = _em()->getRepository(User::class);
                 $admins = $repository->getAllAdministratorsToNotify();
                 foreach ($admins as $admin) {
-                    $message = $mailer->queueUnregister($admin, $user);
+                    $message = $messageQueuer->queueUnregister($admin, $user);
                     $mailer->sendMessageAsync($message);
                 }
 

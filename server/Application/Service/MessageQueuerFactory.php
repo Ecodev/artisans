@@ -6,29 +6,27 @@ namespace Application\Service;
 
 use Doctrine\ORM\EntityManager;
 use Interop\Container\ContainerInterface;
-use Zend\Mail\Transport\TransportInterface;
+use Zend\View\Renderer\RendererInterface;
 
-class MailerFactory
+class MessageQueuerFactory
 {
     /**
      * Return a configured mailer
      *
      * @param ContainerInterface $container
      *
-     * @return Mailer
+     * @return MessageQueuer
      */
-    public function __invoke(ContainerInterface $container): Mailer
+    public function __invoke(ContainerInterface $container): MessageQueuer
     {
         $entityManager = $container->get(EntityManager::class);
-        $transport = $container->get(TransportInterface::class);
+        $renderer = $container->get(RendererInterface::class);
         $config = $container->get('config');
 
-        return new Mailer(
+        return new MessageQueuer(
             $entityManager,
-            $transport,
-            $config['emailOverride'] ?? null,
-            $config['fromEmail'],
-            $config['phpPath']
+            $renderer,
+            $config['hostname']
         );
     }
 }

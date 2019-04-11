@@ -31,6 +31,7 @@ return [
             \Application\Service\ImageResizer::class => \Application\Service\ImageResizerFactory::class,
             \Imagine\Image\ImagineInterface::class => \Application\Service\ImagineFactory::class,
             \Application\Service\Mailer::class => \Application\Service\MailerFactory::class,
+            \Application\Service\MessageQueuer::class => \Application\Service\MessageQueuerFactory::class,
             \Application\Service\Invoicer::class => \Application\Service\InvoicerFactory::class,
             \Application\Service\Importer::class => \Application\Service\ImporterFactory::class,
             \Zend\View\Renderer\RendererInterface::class => \Application\Service\RendererFactory::class,

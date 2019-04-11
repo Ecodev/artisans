@@ -678,7 +678,7 @@ class User extends AbstractModel
     /**
      * @return bool
      */
-    public function getHasInsurance(): bool
+    public function hasInsurance(): bool
     {
         return $this->hasInsurance;
     }

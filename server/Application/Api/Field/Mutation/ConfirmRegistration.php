@@ -9,6 +9,7 @@ use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
 use Application\DBAL\Types\BookingStatusType;
 use Application\DBAL\Types\BookingTypeType;
+use Application\Model\Account;
 use Application\Model\Bookable;
 use Application\Model\Booking;
 use Application\Model\User;
@@ -42,6 +43,10 @@ abstract class ConfirmRegistration implements FieldInterface
                 if (!$user || !$user->isTokenValid()) {
                     throw new Exception('Cannot confirm registration with an invalid token');
                 }
+
+                /** @var AccountRepository $accountRepo */
+                $accountRepo = _em()->getRepository(Account::class);
+                $accountRepo->getOrCreate($user);
 
                 // Do it
                 $input = $args['input'];

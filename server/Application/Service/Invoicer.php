@@ -97,8 +97,14 @@ class Invoicer
     private function calculateBalance(Booking $booking): string
     {
         $bookable = $booking->getBookable();
+        $simultaneous = $bookable->getSimultaneousBookingMaximum();
 
-        $price = (string) bcadd($bookable->getPeriodicPrice(), $bookable->getInitialPrice());
+        // If infinite booking, pay full price
+        if (!($simultaneous > 1)) {
+            $simultaneous = 1;
+        }
+
+        $price = (string) ($bookable->getPeriodicPrice() / $simultaneous);
 
         return $price;
     }

@@ -52,7 +52,7 @@ class BookingRepository extends AbstractRepository
             AND booking.start_date < :nextYear
             AND (booking.end_date IS NULL OR booking.end_date >= :nextYear)
             AND bookable.is_active
-            AND (bookable.periodic_price != 0 OR bookable.initial_price != 0)
+            AND bookable.periodic_price != 0
             AND transaction_line.id IS NULL
             ORDER BY booking.owner_id ASC, bookable.name ASC
         ";

@@ -483,15 +483,24 @@ EOT;
             }
 
             // Assigne les tags au membre
+            $linkToTag->bindValue(':user_id', $user['uid']);
             if (!empty($user['ichtus_comite_fonction'])) {
                 $userTagId = $this->insertUserTag($user['ichtus_comite_fonction']);
-                $linkToTag->bindValue(':user_id', $user['uid']);
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
             }
             if (!empty($this->users[$user['uid']]['ichtus_NFT'])) {
                 $userTagId = $this->insertUserTag('Membre NFT');
-                $linkToTag->bindValue(':user_id', $user['uid']);
+                $linkToTag->bindValue(':user_tag_id', $userTagId);
+                $linkToTag->execute();
+            }
+            if ($user['ichtus_permisvoile']) {
+                $userTagId = $this->insertUserTag('Permis voile');
+                $linkToTag->bindValue(':user_tag_id', $userTagId);
+                $linkToTag->execute();
+            }
+            if ($user['ichtus_permismoteur']) {
+                $userTagId = $this->insertUserTag('Permis moteur');
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
             }

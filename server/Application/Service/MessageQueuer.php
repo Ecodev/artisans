@@ -6,6 +6,7 @@ namespace Application\Service;
 
 use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Bookable;
+use Application\Model\Booking;
 use Application\Model\Message;
 use Application\Model\User;
 use Doctrine\ORM\EntityManager;
@@ -89,7 +90,7 @@ class MessageQueuer
      *
      * @return Message
      */
-    public function queueBalance(User $user, array $bookables): Message
+    public function queueBalance(User $user, iterable $bookables): Message
     {
         $subject = 'Balance de compte';
         $mailParams = [
@@ -141,5 +142,37 @@ class MessageQueuer
         $this->entityManager->persist($message);
 
         return $message;
+    }
+
+    /**
+     * @param User[] $users
+     *
+     * @return int
+     */
+    private function queueBalanceForEachUsers(array $users): int
+    {
+        foreach ($users as $user) {
+            $bookables = $user->getBookings()->map(function (Booking $booking) {
+                return $booking->getBookable();
+            });
+
+            $this->queueBalance($user, $bookables);
+        }
+
+        return count($users);
+    }
+
+    public function queueAllBalance(): int
+    {
+        $users = $this->entityManager->getRepository(User::class)->getAllToQueueBalanceMessage();
+
+        return $this->queueBalanceForEachUsers($users);
+    }
+
+    public function queueNegativeBalance(): int
+    {
+        $users = $this->entityManager->getRepository(User::class)->getAllToQueueBalanceMessage(true);
+
+        return $this->queueBalanceForEachUsers($users);
     }
 }

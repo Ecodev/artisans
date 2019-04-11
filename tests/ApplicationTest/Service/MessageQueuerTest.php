@@ -20,7 +20,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
     {
         global $container;
 
-        $entityManager = $this->createMock(EntityManager::class);
+        $entityManager = $container->get(EntityManager::class);
         $renderer = $container->get(RendererInterface::class);
 
         $messageQueuer = new MessageQueuer(
@@ -96,6 +96,22 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $message = $messageQueuer->queueBalance($user, $bookables);
 
         $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::BALANCE, 'Balance de compte', $variant);
+    }
+
+    public function testQueueAllBalance(): void
+    {
+        $messageQueuer = $this->createMockMessageQueuer();
+        $actual = $messageQueuer->queueAllBalance();
+
+        self::assertsame(1, $actual);
+    }
+
+    public function testQueueNegativeBalance(): void
+    {
+        $messageQueuer = $this->createMockMessageQueuer();
+        $actual = $messageQueuer->queueNegativeBalance();
+
+        self::assertsame(0, $actual);
     }
 
     private function createMockUser(): User

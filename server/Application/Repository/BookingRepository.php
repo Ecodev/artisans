@@ -45,7 +45,7 @@ class BookingRepository extends AbstractRepository
                 AND transaction_line.transactionDate >= :currentYear
                 AND transaction_line.transactionDate < :nextYear
             WHERE
-            user.status IN (:userStatus)
+            user.status != :userStatus
             $userFilter
             AND bookable.booking_type IN (:bookingType)
             AND booking.status = :bookingStatus
@@ -60,7 +60,7 @@ class BookingRepository extends AbstractRepository
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm)
             ->setParameter('bookingType', [BookingTypeType::MANDATORY, BookingTypeType::ADMIN_ONLY], Connection::PARAM_STR_ARRAY)
             ->setParameter('bookingStatus', BookingStatusType::BOOKED)
-            ->setParameter('userStatus', [User::STATUS_ACTIVE, User::STATUS_INACTIVE], Connection::PARAM_STR_ARRAY)
+            ->setParameter('userStatus', User::STATUS_ARCHIVED)
             ->setParameter('currentYear', Date::now()->firstOfYear()->toDateString())
             ->setParameter('nextYear', Date::now()->firstOfYear()->addYear()->toDateString())
             ->setParameter('roles', [User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR], Connection::PARAM_STR_ARRAY);

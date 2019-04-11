@@ -246,9 +246,9 @@ class BookingRepositoryTest extends AbstractRepositoryTest
                 $archivedUser,
                 [],
             ],
-            'new user get nothing' => [
+            'new user get casier and cotisation' => [
                 $newUser,
-                [],
+                ['casier', 'cotisation'],
             ],
             'anonymous user get nothing' => [
                 $anonymousUser,

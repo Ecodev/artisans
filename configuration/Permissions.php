@@ -85,6 +85,14 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/queue-message-for-all-balance.php',
+        'permissions' => '0750',
+    ],
+    [
+        'path' => 'bin/queue-message-for-negative-balance.php',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/send-message.php',
         'permissions' => '0750',
     ],

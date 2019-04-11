@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\DBAL\Types\BookingTypeType;
 use Application\Model\User;
 use Cake\Chronos\Chronos;
+use Doctrine\DBAL\Connection;
 
 class UserRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
 {
@@ -115,6 +117,36 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             ->andWhere("user.email IS NOT NULL AND user.email != ''")
             ->setParameter('status', User::STATUS_ACTIVE)
             ->setParameter('role', User::ROLE_ADMINISTRATOR);
+
+        $this->getAclFilter()->setEnabled(false);
+        $result = $qb->getQuery()->getResult();
+        $this->getAclFilter()->setEnabled(true);
+
+        return $result;
+    }
+
+    public function getAllToQueueBalanceMessage(bool $onlyNegativeBalance = false): array
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->addSelect('account')
+            ->addSelect('booking')
+            ->addSelect('bookable')
+            ->join('user.accounts', 'account')
+            ->join('user.bookings', 'booking')
+            ->join('booking.bookable', 'bookable')
+            ->andWhere('user.status != :status')
+            ->andWhere("user.email IS NOT NULL AND user.email != ''")
+            ->andWhere('bookable.bookingType IN (:bookingType)')
+            ->andWhere('bookable.isActive = true')
+            ->andWhere('bookable.periodicPrice != 0')
+            ->setParameter('bookingType', [BookingTypeType::MANDATORY, BookingTypeType::ADMIN_ONLY], Connection::PARAM_STR_ARRAY)
+            ->setParameter('status', User::STATUS_ARCHIVED)
+            ->addOrderBy('user.id')
+            ->addOrderBy('bookable.name');
+
+        if ($onlyNegativeBalance) {
+            $qb->andWhere('account.balance < 0');
+        }
 
         $this->getAclFilter()->setEnabled(false);
         $result = $qb->getQuery()->getResult();

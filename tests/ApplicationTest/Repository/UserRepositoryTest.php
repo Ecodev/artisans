@@ -54,7 +54,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
         self::assertNotSame(md5('administrator'), $hash, 'password should have been re-hashed automatically');
     }
 
-    public function testgetOneByLogin(): void
+    public function testGetOneByLogin(): void
     {
         self::assertNull($this->repository->getOneById(1), 'wrong user');
 
@@ -67,5 +67,25 @@ class UserRepositoryTest extends AbstractRepositoryTest
     {
         $actual = $this->repository->getAllAdministratorsToNotify();
         self::assertCount(1, $actual);
+    }
+
+    public function testGetAllToQueueBalanceMessage(): void
+    {
+        $actual = $this->repository->getAllToQueueBalanceMessage();
+        self::assertCount(1, $actual);
+
+        $actualBookings = [];
+        foreach ($actual[0]->getBookings() as $booking) {
+            $actualBookings[] = $booking->getId();
+        }
+
+        $expected = [4004, 4005, 4015];
+        self::assertSame($expected, $actualBookings, 'must have pre-loaded only the bookings that we are interested in');
+    }
+
+    public function testGetAllToQueueBalanceMessageNegative(): void
+    {
+        $actual = $this->repository->getAllToQueueBalanceMessage(true);
+        self::assertCount(0, $actual);
     }
 }

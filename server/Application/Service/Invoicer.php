@@ -34,8 +34,6 @@ class Invoicer
 
     public function invoice(?User $user = null): int
     {
-        error_log('invoice', 0);
-
         $this->count = 0;
         $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice($user);
 

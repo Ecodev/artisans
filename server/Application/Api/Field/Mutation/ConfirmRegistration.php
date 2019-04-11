@@ -9,10 +9,10 @@ use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
 use Application\DBAL\Types\BookingStatusType;
 use Application\DBAL\Types\BookingTypeType;
-use Application\Model\Account;
 use Application\Model\Bookable;
 use Application\Model\Booking;
 use Application\Model\User;
+use Application\Repository\AccountRepository;
 use Application\Repository\UserRepository;
 use Cake\Chronos\Chronos;
 use GraphQL\Type\Definition\Type;
@@ -45,8 +45,8 @@ abstract class ConfirmRegistration implements FieldInterface
                 }
 
                 /** @var AccountRepository $accountRepo */
-                $accountRepo = _em()->getRepository(Account::class);
-                $accountRepo->getOrCreate($user);
+                // $accountRepo = _em()->getRepository(Account::class);
+                // $accountRepo->getOrCreate($user);
 
                 // Do it
                 $input = $args['input'];

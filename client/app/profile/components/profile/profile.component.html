@@ -37,7 +37,7 @@
 
     </div>
 
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px">
 
         <div fxLayout="column">
             <mat-divider class="margin-bottom"></mat-divider>
@@ -45,57 +45,31 @@
             <div fxLayout="row wrap" fxLayout.gt-sm="column" fxLayoutGap="20px grid" id="menu">
 
                 <div [style.max-width.px]="150">
-                    <a mat-button
-                       fxLayout="column"
-                       fxLayoutAlign="start center"
-                       routerLink="/profile"
-                       class="big-button"
-
-                    >
+                    <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile" class="big-button">
                         <app-icon name="lake" [size]="50"></app-icon>
                         Sorties
                     </a>
                 </div>
                 <div [style.max-width.px]="150">
-                    <a mat-button
-                       fxLayout="column"
-                       fxLayoutAlign="start center"
-                       routerLink="family"
-                       class="big-button"
-                    >
+                    <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="family" class="big-button">
                         <app-icon name="family" [size]="50"></app-icon>
                         Famille
                     </a>
                 </div>
                 <div [style.max-width.px]="150">
-                    <a mat-button
-                       fxLayout="column"
-                       fxLayoutAlign="start center"
-                       routerLink="history"
-                       class="big-button"
-                    >
+                    <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="history" class="big-button">
                         <app-icon name="transactionHistory" [size]="50"></app-icon>
                         Historique des transactions
                     </a>
                 </div>
                 <div [style.max-width.px]="150">
-                    <a mat-button
-                       fxLayout="column"
-                       fxLayoutAlign="start center"
-                       routerLink="finances"
-                       class="big-button"
-                    >
+                    <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="finances" class="big-button">
                         <app-icon name="claims" [size]="50"></app-icon>
                         Dépenses et remboursements
                     </a>
                 </div>
                 <div *ngIf="canAccessServices()" [style.max-width.px]="150">
-                    <a mat-button
-                       fxLayout="column"
-                       fxLayoutAlign="start center"
-                       routerLink="services"
-                       class="big-button"
-                    >
+                    <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="services" class="big-button">
                         <app-icon name="ichtus" [size]="50"></app-icon>
                         Cotisation et services
                     </a>
@@ -105,9 +79,7 @@
 
         <div fxFlex fxLayout="column">
             <mat-divider class="margin-bottom"></mat-divider>
-            <div class="padding">
-                <router-outlet></router-outlet>
-            </div>
+            <router-outlet></router-outlet>
         </div>
 
     </div>

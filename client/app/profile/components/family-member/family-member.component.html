@@ -8,6 +8,37 @@
                          placeholder="Rôle dans la famille"
         ></app-select-enum>
 
+        <mat-divider class="margin-bottom"></mat-divider>
+
+        <h2 class="mat-title">Compte</h2>
+
+        <div fxLayout="column">
+
+            <mat-form-field fxFlex>
+                <mat-label>email</mat-label>
+                <input matInput formControlName="email" (change)="update()">
+                <app-icon matPrefix name="alternate_email"></app-icon>
+                <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
+                <mat-error *ngIf="form.get('email').hasError('email')">Adresse email invalide</mat-error>
+            </mat-form-field>
+
+            <mat-form-field fxFlex>
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput formControlName="login" (change)="update()">
+                <app-icon matPrefix name="person"></app-icon>
+                <mat-error *ngIf="form.get('login').hasError('maxlength')">
+                    Maximum {{form.get('login').errors.maxlength.requiredLength}} caractères
+                </mat-error>
+                <mat-error *ngIf="form.get('login').hasError('required')">Requis</mat-error>
+                <mat-error *ngIf="form.get('login').hasError('invalid')">{{ form.get('login').getError('invalid') }}</mat-error>
+            </mat-form-field>
+
+        </div>
+
+        <mat-divider class="margin-bottom"></mat-divider>
+
+        <h2 class="mat-title">Coordonnées</h2>
+
         <mat-form-field>
             <mat-label>Prénom</mat-label>
             <input matInput formControlName="firstName" (change)="update()">
@@ -38,31 +69,6 @@
         <mat-form-field fxFlex>
             <mat-label>Téléphone mobile</mat-label>
             <input matInput formControlName="mobilePhone" (change)="update()">
-        </mat-form-field>
-
-    </div>
-
-    <mat-divider class="margin-bottom"></mat-divider>
-
-    <div fxLayout="column">
-
-        <mat-form-field fxFlex>
-            <mat-label>email</mat-label>
-            <input matInput formControlName="email" (change)="update()">
-            <app-icon matPrefix name="alternate_email"></app-icon>
-            <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
-            <mat-error *ngIf="form.get('email').hasError('email')">Adresse email invalide</mat-error>
-        </mat-form-field>
-
-        <mat-form-field fxFlex>
-            <mat-label>Nom d'utilisateur</mat-label>
-            <input matInput formControlName="login" (change)="update()">
-            <app-icon matPrefix name="person"></app-icon>
-            <mat-error *ngIf="form.get('login').hasError('maxlength')">
-                Maximum {{form.get('login').errors.maxlength.requiredLength}} caractères
-            </mat-error>
-            <mat-error *ngIf="form.get('login').hasError('required')">Requis</mat-error>
-            <mat-error *ngIf="form.get('login').hasError('invalid')">{{ form.get('login').getError('invalid') }}</mat-error>
         </mat-form-field>
 
     </div>

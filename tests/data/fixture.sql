@@ -248,8 +248,8 @@ REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime
 (9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
 
 REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
-(11001, -1000, -1000, -1002, 'monthly_reminder', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
-(11002, -1001, -1001, -1005, 'yearly_reminder', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
+(11001, -1000, -1000, -1002, 'balance', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Ichtus présente un solde négatif'),
+(11002, -1001, -1001, -1005, 'reset_password', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
 (12000, -1000, -1000, 'Moniteur voile', '#0000FF'),

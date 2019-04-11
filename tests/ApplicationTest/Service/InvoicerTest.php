@@ -25,7 +25,9 @@ class InvoicerTest extends TestCase
         $actual = $invoicer->invoice();
         self::assertSame(2, $actual);
 
+        _em()->flush();
+
         $actual2 = $invoicer->invoice();
-        self::assertSame(0, $actual2);
+        self::assertSame(0, $actual2, 'should not invoice things that are already invoiced');
     }
 }

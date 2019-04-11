@@ -19,11 +19,7 @@ class InvoicerFactory
     public function __invoke(ContainerInterface $container): Invoicer
     {
         $entityManager = $container->get(EntityManager::class);
-        $mailer = $container->get(Mailer::class);
 
-        return new Invoicer(
-            $entityManager,
-            $mailer
-        );
+        return new Invoicer($entityManager);
     }
 }

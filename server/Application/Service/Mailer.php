@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\DBAL\Types\MessageTypeType;
+use Application\Model\Bookable;
 use Application\Model\Message;
-use Application\Model\Transaction;
 use Application\Model\User;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
@@ -110,19 +110,20 @@ class Mailer
         return $message;
     }
 
-    public function queueInvoice(User $user, Transaction $transaction): Message
+    /**
+     * @param User $user
+     * @param Bookable[] $bookables
+     *
+     * @return Message
+     */
+    public function queueBalance(User $user, array $bookables): Message
     {
-        $total = '0';
-        foreach ($transaction->getTransactionLines() as $line) {
-            $total = bcadd($total, $line->getBalance(), 2);
-        }
-        $subject = 'Débit de compte';
+        $subject = 'Balance de compte';
         $mailParams = [
-            'transaction' => $transaction,
-            'total' => $total,
+            'bookables' => $bookables,
         ];
 
-        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::INVOICE, $mailParams);
+        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::BALANCE, $mailParams);
 
         return $message;
     }

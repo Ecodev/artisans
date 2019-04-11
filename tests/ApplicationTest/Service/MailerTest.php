@@ -8,8 +8,6 @@ use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Account;
 use Application\Model\Bookable;
 use Application\Model\Message;
-use Application\Model\Transaction;
-use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Service\Mailer;
 use Doctrine\ORM\EntityManager;
@@ -68,27 +66,27 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $user, 'householder@example.com', MessageTypeType::RESET_PASSWORD, 'Demande de modification de mot de passe');
     }
 
-    public function testQueueInvoicePositive(): void
+    public function testQueueBalancePositive(): void
     {
-        $transaction = new Transaction();
-        $this->creatTransactionLine($transaction, 'Cotisation', '90.00');
-        $this->creatTransactionLine($transaction, 'Fonds de réparation interne', '10.00');
+        $bookables = [];
+        $bookables[] = $this->createBookable('Cotisation', '90.00');
+        $bookables[] = $this->createBookable('Fonds de réparation interne', '10.00');
 
-        $this->queueInvoice($transaction, 'positive');
+        $this->queueBalance($bookables, 'positive');
     }
 
-    public function testQueueInvoiceNegative(): void
+    public function testQueueBalanceNegative(): void
     {
-        $transaction = new Transaction();
-        $this->creatTransactionLine($transaction, 'Cotisation', '90.00');
-        $this->creatTransactionLine($transaction, 'Fonds de réparation interne', '10.00');
-        $this->creatTransactionLine($transaction, 'Casier 1012', '20.00');
-        $this->creatTransactionLine($transaction, 'Casier 1014', '20.00');
+        $bookables = [];
+        $bookables[] = $this->createBookable('Cotisation', '90.00');
+        $bookables[] = $this->createBookable('Fonds de réparation interne', '10.00');
+        $bookables[] = $this->createBookable('Casier 1012', '20.00');
+        $bookables[] = $this->createBookable('Casier 1014', '20.00');
 
-        $this->queueInvoice($transaction, 'negative');
+        $this->queueBalance($bookables, 'negative');
     }
 
-    private function queueInvoice(Transaction $transaction, string $variant): void
+    private function queueBalance(array $bookables, string $variant): void
     {
         $user = new User();
         $user->setLogin('john.doe');
@@ -101,9 +99,9 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         $account->setOwner($user);
 
         $mailer = $this->createMockMailer();
-        $message = $mailer->queueInvoice($user, $transaction);
+        $message = $mailer->queueBalance($user, $bookables);
 
-        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::INVOICE, 'Débit de compte', $variant);
+        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::BALANCE, 'Balance de compte', $variant);
     }
 
     public function testSendMessage(): void
@@ -195,14 +193,12 @@ class MailerTest extends \PHPUnit\Framework\TestCase
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
     }
 
-    private function creatTransactionLine(Transaction $transaction, string $bookableName, string $balance): void
+    private function createBookable(string $bookableName, string $periodicPrice): Bookable
     {
         $bookable = new Bookable();
         $bookable->setName($bookableName);
+        $bookable->setPeriodicPrice($periodicPrice);
 
-        $transactionLine = new TransactionLine();
-        $transactionLine->setTransaction($transaction);
-        $transactionLine->setBookable($bookable);
-        $transactionLine->setBalance($balance);
+        return $bookable;
     }
 }

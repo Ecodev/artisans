@@ -39,6 +39,7 @@ describe('UserService', () => {
         door3: true,
         door4: true,
         canOpenDoor: true,
+        receivesNewsletter: true,
         licenses: [
             {
                 id: '456',

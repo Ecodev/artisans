@@ -52,10 +52,11 @@ export abstract class AbstractModelServiceSpec {
 
         it('should watch all with query variables manager',
             fakeAsync(inject([serviceClass], (service: ModelService) => {
+                const expire = new Subject<void>();
                 this.expectNotConfiguredOrEqualForQueryVariablesManager(
                     expectedAll,
-                    (qvm) => service.watchAll(qvm, new Subject()),
-                    true,
+                    (qvm) => service.watchAll(qvm, expire),
+                    expire,
                 );
             })),
         );
@@ -185,7 +186,7 @@ export abstract class AbstractModelServiceSpec {
 
     private static expectNotConfiguredOrEqualForQueryVariablesManager(expectSuccess: boolean,
                                                                       getObservable: (any) => Observable<any>,
-                                                                      expectNextVariables = false): Observable<any> | null {
+                                                                      expire: Subject<void> | null = null): Observable<any> | null {
         let actual = null;
         let completed = false;
         let count = 0;
@@ -215,7 +216,7 @@ export abstract class AbstractModelServiceSpec {
             expect(count).toBe(1);
             expect(actual).toEqual(jasmine.anything());
 
-            if (expectNextVariables) {
+            if (expire) {
                 expect(completed).toBe(false);
 
                 qvm.set('channel', {search: 'intermediate'});
@@ -231,6 +232,13 @@ export abstract class AbstractModelServiceSpec {
                 expect(count).toBe(5, 'Must be 5 because we got a cached response first, then final response from network');
                 expect(actual).toEqual(jasmine.anything());
                 expect(completed).toBe(false);
+
+                expire.next();
+
+                expect(count).toBe(5, 'no more result came');
+                expect(actual).toEqual(jasmine.anything());
+                expect(completed).toBe(true, 'should be completed after calling expire');
+                expect(expire.observers.length).toBe(0, 'expire should not be observed anymore');
             } else {
                 expect(completed).toBe(true);
             }

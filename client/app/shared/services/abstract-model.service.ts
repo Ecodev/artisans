@@ -1,6 +1,6 @@
 import { Apollo } from 'apollo-angular';
 import { Observable, of, OperatorFunction, ReplaySubject, Subject, Subscription } from 'rxjs';
-import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { debounceTime, filter, first, map, takeUntil } from 'rxjs/operators';
 import { Literal } from '../types';
 import { DocumentNode } from 'graphql';
 import { debounce, defaults, isArray, merge, mergeWith, omit, pick } from 'lodash';
@@ -199,7 +199,10 @@ export abstract class AbstractModelService<Tone,
             }
         };
 
-        expire.subscribe(expireFn);
+        expire.pipe(first()).subscribe(() => {
+            expireFn();
+            resultObservable.complete();
+        });
 
         // Ignore very fast variable changes
         queryVariablesManager.variables.pipe(debounceTime(20), takeUntil(expire)).subscribe(variables => {

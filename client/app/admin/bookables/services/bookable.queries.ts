@@ -27,7 +27,7 @@ export const bookableMetaFragment = gql`
         code
         simultaneousBookingMaximum
         bookingType
-        internalRemarks
+        remarks
         image {
             id
         }

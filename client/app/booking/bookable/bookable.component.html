@@ -28,9 +28,8 @@
         <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', bookable.id]">Administration</a>
     </div>
 
-    <div class="mat-subheading-1" [innerHTML]="bookable.description"></div>
-
-    <app-bookable-metadata [bookable]="bookable"></app-bookable-metadata>
+    <div class="mat-headline" [innerHTML]="bookable.description"></div>
+    <div class="mat-subheading-2" [innerHTML]="bookable.remarks"></div>
 </div>
 
 <div *ngIf="!bookable" fxFlex fxLayout="column" fxLayoutAlign="center center" class="padding">

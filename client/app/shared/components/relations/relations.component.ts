@@ -72,6 +72,13 @@ export class RelationsComponent extends AbstractController implements OnInit, On
      * Cause the component to work as one-to-many instead of many-to-many
      */
     @Input() value: any;
+
+    /**
+     * If false, search field is never displayed.
+     * If true, search field is smart and only display when number of items > pageSize
+     */
+    @Input() showSearch = false;
+
     @Output() selectionChange: EventEmitter<any> = new EventEmitter();
 
     /**

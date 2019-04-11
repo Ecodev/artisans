@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="20px">
 
     <div fxLayout="column">
-        <mat-form-field *ngIf="!value && !hideSearch">
+        <mat-form-field *ngIf="showSearch && !value && !hideSearch">
             <mat-label i18n>Rechercher</mat-label>
             <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
             <app-icon name="search" matPrefix></app-icon>
@@ -47,10 +47,10 @@
             <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
         </div>
 
-        <mat-paginator *ngIf="!value && dataSource.data?.length"
-                       [length]="dataSource.data?.length"
-                       [pageSize]="dataSource.data?.pageSize"
-                       [pageIndex]="dataSource.data?.pageIndex"
+        <mat-paginator *ngIf="!value && dataSource.data?.length && dataSource.data.length > dataSource.data.pageSize"
+                       [length]="dataSource.data.length"
+                       [pageSize]="dataSource.data.pageSize"
+                       [pageIndex]="dataSource.data.pageIndex"
                        [pageSizeOptions]="pageSizeOptions"
                        (page)="pagination($event)"
         ></mat-paginator>

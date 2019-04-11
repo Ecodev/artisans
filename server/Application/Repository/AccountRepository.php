@@ -80,4 +80,27 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
 
         return $account;
     }
+
+    /**
+     * Sum balance by account type
+     *
+     * @API\Input(type="AccountType")
+     *
+     * @param string $accountType
+     *
+     * @return string
+     */
+    public function totalBalanceByType(string $accountType): string
+    {
+        $qb = $this->getEntityManager()->getConnection()->createQueryBuilder()
+            ->select('SUM(balance)')
+            ->from($this->getClassMetadata()->getTableName())
+            ->where('type = :type');
+
+        $qb->setParameter('type', $accountType);
+
+        $result = $qb->execute();
+
+        return (string) $result->fetchColumn();
+    }
 }

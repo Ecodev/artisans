@@ -107,7 +107,7 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, balance, iban, name) 
 (10103, 10007, NULL, 'revenue', '8510', 0.00, '', 'Produits extraordinaires, exceptionnels ou hors période'),
 (10104, 10001, NULL, 'liability', '2600', 10.00, '', 'Provisions pour réparations'),
 (10105, 10001, NULL, 'group', '28', 0.00, '', 'Fonds propres'),
-(10106, 10105, NULL, 'liability', '2800', 35000.00, '', 'Capital social');
+(10106, 10105, NULL, 'equity', '2800', 35000.00, '', 'Capital social');
 
 REPLACE INTO license (id, name) VALUES
 (2000, 'Voile - niveau 1'),

@@ -64,4 +64,19 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         self::assertSame('Acomptes de clients', $account->getParent()->getName());
         self::assertSame($account, $user->getAccount());
     }
+
+    public function testTotalBalance(): void
+    {
+        $totalAssets = $this->repository->totalBalanceByType('asset');
+        $totalLiabilities = $this->repository->totalBalanceByType('liability');
+        $totalRevenue = $this->repository->totalBalanceByType('revenue');
+        $totalExpense = $this->repository->totalBalanceByType('expense');
+        $totalEquity = $this->repository->totalBalanceByType('equity');
+
+        self::assertEquals(35187.50, $totalAssets);
+        self::assertEquals(60, $totalLiabilities);
+        self::assertEquals(240, $totalRevenue);
+        self::assertEquals(112.50, $totalExpense);
+        self::assertEquals(35000, $totalEquity);
+    }
 }

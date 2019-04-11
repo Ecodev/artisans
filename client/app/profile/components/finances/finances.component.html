@@ -20,7 +20,7 @@
     <div fxLayout="column">
 
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="10px">
-            <h3 fxFlex class="mat-headline no-margin">Dépenses et remboursements</h3>
+            <h3 fxFlex class="mat-headline no-margin">Dépenses et remboursements en attente</h3>
             <button mat-stroked-button (click)="createRefund()" [disabled]="!viewer.iban">Demander un remboursement</button>
             <a mat-stroked-button [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
         </div>

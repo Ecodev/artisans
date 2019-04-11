@@ -4,7 +4,7 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ProvisionComponent } from '../provision/provision.component';
 import { Apollo } from 'apollo-angular';
 import { ConfigService } from '../../../shared/services/ConfigService';
@@ -43,7 +43,8 @@ export class ProfileComponent implements OnInit {
 
     public pay() {
         if (this.viewer !== null) {
-            this.dialog.open(ProvisionComponent).afterClosed().subscribe(amount => {
+            const config: MatDialogConfig = {data: {balance: Number(this.viewer.account.balance)}};
+            this.dialog.open(ProvisionComponent, config).afterClosed().subscribe(amount => {
                 if (amount) {
                     this.doPayment(this.viewer, amount);
                 }

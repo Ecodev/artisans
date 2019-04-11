@@ -34,6 +34,8 @@ class Invoicer
 
     public function invoice(?User $user = null): int
     {
+        error_log('invoice', 0);
+
         $this->count = 0;
         $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice($user);
 
@@ -97,14 +99,8 @@ class Invoicer
     private function calculateBalance(Booking $booking): string
     {
         $bookable = $booking->getBookable();
-        $simultaneous = $bookable->getSimultaneousBookingMaximum();
 
-        // If infinite booking, pay full price
-        if (!($simultaneous > 1)) {
-            $simultaneous = 1;
-        }
-
-        $price = (string) ($bookable->getPeriodicPrice() / $simultaneous);
+        $price = (string) bcadd($bookable->getPeriodicPrice(), $bookable->getInitialPrice());
 
         return $price;
     }

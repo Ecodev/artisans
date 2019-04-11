@@ -31,8 +31,9 @@ class MessageRepository extends AbstractRepository implements LimitedAccessSubQu
     public function getAllMessageToSend(): array
     {
         $qb = $this->createQueryBuilder('message')
-            ->where('message.dateSent IS NULL');
+            ->where('message.dateSent IS NULL')
+            ->addOrderBy('message.id');
 
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()->setMaxResults(200)->getResult();
     }
 }

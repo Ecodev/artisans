@@ -49,7 +49,7 @@ return [
         'permissions' => '0750',
     ],
     [
-        'path' => 'bin/cron.php',
+        'path' => 'bin/send-all-messages.php',
         'permissions' => '0750',
     ],
     [

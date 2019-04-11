@@ -725,7 +725,7 @@ class User extends AbstractModel
     /**
      * @return bool
      */
-    public function isReceivesNewsletter(): bool
+    public function getReceivesNewsletter(): bool
     {
         return $this->receivesNewsletter;
     }

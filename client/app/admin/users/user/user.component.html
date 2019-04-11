@@ -145,8 +145,13 @@
                         <div class="mat-body-1" fxLayout="column" fxLayoutGap="20px">
 
                             <!-- Has Insurance -->
-                            <mat-checkbox formControlName="hasInsurance" (change)="update()" wrap>
+                            <mat-checkbox formControlName="hasInsurance" (change)="update()">
                                 Assurance RC
+                            </mat-checkbox>
+
+                            <!-- Newsletter -->
+                            <mat-checkbox formControlName="receivesNewsletter" (change)="update()">
+                                Abonné à la newsletter
                             </mat-checkbox>
 
                         </div>

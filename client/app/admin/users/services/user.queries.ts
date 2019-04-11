@@ -17,6 +17,7 @@ export const userFieldsFragment = gql`
         street
         locality
         familyRelationship
+        receivesNewsletter
         role
         status
         hasInsurance

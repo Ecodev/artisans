@@ -71,6 +71,11 @@
             <input matInput formControlName="mobilePhone" (change)="update()">
         </mat-form-field>
 
+        <!-- Newsletter -->
+        <mat-checkbox formControlName="receivesNewsletter" (change)="update()">
+            Abonné à la newsletter
+        </mat-checkbox>
+
     </div>
 
     <div *ngIf="form.get('remarks')?.value">

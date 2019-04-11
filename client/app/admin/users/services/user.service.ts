@@ -180,6 +180,7 @@ export class UserService extends AbstractModelService<User['user'],
             welcomeSessionDate: null,
             iban: '',
             hasInsurance: false,
+            receivesNewsletter: true
         };
     }
 

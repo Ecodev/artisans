@@ -134,6 +134,12 @@
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
+                            <div>
+                                <span class="mat-body-2">Âge</span>
+                                <span *ngIf="data.model.age">
+                                {{ data.model.age }}
+                            </span>
+                            </div>
                         </div>
 
                         <div class="mat-body-1" fxLayout="column" fxLayoutGap="20px">

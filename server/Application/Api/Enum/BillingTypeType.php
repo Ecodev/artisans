@@ -9,8 +9,8 @@ class BillingTypeType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            \Application\DBAL\Types\BillingTypeType::ELECTRONIC => 'Par e-mail',
-            \Application\DBAL\Types\BillingTypeType::PAPER => 'Par courrier postal',
+            \Application\DBAL\Types\BillingTypeType::ELECTRONIC => 'Electronique seulement',
+            \Application\DBAL\Types\BillingTypeType::PAPER => 'Electronique et papier',
         ];
 
         parent::__construct($config);

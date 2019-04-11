@@ -27,6 +27,9 @@ use GraphQL\Doctrine\Annotation as API;
  * @ORM\AssociationOverrides({
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
+ * @API\Sorting({
+ *     "Application\Api\Input\Sorting\Age"
+ * })
  */
 class User extends AbstractModel
 {
@@ -568,6 +571,18 @@ class User extends AbstractModel
     }
 
     /**
+     * return null|int
+     */
+    public function getAge(): ?int
+    {
+        if ($this->birthday) {
+            return (new Date())->diffInYears($this->birthday);
+        }
+
+        return null;
+    }
+
+    /**
      * Get bookings
      *
      * @return Collection
@@ -975,7 +990,7 @@ class User extends AbstractModel
 
     /**
      * Check if the user can *really* open a door
-     * This also takes into account the user status, role and IP address
+     * This also takes into account the user status and role
      *
      * @API\Field(args={@API\Argument(name="door", type="?Application\Api\Enum\DoorType")})
      *

@@ -11,6 +11,7 @@ export const userFieldsFragment = gql`
         name
         email
         birthday
+        age
         phone
         postcode
         street
@@ -76,6 +77,7 @@ export const usersQuery = gql`
                 updateDate
                 creationDate
                 lastLogin
+                age
                 welcomeSessionDate
                 account {
                     id

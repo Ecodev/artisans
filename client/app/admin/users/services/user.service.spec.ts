@@ -32,6 +32,7 @@ describe('UserService', () => {
         swissWindsurfType: 'passive',
         mobilePhone: 'test string',
         lastLogin:  '2018-01-18T11:43:31',
+        hasInsurance: true,
         door1: true,
         door2: true,
         door3: true,

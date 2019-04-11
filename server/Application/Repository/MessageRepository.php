@@ -34,6 +34,6 @@ class MessageRepository extends AbstractRepository implements LimitedAccessSubQu
             ->where('message.dateSent IS NULL')
             ->addOrderBy('message.id');
 
-        return $qb->getQuery()->setMaxResults(200)->getResult();
+        return $qb->getQuery()->setMaxResults(500)->getResult();
     }
 }

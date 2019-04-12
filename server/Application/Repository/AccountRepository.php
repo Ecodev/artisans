@@ -59,6 +59,12 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
      */
     public function getOrCreate(User $user): Account
     {
+        // If an account already exists, because getOrCreate was called once before without flushing in between,
+        // then can return immediately
+        if ($user->getAccount()) {
+            return $user->getAccount();
+        }
+
         $this->getAclFilter()->setEnabled(false);
         $account = $this->findOneByOwner($user);
         $this->getAclFilter()->setEnabled(true);

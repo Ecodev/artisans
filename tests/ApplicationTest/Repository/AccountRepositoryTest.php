@@ -63,6 +63,20 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         self::assertSame('20300009', $account->getCode());
         self::assertSame('Acomptes de clients', $account->getParent()->getName());
         self::assertSame($account, $user->getAccount());
+
+        $account2 = $this->repository->getOrCreate($user);
+        self::assertSame($account, $account2, 'should return the same one if called more than once');
+    }
+
+    public function testGetOrCreateInMemory(): void
+    {
+        $user = new User();
+        $account = new Account();
+        $account->setOwner($user);
+
+        $actualAccount = $this->repository->getOrCreate($user);
+
+        self::assertSame($account, $actualAccount, 'should return the in-memory account if existing');
     }
 
     public function testTotalBalance(): void

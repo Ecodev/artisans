@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Repository;
 
+use Application\Model\Account;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
@@ -49,7 +50,8 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
         User::setCurrent($user);
 
-        $account = $user->getAccount();
+        $credit = $user->getAccount();
+        $debit = _em()->getRepository(Account::class)->findOneBy(['code' => 1000]);
 
         $transaction = new Transaction();
         $transaction->setName('foo');
@@ -62,20 +64,22 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
             [
                 'balance' => '5',
                 'transactionDate' => Date::today(),
-                'credit' => $account,
+                'credit' => $credit,
+                'debit' => $debit,
             ],
         ];
 
         $this->repository->hydrateLinesAndFlush($transaction, $lines);
 
-        self::assertSame('5.00', $account->getBalance(), 'account balance must have been refreshed from DB');
+        self::assertSame('5.00', $credit->getBalance(), 'credit account balance must have been refreshed from DB');
+        self::assertSame('5.00', $debit->getBalance(), 'debit account balance must have been refreshed from DB');
         self::assertFalse($transaction->getTransactionLines()->contains($line), 'original line must have been deleted');
-        self::assertCount(1, $transaction->getTransactionLines(), 'one single new line');
+        self::assertCount(1, $transaction->getTransactionLines(), 'one line');
 
         $line = $transaction->getTransactionLines()->first();
         self::assertSame('5', $line->getBalance());
-        self::assertSame($account, $line->getCredit());
-        self::assertNull($line->getDebit());
+        self::assertSame($credit, $line->getCredit());
+        self::assertSame($debit, $line->getDebit());
     }
 
     public function testHydrateLinesAndFlushMustThrowWithoutAnyLines(): void
@@ -91,5 +95,38 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         $transaction = new Transaction();
         $this->expectExceptionMessage('Cannot create a TransactionLine without any account');
         $this->repository->hydrateLinesAndFlush($transaction, [[]]);
+    }
+
+    public function testHydrateLinesAndFlushMustThrowWithUnbalancedLines(): void
+    {
+        /** @var User $user */
+        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
+        User::setCurrent($user);
+
+        $debit = _em()->getRepository(Account::class)->findOneBy(['code' => 10201]);
+        $credit = _em()->getRepository(Account::class)->findOneBy(['code' => 1000]);
+
+        $transaction = new Transaction();
+        $transaction->setName('caisse à poste');
+        $transaction->setRemarks('montants erronés');
+        $transaction->setTransactionDate(Date::today());
+        $line = new TransactionLine();
+        $line->setTransaction($transaction);
+
+        $lines = [
+            [
+                'balance' => '1000',
+                'transactionDate' => Date::today(),
+                'debit' => $debit,
+            ],
+            [
+                'balance' => '900',
+                'transactionDate' => Date::today(),
+                'credit' => $credit,
+            ],
+        ];
+
+        $this->expectExceptionMessage('Transaction NEW non-équilibrée, débits: 1000.00, crédits: 900.00');
+        $this->repository->hydrateLinesAndFlush($transaction, $lines);
     }
 }

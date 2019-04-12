@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * An accounting journal entry (simple or compound)
  *
  * @ORM\Entity(repositoryClass="Application\Repository\TransactionRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Transaction extends AbstractModel
 {
@@ -192,5 +193,28 @@ class Transaction extends AbstractModel
     public function getDatatransRef(): string
     {
         return $this->datatransRef;
+    }
+
+    /**
+     * Automatically called by Doctrine whenever a transaction is created or updated
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function checkBalance(): void
+    {
+        $totalDebit = '0.00';
+        $totalCredit = '0.00';
+        foreach ($this->getTransactionLines() as $i => $line) {
+            if ($line->getDebit()) {
+                $totalDebit = bcadd($totalDebit, $line->getBalance());
+            }
+            if ($line->getCredit()) {
+                $totalCredit = bcadd($totalCredit, $line->getBalance());
+            }
+        }
+        if (bccomp($totalDebit, $totalCredit) !== 0) {
+            throw new \Application\Api\Exception(sprintf('Transaction %s non-équilibrée, débits: %s, crédits: %s', $this->getId() ?? 'NEW', $totalDebit, $totalCredit));
+        }
     }
 }

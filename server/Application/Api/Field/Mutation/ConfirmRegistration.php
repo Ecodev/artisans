@@ -64,7 +64,7 @@ abstract class ConfirmRegistration implements FieldInterface
                     $booking->setBookable($bookable);
 
                     // Non-periodic bookable must be terminated immediately
-                    if (bccomp($bookable->getPeriodicPrice(), '0.00', 2) === 0) {
+                    if (bccomp($bookable->getPeriodicPrice(), '0.00') === 0) {
                         $booking->terminate('Terminé automatiquement parce que paiement ponctuel uniquement');
                     }
                 }

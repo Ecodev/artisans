@@ -17,8 +17,6 @@ $revenue = $repo->totalBalanceByType(AccountTypeType::REVENUE);
 $expense = $repo->totalBalanceByType(AccountTypeType::EXPENSE);
 $equity = $repo->totalBalanceByType(AccountTypeType::EQUITY);
 
-bcscale(2);
-
 $income = bcsub($revenue, $expense);
 
 $discrepancy = bcsub(bcsub($assets, $income), bcadd($liabilities, $equity));

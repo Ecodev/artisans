@@ -9,6 +9,9 @@ use Zend\ServiceManager\ServiceManager;
 
 require_once 'server/Debug.php';
 
+// Default scale for CHF calculation for the entire project
+bcscale(2);
+
 // Load configuration
 $config = require __DIR__ . '/config.php';
 

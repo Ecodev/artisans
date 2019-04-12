@@ -102,7 +102,7 @@ class InvoicerTest extends TestCase
                 [],
             ],
             'only initial' => [
-                '10',
+                '10.25',
                 '0',
                 [
                     [
@@ -110,60 +110,60 @@ class InvoicerTest extends TestCase
                         'My bookable',
                         'John Doe',
                         'Bookable account',
-                        '10',
+                        '10.25',
                     ],
                 ],
             ],
             'only periodic' => [
                 '0',
-                '90',
+                '90.25',
                 [
                     [
                         'Paiement annuel',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
-                        '90',
+                        '90.25',
                     ],
                 ],
             ],
             'both initial and periodic should create two lines' => [
-                '10',
-                '90',
+                '10.25',
+                '90.25',
                 [
                     [
                         'Paiement ponctuel',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
-                        '10',
+                        '10.25',
                     ],
                     [
                         'Paiement annuel',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
-                        '90',
+                        '90.25',
                     ],
                 ],
             ],
             'negative balance should swap accounts' => [
-                '-10',
-                '-90',
+                '-10.25',
+                '-90.25',
                 [
                     [
                         'Paiement ponctuel',
                         'My bookable',
                         'Bookable account',
                         'John Doe',
-                        '10',
+                        '10.25',
                     ],
                     [
                         'Paiement annuel',
                         'My bookable',
                         'Bookable account',
                         'John Doe',
-                        '90',
+                        '90.25',
                     ],
                 ],
             ],

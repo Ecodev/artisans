@@ -33,7 +33,7 @@ class TransactionLine extends AbstractModel
     /**
      * @var null|Account
      *
-     * @ORM\ManyToOne(targetEntity="Account")
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="debitTransactionLines")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="RESTRICT")
      * })
@@ -43,7 +43,7 @@ class TransactionLine extends AbstractModel
     /**
      * @var null|Account
      *
-     * @ORM\ManyToOne(targetEntity="Account")
+     * @ORM\ManyToOne(targetEntity="Account", inversedBy="creditTransactionLines")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="RESTRICT")
      * })
@@ -120,7 +120,15 @@ class TransactionLine extends AbstractModel
      */
     public function setDebit(?Account $account): void
     {
+        if ($this->debit) {
+            $this->debit->debitTransactionLineRemoved($this);
+        }
+
         $this->debit = $account;
+
+        if ($this->debit) {
+            $this->debit->debitTransactionLineAdded($this);
+        }
     }
 
     /**
@@ -140,7 +148,15 @@ class TransactionLine extends AbstractModel
      */
     public function setCredit(?Account $account): void
     {
+        if ($this->credit) {
+            $this->credit->creditTransactionLineRemoved($this);
+        }
+
         $this->credit = $account;
+
+        if ($this->credit) {
+            $this->credit->creditTransactionLineAdded($this);
+        }
     }
 
     /**

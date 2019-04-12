@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\DBAL\Types\BookingStatusType;
+use Application\Service\Invoicer;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasRemarks;
 use Application\Utility;
@@ -108,6 +109,8 @@ class Booking extends AbstractModel
         if ($this->getOwner()) {
             $this->getOwner()->bookingAdded($this);
         }
+
+        $this->invoiceInitial();
     }
 
     /**
@@ -250,6 +253,8 @@ class Booking extends AbstractModel
         if ($this->bookable) {
             $this->bookable->bookingAdded($this);
         }
+
+        $this->invoiceInitial();
     }
 
     /**
@@ -287,5 +292,21 @@ class Booking extends AbstractModel
                 $this->setEndComment($comment);
             }
         }
+    }
+
+    /**
+     * If the booking is complete, will make initial invoicing
+     */
+    private function invoiceInitial(): void
+    {
+        if (!$this->getOwner() || !$this->getBookable()) {
+            return;
+        }
+
+        global $container;
+
+        /** @var Invoicer $invoicer */
+        $invoicer = $container->get(Invoicer::class);
+        $invoicer->invoiceInitial($this->getOwner(), $this);
     }
 }

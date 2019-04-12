@@ -66,11 +66,25 @@ class Account extends AbstractModel
     private $code;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="TransactionLine", mappedBy="debit")
+     */
+    private $debitTransactionLines;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="TransactionLine", mappedBy="credit")
+     */
+    private $creditTransactionLines;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->debitTransactionLines = new ArrayCollection();
+        $this->creditTransactionLines = new ArrayCollection();
     }
 
     /**
@@ -200,12 +214,62 @@ class Account extends AbstractModel
     }
 
     /**
-     * Get lines of transactions
+     * Notify when a transaction line is added
+     * This should only be called by TransactionLine::setDebit()
      *
-     * @return TransactionLine[]
+     * @param TransactionLine $transactionLine
      */
-    public function getTransactionLines(): array
+    public function debitTransactionLineAdded(TransactionLine $transactionLine): void
     {
-        return _em()->getRepository(TransactionLine::class)->findByDebitOrCredit($this);
+        $this->debitTransactionLines->add($transactionLine);
+    }
+
+    /**
+     * Notify when a transaction line is removed
+     * This should only be called by TransactionLine::setDebit()
+     *
+     * @param TransactionLine $transactionLine
+     */
+    public function debitTransactionLineRemoved(TransactionLine $transactionLine): void
+    {
+        $this->debitTransactionLines->removeElement($transactionLine);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getDebitTransactionLines(): Collection
+    {
+        return $this->debitTransactionLines;
+    }
+
+    /**
+     * Notify when a transaction line is added
+     * This should only be called by TransactionLine::setCredit()
+     *
+     * @param TransactionLine $transactionLine
+     */
+    public function creditTransactionLineAdded(TransactionLine $transactionLine): void
+    {
+        $this->creditTransactionLines->add($transactionLine);
+    }
+
+    /**
+     * Notify when a transaction line is removed
+     * This should only be called by TransactionLine::setCredit()
+     *
+     * @param TransactionLine $transactionLine
+     */
+    public function creditTransactionLineRemoved(TransactionLine $transactionLine): void
+    {
+        $this->creditTransactionLines->removeElement($transactionLine);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCreditTransactionLines(): Collection
+    {
+        return $this->creditTransactionLines;
     }
 }

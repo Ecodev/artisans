@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Model\Account;
+use Application\Model\Bookable;
 use Application\Model\Booking;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
+use Application\Repository\BookingRepository;
 use Cake\Chronos\Date;
 use Doctrine\ORM\EntityManager;
 
@@ -27,15 +29,22 @@ class Invoicer
      */
     private $count = 0;
 
+    /**
+     * @var BookingRepository
+     */
+    private $bookingRepository;
+
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
+        $this->bookingRepository = $this->entityManager->getRepository(Booking::class);
     }
 
-    public function invoice(?User $user = null): int
+    public function invoicePeriodic(?User $user = null): int
     {
         $this->count = 0;
-        $bookings = $this->entityManager->getRepository(Booking::class)->getAllToInvoice($user);
+        $this->bookingRepository->getAclFilter()->setEnabled(false);
+        $bookings = $this->bookingRepository->getAllToInvoice($user);
 
         $user = null;
         $bookingPerUser = [];
@@ -43,7 +52,7 @@ class Invoicer
         /** @var Booking $booking */
         foreach ($bookings as $booking) {
             if ($user !== $booking->getOwner()) {
-                $this->createTransaction($user, $bookingPerUser);
+                $this->createTransaction($user, $bookingPerUser, false);
 
                 $user = $booking->getOwner();
                 $bookingPerUser = [];
@@ -51,16 +60,27 @@ class Invoicer
 
             $bookingPerUser[] = $booking;
         }
-        $this->createTransaction($user, $bookingPerUser);
+        $this->createTransaction($user, $bookingPerUser, false);
+
+        $this->bookingRepository->getAclFilter()->setEnabled(true);
 
         return $this->count;
     }
 
-    /**
-     * @param null|User $user
-     * @param Booking[] $bookings
-     */
-    private function createTransaction(?User $user, array $bookings): void
+    public function invoiceInitial(User $user, Booking $booking): void
+    {
+        $this->bookingRepository->getAclFilter()->setEnabled(false);
+
+        $bookable = $booking->getBookable();
+        if (!$bookable->getInitialPrice() && !$bookable->getPeriodicPrice()) {
+            return;
+        }
+
+        $this->createTransaction($user, [$booking], true);
+        $this->bookingRepository->getAclFilter()->setEnabled(true);
+    }
+
+    private function createTransaction(?User $user, array $bookings, bool $isInitial): void
     {
         if (!$user || !$bookings) {
             return;
@@ -74,16 +94,13 @@ class Invoicer
 
         foreach ($bookings as $booking) {
             $bookable = $booking->getBookable();
-            $transactionLine = new TransactionLine();
-            $this->entityManager->persist($transactionLine);
+            if ($isInitial) {
+                $balance = $this->calculateInitialBalance($booking);
+                $this->createTransactionLine($transaction, $bookable, $account, $balance, 'Paiement ponctuel');
+            }
 
-            $transactionLine->setName('Paiement depuis crédit MyIchtus');
-            $transactionLine->setBookable($bookable);
-            $transactionLine->setDebit($account);
-            $transactionLine->setCredit($bookable->getCreditAccount());
-            $transactionLine->setBalance($this->calculateBalance($booking));
-            $transactionLine->setTransaction($transaction);
-            $transactionLine->setTransactionDate(Date::today());
+            $balance = $this->calculatePeriodicBalance($booking);
+            $this->createTransactionLine($transaction, $bookable, $account, $balance, 'Paiement annuel');
         }
 
         ++$this->count;
@@ -94,18 +111,52 @@ class Invoicer
      *
      * @return string
      */
-    private function calculateBalance(Booking $booking): string
+    private function calculateInitialBalance(Booking $booking): string
     {
         $bookable = $booking->getBookable();
-        $simultaneous = $bookable->getSimultaneousBookingMaximum();
 
-        // If infinite booking, pay full price
-        if (!($simultaneous > 1)) {
-            $simultaneous = 1;
+        // TODO: https://support.ecodev.ch/issues/6227
+
+        return $bookable->getInitialPrice();
+    }
+
+    /**
+     * @param Booking $booking
+     *
+     * @return string
+     */
+    private function calculatePeriodicBalance(Booking $booking): string
+    {
+        $bookable = $booking->getBookable();
+
+        // TODO: https://support.ecodev.ch/issues/6227
+
+        return $bookable->getPeriodicPrice();
+    }
+
+    private function createTransactionLine(Transaction $transaction, Bookable $bookable, Account $account, string $balance, string $name): void
+    {
+        if ($balance > 0) {
+            $debit = $account;
+            $credit = $bookable->getCreditAccount();
+        } elseif ($balance < 0) {
+            $debit = $bookable->getCreditAccount();
+            $credit = $account;
+            $balance = bcmul($balance, '-1'); // into positive
+        } else {
+            // Never create a line with 0 balance
+            return;
         }
 
-        $price = (string) ($bookable->getPeriodicPrice() / $simultaneous);
+        $transactionLine = new TransactionLine();
+        $this->entityManager->persist($transactionLine);
 
-        return $price;
+        $transactionLine->setName($name);
+        $transactionLine->setBookable($bookable);
+        $transactionLine->setDebit($debit);
+        $transactionLine->setCredit($credit);
+        $transactionLine->setBalance($balance);
+        $transactionLine->setTransaction($transaction);
+        $transactionLine->setTransactionDate(Date::today());
     }
 }

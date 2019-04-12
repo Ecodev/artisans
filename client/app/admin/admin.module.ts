@@ -31,6 +31,7 @@ import { TransactionTagComponent } from './transactionTags/transactionTag/transa
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
 import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin-only-modal/select-admin-only-modal.component';
+import { ProfileModule } from '../profile/profile.module';
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin
         IchtusModule,
         AvatarModule,
         SidenavModule,
+        ProfileModule,
     ],
     entryComponents: [
         SelectAdminOnlyModalComponent

@@ -44,6 +44,9 @@ import { TransactionLinesComponent } from './components/transaction-lines/transa
         ProvisionComponent,
         SelectAdminApprovedModalComponent,
     ],
+    exports: [
+        ServicesComponent,
+    ],
 })
 export class ProfileModule {
 }

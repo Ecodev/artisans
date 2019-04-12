@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { BookingType } from '../../../shared/generated-types';
@@ -15,7 +15,9 @@ import { AbstractController } from '../../../shared/components/AbstractControlle
 })
 export class ServicesComponent extends AbstractController implements OnInit, OnDestroy {
 
-    public viewer;
+    @Input() user = null;
+
+    public adminMode = false;
 
     public BookableService = BookableService; // template usage
     public runningServicesDS: AppDataSource;
@@ -32,12 +34,20 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
     }
 
     ngOnInit() {
-        this.viewer = this.route.snapshot.data.viewer.model;
 
-        const pendingApplications = this.userService.getPendingApplications(this.viewer, this.ngUnsubscribe);
+        if (!this.user) {
+            this.user = this.route.snapshot.data.viewer.model;
+        } else {
+            this.adminMode = true;
+            this.applicationsColumns.unshift('detail');
+            this.servicesColumns.unshift('detail');
+            this.applicationsColumns.push('process');
+        }
+
+        const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);
         this.pendingApplicationsDS = new AppDataSource(pendingApplications);
 
-        const runningServices = this.userService.getRunningServices(this.viewer, this.ngUnsubscribe);
+        const runningServices = this.userService.getRunningServices(this.user, this.ngUnsubscribe);
         this.runningServicesDS = new AppDataSource(runningServices);
     }
 
@@ -66,7 +76,7 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
         this.alertService.confirm('Démission', 'Voulez-vous quitter le club Ichtus ?', 'Démissioner définitivement')
             .subscribe(confirmed => {
                 if (confirmed) {
-                    this.userService.unregister(this.viewer).subscribe(() => {
+                    this.userService.unregister(this.user).subscribe(() => {
                         this.alertService.info('Vous avez démissioné', 5000);
                         this.userService.logout();
                     });

@@ -136,7 +136,7 @@
                             </mat-form-field>
 
                             <div *ngIf="data.model.age">
-                                <span class="mat-body-2">Âge : </span>
+                                <span class="mat-body-2">Âge :</span>
                                 <span>{{ data.model.age }}</span>
                             </div>
                         </div>
@@ -273,53 +273,23 @@
 
         <mat-tab label="Finances" *ngIf="data.model.id">
 
-            <h2 class="mat-title padding-top">Finances</h2>
+            <div fxLayout="column" fxLayoutGap="30px">
+                <div fxLayout="row" fxLayoutGap="30px" class="margin-top">
+                    <app-select fxFlex
+                                formControlName="account"
+                                placeholder="Compte"
+                                [service]="accountService"
+                                [showIcon]="false"
+                                [navigateTo]="['/admin/account', form.get('account').value?.id]"
+                    ></app-select>
 
-            <div fxLayout="row" fxLayoutGap="30px">
-                <app-select fxFlex
-                            formControlName="account"
-                            placeholder="Compte"
-                            [service]="accountService"
-                            [showIcon]="false"
-                            [navigateTo]="['/admin/account', form.get('account').value?.id]"
-                ></app-select>
-
-                <mat-form-field fxFlex>
-                    <mat-label>IBAN</mat-label>
-                    <input matInput formControlName="iban" (change)="update()">
-                </mat-form-field>
-            </div>
-
-            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-
-                <div fxFlex>
-                    <h2 class="mat-title">Cotisation, stockage et services</h2>
-                    <app-relations [main]="data.model"
-                                   [service]="bookingService"
-                                   [filter]="runningActive"
-                                   [disabled]="true"
-                                   [hideSearch]="true"
-                    >
-                        <ng-template let-item="item">
-                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookable.name"
-                            ></app-table-button>
-                        </ng-template>
-                    </app-relations>
+                    <mat-form-field fxFlex>
+                        <mat-label>IBAN</mat-label>
+                        <input matInput formControlName="iban" (change)="update()">
+                    </mat-form-field>
                 </div>
-                <div fxFlex>
-                    <h2 class="mat-title">Demandes en attente</h2>
-                    <app-relations [main]="data.model"
-                                   [service]="bookingService"
-                                   [filter]="pendingDemands"
-                                   [disabled]="true"
-                                   [hideSearch]="true"
-                    >
-                        <ng-template let-item="item">
-                            <app-table-button [navigate]="['/admin/booking/', item.id]" [label]="item.bookable.name"
-                            ></app-table-button>
-                        </ng-template>
-                    </app-relations>
-                </div>
+
+                <app-services [user]="data.model"></app-services>
             </div>
 
         </mat-tab>

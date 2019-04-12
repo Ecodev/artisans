@@ -36,8 +36,6 @@ export class UserComponent
         UpdateUserVariables,
         any> implements OnInit {
 
-    public runningActive;
-    public pendingDemands;
     public showFamilyTab;
     public UserService = UserService;
 
@@ -57,8 +55,6 @@ export class UserComponent
         super.ngOnInit();
 
         this.route.data.subscribe(() => {
-            this.runningActive = this.getRunningActive();
-            this.pendingDemands = this.getPendingApplicationsFilter();
 
             const qvm = new QueryVariablesManager<UsersVariables>();
             qvm.set('variables', UserService.getFamilyVariables(this.data.model));
@@ -68,49 +64,6 @@ export class UserComponent
 
         });
 
-    }
-
-    /**
-     * Membership and inventory
-     */
-    public getRunningActive(): BookingFilter {
-
-        const filter: BookingFilter = {
-            groups: [
-                {
-                    conditions: [
-                        {
-                            owner: {have: {values: [this.data.model.id]}},
-                            status: {equal: {value: BookingStatus.booked}},
-                            endDate: {null: {}},
-                        },
-                    ],
-                    joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.admin_only, BookingType.mandatory]}}}]}},
-                },
-            ],
-        };
-
-        return filter;
-    }
-
-    /**
-     * Demandes en attente
-     */
-    public getPendingApplicationsFilter(): BookingFilter {
-
-        const filter: BookingFilter = {
-            groups: [
-                {
-                    conditions: [
-                        {
-                            owner: {have: {values: [this.data.model.id]}},
-                            status: {equal: {value: BookingStatus.application}},
-                        },
-                    ], joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
-                },
-            ],
-        };
-        return filter;
     }
 
 }

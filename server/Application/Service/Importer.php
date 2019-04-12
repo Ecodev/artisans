@@ -72,7 +72,7 @@ class Importer
     {
         $this->loadMembers();
         $this->loadPeople();
-//        $this->deleteTestUsers();
+        $this->deleteTestData();
         $this->loadStorageRequests();
         $this->insertBookables();
         $this->insertUsers();
@@ -814,9 +814,9 @@ EOT;
     }
 
     /**
-     * Delete existing test users prior importing to prevent an ID collision
+     * Delete existing test data prior importing
      */
-    private function deleteTestUsers(): void
+    private function deleteTestData(): void
     {
         $conn = $this->entityManager->getConnection();
         $result = $conn->executeQuery('SELECT id FROM account a where a.owner_id < 0');

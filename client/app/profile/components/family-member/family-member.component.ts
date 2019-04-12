@@ -20,6 +20,7 @@ export class FamilyMemberComponent
         UpdateUserVariables,
         any> implements OnInit {
 
+    @Input() viewer: User['user'];
     @Input() user: User['user'];
     @Input() readonly = false;
 
@@ -39,18 +40,24 @@ export class FamilyMemberComponent
         if (this.user && this.user.id) {
             this.service.getOne(this.user.id).subscribe(user => {
                 this.data = merge({model: this.service.getEmptyObject()}, {model: user});
-                this.initForm();
-                if (this.readonly) {
-                    this.form.disable();
-                }
+                this.setForm();
             });
 
         } else {
             this.data = {model: Object.assign(this.service.getEmptyObject(), this.service.getDefaultValues())};
-            this.initForm();
-            if (this.readonly) {
-                this.form.disable();
-            }
+            this.setForm();
+        }
+
+    }
+
+    public setForm() {
+        this.initForm();
+        if (this.readonly) {
+            this.form.disable();
+        }
+        const familyRelationship = this.form.get('familyRelationship');
+        if (familyRelationship && this.viewer.owner) {
+            familyRelationship.disable();
         }
 
     }

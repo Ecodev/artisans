@@ -71,6 +71,13 @@
             <input matInput formControlName="mobilePhone" (change)="update()">
         </mat-form-field>
 
+        <mat-form-field fxFlex>
+            <mat-label>Date de naissance</mat-label>
+            <input matInput formControlName="birthday" [matDatepicker]="picker" (change)="update()">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
         <!-- Newsletter -->
         <mat-checkbox formControlName="receivesNewsletter" (change)="update()">
             Abonné à la newsletter

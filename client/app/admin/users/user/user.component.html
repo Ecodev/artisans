@@ -235,7 +235,7 @@
 
                 <mat-divider></mat-divider>
 
-                <div fxLayout="column" fxLayoutGap="20px">
+                <div fxLayout="column" fxLayoutGap="15px">
                     <app-stamp [item]="data.model"></app-stamp>
 
                     <!-- Welcome session date -->
@@ -284,7 +284,7 @@
                             [navigateTo]="['/admin/account', form.get('account').value?.id]"
                 ></app-select>
 
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex>s
                     <mat-label>IBAN</mat-label>
                     <input matInput formControlName="iban" (change)="update()">
                 </mat-form-field>

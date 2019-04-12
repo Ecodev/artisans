@@ -9,7 +9,7 @@
             <mat-expansion-panel-header>
                 <mat-panel-title> {{ familyMember?.name || 'Nouveau'}}</mat-panel-title>
             </mat-expansion-panel-header>
-            <app-family-member [user]="familyMember" [readonly]="!canEdit(familyMember)"></app-family-member>
+            <app-family-member [user]="familyMember" [readonly]="!canEdit(familyMember)" [viewer]="viewer"></app-family-member>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

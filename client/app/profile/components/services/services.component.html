@@ -67,21 +67,11 @@
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
-                <ng-container matColumnDef="process">
-                    <th mat-header-cell *matHeaderCellDef>Traiter</th>
+                <ng-container matColumnDef="admin">
+                    <th mat-header-cell *matHeaderCellDef app-1em-column>Traiter</th>
                     <td mat-cell *matCellDef="let booking">
-                        <button mat-icon-button mat-raised-button color="accent">
-                            <app-icon name="check"></app-icon>
-                        </button>
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                </ng-container>
-
-                <ng-container matColumnDef="detail">
-                    <th mat-header-cell *matHeaderCellDef>Détail</th>
-                    <td mat-cell *matCellDef="let booking">
-                        <a mat-icon-button [routerLink]="['/admin/booking', booking.id]">
-                            <app-icon name="edit"></app-icon>
+                        <a mat-icon-button mat-raised-button color="accent" [routerLink]="['/admin/booking', booking.id]">
+                            <app-icon name="chevron_right"></app-icon>
                         </a>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
@@ -137,11 +127,11 @@
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
-                <ng-container matColumnDef="detail">
-                    <th mat-header-cell *matHeaderCellDef>Détail</th>
+                <ng-container matColumnDef="admin">
+                    <th mat-header-cell *matHeaderCellDef app-1em-column>Traiter</th>
                     <td mat-cell *matCellDef="let booking">
-                        <a mat-icon-button [routerLink]="['/admin/booking', booking.id]">
-                            <app-icon name="edit"></app-icon>
+                        <a mat-icon-button mat-raised-button color="accent" [routerLink]="['/admin/booking', booking.id]">
+                            <app-icon name="chevron_right"></app-icon>
                         </a>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>

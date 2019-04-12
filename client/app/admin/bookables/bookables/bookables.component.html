@@ -22,6 +22,7 @@
                     <span appColumnsPickerColumn="periodicPrice">Prix périodique</span>
                     <span appColumnsPickerColumn="date">Dernière modification</span>
                     <span appColumnsPickerColumn="verificationDate">Dernière vérification</span>
+                    <span appColumnsPickerColumn="select" [checked]="false" [hidden]="true">Sélection</span>
                 </app-columns-picker>
             </natural-search>
         </div>
@@ -110,6 +111,13 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Dernière vérification</th>
                     <td mat-cell *matCellDef="let element">
                         {{ element.verificationDate | date: 'mediumDate' }} -{{ element.verificationDate | date: 'shortTime' }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef ></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-flat-button color="primary" (click)="select.emit(element)">Sélectionner</button>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 

@@ -2,15 +2,6 @@
 
     <app-detail-header newLabel="Nouvelle réservation" label="Réservation" [model]="data.model" [listRoute]="['admin', 'booking']">
         <div fxLayout="row" fxLayoutGap="20px">
-            <button mat-flat-button
-                    color="accent"
-                    *ngIf="isApplication() && isStorage() && form.get('status').value === BookingStatus.application"
-                    (click)="selectStorage()"
-            >
-                <app-icon name="check"></app-icon>
-                Attribuer un espace de stockage
-            </button>
-
             <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()">
                 Terminer
             </button>
@@ -21,7 +12,7 @@
         <mat-tab label="Général">
             <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="80" fxLayout="column">
+                    <div fxFlex="50" fxLayout="column">
 
                         <div fxLayout="row" fxLayoutGap="10px">
                             <app-select fxFlex
@@ -32,7 +23,6 @@
                                         [showIcon]="false"
                                         [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"
                             ></app-select>
-
                         </div>
 
                         <app-select formControlName="bookable"
@@ -42,29 +32,35 @@
                                     [showIcon]="false"
                         ></app-select>
 
+                        <button mat-flat-button
+                                color="primary"
+                                *ngIf="isApplication() && isService() && data.model.status === BookingStatus.application"
+                                (click)="assignBookable(form.get('bookable').value)"
+                        >
+                            Valider la demande
+                        </button>
+
+                        <div *ngIf="newBooking">
+                            <mat-divider class="margin-bottom"></mat-divider>
+                            <p class="mat-body-1">L'espace de stockage
+                                <span class="mat-body-2">{{ newBooking.bookable.name }}</span>
+                            </p>
+                            <a mat-stroked-button [routerLink]="['/admin/booking', newBooking.id]" (click)="newBooking = null;">
+                                Se rendre à la réservation
+                            </a>
+                        </div>
+
                     </div>
-                    <div fxFlex="20" fxLayout="column">
+                    <div fxFlex="50" fxLayout="column">
                         <app-select-enum enumName="BookingStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
                         ></app-select-enum>
-                    </div>
-                </div>
 
-                <mat-divider></mat-divider>
-
-                <h2 class="mat-title">Commentaires</h2>
-
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-
-                    <div fxFlex fxLayout="column">
+                        <h2 class="mat-title">Commentaires</h2>
                         <mat-form-field>
                             <mat-label>Remarques</mat-label>
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="3"
                             ></textarea>
                         </mat-form-field>
-
-                    </div>
-
-                    <div fxFlex fxLayout="column">
 
                         <mat-form-field>
                             <mat-label>Remarques internes</mat-label>
@@ -76,7 +72,16 @@
                             ></textarea>
                         </mat-form-field>
                     </div>
+                </div>
 
+                <div *ngIf="isApplication() && isStorage() && data.model.status === BookingStatus.application">
+                    <mat-divider class="margin-bottom"></mat-divider>
+                    <div class="mat-title">Attribuer un stockage</div>
+                    <app-bookables [columns]="['name', 'code', 'periodicPrice', 'select']"
+                                   [persistSearch]="false"
+                                   [queryVariables]="getStorageVariables()"
+                                   (select)="assignBookable($event)"
+                    ></app-bookables>
                 </div>
 
                 <div *ngIf="isSelfApproved()">
@@ -119,7 +124,8 @@
 
                             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="margin-bottom">
                                 <h2 class="mat-title no-margin-bottom">Fin</h2>
-                                <div fxFlex>{{ data.model.endDate | date: 'mediumDate' }} - {{ data.model.endDate | date: 'shortTime' }}</div>
+                                <div fxFlex>{{ data.model.endDate | date: 'mediumDate' }}
+                                    - {{ data.model.endDate | date: 'shortTime' }}</div>
                             </div>
 
                             <mat-form-field>

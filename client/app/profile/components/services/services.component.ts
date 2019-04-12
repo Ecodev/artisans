@@ -39,9 +39,8 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
             this.user = this.route.snapshot.data.viewer.model;
         } else {
             this.adminMode = true;
-            this.applicationsColumns.unshift('detail');
-            this.servicesColumns.unshift('detail');
-            this.applicationsColumns.push('process');
+            this.applicationsColumns.push('admin');
+            this.servicesColumns.push('admin');
         }
 
         const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);

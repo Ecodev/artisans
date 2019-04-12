@@ -4,6 +4,7 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { BookingService } from '../services/booking.service';
 import {
+    BookablesVariables,
     Booking,
     BookingPartialInput,
     BookingStatus,
@@ -16,9 +17,7 @@ import {
 } from '../../../shared/generated-types';
 import { UserService } from '../../users/services/user.service';
 import { BookableService } from '../../bookables/services/bookable.service';
-import { MatDialog } from '@angular/material';
-import { SelectAdminOnlyModalComponent } from '../../../shared/components/select-admin-only-modal/select-admin-only-modal.component';
-import { MatDialogConfig } from '@angular/material/dialog/typings/dialog-config';
+import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Component({
     selector: 'app-booking',
@@ -36,13 +35,17 @@ export class BookingComponent
 
     public BookingStatus = BookingStatus;
 
+    /**
+     * Received the created booking after having processing an application
+     */
+    public newBooking;
+
     constructor(alertService: AlertService,
                 public bookingService: BookingService,
                 router: Router,
                 route: ActivatedRoute,
                 public bookableService: BookableService,
                 public userService: UserService,
-                private dialog: MatDialog,
     ) {
         super('booking', bookingService, alertService, router, route);
     }
@@ -85,29 +88,63 @@ export class BookingComponent
     public isStorage() {
         const bookable = this.form.get('bookable');
         if (bookable) {
-            return bookable.value.bookableTags.find(t => t.id === '6008');
+            return bookable.value.bookableTags.find(t => t.id === BookableTagService.STORAGE);
         }
     }
 
-    public selectStorage() {
+    /**
+     * Wherever bookable is a service for example NFT
+     */
+    public isService() {
+        const bookable = this.form.get('bookable');
+        if (bookable) {
+            return bookable.value.bookableTags.find(t => t.id === BookableTagService.SERVICE);
+        }
+    }
 
-        const options: MatDialogConfig = {
-            width: '700px',
-        };
+    public assignBookable(bookable) {
 
-        this.dialog.open(SelectAdminOnlyModalComponent, options).afterClosed().subscribe(bookable => {
-            if (bookable) {
-                const booking: BookingPartialInput = {status: BookingStatus.booked};
-                this.bookingService.createWithBookable(bookable, this.data.model.owner, booking).subscribe(() => {
-                    this.alertService.info('Le stockage sélectionné a bien été attribué à ' + this.data.model.owner.name);
-                    const status = this.form.get('status');
-                    if (status) {
-                        status.setValue(BookingStatus.processed);
-                        this.update();
-                    }
-                });
+        const message = 'Êtes-vous sûr de vouloir attribuer cet espace de stockage ? ' +
+                        'Cette action va créer une nouvelle réservation et débitera automatiquement le compte du membre. ' +
+                        'Pour annuler cette action, il sera nécessaire de supprimer la nouvelle réservation.';
+
+        this.alertService.confirm('Confirmer l\'attribution', message, 'Confirmer').subscribe(confirm => {
+            if (confirm) {
+                this.doAssignBookable(bookable);
             }
         });
+    }
+
+    public doAssignBookable(bookable) {
+        const partialBooking: BookingPartialInput = {status: BookingStatus.booked};
+        this.bookingService.createWithBookable(bookable, this.data.model.owner, partialBooking).subscribe((booking) => {
+            this.newBooking = Object.assign(booking, {bookable: bookable});
+            this.alertService.info('Le stockage sélectionné a bien été attribué à ' + this.data.model.owner.name);
+            const status = this.form.get('status');
+            if (status) {
+                status.setValue(BookingStatus.processed);
+                this.update();
+            }
+        });
+    }
+
+    public getStorageVariables(): BookablesVariables {
+        const variables: BookablesVariables = {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                bookingType: {in: {values: [BookingType.admin_only]}},
+                                bookableTags: {have: {values: [BookableTagService.STORAGE]}},
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+
+        return variables;
     }
 
 }

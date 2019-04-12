@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
@@ -14,6 +14,8 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     styleUrls: ['./bookables.component.scss'],
 })
 export class BookablesComponent extends AbstractList<Bookables['bookables'], BookablesVariables> implements OnInit {
+
+    @Output() select = new EventEmitter();
 
     constructor(route: ActivatedRoute,
                 router: Router,

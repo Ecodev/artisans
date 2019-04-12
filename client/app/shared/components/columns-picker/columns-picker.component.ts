@@ -9,7 +9,6 @@ import {
     Output,
     QueryList,
 } from '@angular/core';
-import { isString, isUndefined } from 'lodash';
 import { ColumnsPickerColumnDirective } from './columns-picker-column.directive';
 
 @Component({
@@ -32,6 +31,9 @@ export class ColumnsPickerComponent implements AfterViewInit {
     @ContentChildren(ColumnsPickerColumnDirective)
     public availableColumns: QueryList<ColumnsPickerColumnDirective>;
 
+    public displayedColumns: ColumnsPickerColumnDirective[];
+
+
     constructor(private changeDetectorRef: ChangeDetectorRef) {
 
     }
@@ -46,12 +48,14 @@ export class ColumnsPickerComponent implements AfterViewInit {
 
     initColumns(): void {
         this.availableColumns.forEach(col => {
-            col.show = this.initialSelection && !this.initialSelection.includes(col.key) ? false : col.show;
+            col.checked = this.initialSelection ? this.initialSelection.includes(col.key) : col.checked;
         });
+
+        this.displayedColumns = this.availableColumns.filter(col => !col.hidden);
     }
 
     updateColumns(): void {
-        const selectedColumns = this.availableColumns.filter(col => col.show).map(col => col.key);
+        const selectedColumns = this.availableColumns.filter(col => col.checked).map(col => col.key);
 
         this.selectionChange.emit(selectedColumns);
     }

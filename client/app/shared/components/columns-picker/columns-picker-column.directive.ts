@@ -5,10 +5,17 @@ import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/co
 })
 export class ColumnsPickerColumnDirective implements AfterViewInit, OnInit {
     key: string;
+
+    /**
+     * Initial checked state
+     */
+    @Input() checked = true;
+
     /**
      * Initial visibility state
      */
-    @Input() show = true;
+    @Input() hidden = false;
+
     /**
      * Localized label of column, if absent default to key
      */

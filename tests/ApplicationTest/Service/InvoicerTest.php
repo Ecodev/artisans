@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
+use Application\DBAL\Types\BookingStatusType;
 use Application\Model\Account;
 use Application\Model\Bookable;
 use Application\Model\Booking;
@@ -58,6 +59,7 @@ class InvoicerTest extends TestCase
         $booking = new Booking();
         $booking->setOwner($user);
         $booking->setBookable($bookable);
+        $booking->setStatus(BookingStatusType::BOOKED);
 
         $account = $user->getAccount();
 
@@ -179,9 +181,15 @@ class InvoicerTest extends TestCase
 
         $bookingWithoutOwner = new Booking();
         $bookingWithoutOwner->setBookable($bookable);
+        $bookingWithoutOwner->setStatus(BookingStatusType::BOOKED);
 
         $bookingWithoutBookable = new Booking();
         $bookingWithoutBookable->setOwner($user);
+        $bookingWithoutBookable->setStatus(BookingStatusType::BOOKED);
+
+        $bookingWithoutStatus = new Booking();
+        $bookingWithoutStatus->setBookable($bookable);
+        $bookingWithoutStatus->setOwner($user);
 
         self::assertNull($user->getAccount(), 'invoicer is only called when we have both an owner and a bookable');
     }

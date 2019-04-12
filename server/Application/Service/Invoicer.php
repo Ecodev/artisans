@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Application\DBAL\Types\BookingStatusType;
 use Application\Model\Account;
 use Application\Model\Bookable;
 use Application\Model\Booking;
@@ -70,6 +71,10 @@ class Invoicer
     public function invoiceInitial(User $user, Booking $booking): void
     {
         $this->bookingRepository->getAclFilter()->setEnabled(false);
+
+        if ($booking->getStatus() !== BookingStatusType::BOOKED) {
+            return;
+        }
 
         $bookable = $booking->getBookable();
         if (!$bookable->getInitialPrice() && !$bookable->getPeriodicPrice()) {

@@ -275,6 +275,7 @@ class Booking extends AbstractModel
     public function setStatus(string $status): void
     {
         $this->status = $status;
+        $this->invoiceInitial();
     }
 
     /**

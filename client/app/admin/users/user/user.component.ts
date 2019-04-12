@@ -113,10 +113,4 @@ export class UserComponent
         return filter;
     }
 
-    public flagWelcomeSessionDate(user, value?) {
-        this.userService.flagWelcomeSessionDate(user.id, value).subscribe((u: any) => {
-            user.welcomeSessionDate = u.welcomeSessionDate;
-        });
-    }
-
 }

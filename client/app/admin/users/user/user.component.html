@@ -130,15 +130,14 @@
 
                             <mat-form-field fxFlex>
                                 <mat-label>Date de naissance</mat-label>
-                                <input matInput formControlName="birthday" [matDatepicker]="picker" (change)="update()">
+                                <input matInput formControlName="birthday" [matDatepicker]="picker" (dateChange)="update()">
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
-                            <div>
-                                <span class="mat-body-2">Âge</span>
-                                <span *ngIf="data.model.age">
-                                {{ data.model.age }}
-                            </span>
+
+                            <div *ngIf="data.model.age">
+                                <span class="mat-body-2">Âge : </span>
+                                <span>{{ data.model.age }}</span>
                             </div>
                         </div>
 
@@ -240,24 +239,25 @@
 
                     <!-- Welcome session date -->
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-                        <div>
-                            <span class="mat-body-2">Séance d'accueil</span>
-                            <span *ngIf="data.model.welcomeSessionDate">
-                                le : {{ data.model.welcomeSessionDate  | date: 'longDate' }} - {{ data.model.welcomeSessionDate | date: 'shortTime' }}
-                            </span>
-                        </div>
-                        <button mat-button
-                                color="primary"
-                                *ngIf="!data.model.welcomeSessionDate"
-                                (click)="flagWelcomeSessionDate(data.model)"
-                        >A participé à la session d'accueil
-                        </button>
-                        <button mat-button
-                                color="warn"
-                                *ngIf="data.model.welcomeSessionDate"
-                                (click)="flagWelcomeSessionDate(data.model, null)"
-                        >N'a pas participé
-                        </button>
+
+                        <mat-form-field>
+                            <mat-label>Séance d'accueil</mat-label>
+                            <input matInput formControlName="welcomeSessionDate" [matDatepicker]="picker2" (dateChange)="update()">
+
+                            <div matSuffix xLayout="row" fxLayoutAlign="start center">
+                                <mat-datepicker-toggle [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+
+                                <button mat-icon-button
+                                        *ngIf="form.get('welcomeSessionDate').value"
+                                        (click)="form.get('welcomeSessionDate').setValue(null); update()"
+                                >
+                                    <app-icon name="close"></app-icon>
+                                </button>
+                            </div>
+
+                        </mat-form-field>
+
                     </div>
 
                     <!-- LastLogin -->
@@ -284,7 +284,7 @@
                             [navigateTo]="['/admin/account', form.get('account').value?.id]"
                 ></app-select>
 
-                <mat-form-field fxFlex>s
+                <mat-form-field fxFlex>
                     <mat-label>IBAN</mat-label>
                     <input matInput formControlName="iban" (change)="update()">
                 </mat-form-field>

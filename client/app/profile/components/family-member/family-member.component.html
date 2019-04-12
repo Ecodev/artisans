@@ -73,7 +73,7 @@
 
         <mat-form-field fxFlex>
             <mat-label>Date de naissance</mat-label>
-            <input matInput formControlName="birthday" [matDatepicker]="picker" (change)="update()">
+            <input matInput formControlName="birthday" [matDatepicker]="picker" (dateChange)="update()">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

@@ -67,11 +67,11 @@ class AccountRepositoryTest extends AbstractRepositoryTest
 
     public function testTotalBalance(): void
     {
-        $totalAssets = $this->repository->totalBalanceByType('asset');
-        $totalLiabilities = $this->repository->totalBalanceByType('liability');
-        $totalRevenue = $this->repository->totalBalanceByType('revenue');
-        $totalExpense = $this->repository->totalBalanceByType('expense');
-        $totalEquity = $this->repository->totalBalanceByType('equity');
+        $totalAssets = $this->repository->totalBalanceByType(AccountTypeType::ASSET);
+        $totalLiabilities = $this->repository->totalBalanceByType(AccountTypeType::LIABILITY);
+        $totalRevenue = $this->repository->totalBalanceByType(AccountTypeType::REVENUE);
+        $totalExpense = $this->repository->totalBalanceByType(AccountTypeType::EXPENSE);
+        $totalEquity = $this->repository->totalBalanceByType(AccountTypeType::EQUITY);
 
         self::assertEquals(35187.50, $totalAssets);
         self::assertEquals(60, $totalLiabilities);

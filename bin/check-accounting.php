@@ -4,17 +4,18 @@
 /**
  * A script to check that accounts are balanced
  */
+use Application\DBAL\Types\AccountTypeType;
 use Application\Model\Account;
 
 require_once 'server/cli.php';
 
 $repo = _em()->getRepository(Account::class);
 
-$assets = $repo->totalBalanceByType('asset');
-$liabilities = $repo->totalBalanceByType('liability');
-$revenue = $repo->totalBalanceByType('revenue');
-$expense = $repo->totalBalanceByType('expense');
-$equity = $repo->totalBalanceByType('equity');
+$assets = $repo->totalBalanceByType(AccountTypeType::ASSET);
+$liabilities = $repo->totalBalanceByType(AccountTypeType::LIABILITY);
+$revenue = $repo->totalBalanceByType(AccountTypeType::REVENUE);
+$expense = $repo->totalBalanceByType(AccountTypeType::EXPENSE);
+$equity = $repo->totalBalanceByType(AccountTypeType::EQUITY);
 
 bcscale(2);
 

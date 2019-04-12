@@ -59,7 +59,10 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
      */
     public function getOrCreate(User $user): Account
     {
+        $this->getAclFilter()->setEnabled(false);
         $account = $this->findOneByOwner($user);
+        $this->getAclFilter()->setEnabled(true);
+
         if (!$account) {
             $account = new Account();
             $this->getEntityManager()->persist($account);

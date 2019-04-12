@@ -7,7 +7,6 @@ import { AbstractModelService, FormValidators } from '../../../shared/services/a
 import {
     createUser,
     currentUserForProfileQuery,
-    invoiceMutation,
     leaveFamilyMutation,
     loginMutation,
     logoutMutation,
@@ -26,10 +25,9 @@ import {
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
-    Invoice,
-    InvoiceVariables,
     LeaveFamily,
-    LeaveFamilyVariables, LogicalOperator,
+    LeaveFamilyVariables,
+    LogicalOperator,
     Login,
     LoginVariables,
     Logout,
@@ -180,7 +178,7 @@ export class UserService extends AbstractModelService<User['user'],
             welcomeSessionDate: null,
             iban: '',
             hasInsurance: false,
-            receivesNewsletter: true
+            receivesNewsletter: true,
         };
     }
 
@@ -456,14 +454,5 @@ export class UserService extends AbstractModelService<User['user'],
                 login: login,
             },
         });
-    }
-
-    public invoice(user): Observable<{ model: Invoice['invoice'] }> {
-        return this.apollo.mutate<Invoice, InvoiceVariables>({
-            mutation: invoiceMutation,
-            variables: {
-                id: user.id,
-            },
-        }).pipe(map(result => result.data.invoice));
     }
 }

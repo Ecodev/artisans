@@ -172,12 +172,6 @@ export const unregisterMutation = gql`
     }
 `;
 
-export const invoiceMutation = gql`
-    mutation Invoice($id: UserID!) {
-        invoice(id: $id)
-    }
-`;
-
 export const leaveFamilyMutation = gql`
     mutation LeaveFamily($id: UserID!) {
         leaveFamily(id: $id) {

@@ -45,7 +45,7 @@ class Bookable extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
+     * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00", "unsigned" = true})
      */
     private $purchasePrice = '0';
 

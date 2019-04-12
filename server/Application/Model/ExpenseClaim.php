@@ -36,7 +36,7 @@ class ExpenseClaim extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=7, scale=2)
+     * @ORM\Column(type="decimal", precision=7, scale=2, options={"unsigned" = true})
      */
     private $amount;
 

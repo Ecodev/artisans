@@ -271,7 +271,19 @@
 
         </mat-tab>
 
-        <mat-tab label="Finances" *ngIf="data.model.id">
+        <mat-tab label="Famille" *ngIf="data.model.id && showFamilyTab">
+            <app-users [queryVariables]="UserService.getFamilyVariables(data.model)" [persistSearch]="false" class="margin-top"></app-users>
+        </mat-tab>
+
+        <mat-tab label="Historique">
+            <app-transaction-lines [columns]="['name', 'bookable', 'transactionDate', 'remark', 'account']"
+                                   [queryVariables]="getTransactionQueryVariables()"
+                                   [relativeToAccount]="data.model.account"
+                                   class="margin-top"
+            ></app-transaction-lines>
+        </mat-tab>
+
+        <mat-tab label="Dépenses et remboursements" *ngIf="data.model.id">
 
             <div fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="row" fxLayoutGap="30px" class="margin-top">
@@ -282,20 +294,16 @@
                                 [showIcon]="false"
                                 [navigateTo]="['/admin/account', form.get('account').value?.id]"
                     ></app-select>
-
-                    <mat-form-field fxFlex>
-                        <mat-label>IBAN</mat-label>
-                        <input matInput formControlName="iban" (change)="update()">
-                    </mat-form-field>
                 </div>
 
-                <app-services [user]="data.model"></app-services>
+                <app-finances [user]="data.model"></app-finances>
             </div>
 
         </mat-tab>
 
-        <mat-tab label="Famille" *ngIf="data.model.id && showFamilyTab">
-            <app-users [queryVariables]="UserService.getFamilyVariables(data.model)" [persistSearch]="false"></app-users>
+        <mat-tab label="Prestations et services" *ngIf="data.model.id">
+            <br class="margin-top"/>
+            <app-services [user]="data.model"></app-services>
         </mat-tab>
 
     </mat-tab-group>

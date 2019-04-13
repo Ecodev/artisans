@@ -6,7 +6,7 @@
         <mat-form-field>
             <mat-label>IBAN</mat-label>
             <input matInput
-                   [ngModel]="viewer.iban"
+                   [ngModel]="user.iban"
                    (change)="updateIban($event.target.value);"
                    [disabled]="ibanLocked"
                    (blur)="lockIbanIfDefined()"
@@ -21,8 +21,12 @@
 
         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="10px">
             <h3 fxFlex class="mat-headline no-margin">Dépenses et remboursements en attente</h3>
-            <button mat-stroked-button (click)="createRefund()" [disabled]="!viewer.iban">Demander un remboursement</button>
-            <a mat-stroked-button [routerLink]="['/profile/create-expense-claim']">Annoncer une dépense</a>
+            <button mat-stroked-button (click)="createRefund()" [disabled]="!user.iban" *ngIf="!adminMode">
+                Demander un remboursement
+            </button>
+            <a mat-stroked-button [routerLink]="['/profile/create-expense-claim']" *ngIf="!adminMode">
+                Annoncer une dépense
+            </a>
         </div>
 
         <div class="mat-body-1 padding margin"
@@ -92,6 +96,16 @@
                             <app-icon name="delete"></app-icon>
                         </button>
                     </td>
+                </ng-container>
+
+                <ng-container matColumnDef="admin">
+                    <th mat-header-cell *matHeaderCellDef app-1em-column>Traiter</th>
+                    <td mat-cell *matCellDef="let booking">
+                        <a mat-icon-button mat-raised-button color="accent" [routerLink]="['/admin/booking', booking.id]">
+                            <app-icon name="chevron_right"></app-icon>
+                        </a>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
             </table>

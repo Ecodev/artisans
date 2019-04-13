@@ -4,12 +4,9 @@ import { AbstractDetail } from '../../shared/components/AbstractDetail';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
-    BookingFilter,
-    BookingStatus,
-    BookingType,
     CreateUser,
-    CreateUserVariables,
-    LogicalOperator,
+    CreateUserVariables, LogicalOperator, SortingOrder, TransactionLineSortingField,
+    TransactionLinesVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -64,6 +61,25 @@ export class UserComponent
 
         });
 
+    }
+
+    public getTransactionQueryVariables(): TransactionLinesVariables {
+        const account = this.data.model.account;
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditionsLogic: LogicalOperator.OR,
+                        conditions: [
+                            {credit: {equal: {value: account.id}}},
+                            {debit: {equal: {value: account.id}}},
+                        ],
+                    },
+
+                ],
+            },
+            sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
+        };
     }
 
 }

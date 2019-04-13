@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../shared/components/alert/alert.service';
 import { PersistenceService } from '../../shared/services/persistence.service';
@@ -15,6 +15,8 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 })
 export class TransactionLinesComponent extends AbstractList<TransactionLines['transactionLines'], TransactionLinesVariables>
     implements OnInit {
+
+    @Input() relativeToAccount;
 
     constructor(route: ActivatedRoute,
                 router: Router,

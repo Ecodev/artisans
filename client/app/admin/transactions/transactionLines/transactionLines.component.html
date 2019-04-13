@@ -15,12 +15,12 @@
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
                     <span appColumnsPickerColumn="name">Nom</span>
+                    <span appColumnsPickerColumn="bookable">Réservable</span>
                     <span appColumnsPickerColumn="transactionDate">Date</span>
+                    <span appColumnsPickerColumn="remarks">Remarques</span>
                     <span appColumnsPickerColumn="balance">Montant</span>
                     <span appColumnsPickerColumn="account">Compte</span>
-                    <span appColumnsPickerColumn="bookable">Réservable</span>
                     <span appColumnsPickerColumn="expenseClaim">Quittance</span>
-                    <span appColumnsPickerColumn="remarks">Remarques</span>
                     <span appColumnsPickerColumn="creationDate" [checked]="false">Créé le</span>
                     <span appColumnsPickerColumn="updateDate" [checked]="false">Modifié le</span>
                 </app-columns-picker>
@@ -44,7 +44,6 @@
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
-                >
 
                 <ng-container matColumnDef="balance">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Montant</th>
@@ -60,10 +59,22 @@
                     <th mat-header-cell *matHeaderCellDef>Compte</th>
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1px">
-                            <app-transaction-amount displayMode="account" [transactionLine]="element" [relativeToAccount]="element.debit"
-                            ></app-transaction-amount>
-                            <app-transaction-amount displayMode="account" [transactionLine]="element" [relativeToAccount]="element.credit"
-                            ></app-transaction-amount>
+                            <div *ngIf="!relativeToAccount">
+                                <app-transaction-amount displayMode="account"
+                                                        [transactionLine]="element"
+                                                        [relativeToAccount]="element.debit"
+                                ></app-transaction-amount>
+                                <app-transaction-amount displayMode="account"
+                                                        [transactionLine]="element"
+                                                        [relativeToAccount]="element.credit"
+                                ></app-transaction-amount>
+                            </div>
+                            <div *ngIf="!!relativeToAccount">
+                                <app-transaction-amount displayMode="amount"
+                                                        [transactionLine]="element"
+                                                        [relativeToAccount]="relativeToAccount"
+                                ></app-transaction-amount>
+                            </div>
                         </div>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
@@ -82,7 +93,7 @@
 
                 <ng-container matColumnDef="transactionDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
-                    <td mat-cell *matCellDef="let element">{{ element.transactionDate | date : 'longDate' }}</td>
+                    <td mat-cell *matCellDef="let element">{{ element.transactionDate | date : 'mediumDate' }}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 

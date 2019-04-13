@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ExpenseClaimStatus, ExpenseClaimType } from '../../../shared/generated-types';
 import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -19,12 +19,14 @@ import { AbstractController } from '../../../shared/components/AbstractControlle
 })
 export class FinancesComponent extends AbstractController implements OnInit, OnDestroy {
 
-    public viewer;
+    @Input() user = null;
 
     public runningExpenseClaimsDS: AppDataSource;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];
 
     public ibanLocked = true;
+
+    public adminMode = false;
 
     constructor(
         private userService: UserService,
@@ -37,11 +39,17 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
     }
 
     ngOnInit() {
-        this.viewer = this.route.snapshot.data.viewer.model;
 
-        this.ibanLocked = !!this.viewer.iban;
+        if (!this.user) {
+            this.user = this.route.snapshot.data.viewer.model;
+        } else {
+            this.adminMode = true;
+            this.expenseClaimsColumns.push('admin');
+        }
 
-        const runningExpenseClaims = this.expenseClaimService.getForUser(this.viewer, this.ngUnsubscribe);
+        this.ibanLocked = !!this.user.iban;
+
+        const runningExpenseClaims = this.expenseClaimService.getForUser(this.user, this.ngUnsubscribe);
         this.runningExpenseClaimsDS = new AppDataSource(runningExpenseClaims);
 
     }
@@ -75,14 +83,14 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
     }
 
     public updateIban(iban: string) {
-        this.userService.updatePartially({id: this.viewer.id, iban: iban}).pipe(catchError(() => {
+        this.userService.updatePartially({id: this.user.id, iban: iban}).pipe(catchError(() => {
             this.alertService.error('L\'IBAN est invalide');
             return of(null);
         })).subscribe(user => {
             if (user) {
                 this.ibanLocked = true;
                 this.alertService.info('Votre IBAN a été modifié');
-                this.viewer.iban = iban;
+                this.user.iban = iban;
                 this.lockIbanIfDefined();
             } else {
                 this.ibanLocked = false;
@@ -91,7 +99,7 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
     }
 
     public lockIbanIfDefined() {
-        if (this.viewer.iban) {
+        if (this.user.iban) {
             this.ibanLocked = true;
         }
     }

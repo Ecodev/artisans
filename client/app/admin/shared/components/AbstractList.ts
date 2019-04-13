@@ -80,6 +80,9 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         this.initFromRouting();
         this.initFromAttributeInputs();
 
+        console.log('this.columns', this.columns);
+        console.log('this.selectedColumns', this.selectedColumns);
+
         this.dataSource = new AppDataSource(this.getDataObservable());
         this.selection = new SelectionModel<Tall>(true, []);
     }

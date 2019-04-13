@@ -46,6 +46,7 @@ import { TransactionLinesComponent } from './components/transaction-lines/transa
     ],
     exports: [
         ServicesComponent,
+        FinancesComponent
     ],
 })
 export class ProfileModule {

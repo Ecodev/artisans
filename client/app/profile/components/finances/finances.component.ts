@@ -19,7 +19,7 @@ import { AbstractController } from '../../../shared/components/AbstractControlle
 })
 export class FinancesComponent extends AbstractController implements OnInit, OnDestroy {
 
-    @Input() user = null;
+    @Input() user;
 
     public runningExpenseClaimsDS: AppDataSource;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];

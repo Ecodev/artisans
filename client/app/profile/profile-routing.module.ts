@@ -8,7 +8,7 @@ import { FinancesComponent } from './components/finances/finances.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CreateExpenseClaimComponent } from './components/create-expense-claim/create-expense-claim.component';
 import { ServicesGuard } from '../shared/services/services.guard';
-import { TransactionLinesComponent } from './components/transaction-lines/transaction-lines.component';
+import { HistoryComponent } from './components/history/history.component';
 
 const routes: Routes = [
     {
@@ -29,7 +29,7 @@ const routes: Routes = [
                     },
                     {
                         path: 'history',
-                        component: TransactionLinesComponent,
+                        component: HistoryComponent,
                     },
                     {
                         path: 'finances',

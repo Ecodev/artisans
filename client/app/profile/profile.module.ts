@@ -8,7 +8,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileRoutingModule } from './profile-routing.module';
 import { CreateExpenseClaimComponent } from './components/create-expense-claim/create-expense-claim.component';
 import { BookingHistoryComponent } from './components/booking-history/booking-history.component';
-import { FinancesComponent } from './components/finances/finances.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CreateRefundComponent } from './components/create-refund/create-refund.component';
 import { ProvisionComponent } from './components/provision/provision.component';
@@ -16,7 +15,8 @@ import { SelectAdminApprovedModalComponent } from '../shared/components/select-a
 import {
     SelectAdminApprovedButtonComponent
 } from '../shared/components/select-admin-approved-button/select-admin-approved-button.component';
-import { TransactionLinesComponent } from './components/transaction-lines/transaction-lines.component';
+import { HistoryComponent } from './components/history/history.component';
+import { FinancesComponent } from './components/finances/finances.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +31,7 @@ import { TransactionLinesComponent } from './components/transaction-lines/transa
         ProvisionComponent,
         SelectAdminApprovedButtonComponent,
         SelectAdminApprovedModalComponent,
-        TransactionLinesComponent,
+        HistoryComponent,
     ],
     imports: [
         CommonModule,

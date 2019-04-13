@@ -7,18 +7,16 @@ import { TransactionLineService } from '../../../admin/transactions/services/tra
 import { AbstractController } from '../../../shared/components/AbstractController';
 
 @Component({
-    selector: 'app-transaction-lines',
-    templateUrl: './transaction-lines.component.html',
-    styleUrls: ['./transaction-lines.component.scss'],
+    selector: 'app-history',
+    templateUrl: './history.component.html',
+    styleUrls: ['./history.component.scss'],
 })
-export class TransactionLinesComponent extends AbstractController implements OnInit, OnDestroy {
+export class HistoryComponent extends AbstractController implements OnInit, OnDestroy {
 
     public viewer;
 
     public transactionLinesDS: AppDataSource;
     public transactionsColumns = ['name', 'bookable', 'transactionDate', 'remarks', 'amount'];
-
-    public ibanLocked = true;
 
     constructor(
         private userService: UserService,
@@ -30,8 +28,6 @@ export class TransactionLinesComponent extends AbstractController implements OnI
 
     ngOnInit() {
         this.viewer = this.route.snapshot.data.viewer.model;
-
-        this.ibanLocked = !!this.viewer.iban;
 
         if (this.viewer.account) {
             const transactionLinesQuery = this.transactionLineService.getForAccount(this.viewer.account, this.ngUnsubscribe);

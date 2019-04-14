@@ -1,8 +1,8 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { fakeAsync, inject, tick } from '@angular/core/testing';
-import { AbstractModelService } from '../services/abstract-model.service';
-import { Literal } from '../types';
-import { QueryVariablesManager } from '../classes/query-variables-manager';
+import { AbstractModelService } from '../../natural/services/abstract-model.service';
+import { QueryVariablesManager } from '../../natural/classes/QueryVariablesManager';
+import { Literal } from '../../natural/types/types';
 
 // A shortcut for shorter lines
 type ModelService = AbstractModelService<any, any, any, any, any, any, any, any, any>;

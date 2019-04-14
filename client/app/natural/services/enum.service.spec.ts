@@ -1,6 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { EnumService } from './enum.service';
-import { MockApolloProvider } from '../testing/MockApolloProvider';
+import { MockApolloProvider } from '../../shared/testing/MockApolloProvider';
 
 describe('EnumService', () => {
     beforeEach(() => {

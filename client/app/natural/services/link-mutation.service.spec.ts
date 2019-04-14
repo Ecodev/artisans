@@ -1,6 +1,6 @@
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { MockApolloProvider } from '../testing/MockApolloProvider';
 import { LinkMutationService } from './link-mutation.service';
+import { MockApolloProvider } from '../../shared/testing/MockApolloProvider';
 
 describe('LinkMutationService', () => {
     beforeEach(() => {
@@ -20,7 +20,6 @@ describe('LinkMutationService', () => {
             linkLicenseBookable: license,
         },
     };
-
 
     const expectedUnlink = {
         data: {

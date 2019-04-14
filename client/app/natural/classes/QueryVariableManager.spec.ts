@@ -1,4 +1,4 @@
-import { QueryVariablesManager } from './query-variables-manager';
+import { QueryVariablesManager } from './QueryVariablesManager';
 
 describe('QueryVariablesManager', () => {
 

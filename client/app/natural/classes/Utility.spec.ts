@@ -1,4 +1,4 @@
-import { Utility } from '../classes/utility';
+import { Utility } from './Utility';
 
 describe('Utility', () => {
 

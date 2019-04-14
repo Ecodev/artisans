@@ -133,7 +133,7 @@
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-                        <div *ngIf="data.model.id">
+                        <div *ngIf="data.model.id && isSelfApproved()">
                             <h2 class="mat-title">Certifications</h2>
                             <app-relations [main]="data.model"
                                            [service]="licenseService"

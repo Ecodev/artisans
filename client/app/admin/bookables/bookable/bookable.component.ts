@@ -5,7 +5,8 @@ import { AlertService } from '../../../natural/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
     Bookable,
-    BookableVariables, BookingSortingField,
+    BookableVariables,
+    BookingSortingField,
     BookingsVariables,
     BookingType,
     CreateBookable,

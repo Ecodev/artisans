@@ -263,7 +263,7 @@
                     <!-- LastLogin -->
                     <div>
                         <span class="mat-body-2">Dernière connexion :</span>
-                        {{ data.model.lastLogin  | date: 'longDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}
+                        {{ data.model.lastLogin  | date: 'mediumDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}
                     </div>
                 </div>
 
@@ -275,7 +275,7 @@
             <app-users [queryVariables]="UserService.getFamilyVariables(data.model)" [persistSearch]="false" class="margin-top"></app-users>
         </mat-tab>
 
-        <mat-tab label="Historique">
+        <mat-tab label="Historique" *ngIf="data.model.account">
             <app-transaction-lines [columns]="['name', 'bookable', 'transactionDate', 'remark', 'account']"
                                    [queryVariables]="getTransactionQueryVariables()"
                                    [relativeToAccount]="data.model.account"

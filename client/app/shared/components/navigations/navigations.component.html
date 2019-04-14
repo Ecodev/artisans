@@ -19,13 +19,18 @@
                             <mat-divider></mat-divider>
                         </div>
                         <div class="mat-body-2">{{ booking.owner.name }}</div>
-                        <div class="mat-body-1" *ngIf="!booking.endDate && booking.destination">Destination : {{ booking.destination }}
+                        <div class="mat-body-1" *ngIf="!booking.endDate && booking.destination">
+                            Destination : {{ booking.destination }}
                         </div>
                         <div class="mat-body-1" *ngIf="!booking.endDate && booking.estimatedEndDate">
                             Retour prévu : {{ booking.estimatedEndDate }}
                         </div>
-                        <div>Début : {{ booking.startDate | date: 'medium' }}</div>
-                        <div *ngIf="booking.endDate">Fin : {{ booking.endDate | date: 'medium' }}</div>
+                        <div>
+                            Début : {{ booking.startDate  | date: 'mediumDate' }} - {{ booking.startDate | date: 'shortTime' }}
+                        </div>
+                        <div *ngIf="booking.endDate">
+                            Fin : {{ booking.endDate  | date: 'mediumDate' }} - {{ booking.endDate | date: 'shortTime' }}
+                        </div>
 
                         <div fxLayout="row" fxLayoutAlign="end center">
                             <button mat-icon-button (click)="booking.showComments = true">

@@ -80,6 +80,7 @@ export const usersQuery = gql`
                 lastLogin
                 age
                 welcomeSessionDate
+                sex
                 account {
                     id
                     balance

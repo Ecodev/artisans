@@ -2,7 +2,7 @@
 
     <div fxLayout="column">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            <span>{{routeData.title}}</span>
+            <span>{{ routeData.title }}</span>
         </div>
     </div>
 
@@ -16,7 +16,6 @@
                             [multipleGroups]="true"
             >
                 <app-columns-picker (selectionChange)="selectedColumns = $event">
-                    <span appColumnsPickerColumn="id">id</span>
                     <span appColumnsPickerColumn="name">Nom</span>
                 </app-columns-picker>
             </natural-search>
@@ -26,11 +25,6 @@
 
             <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
-
-            <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>ID</th>
-                <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-            </ng-container>
 
             <ng-container matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>

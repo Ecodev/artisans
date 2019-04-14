@@ -107,6 +107,8 @@ class Importer
 
         $this->typo3 = new PDOConnection(sprintf('mysql:host=%s;port=%u;dbname=%s', $config['typo3']['host'], $config['typo3']['port'], $config['typo3']['dbname']), $config['typo3']['user'], $config['typo3']['password']);
 
+        $this->typo3->exec('SET wait_timeout=1200');
+
         return $this->typo3;
     }
 
@@ -459,11 +461,17 @@ EOT;
                 $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_entrée ichtus']);
             }
 
-            // Generate a new random password and store it in TYPO3 fe_users to send a newsletter to users
-            $password = $this->generatePassword();
-            $exportPassword->bindValue(':password', $password);
-            $exportPassword->bindValue(':user_id', $user['uid']);
-            $exportPassword->execute();
+            $password = $user['new_password'];
+            if (empty($password)) {
+                // Generate a new random password and store it in TYPO3 fe_users to send a newsletter to users
+                $password = $this->generatePassword();
+                echo sprintf('Generating new pass %s for user %s', $password, $user['uid']) . PHP_EOL;
+                $exportPassword->bindValue(':password', $password);
+                $exportPassword->bindValue(':user_id', $user['uid']);
+                $exportPassword->execute();
+            } else {
+                echo sprintf('Using existing pass %s for user %s', $password, $user['uid']) . PHP_EOL;
+            }
             $insert->bindValue(':password', password_hash($password, PASSWORD_DEFAULT));
 
             if ($insert->execute() === false) {
@@ -494,34 +502,28 @@ EOT;
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
             }
-            if ($user['ichtus_permisvoile']) {
-                $userTagId = $this->insertUserTag('Permis voile');
-                $linkToTag->bindValue(':user_tag_id', $userTagId);
-                $linkToTag->execute();
-            }
-            if ($user['ichtus_permismoteur']) {
-                $userTagId = $this->insertUserTag('Permis moteur');
-                $linkToTag->bindValue(':user_tag_id', $userTagId);
-                $linkToTag->execute();
-            }
 
             // Assigne les brevets au membre
             $linkToLicense->bindValue(':user_id', $user['uid']);
+            $licenses = [];
             switch ($user['ichtus_autvoile']) {
-                case 1: $idLicense = 2000;
+                case 3: $licenses[] = 2002; // Voile niveau 3 (+ inférieurs)
+                // no break
+                case 2: $licenses[] = 2001; // Voile niveau 2 (+ inférieurs)
+                // no break
+                case 1: $licenses[] = 2000;
 
-break; // Voile niveau 1
-                case 2: $idLicense = 2001;
-
-break; // Voile niveau 2
-                case 3: $idLicense = 2002;
-
-break; // Voile niveau 3
-                default: $idLicense = null;
+break;
+                default:
             }
-            if ($idLicense) {
-                echo sprintf('%s %s: brevet voile niveau %u', $user['first_name'], $user['last_name'], $user['ichtus_autvoile']) . PHP_EOL;
-                $linkToLicense->bindValue(':license_id', $idLicense);
+            if ($user['ichtus_permisvoile']) {
+                $licenses[] = 2006;
+            }
+            if ($user['ichtus_permismoteur']) {
+                $licenses[] = 2007;
+            }
+            foreach ($licenses as $license) {
+                $linkToLicense->bindValue(':license_id', $license);
                 $linkToLicense->execute();
             }
         }

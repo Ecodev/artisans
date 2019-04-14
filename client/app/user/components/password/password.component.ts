@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
-import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
+import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
 
 function passwordValidator(control: FormControl): ValidationErrors | null {
     const value = control.value || '';

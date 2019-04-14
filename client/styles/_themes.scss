@@ -7,15 +7,14 @@
 @import '~@ecodev/natural-search/theming/natural-search.theme';
 @import '../app/shared/components/boot-loader/boot-loader.theme';
 @import '../app/app.theme';
-@import '../app/shared/components/alert/alert.theme';
 @import '../app/door/door.theme';
 @import 'table';
 @import 'rich-text';
 @import 'page-header';
-@import '../app/shared/modules/sidenav/sidenav.theme';
 @import '../app/shared/components/money/money.theme';
 @import '../app/shared/components/file/file.theme';
 @import '../app/shared/components/transaction-amount/transaction-amount.theme';
+@import '../app/natural/_natural.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -23,13 +22,12 @@
 // Include components themes
 @mixin components-theme($theme) {
     @include app($theme);
-    @include alert($theme);
+    @include natural($theme);
     @include boot-loader($theme);
     @include door($theme);
     @include table($theme);
     @include natural-search-theme($theme);
     @include page-header($theme);
-    @include sidenav($theme);
     @include money($theme);
     @include file($theme);
     @include transaction-amount($theme);

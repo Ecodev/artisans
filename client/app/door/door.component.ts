@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DoorService } from './services/door.service';
 import { AbstractController } from '../shared/components/AbstractController';
-import { AlertService } from '../shared/components/alert/alert.service';
 import { UserService } from '../admin/users/services/user.service';
-import { Literal } from '../shared/types';
 import { ActivatedRoute } from '@angular/router';
+import { Literal } from '../natural/types/types';
+import { AlertService } from '../natural/components/../../natural/components/alert/alert.service';
+
 
 @Component({
     selector: 'app-door',

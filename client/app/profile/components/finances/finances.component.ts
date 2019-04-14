@@ -1,16 +1,16 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ExpenseClaimStatus, ExpenseClaimType } from '../../../shared/generated-types';
-import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { MatDialog } from '@angular/material';
 import { CreateRefundComponent } from '../create-refund/create-refund.component';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AbstractController } from '../../../shared/components/AbstractController';
+import { NaturalDataSource } from '../../../natural/classes/DataSource';
 
 @Component({
     selector: 'app-finances',
@@ -21,7 +21,7 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
 
     @Input() user;
 
-    public runningExpenseClaimsDS: AppDataSource;
+    public runningExpenseClaimsDS: NaturalDataSource;
     public expenseClaimsColumns = ['name', 'date', 'status', 'type', 'remarks', 'amount', 'cancel'];
 
     public ibanLocked = true;
@@ -50,7 +50,7 @@ export class FinancesComponent extends AbstractController implements OnInit, OnD
         this.ibanLocked = !!this.user.iban;
 
         const runningExpenseClaims = this.expenseClaimService.getForUser(this.user, this.ngUnsubscribe);
-        this.runningExpenseClaimsDS = new AppDataSource(runningExpenseClaims);
+        this.runningExpenseClaimsDS = new NaturalDataSource(runningExpenseClaims);
 
     }
 

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { merge } from 'lodash';
 import { CountryService } from './country.service';
 import { FormGroup } from '@angular/forms';
 

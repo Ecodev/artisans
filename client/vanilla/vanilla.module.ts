@@ -2,18 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ApplicationRef, DoBootstrap, NgModule } from '@angular/core';
 import { Apollo, APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createUploadLink } from 'apollo-upload-client';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import gql from 'graphql-tag';
-import { QueryVariablesManager } from '../app/shared/classes/query-variables-manager';
-import { LinkMutationService } from '../app/shared/services/link-mutation.service';
 import { BookableService } from '../app/admin/bookables/services/bookable.service';
 import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { UserService } from '../app/admin/users/services/user.service';
 import { BookingService } from '../app/admin/bookings/services/booking.service';
-import { BookableMetadataService } from '../app/shared/components/bookable-metadata/bookable-metadata.service';
+import { LinkMutationService } from '../app/natural/services/link-mutation.service';
+import { QueryVariablesManager } from '../app/natural/classes/QueryVariablesManager';
 
 @NgModule({
     imports: [
@@ -51,7 +49,6 @@ export class VanillaModule implements DoBootstrap {
                 bookableService: BookableService,
                 bookingService: BookingService,
                 linkMutation: LinkMutationService,
-                bookableMetaDataService: BookableMetadataService,
     ) {
 
         const api = {
@@ -62,7 +59,6 @@ export class VanillaModule implements DoBootstrap {
             bookingService,
             QueryVariablesManager,
             linkMutation,
-            bookableMetaDataService,
         };
 
         window['ichtusApi'] = api;

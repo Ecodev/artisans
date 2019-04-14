@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { BookingService } from '../admin/bookings/services/booking.service';
-import { EnumService } from '../shared/services/enum.service';
 import gql from 'graphql-tag';
 import { bookableMetaFragment } from '../admin/bookables/services/bookable.queries';
+import { EnumService } from '../natural/services/enum.service';
 
 const safetyBookings = gql`
     query SafetyBookings($filter: BookingFilter, $sorting: [BookingSorting!], $pagination: PaginationInput) {

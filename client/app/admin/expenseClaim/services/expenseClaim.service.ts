@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     createExpenseClaim,
     deleteExpenseClaims,
@@ -23,8 +23,8 @@ import {
     UpdateExpenseClaimVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { Observable, Subject } from 'rxjs';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 
 @Injectable({
     providedIn: 'root',

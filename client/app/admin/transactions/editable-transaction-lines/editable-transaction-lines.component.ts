@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractEditableList } from '../../shared/components/AbstractEditableList';
 import { TransactionLineService } from '../services/transactionLine.service';
-import { AccountConfiguration } from '../../../shared/hierarchic-selector/configurations/AccountConfiguration';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { Transaction, TransactionLinesVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
+import { AbstractEditableList } from '../../../natural/classes/AbstractEditableList';
+import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
 
 @Component({
     selector: 'app-editable-transaction-lines',
@@ -15,7 +15,7 @@ export class EditableTransactionLinesComponent extends AbstractEditableList<any,
 
     @Input() transaction: Transaction['transaction'];
 
-    public accountHierarchicConfig = AccountConfiguration;
+    public accountHierarchicConfig = AccountHierarchicConfiguration;
     public columns = ['name', 'balance', 'debit', 'credit', 'bookable', 'transactionTag', 'remarks', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,

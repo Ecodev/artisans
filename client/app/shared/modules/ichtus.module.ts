@@ -1,24 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { RelationsComponent } from '../components/relations/relations.component';
-import { SelectComponent } from '../components/select/select.component';
 import { MaterialModule } from './material.module';
-import { ColumnsPickerComponent } from '../components/columns-picker/columns-picker.component';
-import { ColumnsPickerColumnDirective } from '../components/columns-picker/columns-picker-column.directive';
-import { TableButtonComponent } from '../../admin/shared/components/table-button/table-button.component';
-import { FixedButtonComponent } from '../components/fixed-button/fixed-button.component';
-import { DetailFixedButtonComponent } from '../components/detail-fixed-button/detail-fixed-button.component';
-import { NaturalSearchModule } from '@ecodev/natural-search';
-import { IconModule } from '../components/icon/icon.module';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AddressComponent } from '../components/address/address.component';
-import { EnumPipe } from '../pipes/enum.pipe';
-import { CapitalizePipe } from '../pipes/capitalize.pipe';
-import { SelectEnumComponent } from '../components/select-enum/select-enum.component';
 import { AvatarModule } from 'ngx-avatar';
 import { MoneyComponent } from '../components/money/money.component';
-import { BookableMetadataComponent } from '../components/bookable-metadata/bookable-metadata.component';
 import { FocusDirective } from '../directives/focus';
 import { CardComponent } from '../components/card/card.component';
 import { ngfModule } from 'angular-file';
@@ -30,23 +16,14 @@ import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
 import { TimeagoModule } from 'ngx-timeago';
-import { ParticleSwitchComponent } from '../particle-switch/particle-switch.component';
-import { EllipsisPipe } from '../pipes/ellipsis.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
+import { NaturalModule } from '../../natural/natural.module';
+import { NaturalSearchModule } from '@ecodev/natural-search';
 
 const declarations = [
-    RelationsComponent,
-    SelectComponent,
-    SelectEnumComponent,
-    ColumnsPickerComponent,
-    ColumnsPickerColumnDirective,
-    TableButtonComponent,
-    FixedButtonComponent,
-    DetailFixedButtonComponent,
     AddressComponent,
-    EnumPipe,
-    CapitalizePipe,
     MoneyComponent,
-    BookableMetadataComponent,
     FocusDirective,
     CardComponent,
     FileDropDirective,
@@ -56,14 +33,13 @@ const declarations = [
     TransactionAmountComponent,
     AccountingDocumentsComponent,
     ParticleSwitchComponent,
-    EllipsisPipe
 ];
 
 const imports = [
     CommonModule,
     MaterialModule,
+    NaturalModule,
     NaturalSearchModule,
-    IconModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,

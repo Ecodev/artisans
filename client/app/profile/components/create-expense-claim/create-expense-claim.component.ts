@@ -11,9 +11,9 @@ import {
 } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
-import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { AccountingDocumentsComponent } from '../../../admin/accounting-documents/accounting-documents.component';
+import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
 
 @Component({
     selector: 'app-create-expense-claim',

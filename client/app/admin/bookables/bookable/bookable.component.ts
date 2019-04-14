@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../shared/components/AbstractDetail';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
     Bookable,
@@ -18,7 +18,7 @@ import {
 import { LicenseService } from '../../licenses/services/license.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 import { ImageService } from '../services/image.service';
-import { AccountConfiguration } from '../../../shared/hierarchic-selector/configurations/AccountConfiguration';
+import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
 
 @Component({
     selector: 'app-bookable',
@@ -34,7 +34,7 @@ export class BookableComponent
         UpdateBookableVariables,
         any> implements OnInit {
 
-    public accountHierarchicConfig = AccountConfiguration;
+    public accountHierarchicConfig = AccountHierarchicConfiguration;
 
     constructor(alertService: AlertService,
                 bookableService: BookableService,

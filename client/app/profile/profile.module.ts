@@ -17,6 +17,7 @@ import {
 } from '../shared/components/select-admin-approved-button/select-admin-approved-button.component';
 import { HistoryComponent } from './components/history/history.component';
 import { FinancesComponent } from './components/finances/finances.component';
+import { NaturalModule } from '../natural/natural.module';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { FinancesComponent } from './components/finances/finances.component';
         ProfileRoutingModule,
         MaterialModule,
         IchtusModule,
+        NaturalModule
     ],
     entryComponents: [
         CreateRefundComponent,

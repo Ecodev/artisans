@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
-import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge } from 'lodash';
 import { FamilyUserService } from './family-user.service';
+import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
 
 @Component({
     selector: 'app-family-member',

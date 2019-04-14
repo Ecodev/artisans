@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import { bookingQuery, bookingsQuery, createBooking, deleteBookings, terminateBooking, updateBooking } from './booking.queries';
 import {
     Bookable,
@@ -23,8 +22,9 @@ import {
 import { Validators } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { EnumService } from '../../../shared/services/enum.service';
 import { BookingResolve } from '../booking';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { EnumService } from '../../../natural/services/enum.service';
 
 @Injectable({
     providedIn: 'root',

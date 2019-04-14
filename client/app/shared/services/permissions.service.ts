@@ -5,7 +5,7 @@ import { isEqual } from 'lodash';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { Apollo } from 'apollo-angular';
 import { Permissions, Permissions_permissions, Permissions_permissions_crud } from '../generated-types';
-import { Literal } from '../types';
+import { Literal } from '../../natural/types/types';
 
 const permissions = gql`
     query Permissions {

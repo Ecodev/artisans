@@ -7,8 +7,8 @@ import { BookingHistoryComponent } from './components/booking-history/booking-hi
 import { FinancesComponent } from './components/finances/finances.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CreateExpenseClaimComponent } from './components/create-expense-claim/create-expense-claim.component';
-import { ServicesGuard } from '../shared/services/services.guard';
 import { HistoryComponent } from './components/history/history.component';
+import { ServicesGuard } from '../shared/guards/services.guard';
 
 const routes: Routes = [
     {

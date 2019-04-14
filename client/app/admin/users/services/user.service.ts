@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     createUser,
     currentUserForProfileQuery,
@@ -50,12 +50,12 @@ import {
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
-import { Literal } from '../../../shared/types';
-import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { Literal } from '../../../natural/types/types';
 import { BookingService } from '../../bookings/services/booking.service';
-import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
+import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 
 @Injectable({
     providedIn: 'root',

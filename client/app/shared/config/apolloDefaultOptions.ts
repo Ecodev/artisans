@@ -1,12 +1,12 @@
 import { DefaultOptions } from 'apollo-client/ApolloClient';
 import { NetworkActivityService } from '../services/network-activity.service';
-import { AlertService } from '../components/alert/alert.service';
 import { HttpBatchLink } from 'apollo-angular-link-http-batch';
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
 import { isObject } from 'lodash';
-import { Literal } from '../types';
+import { Literal } from '../../natural/types/types';
+import { AlertService } from '../../natural/components/../../natural/components/alert/alert.service';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {

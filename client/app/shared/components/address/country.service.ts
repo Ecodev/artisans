@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 
 import { countriesQuery, countryQuery } from './country.queries';
-import { AbstractModelService } from '../../services/abstract-model.service';
 import { Countries, CountriesVariables, Country, CountryVariables } from '../../generated-types';
+import { AbstractModelService } from '../../../natural/services/abstract-model.service';
 
 @Injectable({
     providedIn: 'root',

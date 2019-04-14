@@ -8,7 +8,6 @@ import { AvatarModule } from 'ngx-avatar';
 import { BookableComponent } from './bookables/bookable/bookable.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { IchtusModule } from '../shared/modules/ichtus.module';
-import { StampComponent } from './shared/components/stamp/stamp.component';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
 import { LicenseComponent } from './licenses/license/license.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
@@ -19,8 +18,6 @@ import { BookingsComponent } from './bookings/bookings/bookings.component';
 import { BookingComponent } from './bookings/booking/booking.component';
 import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
-import { SidenavModule } from '../shared/modules/sidenav/sidenav.module';
-import { DetailHeaderComponent } from '../shared/components/detail-header/detail-header.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountComponent } from './accounts/account/account.component';
@@ -32,6 +29,9 @@ import { TransactionLinesComponent } from './transactions/transactionLines/trans
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
 import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin-only-modal/select-admin-only-modal.component';
 import { ProfileModule } from '../profile/profile.module';
+import { BookableMetadataComponent } from './bookable-metadata/bookable-metadata.component';
+import { DetailHeaderComponent } from '../natural/components/detail-header/detail-header.component';
+import { NaturalModule } from '../natural/natural.module';
 
 @NgModule({
     declarations: [
@@ -41,7 +41,6 @@ import { ProfileModule } from '../profile/profile.module';
         BookingsComponent,
         UsersComponent,
         UserComponent,
-        StampComponent,
         LicensesComponent,
         LicenseComponent,
         UserTagsComponent,
@@ -60,6 +59,7 @@ import { ProfileModule } from '../profile/profile.module';
         TransactionTagComponent,
         EditableTransactionLinesComponent,
         SelectAdminOnlyModalComponent,
+        BookableMetadataComponent,
     ],
     imports: [
         CommonModule,
@@ -67,12 +67,12 @@ import { ProfileModule } from '../profile/profile.module';
         MaterialModule,
         IchtusModule,
         AvatarModule,
-        SidenavModule,
         ProfileModule,
+        NaturalModule,
     ],
     entryComponents: [
-        SelectAdminOnlyModalComponent
-    ]
+        SelectAdminOnlyModalComponent,
+    ],
 })
 export class AdminModule {
 }

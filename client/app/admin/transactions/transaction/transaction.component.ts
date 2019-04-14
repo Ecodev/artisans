@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../shared/components/AbstractDetail';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
     CreateTransaction,

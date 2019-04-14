@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { QueryVariablesManager } from '../../classes/query-variables-manager';
-import { AppDataSource } from '../../services/data.source';
 import { Bookables, BookablesVariables } from '../../generated-types';
 import { SelectionModel } from '@angular/cdk/collections';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalDataSource } from '../../../natural/classes/DataSource';
 
 @Component({
     selector: 'app-select-admin-approved-modal',
@@ -25,7 +25,7 @@ export class SelectAdminApprovedModalComponent implements OnInit {
 
         // Get all because requirable services should not change
         this.bookableService.getAll(qvmServices).subscribe(result => {
-            this.servicesDataSource = new AppDataSource(result);
+            this.servicesDataSource = new NaturalDataSource(result);
         });
 
         const storageVariables = BookableService.adminApprovedByTag('6008');
@@ -34,7 +34,7 @@ export class SelectAdminApprovedModalComponent implements OnInit {
 
         // Get all because requirable storages should not change
         this.bookableService.getAll(qvmStorage).subscribe(result => {
-            this.storagesDataSource = new AppDataSource(result);
+            this.storagesDataSource = new NaturalDataSource(result);
         });
 
     }

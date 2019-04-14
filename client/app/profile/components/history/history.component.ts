@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AppDataSource } from '../../../shared/services/data.source';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
 import { AbstractController } from '../../../shared/components/AbstractController';
+import { NaturalDataSource } from '../../../natural/classes/DataSource';
 
 @Component({
     selector: 'app-history',
@@ -15,7 +15,7 @@ export class HistoryComponent extends AbstractController implements OnInit, OnDe
 
     public viewer;
 
-    public transactionLinesDS: AppDataSource;
+    public transactionLinesDS: NaturalDataSource;
     public transactionsColumns = ['name', 'bookable', 'transactionDate', 'remarks', 'amount'];
 
     constructor(
@@ -31,7 +31,7 @@ export class HistoryComponent extends AbstractController implements OnInit, OnDe
 
         if (this.viewer.account) {
             const transactionLinesQuery = this.transactionLineService.getForAccount(this.viewer.account, this.ngUnsubscribe);
-            this.transactionLinesDS = new AppDataSource(transactionLinesQuery);
+            this.transactionLinesDS = new NaturalDataSource(transactionLinesQuery);
         }
     }
 

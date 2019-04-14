@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { ExtendedFormControl } from '../../../shared/classes/ExtendedFormControl';
 import { Apollo } from 'apollo-angular';
-import { AlertService } from '../../../shared/components/alert/alert.service';
 import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
+import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
 
 @Component({
     selector: 'app-request-password-reset',

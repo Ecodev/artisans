@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractList } from '../../shared/components/AbstractList';
+import { AbstractList } from '../../../natural/classes/AbstractList';
 import { Bookings, BookingsVariables } from '../../../shared/generated-types';
 import { BookingService } from '../services/booking.service';
-import { AlertService } from '../../../shared/components/alert/alert.service';
-import { PersistenceService } from '../../shared/services/persistence.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
+import { PersistenceService } from '../../../natural/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 

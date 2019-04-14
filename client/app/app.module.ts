@@ -13,12 +13,9 @@ import {
     ShowOnDirtyErrorStateMatcher,
 } from '@angular/material';
 import { NetworkActivityService } from './shared/services/network-activity.service';
-import { AlertService } from './shared/components/alert/alert.service';
-import { createUploadLink } from 'apollo-upload-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
 import { TimezonePreservingDateAdapter } from './shared/services/timezone.preserving.date.adapter';
-import { IconModule } from './shared/components/icon/icon.module';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DoorComponent } from './door/door.component';
@@ -32,12 +29,12 @@ import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-bat
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { registerLocaleData } from '@angular/common';
-import { HierarchicSelectorModule } from './shared/hierarchic-selector/hierarchic-selector.module';
-import { ConfirmComponent } from './shared/components/alert/confirm.component';
 import { SafetyComponent } from './safety/safety.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
+import { NaturalModule } from './natural/natural.module';
+import { AlertService } from './natural/components/alert/alert.service';
 
 registerLocaleData(localeFRCH);
 
@@ -54,11 +51,7 @@ export class MyIntl extends TimeagoIntl {
         DashboardComponent,
         BootLoaderComponent,
         ErrorComponent,
-        ConfirmComponent,
         SafetyComponent,
-    ],
-    entryComponents: [
-        ConfirmComponent,
     ],
     imports: [
         BrowserModule,
@@ -68,13 +61,12 @@ export class MyIntl extends TimeagoIntl {
         AppRoutingModule,
         MaterialModule,
         IchtusModule,
-        IconModule,
+        NaturalModule,
         HttpClientModule,
         HttpBatchLinkModule,
-        HierarchicSelectorModule,
         TimeagoModule.forRoot({
             intl: {provide: TimeagoIntl, useClass: MyIntl},
-            formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter }
+            formatter: {provide: TimeagoFormatter, useClass: TimeagoCustomFormatter},
         }),
     ],
     providers: [

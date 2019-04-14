@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import {
     accountQuery,
     accountsQuery,
@@ -22,6 +21,7 @@ import {
     UpdateAccountVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 
 @Injectable({
     providedIn: 'root',

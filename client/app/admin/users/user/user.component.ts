@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../shared/components/AbstractDetail';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
     CreateUser,
@@ -17,7 +17,7 @@ import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
 import { BookingService } from '../../bookings/services/booking.service';
 import { AccountService } from '../../accounts/services/account.service';
-import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 
 @Component({
     selector: 'app-user',

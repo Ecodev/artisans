@@ -14,13 +14,12 @@ import {
     Users,
     UsersVariables,
 } from '../../generated-types';
-import { QueryVariablesManager } from '../../classes/query-variables-manager';
-import { mergeWith } from 'lodash';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { CommentComponent } from './comment.component';
-import { AlertService } from '../alert/alert.service';
 import { AbstractController } from '../AbstractController';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-navigations',

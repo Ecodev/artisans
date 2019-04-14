@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { createUserTag, deleteUserTags, updateUserTag, userTagQuery, userTagsQuery } from './userTag.queries';
 import {
     CreateUserTag,

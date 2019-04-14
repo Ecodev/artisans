@@ -1,23 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { pick } from 'lodash';
-import { Literal } from '../../shared/types';
-import {
-    openDoorMutation
-} from './door.queries';
-import {
-    OpenDoor,
-    Door, OpenDoorVariables
-} from '../../shared/generated-types';
+import { openDoorMutation } from './door.queries';
+import { OpenDoor, OpenDoorVariables } from '../../shared/generated-types';
+import { Literal } from '../../natural/types/types';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DoorService {
 
-    constructor(private apollo: Apollo) {}
+    constructor(private apollo: Apollo) {
+    }
 
     public doors: Literal = [
         {

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { RegisterComponent } from './register.component';
 import { NewUserService } from './new-user.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { Utility } from '../../../shared/classes/utility';
 import { pick } from 'lodash';
+import { Utility } from '../../../natural/classes/Utility';
 
 @Component({
     selector: 'app-confirm',

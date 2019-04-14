@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersVariables } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
-import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { ActivatedRoute } from '@angular/router';
-import { AbstractModelService } from '../../../shared/services/abstract-model.service';
-import { AlertService } from '../../../shared/components/alert/alert.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 import { mergeWith } from 'lodash';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { AbstractModelService } from '../../../natural/services/abstract-model.service';
 
 @Component({
     selector: 'app-family',

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { UserService } from '../../../admin/users/services/user.service';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import { Literal } from '../../../shared/types';
-import { FormValidators } from '../../../shared/services/abstract-model.service';
+import { Literal } from '../../../natural/types/types';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { Relationship } from '../../../shared/generated-types';
+import { FormValidators } from '../../../natural/services/abstract-model.service';
 
 @Injectable({
     providedIn: 'root',

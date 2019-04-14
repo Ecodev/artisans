@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { createTransaction, deleteTransactions, transactionQuery, transactionsQuery, updateTransaction } from './transaction.queries';
 import {
     CreateTransaction,
@@ -16,8 +16,8 @@ import {
     UpdateTransactionVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { Literal } from '../../../shared/types';
 import { TransactionLineService } from './transactionLine.service';
+import { Literal } from '../../../natural/types/types';
 
 @Injectable({
     providedIn: 'root',

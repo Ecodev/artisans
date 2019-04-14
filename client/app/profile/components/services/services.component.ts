@@ -1,12 +1,12 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { AppDataSource } from '../../../shared/services/data.source';
 import { BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { AlertService } from '../../../shared/components/alert/alert.service';
 import { AbstractController } from '../../../shared/components/AbstractController';
+import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-services',
@@ -20,8 +20,8 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
     public adminMode = false;
 
     public BookableService = BookableService; // template usage
-    public runningServicesDS: AppDataSource;
-    public pendingApplicationsDS: AppDataSource;
+    public runningServicesDS: NaturalDataSource;
+    public pendingApplicationsDS: NaturalDataSource;
 
     public servicesColumns = ['name', 'periodicPrice', 'revoke'];
     public applicationsColumns = ['name', 'status', 'initialPrice', 'periodicPrice', 'cancel'];
@@ -44,10 +44,10 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
         }
 
         const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);
-        this.pendingApplicationsDS = new AppDataSource(pendingApplications);
+        this.pendingApplicationsDS = new NaturalDataSource(pendingApplications);
 
         const runningServices = this.userService.getRunningServices(this.user, this.ngUnsubscribe);
-        this.runningServicesDS = new AppDataSource(runningServices);
+        this.runningServicesDS = new NaturalDataSource(runningServices);
     }
 
     /**

@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DoorComponent } from './door/door.component';
-import { AuthGuard } from './shared/services/auth.guard';
-import { DoorGuard } from './shared/services/door.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { SafetyComponent } from './safety/safety.component';
 import { BookingService } from './admin/bookings/services/booking.service';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { DoorGuard } from './shared/guards/door.guard';
 
 export const routes: Routes = [
     {

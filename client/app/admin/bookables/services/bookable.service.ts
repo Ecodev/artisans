@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../shared/services/abstract-model.service';
 import { bookableQuery, bookablesQuery, createBookable, deleteBookables, updateBookable } from './bookable.queries';
 import {
     Bookable,
@@ -23,10 +22,11 @@ import {
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { QueryVariablesManager } from '../../../shared/classes/query-variables-manager';
 import { map } from 'rxjs/operators';
 import { BookingService } from '../../bookings/services/booking.service';
 import { intersectionBy } from 'lodash';
+import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 
 @Injectable({
     providedIn: 'root',

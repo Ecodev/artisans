@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractDetail } from '../../../admin/shared/components/AbstractDetail';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
-import { AlertService } from '../../../shared/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { AppDataSource } from '../../../shared/services/data.source';
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-register',
@@ -22,7 +22,7 @@ export class RegisterComponent extends AbstractDetail<User['user'],
     UpdateUserVariables,
     any> implements OnInit {
 
-    private mandatoryBookables: AppDataSource;
+    private mandatoryBookables: NaturalDataSource;
 
     public step;
     public sending = false;
@@ -50,7 +50,7 @@ export class RegisterComponent extends AbstractDetail<User['user'],
 
         this.bookableService.getMandatoryBookables().subscribe(bookables => {
             if (bookables) {
-                this.mandatoryBookables = new AppDataSource(bookables);
+                this.mandatoryBookables = new NaturalDataSource(bookables);
             }
         });
 

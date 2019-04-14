@@ -34,9 +34,9 @@ import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resol
 import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { TransactionTagResolver } from './transactionTags/services/transactionTag-resolver.service';
-import { AdministrationGuard } from '../shared/services/administration.guard';
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
+import { AdministrationGuard } from '../shared/guards/administration.guard';
 
 const routes: Routes = [
         {

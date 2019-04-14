@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractList } from '../../shared/components/AbstractList';
+import { AbstractList } from '../../../natural/classes/AbstractList';
 import { Users, UserStatus, UsersVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../../../shared/components/alert/alert.service';
-import { PersistenceService } from '../../shared/services/persistence.service';
+import { AlertService } from '../../../natural/components/alert/alert.service';
+import { PersistenceService } from '../../../natural/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { UserService } from '../services/user.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';

@@ -32,7 +32,7 @@ import {
     LoginVariables,
     Logout,
     Relationship,
-    Sex,
+    Sex, SortingOrder,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -43,7 +43,7 @@ import {
     UserInput,
     UserPartialInput,
     UserRole,
-    Users,
+    Users, UserSortingField,
     UserStatus,
     UsersVariables,
     UserVariables,
@@ -144,6 +144,7 @@ export class UserService extends AbstractModelService<User['user'],
                     },
                 ],
             },
+            sorting: [{field: UserSortingField.birthday, order: SortingOrder.ASC}]
         };
     }
 

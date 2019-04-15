@@ -32,10 +32,7 @@ export class FamilyComponent implements OnInit {
         if (this.viewer) {
             const qvm = new QueryVariablesManager<UsersVariables>();
             qvm.set('variables', UserService.getFamilyVariables(this.viewer));
-            this.userService.getAll(qvm).subscribe(members => {
-                members.items.sort(u => u.id === this.viewer.id ? -1 : 0); // sort to have self in first position
-                this.familyMembers = members.items;
-            });
+            this.userService.getAll(qvm).subscribe(members => this.familyMembers = members.items);
         }
 
     }

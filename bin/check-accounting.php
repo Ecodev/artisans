@@ -49,7 +49,7 @@ foreach (_em()->getRepository(Transaction::class)->findAll() as $transaction) {
         }
     }
     if (bccomp($totalDebit, $totalCredit) !== 0) {
-        $errors[] = sprintf('ERREUR: transaction %u non-équilibrée, débit: %s, crédit: %s', $transaction->getId(), $totalDebit, $totalCredit);
+        $errors[] = sprintf('ERREUR: Transaction#%u non-équilibrée, débit: %s, crédit: %s', $transaction->getId(), $totalDebit, $totalCredit);
     }
 }
 

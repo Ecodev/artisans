@@ -47,7 +47,7 @@
             <div fxLayout="row" fxLayoutGap="10px">
                 <mat-form-field fxFlex>
                     <mat-label>Prénom</mat-label>
-                    <input matInput formControlName="firstName" (change)="update()">
+                    <input matInput formControlName="firstName">
                     <mat-error *ngIf="form.get('firstName').hasError('maxlength')">
                         Maximum {{form.get('firstName').errors.maxlength.requiredLength}} caractères
                     </mat-error>
@@ -56,7 +56,7 @@
 
                 <mat-form-field fxFlex>
                     <mat-label>Nom de famille</mat-label>
-                    <input matInput formControlName="lastName" (change)="update()">
+                    <input matInput formControlName="lastName">
                     <mat-error *ngIf="form.get('lastName').hasError('maxlength')">
                         Maximum {{form.get('lastName').errors.maxlength.requiredLength}} caractères
                     </mat-error>
@@ -65,6 +65,17 @@
             </div>
 
             <app-address [form]="form"></app-address>
+
+            <div>
+                <mat-form-field>
+                    <mat-label>Date de naissance</mat-label>
+                    <input matInput formControlName="birthday" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="form.get('birthday').hasError('required')">Requis</mat-error>
+                </mat-form-field>
+            </div>
+
             <mat-divider></mat-divider>
         </div>
 

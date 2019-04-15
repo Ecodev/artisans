@@ -206,6 +206,7 @@ export class UserService extends AbstractModelService<User['user'],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.required, Validators.email],
             familyRelationship: [Validators.required],
+            birthday: [Validators.required]
         };
     }
 

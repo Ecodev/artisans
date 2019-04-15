@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
@@ -13,7 +13,7 @@ import { AlertService } from '../../../natural/components/alert/alert.service';
     templateUrl: './services.component.html',
     styleUrls: ['./services.component.scss'],
 })
-export class ServicesComponent extends AbstractController implements OnInit, OnDestroy {
+export class ServicesComponent extends AbstractController implements OnChanges, OnDestroy {
 
     @Input() user = null;
 
@@ -33,21 +33,27 @@ export class ServicesComponent extends AbstractController implements OnInit, OnD
         super();
     }
 
-    ngOnInit() {
+    ngOnChanges(changes: SimpleChanges): void {
 
-        if (!this.user) {
-            this.user = this.route.snapshot.data.viewer.model;
-        } else {
-            this.adminMode = true;
-            this.applicationsColumns.push('admin');
-            this.servicesColumns.push('admin');
+        const currentUser = changes.user.currentValue;
+        const previousUser = changes.user.previousValue;
+
+        if (!previousUser || currentUser.id !== previousUser.id) {
+            if (!this.user) {
+                this.user = this.route.snapshot.data.viewer.model;
+            } else {
+                this.adminMode = true;
+                this.applicationsColumns.push('admin');
+                this.servicesColumns.push('admin');
+            }
+
+            const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);
+            this.pendingApplicationsDS = new NaturalDataSource(pendingApplications);
+
+            const runningServices = this.userService.getRunningServices(this.user, this.ngUnsubscribe);
+            this.runningServicesDS = new NaturalDataSource(runningServices);
         }
 
-        const pendingApplications = this.userService.getPendingApplications(this.user, this.ngUnsubscribe);
-        this.pendingApplicationsDS = new NaturalDataSource(pendingApplications);
-
-        const runningServices = this.userService.getRunningServices(this.user, this.ngUnsubscribe);
-        this.runningServicesDS = new NaturalDataSource(runningServices);
     }
 
     /**

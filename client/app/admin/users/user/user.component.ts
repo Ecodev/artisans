@@ -36,6 +36,9 @@ export class UserComponent
     public showFamilyTab;
     public UserService = UserService;
 
+    public transactionLinesVariables;
+    public familyVariables;
+
     constructor(alertService: AlertService,
                 private userService: UserService,
                 router: Router,
@@ -59,6 +62,9 @@ export class UserComponent
                 this.userService.getAll(qvm).subscribe(family => {
                     this.showFamilyTab = family.length > 1;
                 });
+
+                this.familyVariables = UserService.getFamilyVariables(this.data.model);
+                this.transactionLinesVariables = this.getTransactionQueryVariables();
             }
 
         });

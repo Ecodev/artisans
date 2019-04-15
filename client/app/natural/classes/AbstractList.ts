@@ -26,7 +26,10 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     extends AbstractController
     implements OnInit, OnDestroy {
 
-    @Input() queryVariables;
+    @Input() set queryVariables(value) {
+        this.variablesManager.set('contextVariables', value);
+    }
+
     @Input() columns: string[];
     @Input() persistSearch = true;
 
@@ -196,10 +199,6 @@ export class AbstractList<Tall, Vall extends QueryVariables>
      * Init context query variables and visible columns from attributes [queryVariables] and [columns]
      */
     public initFromAttributeInputs() {
-        if (this.queryVariables) {
-            this.variablesManager.set('contextFilter', this.queryVariables);
-        }
-
         if (this.columns) {
             this.routerColumns = this.columns;
         }

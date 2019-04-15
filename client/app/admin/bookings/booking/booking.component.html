@@ -30,6 +30,7 @@
                                     [service]="bookableService"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
+                                    [navigateTo]="form.get('bookable').value?.id ? ['/admin/bookable', form.get('bookable').value.id] : null"
                         ></app-select>
 
                         <button mat-flat-button

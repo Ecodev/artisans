@@ -2,8 +2,8 @@
 
     <h2 class="mat-headline margin-bottom">Finances</h2>
 
-    <div fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="10px" fxLayoutAlign.gt-sm="start start">
-        <mat-form-field>
+    <div>
+        <mat-form-field [style.width.px]="250">
             <mat-label>IBAN</mat-label>
             <input matInput
                    [ngModel]="user.iban"

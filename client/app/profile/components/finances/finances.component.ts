@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { ExpenseClaimStatus, ExpenseClaimType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import { NaturalDataSource } from '../../../natural/classes/DataSource';
     templateUrl: './finances.component.html',
     styleUrls: ['./finances.component.scss'],
 })
-export class FinancesComponent extends AbstractController implements OnChanges, OnDestroy {
+export class FinancesComponent extends AbstractController implements OnInit, OnChanges, OnDestroy {
 
     @Input() user;
 
@@ -38,26 +38,28 @@ export class FinancesComponent extends AbstractController implements OnChanges, 
         super();
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-
-        const currentUser = changes.user.currentValue;
-        const previousUser = changes.user.previousValue;
-
-        if (!previousUser || currentUser.id !== previousUser.id) {
-
-            if (!this.user) {
-                this.user = this.route.snapshot.data.viewer.model;
-            } else {
-                this.adminMode = true;
-                this.expenseClaimsColumns.push('admin');
-            }
-
-            this.ibanLocked = !!this.user.iban;
-
-            const runningExpenseClaims = this.expenseClaimService.getForUser(this.user, this.ngUnsubscribe);
-            this.runningExpenseClaimsDS = new NaturalDataSource(runningExpenseClaims);
+    ngOnInit() {
+        if (!this.user) {
+            this.user = this.route.snapshot.data.viewer.model;
+        } else {
+            this.adminMode = true;
+            this.expenseClaimsColumns.push('admin');
         }
 
+        this.loadData();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        const currentUser = changes.user.currentValue;
+        if (currentUser.id !== this.user.id) {
+            this.loadData();
+        }
+    }
+
+    public loadData() {
+        this.ibanLocked = !!this.user.iban;
+        const runningExpenseClaims = this.expenseClaimService.getForUser(this.user, this.ngUnsubscribe);
+        this.runningExpenseClaimsDS = new NaturalDataSource(runningExpenseClaims);
     }
 
     public cancelExpenseClaim(expenseClaim) {

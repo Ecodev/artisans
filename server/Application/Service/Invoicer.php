@@ -47,6 +47,8 @@ class Invoicer
         $this->bookingRepository->getAclFilter()->setEnabled(false);
         $bookings = $this->bookingRepository->getAllToInvoice($user);
 
+        echo count($bookings), "\n";
+
         $user = null;
         $bookingPerUser = [];
 
@@ -101,11 +103,11 @@ class Invoicer
             $bookable = $booking->getBookable();
             if ($isInitial) {
                 $balance = $this->calculateInitialBalance($booking);
-                $this->createTransactionLine($transaction, $bookable, $account, $balance, 'Paiement ponctuel');
+                $this->createTransactionLine($transaction, $bookable, $account, $balance, 'Prestation ponctuelle');
             }
 
             $balance = $this->calculatePeriodicBalance($booking);
-            $this->createTransactionLine($transaction, $bookable, $account, $balance, 'Paiement annuel');
+            $this->createTransactionLine($transaction, $bookable, $account, $balance, 'Prestation annuelle');
         }
 
         ++$this->count;
@@ -132,11 +134,7 @@ class Invoicer
      */
     private function calculatePeriodicBalance(Booking $booking): string
     {
-        $bookable = $booking->getBookable();
-
-        // TODO: https://support.ecodev.ch/issues/6227
-
-        return $bookable->getPeriodicPrice();
+        return $booking->getPeriodicPrice();
     }
 
     private function createTransactionLine(Transaction $transaction, Bookable $bookable, Account $account, string $balance, string $name): void

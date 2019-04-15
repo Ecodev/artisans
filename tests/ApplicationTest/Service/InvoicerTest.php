@@ -108,7 +108,7 @@ class InvoicerTest extends TestCase
                 '0',
                 [
                     [
-                        'Paiement ponctuel',
+                        'Prestation ponctuelle',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
@@ -121,7 +121,7 @@ class InvoicerTest extends TestCase
                 '90.25',
                 [
                     [
-                        'Paiement annuel',
+                        'Prestation annuelle',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
@@ -134,14 +134,14 @@ class InvoicerTest extends TestCase
                 '90.25',
                 [
                     [
-                        'Paiement ponctuel',
+                        'Prestation ponctuelle',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
                         '10.25',
                     ],
                     [
-                        'Paiement annuel',
+                        'Prestation annuelle',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
@@ -154,14 +154,14 @@ class InvoicerTest extends TestCase
                 '-90.25',
                 [
                     [
-                        'Paiement ponctuel',
+                        'Prestation ponctuelle',
                         'My bookable',
                         'Bookable account',
                         'John Doe',
                         '10.25',
                     ],
                     [
-                        'Paiement annuel',
+                        'Prestation annuelle',
                         'My bookable',
                         'Bookable account',
                         'John Doe',

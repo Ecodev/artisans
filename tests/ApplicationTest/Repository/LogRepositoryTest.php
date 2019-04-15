@@ -31,12 +31,9 @@ class LogRepositoryTest extends AbstractRepositoryTest
         $result = $this->repository->loginFailedOften();
         self::assertFalse($result);
 
-        _log()->info(LogRepository::LOGIN_FAILED);
-        _log()->info(LogRepository::LOGIN_FAILED);
-        _log()->info(LogRepository::LOGIN_FAILED);
-        _log()->info(LogRepository::LOGIN_FAILED);
-        _log()->info(LogRepository::LOGIN_FAILED);
-        _log()->info(LogRepository::LOGIN_FAILED);
+        foreach (range(1, 20) as $i) {
+            _log()->info(LogRepository::LOGIN_FAILED);
+        }
 
         $result = $this->repository->loginFailedOften();
         self::assertTrue($result, 'is your PHP date.timezone setting correct ?');
@@ -50,12 +47,9 @@ class LogRepositoryTest extends AbstractRepositoryTest
         $result = $this->repository->updatePasswordFailedOften();
         self::assertFalse($result);
 
-        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
-        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
-        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
-        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
-        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
-        _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        foreach (range(1, 20) as $i) {
+            _log()->info(LogRepository::UPDATE_PASSWORD_FAILED);
+        }
 
         $result = $this->repository->updatePasswordFailedOften();
         self::assertTrue($result, 'is your PHP date.timezone setting correct ?');

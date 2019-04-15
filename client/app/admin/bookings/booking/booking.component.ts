@@ -34,6 +34,7 @@ export class BookingComponent
         any> implements OnInit {
 
     public BookingStatus = BookingStatus;
+    public storageVariables;
 
     /**
      * Received the created booking after having processing an application
@@ -52,6 +53,7 @@ export class BookingComponent
 
     ngOnInit() {
         super.ngOnInit();
+        this.storageVariables = this.getStorageVariables();
     }
 
     public endBooking() {

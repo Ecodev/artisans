@@ -36,6 +36,7 @@ export class BookableComponent
         any> implements OnInit {
 
     public accountHierarchicConfig = AccountHierarchicConfiguration;
+    public bookingsVariables;
 
     constructor(alertService: AlertService,
                 bookableService: BookableService,
@@ -50,6 +51,8 @@ export class BookableComponent
 
     ngOnInit(): void {
         super.ngOnInit();
+
+        this.bookingsVariables = this.getBookingsVariables();
     }
 
     public verify() {

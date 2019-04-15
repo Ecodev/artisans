@@ -188,7 +188,7 @@
 
         <mat-tab label="Utilisations" *ngIf="data.model.id">
             <app-bookings [persistSearch]="false"
-                          [queryVariables]="getBookingsVariables()"
+                          [queryVariables]="bookingsVariables"
                           [columns]="['edit', 'owner', 'destination', 'startDate', 'endDate', 'estimatedEndDate']"
             ></app-bookings>
         </mat-tab>

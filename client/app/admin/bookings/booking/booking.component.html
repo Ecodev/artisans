@@ -80,7 +80,7 @@
                     <div class="mat-title">Attribuer un stockage</div>
                     <app-bookables [columns]="['name', 'code', 'periodicPrice', 'select']"
                                    [persistSearch]="false"
-                                   [queryVariables]="getStorageVariables()"
+                                   [queryVariables]="storageVariables"
                                    (select)="assignBookable($event)"
                     ></app-bookables>
                 </div>

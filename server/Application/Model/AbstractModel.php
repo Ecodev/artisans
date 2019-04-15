@@ -96,7 +96,7 @@ abstract class AbstractModel
      *
      * @param Chronos $creationDate
      */
-    private function setCreationDate(Chronos $creationDate = null): void
+    protected function setCreationDate(Chronos $creationDate = null): void
     {
         $this->creationDate = $creationDate;
     }
@@ -136,7 +136,7 @@ abstract class AbstractModel
      *
      * @param User $creator
      */
-    private function setCreator(User $creator = null): void
+    protected function setCreator(User $creator = null): void
     {
         $this->creator = $creator;
     }

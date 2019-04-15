@@ -13,6 +13,7 @@ use Application\Traits\HasDoorAccess;
 use Application\Traits\HasIban;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasRemarks;
+use Application\Utility;
 use Cake\Chronos\Chronos;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,6 +25,7 @@ use GraphQL\Doctrine\Annotation as API;
  * User
  *
  * @ORM\Entity(repositoryClass="Application\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\AssociationOverrides({
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
@@ -1012,5 +1014,16 @@ class User extends AbstractModel
         }
 
         return true;
+    }
+
+    /**
+     * Automatically called by Doctrine when the object is saved for the first time
+     *
+     * @ORM\PrePersist
+     */
+    public function timestampCreation(): void
+    {
+        $this->setCreationDate(Utility::getNow());
+        $this->setCreator(self::getCurrent());
     }
 }

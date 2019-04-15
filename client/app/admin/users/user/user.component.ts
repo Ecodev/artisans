@@ -53,11 +53,13 @@ export class UserComponent
 
         this.route.data.subscribe(() => {
 
-            const qvm = new QueryVariablesManager<UsersVariables>();
-            qvm.set('variables', UserService.getFamilyVariables(this.data.model));
-            this.userService.getAll(qvm).subscribe(family => {
-                this.showFamilyTab = family.length > 1;
-            });
+            if (this.data.mode.id) {
+                const qvm = new QueryVariablesManager<UsersVariables>();
+                qvm.set('variables', UserService.getFamilyVariables(this.data.model));
+                this.userService.getAll(qvm).subscribe(family => {
+                    this.showFamilyTab = family.length > 1;
+                });
+            }
 
         });
 

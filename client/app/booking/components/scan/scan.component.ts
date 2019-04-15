@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import jsQR from 'jsqr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-scan',
@@ -15,7 +16,7 @@ export class ScanComponent implements OnInit, OnDestroy {
 
     private context;
 
-    constructor(public router: Router, private route: ActivatedRoute) {
+    constructor(public router: Router, private route: ActivatedRoute, private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -24,9 +25,12 @@ export class ScanComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.videoRef.nativeElement.srcObject.getTracks().forEach(track => {
-            track.stop();
-        });
+
+        if (this.videoRef.nativeElement.srcObject) {
+            this.videoRef.nativeElement.srcObject.getTracks().forEach(track => {
+                track.stop();
+            });
+        }
     }
 
     public startScan() {
@@ -35,6 +39,13 @@ export class ScanComponent implements OnInit, OnDestroy {
             this.videoRef.nativeElement.setAttribute('playsinline', 'true'); // required to tell iOS safari we don't want fullscreen
             this.videoRef.nativeElement.play();
             requestAnimationFrame(this.tick.bind(this));
+        }).catch((err) => {
+            console.error('Camera inutilisable.', err.name, err.code, err.message);
+            const message = 'La caméra est indisponible, essaye de taper le code de ton matériel';
+            this.alertService.error(message, 7000);
+            setTimeout(() => {
+                this.router.navigateByUrl('/booking/by-code');
+            }, 1000);
         });
     }
 

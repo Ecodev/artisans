@@ -48,7 +48,7 @@ abstract class ConfirmRegistration implements FieldInterface
                 Helper::hydrate($user, $input);
 
                 // Active the member
-                $user->activate();
+                $user->initialize();
 
                 // Create mandatory booking for him
                 User::setCurrent($user);

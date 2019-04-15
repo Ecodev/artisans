@@ -518,10 +518,10 @@ class User extends AbstractModel
         }
     }
 
-    public function activate(): void
+    public function initialize(): void
     {
         $this->role = self::ROLE_MEMBER; // Bypass security
-        $this->setStatus(self::STATUS_ACTIVE);
+        $this->setStatus(self::STATUS_NEW);
     }
 
     /**

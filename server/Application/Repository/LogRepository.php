@@ -94,7 +94,7 @@ class LogRepository extends AbstractRepository
             ++$failureCount;
         }
 
-        return $failureCount > 5;
+        return $failureCount > 20;
     }
 
     /**

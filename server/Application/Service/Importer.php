@@ -712,6 +712,7 @@ EOT;
                 $insert->execute();
             }
         }
+        $insert->bindValue(':remarks', '');
 
         // Attribution des emplacements de stockage
         $selectBookableByName = $conn->prepare('SELECT id, name, simultaneous_booking_maximum FROM bookable WHERE name=:name');

@@ -40,7 +40,7 @@
 
         <div style="background: #fafafa; padding:0 20px">
             <div style="max-width:650px; width:100%; margin: auto; padding:30px 0;">
-                <p>Salut<?php echo $this->user && $this->user->getFirstName() ? ' ' . $this->escapeHtml($this->user->getFirstName()) : '' ?>,</p>
+                <p>Hello<?php echo $this->user && $this->user->getFirstName() ? ' ' . $this->escapeHtml($this->user->getFirstName()) : '' ?>,</p>
                 <?php echo $this->content; ?>
             </div>
         </div>
@@ -48,13 +48,11 @@
         <div style="background:#3176a2; color: white; padding:16px;">
             <div style="max-width:650px; width:100%; margin:auto; padding:0 20px">
                 <p style="font-weight:bold; margin-bottom:0">
-                    Club nautique Ichtus, case postale 3, 2072 St-Blaise - Réalisation Ecodev
+                    Club nautique Ichtus, 2072 St-Blaise - Réalisation Ecodev
                 </p>
                 <p style="font-size: 0.8em; margin-top:0;">
                     Ceci est un message automatique de notification envoyé par
-                    <a href="<?php echo $this->serverUrl ?>" style="text-decoration:none; color:#cce4ee;">
-                        <?php echo $this->hostname ?>
-                    </a>, n'y répondez pas.
+                    <a href="<?php echo $this->serverUrl ?>" style="text-decoration:none; color:#cce4ee;"><?php echo $this->hostname ?></a>, n'y répond pas.
                 </p>
             </div>
         </div>

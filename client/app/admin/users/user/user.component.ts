@@ -53,7 +53,7 @@ export class UserComponent
 
         this.route.data.subscribe(() => {
 
-            if (this.data.mode.id) {
+            if (this.data.model.id) {
                 const qvm = new QueryVariablesManager<UsersVariables>();
                 qvm.set('variables', UserService.getFamilyVariables(this.data.model));
                 this.userService.getAll(qvm).subscribe(family => {

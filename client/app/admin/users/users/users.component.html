@@ -14,7 +14,7 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="routerColumns">
+                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span appColumnsPickerColumn="balance">Solde</span>
                     <span appColumnsPickerColumn="name">Nom</span>
                     <span appColumnsPickerColumn="login">Login</span>

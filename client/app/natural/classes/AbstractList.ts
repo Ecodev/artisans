@@ -12,7 +12,6 @@ import { NaturalSearchConfigurationService } from '../../shared/natural-search/n
 import { AbstractModelService } from '../services/abstract-model.service';
 import { AlertService } from '../components/alert/alert.service';
 
-
 /**
  * This class helps managing a list of paginated items that can be filtered,
  * selected, and then bulk actions can be performed on selection.
@@ -26,15 +25,37 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     extends AbstractController
     implements OnInit, OnDestroy {
 
+    /**
+     * Contextual variables to apply on a list
+     */
     @Input() set queryVariables(value) {
         this.variablesManager.set('contextVariables', value);
     }
 
+    /**
+     * Contextual initial columns
+     * By now can't by changed after initialization
+     */
     @Input() columns: string[];
+
+    /**
+     * Wherever search should be loaded from url/storage and persisted in it too.
+     */
     @Input() persistSearch = true;
 
+    /**
+     * Columns list after interaction with <app-columns-picker>
+     */
     public selectedColumns: string[] = [];
-    public routerColumns: string[];
+
+    /**
+     * Initial columns on component init
+     */
+    public initialColumns: string[];
+
+    /**
+     *
+     */
     public dataSource: NaturalDataSource;
     public selection: SelectionModel<Tall>;
     public bulkActionSelected: string | null;
@@ -191,7 +212,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         }
 
         if (this.route.snapshot.data.columns) {
-            this.routerColumns = this.route.snapshot.data.columns;
+            this.initialColumns = this.route.snapshot.data.columns;
         }
     }
 
@@ -200,7 +221,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
      */
     public initFromAttributeInputs() {
         if (this.columns) {
-            this.routerColumns = this.columns;
+            this.initialColumns = this.columns;
         }
     }
 

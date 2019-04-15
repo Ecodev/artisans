@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-table-button',
@@ -13,7 +14,7 @@ export class TableButtonComponent {
     @Input() label: string;
     @Input() icon: string;
     @Input() href: string;
-    @Input() navigate: string;
+    @Input() navigate: RouterLink['routerLink'];
 
     constructor() {
     }

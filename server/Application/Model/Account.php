@@ -31,7 +31,7 @@ class Account extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=7, scale=2, options={"default" = "0.00"})
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
      */
     private $balance = '0.00';
 

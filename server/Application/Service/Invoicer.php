@@ -47,8 +47,6 @@ class Invoicer
         $this->bookingRepository->getAclFilter()->setEnabled(false);
         $bookings = $this->bookingRepository->getAllToInvoice($user);
 
-        echo count($bookings), "\n";
-
         $user = null;
         $bookingPerUser = [];
 

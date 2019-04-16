@@ -63,7 +63,7 @@ class TransactionLine extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=7, scale=2, options={"unsigned" = true})
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"unsigned" = true})
      */
     private $balance;
 

@@ -335,14 +335,8 @@ EOT;
             $insert->bindValue(':remarks', $remarks);
             $insert->bindValue(':iban', !empty($user['IBAN']) ? $user['IBAN'] : '');
 
-            $hasInsurance = false;
-            if (empty($this->members[$user['family_uid']]['assurances'])) {
-                echo sprintf('WARN: membre %u n\'a aucune assurance -> fond de réparation forcé', $user['family_uid']) . PHP_EOL;
-                $this->members[$user['family_uid']]['assurances'] = 'Fonds réparation';
-            } elseif (mb_strpos($this->members[$user['family_uid']]['assurances'], 'RC privée') !== false) {
-                $hasInsurance = true;
-            }
-            $insert->bindValue(':has_insurance', $hasInsurance);
+            $insurances = $this->members[$user['family_uid']]['assurances'];
+            $insert->bindValue(':has_insurance', !empty($insurances) && mb_strpos($insurances, 'RC privée') !== false);
 
             $insert->bindValue(':swiss_sailing', !empty($user['ichtus_swiss_sailing']) ? $user['ichtus_swiss_sailing'] : '');
             switch ($user['ichtus_swiss_sailing_type']) {
@@ -446,11 +440,21 @@ EOT;
                 echo sprintf('WARN individu %u (%s %s) a plus d\' un statut actif à la fois', $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
             }
 
+            if ($this->members[$user['family_uid']]['membre_suspension'] + $this->members[$user['family_uid']]['membre_actif'] + $this->members[$user['family_uid']]['membre_archivé'] > 1) {
+                echo sprintf('WARN membre/famille %u a plus d\' un statut actif à la fois', $user['family_uid']) . PHP_EOL;
+            }
+
             if ($this->members[$user['family_uid']]['membre_suspension']) {
                 $userStatus = 'inactive';
-            } elseif ($user['status_actif']) {
-                $userStatus = 'active';
-            } elseif ($user['status_archived']) {
+            } elseif ($this->members[$user['family_uid']]['membre_actif']) {
+                if ($user['status_actif']) {
+                    $userStatus = 'active';
+                } else {
+                    echo sprintf('WARN individu %u (%s %s) de la famille %u ignoré car désactivé', $user['uid'], $user['first_name'], $user['last_name'], $user['family_uid']) . PHP_EOL;
+
+                    continue;
+                }
+            } elseif ($this->members[$user['family_uid']]['membre_archivé']) {
                 $userStatus = 'archived';
             }
             $insert->bindValue(':status', $userStatus);
@@ -670,11 +674,9 @@ EOT;
             $insert->bindValue(':bookable', 3006); // Cotisation annuelle
             $insert->execute();
 
-            // Fond de réparation (optionnel)
-            if (!empty($member['assurances']) && mb_strpos($member['assurances'], 'Fonds réparation') !== false) {
-                $insert->bindValue(':bookable', 3026); // Fonds de réparation interne
-                $insert->execute();
-            }
+            // Fond de réparation
+            $insert->bindValue(':bookable', 3026); // Fonds de réparation interne
+            $insert->execute();
         }
 
         // Réservations concernant des membres du ménage, mais cependant liées et facturées au chef de famille

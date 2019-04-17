@@ -70,7 +70,7 @@ export const usageBookablesQuery = gql`
                 periodicPrice
                 purchasePrice
                 purchasePrice
-                activeBookings {
+                sharedBookings {
                     id
                     owner {
                         id

@@ -56,6 +56,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 import gql from 'graphql-tag';
 import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
 import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { PricedBookingService } from '../../bookings/services/PricedBooking.service';
 
 @Injectable({
     providedIn: 'root',
@@ -78,6 +79,7 @@ export class UserService extends AbstractModelService<User['user'],
     constructor(apollo: Apollo,
                 protected router: Router,
                 protected bookingService: BookingService,
+                protected pricedBookingService: PricedBookingService,
                 private permissionsService: PermissionsService,
     ) {
         super(apollo,
@@ -315,7 +317,7 @@ export class UserService extends AbstractModelService<User['user'],
 
         const qvm = new QueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
-        return this.bookingService.watchAll(qvm, expire);
+        return this.pricedBookingService.watchAll(qvm, expire);
     }
 
     public getPendingApplications(user, expire: Subject<void>): Observable<Bookings['bookings']> {

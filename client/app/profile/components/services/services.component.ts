@@ -19,7 +19,7 @@ export class ServicesComponent extends AbstractController implements OnInit, OnC
 
     public adminMode = false;
 
-    public BookableService = BookableService; // template usage
+    public BookableService = BookableService;
     public runningServicesDS: NaturalDataSource;
     public pendingApplicationsDS: NaturalDataSource;
 
@@ -39,6 +39,7 @@ export class ServicesComponent extends AbstractController implements OnInit, OnC
         } else {
             this.adminMode = true;
             this.applicationsColumns.push('admin');
+            this.servicesColumns.push('usage');
             this.servicesColumns.push('admin');
         }
 

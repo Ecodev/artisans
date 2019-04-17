@@ -108,7 +108,7 @@
                 <ng-container matColumnDef="periodicPrice">
                     <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix périodique</th>
                     <td mat-cell *matCellDef="let booking" app-align-right>
-                        <span *ngIf="booking.bookable.periodicPrice"> {{ booking.bookable.periodicPrice | currency: 'CHF'}}</span>
+                        <span *ngIf="booking.periodicPrice"> {{ booking.periodicPrice | currency: 'CHF'}}</span>
                     </td>
                     <td mat-footer-cell *matFooterCellDef app-align-right>
                         <span *ngIf="runningServicesDS.data.totalPeriodicPrice > 0">
@@ -125,6 +125,19 @@
                         </button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="usage">
+                    <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Utilisations</th>
+                    <td mat-cell *matCellDef="let booking" app-align-right>
+                        <div *ngFor="let b of booking.bookable.sharedBookings" fxLayout="row">
+                            <ngx-avatar [name]="b.owner.name" [size]="36"></ngx-avatar>
+                            <a mat-button [routerLink]="['/admin/user', b.owner.id]">
+                                {{ b.owner.name }}
+                            </a>
+                        </div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right></td>
                 </ng-container>
 
                 <ng-container matColumnDef="admin">

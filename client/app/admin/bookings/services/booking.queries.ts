@@ -25,23 +25,22 @@ export const bookingMetaFragment = gql`
             id
             name
         }
-        bookable {
-            id
-            name
-            image {
-                id
-            }
-            ...bookableMeta
-        }
     }
-    ${bookableMetaFragment}
-${userMetaFragment}`;
+    ${userMetaFragment}
+`;
 
 export const bookingsQuery = gql`
     query Bookings($filter: BookingFilter, $sorting: [BookingSorting!], $pagination: PaginationInput) {
         bookings(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...bookingMeta
+                bookable {
+                    id
+                    name
+                    image {
+                        id
+                    }
+                }
             }
             pageSize
             pageIndex
@@ -51,12 +50,53 @@ export const bookingsQuery = gql`
             totalPeriodicPrice
         }
     }
-${bookingMetaFragment}`;
+    ${bookingMetaFragment}
+`;
+
+export const pricedBookingsQuery = gql`
+    query PricedBookings($filter: BookingFilter, $sorting: [BookingSorting!], $pagination: PaginationInput) {
+        bookings(filter: $filter, sorting: $sorting, pagination: $pagination) {
+            items {
+                ...bookingMeta
+                periodicPrice
+                bookable {
+                    id
+                    name
+                    sharedBookings {
+                        id
+                        owner {
+                            id
+                            name
+                        }
+                    }
+                    bookableTags {
+                        id
+                    }
+                }
+            }
+            pageSize
+            pageIndex
+            length
+            totalParticipantCount
+            totalInitialPrice
+            totalPeriodicPrice
+        }
+    }
+    ${bookingMetaFragment}
+`;
 
 export const bookingQuery = gql`
     query Booking($id: BookingID!) {
         booking(id: $id) {
             ...bookingMeta
+            bookable {
+                id
+                name
+                image {
+                    id
+                }
+                ...bookableMeta
+            }
             creationDate
             creator {
                 ...userMeta
@@ -67,8 +107,10 @@ export const bookingQuery = gql`
             }
         }
     }
+    ${bookableMetaFragment}
     ${bookingMetaFragment}
-${userMetaFragment}`;
+    ${userMetaFragment}
+`;
 
 export const createBooking = gql`
     mutation CreateBooking ($input: BookingInput!) {

@@ -1,19 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { bookableTagQuery, bookableTagsQuery, createBookableTag, deleteBookableTags, updateBookableTag } from './bookableTag.queries';
 import {
-    bookableTagQuery,
-    bookableTagsQuery,
-    createBookableTag,
-    deleteBookableTags,
-    updateBookableTag,
-} from './bookableTag.queries';
-import {
-    BookableTagInput,
     BookableTag,
-    BookableTagVariables,
+    BookableTagInput,
     BookableTags,
     BookableTagsVariables,
+    BookableTagVariables,
     CreateBookableTag,
     CreateBookableTagVariables,
     UpdateBookableTag,

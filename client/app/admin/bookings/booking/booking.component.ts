@@ -108,7 +108,7 @@ export class BookingComponent
 
     public assignBookable(bookable) {
 
-        const message = 'Êtes-vous sûr de vouloir attribuer cet espace de stockage ? ' +
+        const message = 'Êtes-vous sûr de vouloir attribuer cette prestation ou espace de stockage ? ' +
                         'Cette action va créer une nouvelle réservation et débitera automatiquement le compte du membre. ' +
                         'Pour annuler cette action, il sera nécessaire de supprimer la nouvelle réservation.';
 

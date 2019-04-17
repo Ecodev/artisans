@@ -7,6 +7,7 @@ import { Validators } from '@angular/forms';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { FormValidators } from '../../../natural/services/abstract-model.service';
+import { PricedBookingService } from '../../../admin/bookings/services/PricedBooking.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,8 +18,9 @@ export class NewUserService extends UserService {
                 router: Router,
                 bookingService: BookingService,
                 permissionsService: PermissionsService,
+                pricedBookingService: PricedBookingService,
     ) {
-        super(apollo, router, bookingService, permissionsService);
+        super(apollo, router, bookingService, permissionsService, pricedBookingService);
     }
 
     public getDefaultValues(): Literal {

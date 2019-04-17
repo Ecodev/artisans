@@ -337,7 +337,7 @@ class Booking extends AbstractModel
         }
 
         if ($isStorage && $isAdminOnly) {
-            $bookingsCount = (string) count($bookable->getBookings());
+            $bookingsCount = (string) count($bookable->getActiveBookings());
 
             return bcdiv($bookablePrice, $bookingsCount);
         }

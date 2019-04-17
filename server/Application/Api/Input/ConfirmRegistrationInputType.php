@@ -39,6 +39,9 @@ class ConfirmRegistrationInputType extends InputObjectType
                     'country' => [
                         'type' => _types()->getId(Country::class),
                     ],
+                    'birthday' => [
+                        'type' => self::nonNull(_types()->get('Date')),
+                    ],
                 ];
             },
         ];

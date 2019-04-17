@@ -26,8 +26,6 @@ export class NewUserService extends UserService {
     public getDefaultValues(): Literal {
         const values = {
             password: '',
-            hasInsurance: true, // already accepted on step 1
-            termsAgreement: true,  // already accepted on step 1
         };
 
         return Object.assign(super.getDefaultValues(), values);

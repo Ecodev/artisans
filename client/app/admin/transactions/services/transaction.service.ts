@@ -18,6 +18,7 @@ import {
 import { Validators } from '@angular/forms';
 import { TransactionLineService } from './transactionLine.service';
 import { Literal } from '../../../natural/types/types';
+import {TimezonePreservingDateAdapter} from '../../../shared/services/timezone.preserving.date.adapter';
 
 @Injectable({
     providedIn: 'root',
@@ -32,7 +33,10 @@ export class TransactionService extends AbstractModelService<Transaction['transa
     UpdateTransactionVariables,
     DeleteTransactions> {
 
-    constructor(apollo: Apollo, private transactionLineService: TransactionLineService) {
+    constructor(apollo: Apollo,
+                private transactionLineService: TransactionLineService,
+                private timezonePreservingDateAdapter: TimezonePreservingDateAdapter,
+    ) {
         super(apollo,
             'transaction',
             transactionQuery,
@@ -51,7 +55,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
             debit: account,
             credit: {id: '10025', name: 'Postfinance'},
             balance: amount,
-            transactionDate: '',
+            transactionDate: this.timezonePreservingDateAdapter.today(),
         };
 
         return [Object.assign(emptyLine, line)];
@@ -66,7 +70,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
             debit: {id: '10025', name: 'Postfinance'},
             credit: account,
             balance: amount,
-            transactionDate: '',
+            transactionDate: this.timezonePreservingDateAdapter.today(),
         };
 
         return [Object.assign(emptyLine, line)];
@@ -77,7 +81,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
             name: '',
             remarks: '',
             internalRemarks: '',
-            transactionDate: '',
+            transactionDate: this.timezonePreservingDateAdapter.today(),
             expenseClaim: null,
         };
     }

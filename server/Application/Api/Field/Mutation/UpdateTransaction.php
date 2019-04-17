@@ -37,6 +37,10 @@ abstract class UpdateTransaction implements FieldInterface
                 if ($lines !== null) {
                     _em()->getRepository(Transaction::class)->hydrateLinesAndFlush($transaction, $lines);
                 } else {
+                    // Update the date of each line to match the one of the transaction
+                    foreach ($transaction->getTransactionLines() as $line) {
+                        $line->setTransactionDate($transaction->getTransactionDate());
+                    }
                     _em()->flush();
                 }
 

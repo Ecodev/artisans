@@ -64,6 +64,14 @@
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
 
+        <ng-container matColumnDef="isReconciled">
+            <th mat-header-cell *matHeaderCellDef style="text-align:left !important">Pointé</th>
+            <td mat-cell *matCellDef="let element; let i = index;" [formGroupName]="i">
+                <mat-checkbox formControlName="isReconciled"></mat-checkbox>
+            </td>
+            <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
         <ng-container matColumnDef="transactionTag">
             <th mat-header-cell *matHeaderCellDef>Catégorie</th>
             <td mat-cell *matCellDef="let element; let i = index;" [formGroupName]="i">

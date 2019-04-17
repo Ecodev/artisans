@@ -62,6 +62,7 @@ class TransactionRepository extends AbstractRepository implements LimitedAccessS
             $accounts[] = $transactionLine->getDebit();
 
             $transactionLine->setTransaction($transaction);
+            $transactionLine->setTransactionDate($transaction->getTransactionDate());
             $this->getEntityManager()->persist($transactionLine);
         }
 

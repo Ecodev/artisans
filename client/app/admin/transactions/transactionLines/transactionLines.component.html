@@ -16,10 +16,10 @@
                 <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span appColumnsPickerColumn="name">Nom</span>
                     <span appColumnsPickerColumn="bookable">Réservable</span>
-                    <span appColumnsPickerColumn="transactionDate">Date</span>
                     <span appColumnsPickerColumn="remarks">Remarques</span>
                     <span appColumnsPickerColumn="balance">Montant</span>
                     <span appColumnsPickerColumn="account">Compte</span>
+                    <span appColumnsPickerColumn="isReconciled">Pointé</span>
                     <span appColumnsPickerColumn="expenseClaim">Quittance</span>
                     <span appColumnsPickerColumn="creationDate" [checked]="false">Créé le</span>
                     <span appColumnsPickerColumn="updateDate" [checked]="false">Modifié le</span>
@@ -80,6 +80,12 @@
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
+                <ng-container matColumnDef="isReconciled">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Pointé</th>
+                    <td mat-cell *matCellDef="let element">{{ element.isReconciled ? '✔︎' : '' }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
                 <ng-container matColumnDef="bookable">
                     <th mat-header-cell *matHeaderCellDef>Réservable</th>
                     <td mat-cell *matCellDef="let element">
@@ -88,12 +94,6 @@
                                           [navigate]="['/admin/bookable', element.bookable.id]"
                         ></app-table-button>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                </ng-container>
-
-                <ng-container matColumnDef="transactionDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
-                    <td mat-cell *matCellDef="let element">{{ element.transactionDate | date : 'mediumDate' }}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 

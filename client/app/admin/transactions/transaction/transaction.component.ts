@@ -20,6 +20,7 @@ import { EditableTransactionLinesComponent } from '../editable-transaction-lines
 import { TransactionLineService } from '../services/transactionLine.service';
 import { AccountingDocumentsComponent } from '../../accounting-documents/accounting-documents.component';
 import { ExpenseClaimService } from '../../expenseClaim/services/expenseClaim.service';
+import {TimezonePreservingDateAdapter} from '../../../shared/services/timezone.preserving.date.adapter';
 
 @Component({
     selector: 'app-transaction',
@@ -49,6 +50,7 @@ export class TransactionComponent
                 public bookableService: BookableService,
                 public transactionLineService: TransactionLineService,
                 private expenseClaimService: ExpenseClaimService,
+                private timezonePreservingDateAdapter: TimezonePreservingDateAdapter,
     ) {
         super('transaction', transactionService, alertService, router, route);
     }
@@ -69,6 +71,7 @@ export class TransactionComponent
                         nameControl.setValue('Traitement de la dépense "' + expenseClaim.name + '"');
                     } else if (expenseClaim.type === ExpenseClaimType.refund) {
                         nameControl.setValue('Remboursement de "' + expenseClaim.name + '"');
+                        console.log(nameControl);
                     }
                 }
 

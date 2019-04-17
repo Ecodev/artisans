@@ -37,6 +37,7 @@ import { TransactionTagResolver } from './transactionTags/services/transactionTa
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
+import { UsageBookableService } from './bookables/services/usage-bookable.service';
 
 const routes: Routes = [
         {
@@ -49,8 +50,8 @@ const routes: Routes = [
                     component: BookingsComponent,
                     data: {
                         title: 'Sorties en cours',
-                        queryVariables: BookingService.runningSelfApprovedQV,
-                        columns: ['edit', 'owner', 'bookable', 'startDate', 'estimatedEndDate', 'terminateBooking'],
+                        contextVariables: BookingService.runningSelfApprovedQV,
+                        contextColumns: ['edit', 'owner', 'bookable', 'startDate', 'estimatedEndDate', 'terminateBooking'],
                     },
                 },
                 {
@@ -66,8 +67,8 @@ const routes: Routes = [
                             component: BookingsComponent,
                             data: {
                                 title: 'Toutes terminées',
-                                queryVariables: BookingService.selfApprovedQV,
-                                columns: [
+                                contextVariables: BookingService.selfApprovedQV,
+                                contextColumns: [
                                     'edit',
                                     'owner',
                                     'bookable',
@@ -85,8 +86,8 @@ const routes: Routes = [
                             component: BookingsComponent,
                             data: {
                                 title: 'Demandes de stockage en attente',
-                                queryVariables: BookingService.storageApplication,
-                                columns: ['edit', 'owner', 'bookable', 'startDate'],
+                                contextVariables: BookingService.storageApplication,
+                                contextColumns: ['edit', 'owner', 'bookable', 'startDate'],
                             },
                         },
                         {
@@ -94,8 +95,8 @@ const routes: Routes = [
                             component: BookingsComponent,
                             data: {
                                 title: 'Demandes de services en attente',
-                                queryVariables: BookingService.notStorageApplication,
-                                columns: ['edit', 'owner', 'bookable', 'startDate'],
+                                contextVariables: BookingService.notStorageApplication,
+                                contextColumns: ['edit', 'owner', 'bookable', 'startDate'],
                             },
                         },
                         {
@@ -127,7 +128,7 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Cotisations',
-                                queryVariables: BookableService.membershipServices,
+                                contextVariables: BookableService.membershipServices,
                             },
                         },
                         {
@@ -135,8 +136,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Stand up paddle',
-                                queryVariables: BookableService.getFiltersByTagId(6000),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6000),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -144,8 +145,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Planches',
-                                queryVariables: BookableService.getFiltersByTagId(6001),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6001),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -153,8 +154,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Canoës',
-                                queryVariables: BookableService.getFiltersByTagId(6002),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6002),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -162,8 +163,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Kayaks',
-                                queryVariables: BookableService.getFiltersByTagId(6003),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6003),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -171,8 +172,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Aviron',
-                                queryVariables: BookableService.getFiltersByTagId(6004),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6004),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -180,8 +181,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Voile légère',
-                                queryVariables: BookableService.getFiltersByTagId(6005),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6005),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -189,8 +190,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Voile lestée',
-                                queryVariables: BookableService.getFiltersByTagId(6006),
-                                columns: ['image', 'name', 'code', 'date', 'verificationDate'],
+                                contextVariables: BookableService.getFiltersByTagId(6006),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
@@ -198,7 +199,9 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Armoires',
-                                queryVariables: BookableService.adminByTag(6009),
+                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate', 'usage'],
+                                contextVariables: BookableService.adminByTag(6009),
+                                contextService: UsageBookableService
                             },
                         },
                         {
@@ -206,7 +209,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Casiers',
-                                queryVariables: BookableService.adminByTag(6010),
+                                contextVariables: BookableService.adminByTag(6010),
+                                contextService: UsageBookableService
                             },
                         },
                         {
@@ -214,7 +218,8 @@ const routes: Routes = [
                             component: BookablesComponent,
                             data: {
                                 title: 'Flotteurs',
-                                queryVariables: BookableService.adminByTag(6011),
+                                contextVariables: BookableService.adminByTag(6011),
+                                contextService: UsageBookableService
                             },
                         },
                         {
@@ -248,7 +253,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres actifs',
-                                queryVariables: UserService.getFilters([UserRole.member], [UserStatus.active]),
+                                contextVariables: UserService.getFilters([UserRole.member], [UserStatus.active]),
                             },
                         },
                         {
@@ -256,8 +261,8 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Nouveaux membres',
-                                queryVariables: UserService.getFilters([UserRole.member], [UserStatus.new]),
-                                columns: ['balance', 'name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
+                                contextVariables: UserService.getFilters([UserRole.member], [UserStatus.new]),
+                                contextColumns: ['balance', 'name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
                             },
                         },
                         {
@@ -265,7 +270,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Staff',
-                                queryVariables: UserService.getFilters([UserRole.responsible, UserRole.administrator], null),
+                                contextVariables: UserService.getFilters([UserRole.responsible, UserRole.administrator], null),
                             },
                         },
                         {
@@ -273,7 +278,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres inactifs et archivés',
-                                queryVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
+                                contextVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
                             },
                         },
 

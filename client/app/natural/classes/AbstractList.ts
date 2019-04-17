@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Input, OnDestroy, OnInit } from '@angular/core';
+import { Injector, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, Sort } from '@angular/material';
@@ -19,7 +19,7 @@ import { AlertService } from '../components/alert/alert.service';
  * Components inheriting from this class can be used as standalone with input attributes.
  *
  * Usage :
- * <app-my-listing [queryVariables]="{filter:...}" [columns]="['col1']" [persistSearch]="false">
+ * <app-my-listing [contextVariables]="{filter:...}" [contextColumns]="['col1']" [persistSearch]="false">
  */
 export class AbstractList<Tall, Vall extends QueryVariables>
     extends AbstractController
@@ -28,7 +28,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     /**
      * Contextual variables to apply on a list
      */
-    @Input() set queryVariables(value) {
+    @Input() set contextVariables(value) {
         this.variablesManager.set('contextVariables', value);
     }
 
@@ -36,7 +36,9 @@ export class AbstractList<Tall, Vall extends QueryVariables>
      * Contextual initial columns
      * By now can't by changed after initialization
      */
-    @Input() columns: string[];
+    @Input() contextColumns: string[];
+
+    @Input() contextService;
 
     /**
      * Wherever search should be loaded from url/storage and persisted in it too.
@@ -87,7 +89,8 @@ export class AbstractList<Tall, Vall extends QueryVariables>
                 protected route: ActivatedRoute,
                 protected alertService: AlertService,
                 protected persistenceService: PersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService) {
+                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                private injector: Injector) {
         super();
 
         // If available, get configuration for natural search
@@ -100,12 +103,46 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     ngOnInit() {
         this.routeData = this.route.snapshot.data;
 
+        this.initFromContext();
         this.initFromPersisted();
-        this.initFromRouting();
-        this.initFromAttributeInputs();
 
         this.dataSource = new NaturalDataSource(this.getDataObservable());
         this.selection = new SelectionModel<Tall>(true, []);
+    }
+
+    /**
+     * Initialize from routing or input context.
+     * Uses data provided by router as route.data.contextXYZ
+     * Uses data provided by inputs in usage <app-xxx [contextXXX]...>
+     */
+    protected initFromContext() {
+
+        // Variables
+        if (this.route.snapshot.data.contextVariables) {
+            this.variablesManager.set('contextVariables', this.route.snapshot.data.contextVariables);
+        }
+
+        // Columns
+        if (this.contextColumns) {
+            this.initialColumns = this.contextColumns;
+        }
+
+        if (this.route.snapshot.data.contextColumns) {
+            this.initialColumns = this.route.snapshot.data.contextColumns;
+        }
+
+        if (!this.injector && (this.routeData.contextService || this.contextService)) {
+            console.error('Injector is required to provide a context service in a component that extends AbstractListService');
+        }
+
+        // Service
+        if (this.injector && this.routeData.contextService) {
+            this.service = this.injector.get<any>(this.routeData.contextService);
+        }
+
+        if (this.injector && this.contextService) {
+            this.service = this.injector.get<any>(this.contextService);
+        }
     }
 
     /**
@@ -200,29 +237,6 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         }
 
         this[this.bulkActionSelected]();
-    }
-
-    /**
-     * Uses data from routing data.columns: string[]
-     */
-    protected initFromRouting() {
-
-        if (this.route.snapshot.data.queryVariables) {
-            this.variablesManager.set('routeFilters', this.route.snapshot.data.queryVariables);
-        }
-
-        if (this.route.snapshot.data.columns) {
-            this.initialColumns = this.route.snapshot.data.columns;
-        }
-    }
-
-    /**
-     * Init context query variables and visible columns from attributes [queryVariables] and [columns]
-     */
-    public initFromAttributeInputs() {
-        if (this.columns) {
-            this.initialColumns = this.columns;
-        }
     }
 
     protected getDataObservable(): Observable<Tall> {

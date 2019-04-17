@@ -10,7 +10,7 @@
                 </div>
             </div>
             <a mat-flat-button
-               color="warn"
+               color="accent"
                *ngIf="userService.canBecomeMember(viewer)"
                [disabled]="!viewer.email"
                [matTooltip]="!viewer.email ? 'Vous devez avoir saisi une adresse e-mail dans vos données personnelles' : null"

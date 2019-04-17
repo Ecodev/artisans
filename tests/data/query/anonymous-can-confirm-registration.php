@@ -16,6 +16,7 @@ return [
                 'street' => 'Wallstreet',
                 'locality' => 'New York',
                 'postcode' => '2000',
+                'birthday' => '2000-01-01',
             ],
         ],
     ],

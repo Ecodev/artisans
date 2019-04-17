@@ -90,7 +90,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
                 protected alertService: AlertService,
                 protected persistenceService: PersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
-                private injector: Injector) {
+                private injector?: Injector) {
         super();
 
         // If available, get configuration for natural search

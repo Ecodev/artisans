@@ -27,6 +27,7 @@ import { BookingService } from '../../bookings/services/booking.service';
 import { intersectionBy } from 'lodash';
 import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({
     providedIn: 'root',
@@ -48,7 +49,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
                     conditions: [
                         {
                             bookingType: {in: {values: [BookingType.self_approved], not: true}},
-                            bookableTags: {have: {values: ['6007']}},
+                            bookableTags: {have: {values: [BookableTagService.SERVICE]}},
                         },
                     ],
                 },
@@ -57,7 +58,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
                     conditions: [
                         {
                             bookingType: {in: {values: [BookingType.admin_approved]}},
-                            bookableTags: {have: {values: ['6008']}},
+                            bookableTags: {have: {values: [BookableTagService.STORAGE]}},
                         },
                     ],
                 },

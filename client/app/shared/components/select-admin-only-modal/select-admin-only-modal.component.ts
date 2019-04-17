@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
+import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
 
 @Component({
     selector: 'app-select-admin-only-modal',
@@ -8,7 +9,7 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 export class SelectAdminOnlyModalComponent implements OnInit {
 
     public selection;
-    public variables = BookableService.adminByTag('6008');
+    public variables = BookableService.adminByTag(BookableTagService.STORAGE);
 
     constructor(public bookableService: BookableService) {
     }

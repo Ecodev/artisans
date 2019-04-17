@@ -25,6 +25,7 @@ import { map } from 'rxjs/operators';
 import { BookingResolve } from '../booking';
 import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { EnumService } from '../../../natural/services/enum.service';
+import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({
     providedIn: 'root',
@@ -99,7 +100,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
                         bookable: {
                             conditions: [
                                 {
-                                    bookableTags: {have: {values: ['6008']}},
+                                    bookableTags: {have: {values: [BookableTagService.STORAGE]}},
                                     bookingType: {equal: {value: BookingType.admin_approved}},
                                 },
                             ],
@@ -115,7 +116,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
             groups: [
                 {
                     conditions: [{status: {equal: {value: BookingStatus.application}}}],
-                    joins: {bookable: {conditions: [{bookableTags: {have: {values: ['6008'], not: true}}}]}},
+                    joins: {bookable: {conditions: [{bookableTags: {have: {values: [BookableTagService.STORAGE], not: true}}}]}},
                 },
             ],
         },

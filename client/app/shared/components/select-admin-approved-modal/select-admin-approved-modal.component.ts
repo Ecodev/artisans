@@ -4,6 +4,7 @@ import { Bookables, BookablesVariables } from '../../generated-types';
 import { SelectionModel } from '@angular/cdk/collections';
 import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
 
 @Component({
     selector: 'app-select-admin-approved-modal',
@@ -19,7 +20,7 @@ export class SelectAdminApprovedModalComponent implements OnInit {
     }
 
     ngOnInit() {
-        const serviceVariables = BookableService.adminApprovedByTag('6007');
+        const serviceVariables = BookableService.adminApprovedByTag(BookableTagService.SERVICE);
         const qvmServices = new QueryVariablesManager<BookablesVariables>();
         qvmServices.set('variables', serviceVariables);
 
@@ -28,7 +29,7 @@ export class SelectAdminApprovedModalComponent implements OnInit {
             this.servicesDataSource = new NaturalDataSource(result);
         });
 
-        const storageVariables = BookableService.adminApprovedByTag('6008');
+        const storageVariables = BookableService.adminApprovedByTag(BookableTagService.STORAGE);
         const qvmStorage = new QueryVariablesManager<BookablesVariables>();
         qvmStorage.set('variables', storageVariables);
 

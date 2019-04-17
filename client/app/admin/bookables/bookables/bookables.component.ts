@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../natural/components/alert/alert.service';
 import { PersistenceService } from '../../../natural/services/persistence.service';
@@ -24,6 +24,7 @@ export class BookablesComponent extends AbstractList<Bookables['bookables'], Boo
                 persistenceService: PersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
                 public permissionsService: PermissionsService,
+                injector: Injector
     ) {
 
         super('bookables',
@@ -33,6 +34,7 @@ export class BookablesComponent extends AbstractList<Bookables['bookables'], Boo
             alertService,
             persistenceService,
             naturalSearchConfigurationService,
+            injector
         );
 
     }

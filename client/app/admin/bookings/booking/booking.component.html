@@ -78,9 +78,10 @@
                 <div *ngIf="isApplication() && isStorage() && data.model.status === BookingStatus.application">
                     <mat-divider class="margin-bottom"></mat-divider>
                     <div class="mat-title">Attribuer un stockage</div>
-                    <app-bookables [columns]="['name', 'code', 'periodicPrice', 'select']"
+                    <app-bookables [contextColumns]="['usage', 'name', 'code', 'periodicPrice', 'select']"
+                                   [contextService]="UsageBookableService"
                                    [persistSearch]="false"
-                                   [queryVariables]="storageVariables"
+                                   [contextVariables]="storageVariables"
                                    (select)="assignBookable($event)"
                     ></app-bookables>
                 </div>

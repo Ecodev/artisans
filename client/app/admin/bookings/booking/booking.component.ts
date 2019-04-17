@@ -18,6 +18,7 @@ import { BookableService } from '../../bookables/services/bookable.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
 import { AlertService } from '../../../natural/components/alert/alert.service';
+import { UsageBookableService } from '../../bookables/services/usage-bookable.service';
 
 @Component({
     selector: 'app-booking',
@@ -33,6 +34,7 @@ export class BookingComponent
         UpdateBookingVariables,
         any> implements OnInit {
 
+    public UsageBookableService = UsageBookableService;
     public BookingStatus = BookingStatus;
     public storageVariables;
 

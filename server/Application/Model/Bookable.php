@@ -408,4 +408,22 @@ class Bookable extends AbstractModel
     {
         $this->creditAccount = $creditAccount;
     }
+
+    /**
+     * Return list of active bookings
+     *
+     * Consider using this getter for bookables with low booking rate like storages.
+     *
+     * On bookables with high booking rate like navigations, this would be a performance issue.
+     *
+     * @return Booking[]
+     */
+    public function getActiveBookings()
+    {
+        $bookings = array_filter($this->getBookings()->toArray(), function (Booking $booking) {
+            return !$booking->getEndDate();
+        });
+
+        return $bookings;
+    }
 }

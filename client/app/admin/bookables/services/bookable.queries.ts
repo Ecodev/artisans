@@ -59,6 +59,37 @@ export const bookablesQuery = gql`
     }
 ${bookableMetaFragment}`;
 
+export const usageBookablesQuery = gql`
+    query UsageBookables($filter: BookableFilter, $sorting: [BookableSorting!], $pagination: PaginationInput) {
+        bookables(filter: $filter, sorting: $sorting, pagination: $pagination) {
+            items {
+                id
+                name
+                code
+                initialPrice
+                periodicPrice
+                purchasePrice
+                purchasePrice
+                activeBookings {
+                    id
+                    owner {
+                        id
+                        name
+                    }
+                }
+                creationDate
+                updateDate
+            }
+            pageSize
+            pageIndex
+            length
+            totalPurchasePrice
+            totalInitialPrice
+            totalPeriodicPrice
+        }
+    }
+`;
+
 export const bookableQuery = gql`
     query Bookable($id: BookableID!) {
         bookable(id: $id) {

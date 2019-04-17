@@ -186,7 +186,7 @@ class UserTest extends TestCase
         self::assertEquals(32, mb_strlen($token2), 'must be exactly the length of DB field');
         self::assertTrue($user->isTokenValid(), 'second created token is valid');
 
-        $user->setLastLogin(new Chronos());
+        $user->revokeToken();
         self::assertFalse($user->isTokenValid(), 'once user is logged in token is invalid');
 
         $token3 = $user->createToken();

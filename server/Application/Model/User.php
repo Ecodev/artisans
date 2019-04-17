@@ -130,12 +130,6 @@ class User extends AbstractModel
      * @var null|Chronos
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $lastLogin;
-
-    /**
-     * @var null|Chronos
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     private $welcomeSessionDate;
 
     /**
@@ -831,22 +825,23 @@ class User extends AbstractModel
     }
 
     /**
-     * Get the last login
+     * Get the first login date
+     *
+     * @return null|Chronos
+     */
+    public function getFirstLogin(): ?Chronos
+    {
+        return _em()->getRepository(Log::class)->getLoginDate($this, true);
+    }
+
+    /**
+     * Get the last login date
      *
      * @return null|Chronos
      */
     public function getLastLogin(): ?Chronos
     {
-        return $this->lastLogin;
-    }
-
-    /**
-     * @param null|Chronos $lastLogin
-     */
-    public function setLastLogin(?Chronos $lastLogin): void
-    {
-        $this->lastLogin = $lastLogin;
-        $this->revokeToken();
+        return _em()->getRepository(Log::class)->getLoginDate($this, false);
     }
 
     /**
@@ -966,7 +961,7 @@ class User extends AbstractModel
     /**
      * Destroy existing token
      */
-    private function revokeToken(): void
+    public function revokeToken(): void
     {
         $this->token = null;
         $this->tokenCreationDate = null;

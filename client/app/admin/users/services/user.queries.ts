@@ -29,6 +29,7 @@ export const userFieldsFragment = gql`
         door2
         door3
         door4
+        firstLogin
         lastLogin
         canOpenDoor
         licenses {
@@ -77,7 +78,6 @@ export const usersQuery = gql`
                 familyRelationship
                 updateDate
                 creationDate
-                lastLogin
                 age
                 welcomeSessionDate
                 sex

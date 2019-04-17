@@ -6,7 +6,6 @@ namespace Application\Repository;
 
 use Application\DBAL\Types\BookingTypeType;
 use Application\Model\User;
-use Cake\Chronos\Chronos;
 use Doctrine\DBAL\Connection;
 
 class UserRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
@@ -59,7 +58,7 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             if ($isMd5 || password_needs_rehash($hashFromDb, PASSWORD_DEFAULT)) {
                 $user->setPassword($password);
             }
-            $user->setLastLogin(new Chronos());
+            $user->revokeToken();
             _em()->flush();
 
             return $user;

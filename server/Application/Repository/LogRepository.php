@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\Model\User;
 use Cake\Chronos\Chronos;
 use Doctrine\DBAL\Connection;
 use Zend\Log\Logger;
@@ -118,5 +119,20 @@ class LogRepository extends AbstractRepository
         $connection->query('UNLOCK TABLES;');
 
         return $count;
+    }
+
+    public function getLoginDate(User $user, bool $first): ?Chronos
+    {
+        $qb = $this->createQueryBuilder('log')
+            ->select('log.creationDate')
+            ->andWhere('log.creator = :user')
+            ->andWhere('log.message = :message')
+            ->setParameter('user', $user)
+            ->setParameter('message', self::LOGIN)
+            ->addOrderBy('log.creationDate', $first ? 'ASC' : 'DESC');
+
+        $result = $qb->getQuery()->setMaxResults(1)->getOneOrNullResult();
+
+        return $result['creationDate'];
     }
 }

@@ -260,7 +260,11 @@
 
                     </div>
 
-                    <!-- LastLogin -->
+                    <div>
+                        <span class="mat-body-2">Première connexion :</span>
+                        {{ data.model.firstLogin  | date: 'mediumDate' }} - {{ data.model.firstLogin | date: 'shortTime' }}
+                    </div>
+
                     <div>
                         <span class="mat-body-2">Dernière connexion :</span>
                         {{ data.model.lastLogin  | date: 'mediumDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}

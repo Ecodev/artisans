@@ -633,6 +633,37 @@ EOT;
             $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
             $linkToTag->execute();
         }
+
+        // Stockage flotteurs
+        $insert->bindValue(':periodic_price', 50);
+        $insert->bindValue(':description', 'Emplacement de stockage sous le local pour un ou deux flotteurs (80 x 45 x 300 cm)');
+        for ($i = 1; $i <= 80; ++$i) {
+            $insert->bindValue(':name', sprintf('Stockage flotteur %u', $i));
+            $insert->bindValue(':code', sprintf('STF%u', $i));
+            $insert->execute();
+            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Flotteurs'));
+            $linkToTag->execute();
+            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
+            $linkToTag->execute();
+        }
+
+        // Râtelier du Wishbone Club
+        $insert->bindValue(':periodic_price', 100);
+        $insert->bindValue(':description', 'Casier râtelier WBC (100 x 60 x 300 cm)');
+        for ($i = 65; $i <= 81; ++$i) {
+            $door = chr($i); // doors A to Q
+            for ($position = 1; $position <= 5; ++$position) {
+                $insert->bindValue(':name', sprintf('Casier râtelier %s%u', $door, $position));
+                $insert->bindValue(':code', sprintf('STCR%s%u', $door, $position));
+                $insert->execute();
+                $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
+                $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Casier du râtelier WBC'));
+                $linkToTag->execute();
+                $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
+                $linkToTag->execute();
+            }
+        }
     }
 
     /**

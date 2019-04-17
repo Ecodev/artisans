@@ -6,6 +6,7 @@ namespace Application\Model;
 
 use Application\DBAL\Types\BookableStateType;
 use Application\DBAL\Types\BookingTypeType;
+use Application\Repository\BookableTagRepository;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
@@ -410,16 +411,31 @@ class Bookable extends AbstractModel
     }
 
     /**
-     * Return list of active bookings
+     * Return a list of effective active bookings including sharing conditions.
      *
-     * Consider using this getter for bookables with low booking rate like storages.
+     * Only "admin-only" + storage tags are sharable bookables. In this case, a list of bookings is returned.
      *
-     * On bookables with high booking rate like navigations, this would be a performance issue.
+     * For other bookable types, returns null
      *
-     * @return Booking[]
+     * @return null|Booking[]
      */
-    public function getActiveBookings()
+    public function getSharedBookings()
     {
+        $isAdminOnly = $this->getBookingType() === \Application\DBAL\Types\BookingTypeType::ADMIN_ONLY;
+
+        $isStorage = false;
+        foreach ($this->getBookableTags() as $tag) {
+            if ($tag->getId() === BookableTagRepository::STORAGE_ID) {
+                $isStorage = true;
+
+                break;
+            }
+        }
+
+        if (!$isAdminOnly || !$isStorage) {
+            return null;
+        }
+
         $bookings = array_filter($this->getBookings()->toArray(), function (Booking $booking) {
             return !$booking->getEndDate();
         });

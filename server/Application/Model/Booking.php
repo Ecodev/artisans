@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\DBAL\Types\BookingStatusType;
-use Application\Repository\BookableTagRepository;
 use Application\Service\Invoicer;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasRemarks;
@@ -322,26 +321,12 @@ class Booking extends AbstractModel
     public function getPeriodicPrice(): string
     {
         $bookable = $this->getBookable();
-        $bookableBookingType = $bookable->getBookingType();
-        $bookablePrice = $bookable->getPeriodicPrice();
+        $bookings = $bookable->getSharedBookings();
 
-        $isAdminOnly = $bookableBookingType === \Application\DBAL\Types\BookingTypeType::ADMIN_ONLY;
-        $isStorage = false;
-
-        foreach ($bookable->getBookableTags() as $tag) {
-            if ($tag->getId() === BookableTagRepository::STORAGE_ID) {
-                $isStorage = true;
-
-                break;
-            }
+        if (!$bookings) {
+            return $bookable->getPeriodicPrice();
         }
 
-        if ($isStorage && $isAdminOnly) {
-            $bookingsCount = (string) count($bookable->getActiveBookings());
-
-            return bcdiv($bookablePrice, $bookingsCount);
-        }
-
-        return $bookablePrice;
+        return bcdiv($bookable->getPeriodicPrice(), (string) count($bookings));
     }
 }

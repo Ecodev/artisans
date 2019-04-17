@@ -7,7 +7,7 @@ import { FlatNode } from '../classes/FlatNode';
 import { ModelNode } from '../classes/ModelNode';
 import { HierarchicConfiguration } from '../classes/HierarchicConfiguration';
 import { HierarchicFilterConfiguration, HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
-import { QueryVariablesManager } from '../../../classes/QueryVariablesManager';
+import { QueryVariables, QueryVariablesManager } from '../../../classes/QueryVariablesManager';
 
 export interface OrganizedModelSelection {
     [key: string]: any[];
@@ -59,11 +59,19 @@ export class HierarchicSelectorService {
         });
     }
 
+    public search(searchVariables: QueryVariables, contextFilter: HierarchicFiltersConfiguration | null = null) {
+        return this.getList(null, contextFilter, searchVariables).subscribe(items => {
+            this.dataChange.next(items);
+        });
+    }
+
     /**
      * Retrieve elements from the server
      * Get root elements if node is null, or child elements if node is given
      */
-    public getList(node: FlatNode | null = null, contextFilters: HierarchicFiltersConfiguration | null = null): Observable<any> {
+    public getList(node: FlatNode | null = null,
+                   contextFilters: HierarchicFiltersConfiguration | null = null,
+                   searchVariables: QueryVariables | null = null): Observable<any> {
 
         const configurations: HierarchicConfiguration[] = [];
         const observables: Observable<any>[] = [];
@@ -83,7 +91,7 @@ export class HierarchicSelectorService {
 
         for (const config of configs) {
             const contextFilter = this.getServiceContextFilter(config, contextFilters);
-            const filter = this.getServiceFilter(node, config, contextFilter);
+            const filter = this.getServiceFilter(node, config, contextFilter, !!searchVariables);
             if (filter && config.injectedService) {
                 configurations.push(config);
                 const variablesManager = new QueryVariablesManager();
@@ -97,7 +105,10 @@ export class HierarchicSelectorService {
                     filter: config.filter,
                 });
 
-                // TODO : Replace getAll by watchAll
+                if (searchVariables) {
+                    variablesManager.set('natural-search', searchVariables);
+                }
+
                 observables.push(config.injectedService.getAll(variablesManager));
             }
         }
@@ -224,6 +235,7 @@ export class HierarchicSelectorService {
     private getServiceFilter(flatNode: FlatNode | null,
                              config: HierarchicConfiguration,
                              contextFilter: HierarchicFilterConfiguration['filter'] | null = null,
+                             allDeeps = false
     ): HierarchicFilterConfiguration['filter'] | null {
 
         const fieldCondition = {};
@@ -235,9 +247,11 @@ export class HierarchicSelectorService {
                 return contextFilter ? contextFilter : {};
             }
 
-            config.parentsFilters.forEach(f => {
-                fieldCondition[f] = {empty: {}};
-            });
+            if (!allDeeps) {
+                config.parentsFilters.forEach(f => {
+                    fieldCondition[f] = {empty: {}};
+                });
+            }
 
         } else {
             const matchingFilters = intersection(flatNode.node.config.childrenFilters, config.parentsFilters);

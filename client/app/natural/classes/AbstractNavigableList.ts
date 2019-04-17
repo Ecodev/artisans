@@ -79,7 +79,7 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
 
     protected translateSearchAndRefreshList(naturalSearchSelections: NaturalSearchSelections) {
 
-        if (this.hasSelections(naturalSearchSelections)) {
+        if (AbstractList.hasSelections(naturalSearchSelections)) {
             this.variablesManager.set('navigation', null);
 
         } else {

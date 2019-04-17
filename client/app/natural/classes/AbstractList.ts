@@ -83,6 +83,10 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         pageSize: 25,
     };
 
+    public static hasSelections(naturalSearchSelections): boolean {
+        return !!naturalSearchSelections.filter(e => e.length).length; // because empty natural search return [[]]
+    }
+
     constructor(protected key: string,
                 protected service: AbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
                 protected router: Router,
@@ -261,7 +265,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
 
         // Natural search : ns
         this.naturalSearchSelections = fromUrl(this.persistenceService.get('ns', this.route, storageKey));
-        if (this.hasSelections(this.naturalSearchSelections)) {
+        if (AbstractList.hasSelections(this.naturalSearchSelections)) {
             this.translateSearchAndRefreshList(this.naturalSearchSelections);
         }
 
@@ -303,7 +307,4 @@ export class AbstractList<Tall, Vall extends QueryVariables>
         return subject;
     }
 
-    protected hasSelections(naturalSearchSelections): boolean {
-        return !!naturalSearchSelections.filter(e => e.length).length; // because empty natural search return [[]]
-    }
 }

@@ -17,6 +17,7 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { FormsModule } from '@angular/forms';
 import { HierarchicSelectorDialogComponent } from './hierarchic-selector-dialog/hierarchic-selector-dialog.component';
 import { IconModule } from '../../components/icon/icon.module';
+import { NaturalSearchModule } from '@ecodev/natural-search';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import { IconModule } from '../../components/icon/icon.module';
         MatDialogModule,
         IconModule,
         MatChipsModule,
+        NaturalSearchModule
     ],
     entryComponents: [
         HierarchicSelectorDialogComponent,

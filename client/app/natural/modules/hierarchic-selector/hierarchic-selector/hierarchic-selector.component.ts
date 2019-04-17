@@ -12,6 +12,8 @@ import { HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConf
 import { AbstractController } from '../../../../shared/components/AbstractController';
 import { Literal } from '../../../types/types';
 import { Utility } from '../../../classes/Utility';
+import { toGraphQLDoctrineFilter } from '@ecodev/natural-search';
+import { AbstractList } from '../../../classes/AbstractList';
 
 @Component({
     selector: 'app-hierarchic-selector',
@@ -97,9 +99,7 @@ export class HierarchicSelectorComponent extends AbstractController implements O
 
         // Update dataSource when receiving new list -> we assign the whole tree
         // The treeControl and treeFlattener will generate the displayed tree
-        this.hierarchicSelectorService.dataChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => {
-            this.dataSource.data = data;
-        });
+        this.hierarchicSelectorService.dataChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(data => this.dataSource.data = data);
 
         // Prevent empty screen on first load and init HierarchicSelectorService with inputted configuration
         this.loadRoots();
@@ -228,6 +228,7 @@ export class HierarchicSelectorComponent extends AbstractController implements O
 
     private loadRoots(): void {
         this.loading = true;
+        this.flatNodeMap = new Map<string, FlatNode>();
         this.hierarchicSelectorService.init(this.config, this.filters).subscribe(() => {
             this.loading = false;
         });
@@ -337,6 +338,16 @@ export class HierarchicSelectorComponent extends AbstractController implements O
         this.flatNodeMap.set(key, flatNode);
 
         return flatNode;
+    }
+
+    public search(selections) {
+        if (AbstractList.hasSelections(selections)) {
+            const filter = toGraphQLDoctrineFilter([], selections);
+            const variables = {filter: filter};
+            this.hierarchicSelectorService.search(variables, this.filters);
+        } else {
+            this.loadRoots();
+        }
     }
 
     /**

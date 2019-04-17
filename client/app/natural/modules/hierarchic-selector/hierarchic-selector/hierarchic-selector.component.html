@@ -2,6 +2,10 @@
 
 <mat-progress-spinner mode="indeterminate" [diameter]="36" *ngIf="loading" style="margin:10px"></mat-progress-spinner>
 
+<div [style.margin-bottom.px]="20">
+    <natural-search [configurations]="[]" (selectionChange)="search($event)"></natural-search>
+</div>
+
 <div class="body">
     <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
 

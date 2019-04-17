@@ -223,6 +223,15 @@ const routes: Routes = [
                             },
                         },
                         {
+                            path: 'ratelier',
+                            component: BookablesComponent,
+                            data: {
+                                title: 'Râteliers WBC',
+                                contextVariables: BookableService.adminByTag(6016),
+                                contextService: UsageBookableService
+                            },
+                        },
+                        {
                             path: 'new',
                             component: BookableComponent,
                             resolve: {

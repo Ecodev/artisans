@@ -10,7 +10,7 @@ return [
         'variables' => [
             'input' => [
                 'login' => 'john.doe',
-                'password' => 'money12345',
+                'password' => 'douzecaracteres',
                 'firstName' => 'John',
                 'lastName' => 'Doe',
                 'street' => 'Wallstreet',

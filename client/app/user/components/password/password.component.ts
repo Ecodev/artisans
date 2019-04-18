@@ -3,17 +3,6 @@ import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, V
 import { ErrorStateMatcher } from '@angular/material';
 import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
 
-function passwordValidator(control: FormControl): ValidationErrors | null {
-    const value = control.value || '';
-    if (!value.match(/[a-z]/i) || !value.match(/[^a-z ]/i)) {
-        return {
-            invalid: 'Le mot de passe doit contenir au moins une lettre et une non-lettre (chiffre ou symbole)',
-        };
-    }
-
-    return null;
-}
-
 function samePasswordsValidator(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
         return null;
@@ -51,7 +40,7 @@ export class PasswordComponent implements OnInit {
 
     ngOnInit() {
         this.form.removeControl('password');
-        this.form.addControl('password', new ExtendedFormControl('', [Validators.required, Validators.minLength(10), passwordValidator]));
+        this.form.addControl('password', new ExtendedFormControl('', [Validators.required, Validators.minLength(12)]));
         this.form.addControl('confirmPassword', new ExtendedFormControl(''));
         this.form.setValidators(samePasswordsValidator);
     }

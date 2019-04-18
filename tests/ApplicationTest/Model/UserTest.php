@@ -171,6 +171,11 @@ class UserTest extends TestCase
         self::assertSame(User::STATUS_NEW, $u3->getStatus());
         $u3->setOwner($u1);
         self::assertSame(User::STATUS_ACTIVE, $u3->getStatus());
+
+        // Status 'archived' sets resign date
+        Chronos::setTestNow((new Chronos()));
+        $u1->setStatus(User::STATUS_ARCHIVED);
+        self::assertTrue($u1->getResignDate() && $u1->getResignDate()->isToday());
     }
 
     public function testToken(): void

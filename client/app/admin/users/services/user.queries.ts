@@ -52,6 +52,7 @@ export const userFieldsFragment = gql`
         }
         sex
         welcomeSessionDate
+        resignDate
         country {
             id
             name
@@ -80,6 +81,7 @@ export const usersQuery = gql`
                 creationDate
                 age
                 welcomeSessionDate
+                resignDate
                 sex
                 account {
                     id

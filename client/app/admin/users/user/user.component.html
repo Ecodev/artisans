@@ -269,6 +269,11 @@
                         <span class="mat-body-2">Dernière connexion :</span>
                         {{ data.model.lastLogin  | date: 'mediumDate' }} - {{ data.model.lastLogin | date: 'shortTime' }}
                     </div>
+
+                    <div *ngIf="data.model.resignDate && data.model.status == 'archived'">
+                        <span class="mat-body-2">Démission le :</span>
+                        {{ data.model.resignDate  | date: 'mediumDate' }}
+                    </div>
                 </div>
 
             </div>

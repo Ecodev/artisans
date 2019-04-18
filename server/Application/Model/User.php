@@ -133,6 +133,12 @@ class User extends AbstractModel
     private $welcomeSessionDate;
 
     /**
+     * @var null|Chronos
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $resignDate;
+
+    /**
      * @var int sex
      * @ORM\Column(type="smallint", options={"default" = 0}))
      */
@@ -500,14 +506,20 @@ class User extends AbstractModel
      *
      * @param string $status
      */
-    public function setStatus(string $status): void
+    public function setStatus(string $newStatus): void
     {
-        $this->status = $status;
+        if ($newStatus === self::STATUS_ARCHIVED && $this->status !== self::STATUS_ARCHIVED) {
+            $this->setResignDate(Chronos::NOW());
+        } elseif ($this->status === self::STATUS_ARCHIVED && $newStatus !== self::STATUS_ARCHIVED) {
+            $this->setResignDate(null);
+        }
+
+        $this->status = $newStatus;
         $this->revokeToken();
 
         foreach ($this->users as $user) {
             if ($user !== $this) {
-                $user->setStatus($status);
+                $user->setStatus($newStatus);
             }
         }
     }
@@ -716,6 +728,22 @@ class User extends AbstractModel
     public function setWelcomeSessionDate(?Chronos $welcomeSessionDate): void
     {
         $this->welcomeSessionDate = $welcomeSessionDate;
+    }
+
+    /**
+     * @return null|Chronos
+     */
+    public function getResignDate(): ?Chronos
+    {
+        return $this->resignDate;
+    }
+
+    /**
+     * @param null|Chronos $resignDate
+     */
+    public function setResignDate(?Chronos $resignDate): void
+    {
+        $this->resignDate = $resignDate;
     }
 
     /**

@@ -62,6 +62,7 @@ export const pricedBookingsQuery = gql`
                 bookable {
                     id
                     name
+                    bookingType
                     sharedBookings {
                         id
                         owner {

@@ -49,7 +49,7 @@ export class AbstractEditableList<Tall extends { items: any[] }, Vall extends Qu
         const lines = this.form.get('lines') as FormArray;
         if (lines) {
             items.items.forEach(item => {
-                const data = merge(this.service.getEmptyObject(), this.service.getDefaultValues(), item);
+                const data = merge(this.service.getConsolidatedForClient(), item);
                 const lineFormGroup = AbstractDetail.getFormGroup(data, this.service);
                 lines.push(lineFormGroup);
             });

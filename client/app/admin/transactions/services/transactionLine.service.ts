@@ -54,7 +54,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
             null);
     }
 
-    public getEmptyObject(): TransactionLineInput {
+    protected getDefaultForServer(): TransactionLineInput {
         return {
             name: '',
             remarks: '',

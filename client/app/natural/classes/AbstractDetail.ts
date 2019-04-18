@@ -57,7 +57,7 @@ export class AbstractDetail<Tone,
 
     ngOnInit(): void {
         this.route.data.subscribe(data => {
-            this.data = merge({model: this.service.getEmptyObject()}, {model: this.service.getDefaultValues()}, data[this.key]);
+            this.data = merge({model: this.service.getConsolidatedForClient()}, data[this.key]);
             this.data = merge(this.data, omit(data, [this.key]));
             this.initForm();
         });

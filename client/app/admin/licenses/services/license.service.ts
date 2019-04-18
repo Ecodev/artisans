@@ -32,7 +32,7 @@ export class LicenseService extends AbstractModelService<License['license'],
         super(apollo, 'license', licenseQuery, licensesQuery, createLicense, updateLicense, deleteLicenses);
     }
 
-    public getEmptyObject(): LicenseInput {
+    protected getDefaultForServer(): LicenseInput {
         return {
             name: '',
         };

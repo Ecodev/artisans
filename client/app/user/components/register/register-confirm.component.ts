@@ -16,12 +16,12 @@ import { Utility } from '../../../natural/classes/Utility';
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
 
-    constructor(alertService: AlertService,
-                userService: NewUserService,
+    constructor(userService: NewUserService,
                 router: Router,
                 route: ActivatedRoute,
                 bookableService: BookableService,
                 apollo: Apollo,
+                alertService: AlertService,
     ) {
         super(userService, alertService, router, route, bookableService, apollo);
     }
@@ -56,7 +56,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'postcode',
             'locality',
             'country',
-            'birthday'
+            'birthday',
         ];
 
         const input = pick(Utility.relationsToIds(this.form.value), fieldWhitelist);

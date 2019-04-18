@@ -40,7 +40,7 @@ export class ImageService extends AbstractModelService<any,
             null);
     }
 
-    public getEmptyObject(): ImageInput {
+    protected getDefaultForServer(): ImageInput {
         return {
             file: '',
         };

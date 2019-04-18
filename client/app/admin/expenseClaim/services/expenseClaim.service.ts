@@ -49,7 +49,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expe
             deleteExpenseClaims);
     }
 
-    public getEmptyObject(): ExpenseClaimInput {
+    protected getDefaultForServer(): ExpenseClaimInput {
         return {
             name: '',
             owner: null,

@@ -46,7 +46,7 @@ export class AccountService extends AbstractModelService<Account['account'],
             deleteAccounts);
     }
 
-    public getEmptyObject(): AccountInput {
+    protected getDefaultForServer(): AccountInput {
         return {
             name: '',
             iban: '',

@@ -32,7 +32,7 @@ export class UserTagService extends AbstractModelService<UserTag['userTag'],
         super(apollo, 'userTag', userTagQuery, userTagsQuery, createUserTag, updateUserTag, deleteUserTags);
     }
 
-    public getEmptyObject(): UserTagInput {
+    protected getDefaultForServer(): UserTagInput {
         return {
             name: '',
             color: '',

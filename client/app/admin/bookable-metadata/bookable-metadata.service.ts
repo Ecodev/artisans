@@ -40,7 +40,7 @@ export class BookableMetadataService extends AbstractModelService<any,
             deleteBookableMetadatas);
     }
 
-    public getEmptyObject(): BookableMetadataInput {
+    protected getDefaultForServer(): BookableMetadataInput {
         return {
             name: '',
             value: '',

@@ -108,6 +108,8 @@ export class TransactionComponent
             this.data.model.transactionLines = null;
         }
 
+        console.log('this.data.model.transactionLines', this.data.model.transactionLines);
+
         if (this.data.model.id) {
             this.update(true);
         } else {

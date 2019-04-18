@@ -130,7 +130,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
         return matching.length === bookable.licenses.length;
     }
 
-    public getEmptyObject(): BookableInput {
+    protected getDefaultForServer(): BookableInput {
         return {
             name: '',
             code: '',

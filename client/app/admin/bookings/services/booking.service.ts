@@ -132,7 +132,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
             deleteBookings);
     }
 
-    public getEmptyObject(): BookingInput {
+    protected getDefaultForServer(): BookingInput {
         return {
             status: BookingStatus.booked,
             owner: null,

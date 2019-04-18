@@ -41,7 +41,7 @@ export class AccountingDocumentService extends AbstractModelService<any,
             null);
     }
 
-    public getEmptyObject(): AccountingDocumentInput {
+    protected getDefaultForServer(): AccountingDocumentInput {
         return {
             file: '',
             expenseClaim: null,

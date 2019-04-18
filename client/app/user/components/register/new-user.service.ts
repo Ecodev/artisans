@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { UserService } from '../../../admin/users/services/user.service';
 import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import { Literal } from '../../../natural/types/types';
 import { Validators } from '@angular/forms';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { FormValidators } from '../../../natural/services/abstract-model.service';
 import { PricedBookingService } from '../../../admin/bookings/services/PricedBooking.service';
+import { Literal } from '../../../natural/types/types';
+import { AnonymousUserService } from './anonymous-user.service';
+import { LoginValidatorFn } from '../../../admin/users/services/user.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class NewUserService extends UserService {
+export class NewUserService extends AnonymousUserService {
 
     constructor(apollo: Apollo,
                 router: Router,
@@ -23,25 +24,25 @@ export class NewUserService extends UserService {
         super(apollo, router, bookingService, permissionsService, pricedBookingService);
     }
 
-    public getDefaultValues(): Literal {
-        const values = {
+    protected getDefaultForClient(): Literal {
+        return {
+            country: {id: 1, name: 'Suisse'},
             password: '',
         };
-
-        return Object.assign(super.getDefaultValues(), values);
     }
 
     public getFormValidators(): FormValidators {
-
-        const validators = {
-            hasInsurance: [],
-            termsAgreement: [],
+        return {
+            login: [Validators.required, LoginValidatorFn],
+            firstName: [Validators.required, Validators.maxLength(100)],
+            lastName: [Validators.required, Validators.maxLength(100)],
+            email: [Validators.required, Validators.email],
+            familyRelationship: [Validators.required],
+            birthday: [Validators.required],
             locality: [Validators.required],
             street: [Validators.required],
             postcode: [Validators.required],
             country: [Validators.required],
         };
-
-        return Object.assign(super.getFormValidators(), validators);
     }
 }

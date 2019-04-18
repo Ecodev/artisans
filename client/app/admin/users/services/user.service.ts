@@ -32,7 +32,8 @@ import {
     LoginVariables,
     Logout,
     Relationship,
-    Sex, SortingOrder,
+    Sex,
+    SortingOrder,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -43,7 +44,8 @@ import {
     UserInput,
     UserPartialInput,
     UserRole,
-    Users, UserSortingField,
+    Users,
+    UserSortingField,
     UserStatus,
     UsersVariables,
     UserVariables,
@@ -57,6 +59,17 @@ import gql from 'graphql-tag';
 import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
 import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 import { PricedBookingService } from '../../bookings/services/PricedBooking.service';
+
+export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
+    const value = control.value || '';
+    if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
+        return {
+            invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
+        };
+    }
+
+    return null;
+}
 
 @Injectable({
     providedIn: 'root',
@@ -146,11 +159,11 @@ export class UserService extends AbstractModelService<User['user'],
                     },
                 ],
             },
-            sorting: [{field: UserSortingField.birthday, order: SortingOrder.ASC}]
+            sorting: [{field: UserSortingField.birthday, order: SortingOrder.ASC}],
         };
     }
 
-    public getEmptyObject(): UserInput {
+    protected getDefaultForServer(): UserInput {
         return {
             login: '',
             email: '',
@@ -185,7 +198,7 @@ export class UserService extends AbstractModelService<User['user'],
         };
     }
 
-    public getDefaultValues(): Literal {
+    protected getDefaultForClient(): Literal {
         return {
             country: {id: 1, name: 'Suisse'},
         };
@@ -193,23 +206,12 @@ export class UserService extends AbstractModelService<User['user'],
 
     public getFormValidators(): FormValidators {
         return {
-            login: [
-                Validators.required, (control: FormControl): ValidationErrors | null => {
-                    const value = control.value || '';
-                    if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
-                        return {
-                            invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
-                        };
-                    }
-
-                    return null;
-                },
-            ],
+            login: [Validators.required, LoginValidatorFn],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.required, Validators.email],
             familyRelationship: [Validators.required],
-            birthday: [Validators.required]
+            birthday: [Validators.required],
         };
     }
 

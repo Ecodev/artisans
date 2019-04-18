@@ -44,7 +44,7 @@ export class TransactionTagService extends AbstractModelService<TransactionTag['
             deleteTransactionTags);
     }
 
-    public getEmptyObject(): TransactionTagInput {
+    protected getDefaultForServer(): TransactionTagInput {
         return {
             name: '',
             color: '',

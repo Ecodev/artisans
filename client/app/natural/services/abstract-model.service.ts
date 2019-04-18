@@ -61,7 +61,7 @@ export abstract class AbstractModelService<Tone,
      *
      * This is typically useful when showing a form for creation
      */
-    public getEmptyObject(): Vcreate['input'] | Vupdate['input'] {
+    protected getDefaultForServer(): Vcreate['input'] | Vupdate['input'] {
         return {};
     }
 
@@ -70,8 +70,12 @@ export abstract class AbstractModelService<Tone,
      *
      * Where empty object must respect graphql XXXInput type, may need some default values for other fields
      */
-    public getDefaultValues(): Literal {
+    protected getDefaultForClient(): Literal {
         return {};
+    }
+
+    public getConsolidatedForClient(): Literal {
+        return Object.assign(this.getDefaultForServer(), this.getDefaultForClient());
     }
 
     /**
@@ -89,7 +93,7 @@ export abstract class AbstractModelService<Tone,
     }
 
     public getFormConfig(model: Literal): Literal {
-        const values = Object.assign(this.getEmptyObject(), this.getDefaultValues());
+        const values = this.getConsolidatedForClient();
         const validators = this.getFormValidators();
         const config = {};
         const disabled = model.permissions ? !model.permissions.update : false;
@@ -225,8 +229,8 @@ export abstract class AbstractModelService<Tone,
 
                 // Subscription cause query to be sent to server
                 lastSubscription = lastQueryRef.valueChanges
-                    .pipe(filter(r => !!r.data), this.mapAll())
-                    .subscribe(result => resultObservable.next(result));
+                                               .pipe(filter(r => !!r.data), this.mapAll())
+                                               .subscribe(result => resultObservable.next(result));
             }
         });
 
@@ -442,7 +446,7 @@ export abstract class AbstractModelService<Tone,
         if (id) {
             observable = this.getOne(id);
         } else {
-            observable = of(this.getEmptyObject() as Tone);
+            observable = of(this.getConsolidatedForClient() as Tone);
         }
 
         return observable.pipe(map(result => {
@@ -505,7 +509,7 @@ export abstract class AbstractModelService<Tone,
 
         // Pick only attributes that we can find in the empty object
         // In other words, prevent to select data that has unwanted attributes
-        const emptyObject = this.getEmptyObject();
+        const emptyObject = this.getDefaultForServer();
         let input = pick(object, Object.keys(emptyObject));
 
         // Complete a potentially uncompleted object with default values

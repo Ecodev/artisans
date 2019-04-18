@@ -41,7 +41,7 @@ export class BookableTagService extends AbstractModelService<BookableTag['bookab
     public static readonly SERVICE = '6007';
     public static readonly STORAGE = '6008';
 
-    public getEmptyObject(): BookableTagInput {
+    protected getDefaultForServer(): BookableTagInput {
         return {
             name: '',
             color: '',

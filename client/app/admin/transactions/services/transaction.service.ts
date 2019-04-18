@@ -48,7 +48,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
 
     public getRefundPreset(account: {id: string}, amount: string): TransactionLineInput[] {
 
-        const emptyLine = this.transactionLineService.getEmptyObject();
+        const emptyLine = this.transactionLineService.getConsolidatedForClient();
 
         const line: TransactionLineInput = {
             name: 'Remboursement du membre',
@@ -63,7 +63,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
 
     public getExpenseClaimPreset(account: {id: string}, amount: string): TransactionLineInput[] {
 
-        const emptyLine = this.transactionLineService.getEmptyObject();
+        const emptyLine = this.transactionLineService.getConsolidatedForClient();
 
         const line: TransactionLineInput = {
             name: 'Remboursement sur le solde',
@@ -76,7 +76,7 @@ export class TransactionService extends AbstractModelService<Transaction['transa
         return [Object.assign(emptyLine, line)];
     }
 
-    public getEmptyObject(): TransactionInput {
+    protected getDefaultForServer(): TransactionInput {
         return {
             name: '',
             remarks: '',

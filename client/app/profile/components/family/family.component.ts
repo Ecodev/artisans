@@ -38,7 +38,7 @@ export class FamilyComponent implements OnInit {
     }
 
     public add() {
-        const emptyUser = this.userService.getEmptyObject();
+        const emptyUser = this.userService.getConsolidatedForClient();
         this.familyMembers.push(emptyUser);
     }
 

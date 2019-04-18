@@ -39,12 +39,12 @@ export class FamilyMemberComponent
 
         if (this.user && this.user.id) {
             this.service.getOne(this.user.id).subscribe(user => {
-                this.data = merge({model: this.service.getEmptyObject()}, {model: user}, {owner: this.viewer});
+                this.data = merge({model: this.service.getConsolidatedForClient()}, {model: user}, {owner: this.viewer});
                 this.setForm();
             });
 
         } else {
-            this.data = {model: Object.assign(this.service.getEmptyObject(), this.service.getDefaultValues(), {owner: this.viewer})};
+            this.data = {model: Object.assign(this.service.getConsolidatedForClient(), {owner: this.viewer})};
             this.setForm();
         }
 

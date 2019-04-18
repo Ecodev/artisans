@@ -46,9 +46,9 @@ class TransactionRepository extends AbstractRepository implements LimitedAccessS
         }
 
         // Destroy all previously existing TransactionLine
-        $transaction->getTransactionLines()->forAll(function (int $index, TransactionLine $line): void {
+        foreach ($transaction->getTransactionLines() as $line) {
             $this->getEntityManager()->remove($line);
-        });
+        }
         $transaction->getTransactionLines()->clear();
 
         $accounts = [];

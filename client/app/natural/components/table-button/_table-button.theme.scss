@@ -4,7 +4,7 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    app-table-button {
+    natural-table-button {
         a.mat-button {
             &:hover .mat-button-focus-overlay {
                 background: mat-color($background, hover);

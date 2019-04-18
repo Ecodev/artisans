@@ -28,7 +28,7 @@ interface Mutation {
 @Injectable({
     providedIn: 'root',
 })
-export class LinkMutationService {
+export class NaturalLinkMutationService {
 
     /**
      * Query to get list of mutations

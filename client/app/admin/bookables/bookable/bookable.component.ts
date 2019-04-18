@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
     Bookable,
@@ -38,7 +38,7 @@ export class BookableComponent
     public accountHierarchicConfig = AccountHierarchicConfiguration;
     public bookingsVariables;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 bookableService: BookableService,
                 router: Router,
                 route: ActivatedRoute,

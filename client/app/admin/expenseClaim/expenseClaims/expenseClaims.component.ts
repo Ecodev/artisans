@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../../../natural/components/alert/alert.service';
-import { PersistenceService } from '../../../natural/services/persistence.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalPersistenceService } from '../../../natural/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { AbstractList } from '../../../natural/classes/AbstractList';
 import { ExpenseClaims, ExpenseClaimsVariables } from '../../../shared/generated-types';
@@ -19,8 +19,8 @@ export class ExpenseClaimsComponent extends AbstractList<ExpenseClaims['expenseC
     constructor(route: ActivatedRoute,
                 router: Router,
                 expenseClaimService: ExpenseClaimService,
-                alertService: AlertService,
-                persistenceService: PersistenceService,
+                alertService: NaturalAlertService,
+                persistenceService: NaturalPersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
                 public permissionsService: PermissionsService,
     ) {

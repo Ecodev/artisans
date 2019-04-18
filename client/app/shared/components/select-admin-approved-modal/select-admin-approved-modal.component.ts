@@ -7,7 +7,7 @@ import { NaturalDataSource } from '../../../natural/classes/DataSource';
 import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
 
 @Component({
-    selector: 'app-select-admin-approved-modal',
+    selector: 'natural-select-admin-approved-modal',
     templateUrl: './select-admin-approved-modal.component.html',
 })
 export class SelectAdminApprovedModalComponent implements OnInit {

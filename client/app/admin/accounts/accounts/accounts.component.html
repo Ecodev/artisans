@@ -8,7 +8,7 @@
                  fxLayoutGap="5px"
                  class="mat-headline no-margin-v margin-right"
             >
-                <app-icon name="taxonomy"></app-icon>
+                <natural-icon name="taxonomy"></natural-icon>
                 <span>{{ routeData.title }}</span>
             </div>
             <div *ngFor="let element of breadcrumbs;">
@@ -26,17 +26,17 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span appColumnsPickerColumn="navigation">Navigation</span>
-                    <span appColumnsPickerColumn="code">Code</span>
-                    <span appColumnsPickerColumn="name">Nom</span>
-                    <span appColumnsPickerColumn="type">Type</span>
-                    <span appColumnsPickerColumn="owner">Utilisateur</span>
-                    <span appColumnsPickerColumn="iban">IBAN</span>
-                    <span appColumnsPickerColumn="balance">Solde</span>
-                    <span appColumnsPickerColumn="creationDate">Créé le</span>
-                    <span appColumnsPickerColumn="updateDate">Modifié le</span>
-                </app-columns-picker>
+                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="navigation">Navigation</span>
+                    <span naturalColumnsPickerColumn="code">Code</span>
+                    <span naturalColumnsPickerColumn="name">Nom</span>
+                    <span naturalColumnsPickerColumn="type">Type</span>
+                    <span naturalColumnsPickerColumn="owner">Utilisateur</span>
+                    <span naturalColumnsPickerColumn="iban">IBAN</span>
+                    <span naturalColumnsPickerColumn="balance">Solde</span>
+                    <span naturalColumnsPickerColumn="creationDate">Créé le</span>
+                    <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
+                </natural-columns-picker>
             </natural-search>
         </div>
 
@@ -49,8 +49,8 @@
                 <ng-container matColumnDef="navigation">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let element" app-2em-column>
-                        <app-table-button icon="chevron_right" [navigate]="goToChildLink(element)" matTooltip="Afficher les sous-comptes"
-                        ></app-table-button>
+                        <natural-table-button icon="chevron_right" [navigate]="goToChildLink(element)" matTooltip="Afficher les sous-comptes"
+                        ></natural-table-button>
                     </td>
                 </ng-container>
 
@@ -62,7 +62,7 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <app-table-button [label]="element.name" [navigate]="[element.id]" matTooltip="Éditer"></app-table-button>
+                        <natural-table-button [label]="element.name" [navigate]="[element.id]" matTooltip="Éditer"></natural-table-button>
                     </td>
                 </ng-container>
 
@@ -77,10 +77,10 @@
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
                             <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
-                            <app-table-button [label]="element.owner?.name"
+                            <natural-table-button [label]="element.owner?.name"
                                               [navigate]="['/admin/user/', element.owner?.id]"
                                               matTooltip="Éditer"
-                            ></app-table-button>
+                            ></natural-table-button>
                         </div>
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.owner">
@@ -134,4 +134,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/account/new']" icon="add" *ngIf="permissionsService.crud?.account.create"></app-fixed-button>
+<natural-fixed-button [routerLink]="['/admin/account/new']" icon="add" *ngIf="permissionsService.crud?.account.create"></natural-fixed-button>

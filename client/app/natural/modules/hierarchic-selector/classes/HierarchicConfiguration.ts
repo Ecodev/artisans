@@ -4,7 +4,7 @@ import { QueryVariables } from '../../../classes/QueryVariablesManager';
 
 type GenericModelService = AbstractModelService<any, any, any, any, any, any, any, any, any>;
 
-export interface HierarchicConfiguration<T extends GenericModelService = GenericModelService> {
+export interface NaturalHierarchicConfiguration<T extends GenericModelService = GenericModelService> {
 
     /**
      * An AbstractModelService to be used to fetch items

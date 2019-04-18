@@ -4,7 +4,6 @@ import { MatButtonModule, MatIconModule, MatSidenavModule } from '@angular/mater
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SidenavContainerComponent } from './components/sidenav-container/sidenav-container.component';
 import { SidenavContentComponent } from './components/sidenav-content/sidenav-content.component';
-import { IconModule } from '../../components/icon/icon.module';
 
 @NgModule({
     declarations: [
@@ -15,7 +14,6 @@ import { IconModule } from '../../components/icon/icon.module';
     imports: [
         CommonModule,
         MatSidenavModule,
-        IconModule,
         MatIconModule,
         MatButtonModule,
     ],

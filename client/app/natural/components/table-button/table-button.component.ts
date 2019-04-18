@@ -2,12 +2,12 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-table-button',
+    selector: 'natural-table-button',
     templateUrl: './table-button.component.html',
     styleUrls: ['./table-button.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class TableButtonComponent {
+export class NaturalTableButtonComponent {
 
     @Input() queryParams: any;
     @Input() queryParamsHandling: any;

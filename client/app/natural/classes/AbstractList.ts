@@ -4,13 +4,13 @@ import { Observable, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, Sort } from '@angular/material';
 import { fromUrl, NaturalSearchConfiguration, NaturalSearchSelections, toGraphQLDoctrineFilter, toUrl } from '@ecodev/natural-search';
-import { PersistenceService } from '../services/persistence.service';
+import { NaturalPersistenceService } from '../services/persistence.service';
 import { PaginationInput, QueryVariables, QueryVariablesManager } from './QueryVariablesManager';
 import { AbstractController } from '../../shared/components/AbstractController';
 import { NaturalDataSource } from './DataSource';
 import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
 import { AbstractModelService } from '../services/abstract-model.service';
-import { AlertService } from '../components/alert/alert.service';
+import { NaturalAlertService } from '../components/alert/alert.service';
 
 /**
  * This class helps managing a list of paginated items that can be filtered,
@@ -19,7 +19,7 @@ import { AlertService } from '../components/alert/alert.service';
  * Components inheriting from this class can be used as standalone with input attributes.
  *
  * Usage :
- * <app-my-listing [contextVariables]="{filter:...}" [contextColumns]="['col1']" [persistSearch]="false">
+ * <natural-my-listing [contextVariables]="{filter:...}" [contextColumns]="['col1']" [persistSearch]="false">
  */
 export class AbstractList<Tall, Vall extends QueryVariables>
     extends AbstractController
@@ -46,7 +46,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     @Input() persistSearch = true;
 
     /**
-     * Columns list after interaction with <app-columns-picker>
+     * Columns list after interaction with <natural-columns-picker>
      */
     public selectedColumns: string[] = [];
 
@@ -91,8 +91,8 @@ export class AbstractList<Tall, Vall extends QueryVariables>
                 protected service: AbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
                 protected router: Router,
                 protected route: ActivatedRoute,
-                protected alertService: AlertService,
-                protected persistenceService: PersistenceService,
+                protected alertService: NaturalAlertService,
+                protected persistenceService: NaturalPersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
                 private injector?: Injector) {
         super();
@@ -117,7 +117,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     /**
      * Initialize from routing or input context.
      * Uses data provided by router as route.data.contextXYZ
-     * Uses data provided by inputs in usage <app-xxx [contextXXX]...>
+     * Uses data provided by inputs in usage <natural-xxx [contextXXX]...>
      */
     protected initFromContext() {
 

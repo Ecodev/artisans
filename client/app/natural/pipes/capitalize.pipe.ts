@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 import { Utility } from '../classes/Utility';
 
 @Pipe({name: 'capitalize'})
-export class CapitalizePipe implements PipeTransform {
+export class NaturalCapitalizePipe implements PipeTransform {
 
     public transform(value: string | null | Observable<string | null>): string | null | Observable<string | null> {
 

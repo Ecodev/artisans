@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
     CreateUser,
@@ -39,7 +39,7 @@ export class UserComponent
     public transactionLinesVariables;
     public familyVariables;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 private userService: UserService,
                 router: Router,
                 route: ActivatedRoute,

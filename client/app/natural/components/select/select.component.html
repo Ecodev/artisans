@@ -39,7 +39,7 @@
         >
 
         <!-- Meta data -->
-        <app-icon matPrefix *ngIf="!loading && showIcon" [name]="icon"></app-icon>
+        <natural-icon matPrefix *ngIf="!loading && showIcon" [name]="icon"></natural-icon>
         <mat-progress-spinner matPrefix *ngIf="loading" [diameter]="21" [strokeWidth]="5" mode="indeterminate"></mat-progress-spinner>
 
         <!-- Clear button -->
@@ -50,10 +50,10 @@
                     i18n-matTooltip
                     matTooltip="Désélectionner"
             >
-                <app-icon name="close"></app-icon>
+                <natural-icon name="close"></natural-icon>
             </button>
             <button *ngIf="navigateTo" [routerLink]="navigateTo" mat-button mat-icon-button i18n-matTooltip matTooltip="Naviguer vers">
-                <app-icon name="open_in_browser"></app-icon>
+                <natural-icon name="open_in_browser"></natural-icon>
             </button>
         </div>
 

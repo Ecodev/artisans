@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { AccountService } from '../services/account.service';
 import {
     Account,
@@ -27,7 +27,7 @@ export class AccountComponent
         UpdateAccountVariables,
         any> {
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 accountService: AccountService,
                 router: Router,
                 route: ActivatedRoute,

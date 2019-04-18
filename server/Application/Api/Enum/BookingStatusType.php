@@ -11,7 +11,7 @@ class BookingStatusType extends AbstractEnumType
         $config = [
             \Application\DBAL\Types\BookingStatusType::APPLICATION => 'Demande en attente',
             \Application\DBAL\Types\BookingStatusType::PROCESSED => 'Demande traitée',
-            \Application\DBAL\Types\BookingStatusType::BOOKED => 'Réservé',
+            \Application\DBAL\Types\BookingStatusType::BOOKED => 'Réservation',
         ];
 
         parent::__construct($config);

@@ -2,12 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Literal } from '../../types/types';
 
 @Component({
-    selector: 'app-detail-header',
+    selector: 'natural-detail-header',
     templateUrl: './detail-header.component.html',
 })
-export class DetailHeaderComponent implements OnInit {
+export class NaturalDetailHeaderComponent implements OnInit {
 
-    @Input() showAvatar = false;
     @Input() type = '';
     @Input() label = '';
     @Input() rootLabel = '';

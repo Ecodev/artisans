@@ -9,14 +9,14 @@ import {
     Output,
     QueryList,
 } from '@angular/core';
-import { ColumnsPickerColumnDirective } from './columns-picker-column.directive';
+import { NaturalColumnsPickerColumnDirective } from './columns-picker-column.directive';
 
 @Component({
-    selector: 'app-columns-picker',
+    selector: 'natural-columns-picker',
     templateUrl: './columns-picker.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ColumnsPickerComponent implements AfterViewInit {
+export class NaturalColumnsPickerComponent implements AfterViewInit {
 
     /**
      * Emit a list of column keys whenever the selection changes
@@ -28,10 +28,10 @@ export class ColumnsPickerComponent implements AfterViewInit {
      */
     @Input() initialSelection: string[];
 
-    @ContentChildren(ColumnsPickerColumnDirective)
-    public availableColumns: QueryList<ColumnsPickerColumnDirective>;
+    @ContentChildren(NaturalColumnsPickerColumnDirective)
+    public availableColumns: QueryList<NaturalColumnsPickerColumnDirective>;
 
-    public displayedColumns: ColumnsPickerColumnDirective[];
+    public displayedColumns: NaturalColumnsPickerColumnDirective[];
 
 
     constructor(private changeDetectorRef: ChangeDetectorRef) {

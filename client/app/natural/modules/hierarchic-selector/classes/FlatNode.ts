@@ -1,10 +1,10 @@
-import { ModelNode } from './ModelNode';
+import { HierarchicModelNode } from './ModelNode';
 
-export class FlatNode {
+export class HierarchicFlatNode {
 
     public loading = false;
 
-    constructor(public node: ModelNode,
+    constructor(public node: HierarchicModelNode,
                 public name: string,
                 public level: number = 0,
                 public expandable: boolean = false,

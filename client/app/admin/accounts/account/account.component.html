@@ -1,8 +1,8 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'account']">
+    <natural-detail-header newLabel="Nouveau compte" label="Compte" [model]="data.model" [listRoute]="['admin', 'account']">
         <app-money [amount]="data.model.balance" sizeClass="mat-display-1"></app-money>
-    </app-detail-header>
+    </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -33,14 +33,14 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <app-select formControlName="owner"
+                        <natural-select formControlName="owner"
                                     placeholder="Membre"
                                     [service]="userService"
                                     [filter]="{groups: [{conditions: [{accounts: {empty: {not: false}}}]}]}"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
                                     [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"
-                        ></app-select>
+                        ></natural-select>
 
                         <div *ngIf="form.get('owner')?.value">IBAN de l'utilisateur : {{ form.get('owner')?.value?.iban }}</div>
                     </div>
@@ -49,13 +49,13 @@
 
                 <mat-divider></mat-divider>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

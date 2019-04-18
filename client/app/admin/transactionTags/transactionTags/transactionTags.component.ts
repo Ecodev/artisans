@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../../../natural/components/alert/alert.service';
-import { PersistenceService } from '../../../natural/services/persistence.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalPersistenceService } from '../../../natural/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { TransactionTags, TransactionTagsVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../services/transactionTag.service';
@@ -20,8 +20,8 @@ export class TransactionTagsComponent
     constructor(route: ActivatedRoute,
                 router: Router,
                 transactionTagService: TransactionTagService,
-                alertService: AlertService,
-                persistenceService: PersistenceService,
+                alertService: NaturalAlertService,
+                persistenceService: NaturalPersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
                 public permissionsService: PermissionsService,
     ) {

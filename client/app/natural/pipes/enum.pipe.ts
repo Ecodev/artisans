@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { EnumService } from '../services/enum.service';
+import { NaturalEnumService } from '../services/enum.service';
 import { map } from 'rxjs/operators';
 
 /**
@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 @Pipe({
     name: 'enum',
 })
-export class EnumPipe implements PipeTransform {
+export class NaturalEnumPipe implements PipeTransform {
 
-    constructor(private  enumService: EnumService) {
+    constructor(private  enumService: NaturalEnumService) {
     }
 
     transform(value: any, enumName: string): any {

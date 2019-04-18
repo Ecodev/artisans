@@ -1,31 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FixedButtonComponent } from './fixed-button.component';
-import { MatButtonModule, MatIconModule } from '@angular/material';
+import { NaturalFixedButtonComponent } from './fixed-button.component';
+import { MatButtonModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
-import { IconComponent } from '../icon/icon.component';
+import { NaturalModule } from '../../natural.module';
 
 describe('FixedButtonComponent', () => {
-    let component: FixedButtonComponent;
-    let fixture: ComponentFixture<FixedButtonComponent>;
+    let component: NaturalFixedButtonComponent;
+    let fixture: ComponentFixture<NaturalFixedButtonComponent>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                FixedButtonComponent,
-                IconComponent,
-            ],
+            declarations: [],
             imports: [
                 RouterTestingModule,
                 MatButtonModule,
-                MatIconModule,
                 HttpClientModule,
+                NaturalModule.forRoot({}),
             ],
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(FixedButtonComponent);
+        fixture = TestBed.createComponent(NaturalFixedButtonComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

@@ -10,7 +10,7 @@ import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { UserService } from '../app/admin/users/services/user.service';
 import { BookingService } from '../app/admin/bookings/services/booking.service';
-import { LinkMutationService } from '../app/natural/services/link-mutation.service';
+import { NaturalLinkMutationService } from '../app/natural/services/link-mutation.service';
 import { QueryVariablesManager } from '../app/natural/classes/QueryVariablesManager';
 
 @NgModule({
@@ -48,7 +48,7 @@ export class VanillaModule implements DoBootstrap {
                 userService: UserService,
                 bookableService: BookableService,
                 bookingService: BookingService,
-                linkMutation: LinkMutationService,
+                linkMutation: NaturalLinkMutationService,
     ) {
 
         const api = {

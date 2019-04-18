@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
     CreateTransaction,
@@ -43,7 +43,7 @@ export class TransactionComponent
     public ExpenseClaimType = ExpenseClaimType;
     public ExpenseClaimStatus = ExpenseClaimStatus;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 private transactionService: TransactionService,
                 router: Router,
                 route: ActivatedRoute,

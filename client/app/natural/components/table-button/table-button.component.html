@@ -2,22 +2,22 @@
 
 <!-- App routed link with label... -->
 <a *ngIf="!href && label" mat-button [routerLink]="navigate" [queryParams]="queryParams">
-    <app-icon *ngIf="icon" [name]="icon"></app-icon>
+    <natural-icon *ngIf="icon" [name]="icon"></natural-icon>
     <span>{{ label }}</span>
 </a>
 
 <!-- ... and without label -->
 <a *ngIf="!href && !label" mat-icon-button [routerLink]="navigate" [queryParams]="queryParams" [queryParamsHandling]="queryParamsHandling">
-    <app-icon *ngIf="icon" [name]="icon"></app-icon>
+    <natural-icon *ngIf="icon" [name]="icon"></natural-icon>
 </a>
 
 <!-- External link with label... -->
 <a *ngIf="href && label" mat-button [attr.href]="href">
-    <app-icon *ngIf="icon" [name]="icon"></app-icon>
+    <natural-icon *ngIf="icon" [name]="icon"></natural-icon>
     <span>{{ label }}</span>
 </a>
 
 <!-- ... and without label -->
 <a *ngIf="href && !label" mat-icon-button [attr.href]="href">
-    <app-icon *ngIf="icon" [name]="icon"></app-icon>
+    <natural-icon *ngIf="icon" [name]="icon"></natural-icon>
 </a>

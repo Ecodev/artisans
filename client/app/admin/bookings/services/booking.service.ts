@@ -24,7 +24,7 @@ import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookingResolve } from '../booking';
 import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
-import { EnumService } from '../../../natural/services/enum.service';
+import { NaturalEnumService } from '../../../natural/services/enum.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({
@@ -122,7 +122,7 @@ export class BookingService extends AbstractModelService<Booking['booking'],
         },
     };
 
-    constructor(apollo: Apollo, private enumService: EnumService) {
+    constructor(apollo: Apollo, private enumService: NaturalEnumService) {
         super(apollo,
             'booking',
             bookingQuery,

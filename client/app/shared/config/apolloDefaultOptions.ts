@@ -6,7 +6,7 @@ import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
 import { isObject } from 'lodash';
 import { Literal } from '../../natural/types/types';
-import { AlertService } from '../../natural/components/../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../natural/components/../../natural/components/alert/alert.service';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
@@ -39,7 +39,7 @@ function hasFiles(node: Literal): boolean {
  * Create an Apollo link to show alert in case of error, and message if network is down
  */
 function createErrorLink(networkActivityService: NetworkActivityService,
-                         alertService: AlertService): ApolloLink {
+                         alertService: NaturalAlertService): ApolloLink {
     return onError(({graphQLErrors, networkError}) => {
 
         // Network errors seems not to be caught by above middleware, and we need to be informed to decrease pending queries
@@ -63,7 +63,7 @@ function createErrorLink(networkActivityService: NetworkActivityService,
  * Create an Apollo link that support batch, file upload, and network activity
  */
 export function createApolloLink(networkActivityService: NetworkActivityService,
-                                 alertService: AlertService,
+                                 alertService: NaturalAlertService,
                                  httpBatchLink: HttpBatchLink): ApolloLink {
     const options = {
         uri: '/graphql',

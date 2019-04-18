@@ -11,7 +11,7 @@
                 <mat-form-field fxFlex>
                     <mat-label>email</mat-label>
                     <input matInput formControlName="email">
-                    <app-icon matPrefix name="alternate_email"></app-icon>
+                    <natural-icon matPrefix name="alternate_email"></natural-icon>
                     <mat-error *ngIf="form.get('email').hasError('required')">Requis</mat-error>
                     <mat-error *ngIf="form.get('email').hasError('email')">Adresse email invalide</mat-error>
                 </mat-form-field>
@@ -29,7 +29,7 @@
                 <mat-form-field fxFlex>
                     <mat-label>Nom d'utilisateur</mat-label>
                     <input matInput formControlName="login">
-                    <app-icon matPrefix name="person"></app-icon>
+                    <natural-icon matPrefix name="person"></natural-icon>
                     <mat-error *ngIf="form.get('login').hasError('maxlength')">
                         Maximum {{form.get('login').errors.maxlength.requiredLength}} caractères
                     </mat-error>
@@ -159,7 +159,7 @@
 
         <div fxLayout="row" fxLayoutAlign="center">
             <button mat-raised-button [color]="form.invalid ? 'warn' : 'primary'" (click)="submit()" [disabled]="sending">
-                <app-icon name="send"></app-icon>
+                <natural-icon name="send"></natural-icon>
                 Envoyer
             </button>
         </div>

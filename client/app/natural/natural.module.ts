@@ -1,45 +1,48 @@
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmComponent } from './components/alert/confirm.component';
-import { IconModule } from './components/icon/icon.module';
-import { HierarchicSelectorModule } from './modules/hierarchic-selector/hierarchic-selector.module';
-import { TableButtonComponent } from './components/table-button/table-button.component';
-import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { EnumPipe } from './pipes/enum.pipe';
-import { EllipsisPipe } from './pipes/ellipsis.pipe';
-import { DetailFixedButtonComponent } from './components/detail-fixed-button/detail-fixed-button.component';
-import { ColumnsPickerColumnDirective } from './components/columns-picker/columns-picker-column.directive';
-import { ColumnsPickerComponent } from './components/columns-picker/columns-picker.component';
-import { SelectEnumComponent } from './components/select-enum/select-enum.component';
-import { SelectComponent } from './components/select/select.component';
-import { RelationsComponent } from './components/relations/relations.component';
-import { StampComponent } from './components/stamp/stamp.component';
+import { NaturalHierarchicSelectorModule } from './modules/hierarchic-selector/hierarchic-selector.module';
 import { SidenavModule } from './modules/sidenav/sidenav.module';
 import { MaterialModule } from './material.module';
-import { FixedButtonComponent } from './components/fixed-button/fixed-button.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NaturalConfirmComponent } from './components/alert/confirm.component';
+import { NaturalRelationsComponent } from './components/relations/relations.component';
+import { NaturalDetailFixedButtonComponent } from './components/detail-fixed-button/detail-fixed-button.component';
+import { NaturalFixedButtonComponent } from './components/fixed-button/fixed-button.component';
+import { NaturalStampComponent } from './components/stamp/stamp.component';
+import { NaturalTableButtonComponent } from './components/table-button/table-button.component';
+import { NaturalCapitalizePipe } from './pipes/capitalize.pipe';
+import { NaturalEnumPipe } from './pipes/enum.pipe';
+import { NaturalEllipsisPipe } from './pipes/ellipsis.pipe';
+import { NaturalColumnsPickerColumnDirective } from './components/columns-picker/columns-picker-column.directive';
+import { NaturalColumnsPickerComponent } from './components/columns-picker/columns-picker.component';
+import { NaturalSelectEnumComponent } from './components/select-enum/select-enum.component';
+import { NaturalSelectComponent } from './components/select/select.component';
+import { NaturalDetailHeaderComponent } from './components/detail-header/detail-header.component';
+import { NaturalIconModule } from './modules/icon/icon.module';
+import { IconsConfigService, NaturalIconsConfig } from './modules/icon/icon.component';
 
 const declarationsToExport = [
-    ConfirmComponent,
-    RelationsComponent,
-    SelectComponent,
-    SelectEnumComponent,
-    ColumnsPickerComponent,
-    ColumnsPickerColumnDirective,
-    EllipsisPipe,
-    EnumPipe,
-    CapitalizePipe,
-    TableButtonComponent,
-    StampComponent,
-    FixedButtonComponent,
-    DetailFixedButtonComponent,
+    NaturalConfirmComponent,
+    NaturalRelationsComponent,
+    NaturalSelectComponent,
+    NaturalSelectEnumComponent,
+    NaturalColumnsPickerComponent,
+    NaturalColumnsPickerColumnDirective,
+    NaturalEllipsisPipe,
+    NaturalEnumPipe,
+    NaturalCapitalizePipe,
+    NaturalTableButtonComponent,
+    NaturalStampComponent,
+    NaturalFixedButtonComponent,
+    NaturalDetailFixedButtonComponent,
+    NaturalDetailHeaderComponent,
 ];
 
 const importsToExport = [
-    HierarchicSelectorModule,
+    NaturalHierarchicSelectorModule,
     SidenavModule,
-    IconModule,
+    NaturalIconModule,
 ];
 
 @NgModule({
@@ -47,7 +50,7 @@ const importsToExport = [
         ...declarationsToExport,
     ],
     entryComponents: [
-        ConfirmComponent,
+        NaturalConfirmComponent,
     ],
     imports: [
         CommonModule,
@@ -59,8 +62,20 @@ const importsToExport = [
     ],
     exports: [
         ...declarationsToExport,
-        ...importsToExport
+        ...importsToExport,
     ],
 })
 export class NaturalModule {
+
+    static forRoot(config: NaturalIconsConfig): ModuleWithProviders {
+        return {
+            ngModule: NaturalModule,
+            providers: [
+                {
+                    provide: IconsConfigService,
+                    useValue: config,
+                },
+            ],
+        };
+    }
 }

@@ -17,7 +17,7 @@ import { UserService } from '../../users/services/user.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { UsageBookableService } from '../../bookables/services/usage-bookable.service';
 
 @Component({
@@ -43,7 +43,7 @@ export class BookingComponent
      */
     public newBooking;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 public bookingService: BookingService,
                 router: Router,
                 route: ActivatedRoute,

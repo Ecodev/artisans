@@ -1,13 +1,13 @@
 <h2 mat-dialog-title>Sélection</h2>
 
 <mat-dialog-content>
-    <app-hierarchic-selector [multiple]="multiple"
+    <natural-hierarchic-selector [multiple]="multiple"
                              [config]="config"
                              [selected]="selected"
                              [filters]="filters"
                              (selectionChange)="selected = $event"
                              [allowUnselect]="allowUnselect"
-    ></app-hierarchic-selector>
+    ></natural-hierarchic-selector>
 </mat-dialog-content>
 
 <mat-dialog-actions style="display:flex;flex-direction:row;justify-content: flex-end;">

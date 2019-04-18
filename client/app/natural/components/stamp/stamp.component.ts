@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-stamp',
+    selector: 'natural-stamp',
     templateUrl: './stamp.component.html',
 })
-export class StampComponent {
+export class NaturalStampComponent {
     @Input() item;
 }

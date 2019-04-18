@@ -11,7 +11,7 @@ import {
 } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { AccountingDocumentsComponent } from '../../../admin/accounting-documents/accounting-documents.component';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
 
@@ -31,7 +31,7 @@ export class CreateExpenseClaimComponent
 
     @ViewChild(AccountingDocumentsComponent) accountingDocuments: AccountingDocumentsComponent;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 expenseClaimService: ExpenseClaimService,
                 router: Router,
                 route: ActivatedRoute,

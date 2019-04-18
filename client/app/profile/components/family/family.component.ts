@@ -3,7 +3,7 @@ import { UsersVariables } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { ActivatedRoute } from '@angular/router';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { mergeWith } from 'lodash';
 import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
 import { AbstractModelService } from '../../../natural/services/abstract-model.service';
@@ -20,7 +20,7 @@ export class FamilyComponent implements OnInit {
 
     constructor(public userService: UserService,
                 private route: ActivatedRoute,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 public permissionsService: PermissionsService) {
 
     }

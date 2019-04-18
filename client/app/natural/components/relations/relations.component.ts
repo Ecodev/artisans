@@ -13,35 +13,35 @@ import {
     TemplateRef,
     ViewChild,
 } from '@angular/core';
-import { LinkMutationService } from '../../services/link-mutation.service';
+import { NaturalLinkMutationService } from '../../services/link-mutation.service';
 import { forkJoin, Observable } from 'rxjs';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FetchResult } from 'apollo-link';
-import { SelectComponent } from '../select/select.component';
+import { NaturalSelectComponent } from '../select/select.component';
 import { PageEvent } from '@angular/material';
 import { AbstractController } from '../../../shared/components/AbstractController';
-import { HierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
 import { NaturalDataSource } from '../../classes/DataSource';
-import { HierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
+import { NaturalHierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { PaginationInput, QueryVariables, QueryVariablesManager } from '../../classes/QueryVariablesManager';
+import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
  * Custom template usage :
- * <app-relations [main]="owner" [service]="svc" [filter]="{}" placeholder="Select an item">
+ * <natural-relations [main]="owner" [service]="svc" [filter]="{}" placeholder="Select an item">
  *     <ng-template let-item="item">
  *         <span>{{ item.xxx }}</span>
  *     </ng-template>
- * </app-relations>
+ * </natural-relations>
  */
 
 @Component({
-    selector: 'app-relations',
+    selector: 'natural-relations',
     templateUrl: './relations.component.html',
     styleUrls: ['./relations.component.scss'],
 })
-export class RelationsComponent extends AbstractController implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
+export class NaturalRelationsComponent extends AbstractController implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
 
-    @ViewChild(SelectComponent) select: SelectComponent;
+    @ViewChild(NaturalSelectComponent) select: NaturalSelectComponent;
     @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
 
     @Input() service;
@@ -88,7 +88,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     /**
      * Configuration in case we prefer hierarchic selection over autocomplete search
      */
-    @Input() hierarchicSelectorConfig: HierarchicConfiguration[];
+    @Input() hierarchicSelectorConfig: NaturalHierarchicConfiguration[];
 
     /**
      * Provide service for autocomplete search
@@ -101,7 +101,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
     @Input() hideSearch = false;
 
     /**
-     * LinkMutationService usually find the right mutation, by matching type names. But it's
+     * NaturalLinkMutationService usually find the right mutation, by matching type names. But it's
      * not enough when we have the same types on both side of the relation (eg: linkEquipmentEquipment)
      * and reversing the relation is required.
      */
@@ -135,8 +135,8 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         pageSize: 25,
     };
 
-    constructor(private linkMutationService: LinkMutationService,
-                private hierarchicSelectorDialog: HierarchicSelectorDialogService,
+    constructor(private linkMutationService: NaturalLinkMutationService,
+                private hierarchicSelectorDialog: NaturalHierarchicSelectorDialogService,
                 @Optional() @Self() public ngControl: NgControl) {
         super();
 
@@ -282,7 +282,7 @@ export class RelationsComponent extends AbstractController implements OnInit, On
         return (item) => item ? item.fullName || item.name : '';
     }
 
-    public openHierarchicSelector() {
+    public openNaturalHierarchicSelector() {
         const selectAtKey = this.getSelectKey();
 
         if (!selectAtKey) {

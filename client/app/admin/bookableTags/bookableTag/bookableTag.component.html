@@ -1,11 +1,10 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouveau tag de réservable"
+    <natural-detail-header newLabel="Nouveau tag de réservable"
                        label="Tag de réservable"
                        [model]="data.model"
                        [listRoute]="['admin', 'bookable']"
-                       [showAvatar]="true"
-    ></app-detail-header>
+    ></natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -29,14 +28,14 @@
                     </div>
                 </div>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
 
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

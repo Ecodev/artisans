@@ -3,30 +3,30 @@ import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 
 import { map } from 'rxjs/operators';
 import { intersection } from 'lodash';
-import { FlatNode } from '../classes/FlatNode';
-import { ModelNode } from '../classes/ModelNode';
-import { HierarchicConfiguration } from '../classes/HierarchicConfiguration';
+import { HierarchicFlatNode } from '../classes/FlatNode';
+import { HierarchicModelNode } from '../classes/ModelNode';
 import { HierarchicFilterConfiguration, HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
 import { QueryVariables, QueryVariablesManager } from '../../../classes/QueryVariablesManager';
+import { NaturalHierarchicConfiguration } from '../classes/HierarchicConfiguration';
 
 export interface OrganizedModelSelection {
     [key: string]: any[];
 }
 
 @Injectable()
-export class HierarchicSelectorService {
+export class NaturalHierarchicSelectorService {
 
     /**
      * Stores the global result of the tree
      * This observable contains Node.
      * When it's updated, the TreeController and TreeFlattener process the new array to generate the flat tree.
      */
-    dataChange: BehaviorSubject<ModelNode[]> = new BehaviorSubject<ModelNode[]>([]);
+    dataChange: BehaviorSubject<HierarchicModelNode[]> = new BehaviorSubject<HierarchicModelNode[]>([]);
 
     /**
      * Configuration for relations and selection constraints
      */
-    private configuration: HierarchicConfiguration[];
+    private configuration: NaturalHierarchicConfiguration[];
 
     constructor(private injector: Injector) {
     }
@@ -35,7 +35,7 @@ export class HierarchicSelectorService {
      * Init component by saving the complete configuration, and then retrieving root elements.
      * Updates **another** observable (this.dataChange) when data is retrieved.
      */
-    public init(config: HierarchicConfiguration[], contextFilter: HierarchicFiltersConfiguration | null = null): Observable<any> {
+    public init(config: NaturalHierarchicConfiguration[], contextFilter: HierarchicFiltersConfiguration | null = null): Observable<any> {
 
         this.validateConfiguration(config);
         this.configuration = this.injectServicesInConfiguration(config);
@@ -50,7 +50,7 @@ export class HierarchicSelectorService {
      * Get list of children, considering given FlatNode id as a parent.
      * Mark loading status individually on nodes.
      */
-    public loadChildren(flatNode: FlatNode, contextFilter: HierarchicFiltersConfiguration | null = null) {
+    public loadChildren(flatNode: HierarchicFlatNode, contextFilter: HierarchicFiltersConfiguration | null = null) {
         flatNode.loading = true;
         this.getList(flatNode, contextFilter).subscribe(items => {
             flatNode.node.childrenChange.next(items);
@@ -69,11 +69,11 @@ export class HierarchicSelectorService {
      * Retrieve elements from the server
      * Get root elements if node is null, or child elements if node is given
      */
-    public getList(node: FlatNode | null = null,
+    public getList(node: HierarchicFlatNode | null = null,
                    contextFilters: HierarchicFiltersConfiguration | null = null,
                    searchVariables: QueryVariables | null = null): Observable<any> {
 
-        const configurations: HierarchicConfiguration[] = [];
+        const configurations: NaturalHierarchicConfiguration[] = [];
         const observables: Observable<any>[] = [];
 
         // Considering the whole configuration may cause queries with no/wrong results we have imperatively to avoid !
@@ -115,7 +115,7 @@ export class HierarchicSelectorService {
 
         // Fire queries, and merge results, transforming apollo items into Node Object.
         return forkJoin(observables).pipe(map((results: any) => {
-            const listing: ModelNode[] = [];
+            const listing: HierarchicModelNode[] = [];
 
             const totalItems = results.reduce((stack, val) => stack + val.items.length, 0);
             if (totalItems === 0 && node) {
@@ -127,7 +127,7 @@ export class HierarchicSelectorService {
 
                 // For each item of the result, convert into Node object
                 for (let j = 0; j < results[i].items.length; j++) {
-                    listing.push(new ModelNode(results[i].items[j], configurations[i]));
+                    listing.push(new HierarchicModelNode(results[i].items[j], configurations[i]));
                 }
             }
 
@@ -138,7 +138,7 @@ export class HierarchicSelectorService {
     /**
      * Check configuration to return a boolean that allows or denies the selection for the given element
      */
-    public isSelectable(node: FlatNode): boolean {
+    public isSelectable(node: HierarchicFlatNode): boolean {
         return !!node.node.config.selectableAtKey;
     }
 
@@ -146,7 +146,7 @@ export class HierarchicSelectorService {
      * Return models matching given FlatNodes
      * Returns a Literal of models grouped by their configuration attribute "selectableAtKey"
      */
-    public toOrganizedSelection(nodes: ModelNode[]): OrganizedModelSelection {
+    public toOrganizedSelection(nodes: HierarchicModelNode[]): OrganizedModelSelection {
 
         const selection = this.configuration.reduce((group, config) => {
             if (config.selectableAtKey) {
@@ -167,25 +167,25 @@ export class HierarchicSelectorService {
     /**
      * Transforms an OrganizedModelSelection into a list of ModelNodes
      */
-    public fromOrganizedSelection(organizedModelSelection: OrganizedModelSelection): ModelNode[] {
+    public fromOrganizedSelection(organizedModelSelection: OrganizedModelSelection): HierarchicModelNode[] {
 
         if (!organizedModelSelection) {
             return [];
         }
 
-        const result: ModelNode[] = [];
+        const result: HierarchicModelNode[] = [];
         for (const selectableAtKey of Object.keys(organizedModelSelection)) {
             const config = this.getConfigurationBySelectableKey(selectableAtKey);
             if (config) {
                 for (const model of organizedModelSelection[selectableAtKey]) {
-                    result.push(new ModelNode(model, config));
+                    result.push(new HierarchicModelNode(model, config));
                 }
             }
         }
         return result;
     }
 
-    private injectServicesInConfiguration(configurations: HierarchicConfiguration[]): HierarchicConfiguration[] {
+    private injectServicesInConfiguration(configurations: NaturalHierarchicConfiguration[]): NaturalHierarchicConfiguration[] {
 
         for (const config of configurations) {
             if (!config.injectedService) {
@@ -199,7 +199,7 @@ export class HierarchicSelectorService {
     /**
      * Checks that each configuration.selectableAtKey attribute is unique
      */
-    private validateConfiguration(configurations: HierarchicConfiguration[]) {
+    private validateConfiguration(configurations: NaturalHierarchicConfiguration[]) {
         const selectableAtKeyAttributes: string[] = [];
         for (const config of configurations) {
 
@@ -232,8 +232,8 @@ export class HierarchicSelectorService {
     /**
      * Builds queryVariables filter for children query
      */
-    private getServiceFilter(flatNode: FlatNode | null,
-                             config: HierarchicConfiguration,
+    private getServiceFilter(flatNode: HierarchicFlatNode | null,
+                             config: NaturalHierarchicConfiguration,
                              contextFilter: HierarchicFilterConfiguration['filter'] | null = null,
                              allDeeps = false
     ): HierarchicFilterConfiguration['filter'] | null {
@@ -276,7 +276,7 @@ export class HierarchicSelectorService {
         return filters;
     }
 
-    private getServiceContextFilter(config: HierarchicConfiguration,
+    private getServiceContextFilter(config: NaturalHierarchicConfiguration,
                                     contextFilters: HierarchicFilterConfiguration[] | null,
     ): HierarchicFilterConfiguration['filter'] | null {
 
@@ -291,7 +291,7 @@ export class HierarchicSelectorService {
     /**
      * Search in configurations.selectableAtKey attribute to find given key and return the configuration
      */
-    private getConfigurationBySelectableKey(key: HierarchicConfiguration['selectableAtKey']): HierarchicConfiguration | null {
+    private getConfigurationBySelectableKey(key: NaturalHierarchicConfiguration['selectableAtKey']): NaturalHierarchicConfiguration | null {
 
         if (!this.configuration) {
             return null;

@@ -4,7 +4,7 @@ import { AbstractController } from '../shared/components/AbstractController';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SidenavContainerComponent } from '../natural/modules/sidenav/components/sidenav-container/sidenav-container.component';
-import { SidenavService } from '../natural/modules/sidenav/sidenav.service';
+import { NaturalSidenavService } from '../natural/modules/sidenav/sidenav.service';
 
 @Component({
     selector: 'app-home',
@@ -26,9 +26,9 @@ export class HomeComponent extends AbstractController implements OnInit {
 
     ngOnInit() {
 
-        SidenavService.sideNavsChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
+        NaturalSidenavService.sideNavsChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             setTimeout(() => {
-                this.menu = SidenavService.sideNavs.get('adminMenu');
+                this.menu = NaturalSidenavService.sideNavs.get('adminMenu');
             });
         });
     }

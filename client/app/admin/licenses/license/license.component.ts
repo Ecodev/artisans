@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import {
     CreateLicense,
     CreateLicenseVariables,
@@ -29,7 +29,7 @@ export class LicenseComponent
         UpdateLicenseVariables,
         DeleteLicenses> {
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 licenseService: LicenseService,
                 router: Router,
                 route: ActivatedRoute,

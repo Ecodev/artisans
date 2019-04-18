@@ -3,7 +3,7 @@
     <div fxLayout="column" class="pageHeader">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
             <a mat-icon-button [routerLink]="['..']">
-                <app-icon name="arrow_back"></app-icon>
+                <natural-icon name="arrow_back"></natural-icon>
             </a>
             <span *ngIf="!form.get('name').value">Nouvelle certification</span>
             <span *ngIf="form.get('name').value" class="pageTitle">
@@ -38,22 +38,22 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
                     <div fxFlex="50" fxLayout="column">
                         <h2 class="mat-title">Utilisateurs certifiés</h2>
-                        <app-relations [main]="data.model"
+                        <natural-relations [main]="data.model"
                                        [service]="userService"
                                        [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
                                        placeholder="Certifier un utilisateur"
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <app-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></app-table-button>
+                                    <natural-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></natural-table-button>
                                 </div>
                             </ng-template>
-                        </app-relations>
+                        </natural-relations>
                     </div>
 
                     <div fxFlex="50" fxLayout="column">
                         <h2 class="mat-title">Réservables certifiés</h2>
-                        <app-relations [main]="data.model"
+                        <natural-relations [main]="data.model"
                                        [service]="bookableService"
                                        [filter]="{groups: [{conditions: [{licenses: {have: {values: [data.model.id]}}}]}]}"
 
@@ -61,22 +61,22 @@
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <app-table-button [navigate]="['/admin/bookable/', item.id]" [label]="item.name"></app-table-button>
+                                    <natural-table-button [navigate]="['/admin/bookable/', item.id]" [label]="item.name"></natural-table-button>
                                 </div>
                             </ng-template>
-                        </app-relations>
+                        </natural-relations>
                     </div>
 
                 </div>
 
                 <mat-divider></mat-divider>
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

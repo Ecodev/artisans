@@ -34,13 +34,59 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
 import { NaturalModule } from './natural/natural.module';
-import { AlertService } from './natural/components/alert/alert.service';
+import { NaturalAlertService } from './natural/components/alert/alert.service';
+import { NaturalIconsConfig } from './natural/modules/icon/icon.component';
 
 registerLocaleData(localeFRCH);
 
 export class MyIntl extends TimeagoIntl {
     // do extra stuff here...
 }
+
+const iconsConfig: NaturalIconsConfig = {
+    'qr': {
+        svg: 'assets/icons/qr.svg',
+    },
+    'simple-qr': {
+        svg: 'assets/icons/simple-qr.svg',
+    },
+    'own_bookable': {
+        svg: 'assets/icons/swimsuit.svg',
+    },
+    'code': {
+        svg: 'assets/icons/input.svg',
+    },
+    'doors': {
+        svg: 'assets/icons/key.svg',
+    },
+    'family': {
+        svg: 'assets/icons/family.svg',
+    },
+    'lake': {
+        svg: 'assets/icons/lake.svg',
+    },
+    'transactionHistory': {
+        svg: 'assets/icons/history.svg',
+    },
+    'claims': {
+        svg: 'assets/icons/claims.svg',
+    },
+    'finances': {
+        svg: 'assets/icons/notes.svg',
+    },
+    'browse_bookables': {
+        svg: 'assets/icons/search.svg',
+    },
+    'administrator': {
+        svg: 'assets/icons/boss.svg',
+    },
+    'exit': {
+        svg: 'assets/icons/exit.svg',
+    },
+    'ichtus': {
+        svg: 'assets/ichtus.svg',
+    },
+};
 
 @NgModule({
     declarations: [
@@ -61,7 +107,7 @@ export class MyIntl extends TimeagoIntl {
         AppRoutingModule,
         MaterialModule,
         IchtusModule,
-        NaturalModule,
+        NaturalModule.forRoot(iconsConfig),
         HttpClientModule,
         HttpBatchLinkModule,
         TimeagoModule.forRoot({
@@ -99,7 +145,7 @@ export class AppModule {
 
     constructor(apollo: Apollo,
                 networkActivityService: NetworkActivityService,
-                alertService: AlertService,
+                alertService: NaturalAlertService,
                 httpBatchLink: HttpBatchLink,
                 dateAdapter: DateAdapter<Date>,
                 intl: TimeagoIntl,

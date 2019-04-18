@@ -1,8 +1,8 @@
-import { HierarchicConfiguration } from './HierarchicConfiguration';
 import { Literal } from '../../../types/types';
+import { NaturalHierarchicConfiguration } from './HierarchicConfiguration';
 
 export interface HierarchicFilterConfiguration<T = Literal> {
-    service: HierarchicConfiguration['service'];
+    service: NaturalHierarchicConfiguration['service'];
     filter: T;
 }
 

@@ -30,7 +30,6 @@ import { EditableTransactionLinesComponent } from './transactions/editable-trans
 import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin-only-modal/select-admin-only-modal.component';
 import { ProfileModule } from '../profile/profile.module';
 import { BookableMetadataComponent } from './bookable-metadata/bookable-metadata.component';
-import { DetailHeaderComponent } from '../natural/components/detail-header/detail-header.component';
 import { NaturalModule } from '../natural/natural.module';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { NaturalModule } from '../natural/natural.module';
         BookingComponent,
         BookableTagsComponent,
         BookableTagComponent,
-        DetailHeaderComponent,
         TransactionComponent,
         TransactionLinesComponent,
         AccountsComponent,

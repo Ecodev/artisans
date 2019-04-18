@@ -11,7 +11,7 @@ import { MediaObserver } from '@angular/flex-layout';
  * Maybe the better is to wait next release
  */
 @Injectable({providedIn: 'root'})
-export class SidenavService {
+export class NaturalSidenavService {
 
     public static sideNavs = new Map<string, SidenavContainerComponent>();
     public static sideNavsChange = new BehaviorSubject(null);
@@ -79,14 +79,14 @@ export class SidenavService {
     }
 
     public destroy(name: string) {
-        SidenavService.sideNavs.delete(name);
-        SidenavService.sideNavsChange.next(null);
+        NaturalSidenavService.sideNavs.delete(name);
+        NaturalSidenavService.sideNavsChange.next(null);
     }
 
     public init(name: string, container: MatDrawerContainer, drawer: MatDrawer, component: SidenavContainerComponent): void {
 
-        SidenavService.sideNavs.set(name, component);
-        SidenavService.sideNavsChange.next(null);
+        NaturalSidenavService.sideNavs.set(name, component);
+        NaturalSidenavService.sideNavsChange.next(null);
 
         this.container = container;
         this.drawer = drawer;

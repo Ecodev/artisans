@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Sélection d'un espace de stockage</h2>
 <mat-dialog-content fxLayout="column" fxLayoutGap="20px">
 
-    <app-select [service]="bookableService"
+    <natural-select [service]="bookableService"
                 (selectionChange)="selection = $event"
                 [filter]="variables.filter"
                 placeholder="Sélectionner"
-    ></app-select>
+    ></natural-select>
 
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">

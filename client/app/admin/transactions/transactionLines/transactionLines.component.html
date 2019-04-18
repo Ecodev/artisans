@@ -13,16 +13,16 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span appColumnsPickerColumn="transactionDate">Date</span>
-                    <span appColumnsPickerColumn="name">Nom</span>
-                    <span appColumnsPickerColumn="bookable">Réservable</span>
-                    <span appColumnsPickerColumn="remarks">Remarques</span>
-                    <span appColumnsPickerColumn="balance">Montant</span>
-                    <span appColumnsPickerColumn="account">Compte</span>
-                    <span appColumnsPickerColumn="isReconciled">Pointé</span>
-                    <span appColumnsPickerColumn="expenseClaim">Quittance</span>
-                </app-columns-picker>
+                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="transactionDate">Date</span>
+                    <span naturalColumnsPickerColumn="name">Nom</span>
+                    <span naturalColumnsPickerColumn="bookable">Réservable</span>
+                    <span naturalColumnsPickerColumn="remarks">Remarques</span>
+                    <span naturalColumnsPickerColumn="balance">Montant</span>
+                    <span naturalColumnsPickerColumn="account">Compte</span>
+                    <span naturalColumnsPickerColumn="isReconciled">Pointé</span>
+                    <span naturalColumnsPickerColumn="expenseClaim">Quittance</span>
+                </natural-columns-picker>
             </natural-search>
         </div>
 
@@ -36,10 +36,10 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <app-table-button [label]="element.name"
+                        <natural-table-button [label]="element.name"
                                           [navigate]="['/admin', 'transaction', element.transaction.id]"
                                           matTooltip="Éditer"
-                        ></app-table-button>
+                        ></natural-table-button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
@@ -89,10 +89,10 @@
                 <ng-container matColumnDef="bookable">
                     <th mat-header-cell *matHeaderCellDef>Réservable</th>
                     <td mat-cell *matCellDef="let element">
-                        <app-table-button *ngIf="element.bookable"
+                        <natural-table-button *ngIf="element.bookable"
                                           [label]="element.bookable.name"
                                           [navigate]="['/admin/bookable', element.bookable.id]"
-                        ></app-table-button>
+                        ></natural-table-button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
@@ -112,7 +112,7 @@
                            *ngIf="element.transaction.expenseClaim"
                            [routerLink]="['/admin/expense-claim', element.transaction.expenseClaim.id]"
                         >
-                            <app-icon name="receipt"></app-icon>
+                            <natural-icon name="receipt"></natural-icon>
                         </a>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
@@ -148,5 +148,5 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/transaction/new']" icon="add" *ngIf="permissionsService.crud?.transaction.create"
-></app-fixed-button>
+<natural-fixed-button [routerLink]="['/admin/transaction/new']" icon="add" *ngIf="permissionsService.crud?.transaction.create"
+></natural-fixed-button>

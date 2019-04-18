@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { AbstractController } from '../../../shared/components/AbstractController';
 import { NaturalDataSource } from '../../../natural/classes/DataSource';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-services',
@@ -28,7 +28,7 @@ export class ServicesComponent extends AbstractController implements OnInit, OnC
 
     constructor(private userService: UserService,
                 private route: ActivatedRoute,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 private bookingService: BookingService) {
         super();
     }

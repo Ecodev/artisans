@@ -13,7 +13,7 @@ export interface IEnum {
 @Injectable({
     providedIn: 'root',
 })
-export class EnumService {
+export class NaturalEnumService {
 
     constructor(private apollo: Apollo) {
     }

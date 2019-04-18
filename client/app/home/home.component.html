@@ -3,11 +3,11 @@
     <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
 
         <button mat-icon-button *ngIf="menu" (click)="menu.toggle()">
-            <app-icon name="menu"></app-icon>
+            <natural-icon name="menu"></natural-icon>
         </button>
 
         <a routerLink="/" style="width:60px; height:60px">
-            <app-icon name="ichtus" [size]="60"></app-icon>
+            <natural-icon name="ichtus" [size]="60"></natural-icon>
         </a>
 
         <div *ngIf="route.snapshot.data.viewer?.model" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" fxFlex>
@@ -16,12 +16,12 @@
             <div fxFlex id="searchByCode" fxLayout="row" fxLayoutAlign="start center" fxHide.xs>
                 <input fxFlex placeholder="Recherche par code" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
                 <a mat-icon-button [routerLink]="['/booking', code]">
-                    <app-icon name="search"></app-icon>
+                    <natural-icon name="search"></natural-icon>
                 </a>
             </div>
 
             <a mat-icon-button mat-flat-button color="primary" routerLink="/booking/by-scan">
-                <app-icon name="simple-qr" [size]="24"></app-icon>
+                <natural-icon name="simple-qr" [size]="24"></natural-icon>
             </a>
 
             <div fxFlex></div>

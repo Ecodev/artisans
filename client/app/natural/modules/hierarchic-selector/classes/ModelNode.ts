@@ -1,15 +1,15 @@
 import { BehaviorSubject } from 'rxjs';
-import { HierarchicConfiguration } from './HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from './HierarchicConfiguration';
 
-export class ModelNode {
+export class HierarchicModelNode {
 
-    public childrenChange: BehaviorSubject<ModelNode[]> = new BehaviorSubject<ModelNode[]>([]);
+    public childrenChange: BehaviorSubject<HierarchicModelNode[]> = new BehaviorSubject<HierarchicModelNode[]>([]);
 
     constructor(public model: any,
-                public config: HierarchicConfiguration) {
+                public config: NaturalHierarchicConfiguration) {
     }
 
-    get children(): ModelNode[] {
+    get children(): HierarchicModelNode[] {
         return this.childrenChange.getValue();
     }
 }

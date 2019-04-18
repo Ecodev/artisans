@@ -3,7 +3,7 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
 
 @Component({
-    selector: 'app-select-admin-only-modal',
+    selector: 'natural-select-admin-only-modal',
     templateUrl: './select-admin-only-modal.component.html',
 })
 export class SelectAdminOnlyModalComponent implements OnInit {

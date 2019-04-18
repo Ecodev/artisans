@@ -1,6 +1,6 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouveau compte"
+    <natural-detail-header newLabel="Nouveau compte"
                        label="Frais et remboursement"
                        [model]="data.model"
                        [listRoute]="['admin', 'expense-claim']"
@@ -14,14 +14,14 @@
                color="accent"
                [routerLink]="['/admin/transaction/new', {expenseClaim: data.model.id}]"
             >
-                <app-icon name="check"></app-icon>
+                <natural-icon name="check"></natural-icon>
                 <span>Valider</span> &nbsp;
                 <span *ngIf="data.model.type === ExpenseClaimType.expenseClaim">(créditer le solde)</span>
                 <span *ngIf="data.model.type === ExpenseClaimType.refund">(rembourser)</span>
             </a>
 
         </div>
-    </app-detail-header>
+    </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -52,8 +52,8 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <app-select-enum enumName="ExpenseClaimType" formControlName="type" (selectionChange)="update()" placeholder="Type"
-                        ></app-select-enum>
+                        <natural-select-enum enumName="ExpenseClaimType" formControlName="type" (selectionChange)="update()" placeholder="Type"
+                        ></natural-select-enum>
 
                         <div fxLayout="row" fxLayoutGap="20px">
                             <mat-form-field fxFlex="40">
@@ -63,17 +63,17 @@
                                 <mat-error *ngIf="form.get('amount').hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
-                            <app-select-enum enumName="ExpenseClaimStatus"
+                            <natural-select-enum enumName="ExpenseClaimStatus"
                                              formControlName="status"
                                              (selectionChange)="update()"
                                              placeholder="Status"
                                              fxFlex
-                            ></app-select-enum>
+                            ></natural-select-enum>
 
                         </div>
 
-                        <app-select formControlName="owner" placeholder="Membre" [service]="userService" (selectionChange)="update()"
-                        ></app-select>
+                        <natural-select formControlName="owner" placeholder="Membre" [service]="userService" (selectionChange)="update()"
+                        ></natural-select>
                     </div>
 
                 </div>
@@ -125,13 +125,13 @@
 
                 <mat-divider></mat-divider>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

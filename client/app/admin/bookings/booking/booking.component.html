@@ -1,12 +1,12 @@
 <div class="detail-body" [formGroup]="form">
 
-    <app-detail-header newLabel="Nouvelle réservation" label="Réservation" [model]="data.model" [listRoute]="['admin', 'booking']">
+    <natural-detail-header newLabel="Nouvelle réservation" label="Réservation" [model]="data.model" [listRoute]="['admin', 'booking']">
         <div fxLayout="row" fxLayoutGap="20px">
             <button *ngIf="data.model.id && !form.get('endDate').value" mat-flat-button color="warn" (click)="endBooking()">
                 Terminer
             </button>
         </div>
-    </app-detail-header>
+    </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -15,23 +15,23 @@
                     <div fxFlex="50" fxLayout="column">
 
                         <div fxLayout="row" fxLayoutGap="10px">
-                            <app-select fxFlex
+                            <natural-select fxFlex
                                         formControlName="owner"
                                         placeholder="Responsable"
                                         [service]="userService"
                                         (selectionChange)="update()"
                                         [showIcon]="false"
                                         [navigateTo]="form.get('owner').value?.id ? ['/admin/user', form.get('owner').value.id] : null"
-                            ></app-select>
+                            ></natural-select>
                         </div>
 
-                        <app-select formControlName="bookable"
+                        <natural-select formControlName="bookable"
                                     placeholder="Réservable"
                                     [service]="bookableService"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
                                     [navigateTo]="form.get('bookable').value?.id ? ['/admin/bookable', form.get('bookable').value.id] : null"
-                        ></app-select>
+                        ></natural-select>
 
                         <button mat-flat-button
                                 color="primary"
@@ -55,8 +55,8 @@
 
                     </div>
                     <div fxFlex="50" fxLayout="column">
-                        <app-select-enum enumName="BookingStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
-                        ></app-select-enum>
+                        <natural-select-enum enumName="BookingStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
+                        ></natural-select-enum>
 
                         <h2 class="mat-title">Commentaires</h2>
                         <mat-form-field>
@@ -155,14 +155,14 @@
 
                 <mat-divider></mat-divider>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
 
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

@@ -1,10 +1,10 @@
-@mixin sidenav($theme) {
+@mixin natural-sidenav($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    app-sidenav-container {
+    natural-sidenav-container {
         .mat-drawer {
             background: transparent;
             border-right: none;
@@ -14,7 +14,7 @@
 
     // Overrides material sidenav components to allow scroll to be in the content instead of the lateral panel
     // If no-scroll is applied
-    app-sidenav-container[no-scroll="true"] {
+    natural-sidenav-container[no-scroll="true"] {
 
         // Only in side mode
         mat-sidenav[ng-reflect-mode="side"] {
@@ -24,7 +24,7 @@
                 flex-direction: column;
             }
 
-            app-sidenav {
+            natural-sidenav {
                 flex: 1;
                 display: flex;
                 min-height: 0;

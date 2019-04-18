@@ -4,14 +4,14 @@
         <mat-form-field *ngIf="showSearch && !value && !hideSearch">
             <mat-label i18n>Rechercher</mat-label>
             <input matInput appFocus i18n-placeholder (change)="search($event.target.value)" (keyup.esc)="search('')">
-            <app-icon name="search" matPrefix></app-icon>
+            <natural-icon name="search" matPrefix></natural-icon>
         </mat-form-field>
 
         <ng-template #defaultNameCell let-item="item">
             {{ getDisplayFn()(item) }}
         </ng-template>
 
-        <table mat-table class="app-row-click" [dataSource]="dataSource">
+        <table mat-table class="natural-row-click" [dataSource]="dataSource">
             <tr mat-header-row *matHeaderRowDef="displayedColumns" style="display:none"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -33,7 +33,7 @@
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let element">
                     <button mat-icon-button (click)="remove(element)" color="warn" matTooltip="Dissocier">
-                        <app-icon name="link_off"></app-icon>
+                        <natural-icon name="link_off"></natural-icon>
                     </button>
                 </td>
             </ng-container>
@@ -62,7 +62,7 @@
          fxLayoutGap="10px"
          *ngIf="!hierarchicSelectorConfig && (autocompleteSelectorService || service) && !disabled"
     >
-        <app-select #select
+        <natural-select #select
                     fxFlex
                     *ngIf="!disabled"
                     [service]="autocompleteSelectorService || service"
@@ -71,11 +71,11 @@
                     [placeholder]="placeholder"
                     [displayWith]="getDisplayFn()"
                     [showIcon]="false"
-        ></app-select>
+        ></natural-select>
 
     </div>
 
     <div *ngIf="hierarchicSelectorConfig && !disabled">
-        <button mat-flat-button color="primary" (click)="openHierarchicSelector()">{{ placeholder }}</button>
+        <button mat-flat-button color="primary" (click)="openNaturalHierarchicSelector()">{{ placeholder }}</button>
     </div>
 </div>

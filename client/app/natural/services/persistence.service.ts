@@ -5,7 +5,7 @@ import { clone } from 'lodash';
 @Injectable({
     providedIn: 'root',
 })
-export class PersistenceService {
+export class NaturalPersistenceService {
 
     constructor(private router: Router) {
     }

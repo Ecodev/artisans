@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import jsQR from 'jsqr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-scan',
@@ -16,7 +16,7 @@ export class ScanComponent implements OnInit, OnDestroy {
 
     private context;
 
-    constructor(public router: Router, private route: ActivatedRoute, private alertService: AlertService) {
+    constructor(public router: Router, private route: ActivatedRoute, private alertService: NaturalAlertService) {
     }
 
     ngOnInit() {

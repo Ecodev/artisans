@@ -20,13 +20,13 @@
                 <mat-error *ngIf="form.get('postcode').hasError('required')">Requis</mat-error>
             </mat-form-field>
 
-            <app-select [service]="countryService"
+            <natural-select [service]="countryService"
                         formControlName="country"
                         [showIcon]="false"
                         searchField="name"
                         placeholder="Pays"
                         (selectionChange)="update()"
-            ></app-select>
+            ></natural-select>
         </div>
     </div>
 </div>

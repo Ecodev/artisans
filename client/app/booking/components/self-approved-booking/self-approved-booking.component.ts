@@ -4,7 +4,7 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { Bookable, BookingStatus } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-self-approved-booking',
@@ -21,7 +21,7 @@ export class SelfApprovedBookingComponent implements OnInit {
                 private userService: UserService,
                 private bookingService: BookingService,
                 private bookableService: BookableService,
-                private alertService: AlertService) {
+                private alertService: NaturalAlertService) {
     }
 
     ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import {
     TransactionTag,
     TransactionTagVariables,
@@ -28,7 +28,7 @@ export class TransactionTagComponent
         DeleteTransactionTags> {
 
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 transactionTagService: TransactionTagService,
                 router: Router,
                 route: ActivatedRoute,

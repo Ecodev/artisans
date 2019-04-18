@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
     public config;
 
     constructor(public userService: UserService,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 private route: ActivatedRoute,
                 public bookableService: BookableService,
                 private apollo: Apollo,

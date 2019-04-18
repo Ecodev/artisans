@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { RegisterComponent } from './register.component';
@@ -21,7 +21,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
                 route: ActivatedRoute,
                 bookableService: BookableService,
                 apollo: Apollo,
-                alertService: AlertService,
+                alertService: NaturalAlertService,
     ) {
         super(userService, alertService, router, route, bookableService, apollo);
     }

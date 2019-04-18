@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { NaturalDataSource } from '../../../natural/classes/DataSource';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-register',
@@ -28,7 +28,7 @@ export class RegisterComponent extends AbstractDetail<User['user'],
     public sending = false;
 
     constructor(userService: AnonymousUserService,
-                alertService: AlertService,
+                alertService: NaturalAlertService,
                 router: Router,
                 route: ActivatedRoute,
                 protected bookableService: BookableService,

@@ -1,11 +1,11 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnDestroy, OnInit } from '@angular/core';
 import { NaturalSearchSelections, toGraphQLDoctrineFilter } from '@ecodev/natural-search';
-import { PersistenceService } from '../services/persistence.service';
+import { NaturalPersistenceService } from '../services/persistence.service';
 import { AbstractList } from './AbstractList';
 import { QueryVariables } from './QueryVariablesManager';
 import { AbstractModelService } from '../services/abstract-model.service';
-import { AlertService } from '../components/alert/alert.service';
+import { NaturalAlertService } from '../components/alert/alert.service';
 import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
 
 /**
@@ -20,8 +20,8 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
                 service: AbstractModelService<any, any, any, any, any, any, any, any, any>,
                 router: Router,
                 route: ActivatedRoute,
-                alertService: AlertService,
-                persistenceService: PersistenceService,
+                alertService: NaturalAlertService,
+                persistenceService: NaturalPersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService) {
 
         super(key, service, router, route, alertService, persistenceService, naturalSearchConfigurationService);

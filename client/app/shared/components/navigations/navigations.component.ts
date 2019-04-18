@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { CommentComponent } from './comment.component';
 import { AbstractController } from '../AbstractController';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
     selector: 'app-navigations',
@@ -48,7 +48,7 @@ export class NavigationsComponent extends AbstractController implements OnInit {
 
     constructor(public userService: UserService,
                 public bookingService: BookingService,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 private dialog: MatDialog,
                 private snackbar: MatSnackBar) {
         super();

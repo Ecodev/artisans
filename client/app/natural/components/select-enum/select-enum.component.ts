@@ -15,13 +15,13 @@ import {
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
-import { EnumService, IEnum } from '../../services/enum.service';
+import { NaturalEnumService, IEnum } from '../../services/enum.service';
 
 @Component({
-    selector: 'app-select-enum',
+    selector: 'natural-select-enum',
     templateUrl: './select-enum.component.html',
 })
-export class SelectEnumComponent implements OnInit, ControlValueAccessor, AfterViewInit {
+export class NaturalSelectEnumComponent implements OnInit, ControlValueAccessor, AfterViewInit {
 
     @ViewChild('input') input: ElementRef<HTMLInputElement>;
     @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
@@ -42,7 +42,7 @@ export class SelectEnumComponent implements OnInit, ControlValueAccessor, AfterV
      */
     private value;
 
-    constructor(private enumService: EnumService, @Optional() @Self() public ngControl: NgControl) {
+    constructor(private enumService: NaturalEnumService, @Optional() @Self() public ngControl: NgControl) {
         if (this.ngControl !== null) {
             this.ngControl.valueAccessor = this;
         }

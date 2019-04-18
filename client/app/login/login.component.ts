@@ -3,7 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkActivityService } from '../shared/services/network-activity.service';
 import { MatSnackBar } from '@angular/material';
-import { AlertService } from '../shared/components/../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../shared/components/../../natural/components/alert/alert.service';
 import { AbstractController } from '../shared/components/AbstractController';
 import { UserService } from '../admin/users/services/user.service';
 
@@ -41,7 +41,7 @@ export class LoginComponent extends AbstractController implements OnInit, OnDest
                 private router: Router,
                 private userService: UserService,
                 private network: NetworkActivityService,
-                public alertService: AlertService,
+                public alertService: NaturalAlertService,
                 public snackBar: MatSnackBar) {
         super();
     }

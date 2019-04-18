@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { ExpenseClaimService } from '../services/expenseClaim.service';
 import {
     CreateExpenseClaim,
@@ -30,7 +30,7 @@ export class ExpenseClaimComponent
 
     public ExpenseClaimType = ExpenseClaimType;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 expenseClaimService: ExpenseClaimService,
                 router: Router,
                 route: ActivatedRoute,

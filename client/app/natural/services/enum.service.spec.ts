@@ -1,8 +1,8 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { EnumService } from './enum.service';
+import { NaturalEnumService } from './enum.service';
 import { MockApolloProvider } from '../../shared/testing/MockApolloProvider';
 
-describe('EnumService', () => {
+describe('NaturalEnumService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
@@ -11,7 +11,7 @@ describe('EnumService', () => {
         });
     });
 
-    it('should be created', inject([EnumService], (service: EnumService) => {
+    it('should be created', inject([NaturalEnumService], (service: NaturalEnumService) => {
         expect(service).toBeTruthy();
 
         const expected = [
@@ -25,7 +25,7 @@ describe('EnumService', () => {
             },
             {
                 value: 'booked',
-                name: 'Réservé',
+                name: 'Réservation',
             },
         ];
 

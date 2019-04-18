@@ -21,43 +21,44 @@ import { MatAutocompleteTrigger } from '@angular/material';
 import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
 import { AbstractController } from '../../../shared/components/AbstractController';
 import { HierarchicFiltersConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicFiltersConfiguration';
-import { HierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
-import { HierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
+import { NaturalHierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { OrganizedModelSelection } from '../../modules/hierarchic-selector/services/hierarchic-selector.service';
 import { QueryVariables, QueryVariablesManager } from '../../classes/QueryVariablesManager';
+import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
  * Default usage:
- * <app-select [service]="amazingServiceInstance" [(model)]="amazingModel" (modelChange)=amazingChangeFn($event)></app-select>
- * <app-select [hierarchicSelectorConfig]="myConfig" [(ngModel)]="amazingModel" (ngModelChange)=amazingChangeFn($event)></app-select>
+ * <natural-select [service]="amazingServiceInstance" [(model)]="amazingModel" (modelChange)=amazingChangeFn($event)></natural-select>
+ * <natural-select [hierarchicSelectorConfig]="myConfig" [(ngModel)]="amazingModel"
+ * (ngModelChange)=amazingChangeFn($event)></natural-select>
  *
  * Custom template usage :
- * <app-select [service]="svc" [(ngModel)]="model">
+ * <natural-select [service]="svc" [(ngModel)]="model">
  *     <ng-template let-item="item">
  *         <span>{{ item.xxx }}</span>
  *     </ng-template>
- * </app-select>
+ * </natural-select>
  *
  * [(ngModel)] and (ngModelChange) are optional
  *
  * Placeholder :
- * <app-select placeholder="amazing placeholder">
+ * <natural-select placeholder="amazing placeholder">
  *
  * Never float placeholder :
- * <app-select placeholder="amazing placeholder" floatPlaceholder="never">
+ * <natural-select placeholder="amazing placeholder" floatPlaceholder="never">
  *
  * Search with like %xxx% on specified attribute name instead of custom filter on whole object
- * <app-select [searchField]="string">
+ * <natural-select [searchField]="string">
  *
  * Allows to input free string without selecting an option from autocomplete suggestions
- * <app-select [optionRequired]="false">
+ * <natural-select [optionRequired]="false">
  *
  */
 @Component({
-    selector: 'app-select',
+    selector: 'natural-select',
     templateUrl: './select.component.html',
 })
-export class SelectComponent extends AbstractController implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
+export class NaturalSelectComponent extends AbstractController implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
 
     @ViewChild(MatAutocompleteTrigger) autoTrigger: MatAutocompleteTrigger;
     @ViewChild('input') input: ElementRef<HTMLInputElement>;
@@ -99,7 +100,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
      */
     @Input() hierarchicSelectorFilters: HierarchicFiltersConfiguration;
 
-    @Input() hierarchicSelectorConfig: HierarchicConfiguration[];
+    @Input() hierarchicSelectorConfig: NaturalHierarchicConfiguration[];
 
     /**
      * Additional filter for query
@@ -139,7 +140,7 @@ export class SelectComponent extends AbstractController implements OnInit, OnDes
      */
     private value;
 
-    constructor(private hierarchicSelectorDialogService: HierarchicSelectorDialogService,
+    constructor(private hierarchicSelectorDialogService: NaturalHierarchicSelectorDialogService,
                 @Optional() @Self() public ngControl: NgControl) {
 
         super();

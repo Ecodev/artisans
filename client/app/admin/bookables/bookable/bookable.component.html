@@ -1,6 +1,6 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'bookable']">
+    <natural-detail-header newLabel="Nouvel réservable" label="Réservable" [model]="data.model" [listRoute]="['admin', 'bookable']">
         <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
             <div fxLayout="column" style="text-align:right" *ngIf="form.get('verificationDate').value">
                 <div class="mat-body-2">Dernière vérification</div>
@@ -10,7 +10,7 @@
                 Marquer comme vérifié
             </button>
         </div>
-    </app-detail-header>
+    </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -49,11 +49,11 @@
                                     <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
                                 </mat-form-field>
 
-                                <app-select-enum enumName="BookableState"
+                                <natural-select-enum enumName="BookableState"
                                                  formControlName="state"
                                                  (selectionChange)="update()"
                                                  placeholder="État"
-                                ></app-select-enum>
+                                ></natural-select-enum>
 
                                 <mat-form-field>
                                     <mat-label>Prix d'achat</mat-label>
@@ -90,11 +90,11 @@
                             <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
                         </div>
 
-                        <app-select-enum enumName="BookingType"
+                        <natural-select-enum enumName="BookingType"
                                          formControlName="bookingType"
                                          (selectionChange)="update()"
                                          placeholder="Type de réservation"
-                        ></app-select-enum>
+                        ></natural-select-enum>
 
                         <mat-form-field *ngIf="isBookingPriceApplicable()">
                             <mat-label>Prix initial</mat-label>
@@ -117,14 +117,14 @@
                             <mat-hint>Saisir -1 pour aucune limite.</mat-hint>
                         </mat-form-field>
 
-                        <app-select *ngIf="!isSelfApproved()"
+                        <natural-select *ngIf="!isSelfApproved()"
                                     formControlName="creditAccount"
                                     placeholder="Compte à créditer lors de la réservation"
                                     [hierarchicSelectorConfig]="accountHierarchicConfig"
                                     (selectionChange)="update()"
                                     [showIcon]="false"
                                     [navigateTo]="['/admin/account', form.get('creditAccount').value?.id]"
-                        ></app-select>
+                        ></natural-select>
 
                     </div>
                 </div>
@@ -135,7 +135,7 @@
                     <div fxFlex="66" fxLayout="column">
                         <div *ngIf="data.model.id && isSelfApproved()">
                             <h2 class="mat-title">Certifications</h2>
-                            <app-relations [main]="data.model"
+                            <natural-relations [main]="data.model"
                                            [service]="licenseService"
                                            [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
                                            [hideSearch]="true"
@@ -143,17 +143,17 @@
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
+                                        <natural-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></natural-table-button>
                                     </div>
                                 </ng-template>
-                            </app-relations>
+                            </natural-relations>
                         </div>
                     </div>
                     <div fxFlex="33" fxLayout="column">
 
                         <div *ngIf="data.model.id">
                             <h2 class="mat-title">Tags</h2>
-                            <app-relations [main]="data.model"
+                            <natural-relations [main]="data.model"
                                            [service]="bookableTagService"
                                            [filter]="{groups: [{conditions: [{bookables: {have: {values: [data.model.id]}}}]}]}"
                                            [hideSearch]="true"
@@ -163,15 +163,15 @@
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                         <!-- TODO : link to bookables list filtred by tag -->
                                         <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="32"></ngx-avatar>
-                                        <app-table-button [navigate]="['/admin/bookable']" [label]="item.name"></app-table-button>
+                                        <natural-table-button [navigate]="['/admin/bookable']" [label]="item.name"></natural-table-button>
                                     </div>
                                 </ng-template>
-                            </app-relations>
+                            </natural-relations>
                         </div>
                     </div>
                 </div>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
 
             </div>
         </mat-tab>
@@ -195,7 +195,7 @@
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

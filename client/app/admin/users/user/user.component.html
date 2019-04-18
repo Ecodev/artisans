@@ -1,13 +1,8 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouvel utilisateur"
-                       label="Utilisateur"
-                       [model]="data.model"
-                       [listRoute]="['admin', 'user']"
-                       [showAvatar]="true"
-    >
+    <natural-detail-header newLabel="Nouvel utilisateur" label="Utilisateur" [model]="data.model" [listRoute]="['admin', 'user']">
         <app-money *ngIf="data.model.account" [amount]="data.model.account.balance" sizeClass="mat-display-1"></app-money>
-    </app-detail-header>
+    </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -36,8 +31,8 @@
                                 <mat-error *ngIf="form.get('lastName').hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
-                            <app-select-enum enumName="Sex" formControlName="sex" (selectionChange)="update()" placeholder="Genre"
-                            ></app-select-enum>
+                            <natural-select-enum enumName="Sex" formControlName="sex" (selectionChange)="update()" placeholder="Genre"
+                            ></natural-select-enum>
                         </div>
 
                         <app-address [form]="form" (change)="update()"></app-address>
@@ -81,11 +76,14 @@
 
                         <h2 class="mat-title">État</h2>
 
-                        <app-select-enum enumName="UserStatus" formControlName="status" (selectionChange)="update()" placeholder="Status"
-                        ></app-select-enum>
+                        <natural-select-enum enumName="UserStatus"
+                                             formControlName="status"
+                                             (selectionChange)="update()"
+                                             placeholder="Status"
+                        ></natural-select-enum>
 
-                        <app-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
-                        ></app-select-enum>
+                        <natural-select-enum enumName="UserRole" formControlName="role" (selectionChange)="update()" placeholder="Rôle"
+                        ></natural-select-enum>
 
                     </div>
                 </div>
@@ -96,37 +94,37 @@
                     <div fxFlex="66" fxLayout="column">
                         <h2 class="mat-title">Autres</h2>
 
-                        <app-select [service]="service"
-                                    formControlName="owner"
-                                    placeholder="Chef de famille"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                        ></app-select>
+                        <natural-select [service]="service"
+                                        formControlName="owner"
+                                        placeholder="Chef de famille"
+                                        (selectionChange)="update()"
+                                        [showIcon]="false"
+                        ></natural-select>
 
                         <mat-form-field fxFlex>
                             <mat-label>Swiss sailling</mat-label>
                             <input matInput formControlName="swissSailing" (change)="update()">
                         </mat-form-field>
 
-                        <app-select-enum enumName="SwissSailingType"
-                                         formControlName="swissSailingType"
-                                         (selectionChange)="update()"
-                                         placeholder="Licence swiss sailing"
-                        ></app-select-enum>
+                        <natural-select-enum enumName="SwissSailingType"
+                                             formControlName="swissSailingType"
+                                             (selectionChange)="update()"
+                                             placeholder="Licence swiss sailing"
+                        ></natural-select-enum>
 
-                        <app-select-enum enumName="SwissWindsurfType"
-                                         formControlName="swissWindsurfType"
-                                         (selectionChange)="update()"
-                                         placeholder="License swiss windsurfing"
-                        ></app-select-enum>
+                        <natural-select-enum enumName="SwissWindsurfType"
+                                             formControlName="swissWindsurfType"
+                                             (selectionChange)="update()"
+                                             placeholder="License swiss windsurfing"
+                        ></natural-select-enum>
 
                         <div fxLayout="row wrap" fxLayoutGap="20px">
-                            <app-select-enum fxFlex
-                                             enumName="BillingType"
-                                             formControlName="billingType"
-                                             (selectionChange)="update()"
-                                             placeholder="Méthode de paiement"
-                            ></app-select-enum>
+                            <natural-select-enum fxFlex
+                                                 enumName="BillingType"
+                                                 formControlName="billingType"
+                                                 (selectionChange)="update()"
+                                                 placeholder="Méthode de paiement"
+                            ></natural-select-enum>
 
                             <mat-form-field fxFlex>
                                 <mat-label>Date de naissance</mat-label>
@@ -186,34 +184,34 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
                     <div fxFlex="45" fxLayout="column">
                         <h2 class="mat-title">Certifications</h2>
-                        <app-relations [main]="data.model"
-                                       [service]="licenseService"
-                                       [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                       placeholder="Attribuer une certification"
-                                       [hideSearch]="true"
+                        <natural-relations [main]="data.model"
+                                           [service]="licenseService"
+                                           [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
+                                           placeholder="Attribuer une certification"
+                                           [hideSearch]="true"
                         >
                             <ng-template let-item="item">
-                                <app-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></app-table-button>
+                                <natural-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></natural-table-button>
                             </ng-template>
-                        </app-relations>
+                        </natural-relations>
                     </div>
 
                     <div fxFlex="40" fxLayout="column">
                         <h2 class="mat-title">Tags</h2>
-                        <app-relations [main]="data.model"
-                                       [service]="userTagService"
-                                       [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                       [hideSearch]="true"
-                                       placeholder="Ajouter un tag"
+                        <natural-relations [main]="data.model"
+                                           [service]="userTagService"
+                                           [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
+                                           [hideSearch]="true"
+                                           placeholder="Ajouter un tag"
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                     <!-- TODO : link to users list filtred by tag -->
                                     <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                    <app-table-button [navigate]="['/admin/user', item.id]" [label]="item.name"></app-table-button>
+                                    <natural-table-button [navigate]="['/admin/user', item.id]" [label]="item.name"></natural-table-button>
                                 </div>
                             </ng-template>
-                        </app-relations>
+                        </natural-relations>
                     </div>
 
                     <div fxFlex="10" fxLayout="column">
@@ -235,7 +233,7 @@
                 <mat-divider></mat-divider>
 
                 <div fxLayout="column" fxLayoutGap="15px">
-                    <app-stamp [item]="data.model"></app-stamp>
+                    <natural-stamp [item]="data.model"></natural-stamp>
 
                     <!-- Welcome session date -->
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
@@ -252,7 +250,7 @@
                                         *ngIf="form.get('welcomeSessionDate').value"
                                         (click)="form.get('welcomeSessionDate').setValue(null); update()"
                                 >
-                                    <app-icon name="close"></app-icon>
+                                    <natural-icon name="close"></natural-icon>
                                 </button>
                             </div>
 
@@ -296,13 +294,13 @@
 
             <div fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="row" fxLayoutGap="30px" class="margin-top">
-                    <app-select fxFlex
-                                formControlName="account"
-                                placeholder="Compte"
-                                [service]="accountService"
-                                [showIcon]="false"
-                                [navigateTo]="['/admin/account', form.get('account').value?.id]"
-                    ></app-select>
+                    <natural-select fxFlex
+                                    formControlName="account"
+                                    placeholder="Compte"
+                                    [service]="accountService"
+                                    [showIcon]="false"
+                                    [navigateTo]="['/admin/account', form.get('account').value?.id]"
+                    ></natural-select>
                 </div>
 
                 <app-finances [user]="data.model"></app-finances>
@@ -311,12 +309,12 @@
         </mat-tab>
 
         <mat-tab label="Prestations et services" *ngIf="data.model.id">
-            <br class="margin-top"/>
+            <br class="margin-top" />
             <app-services [user]="data.model"></app-services>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()"></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()"></natural-detail-fixed-button>
 
 </div>

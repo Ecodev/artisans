@@ -1,31 +1,31 @@
 import { fakeAsync, flush, inject, TestBed } from '@angular/core/testing';
-import { HierarchicSelectorDialogService } from './hierarchic-selector-dialog.service';
+import { NaturalHierarchicSelectorDialogService } from './hierarchic-selector-dialog.service';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HierarchicSelectorModule } from '../hierarchic-selector.module';
+import { NaturalHierarchicSelectorModule } from '../hierarchic-selector.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
-describe('HierarchicSelectorDialogService', () => {
+describe('NaturalHierarchicSelectorDialogService', () => {
 
-    let dialog: HierarchicSelectorDialogService;
+    let dialog: NaturalHierarchicSelectorDialogService;
     let overlayContainer: OverlayContainer;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [
                 NoopAnimationsModule,
-                HierarchicSelectorModule,
+                NaturalHierarchicSelectorModule,
             ],
             providers: [
-                HierarchicSelectorDialogService,
+                NaturalHierarchicSelectorDialogService,
             ],
         });
     });
 
     beforeEach(inject([
-            HierarchicSelectorDialogService,
+            NaturalHierarchicSelectorDialogService,
             OverlayContainer,
         ],
-        (d: HierarchicSelectorDialogService, oc: OverlayContainer) => {
+        (d: NaturalHierarchicSelectorDialogService, oc: OverlayContainer) => {
             dialog = d;
             overlayContainer = oc;
         }));

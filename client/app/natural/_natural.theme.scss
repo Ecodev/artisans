@@ -10,8 +10,10 @@
 
 @import 'components/alert/alert.theme';
 @import 'modules/sidenav/sidenav.theme';
+@import 'modules/icon/icon.theme';
 
 @mixin natural($theme) {
-    @include alert($theme);
-    @include sidenav($theme);
+    @include natural-alert($theme);
+    @include natural-sidenav($theme);
+    @include natural-icon($theme);
 }

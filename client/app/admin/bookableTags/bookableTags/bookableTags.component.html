@@ -15,10 +15,10 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span appColumnsPickerColumn="color">Couleur</span>
-                    <span appColumnsPickerColumn="name">Nom</span>
-                </app-columns-picker>
+                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="color">Couleur</span>
+                    <span naturalColumnsPickerColumn="name">Nom</span>
+                </natural-columns-picker>
             </natural-search>
         </div>
 
@@ -38,10 +38,10 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <app-table-button [label]="element.name" [navigate]="['/admin/bookable-tag', element.id]"
+                        <natural-table-button [label]="element.name" [navigate]="['/admin/bookable-tag', element.id]"
 
                                           matTooltip="Éditer"
-                        ></app-table-button>
+                        ></natural-table-button>
                     </td>
                 </ng-container>
 
@@ -67,4 +67,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/bookable-tag/new']" icon="add" *ngIf="permissionsService.crud?.bookableTag.create"></app-fixed-button>
+<natural-fixed-button [routerLink]="['/admin/bookable-tag/new']" icon="add" *ngIf="permissionsService.crud?.bookableTag.create"></natural-fixed-button>

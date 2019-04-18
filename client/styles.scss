@@ -6,7 +6,9 @@ body {
     margin: 0;
 }
 
-html, body { height: 100%; }
+html, body {
+    height: 100%;
+}
 
 /**
  * Debug
@@ -104,4 +106,8 @@ mat-checkbox[wrap] {
 
 .line-break {
     white-space: pre-wrap;
+}
+
+.mat-snack-bar-container {
+    margin-top: 88px !important;
 }

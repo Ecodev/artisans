@@ -1,8 +1,8 @@
 import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
-import { LinkMutationService } from './link-mutation.service';
+import { NaturalLinkMutationService } from './link-mutation.service';
 import { MockApolloProvider } from '../../shared/testing/MockApolloProvider';
 
-describe('LinkMutationService', () => {
+describe('NaturalLinkMutationService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             providers: [
@@ -27,7 +27,7 @@ describe('LinkMutationService', () => {
         },
     };
 
-    it('should be able to link', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+    it('should be able to link', fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
         let actual: any = null;
         tick();
         service.link(license, item).subscribe(v => actual = v);
@@ -36,7 +36,7 @@ describe('LinkMutationService', () => {
         expect(actual).toEqual(expectedLink);
     })));
 
-    it('should be able to link in reverse order', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+    it('should be able to link in reverse order', fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
         let actual: any = null;
         tick();
         service.link(item, license).subscribe(v => actual = v);
@@ -45,16 +45,17 @@ describe('LinkMutationService', () => {
         expect(actual).toEqual(expectedLink);
     })));
 
-    it('should be able to link with extra variables', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual: any = null;
-        tick();
-        service.link(license, item, null, {isMain: true}).subscribe(v => actual = v);
-        tick();
+    it('should be able to link with extra variables',
+        fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
+            let actual: any = null;
+            tick();
+            service.link(license, item, null, {isMain: true}).subscribe(v => actual = v);
+            tick();
 
-        expect(actual).toEqual(expectedLink);
-    })));
+            expect(actual).toEqual(expectedLink);
+        })));
 
-    it('should be able to unlink', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
+    it('should be able to unlink', fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
         let actual: any = null;
         tick();
         service.unlink(license, item).subscribe(v => actual = v);
@@ -63,34 +64,37 @@ describe('LinkMutationService', () => {
         expect(actual).toEqual(expectedUnlink);
     })));
 
-    it('should be able to unlink in reverse order', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let actual: any = null;
-        tick();
-        service.unlink(item, license).subscribe(v => actual = v);
-        tick();
+    it('should be able to unlink in reverse order',
+        fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
+            let actual: any = null;
+            tick();
+            service.unlink(item, license).subscribe(v => actual = v);
+            tick();
 
-        expect(actual).toEqual(expectedUnlink);
-    })));
+            expect(actual).toEqual(expectedUnlink);
+        })));
 
-    it('should throw for non-existing link mutation', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let error: any = null;
-        tick();
-        service.link(license, company).subscribe(() => null, (e) => error = e);
-        tick();
+    it('should throw for non-existing link mutation',
+        fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
+            let error: any = null;
+            tick();
+            service.link(license, company).subscribe(() => null, (e) => error = e);
+            tick();
 
-        expect(error).not.toBeNull();
-        expect(error.message).toEqual('API does not allow to link License and Company');
-    })));
+            expect(error).not.toBeNull();
+            expect(error.message).toEqual('API does not allow to link License and Company');
+        })));
 
-    it('should throw for non-existing unlink mutation', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-        let error: any = null;
-        tick();
-        service.unlink(license, company).subscribe(() => null, (e) => error = e);
-        tick();
+    it('should throw for non-existing unlink mutation',
+        fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => {
+            let error: any = null;
+            tick();
+            service.unlink(license, company).subscribe(() => null, (e) => error = e);
+            tick();
 
-        expect(error).not.toBeNull();
-        expect(error.message).toEqual('API does not allow to unlink License and Company');
-    })));
+            expect(error).not.toBeNull();
+            expect(error.message).toEqual('API does not allow to unlink License and Company');
+        })));
 
     // TODO: Unfortunately we don't have a model that allow use to easily test semantic linking
     // TODO: This should be restored if/when we a model that allow it again, or it should be ported to OKpilot
@@ -102,23 +106,10 @@ describe('LinkMutationService', () => {
     //     },
     // };
     //
-    // it('should be able to link with specific semantic', fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-    //     let actual: any = null;
-    //     tick();
-    //     service.link(category1, category2, 'parent').subscribe(v => actual = v);
-    //     tick();
-    //
-    //     expect(actual).toEqual(expectedCategoryLink);
-    // })));
-    //
-    // it('should be able to link with specific semantic in reverse order and have different result',
-    //     fakeAsync(inject([LinkMutationService], (service: LinkMutationService) => {
-    //         let actual: any = null;
-    //         tick();
-    //         service.link(category2, category1, 'parent').subscribe(v => actual = v);
-    //         tick();
-    //
-    //         expect(actual).toEqual(expectedCategoryLink);
-    //     })),
-    // );
+    // it('should be able to link with specific semantic', fakeAsync(inject([NaturalLinkMutationService], (service:
+    // NaturalLinkMutationService) => { let actual: any = null; tick(); service.link(category1, category2, 'parent').subscribe(v => actual
+    // = v); tick();  expect(actual).toEqual(expectedCategoryLink); })));  it('should be able to link with specific semantic in reverse
+    // order and have different result', fakeAsync(inject([NaturalLinkMutationService], (service: NaturalLinkMutationService) => { let
+    // actual: any = null; tick(); service.link(category2, category1, 'parent').subscribe(v => actual = v); tick();
+    // expect(actual).toEqual(expectedCategoryLink); })), );
 });

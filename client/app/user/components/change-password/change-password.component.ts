@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
 import { NetworkActivityService } from '../../../shared/services/network-activity.service';
@@ -19,7 +19,7 @@ export class ChangePasswordComponent {
 
     constructor(route: ActivatedRoute,
                 private apollo: Apollo,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 private network: NetworkActivityService,
                 private router: Router) {
         this.token = route.snapshot.params.token;

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { MatDialog } from '@angular/material';
 import { CreateRefundComponent } from '../create-refund/create-refund.component';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -33,7 +33,7 @@ export class FinancesComponent extends AbstractController implements OnInit, OnC
         private route: ActivatedRoute,
         private expenseClaimService: ExpenseClaimService,
         private transactionLineService: TransactionLineService,
-        private alertService: AlertService,
+        private alertService: NaturalAlertService,
         private dialog: MatDialog) {
         super();
     }

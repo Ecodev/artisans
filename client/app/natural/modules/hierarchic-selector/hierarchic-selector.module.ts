@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HierarchicSelectorComponent } from './hierarchic-selector/hierarchic-selector.component';
+import { NaturalHierarchicSelectorComponent } from './hierarchic-selector/hierarchic-selector.component';
 import {
     MatButtonModule,
     MatCheckboxModule,
@@ -12,43 +12,43 @@ import {
     MatProgressSpinnerModule,
     MatTreeModule,
 } from '@angular/material';
-import { HierarchicSelectorDialogService } from './services/hierarchic-selector-dialog.service';
+import { NaturalHierarchicSelectorDialogService } from './services/hierarchic-selector-dialog.service';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { FormsModule } from '@angular/forms';
-import { HierarchicSelectorDialogComponent } from './hierarchic-selector-dialog/hierarchic-selector-dialog.component';
-import { IconModule } from '../../components/icon/icon.module';
+import { NaturalHierarchicSelectorDialogComponent } from './hierarchic-selector-dialog/hierarchic-selector-dialog.component';
 import { NaturalSearchModule } from '@ecodev/natural-search';
+import { NaturalIconModule } from '../icon/icon.module';
 
 @NgModule({
     declarations: [
-        HierarchicSelectorComponent,
-        HierarchicSelectorDialogComponent,
+        NaturalHierarchicSelectorComponent,
+        NaturalHierarchicSelectorDialogComponent,
     ],
     imports: [
         CommonModule,
+        FormsModule,
+        CdkTreeModule,
         MatCheckboxModule,
         MatFormFieldModule,
-        FormsModule,
         MatButtonModule,
-        CdkTreeModule,
         MatTreeModule,
         MatIconModule,
         MatInputModule,
         MatProgressSpinnerModule,
         MatDialogModule,
-        IconModule,
+        NaturalIconModule,
         MatChipsModule,
-        NaturalSearchModule
+        NaturalSearchModule,
     ],
     entryComponents: [
-        HierarchicSelectorDialogComponent,
+        NaturalHierarchicSelectorDialogComponent,
     ],
     providers: [
-        HierarchicSelectorDialogService,
+        NaturalHierarchicSelectorDialogService,
     ],
     exports: [
-        HierarchicSelectorComponent,
+        NaturalHierarchicSelectorComponent,
     ],
 })
-export class HierarchicSelectorModule {
+export class NaturalHierarchicSelectorModule {
 }

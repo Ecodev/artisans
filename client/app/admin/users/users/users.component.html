@@ -14,17 +14,17 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span appColumnsPickerColumn="balance">Solde</span>
-                    <span appColumnsPickerColumn="name">Nom</span>
-                    <span appColumnsPickerColumn="login">Login</span>
-                    <span appColumnsPickerColumn="age">Âge</span>
-                    <span appColumnsPickerColumn="creationDate">Créé le</span>
-                    <span appColumnsPickerColumn="updateDate">Modifié le</span>
-                    <span appColumnsPickerColumn="status">Status</span>
-                    <span appColumnsPickerColumn="flagWelcomeSessionDate">Séance d'accueil</span>
+                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="balance">Solde</span>
+                    <span naturalColumnsPickerColumn="name">Nom</span>
+                    <span naturalColumnsPickerColumn="login">Login</span>
+                    <span naturalColumnsPickerColumn="age">Âge</span>
+                    <span naturalColumnsPickerColumn="creationDate">Créé le</span>
+                    <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
+                    <span naturalColumnsPickerColumn="status">Status</span>
+                    <span naturalColumnsPickerColumn="flagWelcomeSessionDate">Séance d'accueil</span>
                     <span appColumnsPickerColumn="resignDate">Démission</span>
-                </app-columns-picker>
+                </natural-columns-picker>
             </natural-search>
 
         </div>
@@ -40,8 +40,8 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
-                            <app-table-button [label]="element.name" [navigate]="['/admin/user', element.id]" matTooltip="Éditer"
-                            ></app-table-button>
+                            <natural-table-button [label]="element.name" [navigate]="['/admin/user', element.id]" matTooltip="Éditer"
+                            ></natural-table-button>
                         </div>
                     </td>
                 </ng-container>
@@ -134,4 +134,4 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/user/new']" icon="add" *ngIf="permissionsService.crud?.user.create"></app-fixed-button>
+<natural-fixed-button [routerLink]="['/admin/user/new']" icon="add" *ngIf="permissionsService.crud?.user.create"></natural-fixed-button>

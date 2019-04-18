@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge } from 'lodash';
 import { FamilyUserService } from './family-user.service';
@@ -24,7 +24,7 @@ export class FamilyMemberComponent
     @Input() user: User['user'];
     @Input() readonly = false;
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 private userService: FamilyUserService,
                 router: Router,
                 route: ActivatedRoute,

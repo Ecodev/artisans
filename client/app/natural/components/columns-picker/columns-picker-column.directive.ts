@@ -1,9 +1,9 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnInit } from '@angular/core';
 
 @Directive({
-    selector: '[appColumnsPickerColumn]',
+    selector: '[naturalColumnsPickerColumn]',
 })
-export class ColumnsPickerColumnDirective implements AfterViewInit, OnInit {
+export class NaturalColumnsPickerColumnDirective implements AfterViewInit, OnInit {
     key: string;
 
     /**
@@ -28,7 +28,7 @@ export class ColumnsPickerColumnDirective implements AfterViewInit, OnInit {
      * This must be the column key as defined in matColumnDef
      */
     @Input()
-    set appColumnsPickerColumn(value: string) {
+    set naturalColumnsPickerColumn(value: string) {
         this.key = value;
     }
 

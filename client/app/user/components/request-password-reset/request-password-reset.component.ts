@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
 
 @Component({
@@ -18,7 +18,7 @@ export class RequestPasswordResetComponent {
     public sending = false;
 
     constructor(private apollo: Apollo,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 private router: Router,
                 private userService: UserService) {
         this.form = new FormGroup({login: new ExtendedFormControl('', userService.getFormValidators().login)});

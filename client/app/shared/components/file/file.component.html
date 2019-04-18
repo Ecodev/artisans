@@ -15,13 +15,13 @@
 >
 
     <div class="file-preview" *ngIf="filePreview">
-        <app-icon name="attachment" [size]="height * 0.33"></app-icon>
+        <natural-icon name="attachment" [size]="height * 0.33"></natural-icon>
         {{ filePreview | uppercase }}
     </div>
 
     <div class="action-overlay">
-        <app-icon name="cloud_upload" [size]="height * 0.66" *ngIf="action === 'upload'"></app-icon>
-        <app-icon name="get_app" [size]="height * 0.66" *ngIf="action === 'download'"></app-icon>
+        <natural-icon name="cloud_upload" [size]="height * 0.66" *ngIf="action === 'upload'"></natural-icon>
+        <natural-icon name="get_app" [size]="height * 0.66" *ngIf="action === 'download'"></natural-icon>
     </div>
 
 </a>

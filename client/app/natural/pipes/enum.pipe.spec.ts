@@ -1,9 +1,9 @@
-import { EnumPipe } from './enum.pipe';
+import { NaturalEnumPipe } from './enum.pipe';
 import { Observable, of } from 'rxjs';
-import { EnumService, IEnum } from '../services/enum.service';
+import { NaturalEnumService, IEnum } from '../services/enum.service';
 import { inject, TestBed } from '@angular/core/testing';
 
-class EnumServiceStub {
+class NaturalEnumServiceStub {
 
     public get(name: string): Observable<IEnum[]> {
         return of([
@@ -23,25 +23,25 @@ class EnumServiceStub {
     }
 }
 
-describe('EnumPipe', () => {
+describe('NaturalEnumPipe', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [],
             providers: [
                 {
-                    provide: EnumPipe,
-                    useClass: EnumPipe,
+                    provide: NaturalEnumPipe,
+                    useClass: NaturalEnumPipe,
                 },
                 {
-                    provide: EnumService,
-                    useClass: EnumServiceStub,
+                    provide: NaturalEnumService,
+                    useClass: NaturalEnumServiceStub,
                 },
             ],
         });
     });
 
-    it('can get name of enum value', inject([EnumPipe], (pipe: EnumPipe) => {
+    it('can get name of enum value', inject([NaturalEnumPipe], (pipe: NaturalEnumPipe) => {
         expect(pipe).toBeTruthy();
 
         pipe.transform('val1', 'enumName').subscribe(name => {

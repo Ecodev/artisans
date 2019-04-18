@@ -6,7 +6,7 @@ import { BookingService } from '../../../admin/bookings/services/booking.service
 import { BookingPartialInput, BookingStatus } from '../../generated-types';
 
 @Component({
-    selector: 'app-select-admin-approved-button',
+    selector: 'natural-select-admin-approved-button',
     templateUrl: './select-admin-approved-button.component.html',
 })
 export class SelectAdminApprovedButtonComponent implements OnInit {

@@ -1,12 +1,12 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavContainer } from '@angular/material';
-import { SidenavService } from '../../sidenav.service';
+import { NaturalSidenavService } from '../../sidenav.service';
 
 @Component({
-    selector: 'app-sidenav-container',
+    selector: 'natural-sidenav-container',
     templateUrl: './sidenav-container.component.html',
     styleUrls: ['./sidenav-container.component.scss'],
-    providers: [SidenavService],
+    providers: [NaturalSidenavService],
 })
 export class SidenavContainerComponent implements OnInit, OnDestroy {
 
@@ -15,19 +15,19 @@ export class SidenavContainerComponent implements OnInit, OnDestroy {
     @ViewChild(MatSidenav) private menuSidenav: MatSidenav;
     @HostBinding('attr.no-scroll') @Input() private noScroll: boolean;
 
-    constructor(public sidenavService: SidenavService) {
+    constructor(public naturalSidenavService: NaturalSidenavService) {
     }
 
     ngOnInit() {
-        this.sidenavService.init(this.name, this.menuContainer, this.menuSidenav, this);
+        this.naturalSidenavService.init(this.name, this.menuContainer, this.menuSidenav, this);
     }
 
     ngOnDestroy() {
-        this.sidenavService.destroy(this.name);
+        this.naturalSidenavService.destroy(this.name);
     }
 
     public toggle() {
-        this.sidenavService.toggle();
+        this.naturalSidenavService.toggle();
     }
 
 }

@@ -13,15 +13,15 @@
                             (selectionChange)="search($event)"
                             [multipleGroups]="true"
             >
-                <app-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span appColumnsPickerColumn="name">Nom</span>
-                    <span appColumnsPickerColumn="owner">Utilisateur</span>
-                    <span appColumnsPickerColumn="date">Dernière modification</span>
-                    <span appColumnsPickerColumn="status">Status</span>
-                    <span appColumnsPickerColumn="type">Type</span>
-                    <span appColumnsPickerColumn="remarks">Remarques</span>
-                    <span appColumnsPickerColumn="amount">Montant</span>
-                </app-columns-picker>
+                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="name">Nom</span>
+                    <span naturalColumnsPickerColumn="owner">Utilisateur</span>
+                    <span naturalColumnsPickerColumn="date">Dernière modification</span>
+                    <span naturalColumnsPickerColumn="status">Status</span>
+                    <span naturalColumnsPickerColumn="type">Type</span>
+                    <span naturalColumnsPickerColumn="remarks">Remarques</span>
+                    <span naturalColumnsPickerColumn="amount">Montant</span>
+                </natural-columns-picker>
             </natural-search>
         </div>
 
@@ -34,7 +34,7 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <app-table-button [label]="element.name" [navigate]="[element.id]" matTooltip="Éditer"></app-table-button>
+                        <natural-table-button [label]="element.name" [navigate]="[element.id]" matTooltip="Éditer"></natural-table-button>
                     </td>
                 </ng-container>
 
@@ -44,10 +44,10 @@
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
                             <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
-                            <app-table-button [label]="element.owner?.name" [navigate]="['/admin/user/', element.owner?.id]"
+                            <natural-table-button [label]="element.owner?.name" [navigate]="['/admin/user/', element.owner?.id]"
 
                                               matTooltip="Éditer"
-                            ></app-table-button>
+                            ></natural-table-button>
                         </div>
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!element.owner">
@@ -110,5 +110,5 @@
     </div>
 </div>
 
-<app-fixed-button [routerLink]="['/admin/expense-claim/new']" icon="add" *ngIf="permissionsService.crud?.expenseClaim.create"
-></app-fixed-button>
+<natural-fixed-button [routerLink]="['/admin/expense-claim/new']" icon="add" *ngIf="permissionsService.crud?.expenseClaim.create"
+></natural-fixed-button>

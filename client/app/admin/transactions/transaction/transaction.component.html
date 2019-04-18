@@ -1,8 +1,8 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouvelle transaction" label="Transaction" [model]="data.model" [listRoute]="['admin', 'transaction-line']">
+    <natural-detail-header newLabel="Nouvelle transaction" label="Transaction" [model]="data.model" [listRoute]="['admin', 'transaction-line']">
         <app-money [amount]="data.model.amount" sizeClass="mat-display-1"></app-money>
-    </app-detail-header>
+    </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -144,21 +144,21 @@
 
                 <mat-divider></mat-divider>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
 
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-fixed-button class="detail-speed-dial"
+    <natural-fixed-button class="detail-speed-dial"
                       (click)="save()"
                       icon="save"
                       color="accent"
                       matTooltip="Sauvegarder"
                       matTooltipPosition="left"
                       [color]="form.invalid ? 'warn' : 'accent'"
-    ></app-fixed-button>
+    ></natural-fixed-button>
 
 </div>
 

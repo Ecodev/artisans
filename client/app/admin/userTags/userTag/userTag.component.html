@@ -1,11 +1,10 @@
 <div [formGroup]="form" class="detail-body">
 
-    <app-detail-header newLabel="Nouveau tag d'utilisateur"
+    <natural-detail-header newLabel="Nouveau tag d'utilisateur"
                        label="Tag d'utilisateur"
                        [model]="data.model"
                        [listRoute]="['admin', 'user-tag']"
-                       [showAvatar]="true"
-    ></app-detail-header>
+    ></natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab label="Général">
@@ -23,17 +22,17 @@
                         </mat-form-field>
 
                         <h2 class="mat-title">Utilisateurs tagués</h2>
-                        <app-relations [main]="data.model"
+                        <natural-relations [main]="data.model"
                                        [service]="userService"
                                        [filter]="{groups: [{conditions: [{userTags: {have: {values: [data.model.id]}}}]}]}"
                                        placeholder="Taguer un utilisateur"
                         >
                             <ng-template let-item="item">
                                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <app-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></app-table-button>
+                                    <natural-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></natural-table-button>
                                 </div>
                             </ng-template>
-                        </app-relations>
+                        </natural-relations>
 
                     </div>
 
@@ -42,14 +41,14 @@
                     </div>
                 </div>
 
-                <app-stamp [item]="data.model"></app-stamp>
+                <natural-stamp [item]="data.model"></natural-stamp>
 
             </div>
         </mat-tab>
 
     </mat-tab-group>
 
-    <app-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
-    ></app-detail-fixed-button>
+    <natural-detail-fixed-button *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    ></natural-detail-fixed-button>
 
 </div>

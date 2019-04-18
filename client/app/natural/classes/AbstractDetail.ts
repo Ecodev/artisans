@@ -7,7 +7,7 @@ import { omit } from 'lodash';
 import { AbstractController } from '../../shared/components/AbstractController';
 import { AbstractModelService, VariablesWithInput } from '../services/abstract-model.service';
 import { Literal } from '../types/types';
-import { AlertService } from '../components/alert/alert.service';
+import { NaturalAlertService } from '../components/alert/alert.service';
 
 export class AbstractDetail<Tone,
     Vone,
@@ -28,7 +28,7 @@ export class AbstractDetail<Tone,
 
     constructor(private key: string,
                 public service: AbstractModelService<Tone, Vone, any, any, Tcreate, Vcreate, Tupdate, Vupdate, Tdelete>,
-                protected alertService: AlertService,
+                protected alertService: NaturalAlertService,
                 protected router: Router,
                 protected route: ActivatedRoute,
     ) {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
-import { AlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import {
     BookableTag,
     BookableTagVariables,
@@ -27,7 +27,7 @@ export class BookableTagComponent
         UpdateBookableTagVariables,
         DeleteBookableTags> {
 
-    constructor(alertService: AlertService,
+    constructor(alertService: NaturalAlertService,
                 bookableTagService: BookableTagService,
                 router: Router,
                 route: ActivatedRoute,

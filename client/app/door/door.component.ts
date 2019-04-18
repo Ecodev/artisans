@@ -4,7 +4,7 @@ import { AbstractController } from '../shared/components/AbstractController';
 import { UserService } from '../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Literal } from '../natural/types/types';
-import { AlertService } from '../natural/components/../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../natural/components/../../natural/components/alert/alert.service';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class DoorComponent extends AbstractController implements OnInit {
 
     constructor(public doorService: DoorService,
                 private userService: UserService,
-                private alertService: AlertService,
+                private alertService: NaturalAlertService,
                 private route: ActivatedRoute) {
         super();
     }

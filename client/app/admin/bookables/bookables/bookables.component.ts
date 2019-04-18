@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AlertService } from '../../../natural/components/alert/alert.service';
-import { PersistenceService } from '../../../natural/services/persistence.service';
+import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalPersistenceService } from '../../../natural/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { AbstractList } from '../../../natural/classes/AbstractList';
 import { Bookables, BookablesVariables } from '../../../shared/generated-types';
@@ -20,8 +20,8 @@ export class BookablesComponent extends AbstractList<Bookables['bookables'], Boo
     constructor(route: ActivatedRoute,
                 router: Router,
                 bookableService: BookableService,
-                alertService: AlertService,
-                persistenceService: PersistenceService,
+                alertService: NaturalAlertService,
+                persistenceService: NaturalPersistenceService,
                 naturalSearchConfigurationService: NaturalSearchConfigurationService,
                 public permissionsService: PermissionsService,
                 injector: Injector

@@ -97,7 +97,8 @@
             <table mat-table [dataSource]="runningServicesDS">
                 <tr mat-header-row *matHeaderRowDef="servicesColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: servicesColumns;"></tr>
-                <tr mat-footer-row *matFooterRowDef="servicesColumns"></tr>
+                <!-- TODO : compute correctly totalPeriodicPrice considering bookable shared usages -->
+                <!-- <tr mat-footer-row *matFooterRowDef="servicesColumns"></tr>-->
 
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef>Nom</th>

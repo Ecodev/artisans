@@ -15,6 +15,17 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 })
 export class UsersComponent extends AbstractList<Users['users'], UsersVariables> implements OnInit {
 
+    public initialColumns = [
+        'balance',
+        'name',
+        'login',
+        'age',
+        'creationDate',
+        'updateDate',
+        'status',
+        'flagWelcomeSessionDate',
+    ];
+
     constructor(route: ActivatedRoute,
                 router: Router,
                 private userService: UserService,
@@ -40,6 +51,7 @@ export class UsersComponent extends AbstractList<Users['users'], UsersVariables>
             user = u;
         });
     }
+
     public activate(user) {
         this.userService.activate(user.id).subscribe((u) => {
             user = u;

@@ -270,7 +270,7 @@
 
                     <div *ngIf="data.model.resignDate && data.model.status == 'archived'">
                         <span class="mat-body-2">Démission le :</span>
-                        {{ data.model.resignDate  | date: 'mediumDate' }}
+                        {{ data.model.resignDate  | date: 'mediumDate' }} - {{ data.model.resignDate | date: 'shortTime' }}
                     </div>
                 </div>
 

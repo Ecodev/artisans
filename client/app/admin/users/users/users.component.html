@@ -21,9 +21,9 @@
                     <span naturalColumnsPickerColumn="age">Âge</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
                     <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
+                    <span naturalColumnsPickerColumn="resignDate">Date démission</span>
                     <span naturalColumnsPickerColumn="status">Status</span>
                     <span naturalColumnsPickerColumn="flagWelcomeSessionDate">Séance d'accueil</span>
-                    <span appColumnsPickerColumn="resignDate">Démission</span>
                 </natural-columns-picker>
             </natural-search>
 
@@ -99,10 +99,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="resignDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Démission</th>
-                    <td mat-cell *matCellDef="let element">
-                        {{ element.resignDate | date: 'mediumDate' }}
-                    </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date démission</th>
+                    <td mat-cell *matCellDef="let element">{{ element.resignDate | date: 'mediumDate' }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">

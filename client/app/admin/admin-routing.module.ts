@@ -288,6 +288,7 @@ const routes: Routes = [
                             data: {
                                 title: 'Membres inactifs et archivés',
                                 contextVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
+                                contextColumns: ['balance', 'name', 'status', 'creationDate', 'resignDate'],
                             },
                         },
 

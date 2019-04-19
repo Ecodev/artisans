@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {
+    DateAdapter,
     MatAutocompleteModule,
     MatButtonModule,
     MatButtonToggleModule,
@@ -27,6 +28,7 @@ import {
     MatTooltipModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TimezonePreservingDateAdapter } from '../services/timezone.preserving.date.adapter';
 
 const list = [
     MatButtonModule,
@@ -64,6 +66,12 @@ const list = [
 @NgModule({
     imports: [...list],
     exports: [...list],
+    providers: [
+        {
+            provide: DateAdapter,
+            useClass: TimezonePreservingDateAdapter,
+        },
+    ],
 })
 export class MaterialModule {
 }

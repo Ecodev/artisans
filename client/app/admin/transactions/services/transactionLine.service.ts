@@ -16,7 +16,6 @@ import {
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
-import {TimezonePreservingDateAdapter} from '../../../shared/services/timezone.preserving.date.adapter';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -42,9 +41,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
     any,
     null> {
 
-    constructor(apollo: Apollo,
-                private timezonePreservingDateAdapter: TimezonePreservingDateAdapter,
-    ) {
+    constructor(apollo: Apollo) {
         super(apollo,
             'transactionLine',
             transactionLineQuery,
@@ -63,7 +60,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
             debit: null,
             bookable: null,
             isReconciled: false,
-            transactionDate: this.timezonePreservingDateAdapter.today(),
+            transactionDate: new Date(),
             transactionTag: null,
         };
     }

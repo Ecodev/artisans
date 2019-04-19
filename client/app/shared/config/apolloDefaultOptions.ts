@@ -4,9 +4,8 @@ import { HttpBatchLink } from 'apollo-angular-link-http-batch';
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
-import { isObject } from 'lodash';
-import { Literal } from '../../natural/types/types';
-import { NaturalAlertService } from '../../natural/components/../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../natural/components/alert/alert.service';
+import { hasFilesAndProcessDate } from '../../natural/classes/ApolloUtils';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
@@ -16,24 +15,6 @@ export const apolloDefaultOptions: DefaultOptions = {
         fetchPolicy: 'cache-and-network',
     },
 };
-
-/**
- * Detect if the query has file to be uploaded or not
- */
-function hasFiles(node: Literal): boolean {
-    if (!isObject(node)) {
-        return false;
-    }
-
-    return Object.keys(node).some((key) => {
-        const value = node[key];
-
-        return (typeof File !== 'undefined' && value instanceof File) ||
-               (typeof Blob !== 'undefined' && value instanceof Blob) ||
-               (typeof FileList !== 'undefined' && node[key] instanceof FileList) ||
-               hasFiles(value);
-    });
-}
 
 /**
  * Create an Apollo link to show alert in case of error, and message if network is down
@@ -85,7 +66,7 @@ export function createApolloLink(networkActivityService: NetworkActivityService,
 
     // If query has no file, batch it, otherwise upload only that query
     const httpLink = ApolloLink.split(
-        ({variables}) => hasFiles(variables),
+        ({variables}) => hasFilesAndProcessDate(variables),
         uploadInterceptor.concat(createUploadLink(options)),
         httpBatchLink.create(options),
     );

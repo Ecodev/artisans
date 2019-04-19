@@ -28,7 +28,7 @@ import {
     MatTooltipModule,
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { TimezonePreservingDateAdapter } from '../services/timezone.preserving.date.adapter';
+import { SwissParsingDateAdapter } from '../services/swiss-parsing-date-adapter.service';
 
 const list = [
     MatButtonModule,
@@ -69,7 +69,7 @@ const list = [
     providers: [
         {
             provide: DateAdapter,
-            useClass: TimezonePreservingDateAdapter,
+            useClass: SwissParsingDateAdapter,
         },
     ],
 })

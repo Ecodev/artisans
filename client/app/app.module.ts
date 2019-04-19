@@ -15,7 +15,7 @@ import {
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
-import { TimezonePreservingDateAdapter } from './shared/services/timezone.preserving.date.adapter';
+import { SwissParsingDateAdapter } from './shared/services/swiss-parsing-date-adapter.service';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DoorComponent } from './door/door.component';
@@ -119,7 +119,7 @@ const iconsConfig: NaturalIconsConfig = {
         MatIconRegistry,
         {
             provide: DateAdapter,
-            useClass: TimezonePreservingDateAdapter,
+            useClass: SwissParsingDateAdapter,
         },
         {
             // Use OnDirty instead of default OnTouched, that allows to validate while editing. Touched is updated after blur.

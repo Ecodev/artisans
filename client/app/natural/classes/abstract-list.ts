@@ -24,42 +24,29 @@ import { NaturalAlertService } from '../modules/alert/alert.service';
 export class NaturalAbstractList<Tall, Vall extends QueryVariables> extends NaturalAbstractController implements OnInit, OnDestroy {
 
     /**
-     * Contextual variables to apply on a list
-     */
-    @Input() set contextVariables(value) {
-        this.variablesManager.set('contextVariables', value);
-    }
-
-    /**
      * Contextual initial columns
      * By now can't by changed after initialization
      */
     @Input() contextColumns: string[];
-
     @Input() contextService;
-
     /**
      * Wherever search should be loaded from url/storage and persisted in it too.
      */
     @Input() persistSearch = true;
-
     /**
      * Columns list after interaction with <natural-columns-picker>
      */
     public selectedColumns: string[] = [];
-
     /**
      * Initial columns on component init
      */
     public initialColumns: string[];
-
     /**
      *
      */
     public dataSource: NaturalDataSource;
     public selection: SelectionModel<Tall>;
     public bulkActionSelected: string | null;
-
     public variablesManager: NaturalQueryVariablesManager<Vall> = new NaturalQueryVariablesManager<Vall>();
     public naturalSearchConfig: NaturalSearchConfiguration | null;
     public naturalSearchSelections: NaturalSearchSelections | null = [[]];
@@ -75,15 +62,10 @@ export class NaturalAbstractList<Tall, Vall extends QueryVariables> extends Natu
         100,
         200,
     ];
-
     protected defaultPagination: PaginationInput = {
         pageIndex: 0,
         pageSize: 25,
     };
-
-    public static hasSelections(naturalSearchSelections): boolean {
-        return !!naturalSearchSelections.filter(e => e.length).length; // because empty natural search return [[]]
-    }
 
     constructor(protected key: string,
                 protected service: NaturalAbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
@@ -100,6 +82,17 @@ export class NaturalAbstractList<Tall, Vall extends QueryVariables> extends Natu
     }
 
     /**
+     * Contextual variables to apply on a list
+     */
+    @Input() set contextVariables(value) {
+        this.variablesManager.set('contextVariables', value);
+    }
+
+    public static hasSelections(naturalSearchSelections): boolean {
+        return !!naturalSearchSelections.filter(e => e.length).length; // because empty natural search return [[]]
+    }
+
+    /**
      * If change, check DocumentsComponent that overrides this function without calling super.ngOnInit().
      */
     ngOnInit() {
@@ -110,41 +103,6 @@ export class NaturalAbstractList<Tall, Vall extends QueryVariables> extends Natu
 
         this.dataSource = new NaturalDataSource(this.getDataObservable());
         this.selection = new SelectionModel<Tall>(true, []);
-    }
-
-    /**
-     * Initialize from routing or input context.
-     * Uses data provided by router as route.data.contextXYZ
-     * Uses data provided by inputs in usage <natural-xxx [contextXXX]...>
-     */
-    protected initFromContext() {
-
-        // Variables
-        if (this.route.snapshot.data.contextVariables) {
-            this.variablesManager.set('contextVariables', this.route.snapshot.data.contextVariables);
-        }
-
-        // Columns
-        if (this.contextColumns) {
-            this.initialColumns = this.contextColumns;
-        }
-
-        if (this.route.snapshot.data.contextColumns) {
-            this.initialColumns = this.route.snapshot.data.contextColumns;
-        }
-
-        if (!this.injector && (this.routeData.contextService || this.contextService)) {
-            console.error('Injector is required to provide a context service in a component that extends AbstractListService');
-        }
-
-        // Service
-        if (this.injector && this.routeData.contextService) {
-            this.service = this.injector.get<any>(this.routeData.contextService);
-        }
-
-        if (this.injector && this.contextService) {
-            this.service = this.injector.get<any>(this.contextService);
-        }
     }
 
     /**
@@ -239,6 +197,41 @@ export class NaturalAbstractList<Tall, Vall extends QueryVariables> extends Natu
         }
 
         this[this.bulkActionSelected]();
+    }
+
+    /**
+     * Initialize from routing or input context.
+     * Uses data provided by router as route.data.contextXYZ
+     * Uses data provided by inputs in usage <natural-xxx [contextXXX]...>
+     */
+    protected initFromContext() {
+
+        // Variables
+        if (this.route.snapshot.data.contextVariables) {
+            this.variablesManager.set('contextVariables', this.route.snapshot.data.contextVariables);
+        }
+
+        // Columns
+        if (this.contextColumns) {
+            this.initialColumns = this.contextColumns;
+        }
+
+        if (this.route.snapshot.data.contextColumns) {
+            this.initialColumns = this.route.snapshot.data.contextColumns;
+        }
+
+        if (!this.injector && (this.routeData.contextService || this.contextService)) {
+            console.error('Injector is required to provide a context service in a component that extends AbstractListService');
+        }
+
+        // Service
+        if (this.injector && this.routeData.contextService) {
+            this.service = this.injector.get<any>(this.routeData.contextService);
+        }
+
+        if (this.injector && this.contextService) {
+            this.service = this.injector.get<any>(this.contextService);
+        }
     }
 
     protected getDataObservable(): Observable<Tall> {

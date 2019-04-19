@@ -7,7 +7,7 @@ import { NaturalTableButtonComponent } from './table-button.component';
 
 @NgModule({
     declarations: [
-        NaturalTableButtonComponent
+        NaturalTableButtonComponent,
     ],
     imports: [
         CommonModule,
@@ -15,9 +15,9 @@ import { NaturalTableButtonComponent } from './table-button.component';
         MatButtonModule,
         NaturalIconModule,
     ],
-    exports : [
-        NaturalTableButtonComponent
-    ]
+    exports: [
+        NaturalTableButtonComponent,
+    ],
 })
 export class NaturalTableButtonModule {
 }

@@ -3,11 +3,11 @@ import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 
 import { map } from 'rxjs/operators';
 import { intersection } from 'lodash';
-import { HierarchicFlatNode } from '../classes/FlatNode';
-import { HierarchicModelNode } from '../classes/ModelNode';
-import { HierarchicFilterConfiguration, HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
-import { QueryVariables, NaturalQueryVariablesManager } from '../../../classes/query-variable-manager';
-import { NaturalHierarchicConfiguration } from '../classes/HierarchicConfiguration';
+import { HierarchicFlatNode } from '../classes/flat-node';
+import { HierarchicModelNode } from '../classes/model-node';
+import { HierarchicFilterConfiguration, HierarchicFiltersConfiguration } from '../classes/hierarchic-filters-configuration';
+import { NaturalQueryVariablesManager, QueryVariables } from '../../../classes/query-variable-manager';
+import { NaturalHierarchicConfiguration } from '../classes/hierarchic-configuration';
 
 export interface OrganizedModelSelection {
     [key: string]: any[];
@@ -235,7 +235,7 @@ export class NaturalHierarchicSelectorService {
     private getServiceFilter(flatNode: HierarchicFlatNode | null,
                              config: NaturalHierarchicConfiguration,
                              contextFilter: HierarchicFilterConfiguration['filter'] | null = null,
-                             allDeeps = false
+                             allDeeps = false,
     ): HierarchicFilterConfiguration['filter'] | null {
 
         const fieldCondition = {};

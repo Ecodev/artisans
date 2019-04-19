@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { NaturalHierarchicConfiguration } from './HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from './hierarchic-configuration';
 
 export class HierarchicModelNode {
 

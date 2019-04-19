@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { clone } from 'lodash';
-import { HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
+import { HierarchicFiltersConfiguration } from '../classes/hierarchic-filters-configuration';
 
 @Component({
     templateUrl: './hierarchic-selector-dialog.component.html',

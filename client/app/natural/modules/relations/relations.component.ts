@@ -22,8 +22,8 @@ import { PageEvent } from '@angular/material';
 import { NaturalAbstractController } from '../../classes/abstract-controller';
 import { NaturalDataSource } from '../../classes/data-source';
 import { NaturalHierarchicSelectorDialogService } from '../hierarchic-selector/services/hierarchic-selector-dialog.service';
-import { PaginationInput, QueryVariables, NaturalQueryVariablesManager } from '../../classes/query-variable-manager';
-import { NaturalHierarchicConfiguration } from '../hierarchic-selector/classes/HierarchicConfiguration';
+import { NaturalQueryVariablesManager, PaginationInput, QueryVariables } from '../../classes/query-variable-manager';
+import { NaturalHierarchicConfiguration } from '../hierarchic-selector/classes/hierarchic-configuration';
 
 /**
  * Custom template usage :
@@ -122,18 +122,15 @@ export class NaturalRelationsComponent extends NaturalAbstractController impleme
     ];
     public onChange;
     public onTouched;
-
-    /**
-     * Observable variables/options for listing service usage and apollo watchQuery
-     */
-    private variablesManager: NaturalQueryVariablesManager<QueryVariables> = new NaturalQueryVariablesManager();
-
     public pageSizeOptions = [5, 10, 50, 100];
-
     protected defaultPagination: PaginationInput = {
         pageIndex: 0,
         pageSize: 25,
     };
+    /**
+     * Observable variables/options for listing service usage and apollo watchQuery
+     */
+    private variablesManager: NaturalQueryVariablesManager<QueryVariables> = new NaturalQueryVariablesManager();
 
     constructor(private linkMutationService: NaturalLinkMutationService,
                 private hierarchicSelectorDialog: NaturalHierarchicSelectorDialogService,

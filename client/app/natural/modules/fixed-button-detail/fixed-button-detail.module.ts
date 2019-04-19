@@ -5,14 +5,14 @@ import { NaturalFixedButtonDetailComponent } from './fixed-button-detail.compone
 
 @NgModule({
     declarations: [
-        NaturalFixedButtonDetailComponent
+        NaturalFixedButtonDetailComponent,
     ],
     imports: [
         CommonModule,
-        NaturalFixedButtonModule
+        NaturalFixedButtonModule,
     ],
     exports: [
-        NaturalFixedButtonDetailComponent
+        NaturalFixedButtonDetailComponent,
     ],
 })
 export class NaturalFixedButtonDetailModule {

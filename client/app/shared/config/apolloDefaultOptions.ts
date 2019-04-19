@@ -5,7 +5,7 @@ import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
 import { NaturalAlertService } from '../../natural/modules/alert/alert.service';
-import { hasFilesAndProcessDate } from '../../natural/classes/ApolloUtils';
+import { hasFilesAndProcessDate } from '../../natural/classes/apollo-utils';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {

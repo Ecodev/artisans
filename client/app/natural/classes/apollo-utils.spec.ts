@@ -1,4 +1,4 @@
-import { hasFilesAndProcessDate } from './ApolloUtils';
+import { hasFilesAndProcessDate } from './apollo-utils';
 
 describe('hasFilesAndProcessDate', () => {
     // Use pattern because tests may be executed in different time zones

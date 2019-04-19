@@ -4,16 +4,16 @@ import { NaturalHierarchicSelectorService, OrganizedModelSelection } from '../se
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
-import { HierarchicFlatNode } from '../classes/FlatNode';
-import { HierarchicModelNode } from '../classes/ModelNode';
+import { HierarchicFlatNode } from '../classes/flat-node';
+import { HierarchicModelNode } from '../classes/model-node';
 import { takeUntil } from 'rxjs/operators';
-import { HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
+import { HierarchicFiltersConfiguration } from '../classes/hierarchic-filters-configuration';
 import { NaturalAbstractController } from '../../../classes/abstract-controller';
 import { Literal } from '../../../types/types';
 import { NaturalUtility } from '../../../classes/utility';
 import { toGraphQLDoctrineFilter } from '@ecodev/natural-search';
 import { NaturalAbstractList } from '../../../classes/abstract-list';
-import { NaturalHierarchicConfiguration } from '../classes/HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from '../classes/hierarchic-configuration';
 
 @Component({
     selector: 'natural-hierarchic-selector',
@@ -226,6 +226,16 @@ export class NaturalHierarchicSelectorComponent extends NaturalAbstractControlle
         return this.createFlatNode(node, level);
     }
 
+    public search(selections) {
+        if (NaturalAbstractList.hasSelections(selections)) {
+            const filter = toGraphQLDoctrineFilter([], selections);
+            const variables = {filter: filter};
+            this.hierarchicSelectorService.search(variables, this.filters);
+        } else {
+            this.loadRoots();
+        }
+    }
+
     private loadRoots(): void {
         this.loading = true;
         this.flatNodeMap = new Map<string, HierarchicFlatNode>();
@@ -338,16 +348,6 @@ export class NaturalHierarchicSelectorComponent extends NaturalAbstractControlle
         this.flatNodeMap.set(key, flatNode);
 
         return flatNode;
-    }
-
-    public search(selections) {
-        if (NaturalAbstractList.hasSelections(selections)) {
-            const filter = toGraphQLDoctrineFilter([], selections);
-            const variables = {filter: filter};
-            this.hierarchicSelectorService.search(variables, this.filters);
-        } else {
-            this.loadRoots();
-        }
     }
 
     /**

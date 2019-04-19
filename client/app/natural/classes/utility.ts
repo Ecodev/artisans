@@ -77,11 +77,11 @@ export class NaturalUtility {
             return;
         }
 
-        Object.keys(obj).forEach(function (key) {
+        Object.keys(obj).forEach(function(key) {
             delete obj[key];
         });
 
-        Object.keys(newObj).forEach(function (key) {
+        Object.keys(newObj).forEach(function(key) {
             obj[key] = newObj[key];
         });
 
@@ -101,7 +101,7 @@ export class NaturalUtility {
     public static hexToRgb(hex: string): { r: number, g: number, b: number } {
         // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
         const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-        hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
             return r + r + g + g + b + b;
         });
 

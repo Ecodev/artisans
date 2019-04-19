@@ -33,7 +33,6 @@ export class NaturalColumnsPickerComponent implements AfterViewInit {
 
     public displayedColumns: NaturalColumnsPickerColumnDirective[];
 
-
     constructor(private changeDetectorRef: ChangeDetectorRef) {
 
     }

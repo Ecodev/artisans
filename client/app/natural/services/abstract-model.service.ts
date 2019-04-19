@@ -56,24 +56,6 @@ export abstract class NaturalAbstractModelService<Tone,
         }
     }
 
-    /**
-     * Return empty object with some default values from server perspective
-     *
-     * This is typically useful when showing a form for creation
-     */
-    protected getDefaultForServer(): Vcreate['input'] | Vupdate['input'] {
-        return {};
-    }
-
-    /**
-     * Return empty object with some default values from frontend perspective
-     *
-     * Where empty object must respect graphql XXXInput type, may need some default values for other fields
-     */
-    protected getDefaultForClient(): Literal {
-        return {};
-    }
-
     public getConsolidatedForClient(): Literal {
         return Object.assign(this.getDefaultForServer(), this.getDefaultForClient());
     }
@@ -455,6 +437,44 @@ export abstract class NaturalAbstractModelService<Tone,
     }
 
     /**
+     * Return an object that match the GraphQL input type.
+     * It creates an object with manually filled data and add uncompleted data (like required attributes that can be empty strings)
+     */
+    public getInput(object: Literal): Vcreate['input'] | Vupdate['input'] {
+
+        // Convert relations to their IDs for mutation
+        object = NaturalUtility.relationsToIds(object);
+
+        // Pick only attributes that we can find in the empty object
+        // In other words, prevent to select data that has unwanted attributes
+        const emptyObject = this.getDefaultForServer();
+        let input = pick(object, Object.keys(emptyObject));
+
+        // Complete a potentially uncompleted object with default values
+        input = defaults(input, emptyObject);
+
+        return input;
+    }
+
+    /**
+     * Return empty object with some default values from server perspective
+     *
+     * This is typically useful when showing a form for creation
+     */
+    protected getDefaultForServer(): Vcreate['input'] | Vupdate['input'] {
+        return {};
+    }
+
+    /**
+     * Return empty object with some default values from frontend perspective
+     *
+     * Where empty object must respect graphql XXXInput type, may need some default values for other fields
+     */
+    protected getDefaultForClient(): Literal {
+        return {};
+    }
+
+    /**
      * Get item key to be used as cache index : action-123
      */
     protected getKey(object: Literal) {
@@ -496,26 +516,6 @@ export abstract class NaturalAbstractModelService<Tone,
     protected mapDelete(result): OperatorFunction<FetchResult<any>, Tdelete> {
         const name = 'delete' + NaturalUtility.makePlural(NaturalUtility.upperCaseFirstLetter(this.name));
         return result.data[name];
-    }
-
-    /**
-     * Return an object that match the GraphQL input type.
-     * It creates an object with manually filled data and add uncompleted data (like required attributes that can be empty strings)
-     */
-    public getInput(object: Literal): Vcreate['input'] | Vupdate['input'] {
-
-        // Convert relations to their IDs for mutation
-        object = NaturalUtility.relationsToIds(object);
-
-        // Pick only attributes that we can find in the empty object
-        // In other words, prevent to select data that has unwanted attributes
-        const emptyObject = this.getDefaultForServer();
-        let input = pick(object, Object.keys(emptyObject));
-
-        // Complete a potentially uncompleted object with default values
-        input = defaults(input, emptyObject);
-
-        return input;
     }
 
     /**

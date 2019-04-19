@@ -1,5 +1,5 @@
 import { Literal } from '../../../types/types';
-import { NaturalHierarchicConfiguration } from './HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from './hierarchic-configuration';
 
 export interface HierarchicFilterConfiguration<T = Literal> {
     service: NaturalHierarchicConfiguration['service'];

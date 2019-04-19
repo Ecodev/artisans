@@ -1,9 +1,8 @@
-import { isArray, kebabCase, merge, mergeWith } from 'lodash';
+import { isArray, kebabCase, merge, mergeWith, omit } from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { omit } from 'lodash';
 import { NaturalAbstractController } from './abstract-controller';
 import { NaturalAbstractModelService, VariablesWithInput } from '../services/abstract-model.service';
 import { Literal } from '../types/types';

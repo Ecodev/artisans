@@ -1,6 +1,6 @@
 import { AccountService } from './accounts/services/account.service';
 import { AccountType } from '../shared/generated-types';
-import { NaturalHierarchicConfiguration } from '../natural/modules/hierarchic-selector/classes/HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from '../natural/modules/hierarchic-selector/classes/hierarchic-configuration';
 
 export const AccountHierarchicConfiguration: NaturalHierarchicConfiguration[] = [
     {

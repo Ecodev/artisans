@@ -7,17 +7,17 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
-        NaturalFixedButtonComponent
+        NaturalFixedButtonComponent,
     ],
     imports: [
         CommonModule,
         RouterModule,
         MatButtonModule,
-        NaturalIconModule
+        NaturalIconModule,
     ],
-    exports : [
-        NaturalFixedButtonComponent
-    ]
+    exports: [
+        NaturalFixedButtonComponent,
+    ],
 })
 export class NaturalFixedButtonModule {
 }

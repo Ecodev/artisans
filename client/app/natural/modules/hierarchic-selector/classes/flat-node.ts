@@ -1,4 +1,4 @@
-import { HierarchicModelNode } from './ModelNode';
+import { HierarchicModelNode } from './model-node';
 
 export class HierarchicFlatNode {
 

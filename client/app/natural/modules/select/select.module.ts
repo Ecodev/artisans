@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
-        NaturalSelectComponent
+        NaturalSelectComponent,
     ],
     imports: [
         CommonModule,
@@ -20,11 +20,11 @@ import { RouterModule } from '@angular/router';
         MatButtonModule,
         FlexLayoutModule,
         MatProgressSpinnerModule,
-        NaturalIconModule
+        NaturalIconModule,
     ],
-    exports : [
-        NaturalSelectComponent
-    ]
+    exports: [
+        NaturalSelectComponent,
+    ],
 })
 export class NaturalSelectModule {
 }

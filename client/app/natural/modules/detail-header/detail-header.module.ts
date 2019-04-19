@@ -13,7 +13,7 @@ import { NaturalDetailHeaderComponent } from './detail-header.component';
         CommonModule,
         RouterModule,
         FlexLayoutModule,
-        MatButtonModule
+        MatButtonModule,
     ],
     exports: [
         NaturalDetailHeaderComponent,

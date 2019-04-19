@@ -20,11 +20,11 @@ import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operato
 import { MatAutocompleteTrigger } from '@angular/material';
 import { NaturalFormControl } from '../../classes/form-control';
 import { NaturalAbstractController } from '../../classes/abstract-controller';
-import { HierarchicFiltersConfiguration } from '../hierarchic-selector/classes/HierarchicFiltersConfiguration';
+import { HierarchicFiltersConfiguration } from '../hierarchic-selector/classes/hierarchic-filters-configuration';
 import { NaturalHierarchicSelectorDialogService } from '../hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { OrganizedModelSelection } from '../hierarchic-selector/services/hierarchic-selector.service';
-import { QueryVariables, NaturalQueryVariablesManager } from '../../classes/query-variable-manager';
-import { NaturalHierarchicConfiguration } from '../hierarchic-selector/classes/HierarchicConfiguration';
+import { NaturalQueryVariablesManager, QueryVariables } from '../../classes/query-variable-manager';
+import { NaturalHierarchicConfiguration } from '../hierarchic-selector/classes/hierarchic-configuration';
 
 /**
  * Default usage:
@@ -343,6 +343,14 @@ export class NaturalSelectComponent extends NaturalAbstractController implements
             });
     }
 
+    public showSelectButton() {
+        return this.hierarchicSelectorConfig && this.formCtrl.enabled && this.selectLabel;
+    }
+
+    public showClearButton() {
+        return this.formCtrl.value && this.formCtrl.enabled && this.clearLabel;
+    }
+
     private getSearchFilter(term: string | null): any {
         let field = {};
 
@@ -357,14 +365,6 @@ export class NaturalSelectComponent extends NaturalAbstractController implements
 
     private getSelectKey() {
         return this.hierarchicSelectorConfig.filter(c => !!c.selectableAtKey)[0].selectableAtKey;
-    }
-
-    public showSelectButton() {
-        return this.hierarchicSelectorConfig && this.formCtrl.enabled && this.selectLabel;
-    }
-
-    public showClearButton() {
-        return this.formCtrl.value && this.formCtrl.enabled && this.clearLabel;
     }
 
 }

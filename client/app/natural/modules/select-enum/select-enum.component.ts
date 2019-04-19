@@ -15,7 +15,7 @@ import {
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { NaturalFormControl } from '../../classes/form-control';
-import { NaturalEnumService, IEnum } from '../../services/enum.service';
+import { IEnum, NaturalEnumService } from '../../services/enum.service';
 
 @Component({
     selector: 'natural-select-enum',

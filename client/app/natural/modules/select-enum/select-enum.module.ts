@@ -16,7 +16,7 @@ import { NaturalCommonModule } from '../common/common-module';
         MatInputModule,
         NaturalIconModule,
         MatSelectModule,
-        NaturalCommonModule
+        NaturalCommonModule,
     ],
     exports: [
         NaturalSelectEnumComponent,

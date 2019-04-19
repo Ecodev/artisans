@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { TransactionService } from '../services/transaction.service';
 import {
@@ -27,7 +27,7 @@ import { ExpenseClaimService } from '../../expenseClaim/services/expenseClaim.se
     styleUrls: ['./transaction.component.scss'],
 })
 export class TransactionComponent
-    extends AbstractDetail<Transaction['transaction'],
+    extends NaturalAbstractDetail<Transaction['transaction'],
         TransactionVariables,
         CreateTransaction['createTransaction'],
         CreateTransactionVariables,

@@ -6,14 +6,14 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { Accounts, AccountsVariables } from '../../../shared/generated-types';
 import { AccountService } from '../services/account.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { AbstractNavigableList } from '../../../natural/classes/AbstractNavigableList';
+import { NaturalAbstractNavigableList } from '../../../natural/classes/abstract-navigable-list';
 
 @Component({
     selector: 'app-accounts',
     templateUrl: './accounts.component.html',
     styleUrls: ['./accounts.component.scss'],
 })
-export class AccountsComponent extends AbstractNavigableList<Accounts['accounts'], AccountsVariables> implements OnInit {
+export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['accounts'], AccountsVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,

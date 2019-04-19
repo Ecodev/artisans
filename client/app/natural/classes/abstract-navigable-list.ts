@@ -2,9 +2,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OnDestroy, OnInit } from '@angular/core';
 import { NaturalSearchSelections, toGraphQLDoctrineFilter } from '@ecodev/natural-search';
 import { NaturalPersistenceService } from '../services/persistence.service';
-import { AbstractList } from './AbstractList';
-import { QueryVariables } from './QueryVariablesManager';
-import { AbstractModelService } from '../services/abstract-model.service';
+import { NaturalAbstractList } from './abstract-list';
+import { QueryVariables } from './query-variable-manager';
+import { NaturalAbstractModelService } from '../services/abstract-model.service';
 import { NaturalAlertService } from '../components/alert/alert.service';
 import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
 
@@ -12,12 +12,13 @@ import { NaturalSearchConfigurationService } from '../../shared/natural-search/n
  * This class helps managing a list of paginated items that can be filtered,
  * selected, and then bulk actions can be performed on selection.
  */
-export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends AbstractList<Tall, Vall> implements OnInit, OnDestroy {
+export class NaturalAbstractNavigableList<Tall, Vall extends QueryVariables> extends NaturalAbstractList<Tall, Vall> implements OnInit,
+                                                                                                                                OnDestroy {
 
     public breadcrumbs: any[] = [];
 
     constructor(key: string,
-                service: AbstractModelService<any, any, any, any, any, any, any, any, any>,
+                service: NaturalAbstractModelService<any, any, any, any, any, any, any, any, any>,
                 router: Router,
                 route: ActivatedRoute,
                 alertService: NaturalAlertService,
@@ -79,7 +80,7 @@ export class AbstractNavigableList<Tall, Vall extends QueryVariables> extends Ab
 
     protected translateSearchAndRefreshList(naturalSearchSelections: NaturalSearchSelections) {
 
-        if (AbstractList.hasSelections(naturalSearchSelections)) {
+        if (NaturalAbstractList.hasSelections(naturalSearchSelections)) {
             this.variablesManager.set('navigation', null);
 
         } else {

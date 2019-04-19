@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookableMetadataService } from './bookable-metadata.service';
-import { NaturalDataSource } from '../../natural/classes/DataSource';
+import { NaturalDataSource } from '../../natural/classes/data-source';
 import { BookableMetadatasVariables } from '../../shared/generated-types';
-import { QueryVariablesManager } from '../../natural/classes/QueryVariablesManager';
+import { NaturalQueryVariablesManager } from '../../natural/classes/query-variable-manager';
 
 @Component({
     selector: 'app-bookable-metadata',
@@ -34,7 +34,7 @@ export class BookableMetadataComponent implements OnInit {
                 filter: {groups: [{conditions: [{bookable: {equal: {value: this.bookable.id}}}]}]},
             };
 
-            const qvm = new QueryVariablesManager<BookableMetadatasVariables>();
+            const qvm = new NaturalQueryVariablesManager<BookableMetadatasVariables>();
             qvm.set('variables', variables);
 
             // TODO : replace by watchAll because two admins may work on same object and meta data could change between two visits

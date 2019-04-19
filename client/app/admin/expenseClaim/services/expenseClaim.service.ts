@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     createExpenseClaim,
     deleteExpenseClaims,
@@ -24,12 +24,12 @@ import {
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expenseClaim'],
+export class ExpenseClaimService extends NaturalAbstractModelService<ExpenseClaim['expenseClaim'],
     ExpenseClaimVariables,
     ExpenseClaims['expenseClaims'],
     ExpenseClaimsVariables,
@@ -85,7 +85,7 @@ export class ExpenseClaimService extends AbstractModelService<ExpenseClaim['expe
             },
         };
 
-        const qvm = new QueryVariablesManager<ExpenseClaimsVariables>();
+        const qvm = new NaturalQueryVariablesManager<ExpenseClaimsVariables>();
         qvm.set('variables', variables);
         return this.watchAll(qvm, expire);
     }

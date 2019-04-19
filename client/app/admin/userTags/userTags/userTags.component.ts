@@ -6,14 +6,14 @@ import { UserTags, UserTagsVariables } from '../../../shared/generated-types';
 import { UserTagService } from '../services/userTag.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { NaturalPersistenceService } from '../../../natural/services/persistence.service';
-import { AbstractList } from '../../../natural/classes/AbstractList';
+import { NaturalAbstractList } from '../../../natural/classes/abstract-list';
 
 @Component({
     selector: 'app-user-tags',
     templateUrl: './userTags.component.html',
     styleUrls: ['./userTags.component.scss'],
 })
-export class UserTagsComponent extends AbstractList<UserTags['userTags'], UserTagsVariables> implements OnInit {
+export class UserTagsComponent extends NaturalAbstractList<UserTags['userTags'], UserTagsVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,

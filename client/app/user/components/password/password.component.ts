@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
-import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
+import { NaturalFormControl } from '../../../natural/classes/form-control';
 
 function samePasswordsValidator(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -40,8 +40,8 @@ export class PasswordComponent implements OnInit {
 
     ngOnInit() {
         this.form.removeControl('password');
-        this.form.addControl('password', new ExtendedFormControl('', [Validators.required, Validators.minLength(12)]));
-        this.form.addControl('confirmPassword', new ExtendedFormControl(''));
+        this.form.addControl('password', new NaturalFormControl('', [Validators.required, Validators.minLength(12)]));
+        this.form.addControl('confirmPassword', new NaturalFormControl(''));
         this.form.setValidators(samePasswordsValidator);
     }
 

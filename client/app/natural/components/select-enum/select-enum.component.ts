@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
+import { NaturalFormControl } from '../../classes/form-control';
 import { NaturalEnumService, IEnum } from '../../services/enum.service';
 
 @Component({
@@ -59,8 +59,8 @@ export class NaturalSelectEnumComponent implements OnInit, ControlValueAccessor,
     ngAfterViewInit(): void {
 
         if (this.ngControl && this.ngControl.control) {
-            if ((this.ngControl.control as ExtendedFormControl).dirtyChanges) {
-                (this.ngControl.control as ExtendedFormControl).dirtyChanges.subscribe(() => {
+            if ((this.ngControl.control as NaturalFormControl).dirtyChanges) {
+                (this.ngControl.control as NaturalFormControl).dirtyChanges.subscribe(() => {
                     this.formCtrl.markAsDirty({onlySelf: true});
                     this.formCtrl.updateValueAndValidity();
                 });

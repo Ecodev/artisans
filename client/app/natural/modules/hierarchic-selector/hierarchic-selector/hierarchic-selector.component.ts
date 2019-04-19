@@ -8,11 +8,11 @@ import { HierarchicFlatNode } from '../classes/FlatNode';
 import { HierarchicModelNode } from '../classes/ModelNode';
 import { takeUntil } from 'rxjs/operators';
 import { HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
-import { AbstractController } from '../../../../shared/components/AbstractController';
+import { NaturalAbstractController } from '../../../classes/abstract-controller';
 import { Literal } from '../../../types/types';
-import { Utility } from '../../../classes/Utility';
+import { NaturalUtility } from '../../../classes/utility';
 import { toGraphQLDoctrineFilter } from '@ecodev/natural-search';
-import { AbstractList } from '../../../classes/AbstractList';
+import { NaturalAbstractList } from '../../../classes/abstract-list';
 import { NaturalHierarchicConfiguration } from '../classes/HierarchicConfiguration';
 
 @Component({
@@ -21,7 +21,7 @@ import { NaturalHierarchicConfiguration } from '../classes/HierarchicConfigurati
     styleUrls: ['./hierarchic-selector.component.scss'],
     providers: [NaturalHierarchicSelectorService],
 })
-export class NaturalHierarchicSelectorComponent extends AbstractController implements OnInit, OnChanges {
+export class NaturalHierarchicSelectorComponent extends NaturalAbstractController implements OnInit, OnChanges {
 
     /**
      * Functions that receives a model and returns a string for display value
@@ -303,7 +303,7 @@ export class NaturalHierarchicSelectorComponent extends AbstractController imple
     private updateSelection(selected) {
         const organizedFlatNodesSelection = this.hierarchicSelectorService.toOrganizedSelection(selected);
         this.selectionChange.emit(organizedFlatNodesSelection);
-        Utility.replaceObjectKeepingReference(this.selected, organizedFlatNodesSelection);
+        NaturalUtility.replaceObjectKeepingReference(this.selected, organizedFlatNodesSelection);
     }
 
     private isNodeSelected(node: HierarchicModelNode): boolean {
@@ -341,7 +341,7 @@ export class NaturalHierarchicSelectorComponent extends AbstractController imple
     }
 
     public search(selections) {
-        if (AbstractList.hasSelections(selections)) {
+        if (NaturalAbstractList.hasSelections(selections)) {
             const filter = toGraphQLDoctrineFilter([], selections);
             const variables = {filter: filter};
             this.hierarchicSelectorService.search(variables, this.filters);

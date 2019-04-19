@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { UserService } from '../services/user.service';
 import {
@@ -17,7 +17,7 @@ import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
 import { BookingService } from '../../bookings/services/booking.service';
 import { AccountService } from '../../accounts/services/account.service';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 
 @Component({
     selector: 'app-user',
@@ -25,7 +25,7 @@ import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesMa
     styleUrls: ['./user.component.scss'],
 })
 export class UserComponent
-    extends AbstractDetail<User['user'],
+    extends NaturalAbstractDetail<User['user'],
         UserVariables,
         CreateUser['createUser'],
         CreateUserVariables,
@@ -57,7 +57,7 @@ export class UserComponent
         this.route.data.subscribe(() => {
 
             if (this.data.model.id) {
-                const qvm = new QueryVariablesManager<UsersVariables>();
+                const qvm = new NaturalQueryVariablesManager<UsersVariables>();
                 qvm.set('variables', UserService.getFamilyVariables(this.data.model));
                 this.userService.getAll(qvm).subscribe(family => {
                     this.showFamilyTab = family.length > 1;

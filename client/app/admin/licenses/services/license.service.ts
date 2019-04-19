@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { createLicense, deleteLicenses, licenseQuery, licensesQuery, updateLicense } from './license.queries';
 import {
     CreateLicense,
@@ -18,7 +18,7 @@ import { Validators } from '@angular/forms';
 @Injectable({
     providedIn: 'root',
 })
-export class LicenseService extends AbstractModelService<License['license'],
+export class LicenseService extends NaturalAbstractModelService<License['license'],
     LicenseVariables,
     Licenses['licenses'],
     LicensesVariables,

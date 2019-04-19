@@ -4,8 +4,8 @@ import { BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { AbstractController } from '../../../shared/components/AbstractController';
-import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
+import { NaturalDataSource } from '../../../natural/classes/data-source';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { NaturalAlertService } from '../../../natural/components/alert/alert.ser
     templateUrl: './services.component.html',
     styleUrls: ['./services.component.scss'],
 })
-export class ServicesComponent extends AbstractController implements OnInit, OnChanges, OnDestroy {
+export class ServicesComponent extends NaturalAbstractController implements OnInit, OnChanges, OnDestroy {
 
     @Input() user;
 

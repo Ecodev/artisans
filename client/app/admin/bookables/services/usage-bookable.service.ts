@@ -13,12 +13,12 @@ import {
     UsageBookablesVariables,
 } from '../../../shared/generated-types';
 import { BookingService } from '../../bookings/services/booking.service';
-import { AbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class UsageBookableService extends AbstractModelService<Bookable['bookable'],
+export class UsageBookableService extends NaturalAbstractModelService<Bookable['bookable'],
     BookableVariables,
     Bookables['bookables'],
     UsageBookablesVariables,

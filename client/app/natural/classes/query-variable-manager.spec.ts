@@ -1,11 +1,11 @@
-import { QueryVariablesManager } from './QueryVariablesManager';
+import { NaturalQueryVariablesManager } from './query-variable-manager';
 
 describe('QueryVariablesManager', () => {
 
-    let manager: QueryVariablesManager<any>;
+    let manager: NaturalQueryVariablesManager<any>;
 
     beforeEach(() => {
-        manager = new QueryVariablesManager<any>();
+        manager = new NaturalQueryVariablesManager<any>();
         expect(manager.variables.value).toBeUndefined();
     });
 

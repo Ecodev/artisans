@@ -5,8 +5,8 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { NaturalDataSource } from '../../../natural/classes/DataSource';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalDataSource } from '../../../natural/classes/data-source';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { NaturalAlertService } from '../../../natural/components/alert/alert.ser
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent extends AbstractDetail<User['user'],
+export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     UserVariables,
     CreateUser['createUser'],
     CreateUserVariables,
@@ -57,7 +57,7 @@ export class RegisterComponent extends AbstractDetail<User['user'],
     }
 
     public submit(): void {
-        AbstractDetail.validateAllFormFields(this.form);
+        NaturalAbstractDetail.validateAllFormFields(this.form);
 
         if (this.form.invalid) {
             return;

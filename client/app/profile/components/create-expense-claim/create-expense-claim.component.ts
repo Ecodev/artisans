@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { AccountingDocumentsComponent } from '../../../admin/accounting-documents/accounting-documents.component';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 
 @Component({
     selector: 'app-create-expense-claim',
@@ -21,7 +21,7 @@ import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
     styleUrls: ['./create-expense-claim.component.scss'],
 })
 export class CreateExpenseClaimComponent
-    extends AbstractDetail<ExpenseClaim['expenseClaim'],
+    extends NaturalAbstractDetail<ExpenseClaim['expenseClaim'],
         ExpenseClaimVariables,
         CreateExpenseClaim['createExpenseClaim'],
         CreateExpenseClaimVariables,

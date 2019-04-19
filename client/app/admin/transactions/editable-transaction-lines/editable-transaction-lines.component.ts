@@ -3,7 +3,7 @@ import { TransactionLineService } from '../services/transactionLine.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { Transaction, TransactionLinesVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
-import { AbstractEditableList } from '../../../natural/classes/AbstractEditableList';
+import { NaturalAbstractEditableList } from '../../../natural/classes/abstract-editable-list';
 import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
 
 @Component({
@@ -11,7 +11,7 @@ import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfigura
     templateUrl: './editable-transaction-lines.component.html',
     styleUrls: ['./editable-transaction-lines.component.scss'],
 })
-export class EditableTransactionLinesComponent extends AbstractEditableList<any, any> implements OnInit {
+export class EditableTransactionLinesComponent extends NaturalAbstractEditableList<any, any> implements OnInit {
 
     @Input() transaction: Transaction['transaction'];
 

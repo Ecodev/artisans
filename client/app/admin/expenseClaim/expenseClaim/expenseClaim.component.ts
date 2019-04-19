@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { ExpenseClaimService } from '../services/expenseClaim.service';
 import {
@@ -20,7 +20,7 @@ import { UserService } from '../../users/services/user.service';
     styleUrls: ['./expenseClaim.component.scss'],
 })
 export class ExpenseClaimComponent
-    extends AbstractDetail<ExpenseClaim['expenseClaim'],
+    extends NaturalAbstractDetail<ExpenseClaim['expenseClaim'],
         ExpenseClaimVariables,
         CreateExpenseClaim['createExpenseClaim'],
         CreateExpenseClaimVariables,

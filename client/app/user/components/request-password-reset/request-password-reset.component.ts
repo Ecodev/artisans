@@ -5,7 +5,7 @@ import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
-import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
+import { NaturalFormControl } from '../../../natural/classes/form-control';
 
 @Component({
     selector: 'app-request-password-reset',
@@ -21,7 +21,7 @@ export class RequestPasswordResetComponent {
                 private alertService: NaturalAlertService,
                 private router: Router,
                 private userService: UserService) {
-        this.form = new FormGroup({login: new ExtendedFormControl('', userService.getFormValidators().login)});
+        this.form = new FormGroup({login: new NaturalFormControl('', userService.getFormValidators().login)});
     }
 
     submit(): void {

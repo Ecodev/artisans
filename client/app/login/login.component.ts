@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkActivityService } from '../shared/services/network-activity.service';
 import { MatSnackBar } from '@angular/material';
 import { NaturalAlertService } from '../shared/components/../../natural/components/alert/alert.service';
-import { AbstractController } from '../shared/components/AbstractController';
+import { NaturalAbstractController } from '../natural/classes/abstract-controller';
 import { UserService } from '../admin/users/services/user.service';
 
 @Component({
@@ -21,7 +21,7 @@ import { UserService } from '../admin/users/services/user.service';
         ]),
     ],
 })
-export class LoginComponent extends AbstractController implements OnInit, OnDestroy {
+export class LoginComponent extends NaturalAbstractController implements OnInit, OnDestroy {
 
     public loading = false;
 

@@ -7,9 +7,9 @@ import { FetchResult } from 'apollo-link';
 import { ValidatorFn } from '@angular/forms';
 import { NetworkStatus } from 'apollo-client';
 import { Literal } from '../types/types';
-import { ExtendedFormControl } from '../classes/ExtendedFormControl';
-import { Utility } from '../classes/Utility';
-import { QueryVariablesManager } from '../classes/QueryVariablesManager';
+import { NaturalFormControl } from '../classes/form-control';
+import { NaturalUtility } from '../classes/utility';
+import { NaturalQueryVariablesManager } from '../classes/query-variable-manager';
 
 export interface FormValidators {
     [key: string]: ValidatorFn[];
@@ -19,7 +19,7 @@ export interface VariablesWithInput {
     input: Literal;
 }
 
-export abstract class AbstractModelService<Tone,
+export abstract class NaturalAbstractModelService<Tone,
     Vone,
     Tall,
     Vall,
@@ -99,7 +99,7 @@ export abstract class AbstractModelService<Tone,
         const disabled = model.permissions ? !model.permissions.update : false;
 
         if (model.id) {
-            config['id'] = new ExtendedFormControl({value: model.id, disabled: true});
+            config['id'] = new NaturalFormControl({value: model.id, disabled: true});
         }
 
         // Configure form for each field of model
@@ -111,7 +111,7 @@ export abstract class AbstractModelService<Tone,
             };
             const validator = typeof validators[key] !== 'undefined' ? validators[key] : null;
 
-            config[key] = new ExtendedFormControl(formState, validator);
+            config[key] = new NaturalFormControl(formState, validator);
         }
 
         // Configure form for extra validators that are not on a specific field
@@ -122,7 +122,7 @@ export abstract class AbstractModelService<Tone,
                     disabled: disabled,
                 };
 
-                config[key] = new ExtendedFormControl(formState, validators[key]);
+                config[key] = new NaturalFormControl(formState, validators[key]);
             }
         }
 
@@ -167,10 +167,10 @@ export abstract class AbstractModelService<Tone,
      * It will **always** fetch from network and then the observable will be completed.
      * No cache is ever used, so it's slow but correct.
      */
-    public getAll(queryVariablesManager: QueryVariablesManager<Vall>): Observable<Tall> {
+    public getAll(queryVariablesManager: NaturalQueryVariablesManager<Vall>): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
-        const manager = new QueryVariablesManager<Vall>(queryVariablesManager); // "copy" qvm
+        const manager = new NaturalQueryVariablesManager<Vall>(queryVariablesManager); // "copy" qvm
         manager.merge('context', this.getContextForAll());
 
         return this.apollo.query<Tall, Vall>({
@@ -187,7 +187,7 @@ export abstract class AbstractModelService<Tone,
      *
      * The observable result will only complete when expire emits.
      */
-    public watchAll(queryVariablesManager: QueryVariablesManager<Vall>, expire: Observable<void>): Observable<Tall> {
+    public watchAll(queryVariablesManager: NaturalQueryVariablesManager<Vall>, expire: Observable<void>): Observable<Tall> {
         this.throwIfNotQuery(this.allQuery);
 
         // Expire all subscriptions when completed (when calling result.unsubscribe())
@@ -219,7 +219,7 @@ export abstract class AbstractModelService<Tone,
 
                 // Apply context from service
                 // Copy manager to prevent to apply internal context to external QueryVariablesManager
-                const manager = new QueryVariablesManager<Vall>(queryVariablesManager);
+                const manager = new NaturalQueryVariablesManager<Vall>(queryVariablesManager);
                 manager.merge('context', this.getContextForAll());
 
                 const lastQueryRef = this.apollo.watchQuery<Tall, Vall>({
@@ -309,7 +309,7 @@ export abstract class AbstractModelService<Tone,
         }).subscribe(result => {
             this.apollo.getClient().reFetchObservableQueries();
             const newObject = this.mapCreation(result);
-            observable.next(mergeWith(object, newObject, AbstractModelService.mergeOverrideArray));
+            observable.next(mergeWith(object, newObject, NaturalAbstractModelService.mergeOverrideArray));
             observable.complete();
         });
 
@@ -364,7 +364,7 @@ export abstract class AbstractModelService<Tone,
         }).subscribe((result: any) => {
             this.apollo.getClient().reFetchObservableQueries();
             result = this.mapUpdate(result);
-            mergeWith(object, result, AbstractModelService.mergeOverrideArray);
+            mergeWith(object, result, NaturalAbstractModelService.mergeOverrideArray);
             observable.next(result);
             observable.complete(); // unsubscribe all after first emit, nothing more will come;
         });
@@ -381,7 +381,7 @@ export abstract class AbstractModelService<Tone,
 
         const variables = {
             id: object.id as string,
-            input: omit(Utility.relationsToIds(object), 'id'),
+            input: omit(NaturalUtility.relationsToIds(object), 'id'),
         } as Vupdate;
 
         return this.apollo.mutate<Tupdate, Vupdate>({
@@ -470,7 +470,7 @@ export abstract class AbstractModelService<Tone,
      * This is used to extract only the array of fetched objects out of the entire fetched data
      */
     protected mapAll(): OperatorFunction<FetchResult<any>, Tall> {
-        const plural = Utility.makePlural(this.name);
+        const plural = NaturalUtility.makePlural(this.name);
         return map(result => result.data[plural]);
     }
 
@@ -478,7 +478,7 @@ export abstract class AbstractModelService<Tone,
      * This is used to extract only the created object out of the entire fetched data
      */
     protected mapCreation(result): OperatorFunction<FetchResult<any>, Tcreate> {
-        const name = 'create' + Utility.upperCaseFirstLetter(this.name);
+        const name = 'create' + NaturalUtility.upperCaseFirstLetter(this.name);
         return result.data[name];
     }
 
@@ -486,7 +486,7 @@ export abstract class AbstractModelService<Tone,
      * This is used to extract only the updated object out of the entire fetched data
      */
     protected mapUpdate(result): OperatorFunction<FetchResult<any>, Tupdate> {
-        const name = 'update' + Utility.upperCaseFirstLetter(this.name);
+        const name = 'update' + NaturalUtility.upperCaseFirstLetter(this.name);
         return result.data[name];
     }
 
@@ -494,7 +494,7 @@ export abstract class AbstractModelService<Tone,
      * This is used to extract only flag when deleting an object
      */
     protected mapDelete(result): OperatorFunction<FetchResult<any>, Tdelete> {
-        const name = 'delete' + Utility.makePlural(Utility.upperCaseFirstLetter(this.name));
+        const name = 'delete' + NaturalUtility.makePlural(NaturalUtility.upperCaseFirstLetter(this.name));
         return result.data[name];
     }
 
@@ -505,7 +505,7 @@ export abstract class AbstractModelService<Tone,
     public getInput(object: Literal): Vcreate['input'] | Vupdate['input'] {
 
         // Convert relations to their IDs for mutation
-        object = Utility.relationsToIds(object);
+        object = NaturalUtility.relationsToIds(object);
 
         // Pick only attributes that we can find in the empty object
         // In other words, prevent to select data that has unwanted attributes

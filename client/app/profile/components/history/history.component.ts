@@ -3,15 +3,15 @@ import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
-import { AbstractController } from '../../../shared/components/AbstractController';
-import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
+import { NaturalDataSource } from '../../../natural/classes/data-source';
 
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html',
     styleUrls: ['./history.component.scss'],
 })
-export class HistoryComponent extends AbstractController implements OnInit, OnDestroy {
+export class HistoryComponent extends NaturalAbstractController implements OnInit, OnDestroy {
 
     public viewer;
 

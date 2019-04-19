@@ -16,7 +16,7 @@ import {
 import { UserService } from '../../users/services/user.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { UsageBookableService } from '../../bookables/services/usage-bookable.service';
 
@@ -26,7 +26,7 @@ import { UsageBookableService } from '../../bookables/services/usage-bookable.se
     styleUrls: ['./booking.component.scss'],
 })
 export class BookingComponent
-    extends AbstractDetail<Booking['booking'],
+    extends NaturalAbstractDetail<Booking['booking'],
         BookingVariables,
         CreateBooking['createBooking'],
         CreateBookingVariables,

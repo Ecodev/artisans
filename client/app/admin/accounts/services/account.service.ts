@@ -21,12 +21,12 @@ import {
     UpdateAccountVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class AccountService extends AbstractModelService<Account['account'],
+export class AccountService extends NaturalAbstractModelService<Account['account'],
     AccountVariables,
     Accounts['accounts'],
     AccountsVariables,

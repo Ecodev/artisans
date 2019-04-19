@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import {
     BookableTag,
@@ -19,7 +19,7 @@ import { BookableTagService } from '../services/bookableTag.service';
     styleUrls: ['./bookableTag.component.scss'],
 })
 export class BookableTagComponent
-    extends AbstractDetail<BookableTag['bookableTag'],
+    extends NaturalAbstractDetail<BookableTag['bookableTag'],
         BookableTagVariables,
         CreateBookableTag['createBookableTag'],
         CreateBookableTagVariables,

@@ -25,14 +25,14 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookingService } from '../../bookings/services/booking.service';
 import { intersectionBy } from 'lodash';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class BookableService extends AbstractModelService<Bookable['bookable'],
+export class BookableService extends NaturalAbstractModelService<Bookable['bookable'],
     BookableVariables,
     Bookables['bookables'],
     BookablesVariables,
@@ -161,7 +161,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
             filter: {groups: [{conditions: [{bookingType: {in: {values: [BookingType.mandatory]}}}]}]},
         };
 
-        const qvm = new QueryVariablesManager<BookablesVariables>();
+        const qvm = new NaturalQueryVariablesManager<BookablesVariables>();
         qvm.set('variables', mandatoryBookablesFilter);
         return this.getAll(qvm); // getAll because mandatory bookables should not change
     }
@@ -185,7 +185,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
             },
         };
 
-        const qvm = new QueryVariablesManager<BookingsVariables>();
+        const qvm = new NaturalQueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
 
         return this.bookingService.getAll(qvm).pipe(map(result => {
@@ -204,7 +204,7 @@ export class BookableService extends AbstractModelService<Bookable['bookable'],
     public resolveByCode(code: string): Observable<{ model: any }> {
 
         if (code) {
-            const qvm = new QueryVariablesManager<BookablesVariables>();
+            const qvm = new NaturalQueryVariablesManager<BookablesVariables>();
             const variables: BookablesVariables = {
                 filter: {groups: [{conditions: [{code: {equal: {value: code}}}]}]},
             };

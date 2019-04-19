@@ -14,11 +14,11 @@ import {
     Users,
     UsersVariables,
 } from '../../generated-types';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { CommentComponent } from './comment.component';
-import { AbstractController } from '../AbstractController';
+import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 
 @Component({
@@ -33,7 +33,7 @@ import { NaturalAlertService } from '../../../natural/components/alert/alert.ser
         ]),
     ],
 })
-export class NavigationsComponent extends AbstractController implements OnInit {
+export class NavigationsComponent extends NaturalAbstractController implements OnInit {
 
     @Input() user;
     @Input() activeOnly = true;
@@ -41,7 +41,7 @@ export class NavigationsComponent extends AbstractController implements OnInit {
 
     public bookings: Bookings['bookings'];
 
-    private bookingsQVM = new QueryVariablesManager<BookingsVariables>();
+    private bookingsQVM = new NaturalQueryVariablesManager<BookingsVariables>();
 
     private currentPage = 0;
     private family;
@@ -56,7 +56,7 @@ export class NavigationsComponent extends AbstractController implements OnInit {
 
     ngOnInit() {
 
-        const qvm = new QueryVariablesManager<UsersVariables>();
+        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{owner: {equal: {value: this.user.owner ? this.user.owner.id : this.user.id}}}]}]},
         });

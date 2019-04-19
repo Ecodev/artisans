@@ -7,7 +7,7 @@ import { clone } from 'lodash';
 import { map, switchMap } from 'rxjs/operators';
 import { Literal } from '../types/types';
 import { Mutations } from '../../shared/generated-types';
-import { Utility } from '../classes/Utility';
+import { NaturalUtility } from '../classes/utility';
 
 export interface LinkableObject {
     id: string;
@@ -143,7 +143,7 @@ export class NaturalLinkMutationService {
      * Generate mutation using patters and replacing variables
      */
     private getMutation(action: string, obj1, obj2, otherName: string | null, variables: Literal = {}): Observable<string> {
-        otherName = otherName ? Utility.upperCaseFirstLetter(otherName) : otherName;
+        otherName = otherName ? NaturalUtility.upperCaseFirstLetter(otherName) : otherName;
         const mutationName = action + obj1.__typename + (otherName || obj2.__typename);
         const reversedMutationName = action + obj2.__typename + (otherName || obj1.__typename);
 

@@ -19,10 +19,10 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FetchResult } from 'apollo-link';
 import { NaturalSelectComponent } from '../select/select.component';
 import { PageEvent } from '@angular/material';
-import { AbstractController } from '../../../shared/components/AbstractController';
-import { NaturalDataSource } from '../../classes/DataSource';
+import { NaturalAbstractController } from '../../classes/abstract-controller';
+import { NaturalDataSource } from '../../classes/data-source';
 import { NaturalHierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
-import { PaginationInput, QueryVariables, QueryVariablesManager } from '../../classes/QueryVariablesManager';
+import { PaginationInput, QueryVariables, NaturalQueryVariablesManager } from '../../classes/query-variable-manager';
 import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
@@ -39,7 +39,7 @@ import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selecto
     templateUrl: './relations.component.html',
     styleUrls: ['./relations.component.scss'],
 })
-export class NaturalRelationsComponent extends AbstractController implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
+export class NaturalRelationsComponent extends NaturalAbstractController implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
 
     @ViewChild(NaturalSelectComponent) select: NaturalSelectComponent;
     @ContentChild(TemplateRef) itemTemplate: TemplateRef<any>;
@@ -126,7 +126,7 @@ export class NaturalRelationsComponent extends AbstractController implements OnI
     /**
      * Observable variables/options for listing service usage and apollo watchQuery
      */
-    private variablesManager: QueryVariablesManager<QueryVariables> = new QueryVariablesManager();
+    private variablesManager: NaturalQueryVariablesManager<QueryVariables> = new NaturalQueryVariablesManager();
 
     public pageSizeOptions = [5, 10, 50, 100];
 

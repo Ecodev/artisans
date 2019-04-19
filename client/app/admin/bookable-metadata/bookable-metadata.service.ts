@@ -8,7 +8,7 @@ import {
 } from './bookable-metadata.queries';
 import { Validators } from '@angular/forms';
 
-import { AbstractModelService, FormValidators } from '../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../natural/services/abstract-model.service';
 import {
     BookableMetadataInput,
     BookableMetadatas,
@@ -20,7 +20,7 @@ import {
 @Injectable({
     providedIn: 'root',
 })
-export class BookableMetadataService extends AbstractModelService<any,
+export class BookableMetadataService extends NaturalAbstractModelService<any,
     any,
     BookableMetadatas['bookableMetadatas'],
     BookableMetadatasVariables,

@@ -23,14 +23,14 @@ import { Validators } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookingResolve } from '../booking';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { NaturalEnumService } from '../../../natural/services/enum.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class BookingService extends AbstractModelService<Booking['booking'],
+export class BookingService extends NaturalAbstractModelService<Booking['booking'],
     BookingVariables,
     Bookings['bookings'],
     BookingsVariables,

@@ -4,19 +4,19 @@ import { OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { omit } from 'lodash';
-import { AbstractController } from '../../shared/components/AbstractController';
-import { AbstractModelService, VariablesWithInput } from '../services/abstract-model.service';
+import { NaturalAbstractController } from './abstract-controller';
+import { NaturalAbstractModelService, VariablesWithInput } from '../services/abstract-model.service';
 import { Literal } from '../types/types';
 import { NaturalAlertService } from '../components/alert/alert.service';
 
-export class AbstractDetail<Tone,
+export class NaturalAbstractDetail<Tone,
     Vone,
     Tcreate extends { id: string; },
     Vcreate extends VariablesWithInput,
     Tupdate,
     Vupdate extends { id: string; input: Literal; },
     Tdelete>
-    extends AbstractController implements OnInit {
+    extends NaturalAbstractController implements OnInit {
 
     public data: any = {
         model: {},
@@ -27,7 +27,7 @@ export class AbstractDetail<Tone,
     public showFabButton = true;
 
     constructor(private key: string,
-                public service: AbstractModelService<Tone, Vone, any, any, Tcreate, Vcreate, Tupdate, Vupdate, Tdelete>,
+                public service: NaturalAbstractModelService<Tone, Vone, any, any, Tcreate, Vcreate, Tupdate, Vupdate, Tdelete>,
                 protected alertService: NaturalAlertService,
                 protected router: Router,
                 protected route: ActivatedRoute,
@@ -50,7 +50,7 @@ export class AbstractDetail<Tone,
                 control.markAsDirty({onlySelf: true});
                 control.markAsTouched({onlySelf: true});
             } else if (control instanceof FormGroup || control instanceof FormArray) {
-                AbstractDetail.validateAllFormFields(control);
+                NaturalAbstractDetail.validateAllFormFields(control);
             }
         });
     }
@@ -73,7 +73,7 @@ export class AbstractDetail<Tone,
             return;
         }
 
-        AbstractDetail.validateAllFormFields(this.form);
+        NaturalAbstractDetail.validateAllFormFields(this.form);
 
         if (this.form && this.form.invalid) {
             return;
@@ -99,7 +99,7 @@ export class AbstractDetail<Tone,
 
     public create(redirect: boolean = true): Observable<Tcreate> | null {
 
-        AbstractDetail.validateAllFormFields(this.form);
+        NaturalAbstractDetail.validateAllFormFields(this.form);
 
         if (this.form && this.form.invalid) {
             return null;
@@ -143,7 +143,7 @@ export class AbstractDetail<Tone,
     }
 
     protected initForm(): void {
-        this.form = AbstractDetail.getFormGroup(this.data.model, this.service);
+        this.form = NaturalAbstractDetail.getFormGroup(this.data.model, this.service);
     }
 
     private formToData() {

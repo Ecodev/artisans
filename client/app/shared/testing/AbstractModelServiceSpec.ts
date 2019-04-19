@@ -1,11 +1,11 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { fakeAsync, inject, tick } from '@angular/core/testing';
-import { AbstractModelService } from '../../natural/services/abstract-model.service';
-import { QueryVariablesManager } from '../../natural/classes/QueryVariablesManager';
+import { NaturalAbstractModelService } from '../../natural/services/abstract-model.service';
+import { NaturalQueryVariablesManager } from '../../natural/classes/query-variable-manager';
 import { Literal } from '../../natural/types/types';
 
 // A shortcut for shorter lines
-type ModelService = AbstractModelService<any, any, any, any, any, any, any, any, any>;
+type ModelService = NaturalAbstractModelService<any, any, any, any, any, any, any, any, any>;
 
 export abstract class AbstractModelServiceSpec {
 
@@ -192,7 +192,7 @@ export abstract class AbstractModelServiceSpec {
         let count = 0;
         let result: Observable<any> | null = null;
         const tickDelay = 20; // should match AbstractModel.watchAll debounceTime value
-        const qvm = new QueryVariablesManager<any>();
+        const qvm = new NaturalQueryVariablesManager<any>();
         qvm.set('channel', {search: 'initial'});
 
         const getActual = () => {

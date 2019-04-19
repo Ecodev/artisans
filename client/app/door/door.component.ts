@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoorService } from './services/door.service';
-import { AbstractController } from '../shared/components/AbstractController';
+import { NaturalAbstractController } from '../natural/classes/abstract-controller';
 import { UserService } from '../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Literal } from '../natural/types/types';
@@ -12,7 +12,7 @@ import { NaturalAlertService } from '../natural/components/../../natural/compone
     templateUrl: './door.component.html',
     styleUrls: ['./door.component.scss'],
 })
-export class DoorComponent extends AbstractController implements OnInit {
+export class DoorComponent extends NaturalAbstractController implements OnInit {
 
     public viewer;
 

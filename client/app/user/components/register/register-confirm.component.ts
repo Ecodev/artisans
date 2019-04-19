@@ -7,7 +7,7 @@ import { NewUserService } from './new-user.service';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { pick } from 'lodash';
-import { Utility } from '../../../natural/classes/Utility';
+import { NaturalUtility } from '../../../natural/classes/utility';
 
 @Component({
     selector: 'app-confirm',
@@ -59,7 +59,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'birthday',
         ];
 
-        const input = pick(Utility.relationsToIds(this.form.value), fieldWhitelist);
+        const input = pick(NaturalUtility.relationsToIds(this.form.value), fieldWhitelist);
         this.apollo.mutate({
             mutation: mutation,
             variables: {

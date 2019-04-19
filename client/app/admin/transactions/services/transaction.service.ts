@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     createTransaction,
     deleteTransactions,
@@ -8,6 +7,7 @@ import {
     transactionsQuery,
     updateTransaction,
 } from './transaction.queries';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     CreateTransaction,
     CreateTransactionVariables,
@@ -28,7 +28,7 @@ import { Literal } from '../../../natural/types/types';
 @Injectable({
     providedIn: 'root',
 })
-export class TransactionService extends AbstractModelService<Transaction['transaction'],
+export class TransactionService extends NaturalAbstractModelService<Transaction['transaction'],
     TransactionVariables,
     Transactions['transactions'],
     TransactionsVariables,

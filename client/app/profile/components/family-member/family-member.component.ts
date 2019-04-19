@@ -4,7 +4,7 @@ import { NaturalAlertService } from '../../../natural/components/alert/alert.ser
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge } from 'lodash';
 import { FamilyUserService } from './family-user.service';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 
 @Component({
     selector: 'app-family-member',
@@ -12,7 +12,7 @@ import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
     styleUrls: ['./family-member.component.scss'],
 })
 export class FamilyMemberComponent
-    extends AbstractDetail<User['user'],
+    extends NaturalAbstractDetail<User['user'],
         UserVariables,
         CreateUser['createUser'],
         CreateUserVariables,

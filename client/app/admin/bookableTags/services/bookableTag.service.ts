@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { bookableTagQuery, bookableTagsQuery, createBookableTag, deleteBookableTags, updateBookableTag } from './bookableTag.queries';
 import {
     BookableTag,
@@ -18,7 +18,7 @@ import { Validators } from '@angular/forms';
 @Injectable({
     providedIn: 'root',
 })
-export class BookableTagService extends AbstractModelService<BookableTag['bookableTag'],
+export class BookableTagService extends NaturalAbstractModelService<BookableTag['bookableTag'],
     BookableTagVariables,
     BookableTags['bookableTags'],
     BookableTagsVariables,

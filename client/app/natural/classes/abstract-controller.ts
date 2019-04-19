@@ -6,7 +6,7 @@ import { OnDestroy } from '@angular/core';
  * import { takeUntil } from 'rxjs/operators';
  * .pipe(takeUntil(this.ngUnsubscribe)) as first pipe on observables that should be destroyed on component destroy
  */
-export class AbstractController implements OnDestroy {
+export class NaturalAbstractController implements OnDestroy {
 
     protected ngUnsubscribe = new Subject<void>();
 

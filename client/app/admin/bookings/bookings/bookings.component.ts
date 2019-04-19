@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractList } from '../../../natural/classes/AbstractList';
+import { NaturalAbstractList } from '../../../natural/classes/abstract-list';
 import { Bookings, BookingsVariables } from '../../../shared/generated-types';
 import { BookingService } from '../services/booking.service';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
@@ -13,7 +13,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     templateUrl: './bookings.component.html',
     styleUrls: ['./bookings.component.scss'],
 })
-export class BookingsComponent extends AbstractList<Bookings['bookings'], BookingsVariables> implements OnInit {
+export class BookingsComponent extends NaturalAbstractList<Bookings['bookings'], BookingsVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 router: Router,

@@ -5,8 +5,8 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 import { ActivatedRoute } from '@angular/router';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { mergeWith } from 'lodash';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
-import { AbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
 
 @Component({
     selector: 'app-family',
@@ -30,7 +30,7 @@ export class FamilyComponent implements OnInit {
         this.viewer = this.route.snapshot.data.viewer.model;
 
         if (this.viewer) {
-            const qvm = new QueryVariablesManager<UsersVariables>();
+            const qvm = new NaturalQueryVariablesManager<UsersVariables>();
             qvm.set('variables', UserService.getFamilyVariables(this.viewer));
             this.userService.getAll(qvm).subscribe(members => this.familyMembers = members.items);
         }
@@ -54,7 +54,7 @@ export class FamilyComponent implements OnInit {
                 if (confirmed) {
                     this.userService.leaveFamily(this.viewer).subscribe(user => {
 
-                        mergeWith(this.viewer, user, AbstractModelService.mergeOverrideArray);
+                        mergeWith(this.viewer, user, NaturalAbstractModelService.mergeOverrideArray);
                         const message = 'Vous avez quitté le ménage';
                         this.alertService.info(message, 5000);
                     });

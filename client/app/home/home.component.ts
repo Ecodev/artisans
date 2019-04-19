@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../admin/users/services/user.service';
-import { AbstractController } from '../shared/components/AbstractController';
+import { NaturalAbstractController } from '../natural/classes/abstract-controller';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SidenavContainerComponent } from '../natural/modules/sidenav/components/sidenav-container/sidenav-container.component';
@@ -11,7 +11,7 @@ import { NaturalSidenavService } from '../natural/modules/sidenav/sidenav.servic
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent extends AbstractController implements OnInit {
+export class HomeComponent extends NaturalAbstractController implements OnInit {
 
     public menu: SidenavContainerComponent | undefined;
 

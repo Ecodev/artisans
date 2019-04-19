@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import {
     TransactionTag,
@@ -19,7 +19,7 @@ import { TransactionTagService } from '../services/transactionTag.service';
     styleUrls: ['./transactionTag.component.scss'],
 })
 export class TransactionTagComponent
-    extends AbstractDetail<TransactionTag['transactionTag'],
+    extends NaturalAbstractDetail<TransactionTag['transactionTag'],
         TransactionTagVariables,
         CreateTransactionTag['createTransactionTag'],
         CreateTransactionTagVariables,

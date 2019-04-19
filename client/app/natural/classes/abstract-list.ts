@@ -5,11 +5,11 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, Sort } from '@angular/material';
 import { fromUrl, NaturalSearchConfiguration, NaturalSearchSelections, toGraphQLDoctrineFilter, toUrl } from '@ecodev/natural-search';
 import { NaturalPersistenceService } from '../services/persistence.service';
-import { PaginationInput, QueryVariables, QueryVariablesManager } from './QueryVariablesManager';
-import { AbstractController } from '../../shared/components/AbstractController';
-import { NaturalDataSource } from './DataSource';
+import { NaturalQueryVariablesManager, PaginationInput, QueryVariables } from './query-variable-manager';
+import { NaturalAbstractController } from './abstract-controller';
+import { NaturalDataSource } from './data-source';
 import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
-import { AbstractModelService } from '../services/abstract-model.service';
+import { NaturalAbstractModelService } from '../services/abstract-model.service';
 import { NaturalAlertService } from '../components/alert/alert.service';
 
 /**
@@ -21,9 +21,7 @@ import { NaturalAlertService } from '../components/alert/alert.service';
  * Usage :
  * <natural-my-listing [contextVariables]="{filter:...}" [contextColumns]="['col1']" [persistSearch]="false">
  */
-export class AbstractList<Tall, Vall extends QueryVariables>
-    extends AbstractController
-    implements OnInit, OnDestroy {
+export class NaturalAbstractList<Tall, Vall extends QueryVariables> extends NaturalAbstractController implements OnInit, OnDestroy {
 
     /**
      * Contextual variables to apply on a list
@@ -62,7 +60,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     public selection: SelectionModel<Tall>;
     public bulkActionSelected: string | null;
 
-    public variablesManager: QueryVariablesManager<Vall> = new QueryVariablesManager<Vall>();
+    public variablesManager: NaturalQueryVariablesManager<Vall> = new NaturalQueryVariablesManager<Vall>();
     public naturalSearchConfig: NaturalSearchConfiguration | null;
     public naturalSearchSelections: NaturalSearchSelections | null = [[]];
     public routeData;
@@ -88,7 +86,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
     }
 
     constructor(protected key: string,
-                protected service: AbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
+                protected service: NaturalAbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
                 protected router: Router,
                 protected route: ActivatedRoute,
                 protected alertService: NaturalAlertService,
@@ -265,7 +263,7 @@ export class AbstractList<Tall, Vall extends QueryVariables>
 
         // Natural search : ns
         this.naturalSearchSelections = fromUrl(this.persistenceService.get('ns', this.route, storageKey));
-        if (AbstractList.hasSelections(this.naturalSearchSelections)) {
+        if (NaturalAbstractList.hasSelections(this.naturalSearchSelections)) {
             this.translateSearchAndRefreshList(this.naturalSearchSelections);
         }
 

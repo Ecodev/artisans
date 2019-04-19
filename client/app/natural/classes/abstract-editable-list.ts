@@ -2,10 +2,10 @@ import { OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { merge } from 'lodash';
 import { MatTableDataSource } from '@angular/material';
-import { AbstractDetail } from './AbstractDetail';
-import { QueryVariables, QueryVariablesManager } from './QueryVariablesManager';
-import { AbstractController } from '../../shared/components/AbstractController';
-import { AbstractModelService } from '../services/abstract-model.service';
+import { NaturalAbstractDetail } from './abstract-detail';
+import { NaturalQueryVariablesManager, QueryVariables } from './query-variable-manager';
+import { NaturalAbstractController } from './abstract-controller';
+import { NaturalAbstractModelService } from '../services/abstract-model.service';
 import { Literal } from '../types/types';
 
 /**
@@ -20,15 +20,16 @@ import { Literal } from '../types/types';
  * this.cmp.addEmpty();
  *
  */
-export class AbstractEditableList<Tall extends { items: any[] }, Vall extends QueryVariables> extends AbstractController implements OnInit {
+export class NaturalAbstractEditableList<Tall extends { items: any[] }, Vall extends QueryVariables> extends NaturalAbstractController
+    implements OnInit {
 
     public result;
     public form: FormGroup;
-    public variablesManager: QueryVariablesManager<Vall> = new QueryVariablesManager<Vall>();
+    public variablesManager: NaturalQueryVariablesManager<Vall> = new NaturalQueryVariablesManager<Vall>();
     public dataSource;
 
     constructor(protected key: string,
-                protected service: AbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
+                protected service: NaturalAbstractModelService<any, any, Tall, Vall, any, any, any, any, any>,
     ) {
         super();
     }
@@ -50,7 +51,7 @@ export class AbstractEditableList<Tall extends { items: any[] }, Vall extends Qu
         if (lines) {
             items.items.forEach(item => {
                 const data = merge(this.service.getConsolidatedForClient(), item);
-                const lineFormGroup = AbstractDetail.getFormGroup(data, this.service);
+                const lineFormGroup = NaturalAbstractDetail.getFormGroup(data, this.service);
                 lines.push(lineFormGroup);
             });
             this.dataSource = new MatTableDataSource(lines.controls);
@@ -71,7 +72,7 @@ export class AbstractEditableList<Tall extends { items: any[] }, Vall extends Qu
     public addEmpty() {
         const lines = this.form.get('lines') as FormArray;
         if (lines) {
-            lines.push(AbstractDetail.getFormGroup({}, this.service));
+            lines.push(NaturalAbstractDetail.getFormGroup({}, this.service));
             this.dataSource = new MatTableDataSource(lines.controls);
         }
     }
@@ -88,7 +89,7 @@ export class AbstractEditableList<Tall extends { items: any[] }, Vall extends Qu
         const lines = this.form.get('lines') as FormArray;
         if (lines && newLines && newLines.length) {
             newLines.forEach(line => {
-                lines.push(AbstractDetail.getFormGroup(line, this.service));
+                lines.push(NaturalAbstractDetail.getFormGroup(line, this.service));
             });
 
             this.dataSource = new MatTableDataSource(lines.controls);
@@ -114,7 +115,7 @@ export class AbstractEditableList<Tall extends { items: any[] }, Vall extends Qu
     }
 
     public validateForm() {
-        AbstractDetail.validateAllFormFields(this.form);
+        NaturalAbstractDetail.validateAllFormFields(this.form);
     }
 
 }

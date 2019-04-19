@@ -1,4 +1,4 @@
-import { Utility } from './Utility';
+import { NaturalUtility } from './utility';
 
 describe('Utility', () => {
 
@@ -45,7 +45,7 @@ describe('Utility', () => {
             date: date,
         };
 
-        const result = Utility.relationsToIds(input);
+        const result = NaturalUtility.relationsToIds(input);
         expect(result).toEqual(expected);
 
         // The original object must not be touched
@@ -53,23 +53,23 @@ describe('Utility', () => {
     });
 
     it('should make plural according to english grammar', () => {
-        const result1 = Utility.makePlural('action');
+        const result1 = NaturalUtility.makePlural('action');
         expect(result1).toBe('actions');
 
-        const result2 = Utility.makePlural('taxonomy');
+        const result2 = NaturalUtility.makePlural('taxonomy');
         expect(result2).toBe('taxonomies');
 
-        const result3 = Utility.makePlural('process');
+        const result3 = NaturalUtility.makePlural('process');
         expect(result3).toBe('processes');
     });
 
     it('should uppercase first letter', () => {
-        const result = Utility.upperCaseFirstLetter('foo bAr');
+        const result = NaturalUtility.upperCaseFirstLetter('foo bAr');
         expect(result).toBe('Foo bAr');
     });
 
     it('should lowercase first letter', () => {
-        const result = Utility.lowerCaseFirstLetter('FOO BaR');
+        const result = NaturalUtility.lowerCaseFirstLetter('FOO BaR');
         expect(result).toBe('fOO BaR');
     });
 

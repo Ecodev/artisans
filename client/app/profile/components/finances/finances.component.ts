@@ -9,15 +9,15 @@ import { NaturalAlertService } from '../../../natural/components/alert/alert.ser
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { AbstractController } from '../../../shared/components/AbstractController';
-import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
+import { NaturalDataSource } from '../../../natural/classes/data-source';
 
 @Component({
     selector: 'app-finances',
     templateUrl: './finances.component.html',
     styleUrls: ['./finances.component.scss'],
 })
-export class FinancesComponent extends AbstractController implements OnInit, OnChanges, OnDestroy {
+export class FinancesComponent extends NaturalAbstractController implements OnInit, OnChanges, OnDestroy {
 
     @Input() user;
 

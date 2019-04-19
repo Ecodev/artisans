@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { transactionLineQuery, transactionLinesQuery } from './transactionLine.queries';
 import {
     Account,
@@ -15,7 +15,7 @@ import {
 } from '../../../shared/generated-types';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -31,7 +31,7 @@ function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
 @Injectable({
     providedIn: 'root',
 })
-export class TransactionLineService extends AbstractModelService<TransactionLine['transactionLine'],
+export class TransactionLineService extends NaturalAbstractModelService<TransactionLine['transactionLine'],
     TransactionLineVariables,
     TransactionLines['transactionLines'],
     TransactionLinesVariables,
@@ -98,7 +98,7 @@ export class TransactionLineService extends AbstractModelService<TransactionLine
             pagination: {pageIndex: 0, pageSize: 9999},
         };
 
-        const qvm = new QueryVariablesManager<TransactionLinesVariables>();
+        const qvm = new NaturalQueryVariablesManager<TransactionLinesVariables>();
         qvm.set('variables', variables);
         return this.watchAll(qvm, expire);
     }

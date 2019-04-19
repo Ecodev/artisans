@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     createUser,
     currentUserForProfileQuery,
@@ -56,8 +56,8 @@ import { Literal } from '../../../natural/types/types';
 import { BookingService } from '../../bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
-import { ExtendedFormControl } from '../../../natural/classes/ExtendedFormControl';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
+import { NaturalFormControl } from '../../../natural/classes/form-control';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 import { PricedBookingService } from '../../bookings/services/PricedBooking.service';
 
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
@@ -74,7 +74,7 @@ export function LoginValidatorFn(control: FormControl): ValidationErrors | null 
 @Injectable({
     providedIn: 'root',
 })
-export class UserService extends AbstractModelService<User['user'],
+export class UserService extends NaturalAbstractModelService<User['user'],
     UserVariables,
     Users['users'],
     UsersVariables,
@@ -223,7 +223,7 @@ export class UserService extends AbstractModelService<User['user'],
             value: model.account,
             disabled: true,
         };
-        config.account = new ExtendedFormControl(formState);
+        config.account = new NaturalFormControl(formState);
 
         return config;
     }
@@ -317,7 +317,7 @@ export class UserService extends AbstractModelService<User['user'],
             },
         };
 
-        const qvm = new QueryVariablesManager<BookingsVariables>();
+        const qvm = new NaturalQueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
         return this.pricedBookingService.watchAll(qvm, expire);
     }
@@ -340,7 +340,7 @@ export class UserService extends AbstractModelService<User['user'],
             },
         };
 
-        const qvm = new QueryVariablesManager<BookingsVariables>();
+        const qvm = new NaturalQueryVariablesManager<BookingsVariables>();
         qvm.set('variables', variables);
         return this.bookingService.watchAll(qvm, expire);
     }

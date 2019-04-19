@@ -6,7 +6,7 @@ import { intersection } from 'lodash';
 import { HierarchicFlatNode } from '../classes/FlatNode';
 import { HierarchicModelNode } from '../classes/ModelNode';
 import { HierarchicFilterConfiguration, HierarchicFiltersConfiguration } from '../classes/HierarchicFiltersConfiguration';
-import { QueryVariables, QueryVariablesManager } from '../../../classes/QueryVariablesManager';
+import { QueryVariables, NaturalQueryVariablesManager } from '../../../classes/query-variable-manager';
 import { NaturalHierarchicConfiguration } from '../classes/HierarchicConfiguration';
 
 export interface OrganizedModelSelection {
@@ -94,7 +94,7 @@ export class NaturalHierarchicSelectorService {
             const filter = this.getServiceFilter(node, config, contextFilter, !!searchVariables);
             if (filter && config.injectedService) {
                 configurations.push(config);
-                const variablesManager = new QueryVariablesManager();
+                const variablesManager = new NaturalQueryVariablesManager();
 
                 variablesManager.set('variables', {
                     filter: filter,

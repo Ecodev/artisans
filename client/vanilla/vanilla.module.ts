@@ -11,7 +11,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { UserService } from '../app/admin/users/services/user.service';
 import { BookingService } from '../app/admin/bookings/services/booking.service';
 import { NaturalLinkMutationService } from '../app/natural/services/link-mutation.service';
-import { QueryVariablesManager } from '../app/natural/classes/QueryVariablesManager';
+import { NaturalQueryVariablesManager } from '../app/natural/classes/query-variable-manager';
 
 @NgModule({
     imports: [
@@ -57,7 +57,7 @@ export class VanillaModule implements DoBootstrap {
             userService,
             bookableService,
             bookingService,
-            QueryVariablesManager,
+            NaturalQueryVariablesManager,
             linkMutation,
         };
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import { createUserTag, deleteUserTags, updateUserTag, userTagQuery, userTagsQuery } from './userTag.queries';
 import {
     CreateUserTag,
@@ -18,7 +18,7 @@ import { Validators } from '@angular/forms';
 @Injectable({
     providedIn: 'root',
 })
-export class UserTagService extends AbstractModelService<UserTag['userTag'],
+export class UserTagService extends NaturalAbstractModelService<UserTag['userTag'],
     UserTagVariables,
     UserTags['userTags'],
     UserTagsVariables,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import { BookableService } from '../services/bookable.service';
 import {
@@ -27,7 +27,7 @@ import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfigura
     styleUrls: ['./bookable.component.scss'],
 })
 export class BookableComponent
-    extends AbstractDetail<Bookable['bookable'],
+    extends NaturalAbstractDetail<Bookable['bookable'],
         BookableVariables,
         CreateBookable['createBookable'],
         CreateBookableVariables,

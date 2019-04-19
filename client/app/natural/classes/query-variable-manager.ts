@@ -67,12 +67,12 @@ function mergeConcatArray(destValue, source) {
  * fm.merge('componentB-variables', {a : [3, 4]);
  * console.log(fm.variables.value); // {a : [1, 2, 3, 4]}
  */
-export class QueryVariablesManager<T extends QueryVariables = QueryVariables> {
+export class NaturalQueryVariablesManager<T extends QueryVariables = QueryVariables> {
 
     public readonly variables: BehaviorSubject<T | undefined> = new BehaviorSubject<T | undefined>(undefined);
     private readonly channels: Map<string, T> = new Map<string, T>();
 
-    constructor(queryVariablesManager?: QueryVariablesManager<T>) {
+    constructor(queryVariablesManager?: NaturalQueryVariablesManager<T>) {
 
         if (queryVariablesManager) {
             this.channels = queryVariablesManager.getChannelsCopy();

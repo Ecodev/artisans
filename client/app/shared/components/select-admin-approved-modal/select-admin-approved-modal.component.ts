@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { Bookables, BookablesVariables } from '../../generated-types';
 import { SelectionModel } from '@angular/cdk/collections';
-import { QueryVariablesManager } from '../../../natural/classes/QueryVariablesManager';
-import { NaturalDataSource } from '../../../natural/classes/DataSource';
+import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalDataSource } from '../../../natural/classes/data-source';
 import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SelectAdminApprovedModalComponent implements OnInit {
 
     ngOnInit() {
         const serviceVariables = BookableService.adminApprovedByTag(BookableTagService.SERVICE);
-        const qvmServices = new QueryVariablesManager<BookablesVariables>();
+        const qvmServices = new NaturalQueryVariablesManager<BookablesVariables>();
         qvmServices.set('variables', serviceVariables);
 
         // Get all because requirable services should not change
@@ -30,7 +30,7 @@ export class SelectAdminApprovedModalComponent implements OnInit {
         });
 
         const storageVariables = BookableService.adminApprovedByTag(BookableTagService.STORAGE);
-        const qvmStorage = new QueryVariablesManager<BookablesVariables>();
+        const qvmStorage = new NaturalQueryVariablesManager<BookablesVariables>();
         qvmStorage.set('variables', storageVariables);
 
         // Get all because requirable storages should not change

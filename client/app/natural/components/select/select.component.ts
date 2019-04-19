@@ -18,12 +18,12 @@ import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { isObject, merge } from 'lodash';
 import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { MatAutocompleteTrigger } from '@angular/material';
-import { ExtendedFormControl } from '../../classes/ExtendedFormControl';
-import { AbstractController } from '../../../shared/components/AbstractController';
+import { NaturalFormControl } from '../../classes/form-control';
+import { NaturalAbstractController } from '../../classes/abstract-controller';
 import { HierarchicFiltersConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicFiltersConfiguration';
 import { NaturalHierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { OrganizedModelSelection } from '../../modules/hierarchic-selector/services/hierarchic-selector.service';
-import { QueryVariables, QueryVariablesManager } from '../../classes/QueryVariablesManager';
+import { QueryVariables, NaturalQueryVariablesManager } from '../../classes/query-variable-manager';
 import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
@@ -58,7 +58,7 @@ import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selecto
     selector: 'natural-select',
     templateUrl: './select.component.html',
 })
-export class NaturalSelectComponent extends AbstractController implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
+export class NaturalSelectComponent extends NaturalAbstractController implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
 
     @ViewChild(MatAutocompleteTrigger) autoTrigger: MatAutocompleteTrigger;
     @ViewChild('input') input: ElementRef<HTMLInputElement>;
@@ -134,7 +134,7 @@ export class NaturalSelectComponent extends AbstractController implements OnInit
     /**
      * Init search options
      */
-    private variablesManager: QueryVariablesManager<QueryVariables>;
+    private variablesManager: NaturalQueryVariablesManager<QueryVariables>;
     /**
      * Stores the value given from parent, it's usually an object. The inner value is formCtrl.value that is a string.
      */
@@ -160,8 +160,8 @@ export class NaturalSelectComponent extends AbstractController implements OnInit
     ngAfterViewInit(): void {
 
         if (this.ngControl && this.ngControl.control) {
-            if ((this.ngControl.control as ExtendedFormControl).dirtyChanges) {
-                (this.ngControl.control as ExtendedFormControl).dirtyChanges.subscribe(() => {
+            if ((this.ngControl.control as NaturalFormControl).dirtyChanges) {
+                (this.ngControl.control as NaturalFormControl).dirtyChanges.subscribe(() => {
                     this.formCtrl.markAsDirty({onlySelf: true});
                     this.formCtrl.updateValueAndValidity();
                 });
@@ -216,7 +216,7 @@ export class NaturalSelectComponent extends AbstractController implements OnInit
 
         variables = merge(variables, this.getSearchFilter(null));
 
-        this.variablesManager = new QueryVariablesManager<QueryVariables>();
+        this.variablesManager = new NaturalQueryVariablesManager<QueryVariables>();
         this.variablesManager.merge('additional-filter', {filter: this.filter});
         this.variablesManager.set('variables', variables);
     }

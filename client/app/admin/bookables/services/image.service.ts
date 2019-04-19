@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
 import { CreateImage, CreateImageVariables, ImageInput } from '../../../shared/generated-types';
-import { AbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
 
 export const createImageMutation = gql`
     mutation CreateImage($input: ImageInput!) {
@@ -20,7 +20,7 @@ export const createImageMutation = gql`
 @Injectable({
     providedIn: 'root',
 })
-export class ImageService extends AbstractModelService<any,
+export class ImageService extends NaturalAbstractModelService<any,
     any,
     any,
     any,

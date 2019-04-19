@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AbstractDetail } from '../../../natural/classes/AbstractDetail';
+import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
 import {
     CreateUserTag,
@@ -20,7 +20,7 @@ import { UserService } from '../../users/services/user.service';
     styleUrls: ['./userTag.component.scss'],
 })
 export class UserTagComponent
-    extends AbstractDetail<UserTag['userTag'],
+    extends NaturalAbstractDetail<UserTag['userTag'],
         UserTagVariables,
         CreateUserTag['createUserTag'],
         CreateUserTagVariables,

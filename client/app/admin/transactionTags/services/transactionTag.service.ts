@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
 import {
     transactionTagsQuery,
     transactionTagQuery,
@@ -24,7 +24,7 @@ import { Validators } from '@angular/forms';
 @Injectable({
     providedIn: 'root',
 })
-export class TransactionTagService extends AbstractModelService<TransactionTag['transactionTag'],
+export class TransactionTagService extends NaturalAbstractModelService<TransactionTag['transactionTag'],
     TransactionTagVariables,
     TransactionTags['transactionTags'],
     TransactionTagsVariables,

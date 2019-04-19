@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../admin/bookables/services/bookable.service';
 import { BookingService } from '../../admin/bookings/services/booking.service';
 import { UserService } from '../../admin/users/services/user.service';
-import { AbstractController } from '../../shared/components/AbstractController';
+import { NaturalAbstractController } from '../../natural/classes/abstract-controller';
 import { Bookings, BookingType } from '../../shared/generated-types';
 
 @Component({
@@ -11,7 +11,7 @@ import { Bookings, BookingType } from '../../shared/generated-types';
     templateUrl: './bookable.component.html',
     styleUrls: ['./bookable.component.scss'],
 })
-export class BookableComponent extends AbstractController implements OnInit {
+export class BookableComponent extends NaturalAbstractController implements OnInit {
 
     /**
      * If the user has a required licence to use the bookable

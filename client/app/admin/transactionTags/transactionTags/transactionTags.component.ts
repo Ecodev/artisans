@@ -6,7 +6,7 @@ import { NaturalSearchConfigurationService } from '../../../shared/natural-searc
 import { TransactionTags, TransactionTagsVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../services/transactionTag.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { AbstractList } from '../../../natural/classes/AbstractList';
+import { NaturalAbstractList } from '../../../natural/classes/abstract-list';
 
 @Component({
     selector: 'app-transaction-tags',
@@ -14,7 +14,7 @@ import { AbstractList } from '../../../natural/classes/AbstractList';
     styleUrls: ['./transactionTags.component.scss'],
 })
 export class TransactionTagsComponent
-    extends AbstractList<TransactionTags['transactionTags'], TransactionTagsVariables>
+    extends NaturalAbstractList<TransactionTags['transactionTags'], TransactionTagsVariables>
     implements OnInit {
 
     constructor(route: ActivatedRoute,

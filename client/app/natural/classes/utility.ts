@@ -1,7 +1,7 @@
 import { isArray, isEmpty, isObject, pickBy } from 'lodash';
 import { Literal } from '../types/types';
 
-export class Utility {
+export class NaturalUtility {
 
     /**
      * Relations to full objects are converted to their IDs only.
@@ -92,7 +92,7 @@ export class Utility {
      * @param hexBgColor string in hexadecimals representing the background color
      */
     public static getForegroundColor(hexBgColor: string): 'black' | 'white' {
-        const rgb = Utility.hexToRgb(hexBgColor.slice(0, 7)); // splice remove alpha and consider only "visible" color at 100% alpha
+        const rgb = NaturalUtility.hexToRgb(hexBgColor.slice(0, 7)); // splice remove alpha and consider only "visible" color at 100% alpha
         const o = Math.round(((rgb.r * 299) + (rgb.g * 587) + (rgb.b * 114)) / 1000);
 
         return (o > 125) ? 'black' : 'white';

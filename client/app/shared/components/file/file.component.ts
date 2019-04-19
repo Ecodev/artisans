@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UploadService } from './services/upload.service';
 import { takeUntil } from 'rxjs/operators';
-import { AbstractController } from '../AbstractController';
+import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
 import { Observable, of, Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { Observable, of, Subject } from 'rxjs';
     styleUrls: ['./file.component.scss'],
     providers: [UploadService],
 })
-export class FileComponent extends AbstractController implements OnInit, OnChanges {
+export class FileComponent extends NaturalAbstractController implements OnInit, OnChanges {
 
     @HostBinding('style.height.px') @Input() height = 250;
 

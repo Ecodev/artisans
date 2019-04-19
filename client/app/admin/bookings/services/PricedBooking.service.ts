@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { pricedBookingsQuery } from './booking.queries';
 import { Bookings, BookingsVariables } from '../../../shared/generated-types';
-import { AbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class PricedBookingService extends AbstractModelService<any,
+export class PricedBookingService extends NaturalAbstractModelService<any,
     any,
     Bookings['bookings'],
     BookingsVariables,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractList } from '../../../natural/classes/AbstractList';
+import { NaturalAbstractList } from '../../../natural/classes/abstract-list';
 import { Users, UserStatus, UsersVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
@@ -13,7 +13,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent extends AbstractList<Users['users'], UsersVariables> implements OnInit {
+export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVariables> implements OnInit {
 
     public initialColumns = [
         'balance',

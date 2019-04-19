@@ -18,8 +18,67 @@ import { AccountingDocumentsComponent } from '../../admin/accounting-documents/a
 import { TimeagoModule } from 'ngx-timeago';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
-import { NaturalModule } from '../../natural/natural.module';
 import { NaturalSearchModule } from '@ecodev/natural-search';
+import { NaturalIconsConfig } from '../../natural/modules/icon/icon.component';
+import { NaturalCommonModule } from '../../natural/modules/common/common-module';
+import { NaturalHierarchicSelectorModule } from '../../natural/modules/hierarchic-selector/hierarchic-selector.module';
+import { NaturalSidenavModule } from '../../natural/modules/sidenav/sidenav.module';
+import { NaturalIconModule } from '../../natural/modules/icon/icon.module';
+import { NaturalSelectModule } from '../../natural/modules/select/select.module';
+import { NaturalRelationsModule } from '../../natural/modules/relations/relations.module';
+import { NaturalAlertModule } from '../../natural/modules/alert/alert.module';
+import { NaturalColumnsPickerModule } from '../../natural/modules/columns-picker/columns-picker.module';
+import { NaturalSelectEnumModule } from '../../natural/modules/select-enum/select-enum.module';
+import { NaturalStampModule } from '../../natural/modules/stamp/stamp-module.module';
+import { NaturalDetailHeaderModule } from '../../natural/modules/detail-header/detail-header.module';
+import { NaturalTableButtonModule } from '../../natural/modules/table-button/table-button.module';
+import { NaturalFixedButtonModule } from '../../natural/modules/fixed-button/fixed-button.module';
+import { NaturalFixedButtonDetailModule } from '../../natural/modules/fixed-button-detail/fixed-button-detail.module';
+
+const iconsConfig: NaturalIconsConfig = {
+    'qr': {
+        svg: 'assets/icons/qr.svg',
+    },
+    'simple-qr': {
+        svg: 'assets/icons/simple-qr.svg',
+    },
+    'own_bookable': {
+        svg: 'assets/icons/swimsuit.svg',
+    },
+    'code': {
+        svg: 'assets/icons/input.svg',
+    },
+    'doors': {
+        svg: 'assets/icons/key.svg',
+    },
+    'family': {
+        svg: 'assets/icons/family.svg',
+    },
+    'lake': {
+        svg: 'assets/icons/lake.svg',
+    },
+    'transactionHistory': {
+        svg: 'assets/icons/history.svg',
+    },
+    'claims': {
+        svg: 'assets/icons/claims.svg',
+    },
+    'finances': {
+        svg: 'assets/icons/notes.svg',
+    },
+    'browse_bookables': {
+        svg: 'assets/icons/search.svg',
+    },
+    'administrator': {
+        svg: 'assets/icons/boss.svg',
+    },
+    'exit': {
+        svg: 'assets/icons/exit.svg',
+    },
+    'ichtus': {
+        svg: 'assets/ichtus.svg',
+    },
+};
 
 const declarations = [
     AddressComponent,
@@ -38,20 +97,35 @@ const declarations = [
 const imports = [
     CommonModule,
     MaterialModule,
-    NaturalModule,
-    NaturalSearchModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
     AvatarModule,
     ngfModule,
     ParticleEffectButtonModule,
+    NaturalSearchModule,
+    NaturalCommonModule,
+    NaturalHierarchicSelectorModule,
+    NaturalSidenavModule,
+    NaturalSelectModule,
+    NaturalRelationsModule,
+    NaturalAlertModule,
+    NaturalColumnsPickerModule,
+    NaturalSelectEnumModule,
+    NaturalStampModule,
+    NaturalDetailHeaderModule,
+    NaturalTableButtonModule,
+    NaturalFixedButtonModule,
+    NaturalFixedButtonDetailModule,
 ];
 
 @NgModule({
     declarations: [...declarations],
-    imports: [...imports],
-    exports: [...imports, ...declarations, TimeagoModule],
+    imports: [
+        ...imports,
+        NaturalIconModule.forRoot(iconsConfig),
+    ],
+    exports: [...imports, ...declarations, TimeagoModule, NaturalIconModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [CommentComponent],
 })

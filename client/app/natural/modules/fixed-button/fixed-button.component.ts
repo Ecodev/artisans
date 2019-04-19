@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'natural-fixed-button',
     templateUrl: './fixed-button.component.html',
     styleUrls: ['./fixed-button.component.scss'],
 })
-export class NaturalFixedButtonComponent implements OnInit {
+export class NaturalFixedButtonComponent {
 
     @Input() link: string;
     @Input() icon: string;
@@ -13,9 +13,6 @@ export class NaturalFixedButtonComponent implements OnInit {
     @Input() disabled = false;
 
     constructor() {
-    }
-
-    ngOnInit() {
     }
 
 }

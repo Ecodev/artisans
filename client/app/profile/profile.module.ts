@@ -17,7 +17,6 @@ import {
 } from '../shared/components/select-admin-approved-button/select-admin-approved-button.component';
 import { HistoryComponent } from './components/history/history.component';
 import { FinancesComponent } from './components/finances/finances.component';
-import { NaturalModule } from '../natural/natural.module';
 
 @NgModule({
     declarations: [
@@ -39,7 +38,6 @@ import { NaturalModule } from '../natural/natural.module';
         ProfileRoutingModule,
         MaterialModule,
         IchtusModule,
-        NaturalModule
     ],
     entryComponents: [
         CreateRefundComponent,
@@ -48,7 +46,7 @@ import { NaturalModule } from '../natural/natural.module';
     ],
     exports: [
         ServicesComponent,
-        FinancesComponent
+        FinancesComponent,
     ],
 })
 export class ProfileModule {

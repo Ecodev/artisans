@@ -30,7 +30,6 @@ import { EditableTransactionLinesComponent } from './transactions/editable-trans
 import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin-only-modal/select-admin-only-modal.component';
 import { ProfileModule } from '../profile/profile.module';
 import { BookableMetadataComponent } from './bookable-metadata/bookable-metadata.component';
-import { NaturalModule } from '../natural/natural.module';
 
 @NgModule({
     declarations: [
@@ -66,7 +65,6 @@ import { NaturalModule } from '../natural/natural.module';
         IchtusModule,
         AvatarModule,
         ProfileModule,
-        NaturalModule,
     ],
     entryComponents: [
         SelectAdminOnlyModalComponent,

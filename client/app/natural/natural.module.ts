@@ -1,8 +1,7 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { NaturalHierarchicSelectorModule } from './modules/hierarchic-selector/hierarchic-selector.module';
 import { NaturalSidenavModule } from './modules/sidenav/sidenav.module';
 import { NaturalIconModule } from './modules/icon/icon.module';
-import { IconsConfigService, NaturalIconsConfig } from './modules/icon/icon.component';
 import { NaturalSelectModule } from './modules/select/select.module';
 import { NaturalRelationsModule } from './modules/relations/relations.module';
 import { NaturalAlertModule } from './modules/alert/alert.module';
@@ -42,15 +41,4 @@ const importsToExport = [
 })
 export class NaturalModule {
 
-    static forRoot(config: NaturalIconsConfig): ModuleWithProviders {
-        return {
-            ngModule: NaturalModule,
-            providers: [
-                {
-                    provide: IconsConfigService,
-                    useValue: config,
-                },
-            ],
-        };
-    }
 }

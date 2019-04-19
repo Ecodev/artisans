@@ -7,7 +7,7 @@ import { omit } from 'lodash';
 import { NaturalAbstractController } from './abstract-controller';
 import { NaturalAbstractModelService, VariablesWithInput } from '../services/abstract-model.service';
 import { Literal } from '../types/types';
-import { NaturalAlertService } from '../components/alert/alert.service';
+import { NaturalAlertService } from '../modules/alert/alert.service';
 
 export class NaturalAbstractDetail<Tone,
     Vone,

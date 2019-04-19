@@ -4,7 +4,7 @@ import { NaturalAbstractController } from '../natural/classes/abstract-controlle
 import { UserService } from '../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Literal } from '../natural/types/types';
-import { NaturalAlertService } from '../natural/components/../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../natural/modules/alert/alert.service';
 
 
 @Component({

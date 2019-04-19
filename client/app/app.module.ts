@@ -34,7 +34,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
 import { NaturalModule } from './natural/natural.module';
-import { NaturalAlertService } from './natural/components/alert/alert.service';
+import { NaturalAlertService } from './natural/modules/alert/alert.service';
 import { NaturalIconsConfig } from './natural/modules/icon/icon.component';
 
 registerLocaleData(localeFRCH);

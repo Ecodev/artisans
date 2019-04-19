@@ -4,7 +4,7 @@ import { SafetyBookingService } from './safety-booking.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalSearchConfigurationService } from '../shared/natural-search/natural-search-configuration.service';
 import { PermissionsService } from '../shared/services/permissions.service';
-import { NaturalAlertService } from '../natural/components/../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../natural/modules/alert/alert.service';
 import { NaturalPersistenceService } from '../natural/services/persistence.service';
 
 @Component({

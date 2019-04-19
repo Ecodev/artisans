@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule, MatIconModule, MatSidenavModule } from '@angular/material';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
-import { SidenavContainerComponent } from './components/sidenav-container/sidenav-container.component';
-import { SidenavContentComponent } from './components/sidenav-content/sidenav-content.component';
+import { NaturalSidenavComponent } from './sidenav/sidenav.component';
+import { NaturalSidenavContainerComponent } from './sidenav-container/sidenav-container.component';
+import { NaturalSidenavContentComponent } from './sidenav-content/sidenav-content.component';
 
 @NgModule({
     declarations: [
-        SidenavComponent,
-        SidenavContainerComponent,
-        SidenavContentComponent,
+        NaturalSidenavComponent,
+        NaturalSidenavContainerComponent,
+        NaturalSidenavContentComponent,
     ],
     imports: [
         CommonModule,
@@ -18,11 +18,11 @@ import { SidenavContentComponent } from './components/sidenav-content/sidenav-co
         MatButtonModule,
     ],
     exports: [
-        SidenavComponent,
-        SidenavContainerComponent,
-        SidenavContentComponent,
+        NaturalSidenavComponent,
+        NaturalSidenavContainerComponent,
+        NaturalSidenavContentComponent,
     ],
 
 })
-export class SidenavModule {
+export class NaturalSidenavModule {
 }

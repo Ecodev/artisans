@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { RegisterComponent } from './register.component';

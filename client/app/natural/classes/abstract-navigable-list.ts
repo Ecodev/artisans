@@ -5,7 +5,7 @@ import { NaturalPersistenceService } from '../services/persistence.service';
 import { NaturalAbstractList } from './abstract-list';
 import { QueryVariables } from './query-variable-manager';
 import { NaturalAbstractModelService } from '../services/abstract-model.service';
-import { NaturalAlertService } from '../components/alert/alert.service';
+import { NaturalAlertService } from '../modules/alert/alert.service';
 import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
 
 /**

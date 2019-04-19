@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList } from '../../../natural/classes/abstract-list';
 import { Bookings, BookingsVariables } from '../../../shared/generated-types';
 import { BookingService } from '../services/booking.service';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { NaturalPersistenceService } from '../../../natural/services/persistence.service';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import {
     BookableTag,
     BookableTagVariables,

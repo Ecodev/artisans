@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
 import { NaturalDataSource } from '../../../natural/classes/data-source';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 
 @Component({
     selector: 'app-services',

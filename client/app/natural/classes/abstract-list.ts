@@ -10,7 +10,7 @@ import { NaturalAbstractController } from './abstract-controller';
 import { NaturalDataSource } from './data-source';
 import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
 import { NaturalAbstractModelService } from '../services/abstract-model.service';
-import { NaturalAlertService } from '../components/alert/alert.service';
+import { NaturalAlertService } from '../modules/alert/alert.service';
 
 /**
  * This class helps managing a list of paginated items that can be filtered,

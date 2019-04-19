@@ -3,7 +3,7 @@ import { UserService } from '../admin/users/services/user.service';
 import { NaturalAbstractController } from '../natural/classes/abstract-controller';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SidenavContainerComponent } from '../natural/modules/sidenav/components/sidenav-container/sidenav-container.component';
+import { NaturalSidenavContainerComponent } from '../natural/modules/sidenav/sidenav-container/sidenav-container.component';
 import { NaturalSidenavService } from '../natural/modules/sidenav/sidenav.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { NaturalSidenavService } from '../natural/modules/sidenav/sidenav.servic
 })
 export class HomeComponent extends NaturalAbstractController implements OnInit {
 
-    public menu: SidenavContainerComponent | undefined;
+    public menu: NaturalSidenavContainerComponent | undefined;
 
     /**
      * Model for header code search

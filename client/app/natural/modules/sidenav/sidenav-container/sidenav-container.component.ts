@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavContainer } from '@angular/material';
-import { NaturalSidenavService } from '../../sidenav.service';
+import { NaturalSidenavService } from '../sidenav.service';
 
 @Component({
     selector: 'natural-sidenav-container',
@@ -8,7 +8,7 @@ import { NaturalSidenavService } from '../../sidenav.service';
     styleUrls: ['./sidenav-container.component.scss'],
     providers: [NaturalSidenavService],
 })
-export class SidenavContainerComponent implements OnInit, OnDestroy {
+export class NaturalSidenavContainerComponent implements OnInit, OnDestroy {
 
     @Input() name: string;
     @ViewChild(MatSidenavContainer) private menuContainer: MatSidenavContainer;

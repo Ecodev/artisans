@@ -20,11 +20,11 @@ import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operato
 import { MatAutocompleteTrigger } from '@angular/material';
 import { NaturalFormControl } from '../../classes/form-control';
 import { NaturalAbstractController } from '../../classes/abstract-controller';
-import { HierarchicFiltersConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicFiltersConfiguration';
-import { NaturalHierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
-import { OrganizedModelSelection } from '../../modules/hierarchic-selector/services/hierarchic-selector.service';
+import { HierarchicFiltersConfiguration } from '../hierarchic-selector/classes/HierarchicFiltersConfiguration';
+import { NaturalHierarchicSelectorDialogService } from '../hierarchic-selector/services/hierarchic-selector-dialog.service';
+import { OrganizedModelSelection } from '../hierarchic-selector/services/hierarchic-selector.service';
 import { QueryVariables, NaturalQueryVariablesManager } from '../../classes/query-variable-manager';
-import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from '../hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
  * Default usage:

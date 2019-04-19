@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { CommentComponent } from './comment.component';
 import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 
 @Component({
     selector: 'app-navigations',

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDrawer, MatDrawerContainer } from '@angular/material';
-import { SidenavContainerComponent } from './components/sidenav-container/sidenav-container.component';
+import { NaturalSidenavContainerComponent } from './sidenav-container/sidenav-container.component';
 import { BehaviorSubject } from 'rxjs';
 import { MediaObserver } from '@angular/flex-layout';
 
@@ -13,7 +13,7 @@ import { MediaObserver } from '@angular/flex-layout';
 @Injectable({providedIn: 'root'})
 export class NaturalSidenavService {
 
-    public static sideNavs = new Map<string, SidenavContainerComponent>();
+    public static sideNavs = new Map<string, NaturalSidenavContainerComponent>();
     public static sideNavsChange = new BehaviorSubject(null);
 
     /**
@@ -83,7 +83,7 @@ export class NaturalSidenavService {
         NaturalSidenavService.sideNavsChange.next(null);
     }
 
-    public init(name: string, container: MatDrawerContainer, drawer: MatDrawer, component: SidenavContainerComponent): void {
+    public init(name: string, container: MatDrawerContainer, drawer: MatDrawer, component: NaturalSidenavContainerComponent): void {
 
         NaturalSidenavService.sideNavs.set(name, component);
         NaturalSidenavService.sideNavsChange.next(null);

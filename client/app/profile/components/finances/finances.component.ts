@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { MatDialog } from '@angular/material';
 import { CreateRefundComponent } from '../create-refund/create-refund.component';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';

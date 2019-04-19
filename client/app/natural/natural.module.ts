@@ -1,67 +1,42 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { NaturalHierarchicSelectorModule } from './modules/hierarchic-selector/hierarchic-selector.module';
-import { SidenavModule } from './modules/sidenav/sidenav.module';
-import { MaterialModule } from './material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NaturalConfirmComponent } from './components/alert/confirm.component';
-import { NaturalRelationsComponent } from './components/relations/relations.component';
-import { NaturalDetailFixedButtonComponent } from './components/detail-fixed-button/detail-fixed-button.component';
-import { NaturalFixedButtonComponent } from './components/fixed-button/fixed-button.component';
-import { NaturalStampComponent } from './components/stamp/stamp.component';
-import { NaturalTableButtonComponent } from './components/table-button/table-button.component';
-import { NaturalCapitalizePipe } from './pipes/capitalize.pipe';
-import { NaturalEnumPipe } from './pipes/enum.pipe';
-import { NaturalEllipsisPipe } from './pipes/ellipsis.pipe';
-import { NaturalColumnsPickerColumnDirective } from './components/columns-picker/columns-picker-column.directive';
-import { NaturalColumnsPickerComponent } from './components/columns-picker/columns-picker.component';
-import { NaturalSelectEnumComponent } from './components/select-enum/select-enum.component';
-import { NaturalSelectComponent } from './components/select/select.component';
-import { NaturalDetailHeaderComponent } from './components/detail-header/detail-header.component';
+import { NaturalSidenavModule } from './modules/sidenav/sidenav.module';
 import { NaturalIconModule } from './modules/icon/icon.module';
 import { IconsConfigService, NaturalIconsConfig } from './modules/icon/icon.component';
-
-const declarationsToExport = [
-    NaturalConfirmComponent,
-    NaturalRelationsComponent,
-    NaturalSelectComponent,
-    NaturalSelectEnumComponent,
-    NaturalColumnsPickerComponent,
-    NaturalColumnsPickerColumnDirective,
-    NaturalEllipsisPipe,
-    NaturalEnumPipe,
-    NaturalCapitalizePipe,
-    NaturalTableButtonComponent,
-    NaturalStampComponent,
-    NaturalFixedButtonComponent,
-    NaturalDetailFixedButtonComponent,
-    NaturalDetailHeaderComponent,
-];
+import { NaturalSelectModule } from './modules/select/select.module';
+import { NaturalRelationsModule } from './modules/relations/relations.module';
+import { NaturalAlertModule } from './modules/alert/alert.module';
+import { NaturalColumnsPickerModule } from './modules/columns-picker/columns-picker.module';
+import { NaturalFixedButtonModule } from './modules/fixed-button/fixed-button.module';
+import { NaturalSelectEnumModule } from './modules/select-enum/select-enum.module';
+import { NaturalStampModule } from './modules/stamp/stamp-module.module';
+import { NaturalTableButtonModule } from './modules/table-button/table-button.module';
+import { NaturalCommonModule } from './modules/common/common-module';
+import { NaturalFixedButtonDetailModule } from './modules/fixed-button-detail/fixed-button-detail.module';
+import { NaturalDetailHeaderModule } from './modules/detail-header/detail-header.module';
 
 const importsToExport = [
+    NaturalCommonModule,
     NaturalHierarchicSelectorModule,
-    SidenavModule,
+    NaturalSidenavModule,
     NaturalIconModule,
+    NaturalSelectModule,
+    NaturalRelationsModule,
+    NaturalAlertModule,
+    NaturalColumnsPickerModule,
+    NaturalSelectEnumModule,
+    NaturalStampModule,
+    NaturalDetailHeaderModule,
+    NaturalTableButtonModule,
+    NaturalFixedButtonModule,
+    NaturalFixedButtonDetailModule,
 ];
 
 @NgModule({
-    declarations: [
-        ...declarationsToExport,
-    ],
-    entryComponents: [
-        NaturalConfirmComponent,
-    ],
     imports: [
-        CommonModule,
-        RouterModule,
-        MaterialModule,
-        FormsModule,
-        ReactiveFormsModule,
         ...importsToExport,
     ],
     exports: [
-        ...declarationsToExport,
         ...importsToExport,
     ],
 })

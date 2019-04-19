@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
 import { NaturalDataSource } from '../../../natural/classes/data-source';
 import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 
 @Component({
     selector: 'app-register',

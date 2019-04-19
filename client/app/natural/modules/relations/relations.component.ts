@@ -21,9 +21,9 @@ import { NaturalSelectComponent } from '../select/select.component';
 import { PageEvent } from '@angular/material';
 import { NaturalAbstractController } from '../../classes/abstract-controller';
 import { NaturalDataSource } from '../../classes/data-source';
-import { NaturalHierarchicSelectorDialogService } from '../../modules/hierarchic-selector/services/hierarchic-selector-dialog.service';
+import { NaturalHierarchicSelectorDialogService } from '../hierarchic-selector/services/hierarchic-selector-dialog.service';
 import { PaginationInput, QueryVariables, NaturalQueryVariablesManager } from '../../classes/query-variable-manager';
-import { NaturalHierarchicConfiguration } from '../../modules/hierarchic-selector/classes/HierarchicConfiguration';
+import { NaturalHierarchicConfiguration } from '../hierarchic-selector/classes/HierarchicConfiguration';
 
 /**
  * Custom template usage :

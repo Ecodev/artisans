@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { NaturalFormControl } from '../../../natural/classes/form-control';
 
 @Component({

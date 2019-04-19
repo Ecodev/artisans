@@ -17,7 +17,7 @@ import { UserService } from '../../users/services/user.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { UsageBookableService } from '../../bookables/services/usage-bookable.service';
 
 @Component({

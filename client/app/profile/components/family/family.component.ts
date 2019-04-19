@@ -3,7 +3,7 @@ import { UsersVariables } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { ActivatedRoute } from '@angular/router';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { mergeWith } from 'lodash';
 import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
 import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';

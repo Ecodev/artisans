@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { NaturalEnumService } from '../services/enum.service';
+import { NaturalEnumService } from '../../../services/enum.service';
 import { map } from 'rxjs/operators';
 
 /**

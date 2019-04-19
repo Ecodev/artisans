@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 import { FormGroup } from '@angular/forms';
 import gql from 'graphql-tag';
 import { NetworkActivityService } from '../../../shared/services/network-activity.service';

@@ -4,7 +4,7 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { Bookable, BookingStatus } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
-import { NaturalAlertService } from '../../../natural/components/alert/alert.service';
+import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
 
 @Component({
     selector: 'app-self-approved-booking',

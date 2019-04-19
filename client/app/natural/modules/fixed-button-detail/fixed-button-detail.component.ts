@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-    selector: 'natural-detail-fixed-button',
-    templateUrl: './detail-fixed-button.component.html',
-    styleUrls: ['./detail-fixed-button.component.scss'],
+    selector: 'natural-fixed-button-detail',
+    templateUrl: './fixed-button-detail.component.html',
+    styleUrls: ['./fixed-button-detail.component.scss'],
 })
-export class NaturalDetailFixedButtonComponent implements OnInit {
+export class NaturalFixedButtonDetailComponent implements OnInit {
 
     @Input() model;
     @Input() form;

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NaturalUtility } from '../classes/utility';
+import { NaturalUtility } from '../../../classes/utility';
 
 @Pipe({name: 'capitalize'})
 export class NaturalCapitalizePipe implements PipeTransform {

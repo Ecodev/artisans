@@ -4,9 +4,16 @@ import { MatIconModule } from '@angular/material';
 import { NaturalIconComponent } from './icon.component';
 
 @NgModule({
-    imports: [CommonModule, MatIconModule],
-    declarations: [NaturalIconComponent],
-    exports: [NaturalIconComponent],
+    declarations: [
+        NaturalIconComponent,
+    ],
+    imports: [
+        CommonModule,
+        MatIconModule,
+    ],
+    exports: [
+        NaturalIconComponent,
+    ],
 })
 export class NaturalIconModule {
 

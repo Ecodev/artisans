@@ -7,7 +7,7 @@ import {
     transactionsQuery,
     updateTransaction,
 } from './transaction.queries';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 import {
     CreateTransaction,
     CreateTransactionVariables,
@@ -23,7 +23,7 @@ import {
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { TransactionLineService } from './transactionLine.service';
-import { Literal } from '../../../natural/types/types';
+import { Literal } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',

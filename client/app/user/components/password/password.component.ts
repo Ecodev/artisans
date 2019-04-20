@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
-import { NaturalFormControl } from '../../../natural/classes/form-control';
+import { NaturalFormControl } from '@ecodev/natural';
 
 function samePasswordsValidator(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {

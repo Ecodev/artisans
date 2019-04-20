@@ -21,7 +21,7 @@ import {
     UpdateAccountVariables,
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',

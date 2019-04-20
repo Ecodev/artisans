@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { BehaviorSubject, of } from 'rxjs';
-import { Literal } from '../../natural/types/types';
+import { Literal } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',

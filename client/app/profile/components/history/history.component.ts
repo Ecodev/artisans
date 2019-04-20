@@ -3,8 +3,8 @@ import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
-import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
-import { NaturalDataSource } from '../../../natural/classes/data-source';
+import { NaturalAbstractController } from '@ecodev/natural';
+import { NaturalDataSource } from '@ecodev/natural';
 
 @Component({
     selector: 'app-history',

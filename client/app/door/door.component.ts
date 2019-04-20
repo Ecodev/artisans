@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DoorService } from './services/door.service';
-import { NaturalAbstractController } from '../natural/classes/abstract-controller';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { UserService } from '../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
-import { Literal } from '../natural/types/types';
-import { NaturalAlertService } from '../natural/modules/alert/alert.service';
+import { Literal } from '@ecodev/natural';
+import { NaturalAlertService } from '@ecodev/natural';
 
 
 @Component({

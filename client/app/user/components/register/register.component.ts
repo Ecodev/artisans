@@ -5,9 +5,7 @@ import { BookableService } from '../../../admin/bookables/services/bookable.serv
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
-import { NaturalDataSource } from '../../../natural/classes/data-source';
-import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAbstractDetail, NaturalAlertService, NaturalDataSource } from '@ecodev/natural';
 
 @Component({
     selector: 'app-register',

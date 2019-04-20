@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
 import { Bookables, BookablesVariables } from '../../generated-types';
 import { SelectionModel } from '@angular/cdk/collections';
-import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
-import { NaturalDataSource } from '../../../natural/classes/data-source';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
+import { NaturalDataSource } from '@ecodev/natural';
 import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
 
 @Component({

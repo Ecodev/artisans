@@ -8,7 +8,7 @@ import {
 } from './bookable-metadata.queries';
 import { Validators } from '@angular/forms';
 
-import { NaturalAbstractModelService, FormValidators } from '../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 import {
     BookableMetadataInput,
     BookableMetadatas,

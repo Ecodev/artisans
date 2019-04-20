@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 import {
     createUser,
     currentUserForProfileQuery,
@@ -52,12 +52,12 @@ import {
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
-import { Literal } from '../../../natural/types/types';
+import { Literal } from '@ecodev/natural';
 import { BookingService } from '../../bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
-import { NaturalFormControl } from '../../../natural/classes/form-control';
-import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalFormControl } from '@ecodev/natural';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { PricedBookingService } from '../../bookings/services/PricedBooking.service';
 
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {

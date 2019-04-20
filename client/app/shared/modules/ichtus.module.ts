@@ -18,22 +18,24 @@ import { AccountingDocumentsComponent } from '../../admin/accounting-documents/a
 import { TimeagoModule } from 'ngx-timeago';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
-import { NaturalSearchModule } from '@ecodev/natural-search';
-import { NaturalIconsConfig } from '../../natural/modules/icon/icon.component';
-import { NaturalCommonModule } from '../../natural/modules/common/common-module';
-import { NaturalHierarchicSelectorModule } from '../../natural/modules/hierarchic-selector/hierarchic-selector.module';
-import { NaturalSidenavModule } from '../../natural/modules/sidenav/sidenav.module';
-import { NaturalIconModule } from '../../natural/modules/icon/icon.module';
-import { NaturalSelectModule } from '../../natural/modules/select/select.module';
-import { NaturalRelationsModule } from '../../natural/modules/relations/relations.module';
-import { NaturalAlertModule } from '../../natural/modules/alert/alert.module';
-import { NaturalColumnsPickerModule } from '../../natural/modules/columns-picker/columns-picker.module';
-import { NaturalSelectEnumModule } from '../../natural/modules/select-enum/select-enum.module';
-import { NaturalStampModule } from '../../natural/modules/stamp/stamp-module.module';
-import { NaturalDetailHeaderModule } from '../../natural/modules/detail-header/detail-header.module';
-import { NaturalTableButtonModule } from '../../natural/modules/table-button/table-button.module';
-import { NaturalFixedButtonModule } from '../../natural/modules/fixed-button/fixed-button.module';
-import { NaturalFixedButtonDetailModule } from '../../natural/modules/fixed-button-detail/fixed-button-detail.module';
+import { NaturalSearchModule } from '@ecodev/natural';
+import {
+    NaturalAlertModule,
+    NaturalColumnsPickerModule,
+    NaturalCommonModule,
+    NaturalDetailHeaderModule,
+    NaturalFixedButtonDetailModule,
+    NaturalFixedButtonModule,
+    NaturalHierarchicSelectorModule,
+    NaturalIconModule,
+    NaturalIconsConfig,
+    NaturalRelationsModule,
+    NaturalSelectEnumModule,
+    NaturalSelectModule,
+    NaturalSidenavModule,
+    NaturalStampModule,
+    NaturalTableButtonModule,
+} from '@ecodev/natural';
 
 const iconsConfig: NaturalIconsConfig = {
     'qr': {

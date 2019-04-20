@@ -3,7 +3,7 @@ import { TransactionLineService } from '../services/transactionLine.service';
 import { BookableService } from '../../bookables/services/bookable.service';
 import { Transaction, TransactionLinesVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
-import { NaturalAbstractEditableList } from '../../../natural/classes/abstract-editable-list';
+import { NaturalAbstractEditableList } from '@ecodev/natural';
 import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
 
 @Component({

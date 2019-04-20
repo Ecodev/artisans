@@ -13,7 +13,7 @@ import {
     UsageBookablesVariables,
 } from '../../../shared/generated-types';
 import { BookingService } from '../../bookings/services/booking.service';
-import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',

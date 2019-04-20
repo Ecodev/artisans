@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 import { transactionLineQuery, transactionLinesQuery } from './transactionLine.queries';
 import {
     Account,
@@ -15,7 +15,7 @@ import {
 } from '../../../shared/generated-types';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {

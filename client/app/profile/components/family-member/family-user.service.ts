@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { Relationship } from '../../../shared/generated-types';
-import { FormValidators } from '../../../natural/services/abstract-model.service';
+import { FormValidators } from '@ecodev/natural';
 import { PricedBookingService } from '../../../admin/bookings/services/PricedBooking.service';
 
 @Injectable({

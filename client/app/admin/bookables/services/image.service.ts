@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { userMetaFragment } from '../../../shared/queries/fragments';
 import { CreateImage, CreateImageVariables, ImageInput } from '../../../shared/generated-types';
-import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '@ecodev/natural';
 
 export const createImageMutation = gql`
     mutation CreateImage($input: ImageInput!) {

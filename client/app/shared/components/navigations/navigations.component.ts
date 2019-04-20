@@ -14,12 +14,12 @@ import {
     Users,
     UsersVariables,
 } from '../../generated-types';
-import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { Observable } from 'rxjs';
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { CommentComponent } from './comment.component';
-import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAbstractController } from '@ecodev/natural';
+import { NaturalAlertService } from '@ecodev/natural';
 
 @Component({
     selector: 'app-navigations',

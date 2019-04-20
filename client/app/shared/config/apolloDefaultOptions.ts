@@ -4,8 +4,8 @@ import { HttpBatchLink } from 'apollo-angular-link-http-batch';
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
-import { NaturalAlertService } from '../../natural/modules/alert/alert.service';
-import { hasFilesAndProcessDate } from '../../natural/classes/apollo-utils';
+import { NaturalAlertService } from '@ecodev/natural';
+import { hasFilesAndProcessDate } from '@ecodev/natural';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {

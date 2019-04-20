@@ -25,8 +25,8 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookingService } from '../../bookings/services/booking.service';
 import { intersectionBy } from 'lodash';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
-import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({

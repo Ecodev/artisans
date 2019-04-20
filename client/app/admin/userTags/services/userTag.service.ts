@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 import { createUserTag, deleteUserTags, updateUserTag, userTagQuery, userTagsQuery } from './userTag.queries';
 import {
     CreateUserTag,

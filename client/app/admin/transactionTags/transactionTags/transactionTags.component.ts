@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
-import { NaturalPersistenceService } from '../../../natural/services/persistence.service';
+import { NaturalAlertService } from '@ecodev/natural';
+import { NaturalPersistenceService } from '@ecodev/natural';
 import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { TransactionTags, TransactionTagsVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../services/transactionTag.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { NaturalAbstractList } from '../../../natural/classes/abstract-list';
+import { NaturalAbstractList } from '@ecodev/natural';
 
 @Component({
     selector: 'app-transaction-tags',
@@ -32,7 +32,7 @@ export class TransactionTagsComponent
             route,
             alertService,
             persistenceService,
-            naturalSearchConfigurationService,
+
         );
 
     }

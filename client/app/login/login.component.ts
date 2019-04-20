@@ -3,8 +3,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkActivityService } from '../shared/services/network-activity.service';
 import { MatSnackBar } from '@angular/material';
-import { NaturalAlertService } from '../natural/modules/alert/alert.service';
-import { NaturalAbstractController } from '../natural/classes/abstract-controller';
+import { NaturalAlertService } from '@ecodev/natural';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { UserService } from '../admin/users/services/user.service';
 
 @Component({

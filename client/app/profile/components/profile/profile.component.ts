@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
 import { MatDialog, MatDialogConfig } from '@angular/material';

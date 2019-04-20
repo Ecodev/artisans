@@ -33,7 +33,7 @@ import { SafetyComponent } from './safety/safety.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
-import { NaturalAlertService } from './natural/modules/alert/alert.service';
+import { NaturalAlertService } from '@ecodev/natural';
 
 registerLocaleData(localeFRCH);
 

@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 
 import { countriesQuery, countryQuery } from './country.queries';
 import { Countries, CountriesVariables, Country, CountryVariables } from '../../generated-types';
-import { NaturalAbstractModelService } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',

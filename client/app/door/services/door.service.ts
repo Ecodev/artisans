@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { openDoorMutation } from './door.queries';
 import { OpenDoor, OpenDoorVariables } from '../../shared/generated-types';
-import { Literal } from '../../natural/types/types';
+import { Literal } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',

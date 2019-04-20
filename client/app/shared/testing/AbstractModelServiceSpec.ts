@@ -1,8 +1,8 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { fakeAsync, inject, tick } from '@angular/core/testing';
-import { NaturalAbstractModelService } from '../../natural/services/abstract-model.service';
-import { NaturalQueryVariablesManager } from '../../natural/classes/query-variable-manager';
-import { Literal } from '../../natural/types/types';
+import { NaturalAbstractModelService } from '@ecodev/natural';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
+import { Literal } from '@ecodev/natural';
 
 // A shortcut for shorter lines
 type ModelService = NaturalAbstractModelService<any, any, any, any, any, any, any, any, any>;

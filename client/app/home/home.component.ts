@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../admin/users/services/user.service';
-import { NaturalAbstractController } from '../natural/classes/abstract-controller';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalSidenavContainerComponent } from '../natural/modules/sidenav/sidenav-container/sidenav-container.component';
-import { NaturalSidenavService } from '../natural/modules/sidenav/sidenav.service';
+import { NaturalSidenavContainerComponent } from '@ecodev/natural';
+import { NaturalSidenavService } from '@ecodev/natural';
 
 @Component({
     selector: 'app-home',

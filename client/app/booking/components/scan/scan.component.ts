@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import jsQR from 'jsqr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAlertService } from '@ecodev/natural';
 
 @Component({
     selector: 'app-scan',

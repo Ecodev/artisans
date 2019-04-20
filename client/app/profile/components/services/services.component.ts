@@ -4,9 +4,9 @@ import { BookingType } from '../../../shared/generated-types';
 import { UserService } from '../../../admin/users/services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BookingService } from '../../../admin/bookings/services/booking.service';
-import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
-import { NaturalDataSource } from '../../../natural/classes/data-source';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAbstractController } from '@ecodev/natural';
+import { NaturalDataSource } from '@ecodev/natural';
+import { NaturalAlertService } from '@ecodev/natural';
 
 @Component({
     selector: 'app-services',

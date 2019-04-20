@@ -23,8 +23,8 @@ import { Validators } from '@angular/forms';
 import { forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BookingResolve } from '../booking';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
-import { NaturalEnumService } from '../../../natural/services/enum.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
+import { NaturalEnumService } from '@ecodev/natural';
 import { BookableTagService } from '../../bookableTags/services/bookableTag.service';
 
 @Injectable({
@@ -122,7 +122,7 @@ export class BookingService extends NaturalAbstractModelService<Booking['booking
         },
     };
 
-    constructor(apollo: Apollo, private enumService: NaturalEnumService) {
+    constructor(apollo: Apollo, private enumService: NaturalEnumService<any>) {
         super(apollo,
             'booking',
             bookingQuery,

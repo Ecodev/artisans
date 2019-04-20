@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { UploadService } from './services/upload.service';
 import { takeUntil } from 'rxjs/operators';
-import { NaturalAbstractController } from '../../../natural/classes/abstract-controller';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SafeStyle } from '@angular/platform-browser/src/security/dom_sanitization_service';
 import { Observable, of, Subject } from 'rxjs';

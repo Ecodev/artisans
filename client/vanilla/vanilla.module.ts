@@ -10,8 +10,8 @@ import { VanillaRoutingModule } from './vanilla-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { UserService } from '../app/admin/users/services/user.service';
 import { BookingService } from '../app/admin/bookings/services/booking.service';
-import { NaturalLinkMutationService } from '../app/natural/services/link-mutation.service';
-import { NaturalQueryVariablesManager } from '../app/natural/classes/query-variable-manager';
+import { NaturalLinkMutationService } from '@ecodev/natural';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 
 @NgModule({
     imports: [
@@ -48,8 +48,10 @@ export class VanillaModule implements DoBootstrap {
                 userService: UserService,
                 bookableService: BookableService,
                 bookingService: BookingService,
-                linkMutation: NaturalLinkMutationService,
+                linkMutation: NaturalLinkMutationService<any>,
     ) {
+
+        const QueryVariablesManager = NaturalQueryVariablesManager; // for retro compatibility
 
         const api = {
             gql,
@@ -57,7 +59,7 @@ export class VanillaModule implements DoBootstrap {
             userService,
             bookableService,
             bookingService,
-            NaturalQueryVariablesManager,
+            QueryVariablesManager,
             linkMutation,
         };
 

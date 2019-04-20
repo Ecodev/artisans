@@ -11,9 +11,9 @@ import {
 } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAlertService } from '@ecodev/natural';
 import { AccountingDocumentsComponent } from '../../../admin/accounting-documents/accounting-documents.component';
-import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
+import { NaturalAbstractDetail } from '@ecodev/natural';
 
 @Component({
     selector: 'app-create-expense-claim',

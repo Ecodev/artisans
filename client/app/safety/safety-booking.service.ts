@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { BookingService } from '../admin/bookings/services/booking.service';
 import gql from 'graphql-tag';
 import { bookableMetaFragment } from '../admin/bookables/services/bookable.queries';
-import { NaturalEnumService } from '../natural/services/enum.service';
+import { NaturalEnumService } from '@ecodev/natural';
 
 const safetyBookings = gql`
     query SafetyBookings($filter: BookingFilter, $sorting: [BookingSorting!], $pagination: PaginationInput) {
@@ -45,7 +45,7 @@ const safetyBookings = gql`
 })
 export class SafetyBookingService extends BookingService {
 
-    constructor(apollo: Apollo, enumService: NaturalEnumService) {
+    constructor(apollo: Apollo, enumService: NaturalEnumService<any>) {
         super(apollo, enumService);
         this.allQuery = safetyBookings;
     }

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BookableMetadataService } from './bookable-metadata.service';
-import { NaturalDataSource } from '../../natural/classes/data-source';
+import { NaturalDataSource } from '@ecodev/natural';
 import { BookableMetadatasVariables } from '../../shared/generated-types';
-import { NaturalQueryVariablesManager } from '../../natural/classes/query-variable-manager';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 
 @Component({
     selector: 'app-bookable-metadata',

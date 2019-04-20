@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators } from '../../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
 import { bookableTagQuery, bookableTagsQuery, createBookableTag, deleteBookableTags, updateBookableTag } from './bookableTag.queries';
 import {
     BookableTag,

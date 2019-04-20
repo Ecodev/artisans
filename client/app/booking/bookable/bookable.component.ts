@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { BookableService } from '../../admin/bookables/services/bookable.service';
 import { BookingService } from '../../admin/bookings/services/booking.service';
 import { UserService } from '../../admin/users/services/user.service';
-import { NaturalAbstractController } from '../../natural/classes/abstract-controller';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { Bookings, BookingType } from '../../shared/generated-types';
 
 @Component({

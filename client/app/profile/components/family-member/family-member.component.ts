@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAlertService } from '@ecodev/natural';
 import { ActivatedRoute, Router } from '@angular/router';
 import { merge } from 'lodash';
 import { FamilyUserService } from './family-user.service';
-import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
+import { NaturalAbstractDetail } from '@ecodev/natural';
 
 @Component({
     selector: 'app-family-member',

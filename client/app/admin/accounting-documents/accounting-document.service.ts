@@ -4,7 +4,7 @@ import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { AccountingDocumentInput, CreateAccountingDocument, CreateAccountingDocumentVariables } from '../../shared/generated-types';
 import { userMetaFragment } from '../../shared/queries/fragments';
-import { NaturalAbstractModelService } from '../../natural/services/abstract-model.service';
+import { NaturalAbstractModelService } from '@ecodev/natural';
 
 export const createAccountingDocumentMutation = gql`
     mutation CreateAccountingDocument($input: AccountingDocumentInput!) {

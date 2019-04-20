@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ItemConfiguration, NaturalSearchConfiguration, Selection } from '@ecodev/natural-search';
-import { SelectNaturalComponent } from './select-natural/select-natural.component';
-import { UserService } from '../../admin/users/services/user.service';
+import { NaturalSearchConfiguration, Selection } from '@ecodev/natural';
 
 function wrapLike(s: Selection): Selection {
     if (s.condition.like) {
@@ -55,18 +53,9 @@ function replaceOperatorByName(s: Selection): Selection {
 })
 export class NaturalSearchConfigurationService {
 
-    private readonly owner: ItemConfiguration = {
-        display: 'Responsable',
-        field: 'owner',
-        component: SelectNaturalComponent,
-        configuration: {
-            service: this.userService,
-        },
-    };
-
     private readonly allConfigurations: { [key: string]: NaturalSearchConfiguration } = {};
 
-    constructor(private readonly userService: UserService) {
+    constructor() {
     }
 
     /**

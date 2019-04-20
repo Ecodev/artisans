@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail } from '../../../natural/classes/abstract-detail';
-import { NaturalAlertService } from '../../../natural/modules/alert/alert.service';
+import { NaturalAbstractDetail } from '@ecodev/natural';
+import { NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../services/user.service';
 import {
     CreateUser,
@@ -17,7 +17,7 @@ import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
 import { BookingService } from '../../bookings/services/booking.service';
 import { AccountService } from '../../accounts/services/account.service';
-import { NaturalQueryVariablesManager } from '../../../natural/classes/query-variable-manager';
+import { NaturalQueryVariablesManager } from '@ecodev/natural';
 
 @Component({
     selector: 'app-user',

@@ -1,7 +1,12 @@
 :host {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 
-    & > div {
+    natural-sidenav-container {
+        width:100%;
         max-width: 1400px;
         margin: auto;
     }
+
 }

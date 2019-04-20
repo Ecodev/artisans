@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="50px">
 
     <div fxLayout="column" fxLayoutGap="10px">
-        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="start center" fxLayoutAlign="start start" class="margin-bottom">
             <h2 fxFlex class="mat-headline no-margin-bottom">Demandes en attente</h2>
             <natural-select-admin-approved-button [user]="user" *ngIf="!adminMode"></natural-select-admin-approved-button>
         </div>

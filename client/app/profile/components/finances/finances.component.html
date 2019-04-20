@@ -19,14 +19,22 @@
 
     <div fxLayout="column">
 
-        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="10px">
-            <h3 fxFlex class="mat-headline no-margin">Dépenses et remboursements en attente</h3>
-            <button mat-stroked-button (click)="createRefund()" [disabled]="!user.iban" *ngIf="!adminMode">
-                Demander un remboursement
-            </button>
-            <a mat-stroked-button [routerLink]="['/profile/create-expense-claim']" *ngIf="!adminMode">
-                Annoncer une dépense
-            </a>
+        <div fxLayout="column"
+             fxLayout.gt-xs="row"
+             fxLayoutAlign.gt-xs="start center"
+             fxLayoutAlign="start start"
+             class="margin-bottom"
+             fxLayoutGap="10px"
+        >
+            <h2 fxFlex class="mat-headline no-margin">Dépenses et remboursements en attente</h2>
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
+                <button mat-stroked-button (click)="createRefund()" [disabled]="!user.iban" *ngIf="!adminMode">
+                    Demander un remboursement
+                </button>
+                <a mat-stroked-button [routerLink]="['/profile/create-expense-claim']" *ngIf="!adminMode">
+                    Annoncer une dépense
+                </a>
+            </div>
         </div>
 
         <div class="mat-body-1 padding margin"

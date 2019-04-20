@@ -1,9 +1,20 @@
-<div [style.max-width.px]="1130" [style.margin]="'auto'">
-    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center" class="margin-bottom">
+<div style="margin-right:3px">
+    <div fxLayout="column"
+         fxLayout.gt-xs="row"
+         fxLayoutAlign.gt-xs="start center"
+         fxLayoutAlign="start start"
+         class="margin-bottom"
+         fxLayoutGap="10px"
+    >
         <h2 class="mat-headline no-margin-bottom" fxFlex>Données personnelles du ménage</h2>
-        <button mat-stroked-button routerLink="/user/request-password-reset">Changer de mot de passe</button>
-        <button mat-stroked-button color="warn" [disabled]="!userService.canLeaveFamily(viewer)" (click)="leaveFamily()">Quitter le ménage</button>
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="10px">
+            <button mat-stroked-button routerLink="/user/request-password-reset">Changer de mot de passe</button>
+            <button mat-stroked-button color="warn" [disabled]="!userService.canLeaveFamily(viewer)" (click)="leaveFamily()">
+                Quitter le ménage
+            </button>
+        </div>
     </div>
+
     <mat-accordion>
         <mat-expansion-panel *ngFor="let familyMember of familyMembers" [expanded]="!familyMember.id">
             <mat-expansion-panel-header>

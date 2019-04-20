@@ -28,7 +28,7 @@ export class HomeComponent extends NaturalAbstractController implements OnInit {
 
         NaturalSidenavService.sideNavsChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             setTimeout(() => {
-                this.menu = NaturalSidenavService.sideNavs.get('adminMenu');
+                this.menu = NaturalSidenavService.sideNavs.get('adminMenu') || NaturalSidenavService.sideNavs.get('profileMenu');
             });
         });
     }

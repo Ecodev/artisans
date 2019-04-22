@@ -231,61 +231,56 @@ class UserTest extends TestCase
             'anonymous cannot open' => [
                 User::ROLE_ANONYMOUS,
                 User::STATUS_ACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
-                ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
+                true,
+                false,
             ],
             'individual member can open' => [
                 User::ROLE_INDIVIDUAL,
                 User::STATUS_ACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+                true,
+                true,
             ],
             'active member can open' => [
                 User::ROLE_MEMBER,
                 User::STATUS_ACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
+                true,
+                true,
             ],
             'inactive member cannot open' => [
                 User::ROLE_MEMBER,
                 User::STATUS_INACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => false],
-                ['door1' => false, 'door2' => false, 'door3' => false, 'door4' => false],
+                true,
+                false,
             ],
             'responsible can open' => [
                 User::ROLE_RESPONSIBLE,
                 User::STATUS_ACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+                true,
+                true,
             ],
             'administrator can open' => [
                 User::ROLE_ADMINISTRATOR,
                 User::STATUS_ACTIVE,
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
-                ['door1' => true, 'door2' => true, 'door3' => true, 'door4' => true],
+                true,
+                true,
             ],
         ];
     }
 
     /**
-     * @dataProvider providerCanOpenDoor,
+     * @dataProvider providerCanOpenDoor
      *
      * @param string $role
      * @param string $status
-     * @param array $doors
-     * @param array $result
+     * @param bool $doors
+     * @param bool $expected
      */
-    public function testCanOpenDoor(string $role, string $status, array $doors, array $result): void
+    public function testCanOpenDoor(string $role, string $status, bool $doors, bool $expected): void
     {
         $user = new User($role);
         $user->setStatus($status);
-        foreach ($doors as $door => $value) {
-            $setter = 'set' . ucfirst($door);
-            $user->$setter($value);
-        }
+        $user->setDoor($doors);
 
-        foreach ($result as $door => $canOpen) {
-            self::assertSame($canOpen, $user->getCanOpenDoor($door));
-        }
+        self::assertSame($expected, $user->getCanOpenDoor());
     }
 }

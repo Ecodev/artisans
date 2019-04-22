@@ -9,6 +9,7 @@ use Application\DBAL\Types\BillingTypeType;
 use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
+use Application\Traits\HasCode;
 use Application\Traits\HasDoorAccess;
 use Application\Traits\HasIban;
 use Application\Traits\HasInternalRemarks;
@@ -52,6 +53,7 @@ class User extends AbstractModel
     use HasInternalRemarks;
     use HasAddress;
     use HasIban;
+    use HasCode;
 
     /**
      * @var User
@@ -143,6 +145,12 @@ class User extends AbstractModel
      * @ORM\Column(type="smallint", options={"default" = 0}))
      */
     private $sex = 0;
+
+    /**
+     * @var int
+     * @ORM\Column(type="smallint", options={"default" = 0}))
+     */
+    private $companyShares = 0;
 
     /**
      * @var string
@@ -937,32 +945,6 @@ class User extends AbstractModel
     }
 
     /**
-     * Check if the user can *really* open a door
-     * This also takes into account the user status and role
-     *
-     * @API\Field(args={@API\Argument(name="door", type="?Application\Api\Enum\DoorType")})
-     *
-     * @param null|string $door a particular door, or null for any
-     *
-     * @return bool
-     */
-    public function getCanOpenDoor(?string $door = null): bool
-    {
-        $allowedStatus = [self::STATUS_ACTIVE];
-        $allowedRoles = [self::ROLE_INDIVIDUAL, self::ROLE_MEMBER, self::ROLE_RESPONSIBLE, self::ROLE_ADMINISTRATOR];
-
-        if ($door && !$this->$door) {
-            return false;
-        }
-
-        if (!in_array($this->status, $allowedStatus, true) || !in_array($this->role, $allowedRoles, true)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
      * Automatically called by Doctrine when the object is saved for the first time
      *
      * @ORM\PrePersist
@@ -971,5 +953,25 @@ class User extends AbstractModel
     {
         $this->setCreationDate(Utility::getNow());
         $this->setCreator(self::getCurrent());
+    }
+
+    /**
+     * Number of company shares
+     *
+     * @return int
+     */
+    public function getCompanyShares(): int
+    {
+        return $this->companyShares;
+    }
+
+    /**
+     * Number of company shares
+     *
+     * @param int $companyShares
+     */
+    public function setCompanyShares(int $companyShares): void
+    {
+        $this->companyShares = $companyShares;
     }
 }

@@ -1,6 +1,6 @@
 START TRANSACTION;
 
-REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, birthday, billing_type, welcome_session_date, resign_date, family_relationship, door4, iban) VALUES
+REPLACE INTO user (id, owner_id, login, first_name, last_name, email, password, role, status, birthday, billing_type, welcome_session_date, resign_date, family_relationship, door, iban) VALUES
 (-1000, NULL, 'administrator', 'Admin', 'Istrator', 'administrator@example.com', MD5('administrator'), 'administrator', 'active', '1989-12-01', 'electronic', '2018-01-01 12:00:00', NULL, 'householder', 1, NULL),
 (-1001, NULL, 'responsible', 'Respon', 'Sable', 'responsible@example.com', MD5('responsible'), 'responsible', 'active', '1991-05-12', 'electronic', '2018-01-01 12:00:00', NULL, 'householder', 1, NULL),
 (-1002, NULL, 'member', 'Active', 'Member', 'member@example.com', MD5('member'), 'member', 'active', '1987-10-05', 'electronic', '2018-01-01 12:00:00', NULL, 'householder', 0, 'CH4200681926673315051'),

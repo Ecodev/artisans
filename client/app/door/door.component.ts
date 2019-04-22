@@ -24,7 +24,7 @@ export class DoorComponent extends NaturalAbstractController implements OnInit {
     }
 
     public open(door: Literal) {
-        this.doorService.open({door: door.id}).subscribe(
+        this.doorService.open().subscribe(
             res => {
                 door.opened = true;
                 this.alertService.info(res.message);

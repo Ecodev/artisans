@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { openDoorMutation } from './door.queries';
-import { OpenDoor, OpenDoorVariables } from '../../shared/generated-types';
+import { OpenDoor } from '../../shared/generated-types';
 import { Literal } from '@ecodev/natural';
 
 @Injectable({
@@ -16,36 +16,17 @@ export class DoorService {
 
     public doors: Literal = [
         {
-            id: 'door1',
-            name: 'Entrée nord',
-            image: 'door1.jpg',
-            opened: false,
-        },
-        {
-            id: 'door2',
-            name: 'Entrée plage',
-            image: 'door2.jpg',
-            opened: false,
-        },
-        {
-            id: 'door3',
-            name: 'Vestibule',
-            image: 'door3.jpg',
-            opened: false,
-        },
-        {
-            id: 'door4',
-            name: 'Local technique',
-            image: 'door4.jpg',
+            id: 'door',
+            name: 'Entrée',
+            image: 'door.jpg',
             opened: false,
         },
     ];
 
-    public open(openData: OpenDoorVariables): Observable<OpenDoor['openDoor']> {
+    public open(): Observable<OpenDoor['openDoor']> {
 
-        return this.apollo.mutate<OpenDoor, OpenDoorVariables>({
+        return this.apollo.mutate<OpenDoor>({
             mutation: openDoorMutation,
-            variables: openData,
         }).pipe(map(({data: {openDoor}}) => openDoor));
     }
 }

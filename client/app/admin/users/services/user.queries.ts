@@ -25,10 +25,8 @@ export const userFieldsFragment = gql`
         swissSailingType
         swissWindsurfType
         mobilePhone
-        door1
-        door2
-        door3
-        door4
+        door
+        code
         firstLogin
         lastLogin
         canOpenDoor

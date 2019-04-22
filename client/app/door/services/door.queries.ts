@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const openDoorMutation = gql`
-    mutation OpenDoor($door: Door!) {
-        openDoor (door: $door) {
+    mutation OpenDoor {
+        openDoor {
             message
             timer
         }

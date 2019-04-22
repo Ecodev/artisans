@@ -7,7 +7,7 @@ namespace Application\Traits;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Access to all doors
+ * Access to doors
  */
 trait HasDoorAccess
 {
@@ -15,87 +15,43 @@ trait HasDoorAccess
      * @var bool
      * @ORM\Column(type="boolean", options={"default" = 1})
      */
-    private $door1 = true;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean", options={"default" = 1})
-     */
-    private $door2 = true;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean", options={"default" = 1})
-     */
-    private $door3 = true;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
-    private $door4 = false;
+    private $door = true;
 
     /**
      * @return bool
      */
-    public function getDoor1(): bool
+    public function getDoor(): bool
     {
-        return $this->door1;
+        return $this->door;
     }
 
     /**
-     * @param bool $door1
+     * @param bool $door
      */
-    public function setDoor1(bool $door1): void
+    public function setDoor(bool $door): void
     {
-        $this->door1 = $door1;
+        $this->door = $door;
     }
 
     /**
+     * Check if the user can *really* open the door
+     * This also takes into account the user status and role
+     *
      * @return bool
      */
-    public function getDoor2(): bool
+    public function getCanOpenDoor(): bool
     {
-        return $this->door2;
-    }
+        $allowedStatus = [self::STATUS_ACTIVE];
+        $allowedRoles = [self::ROLE_INDIVIDUAL, self::ROLE_MEMBER, self::ROLE_RESPONSIBLE, self::ROLE_ADMINISTRATOR];
 
-    /**
-     * @param bool $door2
-     */
-    public function setDoor2(bool $door2): void
-    {
-        $this->door2 = $door2;
-    }
+        if (!$this->getDoor()) {
+            return false;
+        }
 
-    /**
-     * @return bool
-     */
-    public function getDoor3(): bool
-    {
-        return $this->door3;
-    }
+        if (!in_array($this->status, $allowedStatus, true) || !in_array($this->role, $allowedRoles, true)) {
+            return false;
+        }
 
-    /**
-     * @param bool $door3
-     */
-    public function setDoor3(bool $door3): void
-    {
-        $this->door3 = $door3;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getDoor4(): bool
-    {
-        return $this->door4;
-    }
-
-    /**
-     * @param bool $door4
-     */
-    public function setDoor4(bool $door4): void
-    {
-        $this->door4 = $door4;
+        return true;
     }
 }

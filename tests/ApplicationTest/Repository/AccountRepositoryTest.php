@@ -35,7 +35,6 @@ class AccountRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['bookingonly', []],
             ['individual', [10097]],
             ['member', [10096]],
             ['responsible', $all],

@@ -30,7 +30,6 @@ class MessageRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['bookingonly', []],
             ['individual', []],
             ['member', [11001]],
             ['responsible', []],

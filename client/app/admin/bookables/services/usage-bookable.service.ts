@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { bookableQuery, createBookable, deleteBookables, updateBookable, usageBookablesQuery } from './bookable.queries';
+import {
+    bookableQuery,
+    createBookable,
+    deleteBookables,
+    updateBookable,
+    usageBookablesQuery,
+} from './bookable.queries';
 import {
     Bookable,
     Bookables,
@@ -12,7 +18,6 @@ import {
     UpdateBookableVariables,
     UsageBookablesVariables,
 } from '../../../shared/generated-types';
-import { BookingService } from '../../bookings/services/booking.service';
 import { NaturalAbstractModelService } from '@ecodev/natural';
 
 @Injectable({
@@ -28,7 +33,7 @@ export class UsageBookableService extends NaturalAbstractModelService<Bookable['
     UpdateBookableVariables,
     DeleteBookables> {
 
-    constructor(apollo: Apollo, protected bookingService: BookingService) {
+    constructor(apollo: Apollo) {
         super(apollo,
             'bookable',
             bookableQuery,

@@ -11,19 +11,13 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-        <div *ngIf="!isAvailable && runningBooking" class="mat-body-1">Sorti {{ runningBooking.startDate | timeago }}</div>
-        <div *ngIf="!hasLicense">Vous ne disposez pas des licences requises pour utiliser cette embarcation</div>
 
         <button mat-flat-button
                 color="primary"
-                *ngIf="isNavigable && isAvailable"
-                [disabled]="!hasLicense"
+                *ngIf="isAvailable"
                 [routerLink]="['../new', {bookable: bookable.id}]"
         >
             Annoncer une sortie
-        </button>
-        <button mat-flat-button color="warn" *ngIf="isNavigable && !isAvailable && runningBooking" (click)="endBooking()">
-            Terminer
         </button>
         <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/bookable', bookable.id]">Administration</a>
     </div>

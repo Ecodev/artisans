@@ -4,7 +4,6 @@ import { ScanComponent } from './components/scan/scan.component';
 import { BookableComponent } from './bookable/bookable.component';
 import { BookableByCodeResolver } from './bookable/bookable-by-code.resolver';
 import { CodeInputComponent } from './components/code-input/code-input.component';
-import { SelfApprovedBookingComponent } from './components/self-approved-booking/self-approved-booking.component';
 
 const routes: Routes = [
     {
@@ -14,10 +13,6 @@ const routes: Routes = [
     {
         path: 'by-code',
         component: CodeInputComponent,
-    },
-    {
-        path: 'new',
-        component: SelfApprovedBookingComponent,
     },
     {
         path: ':bookableCode',

@@ -40,11 +40,6 @@ abstract class Unregister implements FieldInterface
 
                 $user->setStatus(User::STATUS_ARCHIVED);
 
-                // Terminate all bookings
-                foreach ($user->getBookings() as $booking) {
-                    $booking->terminate('Terminé automatiquement lors de démission');
-                }
-
                 // Force logout if we are unregistering ourselves
                 if (User::getCurrent() === $user) {
                     $session->clear();

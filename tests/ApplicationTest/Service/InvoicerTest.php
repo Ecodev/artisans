@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
-use Application\DBAL\Types\BookingStatusType;
 use Application\Model\Account;
 use Application\Model\Bookable;
-use Application\Model\Booking;
 use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Service\Invoicer;
@@ -17,21 +15,6 @@ use PHPUnit\Framework\TestCase;
 class InvoicerTest extends TestCase
 {
     use TestWithTransaction;
-
-    public function testInvoice(): void
-    {
-        global $container;
-
-        /** @var Invoicer $invoicer */
-        $invoicer = $container->get(Invoicer::class);
-        $actual = $invoicer->invoicePeriodic();
-        self::assertSame(2, $actual);
-
-        _em()->flush();
-
-        $actual2 = $invoicer->invoicePeriodic();
-        self::assertSame(0, $actual2, 'should not invoice things that are already invoiced');
-    }
 
     /**
      * @dataProvider providerInvoiceInitial
@@ -46,6 +29,8 @@ class InvoicerTest extends TestCase
         $user->setFirstName('John');
         $user->setLastName('Doe');
 
+        $this->getEntityManager()->getRepository(Account::class)->getOrCreate($user);
+
         $bookable = new Bookable();
         $bookable->setName('My bookable');
         $bookable->setInitialPrice($initialPrice);
@@ -55,50 +40,44 @@ class InvoicerTest extends TestCase
         $bookableAccount->setName('Bookable account');
         $bookable->setCreditAccount($bookableAccount);
 
-        // Creation of booking will implicitly call the invoicer
-        $booking = new Booking();
-        $booking->setOwner($user);
-        $booking->setBookable($bookable);
-        $booking->setStatus(BookingStatusType::BOOKED);
+        global $container;
+        $invoicer = $container->get(Invoicer::class);
+        $invoicer->invoiceInitial($user, $bookable);
 
         $account = $user->getAccount();
 
-        if ($expected === []) {
-            self::assertNull($account);
-        } else {
-            $all = array_merge(
-                $account->getCreditTransactionLines()->toArray(),
-                $account->getDebitTransactionLines()->toArray()
-            );
-            $actual = [];
+        $all = array_merge(
+            $account->getCreditTransactionLines()->toArray(),
+            $account->getDebitTransactionLines()->toArray()
+        );
+        $actual = [];
 
-            /** @var TransactionLine $t */
-            $transaction = null;
-            foreach ($all as $t) {
-                if (!$transaction) {
-                    $transaction = $t->getTransaction();
-                    self::assertNotNull($transaction, 'must belong to a transaction');
-                } else {
-                    self::assertSame($transaction, $t->getTransaction(), 'all lines should belong to same transaction');
-                }
-
-                $actual[] = [
-                    $t->getName(),
-                    $t->getBookable()->getName(),
-                    $t->getDebit()->getName(),
-                    $t->getCredit()->getName(),
-                    $t->getBalance(),
-                ];
+        /** @var TransactionLine $t */
+        $transaction = null;
+        foreach ($all as $t) {
+            if (!$transaction) {
+                $transaction = $t->getTransaction();
+                self::assertNotNull($transaction, 'must belong to a transaction');
+            } else {
+                self::assertSame($transaction, $t->getTransaction(), 'all lines should belong to same transaction');
             }
 
-            self::assertSame($expected, $actual);
+            $actual[] = [
+                $t->getName(),
+                $t->getBookable()->getName(),
+                $t->getDebit()->getName(),
+                $t->getCredit()->getName(),
+                $t->getBalance(),
+            ];
         }
+
+        self::assertSame($expected, $actual);
     }
 
     public function providerInvoiceInitial(): array
     {
         return [
-            'free booking should create nothing' => [
+            'free bookable should create nothing' => [
                 '0',
                 '0',
                 [],
@@ -108,7 +87,7 @@ class InvoicerTest extends TestCase
                 '0',
                 [
                     [
-                        'Prestation ponctuelle',
+                        'My bookable',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
@@ -120,13 +99,6 @@ class InvoicerTest extends TestCase
                 '0',
                 '90.25',
                 [
-                    [
-                        'Prestation annuelle',
-                        'My bookable',
-                        'John Doe',
-                        'Bookable account',
-                        '90.25',
-                    ],
                 ],
             ],
             'both initial and periodic should create two lines' => [
@@ -134,18 +106,11 @@ class InvoicerTest extends TestCase
                 '90.25',
                 [
                     [
-                        'Prestation ponctuelle',
+                        'My bookable',
                         'My bookable',
                         'John Doe',
                         'Bookable account',
                         '10.25',
-                    ],
-                    [
-                        'Prestation annuelle',
-                        'My bookable',
-                        'John Doe',
-                        'Bookable account',
-                        '90.25',
                     ],
                 ],
             ],
@@ -154,43 +119,14 @@ class InvoicerTest extends TestCase
                 '-90.25',
                 [
                     [
-                        'Prestation ponctuelle',
+                        'My bookable',
                         'My bookable',
                         'Bookable account',
                         'John Doe',
                         '10.25',
                     ],
-                    [
-                        'Prestation annuelle',
-                        'My bookable',
-                        'Bookable account',
-                        'John Doe',
-                        '90.25',
-                    ],
                 ],
             ],
         ];
-    }
-
-    public function testInvoicerNotCalled(): void
-    {
-        $user = new User();
-        $bookable = new Bookable();
-        $bookable->setInitialPrice('1');
-        $bookable->setPeriodicPrice('1');
-
-        $bookingWithoutOwner = new Booking();
-        $bookingWithoutOwner->setBookable($bookable);
-        $bookingWithoutOwner->setStatus(BookingStatusType::BOOKED);
-
-        $bookingWithoutBookable = new Booking();
-        $bookingWithoutBookable->setOwner($user);
-        $bookingWithoutBookable->setStatus(BookingStatusType::BOOKED);
-
-        $bookingWithoutStatus = new Booking();
-        $bookingWithoutStatus->setBookable($bookable);
-        $bookingWithoutStatus->setOwner($user);
-
-        self::assertNull($user->getAccount(), 'invoicer is only called when we have both an owner and a bookable');
     }
 }

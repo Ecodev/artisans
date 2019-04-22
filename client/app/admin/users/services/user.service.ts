@@ -3,7 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
-import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
+import { FormValidators, Literal, NaturalAbstractModelService, NaturalFormControl } from '@ecodev/natural';
 import {
     createUser,
     currentUserForProfileQuery,
@@ -18,10 +18,6 @@ import {
 } from './user.queries';
 import {
     BillingType,
-    Bookings,
-    BookingStatus,
-    BookingsVariables,
-    BookingType,
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
@@ -52,13 +48,8 @@ import {
 } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
-import { Literal } from '@ecodev/natural';
-import { BookingService } from '../../bookings/services/booking.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
-import { NaturalFormControl } from '@ecodev/natural';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
-import { PricedBookingService } from '../../bookings/services/PricedBooking.service';
 
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
     const value = control.value || '';
@@ -91,9 +82,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
     constructor(apollo: Apollo,
                 protected router: Router,
-                protected bookingService: BookingService,
                 private permissionsService: PermissionsService,
-                protected pricedBookingService: PricedBookingService,
     ) {
         super(apollo,
             'user',
@@ -198,8 +187,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
     }
 
     protected getDefaultForClient(): Literal {
-        return {
-        };
+        return {};
     }
 
     public getFormValidators(): FormValidators {
@@ -279,68 +267,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         });
 
         return subject;
-    }
-
-    /**
-     * Impact members
-     */
-    public getRunningServices(user, expire: Subject<void>): Observable<Bookings['bookings']> {
-        const variables: BookingsVariables = {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                owner: {equal: {value: user.id}},
-                                status: {equal: {value: BookingStatus.booked}},
-                                endDate: {null: {}},
-                            },
-                        ],
-                        joins: {
-                            bookable: {
-                                conditions: [
-                                    {
-                                        bookingType: {
-                                            in: {
-                                                values: [BookingType.self_approved],
-                                                not: true,
-                                            },
-                                        },
-                                    },
-                                ],
-                            },
-                        },
-                    },
-                ],
-            },
-        };
-
-        const qvm = new NaturalQueryVariablesManager<BookingsVariables>();
-        qvm.set('variables', variables);
-        return this.pricedBookingService.watchAll(qvm, expire);
-    }
-
-    public getPendingApplications(user, expire: Subject<void>): Observable<Bookings['bookings']> {
-        const variables: BookingsVariables = {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                endDate: {null: {}},
-                                owner: {equal: {value: user.id}},
-                                status: {equal: {value: BookingStatus.application}},
-                            },
-                        ],
-                        joins: {bookable: {conditions: [{bookingType: {in: {values: [BookingType.admin_approved]}}}]}},
-                    },
-                ],
-            },
-        };
-
-        const qvm = new NaturalQueryVariablesManager<BookingsVariables>();
-        qvm.set('variables', variables);
-        return this.bookingService.watchAll(qvm, expire);
     }
 
     public getViewer(): Observable<CurrentUserForProfile['viewer']> {

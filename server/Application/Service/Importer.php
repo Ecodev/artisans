@@ -49,14 +49,6 @@ class Importer
     private $storage = [];
 
     /**
-     * Allocated storage
-     * [idBookable] => number of bookings
-     *
-     * @var array
-     */
-    private $storageAllocated = [];
-
-    /**
      * Import constructor
      */
     public function __construct(ContainerInterface $container, EntityManager $entityManager)
@@ -76,7 +68,6 @@ class Importer
         $this->loadStorageRequests();
         $this->insertBookables();
         $this->insertUsers();
-        $this->insertBookings();
     }
 
     /**
@@ -276,8 +267,6 @@ EOT;
 
         $linkToTag = $conn->prepare('INSERT INTO user_tag_user(user_tag_id, user_id) VALUES (:user_tag_id, :user_id)');
 
-        $linkToLicense = $conn->prepare('INSERT INTO license_user(license_id, user_id) VALUES (:license_id, :user_id)');
-
         $exportPassword = $typo3->prepare('UPDATE fe_users SET new_password=:password WHERE uid=:user_id');
 
         foreach ($this->users as $user) {
@@ -476,30 +465,6 @@ EOT;
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
             }
-
-            // Assigne les brevets au membre
-            $linkToLicense->bindValue(':user_id', $user['uid']);
-            $licenses = [];
-            switch ($user['emmy_autvoile']) {
-                case 3: $licenses[] = 2002; // Voile niveau 3 (+ inférieurs)
-                // no break
-                case 2: $licenses[] = 2001; // Voile niveau 2 (+ inférieurs)
-                // no break
-                case 1: $licenses[] = 2000;
-
-break;
-                default:
-            }
-            if ($user['emmy_permisvoile']) {
-                $licenses[] = 2006;
-            }
-            if ($user['emmy_permismoteur']) {
-                $licenses[] = 2007;
-            }
-            foreach ($licenses as $license) {
-                $linkToLicense->bindValue(':license_id', $license);
-                $linkToLicense->execute();
-            }
         }
 
         $updateOwner = $conn->prepare('UPDATE user SET owner_id=:owner WHERE id=:id');
@@ -544,8 +509,6 @@ break;
                   description,
                   initial_price,
                   periodic_price,
-                  simultaneous_booking_maximum,
-                  booking_type,
                   creation_date,
                   credit_account_id
                 ) VALUES (
@@ -554,8 +517,6 @@ break;
                   :description,
                   :initial_price,
                   :periodic_price,
-                  :simultaneous_booking_maximum,
-                  :booking_type,
                   NOW(),
                   10036 -- Vente de prestations -> Location casiers
                 )
@@ -568,14 +529,6 @@ EOT;
         // Armoires
         $insert->bindValue(':initial_price', 0);
         $insert->bindValue(':periodic_price', 50);
-        // Une armoire peut être partagée entre 2 ou 3 membres
-        $insert->bindValue(':simultaneous_booking_maximum', 3);
-
-        /*
-         * admin_only, because l'attribution d'un casier particulier est faite par l'admin,
-         * bien que le membre demande un "Casier" il ne doit pas pouvoir réserver "Casier 26"
-         */
-        $insert->bindValue(':booking_type', 'admin_only');
 
         $insert->bindValue(':description', 'Armoire (50 x 200 x 70 cm)');
         for ($i = 1; $i <= 120; ++$i) {
@@ -591,7 +544,6 @@ EOT;
 
         // Casiers
         $insert->bindValue(':periodic_price', 30);
-        $insert->bindValue(':simultaneous_booking_maximum', 1);
         $insert->bindValue(':description', 'Casier (50 x 50 x 70 cm)');
         for ($i = 1; $i <= 36; ++$i) {
             $insert->bindValue(':name', sprintf('Casier %u', $i));
@@ -632,123 +584,6 @@ EOT;
                 $linkToTag->execute();
                 $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
                 $linkToTag->execute();
-            }
-        }
-    }
-
-    /**
-     * Create periodic bookings for all members
-     */
-    private function insertBookings(): void
-    {
-        $conn = $this->entityManager->getConnection();
-
-        $insert = <<<EOT
-                INSERT INTO booking(
-                  owner_id,
-                  creation_date,
-                  status,
-                  participant_count,
-                  start_date,
-                  bookable_id,
-                  remarks
-                ) VALUES (
-                  :owner,
-                  NOW(),
-                  :status,
-                  :participant_count,
-                  NOW(),
-                  :bookable,
-                  :remarks
-                )
-EOT;
-
-        $insert = $conn->prepare($insert);
-        $insert->bindValue(':status', 'booked');
-        $insert->bindValue(':participant_count', 1);
-        $insert->bindValue(':remarks', '');
-
-        // Réservations liées au chef de famille
-        foreach ($this->members as $idMember => $member) {
-            // Cotisation annuelle
-            $insert->bindValue(':owner', $idMember);
-            $insert->bindValue(':bookable', 3006); // Cotisation annuelle
-            $insert->execute();
-
-            // Fond de réparation
-            $insert->bindValue(':bookable', 3026); // Fonds de réparation interne
-            $insert->execute();
-        }
-
-        // Réservations concernant des membres du ménage, mais cependant liées et facturées au chef de famille
-        foreach ($this->users as $idUser => $user) {
-            $insert->bindValue(':owner', $user['family_uid']);
-            $insert->bindValue(':remarks', implode(' ', [$user['first_name'], $user['last_name']]));
-
-            // Adhésion NFT (optionnel)
-            if (!empty($user['emmy_NFT'])) {
-                $insert->bindValue(':bookable', 3004); // Cotisation NFT
-                $insert->execute();
-            }
-
-            // Licence Swiss Sailing
-            if (!empty($user['emmy_swiss_sailing'])) {
-                switch ($user['emmy_swiss_sailing_type']) {
-                    case 'A':
-                        $idBookable = 3027; // Licence Swiss Sailing (voile)
-                        break;
-                    case 'J':
-                        $idBookable = 3030; // Cotisation Swiss Sailing (NFT, junior)
-                        break;
-                    default:
-                        $idBookable = null;
-                }
-                if ($idBookable) {
-                    $insert->bindValue(':bookable', $idBookable);
-                    $insert->execute();
-                }
-            }
-
-            // Licence Swiss Windsurfing
-            if (!empty($user['emmy_swiss_windsurf_type']) && $user['emmy_swiss_windsurf_type'] === 'A') {
-                $insert->bindValue(':bookable', 3028); // Cotisation Swiss Windsurfing (NFT)
-                $insert->execute();
-            }
-        }
-        $insert->bindValue(':remarks', '');
-
-        // Attribution des emplacements de stockage
-        $selectBookableByName = $conn->prepare('SELECT id, name, simultaneous_booking_maximum FROM bookable WHERE name=:name');
-        foreach ($this->storage as $request) {
-            if (empty($request['uid_link']) || !array_key_exists($request['uid_link'], $this->members)) {
-                echo sprintf('ERROR: UID membre de %s %s inconnu dans fichier de demande de stockage', $request['first_name'], $request['last_name']) . PHP_EOL;
-
-                continue;
-            }
-            $insert->bindValue(':owner', $request['uid_link']);
-            foreach ([1 => 'Armoire %u', 2 => 'Armoire %u', 3 => 'Casier %u'] as $index => $bookableName) {
-                if ($request["materiel{$index}"] > 0 && !empty($request["materiel{$index}attrib"])) {
-                    $selectBookableByName->bindValue(':name', sprintf($bookableName, $request["materiel{$index}attrib"]));
-                    $bookable = null;
-                    if ($selectBookableByName->execute() && $selectBookableByName->rowCount() === 1) {
-                        $bookable = $selectBookableByName->fetch(\PDO::FETCH_ASSOC);
-                    }
-                    if ($bookable) {
-                        $insert->bindValue(':bookable', $bookable['id']);
-                        $insert->execute();
-                        if (!array_key_exists($bookable['id'], $this->storageAllocated)) {
-                            $this->storageAllocated[$bookable['id']] = 1;
-                        } else {
-                            $this->storageAllocated[$bookable['id']] += 1;
-                        }
-                        echo sprintf('%s attribué à %s %s', $bookable['name'], $this->users[$request['uid_link']]['first_name'], $this->users[$request['uid_link']]['last_name']) . PHP_EOL;
-                        if ($this->storageAllocated[$bookable['id']] > $bookable['simultaneous_booking_maximum']) {
-                            echo sprintf('WARN: %s attribué %u fois dépassant la limite de %u', $bookable['name'], $this->storageAllocated[$bookable], $bookable['simultaneous_booking_maximum']) . PHP_EOL;
-                        }
-                    } else {
-                        echo sprintf("ERROR: cannot find $bookableName in bookables", $request["materiel{$index}attrib"]) . PHP_EOL;
-                    }
-                }
             }
         }
     }
@@ -840,8 +675,6 @@ EOT;
         $stmt = $conn->prepare('DELETE FROM user_tag WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
         $stmt = $conn->prepare('DELETE FROM expense_claim WHERE creator_id < 0 OR owner_id < 0');
-        $stmt->execute();
-        $stmt = $conn->prepare('DELETE FROM booking WHERE creator_id < 0 OR owner_id < 0');
         $stmt->execute();
         $stmt = $conn->prepare('UPDATE user set owner_id = NULL WHERE id < 0');
         $stmt->execute();

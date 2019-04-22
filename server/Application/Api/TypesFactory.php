@@ -19,8 +19,6 @@ class TypesFactory
             \Application\Api\Enum\UserStatusType::class,
             \Application\Api\Enum\UserRoleType::class,
             \Application\Api\Enum\BookableStateType::class,
-            \Application\Api\Enum\BookingStatusType::class,
-            \Application\Api\Enum\BookingTypeType::class,
             \Application\Api\Enum\SexType::class,
             \Application\Api\Enum\RelationshipType::class,
             \Application\Api\Enum\BillingTypeType::class,

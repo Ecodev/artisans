@@ -36,7 +36,7 @@ use GraphQL\Doctrine\Annotation as API;
 class User extends AbstractModel
 {
     const ROLE_ANONYMOUS = 'anonymous';
-    const ROLE_BOOKING_ONLY = 'booking_only';
+    const ROLE_PARTNER = 'partner';
     const ROLE_INDIVIDUAL = 'individual';
     const ROLE_MEMBER = 'member';
     const ROLE_RESPONSIBLE = 'responsible';
@@ -225,18 +225,6 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Booking", mappedBy="owner")
-     */
-    private $bookings;
-
-    /**
-     * @var Collection
-     * @ORM\ManyToMany(targetEntity="License", mappedBy="users")
-     */
-    private $licenses;
-
-    /**
-     * @var Collection
      * @ORM\ManyToMany(targetEntity="UserTag", mappedBy="users")
      */
     private $userTags;
@@ -270,9 +258,7 @@ class User extends AbstractModel
     public function __construct(string $role = self::ROLE_INDIVIDUAL)
     {
         $this->role = $role;
-        $this->bookings = new ArrayCollection();
         $this->accounts = new ArrayCollection();
-        $this->licenses = new ArrayCollection();
         $this->userTags = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->users = new ArrayCollection();
@@ -438,7 +424,6 @@ class User extends AbstractModel
             self::ROLE_ANONYMOUS,
             self::ROLE_INDIVIDUAL,
             self::ROLE_MEMBER,
-            self::ROLE_BOOKING_ONLY,
             self::ROLE_RESPONSIBLE,
             self::ROLE_ADMINISTRATOR,
         ];
@@ -591,73 +576,11 @@ class User extends AbstractModel
     }
 
     /**
-     * Get bookings
-     *
-     * @return Collection
-     */
-    public function getBookings(): Collection
-    {
-        return $this->bookings;
-    }
-
-    /**
-     * Notify the user that it has a new booking.
-     * This should only be called by Booking::setResponsible()
-     *
-     * @param Booking $booking
-     */
-    public function bookingAdded(Booking $booking): void
-    {
-        $this->bookings->add($booking);
-    }
-
-    /**
-     * Notify the user that it has a booking was removed.
-     * This should only be called by Booking::setResponsible()
-     *
-     * @param Booking $booking
-     */
-    public function bookingRemoved(Booking $booking): void
-    {
-        $this->bookings->removeElement($booking);
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getLicenses(): Collection
-    {
-        return $this->licenses;
-    }
-
-    /**
      * @return Collection
      */
     public function getUserTags(): Collection
     {
         return $this->userTags;
-    }
-
-    /**
-     * Notify the user that it has a new license.
-     * This should only be called by License::addUser()
-     *
-     * @param License $license
-     */
-    public function licenseAdded(License $license): void
-    {
-        $this->licenses->add($license);
-    }
-
-    /**
-     * Notify the user that it a license was removed.
-     * This should only be called by License::removeUser()
-     *
-     * @param License $license
-     */
-    public function licenseRemoved(License $license): void
-    {
-        $this->licenses->removeElement($license);
     }
 
     /**

@@ -6,7 +6,6 @@ namespace ApplicationTest\Api\Input\Operator;
 
 use Application\Api\Exception;
 use Application\Api\Input\Operator\SearchOperatorType;
-use Application\Model\Booking;
 use Application\Model\Image;
 use Application\Model\User;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
@@ -58,12 +57,6 @@ class SearchOperatorTypeTest extends \PHPUnit\Framework\TestCase
                 '  foo   bar   ',
                 0,
                 '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2)',
-            ],
-            'joined entities' => [
-                Booking::class,
-                'foo',
-                2,
-                '(a.destination LIKE :filter1 OR a.startComment LIKE :filter1 OR user1.firstName LIKE :filter1 OR user1.lastName LIKE :filter1 OR user1.email LIKE :filter1 OR user1.locality LIKE :filter1 OR bookable1.name LIKE :filter1)',
             ],
         ];
     }

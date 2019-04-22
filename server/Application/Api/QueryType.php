@@ -13,10 +13,8 @@ use Application\Model\AccountingDocument;
 use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
 use Application\Model\BookableTag;
-use Application\Model\Booking;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
-use Application\Model\License;
 use Application\Model\Message;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
@@ -41,9 +39,7 @@ class QueryType extends ObjectType
             Standard::buildQuery(Bookable::class),
             Standard::buildQuery(BookableMetadata::class),
             Standard::buildQuery(BookableTag::class),
-            Standard::buildQuery(Booking::class),
             Standard::buildQuery(Image::class),
-            Standard::buildQuery(License::class),
             Standard::buildQuery(User::class),
             Standard::buildQuery(UserTag::class),
             Standard::buildQuery(Account::class),

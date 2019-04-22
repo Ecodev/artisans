@@ -5,8 +5,6 @@ import { HomeComponent } from './home/home.component';
 import { DoorComponent } from './door/door.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { SafetyComponent } from './safety/safety.component';
-import { BookingService } from './admin/bookings/services/booking.service';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { DoorGuard } from './shared/guards/door.guard';
@@ -23,15 +21,6 @@ export const routes: Routes = [
         component: HomeComponent,
         loadChildren: './user/user.module#UserModule',
     },
-    {
-        path: 'safety',
-        component: SafetyComponent,
-        data: {
-            title: 'Sorties en cours',
-            queryVariables: BookingService.runningSelfApprovedQV,
-            columns: ['bookable', 'destination', 'startDate', 'estimatedEndDate', 'participantCount'],
-        },
-    },
     // Auth required routes
     {
         path: '',
@@ -42,10 +31,6 @@ export const routes: Routes = [
             {
                 path: '',
                 component: DashboardComponent,
-            },
-            {
-                path: 'booking',
-                loadChildren: './booking/booking.module#BookingModule',
             },
             {
                 path: 'admin',

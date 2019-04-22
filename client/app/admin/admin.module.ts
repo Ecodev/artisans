@@ -8,14 +8,10 @@ import { AvatarModule } from 'ngx-avatar';
 import { BookableComponent } from './bookables/bookable/bookable.component';
 import { MaterialModule } from '../shared/modules/material.module';
 import { EmmyModule } from '../shared/modules/emmy.module';
-import { LicensesComponent } from './licenses/licenses/licenses.component';
-import { LicenseComponent } from './licenses/license/license.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
-import { BookingsComponent } from './bookings/bookings/bookings.component';
-import { BookingComponent } from './bookings/booking/booking.component';
 import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
 import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
@@ -36,14 +32,10 @@ import { BookableMetadataComponent } from './bookable-metadata/bookable-metadata
         BookablesComponent,
         BookableComponent,
         AdminComponent,
-        BookingsComponent,
         UsersComponent,
         UserComponent,
-        LicensesComponent,
-        LicenseComponent,
         UserTagsComponent,
         UserTagComponent,
-        BookingComponent,
         BookableTagsComponent,
         BookableTagComponent,
         TransactionComponent,

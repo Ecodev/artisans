@@ -12,10 +12,8 @@ return [
                     bookable { create }
                     bookableMetadata { create }
                     bookableTag { create }
-                    booking { create }
                     expenseClaim { create }
                     image { create }
-                    license { create }
                     message { create }
                     transaction { create }
                     transactionTag { create }
@@ -46,16 +44,10 @@ return [
                     'bookableTag' => [
                         'create' => false,
                     ],
-                    'booking' => [
-                        'create' => false,
-                    ],
                     'expenseClaim' => [
                         'create' => false,
                     ],
                     'image' => [
-                        'create' => false,
-                    ],
-                    'license' => [
                         'create' => false,
                     ],
                     'message' => [

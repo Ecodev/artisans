@@ -32,7 +32,6 @@ class UserRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['bookingonly', $all],
             ['individual', $all],
             ['member', $all],
             ['responsible', $all],
@@ -72,15 +71,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
     public function testGetAllToQueueBalanceMessage(): void
     {
         $actual = $this->repository->getAllToQueueBalanceMessage();
-        self::assertCount(1, $actual);
-
-        $actualBookings = [];
-        foreach ($actual[0]->getBookings() as $booking) {
-            $actualBookings[] = $booking->getId();
-        }
-
-        $expected = [4004, 4005, 4015];
-        self::assertSame($expected, $actualBookings, 'must have pre-loaded only the bookings that we are interested in');
+        self::assertCount(5, $actual);
     }
 
     public function testGetAllToQueueBalanceMessageNegative(): void

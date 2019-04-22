@@ -32,7 +32,6 @@ class ExpenseClaimRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['bookingonly', []],
             ['individual', [7003]],
             ['member', [7000, 7001, 7002]],
             ['responsible', $all],

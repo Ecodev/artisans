@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
+import { FormValidators, NaturalAbstractModelService, NaturalQueryVariablesManager } from '@ecodev/natural';
 import {
     createExpenseClaim,
     deleteExpenseClaims,
@@ -24,7 +24,6 @@ import {
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',
@@ -77,7 +76,6 @@ export class ExpenseClaimService extends NaturalAbstractModelService<ExpenseClai
                         conditions: [
                             {
                                 owner: {equal: {value: user.id}},
-                                // status: {equal: {value: BookingStatus.application}}, ?? all ? or just pending ones ?
                             },
                         ],
                     },

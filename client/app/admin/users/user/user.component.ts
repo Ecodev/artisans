@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail } from '@ecodev/natural';
-import { NaturalAlertService } from '@ecodev/natural';
+import { NaturalAbstractDetail, NaturalAlertService, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { UserService } from '../services/user.service';
 import {
     CreateUser,
-    CreateUserVariables, LogicalOperator, SortingOrder, TransactionLineSortingField,
+    CreateUserVariables,
+    LogicalOperator,
+    SortingOrder,
+    TransactionLineSortingField,
     TransactionLinesVariables,
     UpdateUser,
     UpdateUserVariables,
@@ -13,11 +15,8 @@ import {
     UsersVariables,
     UserVariables,
 } from '../../../shared/generated-types';
-import { LicenseService } from '../../licenses/services/license.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
-import { BookingService } from '../../bookings/services/booking.service';
 import { AccountService } from '../../accounts/services/account.service';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
 
 @Component({
     selector: 'app-user',
@@ -44,8 +43,6 @@ export class UserComponent
                 router: Router,
                 route: ActivatedRoute,
                 public userTagService: UserTagService,
-                public licenseService: LicenseService,
-                public bookingService: BookingService,
                 public accountService: AccountService,
     ) {
         super('user', userService, alertService, router, route);

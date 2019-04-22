@@ -16,10 +16,8 @@ const permissions = gql`
                 bookable { create }
                 bookableMetadata { create }
                 bookableTag { create }
-                booking { create }
                 expenseClaim { create }
                 image { create }
-                license { create }
                 message { create }
                 transaction { create }
                 transactionTag { create }

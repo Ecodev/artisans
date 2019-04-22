@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Application\Api\Input\Operator;
 
 use Application\Api\Exception;
-use Application\Model\Booking;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -39,15 +38,6 @@ class SearchOperatorType extends AbstractOperator
         }
 
         $fields = $this->getSearchableFields($metadata, $alias);
-
-        // Special case for Booking, search in related objects
-        if ($metadata->getName() === Booking::class) {
-            $fields = array_merge(
-                $fields,
-                $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, 'owner'),
-                $this->searchOnJoinedEntity($uniqueNameFactory, $metadata, $queryBuilder, $alias, 'bookable')
-            );
-        }
 
         return $this->buildSearchDqlCondition($uniqueNameFactory, $metadata, $queryBuilder, $fields, $words);
     }

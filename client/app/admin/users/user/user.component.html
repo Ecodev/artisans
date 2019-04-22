@@ -115,7 +115,7 @@
                         <natural-select-enum enumName="SwissWindsurfType"
                                              formControlName="swissWindsurfType"
                                              (selectionChange)="update()"
-                                             placeholder="License swiss windsurfing"
+                                             placeholder="Licence swiss windsurfing"
                         ></natural-select-enum>
 
                         <div fxLayout="row wrap" fxLayoutGap="20px">
@@ -178,22 +178,11 @@
                     </div>
                 </div>
 
-                <!-- Bookings -->
                 <mat-divider *ngIf="data.model.id"></mat-divider>
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
                     <div fxFlex="45" fxLayout="column">
-                        <h2 class="mat-title">Certifications</h2>
-                        <natural-relations [main]="data.model"
-                                           [service]="licenseService"
-                                           [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                           placeholder="Attribuer une certification"
-                                           [hideSearch]="true"
-                        >
-                            <ng-template let-item="item">
-                                <natural-table-button [navigate]="['/admin/license/', item.id]" [label]="item.name"></natural-table-button>
-                            </ng-template>
-                        </natural-relations>
+                        REMOVE ME AND RE-LAYOUT THE PAG
                     </div>
 
                     <div fxFlex="40" fxLayout="column">

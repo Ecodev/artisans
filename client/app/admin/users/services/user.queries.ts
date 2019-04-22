@@ -32,10 +32,6 @@ export const userFieldsFragment = gql`
         firstLogin
         lastLogin
         canOpenDoor
-        licenses {
-            id
-            name
-        }
         account {
             id
             name

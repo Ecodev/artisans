@@ -10,8 +10,6 @@ import { CardComponent } from '../components/card/card.component';
 import { ngfModule } from 'angular-file';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
-import { NavigationsComponent } from '../components/navigations/navigations.component';
-import { CommentComponent } from '../components/navigations/comment.component';
 import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
@@ -89,8 +87,6 @@ const declarations = [
     CardComponent,
     FileDropDirective,
     FileComponent,
-    NavigationsComponent,
-    CommentComponent,
     TransactionAmountComponent,
     AccountingDocumentsComponent,
     ParticleSwitchComponent,
@@ -129,7 +125,7 @@ const imports = [
     ],
     exports: [...imports, ...declarations, TimeagoModule, NaturalIconModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    entryComponents: [CommentComponent],
+    entryComponents: [],
 })
 export class EmmyModule {
 }

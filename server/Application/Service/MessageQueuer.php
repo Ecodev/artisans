@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\DBAL\Types\MessageTypeType;
-use Application\Model\Bookable;
-use Application\Model\Booking;
 use Application\Model\Message;
 use Application\Model\User;
 use Doctrine\ORM\EntityManager;
@@ -86,15 +84,13 @@ class MessageQueuer
 
     /**
      * @param User $user
-     * @param Bookable[] $bookables
      *
      * @return Message
      */
-    public function queueBalance(User $user, iterable $bookables): Message
+    public function queueBalance(User $user): Message
     {
         $subject = 'Balance de compte';
         $mailParams = [
-            'bookables' => $bookables,
         ];
 
         $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::BALANCE, $mailParams);
@@ -152,11 +148,7 @@ class MessageQueuer
     private function queueBalanceForEachUsers(array $users): int
     {
         foreach ($users as $user) {
-            $bookables = $user->getBookings()->map(function (Booking $booking) {
-                return $booking->getBookable();
-            });
-
-            $this->queueBalance($user, $bookables);
+            $this->queueBalance($user);
         }
 
         return count($users);

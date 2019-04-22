@@ -9,10 +9,6 @@ export const bookableMetaFragment = gql`
         isActive
         state
         verificationDate
-        licenses {
-            id
-            name
-        }
         bookableTags {
             id
             name
@@ -25,8 +21,6 @@ export const bookableMetaFragment = gql`
             name
         }
         code
-        simultaneousBookingMaximum
-        bookingType
         remarks
         image {
             id
@@ -70,13 +64,6 @@ export const usageBookablesQuery = gql`
                 periodicPrice
                 purchasePrice
                 purchasePrice
-                sharedBookings {
-                    id
-                    owner {
-                        id
-                        name
-                    }
-                }
                 creationDate
                 updateDate
             }

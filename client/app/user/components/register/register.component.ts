@@ -45,13 +45,6 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
         if (email && this.step === 1) {
             email.setValue(this.route.snapshot.params.email);
         }
-
-        this.bookableService.getMandatoryBookables().subscribe(bookables => {
-            if (bookables) {
-                this.mandatoryBookables = new NaturalDataSource(bookables);
-            }
-        });
-
     }
 
     public submit(): void {

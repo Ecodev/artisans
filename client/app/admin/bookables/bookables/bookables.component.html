@@ -21,7 +21,6 @@
                     <span naturalColumnsPickerColumn="initialPrice">Prix initial</span>
                     <span naturalColumnsPickerColumn="periodicPrice">Prix périodique</span>
                     <span naturalColumnsPickerColumn="date">Dernière modification</span>
-                    <span naturalColumnsPickerColumn="usage">Dernière modification</span>
                     <span naturalColumnsPickerColumn="verificationDate">Dernière vérification</span>
                     <span naturalColumnsPickerColumn="select" [checked]="false" [hidden]="true">Sélection</span>
                 </natural-columns-picker>
@@ -112,19 +111,6 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Dernière vérification</th>
                     <td mat-cell *matCellDef="let element">
                         {{ element.verificationDate | date: 'mediumDate' }} - {{ element.verificationDate | date: 'shortTime' }}
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                </ng-container>
-
-                <ng-container matColumnDef="usage">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-3em-column app-align-center>Utilisations</th>
-                    <td mat-cell *matCellDef="let element"  app-align-center>
-                        <div *ngFor="let b of element.sharedBookings" fxLayout="row">
-                            <ngx-avatar [name]="b.owner.name" [size]="36"></ngx-avatar>
-                            <a mat-button [routerLink]="['/admin/user', b.owner.id]">
-                                {{ b.owner.name }}
-                            </a>
-                        </div>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>

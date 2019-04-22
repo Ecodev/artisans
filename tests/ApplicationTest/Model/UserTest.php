@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Model;
 
-use Application\Model\Booking;
+use Application\Model\Bookable;
 use Application\Model\User;
 use Cake\Chronos\Chronos;
 use PHPUnit\Framework\TestCase;
@@ -83,7 +83,7 @@ class UserTest extends TestCase
     {
         User::setCurrent($currentUser);
 
-        $subject = new Booking();
+        $subject = new Bookable();
         self::assertNull($subject->getOwner());
 
         $subject->setOwner($originalOwner);

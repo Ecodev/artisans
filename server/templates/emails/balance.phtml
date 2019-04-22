@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 $urlTransaction = $this->serverUrl . '/profile/history';
-$urlServices = $this->serverUrl . '/profile/services';
 ?>
 <p>
     Ton solde actuel est de
@@ -9,8 +8,7 @@ $urlServices = $this->serverUrl . '/profile/services';
 </p>
 
 <?php if ($this->user->getAccount()->getBalance() < 0): ?>
-    <p>Ton solde est insuffisant. Merci de <a href="<?php echo $urlTransaction ?>">faire un versement</a> et/ou ajuster <a
-                href="<?php echo $urlServices ?>">les services utilisés</a>.</p>
+    <p>Ton solde est insuffisant. Merci de <a href="<?php echo $urlTransaction ?>">faire un versement</a>.</p>
 
     <p style="text-align:center;margin:40px 0">
         <a href="<?php echo $urlTransaction ?>"
@@ -25,16 +23,5 @@ $urlServices = $this->serverUrl . '/profile/services';
 <?php endif; ?>
 
 
-<p>Pour rappel, tes prestations annuelles sont:</p>
-
-<table style="margin-left: 2em; min-width: 300px; border-collapse: collapse">
-    <?php foreach ($this->bookables as $bookable): ?>
-        <tr>
-            <td><?php echo $bookable->getName() ?></td>
-            <td style="text-align: right"><?php echo $bookable->getPeriodicPrice() ?> CHF</td>
-        </tr>
-    <?php endforeach; ?>
-</table>
-
 <p>Voir aussi <a href="<?php echo $urlTransaction ?>">l'historique du compte</a> et <a
-            href="https://emmy.ch/le-club/philosophie/">les FAQ de facturation</a>.</p>
+            href="https://about.emmy.ch">les FAQ de facturation</a>.</p>

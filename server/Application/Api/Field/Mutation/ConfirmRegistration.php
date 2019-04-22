@@ -7,13 +7,8 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
-use Application\DBAL\Types\BookingStatusType;
-use Application\DBAL\Types\BookingTypeType;
-use Application\Model\Bookable;
-use Application\Model\Booking;
 use Application\Model\User;
 use Application\Repository\UserRepository;
-use Cake\Chronos\Chronos;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
 
@@ -50,24 +45,8 @@ abstract class ConfirmRegistration implements FieldInterface
                 // Active the member
                 $user->initialize();
 
-                // Create mandatory booking for him
+                // Login
                 User::setCurrent($user);
-
-                $mandatoryBookables = _em()->getRepository(Bookable::class)->findByBookingType(BookingTypeType::MANDATORY);
-                foreach ($mandatoryBookables as $bookable) {
-                    $booking = new Booking();
-                    _em()->persist($booking);
-
-                    $booking->setOwner($user);
-                    $booking->setStatus(BookingStatusType::BOOKED);
-                    $booking->setStartDate(new Chronos());
-                    $booking->setBookable($bookable);
-
-                    // Non-periodic bookable must be terminated immediately
-                    if (bccomp($bookable->getPeriodicPrice(), '0.00') === 0) {
-                        $booking->terminate('Terminé automatiquement parce que paiement ponctuel uniquement');
-                    }
-                }
 
                 _em()->flush();
 

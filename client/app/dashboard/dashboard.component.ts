@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../admin/users/services/user.service';
-import { BookingService } from '../admin/bookings/services/booking.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,7 +14,7 @@ export class DashboardComponent implements OnInit {
 
     public viewer;
 
-    constructor(public userService: UserService, public bookingService: BookingService, private route: ActivatedRoute) {
+    constructor(public userService: UserService, private route: ActivatedRoute) {
     }
 
     public ngOnInit(): void {

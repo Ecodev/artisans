@@ -29,7 +29,6 @@ import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-bat
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { registerLocaleData } from '@angular/common';
-import { SafetyComponent } from './safety/safety.component';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
@@ -50,7 +49,6 @@ export class MyIntl extends TimeagoIntl {
         DashboardComponent,
         BootLoaderComponent,
         ErrorComponent,
-        SafetyComponent,
     ],
     imports: [
         BrowserModule,

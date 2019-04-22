@@ -42,18 +42,6 @@ describe('UserService', () => {
         door4: true,
         canOpenDoor: true,
         receivesNewsletter: true,
-        licenses: [
-            {
-                id: '456',
-                name: 'test string',
-                __typename: 'License',
-            },
-            {
-                id: '456',
-                name: 'test string',
-                __typename: 'License',
-            },
-        ],
         account: {
             id: '456',
             balance: 'test string',

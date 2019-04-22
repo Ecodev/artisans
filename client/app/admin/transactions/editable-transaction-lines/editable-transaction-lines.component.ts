@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TransactionLineService } from '../services/transactionLine.service';
-import { BookableService } from '../../bookables/services/bookable.service';
+import { ProductService } from '../../products/services/product.service';
 import { Transaction, TransactionLinesVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
 import { NaturalAbstractEditableList } from '@ecodev/natural';
@@ -16,11 +16,11 @@ export class EditableTransactionLinesComponent extends NaturalAbstractEditableLi
     @Input() transaction: Transaction['transaction'];
 
     public accountHierarchicConfig = AccountHierarchicConfiguration;
-    public columns = ['name', 'balance', 'debit', 'credit', 'isReconciled', 'bookable', 'transactionTag', 'remarks', 'remove'];
+    public columns = ['name', 'balance', 'debit', 'credit', 'isReconciled', 'product', 'transactionTag', 'remarks', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,
                 public transactionTagService: TransactionTagService,
-                public bookableService: BookableService) {
+                public productService: ProductService) {
         super('transactionLine', transactionLineService);
     }
 

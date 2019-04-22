@@ -66,7 +66,7 @@ class Importer
         $this->loadPeople();
         $this->deleteTestData();
         $this->loadStorageRequests();
-        $this->insertBookables();
+        $this->insertProducts();
         $this->insertUsers();
     }
 
@@ -496,14 +496,14 @@ EOT;
     }
 
     /**
-     * Create bookables (storage lockers, cabinets, space for boats)
+     * Create products (storage lockers, cabinets, space for boats)
      */
-    private function insertBookables(): void
+    private function insertProducts(): void
     {
         $conn = $this->entityManager->getConnection();
 
         $insert = <<<EOT
-                INSERT INTO bookable(
+                INSERT INTO product(
                   code,
                   name,
                   description,
@@ -524,7 +524,7 @@ EOT;
 
         $insert = $conn->prepare($insert);
 
-        $linkToTag = $conn->prepare('INSERT INTO bookable_tag_bookable(bookable_tag_id, bookable_id) VALUES (:bookable_tag_id, :bookable_id)');
+        $linkToTag = $conn->prepare('INSERT INTO product_tag_product(product_tag_id, product_id) VALUES (:product_tag_id, :product_id)');
 
         // Armoires
         $insert->bindValue(':initial_price', 0);
@@ -535,10 +535,10 @@ EOT;
             $insert->bindValue(':name', sprintf('Armoire %u', $i));
             $insert->bindValue(':code', sprintf('STA%u', $i));
             $insert->execute();
-            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
-            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Armoire'));
+            $linkToTag->bindValue(':product_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Armoire'));
             $linkToTag->execute();
-            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
+            $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Stockage'));
             $linkToTag->execute();
         }
 
@@ -549,10 +549,10 @@ EOT;
             $insert->bindValue(':name', sprintf('Casier %u', $i));
             $insert->bindValue(':code', sprintf('STC%u', $i));
             $insert->execute();
-            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
-            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Casier'));
+            $linkToTag->bindValue(':product_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Casier'));
             $linkToTag->execute();
-            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
+            $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Stockage'));
             $linkToTag->execute();
         }
 
@@ -563,10 +563,10 @@ EOT;
             $insert->bindValue(':name', sprintf('Stockage flotteur %u', $i));
             $insert->bindValue(':code', sprintf('STF%u', $i));
             $insert->execute();
-            $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
-            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Flotteurs'));
+            $linkToTag->bindValue(':product_id', $conn->lastInsertId());
+            $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Flotteurs'));
             $linkToTag->execute();
-            $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
+            $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Stockage'));
             $linkToTag->execute();
         }
 
@@ -579,10 +579,10 @@ EOT;
                 $insert->bindValue(':name', sprintf('Casier râtelier %s%u', $door, $position));
                 $insert->bindValue(':code', sprintf('STCR%s%u', $door, $position));
                 $insert->execute();
-                $linkToTag->bindValue(':bookable_id', $conn->lastInsertId());
-                $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Casier du râtelier WBC'));
+                $linkToTag->bindValue(':product_id', $conn->lastInsertId());
+                $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Casier du râtelier WBC'));
                 $linkToTag->execute();
-                $linkToTag->bindValue(':bookable_tag_id', $this->insertBookableTag('Stockage'));
+                $linkToTag->bindValue(':product_tag_id', $this->insertProductTag('Stockage'));
                 $linkToTag->execute();
             }
         }
@@ -616,30 +616,30 @@ EOT;
     }
 
     /**
-     * Insert or find a bookable tag by name
+     * Insert or find a product tag by name
      *
      * @param string $name
      *
      * @return int ID of the existing or newly tag
      */
-    private function insertBookableTag(string $name): int
+    private function insertProductTag(string $name): int
     {
         $conn = $this->entityManager->getConnection();
 
-        $existing = $conn->prepare('SELECT id FROM bookable_tag WHERE name = :name');
+        $existing = $conn->prepare('SELECT id FROM product_tag WHERE name = :name');
         $existing->bindValue(':name', $name);
         $existing->execute();
         if ($existing->rowCount()) {
             return (int) $existing->fetchColumn();
         }
 
-        $insert = $conn->prepare('INSERT INTO bookable_tag(creation_date, name) VALUES (NOW(), :name)');
+        $insert = $conn->prepare('INSERT INTO product_tag(creation_date, name) VALUES (NOW(), :name)');
         $insert->bindValue(':name', $name);
         if ($insert->execute()) {
             return (int) $conn->lastInsertId();
         }
 
-        throw new Exception(sprintf('Cannot find or insert BookableTag "%s"', $name));
+        throw new Exception(sprintf('Cannot find or insert ProductTag "%s"', $name));
     }
 
     /**

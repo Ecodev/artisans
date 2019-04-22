@@ -10,12 +10,12 @@ use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
-use Application\Model\Bookable;
-use Application\Model\BookableMetadata;
-use Application\Model\BookableTag;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\Message;
+use Application\Model\Product;
+use Application\Model\ProductMetadata;
+use Application\Model\ProductTag;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\TransactionTag;
@@ -36,9 +36,9 @@ class QueryType extends ObjectType
         $fields = array_merge(
             $specializedFields,
 
-            Standard::buildQuery(Bookable::class),
-            Standard::buildQuery(BookableMetadata::class),
-            Standard::buildQuery(BookableTag::class),
+            Standard::buildQuery(Product::class),
+            Standard::buildQuery(ProductMetadata::class),
+            Standard::buildQuery(ProductTag::class),
             Standard::buildQuery(Image::class),
             Standard::buildQuery(User::class),
             Standard::buildQuery(UserTag::class),

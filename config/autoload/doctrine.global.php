@@ -50,7 +50,6 @@ return [
         'types' => [
             'UserRole' => Application\DBAL\Types\UserRoleType::class,
             'UserStatus' => Application\DBAL\Types\UserStatusType::class,
-            'BookableState' => Application\DBAL\Types\BookableStateType::class,
             'Relationship' => Application\DBAL\Types\RelationshipType::class,
             'BillingType' => Application\DBAL\Types\BillingTypeType::class,
             'datetime' => Application\DBAL\Types\ChronosType::class,

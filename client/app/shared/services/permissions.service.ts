@@ -13,9 +13,9 @@ const permissions = gql`
             crud {
                 account { create }
                 accountingDocument { create }
-                bookable { create }
-                bookableMetadata { create }
-                bookableTag { create }
+                product { create }
+                productMetadata { create }
+                productTag { create }
                 expenseClaim { create }
                 image { create }
                 message { create }

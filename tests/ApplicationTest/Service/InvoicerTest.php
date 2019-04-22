@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\Model\Account;
-use Application\Model\Bookable;
+use Application\Model\Product;
 use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Service\Invoicer;
@@ -31,18 +31,18 @@ class InvoicerTest extends TestCase
 
         $this->getEntityManager()->getRepository(Account::class)->getOrCreate($user);
 
-        $bookable = new Bookable();
-        $bookable->setName('My bookable');
-        $bookable->setInitialPrice($initialPrice);
-        $bookable->setPeriodicPrice($periodicPrice);
+        $product = new Product();
+        $product->setName('My product');
+        $product->setInitialPrice($initialPrice);
+        $product->setPeriodicPrice($periodicPrice);
 
-        $bookableAccount = new Account();
-        $bookableAccount->setName('Bookable account');
-        $bookable->setCreditAccount($bookableAccount);
+        $productAccount = new Account();
+        $productAccount->setName('Product account');
+        $product->setCreditAccount($productAccount);
 
         global $container;
         $invoicer = $container->get(Invoicer::class);
-        $invoicer->invoiceInitial($user, $bookable);
+        $invoicer->invoiceInitial($user, $product);
 
         $account = $user->getAccount();
 
@@ -64,7 +64,7 @@ class InvoicerTest extends TestCase
 
             $actual[] = [
                 $t->getName(),
-                $t->getBookable()->getName(),
+                $t->getProduct()->getName(),
                 $t->getDebit()->getName(),
                 $t->getCredit()->getName(),
                 $t->getBalance(),
@@ -77,7 +77,7 @@ class InvoicerTest extends TestCase
     public function providerInvoiceInitial(): array
     {
         return [
-            'free bookable should create nothing' => [
+            'free product should create nothing' => [
                 '0',
                 '0',
                 [],
@@ -87,10 +87,10 @@ class InvoicerTest extends TestCase
                 '0',
                 [
                     [
-                        'My bookable',
-                        'My bookable',
+                        'My product',
+                        'My product',
                         'John Doe',
-                        'Bookable account',
+                        'Product account',
                         '10.25',
                     ],
                 ],
@@ -106,10 +106,10 @@ class InvoicerTest extends TestCase
                 '90.25',
                 [
                     [
-                        'My bookable',
-                        'My bookable',
+                        'My product',
+                        'My product',
                         'John Doe',
-                        'Bookable account',
+                        'Product account',
                         '10.25',
                     ],
                 ],
@@ -119,9 +119,9 @@ class InvoicerTest extends TestCase
                 '-90.25',
                 [
                     [
-                        'My bookable',
-                        'My bookable',
-                        'Bookable account',
+                        'My product',
+                        'My product',
+                        'Product account',
                         'John Doe',
                         '10.25',
                     ],

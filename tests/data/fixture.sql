@@ -110,7 +110,7 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, balance, iban, name) 
 (10106, 10105, NULL, 'equity', '2800', 35000.00, '', 'Capital social');
 
 
-REPLACE INTO bookable_tag (id, name) VALUES
+REPLACE INTO product_tag (id, name) VALUES
 (6000, 'SUP'),
 (6001, 'Planche'),
 (6002, 'Canoë'),
@@ -134,7 +134,7 @@ REPLACE INTO image (id, filename, width, height) VALUES
 (5006, 'chat7.jpg', 820, 457),
 (5007, 'chat8.jpg', 1000, 1000);
 
-REPLACE INTO bookable (id, image_id, credit_account_id, purchase_price, periodic_price, initial_price, name, code, description) VALUES
+REPLACE INTO product (id, image_id, credit_account_id, purchase_price, periodic_price, initial_price, name, code, description) VALUES
 (3000, 5000, NULL, 300, 0, 0, 'Stand up S1 (3000, carnet de sortie, occupé)', 'S1', 'No, no, no, no. You gotta listen to the way people talk. You don''t say "affirmative," or some shit like that. You say "no problemo." And if someone comes on to you with an attitude you say "eat me." And if you want to shine them on it''s "hasta la vista, baby."'),
 (3001, 5001, NULL, 700, 0, 0, 'Canoe C1 (3001, carnet de sortie, occupé)', 'C1', 'La marche des vertueux est semée d’obstacles qui sont les entreprises égoïstes que fait sans fin, surgir l’œuvre du malin. Béni soit-il l’homme de bonne volonté qui, au nom de la charité se fait le berger des faibles qu’il guide dans la vallée d’ombre de la mort et des larmes, car il est le gardien de son frère et la providence des enfants égarés. J’abattrai alors le bras d’une terrible colère, d’une vengeance furieuse et effrayante sur les hordes impies qui pourchassent et réduisent à néant les brebis de Dieu. Et tu connaîtras pourquoi mon nom est l’éternel quand sur toi, s’abattra la vengeance du Tout-Puissant !'),
 (3002, NULL, 10036, 0, 10, 0, 'Casier virtuel (3002, sur demande, periodic)', 'casier', 'Pour demande de stockage.'),
@@ -154,7 +154,7 @@ REPLACE INTO bookable (id, image_id, credit_account_id, purchase_price, periodic
 (3030, NULL, 10036, 0, 10, 0, 'Armoire virtuelle (3030, sur demande, periodic)', 'armoire', 'Pour demande de stockage.'),
 (3031, NULL, 10036, 0, 10, 0, 'Flotteur virtuel (3031, sur demande, periodic)', 'flotteur', 'Pour demande de stockage.');
 
-REPLACE INTO bookable_tag_bookable (bookable_tag_id, bookable_id) VALUES
+REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6000, 3000),
 (6002, 3001),
 (6008, 3002),
@@ -204,7 +204,7 @@ REPLACE INTO transaction_tag (id, name) VALUES
 (15004, 'Camp France 2019'),
 (15005, 'Semaine nautique 2019');
 
-REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, bookable_id, transaction_tag_id, balance, transactionDate, is_reconciled, name, remarks) VALUES
+REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, product_id, transaction_tag_id, balance, transactionDate, is_reconciled, name, remarks) VALUES
 (14000, 8000, 10096, 10037, NULL, 15001, 100.00, '2019-03-01', 1, 'Inscription cours nautique Active Member', ''),
 (14001, 8001, 10085, 10025, NULL, NULL, 12.50, '2019-03-10', 1, 'Paiement par Postcard', ''),
 (14002, 8002, 10096, 10035, NULL, NULL, 90.00, '2019-03-12', 1, 'Cotisation 2019', ''),
@@ -233,7 +233,7 @@ REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 (12000, -1008),
 (12001, -1009);
 
-REPLACE INTO bookable_metadata (id, bookable_id, name, value) VALUES
+REPLACE INTO product_metadata (id, product_id, name, value) VALUES
 (13000, 3000, 'Largeur', '1405 mm'),
 (13001, 3000, 'Hauteur', '1605 mm');
 

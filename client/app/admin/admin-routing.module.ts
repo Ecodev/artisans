@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
-import { BookablesComponent } from './bookables/bookables/bookables.component';
-import { BookableComponent } from './bookables/bookable/bookable.component';
-import { BookableResolver } from './bookables/services/bookable.resolver';
+import { ProductsComponent } from './products/products/products.component';
+import { ProductComponent } from './products/product/product.component';
+import { ProductResolver } from './products/services/product.resolver';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagResolver } from './userTags/services/userTag.resolver';
@@ -11,10 +11,10 @@ import { UsersComponent } from './users/users/users.component';
 import { UserComponent } from './users/user/user.component';
 import { UserResolver } from './users/services/user.resolver';
 import { UserService } from './users/services/user.service';
-import { BookableService } from './bookables/services/bookable.service';
-import { BookableTagsComponent } from './bookableTags/bookableTags/bookableTags.component';
-import { BookableTagComponent } from './bookableTags/bookableTag/bookableTag.component';
-import { BookableTagResolver } from './bookableTags/services/bookableTag.resolver';
+import { ProductService } from './products/services/product.service';
+import { ProductTagsComponent } from './productTags/productTags/productTags.component';
+import { ProductTagComponent } from './productTags/productTag/productTag.component';
+import { ProductTagResolver } from './productTags/services/productTag.resolver';
 import { UserRole, UserStatus } from '../shared/generated-types';
 import { TransactionResolver } from './transactions/services/transaction.resolver';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
@@ -30,7 +30,7 @@ import { TransactionTagResolver } from './transactionTags/services/transactionTa
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
-import { UsageBookableService } from './bookables/services/usage-bookable.service';
+import { UsageProductService } from './products/services/usage-product.service';
 
 const routes: Routes = [
         {
@@ -39,133 +39,133 @@ const routes: Routes = [
             canActivate: [AdministrationGuard],
             children: [
                 {
-                    path: 'bookable', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: BookablesComponent,
-                    data: {title: 'Réservables'},
+                    path: 'product', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: ProductsComponent,
+                    data: {title: 'Produits'},
                 },
                 {
-                    path: 'bookable',
+                    path: 'product',
                     children: [
                         {
                             path: 'services',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Cotisations',
-                                contextVariables: BookableService.membershipServices,
+                                contextVariables: ProductService.membershipServices,
                             },
                         },
                         {
                             path: 'sup',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Stand up paddle',
-                                contextVariables: BookableService.getFiltersByTagId(6000),
+                                contextVariables: ProductService.getFiltersByTagId(6000),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'planche',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Planches',
-                                contextVariables: BookableService.getFiltersByTagId(6001),
+                                contextVariables: ProductService.getFiltersByTagId(6001),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'canoe',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Canoës',
-                                contextVariables: BookableService.getFiltersByTagId(6002),
+                                contextVariables: ProductService.getFiltersByTagId(6002),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'kayak',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Kayaks',
-                                contextVariables: BookableService.getFiltersByTagId(6003),
+                                contextVariables: ProductService.getFiltersByTagId(6003),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'aviron',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Aviron',
-                                contextVariables: BookableService.getFiltersByTagId(6004),
+                                contextVariables: ProductService.getFiltersByTagId(6004),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'voile-legere',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Voile légère',
-                                contextVariables: BookableService.getFiltersByTagId(6005),
+                                contextVariables: ProductService.getFiltersByTagId(6005),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'voile-lestee',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Voile lestée',
-                                contextVariables: BookableService.getFiltersByTagId(6006),
+                                contextVariables: ProductService.getFiltersByTagId(6006),
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
                             },
                         },
                         {
                             path: 'armoire',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Armoires',
                                 contextColumns: ['image', 'name', 'code', 'date', 'verificationDate', 'usage'],
-                                contextVariables: BookableService.adminByTag(6009),
-                                contextService: UsageBookableService,
+                                contextVariables: ProductService.adminByTag(6009),
+                                contextService: UsageProductService,
                             },
                         },
                         {
                             path: 'casier',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Casiers',
-                                contextVariables: BookableService.adminByTag(6010),
-                                contextService: UsageBookableService,
+                                contextVariables: ProductService.adminByTag(6010),
+                                contextService: UsageProductService,
                             },
                         },
                         {
                             path: 'flotteur',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Flotteurs',
-                                contextVariables: BookableService.adminByTag(6011),
-                                contextService: UsageBookableService,
+                                contextVariables: ProductService.adminByTag(6011),
+                                contextService: UsageProductService,
                             },
                         },
                         {
                             path: 'ratelier',
-                            component: BookablesComponent,
+                            component: ProductsComponent,
                             data: {
                                 title: 'Râteliers WBC',
-                                contextVariables: BookableService.adminByTag(6016),
-                                contextService: UsageBookableService,
+                                contextVariables: ProductService.adminByTag(6016),
+                                contextService: UsageProductService,
                             },
                         },
                         {
                             path: 'new',
-                            component: BookableComponent,
+                            component: ProductComponent,
                             resolve: {
-                                bookable: BookableResolver,
+                                product: ProductResolver,
                             },
                         },
                         {
-                            path: ':bookableId', // last
-                            component: BookableComponent,
+                            path: ':productId', // last
+                            component: ProductComponent,
                             resolve: {
-                                bookable: BookableResolver,
+                                product: ProductResolver,
                             },
                         },
                     ],
@@ -258,27 +258,27 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'bookable-tag', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: BookableTagsComponent,
+                    path: 'product-tag', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: ProductTagsComponent,
                     data: {
-                        title: 'Tags de réservables',
+                        title: 'Tags de produits',
                     },
                 },
                 {
-                    path: 'bookable-tag',
+                    path: 'product-tag',
                     children: [
                         {
                             path: 'new',
-                            component: BookableTagComponent,
+                            component: ProductTagComponent,
                             resolve: {
-                                bookableTag: BookableTagResolver,
+                                productTag: ProductTagResolver,
                             },
                         },
                         {
-                            path: ':bookableTagId', // last
-                            component: BookableTagComponent,
+                            path: ':productTagId', // last
+                            component: ProductTagComponent,
                             resolve: {
-                                bookableTag: BookableTagResolver,
+                                productTag: ProductTagResolver,
                             },
                         },
                     ],

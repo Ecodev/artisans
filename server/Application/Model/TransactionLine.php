@@ -51,14 +51,14 @@ class TransactionLine extends AbstractModel
     private $credit;
 
     /**
-     * @var null|Bookable
+     * @var null|Product
      *
-     * @ORM\ManyToOne(targetEntity="Bookable")
+     * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
-    private $bookable;
+    private $product;
 
     /**
      * @var string
@@ -172,21 +172,21 @@ class TransactionLine extends AbstractModel
     /**
      * Get related equipment or service
      *
-     * @return null|Bookable
+     * @return null|Product
      */
-    public function getBookable(): ?Bookable
+    public function getProduct(): ?Product
     {
-        return $this->bookable;
+        return $this->product;
     }
 
     /**
      * Set related equipment or service
      *
-     * @param null|Bookable $bookable
+     * @param null|Product $product
      */
-    public function setBookable(?Bookable $bookable): void
+    public function setProduct(?Product $product): void
     {
-        $this->bookable = $bookable;
+        $this->product = $product;
     }
 
     /**

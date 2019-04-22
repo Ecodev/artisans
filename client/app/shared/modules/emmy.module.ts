@@ -42,7 +42,7 @@ const iconsConfig: NaturalIconsConfig = {
     'simple-qr': {
         svg: 'assets/icons/simple-qr.svg',
     },
-    'own_bookable': {
+    'own_product': {
         svg: 'assets/icons/swimsuit.svg',
     },
     'code': {
@@ -66,7 +66,7 @@ const iconsConfig: NaturalIconsConfig = {
     'finances': {
         svg: 'assets/icons/notes.svg',
     },
-    'browse_bookables': {
+    'browse_products': {
         svg: 'assets/icons/search.svg',
     },
     'administrator': {

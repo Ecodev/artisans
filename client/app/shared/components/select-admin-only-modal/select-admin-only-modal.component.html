@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Sélection d'un espace de stockage</h2>
 <mat-dialog-content fxLayout="column" fxLayoutGap="20px">
 
-    <natural-select [service]="bookableService"
+    <natural-select [service]="productService"
                 (selectionChange)="selection = $event"
                 [filter]="variables.filter"
                 placeholder="Sélectionner"

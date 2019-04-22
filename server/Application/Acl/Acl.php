@@ -13,12 +13,12 @@ use Application\Acl\Assertion\StatusIsNew;
 use Application\Model\AbstractModel;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
-use Application\Model\Bookable;
-use Application\Model\BookableMetadata;
-use Application\Model\BookableTag;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\Message;
+use Application\Model\Product;
+use Application\Model\ProductMetadata;
+use Application\Model\ProductTag;
 use Application\Model\Transaction;
 use Application\Model\TransactionTag;
 use Application\Model\User;
@@ -44,9 +44,9 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_MEMBER);
         $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_RESPONSIBLE);
 
-        $bookable = new ModelResource(Bookable::class);
-        $bookableMetadata = new ModelResource(BookableMetadata::class);
-        $bookableTag = new ModelResource(BookableTag::class);
+        $product = new ModelResource(Product::class);
+        $productMetadata = new ModelResource(ProductMetadata::class);
+        $productTag = new ModelResource(ProductTag::class);
         $image = new ModelResource(Image::class);
         $user = new ModelResource(User::class);
         $userTag = new ModelResource(UserTag::class);
@@ -57,9 +57,9 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $message = new ModelResource(Message::class);
         $transaction = new ModelResource(Transaction::class);
 
-        $this->addResource($bookable);
-        $this->addResource($bookableMetadata);
-        $this->addResource($bookableTag);
+        $this->addResource($product);
+        $this->addResource($productMetadata);
+        $this->addResource($productTag);
         $this->addResource($image);
         $this->addResource($user);
         $this->addResource($userTag);
@@ -70,7 +70,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($message);
         $this->addResource($transaction);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$bookable, $bookableMetadata, $bookableTag, $image, $transactionTag], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$product, $productMetadata, $productTag, $image, $transactionTag], ['read']);
 
         $this->allow(User::ROLE_INDIVIDUAL, $user, ['read']);
         $this->allow(User::ROLE_INDIVIDUAL, $user, ['update'], new IsMyself());
@@ -90,7 +90,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$user], ['update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$userTag], ['create', 'read', 'update', 'delete']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$bookable, $bookableMetadata, $bookableTag, $image], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$product, $productMetadata, $productTag, $image], ['create', 'update', 'delete']);
 
         $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $transactionTag], ['create', 'update', 'delete']);
     }

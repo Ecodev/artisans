@@ -6,8 +6,8 @@ namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Account;
-use Application\Model\Bookable;
 use Application\Model\Message;
+use Application\Model\Product;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
@@ -62,25 +62,25 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
 
     public function testQueueBalancePositive(): void
     {
-        $bookables = [];
-        $bookables[] = $this->createBookable('Cotisation', '90.00');
-        $bookables[] = $this->createBookable('Fonds de réparation interne', '10.00');
+        $products = [];
+        $products[] = $this->createProduct('Cotisation', '90.00');
+        $products[] = $this->createProduct('Fonds de réparation interne', '10.00');
 
-        $this->queueBalance($bookables, 'positive');
+        $this->queueBalance($products, 'positive');
     }
 
     public function testQueueBalanceNegative(): void
     {
-        $bookables = [];
-        $bookables[] = $this->createBookable('Cotisation', '90.00');
-        $bookables[] = $this->createBookable('Fonds de réparation interne', '10.00');
-        $bookables[] = $this->createBookable('Casier 1012', '20.00');
-        $bookables[] = $this->createBookable('Casier 1014', '20.00');
+        $products = [];
+        $products[] = $this->createProduct('Cotisation', '90.00');
+        $products[] = $this->createProduct('Fonds de réparation interne', '10.00');
+        $products[] = $this->createProduct('Casier 1012', '20.00');
+        $products[] = $this->createProduct('Casier 1014', '20.00');
 
-        $this->queueBalance($bookables, 'negative');
+        $this->queueBalance($products, 'negative');
     }
 
-    private function queueBalance(array $bookables, string $variant): void
+    private function queueBalance(array $products, string $variant): void
     {
         $user = new User();
         $user->setLogin('john.doe');
@@ -93,7 +93,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $account->setOwner($user);
 
         $messageQueuer = $this->createMockMessageQueuer();
-        $message = $messageQueuer->queueBalance($user, $bookables);
+        $message = $messageQueuer->queueBalance($user, $products);
 
         $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::BALANCE, 'Balance de compte', $variant);
     }
@@ -192,12 +192,12 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
     }
 
-    private function createBookable(string $bookableName, string $periodicPrice): Bookable
+    private function createProduct(string $productName, string $periodicPrice): Product
     {
-        $bookable = new Bookable();
-        $bookable->setName($bookableName);
-        $bookable->setPeriodicPrice($periodicPrice);
+        $product = new Product();
+        $product->setName($productName);
+        $product->setPeriodicPrice($periodicPrice);
 
-        return $bookable;
+        return $product;
     }
 }

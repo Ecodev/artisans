@@ -16,7 +16,7 @@ export class HistoryComponent extends NaturalAbstractController implements OnIni
     public viewer;
 
     public transactionLinesDS: NaturalDataSource;
-    public transactionsColumns = ['name', 'bookable', 'transactionDate', 'remarks', 'amount'];
+    public transactionsColumns = ['name', 'product', 'transactionDate', 'remarks', 'amount'];
 
     constructor(
         private userService: UserService,

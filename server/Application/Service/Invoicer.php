@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Model\Account;
-use Application\Model\Bookable;
+use Application\Model\Product;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
@@ -14,7 +14,7 @@ use Cake\Chronos\Date;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Service to create transactions for bookable, if needed, for all users or one user
+ * Service to create transactions for product, if needed, for all users or one user
  */
 class Invoicer
 {
@@ -39,21 +39,21 @@ class Invoicer
         $this->accountRepository = $this->entityManager->getRepository(Account::class);
     }
 
-    public function invoiceInitial(User $user, Bookable $bookable): void
+    public function invoiceInitial(User $user, Product $product): void
     {
         $this->accountRepository->getAclFilter()->setEnabled(false);
 
-        if (!$bookable->getInitialPrice() && !$bookable->getPeriodicPrice()) {
+        if (!$product->getInitialPrice() && !$product->getPeriodicPrice()) {
             return;
         }
 
-        $this->createTransaction($user, [$bookable]);
+        $this->createTransaction($user, [$product]);
         $this->accountRepository->getAclFilter()->setEnabled(true);
     }
 
-    private function createTransaction(?User $user, array $bookables): void
+    private function createTransaction(?User $user, array $products): void
     {
-        if (!$user || !$bookables) {
+        if (!$user || !$products) {
             return;
         }
 
@@ -63,31 +63,31 @@ class Invoicer
         $transaction->setName('Achats ' . Date::today()->toDateString());
         $this->entityManager->persist($transaction);
 
-        foreach ($bookables as $bookable) {
-            $balance = $this->calculateInitialBalance($bookable);
-            $this->createTransactionLine($transaction, $bookable, $account, $balance);
+        foreach ($products as $product) {
+            $balance = $this->calculateInitialBalance($product);
+            $this->createTransactionLine($transaction, $product, $account, $balance);
         }
 
         ++$this->count;
     }
 
     /**
-     * @param Bookable $bookable
+     * @param Product $product
      *
      * @return string
      */
-    private function calculateInitialBalance(Bookable $bookable): string
+    private function calculateInitialBalance(Product $product): string
     {
-        return $bookable->getInitialPrice();
+        return $product->getInitialPrice();
     }
 
-    private function createTransactionLine(Transaction $transaction, Bookable $bookable, Account $account, string $balance): void
+    private function createTransactionLine(Transaction $transaction, Product $product, Account $account, string $balance): void
     {
         if ($balance > 0) {
             $debit = $account;
-            $credit = $bookable->getCreditAccount();
+            $credit = $product->getCreditAccount();
         } elseif ($balance < 0) {
-            $debit = $bookable->getCreditAccount();
+            $debit = $product->getCreditAccount();
             $credit = $account;
             $balance = bcmul($balance, '-1'); // into positive
         } else {
@@ -98,8 +98,8 @@ class Invoicer
         $transactionLine = new TransactionLine();
         $this->entityManager->persist($transactionLine);
 
-        $transactionLine->setName($bookable->getName());
-        $transactionLine->setBookable($bookable);
+        $transactionLine->setName($product->getName());
+        $transactionLine->setProduct($product);
         $transactionLine->setDebit($debit);
         $transactionLine->setCredit($credit);
         $transactionLine->setBalance($balance);

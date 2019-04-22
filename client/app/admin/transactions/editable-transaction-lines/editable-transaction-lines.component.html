@@ -81,10 +81,10 @@
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
 
-        <ng-container matColumnDef="bookable">
-            <th mat-header-cell *matHeaderCellDef>Réservable</th>
+        <ng-container matColumnDef="product">
+            <th mat-header-cell *matHeaderCellDef>Produit</th>
             <td mat-cell *matCellDef="let element; let i = index;" [formGroupName]="i">
-                <natural-select formControlName="bookable" [service]="bookableService" placeholder="Réservable" [showIcon]="false"
+                <natural-select formControlName="product" [service]="productService" placeholder="Produit" [showIcon]="false"
                 ></natural-select>
             </td>
             <td mat-footer-cell *matFooterCellDef></td>

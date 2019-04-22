@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NaturalAlertService } from '@ecodev/natural';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookableService } from '../../../admin/bookables/services/bookable.service';
+import { ProductService } from '../../../admin/products/services/product.service';
 import { RegisterComponent } from './register.component';
 import { NewUserService } from './new-user.service';
 import { Apollo } from 'apollo-angular';
@@ -19,11 +19,11 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
     constructor(userService: NewUserService,
                 router: Router,
                 route: ActivatedRoute,
-                bookableService: BookableService,
+                productService: ProductService,
                 apollo: Apollo,
                 alertService: NaturalAlertService,
     ) {
-        super(userService, alertService, router, route, bookableService, apollo);
+        super(userService, alertService, router, route, productService, apollo);
     }
 
     protected initForm(): void {

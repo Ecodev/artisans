@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Repository;
 
-use Application\Model\Bookable;
 use Application\Model\Image;
+use Application\Model\Product;
 use Application\Repository\ImageRepository;
 use Application\Service\AbstractDatabase;
 
@@ -49,10 +49,10 @@ class ImageRepositoryTest extends AbstractRepositoryTest
         self::assertFileNotExists($path, 'test file must have been deleted when record was deleted');
     }
 
-    public function testDoctrineDoesNotFuckUpAndDeleteImageFromUnrelatedBookable(): void
+    public function testDoctrineDoesNotFuckUpAndDeleteImageFromUnrelatedProduct(): void
     {
         // Make one image usable
-        $this->getEntityManager()->getConnection()->update('bookable', ['image_id' => null], ['image_id' => 5007]);
+        $this->getEntityManager()->getConnection()->update('product', ['image_id' => null], ['image_id' => 5007]);
 
         $paths = [
             'data/images/chat1.jpg',
@@ -74,16 +74,16 @@ class ImageRepositoryTest extends AbstractRepositoryTest
         $imageToBeOrphanedQuery = 'SELECT COUNT(*) FROM image WHERE id = 5000';
         self::assertSame('1', $this->getEntityManager()->getConnection()->fetchColumn($imageToBeOrphanedQuery));
 
-        // Affect existing image to an existing bookable
-        $bookable = $this->getEntityManager()->find(Bookable::class, 3000);
+        // Affect existing image to an existing product
+        $product = $this->getEntityManager()->find(Product::class, 3000);
         $image = $this->getEntityManager()->find(Image::class, 5007);
         self::assertNotNull($image);
-        $bookable->setImage($image);
-        self::assertSame($image, $bookable->getImage(), 'should get image that was set');
+        $product->setImage($image);
+        self::assertSame($image, $product->getImage(), 'should get image that was set');
         $this->getEntityManager()->flush();
 
-        // Most images must still exist after affecting an existing image to an existing bookable.
-        // Only the orphaned image should be deleted, but absolutely never an image related to **another** bookable
+        // Most images must still exist after affecting an existing image to an existing product.
+        // Only the orphaned image should be deleted, but absolutely never an image related to **another** product
         $mustBeDeleted = 'data/images/chat1.jpg';
         foreach ($paths as $p) {
             if ($p === $mustBeDeleted) {

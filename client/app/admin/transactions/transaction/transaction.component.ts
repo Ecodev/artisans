@@ -15,7 +15,7 @@ import {
     UpdateTransaction,
     UpdateTransactionVariables,
 } from '../../../shared/generated-types';
-import { BookableService } from '../../bookables/services/bookable.service';
+import { ProductService } from '../../products/services/product.service';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
 import { TransactionLineService } from '../services/transactionLine.service';
 import { AccountingDocumentsComponent } from '../../accounting-documents/accounting-documents.component';
@@ -46,7 +46,7 @@ export class TransactionComponent
                 private transactionService: TransactionService,
                 router: Router,
                 route: ActivatedRoute,
-                public bookableService: BookableService,
+                public productService: ProductService,
                 public transactionLineService: TransactionLineService,
                 private expenseClaimService: ExpenseClaimService,
     ) {

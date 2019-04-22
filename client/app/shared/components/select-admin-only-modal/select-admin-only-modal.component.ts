@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BookableService } from '../../../admin/bookables/services/bookable.service';
-import { BookableTagService } from '../../../admin/bookableTags/services/bookableTag.service';
+import { ProductService } from '../../../admin/products/services/product.service';
+import { ProductTagService } from '../../../admin/productTags/services/productTag.service';
 
 @Component({
     selector: 'natural-select-admin-only-modal',
@@ -9,9 +9,9 @@ import { BookableTagService } from '../../../admin/bookableTags/services/bookabl
 export class SelectAdminOnlyModalComponent implements OnInit {
 
     public selection;
-    public variables = BookableService.adminByTag(BookableTagService.STORAGE);
+    public variables = ProductService.adminByTag(ProductTagService.STORAGE);
 
-    constructor(public bookableService: BookableService) {
+    constructor(public productService: ProductService) {
     }
 
     ngOnInit() {

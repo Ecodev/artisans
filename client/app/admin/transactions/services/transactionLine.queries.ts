@@ -16,7 +16,7 @@ export const transactionLineMetaFragment = gql`
             name
             type
         }
-        bookable{
+        product{
             id
             name
             code

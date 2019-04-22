@@ -1,0 +1,32 @@
+<div fxLayout="column" style="max-width:1100px;margin:auto" fxLayoutGap="40px" class="padding" *ngIf="product">
+
+    <app-file [model]="product.image" [height]="400" [style.borderRadius.px]="4" class="mat-elevation-z2"></app-file>
+
+    <div fxLayout="row" fxLayoutAlign="start stretch" class="mat-display-1">
+        <div fxFlex>{{ product.name }}</div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxLayout="column" fxLayoutAlign="center">{{ product.code }}</div>
+        </div>
+    </div>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+
+        <button mat-flat-button
+                color="primary"
+                *ngIf="isAvailable"
+                [routerLink]="['../new', {product: product.id}]"
+        >
+            Annoncer une sortie
+        </button>
+        <a mat-stroked-button color="primary" *ngIf="canAccessAdmin" [routerLink]="['/admin/product', product.id]">Administration</a>
+    </div>
+
+    <div class="mat-headline" [innerHTML]="product.description"></div>
+    <div class="mat-subheading-2" [innerHTML]="product.remarks"></div>
+</div>
+
+<div *ngIf="!product" fxFlex fxLayout="column" fxLayoutAlign="center center" class="padding">
+    <div class="mat-display-1" style="text-align:center">Aucun matériel correspondant à ce code n'a été trouvé</div>
+    <button mat-flat-button color="primary" (click)="back()">Revenir à la page précédente</button>
+</div>

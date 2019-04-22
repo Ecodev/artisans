@@ -9,9 +9,9 @@ return [
                 crud {
                     account { create }
                     accountingDocument { create }
-                    bookable { create }
-                    bookableMetadata { create }
-                    bookableTag { create }
+                    product { create }
+                    productMetadata { create }
+                    productTag { create }
                     expenseClaim { create }
                     image { create }
                     message { create }
@@ -35,13 +35,13 @@ return [
                     'accountingDocument' => [
                         'create' => true,
                     ],
-                    'bookable' => [
+                    'product' => [
                         'create' => true,
                     ],
-                    'bookableMetadata' => [
+                    'productMetadata' => [
                         'create' => true,
                     ],
-                    'bookableTag' => [
+                    'productTag' => [
                         'create' => true,
                     ],
                     'expenseClaim' => [

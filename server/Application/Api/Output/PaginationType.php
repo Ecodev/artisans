@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Output;
 
-use Application\Model\Bookable;
+use Application\Model\Product;
 use Application\Model\TransactionLine;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -44,7 +44,7 @@ class PaginationType extends ObjectType
                 ];
 
                 // Add specific total fields if needed
-                if ($class === Bookable::class) {
+                if ($class === Product::class) {
                     $fields['totalPurchasePrice'] = [
                         'type' => self::string(),
                         'description' => 'The total purchase price',

@@ -18,11 +18,11 @@ use Application\Api\Field\Mutation\UpdateTransaction;
 use Application\Api\Field\Standard;
 use Application\Model\Account;
 use Application\Model\AccountingDocument;
-use Application\Model\Bookable;
-use Application\Model\BookableMetadata;
-use Application\Model\BookableTag;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
+use Application\Model\Product;
+use Application\Model\ProductMetadata;
+use Application\Model\ProductTag;
 use Application\Model\Transaction;
 use Application\Model\TransactionTag;
 use Application\Model\User;
@@ -51,9 +51,9 @@ class MutationType extends ObjectType
         $fields = array_merge(
             $specializedFields,
 
-            Standard::buildMutation(Bookable::class),
-            Standard::buildMutation(BookableMetadata::class),
-            Standard::buildMutation(BookableTag::class),
+            Standard::buildMutation(Product::class),
+            Standard::buildMutation(ProductMetadata::class),
+            Standard::buildMutation(ProductTag::class),
             Standard::buildMutation(Image::class),
             Standard::buildMutation(User::class),
             Standard::buildMutation(UserTag::class),
@@ -62,7 +62,7 @@ class MutationType extends ObjectType
             Standard::buildMutation(ExpenseClaim::class),
             Standard::buildMutation(AccountingDocument::class),
             Standard::buildRelationMutation(UserTag::class, User::class),
-            Standard::buildRelationMutation(BookableTag::class, Bookable::class),
+            Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Account::class, Account::class, 'Parent')
         );
 

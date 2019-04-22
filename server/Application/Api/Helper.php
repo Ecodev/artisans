@@ -6,7 +6,7 @@ namespace Application\Api;
 
 use Application\Acl\Acl;
 use Application\Model\AbstractModel;
-use Application\Model\Bookable;
+use Application\Model\Product;
 use Application\Model\TransactionLine;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -64,12 +64,12 @@ abstract class Helper
     {
         $result = [];
 
-        if ($class === Bookable::class) {
+        if ($class === Product::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(bookable1.purchasePrice) AS totalPurchasePrice')
-                ->addSelect('SUM(bookable1.periodicPrice) AS totalPeriodicPrice')
-                ->addSelect('SUM(bookable1.initialPrice) AS totalInitialPrice');
+                ->addSelect('SUM(product1.purchasePrice) AS totalPurchasePrice')
+                ->addSelect('SUM(product1.periodicPrice) AS totalPeriodicPrice')
+                ->addSelect('SUM(product1.initialPrice) AS totalInitialPrice');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === TransactionLine::class) {

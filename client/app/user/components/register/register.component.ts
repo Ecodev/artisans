@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookableService } from '../../../admin/bookables/services/bookable.service';
+import { ProductService } from '../../../admin/products/services/product.service';
 import { AnonymousUserService } from './anonymous-user.service';
 import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
@@ -20,7 +20,7 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     UpdateUserVariables,
     any> implements OnInit {
 
-    private mandatoryBookables: NaturalDataSource;
+    private mandatoryProducts: NaturalDataSource;
 
     public step;
     public sending = false;
@@ -29,7 +29,7 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
                 alertService: NaturalAlertService,
                 router: Router,
                 route: ActivatedRoute,
-                protected bookableService: BookableService,
+                protected productService: ProductService,
                 protected apollo: Apollo,
     ) {
         super('user', userService, alertService, router, route);

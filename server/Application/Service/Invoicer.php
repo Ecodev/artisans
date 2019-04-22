@@ -39,24 +39,13 @@ class Invoicer
         $this->accountRepository = $this->entityManager->getRepository(Account::class);
     }
 
-    public function invoiceInitial(User $user, Product $product): void
-    {
-        $this->accountRepository->getAclFilter()->setEnabled(false);
-
-        if (!$product->getInitialPrice() && !$product->getPeriodicPrice()) {
-            return;
-        }
-
-        $this->createTransaction($user, [$product]);
-        $this->accountRepository->getAclFilter()->setEnabled(true);
-    }
-
-    private function createTransaction(?User $user, array $products): void
+    public function createTransaction(?User $user, array $products): void
     {
         if (!$user || !$products) {
             return;
         }
 
+        $this->accountRepository->getAclFilter()->setEnabled(false);
         $account = $this->accountRepository->getOrCreate($user);
         $transaction = new Transaction();
         $transaction->setTransactionDate(Date::today());
@@ -69,6 +58,8 @@ class Invoicer
         }
 
         ++$this->count;
+
+        $this->accountRepository->getAclFilter()->setEnabled(true);
     }
 
     /**
@@ -78,7 +69,7 @@ class Invoicer
      */
     private function calculateInitialBalance(Product $product): string
     {
-        return $product->getInitialPrice();
+        return $product->getPricePerUnit();
     }
 
     private function createTransactionLine(Transaction $transaction, Product $product, Account $account, string $balance): void

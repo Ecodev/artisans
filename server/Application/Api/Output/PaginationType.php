@@ -45,17 +45,13 @@ class PaginationType extends ObjectType
 
                 // Add specific total fields if needed
                 if ($class === Product::class) {
-                    $fields['totalPurchasePrice'] = [
+                    $fields['totalSupplierPrice'] = [
                         'type' => self::string(),
-                        'description' => 'The total purchase price',
+                        'description' => 'The total supplier price',
                     ];
-                    $fields['totalInitialPrice'] = [
+                    $fields['totalPricePerUnit'] = [
                         'type' => self::string(),
-                        'description' => 'The total initial price',
-                    ];
-                    $fields['totalPeriodicPrice'] = [
-                        'type' => self::string(),
-                        'description' => 'The total periodic price',
+                        'description' => 'The total price per unit',
                     ];
                 } elseif ($class === TransactionLine::class) {
                     $fields['totalBalance'] = [

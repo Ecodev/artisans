@@ -12,9 +12,12 @@ export const productMetaFragment = gql`
             id
             name
         }
-        initialPrice
-        periodicPrice
-        purchasePrice
+        pricePerUnit
+        unit
+        vatRate
+        quantity
+        supplierPrice
+        supplierReference
         creditAccount {
             id
             name
@@ -45,9 +48,8 @@ export const productsQuery = gql`
             pageSize
             pageIndex
             length
-            totalPurchasePrice
-            totalInitialPrice
-            totalPeriodicPrice
+            totalPricePerUnit
+            totalSupplierPrice
         }
     }
 ${productMetaFragment}`;
@@ -59,19 +61,20 @@ export const usageProductsQuery = gql`
                 id
                 name
                 code
-                initialPrice
-                periodicPrice
-                purchasePrice
-                purchasePrice
+                pricePerUnit
+                unit
+                vatRate
+                quantity
+                supplierPrice
+                supplierReference
                 creationDate
                 updateDate
             }
             pageSize
             pageIndex
             length
-            totalPurchasePrice
-            totalInitialPrice
-            totalPeriodicPrice
+            totalPricePerUnit
+            totalSupplierPrice
         }
     }
 `;

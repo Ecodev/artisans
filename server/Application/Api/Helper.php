@@ -67,9 +67,8 @@ abstract class Helper
         if ($class === Product::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(product1.purchasePrice) AS totalPurchasePrice')
-                ->addSelect('SUM(product1.periodicPrice) AS totalPeriodicPrice')
-                ->addSelect('SUM(product1.initialPrice) AS totalInitialPrice');
+                ->addSelect('SUM(product1.supplierPrice) AS totalSupplierPrice')
+                ->addSelect('SUM(product1.pricePerUnit) AS totalPricePerUnit');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === TransactionLine::class) {

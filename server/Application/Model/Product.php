@@ -30,21 +30,49 @@ class Product extends AbstractModel
      *
      * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
      */
-    private $initialPrice = '0';
+    private $pricePerUnit = '0';
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
      */
-    private $periodicPrice = '0';
+    private $margin = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
+     */
+    private $vatRate = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10, options={"default" = ""})
+     */
+    private $unit = '';
 
     /**
      * @var string
      *
      * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00", "unsigned" = true})
      */
-    private $purchasePrice = '0';
+    private $supplierPrice = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10, options={"default" = ""})
+     */
+    private $supplierReference = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
+     */
+    private $quantity = '0';
 
     /**
      * @var bool
@@ -94,49 +122,69 @@ class Product extends AbstractModel
     /**
      * @return string
      */
-    public function getInitialPrice(): string
+    public function getPricePerUnit(): string
     {
-        return $this->initialPrice;
+        return $this->pricePerUnit;
     }
 
     /**
-     * @param string $initialPrice
+     * @param string $pricePerUnit
      */
-    public function setInitialPrice(string $initialPrice): void
+    public function setPricePerUnit(string $pricePerUnit): void
     {
-        $this->initialPrice = $initialPrice;
+        $this->pricePerUnit = $pricePerUnit;
+    }
+
+    /**
+     * Set unit
+     *
+     * @param string $unit
+     */
+    public function setUnit(string $unit): void
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * Get unit
+     *
+     * @return string
+     */
+    public function getUnit(): string
+    {
+        return $this->unit;
     }
 
     /**
      * @return string
      */
-    public function getPeriodicPrice(): string
+    public function getSupplierPrice(): string
     {
-        return $this->periodicPrice;
+        return $this->supplierPrice;
     }
 
     /**
-     * @param string $periodicPrice
+     * @param string $supplierPrice
      */
-    public function setPeriodicPrice(string $periodicPrice): void
+    public function setSupplierPrice(string $supplierPrice): void
     {
-        $this->periodicPrice = $periodicPrice;
+        $this->supplierPrice = $supplierPrice;
     }
 
     /**
      * @return string
      */
-    public function getPurchasePrice(): string
+    public function getSupplierReference(): string
     {
-        return $this->purchasePrice;
+        return $this->supplierReference;
     }
 
     /**
-     * @param string $purchasePrice
+     * @param string $supplierReference
      */
-    public function setPurchasePrice(string $purchasePrice): void
+    public function setSupplierReference(string $supplierReference): void
     {
-        $this->purchasePrice = $purchasePrice;
+        $this->supplierReference = $supplierReference;
     }
 
     /**
@@ -249,5 +297,41 @@ class Product extends AbstractModel
     public function setCreditAccount(?Account $creditAccount): void
     {
         $this->creditAccount = $creditAccount;
+    }
+
+    /**
+     * Quantity currently in stock
+     *
+     * @return string
+     */
+    public function getQuantity(): string
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * Quantity currently in stock
+     *
+     * @param string $quantity
+     */
+    public function setQuantity(string $quantity): void
+    {
+        $this->quantity = $quantity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getVatRate(): string
+    {
+        return $this->vatRate;
+    }
+
+    /**
+     * @param string $vatRate
+     */
+    public function setVatRate(string $vatRate): void
+    {
+        $this->vatRate = $vatRate;
     }
 }

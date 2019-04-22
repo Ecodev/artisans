@@ -7,7 +7,6 @@ namespace ApplicationTest\Service;
 use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Account;
 use Application\Model\Message;
-use Application\Model\Product;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
@@ -62,25 +61,15 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
 
     public function testQueueBalancePositive(): void
     {
-        $products = [];
-        $products[] = $this->createProduct('Cotisation', '90.00');
-        $products[] = $this->createProduct('Fonds de réparation interne', '10.00');
-
-        $this->queueBalance($products, 'positive');
+        $this->queueBalance('positive');
     }
 
     public function testQueueBalanceNegative(): void
     {
-        $products = [];
-        $products[] = $this->createProduct('Cotisation', '90.00');
-        $products[] = $this->createProduct('Fonds de réparation interne', '10.00');
-        $products[] = $this->createProduct('Casier 1012', '20.00');
-        $products[] = $this->createProduct('Casier 1014', '20.00');
-
-        $this->queueBalance($products, 'negative');
+        $this->queueBalance('negative');
     }
 
-    private function queueBalance(array $products, string $variant): void
+    private function queueBalance(string $variant): void
     {
         $user = new User();
         $user->setLogin('john.doe');
@@ -93,7 +82,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $account->setOwner($user);
 
         $messageQueuer = $this->createMockMessageQueuer();
-        $message = $messageQueuer->queueBalance($user, $products);
+        $message = $messageQueuer->queueBalance($user);
 
         $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::BALANCE, 'Balance de compte', $variant);
     }
@@ -190,14 +179,5 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $expected = file_get_contents($file);
 
         self::assertTrue($expected === $actual, 'File content does not match, compare with: meld ' . $file . ' ' . $logFile);
-    }
-
-    private function createProduct(string $productName, string $periodicPrice): Product
-    {
-        $product = new Product();
-        $product->setName($productName);
-        $product->setPeriodicPrice($periodicPrice);
-
-        return $product;
     }
 }

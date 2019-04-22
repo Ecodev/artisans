@@ -19,11 +19,10 @@ class InvoicerTest extends TestCase
     /**
      * @dataProvider providerInvoiceInitial
      *
-     * @param string $initialPrice
-     * @param string $periodicPrice
+     * @param string $pricePerUnit
      * @param array $expected
      */
-    public function testInvoiceInitial(string $initialPrice, string $periodicPrice, array $expected): void
+    public function testInvoiceInitial(string $pricePerUnit, array $expected): void
     {
         $user = new User();
         $user->setFirstName('John');
@@ -33,8 +32,7 @@ class InvoicerTest extends TestCase
 
         $product = new Product();
         $product->setName('My product');
-        $product->setInitialPrice($initialPrice);
-        $product->setPeriodicPrice($periodicPrice);
+        $product->setPricePerUnit($pricePerUnit);
 
         $productAccount = new Account();
         $productAccount->setName('Product account');
@@ -42,7 +40,7 @@ class InvoicerTest extends TestCase
 
         global $container;
         $invoicer = $container->get(Invoicer::class);
-        $invoicer->invoiceInitial($user, $product);
+        $invoicer->createTransaction($user, [$product]);
 
         $account = $user->getAccount();
 
@@ -79,31 +77,10 @@ class InvoicerTest extends TestCase
         return [
             'free product should create nothing' => [
                 '0',
-                '0',
                 [],
             ],
             'only initial' => [
                 '10.25',
-                '0',
-                [
-                    [
-                        'My product',
-                        'My product',
-                        'John Doe',
-                        'Product account',
-                        '10.25',
-                    ],
-                ],
-            ],
-            'only periodic' => [
-                '0',
-                '90.25',
-                [
-                ],
-            ],
-            'both initial and periodic should create two lines' => [
-                '10.25',
-                '90.25',
                 [
                     [
                         'My product',
@@ -116,7 +93,6 @@ class InvoicerTest extends TestCase
             ],
             'negative balance should swap accounts' => [
                 '-10.25',
-                '-90.25',
                 [
                     [
                         'My product',

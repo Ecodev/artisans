@@ -297,11 +297,6 @@
 
         </mat-tab>
 
-        <mat-tab label="Prestations et services" *ngIf="data.model.id">
-            <br class="margin-top" />
-            <app-services [user]="data.model"></app-services>
-        </mat-tab>
-
     </mat-tab-group>
 
     <natural-fixed-button-detail *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()"></natural-fixed-button-detail>

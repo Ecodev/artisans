@@ -24,7 +24,6 @@ export class FamilyUserService extends UserService {
 
     protected getDefaultForClient() {
         return {
-            country: {id: 1, name: 'Suisse'},
             hasInsurance: false,
             termsAgreement: false,
             familyRelationship: Relationship.partner,
@@ -39,7 +38,6 @@ export class FamilyUserService extends UserService {
             locality: [],
             street: [],
             postcode: [],
-            country: [],
         };
 
         return Object.assign(super.getFormValidators(), validators);

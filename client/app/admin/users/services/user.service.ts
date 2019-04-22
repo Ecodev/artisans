@@ -173,7 +173,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             street: '',
             postcode: '',
             locality: '',
-            country: null,
             status: UserStatus.new,
             role: UserRole.member,
             familyRelationship: Relationship.householder,
@@ -200,7 +199,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
     protected getDefaultForClient(): Literal {
         return {
-            country: {id: 1, name: 'Suisse'},
         };
     }
 

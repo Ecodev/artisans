@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
-use Application\Model\Country;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -29,13 +28,6 @@ trait HasAddress
      * @ORM\Column(type="string", length=255)
      */
     private $locality = '';
-
-    /**
-     * @var Country
-     * @ORM\ManyToOne(targetEntity="Country")
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     */
-    private $country;
 
     /**
      * @return string
@@ -83,21 +75,5 @@ trait HasAddress
     public function setLocality(string $locality): void
     {
         $this->locality = $locality;
-    }
-
-    /**
-     * @return null|Country
-     */
-    public function getCountry(): ?Country
-    {
-        return $this->country;
-    }
-
-    /**
-     * @param null|Country $country
-     */
-    public function setCountry(?Country $country = null): void
-    {
-        $this->country = $country;
     }
 }

@@ -13,7 +13,6 @@ return [
                     bookableMetadata { create }
                     bookableTag { create }
                     booking { create }
-                    country { create }
                     expenseClaim { create }
                     image { create }
                     license { create }
@@ -49,9 +48,6 @@ return [
                     ],
                     'booking' => [
                         'create' => true,
-                    ],
-                    'country' => [
-                        'create' => false,
                     ],
                     'expenseClaim' => [
                         'create' => true,

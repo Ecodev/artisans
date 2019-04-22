@@ -55,7 +55,6 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'street',
             'postcode',
             'locality',
-            'country',
             'birthday',
         ];
 

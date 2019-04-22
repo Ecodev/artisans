@@ -17,7 +17,6 @@ use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
 use Application\Model\BookableTag;
 use Application\Model\Booking;
-use Application\Model\Country;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
@@ -55,7 +54,6 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $license = new ModelResource(License::class);
         $user = new ModelResource(User::class);
         $userTag = new ModelResource(UserTag::class);
-        $country = new ModelResource(Country::class);
         $account = new ModelResource(Account::class);
         $accountingDocument = new ModelResource(AccountingDocument::class);
         $transactionTag = new ModelResource(TransactionTag::class);
@@ -71,7 +69,6 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($license);
         $this->addResource($user);
         $this->addResource($userTag);
-        $this->addResource($country);
         $this->addResource($account);
         $this->addResource($accountingDocument);
         $this->addResource($transactionTag);
@@ -79,7 +76,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($message);
         $this->addResource($transaction);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$country, $bookable, $bookableMetadata, $bookableTag, $image, $license, $transactionTag], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$bookable, $bookableMetadata, $bookableTag, $image, $license, $transactionTag], ['read']);
 
         $this->allow(User::ROLE_BOOKING_ONLY, $booking, ['create', 'read', 'update']);
 

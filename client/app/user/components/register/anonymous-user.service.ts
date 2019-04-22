@@ -25,7 +25,6 @@ export class AnonymousUserService extends UserService {
 
     protected getDefaultForClient(): Literal {
         return {
-            country: {id: 1, name: 'Suisse'},
             hasInsurance: false,
             termsAgreement: false,
         } ;

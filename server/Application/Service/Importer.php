@@ -233,7 +233,6 @@ EOT;
                   :street,
                   :postcode,
                   :locality,
-                  :country_id,
                   :mobile_phone,
                   :phone,
                   :remarks,
@@ -293,35 +292,6 @@ EOT;
             $insert->bindValue(':street', $user['address']);
             $insert->bindValue(':postcode', $user['zip']);
             $insert->bindValue(':locality', $user['city']);
-
-            switch ($user['country']) {
-                case 'CH':
-                    $country_id = 1;
-
-                    break;
-                case 'FR':
-                case 'France':
-                    $country_id = 2;
-
-                    break;
-                case 'DE':
-                    $country_id = 10;
-
-                    break;
-                case 'CA':
-                    $country_id = 6;
-
-                    break;
-                case 'NL':
-                    $country_id = 19;
-
-                    break;
-                default:
-                    $country_id = null;
-                    echo sprintf("WARN: pas de correspondance pour le code pays %s de l\\'individu %u (%s %s)", $user['country'], $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
-            }
-            $insert->bindValue(':country_id', $country_id);
-
             $insert->bindValue(':mobile_phone', !empty($user['natel']) ? $user['natel'] : '');
             $insert->bindValue(':phone', $user['telephone']);
 

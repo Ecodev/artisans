@@ -14,7 +14,6 @@ use Application\Model\Bookable;
 use Application\Model\BookableMetadata;
 use Application\Model\BookableTag;
 use Application\Model\Booking;
-use Application\Model\Country;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\License;
@@ -43,7 +42,6 @@ class QueryType extends ObjectType
             Standard::buildQuery(BookableMetadata::class),
             Standard::buildQuery(BookableTag::class),
             Standard::buildQuery(Booking::class),
-            Standard::buildQuery(Country::class),
             Standard::buildQuery(Image::class),
             Standard::buildQuery(License::class),
             Standard::buildQuery(User::class),

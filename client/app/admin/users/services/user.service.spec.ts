@@ -72,11 +72,6 @@ describe('UserService', () => {
         sex: 'not_known',
         welcomeSessionDate: '2018-01-18T11:43:31',
         creationDate: '2018-01-18T11:43:31',
-        country: {
-            id: '456',
-            name: 'test string',
-            __typename: 'Country',
-        },
         creator: userMetaTesting,
         updater: userMetaTesting,
         __typename: 'User',

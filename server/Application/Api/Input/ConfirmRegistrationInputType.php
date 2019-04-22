@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Api\Input;
 
-use Application\Model\Country;
 use GraphQL\Type\Definition\InputObjectType;
 
 class ConfirmRegistrationInputType extends InputObjectType
@@ -35,9 +34,6 @@ class ConfirmRegistrationInputType extends InputObjectType
                     ],
                     'locality' => [
                         'type' => self::nonNull(self::string()),
-                    ],
-                    'country' => [
-                        'type' => _types()->getId(Country::class),
                     ],
                     'birthday' => [
                         'type' => self::nonNull(_types()->get('Date')),

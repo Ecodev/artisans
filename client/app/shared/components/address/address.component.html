@@ -19,14 +19,6 @@
                 <input matInput formControlName="postcode" (change)="update()">
                 <mat-error *ngIf="form.get('postcode').hasError('required')">Requis</mat-error>
             </mat-form-field>
-
-            <natural-select [service]="countryService"
-                        formControlName="country"
-                        [showIcon]="false"
-                        searchField="name"
-                        placeholder="Pays"
-                        (selectionChange)="update()"
-            ></natural-select>
         </div>
     </div>
 </div>

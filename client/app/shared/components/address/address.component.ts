@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CountryService } from './country.service';
 import { FormGroup } from '@angular/forms';
 
 export const markFormGroupTouched = (formGroup) => {
@@ -23,7 +22,7 @@ export class AddressComponent {
     @Input() form: FormGroup;
     @Output() change: EventEmitter<boolean> = new EventEmitter();
 
-    constructor(public countryService: CountryService) {
+    constructor() {
     }
 
     public update() {

@@ -26,7 +26,6 @@ export class NewUserService extends AnonymousUserService {
 
     protected getDefaultForClient(): Literal {
         return {
-            country: {id: 1, name: 'Suisse'},
             password: '',
         };
     }
@@ -42,7 +41,6 @@ export class NewUserService extends AnonymousUserService {
             locality: [Validators.required],
             street: [Validators.required],
             postcode: [Validators.required],
-            country: [Validators.required],
         };
     }
 }

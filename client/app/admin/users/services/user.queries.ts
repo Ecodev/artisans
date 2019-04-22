@@ -53,10 +53,6 @@ export const userFieldsFragment = gql`
         sex
         welcomeSessionDate
         resignDate
-        country {
-            id
-            name
-        }
         creationDate
         creator {
             ...userMeta

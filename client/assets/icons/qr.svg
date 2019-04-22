@@ -5,8 +5,8 @@
 	.qr-st0{fill:url(#SVGID_1_);}
 </style>
 <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="256" y1="2" x2="256" y2="510.0482">
-	<stop  offset="0" style="stop-color:#E3B3FF"/>
-	<stop  offset="1" style="stop-color:#5BC0FD"/>
+	<stop  offset="0" style="stop-color:#C53F48"/>
+	<stop  offset="1" style="stop-color:#F1716C"/>
 </linearGradient>
 <path class="qr-st0" d="M256,60v40h-40V60H256z M216,295v57h40v-57H216z M336,512v-40h-40v-40h-40v80H336z M416,215H296v40h120V215z
 	 M416,295h56v-40h-56V295z M416,352v40h96v-97h-40v57H416z M296,0h-40v60h40V0z M256,180h40v-80h-40v40h-40v115h40V180z M0,215v80

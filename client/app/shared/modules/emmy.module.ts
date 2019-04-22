@@ -76,7 +76,7 @@ const iconsConfig: NaturalIconsConfig = {
         svg: 'assets/icons/exit.svg',
     },
     'emmy': {
-        svg: 'assets/emmy.svg',
+        svg: 'assets/logo.svg',
     },
 };
 

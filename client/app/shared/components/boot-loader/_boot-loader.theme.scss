@@ -1,7 +1,7 @@
 @mixin boot-loader($theme) {
     $primary: map-get($theme, primary);
     .bootloader {
-        background: mat-color($primary);
+        //background: mat-color($primary);
     }
 }
 

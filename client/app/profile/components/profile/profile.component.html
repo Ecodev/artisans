@@ -1,86 +1,44 @@
-<natural-sidenav-container name="profileMenu" [noScroll]="true" fxFlex>
-    <natural-sidenav>
-        <div fxLayout="column" fxLayoutGap="20px" [style.margin-top.px]="30">
+<div fxLayout="column" fxLayoutGap="30px">
 
-            <div [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile" class="big-button">
-                    <natural-icon name="family" [size]="50"></natural-icon>
-                    Famille
-                </a>
-            </div>
-            <div [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="history" class="big-button">
-                    <natural-icon name="transactionHistory" [size]="50"></natural-icon>
-                    Historique des transactions
-                </a>
-            </div>
-            <div [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="finances" class="big-button">
-                    <natural-icon name="claims" [size]="50"></natural-icon>
-                    Dépenses et remboursements
-                </a>
-            </div>
-            <div *ngIf="canAccessServices()" [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="services" class="big-button">
-                    <natural-icon name="emmy" [size]="50"></natural-icon>
-                    Cotisation et services
-                </a>
-            </div>
-        </div>
-    </natural-sidenav>
-
-    <natural-sidenav-content>
-        <div fxLayout="column" fxLayoutGap="30px">
-
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="0px" fxLayoutGap="30px">
-                <div fxFlex="none" fxFlex.gt-xs fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-                        <ngx-avatar [name]="viewer.name" [size]="50"></ngx-avatar>
-                        <div>
-                            <div class="mat-display-1 no-margin-bottom">{{ viewer.name }}</div>
-                            <div class="mat-subheading-1 no-margin-bottom">{{ viewer.status | enum: 'UserStatus' | capitalize | async}}</div>
-                        </div>
-                    </div>
-                    <a mat-flat-button
-                       color="accent"
-                       *ngIf="userService.canBecomeMember(viewer)"
-                       [disabled]="!viewer.email"
-                       [matTooltip]="!viewer.email ? 'Vous devez avoir saisi une adresse e-mail dans vos données personnelles' : null"
-                       [routerLink]="['/user/new', {email: viewer.email}]"
-                    >
-                        Devenir membre
-                    </a>
-                    <!-- TODO : UPDATE email when user add e-mail in family member component -->
+    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="0px" fxLayoutGap="30px">
+        <div fxFlex="none" fxFlex.gt-xs fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                <ngx-avatar [name]="viewer.name" [size]="50"></ngx-avatar>
+                <div>
+                    <div class="mat-display-1 no-margin-bottom">{{ viewer.name }}</div>
+                    <div class="mat-subheading-1 no-margin-bottom">{{ viewer.status | enum: 'UserStatus' | capitalize | async}}</div>
                 </div>
-
-                <!-- CREDIT -->
-                <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
-                    <div fxLayout="column" fxLayoutGap="20px">
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
-                            <!--
-                            <button mat-flat-button color="primary" class="margin-left" (click)="pay()" [disabled]="!config">
-                                Faire un versement
-                            </button>
-                            -->
-                        </div>
-
-                        <app-particle-switch [data]="viewer?.account?.balance || 0">
-                            <ng-template let-data="data">
-                                <app-money [amount]="data" sizeClass="mat-display-2"></app-money>
-                            </ng-template>
-                        </app-particle-switch>
-
-                    </div>
-                </div>
-
             </div>
-
-            <mat-divider></mat-divider>
-            <router-outlet></router-outlet>
-
+            <a mat-flat-button color="accent" *ngIf="userService.canBecomeMember(viewer)" [disabled]="!viewer.email" [matTooltip]="!viewer.email ? 'Vous devez avoir saisi une adresse e-mail dans vos données personnelles' : null" [routerLink]="['/user/new', {email: viewer.email}]">
+                Devenir membre
+            </a>
+            <!-- TODO : UPDATE email when user add e-mail in family member component -->
         </div>
 
-    </natural-sidenav-content>
-</natural-sidenav-container>
+        <!-- CREDIT -->
+        <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
+            <div fxLayout="column" fxLayoutGap="20px">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
+                    <!--
+                    <button mat-flat-button color="primary" class="margin-left" (click)="pay()" [disabled]="!config">
+                        Faire un versement
+                    </button>
+                    -->
+                </div>
 
+                <app-particle-switch [data]="viewer?.account?.balance || 0">
+                    <ng-template let-data="data">
+                        <app-money [amount]="data" sizeClass="mat-display-2"></app-money>
+                    </ng-template>
+                </app-particle-switch>
+
+            </div>
+        </div>
+
+    </div>
+
+    <mat-divider></mat-divider>
+    <router-outlet></router-outlet>
+
+</div>

@@ -26,13 +26,15 @@ export class HomeComponent extends NaturalAbstractController implements OnInit {
 
         NaturalSidenavService.sideNavsChange.pipe(takeUntil(this.ngUnsubscribe)).subscribe(() => {
             setTimeout(() => {
-                this.menu = NaturalSidenavService.sideNavs.get('adminMenu') || NaturalSidenavService.sideNavs.get('profileMenu');
+                this.menu = NaturalSidenavService.sideNavs.get('dashboardMenu') ||
+                            NaturalSidenavService.sideNavs.get('adminMenu') ||
+                            NaturalSidenavService.sideNavs.get('profileMenu');
             });
         });
     }
 
     public goToCode() {
-        this.router.navigate(['/booking', this.code]);
+        this.router.navigate(['/product', this.code]);
     }
 
 }

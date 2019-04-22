@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import jsQR from 'jsqr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
+import jsQR from 'jsqr';
 
 @Component({
     selector: 'app-scan',
@@ -64,8 +64,8 @@ export class ScanComponent implements OnInit, OnDestroy {
             const code = jsQR(imgData.data, imgData.width, imgData.height);
 
             if (code && code.data) {
-                const parsedCode = code.data.toLowerCase().replace('https://emmy.club/booking/', '');
-                this.router.navigate(['..', parsedCode], {relativeTo: this.route});
+                const parsedCode = code.data.toLowerCase().replace('https://chez-emmy.ch/product/', '');
+                this.router.navigate(['/product', parsedCode]);
             } else {
                 requestAnimationFrame(this.tick.bind(this));
             }

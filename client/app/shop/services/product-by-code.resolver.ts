@@ -18,7 +18,7 @@ export class ProductByCodeResolver implements Resolve<ProductResolve> {
      * Resolve product data for router and panels service
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<ProductResolve> {
-        const observable = this.productService.resolveByCode(route.params.productCode);
+        const observable = this.productService.resolveByCode(route.params.code);
 
         return this.errorService.redirectIfError(observable);
     }

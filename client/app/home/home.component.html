@@ -10,27 +10,18 @@
             <natural-icon name="emmy" [size]="60"></natural-icon>
         </a>
 
-        <div *ngIf="route.snapshot.data.viewer?.model" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px" fxFlex>
-            <div fxFlex></div>
+        <div fxFlex></div>
 
-            <div fxFlex id="searchByCode" fxLayout="row" fxLayoutAlign="start center" fxHide.xs>
-                <input fxFlex placeholder="Recherche par code" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
-                <a mat-icon-button [routerLink]="['/booking', code]">
-                    <natural-icon name="search"></natural-icon>
-                </a>
-            </div>
-
-            <a mat-icon-button mat-flat-button color="primary" routerLink="/booking/by-scan">
-                <natural-icon name="simple-qr" [size]="24"></natural-icon>
-            </a>
-
-            <div fxFlex></div>
-
-            <a mat-icon-button routerLink="/profile">
-                <ngx-avatar [name]="route.snapshot.data.viewer.model.name" [size]="50" style="position:relative;top:-5px;left:-5px"
-                ></ngx-avatar>
+        <div id="searchByCode" fxLayout="row" fxLayoutAlign="start center">
+            <input fxFlex placeholder="Code d'article" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
+            <a mat-icon-button [routerLink]="['/product', code]">
+                <natural-icon name="search"></natural-icon>
             </a>
         </div>
+
+        <a mat-icon-button mat-flat-button color="primary" routerLink="/by-scan">
+            <natural-icon name="simple-qr" [size]="24"></natural-icon>
+        </a>
 
     </mat-toolbar>
 

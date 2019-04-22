@@ -1,0 +1,56 @@
+<natural-sidenav-container fxFlex name="dashboardMenu" style="height:600px;">
+    <natural-sidenav>
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center" class="margin">
+
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/" class="big-button">
+                <natural-icon name="shop" [size]="70"></natural-icon>
+                Comissions
+            </a>
+
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="openDoor()" *ngIf="canAccessDoor()" class="big-button">
+                <natural-icon name="doors" [size]="70"></natural-icon>
+                Ouvrir
+            </a>
+
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/admin" *ngIf="canAccessAdmin()" class="big-button">
+                <natural-icon name="administrator" [size]="70"></natural-icon>
+                Administration
+            </a>
+
+            <mat-divider class="margin"></mat-divider>
+
+            <div [style.max-width.px]="150">
+                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile/family" class="big-button">
+                    <natural-icon name="family" [size]="50"></natural-icon>
+                    Famille
+                </a>
+            </div>
+            <div [style.max-width.px]="150">
+                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile/history" class="big-button">
+                    <natural-icon name="transactionHistory" [size]="50"></natural-icon>
+                    Historique des transactions
+                </a>
+            </div>
+            <div [style.max-width.px]="150">
+                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile/finances" class="big-button">
+                    <natural-icon name="claims" [size]="50"></natural-icon>
+                    Dépenses et remboursements
+                </a>
+            </div>
+
+            <mat-divider class="margin"></mat-divider>
+
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="userService.logout()" class="big-button">
+                <natural-icon name="exit" [size]="70"></natural-icon>
+                Déconnexion
+            </a>
+        </div>
+    </natural-sidenav>
+
+    <natural-sidenav-content>
+        <div class="body" fxLayout="column">
+            <router-outlet></router-outlet>
+        </div>
+    </natural-sidenav-content>
+
+</natural-sidenav-container>

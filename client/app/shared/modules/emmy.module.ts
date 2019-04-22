@@ -1,22 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { MaterialModule } from './material.module';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { AddressComponent } from '../components/address/address.component';
-import { AvatarModule } from 'ngx-avatar';
-import { MoneyComponent } from '../components/money/money.component';
-import { FocusDirective } from '../directives/focus';
-import { CardComponent } from '../components/card/card.component';
-import { ngfModule } from 'angular-file';
-import { FileComponent } from '../components/file/file.component';
-import { FileDropDirective } from '../components/file/services/file-drop.directive';
-import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
-import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
-import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
-import { TimeagoModule } from 'ngx-timeago';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
-import { NaturalSearchModule } from '@ecodev/natural';
+import { RouterModule } from '@angular/router';
 import {
     NaturalAlertModule,
     NaturalColumnsPickerModule,
@@ -28,12 +13,27 @@ import {
     NaturalIconModule,
     NaturalIconsConfig,
     NaturalRelationsModule,
+    NaturalSearchModule,
     NaturalSelectEnumModule,
     NaturalSelectModule,
     NaturalSidenavModule,
     NaturalStampModule,
     NaturalTableButtonModule,
 } from '@ecodev/natural';
+import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
+import { ngfModule } from 'angular-file';
+import { AvatarModule } from 'ngx-avatar';
+import { TimeagoModule } from 'ngx-timeago';
+import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
+import { AddressComponent } from '../components/address/address.component';
+import { CardComponent } from '../components/card/card.component';
+import { FileComponent } from '../components/file/file.component';
+import { FileDropDirective } from '../components/file/services/file-drop.directive';
+import { MoneyComponent } from '../components/money/money.component';
+import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
+import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
+import { FocusDirective } from '../directives/focus';
+import { MaterialModule } from './material.module';
 
 const iconsConfig: NaturalIconsConfig = {
     'qr': {
@@ -77,6 +77,9 @@ const iconsConfig: NaturalIconsConfig = {
     },
     'emmy': {
         svg: 'assets/logo.svg',
+    },
+    'shop': {
+        svg: 'assets/icons/grocery.svg',
     },
 };
 

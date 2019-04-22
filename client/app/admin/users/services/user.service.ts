@@ -113,13 +113,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         };
     }
 
-    public static canAccessServices(user: CurrentUserForProfile['viewer']): boolean {
-        if (!user) {
-            return false;
-        }
-        return !user.owner;
-    }
-
     public static canAccessAdmin(user: CurrentUserForProfile['viewer']): boolean {
         if (!user) {
             return false;

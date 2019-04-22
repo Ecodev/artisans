@@ -1,9 +1,7 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { registerLocaleData } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import localeFRCH from '@angular/common/locales/fr-CH';
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { Apollo, ApolloModule } from 'apollo-angular';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {
     DateAdapter,
@@ -12,27 +10,30 @@ import {
     MatIconRegistry,
     ShowOnDirtyErrorStateMatcher,
 } from '@angular/material';
-import { NetworkActivityService } from './shared/services/network-activity.service';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
-import { SwissParsingDateAdapter } from './shared/services/swiss-parsing-date-adapter.service';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { DoorComponent } from './door/door.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ErrorComponent } from './shared/components/error/error.component';
-import { MaterialModule } from './shared/modules/material.module';
-import { EmmyModule } from './shared/modules/emmy.module';
-import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
-import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
-import localeFRCH from '@angular/common/locales/fr-CH';
-import { registerLocaleData } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NaturalAlertService } from '@ecodev/natural';
 import { NgProgressModule } from '@ngx-progressbar/core';
+import { Apollo, ApolloModule } from 'apollo-angular';
+import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
 import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
-import { NaturalAlertService } from '@ecodev/natural';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FrontEndComponent } from './front-end/front-end.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { ModalTriggerComponent } from './shared/components/modal-trigger/modal-trigger.component';
+import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
+import { EmmyModule } from './shared/modules/emmy.module';
+import { MaterialModule } from './shared/modules/material.module';
+import { NetworkActivityService } from './shared/services/network-activity.service';
+import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
+import { SwissParsingDateAdapter } from './shared/services/swiss-parsing-date-adapter.service';
+import { ShopModule } from './shop/shop.module';
 
 registerLocaleData(localeFRCH);
 
@@ -45,19 +46,20 @@ export class MyIntl extends TimeagoIntl {
         AppComponent,
         LoginComponent,
         HomeComponent,
-        DoorComponent,
-        DashboardComponent,
+        FrontEndComponent,
         BootLoaderComponent,
         ErrorComponent,
+        ModalTriggerComponent,
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
+        MaterialModule,
+        EmmyModule,
         NgProgressModule,
         ApolloModule,
         AppRoutingModule,
-        MaterialModule,
-        EmmyModule,
+        ShopModule,
         HttpClientModule,
         HttpBatchLinkModule,
         TimeagoModule.forRoot({

@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { DoorComponent } from './door/door.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ErrorComponent } from './shared/components/error/error.component';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
+import { FrontEndComponent } from './front-end/front-end.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { ErrorComponent } from './shared/components/error/error.component';
+import { ModalTriggerComponent } from './shared/components/modal-trigger/modal-trigger.component';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { DoorGuard } from './shared/guards/door.guard';
+import { CodeInputComponent } from './shop/code-input/code-input.component';
+import { ProductComponent } from './shop/product/product.component';
+import { ScanComponent } from './shop/scan/scan.component';
+import { ProductByCodeResolver } from './shop/services/product-by-code.resolver';
+import { ShopComponent } from './shop/shop/shop.component';
 
 export const routes: Routes = [
     {
@@ -30,22 +34,44 @@ export const routes: Routes = [
         children: [
             {
                 path: '',
-                component: DashboardComponent,
+                component: FrontEndComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ShopComponent,
+                        children: [
+                            {
+                                path: 'product/:code',
+                                component: ModalTriggerComponent,
+                                data: {
+                                    component: ProductComponent,
+                                    width: 600,
+                                },
+                                resolve: {
+                                    product: ProductByCodeResolver,
+                                },
+                            },
+                            {
+                                path: 'by-scan',
+                                component: ScanComponent,
+                            },
+                            {
+                                path: 'by-code',
+                                component: CodeInputComponent,
+                            },
+                        ],
+                    },
+                    {
+                        path: 'profile',
+                        loadChildren: './profile/profile.module#ProfileModule',
+                    },
+                ],
             },
             {
                 path: 'admin',
                 loadChildren: './admin/admin.module#AdminModule',
             },
-            {
-                path: 'profile',
-                loadChildren: './profile/profile.module#ProfileModule',
-            },
-            {
-                path: 'door',
-                component: DoorComponent,
-                canActivate: [DoorGuard],
-                resolve: {viewer: ViewerResolver},
-            },
+
         ],
     },
     {

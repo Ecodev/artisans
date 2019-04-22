@@ -17,7 +17,7 @@ const routes: Routes = [
                 component: ProfileComponent,
                 children: [
                     {
-                        path: '',
+                        path: 'family',
                         component: FamilyComponent,
                     },
                     {

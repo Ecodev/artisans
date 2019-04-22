@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class CodeInputComponent implements OnInit {
 
     public code;
+    public redirectionUrl = ['/product'];
 
     constructor(private router: Router) {
     }
@@ -17,6 +18,10 @@ export class CodeInputComponent implements OnInit {
     }
 
     public goToProduct(code: string) {
-        this.router.navigate(['/booking', code]);
+        this.router.navigate(this.getUrl(code));
+    }
+
+    public getUrl(code) {
+        return [...this.redirectionUrl, code];
     }
 }

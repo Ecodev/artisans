@@ -91,8 +91,4 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-    public canAccessServices() {
-        return UserService.canAccessServices(this.viewer);
-    }
-
 }

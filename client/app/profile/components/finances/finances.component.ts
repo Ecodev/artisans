@@ -43,7 +43,6 @@ export class FinancesComponent extends NaturalAbstractController implements OnIn
             this.user = this.route.snapshot.data.viewer.model;
         } else {
             this.adminMode = true;
-            this.expenseClaimsColumns.push('admin');
         }
 
         this.loadData();

@@ -18,7 +18,6 @@ export class DoorService {
         {
             id: 'door',
             name: 'Entrée',
-            image: 'door.jpg',
             opened: false,
         },
     ];

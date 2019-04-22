@@ -2,8 +2,8 @@
 
 # This script build all assets for production environment
 
-# If the deploy user exists on the machin****e, re-run script with that user
-DEPLOY_USER="emmyclub"
+# If the deploy user exists on the machine, re-run script with that user
+DEPLOY_USER="chezemmych"
 if id "$DEPLOY_USER" >/dev/null 2>&1; then
 
     if [ ! "$DEPLOY_USER" == "$USER" ]; then

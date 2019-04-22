@@ -18,11 +18,9 @@ class TypesFactory
         $invokables = [
             \Application\Api\Enum\UserStatusType::class,
             \Application\Api\Enum\UserRoleType::class,
-            \Application\Api\Enum\ProductStateType::class,
             \Application\Api\Enum\SexType::class,
             \Application\Api\Enum\RelationshipType::class,
             \Application\Api\Enum\BillingTypeType::class,
-            \Application\Api\Enum\DoorType::class,
             \Application\Api\Enum\ExpenseClaimStatusType::class,
             \Application\Api\Enum\ExpenseClaimTypeType::class,
             \Application\Api\Enum\MessageTypeType::class,

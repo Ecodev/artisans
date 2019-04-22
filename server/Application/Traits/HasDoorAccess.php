@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use Application\Model\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,8 +42,8 @@ trait HasDoorAccess
      */
     public function getCanOpenDoor(): bool
     {
-        $allowedStatus = [self::STATUS_ACTIVE];
-        $allowedRoles = [self::ROLE_INDIVIDUAL, self::ROLE_MEMBER, self::ROLE_RESPONSIBLE, self::ROLE_ADMINISTRATOR];
+        $allowedStatus = [User::STATUS_ACTIVE];
+        $allowedRoles = [User::ROLE_INDIVIDUAL, User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR];
 
         if (!$this->getDoor()) {
             return false;

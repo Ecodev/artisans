@@ -88,7 +88,7 @@ class Product extends AbstractModel
     private $verificationDate;
 
     /**
-     * @var ProductTag
+     * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="ProductTag", mappedBy="products")
      */
@@ -333,5 +333,25 @@ class Product extends AbstractModel
     public function setVatRate(string $vatRate): void
     {
         $this->vatRate = $vatRate;
+    }
+
+    /**
+     * Percentage of margin made on price
+     *
+     * @return string
+     */
+    public function getMargin(): string
+    {
+        return $this->margin;
+    }
+
+    /**
+     * Percentage of margin made on price
+     *
+     * @param string $margin
+     */
+    public function setMargin(string $margin): void
+    {
+        $this->margin = $margin;
     }
 }

@@ -1,8 +1,8 @@
 {
-    "name": "ecodev/my-ichtus",
-    "description": "My Ichtus",
+    "name": "ecodev/chez-emmy",
+    "description": "Chez Emmy",
     "type": "project",
-    "homepage": "https://github.com/ecodev/my-ichtus",
+    "homepage": "https://github.com/ecodev/chez-emmy",
     "license": "MIT",
     "config": {
         "sort-packages": true

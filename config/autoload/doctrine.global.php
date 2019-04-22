@@ -9,8 +9,8 @@ return [
                 'driverClass' => Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host' => 'localhost',
-                    'dbname' => 'ichtus',
-                    'user' => 'ichtus',
+                    'dbname' => 'emmy',
+                    'user' => 'emmy',
                     'password' => '',
                     'port' => 3306,
                     'driverOptions' => [

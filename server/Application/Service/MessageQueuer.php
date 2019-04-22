@@ -42,7 +42,7 @@ class MessageQueuer
 
     public function queueRegister(User $user): Message
     {
-        $subject = 'Demande de création de compte au Club Nautique Ichtus';
+        $subject = 'Demande de création de compte au coopérative Chez Emmy';
         $mailParams = [
             'token' => $user->createToken(),
         ];

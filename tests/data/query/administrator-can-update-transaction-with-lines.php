@@ -24,7 +24,7 @@ return [
             ],
             'lines' => [
                 [
-                    'name' => 'Paiement depuis crédit MyIchtus ',
+                    'name' => 'Paiement depuis crédit Chez Emmy ',
                     'balance' => '150.00',
                     'transactionDate' => '2019-03-01',
                     'credit' => 10037,

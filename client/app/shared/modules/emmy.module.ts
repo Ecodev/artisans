@@ -77,8 +77,8 @@ const iconsConfig: NaturalIconsConfig = {
     'exit': {
         svg: 'assets/icons/exit.svg',
     },
-    'ichtus': {
-        svg: 'assets/ichtus.svg',
+    'emmy': {
+        svg: 'assets/emmy.svg',
     },
 };
 
@@ -131,5 +131,5 @@ const imports = [
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [CommentComponent],
 })
-export class IchtusModule {
+export class EmmyModule {
 }

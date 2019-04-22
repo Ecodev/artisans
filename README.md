@@ -1,18 +1,18 @@
-# My Ichtus
+# Chez Emmy
 
 Master:
-[![Build Status](https://travis-ci.org/Ecodev/my-ichtus.svg?branch=master)](https://travis-ci.org/Ecodev/my-ichtus) &nbsp;
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/badges/quality-score.png?b=master&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/?branch=master) &nbsp;
-[![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/badges/coverage.png?b=master&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/?branch=master)
+[![Build Status](https://travis-ci.org/Ecodev/chez-emmy.svg?branch=master)](https://travis-ci.org/Ecodev/chez-emmy) &nbsp;
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/quality-score.png?b=master&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=master) &nbsp;
+[![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/coverage.png?b=master&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=master)
 
 Develop:
-[![Build Status](https://travis-ci.org/Ecodev/my-ichtus.svg?branch=develop)](https://travis-ci.org/Ecodev/my-ichtus) &nbsp;
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/badges/quality-score.png?b=develop&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/?branch=develop) &nbsp;
-[![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/badges/coverage.png?b=develop&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/my-ichtus/?branch=develop)
+[![Build Status](https://travis-ci.org/Ecodev/chez-emmy.svg?branch=develop)](https://travis-ci.org/Ecodev/chez-emmy) &nbsp;
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/quality-score.png?b=develop&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=develop) &nbsp;
+[![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/coverage.png?b=develop&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=develop)
 
 ## Introduction
 
-My Ichtus is a web application based on GraphQL for the API and Angular for the client.
+Chez Emmy is a web application based on GraphQL for the API and Angular for the client.
 
 
 ## Installation
@@ -20,7 +20,7 @@ My Ichtus is a web application based on GraphQL for the API and Angular for the 
 The recommended way to get a working copy is the following:
 
 1. Set up a nginx virtual host to point to `htdocs/` directory and to include `configuration/nginx.conf`
-2. Create a database in MariaDB named "my-ichtus"
+2. Create a database in MariaDB named "chez-emmy"
 3. Configure database in `config/autoload/local.php` (see example ``config/autoload/local.php.dist``)
 4. Configure client in `client/assets/config/config.local.json` (see example ``client/assets/config/config.dist.json``)
 5. Finally, build the app:
@@ -55,7 +55,7 @@ $ composer clear-config-cache
 
 ### Client
 
-Run `yarn dev` for a dev server. Navigate to `http://my-ichtus.lan:4200/`. The app will
+Run `yarn dev` for a dev server. Navigate to `http://chez-emmy.lan:4200/`. The app will
 automatically reload if you change any of the source files.
 
 ## Testing

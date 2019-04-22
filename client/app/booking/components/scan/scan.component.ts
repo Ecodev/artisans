@@ -64,7 +64,7 @@ export class ScanComponent implements OnInit, OnDestroy {
             const code = jsQR(imgData.data, imgData.width, imgData.height);
 
             if (code && code.data) {
-                const parsedCode = code.data.toLowerCase().replace('https://ichtus.club/booking/', '');
+                const parsedCode = code.data.toLowerCase().replace('https://emmy.club/booking/', '');
                 this.router.navigate(['..', parsedCode], {relativeTo: this.route});
             } else {
                 requestAnimationFrame(this.tick.bind(this));

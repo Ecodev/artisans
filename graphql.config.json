@@ -7,8 +7,8 @@
   "README_endpoints": "A list of GraphQL endpoints that can be queried from '.graphql' files in the IDE",
   "endpoints": [
     {
-      "name": "Default (https://my-ichtus.lan/graphql)",
-      "url": "https://my-ichtus.lan/graphql",
+      "name": "Default (https://chez-emmy.lan/graphql)",
+      "url": "https://chez-emmy.lan/graphql",
       "options": {
         "headers": {
           "user-agent": "JS GraphQL"

@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-    public title = 'my-ichtus';
+    public title = 'chez-emmy';
 
     public viewer;
 

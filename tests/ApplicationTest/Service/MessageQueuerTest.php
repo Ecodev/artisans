@@ -26,7 +26,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = new MessageQueuer(
             $entityManager,
             $renderer,
-            'my-ichtus.lan'
+            'chez-emmy.lan'
         );
 
         return $messageQueuer;
@@ -38,7 +38,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = $this->createMockMessageQueuer();
         $message = $messageQueuer->queueRegister($user);
 
-        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte au Club Nautique Ichtus');
+        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte au coopérative Chez Emmy');
     }
 
     public function testQueueUnregister(): void

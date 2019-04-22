@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FileComponent } from './file.component';
-import { IchtusModule } from '../../modules/ichtus.module';
+import { EmmyModule } from '../../modules/emmy.module';
 
 describe('FileComponent', () => {
     let component: FileComponent;
@@ -10,7 +10,7 @@ describe('FileComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [],
-            imports: [IchtusModule],
+            imports: [EmmyModule],
         }).compileComponents();
     }));
 

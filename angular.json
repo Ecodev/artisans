@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-ichtus": {
+    "chez-emmy": {
       "root": "",
       "sourceRoot": "client",
       "projectType": "application",
@@ -66,21 +66,21 @@
             "ssl": true,
             "sslCert": "/sites/self-signed-certificate.crt",
             "sslKey": "/sites/self-signed-certificate.key",
-            "port": 4300,
-            "browserTarget": "my-ichtus:build",
-            "host": "my-ichtus.lan",
+            "port": 4205,
+            "browserTarget": "chez-emmy:build",
+            "host": "chez-emmy.lan",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "my-ichtus:build:production"
+              "browserTarget": "chez-emmy:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "my-ichtus:build"
+            "browserTarget": "chez-emmy:build"
           }
         },
         "test": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "my-ichtus-e2e": {
+    "chez-emmy-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -124,11 +124,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "my-ichtus:serve"
+            "devServerTarget": "chez-emmy:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-ichtus:serve:production"
+              "devServerTarget": "chez-emmy:serve:production"
             }
           }
         },
@@ -182,5 +182,5 @@
       }
     }
   },
-  "defaultProject": "my-ichtus"
+  "defaultProject": "chez-emmy"
 }

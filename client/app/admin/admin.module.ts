@@ -7,7 +7,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AvatarModule } from 'ngx-avatar';
 import { BookableComponent } from './bookables/bookable/bookable.component';
 import { MaterialModule } from '../shared/modules/material.module';
-import { IchtusModule } from '../shared/modules/ichtus.module';
+import { EmmyModule } from '../shared/modules/emmy.module';
 import { LicensesComponent } from './licenses/licenses/licenses.component';
 import { LicenseComponent } from './licenses/license/license.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
@@ -62,7 +62,7 @@ import { BookableMetadataComponent } from './bookable-metadata/bookable-metadata
         CommonModule,
         AdminRoutingModule,
         MaterialModule,
-        IchtusModule,
+        EmmyModule,
         AvatarModule,
         ProfileModule,
     ],

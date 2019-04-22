@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../shared/modules/material.module';
-import { IchtusModule } from '../shared/modules/ichtus.module';
+import { EmmyModule } from '../shared/modules/emmy.module';
 import { FamilyMemberComponent } from './components/family-member/family-member.component';
 import { FamilyComponent } from './components/family/family.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -37,7 +37,7 @@ import { FinancesComponent } from './components/finances/finances.component';
         CommonModule,
         ProfileRoutingModule,
         MaterialModule,
-        IchtusModule,
+        EmmyModule,
     ],
     entryComponents: [
         CreateRefundComponent,

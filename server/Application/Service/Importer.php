@@ -113,7 +113,7 @@ class Importer
     }
 
     /**
-     * Load members from FileMaker "ichtus" table into memory
+     * Load members from FileMaker "emmy" table into memory
      */
     private function loadMembers(): void
     {
@@ -121,7 +121,7 @@ class Importer
         $query = <<<EOT
           SELECT ID_membre,
                "nom_prénom",
-               "date_entrée ichtus",
+               "date_entrée emmy",
                remarques,
                "liens de famille",
                "date_séance d'accueil",
@@ -132,7 +132,7 @@ class Importer
                "membre_archivé",
                assurances,
                envoi_papier
-          FROM ichtus
+          FROM emmy
           WHERE ((membre_new>0 AND "date_formulaire_adhésion">=DATE '2018-10-01') OR membre_actif>0 OR membre_suspension>0) AND "membre_archivé"=0 AND remarques NOT LIKE '%Ignorer%'
 EOT;
         $statement = $this->filemaker->prepare(trim($query));
@@ -170,14 +170,14 @@ EOT;
                     echo sprintf('WARN: utilisateur %u ne devrait pas être de chef de la famille %u', $user['uid'], $user['family_uid']) . PHP_EOL;
                 }
                 if (empty($user['new_username'])) {
-                    echo sprintf("WARN: utilisateur %u (%s %s) n'a pas de login MyIchtus", $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
+                    echo sprintf("WARN: utilisateur %u (%s %s) n'a pas de login Chez Emmy", $user['uid'], $user['first_name'], $user['last_name']) . PHP_EOL;
                     ++$withoutLoginCount;
                 }
                 $this->users[$user['uid']] = $user;
                 echo sprintf('Individu %u importé', $user['uid']) . PHP_EOL;
             }
             if ($withoutLoginCount > 0) {
-                echo sprintf('%u individus sans login MyIchtus', $withoutLoginCount) . PHP_EOL;
+                echo sprintf('%u individus sans login Chez Emmy', $withoutLoginCount) . PHP_EOL;
             }
         }
     }
@@ -338,8 +338,8 @@ EOT;
             $insurances = $this->members[$user['family_uid']]['assurances'];
             $insert->bindValue(':has_insurance', !empty($insurances) && mb_strpos($insurances, 'RC privée') !== false);
 
-            $insert->bindValue(':swiss_sailing', !empty($user['ichtus_swiss_sailing']) ? $user['ichtus_swiss_sailing'] : '');
-            switch ($user['ichtus_swiss_sailing_type']) {
+            $insert->bindValue(':swiss_sailing', !empty($user['emmy_swiss_sailing']) ? $user['emmy_swiss_sailing'] : '');
+            switch ($user['emmy_swiss_sailing_type']) {
                 case 'A':
                     $swissSailingType = 'active';
 
@@ -357,7 +357,7 @@ EOT;
             }
             $insert->bindValue(':swiss_sailing_type', $swissSailingType);
 
-            switch ($user['ichtus_swiss_windsurf_type']) {
+            switch ($user['emmy_swiss_windsurf_type']) {
                 case 'A':
                     $swissWindsurfType = 'active';
 
@@ -421,7 +421,7 @@ EOT;
             }
             if (in_array((int) $user['uid'], [1057, 2738], true)) {
                 $role = 'administrator';
-            } elseif (!empty($user['ichtus_comite_fonction'])) {
+            } elseif (!empty($user['emmy_comite_fonction'])) {
                 $role = 'responsible';
             }
             $insert->bindValue(':role', $role);
@@ -462,7 +462,7 @@ EOT;
             if ($userStatus === 'new') {
                 $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_formulaire_adhésion']);
             } else {
-                $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_entrée ichtus']);
+                $insert->bindValue(':creation_date', $this->members[$user['family_uid']]['date_entrée emmy']);
             }
 
             $password = $user['new_password'];
@@ -496,12 +496,12 @@ EOT;
 
             // Assigne les tags au membre
             $linkToTag->bindValue(':user_id', $user['uid']);
-            if (!empty($user['ichtus_comite_fonction'])) {
-                $userTagId = $this->insertUserTag($user['ichtus_comite_fonction']);
+            if (!empty($user['emmy_comite_fonction'])) {
+                $userTagId = $this->insertUserTag($user['emmy_comite_fonction']);
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
             }
-            if (!empty($this->users[$user['uid']]['ichtus_NFT'])) {
+            if (!empty($this->users[$user['uid']]['emmy_NFT'])) {
                 $userTagId = $this->insertUserTag('Membre NFT');
                 $linkToTag->bindValue(':user_tag_id', $userTagId);
                 $linkToTag->execute();
@@ -510,7 +510,7 @@ EOT;
             // Assigne les brevets au membre
             $linkToLicense->bindValue(':user_id', $user['uid']);
             $licenses = [];
-            switch ($user['ichtus_autvoile']) {
+            switch ($user['emmy_autvoile']) {
                 case 3: $licenses[] = 2002; // Voile niveau 3 (+ inférieurs)
                 // no break
                 case 2: $licenses[] = 2001; // Voile niveau 2 (+ inférieurs)
@@ -520,10 +520,10 @@ EOT;
 break;
                 default:
             }
-            if ($user['ichtus_permisvoile']) {
+            if ($user['emmy_permisvoile']) {
                 $licenses[] = 2006;
             }
-            if ($user['ichtus_permismoteur']) {
+            if ($user['emmy_permismoteur']) {
                 $licenses[] = 2007;
             }
             foreach ($licenses as $license) {
@@ -716,14 +716,14 @@ EOT;
             $insert->bindValue(':remarks', implode(' ', [$user['first_name'], $user['last_name']]));
 
             // Adhésion NFT (optionnel)
-            if (!empty($user['ichtus_NFT'])) {
+            if (!empty($user['emmy_NFT'])) {
                 $insert->bindValue(':bookable', 3004); // Cotisation NFT
                 $insert->execute();
             }
 
             // Licence Swiss Sailing
-            if (!empty($user['ichtus_swiss_sailing'])) {
-                switch ($user['ichtus_swiss_sailing_type']) {
+            if (!empty($user['emmy_swiss_sailing'])) {
+                switch ($user['emmy_swiss_sailing_type']) {
                     case 'A':
                         $idBookable = 3027; // Licence Swiss Sailing (voile)
                         break;
@@ -740,7 +740,7 @@ EOT;
             }
 
             // Licence Swiss Windsurfing
-            if (!empty($user['ichtus_swiss_windsurf_type']) && $user['ichtus_swiss_windsurf_type'] === 'A') {
+            if (!empty($user['emmy_swiss_windsurf_type']) && $user['emmy_swiss_windsurf_type'] === 'A') {
                 $insert->bindValue(':bookable', 3028); // Cotisation Swiss Windsurfing (NFT)
                 $insert->execute();
             }

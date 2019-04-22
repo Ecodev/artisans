@@ -35,7 +35,7 @@ abstract class OpenDoor implements FieldInterface
 
                 $user = User::getCurrent();
                 if (!$user || !$user->getCanOpenDoor($args['door'])) {
-                    throw new Exception("Vous n'avez pas le droit d'ouvrir la porte, assurez-vous d'être connecté au Wi-Fi du local Ichtus");
+                    throw new Exception("Vous n'avez pas le droit d'ouvrir la porte, assurez-vous d'être connecté au Wi-Fi du local Emmy");
                 }
 
                 $apiConfig = $container->get('config')['doorsApi'];

@@ -7,8 +7,8 @@ declare(strict_types=1);
  * that required keys exist with "safe" values.
  */
 return [
-    'hostname' => 'my-ichtus.lan',
-    'fromEmail' => 'noreply@my-ichtus.lan',
+    'hostname' => 'chez-emmy.lan',
+    'fromEmail' => 'noreply@chez-emmy.lan',
     'emailOverride' => null,
     'smtp' => null,
     'phpPath' => '/usr/bin/php',

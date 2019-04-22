@@ -24,7 +24,7 @@ import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { MaterialModule } from './shared/modules/material.module';
-import { IchtusModule } from './shared/modules/ichtus.module';
+import { EmmyModule } from './shared/modules/emmy.module';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
 import localeFRCH from '@angular/common/locales/fr-CH';
@@ -59,7 +59,7 @@ export class MyIntl extends TimeagoIntl {
         ApolloModule,
         AppRoutingModule,
         MaterialModule,
-        IchtusModule,
+        EmmyModule,
         HttpClientModule,
         HttpBatchLinkModule,
         TimeagoModule.forRoot({

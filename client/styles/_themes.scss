@@ -33,7 +33,7 @@
     @include rich-text($theme);
 }
 
-$mat-ichtus: (
+$mat-emmy: (
         50: #e3f2fd,
         100: #bbdefb,
         200: #90caf9,
@@ -67,10 +67,10 @@ $mat-ichtus: (
 );
 
 // Configure themes
-$ichtus-primary: mat-palette($mat-ichtus);
-$ichtus-accent: mat-palette($mat-orange);
-$ichtus-warn: mat-palette($mat-red);
-$ichtus-theme: mat-light-theme($ichtus-primary, $ichtus-accent, $ichtus-warn);
+$emmy-primary: mat-palette($mat-emmy);
+$emmy-accent: mat-palette($mat-orange);
+$emmy-warn: mat-palette($mat-red);
+$emmy-theme: mat-light-theme($emmy-primary, $emmy-accent, $emmy-warn);
 
-@include angular-material-theme($ichtus-theme);
-@include components-theme($ichtus-theme);
+@include angular-material-theme($emmy-theme);
+@include components-theme($emmy-theme);

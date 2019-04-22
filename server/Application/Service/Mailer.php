@@ -130,7 +130,7 @@ class Mailer
         $mailMessage = new Mail\Message();
         $mailMessage->setSubject($modelMessage->getSubject());
         $mailMessage->setBody($body);
-        $mailMessage->setFrom($this->fromEmail, 'Ichtus');
+        $mailMessage->setFrom($this->fromEmail, 'Emmy');
 
         return $mailMessage;
     }

@@ -12,6 +12,6 @@ class Version20190329154244 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE user ADD swiss_sailing_type ENUM(\'active\', \'passive\', \'junior\') DEFAULT NULL COMMENT \'(DC2Type:SwissSailingType)\', ADD swiss_windsurf_type ENUM(\'active\', \'passive\') DEFAULT NULL COMMENT \'(DC2Type:SwissWindsurfType)\', CHANGE ichtus_swiss_sailing swiss_sailing VARCHAR(25) DEFAULT \'\' NOT NULL');
+        $this->addSql('ALTER TABLE user ADD swiss_sailing_type ENUM(\'active\', \'passive\', \'junior\') DEFAULT NULL COMMENT \'(DC2Type:SwissSailingType)\', ADD swiss_windsurf_type ENUM(\'active\', \'passive\') DEFAULT NULL COMMENT \'(DC2Type:SwissWindsurfType)\', CHANGE emmy_swiss_sailing swiss_sailing VARCHAR(25) DEFAULT \'\' NOT NULL');
     }
 }

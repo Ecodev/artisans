@@ -29,7 +29,7 @@ import { NaturalQueryVariablesManager } from '@ecodev/natural';
                 return {
                     cache: new InMemoryCache(),
                     link: httpLink.create({
-                        uri: 'https://ichtus.club/graphql',
+                        uri: 'https://emmy.club/graphql',
                         withCredentials: true,
                     }),
                     defaultOptions: {
@@ -63,7 +63,7 @@ export class VanillaModule implements DoBootstrap {
             linkMutation,
         };
 
-        window['ichtusApi'] = api;
+        window['emmyApi'] = api;
     }
 
     ngDoBootstrap(appRef: ApplicationRef): void {

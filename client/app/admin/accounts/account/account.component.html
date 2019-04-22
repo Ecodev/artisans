@@ -20,13 +20,13 @@
                         </mat-form-field>
 
                         <mat-form-field *ngIf="!form.get('owner').value">
-                            <mat-label>IBAN Ichtus</mat-label>
+                            <mat-label>IBAN Emmy</mat-label>
                             <input matInput formControlName="iban" (change)="update()">
                             <mat-error *ngIf="form.get('iban').hasError('maxlength')">
                                 Maximum {{form.get('iban').errors.maxlength.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('iban').hasError('required')">Requis</mat-error>
-                            <mat-hint>Pour les comptes bancaires ichtus uniquement</mat-hint>
+                            <mat-hint>Pour les comptes bancaires emmy uniquement</mat-hint>
                         </mat-form-field>
 
                     </div>

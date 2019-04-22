@@ -83,7 +83,7 @@ export class ServicesComponent extends NaturalAbstractController implements OnIn
     }
 
     public unregister(): void {
-        this.alertService.confirm('Démission', 'Voulez-vous quitter le club Ichtus ?', 'Démissioner définitivement')
+        this.alertService.confirm('Démission', 'Voulez-vous quitter le club Emmy ?', 'Démissioner définitivement')
             .subscribe(confirmed => {
                 if (confirmed) {
                     this.userService.unregister(this.user).subscribe(() => {

@@ -9,13 +9,13 @@
 declare(strict_types=1);
 
 return [
-    'hostname' => 'my-ichtus.lan',
+    'hostname' => 'chez-emmy.lan',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'params' => [
                     'host' => 'localhost',
-                    'dbname' => 'ichtus',
+                    'dbname' => 'emmy',
                     'user' => 'root',
                     'password' => '',
                     'port' => 3306,
@@ -27,7 +27,7 @@ return [
         'endpoint' => 'http://localhost:8888',
         'token' => 'my-token-value',
     ],
-    'fromEmail' => 'noreply@my-ichtus.lan',
+    'fromEmail' => 'noreply@chez-emmy.lan',
     'emailOverride' => 'your@email.com',
     'smtp' => [
         'name' => 'mail.example.com',
@@ -42,14 +42,14 @@ return [
     ],
     'filemaker' => [
         'driver' => '/path/to/fmodbc.so',
-        'dbname' => 'ichtus',
+        'dbname' => 'emmy',
         'host' => 'filemaker.example.com',
         'user' => '',
         'password' => '',
     ],
     'typo3' => [
         'host' => 'localhost',
-        'dbname' => 'ichtus-typo3',
+        'dbname' => 'emmy-typo3',
         'user' => 'root',
         'password' => '',
         'port' => 3306,

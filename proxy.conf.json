@@ -1,6 +1,6 @@
 {
   "/graphql": {
-    "target": "https://my-ichtus.lan",
+    "target": "https://chez-emmy.lan",
     "secure": false
   }
 }

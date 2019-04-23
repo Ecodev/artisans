@@ -42,16 +42,9 @@ return [
     ],
     'filemaker' => [
         'driver' => '/path/to/fmodbc.so',
-        'dbname' => 'emmy',
+        'dbname' => 'epicerie-sb',
         'host' => 'filemaker.example.com',
         'user' => '',
         'password' => '',
-    ],
-    'typo3' => [
-        'host' => 'localhost',
-        'dbname' => 'emmy-typo3',
-        'user' => 'root',
-        'password' => '',
-        'port' => 3306,
     ],
 ];

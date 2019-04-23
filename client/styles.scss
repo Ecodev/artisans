@@ -127,6 +127,11 @@ mat-checkbox[wrap] {
     max-height: 85vh;
 }
 
+.full-height-dialog-content .mat-dialog-content {
+    height: 100%;
+    padding: 0
+}
+
 .price {
     //font-family: Georgia;
 }

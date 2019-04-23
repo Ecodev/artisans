@@ -1,4 +1,10 @@
-<video #video autoplay style="display:none"></video>
-<div fxFlex class="canvasWrapper" fxLayout="row" fxLayoutAlign="center center" >
-    <canvas #canvas></canvas>
-</div>
+<mat-dialog-content>
+    <video #video autoplay style="display:none"></video>
+    <div class="canvasWrapper" fxLayout="row" fxLayoutAlign="center center">
+        <canvas #canvas></canvas>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <button mat-button mat-dialog-close [routerLink]="['../../']">Fermer</button>
+</mat-dialog-actions>

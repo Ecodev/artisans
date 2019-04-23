@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import jsQR from 'jsqr';
@@ -16,7 +17,11 @@ export class ScanComponent implements OnInit, OnDestroy {
 
     private context;
 
-    constructor(public router: Router, private route: ActivatedRoute, private alertService: NaturalAlertService) {
+    constructor(public router: Router,
+                private route: ActivatedRoute,
+                private alertService: NaturalAlertService,
+                @Inject(MAT_DIALOG_DATA) data: any,
+                private dialogRef: MatDialogRef<any>) {
     }
 
     ngOnInit() {
@@ -44,7 +49,7 @@ export class ScanComponent implements OnInit, OnDestroy {
             const message = 'La caméra est indisponible, essaye de taper le code de ton matériel';
             this.alertService.error(message, 7000);
             setTimeout(() => {
-                this.router.navigateByUrl('/booking/by-code');
+                this.router.navigateByUrl('/');
             }, 1000);
         });
     }
@@ -66,6 +71,7 @@ export class ScanComponent implements OnInit, OnDestroy {
             if (code && code.data) {
                 const parsedCode = code.data.toLowerCase().replace('https://chez-emmy.ch/product/', '');
                 this.router.navigate(['/product', parsedCode]);
+                this.dialogRef.close();
             } else {
                 requestAnimationFrame(this.tick.bind(this));
             }

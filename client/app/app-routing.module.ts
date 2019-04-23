@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialogConfig } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
 import { FrontEndComponent } from './front-end/front-end.component';
@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { ModalTriggerComponent } from './shared/components/modal-trigger/modal-trigger.component';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { CodeInputComponent } from './shop/code-input/code-input.component';
 import { ProductComponent } from './shop/product/product.component';
 import { ScanComponent } from './shop/scan/scan.component';
 import { ProductByCodeResolver } from './shop/services/product-by-code.resolver';
@@ -47,24 +46,34 @@ export const routes: Routes = [
                                 data: {
                                     component: ProductComponent,
                                     backdropRedirection: '/',
-                                    dialogConfig : {
+                                    dialogConfig: {
                                         width: '600px',
                                         maxWidth: '95vw',
                                         maxHeight: '97vh',
                                         panelClass: 'big-height-dialog',
-                                    } as MatDialogConfig
+                                    } as MatDialogConfig,
                                 },
                                 resolve: {
                                     product: ProductByCodeResolver,
                                 },
                             },
                             {
-                                path: 'by-scan',
-                                component: ScanComponent,
-                            },
-                            {
-                                path: 'by-code',
-                                component: CodeInputComponent,
+                                path: 'scan',
+                                component: ModalTriggerComponent,
+                                data: {
+                                    component: ScanComponent,
+                                    backdropRedirection: '/',
+                                    dialogConfig: {
+                                        width: '600px',
+                                        maxWidth: '95vw',
+                                        maxHeight: '97vh',
+                                        panelClass: 'big-height-dialog',
+
+                                    } as MatDialogConfig,
+                                },
+                                resolve: {
+                                    product: ProductByCodeResolver,
+                                },
                             },
                         ],
                     },

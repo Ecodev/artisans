@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { productQuery, productsQuery, createProduct, deleteProducts, updateProduct } from './product.queries';
+import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
 import {
+    CreateProduct,
+    CreateProductVariables,
+    DeleteProducts,
+    LogicalOperator,
     Product,
     ProductInput,
     Products,
     ProductsVariables,
     ProductVariables,
-    CreateProduct,
-    CreateProductVariables,
-    DeleteProducts,
-    LogicalOperator,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
@@ -91,11 +91,13 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             code: '',
             description: '',
             pricePerUnit: '0',
+            supplier: '',
             supplierPrice: '0',
-            supplierReference: '0',
-            vatRate: '0',
-            unit: '0',
+            supplierReference: '',
+            vatRate: '0.077',
+            unit: '',
             quantity: '0',
+            margin: '0.20',
             remarks: '',
             isActive: true,
             verificationDate: null,
@@ -107,7 +109,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
-            code: [Validators.maxLength(100)],
         };
     }
 

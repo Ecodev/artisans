@@ -42,7 +42,7 @@ class Product extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
+     * @ORM\Column(type="decimal", precision=10, scale=3, options={"default" = "0.000"})
      */
     private $vatRate = '0';
 
@@ -52,6 +52,13 @@ class Product extends AbstractModel
      * @ORM\Column(type="string", length=10, options={"default" = ""})
      */
     private $unit = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=191, options={"default" = ""})
+     */
+    private $supplier = '';
 
     /**
      * @var string
@@ -353,5 +360,25 @@ class Product extends AbstractModel
     public function setMargin(string $margin): void
     {
         $this->margin = $margin;
+    }
+
+    /**
+     * Name of supplier
+     *
+     * @return string
+     */
+    public function getSupplier(): string
+    {
+        return $this->supplier;
+    }
+
+    /**
+     * Name of supplier
+     *
+     * @param string $supplier
+     */
+    public function setSupplier(string $supplier): void
+    {
+        $this->supplier = $supplier;
     }
 }

@@ -16,6 +16,8 @@ export const productMetaFragment = gql`
         unit
         vatRate
         quantity
+        margin
+        supplier
         supplierPrice
         supplierReference
         creditAccount {

@@ -115,3 +115,10 @@ mat-checkbox[wrap] {
 .mat-snack-bar-container {
     margin-top: 88px !important;
 }
+
+// Override mat-suffix container to apply an horizontal layout
+.mat-form-field-suffix {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

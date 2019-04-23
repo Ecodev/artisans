@@ -6,7 +6,7 @@
                 <div class="mat-body-2">Dernière vérification</div>
                 <div class="mat-body-1">{{ form.get('verificationDate').value | date: 'longDate' }}</div>
             </div>
-            <button mat-flat-button color="primary" (click)="verify()" *ngIf="data.model.id && showVerified()">
+            <button mat-flat-button color="primary" (click)="verify()" *ngIf="data.model.id">
                 Marquer comme vérifié
             </button>
         </div>
@@ -41,26 +41,12 @@
                                 </mat-form-field>
 
                                 <mat-form-field>
-                                    <input matInput formControlName="code" (change)="update()">
+                                    <input matInput maxlength="10" formControlName="code" (change)="update()">
                                     <mat-label>Code</mat-label>
                                     <mat-error *ngIf="form.get('code').hasError('maxlength')">
                                         Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
                                     </mat-error>
                                     <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
-                                </mat-form-field>
-
-                                <natural-select-enum enumName="ProductState"
-                                                 formControlName="state"
-                                                 (selectionChange)="update()"
-                                                 placeholder="État"
-                                ></natural-select-enum>
-
-                                <mat-form-field>
-                                    <mat-label>Prix d'achat</mat-label>
-                                    <input matInput type="number" step="0.01" min="0" formControlName="purchasePrice" (change)="update()">
-                                    <div matSuffix>CHF</div>
-                                    <mat-error *ngIf="form.get('purchasePrice').hasError('required')">Requis</mat-error>
-                                    <mat-error *ngIf="form.get('purchasePrice').hasError('min')">Le montant doit être positif</mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -81,37 +67,71 @@
                             ></textarea>
                         </mat-form-field>
 
+                        <mat-form-field>
+                            <mat-label>Quantité en stock</mat-label>
+                            <input matInput type="number" required="required" step="0.01" min="0" formControlName="quantity" (change)="update()">
+                            <div matSuffix>{{ data.model.unit }}</div>
+                            <mat-error *ngIf="form.get('quantity').hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
 
                         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
-                            <h2 class="mat-title no-margin" fxFlex>Réservation</h2>
+                            <h2 class="mat-title no-margin" fxFlex>Prix</h2>
                             <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
                         </div>
 
-                        <mat-form-field>
-                            <mat-label>Prix initial</mat-label>
-                            <input matInput type="number" step="0.01" formControlName="initialPrice" (change)="update()">
-                            <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('initialPrice').hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Prix périodique</mat-label>
-                            <input matInput type="number" step="0.01" formControlName="periodicPrice" (change)="update()">
-                            <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('periodicPrice').hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <natural-select *ngIf="!isSelfApproved()"
-                                    formControlName="creditAccount"
-                                    placeholder="Compte à créditer lors de la réservation"
-                                    [hierarchicSelectorConfig]="accountHierarchicConfig"
-                                    (selectionChange)="update()"
-                                    [showIcon]="false"
-                                    [navigateTo]="['/admin/account', form.get('creditAccount').value?.id]"
+                        <natural-select
+                                formControlName="creditAccount"
+                                placeholder="Compte à créditer lors de l'achat"
+                                [hierarchicSelectorConfig]="accountHierarchicConfig"
+                                (selectionChange)="update()"
+                                [showIcon]="false"
+                                [navigateTo]="['/admin/account', form.get('creditAccount').value?.id]"
                         ></natural-select>
+
+                        <mat-form-field>
+                            <mat-label>Marge de profit</mat-label>
+                            <mat-select (selectionChange)="update()" formControlName="margin" required="required">
+                                <mat-option *ngFor="let item of availableMargin" [value]="item">
+                                    {{ item | percent }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.get('margin').hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Taux de TVA</mat-label>
+                            <mat-select (selectionChange)="update()" formControlName="vatRate" required="required">
+                                <mat-option *ngFor="let item of availableVatRate" [value]="item">
+                                    {{ item | percent:'1.1-1' }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="form.get('vatRate').hasError('required')">Requis</mat-error>
+                            <mat-hint>Montant de la TVA : {{ data.model.vatRate * data.model.pricePerUnit | currency : 'CHF' }}</mat-hint>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Unité</mat-label>
+                            <input matInput maxlength="10" formControlName="unit" (change)="update()">
+                            <mat-error *ngIf="form.get('unit').hasError('maxlength')">
+                                Maximum {{form.get('unit').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('unit').hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Prix par unité (TTC)</mat-label>
+                            <input matInput type="number" required="required" step="0.01" min="0" formControlName="pricePerUnit" (change)="update()">
+                            <div matSuffix>CHF</div>
+                            <button mat-button matSuffix mat-icon-button matTooltip="Utiliser le prix suggéré" (click)="form.get('pricePerUnit').setValue(calculateSuggestedPricePerUnit()); update()">
+                                <mat-icon>reply</mat-icon>
+                            </button>
+                            <mat-error *ngIf="form.get('pricePerUnit').hasError('required')">Requis</mat-error>
+                            <mat-hint>Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
+                        </mat-form-field>
 
                     </div>
                 </div>
@@ -120,7 +140,30 @@
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-                        REMOVE ME AND RE-LAYOUT THE PAG
+                        <h2 class="mat-title">Fournisseur</h2>
+
+                        <mat-form-field>
+                            <mat-label>Nom du fournisseur</mat-label>
+                            <input matInput formControlName="supplier" (change)="update()">
+                            <mat-error *ngIf="form.get('supplier').hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Prix payé au fournisseur</mat-label>
+                            <input matInput type="number" required="required" step="0.01" min="0" formControlName="supplierPrice" (change)="update()">
+                            <div matSuffix>CHF</div>
+                            <mat-error *ngIf="form.get('supplierPrice').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('supplierPrice').hasError('min')">Le montant doit être positif</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Code produit chez le fournisseur</mat-label>
+                            <input matInput maxlength="10" formControlName="supplierReference" (change)="update()">
+                            <mat-error *ngIf="form.get('supplierReference').hasError('maxlength')">
+                                Maximum {{form.get('supplierReference').errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                        </mat-form-field>
+
                     </div>
                     <div fxFlex="33" fxLayout="column">
 

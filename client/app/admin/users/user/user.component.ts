@@ -35,6 +35,7 @@ export class UserComponent
     public showFamilyTab;
     public UserService = UserService;
 
+    public transactionLinesVariables;
     public familyVariables;
 
     constructor(alertService: NaturalAlertService,
@@ -60,6 +61,7 @@ export class UserComponent
                 });
 
                 this.familyVariables = UserService.getFamilyVariables(this.data.model);
+                this.transactionLinesVariables = this.getTransactionQueryVariables();
             }
 
         });
@@ -68,6 +70,10 @@ export class UserComponent
 
     public getTransactionQueryVariables(): TransactionLinesVariables {
         const account = this.data.model.account;
+        if (!account) {
+            return {};
+        }
+
         return {
             filter: {
                 groups: [

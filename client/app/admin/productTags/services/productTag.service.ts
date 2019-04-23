@@ -38,9 +38,6 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
             deleteProductTags);
     }
 
-    public static readonly SERVICE = '6007';
-    public static readonly STORAGE = '6008';
-
     protected getDefaultForServer(): ProductTagInput {
         return {
             name: '',

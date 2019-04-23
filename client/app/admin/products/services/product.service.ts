@@ -5,7 +5,6 @@ import {
     CreateProduct,
     CreateProductVariables,
     DeleteProducts,
-    LogicalOperator,
     Product,
     ProductInput,
     Products,
@@ -18,7 +17,6 @@ import { Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormValidators, NaturalAbstractModelService, NaturalQueryVariablesManager } from '@ecodev/natural';
-import { ProductTagService } from '../../productTags/services/productTag.service';
 
 @Injectable({
     providedIn: 'root',
@@ -33,28 +31,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     UpdateProductVariables,
     DeleteProducts> {
 
-    public static readonly membershipServices: ProductsVariables = {
-        filter: {
-            groups: [
-                {
-                    conditions: [
-                        {
-                            productTags: {have: {values: [ProductTagService.SERVICE]}},
-                        },
-                    ],
-                },
-                {
-                    groupLogic: LogicalOperator.OR,
-                    conditions: [
-                        {
-                            productTags: {have: {values: [ProductTagService.STORAGE]}},
-                        },
-                    ],
-                },
-            ],
-        },
-    };
-
     constructor(apollo: Apollo) {
         super(apollo,
             'product',
@@ -63,26 +39,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             createProduct,
             updateProduct,
             deleteProducts);
-    }
-
-    public static getFiltersByTagId(tagId): ProductsVariables {
-        return {filter: {groups: [{conditions: [{productTags: {have: {values: [tagId]}}}]}]}};
-    }
-
-    public static adminByTag(tagId): ProductsVariables {
-        return {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                productTags: {have: {values: [tagId]}},
-                            },
-                        ],
-                    },
-                ],
-            },
-        };
     }
 
     protected getDefaultForServer(): ProductInput {

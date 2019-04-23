@@ -11,7 +11,6 @@ import { UsersComponent } from './users/users/users.component';
 import { UserComponent } from './users/user/user.component';
 import { UserResolver } from './users/services/user.resolver';
 import { UserService } from './users/services/user.service';
-import { ProductService } from './products/services/product.service';
 import { ProductTagsComponent } from './productTags/productTags/productTags.component';
 import { ProductTagComponent } from './productTags/productTag/productTag.component';
 import { ProductTagResolver } from './productTags/services/productTag.resolver';
@@ -30,7 +29,6 @@ import { TransactionTagResolver } from './transactionTags/services/transactionTa
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
-import { UsageProductService } from './products/services/usage-product.service';
 
 const routes: Routes = [
         {
@@ -46,114 +44,6 @@ const routes: Routes = [
                 {
                     path: 'product',
                     children: [
-                        {
-                            path: 'services',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Cotisations',
-                                contextVariables: ProductService.membershipServices,
-                            },
-                        },
-                        {
-                            path: 'sup',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Stand up paddle',
-                                contextVariables: ProductService.getFiltersByTagId(6000),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'planche',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Planches',
-                                contextVariables: ProductService.getFiltersByTagId(6001),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'canoe',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Canoës',
-                                contextVariables: ProductService.getFiltersByTagId(6002),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'kayak',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Kayaks',
-                                contextVariables: ProductService.getFiltersByTagId(6003),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'aviron',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Aviron',
-                                contextVariables: ProductService.getFiltersByTagId(6004),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'voile-legere',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Voile légère',
-                                contextVariables: ProductService.getFiltersByTagId(6005),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'voile-lestee',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Voile lestée',
-                                contextVariables: ProductService.getFiltersByTagId(6006),
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate'],
-                            },
-                        },
-                        {
-                            path: 'armoire',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Armoires',
-                                contextColumns: ['image', 'name', 'code', 'date', 'verificationDate', 'usage'],
-                                contextVariables: ProductService.adminByTag(6009),
-                                contextService: UsageProductService,
-                            },
-                        },
-                        {
-                            path: 'casier',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Casiers',
-                                contextVariables: ProductService.adminByTag(6010),
-                                contextService: UsageProductService,
-                            },
-                        },
-                        {
-                            path: 'flotteur',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Flotteurs',
-                                contextVariables: ProductService.adminByTag(6011),
-                                contextService: UsageProductService,
-                            },
-                        },
-                        {
-                            path: 'ratelier',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Râteliers WBC',
-                                contextVariables: ProductService.adminByTag(6016),
-                                contextService: UsageProductService,
-                            },
-                        },
                         {
                             path: 'new',
                             component: ProductComponent,
@@ -361,7 +251,7 @@ const routes: Routes = [
                     // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     path: 'transaction-tag',
                     component: TransactionTagsComponent,
-                    data: {title: 'Tags'},
+                    data: {title: 'Tags de transactions'},
                 },
                 {
                     path: 'transaction-tag',

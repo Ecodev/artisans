@@ -23,7 +23,6 @@ import { TransactionTagsComponent } from './transactionTags/transactionTags/tran
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { TransactionLinesComponent } from './transactions/transactionLines/transactionLines.component';
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
-import { SelectAdminOnlyModalComponent } from '../shared/components/select-admin-only-modal/select-admin-only-modal.component';
 import { ProfileModule } from '../profile/profile.module';
 import { ProductMetadataComponent } from './product-metadata/product-metadata.component';
 
@@ -47,7 +46,6 @@ import { ProductMetadataComponent } from './product-metadata/product-metadata.co
         TransactionTagsComponent,
         TransactionTagComponent,
         EditableTransactionLinesComponent,
-        SelectAdminOnlyModalComponent,
         ProductMetadataComponent,
     ],
     imports: [
@@ -59,7 +57,6 @@ import { ProductMetadataComponent } from './product-metadata/product-metadata.co
         ProfileModule,
     ],
     entryComponents: [
-        SelectAdminOnlyModalComponent,
     ],
 })
 export class AdminModule {

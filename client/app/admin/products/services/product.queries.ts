@@ -56,31 +56,6 @@ export const productsQuery = gql`
     }
 ${productMetaFragment}`;
 
-export const usageProductsQuery = gql`
-    query UsageProducts($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {
-        products(filter: $filter, sorting: $sorting, pagination: $pagination) {
-            items {
-                id
-                name
-                code
-                pricePerUnit
-                unit
-                vatRate
-                quantity
-                supplierPrice
-                supplierReference
-                creationDate
-                updateDate
-            }
-            pageSize
-            pageIndex
-            length
-            totalPricePerUnit
-            totalSupplierPrice
-        }
-    }
-`;
-
 export const productQuery = gql`
     query Product($id: ProductID!) {
         product(id: $id) {

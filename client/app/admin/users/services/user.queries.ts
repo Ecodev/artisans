@@ -20,13 +20,12 @@ export const userFieldsFragment = gql`
         receivesNewsletter
         role
         status
-        hasInsurance
-        swissSailing
-        swissSailingType
-        swissWindsurfType
         mobilePhone
         door
         code
+        companyShares
+        companySharesDate
+        url
         firstLogin
         lastLogin
         canOpenDoor

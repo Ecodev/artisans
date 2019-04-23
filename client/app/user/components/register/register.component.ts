@@ -63,8 +63,8 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     protected doSubmit(): void {
         this.sending = true;
         const mutation = gql`
-            mutation Register($email: Email!, $hasInsurance: Boolean!, $termsAgreement: Boolean!) {
-                register(email: $email, hasInsurance: $hasInsurance, termsAgreement: $termsAgreement)
+            mutation Register($email: Email!, $termsAgreement: Boolean!) {
+                register(email: $email, termsAgreement: $termsAgreement)
             }
         `;
 

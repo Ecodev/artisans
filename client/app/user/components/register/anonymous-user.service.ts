@@ -20,7 +20,6 @@ export class AnonymousUserService extends UserService {
 
     protected getDefaultForClient(): Literal {
         return {
-            hasInsurance: false,
             termsAgreement: false,
         };
     }
@@ -28,7 +27,6 @@ export class AnonymousUserService extends UserService {
     public getFormValidators(): FormValidators {
         return {
             email: [Validators.required, Validators.email],
-            hasInsurance: [],
             termsAgreement: [],
         };
     }

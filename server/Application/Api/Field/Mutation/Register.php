@@ -22,7 +22,6 @@ abstract class Register implements FieldInterface
             'description' => 'First step to register as a new user.',
             'args' => [
                 'email' => Type::nonNull(_types()->get('Email')),
-                'hasInsurance' => Type::nonNull(Type::boolean()),
                 'termsAgreement' => Type::nonNull(Type::boolean()),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
@@ -48,7 +47,6 @@ abstract class Register implements FieldInterface
                 }
 
                 $user->setEmail($args['email']);
-                $user->setHasInsurance($args['hasInsurance']);
                 $user->setTermsAgreement($args['termsAgreement']);
 
                 if ($existingUser && $user->getLogin()) {

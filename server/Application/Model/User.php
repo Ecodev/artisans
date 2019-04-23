@@ -14,6 +14,7 @@ use Application\Traits\HasDoorAccess;
 use Application\Traits\HasIban;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasRemarks;
+use Application\Traits\HasUrl;
 use Application\Utility;
 use Cake\Chronos\Chronos;
 use Cake\Chronos\Date;
@@ -54,6 +55,7 @@ class User extends AbstractModel
     use HasAddress;
     use HasIban;
     use HasCode;
+    use HasUrl;
 
     /**
      * @var User
@@ -153,6 +155,12 @@ class User extends AbstractModel
     private $companyShares = 0;
 
     /**
+     * @var null|Date
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $companySharesDate;
+
+    /**
      * @var string
      * @ORM\Column(type="string", length=25, options={"default" = ""})
      */
@@ -165,24 +173,6 @@ class User extends AbstractModel
     private $mobilePhone = '';
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=25, options={"default" = ""})
-     */
-    private $swissSailing = '';
-
-    /**
-     * @var string
-     * @ORM\Column(type="SwissSailingType", nullable=true)
-     */
-    private $swissSailingType;
-
-    /**
-     * @var string
-     * @ORM\Column(type="SwissWindsurfType", nullable=true)
-     */
-    private $swissWindsurfType;
-
-    /**
      * @var null|Date
      * @ORM\Column(type="date", nullable=true)
      */
@@ -193,12 +183,6 @@ class User extends AbstractModel
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
     private $termsAgreement = false;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
-    private $hasInsurance = false;
 
     /**
      * @var bool
@@ -630,22 +614,6 @@ class User extends AbstractModel
     }
 
     /**
-     * @return bool
-     */
-    public function hasInsurance(): bool
-    {
-        return $this->hasInsurance;
-    }
-
-    /**
-     * @param bool $hasInsurance
-     */
-    public function setHasInsurance(bool $hasInsurance): void
-    {
-        $this->hasInsurance = $hasInsurance;
-    }
-
-    /**
      * @return null|Chronos
      */
     public function getWelcomeSessionDate(): ?Chronos
@@ -715,72 +683,6 @@ class User extends AbstractModel
     public function setSex(int $sex): void
     {
         $this->sex = $sex;
-    }
-
-    /**
-     * Get the Swiss Sailing licence number
-     *
-     * @return string
-     */
-    public function getSwissSailing(): string
-    {
-        return $this->swissSailing;
-    }
-
-    /**
-     * @param string $swissSailing
-     */
-    public function setSwissSailing(string $swissSailing): void
-    {
-        $this->swissSailing = $swissSailing;
-    }
-
-    /**
-     * Get the Swiss Sailing licence type
-     *
-     * @API\Field(type="?SwissSailingType")
-     *
-     * @return null|string
-     */
-    public function getSwissSailingType(): ?string
-    {
-        return $this->swissSailingType;
-    }
-
-    /**
-     * Set the Swiss Sailing licence type
-     *
-     * @API\Input(type="?SwissSailingType")
-     *
-     * @param null|string $swissSailingType
-     */
-    public function setSwissSailingType(?string $swissSailingType): void
-    {
-        $this->swissSailingType = $swissSailingType;
-    }
-
-    /**
-     * Get the Swiss Windsurf licence type
-     *
-     * @API\Field(type="?SwissWindsurfType")
-     *
-     * @return null|string
-     */
-    public function getSwissWindsurfType(): ?string
-    {
-        return $this->swissWindsurfType;
-    }
-
-    /**
-     * Set the Swiss Windsurf licence type
-     *
-     * @API\Input(type="?SwissWindsurfType")
-     *
-     * @param null|string $swissWindsurfType
-     */
-    public function setSwissWindsurfType(?string $swissWindsurfType): void
-    {
-        $this->swissWindsurfType = $swissWindsurfType;
     }
 
     /**
@@ -973,5 +875,25 @@ class User extends AbstractModel
     public function setCompanyShares(int $companyShares): void
     {
         $this->companyShares = $companyShares;
+    }
+
+    /**
+     * The date when the shares were received
+     *
+     * @return null|Date
+     */
+    public function getCompanySharesDate(): ?Date
+    {
+        return $this->companySharesDate;
+    }
+
+    /**
+     * The date when the shares were received
+     *
+     * @param null|Date $companySharesDate
+     */
+    public function setCompanySharesDate(?Date $companySharesDate): void
+    {
+        $this->companySharesDate = $companySharesDate;
     }
 }

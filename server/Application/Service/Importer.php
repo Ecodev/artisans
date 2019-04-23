@@ -201,9 +201,6 @@ EOT;
                   internal_remarks,
                   iban,
                   has_insurance,
-                  swiss_sailing,
-                  swiss_sailing_type,
-                  swiss_windsurf_type,
                   receives_newsletter,
                   role,
                   family_relationship,
@@ -229,9 +226,6 @@ EOT;
                   :remarks,
                   :iban,
                   :has_insurance,
-                  :swiss_sailing,
-                  :swiss_sailing_type,
-                  :swiss_windsurf_type,
                   :receives_newsletter,
                   :role,
                   :family_relationship,
@@ -296,39 +290,6 @@ EOT;
 
             $insurances = $this->members[$user['family_uid']]['assurances'];
             $insert->bindValue(':has_insurance', !empty($insurances) && mb_strpos($insurances, 'RC privée') !== false);
-
-            $insert->bindValue(':swiss_sailing', !empty($user['emmy_swiss_sailing']) ? $user['emmy_swiss_sailing'] : '');
-            switch ($user['emmy_swiss_sailing_type']) {
-                case 'A':
-                    $swissSailingType = 'active';
-
-                    break;
-                case 'P':
-                    $swissSailingType = 'passive';
-
-                    break;
-                case 'J':
-                    $swissSailingType = 'junior';
-
-                    break;
-                default:
-                    $swissSailingType = null;
-            }
-            $insert->bindValue(':swiss_sailing_type', $swissSailingType);
-
-            switch ($user['emmy_swiss_windsurf_type']) {
-                case 'A':
-                    $swissWindsurfType = 'active';
-
-                    break;
-                case 'P':
-                    $swissWindsurfType = 'passive';
-
-                    break;
-                default:
-                    $swissWindsurfType = null;
-            }
-            $insert->bindValue(':swiss_windsurf_type', $swissWindsurfType);
 
             $insert->bindValue(':receives_newsletter', !empty($user['email']) ? 1 : 0);
 

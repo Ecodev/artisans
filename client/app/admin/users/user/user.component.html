@@ -101,23 +101,6 @@
                                         [showIcon]="false"
                         ></natural-select>
 
-                        <mat-form-field fxFlex>
-                            <mat-label>Swiss sailling</mat-label>
-                            <input matInput formControlName="swissSailing" (change)="update()">
-                        </mat-form-field>
-
-                        <natural-select-enum enumName="SwissSailingType"
-                                             formControlName="swissSailingType"
-                                             (selectionChange)="update()"
-                                             placeholder="Licence swiss sailing"
-                        ></natural-select-enum>
-
-                        <natural-select-enum enumName="SwissWindsurfType"
-                                             formControlName="swissWindsurfType"
-                                             (selectionChange)="update()"
-                                             placeholder="Licence swiss windsurfing"
-                        ></natural-select-enum>
-
                         <div fxLayout="row wrap" fxLayoutGap="20px">
                             <natural-select-enum fxFlex
                                                  enumName="BillingType"
@@ -141,18 +124,65 @@
 
                         <div class="mat-body-1" fxLayout="column" fxLayoutGap="20px">
 
-                            <!-- Has Insurance -->
-                            <mat-checkbox formControlName="hasInsurance" (change)="update()">
-                                Assurance RC
-                            </mat-checkbox>
-
                             <!-- Newsletter -->
                             <mat-checkbox formControlName="receivesNewsletter" (change)="update()">
                                 Abonné à la newsletter
                             </mat-checkbox>
 
+                            <mat-slide-toggle fxFlex formControlName="door" (change)="update()" class="margin-bottom">
+                                Porte
+                            </mat-slide-toggle>
                         </div>
 
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+                        <h2 class="mat-title">Coopérateur</h2>
+                        <mat-form-field fxFlex>
+                            <mat-label>Lien doc. sur Drive</mat-label>
+                            <input matInput type="url" formControlName="url" (change)="update()">
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex>
+                            <mat-label>Nº coopérateur</mat-label>
+                            <input matInput formControlName="code" (change)="update()">
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex>
+                            <mat-label>Nombres de part sociales</mat-label>
+                            <input matInput type="number" step="1" min="0" formControlName="companyShares" (change)="update()">
+                        </mat-form-field>
+
+                        <mat-form-field fxFlex>
+                            <mat-label>Parts sociales reçue le</mat-label>
+                            <input matInput formControlName="companySharesDate" [matDatepicker]="pickerCompanySharesDate" (dateChange)="update()">
+                            <mat-datepicker-toggle matSuffix [for]="pickerCompanySharesDate"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerCompanySharesDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <mat-divider *ngIf="data.model.id"></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
+
+                    <div fxFlex="66" fxLayout="column">
+                        <h2 class="mat-title">Tags</h2>
+                        <natural-relations [main]="data.model"
+                                           [service]="userTagService"
+                                           [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
+                                           [hideSearch]="true"
+                                           placeholder="Ajouter un tag"
+                        >
+                            <ng-template let-item="item">
+                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                    <!-- TODO : link to users list filtred by tag -->
+                                    <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
+                                    <natural-table-button [navigate]="['/admin/user', item.id]" [label]="item.name"></natural-table-button>
+                                </div>
+                            </ng-template>
+                        </natural-relations>
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
@@ -175,38 +205,6 @@
                             ></textarea>
                         </mat-form-field>
 
-                    </div>
-                </div>
-
-                <mat-divider *ngIf="data.model.id"></mat-divider>
-
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px" *ngIf="data.model.id">
-                    <div fxFlex="45" fxLayout="column">
-                        REMOVE ME AND RE-LAYOUT THE PAG
-                    </div>
-
-                    <div fxFlex="40" fxLayout="column">
-                        <h2 class="mat-title">Tags</h2>
-                        <natural-relations [main]="data.model"
-                                           [service]="userTagService"
-                                           [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                           [hideSearch]="true"
-                                           placeholder="Ajouter un tag"
-                        >
-                            <ng-template let-item="item">
-                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <!-- TODO : link to users list filtred by tag -->
-                                    <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                    <natural-table-button [navigate]="['/admin/user', item.id]" [label]="item.name"></natural-table-button>
-                                </div>
-                            </ng-template>
-                        </natural-relations>
-                    </div>
-
-                    <div fxFlex="10" fxLayout="column">
-                        <mat-slide-toggle fxFlex formControlName="door" (change)="update()" class="margin-bottom">
-                            Porte
-                        </mat-slide-toggle>
                     </div>
                 </div>
 

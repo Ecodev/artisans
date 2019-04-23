@@ -20,7 +20,6 @@ export class FamilyUserService extends UserService {
 
     protected getDefaultForClient() {
         return {
-            hasInsurance: false,
             termsAgreement: false,
             familyRelationship: Relationship.partner,
         };
@@ -29,7 +28,6 @@ export class FamilyUserService extends UserService {
     public getFormValidators(): FormValidators {
 
         const validators = {
-            hasInsurance: [],
             termsAgreement: [],
             locality: [],
             street: [],

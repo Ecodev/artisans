@@ -110,9 +110,11 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, balance, iban, name) 
 (10106, 10105, NULL, 'equity', '2800', 35000.00, '', 'Capital social');
 
 
-REPLACE INTO product_tag (id, name) VALUES
-(6000, 'Boulangerie'),
-(6001, 'Légumes');
+REPLACE INTO product_tag (id, name, color) VALUES
+(6000, 'Boulangerie', '#c67347'),
+(6001, 'Fruits et légumes', '#c83023'),
+(6002, 'Céréales', '#d1b075'),
+(6003, 'Produits laitiers', '#58b5e6');
 
 REPLACE INTO image (id, filename, width, height) VALUES
 (5000, 'chat1.jpg', 1000, 482),
@@ -184,12 +186,23 @@ REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, e
 (11002, -1001, -1001, -1005, 'reset_password', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
-(12000, -1000, -1000, 'Moniteur voile', '#0000FF'),
-(12001, -1000, -1000, 'Moniteur SUP', '#FF0000');
+(12000, -1000, -1000, 'Secteur EPI', '#cD4A50'),
+(12001, -1000, -1000, 'Secteur PROD', '#cD4A50'),
+(12002, -1000, -1000, 'Secteur COOP', '#cD4A50'),
+(12003, -1000, -1000, 'Secteur MAG', '#cD4A50'),
+(12004, -1000, -1000, 'Secteur ADMIN', '#cD4A50'),
+(12005, -1000, -1000, 'Secteur FIN', '#cD4A50'),
+(12006, -1000, -1000, 'Equipe 1', '#A4CE4C'),
+(12007, -1000, -1000, 'Equipe 2', '#A4CE4C'),
+(12008, -1000, -1000, 'Equipe 3', '#A4CE4C'),
+(12009, -1000, -1000, 'Equipe 4', '#A4CE4C');
 
 REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 (12000, -1008),
-(12001, -1009);
+(12001, -1009),
+(12006, -1008),
+(12007, -1009),
+(12007, -1010);
 
 REPLACE INTO product_metadata (id, product_id, name, value) VALUES
 (13000, 3000, 'Largeur', '1405 mm'),

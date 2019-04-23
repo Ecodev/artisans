@@ -7,7 +7,7 @@
             width: 80px;
             text-align: right;
 
-            &.mat-body-2 {
+            &:first-child {
                 text-align: left;
             }
         }

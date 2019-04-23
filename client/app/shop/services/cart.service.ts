@@ -114,6 +114,11 @@ export class CartService {
         }
     }
 
+    public empty() {
+        this.cart = [];
+        CartService.saveCart(this.cart);
+    }
+
     public setQuantity(product: CartLine['product'], quantity: number) {
 
         const line = this.cart.find(l => l.product.id === product.id);

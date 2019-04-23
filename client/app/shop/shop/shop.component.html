@@ -1,6 +1,44 @@
-<div fxFlex fxLayout="column">
+<div fxFlex fxLayout="column" [style.max-width.px]="700" style="margin:auto">
 
     <router-outlet></router-outlet>
+
+    <div class="margin" *ngIf="cartService?.cart?.length" fxLayout="column" fxLayoutGap="10px">
+        <h1 class="mat-title">Panier d'achats</h1>
+
+        <mat-nav-list>
+            <mat-list-item *ngFor="let line of cartService.cart" [routerLink]="['/product', line.product.code, {quantity: line.quantity}]">
+                <app-file [model]="line.product.image" [height]="70" [style.width.px]="70" matListAvatar></app-file>
+                <div matLine style="white-space: normal;">{{ line.product.name }}</div>
+                <div matLine></div>
+                <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start end" style="padding-left:10px;white-space: nowrap">
+                    <div class="price mat-body-2">{{ line.total | currency : 'CHF'}}</div>
+                    <div>{{ line.quantity }} {{ line.product.unit || 'x' }}</div>
+                </div>
+            </mat-list-item>
+        </mat-nav-list>
+
+        <mat-divider></mat-divider>
+
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start end" class="mat-body-1" class="padding totals">
+            <div>
+                <span class="mat-body-2">Total HT :</span>
+                <span>{{CartService.totalTaxExc | currency : 'CHF' }}</span>
+            </div>
+            <div>
+                <span class="mat-body-2">TVA :</span>
+                <span>{{CartService.totalTaxes | currency : 'CHF' }}</span>
+            </div>
+            <div>
+                <span class="mat-body-2">Total TTC :</span>
+                <span>{{CartService.totalTaxInc | currency : 'CHF' }}</span>
+            </div>
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="20px">
+            <button mat-flat-button color="primary">Valider et payer</button>
+            <button mat-stroked-button>Vider le panier</button>
+        </div>
+    </div>
 
 </div>
 

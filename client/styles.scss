@@ -122,3 +122,11 @@ mat-checkbox[wrap] {
     flex-direction: row;
     align-items: center;
 }
+
+.big-height-dialog .mat-dialog-content {
+    max-height: 85vh;
+}
+
+.price {
+    //font-family: Georgia;
+}

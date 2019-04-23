@@ -1,3 +1,15 @@
 :host {
     flex: 1;
+
+    .totals {
+        & > div > span {
+            display: inline-block;
+            width: 80px;
+            text-align: right;
+
+            &.mat-body-2 {
+                text-align: left;
+            }
+        }
+    }
 }

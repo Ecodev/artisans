@@ -1,19 +1,68 @@
-<h2 mat-dialog-title>{{ data.model.name }}</h2>
+<mat-dialog-content fxLayout="column">
 
-<mat-dialog-content>
+    <div *ngIf="!data.model" class="mat-subheading-2">
+        Oops, aucun article ne correspond à la référence recherchée : {{ routeSnapshot.params.code }}
+    </div>
 
-    <app-file [model]="data.model.image" [height]="300"></app-file>
-    <div class="mat-display-1"> {{ data.model.pricePerUnit | currency : 'CHF' }} / {{ data.model.unit }}</div>
-    <div class="mat-headline" [innerHTML]="data.model.description"></div>
-    <div class="mat-subheading-2" [innerHTML]="data.model.remarks"></div>
+    <div *ngIf="data.model" fxLayout="column" fxLayoutGap="20px">
+        <app-file [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
+
+        <div fxLayout="row" fxLayoutGap="10px">
+            <h2 class="mat-headline no-margin-bottom">{{ data.model.name }}</h2>
+            <div fxFlex></div>
+            <div class="mat-headline price no-margin-bottom">
+                {{ CartService.getPriceTaxInc(data.model, 1) | currency : 'CHF' }}
+                <span *ngIf="data.model.unit" class="mat-body-2"> / {{ data.model.unit }}</span>
+            </div>
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+            <mat-form-field [style.width.px]="90" [style.padding-top.em]="1.34375">
+                <mat-label>Quantité</mat-label>
+                <input matInput type="number" [formControl]="quantityForm">
+                <div matSuffix *ngIf="data.model.unit">{{ data.model.unit }}</div>
+                <mat-error *ngIf="quantityForm.hasError('required')">Requis</mat-error>
+            </mat-form-field>
+            <div fxLayout="column" fxLayoutGap="10px">
+                <button mat-icon-button mat-raised-button *ngIf="!data.model.unit" (click)="increase()">
+                    <natural-icon name="add"></natural-icon>
+                </button>
+                <button mat-icon-button mat-raised-button *ngIf="!data.model.unit" (click)="decrease()" [disabled]="quantityForm.value <= 0">
+                    <natural-icon name="remove"></natural-icon>
+                </button>
+            </div>
+            <div fxFlex></div>
+
+            <div class="mat-display-1 price no-margin" *ngIf="quantityForm.value !== 1">{{ price | currency : 'CHF' }}</div>
+
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="mat-subheading-2" [innerHTML]="data.model.description"></div>
+        <div class="mat-body-1" [innerHTML]="data.model.remarks"></div>
+    </div>
 
 </mat-dialog-content>
 
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
-    <button mat-button mat-dialog-close>Fermer</button>
-    <button mat-button mat-dialog-close [routerLink]="['/admin/product', data.model.id]">Administration</button>
-    <button mat-dialog-close mat-flat-button color="primary" (click)="addToCart()">
-        <natural-icon name="add"></natural-icon>
-        Panier
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+    <button mat-button mat-dialog-close [routerLink]="['../../']">Fermer</button>
+
+    <div fxFlex></div>
+
+    <!--    <button mat-button mat-dialog-close [routerLink]="['/admin/product', data.model.id]">Administration</button>-->
+    <button mat-dialog-close mat-flat-button color="primary" (click)="addToCart()" [routerLink]="['../../']" *ngIf="!edit && data?.model" [disabled]="quantityForm.invalid">
+        Ajouter au panier
     </button>
+
+    <button mat-dialog-close mat-stroked-button color="warn" (click)="removeFromCart()" [routerLink]="['../../']" [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
+        Supprimer
+    </button>
+
+    <button mat-dialog-close mat-flat-button color="primary" (click)="updateCart()" [routerLink]="['../../']" [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
+        Mettre à jour
+    </button>
+
 </mat-dialog-actions>

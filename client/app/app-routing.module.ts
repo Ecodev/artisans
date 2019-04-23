@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
 import { FrontEndComponent } from './front-end/front-end.component';
@@ -45,7 +46,13 @@ export const routes: Routes = [
                                 component: ModalTriggerComponent,
                                 data: {
                                     component: ProductComponent,
-                                    width: 600,
+                                    backdropRedirection: '/',
+                                    dialogConfig : {
+                                        width: '600px',
+                                        maxWidth: '95vw',
+                                        maxHeight: '97vh',
+                                        panelClass: 'big-height-dialog',
+                                    } as MatDialogConfig
                                 },
                                 resolve: {
                                     product: ProductByCodeResolver,

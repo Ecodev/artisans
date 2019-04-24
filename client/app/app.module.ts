@@ -49,7 +49,6 @@ export class MyIntl extends TimeagoIntl {
         FrontEndComponent,
         BootLoaderComponent,
         ErrorComponent,
-        DialogTriggerComponent,
     ],
     imports: [
         BrowserModule,

@@ -62,7 +62,7 @@ export const routes: Routes = [
                                 component: DialogTriggerComponent,
                                 data: {
                                     component: ScanComponent,
-                                    backdropRedirection: '/',
+                                    escapeRouterLink: ['../../'],
                                     dialogConfig: {
                                         width: '600px',
                                         maxWidth: '95vw',

@@ -12,11 +12,6 @@
                 Ouvrir
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/admin" *ngIf="canAccessAdmin()" class="big-button">
-                <natural-icon name="administrator" [size]="70"></natural-icon>
-                Administration
-            </a>
-
             <mat-divider class="margin"></mat-divider>
 
             <div [style.max-width.px]="150">
@@ -37,6 +32,13 @@
                     Dépenses et remboursements
                 </a>
             </div>
+
+            <mat-divider class="margin"></mat-divider>
+
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/admin" *ngIf="canAccessAdmin()" class="big-button">
+                <natural-icon name="administrator" [size]="70"></natural-icon>
+                Administration
+            </a>
 
             <mat-divider class="margin"></mat-divider>
 

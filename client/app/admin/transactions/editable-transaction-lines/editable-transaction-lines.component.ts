@@ -16,7 +16,7 @@ export class EditableTransactionLinesComponent extends NaturalAbstractEditableLi
     @Input() transaction: Transaction['transaction'];
 
     public accountHierarchicConfig = AccountHierarchicConfiguration;
-    public columns = ['name', 'balance', 'debit', 'credit', 'isReconciled', 'product', 'transactionTag', 'remarks', 'remove'];
+    public columns = ['isReconciled', 'name', 'balance', 'debit', 'credit',  'product', 'transactionTag', 'remarks', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,
                 public transactionTagService: TransactionTagService,

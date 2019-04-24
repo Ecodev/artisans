@@ -25,10 +25,12 @@ import { ngfModule } from 'angular-file';
 import { AvatarModule } from 'ngx-avatar';
 import { TimeagoModule } from 'ngx-timeago';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
+import { TransactionsComponent } from '../../admin/transactions/transactions/transactions.component';
 import { AddressComponent } from '../components/address/address.component';
 import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
+import { DialogTriggerComponent } from '../components/modal-trigger/dialog-trigger.component';
 import { MoneyComponent } from '../components/money/money.component';
 import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
 import { TransactionAmountComponent } from '../components/transaction-amount/transaction-amount.component';
@@ -93,6 +95,8 @@ const declarations = [
     TransactionAmountComponent,
     AccountingDocumentsComponent,
     ParticleSwitchComponent,
+    TransactionsComponent,
+    DialogTriggerComponent
 ];
 
 const imports = [

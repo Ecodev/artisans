@@ -4,6 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ProductsComponent } from './products/products/products.component';
 import { ProductComponent } from './products/product/product.component';
 import { ProductResolver } from './products/services/product.resolver';
+import { TransactionsComponent } from './transactions/transactions/transactions.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagResolver } from './userTags/services/userTag.resolver';
@@ -36,6 +37,11 @@ const routes: Routes = [
             component: AdminComponent,
             canActivate: [AdministrationGuard],
             children: [
+                {
+                    path: '',
+                    pathMatch: 'full',
+                    redirectTo: '/admin/product'
+                },
                 {
                     path: 'product', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     component: ProductsComponent,
@@ -172,6 +178,11 @@ const routes: Routes = [
                             },
                         },
                     ],
+                },
+                {
+                    path: 'transaction', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: TransactionsComponent,
+                    data: {title: 'Transactions'},
                 },
                 {
                     path: 'transaction',

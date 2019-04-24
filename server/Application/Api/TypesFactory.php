@@ -27,6 +27,7 @@ class TypesFactory
             \Application\Api\Enum\AccountTypeType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,
             \Application\Api\Input\PaginationInputType::class,
+            \Application\Api\Input\OrderLineInputType::class,
             \Application\Api\MutationType::class,
             \Application\Api\Output\AllPermissionsType::class,
             \Application\Api\Output\CrudPermissionsListType::class,

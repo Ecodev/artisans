@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api;
 
 use Application\Api\Field\Mutation\ConfirmRegistration;
+use Application\Api\Field\Mutation\CreateOrder;
 use Application\Api\Field\Mutation\CreateTransaction;
 use Application\Api\Field\Mutation\LeaveFamily;
 use Application\Api\Field\Mutation\Login;
@@ -45,6 +46,7 @@ class MutationType extends ObjectType
             LeaveFamily::build(),
             CreateTransaction::build(),
             UpdateTransaction::build(),
+            CreateOrder::build(),
             Standard::buildMutation(Transaction::class)[2], // Only delete mutation
         ];
 

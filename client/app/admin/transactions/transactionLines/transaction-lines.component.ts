@@ -7,8 +7,8 @@ import { TransactionLineService } from '../services/transactionLine.service';
 
 @Component({
     selector: 'app-transaction-lines',
-    templateUrl: './transactionLines.component.html',
-    styleUrls: ['./transactionLines.component.scss'],
+    templateUrl: './transaction-lines.component.html',
+    styleUrls: ['./transaction-lines.component.scss'],
 })
 export class TransactionLinesComponent extends NaturalAbstractList<TransactionLines['transactionLines'], TransactionLinesVariables>
     implements OnInit {

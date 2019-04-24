@@ -19,11 +19,11 @@
         <mat-divider></mat-divider>
 
         <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start end" class="mat-body-1" class="padding totals">
-            <div>
+            <div *ngIf="CartService.totalTaxExc">
                 <span class="mat-body-2">Total HT :</span>
                 <span>{{CartService.totalTaxExc | currency : 'CHF' }}</span>
             </div>
-            <div>
+            <div *ngIf="CartService.totalTaxes">
                 <span class="mat-body-2">TVA :</span>
                 <span>{{CartService.totalTaxes | currency : 'CHF' }}</span>
             </div>

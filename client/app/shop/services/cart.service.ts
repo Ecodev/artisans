@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import Decimal from 'decimal.js';
 import { Product, Products } from '../../shared/generated-types';
 
 export interface CartLine {
@@ -26,43 +27,9 @@ export class CartService {
         }
     }
 
-    public static getTax(product: CartLine['product'], quantity: number): number {
-        const ht = CartService.getPriceTaxExc(product, quantity);
-        const tax = CartService.multiplyDecimal(Number(product.vatRate), 0.01);
-        return CartService.multiplyDecimal(ht, tax);
-    }
 
-    public static getPriceTaxExc(product: CartLine['product'], quantity: number): number {
-        return CartService.multiplyDecimal(Number(product.pricePerUnit), quantity);
-    }
-
-    public static getPriceTaxInc(product: CartLine['product'], quantity: number): number {
-        const ht = CartService.getPriceTaxExc(product, quantity);
-        const tax = CartService.getTax(product, quantity);
-        return ht + tax;
-    }
-
-    /**
-     * When 0.3999 * 100  we get 0.3989999999999995 due to floating imprecision
-     * To prevent that, first we multiply each number to get two integers and then we multiply them and re-divide
-     */
-    public static multiplyDecimal(nb1: number, nb2: number): number {
-
-        const precision1 = CartService.decimalCount(nb1);
-        const precision2 = CartService.decimalCount(nb2);
-        const precision = Math.max(precision1, precision2);
-
-        const multiplicator = Math.pow(10, precision); // transform number of digits into 10^digits
-
-        return ((nb1 * multiplicator) * (nb2 * multiplicator)) / (multiplicator * multiplicator);
-    }
-
-    public static decimalCount(number: number): number {
-        if (Math.floor(number) === number) {
-            return 0;
-        }
-
-        return number.toString().split('.')[1].length || 0;
+    public static getPriceTaxInc(product: CartLine['product'], quantity: number = 1): number {
+        return +Decimal.mul(product.pricePerUnit, quantity);
     }
 
     private static saveCart(cart) {
@@ -74,17 +41,14 @@ export class CartService {
 
         CartService.totalTaxes = 0;
         CartService.totalTaxExc = 0;
-        CartService.totalTaxInc = 0;
-        cart.forEach(line => {
-            const ht = this.getPriceTaxExc(line.product, line.quantity);
-            const tax = this.getTax(line.product, line.quantity);
-            const ttc = this.getPriceTaxInc(line.product, line.quantity);
+        CartService.totalTaxInc = cart.reduce((a, b) => a + b.total, 0);
 
-            CartService.totalTaxExc += ht;
-            CartService.totalTaxes += tax;
-            CartService.totalTaxInc += ttc;
+        // this.anyService.computeTotals({lines : cart});.subscribe(res => {
+        //     CartService.totalTaxExc += res.ht;
+        //     CartService.totalTaxes += res.tax;
+        //     CartService.totalTaxInc += res.ttc;
+        // });
 
-        });
     }
 
     public add(product: CartLine['product'], quantity) {

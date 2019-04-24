@@ -45,6 +45,7 @@
         "apollo-link-schema": "^1.1.2",
         "apollo-upload-client": "^10.0.0",
         "core-js": "^2.6.0",
+        "decimal.js": "^10.1.1",
         "graphql": "^14.0.2",
         "graphql-tag": "^2.10.0",
         "graphql-tools": "^4.0.3",

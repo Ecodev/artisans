@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { userMetaFragment } from '../../../shared/queries/fragments';
+import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
 
 export const productMetaFragment = gql`
     fragment productMeta on Product {
@@ -60,9 +60,13 @@ export const productQuery = gql`
     query Product($id: ProductID!) {
         product(id: $id) {
             ...productMeta
+            permissions {
+                ...permissions
+            }
         }
     }
     ${productMetaFragment}
+    ${permissionsFragment}
 `;
 
 export const createProduct = gql`

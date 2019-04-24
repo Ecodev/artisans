@@ -1,4 +1,4 @@
-<natural-sidenav-container fxFlex name="dashboardMenu" style="height:600px;">
+<natural-sidenav-container fxFlex name="dashboardMenu">
     <natural-sidenav>
         <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center" class="margin">
 
@@ -48,7 +48,7 @@
     </natural-sidenav>
 
     <natural-sidenav-content>
-        <div class="body" fxLayout="column">
+        <div fxFlex fxLayout="column">
             <router-outlet></router-outlet>
         </div>
     </natural-sidenav-content>

@@ -5,7 +5,6 @@ import { UserService } from '../admin/users/services/user.service';
 import { DoorService } from '../door/services/door.service';
 
 @Component({
-    selector: 'app-dashboard',
     templateUrl: './front-end.component.html',
     styleUrls: ['./front-end.component.scss'],
 

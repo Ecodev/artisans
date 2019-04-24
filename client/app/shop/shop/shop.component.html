@@ -1,8 +1,24 @@
-<div fxFlex fxLayout="column" [style.max-width.px]="700" style="margin:auto">
+<div fxFlex fxLayout="column" class="padding">
 
-    <router-outlet></router-outlet>
+    <div fxFlex fxLayout="column" fxLayoutAlign="start end" *ngIf="!cartService.cart.length">
 
-    <div class="margin" *ngIf="cartService?.cart?.length" fxLayout="column" fxLayoutGap="10px">
+        <img fxFlex="none" src="assets/images/consigne.svg" style="margin-right:10px;width:380px;height:100px">
+
+        <div fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center center" style="max-width:600px; margin: 0 auto">
+            <img src="assets/logo.svg" style="height:40vmin; margin:0 auto">
+            <div fxFlex="none">
+                <h1 class="mat-headline">Bienvenue ! </h1>
+                <p class="mat-subheading-2">Pour effectuer tes achats, il te suffit de scanner le code QR du produit ou d'introduire le code de l'article puis sa quantité…</p>
+                <button mat-flat-button color="primary" routerLink="/scan">
+                    <natural-icon name="simple-qr" [size]="24"></natural-icon>
+                    Démarrer la caméra
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="cartService?.cart?.length" fxLayout="column" fxLayoutGap="10px" style="width:100%;max-width:600px; margin: 0 auto">
         <h1 class="mat-title">Panier d'achats</h1>
 
         <mat-nav-list>
@@ -41,3 +57,4 @@
 
 </div>
 
+<router-outlet></router-outlet>

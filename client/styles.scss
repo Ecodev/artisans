@@ -135,3 +135,15 @@ mat-checkbox[wrap] {
 .price {
     //font-family: Georgia;
 }
+
+natural-sidenav-container[name=dashboardMenu] .mat-drawer-content {
+
+    &,
+    & > div,
+    & > div > natural-sidenav-content
+    {
+        flex: 1;
+        display: flex;
+        flex-direction:column;
+    }
+}

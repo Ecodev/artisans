@@ -35,14 +35,27 @@
             </div>
             <div fxFlex></div>
 
-            <div class="mat-display-1 price no-margin" *ngIf="quantityForm.value !== 1">{{ price | currency : 'CHF' }}</div>
+            <div class="mat-display-1 price no-margin" *ngIf="quantityForm.value != 1">{{ price | currency : 'CHF' }}</div>
 
         </div>
 
         <mat-divider></mat-divider>
 
+        <div class="mat-subheading-2">
+            <span style="font-weight:bold">Référence :</span>
+            {{ data.model.code }}
+        </div>
+        <div class="mat-subheading-2" *ngIf="data.model.supplier">
+            <span style="font-weight:bold">Fournisseur :</span>
+            {{ data.model.supplier }}
+        </div>
         <div class="mat-subheading-2" [innerHTML]="data.model.description"></div>
         <div class="mat-body-1" [innerHTML]="data.model.remarks"></div>
+
+        <div>
+            <button mat-stroked-button mat-dialog-close [routerLink]="['/admin/product', data.model.id]">Administration</button>
+        </div>
+
     </div>
 
 </mat-dialog-content>
@@ -52,17 +65,16 @@
 
     <div fxFlex></div>
 
-    <!--    <button mat-button mat-dialog-close [routerLink]="['/admin/product', data.model.id]">Administration</button>-->
-    <button mat-dialog-close mat-flat-button color="primary" (click)="addToCart()" [routerLink]="['../../']" *ngIf="!edit && data?.model" [disabled]="quantityForm.invalid">
-        Ajouter au panier
-    </button>
-
     <button mat-dialog-close mat-stroked-button color="warn" (click)="removeFromCart()" [routerLink]="['../../']" [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
         Supprimer
     </button>
 
-    <button mat-dialog-close mat-flat-button color="primary" (click)="updateCart()" [routerLink]="['../../']" [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
+    <button mat-dialog-close mat-flat-button color="primary" (click)="updateCart()" [routerLink]="['../../']" *ngIf="edit && data?.model" [disabled]="quantityForm.invalid || !quantityForm.dirty || !data.model.isActive">
         Mettre à jour
+    </button>
+
+    <button mat-dialog-close mat-flat-button color="primary" (click)="addToCart()" [routerLink]="['../../']" *ngIf="!edit && data?.model" [disabled]="quantityForm.invalid || !data.model.isActive">
+        Ajouter au panier
     </button>
 
 </mat-dialog-actions>

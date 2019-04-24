@@ -64,14 +64,6 @@ export class ProductComponent
         super.ngOnInit();
     }
 
-    public verify() {
-
-        const partialProduct = {id: this.data.model.id, verificationDate: (new Date()).toISOString()};
-        this.service.updatePartially(partialProduct).subscribe((product) => {
-            this.form.patchValue(product);
-        });
-
-    }
 
     public newImage(image: CreateImage['createImage']) {
 

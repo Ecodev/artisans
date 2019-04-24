@@ -6,7 +6,7 @@ import { FrontEndComponent } from './front-end/front-end.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { ModalTriggerComponent } from './shared/components/modal-trigger/modal-trigger.component';
+import { DialogTriggerComponent } from './shared/components/modal-trigger/dialog-trigger.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { ProductComponent } from './shop/product/product.component';
 import { ScanComponent } from './shop/scan/scan.component';
@@ -42,10 +42,10 @@ export const routes: Routes = [
                         children: [
                             {
                                 path: 'product/:code',
-                                component: ModalTriggerComponent,
+                                component: DialogTriggerComponent,
                                 data: {
                                     component: ProductComponent,
-                                    backdropRedirection: '/',
+                                    escapeRouterLink: ['../../'],
                                     dialogConfig: {
                                         width: '600px',
                                         maxWidth: '95vw',
@@ -59,7 +59,7 @@ export const routes: Routes = [
                             },
                             {
                                 path: 'scan',
-                                component: ModalTriggerComponent,
+                                component: DialogTriggerComponent,
                                 data: {
                                     component: ScanComponent,
                                     backdropRedirection: '/',

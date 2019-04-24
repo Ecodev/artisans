@@ -26,7 +26,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { ModalTriggerComponent } from './shared/components/modal-trigger/modal-trigger.component';
+import { DialogTriggerComponent } from './shared/components/modal-trigger/dialog-trigger.component';
 import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
 import { EmmyModule } from './shared/modules/emmy.module';
 import { MaterialModule } from './shared/modules/material.module';
@@ -49,7 +49,7 @@ export class MyIntl extends TimeagoIntl {
         FrontEndComponent,
         BootLoaderComponent,
         ErrorComponent,
-        ModalTriggerComponent,
+        DialogTriggerComponent,
     ],
     imports: [
         BrowserModule,

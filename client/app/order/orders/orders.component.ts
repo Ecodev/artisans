@@ -7,7 +7,7 @@ import { PermissionsService } from '../../shared/services/permissions.service';
 import { OrderService } from '../services/order.service';
 
 @Component({
-    selector: 'app-transactions',
+    selector: 'app-orders',
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.scss'],
 })

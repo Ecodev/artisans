@@ -187,10 +187,8 @@
             <app-product-metadata [product]="data.model" [edit]="true" class="margin"></app-product-metadata>
         </mat-tab>
 
-        <mat-tab label="Écritures" *ngIf="data.model.id">
-            <app-transaction-lines [persistSearch]="false"
-                                   [contextVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
-            ></app-transaction-lines>
+        <mat-tab label="Ventes" *ngIf="data.model.id">
+            <app-order-lines [persistSearch]="false" [contextVariables]="orderLinesVariables"></app-order-lines>
         </mat-tab>
 
     </mat-tab-group>

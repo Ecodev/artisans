@@ -5,6 +5,7 @@ import {
     CreateImage,
     CreateProduct,
     CreateProductVariables,
+    OrderLinesVariables,
     Product,
     ProductVariables,
     UpdateProduct,
@@ -48,6 +49,8 @@ export class ProductComponent
         '1.00',
     ];
 
+    public orderLinesVariables: OrderLinesVariables;
+
     constructor(alertService: NaturalAlertService,
                 productService: ProductService,
                 router: Router,
@@ -60,6 +63,7 @@ export class ProductComponent
 
     ngOnInit(): void {
         super.ngOnInit();
+        this.orderLinesVariables = {filter: {groups: [{conditions: [{product: {equal: {value: this.data.model.id}}}]}]}};
     }
 
     public newImage(image: CreateImage['createImage']) {

@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { OrderLinesVariables } from '../../shared/generated-types';
 
 @Component({
-    selector: 'app-order-detail',
+    selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.scss'],
 })

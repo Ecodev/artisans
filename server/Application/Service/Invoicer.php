@@ -57,7 +57,7 @@ class Invoicer
         $total = '0';
         foreach ($lines as $line) {
             /** @var Product $product */
-            $product = $line['product'];
+            $product = $line['product']->getEntity();
             $quantity = $line['quantity'];
 
             $balance = bcmul($product->getPricePerUnit(), $quantity);

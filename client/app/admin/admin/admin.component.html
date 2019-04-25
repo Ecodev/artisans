@@ -27,12 +27,12 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
                     <mat-expansion-panel-header>
                         <mat-panel-title>Comptabilité</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-nav-list>
-                        <a mat-list-item routerLink="order">Achats</a>
+                        <a mat-list-item routerLink="order">Ventes</a>
                         <a mat-list-item routerLink="transaction-line">Écritures</a>
                         <a mat-list-item routerLink="account">Comptes</a>
                         <a mat-list-item routerLink="expense-claim">Frais et remboursements</a>

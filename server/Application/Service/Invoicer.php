@@ -47,7 +47,7 @@ class Invoicer
 
         $transaction = new Transaction();
         $transaction->setTransactionDate(Date::today());
-        $transaction->setName('Commissions');
+        $transaction->setName('Vente');
         $this->entityManager->persist($transaction);
 
         $order = new Order();
@@ -92,7 +92,7 @@ class Invoicer
         $transactionLine = new TransactionLine();
         $this->entityManager->persist($transactionLine);
 
-        $transactionLine->setName($transaction->getName());
+        $transactionLine->setName('Achats');
         $transactionLine->setDebit($debit);
         $transactionLine->setCredit($credit);
         $transactionLine->setBalance($balance);

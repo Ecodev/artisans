@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const orderLineMetaFragment = gql`
     fragment orderLineMeta on OrderLine {
         id
+        name
         order {
             id
         }
@@ -16,6 +17,7 @@ export const orderLineMetaFragment = gql`
         }
         unit
         quantity
+        creationDate
     }
 `;
 

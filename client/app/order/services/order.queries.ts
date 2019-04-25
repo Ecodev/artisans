@@ -4,7 +4,6 @@ import { permissionsFragment, userMetaFragment } from '../../shared/queries/frag
 export const orderMetaFragment = gql`
     fragment orderMeta on Order {
         id
-        balance
         orderLines {
             id
         }

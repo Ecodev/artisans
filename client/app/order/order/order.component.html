@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>
+    Achats du
+    <span class="mat-body-1"> - {{ data.model.transaction.transactionDate | date: 'mediumDate' }} - {{ data.model.transaction.transactionDate | date: 'shortTime' }}</span>
+    {{ data.model.transaction.name }}
+</h2>
+<mat-dialog-content>
+    <app-order-lines [contextVariables]="contextVariables"></app-order-lines>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+    <button mat-button [mat-dialog-close]="dialogData.routeSnapshot.data.escapeRouterLink">Fermer</button>
+</mat-dialog-actions>

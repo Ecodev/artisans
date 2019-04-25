@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * An accounting journal entry (simple or compound)
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
+ * @ORM\Table(name="`order`")
  */
 class Order extends AbstractModel
 {
@@ -26,6 +27,20 @@ class Order extends AbstractModel
      * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
     private $orderLines;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=10, scale=7, options={"unsigned" = true, "default" = "0.0000000"})
+     */
+    private $vatPart = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"unsigned" = true})
+     */
+    private $balance;
 
     /**
      * Constructor
@@ -79,5 +94,29 @@ class Order extends AbstractModel
     public function setTransaction(Transaction $transaction): void
     {
         $this->transaction = $transaction;
+    }
+
+    /**
+     * Get total amount of VAT
+     *
+     * Read only, computed by SQL triggers
+     *
+     * @return string
+     */
+    public function getVatPart(): string
+    {
+        return $this->vatPart;
+    }
+
+    /**
+     * Get total order amount, VAT inclusive
+     *
+     * Read only, computed by SQL triggers
+     *
+     * @return string
+     */
+    public function getBalance(): string
+    {
+        return $this->balance;
     }
 }

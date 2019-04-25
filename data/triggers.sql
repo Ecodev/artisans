@@ -27,6 +27,11 @@ CREATE TRIGGER transaction_line_INSERT
     IF NEW.credit_id IS NOT NULL THEN
       UPDATE account SET account.balance=IF(account.type IN ('asset', 'expense'), account.balance-NEW.balance, IF(account.type IN ('liability', 'equity', 'revenue'), account.balance+NEW.balance, account.balance)) WHERE account.id=NEW.credit_id;
     END IF;
+
+    /* Update transaction total */
+    UPDATE transaction t
+    SET t.balance=(SELECT SUM(IF(tl.debit_id IS NOT NULL, tl.balance, 0)) FROM transaction_line tl WHERE tl.transaction_id=NEW.transaction_id)
+    WHERE t.id=NEW.transaction_id;
   END; //
 
 DELIMITER ;
@@ -49,6 +54,11 @@ CREATE TRIGGER transaction_line_DELETE
     IF OLD.credit_id IS NOT NULL THEN
       UPDATE account SET account.balance=IF(account.type IN ('asset', 'expense'), account.balance+OLD.balance, IF(account.type IN ('liability', 'equity', 'revenue'), account.balance-OLD.balance, account.balance)) WHERE account.id=OLD.credit_id;
     END IF;
+
+    /* Update transaction total */
+    UPDATE transaction t
+    SET t.balance=(SELECT SUM(IF(tl.debit_id IS NOT NULL, tl.balance, 0)) FROM transaction_line tl WHERE tl.transaction_id=OLD.transaction_id)
+    WHERE t.id=OLD.transaction_id;
   END; //
 
 DELIMITER ;
@@ -81,6 +91,11 @@ CREATE TRIGGER transaction_line_UPDATE
     IF NEW.credit_id IS NOT NULL THEN
       UPDATE account SET account.balance=IF(account.type IN ('asset', 'expense'), account.balance-NEW.balance, IF(account.type IN ('liability', 'equity', 'revenue'), account.balance+NEW.balance, account.balance)) WHERE account.id=NEW.credit_id;
     END IF;
+
+    /* Update transaction total */
+    UPDATE transaction t
+    SET t.balance=(SELECT SUM(IF(tl.debit_id IS NOT NULL, tl.balance, 0)) FROM transaction_line tl WHERE tl.transaction_id=NEW.transaction_id)
+    WHERE t.id=NEW.transaction_id;
   END; //
 
 DELIMITER ;
@@ -101,6 +116,90 @@ CREATE OR REPLACE PROCEDURE checkTransaction (IN transactionId INT) COMMENT 'Che
       SELECT CONCAT('Transaction #', IFNULL(transactionId, 'new'), ' n''a pas les mêmes totaux au débit (', total_debit , ') et crédit (', total_credit ,')') into @message;
       SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = @message;
     END IF;
+  END; //
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS order_line_before_insert;
+
+DELIMITER //
+
+CREATE TRIGGER order_line_before_insert
+  BEFORE INSERT
+  ON order_line
+  FOR EACH ROW
+  BEGIN
+    /* Compute amount of VAT */
+    SET NEW.vat_part = NEW.vat_rate * NEW.balance / (1 + NEW.vat_rate);
+  END; //
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS order_line_before_update;
+
+DELIMITER //
+
+CREATE TRIGGER order_line_before_update
+  BEFORE UPDATE
+  ON order_line
+  FOR EACH ROW
+  BEGIN
+    /* Compute amount of VAT */
+    SET NEW.vat_part = NEW.vat_rate * NEW.balance / (1 + NEW.vat_rate);
+  END; //
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS order_line_after_insert;
+
+DELIMITER //
+
+CREATE TRIGGER order_line_after_insert
+  AFTER INSERT
+  ON order_line
+  FOR EACH ROW
+  BEGIN
+    /* Update order totals */
+    UPDATE `order`
+    SET balance=(SELECT SUM(balance) FROM order_line WHERE order_id=NEW.order_id),
+        vat_part=(SELECT SUM(vat_rate * balance / (1 + vat_rate)) FROM order_line WHERE order_id=NEW.order_id)
+    WHERE id=NEW.order_id;
+  END; //
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS order_line_after_update;
+
+DELIMITER //
+
+CREATE TRIGGER order_line_after_update
+  AFTER UPDATE
+  ON order_line
+  FOR EACH ROW
+  BEGIN
+    /* Update order totals */
+    UPDATE `order`
+    SET balance=(SELECT SUM(balance) FROM order_line WHERE order_id=NEW.order_id),
+        vat_part=(SELECT SUM(vat_rate * balance / (1 + vat_rate)) FROM order_line WHERE order_id=NEW.order_id)
+    WHERE id=NEW.order_id;
+  END; //
+
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS order_line_after_delete;
+
+DELIMITER //
+
+CREATE TRIGGER order_line_after_delete
+  AFTER DELETE
+  ON order_line
+  FOR EACH ROW
+  BEGIN
+    /* Update order totals */
+    UPDATE `order`
+    SET balance=(SELECT SUM(balance) FROM order_line WHERE order_id=OLD.order_id),
+        vat_part=(SELECT SUM(vat_rate * balance / (1 + vat_rate)) FROM order_line WHERE order_id=OLD.order_id)
+    WHERE id=OLD.order_id;
   END; //
 
 DELIMITER ;

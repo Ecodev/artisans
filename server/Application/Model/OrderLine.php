@@ -48,7 +48,7 @@ class OrderLine extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
+     * @ORM\Column(type="decimal", precision=10, scale=7, options={"unsigned" = true, "default" = "0.0000000"})
      */
     private $vatPart = '0';
 
@@ -96,10 +96,14 @@ class OrderLine extends AbstractModel
     }
 
     /**
+     * Get amount of VAT
+     *
+     * No setter, computed by SQL triggers
+     *
      * @return string
      */
     public function getVatPart(): string
     {
-        return bcmul($this->getBalance(), $this->getVatRate());
+        return $this->vatPart;
     }
 }

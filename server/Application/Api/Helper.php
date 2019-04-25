@@ -6,6 +6,7 @@ namespace Application\Api;
 
 use Application\Acl\Acl;
 use Application\Model\AbstractModel;
+use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\TransactionLine;
 use Doctrine\ORM\QueryBuilder;
@@ -72,6 +73,12 @@ abstract class Helper
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === TransactionLine::class) {
+            $qb->resetDQLPart('select')
+                ->resetDQLPart('orderBy')
+                ->addSelect('SUM(transactionLine1.balance) AS totalBalance');
+
+            $result = $qb->getQuery()->getResult()[0];
+        } elseif ($class === OrderLine::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
                 ->addSelect('SUM(transactionLine1.balance) AS totalBalance');

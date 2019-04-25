@@ -13,6 +13,8 @@ use Application\Model\AccountingDocument;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\Message;
+use Application\Model\Order;
+use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
@@ -48,7 +50,9 @@ class QueryType extends ObjectType
             Standard::buildQuery(TransactionTag::class),
             Standard::buildQuery(ExpenseClaim::class),
             Standard::buildQuery(AccountingDocument::class),
-            Standard::buildQuery(Message::class)
+            Standard::buildQuery(Message::class),
+            Standard::buildQuery(Order::class),
+            Standard::buildQuery(OrderLine::class)
         );
 
         $config = [

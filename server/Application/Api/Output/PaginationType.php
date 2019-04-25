@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Output;
 
+use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\TransactionLine;
 use GraphQL\Type\Definition\ObjectType;
@@ -54,6 +55,11 @@ class PaginationType extends ObjectType
                         'description' => 'The total price per unit',
                     ];
                 } elseif ($class === TransactionLine::class) {
+                    $fields['totalBalance'] = [
+                        'type' => self::string(),
+                        'description' => 'The total balance',
+                    ];
+                } elseif ($class === OrderLine::class) {
                     $fields['totalBalance'] = [
                         'type' => self::string(),
                         'description' => 'The total balance',

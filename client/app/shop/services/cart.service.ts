@@ -37,16 +37,8 @@ export class CartService {
     }
 
     private static computeTotals(cart) {
-
-        CartService.totalTaxes = 0;
-        CartService.totalTaxInc = cart.reduce((a, b) => a + b.total, 0);
-
-        // this.anyService.computeTotals({lines : cart});.subscribe(res => {
-        //     CartService.totalTaxExc += res.ht;
-        //     CartService.totalTaxes += res.tax;
-        //     CartService.totalTaxInc += res.ttc;
-        // });
-
+        CartService.totalTaxes = cart.reduce((a, line) => a + line.total - +Decimal.div(line.total, +line.product.vatRate + 1), 0);
+        CartService.totalTaxInc = cart.reduce((a, line) => a + line.total, 0);
     }
 
     public save() {

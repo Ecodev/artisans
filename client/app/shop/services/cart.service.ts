@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import Decimal from 'decimal.js';
 import { OrderService } from '../../order/services/order.service';
 import { Product, Products } from '../../shared/generated-types';
+import { moneyRoundUp } from '../../shared/utils';
 
 export interface CartLine {
     product: Products['products']['items'][0] | Product['product'];
@@ -28,7 +29,7 @@ export class CartService {
     }
 
     public static getPriceTaxInc(product: CartLine['product'], quantity: number = 1): number {
-        return +Decimal.mul(product.pricePerUnit, quantity);
+        return moneyRoundUp(+Decimal.mul(product.pricePerUnit, quantity));
     }
 
     private static saveCart(cart) {

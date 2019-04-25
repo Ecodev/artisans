@@ -16,6 +16,7 @@ use Application\Model\AccountingDocument;
 use Application\Model\ExpenseClaim;
 use Application\Model\Image;
 use Application\Model\Message;
+use Application\Model\Order;
 use Application\Model\Product;
 use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
@@ -56,6 +57,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $expenseClaim = new ModelResource(ExpenseClaim::class);
         $message = new ModelResource(Message::class);
         $transaction = new ModelResource(Transaction::class);
+        $order = new ModelResource(Order::class);
 
         $this->addResource($product);
         $this->addResource($productMetadata);
@@ -69,6 +71,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($expenseClaim);
         $this->addResource($message);
         $this->addResource($transaction);
+        $this->addResource($order);
 
         $this->allow(User::ROLE_ANONYMOUS, [$product, $productMetadata, $productTag, $image, $transactionTag], ['read']);
 
@@ -82,6 +85,8 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['update', 'delete'], new All(new IsOwner(), new ExpenseClaimStatusIsNew()));
         $this->allow(User::ROLE_INDIVIDUAL, [$account], ['read'], new IsOwner());
         $this->allow(User::ROLE_INDIVIDUAL, [$message], ['read'], new IsRecipient());
+        $this->allow(User::ROLE_INDIVIDUAL, [$order], ['read']); // Todo : new IsFamily() ? #6276
+        $this->allow(User::ROLE_INDIVIDUAL, [$order], ['create']);
 
         $this->allow(User::ROLE_MEMBER, [$account], ['create', 'update']);
         $this->allow(User::ROLE_MEMBER, [$user], ['create']);

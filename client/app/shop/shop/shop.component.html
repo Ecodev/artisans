@@ -34,24 +34,22 @@
 
         <mat-divider></mat-divider>
 
-        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start end" class="mat-body-1" class="padding totals">
-            <div *ngIf="CartService.totalTaxExc">
-                <span class="mat-body-2">Total HT :</span>
-                <span>{{CartService.totalTaxExc | currency : 'CHF' }}</span>
-            </div>
-            <div *ngIf="CartService.totalTaxes">
-                <span class="mat-body-2">TVA :</span>
-                <span>{{CartService.totalTaxes | currency : 'CHF' }}</span>
-            </div>
-            <div>
-                <span class="mat-body-2">Total TTC :</span>
-                <span class="mat-body-2">{{CartService.totalTaxInc | currency : 'CHF' }}</span>
+        <div fxLayout="row" fxLayoutAlign="end">
+            <div class="mat-body-1 padding totals natural-table">
+                <div *ngIf="CartService.totalTaxes">
+                    <span class="mat-body-2">TVA :</span>
+                    <span>{{CartService.totalTaxes | currency : 'CHF' }}</span>
+                </div>
+                <div>
+                    <span class="mat-body-2">Total TTC :</span>
+                    <span class="mat-body-2">{{CartService.totalTaxInc | currency : 'CHF' }}</span>
+                </div>
             </div>
         </div>
 
-        <div fxLayout="column" fxLayoutGap="20px">
-            <button mat-flat-button color="primary">Valider et payer</button>
-            <button mat-stroked-button (click)="cartService.empty();">Vider le panier</button>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end" >
+            <button mat-button (click)="cartService.empty();">Vider le panier</button>
+            <button mat-flat-button color="primary" (click)="createOrder()">Valider et payer</button>
         </div>
     </div>
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import Decimal from 'decimal.js';
+import { OrderService } from '../../order/services/order.service';
 import { Product, Products } from '../../shared/generated-types';
 
 export interface CartLine {
@@ -15,18 +16,16 @@ export class CartService {
 
     public static totalTaxes = 0;
     public static totalTaxInc = 0;
-    public static totalTaxExc = 0;
     private static storageKey = 'chez-emmy-cart';
     public cart: CartLine[] = [];
 
-    constructor() {
+    constructor(private orderService: OrderService) {
         const storedCart = sessionStorage.getItem(CartService.storageKey);
         if (storedCart) {
             this.cart = JSON.parse(storedCart);
             CartService.computeTotals(this.cart);
         }
     }
-
 
     public static getPriceTaxInc(product: CartLine['product'], quantity: number = 1): number {
         return +Decimal.mul(product.pricePerUnit, quantity);
@@ -40,7 +39,6 @@ export class CartService {
     private static computeTotals(cart) {
 
         CartService.totalTaxes = 0;
-        CartService.totalTaxExc = 0;
         CartService.totalTaxInc = cart.reduce((a, b) => a + b.total, 0);
 
         // this.anyService.computeTotals({lines : cart});.subscribe(res => {
@@ -49,6 +47,10 @@ export class CartService {
         //     CartService.totalTaxInc += res.ttc;
         // });
 
+    }
+
+    public save() {
+        return this.orderService.create(this.cart as any); // whines because of a number is provided instead of a string. TODO : fix
     }
 
     public add(product: CartLine['product'], quantity) {

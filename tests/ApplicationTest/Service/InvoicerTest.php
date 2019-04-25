@@ -130,7 +130,7 @@ class InvoicerTest extends TestCase
                 ],
                 [
                     [
-                        'Commissions',
+                        'Achats',
                         'John Doe',
                         'Vente de marchandises',
                         '210.00',
@@ -161,7 +161,7 @@ class InvoicerTest extends TestCase
                 ],
                 [
                     [
-                        'Commissions',
+                        'Achats',
                         'Vente de marchandises',
                         'John Doe',
                         '100.00',

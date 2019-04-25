@@ -7,7 +7,9 @@ namespace Application\Model;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
+use Application\Traits\HasQuantity;
 use Application\Traits\HasRemarks;
+use Application\Traits\HasUnit;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +26,8 @@ class Product extends AbstractModel
     use HasDescription;
     use HasCode;
     use HasRemarks;
+    use HasUnit;
+    use HasQuantity;
 
     /**
      * @var string
@@ -49,13 +53,6 @@ class Product extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=10, options={"default" = ""})
-     */
-    private $unit = '';
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
     private $supplier = '';
@@ -73,13 +70,6 @@ class Product extends AbstractModel
      * @ORM\Column(type="string", length=10, options={"default" = ""})
      */
     private $supplierReference = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
-     */
-    private $quantity = '0';
 
     /**
      * @var bool
@@ -140,26 +130,6 @@ class Product extends AbstractModel
     public function setPricePerUnit(string $pricePerUnit): void
     {
         $this->pricePerUnit = $pricePerUnit;
-    }
-
-    /**
-     * Set unit
-     *
-     * @param string $unit
-     */
-    public function setUnit(string $unit): void
-    {
-        $this->unit = $unit;
-    }
-
-    /**
-     * Get unit
-     *
-     * @return string
-     */
-    public function getUnit(): string
-    {
-        return $this->unit;
     }
 
     /**
@@ -304,26 +274,6 @@ class Product extends AbstractModel
     public function setCreditAccount(?Account $creditAccount): void
     {
         $this->creditAccount = $creditAccount;
-    }
-
-    /**
-     * Quantity currently in stock
-     *
-     * @return string
-     */
-    public function getQuantity(): string
-    {
-        return $this->quantity;
-    }
-
-    /**
-     * Quantity currently in stock
-     *
-     * @param string $quantity
-     */
-    public function setQuantity(string $quantity): void
-    {
-        $this->quantity = $quantity;
     }
 
     /**

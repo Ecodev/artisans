@@ -123,18 +123,18 @@ REPLACE INTO transaction (id, creator_id, owner_id, transactionDate, name, remar
 REPLACE INTO transaction_tag (id, name) VALUES
 (15000, 'Entretien');
 
-REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, product_id, transaction_tag_id, balance, transactionDate, is_reconciled, name, remarks) VALUES
-(14000, 8000, 10029, 10042, NULL, NULL, 1000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de caisse'),
-(14001, 8000, 10030, 10042, NULL, NULL, 23500, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de banque'),
-(14002, 8001, 10032, NULL, NULL, NULL, 1500, '2019-02-03', 1, 'Achat réfrigérateur', ''),
-(14003, 8001, NULL, 10029, NULL, NULL, 500, '2019-02-03', 1, 'Paiement en espèces', ''),
-(14004, 8001, NULL, 10030, NULL, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
-(14005, 8003, 10028, -1002, NULL, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
-(14006, 8004, 10030, -1002, NULL, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
-(14007, 8005, -1002, 10015, 3000, NULL, 12.00, '2019-04-24', 1, 'Chocolat noir BIO', '2 pièces'),
-(14008, 8005, -1002, 10016, 3002, NULL, 6.00, '2019-04-24', 1, '6 oeufs BIO de la région', '1 pièce'),
-(14009, 8005, -1002, 10017, 3011, NULL, 12.50, '2019-04-24', 1, 'Miel de la région', '1 pièce'),
-(14010, 8005, -1002, 10016, 3005, NULL, 1.60, '2019-04-24', 1, 'Pommes', '0.6 kg');
+REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transaction_tag_id, balance, transactionDate, is_reconciled, name, remarks) VALUES
+(14000, 8000, 10029, 10042, NULL, 1000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de caisse'),
+(14001, 8000, 10030, 10042, NULL, 23500, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de banque'),
+(14002, 8001, 10032, NULL, NULL, 1500, '2019-02-03', 1, 'Achat réfrigérateur', ''),
+(14003, 8001, NULL, 10029, NULL, 500, '2019-02-03', 1, 'Paiement en espèces', ''),
+(14004, 8001, NULL, 10030, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
+(14005, 8003, 10028, -1002, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
+(14006, 8004, 10030, -1002, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
+(14007, 8005, -1002, 10015, NULL, 12.00, '2019-04-24', 1, 'Chocolat noir BIO', '2 pièces'),
+(14008, 8005, -1002, 10016, NULL, 6.00, '2019-04-24', 1, '6 oeufs BIO de la région', '1 pièce'),
+(14009, 8005, -1002, 10017, NULL, 12.50, '2019-04-24', 1, 'Miel de la région', '1 pièce'),
+(14010, 8005, -1002, 10016, NULL, 1.60, '2019-04-24', 1, 'Pommes', '0.6 kg');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
 (9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
@@ -167,5 +167,17 @@ REPLACE INTO product_metadata (id, product_id, name, value) VALUES
 (13001, 3010, 'Contenance', '150g'),
 (13002, 3007, 'Contenance', '75cl'),
 (13003, 3008, 'Contenance', '75cl');
+
+REPLACE INTO `order` (id, owner_id, creation_date) VALUES
+(16000, -1002, '2019-04-24'),
+(16001, -1007, '2019-04-25');
+
+REPLACE INTO order_line (id, order_id, product_id, creation_date, quantity, unit, balance, vat_part, name) VALUES
+(17000, 16000, 3000, '2019-04-24', 2, '', 12.00, 0.30, 'Chocolat noir BIO'),
+(17001, 16000, 3002, '2019-04-24', 1, '', 6.00, 0.15, '6 oeufs BIO de la région'),
+(17002, 16000, 3011, '2019-04-24', 1, '', 12.50, 0.31, 'Miel de la région'),
+(17003, 16000, 3005, '2019-04-24', 600, 'g', 1.60, 0.02, 'Pommes'),
+(17004, 16001, 3011, '2019-04-25', 2, '', 25, 0.62, 'Miel de la région'),
+(17005, 16001, 3005, '2019-04-25', 0.6, 'kg', 1.60, 0.02, 'Pommes');
 
 COMMIT;

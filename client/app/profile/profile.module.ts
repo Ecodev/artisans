@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { OrderModule } from '../order/order.module';
 import { EmmyModule } from '../shared/modules/emmy.module';
 import { MaterialModule } from '../shared/modules/material.module';
 import { CreateExpenseClaimComponent } from './components/create-expense-claim/create-expense-claim.component';
@@ -11,7 +12,6 @@ import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProvisionComponent } from './components/provision/provision.component';
 import { ProfileRoutingModule } from './profile-routing.module';
-import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
 
 @NgModule({
     declarations: [
@@ -23,13 +23,13 @@ import { TransactionDetailComponent } from './components/transaction-detail/tran
         CreateRefundComponent,
         ProvisionComponent,
         HistoryComponent,
-        TransactionDetailComponent,
     ],
     imports: [
         CommonModule,
         ProfileRoutingModule,
         MaterialModule,
         EmmyModule,
+        OrderModule,
     ],
     entryComponents: [
         CreateRefundComponent,

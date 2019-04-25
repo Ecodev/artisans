@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AvatarModule } from 'ngx-avatar';
+import { OrderModule } from '../order/order.module';
 import { ProfileModule } from '../profile/profile.module';
 import { EmmyModule } from '../shared/modules/emmy.module';
 import { MaterialModule } from '../shared/modules/material.module';
@@ -18,7 +19,6 @@ import { ProductTagComponent } from './productTags/productTag/productTag.compone
 import { ProductTagsComponent } from './productTags/productTags/productTags.component';
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
-import { TransactionLinesComponent } from './transactions/transactionLines/transaction-lines.component';
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
 import { UserComponent } from './users/user/user.component';
@@ -38,7 +38,6 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         ProductTagsComponent,
         ProductTagComponent,
         TransactionComponent,
-        TransactionLinesComponent,
         AccountsComponent,
         AccountComponent,
         ExpenseClaimsComponent,
@@ -47,6 +46,7 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         TransactionTagComponent,
         EditableTransactionLinesComponent,
         ProductMetadataComponent,
+
     ],
     imports: [
         CommonModule,
@@ -55,6 +55,7 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         EmmyModule,
         AvatarModule,
         ProfileModule,
+        OrderModule,
     ],
     entryComponents: [],
 })

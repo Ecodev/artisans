@@ -6,7 +6,7 @@ import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expens
 import { MatDialog } from '@angular/material';
 import { CreateRefundComponent } from '../create-refund/create-refund.component';
 import { NaturalAlertService } from '@ecodev/natural';
-import { TransactionLineService } from '../../../admin/transactions/services/transactionLine.service';
+import { TransactionLineService } from '../../../admin/transactions/services/transaction-line.service';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NaturalAbstractController } from '@ecodev/natural';

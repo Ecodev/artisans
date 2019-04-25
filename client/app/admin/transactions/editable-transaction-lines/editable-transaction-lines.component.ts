@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TransactionLineService } from '../services/transactionLine.service';
+import { TransactionLineService } from '../services/transaction-line.service';
 import { Transaction, TransactionLinesVariables } from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
 import { NaturalAbstractEditableList } from '@ecodev/natural';

@@ -21,7 +21,7 @@ import {
     UpdateTransactionVariables,
 } from '../../../shared/generated-types';
 import { createTransaction, deleteTransactions, transactionQuery, transactionsQuery, updateTransaction } from './transaction.queries';
-import { TransactionLineService } from './transactionLine.service';
+import { TransactionLineService } from './transaction-line.service';
 
 @Injectable({
     providedIn: 'root',

@@ -1,35 +1,39 @@
 import { NgModule } from '@angular/core';
+import { MatDialogConfig } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
-import { ProductsComponent } from './products/products/products.component';
-import { ProductComponent } from './products/product/product.component';
-import { ProductResolver } from './products/services/product.resolver';
-import { TransactionsComponent } from './transactions/transactions/transactions.component';
-import { UserTagsComponent } from './userTags/userTags/userTags.component';
-import { UserTagComponent } from './userTags/userTag/userTag.component';
-import { UserTagResolver } from './userTags/services/userTag.resolver';
-import { UsersComponent } from './users/users/users.component';
-import { UserComponent } from './users/user/user.component';
-import { UserResolver } from './users/services/user.resolver';
-import { UserService } from './users/services/user.service';
-import { ProductTagsComponent } from './productTags/productTags/productTags.component';
-import { ProductTagComponent } from './productTags/productTag/productTag.component';
-import { ProductTagResolver } from './productTags/services/productTag.resolver';
+import { OrderComponent } from '../order/order/order.component';
+import { OrdersComponent } from '../order/orders/orders.component';
+import { OrderResolver } from '../order/services/order.resolver';
+import { DialogTriggerComponent } from '../shared/components/modal-trigger/dialog-trigger.component';
 import { UserRole, UserStatus } from '../shared/generated-types';
+import { AdministrationGuard } from '../shared/guards/administration.guard';
+import { AccountComponent } from './accounts/account/account.component';
+import { AccountsComponent } from './accounts/accounts/accounts.component';
+import { AccountResolver } from './accounts/services/account.resolver';
+import { AdminComponent } from './admin/admin.component';
+import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
+import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
+import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
+import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resolver';
+import { ProductComponent } from './products/product/product.component';
+import { ProductsComponent } from './products/products/products.component';
+import { ProductResolver } from './products/services/product.resolver';
+import { ProductTagComponent } from './productTags/productTag/productTag.component';
+import { ProductTagsComponent } from './productTags/productTags/productTags.component';
+import { ProductTagResolver } from './productTags/services/productTag.resolver';
 import { TransactionResolver } from './transactions/services/transaction.resolver';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
-import { AccountsComponent } from './accounts/accounts/accounts.component';
-import { AccountComponent } from './accounts/account/account.component';
-import { AccountResolver } from './accounts/services/account.resolver';
-import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
-import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.component';
-import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resolver';
-import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
-import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
-import { TransactionTagResolver } from './transactionTags/services/transactionTag-resolver.service';
 import { TransactionLinesComponent } from './transactions/transactionLines/transaction-lines.component';
-import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
-import { AdministrationGuard } from '../shared/guards/administration.guard';
+import { TransactionTagResolver } from './transactionTags/services/transactionTag-resolver.service';
+import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
+import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
+import { UserResolver } from './users/services/user.resolver';
+import { UserService } from './users/services/user.service';
+import { UserComponent } from './users/user/user.component';
+import { UsersComponent } from './users/users/users.component';
+import { UserTagResolver } from './userTags/services/userTag.resolver';
+import { UserTagComponent } from './userTags/userTag/userTag.component';
+import { UserTagsComponent } from './userTags/userTags/userTags.component';
 
 const routes: Routes = [
         {
@@ -40,7 +44,7 @@ const routes: Routes = [
                 {
                     path: '',
                     pathMatch: 'full',
-                    redirectTo: '/admin/product'
+                    redirectTo: '/admin/product',
                 },
                 {
                     path: 'product', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
@@ -180,9 +184,28 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'transaction', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: TransactionsComponent,
-                    data: {title: 'Transactions'},
+                    path: 'order', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: OrdersComponent,
+                    data: {title: 'Achats'},
+                    children: [
+                        {
+                            path: ':orderId',
+                            component: DialogTriggerComponent,
+                            resolve: {
+                                order: OrderResolver,
+                            },
+                            data: {
+                                component: OrderComponent,
+                                escapeRouterLink: ['/admin/order'],
+                                dialogConfig: {
+                                    width: '600px',
+                                    maxWidth: '95vw',
+                                    maxHeight: '97vh',
+                                    panelClass: 'big-height-dialog',
+                                } as MatDialogConfig,
+                            },
+                        },
+                    ],
                 },
                 {
                     path: 'transaction',

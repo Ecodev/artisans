@@ -25,7 +25,7 @@ import { ngfModule } from 'angular-file';
 import { AvatarModule } from 'ngx-avatar';
 import { TimeagoModule } from 'ngx-timeago';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
-import { TransactionsComponent } from '../../admin/transactions/transactions/transactions.component';
+import { TransactionLinesComponent } from '../../admin/transactions/transactionLines/transaction-lines.component';
 import { AddressComponent } from '../components/address/address.component';
 import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
@@ -95,8 +95,8 @@ const declarations = [
     TransactionAmountComponent,
     AccountingDocumentsComponent,
     ParticleSwitchComponent,
-    TransactionsComponent,
-    DialogTriggerComponent
+    DialogTriggerComponent,
+    TransactionLinesComponent
 ];
 
 const imports = [

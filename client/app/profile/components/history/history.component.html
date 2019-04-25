@@ -5,7 +5,7 @@
             <h3 fxFlex class="mat-headline no-margin-bottom">Historique des transactions</h3>
         </div>
 
-        <app-transactions [contextVariables]="transactionVariables" [persistSearch]="false" [contextColumns]="['transactionDate', 'open', 'remarks', 'balance']" (select)="detail($event)"></app-transactions>
+        <app-transaction-lines [contextVariables]="variables" [persistSearch]="false" [contextColumns]="['transactionDate', 'open', 'remarks', 'balance']" (select)="detail($event)"></app-transaction-lines>
 
     </div>
 </div>

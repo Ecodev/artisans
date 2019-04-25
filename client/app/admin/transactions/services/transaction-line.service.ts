@@ -3,13 +3,16 @@ import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/f
 import { FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
+    LogicalOperator,
+    SortingOrder,
     TransactionLine,
     TransactionLineInput,
-    TransactionLines,
+    TransactionLines, TransactionLineSortingField,
     TransactionLinesVariables,
     TransactionLineVariables,
+    TransactionSortingField,
 } from '../../../shared/generated-types';
-import { transactionLineQuery, transactionLinesQuery } from './transactionLine.queries';
+import { transactionLineQuery, transactionLinesQuery } from './transaction-line.queries';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -43,6 +46,25 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
             null,
             null,
             null);
+    }
+
+    public static getVariablesForAccount(account): TransactionLinesVariables {
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditionsLogic: LogicalOperator.OR,
+                        conditions: [
+                            {
+                                debit: {equal: {value: account.id}},
+                                credit: {equal: {value: account.id}},
+                            },
+                        ],
+                    },
+                ],
+            },
+            sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
+        };
     }
 
     public getFormValidators(): FormValidators {

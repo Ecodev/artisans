@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractController } from '@ecodev/natural';
 import { ExpenseClaimService } from '../../../admin/expenseClaim/services/expenseClaim.service';
 import { TransactionService } from '../../../admin/transactions/services/transaction.service';
+import { TransactionLineService } from '../../../admin/transactions/services/transaction-line.service';
 import { UserService } from '../../../admin/users/services/user.service';
-import { TransactionsVariables } from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-history',
@@ -15,7 +15,7 @@ export class HistoryComponent extends NaturalAbstractController implements OnIni
 
     @Input() user;
 
-    public transactionVariables: TransactionsVariables;
+    public variables;
 
     constructor(
         private userService: UserService,
@@ -50,12 +50,13 @@ export class HistoryComponent extends NaturalAbstractController implements OnIni
     public loadData() {
 
         if (this.user.account) {
-            this.transactionVariables = TransactionService.getVariablesForAccount(this.user.account);
+            this.variables = TransactionLineService.getVariablesForAccount(this.user.account);
         }
     }
 
-    public detail(transaction) {
-        this.router.navigate(['.', transaction.id], {relativeTo: this.route});
+    public detail(transactionLine) {
+        console.log('transactionLine', transactionLine);
+        this.router.navigate(['.', transactionLine.transaction.id], {relativeTo: this.route});
     }
 
 }

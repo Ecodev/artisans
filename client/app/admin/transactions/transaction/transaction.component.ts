@@ -16,7 +16,7 @@ import {
     UpdateTransactionVariables,
 } from '../../../shared/generated-types';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
-import { TransactionLineService } from '../services/transactionLine.service';
+import { TransactionLineService } from '../services/transaction-line.service';
 import { AccountingDocumentsComponent } from '../../accounting-documents/accounting-documents.component';
 import { ExpenseClaimService } from '../../expenseClaim/services/expenseClaim.service';
 

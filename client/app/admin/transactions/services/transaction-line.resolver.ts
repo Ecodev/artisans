@@ -3,7 +3,7 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TransactionLineResolve } from '../transaction';
 import { ErrorService } from '../../../shared/components/error/error.service';
-import { TransactionLineService } from './transactionLine.service';
+import { TransactionLineService } from './transaction-line.service';
 
 @Injectable({
     providedIn: 'root',

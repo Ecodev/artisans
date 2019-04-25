@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * An accounting journal entry (simple or compound)
  *
+ * @ORM\Table(name="`order`")
  * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
  */

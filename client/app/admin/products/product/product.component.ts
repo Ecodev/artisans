@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractDetail, NaturalAlertService } from '@ecodev/natural';
-import { ProductService } from '../services/product.service';
 import {
     CreateImage,
     CreateProduct,
@@ -11,10 +10,10 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
+import { calculateSuggestedPrice, moneyRoundUp } from '../../../shared/utils';
 import { ProductTagService } from '../../productTags/services/productTag.service';
 import { ImageService } from '../services/image.service';
-import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
-import { calculateSuggestedPrice, moneyRoundUp } from '../../../shared/utils';
+import { ProductService } from '../services/product.service';
 
 @Component({
     selector: 'app-product',
@@ -30,7 +29,6 @@ export class ProductComponent
         UpdateProductVariables,
         any> implements OnInit {
 
-    public accountHierarchicConfig = AccountHierarchicConfiguration;
     public availableVatRate = [
         '0.025',
         '0.077',
@@ -64,7 +62,6 @@ export class ProductComponent
         super.ngOnInit();
     }
 
-
     public newImage(image: CreateImage['createImage']) {
 
         const imageField = this.form.get('image');
@@ -82,4 +79,14 @@ export class ProductComponent
 
         return moneyRoundUp(suggested);
     }
+
+    public verify() {
+
+        const partialBookable = {id: this.data.model.id, verificationDate: (new Date()).toISOString()};
+        this.service.updatePartially(partialBookable).subscribe((bookable) => {
+            this.form.patchValue(bookable);
+        });
+
+    }
+
 }

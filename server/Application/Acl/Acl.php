@@ -72,19 +72,20 @@ class Acl extends \Zend\Permissions\Acl\Acl
 
         $this->allow(User::ROLE_ANONYMOUS, [$product, $productMetadata, $productTag, $image, $transactionTag], ['read']);
 
-        $this->allow(User::ROLE_INDIVIDUAL, $user, ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, $user, ['update'], new IsMyself());
-        $this->allow(User::ROLE_INDIVIDUAL, [$account, $expenseClaim], ['create']);
+        $this->allow(User::ROLE_INDIVIDUAL, [$user], ['read']);
+        $this->allow(User::ROLE_INDIVIDUAL, [$user], ['update'], new IsMyself());
+        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['create']);
         $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['read'], new IsOwner());
         $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['update', 'delete'], new All(new IsOwner(), new StatusIsNew()));
         $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['create'], new ExpenseClaimStatusIsNew());
         $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['read'], new IsOwner());
         $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['update', 'delete'], new All(new IsOwner(), new ExpenseClaimStatusIsNew()));
-        $this->allow(User::ROLE_INDIVIDUAL, [$account], ['read', 'update'], new IsOwner());
-        $this->allow(User::ROLE_INDIVIDUAL, $message, ['read'], new IsRecipient());
+        $this->allow(User::ROLE_INDIVIDUAL, [$account], ['read'], new IsOwner());
+        $this->allow(User::ROLE_INDIVIDUAL, [$message], ['read'], new IsRecipient());
 
-        $this->allow(User::ROLE_MEMBER, $user, ['create']);
-        $this->allow(User::ROLE_MEMBER, $user, ['update'], new IsOwner());
+        $this->allow(User::ROLE_MEMBER, [$account], ['create', 'update']);
+        $this->allow(User::ROLE_MEMBER, [$user], ['create']);
+        $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsOwner());
 
         $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $transactionTag], ['read']);
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);

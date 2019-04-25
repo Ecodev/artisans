@@ -30,7 +30,7 @@ return [
             'permissions' => [
                 'crud' => [
                     'account' => [
-                        'create' => true,
+                        'create' => false,
                     ],
                     'accountingDocument' => [
                         'create' => true,

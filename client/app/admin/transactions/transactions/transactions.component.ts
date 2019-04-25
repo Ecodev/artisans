@@ -27,7 +27,7 @@ export class TransactionsComponent extends NaturalAbstractList<Transactions['tra
                 injector: Injector
     ) {
 
-        super('products',
+        super('transactions',
             service,
             router,
             route,

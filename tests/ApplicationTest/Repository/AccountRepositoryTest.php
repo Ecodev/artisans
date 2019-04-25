@@ -31,6 +31,7 @@ class AccountRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
+        $range = range(10000, 10045);
         $all = array_merge([
             -1011,
             -1010,
@@ -38,7 +39,7 @@ class AccountRepositoryTest extends AbstractRepositoryTest
             -1002,
             -1001,
             -1000,
-        ], range(10000, 10045));
+        ], array_diff($range, [10015, 10016, 10017]));
 
         return [
             ['anonymous', []],
@@ -66,8 +67,8 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         self::assertSame($user, $account->getOwner());
         self::assertSame('Foo Bar', $account->getName());
         self::assertSame(AccountTypeType::LIABILITY, $account->getType());
-        self::assertSame('2211', $account->getCode());
-        self::assertSame('Dettes à court terme', $account->getParent()->getName());
+        self::assertSame('20300007', $account->getCode());
+        self::assertSame('Acomptes de clients', $account->getParent()->getName());
         self::assertSame($account, $user->getAccount());
 
         $account2 = $this->repository->getOrCreate($user);

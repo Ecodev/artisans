@@ -25,8 +25,6 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
             return $this->getAllIdsQuery();
         }
 
-        return 'SELECT order_line.id FROM order_line
-              JOIN account ON order_line.debit_id = account.id OR order_line.credit_id = account.id 
-              WHERE account.owner_id = ' . $user->getId();
+        return $this->getAllIdsForOwnerQuery($user);
     }
 }

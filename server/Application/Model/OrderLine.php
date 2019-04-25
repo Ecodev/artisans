@@ -8,6 +8,7 @@ use Application\Traits\HasBalance;
 use Application\Traits\HasName;
 use Application\Traits\HasQuantity;
 use Application\Traits\HasUnit;
+use Application\Traits\HasVatRate;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
@@ -22,6 +23,7 @@ class OrderLine extends AbstractModel
     use HasUnit;
     use HasQuantity;
     use HasBalance;
+    use HasVatRate;
 
     /**
      * @var Order
@@ -98,14 +100,6 @@ class OrderLine extends AbstractModel
      */
     public function getVatPart(): string
     {
-        return $this->vatPart;
-    }
-
-    /**
-     * @param string $vatPart
-     */
-    public function setVatPart(string $vatPart): void
-    {
-        $this->vatPart = $vatPart;
+        return bcmul($this->getBalance(), $this->getVatRate());
     }
 }

@@ -83,15 +83,6 @@
                             <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
                         </div>
 
-                        <natural-select
-                                formControlName="creditAccount"
-                                placeholder="Compte à créditer lors de l'achat"
-                                [hierarchicSelectorConfig]="accountHierarchicConfig"
-                                (selectionChange)="update()"
-                                [showIcon]="false"
-                                [navigateTo]="['/admin/account', form.get('creditAccount').value?.id]"
-                        ></natural-select>
-
                         <mat-form-field>
                             <mat-label>Marge de profit</mat-label>
                             <mat-select (selectionChange)="update()" formControlName="margin" required="required">

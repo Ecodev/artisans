@@ -10,6 +10,7 @@ use Application\Traits\HasName;
 use Application\Traits\HasQuantity;
 use Application\Traits\HasRemarks;
 use Application\Traits\HasUnit;
+use Application\Traits\HasVatRate;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -28,6 +29,7 @@ class Product extends AbstractModel
     use HasRemarks;
     use HasUnit;
     use HasQuantity;
+    use HasVatRate;
 
     /**
      * @var string
@@ -39,16 +41,9 @@ class Product extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
+     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.20"})
      */
-    private $margin = '0';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=10, scale=3, options={"default" = "0.000"})
-     */
-    private $vatRate = '0';
+    private $margin = '0.20';
 
     /**
      * @var string
@@ -97,16 +92,6 @@ class Product extends AbstractModel
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      */
     private $image;
-
-    /**
-     * @var null|Account
-     *
-     * @ORM\ManyToOne(targetEntity="Account")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
-     * })
-     */
-    private $creditAccount;
 
     /**
      * Constructor
@@ -254,42 +239,6 @@ class Product extends AbstractModel
         }
 
         $this->image = $image;
-    }
-
-    /**
-     * The account to credit when buying this product
-     *
-     * @return null|Account
-     */
-    public function getCreditAccount(): ?Account
-    {
-        return $this->creditAccount;
-    }
-
-    /**
-     * The account to credit when buying this product
-     *
-     * @param null|Account $creditAccount
-     */
-    public function setCreditAccount(?Account $creditAccount): void
-    {
-        $this->creditAccount = $creditAccount;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVatRate(): string
-    {
-        return $this->vatRate;
-    }
-
-    /**
-     * @param string $vatRate
-     */
-    public function setVatRate(string $vatRate): void
-    {
-        $this->vatRate = $vatRate;
     }
 
     /**

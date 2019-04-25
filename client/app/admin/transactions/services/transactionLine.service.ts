@@ -66,7 +66,6 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
             balance: '',
             credit: null,
             debit: null,
-            product: null,
             isReconciled: false,
             transactionDate: new Date(),
             transactionTag: null,

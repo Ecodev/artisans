@@ -26,11 +26,6 @@ class Invoicer
     private $entityManager;
 
     /**
-     * @var int
-     */
-    private $count = 0;
-
-    /**
      * @var AccountRepository
      */
     private $accountRepository;
@@ -69,23 +64,24 @@ class Invoicer
             $total = bcadd($total, $balance);
 
             $this->createOrderLine($order, $product, $balance, $quantity);
-            $this->createTransactionLine($transaction, $product, $account, $balance);
         }
 
-        ++$this->count;
+        $this->createTransactionLine($transaction, $account, $total);
 
         $this->accountRepository->getAclFilter()->setEnabled(true);
 
         return $order;
     }
 
-    private function createTransactionLine(Transaction $transaction, Product $product, Account $account, string $balance): void
+    private function createTransactionLine(Transaction $transaction, Account $account, string $balance): void
     {
+        $saleAccount = $this->entityManager->getReference(Account::class, AccountRepository::ACCOUNT_ID_FOR_SALE);
+
         if ($balance > 0) {
             $debit = $account;
-            $credit = $product->getCreditAccount();
+            $credit = $saleAccount;
         } elseif ($balance < 0) {
-            $debit = $product->getCreditAccount();
+            $debit = $saleAccount;
             $credit = $account;
             $balance = bcmul($balance, '-1'); // into positive
         } else {
@@ -96,7 +92,7 @@ class Invoicer
         $transactionLine = new TransactionLine();
         $this->entityManager->persist($transactionLine);
 
-        $transactionLine->setName($product->getName());
+        $transactionLine->setName($transaction->getName());
         $transactionLine->setDebit($debit);
         $transactionLine->setCredit($credit);
         $transactionLine->setBalance($balance);
@@ -115,30 +111,8 @@ class Invoicer
         $orderLine->setUnit($product->getUnit());
         $orderLine->setQuantity($quantity);
         $orderLine->setBalance($balance);
-
-        $vatRate = $this->getVatRate($product);
-        $vatPart = bcmul($balance, $vatRate);
-        $orderLine->setVatPart($vatPart);
+        $orderLine->setVatRate($product->getVatRate());
 
         return $orderLine;
-    }
-
-    private function getVatRate(Product $product): string
-    {
-        $account = $product->getCreditAccount();
-        if (!$account) {
-            throw new \Exception('Cannot find VAT rate for product without credit account');
-        }
-
-        switch ($account->getId()) {
-            case 10015:
-                return '0.077';
-            case 10016:
-                return '0.025';
-            case 10017:
-                return '0.0';
-            default:
-                throw new \Exception('Unsupported credit account for VAT rate');
-        }
     }
 }

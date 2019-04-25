@@ -16,11 +16,6 @@ export const transactionLineMetaFragment = gql`
             name
             type
         }
-        product{
-            id
-            name
-            code
-        }
         remarks
         isReconciled
         transaction {

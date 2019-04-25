@@ -20,10 +20,6 @@ export const productMetaFragment = gql`
         supplier
         supplierPrice
         supplierReference
-        creditAccount {
-            id
-            name
-        }
         code
         remarks
         image {

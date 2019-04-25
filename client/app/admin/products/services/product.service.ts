@@ -58,7 +58,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             isActive: true,
             verificationDate: null,
             image: null,
-            creditAccount: null,
         };
     }
 

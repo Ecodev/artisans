@@ -11,6 +11,7 @@ use Application\Model\User;
 class AccountRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
 {
     private const PARENT_ACCOUNT_ID_FOR_USER = 10038;
+    const ACCOUNT_ID_FOR_SALE = 10013;
 
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.

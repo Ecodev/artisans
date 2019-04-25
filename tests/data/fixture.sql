@@ -14,11 +14,8 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, balance, iban, name) 
 (10010, 10000, NULL, 'group', '150', 0.00, '', 'Immobilisation corporelles meubles'),
 (10011, 10001, NULL, 'group', '20', 0.00, '', 'Dettes à court terme'),
 (10012, 10008, NULL, 'equity', '9200', 0.00, '', 'Bénéfice / perte de l\'exercice'),
-(10013, 10002, NULL, 'group', '3200', 0.00, '', 'Vente de marchandises'),
+(10013, 10002, NULL, 'revenue', '3200', 32.10, '', 'Vente de marchandises'),
 (10014, 10002, NULL, 'revenue', '3800', 0.00, '', 'Déductions sur les ventes'),
-(10015, 10013, NULL, 'revenue', '3220', 12.00, '', 'Ventes brutes TVA taux normal (7.7%)'),
-(10016, 10013, NULL, 'revenue', '3221', 7.60, '', 'Ventes brutes TVA taux réduit (2.5%)'),
-(10017, 10013, NULL, 'revenue', '3222', 12.50, '', 'Ventes brutes TVA taux zéro (0%)'),
 (10018, 10003, NULL, 'expense', '4000', 0.00, '', 'Charges de matériel de l\'épicerie'),
 (10019, 10003, NULL, 'expense', '4200', 0.00, '', 'Achats de marchandises destinées à la revente'),
 (10020, 10003, NULL, 'expense', '4400', 0.00, '', 'Prestations / travaux de tiers'),
@@ -80,17 +77,17 @@ REPLACE INTO image (id, filename, width, height) VALUES
 (5011, 'miel.png', 308, 436);
 
 REPLACE INTO product (id, image_id, supplier_price, price_per_unit, unit, vat_rate, name, code, description) VALUES
-(3000, 5000, 5.00, 6.00, '', '7.7', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao'),
-(3001, 5001, 20.00, 24.00, '', '7.7', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.'),
-(3002, 5002, 5.00, 6.00, '', '2.5', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air'),
-(3003, 5003, 3.00, 4.00, '', '2.5', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes'),
-(3004, 5004, 2.00, 2.50, 'kg', '2.5', 'Pommes de terre', 'P5', ''),
-(3005, 5005, 3.00, 4.00, 'kg', '2.5', 'Pommes', 'P6', ''),
-(3006, 5006, 3.00, 4.00, 'kg', '2.5', 'Poire', 'P7', ''),
-(3007, 5007, 8.00, 10.00, '', '7.7', 'Oeil de Perdrix Auvernier', 'P8', ''),
-(3008, 5008, 10.00, 13.00, '', '7.7', 'Pinot Noir La Coccinelle', 'P9', ''),
-(3009, 5009, 1.10, 1.60, '', '2.5', 'Yogourt Bircher', 'P10', ''),
-(3010, 5010, 1.30, 2.00, '', '2.5', 'Yogourt vanille au lait de brebis', 'P11', ''),
+(3000, 5000, 5.00, 6.00, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao'),
+(3001, 5001, 20.00, 24.00, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.'),
+(3002, 5002, 5.00, 6.00, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air'),
+(3003, 5003, 3.00, 4.00, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes'),
+(3004, 5004, 2.00, 2.50, 'kg', '0.025', 'Pommes de terre', 'P5', ''),
+(3005, 5005, 3.00, 4.00, 'kg', '0.025', 'Pommes', 'P6', ''),
+(3006, 5006, 3.00, 4.00, 'kg', '0.025', 'Poire', 'P7', ''),
+(3007, 5007, 8.00, 10.00, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', ''),
+(3008, 5008, 10.00, 13.00, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', ''),
+(3009, 5009, 1.10, 1.60, '', '0.025', 'Yogourt Bircher', 'P10', ''),
+(3010, 5010, 1.30, 2.00, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', ''),
 (3011, 5011, 10.00, 12.50, '', '0.0', 'Miel de la région', 'P12', '');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
@@ -131,10 +128,10 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transact
 (14004, 8001, NULL, 10030, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
 (14005, 8003, 10028, -1002, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
 (14006, 8004, 10030, -1002, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
-(14007, 8005, -1002, 10015, NULL, 12.00, '2019-04-24', 1, 'Chocolat noir BIO', '2 pièces'),
-(14008, 8005, -1002, 10016, NULL, 6.00, '2019-04-24', 1, '6 oeufs BIO de la région', '1 pièce'),
-(14009, 8005, -1002, 10017, NULL, 12.50, '2019-04-24', 1, 'Miel de la région', '1 pièce'),
-(14010, 8005, -1002, 10016, NULL, 1.60, '2019-04-24', 1, 'Pommes', '0.6 kg');
+(14007, 8005, -1002, 10013, NULL, 12.00, '2019-04-24', 1, 'Chocolat noir BIO', '2 pièces'),
+(14008, 8005, -1002, 10013, NULL, 6.00, '2019-04-24', 1, '6 oeufs BIO de la région', '1 pièce'),
+(14009, 8005, -1002, 10013, NULL, 12.50, '2019-04-24', 1, 'Miel de la région', '1 pièce'),
+(14010, 8005, -1002, 10013, NULL, 1.60, '2019-04-24', 1, 'Pommes', '0.6 kg');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
 (9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
@@ -172,12 +169,12 @@ REPLACE INTO `order` (id, owner_id, creation_date) VALUES
 (16000, -1002, '2019-04-24'),
 (16001, -1007, '2019-04-25');
 
-REPLACE INTO order_line (id, order_id, product_id, creation_date, quantity, unit, balance, vat_part, name) VALUES
-(17000, 16000, 3000, '2019-04-24', 2, '', 12.00, 0.30, 'Chocolat noir BIO'),
-(17001, 16000, 3002, '2019-04-24', 1, '', 6.00, 0.15, '6 oeufs BIO de la région'),
-(17002, 16000, 3011, '2019-04-24', 1, '', 12.50, 0.31, 'Miel de la région'),
-(17003, 16000, 3005, '2019-04-24', 600, 'g', 1.60, 0.02, 'Pommes'),
-(17004, 16001, 3011, '2019-04-25', 2, '', 25, 0.62, 'Miel de la région'),
-(17005, 16001, 3005, '2019-04-25', 0.6, 'kg', 1.60, 0.02, 'Pommes');
+REPLACE INTO order_line (id, order_id, product_id, creation_date, quantity, unit, balance, vat_rate, name) VALUES
+(17000, 16000, 3000, '2019-04-24', 2, '', 12.00, 0.077, 'Chocolat noir BIO'),
+(17001, 16000, 3002, '2019-04-24', 1, '', 6.00, 0.077, '6 oeufs BIO de la région'),
+(17002, 16000, 3011, '2019-04-24', 1, '', 12.50, 0.00, 'Miel de la région'),
+(17003, 16000, 3005, '2019-04-24', 600, 'g', 1.60, 0.025, 'Pommes'),
+(17004, 16001, 3011, '2019-04-25', 2, '', 25, 0.00, 'Miel de la région'),
+(17005, 16001, 3005, '2019-04-25', 0.6, 'kg', 1.60, 0.025, 'Pommes');
 
 COMMIT;

@@ -16,7 +16,6 @@
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="transactionDate">Date</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="product">Produit</span>
                     <span naturalColumnsPickerColumn="remarks">Remarques</span>
                     <span naturalColumnsPickerColumn="balance">Montant</span>
                     <span naturalColumnsPickerColumn="account">Compte</span>
@@ -83,17 +82,6 @@
                 <ng-container matColumnDef="isReconciled">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Pointé</th>
                     <td mat-cell *matCellDef="let element">{{ element.isReconciled ? '✔︎' : '' }}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
-                </ng-container>
-
-                <ng-container matColumnDef="product">
-                    <th mat-header-cell *matHeaderCellDef>Produit</th>
-                    <td mat-cell *matCellDef="let element">
-                        <natural-table-button *ngIf="element.product"
-                                          [label]="element.product.name"
-                                          [navigate]="['/admin/product', element.product.id]"
-                        ></natural-table-button>
-                    </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 

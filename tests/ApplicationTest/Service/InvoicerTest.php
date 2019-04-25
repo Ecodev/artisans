@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
-use Application\Model\Account;
 use Application\Model\Product;
 use Application\Model\User;
 use Application\Service\Invoicer;
@@ -43,6 +42,7 @@ class InvoicerTest extends TestCase
                 $orderLine->getUnit(),
                 $orderLine->getQuantity(),
                 $orderLine->getBalance(),
+                $orderLine->getVatRate(),
                 $orderLine->getVatPart(),
             ];
         }
@@ -71,7 +71,7 @@ class InvoicerTest extends TestCase
                             'name' => 'My product',
                             'pricePerUnit' => '0',
                             'unit' => 'kg',
-                            'creditAccount' => 10015,
+                            'vatRate' => '0.077',
                         ],
 
                     ],
@@ -82,12 +82,13 @@ class InvoicerTest extends TestCase
                         'kg',
                         '1',
                         '0',
+                        '0.077',
                         '0.00',
                     ],
                 ],
                 [],
             ],
-            'only initial' => [
+            'normal' => [
                 [
                     [
                         'quantity' => '4',
@@ -95,7 +96,7 @@ class InvoicerTest extends TestCase
                             'name' => 'My product 1',
                             'pricePerUnit' => '2.50',
                             'unit' => 'kg',
-                            'creditAccount' => 10015,
+                            'vatRate' => '0.077',
                         ],
                     ],
                     [
@@ -104,10 +105,9 @@ class InvoicerTest extends TestCase
                             'name' => 'My product 2',
                             'pricePerUnit' => '200',
                             'unit' => '',
-                            'creditAccount' => 10016,
+                            'vatRate' => '0.025',
                         ],
                     ],
-
                 ],
                 [
                     [
@@ -115,6 +115,7 @@ class InvoicerTest extends TestCase
                         'kg',
                         '4',
                         '10.00',
+                        '0.077',
                         '0.77',
 
                     ],
@@ -123,21 +124,16 @@ class InvoicerTest extends TestCase
                         '',
                         '1',
                         '200',
+                        '0.025',
                         '5.00',
                     ],
                 ],
                 [
                     [
-                        'My product 1',
+                        'Commissions',
                         'John Doe',
-                        'Ventes brutes TVA taux normal (7.7%)',
-                        '10.00',
-                    ],
-                    [
-                        'My product 2',
-                        'John Doe',
-                        'Ventes brutes TVA taux réduit (2.5%)',
-                        '200',
+                        'Vente de marchandises',
+                        '210.00',
                     ],
                 ],
             ],
@@ -149,7 +145,7 @@ class InvoicerTest extends TestCase
                             'name' => 'My product',
                             'pricePerUnit' => '-100',
                             'unit' => 'kg',
-                            'creditAccount' => 10015,
+                            'vatRate' => '0.077',
                         ],
                     ],
                 ],
@@ -159,15 +155,16 @@ class InvoicerTest extends TestCase
                         'kg',
                         '1',
                         '-100',
+                        '0.077',
                         '-7.70',
                     ],
                 ],
                 [
                     [
-                        'My product',
-                        'Ventes brutes TVA taux normal (7.7%)',
+                        'Commissions',
+                        'Vente de marchandises',
                         'John Doe',
-                        '100',
+                        '100.00',
                     ],
                 ],
             ],
@@ -183,11 +180,7 @@ class InvoicerTest extends TestCase
             $product->setName($p['name']);
             $product->setPricePerUnit($p['pricePerUnit']);
             $product->setUnit($p['unit']);
-
-            if ($p['creditAccount']) {
-                $account = $this->getEntityManager()->getReference(Account::class, $p['creditAccount']);
-                $product->setCreditAccount($account);
-            }
+            $product->setVatRate($p['vatRate']);
 
             $i['product'] = $product;
         }

@@ -81,7 +81,7 @@ abstract class Helper
         } elseif ($class === OrderLine::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(transactionLine1.balance) AS totalBalance');
+                ->addSelect('SUM(orderLine1.balance) AS totalBalance');
 
             $result = $qb->getQuery()->getResult()[0];
         }

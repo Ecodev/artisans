@@ -14,6 +14,7 @@ use Application\Model\User;
 use Application\Repository\AccountRepository;
 use Cake\Chronos\Date;
 use Doctrine\ORM\EntityManager;
+use GraphQL\Doctrine\Definition\EntityID;
 
 /**
  * Service to create order and transactions for products and their quantity
@@ -57,7 +58,7 @@ class Invoicer
         $total = '0';
         foreach ($lines as $line) {
             /** @var Product $product */
-            $product = $line['product']->getEntity();
+            $product = $line['product'] instanceof EntityID ? $line['product']->getEntity() : $line['product'];
             $quantity = $line['quantity'];
 
             $balance = bcmul($product->getPricePerUnit(), $quantity);

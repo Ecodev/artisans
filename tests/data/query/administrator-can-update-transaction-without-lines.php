@@ -33,7 +33,7 @@ return [
                     [
                         'balance' => '1000.00',
                         'credit' => [
-                            'balance' => '21000.00',
+                            'balance' => '24500.00',
                         ],
                         'debit' => [
                             'balance' => '500.00',
@@ -42,7 +42,7 @@ return [
                     [
                         'balance' => '23500.00',
                         'credit' => [
-                            'balance' => '21000.00',
+                            'balance' => '24500.00',
                         ],
                         'debit' => [
                             'balance' => '22700.00',

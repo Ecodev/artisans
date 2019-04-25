@@ -83,7 +83,7 @@ class InvoicerTest extends TestCase
                         '1',
                         '0',
                         '0.077',
-                        '0.00',
+                        '0',
                     ],
                 ],
                 [],
@@ -116,7 +116,7 @@ class InvoicerTest extends TestCase
                         '4',
                         '10.00',
                         '0.077',
-                        '0.77',
+                        '0',
 
                     ],
                     [
@@ -125,7 +125,7 @@ class InvoicerTest extends TestCase
                         '1',
                         '200',
                         '0.025',
-                        '5.00',
+                        '0',
                     ],
                 ],
                 [
@@ -156,7 +156,7 @@ class InvoicerTest extends TestCase
                         '1',
                         '-100',
                         '0.077',
-                        '-7.70',
+                        '0',
                     ],
                 ],
                 [

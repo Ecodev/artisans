@@ -30,6 +30,7 @@ class OwnerTest extends AbstractSorting
             8001,
             8003,
             8005,
+            8006,
         ], $result);
     }
 }

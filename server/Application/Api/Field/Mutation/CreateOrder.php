@@ -25,9 +25,15 @@ abstract class CreateOrder implements FieldInterface
             'resolve' => function ($root, array $args, SessionInterface $session): ?Order {
                 global $container;
 
+                $input = array_map(function (array $line) {
+                    $line['product'] = $line['product']->getEntity();
+
+                    return $line;
+                }, $args['input']);
+
                 /** @var Invoicer $invoicer */
                 $invoicer = $container->get(Invoicer::class);
-                $order = $invoicer->createOrder(User::getCurrent(), $args['input']);
+                $order = $invoicer->createOrder(User::getCurrent(), $input);
 
                 _em()->flush();
 

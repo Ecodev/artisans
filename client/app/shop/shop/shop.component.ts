@@ -35,4 +35,14 @@ export class ShopComponent implements OnInit {
 
     }
 
+    public empty() {
+        this.alertService
+            .confirm('Vider le panier', 'Êtes-vous sûr de vouloir vider le panier ? Cette action est irréversible.', 'Vider le panier')
+            .subscribe(confirm => {
+                if (confirm) {
+                    this.cartService.empty();
+                }
+            });
+    }
+
 }

@@ -48,8 +48,8 @@
         </div>
 
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end" >
-            <button mat-button (click)="cartService.empty();">Vider le panier</button>
-            <button mat-flat-button color="primary" (click)="createOrder()">Valider et payer</button>
+            <button mat-button (click)="empty()">Vider le panier</button>
+            <button mat-flat-button color="primary" (click)="createOrder()" [style.width.px]="200">Passer à la caisse</button>
         </div>
     </div>
 

@@ -32,6 +32,7 @@ export class ProductComponent implements OnInit {
             }
 
             this.computePrice();
+            this.quantityForm.valueChanges.subscribe(() => this.computePrice(true));
         }
 
     }
@@ -39,11 +40,13 @@ export class ProductComponent implements OnInit {
     ngOnInit() {
     }
 
-    public computePrice() {
+    public computePrice(skipFormat = false) {
 
-        const qty = +this.quantityForm.value;
-        if (!this.data.model.unit && Math.floor(qty) !== qty) {
-            this.quantityForm.setValue(Math.round(qty));
+        if (!skipFormat) {
+            const qty = +this.quantityForm.value;
+            if (!this.data.model.unit && Math.floor(qty) !== qty) {
+                this.quantityForm.setValue(Math.round(qty));
+            }
         }
 
         this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value);
@@ -66,11 +69,14 @@ export class ProductComponent implements OnInit {
 
     public increase() {
         this.quantityForm.setValue(+this.quantityForm.value + 1);
+        this.quantityForm.markAsDirty();
     }
 
     public decrease() {
         const value = +this.quantityForm.value - 1;
         this.quantityForm.setValue(value < 0 ? 0 : value);
+        this.quantityForm.markAsDirty();
+
     }
 
 }

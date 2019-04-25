@@ -66,7 +66,6 @@ class Invoicer
             $this->createOrderLine($order, $product, $balance, $quantity);
         }
 
-        $order->setTotal($total);
         $this->createTransactionLine($transaction, $account, $total);
 
         $this->accountRepository->getAclFilter()->setEnabled(true);

@@ -51,7 +51,7 @@ abstract class AbstractRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()->getConnection()->createQueryBuilder()
             ->select('id')
-            ->from($this->getClassMetadata()->getTableName())
+            ->from('`' . $this->getClassMetadata()->getTableName() . '`')
             ->andWhere('owner_id = ' . $user->getId());
 
         return $qb->getSQL();

@@ -43,7 +43,6 @@ class InvoicerTest extends TestCase
                 $orderLine->getQuantity(),
                 $orderLine->getBalance(),
                 $orderLine->getVatRate(),
-                $orderLine->getVatPart(),
             ];
         }
         self::assertSame($expectedOrderLines, $actualOrderLines);
@@ -83,7 +82,6 @@ class InvoicerTest extends TestCase
                         '1',
                         '0',
                         '0.077',
-                        '0',
                     ],
                 ],
                 [],
@@ -116,7 +114,6 @@ class InvoicerTest extends TestCase
                         '4',
                         '10.00',
                         '0.077',
-                        '0',
 
                     ],
                     [
@@ -125,7 +122,6 @@ class InvoicerTest extends TestCase
                         '1',
                         '200',
                         '0.025',
-                        '0',
                     ],
                 ],
                 [
@@ -156,7 +152,6 @@ class InvoicerTest extends TestCase
                         '1',
                         '-100',
                         '0.077',
-                        '0',
                     ],
                 ],
                 [

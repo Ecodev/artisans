@@ -20,12 +20,9 @@ export class OrderResolver implements Resolve<OrderResolve> {
     public resolve(route: ActivatedRouteSnapshot): Observable<OrderResolve> {
         let observable;
 
-        console.log('route.params', route.params);
         if (route.params.orderId) {
-            console.log('a');
             observable = this.orderService.resolve(route.params.orderId);
         } else if (route.params.transactionId) {
-            console.log('b');
             observable = this.orderService.resolveByTransaction(route.params.transactionId);
         }
 

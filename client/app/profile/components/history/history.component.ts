@@ -55,7 +55,6 @@ export class HistoryComponent extends NaturalAbstractController implements OnIni
     }
 
     public detail(transactionLine) {
-        console.log('transactionLine', transactionLine);
         this.router.navigate(['.', transactionLine.transaction.id], {relativeTo: this.route});
     }
 

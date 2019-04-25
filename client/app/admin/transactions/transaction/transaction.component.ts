@@ -67,7 +67,6 @@ export class TransactionComponent
                         nameControl.setValue('Traitement de la dépense "' + expenseClaim.name + '"');
                     } else if (expenseClaim.type === ExpenseClaimType.refund) {
                         nameControl.setValue('Remboursement de "' + expenseClaim.name + '"');
-                        console.log(nameControl);
                     }
                 }
 
@@ -103,8 +102,6 @@ export class TransactionComponent
         } else {
             this.data.model.transactionLines = null;
         }
-
-        console.log('this.data.model.transactionLines', this.data.model.transactionLines);
 
         if (this.data.model.id) {
             this.update(true);

@@ -140,11 +140,10 @@ natural-sidenav-container[name=dashboardMenu] .mat-drawer-content {
 
     &,
     & > div,
-    & > div > natural-sidenav-content
-    {
+    & > div > natural-sidenav-content {
         flex: 1;
         display: flex;
-        flex-direction:column;
+        flex-direction: column;
     }
 }
 
@@ -156,5 +155,18 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield; /* Firefox */
+}
+
+
+.natural-table {
+    display: table;
+
+    & > div {
+        display: table-row;
+
+        & > div {
+            display: table-cell;
+        }
+    }
 }

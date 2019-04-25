@@ -33,18 +33,18 @@ class AccountRepositoryTest extends AbstractRepositoryTest
     {
         $range = range(10000, 10045);
         $all = array_merge([
-            -1011,
-            -1010,
-            -1007,
-            -1002,
-            -1001,
-            -1000,
+            -10011,
+            -10010,
+            -10007,
+            -10002,
+            -10001,
+            -10000,
         ], array_diff($range, [10015, 10016, 10017]));
 
         return [
             ['anonymous', []],
-            ['individual', [-1007]],
-            ['member', [-1002]],
+            ['individual', [-10007]],
+            ['member', [-10002]],
             ['responsible', $all],
             ['administrator', $all],
         ];

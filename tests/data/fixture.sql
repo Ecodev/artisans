@@ -44,12 +44,12 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10043, 10037, NULL, 'liability', '200010', '', 'Fournisseur A'),
 (10044, 10037, NULL, 'liability', '200011', '', 'Fournisseur B'),
 (10045, 10037, NULL, 'liability', '200012', '', 'Fournisseur C'),
-(-1000, 10038, -1000, 'liability', '20300001', '', 'Administrator'),
-(-1001, 10038, -1001, 'liability', '20300002', '', 'Responsable'),
-(-1002, 10038, -1002, 'liability', '20300003', '', 'Active Member'),
-(-1007, 10038, -1007, 'liability', '20300004', '', 'Conjoint'),
-(-1010, 10038, -1010, 'liability', '20300005', '', 'Voilier Member'),
-(-1011, 10038, -1011, 'liability', '20300006', '', 'Voilier Family');
+(-10000, 10038, -1000, 'liability', '20300001', '', 'Administrator'),
+(-10001, 10038, -1001, 'liability', '20300002', '', 'Responsable'),
+(-10002, 10038, -1002, 'liability', '20300003', '', 'Active Member'),
+(-10007, 10038, -1007, 'liability', '20300004', '', 'Conjoint'),
+(-10010, 10038, -1010, 'liability', '20300005', '', 'Voilier Member'),
+(-10011, 10038, -1011, 'liability', '20300006', '', 'Voilier Family');
 
 REPLACE INTO product_tag (id, name) VALUES
 (6000, 'Fruits & Légumes'),
@@ -127,10 +127,10 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transact
 (14002, 8001, 10032, NULL, NULL, 1500, '2019-02-03', 1, 'Achat réfrigérateur', ''),
 (14003, 8001, NULL, 10029, NULL, 500, '2019-02-03', 1, 'Paiement en espèces', ''),
 (14004, 8001, NULL, 10030, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
-(14005, 8003, 10028, -1002, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
-(14006, 8004, 10030, -1002, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
-(14007, 8005, -1002, 10013, NULL, 12.00, '2019-04-24', 1, 'Achats', ''),
-(14007, 8006, -1002, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats', '');
+(14005, 8003, 10028, -10002, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
+(14006, 8004, 10030, -10002, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
+(14007, 8005, -10002, 10013, NULL, 12.00, '2019-04-24', 1, 'Achats', ''),
+(14007, 8006, -10002, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
 (9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');

@@ -15,15 +15,15 @@ return [
         'variables' => [
             'inputImage' => [
                 // Fake a file uploaded with incorrect data, to check if we trust them (we should not)
-                'file' => new UploadedFile('data/images/chat1.jpg', 999, UPLOAD_ERR_OK, 'image.jpg', 'text/plain'),
+                'file' => new UploadedFile('data/images/pomme.jpg', 999, UPLOAD_ERR_OK, 'image.jpg', 'text/plain'),
             ],
         ],
     ],
     [
         'data' => [
             'createImage' => [
-                'width' => 1000,
-                'height' => 482,
+                'width' => 800,
+                'height' => 531,
             ],
         ],
     ],

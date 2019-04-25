@@ -31,12 +31,19 @@ class AccountRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = range(10000, 10106);
+        $all = array_merge([
+            -1011,
+            -1010,
+            -1007,
+            -1002,
+            -1001,
+            -1000,
+        ], range(10000, 10045));
 
         return [
             ['anonymous', []],
-            ['individual', [10097]],
-            ['member', [10096]],
+            ['individual', [-1007]],
+            ['member', [-1002]],
             ['responsible', $all],
             ['administrator', $all],
         ];
@@ -59,8 +66,8 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         self::assertSame($user, $account->getOwner());
         self::assertSame('Foo Bar', $account->getName());
         self::assertSame(AccountTypeType::LIABILITY, $account->getType());
-        self::assertSame('20300009', $account->getCode());
-        self::assertSame('Acomptes de clients', $account->getParent()->getName());
+        self::assertSame('2211', $account->getCode());
+        self::assertSame('Dettes à court terme', $account->getParent()->getName());
         self::assertSame($account, $user->getAccount());
 
         $account2 = $this->repository->getOrCreate($user);
@@ -86,10 +93,10 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         $totalExpense = $this->repository->totalBalanceByType(AccountTypeType::EXPENSE);
         $totalEquity = $this->repository->totalBalanceByType(AccountTypeType::EQUITY);
 
-        self::assertEquals(35187.50, $totalAssets);
-        self::assertEquals(60, $totalLiabilities);
-        self::assertEquals(240, $totalRevenue);
-        self::assertEquals(112.50, $totalExpense);
-        self::assertEquals(35000, $totalEquity);
+        self::assertEquals(24700, $totalAssets);
+        self::assertEquals(3767.90, $totalLiabilities);
+        self::assertEquals(32.10, $totalRevenue);
+        self::assertEquals(100.00, $totalExpense);
+        self::assertEquals(21000.00, $totalEquity);
     }
 }

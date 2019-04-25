@@ -22,8 +22,8 @@ class LatestModificationTest extends AbstractSorting
 
         $result = $this->getSortedQueryResult(ExpenseClaim::class, 'latestModification');
         self::assertSame([
-            7002,
             7001,
+            7002,
             7000,
         ], $result);
     }

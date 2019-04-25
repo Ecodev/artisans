@@ -55,14 +55,18 @@ class ImageRepositoryTest extends AbstractRepositoryTest
         $this->getEntityManager()->getConnection()->update('product', ['image_id' => null], ['image_id' => 5007]);
 
         $paths = [
-            'data/images/chat1.jpg',
-            'data/images/chat2.jpg',
-            'data/images/chat3.jpg',
-            'data/images/chat4.jpg',
-            'data/images/chat5.jpg',
-            'data/images/chat6.jpg',
-            'data/images/chat7.jpg',
-            'data/images/chat8.jpg',
+            'data/images/chocolat1.jpg',
+            'data/images/chocolat2.jpg',
+            'data/images/miel.png',
+            'data/images/oeufs.jpg',
+            'data/images/patates.jpg',
+            'data/images/poire.jpg',
+            'data/images/pomme.jpg',
+            'data/images/salade.jpg',
+            'data/images/vin1.jpg',
+            'data/images/vin2.jpg',
+            'data/images/yogourt1.jpg',
+            'data/images/yogourt2.png',
         ];
 
         // All images must exist before testing
@@ -84,7 +88,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         // Most images must still exist after affecting an existing image to an existing product.
         // Only the orphaned image should be deleted, but absolutely never an image related to **another** product
-        $mustBeDeleted = 'data/images/chat1.jpg';
+        $mustBeDeleted = 'data/images/chocolat1.jpg';
         foreach ($paths as $p) {
             if ($p === $mustBeDeleted) {
                 self::assertFileNotExists($p);

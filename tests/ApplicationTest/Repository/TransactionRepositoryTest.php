@@ -32,12 +32,12 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [8000, 8001, 8002, 8003, 8004, 8005, 8006, 8007];
+        $all = [8000, 8001, 8003, 8004, 8005];
 
         return [
             ['anonymous', []],
             ['individual', []],
-            ['member', [8000, 8002, 8002, 8003, 8004, 8006]],
+            ['member', [8003, 8004, 8005]],
             ['responsible', $all],
             ['administrator', $all],
         ];
@@ -71,7 +71,7 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         $this->repository->hydrateLinesAndFlush($transaction, $lines);
 
         self::assertSame('5.00', $credit->getBalance(), 'credit account balance must have been refreshed from DB');
-        self::assertSame('5.00', $debit->getBalance(), 'debit account balance must have been refreshed from DB');
+        self::assertSame('505.00', $debit->getBalance(), 'debit account balance must have been refreshed from DB');
         self::assertFalse($transaction->getTransactionLines()->contains($line), 'original line must have been deleted');
         self::assertCount(1, $transaction->getTransactionLines(), 'one line');
 
@@ -102,8 +102,8 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
         User::setCurrent($user);
 
-        $debit = _em()->getRepository(Account::class)->findOneBy(['code' => 10201]);
-        $credit = _em()->getRepository(Account::class)->findOneBy(['code' => 1000]);
+        $debit = _em()->getRepository(Account::class)->findOneByCode('20300001');
+        $credit = _em()->getRepository(Account::class)->findOneByCode('20300002');
 
         $transaction = new Transaction();
         $transaction->setName('caisse à poste');

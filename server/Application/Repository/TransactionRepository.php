@@ -29,7 +29,7 @@ class TransactionRepository extends AbstractRepository implements LimitedAccessS
             return $this->getAllIdsQuery();
         }
 
-        return 'SELECT transaction.id FROM transaction
+        return 'SELECT DISTINCT transaction.id FROM transaction
               JOIN transaction_line ON transaction.id = transaction_line.transaction_id
               JOIN account ON transaction_line.debit_id = account.id OR transaction_line.credit_id = account.id 
               WHERE account.owner_id = ' . $user->getId();

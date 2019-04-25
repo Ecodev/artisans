@@ -25,14 +25,11 @@ class OwnerTest extends AbstractSorting
     {
         $result = $this->getSortedQueryResult(Transaction::class, 'owner');
         self::assertSame([
+            8004,
             8000,
-            8002,
-            8006,
-            8005,
-            8007,
             8001,
             8003,
-            8004,
+            8005,
         ], $result);
     }
 }

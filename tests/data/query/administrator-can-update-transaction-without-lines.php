@@ -31,12 +31,21 @@ return [
                 'name' => 'Active Member: inscription cours nautique (corrigé)',
                 'transactionLines' => [
                     [
-                        'balance' => '100.00',
+                        'balance' => '1000.00',
                         'credit' => [
-                            'balance' => '100.00',
+                            'balance' => '21000.00',
                         ],
                         'debit' => [
-                            'balance' => '50.00',
+                            'balance' => '500.00',
+                        ],
+                    ],
+                    [
+                        'balance' => '23500.00',
+                        'credit' => [
+                            'balance' => '21000.00',
+                        ],
+                        'debit' => [
+                            'balance' => '22700.00',
                         ],
                     ],
                 ],

@@ -28,19 +28,19 @@ return [
                     'name' => 'Acquisition voilier NE123456',
                     'balance' => '10000',
                     'transactionDate' => '2019-02-03',
-                    'debit' => 10054,
+                    'debit' => -1000,
                 ],
                 [
-                    'name' => 'Paiement par PostFinance	',
+                    'name' => 'Paiement cash',
                     'balance' => '7000',
                     'transactionDate' => '2019-02-03',
-                    'credit' => 10025,
+                    'credit' => 10029,
                 ],
                 [
                     'name' => 'Paiement par Raiffeisen',
                     'balance' => '3000',
                     'transactionDate' => '2019-02-04',
-                    'credit' => 10026,
+                    'credit' => 10030,
                 ],
             ],
         ],
@@ -54,20 +54,20 @@ return [
                         'balance' => '10000',
                         'credit' => null,
                         'debit' => [
-                            'balance' => '10000.00',
+                            'balance' => '-10000.00',
                         ],
                     ],
                     [
                         'balance' => '7000',
                         'credit' => [
-                            'balance' => '1187.50',
+                            'balance' => '-6500.00',
                         ],
                         'debit' => null,
                     ],
                     [
                         'balance' => '3000',
                         'credit' => [
-                            'balance' => '14000.00',
+                            'balance' => '19700.00',
                         ],
                         'debit' => null,
                     ],

@@ -13,7 +13,7 @@ return [
     [
         'data' => [
             'transactionLines' => [
-                'totalBalance' => '55562.50',
+                'totalBalance' => '27832.10',
             ],
         ],
     ],

@@ -28,7 +28,7 @@ return [
                     'balance' => '150.00',
                     'transactionDate' => '2019-03-01',
                     'credit' => 10037,
-                    'debit' => 10096,
+                    'debit' => -1000,
                 ],
             ],
         ],
@@ -41,10 +41,10 @@ return [
                     [
                         'balance' => '150.00',
                         'credit' => [
-                            'balance' => '150.00',
+                            'balance' => '0.00',
                         ],
                         'debit' => [
-                            'balance' => '0.00',
+                            'balance' => '-150.00',
                         ],
                     ],
                 ],

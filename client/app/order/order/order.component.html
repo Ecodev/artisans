@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>
-    Achats du {{ data.model.transaction.transactionDate | date: 'mediumDate' }}
+    Achats du {{ data.model.transaction.transactionDate | date: 'mediumDate' }} - {{ data.model.transaction.transactionDate | date: 'shortTime' }}
 </h2>
 
-<mat-dialog-content fxLayout="column" fxLayoutAlign="start end">
+<mat-dialog-content>
     <app-order-lines [contextVariables]="contextVariables"></app-order-lines>
 
-    <div class="natural-table">
+    <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
         <div class="mat-subheading-2">
             <div>TVA :</div>
             <div style="text-align:right">{{ data.model.vatPart | currency : 'CHF' }}</div>

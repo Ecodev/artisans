@@ -13,7 +13,7 @@ use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Repository\AccountRepository;
 use Application\Utility;
-use Cake\Chronos\Date;
+use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -47,7 +47,7 @@ class Invoicer
         $account = $this->accountRepository->getOrCreate($user);
 
         $transaction = new Transaction();
-        $transaction->setTransactionDate(Date::today());
+        $transaction->setTransactionDate(Chronos::now());
         $transaction->setName('Vente');
         $this->entityManager->persist($transaction);
 
@@ -98,7 +98,7 @@ class Invoicer
         $transactionLine->setCredit($credit);
         $transactionLine->setBalance($balance);
         $transactionLine->setTransaction($transaction);
-        $transactionLine->setTransactionDate(Date::today());
+        $transactionLine->setTransactionDate(Chronos::now());
     }
 
     private function createOrderLine(Order $order, Product $product, string $balance, string $quantity): OrderLine

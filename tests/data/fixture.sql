@@ -110,7 +110,7 @@ REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, d
 (7002, '2019-03-14', -1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
 (7003, '2019-01-10', -1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim');
 
-REPLACE INTO transaction (id, creator_id, owner_id, transactionDate, name, remarks, expense_claim_id) VALUES
+REPLACE INTO transaction (id, creator_id, owner_id, transaction_date, name, remarks, expense_claim_id) VALUES
 (8000, -1000, -1000, '2019-01-01', 'Solde à nouveau', 'Ouverture des comptes en début d\'exercice', NULL),
 (8001, -1000, -1000, '2019-02-04', 'Achat réfrigérateur', 'Paiement partiel par banque et caisse', NULL),
 (8003, NULL, NULL, '2019-04-15', 'Traitement de la dépense "Produits de nettoyage"', '', 7001),
@@ -121,7 +121,7 @@ REPLACE INTO transaction (id, creator_id, owner_id, transactionDate, name, remar
 REPLACE INTO transaction_tag (id, name) VALUES
 (15000, 'Entretien');
 
-REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transaction_tag_id, balance, transactionDate, is_reconciled, name, remarks) VALUES
+REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transaction_tag_id, balance, transaction_date, is_reconciled, name, remarks) VALUES
 (14000, 8000, 10029, 10042, NULL, 1000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de caisse'),
 (14001, 8000, 10030, 10042, NULL, 23500, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de banque'),
 (14002, 8001, 10032, NULL, NULL, 1500, '2019-02-03', 1, 'Achat réfrigérateur', ''),

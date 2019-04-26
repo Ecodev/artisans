@@ -5,6 +5,7 @@ export const orderMetaFragment = gql`
     fragment orderMeta on Order {
         id
         balance
+        vatPart
         orderLines {
             id
         }

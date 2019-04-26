@@ -1,7 +1,7 @@
 <mat-dialog-content fxLayout="column">
 
     <div *ngIf="!data.model" class="mat-subheading-2">
-        Oops, aucun article ne correspond au code recherché : {{ routeSnapshot.params.code }}
+        Oops, aucun article ne correspond au code recherché : "{{ routeSnapshot.params.code }}"
     </div>
 
     <div *ngIf="data.model" fxLayout="column" fxLayoutGap="20px">

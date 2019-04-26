@@ -44,12 +44,14 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10043, 10037, NULL, 'liability', '200010', '', 'Fournisseur A'),
 (10044, 10037, NULL, 'liability', '200011', '', 'Fournisseur B'),
 (10045, 10037, NULL, 'liability', '200012', '', 'Fournisseur C'),
-(-10000, 10038, -1000, 'liability', '20300001', '', 'Administrator'),
-(-10001, 10038, -1001, 'liability', '20300002', '', 'Responsable'),
-(-10002, 10038, -1002, 'liability', '20300003', '', 'Active Member'),
-(-10007, 10038, -1007, 'liability', '20300004', '', 'Conjoint'),
-(-10010, 10038, -1010, 'liability', '20300005', '', 'Voilier Member'),
-(-10011, 10038, -1011, 'liability', '20300006', '', 'Voilier Family');
+(-10000, 10038, -1000, 'liability', '20300000', '', 'Administrator'),
+(-10001, 10038, -1001, 'liability', '20300001', '', 'Responsable'),
+(-10002, 10038, -1002, 'liability', '20300002', '', 'Active Member'),
+(-10010, 10038, -1010, 'liability', '20300010', '', 'Voilier Member'),
+(-10011, 10038, -1006, 'liability', '20300006', '', 'Archived Member'),
+(-10012, 10038, -1005, 'liability', '20300005', '', 'Inactive Member'),
+(-10013, 10038, -1004, 'liability', '20300004', '', 'New User'),
+(-10014, 10038, -1003, 'liability', '20300003', '', 'Booking Only');
 
 REPLACE INTO product_tag (id, name) VALUES
 (6000, 'Fruits & Légumes'),

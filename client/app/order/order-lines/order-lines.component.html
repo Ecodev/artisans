@@ -14,9 +14,9 @@
                             [multipleGroups]="true"
             >
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="quantity">Quantité</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="open" [checked]="false" [hidden]="true">Nom</span>
-                    <span naturalColumnsPickerColumn="quantity">Quantité</span>
                     <span naturalColumnsPickerColumn="balance">Montant</span>
                 </natural-columns-picker>
             </natural-search>

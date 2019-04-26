@@ -196,7 +196,6 @@ const routes: Routes = [
                             },
                             data: {
                                 component: OrderComponent,
-                                escapeRouterLink: ['/admin/order'],
                                 dialogConfig: {
                                     width: '600px',
                                     maxWidth: '95vw',

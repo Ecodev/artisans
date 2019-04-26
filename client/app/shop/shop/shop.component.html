@@ -22,7 +22,7 @@
         <h1 class="mat-title">Panier d'achats</h1>
 
         <mat-nav-list>
-            <mat-list-item *ngFor="let line of cartService.cart" [routerLink]="['/product', line.product.code, {quantity: line.quantity}]">
+            <mat-list-item *ngFor="let line of cartService.cart" [routerLink]="['/shop/product', line.product.code, {quantity: line.quantity}]">
                 <app-file [model]="line.product.image" [height]="70" [style.width.px]="70" matListAvatar></app-file>
                 <div matLine style="white-space: normal;">{{ line.product.name }}</div>
                 <div matLine fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start end" style="white-space: nowrap">

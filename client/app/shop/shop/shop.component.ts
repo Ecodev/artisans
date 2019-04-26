@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
+import { throttle, throttleTime } from 'rxjs/operators';
+import { QrService } from '../services/qr.service';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -12,11 +16,14 @@ export class ShopComponent implements OnInit {
     public mode;
     public CartService = CartService;
 
-    constructor(public cartService: CartService, public alertService: NaturalAlertService) {
+    constructor(public cartService: CartService, public alertService: NaturalAlertService,
+                public router: Router) {
 
     }
 
     ngOnInit() {
+
+
     }
 
     public createOrder() {

@@ -2,14 +2,14 @@ import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@an
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
-import { ScanService } from './scan.service';
+import { QrService } from '../services/qr.service';
 
 @Component({
     selector: 'app-scan',
-    templateUrl: './scan.component.html',
-    styleUrls: ['./scan.component.scss'],
+    templateUrl: './camera.component.html',
+    styleUrls: ['./camera.component.scss'],
 })
-export class ScanComponent implements OnInit, OnDestroy {
+export class CameraComponent implements OnInit, OnDestroy {
 
     @ViewChild('video') videoRef: ElementRef;
 
@@ -18,29 +18,19 @@ export class ScanComponent implements OnInit, OnDestroy {
                 private alertService: NaturalAlertService,
                 @Inject(MAT_DIALOG_DATA) data: any,
                 private dialogRef: MatDialogRef<any>,
-                private scanService: ScanService) {
+                private scanService: QrService) {
     }
 
     ngOnInit() {
-
         this.scanService.getStream().subscribe(stream => {
             this.videoRef.nativeElement.srcObject = stream;
             this.videoRef.nativeElement.setAttribute('playsinline', 'true'); // required to tell iOS safari we don't want fullscreen
             this.videoRef.nativeElement.play();
         });
 
-        this.scanService.scan().subscribe(result => {
-            const parsedCode = result.toLowerCase().replace('https://chez-emmy.ch/product/', '');
-            this.router.navigate(['/product', parsedCode]);
-            this.dialogRef.close();
-
-        }, (err) => {
-            console.error('Camera inutilisable.', err.name, err.code, err.message);
-            const message = 'La caméra est indisponible, essaye de rechercher ton article au travers de son code';
-            this.alertService.error(message, 5000);
-            this.router.navigateByUrl('/');
-            this.dialogRef.close();
-        });
+        // In case we arrive here by url refresh that avoids to start camera from click on home.component.ts
+        // Won't cause double scanning
+        this.scanService.start();
     }
 
     ngOnDestroy() {

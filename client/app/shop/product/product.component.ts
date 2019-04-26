@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
+import { DialogTriggerProvidedData } from '../../shared/components/modal-trigger/dialog-trigger.component';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../../admin/products/services/product.service';
 
@@ -19,12 +20,12 @@ export class ProductComponent implements OnInit {
     public price;
     private routeSnapshot;
 
-    constructor(@Inject(MAT_DIALOG_DATA) data: any,
+    constructor(@Inject(MAT_DIALOG_DATA) data: DialogTriggerProvidedData,
                 private cartService: CartService,
                 productService: ProductService,
                 private router: Router) {
 
-        this.routeSnapshot = data.routeSnapshot;
+        this.routeSnapshot = data.activatedRoute.snapshot;
         this.data = {model: this.routeSnapshot.data.product.model}; // to respect our template standard
 
         if (this.data.model) {

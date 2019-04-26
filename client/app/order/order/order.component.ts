@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { DialogTriggerProvidedData } from '../../shared/components/modal-trigger/dialog-trigger.component';
 import { OrderLinesVariables } from '../../shared/generated-types';
 
 @Component({
@@ -16,9 +17,9 @@ export class OrderComponent implements OnInit {
 
     public data;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public dialogData: any) {
+    constructor(@Inject(MAT_DIALOG_DATA) public dialogData: DialogTriggerProvidedData) {
 
-        this.data = dialogData.routeSnapshot.data.order;
+        this.data = dialogData.activatedRoute.snapshot.data.order;
 
         this.contextVariables = {
             filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]},

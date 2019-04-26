@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import jsQR from 'jsqr';
-import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ScanService {
+export class QrService {
 
     private stream: MediaStream | null;
 
     private video: HTMLVideoElement;
     private canvas: HTMLCanvasElement;
-    private context: CanvasRenderingContext2D | null;
+    private context: CanvasRenderingContext2D;
 
-    private scanObservable: Subject<string> = new Subject<string>();
-    private streamObservable: ReplaySubject<MediaStream> = new ReplaySubject<MediaStream>(1);
+    private readonly scanObservable = new Subject<string | null>();
+    private readonly streamObservable = new ReplaySubject<MediaStream>(1);
+
+    private starting = false;
+    private stopped = true;
 
     constructor() {
     }
@@ -25,15 +29,21 @@ export class ScanService {
 
     public start() {
 
-        if (this.stream) {
+        if (this.stream || this.starting) {
+            this.stopped = false;
+            requestAnimationFrame(this.decode.bind(this));
             return;
         }
 
+        this.starting = true;
+        this.stopped = false;
+
         this.video = document.createElement('video');
         this.canvas = document.createElement('canvas');
-        this.context = this.canvas.getContext('2d');
+        this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 
         navigator.mediaDevices.getUserMedia({video: {facingMode: 'environment'}}).then(async (stream: MediaStream) => {
+            this.starting = false;
             this.streamObservable.next(stream);
             this.stream = stream;
             this.video.srcObject = stream;
@@ -44,18 +54,27 @@ export class ScanService {
         }).catch((err) => {
             this.scanObservable.error(err);
         });
+
     }
 
+    /**
+     * Start to watch QR scanning, but dont start scanning. Call QrService.start() separatedly
+     */
     public scan(): Observable<string> {
-
-        if (!this.stream) {
-            this.start();
-        }
-
-        return this.scanObservable.asObservable();
+        return this.scanObservable.pipe(distinctUntilChanged(), filter(v => !!v)) as Observable<string>;
     }
 
+    /**
+     * Pause processing
+     */
     public stop() {
+        this.stopped = true;
+    }
+
+    /**
+     * Stop without allowing restart. Kill everything, a new service has to be instantiated
+     */
+    public stopForefer() {
 
         if (this.stream) {
             this.stream.getTracks().forEach(track => track.stop());
@@ -67,14 +86,9 @@ export class ScanService {
 
     private decode(): void {
         if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+
             this.canvas.height = this.video.videoHeight;
             this.canvas.width = this.video.videoWidth;
-
-            if (!this.context) {
-                requestAnimationFrame(this.decode.bind(this));
-                return;
-            }
-
             this.context.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
 
             const imgData = this.context.getImageData(0, 0, this.canvas.width, this.canvas.height);
@@ -82,13 +96,17 @@ export class ScanService {
 
             if (code && code.data) {
                 this.scanObservable.next(code.data);
-
             } else {
-                requestAnimationFrame(this.decode.bind(this));
+                this.scanObservable.next(null);
             }
 
+            if (!this.stopped) {
+                requestAnimationFrame(this.decode.bind(this));
+            }
         } else {
-            requestAnimationFrame(this.decode.bind(this));
+            if (!this.stopped) {
+                requestAnimationFrame(this.decode.bind(this));
+            }
         }
     }
 

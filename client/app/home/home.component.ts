@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractController, NaturalSidenavContainerComponent, NaturalSidenavService } from '@ecodev/natural';
-import { takeUntil } from 'rxjs/operators';
+import { NaturalAbstractController, NaturalAlertService, NaturalSidenavContainerComponent, NaturalSidenavService } from '@ecodev/natural';
+import { takeUntil, throttleTime } from 'rxjs/operators';
 import { UserService } from '../admin/users/services/user.service';
+import { QrService } from '../shop/services/qr.service';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent extends NaturalAbstractController implements OnInit {
+export class HomeComponent extends NaturalAbstractController implements OnInit, OnDestroy {
 
     public menu: NaturalSidenavContainerComponent | undefined;
 
@@ -18,7 +19,12 @@ export class HomeComponent extends NaturalAbstractController implements OnInit {
      */
     public code = '';
 
-    constructor(private userService: UserService, private router: Router, public route: ActivatedRoute) {
+    constructor(private userService: UserService,
+                private router: Router,
+                public route: ActivatedRoute,
+                private qrService: QrService,
+                public alertService: NaturalAlertService,
+    ) {
         super();
     }
 
@@ -31,10 +37,25 @@ export class HomeComponent extends NaturalAbstractController implements OnInit {
                             NaturalSidenavService.sideNavs.get('profileMenu');
             });
         });
+
+        this.qrService.scan().pipe(takeUntil(this.ngUnsubscribe), throttleTime(500)).subscribe(result => {
+            const parsedCode = result.toLowerCase().replace('https://chez-emmy.ch/shop/product/', '');
+            this.router.navigate(['/shop/product', parsedCode]);
+
+        }, () => {
+            const message = 'La caméra est indisponible, essaye de rechercher ton article au travers de son code';
+            this.alertService.error(message, 5000);
+            this.router.navigateByUrl('/');
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.qrService.stop();
     }
 
     public goToCode() {
-        this.router.navigate(['/product', this.code]);
+        this.router.navigate(['/shop/product', this.code]);
     }
+
 
 }

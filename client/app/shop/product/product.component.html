@@ -63,17 +63,17 @@
 </mat-dialog-content>
 
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
-    <button mat-button [mat-dialog-close]="['../../']">Fermer</button>
+    <button mat-button [mat-dialog-close]="null">Fermer</button>
 
-    <button mat-stroked-button color="warn" (click)="removeFromCart()" [mat-dialog-close]="['../../']" [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
+    <button mat-stroked-button color="warn" (click)="removeFromCart()" mat-dialog-close [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
         Supprimer
     </button>
 
-    <button mat-flat-button color="primary" (click)="updateCart()" [mat-dialog-close]="['../../']" *ngIf="edit && data?.model" [disabled]="quantityForm.invalid || !quantityForm.dirty || !data.model.isActive">
+    <button mat-flat-button color="primary" (click)="updateCart()" mat-dialog-close *ngIf="edit && data?.model" [disabled]="quantityForm.invalid || !quantityForm.dirty || !data.model.isActive">
         Mettre à jour
     </button>
 
-    <button mat-flat-button color="primary" (click)="addToCart()" [mat-dialog-close]="['../../']" *ngIf="!edit && data?.model" [disabled]="quantityForm.invalid || !data.model.isActive">
+    <button mat-flat-button color="primary" (click)="addToCart()" mat-dialog-close *ngIf="!edit && data?.model" [disabled]="quantityForm.invalid || !data.model.isActive">
         Ajouter au panier
     </button>
 

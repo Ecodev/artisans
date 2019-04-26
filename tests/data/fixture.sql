@@ -116,7 +116,7 @@ REPLACE INTO transaction (id, creator_id, owner_id, transaction_date, name, rema
 (8003, NULL, NULL, '2019-04-15', 'Traitement de la dépense "Produits de nettoyage"', '', 7001),
 (8004, -1002, -1002, '2019-04-05', 'Versement en ligne', '', NULL),
 (8005, -1002, NULL, '2019-04-24', 'Vente 1', '', NULL),
-(8006, -1002, NULL, '2019-04-25', 'Vente 2', '', NULL);
+(8006, -1007, NULL, '2019-04-25', 'Vente 2', '', NULL);
 
 REPLACE INTO transaction_tag (id, name) VALUES
 (15000, 'Entretien');
@@ -129,8 +129,8 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transact
 (14004, 8001, NULL, 10030, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
 (14005, 8003, 10028, -10002, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
 (14006, 8004, 10030, -10002, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
-(14007, 8005, -10002, 10013, NULL, 12.00, '2019-04-24', 1, 'Achats', ''),
-(14007, 8006, -10002, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats', '');
+(14007, 8005, -10002, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats du responsable', ''),
+(14008, 8006, -10002, 10013, NULL, 62.40, '2019-04-24', 1, 'Achats du conjoint', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
 (9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
@@ -164,17 +164,18 @@ REPLACE INTO product_metadata (id, product_id, name, value) VALUES
 (13002, 3007, 'Contenance', '75cl'),
 (13003, 3008, 'Contenance', '75cl');
 
-REPLACE INTO `order` (id, owner_id, creation_date, transaction_id) VALUES
-(16000, -1002, '2019-04-24', 8005),
-(16001, -1007, '2019-04-25', 8006);
+REPLACE INTO `order` (id, owner_id, creator_id, creation_date, transaction_id) VALUES
+(16000, -1002, -1002, '2019-04-24', 8005),
+(16001, -1007, -1007, '2019-04-25', 8006);
 
-REPLACE INTO order_line (id, order_id, product_id, creation_date, quantity, unit, balance, vat_rate, name) VALUES
-(17000, 16000, 3000, '2019-04-24', 2, '', 10.00, 0.077, 'Chocolat noir BIO'),
-(17001, 16000, 3002, '2019-04-24', 1, '', 5.00, 0.077, '6 oeufs BIO de la région'),
-(17002, 16000, 3011, '2019-04-24', 1, '', 10.00, 0.00, 'Miel de la région'),
-(17003, 16000, 3005, '2019-04-24', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
-(17004, 16001, 3011, '2019-04-25', 2, '', 10.00, 0.00, 'Miel de la région'),
-(17005, 16001, 3005, '2019-04-25', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
-(17006, 16001, 3005, '2019-04-25', 5, '', 50.00, 0.077, 'Pinot Noir La Coccinelle');
+REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quantity, unit, balance, vat_rate, name) VALUES
+(17000, -1002, 16000, 3000, '2019-04-24', 2, '', 10.00, 0.077, 'Chocolat noir BIO'),
+(17001, -1002, 16000, 3002, '2019-04-24', 1, '', 5.00, 0.077, '6 oeufs BIO de la région'),
+(17002, -1002, 16000, 3011, '2019-04-24', 1, '', 10.00, 0.00, 'Miel de la région'),
+(17003, -1002, 16000, 3005, '2019-04-24', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
+(17004, -1007, 16001, 3011, '2019-04-25', 2, '', 10.00, 0.00, 'Miel de la région'),
+(17005, -1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
+(17006, -1007, 16001, 3005, '2019-04-25', 5, '', 50.00, 0.077, 'Pinot Noir La Coccinelle');
+
 
 COMMIT;

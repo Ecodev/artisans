@@ -112,7 +112,7 @@ class InvoicerTest extends TestCase
                         'My product 1',
                         'kg',
                         '3.100',
-                        '8.55',
+                        '8.53',
                         '0.077',
 
                     ],
@@ -129,7 +129,7 @@ class InvoicerTest extends TestCase
                         'Achats',
                         'John Doe',
                         'Vente de marchandises',
-                        '208.55',
+                        '208.53',
                     ],
                 ],
             ],

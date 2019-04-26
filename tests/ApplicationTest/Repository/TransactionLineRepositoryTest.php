@@ -28,12 +28,12 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = range(14000, 14007);
+        $all = range(14000, 14008);
 
         return [
             ['anonymous', []],
             ['individual', []],
-            ['member', [14005, 14006, 14007]],
+            ['member', [14005, 14006, 14007, 14008]],
             ['responsible', $all],
             ['administrator', $all],
         ];

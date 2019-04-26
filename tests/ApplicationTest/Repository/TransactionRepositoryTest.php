@@ -37,7 +37,7 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         return [
             ['anonymous', []],
             ['individual', []],
-            ['member', [8003, 8004, 8006]],
+            ['member', [8003, 8004, 8005, 8006]],
             ['responsible', $all],
             ['administrator', $all],
         ];

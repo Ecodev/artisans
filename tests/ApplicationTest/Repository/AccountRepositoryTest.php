@@ -95,8 +95,8 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         $totalEquity = $this->repository->totalBalanceByType(AccountTypeType::EQUITY);
 
         self::assertEquals(24700, $totalAssets);
-        self::assertEquals(272.60, $totalLiabilities);
-        self::assertEquals(27.40, $totalRevenue);
+        self::assertEquals(210.20, $totalLiabilities);
+        self::assertEquals(89.80, $totalRevenue);
         self::assertEquals(100.00, $totalExpense);
         self::assertEquals(24500.00, $totalEquity);
     }

@@ -62,10 +62,10 @@ abstract class Utility
     }
 
     /**
-     * Round up money amount to next 5 cents
+     * Round up money amount to next cent
      *
-     * - 2.13 => 2.15
-     * - 2.20 => 2.20
+     * - 2.134 => 2.14
+     * - 2.173 => 2.18
      *
      * @param string $amount
      *
@@ -73,22 +73,6 @@ abstract class Utility
      */
     public static function moneyRoundUp(string $amount): string
     {
-        $result = (string) ceil((float) bcmul($amount, '100'));
-
-        if (preg_match('~.$~', $result, $m)) {
-            $lastDigit = $m[0];
-
-            if ($lastDigit > 0 && $lastDigit < 5) {
-                $result = bcadd($result, '5');
-                $result = bcsub($result, $lastDigit);
-            } elseif ($lastDigit > 5) {
-                $result = bcadd($result, '10');
-                $result = bcsub($result, $lastDigit);
-            }
-        }
-
-        $result = bcdiv((string) $result, '100');
-
-        return $result;
+        return bcdiv((string) ceil((float) bcmul($amount, '100')), '100');
     }
 }

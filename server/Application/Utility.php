@@ -73,6 +73,6 @@ abstract class Utility
      */
     public static function moneyRoundUp(string $amount): string
     {
-        return bcdiv((string) ceil((float) bcmul($amount, '100')), '100');
+        return (string) bcdiv((string) ceil((float) bcmul($amount, '100')), '100');
     }
 }

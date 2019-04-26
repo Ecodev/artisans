@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { CartService } from '../services/cart.service';
+import { ProductService } from '../../admin/products/services/product.service';
 
 @Component({
     selector: 'app-product',
@@ -20,6 +21,7 @@ export class ProductComponent implements OnInit {
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any,
                 private cartService: CartService,
+                productService: ProductService,
                 private router: Router) {
 
         this.routeSnapshot = data.routeSnapshot;
@@ -33,6 +35,11 @@ export class ProductComponent implements OnInit {
 
             this.computePrice();
             this.quantityForm.valueChanges.subscribe(() => this.computePrice(true));
+
+            // Fetch permissions if they are missing
+            if (!this.data.model.permissions) {
+                productService.getOne(this.data.model.id).subscribe(productWithPermissions => this.data.model = productWithPermissions);
+            }
         }
 
     }

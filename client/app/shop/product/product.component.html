@@ -54,7 +54,7 @@
         <div class="mat-subheading-2" [innerHTML]="data.model.description"></div>
         <div class="mat-body-1" [innerHTML]="data.model.remarks"></div>
 
-        <div>
+        <div *ngIf="data.model.permissions?.update">
             <button mat-stroked-button [mat-dialog-close]="['/admin/product', data.model.id]">Administration</button>
         </div>
 

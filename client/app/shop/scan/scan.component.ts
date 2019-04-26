@@ -36,7 +36,7 @@ export class ScanComponent implements OnInit, OnDestroy {
 
         }, (err) => {
             console.error('Camera inutilisable.', err.name, err.code, err.message);
-            const message = 'La caméra est indisponible, essaye de rechercher ton article au travers de sa référence';
+            const message = 'La caméra est indisponible, essaye de rechercher ton article au travers de son code';
             this.alertService.error(message, 5000);
             this.router.navigateByUrl('/');
             this.dialogRef.close();

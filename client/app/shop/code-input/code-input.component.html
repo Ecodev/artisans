@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutGap="30px" [style.max-width.px]="400">
-    <h1 class="mat-display-1">Référence de l'article</h1>
+    <h1 class="mat-display-1">Code de l'article</h1>
     <input [(ngModel)]="code" placeholder="Code" (keydown.enter)="goToProduct(code)" appFocus />
     <button mat-flat-button color="primary" [routerLink]="getUrl(code)">Valider</button>
 </div>

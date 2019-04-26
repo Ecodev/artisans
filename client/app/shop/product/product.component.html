@@ -1,7 +1,7 @@
 <mat-dialog-content fxLayout="column">
 
     <div *ngIf="!data.model" class="mat-subheading-2">
-        Oops, aucun article ne correspond à la référence recherchée : {{ routeSnapshot.params.code }}
+        Oops, aucun article ne correspond au code recherché : {{ routeSnapshot.params.code }}
     </div>
 
     <div *ngIf="data.model" fxLayout="column" fxLayoutGap="20px">
@@ -44,7 +44,7 @@
         <mat-divider></mat-divider>
 
         <div class="mat-subheading-2">
-            <span style="font-weight:bold">Référence :</span>
+            <span style="font-weight:bold">Code d'article :</span>
             {{ data.model.code }}
         </div>
         <div class="mat-subheading-2" *ngIf="data.model.supplier">

@@ -35,7 +35,7 @@
             </div>
             <div fxFlex></div>
 
-            <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px" *ngIf="quantityForm.value != 1">
+            <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px">
                 <div class="mat-title">x {{quantityForm.value}}</div>
                 <div class="mat-display-1 price no-margin">{{ price | currency : 'CHF' }}</div>
             </div>

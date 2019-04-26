@@ -12,6 +12,7 @@ use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Repository\AccountRepository;
+use Application\Utility;
 use Cake\Chronos\Date;
 use Doctrine\ORM\EntityManager;
 
@@ -60,7 +61,7 @@ class Invoicer
             $product = $line['product'];
             $quantity = $line['quantity'];
 
-            $balance = bcmul($product->getPricePerUnit(), $quantity);
+            $balance = Utility::moneyRoundUp(bcmul($product->getPricePerUnit(), $quantity, 10));
             $total = bcadd($total, $balance);
 
             $this->createOrderLine($order, $product, $balance, $quantity);

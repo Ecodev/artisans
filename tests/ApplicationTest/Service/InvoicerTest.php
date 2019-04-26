@@ -80,7 +80,7 @@ class InvoicerTest extends TestCase
                         'My product',
                         'kg',
                         '1',
-                        '0',
+                        '0.00',
                         '0.077',
                     ],
                 ],
@@ -89,10 +89,10 @@ class InvoicerTest extends TestCase
             'normal' => [
                 [
                     [
-                        'quantity' => '4',
+                        'quantity' => '3.100',
                         'product' => [
                             'name' => 'My product 1',
-                            'pricePerUnit' => '2.50',
+                            'pricePerUnit' => '2.75',
                             'unit' => 'kg',
                             'vatRate' => '0.077',
                         ],
@@ -111,8 +111,8 @@ class InvoicerTest extends TestCase
                     [
                         'My product 1',
                         'kg',
-                        '4',
-                        '10.00',
+                        '3.100',
+                        '8.55',
                         '0.077',
 
                     ],
@@ -120,7 +120,7 @@ class InvoicerTest extends TestCase
                         'My product 2',
                         '',
                         '1',
-                        '200',
+                        '200.00',
                         '0.025',
                     ],
                 ],
@@ -129,7 +129,7 @@ class InvoicerTest extends TestCase
                         'Achats',
                         'John Doe',
                         'Vente de marchandises',
-                        '210.00',
+                        '208.55',
                     ],
                 ],
             ],
@@ -150,7 +150,7 @@ class InvoicerTest extends TestCase
                         'My product',
                         'kg',
                         '1',
-                        '-100',
+                        '-100.00',
                         '0.077',
                     ],
                 ],

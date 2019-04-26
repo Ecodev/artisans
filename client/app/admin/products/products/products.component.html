@@ -16,7 +16,7 @@
                     <span naturalColumnsPickerColumn="supplierPrice">Prix du producteur</span>
                     <span naturalColumnsPickerColumn="pricePerUnit">Prix par unité</span>
                     <span naturalColumnsPickerColumn="vatRate">TVA</span>
-                    <span naturalColumnsPickerColumn="date">Dernière modification</span>
+                    <span naturalColumnsPickerColumn="quantity">Quantité en stock</span>
                     <span naturalColumnsPickerColumn="verificationDate">Dernière vérification</span>
                 </natural-columns-picker>
             </natural-search>
@@ -84,10 +84,10 @@
                     <td mat-footer-cell *matFooterCellDef ></td>
                 </ng-container>
 
-                <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Dernière modification</th>
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantité en stock</th>
                     <td mat-cell *matCellDef="let element">
-                        {{ element.updateDate || element.creationDate | date: 'mediumDate' }}-{{ element.updateDate || element.creationDate | date: 'shortTime' }}
+                        {{ +element.quantity + element.unit }}
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>

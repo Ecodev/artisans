@@ -65,6 +65,7 @@ class Invoicer
             $total = bcadd($total, $balance);
 
             $this->createOrderLine($order, $product, $balance, $quantity);
+            $product->setQuantity(bcsub($product->getQuantity(), $quantity, 10));
         }
 
         $this->createTransactionLine($transaction, $account, $total);

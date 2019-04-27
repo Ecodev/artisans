@@ -87,7 +87,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_INDIVIDUAL, [$order], ['read']);
         $this->allow(User::ROLE_INDIVIDUAL, [$order], ['create']);
 
-        $this->allow(User::ROLE_MEMBER, [$account], ['create', 'update']);
+        $this->allow(User::ROLE_MEMBER, [$account], ['update']);
         $this->allow(User::ROLE_MEMBER, [$user], ['create']);
         $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsOwner());
 

@@ -7,6 +7,7 @@
 use Application\DBAL\Types\AccountTypeType;
 use Application\Model\Account;
 use Application\Model\Transaction;
+use Application\Model\User;
 
 require_once 'server/cli.php';
 
@@ -51,6 +52,16 @@ foreach (_em()->getRepository(Transaction::class)->findAll() as $transaction) {
     if (bccomp($totalDebit, $totalCredit) !== 0) {
         $errors[] = sprintf('ERREUR: Transaction#%u non-équilibrée, débit: %s, crédit: %s', $transaction->getId(), $totalDebit, $totalCredit);
     }
+}
+
+foreach (_em()->getRepository(User::class)->getAllNonFamilyOwnersWithAccount() as $user) {
+    $errors[] = sprintf(
+        'User#%d (%s) ne devrait pas avoir son propre compte débiteur mais partager celui du User#%d (%s)',
+        $user->getId(),
+        $user->getName(),
+        $user->getOwner()->getId(),
+        $user->getOwner()->getName()
+    );
 }
 
 if (count($errors)) {

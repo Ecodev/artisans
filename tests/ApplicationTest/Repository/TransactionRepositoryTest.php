@@ -33,11 +33,12 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
     public function providerGetAccessibleSubQuery(): array
     {
         $all = [8000, 8001, 8003, 8004, 8005, 8006];
+        $family = [8003, 8004, 8005, 8006];
 
         return [
             ['anonymous', []],
-            ['individual', []],
-            ['member', [8003, 8004, 8005, 8006]],
+            ['individual', $family],
+            ['member', $family],
             ['responsible', $all],
             ['administrator', $all],
         ];

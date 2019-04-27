@@ -42,11 +42,12 @@ class AccountRepositoryTest extends AbstractRepositoryTest
             -10001,
             -10000,
         ], array_diff($range, [10015, 10016, 10017]));
+        $family = [-10002];
 
         return [
             ['anonymous', []],
-            ['individual', [-10002]],
-            ['member', [-10002]],
+            ['individual', $family],
+            ['member', $family],
             ['responsible', $all],
             ['administrator', $all],
         ];

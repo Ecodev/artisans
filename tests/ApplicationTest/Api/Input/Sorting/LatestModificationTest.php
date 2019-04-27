@@ -25,6 +25,7 @@ class LatestModificationTest extends AbstractSorting
             7001,
             7002,
             7000,
+            7003,
         ], $result);
     }
 }

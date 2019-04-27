@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Repository;
 
-use Application\Model\ExpenseClaim;
-use Application\Repository\ExpenseClaimRepository;
+use Application\Model\OrderLine;
+use Application\Repository\OrderLineRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
 /**
  * @group Repository
  */
-class ExpenseClaimRepositoryTest extends AbstractRepositoryTest
+class OrderLineRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;
 
     /**
-     * @var ExpenseClaimRepository
+     * @var OrderLineRepository
      */
     private $repository;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->repository = _em()->getRepository(ExpenseClaim::class);
+        $this->repository = _em()->getRepository(OrderLine::class);
     }
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [7000, 7001, 7002, 7003, 7004];
-        $family = [7000, 7001, 7002, 7003];
+        $all = range(17000, 17006);
+        $family = $all;
 
         return [
             ['anonymous', []],

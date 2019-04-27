@@ -25,6 +25,6 @@ class ExpenseClaimRepository extends AbstractRepository implements LimitedAccess
             return $this->getAllIdsQuery();
         }
 
-        return $this->getAllIdsForOwnerQuery($user);
+        return $this->getAllIdsForFamilyQuery($user);
     }
 }

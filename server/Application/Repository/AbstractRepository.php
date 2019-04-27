@@ -33,9 +33,10 @@ abstract class AbstractRepository extends EntityRepository
      */
     protected function getAllIdsQuery(): string
     {
-        $qb = $this->getEntityManager()->getConnection()->createQueryBuilder()
+        $connection = $this->getEntityManager()->getConnection();
+        $qb = $connection->createQueryBuilder()
             ->select('id')
-            ->from($this->getClassMetadata()->getTableName());
+            ->from($connection->quoteIdentifier($this->getClassMetadata()->getTableName()));
 
         return $qb->getSQL();
     }
@@ -59,24 +60,25 @@ abstract class AbstractRepository extends EntityRepository
     }
 
     /**
-     * Return native SQL query to get all ID of object owned by given user or that user family
+     * Return native SQL query to get all ID of object owned by anybody from the family
      *
      * @param User $user
      *
      * @return string
      */
-    protected function getAllIdsForOwnerOrFamilyQuery(User $user): string
+    protected function getAllIdsForFamilyQuery(User $user): string
     {
-        $ids = [$user->getId()];
         if ($user->getOwner()) {
-            $ids[] = $user->getOwner()->getId();
+            $id = $user->getOwner()->getId();
+        } else {
+            $id = $user->getId();
         }
 
         $connection = $this->getEntityManager()->getConnection();
         $qb = $connection->createQueryBuilder()
             ->select('id')
             ->from($connection->quoteIdentifier($this->getClassMetadata()->getTableName()))
-            ->andWhere('owner_id IN (' . implode(', ', $ids) . ')');
+            ->andWhere('owner_id IN (SELECT id FROM user WHERE id = ' . $id . ' OR owner_id = ' . $id . ')');
 
         return $qb->getSQL();
     }

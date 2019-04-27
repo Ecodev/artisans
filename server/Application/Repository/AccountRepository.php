@@ -30,7 +30,7 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
             return $this->getAllIdsQuery();
         }
 
-        return $this->getAllIdsForOwnerOrFamilyQuery($user);
+        return $this->getAllIdsForFamilyQuery($user);
     }
 
     /**

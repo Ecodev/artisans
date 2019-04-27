@@ -25,6 +25,6 @@ class OrderRepository extends AbstractRepository implements LimitedAccessSubQuer
             return $this->getAllIdsQuery();
         }
 
-        return $this->getAllIdsForOwnerQuery($user);
+        return $this->getAllIdsForFamilyQuery($user);
     }
 }

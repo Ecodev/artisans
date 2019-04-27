@@ -25,8 +25,14 @@ class TransactionLineRepository extends AbstractRepository implements LimitedAcc
             return $this->getAllIdsQuery();
         }
 
+        if ($user->getOwner()) {
+            $id = $user->getOwner()->getId();
+        } else {
+            $id = $user->getId();
+        }
+
         return 'SELECT transaction_line.id FROM transaction_line
               JOIN account ON transaction_line.debit_id = account.id OR transaction_line.credit_id = account.id 
-              WHERE account.owner_id = ' . $user->getId();
+              WHERE account.owner_id = ' . $id;
     }
 }

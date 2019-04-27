@@ -25,6 +25,6 @@ class AccountingDocumentRepository extends AbstractRepository implements Limited
             return $this->getAllIdsQuery();
         }
 
-        return $this->getAllIdsForOwnerQuery($user);
+        return $this->getAllIdsForFamilyQuery($user);
     }
 }

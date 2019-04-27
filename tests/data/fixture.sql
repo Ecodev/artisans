@@ -110,7 +110,8 @@ REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, d
 (7000, '2019-03-10', -1002, 200.00, 'new', 'achats Jumbo', 'matériaux pour étagère', 'expenseClaim'),
 (7001, '2019-03-14', -1002, 100.00, 'processed', 'Produits de nettoyage', 'Facture Migros du 10.03.2019', 'expenseClaim'),
 (7002, '2019-03-14', -1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
-(7003, '2019-01-10', -1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim');
+(7003, '2019-01-10', -1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim'),
+(7004, '2019-01-06', -1010, 21.00, 'new', 'remplacement des clés', '', 'expenseClaim');
 
 REPLACE INTO transaction (id, creator_id, owner_id, transaction_date, name, remarks, expense_claim_id) VALUES
 (8000, -1000, -1000, '2019-01-01', 'Solde à nouveau', 'Ouverture des comptes en début d\'exercice', NULL),

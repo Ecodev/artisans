@@ -25,6 +25,6 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
             return $this->getAllIdsQuery();
         }
 
-        return $this->getAllIdsForOwnerQuery($user);
+        return $this->getAllIdsForFamilyQuery($user);
     }
 }

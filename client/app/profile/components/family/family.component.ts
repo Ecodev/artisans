@@ -30,9 +30,7 @@ export class FamilyComponent implements OnInit {
         this.viewer = this.route.snapshot.data.viewer.model;
 
         if (this.viewer) {
-            const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-            qvm.set('variables', UserService.getFamilyVariables(this.viewer));
-            this.userService.getAll(qvm).subscribe(members => this.familyMembers = members.items);
+            this.userService.getFamily(this.viewer).subscribe(family => this.familyMembers = family.items);
         }
 
     }

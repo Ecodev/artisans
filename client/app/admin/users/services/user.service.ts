@@ -3,7 +3,13 @@ import { Apollo } from 'apollo-angular';
 import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
-import { FormValidators, Literal, NaturalAbstractModelService, NaturalFormControl } from '@ecodev/natural';
+import {
+    FormValidators,
+    Literal,
+    NaturalAbstractModelService,
+    NaturalFormControl,
+    NaturalQueryVariablesManager,
+} from '@ecodev/natural';
 import {
     createUser,
     currentUserForProfileQuery,
@@ -374,5 +380,15 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                 login: login,
             },
         });
+    }
+
+    /**
+     * Get all members of the user family
+     */
+    public getFamily(user: CurrentUserForProfile['viewer']) {
+        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+        qvm.set('variables', UserService.getFamilyVariables(user));
+
+        return this.getAll(qvm);
     }
 }

@@ -54,9 +54,7 @@ export class UserComponent
         this.route.data.subscribe(() => {
 
             if (this.data.model.id) {
-                const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-                qvm.set('variables', UserService.getFamilyVariables(this.data.model));
-                this.userService.getAll(qvm).subscribe(family => {
+                this.userService.getFamily(this.data.model).subscribe(family => {
                     this.showFamilyTab = family.length > 1;
                 });
 

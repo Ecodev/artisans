@@ -24,6 +24,8 @@ import {
 } from '../../../shared/generated-types';
 import { Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
+import { UserService } from '../../users/services/user.service';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -38,7 +40,9 @@ export class ExpenseClaimService extends NaturalAbstractModelService<ExpenseClai
     UpdateExpenseClaimVariables,
     DeleteExpenseClaims> {
 
-    constructor(apollo: Apollo) {
+    constructor(apollo: Apollo,
+                private userService: UserService,
+    ) {
         super(apollo,
             'expenseClaim',
             expenseClaimQuery,
@@ -69,23 +73,28 @@ export class ExpenseClaimService extends NaturalAbstractModelService<ExpenseClai
     }
 
     public getForUser(user, expire: Subject<void>): Observable<ExpenseClaims['expenseClaims']> {
-        const variables: ExpenseClaimsVariables = {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                owner: {equal: {value: user.id}},
-                            },
-                        ],
-                    },
-                ],
-            },
-        };
 
-        const qvm = new NaturalQueryVariablesManager<ExpenseClaimsVariables>();
-        qvm.set('variables', variables);
-        return this.watchAll(qvm, expire);
+        return this.userService.getFamily(user).pipe(switchMap(family => {
+
+            const variables: ExpenseClaimsVariables = {
+                filter: {
+                    groups: [
+                        {
+                            conditions: [
+                                {
+                                    owner: {in: {values: family.items.map(familyMember => familyMember.id)}},
+                                },
+                            ],
+                        },
+                    ],
+                },
+            };
+
+            const qvm = new NaturalQueryVariablesManager<ExpenseClaimsVariables>();
+            qvm.set('variables', variables);
+
+            return this.watchAll(qvm, expire);
+        }));
     }
 
 }

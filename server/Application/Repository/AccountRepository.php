@@ -12,6 +12,7 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
 {
     private const PARENT_ACCOUNT_ID_FOR_USER = 10038;
     const ACCOUNT_ID_FOR_SALE = 10013;
+    const ACCOUNT_ID_FOR_BANK = 10030;
 
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.

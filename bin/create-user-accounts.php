@@ -19,7 +19,7 @@ $customersAccountRoot = $accountRepository->findOneById(10038);
 $errors = [];
 
 foreach ($userRepository->findAll() as $user) {
-    if ($user->getOwner() === null) {
+    if ($user->isFamilyOwner()) {
         echo sprintf('Utilisateur %d (%s %s) est un coopérateur', $user->getId(), $user->getFirstName(), $user->getLastName()) . PHP_EOL;
         if (!$user->getAccount()) {
             $accountNumber = sprintf('2030%03u', abs($user->getId())); // 2030 (Acomptes de client) & UserID = n° de compte unique

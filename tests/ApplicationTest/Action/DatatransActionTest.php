@@ -19,7 +19,7 @@ class DatatransActionTest extends TestCase
     /**
      * @dataProvider providerProcess
      */
-    public function testProcess(?array $data, string $expectedAmount, array $expectedViewModel): void
+    public function testProcess(?array $data, ?int $accountId, string $expectedAmount, array $expectedViewModel): void
     {
         $userId = $data['refno'] ?? null;
         $user = _em()->getRepository(User::class)->getOneById((int) $userId);
@@ -38,8 +38,8 @@ class DatatransActionTest extends TestCase
         $action = new DatatransAction(_em(), $renderer->reveal());
         $action->process($request, $handler->reveal());
 
-        if ($userId) {
-            $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE owner_id = ' . $userId);
+        if ($accountId) {
+            $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE id = ' . $accountId);
             self::assertSame($expectedAmount, $actualBalance);
         }
 
@@ -58,7 +58,8 @@ class DatatransActionTest extends TestCase
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                '100.00',
+                -10002,
+                '310.20',
                 [
                     'message' => [
                         'status' => 'success',
@@ -75,7 +76,8 @@ class DatatransActionTest extends TestCase
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                '100.00',
+                -10002,
+                '310.20',
                 [
                     'message' => [
                         'status' => 'success',
@@ -90,7 +92,8 @@ class DatatransActionTest extends TestCase
                     'refno' => '-1007',
                     'errorMessage' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
                 ],
-                '0.00',
+                -10002,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'error',
@@ -104,7 +107,8 @@ class DatatransActionTest extends TestCase
                     'status' => 'cancel',
                     'refno' => '-1007',
                 ],
-                '0.00',
+                -10002,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'cancel',
@@ -114,7 +118,8 @@ class DatatransActionTest extends TestCase
             ],
             'invalid body' => [
                 null,
-                '0.00',
+                null,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'error',
@@ -131,7 +136,8 @@ class DatatransActionTest extends TestCase
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                '0.00',
+                -10002,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'error',
@@ -147,7 +153,8 @@ class DatatransActionTest extends TestCase
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                '0.00',
+                -10002,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'error',
@@ -163,7 +170,8 @@ class DatatransActionTest extends TestCase
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                '0.00',
+                -10002,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'error',
@@ -180,7 +188,8 @@ class DatatransActionTest extends TestCase
                     'currency' => 'USD',
                     'responseMessage' => 'Payment was successful',
                 ],
-                '0.00',
+                -10002,
+                '210.20',
                 [
                     'message' => [
                         'status' => 'error',

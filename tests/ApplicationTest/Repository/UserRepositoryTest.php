@@ -71,7 +71,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
     public function testGetAllToQueueBalanceMessage(): void
     {
         $actual = $this->repository->getAllToQueueBalanceMessage();
-        self::assertCount(5, $actual);
+        self::assertCount(6, $actual);
     }
 
     public function testGetAllToQueueBalanceMessageNegative(): void

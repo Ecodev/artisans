@@ -33,9 +33,11 @@ class AccountRepositoryTest extends AbstractRepositoryTest
     {
         $range = range(10000, 10045);
         $all = array_merge([
+            -10014,
+            -10013,
+            -10012,
             -10011,
             -10010,
-            -10007,
             -10002,
             -10001,
             -10000,
@@ -43,7 +45,7 @@ class AccountRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['individual', [-10007]],
+            ['individual', [-10002]],
             ['member', [-10002]],
             ['responsible', $all],
             ['administrator', $all],
@@ -67,7 +69,7 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         self::assertSame($user, $account->getOwner());
         self::assertSame('Foo Bar', $account->getName());
         self::assertSame(AccountTypeType::LIABILITY, $account->getType());
-        self::assertSame('20300007', $account->getCode());
+        self::assertSame('20300011', $account->getCode());
         self::assertSame('Acomptes de clients', $account->getParent()->getName());
         self::assertSame($account, $user->getAccount());
 
@@ -84,6 +86,21 @@ class AccountRepositoryTest extends AbstractRepositoryTest
         $actualAccount = $this->repository->getOrCreate($user);
 
         self::assertSame($account, $actualAccount, 'should return the in-memory account if existing');
+    }
+
+    public function testGetOrCreateWithOwner(): void
+    {
+        $user = new User();
+        $owner = new User();
+        $user->setOwner($owner);
+
+        $account = new Account();
+        $account->setOwner($user);
+
+        $actualAccount = $this->repository->getOrCreate($user);
+
+        self::assertSame($owner, $actualAccount->getOwner(), 'account should be owner by the user owner');
+        self::assertSame($owner->getAccount(), $user->getAccount(), 'account should be accessible through both users');
     }
 
     public function testTotalBalance(): void

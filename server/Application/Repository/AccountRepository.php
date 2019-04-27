@@ -30,7 +30,7 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
             return $this->getAllIdsQuery();
         }
 
-        return $this->getAllIdsForOwnerQuery($user);
+        return $this->getAllIdsForOwnerOrFamilyQuery($user);
     }
 
     /**
@@ -64,6 +64,11 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
         // then can return immediately
         if ($user->getAccount()) {
             return $user->getAccount();
+        }
+
+        // If user have an owner, then create account for the owner instead
+        if ($user->getOwner()) {
+            $user = $user->getOwner();
         }
 
         $this->getAclFilter()->setEnabled(false);

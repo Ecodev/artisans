@@ -501,6 +501,20 @@ class User extends AbstractModel
         }
     }
 
+    /**
+     * Whether this user is a family owner or not
+     *
+     * This is used for our internal logic and should
+     * NEVER be related to `familyRelationship`. That field
+     * is purely informative for humans.
+     *
+     * @return bool
+     */
+    public function isFamilyOwner(): bool
+    {
+        return !$this->getOwner() || $this->getOwner() === $this;
+    }
+
     public function initialize(): void
     {
         $this->role = self::ROLE_MEMBER; // Bypass security
@@ -752,6 +766,10 @@ class User extends AbstractModel
      */
     public function getAccount(): ?Account
     {
+        if ($this->getOwner() && $this->getOwner() !== $this) {
+            return $this->getOwner()->getAccount();
+        }
+
         return $this->accounts->count() ? $this->accounts->first() : null;
     }
 
@@ -847,7 +865,9 @@ class User extends AbstractModel
     }
 
     /**
-     * Automatically called by Doctrine when the object is saved for the first time
+     * Override parent to prevents users created from administration to be family of the administrator
+     *
+     * The owner must be explicitly set for all users.
      *
      * @ORM\PrePersist
      */

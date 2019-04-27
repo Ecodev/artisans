@@ -7,6 +7,7 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
 use Application\DBAL\Types\RelationshipType;
+use Application\Model\Account;
 use Application\Model\User;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
@@ -32,11 +33,14 @@ abstract class LeaveFamily implements FieldInterface
                 // Set owner while pretending we are an admin to workaround normal security things
                 $previousCurrentUser = User::getCurrent();
                 User::setCurrent(new User(User::ROLE_ADMINISTRATOR));
-                $user->setOwner($user);
+                $user->setOwner(null);
                 User::setCurrent($previousCurrentUser);
 
                 $user->setFamilyRelationship(RelationshipType::HOUSEHOLDER);
                 $user->setStatus(User::STATUS_INACTIVE);
+
+                // Create account so he can credit money and start shopping
+                _em()->getRepository(Account::class)->getOrCreate($user);
 
                 _em()->flush();
 

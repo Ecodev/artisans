@@ -12,6 +12,7 @@ import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProvisionComponent } from './components/provision/provision.component';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { BvrComponent } from './components/bvr/bvr.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { ProfileRoutingModule } from './profile-routing.module';
         CreateRefundComponent,
         ProvisionComponent,
         HistoryComponent,
+        BvrComponent,
     ],
     imports: [
         CommonModule,

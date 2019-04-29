@@ -1,0 +1,59 @@
+<div fxLayout="column">
+
+    <h2 class="mat-title">Informations pour le versement</h2>
+
+    <p class="mat-body">
+        Les paiements effectués au travers d'un e-banking peuvent mettre plusieurs jours à être crédités sur ton solde.
+    </p>
+
+    <div fxLayout="column" fxLayoutGap="10px">
+
+        <div class="margin">
+            <div class="mat-body-2">En faveur de :</div>
+            Coopérative "Chez Emmy"
+            <br />
+            Grand Rue 20
+            <br />
+            2072 St-Blaise
+        </div>
+
+        <div fxLayout="column" fxLayoutGap="30px" class="bankingData">
+
+            <div fxLayout="column" fxLayoutGap="20px">
+                <div>
+                    <div class="mat-body-2">Versement pour :</div>
+                    Banque Alternative Suisse SA
+                    <br />
+                    4601 Olten
+                </div>
+
+                <div>
+                    <div class="mat-body-2">Référence du paiement :</div>
+                    {{ bankingInfos.referenceNumber }}
+                </div>
+
+                <div>
+                    <span class="mat-body-2">Compte :</span>
+                    {{ bankingInfos.bankAccount }}
+                </div>
+
+                <div>
+                    <span class="mat-body-2">Montant :</span>
+                    {{ amount | currency : 'CHF' }}
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <mat-divider fxFlex></mat-divider>
+                <div>OU</div>
+                <mat-divider fxFlex></mat-divider>
+            </div>
+
+            <div>
+                <div class="mat-body-2">Référence BVR complète :</div>
+                {{ fullReference }}
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -3,18 +3,20 @@
 
     <p class="mat-body">Merci d'indiquer le montant que tu souhaites verser.</p>
 
-    <mat-form-field style="width:100%">
-        <mat-label>Montant</mat-label>
-        <input matInput type="number" step="1" [formControl]="formCtrl" [errorStateMatcher]="matcher" />
-        <mat-error *ngIf="formCtrl.errors?.min">Minimum {{ formCtrl.errors.min.min | currency : 'CHF' }}</mat-error>
-        <div matSuffix>CHF</div>
-    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="center">
+        <mat-form-field style="width:120px;">
+            <mat-label>Montant</mat-label>
+            <input matInput type="number" step="1" [formControl]="formCtrl" [errorStateMatcher]="matcher" />
+            <mat-error *ngIf="formCtrl.errors?.min">Minimum {{ formCtrl.errors.min.min | currency : 'CHF' }}</mat-error>
+            <div matSuffix>CHF</div>
+        </mat-form-field>
+    </div>
+
+    <app-bvr [bankingData]="bvrData"></app-bvr>
+
 
 </mat-dialog-content>
 
-<mat-dialog-actions style="display:flex;justify-content: flex-end;">
-    <button mat-button mat-dialog-close>{{ data?.cancelText || 'Annuler' }}</button>
-    <button mat-flat-button color="primary" [mat-dialog-close]="formCtrl.value" [disabled]="formCtrl.invalid">
-        {{ data?.confirmText || 'Suivant' }}
-    </button>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+    <button mat-button mat-dialog-close>Annuler</button>
 </mat-dialog-actions>

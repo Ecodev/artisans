@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../../../admin/products/services/product.service';
 import { NaturalAlertService } from '@ecodev/natural';
+import { Apollo } from 'apollo-angular';
 import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
-import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ProvisionComponent } from '../provision/provision.component';
-import { Apollo } from 'apollo-angular';
 import { ConfigService } from '../../../shared/services/config.service';
+import { ProvisionComponent } from '../provision/provision.component';
 
 @Component({
     selector: 'app-profile',
@@ -26,7 +25,6 @@ export class ProfileComponent implements OnInit {
     constructor(public userService: UserService,
                 private alertService: NaturalAlertService,
                 private route: ActivatedRoute,
-                public productService: ProductService,
                 private apollo: Apollo,
                 private dialog: MatDialog,
                 private configService: ConfigService,
@@ -45,6 +43,7 @@ export class ProfileComponent implements OnInit {
         if (this.viewer !== null) {
             const config: MatDialogConfig = {data: {balance: Number(this.viewer.account.balance)}};
             this.dialog.open(ProvisionComponent, config).afterClosed().subscribe(amount => {
+                console.log('amount', amount);
                 if (amount) {
                     this.doPayment(this.viewer, amount);
                 }
@@ -57,6 +56,8 @@ export class ProfileComponent implements OnInit {
         if (!this.config) {
             return;
         }
+
+        console.log('paiement');
 
         Datatrans.startPayment({
             params: {

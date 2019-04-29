@@ -5,7 +5,6 @@
 // Import theming files full relative way or karma will display warning
 @import '~@angular/material/theming';
 @import '~@ecodev/natural/theming/natural.theme';
-@import '../app/shared/components/boot-loader/boot-loader.theme';
 @import '../app/app.theme';
 @import 'table';
 @import 'rich-text';
@@ -21,7 +20,6 @@
 @mixin components-theme($theme) {
     @include app($theme);
     @include natural($theme);
-    @include boot-loader($theme);
     @include table($theme);
     @include page-header($theme);
     @include money($theme);
@@ -64,43 +62,11 @@ $mat-emmy-primary: (
         )
 );
 
-$mat-emmy-secondary: (
-        50: #ffebee,
-        100: #ffcdd2,
-        200: #ef9a9a,
-        300: #e57373,
-        400: #ef5350,
-        500: #CF4A50,
-        600: #e53935,
-        700: #d32f2f,
-        800: #c62828,
-        900: #b71c1c,
-        A100: #ff8a80,
-        A200: #ff5252,
-        A400: #ff1744,
-        A700: #d50000,
-        contrast: (
-                50: $dark-primary-text,
-                100: $dark-primary-text,
-                200: $dark-primary-text,
-                300: $dark-primary-text,
-                400: $dark-primary-text,
-                500: $light-primary-text,
-                600: $light-primary-text,
-                700: $light-primary-text,
-                800: $light-primary-text,
-                900: $light-primary-text,
-                A100: $dark-primary-text,
-                A200: $light-primary-text,
-                A400: $light-primary-text,
-                A700: $light-primary-text,
-        )
-);
 
 // Configure themes
 $emmy-primary: mat-palette($mat-emmy-primary);
-$emmy-accent: mat-palette($mat-emmy-secondary);
-$emmy-warn: mat-palette($mat-orange);
+$emmy-accent: mat-palette($mat-purple);
+$emmy-warn: mat-palette($mat-red);
 $emmy-theme: mat-light-theme($emmy-primary, $emmy-accent, $emmy-warn);
 
 @include angular-material-theme($emmy-theme);

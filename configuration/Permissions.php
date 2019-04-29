@@ -41,6 +41,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/import-products.php',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/send-all-messages.php',
         'permissions' => '0750',
     ],

@@ -41,7 +41,7 @@
                                 </mat-form-field>
 
                                 <mat-form-field>
-                                    <input matInput maxlength="10" formControlName="code" (change)="update()">
+                                    <input matInput maxlength="20" formControlName="code" (change)="update()">
                                     <mat-label>Code</mat-label>
                                     <mat-error *ngIf="form.get('code').hasError('maxlength')">
                                         Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
@@ -149,7 +149,7 @@
 
                         <mat-form-field>
                             <mat-label>Code produit chez le fournisseur</mat-label>
-                            <input matInput maxlength="10" formControlName="supplierReference" (change)="update()">
+                            <input matInput maxlength="20" formControlName="supplierReference" (change)="update()">
                             <mat-error *ngIf="form.get('supplierReference').hasError('maxlength')">
                                 Maximum {{form.get('supplierReference').errors.maxlength.requiredLength }} caractères
                             </mat-error>

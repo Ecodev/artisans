@@ -62,7 +62,7 @@ class Product extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=10, options={"default" = ""})
+     * @ORM\Column(type="string", length=20, options={"default" = ""})
      */
     private $supplierReference = '';
 

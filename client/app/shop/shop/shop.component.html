@@ -1,6 +1,6 @@
-<div fxFlex fxLayout="column" class="padding">
+<div fxFlex="1 0 auto" fxLayout="column" class="padding">
 
-    <div fxFlex fxLayout="column" fxLayoutAlign="start end" *ngIf="!cartService.cart.length">
+    <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end" *ngIf="!cartService.cart.length">
 
         <img fxFlex="none" src="assets/images/consigne.svg" style="margin-right:10px;width:380px;height:100px">
 
@@ -8,7 +8,10 @@
             <img src="assets/logo.svg" style="height:40vmin; margin:0 auto">
             <div fxFlex="none">
                 <h1 class="mat-headline">Bienvenue ! </h1>
-                <p class="mat-subheading-2">Pour effectuer tes achats, il te suffit de scanner le code QR du produit ou d'introduire le code de l'article puis sa quantité…</p>
+                <p class="mat-subheading-2">
+                    Pour effectuer tes achats, il te suffit de scanner le code QR du produit ou d'introduire le code de l'article puis sa
+                    quantité…
+                </p>
                 <button mat-flat-button color="primary" routerLink="/scan">
                     <natural-icon name="simple-qr" [size]="24"></natural-icon>
                     Démarrer la caméra
@@ -22,7 +25,9 @@
         <h1 class="mat-title">Panier d'achats</h1>
 
         <mat-nav-list>
-            <mat-list-item *ngFor="let line of cartService.cart" [routerLink]="['/shop/product', line.product.code, {quantity: line.quantity}]">
+            <mat-list-item *ngFor="let line of cartService.cart"
+                           [routerLink]="['/shop/product', line.product.code, {quantity: line.quantity}]"
+            >
                 <app-file [model]="line.product.image" [height]="70" [style.width.px]="70" matListAvatar></app-file>
                 <div matLine style="white-space: normal;">{{ line.product.name }}</div>
                 <div matLine fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start end" style="white-space: nowrap">
@@ -47,7 +52,7 @@
             </div>
         </div>
 
-        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end" >
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end">
             <button mat-button (click)="empty()">Vider le panier</button>
             <button mat-flat-button color="primary" (click)="createOrder()" [style.width.px]="200">Passer à la caisse</button>
         </div>

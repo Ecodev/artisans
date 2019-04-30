@@ -200,7 +200,6 @@ const routes: Routes = [
                                     width: '600px',
                                     maxWidth: '95vw',
                                     maxHeight: '97vh',
-                                    panelClass: 'big-height-dialog',
                                 } as MatDialogConfig,
                             },
                         },

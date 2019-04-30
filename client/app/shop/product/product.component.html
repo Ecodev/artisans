@@ -1,11 +1,12 @@
-<mat-dialog-content fxLayout="column">
+<mat-dialog-content>
 
     <div *ngIf="!data.model" class="mat-subheading-2">
         Oops, aucun article ne correspond au code recherché : "{{ routeSnapshot.params.code }}"
     </div>
 
     <div *ngIf="data.model" fxLayout="column" fxLayoutGap="20px">
-        <app-file [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
+
+        <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
 
         <div fxLayout="row" fxLayoutGap="10px">
             <h2 class="mat-headline no-margin-bottom">{{ data.model.name }}</h2>

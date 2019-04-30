@@ -1,9 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
-import { throttle, throttleTime } from 'rxjs/operators';
-import { QrService } from '../services/qr.service';
 import { CartService } from '../services/cart.service';
 
 @Component({
@@ -22,8 +19,6 @@ export class ShopComponent implements OnInit {
     }
 
     ngOnInit() {
-
-
     }
 
     public createOrder() {

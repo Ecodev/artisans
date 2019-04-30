@@ -60,7 +60,7 @@ class Bvr
         }
 
         if (!preg_match('~^\d{6}$~', $bankAccount)) {
-            throw new Exception('Invalid bank number. It must be exactly 6 digits, but got: `' . $bankAccount . '`');
+            throw new Exception('Invalid bank account. It must be exactly 6 digits, but got: `' . $bankAccount . '`');
         }
 
         return $bankAccount . self::pad($referenceNumber, 20);

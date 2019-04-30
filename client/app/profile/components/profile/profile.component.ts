@@ -4,10 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { UserService } from '../../../admin/users/services/user.service';
-import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
+import { CurrentUserForProfile } from '../../../shared/generated-types';
 import { ConfigService } from '../../../shared/services/config.service';
 import { ProvisionComponent } from '../provision/provision.component';
-import { CurrentUserForProfile } from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-profile',
@@ -52,55 +51,7 @@ export class ProfileComponent implements OnInit {
             },
         };
 
-        this.dialog.open(ProvisionComponent, config).afterClosed().subscribe(amount => {
-            console.log('amount', amount);
-            if (amount) {
-                this.doPayment(this.viewer, amount);
-            }
-        });
-    }
-
-    private doPayment(user, amount): void {
-
-        if (!this.config) {
-            return;
-        }
-
-        console.log('paiement');
-
-        Datatrans.startPayment({
-            params: {
-                production: this.config.datatransProduction,
-                merchantId: this.config.datatransMerchantId,
-                sign: this.config.datatransSign,
-                refno: user.id,
-                amount: amount * 100,
-                currency: 'CHF',
-                endpoint: this.config.datatransEndpoint,
-            },
-            success: () => {
-                this.alertService.info('Paiement réussi');
-                // Request user to update account.
-                // Don't call accountService as actual user may not have one, and it couldn't be updated.
-                // TODO : replace by a viewer watching architecture
-                this.userService.getOne(user.id).subscribe(updatedUser => {
-                    if (this.viewer) {
-                        this.viewer.account = updatedUser.account;
-                    }
-                });
-
-                // Restore store, to refetch queries that are watched
-                // this.apollo.getClient().resetStore();
-                this.apollo.getClient().reFetchObservableQueries(false);
-
-            },
-            error: (data) => {
-                this.alertService.error('Le paiement n\'a pas abouti: ' + data.message);
-            },
-            cancel: () => {
-                this.alertService.error('Le paiement a été annulé');
-            },
-        });
+        this.dialog.open(ProvisionComponent, config);
     }
 
 }

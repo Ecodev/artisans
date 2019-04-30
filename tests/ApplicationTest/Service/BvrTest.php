@@ -45,7 +45,7 @@ class BvrTest extends TestCase
 
     public function testGetEncodingLineMustThrowIfTooLongBankAccount(): void
     {
-        $this->expectExceptionMessage('Invalid bank number. It must be exactly 6 digits, but got: `1234567`');
+        $this->expectExceptionMessage('Invalid bank account. It must be exactly 6 digits, but got: `1234567`');
         Bvr::concatReferenceNumber('1234567', '123');
     }
 

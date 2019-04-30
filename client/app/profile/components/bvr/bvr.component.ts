@@ -22,7 +22,6 @@ const q = gql`
 export class BvrComponent {
 
     @Input() set bankingData(data: BankingInfosVariables) {
-        this.amount = data.amount;
 
         this.apollo.query<BankingInfos, BankingInfosVariables>({
             query: q,
@@ -32,8 +31,6 @@ export class BvrComponent {
     }
 
     public bankingInfos: BankingInfos_bankingInfos;
-
-    public amount;
 
     constructor(private apollo: Apollo) {
 

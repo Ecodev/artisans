@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
     /**
      * Install FE config
      */
-    public config;
+    private config;
 
     constructor(public userService: UserService,
                 private alertService: NaturalAlertService,

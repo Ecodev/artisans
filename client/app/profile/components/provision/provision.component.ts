@@ -10,7 +10,7 @@ import { BankingInfosVariables } from '../../../shared/generated-types';
 })
 export class ProvisionComponent implements OnInit {
 
-    public min = 25;
+    public min = 100;
     public defaultValue = this.min;
     public formCtrl: FormControl;
     public matcher = new ShowOnDirtyErrorStateMatcher();

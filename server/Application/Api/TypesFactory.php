@@ -30,6 +30,7 @@ class TypesFactory
             \Application\Api\Input\OrderLineInputType::class,
             \Application\Api\MutationType::class,
             \Application\Api\Output\AllPermissionsType::class,
+            \Application\Api\Output\BankingInfosType::class,
             \Application\Api\Output\CrudPermissionsListType::class,
             \Application\Api\Output\CrudPermissionsType::class,
             \Application\Api\Output\OpenDoorType::class,

@@ -7,6 +7,7 @@ import { UserService } from '../../../admin/users/services/user.service';
 import * as Datatrans from '../../../datatrans-2.0.0-ecodev.js';
 import { ConfigService } from '../../../shared/services/config.service';
 import { ProvisionComponent } from '../provision/provision.component';
+import { CurrentUserForProfile } from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-profile',
@@ -15,7 +16,7 @@ import { ProvisionComponent } from '../provision/provision.component';
 })
 export class ProfileComponent implements OnInit {
 
-    public viewer;
+    public viewer: CurrentUserForProfile['viewer'];
 
     /**
      * Install FE config
@@ -39,16 +40,24 @@ export class ProfileComponent implements OnInit {
         this.viewer = this.route.snapshot.data.viewer.model;
     }
 
-    public pay() {
-        if (this.viewer !== null) {
-            const config: MatDialogConfig = {data: {balance: Number(this.viewer.account.balance)}};
-            this.dialog.open(ProvisionComponent, config).afterClosed().subscribe(amount => {
-                console.log('amount', amount);
-                if (amount) {
-                    this.doPayment(this.viewer, amount);
-                }
-            });
+    public pay(): void {
+        if (!this.viewer || !this.viewer.account) {
+            return;
         }
+
+        const config: MatDialogConfig = {
+            data: {
+                balance: Number(this.viewer.account.balance),
+                user: this.viewer,
+            },
+        };
+
+        this.dialog.open(ProvisionComponent, config).afterClosed().subscribe(amount => {
+            console.log('amount', amount);
+            if (amount) {
+                this.doPayment(this.viewer, amount);
+            }
+        });
     }
 
     private doPayment(user, amount): void {
@@ -75,7 +84,9 @@ export class ProfileComponent implements OnInit {
                 // Don't call accountService as actual user may not have one, and it couldn't be updated.
                 // TODO : replace by a viewer watching architecture
                 this.userService.getOne(user.id).subscribe(updatedUser => {
-                    this.viewer.account = updatedUser.account;
+                    if (this.viewer) {
+                        this.viewer.account = updatedUser.account;
+                    }
                 });
 
                 // Restore store, to refetch queries that are watched

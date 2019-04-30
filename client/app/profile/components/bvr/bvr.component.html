@@ -8,50 +8,45 @@
 
     <div fxLayout="column" fxLayoutGap="10px">
 
-        <div class="margin">
-            <div class="mat-body-2">En faveur de :</div>
-            Coopérative "Chez Emmy"
-            <br />
-            Grand Rue 20
-            <br />
-            2072 St-Blaise
-        </div>
 
         <div fxLayout="column" fxLayoutGap="30px" class="bankingData">
 
             <div fxLayout="column" fxLayoutGap="20px">
                 <div>
                     <div class="mat-body-2">Versement pour :</div>
-                    Banque Alternative Suisse SA
-                    <br />
-                    4601 Olten
+                    <div class="mat-body-1" style="white-space: pre-line;">{{ bankingInfos?.paymentTo }}</div>
                 </div>
 
                 <div>
-                    <div class="mat-body-2">Référence du paiement :</div>
-                    {{ bankingInfos.referenceNumber }}
+                    <div class="mat-body-2">En faveur de :</div>
+                    <div class="mat-body-1" style="white-space: pre-line;">{{ bankingInfos?.paymentFor }}</div>
                 </div>
 
                 <div>
-                    <span class="mat-body-2">Compte :</span>
-                    {{ bankingInfos.bankAccount }}
+                    <div class="mat-body-2">Numéro de référence :</div>
+                    <div class="mat-body-1">{{ bankingInfos?.referenceNumber }}</div>
                 </div>
 
                 <div>
-                    <span class="mat-body-2">Montant :</span>
-                    {{ amount | currency : 'CHF' }}
+                    <span class="mat-body-2">Compte : </span>
+                    <span class="mat-body-1">{{ bankingInfos?.postAccount }}</span>
+                </div>
+
+                <div>
+                    <span class="mat-body-2">Montant : </span>
+                    <span class="mat-body-1">{{ amount | currency : 'CHF' }}</span>
                 </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                 <mat-divider fxFlex></mat-divider>
-                <div>OU</div>
+                <div class="mat-body-1">OU</div>
                 <mat-divider fxFlex></mat-divider>
             </div>
 
             <div>
-                <div class="mat-body-2">Référence BVR complète :</div>
-                {{ fullReference }}
+                <div class="mat-body-2">Ligne de codage :</div>
+                <div class="mat-body-1">{{ bankingInfos?.encodingLine }}</div>
             </div>
         </div>
 

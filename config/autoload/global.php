@@ -23,4 +23,10 @@ return [
             'layout' => ['server/templates/layout'],
         ],
     ],
+    'banking' => [
+        'bankAccount' => '',
+        'postAccount' => '',
+        'paymentTo' => '',
+        'paymentFor' => '',
+    ],
 ];

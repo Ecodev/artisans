@@ -1,44 +1,42 @@
-import { Component, Input, OnInit } from '@angular/core';
-import Decimal from 'decimal.js';
-import { mod10Recursive } from '../../../shared/utils';
+import { Component, Input } from '@angular/core';
+import gql from 'graphql-tag';
+import { Apollo } from 'apollo-angular';
+import { BankingInfos, BankingInfos_bankingInfos, BankingInfosVariables } from '../../../shared/generated-types';
+
+const q = gql`
+    query BankingInfos($user: UserID!, $amount: String) {
+        bankingInfos(user: $user, amount: $amount) {
+            referenceNumber
+            encodingLine
+            postAccount
+            paymentTo
+            paymentFor
+        }
+    }`;
 
 @Component({
     selector: 'app-bvr',
     templateUrl: './bvr.component.html',
     styleUrls: ['./bvr.component.scss'],
 })
-export class BvrComponent implements OnInit {
+export class BvrComponent {
 
-    @Input() set bankingData(data) {
+    @Input() set bankingData(data: BankingInfosVariables) {
         this.amount = data.amount;
-        this.fullReference = this.getFullReference(data.amount, this.bankingInfos.referenceNumber, this.bankingInfos.formattedBankAccount);
+
+        this.apollo.query<BankingInfos, BankingInfosVariables>({
+            query: q,
+            fetchPolicy: 'cache-first',
+            variables: data,
+        }).subscribe(result => this.bankingInfos = result.data.bankingInfos);
     }
 
-    public bankingInfos = {
-        referenceNumber: '800826000000000000000000012',
-        bankAccount: '01-162-8',
-        formattedBankAccount: '010001628',
-    };
+    public bankingInfos: BankingInfos_bankingInfos;
 
-    public fullReference;
     public amount;
 
-    constructor() {
-        this.fullReference = this.getFullReference(this.amount, this.bankingInfos.referenceNumber, this.bankingInfos.formattedBankAccount);
+    constructor(private apollo: Apollo) {
+
     }
-
-    ngOnInit() {
-    }
-
-    public getFullReference(amount, referenceNumber, bankAccount) {
-        let cents = '042';
-
-        if (amount) {
-            cents = '01' + ('' + Decimal.mul(amount, 100)).padStart(10, '0');
-        }
-
-        const checkedAmount = cents + mod10Recursive(cents);
-        return checkedAmount + '>' + referenceNumber + '+ ' + bankAccount + '>';
-    }
-
 }
+

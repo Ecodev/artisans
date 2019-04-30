@@ -56,11 +56,11 @@ class Bvr
     public static function concatReferenceNumber(string $bankAccount, string $referenceNumber): string
     {
         if (!preg_match('~^\d{0,20}$~', $referenceNumber)) {
-            throw new Exception('Invalid reference number. It must be 20 or less digits.');
+            throw new Exception('Invalid reference number. It must be 20 or less digits, but got: `' . $referenceNumber . '`');
         }
 
         if (!preg_match('~^\d{6}$~', $bankAccount)) {
-            throw new Exception('Invalid bank number. It must be exactly 6 digits.');
+            throw new Exception('Invalid bank number. It must be exactly 6 digits, but got: `' . $bankAccount . '`');
         }
 
         return $bankAccount . self::pad($referenceNumber, 20);
@@ -69,14 +69,16 @@ class Bvr
     public static function getEncodingLine(string $referenceNumber, string $postAccount, ?string $amount = null): string
     {
         if (!preg_match('~^\d{0,26}$~', $referenceNumber)) {
-            throw new Exception('Invalid reference number');
+            throw new Exception('Invalid reference number. It must be 26 or less digits, but got: `' . $referenceNumber . '`');
         }
 
         if ($amount === null) {
             $firstPart = '04';
-        } else {
+        } elseif (is_numeric($amount)) {
             $cents = bcmul($amount, '100', 0);
             $firstPart = '01' . self::pad($cents, 10);
+        } else {
+            throw new Exception('Invalid amount. Must be numeric, but got: `' . $amount . '`');
         }
 
         $secondPart = self::pad($referenceNumber, 26);
@@ -112,13 +114,13 @@ class Bvr
     private static function formatPostAccount(string $postAccount): string
     {
         if (!preg_match('~^(\d+)-(\d+)-(\d)$~', $postAccount, $m)) {
-            throw new Exception('Invalid post account number');
+            throw new Exception('Invalid post account number, got `' . $postAccount . '`');
         }
 
         $participantNumber = self::pad($m[1], 2) . self::pad($m[2], 6) . $m[3];
 
         if (mb_strlen($participantNumber) !== 9) {
-            throw new Exception('The post account number is too long');
+            throw new Exception('The post account number is too long, got `' . $postAccount . '`');
         }
 
         return $participantNumber;

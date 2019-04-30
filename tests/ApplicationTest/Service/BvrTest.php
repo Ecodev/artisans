@@ -45,19 +45,19 @@ class BvrTest extends TestCase
 
     public function testGetEncodingLineMustThrowIfTooLongBankAccount(): void
     {
-        $this->expectExceptionMessage('Invalid bank number. It must be exactly 6 digits.');
+        $this->expectExceptionMessage('Invalid bank number. It must be exactly 6 digits, but got: `1234567`');
         Bvr::concatReferenceNumber('1234567', '123');
     }
 
     public function testGetEncodingLineMustThrowIfTooLongReferenceNumber(): void
     {
-        $this->expectExceptionMessage('Invalid reference number. It must be 20 or less digits.');
+        $this->expectExceptionMessage('Invalid reference number. It must be 20 or less digits, but got: `000000000000000000000`');
         Bvr::concatReferenceNumber('123456', str_repeat('0', 21));
     }
 
     public function testGetEncodingLineMustThrowIfInvalidReferenceNumber(): void
     {
-        $this->expectExceptionMessage('Invalid reference number. It must be 20 or less digits.');
+        $this->expectExceptionMessage('Invalid reference number. It must be 20 or less digits, but got: `1.5`');
         Bvr::concatReferenceNumber('123456', '1.5');
     }
 
@@ -76,8 +76,19 @@ class BvrTest extends TestCase
             ['', 0],
             ['0', 0],
             ['04', 2],
+            ['010000394975', 3],
             ['313947143000901', 8],
             ['80082600000000000000000201', 6],
+            ['80082600000000000000000001', 2],
+            ['80082600000000000000000002', 8],
+            ['80082600000000000000000003', 3],
+            ['80082600000000000000000004', 9],
+            ['80082600000000000000000005', 7],
+            ['80082600000000000000000006', 5],
+            ['80082600000000000000000007', 0],
+            ['80082600000000000000000008', 1],
+            ['80082600000000000000000009', 6],
+            ['80082600000000000000000010', 8],
         ];
     }
 
@@ -121,5 +132,11 @@ class BvrTest extends TestCase
     {
         $this->expectExceptionMessage('The post account number is too long');
         Bvr::getEncodingLine('0', '0123-456789-0');
+    }
+
+    public function testGetEncodingLineMustThrowIfInvalidAmount(): void
+    {
+        $this->expectExceptionMessage('Invalid amount. Must be numeric, but got: `foo`');
+        Bvr::getEncodingLine('0', '01-4567-0', 'foo');
     }
 }

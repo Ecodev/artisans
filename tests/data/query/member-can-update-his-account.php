@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     [
         'query' => 'mutation ($inputAccount: AccountPartialInput!) {
-            updateAccount(id: -10002 input: $inputAccount) {
+            updateAccount(id: 10902 input: $inputAccount) {
                 id
                 name
             }
@@ -19,7 +19,7 @@ return [
     [
         'data' => [
             'updateAccount' => [
-                'id' => -10002,
+                'id' => 10902,
                 'name' => 'test name',
             ],
         ],

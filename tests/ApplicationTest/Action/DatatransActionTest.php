@@ -53,12 +53,12 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'success',
-                    'refno' => '-1007',
+                    'refno' => '1007',
                     'amount' => '10000',
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                -10002,
+                10902,
                 '310.20',
                 [
                     'message' => [
@@ -71,12 +71,12 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'success',
-                    'refno' => '-1008',
+                    'refno' => '1008',
                     'amount' => '10000',
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                -10002,
+                10902,
                 '310.20',
                 [
                     'message' => [
@@ -89,10 +89,10 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '876543210987654321',
                     'status' => 'error',
-                    'refno' => '-1007',
+                    'refno' => '1007',
                     'errorMessage' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
                 ],
-                -10002,
+                10902,
                 '210.20',
                 [
                     'message' => [
@@ -105,9 +105,9 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '876543210987654321',
                     'status' => 'cancel',
-                    'refno' => '-1007',
+                    'refno' => '1007',
                 ],
-                -10002,
+                10902,
                 '210.20',
                 [
                     'message' => [
@@ -131,12 +131,12 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'non-existing-status',
-                    'refno' => '-1007',
+                    'refno' => '1007',
                     'amount' => '10000',
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                -10002,
+                10902,
                 '210.20',
                 [
                     'message' => [
@@ -153,7 +153,7 @@ class DatatransActionTest extends TestCase
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                -10002,
+                10902,
                 '210.20',
                 [
                     'message' => [
@@ -166,11 +166,11 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'success',
-                    'refno' => '-1007',
+                    'refno' => '1007',
                     'currency' => 'CHF',
                     'responseMessage' => 'Payment was successful',
                 ],
-                -10002,
+                10902,
                 '210.20',
                 [
                     'message' => [
@@ -183,12 +183,12 @@ class DatatransActionTest extends TestCase
                 [
                     'uppTransactionId' => '123456789012345678',
                     'status' => 'success',
-                    'refno' => '-1007',
+                    'refno' => '1007',
                     'amount' => '10000',
                     'currency' => 'USD',
                     'responseMessage' => 'Payment was successful',
                 ],
-                -10002,
+                10902,
                 '210.20',
                 [
                     'message' => [

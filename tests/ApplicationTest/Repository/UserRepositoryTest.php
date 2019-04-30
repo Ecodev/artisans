@@ -28,7 +28,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [-1011, -1010, -1009, -1008, -1007, -1006, -1005, -1004, -1003, -1002, -1001, -1000];
+        $all = [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011];
 
         return [
             ['anonymous', []],
@@ -46,9 +46,9 @@ class UserRepositoryTest extends AbstractRepositoryTest
 
         $user = $this->repository->getOneByLoginPassword('administrator', 'administrator');
         self::assertNotNull($user);
-        self::assertSame(-1000, $user->getId());
+        self::assertSame(1000, $user->getId());
 
-        $hash = _em()->getConnection()->query('SELECT password FROM `user` WHERE id = -1000')->fetchColumn();
+        $hash = _em()->getConnection()->query('SELECT password FROM `user` WHERE id = 1000')->fetchColumn();
         self::assertStringStartsWith('$', $hash, 'password should have been re-hashed automatically');
         self::assertNotSame(md5('administrator'), $hash, 'password should have been re-hashed automatically');
     }
@@ -57,9 +57,9 @@ class UserRepositoryTest extends AbstractRepositoryTest
     {
         self::assertNull($this->repository->getOneById(1), 'wrong user');
 
-        $user = $this->repository->getOneById(-1000);
+        $user = $this->repository->getOneById(1000);
         self::assertNotNull($user);
-        self::assertSame(-1000, $user->getId());
+        self::assertSame(1000, $user->getId());
     }
 
     public function testGetAllAdministratorsToNotify(): void

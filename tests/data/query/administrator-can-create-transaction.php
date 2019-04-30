@@ -28,7 +28,7 @@ return [
                     'name' => 'Acquisition voilier NE123456',
                     'balance' => '10000',
                     'transactionDate' => '2019-02-03',
-                    'debit' => -10000,
+                    'debit' => 10900,
                 ],
                 [
                     'name' => 'Paiement cash',

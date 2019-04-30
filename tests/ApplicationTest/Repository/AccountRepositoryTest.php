@@ -32,17 +32,17 @@ class AccountRepositoryTest extends AbstractRepositoryTest
     public function providerGetAccessibleSubQuery(): array
     {
         $range = range(10000, 10045);
-        $all = array_merge([
-            -10014,
-            -10013,
-            -10012,
-            -10011,
-            -10010,
-            -10002,
-            -10001,
-            -10000,
-        ], array_diff($range, [10015, 10016, 10017]));
-        $family = [-10002];
+        $all = array_merge(array_diff($range, [10015, 10016, 10017]), [
+            10900,
+            10901,
+            10902,
+            10910,
+            10911,
+            10912,
+            10913,
+            10914,
+        ]);
+        $family = [10902];
 
         return [
             ['anonymous', []],
@@ -56,7 +56,7 @@ class AccountRepositoryTest extends AbstractRepositoryTest
     public function testOneUserCanHaveOnlyOneAccount(): void
     {
         $this->expectException(UniqueConstraintViolationException::class);
-        $this->getEntityManager()->getConnection()->insert('account', ['owner_id' => -1000, 'iban' => uniqid()]);
+        $this->getEntityManager()->getConnection()->insert('account', ['owner_id' => 1000, 'iban' => uniqid()]);
     }
 
     public function testGetOrCreate(): void

@@ -44,14 +44,14 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10043, 10037, NULL, 'liability', '200010', '', 'Fournisseur A'),
 (10044, 10037, NULL, 'liability', '200011', '', 'Fournisseur B'),
 (10045, 10037, NULL, 'liability', '200012', '', 'Fournisseur C'),
-(-10000, 10038, -1000, 'liability', '20300000', '', 'Administrator'),
-(-10001, 10038, -1001, 'liability', '20300001', '', 'Responsable'),
-(-10002, 10038, -1002, 'liability', '20300002', '', 'Active Member'),
-(-10010, 10038, -1010, 'liability', '20300010', '', 'Voilier Member'),
-(-10011, 10038, -1006, 'liability', '20300006', '', 'Archived Member'),
-(-10012, 10038, -1005, 'liability', '20300005', '', 'Inactive Member'),
-(-10013, 10038, -1004, 'liability', '20300004', '', 'New User'),
-(-10014, 10038, -1003, 'liability', '20300003', '', 'Booking Only');
+(10900, 10038, 1000, 'liability', '20300000', '', 'Administrator'),
+(10901, 10038, 1001, 'liability', '20300001', '', 'Responsable'),
+(10902, 10038, 1002, 'liability', '20300002', '', 'Active Member'),
+(10910, 10038, 1010, 'liability', '20300010', '', 'Voilier Member'),
+(10911, 10038, 1006, 'liability', '20300006', '', 'Archived Member'),
+(10912, 10038, 1005, 'liability', '20300005', '', 'Inactive Member'),
+(10913, 10038, 1004, 'liability', '20300004', '', 'New User'),
+(10914, 10038, 1003, 'liability', '20300003', '', 'Booking Only');
 
 REPLACE INTO product_tag (id, name) VALUES
 (6000, 'Fruits & Légumes'),
@@ -107,19 +107,19 @@ REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6004, 3011);
 
 REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type) VALUES
-(7000, '2019-03-10', -1002, 200.00, 'new', 'achats Jumbo', 'matériaux pour étagère', 'expenseClaim'),
-(7001, '2019-03-14', -1002, 100.00, 'processed', 'Produits de nettoyage', 'Facture Migros du 10.03.2019', 'expenseClaim'),
-(7002, '2019-03-14', -1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
-(7003, '2019-01-10', -1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim'),
-(7004, '2019-01-06', -1010, 21.00, 'new', 'remplacement des clés', '', 'expenseClaim');
+(7000, '2019-03-10', 1002, 200.00, 'new', 'achats Jumbo', 'matériaux pour étagère', 'expenseClaim'),
+(7001, '2019-03-14', 1002, 100.00, 'processed', 'Produits de nettoyage', 'Facture Migros du 10.03.2019', 'expenseClaim'),
+(7002, '2019-03-14', 1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
+(7003, '2019-01-10', 1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim'),
+(7004, '2019-01-06', 1010, 21.00, 'new', 'remplacement des clés', '', 'expenseClaim');
 
 REPLACE INTO transaction (id, creator_id, owner_id, transaction_date, name, remarks, expense_claim_id) VALUES
-(8000, -1000, -1000, '2019-01-01', 'Solde à nouveau', 'Ouverture des comptes en début d\'exercice', NULL),
-(8001, -1000, -1000, '2019-02-04', 'Achat réfrigérateur', 'Paiement partiel par banque et caisse', NULL),
+(8000, 1000, 1000, '2019-01-01', 'Solde à nouveau', 'Ouverture des comptes en début d\'exercice', NULL),
+(8001, 1000, 1000, '2019-02-04', 'Achat réfrigérateur', 'Paiement partiel par banque et caisse', NULL),
 (8003, NULL, NULL, '2019-04-15', 'Traitement de la dépense "Produits de nettoyage"', '', 7001),
-(8004, -1002, -1002, '2019-04-05', 'Versement en ligne', '', NULL),
-(8005, -1002, NULL, '2019-04-24', 'Vente 1', '', NULL),
-(8006, -1007, NULL, '2019-04-25', 'Vente 2', '', NULL);
+(8004, 1002, 1002, '2019-04-05', 'Versement en ligne', '', NULL),
+(8005, 1002, NULL, '2019-04-24', 'Vente 1', '', NULL),
+(8006, 1007, NULL, '2019-04-25', 'Vente 2', '', NULL);
 
 REPLACE INTO transaction_tag (id, name) VALUES
 (15000, 'Entretien');
@@ -130,36 +130,36 @@ REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transact
 (14002, 8001, 10032, NULL, NULL, 1500, '2019-02-03', 1, 'Achat réfrigérateur', ''),
 (14003, 8001, NULL, 10029, NULL, 500, '2019-02-03', 1, 'Paiement en espèces', ''),
 (14004, 8001, NULL, 10030, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
-(14005, 8003, 10028, -10002, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
-(14006, 8004, 10030, -10002, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
-(14007, 8005, -10002, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats du responsable', ''),
-(14008, 8006, -10002, 10013, NULL, 62.40, '2019-04-24', 1, 'Achats du conjoint', '');
+(14005, 8003, 10028, 10902, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
+(14006, 8004, 10030, 10902, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
+(14007, 8005, 10902, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats du responsable', ''),
+(14008, 8006, 10902, 10013, NULL, 62.40, '2019-04-24', 1, 'Achats du conjoint', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
-(9000, 7000, -1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
+(9000, 7000, 1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
 
 REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
-(11001, -1000, -1000, -1002, 'balance', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Emmy présente un solde négatif'),
-(11002, -1001, -1001, -1005, 'reset_password', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
+(11001, 1000, 1000, 1002, 'balance', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Emmy présente un solde négatif'),
+(11002, 1001, 1001, 1005, 'reset_password', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
-(12000, -1000, -1000, 'Secteur EPI', '#cD4A50'),
-(12001, -1000, -1000, 'Secteur PROD', '#cD4A50'),
-(12002, -1000, -1000, 'Secteur COOP', '#cD4A50'),
-(12003, -1000, -1000, 'Secteur MAG', '#cD4A50'),
-(12004, -1000, -1000, 'Secteur ADMIN', '#cD4A50'),
-(12005, -1000, -1000, 'Secteur FIN', '#cD4A50'),
-(12006, -1000, -1000, 'Equipe 1', '#A4CE4C'),
-(12007, -1000, -1000, 'Equipe 2', '#A4CE4C'),
-(12008, -1000, -1000, 'Equipe 3', '#A4CE4C'),
-(12009, -1000, -1000, 'Equipe 4', '#A4CE4C');
+(12000, 1000, 1000, 'Secteur EPI', '#cD4A50'),
+(12001, 1000, 1000, 'Secteur PROD', '#cD4A50'),
+(12002, 1000, 1000, 'Secteur COOP', '#cD4A50'),
+(12003, 1000, 1000, 'Secteur MAG', '#cD4A50'),
+(12004, 1000, 1000, 'Secteur ADMIN', '#cD4A50'),
+(12005, 1000, 1000, 'Secteur FIN', '#cD4A50'),
+(12006, 1000, 1000, 'Equipe 1', '#A4CE4C'),
+(12007, 1000, 1000, 'Equipe 2', '#A4CE4C'),
+(12008, 1000, 1000, 'Equipe 3', '#A4CE4C'),
+(12009, 1000, 1000, 'Equipe 4', '#A4CE4C');
 
 REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
-(12000, -1008),
-(12001, -1009),
-(12006, -1008),
-(12007, -1009),
-(12007, -1010);
+(12000, 1008),
+(12001, 1009),
+(12006, 1008),
+(12007, 1009),
+(12007, 1010);
 
 REPLACE INTO product_metadata (id, product_id, name, value) VALUES
 (13000, 3009, 'Contenance', '150g'),
@@ -168,17 +168,17 @@ REPLACE INTO product_metadata (id, product_id, name, value) VALUES
 (13003, 3008, 'Contenance', '75cl');
 
 REPLACE INTO `order` (id, owner_id, creator_id, creation_date, transaction_id) VALUES
-(16000, -1002, -1002, '2019-04-24', 8005),
-(16001, -1007, -1007, '2019-04-25', 8006);
+(16000, 1002, 1002, '2019-04-24', 8005),
+(16001, 1007, 1007, '2019-04-25', 8006);
 
 REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quantity, unit, balance, vat_rate, name) VALUES
-(17000, -1002, 16000, 3000, '2019-04-24', 2, '', 10.00, 0.077, 'Chocolat noir BIO'),
-(17001, -1002, 16000, 3002, '2019-04-24', 1, '', 5.00, 0.077, '6 oeufs BIO de la région'),
-(17002, -1002, 16000, 3011, '2019-04-24', 1, '', 10.00, 0.00, 'Miel de la région'),
-(17003, -1002, 16000, 3005, '2019-04-24', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
-(17004, -1007, 16001, 3011, '2019-04-25', 2, '', 10.00, 0.00, 'Miel de la région'),
-(17005, -1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
-(17006, -1007, 16001, 3005, '2019-04-25', 5, '', 50.00, 0.077, 'Pinot Noir La Coccinelle');
+(17000, 1002, 16000, 3000, '2019-04-24', 2, '', 10.00, 0.077, 'Chocolat noir BIO'),
+(17001, 1002, 16000, 3002, '2019-04-24', 1, '', 5.00, 0.077, '6 oeufs BIO de la région'),
+(17002, 1002, 16000, 3011, '2019-04-24', 1, '', 10.00, 0.00, 'Miel de la région'),
+(17003, 1002, 16000, 3005, '2019-04-24', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
+(17004, 1007, 16001, 3011, '2019-04-25', 2, '', 10.00, 0.00, 'Miel de la région'),
+(17005, 1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
+(17006, 1007, 16001, 3005, '2019-04-25', 5, '', 50.00, 0.077, 'Pinot Noir La Coccinelle');
 
 
 COMMIT;

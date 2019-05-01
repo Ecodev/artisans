@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFlexFill>
 
-    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxLayoutGap.gt-xs="20px">
 
         <button mat-icon-button *ngIf="menu" (click)="menu.toggle()">
             <natural-icon name="menu"></natural-icon>
@@ -13,7 +13,7 @@
         <div fxFlex></div>
 
         <div id="searchByCode" fxLayout="row" fxLayoutAlign="start center">
-            <input fxFlex placeholder="Code d'article" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
+            <input fxFlex placeholder="Référence" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
             <a mat-icon-button [routerLink]="['/shop/product', code]">
                 <natural-icon name="search"></natural-icon>
             </a>

@@ -4,14 +4,15 @@
         border-radius: 5px;
         background: rgba(0, 0, 0, 0.05);
         padding: 3px 5px;
-        max-width: 190px;
+        width:135px;
 
         input {
             border: none;
             font-size: 16px;
             line-height: 40px;
             height: 40px;
-            max-width: 140px;
+            min-width: 70px;
+            width: calc(100% - 50px);
             display: block;
             padding: 5px;
             background: transparent;

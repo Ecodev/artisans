@@ -2,7 +2,9 @@
 
     <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end" *ngIf="!cartService.cart.length">
 
-        <img fxFlex="none" src="assets/images/consigne.svg" style="margin-right:10px;width:380px;height:100px">
+        <div fxFlex="none">
+            <img  src="assets/images/consigne.svg" style="margin-right:10px;width:380px;max-width:100%;height:100px">
+        </div>
 
         <div fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center center" style="max-width:600px; margin: 0 auto">
             <img src="assets/logo.svg" style="height:40vmin; margin:0 auto">
@@ -10,14 +12,12 @@
                 <h1 class="mat-headline">Bienvenue ! </h1>
                 <p class="mat-subheading-2">
                     Pour effectuer tes achats, il te suffit de scanner le code QR du produit ou d'introduire le code de l'article puis sa
-                    quantité…
-                </p>
+                    quantité… </p>
                 <button mat-flat-button color="primary" routerLink="/shop/camera">
                     <natural-icon name="simple-qr" [size]="24"></natural-icon>
                     Démarrer la caméra
                 </button>
             </div>
-
 
         </div>
     </div>

@@ -44,46 +44,31 @@ INSERT INTO product_tag (id, name, color) VALUES
         );
 
         $handle = fopen($file, 'r');
-        $rowCount = 0;
         $skipped = [];
         $count = 0;
         while ($row = fgetcsv($handle)) {
-            ++$rowCount;
-            if ($rowCount < 11) {
-                continue;
-            }
-
-            // Stop import if no product name anymore
-            $name = trim($row[$this->letterToColumn('C')]);
-            if (!$name) {
-                break;
-            }
-
-            $price = $this->price($row[$this->letterToColumn('F')]);
-            if ($price === '') {
-                $skipped[] = $rowCount;
-
+            if (trim($row[$this->letterToColumn('C')]) !== '1') {
                 continue;
             }
 
             $product = [
                 'creation_date' => Chronos::now()->toIso8601String(),
                 'code' => $count + 1,
-                'name' => $name,
-                'description' => trim($row[$this->letterToColumn('D')]),
-                'supplier' => trim($row[$this->letterToColumn('E')]),
-                'price_per_unit' => $price,
-                'unit' => $this->unit($row[$this->letterToColumn('J')]),
-                'supplier_price' => $this->price($row[$this->letterToColumn('K')]),
-                'vat_rate' => $this->vat($row[$this->letterToColumn('G')]),
-                'margin' => $this->percent($row[$this->letterToColumn('N')], 0.20),
-                'supplier_reference' => trim($row[$this->letterToColumn('T')]),
+                'name' => ucfirst(trim($row[$this->letterToColumn('D')])),
+                'description' => trim($row[$this->letterToColumn('E')]),
+                'supplier' => trim($row[$this->letterToColumn('F')]),
+                'price_per_unit' => $this->price($row[$this->letterToColumn('G')]),
+                'unit' => $this->unit($row[$this->letterToColumn('L')]),
+                'supplier_price' => $this->price($row[$this->letterToColumn('M')]),
+                'vat_rate' => $this->vat($row[$this->letterToColumn('I')]),
+                'margin' => $this->percent($row[$this->letterToColumn('P')], 0.20),
+                'supplier_reference' => trim($row[$this->letterToColumn('V')]),
             ];
 
             $this->connection->insert('product', $product);
             $productId = $this->connection->lastInsertId();
 
-            $productTagId = $this->nullable($row[$this->letterToColumn('H')]);
+            $productTagId = $this->nullable($row[$this->letterToColumn('J')]);
             if ($productTagId) {
                 $this->connection->insert('product_tag_product', [
                     'product_tag_id' => $productTagId,
@@ -133,7 +118,7 @@ INSERT INTO product_tag (id, name, color) VALUES
     {
         $value = trim($value);
 
-        if (in_array($value, ['pièces', 'pièce', 'P'], true)) {
+        if (in_array($value, ['pièces', 'pièce', 'P', 'p'], true)) {
             return '';
         }
 

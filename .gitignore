@@ -31,6 +31,10 @@
 /htdocs/*.woff2
 /htdocs/*.ttf
 /htdocs/*.eot
+/htdocs/*.png
+/htdocs/*.svg
+/htdocs/*.webmanifest
+/htdocs/*.xml
 /htdocs/assets
 /.idea/
 /logs/

@@ -50,7 +50,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             supplier: '',
             supplierPrice: '0',
             supplierReference: '',
-            vatRate: '0.077',
+            vatRate: '0.025',
             unit: '',
             quantity: '0',
             margin: '0.20',

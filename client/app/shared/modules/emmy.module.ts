@@ -23,7 +23,6 @@ import {
 import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
 import { ngfModule } from 'angular-file';
 import { AvatarModule } from 'ngx-avatar';
-import { TimeagoModule } from 'ngx-timeago';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
 import { TransactionLinesComponent } from '../../admin/transactions/transactionLines/transaction-lines.component';
 import { AddressComponent } from '../components/address/address.component';
@@ -93,7 +92,7 @@ const declarations = [
     AccountingDocumentsComponent,
     ParticleSwitchComponent,
     DialogTriggerComponent,
-    TransactionLinesComponent
+    TransactionLinesComponent,
 ];
 
 const imports = [
@@ -127,7 +126,7 @@ const imports = [
         ...imports,
         NaturalIconModule.forRoot(iconsConfig),
     ],
-    exports: [...imports, ...declarations, TimeagoModule, NaturalIconModule],
+    exports: [...imports, ...declarations, NaturalIconModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     entryComponents: [],
 })

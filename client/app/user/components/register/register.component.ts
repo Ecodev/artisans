@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../admin/products/services/product.service';
-import { AnonymousUserService } from './anonymous-user.service';
-import gql from 'graphql-tag';
-import { Apollo } from 'apollo-angular';
 import { NaturalAbstractDetail, NaturalAlertService, NaturalDataSource } from '@ecodev/natural';
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
+import { ProductService } from '../../../admin/products/services/product.service';
+import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
+import { AnonymousUserService } from './anonymous-user.service';
 
 @Component({
     selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     UpdateUserVariables,
     any> implements OnInit {
 
-    private mandatoryProducts: NaturalDataSource;
+    public mandatoryProducts: NaturalDataSource;
 
     public step;
     public sending = false;

@@ -17,8 +17,6 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { TimeagoCustomFormatter, TimeagoFormatter, TimeagoIntl, TimeagoModule } from 'ngx-timeago';
-import { strings as frenchStrings } from 'ngx-timeago/language-strings/fr-short';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FrontEndComponent } from './front-end/front-end.component';
@@ -26,7 +24,6 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { DialogTriggerComponent } from './shared/components/modal-trigger/dialog-trigger.component';
 import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
 import { EmmyModule } from './shared/modules/emmy.module';
 import { MaterialModule } from './shared/modules/material.module';
@@ -36,10 +33,6 @@ import { SwissParsingDateAdapter } from './shared/services/swiss-parsing-date-ad
 import { ShopModule } from './shop/shop.module';
 
 registerLocaleData(localeFRCH);
-
-export class MyIntl extends TimeagoIntl {
-    // do extra stuff here...
-}
 
 @NgModule({
     declarations: [
@@ -61,10 +54,6 @@ export class MyIntl extends TimeagoIntl {
         ShopModule,
         HttpClientModule,
         HttpBatchLinkModule,
-        TimeagoModule.forRoot({
-            intl: {provide: TimeagoIntl, useClass: MyIntl},
-            formatter: {provide: TimeagoFormatter, useClass: TimeagoCustomFormatter},
-        }),
     ],
     providers: [
         MatIconRegistry,
@@ -99,12 +88,8 @@ export class AppModule {
                 alertService: NaturalAlertService,
                 httpBatchLink: HttpBatchLink,
                 dateAdapter: DateAdapter<Date>,
-                intl: TimeagoIntl,
     ) {
         dateAdapter.setLocale('fr-ch');
-
-        intl.strings = frenchStrings;
-        intl.changes.next();
 
         const link = createApolloLink(networkActivityService, alertService, httpBatchLink);
 

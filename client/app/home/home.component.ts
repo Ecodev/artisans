@@ -22,7 +22,7 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
     constructor(private userService: UserService,
                 private router: Router,
                 public route: ActivatedRoute,
-                private qrService: QrService,
+                public qrService: QrService,
                 public alertService: NaturalAlertService,
     ) {
         super();

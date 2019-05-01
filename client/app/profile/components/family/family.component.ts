@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersVariables } from '../../../shared/generated-types';
+import { ActivatedRoute } from '@angular/router';
+import { NaturalAbstractModelService, NaturalAlertService } from '@ecodev/natural';
+import { mergeWith } from 'lodash';
 import { UserService } from '../../../admin/users/services/user.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { ActivatedRoute } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
-import { mergeWith } from 'lodash';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
-import { NaturalAbstractModelService } from '@ecodev/natural';
 
 @Component({
     selector: 'app-family',
@@ -16,7 +13,7 @@ import { NaturalAbstractModelService } from '@ecodev/natural';
 export class FamilyComponent implements OnInit {
 
     public viewer;
-    private familyMembers;
+    public familyMembers;
 
     constructor(public userService: UserService,
                 private route: ActivatedRoute,

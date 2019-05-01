@@ -2,9 +2,9 @@
 
     <natural-detail-header newLabel="Nouveau produit" label="Produit" [model]="data.model" [listRoute]="['admin', 'product']">
         <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-            <div fxLayout="column" style="text-align:right" *ngIf="form.get('verificationDate').value">
+            <div fxLayout="column" style="text-align:right" *ngIf="form.get('verificationDate')?.value">
                 <div class="mat-body-2">Dernière vérification</div>
-                <div class="mat-body-1">{{ form.get('verificationDate').value | date: 'longDate' }}</div>
+                <div class="mat-body-1">{{ form.get('verificationDate')?.value | date: 'longDate' }}</div>
             </div>
             <button mat-flat-button color="primary" (click)="verify()" *ngIf="data.model.id">
                 Marquer comme vérifié
@@ -34,19 +34,19 @@
                                 <mat-form-field>
                                     <input matInput formControlName="name" (change)="update()">
                                     <mat-label>Nom</mat-label>
-                                    <mat-error *ngIf="form.get('name').hasError('maxlength')">
-                                        Maximum {{form.get('name').errors.maxlength.requiredLength }} caractères
+                                    <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
+                                        Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>
-                                    <mat-error *ngIf="form.get('name').hasError('required')">Requis</mat-error>
+                                    <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field>
                                     <input matInput maxlength="20" formControlName="code" (change)="update()">
                                     <mat-label>Code</mat-label>
-                                    <mat-error *ngIf="form.get('code').hasError('maxlength')">
-                                        Maximum {{form.get('code').errors.maxlength.requiredLength }} caractères
+                                    <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
+                                        Maximum {{form.get('code')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>
-                                    <mat-error *ngIf="form.get('code').hasError('required')">Requis</mat-error>
+                                    <mat-error *ngIf="form.get('code')?.hasError('required')">Requis</mat-error>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                             <mat-label>Quantité en stock</mat-label>
                             <input matInput type="number" required="required" step="0.01" min="0" formControlName="quantity" (change)="update()">
                             <div matSuffix>{{ data.model.unit }}</div>
-                            <mat-error *ngIf="form.get('quantity').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                     </div>
@@ -90,7 +90,7 @@
                                     {{ item | percent }}
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="form.get('margin').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('margin')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
@@ -100,27 +100,27 @@
                                     {{ item | percent:'1.1-1' }}
                                 </mat-option>
                             </mat-select>
-                            <mat-error *ngIf="form.get('vatRate').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('vatRate')?.hasError('required')">Requis</mat-error>
                             <mat-hint>Montant de la TVA : {{ data.model.vatRate * data.model.pricePerUnit | currency : 'CHF' }}</mat-hint>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Unité</mat-label>
                             <input matInput maxlength="10" formControlName="unit" (change)="update()">
-                            <mat-error *ngIf="form.get('unit').hasError('maxlength')">
-                                Maximum {{form.get('unit').errors.maxlength.requiredLength }} caractères
+                            <mat-error *ngIf="form.get('unit')?.hasError('maxlength')">
+                                Maximum {{form.get('unit')?.errors.maxlength.requiredLength }} caractères
                             </mat-error>
-                            <mat-error *ngIf="form.get('unit').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('unit')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Prix par unité (TTC)</mat-label>
                             <input matInput type="number" required="required" step="0.01" min="0" formControlName="pricePerUnit" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <button mat-button matSuffix mat-icon-button matTooltip="Utiliser le prix suggéré" (click)="form.get('pricePerUnit').setValue(calculateSuggestedPricePerUnit()); update()">
+                            <button mat-button matSuffix mat-icon-button matTooltip="Utiliser le prix suggéré" (click)="form.get('pricePerUnit')?.setValue(calculateSuggestedPricePerUnit()); update()">
                                 <mat-icon>reply</mat-icon>
                             </button>
-                            <mat-error *ngIf="form.get('pricePerUnit').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('pricePerUnit')?.hasError('required')">Requis</mat-error>
                             <mat-hint>Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
                         </mat-form-field>
 
@@ -136,22 +136,22 @@
                         <mat-form-field>
                             <mat-label>Nom du fournisseur</mat-label>
                             <input matInput formControlName="supplier" (change)="update()">
-                            <mat-error *ngIf="form.get('supplier').hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('supplier')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Prix payé au fournisseur</mat-label>
                             <input matInput type="number" required="required" step="0.01" min="0" formControlName="supplierPrice" (change)="update()">
                             <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('supplierPrice').hasError('required')">Requis</mat-error>
-                            <mat-error *ngIf="form.get('supplierPrice').hasError('min')">Le montant doit être positif</mat-error>
+                            <mat-error *ngIf="form.get('supplierPrice')?.hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('supplierPrice')?.hasError('min')">Le montant doit être positif</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Code produit chez le fournisseur</mat-label>
                             <input matInput maxlength="20" formControlName="supplierReference" (change)="update()">
-                            <mat-error *ngIf="form.get('supplierReference').hasError('maxlength')">
-                                Maximum {{form.get('supplierReference').errors.maxlength.requiredLength }} caractères
+                            <mat-error *ngIf="form.get('supplierReference')?.hasError('maxlength')">
+                                Maximum {{form.get('supplierReference')?.errors.maxlength.requiredLength }} caractères
                             </mat-error>
                         </mat-form-field>
 

@@ -11,7 +11,7 @@
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="transactionDate">Date</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="open" [hidden]="true">Nom</span>
+                    <span naturalColumnsPickerColumn="open" [checked]="false" [hidden]="true">Nom</span>
                     <span naturalColumnsPickerColumn="remarks">Remarques</span>
                     <span naturalColumnsPickerColumn="balance">Montant</span>
                     <span naturalColumnsPickerColumn="account">Compte</span>

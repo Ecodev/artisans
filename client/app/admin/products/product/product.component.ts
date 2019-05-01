@@ -35,6 +35,12 @@ export class ProductComponent
         '0.077',
     ];
 
+    public availableUnits = [
+        '',
+        'gr',
+        'kg',
+    ];
+
     public availableMargin = [
         '0.15',
         '0.16',

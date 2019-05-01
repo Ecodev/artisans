@@ -106,11 +106,11 @@
 
                         <mat-form-field>
                             <mat-label>Unité</mat-label>
-                            <input matInput maxlength="10" formControlName="unit" (change)="update()">
-                            <mat-error *ngIf="form.get('unit')?.hasError('maxlength')">
-                                Maximum {{form.get('unit')?.errors.maxlength.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('unit')?.hasError('required')">Requis</mat-error>
+                            <mat-select (selectionChange)="update()" formControlName="unit">
+                                <mat-option *ngFor="let item of availableUnits" [value]="item">
+                                    {{ item || 'A la pièce' }}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
 
                         <mat-form-field>

@@ -55,7 +55,7 @@ export class UserComponent
 
             if (this.data.model.id) {
                 this.userService.getFamily(this.data.model).subscribe(family => {
-                    this.showFamilyTab = family.length > 1;
+                    this.showFamilyTab = family.items.length > 1;
                 });
 
                 this.familyVariables = UserService.getFamilyVariables(this.data.model);

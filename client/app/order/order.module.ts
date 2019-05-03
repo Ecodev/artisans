@@ -18,6 +18,9 @@ const declarations = [
         CommonModule,
         EmmyModule
     ],
+    entryComponents: [
+        OrderComponent
+    ]
 })
 export class OrderModule {
 }

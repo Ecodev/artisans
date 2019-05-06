@@ -15,6 +15,7 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
     implements OnInit {
 
     @Input() relativeToAccount;
+    @Input() hideFab = false;
 
     @Output() select = new EventEmitter();
 

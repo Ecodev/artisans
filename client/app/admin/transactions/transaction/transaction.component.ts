@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail } from '@ecodev/natural';
-import { NaturalAlertService } from '@ecodev/natural';
-import { TransactionService } from '../services/transaction.service';
+import { NaturalAbstractDetail, NaturalAlertService } from '@ecodev/natural';
+import { OrderService } from '../../../order/services/order.service';
 import {
     CreateTransaction,
     CreateTransactionVariables,
@@ -15,10 +14,11 @@ import {
     UpdateTransaction,
     UpdateTransactionVariables,
 } from '../../../shared/generated-types';
-import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
-import { TransactionLineService } from '../services/transaction-line.service';
 import { AccountingDocumentsComponent } from '../../accounting-documents/accounting-documents.component';
 import { ExpenseClaimService } from '../../expenseClaim/services/expenseClaim.service';
+import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
+import { TransactionLineService } from '../services/transaction-line.service';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
     selector: 'app-transaction',
@@ -41,18 +41,25 @@ export class TransactionComponent
     public ExpenseClaimType = ExpenseClaimType;
     public ExpenseClaimStatus = ExpenseClaimStatus;
 
+    public order;
+
     constructor(alertService: NaturalAlertService,
                 private transactionService: TransactionService,
                 router: Router,
                 route: ActivatedRoute,
                 public transactionLineService: TransactionLineService,
                 private expenseClaimService: ExpenseClaimService,
+                private orderService: OrderService,
     ) {
         super('transaction', transactionService, alertService, router, route);
     }
 
     ngOnInit() {
         super.ngOnInit();
+
+        if (this.data.model.id) {
+            this.orderService.getForTransaction(this.data.model.id).subscribe(order => this.order = order);
+        }
 
         setTimeout(() => {
             const expenseClaim: ExpenseClaim['expenseClaim'] = this.data.expenseClaim ? this.data.expenseClaim.model : null;
@@ -120,5 +127,9 @@ export class TransactionComponent
         this.expenseClaimService.updatePartially(model).subscribe(() => {
             this.data.model.expenseClaim.status = status;
         });
+    }
+
+    public delete(redirectionRoute: any[]): void {
+        super.delete(['/admin/transaction-line']);
     }
 }

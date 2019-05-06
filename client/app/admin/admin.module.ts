@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { AvatarModule } from 'ngx-avatar';
 import { OrderModule } from '../order/order.module';
 import { ProfileModule } from '../profile/profile.module';
@@ -56,6 +57,7 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         AvatarModule,
         ProfileModule,
         OrderModule,
+        EcoFabSpeedDialModule,
     ],
     entryComponents: [],
 })

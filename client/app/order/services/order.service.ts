@@ -49,6 +49,19 @@ export class OrderService extends NaturalAbstractModelService<Order['order'],
     }
 
     public getInput(object: Literal) {
-       return (object as CreateOrderVariables['input']).map(line => this.orderLineService.getInput(line));
+        return (object as CreateOrderVariables['input']).map(line => this.orderLineService.getInput(line));
+    }
+
+    public getForTransaction(transactionId: string): Observable<Orders['orders']['items'][0]> {
+
+        const qvm = new NaturalQueryVariablesManager<OrdersVariables>();
+        const variables: OrdersVariables = {
+            filter: {groups: [{conditions: [{transaction: {equal: {value: transactionId}}}]}]},
+        };
+        qvm.set('variables', variables);
+        return this.getAll(qvm).pipe(map(orders => {
+            return orders.items[0];
+        }));
+
     }
 }

@@ -19,6 +19,9 @@ class Order extends AbstractModel
     /**
      * @var Transaction
      * @ORM\OneToOne(targetEntity="Transaction")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     * })
      */
     private $transaction;
 

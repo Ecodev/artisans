@@ -128,4 +128,20 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         $this->expectExceptionMessage('Transaction NEW non-équilibrée, débits: 1000.00, crédits: 900.00');
         $this->repository->hydrateLinesAndFlush($transaction, $lines);
     }
+
+    public function testTriggers(): void
+    {
+        $account1 = 10902;
+        $account2 = 10013;
+
+        $this->assertAccountBalance($account1, '210.20', 'initial balance');
+        $this->assertAccountBalance($account2, '89.80', 'initial balance');
+
+        $connection = $this->getEntityManager()->getConnection();
+        $count = $connection->delete('transaction', ['id' => 8005]);
+
+        self::assertSame(1, $count);
+        $this->assertAccountBalance($account1, '237.60', 'balance should be increased after deletion');
+        $this->assertAccountBalance($account2, '62.40', 'balance should be decreased after deletion');
+    }
 }

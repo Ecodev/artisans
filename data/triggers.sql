@@ -9,6 +9,24 @@
 | Group        | N/A          | N/A          |
  */
 
+DROP TRIGGER IF EXISTS transaction_DELETE;
+
+DELIMITER ~~
+
+CREATE TRIGGER transaction_DELETE
+    BEFORE DELETE
+    ON transaction
+    FOR EACH ROW
+BEGIN
+    -- Manually cascade the delete so that the transaction_line trigger is activated correctly, see https://jira.mariadb.org/browse/MDEV-19402
+    SET @transaction_being_deleted = OLD.id;
+    DELETE FROM transaction_line WHERE transaction_id = OLD.id;
+    SET @transaction_being_deleted = NULL;
+END; ~~
+
+DELIMITER ;
+
+
 DROP TRIGGER IF EXISTS transaction_line_INSERT;
 
 DELIMITER //
@@ -56,9 +74,11 @@ CREATE TRIGGER transaction_line_DELETE
     END IF;
 
     /* Update transaction total */
-    UPDATE transaction t
-    SET t.balance=(SELECT SUM(IF(tl.debit_id IS NOT NULL, tl.balance, 0)) FROM transaction_line tl WHERE tl.transaction_id=OLD.transaction_id)
-    WHERE t.id=OLD.transaction_id;
+    IF @transaction_being_deleted IS NULL THEN
+        UPDATE transaction t
+        SET t.balance=(SELECT SUM(IF(tl.debit_id IS NOT NULL, tl.balance, 0)) FROM transaction_line tl WHERE tl.transaction_id=OLD.transaction_id)
+        WHERE t.id=OLD.transaction_id;
+    END IF;
   END; //
 
 DELIMITER ;

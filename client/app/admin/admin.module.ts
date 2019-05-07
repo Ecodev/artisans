@@ -32,7 +32,6 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         ProductsComponent,
         ProductComponent,
         AdminComponent,
-        UsersComponent,
         UserComponent,
         UserTagsComponent,
         UserTagComponent,

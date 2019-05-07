@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserService } from './admin/users/services/user.service';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
+import { UsersComponent } from './admin/users/users/users.component';
 import { FrontEndComponent } from './front-end/front-end.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { DialogTriggerComponent, DialogTriggerRoutingData } from './shared/components/modal-trigger/dialog-trigger.component';
+import { UserRole, UserStatus } from './shared/generated-types';
 import { AuthGuard } from './shared/guards/auth.guard';
-import { ProductComponent } from './shop/product/product.component';
 import { CameraComponent } from './shop/camera/camera.component';
+import { ProductComponent } from './shop/product/product.component';
 import { ProductByCodeResolver } from './shop/services/product-by-code.resolver';
 import { ShopComponent } from './shop/shop/shop.component';
 
@@ -39,6 +42,18 @@ export const routes: Routes = [
                         path: '',
                         pathMatch: 'full',
                         redirectTo: 'shop',
+                    },
+                    {
+                        path: 'members',
+                        component: UsersComponent,
+                        data: {
+                            title: 'Membres',
+                            hideFab : true,
+                            contextColumns: ['name_readonly', 'email', 'mobilePhone'],
+                            contextVariables: UserService.getFilters(
+                                [UserRole.administrator, UserRole.member, UserRole.responsible],
+                                [UserStatus.active]),
+                        },
                     },
                     {
                         path: 'shop',

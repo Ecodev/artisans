@@ -25,6 +25,7 @@ import { ngfModule } from 'angular-file';
 import { AvatarModule } from 'ngx-avatar';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
 import { TransactionLinesComponent } from '../../admin/transactions/transactionLines/transaction-lines.component';
+import { UsersComponent } from '../../admin/users/users/users.component';
 import { AddressComponent } from '../components/address/address.component';
 import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
@@ -79,6 +80,9 @@ const iconsConfig: NaturalIconsConfig = {
     'shop': {
         svg: 'assets/icons/grocery.svg',
     },
+    'members': {
+        svg: 'assets/icons/members.svg',
+    },
 };
 
 const declarations = [
@@ -93,6 +97,7 @@ const declarations = [
     ParticleSwitchComponent,
     DialogTriggerComponent,
     TransactionLinesComponent,
+    UsersComponent,
 ];
 
 const imports = [

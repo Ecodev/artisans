@@ -33,6 +33,12 @@
                 </a>
             </div>
 
+            <mat-divider class="margin"></mat-divider>
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/members" class="big-button">
+                <natural-icon name="members" [size]="70"></natural-icon>
+                Membres
+            </a>
+
             <ng-container *ngIf="canAccessAdmin()">
                 <mat-divider class="margin"></mat-divider>
                 <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/admin" class="big-button">

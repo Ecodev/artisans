@@ -73,6 +73,8 @@ export const usersQuery = gql`
                 welcomeSessionDate
                 resignDate
                 sex
+                mobilePhone
+                email
                 account {
                     id
                     balance

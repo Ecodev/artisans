@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'styles/layout';
 @import 'app/shared/components/boot-loader/boot-loader.external';
 
 body {
@@ -166,4 +165,13 @@ input[type=number] {
             padding: 3px;
         }
     }
+}
+
+
+[app-date-column] {
+    width: 14em;
+}
+
+[app-price-column] {
+    width: 7em;
 }

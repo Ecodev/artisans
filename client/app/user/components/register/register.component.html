@@ -97,11 +97,11 @@
                     </ng-container>
 
                     <ng-container matColumnDef="pricePerUnit">
-                        <th mat-header-cell *matHeaderCellDef app-7em-column app-align-right>Prix par unité</th>
-                        <td mat-cell *matCellDef="let product" app-align-right>
+                        <th mat-header-cell *matHeaderCellDef natural-7em-column natural-align-right>Prix par unité</th>
+                        <td mat-cell *matCellDef="let product" natural-align-right>
                             <span *ngIf="product.pricePerUnit != '0.00'"> {{ product.pricePerUnit | currency: 'CHF' }}</span>
                         </td>
-                        <td mat-footer-cell *matFooterCellDef app-align-right>
+                        <td mat-footer-cell *matFooterCellDef natural-align-right>
                             <span *ngIf="mandatoryProducts?.data?.totalPricePerUnit > 0">
                                 {{ mandatoryProducts.data.totalPricePerUnit | currency: 'CHF'}}
                             </span>

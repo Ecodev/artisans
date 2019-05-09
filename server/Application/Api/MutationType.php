@@ -7,6 +7,7 @@ namespace Application\Api;
 use Application\Api\Field\Mutation\ConfirmRegistration;
 use Application\Api\Field\Mutation\CreateOrder;
 use Application\Api\Field\Mutation\CreateTransaction;
+use Application\Api\Field\Mutation\ImportCamt;
 use Application\Api\Field\Mutation\LeaveFamily;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
@@ -47,6 +48,7 @@ class MutationType extends ObjectType
             CreateTransaction::build(),
             UpdateTransaction::build(),
             CreateOrder::build(),
+            ImportCamt::build(),
             Standard::buildMutation(Transaction::class)[2], // Only delete mutation
         ];
 

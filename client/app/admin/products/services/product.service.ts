@@ -44,7 +44,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     protected getDefaultForServer(): ProductInput {
         return {
             name: '',
-            code: '',
+            code: null,
             description: '',
             pricePerUnit: '0',
             supplier: '',

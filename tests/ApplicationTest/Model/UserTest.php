@@ -318,4 +318,22 @@ class UserTest extends TestCase
         self::assertSame($account1, $user1->getAccount());
         self::assertSame($account2, $user2->getAccount(), 'user2 should be use his own account again');
     }
+
+    public function testCode(): void
+    {
+        $user = new User();
+        self::assertNull($user->getCode());
+
+        $user->setCode('foo');
+        self::assertSame('foo', $user->getCode());
+
+        $user->setCode('');
+        self::assertNull($user->getCode());
+
+        $user->setCode('foo');
+        self::assertSame('foo', $user->getCode());
+
+        $user->setCode(null);
+        self::assertNull($user->getCode());
+    }
 }

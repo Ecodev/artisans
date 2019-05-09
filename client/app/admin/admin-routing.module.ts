@@ -34,6 +34,7 @@ import { UsersComponent } from './users/users/users.component';
 import { UserTagResolver } from './userTags/services/userTag.resolver';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
+import { ImportComponent } from './import/import.component';
 
 const routes: Routes = [
         {
@@ -278,6 +279,11 @@ const routes: Routes = [
                             },
                         },
                     ],
+                },
+                {
+                    path: 'import',
+                    component: ImportComponent,
+                    data: {title: 'Import des virement BVR'},
                 },
                 {
                     // Separated from other similar routes because of https://github.com/angular/angular/issues/27674

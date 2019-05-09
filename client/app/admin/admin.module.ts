@@ -23,9 +23,9 @@ import { TransactionComponent } from './transactions/transaction/transaction.com
 import { TransactionTagComponent } from './transactionTags/transactionTag/transactionTag.component';
 import { TransactionTagsComponent } from './transactionTags/transactionTags/transactionTags.component';
 import { UserComponent } from './users/user/user.component';
-import { UsersComponent } from './users/users/users.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
+import { ImportComponent } from './import/import.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +46,7 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         TransactionTagComponent,
         EditableTransactionLinesComponent,
         ProductMetadataComponent,
-
+        ImportComponent,
     ],
     imports: [
         CommonModule,

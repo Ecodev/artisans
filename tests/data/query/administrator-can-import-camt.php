@@ -20,7 +20,7 @@ return [
         'data' => [
             'importCamt' => [
                 [
-                    'name' => 'Entrée BVR',
+                    'name' => 'Versement BVR',
                 ],
             ],
         ],

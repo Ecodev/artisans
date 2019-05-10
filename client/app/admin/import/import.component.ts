@@ -52,16 +52,16 @@ export class ImportComponent implements OnInit {
             },
         }).subscribe((result) => {
                 const naturalSearchSelections: NaturalSearchSelections = [
-                    [
-                        {
+                    result.data.importCamt.map(transaction => {
+                        return {
                             field: 'transaction',
                             condition: {
-                                in: {
-                                    values: result.data.importCamt.map(o => o.id),
+                                have: {
+                                    values: [transaction.id],
                                 },
                             },
-                        },
-                    ],
+                        };
+                    }),
                 ];
 
                 const ns = JSON.stringify(toUrl(naturalSearchSelections));

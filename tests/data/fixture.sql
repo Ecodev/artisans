@@ -78,19 +78,19 @@ REPLACE INTO image (id, filename, width, height) VALUES
 (5010, 'yogourt2.png', 388, 407),
 (5011, 'miel.png', 308, 436);
 
-REPLACE INTO product (id, image_id, supplier_price, price_per_unit, unit, vat_rate, name, code, description) VALUES
-(3000, 5000, 5.00, 6.00, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao'),
-(3001, 5001, 20.00, 24.00, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.'),
-(3002, 5002, 5.00, 6.00, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air'),
-(3003, 5003, 3.00, 4.00, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes'),
-(3004, 5004, 2.00, 2.50, 'kg', '0.025', 'Pommes de terre', 'P5', ''),
-(3005, 5005, 3.00, 4.00, 'kg', '0.025', 'Pommes', 'P6', ''),
-(3006, 5006, 3.00, 4.00, 'kg', '0.025', 'Poire', 'P7', ''),
-(3007, 5007, 8.00, 10.00, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', ''),
-(3008, 5008, 10.00, 13.00, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', ''),
-(3009, 5009, 1.10, 1.60, '', '0.025', 'Yogourt Bircher', 'P10', ''),
-(3010, 5010, 1.30, 2.00, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', ''),
-(3011, 5011, 10.00, 12.50, '', '0.0', 'Miel de la région', 'P12', '');
+REPLACE INTO product (id, image_id, quantity, supplier_price, price_per_unit, unit, vat_rate, name, code, description) VALUES
+(3000, 5000, 8, 5.00, 6.00, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao'),
+(3001, 5001, 12, 20.00, 24.00, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.'),
+(3002, 5002, 14, 5.00, 6.00, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air'),
+(3003, 5003, 17, 3.00, 4.00, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes'),
+(3004, 5004, 50.123, 2.00, 2.50, 'kg', '0.025', 'Pommes de terre', 'P5', ''),
+(3005, 5005, 21.8, 3.00, 4.00, 'kg', '0.025', 'Pommes', 'P6', ''),
+(3006, 5006, 5, 3.00, 4.00, 'kg', '0.025', 'Poire', 'P7', ''),
+(3007, 5007, 7, 8.00, 10.00, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', ''),
+(3008, 5008, 12, 10.00, 13.00, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', ''),
+(3009, 5009, 20, 1.10, 1.60, '', '0.025', 'Yogourt Bircher', 'P10', ''),
+(3010, 5010, 23, 1.30, 2.00, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', ''),
+(3011, 5011, 5, 10.00, 12.50, '', '0.0', 'Miel de la région', 'P12', '');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6004, 3000),
@@ -179,6 +179,18 @@ REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quan
 (17004, 1007, 16001, 3011, '2019-04-25', 2, '', 10.00, 0.00, 'Miel de la région'),
 (17005, 1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
 (17006, 1007, 16001, 3005, '2019-04-25', 5, '', 50.00, 0.077, 'Pinot Noir La Coccinelle');
+
+REPLACE INTO stock_movement (id, product_id, order_line_id, type, creation_date, delta, quantity) VALUES
+(18000, 3000, 17000, 'sale', '2019-04-24', -2, 8),
+(18001, 3002, 17001, 'sale', '2019-04-24', -1, 14),
+(18002, 3011, 17002, 'sale', '2019-04-24', -1, 7),
+(18003, 3005, 17003, 'sale', '2019-04-24', -0.6, 19.4),
+(18004, 3005, NULL, 'delivery', '2019-04-25', 10, 29.4),
+(18005, 3011, 17004, 'sale', '2019-04-25', -2, 5),
+(18006, 3005, 17005, 'sale', '2019-04-25', -0.6, 28.8),
+(18007, 3005, 17006, 'sale', '2019-04-25', -5, 23.8),
+(18008, 3005, NULL, 'loss', '2019-04-25', -2, 21.8),
+(18009, 3006, NULL, 'loss', '2019-04-25', -10, 5);
 
 
 COMMIT;

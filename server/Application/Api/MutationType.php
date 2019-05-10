@@ -6,6 +6,7 @@ namespace Application\Api;
 
 use Application\Api\Field\Mutation\ConfirmRegistration;
 use Application\Api\Field\Mutation\CreateOrder;
+use Application\Api\Field\Mutation\CreateStockMovement;
 use Application\Api\Field\Mutation\CreateTransaction;
 use Application\Api\Field\Mutation\ImportCamt;
 use Application\Api\Field\Mutation\LeaveFamily;
@@ -25,6 +26,7 @@ use Application\Model\Image;
 use Application\Model\Product;
 use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
+use Application\Model\StockMovement;
 use Application\Model\Transaction;
 use Application\Model\TransactionTag;
 use Application\Model\User;
@@ -48,8 +50,10 @@ class MutationType extends ObjectType
             CreateTransaction::build(),
             UpdateTransaction::build(),
             CreateOrder::build(),
+            CreateStockMovement::build(),
             ImportCamt::build(),
             Standard::buildMutation(Transaction::class)[2], // Only delete mutation
+            Standard::buildMutation(StockMovement::class)[2], // Only delete mutation
         ];
 
         $fields = array_merge(

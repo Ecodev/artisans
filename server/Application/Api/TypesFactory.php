@@ -25,6 +25,7 @@ class TypesFactory
             \Application\Api\Enum\ExpenseClaimTypeType::class,
             \Application\Api\Enum\MessageTypeType::class,
             \Application\Api\Enum\AccountTypeType::class,
+            \Application\Api\Enum\StockMovementTypeType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\Input\OrderLineInputType::class,

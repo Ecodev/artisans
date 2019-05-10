@@ -20,6 +20,7 @@ use Application\Model\Order;
 use Application\Model\Product;
 use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
+use Application\Model\StockMovement;
 use Application\Model\Transaction;
 use Application\Model\TransactionTag;
 use Application\Model\User;
@@ -58,6 +59,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $message = new ModelResource(Message::class);
         $transaction = new ModelResource(Transaction::class);
         $order = new ModelResource(Order::class);
+        $stockMovement = new ModelResource(StockMovement::class);
 
         $this->addResource($product);
         $this->addResource($productMetadata);
@@ -72,6 +74,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addResource($message);
         $this->addResource($transaction);
         $this->addResource($order);
+        $this->addResource($stockMovement);
 
         $this->allow(User::ROLE_ANONYMOUS, [$product, $productMetadata, $productTag, $image, $transactionTag], ['read']);
 
@@ -97,6 +100,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_RESPONSIBLE, [$user], ['update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$userTag], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_RESPONSIBLE, [$product, $productMetadata, $productTag, $image], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$stockMovement], ['create', 'read', 'update', 'delete']);
 
         $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $transactionTag], ['create', 'update', 'delete']);
     }

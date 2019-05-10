@@ -19,6 +19,7 @@ use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
+use Application\Model\StockMovement;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\TransactionTag;
@@ -54,7 +55,8 @@ class QueryType extends ObjectType
             Standard::buildQuery(AccountingDocument::class),
             Standard::buildQuery(Message::class),
             Standard::buildQuery(Order::class),
-            Standard::buildQuery(OrderLine::class)
+            Standard::buildQuery(OrderLine::class),
+            Standard::buildQuery(StockMovement::class)
         );
 
         $config = [

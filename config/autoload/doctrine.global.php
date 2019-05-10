@@ -58,6 +58,7 @@ return [
             'ExpenseClaimType' => Application\DBAL\Types\ExpenseClaimTypeType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'AccountType' => Application\DBAL\Types\AccountTypeType::class,
+            'StockMovementType' => Application\DBAL\Types\StockMovementTypeType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

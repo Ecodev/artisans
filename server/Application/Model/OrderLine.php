@@ -76,7 +76,7 @@ class OrderLine extends AbstractModel
     }
 
     /**
-     * Get related equipment or service
+     * Get related product
      *
      * @return null|Product
      */
@@ -86,7 +86,7 @@ class OrderLine extends AbstractModel
     }
 
     /**
-     * Set related equipment or service
+     * Set related product
      *
      * @param null|Product $product
      */

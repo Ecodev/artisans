@@ -42,18 +42,18 @@ class ImporterTest extends TestCase
         return $this->extract($importer->import($filename));
     }
 
-    public function testImport(): void
-    {
-        $actual = $this->import('tests/data/importer/two-transactions.xml');
-        $expected = require 'tests/data/importer/two-transactions.php';
-
-        self::assertSame($expected, $actual);
-    }
-
     public function testImportMinimal(): void
     {
         $actual = $this->import('tests/data/importer/minimal.xml');
         $expected = require 'tests/data/importer/minimal.php';
+
+        self::assertSame($expected, $actual);
+    }
+
+    public function testImport(): void
+    {
+        $actual = $this->import('tests/data/importer/two-transactions.xml');
+        $expected = require 'tests/data/importer/two-transactions.php';
 
         self::assertSame($expected, $actual);
     }

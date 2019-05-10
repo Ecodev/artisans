@@ -20,7 +20,6 @@ use Genkgo\Camt\DTO\Message;
 use Genkgo\Camt\DTO\Record;
 use Genkgo\Camt\DTO\RelatedPartyTypeInterface;
 use Genkgo\Camt\Reader;
-use ReflectionClass;
 
 /**
  * This service allows to import a CAMT file as Transaction and TransactionLine
@@ -96,20 +95,21 @@ class Importer
      */
     private function importTransaction(Entry $entry): void
     {
-        $name = $entry->getAdditionalInfo();
         $nativeDate = $entry->getValueDate();
         $date = Chronos::instance($nativeDate);
 
         $transaction = new Transaction();
-        $transaction->setName($name);
+        $transaction->setName('Versement BVR');
         $transaction->setTransactionDate($date);
 
+        $internalRemarks = [];
         foreach ($entry->getTransactionDetails() as $detail) {
-            $this->importTransactionLine($transaction, $detail);
+            $internalRemarks[] = $this->importTransactionLine($transaction, $detail);
 
             // Use same owner for line and transaction
             $transaction->setOwner($transaction->getTransactionLines()->first()->getOwner());
         }
+        $transaction->setInternalRemarks(implode(PHP_EOL . PHP_EOL, $internalRemarks));
 
         // Don't persist transaction that may not have any lines
         if ($transaction->getTransactionLines()->count()) {
@@ -118,13 +118,12 @@ class Importer
         }
     }
 
-    private function importTransactionLine(Transaction $transaction, EntryTransactionDetail $detail): void
+    private function importTransactionLine(Transaction $transaction, EntryTransactionDetail $detail): string
     {
         $referenceNumber = $detail->getRemittanceInformation()->getStructuredBlock()->getCreditorReferenceInformation()->getRef();
         $user = $this->loadUser($referenceNumber);
         $userAccount = $user->getAccount();
         $remarks = $this->getRemarks($detail, $referenceNumber);
-        $name = $detail->getAdditionalTransactionInformation();
         $amount = $detail->getAmount()->getAmount()->getAmount();
         $amount = bcdiv($amount, '100', 2);
 
@@ -136,22 +135,22 @@ class Importer
         $line = new TransactionLine();
         $line->setTransaction($transaction);
         $line->setOwner($user);
-        $line->setName($name);
+        $line->setName('Versement BVR');
         $line->setTransactionDate($transaction->getTransactionDate());
         $line->setBalance($amount);
-        $line->setRemarks($remarks);
         $line->setCredit($userAccount);
         $line->setDebit($this->bankAccount);
         $line->setImportedId($accountServicerReference);
 
         _em()->persist($line);
+
+        return $remarks;
     }
 
     private function partyToString(RelatedPartyTypeInterface $party): string
     {
-        $class = new ReflectionClass($party);
         $parts = [];
-        $parts[] = $class->getShortName();
+        $parts[] = $this->partyLabel($party);
         $parts[] = $party->getName();
 
         $address = $party->getAddress();
@@ -160,6 +159,25 @@ class Importer
         }
 
         return implode(PHP_EOL, $parts);
+    }
+
+    private function partyLabel(RelatedPartyTypeInterface $party): string
+    {
+        $class = get_class($party);
+        switch ($class) {
+            case \Genkgo\Camt\DTO\Recipient::class:
+                return 'Récipient';
+            case \Genkgo\Camt\DTO\Debtor::class:
+                return 'Débiteur';
+            case \Genkgo\Camt\DTO\Creditor::class:
+                return 'Créancier';
+            case \Genkgo\Camt\DTO\UltimateDebtor::class:
+                return 'Débiteur final';
+            case \Genkgo\Camt\DTO\UltimateCreditor::class:
+                return 'Créancier final';
+            default:
+                throw new Exception('Non supported related party type: ' . $class);
+        }
     }
 
     private function addressToString(Address $a): string

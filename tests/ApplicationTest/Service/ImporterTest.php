@@ -33,7 +33,7 @@ class ImporterTest extends TestCase
     /**
      * @param string $filename
      *
-     * @return Transaction[]
+     * @return array
      */
     private function import(string $filename): array
     {

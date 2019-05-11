@@ -62,11 +62,14 @@ class Invoicer
             /** @var Product $product */
             $product = $line['product'];
             $quantity = $line['quantity'];
+            $pricePonderation = $line['pricePonderation'];
 
-            $balance = Utility::moneyRoundUp(bcmul($product->getPricePerUnit(), $quantity, 10));
+            $quantifiedPrice = bcmul($product->getPricePerUnit(), $quantity, 10);
+            $ponderatedPrice = bcmul($quantifiedPrice, $pricePonderation, 10);
+            $balance = Utility::moneyRoundUp($ponderatedPrice);
             $total = bcadd($total, $balance);
 
-            $this->createOrderLine($order, $product, $balance, $quantity);
+            $this->createOrderLine($order, $product, $balance, $quantity, $pricePonderation);
             $product->setQuantity(bcsub($product->getQuantity(), $quantity, 10));
         }
 
@@ -104,7 +107,7 @@ class Invoicer
         $transactionLine->setTransactionDate(Chronos::now());
     }
 
-    private function createOrderLine(Order $order, Product $product, string $balance, string $quantity): OrderLine
+    private function createOrderLine(Order $order, Product $product, string $balance, string $quantity, string $pricePonderation): OrderLine
     {
         $orderLine = new OrderLine();
         $this->entityManager->persist($orderLine);
@@ -115,6 +118,7 @@ class Invoicer
         $orderLine->setUnit($product->getUnit());
         $orderLine->setQuantity($quantity);
         $orderLine->setBalance($balance);
+        $orderLine->setPricePonderation($pricePonderation);
         $orderLine->setVatRate($product->getVatRate());
 
         $this->createStockMovement($orderLine);

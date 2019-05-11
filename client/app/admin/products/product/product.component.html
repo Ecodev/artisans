@@ -69,9 +69,14 @@
 
                         <mat-form-field>
                             <mat-label>Quantité en stock</mat-label>
-                            <input matInput type="number" disabled [value]="data.model.quantity" >
+                            <input matInput type="number" disabled [value]="data.model.quantity">
                             <div matSuffix>{{ data.model.unit }}</div>
-                            <button mat-button matSuffix mat-icon-button matTooltip="Saisir un changement de stock" (click)="createStockMovement()">
+                            <button mat-button
+                                    matSuffix
+                                    mat-icon-button
+                                    matTooltip="Saisir un changement de stock"
+                                    (click)="createStockMovement()"
+                            >
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </mat-form-field>
@@ -80,9 +85,10 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom">
+                        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="20px">
                             <h2 class="mat-title no-margin" fxFlex>Prix</h2>
                             <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
+                            <mat-slide-toggle formControlName="ponderatePrice" (change)="update()">Prix ajustable</mat-slide-toggle>
                         </div>
 
                         <mat-form-field>
@@ -117,13 +123,26 @@
 
                         <mat-form-field>
                             <mat-label>Prix par unité (TTC)</mat-label>
-                            <input matInput type="number" required="required" step="0.01" min="0" formControlName="pricePerUnit" (change)="update()">
+                            <input matInput
+                                   type="number"
+                                   required="required"
+                                   step="0.01"
+                                   min="0"
+                                   formControlName="pricePerUnit"
+                                   (change)="update()"
+                            >
                             <div matSuffix>CHF</div>
-                            <button mat-button matSuffix mat-icon-button matTooltip="Utiliser le prix suggéré" (click)="form.get('pricePerUnit')?.setValue(calculateSuggestedPricePerUnit()); update()">
+                            <button mat-button
+                                    matSuffix
+                                    mat-icon-button
+                                    matTooltip="Utiliser le prix suggéré"
+                                    (click)="form.get('pricePerUnit')?.setValue(calculateSuggestedPricePerUnit()); update()"
+                            >
                                 <mat-icon>reply</mat-icon>
                             </button>
                             <mat-error *ngIf="form.get('pricePerUnit')?.hasError('required')">Requis</mat-error>
-                            <mat-hint>Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
+                            <mat-hint>Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA
+                                      : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
                         </mat-form-field>
 
                     </div>
@@ -143,7 +162,14 @@
 
                         <mat-form-field>
                             <mat-label>Prix payé au fournisseur</mat-label>
-                            <input matInput type="number" required="required" step="0.01" min="0" formControlName="supplierPrice" (change)="update()">
+                            <input matInput
+                                   type="number"
+                                   required="required"
+                                   step="0.01"
+                                   min="0"
+                                   formControlName="supplierPrice"
+                                   (change)="update()"
+                            >
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('supplierPrice')?.hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('supplierPrice')?.hasError('min')">Le montant doit être positif</mat-error>
@@ -163,10 +189,10 @@
                         <div *ngIf="data.model.id">
                             <h2 class="mat-title">Tags</h2>
                             <natural-relations [main]="data.model"
-                                           [service]="productTagService"
-                                           [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
-                                           [hideSearch]="true"
-                                           placeholder="Ajouter un tag"
+                                               [service]="productTagService"
+                                               [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
+                                               [hideSearch]="true"
+                                               placeholder="Ajouter un tag"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">

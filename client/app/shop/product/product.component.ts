@@ -1,10 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
+import { ProductService } from '../../admin/products/services/product.service';
 import { DialogTriggerProvidedData } from '../../shared/components/modal-trigger/dialog-trigger.component';
 import { CartService } from '../services/cart.service';
-import { ProductService } from '../../admin/products/services/product.service';
 
 @Component({
     selector: 'app-product',
@@ -13,12 +13,45 @@ import { ProductService } from '../../admin/products/services/product.service';
 })
 export class ProductComponent implements OnInit {
 
+    /**
+     * Stores cart service to allow access from template
+     */
     public CartService = CartService;
+
+    /**
+     * Resolved model product. Called data to stay compliant with usual providing naming and usage in template
+     */
     public data: any;
-    public quantityForm = new FormControl(1, [Validators.required, Validators.min(0)]);
+
+    /**
+     * True if we are in edition mode after selecting an existing cart line from cart list. Activates some special layout for line update
+     */
     public edit = false;
+
+    /**
+     * Formatted displayed price
+     */
     public price;
+
+    /**
+     * Stores DialogTriggerComponent actuvated route snapshot
+     */
     private routeSnapshot;
+
+    /**
+     * Form controller for quantity
+     */
+    public quantityForm = new FormControl(1, [Validators.required, Validators.min(0)]);
+
+    /**
+     * Form controller for price ponderation
+     */
+    public pricePonderation = new FormControl(1, [Validators.required, Validators.min(0), Validators.max(1)]);
+
+    /**
+     * Combination of form controls of the page
+     */
+    public formGroup = new FormGroup({quantity: this.quantityForm, pricePonderation: this.pricePonderation});
 
     constructor(@Inject(MAT_DIALOG_DATA) data: DialogTriggerProvidedData,
                 private cartService: CartService,
@@ -29,13 +62,15 @@ export class ProductComponent implements OnInit {
         this.data = {model: this.routeSnapshot.data.product.model}; // to respect our template standard
 
         if (this.data.model) {
-            if (this.routeSnapshot.params.quantity) {
+            if (this.routeSnapshot.params.index) {
                 this.edit = true;
-                this.quantityForm.setValue(this.routeSnapshot.params.quantity);
+                this.quantityForm.setValue(this.cartService.cart[+this.routeSnapshot.params.index].quantity);
+                this.pricePonderation.setValue(this.cartService.cart[+this.routeSnapshot.params.index].pricePonderation);
             }
 
             this.computePrice();
             this.quantityForm.valueChanges.subscribe(() => this.computePrice(true));
+            this.pricePonderation.valueChanges.subscribe(() => this.computePrice(true));
 
             // Fetch permissions if they are missing
             if (!this.data.model.permissions) {
@@ -57,21 +92,21 @@ export class ProductComponent implements OnInit {
             }
         }
 
-        this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value);
+        this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value, this.pricePonderation.value);
     }
 
     public addToCart() {
-        this.cartService.add(this.data.model, this.quantityForm.value);
+        this.cartService.add(this.data.model, +this.quantityForm.value, +this.pricePonderation.value);
         this.router.navigateByUrl('/');
     }
 
     public updateCart() {
-        this.cartService.setQuantity(this.data.model, +this.quantityForm.value);
+        this.cartService.updateProduct(+this.routeSnapshot.params.index, +this.quantityForm.value, +this.pricePonderation.value);
         this.router.navigateByUrl('/');
     }
 
     public removeFromCart() {
-        this.cartService.remove(this.data.model);
+        this.cartService.remove(+this.routeSnapshot.params.index);
         this.router.navigateByUrl('/');
     }
 

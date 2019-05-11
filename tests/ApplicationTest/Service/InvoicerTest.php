@@ -43,6 +43,7 @@ class InvoicerTest extends TestCase
                 $orderLine->getQuantity(),
                 $orderLine->getBalance(),
                 $orderLine->getVatRate(),
+                $orderLine->getPricePonderation(),
             ];
         }
         self::assertSame($expectedOrderLines, $actualOrderLines);
@@ -66,6 +67,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'quantity' => '1',
+                        'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product',
                             'pricePerUnit' => '0',
@@ -82,6 +84,7 @@ class InvoicerTest extends TestCase
                         '1',
                         '0.00',
                         '0.077',
+                        '1.00',
                     ],
                 ],
                 [],
@@ -90,6 +93,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'quantity' => '3.100',
+                        'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product 1',
                             'pricePerUnit' => '2.75',
@@ -99,6 +103,7 @@ class InvoicerTest extends TestCase
                     ],
                     [
                         'quantity' => '1',
+                        'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product 2',
                             'pricePerUnit' => '200',
@@ -114,6 +119,7 @@ class InvoicerTest extends TestCase
                         '3.100',
                         '8.53',
                         '0.077',
+                        '1.00',
 
                     ],
                     [
@@ -122,6 +128,7 @@ class InvoicerTest extends TestCase
                         '1',
                         '200.00',
                         '0.025',
+                        '1.00',
                     ],
                 ],
                 [
@@ -133,10 +140,61 @@ class InvoicerTest extends TestCase
                     ],
                 ],
             ],
+            'with ponderated prices' => [
+                [
+                    [
+                        'quantity' => '3.100',
+                        'pricePonderation' => '0.30',
+                        'product' => [
+                            'name' => 'My product 1',
+                            'pricePerUnit' => '2.75',
+                            'unit' => 'kg',
+                            'vatRate' => '0.077',
+                        ],
+                    ],
+                    [
+                        'quantity' => '1',
+                        'pricePonderation' => '0.50',
+                        'product' => [
+                            'name' => 'My product 2',
+                            'pricePerUnit' => '200',
+                            'unit' => '',
+                            'vatRate' => '0.025',
+                        ],
+                    ],
+                ],
+                [
+                    [
+                        'My product 1',
+                        'kg',
+                        '3.100',
+                        '2.56',
+                        '0.077',
+                        '0.30',
+                    ],
+                    [
+                        'My product 2',
+                        '',
+                        '1',
+                        '100.00',
+                        '0.025',
+                        '0.50',
+                    ],
+                ],
+                [
+                    [
+                        'Achats',
+                        'John Doe',
+                        'Vente de marchandises',
+                        '102.56',
+                    ],
+                ],
+            ],
             'negative balance should swap accounts' => [
                 [
                     [
                         'quantity' => '1',
+                        'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product',
                             'pricePerUnit' => '-100',
@@ -152,6 +210,7 @@ class InvoicerTest extends TestCase
                         '1',
                         '-100.00',
                         '0.077',
+                        '1.00',
                     ],
                 ],
                 [

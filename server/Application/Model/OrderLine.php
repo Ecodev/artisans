@@ -53,6 +53,13 @@ class OrderLine extends AbstractModel
     private $vatPart = '0';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=4, scale=2, options={"unsigned" = true})
+     */
+    private $pricePonderation;
+
+    /**
      * @API\Exclude
      *
      * @param Order $order
@@ -105,5 +112,23 @@ class OrderLine extends AbstractModel
     public function getVatPart(): string
     {
         return $this->vatPart;
+    }
+
+    /**
+     * Set price ratio ponderation
+     *
+     * @param string $pricePonderation
+     */
+    public function setPricePonderation(string $pricePonderation): void
+    {
+        $this->pricePonderation = $pricePonderation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPricePonderation(): string
+    {
+        return $this->pricePonderation;
     }
 }

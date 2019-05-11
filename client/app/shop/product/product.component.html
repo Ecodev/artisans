@@ -12,32 +12,43 @@
             <h2 class="mat-headline no-margin-bottom">{{ data.model.name }}</h2>
             <div fxFlex></div>
             <div class="mat-headline price no-margin-bottom">
-                {{ CartService.getPriceTaxInc(data.model, 1) | currency : 'CHF' }}
+                {{ CartService.getPriceTaxInc(data.model, 1, 1) | currency : 'CHF' }}
                 <span *ngIf="data.model.unit" class="mat-body-2"> / {{ data.model.unit }}</span>
             </div>
         </div>
 
         <mat-divider></mat-divider>
 
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+
             <mat-form-field [style.width.px]="90" [style.padding-top.em]="1.34375">
                 <mat-label>Quantité</mat-label>
                 <input matInput type="number" min="0" [formControl]="quantityForm" (change)="computePrice()">
                 <div matSuffix *ngIf="data.model.unit">{{ data.model.unit }}</div>
                 <mat-error *ngIf="quantityForm.hasError('required')">Requis</mat-error>
             </mat-form-field>
-            <div fxLayout="column" fxLayoutGap="10px">
+
+            <div fxLayout="column" fxLayoutGap="10px" fxFlex>
                 <button mat-icon-button mat-raised-button *ngIf="!data.model.unit" (click)="increase()">
                     <natural-icon name="add"></natural-icon>
                 </button>
-                <button mat-icon-button mat-raised-button *ngIf="!data.model.unit" (click)="decrease()" [disabled]="quantityForm.value <= 0">
+                <button mat-icon-button mat-raised-button *ngIf="!data.model.unit" (click)="decrease()" [disabled]="quantityForm.value <= 0"
+                >
                     <natural-icon name="remove"></natural-icon>
                 </button>
             </div>
-            <div fxFlex></div>
 
             <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px">
-                <div class="mat-title">x {{quantityForm.value}}</div>
+
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <div fxFlex="none" class="mat-title no-margin-bottom">{{quantityForm.value}}x</div>
+
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" *ngIf="data.model.ponderatePrice">
+                        <div class="mat-title no-margin-bottom">&nbsp;à {{ pricePonderation.value | percent}}</div>
+                        <mat-slider fxFlex [formControl]="pricePonderation" min="0" max="1" step="0.1" value="1"></mat-slider>
+                    </div>
+                </div>
+
                 <div class="mat-display-1 price no-margin">{{ price | currency : 'CHF' }}</div>
             </div>
         </div>
@@ -66,15 +77,33 @@
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
     <button mat-button [mat-dialog-close]="null">Fermer</button>
 
-    <button mat-stroked-button color="warn" (click)="removeFromCart()" mat-dialog-close [disabled]="quantityForm.invalid" *ngIf="edit && data?.model">
+    <button mat-stroked-button
+            color="warn"
+            (click)="removeFromCart()"
+            mat-dialog-close
+            [disabled]="formGroup.invalid"
+            *ngIf="edit && data?.model"
+    >
         Supprimer
     </button>
 
-    <button mat-flat-button color="primary" (click)="updateCart()" mat-dialog-close *ngIf="edit && data?.model" [disabled]="quantityForm.invalid || !quantityForm.dirty || !data.model.isActive">
+    <button mat-flat-button
+            color="primary"
+            (click)="updateCart()"
+            mat-dialog-close
+            *ngIf="edit && data?.model"
+            [disabled]="formGroup.invalid || !formGroup.dirty || !data.model.isActive"
+    >
         Mettre à jour
     </button>
 
-    <button mat-flat-button color="primary" (click)="addToCart()" mat-dialog-close *ngIf="!edit && data?.model" [disabled]="quantityForm.invalid || !data.model.isActive">
+    <button mat-flat-button
+            color="primary"
+            (click)="addToCart()"
+            mat-dialog-close
+            *ngIf="!edit && data?.model"
+            [disabled]="formGroup.invalid || !data.model.isActive"
+    >
         Ajouter au panier
     </button>
 

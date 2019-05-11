@@ -10,6 +10,7 @@ export const orderLineMetaFragment = gql`
         vatPart
         vatRate
         balance
+        pricePonderation
         product {
             id
             name

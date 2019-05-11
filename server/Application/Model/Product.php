@@ -94,6 +94,13 @@ class Product extends AbstractModel
     private $image;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $ponderatePrice = true;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -150,7 +157,7 @@ class Product extends AbstractModel
     }
 
     /**
-     * Whether this product can be booked
+     * Whether this product can be bought
      *
      * @return bool
      */
@@ -160,7 +167,7 @@ class Product extends AbstractModel
     }
 
     /**
-     * Whether this product can be booked
+     * Whether this product can be bought
      *
      * @param bool $isActive
      */
@@ -279,5 +286,25 @@ class Product extends AbstractModel
     public function setSupplier(string $supplier): void
     {
         $this->supplier = $supplier;
+    }
+
+    /**
+     * Wherever product allow user defined price ponderation
+     *
+     * @return bool
+     */
+    public function getPonderatePrice(): bool
+    {
+        return $this->ponderatePrice;
+    }
+
+    /**
+     * Wherever product allow user defined price ponderation
+     *
+     * @param bool $ponderatePrice
+     */
+    public function setPonderatePrice(bool $ponderatePrice): void
+    {
+        $this->ponderatePrice = $ponderatePrice;
     }
 }

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
     DateAdapter,
     MatAutocompleteModule,
@@ -19,6 +20,7 @@ import {
     MatRippleModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSliderModule,
     MatSlideToggleModule,
     MatSnackBarModule,
     MatSortModule,
@@ -27,7 +29,6 @@ import {
     MatToolbarModule,
     MatTooltipModule,
 } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { SwissParsingDateAdapter } from '../services/swiss-parsing-date-adapter.service';
 
 const list = [
@@ -57,6 +58,7 @@ const list = [
     MatTooltipModule,
     MatRippleModule,
     MatSortModule,
+    MatSliderModule,
 ];
 
 /**

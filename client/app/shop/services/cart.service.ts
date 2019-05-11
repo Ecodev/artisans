@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { NaturalAlertService } from '@ecodev/natural';
 import Decimal from 'decimal.js';
 import { OrderService } from '../../order/services/order.service';
 import { Product, Products } from '../../shared/generated-types';
@@ -8,6 +9,7 @@ export interface CartLine {
     product: Products['products']['items'][0] | Product['product'];
     quantity: number;
     total: number;
+    pricePonderation: number;
 }
 
 @Injectable({
@@ -20,7 +22,7 @@ export class CartService {
     private static storageKey = 'chez-emmy-cart';
     public cart: CartLine[] = [];
 
-    constructor(private orderService: OrderService) {
+    constructor(private orderService: OrderService, private alertService: NaturalAlertService) {
         const storedCart = sessionStorage.getItem(CartService.storageKey);
         if (storedCart) {
             this.cart = JSON.parse(storedCart);
@@ -28,11 +30,13 @@ export class CartService {
         }
     }
 
-    public static getPriceTaxInc(product: CartLine['product'], quantity: number = 1): number {
-        return moneyRoundUp(+Decimal.mul(product.pricePerUnit, quantity));
+    public static getPriceTaxInc(product: CartLine['product'], quantity: number, ponderation: number): number {
+        const quantifiedPrice = Decimal.mul(product.pricePerUnit, quantity);
+        const ponderatedPrice = Decimal.mul(quantifiedPrice, ponderation);
+        return moneyRoundUp(+ponderatedPrice);
     }
 
-    private static saveCart(cart) {
+    private static persistCart(cart) {
         CartService.computeTotals(cart);
         sessionStorage.setItem(CartService.storageKey, JSON.stringify(cart));
     }
@@ -46,63 +50,75 @@ export class CartService {
         return this.orderService.create(this.cart as any); // whines because of a number is provided instead of a string. TODO : fix
     }
 
-    public add(product: CartLine['product'], quantity) {
+    public add(product: CartLine['product'], quantity: number, ponderation: number) {
 
-        const existingLine = this.cart.find(line => line.product.id === product.id);
+        const existingLineIndex = this.getLineIndexByProductAndPonderation(product, ponderation);
 
-        if (existingLine) {
+        if (existingLineIndex > -1) {
+            const existingLine = this.cart[existingLineIndex];
             existingLine.quantity += quantity;
-            existingLine.total = CartService.getPriceTaxInc(product, existingLine.quantity);
+            existingLine.total = CartService.getPriceTaxInc(product, existingLine.quantity, ponderation);
+
         } else {
             this.cart.push({
                 product: product,
                 quantity: quantity,
-                total: CartService.getPriceTaxInc(product, quantity),
+                pricePonderation: ponderation,
+                total: CartService.getPriceTaxInc(product, quantity, ponderation),
             });
         }
 
-        CartService.saveCart(this.cart);
-
+        CartService.persistCart(this.cart);
     }
 
-    public remove(product: CartLine['product']) {
-        const index = this.cart.findIndex(line => line.product.id === product.id);
-        if (index > -1) {
-            this.cart.splice(index, 1);
-            CartService.saveCart(this.cart);
-        }
+    /**
+     * Return a line from cart where product, quantity and price ponderation are identical
+     * @param excludeIndex If provided ignore that index (permits to prevent colision in search)
+     */
+    public getLineIndexByProductAndPonderation(product: CartLine['product'], ponderation: number, excludeIndex?: number): number {
+        return this.cart.findIndex((line: CartLine, index: number) => {
+            return index === excludeIndex ? false : line.product.id === product.id && line.pricePonderation === ponderation;
+        });
+    }
+
+    public remove(index: number) {
+        this.cart.splice(index, 1);
+        CartService.persistCart(this.cart);
     }
 
     public empty() {
         this.cart = [];
-        CartService.saveCart(this.cart);
+        CartService.persistCart(this.cart);
     }
 
-    public setQuantity(product: CartLine['product'], quantity: number) {
+    public updateProduct(index: number, quantity: number, pricePonderation: number) {
 
-        const line = this.cart.find(l => l.product.id === product.id);
+        const similarLineIndex = this.getLineIndexByProductAndPonderation(this.cart[index].product, pricePonderation, index);
+        const currentLine = this.cart[index];
 
-        // If no product, or no quantity, stop it
-        if (!line && quantity <= 0) {
+        // In case there is some other line with same parameters, merge them in the other line, and clear the current one
+        if (similarLineIndex > -1) {
+            const similarLine = this.cart[similarLineIndex];
+            currentLine.quantity = quantity + similarLine.quantity;
+            currentLine.pricePonderation = pricePonderation;
+            currentLine.total = CartService.getPriceTaxInc(currentLine.product, currentLine.quantity, pricePonderation);
+            this.remove(similarLineIndex);
+            this.alertService.info('Deux produits partageant les mêmes caractéristiques ont été combinés');
+            CartService.persistCart(this.cart);
             return;
         }
 
-        // If product does not exist in cart, add it with defined quantity
-        if (!line) {
-            this.add(product, quantity);
-            return;
-        }
-
-        // If line has been found, but quantity is falsey, remove from cart
         if (quantity <= 0) {
-            this.remove(product);
+            // If quantity is falsey, remove from cart
+            this.remove(index);
+        } else {
+            // If product exist and quantity is truey, update existing entry
+            currentLine.quantity = quantity;
+            currentLine.pricePonderation = pricePonderation;
+            currentLine.total = CartService.getPriceTaxInc(currentLine.product, quantity, pricePonderation);
         }
 
-        // If product exist and quantity is truey, update existing entry
-        line.quantity = quantity;
-        line.total = CartService.getPriceTaxInc(line.product, quantity);
-
-        CartService.saveCart(this.cart);
+        CartService.persistCart(this.cart);
     }
 
 }

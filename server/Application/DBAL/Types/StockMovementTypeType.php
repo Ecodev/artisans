@@ -6,7 +6,7 @@ namespace Application\DBAL\Types;
 
 class StockMovementTypeType extends AbstractEnumType
 {
-    const SELL = 'sale';
+    const SALE = 'sale';
     const LOSS = 'loss';
     const DELIVERY = 'delivery';
     const INVENTORY = 'inventory';
@@ -14,7 +14,7 @@ class StockMovementTypeType extends AbstractEnumType
     protected function getPossibleValues(): array
     {
         return [
-            self::SELL,
+            self::SALE,
             self::LOSS,
             self::DELIVERY,
             self::INVENTORY,

@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Application\DBAL\Types\StockMovementTypeType;
 use Application\Model\Account;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
+use Application\Model\StockMovement;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
@@ -115,6 +117,19 @@ class Invoicer
         $orderLine->setBalance($balance);
         $orderLine->setVatRate($product->getVatRate());
 
+        $this->createStockMovement($orderLine);
+
         return $orderLine;
+    }
+
+    private function createStockMovement(OrderLine $orderLine): void
+    {
+        $stockMovement = new StockMovement();
+        $this->entityManager->persist($stockMovement);
+
+        $stockMovement->setProduct($orderLine->getProduct());
+        $stockMovement->setOrderLine($orderLine);
+        $stockMovement->setDelta($orderLine->getQuantity());
+        $stockMovement->setType(StockMovementTypeType::SALE);
     }
 }

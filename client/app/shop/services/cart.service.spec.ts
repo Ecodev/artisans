@@ -9,7 +9,7 @@ class DummyService {
     }
 }
 
-fdescribe('CartService', () => {
+describe('CartService', () => {
 
     let service: CartService;
 

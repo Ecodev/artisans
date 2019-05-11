@@ -1,0 +1,36 @@
+<h2 mat-dialog-title>Mouvement de stock</h2>
+<mat-dialog-content>
+
+    <natural-select-enum
+            enumName="StockMovementType"
+            placeholder="Type du mouvement"
+            [(ngModel)]="stockMovement.type"
+            (selectionChange)="update()"
+    ></natural-select-enum>
+
+    <mat-form-field style="width:100%" *ngIf="stockMovement.type !== inventory">
+        <mat-label>Quantité du mouvement</mat-label>
+        <input matInput [(ngModel)]="delta" type="number" required="required" step="0.001" min="0" (change)="update()"/>
+        <div matSuffix>{{ data.product.unit }}</div>
+    </mat-form-field>
+
+    <mat-form-field style="width:100%" *ngIf="stockMovement.type === inventory">
+        <mat-label>Quantité totale en stock actuellement</mat-label>
+        <input matInput [(ngModel)]="quantity" type="number" required="required" step="0.001" min="0" (change)="update()" (keyup)="update()"/>
+        <div matSuffix>{{ data.product.unit }}</div>
+        <mat-hint>Saisir la quantité <strong>totale</strong> en stock</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field style="width:100%">
+        <mat-label>Remarques</mat-label>
+        <textarea matInput [(ngModel)]="stockMovement.remarks" matTextareaAutosize [matAutosizeMinRows]="3"></textarea>
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions style="display:flex;justify-content: flex-end;">
+    <button mat-button mat-dialog-close>Annuler</button>
+    <button mat-flat-button color="primary" [mat-dialog-close]="stockMovement" [disabled]="!stockMovement.delta">
+        Valider
+    </button>
+</mat-dialog-actions>

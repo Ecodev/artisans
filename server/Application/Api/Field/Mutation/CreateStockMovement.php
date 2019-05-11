@@ -17,13 +17,13 @@ abstract class CreateStockMovement implements FieldInterface
     {
         return [
             'name' => 'createStockMovement',
-            'type' => _types()->getOutput(StockMovement::class),
+            'type' => Type::nonNull(_types()->getOutput(StockMovement::class)),
             'description' => 'Create stock movement for the given product. A sale or a loss should be a negative delta.',
             'args' => [
                 'input' => Type::nonNull(_types()->getInput(StockMovement::class)),
                 'product' => Type::nonNull(_types()->getId(Product::class)),
             ],
-            'resolve' => function ($root, array $args, SessionInterface $session): ?StockMovement {
+            'resolve' => function ($root, array $args, SessionInterface $session): StockMovement {
 
                 // Do it
                 $product = $args['product']->getEntity();

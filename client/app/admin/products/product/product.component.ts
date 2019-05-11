@@ -15,6 +15,9 @@ import { calculateSuggestedPrice, moneyRoundUp } from '../../../shared/utils';
 import { ProductTagService } from '../../productTags/services/productTag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
+import { MatDialog } from '@angular/material';
+import { StockMovementService } from '../../stockMovement/services/stockMovement.service';
+import { CreateStockMovementComponent } from '../../stockMovement/create-stock-movement/create-stock-movement.component';
 
 @Component({
     selector: 'app-product',
@@ -63,6 +66,8 @@ export class ProductComponent
                 route: ActivatedRoute,
                 public productTagService: ProductTagService,
                 public imageService: ImageService,
+                private dialog: MatDialog,
+                private stockMovementService: StockMovementService,
     ) {
         super('product', productService, alertService, router, route);
     }
@@ -92,11 +97,29 @@ export class ProductComponent
 
     public verify() {
 
-        const partialBookable = {id: this.data.model.id, verificationDate: (new Date()).toISOString()};
-        this.service.updatePartially(partialBookable).subscribe((bookable) => {
-            this.form.patchValue(bookable);
+        const partialProduct = {id: this.data.model.id, verificationDate: (new Date()).toISOString()};
+        this.service.updatePartially(partialProduct).subscribe(product => {
+            this.form.patchValue(product);
         });
 
     }
 
+    createStockMovement(): void {
+        const product: Product['product'] = this.data.model;
+
+        const config = {
+            data: {
+                product: product,
+            },
+        };
+        this.dialog.open(CreateStockMovementComponent, config).afterClosed().subscribe(stockMovement => {
+            if (stockMovement) {
+                this.stockMovementService.create(stockMovement).subscribe(newStockMovement => {
+                    this.data.model.quantity = newStockMovement.product.quantity;
+                    this.alertService.info('Stock modifié');
+                });
+            }
+        });
+
+    }
 }

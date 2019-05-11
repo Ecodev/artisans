@@ -8,6 +8,7 @@ use Application\Acl\Acl;
 use Application\Model\AbstractModel;
 use Application\Model\OrderLine;
 use Application\Model\Product;
+use Application\Model\StockMovement;
 use Application\Model\TransactionLine;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -82,6 +83,12 @@ abstract class Helper
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
                 ->addSelect('SUM(orderLine1.balance) AS totalBalance');
+
+            $result = $qb->getQuery()->getResult()[0];
+        } elseif ($class === StockMovement::class) {
+            $qb->resetDQLPart('select')
+                ->resetDQLPart('orderBy')
+                ->addSelect('SUM(stockMovement1.delta) AS totalDelta');
 
             $result = $qb->getQuery()->getResult()[0];
         }

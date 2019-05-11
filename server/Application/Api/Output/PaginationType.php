@@ -6,6 +6,7 @@ namespace Application\Api\Output;
 
 use Application\Model\OrderLine;
 use Application\Model\Product;
+use Application\Model\StockMovement;
 use Application\Model\TransactionLine;
 use GraphQL\Type\Definition\ObjectType;
 
@@ -63,6 +64,11 @@ class PaginationType extends ObjectType
                     $fields['totalBalance'] = [
                         'type' => self::string(),
                         'description' => 'The total balance',
+                    ];
+                } elseif ($class === StockMovement::class) {
+                    $fields['totalDelta'] = [
+                        'type' => self::string(),
+                        'description' => 'The total delta',
                     ];
                 }
 

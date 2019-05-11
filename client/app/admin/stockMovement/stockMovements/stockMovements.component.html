@@ -1,0 +1,105 @@
+<div *ngIf="dataSource" fxLayout="column">
+
+    <div fxLayout="column">
+        <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+    </div>
+
+    <div fxLayout="column">
+
+        <div fxLayout="row" class="margin-v" overflow>
+            <natural-search fxFlex
+                            [configurations]="naturalSearchConfig"
+                            [selections]="naturalSearchSelections"
+                            (selectionChange)="search($event)"
+                            [multipleGroups]="true"
+            >
+                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="creationDate">Date</span>
+                    <span naturalColumnsPickerColumn="type">Type</span>
+                    <span naturalColumnsPickerColumn="delta">Mouvement</span>
+                    <span naturalColumnsPickerColumn="quantity">Quantité</span>
+                    <span naturalColumnsPickerColumn="product">Produit</span>
+                    <span naturalColumnsPickerColumn="remarks">Remarques</span>
+                </natural-columns-picker>
+            </natural-search>
+        </div>
+
+        <div class="responsive-table">
+            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting($event)">
+
+                <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="selectedColumns"></tr>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
+                    <td mat-cell *matCellDef="let element">{{ element.creationDate | date : 'medium' }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="product">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Produit</th>
+                    <td mat-cell *matCellDef="let element">
+                        <natural-table-button
+                                [label]="element.product.name"
+                                [navigate]="['/admin/product/', element.product.id]"
+                                matTooltip="Éditer"
+                        ></natural-table-button>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Type</th>
+                    <td mat-cell *matCellDef="let element">{{ element.type | enum : 'StockMovementType' | async }}</td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="delta">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column natural-align-right>Mouvement</th>
+                    <td mat-cell *matCellDef="let element" app-align-right>
+                        {{ element.delta | number }} {{ element.product.unit }}
+                    </td>
+
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        {{ dataSource.data.totalDelta | number }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column natural-align-right>Quantité</th>
+                    <td mat-cell *matCellDef="let element" app-align-right>
+                        {{ element.quantity | number }} {{ element.product.unit }}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="remarks">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Remarques</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div [innerHTML]="element.remarks" class="line-break"></div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+            </table>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === 0">
+            <div>Pas de résultats</div>
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.length === null">
+            <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
+        </div>
+
+        <mat-paginator *ngIf="dataSource.data?.length"
+                       [length]="dataSource.data?.length"
+                       [pageSize]="dataSource.data?.pageSize"
+                       [pageIndex]="dataSource.data?.pageIndex"
+                       [pageSizeOptions]="pageSizeOptions"
+                       (page)="pagination($event)"
+        ></mat-paginator>
+
+    </div>
+</div>

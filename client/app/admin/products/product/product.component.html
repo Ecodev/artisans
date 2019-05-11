@@ -69,9 +69,11 @@
 
                         <mat-form-field>
                             <mat-label>Quantité en stock</mat-label>
-                            <input matInput type="number" required="required" step="0.01" min="0" formControlName="quantity" (change)="update()">
+                            <input matInput type="number" disabled [value]="data.model.quantity" >
                             <div matSuffix>{{ data.model.unit }}</div>
-                            <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
+                            <button mat-button matSuffix mat-icon-button matTooltip="Saisir un changement de stock" (click)="createStockMovement()">
+                                <mat-icon>edit</mat-icon>
+                            </button>
                         </mat-form-field>
 
                     </div>

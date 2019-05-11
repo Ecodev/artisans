@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasRemarks;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
@@ -16,6 +17,8 @@ use GraphQL\Doctrine\Annotation as API;
  */
 class StockMovement extends AbstractModel
 {
+    use HasRemarks;
+
     /**
      * @var string
      *

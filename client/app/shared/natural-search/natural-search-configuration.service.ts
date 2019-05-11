@@ -1,7 +1,16 @@
 import { Injectable } from '@angular/core';
-import { ItemConfiguration, NaturalSearchConfiguration, Selection, TypeNaturalSelectComponent } from '@ecodev/natural';
+import {
+    ItemConfiguration,
+    NaturalEnumService,
+    NaturalSearchConfiguration,
+    Selection,
+    TypeDateRangeComponent,
+    TypeNaturalSelectComponent,
+    TypeSelectComponent,
+} from '@ecodev/natural';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { TransactionService } from '../../admin/transactions/services/transaction.service';
+import { ProductService } from '../../admin/products/services/product.service';
 
 function wrapLike(s: Selection): Selection {
     if (s.condition.like) {
@@ -74,6 +83,21 @@ export class NaturalSearchConfigurationService {
         },
     };
 
+    private readonly product: ItemConfiguration = {
+        display: 'Produit',
+        field: 'product',
+        component: TypeNaturalSelectComponent,
+        configuration: {
+            service: this.productService,
+        },
+    };
+
+    private readonly creationDate: ItemConfiguration = {
+        display: 'Date',
+        field: 'creationDate',
+        component: TypeDateRangeComponent,
+    };
+
     private readonly allConfigurations: { [key: string]: NaturalSearchConfiguration } = {
         users: [
             this.userTags,
@@ -81,11 +105,25 @@ export class NaturalSearchConfigurationService {
         transactionLines: [
             this.transaction,
         ],
+        stockMovements: [
+            this.product,
+            {
+                display: 'Type',
+                field: 'type',
+                component: TypeSelectComponent,
+                configuration: {
+                    items: this.enumService.get('StockMovementType'),
+                },
+            },
+            this.creationDate,
+        ],
     };
 
     constructor(
         public userTagService: UserTagService,
         private readonly transactionService: TransactionService,
+        private readonly productService: ProductService,
+        private readonly enumService: NaturalEnumService<any>,
     ) {
     }
 

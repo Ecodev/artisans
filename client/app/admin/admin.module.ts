@@ -26,6 +26,8 @@ import { UserComponent } from './users/user/user.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { ImportComponent } from './import/import.component';
+import { StockMovementsComponent } from './stockMovement/stockMovements/stockMovements.component';
+import { CreateStockMovementComponent } from './stockMovement/create-stock-movement/create-stock-movement.component';
 
 @NgModule({
     declarations: [
@@ -47,6 +49,8 @@ import { ImportComponent } from './import/import.component';
         EditableTransactionLinesComponent,
         ProductMetadataComponent,
         ImportComponent,
+        CreateStockMovementComponent,
+        StockMovementsComponent,
     ],
     imports: [
         CommonModule,
@@ -58,7 +62,9 @@ import { ImportComponent } from './import/import.component';
         OrderModule,
         EcoFabSpeedDialModule,
     ],
-    entryComponents: [],
+    entryComponents: [
+        CreateStockMovementComponent,
+    ],
 })
 export class AdminModule {
 }

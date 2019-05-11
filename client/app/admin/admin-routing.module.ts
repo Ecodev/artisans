@@ -35,6 +35,7 @@ import { UserTagResolver } from './userTags/services/userTag.resolver';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { ImportComponent } from './import/import.component';
+import { StockMovementsComponent } from './stockMovement/stockMovements/stockMovements.component';
 
 const routes: Routes = [
         {
@@ -70,6 +71,13 @@ const routes: Routes = [
                             },
                         },
                     ],
+                },
+                {
+                    path: 'stock-movement',
+                    component: StockMovementsComponent,
+                    data: {
+                        title: 'Mouvements de stock',
+                    },
                 },
                 {
                     path: 'user', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674

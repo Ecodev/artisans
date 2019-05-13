@@ -79,18 +79,18 @@ REPLACE INTO image (id, filename, width, height) VALUES
 (5011, 'miel.png', 308, 436);
 
 REPLACE INTO product (id, image_id, quantity, supplier_price, price_per_unit, unit, vat_rate, name, code, description) VALUES
-(3000, 5000, 8, 5.00, 6.00, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao'),
-(3001, 5001, 12, 20.00, 24.00, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.'),
-(3002, 5002, 14, 5.00, 6.00, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air'),
-(3003, 5003, 17, 3.00, 4.00, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes'),
-(3004, 5004, 50.123, 2.00, 2.50, 'kg', '0.025', 'Pommes de terre', 'P5', ''),
-(3005, 5005, 21.8, 3.00, 4.00, 'kg', '0.025', 'Pommes', 'P6', ''),
-(3006, 5006, 5, 3.00, 4.00, 'kg', '0.025', 'Poire', 'P7', ''),
-(3007, 5007, 7, 8.00, 10.00, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', ''),
-(3008, 5008, 12, 10.00, 13.00, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', ''),
-(3009, 5009, 20, 1.10, 1.60, '', '0.025', 'Yogourt Bircher', 'P10', ''),
-(3010, 5010, 23, 1.30, 2.00, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', ''),
-(3011, 5011, 5, 10.00, 12.50, '', '0.0', 'Miel de la région', 'P12', '');
+(3000, 5000, 8, 500, 600, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao'),
+(3001, 5001, 12, 2000, 2400, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.'),
+(3002, 5002, 14, 500, 600, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air'),
+(3003, 5003, 17, 300, 400, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes'),
+(3004, 5004, 50.123, 200, 250, 'kg', '0.025', 'Pommes de terre', 'P5', ''),
+(3005, 5005, 21.8, 300, 400, 'kg', '0.025', 'Pommes', 'P6', ''),
+(3006, 5006, 5, 300, 400, 'kg', '0.025', 'Poire', 'P7', ''),
+(3007, 5007, 7, 800, 1000, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', ''),
+(3008, 5008, 12, 1000, 1300, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', ''),
+(3009, 5009, 20, 110, 160, '', '0.025', 'Yogourt Bircher', 'P10', ''),
+(3010, 5010, 23, 130, 200, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', ''),
+(3011, 5011, 5, 1000, 1250, '', '0.0', 'Miel de la région', 'P12', '');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6004, 3000),
@@ -107,11 +107,11 @@ REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6004, 3011);
 
 REPLACE INTO expense_claim (id, creation_date, owner_id, amount, status, name, description, type) VALUES
-(7000, '2019-03-10', 1002, 200.00, 'new', 'achats Jumbo', 'matériaux pour étagère', 'expenseClaim'),
-(7001, '2019-03-14', 1002, 100.00, 'processed', 'Produits de nettoyage', 'Facture Migros du 10.03.2019', 'expenseClaim'),
-(7002, '2019-03-14', 1002, 50.00, 'processing', 'remboursement bancaire', '', 'refund'),
-(7003, '2019-01-10', 1007, 75.00, 'new', 'achats boissons', 'pour la fête', 'expenseClaim'),
-(7004, '2019-01-06', 1010, 21.00, 'new', 'remplacement des clés', '', 'expenseClaim');
+(7000, '2019-03-10', 1002, 20000, 'new', 'achats Jumbo', 'matériaux pour étagère', 'expenseClaim'),
+(7001, '2019-03-14', 1002, 10000, 'processed', 'Produits de nettoyage', 'Facture Migros du 10.03.2019', 'expenseClaim'),
+(7002, '2019-03-14', 1002, 5000, 'processing', 'remboursement bancaire', '', 'refund'),
+(7003, '2019-01-10', 1007, 7500, 'new', 'achats boissons', 'pour la fête', 'expenseClaim'),
+(7004, '2019-01-06', 1010, 2100, 'new', 'remplacement des clés', '', 'expenseClaim');
 
 REPLACE INTO transaction (id, creator_id, owner_id, transaction_date, name, remarks, expense_claim_id) VALUES
 (8000, 1000, 1000, '2019-01-01', 'Solde à nouveau', 'Ouverture des comptes en début d\'exercice', NULL),
@@ -125,15 +125,15 @@ REPLACE INTO transaction_tag (id, name) VALUES
 (15000, 'Entretien');
 
 REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transaction_tag_id, balance, transaction_date, is_reconciled, name, remarks) VALUES
-(14000, 8000, 10029, 10042, NULL, 1000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de caisse'),
-(14001, 8000, 10030, 10042, NULL, 23500, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de banque'),
-(14002, 8001, 10032, NULL, NULL, 1500, '2019-02-03', 1, 'Achat réfrigérateur', ''),
-(14003, 8001, NULL, 10029, NULL, 500, '2019-02-03', 1, 'Paiement en espèces', ''),
-(14004, 8001, NULL, 10030, NULL, 1000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
-(14005, 8003, 10028, 10902, 15000, 100, '2019-03-15', 1, 'Remboursement sur le solde', ''),
-(14006, 8004, 10030, 10902, NULL, 200.00, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
-(14007, 8005, 10902, 10013, NULL, 27.40, '2019-04-24', 1, 'Achats du responsable', ''),
-(14008, 8006, 10902, 10013, NULL, 62.40, '2019-04-24', 1, 'Achats du conjoint', '');
+(14000, 8000, 10029, 10042, NULL, 100000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de caisse'),
+(14001, 8000, 10030, 10042, NULL, 2350000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de banque'),
+(14002, 8001, 10032, NULL, NULL, 150000, '2019-02-03', 1, 'Achat réfrigérateur', ''),
+(14003, 8001, NULL, 10029, NULL, 50000, '2019-02-03', 1, 'Paiement en espèces', ''),
+(14004, 8001, NULL, 10030, NULL, 100000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
+(14005, 8003, 10028, 10902, 15000, 10000, '2019-03-15', 1, 'Remboursement sur le solde', ''),
+(14006, 8004, 10030, 10902, NULL, 20000, '2019-03-10', 1, 'Paiement par carte de crédit', ''),
+(14007, 8005, 10902, 10013, NULL, 2740, '2019-04-24', 1, 'Achats du responsable', ''),
+(14008, 8006, 10902, 10013, NULL, 6240, '2019-04-24', 1, 'Achats du conjoint', '');
 
 REPLACE INTO accounting_document (id, expense_claim_id, owner_id, filename, mime) VALUES
 (9000, 7000, 1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf');
@@ -172,13 +172,13 @@ REPLACE INTO `order` (id, owner_id, creator_id, creation_date, transaction_id) V
 (16001, 1007, 1007, '2019-04-25', 8006);
 
 REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quantity, unit, balance, vat_rate, name) VALUES
-(17000, 1002, 16000, 3000, '2019-04-24', 2, '', 10.00, 0.077, 'Chocolat noir BIO'),
-(17001, 1002, 16000, 3002, '2019-04-24', 1, '', 5.00, 0.077, '6 oeufs BIO de la région'),
-(17002, 1002, 16000, 3011, '2019-04-24', 1, '', 10.00, 0.00, 'Miel de la région'),
-(17003, 1002, 16000, 3005, '2019-04-24', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
-(17004, 1007, 16001, 3011, '2019-04-25', 2, '', 10.00, 0.00, 'Miel de la région'),
-(17005, 1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 2.40, 0.025, 'Pommes'),
-(17006, 1007, 16001, 3005, '2019-04-25', 5, '', 50.00, 0.077, 'Pinot Noir La Coccinelle');
+(17000, 1002, 16000, 3000, '2019-04-24', 2, '', 1000, 0.077, 'Chocolat noir BIO'),
+(17001, 1002, 16000, 3002, '2019-04-24', 1, '', 500, 0.077, '6 oeufs BIO de la région'),
+(17002, 1002, 16000, 3011, '2019-04-24', 1, '', 1000, 0.00, 'Miel de la région'),
+(17003, 1002, 16000, 3005, '2019-04-24', 0.6, 'kg', 240, 0.025, 'Pommes'),
+(17004, 1007, 16001, 3011, '2019-04-25', 2, '', 1000, 0.00, 'Miel de la région'),
+(17005, 1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 240, 0.025, 'Pommes'),
+(17006, 1007, 16001, 3005, '2019-04-25', 5, '', 5000, 0.077, 'Pinot Noir La Coccinelle');
 
 REPLACE INTO stock_movement (id, product_id, order_line_id, type, creation_date, delta, quantity) VALUES
 (18000, 3000, 17000, 'sale', '2019-04-24', -2, 8),

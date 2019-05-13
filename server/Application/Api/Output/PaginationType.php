@@ -48,21 +48,21 @@ class PaginationType extends ObjectType
                 // Add specific total fields if needed
                 if ($class === Product::class) {
                     $fields['totalSupplierPrice'] = [
-                        'type' => self::string(),
+                        'type' => _types()->get('Money'),
                         'description' => 'The total supplier price',
                     ];
                     $fields['totalPricePerUnit'] = [
-                        'type' => self::string(),
+                        'type' => _types()->get('Money'),
                         'description' => 'The total price per unit',
                     ];
                 } elseif ($class === TransactionLine::class) {
                     $fields['totalBalance'] = [
-                        'type' => self::string(),
+                        'type' => _types()->get('Money'),
                         'description' => 'The total balance',
                     ];
                 } elseif ($class === OrderLine::class) {
                     $fields['totalBalance'] = [
-                        'type' => self::string(),
+                        'type' => _types()->get('Money'),
                         'description' => 'The total balance',
                     ];
                 } elseif ($class === StockMovement::class) {

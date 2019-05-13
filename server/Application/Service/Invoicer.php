@@ -14,9 +14,9 @@ use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Repository\AccountRepository;
-use Application\Utility;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
+use Money\Money;
 
 /**
  * Service to create order and transactions for products and their quantity
@@ -57,17 +57,15 @@ class Invoicer
         $order->setTransaction($transaction);
         $this->entityManager->persist($order);
 
-        $total = '0';
+        $total = Money::CHF(0);
         foreach ($lines as $line) {
             /** @var Product $product */
             $product = $line['product'];
             $quantity = $line['quantity'];
             $pricePonderation = $line['pricePonderation'];
 
-            $quantifiedPrice = bcmul($product->getPricePerUnit(), $quantity, 10);
-            $ponderatedPrice = bcmul($quantifiedPrice, $pricePonderation, 10);
-            $balance = Utility::moneyRoundUp($ponderatedPrice);
-            $total = bcadd($total, $balance);
+            $balance = $product->getPricePerUnit()->multiply($quantity)->multiply($pricePonderation);
+            $total = $total->add($balance);
 
             $this->createOrderLine($order, $product, $balance, $quantity, $pricePonderation);
             $product->setQuantity(bcsub($product->getQuantity(), $quantity, 10));
@@ -80,17 +78,17 @@ class Invoicer
         return $order;
     }
 
-    private function createTransactionLine(Transaction $transaction, Account $account, string $balance): void
+    private function createTransactionLine(Transaction $transaction, Account $account, Money $balance): void
     {
         $saleAccount = $this->entityManager->getReference(Account::class, AccountRepository::ACCOUNT_ID_FOR_SALE);
 
-        if ($balance > 0) {
+        if ($balance->isPositive()) {
             $debit = $account;
             $credit = $saleAccount;
-        } elseif ($balance < 0) {
+        } elseif ($balance->isNegative()) {
             $debit = $saleAccount;
             $credit = $account;
-            $balance = bcmul($balance, '-1'); // into positive
+            $balance = $balance->absolute();
         } else {
             // Never create a line with 0 balance
             return;
@@ -107,7 +105,7 @@ class Invoicer
         $transactionLine->setTransactionDate(Chronos::now());
     }
 
-    private function createOrderLine(Order $order, Product $product, string $balance, string $quantity, string $pricePonderation): OrderLine
+    private function createOrderLine(Order $order, Product $product, Money $balance, string $quantity, string $pricePonderation): OrderLine
     {
         $orderLine = new OrderLine();
         $this->entityManager->persist($orderLine);

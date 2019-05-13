@@ -8,6 +8,7 @@ use Application\Model\Product;
 use Application\Model\User;
 use Application\Service\Invoicer;
 use ApplicationTest\Traits\TestWithTransaction;
+use Money\Money;
 use PHPUnit\Framework\TestCase;
 
 class InvoicerTest extends TestCase
@@ -41,7 +42,7 @@ class InvoicerTest extends TestCase
                 $orderLine->getName(),
                 $orderLine->getUnit(),
                 $orderLine->getQuantity(),
-                $orderLine->getBalance(),
+                $orderLine->getBalance()->getAmount(),
                 $orderLine->getVatRate(),
                 $orderLine->getPricePonderation(),
             ];
@@ -54,7 +55,7 @@ class InvoicerTest extends TestCase
                 $transactionLine->getName(),
                 $transactionLine->getDebit()->getName(),
                 $transactionLine->getCredit()->getName(),
-                $transactionLine->getBalance(),
+                $transactionLine->getBalance()->getAmount(),
             ];
         }
         self::assertSame($expectedTransactionLines, $actualTransactionLines);
@@ -70,7 +71,7 @@ class InvoicerTest extends TestCase
                         'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product',
-                            'pricePerUnit' => '0',
+                            'pricePerUnit' => Money::CHF(0),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
                         ],
@@ -82,7 +83,7 @@ class InvoicerTest extends TestCase
                         'My product',
                         'kg',
                         '1',
-                        '0.00',
+                        '0',
                         '0.077',
                         '1.00',
                     ],
@@ -96,7 +97,8 @@ class InvoicerTest extends TestCase
                         'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product 1',
-                            'pricePerUnit' => '2.75',
+                            'pricePerUnit' => Money::CHF(275),
+
                             'unit' => 'kg',
                             'vatRate' => '0.077',
                         ],
@@ -106,7 +108,7 @@ class InvoicerTest extends TestCase
                         'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product 2',
-                            'pricePerUnit' => '200',
+                            'pricePerUnit' => Money::CHF(20000),
                             'unit' => '',
                             'vatRate' => '0.025',
                         ],
@@ -117,7 +119,7 @@ class InvoicerTest extends TestCase
                         'My product 1',
                         'kg',
                         '3.100',
-                        '8.53',
+                        '853',
                         '0.077',
                         '1.00',
 
@@ -126,7 +128,7 @@ class InvoicerTest extends TestCase
                         'My product 2',
                         '',
                         '1',
-                        '200.00',
+                        '20000',
                         '0.025',
                         '1.00',
                     ],
@@ -136,7 +138,7 @@ class InvoicerTest extends TestCase
                         'Achats',
                         'John Doe',
                         'Vente de marchandises',
-                        '208.53',
+                        '20853',
                     ],
                 ],
             ],
@@ -147,7 +149,7 @@ class InvoicerTest extends TestCase
                         'pricePonderation' => '0.30',
                         'product' => [
                             'name' => 'My product 1',
-                            'pricePerUnit' => '2.75',
+                            'pricePerUnit' => Money::CHF(275),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
                         ],
@@ -157,7 +159,7 @@ class InvoicerTest extends TestCase
                         'pricePonderation' => '0.50',
                         'product' => [
                             'name' => 'My product 2',
-                            'pricePerUnit' => '200',
+                            'pricePerUnit' => Money::CHF(20000),
                             'unit' => '',
                             'vatRate' => '0.025',
                         ],
@@ -168,7 +170,7 @@ class InvoicerTest extends TestCase
                         'My product 1',
                         'kg',
                         '3.100',
-                        '2.56',
+                        '256',
                         '0.077',
                         '0.30',
                     ],
@@ -176,7 +178,7 @@ class InvoicerTest extends TestCase
                         'My product 2',
                         '',
                         '1',
-                        '100.00',
+                        '10000',
                         '0.025',
                         '0.50',
                     ],
@@ -186,7 +188,7 @@ class InvoicerTest extends TestCase
                         'Achats',
                         'John Doe',
                         'Vente de marchandises',
-                        '102.56',
+                        '10256',
                     ],
                 ],
             ],
@@ -197,7 +199,7 @@ class InvoicerTest extends TestCase
                         'pricePonderation' => '1.00',
                         'product' => [
                             'name' => 'My product',
-                            'pricePerUnit' => '-100',
+                            'pricePerUnit' => Money::CHF(-10000),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
                         ],
@@ -208,7 +210,7 @@ class InvoicerTest extends TestCase
                         'My product',
                         'kg',
                         '1',
-                        '-100.00',
+                        '-10000',
                         '0.077',
                         '1.00',
                     ],
@@ -218,7 +220,7 @@ class InvoicerTest extends TestCase
                         'Achats',
                         'Vente de marchandises',
                         'John Doe',
-                        '100.00',
+                        '10000',
                     ],
                 ],
             ],

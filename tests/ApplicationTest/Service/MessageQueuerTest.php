@@ -10,6 +10,7 @@ use Application\Model\Message;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
+use Money\Money;
 use Prophecy\Argument;
 use Zend\View\Renderer\RendererInterface;
 
@@ -78,7 +79,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $user->setEmail('john.doe@example.com');
 
         $account = new Account();
-        $account->setBalance($variant === 'positive' ? '25.00' : '-45.00');
+        $account->setBalance(Money::CHF($variant === 'positive' ? 2500 : -4500));
         $account->setOwner($user);
 
         $messageQueuer = $this->createMockMessageQueuer();

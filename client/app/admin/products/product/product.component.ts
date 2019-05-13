@@ -92,7 +92,7 @@ export class ProductComponent
         const product: Product['product'] = this.data.model;
         const suggested = calculateSuggestedPrice(product.supplierPrice, product.margin, product.vatRate);
 
-        return moneyRoundUp(suggested);
+        return moneyRoundUp(suggested) + '';
     }
 
     public verify() {

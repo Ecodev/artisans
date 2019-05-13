@@ -44,9 +44,9 @@
 
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
                             <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
-                            <natural-table-button [label]="element.owner?.name" [navigate]="['/admin/user/', element.owner?.id]"
-
-                                              matTooltip="Éditer"
+                            <natural-table-button [label]="element.owner?.name"
+                                                  [navigate]="['/admin/user/', element.owner?.id]"
+                                                  matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
 

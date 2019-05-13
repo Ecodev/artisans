@@ -88,7 +88,7 @@ export class ProductComponent
         }
     }
 
-    public calculateSuggestedPricePerUnit(): number {
+    public calculateSuggestedPricePerUnit(): string {
         const product: Product['product'] = this.data.model;
         const suggested = calculateSuggestedPrice(product.supplierPrice, product.margin, product.vatRate);
 

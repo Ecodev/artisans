@@ -18,6 +18,9 @@ class OrderLineInputType extends InputObjectType
                     'quantity' => [
                         'type' => self::nonNull(self::string()),
                     ],
+                    'pricePonderation' => [
+                        'type' => self::nonNull(self::string()),
+                    ],
                     'product' => [
                         'type' => self::nonNull(_types()->getId(Product::class)),
                     ],

@@ -22,13 +22,14 @@ export class ShopComponent implements OnInit {
     }
 
     public createOrder() {
-
         this.alertService
-            .confirm('Valider l\'achat', 'Veuillez confirmer votre achat de ' + CartService.totalTaxInc + ' CHF TTC', 'Confirmer')
+            .confirm('Valider l\'achat',
+                'Veuillez confirmer votre achat de ' + CartService.totalTaxInc.toFixed(2) + ' CHF',
+                'Confirmer')
             .subscribe(
                 confirm => {
                     if (confirm) {
-                        this.cartService.save().subscribe(order => {
+                        this.cartService.save().subscribe(() => {
                             this.alertService.info('Votre commande a bien été enregistrée');
                             this.cartService.empty();
                         });

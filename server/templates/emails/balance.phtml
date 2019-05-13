@@ -1,13 +1,20 @@
 <?php declare(strict_types=1);
+
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
+
+$currencies = new ISOCurrencies();
+$moneyFormatter = new DecimalMoneyFormatter($currencies);
+
 $urlTransaction = $this->serverUrl . '/profile/history';
 ?>
 <p>
     Ton solde actuel est de
-    <span style="text-align: right; font-weight: bold; color: <?php echo $this->user->getAccount()->getBalance() < 0 ? '#f44336' : '#008600' ?>">
-        <?php echo $this->user->getAccount()->getBalance() ?> CHF</span>.
+    <span style="text-align: right; font-weight: bold; color: <?php echo $this->user->getAccount()->getBalance()->isNegative() ? '#f44336' : '#008600' ?>">
+        <?php echo $moneyFormatter->format($this->user->getAccount()->getBalance()) ?> CHF</span>.
 </p>
 
-<?php if ($this->user->getAccount()->getBalance() < 0): ?>
+<?php if ($this->user->getAccount()->getBalance()->isNegative()): ?>
     <p>Ton solde est insuffisant. Merci de <a href="<?php echo $urlTransaction ?>">faire un versement</a>.</p>
 
     <p style="text-align:center;margin:40px 0">

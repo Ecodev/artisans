@@ -15,6 +15,7 @@ use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Money\Money;
 
 /**
  * An item that can be booked by a user
@@ -32,11 +33,11 @@ class Product extends AbstractModel
     use HasVatRate;
 
     /**
-     * @var string
+     * @var Money
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00"})
+     * @ORM\Column(type="Money", options={"default" = "0.00"})
      */
-    private $pricePerUnit = '0';
+    private $pricePerUnit;
 
     /**
      * @var string
@@ -53,11 +54,11 @@ class Product extends AbstractModel
     private $supplier = '';
 
     /**
-     * @var string
+     * @var Money
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.00", "unsigned" = true})
+     * @ORM\Column(type="Money", options={"default" = 0, "unsigned" = true})
      */
-    private $supplierPrice = '0';
+    private $supplierPrice;
 
     /**
      * @var string
@@ -94,41 +95,50 @@ class Product extends AbstractModel
     private $image;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $ponderatePrice = true;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->pricePerUnit = Money::CHF(0);
+        $this->supplierPrice = Money::CHF(0);
         $this->productTags = new ArrayCollection();
     }
 
     /**
-     * @return string
+     * @return Money
      */
-    public function getPricePerUnit(): string
+    public function getPricePerUnit(): Money
     {
         return $this->pricePerUnit;
     }
 
     /**
-     * @param string $pricePerUnit
+     * @param Money $pricePerUnit
      */
-    public function setPricePerUnit(string $pricePerUnit): void
+    public function setPricePerUnit(Money $pricePerUnit): void
     {
         $this->pricePerUnit = $pricePerUnit;
     }
 
     /**
-     * @return string
+     * @return Money
      */
-    public function getSupplierPrice(): string
+    public function getSupplierPrice(): Money
     {
         return $this->supplierPrice;
     }
 
     /**
-     * @param string $supplierPrice
+     * @param Money $supplierPrice
      */
-    public function setSupplierPrice(string $supplierPrice): void
+    public function setSupplierPrice(Money $supplierPrice): void
     {
         $this->supplierPrice = $supplierPrice;
     }
@@ -150,7 +160,7 @@ class Product extends AbstractModel
     }
 
     /**
-     * Whether this product can be booked
+     * Whether this product can be bought
      *
      * @return bool
      */
@@ -160,7 +170,7 @@ class Product extends AbstractModel
     }
 
     /**
-     * Whether this product can be booked
+     * Whether this product can be bought
      *
      * @param bool $isActive
      */
@@ -279,5 +289,25 @@ class Product extends AbstractModel
     public function setSupplier(string $supplier): void
     {
         $this->supplier = $supplier;
+    }
+
+    /**
+     * Wherever product allow user defined price ponderation
+     *
+     * @return bool
+     */
+    public function getPonderatePrice(): bool
+    {
+        return $this->ponderatePrice;
+    }
+
+    /**
+     * Wherever product allow user defined price ponderation
+     *
+     * @param bool $ponderatePrice
+     */
+    public function setPonderatePrice(bool $ponderatePrice): void
+    {
+        $this->ponderatePrice = $ponderatePrice;
     }
 }

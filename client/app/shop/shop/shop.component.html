@@ -3,7 +3,7 @@
     <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end" *ngIf="!cartService.cart.length">
 
         <div fxFlex="none">
-            <img  src="assets/images/consigne.svg" style="margin-right:10px;width:380px;max-width:100%;height:100px">
+            <img src="assets/images/consigne.svg" style="margin-right:10px;width:380px;max-width:100%;height:100px">
         </div>
 
         <div fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center center" style="max-width:600px; margin: 0 auto">
@@ -26,13 +26,16 @@
         <h1 class="mat-title">Panier d'achats</h1>
 
         <mat-nav-list>
-            <mat-list-item *ngFor="let line of cartService.cart"
-                           [routerLink]="['/shop/product', line.product.code, {quantity: line.quantity}]"
+            <mat-list-item *ngFor="let line of cartService.cart; let i = index"
+                           [routerLink]="['/shop/product', line.product.code, {index: i}]"
             >
                 <app-file [model]="line.product.image" [height]="70" [style.width.px]="70" matListAvatar></app-file>
                 <div matLine style="white-space: normal;">{{ line.product.name }}</div>
                 <div matLine fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start end" style="white-space: nowrap">
-                    <div fxFlex>{{ line.quantity }} {{ line.product.unit || 'x' }}</div>
+                    <div fxFlex>
+                        {{ line.quantity }}{{ line.product.unit || 'x' }}
+                        <ng-container *ngIf="line.product.ponderatePrice"> à {{ line.pricePonderation | percent }}</ng-container>
+                    </div>
                     <div class="price mat-body-2">{{ line.total | currency : 'CHF'}}</div>
                 </div>
             </mat-list-item>
@@ -44,11 +47,11 @@
             <div class="mat-body-1 padding totals natural-table">
                 <div *ngIf="CartService.totalTaxes">
                     <span class="mat-body-2">TVA :</span>
-                    <span>{{CartService.totalTaxes | currency : 'CHF' }}</span>
+                    <span>{{ CartService.totalTaxes | currency : 'CHF' }}</span>
                 </div>
                 <div>
                     <span class="mat-body-2">Total TTC :</span>
-                    <span class="mat-body-2">{{CartService.totalTaxInc | currency : 'CHF' }}</span>
+                    <span class="mat-body-2">{{ CartService.totalTaxInc | currency : 'CHF' }}</span>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ namespace ApplicationTest\Action;
 use Application\Action\DatatransAction;
 use Application\Model\User;
 use ApplicationTest\Traits\TestWithTransaction;
+use Money\Money;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\ServerRequest;
@@ -19,7 +20,7 @@ class DatatransActionTest extends TestCase
     /**
      * @dataProvider providerProcess
      */
-    public function testProcess(?array $data, ?int $accountId, string $expectedAmount, array $expectedViewModel): void
+    public function testProcess(?array $data, ?int $accountId, Money $expectedAmount, array $expectedViewModel): void
     {
         $userId = $data['refno'] ?? null;
         $user = _em()->getRepository(User::class)->getOneById((int) $userId);
@@ -40,7 +41,7 @@ class DatatransActionTest extends TestCase
 
         if ($accountId) {
             $actualBalance = _em()->getConnection()->fetchColumn('SELECT balance FROM account WHERE id = ' . $accountId);
-            self::assertSame($expectedAmount, $actualBalance);
+            self::assertSame($expectedAmount->getAmount(), $actualBalance);
         }
 
         self::assertTrue(true); // Workaround when we only assert via prophesize
@@ -59,7 +60,7 @@ class DatatransActionTest extends TestCase
                     'responseMessage' => 'Payment was successful',
                 ],
                 10902,
-                '310.20',
+                Money::CHF(31020),
                 [
                     'message' => [
                         'status' => 'success',
@@ -77,7 +78,7 @@ class DatatransActionTest extends TestCase
                     'responseMessage' => 'Payment was successful',
                 ],
                 10902,
-                '310.20',
+                Money::CHF(31020),
                 [
                     'message' => [
                         'status' => 'success',
@@ -93,7 +94,7 @@ class DatatransActionTest extends TestCase
                     'errorMessage' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
                 ],
                 10902,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'error',
@@ -108,7 +109,7 @@ class DatatransActionTest extends TestCase
                     'refno' => '1007',
                 ],
                 10902,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'cancel',
@@ -119,7 +120,7 @@ class DatatransActionTest extends TestCase
             'invalid body' => [
                 null,
                 null,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'error',
@@ -137,7 +138,7 @@ class DatatransActionTest extends TestCase
                     'responseMessage' => 'Payment was successful',
                 ],
                 10902,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'error',
@@ -154,7 +155,7 @@ class DatatransActionTest extends TestCase
                     'responseMessage' => 'Payment was successful',
                 ],
                 10902,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'error',
@@ -171,7 +172,7 @@ class DatatransActionTest extends TestCase
                     'responseMessage' => 'Payment was successful',
                 ],
                 10902,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'error',
@@ -189,7 +190,7 @@ class DatatransActionTest extends TestCase
                     'responseMessage' => 'Payment was successful',
                 ],
                 10902,
-                '210.20',
+                Money::CHF(21020),
                 [
                     'message' => [
                         'status' => 'error',

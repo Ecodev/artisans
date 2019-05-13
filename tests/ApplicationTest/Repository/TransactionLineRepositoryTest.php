@@ -47,35 +47,35 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
         $account3 = 10029;
         $account4 = 10030;
 
-        $this->assertAccountBalance($account1, '210.20', 'initial balance');
-        $this->assertAccountBalance($account2, '89.80', 'initial balance');
-        $this->assertAccountBalance($account3, '500.00', 'initial balance');
-        $this->assertAccountBalance($account4, '22700.00', 'initial balance');
+        $this->assertAccountBalance($account1, 21020, 'initial balance');
+        $this->assertAccountBalance($account2, 8980, 'initial balance');
+        $this->assertAccountBalance($account3, 50000, 'initial balance');
+        $this->assertAccountBalance($account4, 2270000, 'initial balance');
 
         $connection = $this->getEntityManager()->getConnection();
         $connection->insert('transaction_line', [
             'transaction_id' => 8000,
             'debit_id' => $account1,
             'credit_id' => $account2,
-            'balance' => '5.00',
+            'balance' => '500',
         ]);
 
         $id = $connection->lastInsertId();
 
-        $this->assertAccountBalance($account1, '205.20', 'balance should be reduced when line is inserted');
-        $this->assertAccountBalance($account2, '94.80', 'balance should be increased when line is inserted');
+        $this->assertAccountBalance($account1, 20520, 'balance should be reduced when line is inserted');
+        $this->assertAccountBalance($account2, 9480, 'balance should be increased when line is inserted');
 
         $count = $connection->update('transaction_line',
             [
-                'balance' => '40.00',
+                'balance' => '4000',
             ],
             [
                 'id' => $id,
             ]
         );
         self::assertSame(1, $count);
-        $this->assertAccountBalance($account1, '170.20', 'balance should be reduced even more after update');
-        $this->assertAccountBalance($account2, '129.80', 'balance should be increased even more after update');
+        $this->assertAccountBalance($account1, 17020, 'balance should be reduced even more after update');
+        $this->assertAccountBalance($account2, 12980, 'balance should be increased even more after update');
 
         $count = $connection->update('transaction_line',
             [
@@ -87,16 +87,16 @@ class TransactionLineRepositoryTest extends AbstractRepositoryTest
             ]
         );
         self::assertSame(1, $count);
-        $this->assertAccountBalance($account1, '210.20', 'balance should be restored to its original value after deletion');
-        $this->assertAccountBalance($account2, '89.80', 'balance should be restored to its original value after deletion');
-        $this->assertAccountBalance($account3, '540.00', 'balance should be increased after swapped account');
-        $this->assertAccountBalance($account4, '22660.00', 'balance should be reduced after swapped account');
+        $this->assertAccountBalance($account1, 21020, 'balance should be restored to its original value after deletion');
+        $this->assertAccountBalance($account2, 8980, 'balance should be restored to its original value after deletion');
+        $this->assertAccountBalance($account3, 54000, 'balance should be increased after swapped account');
+        $this->assertAccountBalance($account4, 2266000, 'balance should be reduced after swapped account');
 
         $count = $connection->delete('transaction_line', ['id' => $id]);
         self::assertSame(1, $count);
-        $this->assertAccountBalance($account1, '210.20', 'balance should be restored to its original value after deletion');
-        $this->assertAccountBalance($account2, '89.80', 'balance should be restored to its original value after deletion');
-        $this->assertAccountBalance($account3, '500.00', 'balance should be restored to its original value after deletion');
-        $this->assertAccountBalance($account4, '22700.00', 'balance should be restored to its original value after deletion');
+        $this->assertAccountBalance($account1, 21020, 'balance should be restored to its original value after deletion');
+        $this->assertAccountBalance($account2, 8980, 'balance should be restored to its original value after deletion');
+        $this->assertAccountBalance($account3, 50000, 'balance should be restored to its original value after deletion');
+        $this->assertAccountBalance($account4, 2270000, 'balance should be restored to its original value after deletion');
     }
 }

@@ -60,19 +60,4 @@ abstract class Utility
         }
         echo PHP_EOL;
     }
-
-    /**
-     * Round up money amount to next cent
-     *
-     * - 2.134 => 2.14
-     * - 2.173 => 2.18
-     *
-     * @param string $amount
-     *
-     * @return string
-     */
-    public static function moneyRoundUp(string $amount): string
-    {
-        return (string) bcdiv((string) ceil((float) bcmul($amount, '100')), '100');
-    }
 }

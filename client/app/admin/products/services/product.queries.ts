@@ -8,6 +8,7 @@ export const productMetaFragment = gql`
         description
         isActive
         verificationDate
+        ponderatePrice
         productTags {
             id
             name

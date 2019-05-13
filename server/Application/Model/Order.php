@@ -7,6 +7,7 @@ namespace Application\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Money\Money;
 
 /**
  * An accounting journal entry (simple or compound)
@@ -39,9 +40,9 @@ class Order extends AbstractModel
     private $vatPart = '0';
 
     /**
-     * @var string
+     * @var Money
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true, options={"unsigned" = true})
+     * @ORM\Column(type="Money", nullable=true, options={"unsigned" = true})
      */
     private $balance;
 
@@ -116,9 +117,9 @@ class Order extends AbstractModel
      *
      * Read only, computed by SQL triggers
      *
-     * @return string
+     * @return Money
      */
-    public function getBalance(): string
+    public function getBalance(): Money
     {
         return $this->balance;
     }

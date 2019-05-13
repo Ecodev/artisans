@@ -31,6 +31,7 @@ export class OrderLineService extends NaturalAbstractModelService<null,
         return {
             product: null,
             quantity: '0',
+            pricePonderation: '1',
         };
     }
 

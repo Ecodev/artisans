@@ -35,7 +35,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="quantity">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column>Quantité</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-7em-column>Quantité</th>
                     <td mat-cell *matCellDef="let element">
                         {{ +element.quantity }}{{ element.unit || 'x' }}
                         <ng-container *ngIf="element.pricePonderation !== '1.00'">

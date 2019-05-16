@@ -8,6 +8,7 @@ use Application\Traits\HasBalance;
 use Application\Traits\HasName;
 use Application\Traits\HasQuantity;
 use Application\Traits\HasUnit;
+use Application\Traits\HasVatPart;
 use Application\Traits\HasVatRate;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
@@ -24,6 +25,7 @@ class OrderLine extends AbstractModel
     use HasQuantity;
     use HasBalance;
     use HasVatRate;
+    use HasVatPart;
 
     /**
      * @var Order
@@ -44,13 +46,6 @@ class OrderLine extends AbstractModel
      * })
      */
     private $product;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=10, scale=7, options={"unsigned" = true, "default" = "0.0000000"})
-     */
-    private $vatPart = '0';
 
     /**
      * @var string
@@ -100,18 +95,6 @@ class OrderLine extends AbstractModel
     public function setProduct(?Product $product): void
     {
         $this->product = $product;
-    }
-
-    /**
-     * Get amount of VAT
-     *
-     * No setter, computed by SQL triggers
-     *
-     * @return string
-     */
-    public function getVatPart(): string
-    {
-        return $this->vatPart;
     }
 
     /**

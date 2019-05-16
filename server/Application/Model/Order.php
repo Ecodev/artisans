@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasVatPart;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,6 +18,8 @@ use Money\Money;
  */
 class Order extends AbstractModel
 {
+    use HasVatPart;
+
     /**
      * @var Transaction
      * @ORM\OneToOne(targetEntity="Transaction")
@@ -31,13 +34,6 @@ class Order extends AbstractModel
      * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
     private $orderLines;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=10, scale=7, options={"unsigned" = true, "default" = "0.0000000"})
-     */
-    private $vatPart = '0';
 
     /**
      * @var Money
@@ -98,18 +94,6 @@ class Order extends AbstractModel
     public function setTransaction(Transaction $transaction): void
     {
         $this->transaction = $transaction;
-    }
-
-    /**
-     * Get total amount of VAT
-     *
-     * Read only, computed by SQL triggers
-     *
-     * @return string
-     */
-    public function getVatPart(): string
-    {
-        return $this->vatPart;
     }
 
     /**

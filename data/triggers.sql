@@ -36,6 +36,19 @@ BEGIN
 END ~~
 
 
+DROP PROCEDURE IF EXISTS update_order_balance_and_vat_part;
+
+CREATE PROCEDURE update_order_balance_and_vat_part (IN orderId INT)
+BEGIN
+
+    UPDATE `order`
+    SET balance = (SELECT SUM(balance) FROM order_line WHERE order_id = orderId),
+        vat_part = (SELECT SUM(vat_part) FROM order_line WHERE order_id = orderId)
+    WHERE id = orderId;
+
+END ~~
+
+
 DROP TRIGGER IF EXISTS transaction_DELETE;
 
 CREATE TRIGGER transaction_DELETE
@@ -134,7 +147,9 @@ CREATE TRIGGER transaction_line_UPDATE
   END; ~~
 
 
-CREATE OR REPLACE PROCEDURE checkTransaction (IN transactionId INT) COMMENT 'Check that all transaction lines have balanced debit and credit'
+DROP PROCEDURE IF EXISTS checkTransaction;
+
+CREATE PROCEDURE checkTransaction (IN transactionId INT) COMMENT 'Check that all transaction lines have balanced debit and credit'
   BEGIN
     DECLARE total_debit DECIMAL(7,2);
     DECLARE total_credit DECIMAL(7,2);
@@ -181,11 +196,7 @@ CREATE TRIGGER order_line_after_insert
   ON order_line
   FOR EACH ROW
   BEGIN
-    /* Update order totals */
-    UPDATE `order`
-    SET balance=(SELECT SUM(balance) FROM order_line WHERE order_id=NEW.order_id),
-        vat_part=(SELECT SUM(vat_rate * balance / (1 + vat_rate)) FROM order_line WHERE order_id=NEW.order_id)
-    WHERE id=NEW.order_id;
+      CALL update_order_balance_and_vat_part(NEW.order_id);
   END; ~~
 
 
@@ -195,11 +206,8 @@ CREATE TRIGGER order_line_after_update
   ON order_line
   FOR EACH ROW
   BEGIN
-    /* Update order totals */
-    UPDATE `order`
-    SET balance=(SELECT SUM(balance) FROM order_line WHERE order_id=NEW.order_id),
-        vat_part=(SELECT SUM(vat_rate * balance / (1 + vat_rate)) FROM order_line WHERE order_id=NEW.order_id)
-    WHERE id=NEW.order_id;
+      CALL update_order_balance_and_vat_part(OLD.order_id);
+      CALL update_order_balance_and_vat_part(NEW.order_id);
   END; ~~
 
 
@@ -209,11 +217,7 @@ CREATE TRIGGER order_line_after_delete
   ON order_line
   FOR EACH ROW
   BEGIN
-    /* Update order totals */
-    UPDATE `order`
-    SET balance=(SELECT SUM(balance) FROM order_line WHERE order_id=OLD.order_id),
-        vat_part=(SELECT SUM(vat_rate * balance / (1 + vat_rate)) FROM order_line WHERE order_id=OLD.order_id)
-    WHERE id=OLD.order_id;
+      CALL update_order_balance_and_vat_part(OLD.order_id);
   END; ~~
 
 DELIMITER ;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\Traits\HasAutomaticBalance;
+use Application\DBAL\Types\AccountTypeType;
 use Application\Traits\HasIban;
 use Application\Traits\HasName;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -29,7 +29,6 @@ class Account extends AbstractModel
 {
     use HasName;
     use HasIban;
-    use HasAutomaticBalance;
 
     /**
      * @var Account
@@ -74,6 +73,13 @@ class Account extends AbstractModel
     private $creditTransactionLines;
 
     /**
+     * @var Money
+     *
+     * @ORM\Column(type="Money", options={"default" = 0})
+     */
+    private $balance;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -100,6 +106,18 @@ class Account extends AbstractModel
         if ($this->getOwner()) {
             $owner->accountAdded($this);
         }
+    }
+
+    /**
+     * @return Money
+     */
+    public function getBalance(): Money
+    {
+        if ($this->type === AccountTypeType::GROUP) {
+            return _em()->getRepository(self::class)->totalBalanceByParent($this);
+        }
+
+        return $this->balance;
     }
 
     /**

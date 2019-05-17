@@ -48,6 +48,7 @@ class Order extends AbstractModel
     public function __construct()
     {
         $this->orderLines = new ArrayCollection();
+        $this->vatPart = Money::CHF(0);
     }
 
     /**

@@ -12,6 +12,7 @@ use Application\Traits\HasVatPart;
 use Application\Traits\HasVatRate;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
+use Money\Money;
 
 /**
  * A single line in the shopping basket when making an order
@@ -53,6 +54,14 @@ class OrderLine extends AbstractModel
      * @ORM\Column(type="decimal", precision=4, scale=2, options={"unsigned" = true})
      */
     private $pricePonderation;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->vatPart = Money::CHF(0);
+    }
 
     /**
      * @API\Exclude

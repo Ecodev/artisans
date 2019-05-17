@@ -25,8 +25,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLi
                 injector: Injector,
     ) {
 
-        super('orderLines',
-            service,
+        super(service,
             router,
             route,
             alertService,
@@ -34,7 +33,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLi
             injector,
         );
 
-        this.naturalSearchConfig = naturalSearchConfigurationService.get(this.key);
+        this.naturalSearchConfig = naturalSearchConfigurationService.get('orderLines');
 
     }
 }

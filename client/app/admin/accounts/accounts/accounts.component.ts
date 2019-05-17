@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
-import { NaturalPersistenceService } from '@ecodev/natural';
-import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { NaturalAbstractNavigableList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { Accounts, AccountsVariables } from '../../../shared/generated-types';
-import { AccountService } from '../services/account.service';
+import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { NaturalAbstractNavigableList } from '@ecodev/natural';
+import { AccountService } from '../services/account.service';
 
 @Component({
     selector: 'app-accounts',
@@ -24,13 +22,11 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
                 public permissionsService: PermissionsService,
     ) {
 
-        super('accounts',
-            accountService,
+        super(accountService,
             router,
             route,
             alertService,
             persistenceService,
-
         );
 
     }

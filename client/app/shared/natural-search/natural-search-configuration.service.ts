@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import {
-    ItemConfiguration,
+    DropdownConfiguration,
     NaturalEnumService,
     NaturalSearchConfiguration,
     Selection,
     TypeDateRangeComponent,
+    TypeDateRangeConfiguration,
     TypeNaturalSelectComponent,
     TypeSelectComponent,
+    TypeSelectNaturalConfiguration,
 } from '@ecodev/natural';
-import { UserTagService } from '../../admin/userTags/services/userTag.service';
-import { TransactionService } from '../../admin/transactions/services/transaction.service';
 import { ProductService } from '../../admin/products/services/product.service';
+import { TransactionService } from '../../admin/transactions/services/transaction.service';
+import { UserTagService } from '../../admin/userTags/services/userTag.service';
 
 function wrapLike(s: Selection): Selection {
     if (s.condition.like) {
@@ -64,7 +66,7 @@ function replaceOperatorByName(s: Selection): Selection {
 })
 export class NaturalSearchConfigurationService {
 
-    private readonly userTags: ItemConfiguration = {
+    private readonly userTags: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
         display: 'Tags',
         field: 'userTags',
         component: TypeNaturalSelectComponent,
@@ -74,25 +76,27 @@ export class NaturalSearchConfigurationService {
         },
     };
 
-    private readonly transaction: ItemConfiguration = {
+    private readonly transaction: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
         display: 'Transaction',
         field: 'transaction',
         component: TypeNaturalSelectComponent,
         configuration: {
             service: this.transactionService,
+            placeholder: 'Transaction',
         },
     };
 
-    private readonly product: ItemConfiguration = {
+    private readonly product: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
         display: 'Produit',
         field: 'product',
         component: TypeNaturalSelectComponent,
         configuration: {
             service: this.productService,
+            placeholder: 'Produit',
         },
     };
 
-    private readonly creationDate: ItemConfiguration = {
+    private readonly creationDate: DropdownConfiguration<TypeDateRangeConfiguration> = {
         display: 'Date',
         field: 'creationDate',
         component: TypeDateRangeComponent,

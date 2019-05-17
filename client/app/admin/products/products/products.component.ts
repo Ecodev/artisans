@@ -23,8 +23,7 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
                 injector: Injector,
     ) {
 
-        super('products',
-            productService,
+        super(productService,
             router,
             route,
             alertService,

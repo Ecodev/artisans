@@ -25,14 +25,13 @@ export class StockMovementsComponent extends NaturalAbstractList<StockMovements[
                 public permissionsService: PermissionsService,
     ) {
 
-        super('stockMovements',
-            stockMovementService,
+        super(stockMovementService,
             router,
             route,
             alertService,
             persistenceService,
         );
 
-        this.naturalSearchConfig = naturalSearchConfigurationService.get(this.key);
+        this.naturalSearchConfig = naturalSearchConfigurationService.get('stockMovements');
     }
 }

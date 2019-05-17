@@ -24,8 +24,7 @@ export class ProductTagsComponent extends NaturalAbstractList<ProductTags['produ
                 public permissionsService: PermissionsService,
     ) {
 
-        super('productTags',
-            productTagService,
+        super(productTagService,
             router,
             route,
             alertService,

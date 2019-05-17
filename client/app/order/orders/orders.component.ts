@@ -23,8 +23,7 @@ export class OrdersComponent extends NaturalAbstractList<Orders['orders'], Order
                 injector: Injector,
     ) {
 
-        super('order',
-            service,
+        super(service,
             router,
             route,
             alertService,
@@ -32,7 +31,7 @@ export class OrdersComponent extends NaturalAbstractList<Orders['orders'], Order
             injector,
         );
 
-        this.naturalSearchConfig = naturalSearchConfigurationService.get(this.key);
+        this.naturalSearchConfig = naturalSearchConfigurationService.get('order');
 
     }
 }

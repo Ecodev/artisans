@@ -6,7 +6,7 @@ import {
     NaturalAlertModule,
     NaturalColumnsPickerModule,
     NaturalCommonModule,
-    NaturalDetailHeaderModule,
+    NaturalDetailHeaderModule, NaturalDropdownComponentsModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
     NaturalHierarchicSelectorModule,
@@ -123,6 +123,7 @@ const imports = [
     NaturalTableButtonModule,
     NaturalFixedButtonModule,
     NaturalFixedButtonDetailModule,
+    NaturalDropdownComponentsModule
 ];
 
 @NgModule({

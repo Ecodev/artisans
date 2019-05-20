@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
     DropdownConfiguration,
     NaturalEnumService,
+    FlagConfiguration,
     NaturalSearchConfiguration,
     Selection,
     TypeDateRangeComponent,
@@ -13,6 +14,7 @@ import {
 import { ProductService } from '../../admin/products/services/product.service';
 import { TransactionService } from '../../admin/transactions/services/transaction.service';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
+import { UserFilterGroupCondition } from '../generated-types';
 
 function wrapLike(s: Selection): Selection {
     if (s.condition.like) {
@@ -76,6 +78,12 @@ export class NaturalSearchConfigurationService {
         },
     };
 
+    private readonly userWelcomeSession: FlagConfiguration = {
+        display: 'N\'a pas été accueilli',
+        field: 'welcomeSessionDate',
+        condition: {null: {}} as UserFilterGroupCondition
+    };
+
     private readonly transaction: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
         display: 'Transaction',
         field: 'transaction',
@@ -105,6 +113,7 @@ export class NaturalSearchConfigurationService {
     private readonly allConfigurations: { [key: string]: NaturalSearchConfiguration } = {
         users: [
             this.userTags,
+            this.userWelcomeSession
         ],
         transactionLines: [
             this.transaction,

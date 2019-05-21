@@ -33,8 +33,8 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
         'flagWelcomeSessionDate',
     ];
 
-    public usersEmail;
-    public usersEmailAndName;
+    public usersEmail: string | null = null;
+    public usersEmailAndName: string | null = null;
 
     constructor(route: ActivatedRoute,
                 router: Router,
@@ -96,7 +96,7 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
         }
     }
 
-    public copy(data) {
+    public copy(data: string): void {
         copy(data);
     }
 

@@ -28,16 +28,14 @@ export class QrService {
     }
 
     public start(): void {
+        this.paused = false;
 
         if (this.stream || this.starting) {
-            this.paused = false;
-            requestAnimationFrame(this.decode.bind(this));
+            this.queueDecoding();
             return;
         }
 
         this.starting = true;
-        this.paused = false;
-
         this.video = document.createElement('video');
         this.canvas = document.createElement('canvas');
         this.context = this.canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -49,7 +47,7 @@ export class QrService {
             this.video.srcObject = stream;
             this.video.setAttribute('playsinline', 'true'); // required to tell iOS safari we don't want fullscreen
             this.video.play();
-            requestAnimationFrame(this.decode.bind(this));
+            this.queueDecoding();
 
         }).catch((err) => {
             this.scanObservable.error(err);
@@ -58,7 +56,7 @@ export class QrService {
     }
 
     /**
-     * Start to watch QR scanning, but dont start scanning. Call QrService.start() separatedly
+     * Start to watch QR scanning, but dont start scanning. Call QrService.start() separately
      */
     public scan(): Observable<string> {
         return this.scanObservable.pipe(distinctUntilChanged(), filter(v => !!v)) as Observable<string>;
@@ -75,6 +73,7 @@ export class QrService {
      * Stop without allowing restart. Kill everything, a new service has to be instantiated
      */
     public stop(): void {
+        this.pause();
 
         if (this.stream) {
             this.stream.getTracks().forEach(track => track.stop());
@@ -86,7 +85,6 @@ export class QrService {
 
     private decode(): void {
         if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
-
             this.canvas.height = this.video.videoHeight;
             this.canvas.width = this.video.videoWidth;
             this.context.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
@@ -99,14 +97,14 @@ export class QrService {
             } else {
                 this.scanObservable.next(null);
             }
+        }
 
-            if (!this.paused) {
-                requestAnimationFrame(this.decode.bind(this));
-            }
-        } else {
-            if (!this.paused) {
-                requestAnimationFrame(this.decode.bind(this));
-            }
+        this.queueDecoding();
+    }
+
+    private queueDecoding(): void {
+        if (!this.paused) {
+            requestAnimationFrame(this.decode.bind(this));
         }
     }
 

@@ -68,7 +68,6 @@ class Invoicer
             $total = $total->add($balance);
 
             $this->createOrderLine($order, $product, $balance, $quantity, $pricePonderation);
-            $product->setQuantity(bcsub($product->getQuantity(), $quantity, 10));
         }
 
         $this->createTransactionLine($transaction, $account, $total);
@@ -131,7 +130,7 @@ class Invoicer
 
         $stockMovement->setProduct($orderLine->getProduct());
         $stockMovement->setOrderLine($orderLine);
-        $stockMovement->setDelta($orderLine->getQuantity());
+        $stockMovement->setDelta(bcmul($orderLine->getQuantity(), '-1', 3));
         $stockMovement->setType(StockMovementTypeType::SALE);
     }
 }

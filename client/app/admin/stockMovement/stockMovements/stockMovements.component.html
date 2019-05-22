@@ -40,10 +40,9 @@
                 <ng-container matColumnDef="product">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Produit</th>
                     <td mat-cell *matCellDef="let element">
-                        <natural-table-button
-                                [label]="element.product.name"
-                                [navigate]="['/admin/product/', element.product.id]"
-                                matTooltip="Éditer"
+                        <natural-table-button [label]="element.product.name"
+                                              [navigate]="['/admin/product/', element.product.id]"
+                                              matTooltip="Éditer"
                         ></natural-table-button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
@@ -56,8 +55,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="delta">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column natural-align-right>Mouvement</th>
-                    <td mat-cell *matCellDef="let element" app-align-right>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Mouvement</th>
+                    <td mat-cell *matCellDef="let element">
                         {{ element.delta | number }} {{ element.product.unit }}
                     </td>
 
@@ -67,8 +66,8 @@
                 </ng-container>
 
                 <ng-container matColumnDef="quantity">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column natural-align-right>Quantité</th>
-                    <td mat-cell *matCellDef="let element" app-align-right>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Quantité</th>
+                    <td mat-cell *matCellDef="let element">
                         {{ element.quantity | number }} {{ element.product.unit }}
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>

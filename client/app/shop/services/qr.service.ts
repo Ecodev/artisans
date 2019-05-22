@@ -18,7 +18,7 @@ export class QrService {
     private readonly streamObservable = new ReplaySubject<MediaStream>(1);
 
     private starting = false;
-    private stopped = true;
+    private paused = true;
 
     constructor() {
     }
@@ -27,16 +27,16 @@ export class QrService {
         return this.streamObservable;
     }
 
-    public start() {
+    public start(): void {
 
         if (this.stream || this.starting) {
-            this.stopped = false;
+            this.paused = false;
             requestAnimationFrame(this.decode.bind(this));
             return;
         }
 
         this.starting = true;
-        this.stopped = false;
+        this.paused = false;
 
         this.video = document.createElement('video');
         this.canvas = document.createElement('canvas');
@@ -65,16 +65,16 @@ export class QrService {
     }
 
     /**
-     * Pause processing
+     * Pause processing, but keep the camera on, so processing can be restarted quickly
      */
-    public stop() {
-        this.stopped = true;
+    public pause(): void {
+        this.paused = true;
     }
 
     /**
      * Stop without allowing restart. Kill everything, a new service has to be instantiated
      */
-    public stopForefer() {
+    public stop(): void {
 
         if (this.stream) {
             this.stream.getTracks().forEach(track => track.stop());
@@ -100,11 +100,11 @@ export class QrService {
                 this.scanObservable.next(null);
             }
 
-            if (!this.stopped) {
+            if (!this.paused) {
                 requestAnimationFrame(this.decode.bind(this));
             }
         } else {
-            if (!this.stopped) {
+            if (!this.paused) {
                 requestAnimationFrame(this.decode.bind(this));
             }
         }

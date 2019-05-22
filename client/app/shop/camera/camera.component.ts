@@ -18,11 +18,11 @@ export class CameraComponent implements OnInit, OnDestroy {
                 private alertService: NaturalAlertService,
                 @Inject(MAT_DIALOG_DATA) data: any,
                 private dialogRef: MatDialogRef<any>,
-                private scanService: QrService) {
+                private qrService: QrService) {
     }
 
     ngOnInit() {
-        this.scanService.getStream().subscribe(stream => {
+        this.qrService.getStream().subscribe(stream => {
             this.videoRef.nativeElement.srcObject = stream;
             this.videoRef.nativeElement.setAttribute('playsinline', 'true'); // required to tell iOS safari we don't want fullscreen
             this.videoRef.nativeElement.play();
@@ -30,7 +30,7 @@ export class CameraComponent implements OnInit, OnDestroy {
 
         // In case we arrive here by url refresh that avoids to start camera from click on home.component.ts
         // Won't cause double scanning
-        this.scanService.start();
+        this.qrService.start();
     }
 
     ngOnDestroy() {

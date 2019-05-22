@@ -50,7 +50,7 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
     }
 
     ngOnDestroy(): void {
-        this.qrService.stop();
+        this.qrService.pause();
     }
 
     public goToCode() {

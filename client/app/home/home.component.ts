@@ -38,8 +38,8 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
             });
         });
 
-        this.qrService.scan().pipe(takeUntil(this.ngUnsubscribe), throttleTime(500)).subscribe(result => {
-            const parsedCode = result.toLowerCase().replace('https://chez-emmy.ch/shop/product/', '');
+        this.qrService.qrCode.pipe(takeUntil(this.ngUnsubscribe)).subscribe(code => {
+            const parsedCode = code.toLowerCase().replace('https://chez-emmy.ch/shop/product/', '');
             this.router.navigate(['/shop/product', parsedCode]);
 
         }, () => {

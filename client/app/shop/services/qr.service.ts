@@ -14,14 +14,20 @@ export class QrService {
     private canvas: HTMLCanvasElement;
     private context: CanvasRenderingContext2D;
 
-    private readonly scanObservable = new Subject<string | null>();
+    private readonly scanObservable = new Subject<string>();
     private readonly streamObservable = new ReplaySubject<MediaStream>(1);
 
     private starting = false;
     private paused = true;
     private lastDecoding = 0;
 
+    /**
+     * An observable of all distinct, non-empty scanned QR code
+     */
+    public readonly qrCode: Observable<string>;
+
     constructor() {
+        this.qrCode = this.scanObservable.pipe(distinctUntilChanged(), filter(v => !!v));
     }
 
     public getStream(): Observable<MediaStream> {
@@ -57,21 +63,15 @@ export class QrService {
     }
 
     /**
-     * Start to watch QR scanning, but dont start scanning. Call QrService.start() separately
-     */
-    public scan(): Observable<string> {
-        return this.scanObservable.pipe(distinctUntilChanged(), filter(v => !!v)) as Observable<string>;
-    }
-
-    /**
      * Pause processing, but keep the camera on, so processing can be restarted quickly
      */
     public pause(): void {
         this.paused = true;
+        this.scanObservable.next('');
     }
 
     /**
-     * Stop without allowing restart. Kill everything, a new service has to be instantiated
+     * Stop processing and camera
      */
     public stop(): void {
         this.pause();
@@ -80,8 +80,6 @@ export class QrService {
             this.stream.getTracks().forEach(track => track.stop());
             this.stream = null;
         }
-
-        this.scanObservable.complete();
     }
 
     private decode(time: number): void {
@@ -97,7 +95,7 @@ export class QrService {
             if (code && code.data) {
                 this.scanObservable.next(code.data);
             } else {
-                this.scanObservable.next(null);
+                this.scanObservable.next('');
             }
         }
 

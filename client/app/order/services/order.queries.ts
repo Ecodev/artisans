@@ -6,6 +6,7 @@ export const orderMetaFragment = gql`
         id
         balance
         vatPart
+        creationDate
         orderLines {
             id
         }

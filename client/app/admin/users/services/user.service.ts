@@ -56,6 +56,7 @@ import { Router } from '@angular/router';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
+import { CartService } from '../../../shop/services/cart.service';
 
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
     const value = control.value || '';
@@ -89,6 +90,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
     constructor(apollo: Apollo,
                 protected router: Router,
                 private permissionsService: PermissionsService,
+                private cartService: CartService,
     ) {
         super(apollo,
             'user',
@@ -231,6 +233,9 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                         data,
                     });
                     this.permissionsService.setUser(login);
+
+                    // Be sure that we don't have leftovers from another user
+                    this.cartService.empty();
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);
         });

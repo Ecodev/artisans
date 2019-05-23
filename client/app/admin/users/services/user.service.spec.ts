@@ -5,6 +5,12 @@ import { Apollo } from 'apollo-angular';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { MockApolloProvider } from '../../../shared/testing/MockApolloProvider';
 import { UserService } from './user.service';
+import { CartService } from '../../../shop/services/cart.service';
+
+class MockCartService {
+    empty() {
+    }
+}
 
 describe('UserService', () => {
 
@@ -15,6 +21,7 @@ describe('UserService', () => {
             ],
             providers: [
                 MockApolloProvider,
+                {provide: CartService, useClass: MockCartService},
             ],
         });
 

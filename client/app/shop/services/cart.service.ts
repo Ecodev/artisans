@@ -4,6 +4,8 @@ import Decimal from 'decimal.js';
 import { OrderService } from '../../order/services/order.service';
 import { Product, Products } from '../../shared/generated-types';
 import { moneyRoundUp } from '../../shared/utils';
+import { fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface CartLine {
     product: Products['products']['items'][0] | Product['product'];
@@ -23,7 +25,18 @@ export class CartService {
     public cart: CartLine[] = [];
 
     constructor(private orderService: OrderService, private alertService: NaturalAlertService) {
-        const storedCart = sessionStorage.getItem(CartService.storageKey);
+
+        // If our cart changes in another browser tab, reload it from storage to keep it in sync
+        fromEvent<StorageEvent>(window, 'storage').pipe(
+            map(event => {
+                if (event.key === CartService.storageKey && event.newValue !== null) {
+                    this.cart = JSON.parse(event.newValue);
+                    CartService.computeTotals(this.cart);
+                }
+            }),
+        ).subscribe();
+
+        const storedCart = localStorage.getItem(CartService.storageKey);
         if (storedCart) {
             this.cart = JSON.parse(storedCart);
             CartService.computeTotals(this.cart);
@@ -38,7 +51,7 @@ export class CartService {
 
     private static persistCart(cart) {
         CartService.computeTotals(cart);
-        sessionStorage.setItem(CartService.storageKey, JSON.stringify(cart));
+        localStorage.setItem(CartService.storageKey, JSON.stringify(cart));
     }
 
     private static computeTotals(cart) {

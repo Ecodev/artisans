@@ -6,6 +6,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 import { FormValidators, Literal } from '@ecodev/natural';
 import { AnonymousUserService } from './anonymous-user.service';
 import { LoginValidatorFn } from '../../../admin/users/services/user.service';
+import { CartService } from '../../../shop/services/cart.service';
 
 @Injectable({
     providedIn: 'root',
@@ -15,8 +16,9 @@ export class NewUserService extends AnonymousUserService {
     constructor(apollo: Apollo,
                 router: Router,
                 permissionsService: PermissionsService,
+                cartService: CartService,
     ) {
-        super(apollo, router, permissionsService);
+        super(apollo, router, permissionsService, cartService);
     }
 
     protected getDefaultForClient(): Literal {

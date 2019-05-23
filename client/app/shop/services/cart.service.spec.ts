@@ -35,7 +35,7 @@ describe('CartService', () => {
     } as Product['product'];
 
     beforeEach(() => {
-        sessionStorage.removeItem('chez-emmy-cart');
+        localStorage.removeItem('chez-emmy-cart');
         TestBed.configureTestingModule({
             providers: [
                 {provide: OrderService, useClass: DummyService},

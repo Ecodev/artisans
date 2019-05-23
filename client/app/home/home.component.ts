@@ -1,7 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractController, NaturalAlertService, NaturalSidenavContainerComponent, NaturalSidenavService } from '@ecodev/natural';
-import { takeUntil, throttleTime } from 'rxjs/operators';
+import {
+    NaturalAbstractController,
+    NaturalAlertService,
+    NaturalSidenavContainerComponent,
+    NaturalSidenavService,
+} from '@ecodev/natural';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../admin/users/services/user.service';
 import { QrService } from '../shop/services/qr.service';
 
@@ -50,7 +55,8 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
     }
 
     ngOnDestroy(): void {
-        this.qrService.pause();
+        super.ngOnDestroy();
+        this.qrService.stop();
     }
 
     public goToCode() {

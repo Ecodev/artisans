@@ -19,6 +19,7 @@ export class QrService {
 
     private starting = false;
     private paused = true;
+    private lastDecoding = 0;
 
     constructor() {
     }
@@ -83,8 +84,9 @@ export class QrService {
         this.scanObservable.complete();
     }
 
-    private decode(): void {
-        if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
+    private decode(time: number): void {
+        if (this.video.readyState === this.video.HAVE_ENOUGH_DATA && time - this.lastDecoding > 300) {
+            this.lastDecoding = time;
             this.canvas.height = this.video.videoHeight;
             this.canvas.width = this.video.videoWidth;
             this.context.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);

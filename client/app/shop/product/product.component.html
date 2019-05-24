@@ -23,7 +23,7 @@
 
             <mat-form-field [style.width.px]="90" [style.padding-top.em]="1.34375">
                 <mat-label>Quantité</mat-label>
-                <input matInput type="number" min="0" [formControl]="quantityForm" (change)="computePrice()">
+                <input matInput type="number" min="0" [formControl]="quantityForm" (change)="computePrice()" (keydown.enter)="updateOrAddToCart()">
                 <div matSuffix *ngIf="data.model.unit">{{ data.model.unit }}</div>
                 <mat-error *ngIf="quantityForm.hasError('required')">Requis</mat-error>
             </mat-form-field>

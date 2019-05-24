@@ -101,31 +101,44 @@ export class ProductComponent implements OnInit {
         this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value, this.pricePonderation.value);
     }
 
-    public addToCart() {
+    public addToCart(): void {
         this.cartService.add(this.data.model, +this.quantityForm.value, +this.pricePonderation.value);
         this.router.navigateByUrl('/');
     }
 
-    public updateCart() {
+    public updateCart(): void {
         this.cartService.updateProduct(+this.routeSnapshot.params.index, +this.quantityForm.value, +this.pricePonderation.value);
         this.router.navigateByUrl('/');
     }
 
-    public removeFromCart() {
+    public removeFromCart(): void {
         this.cartService.remove(+this.routeSnapshot.params.index);
         this.router.navigateByUrl('/');
     }
 
-    public increase() {
+    public increase(): void {
         this.quantityForm.setValue(+this.quantityForm.value + 1);
         this.quantityForm.markAsDirty();
     }
 
-    public decrease() {
+    public decrease(): void {
         const value = +this.quantityForm.value - 1;
         this.quantityForm.setValue(value < 0 ? 0 : value);
         this.quantityForm.markAsDirty();
 
     }
 
+    public updateOrAddToCart(): void {
+        if (this.formGroup.invalid || !this.data.model.isActive) {
+            return;
+        }
+
+        if (this.data && this.data.model) {
+            if (this.edit) {
+                this.updateCart();
+            } else {
+                this.addToCart();
+            }
+        }
+    }
 }

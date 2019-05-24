@@ -14,9 +14,9 @@
 
         <div id="searchByCode" fxLayout="row" fxLayoutAlign="start center">
             <input fxFlex placeholder="Référence" [(ngModel)]="code" (keydown.enter)="goToCode()" (keydown.esc)="code = ''">
-            <a mat-icon-button [routerLink]="['/shop/product', code]">
+            <button mat-icon-button (click)="goToCode()">
                 <natural-icon name="search"></natural-icon>
-            </a>
+            </button>
         </div>
 
         <a mat-icon-button mat-flat-button color="primary" routerLink="/shop/camera" (click)="qrService.start()">

@@ -59,9 +59,8 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
         this.qrService.stop();
     }
 
-    public goToCode() {
-        this.router.navigate(['/shop/product', this.code]);
+    public goToCode(): void {
+        this.router.navigate(['/shop/product', this.code]).then(() => this.code = '');
     }
-
 
 }

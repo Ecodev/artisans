@@ -34,7 +34,7 @@ export class CameraComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.qrService.stop();
+        this.qrService.pause();
     }
 
 }

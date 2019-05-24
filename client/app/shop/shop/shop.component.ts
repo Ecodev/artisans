@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { CartService } from '../services/cart.service';
+import { QrService } from '../services/qr.service';
 
 @Component({
     selector: 'app-shop',
     templateUrl: './shop.component.html',
     styleUrls: ['./shop.component.scss'],
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
 
     public mode;
     public CartService = CartService;
 
-    constructor(public cartService: CartService, public alertService: NaturalAlertService,
-                public router: Router) {
+    constructor(public cartService: CartService,
+                public alertService: NaturalAlertService,
+                public router: Router,
+                private qrService: QrService,
+    ) {
 
     }
 
@@ -46,6 +50,10 @@ export class ShopComponent implements OnInit {
                     this.cartService.empty();
                 }
             });
+    }
+
+    ngOnDestroy(): void {
+        this.qrService.stop();
     }
 
 }

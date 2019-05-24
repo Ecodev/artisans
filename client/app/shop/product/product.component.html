@@ -41,7 +41,7 @@
             <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px">
 
                 <div fxLayout="row" fxLayoutAlign="start center">
-                    <div fxFlex="none" class="mat-title no-margin-bottom">{{ quantityForm.value }}x</div>
+                    <div fxFlex="none" class="mat-title no-margin-bottom">{{ quantityForm.value || 0 }}x</div>
 
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" *ngIf="data.model.ponderatePrice">
                         <div class="mat-title no-margin-bottom">&nbsp;à {{ pricePonderation.value | percent}}</div>

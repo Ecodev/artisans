@@ -31,7 +31,7 @@ export class ProductComponent implements OnInit {
     /**
      * Formatted displayed price
      */
-    public price;
+    public price = 0;
 
     /**
      * Stores DialogTriggerComponent actuvated route snapshot
@@ -41,7 +41,7 @@ export class ProductComponent implements OnInit {
     /**
      * Form controller for quantity
      */
-    public quantityForm = new FormControl(1, [Validators.required, Validators.min(0)]);
+    public quantityForm = new FormControl(null, [Validators.required, Validators.min(0)]);
 
     /**
      * Form controller for price ponderation
@@ -83,7 +83,13 @@ export class ProductComponent implements OnInit {
     ngOnInit() {
     }
 
-    public computePrice(skipFormat = false) {
+    public computePrice(skipFormat = false): void {
+
+        // Assume no quantity cost nothing for the sake of simple display for end-users
+        if (this.quantityForm.value === null) {
+            this.price = 0;
+            return;
+        }
 
         if (!skipFormat) {
             const qty = +this.quantityForm.value;

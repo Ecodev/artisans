@@ -36,6 +36,7 @@ export class ShopComponent implements OnInit, OnDestroy {
                         this.cartService.save().subscribe(() => {
                             this.alertService.info('Votre commande a bien été enregistrée');
                             this.cartService.empty();
+                            this.qrService.stop();
                         });
                     }
                 });
@@ -48,6 +49,7 @@ export class ShopComponent implements OnInit, OnDestroy {
             .subscribe(confirm => {
                 if (confirm) {
                     this.cartService.empty();
+                    this.qrService.stop();
                 }
             });
     }

@@ -145,4 +145,40 @@ class TransactionRepositoryTest extends AbstractRepositoryTest
         $this->assertAccountBalance($account1, 23760, 'balance should be increased after deletion');
         $this->assertAccountBalance($account2, 6240, 'balance should be decreased after deletion');
     }
+
+    public function testCanDeleteTransactionAndEverythingRelatedToit(): void
+    {
+        $this->assertExists('transaction', 8005, true);
+        $this->assertExists('transaction_line', 14007, true);
+        $this->assertExists('order', 16000, true);
+        $this->assertExists('order_line', 17000, true);
+        $this->assertExists('stock_movement', 18000, true);
+
+        $connection = $this->getEntityManager()->getConnection();
+        $count = $connection->delete('transaction', ['id' => 8005]);
+
+        self::assertSame(1, $count);
+        $this->assertExists('transaction', 8005, false);
+        $this->assertExists('transaction_line', 14007, false);
+        $this->assertExists('order', 16000, false);
+        $this->assertExists('order_line', 17000, false);
+
+        // Stock movement are NOT deleted in cascade because the product quantity would not be
+        // updated accordingly. If we wanted to do that we should either use DB triggers to compute product
+        // quantity (similar to transactions amount), or make a custom deleteTransactions mutation
+        // that would iterate through all stockMovement and set their delta to 0, to automatically update
+        // the product quantity.
+        //
+        // That means that for now end users must update the stock of every single product manually after deleting a transaction
+        $this->assertExists('stock_movement', 18000, true);
+    }
+
+    private function assertExists(string $table, int $id, bool $expected): void
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $actual = $connection->fetchColumn("SELECT COUNT(*) FROM `$table` WHERE id = $id");
+
+        $message = "Record $id in table `$table` should " . ($expected ? '' : ' not ') . 'exists';
+        self::assertSame($expected ? '1' : '0', $actual, $message);
+    }
 }

@@ -155,8 +155,8 @@
         </mat-tab>
 
     </mat-tab-group>
-     
-    <natural-fixed-button *ngIf="!data.model.id || order"
+
+    <natural-fixed-button *ngIf="!data.model.id"
                           class="detail-speed-dial"
                           (click)="save()"
                           icon="save"
@@ -166,7 +166,7 @@
                           [color]="form.invalid ? 'warn' : 'accent'"
     ></natural-fixed-button>
 
-    <eco-fab-speed-dial class="detail-speed-dial" *ngIf="data.model.id && !order">
+    <eco-fab-speed-dial class="detail-speed-dial" *ngIf="data.model.id">
         <eco-fab-speed-dial-trigger>
             <button mat-fab>
                 <natural-icon name="more_vert"></natural-icon>

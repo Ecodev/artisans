@@ -5,10 +5,12 @@ import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import {
     FormValidators,
+    FormAsyncValidators,
     Literal,
     NaturalAbstractModelService,
     NaturalFormControl,
     NaturalQueryVariablesManager,
+    NaturalValidators,
 } from '@ecodev/natural';
 import {
     createUser,
@@ -196,6 +198,12 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             email: [Validators.email],
             familyRelationship: [Validators.required],
             birthday: [Validators.required],
+        };
+    }
+
+    public getFormAsyncValidators(): FormAsyncValidators {
+        return {
+            code: [NaturalValidators.unique('code', this)],
         };
     }
 

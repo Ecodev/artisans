@@ -46,6 +46,9 @@
                                     <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
                                         Maximum {{form.get('code')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>
+                                    <mat-error *ngIf="form.get('code')?.hasError('duplicateValue')">
+                                        Ce code est déjà attribué à un produit
+                                    </mat-error>
                                     <mat-error *ngIf="form.get('code')?.hasError('required')">Requis</mat-error>
                                 </mat-form-field>
                             </div>

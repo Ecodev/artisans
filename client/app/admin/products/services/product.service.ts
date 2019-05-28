@@ -16,7 +16,13 @@ import {
 import { Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormValidators, NaturalAbstractModelService, NaturalQueryVariablesManager } from '@ecodev/natural';
+import {
+    FormValidators,
+    FormAsyncValidators,
+    NaturalAbstractModelService,
+    NaturalQueryVariablesManager,
+    NaturalValidators,
+} from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',
@@ -63,7 +69,14 @@ export class ProductService extends NaturalAbstractModelService<Product['product
 
     public getFormValidators(): FormValidators {
         return {
+            code: [Validators.maxLength(20)],
             name: [Validators.required, Validators.maxLength(100)],
+        };
+    }
+
+    public getFormAsyncValidators(): FormAsyncValidators {
+        return {
+            code: [NaturalValidators.unique('code', this)],
         };
     }
 

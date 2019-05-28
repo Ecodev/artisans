@@ -146,6 +146,9 @@
                         <mat-form-field fxFlex>
                             <mat-label>Nº coopérateur</mat-label>
                             <input matInput formControlName="code" (change)="update()">
+                            <mat-error *ngIf="form.get('code')?.hasError('duplicateValue')">
+                                Ce code est déjà attribué à un coopérateur
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field fxFlex>

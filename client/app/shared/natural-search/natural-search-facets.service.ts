@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-    DropdownConfiguration,
+    DropdownFacet,
+    FlagFacet,
     NaturalEnumService,
-    FlagConfiguration,
-    NaturalSearchConfiguration,
-    Selection,
-    TypeDateRangeComponent,
-    TypeDateRangeConfiguration,
+    NaturalSearchFacets,
+    TypeDateComponent,
+    TypeDateConfiguration,
     TypeNaturalSelectComponent,
     TypeSelectComponent,
     TypeSelectNaturalConfiguration,
@@ -16,59 +15,15 @@ import { TransactionService } from '../../admin/transactions/services/transactio
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { UserFilterGroupCondition } from '../generated-types';
 
-function wrapLike(s: Selection): Selection {
-    if (s.condition.like) {
-        s.condition.like.value = '%' + s.condition.like.value + '%';
-    }
-    return s;
-}
-
 /**
- * Replace the operator name (usually "like", "in" or "between") with the
- * attribute "field" or "name" defined in the configuration
- *
- * So:
- *
- *     {field: 'myFieldName', condition: {in: {values: [1, 2, 3]}}}
- *
- * will become
- *
- *     {field: 'myFieldName', condition: {myFieldName: {values: [1, 2, 3]}}}
- */
-function replaceOperatorByField(s: Selection, attribute: string = 'field'): Selection {
-    const oldOperator = Object.keys(s.condition)[0];
-
-    s.condition[s[attribute]] = s.condition[oldOperator];
-    delete s.condition[oldOperator];
-
-    return s;
-}
-
-/**
- * Replace the operator name (usually "like", "in" or "between") with the
- * field "name" defined in the configuration
- *
- * So:
- *
- *     {field: 'myFieldName', name:'myConfigName', condition: {in: {values: [1, 2, 3]}}}
- *
- * will become
- *
- *     {field: 'myFieldName',  name:'myConfigName', condition: {myConfigName: {values: [1, 2, 3]}}}
- */
-function replaceOperatorByName(s: Selection): Selection {
-    return replaceOperatorByField(s, 'name');
-}
-
-/**
- * Collection of configuration for natural-search accessible by the object name
+ * Collection of facets for natural-search accessible by the object name
  */
 @Injectable({
     providedIn: 'root',
 })
-export class NaturalSearchConfigurationService {
+export class NaturalSearchFacetsService {
 
-    private readonly userTags: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
+    private readonly userTags: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Tags',
         field: 'userTags',
         component: TypeNaturalSelectComponent,
@@ -78,13 +33,13 @@ export class NaturalSearchConfigurationService {
         },
     };
 
-    private readonly userWelcomeSession: FlagConfiguration = {
+    private readonly userWelcomeSession: FlagFacet = {
         display: 'N\'a pas été accueilli',
         field: 'welcomeSessionDate',
-        condition: {null: {}} as UserFilterGroupCondition
+        condition: {null: {}} as UserFilterGroupCondition,
     };
 
-    private readonly transaction: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
+    private readonly transaction: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Transaction',
         field: 'transaction',
         component: TypeNaturalSelectComponent,
@@ -94,7 +49,7 @@ export class NaturalSearchConfigurationService {
         },
     };
 
-    private readonly product: DropdownConfiguration<TypeSelectNaturalConfiguration> = {
+    private readonly product: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Produit',
         field: 'product',
         component: TypeNaturalSelectComponent,
@@ -104,16 +59,16 @@ export class NaturalSearchConfigurationService {
         },
     };
 
-    private readonly creationDate: DropdownConfiguration<TypeDateRangeConfiguration> = {
+    private readonly creationDate: DropdownFacet<TypeDateConfiguration> = {
         display: 'Date',
         field: 'creationDate',
-        component: TypeDateRangeComponent,
+        component: TypeDateComponent,
     };
 
-    private readonly allConfigurations: { [key: string]: NaturalSearchConfiguration } = {
+    private readonly allFacets: { [key: string]: NaturalSearchFacets } = {
         users: [
             this.userTags,
-            this.userWelcomeSession
+            this.userWelcomeSession,
         ],
         transactionLines: [
             this.transaction,
@@ -143,8 +98,8 @@ export class NaturalSearchConfigurationService {
     /**
      * Returns the natural search configuration for given, or null if non-existent
      */
-    public get(key: string): NaturalSearchConfiguration | null {
-        return this.allConfigurations[key];
+    public get(key: string): NaturalSearchFacets | null {
+        return this.allFacets[key];
     }
 
 }

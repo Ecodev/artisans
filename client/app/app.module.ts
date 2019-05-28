@@ -12,7 +12,7 @@ import {
 } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NaturalAlertService } from '@ecodev/natural';
+import { NaturalAlertService, NaturalSwissParsingDateAdapter } from '@ecodev/natural';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
@@ -29,7 +29,6 @@ import { EmmyModule } from './shared/modules/emmy.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
-import { SwissParsingDateAdapter } from './shared/services/swiss-parsing-date-adapter.service';
 import { ShopModule } from './shop/shop.module';
 
 registerLocaleData(localeFRCH);
@@ -59,7 +58,7 @@ registerLocaleData(localeFRCH);
         MatIconRegistry,
         {
             provide: DateAdapter,
-            useClass: SwissParsingDateAdapter,
+            useClass: NaturalSwissParsingDateAdapter,
         },
         {
             // Use OnDirty instead of default OnTouched, that allows to validate while editing. Touched is updated after blur.

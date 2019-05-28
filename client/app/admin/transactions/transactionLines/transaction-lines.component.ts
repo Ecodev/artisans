@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { TransactionLines, TransactionLinesVariables } from '../../../shared/generated-types';
-import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { TransactionLineService } from '../services/transaction-line.service';
 
@@ -24,7 +24,7 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
                 transactionLineService: TransactionLineService,
                 alertService: NaturalAlertService,
                 persistenceService: NaturalPersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 
@@ -35,7 +35,7 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
             persistenceService,
         );
 
-        this.naturalSearchConfig = naturalSearchConfigurationService.get('transactionLines');
+        this.naturalSearchFacets = naturalSearchFacetsService.get('transactionLines');
 
     }
 }

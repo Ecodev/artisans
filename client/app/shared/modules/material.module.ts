@@ -29,7 +29,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
 } from '@angular/material';
-import { SwissParsingDateAdapter } from '../services/swiss-parsing-date-adapter.service';
+import { NaturalSwissParsingDateAdapter } from '@ecodev/natural';
 
 const list = [
     MatButtonModule,
@@ -71,7 +71,7 @@ const list = [
     providers: [
         {
             provide: DateAdapter,
-            useClass: SwissParsingDateAdapter,
+            useClass: NaturalSwissParsingDateAdapter,
         },
     ],
 })

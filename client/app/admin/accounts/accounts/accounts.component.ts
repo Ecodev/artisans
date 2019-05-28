@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractNavigableList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { Accounts, AccountsVariables } from '../../../shared/generated-types';
-import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { AccountService } from '../services/account.service';
 
@@ -18,7 +18,7 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
                 accountService: AccountService,
                 alertService: NaturalAlertService,
                 persistenceService: NaturalPersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 

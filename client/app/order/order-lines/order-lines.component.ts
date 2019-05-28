@@ -2,7 +2,7 @@ import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { OrderLines, OrderLinesVariables } from '../../shared/generated-types';
-import { NaturalSearchConfigurationService } from '../../shared/natural-search/natural-search-configuration.service';
+import { NaturalSearchFacetsService } from '../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../shared/services/permissions.service';
 import { OrderLineService } from '../services/order-lines.service';
 
@@ -20,7 +20,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLi
                 service: OrderLineService,
                 alertService: NaturalAlertService,
                 persistenceService: NaturalPersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
                 injector: Injector,
     ) {
@@ -33,7 +33,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLi
             injector,
         );
 
-        this.naturalSearchConfig = naturalSearchConfigurationService.get('orderLines');
+        this.naturalSearchFacets = naturalSearchFacetsService.get('orderLines');
 
     }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { NaturalPersistenceService } from '@ecodev/natural';
-import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { NaturalAbstractList } from '@ecodev/natural';
 import { ProductTags, ProductTagsVariables } from '../../../shared/generated-types';
 import { ProductTagService } from '../services/productTag.service';
@@ -20,7 +20,7 @@ export class ProductTagsComponent extends NaturalAbstractList<ProductTags['produ
                 productTagService: ProductTagService,
                 alertService: NaturalAlertService,
                 persistenceService: NaturalPersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 

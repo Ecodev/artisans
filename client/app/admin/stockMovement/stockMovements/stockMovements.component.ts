@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { NaturalPersistenceService } from '@ecodev/natural';
-import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { NaturalAbstractList } from '@ecodev/natural';
 import { StockMovements, StockMovementsVariables } from '../../../shared/generated-types';
 import { StockMovementService } from '../services/stockMovement.service';
@@ -21,7 +21,7 @@ export class StockMovementsComponent extends NaturalAbstractList<StockMovements[
                 stockMovementService: StockMovementService,
                 alertService: NaturalAlertService,
                 persistenceService: NaturalPersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 
@@ -32,6 +32,6 @@ export class StockMovementsComponent extends NaturalAbstractList<StockMovements[
             persistenceService,
         );
 
-        this.naturalSearchConfig = naturalSearchConfigurationService.get('stockMovements');
+        this.naturalSearchFacets = naturalSearchFacetsService.get('stockMovements');
     }
 }

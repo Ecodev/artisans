@@ -7,7 +7,7 @@
     <div fxLayout="column">
 
         <div fxLayout="row" class="margin-v" overflow>
-            <natural-search fxFlex [configurations]="naturalSearchConfig" [selections]="naturalSearchSelections" (selectionChange)="search($event)" [multipleGroups]="true">
+            <natural-search fxFlex [facets]="naturalSearchFacets" [selections]="naturalSearchSelections" (selectionChange)="search($event)" [multipleGroups]="true">
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="transactionDate">Date</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>

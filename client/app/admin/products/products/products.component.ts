@@ -2,7 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { Products, ProductsVariables } from '../../../shared/generated-types';
-import { NaturalSearchConfigurationService } from '../../../shared/natural-search/natural-search-configuration.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { ProductService } from '../services/product.service';
 
@@ -18,7 +18,7 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
                 productService: ProductService,
                 alertService: NaturalAlertService,
                 persistenceService: NaturalPersistenceService,
-                naturalSearchConfigurationService: NaturalSearchConfigurationService,
+                naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
                 injector: Injector,
     ) {

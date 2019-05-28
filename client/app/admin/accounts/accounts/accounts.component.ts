@@ -28,6 +28,7 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
             alertService,
             persistenceService,
         );
+        this.naturalSearchFacets = naturalSearchFacetsService.get('accounts');
 
     }
 }

@@ -31,7 +31,7 @@ export class OrdersComponent extends NaturalAbstractList<Orders['orders'], Order
             injector,
         );
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('order');
+        this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
 
     }
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
-import { NaturalPersistenceService } from '@ecodev/natural';
+import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
-import { NaturalAbstractList } from '@ecodev/natural';
 import { ExpenseClaims, ExpenseClaimsVariables } from '../../../shared/generated-types';
 import { ExpenseClaimService } from '../services/expenseClaim.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
@@ -30,8 +28,9 @@ export class ExpenseClaimsComponent extends NaturalAbstractList<ExpenseClaims['e
             route,
             alertService,
             persistenceService,
-
         );
+
+        this.naturalSearchFacets = naturalSearchFacetsService.get('expenseClaims');
 
     }
 }

@@ -30,6 +30,7 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
             persistenceService,
             injector,
         );
+        this.naturalSearchFacets = naturalSearchFacetsService.get('products');
 
     }
 }

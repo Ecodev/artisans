@@ -34,6 +34,7 @@ export class ProductComponent
         any> implements OnInit {
 
     public availableVatRate = [
+        '0.000',
         '0.025',
         '0.077',
     ];
@@ -45,6 +46,7 @@ export class ProductComponent
     ];
 
     public availableMargin = [
+        '0.00',
         '0.15',
         '0.16',
         '0.17',

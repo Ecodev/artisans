@@ -37,6 +37,9 @@ abstract class CreateOrder implements FieldInterface
 
                 _em()->flush();
 
+                _em()->refresh($order);
+                _em()->refresh($order->getTransaction());
+
                 return $order;
             },
         ];

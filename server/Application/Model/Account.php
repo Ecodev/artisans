@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasAutomaticBalance;
 use Application\Traits\HasIban;
 use Application\Traits\HasName;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,13 +29,7 @@ class Account extends AbstractModel
 {
     use HasName;
     use HasIban;
-
-    /**
-     * @var Money
-     *
-     * @ORM\Column(type="Money", options={"default" = 0})
-     */
-    private $balance;
+    use HasAutomaticBalance;
 
     /**
      * @var Account
@@ -105,26 +100,6 @@ class Account extends AbstractModel
         if ($this->getOwner()) {
             $owner->accountAdded($this);
         }
-    }
-
-    /**
-     * Set balance
-     *
-     * @param Money $balance
-     *
-     * @API\Exclude
-     */
-    public function setBalance(Money $balance): void
-    {
-        $this->balance = $balance;
-    }
-
-    /**
-     * @return Money
-     */
-    public function getBalance(): Money
-    {
-        return $this->balance;
     }
 
     /**

@@ -6,26 +6,20 @@ namespace Application\Traits;
 
 use Money\Money;
 
-trait HasBalance
+trait HasAutomaticUnsignedBalance
 {
     /**
      * @var Money
      *
-     * @ORM\Column(type="Money")
+     * @ORM\Column(type="Money", options={"default" = 0, "unsigned" = true})
      */
     private $balance;
 
     /**
-     * Set balance
+     * Get total balance
      *
-     * @param Money $balance
-     */
-    public function setBalance(Money $balance): void
-    {
-        $this->balance = $balance;
-    }
-
-    /**
+     * Read only, computed by SQL triggers
+     *
      * @return Money
      */
     public function getBalance(): Money

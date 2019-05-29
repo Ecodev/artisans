@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasAutomaticBalance;
 use Application\Traits\HasVatPart;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Money\Money;
 
 /**
- * An accounting journal entry (simple or compound)
+ * An order made by a users
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
@@ -19,6 +20,7 @@ use Money\Money;
 class Order extends AbstractModel
 {
     use HasVatPart;
+    use HasAutomaticBalance;
 
     /**
      * @var Transaction
@@ -36,19 +38,13 @@ class Order extends AbstractModel
     private $orderLines;
 
     /**
-     * @var Money
-     *
-     * @ORM\Column(type="Money", nullable=true, options={"unsigned" = true})
-     */
-    private $balance;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
         $this->orderLines = new ArrayCollection();
         $this->vatPart = Money::CHF(0);
+        $this->balance = Money::CHF(0);
     }
 
     /**
@@ -95,17 +91,5 @@ class Order extends AbstractModel
     public function setTransaction(Transaction $transaction): void
     {
         $this->transaction = $transaction;
-    }
-
-    /**
-     * Get total order amount, VAT inclusive
-     *
-     * Read only, computed by SQL triggers
-     *
-     * @return Money
-     */
-    public function getBalance(): Money
-    {
-        return $this->balance;
     }
 }

@@ -127,6 +127,8 @@ class MoneyTypeTest extends TestCase
             ['2.95', Money::CHF(295)],
             ['0', Money::CHF(0)],
             ['9.00', Money::CHF(900)],
+            ['-9.00', Money::CHF(-900)],
+            ['-0.00', Money::CHF(0)],
         ];
     }
 
@@ -136,6 +138,7 @@ class MoneyTypeTest extends TestCase
             [2, Money::CHF(200)],
             [0, Money::CHF(0)],
             [9, Money::CHF(900)],
+            [-9, Money::CHF(-900)],
         ];
     }
 
@@ -146,6 +149,7 @@ class MoneyTypeTest extends TestCase
             'too many decimals' => ['1.123'],
             'exponential' => ['1e10'],
             'empty string' => [''],
+            'only negative sign' => ['-'],
         ];
     }
 }

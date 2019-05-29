@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasAutomaticUnsignedBalance;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
@@ -26,6 +27,7 @@ class Transaction extends AbstractModel
     use HasName;
     use HasRemarks;
     use HasInternalRemarks;
+    use HasAutomaticUnsignedBalance;
 
     /**
      * @var Chronos
@@ -63,17 +65,11 @@ class Transaction extends AbstractModel
     private $datatransRef = '';
 
     /**
-     * @var Money
-     *
-     * @ORM\Column(type="Money", nullable=true, options={"unsigned" = true})
-     */
-    private $balance;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->balance = Money::CHF(0);
         $this->transactionLines = new ArrayCollection();
         $this->accountingDocuments = new ArrayCollection();
     }
@@ -230,17 +226,5 @@ class Transaction extends AbstractModel
 
             throw new \Application\Api\Exception(sprintf('Transaction %s non-équilibrée, débits: %s, crédits: %s', $this->getId() ?? 'NEW', $moneyFormatter->format($totalDebit), $moneyFormatter->format($totalCredit)));
         }
-    }
-
-    /**
-     * Get total balance
-     *
-     * Read only, computed by SQL triggers
-     *
-     * @return Money
-     */
-    public function getBalance(): Money
-    {
-        return $this->balance;
     }
 }

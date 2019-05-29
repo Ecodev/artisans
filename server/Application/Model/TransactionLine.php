@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\Traits\HasBalance;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
+use Application\Traits\HasUnsignedBalance;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
@@ -20,7 +20,7 @@ class TransactionLine extends AbstractModel
 {
     use HasName;
     use HasRemarks;
-    use HasBalance;
+    use HasUnsignedBalance;
 
     /**
      * @var Transaction

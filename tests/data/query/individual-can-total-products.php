@@ -15,7 +15,7 @@ return [
         'data' => [
             'products' => [
                 'totalSupplierPrice' => '71.40',
-                'totalPricePerUnit' => '89.60',
+                'totalPricePerUnit' => '89.10',
             ],
         ],
     ],

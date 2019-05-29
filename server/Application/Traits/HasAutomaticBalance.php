@@ -6,24 +6,24 @@ namespace Application\Traits;
 
 use Money\Money;
 
-trait HasVatPart
+trait HasAutomaticBalance
 {
     /**
      * @var Money
      *
      * @ORM\Column(type="Money", options={"default" = 0})
      */
-    private $vatPart;
+    private $balance;
 
     /**
-     * Get amount of VAT
+     * Get total balance
      *
-     * No setter, computed by SQL triggers
+     * Read only, computed by SQL triggers
      *
      * @return Money
      */
-    public function getVatPart(): Money
+    public function getBalance(): Money
     {
-        return $this->vatPart;
+        return $this->balance;
     }
 }

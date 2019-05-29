@@ -90,7 +90,8 @@ REPLACE INTO product (id, image_id, quantity, supplier_price, price_per_unit, un
 (3008, 5008, 12, 1000, 1300, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', ''),
 (3009, 5009, 20, 110, 160, '', '0.025', 'Yogourt Bircher', 'P10', ''),
 (3010, 5010, 23, 130, 200, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', ''),
-(3011, 5011, 5, 1000, 1250, '', '0.0', 'Miel de la région', 'P12', '');
+(3011, 5011, 5, 1000, 1250, '', '0.0', 'Miel de la région', 'P12', ''),
+(3012, NULL, 5, 0, -50, '', '0.0', 'Consigne pot de yaourt', 'P13', 'Pour rembourser les gens qui ramène les pots de yaourt');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6004, 3000),

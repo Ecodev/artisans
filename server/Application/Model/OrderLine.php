@@ -15,7 +15,7 @@ use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
 /**
- * A single line in the shopping basket when making an order
+ * A single line in the shopping cart when making an order
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderLineRepository")
  */

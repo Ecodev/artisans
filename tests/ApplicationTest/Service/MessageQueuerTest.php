@@ -78,9 +78,10 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $user->setLastName('Doe');
         $user->setEmail('john.doe@example.com');
 
-        $account = new Account();
-        $account->setBalance(Money::CHF($variant === 'positive' ? 2500 : -4500));
-        $account->setOwner($user);
+        $prophecy = $this->prophesize(Account::class);
+        $prophecy->getBalance()->willReturn(Money::CHF($variant === 'positive' ? 2500 : -4500));
+        $account = $prophecy->reveal();
+        $user->accountAdded($account);
 
         $messageQueuer = $this->createMockMessageQueuer();
         $message = $messageQueuer->queueBalance($user);

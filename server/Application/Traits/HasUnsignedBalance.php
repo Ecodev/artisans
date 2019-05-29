@@ -6,12 +6,12 @@ namespace Application\Traits;
 
 use Money\Money;
 
-trait HasBalance
+trait HasUnsignedBalance
 {
     /**
      * @var Money
      *
-     * @ORM\Column(type="Money")
+     * @ORM\Column(type="Money", options={"unsigned" = true})
      */
     private $balance;
 

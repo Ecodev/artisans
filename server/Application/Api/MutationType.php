@@ -16,6 +16,7 @@ use Application\Api\Field\Mutation\OpenDoor;
 use Application\Api\Field\Mutation\Register;
 use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\Unregister;
+use Application\Api\Field\Mutation\UpdateOrderLine;
 use Application\Api\Field\Mutation\UpdatePassword;
 use Application\Api\Field\Mutation\UpdateTransaction;
 use Application\Api\Field\Standard;
@@ -51,6 +52,7 @@ class MutationType extends ObjectType
             UpdateTransaction::build(),
             CreateOrder::build(),
             CreateStockMovement::build(),
+            UpdateOrderLine::build(),
             ImportCamt::build(),
             Standard::buildMutation(Transaction::class)[2], // Only delete mutation
             Standard::buildMutation(StockMovement::class)[2], // Only delete mutation

@@ -43,7 +43,7 @@ class StockMovement extends AbstractModel
     /**
      * @var null|OrderLine
      *
-     * @ORM\OneToOne(targetEntity="OrderLine")
+     * @ORM\OneToOne(targetEntity="OrderLine", inversedBy="stockMovement")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="SET NULL")
      * })
@@ -101,6 +101,9 @@ class StockMovement extends AbstractModel
     public function setOrderLine(?OrderLine $orderLine): void
     {
         $this->orderLine = $orderLine;
+        if ($this->orderLine) {
+            $this->orderLine->stockMovementAdded($this);
+        }
     }
 
     /**

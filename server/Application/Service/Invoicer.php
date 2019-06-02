@@ -65,10 +65,8 @@ class Invoicer
                 $quantity = $line['quantity'];
                 $pricePonderation = $line['pricePonderation'];
 
-                $balance = $product->getPricePerUnit()->multiply($quantity)->multiply($pricePonderation);
-                $total = $total->add($balance);
-
-                $this->createOrderLine($order, $product, $balance, $quantity, $pricePonderation);
+                $orderLine = $this->createOrderLine($order, $product, $quantity, $pricePonderation);
+                $total = $total->add($orderLine->getBalance());
             }
 
             $this->createTransactionLine($transaction, $account, $total);
@@ -104,32 +102,58 @@ class Invoicer
         $transactionLine->setTransactionDate(Chronos::now());
     }
 
-    private function createOrderLine(Order $order, Product $product, Money $balance, string $quantity, string $pricePonderation): OrderLine
+    private function createOrderLine(Order $order, Product $product, string $quantity, string $pricePonderation): OrderLine
     {
         $orderLine = new OrderLine();
         $this->entityManager->persist($orderLine);
-
         $orderLine->setOrder($order);
-        $orderLine->setProduct($product);
-        $orderLine->setName($product->getName());
-        $orderLine->setUnit($product->getUnit());
-        $orderLine->setQuantity($quantity);
-        $orderLine->setBalance($balance);
-        $orderLine->setPricePonderation($pricePonderation);
-        $orderLine->setVatRate($product->getVatRate());
 
-        $this->createStockMovement($orderLine);
+        $stockMovement = new StockMovement();
+        $this->entityManager->persist($stockMovement);
+        $stockMovement->setOrderLine($orderLine);
+
+        $this->updateOrderLine($orderLine, $product, $quantity, $pricePonderation);
 
         return $orderLine;
     }
 
-    private function createStockMovement(OrderLine $orderLine): void
+    public function updateOrderLineAndTransactionLine(OrderLine $orderLine, Product $product, string $quantity, string $pricePonderation): void
     {
-        $stockMovement = new StockMovement();
-        $this->entityManager->persist($stockMovement);
+        $orderBefore = $orderLine->getBalance();
+        $this->updateOrderLine($orderLine, $product, $quantity, $pricePonderation);
+        $orderAfter = $orderLine->getBalance();
 
+        /** @var TransactionLine $transactionLine */
+        $transactionLine = $orderLine->getOrder()->getTransaction()->getTransactionLines()->first();
+
+        $transactionBefore = $transactionLine->getBalance();
+        $transactionAfter = $transactionBefore->subtract($orderBefore)->add($orderAfter);
+
+        // Swap account if negativity changed
+        if (
+            ($transactionBefore->isNegative() && !$transactionAfter->isNegative())
+            || (!$transactionBefore->isNegative() && $transactionAfter->isNegative())
+        ) {
+            $credit = $transactionLine->getCredit();
+            $debit = $transactionLine->getDebit();
+            $transactionLine->setCredit($debit);
+            $transactionLine->setDebit($credit);
+        }
+
+        $transactionLine->setBalance($transactionAfter);
+    }
+
+    private function updateOrderLine(OrderLine $orderLine, Product $product, string $quantity, string $pricePonderation): void
+    {
+        $balance = $product->getPricePerUnit()->multiply($quantity)->multiply($pricePonderation);
+
+        $orderLine->setProduct($product);
+        $orderLine->setQuantity($quantity);
+        $orderLine->setPricePonderation($pricePonderation);
+        $orderLine->setBalance($balance);
+
+        $stockMovement = $orderLine->getStockMovement();
         $stockMovement->setProduct($orderLine->getProduct());
-        $stockMovement->setOrderLine($orderLine);
         $stockMovement->setDelta(bcmul($orderLine->getQuantity(), '-1', 3));
         $stockMovement->setType(StockMovementTypeType::SALE);
     }

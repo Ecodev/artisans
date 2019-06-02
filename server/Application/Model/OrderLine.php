@@ -56,6 +56,13 @@ class OrderLine extends AbstractModel
     private $pricePonderation;
 
     /**
+     * @var StockMovement
+     *
+     * @ORM\OneToOne(targetEntity="StockMovement", mappedBy="orderLine")
+     */
+    private $stockMovement;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -87,7 +94,7 @@ class OrderLine extends AbstractModel
     }
 
     /**
-     * Get related product
+     * Get related product, if it still exists in DB
      *
      * @return null|Product
      */
@@ -99,11 +106,14 @@ class OrderLine extends AbstractModel
     /**
      * Set related product
      *
-     * @param null|Product $product
+     * @param Product $product
      */
-    public function setProduct(?Product $product): void
+    public function setProduct(Product $product): void
     {
         $this->product = $product;
+        $this->setName($product->getName());
+        $this->setUnit($product->getUnit());
+        $this->setVatRate($product->getVatRate());
     }
 
     /**
@@ -122,5 +132,24 @@ class OrderLine extends AbstractModel
     public function getPricePonderation(): string
     {
         return $this->pricePonderation;
+    }
+
+    /**
+     * @return StockMovement
+     */
+    public function getStockMovement(): StockMovement
+    {
+        return $this->stockMovement;
+    }
+
+    /**
+     * Notify the orderLine that it has a new stockMovement
+     * This should only be called by StockMovement::setOrderLine()
+     *
+     * @param StockMovement $stockMovement
+     */
+    public function stockMovementAdded(StockMovement $stockMovement): void
+    {
+        $this->stockMovement = $stockMovement;
     }
 }

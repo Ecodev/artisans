@@ -76,9 +76,9 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      */
     public function getOneById(int $id): ?User
     {
-        $this->getAclFilter()->setEnabled(false);
-        $user = $this->findOneById($id);
-        $this->getAclFilter()->setEnabled(true);
+        $user = $this->getAclFilter()->runWithoutAcl(function () use ($id) {
+            return $this->findOneById($id);
+        });
 
         return $user;
     }
@@ -94,9 +94,9 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      */
     public function getOneByLogin(?string $login): ?User
     {
-        $this->getAclFilter()->setEnabled(false);
-        $user = $this->findOneByLogin($login);
-        $this->getAclFilter()->setEnabled(true);
+        $user = $this->getAclFilter()->runWithoutAcl(function () use ($login) {
+            return $this->findOneByLogin($login);
+        });
 
         return $user;
     }
@@ -115,9 +115,9 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             ->setParameter('status', User::STATUS_ACTIVE)
             ->setParameter('role', User::ROLE_ADMINISTRATOR);
 
-        $this->getAclFilter()->setEnabled(false);
-        $result = $qb->getQuery()->getResult();
-        $this->getAclFilter()->setEnabled(true);
+        $result = $this->getAclFilter()->runWithoutAcl(function () use ($qb) {
+            return $qb->getQuery()->getResult();
+        });
 
         return $result;
     }
@@ -136,9 +136,9 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             $qb->andWhere('account.balance < 0');
         }
 
-        $this->getAclFilter()->setEnabled(false);
-        $result = $qb->getQuery()->getResult();
-        $this->getAclFilter()->setEnabled(true);
+        $result = $this->getAclFilter()->runWithoutAcl(function () use ($qb) {
+            return $qb->getQuery()->getResult();
+        });
 
         return $result;
     }

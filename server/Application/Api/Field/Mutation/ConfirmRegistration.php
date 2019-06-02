@@ -31,16 +31,23 @@ abstract class ConfirmRegistration implements FieldInterface
                 $repository = _em()->getRepository(User::class);
 
                 /** @var User $user */
-                $repository->getAclFilter()->setEnabled(false);
-                $user = $repository->findOneByToken($args['token']);
-                $repository->getAclFilter()->setEnabled(true);
+                $user = $repository->getAclFilter()->runWithoutAcl(function () use ($repository, $args) {
+                    return $repository->findOneByToken($args['token']);
+                });
 
                 if (!$user || !$user->isTokenValid()) {
                     throw new Exception('Cannot confirm registration with an invalid token');
                 }
 
-                // Do it
                 $input = $args['input'];
+
+                $repository->getAclFilter()->runWithoutAcl(function () use ($repository, $input): void {
+                    if ($repository->findOneByLogin($input['login'])) {
+                        throw new Exception('Ce nom d\'utilisateur est déjà attribué et ne peut être utilisé');
+                    }
+                });
+
+                // Do it
                 Helper::hydrate($user, $input);
 
                 // Active the member

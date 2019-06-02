@@ -45,34 +45,34 @@ class Invoicer
             return null;
         }
 
-        $this->accountRepository->getAclFilter()->setEnabled(false);
-        $account = $this->accountRepository->getOrCreate($user);
-
-        $transaction = new Transaction();
-        $transaction->setTransactionDate(Chronos::now());
-        $transaction->setName('Vente');
-        $this->entityManager->persist($transaction);
-
         $order = new Order();
-        $order->setTransaction($transaction);
-        $this->entityManager->persist($order);
 
-        $total = Money::CHF(0);
-        foreach ($lines as $line) {
-            /** @var Product $product */
-            $product = $line['product'];
-            $quantity = $line['quantity'];
-            $pricePonderation = $line['pricePonderation'];
+        $this->accountRepository->getAclFilter()->runWithoutAcl(function () use ($user, $lines, $order): void {
+            $account = $this->accountRepository->getOrCreate($user);
 
-            $balance = $product->getPricePerUnit()->multiply($quantity)->multiply($pricePonderation);
-            $total = $total->add($balance);
+            $transaction = new Transaction();
+            $transaction->setTransactionDate(Chronos::now());
+            $transaction->setName('Vente');
+            $this->entityManager->persist($transaction);
 
-            $this->createOrderLine($order, $product, $balance, $quantity, $pricePonderation);
-        }
+            $order->setTransaction($transaction);
+            $this->entityManager->persist($order);
 
-        $this->createTransactionLine($transaction, $account, $total);
+            $total = Money::CHF(0);
+            foreach ($lines as $line) {
+                /** @var Product $product */
+                $product = $line['product'];
+                $quantity = $line['quantity'];
+                $pricePonderation = $line['pricePonderation'];
 
-        $this->accountRepository->getAclFilter()->setEnabled(true);
+                $balance = $product->getPricePerUnit()->multiply($quantity)->multiply($pricePonderation);
+                $total = $total->add($balance);
+
+                $this->createOrderLine($order, $product, $balance, $quantity, $pricePonderation);
+            }
+
+            $this->createTransactionLine($transaction, $account, $total);
+        });
 
         return $order;
     }

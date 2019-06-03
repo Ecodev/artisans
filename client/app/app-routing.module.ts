@@ -49,7 +49,7 @@ export const routes: Routes = [
                         data: {
                             title: 'Membres',
                             hideFab : true,
-                            contextColumns: ['name', 'email', 'mobilePhone'],
+                            contextColumns: ['name', 'code', 'email', 'mobilePhone'],
                             contextVariables: UserService.getFilters(
                                 [UserRole.administrator, UserRole.member, UserRole.responsible],
                                 [UserStatus.active]),

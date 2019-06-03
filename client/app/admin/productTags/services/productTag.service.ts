@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators } from '@ecodev/natural';
+import { NaturalAbstractModelService, FormValidators, NaturalValidators, FormAsyncValidators } from '@ecodev/natural';
 import { productTagQuery, productTagsQuery, createProductTag, deleteProductTags, updateProductTag } from './productTag.queries';
 import {
     ProductTag,
@@ -48,6 +48,12 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
+        };
+    }
+
+    public getFormAsyncValidators(): FormAsyncValidators {
+        return {
+            name: [NaturalValidators.unique('name', this)],
         };
     }
 

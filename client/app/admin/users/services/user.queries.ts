@@ -64,6 +64,7 @@ export const usersQuery = gql`
             items {
                 id
                 login
+                code
                 name
                 status
                 familyRelationship

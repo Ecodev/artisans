@@ -30,7 +30,7 @@
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="balance">Solde</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="name_readonly">Nom</span>
+                    <span naturalColumnsPickerColumn="code">N° coopérateur</span>
                     <span naturalColumnsPickerColumn="login">Login</span>
                     <span naturalColumnsPickerColumn="age">Âge</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
@@ -62,14 +62,9 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="name_readonly">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="lastName">Nom</th>
-                    <td mat-cell *matCellDef="let element">
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                            <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
-                            <div>{{ element.name }}</div>
-                        </div>
-                    </td>
+                <ng-container matColumnDef="code">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="code">N° coopérateur</th>
+                    <td mat-cell *matCellDef="let element">{{ element.code}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="login">

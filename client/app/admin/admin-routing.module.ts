@@ -36,6 +36,8 @@ import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
 import { ImportComponent } from './import/import.component';
 import { StockMovementsComponent } from './stockMovement/stockMovements/stockMovements.component';
+import { OrderLineComponent } from '../order/order-line/order-line.component';
+import { OrderLineResolver } from '../order/services/order-line.resolver';
 
 const routes: Routes = [
         {
@@ -209,6 +211,22 @@ const routes: Routes = [
                                     width: '600px',
                                     maxWidth: '95vw',
                                     maxHeight: '97vh',
+                                } as MatDialogConfig,
+                            },
+                        },
+                        {
+                            path: 'order-line/:orderLineId',
+                            component: DialogTriggerComponent,
+                            resolve: {
+                                orderLine: OrderLineResolver,
+                            },
+                            data: {
+                                component: OrderLineComponent,
+                                dialogConfig: {
+                                    width: '600px',
+                                    maxWidth: '95vw',
+                                    maxHeight: '97vh',
+                                    autoFocus: false,
                                 } as MatDialogConfig,
                             },
                         },

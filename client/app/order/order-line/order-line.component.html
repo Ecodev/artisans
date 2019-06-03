@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>
+    Modification d'un produit vendu
+</h2>
+<mat-dialog-content>
+
+    <div [formGroup]="form">
+
+        <natural-select [service]="productService"
+                        formControlName="product"
+                        placeholder="Produit"
+                        [showIcon]="false"
+                        [required]="true"
+        ></natural-select>
+
+        <div fxLayout="row">
+
+            <mat-form-field [style.width.px]="90" [style.padding-top.em]="1.34375">
+                <mat-label>Quantité</mat-label>
+                <input matInput type="number" min="0" formControlName="quantity" [required]="true">
+                <div matSuffix *ngIf="form.get('product')?.value.unit">{{ form.get('product')?.value.unit }}</div>
+                <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
+            </mat-form-field>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex>
+                <div class="mat-body no-margin-bottom">&nbsp;à {{ form.get('pricePonderation')?.value | percent}}</div>
+                <mat-slider fxFlex formControlName="pricePonderation" min="0" max="1" step="0.1" value="1"></mat-slider>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+    <button mat-button mat-dialog-close>Fermer</button>
+
+    <button mat-flat-button
+            color="primary"
+            (click)="update(true)"
+            mat-dialog-close
+            [disabled]="form.invalid"
+    >
+        Mettre à jour
+    </button>
+</mat-dialog-actions>

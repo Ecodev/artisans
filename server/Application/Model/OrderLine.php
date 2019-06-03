@@ -51,9 +51,9 @@ class OrderLine extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="decimal", precision=4, scale=2, options={"unsigned" = true})
+     * @ORM\Column(type="decimal", precision=4, scale=2, options={"unsigned" = true, "default" = "1.00"})
      */
-    private $pricePonderation;
+    private $pricePonderation = '1.00';
 
     /**
      * @var StockMovement

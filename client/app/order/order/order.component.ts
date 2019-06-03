@@ -13,7 +13,7 @@ export class OrderComponent implements OnInit {
     public selectedColumns = ['name', 'remarks', 'balance'];
 
     public transaction;
-    public contextVariables;
+    public contextVariables: OrderLinesVariables;
 
     public data;
 
@@ -23,7 +23,7 @@ export class OrderComponent implements OnInit {
 
         this.contextVariables = {
             filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]},
-        } as OrderLinesVariables;
+        };
 
     }
 

@@ -35,10 +35,10 @@ export class DialogTriggerComponent implements OnDestroy {
         const routeData = this.route.snapshot.data as DialogTriggerRoutingData;
 
         // Get data relative to dialog service configuration
-        const config: MatDialogConfig = routeData.dialogConfig;
+        const config: MatDialogConfig<DialogTriggerProvidedData> = routeData.dialogConfig;
 
         // Set data accessible into component instantiated by the dialog service
-        config.data = {activatedRoute: this.route} as DialogTriggerProvidedData;
+        config.data = {activatedRoute: this.route};
 
         this.dialogRef = this.dialog.open(this.route.snapshot.data.component, config);
 

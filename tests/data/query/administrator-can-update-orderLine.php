@@ -32,7 +32,7 @@ return [
                     }
                 }
             }
-        }        ',
+        }',
         'variables' => [
             'input' => [
                 'product' => 3001,

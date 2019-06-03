@@ -4,11 +4,13 @@ import { EmmyModule } from '../shared/modules/emmy.module';
 import { OrderLinesComponent } from './order-lines/order-lines.component';
 import { OrderComponent } from './order/order.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderLineComponent } from './order-line/order-line.component';
 
 const declarations = [
     OrderComponent,
     OrdersComponent,
     OrderLinesComponent,
+    OrderLineComponent,
 ];
 
 @NgModule({
@@ -16,11 +18,12 @@ const declarations = [
     exports: [...declarations],
     imports: [
         CommonModule,
-        EmmyModule
+        EmmyModule,
     ],
     entryComponents: [
-        OrderComponent
-    ]
+        OrderComponent,
+        OrderLineComponent,
+    ],
 })
 export class OrderModule {
 }

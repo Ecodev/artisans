@@ -1,29 +1,38 @@
 import { Injectable } from '@angular/core';
-import { NaturalAbstractModelService } from '@ecodev/natural';
+import { FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { OrderLineInput, OrderLines, OrderLinesVariables } from '../../shared/generated-types';
-import { orderLinesQuery } from './order-lines.queries';
+import {
+    OrderLine,
+    OrderLineInput,
+    OrderLines,
+    OrderLinesVariables,
+    OrderLineVariables,
+    UpdateOrderLine,
+    UpdateOrderLineVariables,
+} from '../../shared/generated-types';
+import { orderLineQuery, orderLinesQuery, updateOrderLine } from './order-lines.queries';
+import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
 })
-export class OrderLineService extends NaturalAbstractModelService<null,
-    null,
+export class OrderLineService extends NaturalAbstractModelService<OrderLine['orderLine'],
+    OrderLineVariables,
     OrderLines['orderLines'],
     OrderLinesVariables,
-    null,
-    any,
-    any,
-    any,
-    any> {
+    never,
+    never,
+    UpdateOrderLine['updateOrderLine'],
+    UpdateOrderLineVariables,
+    never> {
 
     constructor(apollo: Apollo) {
         super(apollo,
             'orderLine',
-            null,
+            orderLineQuery,
             orderLinesQuery,
             null,
-            null,
+            updateOrderLine,
             null);
     }
 
@@ -35,4 +44,11 @@ export class OrderLineService extends NaturalAbstractModelService<null,
         };
     }
 
+    public getFormValidators(): FormValidators {
+        return {
+            product: [Validators.required],
+            quantity: [Validators.required],
+            pricePonderation: [Validators.required],
+        };
+    }
 }

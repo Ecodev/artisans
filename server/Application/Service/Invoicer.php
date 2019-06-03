@@ -39,6 +39,11 @@ class Invoicer
         $this->accountRepository = $this->entityManager->getRepository(Account::class);
     }
 
+    private function getSaleAccount(): Account
+    {
+        return $this->entityManager->getReference(Account::class, AccountRepository::ACCOUNT_ID_FOR_SALE);
+    }
+
     public function createOrder(User $user, array $lines): ?Order
     {
         if (!$lines) {
@@ -77,29 +82,36 @@ class Invoicer
 
     private function createTransactionLine(Transaction $transaction, Account $account, Money $balance): void
     {
-        $saleAccount = $this->entityManager->getReference(Account::class, AccountRepository::ACCOUNT_ID_FOR_SALE);
-
-        if ($balance->isPositive()) {
-            $debit = $account;
-            $credit = $saleAccount;
-        } elseif ($balance->isNegative()) {
-            $debit = $saleAccount;
-            $credit = $account;
-            $balance = $balance->absolute();
-        } else {
-            // Never create a line with 0 balance
-            return;
-        }
-
         $transactionLine = new TransactionLine();
         $this->entityManager->persist($transactionLine);
 
         $transactionLine->setName('Achats');
-        $transactionLine->setDebit($debit);
-        $transactionLine->setCredit($credit);
-        $transactionLine->setBalance($balance);
         $transactionLine->setTransaction($transaction);
         $transactionLine->setTransactionDate(Chronos::now());
+
+        $this->updateTransactionLine($transactionLine, $balance, $account);
+    }
+
+    /**
+     * This will affect accounts correctly depending on the balance
+     *
+     * @param TransactionLine $transactionLine
+     * @param Money $balance
+     * @param Account $account
+     */
+    private function updateTransactionLine(TransactionLine $transactionLine, Money $balance, Account $account): void
+    {
+        if ($balance->isNegative()) {
+            $debit = $this->getSaleAccount();
+            $credit = $account;
+        } else {
+            $debit = $account;
+            $credit = $this->getSaleAccount();
+        }
+
+        $transactionLine->setDebit($debit);
+        $transactionLine->setCredit($credit);
+        $transactionLine->setBalance($balance->absolute());
     }
 
     private function createOrderLine(Order $order, Product $product, string $quantity, string $pricePonderation): OrderLine
@@ -119,28 +131,26 @@ class Invoicer
 
     public function updateOrderLineAndTransactionLine(OrderLine $orderLine, Product $product, string $quantity, string $pricePonderation): void
     {
-        $orderBefore = $orderLine->getBalance();
-        $this->updateOrderLine($orderLine, $product, $quantity, $pricePonderation);
-        $orderAfter = $orderLine->getBalance();
+        $this->accountRepository->getAclFilter()->runWithoutAcl(function () use ($orderLine, $product, $quantity, $pricePonderation): void {
+            $orderBefore = $orderLine->getBalance();
+            $this->updateOrderLine($orderLine, $product, $quantity, $pricePonderation);
+            $orderAfter = $orderLine->getBalance();
 
-        /** @var TransactionLine $transactionLine */
-        $transactionLine = $orderLine->getOrder()->getTransaction()->getTransactionLines()->first();
+            /** @var TransactionLine $transactionLine */
+            $transactionLine = $orderLine->getOrder()->getTransaction()->getTransactionLines()->first();
 
-        $transactionBefore = $transactionLine->getBalance();
-        $transactionAfter = $transactionBefore->subtract($orderBefore)->add($orderAfter);
+            // Be careful if transaction was actually negative (swapped accounts)
+            $transactionBefore = $transactionLine->getBalance();
+            if ($transactionLine->getCredit() === $this->getSaleAccount()) {
+                $account = $transactionLine->getDebit();
+            } else {
+                $account = $transactionLine->getCredit();
+                $transactionBefore = $transactionBefore->negative();
+            }
 
-        // Swap account if negativity changed
-        if (
-            ($transactionBefore->isNegative() && !$transactionAfter->isNegative())
-            || (!$transactionBefore->isNegative() && $transactionAfter->isNegative())
-        ) {
-            $credit = $transactionLine->getCredit();
-            $debit = $transactionLine->getDebit();
-            $transactionLine->setCredit($debit);
-            $transactionLine->setDebit($credit);
-        }
-
-        $transactionLine->setBalance($transactionAfter);
+            $transactionAfter = $transactionBefore->subtract($orderBefore)->add($orderAfter);
+            $this->updateTransactionLine($transactionLine, $transactionAfter, $account);
+        });
     }
 
     private function updateOrderLine(OrderLine $orderLine, Product $product, string $quantity, string $pricePonderation): void

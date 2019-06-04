@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasAutomaticQuantity;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
-use Application\Traits\HasQuantity;
 use Application\Traits\HasRemarks;
 use Application\Traits\HasUnit;
 use Application\Traits\HasVatRate;
@@ -29,7 +29,7 @@ class Product extends AbstractModel
     use HasCode;
     use HasRemarks;
     use HasUnit;
-    use HasQuantity;
+    use HasAutomaticQuantity;
     use HasVatRate;
 
     /**

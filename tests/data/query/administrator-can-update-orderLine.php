@@ -25,8 +25,8 @@ return [
                     }
                 }
                 stockMovement {
-                    quantity
                     delta
+                    quantity
                     product {
                         id
                     }
@@ -35,7 +35,7 @@ return [
         }',
         'variables' => [
             'input' => [
-                'product' => 3001,
+                'product' => 3011,
                 'quantity' => '20',
                 'pricePonderation' => '0.5',
             ],
@@ -45,30 +45,30 @@ return [
         'data' => [
             'updateOrderLine' => [
                 'product' => [
-                    'id' => '3001',
-                    'quantity' => '-8.000',
+                    'id' => '3011',
+                    'quantity' => '-15.000',
                 ],
                 'quantity' => '20.000',
                 'pricePonderation' => '0.50',
-                'balance' => '240.00',
-                'vatPart' => '17.16',
+                'balance' => '125.00',
+                'vatPart' => '0.00',
                 'order' => [
-                    'balance' => '257.40',
-                    'vatPart' => '17.58',
+                    'balance' => '142.40',
+                    'vatPart' => '0.42',
                     'transaction' => [
                         'transactionLines' => [
                             [
-                                'balance' => '257.40',
+                                'balance' => '142.40',
                             ],
                         ],
-                        'balance' => '257.40',
+                        'balance' => '142.40',
                     ],
                 ],
                 'stockMovement' => [
-                    'quantity' => '-8.000',
                     'delta' => '-20.000',
+                    'quantity' => '-12.000',
                     'product' => [
-                        'id' => '3001',
+                        'id' => '3011',
                     ],
                 ],
             ],

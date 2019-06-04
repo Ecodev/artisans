@@ -14,6 +14,7 @@ use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
 use Application\Repository\AccountRepository;
+use Application\Repository\StockMovementRepository;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
 use Money\Money;
@@ -33,10 +34,16 @@ class Invoicer
      */
     private $accountRepository;
 
+    /**
+     * @var StockMovementRepository
+     */
+    private $stockMovementRepository;
+
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->accountRepository = $this->entityManager->getRepository(Account::class);
+        $this->stockMovementRepository = $this->entityManager->getRepository(StockMovement::class);
     }
 
     private function getSaleAccount(): Account
@@ -163,8 +170,10 @@ class Invoicer
         $orderLine->setBalance($balance);
 
         $stockMovement = $orderLine->getStockMovement();
-        $stockMovement->setProduct($orderLine->getProduct());
-        $stockMovement->setDelta(bcmul($orderLine->getQuantity(), '-1', 3));
-        $stockMovement->setType(StockMovementTypeType::SALE);
+        if ($stockMovement) {
+            $stockMovement->setProduct($orderLine->getProduct());
+            $stockMovement->setDelta(bcmul($orderLine->getQuantity(), '-1', 3));
+            $stockMovement->setType(StockMovementTypeType::SALE);
+        }
     }
 }

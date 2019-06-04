@@ -28,7 +28,7 @@ class StockMovementRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = range(18000, 18009);
+        $all = range(18000, 18018);
 
         return [
             ['anonymous', []],

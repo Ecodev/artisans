@@ -89,7 +89,6 @@ class InvoicerTest extends TestCase
                         '27500',
                         '0.077',
                         '1',
-                        '-93.100',
                     ],
                     [
                         'My product 2',
@@ -98,7 +97,6 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0.025',
                         '1.00',
-                        '9.000',
                     ],
                 ],
                 [
@@ -117,7 +115,6 @@ class InvoicerTest extends TestCase
                     'pricePerUnit' => Money::CHF(-10000),
                     'unit' => '',
                     'vatRate' => '0.066',
-                    'quantity' => '300',
                 ],
                 [
                     [
@@ -127,7 +124,6 @@ class InvoicerTest extends TestCase
                         '-1000000',
                         '0.066',
                         '1',
-                        '200.000',
                     ],
                     [
                         'My product 2',
@@ -136,7 +132,6 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0.025',
                         '1.00',
-                        '9.000',
                     ],
                 ],
                 [
@@ -155,7 +150,6 @@ class InvoicerTest extends TestCase
                     'pricePerUnit' => Money::CHF(10000),
                     'unit' => '',
                     'vatRate' => '0.066',
-                    'quantity' => '300',
                 ],
                 [
                     [
@@ -165,7 +159,6 @@ class InvoicerTest extends TestCase
                         '1000000',
                         '0.066',
                         '1',
-                        '200.000',
                     ],
                 ],
                 [
@@ -193,7 +186,6 @@ class InvoicerTest extends TestCase
                             'pricePerUnit' => Money::CHF(0),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
-                            'quantity' => '10',
                         ],
                     ],
                 ],
@@ -205,7 +197,6 @@ class InvoicerTest extends TestCase
                         '0',
                         '0.077',
                         '1.00',
-                        '9.000',
                     ],
                 ],
                 [
@@ -227,7 +218,6 @@ class InvoicerTest extends TestCase
                             'pricePerUnit' => Money::CHF(275),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
-                            'quantity' => '10',
                         ],
                     ],
                     [
@@ -238,7 +228,6 @@ class InvoicerTest extends TestCase
                             'pricePerUnit' => Money::CHF(20000),
                             'unit' => '',
                             'vatRate' => '0.025',
-                            'quantity' => '10',
                         ],
                     ],
                 ],
@@ -250,7 +239,6 @@ class InvoicerTest extends TestCase
                         '853',
                         '0.077',
                         '1.00',
-                        '6.900',
                     ],
                     [
                         'My product 2',
@@ -259,7 +247,6 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0.025',
                         '1.00',
-                        '9.000',
                     ],
                 ],
                 [
@@ -281,7 +268,6 @@ class InvoicerTest extends TestCase
                             'pricePerUnit' => Money::CHF(275),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
-                            'quantity' => '10',
                         ],
                     ],
                     [
@@ -292,7 +278,6 @@ class InvoicerTest extends TestCase
                             'pricePerUnit' => Money::CHF(20000),
                             'unit' => '',
                             'vatRate' => '0.025',
-                            'quantity' => '10',
                         ],
                     ],
                 ],
@@ -304,7 +289,6 @@ class InvoicerTest extends TestCase
                         '256',
                         '0.077',
                         '0.30',
-                        '6.900',
                     ],
                     [
                         'My product 2',
@@ -313,7 +297,6 @@ class InvoicerTest extends TestCase
                         '10000',
                         '0.025',
                         '0.50',
-                        '9.000',
                     ],
                 ],
                 [
@@ -335,7 +318,6 @@ class InvoicerTest extends TestCase
                             'pricePerUnit' => Money::CHF(-10000),
                             'unit' => 'kg',
                             'vatRate' => '0.077',
-                            'quantity' => '10',
                         ],
                     ],
                 ],
@@ -347,7 +329,6 @@ class InvoicerTest extends TestCase
                         '-10000',
                         '0.077',
                         '1.00',
-                        '9.000',
                     ],
                 ],
                 [
@@ -384,7 +365,6 @@ class InvoicerTest extends TestCase
                 $orderLine->getBalance()->getAmount(),
                 $orderLine->getVatRate(),
                 $orderLine->getPricePonderation(),
-                $orderLine->getProduct()->getQuantity(),
             ];
         }
 
@@ -413,7 +393,6 @@ class InvoicerTest extends TestCase
         $product->setPricePerUnit($p['pricePerUnit']);
         $product->setUnit($p['unit']);
         $product->setVatRate($p['vatRate']);
-        $product->setQuantity($p['quantity']);
 
         return $product;
     }

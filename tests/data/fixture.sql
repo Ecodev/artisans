@@ -82,9 +82,9 @@ REPLACE INTO product (id, image_id, quantity, supplier_price, price_per_unit, un
 (3000, 5000, 8, 500, 600, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao', 0),
 (3001, 5001, 12, 2000, 2400, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.', 0),
 (3002, 5002, 14, 500, 600, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air', 0),
-(3003, 5003, 17, 300, 400, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes', 1),
+(3003, 5003, 0, 300, 400, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes', 1),
 (3004, 5004, 50.123, 200, 250, 'kg', '0.025', 'Pommes de terre', 'P5', '', 0),
-(3005, 5005, 21.8, 300, 400, 'kg', '0.025', 'Pommes', 'P6', '', 0),
+(3005, 5005, 26.8, 300, 400, 'kg', '0.025', 'Pommes', 'P6', '', 0),
 (3006, 5006, 5, 300, 400, 'kg', '0.025', 'Poire', 'P7', '', 0),
 (3007, 5007, 7, 800, 1000, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', '', 0),
 (3008, 5008, 12, 1000, 1300, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', '', 0),
@@ -179,18 +179,27 @@ REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quan
 (17003, 1002, 16000, 3005, '2019-04-24', 0.6, 'kg', 240, 0.025, 'Pommes'),
 (17004, 1007, 16001, 3011, '2019-04-25', 2, '', 1000, 0.00, 'Miel de la région'),
 (17005, 1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 240, 0.025, 'Pommes'),
-(17006, 1007, 16001, 3005, '2019-04-25', 5, '', 5000, 0.077, 'Pinot Noir La Coccinelle');
+(17006, 1007, 16001, 3008, '2019-04-25', 5, '', 5000, 0.077, 'Pinot Noir La Coccinelle');
 
 REPLACE INTO stock_movement (id, creator_id, product_id, order_line_id, type, creation_date, delta, quantity) VALUES
-(18000, 1002, 3000, 17000, 'sale', '2019-04-24', -2, 8),
-(18001, 1002, 3002, 17001, 'sale', '2019-04-24', -1, 14),
-(18002, 1002, 3011, 17002, 'sale', '2019-04-24', -1, 7),
-(18003, 1002, 3005, 17003, 'sale', '2019-04-24', -0.6, 19.4),
-(18004, 1001, 3005, NULL, 'delivery', '2019-04-25', 10, 29.4),
-(18005, 1007, 3011, 17004, 'sale', '2019-04-25', -2, 5),
-(18006, 1007, 3005, 17005, 'sale', '2019-04-25', -0.6, 28.8),
-(18007, 1007, 3005, 17006, 'special_sale', '2019-04-25', -5, 23.8),
-(18008, NULL, 3005, NULL, 'loss', '2019-04-25', -2, 21.8),
-(18009, 1001, 3006, NULL, 'loss', '2019-04-25', -10, 5);
+(18000, 1001, 3000, NULL, 'inventory', '2019-01-01', 10, 10),
+(18001, 1001, 3001, NULL, 'inventory', '2019-01-01', 12, 12),
+(18002, 1001, 3002, NULL, 'inventory', '2019-01-01', 15, 15),
+(18003, 1001, 3005, NULL, 'inventory', '2019-01-01', 20, 20),
+(18004, 1001, 3006, NULL, 'inventory', '2019-01-01', 15, 15),
+(18005, 1001, 3007, NULL, 'inventory', '2019-01-01', 7, 7),
+(18006, 1001, 3008, NULL, 'inventory', '2019-01-01', 28.8, 28.8),
+(18007, 1001, 3011, NULL, 'inventory', '2019-01-01', 8, 8),
+(18008, 1001, 3012, NULL, 'inventory', '2019-01-01', 5, 5),
+(18009, 1002, 3000, 17000, 'sale', '2019-04-24', -2, 8),
+(18010, 1002, 3002, 17001, 'sale', '2019-04-24', -1, 14),
+(18011, 1002, 3011, 17002, 'sale', '2019-04-24', -1, 7),
+(18012, 1002, 3005, 17003, 'sale', '2019-04-24', -0.6, 19.4),
+(18013, 1001, 3005, NULL, 'delivery', '2019-04-25', 10, 29.4),
+(18014, 1007, 3011, 17004, 'sale', '2019-04-25', -2, 5),
+(18015, 1007, 3005, 17005, 'sale', '2019-04-25', -0.6, 28.8),
+(18016, 1007, 3008, 17006, 'special_sale', '2019-04-25', -5, 23.8),
+(18017, NULL, 3005, NULL, 'loss', '2019-04-25', -2, 26.8),
+(18018, 1001, 3006, NULL, 'loss', '2019-04-25', -10, 5);
 
 COMMIT;

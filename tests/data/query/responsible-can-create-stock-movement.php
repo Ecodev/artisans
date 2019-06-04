@@ -25,7 +25,7 @@ return [
     [
         'data' => [
             'createStockMovement' => [
-                'delta' => '5',
+                'delta' => '5.000',
                 'quantity' => '13.000',
                 'product' => [
                     'quantity' => '13.000',

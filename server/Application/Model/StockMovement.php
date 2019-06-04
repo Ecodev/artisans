@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasAutomaticQuantity;
 use Application\Traits\HasRemarks;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
@@ -13,11 +14,15 @@ use GraphQL\Doctrine\Annotation as API;
  *
  * It may also be related to an order if applicable.
  *
+ * The quantity is the quantity in stock after the movement happened. It exists only
+ * for convenience to do stats.
+ *
  * @ORM\Entity(repositoryClass="Application\Repository\StockMovementRepository")
  */
 class StockMovement extends AbstractModel
 {
     use HasRemarks;
+    use HasAutomaticQuantity;
 
     /**
      * @var string
@@ -25,13 +30,6 @@ class StockMovement extends AbstractModel
      * @ORM\Column(type="StockMovementType")
      */
     private $type;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=10, scale=3, options={"default" = "0.00"})
-     */
-    private $quantity = '0';
 
     /**
      * @var string
@@ -61,18 +59,6 @@ class StockMovement extends AbstractModel
     private $product;
 
     /**
-     * Quantity in stock after the movement happened
-     *
-     * This exists only for convenience to do stats
-     *
-     * @return string
-     */
-    public function getQuantity(): string
-    {
-        return $this->quantity;
-    }
-
-    /**
      * Delta of stock from previous quantity
      *
      * @return string
@@ -89,7 +75,6 @@ class StockMovement extends AbstractModel
      */
     public function setDelta(string $delta): void
     {
-        $this->applyDelta($this->delta, $delta);
         $this->delta = $delta;
     }
 
@@ -134,19 +119,6 @@ class StockMovement extends AbstractModel
     public function setProduct(Product $product): void
     {
         $this->product = $product;
-        $this->applyDelta('0', $this->delta);
-    }
-
-    /**
-     * @param string $oldDelta
-     * @param string $newDelta
-     */
-    private function applyDelta(string $oldDelta, string $newDelta): void
-    {
-        if ($this->product) {
-            $this->quantity = bcadd(bcsub($this->getProduct()->getQuantity(), $oldDelta, 3), $newDelta, 3);
-            $this->getProduct()->setQuantity($this->quantity);
-        }
     }
 
     /**

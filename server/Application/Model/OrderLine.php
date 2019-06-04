@@ -56,7 +56,7 @@ class OrderLine extends AbstractModel
     private $pricePonderation = '1.00';
 
     /**
-     * @var StockMovement
+     * @var null|StockMovement
      *
      * @ORM\OneToOne(targetEntity="StockMovement", mappedBy="orderLine")
      */
@@ -135,9 +135,11 @@ class OrderLine extends AbstractModel
     }
 
     /**
-     * @return StockMovement
+     * For historical reason very old orderLine may not have a stockMovement
+     *
+     * @return null|StockMovement
      */
-    public function getStockMovement(): StockMovement
+    public function getStockMovement(): ?StockMovement
     {
         return $this->stockMovement;
     }

@@ -27,6 +27,7 @@ trait TestWithTransaction
      */
     public function setUp(): void
     {
+        $this->getEntityManager()->clear();
         $this->getEntityManager()->beginTransaction();
         User::setCurrent(null);
     }
@@ -36,6 +37,7 @@ trait TestWithTransaction
      */
     public function tearDown(): void
     {
+        User::setCurrent(null);
         $this->getEntityManager()->rollback();
         $this->getEntityManager()->clear();
         $this->getEntityManager()->getConnection()->close();

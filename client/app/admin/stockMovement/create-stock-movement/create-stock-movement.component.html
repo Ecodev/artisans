@@ -2,7 +2,7 @@
 <mat-dialog-content>
 
     <natural-select-enum
-            enumName="StockMovementType"
+            enumName="StockMovementTypeForCreate"
             placeholder="Type du mouvement"
             [(ngModel)]="stockMovement.type"
             (selectionChange)="update()"
@@ -10,13 +10,13 @@
 
     <mat-form-field style="width:100%" *ngIf="stockMovement.type !== inventory">
         <mat-label>Quantité du mouvement</mat-label>
-        <input matInput [(ngModel)]="delta" type="number" required="required" step="0.001" min="0" (change)="update()"/>
+        <input matInput [(ngModel)]="delta" type="number" required="required" step="0.001" min="0" oninput="validity.valid||(value='');" (change)="update()"/>
         <div matSuffix>{{ data.product.unit }}</div>
     </mat-form-field>
 
     <mat-form-field style="width:100%" *ngIf="stockMovement.type === inventory">
         <mat-label>Quantité totale en stock actuellement</mat-label>
-        <input matInput [(ngModel)]="quantity" type="number" required="required" step="0.001" min="0" (change)="update()" (keyup)="update()"/>
+        <input matInput [(ngModel)]="quantity" type="number" required="required" step="0.001" min="0" oninput="validity.valid||(value='');" (change)="update()" (keyup)="update()"/>
         <div matSuffix>{{ data.product.unit }}</div>
         <mat-hint>Saisir la quantité <strong>totale</strong> en stock</mat-hint>
     </mat-form-field>

@@ -23,6 +23,9 @@ export const stockMovementsQuery = gql`
         stockMovements(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...stockMovementMeta
+                creator {
+                    ...userMeta
+                }
             }
             pageSize
             pageIndex
@@ -30,7 +33,9 @@ export const stockMovementsQuery = gql`
             totalDelta
         }
     }
-${stockMovementMetaFragment}`;
+    ${stockMovementMetaFragment}
+    ${userMetaFragment}
+`;
 
 export const stockMovementQuery = gql`
     query StockMovement($id: StockMovementID!) {

@@ -11,10 +11,8 @@ export class ProvisionComponent implements OnInit {
 
     public bvrData: BankingInfosVariables;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-        this.bvrData = {
-            user: data.user.id,
-        };
+    constructor(@Inject(MAT_DIALOG_DATA) public data: BankingInfosVariables) {
+        this.bvrData = this.data;
     }
 
     ngOnInit() {

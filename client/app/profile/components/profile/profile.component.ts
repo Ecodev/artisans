@@ -4,8 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { UserService } from '../../../admin/users/services/user.service';
-import { CurrentUserForProfile } from '../../../shared/generated-types';
-import { ConfigService } from '../../../shared/services/config.service';
+import { BankingInfosVariables, CurrentUserForProfile } from '../../../shared/generated-types';
 import { ProvisionComponent } from '../provision/provision.component';
 
 @Component({
@@ -30,14 +29,13 @@ export class ProfileComponent implements OnInit {
     }
 
     public pay(): void {
-        if (!this.viewer || !this.viewer.account) {
+        if (!this.viewer) {
             return;
         }
 
-        const config: MatDialogConfig = {
+        const config: MatDialogConfig<BankingInfosVariables> = {
             data: {
-                balance: Number(this.viewer.account.balance),
-                user: this.viewer,
+                user: this.viewer.id,
             },
         };
 

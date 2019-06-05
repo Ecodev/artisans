@@ -18,7 +18,7 @@
                     <span naturalColumnsPickerColumn="creator">Utilisateur</span>
                     <span naturalColumnsPickerColumn="type">Type</span>
                     <span naturalColumnsPickerColumn="delta">Mouvement</span>
-                    <span naturalColumnsPickerColumn="quantity">Solde</span>
+                    <span naturalColumnsPickerColumn="quantity">Quantité</span>
                     <span naturalColumnsPickerColumn="product">Produit</span>
                     <span naturalColumnsPickerColumn="remarks">Remarques</span>
                 </natural-columns-picker>
@@ -78,7 +78,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="quantity">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Solde</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Quantité</th>
                     <td mat-cell *matCellDef="let element">
                         {{ element.quantity | number }} {{ element.product.unit }}
                     </td>

@@ -8,6 +8,7 @@ use Application\Api\Field\Mutation\ConfirmRegistration;
 use Application\Api\Field\Mutation\CreateOrder;
 use Application\Api\Field\Mutation\CreateStockMovement;
 use Application\Api\Field\Mutation\CreateTransaction;
+use Application\Api\Field\Mutation\DeleteTransactions;
 use Application\Api\Field\Mutation\ImportCamt;
 use Application\Api\Field\Mutation\LeaveFamily;
 use Application\Api\Field\Mutation\Login;
@@ -28,7 +29,6 @@ use Application\Model\Product;
 use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
 use Application\Model\StockMovement;
-use Application\Model\Transaction;
 use Application\Model\TransactionTag;
 use Application\Model\User;
 use Application\Model\UserTag;
@@ -54,7 +54,7 @@ class MutationType extends ObjectType
             CreateStockMovement::build(),
             UpdateOrderLine::build(),
             ImportCamt::build(),
-            Standard::buildMutation(Transaction::class)[2], // Only delete mutation
+            DeleteTransactions::build(),
             Standard::buildMutation(StockMovement::class)[2], // Only delete mutation
         ];
 

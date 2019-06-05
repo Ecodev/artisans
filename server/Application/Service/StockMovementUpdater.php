@@ -39,7 +39,7 @@ class StockMovementUpdater implements EventSubscriber
     }
 
     /**
-     * Records all action on recordable objects
+     * Records all products whose stock may have changed
      *
      * @param OnFlushEventArgs $eventArgs
      */
@@ -68,7 +68,7 @@ class StockMovementUpdater implements EventSubscriber
     }
 
     /**
-     * When everything is finished, we save our activies, if any
+     * When everything is finished, we rewrite the stockMovement history for each products
      *
      * @param PostFlushEventArgs $eventArgs
      */

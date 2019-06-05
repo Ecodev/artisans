@@ -7,8 +7,8 @@ import {
     Selection,
     TypeDateComponent,
     TypeDateConfiguration,
-    TypeHierarchicSelectorConfiguration,
     TypeHierarchicSelectorComponent,
+    TypeHierarchicSelectorConfiguration,
     TypeNaturalSelectComponent,
     TypeNumberComponent,
     TypeNumberConfiguration,
@@ -227,6 +227,22 @@ export class NaturalSearchFacetsService {
         ],
         stockMovements: [
             this.product,
+            {
+                display: 'Mouvement',
+                field: 'delta',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.001,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
+            {
+                display: 'Quantité après mouvement',
+                field: 'quantity',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.001,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
             {
                 display: 'Type',
                 field: 'type',

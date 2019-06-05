@@ -17,22 +17,12 @@ export class ProfileComponent implements OnInit {
 
     public viewer: CurrentUserForProfile['viewer'];
 
-    /**
-     * Install FE config
-     */
-    private config;
-
     constructor(public userService: UserService,
                 private alertService: NaturalAlertService,
                 private route: ActivatedRoute,
                 private apollo: Apollo,
                 private dialog: MatDialog,
-                private configService: ConfigService,
     ) {
-
-        this.configService.get().subscribe(config => {
-            this.config = config;
-        });
     }
 
     ngOnInit() {

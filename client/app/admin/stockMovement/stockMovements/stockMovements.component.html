@@ -15,7 +15,7 @@
             >
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
-                    <span naturalColumnsPickerColumn="creator">Utilisateur</span>
+                    <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="type">Type</span>
                     <span naturalColumnsPickerColumn="delta">Mouvement</span>
                     <span naturalColumnsPickerColumn="quantity">Quantité</span>
@@ -38,12 +38,12 @@
                     <td mat-footer-cell *matFooterCellDef>Totaux</td>
                 </ng-container>
 
-                <ng-container matColumnDef="creator">
+                <ng-container matColumnDef="owner">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header="owner">Utilisateur</th>
                     <td mat-cell *matCellDef="let element">
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <ngx-avatar [name]="element.creator?.name" [size]="36"></ngx-avatar>
-                            <natural-table-button [label]="element.creator?.name" [navigate]="['/admin/user', element.creator?.id]" matTooltip="Éditer"
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
+                            <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
+                            <natural-table-button [label]="element.owner?.name" [navigate]="['/admin/user', element.owner?.id]" matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>

@@ -23,7 +23,7 @@ export const stockMovementsQuery = gql`
         stockMovements(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...stockMovementMeta
-                creator {
+                owner {
                     ...userMeta
                 }
             }

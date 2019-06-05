@@ -181,7 +181,7 @@ REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quan
 (17005, 1007, 16001, 3005, '2019-04-25', 0.6, 'kg', 240, 0.025, 'Pommes'),
 (17006, 1007, 16001, 3008, '2019-04-25', 5, '', 5000, 0.077, 'Pinot Noir La Coccinelle');
 
-REPLACE INTO stock_movement (id, creator_id, product_id, order_line_id, type, creation_date, delta, quantity) VALUES
+REPLACE INTO stock_movement (id, owner_id, product_id, order_line_id, type, creation_date, delta, quantity) VALUES
 (18000, 1001, 3000, NULL, 'inventory', '2019-01-01', 10, 10),
 (18001, 1001, 3001, NULL, 'inventory', '2019-01-01', 12, 12),
 (18002, 1001, 3002, NULL, 'inventory', '2019-01-01', 15, 15),

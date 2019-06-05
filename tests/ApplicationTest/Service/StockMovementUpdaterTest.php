@@ -66,7 +66,7 @@ class StockMovementUpdaterTest extends TestCase
         ]);
 
         /** @var StockMovement $stockMovement */
-        $stockMovement = $this->getEntityManager()->getReference(StockMovement::class, 18013);
+        $stockMovement = $this->getEntityManager()->getReference(StockMovement::class, 18016);
         $stockMovement->setDelta('15.000');
         $this->getEntityManager()->flush();
 

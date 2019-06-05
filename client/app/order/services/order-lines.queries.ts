@@ -34,13 +34,19 @@ export const orderLinesQuery = gql`
                 permissions {
                     ...permissions
                 }
+                owner {
+                    ...userMeta
+                }
             }
             pageSize
             pageIndex
             length
+            totalBalance
+            totalQuantity
         }
     }
 ${permissionsFragment}
+${userMetaFragment}
 ${orderLineMetaFragment}`;
 
 export const orderLineQuery = gql`

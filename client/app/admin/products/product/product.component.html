@@ -218,7 +218,12 @@
         </mat-tab>
 
         <mat-tab label="Ventes" *ngIf="data.model.id">
-            <app-order-lines [persistSearch]="false" [contextVariables]="orderLinesVariables"></app-order-lines>
+            <app-order-lines
+                    [persistSearch]="false"
+                    [contextVariables]="orderLinesVariables"
+                    [contextColumns]="['creationDate', 'quantity', 'owner', 'balance']"
+                    [showTotals]="true"
+            ></app-order-lines>
         </mat-tab>
 
     </mat-tab-group>

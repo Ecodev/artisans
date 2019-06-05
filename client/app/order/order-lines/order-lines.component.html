@@ -14,9 +14,11 @@
                             [multipleGroups]="true"
             >
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="creationDate">Date</span>
                     <span naturalColumnsPickerColumn="quantity">Quantité</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="open" [checked]="false" [hidden]="true">Nom</span>
+                    <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="balance">Montant</span>
                 </natural-columns-picker>
             </natural-search>
@@ -27,6 +29,7 @@
 
                 <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
+                <tr mat-footer-row *matFooterRowDef="selectedColumns"></tr>
 
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
@@ -34,6 +37,24 @@
                         <natural-table-button *ngIf="element.permissions.update" [label]="element.name" [navigate]="['/admin/order/order-line/', element.id]" matTooltip="Éditer"></natural-table-button>
                         <span *ngIf="!element.permissions.update">{{ element.name }}</span>
                     </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="owner">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Utilisateur</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
+                            <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
+                            <natural-table-button [label]="element.owner?.name" [navigate]="['/admin/user', element.owner?.id]" matTooltip="Éditer"
+                            ></natural-table-button>
+                        </div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="creationDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
+                    <td mat-cell *matCellDef="let element">{{ element.creationDate | date: 'd MMM y - HH:mm' }}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
@@ -45,13 +66,17 @@
                             à {{ element.pricePonderation | percent }}
                         </ng-container>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
+                    <td mat-footer-cell *matFooterCellDef>
+                        <span *ngIf="showTotals === true && dataSource?.data.totalQuantity > 0">{{dataSource.data.totalQuantity}}</span>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column>Montant</th>
                     <td mat-cell *matCellDef="let element">{{ element.balance | currency : 'CHF'}}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
+                    <td mat-footer-cell *matFooterCellDef>
+                        <span *ngIf="showTotals === true && dataSource?.data.totalBalance > 0">{{dataSource.data.totalBalance | currency : 'CHF'}}</span>
+                    </td>
                 </ng-container>
 
             </table>

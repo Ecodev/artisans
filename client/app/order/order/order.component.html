@@ -3,7 +3,10 @@
 </h2>
 
 <mat-dialog-content>
-    <app-order-lines [contextVariables]="contextVariables"></app-order-lines>
+    <app-order-lines
+            [contextVariables]="contextVariables"
+            [contextColumns]="['quantity', 'name', 'balance']"
+    ></app-order-lines>
 
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
         <div class="mat-subheading-2">

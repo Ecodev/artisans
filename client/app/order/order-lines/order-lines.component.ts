@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Injector, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
 import { OrderLines, OrderLinesVariables } from '../../shared/generated-types';
@@ -14,6 +14,7 @@ import { OrderLineService } from '../services/order-lines.service';
 export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLines'], OrderLinesVariables> implements OnInit {
 
     @Output() select = new EventEmitter();
+    @Input() showTotals = false;
 
     constructor(route: ActivatedRoute,
                 router: Router,

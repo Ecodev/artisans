@@ -83,7 +83,8 @@ abstract class Helper
         } elseif ($class === OrderLine::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(orderLine1.balance) AS totalBalance');
+                ->addSelect('SUM(orderLine1.balance) AS totalBalance')
+                ->addSelect('SUM(orderLine1.quantity) AS totalQuantity');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === StockMovement::class) {

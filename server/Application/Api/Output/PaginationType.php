@@ -66,6 +66,10 @@ class PaginationType extends ObjectType
                         'type' => _types()->get('Money'),
                         'description' => 'The total balance',
                     ];
+                    $fields['totalQuantity'] = [
+                        'type' => self::string(),
+                        'description' => 'The total quantity',
+                    ];
                 } elseif ($class === StockMovement::class) {
                     $fields['totalDelta'] = [
                         'type' => self::string(),

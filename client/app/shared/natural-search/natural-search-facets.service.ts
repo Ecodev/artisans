@@ -328,6 +328,26 @@ export class NaturalSearchFacetsService {
             this.creationDate,
             this.updateDate,
         ],
+        orderLines: [
+            this.owner,
+            {
+                display: 'Montant',
+                field: 'balance',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.01,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
+            {
+                display: 'Quantité',
+                field: 'quantity',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.01,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
+            this.creationDate,
+        ],
         accounts: [
             this.name,
             {

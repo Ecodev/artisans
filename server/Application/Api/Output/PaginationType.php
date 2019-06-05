@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Output;
 
+use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\StockMovement;
@@ -69,6 +70,11 @@ class PaginationType extends ObjectType
                     $fields['totalDelta'] = [
                         'type' => self::string(),
                         'description' => 'The total delta',
+                    ];
+                } elseif ($class === Order::class) {
+                    $fields['totalBalance'] = [
+                        'type' => _types()->get('Money'),
+                        'description' => 'The total balance',
                     ];
                 }
 

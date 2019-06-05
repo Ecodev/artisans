@@ -6,6 +6,7 @@ namespace Application\Api;
 
 use Application\Acl\Acl;
 use Application\Model\AbstractModel;
+use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\StockMovement;
@@ -89,6 +90,12 @@ abstract class Helper
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
                 ->addSelect('SUM(stockMovement1.delta) AS totalDelta');
+
+            $result = $qb->getQuery()->getResult()[0];
+        } elseif ($class === Order::class) {
+            $qb->resetDQLPart('select')
+                ->resetDQLPart('orderBy')
+                ->addSelect('SUM(order1.balance) AS totalBalance');
 
             $result = $qb->getQuery()->getResult()[0];
         }

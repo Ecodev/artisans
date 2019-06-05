@@ -32,6 +32,7 @@ export const ordersQuery = gql`
             pageSize
             pageIndex
             length
+            totalBalance
         }
     }
 ${orderMetaFragment}`;

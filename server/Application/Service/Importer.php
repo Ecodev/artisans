@@ -118,7 +118,7 @@ class Importer
     {
         $referenceNumber = $detail->getRemittanceInformation()->getStructuredBlock()->getCreditorReferenceInformation()->getRef();
         $user = $this->loadUser($referenceNumber);
-        $userAccount = $user->getAccount();
+        $userAccount = $this->accountRepository->getOrCreate($user);
         $remarks = $this->getRemarks($detail, $referenceNumber);
         $amount = $detail->getAmount()->getAmount();
 

@@ -42,18 +42,13 @@ class ImporterTest extends TestCase
         return $this->extract($importer->import($filename));
     }
 
-    public function testImportMinimal(): void
+    /**
+     * @dataProvider providerImport
+     */
+    public function testImport(string $xml, string $php): void
     {
-        $actual = $this->import('tests/data/importer/minimal.xml');
-        $expected = require 'tests/data/importer/minimal.php';
-
-        self::assertSame($expected, $actual);
-    }
-
-    public function testImport(): void
-    {
-        $actual = $this->import('tests/data/importer/two-transactions.xml');
-        $expected = require 'tests/data/importer/two-transactions.php';
+        $actual = $this->import($xml);
+        $expected = require $php;
 
         self::assertSame($expected, $actual);
     }
@@ -143,5 +138,19 @@ class ImporterTest extends TestCase
         ];
 
         return $result;
+    }
+
+    public function providerImport(): array
+    {
+        // Return all couples of xml/php files
+        $files = [];
+        foreach (glob('tests/data/importer/*.xml') as $xml) {
+            $php = preg_replace('~xml$~', 'php', $xml);
+            if (file_exists($php)) {
+                $files[] = [$xml, $php];
+            }
+        }
+
+        return $files;
     }
 }

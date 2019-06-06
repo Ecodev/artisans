@@ -94,7 +94,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = $this->createMockMessageQueuer();
         $actual = $messageQueuer->queueAllBalance();
 
-        self::assertsame(6, $actual);
+        self::assertsame(5, $actual);
     }
 
     public function testQueueNegativeBalance(): void

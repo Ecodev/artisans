@@ -9,6 +9,7 @@ use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\StockMovement;
 use Application\Model\TransactionLine;
+use Application\Repository\ExportExcelInterface;
 use GraphQL\Type\Definition\ObjectType;
 
 class PaginationType extends ObjectType
@@ -95,6 +96,13 @@ class PaginationType extends ObjectType
                     $fields['totalBalance'] = [
                         'type' => _types()->get('Money'),
                         'description' => 'The total balance',
+                    ];
+                }
+                $repository = _em()->getRepository($class);
+                if ($repository instanceof ExportExcelInterface) {
+                    $fields['excelExport'] = [
+                        'type' => self::nonNull(self::string()),
+                        'description' => 'URL to download filtered Excel listing',
                     ];
                 }
 

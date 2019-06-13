@@ -12,7 +12,10 @@ import {
     TransactionLineVariables,
     TransactionSortingField,
 } from '../../../shared/generated-types';
-import { transactionLineQuery, transactionLinesQuery } from './transaction-line.queries';
+import { transactionLineQuery, transactionLinesQuery, transactionLinesForExportQuery } from './transaction-line.queries';
+import { Observable, Subject} from 'rxjs';
+import { map } from 'rxjs/operators';
+import { NaturalQueryVariablesManager, NaturalUtility } from '@ecodev/natural';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -94,4 +97,15 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
         };
     }
 
+    public getExportLink(qvm: NaturalQueryVariablesManager<TransactionLinesVariables>): Observable<string> {
+
+        return this.apollo.query<any>({
+           query: transactionLinesForExportQuery,
+           variables: qvm.variables.value,
+        }).pipe(map(result => {
+            const plural = NaturalUtility.makePlural(this.name);
+            return result.data[plural].excelExport;
+        }));
+
+    }
 }

@@ -122,13 +122,14 @@ REPLACE INTO transaction (id, creator_id, owner_id, transaction_date, name, rema
 (8005, 1002, NULL, '2019-04-24', 'Vente 1', '', NULL),
 (8006, 1007, NULL, '2019-04-25', 'Vente 2', '', NULL);
 
-REPLACE INTO transaction_tag (id, name) VALUES
-(15000, 'Entretien');
+REPLACE INTO transaction_tag (id, name, color) VALUES
+(15000, 'Entretien', ''),
+(15001, 'Équipement', '#25ca69');
 
 REPLACE INTO transaction_line (id, transaction_id, debit_id, credit_id, transaction_tag_id, balance, transaction_date, is_reconciled, name, remarks) VALUES
 (14000, 8000, 10029, 10042, NULL, 100000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de caisse'),
 (14001, 8000, 10030, 10042, NULL, 2350000, '2019-01-01', 1, 'Solde à nouveau', 'Ouverture de banque'),
-(14002, 8001, 10032, NULL, NULL, 150000, '2019-02-03', 1, 'Achat réfrigérateur', ''),
+(14002, 8001, 10032, NULL, 15001, 150000, '2019-02-03', 1, 'Achat réfrigérateur', ''),
 (14003, 8001, NULL, 10029, NULL, 50000, '2019-02-03', 1, 'Paiement en espèces', ''),
 (14004, 8001, NULL, 10030, NULL, 100000, '2019-02-04', 0, 'Paiement carte Maestro', ''),
 (14005, 8003, 10028, 10902, 15000, 10000, '2019-03-15', 1, 'Remboursement sur le solde', ''),

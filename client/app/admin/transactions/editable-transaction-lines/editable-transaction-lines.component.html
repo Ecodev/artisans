@@ -44,6 +44,7 @@
                 <natural-select [hierarchicSelectorConfig]="accountHierarchicConfig"
                             formControlName="debit"
                             placeholder="Compte débit"
+                            [displayWith]="getAccountLabel"
                             [showIcon]="false"
                 ></natural-select>
             </td>
@@ -56,6 +57,7 @@
                 <natural-select [hierarchicSelectorConfig]="accountHierarchicConfig"
                             formControlName="credit"
                             placeholder="Compte crédit"
+                            [displayWith]="getAccountLabel"
                             [showIcon]="false"
                 >
                     <!--<mat-error *ngIf="form.get('lines')?.at(i).hasError('atLeastOneAccountRequired')">Au moins un compte est requis</mat-error>-->

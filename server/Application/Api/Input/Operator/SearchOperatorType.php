@@ -48,6 +48,7 @@ class SearchOperatorType extends AbstractOperator
         $whitelistedFields = [
             'firstName',
             'lastName',
+            'code',
             'name',
             'locality',
             'email',

@@ -145,7 +145,10 @@
 
                         <mat-form-field fxFlex class="margin-bottom">
                             <mat-label>Nº coopérateur</mat-label>
-                            <input matInput formControlName="code" (change)="update()">
+                            <input matInput
+                                   type="number"
+                                   formControlName="code"
+                                   (change)="update()">
                             <button mat-button
                                     matSuffix
                                     mat-icon-button

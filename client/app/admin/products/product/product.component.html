@@ -131,19 +131,20 @@
                                    required="required"
                                    step="0.01"
                                    formControlName="pricePerUnit"
-                                   (change)="update()"
+                                   (change)="update(); checkPrice();"
                             >
                             <div matSuffix>CHF</div>
                             <button mat-button
                                     matSuffix
                                     mat-icon-button
                                     matTooltip="Utiliser le prix suggéré"
-                                    (click)="form.get('pricePerUnit')?.setValue(calculateSuggestedPricePerUnit()); update()"
+                                    (click)="form.get('pricePerUnit')?.setValue(calculateSuggestedPricePerUnit()); update(); checkPrice();"
                             >
                                 <mat-icon>reply</mat-icon>
                             </button>
                             <mat-error *ngIf="form.get('pricePerUnit')?.hasError('required')">Requis</mat-error>
-                            <mat-hint>Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA
+                            <mat-hint *ngIf="sellingPriceTooLow" class="warn" align="start">Prix de vente inférieur au prix fournisseur!</mat-hint>
+                            <mat-hint align="end">Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA
                                       : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
                         </mat-form-field>
 
@@ -170,7 +171,7 @@
                                    step="0.01"
                                    min="0"
                                    formControlName="supplierPrice"
-                                   (change)="update()"
+                                   (change)="update(); checkPrice();"
                             >
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('supplierPrice')?.hasError('required')">Requis</mat-error>

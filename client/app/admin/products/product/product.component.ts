@@ -61,6 +61,7 @@ export class ProductComponent
     ];
 
     public orderLinesVariables: OrderLinesVariables;
+    public sellingPriceTooLow: boolean;
 
     constructor(alertService: NaturalAlertService,
                 productService: ProductService,
@@ -77,6 +78,7 @@ export class ProductComponent
     ngOnInit(): void {
         super.ngOnInit();
         this.orderLinesVariables = {filter: {groups: [{conditions: [{product: {equal: {value: this.data.model.id}}}]}]}};
+        this.checkPrice();
     }
 
     public newImage(image: CreateImage['createImage']) {
@@ -104,6 +106,14 @@ export class ProductComponent
             this.form.patchValue(product);
         });
 
+    }
+
+    public checkPrice() {
+        const pricePerUnit = this.form.get('pricePerUnit');
+        const supplierPrice = this.form.get('supplierPrice');
+        if (pricePerUnit && supplierPrice) {
+            this.sellingPriceTooLow = +pricePerUnit.value < +supplierPrice.value;
+        }
     }
 
     createStockMovement(): void {

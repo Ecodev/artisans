@@ -10,6 +10,7 @@
 @import 'page-header';
 @import '../app/shared/components/money/money.theme';
 @import '../app/shared/components/file/file.theme';
+@import '../app/admin/products/product/product.theme';
 @import '../app/shared/components/transaction-amount/transaction-amount.theme';
 
 // Include material core (only once !)
@@ -22,6 +23,7 @@
     @include page-header($theme);
     @include money($theme);
     @include file($theme);
+    @include product($theme);
     @include transaction-amount($theme);
     @include rich-text($theme);
 }

@@ -1,0 +1,5 @@
+@mixin product($theme) {
+  .warn {
+    color: mat-color($emmy-warn);
+  }
+}

@@ -143,12 +143,21 @@
                             <input matInput type="url" formControlName="url" (change)="update()">
                         </mat-form-field>
 
-                        <mat-form-field fxFlex>
+                        <mat-form-field fxFlex class="margin-bottom">
                             <mat-label>Nº coopérateur</mat-label>
                             <input matInput formControlName="code" (change)="update()">
+                            <button mat-button
+                                    matSuffix
+                                    mat-icon-button
+                                    matToolTip="Utiliser le code suggéré"
+                                    (click)="form.get('code')?.setValue(this.nextCodeAvailable); update()"
+                            >
+                                <mat-icon>reply</mat-icon>
+                            </button>
                             <mat-error *ngIf="form.get('code')?.hasError('duplicateValue')">
                                 Ce code est déjà attribué à un coopérateur
                             </mat-error>
+                            <mat-hint>Prochain code disponible: {{ nextCodeAvailable }}</mat-hint>
                         </mat-form-field>
 
                         <mat-form-field fxFlex>

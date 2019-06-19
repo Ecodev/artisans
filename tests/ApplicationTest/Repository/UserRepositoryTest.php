@@ -79,4 +79,10 @@ class UserRepositoryTest extends AbstractRepositoryTest
         $actual = $this->repository->getAllToQueueBalanceMessage(true);
         self::assertCount(0, $actual);
     }
+
+    public function testGetNextCode(): void
+    {
+        $next = $this->repository->getNextCodeAvailable();
+        self::assertSame(1, $next);
+    }
 }

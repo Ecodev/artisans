@@ -171,4 +171,18 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
 
         return $qb->getQuery()->getResult();
     }
+
+    /**
+     * Return the next available User code
+     *
+     * @return int
+     */
+    public function getNextCodeAvailable(): int
+    {
+        $qb = _em()->getConnection()->createQueryBuilder()
+            ->select('IFNULL(MAX(u.code) + 1, 1)')
+            ->from('user', 'u');
+
+        return (int) $qb->execute()->fetchColumn();
+    }
 }

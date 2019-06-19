@@ -37,6 +37,7 @@ export class UserComponent
 
     public transactionLinesVariables;
     public familyVariables;
+    public nextCodeAvailable: number;
 
     constructor(alertService: NaturalAlertService,
                 private userService: UserService,
@@ -64,6 +65,10 @@ export class UserComponent
 
         });
 
+        this.userService.getNextCodeAvailable().subscribe(code => {
+            this.nextCodeAvailable = code;
+        });
+
     }
 
     public getTransactionQueryVariables(): TransactionLinesVariables {
@@ -88,5 +93,4 @@ export class UserComponent
             sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
         };
     }
-
 }

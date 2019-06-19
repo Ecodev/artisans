@@ -9,10 +9,10 @@ use Application\DBAL\Types\BillingTypeType;
 use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
-use Application\Traits\HasCode;
 use Application\Traits\HasDoorAccess;
 use Application\Traits\HasIban;
 use Application\Traits\HasInternalRemarks;
+use Application\Traits\HasNumericCode;
 use Application\Traits\HasRemarks;
 use Application\Traits\HasUrl;
 use Application\Utility;
@@ -54,7 +54,7 @@ class User extends AbstractModel
     use HasInternalRemarks;
     use HasAddress;
     use HasIban;
-    use HasCode;
+    use HasNumericCode;
     use HasUrl;
 
     /**

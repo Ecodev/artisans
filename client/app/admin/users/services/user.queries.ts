@@ -180,6 +180,12 @@ export const currentUserForProfileQuery = gql`
     ${userMetaFragment}
 `;
 
+export const nextCodeAvailableQuery = gql`
+    query NextUserCode {
+        nextUserCode
+    }
+`;
+
 export const unregisterMutation = gql`
     mutation Unregister($id: UserID!) {
         unregister(id: $id)

@@ -15,6 +15,7 @@ import {
 import {
     createUser,
     currentUserForProfileQuery,
+    nextCodeAvailableQuery,
     leaveFamilyMutation,
     loginMutation,
     logoutMutation,
@@ -34,7 +35,7 @@ import {
     LogicalOperator,
     Login,
     LoginVariables,
-    Logout,
+    Logout, NextUserCode,
     Relationship,
     Sex,
     SortingOrder,
@@ -290,6 +291,16 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             this.cacheViewer(result.data.viewer);
             return result.data.viewer;
         }));
+    }
+
+    public getNextCodeAvailable(): Observable<number> {
+
+        return this.apollo.query<NextUserCode>({
+            query: nextCodeAvailableQuery,
+        }).pipe(map(result => {
+            return result.data.nextUserCode;
+        }));
+
     }
 
     /**

@@ -44,7 +44,8 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->addRole(User::ROLE_PARTNER, User::ROLE_ANONYMOUS);
         $this->addRole(User::ROLE_INDIVIDUAL, User::ROLE_PARTNER);
         $this->addRole(User::ROLE_MEMBER, User::ROLE_INDIVIDUAL);
-        $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_MEMBER);
+        $this->addRole(User::ROLE_PRODUCT, User::ROLE_MEMBER);
+        $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_PRODUCT);
         $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_RESPONSIBLE);
 
         $product = new ModelResource(Product::class);
@@ -98,12 +99,14 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_MEMBER, [$user], ['create']);
         $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsOwner());
 
+        $this->allow(User::ROLE_PRODUCT, [$product, $productMetadata, $productTag, $image], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_PRODUCT, [$stockMovement], ['read']);
+
         $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $transactionTag], ['read']);
         $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$user], ['update']);
         $this->allow(User::ROLE_RESPONSIBLE, [$userTag], ['create', 'update', 'delete']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$product, $productMetadata, $productTag, $image], ['create', 'update', 'delete']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$stockMovement], ['create', 'read', 'update', 'delete']);
+        $this->allow(User::ROLE_RESPONSIBLE, [$stockMovement], ['create', 'update', 'delete']);
 
         $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $transactionTag], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);

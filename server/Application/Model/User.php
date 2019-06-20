@@ -41,6 +41,7 @@ class User extends AbstractModel
     const ROLE_PARTNER = 'partner';
     const ROLE_INDIVIDUAL = 'individual';
     const ROLE_MEMBER = 'member';
+    const ROLE_PRODUCT = 'product';
     const ROLE_RESPONSIBLE = 'responsible';
     const ROLE_ADMINISTRATOR = 'administrator';
 
@@ -416,6 +417,7 @@ class User extends AbstractModel
             self::ROLE_ANONYMOUS,
             self::ROLE_INDIVIDUAL,
             self::ROLE_MEMBER,
+            self::ROLE_PRODUCT,
             self::ROLE_RESPONSIBLE,
             self::ROLE_ADMINISTRATOR,
         ];

@@ -128,6 +128,20 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         if (!user) {
             return false;
         }
+        return [UserRole.product, UserRole.responsible, UserRole.administrator].includes(user.role);
+    }
+
+    public static canAccessAccounting(user: CurrentUserForProfile['viewer']): boolean {
+        if (!user) {
+            return false;
+        }
+        return [UserRole.responsible, UserRole.administrator].includes(user.role);
+    }
+
+    public static canAccessUsers(user: CurrentUserForProfile['viewer']): boolean {
+        if (!user) {
+            return false;
+        }
         return [UserRole.responsible, UserRole.administrator].includes(user.role);
     }
 
@@ -386,7 +400,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             return false;
         }
 
-        const isMember = [UserRole.member, UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
+        const isMember = [UserRole.member, UserRole.product, UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
 
         return !isMember && !this.canLeaveFamily(user);
     }

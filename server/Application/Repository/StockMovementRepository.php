@@ -21,7 +21,7 @@ class StockMovementRepository extends AbstractRepository implements LimitedAcces
             return '-1';
         }
 
-        if (in_array($user->getRole(), [User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR], true)) {
+        if (in_array($user->getRole(), [User::ROLE_PRODUCT, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR], true)) {
             return $this->getAllIdsQuery();
         }
 

@@ -51,7 +51,7 @@ export const routes: Routes = [
                             hideFab : true,
                             contextColumns: ['name', 'code', 'email', 'mobilePhone'],
                             contextVariables: UserService.getFilters(
-                                [UserRole.administrator, UserRole.member, UserRole.responsible],
+                                [UserRole.administrator, UserRole.member, UserRole.product, UserRole.responsible],
                                 [UserStatus.active]),
                         },
                     },

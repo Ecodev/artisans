@@ -20,6 +20,7 @@ class AgeTest extends AbstractSorting
             1000,
             1007,
             1001,
+            1012,
             1005,
             1006,
             1008,

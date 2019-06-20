@@ -14,6 +14,7 @@ class UserRoleType extends AbstractEnumType
             User::ROLE_PARTNER,
             User::ROLE_INDIVIDUAL,
             User::ROLE_MEMBER,
+            User::ROLE_PRODUCT,
             User::ROLE_RESPONSIBLE,
             User::ROLE_ADMINISTRATOR,
         ];

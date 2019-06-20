@@ -7,6 +7,7 @@ import { OrderResolver } from '../order/services/order.resolver';
 import { DialogTriggerComponent } from '../shared/components/modal-trigger/dialog-trigger.component';
 import { UserRole, UserStatus } from '../shared/generated-types';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
+import { AccountingGuard } from '../shared/guards/accounting.guard';
 import { AccountComponent } from './accounts/account/account.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountResolver } from './accounts/services/account.resolver';
@@ -234,6 +235,7 @@ const routes: Routes = [
                 },
                 {
                     path: 'transaction',
+                    canActivate: [AccountingGuard],
                     children: [
                         {
                             path: 'new',
@@ -255,16 +257,19 @@ const routes: Routes = [
                 {
                     path: 'transaction-line', // Separated from other similar routes because of
                                               // https://github.com/angular/angular/issues/27674
+                    canActivate: [AccountingGuard],
                     component: TransactionLinesComponent,
                     data: {title: 'Écritures'},
                 },
                 {
                     path: 'account', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    canActivate: [AccountingGuard],
                     component: AccountsComponent,
                     data: {title: 'Comptes'},
                 },
                 {
                     path: 'account',
+                    canActivate: [AccountingGuard],
                     children: [
                         {
                             path: 'new',
@@ -284,11 +289,13 @@ const routes: Routes = [
                 },
                 {
                     path: 'expense-claim', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    canActivate: [AccountingGuard],
                     component: ExpenseClaimsComponent,
                     data: {title: 'Notes de frais'},
                 },
                 {
                     path: 'expense-claim',
+                    canActivate: [AccountingGuard],
                     children: [
                         {
                             path: 'new',
@@ -308,17 +315,20 @@ const routes: Routes = [
                 },
                 {
                     path: 'import',
+                    canActivate: [AccountingGuard],
                     component: ImportComponent,
                     data: {title: 'Import des virements BVR'},
                 },
                 {
                     // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     path: 'transaction-tag',
+                    canActivate: [AccountingGuard],
                     component: TransactionTagsComponent,
                     data: {title: 'Tags de transactions'},
                 },
                 {
                     path: 'transaction-tag',
+                    canActivate: [AccountingGuard],
                     children: [
                         {
                             path: 'new',

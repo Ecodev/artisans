@@ -14,6 +14,7 @@ class UserRoleType extends AbstractEnumType
             User::ROLE_PARTNER => 'Uniquement pour voir users (spécial)',
             User::ROLE_INDIVIDUAL => 'Individu',
             User::ROLE_MEMBER => 'Membre',
+            User::ROLE_PRODUCT => 'Gestion des produits',
             User::ROLE_RESPONSIBLE => 'Responsable de secteur',
             User::ROLE_ADMINISTRATOR => 'Administrateur',
         ];

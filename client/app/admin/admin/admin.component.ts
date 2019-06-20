@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../users/services/user.service';
 
 @Component({
     selector: 'app-admin',
@@ -7,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-    constructor() {
+    public viewer;
+
+    constructor(private route: ActivatedRoute) {
+
     }
 
     ngOnInit() {
+        this.viewer = this.route.snapshot.data.viewer.model;
+    }
+
+    public canAccessAccounting() {
+        return UserService.canAccessAccounting(this.viewer);
+    }
+
+    public canAccessUsers() {
+        return UserService.canAccessUsers(this.viewer);
     }
 
 }

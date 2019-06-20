@@ -3,7 +3,7 @@
         <div overflow class="margin">
             <mat-accordion displayMode="flat">
 
-                <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel class="mat-elevation-z0" *ngIf="canAccessUsers()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>Utilisateurs</mat-panel-title>
                     </mat-expansion-panel-header>
@@ -17,7 +17,7 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
                     <mat-expansion-panel-header>
                         <mat-panel-title>Produits</mat-panel-title>
                     </mat-expansion-panel-header>
@@ -28,7 +28,7 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                <mat-expansion-panel class="mat-elevation-z0" *ngIf="canAccessAccounting()">
                     <mat-expansion-panel-header>
                         <mat-panel-title>Comptabilité</mat-panel-title>
                     </mat-expansion-panel-header>

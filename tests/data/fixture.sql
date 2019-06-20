@@ -50,7 +50,8 @@ REPLACE INTO account (id, parent_id, owner_id, type, code, iban, name) VALUES
 (10910, 10038, 1010, 'liability', '20300010', '', 'Voilier Member'),
 (10911, 10038, 1006, 'liability', '20300006', '', 'Archived Member'),
 (10912, 10038, 1005, 'liability', '20300005', '', 'Inactive Member'),
-(10913, 10038, 1003, 'liability', '20300003', '', 'Booking Only');
+(10913, 10038, 1003, 'liability', '20300003', '', 'Booking Only'),
+(10914, 10038, 1012, 'liability', '20300004', '', 'Product Manager');
 
 REPLACE INTO product_tag (id, name) VALUES
 (6000, 'Fruits & Légumes'),

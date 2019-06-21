@@ -60,6 +60,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             unit: '',
             margin: '0.20',
             remarks: '',
+            internalRemarks: '',
             isActive: true,
             verificationDate: null,
             image: null,

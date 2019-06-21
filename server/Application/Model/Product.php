@@ -7,6 +7,7 @@ namespace Application\Model;
 use Application\Traits\HasAutomaticQuantity;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
+use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasName;
 use Application\Traits\HasRemarks;
 use Application\Traits\HasUnit;
@@ -28,6 +29,7 @@ class Product extends AbstractModel
     use HasDescription;
     use HasCode;
     use HasRemarks;
+    use HasInternalRemarks;
     use HasUnit;
     use HasAutomaticQuantity;
     use HasVatRate;

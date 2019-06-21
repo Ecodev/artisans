@@ -23,6 +23,7 @@ export const productMetaFragment = gql`
         supplierReference
         code
         remarks
+        internalRemarks
         image {
             id
         }

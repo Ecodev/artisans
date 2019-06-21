@@ -148,6 +148,16 @@
                                       : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
                         </mat-form-field>
 
+                        <mat-form-field class="margin-top">
+                            <mat-label>Remarques internes</mat-label>
+                            <textarea matInput
+                                      formControlName="internalRemarks"
+                                      (change)="update()"
+                                      matTextareaAutosize
+                                      [matAutosizeMaxRows]="3"
+                            ></textarea>
+                        </mat-form-field>
+
                     </div>
                 </div>
 

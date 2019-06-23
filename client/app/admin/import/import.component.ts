@@ -4,7 +4,7 @@ import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ImportCamt, ImportCamtVariables } from '../../shared/generated-types';
-import { NaturalAlertService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
+import { formatIsoDate, NaturalAlertService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 
 @Component({
     selector: 'app-import',
@@ -41,6 +41,9 @@ export class ImportComponent implements OnInit {
             mutation ImportCamt($file: Upload!) {
                 importCamt(file: $file) {
                     id
+                    transactionLines {
+                        id
+                    }
                 }
             }
         `;
@@ -52,21 +55,31 @@ export class ImportComponent implements OnInit {
             },
         }).subscribe((result) => {
                 const naturalSearchSelections: NaturalSearchSelections = [
-                    result.data.importCamt.map(transaction => {
-                        return {
-                            field: 'transaction',
+                    [
+                        {
+                            field: 'search',
                             condition: {
-                                have: {
-                                    values: [transaction.id],
+                                like: {
+                                    value: 'Versement BVR',
                                 },
                             },
-                        };
-                    }),
+                        },
+                        {
+                            field: 'creationDate',
+                            condition: {
+                                greaterOrEqual: {
+                                    value: formatIsoDate(new Date()) || '',
+                                },
+                            },
+                        },
+                    ],
                 ];
 
                 const ns = JSON.stringify(toUrl(naturalSearchSelections));
                 this.importing = false;
-                this.alertService.info(result.data.importCamt.length + ' transactions importées', 5000);
+
+                const total = result.data.importCamt.reduce((count, transaction) => count + transaction.transactionLines.length, 0);
+                this.alertService.info(total + ' écritures importées', 5000);
                 this.router.navigate(['/admin/transaction-line', {ns}]);
             },
             (error) => {

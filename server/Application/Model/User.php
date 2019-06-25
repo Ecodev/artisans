@@ -32,7 +32,8 @@ use GraphQL\Doctrine\Annotation as API;
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
  * @API\Sorting({
- *     "Application\Api\Input\Sorting\Age"
+ *     "Application\Api\Input\Sorting\Age",
+ *     "Application\Api\Input\Sorting\Balance",
  * })
  */
 class User extends AbstractModel

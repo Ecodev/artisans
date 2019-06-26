@@ -97,7 +97,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres actifs',
-                                contextVariables: UserService.getFilters([UserRole.member], [UserStatus.active]),
+                                contextVariables: UserService.getFilters([UserRole.member, UserRole.product], [UserStatus.active], true),
                             },
                         },
                         {

@@ -107,7 +107,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
     /**
      * Return filters for users for given roles and statuses
      */
-    public static getFilters(roles: UserRole[], statuses: UserStatus[] | null): UsersVariables {
+    public static getFilters(roles: UserRole[], statuses: UserStatus[] | null, withCode: boolean = false): UsersVariables {
         return {
             filter: {
                 groups: [
@@ -116,6 +116,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                             {
                                 role: roles && roles.length ? {in: {values: roles}} : null,
                                 status: statuses ? {in: {values: statuses}} : null,
+                                code: withCode ? {null: {not: true}} : null,
                             },
                         ],
                     },

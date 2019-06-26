@@ -83,6 +83,6 @@ class UserRepositoryTest extends AbstractRepositoryTest
     public function testGetNextCode(): void
     {
         $next = $this->repository->getNextCodeAvailable();
-        self::assertSame(1, $next);
+        self::assertSame(10, $next);
     }
 }

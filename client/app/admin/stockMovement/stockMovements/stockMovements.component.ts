@@ -16,6 +16,16 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 export class StockMovementsComponent extends NaturalAbstractList<StockMovements['stockMovements'], StockMovementsVariables>
     implements OnInit {
 
+    public initialColumns = [
+        'creationDate',
+        'owner',
+        'type',
+        'delta',
+        'quantity',
+        'product',
+        'remarks',
+    ];
+
     constructor(route: ActivatedRoute,
                 router: Router,
                 stockMovementService: StockMovementService,

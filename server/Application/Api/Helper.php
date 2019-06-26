@@ -90,7 +90,11 @@ abstract class Helper
         } elseif ($class === StockMovement::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(stockMovement1.delta) AS totalDelta');
+                ->addSelect('SUM(stockMovement1.delta) AS totalDelta')
+                ->addSelect('SUM(IF(FIND_IN_SET(stockMovement1.type, \'sale,special_sale\') > 0, stockMovement1.delta, 0)) as totalSale')
+                ->addSelect('SUM(IF(stockMovement1.type = \'loss\', stockMovement1.delta, 0)) as totalLoss')
+                ->addSelect('SUM(IF(stockMovement1.type = \'delivery\', stockMovement1.delta, 0)) as totalDelivery')
+                ->addSelect('SUM(IF(stockMovement1.type = \'inventory\', stockMovement1.delta, 0)) as totalInventory');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === Order::class) {

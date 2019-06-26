@@ -31,6 +31,10 @@ export const stockMovementsQuery = gql`
             pageIndex
             length
             totalDelta
+            totalSale
+            totalLoss
+            totalDelivery
+            totalInventory
         }
     }
     ${stockMovementMetaFragment}

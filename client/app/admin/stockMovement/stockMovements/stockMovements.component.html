@@ -18,7 +18,11 @@
                     <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="type">Type</span>
                     <span naturalColumnsPickerColumn="delta">Mouvement</span>
-                    <span naturalColumnsPickerColumn="quantity">Quantité</span>
+                    <span naturalColumnsPickerColumn="sales">Ventes</span>
+                    <span naturalColumnsPickerColumn="loss">Pertes</span>
+                    <span naturalColumnsPickerColumn="inventory">Inventaire</span>
+                    <span naturalColumnsPickerColumn="delivery">Livraisons</span>
+                    <span naturalColumnsPickerColumn="quantity">Solde</span>
                     <span naturalColumnsPickerColumn="product">Produit</span>
                     <span naturalColumnsPickerColumn="remarks">Remarques</span>
                 </natural-columns-picker>
@@ -71,8 +75,56 @@
                     </td>
                 </ng-container>
 
+                <ng-container matColumnDef="sales">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Ventes</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.type == 'sale' || element.type == 'special_sale'">
+                            {{ element.delta | number }} {{ element.product.unit }}
+                        </span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        {{ dataSource.data.totalSale | number }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="loss">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Pertes</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.type == 'loss'">
+                            {{ element.delta | number }} {{ element.product.unit }}
+                        </span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        {{ dataSource.data.totalLoss | number }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="inventory">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Inventaire</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.type == 'inventory'">
+                            {{ element.delta | number }} {{ element.product.unit }}
+                        </span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        {{ dataSource.data.totalInventory | number }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delivery">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Livraisons</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span *ngIf="element.type == 'delivery'">
+                            {{ element.delta | number }} {{ element.product.unit }}
+                        </span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef app-align-right>
+                        {{ dataSource.data.totalDelivery | number }}
+                    </td>
+                </ng-container>
+
                 <ng-container matColumnDef="quantity">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Quantité</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-4em-column>Solde</th>
                     <td mat-cell *matCellDef="let element">
                         {{ element.quantity | number }} {{ element.product.unit }}
                     </td>

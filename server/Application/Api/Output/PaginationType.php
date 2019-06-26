@@ -75,6 +75,22 @@ class PaginationType extends ObjectType
                         'type' => self::string(),
                         'description' => 'The total delta',
                     ];
+                    $fields['totalSale'] = [
+                        'type' => self::string(),
+                        'description' => 'The total delta for normal and special sales',
+                    ];
+                    $fields['totalLoss'] = [
+                        'type' => self::string(),
+                        'description' => 'The total delta for losses',
+                    ];
+                    $fields['totalDelivery'] = [
+                        'type' => self::string(),
+                        'description' => 'The total delta for deliveries',
+                    ];
+                    $fields['totalInventory'] = [
+                        'type' => self::string(),
+                        'description' => 'The total delta for inventories',
+                    ];
                 } elseif ($class === Order::class) {
                     $fields['totalBalance'] = [
                         'type' => _types()->get('Money'),

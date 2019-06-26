@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Input\Sorting;
 
+use Application\Model\Account;
 use Application\Model\User;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\QueryBuilder;
@@ -21,9 +22,15 @@ class Balance implements SortingInterface
 
     public function __invoke(UniqueNameFactory $uniqueNameFactory, ClassMetadata $metadata, QueryBuilder $queryBuilder, string $alias, string $order): void
     {
-        $account = $uniqueNameFactory->createAliasName(User::class);
-        $queryBuilder->leftJoin($alias . '.accounts', $account);
+        $account = $uniqueNameFactory->createAliasName(Account::class);
+        $owner = $uniqueNameFactory->createAliasName(User::class);
+        $accountOwner = $uniqueNameFactory->createAliasName(Account::class);
 
+        $queryBuilder->leftJoin($alias . '.accounts', $account);
+        $queryBuilder->leftJoin($alias . '.owner', $owner);
+        $queryBuilder->leftJoin($owner . '.accounts', $accountOwner);
+
+        $queryBuilder->addOrderBy($accountOwner . '.balance', $order);
         $queryBuilder->addOrderBy($account . '.balance', $order);
     }
 }

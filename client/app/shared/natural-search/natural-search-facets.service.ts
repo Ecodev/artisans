@@ -236,7 +236,7 @@ export class NaturalSearchFacetsService {
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
             {
-                display: 'Quantité après mouvement',
+                display: 'Solde',
                 field: 'quantity',
                 component: TypeNumberComponent,
                 configuration: {

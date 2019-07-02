@@ -85,9 +85,9 @@ export class NaturalSearchFacetsService {
     };
 
     private readonly productIsActive: FlagFacet = {
-        display: 'Active',
+        display: 'Actif',
         field: 'isActive',
-        condition: {equals: {value: true}} as ProductFilterGroupCondition,
+        condition: {equal: {value: true}} as ProductFilterGroupCondition,
     };
 
     private readonly transaction: DropdownFacet<TypeSelectNaturalConfiguration> = {

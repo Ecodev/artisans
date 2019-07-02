@@ -90,6 +90,13 @@ export class NaturalSearchFacetsService {
         condition: {equal: {value: true}} as ProductFilterGroupCondition,
     };
 
+    private readonly userWithoutTag: FlagFacet = {
+        display: 'Sans tag',
+        field: 'userTags',
+        name: 'userNoTags',
+        condition: {empty: {}} as UserFilterGroupCondition,
+    };
+
     private readonly transaction: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Transaction',
         field: 'transaction',
@@ -179,6 +186,7 @@ export class NaturalSearchFacetsService {
                 },
             } as DropdownFacet<TypeSelectConfiguration>,
             this.userTags,
+            this.userWithoutTag,
             this.userWelcomeSession,
             {
                 display: 'Chef de famille',

@@ -171,6 +171,9 @@ input[type=number] {
     }
 }
 
+app-products natural-table-button.inactive span {
+    opacity: 0.38;
+}
 
 [app-date-column] {
     width: 14em;

@@ -49,7 +49,11 @@
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <natural-table-button [label]="element.name" [navigate]="['/admin/product', element.id]" matTooltip="Éditer"
+                        <natural-table-button
+                                [label]="element.name"
+                                [navigate]="['/admin/product', element.id]"
+                                matTooltip="Éditer"
+                                [class]="!element.isActive ? 'inactive' : ''"
                         ></natural-table-button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef>Totaux</td>

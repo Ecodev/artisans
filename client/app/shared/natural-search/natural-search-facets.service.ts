@@ -21,7 +21,7 @@ import {
 import { ProductService } from '../../admin/products/services/product.service';
 import { TransactionService } from '../../admin/transactions/services/transaction.service';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
-import { UserFilterGroupCondition } from '../generated-types';
+import { UserFilterGroupCondition, ProductFilterGroupCondition } from '../generated-types';
 import { ProductTagService } from '../../admin/productTags/services/productTag.service';
 import { AccountService } from '../../admin/accounts/services/account.service';
 import { AccountHierarchicConfiguration } from '../../admin/AccountHierarchicConfiguration';
@@ -82,6 +82,12 @@ export class NaturalSearchFacetsService {
         display: 'N\'a pas été accueilli',
         field: 'welcomeSessionDate',
         condition: {null: {}} as UserFilterGroupCondition,
+    };
+
+    private readonly productIsActive: FlagFacet = {
+        display: 'Active',
+        field: 'isActive',
+        condition: {equals: {value: true}} as ProductFilterGroupCondition,
     };
 
     private readonly transaction: DropdownFacet<TypeSelectNaturalConfiguration> = {
@@ -257,6 +263,7 @@ export class NaturalSearchFacetsService {
         products: [
             this.name,
             this.code,
+            this.productIsActive,
             this.productTags,
             {
                 display: 'Prix de vente',

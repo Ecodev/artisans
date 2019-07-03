@@ -23,6 +23,11 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
     private $totalBalanceCache = [];
 
     /**
+     * @var null|int
+     */
+    private $maxCode;
+
+    /**
      * Clear all caches
      */
     public function clearCache(): void
@@ -105,9 +110,11 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
             $account->setType(AccountTypeType::LIABILITY);
             $account->setName($user->getName());
 
-            $maxCode = $this->getEntityManager()->getConnection()->fetchColumn('SELECT MAX(code) FROM account WHERE parent_id = ' . self::PARENT_ACCOUNT_ID_FOR_USER);
-            $newCode = ++$maxCode;
-            $account->setCode((string) $newCode);
+            if (!$this->maxCode) {
+                $this->maxCode = $this->getEntityManager()->getConnection()->fetchColumn('SELECT MAX(code) FROM account WHERE parent_id = ' . self::PARENT_ACCOUNT_ID_FOR_USER);
+            }
+            $newCode = ++$this->maxCode;
+            $account->setCode($newCode);
 
             $parent = $this->getOneById(self::PARENT_ACCOUNT_ID_FOR_USER);
             $account->setParent($parent);

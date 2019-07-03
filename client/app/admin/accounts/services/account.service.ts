@@ -51,7 +51,7 @@ export class AccountService extends NaturalAbstractModelService<Account['account
             name: '',
             iban: '',
             type: AccountType.expense,
-            code: '',
+            code: null,
             owner: null,
         };
     }

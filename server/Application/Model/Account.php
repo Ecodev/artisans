@@ -7,6 +7,7 @@ namespace Application\Model;
 use Application\DBAL\Types\AccountTypeType;
 use Application\Traits\HasIban;
 use Application\Traits\HasName;
+use Application\Traits\HasNumericCode;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,6 +30,7 @@ class Account extends AbstractModel
 {
     use HasName;
     use HasIban;
+    use HasNumericCode;
 
     /**
      * @var Account
@@ -52,13 +54,6 @@ class Account extends AbstractModel
      * @ORM\Column(type="AccountType", length=10)
      */
     private $type;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=10, nullable=false, unique=true)
-     */
-    private $code;
 
     /**
      * @var Collection
@@ -176,26 +171,6 @@ class Account extends AbstractModel
     public function getType(): string
     {
         return $this->type;
-    }
-
-    /**
-     * Set code
-     *
-     * @param string $code
-     */
-    public function setCode(string $code): void
-    {
-        $this->code = $code;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode(): string
-    {
-        return $this->code;
     }
 
     /**

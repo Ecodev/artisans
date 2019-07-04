@@ -90,6 +90,15 @@ export class NaturalSearchFacetsService {
         condition: {equal: {value: true}} as ProductFilterGroupCondition,
     };
 
+    private readonly productQuantity: DropdownFacet<TypeNumberConfiguration> = {
+        display: 'Quantité en stock',
+        field: 'quantity',
+        component: TypeNumberComponent,
+        configuration: {
+            step: 0.001
+        },
+    };
+
     private readonly userWithoutTag: FlagFacet = {
         display: 'Sans tag',
         field: 'userTags',
@@ -124,6 +133,29 @@ export class NaturalSearchFacetsService {
         transform: wrapLike,
     };
 
+    private readonly userCode: DropdownFacet<TypeNumberConfiguration> = {
+        display: 'Nº coopérateur',
+        field: 'code',
+        component: TypeNumberComponent,
+        configuration: {
+            step: 1,
+        }
+    };
+
+    private readonly firstName: DropdownFacet<never> = {
+        display: 'Prénom',
+        field: 'firstName',
+        component: TypeTextComponent,
+        transform: wrapLike,
+    };
+
+    private readonly lastName: DropdownFacet<never> = {
+        display: 'Nom de famille',
+        field: 'lastName',
+        component: TypeTextComponent,
+        transform: wrapLike,
+    };
+
     private readonly name: DropdownFacet<never> = {
         display: 'Nom',
         field: 'name',
@@ -144,33 +176,23 @@ export class NaturalSearchFacetsService {
     };
 
     private readonly allFacets: { [key: string]: NaturalSearchFacets } = {
-        users: [
+        usersFrontend: [
+            this.userCode,
+            this.firstName,
+            this.lastName,
+            this.userCode,
+            this.userTags,
+        ],
+        usersAdmin: [
             {
                 display: 'Login',
                 field: 'login',
                 component: TypeTextComponent,
                 transform: wrapLike,
             } as DropdownFacet<never>,
-            {
-                display: 'Prénom',
-                field: 'firstName',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
-            {
-                display: 'Nom de famille',
-                field: 'lastName',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
-            {
-                display: 'Nº coopérateur',
-                field: 'code',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 1,
-                }
-            } as DropdownFacet<TypeNumberConfiguration>,
+            this.firstName,
+            this.lastName,
+            this.userCode,
             {
                 display: 'Status',
                 field: 'status',
@@ -270,7 +292,12 @@ export class NaturalSearchFacetsService {
             this.owner,
             this.creationDate,
         ],
-        products: [
+        productsFrontend: [
+            this.name,
+            this.productTags,
+            this.productQuantity,
+        ],
+        productsAdmin: [
             this.name,
             this.code,
             this.productIsActive,
@@ -301,14 +328,7 @@ export class NaturalSearchFacetsService {
                 },
                 transform: percentage,
             } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Quantité en stock',
-                field: 'quantity',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.001,
-                },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            this.productQuantity,
             {
                 display: 'Fournisseur',
                 field: 'supplier',

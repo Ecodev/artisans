@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './admin/users/services/user.service';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
 import { UsersComponent } from './admin/users/users/users.component';
+import { ProductsComponent } from './admin/products/products/products.component';
+import { ProductService } from './admin/products/services/product.service';
 import { FrontEndComponent } from './front-end/front-end.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -48,7 +50,7 @@ export const routes: Routes = [
                         component: UsersComponent,
                         data: {
                             title: 'Membres',
-                            hideFab : true,
+                            isAdmin : false,
                             contextColumns: ['name', 'code', 'email', 'mobilePhone'],
                             contextVariables: UserService.getFilters(
                                 [UserRole.administrator, UserRole.member, UserRole.product, UserRole.responsible],
@@ -88,8 +90,18 @@ export const routes: Routes = [
                                 resolve: {
                                     product: ProductByCodeResolver,
                                 },
-                            },
+                            }
                         ],
+                    },
+                    {
+                        path: 'product',
+                        component: ProductsComponent,
+                        data: {
+                            title: 'Produits en stock',
+                            contextColumns: ['image', 'name', 'quantity'],
+                            contextVariables: ProductService.getFilterForActiveInStock(),
+                            isAdmin: false,
+                        },
                     },
                     {
                         path: 'profile',

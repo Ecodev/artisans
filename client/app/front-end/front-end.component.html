@@ -7,6 +7,11 @@
                 Commissions
             </a>
 
+            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/product" class="big-button">
+                <natural-icon name="product" [size]="70"></natural-icon>
+                Produits
+            </a>
+
             <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="openDoor()" *ngIf="canAccessDoor()" class="big-button">
                 <natural-icon name="doors" [size]="70"></natural-icon>
                 Ouvrir

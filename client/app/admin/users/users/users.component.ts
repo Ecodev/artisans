@@ -53,7 +53,7 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
             persistenceService,
         );
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('users');
+        this.naturalSearchFacets = naturalSearchFacetsService.get(this.route.snapshot.data.isAdmin ? 'usersAdmin' : 'usersFrontend');
     }
 
     public flagWelcomeSessionDate(user) {

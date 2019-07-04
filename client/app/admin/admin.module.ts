@@ -15,7 +15,6 @@ import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
 import { ProductMetadataComponent } from './product-metadata/product-metadata.component';
 import { ProductComponent } from './products/product/product.component';
-import { ProductsComponent } from './products/products/products.component';
 import { ProductTagComponent } from './productTags/productTag/productTag.component';
 import { ProductTagsComponent } from './productTags/productTags/productTags.component';
 import { EditableTransactionLinesComponent } from './transactions/editable-transaction-lines/editable-transaction-lines.component';
@@ -31,7 +30,6 @@ import { CreateStockMovementComponent } from './stockMovement/create-stock-movem
 
 @NgModule({
     declarations: [
-        ProductsComponent,
         ProductComponent,
         AdminComponent,
         UserComponent,

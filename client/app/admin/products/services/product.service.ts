@@ -47,6 +47,26 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             deleteProducts);
     }
 
+    /**
+     * Filter only products in stock and active
+     */
+    public static getFilterForActiveInStock(): ProductsVariables {
+        return {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                isActive: {equal: {value: true}},
+                                quantity: {greater: {value: '0'}},
+                            },
+                        ],
+                    },
+                ],
+            },
+        };
+    }
+
     protected getDefaultForServer(): ProductInput {
         return {
             name: '',

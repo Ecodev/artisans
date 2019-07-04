@@ -54,7 +54,10 @@ const routes: Routes = [
                 {
                     path: 'product', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     component: ProductsComponent,
-                    data: {title: 'Produits'},
+                    data: {
+                        title: 'Produits',
+                        isAdmin: true,
+                    },
                 },
                 {
                     path: 'product',
@@ -87,6 +90,7 @@ const routes: Routes = [
                     component: UsersComponent,
                     data: {
                         title: 'Tous les utilisateurs',
+                        isAdmin: true,
                     },
                 },
                 {
@@ -97,6 +101,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres actifs',
+                                isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.member, UserRole.product], [UserStatus.active], true),
                             },
                         },
@@ -105,6 +110,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Nouveaux membres',
+                                isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.member], [UserStatus.new]),
                                 contextColumns: ['balance', 'name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
                             },
@@ -114,6 +120,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Staff',
+                                isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.responsible, UserRole.administrator], null),
                             },
                         },
@@ -122,6 +129,7 @@ const routes: Routes = [
                             component: UsersComponent,
                             data: {
                                 title: 'Membres inactifs et archivés',
+                                isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
                                 contextColumns: ['balance', 'name', 'status', 'creationDate', 'resignDate'],
                             },

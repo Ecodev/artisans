@@ -166,9 +166,11 @@ export class NaturalSearchFacetsService {
             {
                 display: 'Nº coopérateur',
                 field: 'code',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 1,
+                }
+            } as DropdownFacet<TypeNumberConfiguration>,
             {
                 display: 'Status',
                 field: 'status',

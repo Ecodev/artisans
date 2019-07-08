@@ -148,6 +148,9 @@ const routes: Routes = [
                             resolve: {
                                 user: UserResolver,
                             },
+                            data: {
+                                isAdmin: true,
+                            },
                         },
                     ],
                 },

@@ -9,6 +9,7 @@ use Application\Api\Helper;
 use Application\Model\Transaction;
 use Application\Model\TransactionLine;
 use Application\Model\User;
+use Application\Utility;
 
 class TransactionRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
 {
@@ -76,7 +77,7 @@ class TransactionRepository extends AbstractRepository implements LimitedAccessS
         $this->getEntityManager()->flush();
 
         // Be sure to refresh the new account balance that were computed by DB triggers
-        $accounts = array_filter(array_unique($accounts, SORT_REGULAR));
+        $accounts = array_filter(Utility::unique($accounts));
         foreach ($accounts as $account) {
             $this->getEntityManager()->refresh($account);
         }

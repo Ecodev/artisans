@@ -1,12 +1,12 @@
 # Chez Emmy
 
 Master:
-[![Build Status](https://travis-ci.org/Ecodev/chez-emmy.svg?branch=master)](https://travis-ci.org/Ecodev/chez-emmy) &nbsp;
+[![Build Status](https://travis-ci.com/Ecodev/chez-emmy.svg?branch=master)](https://travis-ci.com/Ecodev/chez-emmy) &nbsp;
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/quality-score.png?b=master&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=master) &nbsp;
 [![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/coverage.png?b=master&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=master)
 
 Develop:
-[![Build Status](https://travis-ci.org/Ecodev/chez-emmy.svg?branch=develop)](https://travis-ci.org/Ecodev/chez-emmy) &nbsp;
+[![Build Status](https://travis-ci.com/Ecodev/chez-emmy.svg?branch=develop)](https://travis-ci.com/Ecodev/chez-emmy) &nbsp;
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/quality-score.png?b=develop&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=develop) &nbsp;
 [![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/badges/coverage.png?b=develop&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/chez-emmy/?branch=develop)
 

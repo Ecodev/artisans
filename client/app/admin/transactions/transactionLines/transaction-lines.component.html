@@ -66,8 +66,19 @@
                     <th mat-header-cell *matHeaderCellDef>Compte</th>
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="1px">
-                            <app-transaction-amount displayMode="account" [transactionLine]="element" [relativeToAccount]="element.debit" style="margin: 0 3px 3px 0"></app-transaction-amount>
-                            <app-transaction-amount displayMode="account" [transactionLine]="element" [relativeToAccount]="element.credit"></app-transaction-amount>
+                            <app-transaction-amount
+                                    displayMode="account"
+                                    [transactionLine]="element"
+                                    [relativeToAccount]="element.debit"
+                                    (accountClick)="searchAccount($event)"
+                                    style="margin: 0 3px 3px 0"
+                            ></app-transaction-amount>
+                            <app-transaction-amount
+                                    displayMode="account"
+                                    [transactionLine]="element"
+                                    [relativeToAccount]="element.credit"
+                                    (accountClick)="searchAccount($event)"
+                            ></app-transaction-amount>
                         </div>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
-import { TransactionLines, TransactionLinesVariables } from '../../../shared/generated-types';
+import { TransactionLines, TransactionLinesVariables, Account } from '../../../shared/generated-types';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { TransactionLineService } from '../services/transaction-line.service';
 
@@ -46,5 +46,20 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
         this.transactionLineService.getExportLink(qvm).subscribe(url => {
             window.location.href = url;
         });
+    }
+
+    public searchAccount(account: Account['account']) {
+        if (this.hideFab) {
+            const link = this.transactionLineService.linkToTransactionForAccount(account);
+            if (typeof link === 'string') {
+                this.router.navigateByUrl(link);
+            } else {
+                this.router.navigate(link);
+            }
+        } else {
+            const selection = TransactionLineService.getSelectionForAccount(account);
+            this.naturalSearchSelections = selection;
+            this.search(selection);
+        }
     }
 }

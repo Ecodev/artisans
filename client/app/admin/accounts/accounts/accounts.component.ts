@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NaturalAbstractNavigableList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
-import { Accounts, AccountsVariables } from '../../../shared/generated-types';
+import { Account, Accounts, AccountsVariables } from '../../../shared/generated-types';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { AccountService } from '../services/account.service';
+import { TransactionLineService } from '../../transactions/services/transaction-line.service';
 
 @Component({
     selector: 'app-accounts',
@@ -20,6 +21,7 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
                 persistenceService: NaturalPersistenceService,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
+                public transactionLineService: TransactionLineService,
     ) {
 
         super(accountService,
@@ -29,6 +31,6 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
             persistenceService,
         );
         this.naturalSearchFacets = naturalSearchFacetsService.get('accounts');
-
     }
+
 }

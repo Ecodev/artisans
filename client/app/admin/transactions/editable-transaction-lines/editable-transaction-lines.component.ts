@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TransactionLineService } from '../services/transaction-line.service';
-import { Account_account, Transaction, TransactionLinesVariables} from '../../../shared/generated-types';
+import { Account, Transaction, TransactionLinesVariables} from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
 import { NaturalAbstractEditableList } from '@ecodev/natural';
 import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
@@ -41,7 +41,7 @@ export class EditableTransactionLinesComponent extends NaturalAbstractEditableLi
         }
     }
 
-    public getAccountLabel(account: Account_account): string {
+    public getAccountLabel(account: Account['account']): string {
         return [account.code, account.name].join(' ');
     }
 

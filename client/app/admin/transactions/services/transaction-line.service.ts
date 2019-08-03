@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
+import { FormValidators, NaturalAbstractModelService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
     LogicalOperator,
@@ -10,12 +10,13 @@ import {
     TransactionLines, TransactionLineSortingField,
     TransactionLinesVariables,
     TransactionLineVariables,
-    TransactionSortingField,
+    Account,
 } from '../../../shared/generated-types';
 import { transactionLineQuery, transactionLinesQuery, transactionLinesForExportQuery } from './transaction-line.queries';
-import { Observable, Subject} from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NaturalQueryVariablesManager, NaturalUtility } from '@ecodev/natural';
+import { RouterLink } from '@angular/router';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
     if (!formGroup || !formGroup.controls) {
@@ -68,6 +69,39 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
             },
             sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
         };
+    }
+
+    public static getSelectionForAccount(account: Account['account']): NaturalSearchSelections {
+        return [
+            [
+                {
+                    field: 'debit',
+                    condition: {
+                        have: {
+                            values: [account.id],
+                        },
+                    },
+                },
+            ],
+            [
+                {
+                    field: 'credit',
+                    condition: {
+                        have: {
+                            values: [account.id],
+                        },
+                    },
+                },
+            ],
+        ];
+    }
+
+    public linkToTransactionForAccount(account: Account['account']): RouterLink['routerLink'] {
+        const selection = TransactionLineService.getSelectionForAccount(account);
+        return [
+            '/admin/transaction-line',
+            {ns: JSON.stringify(toUrl(selection))},
+        ];
     }
 
     public getFormValidators(): FormValidators {

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { QrService } from '../services/qr.service';
@@ -11,7 +11,7 @@ import { QrService } from '../services/qr.service';
 })
 export class CameraComponent implements OnInit, OnDestroy {
 
-    @ViewChild('video') videoRef: ElementRef;
+    @ViewChild('video', { static: true }) videoRef: ElementRef;
 
     constructor(public router: Router,
                 private route: ActivatedRoute,

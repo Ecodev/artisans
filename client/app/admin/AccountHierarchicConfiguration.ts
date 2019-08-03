@@ -2,7 +2,7 @@ import { AccountService } from './accounts/services/account.service';
 import { AccountType } from '../shared/generated-types';
 import { NaturalHierarchicConfiguration } from '@ecodev/natural';
 
-export const AccountHierarchicConfiguration: NaturalHierarchicConfiguration[] = [
+export const accountHierarchicConfiguration: NaturalHierarchicConfiguration[] = [
     {
         service: AccountService,
         parentsFilters: ['parent'],

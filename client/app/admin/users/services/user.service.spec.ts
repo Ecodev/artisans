@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Apollo } from 'apollo-angular';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { MockApolloProvider } from '../../../shared/testing/MockApolloProvider';
+import { mockApolloProvider } from '../../../shared/testing/MockApolloProvider';
 import { UserService } from './user.service';
 import { CartService } from '../../../shop/services/cart.service';
 
@@ -20,7 +20,7 @@ describe('UserService', () => {
                 RouterTestingModule,
             ],
             providers: [
-                MockApolloProvider,
+                mockApolloProvider,
                 {provide: CartService, useClass: MockCartService},
             ],
         });
@@ -68,7 +68,7 @@ describe('UserService', () => {
         const resetStore = spyOn(apollo.getClient(), 'resetStore').and.callThrough();
 
         // Mock router to do nothing when navigating
-        const navigate = spyOn(router, 'navigate').and.callFake(() => Promise.resolve());
+        const navigate = spyOn(router, 'navigate').and.callFake(() => Promise.resolve(true));
 
         let actual;
         service.logout().subscribe(v => actual = v);

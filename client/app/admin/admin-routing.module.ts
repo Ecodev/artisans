@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatDialogConfig } from '@angular/material';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { OrderComponent } from '../order/order/order.component';
 import { OrdersComponent } from '../order/orders/orders.component';

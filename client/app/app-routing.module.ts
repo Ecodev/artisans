@@ -27,7 +27,7 @@ export const routes: Routes = [
         // Registration
         path: 'user',
         component: HomeComponent,
-        loadChildren: './user/user.module#UserModule',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule),
     },
     // Auth required routes
     {
@@ -105,13 +105,13 @@ export const routes: Routes = [
                     },
                     {
                         path: 'profile',
-                        loadChildren: './profile/profile.module#ProfileModule',
+                        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
                     },
                 ],
             },
             {
                 path: 'admin',
-                loadChildren: './admin/admin.module#AdminModule',
+                loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
             },
 
         ],

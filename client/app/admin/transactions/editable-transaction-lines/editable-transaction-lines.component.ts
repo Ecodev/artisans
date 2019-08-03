@@ -3,7 +3,7 @@ import { TransactionLineService } from '../services/transaction-line.service';
 import { Account, Transaction, TransactionLinesVariables} from '../../../shared/generated-types';
 import { TransactionTagService } from '../../transactionTags/services/transactionTag.service';
 import { NaturalAbstractEditableList } from '@ecodev/natural';
-import { AccountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
+import { accountHierarchicConfiguration } from '../../AccountHierarchicConfiguration';
 
 @Component({
     selector: 'app-editable-transaction-lines',
@@ -14,7 +14,7 @@ export class EditableTransactionLinesComponent extends NaturalAbstractEditableLi
 
     @Input() transaction: Transaction['transaction'];
 
-    public accountHierarchicConfig = AccountHierarchicConfiguration;
+    public accountHierarchicConfig = accountHierarchicConfiguration;
     public columns = ['isReconciled', 'name', 'balance', 'debit', 'credit', 'transactionTag', 'remarks', 'remove'];
 
     constructor(private transactionLineService: TransactionLineService,

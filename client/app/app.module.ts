@@ -3,13 +3,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { LOCALE_ID, NgModule } from '@angular/core';
 
-import {
-    DateAdapter,
-    ErrorStateMatcher,
-    MAT_FORM_FIELD_DEFAULT_OPTIONS,
-    MatIconRegistry,
-    ShowOnDirtyErrorStateMatcher,
-} from '@angular/material';
+import { DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatIconRegistry } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NaturalAlertService, NaturalSwissParsingDateAdapter } from '@ecodev/natural';

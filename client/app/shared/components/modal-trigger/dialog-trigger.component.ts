@@ -1,6 +1,6 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { Component, OnDestroy } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 export interface DialogTriggerRoutingData {

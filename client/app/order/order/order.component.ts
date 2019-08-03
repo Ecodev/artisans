@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogTriggerProvidedData } from '../../shared/components/modal-trigger/dialog-trigger.component';
 import { OrderLinesVariables } from '../../shared/generated-types';
 

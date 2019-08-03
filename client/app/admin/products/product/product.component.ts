@@ -15,7 +15,7 @@ import { calculateSuggestedPrice, moneyRoundUp } from '../../../shared/utils';
 import { ProductTagService } from '../../productTags/services/productTag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { StockMovementService } from '../../stockMovement/services/stockMovement.service';
 import { CreateStockMovementComponent } from '../../stockMovement/create-stock-movement/create-stock-movement.component';
 

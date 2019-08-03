@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatDialogConfig } from '@angular/material';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
 import { OrderComponent } from '../order/order/order.component';

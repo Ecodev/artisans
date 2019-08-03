@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Product, StockMovementInput, StockMovementType } from '../../../shared/generated-types';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-create-stock-movement',

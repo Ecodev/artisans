@@ -39,52 +39,52 @@ import { FocusDirective } from '../directives/focus';
 import { MaterialModule } from './material.module';
 
 const iconsConfig: NaturalIconsConfig = {
-    'qr': {
+    qr: {
         svg: 'assets/icons/qr.svg',
     },
     'simple-qr': {
         svg: 'assets/icons/simple-qr.svg',
     },
-    'own_product': {
+    own_product: {
         svg: 'assets/icons/swimsuit.svg',
     },
-    'code': {
+    code: {
         svg: 'assets/icons/input.svg',
     },
-    'doors': {
+    doors: {
         svg: 'assets/icons/key.svg',
     },
-    'family': {
+    family: {
         svg: 'assets/icons/family.svg',
     },
-    'lake': {
+    lake: {
         svg: 'assets/icons/lake.svg',
     },
-    'transactionHistory': {
+    transactionHistory: {
         svg: 'assets/icons/history.svg',
     },
-    'claims': {
+    claims: {
         svg: 'assets/icons/claims.svg',
     },
-    'finances': {
+    finances: {
         svg: 'assets/icons/notes.svg',
     },
-    'browse_products': {
+    browse_products: {
         svg: 'assets/icons/search.svg',
     },
-    'administrator': {
+    administrator: {
         svg: 'assets/icons/boss.svg',
     },
-    'exit': {
+    exit: {
         svg: 'assets/icons/exit.svg',
     },
-    'shop': {
+    shop: {
         svg: 'assets/icons/grocery.svg',
     },
-    'product': {
+    product: {
         svg: 'assets/icons/product.svg',
     },
-    'members': {
+    members: {
         svg: 'assets/icons/members.svg',
     },
 };

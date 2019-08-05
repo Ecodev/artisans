@@ -24,8 +24,8 @@ import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { UserFilterGroupCondition, ProductFilterGroupCondition } from '../generated-types';
 import { ProductTagService } from '../../admin/productTags/services/productTag.service';
 import { AccountService } from '../../admin/accounts/services/account.service';
-import { accountHierarchicConfiguration } from '../../admin/AccountHierarchicConfiguration';
 import { UserService } from '../../admin/users/services/user.service';
+import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHierarchicConfiguration';
 
 /**
  * Convert percentage for server

@@ -185,4 +185,18 @@ class AccountRepository extends AbstractRepository implements LimitedAccessSubQu
 
         return Money::CHF($result->fetchColumn());
     }
+
+    /**
+     * Return the next available Account code
+     *
+     * @return int
+     */
+    public function getNextCodeAvailable(): int
+    {
+        $qb = _em()->getConnection()->createQueryBuilder()
+            ->select('IFNULL(MAX(a.code) + 1, 1)')
+            ->from('account', 'a');
+
+        return (int) $qb->execute()->fetchColumn();
+    }
 }

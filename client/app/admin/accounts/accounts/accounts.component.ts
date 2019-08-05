@@ -33,4 +33,13 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
         this.naturalSearchFacets = naturalSearchFacetsService.get('accounts');
     }
 
+    public addLink(): any[] {
+        let route: any[] = ['/admin/account/new'];
+        const parentId = this.route.snapshot.params['parent'];
+        if (parentId) {
+            route = route.concat([{parent: parentId}]);
+        }
+        return route;
+    }
+
 }

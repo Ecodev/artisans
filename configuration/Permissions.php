@@ -105,4 +105,8 @@ return [
         'path' => 'node_modules/.bin/*',
         'permissions' => '0750',
     ],
+    [
+        'path' => 'vendor/bin/*',
+        'permissions' => '0750',
+    ],
 ];

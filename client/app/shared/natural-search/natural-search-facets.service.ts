@@ -24,7 +24,7 @@ import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { UserFilterGroupCondition, ProductFilterGroupCondition } from '../generated-types';
 import { ProductTagService } from '../../admin/productTags/services/productTag.service';
 import { AccountService } from '../../admin/accounts/services/account.service';
-import { AccountHierarchicConfiguration } from '../../admin/AccountHierarchicConfiguration';
+import { AccountHierarchicConfiguration } from '../hierarchic-selector/AccountHierarchicConfiguration';
 import { UserService } from '../../admin/users/services/user.service';
 
 /**

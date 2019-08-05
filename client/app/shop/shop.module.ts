@@ -15,6 +15,10 @@ import { ShopComponent } from './shop/shop.component';
         CommonModule,
         EmmyModule,
     ],
+    entryComponents: [
+        CameraComponent,
+        ProductComponent,
+    ],
 })
 export class ShopModule {
 }

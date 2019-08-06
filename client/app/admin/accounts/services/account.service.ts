@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { accountQuery, accountsQuery, createAccount, deleteAccounts, nextCodeAvailableQuery, updateAccount, } from './account.queries';
 import {
-    accountQuery,
-    accountsQuery,
-    createAccount,
-    deleteAccounts,
-    updateAccount,
-    nextCodeAvailableQuery,
-} from './account.queries';
-import {
-    AccountInput,
     Account,
-    AccountVariables,
+    AccountInput,
     Accounts,
+    AccountSorting, AccountSortingField,
     AccountsVariables,
     AccountType,
+    AccountVariables,
     CreateAccount,
     CreateAccountVariables,
     DeleteAccounts,
+    NextAccountCode,
+    SortingOrder,
     UpdateAccount,
     UpdateAccountVariables,
-    NextAccountCode,
 } from '../../../shared/generated-types';
+
 import { Validators } from '@angular/forms';
-import { NaturalAbstractModelService, FormValidators, NaturalValidators, FormAsyncValidators } from '@ecodev/natural';
+import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, NaturalValidators } from '@ecodev/natural';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -82,4 +78,16 @@ export class AccountService extends NaturalAbstractModelService<Account['account
         }));
     }
 
+    /**
+     * By default, sort accounts by code
+     *
+     */
+    protected getContextForAll(): AccountsVariables {
+        return {
+            sorting: [{
+                field: AccountSortingField.code,
+                order: SortingOrder.ASC,
+            }],
+        };
+    }
 }

@@ -14,6 +14,15 @@ import { TransactionLineService } from '../../transactions/services/transaction-
 })
 export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['accounts'], AccountsVariables> implements OnInit {
 
+    public initialColumns = [
+        'navigation',
+        'code',
+        'name',
+        'type',
+        'owner',
+        'balance',
+    ];
+
     constructor(route: ActivatedRoute,
                 router: Router,
                 accountService: AccountService,

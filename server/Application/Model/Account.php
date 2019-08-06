@@ -109,6 +109,17 @@ class Account extends AbstractModel
     }
 
     /**
+     * Only members' liability accounts must have an owner
+     * and there must be only an account per member
+     *
+     * @return null|User
+     */
+    public function getOwnerForCreation(): ?User
+    {
+        return null;
+    }
+
+    /**
      * @return Money
      */
     public function getBalance(): Money

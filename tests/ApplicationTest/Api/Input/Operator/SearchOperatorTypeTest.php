@@ -11,7 +11,7 @@ use Application\Model\User;
 use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Type\Definition\Type;
 
-class SearchOperatorTypeTest extends \PHPUnit\Framework\TestCase
+class SearchOperatorTypeTest extends AbstractOperatorType
 {
     /**
      * @dataProvider providerSearch

@@ -15,6 +15,9 @@ use GraphQL\Doctrine\Annotation as API;
  * A single line of accounting transaction
  *
  * @ORM\Entity(repositoryClass="Application\Repository\TransactionLineRepository")
+ * @API\Filters({
+ *     @API\Filter(field="custom", operator="Application\Api\Input\Operator\TransactionWithDocumentOperatorType", type="boolean"),
+ * })
  */
 class TransactionLine extends AbstractModel
 {

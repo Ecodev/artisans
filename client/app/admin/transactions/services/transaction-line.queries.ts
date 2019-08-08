@@ -22,6 +22,12 @@ export const transactionLineMetaFragment = gql`
             id
             expenseClaim {
                 id
+                accountingDocuments {
+                    id
+                }
+            }
+            accountingDocuments {
+                id
             }
         }
         transactionDate

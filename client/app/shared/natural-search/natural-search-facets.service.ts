@@ -3,7 +3,7 @@ import {
     DropdownFacet,
     FlagFacet,
     NaturalEnumService,
-    NaturalSearchFacets,
+    NaturalSearchFacets, replaceOperatorByName,
     Selection,
     TypeDateComponent,
     TypeDateConfiguration,
@@ -21,11 +21,12 @@ import {
 import { ProductService } from '../../admin/products/services/product.service';
 import { TransactionService } from '../../admin/transactions/services/transaction.service';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
-import { UserFilterGroupCondition, ProductFilterGroupCondition } from '../generated-types';
+import { UserFilterGroupCondition, ProductFilterGroupCondition, TransactionLineFilterGroupCondition } from '../generated-types';
 import { ProductTagService } from '../../admin/productTags/services/productTag.service';
 import { AccountService } from '../../admin/accounts/services/account.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHierarchicConfiguration';
+import { TypeSelectItem } from '@ecodev/natural/lib/modules/dropdown-components/type-select/type-select.component';
 
 /**
  * Convert percentage for server
@@ -259,6 +260,19 @@ export class NaturalSearchFacetsService {
                 field: 'transactionDate',
                 component: TypeDateComponent,
             } as DropdownFacet<TypeDateConfiguration>,
+            {
+                display: 'Justificatif',
+                field: 'custom',
+                component: TypeSelectComponent,
+                name: 'transactionWithDocument',
+                transform: replaceOperatorByName,
+                configuration: {
+                    items: [
+                        {value: true, name: 'Avec'},
+                        {value: false, name: 'Sans'},
+                    ],
+                }
+            } as DropdownFacet<TypeSelectConfiguration>,
             this.owner,
             this.creationDate,
             this.updateDate,

@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
-import { TransactionLines, TransactionLinesVariables, Account } from '../../../shared/generated-types';
+import { TransactionLines, TransactionLinesVariables, Account, TransactionLine } from '../../../shared/generated-types';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { TransactionLineService } from '../services/transaction-line.service';
+import { union } from 'lodash';
 
 @Component({
     selector: 'app-transaction-lines',
@@ -61,5 +62,15 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
             this.naturalSearchSelections = selection;
             this.search(selection);
         }
+    }
+
+    public documentCount(tl: TransactionLine['transactionLine']): number {
+        const transaction = tl.transaction;
+        const expenseClaim = transaction.expenseClaim;
+
+        return union(
+            transaction.accountingDocuments.map((document) => document ? document.id : null),
+            expenseClaim ? expenseClaim.accountingDocuments.map((document) => document ? document.id : null) : []
+        ).length;
     }
 }

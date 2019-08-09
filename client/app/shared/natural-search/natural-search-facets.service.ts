@@ -20,13 +20,13 @@ import {
 } from '@ecodev/natural';
 import { ProductService } from '../../admin/products/services/product.service';
 import { TransactionService } from '../../admin/transactions/services/transaction.service';
+import { TransactionTagService } from '../../admin/transactionTags/services/transactionTag.service';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { UserFilterGroupCondition, ProductFilterGroupCondition, TransactionLineFilterGroupCondition } from '../generated-types';
 import { ProductTagService } from '../../admin/productTags/services/productTag.service';
 import { AccountService } from '../../admin/accounts/services/account.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHierarchicConfiguration';
-import { TypeSelectItem } from '@ecodev/natural/lib/modules/dropdown-components/type-select/type-select.component';
 
 /**
  * Convert percentage for server
@@ -55,6 +55,16 @@ export class NaturalSearchFacetsService {
         component: TypeNaturalSelectComponent,
         configuration: {
             service: this.userTagService,
+            placeholder: 'Tags',
+        },
+    };
+
+    private readonly transactionTags: DropdownFacet<TypeSelectNaturalConfiguration> = {
+        display: 'Tags',
+        field: 'transactionTag',
+        component: TypeNaturalSelectComponent,
+        configuration: {
+            service: this.transactionTagService,
             placeholder: 'Tags',
         },
     };
@@ -273,6 +283,7 @@ export class NaturalSearchFacetsService {
                     ],
                 }
             } as DropdownFacet<TypeSelectConfiguration>,
+            this.transactionTags,
             this.owner,
             this.creationDate,
             this.updateDate,
@@ -456,6 +467,7 @@ export class NaturalSearchFacetsService {
         private readonly enumService: NaturalEnumService<any>,
         private readonly userTagService: UserTagService,
         private readonly transactionService: TransactionService,
+        private readonly transactionTagService: TransactionTagService,
         private readonly productService: ProductService,
         private readonly productTagService: ProductTagService,
         private readonly accountService: AccountService,

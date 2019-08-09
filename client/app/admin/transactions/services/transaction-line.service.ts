@@ -11,6 +11,7 @@ import {
     TransactionLinesVariables,
     TransactionLineVariables,
     Account,
+    TransactionTag,
 } from '../../../shared/generated-types';
 import { transactionLineQuery, transactionLinesQuery, transactionLinesForExportQuery } from './transaction-line.queries';
 import { Observable } from 'rxjs';
@@ -96,8 +97,31 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
         ];
     }
 
+    public static getSelectionForTag(tag: TransactionTag['transactionTag']): NaturalSearchSelections {
+        return [
+            [
+                {
+                    field: 'transactionTag',
+                    condition: {
+                        have: {
+                            values: [tag.id],
+                        },
+                    },
+                },
+            ]
+        ];
+    }
+
     public linkToTransactionForAccount(account: Account['account']): RouterLink['routerLink'] {
         const selection = TransactionLineService.getSelectionForAccount(account);
+        return [
+            '/admin/transaction-line',
+            {ns: JSON.stringify(toUrl(selection))},
+        ];
+    }
+
+    public linkToTransactionForTag(tag: TransactionTag['transactionTag']): RouterLink['routerLink'] {
+        const selection = TransactionLineService.getSelectionForTag(tag);
         return [
             '/admin/transaction-line',
             {ns: JSON.stringify(toUrl(selection))},

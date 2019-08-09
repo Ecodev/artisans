@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
-import { TransactionLines, TransactionLinesVariables, Account, TransactionLine } from '../../../shared/generated-types';
+import { TransactionLines, TransactionLinesVariables, Account, TransactionLine, TransactionTag } from '../../../shared/generated-types';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { TransactionLineService } from '../services/transaction-line.service';
 import { union } from 'lodash';
@@ -49,7 +49,7 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
         });
     }
 
-    public searchAccount(account: Account['account']) {
+    public filterByAccount(account: Account['account']): void {
         if (this.hideFab) {
             const link = this.transactionLineService.linkToTransactionForAccount(account);
             if (typeof link === 'string') {
@@ -72,5 +72,20 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
             transaction.accountingDocuments.map((document) => document ? document.id : null),
             expenseClaim ? expenseClaim.accountingDocuments.map((document) => document ? document.id : null) : []
         ).length;
+    }
+
+    public filterByTag(tag: TransactionTag['transactionTag']): void {
+        if (this.hideFab) {
+            const link = this.transactionLineService.linkToTransactionForTag(tag);
+            if (typeof link === 'string') {
+                this.router.navigateByUrl(link);
+            } else {
+                this.router.navigate(link);
+            }
+        } else {
+            const selection = TransactionLineService.getSelectionForTag(tag);
+            this.naturalSearchSelections = selection;
+            this.search(selection);
+        }
     }
 }

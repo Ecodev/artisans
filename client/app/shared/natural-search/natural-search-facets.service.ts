@@ -4,7 +4,7 @@ import {
     FlagFacet,
     NaturalEnumService,
     NaturalSearchFacets, replaceOperatorByName,
-    Selection,
+    NaturalSearchSelection,
     TypeDateComponent,
     TypeDateConfiguration,
     TypeHierarchicSelectorComponent,
@@ -31,7 +31,7 @@ import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHi
 /**
  * Convert percentage for server
  */
-function percentage(selection: Selection): Selection {
+function percentage(selection: NaturalSearchSelection): NaturalSearchSelection {
     Object.keys(selection.condition).forEach(key => {
         if (selection.condition[key].value) {
             selection.condition[key].value = selection.condition[key].value / 100;

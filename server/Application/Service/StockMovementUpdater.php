@@ -125,7 +125,7 @@ class StockMovementUpdater implements EventSubscriber
                 'product' => $product->getId(),
             ]);
 
-        $this->connection->executeUpdate('UPDATE product SET quantity = @sum WHERE id = :product',
+        $this->connection->executeUpdate('UPDATE product SET quantity = @sum, purchase_status = IF(purchase_status = \'ok\' && @sum < minimum_quantity, \'to_order\', IF(@sum >= minimum_quantity, \'ok\', purchase_status)) WHERE id = :product',
             [
                 'product' => $product->getId(),
             ]);

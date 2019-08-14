@@ -87,6 +87,18 @@ const iconsConfig: NaturalIconsConfig = {
     members: {
         svg: 'assets/icons/members.svg',
     },
+    purchase_status_to_order: {
+        svg: 'assets/icons/priority-normal.svg',
+        class: 'negative',
+    },
+    purchase_status_preordered: {
+        font: 'done',
+        class: 'neutral',
+    },
+    purchase_status_ordered: {
+        font: 'done_all',
+        class: 'positive',
+    },
 };
 
 const declarations = [

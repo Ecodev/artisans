@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\DBAL\Types\PurchaseStatusType;
 use Application\Traits\HasAutomaticQuantity;
 use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
@@ -16,6 +17,7 @@ use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
 /**
@@ -102,6 +104,20 @@ class Product extends AbstractModel
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
     private $ponderatePrice = true;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="PurchaseStatus", options={"default" = PurchaseStatusType::OK})
+     */
+    private $purchaseStatus = PurchaseStatusType::OK;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="decimal", precision=10, scale=3, options={"default" = "0.00"})
+     */
+    private $minimumQuantity = '0';
 
     /**
      * Constructor
@@ -311,5 +327,49 @@ class Product extends AbstractModel
     public function setPonderatePrice(bool $ponderatePrice): void
     {
         $this->ponderatePrice = $ponderatePrice;
+    }
+
+    /**
+     * Whether the product needs to be purchased or was already when the stock level is low
+     *
+     * @API\Field(type="PurchaseStatus")
+     *
+     * @return string
+     */
+    public function getPurchaseStatus(): string
+    {
+        return $this->purchaseStatus;
+    }
+
+    /**
+     * Set purchase status
+     *
+     * @API\Input(type="PurchaseStatus")
+     *
+     * @param string $status
+     */
+    public function setPurchaseStatus(string $status): void
+    {
+        $this->purchaseStatus = $status;
+    }
+
+    /**
+     * Minimum stock level
+     *
+     * @return string
+     */
+    public function getMinimumQuantity(): string
+    {
+        return $this->minimumQuantity;
+    }
+
+    /**
+     * Minimum stock level
+     *
+     * @param string $quantity
+     */
+    public function setMinimumQuantity(string $quantity): void
+    {
+        $this->minimumQuantity = $quantity;
     }
 }

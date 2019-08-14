@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
+use Application\DBAL\Types\PurchaseStatusType;
 use Application\DBAL\Types\StockMovementTypeType;
 use Application\Model\Product;
 use Application\Model\StockMovement;
@@ -158,6 +159,8 @@ class StockMovementUpdaterTest extends TestCase
             ],
         ]);
 
+        self::assertSame(PurchaseStatusType::TO_ORDER, $product2->getPurchaseStatus());
+
         $s1 = new StockMovement();
         $s1->setType(StockMovementTypeType::DELIVERY);
         $s1->setProduct($product2);
@@ -174,6 +177,9 @@ class StockMovementUpdaterTest extends TestCase
 
         self::assertSame('25.000', $s1->getQuantity());
         self::assertSame('65.000', $s2->getQuantity());
+
+        self::assertSame(PurchaseStatusType::OK, $product2->getPurchaseStatus());
+
         $this->assertHistory($product2, [
             [
                 'delta' => '8.000',

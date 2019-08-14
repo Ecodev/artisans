@@ -7,7 +7,7 @@ import {
     CreateProductVariables,
     OrderLinesVariables,
     Product,
-    ProductVariables,
+    ProductVariables, PurchaseStatus,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
@@ -62,6 +62,7 @@ export class ProductComponent
 
     public orderLinesVariables: OrderLinesVariables;
     public sellingPriceTooLow: boolean;
+    public PurchaseStatus = PurchaseStatus;
 
     constructor(alertService: NaturalAlertService,
                 productService: ProductService,
@@ -129,6 +130,10 @@ export class ProductComponent
                 this.stockMovementService.create(stockMovement).subscribe(newStockMovement => {
                     this.data.model.quantity = newStockMovement.product.quantity;
                     this.alertService.info('Stock modifié');
+                });
+                // Refresh purchaseStatus
+                this.service.getOne(this.data.model.id).subscribe(p => {
+                    this.form.patchValue(p);
                 });
             }
         });

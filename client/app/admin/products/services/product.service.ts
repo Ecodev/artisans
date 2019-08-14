@@ -10,6 +10,7 @@ import {
     Products,
     ProductsVariables,
     ProductVariables,
+    PurchaseStatus,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
@@ -17,8 +18,8 @@ import { Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-    FormValidators,
     FormAsyncValidators,
+    FormValidators,
     NaturalAbstractModelService,
     NaturalQueryVariablesManager,
     NaturalValidators,
@@ -84,7 +85,9 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             isActive: true,
             verificationDate: null,
             image: null,
-            ponderatePrice: false
+            ponderatePrice: false,
+            purchaseStatus: PurchaseStatus.ok,
+            minimumQuantity: '0',
         };
     }
 
@@ -92,6 +95,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         return {
             code: [Validators.maxLength(20)],
             name: [Validators.required, Validators.maxLength(100)],
+            minimumQuantity: [Validators.required, Validators.min(0)],
         };
     }
 

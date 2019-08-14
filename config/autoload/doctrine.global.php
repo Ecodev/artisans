@@ -68,6 +68,7 @@ return [
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'AccountType' => Application\DBAL\Types\AccountTypeType::class,
             'StockMovementType' => Application\DBAL\Types\StockMovementTypeType::class,
+            'PurchaseStatus' => Application\DBAL\Types\PurchaseStatusType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

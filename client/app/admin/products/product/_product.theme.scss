@@ -2,4 +2,16 @@
   .warn {
     color: mat-color($emmy-warn);
   }
+  natural-icon {
+    .negative {
+      color: mat-color($emmy-warn) !important;
+    }
+    .neutral {
+      color: mat-color($emmy-accent) !important;
+    }
+    .positive {
+      color: mat-color($emmy-primary) !important;
+    }
+
+  }
 }

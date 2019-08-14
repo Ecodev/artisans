@@ -69,21 +69,6 @@
                             <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
                             ></textarea>
                         </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Quantité en stock</mat-label>
-                            <input matInput type="number" disabled [value]="data.model.quantity">
-                            <div matSuffix>{{ data.model.unit }}</div>
-                            <button mat-button
-                                    matSuffix
-                                    mat-icon-button
-                                    matTooltip="Saisir un changement de stock"
-                                    (click)="createStockMovement()"
-                            >
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                        </mat-form-field>
-
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
@@ -158,6 +143,53 @@
                             ></textarea>
                         </mat-form-field>
 
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="20px">
+                    <div fxLayout="column">
+                        <h2 class="mat-title">Stock</h2>
+                        <div fxLayout="row" fxLayoutGap="10px">
+                            <mat-form-field>
+                                <mat-label>Quantité en stock</mat-label>
+                                <input matInput type="number" disabled [value]="data.model.quantity">
+                                <div matSuffix>{{ data.model.unit }}</div>
+                                <button mat-button
+                                        matSuffix
+                                        mat-icon-button
+                                        matTooltip="Saisir un changement de stock"
+                                        (click)="createStockMovement()"
+                                >
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Stock minimum</mat-label>
+                                <input matInput type="number" required="required" step="0.01" formControlName="minimumQuantity" (change)="update()">
+                                <div matSuffix>{{ data.model.unit }}</div>
+                                <mat-error *ngIf="form.get('minimumQuantity')?.hasError('required')">Requis</mat-error>
+                                <mat-error *ngIf="form.get('minimumQuantity')?.hasError('min')">Valeur positive</mat-error>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div fxLayout="column" fxLayoutAlign="center start">
+                        <span class="mat-body-2">Commande au fournisseur</span>
+                        <mat-button-toggle-group (change)="update()" formControlName="purchaseStatus">
+                            <mat-button-toggle [value]="PurchaseStatus.ok">OK</mat-button-toggle>
+                            <mat-button-toggle [value]="PurchaseStatus.to_order">
+                                <natural-icon name="purchase_status_to_order"></natural-icon>À commander
+                            </mat-button-toggle>
+                            <mat-button-toggle [value]="PurchaseStatus.preordered">
+                                <natural-icon name="purchase_status_preordered"></natural-icon>Précommandé
+                            </mat-button-toggle>
+                            <mat-button-toggle [value]="PurchaseStatus.ordered">
+                                <natural-icon name="purchase_status_ordered"></natural-icon>Commandé
+                            </mat-button-toggle>
+                        </mat-button-toggle-group>
                     </div>
                 </div>
 

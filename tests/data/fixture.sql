@@ -78,20 +78,20 @@ REPLACE INTO image (id, filename, width, height) VALUES
 (5010, 'yogourt2.png', 388, 407),
 (5011, 'miel.png', 308, 436);
 
-REPLACE INTO product (id, is_active, image_id, quantity, supplier_price, price_per_unit, unit, vat_rate, name, code, description, ponderate_price) VALUES
-(3000, 1, 5000, 8, 500, 600, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao', 0),
-(3001, 1, 5001, 12, 2000, 2400, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.', 0),
-(3002, 1, 5002, 14, 500, 600, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air', 0),
-(3003, 0, 5003, 0, 300, 400, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes', 1),
-(3004, 1, 5004, 50.123, 200, 250, 'kg', '0.025', 'Pommes de terre', 'P5', '', 0),
-(3005, 1, 5005, 26.8, 300, 400, 'kg', '0.025', 'Pommes', 'P6', '', 0),
-(3006, 1, 5006, 5, 300, 400, 'kg', '0.025', 'Poire', 'P7', '', 0),
-(3007, 1, 5007, 7, 800, 1000, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', '', 0),
-(3008, 1, 5008, 23, 1000, 1300, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', '', 0),
-(3009, 1, 5009, 20, 110, 160, '', '0.025', 'Yogourt Bircher', 'P10', '', 0),
-(3010, 1, 5010, 23, 130, 200, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', '', 0),
-(3011, 1, 5011, 5, 1000, 1250, '', '0.0', 'Miel de la région', 'P12', '', 0),
-(3012, 1, NULL, 5, 0, -50, '', '0.0', 'Consigne pot de yaourt', 'P13', 'Pour rembourser les gens qui ramène les pots de yaourt', 0);
+REPLACE INTO product (id, is_active, image_id, quantity, minimum_quantity, purchase_status, supplier_price, price_per_unit, unit, vat_rate, name, code, description, ponderate_price) VALUES
+(3000, 1, 5000, 8, 0, 'ok', 500, 600, '', '0.077', 'Chocolat noir BIO', 'P1', 'Tablette de chocolat • Noir 70%, avec fèves de cacao', 0),
+(3001, 1, 5001, 12, 0, 'ok', 2000, 2400, '', '0.077', '12 pralinés avec alcool', 'P2', 'Un assortiment représentatif du savoir-faire de Jacot Chocolatier : ganache, masse pralinée, gianduja, massepain. Nous prêtons une attention toute particulière à la confection des chocolats et des emballages, pour une livraison et une dégustation de qualité.', 0),
+(3002, 1, 5002, 14, 14, 'ok', 500, 600, '', '0.025', '6 oeufs BIO de la région', 'P3', 'Oeufs suisses 53g+ d''élevage en plein air', 0),
+(3003, 0, 5003, 0, 3, 'ok', 300, 400, '', '0.025', 'Salade Batavia BIO', 'P4', 'La batavia n’est pas aussi robuste que l''iceberg mais est moins sensible que la laitue pommée. Si vous ne la consommez pas immédiatement, emballez-la dans un papier absorbant humide. Elle se conservera 2 à 3 jours dans le compartiment à légumes', 1),
+(3004, 1, 5004, 50.123, 0, 'ok', 200, 250, 'kg', '0.025', 'Pommes de terre', 'P5', '', 0),
+(3005, 1, 5005, 26.8, 0, 'ok', 300, 400, 'kg', '0.025', 'Pommes', 'P6', '', 0),
+(3006, 1, 5006, 5, 10, 'to_order', 300, 400, 'kg', '0.025', 'Poire', 'P7', '', 0),
+(3007, 1, 5007, 7, 0, 'ok', 800, 1000, '', '0.077', 'Oeil de Perdrix Auvernier', 'P8', '', 0),
+(3008, 1, 5008, 23, 0, 'ok', 1000, 1300, '', '0.077', 'Pinot Noir La Coccinelle', 'P9', '', 0),
+(3009, 1, 5009, 20, 20, 'ok', 110, 160, '', '0.025', 'Yogourt Bircher', 'P10', '', 0),
+(3010, 1, 5010, 23, 20, 'preordered', 130, 200, '', '0.025', 'Yogourt vanille au lait de brebis', 'P11', '', 0),
+(3011, 1, 5011, 5, 10, 'ordered', 1000, 1250, '', '0.0', 'Miel de la région', 'P12', '', 0),
+(3012, 1, NULL, 5, 0, 'ok', 0, -50, '', '0.0', 'Consigne pot de yaourt', 'P13', 'Pour rembourser les gens qui ramène les pots de yaourt', 0);
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6004, 3000),

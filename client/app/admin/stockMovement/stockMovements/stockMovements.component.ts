@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
-import { NaturalPersistenceService } from '@ecodev/natural';
-import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
+import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractList } from '@ecodev/natural';
 import { StockMovements, StockMovementsVariables } from '../../../shared/generated-types';
-import { StockMovementService } from '../services/stockMovement.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import { StockMovementService } from '../services/stockMovement.service';
 
 @Component({
     selector: 'app-stock-movements',
@@ -26,21 +23,13 @@ export class StockMovementsComponent extends NaturalAbstractList<StockMovements[
         'remarks',
     ];
 
-    constructor(route: ActivatedRoute,
-                router: Router,
-                stockMovementService: StockMovementService,
-                alertService: NaturalAlertService,
-                persistenceService: NaturalPersistenceService,
+    constructor(stockMovementService: StockMovementService,
+                injector: Injector,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 
-        super(stockMovementService,
-            router,
-            route,
-            alertService,
-            persistenceService,
-        );
+        super(stockMovementService, injector);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('stockMovements');
     }

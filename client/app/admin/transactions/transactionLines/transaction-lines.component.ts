@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
@@ -20,21 +20,13 @@ export class TransactionLinesComponent extends NaturalAbstractList<TransactionLi
 
     @Output() select = new EventEmitter();
 
-    constructor(route: ActivatedRoute,
-                router: Router,
-                private transactionLineService: TransactionLineService,
-                alertService: NaturalAlertService,
-                persistenceService: NaturalPersistenceService,
+    constructor(private transactionLineService: TransactionLineService,
+                injector: Injector,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 
-        super(transactionLineService,
-            router,
-            route,
-            alertService,
-            persistenceService,
-        );
+        super(transactionLineService, injector);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('transactionLines');
 

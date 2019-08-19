@@ -1,17 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { NaturalAbstractDetail, NaturalAlertService } from '@ecodev/natural';
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-    OrderLine,
-    OrderLineVariables,
-    UpdateOrderLine,
-    UpdateOrderLineVariables,
-} from '../../shared/generated-types';
-import { OrderLineService } from '../services/order-lines.service';
-import { ProductService } from '../../admin/products/services/product.service';
-import { merge, omit } from 'lodash';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NaturalAbstractDetail } from '@ecodev/natural';
+import { merge, omit } from 'lodash';
+import { ProductService } from '../../admin/products/services/product.service';
 import { DialogTriggerProvidedData } from '../../shared/components/modal-trigger/dialog-trigger.component';
+import { OrderLine, OrderLineVariables, UpdateOrderLine, UpdateOrderLineVariables } from '../../shared/generated-types';
+import { OrderLineService } from '../services/order-lines.service';
 
 @Component({
     selector: 'app-order-line',
@@ -27,14 +21,12 @@ export class OrderLineComponent
         UpdateOrderLineVariables,
         never> implements OnInit {
 
-    constructor(alertService: NaturalAlertService,
-                private orderLineService: OrderLineService,
+    constructor(private orderLineService: OrderLineService,
                 public productService: ProductService,
-                router: Router,
-                route: ActivatedRoute,
+                injector: Injector,
                 @Inject(MAT_DIALOG_DATA) private dialogData: DialogTriggerProvidedData,
     ) {
-        super('orderLine', orderLineService, alertService, router, route);
+        super('orderLine', orderLineService, injector);
     }
 
     /**

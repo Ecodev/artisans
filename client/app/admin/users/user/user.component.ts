@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail, NaturalAlertService, NaturalQueryVariablesManager } from '@ecodev/natural';
-import { UserService } from '../services/user.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
     CreateUser,
     CreateUserVariables,
@@ -12,11 +10,11 @@ import {
     UpdateUser,
     UpdateUserVariables,
     User,
-    UsersVariables,
     UserVariables,
 } from '../../../shared/generated-types';
-import { UserTagService } from '../../userTags/services/userTag.service';
 import { AccountService } from '../../accounts/services/account.service';
+import { UserTagService } from '../../userTags/services/userTag.service';
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: 'app-user',
@@ -39,14 +37,12 @@ export class UserComponent
     public familyVariables;
     public nextCodeAvailable: number;
 
-    constructor(alertService: NaturalAlertService,
-                private userService: UserService,
-                router: Router,
-                route: ActivatedRoute,
+    constructor(private userService: UserService,
+                injector: Injector,
                 public userTagService: UserTagService,
                 public accountService: AccountService,
     ) {
-        super('user', userService, alertService, router, route);
+        super('user', userService, injector);
     }
 
     ngOnInit() {

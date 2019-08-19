@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
-import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { NaturalAbstractList } from '@ecodev/natural';
 import { ExpenseClaims, ExpenseClaimsVariables } from '../../../shared/generated-types';
-import { ExpenseClaimService } from '../services/expenseClaim.service';
+import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import { ExpenseClaimService } from '../services/expenseClaim.service';
 
 @Component({
     selector: 'app-expense-claims',
@@ -14,21 +13,13 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 export class ExpenseClaimsComponent extends NaturalAbstractList<ExpenseClaims['expenseClaims'], ExpenseClaimsVariables>
     implements OnInit {
 
-    constructor(route: ActivatedRoute,
-                router: Router,
-                expenseClaimService: ExpenseClaimService,
-                alertService: NaturalAlertService,
-                persistenceService: NaturalPersistenceService,
+    constructor(expenseClaimService: ExpenseClaimService,
+                injector: Injector,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
     ) {
 
-        super(expenseClaimService,
-            router,
-            route,
-            alertService,
-            persistenceService,
-        );
+        super(expenseClaimService, injector);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('expenseClaims');
 

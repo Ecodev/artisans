@@ -236,7 +236,6 @@
                             <natural-relations [main]="data.model"
                                                [service]="productTagService"
                                                [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
-                                               [hideSearch]="true"
                                                placeholder="Ajouter un tag"
                             >
                                 <ng-template let-item="item">

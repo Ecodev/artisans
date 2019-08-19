@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
+import { Component, EventEmitter, Injector, Input, OnInit, Output } from '@angular/core';
+import { NaturalAbstractList } from '@ecodev/natural';
 import { OrderLines, OrderLinesVariables } from '../../shared/generated-types';
 import { NaturalSearchFacetsService } from '../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../shared/services/permissions.service';
@@ -16,23 +15,13 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLi
     @Output() select = new EventEmitter();
     @Input() showTotals = false;
 
-    constructor(route: ActivatedRoute,
-                router: Router,
-                service: OrderLineService,
-                alertService: NaturalAlertService,
-                persistenceService: NaturalPersistenceService,
+    constructor(service: OrderLineService,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
                 injector: Injector,
     ) {
 
-        super(service,
-            router,
-            route,
-            alertService,
-            persistenceService,
-            injector,
-        );
+        super(service, injector);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orderLines');
 

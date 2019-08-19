@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { NaturalAlertService } from '@ecodev/natural';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from '../../../admin/products/services/product.service';
-import { RegisterComponent } from './register.component';
-import { NewUserService } from './new-user.service';
+import { Component, Injector, OnInit } from '@angular/core';
+import { NaturalUtility } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { pick } from 'lodash';
-import { NaturalUtility } from '@ecodev/natural';
+import { ProductService } from '../../../admin/products/services/product.service';
+import { NewUserService } from './new-user.service';
+import { RegisterComponent } from './register.component';
 
 @Component({
     selector: 'app-confirm',
@@ -17,13 +15,11 @@ import { NaturalUtility } from '@ecodev/natural';
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
 
     constructor(userService: NewUserService,
-                router: Router,
-                route: ActivatedRoute,
                 productService: ProductService,
                 apollo: Apollo,
-                alertService: NaturalAlertService,
+                injector: Injector,
     ) {
-        super(userService, alertService, router, route, productService, apollo);
+        super(userService, injector, apollo);
     }
 
     protected initForm(): void {

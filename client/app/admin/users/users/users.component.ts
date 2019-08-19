@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-    NaturalAbstractList,
-    NaturalAlertService,
-    NaturalPersistenceService,
-    NaturalQueryVariablesManager,
-    NaturalSearchSelections,
-} from '@ecodev/natural';
+import { Component, Injector, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { NaturalAbstractList, NaturalQueryVariablesManager, NaturalSearchSelections } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { Users, UserStatus, UsersVariables } from '../../../shared/generated-types';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import { copy } from '../../../shared/utils';
 import { emailUsersQuery } from '../services/user.queries';
 import { UserService } from '../services/user.service';
-import { copy } from '../../../shared/utils';
 
 @Component({
     selector: 'app-users',
@@ -37,21 +31,14 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
     public usersEmailAndName: string | null = null;
 
     constructor(route: ActivatedRoute,
-                router: Router,
                 private userService: UserService,
-                alertService: NaturalAlertService,
-                persistenceService: NaturalPersistenceService,
+                injector: Injector,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
                 private apollo: Apollo,
     ) {
 
-        super(userService,
-            router,
-            route,
-            alertService,
-            persistenceService,
-        );
+        super(userService, injector);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get(this.route.snapshot.data.isAdmin ? 'usersAdmin' : 'usersFrontend');
     }

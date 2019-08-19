@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { NaturalAbstractNavigableList, NaturalAlertService, NaturalPersistenceService } from '@ecodev/natural';
-import { Account, Accounts, AccountsVariables } from '../../../shared/generated-types';
+import { Component, Injector, OnInit } from '@angular/core';
+import { NaturalAbstractNavigableList } from '@ecodev/natural';
+import { Accounts, AccountsVariables } from '../../../shared/generated-types';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import { AccountService } from '../services/account.service';
 import { TransactionLineService } from '../../transactions/services/transaction-line.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
     selector: 'app-accounts',
@@ -23,22 +22,14 @@ export class AccountsComponent extends NaturalAbstractNavigableList<Accounts['ac
         'balance',
     ];
 
-    constructor(route: ActivatedRoute,
-                router: Router,
-                accountService: AccountService,
-                alertService: NaturalAlertService,
-                persistenceService: NaturalPersistenceService,
+    constructor(accountService: AccountService,
+                injector: Injector,
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
                 public transactionLineService: TransactionLineService,
     ) {
 
-        super(accountService,
-            router,
-            route,
-            alertService,
-            persistenceService,
-        );
+        super(accountService, injector);
         this.naturalSearchFacets = naturalSearchFacetsService.get('accounts');
     }
 

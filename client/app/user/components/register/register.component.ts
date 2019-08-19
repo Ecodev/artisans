@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail, NaturalAlertService, NaturalDataSource } from '@ecodev/natural';
+import { Component, Injector, OnInit } from '@angular/core';
+import { NaturalAbstractDetail, NaturalDataSource } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { ProductService } from '../../../admin/products/services/product.service';
@@ -26,13 +25,10 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     public sending = false;
 
     constructor(userService: AnonymousUserService,
-                alertService: NaturalAlertService,
-                router: Router,
-                route: ActivatedRoute,
-                protected productService: ProductService,
+                injector: Injector,
                 protected apollo: Apollo,
     ) {
-        super('user', userService, alertService, router, route);
+        super('user', userService, injector);
     }
 
     ngOnInit() {

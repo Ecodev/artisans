@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { NaturalAlertService } from '@ecodev/natural';
-import { AccountService } from '../services/account.service';
 import {
     Account,
     AccountVariables,
@@ -11,8 +8,9 @@ import {
     UpdateAccount,
     UpdateAccountVariables,
 } from '../../../shared/generated-types';
-import { UserService } from '../../users/services/user.service';
 import { groupAccountHierarchicConfiguration } from '../../../shared/hierarchic-selector/GroupAccountHierarchicConfiguration';
+import { UserService } from '../../users/services/user.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
     selector: 'app-account',
@@ -31,13 +29,11 @@ export class AccountComponent
     public nextCodeAvailable: number;
     public accountHierarchicConfig = groupAccountHierarchicConfiguration;
 
-    constructor(alertService: NaturalAlertService,
-                public accountService: AccountService,
-                router: Router,
-                route: ActivatedRoute,
+    constructor(public accountService: AccountService,
+                injector: Injector,
                 public userService: UserService,
     ) {
-        super('account', accountService, alertService, router, route);
+        super('account', accountService, injector);
     }
 
     ngOnInit(): void {
@@ -61,12 +57,14 @@ export class AccountComponent
             });
         }
     }
+
     public getAccountLabel(account: Account['account']): string {
         if (account) {
             return [account.code, account.name].join(' ');
         }
         return '';
     }
+
     public updateLinkedFields(): void {
         const typeField = this.form.get('type');
         if (typeField && typeField.value !== 'liability') {

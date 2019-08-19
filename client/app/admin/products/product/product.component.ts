@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail, NaturalAlertService } from '@ecodev/natural';
+import { Component, Injector, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
     CreateImage,
     CreateProduct,
     CreateProductVariables,
     OrderLinesVariables,
     Product,
-    ProductVariables, PurchaseStatus,
+    ProductVariables,
+    PurchaseStatus,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
 import { calculateSuggestedPrice, moneyRoundUp } from '../../../shared/utils';
 import { ProductTagService } from '../../productTags/services/productTag.service';
+import { CreateStockMovementComponent } from '../../stockMovement/create-stock-movement/create-stock-movement.component';
+import { StockMovementService } from '../../stockMovement/services/stockMovement.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
-import { MatDialog } from '@angular/material/dialog';
-import { StockMovementService } from '../../stockMovement/services/stockMovement.service';
-import { CreateStockMovementComponent } from '../../stockMovement/create-stock-movement/create-stock-movement.component';
 
 @Component({
     selector: 'app-product',
@@ -64,16 +64,14 @@ export class ProductComponent
     public sellingPriceTooLow: boolean;
     public PurchaseStatus = PurchaseStatus;
 
-    constructor(alertService: NaturalAlertService,
-                productService: ProductService,
-                router: Router,
-                route: ActivatedRoute,
+    constructor(productService: ProductService,
+                injector: Injector,
                 public productTagService: ProductTagService,
                 public imageService: ImageService,
                 private dialog: MatDialog,
                 private stockMovementService: StockMovementService,
     ) {
-        super('product', productService, alertService, router, route);
+        super('product', productService, injector);
     }
 
     ngOnInit(): void {

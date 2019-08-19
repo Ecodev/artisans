@@ -1,8 +1,5 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injector } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { NaturalAlertService } from '@ecodev/natural';
-import { ExpenseClaimService } from '../services/expenseClaim.service';
 import {
     CreateExpenseClaim,
     CreateExpenseClaimVariables,
@@ -13,6 +10,7 @@ import {
     UpdateExpenseClaimVariables,
 } from '../../../shared/generated-types';
 import { UserService } from '../../users/services/user.service';
+import { ExpenseClaimService } from '../services/expenseClaim.service';
 
 @Component({
     selector: 'app-expense-claim',
@@ -30,12 +28,10 @@ export class ExpenseClaimComponent
 
     public ExpenseClaimType = ExpenseClaimType;
 
-    constructor(alertService: NaturalAlertService,
-                expenseClaimService: ExpenseClaimService,
-                router: Router,
-                route: ActivatedRoute,
+    constructor(expenseClaimService: ExpenseClaimService,
+                injector: Injector,
                 public userService: UserService,
     ) {
-        super('expenseClaim', expenseClaimService, alertService, router, route);
+        super('expenseClaim', expenseClaimService, injector);
     }
 }

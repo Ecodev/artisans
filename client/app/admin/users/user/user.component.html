@@ -187,7 +187,6 @@
                         <natural-relations [main]="data.model"
                                            [service]="userTagService"
                                            [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                           [hideSearch]="true"
                                            placeholder="Ajouter un tag"
                         >
                             <ng-template let-item="item">

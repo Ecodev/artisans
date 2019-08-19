@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Injector } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { NaturalAlertService } from '@ecodev/natural';
 import {
-    ProductTag,
-    ProductTagVariables,
     CreateProductTag,
     CreateProductTagVariables,
     DeleteProductTags,
+    ProductTag,
+    ProductTagVariables,
     UpdateProductTag,
     UpdateProductTagVariables,
 } from '../../../shared/generated-types';
@@ -27,12 +25,10 @@ export class ProductTagComponent
         UpdateProductTagVariables,
         DeleteProductTags> {
 
-    constructor(alertService: NaturalAlertService,
-                productTagService: ProductTagService,
-                router: Router,
-                route: ActivatedRoute,
+    constructor(productTagService: ProductTagService,
+                injector: Injector,
                 public tagService: ProductTagService,
     ) {
-        super('productTag', productTagService, alertService, router, route);
+        super('productTag', productTagService, injector);
     }
 }

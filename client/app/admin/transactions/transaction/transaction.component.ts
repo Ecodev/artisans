@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAbstractDetail, NaturalAlertService } from '@ecodev/natural';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { NaturalAbstractDetail } from '@ecodev/natural';
 import { OrderService } from '../../../order/services/order.service';
 import {
     CreateTransaction,
@@ -34,8 +33,8 @@ export class TransactionComponent
         UpdateTransactionVariables,
         DeleteTransactions> implements OnInit {
 
-    @ViewChild(EditableTransactionLinesComponent, { static: false }) transactionLinesComponent: EditableTransactionLinesComponent;
-    @ViewChild('transactionDocuments', { static: true }) accountingDocuments: AccountingDocumentsComponent;
+    @ViewChild(EditableTransactionLinesComponent, {static: false}) transactionLinesComponent: EditableTransactionLinesComponent;
+    @ViewChild('transactionDocuments', {static: true}) accountingDocuments: AccountingDocumentsComponent;
 
     public updateTransactionLines = false;
     public ExpenseClaimType = ExpenseClaimType;
@@ -43,15 +42,13 @@ export class TransactionComponent
 
     public order;
 
-    constructor(alertService: NaturalAlertService,
-                private transactionService: TransactionService,
-                router: Router,
-                route: ActivatedRoute,
+    constructor(private transactionService: TransactionService,
+                injector: Injector,
                 public transactionLineService: TransactionLineService,
                 private expenseClaimService: ExpenseClaimService,
                 private orderService: OrderService,
     ) {
-        super('transaction', transactionService, alertService, router, route);
+        super('transaction', transactionService, injector);
     }
 
     ngOnInit() {

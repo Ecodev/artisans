@@ -76,7 +76,7 @@ export const transactionLineQuery = gql`
 `;
 
 export const transactionLinesForExportQuery = gql`
-    query TransactionLines($filter: TransactionLineFilter, $sorting: [TransactionLineSorting!], $pagination: PaginationInput) {
+    query TransactionLinesForExport($filter: TransactionLineFilter, $sorting: [TransactionLineSorting!], $pagination: PaginationInput) {
         transactionLines(filter: $filter, sorting: $sorting, pagination: $pagination) {
             excelExport
         }

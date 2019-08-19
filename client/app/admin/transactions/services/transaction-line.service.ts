@@ -1,22 +1,35 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { FormValidators, NaturalAbstractModelService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
+import {
+    FormValidators,
+    NaturalAbstractModelService,
+    NaturalQueryVariablesManager,
+    NaturalSearchSelections,
+    NaturalUtility,
+    toUrl,
+} from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
+    Account,
     LogicalOperator,
     SortingOrder,
     TransactionLine,
     TransactionLineInput,
-    TransactionLines, TransactionLineSortingField,
+    TransactionLines,
+    TransactionLinesForExport,
+    TransactionLinesForExportVariables,
+    TransactionLineSortingField,
     TransactionLinesVariables,
     TransactionLineVariables,
-    Account,
     TransactionTag,
 } from '../../../shared/generated-types';
-import { transactionLineQuery, transactionLinesQuery, transactionLinesForExportQuery } from './transaction-line.queries';
+import {
+    transactionLineQuery,
+    transactionLinesForExportQuery,
+    transactionLinesQuery,
+} from './transaction-line.queries';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { NaturalQueryVariablesManager, NaturalUtility } from '@ecodev/natural';
 import { RouterLink } from '@angular/router';
 
 function atLeastOneAccount(formGroup: FormGroup): ValidationErrors | null {
@@ -108,7 +121,7 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
                         },
                     },
                 },
-            ]
+            ],
         ];
     }
 
@@ -155,11 +168,11 @@ export class TransactionLineService extends NaturalAbstractModelService<Transact
         };
     }
 
-    public getExportLink(qvm: NaturalQueryVariablesManager<TransactionLinesVariables>): Observable<string> {
+    public getExportLink(qvm: NaturalQueryVariablesManager<TransactionLinesForExportVariables>): Observable<string> {
 
-        return this.apollo.query<any>({
-           query: transactionLinesForExportQuery,
-           variables: qvm.variables.value,
+        return this.apollo.query<TransactionLinesForExport, TransactionLinesForExportVariables>({
+            query: transactionLinesForExportQuery,
+            variables: qvm.variables.value,
         }).pipe(map(result => {
             const plural = NaturalUtility.makePlural(this.name);
             return result.data[plural].excelExport;

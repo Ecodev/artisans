@@ -18,6 +18,7 @@ import { ExpenseClaimService } from '../../expenseClaim/services/expenseClaim.se
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
 import { TransactionLineService } from '../services/transaction-line.service';
 import { TransactionService } from '../services/transaction.service';
+import { UserService } from '../../users/services/user.service';
 
 @Component({
     selector: 'app-transaction',
@@ -41,10 +42,12 @@ export class TransactionComponent
     public ExpenseClaimStatus = ExpenseClaimStatus;
 
     public order;
+    public viewer;
 
     constructor(private transactionService: TransactionService,
                 injector: Injector,
                 public transactionLineService: TransactionLineService,
+                public userService: UserService,
                 private expenseClaimService: ExpenseClaimService,
                 private orderService: OrderService,
     ) {
@@ -57,6 +60,8 @@ export class TransactionComponent
         if (this.data.model.id) {
             this.orderService.getForTransaction(this.data.model.id).subscribe(order => this.order = order);
         }
+
+        this.viewer = this.route.snapshot.data.viewer.model;
 
         setTimeout(() => {
             const expenseClaim: ExpenseClaim['expenseClaim'] = this.data.expenseClaim ? this.data.expenseClaim.model : null;
@@ -93,6 +98,10 @@ export class TransactionComponent
     public save() {
 
         this.accountingDocuments.save();
+
+        if (!this.userService.canUpdateTransaction(this.viewer)) {
+            return;
+        }
 
         if (this.transactionLinesComponent) {
             const rawTransactionLines = this.transactionLinesComponent.getItems();

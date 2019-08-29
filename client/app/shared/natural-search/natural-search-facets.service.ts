@@ -3,8 +3,9 @@ import {
     DropdownFacet,
     FlagFacet,
     NaturalEnumService,
-    NaturalSearchFacets, replaceOperatorByName,
+    NaturalSearchFacets,
     NaturalSearchSelection,
+    replaceOperatorByName,
     TypeDateComponent,
     TypeDateConfiguration,
     TypeHierarchicSelectorComponent,
@@ -18,14 +19,14 @@ import {
     TypeTextComponent,
     wrapLike,
 } from '@ecodev/natural';
+import { AccountService } from '../../admin/accounts/services/account.service';
 import { ProductService } from '../../admin/products/services/product.service';
+import { ProductTagService } from '../../admin/productTags/services/productTag.service';
 import { TransactionService } from '../../admin/transactions/services/transaction.service';
 import { TransactionTagService } from '../../admin/transactionTags/services/transactionTag.service';
-import { UserTagService } from '../../admin/userTags/services/userTag.service';
-import { UserFilterGroupCondition, ProductFilterGroupCondition, TransactionLineFilterGroupCondition } from '../generated-types';
-import { ProductTagService } from '../../admin/productTags/services/productTag.service';
-import { AccountService } from '../../admin/accounts/services/account.service';
 import { UserService } from '../../admin/users/services/user.service';
+import { UserTagService } from '../../admin/userTags/services/userTag.service';
+import { ProductFilterGroupCondition, UserFilterGroupCondition } from '../generated-types';
 import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHierarchicConfiguration';
 
 /**
@@ -106,7 +107,7 @@ export class NaturalSearchFacetsService {
         field: 'quantity',
         component: TypeNumberComponent,
         configuration: {
-            step: 0.001
+            step: 0.001,
         },
     };
 
@@ -159,7 +160,7 @@ export class NaturalSearchFacetsService {
         component: TypeNumberComponent,
         configuration: {
             step: 1,
-        }
+        },
     };
 
     private readonly firstName: DropdownFacet<never> = {
@@ -257,7 +258,9 @@ export class NaturalSearchFacetsService {
             {
                 display: 'Compte au débit',
                 field: 'debit',
+                name: 'debit-included',
                 component: TypeHierarchicSelectorComponent,
+                showValidateButton: true,
                 configuration: {
                     key: 'account',
                     service: this.accountService,
@@ -267,11 +270,49 @@ export class NaturalSearchFacetsService {
             {
                 display: 'Compte au crédit',
                 field: 'credit',
+                name: 'credit-included',
                 component: TypeHierarchicSelectorComponent,
+                showValidateButton: true,
                 configuration: {
                     key: 'account',
                     service: this.accountService,
                     config: accountHierarchicConfiguration,
+                },
+            } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
+            {
+                display: 'Compte au débit exclu',
+                field: 'debit',
+                name: 'debit-excluded',
+                component: TypeHierarchicSelectorComponent,
+                showValidateButton: true,
+                configuration: {
+                    key: 'account',
+                    service: this.accountService,
+                    config: accountHierarchicConfiguration,
+                },
+                transform: (selection: NaturalSearchSelection): NaturalSearchSelection => {
+                    if (selection.condition && selection.condition.have) {
+                        selection.condition.have.not = true;
+                    }
+                    return selection;
+                },
+            } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
+            {
+                display: 'Compte au crédit exclus',
+                field: 'credit',
+                name: 'credit-excluded',
+                component: TypeHierarchicSelectorComponent,
+                showValidateButton: true,
+                configuration: {
+                    key: 'account',
+                    service: this.accountService,
+                    config: accountHierarchicConfiguration,
+                },
+                transform: (selection: NaturalSearchSelection): NaturalSearchSelection => {
+                    if (selection.condition && selection.condition.have) {
+                        selection.condition.have.not = true;
+                    }
+                    return selection;
                 },
             } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
             {
@@ -290,7 +331,7 @@ export class NaturalSearchFacetsService {
                         {value: true, name: 'Avec'},
                         {value: false, name: 'Sans'},
                     ],
-                }
+                },
             } as DropdownFacet<TypeSelectConfiguration>,
             this.transactionTags,
             this.owner,

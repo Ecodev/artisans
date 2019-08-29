@@ -1,5 +1,8 @@
 import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { NavigationEnd } from '@angular/router';
 import { NaturalAbstractDetail } from '@ecodev/natural';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { OrderService } from '../../../order/services/order.service';
 import {
     CreateTransaction,
@@ -15,10 +18,10 @@ import {
 } from '../../../shared/generated-types';
 import { AccountingDocumentsComponent } from '../../accounting-documents/accounting-documents.component';
 import { ExpenseClaimService } from '../../expenseClaim/services/expenseClaim.service';
+import { UserService } from '../../users/services/user.service';
 import { EditableTransactionLinesComponent } from '../editable-transaction-lines/editable-transaction-lines.component';
 import { TransactionLineService } from '../services/transaction-line.service';
 import { TransactionService } from '../services/transaction.service';
-import { UserService } from '../../users/services/user.service';
 
 @Component({
     selector: 'app-transaction',
@@ -123,6 +126,30 @@ export class TransactionComponent
         }
 
         this.updateTransactionLines = false;
+    }
+
+    protected postUpdate(model): void {
+        this.goToNew();
+    }
+
+    /**
+     * Wait the creation redirection, to have an url like /transaction/123, then redirect to /transaction/new
+     * If we dont wait first navigation, we would try to redirect to the same route /transaction/new -> /transaction/new
+     * and nothing would happen.
+     *
+     */
+    protected postCreate(model): void {
+        const expire = new Subject();
+        this.router.events.pipe(takeUntil(expire), filter((ev) => ev instanceof NavigationEnd)).subscribe(() => {
+            expire.next();
+            expire.complete();
+            this.goToNew();
+        });
+    }
+
+    private goToNew() {
+        this.router.navigateByUrl('/admin/transaction/new');
+
     }
 
     public flagExpenseClaim(status: ExpenseClaimStatus) {

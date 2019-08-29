@@ -17,6 +17,7 @@ use GraphQL\Doctrine\Annotation as API;
  * @ORM\Entity(repositoryClass="Application\Repository\TransactionLineRepository")
  * @API\Filters({
  *     @API\Filter(field="custom", operator="Application\Api\Input\Operator\TransactionWithDocumentOperatorType", type="boolean"),
+ *     @API\Filter(field="custom", operator="Application\Api\Input\Operator\TransactionExportOperatorType", type="boolean"),
  * })
  */
 class TransactionLine extends AbstractModel

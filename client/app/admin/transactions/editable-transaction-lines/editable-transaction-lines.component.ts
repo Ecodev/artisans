@@ -23,7 +23,7 @@ export class EditableTransactionLinesComponent
     @Input() transaction: Transaction['transaction'];
 
     public accountHierarchicConfig = accountHierarchicConfiguration;
-    public columns = ['isReconciled', 'name', 'balance', 'debit', 'credit', 'transactionTag', 'remarks', 'remove'];
+    public columns = ['name', 'balance', 'debit', 'credit', 'transactionTag', 'remarks', 'isReconciled',  'remove'];
 
     constructor(
         private transactionLineService: TransactionLineService,

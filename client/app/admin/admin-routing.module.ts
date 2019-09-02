@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
+import { OrderLineComponent } from '../order/order-line/order-line.component';
 import { OrderComponent } from '../order/order/order.component';
 import { OrdersComponent } from '../order/orders/orders.component';
+import { OrderLineResolver } from '../order/services/order-line.resolver';
 import { OrderResolver } from '../order/services/order.resolver';
 import { DialogTriggerComponent } from '../shared/components/modal-trigger/dialog-trigger.component';
 import { UserRole, UserStatus } from '../shared/generated-types';
-import { AdministrationGuard } from '../shared/guards/administration.guard';
 import { AccountingGuard } from '../shared/guards/accounting.guard';
+import { AdministrationGuard } from '../shared/guards/administration.guard';
 import { AccountComponent } from './accounts/account/account.component';
 import { AccountsComponent } from './accounts/accounts/accounts.component';
 import { AccountResolver } from './accounts/services/account.resolver';
@@ -16,12 +18,14 @@ import { ExpenseClaimComponent } from './expenseClaim/expenseClaim/expenseClaim.
 import { ExpenseClaimsComponent } from './expenseClaim/expenseClaims/expenseClaims.component';
 import { ExpenseClaimParamResolver } from './expenseClaim/services/expenseClaim.param.resolver';
 import { ExpenseClaimResolver } from './expenseClaim/services/expenseClaim.resolver';
+import { ImportComponent } from './import/import.component';
 import { ProductComponent } from './products/product/product.component';
 import { ProductsComponent } from './products/products/products.component';
 import { ProductResolver } from './products/services/product.resolver';
 import { ProductTagComponent } from './productTags/productTag/productTag.component';
 import { ProductTagsComponent } from './productTags/productTags/productTags.component';
 import { ProductTagResolver } from './productTags/services/productTag.resolver';
+import { StockMovementsComponent } from './stockMovement/stockMovements/stockMovements.component';
 import { TransactionResolver } from './transactions/services/transaction.resolver';
 import { TransactionComponent } from './transactions/transaction/transaction.component';
 import { TransactionLinesComponent } from './transactions/transactionLines/transaction-lines.component';
@@ -35,10 +39,6 @@ import { UsersComponent } from './users/users/users.component';
 import { UserTagResolver } from './userTags/services/userTag.resolver';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
-import { ImportComponent } from './import/import.component';
-import { StockMovementsComponent } from './stockMovement/stockMovements/stockMovements.component';
-import { OrderLineComponent } from '../order/order-line/order-line.component';
-import { OrderLineResolver } from '../order/services/order-line.resolver';
 
 const routes: Routes = [
         {
@@ -91,6 +91,7 @@ const routes: Routes = [
                     data: {
                         title: 'Tous les utilisateurs',
                         isAdmin: true,
+                        contextColumns: ['balance', 'name', 'code', 'login', 'age', 'status', 'flagWelcomeSessionDate'],
                     },
                 },
                 {
@@ -103,6 +104,7 @@ const routes: Routes = [
                                 title: 'Membres actifs',
                                 isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.member, UserRole.product], [UserStatus.active], true),
+                                contextColumns: ['balance', 'name', 'code', 'login', 'age', 'status', 'flagWelcomeSessionDate'],
                             },
                         },
                         {
@@ -112,7 +114,9 @@ const routes: Routes = [
                                 title: 'Nouveaux membres',
                                 isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.member], [UserStatus.new]),
-                                contextColumns: ['balance', 'name', 'status', 'creationDate', 'flagWelcomeSessionDate'],
+                                contextColumns: [
+                                    'balance', 'name', 'code', 'login', 'age', 'creationDate', 'status', 'flagWelcomeSessionDate',
+                                ],
                             },
                         },
                         {
@@ -122,6 +126,7 @@ const routes: Routes = [
                                 title: 'Staff',
                                 isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.responsible, UserRole.administrator], null),
+                                contextColumns: ['balance', 'name', 'code', 'login', 'age', 'status', 'flagWelcomeSessionDate'],
                             },
                         },
                         {
@@ -131,7 +136,8 @@ const routes: Routes = [
                                 title: 'Membres inactifs et archivés',
                                 isAdmin: true,
                                 contextVariables: UserService.getFilters([UserRole.member], [UserStatus.inactive, UserStatus.archived]),
-                                contextColumns: ['balance', 'name', 'status', 'creationDate', 'resignDate'],
+                                contextColumns: ['balance', 'name', 'code', 'login', 'age', 'resignDate', 'status'],
+
                             },
                         },
 

@@ -52,16 +52,16 @@ const routes: Routes = [
                     redirectTo: '/admin/product',
                 },
                 {
+                    path: 'product', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: ProductsComponent,
+                    data: {
+                        title: 'Produits',
+                        isAdmin: true,
+                    },
+                },
+                {
                     path: 'product',
                     children: [
-                        {
-                            path: '',
-                            component: ProductsComponent,
-                            data: {
-                                title: 'Produits',
-                                isAdmin: true,
-                            },
-                        },
                         {
                             path: 'new',
                             component: ProductComponent,
@@ -86,17 +86,17 @@ const routes: Routes = [
                     },
                 },
                 {
+                    path: 'user', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: UsersComponent,
+                    data: {
+                        title: 'Tous les utilisateurs',
+                        isAdmin: true,
+                        contextColumns: ['balance', 'name', 'code', 'login', 'age', 'status', 'flagWelcomeSessionDate'],
+                    },
+                },
+                {
                     path: 'user',
                     children: [
-                        {
-                            path: '',
-                            component: UsersComponent,
-                            data: {
-                                title: 'Tous les utilisateurs',
-                                isAdmin: true,
-                                contextColumns: ['balance', 'name', 'code', 'login', 'age', 'status', 'flagWelcomeSessionDate'],
-                            },
-                        },
                         {
                             path: 'member',
                             component: UsersComponent,
@@ -161,15 +161,15 @@ const routes: Routes = [
                     ],
                 },
                 {
+                    path: 'user-tag', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: UserTagsComponent,
+                    data: {
+                        title: 'Tags d\'utilisateurs',
+                    },
+                },
+                {
                     path: 'user-tag',
                     children: [
-                        {
-                            path: '',
-                            component: UserTagsComponent,
-                            data: {
-                                title: 'Tags d\'utilisateurs',
-                            },
-                        },
                         {
                             path: 'new',
                             component: UserTagComponent,
@@ -186,17 +186,16 @@ const routes: Routes = [
                         },
                     ],
                 },
-
+                {
+                    path: 'product-tag', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: ProductTagsComponent,
+                    data: {
+                        title: 'Tags de produits',
+                    },
+                },
                 {
                     path: 'product-tag',
                     children: [
-                        {
-                            path: '',
-                            component: ProductTagsComponent,
-                            data: {
-                                title: 'Tags de produits',
-                            },
-                        },
                         {
                             path: 'new',
                             component: ProductTagComponent,
@@ -214,7 +213,7 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'order',
+                    path: 'order', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                     component: OrdersComponent,
                     data: {title: 'Ventes'},
                     children: [
@@ -273,7 +272,8 @@ const routes: Routes = [
                     ],
                 },
                 {
-                    path: 'transaction-line',
+                    path: 'transaction-line', // Separated from other similar routes because of
+                                              // https://github.com/angular/angular/issues/27674
                     canActivate: [AccountingGuard],
                     component: TransactionLinesComponent,
                     data: {title: 'Écritures'},
@@ -305,15 +305,15 @@ const routes: Routes = [
                     ],
                 },
                 {
+                    path: 'expense-claim', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    canActivate: [AccountingGuard],
+                    component: ExpenseClaimsComponent,
+                    data: {title: 'Notes de frais'},
+                },
+                {
                     path: 'expense-claim',
                     canActivate: [AccountingGuard],
                     children: [
-                        {
-                            path: '',
-                            canActivate: [AccountingGuard],
-                            component: ExpenseClaimsComponent,
-                            data: {title: 'Notes de frais'},
-                        },
                         {
                             path: 'new',
                             component: ExpenseClaimComponent,
@@ -337,15 +337,16 @@ const routes: Routes = [
                     data: {title: 'Import des virements BVR'},
                 },
                 {
+                    // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    path: 'transaction-tag',
+                    canActivate: [AccountingGuard],
+                    component: TransactionTagsComponent,
+                    data: {title: 'Tags de transactions'},
+                },
+                {
                     path: 'transaction-tag',
                     canActivate: [AccountingGuard],
                     children: [
-                        {
-                            path: 'transaction-tag',
-                            canActivate: [AccountingGuard],
-                            component: TransactionTagsComponent,
-                            data: {title: 'Tags de transactions'},
-                        },
                         {
                             path: 'new',
                             component: TransactionTagComponent,

@@ -16,7 +16,7 @@ class IsFamily implements AssertionInterface
     /**
      * Assert that the object belongs to someone in the current user family
      *
-     * @param Acl $acl
+     * @param \Application\Acl\Acl $acl
      * @param RoleInterface $role
      * @param ResourceInterface $resource
      * @param string $privilege
@@ -38,6 +38,10 @@ class IsFamily implements AssertionInterface
             $objectFamilyOwner = $objectFamilyOwner->getOwner();
         }
 
-        return $currentFamilyOwner && $currentFamilyOwner === $objectFamilyOwner;
+        if ($currentFamilyOwner && $currentFamilyOwner === $objectFamilyOwner) {
+            return true;
+        }
+
+        return $acl->reject('the object does not belong to the family');
     }
 }

@@ -17,6 +17,12 @@ export class CreateStockMovementComponent {
     public delta = 0;
     public inventory = StockMovementType.inventory;
 
+    /**
+     * Container weight
+     * Quantity of weight to ignore from this.delta/this.quantity attribute
+     */
+    public containerWeight = 0;
+
     public stockMovement: StockMovementInput = {
         type: StockMovementType.delivery,
         delta: 0 as any, // Use integer for easier integration in form int|null values
@@ -33,11 +39,11 @@ export class CreateStockMovementComponent {
 
     update() {
         if (this.stockMovement.type === StockMovementType.inventory) {
-            this.stockMovement.delta = +this.quantity - +this.data.product.quantity as any;
+            this.stockMovement.delta = +this.quantity - +this.data.product.quantity - +this.containerWeight as any;
         } else if (this.stockMovement.type === StockMovementType.delivery) {
-            this.stockMovement.delta = this.delta as any;
+            this.stockMovement.delta = this.delta - +this.containerWeight as any;
         } else {
-            this.stockMovement.delta = -this.delta as any;
+            this.stockMovement.delta = -this.delta + +this.containerWeight as any;
         }
     }
 
@@ -51,5 +57,14 @@ export class CreateStockMovementComponent {
             this.lockedButtons = false;
             this.dialogRef.close(newStockMovement);
         });
+    }
+
+    public isWeightRespected() {
+
+        if (!this.data.product) {
+            return true;
+        }
+        return (this.stockMovement.type !== StockMovementType.inventory && +this.delta >= +this.containerWeight) ||
+               (this.stockMovement.type === StockMovementType.inventory && +this.quantity >= +this.containerWeight);
     }
 }

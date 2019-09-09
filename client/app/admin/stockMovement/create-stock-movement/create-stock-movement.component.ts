@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Product, StockMovementInput, StockMovementType } from '../../../shared/generated-types';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductService } from '../../products/services/product.service';
+import { StockMovementService } from '../services/stockMovement.service';
 
 @Component({
     selector: 'app-create-stock-movement',
@@ -8,6 +10,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     styleUrls: ['./create-stock-movement.component.scss'],
 })
 export class CreateStockMovementComponent {
+
+    private lockedButtons = false;
+
     public quantity = 0;
     public delta = 0;
     public inventory = StockMovementType.inventory;
@@ -18,7 +23,10 @@ export class CreateStockMovementComponent {
         remarks: '',
     };
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: { product: Product['product'] }) {
+    constructor(@Inject(MAT_DIALOG_DATA) public data: { product: Product['product'] },
+                private dialogRef: MatDialogRef<CreateStockMovementComponent>,
+                private productService: ProductService,
+                private stockMovementService: StockMovementService) {
         this.quantity = +data.product.quantity;
         this.stockMovement['product'] = data.product.id;
     }
@@ -31,5 +39,17 @@ export class CreateStockMovementComponent {
         } else {
             this.stockMovement.delta = -this.delta as any;
         }
+    }
+
+    public verify() {
+        this.productService.verify(this.data.product);
+    }
+
+    public create(stockMovement) {
+        this.lockedButtons = true;
+        this.stockMovementService.create(stockMovement).subscribe(newStockMovement => {
+            this.lockedButtons = false;
+            this.dialogRef.close(newStockMovement);
+        });
     }
 }

@@ -5,7 +5,7 @@ import {
     CreateProduct,
     CreateProductVariables,
     DeleteProducts,
-    Product,
+    Product, Product_product,
     ProductInput,
     Products,
     ProductsVariables,
@@ -14,7 +14,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -103,6 +103,17 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         return {
             code: [NaturalValidators.unique('code', this)],
         };
+    }
+
+    public verify(product: Product_product, form?: FormGroup) {
+
+        const partialProduct = {id: product.id, verificationDate: (new Date()).toISOString()};
+        this.updatePartially(partialProduct).subscribe(result => {
+            if (form) {
+                form.patchValue(result);
+            }
+        });
+
     }
 
     public resolveByCode(code: string): Observable<{ model: any }> {

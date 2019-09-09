@@ -11,7 +11,10 @@ import { StockMovementService } from '../services/stockMovement.service';
 })
 export class CreateStockMovementComponent {
 
-    private lockedButtons = false;
+    /**
+     * Prevent to double validate a stock creation (and double create a stock movement)
+     */
+    public lockedButtons = false;
 
     public quantity = 0;
     public delta = 0;

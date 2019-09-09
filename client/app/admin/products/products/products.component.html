@@ -22,6 +22,7 @@
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="pricePerUnit">Prix par unité</span>
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="vatRate">TVA</span>
                     <span naturalColumnsPickerColumn="quantity">Quantité en stock</span>
+                    <span naturalColumnsPickerColumn="changeQuantity">Modifier le stock</span>
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="verificationDate">Dernière vérification</span>
                 </natural-columns-picker>
             </natural-search>
@@ -111,6 +112,21 @@
                             ></natural-icon>
                             <div class="quantity-amount">{{ element.quantity | number:'1.0-1' }} {{ element.unit }}</div>
                         </div>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef></td>
+                </ng-container>
+
+                <ng-container matColumnDef="changeQuantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-align-right natural-4em-column>Stock</th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button
+                                matSuffix
+                                mat-icon-button
+                                matTooltip="Saisir un changement de stock"
+                                (click)="createStockMovement(element)"
+                        >
+                            <natural-icon name="stock_change"></natural-icon>
+                        </button>
                     </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>

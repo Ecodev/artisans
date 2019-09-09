@@ -1,0 +1,11 @@
+:host {
+    mat-dialog-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+
+        *:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+}

@@ -64,12 +64,11 @@ export class ProductComponent
     public sellingPriceTooLow: boolean;
     public PurchaseStatus = PurchaseStatus;
 
-    constructor(productService: ProductService,
+    constructor(private productService: ProductService,
                 injector: Injector,
                 public productTagService: ProductTagService,
                 public imageService: ImageService,
-                private dialog: MatDialog,
-                private stockMovementService: StockMovementService,
+                private dialog: MatDialog
     ) {
         super('product', productService, injector);
     }
@@ -99,12 +98,7 @@ export class ProductComponent
     }
 
     public verify() {
-
-        const partialProduct = {id: this.data.model.id, verificationDate: (new Date()).toISOString()};
-        this.service.updatePartially(partialProduct).subscribe(product => {
-            this.form.patchValue(product);
-        });
-
+        this.productService.verify(this.data.model, this.form);
     }
 
     public checkPrice() {
@@ -123,12 +117,11 @@ export class ProductComponent
                 product: product,
             },
         };
-        this.dialog.open(CreateStockMovementComponent, config).afterClosed().subscribe(stockMovement => {
-            if (stockMovement) {
-                this.stockMovementService.create(stockMovement).subscribe(newStockMovement => {
-                    this.data.model.quantity = newStockMovement.product.quantity;
-                    this.alertService.info('Stock modifié');
-                });
+        this.dialog.open(CreateStockMovementComponent, config).afterClosed().subscribe(newStockMovement => {
+            if (newStockMovement) {
+                this.data.model.quantity = newStockMovement.product.quantity;
+                this.alertService.info('Stock modifié');
+
                 // Refresh purchaseStatus
                 this.service.getOne(this.data.model.id).subscribe(p => {
                     this.form.patchValue(p);

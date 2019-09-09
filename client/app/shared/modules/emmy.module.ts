@@ -6,7 +6,8 @@ import {
     NaturalAlertModule,
     NaturalColumnsPickerModule,
     NaturalCommonModule,
-    NaturalDetailHeaderModule, NaturalDropdownComponentsModule,
+    NaturalDetailHeaderModule,
+    NaturalDropdownComponentsModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
     NaturalHierarchicSelectorModule,
@@ -24,9 +25,9 @@ import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect
 import { ngfModule } from 'angular-file';
 import { AvatarModule } from 'ngx-avatar';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';
+import { ProductsComponent } from '../../admin/products/products/products.component';
 import { TransactionLinesComponent } from '../../admin/transactions/transactionLines/transaction-lines.component';
 import { UsersComponent } from '../../admin/users/users/users.component';
-import { ProductsComponent } from '../../admin/products/products/products.component';
 import { AddressComponent } from '../components/address/address.component';
 import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
@@ -99,6 +100,9 @@ const iconsConfig: NaturalIconsConfig = {
         font: 'done_all',
         class: 'positive',
     },
+    stock_change: {
+        font: 'trending_up',
+    },
 };
 
 const declarations = [
@@ -140,7 +144,7 @@ const imports = [
     NaturalTableButtonModule,
     NaturalFixedButtonModule,
     NaturalFixedButtonDetailModule,
-    NaturalDropdownComponentsModule
+    NaturalDropdownComponentsModule,
 ];
 
 @NgModule({

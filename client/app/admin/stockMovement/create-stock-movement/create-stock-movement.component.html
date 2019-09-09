@@ -14,7 +14,7 @@
                type="number"
                required="required"
                step="0.001"
-               [min]="0"
+               min="0"
                oninput="validity.valid||(value='');"
                (ngModelChange)="update()"
         />
@@ -38,7 +38,13 @@
 
     <mat-form-field *ngIf="data.product.unit" style="margin-bottom:20px">
         <mat-label>Poids du récipient</mat-label>
-        <input matInput [(ngModel)]="containerWeight" type="number" step="0.001" min="0" (ngModelChange)="update()"
+        <input matInput
+               [(ngModel)]="containerWeight"
+               type="number"
+               step="0.001"
+               min="0"
+               (ngModelChange)="update()"
+               oninput="validity.valid||(value='');"
         />
         <div matSuffix>{{ data.product.unit }}</div>
         <mat-hint>Ne remplir que lorsque le récipient a été pesé avec la marchandise</mat-hint>

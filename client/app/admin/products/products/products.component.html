@@ -115,7 +115,7 @@
                 <ng-container matColumnDef="verificationDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Dernière vérification</th>
                     <td mat-cell *matCellDef="let element">
-                        {{ element.verificationDate | date: 'd MMM y - HH:mm' }}
+                        {{ element.verificationDate | date: 'd MMM y' }}
                     </td>
                 </ng-container>
 

@@ -43,7 +43,7 @@ trait HasDoorAccess
     public function getCanOpenDoor(): bool
     {
         $allowedStatus = [User::STATUS_ACTIVE];
-        $allowedRoles = [User::ROLE_INDIVIDUAL, User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_ADMINISTRATOR];
+        $allowedRoles = [User::ROLE_INDIVIDUAL, User::ROLE_MEMBER, User::ROLE_RESPONSIBLE, User::ROLE_PRODUCT, User::ROLE_ADMINISTRATOR];
 
         if (!$this->getDoor()) {
             return false;

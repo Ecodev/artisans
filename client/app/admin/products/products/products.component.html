@@ -21,8 +21,10 @@
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="supplierPrice">Prix du producteur</span>
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="pricePerUnit">Prix par unité</span>
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="vatRate">TVA</span>
+                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="margin">Marge de profit</span>
+                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="minimumQuantity">Stock minimum</span>
                     <span naturalColumnsPickerColumn="quantity">Quantité en stock</span>
-                    <span naturalColumnsPickerColumn="changeQuantity">Modifier le stock</span>
+                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="changeQuantity">Modifier le stock</span>
                     <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="verificationDate">Dernière vérification</span>
                 </natural-columns-picker>
             </natural-search>
@@ -83,6 +85,16 @@
                 <ng-container matColumnDef="vatRate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header natural-align-right natural-2em-column>TVA</th>
                     <td mat-cell *matCellDef="let element" natural-align-right>{{ element.vatRate * 100}}%</td>
+                </ng-container>
+
+                <ng-container matColumnDef="margin">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-align-center natural-4em-column>Marge</th>
+                    <td mat-cell *matCellDef="let element" natural-align-right>{{ element.margin * 100}}%</td>
+                </ng-container>
+
+                <ng-container matColumnDef="minimumQuantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-align-right natural-5em-column>Stock minimum</th>
+                    <td mat-cell *matCellDef="let element" natural-align-right>{{ element.minimumQuantity | number: '1.0-1' }} {{ element.unit }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="quantity">

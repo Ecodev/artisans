@@ -33,9 +33,6 @@
 
                 <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
-                <ng-container *ngIf="routeData?.isAdmin">
-                    <tr mat-footer-row *matFooterRowDef="selectedColumns"></tr>
-                </ng-container>
 
                 <ng-container matColumnDef="image">
                     <th mat-header-cell *matHeaderCellDef natural-2em-column></th>
@@ -47,7 +44,6 @@
                                   [style.borderRadius.px]="40"
                         ></app-file>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
@@ -62,24 +58,17 @@
                         ></natural-table-button>
                         <span *ngIf="!routeData?.isAdmin">{{ element.name }}</span>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef>Totaux</td>
                 </ng-container>
 
                 <ng-container matColumnDef="code">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
                     <td mat-cell *matCellDef="let element">{{ element.code }}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <ng-container matColumnDef="supplierPrice">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header natural-align-right app-price-column>Prix achat</th>
                     <td mat-cell *matCellDef="let element" natural-align-right>
                         <span *ngIf="element.supplierPrice > 0">{{ element.supplierPrice | currency: 'CHF' }}</span>
-                    </td>
-                    <td mat-footer-cell *matFooterCellDef natural-align-right>
-                        <span *ngIf="dataSource?.data?.totalSupplierPrice > 0">
-                            {{ dataSource.data.totalSupplierPrice | currency: 'CHF'}}
-                        </span>
                     </td>
                 </ng-container>
 
@@ -89,17 +78,11 @@
                         <span *ngIf="element.pricePerUnit != '0.00'">{{ element.pricePerUnit | currency: 'CHF' }}</span>
                         <span *ngIf="element.unit">/{{ element.unit }}</span>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef natural-align-right>
-                        <span *ngIf="dataSource?.data?.totalPricePerUnit > 0">
-                            {{ dataSource.data.totalPricePerUnit | currency: 'CHF'}}
-                        </span>
-                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="vatRate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header natural-align-right natural-2em-column>TVA</th>
                     <td mat-cell *matCellDef="let element" natural-align-right>{{ element.vatRate * 100}}%</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <ng-container matColumnDef="quantity">
@@ -113,7 +96,6 @@
                             <div class="quantity-amount">{{ element.quantity | number:'1.0-1' }} {{ element.unit }}</div>
                         </div>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <ng-container matColumnDef="changeQuantity">
@@ -128,7 +110,6 @@
                             <natural-icon name="stock_change"></natural-icon>
                         </button>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <ng-container matColumnDef="verificationDate">
@@ -136,7 +117,6 @@
                     <td mat-cell *matCellDef="let element">
                         {{ element.verificationDate | date: 'd MMM y - HH:mm' }}
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
             </table>

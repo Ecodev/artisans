@@ -34,8 +34,11 @@ import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHi
  */
 function percentage(selection: NaturalSearchSelection): NaturalSearchSelection {
     Object.keys(selection.condition).forEach(key => {
-        if (selection.condition[key].value) {
-            selection.condition[key].value = selection.condition[key].value / 100;
+        if (selection.condition && selection.condition[key] ) {
+            const condition = selection.condition[key];
+            if (condition && condition.value) {
+                condition.value = condition.value / 100;
+            }
         }
     });
 

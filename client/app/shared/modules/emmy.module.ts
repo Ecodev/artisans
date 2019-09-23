@@ -21,7 +21,7 @@ import {
     NaturalStampModule,
     NaturalTableButtonModule,
 } from '@ecodev/natural';
-import { ParticleEffectButtonModule } from '@sambaptista/angular-particle-effect-button';
+import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { ngfModule } from 'angular-file';
 import { AvatarModule } from 'ngx-avatar';
 import { AccountingDocumentsComponent } from '../../admin/accounting-documents/accounting-documents.component';

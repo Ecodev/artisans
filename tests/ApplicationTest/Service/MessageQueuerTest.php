@@ -26,7 +26,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = new MessageQueuer(
             $entityManager,
             $renderer,
-            'chez-emmy.lan'
+            'lesartisansdelatransition.lan'
         );
 
         return $messageQueuer;

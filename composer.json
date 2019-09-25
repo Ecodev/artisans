@@ -1,8 +1,8 @@
 {
-    "name": "ecodev/chez-emmy",
-    "description": "Chez Emmy",
+    "name": "ecodev/lesartisansdelatransition",
+    "description": "Les artisans de la transition",
     "type": "project",
-    "homepage": "https://github.com/ecodev/chez-emmy",
+    "homepage": "https://lesartisansdelatransition.org",
     "license": "MIT",
     "config": {
         "sort-packages": true

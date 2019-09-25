@@ -9,13 +9,13 @@
 declare(strict_types=1);
 
 return [
-    'hostname' => 'chez-emmy.lan',
+    'hostname' => 'lesartisansdelatransition.lan',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'params' => [
                     'host' => 'localhost',
-                    'dbname' => 'emmy',
+                    'dbname' => 'lesartisansdelatransition',
                     'user' => 'root',
                     'password' => '',
                     'port' => 3306,
@@ -27,7 +27,7 @@ return [
         'endpoint' => 'http://localhost:8888',
         'token' => 'my-token-value',
     ],
-    'fromEmail' => 'noreply@chez-emmy.lan',
+    'fromEmail' => 'noreply@lesartisansdelatransition.lan',
     'emailOverride' => 'your@email.com',
     'smtp' => [
         'name' => 'mail.example.com',
@@ -39,13 +39,6 @@ return [
             'password' => '',
             'ssl' => 'tls',
         ],
-    ],
-    'filemaker' => [
-        'driver' => '/path/to/fmodbc.so',
-        'dbname' => 'epicerie-sb',
-        'host' => 'filemaker.example.com',
-        'user' => '',
-        'password' => '',
     ],
     'banking' => [
         'bankAccount' => '', // Bank account number, eg: '800876'

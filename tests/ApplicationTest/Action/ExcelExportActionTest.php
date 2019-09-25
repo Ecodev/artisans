@@ -18,7 +18,7 @@ class ExcelExportActionTest extends TestCase
     public function testExportTransactionLines(): void
     {
         // Query to generate the Excel file on disk
-        $hostname = 'chez-emmy.lan';
+        $hostname = 'lesartisansdelatransition.lan';
         $qb = _em()->getRepository(TransactionLine::class)->createQueryBuilder('tl');
         $action = new ExportTransactionLinesAction($hostname);
         $url = $action->generate($qb->getQuery());

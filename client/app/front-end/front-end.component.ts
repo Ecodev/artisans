@@ -11,7 +11,7 @@ import { DoorService } from '../door/services/door.service';
 })
 export class FrontEndComponent implements OnInit {
 
-    public title = 'chez-emmy';
+    public title = 'Les artisans de la transition';
 
     public viewer;
 

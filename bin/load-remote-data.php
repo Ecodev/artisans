@@ -8,7 +8,7 @@ require_once 'server/cli.php';
 $options = getopt('', ['site:']);
 
 if (!is_array($options) || !isset($options['site'])) {
-    echo PHP_EOL . "Usage: $argv[0] --site=chez-emmy.ch" . PHP_EOL . PHP_EOL;
+    echo PHP_EOL . "Usage: $argv[0] --site=lesartisansdelatransition.org" . PHP_EOL . PHP_EOL;
     exit;
 }
 

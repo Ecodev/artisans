@@ -90,7 +90,7 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
             const image = loc.protocol + '//' + loc.hostname + '/image/' + this.model.id + height;
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + image + ')');
 
-        } else if (this.model.__typename === 'AccountingDocument') {
+        } else if (this.model.__typename === 'File') {
             this.filePreview = this.model.mime.split('/')[1];
 
         } else if (this.model.src) {
@@ -125,8 +125,8 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
 
         const hostname = window.location.protocol + '//' + window.location.hostname;
 
-        if (this.model && this.model.__typename === 'AccountingDocument') {
-            return hostname + '/accounting-document/' + this.model.id;
+        if (this.model && this.model.__typename === 'File') {
+            return hostname + '/file/' + this.model.id;
         } else if (this.model && this.model.__typename === 'Image') {
             return hostname + '/image/' + this.model.id;
         }

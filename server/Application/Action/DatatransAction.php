@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Action;
 
-use Application\Model\Account;
-use Application\Model\Transaction;
-use Application\Model\TransactionLine;
 use Application\Model\User;
-use Application\Repository\AccountRepository;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
 use Money\Money;

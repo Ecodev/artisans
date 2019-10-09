@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Application\Api\Input\Operator;
 
 use Application\Api\Exception;
-use Application\Model\StockMovement;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
@@ -52,14 +51,7 @@ class SearchOperatorType extends AbstractOperator
             'name',
             'locality',
             'email',
-            'destination',
-            'startComment',
-            'endComment ',
         ];
-
-        if ($metadata->name === StockMovement::class) {
-            $whitelistedFields[] = 'remarks';
-        }
 
         // Find most textual fields for the entity
         $fields = [];

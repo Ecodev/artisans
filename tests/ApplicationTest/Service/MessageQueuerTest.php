@@ -5,12 +5,10 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
-use Application\Model\Account;
 use Application\Model\Message;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
-use Money\Money;
 use Prophecy\Argument;
 use Zend\View\Renderer\RendererInterface;
 
@@ -26,7 +24,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = new MessageQueuer(
             $entityManager,
             $renderer,
-            'lesartisansdelatransition.lan'
+            'artisans.lan'
         );
 
         return $messageQueuer;
@@ -38,7 +36,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = $this->createMockMessageQueuer();
         $message = $messageQueuer->queueRegister($user);
 
-        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte au coopérative Chez Emmy');
+        $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte Les artisans de la transition');
     }
 
     public function testQueueUnregister(): void
@@ -58,51 +56,6 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $message = $messageQueuer->queueResetPassword($user, 'householder@example.com');
 
         $this->assertMessage($message, $user, 'householder@example.com', MessageTypeType::RESET_PASSWORD, 'Demande de modification de mot de passe');
-    }
-
-    public function testQueueBalancePositive(): void
-    {
-        $this->queueBalance('positive');
-    }
-
-    public function testQueueBalanceNegative(): void
-    {
-        $this->queueBalance('negative');
-    }
-
-    private function queueBalance(string $variant): void
-    {
-        $user = new User();
-        $user->setLogin('john.doe');
-        $user->setFirstName('John');
-        $user->setLastName('Doe');
-        $user->setEmail('john.doe@example.com');
-
-        $prophecy = $this->prophesize(Account::class);
-        $prophecy->getBalance()->willReturn(Money::CHF($variant === 'positive' ? 2500 : -4500));
-        $account = $prophecy->reveal();
-        $user->accountAdded($account);
-
-        $messageQueuer = $this->createMockMessageQueuer();
-        $message = $messageQueuer->queueBalance($user);
-
-        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::BALANCE, 'Balance de compte', $variant);
-    }
-
-    public function testQueueAllBalance(): void
-    {
-        $messageQueuer = $this->createMockMessageQueuer();
-        $actual = $messageQueuer->queueAllBalance();
-
-        self::assertsame(6, $actual);
-    }
-
-    public function testQueueNegativeBalance(): void
-    {
-        $messageQueuer = $this->createMockMessageQueuer();
-        $actual = $messageQueuer->queueNegativeBalance();
-
-        self::assertsame(0, $actual);
     }
 
     private function createMockUser(): User

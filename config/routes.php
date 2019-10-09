@@ -46,16 +46,12 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         \Application\Action\ImageAction::class,
     ], 'image');
 
-    $app->get('/accounting-document/{id:\d+}', [
-        \Application\Action\AccountingDocumentAction::class,
-    ], 'accounting-document');
+    $app->get('/file/{id:\d+}', [
+        \Application\Action\FileAction::class,
+    ], 'file');
 
     $app->post('/datatrans', [
         BodyParamsMiddleware::class,
         \Application\Action\DatatransAction::class,
     ], 'datatrans');
-
-    $app->get('/export/transactionLines/{key:[0-9a-f]+}/{name:.+\.xlsx}', [
-        \Application\Action\ExportTransactionLinesAction::class,
-    ], 'transactionsLines');
 };

@@ -41,11 +41,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             return null;
         }
 
-        // Check user status
-        if (!in_array($user->getStatus(), [User::STATUS_ACTIVE, User::STATUS_INACTIVE, User::STATUS_NEW], true)) {
-            return null;
-        }
-
         $hashFromDb = $user->getPassword();
         $isMd5 = mb_strlen($hashFromDb) === 32 && ctype_xdigit($hashFromDb);
 
@@ -109,10 +104,8 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
     public function getAllAdministratorsToNotify(): array
     {
         $qb = $this->createQueryBuilder('user')
-            ->andWhere('user.status = :status')
             ->andWhere('user.role = :role')
             ->andWhere("user.email IS NOT NULL AND user.email != ''")
-            ->setParameter('status', User::STATUS_ACTIVE)
             ->setParameter('role', User::ROLE_ADMINISTRATOR);
 
         $result = $this->getAclFilter()->runWithoutAcl(function () use ($qb) {
@@ -120,56 +113,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
         });
 
         return $result;
-    }
-
-    public function getAllToQueueBalanceMessage(bool $onlyNegativeBalance = false): array
-    {
-        $qb = $this->createQueryBuilder('user')
-            ->addSelect('account')
-            ->join('user.accounts', 'account')
-            ->andWhere('user.status != :status')
-            ->andWhere("user.email IS NOT NULL AND user.email != ''")
-            ->setParameter('status', User::STATUS_ARCHIVED)
-            ->addOrderBy('user.id');
-
-        if ($onlyNegativeBalance) {
-            $qb->andWhere('account.balance < 0');
-        }
-
-        $result = $this->getAclFilter()->runWithoutAcl(function () use ($qb) {
-            return $qb->getQuery()->getResult();
-        });
-
-        return $result;
-    }
-
-    /**
-     * Return all users that are family owners (and should have Account)
-     *
-     * @return User[]
-     */
-    public function getAllFamilyOwners(): array
-    {
-        $qb = $this->createQueryBuilder('user')
-            ->andWhere('user.owner IS NULL OR user.owner = user')
-            ->addOrderBy('user.id');
-
-        return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Return all users that are not family owners but still have an Account
-     *
-     * @return User[]
-     */
-    public function getAllNonFamilyOwnersWithAccount(): array
-    {
-        $qb = $this->createQueryBuilder('user')
-            ->join('user.accounts', 'account')
-            ->andWhere('user.owner IS NOT NULL AND user.owner != user')
-            ->addOrderBy('user.id');
-
-        return $qb->getQuery()->getResult();
     }
 
     /**

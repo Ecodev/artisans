@@ -7,24 +7,13 @@ export const productMetaFragment = gql`
         name
         description
         isActive
-        verificationDate
-        ponderatePrice
         productTags {
             id
             name
         }
-        pricePerUnit
-        unit
-        vatRate
-        quantity
-        minimumQuantity,
-        purchaseStatus,
-        margin
-        supplier
-        supplierPrice
-        supplierReference
+        pricePerUnitCHF
+        pricePerUnitEUR
         code
-        remarks
         internalRemarks
         image {
             id
@@ -50,8 +39,8 @@ export const productsQuery = gql`
             pageSize
             pageIndex
             length
-            totalPricePerUnit
-            totalSupplierPrice
+            totalPricePerUnitCHF
+            totalPricePerUnitEUR
         }
     }
 ${productMetaFragment}`;
@@ -85,7 +74,6 @@ export const updateProduct = gql`
     mutation UpdateProduct($id: ProductID!, $input: ProductPartialInput!) {
         updateProduct(id:$id, input:$input) {
             id
-            verificationDate
             updateDate
             updater {
                 ...userMeta

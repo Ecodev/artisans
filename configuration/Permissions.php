@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     [
-        'path' => 'data/accounting',
+        'path' => 'data/file',
         'permissions' => '0770',
         'recursive' => false,
     ],
@@ -46,10 +46,6 @@ return [
         'permissions' => '0750',
     ],
     [
-        'path' => 'bin/import-products.php',
-        'permissions' => '0750',
-    ],
-    [
         'path' => 'bin/send-all-messages.php',
         'permissions' => '0750',
     ],
@@ -83,18 +79,6 @@ return [
     ],
     [
         'path' => 'bin/pre-commit.sh',
-        'permissions' => '0750',
-    ],
-    [
-        'path' => 'bin/check-accounting.sh',
-        'permissions' => '0750',
-    ],
-    [
-        'path' => 'bin/queue-message-for-all-balance.php',
-        'permissions' => '0750',
-    ],
-    [
-        'path' => 'bin/queue-message-for-negative-balance.php',
         'permissions' => '0750',
     ],
     [

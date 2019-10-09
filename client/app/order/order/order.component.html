@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>
-    Achats du {{ data.model.transaction.transactionDate | date: 'd MMM y - HH:mm' }}
+    Achats du {{ data.model.creationDate | date: 'd MMM y - HH:mm' }}
 </h2>
 
 <mat-dialog-content>
     <app-order-lines
             [contextVariables]="contextVariables"
-            [contextColumns]="['quantity', 'name', 'balance']"
+            [contextColumns]="['quantity', 'name', 'balanceCHF', 'balanceEUR']"
     ></app-order-lines>
 
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
@@ -15,7 +15,8 @@
         </div>
         <div class="mat-headline">
             <div>Total :</div>
-            <div style="text-align:right">{{ data.model.balance | currency : 'CHF' }}</div>
+            <div style="text-align:right">{{ data.model.balanceCHF | currency : 'CHF' }}</div>
+            <div style="text-align:right">{{ data.model.balanceEUR | currency : 'EUR' }}</div>
         </div>
     </div>
 

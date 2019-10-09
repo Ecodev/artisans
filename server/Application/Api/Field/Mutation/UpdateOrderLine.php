@@ -18,7 +18,7 @@ abstract class UpdateOrderLine implements FieldInterface
         return [
             'name' => 'updateOrderLine',
             'type' => Type::nonNull(_types()->getOutput(OrderLine::class)),
-            'description' => 'Update an existing orderLine and its related stockMovement.',
+            'description' => 'Update an existing orderLine.',
             'args' => [
                 'id' => Type::nonNull(_types()->getId(OrderLine::class)),
                 'input' => Type::nonNull(_types()->getInput(OrderLine::class)),
@@ -39,15 +39,15 @@ abstract class UpdateOrderLine implements FieldInterface
                 $input = $args['input'];
                 $product = $input['product']->getEntity();
                 $quantity = $input['quantity'];
-                $pricePonderation = $input['pricePonderation'];
+                $isCHF = $input['isCHF'];
+                $type = $input['type'];
 
-                $invoicer->updateOrderLineAndTransactionLine($orderLine, $product, $quantity, $pricePonderation);
+                $invoicer->updateOrderLineAndTransactionLine($orderLine, $product, $quantity, $isCHF, $type);
 
                 _em()->flush();
 
                 _em()->refresh($orderLine);
                 _em()->refresh($orderLine->getOrder());
-                _em()->refresh($orderLine->getOrder()->getTransaction());
 
                 return $orderLine;
             },

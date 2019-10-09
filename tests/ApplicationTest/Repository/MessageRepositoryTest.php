@@ -30,9 +30,8 @@ class MessageRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['individual', []],
             ['member', [11001]],
-            ['responsible', []],
+            ['facilitator', [11002]],
             ['administrator', []],
         ];
     }

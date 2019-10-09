@@ -38,7 +38,8 @@ abstract class Unregister implements FieldInterface
                 // Check ACL
                 Helper::throwIfDenied($user, 'update');
 
-                $user->setStatus(User::STATUS_ARCHIVED);
+                // TODO what should we do here ? delete user ? or notify admin ?
+                _em()->remove($user);
 
                 // Force logout if we are unregistering ourselves
                 if (User::getCurrent() === $user) {

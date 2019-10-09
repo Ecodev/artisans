@@ -28,14 +28,13 @@ class OrderLineRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = range(17000, 17006);
+        $all = range(17000, 17002);
         $family = $all;
 
         return [
             ['anonymous', []],
-            ['individual', $family],
             ['member', $family],
-            ['responsible', $all],
+            ['facilitator', $all],
             ['administrator', $all],
         ];
     }

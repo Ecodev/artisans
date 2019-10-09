@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "lesartisansdelatransition": {
+    "artisans": {
       "root": "",
       "sourceRoot": "client",
       "projectType": "application",
@@ -71,21 +71,21 @@
             "ssl": true,
             "sslCert": "/sites/self-signed-certificate.crt",
             "sslKey": "/sites/self-signed-certificate.key",
-            "port": 4210,
-            "browserTarget": "lesartisansdelatransition:build",
-            "host": "lesartisansdelatransition.lan",
+            "port": 4207,
+            "browserTarget": "artisans:build",
+            "host": "artisans.lan",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "lesartisansdelatransition:build:production"
+              "browserTarget": "artisans:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "lesartisansdelatransition:build"
+            "browserTarget": "artisans:build"
           }
         },
         "test": {
@@ -124,7 +124,7 @@
         }
       }
     },
-    "lesartisansdelatransition-e2e": {
+    "artisans-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -133,11 +133,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "lesartisansdelatransition:serve"
+            "devServerTarget": "artisans:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "lesartisansdelatransition:serve:production"
+              "devServerTarget": "artisans:serve:production"
             }
           }
         },
@@ -153,5 +153,5 @@
       }
     }
   },
-  "defaultProject": "lesartisansdelatransition"
+  "defaultProject": "artisans"
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\DBAL\Types;
 
-use Application\DBAL\Types\MoneyType;
+use Application\DBAL\Types\CHFType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
 use Money\Money;
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 class MoneyTypeTest extends TestCase
 {
     /**
-     * @var MoneyType
+     * @var CHFType
      */
     private $type;
 
@@ -24,7 +24,7 @@ class MoneyTypeTest extends TestCase
 
     public function setUp(): void
     {
-        $this->type = $this->getMockBuilder(MoneyType::class)->disableOriginalConstructor()
+        $this->type = $this->getMockBuilder(CHFType::class)->disableOriginalConstructor()
             ->setMethods(null)
             ->getMock();
         $this->platform = $this->createMock(AbstractPlatform::class);

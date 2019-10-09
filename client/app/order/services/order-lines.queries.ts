@@ -7,20 +7,16 @@ export const orderLineMetaFragment = gql`
         name
         order {
             id
-            balance
-            vatPart
+            balanceCHF
+            balanceEUR
         }
-        vatPart
-        vatRate
-        balance
-        pricePonderation
+        balanceCHF
+        balanceEUR
         product {
             id
             name
             code
-            unit
         }
-        unit
         quantity
         creationDate
     }
@@ -41,7 +37,8 @@ export const orderLinesQuery = gql`
             pageSize
             pageIndex
             length
-            totalBalance
+            totalBalanceCHF
+            totalBalanceEUR
             totalQuantity
         }
     }

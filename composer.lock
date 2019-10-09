@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73e59b2e4c6d5d05ffe5c610c76929c0",
+    "content-hash": "81a00e853e98c4eab8720a704289374f",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1329,72 +1329,6 @@
                 "response"
             ],
             "time": "2018-11-19T16:19:58+00:00"
-        },
-        {
-            "name": "genkgo/camt",
-            "version": "0.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/genkgo/camt.git",
-                "reference": "234b51ded8ffa06bc2b373c5939aa5d1da07ac6b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/genkgo/camt/zipball/234b51ded8ffa06bc2b373c5939aa5d1da07ac6b",
-                "reference": "234b51ded8ffa06bc2b373c5939aa5d1da07ac6b",
-                "shasum": ""
-            },
-            "require": {
-                "globalcitizen/php-iban": "^2.6",
-                "moneyphp/money": "^3",
-                "php": "^7.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.14",
-                "phpunit/phpunit": "~6"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Genkgo\\Camt\\": [
-                        "src"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Library to read CAMT files (XML containing bank statements).",
-            "time": "2019-05-06T00:32:43+00:00"
-        },
-        {
-            "name": "globalcitizen/php-iban",
-            "version": "v2.6.9",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/globalcitizen/php-iban.git",
-                "reference": "16b8c416e8a4047b52dca00794f161bfa68afb7a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/globalcitizen/php-iban/zipball/16b8c416e8a4047b52dca00794f161bfa68afb7a",
-                "reference": "16b8c416e8a4047b52dca00794f161bfa68afb7a",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "oophp-iban.php",
-                    "php-iban.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL-3.0"
-            ],
-            "description": "php-iban is a library for parsing and validating IBAN (and IIBAN) bank account information.",
-            "time": "2018-08-14T00:04:02+00:00"
         },
         {
             "name": "imagine/imagine",

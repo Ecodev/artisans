@@ -18,13 +18,7 @@ export class OrderResolver implements Resolve<OrderResolve> {
      * Resolve order data for router and panels service
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<OrderResolve> {
-        let observable;
-
-        if (route.params.orderId) {
-            observable = this.orderService.resolve(route.params.orderId);
-        } else if (route.params.transactionId) {
-            observable = this.orderService.resolveByTransaction(route.params.transactionId);
-        }
+        const observable = this.orderService.resolve(route.params.orderId);
 
         return this.errorService.redirectIfError(observable);
     }

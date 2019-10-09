@@ -44,14 +44,9 @@ export class ProductComponent implements OnInit {
     public quantityForm = new FormControl(null, [Validators.required, Validators.min(0)]);
 
     /**
-     * Form controller for price ponderation
-     */
-    public pricePonderation = new FormControl(1, [Validators.required, Validators.min(0), Validators.max(1)]);
-
-    /**
      * Combination of form controls of the page
      */
-    public formGroup = new FormGroup({quantity: this.quantityForm, pricePonderation: this.pricePonderation});
+    public formGroup = new FormGroup({quantity: this.quantityForm});
 
     constructor(@Inject(MAT_DIALOG_DATA) data: DialogTriggerProvidedData,
                 private cartService: CartService,
@@ -65,12 +60,10 @@ export class ProductComponent implements OnInit {
             if (this.routeSnapshot.params.index) {
                 this.edit = true;
                 this.quantityForm.setValue(this.cartService.cart[+this.routeSnapshot.params.index].quantity);
-                this.pricePonderation.setValue(this.cartService.cart[+this.routeSnapshot.params.index].pricePonderation);
             }
 
             this.computePrice();
             this.quantityForm.valueChanges.subscribe(() => this.computePrice(true));
-            this.pricePonderation.valueChanges.subscribe(() => this.computePrice(true));
 
             // Fetch permissions if they are missing
             if (!this.data.model.permissions) {
@@ -98,16 +91,16 @@ export class ProductComponent implements OnInit {
             }
         }
 
-        this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value, this.pricePonderation.value);
+        this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value);
     }
 
     public addToCart(): void {
-        this.cartService.add(this.data.model, +this.quantityForm.value, +this.pricePonderation.value);
+        this.cartService.add(this.data.model, +this.quantityForm.value);
         this.router.navigateByUrl('/');
     }
 
     public updateCart(): void {
-        this.cartService.updateProduct(+this.routeSnapshot.params.index, +this.quantityForm.value, +this.pricePonderation.value);
+        this.cartService.updateProduct(+this.routeSnapshot.params.index, +this.quantityForm.value);
         this.router.navigateByUrl('/');
     }
 

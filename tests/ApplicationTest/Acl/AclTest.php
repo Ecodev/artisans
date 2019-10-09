@@ -26,13 +26,13 @@ class AclTest extends TestCase
 
         User::setCurrent($owner);
         self::assertFalse($acl->isCurrentUserAllowed($user, 'update'), 'student cannot update even if owner');
-        self::assertSame('User "sarah" with role individual is not allowed on resource "User#" with privilege "update" because it is not himself', $acl->getLastDenialMessage());
+        self::assertSame('User "sarah" with role member is not allowed on resource "User#" with privilege "update" because it is not himself', $acl->getLastDenialMessage());
 
         $other = new User();
         $other->setLogin('john');
         User::setCurrent($other);
         self::assertFalse($acl->isCurrentUserAllowed($user, 'update'), 'other user cannot update');
-        self::assertSame('User "john" with role individual is not allowed on resource "User#" with privilege "update" because it is not himself', $acl->getLastDenialMessage());
+        self::assertSame('User "john" with role member is not allowed on resource "User#" with privilege "update" because it is not himself', $acl->getLastDenialMessage());
 
         // Test again the first case to assert that reject reason does not leak from one assertion to the next
         User::setCurrent(null);

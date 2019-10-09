@@ -1,4 +1,4 @@
-# Les artisants de la transition
+# Les artisans de la transition
 
 Master:
 [![Build Status](https://travis-ci.com/Ecodev/lesartisans.svg?branch=master)](https://travis-ci.com/Ecodev/lesartisans) &nbsp;
@@ -12,7 +12,7 @@ Develop:
 
 ## Introduction
 
-Chez Emmy is a web application based on GraphQL for the API and Angular for the client.
+Les artisans de la transition is a web application based on GraphQL for the API and Angular for the client.
 
 
 ## Installation
@@ -20,7 +20,7 @@ Chez Emmy is a web application based on GraphQL for the API and Angular for the 
 The recommended way to get a working copy is the following:
 
 1. Set up a nginx virtual host to point to `htdocs/` directory and to include `configuration/nginx.conf`
-2. Create a database in MariaDB named "lesartisansdelatransition"
+2. Create a database in MariaDB named "artisans"
 3. Configure database in `config/autoload/local.php` (see example ``config/autoload/local.php.dist``)
 4. Configure client in `client/assets/config/config.local.json` (see example ``client/assets/config/config.dist.json``)
 5. Finally, build the app:
@@ -55,7 +55,7 @@ $ composer clear-config-cache
 
 ### Client
 
-Run `yarn dev` for a dev server. Navigate to `http://lesartisansdelatransition.lan:4210/`. The app will
+Run `yarn dev` for a dev server. Navigate to `http://artisans.lan:4210/`. The app will
 automatically reload if you change any of the source files.
 
 ## Testing

@@ -7,16 +7,16 @@ return [
         'query' => '{
             permissions {
                 crud {
-                    account { create }
-                    accountingDocument { create }
+                    configuration { create }
+                    news { create }
+                    newsletter { create }
+                    session { create }
+                    subscription { create }
+                    userProduct { create }
                     product { create }
-                    productMetadata { create }
                     productTag { create }
-                    expenseClaim { create }
                     image { create }
                     message { create }
-                    transaction { create }
-                    transactionTag { create }
                     user { create }
                     userTag { create }
                 }
@@ -29,22 +29,28 @@ return [
         'data' => [
             'permissions' => [
                 'crud' => [
-                    'account' => [
+                    'configuration' => [
+                        'create' => false,
+                    ],
+                    'news' => [
                         'create' => true,
                     ],
-                    'accountingDocument' => [
+                    'newsletter' => [
+                        'create' => true,
+                    ],
+                    'session' => [
+                        'create' => true,
+                    ],
+                    'subscription' => [
+                        'create' => true,
+                    ],
+                    'userProduct' => [
                         'create' => true,
                     ],
                     'product' => [
                         'create' => true,
                     ],
-                    'productMetadata' => [
-                        'create' => true,
-                    ],
                     'productTag' => [
-                        'create' => true,
-                    ],
-                    'expenseClaim' => [
                         'create' => true,
                     ],
                     'image' => [
@@ -52,12 +58,6 @@ return [
                     ],
                     'message' => [
                         'create' => false,
-                    ],
-                    'transaction' => [
-                        'create' => true,
-                    ],
-                    'transactionTag' => [
-                        'create' => true,
                     ],
                     'user' => [
                         'create' => true,

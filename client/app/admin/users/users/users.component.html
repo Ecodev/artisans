@@ -28,18 +28,15 @@
                 </button>
 
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="balance">Solde</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="code">N° coopérateur</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="login">Login</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="age">Âge</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="creationDate">Créé le</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="updateDate">Modifié le</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="resignDate">Date démission</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="status">Status</span>
+                    <span naturalColumnsPickerColumn="code">Code</span>
+                    <span naturalColumnsPickerColumn="login">Login</span>
+                    <span naturalColumnsPickerColumn="creationDate">Créé le</span>
+                    <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
+                    <span naturalColumnsPickerColumn="membershipBegin">Date début</span>
+                    <span naturalColumnsPickerColumn="membershipEnd">Date fin</span>
                     <span naturalColumnsPickerColumn="email">Email</span>
-                    <span naturalColumnsPickerColumn="mobilePhone">Telephone</span>
-                    <span *ngIf="routeData?.isAdmin" naturalColumnsPickerColumn="flagWelcomeSessionDate">Séance d'accueil</span>
+                    <span naturalColumnsPickerColumn="phone">Téléphone</span>
                 </natural-columns-picker>
             </natural-search>
 
@@ -57,7 +54,6 @@
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
                             <natural-table-button
-                                    *ngIf="routeData?.isAdmin"
                                     [label]="element.name"
                                     [navigate]="['/admin/user', element.id]"
                                     matTooltip="Éditer"
@@ -68,33 +64,13 @@
                 </ng-container>
 
                 <ng-container matColumnDef="code">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header="code">N° coopérateur</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header="code">Code</th>
                     <td mat-cell *matCellDef="let element">{{ element.code}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="login">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
                     <td mat-cell *matCellDef="let element">{{ element.login }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="age">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Âge</th>
-                    <td mat-cell *matCellDef="let element">{{ element.age }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column natural-align-center>Status</th>
-                    <td mat-cell *matCellDef="let element" natural-align-center>
-                        <span *ngIf="isActive(element)">{{ element.status | enum: 'UserStatus' | capitalize | async }}</span>
-                        <button mat-flat-button
-                                [color]="isNew(element) ? 'accent' : 'primary'"
-                                (click)="activate(element)"
-                                *ngIf="!isActive(element)"
-                                [style.width.px]="150"
-                        >
-                            Activer ({{ element.status | enum: 'UserStatus' | capitalize | async }})
-                        </button>
-                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="creationDate">
@@ -111,34 +87,19 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="flagWelcomeSessionDate">
-                    <th mat-header-cell *matHeaderCellDef natural-7em-column>Accueil</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button mat-flat-button
-                                color="primary"
-                                *ngIf="!element.welcomeSessionDate"
-                                (click)="flagWelcomeSessionDate(element)"
-                        >A participé
-                        </button>
-                        <span *ngIf="element.welcomeSessionDate">{{ element.welcomeSessionDate | date: 'mediumDate' }}</span>
-                    </td>
+                <ng-container matColumnDef="membershipBegin">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date début</th>
+                    <td mat-cell *matCellDef="let element">{{ element.membershipBegin | date: 'mediumDate' }}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="resignDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date démission</th>
-                    <td mat-cell *matCellDef="let element">{{ element.resignDate | date: 'mediumDate' }}</td>
+                <ng-container matColumnDef="membershipEnd">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date fin</th>
+                    <td mat-cell *matCellDef="let element">{{ element.membershipEnd | date: 'mediumDate' }}</td>
                 </ng-container>
 
-                <ng-container matColumnDef="balance">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-6em-column>Solde</th>
-                    <td mat-cell *matCellDef="let element">
-                        <app-money [amount]="element.account?.balance"></app-money>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="mobilePhone">
+                <ng-container matColumnDef="phone">
                     <th mat-header-cell *matHeaderCellDef>Tél.</th>
-                    <td mat-cell *matCellDef="let element">{{ element.mobilePhone }}</td>
+                    <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="email">

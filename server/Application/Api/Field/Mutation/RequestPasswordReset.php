@@ -6,7 +6,6 @@ namespace Application\Api\Field\Mutation;
 
 use Application\Api\Field\FieldInterface;
 use Application\Api\Scalar\LoginType;
-use Application\DBAL\Types\RelationshipType;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
@@ -20,12 +19,12 @@ abstract class RequestPasswordReset implements FieldInterface
     {
         return [
             'name' => 'requestPasswordReset',
-            'type' => Type::nonNull(_types()->get('Relationship')),
+            'type' => Type::nonNull(Type::boolean()),
             'description' => 'Request to send an email to reset the password for the given user. It will **always** return a successful response, even if the user is not found.',
             'args' => [
                 'login' => Type::nonNull(_types()->get(LoginType::class)),
             ],
-            'resolve' => function ($root, array $args, SessionInterface $session): string {
+            'resolve' => function ($root, array $args, SessionInterface $session): bool {
                 global $container;
                 /** @var Mailer $mailer */
                 $mailer = $container->get(Mailer::class);
@@ -38,7 +37,6 @@ abstract class RequestPasswordReset implements FieldInterface
 
                 /** @var User $user */
                 $user = $repository->getOneByLogin($args['login']);
-                $relationship = RelationshipType::HOUSEHOLDER;
 
                 if ($user) {
                     $email = $user->getEmail();
@@ -48,8 +46,6 @@ abstract class RequestPasswordReset implements FieldInterface
                         $email = $repository->getAclFilter()->runWithoutAcl(function () use ($user) {
                             return $user->getOwner()->getEmail();
                         });
-
-                        $relationship = $user->getFamilyRelationship();
                     }
 
                     if ($email) {
@@ -59,7 +55,7 @@ abstract class RequestPasswordReset implements FieldInterface
                 }
 
                 // Here we lie to client, and always say we are successful, to avoid data leak
-                return $relationship;
+                return true;
             },
         ];
     }

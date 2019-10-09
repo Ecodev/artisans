@@ -7,44 +7,6 @@
                 Commissions
             </a>
 
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/product" class="big-button">
-                <natural-icon name="product" [size]="70"></natural-icon>
-                Produits
-            </a>
-
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" (click)="openDoor()" *ngIf="canAccessDoor()" class="big-button">
-                <natural-icon name="doors" [size]="70"></natural-icon>
-                Ouvrir
-            </a>
-
-            <mat-divider class="margin"></mat-divider>
-
-            <div [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile/family" class="big-button">
-                    <natural-icon name="family" [size]="50"></natural-icon>
-                    Famille
-                </a>
-            </div>
-
-            <div [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile/history" class="big-button">
-                    <natural-icon name="transactionHistory" [size]="50"></natural-icon>
-                    Historique des transactions
-                </a>
-            </div>
-            <div [style.max-width.px]="150">
-                <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/profile/finances" class="big-button">
-                    <natural-icon name="claims" [size]="50"></natural-icon>
-                    Dépenses et remboursements
-                </a>
-            </div>
-
-            <mat-divider class="margin"></mat-divider>
-            <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/members" class="big-button">
-                <natural-icon name="members" [size]="70"></natural-icon>
-                Membres
-            </a>
-
             <ng-container *ngIf="canAccessAdmin()">
                 <mat-divider class="margin"></mat-divider>
                 <a mat-button fxLayout="column" fxLayoutAlign="start center" routerLink="/admin" class="big-button">

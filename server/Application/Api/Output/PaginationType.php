@@ -7,9 +7,6 @@ namespace Application\Api\Output;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
-use Application\Model\StockMovement;
-use Application\Model\TransactionLine;
-use Application\Repository\ExportExcelInterface;
 use GraphQL\Type\Definition\ObjectType;
 
 class PaginationType extends ObjectType
@@ -49,60 +46,35 @@ class PaginationType extends ObjectType
 
                 // Add specific total fields if needed
                 if ($class === Product::class) {
-                    $fields['totalSupplierPrice'] = [
-                        'type' => _types()->get('Money'),
-                        'description' => 'The total supplier price',
-                    ];
-                    $fields['totalPricePerUnit'] = [
-                        'type' => _types()->get('Money'),
+                    $fields['totalPricePerUnitCHF'] = [
+                        'type' => _types()->get('CHF'),
                         'description' => 'The total price per unit',
                     ];
-                } elseif ($class === TransactionLine::class) {
-                    $fields['totalBalance'] = [
-                        'type' => _types()->get('Money'),
-                        'description' => 'The total balance',
+                    $fields['totalPricePerUnitEUR'] = [
+                        'type' => _types()->get('EUR'),
+                        'description' => 'The total price per unit',
                     ];
                 } elseif ($class === OrderLine::class) {
-                    $fields['totalBalance'] = [
-                        'type' => _types()->get('Money'),
+                    $fields['totalBalanceCHF'] = [
+                        'type' => _types()->get('CHF'),
+                        'description' => 'The total balance',
+                    ];
+                    $fields['totalBalanceEUR'] = [
+                        'type' => _types()->get('EUR'),
                         'description' => 'The total balance',
                     ];
                     $fields['totalQuantity'] = [
                         'type' => self::string(),
                         'description' => 'The total quantity',
                     ];
-                } elseif ($class === StockMovement::class) {
-                    $fields['totalDelta'] = [
-                        'type' => self::string(),
-                        'description' => 'The total delta',
-                    ];
-                    $fields['totalSale'] = [
-                        'type' => self::string(),
-                        'description' => 'The total delta for normal and special sales',
-                    ];
-                    $fields['totalLoss'] = [
-                        'type' => self::string(),
-                        'description' => 'The total delta for losses',
-                    ];
-                    $fields['totalDelivery'] = [
-                        'type' => self::string(),
-                        'description' => 'The total delta for deliveries',
-                    ];
-                    $fields['totalInventory'] = [
-                        'type' => self::string(),
-                        'description' => 'The total delta for inventories',
-                    ];
                 } elseif ($class === Order::class) {
-                    $fields['totalBalance'] = [
-                        'type' => _types()->get('Money'),
+                    $fields['totalBalanceCHF'] = [
+                        'type' => _types()->get('CHF'),
                         'description' => 'The total balance',
                     ];
-                }
-                $repository = _em()->getRepository($class);
-                if ($repository instanceof ExportExcelInterface) {
-                    $fields['excelExport'] = [
-                        'type' => self::nonNull(self::string()),
-                        'description' => 'URL to download filtered Excel listing',
+                    $fields['totalBalanceEUR'] = [
+                        'type' => _types()->get('EUR'),
+                        'description' => 'The total balance',
                     ];
                 }
 

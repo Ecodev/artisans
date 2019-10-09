@@ -5,16 +5,15 @@ import {
     CreateProduct,
     CreateProductVariables,
     DeleteProducts,
-    Product, Product_product,
+    Product,
     ProductInput,
     Products,
     ProductsVariables,
     ProductVariables,
-    PurchaseStatus,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -48,46 +47,18 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             deleteProducts);
     }
 
-    /**
-     * Filter only products in stock and active
-     */
-    public static getFilterForActiveInStock(): ProductsVariables {
-        return {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                isActive: {equal: {value: true}},
-                                quantity: {greater: {value: '0'}},
-                            },
-                        ],
-                    },
-                ],
-            },
-        };
-    }
-
     protected getDefaultForServer(): ProductInput {
         return {
             name: '',
             code: null,
             description: '',
-            pricePerUnit: '0',
-            supplier: '',
-            supplierPrice: '0',
-            supplierReference: '',
-            vatRate: '0.025',
-            unit: '',
-            margin: '0.20',
-            remarks: '',
+            pricePerUnitCHF: '0',
+            pricePerUnitEUR: '0',
             internalRemarks: '',
             isActive: true,
-            verificationDate: null,
             image: null,
-            ponderatePrice: false,
-            purchaseStatus: PurchaseStatus.ok,
-            minimumQuantity: '0',
+            releaseDate: null,
+            reviewNumber: 0,
         };
     }
 
@@ -103,17 +74,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         return {
             code: [NaturalValidators.unique('code', this)],
         };
-    }
-
-    public verify(product: Product_product, form?: FormGroup) {
-
-        const partialProduct = {id: product.id, verificationDate: (new Date()).toISOString()};
-        this.updatePartially(partialProduct).subscribe(result => {
-            if (form) {
-                form.patchValue(result);
-            }
-        });
-
     }
 
     public resolveByCode(code: string): Observable<{ model: any }> {

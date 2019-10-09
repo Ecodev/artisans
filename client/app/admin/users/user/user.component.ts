@@ -3,16 +3,11 @@ import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
     CreateUser,
     CreateUserVariables,
-    LogicalOperator,
-    SortingOrder,
-    TransactionLineSortingField,
-    TransactionLinesVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
     UserVariables,
 } from '../../../shared/generated-types';
-import { AccountService } from '../../accounts/services/account.service';
 import { UserTagService } from '../../userTags/services/userTag.service';
 import { UserService } from '../services/user.service';
 
@@ -30,17 +25,13 @@ export class UserComponent
         UpdateUserVariables,
         any> implements OnInit {
 
-    public showFamilyTab;
     public UserService = UserService;
 
-    public transactionLinesVariables;
-    public familyVariables;
     public nextCodeAvailable: number;
 
     constructor(private userService: UserService,
                 injector: Injector,
                 public userTagService: UserTagService,
-                public accountService: AccountService,
     ) {
         super('user', userService, injector);
     }
@@ -48,45 +39,10 @@ export class UserComponent
     ngOnInit() {
         super.ngOnInit();
 
-        this.route.data.subscribe(() => {
-
-            if (this.data.model.id) {
-                this.userService.getFamily(this.data.model).subscribe(family => {
-                    this.showFamilyTab = family.items.length > 1;
-                });
-
-                this.familyVariables = UserService.getFamilyVariables(this.data.model);
-                this.transactionLinesVariables = this.getTransactionQueryVariables();
-            }
-
-        });
-
         this.userService.getNextCodeAvailable().subscribe(code => {
             this.nextCodeAvailable = code;
         });
 
     }
 
-    public getTransactionQueryVariables(): TransactionLinesVariables {
-        const account = this.data.model.account;
-        if (!account) {
-            return {};
-        }
-
-        return {
-            filter: {
-                groups: [
-                    {
-                        conditionsLogic: LogicalOperator.OR,
-                        conditions: [
-                            {credit: {equal: {value: account.id}}},
-                            {debit: {equal: {value: account.id}}},
-                        ],
-                    },
-
-                ],
-            },
-            sorting: [{field: TransactionLineSortingField.transactionDate, order: SortingOrder.DESC}],
-        };
-    }
 }

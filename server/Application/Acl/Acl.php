@@ -4,27 +4,23 @@ declare(strict_types=1);
 
 namespace Application\Acl;
 
-use Application\Acl\Assertion\All;
-use Application\Acl\Assertion\ExpenseClaimStatusIsNew;
-use Application\Acl\Assertion\IsFamily;
 use Application\Acl\Assertion\IsMyself;
-use Application\Acl\Assertion\IsOwner;
-use Application\Acl\Assertion\StatusIsNew;
 use Application\Model\AbstractModel;
-use Application\Model\Account;
-use Application\Model\AccountingDocument;
-use Application\Model\ExpenseClaim;
+use Application\Model\Configuration;
+use Application\Model\Event;
+use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\Message;
+use Application\Model\News;
+use Application\Model\Newsletter;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
-use Application\Model\ProductMetadata;
 use Application\Model\ProductTag;
-use Application\Model\StockMovement;
-use Application\Model\Transaction;
-use Application\Model\TransactionTag;
+use Application\Model\Session;
+use Application\Model\Subscription;
 use Application\Model\User;
+use Application\Model\UserProduct;
 use Application\Model\UserTag;
 use Doctrine\Common\Util\ClassUtils;
 
@@ -46,74 +42,60 @@ class Acl extends \Zend\Permissions\Acl\Acl
     {
         // Each role is strictly "stronger" than the last one
         $this->addRole(User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_PARTNER, User::ROLE_ANONYMOUS);
-        $this->addRole(User::ROLE_INDIVIDUAL, User::ROLE_PARTNER);
-        $this->addRole(User::ROLE_MEMBER, User::ROLE_INDIVIDUAL);
-        $this->addRole(User::ROLE_PRODUCT, User::ROLE_MEMBER);
-        $this->addRole(User::ROLE_RESPONSIBLE, User::ROLE_PRODUCT);
-        $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_RESPONSIBLE);
+        $this->addRole(User::ROLE_MEMBER, User::ROLE_ANONYMOUS);
+        $this->addRole(User::ROLE_FACILITATOR, User::ROLE_MEMBER);
+        $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_FACILITATOR);
 
         $product = new ModelResource(Product::class);
-        $productMetadata = new ModelResource(ProductMetadata::class);
         $productTag = new ModelResource(ProductTag::class);
         $image = new ModelResource(Image::class);
         $user = new ModelResource(User::class);
         $userTag = new ModelResource(UserTag::class);
-        $account = new ModelResource(Account::class);
-        $accountingDocument = new ModelResource(AccountingDocument::class);
-        $transactionTag = new ModelResource(TransactionTag::class);
-        $expenseClaim = new ModelResource(ExpenseClaim::class);
+        $file = new ModelResource(File::class);
         $message = new ModelResource(Message::class);
-        $transaction = new ModelResource(Transaction::class);
         $order = new ModelResource(Order::class);
         $orderLine = new ModelResource(OrderLine::class);
-        $stockMovement = new ModelResource(StockMovement::class);
+        $configuration = new ModelResource(Configuration::class);
+        $event = new ModelResource(Event::class);
+        $news = new ModelResource(News::class);
+        $newsletter = new ModelResource(Newsletter::class);
+        $session = new ModelResource(Session::class);
+        $subscription = new ModelResource(Subscription::class);
+        $userProduct = new ModelResource(UserProduct::class);
 
         $this->addResource($product);
-        $this->addResource($productMetadata);
         $this->addResource($productTag);
         $this->addResource($image);
         $this->addResource($user);
         $this->addResource($userTag);
-        $this->addResource($account);
-        $this->addResource($accountingDocument);
-        $this->addResource($transactionTag);
-        $this->addResource($expenseClaim);
+        $this->addResource($file);
         $this->addResource($message);
-        $this->addResource($transaction);
         $this->addResource($order);
         $this->addResource($orderLine);
-        $this->addResource($stockMovement);
+        $this->addResource($configuration);
+        $this->addResource($event);
+        $this->addResource($news);
+        $this->addResource($newsletter);
+        $this->addResource($session);
+        $this->addResource($subscription);
+        $this->addResource($userProduct);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$product, $productMetadata, $productTag, $image, $transactionTag], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $userProduct, $productTag, $image], ['read']);
 
-        $this->allow(User::ROLE_INDIVIDUAL, [$user, $userTag], ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$user], ['update'], new IsMyself());
-        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['create']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$expenseClaim], ['update', 'delete'], new All(new IsFamily(), new StatusIsNew()));
-        $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['create'], new ExpenseClaimStatusIsNew());
-        $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$accountingDocument], ['update', 'delete'], new All(new IsFamily(), new ExpenseClaimStatusIsNew()));
-        $this->allow(User::ROLE_INDIVIDUAL, [$account], ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$message], ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$order, $orderLine], ['read']);
-        $this->allow(User::ROLE_INDIVIDUAL, [$order], ['create']);
+        $this->allow(User::ROLE_MEMBER, [$user, $userTag], ['read']);
+        $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsMyself());
+        $this->allow(User::ROLE_MEMBER, [$file], ['read']);
+        $this->allow(User::ROLE_MEMBER, [$message], ['read']);
+        $this->allow(User::ROLE_MEMBER, [$order, $orderLine], ['read']);
+        $this->allow(User::ROLE_MEMBER, [$order], ['create']);
 
-        $this->allow(User::ROLE_MEMBER, [$account], ['update']);
-        $this->allow(User::ROLE_MEMBER, [$user], ['create']);
-        $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsOwner());
+        $this->allow(User::ROLE_FACILITATOR, [$file], ['read', 'update']);
+        $this->allow(User::ROLE_FACILITATOR, [$user], ['create', 'update']);
+        $this->allow(User::ROLE_FACILITATOR, [$userTag], ['create', 'update', 'delete']);
 
-        $this->allow(User::ROLE_PRODUCT, [$product, $productMetadata, $productTag, $image], ['create', 'update', 'delete']);
-        $this->allow(User::ROLE_PRODUCT, [$stockMovement], ['read', 'create', 'update', 'delete']);
-
-        $this->allow(User::ROLE_RESPONSIBLE, [$transaction, $account, $transactionTag], ['read']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$expenseClaim, $accountingDocument], ['read', 'update']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$user], ['update']);
-        $this->allow(User::ROLE_RESPONSIBLE, [$userTag], ['create', 'update', 'delete']);
-
-        $this->allow(User::ROLE_ADMINISTRATOR, [$transaction, $account, $transactionTag, $accountingDocument], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $userProduct, $product, $productTag, $image], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$newsletter], ['create', 'read', 'update', 'delete']);
     }
 
     /**

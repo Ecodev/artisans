@@ -19,7 +19,8 @@
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="open" [checked]="false" [hidden]="true">Nom</span>
                     <span naturalColumnsPickerColumn="owner">Utilisateur</span>
-                    <span naturalColumnsPickerColumn="balance">Montant</span>
+                    <span naturalColumnsPickerColumn="balanceCHF">Montant (CHF)</span>
+                    <span naturalColumnsPickerColumn="balanceEUR">Montant (EUR)</span>
                 </natural-columns-picker>
             </natural-search>
         </div>
@@ -55,21 +56,26 @@
                 <ng-container matColumnDef="quantity">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header natural-7em-column>Quantité</th>
                     <td mat-cell *matCellDef="let element">
-                        {{ +element.quantity }}{{ element.unit || 'x' }}
-                        <ng-container *ngIf="element.pricePonderation !== '1.00'">
-                            à {{ element.pricePonderation | percent }}
-                        </ng-container>
+                        {{ +element.quantity }}
                     </td>
                     <td mat-footer-cell *matFooterCellDef>
                         <span *ngIf="showTotals === true && dataSource?.data.totalQuantity > 0">{{dataSource.data.totalQuantity}}</span>
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="balance">
+                <ng-container matColumnDef="balanceCHF">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column>Montant</th>
-                    <td mat-cell *matCellDef="let element">{{ element.balance | currency : 'CHF'}}</td>
+                    <td mat-cell *matCellDef="let element">{{ element.balanceCHF | currency : 'CHF'}}</td>
                     <td mat-footer-cell *matFooterCellDef>
-                        <span *ngIf="showTotals === true && dataSource?.data.totalBalance > 0">{{dataSource.data.totalBalance | currency : 'CHF'}}</span>
+                        <span *ngIf="showTotals === true && dataSource?.data.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="balanceEUR">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column>Montant</th>
+                    <td mat-cell *matCellDef="let element">{{ element.balanceEUR | currency : 'EUR'}}</td>
+                    <td mat-footer-cell *matFooterCellDef>
+                        <span *ngIf="showTotals === true && dataSource?.data.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
                     </td>
                 </ng-container>
 

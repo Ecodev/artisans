@@ -1,6 +1,6 @@
 {
   "/graphql": {
-    "target": "https://lesartisansdelatransition.lan",
+    "target": "https://artisans.lan",
     "secure": false
   }
 }

@@ -40,7 +40,7 @@ class MessageQueuer
 
     public function queueRegister(User $user): Message
     {
-        $subject = 'Demande de création de compte au coopérative Chez Emmy';
+        $subject = 'Demande de création de compte Les artisans de la transition';
         $mailParams = [
             'token' => $user->createToken(),
         ];
@@ -78,22 +78,6 @@ class MessageQueuer
         ];
 
         $message = $this->createMessage($user, $email, $subject, MessageTypeType::RESET_PASSWORD, $mailParams);
-
-        return $message;
-    }
-
-    /**
-     * @param User $user
-     *
-     * @return Message
-     */
-    public function queueBalance(User $user): Message
-    {
-        $subject = 'Balance de compte';
-        $mailParams = [
-        ];
-
-        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::BALANCE, $mailParams);
 
         return $message;
     }
@@ -138,33 +122,5 @@ class MessageQueuer
         $this->entityManager->persist($message);
 
         return $message;
-    }
-
-    /**
-     * @param User[] $users
-     *
-     * @return int
-     */
-    private function queueBalanceForEachUsers(array $users): int
-    {
-        foreach ($users as $user) {
-            $this->queueBalance($user);
-        }
-
-        return count($users);
-    }
-
-    public function queueAllBalance(): int
-    {
-        $users = $this->entityManager->getRepository(User::class)->getAllToQueueBalanceMessage();
-
-        return $this->queueBalanceForEachUsers($users);
-    }
-
-    public function queueNegativeBalance(): int
-    {
-        $users = $this->entityManager->getRepository(User::class)->getAllToQueueBalanceMessage(true);
-
-        return $this->queueBalanceForEachUsers($users);
     }
 }

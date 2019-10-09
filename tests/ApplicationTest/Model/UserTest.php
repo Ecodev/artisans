@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Model;
 
-use Application\Model\Account;
 use Application\Model\Product;
 use Application\Model\User;
 use Cake\Chronos\Chronos;
@@ -120,65 +119,6 @@ class UserTest extends TestCase
         ];
     }
 
-    public function testIndividualCannotOwnUsers(): void
-    {
-        $u1 = new User();
-        $u2 = new User();
-        $u3 = new User();
-
-        $u1->setOwner($u1);
-        $u2->setOwner($u1);
-
-        $this->expectExceptionMessage('This user cannot be owned by a user who is himself owned by somebody else');
-        $u3->setOwner($u2);
-    }
-
-    public function testIndividualCannotOwnUsers2(): void
-    {
-        $u1 = new User();
-        $u2 = new User();
-        $u3 = new User();
-
-        $u1->setOwner($u1);
-        $u3->setOwner($u2);
-
-        $this->expectExceptionMessage('This user owns other users, so he cannot himself be owned by somebody else');
-        $u2->setOwner($u1);
-    }
-
-    public function testSetStatus(): void
-    {
-        $u1 = new User();
-        $u2 = new User();
-
-        // Initial status
-        self::assertSame(User::STATUS_NEW, $u1->getStatus());
-        self::assertSame(User::STATUS_NEW, $u2->getStatus());
-
-        $u1->setOwner($u1);
-        $u2->setOwner($u1);
-        $u1->setStatus(User::STATUS_INACTIVE);
-
-        // Status is propagated to existing users
-        self::assertSame(User::STATUS_INACTIVE, $u1->getStatus());
-        self::assertSame(User::STATUS_INACTIVE, $u2->getStatus());
-
-        $u1->setStatus(user::STATUS_ACTIVE);
-        self::assertSame(User::STATUS_ACTIVE, $u1->getStatus());
-        self::assertSame(User::STATUS_ACTIVE, $u2->getStatus());
-
-        // Status is propagated on new users too
-        $u3 = new User();
-        self::assertSame(User::STATUS_NEW, $u3->getStatus());
-        $u3->setOwner($u1);
-        self::assertSame(User::STATUS_ACTIVE, $u3->getStatus());
-
-        // Status 'archived' sets resign date
-        Chronos::setTestNow((new Chronos()));
-        $u1->setStatus(User::STATUS_ARCHIVED);
-        self::assertTrue($u1->getResignDate() && $u1->getResignDate()->isToday());
-    }
-
     public function testToken(): void
     {
         $user = new User();
@@ -198,9 +138,6 @@ class UserTest extends TestCase
         $token3 = $user->createToken();
         self::assertEquals(32, mb_strlen($token3), 'must be exactly the length of DB field');
         self::assertTrue($user->isTokenValid(), 'third created token is valid');
-
-        $user->setStatus(User::STATUS_ACTIVE);
-        self::assertFalse($user->isTokenValid(), 'once user is activated token is invalid');
 
         $token4 = $user->createToken();
         self::assertEquals(32, mb_strlen($token4), 'must be exactly the length of DB field');
@@ -224,99 +161,6 @@ class UserTest extends TestCase
         ];
 
         self::assertCount(5, array_unique($allTokens), 'all tokens must be unique');
-    }
-
-    public function providerCanOpenDoor(): array
-    {
-        return [
-            'anonymous cannot open' => [
-                User::ROLE_ANONYMOUS,
-                User::STATUS_ACTIVE,
-                true,
-                false,
-            ],
-            'individual member can open' => [
-                User::ROLE_INDIVIDUAL,
-                User::STATUS_ACTIVE,
-                true,
-                true,
-            ],
-            'active member can open' => [
-                User::ROLE_MEMBER,
-                User::STATUS_ACTIVE,
-                true,
-                true,
-            ],
-            'inactive member cannot open' => [
-                User::ROLE_MEMBER,
-                User::STATUS_INACTIVE,
-                true,
-                false,
-            ],
-            'responsible can open' => [
-                User::ROLE_RESPONSIBLE,
-                User::STATUS_ACTIVE,
-                true,
-                true,
-            ],
-            'administrator can open' => [
-                User::ROLE_ADMINISTRATOR,
-                User::STATUS_ACTIVE,
-                true,
-                true,
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider providerCanOpenDoor
-     *
-     * @param string $role
-     * @param string $status
-     * @param bool $doors
-     * @param bool $expected
-     */
-    public function testCanOpenDoor(string $role, string $status, bool $doors, bool $expected): void
-    {
-        $user = new User($role);
-        $user->setStatus($status);
-        $user->setDoor($doors);
-
-        self::assertSame($expected, $user->getCanOpenDoor());
-    }
-
-    public function testGetAccount(): void
-    {
-        $user1 = new User();
-        $user2 = new User();
-
-        self::assertNull($user1->getAccount());
-        self::assertNull($user2->getAccount());
-
-        $account1 = new Account();
-        $account2 = new Account();
-        $account1->setOwner($user1);
-        $account2->setOwner($user2);
-
-        self::assertSame($account1, $user1->getAccount());
-        self::assertSame($account2, $user2->getAccount());
-
-        $user2->setOwner($user1);
-
-        self::assertSame($account1, $user1->getAccount());
-        self::assertSame($account1, $user2->getAccount(), 'user2 should now use user1 account');
-
-        User::setCurrent($user1);
-        $user2->setOwner($user2);
-
-        self::assertSame($account1, $user1->getAccount());
-        self::assertSame($account2, $user2->getAccount(), 'user2 should be use his own account again');
-
-        User::setCurrent($user2);
-        $user2->setOwner(null);
-
-        self::assertSame($account1, $user1->getAccount());
-        self::assertSame($account2, $user2->getAccount(), 'user2 should be use his own account again');
     }
 
     public function testCode(): void

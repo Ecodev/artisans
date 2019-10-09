@@ -4,21 +4,19 @@ import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
 import { map } from 'rxjs/operators';
 import {
-    FormValidators,
     FormAsyncValidators,
+    FormValidators,
     Literal,
     NaturalAbstractModelService,
     NaturalFormControl,
-    NaturalQueryVariablesManager,
     NaturalValidators,
 } from '@ecodev/natural';
 import {
     createUser,
     currentUserForProfileQuery,
-    nextCodeAvailableQuery,
-    leaveFamilyMutation,
     loginMutation,
     logoutMutation,
+    nextCodeAvailableQuery,
     unregisterMutation,
     updateUser,
     userByTokenQuery,
@@ -26,19 +24,13 @@ import {
     usersQuery,
 } from './user.queries';
 import {
-    BillingType,
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
-    LeaveFamily,
-    LeaveFamilyVariables,
-    LogicalOperator,
     Login,
     LoginVariables,
-    Logout, NextUserCode,
-    Relationship,
-    Sex,
-    SortingOrder,
+    Logout,
+    NextUserCode,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -47,11 +39,8 @@ import {
     UserByToken,
     UserByTokenVariables,
     UserInput,
-    UserPartialInput,
     UserRole,
     Users,
-    UserSortingField,
-    UserStatus,
     UsersVariables,
     UserVariables,
 } from '../../../shared/generated-types';
@@ -104,71 +93,11 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             null);
     }
 
-    /**
-     * Return filters for users for given roles and statuses
-     */
-    public static getFilters(roles: UserRole[], statuses: UserStatus[] | null, withCode: boolean = false): UsersVariables {
-        return {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                role: roles && roles.length ? {in: {values: roles}} : null,
-                                status: statuses ? {in: {values: statuses}} : null,
-                                code: withCode ? {null: {not: true}} : null,
-                            },
-                        ],
-                    },
-                ],
-            },
-        };
-    }
-
     public static canAccessAdmin(user: CurrentUserForProfile['viewer']): boolean {
         if (!user) {
             return false;
         }
-        return [UserRole.product, UserRole.responsible, UserRole.administrator].includes(user.role);
-    }
-
-    public static canAccessAccounting(user: CurrentUserForProfile['viewer']): boolean {
-        if (!user) {
-            return false;
-        }
-        return [UserRole.responsible, UserRole.administrator].includes(user.role);
-    }
-
-    public static canAccessUsers(user: CurrentUserForProfile['viewer']): boolean {
-        if (!user) {
-            return false;
-        }
-        return [UserRole.responsible, UserRole.administrator].includes(user.role);
-    }
-
-    public static canAccessDoor(user: CurrentUserForProfile['viewer']): boolean {
-        if (!user) {
-            return false;
-        }
-        return user.canOpenDoor;
-    }
-
-    public static getFamilyVariables(user): UsersVariables {
-
-        const familyBoss = user.owner || user;
-
-        return {
-            filter: {
-                groups: [
-                    {conditions: [{id: {equal: {value: familyBoss.id}}}]},
-                    {
-                        groupLogic: LogicalOperator.OR,
-                        conditions: [{owner: {equal: {value: familyBoss.id}}}],
-                    },
-                ],
-            },
-            sorting: [{field: UserSortingField.birthday, order: SortingOrder.ASC}],
-        };
+        return [UserRole.facilitator, UserRole.administrator].includes(user.role);
     }
 
     protected getDefaultForServer(): UserInput {
@@ -177,28 +106,17 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             email: null,
             firstName: '',
             lastName: '',
-            birthday: null,
             street: '',
             postcode: '',
             locality: '',
-            status: UserStatus.new,
             role: UserRole.member,
-            familyRelationship: Relationship.householder,
-            mobilePhone: '',
             phone: '',
-            door: false,
             code: null,
-            companyShares: 0,
-            companySharesDate: null,
             url: '',
-            billingType: BillingType.electronic,
-            remarks: '',
             internalRemarks: '',
             owner: null,
-            sex: Sex.not_known,
-            welcomeSessionDate: null,
-            iban: '',
-            receivesNewsletter: true,
+            membershipBegin: null,
+            membershipEnd: null,
         };
     }
 
@@ -221,19 +139,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return {
             code: [NaturalValidators.unique('code', this)],
         };
-    }
-
-    public getFormConfig(model: Literal): Literal {
-        const config = super.getFormConfig(model);
-
-        // Inject extra form control for the account which is strictly read-only
-        const formState = {
-            value: model.account,
-            disabled: true,
-        };
-        config.account = new NaturalFormControl(formState);
-
-        return config;
     }
 
     public login(loginData: LoginVariables): Observable<Login['login']> {
@@ -265,16 +170,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         });
 
         return subject;
-    }
-
-    public flagWelcomeSessionDate(id: string, value = (new Date()).toISOString()) {
-        const user: UserPartialInput = {welcomeSessionDate: value};
-        return this.updatePartially({id: id, ...user});
-    }
-
-    public activate(id: string) {
-        const user: UserPartialInput = {status: UserStatus.active};
-        return this.updatePartially({id: id, ...user});
     }
 
     public logout(): Observable<Logout['logout']> {
@@ -371,15 +266,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         }).pipe(map(result => result.data.unregister));
     }
 
-    public leaveFamily(user): Observable<{ model: LeaveFamily['leaveFamily'] }> {
-        return this.apollo.mutate<LeaveFamily, LeaveFamilyVariables>({
-            mutation: leaveFamilyMutation,
-            variables: {
-                id: user.id,
-            },
-        }).pipe(map(result => result.data.leaveFamily));
-    }
-
     /**
      * Can leave home if has an owner
      */
@@ -390,34 +276,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         }
 
         return !!user.owner && user.owner.id !== user.id;
-    }
-
-    /**
-     * Can become a member has no owner and is not member
-     */
-    public canBecomeMember(user: CurrentUserForProfile['viewer']): boolean {
-
-        if (!user) {
-            return false;
-        }
-
-        const isMember = [UserRole.member, UserRole.product, UserRole.responsible, UserRole.administrator].indexOf(user.role) > -1;
-
-        return !isMember && !this.canLeaveFamily(user);
-    }
-
-    public canUpdateTransaction(user: CurrentUserForProfile['viewer']): boolean {
-        if (!user) {
-            return false;
-        }
-        return user.role === UserRole.administrator;
-    }
-
-    public canDeleteAccountingDocument(user: CurrentUserForProfile['viewer']): boolean {
-        if (!user) {
-            return false;
-        }
-        return user.role === UserRole.administrator;
     }
 
     public requestPasswordReset(login) {
@@ -435,13 +293,4 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         });
     }
 
-    /**
-     * Get all members of the user family
-     */
-    public getFamily(user: CurrentUserForProfile['viewer']) {
-        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-        qvm.set('variables', UserService.getFamilyVariables(user));
-
-        return this.getAll(qvm);
-    }
 }

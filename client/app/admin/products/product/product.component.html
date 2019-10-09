@@ -1,15 +1,6 @@
 <div [formGroup]="form" class="detail-body">
 
     <natural-detail-header newLabel="Nouveau produit" label="Produit" [model]="data.model" [listRoute]="['admin', 'product']">
-        <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
-            <div fxLayout="column" style="text-align:right" *ngIf="form.get('verificationDate')?.value">
-                <div class="mat-body-2">Dernière vérification</div>
-                <div class="mat-body-1">{{ form.get('verificationDate')?.value | date: 'longDate' }}</div>
-            </div>
-            <button mat-flat-button color="primary" (click)="verify()" *ngIf="data.model.id">
-                Marquer comme vérifié
-            </button>
-        </div>
     </natural-detail-header>
 
     <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
@@ -64,11 +55,6 @@
                             ></textarea>
                         </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Remarques</mat-label>
-                            <textarea matInput formControlName="remarks" (change)="update()" matTextareaAutosize [matAutosizeMinRows]="1"
-                            ></textarea>
-                        </mat-form-field>
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
@@ -76,61 +62,32 @@
                         <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="20px">
                             <h2 class="mat-title no-margin" fxFlex>Prix</h2>
                             <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
-                            <mat-slide-toggle formControlName="ponderatePrice" (change)="update()">Prix ajustable</mat-slide-toggle>
                         </div>
 
                         <mat-form-field>
-                            <mat-label>Marge de profit</mat-label>
-                            <mat-select (selectionChange)="update()" formControlName="margin" required="required">
-                                <mat-option *ngFor="let item of availableMargin" [value]="item">
-                                    {{ item | percent }}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="form.get('margin')?.hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Taux de TVA</mat-label>
-                            <mat-select (selectionChange)="update()" formControlName="vatRate" required="required">
-                                <mat-option *ngFor="let item of availableVatRate" [value]="item">
-                                    {{ item | percent:'1.1-1' }}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="form.get('vatRate')?.hasError('required')">Requis</mat-error>
-                            <mat-hint>Montant de la TVA : {{ data.model.vatRate * data.model.pricePerUnit | currency : 'CHF' }}</mat-hint>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Unité</mat-label>
-                            <mat-select (selectionChange)="update()" formControlName="unit">
-                                <mat-option *ngFor="let item of availableUnits" [value]="item">
-                                    {{ item || 'A la pièce' }}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Prix par unité (TTC)</mat-label>
+                            <mat-label>Prix par unité (CHF)</mat-label>
                             <input matInput
                                    type="number"
                                    required="required"
                                    step="0.01"
-                                   formControlName="pricePerUnit"
-                                   (change)="update(); checkPrice();"
+                                   formControlName="pricePerUnitCHF"
+                                   (change)="update();"
                             >
                             <div matSuffix>CHF</div>
-                            <button mat-button
-                                    matSuffix
-                                    mat-icon-button
-                                    matTooltip="Utiliser le prix suggéré"
-                                    (click)="form.get('pricePerUnit')?.setValue(calculateSuggestedPricePerUnit()); update(); checkPrice();"
+                            <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Prix par unité (EUR)</mat-label>
+                            <input matInput
+                                   type="number"
+                                   required="required"
+                                   step="0.01"
+                                   formControlName="pricePerUnitEUR"
+                                   (change)="update();"
                             >
-                                <mat-icon>reply</mat-icon>
-                            </button>
-                            <mat-error *ngIf="form.get('pricePerUnit')?.hasError('required')">Requis</mat-error>
-                            <mat-hint *ngIf="sellingPriceTooLow" class="warn" align="start">Prix de vente inférieur au prix fournisseur!</mat-hint>
-                            <mat-hint align="end">Prix suggéré incluant le prix fournisseur, la marge de profit et la TVA
-                                      : {{ calculateSuggestedPricePerUnit() | currency : 'CHF' }}</mat-hint>
+                            <div matSuffix>EUR</div>
+                            <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="margin-top">
@@ -148,88 +105,8 @@
 
                 <mat-divider></mat-divider>
 
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="20px">
-                    <div fxLayout="column">
-                        <h2 class="mat-title">Stock</h2>
-                        <div fxLayout="row" fxLayoutGap="10px">
-                            <mat-form-field>
-                                <mat-label>Quantité en stock</mat-label>
-                                <input matInput type="number" disabled [value]="data.model.quantity">
-                                <div matSuffix>{{ data.model.unit }}</div>
-                                <button mat-button
-                                        matSuffix
-                                        mat-icon-button
-                                        matTooltip="Saisir un changement de stock"
-                                        (click)="createStockMovement()"
-                                >
-                                    <natural-icon name="stock_change"></natural-icon>
-                                </button>
-                            </mat-form-field>
-
-                            <mat-form-field>
-                                <mat-label>Stock minimum</mat-label>
-                                <input matInput type="number" required="required" step="0.01" formControlName="minimumQuantity" (change)="update()">
-                                <div matSuffix>{{ data.model.unit }}</div>
-                                <mat-error *ngIf="form.get('minimumQuantity')?.hasError('required')">Requis</mat-error>
-                                <mat-error *ngIf="form.get('minimumQuantity')?.hasError('min')">Valeur positive</mat-error>
-                            </mat-form-field>
-                        </div>
-
-                    </div>
-                    <div fxLayout="column" fxLayoutAlign="center start">
-                        <span class="mat-body-2">Commande au fournisseur</span>
-                        <mat-button-toggle-group (change)="update()" formControlName="purchaseStatus">
-                            <mat-button-toggle [value]="PurchaseStatus.ok">OK</mat-button-toggle>
-                            <mat-button-toggle [value]="PurchaseStatus.to_order">
-                                <natural-icon name="purchase_status_to_order"></natural-icon>À commander
-                            </mat-button-toggle>
-                            <mat-button-toggle [value]="PurchaseStatus.preordered">
-                                <natural-icon name="purchase_status_preordered"></natural-icon>Précommandé
-                            </mat-button-toggle>
-                            <mat-button-toggle [value]="PurchaseStatus.ordered">
-                                <natural-icon name="purchase_status_ordered"></natural-icon>Commandé
-                            </mat-button-toggle>
-                        </mat-button-toggle-group>
-                    </div>
-                </div>
-
-                <mat-divider></mat-divider>
-
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-                        <h2 class="mat-title">Fournisseur</h2>
-
-                        <mat-form-field>
-                            <mat-label>Nom du fournisseur</mat-label>
-                            <input matInput formControlName="supplier" (change)="update()">
-                            <mat-error *ngIf="form.get('supplier')?.hasError('required')">Requis</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Prix payé au fournisseur</mat-label>
-                            <input matInput
-                                   type="number"
-                                   required="required"
-                                   step="0.01"
-                                   min="0"
-                                   formControlName="supplierPrice"
-                                   (change)="update(); checkPrice();"
-                            >
-                            <div matSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('supplierPrice')?.hasError('required')">Requis</mat-error>
-                            <mat-error *ngIf="form.get('supplierPrice')?.hasError('min')">Le montant doit être positif</mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Code produit chez le fournisseur</mat-label>
-                            <input matInput maxlength="20" formControlName="supplierReference" (change)="update()">
-                            <mat-error *ngIf="form.get('supplierReference')?.hasError('maxlength')">
-                                Maximum {{form.get('supplierReference')?.errors.maxlength.requiredLength }} caractères
-                            </mat-error>
-                        </mat-form-field>
-
-                    </div>
-                    <div fxFlex="33" fxLayout="column">
 
                         <div *ngIf="data.model.id">
                             <h2 class="mat-title">Tags</h2>
@@ -255,15 +132,11 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Attributs" *ngIf="data.model.id">
-            <app-product-metadata [product]="data.model" [edit]="true" class="margin"></app-product-metadata>
-        </mat-tab>
-
         <mat-tab label="Ventes" *ngIf="data.model.id">
             <app-order-lines
                     [persistSearch]="false"
                     [contextVariables]="orderLinesVariables"
-                    [contextColumns]="['creationDate', 'quantity', 'owner', 'balance']"
+                    [contextColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
                     [showTotals]="true"
             ></app-order-lines>
         </mat-tab>

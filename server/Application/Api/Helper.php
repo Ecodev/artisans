@@ -9,10 +9,6 @@ use Application\Model\AbstractModel;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
-use Application\Model\StockMovement;
-use Application\Model\TransactionLine;
-use Application\Repository\ExportExcelInterface;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use GraphQL\Doctrine\Definition\EntityID;
@@ -72,63 +68,25 @@ abstract class Helper
         if ($class === Product::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(product1.supplierPrice) AS totalSupplierPrice')
-                ->addSelect('SUM(product1.pricePerUnit) AS totalPricePerUnit');
-
-            $result = $qb->getQuery()->getResult()[0];
-        } elseif ($class === TransactionLine::class) {
-            $qb->resetDQLPart('select')
-                ->resetDQLPart('orderBy')
-                ->addSelect('SUM(transactionLine1.balance) AS totalBalance');
+                ->addSelect('SUM(product1.pricePerUnitCHF) AS totalPricePerUnitCHF')
+                ->addSelect('SUM(product1.pricePerUnitEUR) AS totalPricePerUnitEUR');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === OrderLine::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(orderLine1.balance) AS totalBalance')
+                ->addSelect('SUM(orderLine1.balanceCHF) AS totalBalanceCHF')
+                ->addSelect('SUM(orderLine1.balanceEUR  ) AS totalBalanceEUR')
                 ->addSelect('SUM(orderLine1.quantity) AS totalQuantity');
-
-            $result = $qb->getQuery()->getResult()[0];
-        } elseif ($class === StockMovement::class) {
-            $qb->resetDQLPart('select')
-                ->resetDQLPart('orderBy')
-                ->addSelect('SUM(stockMovement1.delta) AS totalDelta')
-                ->addSelect('SUM(IF(FIND_IN_SET(stockMovement1.type, \'sale,special_sale\') > 0, stockMovement1.delta, 0)) as totalSale')
-                ->addSelect('SUM(IF(stockMovement1.type = \'loss\', stockMovement1.delta, 0)) as totalLoss')
-                ->addSelect('SUM(IF(stockMovement1.type = \'delivery\', stockMovement1.delta, 0)) as totalDelivery')
-                ->addSelect('SUM(IF(stockMovement1.type = \'inventory\', stockMovement1.delta, 0)) as totalInventory');
 
             $result = $qb->getQuery()->getResult()[0];
         } elseif ($class === Order::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
-                ->addSelect('SUM(order1.balance) AS totalBalance');
+                ->addSelect('SUM(order1.balanceCHF) AS totalBalanceCHF')
+                ->addSelect('SUM(order1.balanceEUR) AS totalBalanceEUR');
 
             $result = $qb->getQuery()->getResult()[0];
-        }
-
-        return $result;
-    }
-
-    /**
-     * Lazy resolve the Excel export of the listing query
-     *
-     * @param string $class
-     * @param QueryBuilder $qb
-     *
-     * @return array
-     */
-    public static function excelExportField(string $class, QueryBuilder $qb): array
-    {
-        $result = [];
-
-        $repository = _em()->getRepository($class);
-
-        if ($repository instanceof ExportExcelInterface) {
-            $query = $qb->getQuery();
-            $result['excelExport'] = function () use ($query, $repository): string {
-                return $repository->exportExcel($query);
-            };
         }
 
         return $result;

@@ -28,13 +28,12 @@ class UserRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [1000, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012];
+        $all = [1000, 1001, 1002, 1003];
 
         return [
             ['anonymous', []],
-            ['individual', $all],
             ['member', $all],
-            ['responsible', $all],
+            ['facilitator', $all],
             ['administrator', $all],
         ];
     }
@@ -68,21 +67,9 @@ class UserRepositoryTest extends AbstractRepositoryTest
         self::assertCount(1, $actual);
     }
 
-    public function testGetAllToQueueBalanceMessage(): void
-    {
-        $actual = $this->repository->getAllToQueueBalanceMessage();
-        self::assertCount(6, $actual);
-    }
-
-    public function testGetAllToQueueBalanceMessageNegative(): void
-    {
-        $actual = $this->repository->getAllToQueueBalanceMessage(true);
-        self::assertCount(0, $actual);
-    }
-
     public function testGetNextCode(): void
     {
         $next = $this->repository->getNextCodeAvailable();
-        self::assertSame(10, $next);
+        self::assertSame(5, $next);
     }
 }

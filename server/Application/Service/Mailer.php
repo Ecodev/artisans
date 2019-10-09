@@ -134,7 +134,7 @@ class Mailer
         $mailMessage->setEncoding('UTF-8');
         $mailMessage->setSubject($modelMessage->getSubject());
         $mailMessage->setBody($body);
-        $mailMessage->setFrom($this->fromEmail, 'Emmy');
+        $mailMessage->setFrom($this->fromEmail, 'Artisans');
 
         return $mailMessage;
     }

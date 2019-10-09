@@ -21,7 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
-import { EmmyModule } from './shared/modules/emmy.module';
+import { ArtisansModule } from './shared/modules/artisans.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
@@ -42,7 +42,7 @@ registerLocaleData(localeFRCH);
         BrowserModule,
         BrowserAnimationsModule,
         MaterialModule,
-        EmmyModule,
+        ArtisansModule,
         NgProgressModule,
         ApolloModule,
         AppRoutingModule,

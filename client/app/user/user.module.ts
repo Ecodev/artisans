@@ -6,7 +6,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { RegisterComponent } from './components/register/register.component';
 import { RegisterConfirmComponent } from './components/register/register-confirm.component';
 import { MaterialModule } from '../shared/modules/material.module';
-import { EmmyModule } from '../shared/modules/emmy.module';
+import { ArtisansModule } from '../shared/modules/artisans.module';
 import { PasswordComponent } from './components/password/password.component';
 
 @NgModule({
@@ -21,7 +21,7 @@ import { PasswordComponent } from './components/password/password.component';
         CommonModule,
         UserRoutingModule,
         MaterialModule,
-        EmmyModule,
+        ArtisansModule,
     ],
 })
 export class UserModule {

@@ -11,7 +11,6 @@
 @import '../app/shared/components/money/money.theme';
 @import '../app/shared/components/file/file.theme';
 @import '../app/admin/products/product/product.theme';
-@import '../app/shared/components/transaction-amount/transaction-amount.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -24,12 +23,11 @@
     @include money($theme);
     @include file($theme);
     @include product($theme);
-    @include transaction-amount($theme);
     @include rich-text($theme);
 }
 
 
-$mat-emmy-primary: (
+$mat-artisans-primary: (
         50: #f1f8e9,
         100: #dcedc8,
         200: #c5e1a5,
@@ -64,10 +62,10 @@ $mat-emmy-primary: (
 
 
 // Configure themes
-$emmy-primary: mat-palette($mat-emmy-primary);
-$emmy-accent: mat-palette($mat-purple);
-$emmy-warn: mat-palette($mat-red);
-$emmy-theme: mat-light-theme($emmy-primary, $emmy-accent, $emmy-warn);
+$artisans-primary: mat-palette($mat-artisans-primary);
+$artisans-accent: mat-palette($mat-purple);
+$artisans-warn: mat-palette($mat-red);
+$artisans-theme: mat-light-theme($artisans-primary, $artisans-accent, $artisans-warn);
 
-@include angular-material-theme($emmy-theme);
-@include components-theme($emmy-theme);
+@include angular-material-theme($artisans-theme);
+@include components-theme($artisans-theme);

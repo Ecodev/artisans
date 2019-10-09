@@ -6,13 +6,10 @@ namespace Application\Model;
 
 use Application\Traits\HasBalance;
 use Application\Traits\HasName;
+use Application\Traits\HasOrderType;
 use Application\Traits\HasQuantity;
-use Application\Traits\HasUnit;
-use Application\Traits\HasVatPart;
-use Application\Traits\HasVatRate;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
-use Money\Money;
 
 /**
  * A single line in the shopping cart when making an order
@@ -22,11 +19,9 @@ use Money\Money;
 class OrderLine extends AbstractModel
 {
     use HasName;
-    use HasUnit;
     use HasQuantity;
     use HasBalance;
-    use HasVatRate;
-    use HasVatPart;
+    use HasOrderType;
 
     /**
      * @var Order
@@ -49,25 +44,20 @@ class OrderLine extends AbstractModel
     private $product;
 
     /**
-     * @var string
+     * @var null|Subscription
      *
-     * @ORM\Column(type="decimal", precision=4, scale=2, options={"unsigned" = true, "default" = "1.00"})
+     * @ORM\ManyToOne(targetEntity="Subscription")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * })
      */
-    private $pricePonderation = '1.00';
-
-    /**
-     * @var null|StockMovement
-     *
-     * @ORM\OneToOne(targetEntity="StockMovement", mappedBy="orderLine")
-     */
-    private $stockMovement;
+    private $subscription;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->vatPart = Money::CHF(0);
     }
 
     /**
@@ -110,48 +100,30 @@ class OrderLine extends AbstractModel
      */
     public function setProduct(Product $product): void
     {
+        $this->subscription = null;
         $this->product = $product;
         $this->setName($product->getName());
-        $this->setUnit($product->getUnit());
-        $this->setVatRate($product->getVatRate());
     }
 
     /**
-     * Set price ratio ponderation
+     * Get related subscription, if it still exists in DB
      *
-     * @param string $pricePonderation
+     * @return null|Subscription
      */
-    public function setPricePonderation(string $pricePonderation): void
+    public function getSubscription(): ?Subscription
     {
-        $this->pricePonderation = $pricePonderation;
+        return $this->subscription;
     }
 
     /**
-     * @return string
-     */
-    public function getPricePonderation(): string
-    {
-        return $this->pricePonderation;
-    }
-
-    /**
-     * For historical reason very old orderLine may not have a stockMovement
+     * Set related subscription
      *
-     * @return null|StockMovement
+     * @param Subscription $subscription
      */
-    public function getStockMovement(): ?StockMovement
+    public function setSubscription(Subscription $subscription): void
     {
-        return $this->stockMovement;
-    }
-
-    /**
-     * Notify the orderLine that it has a new stockMovement
-     * This should only be called by StockMovement::setOrderLine()
-     *
-     * @param StockMovement $stockMovement
-     */
-    public function stockMovementAdded(StockMovement $stockMovement): void
-    {
-        $this->stockMovement = $stockMovement;
+        $this->product = null;
+        $this->subscription = $subscription;
+        $this->setName($subscription->getName());
     }
 }

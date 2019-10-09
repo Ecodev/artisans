@@ -11,7 +11,6 @@ export interface CartLine {
     product: Products['products']['items'][0] | Product['product'];
     quantity: number;
     total: number;
-    pricePonderation: number;
 }
 
 @Injectable({
@@ -19,9 +18,8 @@ export interface CartLine {
 })
 export class CartService {
 
-    public static totalTaxes = 0;
     public static totalTaxInc = 0;
-    private static storageKey = 'chez-emmy-cart';
+    private static storageKey = 'artisans-cart';
     public cart: CartLine[] = [];
 
     constructor(private orderService: OrderService, private alertService: NaturalAlertService) {
@@ -43,10 +41,10 @@ export class CartService {
         }
     }
 
-    public static getPriceTaxInc(product: CartLine['product'], quantity: number, ponderation: number): number {
-        const quantifiedPrice = Decimal.mul(product.pricePerUnit, quantity);
-        const ponderatedPrice = Decimal.mul(quantifiedPrice, ponderation);
-        return moneyRoundUp(+ponderatedPrice);
+    public static getPriceTaxInc(product: CartLine['product'], quantity: number): number {
+        // TODO add parameter to switch between CHF and EUR
+        const quantifiedPrice = Decimal.mul(product.pricePerUnitCHF, quantity);
+        return moneyRoundUp(+quantifiedPrice);
     }
 
     private static persistCart(cart) {
@@ -55,7 +53,6 @@ export class CartService {
     }
 
     private static computeTotals(cart) {
-        CartService.totalTaxes = cart.reduce((a, line) => a + line.total - +Decimal.div(line.total, +line.product.vatRate + 1), 0);
         CartService.totalTaxInc = cart.reduce((a, line) => a + line.total, 0);
     }
 
@@ -63,21 +60,20 @@ export class CartService {
         return this.orderService.create(this.cart as any); // whines because of a number is provided instead of a string. TODO : fix
     }
 
-    public add(product: CartLine['product'], quantity: number, ponderation: number) {
+    public add(product: CartLine['product'], quantity: number) {
 
-        const existingLineIndex = this.getLineIndexByProductAndPonderation(product, ponderation);
+        const existingLineIndex = this.getLineIndexByProduct(product);
 
         if (existingLineIndex > -1) {
             const existingLine = this.cart[existingLineIndex];
             existingLine.quantity += quantity;
-            existingLine.total = CartService.getPriceTaxInc(product, existingLine.quantity, ponderation);
+            existingLine.total = CartService.getPriceTaxInc(product, existingLine.quantity);
 
         } else {
             this.cart.push({
                 product: product,
                 quantity: quantity,
-                pricePonderation: ponderation,
-                total: CartService.getPriceTaxInc(product, quantity, ponderation),
+                total: CartService.getPriceTaxInc(product, quantity),
             });
         }
 
@@ -85,12 +81,12 @@ export class CartService {
     }
 
     /**
-     * Return a line from cart where product, quantity and price ponderation are identical
-     * @param excludeIndex If provided ignore that index (permits to prevent colision in search)
+     * Return a line from cart where product, quantity are identical
+     * @param excludeIndex If provided ignore that index (permits to prevent collision in search)
      */
-    public getLineIndexByProductAndPonderation(product: CartLine['product'], ponderation: number, excludeIndex?: number): number {
+    public getLineIndexByProduct(product: CartLine['product'], excludeIndex?: number): number {
         return this.cart.findIndex((line: CartLine, index: number) => {
-            return index === excludeIndex ? false : line.product.id === product.id && line.pricePonderation === ponderation;
+            return index === excludeIndex ? false : line.product.id === product.id;
         });
     }
 
@@ -104,17 +100,16 @@ export class CartService {
         CartService.persistCart(this.cart);
     }
 
-    public updateProduct(index: number, quantity: number, pricePonderation: number) {
+    public updateProduct(index: number, quantity: number) {
 
-        const similarLineIndex = this.getLineIndexByProductAndPonderation(this.cart[index].product, pricePonderation, index);
+        const similarLineIndex = this.getLineIndexByProduct(this.cart[index].product, index);
         const currentLine = this.cart[index];
 
         // In case there is some other line with same parameters, merge them in the other line, and clear the current one
         if (similarLineIndex > -1) {
             const similarLine = this.cart[similarLineIndex];
             currentLine.quantity = quantity + similarLine.quantity;
-            currentLine.pricePonderation = pricePonderation;
-            currentLine.total = CartService.getPriceTaxInc(currentLine.product, currentLine.quantity, pricePonderation);
+            currentLine.total = CartService.getPriceTaxInc(currentLine.product, currentLine.quantity);
             this.remove(similarLineIndex);
             this.alertService.info('Deux produits partageant les mêmes caractéristiques ont été combinés');
             CartService.persistCart(this.cart);
@@ -127,8 +122,7 @@ export class CartService {
         } else {
             // If product exist and quantity is truey, update existing entry
             currentLine.quantity = quantity;
-            currentLine.pricePonderation = pricePonderation;
-            currentLine.total = CartService.getPriceTaxInc(currentLine.product, quantity, pricePonderation);
+            currentLine.total = CartService.getPriceTaxInc(currentLine.product, quantity);
         }
 
         CartService.persistCart(this.cart);

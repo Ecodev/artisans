@@ -9,13 +9,13 @@
 declare(strict_types=1);
 
 return [
-    'hostname' => 'lesartisansdelatransition.lan',
+    'hostname' => 'artisans.lan',
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'params' => [
                     'host' => 'localhost',
-                    'dbname' => 'lesartisansdelatransition',
+                    'dbname' => 'artisans',
                     'user' => 'root',
                     'password' => '',
                     'port' => 3306,
@@ -27,7 +27,7 @@ return [
         'endpoint' => 'http://localhost:8888',
         'token' => 'my-token-value',
     ],
-    'fromEmail' => 'noreply@lesartisansdelatransition.lan',
+    'fromEmail' => 'noreply@artisans.lan',
     'emailOverride' => 'your@email.com',
     'smtp' => [
         'name' => 'mail.example.com',

@@ -5,11 +5,8 @@ import {
     NaturalEnumService,
     NaturalSearchFacets,
     NaturalSearchSelection,
-    replaceOperatorByName,
     TypeDateComponent,
     TypeDateConfiguration,
-    TypeHierarchicSelectorComponent,
-    TypeHierarchicSelectorConfiguration,
     TypeNaturalSelectComponent,
     TypeNumberComponent,
     TypeNumberConfiguration,
@@ -19,22 +16,18 @@ import {
     TypeTextComponent,
     wrapLike,
 } from '@ecodev/natural';
-import { AccountService } from '../../admin/accounts/services/account.service';
 import { ProductService } from '../../admin/products/services/product.service';
 import { ProductTagService } from '../../admin/productTags/services/productTag.service';
-import { TransactionService } from '../../admin/transactions/services/transaction.service';
-import { TransactionTagService } from '../../admin/transactionTags/services/transactionTag.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { ProductFilterGroupCondition, UserFilterGroupCondition } from '../generated-types';
-import { accountHierarchicConfiguration } from '../hierarchic-selector/AccountHierarchicConfiguration';
 
 /**
  * Convert percentage for server
  */
 function percentage(selection: NaturalSearchSelection): NaturalSearchSelection {
     Object.keys(selection.condition).forEach(key => {
-        if (selection.condition && selection.condition[key] ) {
+        if (selection.condition && selection.condition[key]) {
             const condition = selection.condition[key];
             if (condition && condition.value) {
                 condition.value = condition.value / 100;
@@ -90,16 +83,6 @@ export class NaturalSearchFacetsService {
         },
     };
 
-    private readonly transactionTags: DropdownFacet<TypeSelectNaturalConfiguration> = {
-        display: 'Tags',
-        field: 'transactionTag',
-        component: TypeNaturalSelectComponent,
-        configuration: {
-            service: this.transactionTagService,
-            placeholder: 'Tags',
-        },
-    };
-
     private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Utilisateur',
         field: 'owner',
@@ -150,16 +133,6 @@ export class NaturalSearchFacetsService {
         },
     };
 
-    private readonly transaction: DropdownFacet<TypeSelectNaturalConfiguration> = {
-        display: 'Transaction',
-        field: 'transaction',
-        component: TypeNaturalSelectComponent,
-        configuration: {
-            service: this.transactionService,
-            placeholder: 'Transaction',
-        },
-    };
-
     private readonly product: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Produit',
         field: 'product',
@@ -178,7 +151,7 @@ export class NaturalSearchFacetsService {
     };
 
     private readonly userCode: DropdownFacet<TypeNumberConfiguration> = {
-        display: 'Nº coopérateur',
+        display: 'Code',
         field: 'code',
         component: TypeNumberComponent,
         configuration: {
@@ -269,118 +242,6 @@ export class NaturalSearchFacetsService {
             this.creationDate,
             this.updateDate,
         ],
-        transactionLines: [
-            this.transaction,
-            {
-                display: 'Montant',
-                field: 'balance',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Compte au débit',
-                field: 'debit',
-                name: 'debit-included',
-                component: TypeHierarchicSelectorComponent,
-                showValidateButton: true,
-                configuration: {
-                    key: 'account',
-                    service: this.accountService,
-                    config: accountHierarchicConfiguration,
-                },
-            } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
-            {
-                display: 'Compte au crédit',
-                field: 'credit',
-                name: 'credit-included',
-                component: TypeHierarchicSelectorComponent,
-                showValidateButton: true,
-                configuration: {
-                    key: 'account',
-                    service: this.accountService,
-                    config: accountHierarchicConfiguration,
-                },
-            } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
-            {
-                display: 'Compte au débit exclu',
-                field: 'debit',
-                name: 'debit-excluded',
-                component: TypeHierarchicSelectorComponent,
-                showValidateButton: true,
-                configuration: {
-                    key: 'account',
-                    service: this.accountService,
-                    config: accountHierarchicConfiguration,
-                },
-                transform: dontHave,
-            } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
-            {
-                display: 'Compte au crédit exclus',
-                field: 'credit',
-                name: 'credit-excluded',
-                component: TypeHierarchicSelectorComponent,
-                showValidateButton: true,
-                configuration: {
-                    key: 'account',
-                    service: this.accountService,
-                    config: accountHierarchicConfiguration,
-                },
-                transform: dontHave,
-            } as DropdownFacet<TypeHierarchicSelectorConfiguration>,
-            {
-                display: 'Date de transaction',
-                field: 'transactionDate',
-                component: TypeDateComponent,
-            } as DropdownFacet<TypeDateConfiguration>,
-            {
-                display: 'Justificatif',
-                field: 'custom',
-                component: TypeSelectComponent,
-                name: 'transactionWithDocument',
-                transform: replaceOperatorByName,
-                configuration: {
-                    items: [
-                        {value: true, name: 'Avec'},
-                        {value: false, name: 'Sans'},
-                    ],
-                },
-            } as DropdownFacet<TypeSelectConfiguration>,
-            this.transactionTags,
-            this.owner,
-            this.creationDate,
-            this.updateDate,
-        ],
-        stockMovements: [
-            this.product,
-            {
-                display: 'Mouvement',
-                field: 'delta',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.001,
-                },
-            } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Solde',
-                field: 'quantity',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.001,
-                },
-            } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Type',
-                field: 'type',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('StockMovementType'),
-                },
-            } as DropdownFacet<TypeSelectConfiguration>,
-            this.owner,
-            this.creationDate,
-        ],
         productsFrontend: [
             this.name,
             this.productTags,
@@ -392,8 +253,16 @@ export class NaturalSearchFacetsService {
             this.productIsActive,
             this.productTags,
             {
-                display: 'Prix de vente',
-                field: 'pricePerUnit',
+                display: 'Prix de vente (CHF)',
+                field: 'pricePerUnitCHF',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.01,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
+            {
+                display: 'Prix de vente (EUR)',
+                field: 'pricePerUnitEUR',
                 component: TypeNumberComponent,
                 configuration: {
                     step: 0.01,
@@ -444,8 +313,16 @@ export class NaturalSearchFacetsService {
         ],
         orders: [
             {
-                display: 'Total',
-                field: 'balance',
+                display: 'Total (CHF)',
+                field: 'balanceCHF',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.01,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
+            {
+                display: 'Total (EUR)',
+                field: 'balanceEUR',
                 component: TypeNumberComponent,
                 configuration: {
                     step: 0.01,
@@ -458,8 +335,16 @@ export class NaturalSearchFacetsService {
         orderLines: [
             this.owner,
             {
-                display: 'Montant',
-                field: 'balance',
+                display: 'Montant (CHF)',
+                field: 'balanceCHF',
+                component: TypeNumberComponent,
+                configuration: {
+                    step: 0.01,
+                },
+            } as DropdownFacet<TypeNumberConfiguration>,
+            {
+                display: 'Montant (EUR)',
+                field: 'balanceEUR',
                 component: TypeNumberComponent,
                 configuration: {
                     step: 0.01,
@@ -475,67 +360,13 @@ export class NaturalSearchFacetsService {
             } as DropdownFacet<TypeNumberConfiguration>,
             this.creationDate,
         ],
-        accounts: [
-            this.name,
-            {
-                display: 'Type',
-                field: 'type',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('AccountType'),
-                },
-            } as DropdownFacet<TypeSelectConfiguration>,
-            {
-                display: 'IBAN',
-                field: 'iban',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
-            {
-                display: 'Solde',
-                field: 'balance',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } as DropdownFacet<TypeNumberConfiguration>,
-            this.owner,
-            this.creationDate,
-            this.updateDate,
-        ],
-        expenseClaims: [
-            this.name,
-            {
-                display: 'Status',
-                field: 'status',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('ExpenseClaimStatus'),
-                },
-            } as DropdownFacet<TypeSelectConfiguration>,
-            {
-                display: 'Type',
-                field: 'type',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('ExpenseClaimType'),
-                },
-            } as DropdownFacet<TypeSelectConfiguration>,
-            this.owner,
-            this.creationDate,
-            this.updateDate,
-
-        ],
     };
 
     constructor(
         private readonly enumService: NaturalEnumService,
         private readonly userTagService: UserTagService,
-        private readonly transactionService: TransactionService,
-        private readonly transactionTagService: TransactionTagService,
         private readonly productService: ProductService,
         private readonly productTagService: ProductTagService,
-        private readonly accountService: AccountService,
         private readonly userService: UserService,
     ) {
     }

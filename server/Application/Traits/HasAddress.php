@@ -13,19 +13,19 @@ trait HasAddress
 {
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", options={"default" = ""})
      */
     private $street = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, options={"default" = ""})
      */
     private $postcode = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, options={"default" = ""})
      */
     private $locality = '';
 

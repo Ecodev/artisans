@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
+use Application\DBAL\Types\OrderTypeType;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
-use Application\Model\User;
 use Application\Service\Invoicer;
 use ApplicationTest\Traits\TestWithTransaction;
 use Money\Money;
@@ -22,43 +22,31 @@ class InvoicerTest extends TestCase
      *
      * @param array $input
      * @param array $expectedOrderLines
-     * @param array $expectedTransactionLines
      */
-    public function testCreateOrder(array $input, array $expectedOrderLines, array $expectedTransactionLines): void
+    public function testCreateOrder(array $input, array $expectedOrderLines): void
     {
-        $user = new User();
-        $user->setFirstName('John');
-        $user->setLastName('Doe');
-
         $input = $this->hydrateTestData($input);
 
         global $container;
         /** @var Invoicer $invoicer */
         $invoicer = $container->get(Invoicer::class);
-        $order = $invoicer->createOrder($user, $input);
+        $order = $invoicer->createOrder($input);
 
         $actualOrderLines = $this->extractOrderLines($order);
         self::assertSame($expectedOrderLines, $actualOrderLines);
-
-        $actualTransactionLines = $this->extractTransactionLines($order);
-        self::assertSame($expectedTransactionLines, $actualTransactionLines);
     }
 
     /**
      * @dataProvider providerUpdateOrderLineAndTransactionLine
      */
-    public function testUpdateOrderLineAndTransactionLine(string $originalOrder, ?array $newProduct, array $expectedOrderLines, array $expectedTransactionLines): void
+    public function testUpdateOrderLineAndTransactionLine(string $originalOrder, ?array $newProduct, array $expectedOrderLines): void
     {
-        $user = new User();
-        $user->setFirstName('John');
-        $user->setLastName('Doe');
-
         $input = $this->hydrateTestData($this->providerCreateOrder()[$originalOrder][0]);
 
         global $container;
         /** @var Invoicer $invoicer */
         $invoicer = $container->get(Invoicer::class);
-        $order = $invoicer->createOrder($user, $input);
+        $order = $invoicer->createOrder($input);
 
         if ($newProduct) {
             $product = $this->hydrateProduct($newProduct);
@@ -66,13 +54,10 @@ class InvoicerTest extends TestCase
             $product = $input[0]['product'];
         }
 
-        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $product, '100', '1');
+        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $product, '100', true, OrderTypeType::DIGITAL);
 
         $actualOrderLines = $this->extractOrderLines($order);
         self::assertSame($expectedOrderLines, $actualOrderLines);
-
-        $actualTransactionLines = $this->extractTransactionLines($order);
-        self::assertSame($expectedTransactionLines, $actualTransactionLines);
     }
 
     public function providerUpdateOrderLineAndTransactionLine(): array
@@ -84,27 +69,19 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My product 1',
-                        'kg',
                         '100',
                         '27500',
-                        '0.077',
-                        '1',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
-                        '',
                         '1',
                         '20000',
-                        '0.025',
-                        '1.00',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'John Doe',
-                        'Vente de marchandises',
-                        '47500',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -112,34 +89,25 @@ class InvoicerTest extends TestCase
                 'normal',
                 [
                     'name' => 'My negative product',
-                    'pricePerUnit' => Money::CHF(-10000),
-                    'unit' => '',
-                    'vatRate' => '0.066',
+                    'pricePerUnitCHF' => Money::CHF(-10000),
+                    'pricePerUnitEUR' => Money::EUR(-15000),
                 ],
                 [
                     [
                         'My negative product',
-                        '',
                         '100',
                         '-1000000',
-                        '0.066',
-                        '1',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
-                        '',
                         '1',
                         '20000',
-                        '0.025',
-                        '1.00',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'Vente de marchandises',
-                        'John Doe',
-                        '980000',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -147,26 +115,17 @@ class InvoicerTest extends TestCase
                 'negative balance should swap accounts',
                 [
                     'name' => 'My positive product',
-                    'pricePerUnit' => Money::CHF(10000),
-                    'unit' => '',
-                    'vatRate' => '0.066',
+                    'pricePerUnitCHF' => Money::CHF(10000),
+                    'pricePerUnitEUR' => Money::EUR(15000),
                 ],
                 [
                     [
                         'My positive product',
-                        '',
                         '100',
                         '1000000',
-                        '0.066',
-                        '1',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'John Doe',
-                        'Vente de marchandises',
-                        '1000000',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -180,31 +139,23 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'quantity' => '1',
-                        'pricePonderation' => '1.00',
+                        'isCHF' => true,
+                        'type' => OrderTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product',
-                            'pricePerUnit' => Money::CHF(0),
-                            'unit' => 'kg',
-                            'vatRate' => '0.077',
+                            'pricePerUnitCHF' => Money::CHF(0),
+                            'pricePerUnitEUR' => Money::EUR(0),
                         ],
                     ],
                 ],
                 [
                     [
                         'My product',
-                        'kg',
                         '1',
                         '0',
-                        '0.077',
-                        '1.00',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'John Doe',
-                        'Vente de marchandises',
                         '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -212,99 +163,83 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'quantity' => '3.100',
-                        'pricePonderation' => '1.00',
+                        'isCHF' => true,
+                        'type' => OrderTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product 1',
-                            'pricePerUnit' => Money::CHF(275),
-                            'unit' => 'kg',
-                            'vatRate' => '0.077',
+                            'pricePerUnitCHF' => Money::CHF(275),
+                            'pricePerUnitEUR' => Money::EUR(280),
                         ],
                     ],
                     [
                         'quantity' => '1',
-                        'pricePonderation' => '1.00',
+                        'isCHF' => true,
+                        'type' => OrderTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product 2',
-                            'pricePerUnit' => Money::CHF(20000),
-                            'unit' => '',
-                            'vatRate' => '0.025',
+                            'pricePerUnitCHF' => Money::CHF(20000),
+                            'pricePerUnitEUR' => Money::EUR(25000),
                         ],
                     ],
                 ],
                 [
                     [
                         'My product 1',
-                        'kg',
                         '3.100',
                         '853',
-                        '0.077',
-                        '1.00',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
-                        '',
                         '1',
                         '20000',
-                        '0.025',
-                        '1.00',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'John Doe',
-                        'Vente de marchandises',
-                        '20853',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                 ],
             ],
-            'with ponderated prices' => [
+            'with mixed CHF/EURO prices' => [
                 [
                     [
                         'quantity' => '3.100',
-                        'pricePonderation' => '0.30',
+                        'isCHF' => false,
+                        'type' => OrderTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product 1',
-                            'pricePerUnit' => Money::CHF(275),
-                            'unit' => 'kg',
-                            'vatRate' => '0.077',
+                            'pricePerUnitCHF' => Money::CHF(275),
+                            'pricePerUnitEUR' => Money::EUR(280),
                         ],
                     ],
                     [
                         'quantity' => '1',
-                        'pricePonderation' => '0.50',
+                        'isCHF' => true,
+                        'type' => OrderTypeType::PAPER,
                         'product' => [
                             'name' => 'My product 2',
-                            'pricePerUnit' => Money::CHF(20000),
-                            'unit' => '',
-                            'vatRate' => '0.025',
+                            'pricePerUnitCHF' => Money::CHF(20000),
+                            'pricePerUnitEUR' => Money::EUR(25000),
                         ],
                     ],
                 ],
                 [
                     [
                         'My product 1',
-                        'kg',
                         '3.100',
-                        '256',
-                        '0.077',
-                        '0.30',
+                        '0',
+                        '868',
+                        false,
+                        OrderTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
-                        '',
                         '1',
-                        '10000',
-                        '0.025',
-                        '0.50',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'John Doe',
-                        'Vente de marchandises',
-                        '10256',
+                        '20000',
+                        '0',
+                        true,
+                        OrderTypeType::PAPER,
                     ],
                 ],
             ],
@@ -312,31 +247,23 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'quantity' => '1',
-                        'pricePonderation' => '1.00',
+                        'isCHF' => true,
+                        'type' => OrderTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product',
-                            'pricePerUnit' => Money::CHF(-10000),
-                            'unit' => 'kg',
-                            'vatRate' => '0.077',
+                            'pricePerUnitCHF' => Money::CHF(-10000),
+                            'pricePerUnitEUR' => Money::EUR(-15000),
                         ],
                     ],
                 ],
                 [
                     [
                         'My product',
-                        'kg',
                         '1',
                         '-10000',
-                        '0.077',
-                        '1.00',
-                    ],
-                ],
-                [
-                    [
-                        'Achats',
-                        'Vente de marchandises',
-                        'John Doe',
-                        '10000',
+                        '0',
+                        true,
+                        OrderTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -360,39 +287,23 @@ class InvoicerTest extends TestCase
             self::assertSame($orderLine->getName(), $orderLine->getProduct()->getName());
             $actualOrderLines[] = [
                 $orderLine->getName(),
-                $orderLine->getUnit(),
                 $orderLine->getQuantity(),
-                $orderLine->getBalance()->getAmount(),
-                $orderLine->getVatRate(),
-                $orderLine->getPricePonderation(),
+                $orderLine->getBalanceCHF()->getAmount(),
+                $orderLine->getBalanceEUR()->getAmount(),
+                $orderLine->isCHF(),
+                $orderLine->getType(),
             ];
         }
 
         return $actualOrderLines;
     }
 
-    private function extractTransactionLines(Order $order): array
-    {
-        $actualTransactionLines = [];
-        foreach ($order->getTransaction()->getTransactionLines() as $transactionLine) {
-            $actualTransactionLines[] = [
-                $transactionLine->getName(),
-                $transactionLine->getDebit()->getName(),
-                $transactionLine->getCredit()->getName(),
-                $transactionLine->getBalance()->getAmount(),
-            ];
-        }
-
-        return $actualTransactionLines;
-    }
-
     private function hydrateProduct(array $p): Product
     {
         $product = new Product();
         $product->setName($p['name']);
-        $product->setPricePerUnit($p['pricePerUnit']);
-        $product->setUnit($p['unit']);
-        $product->setVatRate($p['vatRate']);
+        $product->setPricePerUnitCHF($p['pricePerUnitCHF']);
+        $product->setPricePerUnitEUR($p['pricePerUnitEUR']);
 
         return $product;
     }

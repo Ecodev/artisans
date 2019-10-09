@@ -1,15 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { CartService } from '../services/cart.service';
-import { QrService } from '../services/qr.service';
 
 @Component({
     selector: 'app-shop',
     templateUrl: './shop.component.html',
     styleUrls: ['./shop.component.scss'],
 })
-export class ShopComponent implements OnInit, OnDestroy {
+export class ShopComponent implements OnInit {
 
     public mode;
     public CartService = CartService;
@@ -17,7 +16,6 @@ export class ShopComponent implements OnInit, OnDestroy {
     constructor(public cartService: CartService,
                 public alertService: NaturalAlertService,
                 public router: Router,
-                private qrService: QrService,
     ) {
 
     }
@@ -36,7 +34,6 @@ export class ShopComponent implements OnInit, OnDestroy {
                         this.cartService.save().subscribe(() => {
                             this.alertService.info('Votre commande a bien été enregistrée');
                             this.cartService.empty();
-                            this.qrService.stop();
                         });
                     }
                 });
@@ -49,13 +46,8 @@ export class ShopComponent implements OnInit, OnDestroy {
             .subscribe(confirm => {
                 if (confirm) {
                     this.cartService.empty();
-                    this.qrService.stop();
                 }
             });
-    }
-
-    ngOnDestroy(): void {
-        this.qrService.stop();
     }
 
 }

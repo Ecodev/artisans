@@ -5,10 +5,10 @@
 /data/cache/*.*
 /data/cache/DoctrineORMModule/*
 /data/cache/images/*
-/data/accounting/*
+/data/file/*
 /data/session/*
-!/data/accounting/dw4jV3zYSPsqE2CB8BcP8ABD0.pdf
-!/data/accounting/4k123pkopvs3iDFV948abcde.pdf
+!/data/file/dw4jV3zYSPsqE2CB8BcP8ABD0.pdf
+!/data/file/4k123pkopvs3iDFV948abcde.pdf
 /data/images/*
 !/data/images/chocolat1.jpg
 !/data/images/chocolat2.jpg

@@ -20,11 +20,6 @@
                 <div matSuffix *ngIf="form.get('product')?.value.unit">{{ form.get('product')?.value.unit }}</div>
                 <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
             </mat-form-field>
-
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px" fxFlex>
-                <div class="mat-body no-margin-bottom">&nbsp;à {{ form.get('pricePonderation')?.value | percent}}</div>
-                <mat-slider fxFlex formControlName="pricePonderation" min="0" max="1" step="0.1" value="1"></mat-slider>
-            </div>
         </div>
     </div>
 </mat-dialog-content>

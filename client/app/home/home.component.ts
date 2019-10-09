@@ -8,14 +8,13 @@ import {
 } from '@ecodev/natural';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../admin/users/services/user.service';
-import { QrService } from '../shop/services/qr.service';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent extends NaturalAbstractController implements OnInit, OnDestroy {
+export class HomeComponent extends NaturalAbstractController implements OnInit {
 
     public menu: NaturalSidenavContainerComponent | undefined;
 
@@ -27,7 +26,6 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
     constructor(private userService: UserService,
                 private router: Router,
                 public route: ActivatedRoute,
-                public qrService: QrService,
                 public alertService: NaturalAlertService,
     ) {
         super();
@@ -43,20 +41,6 @@ export class HomeComponent extends NaturalAbstractController implements OnInit, 
             });
         });
 
-        this.qrService.qrCode.pipe(takeUntil(this.ngUnsubscribe)).subscribe(code => {
-            const parsedCode = code.toLowerCase().replace('https://chez-emmy.ch/shop/product/', '');
-            this.router.navigate(['/shop/product', parsedCode]);
-
-        }, () => {
-            const message = 'La caméra est indisponible, essaye de rechercher ton article au travers de son code';
-            this.alertService.error(message, 5000);
-            this.router.navigateByUrl('/');
-        });
-    }
-
-    ngOnDestroy(): void {
-        super.ngOnDestroy();
-        this.qrService.stop();
     }
 
     public goToCode(): void {

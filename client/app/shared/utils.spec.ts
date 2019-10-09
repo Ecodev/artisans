@@ -1,12 +1,4 @@
-import { calculateSuggestedPrice, moneyRoundUp } from './utils';
-
-describe('calculateSuggestedPrice', () => {
-
-    it('should suggest correct price', () => {
-        expect(calculateSuggestedPrice('2.00', '0.2', '0.077')).toBe(2.5848);
-    });
-
-});
+import { moneyRoundUp } from './utils';
 
 describe('moneyRoundUp', () => {
 

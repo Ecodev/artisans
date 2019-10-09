@@ -5,19 +5,13 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Api\Exception;
-use Application\DBAL\Types\BillingTypeType;
-use Application\DBAL\Types\RelationshipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Traits\HasAddress;
-use Application\Traits\HasDoorAccess;
-use Application\Traits\HasIban;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasNumericCode;
-use Application\Traits\HasRemarks;
 use Application\Traits\HasUrl;
 use Application\Utility;
 use Cake\Chronos\Chronos;
-use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -31,31 +25,16 @@ use GraphQL\Doctrine\Annotation as API;
  * @ORM\AssociationOverrides({
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
- * @API\Sorting({
- *     "Application\Api\Input\Sorting\Age",
- *     "Application\Api\Input\Sorting\Balance",
- * })
  */
 class User extends AbstractModel
 {
     const ROLE_ANONYMOUS = 'anonymous';
-    const ROLE_PARTNER = 'partner';
-    const ROLE_INDIVIDUAL = 'individual';
     const ROLE_MEMBER = 'member';
-    const ROLE_PRODUCT = 'product';
-    const ROLE_RESPONSIBLE = 'responsible';
+    const ROLE_FACILITATOR = 'facilitator';
     const ROLE_ADMINISTRATOR = 'administrator';
 
-    const STATUS_INACTIVE = 'inactive';
-    const STATUS_NEW = 'new';
-    const STATUS_ACTIVE = 'active';
-    const STATUS_ARCHIVED = 'archived';
-
-    use HasDoorAccess;
-    use HasRemarks;
     use HasInternalRemarks;
     use HasAddress;
-    use HasIban;
     use HasNumericCode;
     use HasUrl;
 
@@ -97,13 +76,13 @@ class User extends AbstractModel
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=191)
+     * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
     private $firstName = '';
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=191)
+     * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
     private $lastName = '';
 
@@ -122,45 +101,21 @@ class User extends AbstractModel
 
     /**
      * @var string
-     * @ORM\Column(type="UserRole", options={"default" = User::ROLE_INDIVIDUAL})
+     * @ORM\Column(type="UserRole", options={"default" = User::ROLE_MEMBER})
      */
-    private $role = self::ROLE_INDIVIDUAL;
-
-    /**
-     * @var string
-     * @ORM\Column(type="UserStatus", options={"default" = User::STATUS_NEW})
-     */
-    private $status = self::STATUS_NEW;
+    private $role = self::ROLE_MEMBER;
 
     /**
      * @var null|Chronos
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $welcomeSessionDate;
+    private $membershipBegin;
 
     /**
      * @var null|Chronos
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $resignDate;
-
-    /**
-     * @var int sex
-     * @ORM\Column(type="smallint", options={"default" = 0}))
-     */
-    private $sex = 0;
-
-    /**
-     * @var int
-     * @ORM\Column(type="smallint", options={"default" = 0}))
-     */
-    private $companyShares = 0;
-
-    /**
-     * @var null|Date
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $companySharesDate;
+    private $membershipEnd;
 
     /**
      * @var string
@@ -169,40 +124,10 @@ class User extends AbstractModel
     private $phone = '';
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=25, options={"default" = ""})
-     */
-    private $mobilePhone = '';
-
-    /**
-     * @var null|Date
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $birthday;
-
-    /**
      * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $termsAgreement = false;
-
-    /**
-     * @var bool
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
-    private $receivesNewsletter = false;
-
-    /**
-     * @var string
-     * @ORM\Column(type="Relationship", options={"default" = RelationshipType::HOUSEHOLDER})
-     */
-    private $familyRelationship = RelationshipType::HOUSEHOLDER;
-
-    /**
-     * @var string
-     * @ORM\Column(type="BillingType", options={"default" = BillingTypeType::ELECTRONIC})
-     */
-    private $billingType = BillingTypeType::ELECTRONIC;
+    private $restrictRenewVisibility = false;
 
     /**
      * @var null|string
@@ -230,15 +155,6 @@ class User extends AbstractModel
     private $messages;
 
     /**
-     * There is actually 0 to 1 account, never more. And this is
-     * enforced by DB unique constraints
-     *
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="Account", mappedBy="owner")
-     */
-    private $accounts;
-
-    /**
      * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
      */
@@ -249,10 +165,9 @@ class User extends AbstractModel
      *
      * @param string $role role for new user
      */
-    public function __construct(string $role = self::ROLE_INDIVIDUAL)
+    public function __construct(string $role = self::ROLE_MEMBER)
     {
         $this->role = $role;
-        $this->accounts = new ArrayCollection();
         $this->userTags = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->users = new ArrayCollection();
@@ -416,10 +331,8 @@ class User extends AbstractModel
         $currentRole = self::getCurrent() ? self::getCurrent()->getRole() : self::ROLE_ANONYMOUS;
         $orderedRoles = [
             self::ROLE_ANONYMOUS,
-            self::ROLE_INDIVIDUAL,
             self::ROLE_MEMBER,
-            self::ROLE_PRODUCT,
-            self::ROLE_RESPONSIBLE,
+            self::ROLE_FACILITATOR,
             self::ROLE_ADMINISTRATOR,
         ];
 
@@ -445,83 +358,9 @@ class User extends AbstractModel
         $this->role = $role;
     }
 
-    public function setOwner(self $owner = null): void
-    {
-        if ($owner && $owner !== $this) {
-            if ($owner->getOwner() && $owner !== $owner->getOwner()) {
-                throw new Exception('This user cannot be owned by a user who is himself owned by somebody else');
-            }
-
-            if ($this->users->count()) {
-                throw new Exception('This user owns other users, so he cannot himself be owned by somebody else');
-            }
-        }
-
-        if ($this->getOwner()) {
-            $this->getOwner()->getEmail(); // Trigger lazy loading
-            $this->getOwner()->users->removeElement($this);
-        }
-
-        parent::setOwner($owner);
-
-        if ($this->getOwner()) {
-            $this->getOwner()->getEmail(); // Trigger lazy loading
-            $this->getOwner()->users->add($this);
-            $this->setStatus($this->getOwner()->getStatus());
-        }
-    }
-
-    /**
-     * @API\Field(type="Application\Api\Enum\UserStatusType")
-     *
-     * @return string
-     */
-    public function getStatus(): string
-    {
-        return $this->status;
-    }
-
-    /**
-     * @API\Input(type="Application\Api\Enum\UserStatusType")
-     *
-     * @param string $status
-     */
-    public function setStatus(string $newStatus): void
-    {
-        if ($newStatus === self::STATUS_ARCHIVED && $this->status !== self::STATUS_ARCHIVED) {
-            $this->setResignDate(Chronos::NOW());
-        } elseif ($this->status === self::STATUS_ARCHIVED && $newStatus !== self::STATUS_ARCHIVED) {
-            $this->setResignDate(null);
-        }
-
-        $this->status = $newStatus;
-        $this->revokeToken();
-
-        foreach ($this->users as $user) {
-            if ($user !== $this) {
-                $user->setStatus($newStatus);
-            }
-        }
-    }
-
-    /**
-     * Whether this user is a family owner or not
-     *
-     * This is used for our internal logic and should
-     * NEVER be related to `familyRelationship`. That field
-     * is purely informative for humans.
-     *
-     * @return bool
-     */
-    public function isFamilyOwner(): bool
-    {
-        return !$this->getOwner() || $this->getOwner() === $this;
-    }
-
     public function initialize(): void
     {
         $this->role = self::ROLE_MEMBER; // Bypass security
-        $this->setStatus(self::STATUS_NEW);
     }
 
     /**
@@ -538,50 +377,6 @@ class User extends AbstractModel
     public function setPhone(string $phone): void
     {
         $this->phone = $phone;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMobilePhone(): string
-    {
-        return $this->mobilePhone;
-    }
-
-    /**
-     * @param string $mobilePhone
-     */
-    public function setMobilePhone(string $mobilePhone): void
-    {
-        $this->mobilePhone = $mobilePhone;
-    }
-
-    /**
-     * @return null|Date
-     */
-    public function getBirthday(): ?Date
-    {
-        return $this->birthday;
-    }
-
-    /**
-     * @param null|Date $birthday
-     */
-    public function setBirthday(?Date $birthday): void
-    {
-        $this->birthday = $birthday;
-    }
-
-    /**
-     * return null|int
-     */
-    public function getAge(): ?int
-    {
-        if ($this->birthday) {
-            return (new Date())->diffInYears($this->birthday);
-        }
-
-        return null;
     }
 
     /**
@@ -615,91 +410,51 @@ class User extends AbstractModel
     }
 
     /**
-     * @return bool
+     * @return null|Chronos
      */
-    public function isTermsAgreement(): bool
+    public function getMembershipBegin(): ?Chronos
     {
-        return $this->termsAgreement;
+        return $this->membershipBegin;
     }
 
     /**
-     * @param bool $termsAgreement
+     * @param null|Chronos $membershipBegin
      */
-    public function setTermsAgreement(bool $termsAgreement): void
+    public function setMembershipBegin(?Chronos $membershipBegin): void
     {
-        $this->termsAgreement = $termsAgreement;
+        $this->membershipBegin = $membershipBegin;
     }
 
     /**
      * @return null|Chronos
      */
-    public function getWelcomeSessionDate(): ?Chronos
+    public function getMembershipEnd(): ?Chronos
     {
-        return $this->welcomeSessionDate;
+        return $this->membershipEnd;
     }
 
     /**
-     * @param null|Chronos $welcomeSessionDate
+     * @param null|Chronos $membershipEnd
      */
-    public function setWelcomeSessionDate(?Chronos $welcomeSessionDate): void
+    public function setMembershipEnd(?Chronos $membershipEnd): void
     {
-        $this->welcomeSessionDate = $welcomeSessionDate;
-    }
-
-    /**
-     * @return null|Chronos
-     */
-    public function getResignDate(): ?Chronos
-    {
-        return $this->resignDate;
-    }
-
-    /**
-     * @param null|Chronos $resignDate
-     */
-    public function setResignDate(?Chronos $resignDate): void
-    {
-        $this->resignDate = $resignDate;
+        $this->membershipEnd = $membershipEnd;
     }
 
     /**
      * @return bool
      */
-    public function getReceivesNewsletter(): bool
+    public function getRestrictRenewVisibility(): bool
     {
-        return $this->receivesNewsletter;
+        return $this->restrictRenewVisibility;
     }
 
     /**
-     * @param bool $receivesNewsletter
+     * @param bool $restrictRenewVisibility
      */
-    public function setReceivesNewsletter(bool $receivesNewsletter): void
+    public function setRestrictRenewVisibility(bool $restrictRenewVisibility): void
     {
-        $this->receivesNewsletter = $receivesNewsletter;
-    }
-
-    /**
-     * Get the sex
-     *
-     * @API\Field(type="Sex")
-     *
-     * @return int
-     */
-    public function getSex(): int
-    {
-        return $this->sex;
-    }
-
-    /**
-     * Set the sex
-     *
-     * @API\Input(type="Sex")
-     *
-     * @param int $sex
-     */
-    public function setSex(int $sex): void
-    {
-        $this->sex = $sex;
+        $this->restrictRenewVisibility = $restrictRenewVisibility;
     }
 
     /**
@@ -720,81 +475,6 @@ class User extends AbstractModel
     public function getLastLogin(): ?Chronos
     {
         return _em()->getRepository(Log::class)->getLoginDate($this, false);
-    }
-
-    /**
-     * @API\Field(type="Relationship")
-     *
-     * @return string
-     */
-    public function getFamilyRelationship(): string
-    {
-        return $this->familyRelationship;
-    }
-
-    /**
-     * @API\Input(type="Relationship")
-     *
-     * @param string $familyRelationship
-     */
-    public function setFamilyRelationship(string $familyRelationship): void
-    {
-        $this->familyRelationship = $familyRelationship;
-    }
-
-    /**
-     * @API\Field(type="BillingType")
-     *
-     * @return string
-     */
-    public function getBillingType(): string
-    {
-        return $this->billingType;
-    }
-
-    /**
-     * @API\Input(type="BillingType")
-     *
-     * @param string $billingType
-     */
-    public function setBillingType(string $billingType): void
-    {
-        $this->billingType = $billingType;
-    }
-
-    /**
-     * Get the user transaction account
-     *
-     * @return null|Account
-     */
-    public function getAccount(): ?Account
-    {
-        if ($this->getOwner() && $this->getOwner() !== $this) {
-            return $this->getOwner()->getAccount();
-        }
-
-        return $this->accounts->count() ? $this->accounts->first() : null;
-    }
-
-    /**
-     * Notify the user that it has a new account
-     * This should only be called by Account::setOwner()
-     *
-     * @param Account $account
-     */
-    public function accountAdded(Account $account): void
-    {
-        $this->accounts->clear();
-        $this->accounts->add($account);
-    }
-
-    /**
-     * Notify the user that a account was removed
-     * This should only be called by Account::setOwner()
-     */
-    public function accountRemoved(): void
-    {
-        $this->accounts->clear();
     }
 
     /**
@@ -878,45 +558,5 @@ class User extends AbstractModel
     {
         $this->setCreationDate(Utility::getNow());
         $this->setCreator(self::getCurrent());
-    }
-
-    /**
-     * Number of company shares
-     *
-     * @return int
-     */
-    public function getCompanyShares(): int
-    {
-        return $this->companyShares;
-    }
-
-    /**
-     * Number of company shares
-     *
-     * @param int $companyShares
-     */
-    public function setCompanyShares(int $companyShares): void
-    {
-        $this->companyShares = $companyShares;
-    }
-
-    /**
-     * The date when the shares were received
-     *
-     * @return null|Date
-     */
-    public function getCompanySharesDate(): ?Date
-    {
-        return $this->companySharesDate;
-    }
-
-    /**
-     * The date when the shares were received
-     *
-     * @param null|Date $companySharesDate
-     */
-    public function setCompanySharesDate(?Date $companySharesDate): void
-    {
-        $this->companySharesDate = $companySharesDate;
     }
 }

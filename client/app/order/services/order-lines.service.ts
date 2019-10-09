@@ -7,6 +7,7 @@ import {
     OrderLines,
     OrderLinesVariables,
     OrderLineVariables,
+    OrderType,
     UpdateOrderLine,
     UpdateOrderLineVariables,
 } from '../../shared/generated-types';
@@ -40,7 +41,8 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
         return {
             product: null,
             quantity: '0',
-            pricePonderation: '1',
+            isCHF: true,
+            type: OrderType.digital,
         };
     }
 
@@ -48,7 +50,6 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
         return {
             product: [Validators.required],
             quantity: [Validators.required],
-            pricePonderation: [Validators.required],
         };
     }
 }

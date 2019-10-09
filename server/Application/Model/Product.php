@@ -4,85 +4,38 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\DBAL\Types\PurchaseStatusType;
-use Application\Traits\HasAutomaticQuantity;
-use Application\Traits\HasCode;
-use Application\Traits\HasDescription;
-use Application\Traits\HasInternalRemarks;
-use Application\Traits\HasName;
-use Application\Traits\HasRemarks;
-use Application\Traits\HasUnit;
-use Application\Traits\HasVatRate;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
-use Money\Money;
 
 /**
  * An item that can be booked by a user
  *
  * @ORM\Entity(repositoryClass="\Application\Repository\ProductRepository")
  */
-class Product extends AbstractModel
+class Product extends AbstractProduct
 {
-    use HasName;
-    use HasDescription;
-    use HasCode;
-    use HasRemarks;
-    use HasInternalRemarks;
-    use HasUnit;
-    use HasAutomaticQuantity;
-    use HasVatRate;
-
     /**
-     * @var Money
+     * @var null|int
      *
-     * @ORM\Column(type="Money", options={"default" = "0.00"})
+     * @ORM\Column(type="smallint", nullable=true, options={"unsigned" = true})
      */
-    private $pricePerUnit;
+    private $readingDuration;
 
     /**
-     * @var string
+     * @var Date
      *
-     * @ORM\Column(type="decimal", precision=10, scale=2, options={"default" = "0.20"})
+     * @ORM\Column(type="date")
      */
-    private $margin = '0.20';
+    private $releaseDate;
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(type="string", length=191, options={"default" = ""})
+     * @ORM\Column(type="smallint", options={"unsigned" = true})
      */
-    private $supplier = '';
-
-    /**
-     * @var Money
-     *
-     * @ORM\Column(type="Money", options={"default" = 0, "unsigned" = true})
-     */
-    private $supplierPrice;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=20, options={"default" = ""})
-     */
-    private $supplierReference = '';
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", options={"default" = 1})
-     */
-    private $isActive = true;
-
-    /**
-     * @var null|Date
-     * @ORM\Column(type="date", nullable=true)
-     */
-    private $verificationDate;
+    private $reviewNumber;
 
     /**
      * @var Collection
@@ -92,129 +45,12 @@ class Product extends AbstractModel
     private $productTags;
 
     /**
-     * @var null|Image
-     * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     */
-    private $image;
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
-    private $ponderatePrice = true;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="PurchaseStatus", options={"default" = PurchaseStatusType::OK})
-     */
-    private $purchaseStatus = PurchaseStatusType::OK;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="decimal", precision=10, scale=3, options={"default" = "0.00"})
-     */
-    private $minimumQuantity = '0';
-
-    /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(string $name = '')
     {
-        $this->pricePerUnit = Money::CHF(0);
-        $this->supplierPrice = Money::CHF(0);
+        parent::__construct($name);
         $this->productTags = new ArrayCollection();
-    }
-
-    /**
-     * @return Money
-     */
-    public function getPricePerUnit(): Money
-    {
-        return $this->pricePerUnit;
-    }
-
-    /**
-     * @param Money $pricePerUnit
-     */
-    public function setPricePerUnit(Money $pricePerUnit): void
-    {
-        $this->pricePerUnit = $pricePerUnit;
-    }
-
-    /**
-     * @return Money
-     */
-    public function getSupplierPrice(): Money
-    {
-        return $this->supplierPrice;
-    }
-
-    /**
-     * @param Money $supplierPrice
-     */
-    public function setSupplierPrice(Money $supplierPrice): void
-    {
-        $this->supplierPrice = $supplierPrice;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSupplierReference(): string
-    {
-        return $this->supplierReference;
-    }
-
-    /**
-     * @param string $supplierReference
-     */
-    public function setSupplierReference(string $supplierReference): void
-    {
-        $this->supplierReference = $supplierReference;
-    }
-
-    /**
-     * Whether this product can be bought
-     *
-     * @return bool
-     */
-    public function isActive(): bool
-    {
-        return $this->isActive;
-    }
-
-    /**
-     * Whether this product can be bought
-     *
-     * @param bool $isActive
-     */
-    public function setIsActive(bool $isActive): void
-    {
-        $this->isActive = $isActive;
-    }
-
-    /**
-     * The date then the product was last checked
-     *
-     * @return null|Date
-     */
-    public function getVerificationDate(): ?Date
-    {
-        return $this->verificationDate;
-    }
-
-    /**
-     * The date then the product was last checked
-     *
-     * @param null|Date $verificationDate
-     */
-    public function setVerificationDate(?Date $verificationDate): void
-    {
-        $this->verificationDate = $verificationDate;
     }
 
     /**
@@ -248,128 +84,54 @@ class Product extends AbstractModel
     }
 
     /**
-     * @return null|Image
+     * Reading duration in minutes
+     *
+     * @return null|int
      */
-    public function getImage(): ?Image
+    public function getReadingDuration(): ?int
     {
-        return $this->image;
+        return $this->readingDuration;
     }
 
     /**
-     * @param null|Image $image
+     * Reading duration in minutes
+     *
+     * @param null|int $readingDuration
      */
-    public function setImage(?Image $image): void
+    public function setReadingDuration(?int $readingDuration): void
     {
-        // We must trigger lazy loading, otherwise Doctrine will seriously
-        // mess up lifecycle callbacks and delete unrelated image on disk
-        if ($this->image) {
-            $this->image->getFilename();
-        }
-
-        $this->image = $image;
+        $this->readingDuration = $readingDuration;
     }
 
     /**
-     * Percentage of margin made on price
-     *
-     * @return string
+     * @return Date
      */
-    public function getMargin(): string
+    public function getReleaseDate(): Date
     {
-        return $this->margin;
+        return $this->releaseDate;
     }
 
     /**
-     * Percentage of margin made on price
-     *
-     * @param string $margin
+     * @param Date $releaseDate
      */
-    public function setMargin(string $margin): void
+    public function setReleaseDate(Date $releaseDate): void
     {
-        $this->margin = $margin;
+        $this->releaseDate = $releaseDate;
     }
 
     /**
-     * Name of supplier
-     *
-     * @return string
+     * @return int
      */
-    public function getSupplier(): string
+    public function getReviewNumber(): int
     {
-        return $this->supplier;
+        return $this->reviewNumber;
     }
 
     /**
-     * Name of supplier
-     *
-     * @param string $supplier
+     * @param int $reviewNumber
      */
-    public function setSupplier(string $supplier): void
+    public function setReviewNumber(int $reviewNumber): void
     {
-        $this->supplier = $supplier;
-    }
-
-    /**
-     * Wherever product allow user defined price ponderation
-     *
-     * @return bool
-     */
-    public function getPonderatePrice(): bool
-    {
-        return $this->ponderatePrice;
-    }
-
-    /**
-     * Wherever product allow user defined price ponderation
-     *
-     * @param bool $ponderatePrice
-     */
-    public function setPonderatePrice(bool $ponderatePrice): void
-    {
-        $this->ponderatePrice = $ponderatePrice;
-    }
-
-    /**
-     * Whether the product needs to be purchased or was already when the stock level is low
-     *
-     * @API\Field(type="PurchaseStatus")
-     *
-     * @return string
-     */
-    public function getPurchaseStatus(): string
-    {
-        return $this->purchaseStatus;
-    }
-
-    /**
-     * Set purchase status
-     *
-     * @API\Input(type="PurchaseStatus")
-     *
-     * @param string $status
-     */
-    public function setPurchaseStatus(string $status): void
-    {
-        $this->purchaseStatus = $status;
-    }
-
-    /**
-     * Minimum stock level
-     *
-     * @return string
-     */
-    public function getMinimumQuantity(): string
-    {
-        return $this->minimumQuantity;
-    }
-
-    /**
-     * Minimum stock level
-     *
-     * @param string $quantity
-     */
-    public function setMinimumQuantity(string $quantity): void
-    {
-        $this->minimumQuantity = $quantity;
+        $this->reviewNumber = $reviewNumber;
     }
 }

@@ -10,9 +10,6 @@ import { OrderLinesVariables } from '../../shared/generated-types';
 })
 export class OrderComponent implements OnInit {
 
-    public selectedColumns = ['name', 'remarks', 'balance'];
-
-    public transaction;
     public contextVariables: OrderLinesVariables;
 
     public data;

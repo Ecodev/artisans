@@ -7,15 +7,11 @@ declare(strict_types=1);
  * that required keys exist with "safe" values.
  */
 return [
-    'hostname' => 'lesartisansdelatransition.lan',
-    'fromEmail' => 'noreply@lesartisansdelatransition.lan',
+    'hostname' => 'artisans.lan',
+    'fromEmail' => 'noreply@artisans.lan',
     'emailOverride' => null,
     'smtp' => null,
     'phpPath' => '/usr/bin/php',
-    'doorsApi' => [
-        'endpoint' => 'http://localhost:8888',
-        'token' => 'my-token-value',
-    ],
     'templates' => [
         'paths' => [
             'app' => ['server/templates/app'],

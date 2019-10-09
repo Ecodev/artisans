@@ -18,13 +18,4 @@ export class AdminComponent implements OnInit {
     ngOnInit() {
         this.viewer = this.route.snapshot.data.viewer.model;
     }
-
-    public canAccessAccounting() {
-        return UserService.canAccessAccounting(this.viewer);
-    }
-
-    public canAccessUsers() {
-        return UserService.canAccessUsers(this.viewer);
-    }
-
 }

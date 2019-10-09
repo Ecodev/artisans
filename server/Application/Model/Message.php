@@ -34,7 +34,7 @@ class Message extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="MessageType", length=10)
+     * @ORM\Column(type="MessageType")
      */
     private $type;
 

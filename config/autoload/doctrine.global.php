@@ -9,8 +9,8 @@ return [
                 'driverClass' => Doctrine\DBAL\Driver\PDOMySql\Driver::class,
                 'params' => [
                     'host' => 'localhost',
-                    'dbname' => 'emmy',
-                    'user' => 'emmy',
+                    'dbname' => 'artisans',
+                    'user' => 'artisans',
                     'password' => '',
                     'port' => 3306,
                     'driverOptions' => [
@@ -33,7 +33,6 @@ return [
         'event_manager' => [
             'orm_default' => [
                 'subscribers' => [
-                    \Application\Service\StockMovementUpdater::class,
                 ],
             ],
         ],
@@ -57,18 +56,13 @@ return [
         ],
         'types' => [
             'UserRole' => Application\DBAL\Types\UserRoleType::class,
-            'UserStatus' => Application\DBAL\Types\UserStatusType::class,
-            'Relationship' => Application\DBAL\Types\RelationshipType::class,
-            'BillingType' => Application\DBAL\Types\BillingTypeType::class,
             'datetime' => Application\DBAL\Types\ChronosType::class,
             'date' => Application\DBAL\Types\DateType::class,
-            'Money' => Application\DBAL\Types\MoneyType::class,
-            'ExpenseClaimStatus' => Application\DBAL\Types\ExpenseClaimStatusType::class,
-            'ExpenseClaimType' => Application\DBAL\Types\ExpenseClaimTypeType::class,
+            'CHF' => Application\DBAL\Types\CHFType::class,
+            'EUR' => Application\DBAL\Types\EURType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
-            'AccountType' => Application\DBAL\Types\AccountTypeType::class,
-            'StockMovementType' => Application\DBAL\Types\StockMovementTypeType::class,
-            'PurchaseStatus' => Application\DBAL\Types\PurchaseStatusType::class,
+            'SubscriptionType' => Application\DBAL\Types\SubscriptionTypeType::class,
+            'OrderType' => Application\DBAL\Types\OrderTypeType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

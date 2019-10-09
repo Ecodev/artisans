@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
-import { Relationship } from '../../../shared/generated-types';
 import { Router } from '@angular/router';
 import { UserService } from '../../../admin/users/services/user.service';
-import { NaturalAlertService } from '@ecodev/natural';
-import { NaturalFormControl } from '@ecodev/natural';
+import { NaturalAlertService, NaturalFormControl } from '@ecodev/natural';
 
 @Component({
     selector: 'app-request-password-reset',
@@ -30,12 +28,7 @@ export class RequestPasswordResetComponent {
         this.userService.requestPasswordReset(this.form.value.login).subscribe(v => {
             this.sending = false;
 
-            let message;
-            if (v.data.requestPasswordReset === Relationship.householder) {
-                message = 'Un email avec des instructions a été envoyé';
-            } else {
-                message = 'Un email avec des instructions a été envoyé au chef(e) de famille';
-            }
+            const message = 'Un email avec des instructions a été envoyé';
 
             this.alertService.info(message, 5000);
             this.router.navigate(['/login']);

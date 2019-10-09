@@ -6,6 +6,7 @@ namespace ApplicationTest\Repository;
 
 use Application\Model\Image;
 use Application\Model\Product;
+use Application\Model\User;
 use Application\Repository\ImageRepository;
 use Application\Service\AbstractDatabase;
 
@@ -51,22 +52,18 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
     public function testDoctrineDoesNotFuckUpAndDeleteImageFromUnrelatedProduct(): void
     {
+        /** @var User $user */
+        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
+        User::setCurrent($user);
+
         // Make one image usable
         $this->getEntityManager()->getConnection()->update('product', ['image_id' => null], ['image_id' => 5007]);
+        $this->getEntityManager()->getConnection()->exec('REPLACE INTO image (id, filename, width, height) VALUES(5999, \'foo.svg\', 113, 86);');
 
         $paths = [
-            'data/images/chocolat1.jpg',
-            'data/images/chocolat2.jpg',
-            'data/images/miel.png',
-            'data/images/oeufs.jpg',
-            'data/images/patates.jpg',
-            'data/images/poire.jpg',
-            'data/images/pomme.jpg',
-            'data/images/salade.jpg',
-            'data/images/vin1.jpg',
-            'data/images/vin2.jpg',
-            'data/images/yogourt1.jpg',
-            'data/images/yogourt2.png',
+            'data/images/train.jpg',
+            'data/images/transport.jpg',
+            'data/images/garden.jpg',
         ];
 
         // All images must exist before testing
@@ -80,7 +77,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         // Affect existing image to an existing product
         $product = $this->getEntityManager()->find(Product::class, 3000);
-        $image = $this->getEntityManager()->find(Image::class, 5007);
+        $image = $this->getEntityManager()->find(Image::class, 5999);
         self::assertNotNull($image);
         $product->setImage($image);
         self::assertSame($image, $product->getImage(), 'should get image that was set');
@@ -88,7 +85,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         // Most images must still exist after affecting an existing image to an existing product.
         // Only the orphaned image should be deleted, but absolutely never an image related to **another** product
-        $mustBeDeleted = 'data/images/chocolat1.jpg';
+        $mustBeDeleted = 'data/images/garden.jpg';
         foreach ($paths as $p) {
             if ($p === $mustBeDeleted) {
                 self::assertFileNotExists($p);

@@ -35,9 +35,6 @@ class ConfirmRegistrationInputType extends InputObjectType
                     'locality' => [
                         'type' => self::nonNull(self::string()),
                     ],
-                    'birthday' => [
-                        'type' => self::nonNull(_types()->get('Date')),
-                    ],
                 ];
             },
         ];

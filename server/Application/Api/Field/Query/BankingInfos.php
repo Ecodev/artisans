@@ -20,7 +20,7 @@ abstract class BankingInfos implements FieldInterface
                 'description' => 'Represents currently logged-in user',
                 'args' => [
                     'user' => Type::nonNull(_types()->getId(User::class)),
-                    'amount' => _types()->get('Money'),
+                    'amount' => _types()->get('CHF'),
                 ],
                 'resolve' => function ($root, array $args): array {
                     global $container;

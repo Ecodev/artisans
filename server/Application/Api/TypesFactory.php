@@ -16,18 +16,10 @@ class TypesFactory
         $entityManager = $container->get(EntityManager::class);
 
         $invokables = [
-            \Application\Api\Enum\UserStatusType::class,
             \Application\Api\Enum\UserRoleType::class,
-            \Application\Api\Enum\SexType::class,
-            \Application\Api\Enum\RelationshipType::class,
-            \Application\Api\Enum\BillingTypeType::class,
-            \Application\Api\Enum\ExpenseClaimStatusType::class,
-            \Application\Api\Enum\ExpenseClaimTypeType::class,
             \Application\Api\Enum\MessageTypeType::class,
-            \Application\Api\Enum\AccountTypeType::class,
-            \Application\Api\Enum\StockMovementTypeType::class,
-            \Application\Api\Enum\StockMovementTypeForCreateType::class,
-            \Application\Api\Enum\PurchaseStatusType::class,
+            \Application\Api\Enum\SubscriptionTypeType::class,
+            \Application\Api\Enum\OrderTypeType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\Input\OrderLineInputType::class,
@@ -36,13 +28,13 @@ class TypesFactory
             \Application\Api\Output\BankingInfosType::class,
             \Application\Api\Output\CrudPermissionsListType::class,
             \Application\Api\Output\CrudPermissionsType::class,
-            \Application\Api\Output\OpenDoorType::class,
             \Application\Api\Output\PermissionsType::class,
             \Application\Api\QueryType::class,
             \Application\Api\Scalar\ColorType::class,
             \Application\Api\Scalar\ChronosType::class,
             \Application\Api\Scalar\DateType::class,
-            \Application\Api\Scalar\MoneyType::class,
+            \Application\Api\Scalar\CHFType::class,
+            \Application\Api\Scalar\EURType::class,
             \Application\Api\Scalar\EmailType::class,
             \Application\Api\Scalar\LoginType::class,
             \Application\Api\Scalar\PasswordType::class,
@@ -54,7 +46,8 @@ class TypesFactory
             'datetime' => \Application\Api\Scalar\ChronosType::class,
             'date' => \Application\Api\Scalar\DateType::class,
             'UploadedFileInterface' => \GraphQL\Upload\UploadType::class,
-            'Money' => \Application\Api\Scalar\MoneyType::class,
+            'CHF' => \Application\Api\Scalar\CHFType::class,
+            'EUR' => \Application\Api\Scalar\EURType::class,
         ];
 
         // Automatically add aliases for GraphQL type name from the invokable types

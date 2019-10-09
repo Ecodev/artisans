@@ -23,10 +23,8 @@ class ProductRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Product::class);
     }
 
-    public function testDisableAllDiscountablePrices(): void
+    public function testDummy(): void
     {
-        self::assertGreaterThan(0, $this->repository->count(['ponderatePrice' => 1]));
-        $this->repository->disableAllDiscountablePrices();
-        self::assertEquals(0, $this->repository->count(['ponderatePrice' => 1]));
+        self::assertTrue(true, 'find something more interesting to test');
     }
 }

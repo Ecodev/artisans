@@ -33,9 +33,8 @@ class OrderRepositoryTest extends AbstractRepositoryTest
 
         return [
             ['anonymous', []],
-            ['individual', $family],
-            ['member', $family],
-            ['responsible', $all],
+            ['member', [16000]],
+            ['facilitator', $all],
             ['administrator', $all],
         ];
     }

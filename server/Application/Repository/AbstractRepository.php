@@ -58,28 +58,4 @@ abstract class AbstractRepository extends EntityRepository
 
         return $qb->getSQL();
     }
-
-    /**
-     * Return native SQL query to get all ID of object owned by anybody from the family
-     *
-     * @param User $user
-     *
-     * @return string
-     */
-    protected function getAllIdsForFamilyQuery(User $user): string
-    {
-        if ($user->getOwner()) {
-            $id = $user->getOwner()->getId();
-        } else {
-            $id = $user->getId();
-        }
-
-        $connection = $this->getEntityManager()->getConnection();
-        $qb = $connection->createQueryBuilder()
-            ->select('id')
-            ->from($connection->quoteIdentifier($this->getClassMetadata()->getTableName()))
-            ->andWhere('owner_id IN (SELECT id FROM user WHERE id = ' . $id . ' OR owner_id = ' . $id . ')');
-
-        return $qb->getSQL();
-    }
 }

@@ -4,8 +4,8 @@ import { permissionsFragment, userMetaFragment } from '../../shared/queries/frag
 export const orderMetaFragment = gql`
     fragment orderMeta on Order {
         id
-        balance
-        vatPart
+        balanceCHF
+        balanceEUR
         creationDate
         orderLines {
             id
@@ -13,12 +13,6 @@ export const orderMetaFragment = gql`
         owner {
             id
             name
-        }
-        transaction {
-            id
-            name
-            transactionDate
-            remarks
         }
     }
 `;
@@ -32,7 +26,8 @@ export const ordersQuery = gql`
             pageSize
             pageIndex
             length
-            totalBalance
+            totalBalanceCHF
+            totalBalanceEUR
         }
     }
 ${orderMetaFragment}`;

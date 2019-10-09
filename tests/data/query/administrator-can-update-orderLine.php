@@ -2,42 +2,31 @@
 
 declare(strict_types=1);
 
+use Application\DBAL\Types\OrderTypeType;
+
 return [
     [
         'query' => 'mutation ($input:  OrderLineInput!) {
             updateOrderLine(id: 17000, input: $input) {
                 product {
                     id
-                    quantity
                 }
                 quantity
-                pricePonderation
-                balance
-                vatPart
+                balanceCHF
+                balanceEUR
+                type
                 order {
-                    balance
-                    vatPart
-                    transaction {
-                        transactionLines {
-                            balance
-                        }
-                        balance
-                    }
-                }
-                stockMovement {
-                    delta
-                    quantity
-                    product {
-                        id
-                    }
+                    balanceCHF
+                    balanceEUR
                 }
             }
         }',
         'variables' => [
             'input' => [
-                'product' => 3011,
+                'product' => 3001,
                 'quantity' => '20',
-                'pricePonderation' => '0.5',
+                'isCHF' => true,
+                'type' => OrderTypeType::DIGITAL,
             ],
         ],
     ],
@@ -45,31 +34,15 @@ return [
         'data' => [
             'updateOrderLine' => [
                 'product' => [
-                    'id' => '3011',
-                    'quantity' => '-15.000',
+                    'id' => '3001',
                 ],
                 'quantity' => '20.000',
-                'pricePonderation' => '0.50',
-                'balance' => '125.00',
-                'vatPart' => '0.00',
+                'balanceCHF' => '200.00',
+                'balanceEUR' => '0.00',
+                'type' => OrderTypeType::DIGITAL,
                 'order' => [
-                    'balance' => '142.40',
-                    'vatPart' => '0.42',
-                    'transaction' => [
-                        'transactionLines' => [
-                            [
-                                'balance' => '142.40',
-                            ],
-                        ],
-                        'balance' => '142.40',
-                    ],
-                ],
-                'stockMovement' => [
-                    'delta' => '-20.000',
-                    'quantity' => '-12.000',
-                    'product' => [
-                        'id' => '3011',
-                    ],
+                    'balanceCHF' => '200.00',
+                    'balanceEUR' => '0.00',
                 ],
             ],
         ],

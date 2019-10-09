@@ -7,7 +7,6 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
-use Application\Model\Account;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use GraphQL\Type\Definition\Type;
@@ -59,12 +58,6 @@ abstract class ConfirmRegistration implements FieldInterface
 
                 // Login
                 User::setCurrent($user);
-
-                // Create account so he can credit money and start shopping,
-                // but only if it's family chief
-                if ($user->isFamilyOwner()) {
-                    _em()->getRepository(Account::class)->getOrCreate($user);
-                }
 
                 _em()->flush();
 

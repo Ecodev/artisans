@@ -10,43 +10,23 @@ export const userFieldsFragment = gql`
         lastName
         name
         email
-        birthday
-        age
         phone
         postcode
         street
         locality
-        familyRelationship
-        receivesNewsletter
         role
-        status
-        mobilePhone
-        door
         code
-        companyShares
-        companySharesDate
+        membershipBegin
+        membershipEnd
         url
         firstLogin
         lastLogin
-        canOpenDoor
-        account {
-            id
-            name
-            balance
-            type
-        }
-        iban
-        billingType
-        remarks
         internalRemarks
         owner {
             id
             name
             email
         }
-        sex
-        welcomeSessionDate
-        resignDate
         creationDate
         creator {
             ...userMeta
@@ -66,21 +46,9 @@ export const usersQuery = gql`
                 login
                 code
                 name
-                status
-                familyRelationship
                 updateDate
                 creationDate
-                age
-                welcomeSessionDate
-                resignDate
-                sex
-                mobilePhone
                 email
-                account {
-                    id
-                    balance
-                    type
-                }
             }
             pageSize
             pageIndex
@@ -132,7 +100,6 @@ export const updateUser = gql`
         updateUser(id:$id, input:$input) {
             id
             name
-            welcomeSessionDate
             updateDate
             updater {
                 ...userMeta
@@ -192,12 +159,3 @@ export const unregisterMutation = gql`
     }
 `;
 
-export const leaveFamilyMutation = gql`
-    mutation LeaveFamily($id: UserID!) {
-        leaveFamily(id: $id) {
-            ...userFields
-        }
-    }
-    ${userFieldsFragment}
-    ${userMetaFragment}
-`;

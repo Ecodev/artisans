@@ -2,7 +2,7 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NaturalAbstractList, NaturalQueryVariablesManager, NaturalSearchSelections } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { EmailUsers, EmailUsersVariables, Users, UserStatus, UsersVariables } from '../../../shared/generated-types';
+import { EmailUsers, EmailUsersVariables, Users, UsersVariables } from '../../../shared/generated-types';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { copy } from '../../../shared/utils';
@@ -17,14 +17,13 @@ import { UserService } from '../services/user.service';
 export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVariables> implements OnInit {
 
     public initialColumns = [
-        'balance',
         'name',
         'login',
-        'age',
+        'email',
         'creationDate',
         'updateDate',
-        'status',
-        'flagWelcomeSessionDate',
+        'membershipBegin',
+        'membershipEnd',
     ];
 
     public usersEmail: string | null = null;
@@ -41,26 +40,6 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
         super(userService, injector);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get(this.route.snapshot.data.isAdmin ? 'usersAdmin' : 'usersFrontend');
-    }
-
-    public flagWelcomeSessionDate(user) {
-        this.userService.flagWelcomeSessionDate(user.id).subscribe((u) => {
-            user = u;
-        });
-    }
-
-    public activate(user) {
-        this.userService.activate(user.id).subscribe((u) => {
-            user = u;
-        });
-    }
-
-    public isActive(user) {
-        return user.status === UserStatus.active;
-    }
-
-    public isNew(user) {
-        return user.status === UserStatus.new;
     }
 
     public search(naturalSearchSelections: NaturalSearchSelections): void {

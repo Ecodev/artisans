@@ -6,7 +6,6 @@ namespace Application\Api\Field\Mutation;
 
 use Application\Api\Field\FieldInterface;
 use Application\Model\Order;
-use Application\Model\User;
 use Application\Service\Invoicer;
 use GraphQL\Type\Definition\Type;
 use Zend\Expressive\Session\SessionInterface;
@@ -33,12 +32,11 @@ abstract class CreateOrder implements FieldInterface
 
                 /** @var Invoicer $invoicer */
                 $invoicer = $container->get(Invoicer::class);
-                $order = $invoicer->createOrder(User::getCurrent(), $input);
+                $order = $invoicer->createOrder($input);
 
                 _em()->flush();
 
                 _em()->refresh($order);
-                _em()->refresh($order->getTransaction());
 
                 return $order;
             },

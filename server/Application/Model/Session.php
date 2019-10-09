@@ -40,7 +40,7 @@ class Session extends AbstractModel
     private $availability = '';
 
     /**
-     * @var array
+     * @var string[]
      *
      * @ORM\Column(type="json")
      */
@@ -97,7 +97,8 @@ class Session extends AbstractModel
     /**
      * List of dates
      *
-     * @return array
+     *
+     * @return string[]
      */
     public function getDates(): array
     {
@@ -107,7 +108,7 @@ class Session extends AbstractModel
     /**
      * List of dates
      *
-     * @param array $dates
+     * @param string[] $dates
      */
     public function setDates(array $dates): void
     {

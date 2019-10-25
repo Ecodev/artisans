@@ -5,10 +5,10 @@ REPLACE INTO product_tag (id, name) VALUES
 (6001, 'Technologie'),
 (6002, 'Jardinage');
 
-REPLACE INTO image (id, filename, width, height) VALUES
-(5000, 'garden.jpg', 792, 528),
-(5001, 'transport.jpg', 840, 466),
-(5002, 'train.jpg', 832, 468);
+REPLACE INTO image (id, filename, width, height, mime) VALUES
+(5000, 'garden.jpg', 792, 528, 'image/jpeg'),
+(5001, 'transport.jpg', 840, 466, 'image/jpeg'),
+(5002, 'train.jpg', 832, 468, 'image/jpeg');
 
 REPLACE INTO product (id, is_active, image_id, price_per_unit_chf, price_per_unit_eur, name, code, description) VALUES
 (3000, 1, 5000, 1000, 1500, 'Revue printemps 2019', '2019-01', 'Des article intéressants sur le jardinage assisté par ordinateur'),

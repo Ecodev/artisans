@@ -1,14 +1,8 @@
 # Les artisans de la transition
 
-Master:
 [![Build Status](https://travis-ci.com/Ecodev/lesartisans.svg?branch=master)](https://travis-ci.com/Ecodev/lesartisans) &nbsp;
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/lesartisans/badges/quality-score.png?b=master&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/lesartisans/?branch=master) &nbsp;
 [![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/lesartisans/badges/coverage.png?b=master&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/lesartisans/?branch=master)
-
-Develop:
-[![Build Status](https://travis-ci.com/Ecodev/lesartisans.svg?branch=develop)](https://travis-ci.com/Ecodev/lesartisans) &nbsp;
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ecodev/lesartisans/badges/quality-score.png?b=develop&s=2b6588a62b5d35d80bd104014502605b7520f49a)](https://scrutinizer-ci.com/g/Ecodev/lesartisans/?branch=develop) &nbsp;
-[![Code Coverage](https://scrutinizer-ci.com/g/Ecodev/lesartisans/badges/coverage.png?b=develop&s=cc2eec510484f44409973822e7e3a805df6a1e91)](https://scrutinizer-ci.com/g/Ecodev/lesartisans/?branch=develop)
 
 ## Introduction
 

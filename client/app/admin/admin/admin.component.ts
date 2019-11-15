@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from '../users/services/user.service';
+import { NaturalAbstractController, NaturalSidenavService } from '@ecodev/natural';
 
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent extends NaturalAbstractController implements OnInit {
 
     public viewer;
 
-    constructor(private route: ActivatedRoute) {
+    /**
+     * For template usage
+     */
+    public NaturalSidenavService = NaturalSidenavService;
 
+    constructor(private route: ActivatedRoute) {
+        super();
     }
 
     ngOnInit() {
-        this.viewer = this.route.snapshot.data.viewer.model;
+        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
     }
 }

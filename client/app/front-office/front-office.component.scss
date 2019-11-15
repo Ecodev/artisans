@@ -1,10 +1,22 @@
 :host {
 
+    #content {
+        overflow: auto;
+    }
+
+    #header {
+        max-width: 1130px;
+        margin: auto;
+    }
+
     #searchByCode {
+        display: flex;
+
+        padding: 3px 5px;
+        width: 135px;
+
         border-radius: 5px;
         background: rgba(0, 0, 0, 0.05);
-        padding: 3px 5px;
-        width:135px;
 
         input {
             border: none;
@@ -19,5 +31,4 @@
             outline: none;
         }
     }
-
 }

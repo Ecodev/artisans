@@ -1,16 +1,15 @@
-<div fxFlex="1 0 auto" fxLayout="column" class="padding">
+<div class="padding" fxFlex="1 0 auto" fxLayout="column">
 
-    <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end" *ngIf="!cartService.cart.length">
+    <div *ngIf="!cartService.cart.length" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end">
 
-        <div fxFlex="1 0 auto" fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center center" style="max-width:600px; margin: 0 auto">
-            <img src="assets/logo.png" style="height:40vmin; margin:0 auto">
+        <div fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="40px" style="max-width:600px; margin: 0 auto">
             <div fxFlex="none">
                 <h1 class="mat-headline">Bienvenue ! </h1>
                 <p class="mat-subheading-2">
                     Pour effectuer tes achats, il te suffit de scanner le code QR du produit ou d'introduire le code de l'article puis sa
                     quantité… </p>
-                <button mat-flat-button color="primary" routerLink="/shop/camera">
-                    <natural-icon name="simple-qr" [size]="24"></natural-icon>
+                <button color="primary" mat-flat-button routerLink="/shop/camera">
+                    <natural-icon [size]="24" name="simple-qr"></natural-icon>
                     Démarrer la caméra
                 </button>
             </div>
@@ -25,9 +24,9 @@
             <mat-list-item *ngFor="let line of cartService.cart; let i = index"
                            [routerLink]="['/shop/product', line.product.code, {index: i}]"
             >
-                <app-file [model]="line.product.image" [height]="70" [style.width.px]="70" matListAvatar></app-file>
+                <app-file [height]="70" [model]="line.product.image" [style.width.px]="70" matListAvatar></app-file>
                 <div matLine style="white-space: normal;">{{ line.product.name }}</div>
-                <div matLine fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="start end" style="white-space: nowrap">
+                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" matLine style="white-space: nowrap">
                     <div fxFlex>
                         {{ line.quantity }}
                     </div>
@@ -51,9 +50,9 @@
             </div>
         </div>
 
-        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="end">
-            <button mat-button (click)="empty()">Vider le panier</button>
-            <button mat-flat-button color="primary" (click)="createOrder()" [style.width.px]="200">Passer à la caisse</button>
+        <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+            <button (click)="empty()" mat-button>Vider le panier</button>
+            <button (click)="createOrder()" [style.width.px]="200" color="primary" mat-flat-button>Passer à la caisse</button>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
-<natural-sidenav-container name="adminMenu" [noScroll]="true" fxFlex>
+<natural-sidenav-container [noScroll]="true" fxFlexFill name="adminMenu">
     <natural-sidenav>
-        <div overflow class="margin">
+        <div class="margin" overflow>
             <mat-accordion displayMode="flat">
 
                 <mat-expansion-panel class="mat-elevation-z0">
@@ -13,13 +13,13 @@
                     </mat-nav-list>
                 </mat-expansion-panel>
 
-                <mat-expansion-panel class="mat-elevation-z0" [expanded]="true">
+                <mat-expansion-panel [expanded]="true" class="mat-elevation-z0">
                     <mat-expansion-panel-header>
                         <mat-panel-title>Produits</mat-panel-title>
                     </mat-expansion-panel-header>
                     <mat-nav-list>
                         <a mat-list-item routerLink="product">Tous les produits</a>
-                        <a mat-list-item routerLink="product-tag">Tags</a>
+                        <a mat-list-item routerLink="product-tag">Catégories</a>
                     </mat-nav-list>
                 </mat-expansion-panel>
 
@@ -36,7 +36,12 @@
         </div>
     </natural-sidenav>
     <natural-sidenav-content>
-        <div fxFlex fxLayout="column" style="padding:20px; overflow:auto;">
+        <div style="padding:20px; overflow:auto;">
+
+            <button (click)=" NaturalSidenavService?.sideNavs?.get('adminMenu')?.toggle()" fxHide.gt-sm mat-icon-button>
+                <natural-icon name="menu"></natural-icon>
+            </button>
+
             <router-outlet></router-outlet>
         </div>
     </natural-sidenav-content>

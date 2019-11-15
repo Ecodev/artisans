@@ -1,20 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
-import { ProductsComponent } from './admin/products/products/products.component';
-import { ProductService } from './admin/products/services/product.service';
-import { FrontEndComponent } from './front-end/front-end.component';
-import { HomeComponent } from './home/home.component';
+import { FrontOfficeComponent } from './front-office/front-office.component';
+import { HomepageComponent } from './front-office/homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import {
-    DialogTriggerComponent,
-    DialogTriggerRoutingData,
-} from './shared/components/modal-trigger/dialog-trigger.component';
-import { AuthGuard } from './shared/guards/auth.guard';
-import { ProductComponent } from './shop/product/product.component';
-import { ProductByCodeResolver } from './shop/services/product-by-code.resolver';
-import { ShopComponent } from './shop/shop/shop.component';
 
 export const routes: Routes = [
     {
@@ -25,62 +15,32 @@ export const routes: Routes = [
     {
         // Registration
         path: 'user',
-        component: HomeComponent,
+        component: FrontOfficeComponent,
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     },
     // Auth required routes
     {
         path: '',
-        component: HomeComponent,
+        component: FrontOfficeComponent,
         resolve: {viewer: ViewerResolver},
-        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
-                component: FrontEndComponent,
-                children: [
-                    {
-                        path: '',
-                        pathMatch: 'full',
-                        redirectTo: 'shop',
-                    },
-                    {
-                        path: 'shop',
-                        component: ShopComponent,
-                        children: [
-                            {
-                                path: 'product/:code',
-                                component: DialogTriggerComponent,
-                                data: {
-                                    component: ProductComponent,
-                                    dialogConfig: {
-                                        width: '600px',
-                                        maxWidth: '95vw',
-                                        maxHeight: '97vh',
-                                    },
-                                } as DialogTriggerRoutingData,
-                                resolve: {
-                                    product: ProductByCodeResolver,
-                                },
-                            },
-                        ],
-                    },
-                    {
-                        path: 'profile',
-                        loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
-                    },
-                ],
+                component: HomepageComponent,
             },
             {
-                path: 'admin',
-                loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+                path: 'profile',
+                loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
             },
-
         ],
     },
     {
         path: 'error',
-        component: HomeComponent,
+        component: FrontOfficeComponent,
         children: [
             {
                 path: '',

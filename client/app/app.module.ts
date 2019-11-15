@@ -15,8 +15,8 @@ import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-bat
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FrontEndComponent } from './front-end/front-end.component';
-import { HomeComponent } from './home/home.component';
+import { FrontOfficeComponent } from './front-office/front-office.component';
+import { HomepageComponent } from './front-office/homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { ErrorComponent } from './shared/components/error/error.component';
@@ -33,8 +33,8 @@ registerLocaleData(localeFRCH);
     declarations: [
         AppComponent,
         LoginComponent,
-        HomeComponent,
-        FrontEndComponent,
+        FrontOfficeComponent,
+        HomepageComponent,
         BootLoaderComponent,
         ErrorComponent,
     ],

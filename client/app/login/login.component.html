@@ -1,36 +1,34 @@
-<div fxLayout="column" fxFlexAlign="center center" fxFlexFill overflow>
+<div fxFlexAlign="center center" fxFlexFill fxLayout="column" overflow>
 
     <div class="padding" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-
-        <img src="assets/logo.png" width="200px" />
 
         <form fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px" style="min-width:300px">
 
             <mat-form-field>
                 <mat-label>Nom d'utilisateur</mat-label>
-                <input matInput autofocus name="login" [(ngModel)]="loginForm.login" required="required" [disabled]="loading">
+                <input [(ngModel)]="loginForm.login" [disabled]="loading" autofocus matInput name="login" required="required">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Mot de passe</mat-label>
-                <input matInput
-                       type="password"
-                       name="password"
-                       color="warn"
-                       [(ngModel)]="loginForm.password"
-                       required="required"
+                <input [(ngModel)]="loginForm.password"
                        [disabled]="loading"
+                       color="warn"
+                       matInput
+                       name="password"
+                       required="required"
+                       type="password"
                 >
             </mat-form-field>
 
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
                 <a mat-button routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
-                <button type="submit"
-                        mat-raised-button
-                        color="primary"
-                        (click)="login()"
+                <button (click)="login()"
                         [disabled]="loading || !loginForm.login || !loginForm.password"
+                        color="primary"
                         i18n
+                        mat-raised-button
+                        type="submit"
                 >Se connecter
                 </button>
             </div>

@@ -15,11 +15,6 @@ export const routes: Routes = [
         loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
     },
     {
-        path: 'login',
-        component: LoginComponent,
-        resolve: {viewer: ViewerResolver},
-    },
-    {
         // Registration
         path: 'user',
         component: FrontOfficeComponent,

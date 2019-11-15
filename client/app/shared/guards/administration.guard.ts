@@ -23,7 +23,7 @@ export class AdministrationGuard implements CanActivate {
             const granted = UserService.canAccessAdmin(user.model);
 
             if (!granted) {
-                this.router.navigate(['/']);
+                this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
                 return false;
             }
 

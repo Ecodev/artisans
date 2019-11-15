@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { NaturalAbstractModelService, FormValidators, NaturalValidators, FormAsyncValidators } from '@ecodev/natural';
-import { productTagQuery, productTagsQuery, createProductTag, deleteProductTags, updateProductTag } from './productTag.queries';
+import { productTagQuery, productTagsQuery, createProductTag, deleteProductTags, updateProductTag } from './product-tag.queries';
 import {
     ProductTag,
     ProductTagInput,

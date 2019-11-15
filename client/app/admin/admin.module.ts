@@ -10,8 +10,6 @@ import { MaterialModule } from '../shared/modules/material.module';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './products/product/product.component';
-import { ProductTagComponent } from './productTags/productTag/productTag.component';
-import { ProductTagsComponent } from './productTags/productTags/productTags.component';
 import { UserComponent } from './users/user/user.component';
 import { UserTagComponent } from './userTags/userTag/userTag.component';
 import { UserTagsComponent } from './userTags/userTags/userTags.component';
@@ -23,8 +21,6 @@ import { UserTagsComponent } from './userTags/userTags/userTags.component';
         UserComponent,
         UserTagsComponent,
         UserTagComponent,
-        ProductTagsComponent,
-        ProductTagComponent,
     ],
     imports: [
         CommonModule,

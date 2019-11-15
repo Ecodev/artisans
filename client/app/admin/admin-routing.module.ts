@@ -12,9 +12,6 @@ import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './products/product/product.component';
 import { ProductsComponent } from './products/products/products.component';
 import { ProductResolver } from './products/services/product.resolver';
-import { ProductTagComponent } from './productTags/productTag/productTag.component';
-import { ProductTagsComponent } from './productTags/productTags/productTags.component';
-import { ProductTagResolver } from './productTags/services/productTag.resolver';
 import { UserResolver } from './users/services/user.resolver';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
@@ -112,32 +109,6 @@ const routes: Routes = [
                             component: UserTagComponent,
                             resolve: {
                                 userTag: UserTagResolver,
-                            },
-                        },
-                    ],
-                },
-                {
-                    path: 'product-tag', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: ProductTagsComponent,
-                    data: {
-                        title: 'Tags de produits',
-                    },
-                },
-                {
-                    path: 'product-tag',
-                    children: [
-                        {
-                            path: 'new',
-                            component: ProductTagComponent,
-                            resolve: {
-                                productTag: ProductTagResolver,
-                            },
-                        },
-                        {
-                            path: ':productTagId', // last
-                            component: ProductTagComponent,
-                            resolve: {
-                                productTag: ProductTagResolver,
                             },
                         },
                     ],

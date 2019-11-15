@@ -17,7 +17,7 @@ import {
     wrapLike,
 } from '@ecodev/natural';
 import { ProductService } from '../../admin/products/services/product.service';
-import { ProductTagService } from '../../admin/productTags/services/productTag.service';
+import { ProductTagService } from '../../admin/product-tags/services/product-tag.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { UserTagService } from '../../admin/userTags/services/userTag.service';
 import { ProductFilterGroupCondition, UserFilterGroupCondition } from '../generated-types';

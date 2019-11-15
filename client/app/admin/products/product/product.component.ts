@@ -11,7 +11,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { ProductTagService } from '../../productTags/services/productTag.service';
+import { ProductTagService } from '../../product-tags/services/product-tag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
 

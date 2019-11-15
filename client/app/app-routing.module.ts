@@ -2,11 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewerResolver } from './admin/users/services/viewer.resolver';
 import { FrontOfficeComponent } from './front-office/front-office.component';
-import { HomepageComponent } from './front-office/homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 
 export const routes: Routes = [
+    {
+        path: '',
+        loadChildren: () => import('./front-office/front-office.module').then(m => m.FrontOfficeModule),
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    },
     {
         path: 'login',
         component: LoginComponent,
@@ -17,26 +24,6 @@ export const routes: Routes = [
         path: 'user',
         component: FrontOfficeComponent,
         loadChildren: () => import('./user/user.module').then(m => m.UserModule),
-    },
-    {
-        path: 'admin',
-        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-    },
-    // Auth required routes
-    {
-        path: '',
-        component: FrontOfficeComponent,
-        resolve: {viewer: ViewerResolver},
-        children: [
-            {
-                path: '',
-                component: HomepageComponent,
-            },
-            {
-                path: 'profile',
-                loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule),
-            },
-        ],
     },
     {
         path: 'error',

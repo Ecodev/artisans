@@ -10,12 +10,12 @@ import {
     UserTagVariables,
 } from '../../../shared/generated-types';
 import { UserService } from '../../users/services/user.service';
-import { UserTagService } from '../services/userTag.service';
+import { UserTagService } from '../services/user-tag.service';
 
 @Component({
     selector: 'app-user-tag',
-    templateUrl: './userTag.component.html',
-    styleUrls: ['./userTag.component.scss'],
+    templateUrl: './user-tag.component.html',
+    styleUrls: ['./user-tag.component.scss'],
 })
 export class UserTagComponent
     extends NaturalAbstractDetail<UserTag['userTag'],

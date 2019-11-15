@@ -15,9 +15,9 @@ import { ProductResolver } from './products/services/product.resolver';
 import { UserResolver } from './users/services/user.resolver';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
-import { UserTagResolver } from './userTags/services/userTag.resolver';
-import { UserTagComponent } from './userTags/userTag/userTag.component';
-import { UserTagsComponent } from './userTags/userTags/userTags.component';
+import { UserTagResolver } from './user-tags/services/user-tag.resolver';
+import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
+import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
 
 const routes: Routes = [
         {

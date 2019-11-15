@@ -11,8 +11,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './products/product/product.component';
 import { UserComponent } from './users/user/user.component';
-import { UserTagComponent } from './userTags/userTag/userTag.component';
-import { UserTagsComponent } from './userTags/userTags/userTags.component';
+import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
+import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
 
 @NgModule({
     declarations: [

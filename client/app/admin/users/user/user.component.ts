@@ -8,7 +8,7 @@ import {
     User,
     UserVariables,
 } from '../../../shared/generated-types';
-import { UserTagService } from '../../userTags/services/userTag.service';
+import { UserTagService } from '../../user-tags/services/user-tag.service';
 import { UserService } from '../services/user.service';
 
 @Component({

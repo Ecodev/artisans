@@ -1,12 +1,11 @@
 :host {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    .introduction {
+        margin-bottom: 50px;
+        padding: 40px;
+    }
 
-    natural-sidenav-container {
-        width:100%;
-        max-width: 1400px;
-        margin: auto;
+    .body .mat-title {
+        margin-bottom: 10px;
     }
 
 }

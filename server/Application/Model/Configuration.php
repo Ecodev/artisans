@@ -19,7 +19,7 @@ class Configuration extends AbstractModel
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=191, unique=true)
+     * @ORM\Column(name="`key`", type="string", length=191, unique=true)
      */
     private $key;
 
@@ -28,7 +28,12 @@ class Configuration extends AbstractModel
      *
      * @ORM\Column(type="text")
      */
-    private $value;
+    private $value = '';
+
+    public function __construct(string $key = '')
+    {
+        $this->key = $key;
+    }
 
     /**
      * Get key

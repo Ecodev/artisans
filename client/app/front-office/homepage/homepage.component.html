@@ -1,22 +1,103 @@
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
-homepage<br/>
+<div class="introduction-blocs">
+
+    <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutGap="50px">
+        <app-home-block fxFlex key="home-block-1"></app-home-block>
+        <app-home-block fxFlex key="home-block-2"></app-home-block>
+        <app-home-block fxFlex key="home-block-3"></app-home-block>
+    </div>
+</div>
+
+<div><!-- spacer --></div>
+
+<div class="news">
+    <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+        <div fxFlex.gt-sm="66">
+            <div class="mat-display-2">Actualités</div>
+            <div></div>
+        </div>
+        <div fxFlex.gt-sm="33">
+            <div class="mat-display-2">Agenda</div>
+        </div>
+    </div>
+</div>
+
+<div class="la-revue section">
+    <div class="container">
+
+        <div class="la-revue-introduction section-introduction">
+            <div class="mat-display-2">La Revue Durable</div>
+            <div class="mat-subheading-1">
+                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor
+                mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+            </div>
+        </div>
+
+        <div fxLayout.gt-sm="row" fxLayoutGap="30px">
+            <div fxFlex.gt-sm="33">
+                <div class="mat-headline">Le dernier numéro</div>
+                <mat-card>asdf</mat-card>
+            </div>
+            <div fxFlex.gt-sm="66">
+                <div class="mat-headline">Nos thèmes</div>
+                <div fxLayout="row wrap">
+                    <div fxFlex="50">category</div>
+                    <div fxFlex="50">category</div>
+                    <div fxFlex="50">category</div>
+                    <div fxFlex="50">category</div>
+                    <div fxFlex="50">category</div>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center">
+            <a mat-stroked-button color="accent">Voir tous nos articles</a>
+        </div>
+    </div>
+</div>
+
+<div class="support section">
+
+    <div class="container">
+
+        <div class="support-introduction section-introduction">
+            <div class="mat-display-2">Nous soutenir</div>
+            <div class="mat-subheading-1">
+                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor
+                mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+            </div>
+        </div>
+
+        <div fxLayout.gt-sm="row" fxLayoutGap="30px">
+            <div fxFlex.gt-sm="33" class="support-column">
+                <div class="mat-headline">S'abonner</div>
+                <div class="support-column-content">
+                    Fusce dapibus, tellus ac <strong>cursus commodo</strong>, tortor mauris condimentum nibh, ut fermentum massa justo sit
+                    amet risus.
+                </div>
+
+                <a mat-stroked-button>Voir les abonnements</a>
+            </div>
+
+            <div fxFlex.gt-sm="33" class="support-column">
+                <div class="mat-headline">Rejoindre l'association</div>
+                <div class="support-column-content">
+                    Fusce dapibus, tellus ac <strong>cursus commodo</strong>, tortor mauris condimentum nibh, ut fermentum massa justo sit
+                    amet risus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </div>
+                <a mat-stroked-button>Découvrir l'association</a>
+
+            </div>
+
+            <div fxFlex.gt-sm="33" class="donation support-column">
+                <div class="mat-headline">Faire un don</div>
+                <div class="support-column-content">
+                    Fusce dapibus, tellus ac <strong>cursus commodo</strong>, tortor mauris condimentum nibh, ut fermentum massa justo sit
+                    amet risus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                </div>
+                <a mat-flat-button color="accent">Faire un don</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>

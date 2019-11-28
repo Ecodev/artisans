@@ -70,7 +70,6 @@ export const emailUsersQuery = gql`
     }
 `;
 
-
 export const userQuery = gql`
     query User($id: UserID!) {
         user(id: $id) {

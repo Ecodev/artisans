@@ -1,4 +1,4 @@
-<div fxFlexFill>
+<div fxFlexFill class="mat-body-1">
     <ng-progress [spinner]="false" [trickleSpeed]="1000"></ng-progress>
     <router-outlet (activate)="initialized = true"></router-outlet>
     <app-boot-loader *ngIf="!initialized"></app-boot-loader>

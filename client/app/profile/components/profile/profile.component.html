@@ -1,36 +1,53 @@
-<div class="padding" fxFlex="none" fxLayout="column" fxLayoutGap="30px" style="width:100%; max-width:1300px; margin:0 auto">
+<div class="container padding-top padding-bottom">
 
-    <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start center" fxLayoutGap="30px" fxLayoutGap.gt-xs="0px">
-        <div fxFlex="none" fxFlex.gt-xs fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="10px">
-            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                <ngx-avatar [name]="viewer?.name" [size]="50"></ngx-avatar>
-                <div>
-                    <div class="mat-display-1 no-margin-bottom">{{ viewer?.name }}</div>
-                </div>
-            </div>
+    <div fxLayout="column" fxLayout.gt-xs="row" class="introduction" fxLayoutGap="20px">
+        <div fxFlex="25" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+            <div class="mat-display-1 no-margin" fxFlex>Bonjour {{ viewer?.firstName }},</div>
+            <a (click)="userService.logout()" color="warn" mat-flat-button>Se déconnecter</a>
         </div>
 
-        <a (click)="userService.logout()" color="warn" mat-button>logout</a>
-
-        <!-- CREDIT -->
-        <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
-            <div fxLayout="column" fxLayoutGap="20px">
-                <div fxLayout="row" fxLayoutAlign="start center">
-                    <h2 class="mat-headline no-margin" fxFlex>Solde</h2>
-                    <button (click)="pay()" class="margin-left" color="primary" mat-flat-button>
-                        Faire un versement
-                    </button>
-                </div>
-
-            </div>
+        <div fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+            <div class="mat-title">Mon compte de La Revue</div>
+            <div>Abonné web et papier depuis 14 mai 1984</div>
+            <div>Date du prochain renouvellement : novembre 2019</div>
+            <button mat-flat-button color="accent" routerLink="/subscriptions">Renouveller</button>
         </div>
 
+        <div fxFlex fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+            <div class="mat-title ">Mon statut Artisans de la transition</div>
+            <div>Membre depuis 1984</div>
+            <div>Date de la prochaine cotisation : juin 2020</div>
+            <button mat-flat-button color="accent" routerLink="/membership">Payer la cotisation</button>
+        </div>
     </div>
 
-    <mat-divider></mat-divider>
-
-    <div fxLayout="column">
-        <router-outlet></router-outlet>
+    <div class="container body">
+        <div fxLayout="column" fxFlex="25">
+            <div fxLayout="column" fxLayoutGap="20px">
+                <div>
+                    <div class="mat-title">Mon compte</div>
+                    <mat-nav-list>
+                        <a mat-list-item> Mes coordonnées et mot de passe</a>
+                        <a mat-list-item> Commandes</a>
+                    </mat-nav-list>
+                </div>
+                <div>
+                    <div class="mat-title">Les artisans de la transition</div>
+                    <mat-nav-list>
+                        <a mat-list-item> Cotisations</a>
+                    </mat-nav-list>
+                </div>
+                <div>
+                    <div class="mat-title">La Revue</div>
+                    <mat-nav-list>
+                        <a mat-list-item> Articles et revues achetées</a>
+                    </mat-nav-list>
+                </div>
+            </div>
+            <div fxFlex>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
 
 </div>

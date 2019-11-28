@@ -1,0 +1,40 @@
+<mat-card class="mat-elevation-z5" *ngIf="!editMode">
+    <div class="mat-title">{{ form.get('title').value }}</div>
+    <div class="description mat-subheading-1">{{ form.get('description').value }}</div>
+    <a mat-stroked-button routerLink="{{ form.get('buttonLink').value }}">{{ form.get('buttonLabel').value }}</a>
+    <button mat-fab color="primary" (click)="editMode = true" class="edit-button" *ngIf="permissionService?.crud?.configuration?.create">
+        <natural-icon name="edit"></natural-icon>
+    </button>
+</mat-card>
+
+<mat-card *ngIf="editMode" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+    <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+        <mat-form-field>
+            <mat-label>Titre</mat-label>
+            <textarea matInput formControlName="title" matTextareaAutosize [matAutosizeMinRows]="1"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description" matTextareaAutosize [matAutosizeMinRows]="1"></textarea>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Nom du bouton</mat-label>
+            <input matInput formControlName="buttonLabel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Lien du bouton</mat-label>
+            <input matInput formControlName="buttonLink">
+            <mat-hint>URL absolue débutant par un slash "/"</mat-hint>
+        </mat-form-field>
+    </form>
+
+    <div fxLayout="row">
+        <div fxFlex></div>
+        <button mat-button (click)="reset()">Annuler</button>
+
+        <button mat-flat-button color="primary" (click)="update(); editMode = false">
+            <natural-icon name="save"></natural-icon>
+            Sauvegarder
+        </button>
+    </div>
+</mat-card>

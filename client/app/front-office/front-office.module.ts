@@ -11,12 +11,14 @@ import { MaterialModule } from '../shared/modules/material.module';
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { HomeBlockComponent } from './home-block/home-block.component';
 
 @NgModule({
     declarations: [
         HomepageComponent,
         FrontOfficeComponent,
-        LoginComponent
+        LoginComponent,
+        HomeBlockComponent
     ],
     imports: [
         CommonModule,

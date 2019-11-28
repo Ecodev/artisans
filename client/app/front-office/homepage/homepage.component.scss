@@ -1,0 +1,63 @@
+@import '../../../styles/responsive';
+
+:host {
+
+    & > :not(:last-child) {
+        margin-bottom: 150px;
+    }
+
+    .introduction-blocs {
+        padding: 50px 0 50px 0;
+
+        @include responsive($lt-md) {
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-bottom: 50px;
+        }
+
+        .bloc {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 30px 30px 20px 30px;
+
+            .bloc-description {
+                flex: 1;
+            }
+
+            @include responsive($gt-sm) {
+                position: relative;
+                top: 150px;
+            }
+        }
+    }
+
+    .section {
+        .container {
+            & > :not(:last-child) {
+                margin-bottom: 30px;
+            }
+        }
+
+        .section-introduction {
+            max-width: 50vw;
+            text-align: center;
+            margin: auto;
+
+            .mat-display-2 {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    .support-column {
+        padding: 40px;
+
+        & > :not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+    }
+
+}

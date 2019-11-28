@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Application\Api;
 
 use Application\Api\Field\Query\BankingInfos;
+use Application\Api\Field\Query\Configuration;
 use Application\Api\Field\Query\NextUserCode;
 use Application\Api\Field\Query\Permissions;
 use Application\Api\Field\Query\UserByToken;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
-use Application\Model\Configuration;
 use Application\Model\Event;
 use Application\Model\File;
 use Application\Model\Image;
@@ -38,30 +38,14 @@ class QueryType extends ObjectType
             Permissions::build(),
             BankingInfos::build(),
             NextUserCode::build(),
+            Configuration::build(),
         ];
 
-        $fields = array_merge(
-            $specializedFields,
+        $fields = array_merge($specializedFields,
 
-            Standard::buildQuery(Configuration::class),
-            Standard::buildQuery(Event::class),
-            Standard::buildQuery(File::class),
-            Standard::buildQuery(File::class),
-            Standard::buildQuery(Image::class),
-            Standard::buildQuery(Message::class),
-            Standard::buildQuery(News::class),
-            Standard::buildQuery(Newsletter::class),
-            Standard::buildQuery(Order::class),
-            Standard::buildQuery(OrderLine::class),
-            Standard::buildQuery(Product::class),
-            Standard::buildQuery(ProductTag::class),
-            Standard::buildQuery(Session::class),
-            Standard::buildQuery(Subscription::class),
-            Standard::buildQuery(User::class),
-            Standard::buildQuery(UserProduct::class),
-            Standard::buildQuery(UserTag::class),
+            Standard::buildQuery(Event::class), Standard::buildQuery(File::class), Standard::buildQuery(File::class), Standard::buildQuery(Image::class), Standard::buildQuery(Message::class), Standard::buildQuery(News::class), Standard::buildQuery(Newsletter::class), Standard::buildQuery(Order::class), Standard::buildQuery(OrderLine::class), Standard::buildQuery(Product::class), Standard::buildQuery(ProductTag::class), Standard::buildQuery(Session::class), Standard::buildQuery(Subscription::class), Standard::buildQuery(User::class), Standard::buildQuery(UserProduct::class), Standard::buildQuery(UserTag::class),
 
-        );
+            );
 
         $config = [
             'fields' => $fields,

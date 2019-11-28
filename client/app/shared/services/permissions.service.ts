@@ -22,6 +22,7 @@ const permissions = gql`
                 message { create }
                 user { create }
                 userTag { create }
+                configuration { create }
             }
         }
     }

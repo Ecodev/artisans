@@ -96,6 +96,7 @@ class Acl extends \Zend\Permissions\Acl\Acl
         $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $userProduct, $product, $productTag, $image], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$newsletter], ['create', 'read', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$configuration], ['create']);
     }
 
     /**

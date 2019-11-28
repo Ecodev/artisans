@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'app/shared/components/boot-loader/boot-loader.external';
+@import 'styles/responsive';
 
 body {
     margin: 0;
@@ -22,17 +23,41 @@ pre.debug {
     font-family: Courrier, monospace;
 }
 
+[bg] {
+    &, & * {
+        background: rgba(255, 0, 0, 0.1);
+    }
+}
+
+[bd] {
+    &, & * {
+        border: 1px solid red;
+    }
+}
+
 [debug] {
     border: 2px solid red;
+
+    & > * {
+        border: 2px solid orange;
+    }
 }
 
-[debug][children] > * {
-    border: 2px solid orange;
+[debug][children] > * > * {
+    border: 2px solid blue;
 }
 
-[debug][children][grandchildren] > * > * {
+[debug][children][grandchildren] > * > * > * {
     border: 2px solid green;
 }
+
+.container {
+    max-width: 1130px;
+    margin: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 
 /* Disable login autofill background color */
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
@@ -50,26 +75,9 @@ app-admin router-outlet + * {
     z-index: 999; // < than 1000 that is the z-index of overlay contents
 }
 
-[overflow] {
-    overflow: auto;
-}
-
-[overflow-x] {
-    overflow-x: auto;
-}
-
-.mat-column-amount,
-.mat-column-balance {
-    text-align: right !important;
-}
 
 mat-form-field.no-bottom-spacing {
     margin-bottom: -1.34375em;
-}
-
-.detail-body {
-    max-width: 1300px;
-    margin: auto;
 }
 
 .text-center {
@@ -80,70 +88,14 @@ mat-form-field.no-bottom-spacing {
     text-align: right
 }
 
-.mat-button {
-    &.app-button-wrap,
-    &[app-button-wrap] {
-        line-height: 16px;
-        min-height: 36px;
-
-        .mat-button-wrapper {
-            white-space: normal;
-        }
-    }
-}
-
-.mat-button.big-button {
-    white-space: normal;
-    line-height: 24px;
-
-    .mat-button-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 1.2em;
-        padding-top: 10px;
-    }
-}
-
 mat-checkbox[wrap] {
     .mat-checkbox-label {
         white-space: initial;
     }
 }
 
-.line-break {
-    white-space: pre-wrap;
-}
-
 .mat-snack-bar-container {
     margin-top: 88px !important;
-}
-
-// Override mat-suffix container to apply an horizontal layout
-.mat-form-field-suffix {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.full-height-dialog-content .mat-dialog-content {
-    height: 100%;
-    padding: 0
-}
-
-.price {
-    //font-family: Georgia;
-}
-
-natural-sidenav-container[name=dashboardMenu] .mat-drawer-content {
-
-    &,
-    & > div,
-    & > div > natural-sidenav-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
 }
 
 input::-webkit-outer-spin-button,
@@ -171,14 +123,4 @@ input[type=number] {
     }
 }
 
-app-products natural-table-button.inactive span {
-    opacity: 0.38;
-}
 
-[app-date-column] {
-    width: 14em;
-}
-
-[app-price-column] {
-    width: 7em;
-}

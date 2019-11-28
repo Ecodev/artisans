@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ViewerResolver } from './admin/users/services/viewer.resolver';
 import { FrontOfficeComponent } from './front-office/front-office.component';
-import { LoginComponent } from './login/login.component';
 import { ErrorComponent } from './shared/components/error/error.component';
 
 export const routes: Routes = [

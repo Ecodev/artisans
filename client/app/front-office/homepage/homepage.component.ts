@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../admin/users/services/user.service';
 
 @Component({
+    selector: 'app-homepage',
     templateUrl: './homepage.component.html',
     styleUrls: ['./homepage.component.scss'],
 

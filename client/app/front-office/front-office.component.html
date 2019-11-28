@@ -1,4 +1,4 @@
-<mat-sidenav-container fxFlexFill>
+<mat-sidenav-container>
 
     <mat-sidenav #menu [opened]="menuOpened" mode="push" position="start">
 
@@ -38,51 +38,129 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <div id="content">
 
-            <div fxHide.gt-xs id="header-mobile">
+        <div fxHide.gt-xs id="header-mobile">
 
-                <div fxFlex></div>
+            <div fxFlex></div>
 
-                <a routerLink="/" style="width:72px; height:72px;">
-                    <img alt="logo" height="72" src="assets/logo2.png" width="72" />
-                </a>
+            <a routerLink="/" style="width:72px; height:72px;">
+                <img alt="logo" height="72" src="assets/logo2.png" width="72" />
+            </a>
 
-                <div fxFlex></div>
+            <div fxFlex></div>
 
-                <button (click)="menu.toggle()" mat-icon-button>
-                    <natural-icon name="menu"></natural-icon>
-                </button>
+            <button (click)="menu.toggle()" mat-icon-button>
+                <natural-icon name="menu"></natural-icon>
+            </button>
 
+        </div>
+
+        <div fxHide.lt-sm id="header">
+
+            <!-- header : 1s line -->
+            <div>
+                <div class="container" id="header-top" fxLayout="row">
+                    <div id="menu-top">
+                        <!--<a routerLink="agenda">Agenda</a>-->
+                        <!--<a routerLink="newsletter">Newsletter</a>-->
+                        <a mat-button routerLink="contact">Nous contacter</a>
+                    </div>
+                    <div fxFlex></div>
+                    <div>
+                        <a mat-button [matMenuTriggerFor]="deviseMenu">Devise</a>
+                        <mat-menu #deviseMenu="matMenu">
+                            <button mat-menu-item>Suisse (CHF)</button>
+                            <button mat-menu-item>Europe (EUR)</button>
+                        </mat-menu>
+                        <a mat-button routerLink="/cart">Panier</a>
+                        <a mat-button routerLink="/profile">Mon compte</a>
+                    </div>
+                </div>
             </div>
 
-            <div fxHide.lt-sm id="header">
-
-                <div fxLayout="row" fxLayoutAlign="start center" id="header-top">
-                    <div class="mat-title" fxFlex>menu menu menu menu</div>
-                    <a mat-button routerLink="/profile">Mon compte</a>
-                </div>
-
-                <div fxLayout="row" fxLayoutAlign="center" id="header-middle">
+            <!-- header : 2nd line -->
+            <div>
+                <div class="container" fxLayout="row">
                     <a routerLink="/" style="width:72px; height:72px;">
                         <img alt="logo" height="72" src="assets/logo2.png" width="72" />
                     </a>
                 </div>
+            </div>
 
-                <div fxLayout="row" id="header-bottom">
-                    <div class="mat-title" fxFlex>menu menu menu menu</div>
-                    <div fxLayout="row" fxLayoutAlign="center" id="searchByCode">
-                        <input (keydown.enter)="search()" (keydown.esc)="searchTerm = ''" [(ngModel)]="searchTerm" placeholder="Rechercher">
-                        <button (click)="search()" mat-icon-button>
+            <!-- header : 3rd line -->
+            <div>
+                <div class="container" fxLayout="row" fxLayoutAlign="start center">
+
+                    <div class="menu-main">
+                        <a mat-button>L'association</a>
+                        <a mat-button>La Revue Durable</a>
+                        <a mat-button>Agir avec nous</a>
+                        <a mat-button>Nous soutenir</a>
+                    </div>
+                    <div fxFlex></div>
+                    <mat-form-field>
+                        <mat-label>Rechercher</mat-label>
+                        <input matInput (keydown.enter)="search()" (keydown.esc)="searchTerm = ''" [(ngModel)]="searchTerm">
+                        <button matSuffix (click)="search()" mat-icon-button>
                             <natural-icon name="search"></natural-icon>
                         </button>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+
+        <div id="body">
+            <router-outlet></router-outlet>
+        </div>
+
+        <div id="footer">
+            <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+
+                <mat-nav-list fxFlex.gt-sm="15">
+                    <a mat-list-item routerLink="product">L'association</a>
+                    <a mat-list-item routerLink="product-tag">La Revue Durable</a>
+                    <a mat-list-item routerLink="product-tag">Agir avec nous</a>
+                    <a mat-list-item routerLink="product-tag">Abonnements</a>
+                    <a mat-list-item routerLink="product-tag">Faire un don</a>
+                </mat-nav-list>
+
+                <mat-nav-list fxFlex.gt-sm="15">
+                    <a mat-list-item routerLink="product">Livraison</a>
+                    <a mat-list-item routerLink="product-tag">Mentions légales</a>
+                    <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
+                    <a mat-list-item routerLink="product-tag">Annonceurs</a>
+                </mat-nav-list>
+
+                <div fxLayout="column" fxLayoutGap="10px" fxFlex.gt-sm>
+                    <div class="mat-title">Newsletter</div>
+                    <div>Inscrivez-vous à la newsletter !</div>
+                    <mat-form-field>
+                        <mat-label>Adresse e-mail</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <div fxLayout="row" fxLayoutAlign="end">
+                        <button mat-stroked-button color="accent">S'incrire</button>
+                    </div>
+                </div>
+
+                <div fxLayout="column" fxLayoutGap="10px" fxFlex.gt-sm="20">
+                    <div class="mat-title">Association Artisans de la transition</div>
+                    <div class="mat-title"> La Revue durable</div>
+                    <div>
+                        Rue de Lausanne 23
+                        <br />
+                        1700 Fribourg
+                        <br />
+                        Suisse
+                        <br />
+                        Tél: ...
                     </div>
 
                 </div>
-            </div>
 
-            <router-outlet></router-outlet>
+            </div>
         </div>
+
     </mat-sidenav-content>
 
 </mat-sidenav-container>

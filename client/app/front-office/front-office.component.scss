@@ -1,13 +1,6 @@
+@import '../../styles/responsive';
+
 :host {
-
-    #content {
-        overflow: auto;
-    }
-
-    #header {
-        max-width: 1130px;
-        margin: auto;
-    }
 
     #searchByCode {
         display: flex;
@@ -31,4 +24,23 @@
             outline: none;
         }
     }
+
+    mat-sidenav-container {
+        height: 100%;
+        min-height: 100%;
+        min-width: 100%;
+        width: 100%;
+    }
+
+    #header, #body, #footer {
+        margin-bottom: 50px;
+    }
+
+    #body {
+        @include responsive($gt-xs) {
+            margin-bottom: 150px;
+        }
+    }
+
+
 }

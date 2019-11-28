@@ -13,6 +13,7 @@
 @import '../app/admin/products/product/product.theme';
 @import '../app/profile/components/profile/profile.theme';
 @import '../app/front-office/homepage/homepage.theme';
+@import '../app/front-office/front-office.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -28,6 +29,7 @@
     @include rich-text($theme);
     @include profile($theme);
     @include homepage($theme);
+    @include front-office($theme);
 }
 
 // Configure themes

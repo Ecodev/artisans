@@ -6,13 +6,7 @@
     $fg: map-get($theme, foreground);
 
     app-homepage {
-        .introduction-blocs {
-            background: mat-color($accent, 0.1);
-        }
 
-        .donation {
-            background: mat-color($accent, 0.1);
-        }
     }
 
 }

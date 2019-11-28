@@ -1,4 +1,5 @@
 @import '../../../styles/responsive';
+@import '../../../styles/variables';
 
 :host {
 
@@ -6,39 +7,49 @@
         margin-bottom: 150px;
     }
 
+    .splash-image, .la-revue-splash {
+        background: lighten($app-orange, 20%);
+    }
+
+    .splash-image {
+        display: none;
+
+        @include responsive($gt-sm) {
+            display: block;
+            height: 550px;
+            margin-bottom: 0;
+        }
+    }
+
     .introduction-blocs {
-        padding: 50px 0 50px 0;
+
+        @include responsive($gt-sm) {
+            margin-top: -150px;
+        }
 
         @include responsive($lt-md) {
             padding-left: 50px;
             padding-right: 50px;
-            padding-bottom: 50px;
         }
 
-        .bloc {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 30px 30px 20px 30px;
-
-            .bloc-description {
-                flex: 1;
-            }
-
-            @include responsive($gt-sm) {
-                position: relative;
-                top: 150px;
-            }
+        #bloc1 {
+            color: white;
+            background: $app-orange;
         }
+
+        #bloc2 {
+            color: white;
+            background: $app-blue;
+        }
+
+        #bloc3 {
+            color: white;
+            background: $app-green;
+        }
+
     }
 
     .section {
-        .container {
-            & > :not(:last-child) {
-                margin-bottom: 30px;
-            }
-        }
 
         .section-introduction {
             max-width: 50vw;
@@ -51,13 +62,111 @@
         }
     }
 
-    .support-column {
-        padding: 40px;
 
-        & > :not(:last-child) {
+    .newses, .events {
+        padding: 10px;
+
+        .section-title {
             margin-bottom: 20px;
         }
 
+    }
+
+    .newses-list {
+        @include responsive($gt-sm) {
+            padding-right: 50px;
+        }
+    }
+
+    .la-revue-splash {
+        @include responsive($gt-sm) {
+            height: 550px;
+        }
+
+        margin-bottom: 0;
+
+        .mat-display-3 {
+            padding-top: 50px;
+        }
+    }
+
+    .la-revue.section {
+
+        .last-product-thumbnail {
+            height: 435px;
+            width: 325px;
+            background: #ddd;
+            margin: auto;
+
+            @include responsive($gt-sm) {
+                margin-top: -170px;
+            }
+        }
+
+        .la-revue-body {
+            padding: 40px 0 0 40px;
+
+            .mat-display-1 {
+                min-height: 120px;
+                margin-bottom: 0;
+            }
+        }
+
+    }
+
+    .support.section {
+
+        .mat-headline {
+            min-height: 64px;
+        }
+
+        .support-column {
+            display: flex;
+            flex-direction: column;
+            max-width: 350px;
+            @include responsive($lt-md) {
+                margin: auto;
+            }
+
+        }
+
+        .support-image {
+            width: 100%;
+            padding-top: 80%;
+            background: lighten($app-orange, 20%);
+        }
+
+        .support-column-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+
+            & > :not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+
+        .support-column-content {
+            flex: 1;
+        }
+
+        #support-column-1 {
+            color: white;
+            background: $app-blue;
+
+        }
+
+        #support-column-2 {
+            color: white;
+            background: $app-orange;
+        }
+
+        #support-column-3 {
+            color: white;
+            background: $app-green;
+        }
     }
 
 }

@@ -32,7 +32,12 @@
         width: 100%;
     }
 
-    #header, #body, #footer {
+    #footer {
+        background: #EBEBEB;
+        padding: 50px 0;
+    }
+
+    #body {
         margin-bottom: 50px;
     }
 
@@ -40,6 +45,20 @@
         @include responsive($gt-xs) {
             margin-bottom: 150px;
         }
+    }
+
+    #header-top {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    #header-middle {
+        padding-top: 80px;
+        padding-bottom: 50px;
+    }
+
+    #header-mobile {
+        margin-bottom: 30px;
     }
 
 

@@ -1,57 +1,111 @@
+<div class="splash-image"></div>
+
 <div class="introduction-blocs">
 
     <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutGap="50px">
-        <app-home-block fxFlex key="home-block-1"></app-home-block>
-        <app-home-block fxFlex key="home-block-2"></app-home-block>
-        <app-home-block fxFlex key="home-block-3"></app-home-block>
+        <app-home-block fxFlex key="home-block-1" id="bloc1"></app-home-block>
+        <app-home-block fxFlex key="home-block-2" id="bloc2"></app-home-block>
+        <app-home-block fxFlex key="home-block-3" id="bloc3"></app-home-block>
     </div>
 </div>
 
 <div><!-- spacer --></div>
 
-<div class="news">
-    <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
-        <div fxFlex.gt-sm="66">
-            <div class="mat-display-2">Actualités</div>
-            <div></div>
+<!-- News + Events -->
+<div class="posts">
+    <div class="container " fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+
+        <!-- News -->
+        <div fxFlex.gt-sm="66" class="newses">
+            <div class="mat-display-1 section-title">ACTUALITÉS</div>
+            <mat-divider></mat-divider>
+            <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
+                <div></div>
+                <div class="news">
+                    <div class="mat-body-2">Jeu 29.04.19</div>
+                    <div class="mat-headline">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique</div>
+                    <div class="mat-subheading-1">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique. Si toute
+                                                  l’humanité consommait autant de ressources que les Européens, elle utiliserait
+                                                  l’équivalent de 2,8 planètes Terre pour subvenir à ses besoins.
+                    </div>
+                </div>
+                <div class="news">
+                    <div class="mat-body-2">Jeu 29.04.19</div>
+                    <div class="mat-headline">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique</div>
+                    <div class="mat-subheading-1">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique. Si toute
+                                                  l’humanité consommait autant de ressources que les Européens, elle utiliserait
+                                                  l’équivalent de 2,8 planètes Terre pour subvenir à ses besoins.
+                    </div>
+                </div>
+            </div>
+
+            <a mat-flat-button routerLink="/actualites" color="primary">VOIR TOUTES NOS ACTUALITÉS</a>
+
         </div>
-        <div fxFlex.gt-sm="33">
-            <div class="mat-display-2">Agenda</div>
+
+        <!-- Events -->
+        <div fxFlex.gt-sm="33" class="events">
+            <div class="mat-display-1 section-title">AGENDA</div>
+            <mat-divider></mat-divider>
+            <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
+                <div></div>
+                <div class="event">
+                    <div class="mat-headline">Le pouvoir de l’habitat participatif</div>
+                    <div class="mat-subheading-2">Mer 01.06.19 - Fribourg Conférence-débat</div>
+                </div>
+                <div class="event">
+                    <div class="mat-headline">Le pouvoir de l’habitat participatif</div>
+                    <div class="mat-subheading-2">Mer 01.06.19 - Fribourg Conférence-débat</div>
+                </div>
+            </div>
+            <a mat-flat-button routerLink="/events" color="primary">VOIR TOUT L'AGENDA</a>
+
         </div>
     </div>
 </div>
 
-<div class="la-revue section">
+<div class="la-revue-splash">
     <div class="container">
+        <div class="mat-display-3">LaRevue<strong>Durable</strong></div>
+    </div>
+</div>
 
-        <div class="la-revue-introduction section-introduction">
-            <div class="mat-display-2">La Revue Durable</div>
-            <div class="mat-subheading-1">
-                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor
-                mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+<div class="la-revue section">
+    <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+
+        <div>
+            <mat-card class="mat-elevation-z5 last-product-thumbnail"></mat-card>
+        </div>
+
+        <div class="la-revue-body" fxLayout="column">
+            <div class="mat-headline">Le dernier numéro</div>
+            <div class="mat-subheading-1">63 | AUTOMNE-HIVER 2019</div>
+            <div class="mat-display-1">Technologies numériques : en finir avec le capitalisme de surveillance</div>
+            <div class="mat-subheading-2">
+                Disponible en versions papier ou PDF avec votre abonnnement
+                <br />
+                CHF 17.– pour non abonnés
             </div>
         </div>
 
-        <div fxLayout.gt-sm="row" fxLayoutGap="30px">
-            <div fxFlex.gt-sm="33">
-                <div class="mat-headline">Le dernier numéro</div>
-                <mat-card>asdf</mat-card>
-            </div>
-            <div fxFlex.gt-sm="66">
-                <div class="mat-headline">Nos thèmes</div>
-                <div fxLayout="row wrap">
-                    <div fxFlex="50">category</div>
-                    <div fxFlex="50">category</div>
-                    <div fxFlex="50">category</div>
-                    <div fxFlex="50">category</div>
-                    <div fxFlex="50">category</div>
-                </div>
-            </div>
+    </div>
+</div>
+
+<div class="categories section">
+    <div class="container">
+        <div class="mat-display-1 margin-bottom">NOS THEMES</div>
+        <div fxLayout="row wrap" fxLayoutGap="5px" class="mat-title">
+            <div>category</div>
+            <div>·</div>
+            <div>category</div>
+            <div>·</div>
+            <div>category</div>
+            <div>·</div>
+            <div>category</div>
+            <div>·</div>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="center">
-            <a mat-stroked-button color="accent">Voir tous nos articles</a>
-        </div>
+        <a mat-flat-button color="accent">VOIR TOUS NOS ARTICLES ET DOSSIERS</a>
     </div>
 </div>
 
@@ -59,42 +113,55 @@
 
     <div class="container">
 
-        <div class="support-introduction section-introduction">
-            <div class="mat-display-2">Nous soutenir</div>
-            <div class="mat-subheading-1">
-                Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Fusce dapibus, tellus ac cursus commodo, tortor
-                mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-            </div>
-        </div>
+        <div class="mat-display-1 margin-bottom">NOUS SOUTENIR</div>
 
-        <div fxLayout.gt-sm="row" fxLayoutGap="30px">
-            <div fxFlex.gt-sm="33" class="support-column">
-                <div class="mat-headline">S'abonner</div>
-                <div class="support-column-content">
-                    Fusce dapibus, tellus ac <strong>cursus commodo</strong>, tortor mauris condimentum nibh, ut fermentum massa justo sit
-                    amet risus.
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayoutAlign.gt-sm="start stretch" fxLayout="column" fxLayoutGap="30px">
+
+            <div fxFlex.gt-sm="33" class="support-column" id="support-column-1">
+                <div class="support-image"></div>
+                <div class="support-column-body">
+                    <div class="mat-headline">S'abonner</div>
+                    <div class="support-column-content mat-subheading-2">
+                        <p>Un accès à toute la base de données avec près de 1000 articles de fond sur tous les thèmes qui touchent à la
+                           durabilité dans une soixantaine de pays.</p>
+                        <p>Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte atteinte. </p>
+                    </div>
+                    <a mat-flat-button>
+                        Voir les abonnements
+                        <natural-icon name="chevron_right"></natural-icon>
+                    </a>
                 </div>
-
-                <a mat-stroked-button>Voir les abonnements</a>
-            </div>
-
-            <div fxFlex.gt-sm="33" class="support-column">
-                <div class="mat-headline">Rejoindre l'association</div>
-                <div class="support-column-content">
-                    Fusce dapibus, tellus ac <strong>cursus commodo</strong>, tortor mauris condimentum nibh, ut fermentum massa justo sit
-                    amet risus. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                </div>
-                <a mat-stroked-button>Découvrir l'association</a>
-
             </div>
 
-            <div fxFlex.gt-sm="33" class="donation support-column">
-                <div class="mat-headline">Faire un don</div>
-                <div class="support-column-content">
-                    Fusce dapibus, tellus ac <strong>cursus commodo</strong>, tortor mauris condimentum nibh, ut fermentum massa justo sit
-                    amet risus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+            <div fxFlex.gt-sm="33" class="support-column" id="support-column-2">
+                <div class="support-image"></div>
+                <div class="support-column-body">
+                    <div class="mat-headline">Rejoindre l’association</div>
+                    <div class="support-column-content mat-subheading-2">
+                        <p>Devenir acteur du respect des grands équilibres écologiques.</p>
+                        <p>Plus nous aurons de membres, plus l’élan sera fort et plus nous pourrons continuer d’identifier en toute
+                           indépendance les actions les plus pertinentes à entreprendre.</p>
+                    </div>
+                    <a mat-flat-button>
+                        Découvrir l'association
+                        <natural-icon name="chevron_right"></natural-icon>
+                    </a>
                 </div>
-                <a mat-flat-button color="accent">Faire un don</a>
+            </div>
+            <div fxFlex.gt-sm="33" class="support-column" id="support-column-3">
+                <div class="support-image"></div>
+                <div class="support-column-body">
+                    <div class="mat-headline">Rejoindre l’association</div>
+                    <div class="support-column-content mat-subheading-2">
+                        <p>LaRevueDurable est un média indépendant, presque sans publicité. Son financement est donc un défi permanent. Il
+                           aidera ce titre à poursuivre ses efforts pour fournir une information rigoureuse, à la pointe et toujours
+                           constructive. Les dons sont déductibles d’impôts pour les contribuables suisses.</p>
+                    </div>
+                    <a mat-flat-button>
+                        Faire un don
+                        <natural-icon name="chevron_right"></natural-icon>
+                    </a>
+                </div>
             </div>
 
         </div>

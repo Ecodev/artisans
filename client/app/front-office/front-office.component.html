@@ -1,6 +1,6 @@
 <mat-sidenav-container>
 
-    <mat-sidenav #menu [opened]="menuOpened" mode="push" position="start">
+    <mat-sidenav #menu [opened]="menuOpened" position="end">
 
         <!-- menu mobile -->
         <mat-accordion displayMode="flat">
@@ -39,12 +39,12 @@
 
     <mat-sidenav-content>
 
-        <div fxHide.gt-xs id="header-mobile">
+        <mat-toolbar fxHide.gt-xs id="header-mobile" fxLayout="row" fxLayoutAlign="start center">
 
             <div fxFlex></div>
 
-            <a routerLink="/" style="width:72px; height:72px;">
-                <img alt="logo" height="72" src="assets/logo2.png" width="72" />
+            <a routerLink="/">
+                <img alt="logo" src="assets/logo.png" height="30" />
             </a>
 
             <div fxFlex></div>
@@ -53,42 +53,41 @@
                 <natural-icon name="menu"></natural-icon>
             </button>
 
-        </div>
+        </mat-toolbar>
 
         <div fxHide.lt-sm id="header">
 
             <!-- header : 1s line -->
-            <div>
-                <div class="container" id="header-top" fxLayout="row">
-                    <div id="menu-top">
-                        <!--<a routerLink="agenda">Agenda</a>-->
-                        <!--<a routerLink="newsletter">Newsletter</a>-->
-                        <a mat-button routerLink="contact">Nous contacter</a>
-                    </div>
+            <div id="header-top">
+                <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <div>
-                        <a mat-button [matMenuTriggerFor]="deviseMenu">Devise</a>
-                        <mat-menu #deviseMenu="matMenu">
-                            <button mat-menu-item>Suisse (CHF)</button>
-                            <button mat-menu-item>Europe (EUR)</button>
-                        </mat-menu>
-                        <a mat-button routerLink="/cart">Panier</a>
-                        <a mat-button routerLink="/profile">Mon compte</a>
-                    </div>
+                    <!--<a routerLink="agenda">Agenda</a>-->
+                    <!--<a routerLink="newsletter">Newsletter</a>-->
+                    <a mat-button routerLink="contact">NOUS CONTACTER</a>
+                    <a mat-button [matMenuTriggerFor]="deviseMenu">DEVISE</a>
+                    <mat-menu #deviseMenu="matMenu">
+                        <button mat-menu-item>Suisse (CHF)</button>
+                        <button mat-menu-item>Europe (EUR)</button>
+                    </mat-menu>
+                    <a mat-button routerLink="/cart">
+                        PANIER
+                        <natural-icon name="shopping_cart"></natural-icon>
+                    </a>
+                    <a mat-button routerLink="/profile">MON COMPTE</a>
                 </div>
             </div>
 
             <!-- header : 2nd line -->
-            <div>
+            <div id="header-middle">
                 <div class="container" fxLayout="row">
-                    <a routerLink="/" style="width:72px; height:72px;">
-                        <img alt="logo" height="72" src="assets/logo2.png" width="72" />
+                    <a routerLink="/">
+                        <img alt="logo" src="assets/logo.png" height="55" />
                     </a>
                 </div>
             </div>
 
             <!-- header : 3rd line -->
-            <div>
+            <div id="header-bottom">
                 <div class="container" fxLayout="row" fxLayoutAlign="start center">
 
                     <div class="menu-main">
@@ -114,50 +113,56 @@
         </div>
 
         <div id="footer">
-            <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+            <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px">
 
-                <mat-nav-list fxFlex.gt-sm="15">
-                    <a mat-list-item routerLink="product">L'association</a>
-                    <a mat-list-item routerLink="product-tag">La Revue Durable</a>
-                    <a mat-list-item routerLink="product-tag">Agir avec nous</a>
-                    <a mat-list-item routerLink="product-tag">Abonnements</a>
-                    <a mat-list-item routerLink="product-tag">Faire un don</a>
-                </mat-nav-list>
+                <div>
+                    <div class="mat-display-3">ArtisansDeLa<strong>Transition</strong></div>
 
-                <mat-nav-list fxFlex.gt-sm="15">
-                    <a mat-list-item routerLink="product">Livraison</a>
-                    <a mat-list-item routerLink="product-tag">Mentions légales</a>
-                    <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
-                    <a mat-list-item routerLink="product-tag">Annonceurs</a>
-                </mat-nav-list>
-
-                <div fxLayout="column" fxLayoutGap="10px" fxFlex.gt-sm>
-                    <div class="mat-title">Newsletter</div>
-                    <div>Inscrivez-vous à la newsletter !</div>
-                    <mat-form-field>
-                        <mat-label>Adresse e-mail</mat-label>
-                        <input matInput>
-                    </mat-form-field>
-                    <div fxLayout="row" fxLayoutAlign="end">
+                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                        <div class="mat-headline">Inscrivez-vous à la lettre d'info !</div>
+                        <mat-form-field>
+                            <mat-label>Adresse e-mail</mat-label>
+                            <input matInput>
+                        </mat-form-field>
                         <button mat-stroked-button color="accent">S'incrire</button>
                     </div>
                 </div>
 
-                <div fxLayout="column" fxLayoutGap="10px" fxFlex.gt-sm="20">
-                    <div class="mat-title">Association Artisans de la transition</div>
-                    <div class="mat-title"> La Revue durable</div>
-                    <div>
-                        Rue de Lausanne 23
-                        <br />
-                        1700 Fribourg
-                        <br />
-                        Suisse
-                        <br />
-                        Tél: ...
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px" class="mat-subheading-2">
+
+                    <mat-nav-list fxFlex.gt-sm="33">
+                        <a mat-list-item routerLink="product">L'association</a>
+                        <a mat-list-item routerLink="product-tag">La Revue Durable</a>
+                        <a mat-list-item routerLink="product-tag">Agir avec nous</a>
+                        <a mat-list-item routerLink="product-tag">Abonnements</a>
+                        <a mat-list-item routerLink="product-tag">Faire un don</a>
+                    </mat-nav-list>
+
+                    <mat-nav-list fxFlex.gt-sm="33">
+                        <a mat-list-item routerLink="product">Livraison</a>
+                        <a mat-list-item routerLink="product-tag">Mentions légales</a>
+                        <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
+                        <a mat-list-item routerLink="product-tag">Annonceurs</a>
+                    </mat-nav-list>
+
+                    <div fxLayout="column" fxLayoutGap="10px" fxFlex.gt-sm="33">
+                        <div>
+                            <div class="mat-title no-margin-bottom">Association Artisans de la transition</div>
+                            <div class="mat-title"> La Revue durable</div>
+                        </div>
+                        <div>
+                            Rue de Lausanne 23
+                            <br />
+                            1700 Fribourg
+                            <br />
+                            Suisse
+                            <br />
+                            Tél: ...
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
         </div>
 

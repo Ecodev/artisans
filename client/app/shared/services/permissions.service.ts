@@ -12,6 +12,7 @@ const permissions = gql`
         permissions {
             crud {
                 news { create }
+                event { create }
                 newsletter { create }
                 session { create }
                 subscription { create }

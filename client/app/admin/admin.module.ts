@@ -9,6 +9,8 @@ import { MaterialModule } from '../shared/modules/material.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
+import { EventComponent } from './events/event/event.component';
+import { EventsComponent } from './events/events/events.component';
 import { NewsComponent } from './newses/news/news.component';
 import { NewsesComponent } from './newses/newses/newses.component';
 import { ProductComponent } from './products/product/product.component';
@@ -25,6 +27,8 @@ import { UserComponent } from './users/user/user.component';
         UserTagComponent,
         NewsesComponent,
         NewsComponent,
+        EventsComponent,
+        EventComponent,
     ],
     imports: [
         CommonModule,

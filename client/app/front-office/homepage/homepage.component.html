@@ -53,13 +53,9 @@
             <mat-divider></mat-divider>
             <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
                 <div></div>
-                <div class="event">
-                    <div class="mat-headline">Le pouvoir de l’habitat participatif</div>
-                    <div class="mat-subheading-2">Mer 01.06.19 - Fribourg Conférence-débat</div>
-                </div>
-                <div class="event">
-                    <div class="mat-headline">Le pouvoir de l’habitat participatif</div>
-                    <div class="mat-subheading-2">Mer 01.06.19 - Fribourg Conférence-débat</div>
+                <div class="event" *ngFor="let event of events">
+                    <div class="mat-headline">{{ event.name }}</div>
+                    <div class="mat-subheading-2">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.description }}</div>
                 </div>
             </div>
             <a mat-flat-button routerLink="/events" color="primary">VOIR TOUT L'AGENDA</a>

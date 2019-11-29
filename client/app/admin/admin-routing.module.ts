@@ -9,6 +9,9 @@ import { OrderResolver } from '../order/services/order.resolver';
 import { DialogTriggerComponent } from '../shared/components/modal-trigger/dialog-trigger.component';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
 import { AdminComponent } from './admin/admin.component';
+import { EventComponent } from './events/event/event.component';
+import { EventsComponent } from './events/events/events.component';
+import { EventResolver } from './events/services/event.resolver';
 import { NewsComponent } from './newses/news/news.component';
 import { NewsesComponent } from './newses/newses/newses.component';
 import { NewsResolver } from './newses/services/news.resolver';
@@ -172,6 +175,28 @@ const routes: Routes = [
                             resolve: {
                                 news: NewsResolver,
                             },
+                        },
+                    ],
+                },
+                {
+                    path: 'event', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: EventsComponent,
+                    data: {
+                        title: 'Événements',
+                    },
+                },
+                {
+                    path: 'event',
+                    children: [
+                        {
+                            path: 'new',
+                            component: EventComponent,
+                            resolve: {event: EventResolver},
+                        },
+                        {
+                            path: ':eventId', // last
+                            component: EventComponent,
+                            resolve: {event: EventResolver},
                         },
                     ],
                 },

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
-import { NewsService } from '../../admin/news/services/news.service';
+import { NewsService } from '../../admin/newses/services/news.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { Newses_newses_items, NewsesVariables, NewsSortingField, SortingOrder } from '../../shared/generated-types';
 import { PermissionsService } from '../../shared/services/permissions.service';

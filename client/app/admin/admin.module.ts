@@ -9,8 +9,8 @@ import { MaterialModule } from '../shared/modules/material.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
-import { NewsComponent } from './news/news/news.component';
-import { NewsesComponent } from './news/newses/newses.component';
+import { NewsComponent } from './newses/news/news.component';
+import { NewsesComponent } from './newses/newses/newses.component';
 import { ProductComponent } from './products/product/product.component';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';

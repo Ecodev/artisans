@@ -32,8 +32,7 @@
                 <div class="news" *ngFor="let news of newses">
                     <div class="mat-body-2">{{ news.date | date : 'EEE d.M.yy' }}</div>
                     <div class="mat-headline">{{ news.name }}</div>
-                    <div class="mat-subheading-1">{{ news.description}}
-                    </div>
+                    <div class="mat-subheading-1" [innerHTML]="news.description"></div>
                 </div>
             </div>
 
@@ -46,8 +45,7 @@
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
                 <div fxFlex>AGENDA</div>
                 <div class="relative">
-                    <button mat-fab color="none" routerLink="/admin/event" class="absolute" *ngIf="permissionService?.crud?.news?.create"
-                    >
+                    <button mat-fab color="none" routerLink="/admin/event" class="absolute" *ngIf="permissionService?.crud?.event?.create">
                         <natural-icon name="edit"></natural-icon>
                     </button>
                 </div>

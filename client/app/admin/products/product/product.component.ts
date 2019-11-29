@@ -1,5 +1,4 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
     CreateImage,
@@ -35,7 +34,6 @@ export class ProductComponent
                 injector: Injector,
                 public productTagService: ProductTagService,
                 public imageService: ImageService,
-                private dialog: MatDialog,
     ) {
         super('product', productService, injector);
     }

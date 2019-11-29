@@ -63,6 +63,7 @@
                     <div fxFlex></div>
                     <!--<a routerLink="agenda">Agenda</a>-->
                     <!--<a routerLink="newsletter">Newsletter</a>-->
+                    <a mat-button color="accent" routerLink="/admin" *ngIf="viewer?.role === UserRole.administrator">ADMINISTRATION</a>
                     <a mat-button routerLink="contact">NOUS CONTACTER</a>
                     <a mat-button [matMenuTriggerFor]="deviseMenu">DEVISE</a>
                     <mat-menu #deviseMenu="matMenu">

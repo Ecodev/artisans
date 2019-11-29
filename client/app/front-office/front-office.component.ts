@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NaturalAbstractController, NaturalAlertService } from '@ecodev/natural';
+import { CurrentUserForProfile, UserRole } from '../shared/generated-types';
 
 @Component({
     selector: 'app-front-office',
@@ -12,6 +13,9 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public searchTerm = '';
     public menuOpened = false;
 
+    public UserRole = UserRole;
+    public viewer: CurrentUserForProfile;
+
     constructor(public route: ActivatedRoute,
                 public alertService: NaturalAlertService,
     ) {
@@ -19,7 +23,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     ngOnInit() {
-
+        this.viewer = this.route.snapshot.data.viewer.model;
     }
 
     public search() {

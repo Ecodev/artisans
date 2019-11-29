@@ -54,7 +54,7 @@ export class ProductComponent implements OnInit {
                 private router: Router) {
 
         this.routeSnapshot = data.activatedRoute.snapshot;
-        this.data = {model: this.routeSnapshot.data.product.model}; // to respect our template standard
+        this.data = {model: this.routeSnapshot.data.news.model}; // to respect our template standard
 
         if (this.data.model) {
             if (this.routeSnapshot.params.index) {

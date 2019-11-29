@@ -9,10 +9,12 @@ import { MaterialModule } from '../shared/modules/material.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
+import { NewsComponent } from './news/news/news.component';
+import { NewsesComponent } from './news/newses/newses.component';
 import { ProductComponent } from './products/product/product.component';
-import { UserComponent } from './users/user/user.component';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
+import { UserComponent } from './users/user/user.component';
 
 @NgModule({
     declarations: [
@@ -21,6 +23,8 @@ import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
         UserComponent,
         UserTagsComponent,
         UserTagComponent,
+        NewsesComponent,
+        NewsComponent,
     ],
     imports: [
         CommonModule,

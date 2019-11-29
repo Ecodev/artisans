@@ -125,3 +125,18 @@ input[type=number] {
 }
 
 
+.relative {
+    position: relative;
+    border: 1px solid red;
+
+    // Centers
+    .absolute {
+        position: absolute !important;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+}
+

@@ -9,15 +9,18 @@ import { OrderResolver } from '../order/services/order.resolver';
 import { DialogTriggerComponent } from '../shared/components/modal-trigger/dialog-trigger.component';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
 import { AdminComponent } from './admin/admin.component';
+import { NewsComponent } from './news/news/news.component';
+import { NewsesComponent } from './news/newses/newses.component';
+import { NewsResolver } from './news/services/news.resolver';
 import { ProductComponent } from './products/product/product.component';
 import { ProductsComponent } from './products/products/products.component';
 import { ProductResolver } from './products/services/product.resolver';
-import { UserResolver } from './users/services/user.resolver';
-import { UserComponent } from './users/user/user.component';
-import { UsersComponent } from './users/users/users.component';
 import { UserTagResolver } from './user-tags/services/user-tag.resolver';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
+import { UserResolver } from './users/services/user.resolver';
+import { UserComponent } from './users/user/user.component';
+import { UsersComponent } from './users/users/users.component';
 
 const routes: Routes = [
         {
@@ -35,7 +38,6 @@ const routes: Routes = [
                     component: ProductsComponent,
                     data: {
                         title: 'Produits',
-                        isAdmin: true,
                     },
                 },
                 {
@@ -62,7 +64,6 @@ const routes: Routes = [
                     component: UsersComponent,
                     data: {
                         title: 'Tous les utilisateurs',
-                        isAdmin: true,
                     },
                 },
                 {
@@ -80,9 +81,6 @@ const routes: Routes = [
                             component: UserComponent,
                             resolve: {
                                 user: UserResolver,
-                            },
-                            data: {
-                                isAdmin: true,
                             },
                         },
                     ],
@@ -147,6 +145,32 @@ const routes: Routes = [
                                     maxHeight: '97vh',
                                     autoFocus: false,
                                 } as MatDialogConfig,
+                            },
+                        },
+                    ],
+                },
+                {
+                    path: 'news', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: NewsesComponent,
+                    data: {
+                        title: 'Actualités et articles',
+                    },
+                },
+                {
+                    path: 'news',
+                    children: [
+                        {
+                            path: 'new',
+                            component: NewsComponent,
+                            resolve: {
+                                news: NewsResolver,
+                            },
+                        },
+                        {
+                            path: ':newsId', // last
+                            component: NewsComponent,
+                            resolve: {
+                                news: NewsResolver,
                             },
                         },
                     ],

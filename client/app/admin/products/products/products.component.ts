@@ -1,5 +1,4 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { NaturalAbstractList } from '@ecodev/natural';
 import { Products, ProductsVariables } from '../../../shared/generated-types';
@@ -27,12 +26,11 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
                 naturalSearchFacetsService: NaturalSearchFacetsService,
                 public permissionsService: PermissionsService,
                 injector: Injector,
-                private dialog: MatDialog,
     ) {
 
         super(productService, injector);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get(route.snapshot.data.isAdmin ? 'productsAdmin' : 'productsFrontend');
+        this.naturalSearchFacets = naturalSearchFacetsService.get('productsAdmin');
     }
 
 }

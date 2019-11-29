@@ -1,5 +1,4 @@
 <div *ngIf="dataSource" fxLayout="column">
-<div *ngIf="dataSource" fxLayout="column">
 
     <div fxLayout="column">
         <div class="mat-headline no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
@@ -51,7 +50,6 @@
                                 matTooltip="Éditer"
                                 [class]="!element.isActive ? 'inactive' : ''"
                         ></natural-table-button>
-                        <span *ngIf="!routeData?.isAdmin">{{ element.name }}</span>
                     </td>
                 </ng-container>
 
@@ -96,7 +94,5 @@
     </div>
 </div>
 
-<natural-fixed-button [routerLink]="['/admin/product/new']"
-                      icon="add"
-                      *ngIf="routeData?.isAdmin && permissionsService.crud?.product.create"
+<natural-fixed-button [routerLink]="['/admin/product/new']" icon="add" *ngIf="permissionsService.crud?.product.create"
 ></natural-fixed-button>

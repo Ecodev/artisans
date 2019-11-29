@@ -135,7 +135,7 @@ export class NaturalSearchFacetsService {
 
     private readonly product: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Produit',
-        field: 'product',
+        field: 'news.ts',
         component: TypeNaturalSelectComponent,
         configuration: {
             service: this.productService,

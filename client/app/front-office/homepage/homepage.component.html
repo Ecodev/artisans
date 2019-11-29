@@ -17,24 +17,22 @@
 
         <!-- News -->
         <div fxFlex.gt-sm="66" class="newses">
-            <div class="mat-display-1 section-title">ACTUALITÉS</div>
+            <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
+                <div fxFlex>ACTUALITÉS</div>
+                <div class="relative">
+                    <button mat-fab color="none" routerLink="/admin/news" class="absolute" *ngIf="permissionService?.crud?.news?.create"
+                    >
+                        <natural-icon name="edit"></natural-icon>
+                    </button>
+                </div>
+            </div>
             <mat-divider></mat-divider>
             <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
                 <div></div>
-                <div class="news">
-                    <div class="mat-body-2">Jeu 29.04.19</div>
-                    <div class="mat-headline">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique</div>
-                    <div class="mat-subheading-1">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique. Si toute
-                                                  l’humanité consommait autant de ressources que les Européens, elle utiliserait
-                                                  l’équivalent de 2,8 planètes Terre pour subvenir à ses besoins.
-                    </div>
-                </div>
-                <div class="news">
-                    <div class="mat-body-2">Jeu 29.04.19</div>
-                    <div class="mat-headline">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique</div>
-                    <div class="mat-subheading-1">À partir du 10 mai 2019, l’Union européenne entrera en déficit écologique. Si toute
-                                                  l’humanité consommait autant de ressources que les Européens, elle utiliserait
-                                                  l’équivalent de 2,8 planètes Terre pour subvenir à ses besoins.
+                <div class="news" *ngFor="let news of newses">
+                    <div class="mat-body-2">{{ news.date | date : 'EEE d.M.yy' }}</div>
+                    <div class="mat-headline">{{ news.name }}</div>
+                    <div class="mat-subheading-1">{{ news.description}}
                     </div>
                 </div>
             </div>
@@ -45,7 +43,15 @@
 
         <!-- Events -->
         <div fxFlex.gt-sm="33" class="events">
-            <div class="mat-display-1 section-title">AGENDA</div>
+            <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
+                <div fxFlex>AGENDA</div>
+                <div class="relative">
+                    <button mat-fab color="none" routerLink="/admin/event" class="absolute" *ngIf="permissionService?.crud?.news?.create"
+                    >
+                        <natural-icon name="edit"></natural-icon>
+                    </button>
+                </div>
+            </div>
             <mat-divider></mat-divider>
             <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
                 <div></div>

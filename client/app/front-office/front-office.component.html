@@ -58,7 +58,7 @@
                         <button mat-menu-item>Suisse (CHF)</button>
                         <button mat-menu-item>Europe (EUR)</button>
                     </mat-menu>
-                    <a mat-button *ngFor="let item of topNavigation" routerLink="item.link"> {{ item.display }}</a>
+                    <a mat-button *ngFor="let item of topNavigation" [routerLink]="item.link"> {{ item.display }}</a>
                 </div>
             </div>
 

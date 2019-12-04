@@ -7,7 +7,7 @@
 
     app-front-office {
         #header-top {
-            background: #EBEBEB;
+            background: darken(mat-color($bg, app-bar), 5%);
         }
 
         #mobile-menu .mat-expansion-panel-body {

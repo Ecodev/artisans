@@ -75,7 +75,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         },
         {
             display: 'Mon compte',
-            link: '/profile',
+            link: '/mon-compte',
         },
     ];
 

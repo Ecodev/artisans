@@ -26,6 +26,7 @@
 
     #header-top {
         padding: 5px 0;
+        text-transform: uppercase;
     }
 
     #header-middle {
@@ -69,6 +70,12 @@
                 color: black;
             }
 
+
+            ul {
+                position: absolute;
+                z-index: 901;
+            }
+
             li {
                 display: block;
                 margin: 0;
@@ -78,15 +85,14 @@
 
                     & > a {
                         border-color: #4DAB8E;
-                        position: relative;
                     }
 
                     & > ul {
                         display: block !important;
                         position: absolute;
                         top: 0;
+                        opacity: 1 !important;
                     }
-
                 }
             }
 
@@ -123,7 +129,9 @@
 
                 &.hasMenu {
 
+                    // Mega menu
                     &::after {
+                        display: none;
                         content: '';
                         position: absolute;
                         top: 58px;
@@ -131,14 +139,12 @@
                         right: 0;
                         height: 300px;
                         background: white;
-                        opacity: 0;
-                        transition: all .3s ease-out;
                         pointer-events: none;
+                        z-index: 900; // just before material overlays
                     }
 
                     &:hover::after {
-                        opacity: 1;
-                        transform: scale(1);
+                        display: block;
                     }
                 }
             }
@@ -153,7 +159,7 @@
                 margin-right: 0;
                 margin-left: 100%;
 
-                 a:hover {
+                a:hover {
                     color: #4DAB8E;
                 }
 

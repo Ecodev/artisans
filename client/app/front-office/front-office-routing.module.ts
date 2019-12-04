@@ -21,7 +21,7 @@ const routes: Routes = [
                     resolve: {viewer: ViewerResolver},
                 },
                 {
-                    path: 'profile',
+                    path: 'mon-compte',
                     loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
                 },
             ],

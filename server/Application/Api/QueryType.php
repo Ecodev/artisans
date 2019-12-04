@@ -46,7 +46,6 @@ class QueryType extends ObjectType
 
             Standard::buildQuery(Event::class),
             Standard::buildQuery(File::class),
-            Standard::buildQuery(File::class),
             Standard::buildQuery(Image::class),
             Standard::buildQuery(Message::class),
             Standard::buildQuery(News::class),

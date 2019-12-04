@@ -41,11 +41,26 @@ class QueryType extends ObjectType
             Configuration::build(),
         ];
 
-        $fields = array_merge($specializedFields,
+        $fields = array_merge(
+            $specializedFields,
 
-            Standard::buildQuery(Event::class), Standard::buildQuery(File::class), Standard::buildQuery(File::class), Standard::buildQuery(Image::class), Standard::buildQuery(Message::class), Standard::buildQuery(News::class), Standard::buildQuery(Newsletter::class), Standard::buildQuery(Order::class), Standard::buildQuery(OrderLine::class), Standard::buildQuery(Product::class), Standard::buildQuery(ProductTag::class), Standard::buildQuery(Session::class), Standard::buildQuery(Subscription::class), Standard::buildQuery(User::class), Standard::buildQuery(UserProduct::class), Standard::buildQuery(UserTag::class),
-
-            );
+            Standard::buildQuery(Event::class),
+            Standard::buildQuery(File::class),
+            Standard::buildQuery(File::class),
+            Standard::buildQuery(Image::class),
+            Standard::buildQuery(Message::class),
+            Standard::buildQuery(News::class),
+            Standard::buildQuery(Newsletter::class),
+            Standard::buildQuery(Order::class),
+            Standard::buildQuery(OrderLine::class),
+            Standard::buildQuery(Product::class),
+            Standard::buildQuery(ProductTag::class),
+            Standard::buildQuery(Session::class),
+            Standard::buildQuery(Subscription::class),
+            Standard::buildQuery(User::class),
+            Standard::buildQuery(UserProduct::class),
+            Standard::buildQuery(UserTag::class),
+        );
 
         $config = [
             'fields' => $fields,

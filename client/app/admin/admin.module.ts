@@ -14,6 +14,8 @@ import { EventsComponent } from './events/events/events.component';
 import { NewsComponent } from './newses/news/news.component';
 import { NewsesComponent } from './newses/newses/newses.component';
 import { ProductComponent } from './products/product/product.component';
+import { SessionComponent } from './sessions/session/session.component';
+import { SessionsComponent } from './sessions/sessions/sessions.component';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
 import { UserComponent } from './users/user/user.component';
@@ -29,6 +31,8 @@ import { UserComponent } from './users/user/user.component';
         NewsComponent,
         EventsComponent,
         EventComponent,
+        SessionsComponent,
+        SessionComponent
     ],
     imports: [
         CommonModule,

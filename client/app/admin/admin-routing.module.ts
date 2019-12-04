@@ -18,6 +18,9 @@ import { NewsResolver } from './newses/services/news.resolver';
 import { ProductComponent } from './products/product/product.component';
 import { ProductsComponent } from './products/products/products.component';
 import { ProductResolver } from './products/services/product.resolver';
+import { SessionResolver } from './sessions/services/session.resolver';
+import { SessionComponent } from './sessions/session/session.component';
+import { SessionsComponent } from './sessions/sessions/sessions.component';
 import { UserTagResolver } from './user-tags/services/user-tag.resolver';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
@@ -197,6 +200,28 @@ const routes: Routes = [
                             path: ':eventId', // last
                             component: EventComponent,
                             resolve: {event: EventResolver},
+                        },
+                    ],
+                },
+                {
+                    path: 'session', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: SessionsComponent,
+                    data: {
+                        title: 'Événements',
+                    },
+                },
+                {
+                    path: 'session',
+                    children: [
+                        {
+                            path: 'new',
+                            component: SessionComponent,
+                            resolve: {session: SessionResolver},
+                        },
+                        {
+                            path: ':sessionId', // last
+                            component: SessionComponent,
+                            resolve: {session: SessionResolver},
                         },
                     ],
                 },

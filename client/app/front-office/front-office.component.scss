@@ -67,7 +67,6 @@
                 padding: 10px 10px;
                 text-transform: uppercase;
                 text-decoration: none;
-                color: black;
             }
 
 
@@ -82,10 +81,6 @@
                 padding: 0;
 
                 &:hover {
-
-                    & > a {
-                        border-color: #4DAB8E;
-                    }
 
                     & > ul {
                         display: block !important;
@@ -114,11 +109,10 @@
                     align-items: center;
                     border-bottom: 6px solid transparent;
                     font-weight: bold;
-
                 }
 
                 & > ul {
-                    padding: 20px 0;
+                    padding: 30px 0 0 0 ;
                 }
 
                 &:hover > ul {
@@ -138,7 +132,6 @@
                         left: 0;
                         right: 0;
                         height: 300px;
-                        background: white;
                         pointer-events: none;
                         z-index: 900; // just before material overlays
                     }
@@ -158,10 +151,6 @@
                 padding-right: 0;
                 margin-right: 0;
                 margin-left: 100%;
-
-                a:hover {
-                    color: #4DAB8E;
-                }
 
                 li {
                     position: relative;
@@ -193,10 +182,6 @@
             color: black;
             cursor: pointer;
             font-size: 16px;
-
-            &:hover {
-                color: #4DAB8E; // todo replace
-            }
         }
 
         ul {

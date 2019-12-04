@@ -8,12 +8,12 @@
     app-profile {
 
         .introduction {
-            background: mat-color($accent, 0.1);
+            background: mat-color($primary, 0.1);
         }
 
         mat-nav-list {
             padding-top: 0 !important; // override native .mat-list-base
-            background: mat-color($accent, 0.1);
+            background: mat-color($primary, 0.1);
         }
 
     }

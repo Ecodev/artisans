@@ -8,6 +8,7 @@
     app-front-office {
         #header-top {
             background: darken(mat-color($bg, app-bar), 5%);
+            color: lighten(mat-color($fg, text), 35%);
         }
 
         #mobile-menu .mat-expansion-panel-body {
@@ -15,7 +16,30 @@
         }
 
         #search-field .mat-form-field-underline {
-            display:none;
+            display: none;
+        }
+
+        #menu-main > ul {
+
+            a {
+                color: lighten(mat-color($fg, text), 20%);
+            }
+
+            li:hover > a {
+                border-color: mat-color($primary) !important;
+            }
+
+            & > li.hasMenu::after {
+                background: mat-color($bg, card);
+            }
+
+            ul a:hover {
+                color: mat-color($primary);
+            }
+        }
+
+        #mobile-menu a:hover {
+            color: mat-color($primary) !important;
         }
     }
 }

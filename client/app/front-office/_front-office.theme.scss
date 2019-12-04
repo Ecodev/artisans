@@ -9,6 +9,14 @@
         #header-top {
             background: #EBEBEB;
         }
+
+        #mobile-menu .mat-expansion-panel-body {
+            padding-right: 0 !important;
+        }
+
+        #search-field .mat-form-field-underline {
+            display:none;
+        }
     }
 }
 

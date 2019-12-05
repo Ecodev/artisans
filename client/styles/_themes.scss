@@ -7,13 +7,15 @@
 @import '~@ecodev/natural/theming/natural.theme';
 @import '../app/app.theme';
 @import 'rich-text';
-//@import 'page-header';
+@import 'page-header';
 @import '../app/shared/components/money/money.theme';
 @import '../app/shared/components/file/file.theme';
+@import '../app/shared/components/product-tags-navigation/product-tags-navigation.theme';
 @import '../app/admin/products/product/product.theme';
 @import '../app/profile/components/profile/profile.theme';
-@import '../app/front-office/homepage/homepage.theme';
+@import '../app/front-office/components/homepage/homepage.theme';
 @import '../app/front-office/front-office.theme';
+@import '../app/front-office/modules/shop/components/products/products.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -22,7 +24,7 @@
 @mixin components-theme($theme) {
     @include app($theme);
     @include natural($theme);
-    //@include page-header($theme);
+    @include page-header($theme);
     @include money($theme);
     @include file($theme);
     @include product($theme);
@@ -30,6 +32,8 @@
     @include profile($theme);
     @include homepage($theme);
     @include front-office($theme);
+    @include products($theme);
+    @include product-tags-navigation($theme);
 }
 
 $artisans-blue: (

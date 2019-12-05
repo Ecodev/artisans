@@ -48,7 +48,7 @@ import { Router } from '@angular/router';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
-import { CartService } from '../../../shop/services/cart.service';
+import { CartService } from '../../../front-office/modules/services/cart.service';
 
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
     const value = control.value || '';

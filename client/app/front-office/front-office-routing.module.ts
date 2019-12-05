@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
-import { LoginComponent } from '../login/login.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { LoginComponent } from './components/login/login.component';
 import { FrontOfficeComponent } from './front-office.component';
-import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
         {
@@ -23,6 +23,14 @@ const routes: Routes = [
                 {
                     path: 'mon-compte',
                     loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
+                },
+                {
+                    path: 'larevuedurable',
+                    loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
+                },
+                {
+                    path: 'panier',
+                    loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
                 },
             ],
         },

@@ -1,0 +1,20 @@
+:host {
+
+    * {
+        font-size: 36px;
+        line-height: 1.2em;
+        font-weight: bold;
+        float: left;
+    }
+
+    .dot:last-child {
+        display: none;
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+        padding: 0 5px;
+    }
+
+}

@@ -5,7 +5,7 @@ import { Apollo } from 'apollo-angular';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { mockApolloProvider } from '../../../shared/testing/MockApolloProvider';
 import { UserService } from './user.service';
-import { CartService } from '../../../shop/services/cart.service';
+import { CartService } from '../../../front-office/modules/services/cart.service';
 
 class MockCartService {
     empty() {

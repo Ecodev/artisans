@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { FormValidators, Literal } from '@ecodev/natural';
-import { CartService } from '../../../shop/services/cart.service';
+import { CartService } from '../../../front-office/modules/services/cart.service';
 
 @Injectable({
     providedIn: 'root',

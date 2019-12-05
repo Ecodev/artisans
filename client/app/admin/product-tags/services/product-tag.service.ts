@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators, NaturalValidators, FormAsyncValidators } from '@ecodev/natural';
-import { productTagQuery, productTagsQuery, createProductTag, deleteProductTags, updateProductTag } from './product-tag.queries';
+import { Validators } from '@angular/forms';
 import {
+    FormAsyncValidators,
+    FormValidators,
+    NaturalAbstractModelService,
+    NaturalQueryVariablesManager,
+    NaturalValidators,
+} from '@ecodev/natural';
+import { Apollo } from 'apollo-angular';
+import { map } from 'rxjs/operators';
+import {
+    CreateProductTag,
+    CreateProductTagVariables,
     ProductTag,
     ProductTagInput,
     ProductTags,
     ProductTagsVariables,
     ProductTagVariables,
-    CreateProductTag,
-    CreateProductTagVariables,
     UpdateProductTag,
     UpdateProductTagVariables,
 } from '../../../shared/generated-types';
-import { Validators } from '@angular/forms';
+import { createProductTag, deleteProductTags, productTagQuery, productTagsQuery, updateProductTag } from './product-tag.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -55,6 +62,13 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
         return {
             name: [NaturalValidators.unique('name', this)],
         };
+    }
+
+    public resolveByName(name: string) {
+        const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
+        console.log('name', name);
+        qvm.set('variables', {filter: {groups: [{conditions: [{name: {equal: {value: name}}}]}]}});
+        return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));
     }
 
 }

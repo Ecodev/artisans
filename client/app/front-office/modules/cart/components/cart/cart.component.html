@@ -1,0 +1,58 @@
+<div class="container" fxFlex="1 0 auto" fxLayout="column">
+
+    <div class="mat-display-1">Panier</div>
+
+
+    <div *ngIf="!cartService.cart.length" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end">
+
+        <div class="mat-headline">Aucun article dans le panier</div>
+        <div fxLayout="row" fxLayoutGap="30px" >
+            <a mat-flat-button color="primary" routerLink="/larevuedurable/articles">Consulter nos articles</a>
+            <a mat-flat-button color="primary" routerLink="/larevuedurable/numeros">Consulter nos revues</a>
+            <a mat-flat-button color="primary" routerLink="/...">S'abonner</a>
+        </div>
+
+    </div>
+
+    <div *ngIf="cartService?.cart?.length" fxLayout="column" fxLayoutGap="10px" style="width:100%;max-width:600px; margin: 0 auto">
+        <h1 class="mat-title">Panier d'achats</h1>
+
+        <mat-nav-list>
+            <mat-list-item *ngFor="let line of cartService.cart; let i = index"
+                           [routerLink]="['/shop/product', line.product.code, {index: i}]"
+            >
+                <app-file [height]="70" [model]="line.product.image" [style.width.px]="70" matListAvatar></app-file>
+                <div matLine style="white-space: normal;">{{ line.product.name }}</div>
+                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" matLine style="white-space: nowrap">
+                    <div fxFlex>
+                        {{ line.quantity }}
+                    </div>
+                    <div class="price mat-body-2">{{ line.total | currency : 'CHF'}}</div>
+                </div>
+            </mat-list-item>
+        </mat-nav-list>
+
+        <mat-divider></mat-divider>
+
+        <div fxLayout="row" fxLayoutAlign="end">
+            <div class="mat-body-1 padding totals natural-table">
+                <div *ngIf="CartService.totalTaxes">
+                    <span class="mat-body-2">TVA :</span>
+                    <span>{{ CartService.totalTaxes | currency : 'CHF' }}</span>
+                </div>
+                <div>
+                    <span class="mat-body-2">Total TTC :</span>
+                    <span class="mat-body-2">{{ CartService.totalTaxInc | currency : 'CHF' }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+            <button (click)="empty()" mat-button>Vider le panier</button>
+            <button (click)="createOrder()" [style.width.px]="200" color="primary" mat-flat-button>Passer à la caisse</button>
+        </div>
+    </div>
+
+</div>
+
+<router-outlet></router-outlet>

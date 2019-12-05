@@ -1,0 +1,15 @@
+<div class="container" fxLayout="column" fxLayoutGap="60px">
+
+    <div class="mat-display-1">{{ title }}</div>
+
+    <app-product-tags-navigation *ngIf="showTags"></app-product-tags-navigation>
+
+    <div class="products" [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}">
+        <div *ngFor="let product of products" class="product">
+            {{ product.name }}, {{ product.pricePerUnitEUR }} <!-- todo : componentize, including a CurrencyService -->
+            <a mat-stroked-button [routerLink]="['/larevuedurable', 'product', product.id]">Détail</a>
+        </div>
+    </div>
+
+    <a mat-flat-button color="primary" (click)="loadMore()">Charger plus</a>
+</div>

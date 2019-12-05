@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NaturalAbstractController, NaturalAlertService } from '@ecodev/natural';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
+import { filter } from 'rxjs/operators';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
 
 interface MenuItem {
@@ -35,11 +36,26 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         },
         {
             display: 'La revue durable',
-            link: '/la-revue',
+            children: [
+                {
+                    display: 'Notre projet',
+                },
+                {
+                    display: 'Tous les articles',
+                    link: '/larevuedurable/articles',
+                },
+                {
+                    display: 'Tous les numéros',
+                    link: '/larevuedurable/numeros',
+                },
+                {
+                    display: 'Nos points de vente',
+                    // link: '/' ???
+                },
+            ],
         },
         {
             display: 'Agir avec nous',
-            link: 'agir-avec-nous',
             children: [
                 {display: 'Les conversations carbonne'},
                 {display: 'Les conversations carbonne'},
@@ -81,13 +97,12 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
 
     public mobileNavigation: MenuItem[] = [];
 
-    constructor(public route: ActivatedRoute,
-                public alertService: NaturalAlertService,
-    ) {
+    constructor(private route: ActivatedRoute, private router: Router) {
         super();
     }
 
     ngOnInit() {
+
         this.viewer = this.route.snapshot.data.viewer.model as CurrentUserForProfile_viewer;
 
         // Setup mobile menu with items from top menu that are missing on main menu
@@ -97,6 +112,15 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             this.topNavigation.splice(0, 0, {display: 'Administration', link: '/admin'});
             this.mobileNavigation.push({display: 'Administration', link: '/admin'});
         }
+
+        this.router.events
+            .pipe(filter(event => event instanceof NavigationEnd))
+            .subscribe(() => {
+                const contentContainer = document.querySelector('.mat-sidenav-content');
+                if (contentContainer) {
+                    contentContainer.scroll({top: 0});
+                }
+            });
     }
 
     public search() {

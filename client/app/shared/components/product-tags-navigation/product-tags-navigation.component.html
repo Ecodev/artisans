@@ -1,0 +1,4 @@
+<ng-container *ngFor="let tag of tags">
+    <a [class.active]="tag.active" [routerLink]="['/larevuedurable', 'articles', tag.name]" matRipple>{{ tag.name }}</a>
+    <div class="dot">·</div>
+</ng-container>

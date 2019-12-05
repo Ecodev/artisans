@@ -23,7 +23,6 @@ import { ArtisansModule } from './shared/modules/artisans.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
-import { ShopModule } from './shop/shop.module';
 
 registerLocaleData(localeFRCH);
 
@@ -41,7 +40,6 @@ registerLocaleData(localeFRCH);
         NgProgressModule,
         ApolloModule,
         AppRoutingModule,
-        ShopModule,
         HttpClientModule,
         HttpBatchLinkModule,
         FrontOfficeModule,

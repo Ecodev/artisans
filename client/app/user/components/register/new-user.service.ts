@@ -6,7 +6,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 import { FormValidators, Literal } from '@ecodev/natural';
 import { AnonymousUserService } from './anonymous-user.service';
 import { LoginValidatorFn } from '../../../admin/users/services/user.service';
-import { CartService } from '../../../shop/services/cart.service';
+import { CartService } from '../../../front-office/modules/services/cart.service';
 
 @Injectable({
     providedIn: 'root',

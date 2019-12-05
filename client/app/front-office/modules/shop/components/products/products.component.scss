@@ -1,0 +1,33 @@
+:host {
+
+
+    .products.grid {
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-auto-rows: 270px;
+        grid-gap: 30px;
+
+        .product {
+            border-left: 5px solid transparent;
+            padding: 30px;
+
+            // if bigger first image
+            // &:first-child {
+            //    grid-column: span 2;
+            //    grid-row: span 2;
+            // }
+        }
+    }
+
+    .products.list {
+
+        display: flex;
+        flex-direction: column;
+
+        & > :not(:last-child) {
+            margin-bottom: 30px
+        }
+
+    }
+
+}

@@ -10,10 +10,8 @@
             color: lighten(mat-color($foreground, text), 60%);
         }
 
-        a {
-            &:hover {
-                color: mat-color($primary);
-            }
+        a:hover, a.active {
+            color: mat-color($primary);
         }
 
     }

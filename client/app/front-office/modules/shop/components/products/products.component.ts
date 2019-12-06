@@ -19,6 +19,7 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
 
     public showTags = true;
     public viewMode: ProductsViewMode = ProductsViewMode.grid;
+    public currentProductTag;
 
     public products: Products_products_items[] = [];
 
@@ -36,13 +37,13 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
         super.ngOnInit();
 
         this.route.data.subscribe(data => {
-            console.log('data', data);
-
             this.title = data.title;
             this.showTags = !!data.showTags;
             this.viewMode = data.viewMode || ProductsViewMode.grid;
 
             if (data.productTag && data.productTag.model) {
+                this.currentProductTag = data.productTag.model;
+                this.pagination({offset: null, pageIndex: 0, pageSize: 10});
                 this.variablesManager.set('category',
                     {filter: {groups: [{conditions: [{productTags: {have: {values: [data.productTag.model.id]}}}]}]}});
             }
@@ -51,8 +52,10 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
         this.dataSource.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
 
             if (result.pageIndex === 0) {
+                // When page index is 0, it means "new list" so replace all results.
                 this.products = result.items;
             } else {
+                // Add new results
                 this.products.push(...result.items);
             }
         });

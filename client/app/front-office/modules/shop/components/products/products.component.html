@@ -2,7 +2,7 @@
 
     <div class="mat-display-1">{{ title }}</div>
 
-    <app-product-tags-navigation *ngIf="showTags"></app-product-tags-navigation>
+    <app-product-tags-navigation *ngIf="showTags" [current]="currentProductTag"></app-product-tags-navigation>
 
     <div class="products" [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}">
         <div *ngFor="let product of products" class="product">

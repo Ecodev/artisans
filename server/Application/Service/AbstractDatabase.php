@@ -160,8 +160,8 @@ STRING;
         echo 'importing ' . $file . "\n";
         $connection = _em()->getConnection();
         $database = $connection->getDatabase();
-        $username = escapeshellarg($connection->getUsername());
-        $password = escapeshellarg(empty($connection->getPassword()) ? '' : '-p' . $connection->getPassword());
+        $username = $connection->getUsername();
+        $password = empty($connection->getPassword()) ? '' : '-p' . $connection->getPassword();
 
         $importCommand = "cat $file | mysql -u $username $password $database";
 

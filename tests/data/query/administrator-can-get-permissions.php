@@ -30,7 +30,7 @@ return [
             'permissions' => [
                 'crud' => [
                     'configuration' => [
-                        'create' => false,
+                        'create' => true,
                     ],
                     'news' => [
                         'create' => true,

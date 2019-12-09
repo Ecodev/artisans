@@ -28,12 +28,12 @@
                 <a mat-button [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex>{{ line.product.name }}</a>
 
                 <ng-container *ngIf="line.quantity > 1">
-                    <div>{{ line.product.pricePerUnitCHF }} x</div>
-                    <div>{{ line.quantity }}</div>
+                    <app-price [product]="line.product"></app-price>
+                    <div>x {{ line.quantity }}</div>
                 </ng-container>
 
                 <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
-                    <div class="price mat-body-2">{{ line.total | currency : 'CHF'}}</div>
+                    <div class="price mat-body-2">{{ line.total | currency : currencyService.current.value}}</div>
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -56,11 +56,11 @@
             <div class="mat-body-1 padding totals natural-table">
                 <div *ngIf="CartService.totalTaxes">
                     <span class="mat-body-2">TVA :</span>
-                    <span>{{ CartService.totalTaxes | currency : 'CHF' }}</span>
+                    <span>{{ CartService.totalTaxes | currency : currencyService.current.value }}</span>
                 </div>
                 <div>
                     <span class="mat-body-2">Total TTC :</span>
-                    <span class="mat-body-2">{{ CartService.totalTaxInc | currency : 'CHF' }}</span>
+                    <span class="mat-body-2">{{ CartService.totalTaxInc | currency : currencyService.current.value }}</span>
                 </div>
             </div>
         </div>

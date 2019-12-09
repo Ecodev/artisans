@@ -21,8 +21,8 @@ import {
     NaturalStampModule,
     NaturalTableButtonModule,
 } from '@ecodev/natural';
-import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { ngfModule } from 'angular-file';
+import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { AvatarModule } from 'ngx-avatar';
 import { ProductsComponent } from '../../admin/products/products/products.component';
 import { UsersComponent } from '../../admin/users/users/users.component';
@@ -33,6 +33,7 @@ import { FileDropDirective } from '../components/file/services/file-drop.directi
 import { DialogTriggerComponent } from '../components/modal-trigger/dialog-trigger.component';
 import { MoneyComponent } from '../components/money/money.component';
 import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
+import { PriceComponent } from '../components/price/price.component';
 import { ProductTagsNavigationComponent } from '../components/product-tags-navigation/product-tags-navigation.component';
 import { FocusDirective } from '../directives/focus';
 import { MaterialModule } from './material.module';
@@ -115,6 +116,7 @@ const declarations = [
     UsersComponent,
     ProductsComponent,
     ProductTagsNavigationComponent,
+    PriceComponent,
 ];
 
 const imports = [

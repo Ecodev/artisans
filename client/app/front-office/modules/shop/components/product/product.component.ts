@@ -11,7 +11,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../../../shared/generated-types';
-import { CartService } from '../../../services/cart.service';
+import { CartService } from '../../../cart/services/cart.service';
 
 @Component({
     selector: 'app-product',

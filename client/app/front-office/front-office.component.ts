@@ -4,6 +4,7 @@ import { NaturalAbstractController } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
+import { Currency, CurrencyService } from './modules/cart/services/currency.service';
 
 interface MenuItem {
     display: string;
@@ -97,7 +98,9 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
 
     public mobileNavigation: MenuItem[] = [];
 
-    constructor(private route: ActivatedRoute, private router: Router) {
+    public Currency = Currency;
+
+    constructor(private route: ActivatedRoute, private router: Router, public currencyService: CurrencyService) {
         super();
     }
 

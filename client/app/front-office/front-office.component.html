@@ -53,10 +53,12 @@
             <div id="header-top">
                 <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <a mat-button [matMenuTriggerFor]="deviseMenu">Devise</a>
+                    <a mat-button [matMenuTriggerFor]="deviseMenu">
+                        {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
+                    </a>
                     <mat-menu #deviseMenu="matMenu">
-                        <button mat-menu-item>Suisse (CHF)</button>
-                        <button mat-menu-item>Europe (EUR)</button>
+                        <button mat-menu-item (click)="currencyService.setCurrency(Currency.CHF)">Suisse (CHF)</button>
+                        <button mat-menu-item (click)="currencyService.setCurrency(Currency.EUR)">Europe (EUR)</button>
                     </mat-menu>
                     <a mat-button *ngFor="let item of topNavigation" [routerLink]="item.link"> {{ item.display }}</a>
                 </div>

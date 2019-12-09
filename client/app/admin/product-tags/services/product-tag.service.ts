@@ -66,7 +66,6 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
 
     public resolveByName(name: string) {
         const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
-        console.log('name', name);
         qvm.set('variables', {filter: {groups: [{conditions: [{name: {equal: {value: name}}}]}]}});
         return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));
     }

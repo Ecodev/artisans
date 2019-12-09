@@ -5,7 +5,7 @@
     <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
 
     <div class="mat-headline price no-margin-bottom">
-        {{ CartService.getPriceTaxInc(data.model, 1) | currency : 'CHF' }}
+        <app-price [product]="data.model"></app-price>
     </div>
     <div>
         <app-add-to-cart [product]="data.model"></app-add-to-cart>

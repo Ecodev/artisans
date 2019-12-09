@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
-import { CartLineProduct, CartService } from '../../../services/cart.service';
+import { CartLineProduct, CartService } from '../../services/cart.service';
+import { CurrencyService } from '../../services/currency.service';
 
 @Component({
     selector: 'app-cart',
@@ -16,6 +17,7 @@ export class CartComponent implements OnInit {
     constructor(public cartService: CartService,
                 public alertService: NaturalAlertService,
                 public router: Router,
+                public currencyService: CurrencyService
     ) {
 
     }

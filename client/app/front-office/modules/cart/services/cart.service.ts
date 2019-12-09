@@ -3,9 +3,9 @@ import { NaturalAlertService } from '@ecodev/natural';
 import Decimal from 'decimal.js';
 import { fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { OrderService } from '../../../order/services/order.service';
-import { Product, Products } from '../../../shared/generated-types';
-import { moneyRoundUp } from '../../../shared/utils';
+import { OrderService } from '../../../../order/services/order.service';
+import { Product, Products } from '../../../../shared/generated-types';
+import { moneyRoundUp } from '../../../../shared/utils';
 
 export type CartLineProduct =
     Products['products']['items'][0]

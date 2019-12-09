@@ -1,6 +1,7 @@
 <div class="wrapper" #wrapper>
     <div>
         <div [pHidden]="!showData1"
+             #element1
              libParticleEffectButton
              [pParticlesAmountCoefficient]="settings1.pParticlesAmountCoefficient"
              [pOscillationCoefficient]="settings1.pOscillationCoefficient"
@@ -8,13 +9,15 @@
              [pSpeed]="settings1.pSpeed"
              [pDirection]="settings1.pDirection"
              [pColor]="settings1.pColor"
+             (pComplete)="updateSize()"
         >
-            <ng-template #firstTemplate [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ data: _data1 }"></ng-template>
+            <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ data: _data1 }"></ng-template>
         </div>
     </div>
 
     <div>
         <div [pHidden]="!showData2"
+             #element2
              libParticleEffectButton
              [pParticlesAmountCoefficient]="settings2.pParticlesAmountCoefficient"
              [pOscillationCoefficient]="settings2.pOscillationCoefficient"
@@ -22,6 +25,7 @@
              [pSpeed]="settings2.pSpeed"
              [pDirection]="settings2.pDirection"
              [pColor]="settings2.pColor"
+             (pComplete)="updateSize()"
         >
             <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ data: _data2 }"></ng-template>
         </div>

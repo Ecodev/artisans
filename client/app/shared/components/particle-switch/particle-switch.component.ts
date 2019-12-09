@@ -1,13 +1,4 @@
-import {
-    AfterViewInit,
-    Component,
-    ContentChild,
-    ElementRef,
-    Input,
-    OnInit,
-    TemplateRef,
-    ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, ContentChild, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'app-particle-switch',
@@ -18,6 +9,8 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
 
     @ContentChild(TemplateRef, {static: true}) template: TemplateRef<any>;
     @ViewChild('wrapper', {static: true}) wrapper: ElementRef<any>;
+    @ViewChild('element1', {static: false}) element1: ElementRef<any>;
+    @ViewChild('element2', {static: false}) element2: ElementRef<any>;
 
     public _data1;
     public _data2;
@@ -30,7 +23,7 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
     public settings1 = {
         pOscillationCoefficient: 80,
         pDirection: 'right',
-        pColor: 'red',
+        pColor: '#0e7ecb',
         pParticlesAmountCoefficient: 1,
         pDuration: this.duration,
         pSpeed: 0.5,
@@ -39,7 +32,7 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
     public settings2 = {
         pOscillationCoefficient: 100,
         pDirection: 'left',
-        pColor: 'green',
+        pColor: '#ef6031',
         pParticlesAmountCoefficient: 1,
         pDuration: this.duration,
         pSpeed: 0.5,
@@ -84,7 +77,9 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
 
     private updateSize() {
         const root = this.rootElement.nativeElement;
-        const child = this.wrapper.nativeElement.children[0];
+
+        const element = this.element2 || this.element1 || this.wrapper;
+        const child = element.nativeElement.children[0];
         root.style.height = child.offsetHeight + 'px';
         root.style.width = child.offsetWidth + 'px';
     }

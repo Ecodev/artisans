@@ -75,7 +75,7 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
         this.updateSize();
     }
 
-    private updateSize() {
+    public updateSize() {
         const root = this.rootElement.nativeElement;
 
         const element = this.element2 || this.element1 || this.wrapper;

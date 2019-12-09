@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NaturalAbstractController } from '@ecodev/natural';
 import { takeUntil } from 'rxjs/operators';
 import { CartLineProduct } from '../../../front-office/modules/cart/services/cart.service';
-import { Currency, CurrencyService } from '../../../front-office/modules/cart/services/currency.service';
+import { Currency, CurrencyManager } from '../../classes/currencyManager';
 
 @Component({
     selector: 'app-price',
@@ -15,13 +15,18 @@ export class PriceComponent extends NaturalAbstractController implements OnInit 
 
     public price;
 
-    constructor(public currencyService: CurrencyService) {
+    /**
+     * For template usage
+     */
+    public CurrencyManager = CurrencyManager;
+
+    constructor() {
         super();
     }
 
     ngOnInit() {
 
-        this.currencyService.current.pipe(takeUntil(this.ngUnsubscribe)).subscribe(currency => {
+        CurrencyManager.current.pipe(takeUntil(this.ngUnsubscribe)).subscribe(currency => {
             if (currency === Currency.CHF) {
                 this.price = this.product.pricePerUnitCHF;
             } else {

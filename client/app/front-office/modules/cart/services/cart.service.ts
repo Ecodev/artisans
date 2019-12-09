@@ -4,6 +4,7 @@ import Decimal from 'decimal.js';
 import { fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { OrderService } from '../../../../order/services/order.service';
+import { CurrencyManager } from '../../../../shared/classes/currencyManager';
 import { Product, Products } from '../../../../shared/generated-types';
 import { moneyRoundUp } from '../../../../shared/utils';
 
@@ -46,8 +47,7 @@ export class CartService {
     }
 
     public static getPriceTaxInc(product: CartLineProduct, quantity: number): number {
-        // TODO add parameter to switch between CHF and EUR
-        const quantifiedPrice = Decimal.mul(product.pricePerUnitCHF, quantity);
+        const quantifiedPrice = Decimal.mul(CurrencyManager.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
     }
 

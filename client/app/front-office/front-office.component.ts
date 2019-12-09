@@ -3,8 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/rout
 import { NaturalAbstractController } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
+import { Currency, CurrencyManager } from '../shared/classes/currencyManager';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
-import { Currency, CurrencyService } from './modules/cart/services/currency.service';
 
 interface MenuItem {
     display: string;
@@ -99,8 +99,9 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public mobileNavigation: MenuItem[] = [];
 
     public Currency = Currency;
+    public CurrencyManager = CurrencyManager;
 
-    constructor(private route: ActivatedRoute, private router: Router, public currencyService: CurrencyService) {
+    constructor(private route: ActivatedRoute, private router: Router) {
         super();
     }
 

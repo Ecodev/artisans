@@ -48,4 +48,19 @@ REPLACE INTO file (id, product_id, owner_id, filename, mime) VALUES
 (9000, 3001,  1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf'),
 (9001, 3002,  1000, '4k123pkopvs3iDFV948abcde.pdf', 'application/pdf');
 
+REPLACE INTO `configuration` (id, `key`, `value`) VALUES
+(18000, 'home-block-1-title', 'Titre bloc 1'),
+(18001, 'home-block-1-description', 'Description bloc 1 Donec ullamcorper nulla non metus auctor fringilla. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.'),
+(18002, 'home-block-1-button-label', 'Label bouton bloc 1'),
+(18003, 'home-block-1-button-link', '/panier'),
+(18004, 'home-block-2-title', 'Titre bloc 2'),
+(18005, 'home-block-2-description', 'Description bloc 2 Donec ullamcorper nulla non metus auctor fringilla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'),
+(18006, 'home-block-2-button-label', 'Label bouton bloc 2'),
+(18007, 'home-block-2-button-link', '/larevuedurable/numeros'),
+(18008, 'home-block-3-title', 'Titre bloc 3'),
+(18009, 'home-block-3-description', 'Description bloc 3 Donec ullamcorper nulla non metus auctor fringilla. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.'),
+(18010, 'home-block-3-button-label', 'Label bouton bloc 3'),
+(18011, 'home-block-3-button-link', '/larevuedurable/articles');
+
+
 COMMIT;

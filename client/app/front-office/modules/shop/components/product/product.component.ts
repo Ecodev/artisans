@@ -71,31 +71,6 @@ export class ProductComponent
      */
     public formGroup = new FormGroup({quantity: this.quantityForm});
 
-    // constructor(@Inject(MAT_DIALOG_DATA) data: DialogTriggerProvidedData,
-    //             private cartService: CartService,
-    //             productService: ProductService,
-    //             private router: Router) {
-    //
-    //     this.routeSnapshot = data.activatedRoute.snapshot;
-    //     this.data = {model: this.routeSnapshot.data.news.model}; // to respect our template standard
-    //
-    //     if (this.data.model) {
-    //         if (this.routeSnapshot.params.index) {
-    //             this.edit = true;
-    //             this.quantityForm.setValue(this.cartService.cart[+this.routeSnapshot.params.index].quantity);
-    //         }
-    //
-    //         this.computePrice();
-    //         this.quantityForm.valueChanges.subscribe(() => this.computePrice(true));
-    //
-    //         // Fetch permissions if they are missing
-    //         if (!this.data.model.permissions) {
-    //             productService.getOne(this.data.model.id).subscribe(productWithPermissions => this.data.model = productWithPermissions);
-    //         }
-    //     }
-    //
-    // }
-
     ngOnInit(): void {
         super.ngOnInit();
     }
@@ -118,44 +93,4 @@ export class ProductComponent
         this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value);
     }
 
-    public addToCart(): void {
-        this.cartService.add(this.data.model, +this.quantityForm.value);
-        this.router.navigateByUrl('/');
-    }
-
-    public updateCart(): void {
-        this.cartService.updateProduct(+this.routeSnapshot.params.index, +this.quantityForm.value);
-        this.router.navigateByUrl('/');
-    }
-
-    public removeFromCart(): void {
-        this.cartService.remove(+this.routeSnapshot.params.index);
-        this.router.navigateByUrl('/');
-    }
-
-    public increase(): void {
-        this.quantityForm.setValue(+this.quantityForm.value + 1);
-        this.quantityForm.markAsDirty();
-    }
-
-    public decrease(): void {
-        const value = +this.quantityForm.value - 1;
-        this.quantityForm.setValue(value < 0 ? 0 : value);
-        this.quantityForm.markAsDirty();
-
-    }
-
-    public updateOrAddToCart(): void {
-        if (this.formGroup.invalid || !this.data.model.isActive) {
-            return;
-        }
-
-        if (this.data && this.data.model) {
-            if (this.edit) {
-                this.updateCart();
-            } else {
-                this.addToCart();
-            }
-        }
-    }
 }

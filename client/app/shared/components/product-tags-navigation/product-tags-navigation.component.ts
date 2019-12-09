@@ -19,7 +19,6 @@ export class ProductTagsNavigationComponent implements OnInit {
     @Input() set current(value: ProductTags_productTags_items) {
         this._current = value;
 
-        console.log('value', value);
         if (this.tags) {
             this.tags.forEach(tag => tag.active = value && tag.id === value.id);
         }

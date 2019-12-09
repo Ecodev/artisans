@@ -7,8 +7,12 @@ import { OrderService } from '../../../order/services/order.service';
 import { Product, Products } from '../../../shared/generated-types';
 import { moneyRoundUp } from '../../../shared/utils';
 
+export type CartLineProduct =
+    Products['products']['items'][0]
+    | Product['product'];
+
 export interface CartLine {
-    product: Products['products']['items'][0] | Product['product'];
+    product: CartLineProduct;
     quantity: number;
     total: number;
 }
@@ -41,7 +45,7 @@ export class CartService {
         }
     }
 
-    public static getPriceTaxInc(product: CartLine['product'], quantity: number): number {
+    public static getPriceTaxInc(product: CartLineProduct, quantity: number): number {
         // TODO add parameter to switch between CHF and EUR
         const quantifiedPrice = Decimal.mul(product.pricePerUnitCHF, quantity);
         return moneyRoundUp(+quantifiedPrice);
@@ -60,14 +64,13 @@ export class CartService {
         return this.orderService.create(this.cart as any); // whines because of a number is provided instead of a string. TODO : fix
     }
 
-    public add(product: CartLine['product'], quantity: number) {
+    public increase(product: CartLineProduct, quantity: number) {
 
-        const existingLineIndex = this.getLineIndexByProduct(product);
+        const line = this.getLineByProduct(product);
 
-        if (existingLineIndex > -1) {
-            const existingLine = this.cart[existingLineIndex];
-            existingLine.quantity += quantity;
-            existingLine.total = CartService.getPriceTaxInc(product, existingLine.quantity);
+        if (line) {
+            line.quantity += quantity;
+            line.total = CartService.getPriceTaxInc(product, line.quantity);
 
         } else {
             this.cart.push({
@@ -80,51 +83,42 @@ export class CartService {
         CartService.persistCart(this.cart);
     }
 
-    /**
-     * Return a line from cart where product, quantity are identical
-     * @param excludeIndex If provided ignore that index (permits to prevent collision in search)
-     */
-    public getLineIndexByProduct(product: CartLine['product'], excludeIndex?: number): number {
-        return this.cart.findIndex((line: CartLine, index: number) => {
-            return index === excludeIndex ? false : line.product.id === product.id;
-        });
+    public decrease(product: CartLineProduct, quantity: number) {
+
+        const line = this.getLineByProduct(product);
+
+        if (line) {
+            const newQuantity = line.quantity - quantity;
+
+            if (newQuantity <= 0) {
+                // If quantity is falsey, remove from cart
+                this.remove(product);
+            } else {
+                // If product exist and quantity is truey, update existing entry
+                line.quantity = newQuantity;
+                line.total = CartService.getPriceTaxInc(line.product, line.quantity);
+            }
+        }
+
+        CartService.persistCart(this.cart);
+
     }
 
-    public remove(index: number) {
+    /**
+     * Return a line from cart where product, quantity are identical
+     */
+    public getLineByProduct(product: CartLineProduct): CartLine | undefined {
+        return this.cart.find(line => line.product.id === product.id);
+    }
+
+    public remove(product: CartLineProduct) {
+        const index = this.cart.findIndex(line => line.product.id === product.id);
         this.cart.splice(index, 1);
         CartService.persistCart(this.cart);
     }
 
     public empty() {
         this.cart = [];
-        CartService.persistCart(this.cart);
-    }
-
-    public updateProduct(index: number, quantity: number) {
-
-        const similarLineIndex = this.getLineIndexByProduct(this.cart[index].product, index);
-        const currentLine = this.cart[index];
-
-        // In case there is some other line with same parameters, merge them in the other line, and clear the current one
-        if (similarLineIndex > -1) {
-            const similarLine = this.cart[similarLineIndex];
-            currentLine.quantity = quantity + similarLine.quantity;
-            currentLine.total = CartService.getPriceTaxInc(currentLine.product, currentLine.quantity);
-            this.remove(similarLineIndex);
-            this.alertService.info('Deux produits partageant les mêmes caractéristiques ont été combinés');
-            CartService.persistCart(this.cart);
-            return;
-        }
-
-        if (quantity <= 0) {
-            // If quantity is falsey, remove from cart
-            this.remove(index);
-        } else {
-            // If product exist and quantity is truey, update existing entry
-            currentLine.quantity = quantity;
-            currentLine.total = CartService.getPriceTaxInc(currentLine.product, quantity);
-        }
-
         CartService.persistCart(this.cart);
     }
 

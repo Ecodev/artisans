@@ -6,8 +6,10 @@
 
     <div class="products" [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}">
         <div *ngFor="let product of products" class="product">
-            {{ product.name }}, {{ product.pricePerUnitEUR }} <!-- todo : componentize, including a CurrencyService -->
+            <div class="product-name">{{ product.name }}</div>
+            <div class="mat-body-2">{{ product.pricePerUnitCHF }} CHF</div> <!-- todo : componentize, including a CurrencyService -->
             <a mat-stroked-button [routerLink]="['/larevuedurable', 'product', product.id]">Détail</a>
+            <app-add-to-cart [product]="product"></app-add-to-cart>
         </div>
     </div>
 

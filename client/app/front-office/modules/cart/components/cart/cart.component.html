@@ -1,12 +1,11 @@
-<div class="container" fxFlex="1 0 auto" fxLayout="column">
+<div class="container" fxLayout="column">
 
     <div class="mat-display-1">Panier</div>
 
-
-    <div *ngIf="!cartService.cart.length" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start end">
+    <div *ngIf="!cartService.cart.length" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start center">
 
         <div class="mat-headline">Aucun article dans le panier</div>
-        <div fxLayout="row" fxLayoutGap="30px" >
+        <div fxLayout="row" fxLayoutGap="30px">
             <a mat-flat-button color="primary" routerLink="/larevuedurable/articles">Consulter nos articles</a>
             <a mat-flat-button color="primary" routerLink="/larevuedurable/numeros">Consulter nos revues</a>
             <a mat-flat-button color="primary" routerLink="/...">S'abonner</a>
@@ -14,23 +13,42 @@
 
     </div>
 
-    <div *ngIf="cartService?.cart?.length" fxLayout="column" fxLayoutGap="10px" style="width:100%;max-width:600px; margin: 0 auto">
-        <h1 class="mat-title">Panier d'achats</h1>
+    <div *ngIf="cartService?.cart?.length" fxLayout="column" fxLayoutGap="10px">
 
-        <mat-nav-list>
-            <mat-list-item *ngFor="let line of cartService.cart; let i = index"
-                           [routerLink]="['/shop/product', line.product.code, {index: i}]"
-            >
-                <app-file [height]="70" [model]="line.product.image" [style.width.px]="70" matListAvatar></app-file>
-                <div matLine style="white-space: normal;">{{ line.product.name }}</div>
-                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" matLine style="white-space: nowrap">
-                    <div fxFlex>
-                        {{ line.quantity }}
-                    </div>
+        <div class="cart-items">
+            <div class="cart-item" *ngFor="let line of cartService.cart" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+                <app-file [height]="70"
+                          [model]="line.product.image"
+                          [style.width.px]="70"
+                          matListAvatar
+                          [routerLink]="['/larevuedurable/product', line.product.id]"
+                          matRipple
+
+                ></app-file>
+                <a mat-button [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex>{{ line.product.name }}</a>
+
+                <ng-container *ngIf="line.quantity > 1">
+                    <div>{{ line.product.pricePerUnitCHF }} x</div>
+                    <div>{{ line.quantity }}</div>
+                </ng-container>
+
+                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
                     <div class="price mat-body-2">{{ line.total | currency : 'CHF'}}</div>
                 </div>
-            </mat-list-item>
-        </mat-nav-list>
+
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <button mat-icon-button mat-raised-button (click)="decrease(line.product)" color="warn" *ngIf="line.quantity === 1">
+                        <natural-icon name="delete"></natural-icon>
+                    </button>
+                    <button mat-icon-button mat-raised-button (click)="decrease(line.product)" *ngIf="line.quantity > 1">
+                        <natural-icon name="remove"></natural-icon>
+                    </button>
+                    <button mat-icon-button mat-raised-button (click)="increase(line.product)">
+                        <natural-icon name="add"></natural-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <mat-divider></mat-divider>
 

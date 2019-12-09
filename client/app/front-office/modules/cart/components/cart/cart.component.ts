@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
-import { CartService } from '../../../services/cart.service';
+import { CartLineProduct, CartService } from '../../../services/cart.service';
 
 @Component({
-    selector: 'app-shop',
+    selector: 'app-cart',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss'],
 })
@@ -48,6 +48,15 @@ export class CartComponent implements OnInit {
                     this.cartService.empty();
                 }
             });
+    }
+
+    public increase(product: CartLineProduct): void {
+        this.cartService.increase(product, 1);
+    }
+
+    public decrease(product: CartLineProduct): void {
+        this.cartService.decrease(product, 1);
+
     }
 
 }

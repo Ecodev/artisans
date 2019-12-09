@@ -1,62 +1,25 @@
-<div class="container">
+<div class="container" fxLayout="column">
 
     <h1 class="mat-display-1"> {{ data.model.name }}</h1>
+
+    <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
 
     <div class="mat-headline price no-margin-bottom">
         {{ CartService.getPriceTaxInc(data.model, 1) | currency : 'CHF' }}
     </div>
-
-    <div *ngIf="data.model" fxLayout="column" fxLayoutGap="20px">
-
-        <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
-
-        <mat-divider></mat-divider>
-
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-
-            <mat-form-field [style.width.px]="90" [style.padding-top.em]="1.34375">
-                <mat-label>Quantité</mat-label>
-                <input matInput
-                       type="number"
-                       min="0"
-                       [formControl]="quantityForm"
-                       (change)="computePrice()"
-                       (keydown.enter)="updateOrAddToCart()"
-                >
-                <mat-error *ngIf="quantityForm.hasError('required')">Requis</mat-error>
-            </mat-form-field>
-
-            <div fxLayout="column" fxLayoutGap="10px" fxFlex>
-                <button mat-icon-button mat-raised-button (click)="increase()">
-                    <natural-icon name="add"></natural-icon>
-                </button>
-                <button mat-icon-button mat-raised-button (click)="decrease()" [disabled]="quantityForm.value <= 0">
-                    <natural-icon name="remove"></natural-icon>
-                </button>
-            </div>
-
-            <div fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="10px">
-
-                <div fxLayout="row" fxLayoutAlign="start center">
-                    <div fxFlex="none" class="mat-title no-margin-bottom">{{ quantityForm.value || 0 }}x</div>
-                </div>
-
-                <div class="mat-display-1 price no-margin">{{ price | currency : 'CHF' }}</div>
-            </div>
-        </div>
-
-        <mat-divider></mat-divider>
-
-        <div class="mat-subheading-2">
-            <span style="font-weight:bold">Code d'article :</span>
-            {{ data.model.code }}
-        </div>
-
-        <div class="mat-subheading-2" [innerHTML]="data.model.description"></div>
-
-        <div *ngIf="data.model.permissions?.update">
-            <button mat-stroked-button [mat-dialog-close]="['/admin/product', data.model.id]">Administration</button>
-        </div>
+    <div>
+        <app-add-to-cart [product]="data.model"></app-add-to-cart>
 
     </div>
+    <div class="mat-subheading-2">
+        <span style="font-weight:bold">Code d'article :</span>
+        {{ data.model.code }}
+    </div>
+
+    <div class="mat-subheading-2" [innerHTML]="data.model.description"></div>
+
+    <div *ngIf="data.model.permissions?.update">
+        <button mat-stroked-button [mat-dialog-close]="['/admin/product', data.model.id]">Administration</button>
+    </div>
+
 </div>

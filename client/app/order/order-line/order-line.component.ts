@@ -32,7 +32,7 @@ export class OrderLineComponent
     /**
      * Override parent to populate data from dialog data instead of standard route data
      */
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.dialogData.activatedRoute.data.subscribe(data => {
             const key = 'orderLine';
             this.data = merge({model: this.service.getConsolidatedForClient()}, data[key]);

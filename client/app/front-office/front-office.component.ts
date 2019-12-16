@@ -105,7 +105,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         super();
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
 
         this.viewer = this.route.snapshot.data.viewer.model as CurrentUserForProfile_viewer;
 

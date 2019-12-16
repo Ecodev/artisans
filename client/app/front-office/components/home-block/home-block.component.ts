@@ -22,7 +22,7 @@ export class HomeBlockComponent implements OnInit {
     constructor(private configService: ConfigurationService, public permissionService: PermissionsService) {
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
 
         this.form = new FormGroup({
             title: new FormControl(''),

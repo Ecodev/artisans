@@ -49,7 +49,7 @@ export class DialogTriggerComponent implements OnDestroy {
     /**
      * Called when router leaves route, and so on, closes the modal with undefined value to prevent a new redirection
      */
-    ngOnDestroy(): void {
+    public ngOnDestroy(): void {
         if (this.dialogRef) {
             this.dialogRef.close(-1); // -1 = no redirection
         }

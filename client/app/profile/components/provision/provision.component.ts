@@ -15,7 +15,7 @@ export class ProvisionComponent implements OnInit {
         this.bvrData = this.data;
     }
 
-    ngOnInit() {
+    public ngOnInit(): void {
     }
 
 }

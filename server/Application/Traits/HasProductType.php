@@ -10,18 +10,18 @@ use GraphQL\Doctrine\Annotation as API;
 /**
  * Trait for all objects with an type
  */
-trait HasOrderType
+trait HasProductType
 {
     /**
      * @var string
-     * @ORM\Column(type="OrderType")
+     * @ORM\Column(type="ProductType")
      */
     private $type;
 
     /**
      * Set type
      *
-     * @API\Input(type="OrderType")
+     * @API\Input(type="ProductType")
      *
      * @param string $type
      */
@@ -33,7 +33,7 @@ trait HasOrderType
     /**
      * Get type
      *
-     * @API\Field(type="OrderType")
+     * @API\Field(type="ProductType")
      *
      * @return string
      */

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Application\DBAL\Types\OrderTypeType;
+use Application\DBAL\Types\ProductTypeType;
 
 return [
     [
@@ -26,7 +26,7 @@ return [
                 'product' => 3001,
                 'quantity' => '20',
                 'isCHF' => true,
-                'type' => OrderTypeType::DIGITAL,
+                'type' => ProductTypeType::DIGITAL,
             ],
         ],
     ],
@@ -39,7 +39,7 @@ return [
                 'quantity' => '20.000',
                 'balanceCHF' => '200.00',
                 'balanceEUR' => '0.00',
-                'type' => OrderTypeType::DIGITAL,
+                'type' => ProductTypeType::DIGITAL,
                 'order' => [
                     'balanceCHF' => '200.00',
                     'balanceEUR' => '0.00',

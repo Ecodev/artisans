@@ -117,6 +117,9 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             owner: null,
             membershipBegin: null,
             membershipEnd: null,
+            subscriptionBegin: null,
+            subscriptionType: null,
+            webTemporaryAccess: false,
         };
     }
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
@@ -7,12 +8,11 @@ import {
     OrderLines,
     OrderLinesVariables,
     OrderLineVariables,
-    OrderType,
+    ProductType,
     UpdateOrderLine,
     UpdateOrderLineVariables,
 } from '../../shared/generated-types';
 import { orderLineQuery, orderLinesQuery, updateOrderLine } from './order-lines.queries';
-import { Validators } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
@@ -42,7 +42,7 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
             product: null,
             quantity: '0',
             isCHF: true,
-            type: OrderType.digital,
+            type: ProductType.digital,
         };
     }
 

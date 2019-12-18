@@ -61,8 +61,7 @@ return [
             'CHF' => Application\DBAL\Types\CHFType::class,
             'EUR' => Application\DBAL\Types\EURType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
-            'SubscriptionType' => Application\DBAL\Types\SubscriptionTypeType::class,
-            'OrderType' => Application\DBAL\Types\OrderTypeType::class,
+            'ProductType' => Application\DBAL\Types\ProductTypeType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

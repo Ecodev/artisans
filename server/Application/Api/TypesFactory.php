@@ -18,8 +18,7 @@ class TypesFactory
         $invokables = [
             \Application\Api\Enum\UserRoleType::class,
             \Application\Api\Enum\MessageTypeType::class,
-            \Application\Api\Enum\SubscriptionTypeType::class,
-            \Application\Api\Enum\OrderTypeType::class,
+            \Application\Api\Enum\ProductTypeType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\Input\OrderLineInputType::class,

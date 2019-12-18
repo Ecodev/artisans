@@ -118,6 +118,28 @@ class User extends AbstractModel
     private $membershipEnd;
 
     /**
+     * @var null|Chronos
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $subscriptionBegin;
+
+    /**
+     * @var null|Product
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * })
+     */
+    private $subscriptionLastNumber;
+
+    /**
+     * @var string
+     * @ORM\Column(type="ProductType", nullable=true)
+     */
+    private $subscriptionType;
+
+    /**
      * @var string
      * @ORM\Column(type="string", length=25, options={"default" = ""})
      */
@@ -127,7 +149,7 @@ class User extends AbstractModel
      * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $restrictRenewVisibility = false;
+    private $webTemporaryAccess = false;
 
     /**
      * @var null|string
@@ -444,17 +466,17 @@ class User extends AbstractModel
     /**
      * @return bool
      */
-    public function getRestrictRenewVisibility(): bool
+    public function getWebTemporaryAccess(): bool
     {
-        return $this->restrictRenewVisibility;
+        return $this->webTemporaryAccess;
     }
 
     /**
-     * @param bool $restrictRenewVisibility
+     * @param bool $webTemporaryAccess
      */
-    public function setRestrictRenewVisibility(bool $restrictRenewVisibility): void
+    public function setWebTemporaryAccess(bool $webTemporaryAccess): void
     {
-        $this->restrictRenewVisibility = $restrictRenewVisibility;
+        $this->webTemporaryAccess = $webTemporaryAccess;
     }
 
     /**
@@ -558,5 +580,65 @@ class User extends AbstractModel
     {
         $this->setCreationDate(Utility::getNow());
         $this->setCreator(self::getCurrent());
+    }
+
+    /**
+     * @return null|Chronos
+     */
+    public function getSubscriptionBegin(): ?Chronos
+    {
+        return $this->subscriptionBegin;
+    }
+
+    /**
+     * @param null|Chronos $subscriptionBegin
+     */
+    public function setSubscriptionBegin(?Chronos $subscriptionBegin): void
+    {
+        $this->subscriptionBegin = $subscriptionBegin;
+    }
+
+    /**
+     * Set subscription type
+     *
+     * @API\Input(type="?ProductType")
+     *
+     * @param null|string $subscriptionType
+     */
+    public function setSubscriptionType(?string $subscriptionType): void
+    {
+        $this->subscriptionType = $subscriptionType;
+    }
+
+    /**
+     * Get subscription type
+     *
+     * @API\Field(type="ProductType")
+     *
+     * @return null|string
+     */
+    public function getSubscriptionType(): ?string
+    {
+        return $this->subscriptionType;
+    }
+
+    /**
+     * Get last subscription related product
+     *
+     * @return null|Product
+     */
+    public function getSubscriptionLastNumber(): ?Product
+    {
+        return $this->subscriptionLastNumber;
+    }
+
+    /**
+     * Set related product as last subscribed one
+     *
+     * @param null|Product $subscriptionLastNumber
+     */
+    public function setSubscriptionLastNumber(?Product $subscriptionLastNumber): void
+    {
+        $this->subscriptionLastNumber = $subscriptionLastNumber;
     }
 }

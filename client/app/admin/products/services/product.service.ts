@@ -1,6 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
+import {
+    FormAsyncValidators,
+    FormValidators,
+    NaturalAbstractModelService,
+    NaturalQueryVariablesManager,
+    NaturalValidators,
+} from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -9,20 +18,12 @@ import {
     ProductInput,
     Products,
     ProductsVariables,
+    ProductType,
     ProductVariables,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { Validators } from '@angular/forms';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    NaturalAbstractModelService,
-    NaturalQueryVariablesManager,
-    NaturalValidators,
-} from '@ecodev/natural';
+import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -59,6 +60,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             image: null,
             releaseDate: null,
             reviewNumber: 0,
+            type: ProductType.digital,
         };
     }
 

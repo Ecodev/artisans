@@ -8,6 +8,7 @@ use Application\Traits\HasCode;
 use Application\Traits\HasDescription;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasName;
+use Application\Traits\HasProductType;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
@@ -23,6 +24,7 @@ abstract class AbstractProduct extends AbstractModel
     use HasDescription;
     use HasCode;
     use HasInternalRemarks;
+    use HasProductType;
 
     /**
      * @var Money

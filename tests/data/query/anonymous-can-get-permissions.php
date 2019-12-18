@@ -12,7 +12,6 @@ return [
                     newsletter { create }
                     session { create }
                     subscription { create }
-                    userProduct { create }
                     product { create }
                     productTag { create }
                     image { create }
@@ -42,9 +41,6 @@ return [
                         'create' => false,
                     ],
                     'subscription' => [
-                        'create' => false,
-                    ],
-                    'userProduct' => [
                         'create' => false,
                     ],
                     'product' => [

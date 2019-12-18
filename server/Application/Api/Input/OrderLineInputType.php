@@ -19,7 +19,7 @@ class OrderLineInputType extends InputObjectType
                         'type' => self::nonNull(self::string()),
                     ],
                     'type' => [
-                        'type' => self::nonNull(_types()->get('OrderType')),
+                        'type' => self::nonNull(_types()->get('ProductType')),
                     ],
                     'isCHF' => [
                         'type' => self::nonNull(self::boolean()),

@@ -13,26 +13,4 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription extends AbstractProduct
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="SubscriptionType")
-     */
-    private $type;
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType(string $type): void
-    {
-        $this->type = $type;
-    }
 }

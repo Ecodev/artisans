@@ -6,7 +6,7 @@ namespace Application\Model;
 
 use Application\Traits\HasBalance;
 use Application\Traits\HasName;
-use Application\Traits\HasOrderType;
+use Application\Traits\HasProductType;
 use Application\Traits\HasQuantity;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
@@ -21,7 +21,7 @@ class OrderLine extends AbstractModel
     use HasName;
     use HasQuantity;
     use HasBalance;
-    use HasOrderType;
+    use HasProductType;
 
     /**
      * @var Order

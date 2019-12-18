@@ -16,7 +16,6 @@ const permissions = gql`
                 newsletter { create }
                 session { create }
                 subscription { create }
-                userProduct { create }
                 product { create }
                 productTag { create }
                 image { create }

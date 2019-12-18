@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\User;
 
 class FileRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
 {
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
+     *
+     * Give access to users that have flag webTemporaryAccess or to users that have web subscription (digital/both)
      *
      * @param null|User $user
      *
@@ -25,10 +28,18 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
             return $this->getAllIdsQuery();
         }
 
-        return '
+        if (!$user->getWebTemporaryAccess() && !in_array($user->getSubscriptionType(), [ProductTypeType::BOTH, ProductTypeType::DIGITAL], true)) {
+            $webTypesSql = '(' .
+                $this->getEntityManager()->getConnection()->quote(ProductTypeType::BOTH) . ', ' .
+                $this->getEntityManager()->getConnection()->quote(ProductTypeType::DIGITAL) .
+                ')';
+
+            return '
 SELECT file.id FROM file
-INNER JOIN product p ON file.product_id = p.id AND p.is_active
-INNER JOIN user_product ON p.id = user_product.product_id AND user_product.user_id = ' . $this->getEntityManager()->getConnection()->quote($user->getId()) . '
+INNER JOIN product p ON file.product_id = p.id AND p.is_active and p.type IN ' . $webTypesSql . '
 ';
+        }
+
+        return '';
     }
 }

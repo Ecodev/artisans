@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
-use Application\DBAL\Types\OrderTypeType;
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
@@ -54,7 +54,7 @@ class InvoicerTest extends TestCase
             $product = $input[0]['product'];
         }
 
-        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $product, '100', true, OrderTypeType::DIGITAL);
+        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $product, '100', true, ProductTypeType::DIGITAL);
 
         $actualOrderLines = $this->extractOrderLines($order);
         self::assertSame($expectedOrderLines, $actualOrderLines);
@@ -73,7 +73,7 @@ class InvoicerTest extends TestCase
                         '27500',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
@@ -81,7 +81,7 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -99,7 +99,7 @@ class InvoicerTest extends TestCase
                         '-1000000',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
@@ -107,7 +107,7 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -125,7 +125,7 @@ class InvoicerTest extends TestCase
                         '1000000',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -140,7 +140,7 @@ class InvoicerTest extends TestCase
                     [
                         'quantity' => '1',
                         'isCHF' => true,
-                        'type' => OrderTypeType::DIGITAL,
+                        'type' => ProductTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product',
                             'pricePerUnitCHF' => Money::CHF(0),
@@ -155,7 +155,7 @@ class InvoicerTest extends TestCase
                         '0',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -164,7 +164,7 @@ class InvoicerTest extends TestCase
                     [
                         'quantity' => '3.100',
                         'isCHF' => true,
-                        'type' => OrderTypeType::DIGITAL,
+                        'type' => ProductTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product 1',
                             'pricePerUnitCHF' => Money::CHF(275),
@@ -174,7 +174,7 @@ class InvoicerTest extends TestCase
                     [
                         'quantity' => '1',
                         'isCHF' => true,
-                        'type' => OrderTypeType::DIGITAL,
+                        'type' => ProductTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product 2',
                             'pricePerUnitCHF' => Money::CHF(20000),
@@ -189,7 +189,7 @@ class InvoicerTest extends TestCase
                         '853',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
@@ -197,7 +197,7 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                 ],
             ],
@@ -206,7 +206,7 @@ class InvoicerTest extends TestCase
                     [
                         'quantity' => '3.100',
                         'isCHF' => false,
-                        'type' => OrderTypeType::DIGITAL,
+                        'type' => ProductTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product 1',
                             'pricePerUnitCHF' => Money::CHF(275),
@@ -216,7 +216,7 @@ class InvoicerTest extends TestCase
                     [
                         'quantity' => '1',
                         'isCHF' => true,
-                        'type' => OrderTypeType::PAPER,
+                        'type' => ProductTypeType::PAPER,
                         'product' => [
                             'name' => 'My product 2',
                             'pricePerUnitCHF' => Money::CHF(20000),
@@ -231,7 +231,7 @@ class InvoicerTest extends TestCase
                         '0',
                         '868',
                         false,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
@@ -239,7 +239,7 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0',
                         true,
-                        OrderTypeType::PAPER,
+                        ProductTypeType::PAPER,
                     ],
                 ],
             ],
@@ -248,7 +248,7 @@ class InvoicerTest extends TestCase
                     [
                         'quantity' => '1',
                         'isCHF' => true,
-                        'type' => OrderTypeType::DIGITAL,
+                        'type' => ProductTypeType::DIGITAL,
                         'product' => [
                             'name' => 'My product',
                             'pricePerUnitCHF' => Money::CHF(-10000),
@@ -263,7 +263,7 @@ class InvoicerTest extends TestCase
                         '-10000',
                         '0',
                         true,
-                        OrderTypeType::DIGITAL,
+                        ProductTypeType::DIGITAL,
                     ],
                 ],
             ],

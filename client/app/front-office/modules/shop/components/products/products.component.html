@@ -9,7 +9,6 @@
             <div class="product-name">{{ product.name }}</div>
             <app-price [product]="product"></app-price>
             <a mat-stroked-button [routerLink]="['/larevuedurable', 'product', product.id]">Détail</a>
-            <app-add-to-cart [product]="product"></app-add-to-cart>
         </div>
     </div>
 

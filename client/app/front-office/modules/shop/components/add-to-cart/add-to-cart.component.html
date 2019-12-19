@@ -4,7 +4,7 @@
 <app-particle-switch [data]="inCart" *ngIf="clicked">
     <ng-template #template let-data="data">
         <a mat-flat-button color="primary" (click)="click()" *ngIf="!data">{{ label || 'Acheter l\'article'}}</a>
-        <a mat-flat-button color="accent" routerLink="/panier" *ngIf="data">{{ 'Voir le panier' }}</a>
+        <a mat-flat-button color="accent" routerLink="/panier" *ngIf="data">Voir le panier</a>
     </ng-template>
 </app-particle-switch>
 

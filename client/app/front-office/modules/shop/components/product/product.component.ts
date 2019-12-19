@@ -1,12 +1,16 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NaturalAbstractDetail } from '@ecodev/natural';
+import { takeUntil } from 'rxjs/operators';
 import { ProductService } from '../../../../../admin/products/services/product.service';
+import { UserService } from '../../../../../admin/users/services/user.service';
 import {
     CreateProduct,
     CreateProductVariables,
+    CurrentUserForProfile,
     OrderLinesVariables,
     Product,
+    ProductType,
     ProductVariables,
     UpdateProduct,
     UpdateProductVariables,
@@ -29,10 +33,9 @@ export class ProductComponent
 
     public orderLinesVariables: OrderLinesVariables;
 
-    constructor(private productService: ProductService,
-                injector: Injector,
-                private cartService: CartService,
-    ) {
+    public ProductType = ProductType;
+
+    constructor(private productService: ProductService, injector: Injector, private userService: UserService) {
         super('product', productService, injector);
     }
 
@@ -71,8 +74,11 @@ export class ProductComponent
      */
     public formGroup = new FormGroup({quantity: this.quantityForm});
 
+    public viewer: CurrentUserForProfile['viewer'];
+
     ngOnInit(): void {
         super.ngOnInit();
+        this.userService.getViewer().pipe(takeUntil(this.ngUnsubscribe)).subscribe(viewer => this.viewer = viewer);
     }
 
     public computePrice(skipFormat = false): void {

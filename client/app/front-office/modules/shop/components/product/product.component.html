@@ -1,22 +1,50 @@
-<div class="container" fxLayout="column">
+<div class="container" fxLayout="column" fxLayoutGap="60px">
 
     <h1 class="mat-display-1"> {{ data.model.name }}</h1>
 
-    <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="none"></app-file>
-
-    <div class="mat-headline price no-margin-bottom">
-        <app-price [product]="data.model"></app-price>
-    </div>
-    <div>
-        <app-add-to-cart [product]="data.model"></app-add-to-cart>
-
-    </div>
-    <div class="mat-subheading-2">
-        <span style="font-weight:bold">Code d'article :</span>
-        {{ data.model.code }}
+    <div fxLayout.gt-sm="row" fxLayoutGap="60px">
+        <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="33"></app-file>
+        <div class="mat-subheading-2" [innerHTML]="data.model.description" fxFlex></div>
     </div>
 
-    <div class="mat-subheading-2" [innerHTML]="data.model.description"></div>
+    <div fxLayout="column" fxLayoutGap="30px">
+
+        <div *ngIf="!viewer" fxLayout="row wrap" class="mat-subheading-2">
+            <span class="mat-display-1">Intéressé par ce contenu ?</span>
+            <span>Si vous êtes déjà abonnés à la version digitale</span>
+            <a routerLink="/mon-compte"> connectez-vous !</a>
+        </div>
+        <div fxLayout="row" fxLayoutGap="60px">
+            <div>
+                <div class="mat-display-1">Acheter le numéro</div>
+
+                <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="center start">
+
+                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="data.model.type === ProductType.both">
+                        <div class="mat-headline price no-margin-bottom">
+                            <app-price [product]="data.model"></app-price>
+                        </div>
+                        <app-add-to-cart [product]="data.model" [type]="ProductType.paper" label="Acheter la version papier"
+                        ></app-add-to-cart>
+                    </div>
+
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="mat-headline price no-margin-bottom">
+                            <app-price [product]="data.model"></app-price>
+                        </div>
+                        <app-add-to-cart [product]="data.model" [type]="ProductType.digital" label="Acheter la version numérique"
+                        ></app-add-to-cart>
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <h1 class="mat-display-1">S'abonner</h1>
+                ...
+            </div>
+        </div>
+    </div>
 
     <div *ngIf="data.model.permissions?.update">
         <button mat-stroked-button [mat-dialog-close]="['/admin/product', data.model.id]">Administration</button>

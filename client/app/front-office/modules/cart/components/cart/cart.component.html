@@ -23,9 +23,10 @@
                           matListAvatar
                           [routerLink]="['/larevuedurable/product', line.product.id]"
                           matRipple
-
                 ></app-file>
-                <a mat-button [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex>{{ line.product.name }}</a>
+                <a mat-button [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex>
+                    {{ line.product.name }}
+                    , {{ line.type | enum : 'ProductType' | async }}</a>
 
                 <ng-container *ngIf="line.quantity > 1">
                     <app-price [product]="line.product"></app-price>
@@ -37,13 +38,18 @@
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                    <button mat-icon-button mat-raised-button (click)="decrease(line.product)" color="warn" *ngIf="line.quantity === 1">
+                    <button mat-icon-button
+                            mat-raised-button
+                            (click)="decrease(line.product, line.type)"
+                            color="warn"
+                            *ngIf="line.quantity === 1"
+                    >
                         <natural-icon name="delete"></natural-icon>
                     </button>
-                    <button mat-icon-button mat-raised-button (click)="decrease(line.product)" *ngIf="line.quantity > 1">
+                    <button mat-icon-button mat-raised-button (click)="decrease(line.product, line.type)" *ngIf="line.quantity > 1">
                         <natural-icon name="remove"></natural-icon>
                     </button>
-                    <button mat-icon-button mat-raised-button (click)="increase(line.product)">
+                    <button mat-icon-button mat-raised-button (click)="increase(line.product, line.type)">
                         <natural-icon name="add"></natural-icon>
                     </button>
                 </div>

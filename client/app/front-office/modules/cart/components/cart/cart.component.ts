@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { CurrencyManager } from '../../../../../shared/classes/currencyManager';
+import { ProductType } from '../../../../../shared/generated-types';
 import { CartLineProduct, CartService } from '../../services/cart.service';
 
 @Component({
@@ -57,12 +58,12 @@ export class CartComponent implements OnInit {
             });
     }
 
-    public increase(product: CartLineProduct): void {
-        this.cartService.increase(product, 1);
+    public increase(product: CartLineProduct, type: ProductType): void {
+        this.cartService.increase(product, type, 1);
     }
 
-    public decrease(product: CartLineProduct): void {
-        this.cartService.decrease(product, 1);
+    public decrease(product: CartLineProduct, type: ProductType): void {
+        this.cartService.decrease(product, type, 1);
 
     }
 

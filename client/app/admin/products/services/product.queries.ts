@@ -7,6 +7,7 @@ export const productMetaFragment = gql`
         name
         description
         isActive
+        type
         productTags {
             id
             name

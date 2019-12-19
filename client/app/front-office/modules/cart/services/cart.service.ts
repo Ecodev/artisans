@@ -5,7 +5,7 @@ import { fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { OrderService } from '../../../../order/services/order.service';
 import { CurrencyManager } from '../../../../shared/classes/currencyManager';
-import { Product, Products } from '../../../../shared/generated-types';
+import { Product, Products, ProductType } from '../../../../shared/generated-types';
 import { moneyRoundUp } from '../../../../shared/utils';
 
 export type CartLineProduct =
@@ -14,6 +14,7 @@ export type CartLineProduct =
 
 export interface CartLine {
     product: CartLineProduct;
+    type: ProductType;
     quantity: number;
     total: number;
 }
@@ -64,9 +65,9 @@ export class CartService {
         return this.orderService.create(this.cart as any); // whines because of a number is provided instead of a string. TODO : fix
     }
 
-    public increase(product: CartLineProduct, quantity: number) {
+    public increase(product: CartLineProduct, type: ProductType, quantity: number) {
 
-        const line = this.getLineByProduct(product);
+        const line = this.getLineByProduct(product, type);
 
         if (line) {
             line.quantity += quantity;
@@ -75,6 +76,7 @@ export class CartService {
         } else {
             this.cart.push({
                 product: product,
+                type: type,
                 quantity: quantity,
                 total: CartService.getPriceTaxInc(product, quantity),
             });
@@ -83,9 +85,9 @@ export class CartService {
         CartService.persistCart(this.cart);
     }
 
-    public decrease(product: CartLineProduct, quantity: number) {
+    public decrease(product: CartLineProduct, type: ProductType, quantity: number) {
 
-        const line = this.getLineByProduct(product);
+        const line = this.getLineByProduct(product, type);
 
         if (line) {
             const newQuantity = line.quantity - quantity;
@@ -107,8 +109,8 @@ export class CartService {
     /**
      * Return a line from cart where product, quantity are identical
      */
-    public getLineByProduct(product: CartLineProduct): CartLine | undefined {
-        return this.cart.find(line => line.product.id === product.id);
+    public getLineByProduct(product: CartLineProduct, type: ProductType): CartLine | undefined {
+        return this.cart.find(line => line.product.id === product.id && line.type === type);
     }
 
     public remove(product: CartLineProduct) {

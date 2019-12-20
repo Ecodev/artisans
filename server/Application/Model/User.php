@@ -6,6 +6,7 @@ namespace Application\Model;
 
 use Application\Api\Exception;
 use Application\ORM\Query\Filter\AclFilter;
+use Application\Repository\LogRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasNumericCode;
@@ -54,7 +55,9 @@ class User extends AbstractModel
         self::$currentUser = $user;
 
         // Initalize ACL filter with current user if a logged in one exists
-        _em()->getFilters()->getFilter(AclFilter::class)->setUser($user);
+        /** @var AclFilter $aclFilter */
+        $aclFilter = _em()->getFilters()->getFilter(AclFilter::class);
+        $aclFilter->setUser($user);
     }
 
     /**
@@ -486,7 +489,10 @@ class User extends AbstractModel
      */
     public function getFirstLogin(): ?Chronos
     {
-        return _em()->getRepository(Log::class)->getLoginDate($this, true);
+        /** @var LogRepository $logRepository */
+        $logRepository = _em()->getRepository(Log::class);
+
+        return $logRepository->getLoginDate($this, true);
     }
 
     /**
@@ -496,7 +502,10 @@ class User extends AbstractModel
      */
     public function getLastLogin(): ?Chronos
     {
-        return _em()->getRepository(Log::class)->getLoginDate($this, false);
+        /** @var LogRepository $logRepository */
+        $logRepository = _em()->getRepository(Log::class);
+
+        return $logRepository->getLoginDate($this, false);
     }
 
     /**

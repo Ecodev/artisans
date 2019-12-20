@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Application\Action;
 
 use Application\Model\User;
+use Application\Repository\UserRepository;
 use Cake\Chronos\Chronos;
 use Doctrine\ORM\EntityManager;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Template\TemplateRendererInterface;
-use Money\Money;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
@@ -86,7 +86,7 @@ class DatatransAction extends AbstractAction
      * Dispatch the data received from Datatrans to take appropriate actions
      *
      * @param string $status
-     * @param $body
+     * @param array $body
      *
      * @return array
      */
@@ -117,15 +117,12 @@ class DatatransAction extends AbstractAction
     {
         $userId = $body['refno'] ?? null;
 
-        /** @var User $user */
-        $user = $this->entityManager->getRepository(User::class)->getOneById((int) $userId);
+        /** @var UserRepository $userRepository */
+        $userRepository = $this->entityManager->getRepository(User::class);
+        $user = $userRepository->getOneById((int) $userId);
         if (!$user) {
             throw new \Exception('Cannot create transactions without a user');
         }
-
-        $accountRepository = $this->entityManager->getRepository(Account::class);
-        $userAccount = $accountRepository->getOrCreate($user);
-        $bankAccount = $accountRepository->getOneById(AccountRepository::ACCOUNT_ID_FOR_BANK);
 
         if (!array_key_exists('amount', $body)) {
             // Do not support "registrations"
@@ -141,24 +138,6 @@ class DatatransAction extends AbstractAction
         $datatransRef = $body['uppTransactionId'];
         $name = 'Versement en ligne';
 
-        $transaction = new Transaction();
-        $this->entityManager->persist($transaction);
-        $transaction->setName($name);
-        $transaction->setTransactionDate($now);
-        $transaction->setDatatransRef($datatransRef);
-
-        // This could be removed later on. For now it's mostly for debugging
-        $transaction->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
-
-        $line = new TransactionLine();
-        $this->entityManager->persist($line);
-        $line->setName($name);
-        $line->setTransactionDate($now);
-        $line->setBalance(Money::CHF($body['amount']));
-        $line->setTransaction($transaction);
-        $line->setCredit($userAccount);
-        $line->setDebit($bankAccount);
-
-        $this->entityManager->flush();
+        // TODO: something useful here...
     }
 }

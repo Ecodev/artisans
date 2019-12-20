@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductType } from '../../../../../shared/generated-types';
-import { CartLine, CartService } from '../../../cart/services/cart.service';
+import { CartLineProduct } from '../../../cart/classes/cart';
+import { CartService } from '../../../cart/services/cart.service';
 
 @Component({
     selector: 'app-add-to-cart',
@@ -17,7 +18,7 @@ export class AddToCartComponent implements OnInit {
     /**
      * Product to add to cart
      */
-    @Input() product: CartLine['product'];
+    @Input() product: CartLineProduct;
 
     /**
      * Type variant to add to cart
@@ -27,14 +28,14 @@ export class AddToCartComponent implements OnInit {
     public inCart = false;
     public clicked = false;
 
-    constructor(public cartService: CartService) {
+    constructor() {
     }
 
     ngOnInit() {
     }
 
     public click() {
-        this.cartService.increase(this.product, this.type, 1);
+        CartService.globalCart.increase(this.product, this.type, 1);
         this.clicked = true; // first show particle component
         setTimeout(() => this.inCart = true); // then change it's value to cause animation
     }

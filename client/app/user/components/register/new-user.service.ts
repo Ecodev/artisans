@@ -16,9 +16,8 @@ export class NewUserService extends AnonymousUserService {
     constructor(apollo: Apollo,
                 router: Router,
                 permissionsService: PermissionsService,
-                cartService: CartService,
     ) {
-        super(apollo, router, permissionsService, cartService);
+        super(apollo, router, permissionsService);
     }
 
     protected getDefaultForClient(): Literal {

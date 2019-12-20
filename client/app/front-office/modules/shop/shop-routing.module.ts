@@ -4,6 +4,7 @@ import { ProductTagByNameResolver } from '../../../admin/product-tags/services/p
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent, ProductsViewMode } from './components/products/products.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 const routes: Routes = [
         {
@@ -45,7 +46,10 @@ const routes: Routes = [
                 product: ProductResolver,
             },
         },
-
+        {
+            path: 'abonnements',
+            component: SubscriptionsComponent,
+        },
     ]
 ;
 

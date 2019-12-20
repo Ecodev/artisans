@@ -15,6 +15,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../../../shared/generated-types';
+import { Cart } from '../../../cart/classes/cart';
 import { CartService } from '../../../cart/services/cart.service';
 
 @Component({
@@ -60,7 +61,7 @@ export class ProductComponent
     public price = 0;
 
     /**
-     * Stores DialogTriggerComponent actuvated route snapshot
+     * Stores DialogTriggerComponent activated route snapshot
      */
     private routeSnapshot;
 
@@ -96,7 +97,7 @@ export class ProductComponent
             }
         }
 
-        this.price = CartService.getPriceTaxInc(this.data.model, this.quantityForm.value);
+        this.price = Cart.getPriceTaxInc(this.data.model, this.quantityForm.value);
     }
 
 }

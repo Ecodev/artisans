@@ -7,6 +7,10 @@ const routes: Routes = [
         path: '',
         component: CartComponent,
     },
+    {
+        path: ':cartId',
+        component: CartComponent,
+    },
 ];
 
 @NgModule({

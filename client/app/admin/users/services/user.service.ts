@@ -1,28 +1,13 @@
 import { Injectable } from '@angular/core';
+import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, NaturalValidators } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { Observable, of, Subject } from 'rxjs';
 import { DataProxy } from 'apollo-cache';
+import gql from 'graphql-tag';
+import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    Literal,
-    NaturalAbstractModelService,
-    NaturalFormControl,
-    NaturalValidators,
-} from '@ecodev/natural';
-import {
-    createUser,
-    currentUserForProfileQuery,
-    loginMutation,
-    logoutMutation,
-    nextCodeAvailableQuery,
-    unregisterMutation,
-    updateUser,
-    userByTokenQuery,
-    userQuery,
-    usersQuery,
-} from './user.queries';
+import { CartService } from '../../../front-office/modules/cart/services/cart.service';
 import {
     CreateUser,
     CreateUserVariables,
@@ -44,11 +29,19 @@ import {
     UsersVariables,
     UserVariables,
 } from '../../../shared/generated-types';
-import { Router } from '@angular/router';
-import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { PermissionsService } from '../../../shared/services/permissions.service';
-import gql from 'graphql-tag';
-import { CartService } from '../../../front-office/modules/cart/services/cart.service';
+import {
+    createUser,
+    currentUserForProfileQuery,
+    loginMutation,
+    logoutMutation,
+    nextCodeAvailableQuery,
+    unregisterMutation,
+    updateUser,
+    userByTokenQuery,
+    userQuery,
+    usersQuery,
+} from './user.queries';
 
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
     const value = control.value || '';
@@ -81,9 +74,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
     constructor(apollo: Apollo,
                 protected router: Router,
-                private permissionsService: PermissionsService,
-                private cartService: CartService,
-    ) {
+                private permissionsService: PermissionsService) {
         super(apollo,
             'user',
             userQuery,
@@ -167,7 +158,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                     this.permissionsService.setUser(login);
 
                     // Be sure that we don't have leftovers from another user
-                    this.cartService.empty();
+                    CartService.globalCart.empty();
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);
         });

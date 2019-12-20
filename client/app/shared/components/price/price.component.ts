@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NaturalAbstractController } from '@ecodev/natural';
 import { takeUntil } from 'rxjs/operators';
-import { CartLineProduct } from '../../../front-office/modules/cart/services/cart.service';
+import { CartLineProduct } from '../../../front-office/modules/cart/classes/cart';
 import { Currency, CurrencyManager } from '../../classes/currencyManager';
 
 @Component({

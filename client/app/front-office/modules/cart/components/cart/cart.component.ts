@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { CurrencyManager } from '../../../../../shared/classes/currencyManager';
 import { ProductType } from '../../../../../shared/generated-types';
-import { CartLineProduct, CartService } from '../../services/cart.service';
+import { Cart, CartLineProduct } from '../../classes/cart';
+import {  CartService } from '../../services/cart.service';
 
 @Component({
     selector: 'app-cart',
@@ -24,24 +25,37 @@ export class CartComponent implements OnInit {
      */
     public CurrencyManager = CurrencyManager;
 
-    constructor(public cartService: CartService, public alertService: NaturalAlertService, public router: Router) {
+    public cart: Cart;
+
+    constructor(public cartService: CartService,
+                public alertService: NaturalAlertService,
+                public router: Router,
+                private route: ActivatedRoute) {
 
     }
 
     public ngOnInit(): void {
+        if (this.route.snapshot.params['cartId']) {
+            const cart = Cart.getById(+this.route.snapshot.params['cartId']);
+            if (cart) {
+                this.cart = cart;
+            }
+        } else {
+            this.cart = CartService.globalCart;
+        }
     }
 
     public createOrder() {
         this.alertService
             .confirm('Valider l\'achat',
-                'Veuillez confirmer votre achat de ' + CartService.totalTaxInc.toFixed(2) + ' CHF',
+                'Veuillez confirmer votre achat de ' + this.cart.totalTaxInc.toFixed(2) + ' CHF',
                 'Confirmer')
             .subscribe(
                 confirm => {
                     if (confirm) {
-                        this.cartService.save().subscribe(() => {
+                        this.cartService.save(this.cart).subscribe(() => {
                             this.alertService.info('Votre commande a bien été enregistrée');
-                            this.cartService.empty();
+                            this.cart.empty();
                         });
                     }
                 });
@@ -53,17 +67,17 @@ export class CartComponent implements OnInit {
             .confirm('Vider le panier', 'Êtes-vous sûr de vouloir vider le panier ? Cette action est irréversible.', 'Vider le panier')
             .subscribe(confirm => {
                 if (confirm) {
-                    this.cartService.empty();
+                    this.cart.empty();
                 }
             });
     }
 
     public increase(product: CartLineProduct, type: ProductType): void {
-        this.cartService.increase(product, type, 1);
+        this.cart.increase(product, type, 1);
     }
 
     public decrease(product: CartLineProduct, type: ProductType): void {
-        this.cartService.decrease(product, type, 1);
+        this.cart.decrease(product, type, 1);
 
     }
 

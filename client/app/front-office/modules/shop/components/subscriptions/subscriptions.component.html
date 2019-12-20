@@ -1,0 +1,10 @@
+<div class="container">
+
+    <h1 class="mat-display-1">S'abonner</h1>
+    <div fxLayout="row" fxLayoutGap="30px">
+        <a mat-stroked-button (click)="subscribe('19000', ProductType.paper)">S'abonner standard papier</a>
+        <a mat-stroked-button (click)="subscribe('19001', ProductType.digital)">S'abonner standard numerique</a>
+        <a mat-stroked-button (click)="subscribe('19002', ProductType.both)">S'abonner standard numerique + papier</a>
+    </div>
+
+</div>

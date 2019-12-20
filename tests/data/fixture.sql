@@ -62,5 +62,12 @@ REPLACE INTO `configuration` (id, `key`, `value`) VALUES
 (18010, 'home-block-3-button-label', 'Label bouton bloc 3'),
 (18011, 'home-block-3-button-link', '/larevuedurable/articles');
 
+REPLACE INTO subscription (id, is_active, image_id, price_per_unit_chf, price_per_unit_eur, name, code, type, description) VALUES
+(19000, 1, NULL, 5500, 4000, 'Abonnement standard papier', 'abo-papier', 'paper', 'Aenean lacinia bibendum nulla sed consectetur.Aenean lacinia bibendum nulla sed consectetur.'),
+(19001, 1, NULL, 8000, 5000, 'Abonnement standard numérique', 'abo-web', 'digital', 'Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
+(19002, 1, NULL, 10500, 7000, 'Abonnement standard papier et numérique', 'abo-web-papier', 'both', 'Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+(19003, 1, NULL, 6500, 4500, 'Abonnement institutionnel papier', 'abo-pro-papier', 'paper', 'Aenean lacinia bibendum nulla sed consectetur.Aenean lacinia bibendum nulla sed consectetur.'),
+(19004, 1, NULL, 16000, 10000, 'Abonnement institutionnel numérique', 'abo-pro-web', 'digital', 'Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
+(19005, 1, NULL, 18500, 12000, 'Abonnement institutionnel papier et numérique', 'abo-pro-web-papier', 'both', 'Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
 COMMIT;

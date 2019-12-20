@@ -6,12 +6,16 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
 import { ProductComponent } from './components/product/product.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ShopRoutingModule } from './shop-routing.module';
+import { SubscribeComponent } from './components/subscribe/subscribe.component';
+import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 @NgModule({
     declarations: [
         ProductComponent,
         AddToCartComponent,
         ProductsComponent,
+        SubscribeComponent,
+        SubscriptionsComponent,
     ],
     imports: [
         CommonModule,

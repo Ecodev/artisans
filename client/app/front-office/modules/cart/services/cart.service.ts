@@ -28,6 +28,8 @@ export class CartService {
             }),
         ).subscribe();
 
+        // On currency change, update carts totals
+        CurrencyManager.current.subscribe(() => Cart.carts.forEach(cart => cart.computeTotals()));
     }
 
     public static get globalCart(): Cart {

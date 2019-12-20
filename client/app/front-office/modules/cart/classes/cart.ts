@@ -137,6 +137,9 @@ export class Cart {
     }
 
     public computeTotals() {
-        this.totalTaxInc = this.lines.reduce((a, line) => a + line.totalTaxInc, 0);
+        this.totalTaxInc = this.lines.reduce((a, line) => {
+            line.totalTaxInc = Cart.getPriceTaxInc(line.product, line.quantity); // update line total
+            return a + line.totalTaxInc; // stack for cart total
+        }, 0);
     }
 }

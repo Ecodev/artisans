@@ -41,7 +41,7 @@ return [
                 'balanceEUR' => '0.00',
                 'type' => ProductTypeType::DIGITAL,
                 'order' => [
-                    'balanceCHF' => '200.00',
+                    'balanceCHF' => '215.00',
                     'balanceEUR' => '0.00',
                 ],
             ],

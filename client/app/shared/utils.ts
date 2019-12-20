@@ -1,5 +1,6 @@
 import Decimal from 'decimal.js';
 
+// todo : drop decimaljs ?
 export function moneyRoundUp(amount: number): number {
     return Math.ceil(+Decimal.mul(amount, 100)) / 100;
 }

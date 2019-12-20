@@ -21,7 +21,6 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.subscriptionService.getAll(new NaturalQueryVariablesManager()).subscribe(res => this.subscriptions = keyBy(res.items, 'id'));
     }
 

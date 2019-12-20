@@ -63,6 +63,7 @@ export class Cart {
      * todo : update on currency change ?
      */
     public static getPriceTaxInc(product: CartLineProduct, quantity: number): number {
+        // todo : drop decimaljs ?
         const quantifiedPrice = Decimal.mul(CurrencyManager.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
     }

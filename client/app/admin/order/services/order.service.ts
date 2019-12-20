@@ -3,7 +3,7 @@ import { Literal, NaturalAbstractModelService, NaturalQueryVariablesManager } fr
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CreateOrder, CreateOrderVariables, Order, Orders, OrdersVariables, OrderVariables } from '../../shared/generated-types';
+import { CreateOrder, CreateOrderVariables, Order, Orders, OrdersVariables, OrderVariables } from '../../../shared/generated-types';
 import { OrderLineService } from './order-lines.service';
 import { createOrder, orderQuery, ordersQuery } from './order.queries';
 

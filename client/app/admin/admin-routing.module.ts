@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderLineComponent } from '../order/order-line/order-line.component';
-import { OrderComponent } from '../order/order/order.component';
-import { OrdersComponent } from '../order/orders/orders.component';
-import { OrderLineResolver } from '../order/services/order-line.resolver';
-import { OrderResolver } from '../order/services/order.resolver';
-import { DialogTriggerComponent } from '../shared/components/modal-trigger/dialog-trigger.component';
+import { NaturalDialogTriggerComponent } from '@ecodev/natural';
+import { OrderLineComponent } from './order/order-line/order-line.component';
+import { OrderComponent } from './order/order/order.component';
+import { OrdersComponent } from './order/orders/orders.component';
+import { OrderLineResolver } from './order/services/order-line.resolver';
+import { OrderResolver } from './order/services/order.resolver';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
 import { AdminComponent } from './admin/admin.component';
 import { EventComponent } from './events/event/event.component';
@@ -124,7 +124,7 @@ const routes: Routes = [
                     children: [
                         {
                             path: ':orderId',
-                            component: DialogTriggerComponent,
+                            component: NaturalDialogTriggerComponent,
                             resolve: {
                                 order: OrderResolver,
                             },
@@ -139,7 +139,7 @@ const routes: Routes = [
                         },
                         {
                             path: 'order-line/:orderLineId',
-                            component: DialogTriggerComponent,
+                            component: NaturalDialogTriggerComponent,
                             resolve: {
                                 orderLine: OrderLineResolver,
                             },

@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogTriggerProvidedData } from '../../shared/components/modal-trigger/dialog-trigger.component';
-import { OrderLinesVariables } from '../../shared/generated-types';
+import { NaturalDialogTriggerProvidedData } from '@ecodev/natural';
+import { OrderLinesVariables } from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-order',
@@ -14,7 +14,7 @@ export class OrderComponent implements OnInit {
 
     public data;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public dialogData: DialogTriggerProvidedData) {
+    constructor(@Optional() @Inject(MAT_DIALOG_DATA) public dialogData: NaturalDialogTriggerProvidedData) {
 
         this.data = dialogData.activatedRoute.snapshot.data.order;
 

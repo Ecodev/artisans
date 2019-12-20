@@ -17,8 +17,7 @@
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
                     <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="lines">Entrées</span>
-                    <span naturalColumnsPickerColumn="balanceCHF">Total (CHF)</span>
-                    <span naturalColumnsPickerColumn="balanceEUR">Total (EUR)</span>
+                    <span naturalColumnsPickerColumn="balance">Total</span>
                 </natural-columns-picker>
             </natural-search>
         </div>
@@ -35,7 +34,9 @@
                     <td mat-cell *matCellDef="let element">
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
                             <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
-                            <natural-table-button [label]="element.owner?.name" [navigate]="['/admin/user', element.owner?.id]" matTooltip="Éditer"
+                            <natural-table-button [label]="element.owner?.name"
+                                                  [navigate]="['/admin/user', element.owner?.id]"
+                                                  matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>
@@ -46,30 +47,28 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
                     <td mat-cell *matCellDef="let element">
                         <natural-table-button [label]="element.creationDate | date: 'd MMM y - HH:mm'"
-                                              [navigate]="['/admin', 'order', element.id]"
+                                              [navigate]="[element.id]"
                                               matTooltip="Éditer"
-                        ></natural-table-button></td>
+                        ></natural-table-button>
+                    </td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
                 <ng-container matColumnDef="lines">
-                    <th mat-header-cell *matHeaderCellDef >Entrées</th>
+                    <th mat-header-cell *matHeaderCellDef>Entrées</th>
                     <td mat-cell *matCellDef="let element">{{ element.orderLines.length }}</td>
                     <td mat-footer-cell *matFooterCellDef></td>
                 </ng-container>
 
-                <ng-container matColumnDef="balanceCHF">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column natural-align-right>Total (CHF)</th>
-                    <td mat-cell *matCellDef="let element" natural-align-right>{{ element.balanceCHF | currency : 'CHF' }}</td>
+                <ng-container matColumnDef="balance">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column natural-align-right>Total</th>
+                    <td mat-cell *matCellDef="let element" natural-align-right>
+                        <ng-container *ngIf="element.balanceCHF > 0">{{ element.balanceCHF  | currency : 'CHF' }}</ng-container>
+                        <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
+                    </td>
                     <td mat-footer-cell *matFooterCellDef natural-align-right>
                         <span *ngIf="dataSource?.data.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="balanceEUR">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column natural-align-right>Total (EUR)</th>
-                    <td mat-cell *matCellDef="let element" natural-align-right>{{ element.balanceEur | currency : 'EUR' }}</td>
-                    <td mat-footer-cell *matFooterCellDef natural-align-right>
+                        <ng-container *ngIf="dataSource?.data.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -</ng-container>
                         <span *ngIf="dataSource?.data.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
                     </td>
                 </ng-container>

@@ -59,10 +59,6 @@
 
         <div fxLayout="row" fxLayoutAlign="end">
             <div class="mat-body-1 padding totals natural-table">
-                <div *ngIf="cart.totalTaxes">
-                    <span class="mat-body-2">TVA :</span>
-                    <span>{{ cart.totalTaxes | currency : CurrencyManager.current.value }}</span>
-                </div>
                 <div>
                     <span class="mat-body-2">Total TTC :</span>
                     <span class="mat-body-2">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</span>

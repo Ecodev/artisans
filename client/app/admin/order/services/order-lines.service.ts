@@ -11,7 +11,7 @@ import {
     ProductType,
     UpdateOrderLine,
     UpdateOrderLineVariables,
-} from '../../shared/generated-types';
+} from '../../../shared/generated-types';
 import { orderLineQuery, orderLinesQuery, updateOrderLine } from './order-lines.queries';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
-import { OrderModule } from '../order/order.module';
+import { OrderModule } from '../admin/order/order.module';
 import { ProfileModule } from '../profile/profile.module';
 import { ArtisansModule } from '../shared/modules/artisans.module';
 import { MaterialModule } from '../shared/modules/material.module';

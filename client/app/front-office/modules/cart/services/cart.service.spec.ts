@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { NaturalAlertService } from '@ecodev/natural';
-import { OrderService } from '../../../../order/services/order.service';
+import { OrderService } from '../../../../admin/order/services/order.service';
 import { Product } from '../../../../shared/generated-types';
 import { CartLine, CartService } from './cart.service';
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { NaturalAlertService } from '@ecodev/natural';
 import { fromEvent } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { OrderService } from '../../../../order/services/order.service';
+import { OrderService } from '../../../../admin/order/services/order.service';
 import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
 import { OrderLineInput } from '../../../../shared/generated-types';
 import { Cart } from '../classes/cart';

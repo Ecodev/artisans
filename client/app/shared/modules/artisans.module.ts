@@ -6,7 +6,7 @@ import {
     NaturalAlertModule,
     NaturalColumnsPickerModule,
     NaturalCommonModule,
-    NaturalDetailHeaderModule,
+    NaturalDetailHeaderModule, NaturalDialogTriggerModule,
     NaturalDropdownComponentsModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
@@ -30,7 +30,6 @@ import { AddressComponent } from '../components/address/address.component';
 import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
-import { DialogTriggerComponent } from '../components/modal-trigger/dialog-trigger.component';
 import { MoneyComponent } from '../components/money/money.component';
 import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
 import { PriceComponent } from '../components/price/price.component';
@@ -112,7 +111,6 @@ const declarations = [
     FileDropDirective,
     FileComponent,
     ParticleSwitchComponent,
-    DialogTriggerComponent,
     UsersComponent,
     ProductsComponent,
     ProductTagsNavigationComponent,
@@ -143,6 +141,7 @@ const imports = [
     NaturalFixedButtonModule,
     NaturalFixedButtonDetailModule,
     NaturalDropdownComponentsModule,
+    NaturalDialogTriggerModule
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ErrorService } from '../../shared/components/error/error.service';
+import { ErrorService } from '../../../shared/components/error/error.service';
 import { OrderLineService } from './order-lines.service';
 import { OrderLineResolve } from '../order-line';
 

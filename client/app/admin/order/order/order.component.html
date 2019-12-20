@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>
+    Achats du {{ data.model.creationDate | date: 'd MMM y - HH:mm' }}
+</h2>
+
+<mat-dialog-content>
+    <app-order-lines [contextVariables]="contextVariables" [contextColumns]="['quantity', 'name', 'balance']"
+    ></app-order-lines>
+
+    <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
+        <div class="mat-headline">
+            <div>Total :</div>
+            <div style="text-align:right" *ngIf="data.model.balanceCHF > 0">{{ data.model.balanceCHF | currency : 'CHF' }}</div>
+            <div style="text-align:right" *ngIf="data.model.balanceEUR > 0">{{ data.model.balanceEUR | currency : 'EUR' }}</div>
+        </div>
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+    <button mat-button mat-dialog-close>Fermer</button>
+</mat-dialog-actions>

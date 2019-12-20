@@ -12,8 +12,8 @@ class Version20191218115030 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE order_line CHANGE type type ENUM(\'paper\', \'digital\') NOT NULL COMMENT \'(DC2Type:ProductType)\'');
-        $this->addSql('ALTER TABLE product ADD type ENUM(\'paper\', \'digital\') NOT NULL COMMENT \'(DC2Type:ProductType)\'');
+        $this->addSql('ALTER TABLE order_line CHANGE type type ENUM(\'paper\', \'digital\', \'both\') NOT NULL COMMENT \'(DC2Type:ProductType)\'');
+        $this->addSql('ALTER TABLE product ADD type ENUM(\'paper\', \'digital\', \'both\') NOT NULL COMMENT \'(DC2Type:ProductType)\'');
         $this->addSql('ALTER TABLE user_product CHANGE type type ENUM(\'paper\', \'digital\') NOT NULL COMMENT \'(DC2Type:ProductType)\'');
         $this->addSql('DROP TABLE user_product');
         $this->addSql('ALTER TABLE subscription CHANGE type type ENUM(\'paper\', \'digital\', \'both\') NOT NULL COMMENT \'(DC2Type:ProductType)\'');

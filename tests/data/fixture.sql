@@ -10,10 +10,10 @@ REPLACE INTO image (id, filename, width, height, mime) VALUES
 (5001, 'transport.jpg', 840, 466, 'image/jpeg'),
 (5002, 'train.jpg', 832, 468, 'image/jpeg');
 
-REPLACE INTO product (id, is_active, image_id, price_per_unit_chf, price_per_unit_eur, name, code, description) VALUES
-(3000, 1, 5000, 1000, 1500, 'Revue printemps 2019', '2019-01', 'Des article intéressants sur le jardinage assisté par ordinateur'),
-(3001, 1, 5001, 1000, 1500, 'Revue été 2019', '2019-02', 'La révolution des transports en commun'),
-(3002, 1, 5002, 500, 550, 'Article individuel', '2019-02-02', 'Pourquoi le train est-il plus rapide ?');
+REPLACE INTO product (id, is_active, image_id, price_per_unit_chf, price_per_unit_eur, name, code, type, description) VALUES
+(3000, 1, 5000, 1000, 1500, 'Revue printemps 2019', '2019-01', 'both', 'Des article intéressants sur le jardinage assisté par ordinateur'),
+(3001, 1, 5001, 1000, 1500, 'Revue été 2019', '2019-02', 'both', 'La révolution des transports en commun'),
+(3002, 1, 5002, 500, 550, 'Article individuel', '2019-02-02', 'digital', 'Pourquoi le train est-il plus rapide ?');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6002, 3000),

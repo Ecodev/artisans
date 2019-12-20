@@ -1,19 +1,19 @@
 <div [formGroup]="form" class="detail-body">
 
-    <natural-detail-header newLabel="Nouveau tag d'utilisateur"
-                       label="Tag d'utilisateur"
-                       [model]="data.model"
-                       [listRoute]="['admin', 'user-tag']"
+    <natural-detail-header [listRoute]="['admin', 'user-tag']"
+                           [model]="data.model"
+                           label="Tag d'utilisateur"
+                           newLabel="Nouveau tag d'utilisateur"
     ></natural-detail-header>
 
-    <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
+    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">
-            <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
+            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
                         <mat-form-field>
-                            <input matInput formControlName="name" (change)="update()">
+                            <input (change)="update()" formControlName="name" matInput>
                             <mat-label>Nom</mat-label>
                             <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
                                 Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
@@ -26,14 +26,15 @@
 
                         <div *ngIf="data.model.id">
                             <h2 class="mat-title">Utilisateurs tagués</h2>
-                            <natural-relations [main]="data.model"
-                                           [service]="userService"
-                                           [filter]="{groups: [{conditions: [{userTags: {have: {values: [data.model.id]}}}]}]}"
-                                           placeholder="Taguer un utilisateur"
+                            <natural-relations [filter]="{groups: [{conditions: [{userTags: {have: {values: [data.model.id]}}}]}]}"
+                                               [main]="data.model"
+                                               [service]="userService"
+                                               placeholder="Taguer un utilisateur"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <natural-table-button [navigate]="['/admin/user/', item.id]" [label]="item.name"></natural-table-button>
+                                        <natural-table-button [label]="item.name" [navigate]="['/admin/user/', item.id]"
+                                        ></natural-table-button>
                                     </div>
                                 </ng-template>
                             </natural-relations>
@@ -41,7 +42,7 @@
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
-                        <input matInput type="color" formControlName="color" (change)="update()" style="height:50px; width:50px;">
+                        <input (change)="update()" formControlName="color" matInput style="height:50px; width:50px;" type="color">
                     </div>
                 </div>
 
@@ -52,7 +53,7 @@
 
     </mat-tab-group>
 
-    <natural-fixed-button-detail *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"
     ></natural-fixed-button-detail>
 
 </div>

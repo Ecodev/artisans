@@ -6,7 +6,8 @@ import {
     NaturalAlertModule,
     NaturalColumnsPickerModule,
     NaturalCommonModule,
-    NaturalDetailHeaderModule, NaturalDialogTriggerModule,
+    NaturalDetailHeaderModule,
+    NaturalDialogTriggerModule,
     NaturalDropdownComponentsModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
@@ -141,7 +142,7 @@ const imports = [
     NaturalFixedButtonModule,
     NaturalFixedButtonDetailModule,
     NaturalDropdownComponentsModule,
-    NaturalDialogTriggerModule
+    NaturalDialogTriggerModule,
 ];
 
 @NgModule({

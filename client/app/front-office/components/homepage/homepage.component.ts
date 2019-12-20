@@ -4,7 +4,6 @@ import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { EventService } from '../../../admin/events/services/event.service';
 import { NewsService } from '../../../admin/newses/services/news.service';
 import { UserService } from '../../../admin/users/services/user.service';
-import { PermissionsService } from '../../../shared/services/permissions.service';
 import {
     Events_events_items,
     EventSortingField,
@@ -14,6 +13,7 @@ import {
     NewsSortingField,
     SortingOrder,
 } from '../../../shared/generated-types';
+import { PermissionsService } from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-homepage',

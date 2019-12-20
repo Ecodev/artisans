@@ -2,7 +2,6 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail, NaturalDataSource } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { ProductService } from '../../../admin/products/services/product.service';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
 import { AnonymousUserService } from './anonymous-user.service';
 

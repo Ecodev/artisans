@@ -38,6 +38,9 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
         pSpeed: 0.5,
     };
 
+    constructor(private rootElement: ElementRef) {
+    }
+
     @Input() set data(value: any) {
 
         if (!this.showData1) {
@@ -63,9 +66,6 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
 
         this.updateSize();
         this.firstDisplay = false;
-    }
-
-    constructor(private rootElement: ElementRef) {
     }
 
     public ngOnInit(): void {

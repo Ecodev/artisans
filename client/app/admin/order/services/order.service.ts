@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Literal, NaturalAbstractModelService, NaturalQueryVariablesManager } from '@ecodev/natural';
+import { Literal, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { CreateOrder, CreateOrderVariables, Order, Orders, OrdersVariables, OrderVariables } from '../../../shared/generated-types';
 import { OrderLineService } from './order-lines.service';
 import { createOrder, orderQuery, ordersQuery } from './order.queries';

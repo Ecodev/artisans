@@ -91,33 +91,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return [UserRole.facilitator, UserRole.administrator].includes(user.role);
     }
 
-    protected getDefaultForServer(): UserInput {
-        return {
-            login: '',
-            email: null,
-            firstName: '',
-            lastName: '',
-            street: '',
-            postcode: '',
-            locality: '',
-            role: UserRole.member,
-            phone: '',
-            code: null,
-            url: '',
-            internalRemarks: '',
-            owner: null,
-            membershipBegin: null,
-            membershipEnd: null,
-            subscriptionBegin: null,
-            subscriptionType: null,
-            webTemporaryAccess: false,
-        };
-    }
-
-    protected getDefaultForClient(): Literal {
-        return {};
-    }
-
     public getFormValidators(): FormValidators {
         return {
             login: [Validators.required, LoginValidatorFn],
@@ -208,29 +181,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
     }
 
     /**
-     * This function caches the viewer for short duration
-     *
-     * This feature responds to two needs :
-     *   - Expire viewer to allow re-resolve for key pages
-     *     - Profile : in cache status or account balance has change
-     *     - Doors : in case permissions have changed
-     *     - Admin : in cache permissions have changed
-     *
-     *   - Serve from cache to prevent duplicate query calls when multiple services initialization queue (preventing batching):
-     *     - Route Guards, then
-     *     - Resolvers, then
-     *     - Components initialization
-     *
-     * This is kind of easiest possible "debounce" like with expiration feature
-     */
-    private cacheViewer(user) {
-        this.viewerCache = user;
-        setTimeout(() => {
-            this.viewerCache = null;
-        }, 1000);
-    }
-
-    /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
     public resolveViewer(): Observable<{ model: CurrentUserForProfile['viewer'] }> {
@@ -285,6 +235,56 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                 login: login,
             },
         });
+    }
+
+    protected getDefaultForServer(): UserInput {
+        return {
+            login: '',
+            email: null,
+            firstName: '',
+            lastName: '',
+            street: '',
+            postcode: '',
+            locality: '',
+            role: UserRole.member,
+            phone: '',
+            code: null,
+            url: '',
+            internalRemarks: '',
+            owner: null,
+            membershipBegin: null,
+            membershipEnd: null,
+            subscriptionBegin: null,
+            subscriptionType: null,
+            webTemporaryAccess: false,
+        };
+    }
+
+    protected getDefaultForClient(): Literal {
+        return {};
+    }
+
+    /**
+     * This function caches the viewer for short duration
+     *
+     * This feature responds to two needs :
+     *   - Expire viewer to allow re-resolve for key pages
+     *     - Profile : in cache status or account balance has change
+     *     - Doors : in case permissions have changed
+     *     - Admin : in cache permissions have changed
+     *
+     *   - Serve from cache to prevent duplicate query calls when multiple services initialization queue (preventing batching):
+     *     - Route Guards, then
+     *     - Resolvers, then
+     *     - Components initialization
+     *
+     * This is kind of easiest possible "debounce" like with expiration feature
+     */
+    private cacheViewer(user) {
+        this.viewerCache = user;
+        setTimeout(() => {
+            this.viewerCache = null;
+        }, 1000);
     }
 
 }

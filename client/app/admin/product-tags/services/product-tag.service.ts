@@ -45,13 +45,6 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
             deleteProductTags);
     }
 
-    protected getDefaultForServer(): ProductTagInput {
-        return {
-            name: '',
-            color: '',
-        };
-    }
-
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
@@ -68,6 +61,13 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
         const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
         qvm.set('variables', {filter: {groups: [{conditions: [{name: {equal: {value: name}}}]}]}});
         return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));
+    }
+
+    protected getDefaultForServer(): ProductTagInput {
+        return {
+            name: '',
+            color: '',
+        };
     }
 
 }

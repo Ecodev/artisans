@@ -14,11 +14,11 @@ import {
     CreateSubscription,
     CreateSubscriptionVariables,
     DeleteSubscriptions,
+    ProductType,
     Subscription,
     SubscriptionInput,
     Subscriptions,
     SubscriptionsVariables,
-    ProductType,
     SubscriptionVariables,
     UpdateSubscription,
     UpdateSubscriptionVariables,
@@ -46,20 +46,6 @@ export class SubscriptionService extends NaturalAbstractModelService<Subscriptio
             createSubscription,
             updateSubscription,
             deleteSubscriptions);
-    }
-
-    protected getDefaultForServer(): SubscriptionInput {
-        return {
-            name: '',
-            code: null,
-            description: '',
-            pricePerUnitCHF: '0',
-            pricePerUnitEUR: '0',
-            internalRemarks: '',
-            isActive: true,
-            image: null,
-            type: ProductType.digital,
-        };
     }
 
     public getFormValidators(): FormValidators {
@@ -92,6 +78,20 @@ export class SubscriptionService extends NaturalAbstractModelService<Subscriptio
             return of({model: null});
         }
 
+    }
+
+    protected getDefaultForServer(): SubscriptionInput {
+        return {
+            name: '',
+            code: null,
+            description: '',
+            pricePerUnitCHF: '0',
+            pricePerUnitEUR: '0',
+            internalRemarks: '',
+            isActive: true,
+            image: null,
+            type: ProductType.digital,
+        };
     }
 
 }

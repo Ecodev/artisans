@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ErrorService } from '../../../shared/components/error/error.service';
-import { ProductTagService } from './product-tag.service';
 import { ProductTagResolve } from '../productTag';
+import { ProductTagService } from './product-tag.service';
 
 @Injectable({
     providedIn: 'root',

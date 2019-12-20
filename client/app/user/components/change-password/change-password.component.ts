@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Apollo } from 'apollo-angular';
-import { NaturalAlertService } from '@ecodev/natural';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NaturalAlertService } from '@ecodev/natural';
+import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { NetworkActivityService } from '../../../shared/services/network-activity.service';
 
@@ -13,9 +13,9 @@ import { NetworkActivityService } from '../../../shared/services/network-activit
 })
 export class ChangePasswordComponent {
 
-    private readonly token: string;
     public readonly form: FormGroup;
     public sending = false;
+    private readonly token: string;
 
     constructor(route: ActivatedRoute,
                 private apollo: Apollo,

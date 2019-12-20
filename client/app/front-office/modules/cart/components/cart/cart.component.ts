@@ -4,7 +4,7 @@ import { NaturalAlertService } from '@ecodev/natural';
 import { CurrencyManager } from '../../../../../shared/classes/currencyManager';
 import { ProductType } from '../../../../../shared/generated-types';
 import { Cart, CartLineProduct } from '../../classes/cart';
-import {  CartService } from '../../services/cart.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
     selector: 'app-cart',

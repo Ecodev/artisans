@@ -5,7 +5,6 @@ export function moneyRoundUp(amount: number): number {
     return Math.ceil(+Decimal.mul(amount, 100)) / 100;
 }
 
-
 /**
  * Copy text to clipboard.
  * Accepts line breaks \n as textarea do.

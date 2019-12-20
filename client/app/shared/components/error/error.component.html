@@ -3,7 +3,7 @@
     <div fxLayout="column" fxLayoutGap="30px">
 
         <h1 class="mat-display-1">
-            <natural-icon name="mood_bad" [size]="60"></natural-icon>
+            <natural-icon [size]="60" name="mood_bad"></natural-icon>
             Oups, une erreur est survenue
         </h1>
 
@@ -14,7 +14,7 @@
         <div></div>
 
         <div fxLayout="row" fxLayoutAlign="center">
-            <a mat-button mat-raised-button color="primary" [routerLink]="['/']">Retourner au menu</a>
+            <a [routerLink]="['/']" color="primary" mat-button mat-raised-button>Retourner au menu</a>
         </div>
     </div>
 

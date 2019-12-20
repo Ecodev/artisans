@@ -2,8 +2,8 @@
 <ng-template #mobileNavigationTemplate let-navigation>
     <ul *ngIf="navigation?.length">
         <li *ngFor="let item of navigation" [class.opened]="item.opened">
-            <a [routerLink]="item.link" matRipple *ngIf="!item.children?.length" (click)="menu.close()">{{ item.display }}</a>
-            <a (click)="item.opened = !item.opened;" matRipple *ngIf="item.children?.length">{{ item.display }}</a>
+            <a (click)="menu.close()" *ngIf="!item.children?.length" [routerLink]="item.link" matRipple>{{ item.display }}</a>
+            <a (click)="item.opened = !item.opened;" *ngIf="item.children?.length" matRipple>{{ item.display }}</a>
             <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context:{ $implicit: item.children }"></ng-container>
         </li>
     </ul>
@@ -31,12 +31,12 @@
 
     <mat-sidenav-content>
 
-        <mat-toolbar fxHide.gt-sm id="header-mobile" fxLayout="row" fxLayoutAlign="start center">
+        <mat-toolbar fxHide.gt-sm fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
 
             <div fxFlex></div>
 
             <a routerLink="/">
-                <img alt="logo" src="assets/logo.png" height="30" />
+                <img alt="logo" height="30" src="assets/logo.png" />
             </a>
 
             <div fxFlex></div>
@@ -53,14 +53,14 @@
             <div id="header-top">
                 <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <a mat-button [matMenuTriggerFor]="deviseMenu">
+                    <a [matMenuTriggerFor]="deviseMenu" mat-button>
                         {{ CurrencyManager.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
                     </a>
                     <mat-menu #deviseMenu="matMenu">
-                        <button mat-menu-item (click)="CurrencyManager.setCurrency(Currency.CHF)">Suisse (CHF)</button>
-                        <button mat-menu-item (click)="CurrencyManager.setCurrency(Currency.EUR)">Europe (EUR)</button>
+                        <button (click)="CurrencyManager.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
+                        <button (click)="CurrencyManager.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
                     </mat-menu>
-                    <a mat-button *ngFor="let item of topNavigation" [routerLink]="item.link"> {{ item.display }}</a>
+                    <a *ngFor="let item of topNavigation" [routerLink]="item.link" mat-button> {{ item.display }}</a>
                 </div>
             </div>
 
@@ -68,23 +68,23 @@
             <div id="header-middle">
                 <div class="container" fxLayout="row">
                     <a routerLink="/">
-                        <img alt="logo" src="assets/logo.png" height="55" />
+                        <img alt="logo" height="55" src="assets/logo.png" />
                     </a>
                 </div>
             </div>
 
             <!-- header : 3rd line -->
             <div id="header-bottom">
-                <div id="menu-main-container" class="container" fxLayout="row" fxLayoutAlign="start end">
+                <div class="container" fxLayout="row" fxLayoutAlign="start end" id="menu-main-container">
 
-                    <div id="menu-main" fxFlex>
+                    <div fxFlex id="menu-main">
                         <ng-container *ngTemplateOutlet="navigationTemplate; context:{ $implicit: navigation }"></ng-container>
                     </div>
 
                     <mat-form-field id="search-field">
                         <mat-label>Rechercher</mat-label>
-                        <input matInput (keydown.enter)="search()" (keydown.esc)="searchTerm = ''" [(ngModel)]="searchTerm">
-                        <button matSuffix (click)="search()" mat-icon-button>
+                        <input (keydown.enter)="search()" (keydown.esc)="searchTerm = ''" [(ngModel)]="searchTerm" matInput>
+                        <button (click)="search()" mat-icon-button matSuffix>
                             <natural-icon name="search"></natural-icon>
                         </button>
                     </mat-form-field>
@@ -103,17 +103,17 @@
                 <div>
                     <div class="mat-display-3">ArtisansDeLa<strong>Transition</strong></div>
 
-                    <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start center">
+                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                         <div class="mat-headline">Inscrivez-vous à la lettre d'info !</div>
                         <mat-form-field>
                             <mat-label>Adresse e-mail</mat-label>
                             <input matInput>
                         </mat-form-field>
-                        <button mat-stroked-button color="primary">S'incrire</button>
+                        <button color="primary" mat-stroked-button>S'incrire</button>
                     </div>
                 </div>
 
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px" class="mat-subheading-2">
+                <div class="mat-subheading-2" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
 
                     <mat-nav-list fxFlex.gt-sm="33">
                         <a mat-list-item routerLink="product">L'association</a>
@@ -130,7 +130,7 @@
                         <a mat-list-item routerLink="product-tag">Annonceurs</a>
                     </mat-nav-list>
 
-                    <div fxLayout="column" fxLayoutGap="10px" fxFlex.gt-sm="33">
+                    <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px">
                         <div>
                             <div class="mat-title no-margin-bottom">Association Artisans de la transition</div>
                             <div class="mat-title"> La Revue durable</div>

@@ -6,12 +6,12 @@
 
     <div fxLayout="column">
 
-        <div fxLayout="row" class="margin-v" overflow>
-            <natural-search fxFlex
+        <div class="margin-v" fxLayout="row" overflow>
+            <natural-search (selectionChange)="search($event)"
                             [facets]="naturalSearchFacets"
-                            [selections]="naturalSearchSelections"
-                            (selectionChange)="search($event)"
                             [multipleGroups]="true"
+                            [selections]="naturalSearchSelections"
+                            fxFlex
             >
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
@@ -23,16 +23,16 @@
         </div>
 
         <div class="responsive-table">
-            <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sorting([$event])">
+            <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
 
-                <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
-                <tr mat-footer-row *matFooterRowDef="selectedColumns"></tr>
+                <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+                <tr *matFooterRowDef="selectedColumns" mat-footer-row></tr>
 
                 <ng-container matColumnDef="owner">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Utilisateur</th>
-                    <td mat-cell *matCellDef="let element">
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.owner">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div *ngIf="element.owner" fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.owner?.name" [size]="36"></ngx-avatar>
                             <natural-table-button [label]="element.owner?.name"
                                                   [navigate]="['/admin/user', element.owner?.id]"
@@ -40,33 +40,33 @@
                             ></natural-table-button>
                         </div>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
+                    <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 
                 <ng-container matColumnDef="creationDate">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header app-date-column>Date</th>
-                    <td mat-cell *matCellDef="let element">
+                    <th *matHeaderCellDef app-date-column mat-header-cell mat-sort-header>Date</th>
+                    <td *matCellDef="let element" mat-cell>
                         <natural-table-button [label]="element.creationDate | date: 'd MMM y - HH:mm'"
                                               [navigate]="[element.id]"
                                               matTooltip="Éditer"
                         ></natural-table-button>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef></td>
+                    <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 
                 <ng-container matColumnDef="lines">
-                    <th mat-header-cell *matHeaderCellDef>Entrées</th>
-                    <td mat-cell *matCellDef="let element">{{ element.orderLines.length }}</td>
-                    <td mat-footer-cell *matFooterCellDef></td>
+                    <th *matHeaderCellDef mat-header-cell>Entrées</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.orderLines.length }}</td>
+                    <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header natural-5em-column natural-align-right>Total</th>
-                    <td mat-cell *matCellDef="let element" natural-align-right>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-5em-column natural-align-right>Total</th>
+                    <td *matCellDef="let element" mat-cell natural-align-right>
                         <ng-container *ngIf="element.balanceCHF > 0">{{ element.balanceCHF  | currency : 'CHF' }}</ng-container>
                         <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
                     </td>
-                    <td mat-footer-cell *matFooterCellDef natural-align-right>
+                    <td *matFooterCellDef mat-footer-cell natural-align-right>
                         <span *ngIf="dataSource?.data.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
                         <ng-container *ngIf="dataSource?.data.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -</ng-container>
                         <span *ngIf="dataSource?.data.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
@@ -76,20 +76,20 @@
             </table>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.data?.length === 0">
+        <div *ngIf="dataSource.data?.length === 0" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <div>Pas de résultats</div>
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="center center" class="margin" *ngIf="dataSource.data?.length === null">
-            <mat-progress-spinner mode="indeterminate" [diameter]="40"></mat-progress-spinner>
+        <div *ngIf="dataSource.data?.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
+            <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator *ngIf="dataSource.data?.length"
+        <mat-paginator (page)="pagination($event)"
+                       *ngIf="dataSource.data?.length"
                        [length]="dataSource.data?.length"
-                       [pageSize]="dataSource.data?.pageSize"
                        [pageIndex]="dataSource.data?.pageIndex"
                        [pageSizeOptions]="pageSizeOptions"
-                       (page)="pagination($event)"
+                       [pageSize]="dataSource.data?.pageSize"
         ></mat-paginator>
 
     </div>

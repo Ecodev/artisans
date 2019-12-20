@@ -1,11 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NetworkActivityService } from '../../../shared/services/network-activity.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { NaturalAlertService } from '@ecodev/natural';
-import { NaturalAbstractController } from '@ecodev/natural';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NaturalAbstractController, NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../../../admin/users/services/user.service';
+import { NetworkActivityService } from '../../../shared/services/network-activity.service';
 
 @Component({
     selector: 'app-login',

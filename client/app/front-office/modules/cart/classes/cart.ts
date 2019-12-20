@@ -33,17 +33,10 @@ export class Cart {
      * Cart detail
      */
     public lines: CartLine[] = [];
-
-    /**
-     * Cart identification
-     */
-    private _id: number;
-
     /**
      * Total including taxes
      */
     public totalTaxInc: number;
-
     public readonly onChange = new Subject();
 
     public constructor() {
@@ -51,12 +44,17 @@ export class Cart {
         Cart.carts.push(this);
     }
 
-    public static getById(id: number): Cart | undefined {
-        return Cart.carts.find(c => c._id === id);
-    }
+    /**
+     * Cart identification
+     */
+    private _id: number;
 
     public get id() {
         return this._id;
+    }
+
+    public static getById(id: number): Cart | undefined {
+        return Cart.carts.find(c => c._id === id);
     }
 
     /**

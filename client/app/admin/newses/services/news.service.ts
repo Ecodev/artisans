@@ -48,7 +48,7 @@ export class NewsService
         return {
             name: '',
             description: '',
-            date: new Date()
+            date: new Date(),
         };
     }
 

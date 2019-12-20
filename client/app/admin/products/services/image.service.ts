@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { userMetaFragment } from '../../../shared/queries/fragments';
 import { CreateImage, CreateImageVariables, ImageInput } from '../../../shared/generated-types';
-import { NaturalAbstractModelService } from '@ecodev/natural';
+import { userMetaFragment } from '../../../shared/queries/fragments';
 
 export const createImageMutation = gql`
     mutation CreateImage($input: ImageInput!) {

@@ -2,10 +2,10 @@ import { fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Apollo } from 'apollo-angular';
+import { CartService } from '../../../front-office/modules/cart/services/cart.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { mockApolloProvider } from '../../../shared/testing/MockApolloProvider';
 import { UserService } from './user.service';
-import { CartService } from '../../../front-office/modules/cart/services/cart.service';
 
 class MockCartService {
     empty() {

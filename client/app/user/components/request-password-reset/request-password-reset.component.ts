@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Apollo } from 'apollo-angular';
 import { Router } from '@angular/router';
-import { UserService } from '../../../admin/users/services/user.service';
 import { NaturalAlertService, NaturalFormControl } from '@ecodev/natural';
+import { Apollo } from 'apollo-angular';
+import { UserService } from '../../../admin/users/services/user.service';
 
 @Component({
     selector: 'app-request-password-reset',

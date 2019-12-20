@@ -1,33 +1,33 @@
-<div class="wrapper" #wrapper>
+<div #wrapper class="wrapper">
     <div>
-        <div [pHidden]="!showData1"
-             #element1
-             libParticleEffectButton
-             [pParticlesAmountCoefficient]="settings1.pParticlesAmountCoefficient"
-             [pOscillationCoefficient]="settings1.pOscillationCoefficient"
-             [pDuration]="settings1.pDuration"
-             [pSpeed]="settings1.pSpeed"
-             [pDirection]="settings1.pDirection"
-             [pColor]="settings1.pColor"
+        <div #element1
              (pComplete)="updateSize()"
+             [pColor]="settings1.pColor"
+             [pDirection]="settings1.pDirection"
+             [pDuration]="settings1.pDuration"
+             [pHidden]="!showData1"
+             [pOscillationCoefficient]="settings1.pOscillationCoefficient"
+             [pParticlesAmountCoefficient]="settings1.pParticlesAmountCoefficient"
+             [pSpeed]="settings1.pSpeed"
+             libParticleEffectButton
         >
-            <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ data: _data1 }"></ng-template>
+            <ng-template [ngTemplateOutletContext]="{ data: _data1 }" [ngTemplateOutlet]="template"></ng-template>
         </div>
     </div>
 
     <div>
-        <div [pHidden]="!showData2"
-             #element2
-             libParticleEffectButton
-             [pParticlesAmountCoefficient]="settings2.pParticlesAmountCoefficient"
-             [pOscillationCoefficient]="settings2.pOscillationCoefficient"
-             [pDuration]="settings2.pDuration"
-             [pSpeed]="settings2.pSpeed"
-             [pDirection]="settings2.pDirection"
-             [pColor]="settings2.pColor"
+        <div #element2
              (pComplete)="updateSize()"
+             [pColor]="settings2.pColor"
+             [pDirection]="settings2.pDirection"
+             [pDuration]="settings2.pDuration"
+             [pHidden]="!showData2"
+             [pOscillationCoefficient]="settings2.pOscillationCoefficient"
+             [pParticlesAmountCoefficient]="settings2.pParticlesAmountCoefficient"
+             [pSpeed]="settings2.pSpeed"
+             libParticleEffectButton
         >
-            <ng-template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ data: _data2 }"></ng-template>
+            <ng-template [ngTemplateOutletContext]="{ data: _data2 }" [ngTemplateOutlet]="template"></ng-template>
         </div>
     </div>
 </div>

@@ -1,11 +1,10 @@
-import { DefaultOptions } from 'apollo-client/ApolloClient';
-import { NetworkActivityService } from '../services/network-activity.service';
+import { hasFilesAndProcessDate, NaturalAlertService } from '@ecodev/natural';
 import { HttpBatchLink } from 'apollo-angular-link-http-batch';
+import { DefaultOptions } from 'apollo-client/ApolloClient';
 import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
-import { NaturalAlertService } from '@ecodev/natural';
-import { hasFilesAndProcessDate } from '@ecodev/natural';
+import { NetworkActivityService } from '../services/network-activity.service';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {

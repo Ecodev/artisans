@@ -37,19 +37,19 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
             null);
     }
 
+    public getFormValidators(): FormValidators {
+        return {
+            product: [Validators.required],
+            quantity: [Validators.required],
+        };
+    }
+
     protected getDefaultForServer(): OrderLineInput {
         return {
             product: null,
             quantity: '0',
             isCHF: true,
             type: ProductType.digital,
-        };
-    }
-
-    public getFormValidators(): FormValidators {
-        return {
-            product: [Validators.required],
-            quantity: [Validators.required],
         };
     }
 }

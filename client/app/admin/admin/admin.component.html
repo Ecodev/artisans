@@ -1,6 +1,6 @@
 <div fxFlexFill fxLayout="column">
 
-    <mat-toolbar id="header-mobile" fxFlex="none" fxLayout="row" fxLayoutAlign="start center">
+    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
 
         <button (click)="NaturalSidenavService?.sideNavs?.get('adminMenu')?.toggle()" mat-icon-button>
             <natural-icon name="menu"></natural-icon>
@@ -9,7 +9,7 @@
         <div fxFlex></div>
 
         <a routerLink="/">
-            <img alt="logo" src="assets/logo.png" height="30" />
+            <img alt="logo" height="30" src="assets/logo.png" />
         </a>
 
         <div fxFlex></div>
@@ -64,7 +64,7 @@
             </div>
         </natural-sidenav>
         <natural-sidenav-content>
-            <div style="padding:20px; overflow:auto;" fxFlex fxLayout="column">
+            <div fxFlex fxLayout="column" style="padding:20px; overflow:auto;">
                 <router-outlet></router-outlet>
             </div>
         </natural-sidenav-content>

@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { merge, omit } from 'lodash';
 import {
     CreateSession,
     CreateSessionVariables,
@@ -28,6 +27,5 @@ export class SessionComponent
     constructor(private sessionService: SessionService, injector: Injector) {
         super('session', sessionService, injector);
     }
-
 
 }

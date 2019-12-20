@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import gql from 'graphql-tag';
 import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
 import { BankingInfos, BankingInfos_bankingInfos, BankingInfosVariables } from '../../../shared/generated-types';
 
 const q = gql`
@@ -21,6 +21,12 @@ const q = gql`
 })
 export class BvrComponent {
 
+    public bankingInfos: BankingInfos_bankingInfos;
+
+    constructor(private apollo: Apollo) {
+
+    }
+
     @Input() set bankingData(data: BankingInfosVariables) {
 
         this.apollo.query<BankingInfos, BankingInfosVariables>({
@@ -28,12 +34,6 @@ export class BvrComponent {
             fetchPolicy: 'cache-first',
             variables: data,
         }).subscribe(result => this.bankingInfos = result.data.bankingInfos);
-    }
-
-    public bankingInfos: BankingInfos_bankingInfos;
-
-    constructor(private apollo: Apollo) {
-
     }
 }
 

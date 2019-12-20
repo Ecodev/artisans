@@ -14,6 +14,11 @@ interface ActivableProductTag extends ProductTags_productTags_items {
 })
 export class ProductTagsNavigationComponent implements OnInit {
 
+    public tags: ActivableProductTag[];
+
+    constructor(private productTagService: ProductTagService) {
+    }
+
     private _current: ProductTags_productTags_items;
 
     @Input() set current(value: ProductTags_productTags_items) {
@@ -22,11 +27,6 @@ export class ProductTagsNavigationComponent implements OnInit {
         if (this.tags) {
             this.tags.forEach(tag => tag.active = value && tag.id === value.id);
         }
-    }
-
-    public tags: ActivableProductTag[];
-
-    constructor(private productTagService: ProductTagService) {
     }
 
     ngOnInit() {

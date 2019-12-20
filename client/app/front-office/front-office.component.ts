@@ -5,7 +5,6 @@ import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
 import { Currency, CurrencyManager } from '../shared/classes/currencyManager';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
-import { CartService } from './modules/cart/services/cart.service';
 
 interface MenuItem {
     display: string;

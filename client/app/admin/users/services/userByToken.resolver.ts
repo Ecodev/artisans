@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from './user.service';
 import { ErrorService } from '../../../shared/components/error/error.service';
 import { UserByToken } from '../../../shared/generated-types';
+import { UserService } from './user.service';
 
 @Injectable({
     providedIn: 'root',

@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { AvatarModule } from 'ngx-avatar';
-import { OrderModule } from './order/order.module';
 import { ProfileModule } from '../profile/profile.module';
 import { ArtisansModule } from '../shared/modules/artisans.module';
 import { MaterialModule } from '../shared/modules/material.module';
@@ -13,6 +12,7 @@ import { EventComponent } from './events/event/event.component';
 import { EventsComponent } from './events/events/events.component';
 import { NewsComponent } from './newses/news/news.component';
 import { NewsesComponent } from './newses/newses/newses.component';
+import { OrderModule } from './order/order.module';
 import { ProductComponent } from './products/product/product.component';
 import { SessionComponent } from './sessions/session/session.component';
 import { SessionsComponent } from './sessions/sessions/sessions.component';
@@ -32,7 +32,7 @@ import { UserComponent } from './users/user/user.component';
         EventsComponent,
         EventComponent,
         SessionsComponent,
-        SessionComponent
+        SessionComponent,
     ],
     imports: [
         CommonModule,

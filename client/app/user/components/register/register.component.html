@@ -1,16 +1,16 @@
-<form class="body padding" [formGroup]="form">
+<form [formGroup]="form" class="body padding">
 
     <div fxLayout="column" fxLayoutGap="30px">
 
-        <h1 class="mat-display-1" *ngIf="step === 1">Adhésion</h1>
-        <h1 class="mat-display-1" *ngIf="step === 2">Confirmation d'adhésion</h1>
+        <h1 *ngIf="step === 1" class="mat-display-1">Adhésion</h1>
+        <h1 *ngIf="step === 2" class="mat-display-1">Confirmation d'adhésion</h1>
 
         <div fxLayout="column">
 
-            <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap.gt-xs="10px">
+            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
                 <mat-form-field fxFlex>
                     <mat-label>email</mat-label>
-                    <input matInput formControlName="email">
+                    <input formControlName="email" matInput>
                     <natural-icon matPrefix name="alternate_email"></natural-icon>
                     <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
                     <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
@@ -18,17 +18,17 @@
             </div>
         </div>
 
-        <div fxLayout="column" fxLayoutGap="30px" *ngIf="step === 2">
+        <div *ngIf="step === 2" fxLayout="column" fxLayoutGap="30px">
 
             <mat-divider></mat-divider>
 
             <h2 class="mat-title">Compte</h2>
 
-            <div fxLayout.gt-xs="row" fxLayout="column" fxLayoutGap.gt-xs="10px">
+            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
 
                 <mat-form-field fxFlex>
                     <mat-label>Nom d'utilisateur</mat-label>
-                    <input matInput formControlName="login">
+                    <input formControlName="login" matInput>
                     <natural-icon matPrefix name="person"></natural-icon>
                     <mat-error *ngIf="form.get('login')?.hasError('maxlength')">
                         Maximum {{form.get('login')?.errors.maxlength.requiredLength}} caractères
@@ -47,7 +47,7 @@
             <div fxLayout="row" fxLayoutGap="10px">
                 <mat-form-field fxFlex>
                     <mat-label>Prénom</mat-label>
-                    <input matInput formControlName="firstName">
+                    <input formControlName="firstName" matInput>
                     <mat-error *ngIf="form.get('firstName')?.hasError('maxlength')">
                         Maximum {{form.get('firstName')?.errors.maxlength.requiredLength}} caractères
                     </mat-error>
@@ -56,7 +56,7 @@
 
                 <mat-form-field fxFlex>
                     <mat-label>Nom de famille</mat-label>
-                    <input matInput formControlName="lastName">
+                    <input formControlName="lastName" matInput>
                     <mat-error *ngIf="form.get('lastName')?.hasError('maxlength')">
                         Maximum {{form.get('lastName')?.errors.maxlength.requiredLength}} caractères
                     </mat-error>
@@ -69,8 +69,8 @@
             <div>
                 <mat-form-field>
                     <mat-label>Date de naissance</mat-label>
-                    <input matInput formControlName="birthday" [matDatepicker]="picker">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <input [matDatepicker]="picker" formControlName="birthday" matInput>
+                    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="form.get('birthday')?.hasError('required')">Requis</mat-error>
                 </mat-form-field>
@@ -82,16 +82,17 @@
         <!-- Spacer-->
         <div *ngIf="step === 1"></div>
 
-        <div fxLayout="row" fxLayoutGap="30px" *ngIf="step === 1">
+        <div *ngIf="step === 1" fxLayout="row" fxLayoutGap="30px">
             <div fxFlex>
                 <mat-checkbox formControlName="termsAgreement" required wrap>
                     Je m'engage à respecter :
                 </mat-checkbox>
 
                 <p class="mat-body-1 rich-text">
-                    tous les règlements et statuts des Artisans de la transition
-                </p>
-                <mat-error class="mat-body-1" *ngIf="form.get('termsAgreement')?.touched && form.get('termsAgreement')?.hasError('required')">
+                    tous les règlements et statuts des Artisans de la transition </p>
+                <mat-error *ngIf="form.get('termsAgreement')?.touched && form.get('termsAgreement')?.hasError('required')"
+                           class="mat-body-1"
+                >
                     Requis
                 </mat-error>
             </div>
@@ -101,7 +102,7 @@
         <div></div>
 
         <div fxLayout="row" fxLayoutAlign="center">
-            <button mat-raised-button [color]="form.invalid ? 'warn' : 'primary'" (click)="submit()" [disabled]="sending">
+            <button (click)="submit()" [color]="form.invalid ? 'warn' : 'primary'" [disabled]="sending" mat-raised-button>
                 <natural-icon name="send"></natural-icon>
                 Envoyer
             </button>

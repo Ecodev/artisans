@@ -1,10 +1,10 @@
-<a *ngIf="!inCart && !clicked" mat-flat-button color="primary" (click)="click()">{{ label || 'Acheter l\'article'}}</a>
-<a *ngIf="inCart && !clicked" mat-flat-button color="accent" routerLink="/panier">{{ 'Voir le panier' }}</a>
+<a (click)="click()" *ngIf="!inCart && !clicked" color="primary" mat-flat-button>{{ label || 'Acheter l\'article'}}</a>
+<a *ngIf="inCart && !clicked" color="accent" mat-flat-button routerLink="/panier">{{ 'Voir le panier' }}</a>
 
-<app-particle-switch [data]="inCart" *ngIf="clicked">
+<app-particle-switch *ngIf="clicked" [data]="inCart">
     <ng-template #template let-data="data">
-        <a mat-flat-button color="primary" (click)="click()" *ngIf="!data">{{ label || 'Acheter l\'article'}}</a>
-        <a mat-flat-button color="accent" routerLink="/panier" *ngIf="data">Voir le panier</a>
+        <a (click)="click()" *ngIf="!data" color="primary" mat-flat-button>{{ label || 'Acheter l\'article'}}</a>
+        <a *ngIf="data" color="accent" mat-flat-button routerLink="/panier">Voir le panier</a>
     </ng-template>
 </app-particle-switch>
 

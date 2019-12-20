@@ -4,13 +4,13 @@
 
     <app-product-tags-navigation *ngIf="showTags" [current]="currentProductTag"></app-product-tags-navigation>
 
-    <div class="products" [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}">
+    <div [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}" class="products">
         <div *ngFor="let product of products" class="product">
             <div class="product-name">{{ product.name }}</div>
             <app-price [product]="product"></app-price>
-            <a mat-stroked-button [routerLink]="['/larevuedurable', 'product', product.id]">Détail</a>
+            <a [routerLink]="['/larevuedurable', 'product', product.id]" mat-stroked-button>Détail</a>
         </div>
     </div>
 
-    <a mat-flat-button color="primary" (click)="loadMore()">Charger plus</a>
+    <a (click)="loadMore()" color="primary" mat-flat-button>Charger plus</a>
 </div>

@@ -1,7 +1,14 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { CreateEvent, CreateEventVariables, Event, EventVariables, UpdateEvent, UpdateEventVariables } from '../../../shared/generated-types';
+import {
+    CreateEvent,
+    CreateEventVariables,
+    Event,
+    EventVariables,
+    UpdateEvent,
+    UpdateEventVariables,
+} from '../../../shared/generated-types';
 import { NaturalSearchFacetsService } from '../../../shared/natural-search/natural-search-facets.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { EventService } from '../services/event.service';

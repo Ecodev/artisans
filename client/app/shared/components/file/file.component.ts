@@ -1,9 +1,9 @@
 import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { UploadService } from './services/upload.service';
-import { takeUntil } from 'rxjs/operators';
-import { NaturalAbstractController } from '@ecodev/natural';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { NaturalAbstractController } from '@ecodev/natural';
 import { Observable, of, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { UploadService } from './services/upload.service';
 
 @Component({
     selector: 'app-file',
@@ -64,6 +64,23 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
         }
     }
 
+    public getDownloadLink(): null | string {
+
+        if (this.action !== 'download') {
+            return null;
+        }
+
+        const hostname = window.location.protocol + '//' + window.location.hostname;
+
+        if (this.model && this.model.__typename === 'File') {
+            return hostname + '/file/' + this.model.id;
+        } else if (this.model && this.model.__typename === 'Image') {
+            return hostname + '/image/' + this.model.id;
+        }
+
+        return null;
+    }
+
     private updateImage() {
 
         this.imagePreview = null;
@@ -116,23 +133,6 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
         reader.readAsBinaryString(file);
 
         return subject.asObservable();
-    }
-
-    public getDownloadLink(): null | string {
-
-        if (this.action !== 'download') {
-            return null;
-        }
-
-        const hostname = window.location.protocol + '//' + window.location.hostname;
-
-        if (this.model && this.model.__typename === 'File') {
-            return hostname + '/file/' + this.model.id;
-        } else if (this.model && this.model.__typename === 'Image') {
-            return hostname + '/image/' + this.model.id;
-        }
-
-        return null;
     }
 
 }

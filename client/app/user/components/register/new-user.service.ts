@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import { Router } from '@angular/router';
 import { Validators } from '@angular/forms';
-import { PermissionsService } from '../../../shared/services/permissions.service';
+import { Router } from '@angular/router';
 import { FormValidators, Literal } from '@ecodev/natural';
-import { AnonymousUserService } from './anonymous-user.service';
+import { Apollo } from 'apollo-angular';
 import { LoginValidatorFn } from '../../../admin/users/services/user.service';
-import { CartService } from '../../../front-office/modules/cart/services/cart.service';
+import { PermissionsService } from '../../../shared/services/permissions.service';
+import { AnonymousUserService } from './anonymous-user.service';
 
 @Injectable({
     providedIn: 'root',
@@ -20,12 +19,6 @@ export class NewUserService extends AnonymousUserService {
         super(apollo, router, permissionsService);
     }
 
-    protected getDefaultForClient(): Literal {
-        return {
-            password: '',
-        };
-    }
-
     public getFormValidators(): FormValidators {
         return {
             login: [Validators.required, LoginValidatorFn],
@@ -37,6 +30,12 @@ export class NewUserService extends AnonymousUserService {
             locality: [Validators.required],
             street: [Validators.required],
             postcode: [Validators.required],
+        };
+    }
+
+    protected getDefaultForClient(): Literal {
+        return {
+            password: '',
         };
     }
 }

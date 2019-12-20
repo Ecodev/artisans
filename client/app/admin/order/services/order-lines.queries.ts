@@ -42,8 +42,8 @@ export const orderLinesQuery = gql`
             totalQuantity
         }
     }
-${permissionsFragment}
-${userMetaFragment}
+    ${permissionsFragment}
+    ${userMetaFragment}
 ${orderLineMetaFragment}`;
 
 export const orderLineQuery = gql`
@@ -64,9 +64,9 @@ export const orderLineQuery = gql`
             }
         }
     }
-${orderLineMetaFragment}
-${userMetaFragment}
-${permissionsFragment}
+    ${orderLineMetaFragment}
+    ${userMetaFragment}
+    ${permissionsFragment}
 `;
 
 export const updateOrderLine = gql`
@@ -79,6 +79,6 @@ export const updateOrderLine = gql`
             }
         }
     }
-${userMetaFragment}
+    ${userMetaFragment}
 ${orderLineMetaFragment}`;
 

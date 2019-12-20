@@ -18,16 +18,16 @@ export class AnonymousUserService extends UserService {
         super(apollo, router, permissionsService);
     }
 
-    protected getDefaultForClient(): Literal {
-        return {
-            termsAgreement: false,
-        };
-    }
-
     public getFormValidators(): FormValidators {
         return {
             email: [Validators.required, Validators.email],
             termsAgreement: [],
+        };
+    }
+
+    protected getDefaultForClient(): Literal {
+        return {
+            termsAgreement: false,
         };
     }
 }

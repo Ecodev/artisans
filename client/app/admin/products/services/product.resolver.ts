@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ProductResolve } from '../product';
 import { ErrorService } from '../../../shared/components/error/error.service';
+import { ProductResolve } from '../product';
 import { ProductService } from './product.service';
 
 @Injectable({

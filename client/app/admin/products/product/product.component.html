@@ -1,29 +1,29 @@
 <div [formGroup]="form" class="detail-body">
 
-    <natural-detail-header newLabel="Nouveau produit" label="Produit" [model]="data.model" [listRoute]="['admin', 'product']">
-    </natural-detail-header>
+    <natural-detail-header [listRoute]="['admin', 'product']" [model]="data.model" label="Produit" newLabel="Nouveau produit"
+    ></natural-detail-header>
 
-    <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
+    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">
-            <div fxLayout="column" fxLayoutGap="30px" class="padding-top">
+            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
 
-                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start start" class="margin-bottom">
+                        <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
 
-                            <app-file fxFlex
-                                      [service]="imageService"
+                            <app-file (modelChange)="newImage($event)"
                                       [model]="data.model.image"
-                                      class="mat-elevation-z2"
+                                      [service]="imageService"
                                       [style.borderRadius.px]="4"
                                       [style.marginLeft.px]="2"
-                                      (modelChange)="newImage($event)"
                                       action="upload"
+                                      class="mat-elevation-z2"
+                                      fxFlex
                             ></app-file>
 
-                            <div fxLayout="column" fxFlex>
+                            <div fxFlex fxLayout="column">
                                 <mat-form-field>
-                                    <input matInput formControlName="name" (change)="update()">
+                                    <input (change)="update()" formControlName="name" matInput>
                                     <mat-label>Nom</mat-label>
                                     <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
                                         Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
@@ -32,7 +32,7 @@
                                 </mat-form-field>
 
                                 <mat-form-field>
-                                    <input matInput maxlength="20" formControlName="code" (change)="update()">
+                                    <input (change)="update()" formControlName="code" matInput maxlength="20">
                                     <mat-label>Code</mat-label>
                                     <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
                                         Maximum {{form.get('code')?.errors.maxlength.requiredLength }} caractères
@@ -47,11 +47,11 @@
 
                         <mat-form-field>
                             <mat-label>Description</mat-label>
-                            <textarea matInput
-                                      formControlName="description"
-                                      (change)="update()"
-                                      matTextareaAutosize
+                            <textarea (change)="update()"
                                       [matAutosizeMinRows]="1"
+                                      formControlName="description"
+                                      matInput
+                                      matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
 
@@ -59,19 +59,19 @@
 
                     <div fxFlex="33" fxLayout="column">
 
-                        <div fxLayout="row" fxLayoutAlign="start center" class="margin-bottom" fxLayoutGap="20px">
+                        <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                             <h2 class="mat-title no-margin" fxFlex>Prix</h2>
-                            <mat-slide-toggle formControlName="isActive" (change)="update()">Disponible</mat-slide-toggle>
+                            <mat-slide-toggle (change)="update()" formControlName="isActive">Disponible</mat-slide-toggle>
                         </div>
 
                         <mat-form-field>
                             <mat-label>Prix par unité (CHF)</mat-label>
-                            <input matInput
-                                   type="number"
+                            <input (change)="update();"
+                                   formControlName="pricePerUnitCHF"
+                                   matInput
                                    required="required"
                                    step="0.01"
-                                   formControlName="pricePerUnitCHF"
-                                   (change)="update();"
+                                   type="number"
                             >
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('required')">Requis</mat-error>
@@ -79,12 +79,12 @@
 
                         <mat-form-field>
                             <mat-label>Prix par unité (EUR)</mat-label>
-                            <input matInput
-                                   type="number"
+                            <input (change)="update();"
+                                   formControlName="pricePerUnitEUR"
+                                   matInput
                                    required="required"
                                    step="0.01"
-                                   formControlName="pricePerUnitEUR"
-                                   (change)="update();"
+                                   type="number"
                             >
                             <div matSuffix>EUR</div>
                             <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('required')">Requis</mat-error>
@@ -92,11 +92,11 @@
 
                         <mat-form-field class="margin-top">
                             <mat-label>Remarques internes</mat-label>
-                            <textarea matInput
-                                      formControlName="internalRemarks"
-                                      (change)="update()"
-                                      matTextareaAutosize
+                            <textarea (change)="update()"
                                       [matAutosizeMaxRows]="3"
+                                      formControlName="internalRemarks"
+                                      matInput
+                                      matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
 
@@ -110,16 +110,16 @@
 
                         <div *ngIf="data.model.id">
                             <h2 class="mat-title">Tags</h2>
-                            <natural-relations [main]="data.model"
+                            <natural-relations [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
+                                               [main]="data.model"
                                                [service]="productTagService"
-                                               [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
                                                placeholder="Ajouter un tag"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                         <!-- TODO : link to products list filtred by tag -->
                                         <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="32"></ngx-avatar>
-                                        <natural-table-button [navigate]="['/admin/product']" [label]="item.name"></natural-table-button>
+                                        <natural-table-button [label]="item.name" [navigate]="['/admin/product']"></natural-table-button>
                                     </div>
                                 </ng-template>
                             </natural-relations>
@@ -132,18 +132,17 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Ventes" *ngIf="data.model.id">
-            <app-order-lines
-                    [persistSearch]="false"
-                    [contextVariables]="orderLinesVariables"
-                    [contextColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
-                    [showTotals]="true"
+        <mat-tab *ngIf="data.model.id" label="Ventes">
+            <app-order-lines [contextColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
+                             [contextVariables]="orderLinesVariables"
+                             [persistSearch]="false"
+                             [showTotals]="true"
             ></app-order-lines>
         </mat-tab>
 
     </mat-tab-group>
 
-    <natural-fixed-button-detail *ngIf="showFabButton" [form]="form" [model]="data.model" (create)="create()" (delete)="delete()"
+    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"
     ></natural-fixed-button-detail>
 
 </div>

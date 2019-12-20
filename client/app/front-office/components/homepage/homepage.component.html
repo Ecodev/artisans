@@ -3,9 +3,9 @@
 <div class="introduction-blocs">
 
     <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutGap="50px">
-        <app-home-block fxFlex key="home-block-1" id="bloc1"></app-home-block>
-        <app-home-block fxFlex key="home-block-2" id="bloc2"></app-home-block>
-        <app-home-block fxFlex key="home-block-3" id="bloc3"></app-home-block>
+        <app-home-block fxFlex id="bloc1" key="home-block-1"></app-home-block>
+        <app-home-block fxFlex id="bloc2" key="home-block-2"></app-home-block>
+        <app-home-block fxFlex id="bloc3" key="home-block-3"></app-home-block>
     </div>
 </div>
 
@@ -16,49 +16,49 @@
     <div class="container " fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
 
         <!-- News -->
-        <div fxFlex.gt-sm="66" class="newses">
+        <div class="newses" fxFlex.gt-sm="66">
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
                 <div fxFlex>ACTUALITÉS</div>
                 <div class="relative">
-                    <button mat-fab color="none" routerLink="/admin/news" class="absolute" *ngIf="permissionService?.crud?.news?.create"
+                    <button *ngIf="permissionService?.crud?.news?.create" class="absolute" color="none" mat-fab routerLink="/admin/news"
                     >
                         <natural-icon name="edit"></natural-icon>
                     </button>
                 </div>
             </div>
             <mat-divider></mat-divider>
-            <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
+            <div class="newses-list" fxLayout="column" fxLayoutGap="40px">
                 <div></div>
-                <div class="news" *ngFor="let news of newses">
+                <div *ngFor="let news of newses" class="news">
                     <div class="mat-body-2">{{ news.date | date : 'EEE d.M.yy' }}</div>
                     <div class="mat-headline">{{ news.name }}</div>
-                    <div class="mat-subheading-1" [innerHTML]="news.description"></div>
+                    <div [innerHTML]="news.description" class="mat-subheading-1"></div>
                 </div>
             </div>
 
-            <a mat-flat-button routerLink="/actualites" color="primary">Voir toutes nos actualités</a>
+            <a color="primary" mat-flat-button routerLink="/actualites">Voir toutes nos actualités</a>
 
         </div>
 
         <!-- Events -->
-        <div fxFlex.gt-sm="33" class="events">
+        <div class="events" fxFlex.gt-sm="33">
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
                 <div fxFlex>AGENDA</div>
                 <div class="relative">
-                    <button mat-fab color="none" routerLink="/admin/event" class="absolute" *ngIf="permissionService?.crud?.event?.create">
+                    <button *ngIf="permissionService?.crud?.event?.create" class="absolute" color="none" mat-fab routerLink="/admin/event">
                         <natural-icon name="edit"></natural-icon>
                     </button>
                 </div>
             </div>
             <mat-divider></mat-divider>
-            <div fxLayout="column" fxLayoutGap="40px" class="newses-list">
+            <div class="newses-list" fxLayout="column" fxLayoutGap="40px">
                 <div></div>
-                <div class="event" *ngFor="let event of events">
+                <div *ngFor="let event of events" class="event">
                     <div class="mat-headline">{{ event.name }}</div>
                     <div class="mat-subheading-2">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.description }}</div>
                 </div>
             </div>
-            <a mat-flat-button routerLink="/evenements" color="primary">Voir tout l'agenda</a>
+            <a color="primary" mat-flat-button routerLink="/evenements">Voir tout l'agenda</a>
 
         </div>
     </div>
@@ -92,10 +92,10 @@
 </div>
 
 <div class="categories section">
-    <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px" >
+    <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px">
         <div class="mat-display-1 ">NOS THEMES</div>
         <app-product-tags-navigation></app-product-tags-navigation>
-        <a mat-flat-button color="primary" routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
+        <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
     </div>
 </div>
 
@@ -105,9 +105,9 @@
 
         <div class="mat-display-1 margin-bottom">NOUS SOUTENIR</div>
 
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayoutAlign.gt-sm="start stretch" fxLayout="column" fxLayoutGap="30px">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start stretch" fxLayoutGap="30px" fxLayoutGap.gt-sm="60px">
 
-            <div fxFlex.gt-sm="33" class="support-column" id="support-column-1">
+            <div class="support-column" fxFlex.gt-sm="33" id="support-column-1">
                 <div class="support-image"></div>
                 <div class="support-column-body">
                     <div class="mat-headline">S'abonner</div>
@@ -123,7 +123,7 @@
                 </div>
             </div>
 
-            <div fxFlex.gt-sm="33" class="support-column" id="support-column-2">
+            <div class="support-column" fxFlex.gt-sm="33" id="support-column-2">
                 <div class="support-image"></div>
                 <div class="support-column-body">
                     <div class="mat-headline">Rejoindre l’association</div>
@@ -138,7 +138,7 @@
                     </a>
                 </div>
             </div>
-            <div fxFlex.gt-sm="33" class="support-column" id="support-column-3">
+            <div class="support-column" fxFlex.gt-sm="33" id="support-column-3">
                 <div class="support-image"></div>
                 <div class="support-column-body">
                     <div class="mat-headline">Rejoindre l’association</div>

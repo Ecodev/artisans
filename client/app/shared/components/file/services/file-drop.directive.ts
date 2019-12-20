@@ -1,6 +1,5 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 import { ngfDrop } from 'angular-file';
-import { debounce } from 'lodash';
 import { UploadService } from './upload.service';
 
 @Directive({
@@ -45,11 +44,6 @@ export class FileDropDirective extends ngfDrop {
         super.onDragLeave(event);
     }
 
-    private removeOverlay() {
-        this.element.nativeElement.classList.remove(this.overlayVisibleClass);
-        this.isOverlayVisible = false;
-    }
-
     /**
      * The original eventToTransfer can return null, but eventToFiles try to access an attribute on that potential null causing error.
      * This overrides eventToFiles to prevent this error, but TODO should report bug on original repo and remove this fn when fixed.
@@ -65,5 +59,10 @@ export class FileDropDirective extends ngfDrop {
             }
         }
         return [];
+    }
+
+    private removeOverlay() {
+        this.element.nativeElement.classList.remove(this.overlayVisibleClass);
+        this.isOverlayVisible = false;
     }
 }

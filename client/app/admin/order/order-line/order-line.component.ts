@@ -2,8 +2,8 @@ import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NaturalAbstractDetail, NaturalDialogTriggerProvidedData } from '@ecodev/natural';
 import { merge, omit } from 'lodash';
-import { ProductService } from '../../products/services/product.service';
 import { OrderLine, OrderLineVariables, UpdateOrderLine, UpdateOrderLineVariables } from '../../../shared/generated-types';
+import { ProductService } from '../../products/services/product.service';
 import { OrderLineService } from '../services/order-lines.service';
 
 @Component({

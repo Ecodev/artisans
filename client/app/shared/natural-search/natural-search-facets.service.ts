@@ -16,10 +16,10 @@ import {
     TypeTextComponent,
     wrapLike,
 } from '@ecodev/natural';
-import { ProductService } from '../../admin/products/services/product.service';
 import { ProductTagService } from '../../admin/product-tags/services/product-tag.service';
-import { UserService } from '../../admin/users/services/user.service';
+import { ProductService } from '../../admin/products/services/product.service';
 import { UserTagService } from '../../admin/user-tags/services/user-tag.service';
+import { UserService } from '../../admin/users/services/user.service';
 import { ProductFilterGroupCondition, UserFilterGroupCondition } from '../generated-types';
 
 /**

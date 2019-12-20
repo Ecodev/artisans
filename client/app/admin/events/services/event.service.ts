@@ -7,14 +7,14 @@ import {
     CreateEventVariables,
     DeleteEvents,
     Event,
+    EventInput,
     Events,
     EventsVariables,
-    EventInput,
     EventVariables,
     UpdateEvent,
     UpdateEventVariables,
 } from '../../../shared/generated-types';
-import { createEvent, deleteEvents, eventsQuery, eventQuery, updateEvent } from './event.queries';
+import { createEvent, deleteEvents, eventQuery, eventsQuery, updateEvent } from './event.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -48,7 +48,7 @@ export class EventService
         return {
             name: '',
             description: '',
-            date: new Date()
+            date: new Date(),
         };
     }
 

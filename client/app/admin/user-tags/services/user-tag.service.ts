@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Validators } from '@angular/forms';
+import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, NaturalValidators } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { NaturalAbstractModelService, FormValidators, FormAsyncValidators, NaturalValidators } from '@ecodev/natural';
-import { createUserTag, deleteUserTags, updateUserTag, userTagQuery, userTagsQuery } from './user-tag.queries';
 import {
     CreateUserTag,
     CreateUserTagVariables,
     UpdateUserTag,
     UpdateUserTagVariables,
-    UserTagInput,
     UserTag,
-    UserTagVariables,
+    UserTagInput,
     UserTags,
     UserTagsVariables,
+    UserTagVariables,
 } from '../../../shared/generated-types';
-import { Validators } from '@angular/forms';
+import { createUserTag, deleteUserTags, updateUserTag, userTagQuery, userTagsQuery } from './user-tag.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -32,13 +32,6 @@ export class UserTagService extends NaturalAbstractModelService<UserTag['userTag
         super(apollo, 'userTag', userTagQuery, userTagsQuery, createUserTag, updateUserTag, deleteUserTags);
     }
 
-    protected getDefaultForServer(): UserTagInput {
-        return {
-            name: '',
-            color: '',
-        };
-    }
-
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
@@ -49,6 +42,13 @@ export class UserTagService extends NaturalAbstractModelService<UserTag['userTag
     public getFormAsyncValidators(): FormAsyncValidators {
         return {
             name: [NaturalValidators.unique('name', this)],
+        };
+    }
+
+    protected getDefaultForServer(): UserTagInput {
+        return {
+            name: '',
+            color: '',
         };
     }
 

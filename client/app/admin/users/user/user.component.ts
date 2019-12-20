@@ -1,13 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import {
-    CreateUser,
-    CreateUserVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    User,
-    UserVariables,
-} from '../../../shared/generated-types';
+import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
 import { UserTagService } from '../../user-tags/services/user-tag.service';
 import { UserService } from '../services/user.service';
 

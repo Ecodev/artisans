@@ -5,9 +5,7 @@ import { NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData } from '
 import { OrderComponent } from '../admin/order/order/order.component';
 import { OrdersComponent } from '../admin/order/orders/orders.component';
 import { OrderResolver } from '../admin/order/services/order.resolver';
-import { UserService } from '../admin/users/services/user.service';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
-import { OrdersVariables } from '../shared/generated-types';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 
@@ -35,7 +33,7 @@ const routes: Routes = [
                                 component: NaturalDialogTriggerComponent,
                                 resolve: {
                                     order: OrderResolver,
-                                    viewer: ViewerResolver
+                                    viewer: ViewerResolver,
                                 },
                                 data: {
                                     component: OrderComponent,

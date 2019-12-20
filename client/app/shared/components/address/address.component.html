@@ -1,7 +1,7 @@
-<div [formGroup]="form" fxLayout="column" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'">
+<div [formGroup]="form" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'" fxLayout="column">
     <mat-form-field>
         <mat-label>Rue</mat-label>
-        <input matInput formControlName="street" (change)="update()">
+        <input (change)="update()" formControlName="street" matInput>
         <mat-error *ngIf="form.get('street')?.hasError('required')">Requis</mat-error>
     </mat-form-field>
 
@@ -9,14 +9,14 @@
 
         <mat-form-field [fxFlex]="!vertical">
             <mat-label>Localité</mat-label>
-            <input matInput formControlName="locality" (change)="update()">
+            <input (change)="update()" formControlName="locality" matInput>
             <mat-error *ngIf="form.get('locality')?.hasError('required')">Requis</mat-error>
         </mat-form-field>
 
         <div fxLayout="row" fxLayoutGap="10px">
             <mat-form-field [style.width.px]="100">
                 <mat-label>NPA</mat-label>
-                <input matInput formControlName="postcode" (change)="update()">
+                <input (change)="update()" formControlName="postcode" matInput>
                 <mat-error *ngIf="form.get('postcode')?.hasError('required')">Requis</mat-error>
             </mat-form-field>
         </div>

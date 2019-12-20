@@ -3,13 +3,13 @@
     <h1 class="mat-display-1"> {{ data.model.name }}</h1>
 
     <div fxLayout.gt-sm="row" fxLayoutGap="60px">
-        <app-file *ngIf="data.model.image" [model]="data.model.image" [height]="200" fxFlex="33"></app-file>
-        <div class="mat-subheading-2" [innerHTML]="data.model.description" fxFlex></div>
+        <app-file *ngIf="data.model.image" [height]="200" [model]="data.model.image" fxFlex="33"></app-file>
+        <div [innerHTML]="data.model.description" class="mat-subheading-2" fxFlex></div>
     </div>
 
     <div fxLayout="column" fxLayoutGap="30px">
 
-        <div *ngIf="!viewer" fxLayout="row wrap" class="mat-subheading-2">
+        <div *ngIf="!viewer" class="mat-subheading-2" fxLayout="row wrap">
             <span class="mat-display-1">Intéressé par ce contenu ?</span>
             <span>Si vous êtes déjà abonnés à la version digitale</span>
             <a routerLink="/mon-compte"> connectez-vous !</a>
@@ -18,9 +18,9 @@
             <div>
                 <div class="mat-display-1">Acheter le numéro</div>
 
-                <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="center start">
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="data.model.type === ProductType.both">
+                    <div *ngIf="data.model.type === ProductType.both" fxLayout="column" fxLayoutAlign="start center">
                         <div class="mat-headline price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
@@ -42,13 +42,13 @@
             <div>
                 <h1 class="mat-display-1">S'abonner</h1>
                 ...
-                <a mat-flat-button color="primary" routerLink="/larevuedurable/abonnements">S'abonner</a>
+                <a color="primary" mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
             </div>
         </div>
     </div>
 
     <div *ngIf="data.model.permissions?.update">
-        <button mat-stroked-button [mat-dialog-close]="['/admin/product', data.model.id]">Administration</button>
+        <button [mat-dialog-close]="['/admin/product', data.model.id]" mat-stroked-button>Administration</button>
     </div>
 
 </div>

@@ -39,6 +39,12 @@ export class SessionService extends NaturalAbstractModelService<Session['session
             deleteSessions);
     }
 
+    public getFormValidators(): FormValidators {
+        return {
+            name: [Validators.required, Validators.maxLength(100)],
+        };
+    }
+
     protected getDefaultForServer(): SessionInput {
         return {
             name: '',
@@ -47,12 +53,6 @@ export class SessionService extends NaturalAbstractModelService<Session['session
             availability: '',
             dates: [], // todo
             description: '',
-        };
-    }
-
-    public getFormValidators(): FormValidators {
-        return {
-            name: [Validators.required, Validators.maxLength(100)],
         };
     }
 

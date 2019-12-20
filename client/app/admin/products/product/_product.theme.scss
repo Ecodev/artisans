@@ -1,17 +1,19 @@
 @mixin product($theme) {
-  .warn {
-    color: mat-color($artisans-warn);
-  }
-  natural-icon {
-    .negative {
-      color: mat-color($artisans-warn) !important;
+    .warn {
+        color: mat-color($artisans-warn);
     }
-    .neutral {
-      color: mat-color($artisans-accent) !important;
-    }
-    .positive {
-      color: mat-color($artisans-primary) !important;
-    }
+    natural-icon {
+        .negative {
+            color: mat-color($artisans-warn) !important;
+        }
 
-  }
+        .neutral {
+            color: mat-color($artisans-accent) !important;
+        }
+
+        .positive {
+            color: mat-color($artisans-primary) !important;
+        }
+
+    }
 }

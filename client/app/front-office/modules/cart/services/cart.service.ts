@@ -12,7 +12,6 @@ import { Cart } from '../classes/cart';
 })
 export class CartService {
 
-    public static _globalCart: Cart;
     private static globalCartStorageKey = 'global-cart';
 
     constructor(private orderService: OrderService, private alertService: NaturalAlertService) {
@@ -31,6 +30,8 @@ export class CartService {
         // On currency change, update carts totals
         CurrencyManager.current.subscribe(() => Cart.carts.forEach(cart => cart.computeTotals()));
     }
+
+    public static _globalCart: Cart;
 
     public static get globalCart(): Cart {
         CartService.initGlobalCart();

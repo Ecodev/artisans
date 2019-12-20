@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Literal } from '@ecodev/natural';
+import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
-import { debounceTime, distinctUntilChanged, filter, skip, take } from 'rxjs/operators';
 import { isEqual } from 'lodash';
 import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
-import { Apollo } from 'apollo-angular';
+import { debounceTime, distinctUntilChanged, filter, skip, take } from 'rxjs/operators';
 import { Permissions, Permissions_permissions, Permissions_permissions_crud } from '../generated-types';
-import { Literal } from '@ecodev/natural';
 
 const permissions = gql`
     query Permissions {
@@ -70,6 +70,14 @@ export class PermissionsService {
         });
     }
 
+    public setUser(user: Literal | null): Observable<Permissions_permissions> {
+        const newContexts = {
+            user: user ? user.id : null,
+        };
+
+        return this.setNewContexts(newContexts);
+    }
+
     /**
      * Return an observable that will complete as soon as the next permissions are available
      */
@@ -86,14 +94,6 @@ export class PermissionsService {
 
             return this.changes.pipe(skip(1), take(1));
         }
-    }
-
-    public setUser(user: Literal | null): Observable<Permissions_permissions> {
-        const newContexts = {
-            user: user ? user.id : null,
-        };
-
-        return this.setNewContexts(newContexts);
     }
 
 }

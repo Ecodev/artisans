@@ -1,4 +1,4 @@
-<div class="container" fxLayout="column" *ngIf="cart">
+<div *ngIf="cart" class="container" fxLayout="column">
 
     <div class="mat-display-1">Panier</div>
 
@@ -6,9 +6,9 @@
 
         <div class="mat-headline">Aucun article dans le panier</div>
         <div fxLayout="row" fxLayoutGap="30px">
-            <a mat-flat-button color="primary" routerLink="/larevuedurable/articles">Consulter nos articles</a>
-            <a mat-flat-button color="primary" routerLink="/larevuedurable/numeros">Consulter nos revues</a>
-            <a mat-flat-button color="primary" routerLink="/...">S'abonner</a>
+            <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Consulter nos articles</a>
+            <a color="primary" mat-flat-button routerLink="/larevuedurable/numeros">Consulter nos revues</a>
+            <a color="primary" mat-flat-button routerLink="/...">S'abonner</a>
         </div>
 
     </div>
@@ -16,15 +16,15 @@
     <div *ngIf="cart.lines.length" fxLayout="column" fxLayoutGap="10px">
 
         <div class="cart-items">
-            <div class="cart-item" *ngFor="let line of cart.lines" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+            <div *ngFor="let line of cart.lines" class="cart-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                 <app-file [height]="70"
                           [model]="line.product.image"
+                          [routerLink]="['/larevuedurable/product', line.product.id]"
                           [style.width.px]="70"
                           matListAvatar
-                          [routerLink]="['/larevuedurable/product', line.product.id]"
                           matRipple
                 ></app-file>
-                <a mat-button [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex>
+                <a [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex mat-button>
                     {{ line.product.name }}, {{ line.type | enum : 'ProductType' | async }}</a>
 
                 <ng-container *ngIf="line.quantity > 1">
@@ -37,18 +37,18 @@
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                    <button mat-icon-button
-                            mat-raised-button
-                            (click)="decrease(line.product, line.type)"
-                            color="warn"
+                    <button (click)="decrease(line.product, line.type)"
                             *ngIf="line.quantity === 1"
+                            color="warn"
+                            mat-icon-button
+                            mat-raised-button
                     >
                         <natural-icon name="delete"></natural-icon>
                     </button>
-                    <button mat-icon-button mat-raised-button (click)="decrease(line.product, line.type)" *ngIf="line.quantity > 1">
+                    <button (click)="decrease(line.product, line.type)" *ngIf="line.quantity > 1" mat-icon-button mat-raised-button>
                         <natural-icon name="remove"></natural-icon>
                     </button>
-                    <button mat-icon-button mat-raised-button (click)="increase(line.product, line.type)">
+                    <button (click)="increase(line.product, line.type)" mat-icon-button mat-raised-button>
                         <natural-icon name="add"></natural-icon>
                     </button>
                 </div>

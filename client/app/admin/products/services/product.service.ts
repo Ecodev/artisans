@@ -48,22 +48,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             deleteProducts);
     }
 
-    protected getDefaultForServer(): ProductInput {
-        return {
-            name: '',
-            code: null,
-            description: '',
-            pricePerUnitCHF: '0',
-            pricePerUnitEUR: '0',
-            internalRemarks: '',
-            isActive: true,
-            image: null,
-            releaseDate: null,
-            reviewNumber: 0,
-            type: ProductType.digital,
-        };
-    }
-
     public getFormValidators(): FormValidators {
         return {
             code: [Validators.maxLength(20)],
@@ -94,6 +78,22 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             return of({model: null});
         }
 
+    }
+
+    protected getDefaultForServer(): ProductInput {
+        return {
+            name: '',
+            code: null,
+            description: '',
+            pricePerUnitCHF: '0',
+            pricePerUnitEUR: '0',
+            internalRemarks: '',
+            isActive: true,
+            image: null,
+            releaseDate: null,
+            reviewNumber: 0,
+            type: ProductType.digital,
+        };
     }
 
 }

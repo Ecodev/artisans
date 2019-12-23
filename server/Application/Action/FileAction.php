@@ -35,7 +35,7 @@ class FileAction extends AbstractAction
     {
         $id = $request->getAttribute('id');
 
-        /** @var File $file */
+        /** @var null|File $file */
         $file = $this->fileRepository->findOneById($id);
         if (!$file) {
             return $this->createError("File $id not found in database");

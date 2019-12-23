@@ -56,7 +56,7 @@ class EURType extends ScalarType
         $value = (string) $value;
 
         if (!$this->isValid($value)) {
-            throw new Error('Query error: Not a valid ' . $this->name, [$value]);
+            throw new Error('Query error: Not a valid Money: ' . Utils::printSafe($value));
         }
 
         $money = Money::EUR(bcmul($value, '100', 2));
@@ -77,7 +77,7 @@ class EURType extends ScalarType
             return $this->parseValue($ast->value);
         }
 
-        throw new Error('Query error: Can only parse strings got: ' . $ast->kind, [$ast]);
+        throw new Error('Query error: Can only parse strings got: ' . $ast->kind, $ast);
     }
 
     private function isValid($value): bool

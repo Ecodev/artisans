@@ -28,18 +28,18 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
             return $this->getAllIdsQuery();
         }
 
-        if (!$user->getWebTemporaryAccess() && !in_array($user->getSubscriptionType(), [ProductTypeType::BOTH, ProductTypeType::DIGITAL], true)) {
-            $webTypesSql = '(' .
-                $this->getEntityManager()->getConnection()->quote(ProductTypeType::BOTH) . ', ' .
-                $this->getEntityManager()->getConnection()->quote(ProductTypeType::DIGITAL) .
-                ')';
+        $webTypes = [ProductTypeType::BOTH, ProductTypeType::DIGITAL];
+        if ($user->getWebTemporaryAccess() || in_array($user->getSubscriptionType(), $webTypes, true)) {
+            $webTypesSql = implode(',', array_map(function (string $val): string {
+                return $this->getEntityManager()->getConnection()->quote($val);
+            }, $webTypes));
 
             return '
 SELECT file.id FROM file
-INNER JOIN product p ON file.product_id = p.id AND p.is_active and p.type IN ' . $webTypesSql . '
+INNER JOIN product p ON file.product_id = p.id AND p.is_active AND p.type IN (' . $webTypesSql . ') 
 ';
         }
 
-        return '';
+        return '-1';
     }
 }

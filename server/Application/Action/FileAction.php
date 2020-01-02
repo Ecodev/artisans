@@ -6,10 +6,10 @@ namespace Application\Action;
 
 use Application\Model\File;
 use Application\Repository\FileRepository;
+use Laminas\Diactoros\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Diactoros\Response;
 
 class FileAction extends AbstractAction
 {

@@ -9,7 +9,7 @@ use Application\Api\Helper;
 use Application\Model\OrderLine;
 use Application\Service\Invoicer;
 use GraphQL\Type\Definition\Type;
-use Zend\Expressive\Session\SessionInterface;
+use Mezzio\Session\SessionInterface;
 
 abstract class UpdateOrderLine implements FieldInterface
 {

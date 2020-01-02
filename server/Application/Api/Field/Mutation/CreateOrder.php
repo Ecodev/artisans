@@ -8,7 +8,7 @@ use Application\Api\Field\FieldInterface;
 use Application\Model\Order;
 use Application\Service\Invoicer;
 use GraphQL\Type\Definition\Type;
-use Zend\Expressive\Session\SessionInterface;
+use Mezzio\Session\SessionInterface;
 
 abstract class CreateOrder implements FieldInterface
 {

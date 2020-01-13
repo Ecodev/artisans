@@ -67,8 +67,10 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+            <a mat-button routerLink="/larevuedurable/articles">Continuez mes achats</a>
             <button (click)="empty()" mat-button>Vider le panier</button>
-            <button (click)="createOrder()" [style.width.px]="200" color="primary" mat-flat-button>Passer à la caisse</button>
+            <div fxFlex></div>
+            <button [routerLink]="['/panier/commande', cart.id]" [style.width.px]="200" color="primary" mat-flat-button>Commander</button>
         </div>
     </div>
 

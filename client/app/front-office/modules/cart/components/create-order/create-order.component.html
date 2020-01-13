@@ -1,0 +1,58 @@
+<div *ngIf="cart" class="container" fxLayout="row" fxLayoutGap="60px">
+
+    <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px" [formGroup]="billingForm">
+            <h1 class="mat-display-1">Méthode de paiement</h1>
+
+            <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="20px" formControlName="paymentMethod">
+                <div class="payment-method">
+                    <mat-radio-button [value]="PaymentMethod.DATATRANS">Paiement par carte de crédit</mat-radio-button>
+                </div>
+                <div>
+                    <mat-radio-button [value]="PaymentMethod.EBANKING">Paiement par virement bancaire</mat-radio-button>
+                </div>
+                <div>
+                    <mat-radio-button [value]="PaymentMethod.BVR">Paiement par virement bancaire avec bulletin de versement
+                    </mat-radio-button>
+                </div>
+            </mat-radio-group>
+
+            <!--        <mat-error *ngIf="firstStepForm.get('paymentMethod')?.hasError('required')">Requis</mat-error>-->
+
+            <h1 class="mat-display-1">Adresse de facturation</h1>
+            <app-address [form]="billingForm"></app-address>
+
+        </div>
+
+        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px" [formGroup]="shippingForm" [fxShow]="!virtualOnly">
+
+            <h1 class="mat-display-1">Adresse de livraison</h1>
+
+            <mat-checkbox formControlName="sameAsBilling" (change)="updateAddressRequirements(!$event.checked, shippingForm)">
+                La même addresse que pour la facturation
+            </mat-checkbox>
+
+            <app-address *ngIf="!shippingForm.get('sameAsBilling')?.value" [form]="shippingForm"></app-address>
+
+        </div>
+
+    </div>
+
+    <div fxFlex="20" fxLayout="column" fxLayoutGap="20px">
+        <div *ngFor="let line of cart?.lines" class="cart-item">
+            <a [routerLink]="['/larevuedurable/product', line.product.id]">{{ line.product.name }}</a>
+            <div>Version :  {{ line.type | enum : 'ProductType' | async }}</div>
+            <div>Quantité :{{ line.quantity }}</div>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="start end">
+            <div class="mat-headline">Prix total</div>
+            <div class="mat-display-1">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</div>
+        </div>
+
+        <button mat-flat-button color="accent" [disabled]="billingForm.invalid || shippingForm.invalid" (click)="confirm()">
+            Terminer la commande
+        </button>
+    </div>
+
+</div>

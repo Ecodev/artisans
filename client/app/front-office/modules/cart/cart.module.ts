@@ -4,9 +4,10 @@ import { ArtisansModule } from '../../../shared/modules/artisans.module';
 
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './components/cart/cart.component';
+import { CreateOrderComponent } from './components/create-order/create-order.component';
 
 @NgModule({
-    declarations: [CartComponent],
+    declarations: [CartComponent, CreateOrderComponent],
     imports: [
         CommonModule,
         CartRoutingModule,

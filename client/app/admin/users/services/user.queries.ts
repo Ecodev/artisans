@@ -14,6 +14,11 @@ export const userFieldsFragment = gql`
         postcode
         street
         locality
+        country {
+            id
+            name
+            code
+        }
         role
         code
         membershipBegin

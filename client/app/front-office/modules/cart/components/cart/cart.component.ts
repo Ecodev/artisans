@@ -25,12 +25,12 @@ export class CartComponent implements OnInit {
      */
     public CurrencyManager = CurrencyManager;
 
+    /**
+     * Eligible cart for Order
+     */
     public cart: Cart;
 
-    constructor(public cartService: CartService,
-                public alertService: NaturalAlertService,
-                public router: Router,
-                private route: ActivatedRoute) {
+    constructor(public alertService: NaturalAlertService, public router: Router, private route: ActivatedRoute) {
 
     }
 
@@ -43,23 +43,6 @@ export class CartComponent implements OnInit {
         } else {
             this.cart = CartService.globalCart;
         }
-    }
-
-    public createOrder() {
-        this.alertService
-            .confirm('Valider l\'achat',
-                'Veuillez confirmer votre achat de ' + this.cart.totalTaxInc.toFixed(2) + ' CHF',
-                'Confirmer')
-            .subscribe(
-                confirm => {
-                    if (confirm) {
-                        this.cartService.save(this.cart).subscribe(() => {
-                            this.alertService.info('Votre commande a bien été enregistrée');
-                            this.cart.empty();
-                        });
-                    }
-                });
-
     }
 
     public empty() {

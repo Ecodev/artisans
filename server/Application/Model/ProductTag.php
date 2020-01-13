@@ -13,8 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * A type of product.
  *
- * Typical values would be: "Voilier", "SUP".
- *
  * @ORM\Entity(repositoryClass="\Application\Repository\ProductTagRepository")
  * @ORM\Table(uniqueConstraints={
  *     @ORM\UniqueConstraint(name="unique_name", columns={"name"})

@@ -11,6 +11,7 @@ use Application\Api\Field\Query\Permissions;
 use Application\Api\Field\Query\UserByToken;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
+use Application\Model\Country;
 use Application\Model\Event;
 use Application\Model\File;
 use Application\Model\Image;
@@ -57,6 +58,7 @@ class QueryType extends ObjectType
             Standard::buildQuery(Subscription::class),
             Standard::buildQuery(User::class),
             Standard::buildQuery(UserTag::class),
+            Standard::buildQuery(Country::class),
         );
 
         $config = [

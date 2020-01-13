@@ -7,6 +7,7 @@ namespace Application\Acl;
 use Application\Acl\Assertion\IsMyself;
 use Application\Model\AbstractModel;
 use Application\Model\Configuration;
+use Application\Model\Country;
 use Application\Model\Event;
 use Application\Model\File;
 use Application\Model\Image;
@@ -60,6 +61,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $newsletter = new ModelResource(Newsletter::class);
         $session = new ModelResource(Session::class);
         $subscription = new ModelResource(Subscription::class);
+        $country = new ModelResource(Country::class);
 
         $this->addResource($product);
         $this->addResource($productTag);
@@ -76,8 +78,9 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->addResource($newsletter);
         $this->addResource($session);
         $this->addResource($subscription);
+        $this->addResource($country);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country], ['read']);
 
         $this->allow(User::ROLE_MEMBER, [$user, $userTag], ['read']);
         $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsMyself());
@@ -90,7 +93,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->allow(User::ROLE_FACILITATOR, [$user], ['create', 'update']);
         $this->allow(User::ROLE_FACILITATOR, [$userTag], ['create', 'update', 'delete']);
 
-        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $image], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$newsletter], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$configuration], ['create']);

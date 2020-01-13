@@ -22,7 +22,7 @@ trait HasName
      *
      * @param string $name
      */
-    public function __construct(string $name = '')
+    public function __construct($name = '')
     {
         $this->setName($name);
     }

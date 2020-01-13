@@ -39,7 +39,7 @@ export class AddressComponent {
      */
     @Output() change: EventEmitter<boolean> = new EventEmitter();
 
-    constructor(private countryService: CountryService) {
+    constructor(public countryService: CountryService) {
     }
 
     public update() {

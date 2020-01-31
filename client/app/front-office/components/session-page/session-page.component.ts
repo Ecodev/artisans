@@ -37,12 +37,16 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
      */
     public UserRole = UserRole;
 
+    public data;
+
     constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);
     }
 
     ngOnInit(): void {
         super.ngOnInit();
+
+        this.data = this.route.snapshot.data;
 
         this.route.data.subscribe(data => {
 

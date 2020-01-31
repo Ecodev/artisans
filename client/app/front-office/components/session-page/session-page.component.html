@@ -18,7 +18,7 @@
             <!-- @formatter:off -->
             <a mat-flat-button color="primary"
                [routerLink]="['/admin/session/', data.model.id]"
-               *ngIf="route.snapshot.data?.viewer?.model?.role === UserRole.administrator || route.snapshot.data?.viewer?.model?.role === UserRole.facilitator">
+               *ngIf="data?.viewer?.model?.role === UserRole.administrator || data?.viewer?.model?.role === UserRole.facilitator">
                 Administrer
             </a>
             <!-- @formatter:on -->

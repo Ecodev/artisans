@@ -1,13 +1,17 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail } from '@ecodev/natural';
+import { NaturalAbstractDetail, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { SessionService } from '../../../admin/sessions/services/session.service';
+import { UserService } from '../../../admin/users/services/user.service';
 import {
     CreateSession,
     CreateSessionVariables,
     Session,
     SessionVariables,
     UpdateSession,
-    UpdateSessionVariables, UserRole,
+    UpdateSessionVariables,
+    UserRole,
+    Users_users_items,
+    UsersVariables,
 } from '../../../shared/generated-types';
 
 @Component({
@@ -23,15 +27,32 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
     UpdateSessionVariables,
     any> implements OnInit {
 
+    /**
+     * Session animators/facilitators
+     */
+    public facilitators: Users_users_items[] = [];
 
     /**
      * For template usage
      */
     public UserRole = UserRole;
 
-
-    constructor(private sessionService: SessionService, injector: Injector) {
+    constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);
+    }
+
+    ngOnInit(): void {
+        super.ngOnInit();
+
+        this.route.data.subscribe(data => {
+
+            if (data.session) {
+                const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+                qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [data.session.model.id]}}}]}]}});
+                this.userService.getAll(qvm).subscribe(result => this.facilitators = result.items);
+            }
+
+        });
     }
 
 }

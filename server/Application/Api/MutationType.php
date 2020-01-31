@@ -62,6 +62,7 @@ class MutationType extends ObjectType
             Standard::buildMutation(UserTag::class),
             Standard::buildRelationMutation(UserTag::class, User::class),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
+            Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),
         );
 
         $config = [

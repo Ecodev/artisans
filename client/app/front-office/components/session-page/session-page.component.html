@@ -12,9 +12,17 @@
             </div>
         </div>
 
-        <div fxLayout="row" fxLayoutGap="20px" >
+        <div fxLayout="row" fxLayoutGap="20px">
             <a mat-flat-button color="accent">S'inscrire</a>
-            <a mat-flat-button color="primary" [routerLink]="['/admin/session/', data.model.id]" *ngIf="route.snapshot.data?.viewer?.model?.role === UserRole.administrator || route.snapshot.data?.viewer?.model?.role === UserRole.facilitator">Administrer</a>
+
+            <!-- @formatter:off -->
+            <a mat-flat-button color="primary"
+               [routerLink]="['/admin/session/', data.model.id]"
+               *ngIf="route.snapshot.data?.viewer?.model?.role === UserRole.administrator || route.snapshot.data?.viewer?.model?.role === UserRole.facilitator">
+                Administrer
+            </a>
+            <!-- @formatter:on -->
+
         </div>
 
     </div>
@@ -35,7 +43,10 @@
 
         <div>
             <div class="mat-title">Facilitateurs</div>
-            // todo
+            <div *ngFor="let facilitator of facilitators" fxLayout="column">
+                <div> {{ facilitator.name }}</div>
+                <a [href]="'mailto:' + facilitator.email"> {{ facilitator.email }}</a>
+            </div>
         </div>
 
     </div>

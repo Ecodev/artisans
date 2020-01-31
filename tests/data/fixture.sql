@@ -70,4 +70,13 @@ REPLACE INTO subscription (id, is_active, image_id, price_per_unit_chf, price_pe
 (19004, 1, NULL, 16000, 10000, 'Abonnement institutionnel numérique', 'abo-pro-web', 'digital', 'Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
 (19005, 1, NULL, 18500, 12000, 'Abonnement institutionnel papier et numérique', 'abo-pro-web-papier', 'both', 'Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
+REPLACE INTO session (id, start_date, name, region, locality, street, dates) VALUES
+(20000, '2032-02-01', 'Lausanne 2032-2', 'Vaud', 'Lausanne', 'Rue de lausanne 1', '["1er fevrier", "14 février", "31 février"]'),
+(20001, '2032-03-01', 'Lausanne 2032-3', 'Vaud', 'Lausanne', 'Rue de lausanne 2', '["1er mars", "14 mars", "31 mars"]'),
+(20002, '2032-04-01', 'Lausanne 2032-4', 'Vaud', 'Lausanne', 'Rue de lausanne 3', '["1er avril", "14 avril", "31 avril"]'),
+(20003, '2032-03-01', 'Lutry 2032-3', 'Vaud', 'Lutry', 'Rue de lutry 1', '["2 mars", "15 mars", "30 mars"]'),
+(20004, '2032-05-01', 'Lutry 2032-4', 'Vaud', 'Lutry', 'Rue de lutry 2', '["2 mai", "15 mai", "30 mai"]'),
+(20005, '2032-03-01', 'Neuchâtel 2032-3', 'Neuchâtel', 'Neuchâtel', 'Rue de neuchâtel 2', '["2 mars", "15 mars", "30 mars"]'),
+(20006, '2016-04-01', 'Lausanne 2016-4 (passé)', 'Vaud', 'Lausanne', 'Rue de lausanne 3', '["1er avril", "14 avril", "31 avril"]');
+
 COMMIT;

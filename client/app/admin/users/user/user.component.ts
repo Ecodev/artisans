@@ -1,6 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
+import { SessionService } from '../../sessions/services/session.service';
 import { UserTagService } from '../../user-tags/services/user-tag.service';
 import { UserService } from '../services/user.service';
 
@@ -25,6 +26,7 @@ export class UserComponent
     constructor(private userService: UserService,
                 injector: Injector,
                 public userTagService: UserTagService,
+                public sessionService: SessionService,
     ) {
         super('user', userService, injector);
     }

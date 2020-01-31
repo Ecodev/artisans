@@ -9,6 +9,7 @@ import {
     UpdateSession,
     UpdateSessionVariables,
 } from '../../../shared/generated-types';
+import { UserService } from '../../users/services/user.service';
 import { SessionService } from '../services/session.service';
 
 @Component({
@@ -30,7 +31,7 @@ export class SessionComponent
      */
     public datesForm: FormArray;
 
-    constructor(private sessionService: SessionService, injector: Injector) {
+    constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);
     }
 

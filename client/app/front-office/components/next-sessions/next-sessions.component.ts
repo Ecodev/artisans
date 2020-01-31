@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { SessionService } from '../../../admin/sessions/services/session.service';
-import { Sessions_sessions_items, SessionSortingField, SessionsVariables } from '../../../shared/generated-types';
+import { Sessions_sessions_items, SessionSortingField, SessionsVariables, SortingOrder } from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-next-sessions',
@@ -34,9 +34,20 @@ export class NextSessionsComponent implements OnInit {
         // Get regions
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
         const variables: SessionsVariables = {
-            filter: {groups: [{conditions: [{region: {group: {}}}]}]}, // distinct
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                region: {group: {}}, // distinct
+                                startDate: {greater: {value: new Date()}},
+                            },
+                        ],
+                    },
+                ],
+            },
             pagination: {pageIndex: 0, pageSize: 999},
-            sorting: [{field: SessionSortingField.locality}],
+            sorting: [{field: SessionSortingField.region, order: SortingOrder.ASC}],
         };
 
         qvm.set('variables', variables);
@@ -68,6 +79,7 @@ export class NextSessionsComponent implements OnInit {
                             {
                                 region: {equal: {value: region}},
                                 locality: {group: {}}, // distinct
+                                startDate: {greater: {value: new Date()}},
                             },
                         ],
                     },
@@ -75,8 +87,8 @@ export class NextSessionsComponent implements OnInit {
             },
             pagination: {pageIndex: 0, pageSize: 999},
             sorting: [
-                {field: SessionSortingField.locality},
-                {field: SessionSortingField.startDate},
+                {field: SessionSortingField.startDate, order: SortingOrder.ASC},
+                {field: SessionSortingField.locality, order: SortingOrder.ASC},
             ],
         };
 

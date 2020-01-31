@@ -112,6 +112,22 @@
 
                 <mat-divider></mat-divider>
 
+                <h2 class="mat-title">Conversations carbonne animées</h2>
+
+                <natural-relations [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
+                                   [main]="data.model"
+                                   [service]="sessionService"
+                                   otherName="facilitator"
+                                   placeholder="Conversations carbonne"
+                >
+                    <ng-template let-item="item">
+                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <natural-table-button [label]="item.name" [navigate]="['/admin/session/', item.id]"
+                            ></natural-table-button>
+                        </div>
+                    </ng-template>
+                </natural-relations>
+
                 <mat-divider *ngIf="data.model.id"></mat-divider>
 
                 <div *ngIf="data.model.id" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">

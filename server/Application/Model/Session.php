@@ -7,6 +7,8 @@ namespace Application\Model;
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
 use Cake\Chronos\Date;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -71,6 +73,20 @@ class Session extends AbstractModel
      * @ORM\Column(type="date")
      */
     private $startDate;
+
+    /**
+     * @var Collection
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
+     */
+    private $facilitators;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->facilitators = new ArrayCollection();
+    }
 
     /**
      * @return string
@@ -187,5 +203,37 @@ class Session extends AbstractModel
     public function setStartDate(Date $startDate): void
     {
         $this->startDate = $startDate;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getFacilitators(): Collection
+    {
+        return $this->facilitators;
+    }
+
+    /**
+     * Add facilitator
+     *
+     * @param User $facilitator
+     */
+    public function addFacilitator(User $facilitator): void
+    {
+        if (!$this->facilitators->contains($facilitator)) {
+            $this->facilitators->add($facilitator);
+            $facilitator->sessionAdded($this);
+        }
+    }
+
+    /**
+     * Remove facilitator
+     *
+     * @param User $facilitator
+     */
+    public function removeFacilitator(User $facilitator): void
+    {
+        $this->facilitators->removeElement($facilitator);
+        $facilitator->sessionRemoved($this);
     }
 }

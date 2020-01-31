@@ -175,6 +175,12 @@ class User extends AbstractModel
 
     /**
      * @var Collection
+     * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
+     */
+    private $sessions;
+
+    /**
+     * @var Collection
      * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient")
      */
     private $messages;
@@ -194,6 +200,7 @@ class User extends AbstractModel
     {
         $this->role = $role;
         $this->userTags = new ArrayCollection();
+        $this->sessions = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
@@ -425,13 +432,43 @@ class User extends AbstractModel
 
     /**
      * Notify the user that a userTag was removed.
-     * This should only be called by UserTag::removeUser()
+     * This should only be called by UserTag::removeFacilitator()
      *
      * @param UserTag $userTag
      */
     public function userTagRemoved(UserTag $userTag): void
     {
         $this->userTags->removeElement($userTag);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSessions(): Collection
+    {
+        return $this->sessions;
+    }
+
+    /**
+     * Notify the user that it has a new session.
+     * This should only be called by Session::addFacilitator()
+     *
+     * @param Session $session
+     */
+    public function sessionAdded(Session $session): void
+    {
+        $this->sessions->add($session);
+    }
+
+    /**
+     * Notify the user that a session was removed.
+     * This should only be called by Session::removeFacilitator()
+     *
+     * @param Session $session
+     */
+    public function sessionRemoved(Session $session): void
+    {
+        $this->sessions->removeElement($session);
     }
 
     /**

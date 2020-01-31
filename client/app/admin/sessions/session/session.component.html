@@ -7,8 +7,7 @@
     >
         <a mat-raised-button color="primary" [routerLink]="['/conversation-carbone', data.model.id]">
             <natural-icon name="remove_red_eye"></natural-icon>
-            Aperçu
-        </a>
+            Aperçu </a>
 
     </natural-detail-header>
 
@@ -16,36 +15,37 @@
         <mat-tab label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
+                    <div fxFlex="66" fxLayout="column" fxLayoutGap="30px">
 
-                        <mat-form-field>
-                            <input (change)="update()" formControlName="name" matInput>
-                            <mat-label>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
-                        </mat-form-field>
+                        <div fxLayout="column">
+                            <mat-form-field>
+                                <input (change)="update()" formControlName="name" matInput>
+                                <mat-label>Nom</mat-label>
+                                <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
+                                    Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                </mat-error>
+                                <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Description</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="1"
-                                      formControlName="description"
-                                      matInput
-                                      matTextareaAutosize
-                            ></textarea>
-                        </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Description</mat-label>
+                                <textarea (change)="update()"
+                                          [matAutosizeMinRows]="1"
+                                          formControlName="description"
+                                          matInput
+                                          matTextareaAutosize
+                                ></textarea>
+                            </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Première date</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="startDate">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                            <mat-hint>Ce champ est masqué à l'utilisateur mais est utilisé pour classer les sessions</mat-hint>
-                        </mat-form-field>
-
-                        <div *ngIf="datesForm" formArrayName="dates" [style.margin-top.px]="30">
+                            <mat-form-field>
+                                <mat-label>Première date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="startDate">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-hint>Ce champ est masqué à l'utilisateur mais est utilisé pour classer les sessions</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="datesForm" formArrayName="dates">
                             <h2 class="mat-title">Dates de la session</h2>
                             <div *ngFor="let date of datesForm.controls; let i = index;"
                                  fxLayout="row"
@@ -65,6 +65,23 @@
                                 <natural-icon name="add"></natural-icon>
                                 Ajouter une date
                             </button>
+                        </div>
+
+                        <div>
+                            <h2 class="mat-title">Facilitateurs</h2>
+                            <natural-relations [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
+                                               [main]="data.model"
+                                               [service]="userService"
+                                               otherName="facilitator"
+                                               placeholder="Facilitateur"
+                            >
+                                <ng-template let-item="item">
+                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                        <natural-table-button [label]="item.name" [navigate]="['/admin/user/', item.id]"
+                                        ></natural-table-button>
+                                    </div>
+                                </ng-template>
+                            </natural-relations>
                         </div>
 
                     </div>

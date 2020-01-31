@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SessionResolver } from '../admin/sessions/services/session.resolver';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
+import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
+import { SessionPageComponent } from './components/session-page/session-page.component';
 import { FrontOfficeComponent } from './front-office.component';
 
 const routes: Routes = [
@@ -14,6 +17,19 @@ const routes: Routes = [
                 {
                     path: '',
                     component: HomepageComponent,
+                },
+                {
+                    path: 'prochaines-conversations-carbone',
+                    component: NextSessionsComponent,
+                },
+                {
+                    path: 'prochaines-conversations-carbone/:region',
+                    component: NextSessionsComponent,
+                },
+                {
+                    path: 'conversation-carbone/:sessionId',
+                    component: SessionPageComponent,
+                    resolve: {session: SessionResolver},
                 },
                 {
                     path: 'login',

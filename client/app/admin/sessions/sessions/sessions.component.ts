@@ -11,12 +11,7 @@ import { SessionService } from '../services/session.service';
     templateUrl: './sessions.component.html',
     styleUrls: ['./sessions.component.scss'],
 })
-export class SessionsComponent extends NaturalAbstractList<Sessions['sessions'], SessionsVariables>
-    implements OnInit {
-
-    public initialColumns = [
-        'name',
-    ];
+export class SessionsComponent extends NaturalAbstractList<Sessions['sessions'], SessionsVariables> implements OnInit {
 
     constructor(route: ActivatedRoute,
                 sessionService: SessionService,

@@ -12,6 +12,8 @@ import { LoginComponent } from './components/login/login.component';
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
 import { ShopModule } from './modules/shop/shop.module';
+import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
+import { SessionPageComponent } from './components/session-page/session-page.component';
 
 @NgModule({
     declarations: [
@@ -19,6 +21,8 @@ import { ShopModule } from './modules/shop/shop.module';
         FrontOfficeComponent,
         LoginComponent,
         HomeBlockComponent,
+        NextSessionsComponent,
+        SessionPageComponent,
     ],
     imports: [
         CommonModule,

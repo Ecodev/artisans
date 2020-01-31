@@ -6,6 +6,7 @@ namespace Application\Model;
 
 use Application\Traits\HasDescription;
 use Application\Traits\HasName;
+use Cake\Chronos\Date;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +24,21 @@ class Session extends AbstractModel
      *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $place = '';
+    private $region = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", options={"default" = ""})
+     */
+    private $locality = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", options={"default" = ""})
+     */
+    private $street = '';
 
     /**
      * @var string
@@ -40,6 +55,8 @@ class Session extends AbstractModel
     private $availability = '';
 
     /**
+     * Used for display
+     *
      * @var string[]
      *
      * @ORM\Column(type="json")
@@ -47,19 +64,60 @@ class Session extends AbstractModel
     private $dates = [];
 
     /**
+     * Used for filter + sorting. Represents the first date
+     *
+     * @var Date
+     *
+     * @ORM\Column(type="date")
+     */
+    private $startDate;
+
+    /**
      * @return string
      */
-    public function getPlace(): string
+    public function getLocality(): string
     {
-        return $this->place;
+        return $this->locality;
     }
 
     /**
-     * @param string $place
+     * @param string $locality
      */
-    public function setPlace(string $place): void
+    public function setLocality(string $locality): void
     {
-        $this->place = $place;
+        $this->locality = $locality;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion(): string
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     */
+    public function setRegion(string $region): void
+    {
+        $this->region = $region;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+
+    /**
+     * @param string $street
+     */
+    public function setStreet(string $street): void
+    {
+        $this->street = $street;
     }
 
     /**
@@ -113,5 +171,21 @@ class Session extends AbstractModel
     public function setDates(array $dates): void
     {
         $this->dates = $dates;
+    }
+
+    /**
+     * @return Date
+     */
+    public function getStartDate(): Date
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param Date $startDate
+     */
+    public function setStartDate(Date $startDate): void
+    {
+        $this->startDate = $startDate;
     }
 }

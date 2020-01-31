@@ -1,0 +1,42 @@
+<div class="container" fxLayout.gt-sm="row" fxLayoutGap="60px">
+
+    <div fxLayout="column" fxLayoutGap="60px" fxFlex>
+        <h1 class="mat-display-1">{{ data.model.name }}</h1>
+
+        <div class="mat-body-1" [innerHTML]="data.model.description"></div>
+
+        <div *ngIf="data.model.dates?.length">
+            <p class="mat-body-1">Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>
+            <div fxLayout="row wrap" fxLayoutGap="30px" class="mat-subheading-2">
+                <div fxFlex="45" *ngFor="let date of data.model.dates">{{ date}}</div>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px" >
+            <a mat-flat-button color="accent">S'inscrire</a>
+            <a mat-flat-button color="primary" [routerLink]="['/admin/session/', data.model.id]" *ngIf="route.snapshot.data?.viewer?.model?.role === UserRole.administrator || route.snapshot.data?.viewer?.model?.role === UserRole.facilitator">Administrer</a>
+        </div>
+
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="60px">
+
+        <div fxLayout="column" fxLayoutGap="30px">
+            <div *ngIf="data.model.region || data.model.locality|| data.model.street">
+                Lieu : {{ data.model.street }}, {{ data.model.locality }}, {{ data.model.region }}
+            </div>
+            <div *ngIf="data.model.price">
+                Contribution attendue : {{ data.model.price }}
+            </div>
+            <div *ngIf="data.model.availability">
+                {{ data.model.availability }} {{ data.model.availability > 1 ? 'places' : 'place' }} pour la session
+            </div>
+        </div>
+
+        <div>
+            <div class="mat-title">Facilitateurs</div>
+            // todo
+        </div>
+
+    </div>
+</div>

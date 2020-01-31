@@ -42,16 +42,20 @@ export class SessionService extends NaturalAbstractModelService<Session['session
     public getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
+            startDate: [Validators.required],
         };
     }
 
     protected getDefaultForServer(): SessionInput {
         return {
             name: '',
-            place: '',
+            street: '',
+            locality: '',
+            region: '',
             price: '',
             availability: '',
             dates: [], // todo
+            startDate: null,
             description: '',
         };
     }

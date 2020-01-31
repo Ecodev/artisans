@@ -58,17 +58,22 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         {
             display: 'Agir avec nous',
             children: [
-                {display: 'Les conversations carbonne'},
-                {display: 'Les conversations carbonne'},
+                {display: 'Toutes nos actions'},
+                {display: 'Calculer son bilan carbone'},
                 {
-                    display: 'Les conversations carbonne',
+                    display: 'Participer aux conversations carbone',
                     children: [
-                        {display: 'Les conversations carbonne'},
-                        {display: 'Les conversations carbonne'},
-                        {display: 'Les conversations carbonne'},
+                        {display: 'La méthode'},
+                        {
+                            display: 'Prochaines sessions',
+                            link: '/prochaines-conversations-carbone',
+                        },
+                        {display: 'Pour les organisations'},
+                        {display: 'Facilitateurs'},
+                        {display: 'Les partenaires'},
                     ],
                 },
-                {display: 'Les conversations carbonne'},
+                {display: 'Les conversations carbone'},
             ],
         },
         {

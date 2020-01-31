@@ -5,10 +5,13 @@ export const sessionMetaFragment = gql`
     fragment sessionMeta on Session {
         id
         name
-        place
+        street
+        locality
+        region
         price
         availability
         dates
+        startDate
         description
         creationDate
         creator {

@@ -1,4 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
     CreateSession,
@@ -24,8 +25,26 @@ export class SessionComponent
         UpdateSessionVariables,
         any> implements OnInit {
 
+    /**
+     * Array of form controls dedicated to dates display
+     */
+    public datesForm: FormArray;
+
     constructor(private sessionService: SessionService, injector: Injector) {
         super('session', sessionService, injector);
+    }
+
+    ngOnInit(): void {
+        super.ngOnInit();
+
+        // Overrides form with array by array of forms
+        // Todo in natural : maybe complete AbstractDetailService.getFormConfig() to dynamically consider arrays
+        this.datesForm = new FormArray(this.data.model.dates.map(date => new FormControl(date)));
+        this.form.setControl('dates', this.datesForm);
+    }
+
+    public addDate() {
+        this.datesForm.push(new FormControl(''));
     }
 
 }

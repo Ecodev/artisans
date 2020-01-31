@@ -1,0 +1,18 @@
+<div class="container">
+
+    <mat-form-field>
+        <mat-label>Canton</mat-label>
+        <mat-select (selectionChange)="goToRegion($event.value)" [ngModel]="selectedRegion">
+            <mat-option [value]="null"></mat-option>
+            <mat-option *ngFor="let region of regions" [value]="region">{{ region }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div *ngIf="nextSessions?.length" fxLayout="row wrap" fxLayoutGap="30px">
+        <a fxFlex="45"
+           *ngFor="let session of nextSessions"
+           [routerLink]="['/conversation-carbone', session.id]"
+        >{{ session.locality }}</a>
+    </div>
+
+</div>

@@ -2,9 +2,15 @@
 
     <natural-detail-header [listRoute]="['admin', 'session']"
                            [model]="data.model"
-                           label="Session conv. carbonne"
-                           newLabel="Nouvelle session carbonne"
-    ></natural-detail-header>
+                           label="Session conv. carbone"
+                           newLabel="Nouvelle session carbone"
+    >
+        <a mat-raised-button color="primary" [routerLink]="['/conversation-carbone', data.model.id]">
+            <natural-icon name="remove_red_eye"></natural-icon>
+            Aperçu
+        </a>
+
+    </natural-detail-header>
 
     <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">
@@ -31,15 +37,53 @@
                             ></textarea>
                         </mat-form-field>
 
-                        <!-- todo : dates -->
+                        <mat-form-field>
+                            <mat-label>Première date</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="startDate">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-hint>Ce champ est masqué à l'utilisateur mais est utilisé pour classer les sessions</mat-hint>
+                        </mat-form-field>
+
+                        <div *ngIf="datesForm" formArrayName="dates" [style.margin-top.px]="30">
+                            <h2 class="mat-title">Dates de la session</h2>
+                            <div *ngFor="let date of datesForm.controls; let i = index;"
+                                 fxLayout="row"
+                                 fxLayoutGap="15px"
+                                 fxLayoutAlign="start center"
+                            >
+                                <mat-form-field fxFlex>
+                                    <mat-label>Date</mat-label>
+                                    <input matInput [formControlName]="i" (change)="update();">
+                                </mat-form-field>
+                                <button mat-icon-button mat-raised-button color="warn" (click)="datesForm.removeAt(i); update();">
+                                    <natural-icon name="remove"></natural-icon>
+                                </button>
+                            </div>
+
+                            <button mat-flat-button color="primary" (click)="addDate()">
+                                <natural-icon name="add"></natural-icon>
+                                Ajouter une date
+                            </button>
+                        </div>
 
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
 
                         <mat-form-field>
-                            <mat-label>Lieu</mat-label>
-                            <input (change)="update()" formControlName="place" matInput>
+                            <mat-label>Canton</mat-label>
+                            <input (change)="update()" formControlName="region" matInput>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Ville</mat-label>
+                            <input (change)="update()" formControlName="locality" matInput>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Rue</mat-label>
+                            <input (change)="update()" formControlName="street" matInput>
                         </mat-form-field>
 
                         <mat-form-field>

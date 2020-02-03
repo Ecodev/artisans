@@ -17,6 +17,7 @@
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
                     <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="lines">Entrées</span>
+                    <span naturalColumnsPickerColumn="status">Statut</span>
                     <span naturalColumnsPickerColumn="balance">Total</span>
                 </natural-columns-picker>
             </natural-search>
@@ -58,6 +59,11 @@
                     <th *matHeaderCellDef mat-header-cell>Entrées</th>
                     <td *matCellDef="let element" mat-cell>{{ element.orderLines.length }}</td>
                     <td *matFooterCellDef mat-footer-cell></td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell natural-5em-column >Status</th>
+                    <td *matCellDef="let element" mat-cell >{{ element.status | enum: 'OrderStatus' | async}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">

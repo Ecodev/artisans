@@ -13,7 +13,31 @@ import { OrderLineService } from '../services/order-lines.service';
 export class OrderLinesComponent extends NaturalAbstractList<OrderLines['orderLines'], OrderLinesVariables> implements OnInit {
 
     @Output() select = new EventEmitter();
+
+    /**
+     *
+     */
     @Input() showTotals = false;
+
+    /**
+     * If true, hides natural search and transcluded components
+     */
+    @Input() hideHeader = false;
+
+    /**
+     * If true, hides pagination
+     */
+    @Input() hidePaginator = false;
+
+    /**
+     * Force page size
+     */
+    @Input() paginatorPageSize;
+
+    /**
+     * Override page size options list
+     */
+    @Input() pageSizeOptions;
 
     constructor(service: OrderLineService,
                 naturalSearchFacetsService: NaturalSearchFacetsService,

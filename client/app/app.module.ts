@@ -2,6 +2,7 @@ import { registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import { LOCALE_ID, NgModule } from '@angular/core';
+import { MatPaginatorIntl } from '@angular/material';
 
 import { DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -21,6 +22,7 @@ import { ErrorComponent } from './shared/components/error/error.component';
 import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
 import { ArtisansModule } from './shared/modules/artisans.module';
 import { MaterialModule } from './shared/modules/material.module';
+import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
 
@@ -67,6 +69,10 @@ registerLocaleData(localeFRCH);
             multi: true,
         },
         {provide: LOCALE_ID, useValue: 'fr-CH'},
+        {
+            provide: MatPaginatorIntl,
+            useClass: LocalizedPaginatorIntlService,
+        },
     ],
     bootstrap: [AppComponent],
 })

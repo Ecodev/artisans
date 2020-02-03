@@ -28,7 +28,7 @@ class OrderRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [16000, 16001];
+        $all = [16000, 16001, 16002];
         $family = $all;
 
         return [

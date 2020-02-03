@@ -37,12 +37,14 @@ REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 
 REPLACE INTO `order` (id, owner_id, creator_id, creation_date, balance_chf, balance_eur) VALUES
 (16000, 1002, 1002, '2019-04-24', 2500, NULL),
-(16001, 1003, 1003, '2019-04-25', NULL, 1000);
+(16001, 1003, 1003, '2019-04-25', NULL, 1000),
+(16002, 1000, 1000, '2019-04-25', 1500, NULL);
 
 REPLACE INTO order_line (id, owner_id, order_id, product_id, creation_date, quantity, type, balance_chf, balance_eur, name) VALUES
 (17000, 1002, 16000, 3000, '2019-04-24', 2, 'paper', 1000, NULL, 'Revue printemps 2019'),
 (17001, 1002, 16000, 3002, '2019-04-24', 1, 'digital', 1500, NULL, 'Article individuel'),
-(17002, 1002, 16001, 3001, '2019-04-24', 1, 'digital', NULL, 1000, 'Revue été 2019');
+(17002, 1002, 16001, 3001, '2019-04-24', 1, 'digital', NULL, 1000, 'Revue été 2019'),
+(17003, 1000, 16002, 3000, '2019-05-15', 2, 'paper', 1000, NULL, 'Revue printemps 2019');
 
 REPLACE INTO file (id, product_id, owner_id, filename, mime) VALUES
 (9000, 3001,  1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf'),

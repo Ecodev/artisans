@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Literal, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { CreateOrder, CreateOrderVariables, Order, Orders, OrdersVariables, OrderVariables } from '../../../shared/generated-types';
+import { map } from 'rxjs/operators';
+import {
+    CreateOrder,
+    CreateOrderVariables,
+    Order,
+    Orders,
+    OrderStatus,
+    OrdersVariables,
+    OrderVariables,
+} from '../../../shared/generated-types';
 import { OrderLineService } from './order-lines.service';
-import { createOrder, orderQuery, ordersQuery } from './order.queries';
+import { createOrder, orderQuery, ordersQuery, updateOrderStatus } from './order.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -30,6 +39,16 @@ export class OrderService extends NaturalAbstractModelService<Order['order'],
 
     public getInput(object: Literal) {
         return (object as CreateOrderVariables['input']).map(line => this.orderLineService.getInput(line));
+    }
+
+    public changeStatus(id: string, status: OrderStatus) {
+        return this.apollo.mutate({
+            mutation: updateOrderStatus,
+            variables: {id, status},
+        }).pipe(map((result) => {
+            this.apollo.getClient().reFetchObservableQueries();
+            return result;
+        }));
     }
 
 }

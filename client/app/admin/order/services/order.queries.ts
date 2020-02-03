@@ -7,6 +7,7 @@ export const orderMetaFragment = gql`
         balanceCHF
         balanceEUR
         creationDate
+        status
         orderLines {
             id
         }
@@ -60,6 +61,19 @@ export const createOrder = gql`
         createOrder(input: $input) {
             id
             creator {
+                ...userMeta
+            }
+        }
+    }
+    ${userMetaFragment}
+`;
+
+export const updateOrderStatus = gql`
+    mutation UpdateOrderStatus($id: OrderID!, $status: OrderStatus!) {
+        updateOrderStatus(id:$id, status: $status) {
+            id
+            updateDate
+            updater {
                 ...userMeta
             }
         }

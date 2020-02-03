@@ -25,6 +25,7 @@ import { UserTagResolver } from './user-tags/services/user-tag.resolver';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
 import { UserResolver } from './users/services/user.resolver';
+import { ViewerResolver } from './users/services/viewer.resolver';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
 
@@ -127,10 +128,12 @@ const routes: Routes = [
                             component: NaturalDialogTriggerComponent,
                             resolve: {
                                 order: OrderResolver,
+                                viewer: ViewerResolver,
                             },
                             data: {
                                 component: OrderComponent,
                                 dialogConfig: {
+                                    data: {},
                                     width: '600px',
                                     maxWidth: '95vw',
                                     maxHeight: '97vh',
@@ -146,6 +149,7 @@ const routes: Routes = [
                             data: {
                                 component: OrderLineComponent,
                                 dialogConfig: {
+                                    data: {},
                                     width: '600px',
                                     maxWidth: '95vw',
                                     maxHeight: '97vh',

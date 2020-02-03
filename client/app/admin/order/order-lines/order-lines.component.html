@@ -6,7 +6,7 @@
 
     <div fxLayout="column">
 
-        <div class="margin-v" fxLayout="row" overflow>
+        <div class="margin-v" fxLayout="row" overflow [fxShow]="!hideHeader">
             <natural-search (selectionChange)="search($event)"
                             [facets]="naturalSearchFacets"
                             [multipleGroups]="true"
@@ -29,10 +29,13 @@
 
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
-                <tr *matFooterRowDef="selectedColumns" mat-footer-row></tr>
+
+                <ng-container *ngIf="showTotals">
+                    <tr *matFooterRowDef="selectedColumns" mat-footer-row></tr>
+                </ng-container>
 
                 <ng-container matColumnDef="name">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Article</th>
                     <td *matCellDef="let element" mat-cell>
                         <natural-table-button *ngIf="element.permissions.update"
                                               [label]="element.name"
@@ -62,7 +65,7 @@
                         {{ +element.quantity }}
                     </td>
                     <td *matFooterCellDef mat-footer-cell>
-                        <span *ngIf="showTotals === true && dataSource?.data.totalQuantity > 0">{{dataSource.data.totalQuantity}}</span>
+                        <span *ngIf="dataSource?.data.totalQuantity > 0">{{dataSource.data.totalQuantity}}</span>
                     </td>
                 </ng-container>
 
@@ -73,12 +76,10 @@
                         <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
                     </td>
                     <td *matFooterCellDef mat-footer-cell>
-                        <span *ngIf="showTotals === true">
-                            <span *ngIf="dataSource?.data.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
-                            <ng-container *ngIf="dataSource?.data.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -
-                            </ng-container>
-                            <span *ngIf="dataSource?.data.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
-                        </span>
+                        <span *ngIf="dataSource?.data.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
+                        <ng-container *ngIf="dataSource?.data.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -
+                        </ng-container>
+                        <span *ngIf="dataSource?.data.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
                     </td>
                 </ng-container>
 
@@ -93,12 +94,13 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator (page)="pagination($event)"
+        <mat-paginator [fxShow]="!hidePaginator"
+                       (page)="pagination($event)"
                        *ngIf="dataSource.data?.length"
                        [length]="dataSource.data?.length"
                        [pageIndex]="dataSource.data?.pageIndex"
                        [pageSizeOptions]="pageSizeOptions"
-                       [pageSize]="dataSource.data?.pageSize"
+                       [pageSize]="paginatorPageSize ? paginatorPageSize : dataSource.data?.pageSize"
         ></mat-paginator>
 
     </div>

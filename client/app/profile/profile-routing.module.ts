@@ -3,10 +3,10 @@ import { MatDialogConfig } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 import { NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData } from '@ecodev/natural';
 import { OrderComponent } from '../admin/order/order/order.component';
-import { OrdersComponent } from '../admin/order/orders/orders.component';
 import { OrderResolver } from '../admin/order/services/order.resolver';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
@@ -22,11 +22,8 @@ const routes: Routes = [
                     {
                         // todo : filter Orders for current user
                         path: 'commandes',
-                        component: OrdersComponent,
+                        component: HistoryComponent,
                         resolve: {viewer: ViewerResolver},
-                        data: {
-                            contextColumns: ['creationDate', 'owner', 'balance'],
-                        },
                         children: [
                             {
                                 path: ':orderId',

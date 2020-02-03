@@ -62,6 +62,7 @@ return [
             'EUR' => Application\DBAL\Types\EURType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'ProductType' => Application\DBAL\Types\ProductTypeType::class,
+            'OrderStatus' => Application\DBAL\Types\OrderStatusType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

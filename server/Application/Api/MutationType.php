@@ -13,6 +13,7 @@ use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\Unregister;
 use Application\Api\Field\Mutation\UpdateConfiguration;
 use Application\Api\Field\Mutation\UpdateOrderLine;
+use Application\Api\Field\Mutation\UpdateOrderStatus;
 use Application\Api\Field\Mutation\UpdatePassword;
 use Application\Api\Field\Standard;
 use Application\Model\Event;
@@ -41,6 +42,7 @@ class MutationType extends ObjectType
             ConfirmRegistration::build(),
             Unregister::build(),
             CreateOrder::build(),
+            UpdateOrderStatus::build(),
             UpdateOrderLine::build(),
             UpdateConfiguration::build(),
         ];

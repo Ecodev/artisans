@@ -7,12 +7,14 @@ import { BvrComponent } from './components/bvr/bvr.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProvisionComponent } from './components/provision/provision.component';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { HistoryComponent } from './components/history/history.component';
 
 @NgModule({
     declarations: [
         ProfileComponent,
         ProvisionComponent,
         BvrComponent,
+        HistoryComponent,
     ],
     imports: [
         CommonModule,

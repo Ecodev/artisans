@@ -1,0 +1,57 @@
+<div *ngIf="dataSource" fxLayout="column">
+
+    <h2 class="mat-display-1">Commandes</h2>
+
+    <div fxLayout="column">
+
+        <div class="responsive-table" [fxShow]="dataSource.data?.length > 0">
+            <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table>
+
+                <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+
+                <ng-container matColumnDef="creationDate">
+                    <th *matHeaderCellDef app-date-column mat-header-cell>Date</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <natural-table-button [label]="element.creationDate | date: 'd MMM y - HH:mm'"
+                                              [navigate]="[element.id]"
+                                              matTooltip="Éditer"
+                                              icon="open_in_new"
+                        ></natural-table-button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="status">
+                    <th *matHeaderCellDef mat-header-cell >Status</th>
+                    <td *matCellDef="let element" mat-cell >{{ element.status | enum: 'OrderStatus' | async}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="balance">
+                    <th *matHeaderCellDef mat-header-cell natural-5em-column natural-align-right>Total</th>
+                    <td *matCellDef="let element" mat-cell natural-align-right>
+                        <ng-container *ngIf="element.balanceCHF > 0">{{ element.balanceCHF  | currency : 'CHF' }}</ng-container>
+                        <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
+                    </td>
+                </ng-container>
+
+            </table>
+        </div>
+
+        <div *ngIf="dataSource.data?.length === 0" class="margin mat-subheading-1">Aucun résultat</div>
+
+        <div *ngIf="dataSource.data?.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
+            <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+        </div>
+
+        <mat-paginator (page)="pagination($event)"
+                       *ngIf="dataSource.data?.length"
+                       [length]="dataSource.data?.length"
+                       [pageIndex]="dataSource.data?.pageIndex"
+                       [pageSizeOptions]="[25]"
+                       [pageSize]="[25]"
+        ></mat-paginator>
+
+    </div>
+</div>
+
+<router-outlet></router-outlet>

@@ -4,7 +4,7 @@ import { SessionService } from '../../../admin/sessions/services/session.service
 import { UserService } from '../../../admin/users/services/user.service';
 import {
     CreateSession,
-    CreateSessionVariables,
+    CreateSessionVariables, CurrentUserForProfile_viewer,
     Session,
     SessionVariables,
     UpdateSession,
@@ -37,7 +37,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
      */
     public UserRole = UserRole;
 
-    public data;
+    public viewer: CurrentUserForProfile_viewer;
 
     constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);
@@ -46,7 +46,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
     ngOnInit(): void {
         super.ngOnInit();
 
-        this.data = this.route.snapshot.data;
+        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 
         this.route.data.subscribe(data => {
 

@@ -8,11 +8,13 @@
         </mat-select>
     </mat-form-field>
 
-    <div *ngIf="nextSessions?.length" fxLayout="row wrap" fxLayoutGap="30px">
-        <a fxFlex="45"
-           *ngFor="let session of nextSessions"
-           [routerLink]="['/conversation-carbone', session.id]"
-        >{{ session.locality }}</a>
+    <div *ngIf="localities?.length" fxLayout="row wrap" fxLayoutGap="30px">
+        <ng-container *ngFor="let locality of localities">
+            <a fxFlex="45"
+               *ngIf="nextSessionByRegion.get(locality)"
+               [routerLink]="['/conversation-carbone', nextSessionByRegion.get(locality).id]"
+            >{{ locality }}</a>
+        </ng-container>
     </div>
 
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
+import { forkJoin } from 'rxjs';
 import { SessionService } from '../../../admin/sessions/services/session.service';
 import { Sessions_sessions_items, SessionSortingField, SessionsVariables, SortingOrder } from '../../../shared/generated-types';
 
@@ -24,7 +25,12 @@ export class NextSessionsComponent implements OnInit {
     /**
      * List of only next session for each city matching the wanted region
      */
-    public nextSessions: Sessions_sessions_items[] = [];
+    public localities: string[] = [];
+
+    /**
+     * Stores next session for each locality
+     */
+    public nextSessionByRegion: Map<string, Sessions_sessions_items> = new Map();
 
     constructor(private sessionService: SessionService, public router: Router, public route: ActivatedRoute) {
     }
@@ -54,11 +60,13 @@ export class NextSessionsComponent implements OnInit {
         this.sessionService.getAll(qvm).subscribe(data => this.regions = data.items.map(i => i.region));
 
         this.route.params.subscribe(params => {
-            this.nextSessions = [];
+
+            this.nextSessionByRegion = new Map();
+
             this.selectedRegion = params.region;
 
             if (params.region) {
-                this.getLocalities(params.region);
+                this.fetchLocalitiesAndSessions(params.region);
             }
 
         });
@@ -68,10 +76,13 @@ export class NextSessionsComponent implements OnInit {
         this.router.navigateByUrl('/prochaines-conversations-carbone/' + region);
     }
 
-    public getLocalities(region: string) {
+    /**
+     * Get the next (in the future) session
+     */
+    public fetchLocalitiesAndSessions(region: string) {
 
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
-        const variables: SessionsVariables = {
+        const localityVariables: SessionsVariables = {
             filter: {
                 groups: [
                     {
@@ -87,15 +98,44 @@ export class NextSessionsComponent implements OnInit {
             },
             pagination: {pageIndex: 0, pageSize: 999},
             sorting: [
-                {field: SessionSortingField.startDate, order: SortingOrder.ASC},
                 {field: SessionSortingField.locality, order: SortingOrder.ASC},
+                {field: SessionSortingField.startDate, order: SortingOrder.ASC},
             ],
         };
 
-        qvm.set('variables', variables);
+        qvm.set('variables', localityVariables);
 
-        return this.sessionService.getAll(qvm).subscribe(data => {
-            this.nextSessions = data.items;
+        this.sessionService.getAll(qvm).subscribe(data => {
+
+            // List localities names
+            this.localities = data.items.map(i => i.locality);
+
+            // Query next session for each locality
+            const observables = this.localities.map(locality => {
+
+                const sessionVariables: SessionsVariables = {
+                    filter: {
+                        groups: [{conditions: [{locality: {equal: {value: locality}}, startDate: {greater: {value: new Date()}}}]}],
+                    },
+                    pagination: {pageIndex: 0, pageSize: 1}, // only the next one
+                    sorting: [{field: SessionSortingField.startDate, order: SortingOrder.ASC}],
+                };
+
+                const localityQvm = new NaturalQueryVariablesManager<SessionsVariables>();
+                localityQvm.set('variables', sessionVariables);
+
+                return this.sessionService.getAll(localityQvm);
+            });
+
+            forkJoin(observables).subscribe(result => {
+                result.forEach(sessionsResult => {
+                    const session = sessionsResult.items.length ? sessionsResult.items[0] : null;
+                    if (session) {
+                        this.nextSessionByRegion.set(session.locality, session);
+                    }
+                });
+            });
+
         });
     }
 

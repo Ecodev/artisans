@@ -6,49 +6,41 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
 import { SessionPageComponent } from './components/session-page/session-page.component';
-import { FrontOfficeComponent } from './front-office.component';
 
 const routes: Routes = [
         {
             path: '',
-            component: FrontOfficeComponent,
+            component: HomepageComponent,
+        },
+        {
+            path: 'prochaines-conversations-carbone',
+            component: NextSessionsComponent,
+        },
+        {
+            path: 'prochaines-conversations-carbone/:region',
+            component: NextSessionsComponent,
+        },
+        {
+            path: 'conversation-carbone/:sessionId',
+            component: SessionPageComponent,
+            resolve: {session: SessionResolver},
+        },
+        {
+            path: 'login',
+            component: LoginComponent,
             resolve: {viewer: ViewerResolver},
-            children: [
-                {
-                    path: '',
-                    component: HomepageComponent,
-                },
-                {
-                    path: 'prochaines-conversations-carbone',
-                    component: NextSessionsComponent,
-                },
-                {
-                    path: 'prochaines-conversations-carbone/:region',
-                    component: NextSessionsComponent,
-                },
-                {
-                    path: 'conversation-carbone/:sessionId',
-                    component: SessionPageComponent,
-                    resolve: {session: SessionResolver},
-                },
-                {
-                    path: 'login',
-                    component: LoginComponent,
-                    resolve: {viewer: ViewerResolver},
-                },
-                {
-                    path: 'mon-compte',
-                    loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
-                },
-                {
-                    path: 'larevuedurable',
-                    loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
-                },
-                {
-                    path: 'panier',
-                    loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
-                },
-            ],
+        },
+        {
+            path: 'mon-compte',
+            loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
+        },
+        {
+            path: 'larevuedurable',
+            loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
+        },
+        {
+            path: 'panier',
+            loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
         },
     ]
 ;

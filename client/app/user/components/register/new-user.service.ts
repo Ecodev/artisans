@@ -12,10 +12,7 @@ import { AnonymousUserService } from './anonymous-user.service';
 })
 export class NewUserService extends AnonymousUserService {
 
-    constructor(apollo: Apollo,
-                router: Router,
-                permissionsService: PermissionsService,
-    ) {
+    constructor(apollo: Apollo, router: Router, permissionsService: PermissionsService) {
         super(apollo, router, permissionsService);
     }
 
@@ -25,11 +22,10 @@ export class NewUserService extends AnonymousUserService {
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.required, Validators.email],
-            familyRelationship: [Validators.required],
-            birthday: [Validators.required],
             locality: [Validators.required],
             street: [Validators.required],
             postcode: [Validators.required],
+            country: [Validators.required],
         };
     }
 

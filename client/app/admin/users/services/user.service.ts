@@ -97,6 +97,10 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.email],
+            locality: [Validators.required],
+            street: [Validators.required],
+            postcode: [Validators.required],
+            country: [Validators.required],
         };
     }
 

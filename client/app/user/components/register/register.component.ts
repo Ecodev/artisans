@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail, NaturalDataSource } from '@ecodev/natural';
+import { NaturalAbstractDetail } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
@@ -18,14 +18,10 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     UpdateUserVariables,
     any> implements OnInit {
 
-    public mandatoryProducts: NaturalDataSource;
-
     public step;
     public sending = false;
 
-    constructor(userService: AnonymousUserService,
-                injector: Injector,
-                protected apollo: Apollo,
+    constructor(userService: AnonymousUserService, injector: Injector, protected apollo: Apollo,
     ) {
         super('user', userService, injector);
     }

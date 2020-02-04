@@ -52,6 +52,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'postcode',
             'locality',
             'birthday',
+            'country'
         ];
 
         const input = pick(NaturalUtility.relationsToIds(this.form.value), fieldWhitelist);
@@ -67,7 +68,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             const message = 'Vous pouvez maintenant vous connecter avec le login et mot de passe que vous avez choisi';
 
             this.alertService.info(message, 5000);
-            this.router.navigate(['/login']);
+            this.router.navigate(['/mon-compte']);
         }, () => this.sending = false);
     }
 

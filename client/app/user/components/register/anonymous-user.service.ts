@@ -21,13 +21,13 @@ export class AnonymousUserService extends UserService {
     public getFormValidators(): FormValidators {
         return {
             email: [Validators.required, Validators.email],
-            termsAgreement: [],
+            // termsAgreement: [], // todo : restore ?
         };
     }
 
     protected getDefaultForClient(): Literal {
         return {
-            termsAgreement: false,
+            // termsAgreement: false, // todo : restore ?
         };
     }
 }

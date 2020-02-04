@@ -23,7 +23,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public menuOpened = false;
 
     public UserRole = UserRole;
-    public viewer: CurrentUserForProfile_viewer;
+    public viewer: CurrentUserForProfile_viewer | null;
 
     /**
      * In case of change, check CSS dimensions :
@@ -112,7 +112,8 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
 
     public ngOnInit(): void {
 
-        this.viewer = this.route.snapshot.data.viewer.model as CurrentUserForProfile_viewer;
+        const viewer = this.route.snapshot.data.viewer;
+        this.viewer = viewer ? viewer.model as CurrentUserForProfile_viewer : null;
 
         // Setup mobile menu with items from top menu that are missing on main menu
         this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];

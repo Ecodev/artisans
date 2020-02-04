@@ -40,7 +40,7 @@ const routes: Routes = [
             },
         },
         {
-            path: 'product/:productId',
+            path: 'article/:productId',
             component: ProductComponent,
             resolve: {
                 product: ProductResolver,

@@ -1,0 +1,55 @@
+
+<!--
+<div *ngIf="dataSource" fxLayout="column">
+
+    <h2 class="mat-display-1">Articles achetés</h2>
+
+    <div fxLayout="column" fxLayoutGap="20px" >
+
+        <div class="margin-v" fxLayout="row" overflow>
+
+            <natural-search (selectionChange)="search($event)"
+                            [facets]=""
+                            [multipleGroups]="false"
+                            [selections]="naturalSearchSelections"
+                            fxFlex
+            ></natural-search>
+        </div>
+
+        <div class="responsive-table">
+
+            <div *ngFor="let product of dataSource.data.items" fxLayout="row" fxLayoutGap="20px">
+                <app-file *ngIf="product.image" [model]="product.image" [height]="100" [style.width.px]="100"></app-file>
+                <div fxFlex>
+                    <strong *ngIf="product.reviewNumber" color="text-primary">{{ product.reviewNumber }}</strong>
+                    <a [routerLink]="['/larevuedurable/article', product.id]"> {{ product.name }}</a>
+                    <br/>
+                    <span>{{ product.type | enum : 'ProductType' | async }}</span>
+                    // todo : link to download related file if web
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="dataSource.length === 0" class="margin" fxLayout="column" fxLayoutAlign="center center">
+            <div>Pas de résultats</div>
+        </div>
+
+        <div *ngIf="dataSource.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
+            <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+        </div>
+
+        <mat-paginator (page)="pagination($event)"
+                       *ngIf="dataSource.data?.length"
+                       [length]="dataSource.data?.length"
+                       [pageIndex]="dataSource.data?.pageIndex"
+                       [pageSizeOptions]="[25]"
+                       [pageSize]="25"
+        ></mat-paginator>
+
+    </div>
+</div>
+
+<natural-fixed-button *ngIf="permissionsService.crud?.product.create" [routerLink]="['/admin/product/new']" icon="add"
+></natural-fixed-button>
+-->

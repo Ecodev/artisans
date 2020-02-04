@@ -8,45 +8,43 @@ import { ViewerResolver } from '../admin/users/services/viewer.resolver';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PurchasesComponent } from './components/purchases/purchases.component';
 
 const routes: Routes = [
     {
         path: '',
+        component: ProfileComponent,
         resolve: {viewer: ViewerResolver},
         canActivate: [AuthGuard],
         children: [
             {
-                path: '',
-                component: ProfileComponent,
+                path: 'commandes',
+                component: HistoryComponent,
+                resolve: {viewer: ViewerResolver},
                 children: [
                     {
-                        // todo : filter Orders for current user
-                        path: 'commandes',
-                        component: HistoryComponent,
-                        resolve: {viewer: ViewerResolver},
-                        children: [
-                            {
-                                path: ':orderId',
-                                component: NaturalDialogTriggerComponent,
-                                resolve: {
-                                    order: OrderResolver,
-                                    viewer: ViewerResolver,
-                                },
-                                data: {
-                                    component: OrderComponent,
-                                    dialogConfig: {
-                                        data: {},
-                                        width: '600px',
-                                        maxWidth: '95vw',
-                                        maxHeight: '97vh',
-                                    } as MatDialogConfig,
-                                } as NaturalDialogTriggerRoutingData,
-                            },
-                        ],
+                        path: ':orderId',
+                        component: NaturalDialogTriggerComponent,
+                        resolve: {
+                            order: OrderResolver,
+                            viewer: ViewerResolver,
+                        },
+                        data: {
+                            component: OrderComponent,
+                            dialogConfig: {
+                                data: {},
+                                width: '600px',
+                                maxWidth: '95vw',
+                                maxHeight: '97vh',
+                            } as MatDialogConfig,
+                        } as NaturalDialogTriggerRoutingData,
                     },
                 ],
             },
-
+            {
+                path: 'articles-achetes',
+                component: PurchasesComponent,
+            },
         ],
     },
 ];

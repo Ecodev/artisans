@@ -48,7 +48,7 @@
     </div>
 
     <div *ngIf="data.model.permissions?.update">
-        <button [mat-dialog-close]="['/admin/product', data.model.id]" mat-stroked-button>Administration</button>
+        <a [routerLink]="['/admin/product', data.model.id]" mat-stroked-button>Administration</a>
     </div>
 
 </div>

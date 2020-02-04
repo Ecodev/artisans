@@ -8,7 +8,7 @@
         <div *ngFor="let product of products" class="product">
             <div class="product-name">{{ product.name }}</div>
             <app-price [product]="product"></app-price>
-            <a [routerLink]="['/larevuedurable', 'product', product.id]" mat-stroked-button>Détail</a>
+            <a [routerLink]="['/larevuedurable', 'article', product.id]" mat-stroked-button>Détail</a>
         </div>
     </div>
 

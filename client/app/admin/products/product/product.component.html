@@ -1,7 +1,13 @@
 <div [formGroup]="form" class="detail-body">
 
     <natural-detail-header [listRoute]="['admin', 'product']" [model]="data.model" label="Produit" newLabel="Nouveau produit"
-    ></natural-detail-header>
+    >
+        <a mat-raised-button color="primary" [routerLink]="['/larevuedurable/article', data.model.id]">
+            <natural-icon name="remove_red_eye"></natural-icon>
+            Aperçu
+        </a>
+
+    </natural-detail-header>
 
     <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">

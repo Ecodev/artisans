@@ -1,0 +1,25 @@
+@mixin artisans($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $bg: map-get($theme, background);
+    $fg: map-get($theme, foreground);
+
+
+    .text-primary {
+        color: mat-color($primary);
+    }
+
+    .text-accent {
+        color: mat-color($accent);
+    }
+
+    .text-warn {
+        color: mat-color($warn);
+    }
+
+
+
+}
+
+

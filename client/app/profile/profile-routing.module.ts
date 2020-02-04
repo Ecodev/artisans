@@ -6,6 +6,7 @@ import { OrderComponent } from '../admin/order/order/order.component';
 import { OrderResolver } from '../admin/order/services/order.resolver';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { AccountComponent } from './components/account/account.component';
 import { HistoryComponent } from './components/history/history.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { PurchasesComponent } from './components/purchases/purchases.component';
@@ -40,6 +41,11 @@ const routes: Routes = [
                         } as NaturalDialogTriggerRoutingData,
                     },
                 ],
+            },
+            {
+                path: 'donnees-personnelles',
+                component: AccountComponent,
+                resolve: {user: ViewerResolver},
             },
             {
                 path: 'articles-achetes',

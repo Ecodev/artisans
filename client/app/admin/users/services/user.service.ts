@@ -97,8 +97,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.email],
-            familyRelationship: [Validators.required],
-            birthday: [Validators.required],
         };
     }
 
@@ -257,6 +255,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             subscriptionBegin: null,
             subscriptionType: null,
             webTemporaryAccess: false,
+            country: null
         };
     }
 

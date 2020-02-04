@@ -11,27 +11,6 @@
 
                         <h2 class="mat-title">Coordonnées</h2>
 
-                        <div fxLayout="row" fxLayoutGap="10px">
-                            <mat-form-field fxFlex>
-                                <mat-label>Prénom</mat-label>
-                                <input (change)="update()" formControlName="firstName" matInput>
-                                <mat-error *ngIf="form.get('firstName')?.hasError('maxlength')">
-                                    Maximum {{form.get('firstName')?.errors.maxlength.requiredLength}} caractères
-                                </mat-error>
-                                <mat-error *ngIf="form.get('firstName')?.hasError('required')">Requis</mat-error>
-                            </mat-form-field>
-
-                            <mat-form-field fxFlex>
-                                <mat-label>Nom de famille</mat-label>
-                                <input (change)="update()" formControlName="lastName" matInput>
-                                <mat-error *ngIf="form.get('lastName')?.hasError('maxlength')">
-                                    Maximum {{form.get('lastName')?.errors.maxlength.requiredLength}} caractères
-                                </mat-error>
-                                <mat-error *ngIf="form.get('lastName')?.hasError('required')">Requis</mat-error>
-                            </mat-form-field>
-
-                        </div>
-
                         <app-address (change)="update()" [form]="form" [readonly]="true"></app-address>
 
                         <div fxLayout="row" fxLayoutGap="10px">

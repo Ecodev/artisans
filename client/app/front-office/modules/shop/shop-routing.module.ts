@@ -13,7 +13,6 @@ const routes: Routes = [
             data: {
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
-                title: 'Tous les articles de la revue durable',
             },
         },
         {
@@ -25,7 +24,6 @@ const routes: Routes = [
             data: {
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
-                title: 'Tous les articles de la revue durable',
             },
 
         },

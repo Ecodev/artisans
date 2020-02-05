@@ -1,12 +1,12 @@
-<div class="container padding-top padding-bottom">
 
-    <div class="introduction" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="40px">
+<div class="introduction">
+
+    <div class="container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="40px">
         <div fxFlex="25" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
             <div class="mat-display-1 no-margin" fxFlex>Bonjour {{ viewer?.firstName }},</div>
             <a (click)="userService.logout()" mat-flat-button>
                 <natural-icon name="exit_to_app"></natural-icon>
-                Se déconnecter
-            </a>
+                Se déconnecter </a>
         </div>
 
         <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
@@ -27,35 +27,24 @@
             <button mat-flat-button routerLink="/membership">Payer la cotisation</button>
         </div>
     </div>
+</div>
 
-    <div class="body">
-        <div fxLayout="row" fxLayoutGap="60px">
-            <div fxFlex="25" fxLayout="column" fxLayoutGap="30px">
-                <div>
-                    <div class="mat-title">Mon compte</div>
-                    <mat-nav-list>
-                        <a mat-list-item routerLink="/mon-compte/donnees-personnelles">Données personnelles</a> <a mat-list-item
-                                                                                                                   routerLink="/mon-compte/commandes"
-                    > Commandes</a>
-                    </mat-nav-list>
-                </div>
-                <div>
-                    <div class="mat-title">Les artisans de la transition</div>
-                    <mat-nav-list>
-                        <a mat-list-item>Cotisations</a>
-                    </mat-nav-list>
-                </div>
-                <div>
-                    <div class="mat-title">La Revue</div>
-                    <mat-nav-list>
-                        <a mat-list-item routerLink="/mon-compte/articles-achetes"> Articles et revues achetées</a>
-                    </mat-nav-list>
-                </div>
+<div class="body container">
+    <div fxLayout="row" fxLayoutGap="60px">
+        <div fxFlex="25" fxLayout="column" fxLayoutGap="30px">
+            <div>
+                <div class="mat-title">Mon compte</div>
+                <mat-nav-list>
+                    <a mat-list-item routerLink="/mon-compte/articles-achetes"> Articles et revues achetées</a> <a mat-list-item
+                                                                                                                   routerLink="/mon-compte/donnees-personnelles"
+                >Données personnelles</a> <a mat-list-item routerLink="/mon-compte/commandes"> Commandes</a>
+                </mat-nav-list>
             </div>
-            <div fxFlex>
-                <router-outlet></router-outlet>
-            </div>
+
+        </div>
+        <div fxFlex>
+            <router-outlet></router-outlet>
         </div>
     </div>
-
 </div>
+

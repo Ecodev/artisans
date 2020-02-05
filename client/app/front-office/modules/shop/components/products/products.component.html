@@ -1,7 +1,5 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px">
 
-    <div class="mat-display-1">{{ title }}</div>
-
     <app-product-tags-navigation *ngIf="showTags" [current]="currentProductTag"></app-product-tags-navigation>
 
     <div [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}" class="products">

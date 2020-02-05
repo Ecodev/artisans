@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormControl, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, NaturalValidators } from '@ecodev/natural';
+import {
+    FormAsyncValidators,
+    FormValidators,
+    Literal,
+    NaturalAbstractModelService,
+    unique,
+} from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { DataProxy } from 'apollo-cache';
 import gql from 'graphql-tag';
@@ -21,6 +27,7 @@ import {
     UpdateUser,
     UpdateUserVariables,
     User,
+    User_user,
     UserByToken,
     UserByTokenVariables,
     UserInput,
@@ -104,9 +111,9 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         };
     }
 
-    public getFormAsyncValidators(): FormAsyncValidators {
+    public getFormAsyncValidators(model: User_user): FormAsyncValidators {
         return {
-            code: [NaturalValidators.unique('code', this)],
+            code: [unique('code', model.id, this)],
         };
     }
 
@@ -259,7 +266,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             subscriptionBegin: null,
             subscriptionType: null,
             webTemporaryAccess: false,
-            country: null
+            country: null,
         };
     }
 

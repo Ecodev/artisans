@@ -5,7 +5,7 @@ import {
     FormValidators,
     NaturalAbstractModelService,
     NaturalQueryVariablesManager,
-    NaturalValidators,
+    unique,
 } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
@@ -15,6 +15,7 @@ import {
     CreateProductVariables,
     DeleteProducts,
     Product,
+    Product_product,
     ProductInput,
     Products,
     ProductsVariables,
@@ -56,9 +57,9 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         };
     }
 
-    public getFormAsyncValidators(): FormAsyncValidators {
+    public getFormAsyncValidators(model: Product_product): FormAsyncValidators {
         return {
-            code: [NaturalValidators.unique('code', this)],
+            code: [unique('code', model.id, this)],
         };
     }
 

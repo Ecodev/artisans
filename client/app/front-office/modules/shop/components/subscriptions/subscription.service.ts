@@ -5,7 +5,7 @@ import {
     FormValidators,
     NaturalAbstractModelService,
     NaturalQueryVariablesManager,
-    NaturalValidators,
+    unique,
 } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { Observable, of } from 'rxjs';
@@ -15,7 +15,7 @@ import {
     CreateSubscriptionVariables,
     DeleteSubscriptions,
     ProductType,
-    Subscription,
+    Subscription, Subscription_subscription,
     SubscriptionInput,
     Subscriptions,
     SubscriptionsVariables,
@@ -23,7 +23,13 @@ import {
     UpdateSubscription,
     UpdateSubscriptionVariables,
 } from '../../../../../shared/generated-types';
-import { createSubscription, deleteSubscriptions, subscriptionQuery, subscriptionsQuery, updateSubscription } from './subscription.queries';
+import {
+    createSubscription,
+    deleteSubscriptions,
+    subscriptionQuery,
+    subscriptionsQuery,
+    updateSubscription,
+} from './subscription.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -56,9 +62,9 @@ export class SubscriptionService extends NaturalAbstractModelService<Subscriptio
         };
     }
 
-    public getFormAsyncValidators(): FormAsyncValidators {
+    public getFormAsyncValidators(model: Subscription_subscription): FormAsyncValidators {
         return {
-            code: [NaturalValidators.unique('code', this)],
+            code: [unique('code', model.id, this)],
         };
     }
 

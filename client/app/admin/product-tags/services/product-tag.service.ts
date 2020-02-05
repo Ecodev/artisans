@@ -5,10 +5,9 @@ import {
     FormValidators,
     NaturalAbstractModelService,
     NaturalQueryVariablesManager,
-    NaturalValidators,
+    unique,
 } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
 import {
     CreateProductTag,
     CreateProductTagVariables,
@@ -18,9 +17,16 @@ import {
     ProductTagsVariables,
     ProductTagVariables,
     UpdateProductTag,
-    UpdateProductTagVariables,
+    UpdateProductTagVariables, ProductTag_productTag,
 } from '../../../shared/generated-types';
-import { createProductTag, deleteProductTags, productTagQuery, productTagsQuery, updateProductTag } from './product-tag.queries';
+import {
+    createProductTag,
+    deleteProductTags,
+    productTagQuery,
+    productTagsQuery,
+    updateProductTag,
+} from './product-tag.queries';
+import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -51,9 +57,9 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
         };
     }
 
-    public getFormAsyncValidators(): FormAsyncValidators {
+    public getFormAsyncValidators(model: ProductTag_productTag): FormAsyncValidators {
         return {
-            name: [NaturalValidators.unique('name', this)],
+            name: [unique('name', model.id, this)],
         };
     }
 

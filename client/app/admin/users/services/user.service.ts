@@ -14,10 +14,12 @@ import gql from 'graphql-tag';
 import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from '../../../front-office/modules/cart/services/cart.service';
+import { CurrencyManager } from '../../../shared/classes/currencyManager';
 import {
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
+    CurrentUserForProfile_viewer,
     Login,
     LoginVariables,
     Logout,
@@ -50,6 +52,10 @@ import {
     usersQuery,
 } from './user.queries';
 
+export type UserLike =
+    User_user
+    | CurrentUserForProfile_viewer;
+
 export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
     const value = control.value || '';
     if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
@@ -81,7 +87,9 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
     constructor(apollo: Apollo,
                 protected router: Router,
-                private permissionsService: PermissionsService) {
+                private permissionsService: PermissionsService,
+    ) {
+
         super(apollo,
             'user',
             userQuery,
@@ -133,14 +141,13 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
                     // Inject the freshly logged in user as the current user into Apollo data store
                     const data = {viewer: login};
-                    proxy.writeQuery({
-                        query: currentUserForProfileQuery,
-                        data,
-                    });
+                    proxy.writeQuery({query: currentUserForProfileQuery, data});
                     this.permissionsService.setUser(login);
 
                     // Be sure that we don't have leftovers from another user
                     CartService.globalCart.empty();
+                    CurrencyManager.updateLockedStatus(login);
+
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);
         });
@@ -156,6 +163,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                 mutation: logoutMutation,
             }).pipe(map(({data: {logout}}) => logout)).subscribe((v) => {
                 this.cacheViewer(null);
+                CurrencyManager.updateLockedStatus(null);
                 (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
                     subject.next(v);
                 });
@@ -194,6 +202,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
      */
     public resolveViewer(): Observable<{ model: CurrentUserForProfile['viewer'] }> {
         return this.getViewer().pipe(map(result => {
+            CurrencyManager.updateLockedStatus(result);
             return {model: result};
         }));
     }

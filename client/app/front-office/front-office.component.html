@@ -35,9 +35,7 @@
 
             <div fxFlex></div>
 
-            <a routerLink="/">
-                <img alt="logo" height="30" src="assets/logo.png" />
-            </a>
+            <a routerLink="/"> <img alt="logo" height="30" src="assets/logo.png" /> </a>
 
             <div fxFlex></div>
 
@@ -53,8 +51,9 @@
             <div id="header-top">
                 <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <a [matMenuTriggerFor]="deviseMenu" mat-button>
+                    <a [matMenuTriggerFor]="deviseMenu" mat-button *ngIf="!CurrencyManager.locked">
                         {{ CurrencyManager.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
+                        <natural-icon name="keyboard_arrow_down"></natural-icon>
                     </a>
                     <mat-menu #deviseMenu="matMenu">
                         <button (click)="CurrencyManager.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
@@ -67,9 +66,7 @@
             <!-- header : 2nd line -->
             <div id="header-middle">
                 <div class="container" fxLayout="row">
-                    <a routerLink="/">
-                        <img alt="logo" height="55" src="assets/logo.png" />
-                    </a>
+                    <a routerLink="/"> <img alt="logo" height="55" src="assets/logo.png" /> </a>
                 </div>
             </div>
 
@@ -116,18 +113,16 @@
                 <div class="mat-subheading-2" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
 
                     <mat-nav-list fxFlex.gt-sm="33">
-                        <a mat-list-item routerLink="product">L'association</a>
-                        <a mat-list-item routerLink="product-tag">La Revue Durable</a>
-                        <a mat-list-item routerLink="product-tag">Agir avec nous</a>
-                        <a mat-list-item routerLink="product-tag">Abonnements</a>
+                        <a mat-list-item routerLink="product">L'association</a> <a mat-list-item routerLink="product-tag">La Revue
+                        Durable</a> <a mat-list-item routerLink="product-tag">Agir avec nous</a> <a mat-list-item routerLink="product-tag">Abonnements</a>
                         <a mat-list-item routerLink="product-tag">Faire un don</a>
                     </mat-nav-list>
 
                     <mat-nav-list fxFlex.gt-sm="33">
-                        <a mat-list-item routerLink="product">Livraison</a>
-                        <a mat-list-item routerLink="product-tag">Mentions légales</a>
-                        <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
-                        <a mat-list-item routerLink="product-tag">Annonceurs</a>
+                        <a mat-list-item routerLink="product">Livraison</a> <a mat-list-item routerLink="product-tag">Mentions légales</a>
+                        <a mat-list-item routerLink="product-tag">Conditions générales de vente</a> <a mat-list-item
+                                                                                                       routerLink="product-tag"
+                    >Annonceurs</a>
                     </mat-nav-list>
 
                     <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px">

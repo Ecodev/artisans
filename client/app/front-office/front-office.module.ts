@@ -8,12 +8,13 @@ import { MaterialModule } from '../shared/modules/material.module';
 import { HomeBlockComponent } from './components/home-block/home-block.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
+import { SessionPageComponent } from './components/session-page/session-page.component';
 
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
 import { ShopModule } from './modules/shop/shop.module';
-import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
-import { SessionPageComponent } from './components/session-page/session-page.component';
 
 @NgModule({
     declarations: [
@@ -23,6 +24,7 @@ import { SessionPageComponent } from './components/session-page/session-page.com
         HomeBlockComponent,
         NextSessionsComponent,
         SessionPageComponent,
+        MenuComponent,
     ],
     imports: [
         CommonModule,
@@ -34,7 +36,7 @@ import { SessionPageComponent } from './components/session-page/session-page.com
         EcoFabSpeedDialModule,
         ShopModule,
     ],
-    entryComponents: [],
+    entryComponents: [MenuComponent],
 })
 export class FrontOfficeModule {
 }

@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NaturalAbstractController } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
 import { Currency, CurrencyManager } from '../shared/classes/currencyManager';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
-
-interface MenuItem {
-    display: string;
-    children?: MenuItem[];
-    link?: RouterLink['routerLink'];
-}
+import { MenuItem, NavigationService } from './services/navigation.service';
 
 @Component({
     selector: 'app-front-office',
     templateUrl: './front-office.component.html',
     styleUrls: ['./front-office.component.scss'],
+    animations: [],
 })
 export class FrontOfficeComponent extends NaturalAbstractController implements OnInit {
 
@@ -37,6 +33,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         },
         {
             display: 'La revue durable',
+            link: '/larevuedurable',
             children: [
                 {
                     display: 'Notre projet',
@@ -57,6 +54,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         },
         {
             display: 'Agir avec nous',
+            link: '/agir-avec-nous',
             children: [
                 {display: 'Toutes nos actions'},
                 {display: 'Calculer son bilan carbone'},
@@ -66,7 +64,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                         {display: 'La méthode'},
                         {
                             display: 'Prochaines sessions',
-                            link: '/prochaines-conversations-carbone',
+                            link: '/agir-avec-nous/prochaines-conversations-carbone',
                         },
                         {display: 'Pour les organisations'},
                         {display: 'Facilitateurs'},
@@ -106,7 +104,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public Currency = Currency;
     public CurrencyManager = CurrencyManager;
 
-    constructor(private route: ActivatedRoute, private router: Router) {
+    constructor(private route: ActivatedRoute, private router: Router, private navigationService: NavigationService) {
         super();
     }
 
@@ -134,7 +132,27 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     public search() {
+    }
 
+    public openMenuDropdown(items: MenuItem[], event: MouseEvent) {
+
+        if (!items || !items.length) {
+            return;
+        }
+
+        // Prevent router link
+        event.stopPropagation();
+        event.preventDefault();
+
+        const openClass = 'open';
+
+        let target = (event.target || event.currentTarget) as HTMLElement;
+        target = target.parentNode as HTMLElement;
+
+        target.classList.add(openClass);
+        const position = target.getBoundingClientRect().top + target.offsetHeight; // bottom position of target relative to viewport
+
+        this.navigationService.open(new ElementRef(target), items, position).subscribe(() => target.classList.remove(openClass));
     }
 
 }

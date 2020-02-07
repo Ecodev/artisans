@@ -16,6 +16,7 @@
 @import '../app/profile/components/profile/profile.theme';
 @import '../app/front-office/components/homepage/homepage.theme';
 @import '../app/front-office/front-office.theme';
+@import '../app/front-office/components/menu/menu.theme';
 @import '../app/front-office/modules/shop/components/products/products.theme';
 
 // Include material core (only once !)
@@ -36,6 +37,7 @@
     @include front-office($theme);
     @include products($theme);
     @include product-tags-navigation($theme);
+    @include menu($theme);
 }
 
 $artisans-blue: (

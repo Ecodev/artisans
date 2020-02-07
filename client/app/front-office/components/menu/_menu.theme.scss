@@ -1,0 +1,34 @@
+@mixin menu($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $bg: map-get($theme, background);
+    $fg: map-get($theme, foreground);
+
+    .mega-menu {
+
+        background: mat-color($bg, base);
+
+        ul {
+
+            a {
+                color: lighten(mat-color($fg, text), 20%);
+            }
+
+            li:hover > a {
+                border-color: mat-color($primary) !important;
+            }
+
+            & > li.hasMenu::after {
+                background: mat-color($bg, card);
+            }
+
+            ul a:hover {
+                color: mat-color($primary);
+            }
+        }
+
+    }
+}
+
+

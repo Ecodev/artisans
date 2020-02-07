@@ -25,15 +25,17 @@
                 color: lighten(mat-color($fg, text), 20%);
             }
 
-            li:hover > a {
-                border-color: mat-color($primary) !important;
+            li:hover > a, a.open, a.active {
+                span {
+                    border-color: mat-color($primary) !important;
+                }
             }
 
             & > li.hasMenu::after {
                 background: mat-color($bg, card);
             }
 
-            ul a:hover {
+            ul a:hover, a.open, a.active {
                 color: mat-color($primary);
             }
         }

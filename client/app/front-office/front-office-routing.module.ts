@@ -13,17 +13,22 @@ const routes: Routes = [
             component: HomepageComponent,
         },
         {
-            path: 'prochaines-conversations-carbone',
-            component: NextSessionsComponent,
-        },
-        {
-            path: 'prochaines-conversations-carbone/:region',
-            component: NextSessionsComponent,
-        },
-        {
-            path: 'conversation-carbone/:sessionId',
-            component: SessionPageComponent,
-            resolve: {session: SessionResolver},
+            path: 'agir-avec-nous',
+            children: [
+                {
+                    path: 'prochaines-conversations-carbone',
+                    component: NextSessionsComponent,
+                },
+                {
+                    path: 'prochaines-conversations-carbone/:region',
+                    component: NextSessionsComponent,
+                },
+                {
+                    path: 'conversation-carbone/:sessionId',
+                    component: SessionPageComponent,
+                    resolve: {session: SessionResolver},
+                },
+            ]
         },
         {
             path: 'login',

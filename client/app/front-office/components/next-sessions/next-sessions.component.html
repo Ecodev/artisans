@@ -12,7 +12,7 @@
         <ng-container *ngFor="let locality of localities">
             <a fxFlex="45"
                *ngIf="nextSessionByRegion.get(locality)"
-               [routerLink]="['/conversation-carbone', nextSessionByRegion.get(locality).id]"
+               [routerLink]="['/agir-avec-nous/conversation-carbone', nextSessionByRegion.get(locality).id]"
             >{{ locality }}</a>
         </ng-container>
     </div>

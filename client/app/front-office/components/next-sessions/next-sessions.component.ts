@@ -73,7 +73,7 @@ export class NextSessionsComponent implements OnInit {
     }
 
     public goToRegion(region: string) {
-        this.router.navigateByUrl('/prochaines-conversations-carbone/' + region);
+        this.router.navigateByUrl('/agir-avec-nous/prochaines-conversations-carbone/' + region);
     }
 
     /**

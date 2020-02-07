@@ -9,7 +9,6 @@
         width: 100%;
     }
 
-
     #footer {
         background: #EBEBEB;
         padding: 50px 0;
@@ -57,112 +56,44 @@
             margin: 0;
             height: 50px;
 
-            a {
-                position: relative; // to limit ripple
-                display: block;
-                cursor: pointer;
-                font-size: 20px;
-                white-space: nowrap;
-                padding: 10px 0;
-                text-transform: uppercase;
-                text-decoration: none;
-            }
-
-
             ul {
                 position: absolute;
                 z-index: 901;
+                padding: 30px 0 0 0;
             }
 
             li {
                 display: block;
                 margin: 0;
                 padding: 0;
-
-                &:hover {
-
-                    & > ul {
-                        display: block !important;
-                        position: absolute;
-                        top: 0;
-                        opacity: 1 !important;
-                    }
-                }
-            }
-
-
-            // Level 0 only
-            & > li {
-
-                display: flex;
                 flex-direction: row;
                 align-items: stretch;
 
                 &:not(:last-child) {
-                    margin-right: 30px;
-                }
-
-                & > a {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                    border-bottom: 6px solid transparent;
-                    font-weight: bold;
-                }
-
-                & > ul {
-                    padding: 30px 0 0 0;
-                }
-
-                &:hover > ul {
-                    margin-left: 0 !important;
-                    top: 50px !important;
-                }
-
-
-                &.hasMenu {
-
-                    // Mega menu
-                    &::after {
-                        display: none;
-                        content: '';
-                        position: absolute;
-                        top: 58px;
-                        left: 0;
-                        right: 0;
-                        height: 300px;
-                        pointer-events: none;
-                        z-index: 900; // just before material overlays
-                    }
-
-                    &:hover::after {
-                        display: block;
-                    }
+                    margin-right: 20px;
                 }
             }
 
+            a {
+                position: relative; // to limit ripple
+                display: block;
+                cursor: pointer;
+                font-size: 20px;
+                white-space: nowrap;
+                text-transform: uppercase;
+                text-decoration: none;
+                flex-direction: row;
+                align-items: center;
+                font-weight: bold;
+                outline: none;
 
-            // Levels >= 1
-            ul {
-                display: none;
-                list-style: none;
-                padding-left: 0;
-                padding-right: 0;
-                margin-right: 0;
-                margin-left: 100%;
-
-                li {
-                    position: relative;
-                    z-index: 10;
-                    padding-right: 30px; // gap between menu and submenu
-
-                    &:not(:last-child) {
-                        margin-bottom: 5px;
-                    }
+                span {
+                    display: block;
+                    padding: 10px;
+                    border-bottom: 6px solid transparent;
                 }
             }
         }
-
     }
 
     #mobile-menu {
@@ -197,14 +128,10 @@
                 margin-left: 24px;
                 transition: all .5s ease-out;
             }
-
         }
 
         li.opened > ul {
             max-height: 400px
         }
-
-
     }
-
 }

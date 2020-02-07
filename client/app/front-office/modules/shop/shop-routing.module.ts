@@ -8,6 +8,11 @@ import { SubscriptionsComponent } from './components/subscriptions/subscriptions
 
 const routes: Routes = [
         {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'articles'
+        },
+        {
             path: 'articles',
             component: ProductsComponent,
             data: {

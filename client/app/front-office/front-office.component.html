@@ -13,8 +13,9 @@
 <ng-template #navigationTemplate let-navigation>
     <ul *ngIf="navigation?.length">
         <li *ngFor="let item of navigation" [class.hasMenu]="item.children?.length">
-            <a [routerLink]="item.link" matRipple>{{ item.display }}</a>
-            <ng-container *ngTemplateOutlet="navigationTemplate; context:{ $implicit: item.children }"></ng-container>
+            <a [routerLink]="item.link" routerLinkActive="active" matRipple>
+                <span (click)="openMenuDropdown(item.children, $event)">{{ item.display }}</span>
+            </a>
         </li>
     </ul>
 </ng-template>

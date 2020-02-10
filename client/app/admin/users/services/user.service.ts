@@ -145,9 +145,8 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                     this.permissionsService.setUser(login);
 
                     // Be sure that we don't have leftovers from another user
-                    CartService.globalCart.empty();
+                    CartService.clearCarts();
                     CurrencyManager.updateLockedStatus(login);
-
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);
         });

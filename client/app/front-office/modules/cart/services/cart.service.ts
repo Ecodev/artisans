@@ -38,6 +38,11 @@ export class CartService {
         return CartService._globalCart;
     }
 
+    public static clearCarts() {
+        Cart.carts.forEach(c => c.empty());
+        Cart.carts.length = 0;
+    }
+
     private static initGlobalCart() {
 
         if (!CartService._globalCart) {

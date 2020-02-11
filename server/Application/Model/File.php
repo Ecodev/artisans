@@ -15,8 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
 class File extends AbstractFile
 {
     /**
-     * TODO should this relation be inversed only like Image ?
-     *
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product")

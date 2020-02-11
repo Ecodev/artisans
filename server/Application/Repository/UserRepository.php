@@ -27,15 +27,15 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
     /**
      * Returns the user authenticated by its email and password
      *
-     * @param string $login
+     * @param string $email
      * @param string $password
      *
      * @return null|User
      */
-    public function getOneByLoginPassword(string $login, string $password): ?User
+    public function getOneByEmailPassword(string $email, string $password): ?User
     {
         /** @var null|User $user */
-        $user = $this->getOneByLogin($login);
+        $user = $this->getOneByEmail($email);
 
         if (!$user) {
             return null;
@@ -79,18 +79,18 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
     }
 
     /**
-     * Unsecured way to get a user from its login.
+     * Unsecured way to get a user from its email.
      *
      * This should only be used in tests or controlled environment.
      *
-     * @param null|string $login
+     * @param null|string $email
      *
      * @return null|User
      */
-    public function getOneByLogin(?string $login): ?User
+    public function getOneByEmail(?string $email): ?User
     {
-        $user = $this->getAclFilter()->runWithoutAcl(function () use ($login) {
-            return $this->findOneByLogin($login);
+        $user = $this->getAclFilter()->runWithoutAcl(function () use ($email) {
+            return $this->findOneByEmail($email);
         });
 
         return $user;

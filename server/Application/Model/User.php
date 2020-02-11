@@ -71,13 +71,6 @@ class User extends AbstractModel
     }
 
     /**
-     * @var null|string
-     *
-     * @ORM\Column(type="string", length=50, nullable=true, unique=true)
-     */
-    private $login;
-
-    /**
      * @var string
      * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
@@ -97,8 +90,8 @@ class User extends AbstractModel
     private $password = '';
 
     /**
-     * @var null|string
-     * @ORM\Column(type="string", length=191, nullable=true, unique=true)
+     * @var string
+     * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
 
@@ -206,30 +199,6 @@ class User extends AbstractModel
     }
 
     /**
-     * Set login (eg: johndoe)
-     *
-     * @API\Input(type="Login")
-     *
-     * @param string $login
-     */
-    public function setLogin(string $login): void
-    {
-        $this->login = $login;
-    }
-
-    /**
-     * Get login (eg: johndoe)
-     *
-     * @API\Field(type="?Login")
-     *
-     * @return null|string
-     */
-    public function getLogin(): ?string
-    {
-        return $this->login;
-    }
-
-    /**
      * Hash and change the user password
      *
      * @param string $password
@@ -306,15 +275,15 @@ class User extends AbstractModel
      */
     public function getName(): string
     {
-        return implode(' ', [$this->getFirstName(), $this->getLastName()]);
+        return implode(' ', array_filter([$this->getFirstName(), $this->getLastName()]));
     }
 
     /**
      * Set email
      *
-     * @API\Input(type="?Email")
+     * @API\Input(type="Email")
      *
-     * @param null|string $email
+     * @param string $email
      */
     public function setEmail(?string $email): void
     {
@@ -324,7 +293,7 @@ class User extends AbstractModel
     /**
      * Get email
      *
-     * @API\Field(type="?Email")
+     * @API\Field(type="Email")
      *
      * @return null|string
      */

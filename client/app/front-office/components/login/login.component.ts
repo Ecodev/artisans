@@ -32,7 +32,7 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
     public returnUrl: string;
 
     public loginForm = {
-        login: '',
+        email: '',
         password: '',
     };
 

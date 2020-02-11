@@ -9,7 +9,6 @@ return [
         }',
         'variables' => [
             'input' => [
-                'login' => 'john.doe',
                 'password' => 'douzecaracteres',
                 'firstName' => 'John',
                 'lastName' => 'Doe',
@@ -35,7 +34,7 @@ return [
                 'token_creation_date' => \Cake\Chronos\Chronos::now()->subMinute(1)->toIso8601String(),
             ],
             [
-                'login' => 'administrator',
+                'email' => 'administrator@example.com',
             ]
         );
     },

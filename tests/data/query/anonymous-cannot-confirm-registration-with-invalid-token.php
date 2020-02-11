@@ -9,7 +9,6 @@ return [
         }',
         'variables' => [
             'input' => [
-                'login' => 'john.doe',
                 'password' => 'douzecaracteres',
                 'firstName' => 'John',
                 'lastName' => 'Doe',

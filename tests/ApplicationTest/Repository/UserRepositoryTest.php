@@ -40,10 +40,10 @@ class UserRepositoryTest extends AbstractRepositoryTest
 
     public function testGetOneByLoginPassword(): void
     {
-        self::assertNull($this->repository->getOneByLoginPassword('foo', 'bar'), 'wrong user');
-        self::assertNull($this->repository->getOneByLoginPassword('administrator', 'bar'), 'wrong password');
+        self::assertNull($this->repository->getOneByEmailPassword('foo@example.com', 'bar'), 'wrong user');
+        self::assertNull($this->repository->getOneByEmailPassword('administrator@example.com', 'bar'), 'wrong password');
 
-        $user = $this->repository->getOneByLoginPassword('administrator', 'administrator');
+        $user = $this->repository->getOneByEmailPassword('administrator@example.com', 'administrator');
         self::assertNotNull($user);
         self::assertSame(1000, $user->getId());
 

@@ -44,12 +44,6 @@ abstract class ConfirmRegistration implements FieldInterface
 
                 $input = $args['input'];
 
-                $repository->getAclFilter()->runWithoutAcl(function () use ($repository, $input): void {
-                    if ($repository->findOneByLogin($input['login'])) {
-                        throw new Exception('Ce nom d\'utilisateur est déjà attribué et ne peut être utilisé');
-                    }
-                });
-
                 // Do it
                 Helper::hydrate($user, $input);
 

@@ -56,17 +56,6 @@ export type UserLike =
     User_user
     | CurrentUserForProfile_viewer;
 
-export function LoginValidatorFn(control: FormControl): ValidationErrors | null {
-    const value = control.value || '';
-    if (!value.match(/^[a-zA-Z0-9\\.-]+$/)) {
-        return {
-            invalid: 'Le login doit contenir seulement des lettres, chiffres, "." et "-"',
-        };
-    }
-
-    return null;
-}
-
 @Injectable({
     providedIn: 'root',
 })
@@ -108,7 +97,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
     public getFormValidators(): FormValidators {
         return {
-            login: [Validators.required, LoginValidatorFn],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.email],
@@ -239,24 +227,23 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return !!user.owner && user.owner.id !== user.id;
     }
 
-    public requestPasswordReset(login) {
+    public requestPasswordReset(email) {
         const mutation = gql`
-            mutation RequestPasswordReset($login: Login!) {
-                requestPasswordReset(login: $login)
+            mutation RequestPasswordReset($email: Email!) {
+                requestPasswordReset(email: $email)
             }
         `;
 
         return this.apollo.mutate({
             mutation: mutation,
             variables: {
-                login: login,
+                email: email,
             },
         });
     }
 
     protected getDefaultForServer(): UserInput {
         return {
-            login: '',
             email: null,
             firstName: '',
             lastName: '',

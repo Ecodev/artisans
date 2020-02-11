@@ -62,7 +62,6 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
     {
         $prophecy = $this->prophesize(User::class);
         $prophecy->getId()->willReturn(123);
-        $prophecy->getLogin()->willReturn('john.doe');
         $prophecy->getFirstName()->willReturn('John');
         $prophecy->getLastName()->willReturn('Doe');
         $prophecy->getName()->willReturn('John Doe');
@@ -78,7 +77,6 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
     private function createMockUserAdmin(): User
     {
         $prophecy = $this->prophesize(User::class);
-        $prophecy->getLogin()->willReturn('admin');
         $prophecy->getFirstName()->willReturn('Admin');
         $prophecy->getLastName()->willReturn('Istrator');
         $prophecy->getEmail()->willReturn('administrator@example.com');
@@ -92,7 +90,6 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
     private function createMockUserMinimal(): User
     {
         $prophecy = $this->prophesize(User::class);
-        $prophecy->getLogin();
         $prophecy->getFirstName();
         $prophecy->getLastName();
         $prophecy->getEmail()->willReturn('minimal@example.com');

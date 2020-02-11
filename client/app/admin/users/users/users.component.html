@@ -34,7 +34,6 @@
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="code">Code</span>
-                    <span naturalColumnsPickerColumn="login">Login</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
                     <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
                     <span naturalColumnsPickerColumn="membershipBegin">Date début</span>
@@ -59,7 +58,6 @@
                             <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
                             <natural-table-button [label]="element.name" [navigate]="['/admin/user', element.id]" matTooltip="Éditer"
                             ></natural-table-button>
-                            <span *ngIf="!routeData?.isAdmin">{{ element.name }}</span>
                         </div>
                     </td>
                 </ng-container>
@@ -67,11 +65,6 @@
                 <ng-container matColumnDef="code">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="code">Code</th>
                     <td *matCellDef="let element" mat-cell>{{ element.code}}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="login">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Login</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.login }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="creationDate">

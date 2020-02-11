@@ -5,16 +5,17 @@
         <form fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px" style="min-width:300px">
 
             <mat-form-field>
-                <mat-label>Nom d'utilisateur</mat-label>
-                <input [(ngModel)]="loginForm.login"
+                <mat-label>Email</mat-label>
+                <input [(ngModel)]="loginForm.email"
                        [disabled]="loading"
                        autocapitalize="off"
                        autocorrect="off"
                        autofocus
                        matInput
-                       name="login"
+                       name="email"
                        required="required"
                        spellcheck="false"
+                       type="email"
                 >
             </mat-form-field>
 
@@ -33,7 +34,7 @@
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
                 <a mat-button routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
                 <button (click)="login()"
-                        [disabled]="loading || !loginForm.login || !loginForm.password"
+                        [disabled]="loading || !loginForm.email || !loginForm.password"
                         color="primary"
                         i18n
                         mat-raised-button

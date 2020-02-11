@@ -26,7 +26,7 @@ class AclFilterTest extends TestCase
                 'test.id IN (-1)',
             ],
             'users are accessible to any other users' => [
-                'member',
+                'member@example.com',
                 User::class,
                 'test.id IN (SELECT',
             ],
@@ -36,16 +36,16 @@ class AclFilterTest extends TestCase
     /**
      * @dataProvider providerFilter
      *
-     * @param null|string $login
+     * @param null|string $email
      * @param string $class
      * @param string $expected
      */
-    public function testFilter(?string $login, string $class, string $expected): void
+    public function testFilter(?string $email, string $class, string $expected): void
     {
         /** @var ClassMetadata $targetEntity */
         $targetEntity = _em()->getMetadataFactory()->getMetadataFor($class);
         $filter = new AclFilter(_em());
-        $user = _em()->getRepository(User::class)->getOneByLogin($login);
+        $user = _em()->getRepository(User::class)->getOneByEmail($email);
         $filter->setUser($user);
         $actual = $filter->addFilterConstraint($targetEntity, 'test');
 

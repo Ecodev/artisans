@@ -6,7 +6,7 @@ namespace Application\Api\Field\Mutation;
 
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
-use Application\Api\Scalar\LoginType;
+use Application\Api\Scalar\EmailType;
 use Application\Model\Log;
 use Application\Model\User;
 use Application\Repository\LogRepository;
@@ -24,7 +24,7 @@ abstract class Login implements FieldInterface
             'type' => Type::nonNull(_types()->getOutput(User::class)),
             'description' => 'Log in a user',
             'args' => [
-                'login' => Type::nonNull(_types()->get(LoginType::class)),
+                'email' => Type::nonNull(_types()->get(EmailType::class)),
                 'password' => Type::nonNull(Type::string()),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): User {
@@ -40,7 +40,7 @@ abstract class Login implements FieldInterface
 
                 /** @var UserRepository $userRepository */
                 $userRepository = _em()->getRepository(User::class);
-                $user = $userRepository->getOneByLoginPassword($args['login'], $args['password']);
+                $user = $userRepository->getOneByEmailPassword($args['email'], $args['password']);
 
                 // If we successfully authenticated
                 if ($user) {
@@ -55,7 +55,7 @@ abstract class Login implements FieldInterface
 
                 _log()->info(LogRepository::LOGIN_FAILED);
 
-                throw new Exception("Le nom d'utilisateur ou mot de passe est incorrect !");
+                throw new Exception("L'email ou le mot de passe est incorrect !");
             },
         ];
     }

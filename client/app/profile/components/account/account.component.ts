@@ -31,7 +31,7 @@ export class AccountComponent
     }
 
     public requestPasswordReset() {
-        this.userService.requestPasswordReset(this.form.value.login).subscribe(v => {
+        this.userService.requestPasswordReset(this.form.value.email).subscribe(v => {
             this.passwordMailSending = false;
             this.alertService.info('Un email avec des instructions a été envoyé', 6000);
         }, () => this.passwordMailSending = false);

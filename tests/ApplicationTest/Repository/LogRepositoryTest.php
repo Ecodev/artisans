@@ -64,7 +64,7 @@ class LogRepositoryTest extends AbstractRepositoryTest
 
     public function testGetLoginDate(): void
     {
-        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
+        $user = _em()->getRepository(User::class)->getOneByEmail('administrator@example.com');
 
         $logs = [
             [
@@ -99,7 +99,7 @@ class LogRepositoryTest extends AbstractRepositoryTest
         $lastLogin = $this->repository->getLoginDate($user, false);
         self::assertSame('2019-01-04', $lastLogin->toDateString());
 
-        $otherUser = _em()->getRepository(User::class)->getOneByLogin('member');
+        $otherUser = _em()->getRepository(User::class)->getOneByEmail('member@example.com');
         $never = $this->repository->getLoginDate($otherUser, false);
         self::assertNull($never);
     }

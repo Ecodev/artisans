@@ -36,7 +36,6 @@ class TypesFactory
             \Application\Api\Scalar\CHFType::class,
             \Application\Api\Scalar\EURType::class,
             \Application\Api\Scalar\EmailType::class,
-            \Application\Api\Scalar\LoginType::class,
             \Application\Api\Scalar\PasswordType::class,
             \Application\Api\Scalar\TokenType::class,
             \GraphQL\Upload\UploadType::class,

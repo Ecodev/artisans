@@ -15,9 +15,6 @@ class ConfirmRegistrationInputType extends InputObjectType
             'description' => 'Describe what page we want',
             'fields' => function (): array {
                 return [
-                    'login' => [
-                        'type' => self::nonNull(_types()->get('Login')),
-                    ],
                     'password' => [
                         'type' => self::nonNull(_types()->get('Password')),
                     ],

@@ -47,7 +47,7 @@ abstract class Register implements FieldInterface
 
                 $user->setEmail($args['email']);
 
-                if ($existingUser && $user->getLogin()) {
+                if ($existingUser && $user->getPassword()) {
                     $message = $messageQueuer->queueResetPassword($user, $user->getEmail());
                 } else {
                     $message = $messageQueuer->queueRegister($user);

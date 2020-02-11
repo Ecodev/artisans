@@ -19,13 +19,13 @@ export class RequestPasswordResetComponent {
                 private alertService: NaturalAlertService,
                 private router: Router,
                 private userService: UserService) {
-        this.form = new FormGroup({login: new NaturalFormControl('', userService.getFormValidators().login)});
+        this.form = new FormGroup({email: new NaturalFormControl('', userService.getFormValidators().email)});
     }
 
     submit(): void {
         this.sending = true;
 
-        this.userService.requestPasswordReset(this.form.value.login).subscribe(v => {
+        this.userService.requestPasswordReset(this.form.value.email).subscribe(v => {
             this.sending = false;
 
             const message = 'Un email avec des instructions a été envoyé';

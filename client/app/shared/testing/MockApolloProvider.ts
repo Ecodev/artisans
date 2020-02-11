@@ -40,7 +40,6 @@ class MockApollo extends Apollo {
             Boolean: () => true,
             Chronos: () => '2018-01-18T11:43:31',
             Date: () => '2018-02-27',
-            Login: () => 'test string',
             Email: () => 'test@example.com',
             UserRole: () => 'member',
             CHF: () => '1.25',

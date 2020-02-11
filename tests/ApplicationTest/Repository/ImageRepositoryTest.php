@@ -53,7 +53,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
     public function testDoctrineDoesNotFuckUpAndDeleteImageFromUnrelatedProduct(): void
     {
         /** @var User $user */
-        $user = _em()->getRepository(User::class)->getOneByLogin('administrator');
+        $user = _em()->getRepository(User::class)->getOneByEmail('administrator@example.com');
         User::setCurrent($user);
 
         // Make one image usable

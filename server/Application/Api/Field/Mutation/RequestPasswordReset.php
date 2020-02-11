@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Field\FieldInterface;
-use Application\Api\Scalar\LoginType;
+use Application\Api\Scalar\EmailType;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
@@ -22,7 +22,7 @@ abstract class RequestPasswordReset implements FieldInterface
             'type' => Type::nonNull(Type::boolean()),
             'description' => 'Request to send an email to reset the password for the given user. It will **always** return a successful response, even if the user is not found.',
             'args' => [
-                'login' => Type::nonNull(_types()->get(LoginType::class)),
+                'email' => Type::nonNull(_types()->get(EmailType::class)),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
                 global $container;
@@ -36,7 +36,7 @@ abstract class RequestPasswordReset implements FieldInterface
                 $repository = _em()->getRepository(User::class);
 
                 /** @var null|User $user */
-                $user = $repository->getOneByLogin($args['login']);
+                $user = $repository->getOneByEmail($args['email']);
 
                 if ($user) {
                     $email = $user->getEmail();

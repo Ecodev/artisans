@@ -16,7 +16,7 @@ class AclTest extends TestCase
         $user = new User();
 
         $owner = new User();
-        $owner->setLogin('sarah');
+        $owner->setFirstName('sarah');
         User::setCurrent($owner);
         $user->timestampCreation();
 
@@ -29,7 +29,7 @@ class AclTest extends TestCase
         self::assertSame('User "sarah" with role member is not allowed on resource "User#" with privilege "update" because it is not himself', $acl->getLastDenialMessage());
 
         $other = new User();
-        $other->setLogin('john');
+        $other->setFirstName('john');
         User::setCurrent($other);
         self::assertFalse($acl->isCurrentUserAllowed($user, 'update'), 'other user cannot update');
         self::assertSame('User "john" with role member is not allowed on resource "User#" with privilege "update" because it is not himself', $acl->getLastDenialMessage());
@@ -40,7 +40,7 @@ class AclTest extends TestCase
         self::assertSame('Non-logged user with role anonymous is not allowed on resource "User#" with privilege "update"', $acl->getLastDenialMessage());
 
         $administrator = new User(User::ROLE_ADMINISTRATOR);
-        $administrator->setLogin('jane');
+        $administrator->setFirstName('jane');
         User::setCurrent($administrator);
         self::assertTrue($acl->isCurrentUserAllowed($user, 'update'), 'admin can do anything');
         self::assertNull($acl->getLastDenialMessage());

@@ -5,7 +5,7 @@ declare(strict_types=1);
 return [
     [
         'query' => 'mutation {
-            requestPasswordReset(login: "non-existing-user-login")
+            requestPasswordReset(email: "non-existing-user-login@example.com")
         }',
     ],
     [

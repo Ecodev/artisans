@@ -19,7 +19,7 @@ return [
     [
         'errors' => [
             [
-                'message' => 'User "member" with role member is not allowed on resource "User#1000" with privilege "update" because it is not himself',
+                'message' => 'User "Hector Barbossa" with role member is not allowed on resource "User#1000" with privilege "update" because it is not himself',
                 'extensions' => [
                     'category' => 'Permissions',
                 ],

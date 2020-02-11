@@ -26,17 +26,6 @@
 
             <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
 
-                <mat-form-field fxFlex>
-                    <mat-label>Nom d'utilisateur</mat-label>
-                    <input formControlName="login" matInput>
-                    <natural-icon matPrefix name="person"></natural-icon>
-                    <mat-error *ngIf="form.get('login')?.hasError('maxlength')">
-                        Maximum {{form.get('login')?.errors.maxlength.requiredLength}} caractères
-                    </mat-error>
-                    <mat-error *ngIf="form.get('login')?.hasError('required')">Requis</mat-error>
-                    <mat-error *ngIf="form.get('login')?.hasError('invalid')">{{ form.get('login')?.getError('invalid') }}</mat-error>
-                </mat-form-field>
-
                 <app-password [form]="form"></app-password>
             </div>
 

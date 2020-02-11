@@ -33,17 +33,6 @@
                             <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
                         </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Nom d'utilisateur</mat-label>
-                            <input (change)="update()" formControlName="login" matInput>
-                            <mat-error *ngIf="form.get('login')?.hasError('maxlength')">
-                                Maximum {{form.get('login')?.errors.maxlength.requiredLength}} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('login')?.hasError('required')">Requis</mat-error>
-                            <mat-error *ngIf="form.get('login')?.hasError('invalid')">{{ form.get('login')
-                                                                                             ?.getError('invalid') }}</mat-error>
-                        </mat-form-field>
-
                         <mat-divider class="margin-bottom"></mat-divider>
 
                         <h2 class="mat-title">État</h2>

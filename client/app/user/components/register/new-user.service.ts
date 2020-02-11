@@ -3,7 +3,6 @@ import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormValidators, Literal } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { LoginValidatorFn } from '../../../admin/users/services/user.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { AnonymousUserService } from './anonymous-user.service';
 
@@ -18,7 +17,6 @@ export class NewUserService extends AnonymousUserService {
 
     public getFormValidators(): FormValidators {
         return {
-            login: [Validators.required, LoginValidatorFn],
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
             email: [Validators.required, Validators.email],

@@ -18,7 +18,6 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
 
     public initialColumns = [
         'name',
-        'login',
         'email',
         'creationDate',
         'updateDate',

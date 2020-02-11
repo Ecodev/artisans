@@ -27,7 +27,7 @@ class ServerTest extends TestCase
      */
     public function testQuery(?string $user, ServerRequest $request, array $expected, ?callable $dataPreparator = null): void
     {
-        User::setCurrent(_em()->getRepository(User::class)->getOneByLogin($user));
+        User::setCurrent(_em()->getRepository(User::class)->getOneByEmail($user . '@example.com'));
 
         if ($dataPreparator) {
             $dataPreparator(_em()->getConnection());

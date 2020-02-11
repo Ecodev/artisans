@@ -66,9 +66,9 @@ class EmailTypeTest extends TestCase
     {
         return [
             ['john@example.com', 'john@example.com', true],
-            ['', null, true],
+            ['', '', false],
             ['foo', 'foo', false],
-            [null, null, true],
+            [null, null, false],
         ];
     }
 }

@@ -167,9 +167,9 @@ abstract class AbstractModel
         $isOwner = $user === $this->owner;
 
         if ($this->owner && !$isAdmin && !$isOwner) {
-            $currentLogin = $user ? $user->getLogin() : '[anonymous]';
-            $currentOwnerLogin = $this->owner->getLogin();
-            $futureOwnerLogin = $owner ? $owner->getLogin() : '[nobody]';
+            $currentLogin = $user ? $user->getName() : '[anonymous]';
+            $currentOwnerLogin = $this->owner->getName();
+            $futureOwnerLogin = $owner ? $owner->getName() : '[nobody]';
 
             throw new Exception($currentLogin . ' is not allowed to change owner to ' . $futureOwnerLogin . ' because it belongs to ' . $currentOwnerLogin);
         }

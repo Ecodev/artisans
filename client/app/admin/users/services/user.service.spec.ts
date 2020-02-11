@@ -49,7 +49,7 @@ describe('UserService', () => {
         const resetStore = spyOn(apollo.getClient(), 'resetStore').and.callThrough();
 
         let actual: any = null;
-        service.login({login: 'foo', password: 'bar'}).subscribe(v => actual = v);
+        service.login({email: 'foo@example.com', password: 'bar'}).subscribe(v => actual = v);
         tick(1000);
 
         expect(actual.__typename).toBe('User');

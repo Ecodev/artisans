@@ -100,13 +100,13 @@ class UserTest extends TestCase
     public function providerSetOwner(): array
     {
         $u1 = new User();
-        $u1->setLogin('u1');
+        $u1->setFirstName('u1');
         $u2 = new User();
-        $u2->setLogin('u2');
+        $u2->setFirstName('u2');
         $u3 = new User();
-        $u3->setLogin('u3');
+        $u3->setFirstName('u3');
         $admin = new User(User::ROLE_ADMINISTRATOR);
-        $admin->setLogin('admin');
+        $admin->setFirstName('admin');
 
         return [
             'can change nothing' => [null, null, null],

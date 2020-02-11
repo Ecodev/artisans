@@ -5,11 +5,10 @@ import { permissionsFragment, userMetaFragment } from '../../../shared/queries/f
 export const userFieldsFragment = gql`
     fragment userFields on User {
         id
-        login
+        email
         firstName
         lastName
         name
-        email
         phone
         postcode
         street
@@ -48,12 +47,11 @@ export const usersQuery = gql`
         users(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 id
-                login
+                email
                 code
                 name
                 updateDate
                 creationDate
-                email
             }
             pageSize
             pageIndex
@@ -132,8 +130,8 @@ export const logoutMutation = gql`
     }`;
 
 export const loginMutation = gql`
-    mutation Login($login: Login!, $password: String!) {
-        login(login:$login, password:$password) {
+    mutation Login($email: Email!, $password: String!) {
+        login(email:$email, password:$password) {
             ...userFields
         }
     }

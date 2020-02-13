@@ -104,13 +104,15 @@ class OrderLine extends AbstractModel
     /**
      * Set related product
      *
-     * @param Product $product
+     * @param null|Product $product
      */
-    public function setProduct(Product $product): void
+    public function setProduct(?Product $product): void
     {
-        $this->subscription = null;
         $this->product = $product;
-        $this->setName($product->getName());
+        if ($product) {
+            $this->subscription = null;
+            $this->setName($product->getName());
+        }
     }
 
     /**
@@ -126,13 +128,16 @@ class OrderLine extends AbstractModel
     /**
      * Set related subscription
      *
-     * @param Subscription $subscription
+     * @param null|Subscription $subscription
      */
-    public function setSubscription(Subscription $subscription): void
+    public function setSubscription(?Subscription $subscription): void
     {
-        $this->product = null;
         $this->subscription = $subscription;
-        $this->setName($subscription->getName());
+
+        if ($subscription) {
+            $this->product = null;
+            $this->setName($subscription->getName());
+        }
     }
 
     /**

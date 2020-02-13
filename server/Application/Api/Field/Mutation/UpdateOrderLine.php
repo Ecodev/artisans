@@ -36,13 +36,7 @@ abstract class UpdateOrderLine implements FieldInterface
                 Helper::throwIfDenied($orderLine, 'update');
 
                 // Do it
-                $input = $args['input'];
-                $product = $input['product']->getEntity();
-                $quantity = $input['quantity'];
-                $isCHF = $input['isCHF'];
-                $type = $input['type'];
-
-                $invoicer->updateOrderLineAndTransactionLine($orderLine, $product, $quantity, $isCHF, $type);
+                $invoicer->updateOrderLineAndTransactionLine($orderLine, $args['input']);
 
                 _em()->flush();
 

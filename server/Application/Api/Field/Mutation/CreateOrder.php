@@ -7,6 +7,7 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Field\FieldInterface;
 use Application\Model\Order;
 use Application\Service\Invoicer;
+use Application\Utility;
 use GraphQL\Type\Definition\Type;
 use Mezzio\Session\SessionInterface;
 
@@ -24,11 +25,7 @@ abstract class CreateOrder implements FieldInterface
             'resolve' => function ($root, array $args, SessionInterface $session): ?Order {
                 global $container;
 
-                $input = array_map(function (array $line) {
-                    $line['product'] = $line['product']->getEntity();
-
-                    return $line;
-                }, $args['input']);
+                $input = Utility::entityIdToModel($args['input']);
 
                 /** @var Invoicer $invoicer */
                 $invoicer = $container->get(Invoicer::class);

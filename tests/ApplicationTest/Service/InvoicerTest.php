@@ -54,7 +54,15 @@ class InvoicerTest extends TestCase
             $product = $input[0]['product'];
         }
 
-        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $product, '100', true, ProductTypeType::DIGITAL);
+        $line = [
+            'quantity' => '100',
+            'isCHF' => true,
+            'type' => ProductTypeType::DIGITAL,
+            'product' => $product,
+            'additionalEmails' => [],
+        ];
+
+        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $line);
 
         $actualOrderLines = $this->extractOrderLines($order);
         self::assertSame($expectedOrderLines, $actualOrderLines);
@@ -146,6 +154,7 @@ class InvoicerTest extends TestCase
                             'pricePerUnitCHF' => Money::CHF(0),
                             'pricePerUnitEUR' => Money::EUR(0),
                         ],
+                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -170,6 +179,7 @@ class InvoicerTest extends TestCase
                             'pricePerUnitCHF' => Money::CHF(275),
                             'pricePerUnitEUR' => Money::EUR(280),
                         ],
+                        'additionalEmails' => [],
                     ],
                     [
                         'quantity' => '1',
@@ -180,6 +190,7 @@ class InvoicerTest extends TestCase
                             'pricePerUnitCHF' => Money::CHF(20000),
                             'pricePerUnitEUR' => Money::EUR(25000),
                         ],
+                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -212,6 +223,7 @@ class InvoicerTest extends TestCase
                             'pricePerUnitCHF' => Money::CHF(275),
                             'pricePerUnitEUR' => Money::EUR(280),
                         ],
+                        'additionalEmails' => [],
                     ],
                     [
                         'quantity' => '1',
@@ -222,6 +234,7 @@ class InvoicerTest extends TestCase
                             'pricePerUnitCHF' => Money::CHF(20000),
                             'pricePerUnitEUR' => Money::EUR(25000),
                         ],
+                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -254,6 +267,7 @@ class InvoicerTest extends TestCase
                             'pricePerUnitCHF' => Money::CHF(-10000),
                             'pricePerUnitEUR' => Money::EUR(-15000),
                         ],
+                        'additionalEmails' => [],
                     ],
                 ],
                 [

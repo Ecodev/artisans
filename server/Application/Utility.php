@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application;
 
 use Cake\Chronos\Chronos;
+use GraphQL\Doctrine\Definition\EntityID;
 
 abstract class Utility
 {
@@ -59,5 +60,27 @@ abstract class Utility
             echo '    ' . escapeshellarg($file) . PHP_EOL;
         }
         echo PHP_EOL;
+    }
+
+    /**
+     * Replace EntityID model and don't touch other values
+     *
+     * @param array $data mix of objects and scalar values
+     *
+     * @return null|array
+     */
+    public static function entityIdToModel(?array $data): ?array
+    {
+        if ($data === null) {
+            return null;
+        }
+
+        foreach ($data as &$value) {
+            if ($value instanceof EntityID) {
+                $value = $value->getEntity();
+            }
+        }
+
+        return $data;
     }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatDialogConfig } from '@angular/material';
+import { MatDialogConfig } from '@angular/material/dialog';
 import { RouterModule, Routes } from '@angular/router';
 import { NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData } from '@ecodev/natural';
 import { OrderComponent } from '../admin/order/order/order.component';

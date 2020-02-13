@@ -24,6 +24,14 @@ class OrderLine extends AbstractModel
     use HasProductType;
 
     /**
+     * Additional emails for subscription for a company
+     *
+     * @var string[]
+     * @ORM\Column(type="json", options={"default" = "[]"})
+     */
+    private $additionalEmails = [];
+
+    /**
      * @var Order
      *
      * @ORM\ManyToOne(targetEntity="Order", inversedBy="orderLines")
@@ -125,5 +133,25 @@ class OrderLine extends AbstractModel
         $this->product = null;
         $this->subscription = $subscription;
         $this->setName($subscription->getName());
+    }
+
+    /**
+     * Additional emails for subscription for a company
+     *
+     * @return string[]
+     */
+    public function getAdditionalEmails(): array
+    {
+        return $this->additionalEmails;
+    }
+
+    /**
+     * Additional emails for subscription for a company
+     *
+     * @param string[] $additionalEmails
+     */
+    public function setAdditionalEmails(array $additionalEmails): void
+    {
+        $this->additionalEmails = $additionalEmails;
     }
 }

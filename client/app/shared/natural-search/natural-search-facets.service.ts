@@ -124,15 +124,6 @@ export class NaturalSearchFacetsService {
         },
     };
 
-    private readonly purchaseStatus: DropdownFacet<TypeSelectConfiguration> = {
-        display: 'Commande fournisseur',
-        field: 'purchaseStatus',
-        component: TypeSelectComponent,
-        configuration: {
-            items: this.enumService.get('PurchaseStatus'),
-        },
-    };
-
     private readonly product: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Produit',
         field: 'news.ts',
@@ -287,7 +278,6 @@ export class NaturalSearchFacetsService {
                 transform: percentage,
             } as DropdownFacet<TypeNumberConfiguration>,
             this.productQuantity,
-            this.purchaseStatus,
             {
                 display: 'Fournisseur',
                 field: 'supplier',

@@ -115,15 +115,6 @@ export class NaturalSearchFacetsService {
         condition: {equal: {value: true}} as ProductFilterGroupCondition,
     };
 
-    private readonly productQuantity: DropdownFacet<TypeNumberConfiguration> = {
-        display: 'Quantité en stock',
-        field: 'quantity',
-        component: TypeNumberComponent,
-        configuration: {
-            step: 0.001,
-        },
-    };
-
     private readonly product: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Produit',
         field: 'news.ts',
@@ -233,11 +224,6 @@ export class NaturalSearchFacetsService {
             this.creationDate,
             this.updateDate,
         ],
-        productsFrontend: [
-            this.name,
-            this.productTags,
-            this.productQuantity,
-        ],
         productsAdmin: [
             this.name,
             this.code,
@@ -277,7 +263,6 @@ export class NaturalSearchFacetsService {
                 },
                 transform: percentage,
             } as DropdownFacet<TypeNumberConfiguration>,
-            this.productQuantity,
             {
                 display: 'Fournisseur',
                 field: 'supplier',

@@ -38,71 +38,7 @@ import { ProductTagsNavigationComponent } from '../components/product-tags-navig
 import { FocusDirective } from '../directives/focus';
 import { MaterialModule } from './material.module';
 
-const iconsConfig: NaturalIconsConfig = {
-    qr: {
-        svg: 'assets/icons/qr.svg',
-    },
-    'simple-qr': {
-        svg: 'assets/icons/simple-qr.svg',
-    },
-    own_product: {
-        svg: 'assets/icons/swimsuit.svg',
-    },
-    code: {
-        svg: 'assets/icons/input.svg',
-    },
-    doors: {
-        svg: 'assets/icons/key.svg',
-    },
-    family: {
-        svg: 'assets/icons/family.svg',
-    },
-    lake: {
-        svg: 'assets/icons/lake.svg',
-    },
-    transactionHistory: {
-        svg: 'assets/icons/history.svg',
-    },
-    claims: {
-        svg: 'assets/icons/claims.svg',
-    },
-    finances: {
-        svg: 'assets/icons/notes.svg',
-    },
-    browse_products: {
-        svg: 'assets/icons/search.svg',
-    },
-    administrator: {
-        svg: 'assets/icons/boss.svg',
-    },
-    exit: {
-        svg: 'assets/icons/exit.svg',
-    },
-    shop: {
-        svg: 'assets/icons/grocery.svg',
-    },
-    product: {
-        svg: 'assets/icons/product.svg',
-    },
-    members: {
-        svg: 'assets/icons/members.svg',
-    },
-    purchase_status_to_order: {
-        svg: 'assets/icons/priority-normal.svg',
-        class: 'negative',
-    },
-    purchase_status_preordered: {
-        font: 'done',
-        class: 'neutral',
-    },
-    purchase_status_ordered: {
-        font: 'done_all',
-        class: 'positive',
-    },
-    stock_change: {
-        font: 'trending_up',
-    },
-};
+const iconsConfig: NaturalIconsConfig = {};
 
 const declarations = [
     AddressComponent,

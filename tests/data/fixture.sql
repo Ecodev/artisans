@@ -44,7 +44,7 @@ REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 (12001, 1002);
 
 REPLACE INTO `order` (id, owner_id, creator_id, creation_date, balance_chf, balance_eur, status) VALUES
-(16000, 1002, 1002, '2019-04-24', 2500, NULL, 'pending'),
+(16000, 1002, 1002, '2019-04-24', 2500, NULL, 'validated'),
 (16001, 1003, 1003, '2019-04-25', NULL, 1000, 'pending'),
 (16002, 1000, 1000, '2019-04-25', 1500, NULL, 'pending'),
 (16003, 1000, 1000, '2019-05-19', 12000, NULL, 'validated');

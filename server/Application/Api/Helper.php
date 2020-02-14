@@ -30,6 +30,7 @@ abstract class Helper
         $pageSize = $pagination['pageSize'];
 
         $paginator = new Paginator($query);
+//        $paginator->setUseOutputWalkers(false);
         $paginator
             ->getQuery()
             ->setFirstResult($offset ? $offset : $pageSize * $pageIndex)

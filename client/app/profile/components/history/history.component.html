@@ -37,7 +37,7 @@
             </table>
         </div>
 
-        <div *ngIf="dataSource.data?.length === 0" class="margin mat-subheading-1">Aucun résultat</div>
+        <div *ngIf="dataSource.data?.length === 0" class="margin mat-h4">Aucun résultat</div>
 
         <div *ngIf="dataSource.data?.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>

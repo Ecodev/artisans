@@ -1,11 +1,11 @@
 <div [formGroup]="form">
 
-    <h2 class="mat-headline">Données personnelles</h2>
+    <h2 class="mat-h1">Données personnelles</h2>
 
     <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
 
         <div fxFlex="33" fxLayout="column">
-            <h2 class="mat-title">Compte</h2>
+            <h2 class="mat-h2">Compte</h2>
 
             <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutGap="20px">
                 <mat-form-field fxFlex>
@@ -24,9 +24,9 @@
         <mat-divider></mat-divider>
 
         <div fxLayout="column" fxLayoutGap="15px">
-            <h2 class="mat-title">Adresse</h2>
+            <h2 class="mat-h2">Adresse</h2>
 
-            <p class="mat-body-1">Il s'agit de votre adresse principale qui est utilisée pour la facturation et la livraison. Lors des
+            <p class="mat-body">Il s'agit de votre adresse principale qui est utilisée pour la facturation et la livraison. Lors des
                 commandes vous pourrez définir une adresse de facturation différente.</p>
 
             <app-address [form]="form"></app-address>

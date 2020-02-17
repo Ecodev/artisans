@@ -25,7 +25,7 @@
                         </mat-form-field>
 
                         <div *ngIf="data.model.id">
-                            <h2 class="mat-title">Utilisateurs tagués</h2>
+                            <h2 class="mat-h2">Utilisateurs tagués</h2>
                             <natural-relations [filter]="{groups: [{conditions: [{userTags: {have: {values: [data.model.id]}}}]}]}"
                                                [main]="data.model"
                                                [service]="userService"

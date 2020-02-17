@@ -46,7 +46,7 @@
                             </mat-form-field>
                         </div>
                         <div *ngIf="datesForm" formArrayName="dates">
-                            <h2 class="mat-title">Dates de la session</h2>
+                            <h2 class="mat-h2">Dates de la session</h2>
                             <div *ngFor="let date of datesForm.controls; let i = index;"
                                  fxLayout="row"
                                  fxLayoutGap="15px"
@@ -68,7 +68,7 @@
                         </div>
 
                         <div>
-                            <h2 class="mat-title">Facilitateurs</h2>
+                            <h2 class="mat-h2">Facilitateurs</h2>
                             <natural-relations [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
                                                [main]="data.model"
                                                [service]="userService"

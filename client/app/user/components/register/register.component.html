@@ -22,7 +22,7 @@
 
             <mat-divider></mat-divider>
 
-            <h2 class="mat-title">Compte</h2>
+            <h2 class="mat-h2">Compte</h2>
 
             <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
 
@@ -31,7 +31,7 @@
 
             <mat-divider></mat-divider>
 
-            <h2 class="mat-title">Coordonnées</h2>
+            <h2 class="mat-h2">Coordonnées</h2>
 
             <app-address [form]="form"></app-address>
 
@@ -47,10 +47,10 @@
                             Je m'engage à respecter :
                         </mat-checkbox>
 
-                        <p class="mat-body-1 rich-text">
+                        <p class="mat-body rich-text">
                             tous les règlements et statuts des Artisans de la transition </p>
                         <mat-error *ngIf="form.get('termsAgreement')?.touched && form.get('termsAgreement')?.hasError('required')"
-                                   class="mat-body-1"
+                                   class="mat-body"
                         >
                             Requis
                         </mat-error>

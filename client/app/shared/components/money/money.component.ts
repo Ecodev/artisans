@@ -13,7 +13,7 @@ export class MoneyComponent {
     @Input() model;
 
     /**
-     * E.g mat-title, mat-display-2
+     * E.g mat-h2, mat-display-2
      */
     @Input() sizeClass;
 

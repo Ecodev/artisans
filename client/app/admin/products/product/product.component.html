@@ -66,7 +66,7 @@
                     <div fxFlex="33" fxLayout="column">
 
                         <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-                            <h2 class="mat-title no-margin" fxFlex>Prix</h2>
+                            <h2 class="mat-h2 no-margin" fxFlex>Prix</h2>
                             <mat-slide-toggle (change)="update()" formControlName="isActive">Disponible</mat-slide-toggle>
                         </div>
 
@@ -115,7 +115,7 @@
                     <div fxFlex="66" fxLayout="column">
 
                         <div *ngIf="data.model.id">
-                            <h2 class="mat-title">Tags</h2>
+                            <h2 class="mat-h2">Tags</h2>
                             <natural-relations [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
                                                [main]="data.model"
                                                [service]="productTagService"

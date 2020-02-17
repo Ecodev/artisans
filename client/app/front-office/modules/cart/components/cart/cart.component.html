@@ -4,7 +4,7 @@
 
     <div *ngIf="!cart.lines.length" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start center">
 
-        <div class="mat-headline">Aucun article dans le panier</div>
+        <div class="mat-h1">Aucun article dans le panier</div>
         <div fxLayout="row" fxLayoutGap="30px">
             <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Consulter nos articles</a>
             <a color="primary" mat-flat-button routerLink="/larevuedurable/numeros">Consulter nos revues</a>
@@ -33,7 +33,7 @@
                 </ng-container>
 
                 <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
-                    <div class="price mat-body-2">{{ line.totalTaxInc | currency : CurrencyManager.current.value}}</div>
+                    <div class="price mat-body-strong">{{ line.totalTaxInc | currency : CurrencyManager.current.value}}</div>
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -58,10 +58,10 @@
         <mat-divider></mat-divider>
 
         <div fxLayout="row" fxLayoutAlign="end">
-            <div class="mat-body-1 padding totals natural-table">
+            <div class="mat-body padding totals natural-table">
                 <div>
-                    <span class="mat-body-2">Total TTC :</span>
-                    <span class="mat-body-2">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</span>
+                    <span class="mat-body-strong">Total TTC :</span>
+                    <span class="mat-body-strong">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</span>
                 </div>
             </div>
         </div>

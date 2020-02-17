@@ -1,6 +1,6 @@
 <div *ngIf="!editMode" class="bloc">
-    <div class="mat-headline title">{{ form.get('title').value }}</div>
-    <div class="description mat-subheading-1">{{ form.get('description').value }}</div>
+    <div class="mat-h1 title">{{ form.get('title').value }}</div>
+    <div class="description mat-h4">{{ form.get('description').value }}</div>
     <a mat-flat-button routerLink="{{ form.get('buttonLink').value }}">
         {{ form.get('buttonLabel').value }}
         <natural-icon name="chevron_right"></natural-icon>

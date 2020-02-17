@@ -3,11 +3,11 @@
     <div fxLayout="column" fxLayoutGap="60px" fxFlex>
         <h1 class="mat-display-1">{{ data.model.name }}</h1>
 
-        <div class="mat-body-1" [innerHTML]="data.model.description"></div>
+        <div class="mat-body" [innerHTML]="data.model.description"></div>
 
         <div *ngIf="data.model.dates?.length">
-            <p class="mat-body-1">Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>
-            <div fxLayout="row wrap" fxLayoutGap="30px" class="mat-subheading-2">
+            <p class="mat-body">Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>
+            <div fxLayout="row wrap" fxLayoutGap="30px" class="mat-h3">
                 <div fxFlex="45" *ngFor="let date of data.model.dates">{{ date }}</div>
             </div>
         </div>
@@ -42,17 +42,17 @@
         </div>
 
         <div *ngIf="facilitators.length" fxLayout="column" fxLayoutGap="15px">
-            <div class="mat-title">Facilitateurs</div>
+            <div class="mat-h2">Facilitateurs</div>
             <div *ngFor="let facilitator of facilitators" fxLayout="column">
-                <div class="mat-body-2"> {{ facilitator.name }}</div>
+                <div class="mat-body-strong"> {{ facilitator.name }}</div>
                 <a [href]="'mailto:' + facilitator.email"> {{ facilitator.email }}</a>
             </div>
         </div>
 
         <div *ngIf="otherSessions.length" fxLayout="column" fxLayoutGap="15px" class="frame-padding frame-primary">
-            <div class="mat-title">Les autres sessions à {{ data.model.locality | lowercase }}</div>
+            <div class="mat-h2">Les autres sessions à {{ data.model.locality | lowercase }}</div>
             <div *ngFor="let session of otherSessions">
-                <a class="mat-body-2" [routerLink]="['../', session.id]">{{ session.name }}</a>
+                <a class="mat-body-strong" [routerLink]="['../', session.id]">{{ session.name }}</a>
                 <div>à partir du {{ session.startDate | date : 'EEE d MMMM y' }}</div>
             </div>
         </div>

@@ -4,12 +4,12 @@
 
     <div fxLayout.gt-sm="row" fxLayoutGap="60px">
         <app-file *ngIf="data.model.image" [height]="200" [model]="data.model.image" fxFlex="33"></app-file>
-        <div [innerHTML]="data.model.description" class="mat-subheading-2" fxFlex></div>
+        <div [innerHTML]="data.model.description" class="mat-h3" fxFlex></div>
     </div>
 
     <div fxLayout="column" fxLayoutGap="30px">
 
-        <div *ngIf="!viewer" class="mat-subheading-2" fxLayout="row wrap">
+        <div *ngIf="!viewer" class="mat-h3" fxLayout="row wrap">
             <span class="mat-display-1">Intéressé par ce contenu ?</span>
             <span>Si vous êtes déjà abonnés à la version digitale</span>
             <a routerLink="/mon-compte"> connectez-vous !</a>
@@ -21,7 +21,7 @@
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
                     <div *ngIf="data.model.type === ProductType.both" fxLayout="column" fxLayoutAlign="start center">
-                        <div class="mat-headline price no-margin-bottom">
+                        <div class="mat-h1 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
                         <app-add-to-cart [product]="data.model" [type]="ProductType.paper" label="Acheter la version papier"
@@ -29,7 +29,7 @@
                     </div>
 
                     <div fxLayout="column" fxLayoutAlign="start center">
-                        <div class="mat-headline price no-margin-bottom">
+                        <div class="mat-h1 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
                         <app-add-to-cart [product]="data.model" [type]="ProductType.digital" label="Acheter la version numérique"

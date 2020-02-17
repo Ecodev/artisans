@@ -30,9 +30,9 @@
             <div class="newses-list" fxLayout="column" fxLayoutGap="40px">
                 <div></div>
                 <div *ngFor="let news of newses" class="news">
-                    <div class="mat-body-2">{{ news.date | date : 'EEE d.M.yy' }}</div>
-                    <div class="mat-headline">{{ news.name }}</div>
-                    <div [innerHTML]="news.description" class="mat-subheading-1"></div>
+                    <div class="mat-body-strong">{{ news.date | date : 'EEE d.M.yy' }}</div>
+                    <div class="mat-h1">{{ news.name }}</div>
+                    <div [innerHTML]="news.description" class="mat-h4"></div>
                 </div>
             </div>
 
@@ -53,8 +53,8 @@
             <div class="newses-list" fxLayout="column" fxLayoutGap="40px">
                 <div></div>
                 <div *ngFor="let event of events" class="event">
-                    <div class="mat-headline">{{ event.name }}</div>
-                    <div class="mat-subheading-2">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.place }} - {{ event.type }}</div>
+                    <div class="mat-h1">{{ event.name }}</div>
+                    <div class="mat-h3">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.place }} - {{ event.type }}</div>
                 </div>
             </div>
             <a color="primary" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
@@ -77,10 +77,10 @@
         </div>
 
         <div class="la-revue-body" fxLayout="column">
-            <div class="mat-headline">Le dernier numéro</div>
-            <div class="mat-subheading-1">63 | AUTOMNE-HIVER 2019</div>
+            <div class="mat-h1">Le dernier numéro</div>
+            <div class="mat-h4">63 | AUTOMNE-HIVER 2019</div>
             <div class="mat-display-1">Technologies numériques : en finir avec le capitalisme de surveillance</div>
-            <div class="mat-subheading-2">
+            <div class="mat-h3">
                 Disponible en versions papier ou PDF avec votre abonnnement
                 <br />
                 CHF 17.– pour non abonnés
@@ -109,8 +109,8 @@
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-1">
                 <div class="support-image"></div>
                 <div class="support-column-body">
-                    <div class="mat-headline">S'abonner</div>
-                    <div class="support-column-content mat-subheading-2">
+                    <div class="mat-h1">S'abonner</div>
+                    <div class="support-column-content mat-h3">
                         <p>Un accès à toute la base de données avec près de 1000 articles de fond sur tous les thèmes qui touchent à la
                             durabilité dans une soixantaine de pays.</p>
                         <p>Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte atteinte. </p>
@@ -124,8 +124,8 @@
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-2">
                 <div class="support-image"></div>
                 <div class="support-column-body">
-                    <div class="mat-headline">Rejoindre l’association</div>
-                    <div class="support-column-content mat-subheading-2">
+                    <div class="mat-h1">Rejoindre l’association</div>
+                    <div class="support-column-content mat-h3">
                         <p>Devenir acteur du respect des grands équilibres écologiques.</p>
                         <p>Plus nous aurons de membres, plus l’élan sera fort et plus nous pourrons continuer d’identifier en toute
                             indépendance les actions les plus pertinentes à entreprendre.</p>
@@ -138,8 +138,8 @@
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-3">
                 <div class="support-image"></div>
                 <div class="support-column-body">
-                    <div class="mat-headline">Rejoindre l’association</div>
-                    <div class="support-column-content mat-subheading-2">
+                    <div class="mat-h1">Rejoindre l’association</div>
+                    <div class="support-column-content mat-h3">
                         <p>LaRevueDurable est un média indépendant, presque sans publicité. Son financement est donc un défi permanent. Il
                             aidera ce titre à poursuivre ses efforts pour fournir une information rigoureuse, à la pointe et toujours
                             constructive. Les dons sont déductibles d’impôts pour les contribuables suisses.</p>

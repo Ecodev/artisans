@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div *ngIf="otherSessions.length" fxLayout="column" fxLayoutGap="15px" >
+        <div *ngIf="otherSessions.length" fxLayout="column" fxLayoutGap="15px" class="frame-padding frame-primary">
             <div class="mat-title">Les autres sessions à {{ data.model.locality | lowercase }}</div>
             <div *ngFor="let session of otherSessions">
                 <a class="mat-body-2" [routerLink]="['../', session.id]">{{ session.name }}</a>

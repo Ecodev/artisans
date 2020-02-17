@@ -1,12 +1,12 @@
-
-<div class="introduction">
+<div class="introduction frame-primary ">
 
     <div class="container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="40px">
         <div fxFlex="25" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
             <div class="mat-display-1 no-margin" fxFlex>Bonjour {{ viewer?.firstName }},</div>
-            <a (click)="userService.logout()" mat-flat-button>
+            <button (click)="userService.logout()" mat-flat-button>
                 <natural-icon name="exit_to_app"></natural-icon>
-                Se déconnecter </a>
+                Se déconnecter
+            </button>
         </div>
 
         <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
@@ -15,7 +15,7 @@
                 <br />
                 Date du prochain renouvellement : novembre 2019
             </div>
-            <button mat-flat-button routerLink="/subscriptions">Renouveller</button>
+            <a mat-flat-button routerLink="/subscriptions">Renouveller</a>
         </div>
 
         <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
@@ -24,7 +24,7 @@
                 <br />
                 Date de la prochaine cotisation : juin 2020
             </div>
-            <button mat-flat-button routerLink="/membership">Payer la cotisation</button>
+            <a mat-flat-button routerLink="/membership">Payer la cotisation</a>
         </div>
     </div>
 </div>
@@ -32,12 +32,14 @@
 <div class="body container">
     <div fxLayout="row" fxLayoutGap="60px">
         <div fxFlex="25" fxLayout="column" fxLayoutGap="30px">
-            <div>
-                <div class="mat-title">Mon compte</div>
+            <div class="frame-primary">
+                <div class="mat-title padding">Mon compte</div>
                 <mat-nav-list>
-                    <a mat-list-item routerLink="/mon-compte/articles-achetes"> Articles et revues achetées</a> <a mat-list-item
-                                                                                                                   routerLink="/mon-compte/donnees-personnelles"
-                >Données personnelles</a> <a mat-list-item routerLink="/mon-compte/commandes"> Commandes</a>
+                    <!-- @formatter:off -->
+                    <a mat-list-item routerLink="/mon-compte/articles-achetes"> Articles et revues achetées</a>
+                    <a mat-list-item routerLink="/mon-compte/donnees-personnelles">Données personnelles</a>
+                    <a mat-list-item routerLink="/mon-compte/commandes"> Commandes</a>
+                    <!-- @formatter:on -->
                 </mat-nav-list>
             </div>
 

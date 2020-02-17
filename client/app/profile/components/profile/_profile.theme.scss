@@ -7,17 +7,11 @@
 
     app-profile {
 
-        .introduction {
-            background: mat-color($primary);
-            color: mat-color($primary, default-contrast);
-        }
-
         mat-nav-list {
             padding-top: 0 !important; // override native .mat-list-base
-            background: mat-color($primary);
-             * {
-                 color: mat-color($primary, default-contrast);
-             }
+            * {
+                color: inherit !important;
+            }
         }
 
     }

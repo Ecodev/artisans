@@ -6,19 +6,49 @@
     $fg: map-get($theme, foreground);
 
 
-    .text-primary {
+    .text {
         color: mat-color($primary);
     }
 
-    .text-accent {
+    .text {
         color: mat-color($accent);
     }
 
-    .text-warn {
+    .text {
         color: mat-color($warn);
     }
 
 
+    .frame-primary {
+        background: mat-color($primary);
+
+        &, a:not([routerLink]) {
+            color: mat-color($primary, default-contrast);
+        }
+
+    }
+
+    .frame-accent {
+        background: mat-color($accent);
+
+        &, a:not([routerLink]) {
+            color: mat-color($accent, default-contrast);
+        }
+
+    }
+
+    .frame-warn {
+        background: mat-color($warn);
+
+        &, a:not([routerLink]) {
+            color: mat-color($warn, default-contrast);
+        }
+    }
+
+
+    .frame-padding {
+        padding: 30px;
+    }
 
 }
 

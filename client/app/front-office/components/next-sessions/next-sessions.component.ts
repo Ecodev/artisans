@@ -90,7 +90,7 @@ export class NextSessionsComponent implements OnInit {
                             {
                                 region: {equal: {value: region}},
                                 locality: {group: {}}, // distinct
-                                startDate: {greater: {value: new Date()}},
+                                startDate: {greaterOrEqual: {value: new Date()}},
                             },
                         ],
                     },
@@ -115,7 +115,7 @@ export class NextSessionsComponent implements OnInit {
 
                 const sessionVariables: SessionsVariables = {
                     filter: {
-                        groups: [{conditions: [{locality: {equal: {value: locality}}, startDate: {greater: {value: new Date()}}}]}],
+                        groups: [{conditions: [{locality: {equal: {value: locality}}, startDate: {greaterOrEqual: {value: new Date()}}}]}],
                     },
                     pagination: {pageIndex: 0, pageSize: 1}, // only the next one
                     sorting: [{field: SessionSortingField.startDate, order: SortingOrder.ASC}],

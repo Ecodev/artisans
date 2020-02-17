@@ -27,7 +27,7 @@ export class SubscriptionsComponent implements OnInit {
     public subscribe(id: string, type: ProductType) {
         const cart = new Cart();
         cart.increase(this.subscriptions[id], type);
-        this.router.navigateByUrl('/panier/' + cart.id);
+        this.router.navigateByUrl('/panier/commande/' + cart.id);
     }
 
 }

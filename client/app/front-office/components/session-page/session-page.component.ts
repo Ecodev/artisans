@@ -4,8 +4,12 @@ import { SessionService } from '../../../admin/sessions/services/session.service
 import { UserService } from '../../../admin/users/services/user.service';
 import {
     CreateSession,
-    CreateSessionVariables, CurrentUserForProfile_viewer,
+    CreateSessionVariables,
+    CurrentUserForProfile_viewer,
     Session,
+    Session_session,
+    Sessions_sessions_items,
+    SessionsVariables,
     SessionVariables,
     UpdateSession,
     UpdateSessionVariables,
@@ -33,6 +37,11 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
     public facilitators: Users_users_items[] = [];
 
     /**
+     * Other sessions in same place
+     */
+    public otherSessions: Sessions_sessions_items[] = [];
+
+    /**
      * For template usage
      */
     public UserRole = UserRole;
@@ -49,14 +58,41 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 
         this.route.data.subscribe(data => {
-
             if (data.session) {
-                const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-                qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [data.session.model.id]}}}]}]}});
-                this.userService.getAll(qvm).subscribe(result => this.facilitators = result.items);
+                this.refreshFacilitators(data.session.model);
+                this.refreshOtherSessions(data.session.model);
             }
-
         });
     }
 
+    /**
+     * Get related facilitators
+     */
+    private refreshFacilitators(session: Session_session) {
+        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+        qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [session.id]}}}]}]}});
+        this.userService.getAll(qvm).subscribe(result => this.facilitators = result.items);
+    }
+
+    /**
+     * Fetch other future sessions (5 max) in same locality
+     */
+    private refreshOtherSessions(session: Session_session) {
+        const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
+        qvm.set('variables', {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {locality: {in: {values: [session.locality]}}},
+                            {id: {in: {values: [session.id], not: true}}},
+                            {startDate: {greaterOrEqual: {value: new Date()}}},
+                        ],
+                    },
+                ],
+            },
+            pagination: {pageSize: 5, pageIndex: 0},
+        });
+        this.service.getAll(qvm).subscribe(result => this.otherSessions = result.items);
+    }
 }

@@ -20,8 +20,7 @@
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
                 <div fxFlex>ACTUALITÉS</div>
                 <div class="relative">
-                    <button *ngIf="permissionService?.crud?.news?.create" class="absolute" color="none" mat-fab routerLink="/admin/news"
-                    >
+                    <button *ngIf="permissionService?.crud?.news?.create" class="absolute" color="none" mat-fab routerLink="/admin/news">
                         <natural-icon name="edit"></natural-icon>
                     </button>
                 </div>
@@ -65,7 +64,8 @@
 
 <div class="la-revue-splash">
     <div class="container">
-        <div class="mat-display-3">LaRevue<strong>Durable</strong></div>
+        <img alt="logo" src="assets/LaRevueDurable-90noir.svg" class="section-logo"/>
+<!--        <img alt="logo" src="assets/LaRevueDurable-blanc.svg" [style.width.perc]="50" class="section-logo" />-->
     </div>
 </div>
 

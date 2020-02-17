@@ -7,7 +7,8 @@ export const eventsQuery = gql`
             items {
                 id
                 name
-                description
+                type
+                place
                 date
             }
             pageSize
@@ -21,7 +22,8 @@ export const eventQuery = gql`
         event(id: $id) {
             id
             name
-            description
+            type
+            place
             creationDate
             date
             creator {

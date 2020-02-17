@@ -83,7 +83,11 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public topNavigation: MenuItem[] = [
         {
             display: 'Agenda',
-            link: '/evenements',
+            link: '/agenda',
+        },
+        {
+            display: 'Actualité',
+            link: '/actualite',
         },
         {
             display: 'Nous contacter',

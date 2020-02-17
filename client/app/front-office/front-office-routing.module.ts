@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SessionResolver } from '../admin/sessions/services/session.resolver';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
+import { EventsPageComponent } from './components/events-page/events-page.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
+import { NewsesPageComponent } from './components/newses-page/newses-page.component';
 import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
 import { SessionPageComponent } from './components/session-page/session-page.component';
 
@@ -11,6 +13,14 @@ const routes: Routes = [
         {
             path: '',
             component: HomepageComponent,
+        },
+        {
+            path: 'agenda',
+            component: EventsPageComponent,
+        },
+        {
+            path: 'actualites',
+            component: NewsesPageComponent,
         },
         {
             path: 'agir-avec-nous',
@@ -28,7 +38,7 @@ const routes: Routes = [
                     component: SessionPageComponent,
                     resolve: {session: SessionResolver},
                 },
-            ]
+            ],
         },
         {
             path: 'login',

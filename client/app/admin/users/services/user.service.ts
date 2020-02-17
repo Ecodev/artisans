@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
-import { FormControl, ValidationErrors, Validators } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    Literal,
-    NaturalAbstractModelService,
-    unique,
-} from '@ecodev/natural';
+import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { DataProxy } from 'apollo-cache';
 import gql from 'graphql-tag';
@@ -109,7 +103,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
     public getFormAsyncValidators(model: User_user): FormAsyncValidators {
         return {
-            code: [unique('code', model.id, this)],
+            // code: [unique('code', model.id, this)], // ?? todo : replace by e-mail ?
         };
     }
 

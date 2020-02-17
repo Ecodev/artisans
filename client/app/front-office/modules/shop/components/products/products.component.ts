@@ -1,8 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NaturalAbstractList } from '@ecodev/natural';
-import { takeUntil } from 'rxjs/operators';
 import { ProductService } from '../../../../../admin/products/services/product.service';
+import { AbstractInfiniteLoadList } from '../../../../../shared/classes/AbstractInfiniteLoadList';
 import { Products, Products_products_items, ProductsVariables } from '../../../../../shared/generated-types';
 
 export enum ProductsViewMode {
@@ -15,7 +14,7 @@ export enum ProductsViewMode {
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent extends NaturalAbstractList<Products['products'], ProductsVariables> implements OnInit {
+export class ProductsComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
 
     public showTags = true;
     public viewMode: ProductsViewMode = ProductsViewMode.grid;
@@ -29,8 +28,6 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
 
     constructor(route: ActivatedRoute, productService: ProductService, injector: Injector) {
         super(productService, injector);
-
-        this.persistSearch = false;
     }
 
     ngOnInit(): void {
@@ -49,21 +46,6 @@ export class ProductsComponent extends NaturalAbstractList<Products['products'],
             }
         });
 
-        this.dataSource.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
-
-            if (result.pageIndex === 0) {
-                // When page index is 0, it means "new list" so replace all results.
-                this.products = result.items;
-            } else {
-                // Add new results
-                this.products.push(...result.items);
-            }
-        });
-
-    }
-
-    public loadMore() {
-        this.pagination({offset: null, pageIndex: this.dataSource.data.pageIndex + 1, pageSize: 10});
     }
 
 }

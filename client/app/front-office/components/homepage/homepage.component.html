@@ -13,7 +13,7 @@
 
 <!-- News + Events -->
 <div class="posts">
-    <div class="container " fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+    <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
 
         <!-- News -->
         <div class="newses" fxFlex.gt-sm="66">
@@ -37,7 +37,6 @@
             </div>
 
             <a color="primary" mat-flat-button routerLink="/actualites">Voir toutes nos actualités</a>
-
         </div>
 
         <!-- Events -->
@@ -55,10 +54,10 @@
                 <div></div>
                 <div *ngFor="let event of events" class="event">
                     <div class="mat-headline">{{ event.name }}</div>
-                    <div class="mat-subheading-2">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.description }}</div>
+                    <div class="mat-subheading-2">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.place }} - {{ event.type }}</div>
                 </div>
             </div>
-            <a color="primary" mat-flat-button routerLink="/evenements">Voir tout l'agenda</a>
+            <a color="primary" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
 
         </div>
     </div>
@@ -113,11 +112,10 @@
                     <div class="mat-headline">S'abonner</div>
                     <div class="support-column-content mat-subheading-2">
                         <p>Un accès à toute la base de données avec près de 1000 articles de fond sur tous les thèmes qui touchent à la
-                           durabilité dans une soixantaine de pays.</p>
+                            durabilité dans une soixantaine de pays.</p>
                         <p>Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte atteinte. </p>
                     </div>
-                    <a mat-flat-button>
-                        Voir les abonnements
+                    <a mat-flat-button> Voir les abonnements
                         <natural-icon name="chevron_right"></natural-icon>
                     </a>
                 </div>
@@ -130,10 +128,9 @@
                     <div class="support-column-content mat-subheading-2">
                         <p>Devenir acteur du respect des grands équilibres écologiques.</p>
                         <p>Plus nous aurons de membres, plus l’élan sera fort et plus nous pourrons continuer d’identifier en toute
-                           indépendance les actions les plus pertinentes à entreprendre.</p>
+                            indépendance les actions les plus pertinentes à entreprendre.</p>
                     </div>
-                    <a mat-flat-button>
-                        Découvrir l'association
+                    <a mat-flat-button> Découvrir l'association
                         <natural-icon name="chevron_right"></natural-icon>
                     </a>
                 </div>
@@ -144,11 +141,10 @@
                     <div class="mat-headline">Rejoindre l’association</div>
                     <div class="support-column-content mat-subheading-2">
                         <p>LaRevueDurable est un média indépendant, presque sans publicité. Son financement est donc un défi permanent. Il
-                           aidera ce titre à poursuivre ses efforts pour fournir une information rigoureuse, à la pointe et toujours
-                           constructive. Les dons sont déductibles d’impôts pour les contribuables suisses.</p>
+                            aidera ce titre à poursuivre ses efforts pour fournir une information rigoureuse, à la pointe et toujours
+                            constructive. Les dons sont déductibles d’impôts pour les contribuables suisses.</p>
                     </div>
-                    <a mat-flat-button>
-                        Faire un don
+                    <a mat-flat-button> Faire un don
                         <natural-icon name="chevron_right"></natural-icon>
                     </a>
                 </div>

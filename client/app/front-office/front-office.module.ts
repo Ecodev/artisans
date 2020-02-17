@@ -15,6 +15,8 @@ import { SessionPageComponent } from './components/session-page/session-page.com
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
 import { ShopModule } from './modules/shop/shop.module';
+import { NewsesPageComponent } from './components/newses-page/newses-page.component';
+import { EventsPageComponent } from './components/events-page/events-page.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +27,8 @@ import { ShopModule } from './modules/shop/shop.module';
         NextSessionsComponent,
         SessionPageComponent,
         MenuComponent,
+        NewsesPageComponent,
+        EventsPageComponent,
     ],
     imports: [
         CommonModule,

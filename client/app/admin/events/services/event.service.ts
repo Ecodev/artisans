@@ -47,7 +47,8 @@ export class EventService
     public getDefaultForServer(): EventInput {
         return {
             name: '',
-            description: '',
+            place: '',
+            type: '',
             date: new Date(),
         };
     }

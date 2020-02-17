@@ -19,13 +19,21 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label>Description</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="1"
-                                      formControlName="description"
-                                      matInput
-                                      matTextareaAutosize
-                            ></textarea>
+                            <input (change)="update()" formControlName="place" matInput>
+                            <mat-label>Lieu</mat-label>
+                            <mat-error *ngIf="form.get('place')?.hasError('maxlength')">
+                                Maximum {{form.get('place')?.errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('place')?.hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <input (change)="update()" formControlName="type" matInput>
+                            <mat-label>Type</mat-label>
+                            <mat-error *ngIf="form.get('type')?.hasError('maxlength')">
+                                Maximum {{form.get('type')?.errors.maxlength.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('type')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                     </div>

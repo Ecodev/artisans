@@ -1,0 +1,19 @@
+<div class="container" fxLayout="column" fxLayoutGap="60px">
+
+    <h1 class="mat-h1">Agenda</h1>
+
+    <div fxLayout="column" fxLayoutGap="30px">
+
+        <div *ngFor="let event of items">
+            <h2 class="mat-title">{{ event.id }} {{ event.name }}</h2>
+            <div>{{ event.date | date : 'EEE d.M.yy'}}</div>
+            <div> {{ event.place }}</div>
+            <div> {{ event.type }}</div>
+        </div>
+    </div>
+
+    <div>
+        <a (click)="loadMore()" color="primary" mat-flat-button>Voir plus</a>
+    </div>
+
+</div>

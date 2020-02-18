@@ -11,6 +11,7 @@ export interface MenuItem {
     display: string;
     children?: MenuItem[];
     link?: RouterLink['routerLink'];
+    highlight?: boolean;
 }
 
 @Injectable({

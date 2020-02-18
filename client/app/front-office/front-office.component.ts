@@ -50,6 +50,11 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     display: 'Nos points de vente',
                     // link: '/' ???
                 },
+                {
+                    display: 'S\'abonner',
+                    link: '/larevuedurable/abonnements',
+                    highlight: true
+                },
             ],
         },
         {

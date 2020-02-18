@@ -19,7 +19,7 @@ const routes: Routes = [
             component: EventsPageComponent,
         },
         {
-            path: 'actualites',
+            path: 'actualite',
             component: NewsesPageComponent,
         },
         {

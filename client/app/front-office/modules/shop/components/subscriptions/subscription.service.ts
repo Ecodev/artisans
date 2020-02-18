@@ -1,21 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    NaturalAbstractModelService,
-    NaturalQueryVariablesManager,
-    unique,
-} from '@ecodev/natural';
+import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import {
     CreateSubscription,
     CreateSubscriptionVariables,
     DeleteSubscriptions,
     ProductType,
-    Subscription, Subscription_subscription,
+    Subscription,
+    Subscription_subscription,
     SubscriptionInput,
     Subscriptions,
     SubscriptionsVariables,
@@ -66,24 +59,6 @@ export class SubscriptionService extends NaturalAbstractModelService<Subscriptio
         return {
             code: [unique('code', model.id, this)],
         };
-    }
-
-    public resolveByCode(code: string): Observable<{ model: any }> {
-
-        if (code) {
-            const qvm = new NaturalQueryVariablesManager<SubscriptionsVariables>();
-            const variables: SubscriptionsVariables = {
-                filter: {groups: [{conditions: [{code: {equal: {value: code}}}]}]},
-            };
-            qvm.set('variables', variables);
-
-            return this.getAll(qvm).pipe(map(result => {
-                return {model: result && result.items.length ? result.items[0] : null};
-            }));
-        } else {
-            return of({model: null});
-        }
-
     }
 
     protected getDefaultForServer(): SubscriptionInput {

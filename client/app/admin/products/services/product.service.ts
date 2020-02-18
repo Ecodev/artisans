@@ -63,24 +63,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         };
     }
 
-    public resolveByCode(code: string): Observable<{ model: any }> {
-
-        if (code) {
-            const qvm = new NaturalQueryVariablesManager<ProductsVariables>();
-            const variables: ProductsVariables = {
-                filter: {groups: [{conditions: [{code: {equal: {value: code}}}]}]},
-            };
-            qvm.set('variables', variables);
-
-            return this.getAll(qvm).pipe(map(result => {
-                return {model: result && result.items.length ? result.items[0] : null};
-            }));
-        } else {
-            return of({model: null});
-        }
-
-    }
-
     protected getDefaultForServer(): ProductInput {
         return {
             name: '',

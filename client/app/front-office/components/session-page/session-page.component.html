@@ -1,24 +1,24 @@
 <div class="container" fxLayout.gt-sm="row" fxLayoutGap="60px">
 
-    <div fxLayout="column" fxLayoutGap="60px" fxFlex>
+    <div fxFlex fxLayout="column" fxLayoutGap="60px">
         <h1 class="mat-display-1">{{ data.model.name }}</h1>
 
-        <div class="mat-body" [innerHTML]="data.model.description"></div>
+        <div [innerHTML]="data.model.description" class="mat-body"></div>
 
         <div *ngIf="data.model.dates?.length">
             <p class="mat-body">Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>
-            <div fxLayout="row wrap" fxLayoutGap="30px" class="mat-h3">
-                <div fxFlex="45" *ngFor="let date of data.model.dates">{{ date }}</div>
+            <div class="mat-h3" fxLayout="row wrap" fxLayoutGap="30px">
+                <div *ngFor="let date of data.model.dates" fxFlex="45">{{ date }}</div>
             </div>
         </div>
 
         <div fxLayout="row" fxLayoutGap="20px">
-            <a mat-flat-button color="accent">S'inscrire</a>
+            <a color="accent" mat-flat-button>S'inscrire</a>
 
             <!-- @formatter:off -->
-            <a mat-flat-button color="primary"
-               [routerLink]="['/admin/session/', data.model.id]"
-               *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator">
+            <a *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator" [routerLink]="['/admin/session/', data.model.id]"
+               color="primary"
+               mat-flat-button>
                 Administrer
             </a>
             <!-- @formatter:on -->
@@ -49,10 +49,10 @@
             </div>
         </div>
 
-        <div *ngIf="otherSessions.length" fxLayout="column" fxLayoutGap="15px" class="frame-padding frame-primary">
+        <div *ngIf="otherSessions.length" class="frame-padding frame-primary" fxLayout="column" fxLayoutGap="15px">
             <div class="mat-h2">Les autres sessions à {{ data.model.locality | lowercase }}</div>
             <div *ngFor="let session of otherSessions">
-                <a class="mat-body-strong" [routerLink]="['../', session.id]">{{ session.name }}</a>
+                <a [routerLink]="['../', session.id]" class="mat-body-strong">{{ session.name }}</a>
                 <div>à partir du {{ session.startDate | date : 'EEE d MMMM y' }}</div>
             </div>
         </div>

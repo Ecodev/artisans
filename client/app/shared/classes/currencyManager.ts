@@ -13,19 +13,6 @@ export class CurrencyManager {
 
     public static readonly current: BehaviorSubject<Currency> = new BehaviorSubject<Currency>(Currency.CHF);
 
-    /**
-     * Prevents to change currency
-     */
-    private static _locked = false;
-
-    public static set locked(value: boolean) {
-        CurrencyManager._locked = value;
-    }
-
-    public static get locked(): boolean {
-        return CurrencyManager._locked;
-    }
-
     constructor() {
 
         const stored = sessionStorage.getItem('currency');
@@ -36,6 +23,19 @@ export class CurrencyManager {
             CurrencyManager.current.next(Currency.EUR);
         }
 
+    }
+
+    /**
+     * Prevents to change currency
+     */
+    private static _locked = false;
+
+    public static get locked(): boolean {
+        return CurrencyManager._locked;
+    }
+
+    public static set locked(value: boolean) {
+        CurrencyManager._locked = value;
     }
 
     public static getPriceByCurrency(product) {

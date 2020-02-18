@@ -1,22 +1,22 @@
 <div [formGroup]="form" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'" fxLayout="column">
 
-    <div fxLayout="row" [fxLayout.gt-sm]="vertical ? 'column': 'row'" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'">
+    <div [fxLayout.gt-sm]="vertical ? 'column': 'row'" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'" fxLayout="row">
         <mat-form-field fxFlex.gt-sm>
             <mat-label>Prénom</mat-label>
-            <input (change)="update()" [formControlName]="'firstName'" matInput [readonly]="readonly">
+            <input (change)="update()" [formControlName]="'firstName'" [readonly]="readonly" matInput>
             <mat-error *ngIf="form.get('firstName')?.hasError('required')">Requis</mat-error>
         </mat-form-field>
 
         <mat-form-field fxFlex.gt-sm>
             <mat-label>Nom de famille</mat-label>
-            <input (change)="update()" [formControlName]="'lastName'" matInput [readonly]="readonly">
+            <input (change)="update()" [formControlName]="'lastName'" [readonly]="readonly" matInput>
             <mat-error *ngIf="form.get('lastName')?.hasError('required')">Requis</mat-error>
         </mat-form-field>
     </div>
 
     <mat-form-field>
         <mat-label>Rue</mat-label>
-        <input (change)="update()" [formControlName]="'street'" matInput [readonly]="readonly">
+        <input (change)="update()" [formControlName]="'street'" [readonly]="readonly" matInput>
         <mat-error *ngIf="form.get('street')?.hasError('required')">Requis</mat-error>
     </mat-form-field>
 
@@ -25,18 +25,18 @@
         <div fxLayout="row" fxLayoutGap="10px">
             <mat-form-field [style.width.px]="100">
                 <mat-label>NPA</mat-label>
-                <input (change)="update()" [formControlName]="'postcode'" matInput [readonly]="readonly">
+                <input (change)="update()" [formControlName]="'postcode'" [readonly]="readonly" matInput>
                 <mat-error *ngIf="form.get('postcode')?.hasError('required')">Requis</mat-error>
             </mat-form-field>
         </div>
 
         <mat-form-field [fxFlex]="!vertical">
             <mat-label>Localité</mat-label>
-            <input (change)="update()" [formControlName]="'locality'" matInput [readonly]="readonly">
+            <input (change)="update()" [formControlName]="'locality'" [readonly]="readonly" matInput>
             <mat-error *ngIf="form.get('locality')?.hasError('required')">Requis</mat-error>
         </mat-form-field>
 
-        <natural-select [formControlName]="'country'" [service]="countryService" [showIcon]="false" placeholder="Pays" [disabled]="readonly"
+        <natural-select [disabled]="readonly" [formControlName]="'country'" [service]="countryService" [showIcon]="false" placeholder="Pays"
         ></natural-select>
 
     </div>

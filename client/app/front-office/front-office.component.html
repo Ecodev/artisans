@@ -13,7 +13,7 @@
 <ng-template #navigationTemplate let-navigation>
     <ul *ngIf="navigation?.length">
         <li *ngFor="let item of navigation" [class.hasMenu]="item.children?.length">
-            <a [routerLink]="item.link" routerLinkActive="active" matRipple>
+            <a [routerLink]="item.link" matRipple routerLinkActive="active">
                 <span (click)="openMenuDropdown(item.children, $event)">{{ item.display }}</span>
             </a>
         </li>
@@ -36,7 +36,7 @@
 
             <div fxFlex></div>
 
-            <a routerLink="/"> <img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /> </a>
+            <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
 
             <div fxFlex></div>
 
@@ -52,7 +52,7 @@
             <div id="header-top">
                 <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <a [matMenuTriggerFor]="deviseMenu" mat-button *ngIf="!CurrencyManager.locked">
+                    <a *ngIf="!CurrencyManager.locked" [matMenuTriggerFor]="deviseMenu" mat-button>
                         {{ CurrencyManager.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
                         <natural-icon name="keyboard_arrow_down"></natural-icon>
                     </a>
@@ -67,7 +67,7 @@
             <!-- header : 2nd line -->
             <div id="header-middle">
                 <div class="container" fxLayout="row">
-                    <a routerLink="/"> <img alt="logo" height="55" src="assets/logo-artisans-de-la-transition.svg" /> </a>
+                    <a routerLink="/"><img alt="logo" height="55" src="assets/logo-artisans-de-la-transition.svg" /></a>
                 </div>
             </div>
 
@@ -99,7 +99,7 @@
             <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px">
 
                 <div>
-                    <img alt="logo" src="assets/logo-artisans-de-la-transition-90noir.svg" class="section-logo"/>
+                    <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-90noir.svg" />
 
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                         <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
@@ -114,16 +114,20 @@
                 <div class="mat-h3" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
 
                     <mat-nav-list fxFlex.gt-sm="33">
-                        <a mat-list-item routerLink="product">L'association</a> <a mat-list-item routerLink="product-tag">La Revue
-                        Durable</a> <a mat-list-item routerLink="product-tag">Agir avec nous</a> <a mat-list-item routerLink="product-tag">Abonnements</a>
+                        <a mat-list-item routerLink="product">L'association</a>
+                        <a mat-list-item routerLink="product-tag">La Revue Durable</a>
+                        <a mat-list-item routerLink="product-tag">Agir avec nous</a>
+                        <a mat-list-item routerLink="product-tag">Abonnements</a>
                         <a mat-list-item routerLink="product-tag">Faire un don</a>
                     </mat-nav-list>
 
                     <mat-nav-list fxFlex.gt-sm="33">
-                        <a mat-list-item routerLink="product">Livraison</a> <a mat-list-item routerLink="product-tag">Mentions légales</a>
-                        <a mat-list-item routerLink="product-tag">Conditions générales de vente</a> <a mat-list-item
-                                                                                                       routerLink="product-tag"
-                    >Annonceurs</a>
+                        <a mat-list-item routerLink="product">Livraison</a>
+                        <a mat-list-item routerLink="product-tag">Mentions légales</a>
+                        <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
+                        <a mat-list-item routerLink="product-tag"
+                        >Annonceurs
+                        </a>
                     </mat-nav-list>
 
                     <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px">

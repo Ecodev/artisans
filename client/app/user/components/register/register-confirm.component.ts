@@ -52,7 +52,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'postcode',
             'locality',
             'birthday',
-            'country'
+            'country',
         ];
 
         const input = pick(NaturalUtility.relationsToIds(this.form.value), fieldWhitelist);

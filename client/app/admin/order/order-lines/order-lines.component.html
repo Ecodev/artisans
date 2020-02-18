@@ -6,7 +6,7 @@
 
     <div fxLayout="column">
 
-        <div class="margin-v" fxLayout="row" overflow [fxShow]="!hideHeader">
+        <div [fxShow]="!hideHeader" class="margin-v" fxLayout="row" overflow>
             <natural-search (selectionChange)="search($event)"
                             [facets]="naturalSearchFacets"
                             [multipleGroups]="true"
@@ -94,9 +94,9 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator [fxShow]="!hidePaginator"
-                       (page)="pagination($event)"
+        <mat-paginator (page)="pagination($event)"
                        *ngIf="dataSource.data?.length"
+                       [fxShow]="!hidePaginator"
                        [length]="dataSource.data?.length"
                        [pageIndex]="dataSource.data?.pageIndex"
                        [pageSizeOptions]="pageSizeOptions"

@@ -1,15 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    NaturalAbstractModelService,
-    NaturalQueryVariablesManager,
-    unique,
-} from '@ecodev/natural';
+import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import {
     CreateProduct,
     CreateProductVariables,

@@ -1,32 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    NaturalAbstractModelService,
-    NaturalQueryVariablesManager,
-    unique,
-} from '@ecodev/natural';
+import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, NaturalQueryVariablesManager, unique } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
+import { map } from 'rxjs/operators';
 import {
     CreateProductTag,
     CreateProductTagVariables,
     ProductTag,
+    ProductTag_productTag,
     ProductTagInput,
     ProductTags,
     ProductTagsVariables,
     ProductTagVariables,
     UpdateProductTag,
-    UpdateProductTagVariables, ProductTag_productTag,
+    UpdateProductTagVariables,
 } from '../../../shared/generated-types';
-import {
-    createProductTag,
-    deleteProductTags,
-    productTagQuery,
-    productTagsQuery,
-    updateProductTag,
-} from './product-tag.queries';
-import { map } from 'rxjs/operators';
+import { createProductTag, deleteProductTags, productTagQuery, productTagsQuery, updateProductTag } from './product-tag.queries';
 
 @Injectable({
     providedIn: 'root',

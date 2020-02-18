@@ -4,7 +4,7 @@
 
     <div fxLayout="column">
 
-        <div class="responsive-table" [fxShow]="dataSource.data?.length > 0">
+        <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table>
 
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
@@ -15,15 +15,15 @@
                     <td *matCellDef="let element" mat-cell>
                         <natural-table-button [label]="element.creationDate | date: 'd MMM y - HH:mm'"
                                               [navigate]="[element.id]"
-                                              matTooltip="Éditer"
                                               icon="open_in_new"
+                                              matTooltip="Éditer"
                         ></natural-table-button>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
-                    <th *matHeaderCellDef mat-header-cell >Status</th>
-                    <td *matCellDef="let element" mat-cell >{{ element.status | enum: 'OrderStatus' | async}}</td>
+                    <th *matHeaderCellDef mat-header-cell>Status</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.status | enum: 'OrderStatus' | async}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">

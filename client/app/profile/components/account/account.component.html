@@ -7,14 +7,14 @@
         <div fxFlex="33" fxLayout="column">
             <h2 class="mat-h2">Compte</h2>
 
-            <div fxLayout.gt-sm="row" fxLayout="column" fxLayoutGap="20px">
+            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
                 <mat-form-field fxFlex>
                     <mat-label>email</mat-label>
-                    <input formControlName="email" matInput [readonly]="true" type="email">
+                    <input [readonly]="true" formControlName="email" matInput type="email">
                 </mat-form-field>
 
                 <div>
-                    <button mat-button (click)="requestPasswordReset()" [disabled]="passwordMailSending">
+                    <button (click)="requestPasswordReset()" [disabled]="passwordMailSending" mat-button>
                         Changer de mot de passe
                     </button>
                 </div>
@@ -41,7 +41,7 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end">
-        <button mat-flat-button color="primary" (click)="update()" [disabled]="form.invalid">
+        <button (click)="update()" [disabled]="form.invalid" color="primary" mat-flat-button>
             <natural-icon name="save"></natural-icon>
             Enregistrer
         </button>

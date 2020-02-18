@@ -32,9 +32,7 @@
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                     <td *matCellDef="let element" mat-cell>
-                        <natural-table-button [label]="element.name"
-                                              [navigate]="['/admin/session', element.id]"
-                                              matTooltip="Éditer"
+                        <natural-table-button [label]="element.name" [navigate]="['/admin/session', element.id]" matTooltip="Éditer"
                         ></natural-table-button>
                     </td>
                 </ng-container>

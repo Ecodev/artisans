@@ -1,7 +1,7 @@
+import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
 import { Product, ProductType } from '../../../../shared/generated-types';
 import { CartService } from '../services/cart.service';
 import { Cart, CartLine } from './cart';
-import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
 
 /**
  * Todo : add tests with combinations (same product with web or paper declination)

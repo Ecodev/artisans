@@ -8,10 +8,10 @@ import {
     UpdateUserTag,
     UpdateUserTagVariables,
     UserTag,
+    UserTag_userTag,
     UserTagInput,
     UserTags,
     UserTagsVariables,
-    UserTag_userTag,
     UserTagVariables,
 } from '../../../shared/generated-types';
 import { createUserTag, deleteUserTags, updateUserTag, userTagQuery, userTagsQuery } from './user-tag.queries';

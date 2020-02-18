@@ -2,10 +2,10 @@
 
     <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
 
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px" [formGroup]="billingForm">
+        <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
             <h1 class="mat-display-1">Méthode de paiement</h1>
 
-            <mat-radio-group aria-label="Select an option" fxLayout="column" fxLayoutGap="20px" formControlName="paymentMethod">
+            <mat-radio-group aria-label="Select an option" formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
                 <div class="payment-method">
                     <mat-radio-button [value]="PaymentMethod.DATATRANS">Paiement par carte de crédit</mat-radio-button>
                 </div>
@@ -25,11 +25,11 @@
 
         </div>
 
-        <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px" [formGroup]="shippingForm" [fxShow]="!virtualOnly">
+        <div [formGroup]="shippingForm" [fxShow]="!virtualOnly" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
 
             <h1 class="mat-display-1">Adresse de livraison</h1>
 
-            <mat-checkbox formControlName="sameAsBilling" (change)="updateAddressRequirements(!$event.checked, shippingForm)">
+            <mat-checkbox (change)="updateAddressRequirements(!$event.checked, shippingForm)" formControlName="sameAsBilling">
                 La même addresse que pour la facturation
             </mat-checkbox>
 
@@ -50,7 +50,7 @@
             <div class="mat-display-1">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</div>
         </div>
 
-        <button mat-flat-button color="accent" [disabled]="billingForm.invalid || shippingForm.invalid" (click)="confirm()">
+        <button (click)="confirm()" [disabled]="billingForm.invalid || shippingForm.invalid" color="accent" mat-flat-button>
             Terminer la commande
         </button>
     </div>

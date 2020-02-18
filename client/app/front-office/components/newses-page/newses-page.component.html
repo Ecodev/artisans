@@ -7,11 +7,13 @@
 
             <h2 class="mat-h2">{{ news.id }} {{ news.name }}</h2>
             <div>{{ news.date | date : 'EEE d.M.yy'}}</div>
-            <div class="mat-body" [innerHTML]="news.description "></div>
+            <div [innerHTML]="news.description " class="mat-body"></div>
 
         </div>
     </div>
 
-    <div><a (click)="loadMore()" color="primary" mat-flat-button>Voir plus</a></div>
+    <div>
+        <a (click)="loadMore()" color="primary" mat-flat-button>Voir plus</a>
+    </div>
 
 </div>

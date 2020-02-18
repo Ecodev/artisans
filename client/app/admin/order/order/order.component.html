@@ -1,9 +1,13 @@
 <div fxLayout="row" fxLayoutAlign="start center">
-    <h2 mat-dialog-title fxFlex>
+    <h2 fxFlex mat-dialog-title>
         Commande du {{ data.model.creationDate | date: 'd MMM y - HH:mm' }}
     </h2>
 
-    <natural-select-enum *ngIf="viewer?.role === UserRole.administrator" enumName="OrderStatus" [ngModel]="data.model.status" (selectionChange)="updateStatus($event)" placeholder="Status"
+    <natural-select-enum (selectionChange)="updateStatus($event)"
+                         *ngIf="viewer?.role === UserRole.administrator"
+                         [ngModel]="data.model.status"
+                         enumName="OrderStatus"
+                         placeholder="Status"
     ></natural-select-enum>
 </div>
 
@@ -12,9 +16,9 @@
                      [contextVariables]="contextVariables"
                      [hideHeader]="true"
                      [hidePaginator]="true"
-                     [showTotals]="false"
                      [pageSizeOptions]="[999]"
                      [paginatorPageSize]="999"
+                     [showTotals]="false"
     ></app-order-lines>
 
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">

@@ -55,6 +55,13 @@ abstract class AbstractProduct extends AbstractModel
     private $image;
 
     /**
+     * @var null|Image
+     * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
+     * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $illustration;
+
+    /**
      * Constructor
      *
      * @param string $name
@@ -146,5 +153,27 @@ abstract class AbstractProduct extends AbstractModel
         }
 
         $this->image = $image;
+    }
+
+    /**
+     * @return null|Image
+     */
+    public function getIllustration(): ?Image
+    {
+        return $this->illustration;
+    }
+
+    /**
+     * @param null|Image $illustration
+     */
+    public function setIllustration(?Image $illustration): void
+    {
+        // We must trigger lazy loading, otherwise Doctrine will seriously
+        // mess up lifecycle callbacks and delete unrelated illustration on disk
+        if ($this->illustration) {
+            $this->illustration->getFilename();
+        }
+
+        $this->illustration = $illustration;
     }
 }

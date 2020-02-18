@@ -91,6 +91,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             internalRemarks: '',
             isActive: true,
             image: null,
+            illustration: null,
             releaseDate: null,
             reviewNumber: 0,
             type: ProductType.digital,

@@ -2,6 +2,8 @@
 
     <h1 class="mat-display-1"> {{ data.model.name }}</h1>
 
+    <app-file *ngIf="data.model.illustration" [height]="300" [model]="data.model.illustration"></app-file>
+
     <div fxLayout.gt-sm="row" fxLayoutGap="60px">
         <app-file *ngIf="data.model.image" [height]="200" [model]="data.model.image" fxFlex="33"></app-file>
         <div [innerHTML]="data.model.description" class="mat-h3" fxFlex></div>

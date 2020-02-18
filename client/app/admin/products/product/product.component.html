@@ -4,8 +4,7 @@
     >
         <a mat-raised-button color="primary" [routerLink]="['/larevuedurable/article', data.model.id]">
             <natural-icon name="remove_red_eye"></natural-icon>
-            Aperçu
-        </a>
+            Aperçu </a>
 
     </natural-detail-header>
 
@@ -16,16 +15,6 @@
                     <div fxFlex="66" fxLayout="column">
 
                         <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-
-                            <app-file (modelChange)="newImage($event)"
-                                      [model]="data.model.image"
-                                      [service]="imageService"
-                                      [style.borderRadius.px]="4"
-                                      [style.marginLeft.px]="2"
-                                      action="upload"
-                                      class="mat-elevation-z2"
-                                      fxFlex
-                            ></app-file>
 
                             <div fxFlex fxLayout="column">
                                 <mat-form-field>
@@ -106,6 +95,37 @@
                             ></textarea>
                         </mat-form-field>
 
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+
+                    <div fxFlex="66" fxLayout="column">
+                        <h2 class="mat-h2">Illustration</h2>
+                        <app-file (modelChange)="newImage($event, 'illustration')"
+                                  [model]="data.model.illustration"
+                                  [service]="imageService"
+                                  [height]="300"
+                                  [style.borderRadius.px]="4"
+                                  [style.marginLeft.px]="2"
+                                  action="upload"
+                                  class="mat-elevation-z2"
+                        ></app-file>
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column">
+                        <h2 class="mat-h2">Aperçu de l'article</h2>
+                        <app-file (modelChange)="newImage($event, 'image')"
+                                  [model]="data.model.image"
+                                  [service]="imageService"
+                                  [style.borderRadius.px]="4"
+                                  [style.marginLeft.px]="2"
+                                  [height]="300"
+                                  action="upload"
+                                  class="mat-elevation-z2"
+                        ></app-file>
                     </div>
                 </div>
 

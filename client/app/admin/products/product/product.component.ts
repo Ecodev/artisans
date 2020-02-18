@@ -43,11 +43,11 @@ export class ProductComponent
         this.orderLinesVariables = {filter: {groups: [{conditions: [{product: {equal: {value: this.data.model.id}}}]}]}};
     }
 
-    public newImage(image: CreateImage['createImage']) {
+    public newImage(image: CreateImage['createImage'], fieldName: string) {
 
-        const imageField = this.form.get('image');
-        if (imageField) {
-            imageField.setValue(image);
+        const field = this.form.get(fieldName);
+        if (field) {
+            field.setValue(image);
             if (this.data.model.id) {
                 this.update();
             }

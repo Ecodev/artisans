@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductTagByNameResolver } from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
 import { ProductsVariables } from '../../../shared/generated-types';
-import { ProductComponent } from './components/product/product.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ProductsPageComponent, ProductsViewMode } from './components/products/products-page.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
@@ -56,7 +56,7 @@ const routes: Routes = [
         },
         {
             path: 'article/:productId',
-            component: ProductComponent,
+            component: ProductPageComponent,
             resolve: {
                 product: ProductResolver,
             },

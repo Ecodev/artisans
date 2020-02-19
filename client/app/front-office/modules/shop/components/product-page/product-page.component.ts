@@ -20,11 +20,11 @@ import { Cart } from '../../../cart/classes/cart';
 import { CartService } from '../../../cart/services/cart.service';
 
 @Component({
-    selector: 'app-product',
-    templateUrl: './product.component.html',
-    styleUrls: ['./product.component.scss'],
+    selector: 'app-product-page',
+    templateUrl: './product-page.component.html',
+    styleUrls: ['./product-page.component.scss'],
 })
-export class ProductComponent
+export class ProductPageComponent
     extends NaturalAbstractDetail<Product['product'],
         ProductVariables,
         CreateProduct['createProduct'],

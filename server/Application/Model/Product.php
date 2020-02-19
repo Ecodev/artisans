@@ -38,6 +38,13 @@ class Product extends AbstractProduct
     private $reviewNumber;
 
     /**
+     * @var null|File
+     * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
+     * @ORM\JoinColumn(onDelete="CASCADE")
+     */
+    private $file;
+
+    /**
      * @var Collection
      *
      * @ORM\ManyToMany(targetEntity="ProductTag", mappedBy="products")
@@ -133,5 +140,27 @@ class Product extends AbstractProduct
     public function setReviewNumber(int $reviewNumber): void
     {
         $this->reviewNumber = $reviewNumber;
+    }
+
+    /**
+     * @return null|File
+     */
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param null|File $file
+     */
+    public function setFile(?File $file): void
+    {
+        // We must trigger lazy loading, otherwise Doctrine will seriously
+        // mess up lifecycle callbacks and delete unrelated image on disk
+        if ($this->file) {
+            $this->file->getFilename();
+        }
+
+        $this->file = $file;
     }
 }

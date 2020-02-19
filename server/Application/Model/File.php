@@ -14,16 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class File extends AbstractFile
 {
-    /**
-     * @var Product
-     *
-     * @ORM\ManyToOne(targetEntity="Product")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     * })
-     */
-    private $product;
-
     protected function getBasePath(): string
     {
         return 'data/file/';
@@ -42,21 +32,5 @@ class File extends AbstractFile
             'application/pdf',
             'application/x-pdf',
         ];
-    }
-
-    /**
-     * @return Product
-     */
-    public function getProduct(): Product
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param Product $product
-     */
-    public function setProduct(Product $product): void
-    {
-        $this->product = $product;
     }
 }

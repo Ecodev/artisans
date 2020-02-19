@@ -10,10 +10,14 @@ REPLACE INTO image (id, filename, width, height, mime) VALUES
 (5001, 'transport.jpg', 840, 466, 'image/jpeg'),
 (5002, 'train.jpg', 832, 468, 'image/jpeg');
 
-REPLACE INTO product (id, is_active, image_id, price_per_unit_chf, price_per_unit_eur, name, code, type, description) VALUES
-(3000, 1, 5000, 1000, 1500, 'Revue printemps 2019', '2019-01', 'both', 'Des article intéressants sur le jardinage assisté par ordinateur'),
-(3001, 1, 5001, 1000, 1500, 'Revue été 2019', '2019-02', 'both', 'La révolution des transports en commun'),
-(3002, 1, 5002, 500, 550, 'Article individuel', '2019-02-02', 'digital', 'Pourquoi le train est-il plus rapide ?');
+REPLACE INTO file (id, owner_id, filename, mime) VALUES
+(9000, 1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf'),
+(9001, 1000, '4k123pkopvs3iDFV948abcde.pdf', 'application/pdf');
+
+REPLACE INTO product (id, is_active, image_id, file_id, price_per_unit_chf, price_per_unit_eur, name, code, type, description) VALUES
+(3000, 1, 5000, NULL, 1000, 1500, 'Revue printemps 2019', '2019-01', 'both', 'Des article intéressants sur le jardinage assisté par ordinateur'),
+(3001, 1, 5001, 9000, 1000, 1500, 'Revue été 2019', '2019-02', 'both', 'La révolution des transports en commun'),
+(3002, 1, 5002, 9001, 500, 550, 'Article individuel', '2019-02-02', 'digital', 'Pourquoi le train est-il plus rapide ?');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6002, 3000),
@@ -55,10 +59,6 @@ REPLACE INTO order_line (id, owner_id, order_id, product_id, subscription_id, cr
 (17002, 1002, 16001, 3001, NULL, '2019-04-24', 1, 'digital', NULL, 1000, 'Revue été 2019'),
 (17003, 1000, 16002, 3000, NULL, '2019-05-15', 2, 'paper', 1000, NULL, 'Revue printemps 2019'),
 (17004, 1000, 16003, NULL, 19000, '2019-05-19', 1, 'paper', 12000, NULL, 'Abonnement standard papier');
-
-REPLACE INTO file (id, product_id, owner_id, filename, mime) VALUES
-(9000, 3001,  1002, 'dw4jV3zYSPsqE2CB8BcP8ABD0.pdf', 'application/pdf'),
-(9001, 3002,  1000, '4k123pkopvs3iDFV948abcde.pdf', 'application/pdf');
 
 REPLACE INTO `configuration` (id, `key`, `value`) VALUES
 (18000, 'home-block-1-title', 'Titre bloc 1'),

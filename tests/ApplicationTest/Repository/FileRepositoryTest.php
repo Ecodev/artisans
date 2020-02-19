@@ -51,7 +51,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
         $file = new File();
 
         $file->setFilename('test document.pdf');
-        $file->setProduct($product);
+        $product->setFile($file);
 
         $this->getEntityManager()->persist($product);
         $this->getEntityManager()->persist($file);

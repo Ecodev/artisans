@@ -49,6 +49,11 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
             $qb->addOrderBy('product.' . $sorting['field'], $sorting['order']);
         }
 
+        /** @var \Doctrine\ORM\Query\Parameter $parameter */
+        foreach ($qbProduct->getParameters() as $parameter) {
+            $qb->setParameter($parameter->getName(), $parameter->getValue(), $parameter->getType());
+        }
+
         return $qb;
     }
 }

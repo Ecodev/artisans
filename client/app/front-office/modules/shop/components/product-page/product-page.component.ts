@@ -1,6 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import { takeUntil } from 'rxjs/operators';
 import { ProductService } from '../../../../../admin/products/services/product.service';
@@ -9,15 +8,12 @@ import {
     CreateProduct,
     CreateProductVariables,
     CurrentUserForProfile,
-    OrderLinesVariables,
     Product,
     ProductType,
     ProductVariables,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../../../shared/generated-types';
-import { Cart } from '../../../cart/classes/cart';
-import { CartService } from '../../../cart/services/cart.service';
 
 @Component({
     selector: 'app-product-page',
@@ -33,14 +29,7 @@ export class ProductPageComponent
         UpdateProductVariables,
         any> implements OnInit {
 
-    public orderLinesVariables: OrderLinesVariables;
-
     public ProductType = ProductType;
-
-    /**
-     * Stores cart service to allow access from template
-     */
-    public CartService = CartService;
 
     /**
      * Resolved model product. Called data to stay compliant with usual providing naming and usage in template
@@ -68,11 +57,6 @@ export class ProductPageComponent
     public formGroup = new FormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile['viewer'];
 
-    /**
-     * Stores DialogTriggerComponent activated route snapshot
-     */
-    private routeSnapshot;
-
     constructor(private productService: ProductService, injector: Injector, private userService: UserService) {
         super('product', productService, injector);
     }
@@ -80,24 +64,6 @@ export class ProductPageComponent
     ngOnInit(): void {
         super.ngOnInit();
         this.userService.getViewer().pipe(takeUntil(this.ngUnsubscribe)).subscribe(viewer => this.viewer = viewer);
-    }
-
-    public computePrice(skipFormat = false): void {
-
-        // Assume no quantity cost nothing for the sake of simple display for end-users
-        if (this.quantityForm.value === null) {
-            this.price = 0;
-            return;
-        }
-
-        if (!skipFormat) {
-            const qty = +this.quantityForm.value;
-            if (!this.data.model.unit && Math.floor(qty) !== qty) {
-                this.quantityForm.setValue(Math.round(qty));
-            }
-        }
-
-        this.price = Cart.getPriceTaxInc(this.data.model, this.quantityForm.value);
     }
 
 }

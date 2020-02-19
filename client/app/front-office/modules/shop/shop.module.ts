@@ -4,7 +4,7 @@ import { ArtisansModule } from '../../../shared/modules/artisans.module';
 import { CartModule } from '../cart/cart.module';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { ProductComponent } from './components/product/product.component';
-import { ProductsComponent } from './components/products/products.component';
+import { ProductsPageComponent } from './components/products/products-page.component';
 import { SubscribeComponent } from './components/subscribe/subscribe.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ShopRoutingModule } from './shop-routing.module';
@@ -13,7 +13,7 @@ import { ShopRoutingModule } from './shop-routing.module';
     declarations: [
         ProductComponent,
         AddToCartComponent,
-        ProductsComponent,
+        ProductsPageComponent,
         SubscribeComponent,
         SubscriptionsComponent,
     ],

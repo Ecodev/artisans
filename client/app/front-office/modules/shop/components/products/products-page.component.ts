@@ -12,11 +12,11 @@ export enum ProductsViewMode {
 }
 
 @Component({
-    selector: 'app-products',
-    templateUrl: './products.component.html',
-    styleUrls: ['./products.component.scss'],
+    selector: 'app-products-page',
+    templateUrl: './products-page.component.html',
+    styleUrls: ['./products-page.component.scss'],
 })
-export class ProductsComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
+export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
 
     public showTags = true;
     public viewMode: ProductsViewMode = ProductsViewMode.grid;

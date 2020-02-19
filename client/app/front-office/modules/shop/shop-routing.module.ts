@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductTagByNameResolver } from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
 import { ProductComponent } from './components/product/product.component';
-import { ProductsComponent, ProductsViewMode } from './components/products/products.component';
+import { ProductsPageComponent, ProductsViewMode } from './components/products/products-page.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
         },
         {
             path: 'articles',
-            component: ProductsComponent,
+            component: ProductsPageComponent,
             data: {
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
@@ -22,7 +22,7 @@ const routes: Routes = [
         },
         {
             path: 'articles/:productTagName',
-            component: ProductsComponent,
+            component: ProductsPageComponent,
             resolve: {
                 productTag: ProductTagByNameResolver,
             },
@@ -34,7 +34,7 @@ const routes: Routes = [
         },
         {
             path: 'numeros',
-            component: ProductsComponent,
+            component: ProductsPageComponent,
             data: {
                 showTags: false,
                 viewMode: ProductsViewMode.list,

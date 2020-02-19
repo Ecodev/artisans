@@ -15,9 +15,9 @@ REPLACE INTO file (id, owner_id, filename, mime) VALUES
 (9001, 1000, '4k123pkopvs3iDFV948abcde.pdf', 'application/pdf');
 
 REPLACE INTO product (id, is_active, image_id, file_id, price_per_unit_chf, price_per_unit_eur, name, code, review_number, type, description) VALUES
-(3000, 1, 5000, NULL, 1000, 1500, 'Revue printemps 2019', '2019-01', 1, 'both', 'Des article intéressants sur le jardinage assisté par ordinateur'),
-(3001, 1, 5001, 9000, 1000, 1500, 'Revue été 2019', '2019-02', 2, 'both', 'La révolution des transports en commun'),
-(3002, 1, 5002, 9001, 500, 550, 'Article individuel', '2019-02-02', 1, 'digital', 'Pourquoi le train est-il plus rapide ?');
+(3000, 1, 5000, NULL, 1000, 1500, 'Revue printemps 2019', '2019-01', 61, 'both', 'Des article intéressants sur le jardinage assisté par ordinateur'),
+(3001, 1, 5001, 9000, 1000, 1500, 'Revue été 2019', '2019-02', 62, 'both', 'La révolution des transports en commun'),
+(3002, 1, 5002, 9001, 500, 550, 'Article individuel', '2019-02-02', NULL, 'digital', 'Pourquoi le train est-il plus rapide ?');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6002, 3000),

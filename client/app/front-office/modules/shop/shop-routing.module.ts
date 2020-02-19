@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductTagByNameResolver } from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
+import { ProductsVariables } from '../../../shared/generated-types';
 import { ProductComponent } from './components/product/product.component';
 import { ProductsPageComponent, ProductsViewMode } from './components/products/products-page.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
             data: {
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
+                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables
             },
         },
         {
@@ -38,6 +40,7 @@ const routes: Routes = [
             data: {
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
+                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables
             },
 
         },
@@ -48,7 +51,7 @@ const routes: Routes = [
                 showTags: false,
                 viewMode: ProductsViewMode.list,
                 title: 'Tous les numéros',
-                // contextVariables: // todo : contextualize only numbers.... how to ?
+                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {not: true}}}]}]}} as ProductsVariables
             },
         },
         {

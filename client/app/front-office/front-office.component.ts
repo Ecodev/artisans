@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { NaturalAbstractController } from '@ecodev/natural';
+import { NaturalAbstractController, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
 import { Currency, CurrencyManager } from '../shared/classes/currencyManager';
@@ -53,7 +53,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 {
                     display: 'S\'abonner',
                     link: '/larevuedurable/abonnements',
-                    highlight: true
+                    highlight: true,
                 },
             ],
         },
@@ -140,7 +140,21 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             });
     }
 
+    /**
+     * To reuse some implemented mechanics, the search is just a redirection that converts the search string into a global natural search
+     */
     public search() {
+
+        const search: NaturalSearchSelections = [
+            [
+                {
+                    field: 'search',
+                    condition: {like: {value: this.searchTerm}},
+                },
+            ],
+        ];
+
+        this.router.navigate(['/larevuedurable/articles', {ns: JSON.stringify(toUrl(search))}]);
     }
 
     public openMenuDropdown(items: MenuItem[], event: MouseEvent) {

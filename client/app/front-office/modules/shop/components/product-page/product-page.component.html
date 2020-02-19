@@ -6,7 +6,7 @@
 
 <div class="container body" fxLayout="column" fxLayoutGap="60px">
 
-    <div fxLayout="column" fxLayoutGap="15px" >
+    <div fxLayout="column" fxLayoutGap="15px">
         <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
 
             <!-- Review number -->
@@ -40,7 +40,7 @@
 
     </div>
 
-    <div fxLayout="column"  fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayoutAlign="start start">
+    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayoutAlign="start start">
 
         <!-- Product image -->
         <img class="product-image"
@@ -103,7 +103,8 @@
 
                 </div>
 
-                <a mat-button routerLink="/larevuedurable/articles">ou acheter par articles</a>
+                <!-- Todo ? maybe link to articles from same review -->
+                <a mat-button routerLink="/larevuedurable/articles" *ngIf="data.model.reviewNumber">ou acheter par articles</a>
             </div>
 
             <div fxFlex class="frame-primary frame">

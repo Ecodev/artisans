@@ -4,6 +4,23 @@ import { NaturalAbstractController } from '@ecodev/natural';
 import { Observable, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UploadService } from './services/upload.service';
+import { Product_product_image, Purchases_purchases_items_product_file } from '../../generated-types';
+
+type FileModel = Purchases_purchases_items_product_file
+    | Product_product_image;
+
+export function getDownloadLink(model: FileModel | null): null | string {
+
+    const hostname = window.location.protocol + '//' + window.location.hostname;
+
+    if (model && model.__typename === 'File') {
+        return hostname + '/file/' + model.id;
+    } else if (model && model.__typename === 'Image') {
+        return hostname + '/image/' + model.id;
+    }
+
+    return null;
+}
 
 @Component({
     selector: 'app-file',
@@ -70,15 +87,7 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
             return null;
         }
 
-        const hostname = window.location.protocol + '//' + window.location.hostname;
-
-        if (this.model && this.model.__typename === 'File') {
-            return hostname + '/file/' + this.model.id;
-        } else if (this.model && this.model.__typename === 'Image') {
-            return hostname + '/image/' + this.model.id;
-        }
-
-        return null;
+        return getDownloadLink(this.model);
     }
 
     private updateImage() {

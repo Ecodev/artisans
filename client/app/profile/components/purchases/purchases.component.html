@@ -1,4 +1,3 @@
-<!--
 <div *ngIf="dataSource" fxLayout="column">
 
     <h2 class="mat-display-1">Articles achetés</h2>
@@ -17,24 +16,24 @@
 
         <div class="responsive-table">
 
-            <div *ngFor="let product of dataSource.data.items" fxLayout="row" fxLayoutGap="20px">
-                <app-file *ngIf="product.image" [model]="product.image" [height]="100" [style.width.px]="100"></app-file>
+            <div *ngFor="let orderLine of dataSource.data.items" fxLayout="row" fxLayoutGap="20px">
+                <app-file *ngIf="orderLine.product.image" [model]="orderLine.product.image" [height]="100" [style.width.px]="100"></app-file>
                 <div fxFlex>
-                    <strong *ngIf="product.reviewNumber" color="text-primary">{{ product.reviewNumber }}</strong>
-                    <a [routerLink]="['/larevuedurable/article', product.id]"> {{ product.name }}</a>
+                    <strong *ngIf="orderLine.product.reviewNumber" color="text-primary">{{ orderLine.product.reviewNumber }}</strong>
+                    <a [routerLink]="['/larevuedurable/article', orderLine.product.id]"> {{ orderLine.product.name }}</a>
                     <br/>
-                    <span>{{ product.type | enum : 'ProductType' | async }}</span>
-                    // todo : link to download related file if web
+                    <span>{{ orderLine.type | enum : 'ProductType' | async }}</span>
+                    <a mat-button *ngIf="canDownload(orderLine)" [href]="getDownloadLink(orderLine)">Télécharger</a>
                 </div>
             </div>
 
         </div>
 
-        <div *ngIf="dataSource.length === 0" class="margin" fxLayout="column" fxLayoutAlign="center center">
+        <div *ngIf="dataSource.data?.length === 0" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <div>Pas de résultats</div>
         </div>
 
-        <div *ngIf="dataSource.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
+        <div *ngIf="dataSource.data?.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
@@ -51,4 +50,3 @@
 
 <natural-fixed-button *ngIf="permissionsService.crud?.product.create" [routerLink]="['/admin/product/new']" icon="add"
 ></natural-fixed-button>
--->

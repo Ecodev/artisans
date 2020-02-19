@@ -35,6 +35,11 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
     @Input() action: 'upload' | 'download' | null = null;
 
     /**
+     *
+     */
+    @Input() backgroundSize = 'contain';
+
+    /**
      * Comma separated list of accepted mimetypes
      */
     @Input() accept = 'image/bmp,image/gif,image/jpeg,image/pjpeg,image/png,image/svg+xml,image/svg,image/webp';

@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import { takeUntil } from 'rxjs/operators';
 import { ProductService } from '../../../../../admin/products/services/product.service';
@@ -35,31 +36,38 @@ export class ProductComponent
     public orderLinesVariables: OrderLinesVariables;
 
     public ProductType = ProductType;
+
     /**
      * Stores cart service to allow access from template
      */
     public CartService = CartService;
+
     /**
      * Resolved model product. Called data to stay compliant with usual providing naming and usage in template
      */
     public data: any;
+
     /**
      * True if we are in edition mode after selecting an existing cart line from cart list. Activates some special layout for line update
      */
     public edit = false;
+
     /**
      * Formatted displayed price
      */
     public price = 0;
+
     /**
      * Form controller for quantity
      */
     public quantityForm = new FormControl(null, [Validators.required, Validators.min(0)]);
+
     /**
      * Combination of form controls of the page
      */
     public formGroup = new FormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile['viewer'];
+
     /**
      * Stores DialogTriggerComponent activated route snapshot
      */

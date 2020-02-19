@@ -9,6 +9,10 @@
         .products.grid .product {
             border-color: mat-color($primary) !important;
         }
+
+        .product-name {
+            color: mat-color($fg, base);
+        }
     }
 }
 

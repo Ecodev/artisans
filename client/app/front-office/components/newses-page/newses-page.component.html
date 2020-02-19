@@ -6,7 +6,7 @@
         <div *ngFor="let news of items">
 
             <h2 class="mat-h2">{{ news.id }} {{ news.name }}</h2>
-            <div>{{ news.date | date : 'EEE d.M.yy'}}</div>
+            <div>{{ news.date | date : 'EEE d.M.yy' }}</div>
             <div [innerHTML]="news.description " class="mat-body"></div>
 
         </div>

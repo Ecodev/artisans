@@ -62,6 +62,13 @@ abstract class AbstractProduct extends AbstractModel
     private $illustration;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text", length=65535)
+     */
+    private $shortDescription = '';
+
+    /**
      * Constructor
      *
      * @param string $name
@@ -175,5 +182,25 @@ abstract class AbstractProduct extends AbstractModel
         }
 
         $this->illustration = $illustration;
+    }
+
+    /**
+     * Set shortDescription
+     *
+     * @param string $shortDescription
+     */
+    public function setShortDescription(string $shortDescription): void
+    {
+        $this->shortDescription = $shortDescription;
+    }
+
+    /**
+     * Get shortDescription
+     *
+     * @return string
+     */
+    public function getShortDescription(): string
+    {
+        return $this->shortDescription;
     }
 }

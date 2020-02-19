@@ -16,6 +16,11 @@ export class AddToCartComponent implements OnInit {
     @Input() label: string;
 
     /**
+     * Button background color
+     */
+    @Input() buttonColor: 'primary' | 'accent' | 'warn' = 'primary';
+
+    /**
      * Product to add to cart
      */
     @Input() product: CartLineProduct;

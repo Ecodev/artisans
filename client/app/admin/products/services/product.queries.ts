@@ -5,7 +5,7 @@ export const productMetaFragment = gql`
     fragment productMeta on Product {
         id
         name
-        description
+        shortDescription
         isActive
         type
         reviewNumber
@@ -56,6 +56,7 @@ export const productQuery = gql`
     query Product($id: ProductID!) {
         product(id: $id) {
             ...productMeta
+            description
             permissions {
                 ...permissions
             }

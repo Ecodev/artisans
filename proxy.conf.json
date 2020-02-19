@@ -2,5 +2,9 @@
   "/graphql": {
     "target": "https://artisans.lan",
     "secure": false
+  },
+  "/image": {
+    "target": "https://artisans.lan",
+    "secure": false
   }
 }

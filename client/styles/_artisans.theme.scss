@@ -6,23 +6,31 @@
     $fg: map-get($theme, foreground);
 
 
-    .text {
+    .text-primary {
         color: mat-color($primary);
     }
 
-    .text {
+    .text-accent {
         color: mat-color($accent);
     }
 
-    .text {
+    .text-warn {
         color: mat-color($warn);
+    }
+
+    .text-light {
+        color: mat-color($fg, base, 0.5);
+    }
+
+    .text-bold {
+        font-weight: bold !important;
     }
 
 
     .frame-primary {
         background: mat-color($primary);
 
-        &, a:not([routerLink]) {
+        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: mat-color($primary, default-contrast);
         }
     }
@@ -30,7 +38,8 @@
     .frame-accent {
         background: mat-color($accent);
 
-        &, a:not([routerLink]) {
+        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+            border: 1px solid red !important;
             color: mat-color($accent, default-contrast);
         }
 
@@ -39,14 +48,25 @@
     .frame-warn {
         background: mat-color($warn);
 
-        &, a:not([routerLink]) {
+        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: mat-color($warn, default-contrast);
         }
     }
 
+    .frame-green {
+        background: #00AE8C;
+
+        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+            color: #FFFFFF;
+        }
+    }
 
     .frame-padding {
         padding: 30px;
+    }
+
+    a {
+        color: mat-color($primary);
     }
 
 }

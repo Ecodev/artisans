@@ -1,14 +1,89 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px">
 
-    <app-product-tags-navigation *ngIf="showTags" [current]="currentProductTag"></app-product-tags-navigation>
+    <div *ngIf="title" class="mat-display-1">{{ title }}</div>
 
-    <div [ngClass]="{'grid': viewMode === ProductsViewMode.grid, 'list': viewMode === ProductsViewMode.list}" class="products">
-        <div *ngFor="let product of items" class="product">
-            <div class="product-name">{{ product.name }}</div>
-            <app-price [product]="product"></app-price>
-            <a [routerLink]="['/larevuedurable', 'article', product.id]" mat-stroked-button>Détail</a>
+    <ng-container *ngIf="items.length">
+
+        <app-product-tags-navigation *ngIf="showTags" [current]="currentProductTag"></app-product-tags-navigation>
+
+        <div *ngIf="currentProductTag">
+            <a mat-stroked-button routerLink="/larevuedurable/articles">
+                <natural-icon name="close"></natural-icon>
+                Effacer la sélection
+            </a>
         </div>
-    </div>
 
-    <a (click)="loadMore()" color="primary" mat-flat-button *ngIf="dataSource?.data?.length > items.length">Voir plus</a>
+        <div class="grid products" *ngIf="viewMode === ProductsViewMode.grid">
+            <div *ngFor="let product of items" class="product">
+
+                <div class="product-tags">
+                    <a *ngFor="let tag of product.productTags"
+                       [routerLink]="['/larevuedurable/articles', tag.name]"
+                       class="product-tag mat-body"
+                    > {{ tag.name }}</a>
+                </div>
+
+                <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
+
+                <div class="product-price mat-body-strong" *ngIf="!product.isAccessible">
+                    <span class="frame-primary">Abonné</span>
+                    ou
+                    <app-price [product]="product" class="mat-h3"></app-price>
+                </div>
+
+                <a mat-flat-button *ngIf="product.isAccessible" [routerLink]="['/file/', product.file.id]" class="product-file-button">
+                    Télécharger
+                </a>
+
+                <a [routerLink]="['/larevuedurable/article', product.id]" mat-stroked-button class="product-detail-button">Détail</a>
+            </div>
+        </div>
+
+        <div *ngIf="viewMode === ProductsViewMode.list">
+            <div class="list products">
+                <div *ngFor="let product of items" class="product" fxLayout="row" fxLayoutGap="60px">
+
+                    <app-file fxFlex="25" *ngIf="product.image" [height]="200" [model]="product.image" class="product-image"></app-file>
+
+                    <div fxLayout="column" fxLayoutGap="10px" fxFlex="50">
+                        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start baseline">
+                            <div class="text-primary text-bold mat-h3 no-margin-bottom" *ngIf="product.reviewNumber">
+                                N° {{ product.reviewNumber }}
+                            </div>
+                            <div class="mat-body-4 text-light" *ngIf="product.releaseDate">
+                                {{ product.releaseDate | date: 'MMMM yyyy' }}
+                            </div>
+                        </div>
+                        <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
+                        <div class="product-name mat-body">{{ product.shortDescription }}</div>
+                    </div>
+
+                    <div class="product-price" *ngIf="!product.isAccessible" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px"
+                    >
+                        <app-price [product]="product" class="mat-h1"></app-price>
+                        <a mat-flat-button
+                           color="primary"
+                           [routerLink]="['/larevuedurable/article', product.id]"
+                           class="product-detail-button"
+                        >Acheter le numéro
+                        </a>
+                    </div>
+
+                    <a mat-flat-button
+                       color="primary"
+                       *ngIf="product.isAccessible"
+                       [routerLink]="['/file/', product.file.id]"
+                       class="product-file-button"
+                    >
+                        Télécharger
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+        <a (click)="loadMore()" mat-stroke-button *ngIf="dataSource?.data?.length > items.length">Afficher plus d'articles</a>
+    </ng-container>
+
+    <div class="mat-h2" *ngIf="items.length === 0">Aucun résultat n'a été trouvé.</div>
 </div>

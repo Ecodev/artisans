@@ -26,6 +26,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
 
     public ProductsViewMode = ProductsViewMode;
 
+
     public title: string;
 
     constructor(route: ActivatedRoute, productService: ProductService, injector: Injector) {

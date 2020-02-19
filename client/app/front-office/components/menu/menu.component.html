@@ -13,6 +13,7 @@
                mat-stroked-button
                color="primary"
                *ngIf="item.highlight"
+               class="highlighted"
             >{{ item.display }}</a>
             <ng-container *ngTemplateOutlet="navigationTemplate; context:{ $implicit: item.children }"></ng-container>
         </li>

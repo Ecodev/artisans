@@ -13,6 +13,15 @@ const routes: Routes = [
             redirectTo: 'articles',
         },
         {
+            path: 'recherche',
+            component: ProductsPageComponent,
+            data: {
+                title: 'Résultats la recherche',
+                showTags: false,
+                viewMode: ProductsViewMode.list,
+            },
+        },
+        {
             path: 'articles',
             component: ProductsPageComponent,
             data: {

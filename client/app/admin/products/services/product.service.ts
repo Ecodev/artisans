@@ -45,7 +45,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         return {
             code: [Validators.maxLength(20)],
             name: [Validators.required, Validators.maxLength(100)],
-            minimumQuantity: [Validators.required, Validators.min(0)],
         };
     }
 
@@ -60,6 +59,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             name: '',
             code: null,
             description: '',
+            shortDescription: '',
             pricePerUnitCHF: '0',
             pricePerUnitEUR: '0',
             internalRemarks: '',
@@ -67,8 +67,9 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             image: null,
             illustration: null,
             releaseDate: null,
-            reviewNumber: 0,
+            reviewNumber: null,
             type: ProductType.digital,
+            readingDuration: null,
         };
     }
 

@@ -42,7 +42,17 @@
                         </div>
 
                         <mat-form-field>
-                            <mat-label>Description</mat-label>
+                            <mat-label>Description courte</mat-label>
+                            <textarea (change)="update()"
+                                      [matAutosizeMinRows]="1"
+                                      formControlName="shortDescription"
+                                      matInput
+                                      matTextareaAutosize
+                            ></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Description complète</mat-label>
                             <textarea (change)="update()"
                                       [matAutosizeMinRows]="1"
                                       formControlName="description"
@@ -53,12 +63,28 @@
 
                     </div>
 
-                    <div fxFlex="33" fxLayout="column">
+                    <div fxFlex="33" fxLayout="column" fxLayoutGap="20px">
 
                         <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-                            <h2 class="mat-h2 no-margin" fxFlex>Prix</h2>
+                            <h2 class="mat-h2 no-margin" fxFlex>Disponible à la vente</h2>
                             <mat-slide-toggle (change)="update()" formControlName="isActive">Disponible</mat-slide-toggle>
                         </div>
+
+                        <mat-form-field>
+                            <mat-label>Numéro de revue</mat-label>
+                            <input (change)="update()" formControlName="reviewNumber" matInput type="number">
+                            <mat-hint>Numéro de la revue (seulement pour les revues ! ne pas saisir pour les articles)</mat-hint>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Durée de lecture</mat-label>
+                            <input (change)="update()" formControlName="readingDuration" matInput type="number">
+                            <mat-hint>Saisir un nombre de minutes</mat-hint>
+                        </mat-form-field>
+
+                        <mat-divider></mat-divider>
+
+                        <h2 class="mat-h2">Prix</h2>
 
                         <mat-form-field>
                             <mat-label>Prix par unité (CHF)</mat-label>

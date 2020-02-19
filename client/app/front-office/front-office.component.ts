@@ -154,7 +154,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             ],
         ];
 
-        this.router.navigate(['/larevuedurable/articles', {ns: JSON.stringify(toUrl(search))}]);
+        this.router.navigate(['/larevuedurable/recherche', {ns: JSON.stringify(toUrl(search))}]);
     }
 
     public openMenuDropdown(items: MenuItem[], event: MouseEvent) {

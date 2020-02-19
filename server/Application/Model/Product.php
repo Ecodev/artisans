@@ -31,9 +31,9 @@ class Product extends AbstractProduct
     private $releaseDate;
 
     /**
-     * @var int
+     * @var null|int
      *
-     * @ORM\Column(type="smallint", options={"unsigned" = true})
+     * @ORM\Column(type="smallint", nullable=true, options={"unsigned" = true})
      */
     private $reviewNumber;
 
@@ -127,17 +127,17 @@ class Product extends AbstractProduct
     }
 
     /**
-     * @return int
+     * @return null|int
      */
-    public function getReviewNumber(): int
+    public function getReviewNumber(): ?int
     {
         return $this->reviewNumber;
     }
 
     /**
-     * @param int $reviewNumber
+     * @param null|int $reviewNumber
      */
-    public function setReviewNumber(int $reviewNumber): void
+    public function setReviewNumber(?int $reviewNumber): void
     {
         $this->reviewNumber = $reviewNumber;
     }

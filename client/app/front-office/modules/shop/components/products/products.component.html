@@ -10,5 +10,5 @@
         </div>
     </div>
 
-    <a (click)="loadMore()" color="primary" mat-flat-button>Voir plus</a>
+    <a (click)="loadMore()" color="primary" mat-flat-button *ngIf="dataSource?.data?.length > items.length">Voir plus</a>
 </div>

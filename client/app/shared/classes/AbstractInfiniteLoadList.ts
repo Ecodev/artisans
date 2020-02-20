@@ -18,6 +18,10 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
         super.ngOnInit();
 
         this.dataSource.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+            if (!result) {
+                return;
+            }
+
             if (result.pageIndex === 0) {
                 this.items = result.items; // When page index is 0, it means "new list" so replace all results.
             } else {
@@ -28,7 +32,9 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
     }
 
     public loadMore() {
-        this.pagination({pageIndex: this.dataSource.data.pageIndex + 1});
+        if (this.dataSource.data) {
+            this.pagination({pageIndex: this.dataSource.data.pageIndex + 1});
+        }
     }
 
     /**

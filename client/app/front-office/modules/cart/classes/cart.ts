@@ -1,5 +1,4 @@
 import Decimal from 'decimal.js';
-import { Subject } from 'rxjs';
 import { CurrencyManager } from '../../../../shared/classes/currencyManager';
 import {
     Product_product,
@@ -9,7 +8,6 @@ import {
     Subscriptions_subscriptions_items,
 } from '../../../../shared/generated-types';
 import { moneyRoundUp } from '../../../../shared/utils';
-import { CartService } from '../services/cart.service';
 
 export type CartLineProduct =
     Products_products_items
@@ -43,7 +41,7 @@ export interface CartLine {
 
 export class Cart {
 
-    private static storageKey = 'carts';
+    public static readonly storageKey = 'carts';
 
     public static carts: Cart[] = [];
 
@@ -56,11 +54,6 @@ export class Cart {
      * Total including taxes
      */
     public totalTaxInc: number;
-
-    /**
-     * Emits when cart changes
-     */
-    public readonly onChange = new Subject();
 
     /**
      * Single donation amount
@@ -87,14 +80,6 @@ export class Cart {
         }
 
         return [];
-    }
-
-
-    public static clearCarts() {
-        Cart.carts.forEach(c => c.empty());
-        Cart.carts.length = 0;
-        sessionStorage.setItem(Cart.storageKey, '');
-        CartService.initGlobalCart();
     }
 
     /**

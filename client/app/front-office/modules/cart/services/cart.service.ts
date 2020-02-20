@@ -11,6 +11,15 @@ import { Cart } from '../classes/cart';
 })
 export class CartService {
 
+    public static _globalCart: Cart;
+
+    public static clearCarts() {
+        Cart.carts.forEach(c => c.empty());
+        Cart.carts.length = 0;
+        sessionStorage.setItem(Cart.storageKey, '');
+        CartService.initGlobalCart();
+    }
+
     constructor(private orderService: OrderService, private dialogService: MatDialog) {
 
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
@@ -25,8 +34,6 @@ export class CartService {
         // On currency change, update carts totals
         CurrencyManager.current.subscribe(() => Cart.carts.forEach(cart => cart.computeTotals()));
     }
-
-    public static _globalCart: Cart;
 
     public static get globalCart(): Cart {
         return CartService._globalCart;

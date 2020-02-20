@@ -7,7 +7,7 @@ import { DataProxy } from 'apollo-cache';
 import gql from 'graphql-tag';
 import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Cart } from '../../../front-office/modules/cart/classes/cart';
+import { CartService } from '../../../front-office/modules/cart/services/cart.service';
 import { CurrencyManager } from '../../../shared/classes/currencyManager';
 import {
     CreateUser,
@@ -127,7 +127,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                     this.permissionsService.setUser(login);
 
                     // Be sure that we don't have leftovers from another user
-                    Cart.clearCarts();
+                    CartService.clearCarts();
                     CurrencyManager.updateLockedStatus(login);
                 },
             }).pipe(map(({data: {login}}) => login)).subscribe(subject);

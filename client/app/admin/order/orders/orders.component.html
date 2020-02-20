@@ -73,9 +73,9 @@
                         <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
                     </td>
                     <td *matFooterCellDef mat-footer-cell natural-align-right>
-                        <span *ngIf="dataSource?.data.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
-                        <ng-container *ngIf="dataSource?.data.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -</ng-container>
-                        <span *ngIf="dataSource?.data.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
+                        <span *ngIf="dataSource?.data?.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
+                        <ng-container *ngIf="dataSource?.data?.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -</ng-container>
+                        <span *ngIf="dataSource?.data?.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
                     </td>
                 </ng-container>
 
@@ -86,7 +86,7 @@
             <div>Pas de résultats</div>
         </div>
 
-        <div *ngIf="dataSource.data?.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
+        <div **ngIf="!dataSource?.data" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 

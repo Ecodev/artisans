@@ -16,7 +16,7 @@
 
         <div class="responsive-table">
 
-            <div *ngFor="let orderLine of dataSource.data.items" fxLayout="row" fxLayoutGap="20px">
+            <div *ngFor="let orderLine of dataSource.data?.items" fxLayout="row" fxLayoutGap="20px">
                 <app-file *ngIf="orderLine.product.image" [model]="orderLine.product.image" [height]="100" [style.width.px]="100"></app-file>
                 <div fxFlex>
                     <strong *ngIf="orderLine.product.reviewNumber" color="text-primary">{{ orderLine.product.reviewNumber }}</strong>
@@ -33,7 +33,7 @@
             <div>Pas de résultats</div>
         </div>
 
-        <div *ngIf="dataSource.data?.length === null" class="margin" fxLayout="column" fxLayoutAlign="center center">
+        <div **ngIf="!dataSource?.data" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 

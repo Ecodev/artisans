@@ -9,6 +9,7 @@ use Application\Api\Helper;
 use Application\Api\Input\PaginationInputType;
 use Application\Model\OrderLine;
 use Application\Model\Product;
+use Application\Repository\OrderLineRepository;
 use GraphQL\Type\Definition\Type;
 
 abstract class Purchases implements FieldInterface
@@ -46,6 +47,7 @@ abstract class Purchases implements FieldInterface
                     PaginationInputType::build(),
                 ],
                 'resolve' => function ($root, array $args): array {
+                    /** @var OrderLineRepository $orderLineRepository */
                     $orderLineRepository = _em()->getRepository(OrderLine::class);
                     $qb = $orderLineRepository->createPurchaseQueryBuilder($args['filter'] ?? [], $args['sorting'] ?? []);
 

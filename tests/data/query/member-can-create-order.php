@@ -25,14 +25,12 @@ return [
                     'quantity' => 250,
                     'isCHF' => true,
                     'type' => ProductTypeType::DIGITAL,
-
                 ],
                 [
                     'product' => 3001,
                     'quantity' => 1,
                     'isCHF' => true,
                     'type' => ProductTypeType::PAPER,
-
                 ],
             ],
         ],
@@ -40,19 +38,19 @@ return [
     [
         'data' => [
             'createOrder' => [
-                'balanceCHF' => '2510.00',
+                'balanceCHF' => '3765.00',
                 'balanceEUR' => '0.00',
                 'orderLines' => [
                     [
                         'quantity' => '250',
                         'type' => ProductTypeType::DIGITAL,
-                        'balanceCHF' => '2500.00',
+                        'balanceCHF' => '3750.00',
                         'balanceEUR' => '0.00',
                     ],
                     [
                         'quantity' => '1',
                         'type' => ProductTypeType::PAPER,
-                        'balanceCHF' => '10.00',
+                        'balanceCHF' => '15.00',
                         'balanceEUR' => '0.00',
                     ],
                 ],

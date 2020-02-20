@@ -1,9 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { takeUntil } from 'rxjs/operators';
 import { ProductService } from '../../../../../admin/products/services/product.service';
-import { UserService } from '../../../../../admin/users/services/user.service';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -57,13 +55,14 @@ export class ProductPageComponent
     public formGroup = new FormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile['viewer'];
 
-    constructor(private productService: ProductService, injector: Injector, private userService: UserService) {
+    constructor(private productService: ProductService, injector: Injector) {
         super('product', productService, injector);
     }
 
     ngOnInit(): void {
         super.ngOnInit();
-        this.userService.getViewer().pipe(takeUntil(this.ngUnsubscribe)).subscribe(viewer => this.viewer = viewer);
+
+        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
     }
 
 }

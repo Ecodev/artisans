@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { EventService } from '../../../admin/events/services/event.service';
 import { NewsService } from '../../../admin/newses/services/news.service';
+import { ProductService } from '../../../admin/products/services/product.service';
 import { UserService } from '../../../admin/users/services/user.service';
 import {
     Events_events_items,
@@ -11,6 +12,9 @@ import {
     Newses_newses_items,
     NewsesVariables,
     NewsSortingField,
+    Products_products_items,
+    ProductSortingField,
+    ProductsVariables,
     SortingOrder,
 } from '../../../shared/generated-types';
 import { PermissionsService } from '../../../shared/services/permissions.service';
@@ -37,10 +41,16 @@ export class HomepageComponent implements OnInit {
      */
     public events: Events_events_items[];
 
+    /**
+     * Currently active review
+     */
+    public currentReview: Products_products_items;
+
     constructor(public userService: UserService,
                 private route: ActivatedRoute,
                 private newsService: NewsService,
                 private eventService: EventService,
+                private productService: ProductService,
                 public permissionService: PermissionsService) {
     }
 
@@ -64,6 +74,27 @@ export class HomepageComponent implements OnInit {
             sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
         });
         this.eventService.getAll(qvmEvents).subscribe(result => this.events = result.items);
+
+        // Current active review : next product with review number and already released (and active
+        const qvmProduct = new NaturalQueryVariablesManager<ProductsVariables>();
+        qvmProduct.set('variables', {
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                reviewNumber: {null: {not: true}},
+                                releaseDate: {lessOrEqual: {value: new Date()}},
+                                isActive: {equal: {value: true}},
+                            },
+                        ],
+                    },
+                ],
+            },
+            pagination: {pageSize: 1, pageIndex: 0},
+            sorting: [{field: ProductSortingField.releaseDate, order: SortingOrder.ASC}],
+        });
+        this.productService.getAll(qvmProduct).subscribe(result => this.currentReview = result.items[0]);
     }
 
 }

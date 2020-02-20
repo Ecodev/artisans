@@ -71,22 +71,41 @@
     </div>
 </div>
 
-<div class="la-revue section">
+<div class="la-revue section" *ngIf="currentReview">
     <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
 
-        <div>
-            <mat-card class="mat-elevation-z5 last-product-thumbnail"></mat-card>
-        </div>
+        <a [routerLink]="['/larevuedurable/article', currentReview.id]">
+            <img [attr.src]="'/image/' + currentReview.image.id + '/470'"
+                 alt="illustration du dernier numéro paru"
+                 class="mat-elevation-z5 last-product-thumbnail"
+            />
+        </a>
 
-        <div class="la-revue-body" fxLayout="column">
-            <div class="mat-h1">Le dernier numéro</div>
-            <div class="mat-h4">63 | AUTOMNE-HIVER 2019</div>
-            <div class="mat-display-1">Technologies numériques : en finir avec le capitalisme de surveillance</div>
-            <div class="mat-h3">
+        <div class="la-revue-body" fxLayout="column" fxLayoutGap="10px">
+            <div class="mat-h1 text-primary text-bold">Le dernier numéro</div>
+            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
+                <span>{{ currentReview.reviewNumber }}</span>
+                <span>|</span>
+                <span>{{ currentReview.releaseDate | date : 'EEE dd.MM.yy' | capitalize }}</span>
+            </div>
+            <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-display-1">{{ currentReview.name }}</a>
+
+            <!-- If has not access -->
+            <div class="mat-h3" *ngIf="!currentReview.isAccessible">
                 Disponible en versions papier ou PDF avec votre abonnnement
                 <br />
-                CHF 17.– pour non abonnés
+                <app-price [product]="currentReview"></app-price>
+                pour non abonnés
             </div>
+
+            <!-- If has access -->
+            <a mat-flat-button
+               color="primary"
+               [routerLink]="['/file/', currentReview.file.id]"
+               *ngIf="currentReview.isAccessible && currentReview.file"
+            >
+                Télécharger le numéro
+            </a>
         </div>
 
     </div>

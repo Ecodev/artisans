@@ -62,8 +62,8 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         $paths = [
             'data/images/train.jpg',
-            'data/images/transport.jpg',
-            'data/images/garden.jpg',
+            'data/images/revue61.jpg',
+            'data/images/revue62.jpg',
         ];
 
         // All images must exist before testing
@@ -85,7 +85,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         // Most images must still exist after affecting an existing image to an existing product.
         // Only the orphaned image should be deleted, but absolutely never an image related to **another** product
-        $mustBeDeleted = 'data/images/garden.jpg';
+        $mustBeDeleted = 'data/images/revue61.jpg';
         foreach ($paths as $p) {
             if ($p === $mustBeDeleted) {
                 self::assertFileNotExists($p);

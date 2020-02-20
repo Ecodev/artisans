@@ -37,11 +37,11 @@ return [
                     'id' => '3001',
                 ],
                 'quantity' => '20.000',
-                'balanceCHF' => '200.00',
+                'balanceCHF' => '300.00',
                 'balanceEUR' => '0.00',
                 'type' => ProductTypeType::DIGITAL,
                 'order' => [
-                    'balanceCHF' => '215.00',
+                    'balanceCHF' => '305.00',
                     'balanceEUR' => '0.00',
                 ],
             ],

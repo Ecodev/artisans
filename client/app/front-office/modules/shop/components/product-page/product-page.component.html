@@ -7,12 +7,14 @@
 <div class="container body" fxLayout="column" fxLayoutGap="60px">
 
     <div fxLayout="column" fxLayoutGap="15px">
-        <div fxLayout="row" fxLayoutGap="30px" fxLayoutAlign="start center">
+        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
 
             <!-- Review number -->
             <div class="text-primary text-bold mat-h1 no-margin-bottom" *ngIf="data.model.reviewNumber">
                 N° {{ data.model.reviewNumber }}
             </div>
+
+            <span *ngIf="data.model.reviewNumber && data.model.releaseDate" class="mat-h2 no-margin-bottom"> |</span>
 
             <!-- Release date -->
             <div class="mat-h2 text-light no-margin-bottom" *ngIf="data.model.releaseDate">
@@ -26,6 +28,7 @@
                  fxLayoutGap="10px"
                  class="mat-h3 no-margin-bottom"
             >
+                |
                 <natural-icon name="alarm"></natural-icon>
                 <div>Durée de lecture : {{ data.model.readingDuration }} {{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }}</div>
             </div>
@@ -43,12 +46,13 @@
     <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayoutAlign="start start">
 
         <!-- Product image -->
-        <img class="product-image"
-             *ngIf="data.model.image"
-             [attr.src]="'/image/' + data.model.image.id + '/400'"
-             alt="aperçu de l'article"
-             fxFlex.gt-sm="33"
-        />
+        <div fxFlex="33">
+            <img class="product-image"
+                 *ngIf="data.model.image"
+                 [attr.src]="'/image/' + data.model.image.id + '/400'"
+                 alt="aperçu de l'article"
+            />
+        </div>
 
         <!-- Short description -->
         <section fxFlex>

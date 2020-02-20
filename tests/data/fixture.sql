@@ -6,8 +6,8 @@ REPLACE INTO product_tag (id, name) VALUES
 (6002, 'Jardinage');
 
 REPLACE INTO image (id, filename, width, height, mime) VALUES
-(5000, 'garden.jpg', 792, 528, 'image/jpeg'),
-(5001, 'transport.jpg', 840, 466, 'image/jpeg'),
+(5000, 'revue61.jpg', 1358, 1831, 'image/jpeg'),
+(5001, 'revue62.jpg', 1830, 2480, 'image/jpeg'),
 (5002, 'train.jpg', 832, 468, 'image/jpeg');
 
 REPLACE INTO file (id, owner_id, filename, mime) VALUES
@@ -15,8 +15,8 @@ REPLACE INTO file (id, owner_id, filename, mime) VALUES
 (9001, 1000, '4k123pkopvs3iDFV948abcde.pdf', 'application/pdf');
 
 REPLACE INTO product (id, is_active, image_id, file_id, price_per_unit_chf, price_per_unit_eur, code, review_number, type, name, short_description) VALUES
-(3000, 1, 5000, NULL, 1500, 1000, '2019-01', 61, 'both', 'Revue 61', 'Des articles intéressants sur le jardinage assisté par ordinateur'),
-(3001, 1, 5001, 9000, 1500, 1000, '2019-02', 62, 'both', 'Revue 62', 'La révolution des transports en commun'),
+(3000, 1, 5000, NULL, 1500, 1000, '2019-01', 61, 'both', 'Sobriété et liberté : à la recherche d''un équilibre', 'Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas faucibus mollis interdum.Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.'),
+(3001, 1, 5001, 9000, 1500, 1000, '2019-06', 62, 'both', 'Habitat : le pouvoir de la participation', 'Maecenas sed diam eget risus varius blandit sit amet non magna. Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Donec sed odio dui. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.'),
 (3002, 1, 5002, 9001, 500, 450, '2019-02-02a', NULL, 'digital', 'Article numérique 1', 'Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.'),
 (3003, 1, NULL, NULL, 500, 450, '2019-02-02b', NULL, 'digital', 'Article numérique 2', 'Nullam id dolor id nibh ultricies vehicula ut id elit. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere consectetur est at lobortis.'),
 (3004, 1, NULL, NULL, 500, 450, '2019-02-02c', NULL, 'digital', 'Article numérique 3', 'Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cras justo odio, dapibus ac facilisis in, egestas eget quam.'),
@@ -67,10 +67,10 @@ REPLACE INTO `order` (id, owner_id, creator_id, creation_date, balance_chf, bala
 (16003, 1000, 1000, '2019-05-19', 12000, NULL, 'validated');
 
 REPLACE INTO order_line (id, owner_id, order_id, product_id, subscription_id, creation_date, quantity, type, balance_chf, balance_eur, name) VALUES
-(17000, 1002, 16000, 3000, NULL, '2019-04-24', 2, 'paper', 1500, NULL, 'Revue 61'),
+(17000, 1002, 16000, 3000, NULL, '2019-04-24', 2, 'paper', 1500, NULL, 'Sobriété et liberté : à la recherche d''un équilibre'),
 (17001, 1002, 16000, 3002, NULL, '2019-04-24', 1, 'digital', 500, NULL, 'Article numérique 1'),
--- (17002, 1002, 16001, 3001, NULL, '2019-04-24', 1, 'digital', NULL, 1000, 'Revue 62'),
-(17003, 1000, 16002, 3000, NULL, '2019-05-15', 1, 'digital', NULL, 1000, 'Revue 61'),
+(17002, 1002, 16001, 3001, NULL, '2019-04-24', 1, 'digital', NULL, 1000, 'Habitat : le pouvoir de la participation'),
+(17003, 1000, 16002, 3000, NULL, '2019-05-15', 1, 'digital', NULL, 1000, 'Sobriété et liberté : à la recherche d''un équilibre'),
 (17004, 1000, 16003, NULL, 19000, '2019-05-19', 1, 'paper', 12000, NULL, 'Abonnement standard papier');
 
 REPLACE INTO `configuration` (id, `key`, `value`) VALUES

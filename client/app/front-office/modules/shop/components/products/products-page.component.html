@@ -46,17 +46,19 @@
         LIST
         -->
         <div *ngIf="viewMode === ProductsViewMode.list">
-            <div class="list products">
-                <div *ngFor="let product of items" class="product" fxLayout="row" fxLayoutGap="60px">
+            <div class="list products" fxLayout="column" fxLayoutGap="60px">
+                <div *ngFor="let product of items" class="product" fxLayout="column"  fxLayout.gt-sm="row" fxLayoutGap="60px">
 
-                    <app-file fxFlex="25" *ngIf="product.image" [height]="200" [model]="product.image" class="product-image"></app-file>
+                    <div class="product-image">
+                        <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
+                    </div>
 
-                    <div fxLayout="column" fxLayoutGap="10px" fxFlex="50">
+                    <div fxLayout="column" fxLayoutGap="10px" fxFlex>
                         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start baseline">
-                            <div class="text-primary text-bold mat-h3 no-margin-bottom" *ngIf="product.reviewNumber">
+                            <div class="text-primary text-bold mat-h1 no-margin-bottom" *ngIf="product.reviewNumber">
                                 N° {{ product.reviewNumber }}
                             </div>
-                            <div class="mat-body-4 text-light" *ngIf="product.releaseDate">
+                            <div class="mat-h2 text-light text-thin no-margin-bottom" *ngIf="product.releaseDate">
                                 {{ product.releaseDate | date: 'MMMM yyyy' }}
                             </div>
                         </div>
@@ -64,8 +66,7 @@
                         <div class="product-name mat-body">{{ product.shortDescription }}</div>
                     </div>
 
-                    <div class="product-price" *ngIf="!product.isAccessible" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px"
-                    >
+                    <div class="product-price" *ngIf="!product.isAccessible" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
                         <app-price [product]="product" class="mat-h1"></app-price>
                         <a mat-flat-button
                            color="primary"

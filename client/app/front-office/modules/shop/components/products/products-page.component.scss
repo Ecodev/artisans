@@ -19,12 +19,13 @@
             //    grid-row: span 2;
             // }
 
-            .product-image {
-                display: none;
-            }
 
             .product-name {
                 flex: 1;
+            }
+
+            .product-image img {
+                max-width: 100%;
             }
 
             .product-description {

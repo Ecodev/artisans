@@ -17,7 +17,7 @@
 
         <!-- News -->
         <div class="newses" fxFlex.gt-sm="66">
-            <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
+            <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>ACTUALITÉS</div>
                 <div class="relative">
                     <button *ngIf="permissionService?.crud?.news?.create" class="absolute" color="none" mat-fab routerLink="/admin/news">
@@ -26,11 +26,11 @@
                 </div>
             </div>
             <mat-divider></mat-divider>
-            <div class="newses-list" fxLayout="column" fxLayoutGap="40px">
+            <div class="newses-list" fxLayout="column" fxLayoutGap="30px">
                 <div></div>
                 <div *ngFor="let news of newses" class="news">
-                    <div class="mat-body-strong">{{ news.date | date : 'EEE d.M.yy' }}</div>
-                    <div class="mat-h1">{{ news.name }}</div>
+                    <div class="mat-body-strong text-light">{{ news.date | date : 'EEE d.M.yy' }}</div>
+                    <div class="mat-h2">{{ news.name }}</div>
                     <div [innerHTML]="news.description" class="mat-h4"></div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
 
         <!-- Events -->
         <div class="events" fxFlex.gt-sm="33">
-            <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="60px">
+            <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>AGENDA</div>
                 <div class="relative">
                     <button *ngIf="permissionService?.crud?.event?.create" class="absolute" color="none" mat-fab routerLink="/admin/event">
@@ -49,11 +49,13 @@
                 </div>
             </div>
             <mat-divider></mat-divider>
-            <div class="newses-list" fxLayout="column" fxLayoutGap="40px">
+            <div class="newses-list" fxLayout="column" fxLayoutGap="30px">
                 <div></div>
                 <div *ngFor="let event of events" class="event">
-                    <div class="mat-h1">{{ event.name }}</div>
-                    <div class="mat-h3">{{ event.date | date : 'EEE d.M.yy' }} - {{ event.place }} - {{ event.type }}</div>
+                    <div class="mat-h2">{{ event.name }}</div>
+                    <div class="mat-h3">
+                        <span class="text-light">{{ event.date | date : 'EEE d.M.yy' }}</span>
+                        - {{ event.place }} - {{ event.type }}</div>
                 </div>
             </div>
             <a color="primary" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
@@ -115,7 +117,7 @@
                             durabilité dans une soixantaine de pays.</p>
                         <p>Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte atteinte. </p>
                     </div>
-                    <a mat-flat-button> Voir les abonnements
+                    <a mat-flat-button routerLink="/larevuedurable/abonnements"> Voir les abonnements
                         <natural-icon name="chevron_right"></natural-icon>
                     </a>
                 </div>

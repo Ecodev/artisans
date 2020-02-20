@@ -43,7 +43,7 @@ export class HomepageComponent implements OnInit {
         // News
         const qvmNews = new NaturalQueryVariablesManager<NewsesVariables>();
         qvmNews.set('variables', {
-            pagination: {pageSize: 5, pageIndex: 0},
+            pagination: {pageSize: 3, pageIndex: 0},
             sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
         });
         this.newsService.getAll(qvmNews).subscribe(result => this.newses = result.items);

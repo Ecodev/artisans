@@ -13,6 +13,9 @@
             </a>
         </div>
 
+        <!--
+        GRID
+        -->
         <div class="grid products" *ngIf="viewMode === ProductsViewMode.grid">
             <div *ngFor="let product of items" class="product">
 
@@ -39,6 +42,9 @@
             </div>
         </div>
 
+        <!--
+        LIST
+        -->
         <div *ngIf="viewMode === ProductsViewMode.list">
             <div class="list products">
                 <div *ngFor="let product of items" class="product" fxLayout="row" fxLayoutGap="60px">

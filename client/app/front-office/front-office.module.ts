@@ -5,6 +5,7 @@ import { OrderModule } from '../admin/order/order.module';
 import { ProfileModule } from '../profile/profile.module';
 import { ArtisansModule } from '../shared/modules/artisans.module';
 import { MaterialModule } from '../shared/modules/material.module';
+import { DonationComponent } from './components/donation/donation.component';
 import { EventsPageComponent } from './components/events-page/events-page.component';
 import { HomeBlockComponent } from './components/home-block/home-block.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
@@ -29,6 +30,7 @@ import { ShopModule } from './modules/shop/shop.module';
         MenuComponent,
         NewsesPageComponent,
         EventsPageComponent,
+        DonationComponent,
     ],
     imports: [
         CommonModule,
@@ -40,7 +42,7 @@ import { ShopModule } from './modules/shop/shop.module';
         EcoFabSpeedDialModule,
         ShopModule,
     ],
-    entryComponents: [MenuComponent],
+    entryComponents: [MenuComponent, DonationComponent],
 })
 export class FrontOfficeModule {
 }

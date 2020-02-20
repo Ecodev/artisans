@@ -86,7 +86,7 @@
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
                 <span>{{ currentReview.reviewNumber }}</span>
                 <span>|</span>
-                <span>{{ currentReview.releaseDate | date : 'EEE dd.MM.yy' | capitalize }}</span>
+                <span>{{ currentReview.releaseDate | date : 'MMMM yyyy' | capitalize }}</span>
             </div>
             <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-display-1">{{ currentReview.name }}</a>
 

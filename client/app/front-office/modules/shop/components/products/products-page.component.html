@@ -59,7 +59,7 @@
                                 N° {{ product.reviewNumber }}
                             </div>
                             <div class="mat-h2 text-light text-thin no-margin-bottom" *ngIf="product.releaseDate">
-                                {{ product.releaseDate | date: 'MMMM yyyy' }}
+                                {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
                             </div>
                         </div>
                         <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>

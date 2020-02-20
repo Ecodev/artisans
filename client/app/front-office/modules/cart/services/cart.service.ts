@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { NaturalAlertService } from '@ecodev/natural';
-import { fromEvent } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 import { OrderService } from '../../../../admin/order/services/order.service';
 import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
 import { OrderLineInput } from '../../../../shared/generated-types';
+import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
 
 @Injectable({
@@ -12,20 +11,16 @@ import { Cart } from '../classes/cart';
 })
 export class CartService {
 
-    private static globalCartStorageKey = 'global-cart';
-
-    constructor(private orderService: OrderService, private alertService: NaturalAlertService) {
-
-        CartService.initGlobalCart();
+    constructor(private orderService: OrderService, private dialogService: MatDialog) {
 
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
-        fromEvent<StorageEvent>(window, 'storage').pipe(
-            map(event => {
-                if (event.key === CartService.globalCartStorageKey && event.newValue !== null) {
-                    CartService.globalCart.setLines(JSON.parse(event.newValue));
-                }
-            }),
-        ).subscribe();
+        // fromEvent<StorageEvent>(window, 'storage').pipe(
+        //     map(event => {
+        //         if (event.key === CartService.globalCartStorageKey && event.newValue !== null) {
+        //             CartService.globalCart.setLines(JSON.parse(event.newValue));
+        //         }
+        //     }),
+        // ).subscribe();
 
         // On currency change, update carts totals
         CurrencyManager.current.subscribe(() => Cart.carts.forEach(cart => cart.computeTotals()));
@@ -34,34 +29,22 @@ export class CartService {
     public static _globalCart: Cart;
 
     public static get globalCart(): Cart {
-        CartService.initGlobalCart();
         return CartService._globalCart;
     }
 
-    public static clearCarts() {
-        Cart.carts.forEach(c => c.empty());
-        Cart.carts.length = 0;
-    }
+    public static initGlobalCart() {
+        const persistedCart = Cart.getById(0);
 
-    private static initGlobalCart() {
-
-        if (!CartService._globalCart) {
-            CartService._globalCart = new Cart();
-            CartService._globalCart.onChange.subscribe(() => localStorage.setItem(CartService.globalCartStorageKey,
-                JSON.stringify(CartService._globalCart.lines)));
-        }
-
-        const storedLines = localStorage.getItem(CartService.globalCartStorageKey);
-
-        if (storedLines) {
-            const lines = JSON.parse(storedLines);
-            CartService._globalCart.setLines(lines);
+        if (persistedCart) {
+            CartService._globalCart = persistedCart;
+        } else {
+            CartService._globalCart = new Cart(0);
         }
     }
 
     public save(cart: Cart) {
 
-        const input: OrderLineInput[] = cart.lines.map((line) => {
+        const input: OrderLineInput[] = cart.productLines.map((line) => {
             return {
                 product: line.product.id,
                 quantity: line.quantity + '',
@@ -71,6 +54,24 @@ export class CartService {
         });
 
         return this.orderService.create(input); // whines because of a number is provided instead of a string. TODO : fix
+    }
+
+    /**
+     * Prompts the user to manually set the donation amount
+     */
+    public inputDonation(cart?: Cart) {
+
+        this.dialogService.open(DonationComponent).afterClosed().subscribe(amount => {
+            if (amount != null) {
+
+                if (!cart) {
+                    cart = CartService.globalCart;
+                }
+
+                cart.setDonation(amount);
+            }
+        });
+
     }
 
 }

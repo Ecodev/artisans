@@ -19,8 +19,8 @@
 
                             <div fxFlex fxLayout="column">
                                 <mat-form-field>
-                                    <input (change)="update()" formControlName="name" matInput>
                                     <mat-label>Nom</mat-label>
+                                    <input (change)="update()" formControlName="name" matInput>
                                     <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
                                         Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>
@@ -28,8 +28,8 @@
                                 </mat-form-field>
 
                                 <mat-form-field>
-                                    <input (change)="update()" formControlName="code" matInput maxlength="20">
                                     <mat-label>Code</mat-label>
+                                    <input (change)="update()" formControlName="code" matInput maxlength="20">
                                     <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
                                         Maximum {{form.get('code')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>

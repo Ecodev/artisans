@@ -38,7 +38,7 @@ export class CurrencyManager {
         CurrencyManager._locked = value;
     }
 
-    public static getPriceByCurrency(product) {
+    public static getPriceByCurrency(product: { pricePerUnitCHF?, pricePerUnitEUR? }) {
 
         if (CurrencyManager.current.value === Currency.CHF) {
             return product.pricePerUnitCHF;

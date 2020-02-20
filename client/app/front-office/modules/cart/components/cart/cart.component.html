@@ -2,21 +2,20 @@
 
     <div class="mat-display-1">Panier</div>
 
-    <div *ngIf="!cart.lines.length" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start center">
-
+    <div *ngIf="cart.isEmpty()" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start center">
         <div class="mat-h1">Aucun article dans le panier</div>
         <div fxLayout="row" fxLayoutGap="30px">
             <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Consulter nos articles</a>
             <a color="primary" mat-flat-button routerLink="/larevuedurable/numeros">Consulter nos revues</a>
             <a color="primary" mat-flat-button routerLink="/...">S'abonner</a>
         </div>
-
     </div>
 
-    <div *ngIf="cart.lines.length" fxLayout="column" fxLayoutGap="10px">
+    <div fxLayout="column" fxLayoutGap="10px">
 
-        <div class="cart-items">
-            <div *ngFor="let line of cart.lines" class="cart-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+        <!-- Regular products -->
+        <div class="cart-items" *ngIf="cart.productLines.length">
+            <div *ngFor="let line of cart.productLines" class="cart-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                 <app-file [height]="70"
                           [model]="line.product.image"
                           [routerLink]="['/larevuedurable/product', line.product.id]"
@@ -24,8 +23,10 @@
                           matListAvatar
                           matRipple
                 ></app-file>
+
                 <a [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex mat-button>
-                    {{ line.product.name }}, {{ line.type | enum : 'ProductType' | async }}</a>
+                    {{ line.product.name }}, {{ line.type | enum : 'ProductType' | async }}
+                </a>
 
                 <ng-container *ngIf="line.quantity > 1">
                     <app-price [product]="line.product"></app-price>
@@ -55,23 +56,72 @@
             </div>
         </div>
 
-        <mat-divider></mat-divider>
+        <!-- Subscription -->
+        <div *ngIf="cart.subscription" class="cart-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
 
-        <div fxLayout="row" fxLayoutAlign="end">
-            <div class="mat-body padding totals natural-table">
-                <div>
-                    <span class="mat-body-strong">Total TTC :</span>
-                    <span class="mat-body-strong">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</span>
-                </div>
+            <app-file [height]="70"
+                      [model]="cart.subscription.subscription.image"
+                      [routerLink]="['/larevuedurable/abonnements']"
+                      [style.width.px]="70"
+                      matRipple
+            ></app-file>
+
+            <a [routerLink]="['/larevuedurable/abonnements']" mat-button fxFlex>
+                {{ cart.subscription.subscription.name }}, {{ cart.subscription.type | enum : 'ProductType' | async }}
+            </a>
+
+            <div *ngIf="cart.subscription.emails">{{ cart.subscription.emails.join(', ') }} </div>
+
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
+                <app-price [product]="cart.subscription.subscription" class="price mat-body-strong"></app-price>
+            </div>
+
+            <div></div>
+        </div>
+
+        <!-- Donation -->
+        <div *ngIf="cart.donationAmount" class="cart-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+
+            <div style="width:70px;height:70px;"></div>
+
+            <a mat-button fxFlex>Donation</a>
+
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
+                <div class="price mat-body-strong">{{ cart.donationAmount | currency : CurrencyManager.current.value}}</div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <button (click)="cart.unsetDonation()" color="warn" mat-icon-button mat-raised-button>
+                    <natural-icon name="delete"></natural-icon>
+                </button>
+                <button (click)="cartService.inputDonation(cart)" mat-icon-button mat-raised-button>
+                    <natural-icon name="edit"></natural-icon>
+                </button>
             </div>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
-            <a mat-button routerLink="/larevuedurable/articles">Continuer mes achats</a>
-            <button (click)="empty()" mat-button>Vider le panier</button>
-            <div fxFlex></div>
-            <button [routerLink]="['/panier/commande', cart.id]" [style.width.px]="200" color="primary" mat-flat-button>Commander</button>
-        </div>
+        <ng-container *ngIf="!cart.isEmpty()">
+
+            <mat-divider></mat-divider>
+
+            <div fxLayout="row" fxLayoutAlign="end">
+                <div class="mat-body padding totals natural-table">
+                    <div>
+                        <span class="mat-body-strong">Total TTC :</span>
+                        <span class="mat-body-strong">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="end" fxLayoutGap="20px">
+                <a mat-button routerLink="/larevuedurable/articles">Continuer mes achats</a>
+                <button (click)="empty()" mat-button>Vider le panier</button>
+                <div fxFlex></div>
+                <button mat-raised-button color="accent" (click)="cartService.inputDonation(cart)">Ajouter une donation</button>
+                <button [routerLink]="['/panier/commande', cart.id]" [style.width.px]="200" color="primary" mat-flat-button>Commander
+                </button>
+            </div>
+        </ng-container>
     </div>
 
 </div>

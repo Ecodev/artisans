@@ -8,7 +8,7 @@ use Exception;
 use Money\Money;
 
 /**
- * Class to generate BVR reference number and encoding lines.
+ * Class to generate BVR reference number and encoding productLines.
  *
  * Typically usage would one of the following:
  *

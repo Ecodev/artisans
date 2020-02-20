@@ -39,86 +39,86 @@ describe('CartService', () => {
     });
 
     it('should add to cart', () => {
-        expect(cart.lines).toEqual([], 'cart to be empty');
+        expect(cart.productLines).toEqual([], 'cart to be empty');
 
-        cart.increase(product1, ProductType.paper, 1);
+        cart.addProduct(product1, ProductType.paper, 1);
 
         const expectedCart = [
             {product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart, 'cart have one product');
+        expect(cart.productLines).toEqual(expectedCart, 'cart have one product');
     });
 
-    it('should increase quantity for existing product into cart', () => {
-        cart.increase(product1, ProductType.paper, 1);
-        cart.increase(product1, ProductType.paper, 1);
+    it('should addProduct quantity for existing product into cart', () => {
+        cart.addProduct(product1, ProductType.paper, 1);
+        cart.addProduct(product1, ProductType.paper, 1);
 
         const expectedCart = [
             {product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart, 'cart have one product');
+        expect(cart.productLines).toEqual(expectedCart, 'cart have one product');
         expect(cart.totalTaxInc).toEqual(20);
     });
 
     it('should add two different products to cart', () => {
-        cart.increase(product1, ProductType.paper, 1);
-        cart.increase(product2, ProductType.paper, 1);
+        cart.addProduct(product1, ProductType.paper, 1);
+        cart.addProduct(product2, ProductType.paper, 1);
 
         const expectedCart = [
             {product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper},
             {product: product2, quantity: 1, totalTaxInc: 100, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart);
+        expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(110);
     });
 
     it('should update existing product in cart', () => {
-        cart.increase(product1, ProductType.paper, 1);
-        cart.increase(product2, ProductType.paper, 1);
+        cart.addProduct(product1, ProductType.paper, 1);
+        cart.addProduct(product2, ProductType.paper, 1);
 
         const expectedCart = [
             {product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper},
             {product: product2, quantity: 1, totalTaxInc: 100, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart);
+        expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(110);
     });
 
     it('should add more than one unit to cart', () => {
-        cart.increase(product1, ProductType.paper, 2);
+        cart.addProduct(product1, ProductType.paper, 2);
 
         const expectedCart = [
             {product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart);
+        expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(20);
     });
 
     it('should add decimals quantity', () => {
-        cart.increase(product3, ProductType.paper, 0.5);
+        cart.addProduct(product3, ProductType.paper, 0.5);
 
         const expectedCart = [
             {product: product3, quantity: 0.5, totalTaxInc: 500, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart);
+        expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(500);
     });
 
-    it('should increase decimals quantity to existing products in cart', () => {
-        cart.increase(product3, ProductType.paper, 0.5);
-        cart.increase(product3, ProductType.paper, 2.5);
+    it('should addProduct decimals quantity to existing products in cart', () => {
+        cart.addProduct(product3, ProductType.paper, 0.5);
+        cart.addProduct(product3, ProductType.paper, 2.5);
 
         const expectedCart = [
             {product: product3, quantity: 3, totalTaxInc: 3000, type: ProductType.paper},
         ] as CartLine[];
 
-        expect(cart.lines).toEqual(expectedCart);
+        expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(3000);
     });
 

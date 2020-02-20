@@ -1,10 +1,17 @@
 <div class="container">
 
-    <h1 class="mat-display-1">S'abonner</h1>
+    <h1 class="mat-display-1">S'abonner comme un lambda</h1>
     <div fxLayout="row" fxLayoutGap="30px">
-        <a (click)="subscribe('19000', ProductType.paper)" mat-stroked-button>S'abonner standard papier</a>
-        <a (click)="subscribe('19001', ProductType.digital)" mat-stroked-button>S'abonner standard numerique</a>
-        <a (click)="subscribe('19002', ProductType.both)" mat-stroked-button>S'abonner standard numerique + papier</a>
+        <a (click)="order('19000', ProductType.paper)" mat-stroked-button>S'abonner standard papier</a>
+        <a (click)="order('19001', ProductType.digital)" mat-stroked-button>S'abonner standard numerique</a>
+        <a (click)="order('19002', ProductType.both)" mat-stroked-button>S'abonner standard numerique + papier</a>
+    </div>
+
+    <h1 class="mat-display-1">S'abonner comme un pro</h1>
+    <div fxLayout="row" fxLayoutGap="30px">
+        <a (click)="order('19003', ProductType.paper, true)" mat-stroked-button>S'abonner pro papier</a>
+        <a (click)="order('19004', ProductType.digital, true)" mat-stroked-button>S'abonner pro numerique</a>
+        <a (click)="order('19005', ProductType.both, true)" mat-stroked-button>S'abonner pro numerique + papier</a>
     </div>
 
 </div>

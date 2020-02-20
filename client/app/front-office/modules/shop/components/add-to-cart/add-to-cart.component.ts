@@ -40,7 +40,7 @@ export class AddToCartComponent implements OnInit {
     }
 
     public click() {
-        CartService.globalCart.increase(this.product, this.type, 1);
+        CartService.globalCart.addProduct(this.product, this.type, 1);
         this.clicked = true; // first show particle component
         setTimeout(() => this.inCart = true); // then change it's value to cause animation
     }

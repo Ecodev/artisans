@@ -30,7 +30,10 @@ export class CartComponent implements OnInit {
      */
     public cart: Cart;
 
-    constructor(public alertService: NaturalAlertService, public router: Router, private route: ActivatedRoute) {
+    constructor(public alertService: NaturalAlertService,
+                public router: Router,
+                private route: ActivatedRoute,
+                public cartService: CartService) {
 
     }
 
@@ -56,11 +59,11 @@ export class CartComponent implements OnInit {
     }
 
     public increase(product: CartLineProduct, type: ProductType): void {
-        this.cart.increase(product, type, 1);
+        this.cart.addProduct(product, type, 1);
     }
 
     public decrease(product: CartLineProduct, type: ProductType): void {
-        this.cart.decrease(product, type, 1);
+        this.cart.removeProduct(product, type, 1);
 
     }
 

@@ -37,7 +37,7 @@ export class OrderComponent implements OnInit {
         // Initialize resolved item
         this.data = dialogData.activatedRoute.snapshot.data.order;
 
-        // Filter lines for this current order
+        // Filter productLines for this current order
         this.contextVariables = {filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]}};
 
     }

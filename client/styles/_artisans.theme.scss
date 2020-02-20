@@ -34,7 +34,7 @@
     .frame-primary {
         background: mat-color($primary);
 
-        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: mat-color($primary, default-contrast);
         }
     }
@@ -42,7 +42,7 @@
     .frame-accent {
         background: mat-color($accent);
 
-        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             border: 1px solid red !important;
             color: mat-color($accent, default-contrast);
         }
@@ -52,7 +52,7 @@
     .frame-warn {
         background: mat-color($warn);
 
-        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: mat-color($warn, default-contrast);
         }
     }
@@ -60,7 +60,7 @@
     .frame-green {
         background: #00AE8C;
 
-        &, a:not([ng-reflect-router-link]):not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: #FFFFFF;
         }
     }

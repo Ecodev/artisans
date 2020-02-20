@@ -78,7 +78,7 @@ export class CreateOrderComponent implements OnInit {
         const cart = Cart.getById(+this.route.snapshot.params['cartId']);
         if (cart) {
             this.cart = cart;
-            this.virtualOnly = !cart.lines.some(line => line.type === ProductType.paper || line.type === ProductType.both);
+            this.virtualOnly = !cart.productLines.some(line => line.type === ProductType.paper || line.type === ProductType.both);
         }
 
         const viewer = this.route.snapshot.data.viewer.model;

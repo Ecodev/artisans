@@ -24,10 +24,21 @@ export class SubscriptionsComponent implements OnInit {
         this.subscriptionService.getAll(new NaturalQueryVariablesManager()).subscribe(res => this.subscriptions = keyBy(res.items, 'id'));
     }
 
-    public subscribe(id: string, type: ProductType) {
-        const cart = new Cart();
-        cart.increase(this.subscriptions[id], type);
-        this.router.navigateByUrl('/panier/commande/' + cart.id);
+    public order(id: string, type: ProductType, withEmails?: boolean) {
+
+        const subscribeFn = (emails?: string[]) => {
+            const cart = new Cart();
+            cart.setSubscription(this.subscriptions[id], type, emails);
+
+            console.log('cart', cart);
+            this.router.navigateByUrl('/panier/' + cart.id);
+        };
+
+        if (!withEmails) {
+            subscribeFn();
+        } else {
+            setTimeout(() => subscribeFn(['asdf@qwer.com', 'qwer@asdf.com']), 2000);
+        }
     }
 
 }

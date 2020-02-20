@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Faire une donation</h2>
+
+<mat-dialog-content>
+
+    <mat-form-field>
+        <mat-label>Montant</mat-label>
+        <input [(ngModel)]="amount" matInput type="number" min="0.000001" />
+    </mat-form-field>
+
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button [mat-dialog-close] mat-button>Annuler</button>
+    <button [mat-dialog-close]="amount" mat-stroked-button>Valider</button>
+</mat-dialog-actions>

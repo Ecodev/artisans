@@ -5,18 +5,34 @@ import {
     Product_product,
     Products_products_items,
     ProductType,
+    Subscription_subscription,
     Subscriptions_subscriptions_items,
 } from '../../../../shared/generated-types';
 import { moneyRoundUp } from '../../../../shared/utils';
+import { CartService } from '../services/cart.service';
 
 export type CartLineProduct =
     Products_products_items
-    | Product_product
-    | Subscriptions_subscriptions_items;
+    | Product_product;
+
+export type CartLineSubscription =
+    Subscriptions_subscriptions_items
+    | Subscription_subscription;
 
 export interface CartLine {
+    /**
+     * Related product
+     */
     product: CartLineProduct;
+
+    /**
+     * Type (paper/web) of product added to cart
+     */
     type: ProductType;
+
+    /**
+     * Number of instances of given product added to cart
+     */
     quantity: number;
 
     /**
@@ -27,40 +43,101 @@ export interface CartLine {
 
 export class Cart {
 
+    private static storageKey = 'carts';
+
     public static carts: Cart[] = [];
 
     /**
      * Cart detail
      */
-    public lines: CartLine[] = [];
+    public productLines: CartLine[] = [];
+
     /**
      * Total including taxes
      */
     public totalTaxInc: number;
+
+    /**
+     * Emits when cart changes
+     */
     public readonly onChange = new Subject();
 
-    public constructor() {
-        this._id = Cart.carts.length;
-        Cart.carts.push(this);
-    }
+    /**
+     * Single donation amount
+     */
+    public donationAmount = 0;
+
+    /**
+     * Single subscription setup
+     */
+    public subscription: null | { subscription: CartLineSubscription, emails?: string[], type: ProductType } = null;
 
     /**
      * Cart identification
      */
     private _id: number;
 
+    /**
+     *
+     */
+    public static getPersistedCarts(): any[] {
+        const serializedStoredCarts = sessionStorage.getItem(Cart.storageKey);
+        if (serializedStoredCarts) {
+            return JSON.parse(serializedStoredCarts) as Cart[];
+        }
+
+        return [];
+    }
+
+
+    public static clearCarts() {
+        Cart.carts.forEach(c => c.empty());
+        Cart.carts.length = 0;
+        sessionStorage.setItem(Cart.storageKey, '');
+        CartService.initGlobalCart();
+    }
+
+    /**
+     * On new cart, never recover from session storage
+     * @param id Use id param only for global cart
+     */
+    public constructor(id?: number) {
+        this._id = id || Cart.carts.length;
+        Cart.carts.push(this);
+    }
+
     public get id() {
         return this._id;
     }
 
+    /**
+     * Get cart from memory if exists, or from sessionStorage if not
+     */
     public static getById(id: number): Cart | undefined {
-        return Cart.carts.find(c => c._id === id);
+        let cart = Cart.carts.find(c => c._id === id);
+
+        if (cart) {
+            return cart;
+        }
+
+        const carts = this.getPersistedCarts();
+
+        if (carts[id]) {
+            cart = new Cart(id);
+            cart.productLines = carts[id].productLines || [];
+            cart.subscription = carts[id].subscription;
+            cart.donationAmount = carts[id].donationAmount;
+            cart.computeTotals();
+            return cart;
+        }
+
+        return;
     }
 
     /**
      * todo : update on currency change ?
      */
-    public static getPriceTaxInc(product: CartLineProduct, quantity: number): number {
+    public static getPriceTaxInc(product: { pricePerUnitCHF?, pricePerUnitEUR? }, quantity: number): number {
         // todo : drop decimaljs ?
         const quantifiedPrice = Decimal.mul(CurrencyManager.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
@@ -68,10 +145,19 @@ export class Cart {
 
     public update() {
         this.computeTotals();
-        this.onChange.next();
+
+        const carts = Cart.getPersistedCarts();
+
+        carts[this._id] = {
+            productLines: this.productLines,
+            subscription: this.subscription,
+            donationAmount: this.donationAmount,
+        };
+
+        sessionStorage.setItem(Cart.storageKey, JSON.stringify(carts));
     }
 
-    public increase(product: CartLineProduct, type: ProductType, quantity: number = 1) {
+    public addProduct(product: CartLineProduct, type: ProductType, quantity: number = 1) {
 
         const line = this.getLineByProduct(product, type);
 
@@ -80,7 +166,7 @@ export class Cart {
             line.totalTaxInc = Cart.getPriceTaxInc(product, line.quantity);
 
         } else {
-            this.lines.push({
+            this.productLines.push({
                 product: product,
                 type: type,
                 quantity: quantity,
@@ -91,7 +177,7 @@ export class Cart {
         this.update();
     }
 
-    public decrease(product: CartLineProduct, type: ProductType, quantity: number) {
+    public removeProduct(product: CartLineProduct, type: ProductType, quantity: number) {
 
         const line = this.getLineByProduct(product, type);
 
@@ -109,36 +195,77 @@ export class Cart {
         }
 
         this.update();
+    }
 
+    /**
+     * A subscription is a standalone buy. There can't be more than one, and should not share order with products
+     */
+    public setSubscription(subscription: CartLineSubscription, type: ProductType, emails?: string[]) {
+        this.subscription = {subscription, type, emails};
+        this.update();
+    }
+
+    public unsetSubscription() {
+        this.subscription = null;
+        this.update();
+    }
+
+    /**
+     * A donation is a unique amount in an order.
+     */
+    public setDonation(value: number) {
+        this.donationAmount = value;
+        this.update();
+    }
+
+    public unsetDonation() {
+        this.donationAmount = 0;
+        this.update();
     }
 
     /**
      * Return a line from cart where product, quantity are identical
      */
     public getLineByProduct(product: CartLineProduct, type: ProductType): CartLine | undefined {
-        return this.lines.find(line => line.product.id === product.id && line.type === type);
+        return this.productLines.find(line => line.product.id === product.id && line.type === type);
     }
 
     public remove(product: CartLineProduct) {
-        const index = this.lines.findIndex(line => line.product.id === product.id);
-        this.lines.splice(index, 1);
+        const index = this.productLines.findIndex(line => line.product.id === product.id);
+        this.productLines.splice(index, 1);
         this.update();
     }
 
     public empty() {
-        this.lines = [];
+        this.productLines = [];
         this.update();
     }
 
     public setLines(lines: CartLine[]) {
-        this.lines = lines;
+        this.productLines = lines;
         this.computeTotals();
     }
 
     public computeTotals() {
-        this.totalTaxInc = this.lines.reduce((a, line) => {
+
+        let totals = this.productLines.reduce((a, line) => {
             line.totalTaxInc = Cart.getPriceTaxInc(line.product, line.quantity); // update line total
             return a + line.totalTaxInc; // stack for cart total
         }, 0);
+
+        if (this.subscription) {
+            totals += Cart.getPriceTaxInc(this.subscription.subscription, 1);
+        }
+
+        if (this.donationAmount > 0) {
+            totals += this.donationAmount;
+        }
+
+        this.totalTaxInc = totals;
     }
+
+    public isEmpty(): boolean {
+        return !this.productLines.length && !this.subscription && !this.donationAmount;
+    }
+
 }

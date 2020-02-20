@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\ProductTypeType;
+use Application\Model\AbstractProduct;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
+use Application\Model\Subscription;
 use Application\Service\Invoicer;
 use ApplicationTest\Traits\TestWithTransaction;
 use Money\Money;
@@ -281,13 +283,64 @@ class InvoicerTest extends TestCase
                     ],
                 ],
             ],
+            'can create order for subscription' => [
+                [
+                    [
+                        'quantity' => '1',
+                        'isCHF' => true,
+                        'type' => ProductTypeType::DIGITAL,
+                        'subscription' => [
+                            'name' => 'My subscription',
+                            'pricePerUnitCHF' => Money::CHF(10000),
+                            'pricePerUnitEUR' => Money::EUR(15000),
+                        ],
+                        'additionalEmails' => [],
+                    ],
+                ],
+                [
+                    [
+                        'My subscription',
+                        '1',
+                        '10000',
+                        '0',
+                        true,
+                        ProductTypeType::DIGITAL,
+                    ],
+                ],
+            ],
+            'can create order for donation' => [
+                [
+                    [
+                        'quantity' => '1',
+                        'isCHF' => true,
+                        'type' => ProductTypeType::DIGITAL,
+                        'pricePerUnit' => 100,
+                        'additionalEmails' => [],
+                    ],
+                ],
+                [
+                    [
+                        'Donation',
+                        '1',
+                        '10000',
+                        '0',
+                        true,
+                        ProductTypeType::DIGITAL,
+                    ],
+                ],
+            ],
         ];
     }
 
     private function hydrateTestData(array $input): array
     {
         foreach ($input as &$i) {
-            $i['product'] = $this->hydrateProduct($i['product']);
+            if (array_key_exists('product', $i)) {
+                $i['product'] = $this->hydrateProduct($i['product']);
+            }
+            if (array_key_exists('subscription', $i)) {
+                $i['subscription'] = $this->hydrateSubscription($i['subscription']);
+            }
         }
 
         return $input;
@@ -298,7 +351,10 @@ class InvoicerTest extends TestCase
         $actualOrderLines = [];
         /** @var OrderLine $orderLine */
         foreach ($order->getOrderLines() as $orderLine) {
-            self::assertSame($orderLine->getName(), $orderLine->getProduct()->getName());
+            $abstractProduct = $orderLine->getProduct() ?: $orderLine->getSubscription();
+            $expectedName = $abstractProduct ? $abstractProduct->getName() : 'Donation';
+            self::assertSame($expectedName, $orderLine->getName());
+
             $actualOrderLines[] = [
                 $orderLine->getName(),
                 $orderLine->getQuantity(),
@@ -315,10 +371,23 @@ class InvoicerTest extends TestCase
     private function hydrateProduct(array $p): Product
     {
         $product = new Product();
+        $this->hydrateAbstractProduct($product, $p);
+
+        return $product;
+    }
+
+    private function hydrateSubscription(array $s): Subscription
+    {
+        $subscription = new Subscription();
+        $this->hydrateAbstractProduct($subscription, $s);
+
+        return $subscription;
+    }
+
+    private function hydrateAbstractProduct(AbstractProduct $product, array $p): void
+    {
         $product->setName($p['name']);
         $product->setPricePerUnitCHF($p['pricePerUnitCHF']);
         $product->setPricePerUnitEUR($p['pricePerUnitEUR']);
-
-        return $product;
     }
 }

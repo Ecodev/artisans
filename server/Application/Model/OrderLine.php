@@ -140,6 +140,13 @@ class OrderLine extends AbstractModel
         }
     }
 
+    public function setDonation(): void
+    {
+        $this->product = null;
+        $this->subscription = null;
+        $this->setName('Donation');
+    }
+
     /**
      * Additional emails for subscription for a company
      *

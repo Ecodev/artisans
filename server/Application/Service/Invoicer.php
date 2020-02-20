@@ -60,13 +60,13 @@ class Invoicer
         return $order;
     }
 
-    private function createOrderLine(Order $order, AbstractProduct $product, string $quantity, bool $isCHF, string $type, array $additionalEmails): OrderLine
+    private function createOrderLine(Order $order, ?AbstractProduct $product, Money $pricePerUnit, string $quantity, bool $isCHF, string $type, array $additionalEmails): OrderLine
     {
         $orderLine = new OrderLine();
         $this->entityManager->persist($orderLine);
         $orderLine->setOrder($order);
 
-        $this->updateOrderLine($orderLine, $product, $quantity, $isCHF, $type, $additionalEmails);
+        $this->updateOrderLine($orderLine, $product, $pricePerUnit, $quantity, $isCHF, $type, $additionalEmails);
 
         return $orderLine;
     }
@@ -80,22 +80,31 @@ class Invoicer
         $isCHF = $input['isCHF'];
         $type = $input['type'];
         $additionalEmails = $input['additionalEmails'];
+        $pricePerUnit = $input['pricePerUnit'] ?? null;
+        $this->assertExactlyOneNotNull($product, $subscription, $pricePerUnit);
 
-        if ($product && $subscription) {
-            throw new Exception('Cannot have both a product and a subscription');
-        }
-
-        if (!$product && !$subscription) {
-            throw new Exception('Must have either a product or a subscription');
-        }
+        $abstractProduct = $product ?? $subscription;
+        $pricePerUnit = $this->getPricePerUnit($abstractProduct, $pricePerUnit, $isCHF);
 
         return [
-            $product ?? $subscription,
+            $abstractProduct,
+            $pricePerUnit,
             $quantity,
             $isCHF,
             $type,
             $additionalEmails,
         ];
+    }
+
+    private function assertExactlyOneNotNull(...$args): void
+    {
+        $onlyNotNull = array_filter($args, function ($val) {
+            return $val !== null;
+        });
+
+        if (count($onlyNotNull) !== 1) {
+            throw new Exception('Must have a product, or a subscription, or a pricePerUnit. And not a mixed of those.');
+        }
     }
 
     public function updateOrderLineAndTransactionLine(OrderLine $orderLine, array $line): void
@@ -106,17 +115,19 @@ class Invoicer
         });
     }
 
-    private function updateOrderLine(OrderLine $orderLine, AbstractProduct $product, string $quantity, bool $isCHF, string $type, array $additionalEmails): void
+    private function updateOrderLine(OrderLine $orderLine, ?AbstractProduct $product, Money $pricePerUnit, string $quantity, bool $isCHF, string $type, array $additionalEmails): void
     {
         if ($isCHF) {
-            $balanceCHF = $product->getPricePerUnitCHF()->multiply($quantity);
+            $balanceCHF = $pricePerUnit->multiply($quantity);
             $balanceEUR = Money::EUR(0);
         } else {
             $balanceCHF = Money::CHF(0);
-            $balanceEUR = $product->getPricePerUnitEUR()->multiply($quantity);
+            $balanceEUR = $pricePerUnit->multiply($quantity);
         }
 
-        if ($product instanceof Product) {
+        if (!$product) {
+            $orderLine->setDonation();
+        } elseif ($product instanceof Product) {
             $orderLine->setProduct($product);
         } elseif ($product instanceof Subscription) {
             $orderLine->setSubscription($product);
@@ -132,20 +143,25 @@ class Invoicer
         $orderLine->setAdditionalEmails($additionalEmails);
     }
 
-    private function selectAbstractProduct(?Product $product, ?Subscription $subscription): AbstractProduct
+    private function getPricePerUnit(?AbstractProduct $product, ?float $pricePerUnit, bool $isCHF): Money
     {
-        if ($product && $subscription) {
-            throw new Exception('Cannot have both a product and a subscription');
+        if ($product && $isCHF) {
+            return $product->getPricePerUnitCHF();
         }
 
         if ($product) {
-            return $product;
+            return $product->getPricePerUnitEUR();
         }
 
-        if ($subscription) {
-            return $subscription;
+        if ($pricePerUnit === null || $pricePerUnit <= 0) {
+            throw new Exception('A donation must have strictly positive price');
         }
 
-        throw new Exception('Must have either a product or a subscription');
+        $pricePerUnit = bcmul((string) $pricePerUnit, '100', 2);
+        if ($isCHF) {
+            return Money::CHF($pricePerUnit);
+        }
+
+        return Money::EUR($pricePerUnit);
     }
 }

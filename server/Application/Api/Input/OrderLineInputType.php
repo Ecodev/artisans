@@ -13,7 +13,7 @@ class OrderLineInputType extends InputObjectType
     public function __construct()
     {
         $config = [
-            'description' => 'A shopping basket item when making an order',
+            'description' => 'A shopping cart item when making an order. It can be for a product or a subscription, or a donation, but not a mix of those',
             'fields' => function (): array {
                 return [
                     'quantity' => [
@@ -34,6 +34,9 @@ class OrderLineInputType extends InputObjectType
                     'additionalEmails' => [
                         'type' => self::listOf(self::nonNull(self::string())),
                         'defaultValue' => [],
+                    ],
+                    'pricePerUnit' => [
+                        'type' => self::float(),
                     ],
                 ];
             },

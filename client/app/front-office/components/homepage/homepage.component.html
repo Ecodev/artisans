@@ -29,7 +29,7 @@
             <div class="newses-list" fxLayout="column" fxLayoutGap="30px">
                 <div></div>
                 <div *ngFor="let news of newses" class="news">
-                    <div class="mat-body-strong text-light">{{ news.date | date : 'EEE d.M.yy' }}</div>
+                    <div class="mat-body-strong text-light">{{ news.date | date : 'EEE dd.MM.yy' | capitalize }}</div>
                     <div class="mat-h2">{{ news.name }}</div>
                     <div [innerHTML]="news.description" class="mat-h4"></div>
                 </div>
@@ -54,7 +54,7 @@
                 <div *ngFor="let event of events" class="event">
                     <div class="mat-h2">{{ event.name }}</div>
                     <div class="mat-h3">
-                        <span class="text-light">{{ event.date | date : 'EEE d.M.yy' }}</span>
+                        <span class="text-light">{{ event.date | date : 'EEE dd.MM.yy' | capitalize }}</span>
                         - {{ event.place }} - {{ event.type }}</div>
                 </div>
             </div>

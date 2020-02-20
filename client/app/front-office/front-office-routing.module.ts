@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SessionResolver } from '../admin/sessions/services/session.resolver';
 import { ViewerResolver } from '../admin/users/services/viewer.resolver';
+import { EventSortingField, EventsVariables, NewsesVariables, NewsSortingField, SortingOrder } from '../shared/generated-types';
 import { EventsPageComponent } from './components/events-page/events-page.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
@@ -17,10 +18,22 @@ const routes: Routes = [
         {
             path: 'agenda',
             component: EventsPageComponent,
+            data: {
+                contextVariables: {
+                    filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: new Date()}}}]}]},
+                    sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
+                } as EventsVariables,
+            },
         },
         {
             path: 'actualite',
             component: NewsesPageComponent,
+            data: {
+                contextVariables: {
+                    // filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
+                    sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
+                } as NewsesVariables,
+            },
         },
         {
             path: 'agir-avec-nous',

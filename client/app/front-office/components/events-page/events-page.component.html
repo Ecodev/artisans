@@ -5,10 +5,12 @@
     <div fxLayout="column" fxLayoutGap="30px">
 
         <div *ngFor="let event of items">
-            <h2 class="mat-h2">{{ event.id }} {{ event.name }}</h2>
-            <div>{{ event.date | date : 'EEE d.M.yy'}}</div>
-            <div> {{ event.place }}</div>
-            <div> {{ event.type }}</div>
+            <h2 class="mat-h2">{{ event.name }}</h2>
+            <div fxLayout="row" fxLayoutGap="15px">
+                <div class="text-light">{{ event.date | date : 'EEEE d MMMM yyyy' | capitalize}}</div>
+                <div> {{ event.place }}</div>
+                <div> {{ event.type }}</div>
+            </div>
         </div>
     </div>
 

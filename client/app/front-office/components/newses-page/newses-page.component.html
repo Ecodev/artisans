@@ -2,14 +2,14 @@
 
     <h1 class="mat-display-1">Agenda</h1>
 
-    <div fxLayout="column" fxLayoutGap="30px">
+    <div fxLayout="column" fxLayoutGap="60px">
+
         <div *ngFor="let news of items">
-
-            <h2 class="mat-h2">{{ news.id }} {{ news.name }}</h2>
-            <div>{{ news.date | date : 'EEE d.M.yy' }}</div>
+            <div class="text-light">{{ news.date | date : 'EEEE d MMMM yyyy' | capitalize }}</div>
+            <h2 class="mat-h2">{{ news.name }}</h2>
             <div [innerHTML]="news.description " class="mat-body"></div>
-
         </div>
+
     </div>
 
     <div>

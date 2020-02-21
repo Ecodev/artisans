@@ -28,13 +28,13 @@
 
                 <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
 
-                <div class="product-price mat-body-strong" *ngIf="!product.isAccessible">
+                <div class="product-price mat-body-strong" *ngIf="!product.file">
                     <span class="frame-primary">Abonné</span>
                     ou
                     <app-price [product]="product" class="mat-h3"></app-price>
                 </div>
 
-                <a mat-flat-button *ngIf="product.isAccessible" [routerLink]="['/file/', product.file.id]" class="product-file-button">
+                <a mat-flat-button *ngIf="product.file" [routerLink]="['/file/', product.file.id]" class="product-file-button">
                     Télécharger
                 </a>
 
@@ -66,7 +66,7 @@
                         <div class="product-name mat-body">{{ product.shortDescription }}</div>
                     </div>
 
-                    <div class="product-price" *ngIf="!product.isAccessible" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
+                    <div class="product-price" *ngIf="!product.file" fxLayout="column" fxLayoutAlign="start end" fxLayoutGap="20px">
                         <app-price [product]="product" class="mat-h1"></app-price>
                         <a mat-flat-button
                            color="primary"
@@ -78,7 +78,7 @@
 
                     <a mat-flat-button
                        color="primary"
-                       *ngIf="product.isAccessible"
+                       *ngIf="product.file"
                        [routerLink]="['/file/', product.file.id]"
                        class="product-file-button"
                     >

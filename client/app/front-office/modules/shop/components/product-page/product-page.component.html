@@ -61,7 +61,7 @@
         </section>
 
         <!-- Download -->
-        <div fxFlex="20" class="frame-primary padding" *ngIf="data.model.isAccessible">
+        <div fxFlex="20" class="frame-primary padding" *ngIf="data.model.file">
             <h2 class="mat-h2">Téléchargement</h2>
             <p class="mat-body">Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
             <a mat-flat-button [routerLink]="['/file/', data.model.file.id]">Télécharger cette revue</a>

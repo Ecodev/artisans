@@ -25,6 +25,9 @@ export const productMetaFragment = gql`
         illustration {
             id
         }
+        file {
+            id
+        }
         creationDate
         creator {
             ...userMeta

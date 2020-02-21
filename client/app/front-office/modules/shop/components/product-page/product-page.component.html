@@ -78,12 +78,12 @@
 
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px">
 
-            <div fxFlex fxLayout="column" fxLayoutAlign="start center" class="frame-green frame" fxLayoutGap="30px">
+            <div *ngIf="showBuyPaper || showBuyDigital" fxFlex fxLayout="column" fxLayoutAlign="start center" class="frame-green frame" fxLayoutGap="30px">
                 <div class="mat-h1">Acheter le numéro</div>
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div *ngIf="data.model.type === ProductType.both" fxLayout="column" fxLayoutAlign="start center">
+                    <div *ngIf="showBuyPaper" fxLayout="column" fxLayoutAlign="start center">
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
@@ -94,7 +94,7 @@
                         ></app-add-to-cart>
                     </div>
 
-                    <div fxLayout="column" fxLayoutAlign="start center">
+                    <div *ngIf="showBuyDigital" fxLayout="column" fxLayoutAlign="start center">
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
@@ -111,7 +111,7 @@
                 <a mat-button routerLink="/larevuedurable/articles" *ngIf="data.model.reviewNumber">ou acheter par articles</a>
             </div>
 
-            <div fxFlex class="frame-primary frame" *ngIf="!viewer.subscriptionType">
+            <div fxFlex class="frame-primary frame" *ngIf="!viewer?.subscriptionType">
                 <h1 class="mat-h1">S'abonner</h1>
                 <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
             </div>

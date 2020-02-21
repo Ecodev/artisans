@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 import { OrderService } from '../../../../admin/order/services/order.service';
 import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
-import {
-    CreateOrder_createOrder,
-    OrderInput,
-    OrderLineInput,
-    PaymentMethod,
-    ProductType,
-} from '../../../../shared/generated-types';
-import { DonationComponent } from '../../../components/donation/donation.component';
+import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType } from '../../../../shared/generated-types';
 import { Cart } from '../classes/cart';
-import { Observable } from 'rxjs';
+
+<<<<<<< HEAD
+=== === =
+>>>>>>>
+Consider;
+subscription;
+and;
+donation;
+for createOrder
+    import { DonationComponent } from '../../../components/donation/donation.component';
 
 @Injectable({
     providedIn: 'root',
@@ -66,6 +69,16 @@ export class CartService {
                 isCHF: isCHF,
             };
         });
+
+        if (cart.subscription) {
+            orderLines.push({
+                subscription: cart.subscription.subscription,
+                type: cart.subscription.type,
+                quantity: '1',
+                additionalEmails: cart.subscription.emails,
+                isCHF: isCHF,
+            });
+        }
 
         // Add donation if any
         if (cart.donationAmount) {

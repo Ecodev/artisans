@@ -2,11 +2,13 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import { ProductService } from '../../../../../admin/products/services/product.service';
+import { getDownloadLink } from '../../../../../shared/components/file/file.component';
 import {
     CreateProduct,
     CreateProductVariables,
     CurrentUserForProfile,
     Product,
+    Product_product,
     ProductType,
     ProductVariables,
     UpdateProduct,
@@ -65,4 +67,11 @@ export class ProductPageComponent
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
     }
 
+    public getDownloadLink(product: Product_product): null | string {
+        if (product.file) {
+            return getDownloadLink(product.file);
+        }
+
+        return null;
+    }
 }

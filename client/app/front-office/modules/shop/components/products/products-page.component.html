@@ -34,7 +34,7 @@
                     <app-price [product]="product" class="mat-h3"></app-price>
                 </div>
 
-                <a mat-flat-button *ngIf="product.file" [routerLink]="['/file/', product.file.id]" class="product-file-button">
+                <a mat-flat-button *ngIf="product.file" [href]="getDownloadLink(product)" class="product-file-button">
                     Télécharger
                 </a>
 
@@ -79,7 +79,7 @@
                     <a mat-flat-button
                        color="primary"
                        *ngIf="product.file"
-                       [routerLink]="['/file/', product.file.id]"
+                       [href]="getDownloadLink(product)"
                        class="product-file-button"
                     >
                         Télécharger

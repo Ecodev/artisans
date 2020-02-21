@@ -4,10 +4,17 @@ import { NaturalAbstractController } from '@ecodev/natural';
 import { Observable, of, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UploadService } from './services/upload.service';
-import { Product_product_image, Purchases_purchases_items_product_file } from '../../generated-types';
+import {
+    Product_product_file,
+    Product_product_image,
+    Products_products_items_file,
+    Purchases_purchases_items_product_file,
+} from '../../generated-types';
 
 type FileModel = Purchases_purchases_items_product_file
-    | Product_product_image;
+    | Product_product_image
+    | Product_product_file
+    | Products_products_items_file;
 
 export function getDownloadLink(model: FileModel | null): null | string {
 

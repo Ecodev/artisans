@@ -5,6 +5,7 @@ import { ProductService } from '../../../../../admin/products/services/product.s
 import { AbstractInfiniteLoadList } from '../../../../../shared/classes/AbstractInfiniteLoadList';
 import { Products, Products_products_items, ProductsVariables } from '../../../../../shared/generated-types';
 import { PersistenceInUrlService } from '../../../../../shared/services/persist-in-url.service';
+import { getDownloadLink } from '../../../../../shared/components/file/file.component';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -25,7 +26,6 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
     public products: Products_products_items[] = [];
 
     public ProductsViewMode = ProductsViewMode;
-
 
     public title: string;
 
@@ -59,4 +59,11 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
 
     }
 
+    public getDownloadLink(product: Products_products_items): null | string {
+        if (product.file) {
+            return getDownloadLink(product.file);
+        }
+
+        return null;
+    }
 }

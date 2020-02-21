@@ -111,7 +111,7 @@
                 <a mat-button routerLink="/larevuedurable/articles" *ngIf="data.model.reviewNumber">ou acheter par articles</a>
             </div>
 
-            <div fxFlex class="frame-primary frame">
+            <div fxFlex class="frame-primary frame" *ngIf="!viewer.subscriptionType">
                 <h1 class="mat-h1">S'abonner</h1>
                 <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
             </div>

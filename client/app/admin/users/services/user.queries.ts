@@ -20,6 +20,7 @@ export const userFieldsFragment = gql`
         }
         role
         code
+        subscriptionType
         membershipBegin
         membershipEnd
         url

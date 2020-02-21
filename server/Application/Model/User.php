@@ -130,7 +130,7 @@ class User extends AbstractModel
     private $subscriptionLastNumber;
 
     /**
-     * @var string
+     * @var null|string
      * @ORM\Column(type="ProductType", nullable=true)
      */
     private $subscriptionType;
@@ -628,7 +628,7 @@ class User extends AbstractModel
     /**
      * Get subscription type
      *
-     * @API\Field(type="ProductType")
+     * @API\Field(type="?ProductType")
      *
      * @return null|string
      */

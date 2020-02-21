@@ -16,7 +16,7 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
      * A user can access a file if at least one of the following condition is true:
      *
      * - he has flag webTemporaryAccess
-     * - he has web subscription (digital/both)
+     * - he has web subscription (digital/both) and the product reviewNumber is included in that subscription
      * - he bought the product
      *
      * @param null|User $user
@@ -38,18 +38,22 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
 
         // Files for webTemporaryAccess or web subscription
         $webTypes = [ProductTypeType::BOTH, ProductTypeType::DIGITAL];
-        if ($user->getWebTemporaryAccess() || in_array($user->getSubscriptionType(), $webTypes, true)) {
+        $hasSubscription = in_array($user->getSubscriptionType(), $webTypes, true) && $user->getSubscriptionLastNumber() && $user->getSubscriptionLastNumber()->getReviewNumber();
+        if ($user->getWebTemporaryAccess() || $hasSubscription) {
             $webTypesSql = implode(',', array_map(function (string $val) use ($connection): string {
                 return $connection->quote($val);
             }, $webTypes));
+
+            // TODO adapt according to decision in https://support.ecodev.ch/issues/7045
+            $subscriptionCondition = $hasSubscription ? 'AND product.review_number <= ' . $connection->quote($user->getSubscriptionLastNumber()->getReviewNumber()) : '';
 
             $queries[] = '
 SELECT product.file_id FROM product
 WHERE
 product.is_active
 AND product.file_id IS NOT NULL
-AND product.type IN (' . $webTypesSql . ') 
-';
+AND product.type IN (' . $webTypesSql . ')
+' . $subscriptionCondition;
         }
 
         // Files for products that were bought directly

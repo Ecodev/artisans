@@ -37,6 +37,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
         return [
             ['anonymous', []],
             ['member', $directPurchases],
+            ['othermember', [9000]],
             ['facilitator', $all],
             ['administrator', $all],
         ];

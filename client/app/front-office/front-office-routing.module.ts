@@ -30,7 +30,7 @@ const routes: Routes = [
             component: NewsesPageComponent,
             data: {
                 contextVariables: {
-                    // filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
+                    filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
                     sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
                 } as NewsesVariables,
             },

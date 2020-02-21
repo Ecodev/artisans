@@ -17,7 +17,10 @@ import {
     Login,
     LoginVariables,
     Logout,
-    NextUserCode, RequestMembershipEnd, RequestPasswordReset, RequestPasswordResetVariables,
+    NextUserCode,
+    RequestMembershipEnd,
+    RequestPasswordReset,
+    RequestPasswordResetVariables,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -207,18 +210,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                 id: user.id,
             },
         }).pipe(map(result => result.data.unregister));
-    }
-
-    /**
-     * Can leave home if has an owner
-     */
-    public canLeaveFamily(user: CurrentUserForProfile['viewer']): boolean {
-
-        if (!user) {
-            return false;
-        }
-
-        return !!user.owner && user.owner.id !== user.id;
     }
 
     public requestPasswordReset(email): Observable<RequestMembershipEnd> {

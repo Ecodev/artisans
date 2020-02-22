@@ -33,30 +33,30 @@ abstract class UpdateUser implements FieldInterface
                 /** @var MessageQueuer $messageQueuer */
                 $messageQueuer = $container->get(MessageQueuer::class);
 
-                $object = $args['id']->getEntity();
+                $user = $args['id']->getEntity();
 
                 // Check ACL
-                Helper::throwIfDenied($object, 'update');
+                Helper::throwIfDenied($user, 'update');
 
-                $before = self::privateInformation($object);
+                $before = self::privateInformation($user);
                 // Do it
                 $input = $args['input'];
-                Helper::hydrate($object, $input);
+                Helper::hydrate($user, $input);
 
                 _em()->flush();
 
-                $after = self::privateInformation($object);
+                $after = self::privateInformation($user);
                 if ($before !== $after) {
                     /** @var UserRepository $repository */
                     $repository = _em()->getRepository(User::class);
                     $admins = $repository->getAllAdministratorsToNotify();
                     foreach ($admins as $admin) {
-                        $message = $messageQueuer->queueUpdatedUser($admin, $object, $before, $after);
+                        $message = $messageQueuer->queueUpdatedUser($admin, $user, $before, $after);
                         $mailer->sendMessageAsync($message);
                     }
                 }
 
-                return $object;
+                return $user;
             },
         ];
     }

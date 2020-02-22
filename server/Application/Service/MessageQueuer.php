@@ -50,6 +50,18 @@ class MessageQueuer
         return $message;
     }
 
+    public function queueConfirmedRegistration(User $admin, User $registeredUser): Message
+    {
+        $subject = 'Nouveau membre';
+        $mailParams = [
+            'registeredUser' => $registeredUser,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::CONFIRMED_REGISTRATION, $mailParams);
+
+        return $message;
+    }
+
     public function queueUnregister(User $admin, User $unregisteredUser): Message
     {
         $subject = 'Démission';

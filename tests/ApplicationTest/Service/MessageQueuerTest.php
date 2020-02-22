@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
+use Application\Model\Country;
 use Application\Model\Message;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
@@ -37,6 +38,16 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $message = $messageQueuer->queueRegister($user);
 
         $this->assertMessage($message, $user, 'minimal@example.com', MessageTypeType::REGISTER, 'Demande de création de compte Les artisans de la transition');
+    }
+
+    public function testQueueConfirmedRegistration(): void
+    {
+        $registeredUser = $this->createMockUser();
+        $admin = $this->createMockUserAdmin();
+        $messageQueuer = $this->createMockMessageQueuer();
+        $message = $messageQueuer->queueConfirmedRegistration($admin, $registeredUser);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::CONFIRMED_REGISTRATION, 'Nouveau membre');
     }
 
     public function testQueueUnregister(): void
@@ -86,6 +97,11 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $prophecy->getFirstName()->willReturn('John');
         $prophecy->getLastName()->willReturn('Doe');
         $prophecy->getName()->willReturn('John Doe');
+        $prophecy->getStreet()->willReturn('Main street');
+        $prophecy->getPostcode()->willReturn('2020');
+        $prophecy->getLocality()->willReturn('Locality');
+        $prophecy->getCountry()->willReturn(new Country('Wookaya'));
+        $prophecy->getPhone()->willReturn('123 456 87 98');
         $prophecy->getEmail()->willReturn('john.doe@example.com');
         $prophecy->createToken()->willReturn(str_repeat('X', 32));
         $prophecy->messageAdded(Argument::type(Message::class));

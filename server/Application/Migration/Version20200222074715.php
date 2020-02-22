@@ -12,6 +12,6 @@ class Version20200222074715 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE message CHANGE type type ENUM(\'register\', \'unregister\', \'reset_password\', \'updated_user\') NOT NULL COMMENT \'(DC2Type:MessageType)\'');
+        $this->addSql('ALTER TABLE message CHANGE type type ENUM(\'register\', \'unregister\', \'reset_password\', \'updated_user\', \'confirmed_registration\') NOT NULL COMMENT \'(DC2Type:MessageType)\'');
     }
 }

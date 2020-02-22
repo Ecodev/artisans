@@ -9,7 +9,7 @@ class MessageTypeType extends AbstractEnumType
     const REGISTER = 'register';
     const UNREGISTER = 'unregister';
     const RESET_PASSWORD = 'reset_password';
-    const BALANCE = 'balance';
+    const UPDATED_USER = 'updated_user';
 
     protected function getPossibleValues(): array
     {
@@ -17,7 +17,7 @@ class MessageTypeType extends AbstractEnumType
             self::REGISTER,
             self::UNREGISTER,
             self::RESET_PASSWORD,
-            self::BALANCE,
+            self::UPDATED_USER,
         ];
     }
 }

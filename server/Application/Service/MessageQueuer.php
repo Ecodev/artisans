@@ -82,6 +82,20 @@ class MessageQueuer
         return $message;
     }
 
+    public function queueUpdatedUser(User $admin, User $updatedUser, array $before, array $after)
+    {
+        $subject = 'Un utilisateur a modifié ses données personnelles';
+        $mailParams = [
+            'updatedUser' => $updatedUser,
+            'before' => $before,
+            'after' => $after,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::UPDATED_USER, $mailParams);
+
+        return $message;
+    }
+
     /**
      * Create a message by rendering the template
      *

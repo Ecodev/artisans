@@ -1,0 +1,28 @@
+<?php declare(strict_types=1);
+$url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
+?>
+<p>Le membre suivant a modifié ses information personnelles :</p>
+
+<table style="min-width: 20em;">
+    <tr>
+        <th></th>
+        <th>Avant</th>
+        <th>Après</th>
+    </tr>
+    <?php foreach ($this->before as $key => $value): ?>
+        <tr>
+            <td><?php echo $key ?></td>
+            <td<?php echo $value !== $this->after[$key] ? ' style="color: red"' : '' ?>><?php echo $value ?></td>
+            <td<?php echo $value !== $this->after[$key] ? ' style="color: green"' : '' ?>><?php echo $this->after[$key] ?></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+
+<p>Contacter le membre :</p>
+<ul>
+    <li><?php echo $this->updatedUser->getName() ?></li>
+    <li>
+        <a href="mailto:<?php echo $this->updatedUser->getEmail() ?>"><?php echo $this->updatedUser->getEmail() ?></a>
+    </li>
+    <li><a href="<?php echo $url ?>"><?php echo $url ?></a></li>
+</ul>

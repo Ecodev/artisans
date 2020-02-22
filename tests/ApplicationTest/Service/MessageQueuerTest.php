@@ -58,6 +58,27 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $user, 'householder@example.com', MessageTypeType::RESET_PASSWORD, 'Demande de modification de mot de passe');
     }
 
+    public function testQueueUpdatedUser(): void
+    {
+        $unregisteredUser = $this->createMockUser();
+        $admin = $this->createMockUserAdmin();
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $before = [
+            'Prénom' => 'John',
+            'Nom de famille ' => 'Doe',
+        ];
+
+        $after = [
+            'Prénom' => 'John',
+            'Nom de famille ' => 'Connor',
+        ];
+
+        $message = $messageQueuer->queueUpdatedUser($admin, $unregisteredUser, $before, $after);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::UPDATED_USER, 'Un utilisateur a modifié ses données personnelles');
+    }
+
     private function createMockUser(): User
     {
         $prophecy = $this->prophesize(User::class);

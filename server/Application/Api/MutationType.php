@@ -15,6 +15,7 @@ use Application\Api\Field\Mutation\UpdateConfiguration;
 use Application\Api\Field\Mutation\UpdateOrderLine;
 use Application\Api\Field\Mutation\UpdateOrderStatus;
 use Application\Api\Field\Mutation\UpdatePassword;
+use Application\Api\Field\Mutation\UpdateUser;
 use Application\Api\Field\Standard;
 use Application\Model\Event;
 use Application\Model\File;
@@ -45,11 +46,10 @@ class MutationType extends ObjectType
             UpdateOrderStatus::build(),
             UpdateOrderLine::build(),
             UpdateConfiguration::build(),
+            UpdateUser::build(),
         ];
 
         $fields = array_merge(
-            $specializedFields,
-
             Standard::buildMutation(Event::class),
             Standard::buildMutation(File::class),
             Standard::buildMutation(File::class),
@@ -65,6 +65,8 @@ class MutationType extends ObjectType
             Standard::buildRelationMutation(UserTag::class, User::class),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),
+
+            $specializedFields,
         );
 
         $config = [

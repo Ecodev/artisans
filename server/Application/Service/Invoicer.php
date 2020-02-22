@@ -37,13 +37,15 @@ class Invoicer
         $this->userRepository = $this->entityManager->getRepository(User::class);
     }
 
-    public function createOrder(array $lines): ?Order
+    public function createOrder(array $orderInput): ?Order
     {
+        $lines = $orderInput['orderLines'];
         if (!$lines) {
             return null;
         }
 
         $order = new Order();
+        $order->setPaymentMethod($orderInput['paymentMethod']);
 
         $this->userRepository->getAclFilter()->runWithoutAcl(function () use ($lines, $order): void {
             $this->entityManager->persist($order);

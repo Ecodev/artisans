@@ -57,7 +57,7 @@ export const orderQuery = gql`
 `;
 
 export const createOrder = gql`
-    mutation CreateOrder($input: [OrderLineInput!]!) {
+    mutation CreateOrder($input: OrderInput!) {
         createOrder(input: $input) {
             id
             creator {
@@ -70,7 +70,7 @@ export const createOrder = gql`
 
 export const updateOrderStatus = gql`
     mutation UpdateOrderStatus($id: OrderID!, $status: OrderStatus!) {
-        updateOrderStatus(id:$id, status: $status) {
+        updateOrderStatus(id: $id, status: $status) {
             id
             updateDate
             updater {

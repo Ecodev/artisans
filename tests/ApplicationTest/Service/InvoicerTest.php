@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
+use Application\DBAL\Types\PaymentMethodType;
 use Application\DBAL\Types\ProductTypeType;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
@@ -27,7 +28,7 @@ class InvoicerTest extends TestCase
      */
     public function testCreateOrder(array $input, array $expectedOrderLines): void
     {
-        $input = $this->hydrateTestData($input);
+        $input['orderLines'] = $this->hydrateTestData($input['orderLines']);
 
         global $container;
         /** @var Invoicer $invoicer */
@@ -43,7 +44,8 @@ class InvoicerTest extends TestCase
      */
     public function testUpdateOrderLineAndTransactionLine(string $originalOrder, ?array $newProduct, array $expectedOrderLines): void
     {
-        $input = $this->hydrateTestData($this->providerCreateOrder()[$originalOrder][0]);
+        $input = $this->providerCreateOrder()[$originalOrder][0];
+        $input['orderLines'] = $this->hydrateTestData($input['orderLines']);
 
         global $container;
         /** @var Invoicer $invoicer */
@@ -53,7 +55,7 @@ class InvoicerTest extends TestCase
         if ($newProduct) {
             $product = $this->hydrateProduct($newProduct);
         } else {
-            $product = $input[0]['product'];
+            $product = $input['orderLines'][0]['product'];
         }
 
         $line = [
@@ -147,16 +149,19 @@ class InvoicerTest extends TestCase
         return [
             'free product should create order, even with transactions for zero dollars' => [
                 [
-                    [
-                        'quantity' => '1',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
-                        'product' => [
-                            'name' => 'My product',
-                            'pricePerUnitCHF' => Money::CHF(0),
-                            'pricePerUnitEUR' => Money::EUR(0),
+                    'paymentMethod' => PaymentMethodType::BVR,
+                    'orderLines' => [
+                        [
+                            'quantity' => '1',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::DIGITAL,
+                            'product' => [
+                                'name' => 'My product',
+                                'pricePerUnitCHF' => Money::CHF(0),
+                                'pricePerUnitEUR' => Money::EUR(0),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -172,27 +177,30 @@ class InvoicerTest extends TestCase
             ],
             'normal' => [
                 [
-                    [
-                        'quantity' => '3.100',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
-                        'product' => [
-                            'name' => 'My product 1',
-                            'pricePerUnitCHF' => Money::CHF(275),
-                            'pricePerUnitEUR' => Money::EUR(280),
+                    'paymentMethod' => PaymentMethodType::BVR,
+                    'orderLines' => [
+                        [
+                            'quantity' => '3.100',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::DIGITAL,
+                            'product' => [
+                                'name' => 'My product 1',
+                                'pricePerUnitCHF' => Money::CHF(275),
+                                'pricePerUnitEUR' => Money::EUR(280),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
-                    ],
-                    [
-                        'quantity' => '1',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
-                        'product' => [
-                            'name' => 'My product 2',
-                            'pricePerUnitCHF' => Money::CHF(20000),
-                            'pricePerUnitEUR' => Money::EUR(25000),
+                        [
+                            'quantity' => '1',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::DIGITAL,
+                            'product' => [
+                                'name' => 'My product 2',
+                                'pricePerUnitCHF' => Money::CHF(20000),
+                                'pricePerUnitEUR' => Money::EUR(25000),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -216,27 +224,30 @@ class InvoicerTest extends TestCase
             ],
             'with mixed CHF/EURO prices' => [
                 [
-                    [
-                        'quantity' => '3.100',
-                        'isCHF' => false,
-                        'type' => ProductTypeType::DIGITAL,
-                        'product' => [
-                            'name' => 'My product 1',
-                            'pricePerUnitCHF' => Money::CHF(275),
-                            'pricePerUnitEUR' => Money::EUR(280),
+                    'paymentMethod' => PaymentMethodType::BVR,
+                    'orderLines' => [
+                        [
+                            'quantity' => '3.100',
+                            'isCHF' => false,
+                            'type' => ProductTypeType::DIGITAL,
+                            'product' => [
+                                'name' => 'My product 1',
+                                'pricePerUnitCHF' => Money::CHF(275),
+                                'pricePerUnitEUR' => Money::EUR(280),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
-                    ],
-                    [
-                        'quantity' => '1',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::PAPER,
-                        'product' => [
-                            'name' => 'My product 2',
-                            'pricePerUnitCHF' => Money::CHF(20000),
-                            'pricePerUnitEUR' => Money::EUR(25000),
+                        [
+                            'quantity' => '1',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::PAPER,
+                            'product' => [
+                                'name' => 'My product 2',
+                                'pricePerUnitCHF' => Money::CHF(20000),
+                                'pricePerUnitEUR' => Money::EUR(25000),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -260,16 +271,19 @@ class InvoicerTest extends TestCase
             ],
             'negative balance should swap accounts' => [
                 [
-                    [
-                        'quantity' => '1',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
-                        'product' => [
-                            'name' => 'My product',
-                            'pricePerUnitCHF' => Money::CHF(-10000),
-                            'pricePerUnitEUR' => Money::EUR(-15000),
+                    'paymentMethod' => PaymentMethodType::BVR,
+                    'orderLines' => [
+                        [
+                            'quantity' => '1',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::DIGITAL,
+                            'product' => [
+                                'name' => 'My product',
+                                'pricePerUnitCHF' => Money::CHF(-10000),
+                                'pricePerUnitEUR' => Money::EUR(-15000),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -285,16 +299,19 @@ class InvoicerTest extends TestCase
             ],
             'can create order for subscription' => [
                 [
-                    [
-                        'quantity' => '1',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
-                        'subscription' => [
-                            'name' => 'My subscription',
-                            'pricePerUnitCHF' => Money::CHF(10000),
-                            'pricePerUnitEUR' => Money::EUR(15000),
+                    'paymentMethod' => PaymentMethodType::BVR,
+                    'orderLines' => [
+                        [
+                            'quantity' => '1',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::DIGITAL,
+                            'subscription' => [
+                                'name' => 'My subscription',
+                                'pricePerUnitCHF' => Money::CHF(10000),
+                                'pricePerUnitEUR' => Money::EUR(15000),
+                            ],
+                            'additionalEmails' => [],
                         ],
-                        'additionalEmails' => [],
                     ],
                 ],
                 [
@@ -310,12 +327,15 @@ class InvoicerTest extends TestCase
             ],
             'can create order for donation' => [
                 [
-                    [
-                        'quantity' => '1',
-                        'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
-                        'pricePerUnit' => 100,
-                        'additionalEmails' => [],
+                    'paymentMethod' => PaymentMethodType::BVR,
+                    'orderLines' => [
+                        [
+                            'quantity' => '1',
+                            'isCHF' => true,
+                            'type' => ProductTypeType::DIGITAL,
+                            'pricePerUnit' => 100,
+                            'additionalEmails' => [],
+                        ],
                     ],
                 ],
                 [

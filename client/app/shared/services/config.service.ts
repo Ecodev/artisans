@@ -1,8 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Literal } from '@ecodev/natural';
-import { BehaviorSubject, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
+export interface FrontEndConfig {
+    datatrans: {
+        merchantId: string;
+        key: string;
+        sign: string;
+        production: boolean;
+        endpoint: string;
+    };
+}
 
 @Injectable({
     providedIn: 'root',
@@ -10,10 +19,10 @@ import { catchError } from 'rxjs/operators';
 export class ConfigService {
 
     private configUrl = 'assets/config/config.local.json';
-    private config = new BehaviorSubject<Literal | null>(null);
+    private config = new BehaviorSubject<FrontEndConfig | null>(null);
 
     constructor(private http: HttpClient) {
-        this.http.get(this.configUrl).pipe(catchError(() => {
+        this.http.get<FrontEndConfig>(this.configUrl).pipe(catchError(() => {
             console.error('La configuration front-end n\'a pas pu être chargée !');
             return of(null);
         })).subscribe(result => {
@@ -24,8 +33,7 @@ export class ConfigService {
 
     }
 
-    public get(): BehaviorSubject<Literal | null> {
+    public get(): Observable<FrontEndConfig | null> {
         return this.config;
     }
-
 }

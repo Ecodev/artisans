@@ -20,12 +20,13 @@ abstract class CreateOrder implements FieldInterface
             'type' => _types()->getOutput(Order::class),
             'description' => 'Make an order to the shop.',
             'args' => [
-                'input' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get('OrderLineInput')))),
+                'input' => Type::nonNull(_types()->get('OrderInput')),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): ?Order {
                 global $container;
 
-                $input = Utility::entityIdToModel($args['input']);
+                $input = $args['input'];
+                $input['orderLines'] = Utility::entityIdToModel($input['orderLines']);
 
                 /** @var Invoicer $invoicer */
                 $invoicer = $container->get(Invoicer::class);

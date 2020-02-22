@@ -4,16 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../../../../../admin/users/services/user.service';
 import { Currency, CurrencyManager } from '../../../../../shared/classes/currencyManager';
-import { ProductType } from '../../../../../shared/generated-types';
+import { CreateOrder_createOrder, ProductType, PaymentMethod } from '../../../../../shared/generated-types';
 import { Cart } from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import { CartService } from '../../services/cart.service';
-
-export enum PaymentMethod {
-    DATATRANS = 'datatrans',
-    EBANKING = 'ebanking',
-    BVR = 'bvr'
-}
+import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
 
 @Component({
     selector: 'app-create-order',
@@ -65,12 +60,19 @@ export class CreateOrderComponent implements OnInit {
     /**
      * Banking payment config
      */
-    public paymentConfig;
+    private paymentConfig: FrontEndConfig | null = null;
 
-    constructor(public cartService: CartService, public alertService: NaturalAlertService,
-                public router: Router,
-                private route: ActivatedRoute,
-                public userService: UserService) {
+    constructor(
+        public cartService: CartService,
+        public alertService: NaturalAlertService,
+        public router: Router,
+        private route: ActivatedRoute,
+        public userService: UserService,
+        configService: ConfigService,
+    ) {
+        configService.get().subscribe(paymentConfig => {
+            this.paymentConfig = paymentConfig;
+        });
     }
 
     ngOnInit() {
@@ -124,18 +126,28 @@ export class CreateOrderComponent implements OnInit {
         });
     }
 
-    public confirm() {
-
+    public confirm(): void {
         const paymentMethod = this.billingForm.get('paymentMethod');
-        if (paymentMethod && paymentMethod.value === PaymentMethod.DATATRANS) {
-            this.datatrans(this.route.snapshot.data.viewer.model, this.cart.totalTaxInc, CurrencyManager.current.value);
-        } else {
-            this.createOrder();
+        if (!paymentMethod) {
+            return;
         }
 
+        this.cartService.save(this.cart, paymentMethod.value).subscribe(order => {
+            this.cart.empty();
+            if (!order) {
+                return;
+            }
+
+            // For datatrans, we ask for payment immediately
+            if (paymentMethod.value === PaymentMethod.datatrans) {
+                this.datatrans(order, this.cart.totalTaxInc, CurrencyManager.current.value);
+            } else {
+                this.alertService.info('Votre commande a bien été enregistrée');
+            }
+        });
     }
 
-    private datatrans(user, amount, currency: Currency): void {
+    private datatrans(order: CreateOrder_createOrder, amount: number, currency: Currency): void {
 
         if (!this.paymentConfig) {
             return;
@@ -147,7 +159,7 @@ export class CreateOrderComponent implements OnInit {
             this.paymentConfig.datatrans.merchantId,
             amount * 100,
             currency,
-            user.id,
+            order.id,
         );
 
         Datatrans.startPayment({
@@ -155,14 +167,13 @@ export class CreateOrderComponent implements OnInit {
                 production: this.paymentConfig.datatrans.production,
                 merchantId: this.paymentConfig.datatrans.merchantId,
                 sign: sign,
-                refno: user.id,
+                refno: order.id,
                 amount: amount * 100,
-                currency: 'CHF',
+                currency: currency,
                 endpoint: this.paymentConfig.datatrans.endpoint,
             },
             success: () => {
                 this.alertService.info('Paiement réussi');
-                this.createOrder();
             },
             error: (data) => {
                 this.alertService.error('Le paiement n\'a pas abouti: ' + data.message);
@@ -172,13 +183,4 @@ export class CreateOrderComponent implements OnInit {
             },
         });
     }
-
-    private createOrder() {
-        this.cartService.save(this.cart).subscribe(() => {
-            this.alertService.info('Votre commande a bien été enregistrée');
-            this.cart.empty();
-        });
-
-    }
-
 }

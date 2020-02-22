@@ -7,13 +7,13 @@
 
             <mat-radio-group aria-label="Select an option" formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
                 <div class="payment-method">
-                    <mat-radio-button [value]="PaymentMethod.DATATRANS">Paiement par carte de crédit</mat-radio-button>
+                    <mat-radio-button [value]="PaymentMethod.datatrans">Paiement par carte de crédit</mat-radio-button>
                 </div>
                 <div>
-                    <mat-radio-button [value]="PaymentMethod.EBANKING">Paiement par virement bancaire</mat-radio-button>
+                    <mat-radio-button [value]="PaymentMethod.ebanking">Paiement par virement bancaire</mat-radio-button>
                 </div>
                 <div>
-                    <mat-radio-button [value]="PaymentMethod.BVR">Paiement par virement bancaire avec bulletin de versement
+                    <mat-radio-button [value]="PaymentMethod.bvr">Paiement par virement bancaire avec bulletin de versement
                     </mat-radio-button>
                 </div>
             </mat-radio-group>

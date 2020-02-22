@@ -63,6 +63,7 @@ return [
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'ProductType' => Application\DBAL\Types\ProductTypeType::class,
             'OrderStatus' => Application\DBAL\Types\OrderStatusType::class,
+            'PaymentMethod' => Application\DBAL\Types\PaymentMethodType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

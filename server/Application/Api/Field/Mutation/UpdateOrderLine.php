@@ -21,7 +21,7 @@ abstract class UpdateOrderLine implements FieldInterface
             'description' => 'Update an existing orderLine.',
             'args' => [
                 'id' => Type::nonNull(_types()->getId(OrderLine::class)),
-                'input' => Type::nonNull(_types()->getInput(OrderLine::class)),
+                'input' => Type::nonNull(_types()->get('OrderLineInput')),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): OrderLine {
                 global $container;

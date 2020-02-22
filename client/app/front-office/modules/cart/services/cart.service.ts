@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { OrderService } from '../../../../admin/order/services/order.service';
 import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
-import { OrderLineInput } from '../../../../shared/generated-types';
+import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod } from '../../../../shared/generated-types';
 import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -49,9 +50,9 @@ export class CartService {
         }
     }
 
-    public save(cart: Cart) {
+    public save(cart: Cart, paymentMethod: PaymentMethod): Observable<CreateOrder_createOrder | null> {
 
-        const input: OrderLineInput[] = cart.productLines.map((line) => {
+        const orderLines: OrderLineInput[] = cart.productLines.map((line) => {
             return {
                 product: line.product.id,
                 quantity: line.quantity + '',
@@ -60,7 +61,12 @@ export class CartService {
             };
         });
 
-        return this.orderService.create(input); // whines because of a number is provided instead of a string. TODO : fix
+        const input: OrderInput = {
+            paymentMethod: paymentMethod,
+            orderLines: orderLines,
+        };
+
+        return this.orderService.create(input);
     }
 
     /**

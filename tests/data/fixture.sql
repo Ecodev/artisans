@@ -60,18 +60,18 @@ REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
 (12001, 1001),
 (12001, 1002);
 
-REPLACE INTO `order` (id, owner_id, creator_id, creation_date, balance_chf, balance_eur, status) VALUES
-(16000, 1002, 1002, '2019-04-24', 2500, NULL, 'validated'),
-(16001, 1003, 1003, '2019-04-25', NULL, 1000, 'pending'),
-(16002, 1000, 1000, '2019-04-25', 1500, NULL, 'pending'),
-(16003, 1000, 1000, '2019-05-19', 12000, NULL, 'validated');
+REPLACE INTO `order` (id, owner_id, creator_id, creation_date, status, payment_method) VALUES
+(16000, 1002, 1002, '2019-04-24', 'validated', 'bvr'),
+(16001, 1003, 1003, '2019-04-25', 'pending', 'datatrans'),
+(16002, 1000, 1000, '2019-04-25', 'validated', 'datatrans'),
+(16003, 1000, 1000, '2019-05-19', 'pending', 'ebanking');
 
 REPLACE INTO order_line (id, owner_id, order_id, product_id, subscription_id, creation_date, quantity, type, balance_chf, balance_eur, name) VALUES
-(17000, 1002, 16000, 3000, NULL, '2019-04-24', 2, 'paper', 1500, NULL, 'Sobriété et liberté : à la recherche d''un équilibre'),
-(17001, 1002, 16000, 3002, NULL, '2019-04-24', 1, 'digital', 500, NULL, 'Article numérique 1'),
-(17002, 1002, 16001, 3001, NULL, '2019-04-24', 1, 'digital', NULL, 1000, 'Habitat : le pouvoir de la participation'),
-(17003, 1000, 16002, 3000, NULL, '2019-05-15', 1, 'digital', NULL, 1000, 'Sobriété et liberté : à la recherche d''un équilibre'),
-(17004, 1000, 16003, NULL, 19000, '2019-05-19', 1, 'paper', 12000, NULL, 'Abonnement standard papier');
+(17000, 1002, 16000, 3000, NULL, '2019-04-24', 2, 'paper', 1500, 0, 'Sobriété et liberté : à la recherche d''un équilibre'),
+(17001, 1002, 16000, 3002, NULL, '2019-04-24', 1, 'digital', 500, 0, 'Article numérique 1'),
+(17002, 1002, 16001, 3001, NULL, '2019-04-24', 1, 'digital', 1000, 0, 'Habitat : le pouvoir de la participation'),
+(17003, 1000, 16002, 3000, NULL, '2019-05-15', 1, 'digital', 0, 1000, 'Sobriété et liberté : à la recherche d''un équilibre'),
+(17004, 1000, 16003, NULL, 19000, '2019-05-19', 1, 'paper', 12000, 0, 'Abonnement standard papier');
 
 REPLACE INTO `configuration` (id, `key`, `value`) VALUES
 (18000, 'home-block-1-title', 'Titre bloc 1'),

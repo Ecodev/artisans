@@ -18,11 +18,13 @@ class TypesFactory
         $invokables = [
             \Application\Api\Enum\UserRoleType::class,
             \Application\Api\Enum\MessageTypeType::class,
+            \Application\Api\Enum\PaymentMethodType::class,
             \Application\Api\Enum\ProductTypeType::class,
             \Application\Api\Enum\OrderStatusType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,
             \Application\Api\Input\PaginationInputType::class,
             \Application\Api\Input\OrderLineInputType::class,
+            \Application\Api\Input\OrderInputType::class,
             \Application\Api\MutationType::class,
             \Application\Api\Output\AllPermissionsType::class,
             \Application\Api\Output\BankingInfosType::class,

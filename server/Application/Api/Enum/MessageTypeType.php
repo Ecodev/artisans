@@ -14,6 +14,10 @@ class MessageTypeType extends AbstractEnumType
             \Application\DBAL\Types\MessageTypeType::UNREGISTER => 'Démission',
             \Application\DBAL\Types\MessageTypeType::RESET_PASSWORD => 'Changement de mot de passe',
             \Application\DBAL\Types\MessageTypeType::UPDATED_USER => 'Utilisateur modifié',
+            \Application\DBAL\Types\MessageTypeType::USER_PENDING_ORDER => 'Commande en attente',
+            \Application\DBAL\Types\MessageTypeType::USER_VALIDATED_ORDER => 'Commande validée',
+            \Application\DBAL\Types\MessageTypeType::ADMIN_PENDING_ORDER => 'Commande a besoin de BVR',
+            \Application\DBAL\Types\MessageTypeType::ADMIN_VALIDATED_ORDER => 'Commande doit être comptabilisée',
         ];
 
         parent::__construct($config);

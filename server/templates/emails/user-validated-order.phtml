@@ -1,0 +1,8 @@
+<?php declare(strict_types=1);
+$url = $this->serverUrl . '/mon-compte/commandes/' . $this->order->getId();
+?>
+<p>La commande suivante a été validée :</p>
+
+<?php echo $this->orderLines($this->order); ?>
+
+<p>Voir le détail sur <a href="<?php echo $url ?>"><?php echo $url ?></a>.</p>

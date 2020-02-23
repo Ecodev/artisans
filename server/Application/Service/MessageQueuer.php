@@ -6,6 +6,7 @@ namespace Application\Service;
 
 use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Message;
+use Application\Model\Order;
 use Application\Model\User;
 use Doctrine\ORM\EntityManager;
 use Laminas\View\Model\ViewModel;
@@ -94,7 +95,7 @@ class MessageQueuer
         return $message;
     }
 
-    public function queueUpdatedUser(User $admin, User $updatedUser, array $before, array $after)
+    public function queueUpdatedUser(User $admin, User $updatedUser, array $before, array $after): Message
     {
         $subject = 'Un utilisateur a modifié ses données personnelles';
         $mailParams = [
@@ -104,6 +105,54 @@ class MessageQueuer
         ];
 
         $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::UPDATED_USER, $mailParams);
+
+        return $message;
+    }
+
+    public function queueUserPendingOrder(Order $order): Message
+    {
+        $subject = 'Votre commande est en cours de traitement';
+        $mailParams = [
+            'order' => $order,
+        ];
+
+        $message = $this->createMessage($order->getOwner(), $order->getOwner()->getEmail(), $subject, MessageTypeType::USER_PENDING_ORDER, $mailParams);
+
+        return $message;
+    }
+
+    public function queueUserValidatedOrder(Order $order): Message
+    {
+        $subject = 'Votre commande a été validée';
+        $mailParams = [
+            'order' => $order,
+        ];
+
+        $message = $this->createMessage($order->getOwner(), $order->getOwner()->getEmail(), $subject, MessageTypeType::USER_VALIDATED_ORDER, $mailParams);
+
+        return $message;
+    }
+
+    public function queueAdminPendingOrder(User $admin, Order $order): Message
+    {
+        $subject = 'Une commande a besoin d\'un BVR';
+        $mailParams = [
+            'order' => $order,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::ADMIN_PENDING_ORDER, $mailParams);
+
+        return $message;
+    }
+
+    public function queueAdminValidatedOrder(User $admin, Order $order): Message
+    {
+        $subject = 'Commande à comptabiliser';
+        $mailParams = [
+            'order' => $order,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::ADMIN_VALIDATED_ORDER, $mailParams);
 
         return $message;
     }

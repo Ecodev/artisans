@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace Application\Action;
 
 use Application\Model\Order;
+use Application\Model\User;
 use Application\Repository\OrderRepository;
+use Application\Repository\UserRepository;
+use Application\Service\Mailer;
+use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Template\TemplateRendererInterface;
@@ -31,11 +35,23 @@ class DatatransAction extends AbstractAction
      */
     private $config;
 
-    public function __construct(EntityManager $entityManager, TemplateRendererInterface $template, array $config)
+    /**
+     * @var Mailer
+     */
+    private $mailer;
+
+    /**
+     * @var MessageQueuer
+     */
+    private $messageQueuer;
+
+    public function __construct(EntityManager $entityManager, TemplateRendererInterface $template, array $config, Mailer $mailer, MessageQueuer $messageQueuer)
     {
         $this->entityManager = $entityManager;
         $this->template = $template;
         $this->config = $config;
+        $this->mailer = $mailer;
+        $this->messageQueuer = $messageQueuer;
     }
 
     /**
@@ -185,6 +201,8 @@ class DatatransAction extends AbstractAction
         $order->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
 
         $this->entityManager->flush();
+
+        $this->notify($order);
     }
 
     private function formatMoney(Money $money): string
@@ -213,5 +231,24 @@ class DatatransAction extends AbstractAction
         }
 
         throw new \Exception('Can only accept payment in CHF or EUR, but got: ' . $currency);
+    }
+
+    /**
+     * Notify the user and the admins
+     *
+     * @param Order $order
+     */
+    private function notify(Order $order): void
+    {
+        $message = $this->messageQueuer->queueUserValidatedOrder($order);
+        $this->mailer->sendMessageAsync($message);
+
+        /** @var UserRepository $repository */
+        $repository = $this->entityManager->getRepository(User::class);
+        $admins = $repository->getAllAdministratorsToNotify();
+        foreach ($admins as $admin) {
+            $message = $this->messageQueuer->queueAdminValidatedOrder($admin, $order);
+            $this->mailer->sendMessageAsync($message);
+        }
     }
 }

@@ -19,6 +19,12 @@ return [
             'layout' => ['server/templates/layout'],
         ],
     ],
+    'view_helpers' => [
+        'invokables' => [
+            'orderLines' => \Application\View\Helper\OrderLines::class,
+            'userInfos' => \Application\View\Helper\UserInfos::class,
+        ],
+    ],
     'banking' => [
         'bankAccount' => '',
         'postAccount' => '',

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Application\Traits;
 
 use GraphQL\Doctrine\Annotation as API;
+use Money\Currencies\ISOCurrencies;
+use Money\Formatter\DecimalMoneyFormatter;
 use Money\Money;
 
 trait HasAutomaticBalance
@@ -49,5 +51,19 @@ trait HasAutomaticBalance
     public function getBalanceEUR(): Money
     {
         return $this->balanceEUR;
+    }
+
+    /**
+     * Returns the non-zero balance formatted as string
+     *
+     * @return string
+     */
+    public function getFormattedBalance(): string
+    {
+        $money = $this->getBalanceCHF()->isZero() ? $this->getBalanceEUR() : $this->getBalanceCHF();
+        $currencies = new ISOCurrencies();
+        $moneyFormatter = new DecimalMoneyFormatter($currencies);
+
+        return $moneyFormatter->format($money) . ' ' . $money->getCurrency()->getCode();
     }
 }

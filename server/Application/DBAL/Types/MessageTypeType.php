@@ -11,6 +11,10 @@ class MessageTypeType extends AbstractEnumType
     const RESET_PASSWORD = 'reset_password';
     const UPDATED_USER = 'updated_user';
     const CONFIRMED_REGISTRATION = 'confirmed_registration';
+    const USER_PENDING_ORDER = 'user_pending_order';
+    const USER_VALIDATED_ORDER = 'user_validated_order';
+    const ADMIN_PENDING_ORDER = 'admin_pending_order';
+    const ADMIN_VALIDATED_ORDER = 'admin_validated_order';
 
     protected function getPossibleValues(): array
     {
@@ -20,6 +24,10 @@ class MessageTypeType extends AbstractEnumType
             self::RESET_PASSWORD,
             self::UPDATED_USER,
             self::CONFIRMED_REGISTRATION,
+            self::USER_PENDING_ORDER,
+            self::USER_VALIDATED_ORDER,
+            self::ADMIN_PENDING_ORDER,
+            self::ADMIN_VALIDATED_ORDER,
         ];
     }
 }

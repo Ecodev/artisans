@@ -5,12 +5,18 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
+use Application\DBAL\Types\PaymentMethodType;
 use Application\Model\Country;
 use Application\Model\Message;
+use Application\Model\Order;
+use Application\Model\OrderLine;
+use Application\Model\Product;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Laminas\View\Renderer\RendererInterface;
+use Money\Money;
 use Prophecy\Argument;
 
 class MessageQueuerTest extends \PHPUnit\Framework\TestCase
@@ -71,7 +77,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
 
     public function testQueueUpdatedUser(): void
     {
-        $unregisteredUser = $this->createMockUser();
+        $updatedUser = $this->createMockUser();
         $admin = $this->createMockUserAdmin();
         $messageQueuer = $this->createMockMessageQueuer();
 
@@ -85,9 +91,55 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
             'Nom de famille ' => 'Connor',
         ];
 
-        $message = $messageQueuer->queueUpdatedUser($admin, $unregisteredUser, $before, $after);
+        $message = $messageQueuer->queueUpdatedUser($admin, $updatedUser, $before, $after);
 
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::UPDATED_USER, 'Un utilisateur a modifié ses données personnelles');
+    }
+
+    public function testQueueUserPendingOrder(): void
+    {
+        $user = $this->createMockUser();
+        $order = $this->createMockOrder($user);
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueUserPendingOrder($order);
+
+        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::USER_PENDING_ORDER, 'Votre commande est en cours de traitement');
+    }
+
+    public function testQueueUserValidatedOrder(): void
+    {
+        $user = $this->createMockUser();
+        $order = $this->createMockOrder($user);
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueUserValidatedOrder($order);
+
+        $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::USER_VALIDATED_ORDER, 'Votre commande a été validée');
+    }
+
+    public function testQueueAdminPendingOrder(): void
+    {
+        $admin = $this->createMockUserAdmin();
+        $user = $this->createMockUser();
+        $order = $this->createMockOrder($user);
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueAdminPendingOrder($admin, $order);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR');
+    }
+
+    public function testQueueAdminValidatedOrder(): void
+    {
+        $admin = $this->createMockUserAdmin();
+        $user = $this->createMockUser();
+        $order = $this->createMockOrder($user);
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueAdminValidatedOrder($admin, $order);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser');
     }
 
     private function createMockUser(): User
@@ -109,6 +161,37 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $user = $prophecy->reveal();
 
         return $user;
+    }
+
+    private function createMockOrder(User $owner): Order
+    {
+        $prophecyProduct = $this->prophesize(Product::class);
+        $prophecyProduct->getId()->willReturn(1);
+        $prophecyProduct->getName()->willReturn('Article 1');
+
+        $productLine = new OrderLine();
+        $productLine->setProduct($prophecyProduct->reveal());
+
+        $subscriptionLine = new OrderLine();
+        $subscriptionLine->setName('Abonnement standard papier');
+
+        $donationLine = new OrderLine();
+        $donationLine->setName('Donation');
+
+        $lines = new ArrayCollection([$productLine, $subscriptionLine, $donationLine]);
+
+        $prophecy = $this->prophesize(Order::class);
+        $prophecy->getId()->willReturn(456);
+        $prophecy->getBalanceCHF()->willReturn(Money::CHF(1500));
+        $prophecy->getBalanceEUR()->willReturn(Money::EUR(0));
+        $prophecy->getOrderLines()->willReturn($lines);
+        $prophecy->getOwner()->willReturn($owner);
+        $prophecy->getFormattedBalance()->willReturn('33.00 CHF');
+        $prophecy->getPaymentMethod()->willReturn(PaymentMethodType::BVR);
+
+        $order = $prophecy->reveal();
+
+        return $order;
     }
 
     private function createMockUserAdmin(): User

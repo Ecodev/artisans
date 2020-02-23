@@ -15,6 +15,7 @@ parameters:
         - '~^Property .* does not accept PHPUnit\\Framework\\MockObject\\MockObject\.$~'
         - '~^Call to method Prophecy\\Prophecy\\ObjectProphecy\:\:.*\(\) on a separate line has no effect\.$~'
         - '~^Parameter \#1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\.* given\.$~'
+        - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         -
             message: '~^If condition is always true\.$~'
             path: server/Application/Model/OrderLine.php

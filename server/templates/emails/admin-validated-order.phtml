@@ -1,0 +1,11 @@
+<?php declare(strict_types=1);
+$url = $this->serverUrl . '/admin/order/' . $this->order->getId();
+?>
+<p>Une commande pour un total de <strong><?php echo $this->order->getFormattedBalance() ?></strong> a été validée et doit être compatibilisée.</p>
+
+<h2>Le membre</h2>
+<?php echo $this->userInfos($this->order->getOwner()); ?>
+
+<h2>La commande</h2>
+<?php echo $this->orderLines($this->order); ?>
+<p>Voir le détail sur <a href="<?php echo $url ?>"><?php echo $url ?></a>.</p>

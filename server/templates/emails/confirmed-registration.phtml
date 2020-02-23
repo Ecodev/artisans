@@ -1,17 +1,4 @@
-<?php declare(strict_types=1);
-$url = $this->serverUrl . '/admin/user/' . $this->registeredUser->getId();
-?>
+<?php declare(strict_types=1); ?>
 <p>Un nouveau membre a confirmé son inscription :</p>
 
-<ul>
-    <li><?php echo $this->registeredUser->getFirstName() ?></li>
-    <li><?php echo $this->registeredUser->getLastName() ?></li>
-    <li><?php echo $this->registeredUser->getStreet() ?></li>
-    <li><?php echo $this->registeredUser->getPostcode() ?></li>
-    <li><?php echo $this->registeredUser->getLocality() ?></li>
-    <li><?php echo $this->registeredUser->getCountry() ? $this->registeredUser->getCountry()->getName() : '' ?></li>
-    <li>
-        <a href="mailto:<?php echo $this->registeredUser->getEmail() ?>"><?php echo $this->registeredUser->getEmail() ?></a>
-    </li>
-    <li><a href="<?php echo $url ?>"><?php echo $url ?></a></li>
-</ul>
+<?php echo $this->userInfos($this->registeredUser) ?>

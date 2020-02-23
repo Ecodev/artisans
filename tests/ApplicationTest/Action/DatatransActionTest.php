@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace ApplicationTest\Action;
 
 use Application\Action\DatatransAction;
+use Application\Model\Message;
 use Application\Model\Order;
+use Application\Service\Mailer;
+use Application\Service\MessageQueuer;
 use ApplicationTest\Traits\TestWithTransaction;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
@@ -37,7 +40,13 @@ class DatatransActionTest extends TestCase
             'key' => '1a03b7bcf2752c8c8a1b46616b0c12658d2c7643403e655450bedb7c78bb2d2f659c2ff4e647e4ea72d37ef6745ebda6733c7b859439107069f291cda98f4844',
         ];
 
-        $action = new DatatransAction(_em(), $renderer->reveal(), $config);
+        $mailer = $this->prophesize(Mailer::class);
+
+        $messageQueuer = $this->prophesize(MessageQueuer::class);
+        $messageQueuer->queueUserValidatedOrder(Argument::any())->willReturn(new Message());
+        $messageQueuer->queueAdminValidatedOrder(Argument::any(), Argument::any())->willReturn(new Message());
+
+        $action = new DatatransAction(_em(), $renderer->reveal(), $config, $mailer->reveal(), $messageQueuer->reveal());
         $action->process($request, $handler->reveal());
 
         $renderer->checkProphecyMethodsPredictions();

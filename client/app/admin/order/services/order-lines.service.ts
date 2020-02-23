@@ -47,6 +47,8 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
     protected getDefaultForServer(): OrderLineInput {
         return {
             product: null,
+            subscription: null,
+            pricePerUnit: null,
             quantity: '0',
             isCHF: true,
             type: ProductType.digital,

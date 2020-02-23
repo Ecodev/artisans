@@ -2,7 +2,13 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { OrderService } from '../../../../admin/order/services/order.service';
 import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
-import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod } from '../../../../shared/generated-types';
+import {
+    CreateOrder_createOrder,
+    OrderInput,
+    OrderLineInput,
+    PaymentMethod,
+    ProductType,
+} from '../../../../shared/generated-types';
 import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
 import { Observable } from 'rxjs';
@@ -51,15 +57,25 @@ export class CartService {
     }
 
     public save(cart: Cart, paymentMethod: PaymentMethod): Observable<CreateOrder_createOrder | null> {
-
+        const isCHF = CurrencyManager.current.value === Currency.CHF;
         const orderLines: OrderLineInput[] = cart.productLines.map((line) => {
             return {
                 product: line.product.id,
                 quantity: line.quantity + '',
                 type: line.type,
-                isCHF: CurrencyManager.current.value === Currency.CHF,
+                isCHF: isCHF,
             };
         });
+
+        // Add donation if any
+        if (cart.donationAmount) {
+            orderLines.push({
+                quantity: '1',
+                type: ProductType.digital,
+                isCHF: isCHF,
+                pricePerUnit: cart.donationAmount,
+            });
+        }
 
         const input: OrderInput = {
             paymentMethod: paymentMethod,

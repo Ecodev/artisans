@@ -142,6 +142,17 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser');
     }
 
+    public function testQueueRequestMembershipEnd(): void
+    {
+        $admin = $this->createMockUserAdmin();
+        $user = $this->createMockUser();
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueRequestMembershipEnd($admin, $user);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::REQUEST_MEMBERSHIP_END, 'Demande d\'arrêt de cotisations');
+    }
+
     private function createMockUser(): User
     {
         $prophecy = $this->prophesize(User::class);

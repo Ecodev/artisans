@@ -157,6 +157,18 @@ class MessageQueuer
         return $message;
     }
 
+    public function queueRequestMembershipEnd(User $admin, User $member): Message
+    {
+        $subject = 'Demande d\'arrêt de cotisations';
+        $mailParams = [
+            'member' => $member,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::REQUEST_MEMBERSHIP_END, $mailParams);
+
+        return $message;
+    }
+
     /**
      * Create a message by rendering the template
      *

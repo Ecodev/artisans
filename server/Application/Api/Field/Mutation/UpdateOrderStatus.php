@@ -21,7 +21,7 @@ abstract class UpdateOrderStatus implements FieldInterface
         return [
             'name' => 'updateOrderStatus',
             'type' => _types()->getOutput(Order::class),
-            'description' => 'Make an order to the shop.',
+            'description' => 'Validate an order',
             'args' => [
                 'id' => Type::nonNull(_types()->getId(Order::class)),
                 'status' => Type::nonNull(_types()->get(OrderStatusType::class)),

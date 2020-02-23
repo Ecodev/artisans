@@ -15,6 +15,7 @@ class MessageTypeType extends AbstractEnumType
     const USER_VALIDATED_ORDER = 'user_validated_order';
     const ADMIN_PENDING_ORDER = 'admin_pending_order';
     const ADMIN_VALIDATED_ORDER = 'admin_validated_order';
+    const REQUEST_MEMBERSHIP_END = 'request_membership_end';
 
     protected function getPossibleValues(): array
     {
@@ -28,6 +29,7 @@ class MessageTypeType extends AbstractEnumType
             self::USER_VALIDATED_ORDER,
             self::ADMIN_PENDING_ORDER,
             self::ADMIN_VALIDATED_ORDER,
+            self::REQUEST_MEMBERSHIP_END,
         ];
     }
 }

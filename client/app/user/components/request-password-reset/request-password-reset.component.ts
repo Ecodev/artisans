@@ -25,7 +25,7 @@ export class RequestPasswordResetComponent {
     submit(): void {
         this.sending = true;
 
-        this.userService.requestPasswordReset(this.form.value.email).subscribe(v => {
+        this.userService.requestPasswordReset(this.form.value.email).subscribe(() => {
             this.sending = false;
 
             const message = 'Un email avec des instructions a été envoyé';

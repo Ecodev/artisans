@@ -17,7 +17,7 @@ import {
     Login,
     LoginVariables,
     Logout,
-    NextUserCode,
+    NextUserCode, RequestMembershipEnd, RequestPasswordReset, RequestPasswordResetVariables,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -221,19 +221,31 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return !!user.owner && user.owner.id !== user.id;
     }
 
-    public requestPasswordReset(email) {
+    public requestPasswordReset(email): Observable<RequestMembershipEnd> {
         const mutation = gql`
             mutation RequestPasswordReset($email: Email!) {
                 requestPasswordReset(email: $email)
             }
         `;
 
-        return this.apollo.mutate({
+        return this.apollo.mutate<RequestPasswordReset, RequestPasswordResetVariables>({
             mutation: mutation,
             variables: {
                 email: email,
             },
-        });
+        }).pipe(map(result => result.data.requestPasswordReset));
+    }
+
+    public requestMembershipEnd(): Observable<RequestMembershipEnd> {
+        const mutation = gql`
+            mutation RequestMembershipEnd {
+                requestMembershipEnd
+            }
+        `;
+
+        return this.apollo.mutate<RequestMembershipEnd, never>({
+            mutation: mutation,
+        }).pipe(map(result => result.data.requestMembershipEnd));
     }
 
     protected getDefaultForServer(): UserInput {

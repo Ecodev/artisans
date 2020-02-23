@@ -124,7 +124,11 @@ REPLACE INTO event (id, date, name, place, type) VALUES
 (40010, '2022-11-01', 'Vestibulum id ligula porta felis euismod semper.', 'Fribourg', 'Débat'),
 (40011, '2022-12-01', 'Nullam quis risus eget urna mollis ornare vel eu leo.', 'Neuchâtel', 'Spectacle');
 
--- Give a valid subscription to othermember
-UPDATE user SET subscription_type = 'digital', subscription_last_number_id = 3001 WHERE id = 1003;
+-- Give a valid subscription and membership to othermember
+UPDATE user SET
+    subscription_type = 'digital',
+    subscription_last_number_id = 3001,
+    membership_begin = '2020-01-02'
+WHERE id = 1003;
 
 COMMIT;

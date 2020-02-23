@@ -9,6 +9,7 @@ use Application\Api\Field\Mutation\CreateOrder;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\Register;
+use Application\Api\Field\Mutation\RequestMembershipEnd;
 use Application\Api\Field\Mutation\RequestPasswordReset;
 use Application\Api\Field\Mutation\Unregister;
 use Application\Api\Field\Mutation\UpdateConfiguration;
@@ -47,6 +48,7 @@ class MutationType extends ObjectType
             UpdateOrderLine::build(),
             UpdateConfiguration::build(),
             UpdateUser::build(),
+            RequestMembershipEnd::build(),
         ];
 
         $fields = array_merge(

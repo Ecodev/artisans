@@ -11,9 +11,9 @@ $url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
     </tr>
     <?php foreach ($this->before as $key => $value): ?>
         <tr>
-            <td><?php echo $key ?></td>
-            <td<?php echo $value !== $this->after[$key] ? ' style="color: red"' : '' ?>><?php echo $value ?></td>
-            <td<?php echo $value !== $this->after[$key] ? ' style="color: green"' : '' ?>><?php echo $this->after[$key] ?></td>
+            <td><?php echo $this->escapeHtml($key) ?></td>
+            <td<?php echo $value !== $this->after[$key] ? ' style="color: red"' : '' ?>><?php echo $this->escapeHtml($value) ?></td>
+            <td<?php echo $value !== $this->after[$key] ? ' style="color: green"' : '' ?>><?php echo $this->escapeHtml($this->after[$key]) ?></td>
         </tr>
     <?php endforeach; ?>
 </table>
@@ -22,7 +22,7 @@ $url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
 <ul>
     <li><?php echo $this->updatedUser->getName() ?></li>
     <li>
-        <a href="mailto:<?php echo $this->updatedUser->getEmail() ?>"><?php echo $this->updatedUser->getEmail() ?></a>
+        <a href="mailto:<?php echo $this->escapeHtmlAttr($this->updatedUser->getEmail()) ?>"><?php echo $this->escapeHtml($this->updatedUser->getEmail()) ?></a>
     </li>
-    <li><a href="<?php echo $url ?>"><?php echo $url ?></a></li>
+    <li><a href="<?php echo $this->escapeHtmlAttr($url) ?>"><?php echo $this->escapeHtml($url) ?></a></li>
 </ul>

@@ -9,8 +9,8 @@ export class ParticleSwitchComponent implements OnInit, AfterViewInit {
 
     @ContentChild(TemplateRef, {static: true}) template: TemplateRef<any>;
     @ViewChild('wrapper', {static: true}) wrapper: ElementRef<any>;
-    @ViewChild('element1', {static: false}) element1: ElementRef<any>;
-    @ViewChild('element2', {static: false}) element2: ElementRef<any>;
+    @ViewChild('element1') element1: ElementRef<any>;
+    @ViewChild('element2') element2: ElementRef<any>;
 
     public _data1;
     public _data2;

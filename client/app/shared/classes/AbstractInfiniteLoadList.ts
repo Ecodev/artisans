@@ -1,5 +1,5 @@
 import { Injector, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 import { NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables } from '@ecodev/natural';
 import { defaults, isEqual, pick } from 'lodash';
 import { takeUntil } from 'rxjs/operators';

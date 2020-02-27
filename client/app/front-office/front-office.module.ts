@@ -42,7 +42,6 @@ import { ShopModule } from './modules/shop/shop.module';
         EcoFabSpeedDialModule,
         ShopModule,
     ],
-    entryComponents: [MenuComponent, DonationComponent],
 })
 export class FrontOfficeModule {
 }

@@ -27,9 +27,6 @@ import { ProfileRoutingModule } from './profile-routing.module';
         ArtisansModule,
         OrderModule,
     ],
-    entryComponents: [
-        ProvisionComponent,
-    ],
     exports: [],
 })
 export class ProfileModule {

@@ -20,10 +20,6 @@ const declarations = [
         CommonModule,
         ArtisansModule,
     ],
-    entryComponents: [
-        OrderComponent,
-        OrderLineComponent,
-    ],
 })
 export class OrderModule {
 }

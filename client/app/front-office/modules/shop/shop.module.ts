@@ -23,9 +23,6 @@ import { ShopRoutingModule } from './shop-routing.module';
         ShopRoutingModule,
         CartModule,
     ],
-    entryComponents: [
-        ProductPageComponent,
-    ],
 })
 export class ShopModule {
 }

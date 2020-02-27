@@ -89,7 +89,6 @@ const imports = [
     ],
     exports: [...imports, ...declarations, NaturalIconModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    entryComponents: [],
 })
 export class ArtisansModule {
 }

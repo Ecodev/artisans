@@ -44,7 +44,6 @@ import { UserComponent } from './users/user/user.component';
         OrderModule,
         EcoFabSpeedDialModule,
     ],
-    entryComponents: [],
 })
 export class AdminModule {
 }

@@ -8,8 +8,6 @@
         grid-gap: 30px;
 
         .product {
-            display: flex;
-            flex-direction: column;
             border-left: 6px solid transparent;
             padding: 5px 30px 5px 30px;
 
@@ -19,7 +17,6 @@
             //    grid-row: span 2;
             // }
 
-
             .product-name {
                 flex: 1;
             }
@@ -28,22 +25,11 @@
                 max-width: 100%;
             }
 
-            .product-description {
-                display: none;
-            }
-
             .product-tag {
                 text-decoration: none;
                 margin-right: 10px;
             }
 
-            .product-tags {
-                margin-bottom: 15px;
-            }
-
-            .product-detail-button {
-                display: none;
-            }
 
             .product-price {
                 .frame-primary {

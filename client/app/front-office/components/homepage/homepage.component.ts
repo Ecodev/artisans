@@ -92,7 +92,7 @@ export class HomepageComponent implements OnInit {
                 ],
             },
             pagination: {pageSize: 1, pageIndex: 0},
-            sorting: [{field: ProductSortingField.releaseDate, order: SortingOrder.ASC}],
+            sorting: [{field: ProductSortingField.releaseDate, order: SortingOrder.DESC}],
         });
         this.productService.getAll(qvmProduct).subscribe(result => this.currentReview = result.items[0]);
     }

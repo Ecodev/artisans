@@ -20,7 +20,7 @@ export class FilesService extends NaturalAbstractModelService<any,
 
     constructor(apollo: Apollo) {
         super(apollo,
-            'image',
+            'file',
             null,
             null,
             createFileMutation,

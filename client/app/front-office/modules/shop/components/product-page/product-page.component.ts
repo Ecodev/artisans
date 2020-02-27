@@ -2,20 +2,18 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NaturalAbstractDetail, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { ProductService } from '../../../../../admin/products/services/product.service';
-import { getDownloadLink } from '../../../../../shared/components/file/file.component';
+import { PurchaseService } from '../../../../../profile/components/purchases/purchase.service';
 import {
     CreateProduct,
     CreateProductVariables,
     CurrentUserForProfile,
     Product,
-    Product_product,
     ProductType,
     ProductVariables,
     PurchasesVariables,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../../../shared/generated-types';
-import { PurchaseService } from '../../../../../profile/components/purchases/purchase.service';
 
 @Component({
     selector: 'app-product-page',
@@ -58,7 +56,10 @@ export class ProductPageComponent
      */
     public formGroup = new FormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile['viewer'];
-    public showBuyPaper = false;
+
+    /**
+     * Hide buy digital version if it has already been bought as it can be bought only once.
+     */
     public showBuyDigital = false;
 
     constructor(
@@ -81,23 +82,12 @@ export class ProductPageComponent
 
         // Show button to buy only if we didn't already bought those version
         this.purchaseService.getAll(qvm).subscribe(purchases => {
-            const paper = [ProductType.both, ProductType.paper];
             const digital = [ProductType.both, ProductType.digital];
 
-            this.showBuyPaper = paper.includes(this.data.model.type)
-                && !purchases.items.some(orderLine => paper.includes(orderLine.type));
-
             this.showBuyDigital = digital.includes(this.data.model.type)
-                && !purchases.items.some(orderLine => digital.includes(orderLine.type))
-                && !this.data.model.file; // A digital might be allowed via subscription, not purchase
+                                  && !purchases.items.some(orderLine => digital.includes(orderLine.type))
+                                  && !this.data.model.file; // A digital might be allowed via subscription, not purchase
         });
     }
 
-    public getDownloadLink(product: Product_product): null | string {
-        if (product.file) {
-            return getDownloadLink(product.file);
-        }
-
-        return null;
-    }
 }

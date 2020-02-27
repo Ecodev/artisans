@@ -1,7 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
-    CreateImage,
     CreateProduct,
     CreateProductVariables,
     OrderLinesVariables,
@@ -10,6 +9,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
+import { FilesService } from '../../files/services/files.service';
 import { ProductTagService } from '../../product-tags/services/product-tag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
@@ -34,6 +34,7 @@ export class ProductComponent
                 injector: Injector,
                 public productTagService: ProductTagService,
                 public imageService: ImageService,
+                public fileService: FilesService,
     ) {
         super('product', productService, injector);
     }
@@ -43,14 +44,14 @@ export class ProductComponent
         this.orderLinesVariables = {filter: {groups: [{conditions: [{product: {equal: {value: this.data.model.id}}}]}]}};
     }
 
-    public newImage(image: CreateImage['createImage'], fieldName: string) {
-
+    public setFormValue(value: any, fieldName: string) {
         const field = this.form.get(fieldName);
         if (field) {
-            field.setValue(image);
+            field.setValue(value);
             if (this.data.model.id) {
                 this.update();
             }
         }
     }
+
 }

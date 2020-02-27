@@ -27,6 +27,7 @@ export const productMetaFragment = gql`
         }
         file {
             id
+            mime
         }
         creationDate
         creator {

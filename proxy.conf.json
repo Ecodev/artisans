@@ -6,5 +6,9 @@
   "/image": {
     "target": "https://artisans.lan",
     "secure": false
+  },
+  "/file": {
+    "target": "https://artisans.lan",
+    "secure": false
   }
 }

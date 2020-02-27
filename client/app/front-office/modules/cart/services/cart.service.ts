@@ -4,17 +4,8 @@ import { Observable } from 'rxjs';
 import { OrderService } from '../../../../admin/order/services/order.service';
 import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
 import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType } from '../../../../shared/generated-types';
+import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
-
-<<<<<<< HEAD
-=== === =
->>>>>>>
-Consider;
-subscription;
-and;
-donation;
-for createOrder
-    import { DonationComponent } from '../../../components/donation/donation.component';
 
 @Injectable({
     providedIn: 'root',

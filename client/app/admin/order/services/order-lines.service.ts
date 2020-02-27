@@ -52,8 +52,6 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
             quantity: '0',
             isCHF: true,
             type: ProductType.digital,
-            subscription: null,
-            pricePerUnit: null
         };
     }
 }

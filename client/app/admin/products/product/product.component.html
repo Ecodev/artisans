@@ -129,9 +129,23 @@
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
 
-                    <div fxFlex="66" fxLayout="column">
+                    <div fxFlex="25" fxLayout="column">
+                        <h2 class="mat-h2">Article dématérialisé (PDF)</h2>
+                        <app-file (modelChange)="setFormValue($event, 'file')"
+                                  [height]="300"
+                                  [model]="data.model.file"
+                                  [service]="fileService"
+                                  [style.borderRadius.px]="4"
+                                  [style.marginLeft.px]="2"
+                                  action="upload"
+                                  class="mat-elevation-z2"
+                                  accept="application/pdf"
+                        ></app-file>
+                    </div>
+
+                    <div fxFlex="50" fxLayout="column">
                         <h2 class="mat-h2">Illustration</h2>
-                        <app-file (modelChange)="newImage($event, 'illustration')"
+                        <app-file (modelChange)="setFormValue($event, 'illustration')"
                                   [height]="300"
                                   [model]="data.model.illustration"
                                   [service]="imageService"
@@ -142,9 +156,9 @@
                         ></app-file>
                     </div>
 
-                    <div fxFlex="33" fxLayout="column">
+                    <div fxFlex="25" fxLayout="column">
                         <h2 class="mat-h2">Aperçu de l'article</h2>
-                        <app-file (modelChange)="newImage($event, 'image')"
+                        <app-file (modelChange)="setFormValue($event, 'image')"
                                   [height]="300"
                                   [model]="data.model.image"
                                   [service]="imageService"

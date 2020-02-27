@@ -70,6 +70,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             reviewNumber: null,
             type: ProductType.digital,
             readingDuration: null,
+            file: null,
         };
     }
 

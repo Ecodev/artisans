@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../../../../../admin/users/services/user.service';
 import { Currency, CurrencyManager } from '../../../../../shared/classes/currencyManager';
-import { CreateOrder_createOrder, ProductType, PaymentMethod } from '../../../../../shared/generated-types';
+import { CreateOrder_createOrder, PaymentMethod, ProductType } from '../../../../../shared/generated-types';
+import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
 import { Cart } from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import { CartService } from '../../services/cart.service';
-import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
 
 @Component({
     selector: 'app-create-order',
@@ -80,12 +80,14 @@ export class CreateOrderComponent implements OnInit {
         const cart = Cart.getById(+this.route.snapshot.params['cartId']);
         if (cart) {
             this.cart = cart;
-            this.virtualOnly = !cart.productLines.some(line => line.type === ProductType.paper || line.type === ProductType.both);
+
+            // Not used for now, but we'll maybe need it soon
+            // this.virtualOnly = !cart.productLines.some(line => line.type === ProductType.paper || line.type === ProductType.both);
         }
 
         const viewer = this.route.snapshot.data.viewer.model;
 
-        this.billingForm = new FormGroup({
+        this.shippingForm = new FormGroup({
             paymentMethod: new FormControl('', [Validators.required]),
             firstName: new FormControl(viewer.firstName, [Validators.required]),
             lastName: new FormControl(viewer.lastName, [Validators.required]),
@@ -95,7 +97,7 @@ export class CreateOrderComponent implements OnInit {
             country: new FormControl(viewer.country, []), // todo : set mandatory
         });
 
-        this.shippingForm = new FormGroup({
+        this.billingForm = new FormGroup({
             sameAsBilling: new FormControl(true),
             firstName: new FormControl(),
             lastName: new FormControl(),

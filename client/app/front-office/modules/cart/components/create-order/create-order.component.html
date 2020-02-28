@@ -2,7 +2,7 @@
 
     <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
 
-        <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+        <div [formGroup]="shippingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
             <h1 class="mat-display-1">Méthode de paiement</h1>
 
             <mat-radio-group aria-label="Select an option" formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
@@ -20,20 +20,24 @@
 
             <!--        <mat-error *ngIf="firstStepForm.get('paymentMethod')?.hasError('required')">Requis</mat-error>-->
 
-            <h1 class="mat-display-1">Adresse de facturation</h1>
-            <app-address [form]="billingForm"></app-address>
+            <h1 class="mat-display-1">Votre adresse</h1>
+
+            <div>
+                <app-address [form]="shippingForm" [readonly]="true"></app-address>
+                <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
+            </div>
 
         </div>
 
-        <div [formGroup]="shippingForm" [fxShow]="!virtualOnly" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+        <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
 
-            <h1 class="mat-display-1">Adresse de livraison</h1>
+            <h1 class="mat-display-1">Adresse de facturation</h1>
 
-            <mat-checkbox (change)="updateAddressRequirements(!$event.checked, shippingForm)" formControlName="sameAsBilling">
-                La même addresse que pour la facturation
+            <mat-checkbox (change)="updateAddressRequirements(!$event.checked, billingForm)" formControlName="sameAsBilling">
+                Identique à mon adresse
             </mat-checkbox>
 
-            <app-address *ngIf="!shippingForm.get('sameAsBilling')?.value" [form]="shippingForm"></app-address>
+            <app-address *ngIf="!billingForm.get('sameAsBilling')?.value" [form]="billingForm"></app-address>
 
         </div>
 

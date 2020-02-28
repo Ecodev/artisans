@@ -41,7 +41,7 @@
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end">
-        <button (click)="update()" [disabled]="form.invalid" color="primary" mat-flat-button>
+        <button (click)="update(true)" [disabled]="form.invalid" color="primary" mat-flat-button>
             <natural-icon name="save"></natural-icon>
             Enregistrer
         </button>

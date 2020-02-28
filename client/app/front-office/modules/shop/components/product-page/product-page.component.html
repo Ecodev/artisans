@@ -80,7 +80,10 @@
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div fxLayout="column" fxLayoutAlign="start center">
+                    <div fxLayout="column"
+                         fxLayoutAlign="start center"
+                         *ngIf="data.model.type === ProductType.both || data.model.type === ProductType.paper"
+                    >
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>

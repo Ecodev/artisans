@@ -64,6 +64,7 @@
                 <ng-container matColumnDef="status">
                     <th *matHeaderCellDef mat-header-cell natural-5em-column>Status</th>
                     <td *matCellDef="let element" mat-cell>{{ element.status | enum: 'OrderStatus' | async}}</td>
+                    <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">

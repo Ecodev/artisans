@@ -10,9 +10,6 @@ const routes: Routes = [
         path: 'commande/:cartId',
         component: CreateOrderComponent,
         resolve: {viewer: ViewerResolver},
-
-        // todo : ideally remove guard, and provide form in CreateOrderComponent as stated in
-        // https://projects.invisionapp.com/share/X6RSC2TZGNF#/screens/369040799
         canActivate: [AuthGuard],
     },
     {
@@ -23,7 +20,6 @@ const routes: Routes = [
         path: ':cartId',
         component: CartComponent,
     },
-
 ];
 
 @NgModule({

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../../../../../admin/users/services/user.service';
 import { Currency, CurrencyManager } from '../../../../../shared/classes/currencyManager';
-import { CreateOrder_createOrder, PaymentMethod, ProductType } from '../../../../../shared/generated-types';
+import { BankingInfosVariables, CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
 import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
 import { Cart } from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
@@ -58,6 +58,14 @@ export class CreateOrderComponent implements OnInit {
     public PaymentMethod = PaymentMethod;
 
     /**
+     * If true, cart is hidden and confirmation message is shown.
+     * We could use dedicated "empty" component but this way we spare some app weight. We can as well use previous form values.
+     */
+    public showConfirmationMessage: boolean;
+
+    public bvrData: BankingInfosVariables;
+
+    /**
      * Banking payment config
      */
     private paymentConfig: FrontEndConfig | null = null;
@@ -81,11 +89,20 @@ export class CreateOrderComponent implements OnInit {
         if (cart) {
             this.cart = cart;
 
+            if (cart.isEmpty()) {
+                this.router.navigateByUrl('/panier/0');
+            }
+
             // Not used for now, but we'll maybe need it soon
             // this.virtualOnly = !cart.productLines.some(line => line.type === ProductType.paper || line.type === ProductType.both);
         }
 
         const viewer = this.route.snapshot.data.viewer.model;
+
+        this.bvrData = {
+            user: viewer.id,
+            amount: this.cart.totalTaxInc,
+        };
 
         this.shippingForm = new FormGroup({
             paymentMethod: new FormControl('', [Validators.required]),
@@ -128,14 +145,14 @@ export class CreateOrderComponent implements OnInit {
         });
     }
 
-    public confirm(): void {
-        const paymentMethod = this.billingForm.get('paymentMethod');
+    public createOrder(): void {
+        const paymentMethod = this.shippingForm.get('paymentMethod');
         if (!paymentMethod) {
             return;
         }
 
         this.cartService.save(this.cart, paymentMethod.value).subscribe(order => {
-            this.cart.empty();
+
             if (!order) {
                 return;
             }
@@ -144,9 +161,16 @@ export class CreateOrderComponent implements OnInit {
             if (paymentMethod.value === PaymentMethod.datatrans) {
                 this.datatrans(order, this.cart.totalTaxInc, CurrencyManager.current.value);
             } else {
-                this.alertService.info('Votre commande a bien été enregistrée');
+                this.confirmationRedirect();
             }
         });
+    }
+
+    public confirmationRedirect() {
+
+        this.cart.empty();
+        this.showConfirmationMessage = true;
+
     }
 
     private datatrans(order: CreateOrder_createOrder, amount: number, currency: Currency): void {
@@ -175,6 +199,7 @@ export class CreateOrderComponent implements OnInit {
                 endpoint: this.paymentConfig.datatrans.endpoint,
             },
             success: () => {
+                this.confirmationRedirect();
                 this.alertService.info('Paiement réussi');
             },
             error: (data) => {

@@ -55,6 +55,7 @@ export class HomepageComponent implements OnInit {
     }
 
     public ngOnInit(): void {
+
         this.viewer = this.route.snapshot.data.viewer.model;
 
         // News

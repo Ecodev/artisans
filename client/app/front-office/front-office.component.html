@@ -27,6 +27,10 @@
         <!-- menu mobile -->
         <div id="mobile-menu">
             <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context:{ $implicit: mobileNavigation }"></ng-container>
+
+            <ul *ngIf="viewer?.role === UserRole.administrator">
+                <li><a routerLink="/admin" matRipple>Admnistration</a></li>
+            </ul>
         </div>
     </mat-sidenav>
 
@@ -60,6 +64,7 @@
                         <button (click)="CurrencyManager.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
                         <button (click)="CurrencyManager.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
                     </mat-menu>
+                    <a *ngIf="viewer?.role === UserRole.administrator" routerLink="/admin" mat-button>Admnistration</a>
                     <a *ngFor="let item of topNavigation" [routerLink]="item.link" mat-button> {{ item.display }}</a>
                 </div>
             </div>

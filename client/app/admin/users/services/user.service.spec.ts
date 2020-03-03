@@ -35,7 +35,7 @@ describe('UserService', () => {
 
     it('should get current user', fakeAsync(inject([UserService], (service: UserService) => {
         let actual: any = null;
-        service.getViewer().subscribe(v => actual = v);
+        service.fetchViewer().subscribe(v => actual = v);
         tick(1000);
 
         expect(actual.__typename).toBe('User');

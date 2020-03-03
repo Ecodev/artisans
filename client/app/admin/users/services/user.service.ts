@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService } from '@ecodev/natural';
+import { FormAsyncValidators, FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { DataProxy } from 'apollo-cache';
 import gql from 'graphql-tag';
@@ -9,6 +9,7 @@ import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from '../../../front-office/modules/cart/services/cart.service';
 import { CurrencyManager } from '../../../shared/classes/currencyManager';
+import { UpToDateSubject } from '../../../shared/classes/up-to-date-subject';
 import {
     CreateUser,
     CreateUserVariables,
@@ -67,9 +68,9 @@ export class UserService extends NaturalAbstractModelService<User['user'],
     any> {
 
     /**
-     * Should be used only by getViewer and cacheViewer
+     * Should be used only by fetchViewer and cacheViewer
      */
-    private viewerCache: CurrentUserForProfile['viewer'] | null = null;
+    private readonly viewer = new UpToDateSubject<CurrentUserForProfile['viewer']>(null);
 
     constructor(apollo: Apollo,
                 protected router: Router,
@@ -123,7 +124,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                 update: (proxy: DataProxy, result) => {
 
                     const login = (result.data as Login).login;
-                    this.cacheViewer(login);
+                    this.viewer.next(login);
 
                     // Inject the freshly logged in user as the current user into Apollo data store
                     const data = {viewer: login};
@@ -149,7 +150,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             }).subscribe(result => {
                 const v = (result.data as Logout).logout;
 
-                this.cacheViewer(null);
+                this.viewer.next(null);
                 CurrencyManager.updateLockedStatus(null);
                 (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
                     subject.next(v);
@@ -160,35 +161,57 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return subject;
     }
 
-    public getViewer(): Observable<CurrentUserForProfile['viewer']> {
+    /**
+     * Returns the current viewer from server or from cache as a one shot observable.
+     *
+     * @param expirationTolerance If provided, return cached viewer if it has been fetched more recently than the given delay in ms
+     */
+    public fetchViewer(expirationTolerance?: number): Observable<CurrentUserForProfile['viewer']> {
 
-        if (this.viewerCache) {
-            return of(this.viewerCache);
+        const viewer = this.getViewerValue(expirationTolerance);
+
+        if (viewer) {
+            return of(viewer);
         }
 
         return this.apollo.query<CurrentUserForProfile>({
             query: currentUserForProfileQuery,
         }).pipe(map(result => {
-            this.cacheViewer(result.data.viewer);
+            this.viewer.next(result.data.viewer);
             return result.data.viewer;
         }));
     }
 
-    public getNextCodeAvailable(): Observable<number> {
+    /**
+     *
+     * @param expirationTolerance If provided, return cached viewer more recently than the given delay in ms
+     */
+    public getViewerValue(expirationTolerance?: number) {
+        return this.viewer.getUpToDateValue(expirationTolerance || 0);
+    }
 
+    /**
+     * Return observable that emits on changes about the viewer.
+     *
+     * Each refetch from the **server** update the viewer. "Refetches" from cache don't update the viewer
+     */
+    public getViewerObservable(): Observable<CurrentUserForProfile['viewer']> {
+        return this.viewer.asObservable();
+    }
+
+    public getNextCodeAvailable(): Observable<number> {
         return this.apollo.query<NextUserCode>({
             query: nextCodeAvailableQuery,
         }).pipe(map(result => {
             return result.data.nextUserCode;
         }));
-
     }
 
     /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
     public resolveViewer(): Observable<{ model: CurrentUserForProfile['viewer'] }> {
-        return this.getViewer().pipe(map(result => {
+        return this.fetchViewer(1000).pipe(map(result => {
             CurrencyManager.updateLockedStatus(result);
             return {model: result};
         }));
@@ -263,33 +286,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             webTemporaryAccess: false,
             country: null,
         };
-    }
-
-    protected getDefaultForClient(): Literal {
-        return {};
-    }
-
-    /**
-     * This function caches the viewer for short duration
-     *
-     * This feature responds to two needs :
-     *   - Expire viewer to allow re-resolve for key pages
-     *     - Profile : in cache status or account balance has change
-     *     - Doors : in case permissions have changed
-     *     - Admin : in cache permissions have changed
-     *
-     *   - Serve from cache to prevent duplicate query calls when multiple services initialization queue (preventing batching):
-     *     - Route Guards, then
-     *     - Resolvers, then
-     *     - Components initialization
-     *
-     * This is kind of easiest possible "debounce" like with expiration feature
-     */
-    private cacheViewer(user) {
-        this.viewerCache = user;
-        setTimeout(() => {
-            this.viewerCache = null;
-        }, 1000);
     }
 
 }

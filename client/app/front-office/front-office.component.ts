@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NaturalAbstractController, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
+import { UserService } from '../admin/users/services/user.service';
 import { Currency, CurrencyManager } from '../shared/classes/currencyManager';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
 import { CartService } from './modules/cart/services/cart.service';
@@ -19,7 +20,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public searchTerm = '';
     public menuOpened = false;
 
-    public UserRole = UserRole;
     public viewer: CurrentUserForProfile_viewer | null;
 
     /**
@@ -113,8 +113,12 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
 
     public Currency = Currency;
     public CurrencyManager = CurrencyManager;
+    public UserRole = UserRole;
 
-    constructor(private route: ActivatedRoute, private router: Router, private navigationService: NavigationService) {
+    constructor(private route: ActivatedRoute,
+                private router: Router,
+                private navigationService: NavigationService,
+                public userService: UserService) {
         super();
 
         // We can have multiple parallel carts
@@ -125,16 +129,10 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
 
     public ngOnInit(): void {
 
-        const viewer = this.route.snapshot.data.viewer;
-        this.viewer = viewer ? viewer.model as CurrentUserForProfile_viewer : null;
+        this.userService.getViewerObservable().subscribe(viewer => this.viewer = viewer);
 
         // Setup mobile menu with items from top menu that are missing on main menu
         this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];
-
-        if (this.viewer && this.viewer.role === UserRole.administrator) {
-            this.topNavigation.splice(0, 0, {display: 'Administration', link: '/admin'});
-            this.mobileNavigation.push({display: 'Administration', link: '/admin'});
-        }
 
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))

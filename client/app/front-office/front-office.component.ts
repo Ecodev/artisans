@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NaturalAbstractController, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
@@ -8,6 +8,7 @@ import { Currency, CurrencyService } from '../shared/services/currency.service';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
 import { CartService } from './modules/cart/services/cart.service';
 import { MenuItem, NavigationService } from './services/navigation.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-front-office',
@@ -121,6 +122,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         public userService: UserService,
         public currencyService: CurrencyService,
         cartService: CartService,
+        @Inject(DOCUMENT) private readonly document: Document,
     ) {
         super();
 
@@ -139,7 +141,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe(() => {
-                const contentContainer = document.querySelector('.mat-sidenav-content');
+                const contentContainer = this.document.querySelector('.mat-sidenav-content');
                 if (contentContainer) {
                     contentContainer.scroll({top: 0});
                 }

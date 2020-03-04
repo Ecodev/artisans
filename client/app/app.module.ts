@@ -1,7 +1,7 @@
-import { registerLocaleData } from '@angular/common';
+import { isPlatformBrowser, registerLocaleData } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { Inject, LOCALE_ID, NgModule, PLATFORM_ID } from '@angular/core';
 
 import { DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -19,7 +19,11 @@ import { AppComponent } from './app.component';
 import { FrontOfficeModule } from './front-office/front-office.module';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import { apolloDefaultOptions, createApolloLink } from './shared/config/apolloDefaultOptions';
+import {
+    apolloDefaultOptions,
+    createApolloLink,
+    createApolloLinkForServer,
+} from './shared/config/apolloDefaultOptions';
 import { ArtisansModule } from './shared/modules/artisans.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
@@ -36,6 +40,7 @@ registerLocaleData(localeFRCH);
         ErrorComponent,
     ],
     imports: [
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserModule,
         BrowserAnimationsModule,
         MaterialModule,
@@ -78,8 +83,11 @@ registerLocaleData(localeFRCH);
             useClass: LocalizedPaginatorIntlService,
         },
         {
+            // Here we must use a factory that return directly the value, otherwise it will
+            // crash when running on server because the value does not exist (but the factory will
+            // never actually be called on server, so the server will not see the missing value)
             provide: SESSION_STORAGE,
-            useValue: sessionStorage,
+            useFactory: () => sessionStorage,
         },
     ],
     bootstrap: [AppComponent],
@@ -91,15 +99,23 @@ export class AppModule {
                 alertService: NaturalAlertService,
                 httpBatchLink: HttpBatchLink,
                 dateAdapter: DateAdapter<Date>,
+                // tslint:disable-next-line:ban-types
+                @Inject(PLATFORM_ID) readonly platformId: Object,
     ) {
+        // tells if it's browser or server
+        const isBrowser = isPlatformBrowser(platformId);
+
         dateAdapter.setLocale('fr-ch');
 
-        const link = createApolloLink(networkActivityService, alertService, httpBatchLink);
+        const link = isBrowser ?
+            createApolloLink(networkActivityService, alertService, httpBatchLink) :
+            createApolloLinkForServer(httpBatchLink);
 
         apollo.create({
             link: link,
             cache: new InMemoryCache(),
             defaultOptions: apolloDefaultOptions,
+            ssrMode: true,
         });
     }
 }

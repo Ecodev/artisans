@@ -120,11 +120,59 @@
                     "options": {
                         "tsConfig": [
                             "client/tsconfig.app.json",
-                            "client/tsconfig.spec.json"
+                            "client/tsconfig.spec.json",
+                            "client/tsconfig.server.json"
                         ],
                         "exclude": [
                             "**/node_modules/**"
                         ]
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/artisans/server",
+                        "main": "server.ts",
+                        "tsConfig": "client/tsconfig.server.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "outputHashing": "media",
+                            "fileReplacements": [
+                                {
+                                    "replace": "client/environments/environment.ts",
+                                    "with": "client/environments/environment.prod.ts"
+                                }
+                            ],
+                            "sourceMap": true,
+                            "optimization": false
+                        }
+                    }
+                },
+                "serve-ssr": {
+                    "builder": "@nguniversal/builders:ssr-dev-server",
+                    "options": {
+                        "browserTarget": "artisans:build",
+                        "serverTarget": "artisans:server"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "artisans:build:production",
+                            "serverTarget": "artisans:server:production"
+                        }
+                    }
+                },
+                "prerender": {
+                    "builder": "@nguniversal/builders:prerender",
+                    "options": {
+                        "browserTarget": "artisans:build:production",
+                        "serverTarget": "artisans:server:production",
+                        "routes": [
+                            "/"
+                        ]
+                    },
+                    "configurations": {
+                        "production": {}
                     }
                 }
             }

@@ -9,7 +9,7 @@ export function moneyRoundUp(amount: number): number {
  * Copy text to clipboard.
  * Accepts line breaks \n as textarea do.
  */
-export function copy(value: string): void {
+export function copy(document: Document, value: string): void {
     const input = document.createElement('textarea');
     document.body.append(input);
     input.value = value;

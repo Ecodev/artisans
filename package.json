@@ -11,7 +11,11 @@
     "test": "yarn codegen && ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "codegen": "./bin/dump-schema && apollo client:codegen -c apollo.config.js  --outputFlat --target typescript client/app/shared/generated-types.ts"
+    "codegen": "./bin/dump-schema && apollo client:codegen -c apollo.config.js  --outputFlat --target typescript client/app/shared/generated-types.ts",
+    "dev:ssr": "ng run artisans:serve-ssr",
+    "serve:ssr": "node dist/artisans/server/main.js",
+    "build:ssr": "ng build --prod && ng run artisans:server:production",
+    "prerender": "ng run artisans:prerender"
   },
   "browser": {
     "crypto": false
@@ -28,9 +32,11 @@
     "@angular/material": "^9.2.0",
     "@angular/platform-browser": "~9.1.0",
     "@angular/platform-browser-dynamic": "~9.1.0",
+    "@angular/platform-server": "^9.1.1",
     "@angular/router": "~9.1.0",
     "@ecodev/fab-speed-dial": "^5.0.2",
     "@ecodev/natural": "^14.0.4",
+    "@nguniversal/express-engine": "^9.1.0",
     "angular-file": "^3.0.1",
     "angular-particle-effect-button": "^0.0.50",
     "apollo": "^2.25.0",
@@ -46,6 +52,7 @@
     "core-js": "^3.4.7",
     "crypto-js": "^4.0.0",
     "decimal.js": "^10.2.0",
+    "express": "^4.17.1",
     "graphql": "^14.4.2",
     "graphql-tag": "^2.10.0",
     "graphql-tools": "^4.0.6",
@@ -65,6 +72,8 @@
     "@angular-devkit/build-angular": "~0.901.0",
     "@angular/cli": "~9.1.0",
     "@angular/compiler-cli": "~9.1.0",
+    "@nguniversal/builders": "^9.1.0",
+    "@types/express": "^4.17.4",
     "@types/jasmine": "~3.5.10",
     "@types/jasminewd2": "~2.0.8",
     "@types/node": "^12.12.31",

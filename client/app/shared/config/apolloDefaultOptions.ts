@@ -46,11 +46,35 @@ function createErrorLink(networkActivityService: NetworkActivityService,
 }
 
 /**
- * Create an Apollo link that support batch, file upload, and network activity
+ * Create a simple Apollo link for server side rendering without network activity, nor upload, nor error alerts
+ *
+ * This function will only be executed in Node environment, so we can access `process`
  */
-export function createApolloLink(networkActivityService: NetworkActivityService,
-                                 alertService: NaturalAlertService,
-                                 httpBatchLink: HttpBatchLink): ApolloLink {
+export function createApolloLinkForServer(
+    httpBatchLink: HttpBatchLink,
+): ApolloLink {
+
+    const hostname = process.cwd().split('/').pop() || 'dev.larevuedurable.com';
+    const options = {
+        uri: 'https://' + hostname + '/graphql', // Must be absolute URL
+        credentials: 'include',
+    };
+
+    // We must allow to connect to self-signed certificate for development environment
+    // Unfortunately, this is only possible to do it globally for the entire process, instead of specifically to our API endpoint
+    // See https://github.com/apollographql/apollo-angular/issues/1354#issue-503860648
+    if (hostname.match(/\.lan$/)) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+    }
+
+    return httpBatchLink.create(options);
+}
+
+export function createApolloLink(
+    networkActivityService: NetworkActivityService,
+    alertService: NaturalAlertService,
+    httpBatchLink: HttpBatchLink,
+): ApolloLink {
     const options = {
         uri: '/graphql',
         credentials: 'include',

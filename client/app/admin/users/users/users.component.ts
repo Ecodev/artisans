@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Inject, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NaturalAbstractList, NaturalQueryVariablesManager, NaturalSearchSelections } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
@@ -8,6 +8,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 import { copy } from '../../../shared/utils';
 import { emailUsersQuery } from '../services/user.queries';
 import { UserService } from '../services/user.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-users',
@@ -28,12 +29,14 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;
 
-    constructor(route: ActivatedRoute,
-                private userService: UserService,
-                injector: Injector,
-                naturalSearchFacetsService: NaturalSearchFacetsService,
-                public permissionsService: PermissionsService,
-                private apollo: Apollo,
+    constructor(
+        route: ActivatedRoute,
+        private userService: UserService,
+        injector: Injector,
+        naturalSearchFacetsService: NaturalSearchFacetsService,
+        public permissionsService: PermissionsService,
+        private apollo: Apollo,
+        @Inject(DOCUMENT) private readonly document: Document,
     ) {
 
         super(userService, injector);
@@ -65,7 +68,7 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
     }
 
     public copy(data: string): void {
-        copy(data);
+        copy(this.document, data);
     }
 
 }

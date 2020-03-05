@@ -8,6 +8,8 @@ import { MaterialModule } from '../shared/modules/material.module';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
+import { CommentComponent } from './comments/comment/comment.component';
+import { CommentsComponent } from './comments/comments/comments.component';
 import { EventComponent } from './events/event/event.component';
 import { EventsComponent } from './events/events/events.component';
 import { NewsComponent } from './newses/news/news.component';
@@ -33,6 +35,8 @@ import { UserComponent } from './users/user/user.component';
         EventComponent,
         SessionsComponent,
         SessionComponent,
+        CommentComponent,
+        CommentsComponent
     ],
     imports: [
         CommonModule,

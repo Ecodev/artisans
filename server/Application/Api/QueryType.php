@@ -12,6 +12,7 @@ use Application\Api\Field\Query\Purchases;
 use Application\Api\Field\Query\UserByToken;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
+use Application\Model\Comment;
 use Application\Model\Country;
 use Application\Model\Event;
 use Application\Model\File;
@@ -61,6 +62,7 @@ class QueryType extends ObjectType
             Standard::buildQuery(User::class),
             Standard::buildQuery(UserTag::class),
             Standard::buildQuery(Country::class),
+            Standard::buildQuery(Comment::class),
         );
 
         $config = [

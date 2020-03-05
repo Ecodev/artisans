@@ -16,9 +16,9 @@
             >
 
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="place">Lieu</span>
-                    <span naturalColumnsPickerColumn="type">Type</span>
+                    <span naturalColumnsPickerColumn="description">Commentaire</span>
+                    <span naturalColumnsPickerColumn="event">News</span>
+                    <span naturalColumnsPickerColumn="news">Actualité</span>
                 </natural-columns-picker>
             </natural-search>
 
@@ -30,24 +30,39 @@
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
 
-                <ng-container matColumnDef="name">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nom</th>
+                <ng-container matColumnDef="description">
+                    <th *matHeaderCellDef mat-header-cell>Commentaire</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <natural-table-button [label]="element.name" [navigate]="['/admin/event', element.id]" matTooltip="Éditer"
+                            <natural-table-button [label]="element.description"
+                                                  [navigate]="['/admin/comment', element.id]"
+                                                  matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="place">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="place">Lieu</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.place }} </td>
-                </ng-container>
+                <ng-container matColumnDef="event">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header="event">Événement</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.event">
+                            <natural-table-button [label]="element.event.name"
+                                                  [navigate]="['/admin/event', element.event.id]"
+                                                  matTooltip="Éditer"
+                            ></natural-table-button>
+                        </div>
+                    </td>                </ng-container>
 
-                <ng-container matColumnDef="type">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="type">Type</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.type }} </td>
+                <ng-container matColumnDef="news">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.news">
+                            <natural-table-button [label]="element.news.name"
+                                                  [navigate]="['/admin/news', element.news.id]"
+                                                  matTooltip="Éditer"
+                            ></natural-table-button>
+                        </div>
+                    </td>
                 </ng-container>
 
             </table>
@@ -71,6 +86,3 @@
 
     </div>
 </div>
-
-<natural-fixed-button *ngIf="permissionsService.crud?.event.create" [routerLink]="['/admin/event/new']" icon="add"
-></natural-fixed-button>

@@ -23,7 +23,7 @@
             </natural-search>
         </div>
 
-        <div class="responsive-table">
+        <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting($event)" [dataSource]="dataSource" mat-table matSort>
 
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>

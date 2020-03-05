@@ -23,6 +23,7 @@ const permissions = gql`
                 user { create }
                 userTag { create }
                 configuration { create }
+                comment { create }
             }
         }
     }

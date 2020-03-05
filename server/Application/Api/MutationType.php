@@ -18,6 +18,7 @@ use Application\Api\Field\Mutation\UpdateOrderStatus;
 use Application\Api\Field\Mutation\UpdatePassword;
 use Application\Api\Field\Mutation\UpdateUser;
 use Application\Api\Field\Standard;
+use Application\Model\Comment;
 use Application\Model\Event;
 use Application\Model\File;
 use Application\Model\Image;
@@ -64,6 +65,7 @@ class MutationType extends ObjectType
             Standard::buildMutation(Subscription::class),
             Standard::buildMutation(User::class),
             Standard::buildMutation(UserTag::class),
+            Standard::buildMutation(Comment::class),
             Standard::buildRelationMutation(UserTag::class, User::class),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),

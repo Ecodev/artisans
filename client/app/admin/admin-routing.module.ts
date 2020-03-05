@@ -4,6 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { NaturalDialogTriggerComponent } from '@ecodev/natural';
 import { AdministrationGuard } from '../shared/guards/administration.guard';
 import { AdminComponent } from './admin/admin.component';
+import { CommentComponent } from './comments/comment/comment.component';
+import { CommentsComponent } from './comments/comments/comments.component';
+import { CommentResolver } from './comments/services/comment.resolver';
 import { EventComponent } from './events/event/event.component';
 import { EventsComponent } from './events/events/events.component';
 import { EventResolver } from './events/services/event.resolver';
@@ -224,6 +227,26 @@ const routes: Routes = [
                             path: ':sessionId', // last
                             component: SessionComponent,
                             resolve: {session: SessionResolver},
+                        },
+                    ],
+                },
+                {
+                    path: 'comment', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                    component: CommentsComponent,
+                    data: {title: 'Commentaires'},
+                },
+                {
+                    path: 'comment',
+                    children: [
+                        {
+                            path: 'new',
+                            component: CommentComponent,
+                            resolve: {comment: CommentResolver},
+                        },
+                        {
+                            path: ':commentId', // last
+                            component: CommentComponent,
+                            resolve: {comment: CommentResolver},
                         },
                     ],
                 },

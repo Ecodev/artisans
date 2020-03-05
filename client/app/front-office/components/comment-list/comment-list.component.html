@@ -1,0 +1,23 @@
+<div fxLayout="column" fxLayoutGap="30px">
+    <div fxLayout="column" fxLayoutAlign="start start" *ngIf="permissionsService.crud?.comment?.create">
+        <mat-form-field [style.width]="'100%'">
+            <mat-label>Rédiger un commentaire</mat-label>
+            <textarea matInput [(ngModel)]="newCommentValue"></textarea>
+        </mat-form-field>
+        <a mat-stroked-button color="primary" (click)="addComment()" [disabled]="publishing">Publier</a>
+    </div>
+
+    <div fxLayout="column" fxLayoutGap="30px" *ngIf="dataSource.data?.items?.length">
+
+        <div *ngFor="let comment of dataSource.data.items" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+            <div class="mat-h2" *ngIf="comment.creator">{{ comment.creator?.name }} :</div>
+            <div class="text-light">Posté le {{ comment.creationDate | date : 'longDate' }}</div>
+            <div [innerHTML]="comment.description" class="mat-h3"></div>
+            <a [routerLink]="['/admin/comment', comment.id]" mat-stroked-button>Éditer</a>
+        </div>
+    </div>
+
+    <div *ngIf="!dataSource.data?.items?.length" class="mat-h3">
+        Aucun commentaire
+    </div>
+</div>

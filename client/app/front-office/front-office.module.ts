@@ -18,6 +18,9 @@ import { SessionPageComponent } from './components/session-page/session-page.com
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
 import { FrontOfficeComponent } from './front-office.component';
 import { ShopModule } from './modules/shop/shop.module';
+import { EventPageComponent } from './components/event-page/event-page.component';
+import { NewsPageComponent } from './components/news-page/news-page.component';
+import { CommentListComponent } from './components/comment-list/comment-list.component';
 
 @NgModule({
     declarations: [
@@ -31,6 +34,9 @@ import { ShopModule } from './modules/shop/shop.module';
         NewsesPageComponent,
         EventsPageComponent,
         DonationComponent,
+        EventPageComponent,
+        NewsPageComponent,
+        CommentListComponent,
     ],
     imports: [
         CommonModule,

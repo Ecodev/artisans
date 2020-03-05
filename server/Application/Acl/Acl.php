@@ -6,6 +6,7 @@ namespace Application\Acl;
 
 use Application\Acl\Assertion\IsMyself;
 use Application\Model\AbstractModel;
+use Application\Model\Comment;
 use Application\Model\Configuration;
 use Application\Model\Country;
 use Application\Model\Event;
@@ -62,6 +63,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $session = new ModelResource(Session::class);
         $subscription = new ModelResource(Subscription::class);
         $country = new ModelResource(Country::class);
+        $comment = new ModelResource(Comment::class);
 
         $this->addResource($product);
         $this->addResource($productTag);
@@ -79,8 +81,9 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->addResource($session);
         $this->addResource($subscription);
         $this->addResource($country);
+        $this->addResource($comment);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country, $comment], ['read']);
 
         $this->allow(User::ROLE_MEMBER, [$user, $userTag], ['read']);
         $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsMyself());
@@ -88,12 +91,13 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->allow(User::ROLE_MEMBER, [$message], ['read']);
         $this->allow(User::ROLE_MEMBER, [$order, $orderLine], ['read']);
         $this->allow(User::ROLE_MEMBER, [$order], ['create']);
+        $this->allow(User::ROLE_MEMBER, [$comment], ['create']); // if grant update, care to GUI button that sends to admin
 
         $this->allow(User::ROLE_FACILITATOR, [$file], ['read', 'update']);
         $this->allow(User::ROLE_FACILITATOR, [$user], ['create', 'update']);
         $this->allow(User::ROLE_FACILITATOR, [$userTag], ['create', 'update', 'delete']);
 
-        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$newsletter], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$configuration], ['create']);

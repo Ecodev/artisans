@@ -32,11 +32,13 @@
 
             <div fxFlex></div>
 
-            <!-- Admin shortcut -->
-            <a *ngIf="data.model.permissions?.update" [routerLink]="['/admin/product', data.model.id]" mat-stroked-button>Administrer</a>
         </div>
 
-        <h1 class="mat-display-1 no-margin-bottom">{{ data.model.name }}</h1>
+        <h1 class="mat-display-1 no-margin-bottom">
+            {{ data.model.name }}
+            <!-- Admin shortcut -->
+            <a *ngIf="data.model.permissions?.update" [routerLink]="['/admin/product', data.model.id]" mat-stroked-button>Administrer</a>
+        </h1>
 
     </div>
 
@@ -73,16 +75,20 @@
             <a mat-flat-button routerLink="/login" [queryParams]="{returnUrl: router.url}"> connectez-vous !</a>
         </div>
 
-        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px">
+        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px" fxLayoutAlign="center">
 
-            <div fxFlex fxLayout="column" fxLayoutAlign="start center" class="frame-green frame" fxLayoutGap="30px">
+            <div fxFlex="50"
+                 fxLayout="column"
+                 fxLayoutAlign="start center"
+                 class="frame-green frame"
+                 fxLayoutGap="30px"
+                 *ngIf="showBuyDigital || showBuyDigital"
+            >
                 <div class="mat-h1">Acheter le numéro</div>
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div fxLayout="column"
-                         fxLayoutAlign="start center"
-                         *ngIf="data.model.type === ProductType.both || data.model.type === ProductType.paper"
+                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyDigital"
                     >
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
@@ -111,7 +117,7 @@
                 <a mat-button routerLink="/larevuedurable/articles" *ngIf="data.model.reviewNumber">ou acheter par articles</a>
             </div>
 
-            <div fxFlex class="frame-primary frame" *ngIf="!viewer?.subscriptionType">
+            <div fxFlex="50" class="frame-primary frame" *ngIf="!viewer?.subscriptionType">
                 <h1 class="mat-h1">S'abonner</h1>
                 <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
             </div>

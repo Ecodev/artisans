@@ -62,6 +62,11 @@ export class ProductPageComponent
      */
     public showBuyDigital = false;
 
+    /**
+     * Hide buy paper version if it has already been bought as it can be bought only once.
+     */
+    public showBuyPaper = false;
+
     constructor(
         private productService: ProductService,
         private purchaseService: PurchaseService,
@@ -72,7 +77,6 @@ export class ProductPageComponent
 
     ngOnInit(): void {
         super.ngOnInit();
-
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 
         const qvm = new NaturalQueryVariablesManager<PurchasesVariables>();
@@ -83,10 +87,13 @@ export class ProductPageComponent
         // Show button to buy only if we didn't already bought those version
         this.purchaseService.getAll(qvm).subscribe(purchases => {
             const digital = [ProductType.both, ProductType.digital];
+            const paper = [ProductType.both, ProductType.paper];
 
             this.showBuyDigital = digital.includes(this.data.model.type)
                                   && !purchases.items.some(orderLine => digital.includes(orderLine.type))
                                   && !this.data.model.file; // A digital might be allowed via subscription, not purchase
+
+            this.showBuyPaper = paper.includes(this.data.model.type);
         });
     }
 

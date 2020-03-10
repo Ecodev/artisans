@@ -3,8 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
 import { UserService } from '../../../../../admin/users/services/user.service';
+<<<<<<< HEAD
 import { Currency, CurrencyService } from '../../../../../shared/services/currency.service';
 import { BankingInfosVariables, CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
+=======
+import { Currency, CurrencyManager } from '../../../../../shared/classes/currencyManager';
+import { CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
+>>>>>>> 62e690a4... Dont display BVR data on order confirmation page
 import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
 import { Cart } from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
@@ -59,8 +64,6 @@ export class CreateOrderComponent implements OnInit {
      */
     public showConfirmationMessage: boolean;
 
-    public bvrData: BankingInfosVariables;
-
     /**
      * Banking payment config
      */
@@ -96,11 +99,6 @@ export class CreateOrderComponent implements OnInit {
         }
 
         const viewer = this.route.snapshot.data.viewer.model;
-
-        this.bvrData = {
-            user: viewer.id,
-            amount: this.cart.totalTaxInc,
-        };
 
         this.shippingForm = new FormGroup({
             paymentMethod: new FormControl('', [Validators.required]),

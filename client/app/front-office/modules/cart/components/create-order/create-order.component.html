@@ -76,9 +76,4 @@
 
 <div *ngIf="showConfirmationMessage" class="container">
     <h1 class="mat-display-1">Merci pour votre commande</h1>
-
-    <app-bvr [bankingData]="bvrData"
-             *ngIf="shippingForm.get('paymentMethod').value === PaymentMethod.ebanking || shippingForm.get('paymentMethod').value === PaymentMethod.bvr"
-    ></app-bvr>
-
 </div>

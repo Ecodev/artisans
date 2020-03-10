@@ -1,10 +1,11 @@
 import gql from 'graphql-tag';
-import { userMetaFragment } from '../../../shared/queries/fragments';
+import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
 
 const commentMetaFragment = gql`
     fragment commentMeta on Comment {
         id
         description
+        authorName
         event {
             id
             name
@@ -21,8 +22,12 @@ const commentMetaFragment = gql`
         updater {
             ...userMeta
         }
+        permissions {
+            ...permissions
+        }
     }
     ${userMetaFragment}
+    ${permissionsFragment}
 `;
 
 export const commentsQuery = gql`

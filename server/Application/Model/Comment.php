@@ -91,4 +91,16 @@ class Comment extends AbstractModel
     {
         return $this->news;
     }
+
+    /**
+     * Get owner name
+     *
+     * @return string
+     */
+    public function getAuthorName(): string
+    {
+        return _em()->getRepository(self::class)->getAclFilter()->runWithoutAcl(function () {
+            return $this->getOwner()->getName();
+        });
+    }
 }

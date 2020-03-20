@@ -1,0 +1,13 @@
+{
+    "schemaPath": "client/app/shared/generated-schema.graphql",
+    "extensions": {
+        "endpoints": {
+            "Default (https://artisans.lan/graphql)": {
+                "url": "https://artisans.lan/graphql",
+                "headers": {
+                    "user-agent": "JS GraphQL"
+                }
+            }
+        }
+    }
+}

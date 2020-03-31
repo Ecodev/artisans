@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 import { keyBy } from 'lodash';
 import { ProductType, Subscriptions_subscriptions_items } from '../../../../../shared/generated-types';
 import { Cart } from '../../../cart/classes/cart';
+import { EmailsComponent } from '../emails/emails.component';
 import { SubscriptionService } from './subscription.service';
-import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 
 @Component({
     selector: 'app-subscriptions',
@@ -22,11 +23,13 @@ export class SubscriptionsComponent implements OnInit {
         private subscriptionService: SubscriptionService,
         private router: Router,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
-    ) {
+        public dialog: MatDialog,
+        private route: ActivatedRoute) {
     }
 
     ngOnInit() {
         this.subscriptionService.getAll(new NaturalQueryVariablesManager()).subscribe(res => this.subscriptions = keyBy(res.items, 'id'));
+
     }
 
     public order(id: string, type: ProductType, withEmails?: boolean) {
@@ -34,15 +37,22 @@ export class SubscriptionsComponent implements OnInit {
         const subscribeFn = (emails?: string[]) => {
             const cart = new Cart(this.sessionStorage);
             cart.setSubscription(this.subscriptions[id], type, emails);
-
-            console.log('cart', cart);
             this.router.navigateByUrl('/panier/' + cart.id);
         };
 
         if (!withEmails) {
             subscribeFn();
         } else {
-            setTimeout(() => subscribeFn(['asdf@qwer.com', 'qwer@asdf.com']), 2000);
+
+            const viewer = this.route.snapshot.data.viewer;
+            const dialogData: MatDialogConfig = {data: {user: viewer ? viewer.model : null}};
+
+            this.dialog.open(EmailsComponent, dialogData).afterClosed().subscribe(result => {
+                if (result) {
+                    subscribeFn(result);
+                }
+            });
+
         }
     }
 

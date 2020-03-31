@@ -8,6 +8,7 @@ import { ProductsPageComponent } from './components/products/products-page.compo
 import { SubscribeComponent } from './components/subscribe/subscribe.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 import { ShopRoutingModule } from './shop-routing.module';
+import { EmailsComponent } from './components/emails/emails.component';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { ShopRoutingModule } from './shop-routing.module';
         ProductsPageComponent,
         SubscribeComponent,
         SubscriptionsComponent,
+        EmailsComponent,
     ],
     imports: [
         CommonModule,

@@ -1,20 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
+import { NaturalAlertService, NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 import { UserService } from '../../../../../admin/users/services/user.service';
-<<<<<<< HEAD
-import { Currency, CurrencyService } from '../../../../../shared/services/currency.service';
-import { BankingInfosVariables, CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
-=======
-import { Currency, CurrencyManager } from '../../../../../shared/classes/currencyManager';
+import { Currency } from '../../../../../shared/classes/currencyManager';
 import { CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
->>>>>>> 62e690a4... Dont display BVR data on order confirmation page
 import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
+import { Currency, CurrencyService } from '../../../../../shared/services/currency.service';
 import { Cart } from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import { CartService } from '../../services/cart.service';
-import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 
 @Component({
     selector: 'app-create-order',

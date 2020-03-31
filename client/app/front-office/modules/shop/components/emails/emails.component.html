@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Emails des bénéficiaires de l'abonnement profesionnel</h2>
+<mat-dialog-content [formGroup]="form">
+
+    <div formArrayName="emails">
+        <div *ngFor="let date of form.get('emails')?.controls; let i = index;"
+             fxLayout="row"
+             fxLayoutAlign="start center"
+             fxLayoutGap="15px"
+        >
+            <mat-form-field fxFlex>
+                <mat-label>Email {{ i }}</mat-label>
+                <input [formControlName]="i" matInput>
+            </mat-form-field>
+        </div>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+    <button mat-button mat-dialog-close>annuler</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+    <button mat-button [mat-dialog-close]="form.get('emails')?.getRawValue()">Valider</button>
+</mat-dialog-actions>

@@ -133,6 +133,6 @@ class LogRepository extends AbstractRepository
 
         $result = $qb->getQuery()->setMaxResults(1)->getOneOrNullResult();
 
-        return $result['creationDate'];
+        return $result['creationDate'] ?? null;
     }
 }

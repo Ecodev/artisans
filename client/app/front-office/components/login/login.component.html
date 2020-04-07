@@ -2,39 +2,38 @@
 
     <div class="padding" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
 
-        <form fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px" style="min-width:300px">
+        <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="15px" style="min-width:300px">
 
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input [(ngModel)]="loginForm.email"
-                       [disabled]="loading"
-                       autocapitalize="off"
-                       autocorrect="off"
-                       autofocus
-                       matInput
-                       name="email"
+                <input matInput
+                       formControlName="email"
                        required="required"
+                       autofocus
+                       autocorrect="off"
+                       autocapitalize="off"
                        spellcheck="false"
                        type="email"
                 >
+                <mat-error *ngIf="form.get('email')?.hasError('maxlength')" i18n>Maximum {{ form.get('email').errors.maxlength.requiredLength }} caractères</mat-error>
+                <mat-error *ngIf="form.get('email')?.hasError('email')" i18n>Adresse email invalide</mat-error>
+                <mat-error *ngIf="form.get('email')?.hasError('required')" i18n>Requis</mat-error>
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Mot de passe</mat-label>
-                <input [(ngModel)]="loginForm.password"
-                       [disabled]="loading"
-                       color="warn"
-                       matInput
-                       name="password"
+                <input matInput
+                       formControlName="password"
                        required="required"
                        type="password"
                 >
+                <mat-error *ngIf="form.get('password')?.hasError('required')" i18n>Requis</mat-error>
             </mat-form-field>
 
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
                 <a mat-button routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
                 <button (click)="login()"
-                        [disabled]="loading || !loginForm.email || !loginForm.password"
+                        [disabled]="form.disabled || form.invalid"
                         color="primary"
                         i18n
                         mat-raised-button

@@ -29,7 +29,7 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
     ) {
         super();
         this.form = this.fb.group({
-            email: ['', [Validators.email, Validators.maxLength(191)]],
+            email: ['', [Validators.required, Validators.email, Validators.maxLength(191)]],
             password: ['', [Validators.required]],
         });
     }

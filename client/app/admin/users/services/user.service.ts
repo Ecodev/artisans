@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import { Observable, of, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CartService } from '../../../front-office/modules/cart/services/cart.service';
-import { CurrencyManager } from '../../../shared/classes/currencyManager';
+import { CurrencyService } from '../../../shared/services/currency.service';
 import { UpToDateSubject } from '../../../shared/classes/up-to-date-subject';
 import {
     CreateUser,
@@ -72,9 +72,11 @@ export class UserService extends NaturalAbstractModelService<User['user'],
      */
     private readonly viewer = new UpToDateSubject<CurrentUserForProfile['viewer']>(null);
 
-    constructor(apollo: Apollo,
-                protected router: Router,
-                private permissionsService: PermissionsService,
+    constructor(
+        apollo: Apollo,
+        protected router: Router,
+        private permissionsService: PermissionsService,
+        private currencyService: CurrencyService,
     ) {
 
         super(apollo,
@@ -133,7 +135,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
 
                     // Be sure that we don't have leftovers from another user
                     CartService.clearCarts();
-                    CurrencyManager.updateLockedStatus(login);
+                    this.currencyService.updateLockedStatus(login);
                 },
             }).pipe(map(result => (result.data as Login).login)).subscribe(subject);
         });
@@ -151,7 +153,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                 const v = (result.data as Logout).logout;
 
                 this.viewer.next(null);
-                CurrencyManager.updateLockedStatus(null);
+                this.currencyService.updateLockedStatus(null);
                 (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
                     subject.next(v);
                 });
@@ -212,7 +214,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
      */
     public resolveViewer(): Observable<{ model: CurrentUserForProfile['viewer'] }> {
         return this.fetchViewer(1000).pipe(map(result => {
-            CurrencyManager.updateLockedStatus(result);
+            this.currencyService.updateLockedStatus(result);
             return {model: result};
         }));
     }

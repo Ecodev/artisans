@@ -5,14 +5,20 @@ import { FormValidators, Literal } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { AnonymousUserService } from './anonymous-user.service';
+import { CurrencyService } from '../../../shared/services/currency.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NewUserService extends AnonymousUserService {
 
-    constructor(apollo: Apollo, router: Router, permissionsService: PermissionsService) {
-        super(apollo, router, permissionsService);
+    constructor(
+        apollo: Apollo,
+        router: Router,
+        permissionsService: PermissionsService,
+        currencyService: CurrencyService,
+    ) {
+        super(apollo, router, permissionsService, currencyService);
     }
 
     public getFormValidators(): FormValidators {

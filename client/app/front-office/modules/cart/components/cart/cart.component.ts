@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService } from '@ecodev/natural';
-import { CurrencyManager } from '../../../../../shared/classes/currencyManager';
+import { CurrencyService } from '../../../../../shared/services/currency.service';
 import { ProductType } from '../../../../../shared/generated-types';
 import { Cart, CartLineProduct } from '../../classes/cart';
 import { CartService } from '../../services/cart.service';
@@ -21,20 +21,17 @@ export class CartComponent implements OnInit {
     public CartService = CartService;
 
     /**
-     * For template usage
-     */
-    public CurrencyManager = CurrencyManager;
-
-    /**
      * Eligible cart for Order
      */
     public cart: Cart;
 
-    constructor(public alertService: NaturalAlertService,
-                public router: Router,
-                private route: ActivatedRoute,
-                public cartService: CartService) {
-
+    constructor(
+        public alertService: NaturalAlertService,
+        public router: Router,
+        private route: ActivatedRoute,
+        public cartService: CartService,
+        public currencyService: CurrencyService,
+    ) {
     }
 
     public ngOnInit(): void {

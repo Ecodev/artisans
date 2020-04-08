@@ -4,7 +4,7 @@ import { NaturalAbstractController, NaturalSearchSelections, toUrl } from '@ecod
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
 import { UserService } from '../admin/users/services/user.service';
-import { Currency, CurrencyManager } from '../shared/classes/currencyManager';
+import { Currency, CurrencyService } from '../shared/services/currency.service';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
 import { CartService } from './modules/cart/services/cart.service';
 import { MenuItem, NavigationService } from './services/navigation.service';
@@ -112,19 +112,20 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public mobileNavigation: MenuItem[] = [];
 
     public Currency = Currency;
-    public CurrencyManager = CurrencyManager;
     public UserRole = UserRole;
 
-    constructor(private route: ActivatedRoute,
-                private router: Router,
-                private navigationService: NavigationService,
-                public userService: UserService) {
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private navigationService: NavigationService,
+        public userService: UserService,
+        public currencyService: CurrencyService,
+    ) {
         super();
 
         // We can have multiple parallel carts
         // We have to call first a cart that will stay at index zero of list of carts. BOComponent is earliest place for that.
         CartService.initGlobalCart();
-
     }
 
     public ngOnInit(): void {

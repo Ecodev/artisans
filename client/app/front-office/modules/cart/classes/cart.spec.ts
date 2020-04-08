@@ -1,4 +1,4 @@
-import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
+import { Currency } from '../../../../shared/services/currency.service';
 import { Product, ProductType } from '../../../../shared/generated-types';
 import { CartService } from '../services/cart.service';
 import { Cart, CartLine } from './cart';
@@ -31,7 +31,7 @@ describe('CartService', () => {
     beforeEach(() => {
         cart = new Cart();
         // Ensure that we always test in CHF
-        CurrencyManager.current.next(Currency.CHF);
+        Cart.setCurrency(Currency.CHF);
     });
 
     it('should be created', () => {

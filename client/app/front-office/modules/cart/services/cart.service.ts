@@ -2,8 +2,14 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { OrderService } from '../../../../admin/order/services/order.service';
-import { Currency, CurrencyManager } from '../../../../shared/classes/currencyManager';
-import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType } from '../../../../shared/generated-types';
+import { Currency, CurrencyService } from '../../../../shared/services/currency.service';
+import {
+    CreateOrder_createOrder,
+    OrderInput,
+    OrderLineInput,
+    PaymentMethod,
+    ProductType,
+} from '../../../../shared/generated-types';
 import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
 
@@ -15,13 +21,15 @@ export class CartService {
     public static _globalCart: Cart;
 
     public static clearCarts() {
-        Cart.carts.forEach(c => c.empty());
-        Cart.carts.length = 0;
-        sessionStorage.setItem(Cart.storageKey, '');
+        Cart.clearCarts();
         CartService.initGlobalCart();
     }
 
-    constructor(private orderService: OrderService, private dialogService: MatDialog) {
+    constructor(
+        private orderService: OrderService,
+        private dialogService: MatDialog,
+        private currencyService: CurrencyService,
+    ) {
 
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
         // fromEvent<StorageEvent>(window, 'storage').pipe(
@@ -33,7 +41,7 @@ export class CartService {
         // ).subscribe();
 
         // On currency change, update carts totals
-        CurrencyManager.current.subscribe(() => Cart.carts.forEach(cart => cart.computeTotals()));
+        this.currencyService.current.subscribe(currency => Cart.setCurrency(currency));
     }
 
     public static get globalCart(): Cart {
@@ -51,7 +59,7 @@ export class CartService {
     }
 
     public save(cart: Cart, paymentMethod: PaymentMethod): Observable<CreateOrder_createOrder | null> {
-        const isCHF = CurrencyManager.current.value === Currency.CHF;
+        const isCHF = this.currencyService.current.value === Currency.CHF;
         const orderLines: OrderLineInput[] = cart.productLines.map((line) => {
             return {
                 product: line.product.id,

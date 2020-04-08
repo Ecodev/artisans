@@ -64,7 +64,7 @@
 
         <div fxLayout="column" fxLayoutAlign="start end">
             <div class="mat-h1">Prix total</div>
-            <div class="mat-display-1">{{ cart.totalTaxInc | currency : CurrencyManager.current.value }}</div>
+            <div class="mat-display-1">{{ cart.totalTaxInc | currency : currencyService.current.value }}</div>
         </div>
 
         <button (click)="createOrder()" [disabled]="billingForm.invalid || shippingForm.invalid" mat-flat-button>

@@ -56,13 +56,13 @@
             <div id="header-top">
                 <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <a *ngIf="!CurrencyManager.locked" [matMenuTriggerFor]="deviseMenu" mat-button>
-                        {{ CurrencyManager.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
+                    <a *ngIf="!currencyService.locked" [matMenuTriggerFor]="deviseMenu" mat-button>
+                        {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
                         <natural-icon name="keyboard_arrow_down"></natural-icon>
                     </a>
                     <mat-menu #deviseMenu="matMenu">
-                        <button (click)="CurrencyManager.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
-                        <button (click)="CurrencyManager.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
+                        <button (click)="currencyService.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
+                        <button (click)="currencyService.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
                     </mat-menu>
                     <a *ngIf="viewer?.role === UserRole.administrator" routerLink="/admin" mat-button>Admnistration</a>
                     <a *ngFor="let item of topNavigation" [routerLink]="item.link" mat-button> {{ item.display }}</a>

@@ -1,5 +1,5 @@
 import Decimal from 'decimal.js';
-import { CurrencyManager } from '../../../../shared/classes/currencyManager';
+import { Currency } from '../../../../shared/services/currency.service';
 import {
     Product_product,
     Products_products_items,
@@ -41,9 +41,11 @@ export interface CartLine {
 
 export class Cart {
 
-    public static readonly storageKey = 'carts';
+    private static readonly storageKey = 'carts';
 
-    public static carts: Cart[] = [];
+    private static carts: Cart[] = [];
+
+    private static currency: Currency = Currency.CHF;
 
     /**
      * Cart detail
@@ -68,18 +70,32 @@ export class Cart {
     /**
      * Cart identification
      */
-    private _id: number;
+    private readonly _id: number;
 
-    /**
-     *
-     */
-    public static getPersistedCarts(): any[] {
+    private static getPersistedCarts(): any[] {
         const serializedStoredCarts = sessionStorage.getItem(Cart.storageKey);
         if (serializedStoredCarts) {
-            return JSON.parse(serializedStoredCarts) as Cart[];
+            return JSON.parse(serializedStoredCarts) as any[];
         }
 
         return [];
+    }
+
+    /**
+     * Set current currency and trigger re-computing of all carts
+     */
+    public static setCurrency(currency: Currency): void {
+        this.currency = currency;
+        this.carts.forEach(cart => cart.computeTotals());
+    }
+
+    /**
+     * Delete all carts from memory and storage
+     */
+    public static clearCarts(): void {
+        this.carts.forEach(c => c.empty());
+        this.carts.length = 0;
+        sessionStorage.setItem(Cart.storageKey, '');
     }
 
     /**
@@ -91,7 +107,7 @@ export class Cart {
         Cart.carts.push(this);
     }
 
-    public get id() {
+    public get id(): number {
         return this._id;
     }
 
@@ -113,19 +129,26 @@ export class Cart {
             cart.subscription = carts[id].subscription;
             cart.donationAmount = carts[id].donationAmount;
             cart.computeTotals();
+
             return cart;
         }
-
-        return;
     }
 
-    /**
-     * todo : update on currency change ?
-     */
-    public static getPriceTaxInc(product: { pricePerUnitCHF?, pricePerUnitEUR? }, quantity: number): number {
+    private static getPriceTaxInc(product: { pricePerUnitCHF?, pricePerUnitEUR? }, quantity: number): number {
         // todo : drop decimaljs ?
-        const quantifiedPrice = Decimal.mul(CurrencyManager.getPriceByCurrency(product), quantity);
+        const quantifiedPrice = Decimal.mul(Cart.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
+    }
+
+    private static getPriceByCurrency(product: { pricePerUnitCHF?, pricePerUnitEUR? }): Decimal.Value {
+
+        if (this.currency === Currency.CHF) {
+            return product.pricePerUnitCHF;
+        } else if (this.currency === Currency.EUR) {
+            return product.pricePerUnitEUR;
+        }
+
+        throw new Error('Unsupported currency: ' + this.currency);
     }
 
     public update() {
@@ -252,5 +275,4 @@ export class Cart {
     public isEmpty(): boolean {
         return !this.productLines.length && !this.subscription && !this.donationAmount;
     }
-
 }

@@ -72,8 +72,8 @@ export class Cart {
      */
     private readonly _id: number;
 
-    private static getPersistedCarts(): any[] {
-        const serializedStoredCarts = sessionStorage.getItem(Cart.storageKey);
+    private static getPersistedCarts(storage: Storage): any[] {
+        const serializedStoredCarts = storage.getItem(Cart.storageKey);
         if (serializedStoredCarts) {
             return JSON.parse(serializedStoredCarts) as any[];
         }
@@ -92,17 +92,17 @@ export class Cart {
     /**
      * Delete all carts from memory and storage
      */
-    public static clearCarts(): void {
+    public static clearCarts(storage: Storage): void {
         this.carts.forEach(c => c.empty());
         this.carts.length = 0;
-        sessionStorage.setItem(Cart.storageKey, '');
+        storage.setItem(Cart.storageKey, '');
     }
 
     /**
      * On new cart, never recover from session storage
      * @param id Use id param only for global cart
      */
-    public constructor(id?: number) {
+    public constructor(private readonly storage: Storage, id?: number) {
         this._id = id || Cart.carts.length;
         Cart.carts.push(this);
     }
@@ -112,19 +112,19 @@ export class Cart {
     }
 
     /**
-     * Get cart from memory if exists, or from sessionStorage if not
+     * Get cart from memory if exists, or from storage if not
      */
-    public static getById(id: number): Cart | undefined {
+    public static getById(storage: Storage, id: number): Cart | undefined {
         let cart = Cart.carts.find(c => c._id === id);
 
         if (cart) {
             return cart;
         }
 
-        const carts = this.getPersistedCarts();
+        const carts = this.getPersistedCarts(storage);
 
         if (carts[id]) {
-            cart = new Cart(id);
+            cart = new Cart(storage, id);
             cart.productLines = carts[id].productLines || [];
             cart.subscription = carts[id].subscription;
             cart.donationAmount = carts[id].donationAmount;
@@ -154,7 +154,7 @@ export class Cart {
     public update() {
         this.computeTotals();
 
-        const carts = Cart.getPersistedCarts();
+        const carts = Cart.getPersistedCarts(this.storage);
 
         carts[this._id] = {
             productLines: this.productLines,
@@ -162,7 +162,7 @@ export class Cart {
             donationAmount: this.donationAmount,
         };
 
-        sessionStorage.setItem(Cart.storageKey, JSON.stringify(carts));
+        this.storage.setItem(Cart.storageKey, JSON.stringify(carts));
     }
 
     public addProduct(product: CartLineProduct, type: ProductType, quantity: number = 1) {

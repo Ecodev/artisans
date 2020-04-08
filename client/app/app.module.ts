@@ -25,6 +25,7 @@ import { MaterialModule } from './shared/modules/material.module';
 import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
+import { SESSION_STORAGE } from './shared/utils';
 
 registerLocaleData(localeFRCH);
 
@@ -68,10 +69,17 @@ registerLocaleData(localeFRCH);
             useClass: NetworkInterceptorService,
             multi: true,
         },
-        {provide: LOCALE_ID, useValue: 'fr-CH'},
+        {
+            provide: LOCALE_ID,
+            useValue: 'fr-CH',
+        },
         {
             provide: MatPaginatorIntl,
             useClass: LocalizedPaginatorIntlService,
+        },
+        {
+            provide: SESSION_STORAGE,
+            useValue: sessionStorage,
         },
     ],
     bootstrap: [AppComponent],

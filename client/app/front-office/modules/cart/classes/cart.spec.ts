@@ -29,7 +29,7 @@ describe('CartService', () => {
     } as unknown as Product['product'];
 
     beforeEach(() => {
-        cart = new Cart();
+        cart = new Cart(sessionStorage);
         // Ensure that we always test in CHF
         Cart.setCurrency(Currency.CHF);
     });

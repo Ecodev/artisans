@@ -6,6 +6,7 @@ import { Apollo } from 'apollo-angular';
 import { UserService } from '../../../admin/users/services/user.service';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { CurrencyService } from '../../../shared/services/currency.service';
+import { CartService } from '../../../front-office/modules/cart/services/cart.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,8 +18,9 @@ export class AnonymousUserService extends UserService {
         router: Router,
         permissionsService: PermissionsService,
         currencyService: CurrencyService,
+        cartService: CartService,
     ) {
-        super(apollo, router, permissionsService, currencyService);
+        super(apollo, router, permissionsService, currencyService, cartService);
     }
 
     public getFormValidators(): FormValidators {

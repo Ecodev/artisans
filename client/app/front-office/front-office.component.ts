@@ -120,12 +120,13 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         private navigationService: NavigationService,
         public userService: UserService,
         public currencyService: CurrencyService,
+        cartService: CartService,
     ) {
         super();
 
         // We can have multiple parallel carts
         // We have to call first a cart that will stay at index zero of list of carts. BOComponent is earliest place for that.
-        CartService.initGlobalCart();
+        cartService.initGlobalCart();
     }
 
     public ngOnInit(): void {

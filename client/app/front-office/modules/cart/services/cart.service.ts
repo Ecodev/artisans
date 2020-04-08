@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { OrderService } from '../../../../admin/order/services/order.service';
@@ -12,6 +12,7 @@ import {
 } from '../../../../shared/generated-types';
 import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
+import { SESSION_STORAGE } from '../../../../shared/utils';
 
 @Injectable({
     providedIn: 'root',
@@ -20,15 +21,11 @@ export class CartService {
 
     public static _globalCart: Cart;
 
-    public static clearCarts() {
-        Cart.clearCarts();
-        CartService.initGlobalCart();
-    }
-
     constructor(
         private orderService: OrderService,
         private dialogService: MatDialog,
         private currencyService: CurrencyService,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: Storage,
     ) {
 
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
@@ -48,13 +45,18 @@ export class CartService {
         return CartService._globalCart;
     }
 
-    public static initGlobalCart() {
-        const persistedCart = Cart.getById(0);
+    public clearCarts() {
+        Cart.clearCarts(this.sessionStorage);
+        this.initGlobalCart();
+    }
+
+    public initGlobalCart() {
+        const persistedCart = Cart.getById(this.sessionStorage, 0);
 
         if (persistedCart) {
             CartService._globalCart = persistedCart;
         } else {
-            CartService._globalCart = new Cart(0);
+            CartService._globalCart = new Cart(this.sessionStorage, 0);
         }
     }
 

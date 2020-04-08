@@ -1,4 +1,5 @@
 import Decimal from 'decimal.js';
+import { InjectionToken } from '@angular/core';
 
 // todo : drop decimaljs ?
 export function moneyRoundUp(amount: number): number {
@@ -17,3 +18,5 @@ export function copy(value: string): void {
     document.execCommand('copy');
     document.body.removeChild(input);
 }
+
+export const SESSION_STORAGE = new InjectionToken<Storage>('Session storage that will be shimed when running on server');

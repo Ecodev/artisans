@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { keyBy } from 'lodash';
 import { ProductType, Subscriptions_subscriptions_items } from '../../../../../shared/generated-types';
 import { Cart } from '../../../cart/classes/cart';
 import { SubscriptionService } from './subscription.service';
+import { SESSION_STORAGE } from '../../../../../shared/utils';
 
 @Component({
     selector: 'app-subscriptions',
@@ -17,7 +18,11 @@ export class SubscriptionsComponent implements OnInit {
 
     public ProductType = ProductType;
 
-    constructor(private subscriptionService: SubscriptionService, private router: Router) {
+    constructor(
+        private subscriptionService: SubscriptionService,
+        private router: Router,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: Storage,
+    ) {
     }
 
     ngOnInit() {
@@ -27,7 +32,7 @@ export class SubscriptionsComponent implements OnInit {
     public order(id: string, type: ProductType, withEmails?: boolean) {
 
         const subscribeFn = (emails?: string[]) => {
-            const cart = new Cart();
+            const cart = new Cart(this.sessionStorage);
             cart.setSubscription(this.subscriptions[id], type, emails);
 
             console.log('cart', cart);

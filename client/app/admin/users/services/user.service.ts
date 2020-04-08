@@ -77,6 +77,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         protected router: Router,
         private permissionsService: PermissionsService,
         private currencyService: CurrencyService,
+        private cartService: CartService,
     ) {
 
         super(apollo,
@@ -134,7 +135,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
                     this.permissionsService.setUser(login);
 
                     // Be sure that we don't have leftovers from another user
-                    CartService.clearCarts();
+                    this.cartService.clearCarts();
                     this.currencyService.updateLockedStatus(login);
                 },
             }).pipe(map(result => (result.data as Login).login)).subscribe(subject);

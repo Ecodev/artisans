@@ -1,8 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { UserLike } from '../../admin/users/services/user.service';
 import { Inject, Injectable } from '@angular/core';
-import { APP_MENU_DATA, MenuDropdownData } from '../../front-office/components/menu/menu.component';
-import { SESSION_STORAGE } from '../utils';
+import { SESSION_STORAGE, SimpleStorage } from '../classes/memory-storage';
 
 /**
  * Value from https://en.wikipedia.org/wiki/ISO_4217
@@ -19,7 +18,7 @@ export class CurrencyService {
 
     public readonly current: BehaviorSubject<Currency> = new BehaviorSubject<Currency>(Currency.CHF);
 
-    constructor(@Inject(SESSION_STORAGE) private readonly sessionStorage: Storage) {
+    constructor(@Inject(SESSION_STORAGE) private readonly sessionStorage: SimpleStorage) {
         const stored = this.sessionStorage.getItem('currency');
 
         if (stored === 'CHF') {

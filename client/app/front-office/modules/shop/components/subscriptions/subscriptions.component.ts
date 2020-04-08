@@ -5,7 +5,7 @@ import { keyBy } from 'lodash';
 import { ProductType, Subscriptions_subscriptions_items } from '../../../../../shared/generated-types';
 import { Cart } from '../../../cart/classes/cart';
 import { SubscriptionService } from './subscription.service';
-import { SESSION_STORAGE } from '../../../../../shared/utils';
+import { SESSION_STORAGE, SimpleStorage } from '../../../../../shared/classes/memory-storage';
 
 @Component({
     selector: 'app-subscriptions',
@@ -21,7 +21,7 @@ export class SubscriptionsComponent implements OnInit {
     constructor(
         private subscriptionService: SubscriptionService,
         private router: Router,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: Storage,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: SimpleStorage,
     ) {
     }
 

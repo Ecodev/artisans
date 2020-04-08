@@ -8,6 +8,7 @@ import {
     Subscriptions_subscriptions_items,
 } from '../../../../shared/generated-types';
 import { moneyRoundUp } from '../../../../shared/utils';
+import { SimpleStorage } from '../../../../shared/classes/memory-storage';
 
 export type CartLineProduct =
     Products_products_items
@@ -72,7 +73,7 @@ export class Cart {
      */
     private readonly _id: number;
 
-    private static getPersistedCarts(storage: Storage): any[] {
+    private static getPersistedCarts(storage: SimpleStorage): any[] {
         const serializedStoredCarts = storage.getItem(Cart.storageKey);
         if (serializedStoredCarts) {
             return JSON.parse(serializedStoredCarts) as any[];
@@ -92,7 +93,7 @@ export class Cart {
     /**
      * Delete all carts from memory and storage
      */
-    public static clearCarts(storage: Storage): void {
+    public static clearCarts(storage: SimpleStorage): void {
         this.carts.forEach(c => c.empty());
         this.carts.length = 0;
         storage.setItem(Cart.storageKey, '');
@@ -102,7 +103,7 @@ export class Cart {
      * On new cart, never recover from session storage
      * @param id Use id param only for global cart
      */
-    public constructor(private readonly storage: Storage, id?: number) {
+    public constructor(private readonly storage: SimpleStorage, id?: number) {
         this._id = id || Cart.carts.length;
         Cart.carts.push(this);
     }
@@ -114,7 +115,7 @@ export class Cart {
     /**
      * Get cart from memory if exists, or from storage if not
      */
-    public static getById(storage: Storage, id: number): Cart | undefined {
+    public static getById(storage: SimpleStorage, id: number): Cart | undefined {
         let cart = Cart.carts.find(c => c._id === id);
 
         if (cart) {

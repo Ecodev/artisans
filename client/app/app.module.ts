@@ -25,7 +25,7 @@ import { MaterialModule } from './shared/modules/material.module';
 import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
-import { SESSION_STORAGE } from './shared/utils';
+import { SESSION_STORAGE } from './shared/classes/memory-storage';
 
 registerLocaleData(localeFRCH);
 

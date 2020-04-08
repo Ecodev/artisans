@@ -6,9 +6,10 @@ import { CartService } from '../../../front-office/modules/cart/services/cart.se
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { mockApolloProvider } from '../../../shared/testing/MockApolloProvider';
 import { UserService } from './user.service';
+import { MemoryStorage, SESSION_STORAGE } from '../../../shared/classes/memory-storage';
 
 class MockCartService {
-    empty() {
+    clearCarts() {
     }
 }
 
@@ -22,6 +23,10 @@ describe('UserService', () => {
             providers: [
                 mockApolloProvider,
                 {provide: CartService, useClass: MockCartService},
+                {
+                    provide: SESSION_STORAGE,
+                    useValue: new MemoryStorage(),
+                },
             ],
         });
 

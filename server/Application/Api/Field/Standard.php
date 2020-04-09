@@ -40,9 +40,22 @@ abstract class Standard
                 'name' => $plural,
                 'type' => Type::nonNull(_types()->get($shortName . 'Pagination')),
                 'args' => $listArgs,
-                'resolve' => function ($root, array $args) use ($class): array {
+                'resolve' => function ($root, array $args) use ($class, $metadata): array {
                     $filters = self::customTypesToScalar($args['filter'] ?? []);
-                    $qb = _types()->createFilteredQueryBuilder($class, $filters, $args['sorting'] ?? []);
+
+                    // If null or empty list is provided by client, fallback on default sorting
+                    $sorting = $args['sorting'] ?? [];
+                    if (!$sorting) {
+                        $sorting = self::getDefaultSorting($metadata);
+                    }
+
+                    // And **always** sort by ID
+                    $sorting[] = [
+                        'field' => 'id',
+                        'order' => 'ASC',
+                    ];
+
+                    $qb = _types()->createFilteredQueryBuilder($class, $filters, $sorting);
 
                     $items = Helper::paginate($args['pagination'], $qb);
                     $aggregatedFields = Helper::aggregatedFields($class, $qb);
@@ -295,20 +308,13 @@ abstract class Standard
     /**
      * Get default sorting values with some fallback for some special cases
      *
-     * @param ClassMetadata $class
+     * @param ClassMetadata $metadata
      *
      * @return array
      */
-    private static function getDefaultSorting(ClassMetadata $class): array
+    private static function getDefaultSorting(ClassMetadata $metadata): array
     {
-        $defaultSorting = [];
-
-        $defaultSorting[] = [
-            'field' => 'id',
-            'order' => 'ASC',
-        ];
-
-        return $defaultSorting;
+        return [];
     }
 
     /**

@@ -18,7 +18,7 @@ class OrderLines extends AbstractHelper
         foreach ($order->getOrderLines() as $line) {
             $label = $this->view->escapeHtml($line->getName());
             if ($line->getProduct()) {
-                $url = $this->view->escapeHtmlAttr($this->view->serverUrl . '/larevuedurable/article/' . $line->getProduct()->getId());
+                $url = $this->view->serverUrl . '/larevuedurable/article/' . $line->getProduct()->getId();
                 $label = '<a href="' . $url . '">' . $label . '</a>';
             }
 

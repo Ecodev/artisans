@@ -24,5 +24,5 @@ $url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
     <li>
         <a href="mailto:<?php echo $this->escapeHtmlAttr($this->updatedUser->getEmail()) ?>"><?php echo $this->escapeHtml($this->updatedUser->getEmail()) ?></a>
     </li>
-    <li><a href="<?php echo $this->escapeHtmlAttr($url) ?>"><?php echo $this->escapeHtml($url) ?></a></li>
+    <li><a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a></li>
 </ul>

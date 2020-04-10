@@ -5,4 +5,4 @@ $url = $this->serverUrl . '/mon-compte/commandes/' . $this->order->getId();
 
 <?php echo $this->orderLines($this->order); ?>
 
-<p>Voir le détail sur <a href="<?php echo $this->escapeHtmlAttr($url) ?>"><?php echo $this->escapeHtml($url) ?></a>.</p>
+<p>Voir le détail sur <a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a>.</p>

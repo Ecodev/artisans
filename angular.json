@@ -131,7 +131,7 @@
                 "server": {
                     "builder": "@angular-devkit/build-angular:server",
                     "options": {
-                        "outputPath": "dist/artisans/server",
+                        "outputPath": "data/tmp/server",
                         "main": "server.ts",
                         "tsConfig": "client/tsconfig.server.json"
                     },

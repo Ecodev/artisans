@@ -10,8 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "codegen": "./bin/dump-schema && apollo client:codegen -c apollo.config.js  --outputFlat --target typescript client/app/shared/generated-types.ts",
-    "dev:ssr": "ng run artisans:serve-ssr",
-    "serve:ssr": "node data/tmp/server/main.js",
+    "dev-ssr": "ng run artisans:serve-ssr",
+    "serve-ssr": "node data/tmp/server/main.js",
     "prerender": "ng run artisans:prerender"
   },
   "browser": {

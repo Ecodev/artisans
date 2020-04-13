@@ -33,6 +33,7 @@
 /logs/
 /node_modules/
 /phpunit.xml
+/.pm2/
 /vendor/
 /client/app/shared/generated-schema.graphql
 /client/app/shared/generated-types.ts

@@ -5,14 +5,13 @@
   "scripts": {
     "ng": "ng",
     "dev": "yarn codegen && ng serve",
-    "prod": "yarn codegen && ng build --prod",
+    "prod": "yarn codegen && ng build --prod && ng run artisans:server:production",
     "test": "yarn codegen && ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "codegen": "./bin/dump-schema && apollo client:codegen -c apollo.config.js  --outputFlat --target typescript client/app/shared/generated-types.ts",
     "dev:ssr": "ng run artisans:serve-ssr",
     "serve:ssr": "node data/tmp/server/main.js",
-    "build:ssr": "ng build --prod && ng run artisans:server:production",
     "prerender": "ng run artisans:prerender"
   },
   "browser": {

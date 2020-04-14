@@ -5,7 +5,7 @@ import { CurrencyService } from '../../../../../shared/services/currency.service
 import { ProductType } from '../../../../../shared/generated-types';
 import { Cart, CartLineProduct } from '../../classes/cart';
 import { CartService } from '../../services/cart.service';
-import { SESSION_STORAGE, SimpleStorage } from '../../../../../shared/classes/memory-storage';
+import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 
 @Component({
     selector: 'app-cart',
@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
         private route: ActivatedRoute,
         public cartService: CartService,
         public currencyService: CurrencyService,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: SimpleStorage,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
     }
 

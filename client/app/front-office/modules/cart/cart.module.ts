@@ -6,6 +6,7 @@ import { ArtisansModule } from '../../../shared/modules/artisans.module';
 import { CartRoutingModule } from './cart-routing.module';
 import { CartComponent } from './components/cart/cart.component';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { ssrCompatibleStorageProvider } from '../../../shared/utils';
 
 @NgModule({
     declarations: [CartComponent, CreateOrderComponent, BvrComponent],
@@ -13,6 +14,9 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
         CommonModule,
         CartRoutingModule,
         ArtisansModule,
+    ],
+    providers: [
+        ssrCompatibleStorageProvider,
     ],
 })
 export class CartModule {

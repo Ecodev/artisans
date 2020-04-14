@@ -4,20 +4,13 @@ import { FlexLayoutServerModule } from '@angular/flex-layout/server';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { MemoryStorage, SESSION_STORAGE } from './shared/classes/memory-storage';
+import { ssrCompatibleStorageProvider } from './shared/utils';
 
 @NgModule({
     imports: [
         AppModule,
         ServerModule,
         FlexLayoutServerModule,
-    ],
-    providers: [
-        {
-            // Use memory storage instead of sessionStorage because it is not available in node
-            provide: SESSION_STORAGE,
-            useValue: new MemoryStorage(),
-        },
     ],
     bootstrap: [AppComponent],
 })

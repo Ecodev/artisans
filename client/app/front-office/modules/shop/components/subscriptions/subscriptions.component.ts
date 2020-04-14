@@ -5,7 +5,7 @@ import { keyBy } from 'lodash';
 import { ProductType, Subscriptions_subscriptions_items } from '../../../../../shared/generated-types';
 import { Cart } from '../../../cart/classes/cart';
 import { SubscriptionService } from './subscription.service';
-import { SESSION_STORAGE, SimpleStorage } from '../../../../../shared/classes/memory-storage';
+import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 
 @Component({
     selector: 'app-subscriptions',
@@ -21,7 +21,7 @@ export class SubscriptionsComponent implements OnInit {
     constructor(
         private subscriptionService: SubscriptionService,
         private router: Router,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: SimpleStorage,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
     }
 

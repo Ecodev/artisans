@@ -21,6 +21,7 @@ import { ShopModule } from './modules/shop/shop.module';
 import { EventPageComponent } from './components/event-page/event-page.component';
 import { NewsPageComponent } from './components/news-page/news-page.component';
 import { CommentListComponent } from './components/comment-list/comment-list.component';
+import { ssrCompatibleStorageProvider } from '../shared/utils';
 
 @NgModule({
     declarations: [
@@ -47,6 +48,9 @@ import { CommentListComponent } from './components/comment-list/comment-list.com
         OrderModule,
         EcoFabSpeedDialModule,
         ShopModule,
+    ],
+    providers: [
+        ssrCompatibleStorageProvider,
     ],
 })
 export class FrontOfficeModule {

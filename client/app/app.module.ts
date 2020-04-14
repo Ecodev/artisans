@@ -29,7 +29,7 @@ import { MaterialModule } from './shared/modules/material.module';
 import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
 import { NetworkActivityService } from './shared/services/network-activity.service';
 import { NetworkInterceptorService } from './shared/services/network-interceptor.service';
-import { SESSION_STORAGE } from './shared/classes/memory-storage';
+import { ssrCompatibleStorageProvider } from './shared/utils';
 
 registerLocaleData(localeFRCH);
 
@@ -82,13 +82,7 @@ registerLocaleData(localeFRCH);
             provide: MatPaginatorIntl,
             useClass: LocalizedPaginatorIntlService,
         },
-        {
-            // Here we must use a factory that return directly the value, otherwise it will
-            // crash when running on server because the value does not exist (but the factory will
-            // never actually be called on server, so the server will not see the missing value)
-            provide: SESSION_STORAGE,
-            useFactory: () => sessionStorage,
-        },
+        ssrCompatibleStorageProvider,
     ],
     bootstrap: [AppComponent],
 })

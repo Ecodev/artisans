@@ -9,7 +9,7 @@ import { ConfigService, FrontEndConfig } from '../../../../../shared/services/co
 import { Cart } from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import { CartService } from '../../services/cart.service';
-import { SESSION_STORAGE, SimpleStorage } from '../../../../../shared/classes/memory-storage';
+import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 
 @Component({
     selector: 'app-create-order',
@@ -74,7 +74,7 @@ export class CreateOrderComponent implements OnInit {
         public userService: UserService,
         configService: ConfigService,
         public currencyService: CurrencyService,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: SimpleStorage,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
         configService.get().subscribe(paymentConfig => {
             this.paymentConfig = paymentConfig;

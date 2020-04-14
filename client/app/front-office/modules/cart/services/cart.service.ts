@@ -12,7 +12,7 @@ import {
 } from '../../../../shared/generated-types';
 import { DonationComponent } from '../../../components/donation/donation.component';
 import { Cart } from '../classes/cart';
-import { SESSION_STORAGE, SimpleStorage } from '../../../../shared/classes/memory-storage';
+import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 
 @Injectable({
     providedIn: 'root',
@@ -25,7 +25,7 @@ export class CartService {
         private orderService: OrderService,
         private dialogService: MatDialog,
         private currencyService: CurrencyService,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: SimpleStorage,
+        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
 
         // If our cart changes in another browser tab, reload it from storage to keep it in sync

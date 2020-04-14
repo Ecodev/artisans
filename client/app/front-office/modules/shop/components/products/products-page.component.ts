@@ -1,10 +1,9 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { fromUrl } from '@ecodev/natural';
+import { fromUrl, memoryStorageProvider, NaturalPersistenceService, SESSION_STORAGE } from '@ecodev/natural';
 import { ProductService } from '../../../../../admin/products/services/product.service';
 import { AbstractInfiniteLoadList } from '../../../../../shared/classes/AbstractInfiniteLoadList';
 import { Products, Products_products_items, ProductsVariables } from '../../../../../shared/generated-types';
-import { PersistenceInUrlService } from '../../../../../shared/services/persist-in-url.service';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -15,6 +14,16 @@ export enum ProductsViewMode {
     selector: 'app-products-page',
     templateUrl: './products-page.component.html',
     styleUrls: ['./products-page.component.scss'],
+    providers: [
+        // Provide a NaturalPersistenceService instance only for this component,
+        // but with a memoryStorage to avoid storing pagination in session and
+        // keep it only in URL instead
+        {
+            provide: NaturalPersistenceService,
+            useClass: NaturalPersistenceService,
+        },
+        memoryStorageProvider,
+    ],
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
 
@@ -30,8 +39,6 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
 
     constructor(route: ActivatedRoute, productService: ProductService, injector: Injector) {
         super(productService, injector);
-
-        this.persistenceService = injector.get(PersistenceInUrlService);
     }
 
     ngOnInit(): void {

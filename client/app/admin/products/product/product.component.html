@@ -71,6 +71,14 @@
                         </div>
 
                         <mat-form-field>
+                            <mat-label>Date de publication</mat-label>
+                            <input [matDatepicker]="picker" required="required" formControlName="releaseDate" matInput>
+                            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="form.get('releaseDate')?.hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
                             <mat-label>Numéro de revue</mat-label>
                             <input (change)="update()" formControlName="reviewNumber" matInput type="number">
                             <mat-hint>Numéro de la revue (seulement pour les revues ! ne pas saisir pour les articles)</mat-hint>
@@ -201,7 +209,7 @@
 
         <mat-tab *ngIf="data.model.id" label="Ventes">
             <app-order-lines [contextColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
-                             [contextVariables]="orderLinesVariables"
+                             [contextVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
                              [persistSearch]="false"
                              [showTotals]="true"
             ></app-order-lines>

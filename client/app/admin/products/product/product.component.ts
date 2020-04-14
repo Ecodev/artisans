@@ -28,8 +28,6 @@ export class ProductComponent
         UpdateProductVariables,
         any> implements OnInit {
 
-    public orderLinesVariables: OrderLinesVariables;
-
     constructor(private productService: ProductService,
                 injector: Injector,
                 public productTagService: ProductTagService,
@@ -41,7 +39,6 @@ export class ProductComponent
 
     public ngOnInit(): void {
         super.ngOnInit();
-        this.orderLinesVariables = {filter: {groups: [{conditions: [{product: {equal: {value: this.data.model.id}}}]}]}};
     }
 
     public setFormValue(value: any, fieldName: string) {

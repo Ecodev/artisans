@@ -47,7 +47,7 @@
             <div class="list products" fxLayout="column" fxLayoutGap="60px">
                 <div *ngFor="let product of items" class="product" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px">
 
-                    <div class="product-image">
+                    <div class="product-image" *ngIf="product.image">
                         <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
                     </div>
 
@@ -89,7 +89,7 @@
             </div>
         </div>
 
-        <a (click)="loadMore()" mat-stroke-button *ngIf="dataSource?.data?.length > items.length">Afficher plus d'articles</a>
+        <a (click)="loadMore()" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">Afficher plus d'articles</a>
     </ng-container>
 
     <div class="mat-h2" *ngIf="items.length === 0">Aucun résultat n'a été trouvé.</div>

@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall extends QueryVariables>
     extends NaturalAbstractList<Tall, Vall> implements OnInit {
 
-    public items: any[] = [];
+    public items: Tall['items'] = [];
 
     constructor(service: any, injector: Injector) {
         super(service, injector);

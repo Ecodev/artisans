@@ -19,17 +19,21 @@
                     "options": {
                         "aot": true,
                         "preserveSymlinks": true,
-                        "outputPath": "htdocs",
+                        "outputPath": "data/tmp/build",
                         "index": "client/index.html",
                         "main": "client/main.ts",
                         "polyfills": "client/polyfills.ts",
                         "tsConfig": "client/tsconfig.app.json",
-                        "deleteOutputPath": false,
                         "assets": [
                             "client/assets",
                             {
                                 "input": "client/favicon",
                                 "glob": "*",
+                                "output": "/"
+                            },
+                            {
+                                "input": "server/",
+                                "glob": "index.php",
                                 "output": "/"
                             }
                         ],
@@ -111,6 +115,11 @@
                                 "input": "client/favicon",
                                 "glob": "*",
                                 "output": "/"
+                            },
+                            {
+                                "input": "server/",
+                                "glob": "index.php",
+                                "output": "/"
                             }
                         ]
                     }
@@ -133,7 +142,8 @@
                     "options": {
                         "outputPath": "data/tmp/server",
                         "main": "server.ts",
-                        "tsConfig": "client/tsconfig.server.json"
+                        "tsConfig": "client/tsconfig.server.json",
+                        "deleteOutputPath": false
                     },
                     "configurations": {
                         "production": {

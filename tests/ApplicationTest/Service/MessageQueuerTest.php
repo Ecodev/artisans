@@ -17,7 +17,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Laminas\View\Renderer\RendererInterface;
 use Money\Money;
-use Prophecy\Argument;
 
 class MessageQueuerTest extends \PHPUnit\Framework\TestCase
 {
@@ -153,35 +152,19 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::REQUEST_MEMBERSHIP_END, 'Demande d\'arrêt de cotisations');
     }
 
-    private function createMockUser(): User
-    {
-        $prophecy = $this->prophesize(User::class);
-        $prophecy->getId()->willReturn(123);
-        $prophecy->getFirstName()->willReturn('John');
-        $prophecy->getLastName()->willReturn('Doe');
-        $prophecy->getName()->willReturn('John Doe');
-        $prophecy->getStreet()->willReturn('Main street');
-        $prophecy->getPostcode()->willReturn('2020');
-        $prophecy->getLocality()->willReturn('Locality');
-        $prophecy->getCountry()->willReturn(new Country('Wookaya'));
-        $prophecy->getPhone()->willReturn('123 456 87 98');
-        $prophecy->getEmail()->willReturn('john.doe@example.com');
-        $prophecy->createToken()->willReturn(str_repeat('X', 32));
-        $prophecy->messageAdded(Argument::type(Message::class));
-
-        $user = $prophecy->reveal();
-
-        return $user;
-    }
-
     private function createMockOrder(User $owner): Order
     {
-        $prophecyProduct = $this->prophesize(Product::class);
-        $prophecyProduct->getId()->willReturn(1);
-        $prophecyProduct->getName()->willReturn('Article 1');
+        $product = $this->createMock(Product::class);
+        $product->expects($this->any())
+            ->method('getId')
+            ->willReturn(1);
+
+        $product->expects($this->any())
+            ->method('getName')
+            ->willReturn('Article 1');
 
         $productLine = new OrderLine();
-        $productLine->setProduct($prophecyProduct->reveal());
+        $productLine->setProduct($product);
 
         $subscriptionLine = new OrderLine();
         $subscriptionLine->setName('Abonnement standard papier');
@@ -191,42 +174,118 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
 
         $lines = new ArrayCollection([$productLine, $subscriptionLine, $donationLine]);
 
-        $prophecy = $this->prophesize(Order::class);
-        $prophecy->getId()->willReturn(456);
-        $prophecy->getBalanceCHF()->willReturn(Money::CHF(1500));
-        $prophecy->getBalanceEUR()->willReturn(Money::EUR(0));
-        $prophecy->getOrderLines()->willReturn($lines);
-        $prophecy->getOwner()->willReturn($owner);
-        $prophecy->getFormattedBalance()->willReturn('33.00 CHF');
-        $prophecy->getPaymentMethod()->willReturn(PaymentMethodType::BVR);
+        $order = $this->createMock(Order::class);
+        $order->expects($this->any())
+            ->method('getId')
+            ->willReturn(456);
 
-        $order = $prophecy->reveal();
+        $order->expects($this->any())
+            ->method('getBalanceCHF')
+            ->willReturn(Money::CHF(1500));
+
+        $order->expects($this->any())
+            ->method('getBalanceEUR')
+            ->willReturn(Money::EUR(0));
+
+        $order->expects($this->any())
+            ->method('getOrderLines')
+            ->willReturn($lines);
+
+        $order->expects($this->any())
+            ->method('getOwner')
+            ->willReturn($owner);
+
+        $order->expects($this->any())
+            ->method('getFormattedBalance')
+            ->willReturn('33.00 CHF');
+
+        $order->expects($this->any())
+            ->method('getPaymentMethod')
+            ->willReturn(PaymentMethodType::BVR);
 
         return $order;
     }
 
+    private function createMockUser(): User
+    {
+        $user = $this->createMock(User::class);
+
+        $user->expects($this->any())
+            ->method('getId')
+            ->willReturn(123);
+
+        $user->expects($this->any())
+            ->method('getFirstName')
+            ->willReturn('John');
+
+        $user->expects($this->any())
+            ->method('getLastName')
+            ->willReturn('Doe');
+
+        $user->expects($this->any())
+            ->method('getName')
+            ->willReturn('John Doe');
+
+        $user->expects($this->any())
+            ->method('getStreet')
+            ->willReturn('Main street');
+
+        $user->expects($this->any())
+            ->method('getPostcode')
+            ->willReturn('2020');
+
+        $user->expects($this->any())
+            ->method('getLocality')
+            ->willReturn('Locality');
+
+        $user->expects($this->any())
+            ->method('getCountry')
+            ->willReturn(new Country('Wookaya'));
+
+        $user->expects($this->any())
+            ->method('getPhone')
+            ->willReturn('123 456 87 98');
+
+        $user->expects($this->any())
+            ->method('getEmail')
+            ->willReturn('john.doe@example.com');
+
+        $user->expects($this->any())
+            ->method('createToken')
+            ->willReturn(str_repeat('X', 32));
+
+        return $user;
+    }
+
     private function createMockUserAdmin(): User
     {
-        $prophecy = $this->prophesize(User::class);
-        $prophecy->getFirstName()->willReturn('Admin');
-        $prophecy->getLastName()->willReturn('Istrator');
-        $prophecy->getEmail()->willReturn('administrator@example.com');
-        $prophecy->messageAdded(Argument::type(Message::class));
+        $user = $this->createMock(User::class);
 
-        $user = $prophecy->reveal();
+        $user->expects($this->any())
+            ->method('getFirstName')
+            ->willReturn('Admin');
+
+        $user->expects($this->any())
+            ->method('getLastName')
+            ->willReturn('Istrator');
+
+        $user->expects($this->any())
+            ->method('getEmail')
+            ->willReturn('administrator@example.com');
 
         return $user;
     }
 
     private function createMockUserMinimal(): User
     {
-        $prophecy = $this->prophesize(User::class);
-        $prophecy->getFirstName();
-        $prophecy->getLastName();
-        $prophecy->getEmail()->willReturn('minimal@example.com');
-        $prophecy->createToken()->willReturn(str_repeat('X', 32));
-        $prophecy->messageAdded(Argument::type(Message::class));
-        $user = $prophecy->reveal();
+        $user = $this->createMock(User::class);
+        $user->expects($this->any())
+            ->method('getEmail')
+            ->willReturn('minimal@example.com');
+
+        $user->expects($this->any())
+            ->method('createToken')
+            ->willReturn(str_repeat('X', 32));
 
         return $user;
     }

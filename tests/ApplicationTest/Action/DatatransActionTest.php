@@ -13,7 +13,6 @@ use ApplicationTest\Traits\TestWithTransaction;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class DatatransActionTest extends TestCase
@@ -26,12 +25,11 @@ class DatatransActionTest extends TestCase
     public function testProcess(?array $data, array $expectedViewModel): void
     {
         // Message always include input data
-        $expectedViewModel['message']['detail'] = $data;
-        $renderer = $this->prophesize(TemplateRendererInterface::class);
-        $renderer->render('app::datatrans', $expectedViewModel)->shouldBeCalled();
-        $renderer->render('app::datatrans', Argument::any())->willReturn('');
+        $expectedViewModel['message']['detail'] = $data ?? [];
+        $renderer = $this->createMock(TemplateRendererInterface::class);
+        $renderer->expects($this->once())->method('render')->with('app::datatrans', $expectedViewModel)->willReturn('');
 
-        $handler = $this->prophesize(RequestHandlerInterface::class);
+        $handler = $this->createMock(RequestHandlerInterface::class);
 
         $request = new ServerRequest();
         $request = $request->withParsedBody($data);
@@ -40,16 +38,16 @@ class DatatransActionTest extends TestCase
             'key' => '1a03b7bcf2752c8c8a1b46616b0c12658d2c7643403e655450bedb7c78bb2d2f659c2ff4e647e4ea72d37ef6745ebda6733c7b859439107069f291cda98f4844',
         ];
 
-        $mailer = $this->prophesize(Mailer::class);
+        $mailer = $this->createMock(Mailer::class);
 
-        $messageQueuer = $this->prophesize(MessageQueuer::class);
-        $messageQueuer->queueUserValidatedOrder(Argument::any())->willReturn(new Message());
-        $messageQueuer->queueAdminValidatedOrder(Argument::any(), Argument::any())->willReturn(new Message());
+        $messageQueuer = $this->createMock(MessageQueuer::class);
+        if ($expectedViewModel['message']['status'] === 'success') {
+            $messageQueuer->expects($this->once())->method('queueUserValidatedOrder')->willReturn(new Message());
+            $messageQueuer->expects($this->once())->method('queueAdminValidatedOrder')->willReturn(new Message());
+        }
 
-        $action = new DatatransAction(_em(), $renderer->reveal(), $config, $mailer->reveal(), $messageQueuer->reveal());
-        $action->process($request, $handler->reveal());
-
-        $renderer->checkProphecyMethodsPredictions();
+        $action = new DatatransAction(_em(), $renderer, $config, $mailer, $messageQueuer);
+        $action->process($request, $handler);
 
         $orderId = $data['refno'] ?? null;
         if ($orderId) {
@@ -58,7 +56,7 @@ class DatatransActionTest extends TestCase
             self::assertSame($expectedStatus, $actualStatus);
         }
 
-        self::assertTrue(true); // Workaround when we only assert via prophesize
+        self::assertTrue(true); // Workaround when we only assert via mock
     }
 
     public function providerProcess(): array

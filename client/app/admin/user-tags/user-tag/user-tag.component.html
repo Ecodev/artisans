@@ -2,7 +2,7 @@
 
     <natural-detail-header [listRoute]="['admin', 'user-tag']"
                            [model]="data.model"
-                           label="Tag d'utilisateur"
+                       label="Tag d'utilisateur"
                            newLabel="Nouveau tag d'utilisateur"
     ></natural-detail-header>
 
@@ -28,11 +28,12 @@
                             <h2 class="mat-h2">Utilisateurs tagués</h2>
                             <natural-relations [filter]="{groups: [{conditions: [{userTags: {have: {values: [data.model.id]}}}]}]}"
                                                [main]="data.model"
-                                               [service]="userService"
-                                               placeholder="Taguer un utilisateur"
+                                           [service]="userService"
+                                           placeholder="Taguer un utilisateur"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                        <ngx-avatar [name]="item.name" [gravatarId]="item.email" [size]="36"></ngx-avatar>
                                         <natural-table-button [label]="item.name" [navigate]="['/admin/user/', item.id]"
                                         ></natural-table-button>
                                     </div>

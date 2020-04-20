@@ -12,10 +12,10 @@ export const orderMetaFragment = gql`
             id
         }
         owner {
-            id
-            name
+            ...userMeta
         }
     }
+    ${userMetaFragment}
 `;
 
 export const ordersQuery = gql`

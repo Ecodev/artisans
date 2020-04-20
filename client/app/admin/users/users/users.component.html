@@ -55,7 +55,7 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <ngx-avatar [name]="element.name" [size]="36"></ngx-avatar>
+                            <ngx-avatar [name]="element.name" [gravatarId]="element.email" [size]="36"></ngx-avatar>
                             <natural-table-button [label]="element.name" [navigate]="['/admin/user', element.id]" matTooltip="Éditer"
                             ></natural-table-button>
                         </div>

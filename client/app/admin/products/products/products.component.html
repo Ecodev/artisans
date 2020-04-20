@@ -1,27 +1,27 @@
-<div *ngIf="dataSource" fxLayout="column">
+    <div *ngIf="dataSource" fxLayout="column">
 
-    <div fxLayout="column">
+        <div fxLayout="column">
         <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
-    </div>
+        </div>
 
-    <div fxLayout="column">
+        <div fxLayout="column">
 
         <div class="margin-v" fxLayout="row" overflow>
             <natural-search (selectionChange)="search($event)"
-                            [facets]="naturalSearchFacets"
+                                [facets]="naturalSearchFacets"
                             [multipleGroups]="true"
-                            [selections]="naturalSearchSelections"
+                                [selections]="naturalSearchSelections"
                             fxFlex
-            >
-                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
-                    <span naturalColumnsPickerColumn="image">Image</span>
-                    <span naturalColumnsPickerColumn="name">Nom</span>
+                >
+                    <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                        <span naturalColumnsPickerColumn="image">Image</span>
+                        <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="code">Code</span>
                     <span naturalColumnsPickerColumn="pricePerUnitCHF">Prix par unité (CHF)</span>
                     <span naturalColumnsPickerColumn="pricePerUnitEUR">Prix par unité (EUR)</span>
-                </natural-columns-picker>
-            </natural-search>
-        </div>
+                    </natural-columns-picker>
+                </natural-search>
+            </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
@@ -29,69 +29,69 @@
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
 
-                <ng-container matColumnDef="image">
+                    <ng-container matColumnDef="image">
                     <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
                     <td *matCellDef="let element" mat-cell>
-                        <app-file *ngIf="element.image"
+                            <app-file *ngIf="element.image"
                                   [height]="40"
-                                  [model]="element.image"
+                                      [model]="element.image"
                                   [style.borderRadius.px]="40"
-                                  [style.width.px]="40"
-                        ></app-file>
-                    </td>
-                </ng-container>
+                                      [style.width.px]="40"
+                            ></app-file>
+                        </td>
+                    </ng-container>
 
-                <ng-container matColumnDef="name">
+                    <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                     <td *matCellDef="let element" mat-cell>
                         <natural-table-button [class]="!element.isActive ? 'inactive' : ''"
-                                              [label]="element.name"
-                                              [navigate]="['/admin/product', element.id]"
-                                              matTooltip="Éditer"
-                        ></natural-table-button>
-                    </td>
-                </ng-container>
+                                                      [label]="element.name"
+                                                      [navigate]="['/admin/product', element.id]"
+                                                      matTooltip="Éditer"
+                                ></natural-table-button>
+                        </td>
+                    </ng-container>
 
-                <ng-container matColumnDef="code">
+                    <ng-container matColumnDef="code">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
                     <td *matCellDef="let element" mat-cell>{{ element.code }}</td>
-                </ng-container>
+                    </ng-container>
 
                 <ng-container matColumnDef="pricePerUnitCHF">
                     <th *matHeaderCellDef app-price-column mat-header-cell mat-sort-header natural-align-right>Prix vente</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <span *ngIf="element.pricePerUnitCHF != '0.00'">{{ element.pricePerUnitCHF | currency: 'CHF' }}</span>
-                    </td>
-                </ng-container>
+                        </td>
+                    </ng-container>
 
                 <ng-container matColumnDef="pricePerUnitEUR">
                     <th *matHeaderCellDef app-price-column mat-header-cell mat-sort-header natural-align-right>Prix vente</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <span *ngIf="element.pricePerUnitEUR != '0.00'">{{ element.pricePerUnitEUR | currency: 'CHF' }}</span>
-                    </td>
-                </ng-container>
+                        </td>
+                    </ng-container>
 
-            </table>
-        </div>
+                </table>
+            </div>
 
         <div *ngIf="dataSource.data?.length === 0" class="margin" fxLayout="column" fxLayoutAlign="center center">
-            <div>Pas de résultats</div>
-        </div>
+                <div>Pas de résultats</div>
+            </div>
 
         <div *ngIf="!dataSource?.data" class="margin" fxLayout="column" fxLayoutAlign="center center">
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
-        </div>
+            </div>
 
         <mat-paginator (page)="pagination($event)"
                        *ngIf="dataSource.data?.length"
-                       [length]="dataSource.data?.length"
-                       [pageIndex]="dataSource.data?.pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
+                           [length]="dataSource.data?.length"
+                           [pageIndex]="dataSource.data?.pageIndex"
+                           [pageSizeOptions]="pageSizeOptions"
                        [pageSize]="dataSource.data?.pageSize"
-        ></mat-paginator>
+            ></mat-paginator>
 
+        </div>
     </div>
-</div>
 
 <natural-fixed-button *ngIf="permissionsService.crud?.product.create" [routerLink]="['/admin/product/new']" icon="add"
-></natural-fixed-button>
+    ></natural-fixed-button>

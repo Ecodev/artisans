@@ -54,7 +54,7 @@
                                 >
                                     <natural-icon name="close"></natural-icon>
                                 </button>
-                            </div>
+                </div>
 
                         </mat-form-field>
 
@@ -74,9 +74,9 @@
                                 </button>
                             </div>
 
-                        </mat-form-field>
-                    </div>
-                </div>
+                            </mat-form-field>
+                            </div>
+                        </div>
 
                 <mat-divider></mat-divider>
 
@@ -87,12 +87,12 @@
                                    [service]="sessionService"
                                    otherName="facilitator"
                                    placeholder="Conversations carbonne"
-                >
+                            >
                     <ng-template let-item="item">
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                             <natural-table-button [label]="item.name" [navigate]="['/admin/session/', item.id]"
                             ></natural-table-button>
-                        </div>
+                    </div>
                     </ng-template>
                 </natural-relations>
 
@@ -137,23 +137,23 @@
                 <mat-divider></mat-divider>
 
                 <div fxLayout="column" fxLayoutGap="15px">
-                    <natural-stamp [item]="data.model"></natural-stamp>
+                        <natural-stamp [item]="data.model"></natural-stamp>
 
-                    <div>
+                        <div>
                         <span class="mat-body-strong">Première connexion :</span>
-                        {{ data.model.firstLogin | date: 'd MMM y - HH:mm' }}
-                    </div>
+                            {{ data.model.firstLogin | swissDate }}
+                        </div>
 
-                    <div>
+                        <div>
                         <span class="mat-body-strong">Dernière connexion :</span>
-                        {{ data.model.lastLogin | date: 'd MMM y - HH:mm' }}
-                    </div>
+                            {{ data.model.lastLogin | swissDate }}
+                        </div>
 
-                    <div *ngIf="data.model.resignDate && data.model.status == 'archived'">
+                        <div *ngIf="data.model.resignDate && data.model.status == 'archived'">
                         <span class="mat-body-strong">Démission le :</span>
-                        {{ data.model.resignDate | date: 'd MMM y - HH:mm' }}
+                            {{ data.model.resignDate | swissDate }}
+                        </div>
                     </div>
-                </div>
 
             </div>
 

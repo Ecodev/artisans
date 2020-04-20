@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="start center">
     <h2 fxFlex mat-dialog-title>
-        Commande du {{ data.model.creationDate | date: 'd MMM y - HH:mm' }}
+        Commande du {{ data.model.creationDate | swissDate }}
     </h2>
 
     <natural-select-enum (selectionChange)="updateStatus($event)"

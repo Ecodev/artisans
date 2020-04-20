@@ -47,7 +47,7 @@
                 <ng-container matColumnDef="creationDate">
                     <th *matHeaderCellDef app-date-column mat-header-cell mat-sort-header>Date</th>
                     <td *matCellDef="let element" mat-cell>
-                        <natural-table-button [label]="element.creationDate | date: 'd MMM y - HH:mm'"
+                        <natural-table-button [label]="element.creationDate | swissDate"
                                               [navigate]="[element.id]"
                                               matTooltip="Éditer"
                         ></natural-table-button>

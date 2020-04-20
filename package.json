@@ -33,7 +33,7 @@
         "@angular/platform-server": "^9.1.1",
         "@angular/router": "~9.1.1",
         "@ecodev/fab-speed-dial": "^5.0.2",
-        "@ecodev/natural": "^14.1.0",
+        "@ecodev/natural": "^14.2.0",
         "@nguniversal/express-engine": "^9.1.0",
         "angular-file": "^3.0.1",
         "angular-particle-effect-button": "^0.0.50",

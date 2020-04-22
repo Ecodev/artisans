@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NaturalAlertService, NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 import { UserService } from '../../../../../admin/users/services/user.service';
-import { Currency } from '../../../../../shared/classes/currencyManager';
 import { CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
 import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
 import { Currency, CurrencyService } from '../../../../../shared/services/currency.service';

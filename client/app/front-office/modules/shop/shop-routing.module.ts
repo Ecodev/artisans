@@ -26,9 +26,10 @@ const routes: Routes = [
             path: 'articles',
             component: ProductsPageComponent,
             data: {
+                breadcrumbs: [],
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
-                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables
+                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables,
             },
         },
         {
@@ -38,9 +39,10 @@ const routes: Routes = [
                 productTag: ProductTagByNameResolver,
             },
             data: {
+                breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
                 showTags: false,
                 viewMode: ProductsViewMode.grid,
-                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables
+                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables,
             },
 
         },
@@ -48,10 +50,11 @@ const routes: Routes = [
             path: 'numeros',
             component: ProductsPageComponent,
             data: {
+                breadcrumbs: [],
                 showTags: false,
                 viewMode: ProductsViewMode.list,
                 title: 'Tous les numéros',
-                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {not: true}}}]}]}} as ProductsVariables
+                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {not: true}}}]}]}} as ProductsVariables,
             },
         },
         {
@@ -59,6 +62,9 @@ const routes: Routes = [
             component: ProductPageComponent,
             resolve: {
                 product: ProductResolver,
+            },
+            data: {
+                breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
             },
         },
         {

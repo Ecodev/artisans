@@ -23,6 +23,7 @@ const routes: Routes = [
             path: 'agenda',
             component: EventsPageComponent,
             data: {
+                breadcrumbs: [{link: '/association', label: 'L\'association'}],
                 contextVariables: {
                     filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: new Date()}}}]}]},
                     sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
@@ -33,11 +34,17 @@ const routes: Routes = [
             path: 'agenda/:eventId',
             component: EventPageComponent,
             resolve: {event: EventResolver},
+            data: {
+                breadcrumbs: [
+                    {link: '/association', label: 'L\'association'},
+                    {link: '/agenda', label: 'Agenda'},
+                ],            },
         },
         {
             path: 'actualite',
             component: NewsesPageComponent,
             data: {
+                breadcrumbs: [{link: '/association', label: 'L\'association'}],
                 contextVariables: {
                     filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
                     sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
@@ -48,6 +55,12 @@ const routes: Routes = [
             path: 'actualite/:newsId',
             component: NewsPageComponent,
             resolve: {news: NewsResolver},
+            data: {
+                breadcrumbs: [
+                    {link: '/association', label: 'L\'association'},
+                    {link: '/actualite', label: 'Actualités'},
+                ],
+            },
         },
         {
             path: 'agir-avec-nous',
@@ -55,15 +68,27 @@ const routes: Routes = [
                 {
                     path: 'prochaines-conversations-carbone',
                     component: NextSessionsComponent,
+                    data: {
+                        breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}],
+                    },
                 },
                 {
                     path: 'prochaines-conversations-carbone/:region',
                     component: NextSessionsComponent,
+                    data: {
+                        breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}],
+                    },
                 },
                 {
                     path: 'conversation-carbone/:sessionId',
                     component: SessionPageComponent,
                     resolve: {session: SessionResolver},
+                    data: {
+                        breadcrumbs: [
+                            {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                            {link: '/agir-avec-nous/prochaines-conversations-carbone', label: 'Conversations carbone'},
+                        ],
+                    },
                 },
             ],
         },
@@ -79,6 +104,9 @@ const routes: Routes = [
         {
             path: 'larevuedurable',
             loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
+            data: {
+                breadcrumbs: [{link: '/larevuedurable', label: 'La Revue Durable'}],
+            },
         },
         {
             path: 'panier',

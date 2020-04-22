@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    natural-icon {
+        transform: scale(0.66);
+    }
+
+    .separator {
+        font-weight: 900;
+        opacity: 0.4
+    }
+
+}

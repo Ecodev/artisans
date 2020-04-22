@@ -22,6 +22,9 @@ export class NavigationService {
     constructor(private overlay: Overlay, private injector: Injector, private router: Router) {
     }
 
+    /**
+     * Open menu
+     */
     public open(connectedElement: ElementRef<HTMLElement>, items: MenuItem[], offsetTop: number): Observable<any> {
 
         // Check how many items to display to adjust menu height and prevent overflow (due to absolute positionning)

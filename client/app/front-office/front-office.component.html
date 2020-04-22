@@ -29,7 +29,9 @@
             <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context:{ $implicit: mobileNavigation }"></ng-container>
 
             <ul *ngIf="viewer?.role === UserRole.administrator">
-                <li><a routerLink="/admin" matRipple>Admnistration</a></li>
+                <li>
+                    <a routerLink="/admin" matRipple>Admnistration</a>
+                </li>
             </ul>
         </div>
     </mat-sidenav>
@@ -97,6 +99,11 @@
 
         <!-- THE BODY IS HERE -->
         <div id="front-office-body">
+
+            <div class="container">
+                <app-breadcrumbs></app-breadcrumbs>
+            </div>
+
             <router-outlet></router-outlet>
         </div>
 

@@ -1,0 +1,5 @@
+<div class="separator" *ngIf="breadcrumbs.length">/</div>
+<ng-container *ngFor="let breadcrumb of breadcrumbs">
+    <a mat-button [routerLink]="breadcrumb.link">{{ breadcrumb.label }}</a>
+    <div class="separator">/</div>
+</ng-container>

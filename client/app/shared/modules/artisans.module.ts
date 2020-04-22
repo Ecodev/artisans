@@ -28,6 +28,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { ProductsComponent } from '../../admin/products/products/products.component';
 import { UsersComponent } from '../../admin/users/users/users.component';
 import { AddressComponent } from '../components/address/address.component';
+import { BreadcrumbsComponent } from '../components/breadcrumbs/breadcrumbs.component';
 import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
@@ -52,6 +53,7 @@ const declarations = [
     ProductsComponent,
     ProductTagsNavigationComponent,
     PriceComponent,
+    BreadcrumbsComponent
 ];
 
 const imports = [

@@ -1,0 +1,17 @@
+@mixin breadcrumbs($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    app-breadcrumbs {
+        .mat-button {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+
+    }
+
+}
+
+

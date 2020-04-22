@@ -10,6 +10,7 @@
 @import 'page-header';
 @import 'artisans.theme';
 @import '../app/shared/components/money/money.theme';
+@import '../app/shared/components/breadcrumbs/breadcrumbs.theme';
 @import '../app/shared/components/file/file.theme';
 @import '../app/shared/components/product-tags-navigation/product-tags-navigation.theme';
 @import '../app/admin/products/product/product.theme';
@@ -38,6 +39,7 @@
     @include productsPage($theme);
     @include product-tags-navigation($theme);
     @include menu($theme);
+    @include breadcrumbs($theme);
 }
 
 $artisans-blue: (

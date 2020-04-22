@@ -1,6 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { fromUrl, memoryStorageProvider, NaturalPersistenceService, SESSION_STORAGE } from '@ecodev/natural';
+import { fromUrl, memoryStorageProvider, NaturalPersistenceService } from '@ecodev/natural';
 import { ProductService } from '../../../../../admin/products/services/product.service';
 import { AbstractInfiniteLoadList } from '../../../../../shared/classes/AbstractInfiniteLoadList';
 import { Products, Products_products_items, ProductsVariables } from '../../../../../shared/generated-types';
@@ -44,8 +44,9 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
     ngOnInit(): void {
         super.ngOnInit();
 
+        this.title = this.route.snapshot.params.productTagName || this.route.snapshot.data.title;
+
         this.route.data.subscribe(data => {
-            this.title = data.title;
             this.showTags = !!data.showTags;
             this.viewMode = data.viewMode || ProductsViewMode.grid;
 

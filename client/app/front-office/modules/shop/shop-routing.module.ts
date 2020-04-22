@@ -38,7 +38,7 @@ const routes: Routes = [
                 productTag: ProductTagByNameResolver,
             },
             data: {
-                showTags: true,
+                showTags: false,
                 viewMode: ProductsViewMode.grid,
                 contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables
             },

@@ -112,7 +112,7 @@
 <div class="categories section">
     <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px">
         <div class="mat-display-1 ">NOS THEMES</div>
-        <app-product-tags-navigation></app-product-tags-navigation>
+        <app-tags-navigation [service]="productTagService" [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
         <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
     </div>
 </div>

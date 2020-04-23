@@ -1,20 +1,8 @@
 <div class="container">
 
-    <mat-form-field>
-        <mat-label>Canton</mat-label>
-        <mat-select (selectionChange)="goToRegion($event.value)" [ngModel]="selectedRegion">
-            <mat-option [value]="null"></mat-option>
-            <mat-option *ngFor="let region of regions" [value]="region">{{ region }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <div class="mat-display-1">Prochaines sessions</div>
 
-    <div *ngIf="localities?.length" fxLayout="row wrap" fxLayoutGap="30px">
-        <ng-container *ngFor="let locality of localities">
-            <a *ngIf="nextSessionByRegion.get(locality)"
-               [routerLink]="['/agir-avec-nous/conversation-carbone', nextSessionByRegion.get(locality).id]"
-               fxFlex="45"
-            >{{ locality }}</a>
-        </ng-container>
-    </div>
+    <app-tags-navigation [items]="localities" [linkBase]="['/agir-avec-nous/conversation-carbone']"></app-tags-navigation>
+
 
 </div>

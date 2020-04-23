@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { EventService } from '../../../admin/events/services/event.service';
 import { NewsService } from '../../../admin/newses/services/news.service';
+import { ProductTagService } from '../../../admin/product-tags/services/product-tag.service';
 import { ProductService } from '../../../admin/products/services/product.service';
 import { UserService } from '../../../admin/users/services/user.service';
 import {
@@ -51,7 +52,8 @@ export class HomepageComponent implements OnInit {
                 private newsService: NewsService,
                 private eventService: EventService,
                 private productService: ProductService,
-                public permissionService: PermissionsService) {
+                public permissionService: PermissionsService,
+                public productTagService: ProductTagService) {
     }
 
     public ngOnInit(): void {

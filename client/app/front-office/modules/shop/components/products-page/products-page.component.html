@@ -4,7 +4,7 @@
 
     <ng-container *ngIf="items.length">
 
-        <app-product-tags-navigation *ngIf="showTags"></app-product-tags-navigation>
+        <app-tags-navigation *ngIf="showTags" [service]="productTagService" [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
 
         <!--
         GRID

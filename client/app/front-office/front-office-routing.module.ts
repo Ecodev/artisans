@@ -38,7 +38,8 @@ const routes: Routes = [
                 breadcrumbs: [
                     {link: '/association', label: 'L\'association'},
                     {link: '/agenda', label: 'Agenda'},
-                ],            },
+                ],
+            },
         },
         {
             path: 'actualite',
@@ -69,14 +70,10 @@ const routes: Routes = [
                     path: 'prochaines-conversations-carbone',
                     component: NextSessionsComponent,
                     data: {
-                        breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}],
-                    },
-                },
-                {
-                    path: 'prochaines-conversations-carbone/:region',
-                    component: NextSessionsComponent,
-                    data: {
-                        breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}],
+                        breadcrumbs: [
+                            {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                            {label: 'Conversations carbone'},
+                        ],
                     },
                 },
                 {

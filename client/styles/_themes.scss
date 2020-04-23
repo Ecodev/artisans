@@ -12,7 +12,7 @@
 @import '../app/shared/components/money/money.theme';
 @import '../app/shared/components/breadcrumbs/breadcrumbs.theme';
 @import '../app/shared/components/file/file.theme';
-@import '../app/shared/components/product-tags-navigation/product-tags-navigation.theme';
+@import '../app/shared/components/tags-navigation/tags-navigation.theme';
 @import '../app/admin/products/product/product.theme';
 @import '../app/profile/components/profile/profile.theme';
 @import '../app/front-office/components/homepage/homepage.theme';
@@ -37,7 +37,7 @@
     @include homepage($theme);
     @include front-office($theme);
     @include productsPage($theme);
-    @include product-tags-navigation($theme);
+    @include tags-navigation($theme);
     @include menu($theme);
     @include breadcrumbs($theme);
 }

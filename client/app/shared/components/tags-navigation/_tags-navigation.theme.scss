@@ -1,10 +1,10 @@
-@mixin product-tags-navigation($theme) {
+@mixin tags-navigation($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    app-product-tags-navigation {
+    app-tags-navigation {
 
         * {
             color: lighten(mat-color($foreground, text), 60%);

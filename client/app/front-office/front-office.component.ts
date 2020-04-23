@@ -66,7 +66,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 {display: 'Toutes nos actions'},
                 {display: 'Calculer son bilan carbone'},
                 {
-                    display: 'Participer aux conversations carbone',
+                    display: 'Conversations carbone',
                     children: [
                         {display: 'La méthode'},
                         {

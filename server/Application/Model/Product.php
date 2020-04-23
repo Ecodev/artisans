@@ -34,7 +34,7 @@ class Product extends AbstractProduct
     /**
      * @var null|int
      *
-     * @ORM\Column(type="smallint", nullable=true, options={"unsigned" = true})
+     * @ORM\Column(type="smallint", nullable=true, unique=true, options={"unsigned" = true})
      */
     private $reviewNumber;
 
@@ -44,6 +44,16 @@ class Product extends AbstractProduct
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $file;
+
+    /**
+     * @var null|Product
+     *
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(onDelete="CASCADE")
+     * })
+     */
+    private $review;
 
     /**
      * @var Collection
@@ -214,5 +224,21 @@ class Product extends AbstractProduct
     {
         $this->relatedProducts->removeElement($product);
         $product->relatedProducts->removeElement($this);
+    }
+
+    /**
+     * @return null|Product
+     */
+    public function getReview(): ?self
+    {
+        return $this->review;
+    }
+
+    /**
+     * @param null|Product $review
+     */
+    public function setReview(?self $review): void
+    {
+        $this->review = $review;
     }
 }

@@ -13,6 +13,21 @@ import { FilesService } from '../../files/services/files.service';
 import { ProductTagService } from '../../product-tags/services/product-tag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
+
+class ReviewXorArticleErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        if (!form) {
+            return false;
+        }
+
+        const formGroup = form.form;
+        const isDirty = !!(formGroup.get('review')?.dirty || formGroup.get('reviewNumber')?.dirty);
+
+        return formGroup.hasError('reviewXorArticle') && isDirty;
+    }
+}
 
 @Component({
     selector: 'app-product',
@@ -28,7 +43,9 @@ export class ProductComponent
         UpdateProductVariables,
         any> implements OnInit {
 
-    constructor(private productService: ProductService,
+    public reviewXorArticleErrorStateMatcher = new ReviewXorArticleErrorStateMatcher();
+
+    constructor(public productService: ProductService,
                 injector: Injector,
                 public productTagService: ProductTagService,
                 public imageService: ImageService,

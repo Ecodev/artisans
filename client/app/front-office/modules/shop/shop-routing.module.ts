@@ -29,7 +29,7 @@ const routes: Routes = [
                 breadcrumbs: [],
                 showTags: true,
                 viewMode: ProductsViewMode.grid,
-                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables,
+                contextVariables: {filter: {groups: [{conditions: [{review: {null: {not: true}}}]}]}} as ProductsVariables,
             },
         },
         {
@@ -42,7 +42,7 @@ const routes: Routes = [
                 breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
                 showTags: false,
                 viewMode: ProductsViewMode.grid,
-                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {}}}]}]}} as ProductsVariables,
+                contextVariables: {filter: {groups: [{conditions: [{review: {null: {not: true}}}]}]}} as ProductsVariables,
             },
 
         },

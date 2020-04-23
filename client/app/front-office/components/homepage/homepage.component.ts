@@ -84,7 +84,7 @@ export class HomepageComponent implements OnInit {
                     {
                         conditions: [
                             {
-                                reviewNumber: {null: {not: true}},
+                                review: {null: {not: true}},
                                 releaseDate: {lessOrEqual: {value: new Date()}},
                                 isActive: {equal: {value: true}},
                             },

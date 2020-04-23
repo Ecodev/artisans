@@ -61,6 +61,10 @@ export const productQuery = gql`
         product(id: $id) {
             ...productMeta
             description
+            review {
+                id
+                name
+            }
             permissions {
                 ...permissions
             }

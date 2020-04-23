@@ -80,9 +80,18 @@
 
                         <mat-form-field>
                             <mat-label>Numéro de revue</mat-label>
-                            <input (change)="update()" formControlName="reviewNumber" matInput type="number">
-                            <mat-hint>Numéro de la revue (seulement pour les revues ! ne pas saisir pour les articles)</mat-hint>
+                            <input (change)="update()" formControlName="reviewNumber" matInput type="number" [errorStateMatcher]="reviewXorArticleErrorStateMatcher">
+                            <mat-hint>Seulement pour les revues</mat-hint>
+                            <mat-error *ngIf="form.hasError('reviewXorArticle')">Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer un numéro de revue pour une revue, soit choisir une revue existante pour un article.</mat-error>
                         </mat-form-field>
+
+                        <natural-select (selectionChange)="update()"
+                                        [service]="productService"
+                                        formControlName="review"
+                                        placeholder="Revue dont est extrait cet article"
+                                        [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
+                                        [filter]="{groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}, {reviewNumber: {null: {not: true}}}]}]}"
+                        ></natural-select>
 
                         <mat-form-field>
                             <mat-label>Durée de lecture</mat-label>
@@ -149,7 +158,7 @@
                                   class="mat-elevation-z2"
                                   accept="application/pdf"
                         ></app-file>
-                        </div>
+                    </div>
 
                     <div fxFlex="50" fxLayout="column">
                         <h2 class="mat-h2">Illustration</h2>
@@ -162,7 +171,7 @@
                                   action="upload"
                                   class="mat-elevation-z2"
                         ></app-file>
-                </div>
+                    </div>
 
                     <div fxFlex="25" fxLayout="column">
                         <h2 class="mat-h2">Aperçu de l'article</h2>

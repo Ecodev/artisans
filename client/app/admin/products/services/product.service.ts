@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique } from '@ecodev/natural';
+import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, unique } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
     CreateProduct,
@@ -41,6 +41,25 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             deleteProducts);
     }
 
+    public getFormGroupValidators(model?: Literal): ValidatorFn[] {
+        return [
+            (control: FormGroup): ValidationErrors | null => {
+                const reviewNumber = control.get('reviewNumber');
+                const review = control.get('review');
+
+                if (!review || !reviewNumber) {
+                    return null;
+                }
+
+                if (review.value && reviewNumber.value) {
+                    return {reviewXorArticle: true}
+                }
+
+                return null;
+            },
+        ]
+    }
+
     public getFormValidators(): FormValidators {
         return {
             code: [Validators.maxLength(20)],
@@ -68,6 +87,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             image: null,
             illustration: null,
             releaseDate: null,
+            review: null,
             reviewNumber: null,
             type: ProductType.digital,
             readingDuration: null,

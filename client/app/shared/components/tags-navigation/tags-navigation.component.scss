@@ -1,10 +1,17 @@
 :host {
 
-    * {
-        font-size: 36px;
-        line-height: 1.2em;
-        font-weight: bold;
-        float: left;
+    font-size: 40px;
+    line-height: 1.4em;
+    font-weight: bold;
+
+    .dot {
+        display: inline-block;
+        position: relative;
+        top: -7px;
+        margin: -15px 10px 0 10px;
+        height: 10px;
+        width: 10px;
+        border-radius: 100%;
     }
 
     .dot:last-child {
@@ -12,10 +19,7 @@
     }
 
     a {
-        display: block;
         text-decoration: none;
-        padding: 0 5px;
     }
-
 
 }

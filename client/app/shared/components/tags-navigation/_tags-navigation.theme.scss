@@ -7,7 +7,11 @@
     app-tags-navigation {
 
         * {
-            color: mat-color($foreground, text, 0.6);
+            color: mat-color($foreground, text, 0.25);
+        }
+
+        .dot {
+            background-color: mat-color($foreground, text, 0.15);
         }
 
         a:hover {

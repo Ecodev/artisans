@@ -1,9 +1,19 @@
 START TRANSACTION;
 
 REPLACE INTO product_tag (id, name) VALUES
-(6000, 'Mobilité'),
-(6001, 'Technologie'),
-(6002, 'Jardinage');
+(6000, 'Agriculture et alimentation'),
+(6001, 'Biodiversité'),
+(6002, 'Energie et climat'),
+(6003, 'Construction, ville et urbanisme'),
+(6004, 'Mobilité'),
+(6005, 'Consommation et déchets'),
+(6007, 'Ressources et équilibres de la Terre'),
+(6008, 'Démographie'),
+(6009, 'Economie'),
+(6010, 'Démocratie et gouvernance'),
+(6011, 'Education'),
+(6012, 'Philosophie et culture'),
+(6013, 'Santé');
 
 REPLACE INTO image (id, filename, width, height, mime) VALUES
 (5000, 'revue61.jpg', 1358, 1831, 'image/jpeg'),

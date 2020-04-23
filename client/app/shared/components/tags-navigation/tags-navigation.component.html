@@ -1,4 +1,4 @@
 <ng-container *ngFor="let item of items">
-    <a [routerLink]="getLink(item)" matRipple>{{ item.name }}</a>
-    <div class="dot">·</div>
+    <a [routerLink]="getLink(item)">{{ item.name }}</a>
+    <span class="dot"></span>
 </ng-container>

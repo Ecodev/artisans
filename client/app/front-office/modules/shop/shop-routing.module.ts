@@ -4,7 +4,7 @@ import { ProductTagByNameResolver } from '../../../admin/product-tags/services/p
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
 import { ProductsVariables } from '../../../shared/generated-types';
 import { ProductPageComponent } from './components/product-page/product-page.component';
-import { ProductsPageComponent, ProductsViewMode } from './components/products/products-page.component';
+import { ProductsPageComponent, ProductsViewMode } from './components/products-page/products-page.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
 
 const routes: Routes = [

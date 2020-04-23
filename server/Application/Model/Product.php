@@ -8,6 +8,7 @@ use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
  * An item that can be booked by a user
@@ -52,12 +53,20 @@ class Product extends AbstractProduct
     private $productTags;
 
     /**
+     * @var Collection
+     *
+     * @ORM\ManyToMany(targetEntity="Product")
+     */
+    private $relatedProducts;
+
+    /**
      * Constructor
      */
     public function __construct(string $name = '')
     {
         parent::__construct($name);
         $this->productTags = new ArrayCollection();
+        $this->relatedProducts = new ArrayCollection();
     }
 
     /**
@@ -162,5 +171,48 @@ class Product extends AbstractProduct
         }
 
         $this->file = $file;
+    }
+
+    /**
+     * Get related products
+     *
+     * @API\Field(type="Product[]")
+     *
+     * @return Collection
+     */
+    public function getRelatedProducts(): Collection
+    {
+        return $this->relatedProducts;
+    }
+
+    /**
+     * Add related product
+     *
+     * @param Product $product
+     */
+    public function addRelatedProduct(self $product): void
+    {
+        if ($product === $this) {
+            throw new \InvalidArgumentException('A product cannot be related to itself');
+        }
+
+        if (!$this->relatedProducts->contains($product)) {
+            $this->relatedProducts[] = $product;
+        }
+
+        if (!$product->relatedProducts->contains($this)) {
+            $product->relatedProducts[] = $this;
+        }
+    }
+
+    /**
+     * Remove related product
+     *
+     * @param Product $product
+     */
+    public function removeRelatedProduct(self $product): void
+    {
+        $this->relatedProducts->removeElement($product);
+        $product->relatedProducts->removeElement($this);
     }
 }

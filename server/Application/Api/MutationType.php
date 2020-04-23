@@ -66,9 +66,10 @@ class MutationType extends ObjectType
             Standard::buildMutation(User::class),
             Standard::buildMutation(UserTag::class),
             Standard::buildMutation(Comment::class),
-            Standard::buildRelationMutation(UserTag::class, User::class),
+            Standard::buildRelationMutation(Product::class, Product::class, 'RelatedProduct'),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),
+            Standard::buildRelationMutation(UserTag::class, User::class),
 
             $specializedFields,
         );

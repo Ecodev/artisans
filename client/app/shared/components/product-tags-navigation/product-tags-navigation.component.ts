@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NaturalQueryVariablesManager } from '@ecodev/natural';
 import { ProductTagService } from '../../../admin/product-tags/services/product-tag.service';
 import { ProductTags_productTags_items, ProductTagsVariables } from '../../generated-types';
@@ -19,21 +19,10 @@ export class ProductTagsNavigationComponent implements OnInit {
     constructor(private productTagService: ProductTagService) {
     }
 
-    private _current: ProductTags_productTags_items;
-
-    @Input() set current(value: ProductTags_productTags_items) {
-        this._current = value;
-
-        if (this.tags) {
-            this.tags.forEach(tag => tag.active = value && tag.id === value.id);
-        }
-    }
-
     ngOnInit() {
         const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
         this.productTagService.getAll(qvm).subscribe(result => {
             this.tags = result.items.map(tag => Object.assign(tag, {active: false}));
-            this.current = this._current;
         });
     }
 

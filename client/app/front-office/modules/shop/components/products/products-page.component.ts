@@ -27,15 +27,32 @@ export enum ProductsViewMode {
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
 
+    /**
+     * Display tag navigation and tags over products
+     * In product list by tag, hide them
+     * Configurable by routing
+     */
     public showTags = true;
-    public viewMode: ProductsViewMode = ProductsViewMode.grid;
-    public currentProductTag;
 
+    /**
+     * Display as grid or as list
+     */
+    public viewMode: ProductsViewMode = ProductsViewMode.grid;
+
+    /**
+     * Items to display
+     */
     public products: Products_products_items[] = [];
 
-    public ProductsViewMode = ProductsViewMode;
-
+    /**
+     * Page main title
+     */
     public title: string;
+
+    /**
+     * Template access
+     */
+    public ProductsViewMode = ProductsViewMode;
 
     constructor(route: ActivatedRoute, productService: ProductService, injector: Injector) {
         super(productService, injector);
@@ -51,10 +68,10 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
             this.viewMode = data.viewMode || ProductsViewMode.grid;
 
             if (data.productTag && data.productTag.model) {
-                this.currentProductTag = data.productTag.model;
                 this.pagination({offset: null, pageIndex: 0, pageSize: 10});
-                this.variablesManager.set('category',
-                    {filter: {groups: [{conditions: [{productTags: {have: {values: [data.productTag.model.id]}}}]}]}});
+                this.variablesManager.set('category', {
+                    filter: {groups: [{conditions: [{productTags: {have: {values: [data.productTag.model.id]}}}]}]},
+                });
             }
         });
 

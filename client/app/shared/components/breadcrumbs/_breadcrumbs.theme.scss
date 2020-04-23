@@ -10,6 +10,16 @@
             padding-right: 7px;
         }
 
+        * {
+            color: mat-color($foreground, text, 0.7);
+        }
+
+        .separator {
+            &::before, &::after {
+                border-color: mat-color($foreground, text, 0.3);
+            }
+        }
+
     }
 
 }

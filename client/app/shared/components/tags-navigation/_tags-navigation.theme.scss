@@ -7,7 +7,7 @@
     app-tags-navigation {
 
         * {
-            color: lighten(mat-color($foreground, text), 60%);
+            color: mat-color($foreground, text, 0.6);
         }
 
         a:hover {

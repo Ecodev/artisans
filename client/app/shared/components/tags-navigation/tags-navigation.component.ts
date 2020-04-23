@@ -21,7 +21,12 @@ export class TagsNavigationComponent implements OnInit {
     /**
      * Url base
      */
-    @Input() linkBase: any[];
+    @Input() linkBase: any[] = [];
+
+    /**
+     *
+     */
+    @Input() linkToAttribute = 'name';
 
     constructor() {
     }
@@ -37,7 +42,7 @@ export class TagsNavigationComponent implements OnInit {
     }
 
     getLink(item) {
-        return [...this.linkBase, item.id || item.name];
+        return [...this.linkBase, item[this.linkToAttribute]];
     }
 
 }

@@ -72,7 +72,7 @@
 
                         <mat-form-field>
                             <mat-label>Date de publication</mat-label>
-                            <input [matDatepicker]="picker" required="required" formControlName="releaseDate" matInput>
+                            <input [matDatepicker]="picker" required="required" formControlName="releaseDate" matInput (change)="update()">
                             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                             <mat-error *ngIf="form.get('releaseDate')?.hasError('required')">Requis</mat-error>

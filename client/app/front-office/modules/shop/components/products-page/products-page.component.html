@@ -10,7 +10,12 @@
         GRID
         -->
         <div class="grid products" *ngIf="viewMode === ProductsViewMode.grid">
-            <div *ngFor="let product of items" class="product" fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="start start">
+            <div *ngFor="let product of items; let index = index"
+                 class="product"
+                 fxLayout="column"
+                 fxLayoutGap="10px"
+                 fxLayoutAlign="start start"
+            >
 
                 <div class="product-tags" *ngIf="showTags">
                     <a *ngFor="let tag of product.productTags"
@@ -21,15 +26,22 @@
 
                 <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
 
-                <div class="product-price mat-body-strong" *ngIf="!product.file">
-                    <span class="frame-primary">Abonné</span>
-                    ou
-                    <app-price [product]="product" class="mat-h3"></app-price>
-                </div>
-
-                <a mat-flat-button color="accent" *ngIf="product.file" [href]="'/file/' + product.file.id" class="product-file-button">
-                    Télécharger
+                <a *ngIf="product.illustration" [routerLink]="['/larevuedurable/article', product.id]">
+                    <img [attr.src]="'/image/' + product.illustration.id + '/300'" *ngIf="index === 0" class="product-illustration" />
+                    <img [attr.src]="'/image/' + product.illustration.id + '/140'" *ngIf="index === 1" class="product-illustration" />
                 </a>
+
+                <div fxFlex fxLayout="column" fxLayoutAlign="end">
+                    <div class="product-price mat-body-strong" *ngIf="!product.file">
+                        <span class="frame-primary">Abonné</span>
+                        ou
+                        <app-price [product]="product" class="mat-h3"></app-price>
+                    </div>
+
+                    <a mat-flat-button color="accent" *ngIf="product.file" [href]="'/file/' + product.file.id" class="product-file-button">
+                        Télécharger
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -82,7 +94,11 @@
             </div>
         </div>
 
-        <a (click)="loadMore()" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">Afficher plus d'articles</a>
+        <div fxLayout="row" fxLayoutAlign="center"  >
+            <a (click)="loadMore()" color="primary" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">Afficher plus
+                d'articles
+            </a>
+        </div>
     </ng-container>
 
     <div class="mat-h2" *ngIf="items.length === 0">Aucun résultat n'a été trouvé.</div>

@@ -53,11 +53,27 @@
             <div [innerHTML]="data.model.shortDescription" class="mat-h3"></div>
         </section>
 
-        <!-- Download -->
-        <div fxFlex="20" class="frame-accent padding" *ngIf="data.model.file">
-            <h2 class="mat-h2">Téléchargement</h2>
-            <p class="mat-body">Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
-            <a mat-flat-button [href]="'/file/' + data.model.file.id" target="_blank">Télécharger cette revue</a>
+        <div fxFlex="0 auto 230px" fxLayout="column" fxLayoutGap="40px" >
+
+            <!-- Related review link -->
+            <div *ngIf="data.model.review" fxLayout="column" fxLayoutGap="10px" class="review">
+                <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
+                    <img [attr.src]="'/image/' + data.model.review.image.id + '/300'" alt="couverture de la revue" />
+                </a>
+                <span class="mat-h4">Article issu de la revue</span>
+                <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">
+                    <span class="text-primary">N° {{ data.model.review.reviewNumber }}</span>
+                    {{ data.model.review.name }}
+                </a>
+                <span class="text-light">{{ data.model.review.releaseDate |  date: 'MMMM yyyy' | capitalize }}</span>
+            </div>
+
+            <!-- Download -->
+            <div class="frame-accent padding" *ngIf="data.model.file">
+                <h2 class="mat-h2">Téléchargement</h2>
+                <p class="mat-body">Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
+                <a mat-flat-button [href]="'/file/' + data.model.file.id" target="_blank">Télécharger cette revue</a>
+            </div>
         </div>
     </div>
 
@@ -73,9 +89,7 @@
             <natural-icon name="expand_more"></natural-icon>
         </div>
         <mat-nav-list *ngIf="articlesMenuOpen">
-            <a mat-list-item
-               *ngFor="let article of articles"
-               [routerLink]="['/larevuedurable/article', article.id]"
+            <a mat-list-item *ngFor="let article of articles" [routerLink]="['/larevuedurable/article', article.id]"
             > {{ article.name }} </a>
         </mat-nav-list>
     </div>

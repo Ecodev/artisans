@@ -19,6 +19,7 @@
 @import '../app/front-office/front-office.theme';
 @import '../app/front-office/components/menu/menu.theme';
 @import '../app/front-office/modules/shop/components/products-page/products-page.theme';
+@import '../app/front-office/modules/shop/components/product-page/product-page.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -36,7 +37,8 @@
     @include profile($theme);
     @include homepage($theme);
     @include front-office($theme);
-    @include productsPage($theme);
+    @include products-page($theme);
+    @include product-page($theme);
     @include tags-navigation($theme);
     @include menu($theme);
     @include breadcrumbs($theme);

@@ -1,4 +1,4 @@
-@mixin productsPage($theme) {
+@mixin products-page($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $warn: map-get($theme, warn);

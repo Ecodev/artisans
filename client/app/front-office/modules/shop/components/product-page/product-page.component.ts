@@ -89,32 +89,35 @@ export class ProductPageComponent
     ngOnInit(): void {
         super.ngOnInit();
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
-        this.articlesMenuOpen = false;
-        this.articles = [];
 
-        if (this.data.model.reviewNumber) {
-            console.log('asdf');
-            const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();
-            qvmArticles.set('variables', {filter: {groups: [{conditions: [{review: {in: {values: [this.data.model.id]}}}]}]}});
-            this.productService.getAll(qvmArticles).subscribe((result) => this.articles = result.items);
-        }
+        this.route.data.subscribe(data => {
 
-        const qvm = new NaturalQueryVariablesManager<PurchasesVariables>();
-        qvm.set('variables', {
-            filter: {groups: [{conditions: [{id: {equal: {value: this.data.model.id}}}]}]},
+            this.articlesMenuOpen = false;
+            if (data.product.model.reviewNumber) {
+                const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();
+                qvmArticles.set('variables', {filter: {groups: [{conditions: [{review: {in: {values: [this.data.model.id]}}}]}]}});
+                this.productService.getAll(qvmArticles).subscribe((result) => this.articles = result.items);
+            } else {
+                this.articles = [];
+            }
+
+            const qvm = new NaturalQueryVariablesManager<PurchasesVariables>();
+            qvm.set('variables', {filter: {groups: [{conditions: [{id: {equal: {value: this.data.model.id}}}]}]}});
+
+            // Show button to buy only if we didn't already bought those version
+            this.purchaseService.getAll(qvm).subscribe(purchases => {
+                const digital = [ProductType.both, ProductType.digital];
+                const paper = [ProductType.both, ProductType.paper];
+
+                this.showBuyDigital = digital.includes(this.data.model.type)
+                                      && !purchases.items.some(orderLine => digital.includes(orderLine.type))
+                                      && !this.data.model.file; // A digital might be allowed via subscription, not purchase
+
+                this.showBuyPaper = paper.includes(this.data.model.type);
+            });
+
         });
 
-        // Show button to buy only if we didn't already bought those version
-        this.purchaseService.getAll(qvm).subscribe(purchases => {
-            const digital = [ProductType.both, ProductType.digital];
-            const paper = [ProductType.both, ProductType.paper];
-
-            this.showBuyDigital = digital.includes(this.data.model.type)
-                                  && !purchases.items.some(orderLine => digital.includes(orderLine.type))
-                                  && !this.data.model.file; // A digital might be allowed via subscription, not purchase
-
-            this.showBuyPaper = paper.includes(this.data.model.type);
-        });
     }
 
 }

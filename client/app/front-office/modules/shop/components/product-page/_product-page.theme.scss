@@ -1,0 +1,20 @@
+@mixin product-page($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $bg: map-get($theme, background);
+    $fg: map-get($theme, foreground);
+
+    app-product-page {
+
+        .review {
+            border-left-color: mat-color($primary);
+
+            a {
+                color: mat-color($fg, text);
+            }
+        }
+    }
+}
+
+

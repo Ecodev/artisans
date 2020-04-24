@@ -65,6 +65,11 @@ export const productQuery = gql`
             review {
                 id
                 name
+                reviewNumber
+                image {
+                    id
+                }
+                releaseDate
             }
             permissions {
                 ...permissions

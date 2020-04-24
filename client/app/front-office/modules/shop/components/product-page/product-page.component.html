@@ -61,9 +61,33 @@
         </div>
     </div>
 
+    <div *ngIf="articles?.length">
+        <div matRipple
+             class="mat-title text-primary"
+             (click)="articlesMenuOpen = !articlesMenuOpen"
+             fxLayout="row"
+             fxLayoutGap="10px"
+             fxLayoutAlign="start center"
+        >
+            <span>Voir les articles de ce numéro</span>
+            <natural-icon name="expand_more"></natural-icon>
+        </div>
+        <mat-nav-list *ngIf="articlesMenuOpen">
+            <a mat-list-item
+               *ngFor="let article of articles"
+               [routerLink]="['/larevuedurable/article', article.id]"
+            > {{ article.name }} </a>
+        </mat-nav-list>
+    </div>
+
     <div fxLayout="column" fxLayoutGap="30px">
 
-        <div *ngIf="!viewer" class="mat-h3 mat-card mat-elevation-z3 frame" fxLayout="row wrap" fxLayoutAlign="start baseline" fxLayoutGap="15px">
+        <div *ngIf="!viewer"
+             class="mat-h3 mat-card mat-elevation-z3 frame"
+             fxLayout="row wrap"
+             fxLayoutAlign="start baseline"
+             fxLayoutGap="15px"
+        >
             <div class="mat-h1 no-margin-bottom">Intéressé par ce contenu ?</div>
             <div>Si vous êtes déjà abonnés à la version digitale</div>
             <a mat-flat-button color="primary" routerLink="/login" [queryParams]="{returnUrl: router.url}">connectez-vous !</a>
@@ -82,8 +106,7 @@
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyDigital"
-                    >
+                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyDigital">
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>

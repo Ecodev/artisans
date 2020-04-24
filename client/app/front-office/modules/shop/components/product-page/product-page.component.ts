@@ -8,6 +8,8 @@ import {
     CreateProductVariables,
     CurrentUserForProfile,
     Product,
+    Products_products_items,
+    ProductsVariables,
     ProductType,
     ProductVariables,
     PurchasesVariables,
@@ -63,14 +65,23 @@ export class ProductPageComponent
     public showBuyDigital = false;
 
     /**
+     * List of articles contained in current number
+     */
+    public articles: Products_products_items[] = [];
+
+    /**
+     * Boolean that represents the sub-articles navigation menu visibility
+     */
+    public articlesMenuOpen = false;
+
+    /**
      * Hide buy paper version if it has already been bought as it can be bought only once.
      */
     public showBuyPaper = false;
 
-    constructor(
-        private productService: ProductService,
-        private purchaseService: PurchaseService,
-        injector: Injector,
+    constructor(private productService: ProductService,
+                private purchaseService: PurchaseService,
+                injector: Injector,
     ) {
         super('product', productService, injector);
     }
@@ -78,6 +89,15 @@ export class ProductPageComponent
     ngOnInit(): void {
         super.ngOnInit();
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
+        this.articlesMenuOpen = false;
+        this.articles = [];
+
+        if (this.data.model.reviewNumber) {
+            console.log('asdf');
+            const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();
+            qvmArticles.set('variables', {filter: {groups: [{conditions: [{review: {in: {values: [this.data.model.id]}}}]}]}});
+            this.productService.getAll(qvmArticles).subscribe((result) => this.articles = result.items);
+        }
 
         const qvm = new NaturalQueryVariablesManager<PurchasesVariables>();
         qvm.set('variables', {

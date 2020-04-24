@@ -27,7 +27,7 @@ class Product extends AbstractProduct
     /**
      * @var Date
      *
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $releaseDate;
 
@@ -130,17 +130,17 @@ class Product extends AbstractProduct
     }
 
     /**
-     * @return Date
+     * @return null|Date
      */
-    public function getReleaseDate(): Date
+    public function getReleaseDate(): ?Date
     {
         return $this->releaseDate;
     }
 
     /**
-     * @param Date $releaseDate
+     * @param null|Date $releaseDate
      */
-    public function setReleaseDate(Date $releaseDate): void
+    public function setReleaseDate(?Date $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }

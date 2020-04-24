@@ -83,6 +83,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             pricePerUnitEUR: '0',
             internalRemarks: '',
             isActive: true,
+            isHighlighted: null,
             image: null,
             illustration: null,
             releaseDate: null,

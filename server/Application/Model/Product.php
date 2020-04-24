@@ -70,6 +70,13 @@ class Product extends AbstractProduct
     private $relatedProducts;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $isHighlighted = false;
+
+    /**
      * Constructor
      */
     public function __construct(string $name = '')
@@ -240,5 +247,25 @@ class Product extends AbstractProduct
     public function setReview(?self $review): void
     {
         $this->review = $review;
+    }
+
+    /**
+     * Whether this product has more visibility
+     *
+     * @return bool
+     */
+    public function isHighlighted(): bool
+    {
+        return $this->isHighlighted;
+    }
+
+    /**
+     *Whether this product has more visibility
+     *
+     * @param bool $isHighlighted
+     */
+    public function setIsHighlighted(bool $isHighlighted): void
+    {
+        $this->isHighlighted = $isHighlighted;
     }
 }

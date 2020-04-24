@@ -65,9 +65,9 @@
 
                     <div fxFlex="33" fxLayout="column" fxLayoutGap="20px">
 
-                        <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
-                            <h2 class="mat-h2 no-margin" fxFlex>Disponible à la vente</h2>
-                            <mat-slide-toggle (change)="update()" formControlName="isActive">Disponible</mat-slide-toggle>
+                        <div fxLayout="column" class="margin-bottom" fxLayoutGap="20px">
+                            <mat-slide-toggle (change)="update()" formControlName="isActive">Disponible à la vente</mat-slide-toggle>
+                            <mat-slide-toggle (change)="update()" formControlName="isHighlighted">Mettre en avant</mat-slide-toggle>
                         </div>
 
                         <mat-form-field>
@@ -79,9 +79,17 @@
 
                         <mat-form-field>
                             <mat-label>Numéro de revue</mat-label>
-                            <input (change)="update()" formControlName="reviewNumber" matInput type="number" [errorStateMatcher]="reviewXorArticleErrorStateMatcher">
+                            <input (change)="update()"
+                                   formControlName="reviewNumber"
+                                   matInput
+                                   type="number"
+                                   [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
+                            >
                             <mat-hint>Seulement pour les revues</mat-hint>
-                            <mat-error *ngIf="form.hasError('reviewXorArticle')">Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer un numéro de revue pour une revue, soit choisir une revue existante pour un article.</mat-error>
+                            <mat-error *ngIf="form.hasError('reviewXorArticle')">Un produit ne peut pas être à la fois une revue et un
+                                article. Il faut soit entrer un numéro de revue pour une revue, soit choisir une revue existante pour un
+                                article.
+                            </mat-error>
                         </mat-form-field>
 
                         <natural-select (selectionChange)="update()"

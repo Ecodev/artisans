@@ -19,6 +19,7 @@ export const productMetaFragment = gql`
         pricePerUnitEUR
         code
         internalRemarks
+        isHighlighted
         image {
             id
         }

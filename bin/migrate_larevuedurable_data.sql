@@ -146,8 +146,8 @@ SELECT id_order,
     NULL,
     date_add,
     date_upd,
-    IF(id_currency = 1, total_paid_real, 0),
-    IF(id_currency = 2, total_paid_real, 0),
+    IF(id_currency = 1, total_products_wt, 0),
+    IF(id_currency = 2, total_products_wt, 0),
     IF(ps_orders.valid, 'validated', 'pending'),
     CASE module
         WHEN 'bankwire'

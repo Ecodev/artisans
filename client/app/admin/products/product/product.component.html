@@ -147,7 +147,7 @@
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
 
                     <div fxFlex="25" fxLayout="column">
-                        <h2 class="mat-h2">Article dématérialisé (PDF)</h2>
+                        <h2 class="mat-h2">Produit dématérialisé (PDF)</h2>
                         <app-file (modelChange)="setFormValue($event, 'file')"
                                   [height]="300"
                                   [model]="data.model.file"
@@ -174,7 +174,7 @@
                     </div>
 
                     <div fxFlex="25" fxLayout="column">
-                        <h2 class="mat-h2">Aperçu de l'article</h2>
+                        <h2 class="mat-h2">Aperçu du produit</h2>
                         <app-file (modelChange)="setFormValue($event, 'image')"
                                   [height]="300"
                                   [model]="data.model.image"

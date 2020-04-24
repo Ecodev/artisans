@@ -9,7 +9,7 @@ trait HasCode
     /**
      * @var null|string
      *
-     * @ORM\Column(type="string", length=20, nullable=true, unique=true)
+     * @ORM\Column(type="string", length=25, nullable=true, unique=true)
      */
     private $code;
 

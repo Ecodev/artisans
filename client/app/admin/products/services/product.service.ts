@@ -62,7 +62,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
 
     public getFormValidators(): FormValidators {
         return {
-            code: [Validators.maxLength(20)],
+            code: [Validators.maxLength(25)],
             name: [Validators.required, Validators.maxLength(100)],
             releaseDate: [Validators.required],
         };

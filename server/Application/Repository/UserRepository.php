@@ -44,8 +44,13 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
         $hashFromDb = $user->getPassword();
         $isMd5 = mb_strlen($hashFromDb) === 32 && ctype_xdigit($hashFromDb);
 
+        $possibleMd5 = [
+            md5($password), // normal md5 for our test data
+            md5('oQqnnn8sVBZzveU2zWCqdcu8N9JVE3GXFq6kS0i1ZyS3FkFoPZAN3GCA' . $password), // From PrestaShop `\ToolsCore::encrypt()` with hardcoded _COOKIE_KEY_ value
+        ];
+
         // If we found a user and he has a correct MD5 or correct new hash, then return the user
-        if (($isMd5 && md5($password) === $hashFromDb) || password_verify($password, $hashFromDb)) {
+        if (($isMd5 && in_array($hashFromDb, $possibleMd5, true)) || password_verify($password, $hashFromDb)) {
 
             // Update the hash in DB, if we are still MD5, or if PHP default options changed
             if ($isMd5 || password_needs_rehash($hashFromDb, PASSWORD_DEFAULT)) {

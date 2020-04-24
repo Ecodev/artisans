@@ -17,6 +17,7 @@ const routes: Routes = [
             path: 'recherche',
             component: ProductsPageComponent,
             data: {
+                breadcrumbs: [],
                 title: 'Résultats la recherche',
                 showTags: false,
                 viewMode: ProductsViewMode.list,

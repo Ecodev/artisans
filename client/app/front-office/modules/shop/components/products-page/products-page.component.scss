@@ -69,6 +69,14 @@
 
     .products.list {
 
+        .product-image {
+            max-width: 150px;
+
+            img {
+                max-width: 100%;
+            }
+        }
+
         & > :not(:last-child) {
             margin-bottom: 30px
         }

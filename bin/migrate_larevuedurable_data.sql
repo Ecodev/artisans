@@ -162,20 +162,21 @@ SELECT id_order,
     CONCAT('Référence selon PrestaShop: ', reference)
 FROM ps_orders;
 
-INSERT INTO order_line (id, owner_id, creation_date, update_date, order_id,
-                        name, balance_chf, balance_eur, type, product_id, subscription_id)
+INSERT INTO order_line (id, owner_id, creation_date, update_date, order_id, name, is_chf, balance_chf, balance_eur,
+                        type, product_id, subscription_id, quantity)
 SELECT id_order_detail,
     IF(ps_orders.id_customer IN (SELECT id FROM user), ps_orders.id_customer, NULL),
     ps_orders.date_add,
     ps_orders.date_upd,
     ps_orders.id_order,
-    CONCAT(IF(ps_order_detail.product_quantity > 1, CONCAT(ps_order_detail.product_quantity, 'x '), ''),
-           ps_order_detail.product_name), -- Either "my product" or "3x my product", because we don't have quantity anymore
+    ps_order_detail.product_name,
+    ps_orders.id_currency = 1,
     IF(ps_orders.id_currency = 1, ps_order_detail.total_price_tax_incl, 0) * 100,
     IF(ps_orders.id_currency = 2, ps_order_detail.total_price_tax_incl, 0) * 100,
     'both',
     IF(ps_order_detail.product_id IN (SELECT id FROM product), ps_order_detail.product_id, NULL),
-    IF(ps_order_detail.product_id IN (SELECT id FROM subscription), ps_order_detail.product_id, NULL)
+    IF(ps_order_detail.product_id IN (SELECT id FROM subscription), ps_order_detail.product_id, NULL),
+    ps_order_detail.product_quantity
 FROM ps_order_detail
          INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;
 

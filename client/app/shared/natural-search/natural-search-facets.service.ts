@@ -230,7 +230,7 @@ export class NaturalSearchFacetsService {
             this.productIsActive,
             this.productTags,
             {
-                display: 'Prix de vente (CHF)',
+                display: 'Prix de vente CHF',
                 field: 'pricePerUnitCHF',
                 component: TypeNumberComponent,
                 configuration: {
@@ -238,7 +238,7 @@ export class NaturalSearchFacetsService {
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
             {
-                display: 'Prix de vente (EUR)',
+                display: 'Prix de vente EUR',
                 field: 'pricePerUnitEUR',
                 component: TypeNumberComponent,
                 configuration: {
@@ -288,7 +288,7 @@ export class NaturalSearchFacetsService {
         ],
         orders: [
             {
-                display: 'Total (CHF)',
+                display: 'Total CHF',
                 field: 'balanceCHF',
                 component: TypeNumberComponent,
                 configuration: {
@@ -296,7 +296,7 @@ export class NaturalSearchFacetsService {
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
             {
-                display: 'Total (EUR)',
+                display: 'Total EUR',
                 field: 'balanceEUR',
                 component: TypeNumberComponent,
                 configuration: {
@@ -310,7 +310,7 @@ export class NaturalSearchFacetsService {
         orderLines: [
             this.owner,
             {
-                display: 'Montant (CHF)',
+                display: 'Montant CHF',
                 field: 'balanceCHF',
                 component: TypeNumberComponent,
                 configuration: {
@@ -318,7 +318,7 @@ export class NaturalSearchFacetsService {
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
             {
-                display: 'Montant (EUR)',
+                display: 'Montant EUR',
                 field: 'balanceEUR',
                 component: TypeNumberComponent,
                 configuration: {

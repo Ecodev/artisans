@@ -18,7 +18,8 @@
                     <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="lines">Entrées</span>
                     <span naturalColumnsPickerColumn="status">Statut</span>
-                    <span naturalColumnsPickerColumn="balance">Total</span>
+                    <span naturalColumnsPickerColumn="balanceCHF">Total CHF</span>
+                    <span naturalColumnsPickerColumn="balanceEUR">Total EUR</span>
                 </natural-columns-picker>
             </natural-search>
         </div>
@@ -67,15 +68,22 @@
                     <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 
-                <ng-container matColumnDef="balance">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="balanceCHF" natural-5em-column natural-align-right>Total</th>
+                <ng-container matColumnDef="balanceCHF">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-5em-column natural-align-right>Total CHF</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <ng-container *ngIf="element.balanceCHF > 0">{{ element.balanceCHF  | currency : 'CHF' }}</ng-container>
-                        <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
                     </td>
                     <td *matFooterCellDef mat-footer-cell natural-align-right>
                         <span *ngIf="dataSource?.data?.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
-                        <ng-container *ngIf="dataSource?.data?.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -</ng-container>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="balanceEUR">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-5em-column natural-align-right>Total EUR</th>
+                    <td *matCellDef="let element" mat-cell natural-align-right>
+                        <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
+                    </td>
+                    <td *matFooterCellDef mat-footer-cell natural-align-right>
                         <span *ngIf="dataSource?.data?.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
                     </td>
                 </ng-container>

@@ -13,19 +13,16 @@ describe('CartService', () => {
     const product1 = {
         id: '1',
         pricePerUnitCHF: '10',
-        unit: '',
-    } as unknown as unknown as Product['product'];
+    } as unknown as Product['product'];
 
     const product2 = {
         id: '2',
         pricePerUnitCHF: '100',
-        unit: '',
     } as unknown as Product['product'];
 
     const product3 = {
         id: '3',
         pricePerUnitCHF: '1000',
-        unit: 'kg',
     } as unknown as Product['product'];
 
     beforeEach(() => {

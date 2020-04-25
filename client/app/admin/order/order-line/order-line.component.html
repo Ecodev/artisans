@@ -11,7 +11,6 @@
             <mat-form-field [style.padding-top.em]="1.34375" [style.width.px]="90">
                 <mat-label>Quantité</mat-label>
                 <input [required]="true" formControlName="quantity" matInput min="0" type="number">
-                <div *ngIf="form.get('product')?.value.unit" matSuffix>{{ form.get('product')?.value.unit }}</div>
                 <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
             </mat-form-field>
         </div>

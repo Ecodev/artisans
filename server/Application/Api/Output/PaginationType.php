@@ -48,11 +48,11 @@ class PaginationType extends ObjectType
                 if ($class === Product::class) {
                     $fields['totalPricePerUnitCHF'] = [
                         'type' => _types()->get('CHF'),
-                        'description' => 'The total price per unit',
+                        'description' => 'The total price per unit in CHF',
                     ];
                     $fields['totalPricePerUnitEUR'] = [
                         'type' => _types()->get('EUR'),
-                        'description' => 'The total price per unit',
+                        'description' => 'The total price per unit in EUR',
                     ];
                 } elseif ($class === OrderLine::class) {
                     $fields['totalBalanceCHF'] = [

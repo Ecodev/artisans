@@ -146,8 +146,8 @@ SELECT id_order,
     NULL,
     date_add,
     date_upd,
-    IF(id_currency = 1, total_products_wt, 0),
-    IF(id_currency = 2, total_products_wt, 0),
+    IF(id_currency = 1, total_products_wt, 0) * 100,
+    IF(id_currency = 2, total_products_wt, 0) * 100,
     IF(ps_orders.valid, 'validated', 'pending'),
     CASE module
         WHEN 'bankwire'
@@ -171,8 +171,8 @@ SELECT id_order_detail,
     ps_orders.id_order,
     CONCAT(IF(ps_order_detail.product_quantity > 1, CONCAT(ps_order_detail.product_quantity, 'x '), ''),
            ps_order_detail.product_name), -- Either "my product" or "3x my product", because we don't have quantity anymore
-    IF(ps_orders.id_currency = 1, ps_order_detail.total_price_tax_incl, 0),
-    IF(ps_orders.id_currency = 2, ps_order_detail.total_price_tax_incl, 0),
+    IF(ps_orders.id_currency = 1, ps_order_detail.total_price_tax_incl, 0) * 100,
+    IF(ps_orders.id_currency = 2, ps_order_detail.total_price_tax_incl, 0) * 100,
     'both',
     IF(ps_order_detail.product_id IN (SELECT id FROM product), ps_order_detail.product_id, NULL),
     IF(ps_order_detail.product_id IN (SELECT id FROM subscription), ps_order_detail.product_id, NULL)

@@ -69,7 +69,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="balanceCHF">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-5em-column natural-align-right>Total CHF</th>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column natural-align-right>Total CHF</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <ng-container *ngIf="element.balanceCHF > 0">{{ element.balanceCHF  | currency : 'CHF' }}</ng-container>
                     </td>
@@ -79,7 +79,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="balanceEUR">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-5em-column natural-align-right>Total EUR</th>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column natural-align-right>Total EUR</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
                     </td>

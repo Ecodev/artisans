@@ -230,7 +230,7 @@ export class NaturalSearchFacetsService {
             this.productIsActive,
             this.productTags,
             {
-                display: 'Prix de vente CHF',
+                display: 'Prix CHF',
                 field: 'pricePerUnitCHF',
                 component: TypeNumberComponent,
                 configuration: {
@@ -238,7 +238,7 @@ export class NaturalSearchFacetsService {
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
             {
-                display: 'Prix de vente EUR',
+                display: 'Prix EUR',
                 field: 'pricePerUnitEUR',
                 component: TypeNumberComponent,
                 configuration: {

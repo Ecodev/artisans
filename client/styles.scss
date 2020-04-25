@@ -92,7 +92,7 @@ input[type=number] {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-}
+    }
 
 
 }
@@ -110,4 +110,8 @@ input[type=number] {
 // Keep the mat-checkbox's checkbox on the first line, see https://github.com/angular/components/issues/8416
 .mat-checkbox-inner-container {
     margin-top: 4px !important;
+}
+
+.app-date-column {
+    width: 14em;
 }

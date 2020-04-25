@@ -180,22 +180,3 @@ FROM ps_order_detail
          INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;
 
 COMMIT;
-
--- Drop migrated tables
-# DROP TABLE `city`;
-# DROP TABLE `contributors`;
-
-
--- DEBUG STUFF -- DEBUG STUFF -- DEBUG STUFF -- DEBUG STUFF -- DEBUG STUFF -- DEBUG STUFF -- DEBUG STUFF
-SELECT DISTINCT reference, reference REGEXP '^\\d\\d\\d$', numero, name, description, description_short
-FROM ps_product
-         INNER JOIN ps_product_lang AS ppl ON ps_product.id_product = ppl.id_product AND ppl.id_lang = 1
-WHERE reference LIKE 'abo-%'
-;
-
-
-
-DELETE
-FROM product;
-DELETE
-FROM subscription;

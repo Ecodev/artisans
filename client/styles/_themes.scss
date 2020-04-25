@@ -14,6 +14,7 @@
 @import '../app/shared/components/file/file.theme';
 @import '../app/shared/components/tags-navigation/tags-navigation.theme';
 @import '../app/admin/products/product/product.theme';
+@import '../app/admin/order/order-line/order-line.theme';
 @import '../app/profile/components/profile/profile.theme';
 @import '../app/front-office/components/homepage/homepage.theme';
 @import '../app/front-office/front-office.theme';
@@ -42,6 +43,7 @@
     @include tags-navigation($theme);
     @include menu($theme);
     @include breadcrumbs($theme);
+    @include order-line($theme);
 }
 
 $artisans-blue: (

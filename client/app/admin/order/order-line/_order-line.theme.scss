@@ -1,0 +1,10 @@
+@mixin order-line($theme) {
+
+    $warn: map-get($theme, warn);
+
+    app-order-line {
+        .warning {
+            color: mat-color($warn);
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
+import { ValidatorFn, Validators } from '@angular/forms';
+import { FormValidators, Literal, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
     OrderLine,
@@ -13,6 +13,7 @@ import {
     UpdateOrderLineVariables,
 } from '../../../shared/generated-types';
 import { orderLineQuery, orderLinesQuery, updateOrderLine } from './order-lines.queries';
+import { xorValidator } from '../../../shared/validators';
 
 @Injectable({
     providedIn: 'root',
@@ -37,10 +38,14 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
             null);
     }
 
+    public getFormGroupValidators(model?: Literal): ValidatorFn[] {
+        return [
+            xorValidator('productXorSubscription', ['product', 'subscription']),
+        ]
+    }
     public getFormValidators(): FormValidators {
         return {
-            product: [Validators.required],
-            quantity: [Validators.required],
+            quantity: [Validators.required, Validators.min(0)],
         };
     }
 

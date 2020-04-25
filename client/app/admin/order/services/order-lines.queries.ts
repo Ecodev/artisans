@@ -17,6 +17,11 @@ export const orderLineMetaFragment = gql`
             name
             code
         }
+        subscription {
+            id
+            name
+            code
+        }
         quantity
         creationDate
     }

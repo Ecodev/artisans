@@ -1,6 +1,4 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import {
     CreateProduct,
@@ -14,19 +12,7 @@ import { FilesService } from '../../files/services/files.service';
 import { ProductTagService } from '../../product-tags/services/product-tag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
-
-class ReviewXorArticleErrorStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-        if (!form) {
-            return false;
-        }
-
-        const formGroup = form.form;
-        const isDirty = !!(formGroup.get('review')?.dirty || formGroup.get('reviewNumber')?.dirty);
-
-        return formGroup.hasError('reviewXorArticle') && isDirty;
-    }
-}
+import { XorErrorStateMatcher } from '../../../shared/validators';
 
 @Component({
     selector: 'app-product',
@@ -42,7 +28,7 @@ export class ProductComponent
         UpdateProductVariables,
         any> implements OnInit {
 
-    public reviewXorArticleErrorStateMatcher = new ReviewXorArticleErrorStateMatcher();
+    public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     constructor(public productService: ProductService,
                 injector: Injector,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, unique } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
@@ -17,6 +17,7 @@ import {
     UpdateProductVariables,
 } from '../../../shared/generated-types';
 import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
+import { xorValidator } from '../../../shared/validators';
 
 @Injectable({
     providedIn: 'root',
@@ -43,20 +44,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
 
     public getFormGroupValidators(model?: Literal): ValidatorFn[] {
         return [
-            (control: FormGroup): ValidationErrors | null => {
-                const reviewNumber = control.get('reviewNumber');
-                const review = control.get('review');
-
-                if (!review || !reviewNumber) {
-                    return null;
-                }
-
-                if (review.value && reviewNumber.value) {
-                    return {reviewXorArticle: true}
-                }
-
-                return null;
-            },
+            xorValidator('reviewXorArticle', ['reviewNumber', 'review']),
         ]
     }
 

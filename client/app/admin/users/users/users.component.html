@@ -6,7 +6,7 @@
 
     <div fxLayout="column">
 
-        <div class="margin-v" fxLayout="row" overflow>
+        <div class="margin-v overflow" fxLayout="row">
 
             <natural-search (selectionChange)="search($event)"
                             [facets]="naturalSearchFacets"
@@ -82,12 +82,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="membershipBegin">
-                    <th *matHeaderCellDef app-date-column mat-header-cell mat-sort-header>Date début</th>
+                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date début</th>
                     <td *matCellDef="let element" mat-cell>{{ element.membershipBegin | date: 'dd.MM.y' }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="membershipEnd">
-                    <th *matHeaderCellDef app-date-column mat-header-cell mat-sort-header>Date fin</th>
+                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date fin</th>
                     <td *matCellDef="let element" mat-cell>{{ element.membershipEnd | date: 'dd.MM.y' }}</td>
                 </ng-container>
 

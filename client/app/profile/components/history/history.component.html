@@ -11,7 +11,7 @@
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
 
                 <ng-container matColumnDef="creationDate">
-                    <th *matHeaderCellDef app-date-column mat-header-cell>Date</th>
+                    <th *matHeaderCellDef class="app-date-column" mat-header-cell>Date</th>
                     <td *matCellDef="let element" mat-cell>
                         <natural-table-button [label]="element.creationDate | swissDate"
                                               [navigate]="[element.id]"

@@ -6,7 +6,7 @@
 
     <div fxLayout="column">
 
-        <div class="margin-v" fxLayout="row" overflow>
+        <div class="margin-v overflow" fxLayout="row">
             <natural-search (selectionChange)="search($event)"
                             [facets]="naturalSearchFacets"
                             [multipleGroups]="true"
@@ -46,7 +46,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="creationDate">
-                    <th *matHeaderCellDef app-date-column mat-header-cell mat-sort-header>Date</th>
+                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date</th>
                     <td *matCellDef="let element" mat-cell>
                         <natural-table-button [label]="element.creationDate | swissDate"
                                               [navigate]="[element.id]"

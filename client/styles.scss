@@ -10,47 +10,6 @@ html, body {
     height: 100%;
 }
 
-/**
- * Debug
- */
-pre.debug {
-    padding: 10px;
-    margin: 10px;
-    font-size: 16px;
-    line-height: 1.5em;
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    background: rgba(0, 0, 0, 0.2);
-    font-family: Courrier, monospace;
-}
-
-[bg] {
-    &, & * {
-        background: rgba(255, 0, 0, 0.1);
-    }
-}
-
-[bd] {
-    &, & * {
-        border: 1px solid red;
-    }
-}
-
-[debug] {
-    border: 2px solid red;
-
-    & > * {
-        border: 2px solid orange;
-    }
-}
-
-[debug][children] > * > * {
-    border: 2px solid blue;
-}
-
-[debug][children][grandchildren] > * > * > * {
-    border: 2px solid green;
-}
-
 .container {
     max-width: 1130px;
     margin: auto;
@@ -82,7 +41,6 @@ app-admin router-outlet + * {
     z-index: 999; // < than 1000 that is the z-index of overlay contents
 }
 
-
 mat-form-field.no-bottom-spacing {
     margin-bottom: -1.34375em;
 }
@@ -95,7 +53,7 @@ mat-form-field.no-bottom-spacing {
     text-align: right
 }
 
-mat-checkbox[wrap] {
+mat-checkbox.wrap {
     .mat-checkbox-label {
         white-space: initial;
     }

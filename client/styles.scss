@@ -53,12 +53,6 @@ mat-form-field.no-bottom-spacing {
     text-align: right
 }
 
-mat-checkbox.wrap {
-    .mat-checkbox-label {
-        white-space: initial;
-    }
-}
-
 .mat-snack-bar-container {
     margin-top: 88px !important;
 }
@@ -98,7 +92,7 @@ input[type=number] {
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-    }
+}
 
 
 }
@@ -106,4 +100,14 @@ input[type=number] {
 
 [matRipple] {
     cursor: pointer;
+}
+
+// Allow mat-checkbox with long labels to wrap, see https://github.com/angular/components/issues/8416
+.mat-checkbox-layout {
+    white-space: normal !important;
+}
+
+// Keep the mat-checkbox's checkbox on the first line, see https://github.com/angular/components/issues/8416
+.mat-checkbox-inner-container {
+    margin-top: 4px !important;
 }

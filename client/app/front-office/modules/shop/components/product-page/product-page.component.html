@@ -122,13 +122,13 @@
                  fxLayoutAlign="center center"
                  class="frame-green frame"
                  fxLayoutGap="30px"
-                 *ngIf="showBuyDigital || showBuyDigital"
+                 *ngIf="showBuyPaper || showBuyDigital"
             >
                 <div class="mat-h1">Acheter le numéro</div>
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyDigital">
+                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyPaper">
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>

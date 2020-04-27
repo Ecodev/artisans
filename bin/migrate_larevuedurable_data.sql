@@ -181,3 +181,6 @@ FROM ps_order_detail
          INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;
 
 COMMIT;
+
+
+select 12 in (NULL, 13)

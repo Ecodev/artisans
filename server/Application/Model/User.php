@@ -127,7 +127,7 @@ class User extends AbstractModel
      *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
-    private $subscriptionLastNumber;
+    private $subscriptionLastReview;
 
     /**
      * @var null|string
@@ -638,22 +638,26 @@ class User extends AbstractModel
     }
 
     /**
-     * Get last subscription related product
+     * Get last review available through a subscription
      *
      * @return null|Product
      */
-    public function getSubscriptionLastNumber(): ?Product
+    public function getSubscriptionLastReview(): ?Product
     {
-        return $this->subscriptionLastNumber;
+        return $this->subscriptionLastReview;
     }
 
     /**
-     * Set related product as last subscribed one
+     * Set last review available through a subscription
      *
-     * @param null|Product $subscriptionLastNumber
+     * @param null|Product $subscriptionLastReview
      */
-    public function setSubscriptionLastNumber(?Product $subscriptionLastNumber): void
+    public function setSubscriptionLastReview(?Product $subscriptionLastReview): void
     {
-        $this->subscriptionLastNumber = $subscriptionLastNumber;
+        if ($subscriptionLastReview && !$subscriptionLastReview->getReviewNumber()) {
+            throw new \InvalidArgumentException('The last review of a subscription must be a review, not an article');
+        }
+
+        $this->subscriptionLastReview = $subscriptionLastReview;
     }
 }

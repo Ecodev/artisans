@@ -36,24 +36,32 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
         $queries = [];
         $connection = $this->getEntityManager()->getConnection();
 
-        // Files for webTemporaryAccess or web subscription
         $webTypes = [ProductTypeType::BOTH, ProductTypeType::DIGITAL];
-        $hasSubscription = in_array($user->getSubscriptionType(), $webTypes, true) && $user->getSubscriptionLastNumber() && $user->getSubscriptionLastNumber()->getReviewNumber();
-        if ($user->getWebTemporaryAccess() || $hasSubscription) {
-            $webTypesSql = implode(',', array_map(function (string $val) use ($connection): string {
-                return $connection->quote($val);
-            }, $webTypes));
+        $hasSubscription = in_array($user->getSubscriptionType(), $webTypes, true) && $user->getSubscriptionLastReview() && $user->getSubscriptionLastReview()->getReviewNumber();
+        $webTypesSql = implode(',', array_map(function (string $val) use ($connection): string {
+            return $connection->quote($val);
+        }, $webTypes));
 
-            // TODO adapt according to decision in https://support.ecodev.ch/issues/7045
-            $subscriptionCondition = $hasSubscription ? 'AND product.review_number <= ' . $connection->quote($user->getSubscriptionLastNumber()->getReviewNumber()) : '';
-
+        if ($user->getWebTemporaryAccess()) {
+            // Files for webTemporaryAccess
             $queries[] = '
 SELECT product.file_id FROM product
 WHERE
 product.is_active
 AND product.file_id IS NOT NULL
+AND product.type IN (' . $webTypesSql . ')';
+        } elseif ($hasSubscription) {
+            $allowedReviewNumber = $connection->quote($user->getSubscriptionLastReview()->getReviewNumber());
+
+            // Files for web subscription
+            $queries[] = '
+SELECT product.file_id FROM product
+LEFT JOIN product AS review ON product.review_id = review.id
+WHERE
+product.is_active
+AND product.file_id IS NOT NULL
 AND product.type IN (' . $webTypesSql . ')
-' . $subscriptionCondition;
+AND (product.review_number <= ' . $allowedReviewNumber . ' OR review.review_number <= ' . $allowedReviewNumber . ')';
         }
 
         // Files for products that were bought directly

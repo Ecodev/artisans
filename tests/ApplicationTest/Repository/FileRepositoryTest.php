@@ -31,13 +31,14 @@ class FileRepositoryTest extends AbstractRepositoryTest
 
     public function providerGetAccessibleSubQuery(): array
     {
-        $all = [9000, 9001];
+        $all = [9000, 9001, 9002, 9003];
+        $articlesAndReviewsViaSubscriptions = [9000, 9001, 9002, 9003];
         $directPurchases = [9001];
 
         return [
             ['anonymous', []],
             ['member', $directPurchases],
-            ['othermember', [9000]],
+            ['othermember', $articlesAndReviewsViaSubscriptions],
             ['facilitator', $all],
             ['administrator', $all],
         ];

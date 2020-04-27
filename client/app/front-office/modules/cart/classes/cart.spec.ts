@@ -72,19 +72,6 @@ describe('CartService', () => {
         expect(cart.totalTaxInc).toEqual(110);
     });
 
-    it('should update existing product in cart', () => {
-        cart.addProduct(product1, ProductType.paper, 1);
-        cart.addProduct(product2, ProductType.paper, 1);
-
-        const expectedCart = [
-            {product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper},
-            {product: product2, quantity: 1, totalTaxInc: 100, type: ProductType.paper},
-        ] as CartLine[];
-
-        expect(cart.productLines).toEqual(expectedCart);
-        expect(cart.totalTaxInc).toEqual(110);
-    });
-
     it('should add more than one unit to cart', () => {
         cart.addProduct(product1, ProductType.paper, 2);
 
@@ -107,7 +94,7 @@ describe('CartService', () => {
         expect(cart.totalTaxInc).toEqual(500);
     });
 
-    it('should addProduct decimals quantity to existing products in cart', () => {
+    it('should add product decimals quantity to existing products in cart', () => {
         cart.addProduct(product3, ProductType.paper, 0.5);
         cart.addProduct(product3, ProductType.paper, 2.5);
 

@@ -8,12 +8,20 @@
     }
 
     .body {
-        margin-top: 60px;
+        margin-top: 40px;
+    }
+
+    #title-prefix {
+        margin-bottom: 10px !important;
     }
 
     .product-image {
         display: block;
         width: 100%;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     .review {
@@ -31,10 +39,20 @@
         }
     }
 
+    .show-products-of-review-button {
+        padding: 5px 10px
+    }
+
     .illustration {
         height: 350px;
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
+    }
+
+    @media screen and (min-width: 700px) {
+        .description {
+            max-width: 66%;
+        }
     }
 }

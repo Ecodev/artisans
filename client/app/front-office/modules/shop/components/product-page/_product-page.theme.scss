@@ -14,6 +14,11 @@
                 color: mat-color($fg, text);
             }
         }
+
+        app-products-page .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 }
 

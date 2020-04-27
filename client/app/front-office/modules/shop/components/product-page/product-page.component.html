@@ -1,98 +1,88 @@
 <div class="container body" fxLayout="column" fxLayoutGap="60px">
 
-    <div fxLayout="column" fxLayoutGap="15px">
-        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center">
+    <section fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayoutGap="20px"  fxLayoutAlign="start start">
 
-            <!-- Review number -->
-            <div class="text-primary text-bold mat-h1 no-margin-bottom" *ngIf="data.model.reviewNumber">
-                N° {{ data.model.reviewNumber }}
+        <div fxFlex.gt-sm fxLayout="column" fxLayoutGap="30px">
+
+            <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start center" id="title-prefix">
+
+                <!-- Review number -->
+                <div class="text-primary text-bold mat-h1 no-margin-bottom" *ngIf="data.model.reviewNumber">
+                    N° {{ data.model.reviewNumber }}
+                </div>
+
+                <!-- Release date -->
+                <div class="mat-h2 text-light no-margin-bottom" *ngIf="data.model.releaseDate">
+                    {{ data.model.releaseDate | date: 'MMMM yyyy' | capitalize }}
+                </div>
+
             </div>
 
-            <!-- Release date -->
-            <div class="mat-h2 text-light no-margin-bottom" *ngIf="data.model.releaseDate">
-                {{ data.model.releaseDate | date: 'MMMM yyyy' | capitalize }}
-            </div>
+            <h1 class="mat-display-1">{{ data.model.name }}</h1>
 
             <!-- Reading duration -->
-            <div *ngIf="data.model.readingDuration"
+
+            <div fxLayout="row" fxLayoutGap="20px">
+                <div *ngIf="data.model.readingDuration" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="mat-h3">
+                    <natural-icon name="alarm"></natural-icon>
+                    <div>{{ data.model.readingDuration }} {{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }} de lecture</div>
+                </div>
+                <div *ngIf="data.model.permissions?.update">
+                    <a [routerLink]="['/admin/product', data.model.id]" mat-stroked-button>
+                        Administrer
+                    </a>
+                </div>
+            </div>
+            <div [innerHTML]="data.model.shortDescription" class="description mat-h3"></div>
+        </div>
+
+        <div fxFlex.gt-sm="0 auto 230px" fxLayout="column" fxLayoutGap="40px">
+
+            <!-- Product image (preview) -->
+            <div>
+                <img class="product-image"
+                     *ngIf="data.model.image"
+                     [attr.src]="'/image/' + data.model.image.id + '/300'"
+                     alt="aperçu de l'article"
+                />
+            </div>
+
+        </div>
+    </section>
+
+    <section fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayoutAlign="start start">
+
+        <div *ngIf="articles?.length" fxFlex.gt-sm fxLayout="column" fxFlexOrder.lt-md="2">
+            <div matRipple
+                 class="text-primary"
+                 (click)="articlesMenuOpen = !articlesMenuOpen"
                  fxLayout="row"
+                 fxLayoutGap="5px"
                  fxLayoutAlign="start center"
-                 fxLayoutGap="10px"
-                 class="mat-h3 no-margin-bottom"
             >
-                <natural-icon name="alarm"></natural-icon>
-                <div>Durée de lecture : {{ data.model.readingDuration }} {{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }}</div>
+                <span class="mat-title show-products-of-review-button no-margin-bottom">Voir les articles de ce numéro</span>
+                <natural-icon name="expand_more"></natural-icon>
             </div>
-
-            <div fxFlex></div>
-
+            <mat-nav-list *ngIf="articlesMenuOpen">
+                <a mat-list-item *ngFor="let article of articles" [routerLink]="['/larevuedurable/article', article.id]"
+                > {{ article.name }} </a>
+            </mat-nav-list>
         </div>
 
-        <h1 class="mat-display-1 no-margin-bottom">
-            {{ data.model.name }}
-            <!-- Admin shortcut -->
-            <a *ngIf="data.model.permissions?.update" [routerLink]="['/admin/product', data.model.id]" mat-stroked-button>Administrer</a>
-        </h1>
-
-    </div>
-
-    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayoutAlign="start start">
-
-        <!-- Product image -->
-        <div fxFlex="33">
-            <img class="product-image"
-                 *ngIf="data.model.image"
-                 [attr.src]="'/image/' + data.model.image.id + '/500'"
-                 alt="aperçu de l'article"
-            />
+        <!-- Related review link -->
+        <div *ngIf="data.model.review" fxFlex.gt-sm="0 auto 230px" fxLayout="column" fxLayoutGap="10px" class="review" fxFlexOrder.lt-md="1">
+            <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
+                <img [attr.src]="'/image/' + data.model.review.image.id + '/300'" alt="couverture de la revue" />
+            </a>
+            <span class="mat-h4">Article issu de la revue</span>
+            <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">
+                <span class="text-primary">N° {{ data.model.review.reviewNumber }}</span>
+                {{ data.model.review.name }}
+            </a>
+            <span class="text-light">{{ data.model.review.releaseDate |  date: 'MMMM yyyy' | capitalize }}</span>
         </div>
 
-        <!-- Short description -->
-        <section fxFlex>
-            <h2 class="mat-h2">Description</h2>
-            <div [innerHTML]="data.model.shortDescription" class="mat-h3"></div>
-        </section>
-
-        <div fxFlex="0 auto 230px" fxLayout="column" fxLayoutGap="40px" >
-
-            <!-- Related review link -->
-            <div *ngIf="data.model.review" fxLayout="column" fxLayoutGap="10px" class="review">
-                <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
-                    <img [attr.src]="'/image/' + data.model.review.image.id + '/300'" alt="couverture de la revue" />
-                </a>
-                <span class="mat-h4">Article issu de la revue</span>
-                <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">
-                    <span class="text-primary">N° {{ data.model.review.reviewNumber }}</span>
-                    {{ data.model.review.name }}
-                </a>
-                <span class="text-light">{{ data.model.review.releaseDate |  date: 'MMMM yyyy' | capitalize }}</span>
-            </div>
-
-            <!-- Download -->
-            <div class="frame-accent padding" *ngIf="data.model.file">
-                <h2 class="mat-h2">Téléchargement</h2>
-                <p class="mat-body">Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
-                <a mat-flat-button [href]="'/file/' + data.model.file.id" target="_blank">Télécharger cette revue</a>
-            </div>
-        </div>
-    </div>
-
-    <div *ngIf="articles?.length">
-        <div matRipple
-             class="mat-title text-primary"
-             (click)="articlesMenuOpen = !articlesMenuOpen"
-             fxLayout="row"
-             fxLayoutGap="10px"
-             fxLayoutAlign="start center"
-        >
-            <span>Voir les articles de ce numéro</span>
-            <natural-icon name="expand_more"></natural-icon>
-        </div>
-        <mat-nav-list *ngIf="articlesMenuOpen">
-            <a mat-list-item *ngFor="let article of articles" [routerLink]="['/larevuedurable/article', article.id]"
-            > {{ article.name }} </a>
-        </mat-nav-list>
-    </div>
+    </section>
 
     <div fxLayout="column" fxLayoutGap="30px">
 
@@ -109,9 +99,21 @@
 
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px" fxLayoutAlign="center">
 
-            <div fxFlex="50"
+            <!-- Download -->
+            <div class="frame-accent padding" *ngIf="data.model.file" fxFlex.gt-sm="50" fxLayout="column" fxLayoutAlign="center center">
+                <div style="max-width:300px;">
+                    <h2 class="mat-h2">Téléchargement</h2>
+                    <p class="mat-body">Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
+                    <a mat-flat-button [href]="'/file/' + data.model.file.id" target="_blank">
+                        <natural-icon name="get_app"></natural-icon>
+                        Télécharger cette revue
+                    </a>
+                </div>
+            </div>
+
+            <div fxFlex.gt-sm="50"
                  fxLayout="column"
-                 fxLayoutAlign="start center"
+                 fxLayoutAlign="center center"
                  class="frame-green frame"
                  fxLayoutGap="30px"
                  *ngIf="showBuyDigital || showBuyDigital"
@@ -148,11 +150,46 @@
                 <a mat-button routerLink="/larevuedurable/articles" *ngIf="data.model.reviewNumber">ou acheter par articles</a>
             </div>
 
-            <div fxFlex="50" class="frame-primary frame" *ngIf="!viewer?.subscriptionType">
+            <div fxFlex.gt-sm="50"
+                 class="frame-primary frame"
+                 *ngIf="!viewer?.subscriptionType"
+                 fxLayout="column"
+                 fxLayoutGap="15px"
+                 fxLayoutAlign="start start"
+            >
                 <h1 class="mat-h1">S'abonner</h1>
+
+                <p>Un accès à
+                    <span class="mat-body-2">toute la base de données</span>
+                    avec près de
+                    <span class="mat-body-2">1000 articles</span>
+                    de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays
+                </p>
+                <p>Un travail rédactionnel
+                    <span class="mat-body-2">indépendant</span>
+                    . Aucun partenariat ni soutient financier n'y porte atteinte.
+                </p>
+                <p>L'envie de
+                    <span class="mat-body-2">comprendre</span>
+                    et le pouvoir d'
+                    <span class="mat-body-2">agir</span>
+                    pour
+                    <span class="mat-body-2">construire</span>
+                    une société écologique et solidaire.
+                </p>
+
                 <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
             </div>
         </div>
+
+    </div>
+
+    <div [fxShow]="relatedProducts?.dataSource?.data?.length">
+        <div class="mat-title">Pour continuer votre lecture ...</div>
+        <app-products-page [contextVariables]="{filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}}"
+                           (dataChange)="test($event)"
+                           [highlightFirstItems]="false"
+        ></app-products-page>
     </div>
 
 </div>

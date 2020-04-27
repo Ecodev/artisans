@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NaturalAbstractDetail, NaturalQueryVariablesManager } from '@ecodev/natural';
 import { ProductService } from '../../../../../admin/products/services/product.service';
@@ -16,6 +16,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../../../shared/generated-types';
+import { ProductsPageComponent } from '../products-page/products-page.component';
 
 @Component({
     selector: 'app-product-page',
@@ -30,6 +31,8 @@ export class ProductPageComponent
         UpdateProduct['updateProduct'],
         UpdateProductVariables,
         any> implements OnInit {
+
+    @ViewChild(ProductsPageComponent, {static: false}) relatedProducts: ProductsPageComponent;
 
     public ProductType = ProductType;
 
@@ -79,6 +82,11 @@ export class ProductPageComponent
      */
     public showBuyPaper = false;
 
+    /**
+     *
+     */
+    public relatedProductsCount: number;
+
     constructor(private productService: ProductService,
                 private purchaseService: PurchaseService,
                 injector: Injector,
@@ -92,10 +100,14 @@ export class ProductPageComponent
 
         this.route.data.subscribe(data => {
 
+            this.relatedProductsCount = 0;
             this.articlesMenuOpen = false;
-            if (data.product.model.reviewNumber) {
+
+            const reviewProduct = data.product.model.review || data.product.model;
+
+            if (reviewProduct) {
                 const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();
-                qvmArticles.set('variables', {filter: {groups: [{conditions: [{review: {in: {values: [this.data.model.id]}}}]}]}});
+                qvmArticles.set('variables', {filter: {groups: [{conditions: [{review: {in: {values: [reviewProduct.id]}}}]}]}});
                 this.productService.getAll(qvmArticles).subscribe((result) => this.articles = result.items);
             } else {
                 this.articles = [];

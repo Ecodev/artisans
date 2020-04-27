@@ -21,10 +21,6 @@
 
     #front-office-body {
         margin-bottom: 50px;
-
-        @include responsive($gt-xs) {
-            margin-bottom: 150px;
-        }
     }
 
     #header-top {

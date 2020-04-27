@@ -108,12 +108,17 @@
         </div>
 
         <div id="footer">
-            <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px">
+            <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px">
 
                 <div>
                     <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-90noir.svg" />
 
-                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                    <div fxLayout.gt-sm="row"
+                         fxLayout="column"
+                         fxLayoutAlign.gt-sm="start center"
+                         fxLayoutAlign="start start"
+                         fxLayoutGap.gt-sm="10px"
+                    >
                         <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
                         <mat-form-field>
                             <mat-label>Adresse e-mail</mat-label>
@@ -137,12 +142,10 @@
                         <a mat-list-item routerLink="product">Livraison</a>
                         <a mat-list-item routerLink="product-tag">Mentions légales</a>
                         <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
-                        <a mat-list-item routerLink="product-tag"
-                        >Annonceurs
-                        </a>
+                        <a mat-list-item routerLink="product-tag">Annonceurs</a>
                     </mat-nav-list>
 
-                    <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px">
+                    <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px" class="padding">
                         <div>
                             <div class="mat-h2 no-margin-bottom">Association Artisans de la transition</div>
                             <div class="mat-h2"> La Revue durable</div>

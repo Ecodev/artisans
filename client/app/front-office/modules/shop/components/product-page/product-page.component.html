@@ -187,7 +187,6 @@
     <div [fxShow]="relatedProducts?.dataSource?.data?.length">
         <div class="mat-title">Pour continuer votre lecture ...</div>
         <app-products-page [contextVariables]="{filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}}"
-                           (dataChange)="test($event)"
                            [highlightFirstItems]="false"
         ></app-products-page>
     </div>

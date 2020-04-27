@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { fromUrl, memoryStorageProvider, NaturalPersistenceService } from '@ecodev/natural';
 import { ProductTagService } from '../../../../../admin/product-tags/services/product-tag.service';
@@ -29,11 +29,21 @@ export enum ProductsViewMode {
 export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
 
     /**
-     * Display tag navigation and tags over products
-     * In product list by tag, hide them
+     * If true, the three first items of grid have highlighted layout
+     */
+    @Input() highlightFirstItems = true;
+
+    /**
+     * Display tags over products
      * Configurable by routing
      */
-    public showTags = true;
+    public showTagsOnProducts = true;
+
+    /**
+     * Display tag navigation
+     * Configurable by routing
+     */
+    public showTagsNavigation = true;
 
     /**
      * Display as grid or as list
@@ -65,7 +75,8 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
         this.title = this.route.snapshot.params.productTagName || this.route.snapshot.data.title;
 
         this.route.data.subscribe(data => {
-            this.showTags = !!data.showTags;
+            this.showTagsOnProducts = !!data.showTagsOnProducts;
+            this.showTagsNavigation = !!data.showTagsNavigation;
             this.viewMode = data.viewMode || ProductsViewMode.grid;
 
             if (data.productTag && data.productTag.model) {

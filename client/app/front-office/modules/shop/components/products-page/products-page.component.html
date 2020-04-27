@@ -4,20 +4,15 @@
 
     <ng-container *ngIf="items.length">
 
-        <app-tags-navigation *ngIf="showTags" [service]="productTagService" [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
+        <app-tags-navigation *ngIf="showTagsNavigation" [service]="productTagService" [linkBase]="['/larevuedurable/articles']"
+        ></app-tags-navigation>
 
         <!--
         GRID
         -->
-        <div class="grid products" *ngIf="viewMode === ProductsViewMode.grid">
-            <div *ngFor="let product of items; let index = index"
-                 class="product"
-                 fxLayout="column"
-                 fxLayoutGap="10px"
-                 fxLayoutAlign="start start"
-            >
-
-                <div class="product-tags" *ngIf="showTags">
+        <div class="grid products" [class.highlight-first-items]="highlightFirstItems" *ngIf="viewMode === ProductsViewMode.grid">
+            <div *ngFor="let product of items; let index = index" class="product" fxLayout="column" fxLayoutGap="10px">
+                <div class="product-tags" *ngIf="showTagsOnProducts">
                     <a *ngFor="let tag of product.productTags"
                        [routerLink]="['/larevuedurable/articles', tag.name]"
                        class="product-tag mat-body"
@@ -26,12 +21,16 @@
 
                 <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
 
-                <a *ngIf="product.illustration" [routerLink]="['/larevuedurable/article', product.id]">
-                    <img [attr.src]="'/image/' + product.illustration.id + '/300'" *ngIf="index === 0" class="product-illustration" />
-                    <img [attr.src]="'/image/' + product.illustration.id + '/140'" *ngIf="index === 1" class="product-illustration" />
-                </a>
+                <a *ngIf="index <= 1 && product.illustration"
+                   [routerLink]="['/larevuedurable/article', product.id]"
+                   [style.backgroundImage]="'url(/image/' + product.illustration.id + '/' + (index === 0 ? '400' : '160') + ')'"
+                   class="product-illustration"
+                   fxFlex
+                ></a>
 
-                <div fxFlex fxLayout="column" fxLayoutAlign="end">
+                <div class="image-placeholder"></div>
+
+                <div>
                     <div class="product-price mat-body-strong" *ngIf="!product.file">
                         <span class="frame-primary">Abonné</span>
                         ou

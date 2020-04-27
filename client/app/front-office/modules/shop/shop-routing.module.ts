@@ -19,7 +19,8 @@ const routes: Routes = [
             data: {
                 breadcrumbs: [],
                 title: 'Résultats la recherche',
-                showTags: false,
+                showTagsOnProducts: false,
+                showTagsNavigation: false,
                 viewMode: ProductsViewMode.list,
             },
         },
@@ -28,7 +29,8 @@ const routes: Routes = [
             component: ProductsPageComponent,
             data: {
                 breadcrumbs: [],
-                showTags: true,
+                showTagsOnProducts: true,
+                showTagsNavigation: true,
                 viewMode: ProductsViewMode.grid,
                 contextVariables: {filter: {groups: [{conditions: [{review: {null: {not: true}}}]}]}} as ProductsVariables,
             },
@@ -41,7 +43,8 @@ const routes: Routes = [
             },
             data: {
                 breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
-                showTags: false,
+                showTagsOnProducts: false,
+                showTagsNavigation: false,
                 viewMode: ProductsViewMode.grid,
                 contextVariables: {filter: {groups: [{conditions: [{review: {null: {not: true}}}]}]}} as ProductsVariables,
             },
@@ -52,7 +55,8 @@ const routes: Routes = [
             component: ProductsPageComponent,
             data: {
                 breadcrumbs: [],
-                showTags: false,
+                showTagsOnProducts: false,
+                showTagsNavigation: false,
                 viewMode: ProductsViewMode.list,
                 title: 'Tous les numéros',
                 contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {not: true}}}]}]}} as ProductsVariables,
@@ -65,6 +69,8 @@ const routes: Routes = [
                 product: ProductResolver,
             },
             data: {
+                showTagsOnProducts: true,
+                showTagsNavigation: false,
                 breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
             },
         },

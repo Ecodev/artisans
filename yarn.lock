@@ -1172,9 +1172,9 @@
   integrity sha512-kt0nLSNaRM5MZCIKALvSJkTtgjjdheG98n3Ty0l6jtKYrod3VDDUBtf/ZaoUjikS34RLN4NfRx2L39T2mlqk7w==
 
 "@ecodev/natural@^14.2.0":
-  version "14.2.0"
-  resolved "https://registry.yarnpkg.com/@ecodev/natural/-/natural-14.2.0.tgz#8cc2dcac5c806b83dd134704c3143b70449ed255"
-  integrity sha512-RP2tePEDtdTYxEpAizqB/HUgvC5TofvMEE2jDfFh3oIedovAW+5oym4TLWyqqdNfF7IhZ/Ra5p9Hit+1bGhTig==
+  version "14.3.1"
+  resolved "https://registry.yarnpkg.com/@ecodev/natural/-/natural-14.3.1.tgz#a5f81881173a080e1ea98ac96799605a03847af4"
+  integrity sha512-Plawjp1qXwoYcHHWlnbjOJUXSyYcyHm5HIuXA9SS4abbxQ/wgeCERo8Y79i9KzYns1vmCVh86+/wFqSTNqVF2g==
 
 "@endemolshinegroup/cosmiconfig-typescript-loader@^1.0.0":
   version "1.0.1"

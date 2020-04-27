@@ -1,14 +1,14 @@
+import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NaturalAbstractController, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
 import { filter } from 'rxjs/operators';
 import { UserService } from '../admin/users/services/user.service';
-import { Currency, CurrencyService } from '../shared/services/currency.service';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
+import { Currency, CurrencyService } from '../shared/services/currency.service';
 import { CartService } from './modules/cart/services/cart.service';
 import { MenuItem, NavigationService } from './services/navigation.service';
-import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-front-office',
@@ -143,7 +143,8 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             .subscribe(() => {
                 const contentContainer = this.document.querySelector('.mat-sidenav-content');
                 if (contentContainer) {
-                    contentContainer.scroll({top: 0});
+                    const top = document.getElementById(this.route.snapshot.fragment)?.offsetTop || 0;
+                    contentContainer.scroll({top: top, behavior: top ? 'smooth' : undefined});
                 }
             });
     }

@@ -94,9 +94,9 @@
             </div>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="center"  >
-            <a (click)="loadMore()" color="primary" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">Afficher plus
-                d'articles
+        <div fxLayout="row" fxLayoutAlign="center" id="end-of-list">
+            <a (click)="loadMore()" color="primary" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">
+                Afficher plus d'articles
             </a>
         </div>
     </ng-container>

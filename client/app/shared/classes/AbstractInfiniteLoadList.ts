@@ -68,7 +68,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
 
         this.variablesManager.set('pagination', {pagination} as Vall);
 
-        this.persistPagination(forPersistence, defer);
+        this.persistPagination(forPersistence, defer, {fragment: 'end-of-list'});
     }
 
 }

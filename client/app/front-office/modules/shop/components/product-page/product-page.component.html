@@ -1,6 +1,6 @@
 <div class="container body" fxLayout="column" fxLayoutGap="60px">
 
-    <section fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayoutGap="20px"  fxLayoutAlign="start start">
+    <section fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayoutGap="20px" fxLayoutAlign="start start">
 
         <div fxFlex.gt-sm fxLayout="column" fxLayoutGap="30px">
 
@@ -70,7 +70,13 @@
         </div>
 
         <!-- Related review link -->
-        <div *ngIf="data.model.review" fxFlex.gt-sm="0 auto 230px" fxLayout="column" fxLayoutGap="10px" class="review" fxFlexOrder.lt-md="1">
+        <div *ngIf="data.model.review"
+             fxFlex.gt-sm="0 auto 230px"
+             fxLayout="column"
+             fxLayoutGap="10px"
+             class="review"
+             fxFlexOrder.lt-md="1"
+        >
             <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
                 <img [attr.src]="'/image/' + data.model.review.image.id + '/300'" alt="couverture de la revue" />
             </a>

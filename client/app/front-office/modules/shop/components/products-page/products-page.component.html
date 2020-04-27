@@ -51,18 +51,18 @@
             <div class="list products" fxLayout="column" fxLayoutGap="60px">
                 <div *ngFor="let product of items" class="product" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px">
 
-                    <div class="product-image" *ngIf="product.image">
+                    <a class="product-image" *ngIf="product.image" [routerLink]="['/larevuedurable/article', product.id]">
                         <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
-                    </div>
+                    </a>
 
                     <div fxLayout="column" fxLayoutGap="10px" fxFlex>
                         <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start baseline" class="mat-h2 no-margin-bottom text-light">
-                            <ng-container *ngIf="product.reviewNumber">
-                                {{ product.reviewNumber }}
-                            </ng-container>
-                            <ng-container *ngIf="product.releaseDate">
+                            <span *ngIf="product.reviewNumber" class="text-primary">
+                                N° {{ product.reviewNumber }}
+                            </span>
+                            <span *ngIf="product.releaseDate">
                                 {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
-                            </ng-container>
+                            </span>
                         </div>
                         <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
                         <div class="product-name mat-h3">{{ product.shortDescription }}</div>

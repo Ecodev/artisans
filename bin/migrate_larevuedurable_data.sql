@@ -171,8 +171,8 @@ SELECT id_order_detail,
     ps_orders.id_order,
     ps_order_detail.product_name,
     ps_orders.id_currency = 1,
-    IF(ps_orders.id_currency = 1, ps_order_detail.total_price_tax_incl, 0) * 100,
-    IF(ps_orders.id_currency = 2, ps_order_detail.total_price_tax_incl, 0) * 100,
+        IF(ps_orders.id_currency = 1, ps_order_detail.total_price_tax_incl, 0) * 100,
+        IF(ps_orders.id_currency = 2, ps_order_detail.total_price_tax_incl, 0) * 100,
     'both',
     IF(ps_order_detail.product_id IN (SELECT id FROM product), ps_order_detail.product_id, NULL),
     IF(ps_order_detail.product_id IN (SELECT id FROM subscription), ps_order_detail.product_id, NULL),
@@ -180,7 +180,16 @@ SELECT id_order_detail,
 FROM ps_order_detail
          INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;
 
+INSERT INTO product_tag(id, name, color)
+SELECT id_tag,
+    name,
+    '#f6a990'
+FROM ps_tag;
+
+INSERT INTO product_tag_product (product_tag_id, product_id)
+SELECT id_tag,
+    id_product
+FROM ps_product_tag
+WHERE id_product IN (SELECT id FROM product) AND id_tag IN (SELECT id FROM product_tag);
+
 COMMIT;
-
-
-select 12 in (NULL, 13)

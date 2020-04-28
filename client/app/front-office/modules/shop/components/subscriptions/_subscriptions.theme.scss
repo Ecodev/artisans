@@ -1,0 +1,27 @@
+@mixin subscriptions($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $bg: map-get($theme, background);
+    $fg: map-get($theme, foreground);
+
+    app-subscriptions {
+
+        .subscription.standard {
+            background: mat-color($primary);
+            color: mat-color($primary, default-contrast);
+        }
+
+        .subscription.pro {
+            background: mat-color($accent);
+            color: mat-color($accent, default-contrast);
+        }
+
+        .subscription.popular {
+            border: 10px solid mat-color($bg, card);
+        }
+
+    }
+}
+
+

@@ -192,4 +192,32 @@ SELECT id_tag,
 FROM ps_product_tag
 WHERE id_product IN (SELECT id FROM product) AND id_tag IN (SELECT id FROM product_tag);
 
+
+-- Employee that already exists as customer are promoted to admin
+UPDATE user SET role = 'administrator' WHERE email IN (SELECT email FROM ps_employee);
+
+-- Insert new employee as users
+INSERT INTO user (first_name, last_name, password, email, role, internal_remarks)
+SELECT lastname,
+    firstname,
+    passwd,
+    email,
+
+    CASE id_profile
+        WHEN 1 -- SuperAdmin
+            THEN 'administrator'
+        WHEN 2 -- Administrateur
+            THEN 'administrator'
+        WHEN 5 -- Commercial
+            THEN 'facilitator'
+        WHEN 6 -- Administrateur LRD
+            THEN 'facilitator'
+        WHEN 7 -- Membre LRD
+            THEN 'facilitator'
+        ELSE -- Assume everything else is member (it should not happen)
+            'member'
+        END,
+    ''
+FROM ps_employee WHERE email NOT IN (SELECT email FROM user);
+
 COMMIT;

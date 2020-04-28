@@ -10,12 +10,13 @@
     .rich-text {
         line-height: 1.6em;
 
-        a {
-            color: mat-color($primary);
-        }
-
         .strong {
             font-weight: bold;
         }
+    }
+
+    .rich-text a,
+    a.app-link {
+        color: mat-color($primary);
     }
 }

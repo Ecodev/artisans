@@ -194,7 +194,9 @@ WHERE id_product IN (SELECT id FROM product) AND id_tag IN (SELECT id FROM produ
 
 
 -- Employee that already exists as customer are promoted to admin
-UPDATE user SET role = 'administrator' WHERE email IN (SELECT email FROM ps_employee);
+UPDATE user
+SET role = 'administrator'
+WHERE email IN (SELECT email FROM ps_employee);
 
 -- Insert new employee as users
 INSERT INTO user (first_name, last_name, password, email, role, internal_remarks)
@@ -218,6 +220,18 @@ SELECT lastname,
             'member'
         END,
     ''
-FROM ps_employee WHERE email NOT IN (SELECT email FROM user);
+FROM ps_employee
+WHERE email NOT IN (SELECT email FROM user);
+
+INSERT IGNORE INTO product_product (product_source, product_target)
+SELECT id_product_1,
+    id_product_2
+FROM ps_accessory
+
+UNION
+
+SELECT id_product_2,
+    id_product_1
+FROM ps_accessory;
 
 COMMIT;

@@ -65,7 +65,7 @@
                             </span>
                         </div>
                         <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
-                        <div class="product-name mat-h3">{{ product.description }}</div>
+                        <div class="product-name mat-h3" [innerHTML]="product.description"></div>
                     </div>
 
                     <div class="product-price" fxLayout="column" fxLayoutGap="15px">

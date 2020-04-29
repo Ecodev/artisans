@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
  * Log
@@ -167,6 +168,8 @@ class Log extends AbstractModel
     }
 
     /**
+     * @API\Exclude
+     *
      * @return array
      */
     public function getExtra(): array
@@ -175,6 +178,8 @@ class Log extends AbstractModel
     }
 
     /**
+     * @API\Exclude
+     *
      * @param array $extra
      */
     public function setExtra(array $extra): void

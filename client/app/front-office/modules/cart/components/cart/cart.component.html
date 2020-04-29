@@ -18,13 +18,13 @@
             <div *ngFor="let line of cart.productLines" class="cart-item" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
                 <app-file [height]="70"
                           [model]="line.product.image"
-                          [routerLink]="['/larevuedurable/product', line.product.id]"
+                          [routerLink]="['/larevuedurable/article', line.product.id]"
                           [style.width.px]="70"
                           matListAvatar
                           matRipple
                 ></app-file>
 
-                <a [routerLink]="['/larevuedurable/product', line.product.id]" fxFlex mat-button>
+                <a [routerLink]="['/larevuedurable/article', line.product.id]" fxFlex mat-button>
                     {{ line.product.name }}, {{ line.type | enum : 'ProductType' | async }}
                 </a>
 

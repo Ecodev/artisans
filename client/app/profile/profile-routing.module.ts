@@ -19,6 +19,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: 'articles-achetes',
+            },
+            {
                 path: 'commandes',
                 component: HistoryComponent,
                 resolve: {viewer: ViewerResolver},

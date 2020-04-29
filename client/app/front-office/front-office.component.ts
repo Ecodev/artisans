@@ -107,6 +107,20 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         {
             display: 'Mon compte',
             link: '/mon-compte',
+            children: [
+                {
+                    display: 'Articles et revues achetées',
+                    link: '/mon-compte/articles-achetes',
+                },
+                {
+                    display: 'Données personnelles',
+                    link: '/mon-compte/donnees-personnelles',
+                },
+                {
+                    display: 'Commandes',
+                    link: '/mon-compte/commandes',
+                },
+            ],
         },
     ];
 

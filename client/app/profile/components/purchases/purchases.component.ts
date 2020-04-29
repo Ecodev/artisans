@@ -22,6 +22,8 @@ export class PurchasesComponent extends NaturalAbstractList<Purchases['purchases
         injector: Injector,
     ) {
         super(service, injector);
+
+        this.persistSearch = false;
     }
 
     public getDownloadLink(orderLine: Purchases_purchases_items): null | string {

@@ -16,6 +16,7 @@
 @import '../app/admin/products/product/product.theme';
 @import '../app/admin/order/order-line/order-line.theme';
 @import '../app/profile/components/profile/profile.theme';
+@import '../app/profile/components/purchases/purchases.theme';
 @import '../app/front-office/components/homepage/homepage.theme';
 @import '../app/front-office/front-office.theme';
 @import '../app/front-office/components/menu/menu.theme';
@@ -46,6 +47,7 @@
     @include breadcrumbs($theme);
     @include order-line($theme);
     @include subscriptions($theme);
+    @include purchases($theme);
 }
 
 $artisans-blue: (

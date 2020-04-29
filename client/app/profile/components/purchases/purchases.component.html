@@ -1,8 +1,8 @@
-<div *ngIf="dataSource" fxLayout="column">
+<div *ngIf="dataSource" fxLayout="column" fxLayoutGap="30px">
 
     <h2 class="mat-display-1">Articles achetés</h2>
 
-    <div fxLayout="column" fxLayoutGap="20px" >
+    <div fxLayout="column" fxLayoutGap="20px">
 
         <div class="margin-v overflow" fxLayout="row">
 
@@ -14,16 +14,33 @@
             ></natural-search>
         </div>
 
-        <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
+        <div [fxShow]="dataSource.data?.length > 0" class="responsive-table" fxLayout="column" fxLayoutGap="30px">
 
-            <div *ngFor="let orderLine of dataSource.data?.items" fxLayout="row" fxLayoutGap="20px">
-                <app-file *ngIf="orderLine.product.image" [model]="orderLine.product.image" [height]="100" [style.width.px]="100"></app-file>
-                <div fxFlex>
-                    <strong *ngIf="orderLine.product.reviewNumber" color="text-primary">{{ orderLine.product.reviewNumber }}</strong>
-                    <a [routerLink]="['/larevuedurable/article', orderLine.product.id]"> {{ orderLine.product.name }}</a>
-                    <br/>
-                    <span>{{ orderLine.type | enum : 'ProductType' | async }}</span>
-                    <a mat-button *ngIf="canDownload(orderLine)" [href]="getDownloadLink(orderLine)">Télécharger</a>
+            <div *ngFor="let orderLine of dataSource.data?.items" class="product" fxLayout="row" fxLayoutGap="20px">
+
+                <a class="product-image" *ngIf="orderLine.product.image" [routerLink]="['/larevuedurable/article', orderLine.product.id]">
+                    <img [attr.src]="'/image/' + orderLine.product.image.id + '/90'" alt="aperçu du produit" />
+                </a>
+
+                <div fxFlex fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+                    <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start baseline" class="mat-body no-margin-bottom text-light">
+                        <span *ngIf="orderLine.product.reviewNumber" class="text-primary">
+                            N° {{ orderLine.product.reviewNumber }}
+                        </span>
+                        <span *ngIf="orderLine.product.releaseDate">
+                            {{ orderLine.product.releaseDate | date: 'MMMM yyyy' | capitalize }}
+                        </span>
+                        <span>{{ orderLine.type | enum : 'ProductType' | async }}</span>
+                    </div>
+
+                    <a [routerLink]="['/larevuedurable/article', orderLine.product.id]" matRipple class="mat-h3">
+                        {{ orderLine.product.name }}
+                    </a>
+
+                    <a mat-stroked-button color="accent" *ngIf="canDownload(orderLine)" [href]="getDownloadLink(orderLine)">
+                        <natural-icon name="get_app"></natural-icon>
+                        Télécharger
+                    </a>
                 </div>
             </div>
 

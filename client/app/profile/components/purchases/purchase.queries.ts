@@ -12,6 +12,7 @@ export const purchasesQuery = gql`
                     name
                     code
                     reviewNumber
+                    releaseDate
                     image {
                         id
                         width

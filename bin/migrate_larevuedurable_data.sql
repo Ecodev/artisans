@@ -159,17 +159,25 @@ SELECT id_order_detail,
 FROM ps_order_detail
          INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;
 
-INSERT INTO product_tag(id, name, color)
-SELECT id_tag,
-    name,
+-- Only import used categories
+INSERT IGNORE INTO product_tag(id, creation_date, update_date, name, color)
+SELECT ps_category.id_category,
+    ps_category.date_add,
+    ps_category.date_upd,
+    ps_category_lang.name,
     '#f6a990'
-FROM ps_tag;
+FROM ps_category
+         INNER JOIN ps_category_lang ON ps_category_lang.id_category = ps_category.id_category
+         INNER JOIN ps_category_product ON
+        ps_category_lang.id_category = ps_category_product.id_category AND
+        ps_category_product.id_product IN (SELECT id FROM product)
+WHERE id_lang = 1;
 
 INSERT INTO product_tag_product (product_tag_id, product_id)
-SELECT id_tag,
+SELECT id_category,
     id_product
-FROM ps_product_tag
-WHERE id_product IN (SELECT id FROM product) AND id_tag IN (SELECT id FROM product_tag);
+FROM ps_category_product
+WHERE id_product IN (SELECT id FROM product) AND id_category IN (SELECT id FROM product_tag);
 
 
 -- Employee that already exists as customer are promoted to admin

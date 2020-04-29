@@ -117,27 +117,6 @@ UPDATE product
 SET product.file_id = file.id;
 
 
-INSERT INTO subscription (id, image_id, creation_date, update_date, price_per_unit_chf, price_per_unit_eur, name,
-                          code, internal_remarks, type, description, is_active)
-SELECT ps_product.id_product,
-    pi.id_image, -- Assume the image exists on disk
-    ps_product.date_add,
-    ps_product.date_upd,
-    (ps_product.price + ps_product.price * 0.025) * 100, -- Compute CHF price including tax
-    ((ps_product.price + ps_product.price * 0.025) * 100) * 1 / 1.36, -- Compute EUR price including tax
-    ppl.name,
-    IF(ps_product.reference = '', NULL, ps_product.reference),
-    '',
-    'paper', -- I **think** all (existing) subscriptions are paper only
-    IFNULL(ppl.description_short, ''),
-    ps_product.active
-FROM ps_product
-         INNER JOIN ps_product_lang AS ppl ON ps_product.id_product = ppl.id_product AND ppl.id_lang = 1
-         LEFT JOIN ps_image pi ON ppl.id_product = pi.id_product AND pi.cover = 1
-WHERE ps_product.reference LIKE 'abo-%' -- Only subscriptions
-;
-
-
 INSERT INTO `order` (id, creator_id, owner_id, updater_id, creation_date, update_date, balance_chf, balance_eur, status,
                      payment_method, internal_remarks)
 SELECT id_order,
@@ -175,7 +154,7 @@ SELECT id_order_detail,
         IF(ps_orders.id_currency = 2, ps_order_detail.total_price_tax_incl, 0) * 100,
     'both',
     IF(ps_order_detail.product_id IN (SELECT id FROM product), ps_order_detail.product_id, NULL),
-    IF(ps_order_detail.product_id IN (SELECT id FROM subscription), ps_order_detail.product_id, NULL),
+    NULL, -- Subscriptions are never migrated so cannot be linked
     ps_order_detail.product_quantity
 FROM ps_order_detail
          INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;

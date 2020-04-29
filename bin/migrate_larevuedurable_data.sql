@@ -78,7 +78,7 @@ SELECT ps_product.id_product,
     ps_product.date_add,
     ps_product.date_upd,
     (ps_product.price + ps_product.price * 0.025) * 100, -- Compute CHF price including tax
-    ((ps_product.price + ps_product.price * 0.025) * 100) * 1 / 1.36, -- Compute EUR price including tax
+    (ROUND((ps_product.price + ps_product.price * 0.025) * 0.73 * 4) / 4) * 100, -- Compute EUR price including tax
     REPLACE(ppl.name, ' (version papier)', ''),
     IFNULL(ppl.description, ''),
     IF(ps_product.reference = '', NULL, ps_product.reference),

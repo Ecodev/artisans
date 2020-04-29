@@ -21,9 +21,7 @@ use Money\Money;
 abstract class AbstractProduct extends AbstractModel
 {
     use HasName;
-    use HasDescription {
-        getDescription as traitGetDescription;
-    }
+    use HasDescription;
     use HasCode;
     use HasInternalRemarks;
     use HasProductType;
@@ -62,13 +60,6 @@ abstract class AbstractProduct extends AbstractModel
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $illustration;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", length=65535)
-     */
-    private $shortDescription = '';
 
     /**
      * Constructor
@@ -184,40 +175,5 @@ abstract class AbstractProduct extends AbstractModel
         }
 
         $this->illustration = $illustration;
-    }
-
-    /**
-     * Set shortDescription
-     *
-     * @param string $shortDescription
-     */
-    public function setShortDescription(string $shortDescription): void
-    {
-        $this->shortDescription = $shortDescription;
-    }
-
-    /**
-     * Get shortDescription
-     *
-     * @return string
-     */
-    public function getShortDescription(): string
-    {
-        return $this->shortDescription;
-    }
-
-    /**
-     * Get description, but only for admins
-     *
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        // Only administrator is allowed to see a product description
-        if (!User::getCurrent() || User::getCurrent()->getRole() !== User::ROLE_ADMINISTRATOR) {
-            return '';
-        }
-
-        return $this->description;
     }
 }

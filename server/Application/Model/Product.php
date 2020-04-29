@@ -77,6 +77,13 @@ class Product extends AbstractProduct
     private $isHighlighted = false;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="text", length=65535)
+     */
+    private $content = '';
+
+    /**
      * Constructor
      */
     public function __construct(string $name = '')
@@ -267,5 +274,31 @@ class Product extends AbstractProduct
     public function setIsHighlighted(bool $isHighlighted): void
     {
         $this->isHighlighted = $isHighlighted;
+    }
+
+    /**
+     * Set content
+     *
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $content = strip_tags($content);
+        $this->content = $content;
+    }
+
+    /**
+     * Get content
+     *
+     * @return string
+     */
+    public function getContent(): string
+    {
+        // Only administrator is allowed to see a product content
+        if (!User::getCurrent() || User::getCurrent()->getRole() !== User::ROLE_ADMINISTRATOR) {
+            return '';
+        }
+
+        return $this->content;
     }
 }

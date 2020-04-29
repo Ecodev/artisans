@@ -70,7 +70,7 @@ SELECT id_product_download,
 FROM ps_product_download;
 
 INSERT INTO product (id, image_id, creation_date, update_date, price_per_unit_chf, price_per_unit_eur, name,
-                     description, code, internal_remarks, type, short_description, is_active, reading_duration,
+                     content, code, internal_remarks, type, description, is_active, reading_duration,
                      release_date, review_number)
 SELECT ps_product.id_product,
     pi.id_image, -- Assume the image exists on disk
@@ -117,7 +117,7 @@ SET product.file_id = file.id;
 
 
 INSERT INTO subscription (id, image_id, creation_date, update_date, price_per_unit_chf, price_per_unit_eur, name,
-                          description, code, internal_remarks, type, short_description, is_active)
+                          code, internal_remarks, type, description, is_active)
 SELECT ps_product.id_product,
     pi.id_image, -- Assume the image exists on disk
     ps_product.date_add,
@@ -125,7 +125,6 @@ SELECT ps_product.id_product,
     (ps_product.price + ps_product.price * 0.025) * 100, -- Compute CHF price including tax
     ((ps_product.price + ps_product.price * 0.025) * 100) * 1 / 1.36, -- Compute EUR price including tax
     ppl.name,
-    IFNULL(ppl.description, ''),
     IF(ps_product.reference = '', NULL, ps_product.reference),
     '',
     'paper', -- I **think** all (existing) subscriptions are paper only

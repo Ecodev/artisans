@@ -42,20 +42,20 @@
                         </div>
 
                         <mat-form-field>
-                            <mat-label>Description courte</mat-label>
+                            <mat-label>Description</mat-label>
                             <textarea (change)="update()"
                                       [matAutosizeMinRows]="1"
-                                      formControlName="shortDescription"
+                                      formControlName="description"
                                       matInput
                                       matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label>Description complète</mat-label>
+                            <mat-label>Contenu complet</mat-label>
                             <textarea (change)="update()"
                                       [matAutosizeMinRows]="1"
-                                      formControlName="description"
+                                      formControlName="content"
                                       matInput
                                       matTextareaAutosize
                             ></textarea>

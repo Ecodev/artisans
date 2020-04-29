@@ -101,6 +101,20 @@ WHERE ps_product.reference NOT REGEXP '^\\d\\d\\de$' -- Never import digital rev
     ps_product.id_product != 1258 -- Because it is a duplicate of 83 with both the reference 045-061 and this one is not active
 ;
 
+-- Manual fix for a few references
+UPDATE ps_product
+SET reference = REPLACE(
+        REPLACE(
+                REPLACE(
+                        REPLACE(
+                                REPLACE(
+                                        REPLACE(reference, '053-16', '053-016'),
+                                        '058-17', '058-017'),
+                                '058-46', '058-046'),
+                        '061- 003', '061-003'),
+                '061-62', '061-062'),
+        '062- 003', '062-003');
+
 -- Link articles to their reviews
 UPDATE product
     INNER JOIN ps_product AS article ON article.id_product = product.id

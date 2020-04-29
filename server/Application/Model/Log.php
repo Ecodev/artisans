@@ -59,6 +59,9 @@ class Log extends AbstractModel
      * The statistics data
      *
      * @var array
+     *
+     * @API\Exclude
+     *
      * @ORM\Column(type="json_array")
      */
     private $extra = [];

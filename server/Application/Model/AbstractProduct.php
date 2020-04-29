@@ -21,7 +21,9 @@ use Money\Money;
 abstract class AbstractProduct extends AbstractModel
 {
     use HasName;
-    use HasDescription;
+    use HasDescription {
+        getDescription as traitGetDescription;
+    }
     use HasCode;
     use HasInternalRemarks;
     use HasProductType;
@@ -202,5 +204,20 @@ abstract class AbstractProduct extends AbstractModel
     public function getShortDescription(): string
     {
         return $this->shortDescription;
+    }
+
+    /**
+     * Get description, but only for admins
+     *
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        // Only administrator is allowed to see a product description
+        if (!User::getCurrent() || User::getCurrent()->getRole() !== User::ROLE_ADMINISTRATOR) {
+            return '';
+        }
+
+        return $this->description;
     }
 }

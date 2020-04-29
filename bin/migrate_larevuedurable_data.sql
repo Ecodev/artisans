@@ -121,7 +121,7 @@ INSERT INTO `order` (id, creator_id, owner_id, updater_id, creation_date, update
                      payment_method, internal_remarks)
 SELECT id_order,
     NULL,
-    IF(id_customer IN (SELECT id FROM user), id_customer, NULL),
+    id_customer,
     NULL,
     date_add,
     date_upd,
@@ -139,12 +139,13 @@ SELECT id_order,
             'ebanking'
         END,
     CONCAT('Référence selon PrestaShop: ', reference)
-FROM ps_orders;
+FROM ps_orders
+WHERE id_customer IN (SELECT id FROM user);
 
 INSERT INTO order_line (id, owner_id, creation_date, update_date, order_id, name, is_chf, balance_chf, balance_eur,
                         type, product_id, subscription_id, quantity)
 SELECT id_order_detail,
-    IF(ps_orders.id_customer IN (SELECT id FROM user), ps_orders.id_customer, NULL),
+    ps_orders.id_customer,
     ps_orders.date_add,
     ps_orders.date_upd,
     ps_orders.id_order,
@@ -157,7 +158,9 @@ SELECT id_order_detail,
     NULL, -- Subscriptions are never migrated so cannot be linked
     ps_order_detail.product_quantity
 FROM ps_order_detail
-         INNER JOIN ps_orders ON ps_order_detail.id_order = ps_orders.id_order;
+         INNER JOIN ps_orders ON
+        ps_order_detail.id_order = ps_orders.id_order
+        AND ps_orders.id_customer IN (SELECT id FROM user);
 
 -- Only import used categories
 INSERT IGNORE INTO product_tag(id, creation_date, update_date, name, color)

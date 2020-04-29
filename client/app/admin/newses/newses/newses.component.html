@@ -16,7 +16,9 @@
             >
 
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="date">Date</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
+                    <span naturalColumnsPickerColumn="isActive">Active</span>
                 </natural-columns-picker>
             </natural-search>
 
@@ -28,12 +30,26 @@
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
 
+                <ng-container matColumnDef="date">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.date | date : 'dd.MM.y'}}</td>
+                </ng-container>
+
                 <ng-container matColumnDef="name">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <natural-table-button [label]="element.name" [navigate]="['/admin/news', element.id]" matTooltip="Éditer"
                             ></natural-table-button>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isActive">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <natural-icon *ngIf="element.isActive" name="done"></natural-icon>
                         </div>
                     </td>
                 </ng-container>

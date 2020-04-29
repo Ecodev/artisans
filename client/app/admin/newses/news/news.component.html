@@ -28,10 +28,20 @@
                             ></textarea>
                         </mat-form-field>
 
+                        <mat-form-field>
+                            <mat-label>Contenu</mat-label>
+                            <textarea (change)="update()"
+                                      [matAutosizeMinRows]="1"
+                                      formControlName="content"
+                                      matInput
+                                      matTextareaAutosize
+                            ></textarea>
+                        </mat-form-field>
+
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
-
+                        <mat-slide-toggle (change)="update()" formControlName="isActive">Active</mat-slide-toggle>
                     </div>
                 </div>
 

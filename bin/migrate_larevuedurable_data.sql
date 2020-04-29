@@ -218,4 +218,16 @@ SELECT id_product_1,
     id_product_2
 FROM ps_accessory;
 
+INSERT INTO news (id, name, description, content, date, is_active)
+SELECT ps_prestablog_news.id_prestablog_news,
+    ppnl.title,
+    ppnl.paragraph,
+    ppnl.content,
+    ps_prestablog_news.date,
+    ps_prestablog_news.actif
+FROM ps_prestablog_news
+         INNER JOIN ps_prestablog_news_lang ppnl
+ON ps_prestablog_news.id_prestablog_news = ppnl.id_prestablog_news
+    AND ppnl.id_lang = 1;
+
 COMMIT;

@@ -46,8 +46,10 @@ export class NewsService
 
     public getDefaultForServer(): NewsInput {
         return {
+            isActive: false,
             name: '',
             description: '',
+            content: '',
             date: new Date(),
         };
     }

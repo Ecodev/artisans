@@ -18,11 +18,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class News extends AbstractModel
 {
-    private const IMAGE_PATH = 'htdocs/news/';
-
     use HasName;
     use HasDescription;
     use HasDate;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $isActive = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", length=65535, options={"default" = ""})
+     */
+    private $content = '';
 
     /**
      * @var Collection
@@ -33,6 +45,26 @@ class News extends AbstractModel
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+    }
+
+    /**
+     * Whether this news is shown
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->isActive;
+    }
+
+    /**
+     * Whether this news is shown
+     *
+     * @param bool $isActive
+     */
+    public function setIsActive(bool $isActive): void
+    {
+        $this->isActive = $isActive;
     }
 
     /**
@@ -65,5 +97,21 @@ class News extends AbstractModel
     public function commentRemoved(Comment $comment): void
     {
         $this->comments->removeElement($comment);
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
     }
 }

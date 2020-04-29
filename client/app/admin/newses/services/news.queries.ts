@@ -6,6 +6,7 @@ export const newsesQuery = gql`
         newses(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 id
+                isActive
                 name
                 description
                 date
@@ -20,8 +21,10 @@ export const newsQuery = gql`
     query News($id: NewsID!) {
         news(id: $id) {
             id
+            isActive
             name
             description
+            content
             creationDate
             date
             creator {

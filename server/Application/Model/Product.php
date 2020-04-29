@@ -223,10 +223,6 @@ class Product extends AbstractProduct
         if (!$this->relatedProducts->contains($product)) {
             $this->relatedProducts[] = $product;
         }
-
-        if (!$product->relatedProducts->contains($this)) {
-            $product->relatedProducts[] = $this;
-        }
     }
 
     /**
@@ -237,7 +233,6 @@ class Product extends AbstractProduct
     public function removeRelatedProduct(self $product): void
     {
         $this->relatedProducts->removeElement($product);
-        $product->relatedProducts->removeElement($this);
     }
 
     /**

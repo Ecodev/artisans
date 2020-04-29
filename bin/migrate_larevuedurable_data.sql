@@ -213,12 +213,6 @@ WHERE email NOT IN (SELECT email FROM user);
 INSERT IGNORE INTO product_product (product_source, product_target)
 SELECT id_product_1,
     id_product_2
-FROM ps_accessory
-
-UNION
-
-SELECT id_product_2,
-    id_product_1
 FROM ps_accessory;
 
 COMMIT;

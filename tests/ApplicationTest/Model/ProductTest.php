@@ -20,12 +20,12 @@ class ProductTest extends TestCase
         $product1->addRelatedProduct($product2);
 
         self::assertCount(1, $product1->getRelatedProducts());
-        self::assertCount(1, $product2->getRelatedProducts());
+        self::assertCount(0, $product2->getRelatedProducts());
 
         self::assertSame($product2, $product1->getRelatedProducts()->first());
-        self::assertSame($product1, $product2->getRelatedProducts()->first());
+        self::assertFalse($product2->getRelatedProducts()->first());
 
-        $product2->removeRelatedProduct($product1);
+        $product1->removeRelatedProduct($product2);
 
         self::assertCount(0, $product1->getRelatedProducts());
         self::assertCount(0, $product2->getRelatedProducts());

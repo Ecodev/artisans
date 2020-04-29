@@ -83,4 +83,11 @@ abstract class Utility
 
         return $data;
     }
+
+    public static function sanitizeRichText(string $string): string
+    {
+        $sanitized = strip_tags($string, ['ul', 'ol', 'li', 'p', 'br', 'sup', 'sub', 'a', 'strong', 'em']);
+
+        return $sanitized;
+    }
 }

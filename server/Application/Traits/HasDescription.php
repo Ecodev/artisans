@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use Application\Utility;
+
 trait HasDescription
 {
     /**
@@ -20,7 +22,7 @@ trait HasDescription
      */
     public function setDescription(string $description): void
     {
-        $this->description = $description;
+        $this->description = Utility::sanitizeRichText($description);
     }
 
     /**

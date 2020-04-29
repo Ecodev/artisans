@@ -7,6 +7,7 @@
 --     ./vendor/bin/doctrine-migrations migrations:migrate --no-interaction
 --     gunzip -c data/cache/larevuedurable.com.sql.gz | mysql -u artisans -p artisans
 --     more bin/migrate_larevuedurable_data.sql | mysql -u artisans -p artisans
+--     ./bin/clean-formatted-content.php
 --
 -- Files can be migrated with something like the following. It will only copy the original image, no thumbs, into current project:
 --

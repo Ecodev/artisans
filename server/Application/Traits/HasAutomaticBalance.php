@@ -60,7 +60,7 @@ trait HasAutomaticBalance
      */
     public function getFormattedBalance(): string
     {
-        $money = $this->getBalanceCHF()->isZero() ? $this->getBalanceEUR() : $this->getBalanceCHF();
+        $money = $this->getBalanceEUR()->isZero() ? $this->getBalanceCHF() : $this->getBalanceEUR();
         $currencies = new ISOCurrencies();
         $moneyFormatter = new DecimalMoneyFormatter($currencies);
 

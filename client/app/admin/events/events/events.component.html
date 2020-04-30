@@ -16,6 +16,7 @@
             >
 
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="date">Date</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="place">Lieu</span>
                     <span naturalColumnsPickerColumn="type">Type</span>
@@ -29,6 +30,11 @@
 
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+
+                <ng-container matColumnDef="date">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.date | date : 'dd.MM.y'}}</td>
+                </ng-container>
 
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nom</th>

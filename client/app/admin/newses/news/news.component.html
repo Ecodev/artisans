@@ -41,7 +41,17 @@
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
-                        <mat-slide-toggle (change)="update()" formControlName="isActive">Active</mat-slide-toggle>
+                        <div fxLayout="column" class="margin-bottom" fxLayoutGap="20px">
+                            <mat-slide-toggle (change)="update()" formControlName="isActive">Active</mat-slide-toggle>
+                        </div>
+
+                        <mat-form-field>
+                            <mat-label>Date</mat-label>
+                            <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()">
+                            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
                     </div>
                 </div>
 

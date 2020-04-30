@@ -40,6 +40,13 @@
 
                     <div fxFlex="33" fxLayout="column">
 
+                        <mat-form-field>
+                            <mat-label>Date</mat-label>
+                            <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()">
+                            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+
                     </div>
                 </div>
 

@@ -20,6 +20,7 @@
                     <span naturalColumnsPickerColumn="type">Type</span>
                     <span naturalColumnsPickerColumn="pricePerUnitCHF">Prix CHF</span>
                     <span naturalColumnsPickerColumn="pricePerUnitEUR">Prix EUR</span>
+                    <span naturalColumnsPickerColumn="isActive">Actif</span>
                 </natural-columns-picker>
             </natural-search>
         </div>
@@ -74,6 +75,15 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix EUR</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <span *ngIf="element.pricePerUnitEUR != '0.00'">{{ element.pricePerUnitEUR | currency: 'EUR' }}</span>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="isActive">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div fxLayout="row" fxLayoutAlign="start center">
+                            <natural-icon *ngIf="element.isActive" name="done"></natural-icon>
+                        </div>
                     </td>
                 </ng-container>
 

@@ -260,4 +260,12 @@ FROM ps_prestablog_news
 ON ps_prestablog_news.id_prestablog_news = ppnl.id_prestablog_news
     AND ppnl.id_lang = 1;
 
+INSERT INTO subscription (id, is_active, image_id, price_per_unit_chf, price_per_unit_eur, name, code, type, description, internal_remarks) VALUES
+(19000, 1, NULL, 5500, 4000, 'Abonnement standard papier', 'abo-papier', 'paper', 'CHANGE ME', ''),
+(19001, 1, NULL, 8000, 5000, 'Abonnement standard numérique', 'abo-web', 'digital', 'CHANGE ME', ''),
+(19002, 1, NULL, 10500, 7000, 'Abonnement standard papier et numérique', 'abo-web-papier', 'both', 'CHANGE ME', ''),
+(19003, 1, NULL, 6500, 4500, 'Abonnement institutionnel papier', 'abo-pro-papier', 'paper', 'CHANGE ME', ''),
+(19004, 1, NULL, 16000, 10000, 'Abonnement institutionnel numérique', 'abo-pro-web', 'digital', 'CHANGE ME', ''),
+(19005, 1, NULL, 18500, 12000, 'Abonnement institutionnel papier et numérique', 'abo-pro-web-papier', 'both', 'CHANGE ME', '');
+
 COMMIT;

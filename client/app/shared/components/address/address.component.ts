@@ -22,7 +22,15 @@ export class AddressComponent {
     /**
      * If fields are editable or not
      */
-    @Input() readonly: boolean;
+    @Input()
+    public set disabled(value: boolean) {
+        ['firstName', 'lastName', 'street', 'postcode', 'locality', 'country'].forEach(name => {
+            const control = this.form.get(name);
+            if (control) {
+                value ? control.disable() : control.enable();
+            }
+        });
+    }
 
     /**
      * If true, all fields are displayed vertically
@@ -37,13 +45,13 @@ export class AddressComponent {
     /**
      * Emits when form changes
      */
-    @Output() change: EventEmitter<boolean> = new EventEmitter();
+    @Output() change: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(public countryService: CountryService) {
     }
 
     public update() {
-        this.change.emit(true);
+        this.change.emit();
     }
 
 }

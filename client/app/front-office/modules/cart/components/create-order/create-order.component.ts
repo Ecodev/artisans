@@ -101,7 +101,7 @@ export class CreateOrderComponent implements OnInit {
             street: new FormControl(viewer.street, [Validators.required]),
             locality: new FormControl(viewer.locality, [Validators.required]),
             postcode: new FormControl(viewer.postcode, [Validators.required]),
-            country: new FormControl(viewer.country, []), // todo : set mandatory
+            country: new FormControl(viewer.country, [Validators.required]),
         });
 
         this.billingForm = new FormGroup({

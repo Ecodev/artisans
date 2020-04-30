@@ -1,21 +1,23 @@
-<div class="container" fxLayout="column" fxLayoutGap="60px">
+<div class="container" fxLayout="column" fxLayoutGap="30px">
 
-<div fxLayout="column" fxLayoutGap="15px">
-        <h1 class="mat-display-1">
-            {{ data.model.name }}
-            <a mat-stroked-button [routerLink]="['/admin/event', data.model.id]" *ngIf="data.model.permissions.update">Administrer</a>
-        </h1>
+    <div fxLayout="column" fxLayoutGap="10px">
 
-        <div fxLayout="row" fxLayoutGap="15px" class="mat-body text-light">
+        <div fxLayout="row" fxLayoutGap="15px" class="mat-h3 text-light">
             <div>{{ data.model.date | date : 'EEEE d MMMM yyyy' | capitalize}}</div>
             <div>{{ data.model.place }}</div>
             <div>{{ data.model.type }}</div>
         </div>
+
+        <h1 class="mat-display-1 no-margin-bottom">
+            {{ data.model.name }}
+            <a mat-icon-button mat-raised-button [routerLink]="['/admin/event', data.model.id]" *ngIf="data.model.permissions.update">
+                <natural-icon name="edit"></natural-icon>
+            </a>
+        </h1>
     </div>
 
-
     <div fxLayout="column" fxLayoutGap="30px">
-        <h2 class="mat-display-1">Commentaires</h2>
+        <h2 class="mat-h1">Commentaires</h2>
         <app-comment-list [event]="data.model"></app-comment-list>
     </div>
 </div>

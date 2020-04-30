@@ -1,7 +1,17 @@
 <div class="container" fxLayout.gt-sm="row" fxLayoutGap="60px">
 
-    <div fxFlex fxLayout="column" fxLayoutGap="60px">
-        <h1 class="mat-display-1">{{ data.model.name }}</h1>
+    <div fxFlex fxLayout="column" fxLayoutGap="60px" fxLayoutAlign="start start">
+        <h1 class="mat-display-1">
+            {{ data.model.name }}
+
+            <a *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator"
+               [routerLink]="['/admin/session/', data.model.id]"
+               mat-icon-button
+               mat-raised-button
+            >
+                <natural-icon name="edit"></natural-icon>
+            </a>
+        </h1>
 
         <div [innerHTML]="data.model.description" class="mat-h3 rich-text"></div>
 
@@ -12,18 +22,7 @@
             </div>
         </div>
 
-        <div fxLayout="row" fxLayoutGap="20px">
-            <a color="accent" mat-flat-button>S'inscrire</a>
-
-            <!-- @formatter:off -->
-            <a *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator" [routerLink]="['/admin/session/', data.model.id]"
-               color="primary"
-               mat-flat-button>
-                Administrer
-            </a>
-            <!-- @formatter:on -->
-
-        </div>
+        <a color="accent" mat-flat-button>S'inscrire</a>
 
     </div>
 

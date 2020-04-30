@@ -16,21 +16,23 @@
                     {{ data.model.releaseDate | date: 'MMMM yyyy' | capitalize }}
                 </div>
 
+                <a [routerLink]="['/admin/product', data.model.id]"
+                   mat-icon-button
+                   mat-raised-button
+                   *ngIf="data.model.permissions?.update"
+                >
+                    <natural-icon name="edit"></natural-icon>
+                </a>
+
             </div>
 
             <h1 class="mat-display-1">{{ data.model.name }}</h1>
 
             <!-- Reading duration -->
-
             <div fxLayout="row" fxLayoutGap="20px">
                 <div *ngIf="data.model.readingDuration" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="mat-h3">
                     <natural-icon name="alarm"></natural-icon>
                     <div>{{ data.model.readingDuration }} {{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }} de lecture</div>
-                </div>
-                <div *ngIf="data.model.permissions?.update">
-                    <a [routerLink]="['/admin/product', data.model.id]" mat-stroked-button>
-                        Administrer
-                    </a>
                 </div>
             </div>
             <div [innerHTML]="data.model.description" class="description mat-h3 rich-text"></div>
@@ -70,12 +72,7 @@
         </div>
 
         <!-- Related review link -->
-        <div *ngIf="data.model.review"
-             fxFlex.gt-sm="0 auto 230px"
-             fxLayout="column"
-             fxLayoutGap="10px"
-             class="review"
-             fxFlexOrder.lt-md="1"
+        <div *ngIf="data.model.review" fxFlex.gt-sm="0 auto 230px" fxLayout="column" fxLayoutGap="10px" class="review" fxFlexOrder.lt-md="1"
         >
             <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
                 <img [attr.src]="'/image/' + data.model.review.image.id + '/300'" alt="couverture de la revue" />

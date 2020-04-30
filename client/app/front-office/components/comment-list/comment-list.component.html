@@ -10,10 +10,15 @@
     <div fxLayout="column" fxLayoutGap="30px" *ngIf="dataSource.data?.items?.length">
 
         <div *ngFor="let comment of dataSource.data.items" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
-            <div class="mat-h2" *ngIf="comment.authorName">{{ comment.authorName }} :</div>
-            <div class="text-light">Posté le {{ comment.creationDate | date : 'longDate' }}</div>
+            <div class="mat-h2" *ngIf="comment.authorName" fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="start baseline"  >
+                <span>{{ comment.authorName }}</span>
+                <span class="mat-body text-light"> Posté le {{ comment.creationDate | date : 'longDate' }}</span>
+                <a [routerLink]="['/admin/comment', comment.id]" mat-icon-button mat-raised-button *ngIf="comment.permissions?.update">
+                    <natural-icon name="edit"></natural-icon>
+                </a>
+            </div>
+
             <div [innerHTML]="comment.description" class="mat-h3"></div>
-            <a [routerLink]="['/admin/comment', comment.id]" mat-stroked-button *ngIf="comment.permissions?.update">Éditer</a>
         </div>
     </div>
 

@@ -28,15 +28,14 @@
                                 <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
-                            <mat-form-field>
-                                <mat-label>Description</mat-label>
-                                <textarea (change)="update()"
-                                          [matAutosizeMinRows]="1"
-                                          formControlName="description"
-                                          matInput
-                                          matTextareaAutosize
-                                ></textarea>
-                            </mat-form-field>
+                            <div class="margin-bottom rich-text quill-editor">
+                                <div class="label">Description</div>
+                                <quill-editor formControlName="description"
+                                              bounds="self"
+                                              [modules]="quillModules"
+                                              (onBlur)="update()"
+                                ></quill-editor>
+                            </div>
 
                             <mat-form-field>
                                 <mat-label>Première date</mat-label>

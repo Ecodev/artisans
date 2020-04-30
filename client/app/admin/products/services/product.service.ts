@@ -16,8 +16,8 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
 import { xorValidator } from '../../../shared/validators';
+import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
 
 @Injectable({
     providedIn: 'root',
@@ -45,7 +45,7 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     public getFormGroupValidators(model?: Literal): ValidatorFn[] {
         return [
             xorValidator('reviewXorArticle', ['reviewNumber', 'review']),
-        ]
+        ];
     }
 
     public getFormValidators(): FormValidators {
@@ -59,6 +59,11 @@ export class ProductService extends NaturalAbstractModelService<Product['product
         return {
             code: [unique('code', model.id, this)],
         };
+    }
+
+    public getInput(object: Literal) {
+        object.description = object.description || '';
+        return super.getInput(object);
     }
 
     protected getDefaultForServer(): ProductInput {

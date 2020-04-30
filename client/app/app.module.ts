@@ -14,6 +14,7 @@ import { NgProgressModule } from 'ngx-progressbar';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { QuillModule } from 'ngx-quill';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FrontOfficeModule } from './front-office/front-office.module';
@@ -24,6 +25,7 @@ import {
     createApolloLink,
     createApolloLinkForServer,
 } from './shared/config/apolloDefaultOptions';
+import { quillConfig } from './shared/config/quill.options';
 import { ArtisansModule } from './shared/modules/artisans.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
@@ -51,6 +53,7 @@ registerLocaleData(localeFRCH);
         HttpClientModule,
         HttpBatchLinkModule,
         FrontOfficeModule,
+        QuillModule.forRoot(quillConfig),
     ],
     providers: [
         MatIconRegistry,

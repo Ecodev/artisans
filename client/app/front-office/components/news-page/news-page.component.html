@@ -3,13 +3,13 @@
     <div fxLayout="column" fxLayoutGap="15px">
         <h1 class="mat-display-1">
             {{ data.model.name }}
-            <a mat-stroked-button [routerLink]="['/admin/event', data.model.id]" *ngIf="data.model.permissions.update">Administrer</a>
+            <a mat-stroked-button [routerLink]="['/admin/news', data.model.id]" *ngIf="data.model.permissions.update">Administrer</a>
         </h1>
 
         <div class="text-light">{{ data.model.date | date : 'EEEE d MMMM yyyy' | capitalize}}</div>
     </div>
 
-    <div class="mat-h3" [innerHTML]="data.model.content"></div>
+    <div class="mat-h3 rich-text" [innerHTML]="data.model.content"></div>
 
     <div fxLayout="column" fxLayoutGap="30px">
         <h2 class="mat-display-1">Commentaires</h2>

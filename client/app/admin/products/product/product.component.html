@@ -41,23 +41,18 @@
                             </div>
                         </div>
 
-                        <mat-form-field>
-                            <mat-label>Description</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="1"
-                                      formControlName="description"
-                                      matInput
-                                      matTextareaAutosize
-                            ></textarea>
-                        </mat-form-field>
+                        <div class="margin-bottom rich-text quill-editor">
+                            <div class="label">Description</div>
+                            <quill-editor formControlName="description"
+                                          bounds="self"
+                                          [modules]="quillModules"
+                                          (onBlur)="update()"
+                            ></quill-editor>
+                        </div>
 
                         <mat-form-field>
                             <mat-label>Contenu complet</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="1"
-                                      formControlName="content"
-                                      matInput
-                                      matTextareaAutosize
+                            <textarea (change)="update()" [matAutosizeMinRows]="1" formControlName="content" matInput matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
 
@@ -70,10 +65,7 @@
                             <mat-slide-toggle (change)="update()" formControlName="isHighlighted">Mettre en avant</mat-slide-toggle>
                         </div>
 
-                        <natural-select-enum (selectionChange)="update()"
-                                             formControlName="type"
-                                             enumName="ProductType"
-                                             placeholder="Type"
+                        <natural-select-enum (selectionChange)="update()" formControlName="type" enumName="ProductType" placeholder="Type"
                         ></natural-select-enum>
 
                         <mat-form-field>

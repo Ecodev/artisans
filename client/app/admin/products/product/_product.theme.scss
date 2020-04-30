@@ -1,19 +1,12 @@
 @mixin product($theme) {
-    .warn {
-        color: mat-color($artisans-warn);
-    }
-    natural-icon {
-        .negative {
-            color: mat-color($artisans-warn) !important;
-        }
 
-        .neutral {
-            color: mat-color($artisans-accent) !important;
-        }
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $bg: map-get($theme, background);
+    $fg: map-get($theme, foreground);
 
-        .positive {
-            color: mat-color($artisans-primary) !important;
-        }
+    app-product {
 
     }
 }

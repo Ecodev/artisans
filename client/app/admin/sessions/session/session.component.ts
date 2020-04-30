@@ -1,6 +1,8 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { NaturalAbstractDetail } from '@ecodev/natural';
+import { QuillModules } from 'ngx-quill';
+import { quillConfig } from '../../../shared/config/quill.options';
 import {
     CreateSession,
     CreateSessionVariables,
@@ -30,6 +32,11 @@ export class SessionComponent
      * Array of form controls dedicated to dates display
      */
     public datesForm: FormArray;
+
+    public quillModules: QuillModules = {
+        ...quillConfig.modules,
+    };
+
 
     constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);

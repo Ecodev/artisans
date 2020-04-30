@@ -19,7 +19,7 @@
                         </mat-form-field>
 
                         <mat-form-field>
-                            <mat-label>Description</mat-label>
+                            <mat-label>Résumé</mat-label>
                             <textarea (change)="update()"
                                       [matAutosizeMinRows]="1"
                                       formControlName="description"
@@ -28,15 +28,14 @@
                             ></textarea>
                         </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Contenu</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="1"
-                                      formControlName="content"
-                                      matInput
-                                      matTextareaAutosize
-                            ></textarea>
-                        </mat-form-field>
+                        <div class="margin-bottom rich-text quill-editor">
+                            <div class="label">Contenu</div>
+                            <quill-editor formControlName="content"
+                                          bounds="self"
+                                          [modules]="quillModules"
+                                          (onBlur)="update()"
+                            ></quill-editor>
+                        </div>
 
                     </div>
 

@@ -3,7 +3,7 @@
     <div fxFlex fxLayout="column" fxLayoutGap="60px">
         <h1 class="mat-display-1">{{ data.model.name }}</h1>
 
-        <div [innerHTML]="data.model.description" class="mat-body"></div>
+        <div [innerHTML]="data.model.description" class="mat-h3 rich-text"></div>
 
         <div *ngIf="data.model.dates?.length">
             <p class="mat-body">Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>

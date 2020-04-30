@@ -1,5 +1,7 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
+import { QuillModules } from 'ngx-quill';
+import { quillConfig } from '../../../shared/config/quill.options';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -8,11 +10,11 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
+import { XorErrorStateMatcher } from '../../../shared/validators';
 import { FilesService } from '../../files/services/files.service';
 import { ProductTagService } from '../../product-tags/services/product-tag.service';
 import { ImageService } from '../services/image.service';
 import { ProductService } from '../services/product.service';
-import { XorErrorStateMatcher } from '../../../shared/validators';
 
 @Component({
     selector: 'app-product',
@@ -29,6 +31,10 @@ export class ProductComponent
         any> implements OnInit {
 
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
+
+    public quillModules: QuillModules = {
+        ...quillConfig.modules,
+    };
 
     constructor(public productService: ProductService,
                 injector: Injector,

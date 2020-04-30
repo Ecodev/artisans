@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { AvatarModule } from 'ngx-avatar';
+import { QuillModule } from 'ngx-quill';
 import { ProfileModule } from '../profile/profile.module';
 import { ArtisansModule } from '../shared/modules/artisans.module';
 import { MaterialModule } from '../shared/modules/material.module';
+import { StripTagsPipe } from '../shared/pipes/strip-tags.pipe';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin/admin.component';
@@ -36,7 +38,8 @@ import { UserComponent } from './users/user/user.component';
         SessionsComponent,
         SessionComponent,
         CommentComponent,
-        CommentsComponent
+        CommentsComponent,
+        StripTagsPipe,
     ],
     imports: [
         CommonModule,
@@ -47,6 +50,7 @@ import { UserComponent } from './users/user/user.component';
         ProfileModule,
         OrderModule,
         EcoFabSpeedDialModule,
+        QuillModule,
     ],
 })
 export class AdminModule {

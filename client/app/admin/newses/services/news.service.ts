@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NaturalAbstractModelService } from '@ecodev/natural';
+import { Literal, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 
 import {
@@ -42,6 +42,11 @@ export class NewsService
 
     public getDefaultForClient() {
         return this.getDefaultForServer();
+    }
+
+    public getInput(object: Literal) {
+        object.content = object.content || '';
+        return super.getInput(object);
     }
 
     public getDefaultForServer(): NewsInput {

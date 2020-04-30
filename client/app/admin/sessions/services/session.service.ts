@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { FormValidators, NaturalAbstractModelService } from '@ecodev/natural';
+import { FormValidators, Literal, NaturalAbstractModelService } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import {
     CreateSession,
@@ -44,6 +44,11 @@ export class SessionService extends NaturalAbstractModelService<Session['session
             name: [Validators.required, Validators.maxLength(100)],
             startDate: [Validators.required],
         };
+    }
+
+    public getInput(object: Literal) {
+        object.description = object.description || '';
+        return super.getInput(object);
     }
 
     protected getDefaultForServer(): SessionInput {

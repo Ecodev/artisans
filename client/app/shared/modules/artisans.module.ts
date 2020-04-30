@@ -53,7 +53,7 @@ const declarations = [
     ProductsComponent,
     TagsNavigationComponent,
     PriceComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
 ];
 
 const imports = [

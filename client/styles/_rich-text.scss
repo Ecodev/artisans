@@ -7,8 +7,13 @@
     $background: map-get($theme, background);
     $foreground: map-get($theme, foreground);
 
-    .rich-text {
+    .rich-text:not(.quill-editor) {
+
         line-height: 1.6em;
+
+        br {
+            display: none;
+        }
 
         .strong {
             font-weight: bold;
@@ -17,6 +22,41 @@
 
     .rich-text a,
     a.app-link {
-        color: mat-color($primary);
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 2px solid mat-color($primary);
+
+        &:hover {
+            color: mat-color($primary);
+        }
     }
+
+    // Admin part
+    .rich-text.quill-editor {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        background: mat-color($foreground, base, if(map-get($theme, is-dark), 0.1, 0.04)); // match official mat-form-field component style
+        padding: 10px 10px 0 10px;
+        border-bottom: 1px solid mat-color($foreground, base, 0.5);
+        font-size: 13px;
+
+        .ql-editor {
+            padding: 0.25em 0 0.75em 0;
+
+            p {
+                margin-bottom: 0;
+            }
+        }
+
+        .ql-editor {
+            font-size: 14px;
+        }
+
+        .label {
+            font-size: 0.9em;
+            opacity: 0.6;
+        }
+    }
+
+
 }

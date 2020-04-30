@@ -7,6 +7,7 @@ namespace Application\Api\Field;
 use Application\Api\Helper;
 use Application\Api\Input\PaginationInputType;
 use Application\Model\AbstractModel;
+use Application\Model\Order;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use GraphQL\Type\Definition\Type;
 use Money\Money;
@@ -314,7 +315,17 @@ abstract class Standard
      */
     private static function getDefaultSorting(ClassMetadata $metadata): array
     {
-        return [];
+        $defaultSorting = [];
+
+        $class = $metadata->getName();
+        if ($class === Order::class) {
+            $defaultSorting[] = [
+                'field' => 'creationDate',
+                'order' => 'DESC',
+            ];
+        }
+
+        return $defaultSorting;
     }
 
     /**

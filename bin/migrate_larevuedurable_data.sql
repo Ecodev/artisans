@@ -287,4 +287,13 @@ VALUES (19000, 1, NULL, 5500, 4000, 'Abonnement standard papier', 'abo-papier', 
 (19005, 1, NULL, 18500, 12000, 'Abonnement institutionnel papier et numérique', 'abo-pro-web-papier', 'both',
  'CHANGE ME', '');
 
+-- Out of stock paper is only digital now
+UPDATE product
+SET type        = 'digital',
+    description = REPLACE(
+            REPLACE(description, '<p>La version papier est épuisée</p>', ''),
+            '<p>La version papier est épuisée.  </p>', ''
+        )
+WHERE description LIKE '%La version papier est épuisée%';
+
 COMMIT;

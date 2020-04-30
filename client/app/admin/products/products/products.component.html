@@ -14,10 +14,10 @@
                             fxFlex
             >
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                    <span naturalColumnsPickerColumn="code">Code</span>
                     <span naturalColumnsPickerColumn="image">Image</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="type">Type</span>
-                    <span naturalColumnsPickerColumn="code">Code</span>
                     <span naturalColumnsPickerColumn="pricePerUnitCHF">Prix CHF</span>
                     <span naturalColumnsPickerColumn="pricePerUnitEUR">Prix EUR</span>
                 </natural-columns-picker>
@@ -29,6 +29,11 @@
 
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+
+                <ng-container matColumnDef="code">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.code }}</td>
+                </ng-container>
 
                 <ng-container matColumnDef="image">
                     <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
@@ -56,11 +61,6 @@
                 <ng-container matColumnDef="type">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
                     <td *matCellDef="let element" mat-cell>{{ element.type | enum : 'ProductType' | async }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="code">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.code }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="pricePerUnitCHF">

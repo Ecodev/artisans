@@ -10,6 +10,13 @@ use Laminas\View\Helper\AbstractHelper;
 
 class OrderLines extends AbstractHelper
 {
+    /**
+     * This is used for custom admin and customer emails, so links must be frontend, not backend
+     *
+     * @param Order $order
+     *
+     * @return string
+     */
     public function __invoke(Order $order): string
     {
         $result = '<ul>';
@@ -22,7 +29,16 @@ class OrderLines extends AbstractHelper
                 $label = '<a href="' . $url . '">' . $label . '</a>';
             }
 
-            $result .= '<li>' . $label . '</li>';
+            $extra = '';
+            if ($line->getAdditionalEmails()) {
+                $extra .= '<ul>';
+                foreach ($line->getAdditionalEmails() as $email) {
+                    $extra .= '<li>' . $this->view->escapeHtml($email) . '</li>';
+                }
+                $extra .= '</ul>';
+            }
+
+            $result .= '<li>' . $label . $extra . '</li>';
         }
         $result .= '</ul>';
 

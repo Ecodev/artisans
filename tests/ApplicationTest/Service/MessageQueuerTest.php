@@ -169,10 +169,14 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $subscriptionLine = new OrderLine();
         $subscriptionLine->setName('Abonnement standard papier');
 
+        $subscriptionLine2 = new OrderLine();
+        $subscriptionLine2->setName('Abonnement institutionnel numérique');
+        $subscriptionLine2->setAdditionalEmails(['alice@example.com', 'bob@example.com', 'carol@example.com']);
+
         $donationLine = new OrderLine();
         $donationLine->setName('Donation');
 
-        $lines = new ArrayCollection([$productLine, $subscriptionLine, $donationLine]);
+        $lines = new ArrayCollection([$productLine, $subscriptionLine, $subscriptionLine2, $donationLine]);
 
         $order = $this->createMock(Order::class);
         $order->expects($this->any())

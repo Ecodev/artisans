@@ -16,8 +16,6 @@ class OrderTest extends TestCase
      * @param int $chf
      * @param int $eur
      * @param string $expected
-     *
-     * @return Order
      */
     public function testGetFormattedBalance(int $chf, int $eur, string $expected): void
     {

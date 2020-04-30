@@ -16,6 +16,7 @@ parameters:
         - '~^Parameter \#1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\.* given\.$~'
         - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         - '~^Call to an undefined method Laminas\\View\\Renderer\\RendererInterface\:\:.*\(\)\.$~'
+        - '~^Call to an undefined method PHPUnit\\Framework\\MockObject\\MockObject\:\:.*\(\)\.$~'
         -
             message: '~^If condition is always true\.$~'
             path: server/Application/Model/OrderLine.php

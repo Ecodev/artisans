@@ -70,6 +70,20 @@ SELECT id_product_download,
           'application/pdf'))
 FROM ps_product_download;
 
+-- Manual fix for a few references
+UPDATE ps_product
+SET reference = REPLACE(
+        REPLACE(
+                REPLACE(
+                        REPLACE(
+                                REPLACE(
+                                        REPLACE(reference, '053-16', '053-016'),
+                                        '058-17', '058-017'),
+                                '058-46', '058-046'),
+                        '061- 003', '061-003'),
+                '061-62', '061-062'),
+        '062- 003', '062-003');
+
 INSERT INTO product (id, image_id, creation_date, update_date, price_per_unit_chf, price_per_unit_eur, name,
                      content, code, internal_remarks, type, description, is_active, reading_duration,
                      release_date, review_number)
@@ -116,20 +130,6 @@ WHERE ps_product.reference NOT REGEXP '^\\d\\d\\de$' -- Never import digital rev
                                       1142 -- la cotisation est déjà un produit chez nous. Ce produit n'est donc à priori pas à importer, car l'ajout au panier se fera par ID hardcodé comme pour les abonnements
         )
 ;
-
--- Manual fix for a few references
-UPDATE ps_product
-SET reference = REPLACE(
-        REPLACE(
-                REPLACE(
-                        REPLACE(
-                                REPLACE(
-                                        REPLACE(reference, '053-16', '053-016'),
-                                        '058-17', '058-017'),
-                                '058-46', '058-046'),
-                        '061- 003', '061-003'),
-                '061-62', '061-062'),
-        '062- 003', '062-003');
 
 -- Link articles to their reviews
 UPDATE product

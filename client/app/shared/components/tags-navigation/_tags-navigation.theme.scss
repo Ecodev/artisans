@@ -6,7 +6,7 @@
 
     app-tags-navigation {
 
-        * {
+        &, a { // explicit a gives more ponderation to css selector
             color: mat-color($foreground, text, 0.25);
         }
 

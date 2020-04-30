@@ -78,7 +78,7 @@ SELECT ps_product.id_product,
     ps_product.date_add,
     ps_product.date_upd,
     (ps_product.price + ps_product.price * 0.025) * 100, -- Compute CHF price including tax
-    (ROUND((ps_product.price + ps_product.price * 0.025) * 0.73 * 4) / 4) * 100, -- Compute EUR price including tax
+        (ROUND((ps_product.price + ps_product.price * 0.025) * 0.73 * 4) / 4) * 100, -- Compute EUR price including tax
     REPLACE(ppl.name, ' (version papier)', ''),
     IFNULL(ppl.description, ''),
     IF(ps_product.reference = '', NULL, ps_product.reference),
@@ -98,7 +98,23 @@ FROM ps_product
 WHERE ps_product.reference NOT REGEXP '^\\d\\d\\de$' -- Never import digital review, instead we will import paper and mark it as `both`
         AND ps_product.reference NOT LIKE 'abo-%' -- Skip subscriptions because they have their own table
         AND
-    ps_product.id_product != 1258 -- Because it is a duplicate of 83 with both the reference 045-061 and this one is not active
+        ps_product.id_product NOT IN (
+                                      1258, -- Because it is a duplicate of 83 with both the reference 045-061 and this one is not active
+                                      782, -- Exclude all "Recharge"
+                                      783,
+                                      784,
+                                      785,
+                                      786,
+                                      1024, -- accessible qu'à la recherche, pas importer car on n'a pas ce type de mécanisme
+                                      1025,
+                                      1026,
+                                      1027,
+                                      1028, -- plus de bons cadeaux, ca passera par un contact direct avec eux
+                                      1083, -- semble être un doublon, ne pas importer
+                                      1143, -- n'est plus un produit, mais une feature, ne pas importer
+                                      1236, -- ne pas importer
+                                      1142 -- la cotisation est déjà un produit chez nous. Ce produit n'est donc à priori pas à importer, car l'ajout au panier se fera par ID hardcodé comme pour les abonnements
+        )
 ;
 
 -- Manual fix for a few references

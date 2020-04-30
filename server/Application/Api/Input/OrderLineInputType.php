@@ -32,7 +32,7 @@ class OrderLineInputType extends InputObjectType
                         'type' => _types()->getId(Subscription::class),
                     ],
                     'additionalEmails' => [
-                        'type' => self::listOf(self::nonNull(self::string())),
+                        'type' => self::listOf(self::nonNull(_types()->get('Email'))),
                         'defaultValue' => [],
                     ],
                     'pricePerUnit' => [

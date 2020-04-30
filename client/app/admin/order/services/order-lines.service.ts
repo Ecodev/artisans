@@ -43,6 +43,7 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
             xorValidator('productXorSubscription', ['product', 'subscription']),
         ]
     }
+
     public getFormValidators(): FormValidators {
         return {
             quantity: [Validators.required, Validators.min(0)],
@@ -57,6 +58,7 @@ export class OrderLineService extends NaturalAbstractModelService<OrderLine['ord
             quantity: '0',
             isCHF: true,
             type: ProductType.digital,
+            additionalEmails: [],
         };
     }
 }

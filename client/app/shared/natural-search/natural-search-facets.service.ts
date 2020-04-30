@@ -230,6 +230,14 @@ export class NaturalSearchFacetsService {
             this.productIsActive,
             this.productTags,
             {
+                display: 'Type',
+                field: 'type',
+                component: TypeSelectComponent,
+                configuration: {
+                    items: this.enumService.get('ProductType'),
+                },
+            } as DropdownFacet<TypeSelectConfiguration>,
+            {
                 display: 'Prix CHF',
                 field: 'pricePerUnitCHF',
                 component: TypeNumberComponent,

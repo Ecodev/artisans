@@ -38,7 +38,7 @@ REPLACE INTO product (id, is_active, image_id, file_id, price_per_unit_chf, pric
 (3008, 1, NULL, NULL, 500, 450, '2019-02-01g', NULL, 3000, 'digital', NULL, 'Article numérique 7', 'Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Nullam id dolor id nibh ultricies vehicula ut id elit. Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.'),
 (3009, 1, NULL, NULL, 500, 450, '2019-02-01h', NULL, 3000, 'digital', NULL, 'Article numérique 8', 'Maecenas sed diam eget risus varius blandit sit amet non magna. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur blandit tempus porttitor. Nullam id dolor id nibh ultricies vehicula ut id elit.'),
 (3010, 1, NULL, NULL, 500, 450, '2019-02-01i', NULL, 3000, 'digital', NULL, 'Article numérique 9', 'Curabitur blandit tempus porttitor. Vestibulum id ligula porta felis euismod semper. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas faucibus mollis interdum.'),
-(3011, 1, NULL, NULL, 1000, 1500, 'coti', NULL, NULL, 'both', NULL, 'Cotisation','Soutenez un super projet, et accessoirement, la planète !');
+(3011, 1, NULL, NULL, 1000, 1500, 'coti', NULL, NULL, 'other', NULL, 'Cotisation','Soutenez un super projet, et accessoirement, la planète !');
 
 REPLACE INTO product_tag_product (product_tag_id, product_id) VALUES
 (6001, 3002),

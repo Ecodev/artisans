@@ -85,7 +85,7 @@ SELECT ps_product.id_product,
     '',
     IF(reference REGEXP '^\\d\\d\\d$', 'both', -- Reviews are both
        IF(reference REGEXP '^\\d\\d\\d-\\d\\d\\d$', 'digital', -- Articles are digital only
-          'paper') -- Anything else ("Vignette cuisine") is paper only
+          'other') -- Anything else ("Vignette cuisine")
         ),
     IFNULL(ppl.description_short, ''),
     ps_product.active,

@@ -13,14 +13,6 @@ import { ProductService } from '../services/product.service';
 })
 export class ProductsComponent extends NaturalAbstractList<Products['products'], ProductsVariables> implements OnInit {
 
-    public initialColumns = [
-        'image',
-        'name',
-        'code',
-        'pricePerUnitCHF',
-        'pricePerUnitEUR',
-    ];
-
     constructor(route: ActivatedRoute,
                 productService: ProductService,
                 naturalSearchFacetsService: NaturalSearchFacetsService,

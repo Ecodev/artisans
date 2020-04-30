@@ -6,6 +6,7 @@ namespace Application\DBAL\Types;
 
 class ProductTypeType extends AbstractEnumType
 {
+    const OTHER = 'other';
     const PAPER = 'paper';
     const DIGITAL = 'digital';
     const BOTH = 'both';
@@ -13,6 +14,7 @@ class ProductTypeType extends AbstractEnumType
     protected function getPossibleValues(): array
     {
         return [
+            self::OTHER,
             self::PAPER,
             self::DIGITAL,
             self::BOTH,

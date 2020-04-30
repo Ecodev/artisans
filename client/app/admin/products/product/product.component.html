@@ -70,6 +70,12 @@
                             <mat-slide-toggle (change)="update()" formControlName="isHighlighted">Mettre en avant</mat-slide-toggle>
                         </div>
 
+                        <natural-select-enum (selectionChange)="update()"
+                                             formControlName="type"
+                                             enumName="ProductType"
+                                             placeholder="Type"
+                        ></natural-select-enum>
+
                         <mat-form-field>
                             <mat-label>Date de publication</mat-label>
                             <input [matDatepicker]="picker" formControlName="releaseDate" matInput (change)="update()">

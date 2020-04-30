@@ -204,7 +204,7 @@ FROM ps_category
          INNER JOIN ps_category_product ON
         ps_category_lang.id_category = ps_category_product.id_category AND
         ps_category_product.id_product IN (SELECT id FROM product)
-WHERE id_lang = 1;
+WHERE id_lang = 1 AND ps_category.id_parent = 6;
 
 INSERT INTO product_tag_product (product_tag_id, product_id)
 SELECT id_category,

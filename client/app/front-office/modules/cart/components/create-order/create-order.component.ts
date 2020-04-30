@@ -125,12 +125,8 @@ export class CreateOrderComponent implements OnInit {
         fields.forEach(fieldName => {
             const control = form.get(fieldName);
             if (control) {
-                if (required) {
-                    control.setValidators([Validators.required]);
-                } else {
-                    control.clearValidators();
-                    control.updateValueAndValidity();
-                }
+                control.setValidators(required ? Validators.required : null);
+                control.updateValueAndValidity();
             }
         });
     }

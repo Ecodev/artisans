@@ -8,6 +8,7 @@ use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
 use Application\Model\OrderLine;
 use Application\Service\Invoicer;
+use Application\Utility;
 use GraphQL\Type\Definition\Type;
 use Mezzio\Session\SessionInterface;
 
@@ -31,6 +32,7 @@ abstract class UpdateOrderLine implements FieldInterface
 
                 /** @var OrderLine $orderLine */
                 $orderLine = $args['id']->getEntity();
+                $args['input'] = Utility::entityIdToModel($args['input']);
 
                 // Check ACL
                 Helper::throwIfDenied($orderLine, 'update');

@@ -14,8 +14,8 @@ return [
     [
         'data' => [
             'products' => [
-                'totalPricePerUnitCHF' => '80.00',
-                'totalPricePerUnitEUR' => '71.00',
+                'totalPricePerUnitCHF' => '75.00',
+                'totalPricePerUnitEUR' => '66.50',
             ],
         ],
     ],

@@ -11,7 +11,6 @@ use Application\Model\Product;
 use Application\Model\Subscription;
 use Application\Model\User;
 use Application\Repository\UserRepository;
-use Application\Utility;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use Money\Money;
@@ -73,9 +72,8 @@ class Invoicer
         return $orderLine;
     }
 
-    private function extractArgsFromLine($line): array
+    private function extractArgsFromLine($input): array
     {
-        $input = Utility::entityIdToModel($line);
         $product = $input['product'] ?? null;
         $subscription = $input['subscription'] ?? null;
         $quantity = $input['quantity'];

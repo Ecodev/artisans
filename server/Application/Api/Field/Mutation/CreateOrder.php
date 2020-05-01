@@ -36,7 +36,7 @@ abstract class CreateOrder implements FieldInterface
                 $messageQueuer = $container->get(MessageQueuer::class);
 
                 $input = $args['input'];
-                $input['orderLines'] = Utility::entityIdToModel($input['orderLines']);
+                $input['orderLines'] = array_map(fn ($line) => Utility::entityIdToModel($line), $input['orderLines']);
 
                 /** @var Invoicer $invoicer */
                 $invoicer = $container->get(Invoicer::class);

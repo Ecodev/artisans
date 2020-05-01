@@ -36,7 +36,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
         $directPurchases = [9001];
 
         return [
-            ['anonymous', []],
+            ['anonymous', [9003]],
             ['member', $directPurchases],
             ['othermember', $articlesAndReviewsViaSubscriptions],
             ['facilitator', $all],

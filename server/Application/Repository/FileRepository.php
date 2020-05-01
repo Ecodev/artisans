@@ -18,6 +18,7 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
      * - he has flag webTemporaryAccess
      * - he has web subscription (digital/both) and the product reviewNumber is included in that subscription
      * - he bought the product
+     * - the product is free and active
      *
      * @param null|User $user
      *
@@ -25,24 +26,20 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
      */
     public function getAccessibleSubQuery(?User $user): string
     {
-        if (!$user) {
-            return '-1';
-        }
-
-        if (in_array($user->getRole(), [User::ROLE_FACILITATOR, User::ROLE_ADMINISTRATOR], true)) {
+        if ($user && in_array($user->getRole(), [User::ROLE_FACILITATOR, User::ROLE_ADMINISTRATOR], true)) {
             return $this->getAllIdsQuery();
         }
 
         $queries = [];
-        $connection = $this->getEntityManager()->getConnection();
 
+        $connection = $this->getEntityManager()->getConnection();
         $webTypes = [ProductTypeType::BOTH, ProductTypeType::DIGITAL];
-        $hasSubscription = in_array($user->getSubscriptionType(), $webTypes, true) && $user->getSubscriptionLastReview() && $user->getSubscriptionLastReview()->getReviewNumber();
+        $hasSubscription = $user && in_array($user->getSubscriptionType(), $webTypes, true) && $user->getSubscriptionLastReview() && $user->getSubscriptionLastReview()->getReviewNumber();
         $webTypesSql = implode(',', array_map(function (string $val) use ($connection): string {
             return $connection->quote($val);
         }, $webTypes));
 
-        if ($user->getWebTemporaryAccess()) {
+        if ($user && $user->getWebTemporaryAccess()) {
             // Files for webTemporaryAccess
             $queries[] = '
 SELECT product.file_id FROM product
@@ -64,8 +61,9 @@ AND product.type IN (' . $webTypesSql . ')
 AND (product.review_number <= ' . $allowedReviewNumber . ' OR review.review_number <= ' . $allowedReviewNumber . ')';
         }
 
-        // Files for products that were bought directly
-        $queries[] = '
+        if ($user) {
+            // Files for products that were bought directly
+            $queries[] = '
 SELECT product.file_id FROM product
 INNER JOIN order_line ON product.id = order_line.product_id
 INNER JOIN `order` ON order_line.order_id = `order`.id
@@ -75,6 +73,16 @@ WHERE
 product.is_active
 AND product.file_id IS NOT NULL
 ';
+        } else {
+            // Free product are accessible to everybody
+            $queries[] = '
+SELECT product.file_id FROM product
+WHERE
+product.is_active
+AND product.file_id IS NOT NULL
+AND product.price_per_unit_chf = 0
+AND product.price_per_unit_eur = 0';
+        }
 
         return implode(' UNION ', $queries);
     }

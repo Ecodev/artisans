@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Application\Api\Exception;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
 use Application\Model\OrderLine;
@@ -12,7 +13,6 @@ use Application\Model\Subscription;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use Money\Money;
 
 /**
@@ -86,6 +86,10 @@ class Invoicer
         $abstractProduct = $product ?? $subscription;
         $pricePerUnit = $this->getPricePerUnit($abstractProduct, $pricePerUnit, $isCHF);
 
+        if ($additionalEmails && !$subscription) {
+            throw new Exception('Cannot submit additionalEmails without a subscription');
+        }
+
         return [
             $abstractProduct,
             $pricePerUnit,
@@ -141,6 +145,8 @@ class Invoicer
         $orderLine->setBalanceCHF($balanceCHF);
         $orderLine->setBalanceEUR($balanceEUR);
         $orderLine->setAdditionalEmails($additionalEmails);
+
+        $this->createTemporaryUsers($additionalEmails);
     }
 
     private function getPricePerUnit(?AbstractProduct $product, ?float $pricePerUnit, bool $isCHF): Money
@@ -163,5 +169,25 @@ class Invoicer
         }
 
         return Money::EUR($pricePerUnit);
+    }
+
+    /**
+     * Create temporary users to give them immediate access to web,
+     * until their access is confirmed permanently via a CSV import
+     *
+     * @param array $additionalEmails
+     */
+    private function createTemporaryUsers(array $additionalEmails): void
+    {
+        foreach ($additionalEmails as $email) {
+            if ($this->userRepository->getOneByEmail($email)) {
+                continue;
+            }
+
+            $user = new User();
+            $this->entityManager->persist($user);
+            $user->setEmail($email);
+            $user->setWebTemporaryAccess(true);
+        }
     }
 }

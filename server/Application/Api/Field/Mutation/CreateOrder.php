@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Field\FieldInterface;
+use Application\Api\Helper;
 use Application\DBAL\Types\PaymentMethodType;
 use Application\Model\Order;
 use Application\Model\User;
@@ -34,6 +35,8 @@ abstract class CreateOrder implements FieldInterface
 
                 /** @var MessageQueuer $messageQueuer */
                 $messageQueuer = $container->get(MessageQueuer::class);
+
+                Helper::throwIfDenied(new Order(), 'create');
 
                 $input = $args['input'];
                 $input['orderLines'] = array_map(fn ($line) => Utility::entityIdToModel($line), $input['orderLines']);

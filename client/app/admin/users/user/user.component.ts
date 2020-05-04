@@ -1,6 +1,13 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
+import {
+    CreateUser,
+    CreateUserVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    User,
+    UserVariables,
+} from '../../../shared/generated-types';
 import { SessionService } from '../../sessions/services/session.service';
 import { UserTagService } from '../../user-tags/services/user-tag.service';
 import { UserService } from '../services/user.service';
@@ -33,6 +40,14 @@ export class UserComponent
 
     public ngOnInit(): void {
         super.ngOnInit();
+
+        // Disable fields that should be imported from Cresus
+        ['phone', 'membershipBegin', 'membershipEnd'].forEach(path => {
+            const control = this.form.get(path);
+            if (control) {
+                control.disable();
+            }
+        })
 
         this.userService.getNextCodeAvailable().subscribe(code => {
             this.nextCodeAvailable = code;

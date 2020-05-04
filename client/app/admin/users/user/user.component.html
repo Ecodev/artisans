@@ -33,10 +33,6 @@
                             <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
                         </mat-form-field>
 
-                        <mat-divider class="margin-bottom"></mat-divider>
-
-                        <h2 class="mat-h2">État</h2>
-
                         <natural-select-enum (selectionChange)="update()" enumName="UserRole" formControlName="role" placeholder="Rôle"
                         ></natural-select-enum>
 

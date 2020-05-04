@@ -443,6 +443,8 @@ class User extends AbstractModel
     }
 
     /**
+     * @API\Exclude
+     *
      * @param null|Chronos $membershipBegin
      */
     public function setMembershipBegin(?Chronos $membershipBegin): void
@@ -459,6 +461,8 @@ class User extends AbstractModel
     }
 
     /**
+     * @API\Exclude
+     *
      * @param null|Chronos $membershipEnd
      */
     public function setMembershipEnd(?Chronos $membershipEnd): void
@@ -602,6 +606,8 @@ class User extends AbstractModel
     }
 
     /**
+     * @API\Exclude
+     *
      * @param null|Chronos $subscriptionBegin
      */
     public function setSubscriptionBegin(?Chronos $subscriptionBegin): void
@@ -612,7 +618,7 @@ class User extends AbstractModel
     /**
      * Set subscription type
      *
-     * @API\Input(type="?ProductType")
+     * @API\Exclude
      *
      * @param null|string $subscriptionType
      */

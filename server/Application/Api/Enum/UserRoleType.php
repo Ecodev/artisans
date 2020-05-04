@@ -12,7 +12,7 @@ class UserRoleType extends AbstractEnumType
     {
         $config = [
             User::ROLE_MEMBER => 'Membre',
-            User::ROLE_FACILITATOR => 'Responsable de secteur',
+            User::ROLE_FACILITATOR => 'Facilitateur',
             User::ROLE_ADMINISTRATOR => 'Administrateur',
         ];
 

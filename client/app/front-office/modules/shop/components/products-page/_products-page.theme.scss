@@ -13,6 +13,10 @@
         .product-name {
             color: mat-color($fg, base);
         }
+
+        .product-tag {
+            color: mat-color($primary);
+        }
     }
 }
 

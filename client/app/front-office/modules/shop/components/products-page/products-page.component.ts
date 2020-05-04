@@ -65,6 +65,11 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
      */
     public ProductsViewMode = ProductsViewMode;
 
+    /**
+     * Pagination with page size as multiple of 3 to end correctly before "show more" button.
+     */
+    public defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
+
     constructor(route: ActivatedRoute, productService: ProductService, injector: Injector, public productTagService: ProductTagService) {
         super(productService, injector);
     }

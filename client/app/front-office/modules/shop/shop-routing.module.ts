@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductTagByNameResolver } from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
-import { ProductsVariables } from '../../../shared/generated-types';
+import { ProductSortingField, ProductsVariables, SortingOrder } from '../../../shared/generated-types';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ProductsPageComponent, ProductsViewMode } from './components/products-page/products-page.component';
 import { SubscriptionsComponent } from './components/subscriptions/subscriptions.component';
@@ -32,7 +32,24 @@ const routes: Routes = [
                 showTagsOnProducts: true,
                 showTagsNavigation: true,
                 viewMode: ProductsViewMode.grid,
-                contextVariables: {filter: {groups: [{conditions: [{review: {null: {not: true}}}]}]}} as ProductsVariables,
+                contextVariables: {
+                    filter: {
+                        groups: [
+                            {
+                                conditions: [
+                                    {
+                                        review: {null: {not: true}},
+                                        isActive: {equal: {value: true}},
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    sorting: [
+                        {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
+                        {field: ProductSortingField.releaseDate, order: SortingOrder.DESC},
+                    ],
+                } as ProductsVariables,
             },
         },
         {
@@ -46,7 +63,25 @@ const routes: Routes = [
                 showTagsOnProducts: false,
                 showTagsNavigation: false,
                 viewMode: ProductsViewMode.grid,
-                contextVariables: {filter: {groups: [{conditions: [{review: {null: {not: true}}}]}]}} as ProductsVariables,
+                contextVariables: {
+                    filter: {
+                        groups: [
+                            {
+                                conditions: [
+                                    {
+                                        review: {null: {not: true}},
+                                        isActive: {equal: {value: true}},
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    sorting: [
+                        {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
+                        {field: ProductSortingField.releaseDate, order: SortingOrder.DESC},
+
+                    ],
+                } as ProductsVariables,
             },
 
         },
@@ -59,7 +94,21 @@ const routes: Routes = [
                 showTagsNavigation: false,
                 viewMode: ProductsViewMode.list,
                 title: 'Tous les numéros',
-                contextVariables: {filter: {groups: [{conditions: [{reviewNumber: {null: {not: true}}}]}]}} as ProductsVariables,
+                contextVariables: {
+                    filter: {
+                        groups: [
+                            {
+                                conditions: [
+                                    {
+                                        reviewNumber: {null: {not: true}},
+                                        isActive: {equal: {value: true}},
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    sorting: [{field: ProductSortingField.releaseDate, order: SortingOrder.DESC}],
+                } as ProductsVariables,
             },
         },
         {

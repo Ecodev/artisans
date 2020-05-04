@@ -17,6 +17,7 @@ parameters:
         - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         - '~^Call to an undefined method Laminas\\View\\Renderer\\RendererInterface\:\:.*\(\)\.$~'
         - '~^Call to an undefined method PHPUnit\\Framework\\MockObject\\MockObject\:\:.*\(\)\.$~'
+        - '~^Parameter \#1 \$parameters of method Doctrine\\ORM\\AbstractQuery\:\:setParameters\(\) expects Doctrine\\Common\\Collections\\ArrayCollection&iterable, array\<string, string\> given\.$~'
         -
             message: '~^If condition is always true\.$~'
             path: server/Application/Model/OrderLine.php

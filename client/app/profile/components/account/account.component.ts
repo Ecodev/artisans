@@ -1,7 +1,14 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
 import { UserService } from '../../../admin/users/services/user.service';
-import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
+import {
+    CreateUser,
+    CreateUserVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    User,
+    UserVariables,
+} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-account',
@@ -28,6 +35,16 @@ export class AccountComponent
                 injector: Injector,
     ) {
         super('user', userService, injector);
+    }
+
+    public ngOnInit(): void {
+        super.ngOnInit();
+
+        // Always disable email
+        const email = this.form.get('email');
+        if (email) {
+            email.disable();
+        }
     }
 
     public requestPasswordReset() {

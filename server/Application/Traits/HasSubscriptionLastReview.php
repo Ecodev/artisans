@@ -35,6 +35,8 @@ trait HasSubscriptionLastReview
     /**
      * Set last review available through a subscription
      *
+     * @API\Exclude
+     *
      * @param null|Product $subscriptionLastReview
      */
     public function setSubscriptionLastReview(?Product $subscriptionLastReview): void

@@ -309,6 +309,7 @@ class InvoicerTest extends TestCase
                                 'name' => 'My subscription',
                                 'pricePerUnitCHF' => Money::CHF(10000),
                                 'pricePerUnitEUR' => Money::EUR(15000),
+                                'type' => ProductTypeType::BOTH,
                             ],
                             'additionalEmails' => [],
                         ],
@@ -321,7 +322,7 @@ class InvoicerTest extends TestCase
                         '10000',
                         '0',
                         true,
-                        ProductTypeType::DIGITAL,
+                        ProductTypeType::BOTH,
                     ],
                 ],
             ],
@@ -409,5 +410,6 @@ class InvoicerTest extends TestCase
         $product->setName($p['name']);
         $product->setPricePerUnitCHF($p['pricePerUnitCHF']);
         $product->setPricePerUnitEUR($p['pricePerUnitEUR']);
+        $product->setType($p['type'] ?? ProductTypeType::DIGITAL);
     }
 }

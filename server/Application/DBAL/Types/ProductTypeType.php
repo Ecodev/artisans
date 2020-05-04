@@ -20,4 +20,14 @@ class ProductTypeType extends AbstractEnumType
             self::BOTH,
         ];
     }
+
+    public static function getDigitalTypes(): array
+    {
+        return [self::BOTH, self::DIGITAL];
+    }
+
+    public static function includesDigital(?string $type): bool
+    {
+        return in_array($type, self::getDigitalTypes(), true);
+    }
 }

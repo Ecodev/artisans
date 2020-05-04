@@ -102,6 +102,25 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
     }
 
     /**
+     * Get or create the user for the given email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function getOrCreate(string $email): User
+    {
+        $user = $this->getOneByEmail($email);
+        if (!$user) {
+            $user = new User();
+            $this->getEntityManager()->persist($user);
+            $user->setEmail($email);
+        }
+
+        return $user;
+    }
+
+    /**
      * Get all administrators to notify by email
      *
      * @return User[]

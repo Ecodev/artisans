@@ -48,7 +48,7 @@ return [
                 'orderLines' => [
                     [
                         'quantity' => '1',
-                        'type' => ProductTypeType::DIGITAL,
+                        'type' => ProductTypeType::BOTH,
                         'balanceCHF' => '185.00',
                         'balanceEUR' => '0.00',
                         'additionalEmails' => [

@@ -475,6 +475,8 @@ class User extends AbstractModel
     }
 
     /**
+     * @API\Exclude
+     *
      * @param bool $webTemporaryAccess
      */
     public function setWebTemporaryAccess(bool $webTemporaryAccess): void

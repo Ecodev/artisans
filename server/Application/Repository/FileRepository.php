@@ -33,11 +33,10 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
         $queries = [];
 
         $connection = $this->getEntityManager()->getConnection();
-        $webTypes = [ProductTypeType::BOTH, ProductTypeType::DIGITAL];
-        $hasSubscription = $user && in_array($user->getSubscriptionType(), $webTypes, true) && $user->getSubscriptionLastReview() && $user->getSubscriptionLastReview()->getReviewNumber();
-        $webTypesSql = implode(',', array_map(function (string $val) use ($connection): string {
+        $hasSubscription = $user && ProductTypeType::includesDigital($user->getSubscriptionType()) && $user->getSubscriptionLastReview() && $user->getSubscriptionLastReview()->getReviewNumber();
+        $digitalTypes = implode(',', array_map(function (string $val) use ($connection): string {
             return $connection->quote($val);
-        }, $webTypes));
+        }, ProductTypeType::getDigitalTypes()));
 
         if ($user && $user->getWebTemporaryAccess()) {
             // Files for webTemporaryAccess
@@ -46,7 +45,7 @@ SELECT product.file_id FROM product
 WHERE
 product.is_active
 AND product.file_id IS NOT NULL
-AND product.type IN (' . $webTypesSql . ')';
+AND product.type IN (' . $digitalTypes . ')';
         } elseif ($hasSubscription) {
             $allowedReviewNumber = $connection->quote($user->getSubscriptionLastReview()->getReviewNumber());
 
@@ -57,7 +56,7 @@ LEFT JOIN product AS review ON product.review_id = review.id
 WHERE
 product.is_active
 AND product.file_id IS NOT NULL
-AND product.type IN (' . $webTypesSql . ')
+AND product.type IN (' . $digitalTypes . ')
 AND (product.review_number <= ' . $allowedReviewNumber . ' OR review.review_number <= ' . $allowedReviewNumber . ')';
         }
 

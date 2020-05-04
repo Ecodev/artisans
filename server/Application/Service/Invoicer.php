@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Api\Exception;
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
 use Application\Model\OrderLine;
@@ -90,6 +91,11 @@ class Invoicer
             throw new Exception('Cannot submit additionalEmails without a subscription');
         }
 
+        // User cannot choose type of a subscription
+        if ($subscription) {
+            $type = $subscription->getType();
+        }
+
         return [
             $abstractProduct,
             $pricePerUnit,
@@ -146,7 +152,7 @@ class Invoicer
         $orderLine->setBalanceEUR($balanceEUR);
         $orderLine->setAdditionalEmails($additionalEmails);
 
-        $this->createTemporaryUsers($additionalEmails);
+        $this->createTemporaryUsers($orderLine);
     }
 
     private function getPricePerUnit(?AbstractProduct $product, ?float $pricePerUnit, bool $isCHF): Money
@@ -175,19 +181,22 @@ class Invoicer
      * Create temporary users to give them immediate access to web,
      * until their access is confirmed permanently via a CSV import
      *
-     * @param array $additionalEmails
+     * @param OrderLine $orderLine
      */
-    private function createTemporaryUsers(array $additionalEmails): void
+    private function createTemporaryUsers(OrderLine $orderLine): void
     {
-        foreach ($additionalEmails as $email) {
-            if ($this->userRepository->getOneByEmail($email)) {
-                continue;
-            }
+        $isDigital = $orderLine->getSubscription() && ProductTypeType::includesDigital($orderLine->getSubscription()->getType());
 
-            $user = new User();
-            $this->entityManager->persist($user);
-            $user->setEmail($email);
-            $user->setWebTemporaryAccess(true);
+        foreach ($orderLine->getAdditionalEmails() as $email) {
+            $user = $this->userRepository->getOrCreate($email);
+
+            if ($isDigital) {
+                $user->setWebTemporaryAccess(true);
+            }
+        }
+
+        if ($isDigital && $orderLine->getOwner()) {
+            $orderLine->getOwner()->setWebTemporaryAccess(true);
         }
     }
 }

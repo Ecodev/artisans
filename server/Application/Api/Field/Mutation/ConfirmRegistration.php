@@ -7,7 +7,9 @@ namespace Application\Api\Field\Mutation;
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
+use Application\Model\Organization;
 use Application\Model\User;
+use Application\Repository\OrganizationRepository;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
 use Application\Service\MessageQueuer;
@@ -57,6 +59,14 @@ abstract class ConfirmRegistration implements FieldInterface
 
                 // Active the member
                 $user->initialize();
+
+                // Give user automatic access via organization
+                /** @var OrganizationRepository $organizationRepository */
+                $organizationRepository = _em()->getRepository(Organization::class);
+                $organization = $organizationRepository->getBestMatchingOrganization($user->getEmail());
+                if ($organization) {
+                    $user->setSubscriptionLastReview($organization->getSubscriptionLastReview());
+                }
 
                 // Login
                 User::setCurrent($user);

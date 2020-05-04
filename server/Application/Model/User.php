@@ -10,6 +10,7 @@ use Application\Repository\LogRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasInternalRemarks;
 use Application\Traits\HasNumericCode;
+use Application\Traits\HasSubscriptionLastReview;
 use Application\Traits\HasUrl;
 use Application\Utility;
 use Cake\Chronos\Chronos;
@@ -38,6 +39,7 @@ class User extends AbstractModel
     use HasAddress;
     use HasNumericCode;
     use HasUrl;
+    use HasSubscriptionLastReview;
 
     /**
      * @var User
@@ -120,16 +122,6 @@ class User extends AbstractModel
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $subscriptionBegin;
-
-    /**
-     * @var null|Product
-     *
-     * @ORM\ManyToOne(targetEntity="Product")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     * })
-     */
-    private $subscriptionLastReview;
 
     /**
      * @var null|string
@@ -637,29 +629,5 @@ class User extends AbstractModel
     public function getSubscriptionType(): ?string
     {
         return $this->subscriptionType;
-    }
-
-    /**
-     * Get last review available through a subscription
-     *
-     * @return null|Product
-     */
-    public function getSubscriptionLastReview(): ?Product
-    {
-        return $this->subscriptionLastReview;
-    }
-
-    /**
-     * Set last review available through a subscription
-     *
-     * @param null|Product $subscriptionLastReview
-     */
-    public function setSubscriptionLastReview(?Product $subscriptionLastReview): void
-    {
-        if ($subscriptionLastReview && !$subscriptionLastReview->getReviewNumber()) {
-            throw new \InvalidArgumentException('The last review of a subscription must be a review, not an article');
-        }
-
-        $this->subscriptionLastReview = $subscriptionLastReview;
     }
 }

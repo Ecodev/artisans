@@ -8,7 +8,7 @@ use Application\Traits\HasDescription;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A news
+ * A comment
  *
  * @ORM\Entity(repositoryClass="Application\Repository\CommentRepository")
  */

@@ -11,14 +11,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A news
+ * An event
  *
  * @ORM\Entity(repositoryClass="Application\Repository\EventRepository")
  */
 class Event extends AbstractModel
 {
-    private const IMAGE_PATH = 'htdocs/news/';
-
     use HasName;
     use HasDate;
 

@@ -136,6 +136,10 @@ REPLACE INTO event (id, date, name, place, type) VALUES
 (40010, '2022-11-01', 'Vestibulum id ligula porta felis euismod semper.', 'Fribourg', 'Débat'),
 (40011, '2022-12-01', 'Nullam quis risus eget urna mollis ornare vel eu leo.', 'Neuchâtel', 'Spectacle');
 
+REPLACE INTO organization (id, subscription_last_review_id, pattern)
+VALUES (50000, 3000, '.*@.*university\\.com'),
+(50001, 3001, '.*@teachers\\.university\\.com');
+
 -- Give a valid subscription and membership to othermember
 UPDATE user SET
     subscription_type = 'digital',

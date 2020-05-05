@@ -23,9 +23,7 @@ class Importer
 {
     private int $lineNumber = 0;
 
-    private array
-
- $reviewByNumber = [];
+    private array $reviewByNumber = [];
 
     private Connection $connection;
 

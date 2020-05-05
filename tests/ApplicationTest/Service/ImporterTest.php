@@ -48,6 +48,12 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-missing-review-number.csv');
     }
 
+    public function testInvalidColumnCount(): void
+    {
+        $this->expectErrorMessage('A la ligne 1: Doit avoir exactement 11 colonnes, mais en a 4');
+        $this->import('tests/data/importer/invalid-column-count.csv');
+    }
+
     public function testImport(): void
     {
         $this->assertUser([
@@ -57,6 +63,7 @@ class ImporterTest extends TestCase
             'membership_begin' => null,
             'membership_end' => null,
             'web_temporary_access' => '0',
+            'password' => 'aa08769cdcb26674c6706093503ff0a3',
         ]);
 
         $otherMember = [
@@ -66,6 +73,7 @@ class ImporterTest extends TestCase
             'membership_begin' => '2020-01-02 00:00:00',
             'membership_end' => null,
             'web_temporary_access' => '0',
+            'password' => '1895eaf4aad48bd97ec1a2fd15336591',
         ];
         $this->assertUser($otherMember);
 
@@ -87,6 +95,7 @@ class ImporterTest extends TestCase
             'membership_begin' => null,
             'membership_end' => null,
             'web_temporary_access' => '0',
+            'password' => '',
         ]);
 
         $this->assertUser([
@@ -96,15 +105,17 @@ class ImporterTest extends TestCase
             'membership_begin' => '2010-12-24 00:00:00',
             'membership_end' => '2019-01-01 00:00:00',
             'web_temporary_access' => '0',
+            'password' => '',
         ]);
 
         $this->assertUser([
             'email' => 'member@example.com',
-            'first_name' => 'Hector', // This must remains untouched
+            'first_name' => 'John',
             'subscription_last_review_id' => null,
             'membership_begin' => '2020-01-01 00:00:00',
             'membership_end' => null,
             'web_temporary_access' => '0',
+            'password' => 'aa08769cdcb26674c6706093503ff0a3',
         ]);
 
         $this->assertOrganization([
@@ -119,7 +130,7 @@ class ImporterTest extends TestCase
     private function assertUser(array $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();
-        $actual = $connection->fetchAssoc('SELECT email, first_name, subscription_last_review_id, membership_begin, membership_end, web_temporary_access FROM user WHERE email = ?', [$expected['email']]);
+        $actual = $connection->fetchAssoc('SELECT email, first_name, subscription_last_review_id, membership_begin, membership_end, web_temporary_access, password FROM user WHERE email = ?', [$expected['email']]);
         self::assertSame($expected, $actual);
     }
 

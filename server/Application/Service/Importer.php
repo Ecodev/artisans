@@ -25,6 +25,8 @@ class Importer
 
     private array $reviewByNumber = [];
 
+    private array $countryByCode = [];
+
     private Connection $connection;
 
     private int $updatedUsers = 0;
@@ -37,6 +39,7 @@ class Importer
     {
         $this->connection = _em()->getConnection();
         $this->fetchReviews();
+        $this->fetchCountries();
         $this->updatedUsers = 0;
         $this->updatedOrganizations = 0;
         $this->deletedOrganizations = 0;
@@ -74,10 +77,21 @@ class Importer
 
     private function fetchReviews(): void
     {
-        $foo = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL');
+        $records = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL');
 
-        foreach ($foo as $r) {
+        $this->reviewByNumber = [];
+        foreach ($records as $r) {
             $this->reviewByNumber[$r['review_number']] = $r['id'];
+        }
+    }
+
+    private function fetchCountries(): void
+    {
+        $records = $this->connection->fetchAll('SELECT id, code FROM country');
+
+        $this->countryByCode = [];
+        foreach ($records as $r) {
+            $this->countryByCode[$r['code']] = $r['id'];
         }
     }
 
@@ -93,28 +107,73 @@ class Importer
         while ($line = fgetcsv($file)) {
             ++$this->lineNumber;
 
-            [$email, $lastReviewNumber, $membershipBegin, $membershipEnd] = $line;
+            $expectedColumnCount = 11;
+            $actualColumnCount = count($line);
+            if ($actualColumnCount !== $expectedColumnCount) {
+                $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
+            }
+
+            [$email, $lastReviewNumber, $membershipBegin, $membershipEnd, $firstName, $lastName, $street, $postcode, $locality, $country, $phone] = $line;
 
             $this->assertEmail($seenEmails, $email);
             $lastReviewId = $this->readReviewId($lastReviewNumber);
             $membershipBegin = $this->readDate($membershipBegin);
             $membershipEnd = $this->readDate($membershipEnd);
+            $country = $this->readCountryId($country);
 
             $seenEmails[$email] = $this->lineNumber;
 
             if ($this->isUser($email)) {
-                $sql = 'INSERT INTO user (email, subscription_last_review_id, membership_begin, membership_end, web_temporary_access, creator_id, creation_date)
-                        VALUES (?, ?, ?, ?, ?, ?, NOW())
+                $sql = 'INSERT INTO user (
+                            email,
+                            subscription_last_review_id,
+                            membership_begin,
+                            membership_end,
+                            first_name,
+                            last_name,
+                            street,
+                            postcode,
+                            locality,
+                            country_id,
+                            phone,
+                            web_temporary_access,
+                            creator_id,
+                            creation_date
+                        )
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
-                        email = VALUES(email),
-                        subscription_last_review_id = VALUES(subscription_last_review_id),
-                        membership_begin = VALUES(membership_begin),
-                        membership_end = VALUES(membership_end),
-                        web_temporary_access = VALUES(web_temporary_access),
-                        updater_id = VALUES(creator_id),
-                        update_date = NOW()';
+                            email = VALUES(email),
+                            subscription_last_review_id = VALUES(subscription_last_review_id),
+                            membership_begin = VALUES(membership_begin),
+                            membership_end = VALUES(membership_end),
+                            first_name = VALUES(first_name),
+                            last_name = VALUES(last_name),
+                            street = VALUES(street),
+                            postcode = VALUES(postcode),
+                            locality = VALUES(locality),
+                            country_id = VALUES(country_id),
+                            phone = VALUES(phone),
+                            web_temporary_access = VALUES(web_temporary_access),
+                            updater_id = VALUES(creator_id),
+                            update_date = NOW()';
 
-                $changed = $this->connection->executeUpdate($sql, [$email, $lastReviewId, $membershipBegin, $membershipEnd, false, $currentUser]);
+                $data = [
+                    $email,
+                    $lastReviewId,
+                    $membershipBegin,
+                    $membershipEnd,
+                    $firstName,
+                    $lastName,
+                    $street,
+                    $postcode,
+                    $locality,
+                    $country,
+                    $phone,
+                    false,
+                    $currentUser,
+                ];
+
+                $changed = $this->connection->executeUpdate($sql, $data);
                 if ($changed) {
                     ++$this->updatedUsers;
                 }
@@ -177,6 +236,19 @@ class Importer
         }
 
         return $this->reviewByNumber[$reviewNumberNumeric];
+    }
+
+    private function readCountryId(string $country): ?string
+    {
+        if (!$country) {
+            return null;
+        }
+
+        if (!array_key_exists($country, $this->countryByCode)) {
+            $this->throw('Pays introuvable pour code: ' . $country);
+        }
+
+        return $this->countryByCode[$country];
     }
 
     private function isUser(string $email): bool

@@ -112,7 +112,7 @@ export class AppModule {
             link: link,
             cache: new InMemoryCache(),
             defaultOptions: apolloDefaultOptions,
-            ssrMode: true,
+            ssrMode: !isBrowser,
         });
     }
 }

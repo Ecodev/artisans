@@ -35,6 +35,7 @@ import { FileDropDirective } from '../components/file/services/file-drop.directi
 import { MoneyComponent } from '../components/money/money.component';
 import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
 import { PriceComponent } from '../components/price/price.component';
+import { ProsemirrorComponent } from '../components/proseMirror/proseMirror.component';
 import { TagsNavigationComponent } from '../components/tags-navigation/tags-navigation.component';
 import { FocusDirective } from '../directives/focus';
 import { MaterialModule } from './material.module';
@@ -54,6 +55,7 @@ const declarations = [
     TagsNavigationComponent,
     PriceComponent,
     BreadcrumbsComponent,
+    ProsemirrorComponent
 ];
 
 const imports = [

@@ -28,13 +28,9 @@
                                 <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
-                            <div class="margin-bottom rich-text quill-editor">
+                            <div class="margin-bottom rich-text admin-editor">
                                 <div class="label">Description</div>
-                                <quill-editor formControlName="description"
-                                              bounds="self"
-                                              [modules]="quillModules"
-                                              (onBlur)="update()"
-                                ></quill-editor>
+                                <app-prosemirror formControlName="description" (contentChange)="update()"></app-prosemirror>
                             </div>
 
                             <mat-form-field>
@@ -67,8 +63,8 @@
                             </button>
                         </div>
 
-                        <div>
-                            <h2 class="mat-h2">Facilitateurs</h2>
+                        <div *ngIf="data.model?.id">
+                            <h2 class="mat-h2 no-margin-bottom">Facilitateurs</h2>
                             <natural-relations [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
                                                [main]="data.model"
                                                [service]="userService"

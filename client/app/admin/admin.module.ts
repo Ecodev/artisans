@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { EcoFabSpeedDialModule } from '@ecodev/fab-speed-dial';
 import { AvatarModule } from 'ngx-avatar';
-import { QuillModule } from 'ngx-quill';
 import { ProfileModule } from '../profile/profile.module';
 import { ArtisansModule } from '../shared/modules/artisans.module';
 import { MaterialModule } from '../shared/modules/material.module';
@@ -48,7 +47,6 @@ import { ImportComponent } from './users/import/import.component';
         ProfileModule,
         OrderModule,
         EcoFabSpeedDialModule,
-        QuillModule,
     ],
 })
 export class AdminModule {

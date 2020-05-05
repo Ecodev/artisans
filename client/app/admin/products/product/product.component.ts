@@ -1,7 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { NaturalAbstractDetail } from '@ecodev/natural';
-import { QuillModules } from 'ngx-quill';
-import { quillConfig } from '../../../shared/config/quill.options';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -31,10 +29,6 @@ export class ProductComponent
         any> implements OnInit {
 
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
-
-    public quillModules: QuillModules = {
-        ...quillConfig.modules,
-    };
 
     constructor(public productService: ProductService,
                 injector: Injector,

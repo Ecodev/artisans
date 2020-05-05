@@ -39,13 +39,9 @@
                             </div>
                         </div>
 
-                        <div class="margin-bottom rich-text quill-editor">
+                        <div class="margin-bottom rich-text admin-editor">
                             <div class="label">Description</div>
-                            <quill-editor formControlName="description"
-                                          bounds="self"
-                                          [modules]="quillModules"
-                                          (onBlur)="update()"
-                            ></quill-editor>
+                            <app-prosemirror formControlName="description" (contentChange)="update()"></app-prosemirror>
                         </div>
 
                         <mat-form-field>

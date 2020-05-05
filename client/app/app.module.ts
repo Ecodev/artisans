@@ -10,22 +10,16 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NaturalAlertService, NaturalSwissParsingDateAdapter } from '@ecodev/natural';
-import { NgProgressModule } from 'ngx-progressbar';
 import { Apollo, ApolloModule } from 'apollo-angular';
 import { HttpBatchLink, HttpBatchLinkModule } from 'apollo-angular-link-http-batch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import { QuillModule } from 'ngx-quill';
+import { NgProgressModule } from 'ngx-progressbar';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FrontOfficeModule } from './front-office/front-office.module';
 import { BootLoaderComponent } from './shared/components/boot-loader/boot-loader.component';
 import { ErrorComponent } from './shared/components/error/error.component';
-import {
-    apolloDefaultOptions,
-    createApolloLink,
-    createApolloLinkForServer,
-} from './shared/config/apolloDefaultOptions';
-import { quillConfig } from './shared/config/quill.options';
+import { apolloDefaultOptions, createApolloLink, createApolloLinkForServer } from './shared/config/apolloDefaultOptions';
 import { ArtisansModule } from './shared/modules/artisans.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { LocalizedPaginatorIntlService } from './shared/services/localized-paginator-intl.service';
@@ -53,7 +47,6 @@ registerLocaleData(localeFRCH);
         HttpClientModule,
         HttpBatchLinkModule,
         FrontOfficeModule,
-        QuillModule.forRoot(quillConfig),
     ],
     providers: [
         MatIconRegistry,

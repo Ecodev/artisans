@@ -11,19 +11,20 @@ const permissions = gql`
     query Permissions {
         permissions {
             crud {
-                news { create }
+                comment { create }
+                configuration { create }
                 event { create }
-                newsletter { create }
-                session { create }
-                subscription { create }
-                product { create }
-                productTag { create }
                 image { create }
                 message { create }
+                news { create }
+                newsletter { create }
+                organization { create }
+                product { create }
+                productTag { create }
+                session { create }
+                subscription { create }
                 user { create }
                 userTag { create }
-                configuration { create }
-                comment { create }
             }
         }
     }

@@ -1,0 +1,49 @@
+<div fxLayout="column">
+
+    <div fxLayout="column">
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+    </div>
+
+
+    <div fxLayout="column">
+
+        <div class="margin-v overflow">
+            <p class="mat-body">Uploadez un fichier CSV pour importer les utilisateurs et leur accès:</p>
+            <p>
+                <button
+                        mat-raised-button
+                        ngfSelect
+                        [accept]="'text/csv'"
+                        [ngfFixOrientation]="false"
+                        (fileChange)="uploadFile($event)"
+                        [disabled]="!permissionsService.crud?.organization.create || importing"
+                >
+                    <natural-icon name="file_upload"></natural-icon>
+                    Uploader
+                </button>
+            </p>
+
+            <div *ngIf="result">
+                <p>L'import de {{ result.totalLines }} lignes s'est terminé avec succès.</p>
+                <ul>
+                    <li>Utilisateurs modifiés: {{ result.updatedUsers }}</li>
+                    <li>Organisations modifiées: {{ result.updatedOrganizations }}</li>
+                    <li>Organisations supprimées: {{ result.deletedOrganizations }}</li>
+                </ul>
+
+                <ul>
+                    <li>Total d'utilisateurs existants: {{ result.totalUsers }}</li>
+                    <li>Total d'organisations existants: {{ result.totalOrganizations }}</li>
+                </ul>
+            </div>
+            <div *ngIf="error !== null">
+                <p>L'erreur suivante s'est produite durant l'import et tout le processus a été complétement annulé:</p>
+                <p>
+                    <mat-icon color="warn">error</mat-icon>
+                    {{error.message}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>

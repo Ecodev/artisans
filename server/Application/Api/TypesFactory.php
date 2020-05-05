@@ -28,6 +28,7 @@ class TypesFactory
             \Application\Api\MutationType::class,
             \Application\Api\Output\AllPermissionsType::class,
             \Application\Api\Output\BankingInfosType::class,
+            \Application\Api\Output\ImportResultType::class,
             \Application\Api\Output\CrudPermissionsListType::class,
             \Application\Api\Output\CrudPermissionsType::class,
             \Application\Api\Output\PermissionsType::class,

@@ -17,6 +17,7 @@ use Application\Model\News;
 use Application\Model\Newsletter;
 use Application\Model\Order;
 use Application\Model\OrderLine;
+use Application\Model\Organization;
 use Application\Model\Product;
 use Application\Model\ProductTag;
 use Application\Model\Session;
@@ -47,41 +48,43 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->addRole(User::ROLE_FACILITATOR, User::ROLE_MEMBER);
         $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_FACILITATOR);
 
-        $product = new ModelResource(Product::class);
-        $productTag = new ModelResource(ProductTag::class);
-        $image = new ModelResource(Image::class);
-        $user = new ModelResource(User::class);
-        $userTag = new ModelResource(UserTag::class);
-        $file = new ModelResource(File::class);
-        $message = new ModelResource(Message::class);
-        $order = new ModelResource(Order::class);
-        $orderLine = new ModelResource(OrderLine::class);
+        $comment = new ModelResource(Comment::class);
         $configuration = new ModelResource(Configuration::class);
+        $country = new ModelResource(Country::class);
         $event = new ModelResource(Event::class);
+        $file = new ModelResource(File::class);
+        $image = new ModelResource(Image::class);
+        $message = new ModelResource(Message::class);
         $news = new ModelResource(News::class);
         $newsletter = new ModelResource(Newsletter::class);
+        $order = new ModelResource(Order::class);
+        $orderLine = new ModelResource(OrderLine::class);
+        $organization = new ModelResource(Organization::class);
+        $product = new ModelResource(Product::class);
+        $productTag = new ModelResource(ProductTag::class);
         $session = new ModelResource(Session::class);
         $subscription = new ModelResource(Subscription::class);
-        $country = new ModelResource(Country::class);
-        $comment = new ModelResource(Comment::class);
+        $user = new ModelResource(User::class);
+        $userTag = new ModelResource(UserTag::class);
 
-        $this->addResource($product);
-        $this->addResource($productTag);
-        $this->addResource($image);
-        $this->addResource($user);
-        $this->addResource($userTag);
-        $this->addResource($file);
-        $this->addResource($message);
-        $this->addResource($order);
-        $this->addResource($orderLine);
+        $this->addResource($comment);
         $this->addResource($configuration);
+        $this->addResource($country);
         $this->addResource($event);
+        $this->addResource($file);
+        $this->addResource($image);
+        $this->addResource($message);
         $this->addResource($news);
         $this->addResource($newsletter);
+        $this->addResource($order);
+        $this->addResource($orderLine);
+        $this->addResource($organization);
+        $this->addResource($product);
+        $this->addResource($productTag);
         $this->addResource($session);
         $this->addResource($subscription);
-        $this->addResource($country);
-        $this->addResource($comment);
+        $this->addResource($user);
+        $this->addResource($userTag);
 
         $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country, $comment], ['read']);
 
@@ -100,7 +103,7 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$newsletter], ['create', 'read', 'update', 'delete']);
-        $this->allow(User::ROLE_ADMINISTRATOR, [$configuration], ['create']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$configuration, $organization], ['create']);
     }
 
     /**

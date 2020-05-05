@@ -6,6 +6,7 @@ namespace Application\Api;
 
 use Application\Api\Field\Mutation\ConfirmRegistration;
 use Application\Api\Field\Mutation\CreateOrder;
+use Application\Api\Field\Mutation\Import;
 use Application\Api\Field\Mutation\Login;
 use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\Register;
@@ -50,6 +51,7 @@ class MutationType extends ObjectType
             UpdateConfiguration::build(),
             UpdateUser::build(),
             RequestMembershipEnd::build(),
+            Import::build(),
         ];
 
         $fields = array_merge(

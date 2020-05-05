@@ -31,6 +31,7 @@ import { UserResolver } from './users/services/user.resolver';
 import { ViewerResolver } from './users/services/viewer.resolver';
 import { UserComponent } from './users/user/user.component';
 import { UsersComponent } from './users/users/users.component';
+import { ImportComponent } from './users/import/import.component';
 
 const routes: Routes = [
         {
@@ -120,6 +121,13 @@ const routes: Routes = [
                             },
                         },
                     ],
+                },
+                {
+                    path: 'import',
+                    component: ImportComponent,
+                    data: {
+                        title: 'Import',
+                    },
                 },
                 {
                     path: 'order', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674

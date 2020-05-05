@@ -23,6 +23,7 @@ import { SessionsComponent } from './sessions/sessions/sessions.component';
 import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
 import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
 import { UserComponent } from './users/user/user.component';
+import { ImportComponent } from './users/import/import.component';
 
 @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { UserComponent } from './users/user/user.component';
         SessionComponent,
         CommentComponent,
         CommentsComponent,
+        ImportComponent,
         StripTagsPipe,
     ],
     imports: [

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Api\Exception;
+use Application\Model\User;
 use Doctrine\DBAL\Connection;
 use Throwable;
 
@@ -88,6 +89,7 @@ class Importer
     private function read($file): void
     {
         $seenEmails = [];
+        $currentUser = User::getCurrent() ? User::getCurrent()->getId() : null;
 
         $this->lineNumber = 0;
         while ($line = fgetcsv($file)) {
@@ -100,30 +102,34 @@ class Importer
             $membershipBegin = $this->readDate($membershipBegin);
             $membershipEnd = $this->readDate($membershipEnd);
 
+            $seenEmails[$email] = $this->lineNumber;
+
             if ($this->isUser($email)) {
-                $sql = 'INSERT INTO user (email, subscription_last_review_id, membership_begin, membership_end, web_temporary_access, creation_date)
-                        VALUES (?, ?, ?, ?, ?, NOW())
+                $sql = 'INSERT INTO user (email, subscription_last_review_id, membership_begin, membership_end, web_temporary_access, creator_id, creation_date)
+                        VALUES (?, ?, ?, ?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
                         email = VALUES(email),
                         subscription_last_review_id = VALUES(subscription_last_review_id),
                         membership_begin = VALUES(membership_begin),
                         membership_end = VALUES(membership_end),
                         web_temporary_access = VALUES(web_temporary_access),
+                        updater_id = VALUES(creator_id),
                         update_date = NOW()';
 
-                $changed = $this->connection->executeUpdate($sql, [$email, $lastReviewId, $membershipBegin, $membershipEnd, false]);
+                $changed = $this->connection->executeUpdate($sql, [$email, $lastReviewId, $membershipBegin, $membershipEnd, false, $currentUser]);
                 if ($changed) {
                     ++$this->updatedUsers;
                 }
             } elseif ($this->isOrganization($email)) {
-                $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creation_date)
-                        VALUES (?, ?, NOW())
+                $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creator_id, creation_date)
+                        VALUES (?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
                         pattern = VALUES(pattern),
                         subscription_last_review_id = VALUES(subscription_last_review_id),
+                        updater_id = VALUES(creator_id),
                         update_date = NOW()';
 
-                $changed = $this->connection->executeUpdate($sql, [$email, $lastReviewId]);
+                $changed = $this->connection->executeUpdate($sql, [$email, $lastReviewId, $currentUser]);
                 if ($changed) {
                     ++$this->updatedOrganizations;
                 }
@@ -169,7 +175,7 @@ class Importer
 
         $reviewNumberNumeric = (int) $reviewNumber;
         if (!array_key_exists($reviewNumberNumeric, $this->reviewByNumber)) {
-            $this->throw('Revue introuvable pour le numéro de revue : ' . $reviewNumber);
+            $this->throw('Revue introuvable pour le numéro de revue: ' . $reviewNumber);
         }
 
         return $this->reviewByNumber[$reviewNumberNumeric];
@@ -182,8 +188,7 @@ class Importer
 
     private function isOrganization(string $email): bool
     {
-        $pattern = preg_quote($email, '~');
-        $result = preg_match('~' . $pattern . '~', '');
+        $result = @preg_match('~' . $email . '~', '');
 
         return $result !== false;
     }

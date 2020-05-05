@@ -12,6 +12,42 @@ class ImporterTest extends TestCase
 {
     use TestWithTransaction;
 
+    public function testInvalidEmail(): void
+    {
+        $this->expectErrorMessage("A la ligne 1: L'email suivant n'est ni une addresse email valide, ni un expression régulière valide: fo[o");
+        $this->import('tests/data/importer/invalid-email.csv');
+    }
+
+    public function testInvalidDate(): void
+    {
+        $this->expectErrorMessage('A la ligne 1: La date devrait avoir le format YYYY-MM-DD, mais est: 24.12.2020');
+        $this->import('tests/data/importer/invalid-date.csv');
+    }
+
+    public function testInvalidEmptyEmail(): void
+    {
+        $this->expectErrorMessage("A la ligne 1: L'email ne peut pas être vide");
+        $this->import('tests/data/importer/invalid-empty-email.csv');
+    }
+
+    public function testInvalidDuplicatedEmail(): void
+    {
+        $this->expectErrorMessage("A la ligne 3: L'email \"foo@example.com\" est dupliqué et a déjà été vu à la ligne 1");
+        $this->import('tests/data/importer/invalid-duplicated-email.csv');
+    }
+
+    public function testInvalidReviewNumber(): void
+    {
+        $this->expectErrorMessage('A la ligne 1: Un numéro de revue doit être entièrement numérique, mais est: foo');
+        $this->import('tests/data/importer/invalid-review-number.csv');
+    }
+
+    public function testInvalidMissingReviewNumber(): void
+    {
+        $this->expectErrorMessage('A la ligne 1: Revue introuvable pour le numéro de revue: 123');
+        $this->import('tests/data/importer/invalid-missing-review-number.csv');
+    }
+
     public function testImport(): void
     {
         $this->assertUser([
@@ -33,8 +69,7 @@ class ImporterTest extends TestCase
         ];
         $this->assertUser($otherMember);
 
-        $importer = new Importer();
-        $actual = $importer->import('tests/data/importer/normal.csv');
+        $actual = $this->import('tests/data/importer/normal.csv');
         $expected = [
             'updatedUsers' => 4,
             'updatedOrganizations' => 1,
@@ -93,5 +128,13 @@ class ImporterTest extends TestCase
         $connection = $this->getEntityManager()->getConnection();
         $actual = $connection->fetchAssoc('SELECT pattern, subscription_last_review_id FROM organization WHERE pattern = ?', [$expected['pattern']]);
         self::assertSame($expected, $actual);
+    }
+
+    private function import(string $filename): array
+    {
+        $importer = new Importer();
+        $actual = $importer->import($filename);
+
+        return $actual;
     }
 }

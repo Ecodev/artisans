@@ -91,6 +91,10 @@ class Invoicer
             throw new Exception('Cannot submit additionalEmails without a subscription');
         }
 
+        if ($additionalEmails && !$subscription->isPro()) {
+            throw new Exception('Cannot submit additionalEmails with a subscription that is not pro');
+        }
+
         // User cannot choose type of a subscription
         if ($subscription) {
             $type = $subscription->getType();

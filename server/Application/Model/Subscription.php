@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Annotation as API;
 
 /**
  * A subscription
@@ -13,4 +14,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Subscription extends AbstractProduct
 {
+    /**
+     * @API\Exclude
+     *
+     * @return bool
+     */
+    public function isPro(): bool
+    {
+        return (bool) preg_match('~^abo-pro-~', $this->getCode());
+    }
 }

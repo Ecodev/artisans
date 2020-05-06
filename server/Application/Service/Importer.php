@@ -41,12 +41,15 @@ class Importer
 
     private array $seenPatterns = [];
 
+    private ?int $currentUser;
+
     public function import(string $filename): array
     {
         $start = microtime(true);
         $this->connection = _em()->getConnection();
         $this->fetchReviews();
         $this->fetchCountries();
+        $this->currentUser = User::getCurrent() ? User::getCurrent()->getId() : null;
         $this->updatedUsers = 0;
         $this->updatedOrganizations = 0;
         $this->deletedOrganizations = 0;
@@ -112,13 +115,11 @@ class Importer
      */
     private function read($file): void
     {
-        $currentUser = User::getCurrent() ? User::getCurrent()->getId() : null;
-
         $this->lineNumber = 0;
+        $expectedColumnCount = 12;
         while ($line = fgetcsv($file)) {
             ++$this->lineNumber;
 
-            $expectedColumnCount = 12;
             $actualColumnCount = count($line);
             if ($actualColumnCount !== $expectedColumnCount) {
                 $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
@@ -153,40 +154,7 @@ class Importer
                 $country = $this->readCountryId($country);
                 $subscriptionType = $this->readSubscriptionType($subscriptionType);
 
-                $sql = 'INSERT INTO user (
-                            email,
-                            subscription_type,
-                            subscription_last_review_id,
-                            membership,
-                            first_name,
-                            last_name,
-                            street,
-                            postcode,
-                            locality,
-                            country_id,
-                            phone,
-                            web_temporary_access,
-                            creator_id,
-                            creation_date
-                        )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
-                        ON DUPLICATE KEY UPDATE
-                            email = VALUES(email),
-                            subscription_type = VALUES(subscription_type),
-                            subscription_last_review_id = VALUES(subscription_last_review_id),
-                            membership = VALUES(membership),
-                            first_name = VALUES(first_name),
-                            last_name = VALUES(last_name),
-                            street = VALUES(street),
-                            postcode = VALUES(postcode),
-                            locality = VALUES(locality),
-                            country_id = VALUES(country_id),
-                            phone = VALUES(phone),
-                            web_temporary_access = VALUES(web_temporary_access),
-                            updater_id = VALUES(creator_id),
-                            update_date = NOW()';
-
-                $data = [
+                $this->updateUser(
                     $email,
                     $subscriptionType,
                     $lastReviewId,
@@ -197,30 +165,15 @@ class Importer
                     $postcode,
                     $locality,
                     $country,
-                    $phone,
-                    false,
-                    $currentUser,
-                ];
-
-                $changed = $this->connection->executeUpdate($sql, $data);
-                if ($changed) {
-                    ++$this->updatedUsers;
-                }
+                    $phone
+                );
             } elseif ($pattern) {
                 $this->assertPattern($pattern);
 
-                $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creator_id, creation_date)
-                        VALUES (?, ?, ?, NOW())
-                        ON DUPLICATE KEY UPDATE
-                        pattern = VALUES(pattern),
-                        subscription_last_review_id = VALUES(subscription_last_review_id),
-                        updater_id = VALUES(creator_id),
-                        update_date = NOW()';
-
-                $changed = $this->connection->executeUpdate($sql, [$pattern, $lastReviewId, $currentUser]);
-                if ($changed) {
-                    ++$this->updatedOrganizations;
-                }
+                $this->updateOrganization(
+                    $pattern,
+                    $lastReviewId
+                );
             } else {
                 $this->throw("L'email suivant n'est ni une addresse email valide, ni un expression régulière valide: " . $email);
             }
@@ -332,5 +285,71 @@ class Importer
         }
 
         return $subscriptionType;
+    }
+
+    private function updateUser(...$args): void
+    {
+        $sql = 'INSERT INTO user (
+                            email,
+                            subscription_type,
+                            subscription_last_review_id,
+                            membership,
+                            first_name,
+                            last_name,
+                            street,
+                            postcode,
+                            locality,
+                            country_id,
+                            phone,
+                            web_temporary_access,
+                            creator_id,
+                            creation_date
+                        )
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                        ON DUPLICATE KEY UPDATE
+                            email = VALUES(email),
+                            subscription_type = VALUES(subscription_type),
+                            subscription_last_review_id = VALUES(subscription_last_review_id),
+                            membership = VALUES(membership),
+                            first_name = VALUES(first_name),
+                            last_name = VALUES(last_name),
+                            street = VALUES(street),
+                            postcode = VALUES(postcode),
+                            locality = VALUES(locality),
+                            country_id = VALUES(country_id),
+                            phone = VALUES(phone),
+                            web_temporary_access = VALUES(web_temporary_access),
+                            updater_id = VALUES(creator_id),
+                            update_date = NOW()';
+
+        $params = $args;
+        $params[] = false;
+        $params[] = $this->currentUser;
+
+        $changed = $this->connection->executeUpdate($sql, $params);
+
+        if ($changed) {
+            ++$this->updatedUsers;
+        }
+    }
+
+    private function updateOrganization(...$args): void
+    {
+        $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creator_id, creation_date)
+                        VALUES (?, ?, ?, NOW())
+                        ON DUPLICATE KEY UPDATE
+                        pattern = VALUES(pattern),
+                        subscription_last_review_id = VALUES(subscription_last_review_id),
+                        updater_id = VALUES(creator_id),
+                        update_date = NOW()';
+
+        $params = $args;
+        $params[] = $this->currentUser;
+
+        $changed = $this->connection->executeUpdate($sql, $params);
+
+        if ($changed) {
+            ++$this->updatedOrganizations;
+        }
     }
 }

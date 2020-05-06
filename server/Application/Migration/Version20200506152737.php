@@ -6,12 +6,12 @@ namespace Application\Migration;
 
 use Doctrine\DBAL\Schema\Schema;
 
-class Version20200506143227 extends AbstractMigration
+class Version20200506152737 extends AbstractMigration
 {
     public function up(Schema $schema): void
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product ADD sorting TINYTEXT NOT NULL');
+        $this->addSql('ALTER TABLE product ADD sorting SMALLINT NOT NULL');
     }
 }

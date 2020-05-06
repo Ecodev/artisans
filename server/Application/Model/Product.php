@@ -87,9 +87,9 @@ class Product extends AbstractProduct
     private $content = '';
 
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(type="text", length=16)
+     * @ORM\Column(type="smallint", length=5)
      */
     private $sorting = '';
 
@@ -312,10 +312,10 @@ class Product extends AbstractProduct
      *
      * @API\Exclude
      *
-     * @return null|string
+     * @return null|int
      */
-    public function getSorting(): ?string
+    public function getSorting(): ?int
     {
-        return $this->readingDuration;
+        return $this->sorting;
     }
 }

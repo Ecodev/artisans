@@ -18,7 +18,7 @@ class Message extends AbstractModel
     /**
      * @var null|User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="CASCADE")
      * })
@@ -66,16 +66,8 @@ class Message extends AbstractModel
      */
     public function setRecipient(?User $recipient): void
     {
-        if ($this->recipient) {
-            $this->recipient->messageRemoved($this);
-        }
-
         $this->recipient = $recipient;
         $this->setOwner($recipient);
-
-        if ($this->recipient) {
-            $this->recipient->messageAdded($this);
-        }
     }
 
     /**

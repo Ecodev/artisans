@@ -151,12 +151,6 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient")
-     */
-    private $messages;
-
-    /**
-     * @var Collection
      * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
      */
     private $users;
@@ -170,7 +164,6 @@ class User extends AbstractModel
     {
         $this->role = $role;
         $this->sessions = new ArrayCollection();
-        $this->messages = new ArrayCollection();
         $this->users = new ArrayCollection();
     }
 
@@ -446,38 +439,6 @@ class User extends AbstractModel
         $logRepository = _em()->getRepository(Log::class);
 
         return $logRepository->getLoginDate($this, false);
-    }
-
-    /**
-     * Get messages sent to the user
-     *
-     * @return Collection
-     */
-    public function getMessages(): Collection
-    {
-        return $this->messages;
-    }
-
-    /**
-     * Notify the user that it has a new message
-     * This should only be called by Message::setRecipient()
-     *
-     * @param Message $message
-     */
-    public function messageAdded(Message $message): void
-    {
-        $this->messages->add($message);
-    }
-
-    /**
-     * Notify the user that a message was removed
-     * This should only be called by Message::setRecipient()
-     *
-     * @param Message $message
-     */
-    public function messageRemoved(Message $message): void
-    {
-        $this->messages->removeElement($message);
     }
 
     /**

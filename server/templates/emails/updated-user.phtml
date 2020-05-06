@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 $url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
 ?>
-<p>Le membre suivant a modifié ses information personnelles :</p>
+<p>L'utilisateur suivant a modifié ses information personnelles :</p>
 
 <table style="min-width: 20em;">
     <tr>
@@ -18,7 +18,7 @@ $url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
     <?php endforeach; ?>
 </table>
 
-<p>Contacter le membre :</p>
+<p>Contacter l'utilisateur :</p>
 <ul>
     <li><?php echo $this->updatedUser->getName() ?></li>
     <li>

@@ -11,13 +11,13 @@
 
                         <h2 class="mat-h2">Coordonnées</h2>
 
-                        <app-address (change)="update()" [form]="form" [disabled]="true"></app-address>
+                        <app-address [form]="form" [disabled]="true"></app-address>
 
                         <div fxLayout="row" fxLayoutGap="10px">
 
                             <mat-form-field fxFlex>
                                 <mat-label>Téléphone</mat-label>
-                                <input (change)="update()" formControlName="phone" matInput>
+                                <input formControlName="phone" matInput>
                             </mat-form-field>
 
                         </div>

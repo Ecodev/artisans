@@ -6,6 +6,7 @@ namespace Application\Service;
 
 use Application\Api\Exception;
 use Application\DBAL\Types\MembershipType;
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\User;
 use Doctrine\DBAL\Connection;
 use Throwable;
@@ -117,13 +118,26 @@ class Importer
         while ($line = fgetcsv($file)) {
             ++$this->lineNumber;
 
-            $expectedColumnCount = 11;
+            $expectedColumnCount = 12;
             $actualColumnCount = count($line);
             if ($actualColumnCount !== $expectedColumnCount) {
                 $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
             }
 
-            [$email, $pattern, $lastReviewNumber, $membership, $firstName, $lastName, $street, $postcode, $locality, $country, $phone] = $line;
+            [
+                $email,
+                $pattern,
+                $subscriptionType,
+                $lastReviewNumber,
+                $membership,
+                $firstName,
+                $lastName,
+                $street,
+                $postcode,
+                $locality,
+                $country,
+                $phone,
+            ] = $line;
 
             if ($email && $pattern) {
                 $this->throw('Il faut soit un email, soit un pattern, mais les deux existent');
@@ -137,9 +151,11 @@ class Importer
                 $this->assertEmail($email);
                 $membership = $this->readMembership($membership);
                 $country = $this->readCountryId($country);
+                $subscriptionType = $this->readSubscriptionType($subscriptionType);
 
                 $sql = 'INSERT INTO user (
                             email,
+                            subscription_type,
                             subscription_last_review_id,
                             membership,
                             first_name,
@@ -153,9 +169,10 @@ class Importer
                             creator_id,
                             creation_date
                         )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
                             email = VALUES(email),
+                            subscription_type = VALUES(subscription_type),
                             subscription_last_review_id = VALUES(subscription_last_review_id),
                             membership = VALUES(membership),
                             first_name = VALUES(first_name),
@@ -171,6 +188,7 @@ class Importer
 
                 $data = [
                     $email,
+                    $subscriptionType,
                     $lastReviewId,
                     $membership,
                     $firstName,
@@ -301,5 +319,18 @@ class Importer
         }
 
         return $membership;
+    }
+
+    private function readSubscriptionType(string $subscriptionType): ?string
+    {
+        if (!$subscriptionType) {
+            return null;
+        }
+
+        if (!in_array($subscriptionType, [ProductTypeType::PAPER, ProductTypeType::DIGITAL, ProductTypeType::BOTH], true)) {
+            $this->throw('Le subscriptionType est invalide: ' . $subscriptionType);
+        }
+
+        return $subscriptionType;
     }
 }

@@ -14,6 +14,9 @@ use GraphQL\Doctrine\Annotation as API;
  * An item that can be booked by a user
  *
  * @ORM\Entity(repositoryClass="\Application\Repository\ProductRepository")
+ * @API\Sorting({
+ *     "Application\Api\Input\Sorting\Illustration"
+ * })
  */
 class Product extends AbstractProduct
 {
@@ -82,6 +85,13 @@ class Product extends AbstractProduct
      * @ORM\Column(type="text", length=65535)
      */
     private $content = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", length=16)
+     */
+    private $sorting = '';
 
     /**
      * Constructor
@@ -295,5 +305,17 @@ class Product extends AbstractProduct
         }
 
         return $this->content;
+    }
+
+    /**
+     * Reading duration in minutes
+     *
+     * @API\Exclude
+     *
+     * @return null|string
+     */
+    public function getSorting(): ?string
+    {
+        return $this->readingDuration;
     }
 }

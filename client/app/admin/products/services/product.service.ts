@@ -10,9 +10,12 @@ import {
     Product_product,
     ProductInput,
     Products,
+    ProductSorting,
+    ProductSortingField,
     ProductsVariables,
     ProductType,
     ProductVariables,
+    SortingOrder,
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
@@ -31,6 +34,13 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     UpdateProduct['updateProduct'],
     UpdateProductVariables,
     DeleteProducts> {
+
+    public static articlesSorting: ProductSorting[] = [
+        {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
+        {field: ProductSortingField.releaseDate, order: SortingOrder.DESC},
+        {field: ProductSortingField.illustration, order: SortingOrder.DESC},
+        {field: ProductSortingField.sorting, order: SortingOrder.ASC},
+    ];
 
     constructor(apollo: Apollo) {
         super(apollo,

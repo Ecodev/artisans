@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProductTagByNameResolver } from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import { ProductResolver } from '../../../admin/products/services/product.resolver';
+import { ProductService } from '../../../admin/products/services/product.service';
 import { ProductSortingField, ProductsVariables, SortingOrder } from '../../../shared/generated-types';
 import { ProductPageComponent } from './components/product-page/product-page.component';
 import { ProductsPageComponent, ProductsViewMode } from './components/products-page/products-page.component';
@@ -45,10 +46,7 @@ const routes: Routes = [
                             },
                         ],
                     },
-                    sorting: [
-                        {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
-                        {field: ProductSortingField.releaseDate, order: SortingOrder.DESC},
-                    ],
+                    sorting: ProductService.articlesSorting,
                 } as ProductsVariables,
             },
         },
@@ -76,11 +74,7 @@ const routes: Routes = [
                             },
                         ],
                     },
-                    sorting: [
-                        {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
-                        {field: ProductSortingField.releaseDate, order: SortingOrder.DESC},
-
-                    ],
+                    sorting: ProductService.articlesSorting,
                 } as ProductsVariables,
             },
 

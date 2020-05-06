@@ -6,6 +6,7 @@ namespace Application\Api\Field\Mutation;
 
 use Application\Api\Exception;
 use Application\Api\Field\FieldInterface;
+use Application\DBAL\Types\MembershipType;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Mailer;
@@ -26,7 +27,7 @@ abstract class RequestMembershipEnd implements FieldInterface
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
                 $user = User::getCurrent();
 
-                if (!$user || !$user->getMembershipBegin()) {
+                if (!$user || $user->getMembership() === MembershipType::NONE) {
                     throw new Exception('Must be logged in and have a membership');
                 }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Api\Exception;
+use Application\DBAL\Types\MembershipType;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Repository\LogRepository;
 use Application\Traits\HasAddress;
@@ -100,16 +101,10 @@ class User extends AbstractModel
     private $role = self::ROLE_MEMBER;
 
     /**
-     * @var null|Chronos
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var string
+     * @ORM\Column(type="Membership", options={"default" = MembershipType::NONE})
      */
-    private $membershipBegin;
-
-    /**
-     * @var null|Chronos
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $membershipEnd;
+    private $membership = MembershipType::NONE;
 
     /**
      * @var null|Chronos
@@ -392,39 +387,21 @@ class User extends AbstractModel
     }
 
     /**
-     * @return null|Chronos
+     * @return string
      */
-    public function getMembershipBegin(): ?Chronos
+    public function getMembership(): string
     {
-        return $this->membershipBegin;
+        return $this->membership;
     }
 
     /**
      * @API\Exclude
      *
-     * @param null|Chronos $membershipBegin
+     * @param string $membership
      */
-    public function setMembershipBegin(?Chronos $membershipBegin): void
+    public function setMembership(string $membership): void
     {
-        $this->membershipBegin = $membershipBegin;
-    }
-
-    /**
-     * @return null|Chronos
-     */
-    public function getMembershipEnd(): ?Chronos
-    {
-        return $this->membershipEnd;
-    }
-
-    /**
-     * @API\Exclude
-     *
-     * @param null|Chronos $membershipEnd
-     */
-    public function setMembershipEnd(?Chronos $membershipEnd): void
-    {
-        $this->membershipEnd = $membershipEnd;
+        $this->membership = $membership;
     }
 
     /**

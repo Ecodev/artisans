@@ -135,7 +135,7 @@ VALUES (50000, 3000, '.*@.*university\\.com'),
 UPDATE user SET
     subscription_type = 'digital',
     subscription_last_review_id = 3001,
-    membership_begin = '2020-01-02'
+    membership = 'payed'
 WHERE id = 1003;
 
 COMMIT;

@@ -36,41 +36,12 @@
                         <natural-select-enum (selectionChange)="update()" enumName="UserRole" formControlName="role" placeholder="Rôle"
                         ></natural-select-enum>
 
-                        <mat-form-field>
-                            <mat-label>Membre depuis</mat-label>
-                            <input (dateChange)="update()" [matDatepicker]="picker1" formControlName="membershipBegin" matInput>
+                        <natural-select-enum
+                                enumName="Membership"
+                                formControlName="membership"
+                                placeholder="Membre des artisans"
+                        ></natural-select-enum>
 
-                            <div fxLayoutAlign="start center" matSuffix xLayout="row">
-                                <mat-datepicker-toggle [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-
-                                <button (click)="form.get('membershipBegin')?.setValue(null); update()"
-                                        *ngIf="form.get('membershipBegin')?.value"
-                                        mat-icon-button
-                                >
-                                    <natural-icon name="close"></natural-icon>
-                                </button>
-                </div>
-
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Membre jusqu'à</mat-label>
-                            <input (dateChange)="update()" [matDatepicker]="picker2" formControlName="membershipEnd" matInput>
-
-                            <div fxLayoutAlign="start center" matSuffix xLayout="row">
-                                <mat-datepicker-toggle [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
-
-                                <button (click)="form.get('membershipEnd')?.setValue(null); update()"
-                                        *ngIf="form.get('membershipEnd')?.value"
-                                        mat-icon-button
-                                >
-                                    <natural-icon name="close"></natural-icon>
-                                </button>
-                            </div>
-
-                            </mat-form-field>
                             </div>
                         </div>
 

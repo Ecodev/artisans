@@ -38,7 +38,7 @@ export class UserComponent
         super.ngOnInit();
 
         // Disable fields that should be imported from Cresus
-        ['phone', 'membershipBegin', 'membershipEnd'].forEach(path => {
+        ['phone', 'membership'].forEach(path => {
             const control = this.form.get(path);
             if (control) {
                 control.disable();

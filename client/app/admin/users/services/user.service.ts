@@ -103,8 +103,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             street: [Validators.required],
             postcode: [Validators.required],
             country: [Validators.required],
-            membershipBegin: [], // Inject fields that cannot be mutated, but should be displayed
-            membershipEnd: [],
+            membership: [], // Inject field that cannot be mutated, but should be displayed
         };
     }
 

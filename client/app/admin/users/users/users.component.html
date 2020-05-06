@@ -35,8 +35,7 @@
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
                     <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
-                    <span naturalColumnsPickerColumn="membershipBegin">Date début</span>
-                    <span naturalColumnsPickerColumn="membershipEnd">Date fin</span>
+                    <span naturalColumnsPickerColumn="membership">Membre des artisans</span>
                     <span naturalColumnsPickerColumn="email">Email</span>
                     <span naturalColumnsPickerColumn="phone">Téléphone</span>
                 </natural-columns-picker>
@@ -75,14 +74,9 @@
                     </td>
                 </ng-container>
 
-                <ng-container matColumnDef="membershipBegin">
-                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date début</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.membershipBegin | date: 'dd.MM.y' }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="membershipEnd">
-                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date fin</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.membershipEnd | date: 'dd.MM.y' }}</td>
+                <ng-container matColumnDef="membership">
+                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Membre des artisans</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.membership | enum: 'Membership' | async }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="phone">

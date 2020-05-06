@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Service;
 
 use Application\Api\Exception;
+use Application\DBAL\Types\MembershipType;
 use Application\Model\User;
 use Doctrine\DBAL\Connection;
 use Throwable;
@@ -116,13 +117,13 @@ class Importer
         while ($line = fgetcsv($file)) {
             ++$this->lineNumber;
 
-            $expectedColumnCount = 12;
+            $expectedColumnCount = 11;
             $actualColumnCount = count($line);
             if ($actualColumnCount !== $expectedColumnCount) {
                 $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
             }
 
-            [$email, $pattern, $lastReviewNumber, $membershipBegin, $membershipEnd, $firstName, $lastName, $street, $postcode, $locality, $country, $phone] = $line;
+            [$email, $pattern, $lastReviewNumber, $membership, $firstName, $lastName, $street, $postcode, $locality, $country, $phone] = $line;
 
             if ($email && $pattern) {
                 $this->throw('Il faut soit un email, soit un pattern, mais les deux existent');
@@ -131,18 +132,16 @@ class Importer
             }
 
             $lastReviewId = $this->readReviewId($lastReviewNumber);
-            $membershipBegin = $this->readDate($membershipBegin);
-            $membershipEnd = $this->readDate($membershipEnd);
-            $country = $this->readCountryId($country);
 
             if ($email) {
                 $this->assertEmail($email);
+                $membership = $this->readMembership($membership);
+                $country = $this->readCountryId($country);
 
                 $sql = 'INSERT INTO user (
                             email,
                             subscription_last_review_id,
-                            membership_begin,
-                            membership_end,
+                            membership,
                             first_name,
                             last_name,
                             street,
@@ -154,12 +153,11 @@ class Importer
                             creator_id,
                             creation_date
                         )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
                             email = VALUES(email),
                             subscription_last_review_id = VALUES(subscription_last_review_id),
-                            membership_begin = VALUES(membership_begin),
-                            membership_end = VALUES(membership_end),
+                            membership = VALUES(membership),
                             first_name = VALUES(first_name),
                             last_name = VALUES(last_name),
                             street = VALUES(street),
@@ -174,8 +172,7 @@ class Importer
                 $data = [
                     $email,
                     $lastReviewId,
-                    $membershipBegin,
-                    $membershipEnd,
+                    $membership,
                     $firstName,
                     $lastName,
                     $street,
@@ -295,5 +292,14 @@ class Importer
       OR (update_date IS NOT NULL AND update_date < DATE_SUB(NOW(), INTERVAL 30 MINUTE))
 ';
         $this->deletedOrganizations += $this->connection->executeUpdate($sql);
+    }
+
+    private function readMembership($membership): string
+    {
+        if (!in_array($membership, [MembershipType::NONE, MembershipType::DUE, MembershipType::PAYED], true)) {
+            $this->throw('Le membership aux artisans est invalide: ' . $membership);
+        }
+
+        return $membership;
     }
 }

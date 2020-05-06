@@ -22,8 +22,7 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
         'email',
         'creationDate',
         'updateDate',
-        'membershipBegin',
-        'membershipEnd',
+        'membership',
     ];
 
     public usersEmail: string | null = null;

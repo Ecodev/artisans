@@ -19,6 +19,7 @@ class TypesFactory
             \Application\Api\Enum\UserRoleType::class,
             \Application\Api\Enum\MessageTypeType::class,
             \Application\Api\Enum\PaymentMethodType::class,
+            \Application\Api\Enum\MembershipType::class,
             \Application\Api\Enum\ProductTypeType::class,
             \Application\Api\Enum\OrderStatusType::class,
             \Application\Api\Input\ConfirmRegistrationInputType::class,

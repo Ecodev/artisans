@@ -18,10 +18,10 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-email.csv');
     }
 
-    public function testInvalidDate(): void
+    public function testInvalidMembership(): void
     {
-        $this->expectErrorMessage('A la ligne 1: La date devrait avoir le format YYYY-MM-DD, mais est: 24.12.2020');
-        $this->import('tests/data/importer/invalid-date.csv');
+        $this->expectErrorMessage('A la ligne 1: Le membership aux artisans est invalide: foo');
+        $this->import('tests/data/importer/invalid-membership.csv');
     }
 
     public function testInvalidEmpty(): void
@@ -50,7 +50,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidColumnCount(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Doit avoir exactement 12 colonnes, mais en a 5');
+        $this->expectErrorMessage('A la ligne 1: Doit avoir exactement 11 colonnes, mais en a 5');
         $this->import('tests/data/importer/invalid-column-count.csv');
     }
 
@@ -60,8 +60,7 @@ class ImporterTest extends TestCase
             'email' => 'member@example.com',
             'first_name' => 'Hector',
             'subscription_last_review_id' => null,
-            'membership_begin' => null,
-            'membership_end' => null,
+            'membership' => 'none',
             'web_temporary_access' => '0',
             'password' => 'aa08769cdcb26674c6706093503ff0a3',
         ]);
@@ -70,8 +69,7 @@ class ImporterTest extends TestCase
             'email' => 'othermember@example.com',
             'first_name' => 'Elizabeth',
             'subscription_last_review_id' => '3001',
-            'membership_begin' => '2020-01-02 00:00:00',
-            'membership_end' => null,
+            'membership' => 'payed',
             'web_temporary_access' => '0',
             'password' => '1895eaf4aad48bd97ec1a2fd15336591',
         ];
@@ -96,8 +94,7 @@ class ImporterTest extends TestCase
             'email' => 'new@example.com',
             'first_name' => '',
             'subscription_last_review_id' => null,
-            'membership_begin' => null,
-            'membership_end' => null,
+            'membership' => 'none',
             'web_temporary_access' => '0',
             'password' => '',
         ]);
@@ -106,8 +103,7 @@ class ImporterTest extends TestCase
             'email' => 'new.with.everything@example.com',
             'first_name' => '',
             'subscription_last_review_id' => '3000',
-            'membership_begin' => '2010-12-24 00:00:00',
-            'membership_end' => '2019-01-01 00:00:00',
+            'membership' => 'due',
             'web_temporary_access' => '0',
             'password' => '',
         ]);
@@ -116,8 +112,7 @@ class ImporterTest extends TestCase
             'email' => 'member@example.com',
             'first_name' => 'Roger "Bob"',
             'subscription_last_review_id' => null,
-            'membership_begin' => '2020-01-01 00:00:00',
-            'membership_end' => null,
+            'membership' => 'payed',
             'web_temporary_access' => '0',
             'password' => 'aa08769cdcb26674c6706093503ff0a3',
         ]);
@@ -134,7 +129,7 @@ class ImporterTest extends TestCase
     private function assertUser(array $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();
-        $actual = $connection->fetchAssoc('SELECT email, first_name, subscription_last_review_id, membership_begin, membership_end, web_temporary_access, password FROM user WHERE email = ?', [$expected['email']]);
+        $actual = $connection->fetchAssoc('SELECT email, first_name, subscription_last_review_id, membership, web_temporary_access, password FROM user WHERE email = ?', [$expected['email']]);
         self::assertSame($expected, $actual);
     }
 

@@ -64,6 +64,7 @@ return [
             'ProductType' => Application\DBAL\Types\ProductTypeType::class,
             'OrderStatus' => Application\DBAL\Types\OrderStatusType::class,
             'PaymentMethod' => Application\DBAL\Types\PaymentMethodType::class,
+            'Membership' => Application\DBAL\Types\MembershipType::class,
         ],
         // migrations configuration
         'migrations_configuration' => [

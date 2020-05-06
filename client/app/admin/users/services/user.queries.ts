@@ -20,8 +20,7 @@ export const userFieldsFragment = gql`
         }
         role
         subscriptionType
-        membershipBegin
-        membershipEnd
+        membership
         firstLogin
         lastLogin
         owner {
@@ -47,6 +46,7 @@ export const usersQuery = gql`
                 id
                 email
                 name
+                membership
                 updateDate
                 creationDate
             }

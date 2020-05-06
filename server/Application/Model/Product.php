@@ -89,7 +89,7 @@ class Product extends AbstractProduct
     /**
      * @var null|int
      *
-     * @ORM\Column(type="smallint", nullable=true, length=5)
+     * @ORM\Column(type="smallint", nullable=true)
      */
     private $sorting;
 

@@ -24,7 +24,6 @@ use Application\Model\Event;
 use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\News;
-use Application\Model\Newsletter;
 use Application\Model\Product;
 use Application\Model\ProductTag;
 use Application\Model\Session;
@@ -59,7 +58,6 @@ class MutationType extends ObjectType
             Standard::buildMutation(File::class),
             Standard::buildMutation(Image::class),
             Standard::buildMutation(News::class),
-            Standard::buildMutation(Newsletter::class),
             Standard::buildMutation(Product::class),
             Standard::buildMutation(ProductTag::class),
             Standard::buildMutation(Session::class),

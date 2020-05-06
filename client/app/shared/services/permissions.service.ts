@@ -17,7 +17,6 @@ const permissions = gql`
                 image { create }
                 message { create }
                 news { create }
-                newsletter { create }
                 organization { create }
                 product { create }
                 productTag { create }

@@ -18,7 +18,6 @@ use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\Message;
 use Application\Model\News;
-use Application\Model\Newsletter;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
@@ -49,7 +48,6 @@ class QueryType extends ObjectType
             Standard::buildQuery(Image::class),
             Standard::buildQuery(Message::class),
             Standard::buildQuery(News::class),
-            Standard::buildQuery(Newsletter::class),
             Standard::buildQuery(Order::class),
             Standard::buildQuery(OrderLine::class),
             Standard::buildQuery(Product::class),

@@ -9,7 +9,6 @@ return [
                 crud {
                     configuration { create }
                     news { create }
-                    newsletter { create }
                     session { create }
                     subscription { create }
                     product { create }
@@ -31,9 +30,6 @@ return [
                         'create' => false,
                     ],
                     'news' => [
-                        'create' => false,
-                    ],
-                    'newsletter' => [
                         'create' => false,
                     ],
                     'session' => [

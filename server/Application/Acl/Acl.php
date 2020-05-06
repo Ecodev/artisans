@@ -14,7 +14,6 @@ use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\Message;
 use Application\Model\News;
-use Application\Model\Newsletter;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Organization;
@@ -55,7 +54,6 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $image = new ModelResource(Image::class);
         $message = new ModelResource(Message::class);
         $news = new ModelResource(News::class);
-        $newsletter = new ModelResource(Newsletter::class);
         $order = new ModelResource(Order::class);
         $orderLine = new ModelResource(OrderLine::class);
         $organization = new ModelResource(Organization::class);
@@ -73,7 +71,6 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->addResource($image);
         $this->addResource($message);
         $this->addResource($news);
-        $this->addResource($newsletter);
         $this->addResource($order);
         $this->addResource($orderLine);
         $this->addResource($organization);
@@ -98,7 +95,6 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
         $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
-        $this->allow(User::ROLE_ADMINISTRATOR, [$newsletter], ['create', 'read', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$configuration, $organization], ['create']);
     }
 

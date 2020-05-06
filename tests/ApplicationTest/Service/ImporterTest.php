@@ -14,7 +14,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidEmail(): void
     {
-        $this->expectErrorMessage("A la ligne 1: L'email suivant n'est ni une addresse email valide, ni un expression régulière valide: fo[o");
+        $this->expectErrorMessage("A la ligne 1: Ce n'est pas une addresse email valide: fo[o");
         $this->import('tests/data/importer/invalid-email.csv');
     }
 
@@ -24,10 +24,10 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-date.csv');
     }
 
-    public function testInvalidEmptyEmail(): void
+    public function testInvalidEmpty(): void
     {
-        $this->expectErrorMessage("A la ligne 1: L'email ne peut pas être vide");
-        $this->import('tests/data/importer/invalid-empty-email.csv');
+        $this->expectErrorMessage('A la ligne 1: Il faut soit un email, soit un pattern, mais aucun existe');
+        $this->import('tests/data/importer/invalid-empty.csv');
     }
 
     public function testInvalidDuplicatedEmail(): void
@@ -50,7 +50,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidColumnCount(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Doit avoir exactement 11 colonnes, mais en a 4');
+        $this->expectErrorMessage('A la ligne 1: Doit avoir exactement 12 colonnes, mais en a 5');
         $this->import('tests/data/importer/invalid-column-count.csv');
     }
 

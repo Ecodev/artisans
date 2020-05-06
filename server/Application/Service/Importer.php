@@ -35,6 +35,10 @@ class Importer
 
     private int $deletedOrganizations = 0;
 
+    private array $seenEmails = [];
+
+    private array $seenPatterns = [];
+
     public function import(string $filename): array
     {
         $start = microtime(true);
@@ -44,6 +48,8 @@ class Importer
         $this->updatedUsers = 0;
         $this->updatedOrganizations = 0;
         $this->deletedOrganizations = 0;
+        $this->seenEmails = [];
+        $this->seenPatterns = [];
 
         $file = fopen($filename, 'r');
         if ($file === false) {
@@ -104,30 +110,34 @@ class Importer
      */
     private function read($file): void
     {
-        $seenEmails = [];
         $currentUser = User::getCurrent() ? User::getCurrent()->getId() : null;
 
         $this->lineNumber = 0;
         while ($line = fgetcsv($file)) {
             ++$this->lineNumber;
 
-            $expectedColumnCount = 11;
+            $expectedColumnCount = 12;
             $actualColumnCount = count($line);
             if ($actualColumnCount !== $expectedColumnCount) {
                 $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
             }
 
-            [$email, $lastReviewNumber, $membershipBegin, $membershipEnd, $firstName, $lastName, $street, $postcode, $locality, $country, $phone] = $line;
+            [$email, $pattern, $lastReviewNumber, $membershipBegin, $membershipEnd, $firstName, $lastName, $street, $postcode, $locality, $country, $phone] = $line;
 
-            $this->assertEmail($seenEmails, $email);
+            if ($email && $pattern) {
+                $this->throw('Il faut soit un email, soit un pattern, mais les deux existent');
+            } elseif (!$email && !$pattern) {
+                $this->throw('Il faut soit un email, soit un pattern, mais aucun existe');
+            }
+
             $lastReviewId = $this->readReviewId($lastReviewNumber);
             $membershipBegin = $this->readDate($membershipBegin);
             $membershipEnd = $this->readDate($membershipEnd);
             $country = $this->readCountryId($country);
 
-            $seenEmails[$email] = $this->lineNumber;
+            if ($email) {
+                $this->assertEmail($email);
 
-            if ($this->isUser($email)) {
                 $sql = 'INSERT INTO user (
                             email,
                             subscription_last_review_id,
@@ -181,7 +191,9 @@ class Importer
                 if ($changed) {
                     ++$this->updatedUsers;
                 }
-            } elseif ($this->isOrganization($email)) {
+            } elseif ($pattern) {
+                $this->assertPattern($pattern);
+
                 $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creator_id, creation_date)
                         VALUES (?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
@@ -190,7 +202,7 @@ class Importer
                         updater_id = VALUES(creator_id),
                         update_date = NOW()';
 
-                $changed = $this->connection->executeUpdate($sql, [$email, $lastReviewId, $currentUser]);
+                $changed = $this->connection->executeUpdate($sql, [$pattern, $lastReviewId, $currentUser]);
                 if ($changed) {
                     ++$this->updatedOrganizations;
                 }
@@ -213,15 +225,30 @@ class Importer
         return $date;
     }
 
-    private function assertEmail(array $seenEmails, string $email): void
+    private function assertEmail(string $email): void
     {
-        if (!$email) {
-            $this->throw('L\'email ne peut pas être vide');
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->throw("Ce n'est pas une addresse email valide: " . $email);
         }
 
-        if (array_key_exists($email, $seenEmails)) {
-            $this->throw('L\'email "' . $email . '" est dupliqué et a déjà été vu à la ligne ' . $seenEmails[$email]);
+        if (array_key_exists($email, $this->seenEmails)) {
+            $this->throw('L\'email "' . $email . '" est dupliqué et a déjà été vu à la ligne ' . $this->seenEmails[$email]);
         }
+
+        $this->seenEmails[$email] = $this->lineNumber;
+    }
+
+    private function assertPattern(string $pattern): void
+    {
+        if (@preg_match('~' . $pattern . '~', '') === false) {
+            $this->throw("Ce n'est pas une expression régulière valide: " . $pattern);
+        }
+
+        if (array_key_exists($pattern, $this->seenPatterns)) {
+            $this->throw('Le pattern "' . $pattern . '" est dupliqué et a déjà été vu à la ligne ' . $this->seenPatterns[$pattern]);
+        }
+
+        $this->seenPatterns[$pattern] = $this->lineNumber;
     }
 
     private function readReviewId(string $reviewNumber): ?string
@@ -253,18 +280,6 @@ class Importer
         }
 
         return $this->countryByCode[$country];
-    }
-
-    private function isUser(string $email): bool
-    {
-        return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
-    }
-
-    private function isOrganization(string $email): bool
-    {
-        $result = @preg_match('~' . $email . '~', '');
-
-        return $result !== false;
     }
 
     private function throw(string $message): void

@@ -87,11 +87,11 @@ class Product extends AbstractProduct
     private $content = '';
 
     /**
-     * @var int
+     * @var null|int
      *
-     * @ORM\Column(type="smallint", length=5)
+     * @ORM\Column(type="smallint", nullable=true, length=5)
      */
-    private $sorting = '';
+    private $sorting;
 
     /**
      * Constructor

@@ -80,12 +80,12 @@
                 </ng-container>
 
                 <ng-container matColumnDef="phone">
-                    <th *matHeaderCellDef mat-header-cell>Tél.</th>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Tél.</th>
                     <td mat-cell *matCellDef="let element"><a *ngIf="element.phone" href="tel:{{ element.phone }}" class="app-link">{{ element.phone }}</a></td>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
-                    <th *matHeaderCellDef mat-header-cell>e-mail</th>
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>e-mail</th>
                     <td mat-cell *matCellDef="let element"><a *ngIf="element.email" href="mailto:{{ element.email }}" class="app-link">{{ element.email }}</a></td>
                 </ng-container>
 

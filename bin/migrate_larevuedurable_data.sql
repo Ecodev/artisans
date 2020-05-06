@@ -296,4 +296,17 @@ SET type        = 'digital',
         )
 WHERE description LIKE '%La version papier est épuisée%';
 
+-- Migrate one address per user, even if those data will be overwritten by cresus import after migration, it is useful for dev
+UPDATE user
+    INNER JOIN ps_address ON user.id = ps_address.id_customer
+    INNER JOIN ps_country pc ON ps_address.id_country = pc.id_country
+    INNER JOIN country ON country.code = pc.iso_code
+SET user.street     = ps_address.address1,
+    user.postcode   = ps_address.postcode,
+    user.locality   = ps_address.city,
+    user.country_id = country.id,
+    user.phone      = IFNULL(IFNULL(ps_address.phone_mobile, ps_address.phone), '')
+WHERE ps_address.deleted = 0
+ORDER BY ps_address.date_upd;
+
 COMMIT;

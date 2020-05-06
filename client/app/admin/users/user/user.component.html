@@ -47,13 +47,13 @@
 
                 <mat-divider></mat-divider>
 
-                <h2 class="mat-h2">Conversations carbonne animées</h2>
+                <h2 class="mat-h2">Conversations carbone animées</h2>
 
                 <natural-relations [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
                                    [main]="data.model"
                                    [service]="sessionService"
                                    otherName="facilitator"
-                                   placeholder="Conversations carbonne"
+                                   placeholder="Conversations carbone"
                 >
                     <ng-template let-item="item">
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">

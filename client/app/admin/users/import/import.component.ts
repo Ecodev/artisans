@@ -47,6 +47,7 @@ export class ImportComponent implements OnInit {
                     totalUsers
                     totalOrganizations
                     totalLines
+                    time
                 }
             }
         `;

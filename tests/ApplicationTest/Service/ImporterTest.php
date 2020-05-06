@@ -78,6 +78,10 @@ class ImporterTest extends TestCase
         $this->assertUser($otherMember);
 
         $actual = $this->import('tests/data/importer/normal.csv');
+
+        self::assertArrayHasKey('time', $actual);
+        unset($actual['time']);
+
         $expected = [
             'updatedUsers' => 4,
             'updatedOrganizations' => 1,

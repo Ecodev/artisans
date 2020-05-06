@@ -37,6 +37,7 @@ class Importer
 
     public function import(string $filename): array
     {
+        $start = microtime(true);
         $this->connection = _em()->getConnection();
         $this->fetchReviews();
         $this->fetchCountries();
@@ -65,6 +66,8 @@ class Importer
         $totalUsers = (int) $this->connection->fetchColumn('SELECT COUNT(*) FROM user');
         $totalOrganizations = (int) $this->connection->fetchColumn('SELECT COUNT(*) FROM organization');
 
+        $time = round(microtime(true) - $start, 1);
+
         return [
             'updatedUsers' => $this->updatedUsers,
             'updatedOrganizations' => $this->updatedOrganizations,
@@ -72,6 +75,7 @@ class Importer
             'totalUsers' => $totalUsers,
             'totalOrganizations' => $totalOrganizations,
             'totalLines' => $this->lineNumber,
+            'time' => $time,
         ];
     }
 

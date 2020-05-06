@@ -32,6 +32,9 @@ class ImportResultType extends ObjectType
                 'totalLines' => [
                     'type' => self::nonNull(self::int()),
                 ],
+                'time' => [
+                    'type' => self::nonNull(self::float()),
+                ],
             ],
         ];
 

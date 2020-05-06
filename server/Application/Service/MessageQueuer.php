@@ -169,6 +169,18 @@ class MessageQueuer
         return $message;
     }
 
+    public function queueNewsletterSubscription(User $admin, string $email): Message
+    {
+        $subject = 'Demande d\'inscription à la newsletter';
+        $mailParams = [
+            'newsletterEmail' => $email,
+        ];
+
+        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::NEWSLETTER_SUBSCRIPTION, $mailParams);
+
+        return $message;
+    }
+
     /**
      * Create a message by rendering the template
      *

@@ -152,6 +152,16 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::REQUEST_MEMBERSHIP_END, 'Demande d\'arrêt de cotisations');
     }
 
+    public function testQueueNewsletterSubscription(): void
+    {
+        $admin = $this->createMockUserAdmin();
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueNewsletterSubscription($admin, 'john.doe@example.com');
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::NEWSLETTER_SUBSCRIPTION, 'Demande d\'inscription à la newsletter');
+    }
+
     private function createMockOrder(User $owner): Order
     {
         $product = $this->createMock(Product::class);

@@ -12,6 +12,7 @@ use Application\Api\Field\Mutation\Logout;
 use Application\Api\Field\Mutation\Register;
 use Application\Api\Field\Mutation\RequestMembershipEnd;
 use Application\Api\Field\Mutation\RequestPasswordReset;
+use Application\Api\Field\Mutation\SubscribeNewsletter;
 use Application\Api\Field\Mutation\Unregister;
 use Application\Api\Field\Mutation\UpdateConfiguration;
 use Application\Api\Field\Mutation\UpdateOrderLine;
@@ -49,6 +50,7 @@ class MutationType extends ObjectType
             UpdateConfiguration::build(),
             UpdateUser::build(),
             RequestMembershipEnd::build(),
+            SubscribeNewsletter::build(),
             Import::build(),
         ];
 

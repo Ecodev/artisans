@@ -42,7 +42,7 @@
 
             <div fxFlex></div>
 
-            <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
+            <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg"/></a>
 
             <div fxFlex></div>
 
@@ -74,7 +74,7 @@
             <!-- header : 2nd line -->
             <div id="header-middle">
                 <div class="container" fxLayout="row">
-                    <a routerLink="/"><img alt="logo" height="55" src="assets/logo-artisans-de-la-transition.svg" /></a>
+                    <a routerLink="/"><img alt="logo" height="55" src="assets/logo-artisans-de-la-transition.svg"/></a>
                 </div>
             </div>
 
@@ -111,21 +111,23 @@
             <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px">
 
                 <div>
-                    <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-90noir.svg" />
+                    <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-90noir.svg"/>
 
-                    <div fxLayout.gt-sm="row"
-                         fxLayout="column"
-                         fxLayoutAlign.gt-sm="start center"
-                         fxLayoutAlign="start start"
-                         fxLayoutGap.gt-sm="10px"
+                    <form fxLayout.gt-sm="row"
+                          fxLayout="column"
+                          fxLayoutAlign.gt-sm="start center"
+                          fxLayoutAlign="start start"
+                          fxLayoutGap.gt-sm="10px"
+                          [formGroup]="newsletterForm"
                     >
                         <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
                         <mat-form-field>
                             <mat-label>Adresse e-mail</mat-label>
-                            <input matInput>
+                            <input matInput formControlName="email">
+                            <mat-error *ngIf="newsletterForm.controls.email?.errors">Veuillez indiquer une addresse email valide</mat-error>
                         </mat-form-field>
-                        <button color="primary" mat-stroked-button>S'incrire</button>
-                    </div>
+                        <button color="primary" mat-stroked-button [disabled]="newsletterForm.disabled || newsletterForm.invalid" (click)="subscribeNewsletter()">S'inscrire</button>
+                    </form>
                 </div>
 
                 <div class="mat-h3" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
@@ -152,11 +154,11 @@
                         </div>
                         <div>
                             Rue de Lausanne 23
-                            <br />
+                            <br/>
                             1700 Fribourg
-                            <br />
+                            <br/>
                             Suisse
-                            <br />
+                            <br/>
                             Tél: ...
                         </div>
 

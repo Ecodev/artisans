@@ -21,6 +21,8 @@ import {
     RequestMembershipEnd,
     RequestPasswordReset,
     RequestPasswordResetVariables,
+    SubscribeNewsletter,
+    SubscribeNewsletterVariables,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -257,6 +259,21 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return this.apollo.mutate<RequestMembershipEnd, never>({
             mutation: mutation,
         }).pipe(map(result => (result.data as RequestMembershipEnd).requestMembershipEnd));
+    }
+
+    public subscribeNewsletter(email: string): Observable<SubscribeNewsletter['subscribeNewsletter']> {
+        const mutation = gql`
+            mutation SubscribeNewsletter($email: Email!) {
+                subscribeNewsletter(email: $email)
+            }
+        `;
+
+        return this.apollo.mutate<SubscribeNewsletter, SubscribeNewsletterVariables>({
+            mutation: mutation,
+            variables: {
+                email,
+            },
+        }).pipe(map(result => (result.data as SubscribeNewsletter).subscribeNewsletter));
     }
 
     protected getDefaultForServer(): UserInput {

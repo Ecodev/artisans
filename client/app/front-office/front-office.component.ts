@@ -1,14 +1,15 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { NaturalAbstractController, NaturalSearchSelections, toUrl } from '@ecodev/natural';
+import { NaturalAbstractController, NaturalAlertService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
-import { filter } from 'rxjs/operators';
+import { filter, finalize } from 'rxjs/operators';
 import { UserService } from '../admin/users/services/user.service';
 import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
 import { Currency, CurrencyService } from '../shared/services/currency.service';
 import { CartService } from './modules/cart/services/cart.service';
 import { MenuItem, NavigationService } from './services/navigation.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-front-office',
@@ -22,6 +23,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public menuOpened = false;
 
     public viewer: CurrentUserForProfile_viewer | null;
+    public readonly newsletterForm: FormGroup;
 
     /**
      * In case of change, check CSS dimensions :
@@ -137,8 +139,13 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         public currencyService: CurrencyService,
         cartService: CartService,
         @Inject(DOCUMENT) private readonly document: Document,
+        fb: FormBuilder,
+        private alertService: NaturalAlertService,
     ) {
         super();
+        this.newsletterForm = fb.group({
+            email: ['', [Validators.required, Validators.email, Validators.maxLength(191)]],
+        });
 
         // We can have multiple parallel carts
         // We have to call first a cart that will stay at index zero of list of carts. BOComponent is earliest place for that.
@@ -201,4 +208,23 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         this.navigationService.open(new ElementRef(target), items, position).subscribe(() => target.classList.remove(openClass));
     }
 
+    public subscribeNewsletter(): void {
+        if (this.newsletterForm.invalid) {
+            return;
+        }
+
+        this.newsletterForm.disable();
+        this.userService.subscribeNewsletter(this.newsletterForm.value.email)
+            .pipe(finalize(() => this.newsletterForm.enable()))
+            .subscribe(() => {
+                // Exceptionally show a dialog, instead of snackbar, because
+                // we want to be triple sure that the user saw it worked and
+                // avoid him to re-submit the same email again
+                this.alertService.confirm(
+                    'Inscription résussie',
+                    'Merci de vous être inscrit à la newsletter. Vous receverez le prochain numéro directement par email.',
+                    'Fermer',
+                );
+            });
+    }
 }

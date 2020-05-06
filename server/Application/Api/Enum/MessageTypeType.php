@@ -19,6 +19,7 @@ class MessageTypeType extends AbstractEnumType
             \Application\DBAL\Types\MessageTypeType::ADMIN_PENDING_ORDER => 'Commande a besoin de BVR',
             \Application\DBAL\Types\MessageTypeType::ADMIN_VALIDATED_ORDER => 'Commande doit être comptabilisée',
             \Application\DBAL\Types\MessageTypeType::REQUEST_MEMBERSHIP_END => 'Demande d\'arrêt de cotisations',
+            \Application\DBAL\Types\MessageTypeType::NEWSLETTER_SUBSCRIPTION => 'Demande d\'inscription à la newsletter',
         ];
 
         parent::__construct($config);

@@ -110,7 +110,7 @@ class ImporterTest extends TestCase
 
         $this->assertUser([
             'email' => 'member@example.com',
-            'first_name' => 'John',
+            'first_name' => 'Roger "Bob"',
             'subscription_last_review_id' => null,
             'membership_begin' => '2020-01-01 00:00:00',
             'membership_end' => null,

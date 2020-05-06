@@ -96,23 +96,6 @@
 
                 <div *ngIf="data.model.id" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
 
-                    <div fxFlex="66" fxLayout="column">
-                        <h2 class="mat-h2">Tags</h2>
-                        <natural-relations [filter]="{groups: [{conditions: [{users: {have: {values: [data.model.id]}}}]}]}"
-                                           [main]="data.model"
-                                           [service]="userTagService"
-                                           placeholder="Ajouter un tag"
-                        >
-                            <ng-template let-item="item">
-                                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                    <!-- TODO : link to users list filtred by tag -->
-                                    <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="36"></ngx-avatar>
-                                    <natural-table-button [label]="item.name" [navigate]="['/admin/user', item.id]"></natural-table-button>
-                                </div>
-                            </ng-template>
-                        </natural-relations>
-                    </div>
-
                     <div fxFlex="33" fxLayout="column">
 
                         <h2 class="mat-h2">Commentaires</h2>

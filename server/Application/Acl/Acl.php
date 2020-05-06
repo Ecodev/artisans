@@ -23,7 +23,6 @@ use Application\Model\ProductTag;
 use Application\Model\Session;
 use Application\Model\Subscription;
 use Application\Model\User;
-use Application\Model\UserTag;
 use Doctrine\Common\Util\ClassUtils;
 
 class Acl extends \Laminas\Permissions\Acl\Acl
@@ -65,7 +64,6 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $session = new ModelResource(Session::class);
         $subscription = new ModelResource(Subscription::class);
         $user = new ModelResource(User::class);
-        $userTag = new ModelResource(UserTag::class);
 
         $this->addResource($comment);
         $this->addResource($configuration);
@@ -84,11 +82,10 @@ class Acl extends \Laminas\Permissions\Acl\Acl
         $this->addResource($session);
         $this->addResource($subscription);
         $this->addResource($user);
-        $this->addResource($userTag);
 
         $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country, $comment], ['read']);
 
-        $this->allow(User::ROLE_MEMBER, [$user, $userTag], ['read']);
+        $this->allow(User::ROLE_MEMBER, [$user], ['read']);
         $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsMyself());
         $this->allow(User::ROLE_MEMBER, [$file], ['read']);
         $this->allow(User::ROLE_MEMBER, [$message], ['read']);
@@ -98,7 +95,6 @@ class Acl extends \Laminas\Permissions\Acl\Acl
 
         $this->allow(User::ROLE_FACILITATOR, [$file], ['read', 'update']);
         $this->allow(User::ROLE_FACILITATOR, [$user], ['create', 'update']);
-        $this->allow(User::ROLE_FACILITATOR, [$userTag], ['create', 'update', 'delete']);
 
         $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);

@@ -63,15 +63,6 @@ REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, e
 (11001, 1000, 1000, 1002, 'balance', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Artisans présente un solde négatif'),
 (11002, 1001, 1001, 1001, 'reset_password', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
-REPLACE INTO user_tag (id, creator_id, owner_id, name, color) VALUES
-(12000, 1000, 1000, 'User tag 0', '#cD4A50'),
-(12001, 1000, 1000, 'User tag 1', '#A4CE4C');
-
-REPLACE INTO user_tag_user (user_tag_id, user_id) VALUES
-(12000, 1001),
-(12001, 1001),
-(12001, 1002);
-
 REPLACE INTO `order` (id, owner_id, creator_id, creation_date, status, payment_method) VALUES
 (16000, 1002, 1002, '2019-04-24', 'validated', 'bvr'),
 (16001, 1003, 1003, '2019-04-25', 'pending', 'datatrans'),

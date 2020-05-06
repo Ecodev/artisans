@@ -30,7 +30,6 @@ use Application\Model\ProductTag;
 use Application\Model\Session;
 use Application\Model\Subscription;
 use Application\Model\User;
-use Application\Model\UserTag;
 use GraphQL\Type\Definition\ObjectType;
 
 class MutationType extends ObjectType
@@ -66,12 +65,10 @@ class MutationType extends ObjectType
             Standard::buildMutation(Session::class),
             Standard::buildMutation(Subscription::class),
             Standard::buildMutation(User::class),
-            Standard::buildMutation(UserTag::class),
             Standard::buildMutation(Comment::class),
             Standard::buildRelationMutation(Product::class, Product::class, 'RelatedProduct'),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),
-            Standard::buildRelationMutation(UserTag::class, User::class),
 
             $specializedFields,
         );

@@ -18,7 +18,6 @@ import {
 } from '@ecodev/natural';
 import { ProductTagService } from '../../admin/product-tags/services/product-tag.service';
 import { ProductService } from '../../admin/products/services/product.service';
-import { UserTagService } from '../../admin/user-tags/services/user-tag.service';
 import { UserService } from '../../admin/users/services/user.service';
 import { ProductFilterGroupCondition, UserFilterGroupCondition } from '../generated-types';
 
@@ -52,36 +51,6 @@ function dontHave(selection: NaturalSearchSelection): NaturalSearchSelection {
     providedIn: 'root',
 })
 export class NaturalSearchFacetsService {
-
-    private readonly userTags: DropdownFacet<TypeSelectNaturalConfiguration> = {
-        display: 'Tags',
-        name: 'withTags',
-        field: 'userTags',
-        component: TypeNaturalSelectComponent,
-        configuration: {
-            service: this.userTagService,
-            placeholder: 'Tags',
-        },
-    };
-
-    private readonly userWithNoTags: FlagFacet = {
-        display: 'Sans tag',
-        field: 'userTags',
-        name: 'userNoTags',
-        condition: {empty: {}} as UserFilterGroupCondition,
-    };
-
-    private readonly userWithoutTags: DropdownFacet<TypeSelectNaturalConfiguration> = {
-        display: 'Tags exclus',
-        field: 'userTags',
-        name: 'withoutTags',
-        component: TypeNaturalSelectComponent,
-        transform: dontHave,
-        configuration: {
-            service: this.userTagService,
-            placeholder: 'Tags',
-        },
-    };
 
     private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Utilisateur',
@@ -180,7 +149,6 @@ export class NaturalSearchFacetsService {
             this.firstName,
             this.lastName,
             this.userCode,
-            this.userTags,
         ],
         usersAdmin: [
             {
@@ -208,9 +176,6 @@ export class NaturalSearchFacetsService {
                     items: this.enumService.get('UserRole'),
                 },
             } as DropdownFacet<TypeSelectConfiguration>,
-            this.userTags,
-            this.userWithNoTags,
-            this.userWithoutTags,
             this.userWelcomeSession,
             {
                 display: 'Chef de famille',
@@ -347,7 +312,6 @@ export class NaturalSearchFacetsService {
 
     constructor(
         private readonly enumService: NaturalEnumService,
-        private readonly userTagService: UserTagService,
         private readonly productService: ProductService,
         private readonly productTagService: ProductTagService,
         private readonly userService: UserService,

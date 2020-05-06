@@ -27,7 +27,6 @@ use Application\Model\ProductTag;
 use Application\Model\Session;
 use Application\Model\Subscription;
 use Application\Model\User;
-use Application\Model\UserTag;
 use GraphQL\Type\Definition\ObjectType;
 
 class QueryType extends ObjectType
@@ -60,7 +59,6 @@ class QueryType extends ObjectType
             Standard::buildQuery(Session::class),
             Standard::buildQuery(Subscription::class),
             Standard::buildQuery(User::class),
-            Standard::buildQuery(UserTag::class),
             Standard::buildQuery(Country::class),
             Standard::buildQuery(Comment::class),
         );

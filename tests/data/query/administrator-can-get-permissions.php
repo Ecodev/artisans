@@ -17,7 +17,6 @@ return [
                     image { create }
                     message { create }
                     user { create }
-                    userTag { create }
                 }
             }
         }',
@@ -56,9 +55,6 @@ return [
                         'create' => false,
                     ],
                     'user' => [
-                        'create' => true,
-                    ],
-                    'userTag' => [
                         'create' => true,
                     ],
                 ],

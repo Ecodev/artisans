@@ -24,7 +24,6 @@ const permissions = gql`
                 session { create }
                 subscription { create }
                 user { create }
-                userTag { create }
             }
         }
     }

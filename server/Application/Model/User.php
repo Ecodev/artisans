@@ -156,12 +156,6 @@ class User extends AbstractModel
 
     /**
      * @var Collection
-     * @ORM\ManyToMany(targetEntity="UserTag", mappedBy="users")
-     */
-    private $userTags;
-
-    /**
-     * @var Collection
      * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
     private $sessions;
@@ -186,7 +180,6 @@ class User extends AbstractModel
     public function __construct(string $role = self::ROLE_MEMBER)
     {
         $this->role = $role;
-        $this->userTags = new ArrayCollection();
         $this->sessions = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->users = new ArrayCollection();
@@ -372,36 +365,6 @@ class User extends AbstractModel
     public function setPhone(string $phone): void
     {
         $this->phone = $phone;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getUserTags(): Collection
-    {
-        return $this->userTags;
-    }
-
-    /**
-     * Notify the user that it has a new userTag.
-     * This should only be called by UserTag::addUser()
-     *
-     * @param UserTag $userTag
-     */
-    public function userTagAdded(UserTag $userTag): void
-    {
-        $this->userTags->add($userTag);
-    }
-
-    /**
-     * Notify the user that a userTag was removed.
-     * This should only be called by UserTag::removeFacilitator()
-     *
-     * @param UserTag $userTag
-     */
-    public function userTagRemoved(UserTag $userTag): void
-    {
-        $this->userTags->removeElement($userTag);
     }
 
     /**

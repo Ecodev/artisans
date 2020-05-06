@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace ApplicationTest\ORM\Query\Filter;
 
 use Application\Model\User;
-use Application\Model\UserTag;
 use Application\ORM\Query\Filter\AclFilter;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use PHPUnit\Framework\TestCase;
@@ -15,11 +14,6 @@ class AclFilterTest extends TestCase
     public function providerFilter(): array
     {
         return [
-            'tag is a totally public class, access everything' => [
-                null,
-                UserTag::class,
-                '',
-            ],
             'users are invisible to anonymous' => [
                 null,
                 User::class,

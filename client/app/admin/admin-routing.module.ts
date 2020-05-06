@@ -24,9 +24,6 @@ import { ProductResolver } from './products/services/product.resolver';
 import { SessionResolver } from './sessions/services/session.resolver';
 import { SessionComponent } from './sessions/session/session.component';
 import { SessionsComponent } from './sessions/sessions/sessions.component';
-import { UserTagResolver } from './user-tags/services/user-tag.resolver';
-import { UserTagComponent } from './user-tags/user-tag/user-tag.component';
-import { UserTagsComponent } from './user-tags/user-tags/user-tags.component';
 import { UserResolver } from './users/services/user.resolver';
 import { ViewerResolver } from './users/services/viewer.resolver';
 import { UserComponent } from './users/user/user.component';
@@ -92,32 +89,6 @@ const routes: Routes = [
                             component: UserComponent,
                             resolve: {
                                 user: UserResolver,
-                            },
-                        },
-                    ],
-                },
-                {
-                    path: 'user-tag', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                    component: UserTagsComponent,
-                    data: {
-                        title: 'Tags d\'utilisateurs',
-                    },
-                },
-                {
-                    path: 'user-tag',
-                    children: [
-                        {
-                            path: 'new',
-                            component: UserTagComponent,
-                            resolve: {
-                                userTag: UserTagResolver,
-                            },
-                        },
-                        {
-                            path: ':userTagId', // last
-                            component: UserTagComponent,
-                            resolve: {
-                                userTag: UserTagResolver,
                             },
                         },
                     ],

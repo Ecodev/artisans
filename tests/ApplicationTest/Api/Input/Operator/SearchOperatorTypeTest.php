@@ -44,19 +44,19 @@ class SearchOperatorTypeTest extends AbstractOperatorType
                 User::class,
                 'john',
                 0,
-                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1 OR a.code LIKE :filter1)',
+                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1)',
             ],
             'split words' => [
                 User::class,
                 'john doe',
                 0,
-                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1 OR a.code LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2 OR a.code LIKE :filter2)',
+                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2)',
             ],
             'trimmed split words' => [
                 User::class,
                 '  foo   bar   ',
                 0,
-                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1 OR a.code LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2 OR a.code LIKE :filter2)',
+                '(a.firstName LIKE :filter1 OR a.lastName LIKE :filter1 OR a.email LIKE :filter1 OR a.locality LIKE :filter1) AND (a.firstName LIKE :filter2 OR a.lastName LIKE :filter2 OR a.email LIKE :filter2 OR a.locality LIKE :filter2)',
             ],
         ];
     }

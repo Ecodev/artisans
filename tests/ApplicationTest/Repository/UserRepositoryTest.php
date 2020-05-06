@@ -66,10 +66,4 @@ class UserRepositoryTest extends AbstractRepositoryTest
         $actual = $this->repository->getAllAdministratorsToNotify();
         self::assertCount(1, $actual);
     }
-
-    public function testGetNextCode(): void
-    {
-        $next = $this->repository->getNextCodeAvailable();
-        self::assertSame(5, $next);
-    }
 }

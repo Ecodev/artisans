@@ -6,7 +6,6 @@ namespace Application\Api;
 
 use Application\Api\Field\Query\BankingInfos;
 use Application\Api\Field\Query\Configuration;
-use Application\Api\Field\Query\NextUserCode;
 use Application\Api\Field\Query\Permissions;
 use Application\Api\Field\Query\Purchases;
 use Application\Api\Field\Query\UserByToken;
@@ -39,7 +38,6 @@ class QueryType extends ObjectType
             Permissions::build(),
             Purchases::build(),
             BankingInfos::build(),
-            NextUserCode::build(),
             Configuration::build(),
         ];
 

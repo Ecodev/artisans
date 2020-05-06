@@ -33,7 +33,6 @@
 
                 <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
                     <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="code">Code</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
                     <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
                     <span naturalColumnsPickerColumn="membershipBegin">Date début</span>
@@ -60,11 +59,6 @@
                             ></natural-table-button>
                         </div>
                     </td>
-                </ng-container>
-
-                <ng-container matColumnDef="code">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="code">Code</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.code}}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="creationDate">

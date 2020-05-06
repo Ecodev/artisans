@@ -19,14 +19,11 @@ export const userFieldsFragment = gql`
             code
         }
         role
-        code
         subscriptionType
         membershipBegin
         membershipEnd
-        url
         firstLogin
         lastLogin
-        internalRemarks
         owner {
             id
             name
@@ -49,7 +46,6 @@ export const usersQuery = gql`
             items {
                 id
                 email
-                code
                 name
                 updateDate
                 creationDate
@@ -148,12 +144,6 @@ export const currentUserForProfileQuery = gql`
     }
     ${userFieldsFragment}
     ${userMetaFragment}
-`;
-
-export const nextCodeAvailableQuery = gql`
-    query NextUserCode {
-        nextUserCode
-    }
 `;
 
 export const unregisterMutation = gql`

@@ -18,7 +18,6 @@ import {
     Login,
     LoginVariables,
     Logout,
-    NextUserCode,
     RequestMembershipEnd,
     RequestPasswordReset,
     RequestPasswordResetVariables,
@@ -42,7 +41,6 @@ import {
     currentUserForProfileQuery,
     loginMutation,
     logoutMutation,
-    nextCodeAvailableQuery,
     unregisterMutation,
     updateUser,
     userByTokenQuery,
@@ -204,14 +202,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
         return this.viewer.asObservable();
     }
 
-    public getNextCodeAvailable(): Observable<number> {
-        return this.apollo.query<NextUserCode>({
-            query: nextCodeAvailableQuery,
-        }).pipe(map(result => {
-            return result.data.nextUserCode;
-        }));
-    }
-
     /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
@@ -280,9 +270,6 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             locality: '',
             role: UserRole.member,
             phone: '',
-            code: null,
-            url: '',
-            internalRemarks: '',
             owner: null,
             country: null,
         };

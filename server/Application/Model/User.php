@@ -8,10 +8,7 @@ use Application\Api\Exception;
 use Application\ORM\Query\Filter\AclFilter;
 use Application\Repository\LogRepository;
 use Application\Traits\HasAddress;
-use Application\Traits\HasInternalRemarks;
-use Application\Traits\HasNumericCode;
 use Application\Traits\HasSubscriptionLastReview;
-use Application\Traits\HasUrl;
 use Application\Utility;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -35,10 +32,7 @@ class User extends AbstractModel
     const ROLE_FACILITATOR = 'facilitator';
     const ROLE_ADMINISTRATOR = 'administrator';
 
-    use HasInternalRemarks;
     use HasAddress;
-    use HasNumericCode;
-    use HasUrl;
     use HasSubscriptionLastReview;
 
     /**

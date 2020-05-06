@@ -92,27 +92,6 @@
                     </ng-template>
                 </natural-relations>
 
-                <mat-divider *ngIf="data.model.id"></mat-divider>
-
-                <div *ngIf="data.model.id" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-
-                    <div fxFlex="33" fxLayout="column">
-
-                        <h2 class="mat-h2">Commentaires</h2>
-
-                        <mat-form-field>
-                            <mat-label>Remarques internes</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="3"
-                                      formControlName="internalRemarks"
-                                      matInput
-                                      matTextareaAutosize
-                            ></textarea>
-                        </mat-form-field>
-
-                    </div>
-                </div>
-
                 <mat-divider></mat-divider>
 
                 <div fxLayout="column" fxLayoutGap="15px">

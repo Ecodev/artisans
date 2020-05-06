@@ -162,19 +162,4 @@ class UserTest extends TestCase
 
         self::assertCount(5, array_unique($allTokens), 'all tokens must be unique');
     }
-
-    public function testCode(): void
-    {
-        $user = new User();
-        self::assertNull($user->getCode());
-
-        $user->setCode(3);
-        self::assertSame(3, $user->getCode());
-
-        $user->setCode(null);
-        self::assertNull($user->getCode());
-
-        $user->setCode(5);
-        self::assertSame(5, $user->getCode());
-    }
 }

@@ -27,8 +27,6 @@ export class UserComponent
 
     public UserService = UserService;
 
-    public nextCodeAvailable: number;
-
     constructor(private userService: UserService,
                 injector: Injector,
                 public sessionService: SessionService,
@@ -46,11 +44,6 @@ export class UserComponent
                 control.disable();
             }
         })
-
-        this.userService.getNextCodeAvailable().subscribe(code => {
-            this.nextCodeAvailable = code;
-        });
-
     }
 
 }

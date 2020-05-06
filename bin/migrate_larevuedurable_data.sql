@@ -18,7 +18,7 @@
 
 START TRANSACTION;
 
-INSERT INTO user (id, creation_date, update_date, first_name, last_name, password, email, role, internal_remarks)
+INSERT INTO user (id, creation_date, update_date, first_name, last_name, password, email, role)
 SELECT id_customer,
     date_add,
     date_upd,
@@ -26,8 +26,7 @@ SELECT id_customer,
     CONCAT(UCASE(LEFT(lastname, 1)), SUBSTRING(lastname, 2)),
     passwd,
     email,
-    'member',
-    CONCAT('Cresus ID selon PrestaShop: ', cresus_id)
+    'member'
 FROM ps_customer
 WHERE deleted = 0;
 
@@ -219,7 +218,7 @@ SET role = 'administrator'
 WHERE email IN (SELECT email FROM ps_employee);
 
 -- Insert new employee as users
-INSERT INTO user (first_name, last_name, password, email, role, internal_remarks)
+INSERT INTO user (first_name, last_name, password, email, role)
 SELECT lastname,
     firstname,
     passwd,
@@ -238,8 +237,7 @@ SELECT lastname,
             THEN 'facilitator'
         ELSE -- Assume everything else is member (it should not happen)
             'member'
-        END,
-    ''
+        END
 FROM ps_employee
 WHERE email NOT IN (SELECT email FROM user);
 

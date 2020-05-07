@@ -107,12 +107,6 @@ class User extends AbstractModel
     private $membership = MembershipType::NONE;
 
     /**
-     * @var null|Chronos
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $subscriptionBegin;
-
-    /**
      * @var null|string
      * @ORM\Column(type="ProductType", nullable=true)
      */
@@ -490,24 +484,6 @@ class User extends AbstractModel
     {
         $this->setCreationDate(Utility::getNow());
         $this->setCreator(self::getCurrent());
-    }
-
-    /**
-     * @return null|Chronos
-     */
-    public function getSubscriptionBegin(): ?Chronos
-    {
-        return $this->subscriptionBegin;
-    }
-
-    /**
-     * @API\Exclude
-     *
-     * @param null|Chronos $subscriptionBegin
-     */
-    public function setSubscriptionBegin(?Chronos $subscriptionBegin): void
-    {
-        $this->subscriptionBegin = $subscriptionBegin;
     }
 
     /**

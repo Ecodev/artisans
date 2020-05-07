@@ -12,6 +12,6 @@ class Version20200506162321 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE product ADD sorting SMALLINT DEFAULT NULL');
+        $this->addSql('ALTER TABLE product ADD sorting SMALLINT DEFAULT 0 NOT NULL');
     }
 }

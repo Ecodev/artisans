@@ -89,9 +89,9 @@ class Product extends AbstractProduct
     /**
      * @var null|int
      *
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="smallint", options={"default" = 0})
      */
-    private $sorting;
+    private $sorting = 0;
 
     /**
      * Constructor
@@ -305,17 +305,5 @@ class Product extends AbstractProduct
         }
 
         return $this->content;
-    }
-
-    /**
-     * Reading duration in minutes
-     *
-     * @API\Exclude
-     *
-     * @return null|int
-     */
-    public function getSorting(): ?int
-    {
-        return $this->sorting;
     }
 }

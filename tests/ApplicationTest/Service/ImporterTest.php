@@ -60,6 +60,13 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-subscription-type.csv');
     }
 
+    public function testFuzzyCountry(): void
+    {
+        $this->expectErrorMessage('A la ligne 1: Pays "suise" introuvable. Vouliez-vous dire "Suisse" ?');
+
+        $this->import('tests/data/importer/invalid-country.csv');
+    }
+
     public function testImport(): void
     {
         $this->assertUser([

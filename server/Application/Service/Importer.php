@@ -27,7 +27,7 @@ class Importer
 
     private array $reviewByNumber = [];
 
-    private array $countryByCode = [];
+    private array $countryByName = [];
 
     private Connection $connection;
 
@@ -102,11 +102,11 @@ class Importer
 
     private function fetchCountries(): void
     {
-        $records = $this->connection->fetchAll('SELECT id, code FROM country');
+        $records = $this->connection->fetchAll('SELECT id, name, UPPER(name) AS upper FROM country');
 
-        $this->countryByCode = [];
+        $this->countryByName = [];
         foreach ($records as $r) {
-            $this->countryByCode[$r['code']] = $r['id'];
+            $this->countryByName[$r['upper']] = $r;
         }
     }
 
@@ -243,11 +243,24 @@ class Importer
             return null;
         }
 
-        if (!array_key_exists($country, $this->countryByCode)) {
-            $this->throw('Pays introuvable pour code: ' . $country);
+        // Case insensitive match
+        $upper = trim(mb_strtoupper($country));
+        if (array_key_exists($upper, $this->countryByName)) {
+            return $this->countryByName[$upper]['id'];
         }
 
-        return $this->countryByCode[$country];
+        // Suggest our best guess, so user can fix their data without lookup up countries manually
+        $best = 0;
+        $bestGuess = 0;
+        foreach ($this->countryByName as $r) {
+            similar_text($upper, $r['upper'], $percent);
+            if ($percent > $best) {
+                $best = $percent;
+                $bestGuess = $r;
+            }
+        }
+
+        $this->throw('Pays "' . $country . '" introuvable. Vouliez-vous dire "' . $bestGuess['name'] . '" ?');
     }
 
     private function throw(string $message): void

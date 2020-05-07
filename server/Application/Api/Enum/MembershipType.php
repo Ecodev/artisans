@@ -9,9 +9,9 @@ class MembershipType extends AbstractEnumType
     public function __construct()
     {
         $config = [
-            \Application\DBAL\Types\MembershipType::NONE => 'Non',
-            \Application\DBAL\Types\MembershipType::DUE => 'Doit être payé',
-            \Application\DBAL\Types\MembershipType::PAYED => 'Payé',
+            \Application\DBAL\Types\MembershipType::NONE => 'Non membre',
+            \Application\DBAL\Types\MembershipType::DUE => 'Membre (côtisation dûe)',
+            \Application\DBAL\Types\MembershipType::PAYED => 'Membre (côtisation payée)',
         ];
 
         parent::__construct($config);

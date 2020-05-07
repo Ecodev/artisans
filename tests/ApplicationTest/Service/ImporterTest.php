@@ -134,7 +134,7 @@ class ImporterTest extends TestCase
         ]);
 
         $this->assertUser([
-            'email' => 'new.with.everything@example.com',
+            'email' => 'théo@example.com',
             'subscription_type' => 'paper',
             'subscription_last_review_id' => '3000',
             'membership' => 'due',

@@ -9,6 +9,7 @@ use Application\DBAL\Types\MembershipType;
 use Application\DBAL\Types\ProductTypeType;
 use Application\Model\User;
 use Doctrine\DBAL\Connection;
+use Laminas\Validator\EmailAddress;
 use Throwable;
 
 /**
@@ -195,7 +196,8 @@ class Importer
 
     private function assertEmail(string $email): void
     {
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $validator = new EmailAddress();
+        if (!$validator->isValid($email)) {
             $this->throw("Ce n'est pas une addresse email valide: " . $email);
         }
 

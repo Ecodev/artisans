@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Application\Api\Enum;
 
-class PaymentMethodType extends AbstractEnumType
+use Ecodev\Felix\Api\Enum\EnumType;
+
+class PaymentMethodType extends EnumType
 {
     public function __construct()
     {

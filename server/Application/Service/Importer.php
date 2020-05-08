@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
-use Application\Api\Exception;
 use Application\DBAL\Types\MembershipType;
 use Application\DBAL\Types\ProductTypeType;
 use Application\Model\User;
 use Doctrine\DBAL\Connection;
+use Ecodev\Felix\Api\Exception;
 use Laminas\Validator\EmailAddress;
 use Throwable;
 

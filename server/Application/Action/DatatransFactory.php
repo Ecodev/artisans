@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Application\Action;
 
-use Application\Service\Mailer;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
+use Ecodev\Felix\Service\Mailer;
 use Interop\Container\ContainerInterface;
 use Mezzio\Template\TemplateRendererInterface;
 

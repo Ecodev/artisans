@@ -12,13 +12,13 @@ use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\Subscription;
 use Application\Service\Invoicer;
-use ApplicationTest\Traits\TestWithTransaction;
+use ApplicationTest\Traits\TestWithTransactionAndUser;
 use Money\Money;
 use PHPUnit\Framework\TestCase;
 
 class InvoicerTest extends TestCase
 {
-    use TestWithTransaction;
+    use TestWithTransactionAndUser;
 
     /**
      * @dataProvider providerCreateOrder

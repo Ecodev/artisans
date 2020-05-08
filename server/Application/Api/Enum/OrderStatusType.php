@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Application\Api\Enum;
 
 use Application\Model\Order;
+use Ecodev\Felix\Api\Enum\EnumType;
 
-class OrderStatusType extends AbstractEnumType
+class OrderStatusType extends EnumType
 {
     public function __construct()
     {

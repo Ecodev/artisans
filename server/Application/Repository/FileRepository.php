@@ -7,8 +7,9 @@ namespace Application\Repository;
 use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Order;
 use Application\Model\User;
+use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
-class FileRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
+class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
@@ -24,7 +25,7 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
      *
      * @return string
      */
-    public function getAccessibleSubQuery(?User $user): string
+    public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
         if ($user && in_array($user->getRole(), [User::ROLE_FACILITATOR, User::ROLE_ADMINISTRATOR], true)) {
             return $this->getAllIdsQuery();

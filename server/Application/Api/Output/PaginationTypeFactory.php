@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Application\Api\Output;
 
-use Application\Model\AbstractModel;
-use Interop\Container\ContainerInterface;
-use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
+use Application\Model\Order;
+use Application\Model\OrderLine;
+use Application\Model\Product;
+use GraphQL\Type\Definition\Type;
 
 /**
  * Create a Pagination type for the entity extracted from name.
@@ -14,31 +15,45 @@ use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
  * For example, if given "ActionPagination", it will create a Pagination
  * type for the Action entity.
  */
-class PaginationTypeFactory implements AbstractFactoryInterface
+class PaginationTypeFactory extends \Ecodev\Felix\Api\Output\PaginationTypeFactory
 {
-    private const PATTERN = '~^(.*)Pagination$~';
-
-    public function canCreate(ContainerInterface $container, $requestedName): bool
+    protected function getExtraFields(string $class): array
     {
-        $class = $this->getClass($requestedName);
-
-        return $class && is_a($class, AbstractModel::class, true);
-    }
-
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): PaginationType
-    {
-        $class = $this->getClass($requestedName);
-        $type = new PaginationType($class, $requestedName);
-
-        return $type;
-    }
-
-    private function getClass(string $requestedName): ?string
-    {
-        if (preg_match(self::PATTERN, $requestedName, $m)) {
-            return 'Application\Model\\' . $m[1];
+        $fields = [];
+        // Add specific total fields if needed
+        if ($class === Product::class) {
+            $fields['totalPricePerUnitCHF'] = [
+                'type' => _types()->get('CHF'),
+                'description' => 'The total price per unit in CHF',
+            ];
+            $fields['totalPricePerUnitEUR'] = [
+                'type' => _types()->get('EUR'),
+                'description' => 'The total price per unit in EUR',
+            ];
+        } elseif ($class === OrderLine::class) {
+            $fields['totalBalanceCHF'] = [
+                'type' => _types()->get('CHF'),
+                'description' => 'The total balance',
+            ];
+            $fields['totalBalanceEUR'] = [
+                'type' => _types()->get('EUR'),
+                'description' => 'The total balance',
+            ];
+            $fields['totalQuantity'] = [
+                'type' => Type::string(),
+                'description' => 'The total quantity',
+            ];
+        } elseif ($class === Order::class) {
+            $fields['totalBalanceCHF'] = [
+                'type' => _types()->get('CHF'),
+                'description' => 'The total balance',
+            ];
+            $fields['totalBalanceEUR'] = [
+                'type' => _types()->get('EUR'),
+                'description' => 'The total balance',
+            ];
         }
 
-        return null;
+        return $fields;
     }
 }

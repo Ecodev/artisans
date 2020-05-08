@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\Service\Importer;
-use ApplicationTest\Traits\TestWithTransaction;
+use ApplicationTest\Traits\TestWithTransactionAndUser;
 use PHPUnit\Framework\TestCase;
 
 class ImporterTest extends TestCase
 {
-    use TestWithTransaction;
+    use TestWithTransactionAndUser;
 
     public function testInvalidEmail(): void
     {

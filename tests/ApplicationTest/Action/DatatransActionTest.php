@@ -7,9 +7,9 @@ namespace ApplicationTest\Action;
 use Application\Action\DatatransAction;
 use Application\Model\Message;
 use Application\Model\Order;
-use Application\Service\Mailer;
 use Application\Service\MessageQueuer;
-use ApplicationTest\Traits\TestWithTransaction;
+use ApplicationTest\Traits\TestWithTransactionAndUser;
+use Ecodev\Felix\Service\Mailer;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
@@ -17,7 +17,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class DatatransActionTest extends TestCase
 {
-    use TestWithTransaction;
+    use TestWithTransactionAndUser;
 
     /**
      * @dataProvider providerProcess

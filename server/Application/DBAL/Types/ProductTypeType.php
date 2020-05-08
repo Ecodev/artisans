@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-class ProductTypeType extends AbstractEnumType
+use Ecodev\Felix\DBAL\Types\EnumType;
+
+class ProductTypeType extends EnumType
 {
     const OTHER = 'other';
     const PAPER = 'paper';

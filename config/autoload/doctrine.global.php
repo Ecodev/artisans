@@ -42,7 +42,7 @@ return [
                 'proxy_dir' => 'data/cache/DoctrineORMModule/Proxy',
                 'generate_proxies' => false,
                 'filters' => [
-                    \Application\ORM\Query\Filter\AclFilter::class => \Application\ORM\Query\Filter\AclFilter::class,
+                    \Ecodev\Felix\ORM\Query\Filter\AclFilter::class => \Ecodev\Felix\ORM\Query\Filter\AclFilter::class,
                 ],
                 'datetime_functions' => [],
                 'string_functions' => [
@@ -56,10 +56,10 @@ return [
         ],
         'types' => [
             'UserRole' => Application\DBAL\Types\UserRoleType::class,
-            'datetime' => Application\DBAL\Types\ChronosType::class,
-            'date' => Application\DBAL\Types\DateType::class,
-            'CHF' => Application\DBAL\Types\CHFType::class,
-            'EUR' => Application\DBAL\Types\EURType::class,
+            'datetime' => Ecodev\Felix\DBAL\Types\ChronosType::class,
+            'date' => Ecodev\Felix\DBAL\Types\DateType::class,
+            'CHF' => Ecodev\Felix\DBAL\Types\CHFType::class,
+            'EUR' => Ecodev\Felix\DBAL\Types\EURType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
             'ProductType' => Application\DBAL\Types\ProductTypeType::class,
             'OrderStatus' => Application\DBAL\Types\OrderStatusType::class,

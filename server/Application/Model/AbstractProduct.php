@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Traits\HasCode;
-use Application\Traits\HasDescription;
-use Application\Traits\HasInternalRemarks;
-use Application\Traits\HasName;
 use Application\Traits\HasProductType;
+use Application\Traits\HasRichTextDescription;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Model\Traits\HasInternalRemarks;
+use Ecodev\Felix\Model\Traits\HasName;
 use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
@@ -21,7 +21,7 @@ use Money\Money;
 abstract class AbstractProduct extends AbstractModel
 {
     use HasName;
-    use HasDescription;
+    use HasRichTextDescription;
     use HasCode;
     use HasInternalRemarks;
     use HasProductType;

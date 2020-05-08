@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Mutation;
 
-use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
 use Application\DBAL\Types\PaymentMethodType;
 use Application\Model\Order;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Application\Service\Invoicer;
-use Application\Service\Mailer;
 use Application\Service\MessageQueuer;
-use Application\Utility;
+use Ecodev\Felix\Api\Field\FieldInterface;
+use Ecodev\Felix\Service\Mailer;
+use Ecodev\Felix\Utility;
 use GraphQL\Type\Definition\Type;
 use Mezzio\Session\SessionInterface;
 

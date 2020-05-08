@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\Traits\HasDescription;
+use Application\Traits\HasRichTextDescription;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment extends AbstractModel
 {
-    use HasDescription;
+    use HasRichTextDescription;
 
     /**
      * @var null|Event

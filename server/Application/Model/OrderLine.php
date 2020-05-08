@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Traits\HasBalance;
-use Application\Traits\HasName;
 use Application\Traits\HasProductType;
 use Application\Traits\HasQuantity;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Model\Traits\HasName;
 use GraphQL\Doctrine\Annotation as API;
 
 /**

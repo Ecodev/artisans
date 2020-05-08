@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-class PaymentMethodType extends AbstractEnumType
+use Ecodev\Felix\DBAL\Types\EnumType;
+
+class PaymentMethodType extends EnumType
 {
     const DATATRANS = 'datatrans';
     const EBANKING = 'ebanking';

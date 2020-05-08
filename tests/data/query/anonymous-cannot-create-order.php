@@ -9,7 +9,7 @@ return [
     [
         'errors' => [
             [
-                'message' => 'Non-logged user with role anonymous is not allowed on resource "Order#" with privilege "create"',
+                'message' => 'Non-logged user with role anonymous is not allowed on resource "Order#null" with privilege "create"',
                 'extensions' => [
                     'category' => 'Permissions',
                 ],

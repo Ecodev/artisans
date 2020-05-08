@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Application\Api\Field;
 
 use Application\Api\Helper;
-use Application\Api\Input\PaginationInputType;
 use Application\Model\AbstractModel;
 use Application\Model\Order;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Ecodev\Felix\Api\Input\PaginationInputType;
 use GraphQL\Type\Definition\Type;
 use Money\Money;
 use ReflectionClass;
@@ -285,7 +285,7 @@ abstract class Standard
             ],
         ];
 
-        $listArgs[] = PaginationInputType::build();
+        $listArgs[] = PaginationInputType::build(_types());
 
         return $listArgs;
     }

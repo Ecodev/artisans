@@ -6,6 +6,7 @@ namespace Application\Action;
 
 use Application\Model\File;
 use Doctrine\ORM\EntityManager;
+use Ecodev\Felix\Action\FileAction;
 use Interop\Container\ContainerInterface;
 
 class FileFactory

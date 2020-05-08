@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Traits\HasDate;
-use Application\Traits\HasDescription;
-use Application\Traits\HasName;
+use Application\Traits\HasRichTextDescription;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Model\Traits\HasName;
 
 /**
  * A news
@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
 class News extends AbstractModel
 {
     use HasName;
-    use HasDescription;
+    use HasRichTextDescription;
     use HasDate;
 
     /**

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
-use Application\Api\Exception;
 use Application\DBAL\Types\ProductTypeType;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
@@ -14,6 +13,7 @@ use Application\Model\Subscription;
 use Application\Model\User;
 use Application\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
+use Ecodev\Felix\Api\Exception;
 use Money\Money;
 
 /**

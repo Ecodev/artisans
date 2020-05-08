@@ -8,7 +8,7 @@ use Application\Model\Image;
 use Application\Model\Product;
 use Application\Model\User;
 use Application\Repository\ImageRepository;
-use Application\Service\AbstractDatabase;
+use Ecodev\Felix\Service\AbstractDatabase;
 
 /**
  * @group Repository

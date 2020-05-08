@@ -6,7 +6,7 @@ namespace Application\Traits;
 
 use Application\Utility;
 
-trait HasDescription
+trait HasRichTextDescription
 {
     /**
      * @var string

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Application\Api\Enum;
 
-class MembershipType extends AbstractEnumType
+use Ecodev\Felix\Api\Enum\EnumType;
+
+class MembershipType extends EnumType
 {
     public function __construct()
     {

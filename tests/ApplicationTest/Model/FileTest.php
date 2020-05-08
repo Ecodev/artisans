@@ -10,20 +10,9 @@ use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
 {
-    public function tearDown(): void
+    public function setUp(): void
     {
         User::setCurrent(null);
-    }
-
-    public function testGetPath(): void
-    {
-        $file = new File();
-        $file->setFilename('invoice.pdf');
-
-        self::assertSame('invoice.pdf', $file->getFilename());
-        $appPath = realpath('.');
-        $expected = $appPath . '/data/file/invoice.pdf';
-        self::assertSame($expected, $file->getPath());
     }
 
     public function testGetPermissions(): void

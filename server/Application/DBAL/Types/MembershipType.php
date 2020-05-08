@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-class MembershipType extends AbstractEnumType
+use Ecodev\Felix\DBAL\Types\EnumType;
+
+class MembershipType extends EnumType
 {
     const NONE = 'none';
     const DUE = 'due';

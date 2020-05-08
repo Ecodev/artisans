@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Application\Repository;
 
 use Application\Model\User;
+use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
-class OrderRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
+class OrderRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
@@ -15,7 +16,7 @@ class OrderRepository extends AbstractRepository implements LimitedAccessSubQuer
      *
      * @return string
      */
-    public function getAccessibleSubQuery(?User $user): string
+    public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
         if (!$user) {
             return '-1';

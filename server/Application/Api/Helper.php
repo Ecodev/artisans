@@ -11,6 +11,7 @@ use Application\Model\OrderLine;
 use Application\Model\Product;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Ecodev\Felix\Api\Exception;
 use GraphQL\Doctrine\Definition\EntityID;
 
 abstract class Helper

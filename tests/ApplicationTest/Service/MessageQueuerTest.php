@@ -15,6 +15,7 @@ use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
+use Ecodev\Felix\Service\MessageRenderer;
 use Laminas\View\Renderer\RendererInterface;
 use Money\Money;
 
@@ -25,12 +26,12 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         global $container;
 
         $entityManager = $container->get(EntityManager::class);
-        $renderer = $container->get(RendererInterface::class);
+        $viewRenderer = $container->get(RendererInterface::class);
+        $messageRenderer = new MessageRenderer($viewRenderer, 'artisans.lan');
 
         $messageQueuer = new MessageQueuer(
             $entityManager,
-            $renderer,
-            'artisans.lan'
+            $messageRenderer,
         );
 
         return $messageQueuer;

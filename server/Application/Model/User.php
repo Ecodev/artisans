@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\Api\Exception;
 use Application\DBAL\Types\MembershipType;
-use Application\ORM\Query\Filter\AclFilter;
 use Application\Repository\LogRepository;
+use Application\Repository\UserRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasSubscriptionLastReview;
-use Application\Utility;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Api\Exception;
+use Ecodev\Felix\Model\CurrentUser;
+use Ecodev\Felix\Model\Traits\HasPassword;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
@@ -26,7 +27,7 @@ use GraphQL\Doctrine\Annotation as API;
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
  */
-class User extends AbstractModel
+class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Felix\Model\HasPassword
 {
     const ROLE_ANONYMOUS = 'anonymous';
     const ROLE_MEMBER = 'member';
@@ -35,6 +36,7 @@ class User extends AbstractModel
 
     use HasAddress;
     use HasSubscriptionLastReview;
+    use HasPassword;
 
     /**
      * @var User
@@ -52,9 +54,12 @@ class User extends AbstractModel
         self::$currentUser = $user;
 
         // Initalize ACL filter with current user if a logged in one exists
-        /** @var AclFilter $aclFilter */
-        $aclFilter = _em()->getFilters()->getFilter(AclFilter::class);
+        /** @var UserRepository $userRepository */
+        $userRepository = _em()->getRepository(self::class);
+        $aclFilter = $userRepository->getAclFilter();
         $aclFilter->setUser($user);
+
+        CurrentUser::set($user);
     }
 
     /**
@@ -78,15 +83,6 @@ class User extends AbstractModel
      * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
     private $lastName = '';
-
-    /**
-     * @var string
-     *
-     * @API\Exclude
-     *
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password = '';
 
     /**
      * @var string
@@ -125,19 +121,6 @@ class User extends AbstractModel
     private $webTemporaryAccess = false;
 
     /**
-     * @var null|string
-     * @ORM\Column(type="string", length=32, nullable=true, unique=true)
-     */
-    private $token;
-
-    /**
-     * @var null|Chronos
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $tokenCreationDate;
-
-    /**
      * @var Collection
      * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
@@ -159,36 +142,6 @@ class User extends AbstractModel
         $this->role = $role;
         $this->sessions = new ArrayCollection();
         $this->users = new ArrayCollection();
-    }
-
-    /**
-     * Hash and change the user password
-     *
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        // Ignore empty password that could be sent "by mistake" by the client
-        // when agreeing to terms
-        if ($password === '') {
-            return;
-        }
-
-        $this->revokeToken();
-
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
-    }
-
-    /**
-     * Returns the hashed password
-     *
-     * @API\Exclude
-     *
-     * @return string
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
     }
 
     /**
@@ -263,6 +216,18 @@ class User extends AbstractModel
     public function getEmail(): ?string
     {
         return $this->email;
+    }
+
+    /**
+     * Use email as technical identifier of user
+     *
+     * @API\Exclude
+     *
+     * @return null|string
+     */
+    public function getLogin(): ?string
+    {
+        return $this->getEmail();
     }
 
     /**
@@ -436,44 +401,6 @@ class User extends AbstractModel
     }
 
     /**
-     * Generate a new random token to reset password
-     */
-    public function createToken(): string
-    {
-        $this->token = bin2hex(random_bytes(16));
-        $this->tokenCreationDate = new Chronos();
-
-        return $this->token;
-    }
-
-    /**
-     * Destroy existing token
-     */
-    public function revokeToken(): void
-    {
-        $this->token = null;
-        $this->tokenCreationDate = null;
-    }
-
-    /**
-     * Check if token is valid.
-     *
-     * @API\Exclude
-     *
-     * @return bool
-     */
-    public function isTokenValid(): bool
-    {
-        if (!$this->tokenCreationDate) {
-            return false;
-        }
-
-        $timeLimit = $this->tokenCreationDate->addMinutes(30);
-
-        return $timeLimit->isFuture();
-    }
-
-    /**
      * Override parent to prevents users created from administration to be family of the administrator
      *
      * The owner must be explicitly set for all users.
@@ -482,7 +409,7 @@ class User extends AbstractModel
      */
     public function timestampCreation(): void
     {
-        $this->setCreationDate(Utility::getNow());
+        $this->setCreationDate(new Chronos());
         $this->setCreator(self::getCurrent());
     }
 

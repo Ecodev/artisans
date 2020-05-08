@@ -9,8 +9,9 @@ use Application\Model\Product;
 use Application\Model\User;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
-class OrderLineRepository extends AbstractRepository implements LimitedAccessSubQueryInterface
+class OrderLineRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
@@ -19,7 +20,7 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
      *
      * @return string
      */
-    public function getAccessibleSubQuery(?User $user): string
+    public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
         if (!$user) {
             return '-1';

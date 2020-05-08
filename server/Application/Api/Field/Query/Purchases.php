@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Query;
 
-use Application\Api\Field\FieldInterface;
 use Application\Api\Helper;
-use Application\Api\Input\PaginationInputType;
 use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Repository\OrderLineRepository;
+use Ecodev\Felix\Api\Field\FieldInterface;
+use Ecodev\Felix\Api\Input\PaginationInputType;
 use GraphQL\Type\Definition\Type;
 
 abstract class Purchases implements FieldInterface
@@ -44,7 +44,7 @@ abstract class Purchases implements FieldInterface
                             ],
                         ],
                     ],
-                    PaginationInputType::build(),
+                    PaginationInputType::build(_types()),
                 ],
                 'resolve' => function ($root, array $args): array {
                     /** @var OrderLineRepository $orderLineRepository */

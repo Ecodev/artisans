@@ -49,18 +49,20 @@
                     </button>
                 </div>
             </div>
-            <mat-divider></mat-divider>
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
-                <div *ngFor="let event of events" class="event">
-                    <a class="mat-h2" [routerLink]="['/agenda', event.id]" matRipple>{{ event.name }}</a>
-                    <div class="mat-h3">
-                        <span class="text-light">{{ event.date | date : 'EEE dd.MM.yy' | capitalize }}</span>
-                        <span class="description">- {{ event.place }} - {{ event.type }}</span>
+                <ng-container *ngFor="let event of events">
+                    <mat-divider></mat-divider>
+                    <div class="event">
+                        <a class="mat-h2 no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple>{{ event.name }}</a>
+                        <div class="mat-h3 no-margin-bottom">
+                            <span class="text-light">{{ event.date | date : 'EEE dd.MM.yy' | capitalize }}</span>
+                            <span class="description">- {{ event.place }} - {{ event.type }}</span>
+                        </div>
                     </div>
-                </div>
+                </ng-container>
             </div>
             <div>
-                <a color="primary" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
+                <a color="accent" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
             </div>
         </div>
     </div>

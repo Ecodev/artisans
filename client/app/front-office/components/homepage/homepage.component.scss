@@ -10,7 +10,10 @@
     }
 
     .splash-image, .la-revue-splash {
-        background: lighten($app-orange, 20%);
+        background-color: lighten($app-orange, 20%);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 
     .splash-image {
@@ -153,7 +156,9 @@
         .support-image {
             width: 100%;
             padding-top: 80%;
-            background: lighten($app-orange, 20%);
+            background-color: lighten($app-orange, 20%);
+            background-position: center;
+            background-size: cover;
         }
 
         .support-column-body {

@@ -1,4 +1,4 @@
-<div class="splash-image"></div>
+<div class="splash-image" [style.backgroundImage]="'url(assets/images/homepage/jeromine-derigny-coll-argos-larevuedurable-054.jpg)'"></div>
 
 <div class="introduction-blocs">
 
@@ -16,7 +16,7 @@
     <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
 
         <!-- News -->
-        <div class="newses" fxFlex.gt-sm="66">
+        <div class="newses" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px">
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>ACTUALITÉS</div>
                 <div class="relative">
@@ -26,20 +26,21 @@
                 </div>
             </div>
             <mat-divider></mat-divider>
-            <div class="newses-list" fxLayout="column" fxLayoutGap="30px">
-                <div></div>
+            <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
                 <div *ngFor="let news of newses" class="news">
                     <div class="mat-body-strong text-light">{{ news.date | date : 'EEE dd.MM.yy' | capitalize }}</div>
                     <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
-                    <div [innerHTML]="news.description" class="mat-h3"></div>
+                    <div [innerHTML]="news.description" class="mat-h3 description"></div>
                 </div>
             </div>
 
-            <a color="primary" mat-flat-button routerLink="/actualite">Voir toutes nos actualités</a>
+            <div>
+                <a color="primary" mat-flat-button routerLink="/actualite">Voir toutes nos actualités</a>
+            </div>
         </div>
 
         <!-- Events -->
-        <div class="events" fxFlex.gt-sm="33">
+        <div class="events" fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="30px">
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>AGENDA</div>
                 <div class="relative">
@@ -49,25 +50,26 @@
                 </div>
             </div>
             <mat-divider></mat-divider>
-            <div class="newses-list" fxLayout="column" fxLayoutGap="30px">
-                <div></div>
+            <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
                 <div *ngFor="let event of events" class="event">
                     <a class="mat-h2" [routerLink]="['/agenda', event.id]" matRipple>{{ event.name }}</a>
                     <div class="mat-h3">
                         <span class="text-light">{{ event.date | date : 'EEE dd.MM.yy' | capitalize }}</span>
-                        - {{ event.place }} - {{ event.type }}</div>
+                        <span class="description">- {{ event.place }} - {{ event.type }}</span>
+                    </div>
                 </div>
             </div>
-            <a color="primary" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
-
+            <div>
+                <a color="primary" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="la-revue-splash">
+<div class="la-revue-splash" [style.backgroundImage]="'url(assets/images/homepage/artisans-de-la-transition-thomas_victor_greenpeace.jpg)'">
     <div class="container">
-        <img alt="logo" class="section-logo" src="assets/LaRevueDurable-90noir.svg" />
-        <!-- img alt="logo" src="assets/LaRevueDurable-blanc.svg" [style.width.perc]="50" class="section-logo" />-->
+        <!--        <img alt="logo la revue durable" class="section-logo" src="assets/LaRevueDurable-90noir.svg" [style.width.perc]="50" />-->
+        <img alt="logo la revue durable" class="section-logo" src="assets/LaRevueDurable-blanc.svg" [style.width.perc]="50" />
     </div>
 </div>
 
@@ -126,7 +128,7 @@
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start stretch" fxLayoutGap="30px" fxLayoutGap.gt-sm="60px">
 
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-1">
-                <div class="support-image"></div>
+                <div class="support-image" [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_s-abonner.jpg)'"></div>
                 <div class="support-column-body">
                     <div class="mat-h1">S'abonner</div>
                     <div class="support-column-content mat-h3">
@@ -141,7 +143,9 @@
             </div>
 
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-2">
-                <div class="support-image"></div>
+                <div class="support-image"
+                     [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_rejoindre-l-association.jpg)'"
+                ></div>
                 <div class="support-column-body">
                     <div class="mat-h1">Rejoindre l’association</div>
                     <div class="support-column-content mat-h3">
@@ -155,7 +159,7 @@
                 </div>
             </div>
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-3">
-                <div class="support-image"></div>
+                <div class="support-image" [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"></div>
                 <div class="support-column-body">
                     <div class="mat-h1">Rejoindre l’association</div>
                     <div class="support-column-content mat-h3">

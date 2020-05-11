@@ -15,6 +15,10 @@
                 color: lighten(mat-color($fg, text), 20%);
             }
 
+            a:hover {
+                color: mat-color($primary) !important;
+            }
+
             li:hover > a {
                 border-color: mat-color($primary) !important;
             }
@@ -23,9 +27,6 @@
                 background: mat-color($bg, card);
             }
 
-            ul a:hover {
-                color: mat-color($primary);
-            }
         }
 
     }

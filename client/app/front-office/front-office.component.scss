@@ -14,9 +14,52 @@
         margin-top: 20px;
     }
 
+    #logo-slogan {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 16px;
+
+        #logo-link {
+            width: 50%;
+            max-width: 80%;
+        }
+
+        #slogan {
+            margin: auto;
+            padding-left: 110px;
+        }
+    }
+
+
     #footer {
         background: #EBEBEB;
+    }
+
+    #footer-body {
         padding: 50px 0;
+        text-transform: uppercase;
+    }
+
+    #head-of-footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: stretch;
+        height: 550px;
+
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        & > div {
+            width: 100%;
+        }
+
+    }
+
+    #newsletter-zone {
+        padding: 30px 0 15px 0;
     }
 
     #front-office-body {
@@ -49,7 +92,7 @@
     .section-logo {
         max-width: 100%;
         width: 700px;
-        margin-bottom: 60px;
+        margin-bottom: 15px;
     }
 
     #menu-main {

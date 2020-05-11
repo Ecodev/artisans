@@ -1,9 +1,8 @@
 <div *ngIf="!editMode" class="bloc">
     <div class="mat-h1 title">{{ form.get('title').value }}</div>
-    <div class="description mat-h4">{{ form.get('description').value }}</div>
+    <div class="bloc-description mat-h4">{{ form.get('description').value }}</div>
     <a mat-flat-button routerLink="{{ form.get('buttonLink').value }}">
         {{ form.get('buttonLabel').value }}
-        <natural-icon name="chevron_right"></natural-icon>
     </a>
     <button (click)="editMode = true" *ngIf="permissionService?.crud?.configuration?.create" class="edit-button" color="none" mat-fab>
         <natural-icon name="edit"></natural-icon>

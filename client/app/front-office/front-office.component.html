@@ -42,7 +42,7 @@
 
             <div fxFlex></div>
 
-            <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg"/></a>
+            <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
 
             <div fxFlex></div>
 
@@ -73,8 +73,14 @@
 
             <!-- header : 2nd line -->
             <div id="header-middle">
-                <div class="container" fxLayout="row">
-                    <a routerLink="/"><img alt="logo" height="55" src="assets/logo-artisans-de-la-transition.svg"/></a>
+                <div class="container" id="logo-slogan">
+                    <a routerLink="/" id="logo-link">
+                        <img alt="logo" src="assets/logo-artisans-de-la-transition.svg" />
+                    </a>
+                    <div id="slogan">
+                        <div>Comprendre l’urgence écologique</div>
+                        <div>Des pistes pour y répondre</div>
+                    </div>
                 </div>
             </div>
 
@@ -108,27 +114,40 @@
         </div>
 
         <div id="footer">
-            <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px">
 
-                <div>
-                    <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-90noir.svg"/>
-
-                    <form fxLayout.gt-sm="row"
-                          fxLayout="column"
-                          fxLayoutAlign.gt-sm="start center"
-                          fxLayoutAlign="start start"
-                          fxLayoutGap.gt-sm="10px"
-                          [formGroup]="newsletterForm"
-                    >
-                        <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
-                        <mat-form-field>
-                            <mat-label>Adresse e-mail</mat-label>
-                            <input matInput formControlName="email">
-                            <mat-error *ngIf="newsletterForm.controls.email?.errors">Veuillez indiquer une addresse email valide</mat-error>
-                        </mat-form-field>
-                        <button color="primary" mat-stroked-button [disabled]="newsletterForm.disabled || newsletterForm.invalid" (click)="subscribeNewsletter()">S'inscrire</button>
-                    </form>
+            <div id="head-of-footer"
+                 [style.backgroundImage]="'url(assets/images/homepage/conversations-carbone-transition-energetique-2.jpg)'"
+            >
+                <div class="container">
+                    <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-blanc.svg" [style.width.perc]="50" />
                 </div>
+            </div>
+
+            <div id="newsletter-zone">
+
+                <form fxLayout.gt-sm="row"
+                      fxLayout="column"
+                      fxLayoutAlign.gt-sm="start center"
+                      fxLayoutAlign="start start"
+                      fxLayoutGap.gt-sm="20px"
+                      [formGroup]="newsletterForm"
+                      class="container"
+                >
+                    <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
+
+                    <mat-form-field color="accent">
+                        <mat-label>Adresse e-mail</mat-label>
+                        <input matInput formControlName="email">
+                        <mat-error *ngIf="newsletterForm.controls.email?.errors">Veuillez indiquer une addresse email valide</mat-error>
+                    </mat-form-field>
+
+                    <button mat-flat-button *ngIf="!(newsletterForm.disabled || newsletterForm.invalid)" (click)="subscribeNewsletter()"
+                    >S'inscrire
+                    </button>
+                </form>
+            </div>
+
+            <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px" id="footer-body">
 
                 <div class="mat-h3" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
 
@@ -154,11 +173,11 @@
                         </div>
                         <div>
                             Rue de Lausanne 23
-                            <br/>
+                            <br />
                             1700 Fribourg
-                            <br/>
+                            <br />
                             Suisse
-                            <br/>
+                            <br />
                             Tél: ...
                         </div>
 

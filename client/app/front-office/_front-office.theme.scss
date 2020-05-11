@@ -6,6 +6,7 @@
     $fg: map-get($theme, foreground);
 
     app-front-office {
+
         #header-top {
             background: darken(mat-color($bg, app-bar), 5%);
             color: lighten(mat-color($fg, text), 35%);
@@ -17,6 +18,10 @@
 
         #search-field .mat-form-field-underline {
             display: none;
+        }
+
+        #logo-slogan {
+            color: mat-color($accent);
         }
 
         #menu-main > ul {
@@ -42,6 +47,25 @@
 
         #mobile-menu a:hover {
             color: mat-color($primary) !important;
+        }
+
+        #newsletter-zone {
+            background: mat-color($primary, A700);
+            color: mat-color($primary, default-contrast);
+        }
+
+        #footer {
+
+            .mat-form-field, .mat-form-field * {
+                color: mat-color($primary, default-contrast) !important;
+                border-bottom-color: mat-color($primary, default-contrast) !important;
+            }
+        }
+
+        #footer-body {
+            a:hover {
+                color: mat-color($accent);
+            }
         }
     }
 }

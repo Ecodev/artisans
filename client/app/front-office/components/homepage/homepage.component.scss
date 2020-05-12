@@ -87,12 +87,6 @@
 
     }
 
-    .newses-list {
-        @include responsive($gt-sm) {
-            padding-right: 50px;
-        }
-    }
-
     .la-revue-splash {
         @include responsive($gt-sm) {
             height: 550px;

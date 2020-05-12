@@ -19,6 +19,7 @@ import {
     SortingOrder,
 } from '../../../shared/generated-types';
 import { PermissionsService } from '../../../shared/services/permissions.service';
+import { CartService } from '../../modules/cart/services/cart.service';
 
 @Component({
     selector: 'app-homepage',
@@ -53,7 +54,8 @@ export class HomepageComponent implements OnInit {
                 private eventService: EventService,
                 private productService: ProductService,
                 public permissionService: PermissionsService,
-                public productTagService: ProductTagService) {
+                public productTagService: ProductTagService,
+                public cartService: CartService) {
     }
 
     public ngOnInit(): void {

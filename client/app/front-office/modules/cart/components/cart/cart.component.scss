@@ -1,10 +1,65 @@
+@import '../../../../../../styles/responsive';
+
 :host {
 
+    .cart-buttons .mat-flat-button[color] {
+        min-width: 200px;
+    }
+
+    @include responsive($lt-md) {
+        .cart-buttons > * {
+            min-width: 300px !important;
+        }
+    }
 
     .cart-item {
+
+        display: flex;
+        flex-direction: column;
+
+        // Small
+        @include responsive($xs) {
+            align-items: flex-start;
+            margin-bottom: 30px;
+
+            & > *:not(:last-child) {
+                margin-bottom: 10px;
+            }
+        }
+
+        // Large
+        @include responsive($gt-xs) {
+            flex-direction: row;
+            align-items: center;
+
+            & > *:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+
         a.mat-button {
             text-align: left;
-            line-height: 60px;
+            white-space: normal;
+        }
+
+        .item-body {
+            flex: 1;
+        }
+
+
+        .product-image {
+            display: block;
+            width: 70px;
+            height: 70px;
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            img {
+                max-height: 70px;
+                max-width: 70px;
+            }
         }
     }
 

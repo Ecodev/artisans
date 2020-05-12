@@ -31,18 +31,16 @@ export class AddToCartComponent implements OnInit {
     @Input() type: ProductType;
 
     public inCart = false;
-    public clicked = false;
 
-    constructor() {
+    constructor(private cartService: CartService) {
     }
 
     ngOnInit() {
     }
 
     public click() {
-        CartService.globalCart.addProduct(this.product, this.type, 1);
-        this.clicked = true; // first show particle component
-        setTimeout(() => this.inCart = true); // then change it's value to cause animation
+        this.cartService.addProduct(this.product, this.type, 1);
+        setTimeout(() => this.inCart = true, 300);
     }
 
 }

@@ -1,5 +1,5 @@
+import { NaturalStorage } from '@ecodev/natural';
 import Decimal from 'decimal.js';
-import { Currency } from '../../../../shared/services/currency.service';
 import {
     Product_product,
     Products_products_items,
@@ -7,8 +7,8 @@ import {
     Subscription_subscription,
     Subscriptions_subscriptions_items,
 } from '../../../../shared/generated-types';
+import { Currency } from '../../../../shared/services/currency.service';
 import { moneyRoundUp } from '../../../../shared/utils';
-import { NaturalStorage } from '@ecodev/natural';
 
 export type CartLineProduct =
     Products_products_items
@@ -166,8 +166,13 @@ export class Cart {
         this.storage.setItem(Cart.storageKey, JSON.stringify(carts));
     }
 
-    public addProduct(product: CartLineProduct, type: ProductType, quantity: number = 1) {
+    /**
+     * Add product to cart or increase quantity of existing product
+     * Return true if the product is inserted into cart (opposed to increment from already existing in cart)
+     */
+    public addProduct(product: CartLineProduct, type: ProductType, quantity: number = 1): boolean {
 
+        let isNewItem = false;
         const line = this.getLineByProduct(product, type);
 
         if (line) {
@@ -175,6 +180,7 @@ export class Cart {
             line.totalTaxInc = Cart.getPriceTaxInc(product, line.quantity);
 
         } else {
+            isNewItem = true;
             this.productLines.push({
                 product: product,
                 type: type,
@@ -184,6 +190,8 @@ export class Cart {
         }
 
         this.update();
+
+        return isNewItem;
     }
 
     public removeProduct(product: CartLineProduct, type: ProductType, quantity: number) {

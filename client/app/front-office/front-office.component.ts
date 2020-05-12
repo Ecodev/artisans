@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NaturalAbstractController, NaturalAlertService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
 import { differenceBy } from 'lodash';
@@ -9,7 +10,6 @@ import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-type
 import { Currency, CurrencyService } from '../shared/services/currency.service';
 import { CartService } from './modules/cart/services/cart.service';
 import { MenuItem, NavigationService } from './services/navigation.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-front-office',
@@ -103,10 +103,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             link: '/contact',
         },
         {
-            display: 'Panier',
-            link: '/panier',
-        },
-        {
             display: 'Mon compte',
             link: '/mon-compte',
             children: [
@@ -123,6 +119,10 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     link: '/mon-compte/commandes',
                 },
             ],
+        },
+        {
+            display: 'Panier',
+            link: '/panier',
         },
     ];
 

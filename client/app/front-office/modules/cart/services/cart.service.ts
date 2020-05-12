@@ -1,18 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
 import { Observable } from 'rxjs';
 import { OrderService } from '../../../../admin/order/services/order.service';
+import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType } from '../../../../shared/generated-types';
 import { Currency, CurrencyService } from '../../../../shared/services/currency.service';
-import {
-    CreateOrder_createOrder,
-    OrderInput,
-    OrderLineInput,
-    PaymentMethod,
-    ProductType,
-} from '../../../../shared/generated-types';
 import { DonationComponent } from '../../../components/donation/donation.component';
-import { Cart } from '../classes/cart';
-import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
+import { Cart, CartLineProduct } from '../classes/cart';
 
 @Injectable({
     providedIn: 'root',
@@ -25,6 +21,8 @@ export class CartService {
         private orderService: OrderService,
         private dialogService: MatDialog,
         private currencyService: CurrencyService,
+        private snackbar: MatSnackBar,
+        private router: Router,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
 
@@ -102,7 +100,7 @@ export class CartService {
     /**
      * Prompts the user to manually set the donation amount
      */
-    public inputDonation(cart?: Cart) {
+    public inputDonation(notify: boolean, cart?: Cart) {
 
         this.dialogService.open(DonationComponent).afterClosed().subscribe(amount => {
             if (amount != null) {
@@ -112,9 +110,31 @@ export class CartService {
                 }
 
                 cart.setDonation(amount);
+
+                if (notify) {
+                    this.notificationCartRedirect();
+                }
             }
         });
+    }
 
+    /**
+     * Add product to cart and show alert for cart redirection
+     */
+    public addProduct(product: CartLineProduct, type: ProductType, quantiy: number) {
+        CartService.globalCart.addProduct(product, type, quantiy);
+        this.notificationCartRedirect();
+    }
+
+    public notificationCartRedirect() {
+        const snackbar = this.snackbar.open('Produit ajouté', 'Voir le panier', {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+        });
+        snackbar.onAction().subscribe(() => {
+            this.router.navigateByUrl('/panier');
+        });
     }
 
 }

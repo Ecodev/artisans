@@ -33,7 +33,6 @@ import { CardComponent } from '../components/card/card.component';
 import { FileComponent } from '../components/file/file.component';
 import { FileDropDirective } from '../components/file/services/file-drop.directive';
 import { MoneyComponent } from '../components/money/money.component';
-import { ParticleSwitchComponent } from '../components/particle-switch/particle-switch.component';
 import { PriceComponent } from '../components/price/price.component';
 import { ProsemirrorComponent } from '../components/proseMirror/proseMirror.component';
 import { TagsNavigationComponent } from '../components/tags-navigation/tags-navigation.component';
@@ -49,13 +48,12 @@ const declarations = [
     CardComponent,
     FileDropDirective,
     FileComponent,
-    ParticleSwitchComponent,
     UsersComponent,
     ProductsComponent,
     TagsNavigationComponent,
     PriceComponent,
     BreadcrumbsComponent,
-    ProsemirrorComponent
+    ProsemirrorComponent,
 ];
 
 const imports = [

@@ -138,9 +138,7 @@
                             durabilité dans une soixantaine de pays.</p>
                         <p>Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte atteinte. </p>
                     </div>
-                    <a mat-flat-button routerLink="/larevuedurable/abonnements"> Voir les abonnements
-                        <natural-icon name="chevron_right"></natural-icon>
-                    </a>
+                    <a mat-flat-button routerLink="/larevuedurable/abonnements"> Voir les abonnements</a>
                 </div>
             </div>
 
@@ -155,9 +153,7 @@
                         <p>Plus nous aurons de membres, plus l’élan sera fort et plus nous pourrons continuer d’identifier en toute
                             indépendance les actions les plus pertinentes à entreprendre.</p>
                     </div>
-                    <a mat-flat-button> Découvrir l'association
-                        <natural-icon name="chevron_right"></natural-icon>
-                    </a>
+                    <a mat-flat-button>Découvrir l'association</a>
                 </div>
             </div>
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-3">
@@ -169,9 +165,7 @@
                             aidera ce titre à poursuivre ses efforts pour fournir une information rigoureuse, à la pointe et toujours
                             constructive. Les dons sont déductibles d’impôts pour les contribuables suisses.</p>
                     </div>
-                    <a mat-flat-button> Faire un don
-                        <natural-icon name="chevron_right"></natural-icon>
-                    </a>
+                    <a mat-flat-button (click)="cartService.inputDonation(true)">Faire un don</a>
                 </div>
             </div>
 

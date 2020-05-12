@@ -167,3 +167,8 @@ input[type=number] {
 .app-date-column {
     width: 14em;
 }
+
+
+.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+    border-radius: 0 !important;
+}

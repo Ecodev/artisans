@@ -40,7 +40,7 @@ export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVar
 
         super(userService, injector);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get(this.route.snapshot.data.isAdmin ? 'usersAdmin' : 'usersFrontend');
+        this.naturalSearchFacets = naturalSearchFacetsService.get('users');
     }
 
     public search(naturalSearchSelections: NaturalSearchSelections): void {

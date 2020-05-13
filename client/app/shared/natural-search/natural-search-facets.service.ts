@@ -144,19 +144,18 @@ export class NaturalSearchFacetsService {
     };
 
     private readonly allFacets: { [key: string]: NaturalSearchFacets } = {
-        usersFrontend: [
-            this.userCode,
-            this.firstName,
-            this.lastName,
-            this.userCode,
-        ],
-        usersAdmin: [
+        users: [
             {
                 display: 'Login',
                 field: 'login',
                 component: TypeTextComponent,
                 transform: wrapLike,
             } as DropdownFacet<never>,
+            {
+                display: 'Existe pas dans Crésus',
+                field: 'shouldDelete',
+                condition: {equal: {value: true}} as UserFilterGroupCondition,
+            } as FlagFacet,
             this.firstName,
             this.lastName,
             this.userCode,

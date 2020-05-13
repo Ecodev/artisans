@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data, Router } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
+import { NaturalAlertService, NaturalQueryVariablesManager, toUrl } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
-import { Import, ImportVariables } from '../../../shared/generated-types';
+import {
+    Import,
+    ImportVariables, UserFilterGroupCondition,
+    Users_users_items,
+    UsersVariables,
+} from '../../../shared/generated-types';
+import { UserService } from '../services/user.service';
 
 @Component({
     selector: 'app-import',
@@ -19,6 +25,18 @@ export class ImportComponent implements OnInit {
     public importing = false;
     public error: Error | null = null;
     public result: Import['import'] | null = null;
+    public users: Users_users_items[] = [];
+
+    public readonly params = {
+        ns: JSON.stringify(toUrl([
+            [
+                {
+                    field: 'shouldDelete',
+                    condition: {equal: {value: true}},
+                },
+            ],
+        ])),
+    };
 
     constructor(
         private route: ActivatedRoute,
@@ -26,6 +44,7 @@ export class ImportComponent implements OnInit {
         public permissionsService: PermissionsService,
         private apollo: Apollo,
         private alertService: NaturalAlertService,
+        private userService: UserService,
     ) {
     }
 
@@ -37,6 +56,7 @@ export class ImportComponent implements OnInit {
         this.importing = true;
         this.error = null;
         this.result = null;
+        this.users = [];
 
         const mutation = gql`
             mutation Import($file: Upload!) {
@@ -62,6 +82,10 @@ export class ImportComponent implements OnInit {
 
                 this.result = (result.data as Import).import;
                 this.alertService.info(this.result.totalLines + ' lignes importées', 5000);
+
+                const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+                qvm.set('variables', {filter: {groups: [{conditions: [{shouldDelete: {equal: {value: true}}}]}]}});
+                this.userService.getAll(qvm).subscribe(users => this.users = users.items);
             },
             error => {
                 error.message = error.message.replace(/^GraphQL error: /, '')
@@ -69,5 +93,20 @@ export class ImportComponent implements OnInit {
                 this.importing = false;
             },
         );
+    }
+
+    public deleteAll(): void {
+        this.alertService.confirm(
+            'Suppression',
+            'Voulez-vous supprimer définitivement ' + this.users.length + ' utilisateurs ?',
+            'Supprimer définitivement',
+        ).subscribe(confirmed => {
+            if (confirmed) {
+                this.userService.delete(this.users).subscribe(v => {
+                    this.alertService.info(this.users.length + ' utilisateurs supprimés');
+                    this.users = [];
+                });
+            }
+        });
     }
 }

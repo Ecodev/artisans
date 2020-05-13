@@ -3,6 +3,8 @@
     <natural-detail-header [listRoute]="['admin', 'user']" [model]="data.model" label="Utilisateur" newLabel="Nouvel utilisateur"
     ></natural-detail-header>
 
+    <mat-toolbar color="warn" *ngIf="data.model.shouldDelete">Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé définitivement ici.</mat-toolbar>
+
     <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">

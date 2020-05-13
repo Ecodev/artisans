@@ -35,7 +35,32 @@
                     <li>Total d'utilisateurs existants: {{ result.totalUsers }}</li>
                     <li>Total d'organisations existants: {{ result.totalOrganizations }}</li>
                 </ul>
+
+                <p *ngIf="!users.length">Tout est OK</p>
+                <div *ngIf="users.length">
+                    <p>
+                        Il existe {{users.length}} utilisateurs dans notre BD qui n'ont pas été importés.
+                        Il faut soit créer ces utilisateurs dans Crésus puis re-importer, soit supprimer
+                        définitivement les utilisateurs de notre BD.
+                    </p>
+                    <ul>
+                        <li *ngFor="let user of users">{{ user.name }}</li>
+                    </ul>
+
+                    <a [routerLink]="['/admin/user', this.params]" mat-button style="margin-right: 3em">Voir le détail</a>
+
+                    <button
+                            mat-raised-button
+                            color="warn"
+                            (click)="deleteAll()"
+                    >
+                        <natural-icon name="delete"></natural-icon>
+                        Supprimer tous
+                    </button>
+                </div>
+
             </div>
+
             <div *ngIf="error !== null">
                 <p>L'erreur suivante s'est produite durant l'import et tout le processus a été complétement annulé:</p>
                 <p>

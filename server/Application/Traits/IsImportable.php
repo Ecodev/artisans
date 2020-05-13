@@ -15,4 +15,12 @@ trait IsImportable
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
     private $shouldDelete = false;
+
+    /**
+     * Whether this was found in last import
+     */
+    public function getShouldDelete(): bool
+    {
+        return $this->shouldDelete;
+    }
 }

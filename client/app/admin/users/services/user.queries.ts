@@ -13,6 +13,7 @@ export const userFieldsFragment = gql`
         postcode
         street
         locality
+        shouldDelete
         country {
             id
             name

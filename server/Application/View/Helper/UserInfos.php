@@ -9,8 +9,12 @@ use Laminas\View\Helper\AbstractHelper;
 
 class UserInfos extends AbstractHelper
 {
-    public function __invoke(User $user): string
+    public function __invoke(?User $user): string
     {
+        if (!$user) {
+            return '<p>Utilisateur inconnu. Il a probablement été supprimé.</p>';
+        }
+
         $url = $this->view->serverUrl . '/admin/user/' . $user->getId();
 
         $result = '<ul>';

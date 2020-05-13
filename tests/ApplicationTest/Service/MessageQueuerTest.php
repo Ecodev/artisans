@@ -142,6 +142,17 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser');
     }
 
+    public function testQueueAdminValidatedOrderWithoutOwner(): void
+    {
+        $admin = $this->createMockUserAdmin();
+        $order = $this->createMockOrder(null);
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueAdminValidatedOrder($admin, $order);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser', 'without-owner');
+    }
+
     public function testQueueRequestMembershipEnd(): void
     {
         $admin = $this->createMockUserAdmin();
@@ -163,7 +174,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::NEWSLETTER_SUBSCRIPTION, 'Demande d\'inscription à la newsletter');
     }
 
-    private function createMockOrder(User $owner): Order
+    private function createMockOrder(?User $owner): Order
     {
         $product = $this->createMock(Product::class);
         $product->expects($this->any())

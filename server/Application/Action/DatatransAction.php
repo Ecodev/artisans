@@ -240,8 +240,11 @@ class DatatransAction extends AbstractAction
      */
     private function notify(Order $order): void
     {
-        $message = $this->messageQueuer->queueUserValidatedOrder($order);
-        $this->mailer->sendMessageAsync($message);
+        $user = $order->getOwner();
+        if ($user) {
+            $message = $this->messageQueuer->queueUserValidatedOrder($user, $order);
+            $this->mailer->sendMessageAsync($message);
+        }
 
         /** @var UserRepository $repository */
         $repository = $this->entityManager->getRepository(User::class);

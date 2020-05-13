@@ -100,7 +100,9 @@ class Comment extends AbstractModel
     public function getAuthorName(): string
     {
         return _em()->getRepository(self::class)->getAclFilter()->runWithoutAcl(function () {
-            return $this->getOwner()->getName();
+            $user = $this->getOwner();
+
+            return $user ? $user->getName() : 'Anonyme';
         });
     }
 }

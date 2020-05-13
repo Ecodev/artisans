@@ -52,8 +52,11 @@ abstract class CreateOrder implements FieldInterface
 
                     // Notify people now if payment is not instantaneous
                     if ($order->getPaymentMethod() !== PaymentMethodType::DATATRANS) {
-                        $message = $messageQueuer->queueUserPendingOrder($order);
-                        $mailer->sendMessageAsync($message);
+                        $user = $order->getOwner();
+                        if ($user) {
+                            $message = $messageQueuer->queueUserPendingOrder($user, $order);
+                            $mailer->sendMessageAsync($message);
+                        }
 
                         /** @var UserRepository $repository */
                         $repository = _em()->getRepository(User::class);

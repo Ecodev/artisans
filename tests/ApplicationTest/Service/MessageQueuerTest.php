@@ -102,7 +102,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order = $this->createMockOrder($user);
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueUserPendingOrder($order);
+        $message = $messageQueuer->queueUserPendingOrder($order->getOwner(), $order);
 
         $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::USER_PENDING_ORDER, 'Votre commande est en cours de traitement');
     }
@@ -113,7 +113,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order = $this->createMockOrder($user);
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueUserValidatedOrder($order);
+        $message = $messageQueuer->queueUserValidatedOrder($order->getOwner(), $order);
 
         $this->assertMessage($message, $user, 'john.doe@example.com', MessageTypeType::USER_VALIDATED_ORDER, 'Votre commande a été validée');
     }

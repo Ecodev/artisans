@@ -45,8 +45,11 @@ abstract class UpdateOrderStatus implements FieldInterface
                     $messageQueuer = $container->get(MessageQueuer::class);
 
                     // Notify user
-                    $message = $messageQueuer->queueUserValidatedOrder($order);
-                    $mailer->sendMessageAsync($message);
+                    $user = $order->getOwner();
+                    if ($user) {
+                        $message = $messageQueuer->queueUserValidatedOrder($user, $order);
+                        $mailer->sendMessageAsync($message);
+                    }
 
                     // Notify admins
                     /** @var UserRepository $repository */

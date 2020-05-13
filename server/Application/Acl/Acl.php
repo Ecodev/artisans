@@ -60,10 +60,11 @@ class Acl extends \Ecodev\Felix\Acl\Acl
         $this->allow(User::ROLE_MEMBER, [$comment], ['create']); // if grant update, care to GUI button that sends to admin
 
         $this->allow(User::ROLE_FACILITATOR, [$file], ['read', 'update']);
-        $this->allow(User::ROLE_FACILITATOR, [$user], ['create', 'update']);
+        $this->allow(User::ROLE_FACILITATOR, [$user], ['update']);
 
         $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$configuration, $organization], ['create']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$user], ['create', 'delete']);
     }
 }

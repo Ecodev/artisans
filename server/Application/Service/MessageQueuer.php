@@ -96,26 +96,26 @@ class MessageQueuer
         return $message;
     }
 
-    public function queueUserPendingOrder(Order $order): Message
+    public function queueUserPendingOrder(User $user, Order $order): Message
     {
         $subject = 'Votre commande est en cours de traitement';
         $mailParams = [
             'order' => $order,
         ];
 
-        $message = $this->createMessage($order->getOwner(), $order->getOwner()->getEmail(), $subject, MessageTypeType::USER_PENDING_ORDER, $mailParams);
+        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::USER_PENDING_ORDER, $mailParams);
 
         return $message;
     }
 
-    public function queueUserValidatedOrder(Order $order): Message
+    public function queueUserValidatedOrder(User $user, Order $order): Message
     {
         $subject = 'Votre commande a été validée';
         $mailParams = [
             'order' => $order,
         ];
 
-        $message = $this->createMessage($order->getOwner(), $order->getOwner()->getEmail(), $subject, MessageTypeType::USER_VALIDATED_ORDER, $mailParams);
+        $message = $this->createMessage($user, $user->getEmail(), $subject, MessageTypeType::USER_VALIDATED_ORDER, $mailParams);
 
         return $message;
     }

@@ -40,7 +40,7 @@ import {
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import {
     createUser,
-    currentUserForProfileQuery,
+    currentUserForProfileQuery, deleteUsers,
     loginMutation,
     logoutMutation,
     unregisterMutation,
@@ -86,7 +86,7 @@ export class UserService extends NaturalAbstractModelService<User['user'],
             usersQuery,
             createUser,
             updateUser,
-            null);
+            deleteUsers);
     }
 
     public static canAccessAdmin(user: CurrentUserForProfile['viewer']): boolean {

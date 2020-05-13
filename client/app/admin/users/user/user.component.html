@@ -90,6 +90,6 @@
 
     </mat-tab-group>
 
-    <natural-fixed-button-detail (create)="create()" *ngIf="showFabButton" [form]="form" [model]="data.model"></natural-fixed-button-detail>
+    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"></natural-fixed-button-detail>
 
 </div>

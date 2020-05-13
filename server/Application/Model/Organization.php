@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Traits\HasSubscriptionLastReview;
+use Application\Traits\IsImportable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,6 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Organization extends AbstractModel
 {
     use HasSubscriptionLastReview;
+    use IsImportable;
 
     /**
      * A regexp pattern that match email address

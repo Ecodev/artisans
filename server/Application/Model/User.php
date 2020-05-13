@@ -9,6 +9,7 @@ use Application\Repository\LogRepository;
 use Application\Repository\UserRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasSubscriptionLastReview;
+use Application\Traits\IsImportable;
 use Cake\Chronos\Chronos;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -37,6 +38,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
     use HasAddress;
     use HasSubscriptionLastReview;
     use HasPassword;
+    use IsImportable;
 
     /**
      * @var User

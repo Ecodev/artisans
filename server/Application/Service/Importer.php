@@ -64,6 +64,7 @@ class Importer
 
         try {
             $this->connection->beginTransaction();
+            $this->markToDelete();
             $this->read($file);
             $this->deleteOldOrganizations();
             $this->connection->commit();
@@ -272,11 +273,7 @@ class Importer
 
     private function deleteOldOrganizations(): void
     {
-        $sql = 'DELETE FROM organization WHERE
-      creation_date IS NULL
-      OR (update_date IS NULL AND creation_date < DATE_SUB(NOW(), INTERVAL 30 MINUTE))
-      OR (update_date IS NOT NULL AND update_date < DATE_SUB(NOW(), INTERVAL 30 MINUTE))
-';
+        $sql = 'DELETE FROM organization WHERE should_delete';
         $this->deletedOrganizations += $this->connection->executeUpdate($sql);
     }
 
@@ -317,10 +314,12 @@ class Importer
                             country_id,
                             phone,
                             web_temporary_access,
+                            should_delete,
+                            password,
                             creator_id,
                             creation_date
                         )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
                         ON DUPLICATE KEY UPDATE
                             email = VALUES(email),
                             subscription_type = VALUES(subscription_type),
@@ -334,11 +333,14 @@ class Importer
                             country_id = VALUES(country_id),
                             phone = VALUES(phone),
                             web_temporary_access = VALUES(web_temporary_access),
+                            should_delete = VALUES(should_delete),
                             updater_id = VALUES(creator_id),
                             update_date = NOW()';
 
         $params = $args;
-        $params[] = false;
+        $params[] = false; // web_temporary_access
+        $params[] = false; // should_delete
+        $params[] = ''; // password
         $params[] = $this->currentUser;
 
         $changed = $this->connection->executeUpdate($sql, $params);
@@ -366,5 +368,11 @@ class Importer
         if ($changed) {
             ++$this->updatedOrganizations;
         }
+    }
+
+    private function markToDelete(): void
+    {
+        $this->connection->executeUpdate('UPDATE user SET should_delete = 1');
+        $this->connection->executeUpdate('UPDATE organization SET should_delete = 1');
     }
 }

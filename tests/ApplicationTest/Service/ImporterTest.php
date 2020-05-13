@@ -102,6 +102,7 @@ class ImporterTest extends TestCase
         ];
         $this->assertUser($otherMember);
 
+        $this->assertShouldDeleteUserCount(0);
         $actual = $this->import('tests/data/importer/normal.csv');
 
         self::assertArrayHasKey('time', $actual);
@@ -116,6 +117,8 @@ class ImporterTest extends TestCase
             'totalLines' => 5,
         ];
         self::assertSame($expected, $actual);
+
+        $this->assertShouldDeleteUserCount(2);
 
         $this->assertUser([
             'email' => 'new@example.com',
@@ -172,6 +175,14 @@ class ImporterTest extends TestCase
 
         // Unchanged
         $this->assertUser($otherMember);
+    }
+
+    private function assertShouldDeleteUserCount(int $expected): void
+    {
+        $connection = $this->getEntityManager()->getConnection();
+        $actual = (int) $connection->fetchColumn('SELECT COUNT(*) FROM user WHERE should_delete');
+
+        self::assertSame($expected, $actual);
     }
 
     private function assertUser(array $expected): void

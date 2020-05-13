@@ -36,7 +36,6 @@
         "@ecodev/natural": "^14.2.0",
         "@nguniversal/express-engine": "^9.1.0",
         "angular-file": "^3.0.1",
-        "angular-particle-effect-button": "^0.0.50",
         "apollo": "^2.27.0",
         "apollo-angular": "^1.9.0",
         "apollo-angular-link-http": "^1.10.0",

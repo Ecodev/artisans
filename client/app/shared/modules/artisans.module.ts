@@ -23,7 +23,6 @@ import {
     NaturalTableButtonModule,
 } from '@ecodev/natural';
 import { ngfModule } from 'angular-file';
-import { ParticleEffectButtonModule } from 'angular-particle-effect-button';
 import { AvatarModule } from 'ngx-avatar';
 import { ProductsComponent } from '../../admin/products/products/products.component';
 import { UsersComponent } from '../../admin/users/users/users.component';
@@ -64,7 +63,6 @@ const imports = [
     RouterModule,
     AvatarModule,
     ngfModule,
-    ParticleEffectButtonModule,
     NaturalSearchModule,
     NaturalCommonModule,
     NaturalHierarchicSelectorModule,

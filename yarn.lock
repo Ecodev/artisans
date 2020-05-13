@@ -1914,18 +1914,6 @@ angular-file@^3.0.1:
   resolved "https://registry.yarnpkg.com/angular-file/-/angular-file-3.0.1.tgz#c35cce45033173c403e134ef339800db1e0d756d"
   integrity sha512-F7br38VQgYP3wRLLAGJRw5GHsI5NNcBeCVeeq5b8AcaOiV3gPFu21nF2Q1WSvHsYg9DZlgw+EeiIkG847NLpvQ==
 
-angular-particle-effect-button@^0.0.50:
-  version "0.0.50"
-  resolved "https://registry.yarnpkg.com/angular-particle-effect-button/-/angular-particle-effect-button-0.0.50.tgz#02e3bb1bb1552e831cc12cba08e3d2494f4b9912"
-  integrity sha512-MHLs8J1/q4u7mseM+AB42SU0Ftl19DkQd8MzdbL/3sETc/FH/Oyf3+jw7iyfO1da/cuA65OgmnvADNeg5VoCGw==
-  dependencies:
-    animejs "^3.1.0"
-
-animejs@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/animejs/-/animejs-3.1.0.tgz#748a90fc1d4bef3efed64508af9a6a82babf5c47"
-  integrity sha512-BjnCroPPQPEAngT0M89pz9TBcOGgOFLnVoq3+jV2upl4rn60k57/AXvESTnuILsNgOEjGuhMEOMp7IlQzk40kA==
-
 ansi-colors@4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/ansi-colors/-/ansi-colors-4.1.1.tgz#cbb9ae256bf750af1eab344f229aa27fe94ba348"

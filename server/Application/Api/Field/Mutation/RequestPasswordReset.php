@@ -41,13 +41,6 @@ abstract class RequestPasswordReset implements FieldInterface
                 if ($user) {
                     $email = $user->getEmail();
 
-                    // Fallback to householder if any
-                    if (!$email && $user->getOwner()) {
-                        $email = $repository->getAclFilter()->runWithoutAcl(function () use ($user) {
-                            return $user->getOwner()->getEmail();
-                        });
-                    }
-
                     if ($email) {
                         $message = $messageQueuer->queueResetPassword($user, $email);
                         $mailer->sendMessageAsync($message);

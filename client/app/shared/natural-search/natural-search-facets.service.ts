@@ -72,26 +72,10 @@ export class NaturalSearchFacetsService {
         },
     };
 
-    private readonly userWelcomeSession: FlagFacet = {
-        display: 'N\'a pas été accueilli',
-        field: 'welcomeSessionDate',
-        condition: {null: {}} as UserFilterGroupCondition,
-    };
-
     private readonly productIsActive: FlagFacet = {
         display: 'Actif',
         field: 'isActive',
         condition: {equal: {value: true}} as ProductFilterGroupCondition,
-    };
-
-    private readonly product: DropdownFacet<TypeSelectNaturalConfiguration> = {
-        display: 'Produit',
-        field: 'news.ts',
-        component: TypeNaturalSelectComponent,
-        configuration: {
-            service: this.productService,
-            placeholder: 'Produit',
-        },
     };
 
     private readonly code: DropdownFacet<never> = {
@@ -99,15 +83,6 @@ export class NaturalSearchFacetsService {
         field: 'code',
         component: TypeTextComponent,
         transform: wrapLike,
-    };
-
-    private readonly userCode: DropdownFacet<TypeNumberConfiguration> = {
-        display: 'Code',
-        field: 'code',
-        component: TypeNumberComponent,
-        configuration: {
-            step: 1,
-        },
     };
 
     private readonly firstName: DropdownFacet<never> = {
@@ -146,27 +121,12 @@ export class NaturalSearchFacetsService {
     private readonly allFacets: { [key: string]: NaturalSearchFacets } = {
         users: [
             {
-                display: 'Login',
-                field: 'login',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
-            {
                 display: 'Existe pas dans Crésus',
                 field: 'shouldDelete',
                 condition: {equal: {value: true}} as UserFilterGroupCondition,
             } as FlagFacet,
             this.firstName,
             this.lastName,
-            this.userCode,
-            {
-                display: 'Status',
-                field: 'status',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('UserStatus'),
-                },
-            } as DropdownFacet<TypeSelectConfiguration>,
             {
                 display: 'Rôle',
                 field: 'role',
@@ -175,16 +135,6 @@ export class NaturalSearchFacetsService {
                     items: this.enumService.get('UserRole'),
                 },
             } as DropdownFacet<TypeSelectConfiguration>,
-            this.userWelcomeSession,
-            {
-                display: 'Chef de famille',
-                field: 'owner',
-                component: TypeNaturalSelectComponent,
-                configuration: {
-                    service: this.userService,
-                    placeholder: 'Chef de famille',
-                },
-            } as DropdownFacet<TypeSelectNaturalConfiguration>,
             this.creationDate,
             this.updateDate,
         ],

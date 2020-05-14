@@ -17,6 +17,9 @@ import { MenuComponent } from './components/menu/menu.component';
 import { NewsPageComponent } from './components/news-page/news-page.component';
 import { NewsesPageComponent } from './components/newses-page/newses-page.component';
 import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
+import { SessionFacilitatorComponent } from './components/session-facilitator/session-facilitator.component';
+import { SessionMethodComponent } from './components/session-method/session-method.component';
+import { SessionOrganisationComponent } from './components/session-organisation/session-organisation.component';
 import { SessionPageComponent } from './components/session-page/session-page.component';
 
 import { FrontOfficeRoutingModule } from './front-office-routing.module';
@@ -38,6 +41,9 @@ import { ShopModule } from './modules/shop/shop.module';
         EventPageComponent,
         NewsPageComponent,
         CommentListComponent,
+        SessionMethodComponent,
+        SessionFacilitatorComponent,
+        SessionOrganisationComponent,
     ],
     imports: [
         CommonModule,

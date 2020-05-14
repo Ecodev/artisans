@@ -1,6 +1,6 @@
-<div class="container" fxLayout.gt-sm="row" fxLayoutGap="60px">
+<div class="container mat-h3" fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayout="column">
 
-    <div fxFlex fxLayout="column" fxLayoutGap="60px" fxLayoutAlign="start start">
+    <div fxFlex fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="start start">
         <h1 class="mat-display-1">
             {{ data.model.name }}
 
@@ -13,11 +13,11 @@
             </a>
         </h1>
 
-        <div [innerHTML]="data.model.description" class="mat-h3 rich-text"></div>
+        <div [innerHTML]="data.model.description" class="rich-text"></div>
 
         <div *ngIf="data.model.dates?.length">
-            <p class="mat-body">Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>
-            <div class="mat-h3" fxLayout="row wrap" fxLayoutGap="30px">
+            <p>Les dates et horaires des {{ data.model.dates?.length }} atelier(s) de cette session</p>
+            <div fxLayout="row wrap" fxLayoutGap="30px">
                 <div *ngFor="let date of data.model.dates" fxFlex="45">{{ date }}</div>
             </div>
         </div>
@@ -26,14 +26,14 @@
 
     </div>
 
-    <div fxLayout="column" fxLayoutGap="60px">
+    <div fxLayout="column" fxLayoutGap="60px" fxFlex.gt-sm="25">
 
         <div fxLayout="column" fxLayoutGap="30px">
             <div *ngIf="data.model.region || data.model.locality|| data.model.street">
-                Lieu : {{ data.model.street }}, {{ data.model.locality }}, {{ data.model.region }}
+                <strong>Lieu :</strong> {{ data.model.street }}, {{ data.model.locality }}, {{ data.model.region }}
             </div>
             <div *ngIf="data.model.price">
-                Contribution attendue : {{ data.model.price }}
+                <strong>Contribution attendue :</strong> {{ data.model.price }}
             </div>
             <div *ngIf="data.model.availability">
                 {{ data.model.availability }} {{ data.model.availability > 1 ? 'places' : 'place' }} pour la session

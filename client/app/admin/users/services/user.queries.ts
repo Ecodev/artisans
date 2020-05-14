@@ -51,6 +51,7 @@ export const usersQuery = gql`
                 id
                 email
                 name
+                locality
                 membership
                 updateDate
                 creationDate

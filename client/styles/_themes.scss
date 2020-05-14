@@ -20,6 +20,7 @@
 @import '../app/front-office/components/homepage/homepage.theme';
 @import '../app/front-office/front-office.theme';
 @import '../app/front-office/components/menu/menu.theme';
+@import '../app/front-office/components/session-facilitator/session-facilitator.theme';
 @import '../app/front-office/modules/shop/components/products-page/products-page.theme';
 @import '../app/front-office/modules/shop/components/product-page/product-page.theme';
 @import '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
@@ -48,6 +49,7 @@
     @include order-line($theme);
     @include subscriptions($theme);
     @include purchases($theme);
+    @include session-facilitator($theme);
 }
 
 $artisans-blue: (

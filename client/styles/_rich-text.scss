@@ -10,8 +10,13 @@
     .rich-text {
 
         line-height: 1.6em;
+
         .strong {
             font-weight: bold;
+        }
+
+        h1, h2, h3 {
+            margin-top: 1.3em;
         }
     }
 

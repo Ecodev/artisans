@@ -70,14 +70,22 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 {
                     display: 'Conversations carbone',
                     children: [
-                        {display: 'La méthode'},
+                        {
+                            display: 'La méthode',
+                            link: '/agir-avec-nous/conversation-carbone',
+                        },
                         {
                             display: 'Prochaines sessions',
                             link: '/agir-avec-nous/prochaines-conversations-carbone',
                         },
-                        {display: 'Pour les organisations'},
-                        {display: 'Facilitateurs'},
-                        {display: 'Les partenaires'},
+                        {
+                            display: 'Pour les organisations',
+                            link: '/agir-avec-nous/organisateurs',
+                        },
+                        {
+                            display: 'Facilitateurs',
+                            link: '/agir-avec-nous/facilitateurs',
+                        },
                     ],
                 },
                 {display: 'Les conversations carbone'},

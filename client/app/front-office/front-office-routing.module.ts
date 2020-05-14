@@ -12,6 +12,9 @@ import { LoginComponent } from './components/login/login.component';
 import { NewsPageComponent } from './components/news-page/news-page.component';
 import { NewsesPageComponent } from './components/newses-page/newses-page.component';
 import { NextSessionsComponent } from './components/next-sessions/next-sessions.component';
+import { SessionFacilitatorComponent } from './components/session-facilitator/session-facilitator.component';
+import { SessionMethodComponent } from './components/session-method/session-method.component';
+import { SessionOrganisationComponent } from './components/session-organisation/session-organisation.component';
 import { SessionPageComponent } from './components/session-page/session-page.component';
 
 const routes: Routes = [
@@ -66,6 +69,36 @@ const routes: Routes = [
         {
             path: 'agir-avec-nous',
             children: [
+                {
+                    path: 'conversation-carbone',
+                    component: SessionMethodComponent,
+                    data: {
+                        breadcrumbs: [
+                            {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                            {label: 'Conversations carbone'},
+                        ],
+                    },
+                },
+                {
+                    path: 'conversation-carbone/facilitateurs',
+                    component: SessionFacilitatorComponent,
+                    data: {
+                        breadcrumbs: [
+                            {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                            {label: 'Conversations carbone'},
+                        ],
+                    },
+                },
+                {
+                    path: 'conversation-carbone/organisateurs',
+                    component: SessionOrganisationComponent,
+                    data: {
+                        breadcrumbs: [
+                            {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                            {label: 'Conversations carbone'},
+                        ],
+                    },
+                },
                 {
                     path: 'prochaines-conversations-carbone',
                     component: NextSessionsComponent,

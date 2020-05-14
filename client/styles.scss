@@ -58,6 +58,11 @@ pre.debug {
     padding-left: 20px;
     padding-right: 20px;
     box-sizing: border-box;
+
+
+    .page-body {
+        max-width: 800px;
+    }
 }
 
 
@@ -169,6 +174,6 @@ input[type=number] {
 }
 
 
-.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+.mat-button, .mat-stroked-button, .mat-flat-button {
     border-radius: 0 !important;
 }

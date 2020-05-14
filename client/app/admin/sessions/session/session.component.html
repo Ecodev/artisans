@@ -35,12 +35,13 @@
 
                             <mat-form-field>
                                 <mat-label>Première date</mat-label>
-                                <input [matDatepicker]="picker" formControlName="startDate" matInput>
+                                <input [matDatepicker]="picker" formControlName="startDate" matInput (dateChange)="update()">
                                 <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-                                <mat-hint>Ce champ est masqué à l'utilisateur mais est utilisé pour classer les sessions</mat-hint>
+                                <mat-hint>Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des sessions</mat-hint>
                             </mat-form-field>
                         </div>
+
                         <div *ngIf="datesForm" formArrayName="dates">
                             <h2 class="mat-h2">Dates de la session</h2>
                             <div *ngFor="let date of datesForm.controls; let i = index;"

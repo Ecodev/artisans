@@ -228,11 +228,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 // Exceptionally show a dialog, instead of snackbar, because
                 // we want to be triple sure that the user saw it worked and
                 // avoid him to re-submit the same email again
-                this.alertService.confirm(
-                    'Inscription résussie',
-                    'Merci de vous être inscrit à la newsletter. Vous receverez le prochain numéro directement par email.',
-                    'Fermer',
-                );
+                this.alertService.confirm('Inscription résussie', 'Merci de vous être inscrit à la newsletter', 'Fermer');
             });
     }
 }

@@ -90,7 +90,7 @@
     <div fxLayout="column" fxLayoutGap="30px">
 
         <div *ngIf="!viewer"
-             class="mat-h3 mat-card mat-elevation-z3 frame"
+             class="mat-h3"
              fxLayout="row wrap"
              fxLayoutAlign="start baseline"
              fxLayoutGap="15px"
@@ -125,7 +125,7 @@
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="30px">
 
-                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyPaper">
+                    <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showBuyPaper" fxLayoutGap="10px" >
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
@@ -136,20 +136,19 @@
                         ></app-add-to-cart>
                     </div>
 
-                    <div *ngIf="showBuyDigital" fxLayout="column" fxLayoutAlign="start center">
+                    <div *ngIf="showBuyDigital" fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="10px" >
                         <div class="mat-h2 price no-margin-bottom">
                             <app-price [product]="data.model"></app-price>
                         </div>
                         <app-add-to-cart [buttonColor]="null"
                                          [product]="data.model"
                                          [type]="ProductType.digital"
-                                         label="Acheter la version numérique"
+                                         [label]="showBuyPaper ? 'Acheter la version numérique' : 'Acheter cet article'"
                         ></app-add-to-cart>
                     </div>
 
                 </div>
 
-                <!-- Todo ? maybe link to articles from same review -->
                 <a mat-button routerLink="/larevuedurable/articles" *ngIf="data.model.reviewNumber">ou acheter par articles</a>
             </div>
 

@@ -34,8 +34,6 @@ trait HasBalance
      * Set balance
      *
      * @API\Input(type="CHF")
-     *
-     * @param Money $balanceCHF
      */
     public function setBalanceCHF(Money $balanceCHF): void
     {
@@ -44,8 +42,6 @@ trait HasBalance
 
     /**
      * @API\Field(type="CHF")
-     *
-     * @return Money
      */
     public function getBalanceCHF(): Money
     {
@@ -56,8 +52,6 @@ trait HasBalance
      * Set balance
      *
      * @API\Input(type="EUR")
-     *
-     * @param Money $balanceEUR
      */
     public function setBalanceEUR(Money $balanceEUR): void
     {
@@ -66,25 +60,17 @@ trait HasBalance
 
     /**
      * @API\Field(type="EUR")
-     *
-     * @return Money
      */
     public function getBalanceEUR(): Money
     {
         return $this->balanceEUR;
     }
 
-    /**
-     * @return bool
-     */
     public function isCHF(): bool
     {
         return $this->isCHF;
     }
 
-    /**
-     * @param bool $isCHF
-     */
     public function setIsCHF(bool $isCHF): void
     {
         $this->isCHF = $isCHF;

@@ -13,8 +13,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      * Returns pure SQL to get ID of all objects that are accessible to given user.
      *
      * @param null|User $user
-     *
-     * @return string
      */
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
@@ -27,11 +25,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
 
     /**
      * Returns the user authenticated by its email and password
-     *
-     * @param string $email
-     * @param string $password
-     *
-     * @return null|User
      */
     public function getOneByEmailPassword(string $email, string $password): ?User
     {
@@ -70,10 +63,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      * Unsecured way to get a user from its ID.
      *
      * This should only be used in tests or controlled environment.
-     *
-     * @param int $id
-     *
-     * @return null|User
      */
     public function getOneById(int $id): ?User
     {
@@ -88,10 +77,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
      * Unsecured way to get a user from its email.
      *
      * This should only be used in tests or controlled environment.
-     *
-     * @param null|string $email
-     *
-     * @return null|User
      */
     public function getOneByEmail(?string $email): ?User
     {
@@ -104,10 +89,6 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
 
     /**
      * Get or create the user for the given email
-     *
-     * @param string $email
-     *
-     * @return User
      */
     public function getOrCreate(string $email): User
     {

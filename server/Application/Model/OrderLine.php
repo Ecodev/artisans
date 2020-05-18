@@ -70,8 +70,6 @@ class OrderLine extends AbstractModel
 
     /**
      * @API\Exclude
-     *
-     * @param Order $order
      */
     public function setOrder(Order $order): void
     {
@@ -83,9 +81,6 @@ class OrderLine extends AbstractModel
         $order->orderLineAdded($this);
     }
 
-    /**
-     * @return Order
-     */
     public function getOrder(): Order
     {
         return $this->order;
@@ -93,8 +88,6 @@ class OrderLine extends AbstractModel
 
     /**
      * Get related product, if it still exists in DB
-     *
-     * @return null|Product
      */
     public function getProduct(): ?Product
     {
@@ -103,8 +96,6 @@ class OrderLine extends AbstractModel
 
     /**
      * Set related product
-     *
-     * @param null|Product $product
      */
     public function setProduct(?Product $product): void
     {
@@ -117,8 +108,6 @@ class OrderLine extends AbstractModel
 
     /**
      * Get related subscription, if it still exists in DB
-     *
-     * @return null|Subscription
      */
     public function getSubscription(): ?Subscription
     {
@@ -127,8 +116,6 @@ class OrderLine extends AbstractModel
 
     /**
      * Set related subscription
-     *
-     * @param null|Subscription $subscription
      */
     public function setSubscription(?Subscription $subscription): void
     {

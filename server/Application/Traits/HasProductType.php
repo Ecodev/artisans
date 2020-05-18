@@ -22,8 +22,6 @@ trait HasProductType
      * Set type
      *
      * @API\Input(type="ProductType")
-     *
-     * @param string $type
      */
     public function setType(string $type): void
     {
@@ -34,8 +32,6 @@ trait HasProductType
      * Get type
      *
      * @API\Field(type="ProductType")
-     *
-     * @return string
      */
     public function getType(): string
     {

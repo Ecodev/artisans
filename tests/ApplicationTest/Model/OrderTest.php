@@ -12,20 +12,16 @@ class OrderTest extends TestCase
 {
     /**
      * @dataProvider providerGetFormattedBalance
-     *
-     * @param int $chf
-     * @param int $eur
-     * @param string $expected
      */
     public function testGetFormattedBalance(int $chf, int $eur, string $expected): void
     {
         $order = $this->getMockBuilder(Order::class)->onlyMethods(['getBalanceCHF', 'getBalanceEUR'])->getMock();
 
-        $order->expects($this->any())
+        $order->expects(self::any())
             ->method('getBalanceCHF')
             ->willReturn(Money::CHF($chf));
 
-        $order->expects($this->any())
+        $order->expects(self::any())
             ->method('getBalanceEUR')
             ->willReturn(Money::EUR($eur));
 

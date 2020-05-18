@@ -36,8 +36,6 @@ class Organization extends AbstractModel
     }
 
     /**
-     * @param string $pattern
-     *
      * @return Organization
      */
     public function setPattern(string $pattern): self

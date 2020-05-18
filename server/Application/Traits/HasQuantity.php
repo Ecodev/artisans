@@ -17,8 +17,6 @@ trait HasQuantity
 
     /**
      * Quantity currently in stock
-     *
-     * @return string
      */
     public function getQuantity(): string
     {
@@ -29,8 +27,6 @@ trait HasQuantity
      * Quantity currently in stock
      *
      * @API\Exclude
-     *
-     * @param string $quantity
      */
     public function setQuantity(string $quantity): void
     {

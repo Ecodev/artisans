@@ -13,8 +13,6 @@ class OrderRepository extends AbstractRepository implements LimitedAccessSubQuer
      * Returns pure SQL to get ID of all objects that are accessible to given user.
      *
      * @param null|User $user
-     *
-     * @return string
      */
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {

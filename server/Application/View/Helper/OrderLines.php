@@ -12,10 +12,6 @@ class OrderLines extends AbstractHelper
 {
     /**
      * This is used for custom admin and customer emails, so links must be frontend, not backend
-     *
-     * @param Order $order
-     *
-     * @return string
      */
     public function __invoke(Order $order): string
     {

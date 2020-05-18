@@ -28,8 +28,6 @@ class Comment extends AbstractModel
 
     /**
      * Set event
-     *
-     * @param null|Event $event
      */
     public function setEvent(?Event $event): void
     {
@@ -46,8 +44,6 @@ class Comment extends AbstractModel
 
     /**
      * Get event
-     *
-     * @return null|Event
      */
     public function getEvent(): ?Event
     {
@@ -66,8 +62,6 @@ class Comment extends AbstractModel
 
     /**
      * Set news
-     *
-     * @param null|News $news
      */
     public function setNews(?News $news): void
     {
@@ -84,8 +78,6 @@ class Comment extends AbstractModel
 
     /**
      * Get news
-     *
-     * @return null|News
      */
     public function getNews(): ?News
     {
@@ -94,8 +86,6 @@ class Comment extends AbstractModel
 
     /**
      * Get owner name
-     *
-     * @return string
      */
     public function getAuthorName(): string
     {

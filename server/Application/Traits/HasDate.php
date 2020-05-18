@@ -15,17 +15,11 @@ trait HasDate
      */
     private $date;
 
-    /**
-     * @return Chronos
-     */
     public function getDate(): Chronos
     {
         return $this->date;
     }
 
-    /**
-     * @param Chronos $date
-     */
     public function setDate(Chronos $date): void
     {
         $this->date = $date;

@@ -184,8 +184,6 @@ class Invoicer
     /**
      * Create temporary users to give them immediate access to web,
      * until their access is confirmed permanently via a CSV import
-     *
-     * @param OrderLine $orderLine
      */
     private function createTemporaryUsers(OrderLine $orderLine): void
     {

@@ -63,8 +63,6 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * Constructor
-     *
-     * @param string $name
      */
     public function __construct(string $name = '')
     {
@@ -75,8 +73,6 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * @API\Field(type="CHF")
-     *
-     * @return Money
      */
     public function getPricePerUnitCHF(): Money
     {
@@ -85,8 +81,6 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * @API\Input(type="CHF")
-     *
-     * @param Money $pricePerUnitCHF
      */
     public function setPricePerUnitCHF(Money $pricePerUnitCHF): void
     {
@@ -95,8 +89,6 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * @API\Field(type="EUR")
-     *
-     * @return Money
      */
     public function getPricePerUnitEUR(): Money
     {
@@ -105,8 +97,6 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * @API\Input(type="EUR")
-     *
-     * @param Money $pricePerUnitEUR
      */
     public function setPricePerUnitEUR(Money $pricePerUnitEUR): void
     {
@@ -115,8 +105,6 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * Whether this product can be bought
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -125,25 +113,17 @@ abstract class AbstractProduct extends AbstractModel
 
     /**
      * Whether this product can be bought
-     *
-     * @param bool $isActive
      */
     public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;
     }
 
-    /**
-     * @return null|Image
-     */
     public function getImage(): ?Image
     {
         return $this->image;
     }
 
-    /**
-     * @param null|Image $image
-     */
     public function setImage(?Image $image): void
     {
         // We must trigger lazy loading, otherwise Doctrine will seriously
@@ -155,17 +135,11 @@ abstract class AbstractProduct extends AbstractModel
         $this->image = $image;
     }
 
-    /**
-     * @return null|Image
-     */
     public function getIllustration(): ?Image
     {
         return $this->illustration;
     }
 
-    /**
-     * @param null|Image $illustration
-     */
     public function setIllustration(?Image $illustration): void
     {
         // We must trigger lazy loading, otherwise Doctrine will seriously

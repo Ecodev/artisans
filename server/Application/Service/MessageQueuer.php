@@ -67,8 +67,6 @@ class MessageQueuer
      *
      * @param User $user The user for which a password reset will be done
      * @param string $email the address to send the email to. Might be different than the user's email
-     *
-     * @return Message
      */
     public function queueResetPassword(User $user, string $email): Message
     {
@@ -170,14 +168,6 @@ class MessageQueuer
 
     /**
      * Create a message by rendering the template
-     *
-     * @param null|User $user
-     * @param string $email
-     * @param string $subject
-     * @param string $type
-     * @param array $mailParams
-     *
-     * @return Message
      */
     private function createMessage(?User $user, string $email, string $subject, string $type, array $mailParams): Message
     {

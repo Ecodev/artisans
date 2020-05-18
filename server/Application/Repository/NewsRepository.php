@@ -18,8 +18,6 @@ class NewsRepository extends AbstractRepository implements LimitedAccessSubQuery
      * - the news is active
      *
      * @param null|User $user
-     *
-     * @return string
      */
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {

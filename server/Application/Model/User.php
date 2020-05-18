@@ -28,7 +28,7 @@ use GraphQL\Doctrine\Annotation as API;
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
  */
-class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Felix\Model\HasPassword
+class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {
     const ROLE_ANONYMOUS = 'anonymous';
     const ROLE_MEMBER = 'member';
@@ -66,8 +66,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * Returns currently logged user or null
-     *
-     * @return null|self
      */
     public static function getCurrent(): ?self
     {
@@ -158,8 +156,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * Get first name
-     *
-     * @return string
      */
     public function getFirstName(): string
     {
@@ -178,8 +174,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * Get last name
-     *
-     * @return string
      */
     public function getLastName(): string
     {
@@ -188,8 +182,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * Get full name
-     *
-     * @return string
      */
     public function getName(): string
     {
@@ -212,8 +204,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
      * Get email
      *
      * @API\Field(type="Email")
-     *
-     * @return null|string
      */
     public function getEmail(): ?string
     {
@@ -224,8 +214,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
      * Use email as technical identifier of user
      *
      * @API\Exclude
-     *
-     * @return null|string
      */
     public function getLogin(): ?string
     {
@@ -250,8 +238,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
      *
      * But the current user is **not** allowed to demote a user who has a higher role than himself.
      * That means that a Responsible cannot demote an Admin to Individual.
-     *
-     * @param string $role
      */
     public function setRole(string $role): void
     {
@@ -294,25 +280,16 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
         $this->role = self::ROLE_MEMBER; // Bypass security
     }
 
-    /**
-     * @return string
-     */
     public function getPhone(): string
     {
         return $this->phone;
     }
 
-    /**
-     * @param string $phone
-     */
     public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
 
-    /**
-     * @return Collection
-     */
     public function getSessions(): Collection
     {
         return $this->sessions;
@@ -321,8 +298,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
     /**
      * Notify the user that it has a new session.
      * This should only be called by Session::addFacilitator()
-     *
-     * @param Session $session
      */
     public function sessionAdded(Session $session): void
     {
@@ -332,17 +307,12 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
     /**
      * Notify the user that a session was removed.
      * This should only be called by Session::removeFacilitator()
-     *
-     * @param Session $session
      */
     public function sessionRemoved(Session $session): void
     {
         $this->sessions->removeElement($session);
     }
 
-    /**
-     * @return string
-     */
     public function getMembership(): string
     {
         return $this->membership;
@@ -350,17 +320,12 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * @API\Exclude
-     *
-     * @param string $membership
      */
     public function setMembership(string $membership): void
     {
         $this->membership = $membership;
     }
 
-    /**
-     * @return bool
-     */
     public function getWebTemporaryAccess(): bool
     {
         return $this->webTemporaryAccess;
@@ -368,8 +333,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * @API\Exclude
-     *
-     * @param bool $webTemporaryAccess
      */
     public function setWebTemporaryAccess(bool $webTemporaryAccess): void
     {
@@ -378,8 +341,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * Get the first login date
-     *
-     * @return null|Chronos
      */
     public function getFirstLogin(): ?Chronos
     {
@@ -391,8 +352,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
 
     /**
      * Get the last login date
-     *
-     * @return null|Chronos
      */
     public function getLastLogin(): ?Chronos
     {
@@ -419,8 +378,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
      * Set subscription type
      *
      * @API\Exclude
-     *
-     * @param null|string $subscriptionType
      */
     public function setSubscriptionType(?string $subscriptionType): void
     {
@@ -431,8 +388,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\User, \Ecodev\Fe
      * Get subscription type
      *
      * @API\Field(type="?ProductType")
-     *
-     * @return null|string
      */
     public function getSubscriptionType(): ?string
     {

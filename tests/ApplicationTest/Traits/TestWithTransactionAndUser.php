@@ -20,7 +20,7 @@ trait TestWithTransactionAndUser
     /**
      * Start transaction
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->traitSetupWithTransaction();
         User::setCurrent(null);
@@ -29,7 +29,7 @@ trait TestWithTransactionAndUser
     /**
      * Cancel transaction, to undo all changes made
      */
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         User::setCurrent(null);
         $this->traitTearDownWithTransaction();

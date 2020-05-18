@@ -88,81 +88,51 @@ class Session extends AbstractModel
         $this->facilitators = new ArrayCollection();
     }
 
-    /**
-     * @return string
-     */
     public function getLocality(): string
     {
         return $this->locality;
     }
 
-    /**
-     * @param string $locality
-     */
     public function setLocality(string $locality): void
     {
         $this->locality = $locality;
     }
 
-    /**
-     * @return string
-     */
     public function getRegion(): string
     {
         return $this->region;
     }
 
-    /**
-     * @param string $region
-     */
     public function setRegion(string $region): void
     {
         $this->region = $region;
     }
 
-    /**
-     * @return string
-     */
     public function getStreet(): string
     {
         return $this->street;
     }
 
-    /**
-     * @param string $street
-     */
     public function setStreet(string $street): void
     {
         $this->street = $street;
     }
 
-    /**
-     * @return string
-     */
     public function getPrice(): string
     {
         return $this->price;
     }
 
-    /**
-     * @param string $price
-     */
     public function setPrice(string $price): void
     {
         $this->price = $price;
     }
 
-    /**
-     * @return string
-     */
     public function getAvailability(): string
     {
         return $this->availability;
     }
 
-    /**
-     * @param string $availability
-     */
     public function setAvailability(string $availability): void
     {
         $this->availability = $availability;
@@ -170,7 +140,6 @@ class Session extends AbstractModel
 
     /**
      * List of dates
-     *
      *
      * @return string[]
      */
@@ -189,25 +158,16 @@ class Session extends AbstractModel
         $this->dates = $dates;
     }
 
-    /**
-     * @return Date
-     */
     public function getStartDate(): Date
     {
         return $this->startDate;
     }
 
-    /**
-     * @param Date $startDate
-     */
     public function setStartDate(Date $startDate): void
     {
         $this->startDate = $startDate;
     }
 
-    /**
-     * @return Collection
-     */
     public function getFacilitators(): Collection
     {
         return $this->facilitators;
@@ -215,8 +175,6 @@ class Session extends AbstractModel
 
     /**
      * Add facilitator
-     *
-     * @param User $facilitator
      */
     public function addFacilitator(User $facilitator): void
     {
@@ -228,8 +186,6 @@ class Session extends AbstractModel
 
     /**
      * Remove facilitator
-     *
-     * @param User $facilitator
      */
     public function removeFacilitator(User $facilitator): void
     {

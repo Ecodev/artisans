@@ -28,8 +28,6 @@ class Message extends AbstractModel implements \Ecodev\Felix\Model\Message
 
     /**
      * Set recipient
-     *
-     * @param null|User $recipient
      */
     public function setRecipient(?User $recipient): void
     {
@@ -39,8 +37,6 @@ class Message extends AbstractModel implements \Ecodev\Felix\Model\Message
 
     /**
      * Get recipient
-     *
-     * @return null|User
      */
     public function getRecipient(): ?User
     {

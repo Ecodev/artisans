@@ -12,10 +12,6 @@ class OrganizationRepository extends AbstractRepository
 {
     /**
      * Get the organization that is matching with the most recent review available
-     *
-     * @param string $email
-     *
-     * @return null|Organization
      */
     public function getBestMatchingOrganization(string $email): ?Organization
     {

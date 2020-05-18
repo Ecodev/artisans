@@ -6,6 +6,7 @@ namespace Application\Traits;
 
 use Application\Model\Product;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
 
 /**
  * Trait for all objects with a name
@@ -24,8 +25,6 @@ trait HasSubscriptionLastReview
 
     /**
      * Get last review available through a subscription
-     *
-     * @return null|Product
      */
     public function getSubscriptionLastReview(): ?Product
     {
@@ -36,13 +35,11 @@ trait HasSubscriptionLastReview
      * Set last review available through a subscription
      *
      * @API\Exclude
-     *
-     * @param null|Product $subscriptionLastReview
      */
     public function setSubscriptionLastReview(?Product $subscriptionLastReview): void
     {
         if ($subscriptionLastReview && !$subscriptionLastReview->getReviewNumber()) {
-            throw new \InvalidArgumentException('The last review of a subscription must be a review, not an article');
+            throw new InvalidArgumentException('The last review of a subscription must be a review, not an article');
         }
 
         $this->subscriptionLastReview = $subscriptionLastReview;

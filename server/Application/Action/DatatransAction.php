@@ -11,6 +11,7 @@ use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Service\Mailer;
+use Exception;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Template\TemplateRendererInterface;
 use Money\Currencies\ISOCurrencies;
@@ -19,10 +20,13 @@ use Money\Money;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
 class DatatransAction extends AbstractAction
 {
-    /** @var TemplateRendererInterface */
+    /**
+     * @var TemplateRendererInterface
+     */
     private $template;
 
     /**
@@ -58,11 +62,6 @@ class DatatransAction extends AbstractAction
      * Webhook called by datatrans when a payment was made
      *
      * See documentation: https://api-reference.datatrans.ch/#failed-unsuccessful-authorization-response
-     *
-     * @param ServerRequestInterface $request
-     * @param RequestHandlerInterface $handler
-     *
-     * @return ResponseInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
@@ -71,7 +70,7 @@ class DatatransAction extends AbstractAction
 
         try {
             if (!is_array($body)) {
-                throw new \Exception('Parsed body is expected to be an array but got: ' . gettype($body));
+                throw new Exception('Parsed body is expected to be an array but got: ' . gettype($body));
             }
 
             if (isset($this->config['key'])) {
@@ -80,7 +79,7 @@ class DatatransAction extends AbstractAction
             $status = $body['status'] ?? '';
 
             $message = $this->dispatch($status, $body);
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $message = $this->createMessage('error', $exception->getMessage(), is_array($body) ? $body : []);
         }
 
@@ -94,33 +93,26 @@ class DatatransAction extends AbstractAction
     /**
      * Make sure the signature protecting important body fields is valid
      *
-     * @param array $body
      * @param string $key HMAC-SHA256 signing key in hexadecimal format
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function checkSignature(array $body, string $key): void
     {
         if (!isset($body['sign'])) {
-            throw new \Exception('Missing HMAC signature');
+            throw new Exception('Missing HMAC signature');
         }
 
         $aliasCC = $body['aliasCC'] ?? '';
         $valueToSign = $aliasCC . @$body['merchantId'] . @$body['amount'] . @$body['currency'] . @$body['refno'];
         $expectedSign = hash_hmac('sha256', trim($valueToSign), hex2bin(trim($key)));
         if ($expectedSign !== $body['sign']) {
-            throw new \Exception('Invalid HMAC signature');
+            throw new Exception('Invalid HMAC signature');
         }
     }
 
     /**
      * Create a message in a coherent way
-     *
-     * @param string $status
-     * @param string $message
-     * @param array $detail
-     *
-     * @return array
      */
     private function createMessage(string $status, string $message, array $detail): array
     {
@@ -133,11 +125,6 @@ class DatatransAction extends AbstractAction
 
     /**
      * Dispatch the data received from Datatrans to take appropriate actions
-     *
-     * @param string $status
-     * @param array $body
-     *
-     * @return array
      */
     private function dispatch(string $status, array $body): array
     {
@@ -156,7 +143,7 @@ class DatatransAction extends AbstractAction
 
                 break;
             default:
-                throw new \Exception('Unsupported status in Datatrans data: ' . $status);
+                throw new Exception('Unsupported status in Datatrans data: ' . $status);
         }
 
         return $message;
@@ -175,15 +162,15 @@ class DatatransAction extends AbstractAction
         });
 
         if (!$order) {
-            throw new \Exception('Cannot validate an order without a valid order ID');
+            throw new Exception('Cannot validate an order without a valid order ID');
         }
 
         if ($order->getPaymentMethod() !== \Application\DBAL\Types\PaymentMethodType::DATATRANS) {
-            throw new \Exception('Cannot validate an order whose payment method is: ' . $order->getPaymentMethod());
+            throw new Exception('Cannot validate an order whose payment method is: ' . $order->getPaymentMethod());
         }
 
         if ($order->getStatus() === Order::STATUS_VALIDATED) {
-            throw new \Exception('Cannot validate an order which is already validated');
+            throw new Exception('Cannot validate an order which is already validated');
         }
 
         $money = $this->getMoney($body);
@@ -193,7 +180,7 @@ class DatatransAction extends AbstractAction
             $expectedEUR = $this->formatMoney($order->getBalanceEUR());
             $actual = $this->formatMoney($money);
 
-            throw new \Exception("Cannot validate an order with incorrect balance. Expected $expectedCHF, or $expectedEUR, but got: " . $actual);
+            throw new Exception("Cannot validate an order with incorrect balance. Expected $expectedCHF, or $expectedEUR, but got: " . $actual);
         }
 
         // Actually validate
@@ -217,7 +204,7 @@ class DatatransAction extends AbstractAction
     {
         if (!array_key_exists('amount', $body)) {
             // Do not support "registrations"
-            throw new \Exception('Cannot validate an order without an amount');
+            throw new Exception('Cannot validate an order without an amount');
         }
         $amount = $body['amount'];
 
@@ -230,13 +217,11 @@ class DatatransAction extends AbstractAction
             return Money::EUR($amount);
         }
 
-        throw new \Exception('Can only accept payment in CHF or EUR, but got: ' . $currency);
+        throw new Exception('Can only accept payment in CHF or EUR, but got: ' . $currency);
     }
 
     /**
      * Notify the user and the admins
-     *
-     * @param Order $order
      */
     private function notify(Order $order): void
     {

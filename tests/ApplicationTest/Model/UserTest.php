@@ -10,18 +10,13 @@ use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         User::setCurrent(null);
     }
 
     /**
      * @dataProvider providerSetRole
-     *
-     * @param string $currentRole
-     * @param string $oldRole
-     * @param string $newRole
-     * @param null|string $exception
      */
     public function testSetRole(string $currentRole, string $oldRole, string $newRole, ?string $exception): void
     {

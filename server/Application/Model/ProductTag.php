@@ -37,9 +37,6 @@ class ProductTag extends AbstractModel
         $this->products = new ArrayCollection();
     }
 
-    /**
-     * @return Collection
-     */
     public function getProducts(): Collection
     {
         return $this->products;
@@ -47,8 +44,6 @@ class ProductTag extends AbstractModel
 
     /**
      * Add product
-     *
-     * @param Product $product
      */
     public function addProduct(Product $product): void
     {
@@ -60,8 +55,6 @@ class ProductTag extends AbstractModel
 
     /**
      * Remove product
-     *
-     * @param Product $product
      */
     public function removeProduct(Product $product): void
     {

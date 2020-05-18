@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class FileTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         User::setCurrent(null);
     }

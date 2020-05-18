@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
+use InvalidArgumentException;
 
 /**
  * An item that can be booked by a user
@@ -103,9 +104,6 @@ class Product extends AbstractProduct
         $this->relatedProducts = new ArrayCollection();
     }
 
-    /**
-     * @return Collection
-     */
     public function getProductTags(): Collection
     {
         return $this->productTags;
@@ -114,8 +112,6 @@ class Product extends AbstractProduct
     /**
      * Notify the user that it has a new productTag.
      * This should only be called by ProductTag::addUser()
-     *
-     * @param ProductTag $productTag
      */
     public function productTagAdded(ProductTag $productTag): void
     {
@@ -125,8 +121,6 @@ class Product extends AbstractProduct
     /**
      * Notify the user that it a productTag was removed.
      * This should only be called by ProductTag::removeUser()
-     *
-     * @param ProductTag $productTag
      */
     public function productTagRemoved(ProductTag $productTag): void
     {
@@ -135,8 +129,6 @@ class Product extends AbstractProduct
 
     /**
      * Reading duration in minutes
-     *
-     * @return null|int
      */
     public function getReadingDuration(): ?int
     {
@@ -145,57 +137,37 @@ class Product extends AbstractProduct
 
     /**
      * Reading duration in minutes
-     *
-     * @param null|int $readingDuration
      */
     public function setReadingDuration(?int $readingDuration): void
     {
         $this->readingDuration = $readingDuration;
     }
 
-    /**
-     * @return null|Date
-     */
     public function getReleaseDate(): ?Date
     {
         return $this->releaseDate;
     }
 
-    /**
-     * @param null|Date $releaseDate
-     */
     public function setReleaseDate(?Date $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }
 
-    /**
-     * @return null|int
-     */
     public function getReviewNumber(): ?int
     {
         return $this->reviewNumber;
     }
 
-    /**
-     * @param null|int $reviewNumber
-     */
     public function setReviewNumber(?int $reviewNumber): void
     {
         $this->reviewNumber = $reviewNumber;
     }
 
-    /**
-     * @return null|File
-     */
     public function getFile(): ?File
     {
         return $this->file;
     }
 
-    /**
-     * @param null|File $file
-     */
     public function setFile(?File $file): void
     {
         // We must trigger lazy loading, otherwise Doctrine will seriously
@@ -211,8 +183,6 @@ class Product extends AbstractProduct
      * Get related products
      *
      * @API\Field(type="Product[]")
-     *
-     * @return Collection
      */
     public function getRelatedProducts(): Collection
     {
@@ -227,7 +197,7 @@ class Product extends AbstractProduct
     public function addRelatedProduct(self $product): void
     {
         if ($product === $this) {
-            throw new \InvalidArgumentException('A product cannot be related to itself');
+            throw new InvalidArgumentException('A product cannot be related to itself');
         }
 
         if (!$this->relatedProducts->contains($product)) {
@@ -263,8 +233,6 @@ class Product extends AbstractProduct
 
     /**
      * Whether this product has more visibility
-     *
-     * @return bool
      */
     public function isHighlighted(): bool
     {
@@ -273,8 +241,6 @@ class Product extends AbstractProduct
 
     /**
      *Whether this product has more visibility
-     *
-     * @param bool $isHighlighted
      */
     public function setIsHighlighted(bool $isHighlighted): void
     {
@@ -283,8 +249,6 @@ class Product extends AbstractProduct
 
     /**
      * Set content
-     *
-     * @param string $content
      */
     public function setContent(string $content): void
     {
@@ -294,8 +258,6 @@ class Product extends AbstractProduct
 
     /**
      * Get content
-     *
-     * @return string
      */
     public function getContent(): string
     {

@@ -20,10 +20,6 @@ abstract class Standard
 {
     /**
      * Returns standard fields to query the object
-     *
-     * @param string $class
-     *
-     * @return array
      */
     public static function buildQuery(string $class): array
     {
@@ -82,10 +78,6 @@ abstract class Standard
 
     /**
      * Returns standard fields to mutate the object
-     *
-     * @param string $class
-     *
-     * @return array
      */
     public static function buildMutation(string $class): array
     {
@@ -171,8 +163,6 @@ abstract class Standard
      * @param string $ownerClass The class owning the relation
      * @param string $otherClass The other class, not-owning the relation
      * @param null|string $otherName a specific semantic, if needed, to be use as adder. If `$otherName = 'Parent'`, then we will call `addParent()`
-     *
-     * @return array
      */
     public static function buildRelationMutation(string $ownerClass, string $otherClass, ?string $otherName = null): array
     {
@@ -250,10 +240,6 @@ abstract class Standard
 
     /**
      * Returns the plural form of the given name
-     *
-     * @param string $name
-     *
-     * @return string
      */
     private static function makePlural(string $name): string
     {
@@ -266,10 +252,6 @@ abstract class Standard
 
     /**
      * Return arguments used for the list
-     *
-     * @param ClassMetadata $class
-     *
-     * @return array
      */
     private static function getListArguments(ClassMetadata $class): array
     {
@@ -292,10 +274,6 @@ abstract class Standard
 
     /**
      * Return arguments used for single item
-     *
-     * @param string $class
-     *
-     * @return array
      */
     private static function getSingleArguments(string $class): array
     {
@@ -308,10 +286,6 @@ abstract class Standard
 
     /**
      * Get default sorting values with some fallback for some special cases
-     *
-     * @param ClassMetadata $metadata
-     *
-     * @return array
      */
     private static function getDefaultSorting(ClassMetadata $metadata): array
     {
@@ -331,10 +305,6 @@ abstract class Standard
     /**
      * Recursively convert custom scalars that don't implement __toString() to their scalar
      * representation to injected back into DQL/SQL
-     *
-     * @param array $args
-     *
-     * @return array
      */
     private static function customTypesToScalar(array $args): array
     {

@@ -49,8 +49,6 @@ class Event extends AbstractModel
 
     /**
      * Get place
-     *
-     * @return string
      */
     public function getPlace(): string
     {
@@ -75,8 +73,6 @@ class Event extends AbstractModel
 
     /**
      * Get type
-     *
-     * @return string
      */
     public function getType(): string
     {
@@ -85,8 +81,6 @@ class Event extends AbstractModel
 
     /**
      * Get comments sent to the event
-     *
-     * @return Collection
      */
     public function getComments(): Collection
     {
@@ -96,8 +90,6 @@ class Event extends AbstractModel
     /**
      * Notify the event that it has a new comment
      * This should only be called by Comment::setEvent()
-     *
-     * @param Comment $comment
      */
     public function commentAdded(Comment $comment): void
     {
@@ -107,8 +99,6 @@ class Event extends AbstractModel
     /**
      * Notify the event that a comment was removed
      * This should only be called by Comment::setEvent()
-     *
-     * @param Comment $comment
      */
     public function commentRemoved(Comment $comment): void
     {

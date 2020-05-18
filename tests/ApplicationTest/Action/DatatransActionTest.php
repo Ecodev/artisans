@@ -27,7 +27,7 @@ class DatatransActionTest extends TestCase
         // Message always include input data
         $expectedViewModel['message']['detail'] = $data ?? [];
         $renderer = $this->createMock(TemplateRendererInterface::class);
-        $renderer->expects($this->once())->method('render')->with('app::datatrans', $expectedViewModel)->willReturn('');
+        $renderer->expects(self::once())->method('render')->with('app::datatrans', $expectedViewModel)->willReturn('');
 
         $handler = $this->createMock(RequestHandlerInterface::class);
 
@@ -42,8 +42,8 @@ class DatatransActionTest extends TestCase
 
         $messageQueuer = $this->createMock(MessageQueuer::class);
         if ($expectedViewModel['message']['status'] === 'success') {
-            $messageQueuer->expects($this->once())->method('queueUserValidatedOrder')->willReturn(new Message());
-            $messageQueuer->expects($this->once())->method('queueAdminValidatedOrder')->willReturn(new Message());
+            $messageQueuer->expects(self::once())->method('queueUserValidatedOrder')->willReturn(new Message());
+            $messageQueuer->expects(self::once())->method('queueAdminValidatedOrder')->willReturn(new Message());
         }
 
         $action = new DatatransAction(_em(), $renderer, $config, $mailer, $messageQueuer);

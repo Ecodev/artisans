@@ -18,8 +18,6 @@ class ProductRepository extends AbstractRepository implements LimitedAccessSubQu
      * - he is facilitator or administrator
      *
      * @param null|User $user
-     *
-     * @return string
      */
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {

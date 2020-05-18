@@ -22,9 +22,6 @@ class InvoicerTest extends TestCase
 
     /**
      * @dataProvider providerCreateOrder
-     *
-     * @param array $input
-     * @param array $expectedOrderLines
      */
     public function testCreateOrder(array $input, array $expectedOrderLines): void
     {

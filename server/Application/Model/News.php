@@ -49,8 +49,6 @@ class News extends AbstractModel
 
     /**
      * Whether this news is shown
-     *
-     * @return bool
      */
     public function isActive(): bool
     {
@@ -59,8 +57,6 @@ class News extends AbstractModel
 
     /**
      * Whether this news is shown
-     *
-     * @param bool $isActive
      */
     public function setIsActive(bool $isActive): void
     {
@@ -69,8 +65,6 @@ class News extends AbstractModel
 
     /**
      * Get comments sent to the news
-     *
-     * @return Collection
      */
     public function getComments(): Collection
     {
@@ -80,8 +74,6 @@ class News extends AbstractModel
     /**
      * Notify the news that it has a new comment
      * This should only be called by Comment::setNews()
-     *
-     * @param Comment $comment
      */
     public function commentAdded(Comment $comment): void
     {
@@ -91,25 +83,17 @@ class News extends AbstractModel
     /**
      * Notify the news that a comment was removed
      * This should only be called by Comment::setNews()
-     *
-     * @param Comment $comment
      */
     public function commentRemoved(Comment $comment): void
     {
         $this->comments->removeElement($comment);
     }
 
-    /**
-     * @return string
-     */
     public function getContent(): string
     {
         return $this->content;
     }
 
-    /**
-     * @param string $content
-     */
     public function setContent(string $content): void
     {
         $this->content = $content;

@@ -16,8 +16,6 @@ class Subscription extends AbstractProduct
 {
     /**
      * @API\Exclude
-     *
-     * @return bool
      */
     public function isPro(): bool
     {

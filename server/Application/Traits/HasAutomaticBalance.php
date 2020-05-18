@@ -31,8 +31,6 @@ trait HasAutomaticBalance
      * Read only, computed by SQL triggers
      *
      * @API\Field(type="CHF")
-     *
-     * @return Money
      */
     public function getBalanceCHF(): Money
     {
@@ -45,8 +43,6 @@ trait HasAutomaticBalance
      * Read only, computed by SQL triggers
      *
      * @API\Field(type="EUR")
-     *
-     * @return Money
      */
     public function getBalanceEUR(): Money
     {
@@ -55,8 +51,6 @@ trait HasAutomaticBalance
 
     /**
      * Returns the non-zero balance formatted as string
-     *
-     * @return string
      */
     public function getFormattedBalance(): string
     {

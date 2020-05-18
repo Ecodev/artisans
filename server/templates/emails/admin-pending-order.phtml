@@ -6,11 +6,11 @@ $url = $this->serverUrl . '/admin/order/' . $this->order->getId();
 
 ?>
 <p>Une commande a été initiée pour un total de <strong><?php echo $this->escapeHtml($this->order->getFormattedBalance()) ?></strong>.
-    <?php if ($this->order->getPaymentMethod() === PaymentMethodType::BVR): ?>
+    <?php if ($this->order->getPaymentMethod() === PaymentMethodType::BVR) { ?>
         Cette commande a besoin d'un BVR.
-    <?php else: ?>
+    <?php } else { ?>
         Cette commande a besoin d'informations pour un transfert bancaire.
-    <?php endif; ?>
+    <?php } ?>
 </p>
 
 <h2>Client : </h2>

@@ -60,8 +60,6 @@ class Order extends AbstractModel
     /**
      * Notify when a order line is added
      * This should only be called by OrderLine::setOrder()
-     *
-     * @param OrderLine $orderLine
      */
     public function orderLineAdded(OrderLine $orderLine): void
     {
@@ -71,17 +69,12 @@ class Order extends AbstractModel
     /**
      * Notify when a order line is removed
      * This should only be called by OrderLine::setOrder()
-     *
-     * @param OrderLine $orderLine
      */
     public function orderLineRemoved(OrderLine $orderLine): void
     {
         $this->orderLines->removeElement($orderLine);
     }
 
-    /**
-     * @return Collection
-     */
     public function getOrderLines(): Collection
     {
         return $this->orderLines;
@@ -97,8 +90,6 @@ class Order extends AbstractModel
 
     /**
      * @API\Input(type="OrderStatusType")
-     *
-     * @param string $status
      */
     public function setStatus(string $status): void
     {
@@ -107,8 +98,6 @@ class Order extends AbstractModel
 
     /**
      * @API\Field(type="PaymentMethod")
-     *
-     * @return string
      */
     public function getPaymentMethod(): string
     {
@@ -117,8 +106,6 @@ class Order extends AbstractModel
 
     /**
      * @API\Input(type="PaymentMethod")
-     *
-     * @param string $paymentMethod
      */
     public function setPaymentMethod(string $paymentMethod): void
     {

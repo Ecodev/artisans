@@ -22,8 +22,6 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
      * - the product is free and active
      *
      * @param null|User $user
-     *
-     * @return string
      */
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {

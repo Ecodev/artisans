@@ -47,6 +47,7 @@ class TypesFactory
 
         $aliases = [
             \Cake\Chronos\Chronos::class => \Ecodev\Felix\Api\Scalar\ChronosType::class,
+            \Cake\Chronos\Date::class => \Ecodev\Felix\Api\Scalar\DateType::class,
             'datetime' => \Ecodev\Felix\Api\Scalar\ChronosType::class,
             'date' => \Ecodev\Felix\Api\Scalar\DateType::class,
             \Psr\Http\Message\UploadedFileInterface::class => \GraphQL\Upload\UploadType::class,
@@ -66,8 +67,8 @@ class TypesFactory
             'invokables' => $invokables,
             'aliases' => $aliases,
             'services' => [
-//                // This is not quite right because it allow to compare a string with a json array.
-//                // TODO: either hide the json_array filter or find a cleaner solution
+                //                // This is not quite right because it allow to compare a string with a json array.
+                //                // TODO: either hide the json_array filter or find a cleaner solution
                 'json' => \GraphQL\Type\Definition\Type::string(),
             ],
             'abstract_factories' => [

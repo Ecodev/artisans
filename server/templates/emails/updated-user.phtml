@@ -9,13 +9,13 @@ $url = $this->serverUrl . '/admin/user/' . $this->updatedUser->getId();
         <th>Avant</th>
         <th>Après</th>
     </tr>
-    <?php foreach ($this->before as $key => $value): ?>
+    <?php foreach ($this->before as $key => $value) { ?>
         <tr>
             <td><?php echo $this->escapeHtml($key) ?></td>
             <td<?php echo $value !== $this->after[$key] ? ' style="color: red"' : '' ?>><?php echo $this->escapeHtml($value) ?></td>
             <td<?php echo $value !== $this->after[$key] ? ' style="color: green"' : '' ?>><?php echo $this->escapeHtml($this->after[$key]) ?></td>
         </tr>
-    <?php endforeach; ?>
+    <?php } ?>
 </table>
 
 <p>Contacter l'utilisateur :</p>

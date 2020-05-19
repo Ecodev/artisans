@@ -12,7 +12,7 @@ class UserRoleType extends EnumType
     public function __construct()
     {
         $config = [
-            User::ROLE_MEMBER => 'Membre',
+            User::ROLE_MEMBER => 'Client',
             User::ROLE_FACILITATOR => 'Facilitateur',
             User::ROLE_ADMINISTRATOR => 'Administrateur',
         ];

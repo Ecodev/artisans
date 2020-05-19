@@ -37,7 +37,6 @@ export class ProductService extends NaturalAbstractModelService<Product['product
 
     public static articlesSorting: ProductSorting[] = [
         {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
-        {field: ProductSortingField.releaseDate, order: SortingOrder.DESC},
         {field: ProductSortingField.illustration, order: SortingOrder.DESC},
         {field: ProductSortingField.sorting, order: SortingOrder.ASC},
     ];

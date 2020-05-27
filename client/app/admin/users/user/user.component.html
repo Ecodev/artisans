@@ -1,49 +1,54 @@
 <div [formGroup]="form" class="detail-body">
-
-    <natural-detail-header [listRoute]="['admin', 'user']" [model]="data.model" label="Utilisateur" newLabel="Nouvel utilisateur"
+    <natural-detail-header
+        [listRoute]="['admin', 'user']"
+        [model]="data.model"
+        label="Utilisateur"
+        newLabel="Nouvel utilisateur"
     ></natural-detail-header>
 
-    <mat-toolbar color="warn" *ngIf="data.model.shouldDelete">Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé définitivement ici.</mat-toolbar>
+    <mat-toolbar color="warn" *ngIf="data.model.shouldDelete"
+        >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
+        définitivement ici.</mat-toolbar
+    >
 
     <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-
                         <h2 class="mat-h2">Coordonnées</h2>
 
                         <app-address [form]="form" [disabled]="true"></app-address>
 
                         <div fxLayout="row" fxLayoutGap="10px">
-
                             <mat-form-field fxFlex>
                                 <mat-label>Téléphone</mat-label>
-                                <input formControlName="phone" matInput>
+                                <input formControlName="phone" matInput />
                             </mat-form-field>
-
                         </div>
-
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
                         <h2 class="mat-h2">Compte</h2>
                         <mat-form-field>
                             <mat-label>email</mat-label>
-                            <input (change)="update()" formControlName="email" matInput>
+                            <input (change)="update()" formControlName="email" matInput />
                             <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
                         </mat-form-field>
 
-                        <natural-select-enum (selectionChange)="update()" enumName="UserRole" formControlName="role" placeholder="Rôle"
+                        <natural-select-enum
+                            (selectionChange)="update()"
+                            enumName="UserRole"
+                            formControlName="role"
+                            placeholder="Rôle"
                         ></natural-select-enum>
 
                         <natural-select-enum
-                                enumName="Membership"
-                                formControlName="membership"
-                                placeholder="Membre des artisans"
+                            enumName="Membership"
+                            formControlName="membership"
+                            placeholder="Membre des artisans"
                         ></natural-select-enum>
-
                     </div>
                 </div>
 
@@ -51,15 +56,18 @@
 
                 <h2 class="mat-h2">Conversations carbone animées</h2>
 
-                <natural-relations [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
-                                   [main]="data.model"
-                                   [service]="sessionService"
-                                   otherName="facilitator"
-                                   placeholder="Conversations carbone"
+                <natural-relations
+                    [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
+                    [main]="data.model"
+                    [service]="sessionService"
+                    otherName="facilitator"
+                    placeholder="Conversations carbone"
                 >
                     <ng-template let-item="item">
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                            <natural-table-button [label]="item.name" [navigate]="['/admin/session/', item.id]"
+                            <natural-table-button
+                                [label]="item.name"
+                                [navigate]="['/admin/session/', item.id]"
                             ></natural-table-button>
                         </div>
                     </ng-template>
@@ -85,13 +93,15 @@
                         {{ data.model.resignDate | swissDate }}
                     </div>
                 </div>
-
             </div>
-
         </mat-tab>
-
     </mat-tab-group>
 
-    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"></natural-fixed-button-detail>
-
+    <natural-fixed-button-detail
+        (create)="create()"
+        (delete)="delete()"
+        *ngIf="showFabButton"
+        [form]="form"
+        [model]="data.model"
+    ></natural-fixed-button-detail>
 </div>

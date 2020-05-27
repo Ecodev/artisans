@@ -6,7 +6,6 @@
     $fg: map-get($theme, foreground);
 
     app-homepage {
-
         a.mat-display-1 {
             color: mat-color($fg, base);
 
@@ -26,9 +25,5 @@
                 border-color: mat-color($accent);
             }
         }
-
     }
-
 }
-
-

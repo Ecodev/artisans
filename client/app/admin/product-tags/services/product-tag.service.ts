@@ -1,8 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, NaturalQueryVariablesManager, unique } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Validators} from '@angular/forms';
+import {
+    FormAsyncValidators,
+    FormValidators,
+    NaturalAbstractModelService,
+    NaturalQueryVariablesManager,
+    unique,
+} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
+import {map} from 'rxjs/operators';
 import {
     CreateProductTag,
     CreateProductTagVariables,
@@ -15,12 +21,19 @@ import {
     UpdateProductTag,
     UpdateProductTagVariables,
 } from '../../../shared/generated-types';
-import { createProductTag, deleteProductTags, productTagQuery, productTagsQuery, updateProductTag } from './product-tag.queries';
+import {
+    createProductTag,
+    deleteProductTags,
+    productTagQuery,
+    productTagsQuery,
+    updateProductTag,
+} from './product-tag.queries';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ProductTagService extends NaturalAbstractModelService<ProductTag['productTag'],
+export class ProductTagService extends NaturalAbstractModelService<
+    ProductTag['productTag'],
     ProductTagVariables,
     ProductTags['productTags'],
     ProductTagsVariables,
@@ -28,16 +41,18 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
     CreateProductTagVariables,
     UpdateProductTag['updateProductTag'],
     UpdateProductTagVariables,
-    any> {
-
+    any
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
+        super(
+            apollo,
             'productTag',
             productTagQuery,
             productTagsQuery,
             createProductTag,
             updateProductTag,
-            deleteProductTags);
+            deleteProductTags,
+        );
     }
 
     public getFormValidators(): FormValidators {
@@ -64,5 +79,4 @@ export class ProductTagService extends NaturalAbstractModelService<ProductTag['p
             color: '',
         };
     }
-
 }

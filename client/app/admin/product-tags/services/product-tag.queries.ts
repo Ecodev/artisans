@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const productTagsQuery = gql`
     query ProductTags($filter: ProductTagFilter, $sorting: [ProductTagSorting!], $pagination: PaginationInput) {
@@ -53,7 +53,7 @@ export const createProductTag = gql`
 
 export const updateProductTag = gql`
     mutation UpdateProductTag($id: ProductTagID!, $input: ProductTagPartialInput!) {
-        updateProductTag(id:$id, input:$input) {
+        updateProductTag(id: $id, input: $input) {
             id
             updateDate
             updater {
@@ -65,7 +65,7 @@ export const updateProductTag = gql`
 `;
 
 export const deleteProductTags = gql`
-    mutation DeleteProductTags ($ids: [ProductTagID!]!){
+    mutation DeleteProductTags($ids: [ProductTagID!]!) {
         deleteProductTags(ids: $ids)
-    }`;
-
+    }
+`;

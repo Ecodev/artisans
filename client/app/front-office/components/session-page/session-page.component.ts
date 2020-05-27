@@ -1,7 +1,7 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail, NaturalQueryVariablesManager } from '@ecodev/natural';
-import { SessionService } from '../../../admin/sessions/services/session.service';
-import { UserService } from '../../../admin/users/services/user.service';
+import {Component, Injector, OnInit} from '@angular/core';
+import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {SessionService} from '../../../admin/sessions/services/session.service';
+import {UserService} from '../../../admin/users/services/user.service';
 import {
     CreateSession,
     CreateSessionVariables,
@@ -23,14 +23,17 @@ import {
     templateUrl: './session-page.component.html',
     styleUrls: ['./session-page.component.scss'],
 })
-export class SessionPageComponent extends NaturalAbstractDetail<Session['session'],
-    SessionVariables,
-    CreateSession['createSession'],
-    CreateSessionVariables,
-    UpdateSession['updateSession'],
-    UpdateSessionVariables,
-    any> implements OnInit {
-
+export class SessionPageComponent
+    extends NaturalAbstractDetail<
+        Session['session'],
+        SessionVariables,
+        CreateSession['createSession'],
+        CreateSessionVariables,
+        UpdateSession['updateSession'],
+        UpdateSessionVariables,
+        any
+    >
+    implements OnInit {
     /**
      * Session animators/facilitators
      */
@@ -71,7 +74,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
     private refreshFacilitators(session: Session_session) {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();
         qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [session.id]}}}]}]}});
-        this.userService.getAll(qvm).subscribe(result => this.facilitators = result.items);
+        this.userService.getAll(qvm).subscribe(result => (this.facilitators = result.items));
     }
 
     /**
@@ -93,6 +96,6 @@ export class SessionPageComponent extends NaturalAbstractDetail<Session['session
             },
             pagination: {pageSize: 5, pageIndex: 0},
         });
-        this.service.getAll(qvm).subscribe(result => this.otherSessions = result.items);
+        this.service.getAll(qvm).subscribe(result => (this.otherSessions = result.items));
     }
 }

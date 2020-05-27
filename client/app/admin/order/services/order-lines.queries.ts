@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const orderLineMetaFragment = gql`
     fragment orderLineMeta on OrderLine {
@@ -49,7 +49,8 @@ export const orderLinesQuery = gql`
     }
     ${permissionsFragment}
     ${userMetaFragment}
-${orderLineMetaFragment}`;
+    ${orderLineMetaFragment}
+`;
 
 export const orderLineQuery = gql`
     query OrderLine($id: OrderLineID!) {
@@ -75,7 +76,7 @@ export const orderLineQuery = gql`
 `;
 
 export const updateOrderLine = gql`
-    mutation UpdateOrderLine($id: OrderLineID!, $input:  OrderLineInput!) {
+    mutation UpdateOrderLine($id: OrderLineID!, $input: OrderLineInput!) {
         updateOrderLine(id: $id, input: $input) {
             ...orderLineMeta
             updateDate
@@ -85,5 +86,5 @@ export const updateOrderLine = gql`
         }
     }
     ${userMetaFragment}
-${orderLineMetaFragment}`;
-
+    ${orderLineMetaFragment}
+`;

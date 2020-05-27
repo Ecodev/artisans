@@ -1,6 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
-import { NaturalAbstractDetail } from '@ecodev/natural';
+import {Component, Injector, OnInit} from '@angular/core';
+import {FormArray, FormControl} from '@angular/forms';
+import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateSession,
     CreateSessionVariables,
@@ -9,8 +9,8 @@ import {
     UpdateSession,
     UpdateSessionVariables,
 } from '../../../shared/generated-types';
-import { UserService } from '../../users/services/user.service';
-import { SessionService } from '../services/session.service';
+import {UserService} from '../../users/services/user.service';
+import {SessionService} from '../services/session.service';
 
 @Component({
     selector: 'app-session',
@@ -18,14 +18,16 @@ import { SessionService } from '../services/session.service';
     styleUrls: ['./session.component.scss'],
 })
 export class SessionComponent
-    extends NaturalAbstractDetail<Session['session'],
+    extends NaturalAbstractDetail<
+        Session['session'],
         SessionVariables,
         CreateSession['createSession'],
         CreateSessionVariables,
         UpdateSession['updateSession'],
         UpdateSessionVariables,
-        any> implements OnInit {
-
+        any
+    >
+    implements OnInit {
     /**
      * Array of form controls dedicated to dates display
      */
@@ -47,5 +49,4 @@ export class SessionComponent
     public addDate() {
         this.datesForm.push(new FormControl(''));
     }
-
 }

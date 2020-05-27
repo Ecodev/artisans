@@ -6,7 +6,8 @@ body {
     margin: 0;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -24,13 +25,15 @@ pre.debug {
 }
 
 [bg] {
-    &, & * {
+    &,
+    & * {
         background: rgba(255, 0, 0, 0.1);
     }
 }
 
 [bd] {
-    &, & * {
+    &,
+    & * {
         border: 1px solid red;
     }
 }
@@ -59,21 +62,20 @@ pre.debug {
     padding-right: 20px;
     box-sizing: border-box;
 
-
     .page-body {
         max-width: 800px;
     }
 }
-
 
 #front-office-body > router-outlet + * {
     margin-top: 60px;
     display: block;
 }
 
-
 /* Disable login autofill background color */
-input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
     transition-delay: 3600s;
 }
 
@@ -103,11 +105,11 @@ mat-form-field.no-bottom-spacing {
 }
 
 .text-center {
-    text-align: center
+    text-align: center;
 }
 
 .text-right {
-    text-align: right
+    text-align: right;
 }
 
 .mat-snack-bar-container {
@@ -121,10 +123,9 @@ input::-webkit-inner-spin-button {
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input[type=number] {
+input[type='number'] {
     -moz-appearance: textfield; /* Firefox */
 }
-
 
 .natural-table {
     display: table;
@@ -139,7 +140,6 @@ input[type=number] {
     }
 }
 
-
 .relative {
     position: relative;
 
@@ -150,10 +150,7 @@ input[type=number] {
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
-
 }
-
 
 [matRipple] {
     cursor: pointer;
@@ -173,7 +170,8 @@ input[type=number] {
     width: 14em;
 }
 
-
-.mat-button, .mat-stroked-button, .mat-flat-button {
+.mat-button,
+.mat-stroked-button,
+.mat-flat-button {
     border-radius: 0 !important;
 }

@@ -4,7 +4,13 @@
     <a mat-flat-button routerLink="{{ form.get('buttonLink').value }}">
         {{ form.get('buttonLabel').value }}
     </a>
-    <button (click)="editMode = true" *ngIf="permissionService?.crud?.configuration?.create" class="edit-button" color="none" mat-fab>
+    <button
+        (click)="editMode = true"
+        *ngIf="permissionService?.crud?.configuration?.create"
+        class="edit-button"
+        color="none"
+        mat-fab
+    >
         <natural-icon name="edit"></natural-icon>
     </button>
 </div>
@@ -21,11 +27,11 @@
         </mat-form-field>
         <mat-form-field>
             <mat-label>Nom du bouton</mat-label>
-            <input formControlName="buttonLabel" matInput>
+            <input formControlName="buttonLabel" matInput />
         </mat-form-field>
         <mat-form-field>
             <mat-label>Lien du bouton</mat-label>
-            <input formControlName="buttonLink" matInput>
+            <input formControlName="buttonLink" matInput />
             <mat-hint>URL absolue débutant par un slash "/"</mat-hint>
         </mat-form-field>
     </form>

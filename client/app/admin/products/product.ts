@@ -1,4 +1,4 @@
-import { Product } from '../../shared/generated-types';
+import {Product} from '../../shared/generated-types';
 
 export interface ProductResolve {
     model: Product['product'];

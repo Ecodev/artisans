@@ -1,11 +1,8 @@
-import { Injectable } from '@angular/core';
-import { NaturalAbstractModelService } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
-import {
-    Purchases,
-    PurchasesVariables,
-} from '../../../shared/generated-types';
-import { purchasesQuery } from './purchase.queries';
+import {Injectable} from '@angular/core';
+import {NaturalAbstractModelService} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
+import {Purchases, PurchasesVariables} from '../../../shared/generated-types';
+import {purchasesQuery} from './purchase.queries';
 
 /**
  * A special service that accept Product variables but return OrderLine that were
@@ -14,7 +11,8 @@ import { purchasesQuery } from './purchase.queries';
 @Injectable({
     providedIn: 'root',
 })
-export class PurchaseService extends NaturalAbstractModelService<never,
+export class PurchaseService extends NaturalAbstractModelService<
+    never,
     never,
     Purchases['purchases'],
     PurchasesVariables,
@@ -22,15 +20,9 @@ export class PurchaseService extends NaturalAbstractModelService<never,
     never,
     never,
     never,
-    never> {
-
+    never
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
-            'purchase',
-            null,
-            purchasesQuery,
-            null,
-            null,
-            null);
+        super(apollo, 'purchase', null, purchasesQuery, null, null, null);
     }
 }

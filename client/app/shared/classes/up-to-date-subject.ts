@@ -1,7 +1,6 @@
-import { BehaviorSubject } from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 
 export class UpToDateSubject<T> extends BehaviorSubject<T> {
-
     public time: Date;
 
     constructor(_value: T) {
@@ -15,7 +14,6 @@ export class UpToDateSubject<T> extends BehaviorSubject<T> {
     }
 
     getUpToDateValue(expiration: number): T | null {
-
         const diff = +new Date() - +this.time;
         if (diff < expiration) {
             return this.value;
@@ -23,5 +21,4 @@ export class UpToDateSubject<T> extends BehaviorSubject<T> {
 
         return null;
     }
-
 }

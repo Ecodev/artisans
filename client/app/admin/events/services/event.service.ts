@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { NaturalAbstractModelService } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {NaturalAbstractModelService} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 
 import {
     CreateEvent,
@@ -14,30 +14,24 @@ import {
     UpdateEvent,
     UpdateEventVariables,
 } from '../../../shared/generated-types';
-import { createEvent, deleteEvents, eventQuery, eventsQuery, updateEvent } from './event.queries';
+import {createEvent, deleteEvents, eventQuery, eventsQuery, updateEvent} from './event.queries';
 
 @Injectable({
     providedIn: 'root',
 })
-export class EventService
-    extends NaturalAbstractModelService<Event['event'],
-        EventVariables,
-        Events['events'],
-        EventsVariables,
-        CreateEvent['createEvent'],
-        CreateEventVariables,
-        UpdateEvent['updateEvent'],
-        UpdateEventVariables,
-        DeleteEvents['deleteEvents']> {
-
+export class EventService extends NaturalAbstractModelService<
+    Event['event'],
+    EventVariables,
+    Events['events'],
+    EventsVariables,
+    CreateEvent['createEvent'],
+    CreateEventVariables,
+    UpdateEvent['updateEvent'],
+    UpdateEventVariables,
+    DeleteEvents['deleteEvents']
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
-            'event',
-            eventQuery,
-            eventsQuery,
-            createEvent,
-            updateEvent,
-            deleteEvents);
+        super(apollo, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
     }
 
     public getDefaultForClient() {
@@ -52,5 +46,4 @@ export class EventService
             date: new Date(),
         };
     }
-
 }

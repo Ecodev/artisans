@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import {Component, Input} from '@angular/core';
+import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import { BankingInfos, BankingInfos_bankingInfos, BankingInfosVariables } from '../../../../../shared/generated-types';
+import {BankingInfos, BankingInfos_bankingInfos, BankingInfosVariables} from '../../../../../shared/generated-types';
 
 const q = gql`
     query BankingInfos($user: UserID!, $amount: CHF) {
@@ -12,7 +12,8 @@ const q = gql`
             paymentTo
             paymentFor
         }
-    }`;
+    }
+`;
 
 @Component({
     selector: 'app-bvr',
@@ -20,20 +21,18 @@ const q = gql`
     styleUrls: ['./bvr.component.scss'],
 })
 export class BvrComponent {
-
     public bankingInfos: BankingInfos_bankingInfos;
 
-    constructor(private apollo: Apollo) {
-    }
+    constructor(private apollo: Apollo) {}
 
     @Input() set bankingData(data: BankingInfosVariables) {
-
         console.log('bankingData', data);
-        this.apollo.query<BankingInfos, BankingInfosVariables>({
-            query: q,
-            fetchPolicy: 'cache-first',
-            variables: data,
-        }).subscribe(result => this.bankingInfos = result.data.bankingInfos);
+        this.apollo
+            .query<BankingInfos, BankingInfosVariables>({
+                query: q,
+                fetchPolicy: 'cache-first',
+                variables: data,
+            })
+            .subscribe(result => (this.bankingInfos = result.data.bankingInfos));
     }
 }
-

@@ -1,6 +1,10 @@
 <div [formGroup]="form" class="detail-body">
-
-    <natural-detail-header [listRoute]="['admin', 'product']" [model]="data.model" label="Produit" newLabel="Nouveau produit">
+    <natural-detail-header
+        [listRoute]="['admin', 'product']"
+        [model]="data.model"
+        label="Produit"
+        newLabel="Nouveau produit"
+    >
         <a [routerLink]="['/larevuedurable/article', data.model.id]" color="primary" mat-raised-button>
             <natural-icon name="remove_red_eye"></natural-icon>
             Aperçu
@@ -12,24 +16,22 @@
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-
                         <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-
                             <div fxFlex fxLayout="column">
                                 <mat-form-field>
                                     <mat-label>Nom</mat-label>
-                                    <input (change)="update()" formControlName="name" matInput>
+                                    <input (change)="update()" formControlName="name" matInput />
                                     <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                        Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                        Maximum {{ form.get('name')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>
                                     <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                                 </mat-form-field>
 
                                 <mat-form-field>
                                     <mat-label>Code</mat-label>
-                                    <input (change)="update()" formControlName="code" matInput maxlength="20">
+                                    <input (change)="update()" formControlName="code" matInput maxlength="20" />
                                     <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
-                                        Maximum {{form.get('code')?.errors.maxlength.requiredLength }} caractères
+                                        Maximum {{ form.get('code')?.errors.maxlength.requiredLength }} caractères
                                     </mat-error>
                                     <mat-error *ngIf="form.get('code')?.hasError('duplicateValue')">
                                         Ce code est déjà attribué à un produit
@@ -46,55 +48,82 @@
 
                         <mat-form-field>
                             <mat-label>Contenu complet</mat-label>
-                            <textarea (change)="update()" [matAutosizeMinRows]="1" formControlName="content" matInput matTextareaAutosize
+                            <textarea
+                                (change)="update()"
+                                [matAutosizeMinRows]="1"
+                                formControlName="content"
+                                matInput
+                                matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
-
                     </div>
 
                     <div fxFlex="33" fxLayout="column" fxLayoutGap="20px">
-
                         <div fxLayout="column" class="margin-bottom" fxLayoutGap="20px">
-                            <mat-slide-toggle (change)="update()" formControlName="isActive">Disponible à la vente</mat-slide-toggle>
-                            <mat-slide-toggle (change)="update()" formControlName="isHighlighted">Mettre en avant</mat-slide-toggle>
+                            <mat-slide-toggle (change)="update()" formControlName="isActive"
+                                >Disponible à la vente</mat-slide-toggle
+                            >
+                            <mat-slide-toggle (change)="update()" formControlName="isHighlighted"
+                                >Mettre en avant</mat-slide-toggle
+                            >
                         </div>
 
-                        <natural-select-enum (selectionChange)="update()" formControlName="type" enumName="ProductType" placeholder="Type"
+                        <natural-select-enum
+                            (selectionChange)="update()"
+                            formControlName="type"
+                            enumName="ProductType"
+                            placeholder="Type"
                         ></natural-select-enum>
 
                         <mat-form-field>
                             <mat-label>Date de publication</mat-label>
-                            <input [matDatepicker]="picker" formControlName="releaseDate" matInput (change)="update()">
+                            <input
+                                [matDatepicker]="picker"
+                                formControlName="releaseDate"
+                                matInput
+                                (change)="update()"
+                            />
                             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Numéro de revue</mat-label>
-                            <input (change)="update()"
-                                   formControlName="reviewNumber"
-                                   matInput
-                                   type="number"
-                                   [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
-                            >
+                            <input
+                                (change)="update()"
+                                formControlName="reviewNumber"
+                                matInput
+                                type="number"
+                                [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
+                            />
                             <mat-hint>Seulement pour les revues</mat-hint>
-                            <mat-error *ngIf="form.hasError('reviewXorArticle')">Un produit ne peut pas être à la fois une revue et un
-                                article. Il faut soit entrer un numéro de revue pour une revue, soit choisir une revue existante pour un
-                                article.
+                            <mat-error *ngIf="form.hasError('reviewXorArticle')"
+                                >Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer un
+                                numéro de revue pour une revue, soit choisir une revue existante pour un article.
                             </mat-error>
                         </mat-form-field>
 
-                        <natural-select (selectionChange)="update()"
-                                        [service]="productService"
-                                        formControlName="review"
-                                        placeholder="Revue dont est extrait cet article"
-                                        [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
-                                        [filter]="{groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}, {reviewNumber: {null: {not: true}}}]}]}"
+                        <natural-select
+                            (selectionChange)="update()"
+                            [service]="productService"
+                            formControlName="review"
+                            placeholder="Revue dont est extrait cet article"
+                            [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
+                            [filter]="{
+                                groups: [
+                                    {
+                                        conditions: [
+                                            {id: {equal: {value: data.model.id, not: true}}},
+                                            {reviewNumber: {null: {not: true}}}
+                                        ]
+                                    }
+                                ]
+                            }"
                         ></natural-select>
 
                         <mat-form-field>
                             <mat-label>Durée de lecture</mat-label>
-                            <input (change)="update()" formControlName="readingDuration" matInput type="number">
+                            <input (change)="update()" formControlName="readingDuration" matInput type="number" />
                             <mat-hint>Saisir un nombre de minutes</mat-hint>
                         </mat-form-field>
 
@@ -104,84 +133,88 @@
 
                         <mat-form-field>
                             <mat-label>Prix par unité CHF</mat-label>
-                            <input (change)="update();"
-                                   formControlName="pricePerUnitCHF"
-                                   matInput
-                                   required="required"
-                                   step="0.01"
-                                   type="number"
-                            >
+                            <input
+                                (change)="update()"
+                                formControlName="pricePerUnitCHF"
+                                matInput
+                                required="required"
+                                step="0.01"
+                                type="number"
+                            />
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Prix par unité EUR</mat-label>
-                            <input (change)="update();"
-                                   formControlName="pricePerUnitEUR"
-                                   matInput
-                                   required="required"
-                                   step="0.01"
-                                   type="number"
-                            >
+                            <input
+                                (change)="update()"
+                                formControlName="pricePerUnitEUR"
+                                matInput
+                                required="required"
+                                step="0.01"
+                                type="number"
+                            />
                             <div matSuffix>EUR</div>
                             <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="margin-top">
                             <mat-label>Remarques internes</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMaxRows]="3"
-                                      formControlName="internalRemarks"
-                                      matInput
-                                      matTextareaAutosize
+                            <textarea
+                                (change)="update()"
+                                [matAutosizeMaxRows]="3"
+                                formControlName="internalRemarks"
+                                matInput
+                                matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
-
                     </div>
                 </div>
 
                 <mat-divider></mat-divider>
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-
                     <div fxFlex="25" fxLayout="column">
                         <h2 class="mat-h2">Produit dématérialisé (PDF)</h2>
-                        <app-file (modelChange)="setFormValue($event, 'file')"
-                                  [height]="300"
-                                  [model]="data.model.file"
-                                  [service]="fileService"
-                                  [style.borderRadius.px]="4"
-                                  [style.marginLeft.px]="2"
-                                  action="upload"
-                                  class="mat-elevation-z2"
-                                  accept="application/pdf"
+                        <app-file
+                            (modelChange)="setFormValue($event, 'file')"
+                            [height]="300"
+                            [model]="data.model.file"
+                            [service]="fileService"
+                            [style.borderRadius.px]="4"
+                            [style.marginLeft.px]="2"
+                            action="upload"
+                            class="mat-elevation-z2"
+                            accept="application/pdf"
                         ></app-file>
                     </div>
 
                     <div fxFlex="50" fxLayout="column">
                         <h2 class="mat-h2">Illustration</h2>
-                        <app-file (modelChange)="setFormValue($event, 'illustration')"
-                                  [height]="300"
-                                  [model]="data.model.illustration"
-                                  [service]="imageService"
-                                  [style.borderRadius.px]="4"
-                                  [style.marginLeft.px]="2"
-                                  action="upload"
-                                  class="mat-elevation-z2"
+                        <app-file
+                            (modelChange)="setFormValue($event, 'illustration')"
+                            [height]="300"
+                            [model]="data.model.illustration"
+                            [service]="imageService"
+                            [style.borderRadius.px]="4"
+                            [style.marginLeft.px]="2"
+                            action="upload"
+                            class="mat-elevation-z2"
                         ></app-file>
                     </div>
 
                     <div fxFlex="25" fxLayout="column">
                         <h2 class="mat-h2">Aperçu du produit</h2>
-                        <app-file (modelChange)="setFormValue($event, 'image')"
-                                  [height]="300"
-                                  [model]="data.model.image"
-                                  [service]="imageService"
-                                  [style.borderRadius.px]="4"
-                                  [style.marginLeft.px]="2"
-                                  action="upload"
-                                  class="mat-elevation-z2"
+                        <app-file
+                            (modelChange)="setFormValue($event, 'image')"
+                            [height]="300"
+                            [model]="data.model.image"
+                            [service]="imageService"
+                            [style.borderRadius.px]="4"
+                            [style.marginLeft.px]="2"
+                            action="upload"
+                            class="mat-elevation-z2"
                         ></app-file>
                     </div>
                 </div>
@@ -190,19 +223,22 @@
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-
                         <div *ngIf="data.model.id">
                             <h2 class="mat-h2">Tags</h2>
-                            <natural-relations [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
-                                               [main]="data.model"
-                                               [service]="productTagService"
-                                               placeholder="Ajouter un tag"
+                            <natural-relations
+                                [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
+                                [main]="data.model"
+                                [service]="productTagService"
+                                placeholder="Ajouter un tag"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                                         <!-- TODO : link to products list filtred by tag -->
                                         <ngx-avatar [bgColor]="item.color" [name]="item.name" [size]="32"></ngx-avatar>
-                                        <natural-table-button [label]="item.name" [navigate]="['/admin/product']"></natural-table-button>
+                                        <natural-table-button
+                                            [label]="item.name"
+                                            [navigate]="['/admin/product']"
+                                        ></natural-table-button>
                                     </div>
                                 </ng-template>
                             </natural-relations>
@@ -211,39 +247,45 @@
                 </div>
 
                 <natural-stamp [item]="data.model"></natural-stamp>
-
             </div>
         </mat-tab>
 
         <mat-tab *ngIf="data.model.id" label="Ventes">
-            <app-order-lines [contextColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
-                             [contextVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
-                             [persistSearch]="false"
-                             [showTotals]="true"
+            <app-order-lines
+                [contextColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
+                [contextVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
+                [persistSearch]="false"
+                [showTotals]="true"
             ></app-order-lines>
         </mat-tab>
 
         <mat-tab *ngIf="data.model.id" label="Produits similaires">
             <div class="padding-top">
-                <natural-relations [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"
-                                   [main]="data.model"
-                                   [service]="productService"
-                                   otherName="relatedProduct"
-                                   placeholder="Produit similaire"
+                <natural-relations
+                    [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"
+                    [main]="data.model"
+                    [service]="productService"
+                    otherName="relatedProduct"
+                    placeholder="Produit similaire"
                 >
                     <ng-template let-item="item">
                         <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                            <natural-table-button [label]="item.name" [navigate]="['/admin/product/', item.id]"
+                            <natural-table-button
+                                [label]="item.name"
+                                [navigate]="['/admin/product/', item.id]"
                             ></natural-table-button>
                         </div>
                     </ng-template>
                 </natural-relations>
             </div>
         </mat-tab>
-
     </mat-tab-group>
 
-    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"
+    <natural-fixed-button-detail
+        (create)="create()"
+        (delete)="delete()"
+        *ngIf="showFabButton"
+        [form]="form"
+        [model]="data.model"
     ></natural-fixed-button-detail>
-
 </div>

@@ -1,5 +1,5 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail } from '@ecodev/natural';
+import {Component, Injector, OnInit} from '@angular/core';
+import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -8,11 +8,11 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { XorErrorStateMatcher } from '../../../shared/validators';
-import { FilesService } from '../../files/services/files.service';
-import { ProductTagService } from '../../product-tags/services/product-tag.service';
-import { ImageService } from '../services/image.service';
-import { ProductService } from '../services/product.service';
+import {XorErrorStateMatcher} from '../../../shared/validators';
+import {FilesService} from '../../files/services/files.service';
+import {ProductTagService} from '../../product-tags/services/product-tag.service';
+import {ImageService} from '../services/image.service';
+import {ProductService} from '../services/product.service';
 
 @Component({
     selector: 'app-product',
@@ -20,21 +20,24 @@ import { ProductService } from '../services/product.service';
     styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent
-    extends NaturalAbstractDetail<Product['product'],
+    extends NaturalAbstractDetail<
+        Product['product'],
         ProductVariables,
         CreateProduct['createProduct'],
         CreateProductVariables,
         UpdateProduct['updateProduct'],
         UpdateProductVariables,
-        any> implements OnInit {
-
+        any
+    >
+    implements OnInit {
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
-    constructor(public productService: ProductService,
-                injector: Injector,
-                public productTagService: ProductTagService,
-                public imageService: ImageService,
-                public fileService: FilesService,
+    constructor(
+        public productService: ProductService,
+        injector: Injector,
+        public productTagService: ProductTagService,
+        public imageService: ImageService,
+        public fileService: FilesService,
     ) {
         super('product', productService, injector);
     }
@@ -52,5 +55,4 @@ export class ProductComponent
             }
         }
     }
-
 }

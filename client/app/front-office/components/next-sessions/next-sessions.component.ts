@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
-import { forkJoin } from 'rxjs';
-import { SessionService } from '../../../admin/sessions/services/session.service';
-import { SessionSortingField, SessionsVariables, SortingOrder } from '../../../shared/generated-types';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NaturalQueryVariablesManager} from '@ecodev/natural';
+import {forkJoin} from 'rxjs';
+import {SessionService} from '../../../admin/sessions/services/session.service';
+import {SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-next-sessions',
@@ -11,7 +11,6 @@ import { SessionSortingField, SessionsVariables, SortingOrder } from '../../../s
     styleUrls: ['./next-sessions.component.scss'],
 })
 export class NextSessionsComponent implements OnInit {
-
     /**
      * Regions to display in first step (in mat-select)
      */
@@ -20,13 +19,11 @@ export class NextSessionsComponent implements OnInit {
     /**
      * List of only next session for each city matching the wanted region
      */
-    public localities: { name: string, id: string }[] = [];
+    public localities: {name: string; id: string}[] = [];
 
-    constructor(private sessionService: SessionService, public router: Router, public route: ActivatedRoute) {
-    }
+    constructor(private sessionService: SessionService, public router: Router, public route: ActivatedRoute) {}
 
     ngOnInit(): void {
-
         // Get regions
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
         const variables: SessionsVariables = {
@@ -47,7 +44,7 @@ export class NextSessionsComponent implements OnInit {
         };
 
         qvm.set('variables', variables);
-        this.sessionService.getAll(qvm).subscribe(data => this.regions = data.items.map(i => i.region));
+        this.sessionService.getAll(qvm).subscribe(data => (this.regions = data.items.map(i => i.region)));
 
         this.fetchLocalitiesAndSessions();
     }
@@ -56,7 +53,6 @@ export class NextSessionsComponent implements OnInit {
      * Get the next (in the future) session
      */
     public fetchLocalitiesAndSessions() {
-
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
         const localityVariables: SessionsVariables = {
             filter: {
@@ -81,10 +77,8 @@ export class NextSessionsComponent implements OnInit {
         qvm.set('variables', localityVariables);
 
         this.sessionService.getAll(qvm).subscribe(data => {
-
             // Query next session for each locality
             const observables = data.items.map(session => {
-
                 const sessionVariables: SessionsVariables = {
                     filter: {
                         groups: [
@@ -109,7 +103,7 @@ export class NextSessionsComponent implements OnInit {
             });
 
             forkJoin(observables).subscribe(result => {
-                const localities: { name: string, id: string }[] = [];
+                const localities: {name: string; id: string}[] = [];
 
                 result.forEach(sessionsResult => {
                     const session = sessionsResult.items.length ? sessionsResult.items[0] : null;
@@ -120,8 +114,6 @@ export class NextSessionsComponent implements OnInit {
 
                 this.localities = localities;
             });
-
         });
     }
-
 }

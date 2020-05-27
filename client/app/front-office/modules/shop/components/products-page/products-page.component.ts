@@ -1,10 +1,10 @@
-import { Component, Injector, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { fromUrl, memoryStorageProvider, NaturalPersistenceService } from '@ecodev/natural';
-import { ProductTagService } from '../../../../../admin/product-tags/services/product-tag.service';
-import { ProductService } from '../../../../../admin/products/services/product.service';
-import { AbstractInfiniteLoadList } from '../../../../../shared/classes/AbstractInfiniteLoadList';
-import { Products, Products_products_items, ProductsVariables } from '../../../../../shared/generated-types';
+import {Component, Injector, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {fromUrl, memoryStorageProvider, NaturalPersistenceService} from '@ecodev/natural';
+import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
+import {ProductService} from '../../../../../admin/products/services/product.service';
+import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
+import {Products, Products_products_items, ProductsVariables} from '../../../../../shared/generated-types';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -26,8 +26,8 @@ export enum ProductsViewMode {
         memoryStorageProvider,
     ],
 })
-export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables> implements OnInit {
-
+export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables>
+    implements OnInit {
     /**
      * If true, the three first items of grid have highlighted layout
      */
@@ -70,7 +70,12 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
      */
     public defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
 
-    constructor(route: ActivatedRoute, productService: ProductService, injector: Injector, public productTagService: ProductTagService) {
+    constructor(
+        route: ActivatedRoute,
+        productService: ProductService,
+        injector: Injector,
+        public productTagService: ProductTagService,
+    ) {
         super(productService, injector);
     }
 
@@ -97,7 +102,5 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
                 this.search(fromUrl(this.persistenceService.getFromUrl('ns', this.route)));
             }
         });
-
     }
-
 }

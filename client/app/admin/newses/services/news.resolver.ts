@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ErrorService } from '../../../shared/components/error/error.service';
-import { NewsResolve } from '../news';
-import { NewsService } from './news.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
+import {Observable} from 'rxjs';
+import {ErrorService} from '../../../shared/components/error/error.service';
+import {NewsResolve} from '../news';
+import {NewsService} from './news.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class NewsResolver implements Resolve<NewsResolve> {
-
-    constructor(private productService: NewsService, private errorService: ErrorService) {
-    }
+    constructor(private productService: NewsService, private errorService: ErrorService) {}
 
     /**
      * Resolve product data for router and panels service

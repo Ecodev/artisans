@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { userMetaFragment } from '../../../shared/queries/fragments';
+import {userMetaFragment} from '../../../shared/queries/fragments';
 
 export const eventsQuery = gql`
     query Events($filter: EventFilter, $sorting: [EventSorting!], $pagination: PaginationInput) {
@@ -15,7 +15,8 @@ export const eventsQuery = gql`
             pageIndex
             length
         }
-    }`;
+    }
+`;
 
 export const eventQuery = gql`
     query Event($id: EventID!) {
@@ -38,18 +39,22 @@ export const eventQuery = gql`
                 delete
             }
         }
-    }${userMetaFragment}`;
+    }
+    ${userMetaFragment}
+`;
 
 export const createEvent = gql`
-    mutation CreateEvent ($input: EventInput!) {
-        createEvent (input: $input) {
+    mutation CreateEvent($input: EventInput!) {
+        createEvent(input: $input) {
             id
             creationDate
             creator {
                 ...userMeta
             }
         }
-    }${userMetaFragment}`;
+    }
+    ${userMetaFragment}
+`;
 
 export const updateEvent = gql`
     mutation UpdateEvent($id: EventID!, $input: EventPartialInput!) {
@@ -59,9 +64,12 @@ export const updateEvent = gql`
                 ...userMeta
             }
         }
-    }${userMetaFragment}`;
+    }
+    ${userMetaFragment}
+`;
 
 export const deleteEvents = gql`
-    mutation DeleteEvents ($ids: [EventID!]!){
+    mutation DeleteEvents($ids: [EventID!]!) {
         deleteEvents(ids: $ids)
-    }`;
+    }
+`;

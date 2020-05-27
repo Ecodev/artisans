@@ -1,11 +1,11 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { relationsToIds } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Component, Injector, OnInit} from '@angular/core';
+import {relationsToIds} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import { pick } from 'lodash';
-import { ProductService } from '../../../admin/products/services/product.service';
-import { NewUserService } from './new-user.service';
-import { RegisterComponent } from './register.component';
+import {pick} from 'lodash';
+import {ProductService} from '../../../admin/products/services/product.service';
+import {NewUserService} from './new-user.service';
+import {RegisterComponent} from './register.component';
 
 @Component({
     selector: 'app-confirm',
@@ -13,12 +13,7 @@ import { RegisterComponent } from './register.component';
     styleUrls: ['./register.component.scss'],
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
-
-    constructor(userService: NewUserService,
-                productService: ProductService,
-                apollo: Apollo,
-                injector: Injector,
-    ) {
+    constructor(userService: NewUserService, productService: ProductService, apollo: Apollo, injector: Injector) {
         super(userService, injector, apollo);
     }
 
@@ -56,20 +51,25 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
         ];
 
         const input = pick(relationsToIds(this.form.value), fieldWhitelist);
-        this.apollo.mutate({
-            mutation: mutation,
-            variables: {
-                token: this.route.snapshot.params.token,
-                input: input,
-            },
-        }).subscribe(() => {
-            this.sending = false;
+        this.apollo
+            .mutate({
+                mutation: mutation,
+                variables: {
+                    token: this.route.snapshot.params.token,
+                    input: input,
+                },
+            })
+            .subscribe(
+                () => {
+                    this.sending = false;
 
-            const message = 'Vous pouvez maintenant vous connecter avec le login et mot de passe que vous avez choisi';
+                    const message =
+                        'Vous pouvez maintenant vous connecter avec le login et mot de passe que vous avez choisi';
 
-            this.alertService.info(message, 5000);
-            this.router.navigate(['/mon-compte']);
-        }, () => this.sending = false);
+                    this.alertService.info(message, 5000);
+                    this.router.navigate(['/mon-compte']);
+                },
+                () => (this.sending = false),
+            );
     }
-
 }

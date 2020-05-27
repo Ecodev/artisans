@@ -1,31 +1,43 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px">
-
     <div *ngIf="title" class="mat-display-1">{{ title }}</div>
 
     <ng-container *ngIf="items.length">
-
-        <app-tags-navigation *ngIf="showTagsNavigation" [service]="productTagService" [linkBase]="['/larevuedurable/articles']"
+        <app-tags-navigation
+            *ngIf="showTagsNavigation"
+            [service]="productTagService"
+            [linkBase]="['/larevuedurable/articles']"
         ></app-tags-navigation>
 
         <!--
         GRID
         -->
-        <div class="grid products" [class.highlight-first-items]="highlightFirstItems" *ngIf="viewMode === ProductsViewMode.grid">
+        <div
+            class="grid products"
+            [class.highlight-first-items]="highlightFirstItems"
+            *ngIf="viewMode === ProductsViewMode.grid"
+        >
             <div *ngFor="let product of items; let index = index" class="product" fxLayout="column" fxLayoutGap="10px">
                 <div class="product-tags" *ngIf="showTagsOnProducts">
-                    <a *ngFor="let tag of product.productTags"
-                       [routerLink]="['/larevuedurable/articles', tag.name]"
-                       class="product-tag mat-body"
-                    >{{ tag.name }}</a>
+                    <a
+                        *ngFor="let tag of product.productTags"
+                        [routerLink]="['/larevuedurable/articles', tag.name]"
+                        class="product-tag mat-body"
+                        >{{ tag.name }}</a
+                    >
                 </div>
 
-                <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
+                <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{
+                    product.name
+                }}</a>
 
-                <a *ngIf="index <= 1 && product.illustration"
-                   [routerLink]="['/larevuedurable/article', product.id]"
-                   [style.backgroundImage]="'url(/image/' + product.illustration.id + '/' + (index === 0 ? '400' : '160') + ')'"
-                   class="product-illustration"
-                   fxFlex
+                <a
+                    *ngIf="index <= 1 && product.illustration"
+                    [routerLink]="['/larevuedurable/article', product.id]"
+                    [style.backgroundImage]="
+                        'url(/image/' + product.illustration.id + '/' + (index === 0 ? '400' : '160') + ')'
+                    "
+                    class="product-illustration"
+                    fxFlex
                 ></a>
 
                 <div class="image-placeholder"></div>
@@ -37,7 +49,13 @@
                         <app-price [product]="product" class="mat-h3"></app-price>
                     </div>
 
-                    <a mat-flat-button color="accent" *ngIf="product.file" [href]="'/file/' + product.file.id" class="product-file-button">
+                    <a
+                        mat-flat-button
+                        color="accent"
+                        *ngIf="product.file"
+                        [href]="'/file/' + product.file.id"
+                        class="product-file-button"
+                    >
                         Télécharger
                     </a>
                 </div>
@@ -49,14 +67,28 @@
         -->
         <div *ngIf="viewMode === ProductsViewMode.list">
             <div class="list products" fxLayout="column" fxLayoutGap="60px">
-                <div *ngFor="let product of items" class="product" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px">
-
-                    <a class="product-image" *ngIf="product.image" [routerLink]="['/larevuedurable/article', product.id]">
+                <div
+                    *ngFor="let product of items"
+                    class="product"
+                    fxLayout="column"
+                    fxLayout.gt-sm="row"
+                    fxLayoutGap="60px"
+                >
+                    <a
+                        class="product-image"
+                        *ngIf="product.image"
+                        [routerLink]="['/larevuedurable/article', product.id]"
+                    >
                         <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
                     </a>
 
                     <div fxLayout="column" fxLayoutGap="10px" fxFlex>
-                        <div fxLayout="row" fxLayoutGap="15px" fxLayoutAlign="start baseline" class="mat-h2 no-margin-bottom text-light">
+                        <div
+                            fxLayout="row"
+                            fxLayoutGap="15px"
+                            fxLayoutAlign="start baseline"
+                            class="mat-h2 no-margin-bottom text-light"
+                        >
                             <span *ngIf="product.reviewNumber" class="text-primary">
                                 N° {{ product.reviewNumber }}
                             </span>
@@ -64,31 +96,33 @@
                                 {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
                             </span>
                         </div>
-                        <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{ product.name }}</a>
+                        <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{
+                            product.name
+                        }}</a>
                         <div class="product-name mat-h3" [innerHTML]="product.description"></div>
                     </div>
 
                     <div class="product-price" fxLayout="column" fxLayoutGap="15px">
                         <app-price [product]="product" class="mat-h1"></app-price>
-                        <a mat-flat-button
-                           color="primary"
-                           [routerLink]="['/larevuedurable/article', product.id]"
-                           class="product-detail-button"
-                        >Voir le détail
+                        <a
+                            mat-flat-button
+                            color="primary"
+                            [routerLink]="['/larevuedurable/article', product.id]"
+                            class="product-detail-button"
+                            >Voir le détail
                         </a>
 
-                        <a mat-flat-button
-                           color="accent"
-                           *ngIf="product.file"
-                           [href]="'/file/' + product.file.id"
-                           class="product-file-button"
-                           target="_blank"
+                        <a
+                            mat-flat-button
+                            color="accent"
+                            *ngIf="product.file"
+                            [href]="'/file/' + product.file.id"
+                            class="product-file-button"
+                            target="_blank"
                         >
                             Télécharger
                         </a>
-
                     </div>
-
                 </div>
             </div>
         </div>

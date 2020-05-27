@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { MatDialogConfig } from '@angular/material/dialog';
-import { RouterModule, Routes } from '@angular/router';
-import { NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData } from '@ecodev/natural';
-import { OrderComponent } from '../admin/order/order/order.component';
-import { OrderResolver } from '../admin/order/services/order.resolver';
-import { ViewerResolver } from '../admin/users/services/viewer.resolver';
-import { AuthGuard } from '../shared/guards/auth.guard';
-import { AccountComponent } from './components/account/account.component';
-import { HistoryComponent } from './components/history/history.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { PurchasesComponent } from './components/purchases/purchases.component';
+import {NgModule} from '@angular/core';
+import {MatDialogConfig} from '@angular/material/dialog';
+import {RouterModule, Routes} from '@angular/router';
+import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData} from '@ecodev/natural';
+import {OrderComponent} from '../admin/order/order/order.component';
+import {OrderResolver} from '../admin/order/services/order.resolver';
+import {ViewerResolver} from '../admin/users/services/viewer.resolver';
+import {AuthGuard} from '../shared/guards/auth.guard';
+import {AccountComponent} from './components/account/account.component';
+import {HistoryComponent} from './components/history/history.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {PurchasesComponent} from './components/purchases/purchases.component';
 
 const routes: Routes = [
     {
@@ -64,5 +64,4 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ProfileRoutingModule {
-}
+export class ProfileRoutingModule {}

@@ -6,11 +6,9 @@
     $fg: map-get($theme, foreground);
 
     .mega-menu {
-
         background: mat-color($bg, base);
 
         ul {
-
             a {
                 color: lighten(mat-color($fg, text), 20%);
             }
@@ -26,10 +24,6 @@
             & > li.hasMenu::after {
                 background: mat-color($bg, card);
             }
-
         }
-
     }
 }
-
-

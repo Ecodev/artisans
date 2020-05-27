@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 const commentMetaFragment = gql`
     fragment commentMeta on Comment {
@@ -58,15 +58,17 @@ export const commentQuery = gql`
 `;
 
 export const createComment = gql`
-    mutation CreateComment ($input: CommentInput!) {
-        createComment (input: $input) {
+    mutation CreateComment($input: CommentInput!) {
+        createComment(input: $input) {
             id
             creationDate
             creator {
                 ...userMeta
             }
         }
-    }${userMetaFragment}`;
+    }
+    ${userMetaFragment}
+`;
 
 export const updateComment = gql`
     mutation UpdateComment($id: CommentID!, $input: CommentPartialInput!) {
@@ -76,9 +78,12 @@ export const updateComment = gql`
                 ...userMeta
             }
         }
-    }${userMetaFragment}`;
+    }
+    ${userMetaFragment}
+`;
 
 export const deleteComments = gql`
-    mutation DeleteComments ($ids: [CommentID!]!){
+    mutation DeleteComments($ids: [CommentID!]!) {
         deleteComments(ids: $ids)
-    }`;
+    }
+`;

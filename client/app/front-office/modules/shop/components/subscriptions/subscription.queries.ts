@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../../../shared/queries/fragments';
 
 export const subscriptionMetaFragment = gql`
     fragment subscriptionMeta on Subscription {
@@ -38,7 +38,8 @@ export const subscriptionsQuery = gql`
             length
         }
     }
-${subscriptionMetaFragment}`;
+    ${subscriptionMetaFragment}
+`;
 
 export const subscriptionQuery = gql`
     query Subscription($id: SubscriptionID!) {
@@ -67,7 +68,7 @@ export const createSubscription = gql`
 
 export const updateSubscription = gql`
     mutation UpdateSubscription($id: SubscriptionID!, $input: SubscriptionPartialInput!) {
-        updateSubscription(id:$id, input:$input) {
+        updateSubscription(id: $id, input: $input) {
             id
             updateDate
             updater {
@@ -79,6 +80,7 @@ export const updateSubscription = gql`
 `;
 
 export const deleteSubscriptions = gql`
-    mutation DeleteSubscriptions ($ids: [SubscriptionID!]!){
+    mutation DeleteSubscriptions($ids: [SubscriptionID!]!) {
         deleteSubscriptions(ids: $ids)
-    }`;
+    }
+`;

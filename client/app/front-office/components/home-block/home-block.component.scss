@@ -1,7 +1,6 @@
 @import '../../../../styles/responsive';
 
 :host {
-
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -28,7 +27,5 @@
             right: -10px;
             bottom: -10px;
         }
-
     }
-
 }

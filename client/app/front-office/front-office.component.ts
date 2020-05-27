@@ -1,15 +1,15 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { NaturalAbstractController, NaturalAlertService, NaturalSearchSelections, toUrl } from '@ecodev/natural';
-import { differenceBy } from 'lodash';
-import { filter, finalize } from 'rxjs/operators';
-import { UserService } from '../admin/users/services/user.service';
-import { CurrentUserForProfile_viewer, UserRole } from '../shared/generated-types';
-import { Currency, CurrencyService } from '../shared/services/currency.service';
-import { CartService } from './modules/cart/services/cart.service';
-import { MenuItem, NavigationService } from './services/navigation.service';
+import {DOCUMENT} from '@angular/common';
+import {Component, ElementRef, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {NaturalAbstractController, NaturalAlertService, NaturalSearchSelections, toUrl} from '@ecodev/natural';
+import {differenceBy} from 'lodash';
+import {filter, finalize} from 'rxjs/operators';
+import {UserService} from '../admin/users/services/user.service';
+import {CurrentUserForProfile_viewer, UserRole} from '../shared/generated-types';
+import {Currency, CurrencyService} from '../shared/services/currency.service';
+import {CartService} from './modules/cart/services/cart.service';
+import {MenuItem, NavigationService} from './services/navigation.service';
 
 @Component({
     selector: 'app-front-office',
@@ -18,7 +18,6 @@ import { MenuItem, NavigationService } from './services/navigation.service';
     animations: [],
 })
 export class FrontOfficeComponent extends NaturalAbstractController implements OnInit {
-
     public searchTerm = '';
     public menuOpened = false;
 
@@ -32,7 +31,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
      */
     public navigation: MenuItem[] = [
         {
-            display: 'L\'association',
+            display: "L'association",
             link: '/association',
         },
         {
@@ -55,7 +54,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     // link: '/' ???
                 },
                 {
-                    display: 'S\'abonner',
+                    display: "S'abonner",
                     link: '/larevuedurable/abonnements',
                     highlight: true,
                 },
@@ -161,28 +160,24 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     public ngOnInit(): void {
-
-        this.userService.getViewerObservable().subscribe(viewer => this.viewer = viewer);
+        this.userService.getViewerObservable().subscribe(viewer => (this.viewer = viewer));
 
         // Setup mobile menu with items from top menu that are missing on main menu
         this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];
 
-        this.router.events
-            .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => {
-                const contentContainer = this.document.querySelector('.mat-sidenav-content');
-                if (contentContainer) {
-                    const top = document.getElementById(this.route.snapshot.fragment)?.offsetTop || 0;
-                    contentContainer.scroll({top: top, behavior: top ? 'smooth' : undefined});
-                }
-            });
+        this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+            const contentContainer = this.document.querySelector('.mat-sidenav-content');
+            if (contentContainer) {
+                const top = document.getElementById(this.route.snapshot.fragment)?.offsetTop || 0;
+                contentContainer.scroll({top: top, behavior: top ? 'smooth' : undefined});
+            }
+        });
     }
 
     /**
      * To reuse some implemented mechanics, the search is just a redirection that converts the search string into a global natural search
      */
     public search() {
-
         const search: NaturalSearchSelections = [
             [
                 {
@@ -196,7 +191,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     public openMenuDropdown(items: MenuItem[], event: MouseEvent) {
-
         if (!items || !items.length) {
             return;
         }
@@ -213,7 +207,9 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         target.classList.add(openClass);
         const position = target.getBoundingClientRect().top + target.offsetHeight; // bottom position of target relative to viewport
 
-        this.navigationService.open(new ElementRef(target), items, position).subscribe(() => target.classList.remove(openClass));
+        this.navigationService
+            .open(new ElementRef(target), items, position)
+            .subscribe(() => target.classList.remove(openClass));
     }
 
     public subscribeNewsletter(): void {
@@ -222,13 +218,18 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         }
 
         this.newsletterForm.disable();
-        this.userService.subscribeNewsletter(this.newsletterForm.value.email)
+        this.userService
+            .subscribeNewsletter(this.newsletterForm.value.email)
             .pipe(finalize(() => this.newsletterForm.enable()))
             .subscribe(() => {
                 // Exceptionally show a dialog, instead of snackbar, because
                 // we want to be triple sure that the user saw it worked and
                 // avoid him to re-submit the same email again
-                this.alertService.confirm('Inscription résussie', 'Merci de vous être inscrit à la newsletter', 'Fermer');
+                this.alertService.confirm(
+                    'Inscription résussie',
+                    'Merci de vous être inscrit à la newsletter',
+                    'Fermer',
+                );
             });
     }
 }

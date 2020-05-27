@@ -5,7 +5,6 @@
     $bg: map-get($theme, background);
     $fg: map-get($theme, foreground);
 
-
     .text-primary {
         color: mat-color($primary);
     }
@@ -30,11 +29,11 @@
         font-weight: 100 !important;
     }
 
-
     .frame-primary {
         background: mat-color($primary);
 
-        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &,
+        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: mat-color($primary, default-contrast);
         }
     }
@@ -42,26 +41,28 @@
     .frame-accent {
         background: mat-color($accent);
 
-        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &,
+        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             border: 1px solid red !important;
             color: mat-color($accent, default-contrast);
         }
-
     }
 
     .frame-warn {
         background: mat-color($warn);
 
-        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        &,
+        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
             color: mat-color($warn, default-contrast);
         }
     }
 
     .frame-green {
-        background: #00AE8C;
+        background: #00ae8c;
 
-        &, a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
-            color: #FFFFFF;
+        &,
+        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+            color: #ffffff;
         }
     }
 
@@ -72,7 +73,4 @@
     a {
         color: mat-color($primary);
     }
-
 }
-
-

@@ -37,10 +37,7 @@
                                 "output": "/"
                             }
                         ],
-                        "styles": [
-                            "client/styles/_themes.scss",
-                            "client/styles.scss"
-                        ],
+                        "styles": ["client/styles/_themes.scss", "client/styles.scss"],
                         "scripts": []
                     },
                     "configurations": {
@@ -132,9 +129,7 @@
                             "client/tsconfig.spec.json",
                             "client/tsconfig.server.json"
                         ],
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
+                        "exclude": ["**/node_modules/**"]
                     }
                 },
                 "server": {
@@ -177,9 +172,7 @@
                     "options": {
                         "browserTarget": "artisans:build:production",
                         "serverTarget": "artisans:server:production",
-                        "routes": [
-                            "/"
-                        ]
+                        "routes": ["/"]
                     },
                     "configurations": {
                         "production": {}
@@ -208,9 +201,7 @@
                     "builder": "@angular-devkit/build-angular:tslint",
                     "options": {
                         "tsConfig": "e2e/tsconfig.e2e.json",
-                        "exclude": [
-                            "**/node_modules/**"
-                        ]
+                        "exclude": ["**/node_modules/**"]
                     }
                 }
             }

@@ -1,20 +1,19 @@
 <h2 mat-dialog-title>Emails des bénéficiaires de l'abonnement profesionnel</h2>
 <mat-dialog-content [formGroup]="form">
-
     <div formArrayName="emails">
-        <div *ngFor="let control of emailsControl.controls; let i = index;"
-             fxLayout="row"
-             fxLayoutAlign="start center"
-             fxLayoutGap="15px"
+        <div
+            *ngFor="let control of emailsControl.controls; let i = index"
+            fxLayout="row"
+            fxLayoutAlign="start center"
+            fxLayoutGap="15px"
         >
             <mat-form-field fxFlex>
                 <mat-label>Email {{ i }}</mat-label>
-                <input [formControl]="control" matInput>
+                <input [formControl]="control" matInput />
                 <mat-error *ngIf="control.hasError('email')" i18n>Adresse email invalide</mat-error>
             </mat-form-field>
         </div>
     </div>
-
 </mat-dialog-content>
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
     <button mat-button mat-dialog-close>Annuler</button>

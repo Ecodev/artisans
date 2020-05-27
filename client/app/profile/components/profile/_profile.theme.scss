@@ -6,15 +6,11 @@
     $fg: map-get($theme, foreground);
 
     app-profile {
-
         mat-nav-list {
             padding-top: 0 !important; // override native .mat-list-base
             * {
                 color: inherit !important;
             }
         }
-
     }
 }
-
-

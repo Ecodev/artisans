@@ -1,9 +1,9 @@
-import { Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { NaturalAbstractController } from '@ecodev/natural';
-import { Observable, of, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { UploadService } from './services/upload.service';
+import {Component, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
+import {NaturalAbstractController} from '@ecodev/natural';
+import {Observable, of, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {UploadService} from './services/upload.service';
 import {
     Product_product_file,
     Product_product_image,
@@ -11,13 +11,13 @@ import {
     Purchases_purchases_items_product_file,
 } from '../../generated-types';
 
-type FileModel = Purchases_purchases_items_product_file
+type FileModel =
+    | Purchases_purchases_items_product_file
     | Product_product_image
     | Product_product_file
     | Products_products_items_file;
 
 export function getDownloadLink(model: FileModel | null): null | string {
-
     const hostname = window.location.protocol + '//' + window.location.hostname;
 
     if (model && model.__typename === 'File') {
@@ -36,7 +36,6 @@ export function getDownloadLink(model: FileModel | null): null | string {
     providers: [UploadService],
 })
 export class FileComponent extends NaturalAbstractController implements OnInit, OnChanges {
-
     @HostBinding('style.height.px') @Input() height = 250;
 
     @Input() action: 'upload' | 'download' | null = null;
@@ -54,7 +53,7 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
     @Input() service;
     @Input() model; // todo : when __typename included in queries : FileType;
 
-    @Output() modelChange = new EventEmitter<{ file: File }>();
+    @Output() modelChange = new EventEmitter<{file: File}>();
 
     public imagePreview: SafeStyle | null;
     public filePreview: string | null;
@@ -79,12 +78,11 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
     }
 
     public upload(file: File) {
-
         this.model = {file: file};
         this.updateImage();
 
         if (this.service) {
-            this.service.create(this.model).subscribe((result) => {
+            this.service.create(this.model).subscribe(result => {
                 this.model = result;
                 this.modelChange.emit(result);
             });
@@ -94,7 +92,6 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
     }
 
     public getDownloadLink(): null | string {
-
         if (this.action !== 'download') {
             return null;
         }
@@ -103,7 +100,6 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
     }
 
     private updateImage() {
-
         this.imagePreview = null;
         this.filePreview = null;
         if (!this.model) {
@@ -116,22 +112,18 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
                 const content = 'url(data:' + this.model.file.type + ';base64,' + result + ')';
                 this.imagePreview = this.sanitizer.bypassSecurityTrustStyle(content);
             });
-
         } else if (this.model.file) {
             this.filePreview = this.model.file.type.split('/')[1];
-
         } else if (this.model.__typename === 'Image' && this.model.id) {
             // Model image with id, use specific API to render image by size
             const loc = window.location;
-            const height = (this.height ? '/' + this.height : '');
+            const height = this.height ? '/' + this.height : '';
 
             // create image url without port to stay compatible with dev mode
             const image = loc.protocol + '//' + loc.hostname + '/image/' + this.model.id + height;
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + image + ')');
-
         } else if (this.model.__typename === 'File') {
             this.filePreview = this.model.mime.split('/')[1];
-
         } else if (this.model.src) {
             // external url
             this.imagePreview = this.sanitizer.bypassSecurityTrustStyle('url(' + this.model.src + ')');
@@ -139,7 +131,6 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
     }
 
     private getBase64(file: File | null): Observable<string> {
-
         if (!file) {
             return of('');
         }
@@ -155,5 +146,4 @@ export class FileComponent extends NaturalAbstractController implements OnInit, 
 
         return subject.asObservable();
     }
-
 }

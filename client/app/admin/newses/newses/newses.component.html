@@ -1,45 +1,48 @@
 <div *ngIf="dataSource" fxLayout="column">
-
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            {{ routeData?.title }}
+        </div>
     </div>
 
     <div fxLayout="column">
-
         <div class="margin-v overflow" fxLayout="row">
-
-            <natural-search (selectionChange)="search($event)"
-                            [facets]="naturalSearchFacets"
-                            [multipleGroups]="true"
-                            [selections]="naturalSearchSelections"
-                            fxFlex
+            <natural-search
+                (selectionChange)="search($event)"
+                [facets]="naturalSearchFacets"
+                [multipleGroups]="true"
+                [selections]="naturalSearchSelections"
+                fxFlex
             >
-
-                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                <natural-columns-picker
+                    (selectionChange)="selectedColumns = $event"
+                    [initialSelection]="initialColumns"
+                >
                     <span naturalColumnsPickerColumn="date">Date</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="isActive">Active</span>
                 </natural-columns-picker>
             </natural-search>
-
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
                 <ng-container matColumnDef="date">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.date | date : 'dd.MM.y'}}</td>
+                    <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <natural-table-button [label]="element.name" [navigate]="['/admin/news', element.id]" matTooltip="Éditer"
+                            <natural-table-button
+                                [label]="element.name"
+                                [navigate]="['/admin/news', element.id]"
+                                matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>
@@ -53,7 +56,6 @@
                         </div>
                     </td>
                 </ng-container>
-
             </table>
         </div>
 
@@ -65,16 +67,19 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator (page)="pagination($event)"
-                       *ngIf="dataSource.data?.length"
-                       [length]="dataSource.data?.length"
-                       [pageIndex]="dataSource.data?.pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
-                       [pageSize]="dataSource.data?.pageSize"
+        <mat-paginator
+            (page)="pagination($event)"
+            *ngIf="dataSource.data?.length"
+            [length]="dataSource.data?.length"
+            [pageIndex]="dataSource.data?.pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageSize]="dataSource.data?.pageSize"
         ></mat-paginator>
-
     </div>
 </div>
 
-<natural-fixed-button *ngIf="permissionsService.crud?.news.create" [routerLink]="['/admin/news/new']" icon="add"
+<natural-fixed-button
+    *ngIf="permissionsService.crud?.news.create"
+    [routerLink]="['/admin/news/new']"
+    icon="add"
 ></natural-fixed-button>

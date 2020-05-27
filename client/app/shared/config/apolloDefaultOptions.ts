@@ -1,10 +1,10 @@
-import { hasFilesAndProcessDate, NaturalAlertService } from '@ecodev/natural';
-import { HttpBatchLink } from 'apollo-angular-link-http-batch';
-import { DefaultOptions } from 'apollo-client/ApolloClient';
-import { ApolloLink } from 'apollo-link';
-import { onError } from 'apollo-link-error';
-import { createUploadLink } from 'apollo-upload-client';
-import { NetworkActivityService } from '../services/network-activity.service';
+import {hasFilesAndProcessDate, NaturalAlertService} from '@ecodev/natural';
+import {HttpBatchLink} from 'apollo-angular-link-http-batch';
+import {DefaultOptions} from 'apollo-client/ApolloClient';
+import {ApolloLink} from 'apollo-link';
+import {onError} from 'apollo-link-error';
+import {createUploadLink} from 'apollo-upload-client';
+import {NetworkActivityService} from '../services/network-activity.service';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
@@ -18,10 +18,11 @@ export const apolloDefaultOptions: DefaultOptions = {
 /**
  * Create an Apollo link to show alert in case of error, and message if network is down
  */
-function createErrorLink(networkActivityService: NetworkActivityService,
-                         alertService: NaturalAlertService): ApolloLink {
+function createErrorLink(
+    networkActivityService: NetworkActivityService,
+    alertService: NaturalAlertService,
+): ApolloLink {
     return onError(errorResponse => {
-
         // Network errors are not caught by uploadInterceptor, so we need to decrease pending queries
         if (errorResponse.networkError) {
             alertService.error('Une erreur est survenue sur le réseau');
@@ -50,10 +51,7 @@ function createErrorLink(networkActivityService: NetworkActivityService,
  *
  * This function will only be executed in Node environment, so we can access `process`
  */
-export function createApolloLinkForServer(
-    httpBatchLink: HttpBatchLink,
-): ApolloLink {
-
+export function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloLink {
     const hostname = process.cwd().split('/').pop() || 'dev.larevuedurable.com';
     const options = {
         uri: 'https://' + hostname + '/graphql', // Must be absolute URL

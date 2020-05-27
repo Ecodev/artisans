@@ -1,7 +1,6 @@
 @import '../../../../../../styles/responsive';
 
 :host {
-
     .cart-buttons .mat-flat-button[color] {
         min-width: 200px;
     }
@@ -13,7 +12,6 @@
     }
 
     .cart-item {
-
         display: flex;
         flex-direction: column;
 
@@ -45,7 +43,6 @@
         .item-body {
             flex: 1;
         }
-
 
         .product-image {
             display: block;

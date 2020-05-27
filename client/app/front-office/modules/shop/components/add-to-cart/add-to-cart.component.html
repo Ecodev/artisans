@@ -1,2 +1,2 @@
-<a (click)="click()" *ngIf="!inCart" [color]="buttonColor" mat-flat-button>{{ label || 'Acheter l\'article'}}</a>
+<a (click)="click()" *ngIf="!inCart" [color]="buttonColor" mat-flat-button>{{ label || "Acheter l'article" }}</a>
 <a *ngIf="inCart" color="accent" mat-flat-button routerLink="/panier">{{ 'Voir le panier' }}</a>

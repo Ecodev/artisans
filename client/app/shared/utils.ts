@@ -1,6 +1,6 @@
 import Decimal from 'decimal.js';
-import { Provider } from '@angular/core';
-import { NaturalMemoryStorage, SESSION_STORAGE } from '@ecodev/natural';
+import {Provider} from '@angular/core';
+import {NaturalMemoryStorage, SESSION_STORAGE} from '@ecodev/natural';
 
 // todo : drop decimaljs ?
 export function moneyRoundUp(amount: number): number {
@@ -25,5 +25,5 @@ export function copy(document: Document, value: string): void {
  */
 export const ssrCompatibleStorageProvider: Provider = {
     provide: SESSION_STORAGE,
-    useFactory: () => typeof sessionStorage === 'undefined' ? new NaturalMemoryStorage() : sessionStorage,
+    useFactory: () => (typeof sessionStorage === 'undefined' ? new NaturalMemoryStorage() : sessionStorage),
 };

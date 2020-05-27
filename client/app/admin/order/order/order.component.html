@@ -1,34 +1,37 @@
 <div fxLayout="row" fxLayoutAlign="start center">
-    <h2 fxFlex mat-dialog-title>
-        Commande du {{ data.model.creationDate | swissDate }}
-    </h2>
+    <h2 fxFlex mat-dialog-title>Commande du {{ data.model.creationDate | swissDate }}</h2>
 
-    <natural-select-enum (selectionChange)="updateStatus($event)"
-                         *ngIf="viewer?.role === UserRole.administrator"
-                         [ngModel]="data.model.status"
-                         enumName="OrderStatus"
-                         placeholder="Status"
+    <natural-select-enum
+        (selectionChange)="updateStatus($event)"
+        *ngIf="viewer?.role === UserRole.administrator"
+        [ngModel]="data.model.status"
+        enumName="OrderStatus"
+        placeholder="Status"
     ></natural-select-enum>
 </div>
 
 <mat-dialog-content fxLayout="column" fxLayoutGap="30px">
-    <app-order-lines [contextColumns]="['name', 'quantity', 'balance']"
-                     [contextVariables]="contextVariables"
-                     [hideHeader]="true"
-                     [hidePaginator]="true"
-                     [pageSizeOptions]="[999]"
-                     [paginatorPageSize]="999"
-                     [showTotals]="false"
+    <app-order-lines
+        [contextColumns]="['name', 'quantity', 'balance']"
+        [contextVariables]="contextVariables"
+        [hideHeader]="true"
+        [hidePaginator]="true"
+        [pageSizeOptions]="[999]"
+        [paginatorPageSize]="999"
+        [showTotals]="false"
     ></app-order-lines>
 
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
         <div class="mat-h1">
             <div>Total :</div>
-            <div *ngIf="data.model.balanceCHF > 0" style="text-align:right">{{ data.model.balanceCHF | currency : 'CHF' }}</div>
-            <div *ngIf="data.model.balanceEUR > 0" style="text-align:right">{{ data.model.balanceEUR | currency : 'EUR' }}</div>
+            <div *ngIf="data.model.balanceCHF > 0" style="text-align: right;">
+                {{ data.model.balanceCHF | currency: 'CHF' }}
+            </div>
+            <div *ngIf="data.model.balanceEUR > 0" style="text-align: right;">
+                {{ data.model.balanceEUR | currency: 'EUR' }}
+            </div>
         </div>
     </div>
-
 </mat-dialog-content>
 
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">

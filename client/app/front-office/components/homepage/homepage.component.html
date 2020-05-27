@@ -1,7 +1,9 @@
-<div class="splash-image" [style.backgroundImage]="'url(assets/images/homepage/jeromine-derigny-coll-argos-larevuedurable-054.jpg)'"></div>
+<div
+    class="splash-image"
+    [style.backgroundImage]="'url(assets/images/homepage/jeromine-derigny-coll-argos-larevuedurable-054.jpg)'"
+></div>
 
 <div class="introduction-blocs">
-
     <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutGap="50px">
         <app-home-block fxFlex id="bloc1" key="home-block-1"></app-home-block>
         <app-home-block fxFlex id="bloc2" key="home-block-2"></app-home-block>
@@ -14,13 +16,18 @@
 <!-- News + Events -->
 <div class="posts">
     <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
-
         <!-- News -->
         <div class="newses" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px">
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>ACTUALITÉS</div>
                 <div class="relative">
-                    <button *ngIf="permissionService?.crud?.news?.create" class="absolute" color="none" mat-fab routerLink="/admin/news">
+                    <button
+                        *ngIf="permissionService?.crud?.news?.create"
+                        class="absolute"
+                        color="none"
+                        mat-fab
+                        routerLink="/admin/news"
+                    >
                         <natural-icon name="edit"></natural-icon>
                     </button>
                 </div>
@@ -28,7 +35,7 @@
             <mat-divider></mat-divider>
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
                 <div *ngFor="let news of newses" class="news">
-                    <div class="mat-body-strong text-light">{{ news.date | date : 'EEE dd.MM.yy' | capitalize }}</div>
+                    <div class="mat-body-strong text-light">{{ news.date | date: 'EEE dd.MM.yy' | capitalize }}</div>
                     <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
                     <div [innerHTML]="news.description" class="mat-h3 description"></div>
                 </div>
@@ -44,7 +51,13 @@
             <div class="mat-display-1 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>AGENDA</div>
                 <div class="relative">
-                    <button *ngIf="permissionService?.crud?.event?.create" class="absolute" color="none" mat-fab routerLink="/admin/event">
+                    <button
+                        *ngIf="permissionService?.crud?.event?.create"
+                        class="absolute"
+                        color="none"
+                        mat-fab
+                        routerLink="/admin/event"
+                    >
                         <natural-icon name="edit"></natural-icon>
                     </button>
                 </div>
@@ -53,9 +66,11 @@
                 <ng-container *ngFor="let event of events">
                     <mat-divider></mat-divider>
                     <div class="event">
-                        <a class="mat-h2 no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple>{{ event.name }}</a>
+                        <a class="mat-h2 no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple>{{
+                            event.name
+                        }}</a>
                         <div class="mat-h3 no-margin-bottom">
-                            <span class="text-light">{{ event.date | date : 'EEE dd.MM.yy' | capitalize }}</span>
+                            <span class="text-light">{{ event.date | date: 'EEE dd.MM.yy' | capitalize }}</span>
                             <span class="description">- {{ event.place }} - {{ event.type }}</span>
                         </div>
                     </div>
@@ -68,20 +83,28 @@
     </div>
 </div>
 
-<div class="la-revue-splash" [style.backgroundImage]="'url(assets/images/homepage/artisans-de-la-transition-thomas_victor_greenpeace.jpg)'">
+<div
+    class="la-revue-splash"
+    [style.backgroundImage]="'url(assets/images/homepage/artisans-de-la-transition-thomas_victor_greenpeace.jpg)'"
+>
     <div class="container">
         <!--        <img alt="logo la revue durable" class="section-logo" src="assets/LaRevueDurable-90noir.svg" [style.width.perc]="50" />-->
-        <img alt="logo la revue durable" class="section-logo" src="assets/LaRevueDurable-blanc.svg" [style.width.perc]="50" />
+        <img
+            alt="logo la revue durable"
+            class="section-logo"
+            src="assets/LaRevueDurable-blanc.svg"
+            [style.width.perc]="50"
+        />
     </div>
 </div>
 
 <div class="la-revue section" *ngIf="currentReview">
     <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
-
         <a [routerLink]="['/larevuedurable/article', currentReview.id]">
-            <img [attr.src]="'/image/' + currentReview.image.id + '/470'"
-                 alt="illustration du dernier numéro paru"
-                 class="mat-elevation-z5 last-product-thumbnail"
+            <img
+                [attr.src]="'/image/' + currentReview.image.id + '/470'"
+                alt="illustration du dernier numéro paru"
+                class="mat-elevation-z5 last-product-thumbnail"
             />
         </a>
 
@@ -90,9 +113,11 @@
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
                 <span>{{ currentReview.reviewNumber }}</span>
                 <span>|</span>
-                <span>{{ currentReview.releaseDate | date : 'MMMM yyyy' | capitalize }}</span>
+                <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
             </div>
-            <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-display-1">{{ currentReview.name }}</a>
+            <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-display-1">{{
+                currentReview.name
+            }}</a>
 
             <!-- If has not access -->
             <div class="mat-h3" *ngIf="!currentReview.file">
@@ -109,67 +134,87 @@
                 </a>
             </div>
         </div>
-
     </div>
 </div>
 
 <div class="categories section">
     <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px">
-        <div class="mat-display-1 ">NOS THEMES</div>
-        <app-tags-navigation [service]="productTagService" [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
+        <div class="mat-display-1">NOS THEMES</div>
+        <app-tags-navigation
+            [service]="productTagService"
+            [linkBase]="['/larevuedurable/articles']"
+        ></app-tags-navigation>
         <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
     </div>
 </div>
 
 <div class="support section">
-
     <div class="container">
-
         <div class="mat-display-1 margin-bottom">NOUS SOUTENIR</div>
 
-        <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start stretch" fxLayoutGap="30px" fxLayoutGap.gt-sm="60px">
-
+        <div
+            fxLayout="column"
+            fxLayout.gt-sm="row"
+            fxLayoutAlign.gt-sm="start stretch"
+            fxLayoutGap="30px"
+            fxLayoutGap.gt-sm="60px"
+        >
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-1">
-                <div class="support-image" [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_s-abonner.jpg)'"></div>
+                <div
+                    class="support-image"
+                    [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_s-abonner.jpg)'"
+                ></div>
                 <div class="support-column-body">
                     <div class="mat-h1">S'abonner</div>
                     <div class="support-column-content mat-h3">
-                        <p>Un accès à toute la base de données avec près de 1000 articles de fond sur tous les thèmes qui touchent à la
-                            durabilité dans une soixantaine de pays.</p>
-                        <p>Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte atteinte. </p>
+                        <p>
+                            Un accès à toute la base de données avec près de 1000 articles de fond sur tous les thèmes
+                            qui touchent à la durabilité dans une soixantaine de pays.
+                        </p>
+                        <p>
+                            Un travail rédactionnel indépendant. Aucun partenariat ni soutien financier n’y porte
+                            atteinte.
+                        </p>
                     </div>
                     <a mat-flat-button routerLink="/larevuedurable/abonnements"> Voir les abonnements</a>
                 </div>
             </div>
 
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-2">
-                <div class="support-image"
-                     [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_rejoindre-l-association.jpg)'"
+                <div
+                    class="support-image"
+                    [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_rejoindre-l-association.jpg)'"
                 ></div>
                 <div class="support-column-body">
                     <div class="mat-h1">Rejoindre l’association</div>
                     <div class="support-column-content mat-h3">
                         <p>Devenir acteur du respect des grands équilibres écologiques.</p>
-                        <p>Plus nous aurons de membres, plus l’élan sera fort et plus nous pourrons continuer d’identifier en toute
-                            indépendance les actions les plus pertinentes à entreprendre.</p>
+                        <p>
+                            Plus nous aurons de membres, plus l’élan sera fort et plus nous pourrons continuer
+                            d’identifier en toute indépendance les actions les plus pertinentes à entreprendre.
+                        </p>
                     </div>
                     <a mat-flat-button>Découvrir l'association</a>
                 </div>
             </div>
             <div class="support-column" fxFlex.gt-sm="33" id="support-column-3">
-                <div class="support-image" [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"></div>
+                <div
+                    class="support-image"
+                    [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"
+                ></div>
                 <div class="support-column-body">
                     <div class="mat-h1">Rejoindre l’association</div>
                     <div class="support-column-content mat-h3">
-                        <p>LaRevueDurable est un média indépendant, presque sans publicité. Son financement est donc un défi permanent. Il
-                            aidera ce titre à poursuivre ses efforts pour fournir une information rigoureuse, à la pointe et toujours
-                            constructive. Les dons sont déductibles d’impôts pour les contribuables suisses.</p>
+                        <p>
+                            LaRevueDurable est un média indépendant, presque sans publicité. Son financement est donc un
+                            défi permanent. Il aidera ce titre à poursuivre ses efforts pour fournir une information
+                            rigoureuse, à la pointe et toujours constructive. Les dons sont déductibles d’impôts pour
+                            les contribuables suisses.
+                        </p>
                     </div>
                     <a mat-flat-button (click)="cartService.inputDonation(true)">Faire un don</a>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>

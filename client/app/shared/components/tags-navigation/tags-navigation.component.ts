@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NaturalAbstractModelService, NaturalQueryVariablesManager } from '@ecodev/natural';
+import {Component, Input, OnInit} from '@angular/core';
+import {NaturalAbstractModelService, NaturalQueryVariablesManager} from '@ecodev/natural';
 
 @Component({
     selector: 'app-tags-navigation',
@@ -7,11 +7,10 @@ import { NaturalAbstractModelService, NaturalQueryVariablesManager } from '@ecod
     styleUrls: ['./tags-navigation.component.scss'],
 })
 export class TagsNavigationComponent implements OnInit {
-
     /**
      * Items to list
      */
-    @Input() public items: { name: string, id?: string };
+    @Input() public items: {name: string; id?: string};
 
     /**
      * Service to use to get items
@@ -28,11 +27,9 @@ export class TagsNavigationComponent implements OnInit {
      */
     @Input() linkToAttribute = 'name';
 
-    constructor() {
-    }
+    constructor() {}
 
     ngOnInit() {
-
         if (this.service) {
             const qvm = new NaturalQueryVariablesManager<any>();
             this.service.getAll(qvm).subscribe(result => {
@@ -44,5 +41,4 @@ export class TagsNavigationComponent implements OnInit {
     getLink(item) {
         return [...this.linkBase, item[this.linkToAttribute]];
     }
-
 }

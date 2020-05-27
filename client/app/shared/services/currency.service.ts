@@ -1,21 +1,20 @@
-import { BehaviorSubject } from 'rxjs';
-import { UserLike } from '../../admin/users/services/user.service';
-import { Inject, Injectable } from '@angular/core';
-import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
+import {BehaviorSubject} from 'rxjs';
+import {UserLike} from '../../admin/users/services/user.service';
+import {Inject, Injectable} from '@angular/core';
+import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 
 /**
  * Value from https://en.wikipedia.org/wiki/ISO_4217
  */
 export enum Currency {
     CHF = 'CHF',
-    EUR = 'EUR'
+    EUR = 'EUR',
 }
 
 @Injectable({
     providedIn: 'root',
 })
 export class CurrencyService {
-
     public readonly current: BehaviorSubject<Currency> = new BehaviorSubject<Currency>(Currency.CHF);
 
     constructor(@Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage) {
@@ -34,7 +33,6 @@ export class CurrencyService {
     public locked = false;
 
     public setCurrency(value: Currency): void {
-
         if (this.locked) {
             return;
         }

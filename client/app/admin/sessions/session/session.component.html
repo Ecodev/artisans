@@ -1,15 +1,14 @@
 <div [formGroup]="form" class="detail-body">
-
-    <natural-detail-header [listRoute]="['admin', 'session']"
-                           [model]="data.model"
-                           label="Session conv. carbone"
-                           newLabel="Nouvelle session carbone"
+    <natural-detail-header
+        [listRoute]="['admin', 'session']"
+        [model]="data.model"
+        label="Session conv. carbone"
+        newLabel="Nouvelle session carbone"
     >
         <a [routerLink]="['/agir-avec-nous/conversation-carbone', data.model.id]" color="primary" mat-raised-button>
             <natural-icon name="remove_red_eye"></natural-icon>
             Aperçu
         </a>
-
     </natural-detail-header>
 
     <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
@@ -17,43 +16,59 @@
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column" fxLayoutGap="30px">
-
                         <div fxLayout="column">
                             <mat-form-field>
-                                <input (change)="update()" formControlName="name" matInput>
+                                <input (change)="update()" formControlName="name" matInput />
                                 <mat-label>Nom</mat-label>
                                 <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                    Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                    Maximum {{ form.get('name')?.errors.maxlength.requiredLength }} caractères
                                 </mat-error>
                                 <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                             </mat-form-field>
 
                             <div class="margin-bottom rich-text admin-editor">
                                 <div class="label">Description</div>
-                                <app-prosemirror formControlName="description" (contentChange)="update()"></app-prosemirror>
+                                <app-prosemirror
+                                    formControlName="description"
+                                    (contentChange)="update()"
+                                ></app-prosemirror>
                             </div>
 
                             <mat-form-field>
                                 <mat-label>Première date</mat-label>
-                                <input [matDatepicker]="picker" formControlName="startDate" matInput (dateChange)="update()">
+                                <input
+                                    [matDatepicker]="picker"
+                                    formControlName="startDate"
+                                    matInput
+                                    (dateChange)="update()"
+                                />
                                 <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
-                                <mat-hint>Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des sessions</mat-hint>
+                                <mat-hint
+                                    >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des
+                                    sessions</mat-hint
+                                >
                             </mat-form-field>
                         </div>
 
                         <div *ngIf="datesForm" formArrayName="dates">
                             <h2 class="mat-h2">Dates de la session</h2>
-                            <div *ngFor="let date of datesForm.controls; let i = index;"
-                                 fxLayout="row"
-                                 fxLayoutAlign="start center"
-                                 fxLayoutGap="15px"
+                            <div
+                                *ngFor="let date of datesForm.controls; let i = index"
+                                fxLayout="row"
+                                fxLayoutAlign="start center"
+                                fxLayoutGap="15px"
                             >
                                 <mat-form-field fxFlex>
                                     <mat-label>Date</mat-label>
-                                    <input (change)="update();" [formControlName]="i" matInput>
+                                    <input (change)="update()" [formControlName]="i" matInput />
                                 </mat-form-field>
-                                <button (click)="datesForm.removeAt(i); update();" color="warn" mat-icon-button mat-raised-button>
+                                <button
+                                    (click)="datesForm.removeAt(i); update()"
+                                    color="warn"
+                                    mat-icon-button
+                                    mat-raised-button
+                                >
                                     <natural-icon name="remove"></natural-icon>
                                 </button>
                             </div>
@@ -66,64 +81,65 @@
 
                         <div *ngIf="data.model?.id">
                             <h2 class="mat-h2 no-margin-bottom">Facilitateurs</h2>
-                            <natural-relations [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
-                                               [main]="data.model"
-                                               [service]="userService"
-                                               otherName="facilitator"
-                                               placeholder="Facilitateur"
+                            <natural-relations
+                                [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
+                                [main]="data.model"
+                                [service]="userService"
+                                otherName="facilitator"
+                                placeholder="Facilitateur"
                             >
                                 <ng-template let-item="item">
                                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <natural-table-button [label]="item.name" [navigate]="['/admin/user/', item.id]"
+                                        <natural-table-button
+                                            [label]="item.name"
+                                            [navigate]="['/admin/user/', item.id]"
                                         ></natural-table-button>
                                     </div>
                                 </ng-template>
                             </natural-relations>
                         </div>
-
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
-
                         <mat-form-field>
                             <mat-label>Canton</mat-label>
-                            <input (change)="update()" formControlName="region" matInput>
+                            <input (change)="update()" formControlName="region" matInput />
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Ville</mat-label>
-                            <input (change)="update()" formControlName="locality" matInput>
+                            <input (change)="update()" formControlName="locality" matInput />
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Rue</mat-label>
-                            <input (change)="update()" formControlName="street" matInput>
+                            <input (change)="update()" formControlName="street" matInput />
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Prix</mat-label>
-                            <input (change)="update()" formControlName="price" matInput>
+                            <input (change)="update()" formControlName="price" matInput />
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Disponibilité</mat-label>
-                            <input (change)="update()" formControlName="availability" matInput>
+                            <input (change)="update()" formControlName="availability" matInput />
                         </mat-form-field>
-
                     </div>
-
                 </div>
 
                 <mat-divider></mat-divider>
 
                 <natural-stamp [item]="data.model"></natural-stamp>
-
             </div>
         </mat-tab>
-
     </mat-tab-group>
 
-    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"
+    <natural-fixed-button-detail
+        (create)="create()"
+        (delete)="delete()"
+        *ngIf="showFabButton"
+        [form]="form"
+        [model]="data.model"
     ></natural-fixed-button-detail>
-
 </div>

@@ -1,11 +1,11 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
-import { NaturalAbstractController } from '@ecodev/natural';
-import { filter, takeUntil } from 'rxjs/operators';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
+import {NaturalAbstractController} from '@ecodev/natural';
+import {filter, takeUntil} from 'rxjs/operators';
 
 export interface Breadcrumb {
-    link: any[] | string,
-    label: string
+    link: any[] | string;
+    label: string;
 }
 
 @Component({
@@ -14,17 +14,18 @@ export interface Breadcrumb {
     styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent extends NaturalAbstractController implements OnInit {
-
     @HostBinding('class.mat-body') isBody = true;
 
     @Input() breadcrumbs: Breadcrumb[] = [
         {
             link: '/',
             label: 'asdf',
-        }, {
+        },
+        {
             link: '/',
             label: 'asdf',
-        }, {
+        },
+        {
             link: '/',
             label: 'asdf',
         },
@@ -37,7 +38,10 @@ export class BreadcrumbsComponent extends NaturalAbstractController implements O
     ngOnInit(): void {
         this.update();
         this.router.events
-            .pipe(takeUntil(this.ngUnsubscribe), filter(event => event instanceof NavigationEnd))
+            .pipe(
+                takeUntil(this.ngUnsubscribe),
+                filter(event => event instanceof NavigationEnd),
+            )
             .subscribe(() => this.update());
     }
 
@@ -50,7 +54,6 @@ export class BreadcrumbsComponent extends NaturalAbstractController implements O
      * Returns an object where with all route params through activated routes throw firstChild 'params'
      */
     public getMergedBreadcrumbs(route?: ActivatedRoute | ActivatedRouteSnapshot): Breadcrumb[] {
-
         if (!route) {
             route = this.router.routerState.root;
         }
@@ -63,5 +66,4 @@ export class BreadcrumbsComponent extends NaturalAbstractController implements O
             return breadcrumbs;
         }
     }
-
 }

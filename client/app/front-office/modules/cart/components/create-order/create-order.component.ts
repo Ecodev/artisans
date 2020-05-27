@@ -1,14 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService, NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
-import { UserService } from '../../../../../admin/users/services/user.service';
-import { CreateOrder_createOrder, PaymentMethod } from '../../../../../shared/generated-types';
-import { ConfigService, FrontEndConfig } from '../../../../../shared/services/config.service';
-import { Currency, CurrencyService } from '../../../../../shared/services/currency.service';
-import { Cart } from '../../classes/cart';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NaturalAlertService, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {UserService} from '../../../../../admin/users/services/user.service';
+import {CreateOrder_createOrder, PaymentMethod} from '../../../../../shared/generated-types';
+import {ConfigService, FrontEndConfig} from '../../../../../shared/services/config.service';
+import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
+import {Cart} from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
-import { CartService } from '../../services/cart.service';
+import {CartService} from '../../services/cart.service';
 
 @Component({
     selector: 'app-create-order',
@@ -16,7 +16,6 @@ import { CartService } from '../../services/cart.service';
     styleUrls: ['./create-order.component.scss'],
 })
 export class CreateOrderComponent implements OnInit {
-
     /**
      * Eligible cart for order
      */
@@ -79,7 +78,6 @@ export class CreateOrderComponent implements OnInit {
     }
 
     ngOnInit() {
-
         const cart = Cart.getById(this.sessionStorage, +this.route.snapshot.params['cartId']);
         if (cart) {
             this.cart = cart;
@@ -113,14 +111,12 @@ export class CreateOrderComponent implements OnInit {
             postcode: new FormControl(),
             country: new FormControl(),
         });
-
     }
 
     /**
      * Set shipping address mandatory if "same address" is unchecked
      */
     public updateAddressRequirements(required: boolean, form: FormGroup) {
-
         const fields = ['firstName', 'lastName', 'street', 'locality', 'postcode']; // todo : add country
         fields.forEach(fieldName => {
             const control = form.get(fieldName);
@@ -138,7 +134,6 @@ export class CreateOrderComponent implements OnInit {
         }
 
         this.cartService.save(this.cart, paymentMethod.value).subscribe(order => {
-
             if (!order) {
                 return;
             }
@@ -153,14 +148,11 @@ export class CreateOrderComponent implements OnInit {
     }
 
     public confirmationRedirect() {
-
         this.cart.empty();
         this.showConfirmationMessage = true;
-
     }
 
     private datatrans(order: CreateOrder_createOrder, amount: number, currency: Currency): void {
-
         if (!this.paymentConfig) {
             return;
         }
@@ -188,8 +180,8 @@ export class CreateOrderComponent implements OnInit {
                 this.confirmationRedirect();
                 this.alertService.info('Paiement réussi');
             },
-            error: (data) => {
-                this.alertService.error('Le paiement n\'a pas abouti: ' + data.message);
+            error: data => {
+                this.alertService.error("Le paiement n'a pas abouti: " + data.message);
             },
             cancel: () => {
                 this.alertService.error('Le paiement a été annulé');

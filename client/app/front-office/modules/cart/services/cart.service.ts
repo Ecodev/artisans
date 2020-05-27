@@ -1,20 +1,25 @@
-import { Inject, Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
-import { Observable } from 'rxjs';
-import { OrderService } from '../../../../admin/order/services/order.service';
-import { CreateOrder_createOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType } from '../../../../shared/generated-types';
-import { Currency, CurrencyService } from '../../../../shared/services/currency.service';
-import { DonationComponent } from '../../../components/donation/donation.component';
-import { Cart, CartLineProduct } from '../classes/cart';
+import {Inject, Injectable} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {Observable} from 'rxjs';
+import {OrderService} from '../../../../admin/order/services/order.service';
+import {
+    CreateOrder_createOrder,
+    OrderInput,
+    OrderLineInput,
+    PaymentMethod,
+    ProductType,
+} from '../../../../shared/generated-types';
+import {Currency, CurrencyService} from '../../../../shared/services/currency.service';
+import {DonationComponent} from '../../../components/donation/donation.component';
+import {Cart, CartLineProduct} from '../classes/cart';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CartService {
-
     public static _globalCart: Cart;
 
     constructor(
@@ -25,7 +30,6 @@ export class CartService {
         private router: Router,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
-
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
         // fromEvent<StorageEvent>(window, 'storage').pipe(
         //     map(event => {
@@ -60,7 +64,7 @@ export class CartService {
 
     public save(cart: Cart, paymentMethod: PaymentMethod): Observable<CreateOrder_createOrder | null> {
         const isCHF = this.currencyService.current.value === Currency.CHF;
-        const orderLines: OrderLineInput[] = cart.productLines.map((line) => {
+        const orderLines: OrderLineInput[] = cart.productLines.map(line => {
             return {
                 product: line.product.id,
                 quantity: line.quantity + '',
@@ -101,21 +105,22 @@ export class CartService {
      * Prompts the user to manually set the donation amount
      */
     public inputDonation(notify: boolean, cart?: Cart) {
+        this.dialogService
+            .open(DonationComponent)
+            .afterClosed()
+            .subscribe(amount => {
+                if (amount != null) {
+                    if (!cart) {
+                        cart = CartService.globalCart;
+                    }
 
-        this.dialogService.open(DonationComponent).afterClosed().subscribe(amount => {
-            if (amount != null) {
+                    cart.setDonation(amount);
 
-                if (!cart) {
-                    cart = CartService.globalCart;
+                    if (notify) {
+                        this.notificationCartRedirect();
+                    }
                 }
-
-                cart.setDonation(amount);
-
-                if (notify) {
-                    this.notificationCartRedirect();
-                }
-            }
-        });
+            });
     }
 
     /**
@@ -136,5 +141,4 @@ export class CartService {
             this.router.navigateByUrl('/panier');
         });
     }
-
 }

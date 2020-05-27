@@ -1,29 +1,28 @@
-import { Currency } from '../../../../shared/services/currency.service';
-import { Product, ProductType } from '../../../../shared/generated-types';
-import { CartService } from '../services/cart.service';
-import { Cart, CartLine } from './cart';
+import {Currency} from '../../../../shared/services/currency.service';
+import {Product, ProductType} from '../../../../shared/generated-types';
+import {CartService} from '../services/cart.service';
+import {Cart, CartLine} from './cart';
 
 /**
  * Todo : add tests with combinations (same product with web or paper declination)
  */
 describe('CartService', () => {
-
     let cart: Cart;
 
-    const product1 = {
+    const product1 = ({
         id: '1',
         pricePerUnitCHF: '10',
-    } as unknown as Product['product'];
+    } as unknown) as Product['product'];
 
-    const product2 = {
+    const product2 = ({
         id: '2',
         pricePerUnitCHF: '100',
-    } as unknown as Product['product'];
+    } as unknown) as Product['product'];
 
-    const product3 = {
+    const product3 = ({
         id: '3',
         pricePerUnitCHF: '1000',
-    } as unknown as Product['product'];
+    } as unknown) as Product['product'];
 
     beforeEach(() => {
         cart = new Cart(sessionStorage);
@@ -40,9 +39,7 @@ describe('CartService', () => {
 
         cart.addProduct(product1, ProductType.paper, 1);
 
-        const expectedCart = [
-            {product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper},
-        ] as CartLine[];
+        const expectedCart = [{product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper}] as CartLine[];
 
         expect(cart.productLines).toEqual(expectedCart, 'cart have one product');
     });
@@ -51,9 +48,7 @@ describe('CartService', () => {
         cart.addProduct(product1, ProductType.paper, 1);
         cart.addProduct(product1, ProductType.paper, 1);
 
-        const expectedCart = [
-            {product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper},
-        ] as CartLine[];
+        const expectedCart = [{product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper}] as CartLine[];
 
         expect(cart.productLines).toEqual(expectedCart, 'cart have one product');
         expect(cart.totalTaxInc).toEqual(20);
@@ -75,9 +70,7 @@ describe('CartService', () => {
     it('should add more than one unit to cart', () => {
         cart.addProduct(product1, ProductType.paper, 2);
 
-        const expectedCart = [
-            {product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper},
-        ] as CartLine[];
+        const expectedCart = [{product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper}] as CartLine[];
 
         expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(20);
@@ -105,5 +98,4 @@ describe('CartService', () => {
         expect(cart.productLines).toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(3000);
     });
-
 });

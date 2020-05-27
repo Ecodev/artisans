@@ -6,7 +6,6 @@
     $fg: map-get($theme, foreground);
 
     app-front-office {
-
         #header-top {
             background: darken(mat-color($bg, app-bar), 5%);
             color: lighten(mat-color($fg, text), 35%);
@@ -25,12 +24,13 @@
         }
 
         #menu-main > ul {
-
             a {
                 color: lighten(mat-color($fg, text), 20%);
             }
 
-            li:hover > a, a.open, a.active {
+            li:hover > a,
+            a.open,
+            a.active {
                 span {
                     border-color: mat-color($primary) !important;
                 }
@@ -40,7 +40,9 @@
                 background: mat-color($bg, card);
             }
 
-            ul a:hover, a.open, a.active {
+            ul a:hover,
+            a.open,
+            a.active {
                 color: mat-color($primary);
             }
         }
@@ -55,8 +57,8 @@
         }
 
         #footer {
-
-            .mat-form-field, .mat-form-field * {
+            .mat-form-field,
+            .mat-form-field * {
                 color: mat-color($primary, default-contrast) !important;
                 border-bottom-color: mat-color($primary, default-contrast) !important;
             }
@@ -69,5 +71,3 @@
         }
     }
 }
-
-

@@ -1,12 +1,12 @@
-import { Injector, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables } from '@ecodev/natural';
-import { defaults, isEqual, pick } from 'lodash';
-import { takeUntil } from 'rxjs/operators';
+import {Injector, OnInit} from '@angular/core';
+import {PageEvent} from '@angular/material/paginator';
+import {NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables} from '@ecodev/natural';
+import {defaults, isEqual, pick} from 'lodash';
+import {takeUntil} from 'rxjs/operators';
 
 export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall extends QueryVariables>
-    extends NaturalAbstractList<Tall, Vall> implements OnInit {
-
+    extends NaturalAbstractList<Tall, Vall>
+    implements OnInit {
     public items: Tall['items'] = [];
 
     constructor(service: any, injector: Injector) {
@@ -28,7 +28,6 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
                 this.items.push(...result.items); // Complete existing list with new items
             }
         });
-
     }
 
     public loadMore() {
@@ -46,7 +45,6 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
      * Todo : could be improved to restore default pageSize:5 after initialisation otherwise pageSize:15 will apply for further paginations
      */
     public pagination(event: PaginationInput | PageEvent, defer?: Promise<unknown>): void {
-
         let pagination: PaginationInput = this.defaultPagination;
         let forPersistence: PaginationInput | null = null;
 
@@ -70,5 +68,4 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
 
         this.persistPagination(forPersistence, defer, {fragment: 'end-of-list'});
     }
-
 }

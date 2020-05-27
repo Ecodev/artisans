@@ -1,7 +1,5 @@
 :host {
-
     .products.grid {
-
         @media screen and (max-width: 700px) {
             .product {
                 margin-bottom: 40px;
@@ -28,7 +26,8 @@
                     grid-row: span 7;
                 }
 
-                &:nth-child(1), &:nth-child(2) {
+                &:nth-child(1),
+                &:nth-child(2) {
                     .image-placeholder {
                         display: none;
                     }
@@ -45,7 +44,6 @@
                 }
             }
         }
-
 
         .product {
             border-left: 6px solid transparent;
@@ -77,12 +75,10 @@
                     margin-right: 5px;
                 }
             }
-
         }
     }
 
     .products.list {
-
         .product-image {
             max-width: 150px;
 
@@ -92,9 +88,7 @@
         }
 
         & > :not(:last-child) {
-            margin-bottom: 30px
+            margin-bottom: 30px;
         }
-
     }
-
 }

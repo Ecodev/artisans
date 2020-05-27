@@ -5,8 +5,9 @@
     $foreground: map-get($theme, foreground);
 
     app-tags-navigation {
-
-        &, a { // explicit a gives more ponderation to css selector
+        &,
+        a {
+            // explicit a gives more ponderation to css selector
             color: mat-color($foreground, text, 0.25);
         }
 
@@ -17,9 +18,5 @@
         a:hover {
             color: mat-color($primary);
         }
-
     }
-
 }
-
-

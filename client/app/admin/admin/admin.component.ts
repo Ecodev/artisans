@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NaturalAbstractController, NaturalSidenavService } from '@ecodev/natural';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {NaturalAbstractController, NaturalSidenavService} from '@ecodev/natural';
 
 @Component({
     selector: 'app-admin',
@@ -8,7 +8,6 @@ import { NaturalAbstractController, NaturalSidenavService } from '@ecodev/natura
     styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent extends NaturalAbstractController implements OnInit {
-
     public viewer;
 
     /**

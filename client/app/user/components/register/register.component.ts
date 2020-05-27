@@ -1,33 +1,41 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail, validateAllFormControls } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Component, Injector, OnInit} from '@angular/core';
+import {NaturalAbstractDetail, validateAllFormControls} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
-import { AnonymousUserService } from './anonymous-user.service';
+import {
+    CreateUser,
+    CreateUserVariables,
+    UpdateUser,
+    UpdateUserVariables,
+    User,
+    UserVariables,
+} from '../../../shared/generated-types';
+import {AnonymousUserService} from './anonymous-user.service';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent extends NaturalAbstractDetail<User['user'],
-    UserVariables,
-    CreateUser['createUser'],
-    CreateUserVariables,
-    UpdateUser['updateUser'],
-    UpdateUserVariables,
-    any> implements OnInit {
-
+export class RegisterComponent
+    extends NaturalAbstractDetail<
+        User['user'],
+        UserVariables,
+        CreateUser['createUser'],
+        CreateUserVariables,
+        UpdateUser['updateUser'],
+        UpdateUserVariables,
+        any
+    >
+    implements OnInit {
     public step;
     public sending = false;
 
-    constructor(userService: AnonymousUserService, injector: Injector, protected apollo: Apollo,
-    ) {
+    constructor(userService: AnonymousUserService, injector: Injector, protected apollo: Apollo) {
         super('user', userService, injector);
     }
 
     public ngOnInit(): void {
-
         this.step = +this.route.snapshot.data.step;
 
         super.ngOnInit();
@@ -59,16 +67,21 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
             }
         `;
 
-        this.apollo.mutate({
-            mutation: mutation,
-            variables: this.form.value,
-        }).subscribe(() => {
-            this.sending = false;
+        this.apollo
+            .mutate({
+                mutation: mutation,
+                variables: this.form.value,
+            })
+            .subscribe(
+                () => {
+                    this.sending = false;
 
-            const message = 'Un email avec des instructions a été envoyé';
+                    const message = 'Un email avec des instructions a été envoyé';
 
-            this.alertService.info(message, 5000);
-            this.router.navigate(['/login']);
-        }, () => this.sending = false);
+                    this.alertService.info(message, 5000);
+                    this.router.navigate(['/login']);
+                },
+                () => (this.sending = false),
+            );
     }
 }

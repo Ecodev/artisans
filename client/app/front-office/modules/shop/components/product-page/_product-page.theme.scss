@@ -6,7 +6,6 @@
     $fg: map-get($theme, foreground);
 
     app-product-page {
-
         .review {
             a {
                 color: mat-color($fg, text);
@@ -19,5 +18,3 @@
         }
     }
 }
-
-

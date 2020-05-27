@@ -1,20 +1,19 @@
 <div *ngIf="dataSource" fxLayout="column">
-
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            {{ routeData?.title }}
+        </div>
     </div>
 
     <div fxLayout="column">
-
         <div class="margin-v overflow" fxLayout="row">
-
-            <natural-search (selectionChange)="search($event)"
-                            [facets]="naturalSearchFacets"
-                            [multipleGroups]="true"
-                            [selections]="naturalSearchSelections"
-                            fxFlex
+            <natural-search
+                (selectionChange)="search($event)"
+                [facets]="naturalSearchFacets"
+                [multipleGroups]="true"
+                [selections]="naturalSearchSelections"
+                fxFlex
             >
-
                 <button (click)="download()" *ngIf="!usersEmail" mat-icon-button>
                     <natural-icon name="email"></natural-icon>
                 </button>
@@ -23,15 +22,19 @@
                     <natural-icon name="alternate_email"></natural-icon>
                 </button>
 
-                <button (click)="copy(usersEmailAndName)"
-                        *ngIf="usersEmailAndName"
-                        mat-icon-button
-                        matTooltip="Copier les e-mails et les noms"
+                <button
+                    (click)="copy(usersEmailAndName)"
+                    *ngIf="usersEmailAndName"
+                    mat-icon-button
+                    matTooltip="Copier les e-mails et les noms"
                 >
                     <natural-icon name="file_copy"></natural-icon>
                 </button>
 
-                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                <natural-columns-picker
+                    (selectionChange)="selectedColumns = $event"
+                    [initialSelection]="initialColumns"
+                >
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
                     <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
@@ -40,21 +43,22 @@
                     <span naturalColumnsPickerColumn="phone">Téléphone</span>
                 </natural-columns-picker>
             </natural-search>
-
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.name" [gravatarId]="element.email" [size]="36"></ngx-avatar>
-                            <natural-table-button [label]="element.name" [navigate]="['/admin/user', element.id]" matTooltip="Éditer"
+                            <natural-table-button
+                                [label]="element.name"
+                                [navigate]="['/admin/user', element.id]"
+                                matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>
@@ -75,20 +79,27 @@
                 </ng-container>
 
                 <ng-container matColumnDef="membership">
-                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Membre des artisans</th>
+                    <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>
+                        Membre des artisans
+                    </th>
                     <td *matCellDef="let element" mat-cell>{{ element.membership | enum: 'Membership' | async }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="phone">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Tél.</th>
-                    <td mat-cell *matCellDef="let element"><a *ngIf="element.phone" href="tel:{{ element.phone }}" class="app-link">{{ element.phone }}</a></td>
+                    <td mat-cell *matCellDef="let element">
+                        <a *ngIf="element.phone" href="tel:{{ element.phone }}" class="app-link">{{ element.phone }}</a>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="email">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>e-mail</th>
-                    <td mat-cell *matCellDef="let element"><a *ngIf="element.email" href="mailto:{{ element.email }}" class="app-link">{{ element.email }}</a></td>
+                    <td mat-cell *matCellDef="let element">
+                        <a *ngIf="element.email" href="mailto:{{ element.email }}" class="app-link">{{
+                            element.email
+                        }}</a>
+                    </td>
                 </ng-container>
-
             </table>
         </div>
 
@@ -100,16 +111,19 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator (page)="pagination($event)"
-                       *ngIf="dataSource.data?.length"
-                       [length]="dataSource.data?.length"
-                       [pageIndex]="dataSource.data?.pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
-                       [pageSize]="dataSource.data?.pageSize"
+        <mat-paginator
+            (page)="pagination($event)"
+            *ngIf="dataSource.data?.length"
+            [length]="dataSource.data?.length"
+            [pageIndex]="dataSource.data?.pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageSize]="dataSource.data?.pageSize"
         ></mat-paginator>
-
     </div>
 </div>
 
-<natural-fixed-button *ngIf="routeData?.isAdmin && permissionsService.crud?.user.create" [routerLink]="['/admin/user/new']" icon="add"
+<natural-fixed-button
+    *ngIf="routeData?.isAdmin && permissionsService.crud?.user.create"
+    [routerLink]="['/admin/user/new']"
+    icon="add"
 ></natural-fixed-button>

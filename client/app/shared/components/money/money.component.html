@@ -1,4 +1,9 @@
-<div [attr.class]="sizeClass" [class.negative]="showSignal && amount < 0" [class.positive]="showSignal && amount > 0" [style.margin.px]="0">
+<div
+    [attr.class]="sizeClass"
+    [class.negative]="showSignal && amount < 0"
+    [class.positive]="showSignal && amount > 0"
+    [style.margin.px]="0"
+>
     <span *ngIf="showSignal && amount > 0">+</span>
     <span>{{ amount | currency: 'CHF' }}</span>
 </div>

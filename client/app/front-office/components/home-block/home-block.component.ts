@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { forkJoin } from 'rxjs';
-import { ConfigurationService } from '../../../configuration/services/configuration.service';
-import { PermissionsService } from '../../../shared/services/permissions.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {forkJoin} from 'rxjs';
+import {ConfigurationService} from '../../../configuration/services/configuration.service';
+import {PermissionsService} from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-home-block',
@@ -10,7 +10,6 @@ import { PermissionsService } from '../../../shared/services/permissions.service
     styleUrls: ['./home-block.component.scss'],
 })
 export class HomeBlockComponent implements OnInit {
-
     @Input() key: string;
 
     public editMode = false;
@@ -19,11 +18,9 @@ export class HomeBlockComponent implements OnInit {
 
     public lastValue;
 
-    constructor(private configService: ConfigurationService, public permissionService: PermissionsService) {
-    }
+    constructor(private configService: ConfigurationService, public permissionService: PermissionsService) {}
 
     public ngOnInit(): void {
-
         this.form = new FormGroup({
             title: new FormControl(''),
             description: new FormControl(''),
@@ -61,5 +58,4 @@ export class HomeBlockComponent implements OnInit {
         this.form.setValue(this.lastValue);
         this.editMode = false;
     }
-
 }

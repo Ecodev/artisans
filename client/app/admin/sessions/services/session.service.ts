@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormValidators, Literal, NaturalAbstractModelService } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {Validators} from '@angular/forms';
+import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 import {
     CreateSession,
     CreateSessionVariables,
@@ -14,12 +14,13 @@ import {
     UpdateSession,
     UpdateSessionVariables,
 } from '../../../shared/generated-types';
-import { createSession, deleteSessions, sessionQuery, sessionsQuery, updateSession } from './session.queries';
+import {createSession, deleteSessions, sessionQuery, sessionsQuery, updateSession} from './session.queries';
 
 @Injectable({
     providedIn: 'root',
 })
-export class SessionService extends NaturalAbstractModelService<Session['session'],
+export class SessionService extends NaturalAbstractModelService<
+    Session['session'],
     SessionVariables,
     Sessions['sessions'],
     SessionsVariables,
@@ -27,16 +28,10 @@ export class SessionService extends NaturalAbstractModelService<Session['session
     CreateSessionVariables,
     UpdateSession['updateSession'],
     UpdateSessionVariables,
-    DeleteSessions> {
-
+    DeleteSessions
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
-            'session',
-            sessionQuery,
-            sessionsQuery,
-            createSession,
-            updateSession,
-            deleteSessions);
+        super(apollo, 'session', sessionQuery, sessionsQuery, createSession, updateSession, deleteSessions);
     }
 
     public getFormValidators(): FormValidators {
@@ -64,5 +59,4 @@ export class SessionService extends NaturalAbstractModelService<Session['session
             description: '',
         };
     }
-
 }

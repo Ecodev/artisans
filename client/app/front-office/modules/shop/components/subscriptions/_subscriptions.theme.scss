@@ -6,7 +6,6 @@
     $fg: map-get($theme, foreground);
 
     app-subscriptions {
-
         .subscription.standard {
             background: mat-color($primary);
             color: mat-color($primary, default-contrast);
@@ -20,8 +19,5 @@
         .subscription.popular {
             border: 10px solid mat-color($bg, card);
         }
-
     }
 }
-
-

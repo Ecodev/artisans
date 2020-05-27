@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const sessionMetaFragment = gql`
     fragment sessionMeta on Session {
@@ -36,7 +36,8 @@ export const sessionsQuery = gql`
             length
         }
     }
-${sessionMetaFragment}`;
+    ${sessionMetaFragment}
+`;
 
 export const sessionQuery = gql`
     query Session($id: SessionID!) {
@@ -65,7 +66,7 @@ export const createSession = gql`
 
 export const updateSession = gql`
     mutation UpdateSession($id: SessionID!, $input: SessionPartialInput!) {
-        updateSession(id:$id, input:$input) {
+        updateSession(id: $id, input: $input) {
             id
             updateDate
             updater {
@@ -77,6 +78,7 @@ export const updateSession = gql`
 `;
 
 export const deleteSessions = gql`
-    mutation DeleteSessions ($ids: [SessionID!]!){
+    mutation DeleteSessions($ids: [SessionID!]!) {
         deleteSessions(ids: $ids)
-    }`;
+    }
+`;

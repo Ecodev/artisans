@@ -1,7 +1,5 @@
 <div fxFlexFill fxLayout="column">
-
     <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
-
         <button (click)="NaturalSidenavService?.sideNavs?.get('adminMenu')?.toggle()" mat-icon-button>
             <natural-icon name="menu"></natural-icon>
         </button>
@@ -9,18 +7,16 @@
         <div fxFlex></div>
 
         <a fxLayout="row" fxLayoutAlign="center center" routerLink="/">
-            <img alt="logo" height="50" src="assets/logo-artisans-de-la-transition.svg"/>
+            <img alt="logo" height="50" src="assets/logo-artisans-de-la-transition.svg" />
         </a>
 
         <div fxFlex></div>
-
     </mat-toolbar>
 
     <natural-sidenav-container [noScroll]="true" fxFlex name="adminMenu">
         <natural-sidenav>
             <div class="margin overflow">
                 <mat-accordion displayMode="flat">
-
                     <mat-expansion-panel class="mat-elevation-z0">
                         <mat-expansion-panel-header>
                             <mat-panel-title>Utilisateurs</mat-panel-title>
@@ -60,7 +56,6 @@
                             <a mat-list-item routerLink="order">Ventes</a>
                         </mat-nav-list>
                     </mat-expansion-panel>
-
                 </mat-accordion>
             </div>
         </natural-sidenav>
@@ -70,5 +65,4 @@
             </div>
         </natural-sidenav-content>
     </natural-sidenav-container>
-
 </div>

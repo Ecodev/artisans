@@ -1,5 +1,5 @@
-import { xorValidator } from './validators';
-import { FormBuilder } from '@angular/forms';
+import {xorValidator} from './validators';
+import {FormBuilder} from '@angular/forms';
 
 describe('xorValidator', () => {
     const fb = new FormBuilder();

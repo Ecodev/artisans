@@ -1,7 +1,6 @@
-import { moneyRoundUp } from './utils';
+import {moneyRoundUp} from './utils';
 
 describe('moneyRoundUp', () => {
-
     it('should not touch rounded sum', () => {
         expect(moneyRoundUp(4.15)).toBe(4.15);
     });
@@ -21,5 +20,4 @@ describe('moneyRoundUp', () => {
     it('should not touch zero amount', () => {
         expect(moneyRoundUp(0)).toBe(0);
     });
-
 });

@@ -1,10 +1,10 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Optional, Output, Self, ViewChild } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { exampleSetup } from 'prosemirror-example-setup';
-import { DOMParser, DOMSerializer } from 'prosemirror-model';
-import { EditorState } from 'prosemirror-state';
-import { EditorView } from 'prosemirror-view';
-import { schema } from './schema';
+import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, Optional, Output, Self, ViewChild} from '@angular/core';
+import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {exampleSetup} from 'prosemirror-example-setup';
+import {DOMParser, DOMSerializer} from 'prosemirror-model';
+import {EditorState} from 'prosemirror-state';
+import {EditorView} from 'prosemirror-view';
+import {schema} from './schema';
 
 /**
  * Prosemirror component
@@ -13,8 +13,7 @@ import { schema } from './schema';
  */
 @Component({
     selector: 'app-prosemirror',
-    template: `
-        <div #editor></div>`,
+    template: ` <div #editor></div>`,
     styleUrls: ['./proseMirror.component.scss'],
 })
 export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAccessor {
@@ -35,9 +34,7 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
      */
     private content = '';
 
-    constructor(
-        @Optional() @Self() public ngControl: NgControl,
-    ) {
+    constructor(@Optional() @Self() public ngControl: NgControl) {
         if (this.ngControl !== null) {
             this.ngControl.valueAccessor = this;
         }
@@ -102,8 +99,7 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
         this.onChange = fn;
     }
 
-    public registerOnTouched(fn: any): void {
-    }
+    public registerOnTouched(fn: any): void {}
 
     public setDisabledState(isDisabled: boolean): void {
         // TODO disable editor ?

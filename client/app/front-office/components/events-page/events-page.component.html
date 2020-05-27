@@ -1,21 +1,20 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px">
-
     <h1 class="mat-display-1">Agenda</h1>
 
     <div fxLayout="column" fxLayoutGap="30px">
-
         <div *ngFor="let event of items">
             <a [routerLink]="[event.id]" class="mat-h2">{{ event.name }}</a>
             <div fxLayout="row" fxLayoutGap="15px">
-                <div class="text-light">{{ event.date | date : 'EEEE d MMMM yyyy' | capitalize}}</div>
-                <div> {{ event.place }}</div>
-                <div> {{ event.type }}</div>
+                <div class="text-light">{{ event.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
+                <div>{{ event.place }}</div>
+                <div>{{ event.type }}</div>
             </div>
         </div>
     </div>
 
     <div>
-        <a (click)="loadMore()" color="primary" mat-flat-button *ngIf="dataSource?.data?.length > items.length">Voir plus</a>
+        <a (click)="loadMore()" color="primary" mat-flat-button *ngIf="dataSource?.data?.length > items.length"
+            >Voir plus</a
+        >
     </div>
-
 </div>

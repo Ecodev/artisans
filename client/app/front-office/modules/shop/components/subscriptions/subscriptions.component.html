@@ -1,13 +1,16 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px" *ngIf="subscriptions">
-
     <div class="content">
         <h1 class="mat-display-1 margin-bottom">S'abonner</h1>
 
-        <p class="mat-h3">Un travail rédactionnel indépendant . Aucun partenariat ni soutien financier n'y porte atteinte. L'envie de
-            comprendre et le pouvoir d' agir pour construire une société écologique et solidaire. </p>
+        <p class="mat-h3">
+            Un travail rédactionnel indépendant . Aucun partenariat ni soutien financier n'y porte atteinte. L'envie de
+            comprendre et le pouvoir d' agir pour construire une société écologique et solidaire.
+        </p>
 
-        <p class="mat-h3">S'abonner c'est s'assurer de ne rater aucun numéro et vous permet d'économiser de 20 à 60% selon l'option
-            choisie.</p>
+        <p class="mat-h3">
+            S'abonner c'est s'assurer de ne rater aucun numéro et vous permet d'économiser de 20 à 60% selon l'option
+            choisie.
+        </p>
     </div>
 
     <!--
@@ -15,8 +18,7 @@
    -->
     <div>
         <h1 class="mat-display-1 margin-bottom">Abonnement personnel</h1>
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px" >
-
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px">
             <div class="subscription standard">
                 <div class="mat-h1 title">Abonnement papier</div>
                 <p>Arrive directement dans votre boîte aux lettres</p>
@@ -33,7 +35,7 @@
                     <div class="mat-h3">Préféré par nos lecteurs</div>
                 </div>
                 <p>Arrive directement par mail</p>
-                <p>Accès illimité et instantané à une base de données de plus de 1000 articles </p>
+                <p>Accès illimité et instantané à une base de données de plus de 1000 articles</p>
                 <div class="buy-zone">
                     <p>Pour 2 ans = 4 numéros</p>
                     <app-price [product]="subscriptions['19001']"></app-price>
@@ -51,7 +53,6 @@
                     <a (click)="order('19002', ProductType.both)" mat-flat-button>Acheter cet abonnement</a>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -60,7 +61,7 @@
    -->
     <div>
         <h1 class="mat-display-1 margin-bottom">Abonnement professionnel</h1>
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px" >
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px">
             <div class="subscription pro">
                 <div class="mat-h1 title">Abonnement papier</div>
                 <p>Arrive directement dans votre boîte aux lettres</p>

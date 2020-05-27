@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { NaturalAbstractModelService } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {NaturalAbstractModelService} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 
 import {
     Comment,
@@ -14,30 +14,24 @@ import {
     UpdateComment,
     UpdateCommentVariables,
 } from '../../../shared/generated-types';
-import { commentQuery, commentsQuery, createComment, deleteComments, updateComment } from './comment.queries';
+import {commentQuery, commentsQuery, createComment, deleteComments, updateComment} from './comment.queries';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CommentService
-    extends NaturalAbstractModelService<Comment['comment'],
-        CommentVariables,
-        Comments['comments'],
-        CommentsVariables,
-        CreateComment['createComment'],
-        CreateCommentVariables,
-        UpdateComment['updateComment'],
-        UpdateCommentVariables,
-        DeleteComments['deleteComments']> {
-
+export class CommentService extends NaturalAbstractModelService<
+    Comment['comment'],
+    CommentVariables,
+    Comments['comments'],
+    CommentsVariables,
+    CreateComment['createComment'],
+    CreateCommentVariables,
+    UpdateComment['updateComment'],
+    UpdateCommentVariables,
+    DeleteComments['deleteComments']
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
-            'comment',
-            commentQuery,
-            commentsQuery,
-            createComment,
-            updateComment,
-            deleteComments);
+        super(apollo, 'comment', commentQuery, commentsQuery, createComment, updateComment, deleteComments);
     }
 
     public getDefaultForClient() {
@@ -51,5 +45,4 @@ export class CommentService
             news: null,
         };
     }
-
 }

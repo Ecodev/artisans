@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ErrorService } from '../../../shared/components/error/error.service';
-import { CommentResolve } from '../comment';
-import { CommentService } from './comment.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
+import {Observable} from 'rxjs';
+import {ErrorService} from '../../../shared/components/error/error.service';
+import {CommentResolve} from '../comment';
+import {CommentService} from './comment.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CommentResolver implements Resolve<CommentResolve> {
-
-    constructor(private productService: CommentService, private errorService: ErrorService) {
-    }
+    constructor(private productService: CommentService, private errorService: ErrorService) {}
 
     /**
      * Resolve product data for router and panels service

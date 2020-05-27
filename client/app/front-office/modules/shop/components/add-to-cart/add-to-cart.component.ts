@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ProductType } from '../../../../../shared/generated-types';
-import { CartLineProduct } from '../../../cart/classes/cart';
-import { CartService } from '../../../cart/services/cart.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {ProductType} from '../../../../../shared/generated-types';
+import {CartLineProduct} from '../../../cart/classes/cart';
+import {CartService} from '../../../cart/services/cart.service';
 
 @Component({
     selector: 'app-add-to-cart',
@@ -9,7 +9,6 @@ import { CartService } from '../../../cart/services/cart.service';
     styleUrls: ['./add-to-cart.component.scss'],
 })
 export class AddToCartComponent implements OnInit {
-
     /**
      * Button label
      */
@@ -32,15 +31,12 @@ export class AddToCartComponent implements OnInit {
 
     public inCart = false;
 
-    constructor(private cartService: CartService) {
-    }
+    constructor(private cartService: CartService) {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     public click() {
         this.cartService.addProduct(this.product, this.type, 1);
-        setTimeout(() => this.inCart = true, 300);
+        setTimeout(() => (this.inCart = true), 300);
     }
-
 }

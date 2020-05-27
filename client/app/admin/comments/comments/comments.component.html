@@ -1,42 +1,43 @@
 <div *ngIf="dataSource" fxLayout="column">
-
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            {{ routeData?.title }}
+        </div>
     </div>
 
     <div fxLayout="column">
-
         <div class="margin-v overflow" fxLayout="row">
-
-            <natural-search (selectionChange)="search($event)"
-                            [facets]="naturalSearchFacets"
-                            [multipleGroups]="true"
-                            [selections]="naturalSearchSelections"
-                            fxFlex
+            <natural-search
+                (selectionChange)="search($event)"
+                [facets]="naturalSearchFacets"
+                [multipleGroups]="true"
+                [selections]="naturalSearchSelections"
+                fxFlex
             >
-
-                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                <natural-columns-picker
+                    (selectionChange)="selectedColumns = $event"
+                    [initialSelection]="initialColumns"
+                >
                     <span naturalColumnsPickerColumn="description">Commentaire</span>
                     <span naturalColumnsPickerColumn="event">News</span>
                     <span naturalColumnsPickerColumn="news">Actualité</span>
                 </natural-columns-picker>
             </natural-search>
-
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
                 <ng-container matColumnDef="description">
                     <th *matHeaderCellDef mat-header-cell>Commentaire</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <natural-table-button [label]="element.description"
-                                                  [navigate]="['/admin/comment', element.id]"
-                                                  matTooltip="Éditer"
+                            <natural-table-button
+                                [label]="element.description"
+                                [navigate]="['/admin/comment', element.id]"
+                                matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>
@@ -46,25 +47,27 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="event">Événement</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.event">
-                            <natural-table-button [label]="element.event.name"
-                                                  [navigate]="['/admin/event', element.event.id]"
-                                                  matTooltip="Éditer"
-                            ></natural-table-button>
-                        </div>
-                    </td>                </ng-container>
-
-                <ng-container matColumnDef="news">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
-                    <td *matCellDef="let element" mat-cell>
-                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.news">
-                            <natural-table-button [label]="element.news.name"
-                                                  [navigate]="['/admin/news', element.news.id]"
-                                                  matTooltip="Éditer"
+                            <natural-table-button
+                                [label]="element.event.name"
+                                [navigate]="['/admin/event', element.event.id]"
+                                matTooltip="Éditer"
                             ></natural-table-button>
                         </div>
                     </td>
                 </ng-container>
 
+                <ng-container matColumnDef="news">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="element.news">
+                            <natural-table-button
+                                [label]="element.news.name"
+                                [navigate]="['/admin/news', element.news.id]"
+                                matTooltip="Éditer"
+                            ></natural-table-button>
+                        </div>
+                    </td>
+                </ng-container>
             </table>
         </div>
 
@@ -76,13 +79,13 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator (page)="pagination($event)"
-                       *ngIf="dataSource.data?.length"
-                       [length]="dataSource.data?.length"
-                       [pageIndex]="dataSource.data?.pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
-                       [pageSize]="dataSource.data?.pageSize"
+        <mat-paginator
+            (page)="pagination($event)"
+            *ngIf="dataSource.data?.length"
+            [length]="dataSource.data?.length"
+            [pageIndex]="dataSource.data?.pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageSize]="dataSource.data?.pageSize"
         ></mat-paginator>
-
     </div>
 </div>

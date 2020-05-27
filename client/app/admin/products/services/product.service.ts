@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { ValidatorFn, Validators } from '@angular/forms';
-import { FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, unique } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {ValidatorFn, Validators} from '@angular/forms';
+import {FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, unique} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -19,13 +19,14 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../shared/generated-types';
-import { xorValidator } from '../../../shared/validators';
-import { createProduct, deleteProducts, productQuery, productsQuery, updateProduct } from './product.queries';
+import {xorValidator} from '../../../shared/validators';
+import {createProduct, deleteProducts, productQuery, productsQuery, updateProduct} from './product.queries';
 
 @Injectable({
     providedIn: 'root',
 })
-export class ProductService extends NaturalAbstractModelService<Product['product'],
+export class ProductService extends NaturalAbstractModelService<
+    Product['product'],
     ProductVariables,
     Products['products'],
     ProductsVariables,
@@ -33,8 +34,8 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     CreateProductVariables,
     UpdateProduct['updateProduct'],
     UpdateProductVariables,
-    DeleteProducts> {
-
+    DeleteProducts
+> {
     public static articlesSorting: ProductSorting[] = [
         {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
         {field: ProductSortingField.illustration, order: SortingOrder.DESC},
@@ -42,19 +43,11 @@ export class ProductService extends NaturalAbstractModelService<Product['product
     ];
 
     constructor(apollo: Apollo) {
-        super(apollo,
-            'product',
-            productQuery,
-            productsQuery,
-            createProduct,
-            updateProduct,
-            deleteProducts);
+        super(apollo, 'product', productQuery, productsQuery, createProduct, updateProduct, deleteProducts);
     }
 
     public getFormGroupValidators(model?: Literal): ValidatorFn[] {
-        return [
-            xorValidator('reviewXorArticle', ['reviewNumber', 'review']),
-        ];
+        return [xorValidator('reviewXorArticle', ['reviewNumber', 'review'])];
     }
 
     public getFormValidators(): FormValidators {
@@ -96,5 +89,4 @@ export class ProductService extends NaturalAbstractModelService<Product['product
             file: null,
         };
     }
-
 }

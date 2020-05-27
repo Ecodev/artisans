@@ -1,13 +1,18 @@
 <h2 mat-dialog-title>Faire une don</h2>
 
 <mat-dialog-content>
-
     <mat-form-field>
         <mat-label>Montant</mat-label>
-        <input [(ngModel)]="amount" matInput type="number" min="0.000001" step="1" (keydown.enter)="dialogRef.close(amount)"/>
+        <input
+            [(ngModel)]="amount"
+            matInput
+            type="number"
+            min="0.000001"
+            step="1"
+            (keydown.enter)="dialogRef.close(amount)"
+        />
         <div matSuffix>{{ currencyService.current.value }}</div>
     </mat-form-field>
-
 </mat-dialog-content>
 
 <mat-dialog-actions>

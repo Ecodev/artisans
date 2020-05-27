@@ -29,6 +29,5 @@ export const purchasesQuery = gql`
             pageIndex
             length
         }
-    }`;
-
-
+    }
+`;

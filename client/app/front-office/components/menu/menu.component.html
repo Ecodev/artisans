@@ -1,6 +1,6 @@
 <div [@transformMenu]="panelAnimationState" class="mega-menu mat-elevation-z4" role="menu">
     <div [style.min-height.px]="data.contentHeight" [style.padding-left.px]="offsetLeft" class="mega-menu-content">
-        <ng-container *ngTemplateOutlet="navigationTemplate; context:{ $implicit: data.items }"></ng-container>
+        <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: data.items}"></ng-container>
     </div>
 </div>
 
@@ -8,14 +8,16 @@
     <ul *ngIf="navigation?.length">
         <li *ngFor="let item of navigation" [class.hasMenu]="item.children?.length" [class.open]="item.open">
             <a (click)="item.open = !item.open" [routerLink]="item.link" *ngIf="!item.highlight">{{ item.display }}</a>
-            <a (click)="item.open = !item.open"
-               [routerLink]="item.link"
-               mat-stroked-button
-               color="primary"
-               *ngIf="item.highlight"
-               class="highlighted"
-            >{{ item.display }}</a>
-            <ng-container *ngTemplateOutlet="navigationTemplate; context:{ $implicit: item.children }"></ng-container>
+            <a
+                (click)="item.open = !item.open"
+                [routerLink]="item.link"
+                mat-stroked-button
+                color="primary"
+                *ngIf="item.highlight"
+                class="highlighted"
+                >{{ item.display }}</a
+            >
+            <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}"></ng-container>
         </li>
     </ul>
 </ng-template>

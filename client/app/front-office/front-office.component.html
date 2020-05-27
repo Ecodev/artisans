@@ -2,9 +2,13 @@
 <ng-template #mobileNavigationTemplate let-navigation>
     <ul *ngIf="navigation?.length">
         <li *ngFor="let item of navigation" [class.opened]="item.opened">
-            <a (click)="menu.close()" *ngIf="!item.children?.length" [routerLink]="item.link" matRipple>{{ item.display }}</a>
-            <a (click)="item.opened = !item.opened;" *ngIf="item.children?.length" matRipple>{{ item.display }}</a>
-            <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context:{ $implicit: item.children }"></ng-container>
+            <a (click)="menu.close()" *ngIf="!item.children?.length" [routerLink]="item.link" matRipple>{{
+                item.display
+            }}</a>
+            <a (click)="item.opened = !item.opened" *ngIf="item.children?.length" matRipple>{{ item.display }}</a>
+            <ng-container
+                *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}"
+            ></ng-container>
         </li>
     </ul>
 </ng-template>
@@ -21,12 +25,12 @@
 </ng-template>
 
 <mat-sidenav-container>
-
     <mat-sidenav #menu [opened]="menuOpened" position="end">
-
         <!-- menu mobile -->
         <div id="mobile-menu">
-            <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context:{ $implicit: mobileNavigation }"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: mobileNavigation}"
+            ></ng-container>
 
             <ul *ngIf="viewer?.role === UserRole.administrator">
                 <li>
@@ -37,9 +41,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-
         <mat-toolbar fxHide.gt-sm fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
-
             <div fxFlex></div>
 
             <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
@@ -49,11 +51,9 @@
             <button (click)="menu.toggle()" mat-icon-button>
                 <natural-icon name="menu"></natural-icon>
             </button>
-
         </mat-toolbar>
 
         <div fxHide.lt-md id="header">
-
             <!-- header : 1s line -->
             <div id="header-top">
                 <div class="container" fxLayout="row">
@@ -87,14 +87,20 @@
             <!-- header : 3rd line -->
             <div id="header-bottom">
                 <div class="container" fxLayout="row" fxLayoutAlign="start end" id="menu-main-container">
-
                     <div fxFlex id="menu-main">
-                        <ng-container *ngTemplateOutlet="navigationTemplate; context:{ $implicit: navigation }"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="navigationTemplate; context: {$implicit: navigation}"
+                        ></ng-container>
                     </div>
 
                     <mat-form-field id="search-field">
                         <mat-label>Rechercher</mat-label>
-                        <input (keydown.enter)="search()" (keydown.esc)="searchTerm = ''" [(ngModel)]="searchTerm" matInput>
+                        <input
+                            (keydown.enter)="search()"
+                            (keydown.esc)="searchTerm = ''"
+                            [(ngModel)]="searchTerm"
+                            matInput
+                        />
                         <button (click)="search()" mat-icon-button matSuffix>
                             <natural-icon name="search"></natural-icon>
                         </button>
@@ -105,7 +111,6 @@
 
         <!-- THE BODY IS HERE -->
         <div id="front-office-body">
-
             <div class="container">
                 <app-breadcrumbs></app-breadcrumbs>
             </div>
@@ -114,43 +119,52 @@
         </div>
 
         <div id="footer">
-
-            <div id="head-of-footer"
-                 [style.backgroundImage]="'url(assets/images/conversations-carbone-transition-energetique-2.jpg)'"
+            <div
+                id="head-of-footer"
+                [style.backgroundImage]="'url(assets/images/conversations-carbone-transition-energetique-2.jpg)'"
             >
                 <div class="container">
-                    <img alt="logo" class="section-logo" src="assets/logo-artisans-de-la-transition-blanc.svg" [style.width.perc]="50" />
+                    <img
+                        alt="logo"
+                        class="section-logo"
+                        src="assets/logo-artisans-de-la-transition-blanc.svg"
+                        [style.width.perc]="50"
+                    />
                 </div>
             </div>
 
             <div id="newsletter-zone">
-
-                <form fxLayout.gt-sm="row"
-                      fxLayout="column"
-                      fxLayoutAlign.gt-sm="start center"
-                      fxLayoutAlign="start start"
-                      fxLayoutGap.gt-sm="20px"
-                      [formGroup]="newsletterForm"
-                      class="container"
+                <form
+                    fxLayout.gt-sm="row"
+                    fxLayout="column"
+                    fxLayoutAlign.gt-sm="start center"
+                    fxLayoutAlign="start start"
+                    fxLayoutGap.gt-sm="20px"
+                    [formGroup]="newsletterForm"
+                    class="container"
                 >
                     <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
 
                     <mat-form-field color="accent" id="newsletter-subscription">
                         <mat-label>Adresse e-mail</mat-label>
-                        <input matInput formControlName="email">
-                        <mat-error *ngIf="newsletterForm.controls.email?.errors">Veuillez indiquer une addresse email valide</mat-error>
+                        <input matInput formControlName="email" />
+                        <mat-error *ngIf="newsletterForm.controls.email?.errors"
+                            >Veuillez indiquer une addresse email valide</mat-error
+                        >
                     </mat-form-field>
 
-                    <button mat-flat-button *ngIf="!(newsletterForm.disabled || newsletterForm.invalid)" (click)="subscribeNewsletter()"
-                    >S'inscrire
+                    <button
+                        mat-flat-button
+                        *ngIf="!(newsletterForm.disabled || newsletterForm.invalid)"
+                        (click)="subscribeNewsletter()"
+                    >
+                        S'inscrire
                     </button>
                 </form>
             </div>
 
             <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px" id="footer-body">
-
                 <div class="mat-h3" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
-
                     <mat-nav-list fxFlex.gt-sm="33">
                         <a mat-list-item routerLink="product">L'association</a>
                         <a mat-list-item routerLink="product-tag">La Revue Durable</a>
@@ -168,8 +182,11 @@
 
                     <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px" class="padding">
                         <div>
-                            <div class="mat-h2 no-margin-bottom">Association<br/> Artisans de la transition</div>
-                            <div class="mat-h2"> La Revue durable</div>
+                            <div class="mat-h2 no-margin-bottom">
+                                Association<br />
+                                Artisans de la transition
+                            </div>
+                            <div class="mat-h2">La Revue durable</div>
                         </div>
                         <div>
                             Rue de Lausanne 23
@@ -180,13 +197,9 @@
                             <br />
                             Tél: ...
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
-
     </mat-sidenav-content>
-
 </mat-sidenav-container>

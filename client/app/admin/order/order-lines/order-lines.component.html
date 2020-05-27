@@ -1,19 +1,23 @@
 <div *ngIf="dataSource" fxLayout="column">
-
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            {{ routeData?.title }}
+        </div>
     </div>
 
     <div fxLayout="column">
-
         <div [fxShow]="!hideHeader" class="margin-v overflow" fxLayout="row">
-            <natural-search (selectionChange)="search($event)"
-                            [facets]="naturalSearchFacets"
-                            [multipleGroups]="true"
-                            [selections]="naturalSearchSelections"
-                            fxFlex
+            <natural-search
+                (selectionChange)="search($event)"
+                [facets]="naturalSearchFacets"
+                [multipleGroups]="true"
+                [selections]="naturalSearchSelections"
+                fxFlex
             >
-                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                <natural-columns-picker
+                    (selectionChange)="selectedColumns = $event"
+                    [initialSelection]="initialColumns"
+                >
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
                     <span naturalColumnsPickerColumn="quantity">Quantité</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
@@ -26,9 +30,8 @@
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
                 <ng-container *ngIf="showTotals">
                     <tr *matFooterRowDef="selectedColumns" mat-footer-row></tr>
@@ -37,10 +40,11 @@
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Produit</th>
                     <td *matCellDef="let element" mat-cell>
-                        <natural-table-button *ngIf="element.permissions.update"
-                                              [label]="element.name"
-                                              [navigate]="['/admin/order/order-line/', element.id]"
-                                              matTooltip="Éditer"
+                        <natural-table-button
+                            *ngIf="element.permissions.update"
+                            [label]="element.name"
+                            [navigate]="['/admin/order/order-line/', element.id]"
+                            matTooltip="Éditer"
                         ></natural-table-button>
                         <span *ngIf="!element.permissions.update">{{ element.name }}</span>
                     </td>
@@ -65,24 +69,34 @@
                         {{ +element.quantity }}
                     </td>
                     <td *matFooterCellDef mat-footer-cell>
-                        <span *ngIf="dataSource?.data?.totalQuantity > 0">{{dataSource.data.totalQuantity}}</span>
+                        <span *ngIf="dataSource?.data?.totalQuantity > 0">{{ dataSource.data.totalQuantity }}</span>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">
                     <th *matHeaderCellDef mat-header-cell natural-5em-column>Montant</th>
                     <td *matCellDef="let element" mat-cell>
-                        <ng-container *ngIf="element.balanceCHF > 0">{{ element.balanceCHF  | currency : 'CHF' }}</ng-container>
-                        <ng-container *ngIf="element.balanceEUR > 0">{{ element.balanceEUR  | currency : 'EUR' }}</ng-container>
+                        <ng-container *ngIf="element.balanceCHF > 0">{{
+                            element.balanceCHF | currency: 'CHF'
+                        }}</ng-container>
+                        <ng-container *ngIf="element.balanceEUR > 0">{{
+                            element.balanceEUR | currency: 'EUR'
+                        }}</ng-container>
                     </td>
                     <td *matFooterCellDef mat-footer-cell>
-                        <span *ngIf="dataSource?.data?.totalBalanceCHF > 0">{{dataSource.data.totalBalanceCHF | currency : 'CHF'}}</span>
-                        <ng-container *ngIf="dataSource?.data?.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"> -
+                        <span *ngIf="dataSource?.data?.totalBalanceCHF > 0">{{
+                            dataSource.data.totalBalanceCHF | currency: 'CHF'
+                        }}</span>
+                        <ng-container
+                            *ngIf="dataSource?.data?.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"
+                        >
+                            -
                         </ng-container>
-                        <span *ngIf="dataSource?.data?.totalBalanceEUR > 0">{{dataSource.data.totalBalanceEUR | currency : 'EUR'}}</span>
+                        <span *ngIf="dataSource?.data?.totalBalanceEUR > 0">{{
+                            dataSource.data.totalBalanceEUR | currency: 'EUR'
+                        }}</span>
                     </td>
                 </ng-container>
-
             </table>
         </div>
 
@@ -94,15 +108,14 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator (page)="pagination($event)"
-                       *ngIf="dataSource.data?.length"
-                       [fxShow]="!hidePaginator"
-                       [length]="dataSource.data?.length"
-                       [pageIndex]="dataSource.data?.pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
-                       [pageSize]="paginatorPageSize ? paginatorPageSize : dataSource.data?.pageSize"
+        <mat-paginator
+            (page)="pagination($event)"
+            *ngIf="dataSource.data?.length"
+            [fxShow]="!hidePaginator"
+            [length]="dataSource.data?.length"
+            [pageIndex]="dataSource.data?.pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageSize]="paginatorPageSize ? paginatorPageSize : dataSource.data?.pageSize"
         ></mat-paginator>
-
     </div>
 </div>
-

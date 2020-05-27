@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SessionOrganisationComponent } from './session-organisation.component';
+import {SessionOrganisationComponent} from './session-organisation.component';
 
 describe('SessionOrganisationComponent', () => {
     let component: SessionOrganisationComponent;
@@ -9,8 +9,7 @@ describe('SessionOrganisationComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SessionOrganisationComponent],
-        })
-               .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {

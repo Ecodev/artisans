@@ -1,22 +1,21 @@
 <div fxLayout="column">
-
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            {{ routeData?.title }}
+        </div>
     </div>
 
-
     <div fxLayout="column">
-
         <div class="margin-v overflow">
             <p class="mat-body">Uploadez un fichier CSV pour importer les utilisateurs et leur accès:</p>
             <p>
                 <button
-                        mat-raised-button
-                        ngfSelect
-                        [accept]="'text/csv'"
-                        [ngfFixOrientation]="false"
-                        (fileChange)="uploadFile($event)"
-                        [disabled]="!permissionsService.crud?.organization.create || importing"
+                    mat-raised-button
+                    ngfSelect
+                    [accept]="'text/csv'"
+                    [ngfFixOrientation]="false"
+                    (fileChange)="uploadFile($event)"
+                    [disabled]="!permissionsService.crud?.organization.create || importing"
                 >
                     <natural-icon name="file_upload"></natural-icon>
                     Uploader
@@ -24,7 +23,9 @@
             </p>
 
             <div *ngIf="result">
-                <p>L'import de {{ result.totalLines }} lignes s'est terminé avec succès en {{ result.time }} secondes.</p>
+                <p>
+                    L'import de {{ result.totalLines }} lignes s'est terminé avec succès en {{ result.time }} secondes.
+                </p>
                 <ul>
                     <li>Utilisateurs modifiés: {{ result.updatedUsers }}</li>
                     <li>Organisations modifiées: {{ result.updatedOrganizations }}</li>
@@ -39,36 +40,32 @@
                 <p *ngIf="!users.length">Tout est OK</p>
                 <div *ngIf="users.length">
                     <p>
-                        Il existe {{users.length}} utilisateurs dans notre BD qui n'ont pas été importés.
-                        Il faut soit créer ces utilisateurs dans Crésus puis re-importer, soit supprimer
-                        définitivement les utilisateurs de notre BD.
+                        Il existe {{ users.length }} utilisateurs dans notre BD qui n'ont pas été importés. Il faut soit
+                        créer ces utilisateurs dans Crésus puis re-importer, soit supprimer définitivement les
+                        utilisateurs de notre BD.
                     </p>
                     <ul>
                         <li *ngFor="let user of users">{{ user.name }}</li>
                     </ul>
 
-                    <a [routerLink]="['/admin/user', this.params]" mat-button style="margin-right: 3em">Voir le détail</a>
-
-                    <button
-                            mat-raised-button
-                            color="warn"
-                            (click)="deleteAll()"
+                    <a [routerLink]="['/admin/user', this.params]" mat-button style="margin-right: 3em;"
+                        >Voir le détail</a
                     >
+
+                    <button mat-raised-button color="warn" (click)="deleteAll()">
                         <natural-icon name="delete"></natural-icon>
                         Supprimer tous
                     </button>
                 </div>
-
             </div>
 
             <div *ngIf="error !== null">
                 <p>L'erreur suivante s'est produite durant l'import et tout le processus a été complétement annulé:</p>
                 <p>
                     <mat-icon color="warn">error</mat-icon>
-                    {{error.message}}
+                    {{ error.message }}
                 </p>
             </div>
-
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NaturalAbstractDetail, NaturalQueryVariablesManager } from '@ecodev/natural';
-import { ProductService } from '../../../../../admin/products/services/product.service';
-import { PurchaseService } from '../../../../../profile/components/purchases/purchase.service';
+import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {ProductService} from '../../../../../admin/products/services/product.service';
+import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
 import {
     CreateProduct,
     CreateProductVariables,
@@ -16,7 +16,7 @@ import {
     UpdateProduct,
     UpdateProductVariables,
 } from '../../../../../shared/generated-types';
-import { ProductsPageComponent } from '../products-page/products-page.component';
+import {ProductsPageComponent} from '../products-page/products-page.component';
 
 @Component({
     selector: 'app-product-page',
@@ -24,14 +24,16 @@ import { ProductsPageComponent } from '../products-page/products-page.component'
     styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent
-    extends NaturalAbstractDetail<Product['product'],
+    extends NaturalAbstractDetail<
+        Product['product'],
         ProductVariables,
         CreateProduct['createProduct'],
         CreateProductVariables,
         UpdateProduct['updateProduct'],
         UpdateProductVariables,
-        any> implements OnInit {
-
+        any
+    >
+    implements OnInit {
     @ViewChild(ProductsPageComponent, {static: false}) relatedProducts: ProductsPageComponent;
 
     public ProductType = ProductType;
@@ -87,10 +89,7 @@ export class ProductPageComponent
      */
     public relatedProductsCount: number;
 
-    constructor(private productService: ProductService,
-                private purchaseService: PurchaseService,
-                injector: Injector,
-    ) {
+    constructor(private productService: ProductService, private purchaseService: PurchaseService, injector: Injector) {
         super('product', productService, injector);
     }
 
@@ -99,7 +98,6 @@ export class ProductPageComponent
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 
         this.route.data.subscribe(data => {
-
             this.relatedProductsCount = 0;
             this.articlesMenuOpen = false;
 
@@ -107,8 +105,10 @@ export class ProductPageComponent
 
             if (reviewProduct) {
                 const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();
-                qvmArticles.set('variables', {filter: {groups: [{conditions: [{review: {in: {values: [reviewProduct.id]}}}]}]}});
-                this.productService.getAll(qvmArticles).subscribe((result) => this.articles = result.items);
+                qvmArticles.set('variables', {
+                    filter: {groups: [{conditions: [{review: {in: {values: [reviewProduct.id]}}}]}]},
+                });
+                this.productService.getAll(qvmArticles).subscribe(result => (this.articles = result.items));
             } else {
                 this.articles = [];
             }
@@ -121,15 +121,13 @@ export class ProductPageComponent
                 const digital = [ProductType.both, ProductType.digital];
                 const paper = [ProductType.both, ProductType.paper];
 
-                this.showBuyDigital = digital.includes(this.data.model.type)
-                                      && !purchases.items.some(orderLine => digital.includes(orderLine.type))
-                                      && !this.data.model.file; // A digital might be allowed via subscription, not purchase
+                this.showBuyDigital =
+                    digital.includes(this.data.model.type) &&
+                    !purchases.items.some(orderLine => digital.includes(orderLine.type)) &&
+                    !this.data.model.file; // A digital might be allowed via subscription, not purchase
 
                 this.showBuyPaper = paper.includes(this.data.model.type);
             });
-
         });
-
     }
-
 }

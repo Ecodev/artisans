@@ -1,11 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NaturalAlertService } from '@ecodev/natural';
-import { CurrencyService } from '../../../../../shared/services/currency.service';
-import { ProductType } from '../../../../../shared/generated-types';
-import { Cart, CartLineProduct } from '../../classes/cart';
-import { CartService } from '../../services/cart.service';
-import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NaturalAlertService} from '@ecodev/natural';
+import {CurrencyService} from '../../../../../shared/services/currency.service';
+import {ProductType} from '../../../../../shared/generated-types';
+import {Cart, CartLineProduct} from '../../classes/cart';
+import {CartService} from '../../services/cart.service';
+import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 
 @Component({
     selector: 'app-cart',
@@ -13,7 +13,6 @@ import { NaturalStorage, SESSION_STORAGE } from '@ecodev/natural';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-
     public mode;
 
     /**
@@ -33,8 +32,7 @@ export class CartComponent implements OnInit {
         public cartService: CartService,
         public currencyService: CurrencyService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
-    ) {
-    }
+    ) {}
 
     public ngOnInit(): void {
         if (this.route.snapshot.params['cartId']) {
@@ -49,7 +47,11 @@ export class CartComponent implements OnInit {
 
     public empty() {
         this.alertService
-            .confirm('Vider le panier', 'Êtes-vous sûr de vouloir vider le panier ? Cette action est irréversible.', 'Vider le panier')
+            .confirm(
+                'Vider le panier',
+                'Êtes-vous sûr de vouloir vider le panier ? Cette action est irréversible.',
+                'Vider le panier',
+            )
             .subscribe(confirm => {
                 if (confirm) {
                     this.cart.empty();
@@ -63,7 +65,5 @@ export class CartComponent implements OnInit {
 
     public decrease(product: CartLineProduct, type: ProductType): void {
         this.cart.removeProduct(product, type, 1);
-
     }
-
 }

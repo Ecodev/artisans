@@ -1,5 +1,4 @@
 @mixin product($theme) {
-
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $warn: map-get($theme, warn);
@@ -7,6 +6,5 @@
     $fg: map-get($theme, foreground);
 
     app-product {
-
     }
 }

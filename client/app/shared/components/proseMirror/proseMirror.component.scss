@@ -1,6 +1,6 @@
 ::ng-deep .ProseMirror {
     position: relative;
-    padding: 4px 0 !important
+    padding: 4px 0 !important;
 }
 
 ::ng-deep .ProseMirror {
@@ -41,7 +41,7 @@
 }
 
 ::ng-deep li.ProseMirror-selectednode:after {
-    content: "";
+    content: '';
     position: absolute;
     left: -32px;
     right: -2px;
@@ -76,7 +76,8 @@
     margin-right: 3px;
 }
 
-::ng-deep .ProseMirror-menu-dropdown, ::ng-deep .ProseMirror-menu-dropdown-menu {
+::ng-deep .ProseMirror-menu-dropdown,
+::ng-deep .ProseMirror-menu-dropdown-menu {
     font-size: 90%;
     white-space: nowrap;
 }
@@ -95,17 +96,18 @@
 }
 
 ::ng-deep .ProseMirror-menu-dropdown:after {
-    content: "";
+    content: '';
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
     border-top: 4px solid currentColor;
-    opacity: .6;
+    opacity: 0.6;
     position: absolute;
     right: 4px;
     top: calc(50% - 2px);
 }
 
-::ng-deep .ProseMirror-menu-dropdown-menu, ::ng-deep .ProseMirror-menu-submenu {
+::ng-deep .ProseMirror-menu-dropdown-menu,
+::ng-deep .ProseMirror-menu-submenu {
     position: absolute;
     background: white;
     color: #666;
@@ -133,11 +135,11 @@
 }
 
 ::ng-deep .ProseMirror-menu-submenu-label:after {
-    content: "";
+    content: '';
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
     border-left: 4px solid currentColor;
-    opacity: .6;
+    opacity: 0.6;
     position: absolute;
     right: 4px;
     top: calc(50% - 4px);
@@ -161,10 +163,11 @@
 }
 
 ::ng-deep .ProseMirror-menu-disabled {
-    opacity: .3;
+    opacity: 0.3;
 }
 
-::ng-deep .ProseMirror-menu-submenu-wrap:hover .ProseMirror-menu-submenu, ::ng-deep .ProseMirror-menu-submenu-wrap-active .ProseMirror-menu-submenu {
+::ng-deep .ProseMirror-menu-submenu-wrap:hover .ProseMirror-menu-submenu,
+::ng-deep .ProseMirror-menu-submenu-wrap-active .ProseMirror-menu-submenu {
     display: block;
 }
 
@@ -189,7 +192,7 @@
 
 ::ng-deep .ProseMirror-icon {
     display: inline-block;
-    line-height: .8;
+    line-height: 0.8;
     vertical-align: -2px; /* Compensate for padding */
     padding: 2px 8px;
     cursor: pointer;
@@ -215,7 +218,7 @@
 }
 
 ::ng-deep .ProseMirror-gapcursor:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: -2px;
@@ -243,14 +246,15 @@
 }
 
 ::ng-deep .ProseMirror-example-setup-style hr:after {
-    content: "";
+    content: '';
     display: block;
     height: 1px;
     background-color: silver;
     line-height: 2px;
 }
 
-::ng-deep .ProseMirror ul, ::ng-deep .ProseMirror ol {
+::ng-deep .ProseMirror ul,
+::ng-deep .ProseMirror ol {
     padding-left: 30px;
 }
 
@@ -272,7 +276,7 @@
     position: fixed;
     border-radius: 3px;
     z-index: 11;
-    box-shadow: -.5px 2px 5px rgba(0, 0, 0, .2);
+    box-shadow: -0.5px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 ::ng-deep .ProseMirror-prompt h5 {
@@ -282,7 +286,7 @@
     color: #444;
 }
 
-::ng-deep .ProseMirror-prompt input[type="text"],
+::ng-deep .ProseMirror-prompt input[type='text'],
 ::ng-deep .ProseMirror-prompt textarea {
     background: #eee;
     border: none;
@@ -292,7 +296,7 @@
     width: 20em;
 }
 
-::ng-deep .ProseMirror-prompt input[type="text"] {
+::ng-deep .ProseMirror-prompt input[type='text'] {
     padding: 0 4px;
 }
 
@@ -307,7 +311,7 @@
 }
 
 ::ng-deep .ProseMirror-prompt-close:after {
-    content: "âœ•";
+    content: 'âœ•';
     font-size: 12px;
 }
 
@@ -325,7 +329,8 @@
     display: none;
 }
 
-::ng-deep #editor, ::ng-deep .editor {
+::ng-deep #editor,
+::ng-deep .editor {
     background: white;
     color: black;
     background-clip: padding-box;
@@ -352,5 +357,5 @@
 }
 
 ::ng-deep .ProseMirror p {
-    margin-bottom: 1em
+    margin-bottom: 1em;
 }

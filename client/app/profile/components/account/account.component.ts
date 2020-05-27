@@ -1,6 +1,6 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail } from '@ecodev/natural';
-import { UserService } from '../../../admin/users/services/user.service';
+import {Component, Injector, OnInit} from '@angular/core';
+import {NaturalAbstractDetail} from '@ecodev/natural';
+import {UserService} from '../../../admin/users/services/user.service';
 import {
     CreateUser,
     CreateUserVariables,
@@ -16,14 +16,16 @@ import {
     styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent
-    extends NaturalAbstractDetail<User['user'],
+    extends NaturalAbstractDetail<
+        User['user'],
         UserVariables,
         CreateUser['createUser'],
         CreateUserVariables,
         UpdateUser['updateUser'],
         UpdateUserVariables,
-        any> implements OnInit {
-
+        any
+    >
+    implements OnInit {
     public UserService = UserService;
 
     /**
@@ -31,9 +33,7 @@ export class AccountComponent
      */
     public passwordMailSending = false;
 
-    constructor(private userService: UserService,
-                injector: Injector,
-    ) {
+    constructor(private userService: UserService, injector: Injector) {
         super('user', userService, injector);
     }
 
@@ -48,10 +48,12 @@ export class AccountComponent
     }
 
     public requestPasswordReset() {
-        this.userService.requestPasswordReset(this.form.value.email).subscribe(() => {
-            this.passwordMailSending = false;
-            this.alertService.info('Un email avec des instructions a été envoyé', 6000);
-        }, () => this.passwordMailSending = false);
+        this.userService.requestPasswordReset(this.form.value.email).subscribe(
+            () => {
+                this.passwordMailSending = false;
+                this.alertService.info('Un email avec des instructions a été envoyé', 6000);
+            },
+            () => (this.passwordMailSending = false),
+        );
     }
-
 }

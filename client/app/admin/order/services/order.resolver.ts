@@ -1,18 +1,15 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
-import { Observable } from 'rxjs';
-import { ErrorService } from '../../../shared/components/error/error.service';
-import { OrderResolve } from '../order';
-import { OrderService } from './order.service';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
+import {Observable} from 'rxjs';
+import {ErrorService} from '../../../shared/components/error/error.service';
+import {OrderResolve} from '../order';
+import {OrderService} from './order.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class OrderResolver implements Resolve<OrderResolve> {
-
-    constructor(private orderService: OrderService,
-                private errorService: ErrorService) {
-    }
+    constructor(private orderService: OrderService, private errorService: ErrorService) {}
 
     /**
      * Resolve order data for router and panels service

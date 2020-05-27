@@ -1,4 +1,4 @@
-import { NaturalStorage } from '@ecodev/natural';
+import {NaturalStorage} from '@ecodev/natural';
 import Decimal from 'decimal.js';
 import {
     Product_product,
@@ -7,16 +7,12 @@ import {
     Subscription_subscription,
     Subscriptions_subscriptions_items,
 } from '../../../../shared/generated-types';
-import { Currency } from '../../../../shared/services/currency.service';
-import { moneyRoundUp } from '../../../../shared/utils';
+import {Currency} from '../../../../shared/services/currency.service';
+import {moneyRoundUp} from '../../../../shared/utils';
 
-export type CartLineProduct =
-    Products_products_items
-    | Product_product;
+export type CartLineProduct = Products_products_items | Product_product;
 
-export type CartLineSubscription =
-    Subscriptions_subscriptions_items
-    | Subscription_subscription;
+export type CartLineSubscription = Subscriptions_subscriptions_items | Subscription_subscription;
 
 export interface CartLine {
     /**
@@ -41,7 +37,6 @@ export interface CartLine {
 }
 
 export class Cart {
-
     private static readonly storageKey = 'carts';
 
     private static carts: Cart[] = [];
@@ -66,7 +61,7 @@ export class Cart {
     /**
      * Single subscription setup
      */
-    public subscription: null | { subscription: CartLineSubscription, emails?: string[], type: ProductType } = null;
+    public subscription: null | {subscription: CartLineSubscription; emails?: string[]; type: ProductType} = null;
 
     /**
      * Cart identification
@@ -135,14 +130,13 @@ export class Cart {
         }
     }
 
-    private static getPriceTaxInc(product: { pricePerUnitCHF?, pricePerUnitEUR? }, quantity: number): number {
+    private static getPriceTaxInc(product: {pricePerUnitCHF?; pricePerUnitEUR?}, quantity: number): number {
         // todo : drop decimaljs ?
         const quantifiedPrice = Decimal.mul(Cart.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
     }
 
-    private static getPriceByCurrency(product: { pricePerUnitCHF?, pricePerUnitEUR? }): Decimal.Value {
-
+    private static getPriceByCurrency(product: {pricePerUnitCHF?; pricePerUnitEUR?}): Decimal.Value {
         if (this.currency === Currency.CHF) {
             return product.pricePerUnitCHF;
         } else if (this.currency === Currency.EUR) {
@@ -171,14 +165,12 @@ export class Cart {
      * Return true if the product is inserted into cart (opposed to increment from already existing in cart)
      */
     public addProduct(product: CartLineProduct, type: ProductType, quantity: number = 1): boolean {
-
         let isNewItem = false;
         const line = this.getLineByProduct(product, type);
 
         if (line) {
             line.quantity += quantity;
             line.totalTaxInc = Cart.getPriceTaxInc(product, line.quantity);
-
         } else {
             isNewItem = true;
             this.productLines.push({
@@ -195,7 +187,6 @@ export class Cart {
     }
 
     public removeProduct(product: CartLineProduct, type: ProductType, quantity: number) {
-
         const line = this.getLineByProduct(product, type);
 
         if (line) {
@@ -264,7 +255,6 @@ export class Cart {
     }
 
     public computeTotals() {
-
         let totals = this.productLines.reduce((a, line) => {
             line.totalTaxInc = Cart.getPriceTaxInc(line.product, line.quantity); // update line total
             return a + line.totalTaxInc; // stack for cart total

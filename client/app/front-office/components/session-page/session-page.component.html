@@ -1,13 +1,13 @@
 <div class="container mat-h3" fxLayout.gt-sm="row" fxLayoutGap="60px" fxLayout="column">
-
     <div fxFlex fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="start start">
         <h1 class="mat-display-1">
             {{ data.model.name }}
 
-            <a *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator"
-               [routerLink]="['/admin/session/', data.model.id]"
-               mat-icon-button
-               mat-raised-button
+            <a
+                *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator"
+                [routerLink]="['/admin/session/', data.model.id]"
+                mat-icon-button
+                mat-raised-button
             >
                 <natural-icon name="edit"></natural-icon>
             </a>
@@ -23,18 +23,14 @@
         </div>
 
         <a color="accent" mat-flat-button>S'inscrire</a>
-
     </div>
 
     <div fxLayout="column" fxLayoutGap="60px" fxFlex.gt-sm="25">
-
         <div fxLayout="column" fxLayoutGap="30px">
-            <div *ngIf="data.model.region || data.model.locality|| data.model.street">
+            <div *ngIf="data.model.region || data.model.locality || data.model.street">
                 <strong>Lieu :</strong> {{ data.model.street }}, {{ data.model.locality }}, {{ data.model.region }}
             </div>
-            <div *ngIf="data.model.price">
-                <strong>Contribution attendue :</strong> {{ data.model.price }}
-            </div>
+            <div *ngIf="data.model.price"><strong>Contribution attendue :</strong> {{ data.model.price }}</div>
             <div *ngIf="data.model.availability">
                 {{ data.model.availability }} {{ data.model.availability > 1 ? 'places' : 'place' }} pour la session
             </div>
@@ -43,7 +39,7 @@
         <div *ngIf="facilitators.length" fxLayout="column" fxLayoutGap="15px">
             <div class="mat-h2">Facilitateurs</div>
             <div *ngFor="let facilitator of facilitators" fxLayout="column">
-                <div class="mat-body-strong"> {{ facilitator.name }}</div>
+                <div class="mat-body-strong">{{ facilitator.name }}</div>
                 <a [href]="'mailto:' + facilitator.email"> {{ facilitator.email }}</a>
             </div>
         </div>
@@ -52,9 +48,8 @@
             <div class="mat-h2">Les autres sessions à {{ data.model.locality | lowercase }}</div>
             <div *ngFor="let session of otherSessions">
                 <a [routerLink]="['../', session.id]" class="mat-body-strong">{{ session.name }}</a>
-                <div>à partir du {{ session.startDate | date : 'EEE d MMMM y' }}</div>
+                <div>à partir du {{ session.startDate | date: 'EEE d MMMM y' }}</div>
             </div>
         </div>
-
     </div>
 </div>

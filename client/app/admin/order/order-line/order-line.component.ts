@@ -1,16 +1,16 @@
-import { Component, Inject, Injector, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { NaturalAbstractDetail, NaturalDialogTriggerProvidedData } from '@ecodev/natural';
-import { merge, omit } from 'lodash';
+import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {NaturalAbstractDetail, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
+import {merge, omit} from 'lodash';
 import {
     OrderLine,
     OrderLineVariables,
     UpdateOrderLine,
     UpdateOrderLineVariables,
 } from '../../../shared/generated-types';
-import { ProductService } from '../../products/services/product.service';
-import { OrderLineService } from '../services/order-lines.service';
-import { SubscriptionService } from '../../../front-office/modules/shop/components/subscriptions/subscription.service';
+import {ProductService} from '../../products/services/product.service';
+import {OrderLineService} from '../services/order-lines.service';
+import {SubscriptionService} from '../../../front-office/modules/shop/components/subscriptions/subscription.service';
 
 @Component({
     selector: 'app-order-line',
@@ -18,14 +18,16 @@ import { SubscriptionService } from '../../../front-office/modules/shop/componen
     styleUrls: ['./order-line.component.scss'],
 })
 export class OrderLineComponent
-    extends NaturalAbstractDetail<OrderLine['orderLine'],
+    extends NaturalAbstractDetail<
+        OrderLine['orderLine'],
         OrderLineVariables,
         never,
         never,
         UpdateOrderLine['updateOrderLine'],
         UpdateOrderLineVariables,
-        never> implements OnInit {
-
+        never
+    >
+    implements OnInit {
     constructor(
         private orderLineService: OrderLineService,
         public productService: ProductService,
@@ -47,5 +49,4 @@ export class OrderLineComponent
             this.initForm();
         });
     }
-
 }

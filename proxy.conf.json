@@ -1,14 +1,14 @@
 {
-  "/graphql": {
-    "target": "https://artisans.lan",
-    "secure": false
-  },
-  "/image": {
-    "target": "https://artisans.lan",
-    "secure": false
-  },
-  "/file": {
-    "target": "https://artisans.lan",
-    "secure": false
-  }
+    "/graphql": {
+        "target": "https://artisans.lan",
+        "secure": false
+    },
+    "/image": {
+        "target": "https://artisans.lan",
+        "secure": false
+    },
+    "/file": {
+        "target": "https://artisans.lan",
+        "secure": false
+    }
 }

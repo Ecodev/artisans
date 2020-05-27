@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 // Fragment for single display usage. Too much data for listings, and unused fields for mutations.
 export const userFieldsFragment = gql`
@@ -102,7 +102,7 @@ export const userByTokenQuery = gql`
 
 export const updateUser = gql`
     mutation UpdateUser($id: UserID!, $input: UserPartialInput!) {
-        updateUser(id:$id, input:$input) {
+        updateUser(id: $id, input: $input) {
             id
             name
             updateDate
@@ -115,13 +115,14 @@ export const updateUser = gql`
 `;
 
 export const deleteUsers = gql`
-    mutation DeleteUsers ($ids: [UserID!]!){
+    mutation DeleteUsers($ids: [UserID!]!) {
         deleteUsers(ids: $ids)
-    }`;
+    }
+`;
 
 export const createUser = gql`
-    mutation CreateUser ($input: UserInput!) {
-        createUser (input: $input) {
+    mutation CreateUser($input: UserInput!) {
+        createUser(input: $input) {
             id
             name
             creator {
@@ -135,11 +136,12 @@ export const createUser = gql`
 export const logoutMutation = gql`
     mutation Logout {
         logout
-    }`;
+    }
+`;
 
 export const loginMutation = gql`
     mutation Login($email: Email!, $password: String!) {
-        login(email:$email, password:$password) {
+        login(email: $email, password: $password) {
             ...userFields
         }
     }
@@ -162,4 +164,3 @@ export const unregisterMutation = gql`
         unregister(id: $id)
     }
 `;
-

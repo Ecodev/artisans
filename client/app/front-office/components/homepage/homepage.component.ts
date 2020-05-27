@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { NaturalQueryVariablesManager } from '@ecodev/natural';
-import { EventService } from '../../../admin/events/services/event.service';
-import { NewsService } from '../../../admin/newses/services/news.service';
-import { ProductTagService } from '../../../admin/product-tags/services/product-tag.service';
-import { ProductService } from '../../../admin/products/services/product.service';
-import { UserService } from '../../../admin/users/services/user.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {NaturalQueryVariablesManager} from '@ecodev/natural';
+import {EventService} from '../../../admin/events/services/event.service';
+import {NewsService} from '../../../admin/newses/services/news.service';
+import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
+import {ProductService} from '../../../admin/products/services/product.service';
+import {UserService} from '../../../admin/users/services/user.service';
 import {
     Events_events_items,
     EventSortingField,
@@ -18,17 +18,15 @@ import {
     ProductsVariables,
     SortingOrder,
 } from '../../../shared/generated-types';
-import { PermissionsService } from '../../../shared/services/permissions.service';
-import { CartService } from '../../modules/cart/services/cart.service';
+import {PermissionsService} from '../../../shared/services/permissions.service';
+import {CartService} from '../../modules/cart/services/cart.service';
 
 @Component({
     selector: 'app-homepage',
     templateUrl: './homepage.component.html',
     styleUrls: ['./homepage.component.scss'],
-
 })
 export class HomepageComponent implements OnInit {
-
     public title = 'Les artisans de la transition';
 
     public viewer;
@@ -48,18 +46,18 @@ export class HomepageComponent implements OnInit {
      */
     public currentReview: Products_products_items;
 
-    constructor(public userService: UserService,
-                private route: ActivatedRoute,
-                private newsService: NewsService,
-                private eventService: EventService,
-                private productService: ProductService,
-                public permissionService: PermissionsService,
-                public productTagService: ProductTagService,
-                public cartService: CartService) {
-    }
+    constructor(
+        public userService: UserService,
+        private route: ActivatedRoute,
+        private newsService: NewsService,
+        private eventService: EventService,
+        private productService: ProductService,
+        public permissionService: PermissionsService,
+        public productTagService: ProductTagService,
+        public cartService: CartService,
+    ) {}
 
     public ngOnInit(): void {
-
         this.viewer = this.route.snapshot.data.viewer.model;
 
         // News
@@ -69,7 +67,7 @@ export class HomepageComponent implements OnInit {
             pagination: {pageSize: 3, pageIndex: 0},
             sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
         });
-        this.newsService.getAll(qvmNews).subscribe(result => this.newses = result.items);
+        this.newsService.getAll(qvmNews).subscribe(result => (this.newses = result.items));
 
         // Events
         const qvmEvents = new NaturalQueryVariablesManager<EventsVariables>();
@@ -78,7 +76,7 @@ export class HomepageComponent implements OnInit {
             pagination: {pageSize: 5, pageIndex: 0},
             sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
         });
-        this.eventService.getAll(qvmEvents).subscribe(result => this.events = result.items);
+        this.eventService.getAll(qvmEvents).subscribe(result => (this.events = result.items));
 
         // Current active review : next product with review number and already released (and active
         const qvmProduct = new NaturalQueryVariablesManager<ProductsVariables>();
@@ -99,7 +97,6 @@ export class HomepageComponent implements OnInit {
             pagination: {pageSize: 1, pageIndex: 0},
             sorting: [{field: ProductSortingField.releaseDate, order: SortingOrder.DESC}],
         });
-        this.productService.getAll(qvmProduct).subscribe(result => this.currentReview = result.items[0]);
+        this.productService.getAll(qvmProduct).subscribe(result => (this.currentReview = result.items[0]));
     }
-
 }

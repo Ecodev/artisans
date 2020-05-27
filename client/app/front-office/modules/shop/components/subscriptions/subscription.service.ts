@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Validators } from '@angular/forms';
-import { FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {Validators} from '@angular/forms';
+import {FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 import {
     CreateSubscription,
     CreateSubscriptionVariables,
@@ -27,7 +27,8 @@ import {
 @Injectable({
     providedIn: 'root',
 })
-export class SubscriptionService extends NaturalAbstractModelService<Subscription['subscription'],
+export class SubscriptionService extends NaturalAbstractModelService<
+    Subscription['subscription'],
     SubscriptionVariables,
     Subscriptions['subscriptions'],
     SubscriptionsVariables,
@@ -35,16 +36,18 @@ export class SubscriptionService extends NaturalAbstractModelService<Subscriptio
     CreateSubscriptionVariables,
     UpdateSubscription['updateSubscription'],
     UpdateSubscriptionVariables,
-    DeleteSubscriptions> {
-
+    DeleteSubscriptions
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
+        super(
+            apollo,
             'subscription',
             subscriptionQuery,
             subscriptionsQuery,
             createSubscription,
             updateSubscription,
-            deleteSubscriptions);
+            deleteSubscriptions,
+        );
     }
 
     public getFormValidators(): FormValidators {
@@ -74,5 +77,4 @@ export class SubscriptionService extends NaturalAbstractModelService<Subscriptio
             type: ProductType.digital,
         };
     }
-
 }

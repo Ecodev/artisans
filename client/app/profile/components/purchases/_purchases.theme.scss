@@ -6,12 +6,8 @@
     $fg: map-get($theme, foreground);
 
     app-purchases {
-
         .product a {
             color: mat-color($fg, text);
         }
-
     }
 }
-
-

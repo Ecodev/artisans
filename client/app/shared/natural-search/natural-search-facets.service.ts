@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
     DropdownFacet,
     FlagFacet,
@@ -16,10 +16,10 @@ import {
     TypeTextComponent,
     wrapLike,
 } from '@ecodev/natural';
-import { ProductTagService } from '../../admin/product-tags/services/product-tag.service';
-import { ProductService } from '../../admin/products/services/product.service';
-import { UserService } from '../../admin/users/services/user.service';
-import { ProductFilterGroupCondition, UserFilterGroupCondition } from '../generated-types';
+import {ProductTagService} from '../../admin/product-tags/services/product-tag.service';
+import {ProductService} from '../../admin/products/services/product.service';
+import {UserService} from '../../admin/users/services/user.service';
+import {ProductFilterGroupCondition, UserFilterGroupCondition} from '../generated-types';
 
 /**
  * Convert percentage for server
@@ -51,7 +51,6 @@ function dontHave(selection: NaturalSearchSelection): NaturalSearchSelection {
     providedIn: 'root',
 })
 export class NaturalSearchFacetsService {
-
     private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration> = {
         display: 'Utilisateur',
         field: 'owner',
@@ -118,7 +117,7 @@ export class NaturalSearchFacetsService {
         component: TypeDateComponent,
     };
 
-    private readonly allFacets: { [key: string]: NaturalSearchFacets } = {
+    private readonly allFacets: {[key: string]: NaturalSearchFacets} = {
         users: [
             {
                 display: 'Existe pas dans Crésus',
@@ -264,8 +263,7 @@ export class NaturalSearchFacetsService {
         private readonly productService: ProductService,
         private readonly productTagService: ProductTagService,
         private readonly userService: UserService,
-    ) {
-    }
+    ) {}
 
     /**
      * Returns the natural search configuration for given, or null if non-existent
@@ -273,5 +271,4 @@ export class NaturalSearchFacetsService {
     public get(key: string): NaturalSearchFacets | null {
         return this.allFacets[key];
     }
-
 }

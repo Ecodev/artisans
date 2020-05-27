@@ -1,6 +1,9 @@
 <div [formGroup]="form" class="detail-body">
-
-    <natural-detail-header [listRoute]="['admin', 'news']" [model]="data.model" label="Actualité" newLabel="Nouvelle actualité"
+    <natural-detail-header
+        [listRoute]="['admin', 'news']"
+        [model]="data.model"
+        label="Actualité"
+        newLabel="Nouvelle actualité"
     >
         <a [routerLink]="['/actualite', data.model.id]" color="primary" mat-raised-button>
             <natural-icon name="remove_red_eye"></natural-icon>
@@ -13,23 +16,23 @@
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-
                         <mat-form-field>
-                            <input (change)="update()" formControlName="name" matInput>
+                            <input (change)="update()" formControlName="name" matInput />
                             <mat-label>Nom</mat-label>
                             <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                Maximum {{form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                Maximum {{ form.get('name')?.errors.maxlength.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Résumé</mat-label>
-                            <textarea (change)="update()"
-                                      [matAutosizeMinRows]="1"
-                                      formControlName="description"
-                                      matInput
-                                      matTextareaAutosize
+                            <textarea
+                                (change)="update()"
+                                [matAutosizeMinRows]="1"
+                                formControlName="description"
+                                matInput
+                                matTextareaAutosize
                             ></textarea>
                         </mat-form-field>
 
@@ -37,7 +40,6 @@
                             <div class="label">Contenu</div>
                             <app-prosemirror formControlName="content" (contentChange)="update()"></app-prosemirror>
                         </div>
-
                     </div>
 
                     <div fxFlex="33" fxLayout="column">
@@ -47,22 +49,23 @@
 
                         <mat-form-field>
                             <mat-label>Date</mat-label>
-                            <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()">
+                            <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()" />
                             <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
-
                     </div>
                 </div>
 
                 <natural-stamp [item]="data.model"></natural-stamp>
-
             </div>
         </mat-tab>
-
     </mat-tab-group>
 
-    <natural-fixed-button-detail (create)="create()" (delete)="delete()" *ngIf="showFabButton" [form]="form" [model]="data.model"
+    <natural-fixed-button-detail
+        (create)="create()"
+        (delete)="delete()"
+        *ngIf="showFabButton"
+        [form]="form"
+        [model]="data.model"
     ></natural-fixed-button-detail>
-
 </div>

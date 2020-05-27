@@ -2,14 +2,14 @@
 @import '../../../../styles/variables';
 
 :host {
-
     margin-top: 0 !important; // overrides global top margin
 
     & > :not(:last-child) {
         margin-bottom: 150px;
     }
 
-    .splash-image, .la-revue-splash {
+    .splash-image,
+    .la-revue-splash {
         background-color: lighten($app-orange, 20%);
         background-size: cover;
         background-position: center;
@@ -27,7 +27,6 @@
     }
 
     .introduction-blocs {
-
         @include responsive($gt-sm) {
             margin-top: -150px;
         }
@@ -51,7 +50,6 @@
             color: white;
             background: $app-green;
         }
-
     }
 
     .section-logo {
@@ -60,7 +58,6 @@
     }
 
     .section {
-
         .section-introduction {
             max-width: 50vw;
             text-align: center;
@@ -72,19 +69,20 @@
         }
     }
 
-    .news, .event {
+    .news,
+    .event {
         a {
             margin-bottom: 10px;
         }
     }
 
-    .newses, .events {
+    .newses,
+    .events {
         padding: 10px;
 
         .section-title {
             margin-bottom: 20px;
         }
-
     }
 
     .la-revue-splash {
@@ -104,7 +102,6 @@
     }
 
     .la-revue.section {
-
         .last-product-thumbnail {
             height: 475px;
             width: 365px;
@@ -116,7 +113,6 @@
         }
 
         .la-revue-body {
-
             padding: 30px 0 0 0;
 
             @include responsive($gt-xs) {
@@ -128,11 +124,9 @@
                 margin-bottom: 0;
             }
         }
-
     }
 
     .support.section {
-
         .mat-h1 {
             min-height: 64px;
         }
@@ -144,7 +138,6 @@
             @include responsive($lt-md) {
                 margin: auto;
             }
-
         }
 
         .support-image {
@@ -174,7 +167,6 @@
         #support-column-1 {
             color: white;
             background: $app-blue;
-
         }
 
         #support-column-2 {
@@ -187,5 +179,4 @@
             background: $app-green;
         }
     }
-
 }

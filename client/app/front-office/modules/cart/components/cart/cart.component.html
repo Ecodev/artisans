@@ -1,5 +1,4 @@
 <div *ngIf="cart" class="container" fxLayout="column">
-
     <div class="mat-display-1">Panier</div>
 
     <div *ngIf="cart.isEmpty()" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="start center">
@@ -8,23 +7,24 @@
             <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Consulter nos articles</a>
             <a color="primary" mat-flat-button routerLink="/larevuedurable/numeros">Consulter nos revues</a>
             <a color="primary" mat-flat-button routerLink="/...">S'abonner</a>
-            <button color="primary" mat-flat-button (click)="cartService.inputDonation(false, cart)">Faire un don</button>
+            <button color="primary" mat-flat-button (click)="cartService.inputDonation(false, cart)">
+                Faire un don
+            </button>
         </div>
     </div>
 
     <div fxLayout="column" fxLayoutGap="10px">
-
         <!-- Regular products -->
         <div class="cart-items" *ngIf="cart.productLines.length">
             <div *ngFor="let line of cart.productLines" class="cart-item">
-
-                <a class="product-image"
-                   [routerLink]="['/larevuedurable/article', line.product.id]"
-                   [style.backgroundImage]="'url(/image/' + line.product.image?.id + '/70)'"
+                <a
+                    class="product-image"
+                    [routerLink]="['/larevuedurable/article', line.product.id]"
+                    [style.backgroundImage]="'url(/image/' + line.product.image?.id + '/70)'"
                 ></a>
 
                 <a [routerLink]="['/larevuedurable/article', line.product.id]" class="item-body item-button" mat-button>
-                    {{ line.product.name }}, {{ line.type | enum : 'ProductType' | async }}
+                    {{ line.product.name }}, {{ line.type | enum: 'ProductType' | async }}
                 </a>
 
                 <ng-container *ngIf="line.quantity > 1">
@@ -32,20 +32,28 @@
                     <div>x {{ line.quantity }}</div>
                 </ng-container>
 
-                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
-                    <div class="price mat-body-strong">{{ line.totalTaxInc | currency : currencyService.current.value}}</div>
+                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap;">
+                    <div class="price mat-body-strong">
+                        {{ line.totalTaxInc | currency: currencyService.current.value }}
+                    </div>
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                    <button (click)="decrease(line.product, line.type)"
-                            *ngIf="line.quantity === 1"
-                            color="warn"
-                            mat-icon-button
-                            mat-raised-button
+                    <button
+                        (click)="decrease(line.product, line.type)"
+                        *ngIf="line.quantity === 1"
+                        color="warn"
+                        mat-icon-button
+                        mat-raised-button
                     >
                         <natural-icon name="delete"></natural-icon>
                     </button>
-                    <button (click)="decrease(line.product, line.type)" *ngIf="line.quantity > 1" mat-icon-button mat-raised-button>
+                    <button
+                        (click)="decrease(line.product, line.type)"
+                        *ngIf="line.quantity > 1"
+                        mat-icon-button
+                        mat-raised-button
+                    >
                         <natural-icon name="remove"></natural-icon>
                     </button>
                     <button (click)="increase(line.product, line.type)" mat-icon-button mat-raised-button>
@@ -57,19 +65,19 @@
 
         <!-- Subscription -->
         <div *ngIf="cart.subscription" class="cart-item">
-
-            <a class="product-image"
-               [routerLink]="['/larevuedurable/abonnements']"
-               [style.backgroundImage]="'url(/image/' + cart.subscription.subscription.image?.id + '/70)'"
+            <a
+                class="product-image"
+                [routerLink]="['/larevuedurable/abonnements']"
+                [style.backgroundImage]="'url(/image/' + cart.subscription.subscription.image?.id + '/70)'"
             ></a>
 
             <a [routerLink]="['/larevuedurable/abonnements']" class="item-body item-button">
-                {{ cart.subscription.subscription.name }}, {{ cart.subscription.type | enum : 'ProductType' | async }}
+                {{ cart.subscription.subscription.name }}, {{ cart.subscription.type | enum: 'ProductType' | async }}
             </a>
 
-            <div *ngIf="cart.subscription.emails">{{ cart.subscription.emails.join(', ') }} </div>
+            <div *ngIf="cart.subscription.emails">{{ cart.subscription.emails.join(', ') }}</div>
 
-            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap;">
                 <app-price [product]="cart.subscription.subscription" class="price mat-body-strong"></app-price>
             </div>
 
@@ -78,14 +86,17 @@
 
         <!-- Donation -->
         <div *ngIf="cart.donationAmount" class="cart-item">
-
-            <div style="width:70px;height:70px;" [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"
+            <div
+                style="width: 70px; height: 70px;"
+                [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"
             ></div>
 
             <a mat-button class="item-body">Donation</a>
 
-            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
-                <div class="price mat-body-strong">{{ cart.donationAmount | currency : currencyService.current.value}}</div>
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap;">
+                <div class="price mat-body-strong">
+                    {{ cart.donationAmount | currency: currencyService.current.value }}
+                </div>
             </div>
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
@@ -99,29 +110,32 @@
         </div>
 
         <ng-container *ngIf="!cart.isEmpty()">
-
             <mat-divider></mat-divider>
 
             <div fxLayout="row" fxLayoutAlign="end">
-                <div class="mat-h1 padding-v">Total TTC : {{ cart.totalTaxInc | currency : currencyService.current.value }}</div>
+                <div class="mat-h1 padding-v">
+                    Total TTC : {{ cart.totalTaxInc | currency: currencyService.current.value }}
+                </div>
             </div>
 
-            <div fxLayout="column"
-                 fxLayout.gt-sm="row"
-                 fxLayoutGap.gt-sm="20px"
-                 fxLayoutGap="10px"
-                 fxLayoutAlign="start end"
-                 class="cart-buttons"
+            <div
+                fxLayout="column"
+                fxLayout.gt-sm="row"
+                fxLayoutGap.gt-sm="20px"
+                fxLayoutGap="10px"
+                fxLayoutAlign="start end"
+                class="cart-buttons"
             >
                 <a mat-stroked-button routerLink="/larevuedurable/articles">Continuer mes achats</a>
                 <button (click)="empty()" mat-stroked-button>Vider le panier</button>
                 <div fxFlex.gt-sm></div>
-                <button mat-flat-button color="accent" (click)="cartService.inputDonation(false, cart)">Faire un don</button>
+                <button mat-flat-button color="accent" (click)="cartService.inputDonation(false, cart)">
+                    Faire un don
+                </button>
                 <button mat-flat-button [routerLink]="['/panier/commande', cart.id]" color="primary">Commander</button>
             </div>
         </ng-container>
     </div>
-
 </div>
 
 <router-outlet></router-outlet>

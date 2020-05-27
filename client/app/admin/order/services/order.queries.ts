@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { permissionsFragment, userMetaFragment } from '../../../shared/queries/fragments';
+import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const orderMetaFragment = gql`
     fragment orderMeta on Order {
@@ -31,7 +31,8 @@ export const ordersQuery = gql`
             totalBalanceEUR
         }
     }
-${orderMetaFragment}`;
+    ${orderMetaFragment}
+`;
 
 export const orderQuery = gql`
     query Order($id: OrderID!) {
@@ -80,4 +81,3 @@ export const updateOrderStatus = gql`
     }
     ${userMetaFragment}
 `;
-

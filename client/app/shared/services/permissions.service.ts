@@ -1,28 +1,52 @@
-import { Injectable } from '@angular/core';
-import { Literal } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
+import {Injectable} from '@angular/core';
+import {Literal} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import { isEqual } from 'lodash';
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, skip, take } from 'rxjs/operators';
-import { Permissions, Permissions_permissions, Permissions_permissions_crud } from '../generated-types';
+import {isEqual} from 'lodash';
+import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
+import {debounceTime, distinctUntilChanged, filter, skip, take} from 'rxjs/operators';
+import {Permissions, Permissions_permissions, Permissions_permissions_crud} from '../generated-types';
 
 const permissions = gql`
     query Permissions {
         permissions {
             crud {
-                comment { create }
-                configuration { create }
-                event { create }
-                image { create }
-                message { create }
-                news { create }
-                organization { create }
-                product { create }
-                productTag { create }
-                session { create }
-                subscription { create }
-                user { create }
+                comment {
+                    create
+                }
+                configuration {
+                    create
+                }
+                event {
+                    create
+                }
+                image {
+                    create
+                }
+                message {
+                    create
+                }
+                news {
+                    create
+                }
+                organization {
+                    create
+                }
+                product {
+                    create
+                }
+                productTag {
+                    create
+                }
+                session {
+                    create
+                }
+                subscription {
+                    create
+                }
+                user {
+                    create
+                }
             }
         }
     }
@@ -61,12 +85,15 @@ export class PermissionsService {
         // Query the API when our variables changed
         this.currentContexts.pipe(distinctUntilChanged(isEqual), debounceTime(5)).subscribe(contexts => {
             // Fetch global permissions
-            apollo.query<Permissions>({
-                query: permissions,
-            }).pipe(filter(result => !result.loading)).subscribe(result => {
-                this.crud = result.data.permissions.crud;
-                this.changes.next(result.data.permissions);
-            });
+            apollo
+                .query<Permissions>({
+                    query: permissions,
+                })
+                .pipe(filter(result => !result.loading))
+                .subscribe(result => {
+                    this.crud = result.data.permissions.crud;
+                    this.changes.next(result.data.permissions);
+                });
         });
     }
 
@@ -95,5 +122,4 @@ export class PermissionsService {
             return this.changes.pipe(skip(1), take(1));
         }
     }
-
 }

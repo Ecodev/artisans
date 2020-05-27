@@ -1,13 +1,13 @@
 import 'zone.js/dist/zone-node';
 
-import { ngExpressEngine } from '@nguniversal/express-engine';
+import {ngExpressEngine} from '@nguniversal/express-engine';
 import * as express from 'express';
-import { join } from 'path';
-import { createProxyMiddleware, Options } from 'http-proxy-middleware';
+import {join} from 'path';
+import {createProxyMiddleware, Options} from 'http-proxy-middleware';
 
-import { AppServerModule } from './client/main.server';
-import { APP_BASE_HREF } from '@angular/common';
-import { existsSync, readFileSync } from 'fs';
+import {AppServerModule} from './client/main.server';
+import {APP_BASE_HREF} from '@angular/common';
+import {existsSync, readFileSync} from 'fs';
 
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
@@ -17,27 +17,31 @@ export function app() {
 
     // Share the same proxy as non-SSR development mode for SSR development mode
     // But SSR production mode will not use this and instead directly hit nginx
-    const proxyConfig = JSON.parse(readFileSync('proxy.conf.json', 'utf8')) as { [key: string]: Options; };
-    Object.entries(proxyConfig).forEach(
-        ([route, config]) => {
-            const c = {...config, changeOrigin: true};
-            server.use(route, createProxyMiddleware(c));
-            console.log(route, c);
-        },
-    );
+    const proxyConfig = JSON.parse(readFileSync('proxy.conf.json', 'utf8')) as {[key: string]: Options};
+    Object.entries(proxyConfig).forEach(([route, config]) => {
+        const c = {...config, changeOrigin: true};
+        server.use(route, createProxyMiddleware(c));
+        console.log(route, c);
+    });
 
     // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
-    server.engine('html', ngExpressEngine({
-        bootstrap: AppServerModule,
-    }) as any);
+    server.engine(
+        'html',
+        ngExpressEngine({
+            bootstrap: AppServerModule,
+        }) as any,
+    );
 
     server.set('view engine', 'html');
     server.set('views', distFolder);
 
     // Serve static files from /browser
-    server.get('*.*', express.static(distFolder, {
-        maxAge: '1y',
-    }));
+    server.get(
+        '*.*',
+        express.static(distFolder, {
+            maxAge: '1y',
+        }),
+    );
 
     // All regular routes use the Universal engine
     server.get('*', (req, res) => {
@@ -62,7 +66,7 @@ function run() {
 // The below code is to ensure that the server is run only when not requiring the bundle.
 declare const __non_webpack_require__: NodeRequire;
 const mainModule = __non_webpack_require__.main;
-const moduleFilename = mainModule && mainModule.filename || '';
+const moduleFilename = (mainModule && mainModule.filename) || '';
 if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
     run();
 }

@@ -1,19 +1,23 @@
 <div *ngIf="dataSource" fxLayout="column">
-
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">{{routeData?.title}}</div>
+        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+            {{ routeData?.title }}
+        </div>
     </div>
 
     <div fxLayout="column">
-
         <div class="margin-v overflow" fxLayout="row">
-            <natural-search (selectionChange)="search($event)"
-                            [facets]="naturalSearchFacets"
-                            [multipleGroups]="true"
-                            [selections]="naturalSearchSelections"
-                            fxFlex
+            <natural-search
+                (selectionChange)="search($event)"
+                [facets]="naturalSearchFacets"
+                [multipleGroups]="true"
+                [selections]="naturalSearchSelections"
+                fxFlex
             >
-                <natural-columns-picker (selectionChange)="selectedColumns = $event" [initialSelection]="initialColumns">
+                <natural-columns-picker
+                    (selectionChange)="selectedColumns = $event"
+                    [initialSelection]="initialColumns"
+                >
                     <span naturalColumnsPickerColumn="code">Code</span>
                     <span naturalColumnsPickerColumn="image">Image</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
@@ -27,9 +31,8 @@
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns;" mat-row></tr>
+                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
                 <ng-container matColumnDef="code">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
@@ -39,11 +42,12 @@
                 <ng-container matColumnDef="image">
                     <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
                     <td *matCellDef="let element" mat-cell>
-                        <app-file *ngIf="element.image"
-                                  [height]="40"
-                                  [model]="element.image"
-                                  [style.borderRadius.px]="40"
-                                  [style.width.px]="40"
+                        <app-file
+                            *ngIf="element.image"
+                            [height]="40"
+                            [model]="element.image"
+                            [style.borderRadius.px]="40"
+                            [style.width.px]="40"
                         ></app-file>
                     </td>
                 </ng-container>
@@ -51,30 +55,35 @@
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                     <td *matCellDef="let element" mat-cell>
-                        <natural-table-button [class]="!element.isActive ? 'inactive' : ''"
-                                              [label]="element.name"
-                                              [navigate]="['/admin/product', element.id]"
-                                              matTooltip="Éditer"
+                        <natural-table-button
+                            [class]="!element.isActive ? 'inactive' : ''"
+                            [label]="element.name"
+                            [navigate]="['/admin/product', element.id]"
+                            matTooltip="Éditer"
                         ></natural-table-button>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="type">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.type | enum : 'ProductType' | async }}</td>
+                    <td *matCellDef="let element" mat-cell>{{ element.type | enum: 'ProductType' | async }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="pricePerUnitCHF">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix CHF</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
-                        <span *ngIf="element.pricePerUnitCHF != '0.00'">{{ element.pricePerUnitCHF | currency: 'CHF' }}</span>
+                        <span *ngIf="element.pricePerUnitCHF != '0.00'">{{
+                            element.pricePerUnitCHF | currency: 'CHF'
+                        }}</span>
                     </td>
                 </ng-container>
 
                 <ng-container matColumnDef="pricePerUnitEUR">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix EUR</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
-                        <span *ngIf="element.pricePerUnitEUR != '0.00'">{{ element.pricePerUnitEUR | currency: 'EUR' }}</span>
+                        <span *ngIf="element.pricePerUnitEUR != '0.00'">{{
+                            element.pricePerUnitEUR | currency: 'EUR'
+                        }}</span>
                     </td>
                 </ng-container>
 
@@ -86,7 +95,6 @@
                         </div>
                     </td>
                 </ng-container>
-
             </table>
         </div>
 
@@ -98,16 +106,19 @@
             <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
         </div>
 
-        <mat-paginator (page)="pagination($event)"
-                       *ngIf="dataSource.data?.length"
-                       [length]="dataSource.data?.length"
-                       [pageIndex]="dataSource.data?.pageIndex"
-                       [pageSizeOptions]="pageSizeOptions"
-                       [pageSize]="dataSource.data?.pageSize"
+        <mat-paginator
+            (page)="pagination($event)"
+            *ngIf="dataSource.data?.length"
+            [length]="dataSource.data?.length"
+            [pageIndex]="dataSource.data?.pageIndex"
+            [pageSizeOptions]="pageSizeOptions"
+            [pageSize]="dataSource.data?.pageSize"
         ></mat-paginator>
-
     </div>
 </div>
 
-<natural-fixed-button *ngIf="permissionsService.crud?.product.create" [routerLink]="['/admin/product/new']" icon="add"
+<natural-fixed-button
+    *ngIf="permissionsService.crud?.product.create"
+    [routerLink]="['/admin/product/new']"
+    icon="add"
 ></natural-fixed-button>

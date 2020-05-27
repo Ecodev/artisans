@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import { NaturalAbstractModelService } from '@ecodev/natural';
-import { Apollo } from 'apollo-angular';
-import { CreateFile, CreateFileVariables, DeleteFile, FileInput } from '../../../shared/generated-types';
+import {Injectable} from '@angular/core';
+import {NaturalAbstractModelService} from '@ecodev/natural';
+import {Apollo} from 'apollo-angular';
+import {CreateFile, CreateFileVariables, DeleteFile, FileInput} from '../../../shared/generated-types';
 
-import { createFileMutation, deleteFileMutation } from './files.queries';
+import {createFileMutation, deleteFileMutation} from './files.queries';
 
 @Injectable({
     providedIn: 'root',
 })
-export class FilesService extends NaturalAbstractModelService<any,
+export class FilesService extends NaturalAbstractModelService<
+    any,
     any,
     any,
     any,
@@ -16,16 +17,10 @@ export class FilesService extends NaturalAbstractModelService<any,
     CreateFileVariables,
     any,
     any,
-    DeleteFile> {
-
+    DeleteFile
+> {
     constructor(apollo: Apollo) {
-        super(apollo,
-            'file',
-            null,
-            null,
-            createFileMutation,
-            null,
-            deleteFileMutation);
+        super(apollo, 'file', null, null, createFileMutation, null, deleteFileMutation);
     }
 
     protected getDefaultForServer(): FileInput {
@@ -33,5 +28,4 @@ export class FilesService extends NaturalAbstractModelService<any,
             file: '',
         };
     }
-
 }

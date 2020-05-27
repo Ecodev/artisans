@@ -1,6 +1,6 @@
-import { Component, Injector, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { NaturalAbstractList, SortingOrder } from '@ecodev/natural';
-import { CommentService } from '../../../admin/comments/services/comment.service';
+import {Component, Injector, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {NaturalAbstractList, SortingOrder} from '@ecodev/natural';
+import {CommentService} from '../../../admin/comments/services/comment.service';
 import {
     Comments,
     CommentSortingField,
@@ -10,15 +10,15 @@ import {
     News_news,
     Newses_newses_items,
 } from '../../../shared/generated-types';
-import { PermissionsService } from '../../../shared/services/permissions.service';
+import {PermissionsService} from '../../../shared/services/permissions.service';
 
 @Component({
     selector: 'app-comment-list',
     templateUrl: './comment-list.component.html',
     styleUrls: ['./comment-list.component.scss'],
 })
-export class CommentListComponent extends NaturalAbstractList<Comments['comments'], CommentsVariables> implements OnInit, OnChanges {
-
+export class CommentListComponent extends NaturalAbstractList<Comments['comments'], CommentsVariables>
+    implements OnInit, OnChanges {
     /**
      * Event related to displayed comments
      */
@@ -38,34 +38,30 @@ export class CommentListComponent extends NaturalAbstractList<Comments['comments
 
     public newCommentValue = '';
 
-    constructor(service: CommentService,
-                injector: Injector,
-                public permissionsService: PermissionsService,
-    ) {
-
+    constructor(service: CommentService, injector: Injector, public permissionsService: PermissionsService) {
         super(service, injector);
         this.persistSearch = false;
     }
 
     ngOnInit(): void {
-
         super.ngOnInit();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-
         if (this.event) {
-            this.variablesManager.set('context', {filter: {groups: [{conditions: [{event: {in: {values: [this.event.id]}}}]}]}});
+            this.variablesManager.set('context', {
+                filter: {groups: [{conditions: [{event: {in: {values: [this.event.id]}}}]}]},
+            });
         }
 
         if (this.news) {
-            this.variablesManager.set('context', {filter: {groups: [{conditions: [{news: {in: {values: [this.news.id]}}}]}]}});
+            this.variablesManager.set('context', {
+                filter: {groups: [{conditions: [{news: {in: {values: [this.news.id]}}}]}]},
+            });
         }
-
     }
 
     public addComment() {
-
         this.publishing = true;
         const comment = {
             description: this.newCommentValue,
@@ -79,6 +75,4 @@ export class CommentListComponent extends NaturalAbstractList<Comments['comments
             this.alertService.info('Votre message a bien été publié');
         });
     }
-
 }
-

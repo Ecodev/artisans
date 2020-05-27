@@ -1,16 +1,14 @@
 <div [formGroup]="form" fxLayout="column" fxLayoutGap="30px">
-
     <h2 class="mat-display-1">Données personnelles</h2>
 
     <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-
         <div fxFlex="33" fxLayout="column">
             <h2 class="mat-h2">Compte</h2>
 
             <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
                 <mat-form-field fxFlex>
                     <mat-label>email</mat-label>
-                    <input formControlName="email" matInput type="email">
+                    <input formControlName="email" matInput type="email" />
                 </mat-form-field>
 
                 <div>
@@ -26,18 +24,18 @@
         <div fxLayout="column" fxLayoutGap="15px">
             <h2 class="mat-h2">Adresse</h2>
 
-            <p class="mat-body">Il s'agit de votre adresse principale qui est utilisée pour la facturation et la livraison. Lors des
-                commandes vous pourrez définir une adresse de facturation différente.</p>
+            <p class="mat-body">
+                Il s'agit de votre adresse principale qui est utilisée pour la facturation et la livraison. Lors des
+                commandes vous pourrez définir une adresse de facturation différente.
+            </p>
 
             <app-address [form]="form"></app-address>
 
             <mat-form-field fxFlex>
                 <mat-label>Téléphone</mat-label>
-                <input formControlName="phone" matInput>
+                <input formControlName="phone" matInput />
             </mat-form-field>
-
         </div>
-
     </div>
 
     <div fxLayout="row" fxLayoutAlign="end">

@@ -1,5 +1,5 @@
-import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail } from '@ecodev/natural';
+import {Component, Injector, OnInit} from '@angular/core';
+import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateUser,
     CreateUserVariables,
@@ -8,8 +8,8 @@ import {
     User,
     UserVariables,
 } from '../../../shared/generated-types';
-import { SessionService } from '../../sessions/services/session.service';
-import { UserService } from '../services/user.service';
+import {SessionService} from '../../sessions/services/session.service';
+import {UserService} from '../services/user.service';
 
 @Component({
     selector: 'app-user',
@@ -17,20 +17,19 @@ import { UserService } from '../services/user.service';
     styleUrls: ['./user.component.scss'],
 })
 export class UserComponent
-    extends NaturalAbstractDetail<User['user'],
+    extends NaturalAbstractDetail<
+        User['user'],
         UserVariables,
         CreateUser['createUser'],
         CreateUserVariables,
         UpdateUser['updateUser'],
         UpdateUserVariables,
-        any> implements OnInit {
-
+        any
+    >
+    implements OnInit {
     public UserService = UserService;
 
-    constructor(private userService: UserService,
-                injector: Injector,
-                public sessionService: SessionService,
-    ) {
+    constructor(private userService: UserService, injector: Injector, public sessionService: SessionService) {
         super('user', userService, injector);
     }
 
@@ -43,7 +42,6 @@ export class UserComponent
             if (control) {
                 control.disable();
             }
-        })
+        });
     }
-
 }

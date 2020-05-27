@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalAbstractDetail } from '@ecodev/natural';
+import { NaturalAbstractDetail, validateAllFormControls } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { CreateUser, CreateUserVariables, UpdateUser, UpdateUserVariables, User, UserVariables } from '../../../shared/generated-types';
@@ -39,7 +39,7 @@ export class RegisterComponent extends NaturalAbstractDetail<User['user'],
     }
 
     public submit(): void {
-        NaturalAbstractDetail.validateAllFormFields(this.form);
+        validateAllFormControls(this.form);
 
         if (this.form.invalid) {
             return;

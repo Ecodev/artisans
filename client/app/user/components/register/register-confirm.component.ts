@@ -1,5 +1,5 @@
 import { Component, Injector, OnInit } from '@angular/core';
-import { NaturalUtility } from '@ecodev/natural';
+import { relationsToIds } from '@ecodev/natural';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { pick } from 'lodash';
@@ -55,7 +55,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'country',
         ];
 
-        const input = pick(NaturalUtility.relationsToIds(this.form.value), fieldWhitelist);
+        const input = pick(relationsToIds(this.form.value), fieldWhitelist);
         this.apollo.mutate({
             mutation: mutation,
             variables: {

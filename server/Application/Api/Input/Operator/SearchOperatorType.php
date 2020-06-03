@@ -17,6 +17,8 @@ class SearchOperatorType extends \Ecodev\Felix\Api\Input\Operator\SearchOperator
             'name',
             'locality',
             'email',
+            'description',
+            'content',
         ];
     }
 

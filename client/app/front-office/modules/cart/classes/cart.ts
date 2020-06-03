@@ -246,6 +246,8 @@ export class Cart {
 
     public empty() {
         this.productLines = [];
+        this.donationAmount = 0;
+        this.subscription = null;
         this.update();
     }
 

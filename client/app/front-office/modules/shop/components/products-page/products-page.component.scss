@@ -16,6 +16,13 @@
                 grid-row: span 5;
             }
 
+            .target-customer {
+                display: inline-block;
+                height: 36px;
+                line-height: 36px;
+                padding: 0 16px !important;
+            }
+
             &.highlight-first-items .product {
                 &:nth-child(1) {
                     grid-column: span 2;

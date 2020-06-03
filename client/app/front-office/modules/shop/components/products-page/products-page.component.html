@@ -22,8 +22,7 @@
                         *ngFor="let tag of product.productTags"
                         [routerLink]="['/larevuedurable/articles', tag.name]"
                         class="product-tag mat-body"
-                        >{{ tag.name }}</a
-                    >
+                        >{{ tag.name }}</a>
                 </div>
 
                 <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{
@@ -44,7 +43,7 @@
 
                 <div>
                     <div class="product-price mat-body-strong" *ngIf="!product.file">
-                        <span class="frame-primary">Abonné</span>
+                        <span class="frame-primary target-customer">Abonné</span>
                         ou
                         <app-price [product]="product" class="mat-h3"></app-price>
                     </div>

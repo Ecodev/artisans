@@ -6,6 +6,7 @@ import {UserService} from '../../../../../admin/users/services/user.service';
 import {CreateOrder_createOrder, PaymentMethod} from '../../../../../shared/generated-types';
 import {ConfigService, FrontEndConfig} from '../../../../../shared/services/config.service';
 import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
+import {NavigationService} from '../../../../services/navigation.service';
 import {Cart} from '../../classes/cart';
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import {CartService} from '../../services/cart.service';
@@ -71,6 +72,7 @@ export class CreateOrderComponent implements OnInit {
         configService: ConfigService,
         public currencyService: CurrencyService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
+        public navigationService: NavigationService,
     ) {
         configService.get().subscribe(paymentConfig => {
             this.paymentConfig = paymentConfig;
@@ -150,6 +152,7 @@ export class CreateOrderComponent implements OnInit {
     public confirmationRedirect() {
         this.cart.empty();
         this.showConfirmationMessage = true;
+        this.navigationService.scrollToTop();
     }
 
     private datatrans(order: CreateOrder_createOrder, amount: number, currency: Currency): void {

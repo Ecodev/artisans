@@ -22,12 +22,11 @@
                         *ngFor="let tag of product.productTags"
                         [routerLink]="['/larevuedurable/articles', tag.name]"
                         class="product-tag mat-body"
-                        >{{ tag.name }}</a>
+                        >{{ tag.name }}</a
+                    >
                 </div>
 
-                <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{
-                    product.name
-                }}</a>
+                <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
 
                 <a
                     *ngIf="index <= 1 && product.illustration"
@@ -73,11 +72,7 @@
                     fxLayout.gt-sm="row"
                     fxLayoutGap="60px"
                 >
-                    <a
-                        class="product-image"
-                        *ngIf="product.image"
-                        [routerLink]="getDetailLink(product)"
-                    >
+                    <a class="product-image" *ngIf="product.image" [routerLink]="getDetailLink(product)">
                         <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
                     </a>
 
@@ -95,9 +90,7 @@
                                 {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
                             </span>
                         </div>
-                        <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{
-                            product.name
-                        }}</a>
+                        <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
                         <div class="product-name mat-h3" [innerHTML]="product.description"></div>
                     </div>
 

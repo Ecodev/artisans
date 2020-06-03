@@ -20,9 +20,7 @@
                     <mat-radio-button [value]="PaymentMethod.datatrans">Paiement par carte de crédit</mat-radio-button>
                 </div>
                 <div>
-                    <mat-radio-button [value]="PaymentMethod.bvr"
-                        >Paiement par bulletin de versement orange</mat-radio-button
-                    >
+                    <mat-radio-button [value]="PaymentMethod.bvr">Recevoir une facture</mat-radio-button>
                 </div>
             </mat-radio-group>
 
@@ -82,3 +80,5 @@
 <div *ngIf="showConfirmationMessage" class="container">
     <h1 class="mat-display-1">Merci pour votre commande</h1>
 </div>
+
+<router-outlet></router-outlet>

@@ -1,7 +1,8 @@
 import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
-import {ComponentRef, ElementRef, Injectable, Injector} from '@angular/core';
-import {NavigationEnd, Router, RouterLink} from '@angular/router';
+import {DOCUMENT} from '@angular/common';
+import {ComponentRef, ElementRef, Inject, Injectable, Injector} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'lodash';
 import {merge, Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
@@ -18,7 +19,13 @@ export interface MenuItem {
     providedIn: 'root',
 })
 export class NavigationService {
-    constructor(private overlay: Overlay, private injector: Injector, private router: Router) {}
+    constructor(
+        private overlay: Overlay,
+        private injector: Injector,
+        private router: Router,
+        private route: ActivatedRoute,
+        @Inject(DOCUMENT) private readonly document: Document,
+    ) {}
 
     /**
      * Open menu
@@ -68,5 +75,13 @@ export class NavigationService {
         onClose.subscribe(() => overlayRef.dispose());
 
         return onClose;
+    }
+
+    public scrollToTop(fragment?: string) {
+        const contentContainer = this.document.querySelector('.mat-sidenav-content');
+        if (contentContainer) {
+            const top = fragment ? document.getElementById(fragment)?.offsetTop || 0 : 0;
+            contentContainer.scroll({top: top, behavior: top ? 'smooth' : undefined});
+        }
     }
 }

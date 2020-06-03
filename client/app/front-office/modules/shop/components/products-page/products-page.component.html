@@ -25,13 +25,13 @@
                         >{{ tag.name }}</a>
                 </div>
 
-                <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{
+                <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{
                     product.name
                 }}</a>
 
                 <a
                     *ngIf="index <= 1 && product.illustration"
-                    [routerLink]="['/larevuedurable/article', product.id]"
+                    [routerLink]="['/larevuedurable/', product.reviewNumber ? 'numero' : 'article', product.id]"
                     [style.backgroundImage]="
                         'url(/image/' + product.illustration.id + '/' + (index === 0 ? '400' : '160') + ')'
                     "
@@ -76,7 +76,7 @@
                     <a
                         class="product-image"
                         *ngIf="product.image"
-                        [routerLink]="['/larevuedurable/article', product.id]"
+                        [routerLink]="getDetailLink(product)"
                     >
                         <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
                     </a>
@@ -95,7 +95,7 @@
                                 {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
                             </span>
                         </div>
-                        <a class="product-name mat-h1" [routerLink]="['/larevuedurable/article', product.id]">{{
+                        <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{
                             product.name
                         }}</a>
                         <div class="product-name mat-h3" [innerHTML]="product.description"></div>
@@ -106,7 +106,7 @@
                         <a
                             mat-flat-button
                             color="primary"
-                            [routerLink]="['/larevuedurable/article', product.id]"
+                            [routerLink]="getDetailLink(product)"
                             class="product-detail-button"
                             >Voir le détail
                         </a>

@@ -103,4 +103,8 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['pr
             }
         });
     }
+
+    public getDetailLink(product) {
+        return ['/larevuedurable', product.reviewNumber ? 'numero' : 'article', product.id];
+    }
 }

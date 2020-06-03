@@ -117,6 +117,18 @@ const routes: Routes = [
         },
     },
     {
+        path: 'numero/:productId',
+        component: ProductPageComponent,
+        resolve: {
+            product: ProductResolver,
+        },
+        data: {
+            showTagsOnProducts: true,
+            showTagsNavigation: false,
+            breadcrumbs: [{link: '/larevuedurable/numeros', label: 'Numéros'}],
+        },
+    },
+    {
         path: 'abonnements',
         component: SubscriptionsComponent,
     },

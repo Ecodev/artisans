@@ -1,0 +1,29 @@
+:host {
+    .slogan {
+        font-size: 1.5em;
+        line-height: 1.3em;
+        font-style: italic;
+        margin: 0 0 30px 0;
+    }
+
+    #witnesses {
+        margin-top: 20px;
+        column-count: 2;
+        column-gap: 30px;
+    }
+
+    .witness {
+        border-width: 0;
+        border-style: solid;
+        padding: 0 0 0 10px;
+        border-left-width: 5px;
+        margin-bottom: 30px;
+
+        img {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            max-width: 200px;
+        }
+    }
+}

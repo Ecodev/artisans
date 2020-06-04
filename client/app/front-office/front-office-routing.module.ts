@@ -79,28 +79,37 @@ const routes: Routes = [
                 path: 'conversation-carbone',
                 component: SessionMethodComponent,
                 data: {
-                    breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}, {label: 'Conversations carbone'}],
+                    breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}],
                 },
             },
             {
                 path: 'conversation-carbone/facilitateurs',
                 component: SessionFacilitatorComponent,
                 data: {
-                    breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}, {label: 'Conversations carbone'}],
+                    breadcrumbs: [
+                        {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                        {link: '/agir-avec-nous/conversation-carbone', label: 'Conversations carbone'},
+                    ],
                 },
             },
             {
-                path: 'conversation-carbone/organisateurs',
+                path: 'conversation-carbone/organisations',
                 component: SessionOrganisationComponent,
                 data: {
-                    breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}, {label: 'Conversations carbone'}],
+                    breadcrumbs: [
+                        {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                        {link: '/agir-avec-nous/conversation-carbone', label: 'Conversations carbone'},
+                    ],
                 },
             },
             {
                 path: 'prochaines-conversations-carbone',
                 component: NextSessionsComponent,
                 data: {
-                    breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}, {label: 'Conversations carbone'}],
+                    breadcrumbs: [
+                        {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                        {link: '/agir-avec-nous/conversation-carbone', label: 'Conversations carbone'},
+                    ],
                 },
             },
             {
@@ -137,6 +146,7 @@ const routes: Routes = [
         loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
     },
 ];
+
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],

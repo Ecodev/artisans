@@ -1,10 +1,12 @@
-<div class="container" fxLayout="row" fxLayoutGap="30px">
-    <div class="page-body rich-text mat-h3">
-        <h1 class="mat-display-1">Nos facilitateur·trices</h1>
+<div class="container">
+    <h1 class="mat-display-1">Nos facilitateur·trices</h1>
+
+    <div fxLayout="row" fxLayoutGap="30px">
+        <div fxFlex.gt-sm="66" class="page-body rich-text mat-h3">
 
         <div class="facilitators">
             <div *ngFor="let user of facilitators" class="facilitator">
-                <div>{{ user.name }}</div>
+                <strong>{{ user.name }}</strong>
                 <div>{{ user.email }}</div>
                 <div>{{ user.locality }}</div>
             </div>
@@ -69,10 +71,6 @@
     </div>
 
     <div fxFlex fxHide.lt-md>
-        <mat-nav-list>
-            <a mat-list-item routerLink="/agir-avec-nous/conversation-carbone">La méthode</a>
-            <a mat-list-item routerLink="/agir-avec-nous/prochaines-conversations-carbone">Prochaines sessions</a>
-            <a mat-list-item routerLink="/agir-avec-nous/conversation-carbone/organisateurs">Organisateurs</a>
-        </mat-nav-list>
+        <app-session-side-column></app-session-side-column>
     </div>
 </div>

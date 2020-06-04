@@ -24,6 +24,7 @@
 @import '../app/front-office/modules/shop/components/products-page/products-page.theme';
 @import '../app/front-office/modules/shop/components/product-page/product-page.theme';
 @import '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
+@import '../app/front-office/components/session-method/session-method.theme';
 
 // Include material core (only once !)
 @include mat-core();
@@ -50,6 +51,7 @@
     @include subscriptions($theme);
     @include purchases($theme);
     @include session-facilitator($theme);
+    @include session-method($theme);
 }
 
 $artisans-blue: (

@@ -25,6 +25,7 @@ import {SessionPageComponent} from './components/session-page/session-page.compo
 import {FrontOfficeRoutingModule} from './front-office-routing.module';
 import {FrontOfficeComponent} from './front-office.component';
 import {ShopModule} from './modules/shop/shop.module';
+import {SessionSideColumnComponent} from './components/session-side-column/session-side-column.component';
 
 @NgModule({
     declarations: [
@@ -44,6 +45,7 @@ import {ShopModule} from './modules/shop/shop.module';
         SessionMethodComponent,
         SessionFacilitatorComponent,
         SessionOrganisationComponent,
+        SessionSideColumnComponent,
     ],
     imports: [
         CommonModule,

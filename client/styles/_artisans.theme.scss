@@ -66,6 +66,18 @@
         }
     }
 
+    .frame-stroked-primary {
+        border: 1px solid mat-color($primary);
+    }
+
+    .frame-stroked-accent {
+        border: 1px solid mat-color($accent);
+    }
+
+    .frame-stroked-warn {
+        border: 1px solid mat-color($warn);
+    }
+
     .frame-padding {
         padding: 30px;
     }

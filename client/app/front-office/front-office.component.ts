@@ -79,11 +79,11 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                         },
                         {
                             display: 'Pour les organisations',
-                            link: '/agir-avec-nous/organisateurs',
+                            link: '/agir-avec-nous/conversation-carbone/organisations',
                         },
                         {
                             display: 'Facilitateurs',
-                            link: '/agir-avec-nous/facilitateurs',
+                            link: '/agir-avec-nous/conversation-carbone/facilitateurs',
                         },
                     ],
                 },

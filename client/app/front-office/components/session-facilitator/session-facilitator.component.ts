@@ -27,8 +27,6 @@ export class SessionFacilitatorComponent implements OnInit {
             sorting: [{field: UserSortingField.locality, order: SortingOrder.ASC}],
         });
 
-        this.userService.getAll(qvm).subscribe(result => {
-            this.facilitators = result.items;
-        });
+        this.userService.getAll(qvm).subscribe(result => (this.facilitators = result.items));
     }
 }

@@ -5,6 +5,7 @@ import {NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE} from '@ec
 import {keyBy} from 'lodash';
 import {ProductType, Subscriptions_subscriptions_items} from '../../../../../shared/generated-types';
 import {Cart} from '../../../cart/classes/cart';
+import {CartService} from '../../../cart/services/cart.service';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
 
@@ -34,7 +35,7 @@ export class SubscriptionsComponent implements OnInit {
 
     public order(id: string, type: ProductType, withEmails?: boolean) {
         const subscribeFn = (emails?: string[]) => {
-            const cart = new Cart(this.sessionStorage);
+            const cart = CartService.globalCart;
             cart.setSubscription(this.subscriptions[id], type, emails);
             this.router.navigateByUrl('/panier/' + cart.id);
         };

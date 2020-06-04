@@ -67,11 +67,11 @@
         <div *ngIf="cart.subscription" class="cart-item">
             <a
                 class="product-image"
-                [routerLink]="['/larevuedurable/abonnements']"
+                routerLink="/larevuedurable/abonnements"
                 [style.backgroundImage]="'url(/image/' + cart.subscription.subscription.image?.id + '/70)'"
             ></a>
 
-            <a [routerLink]="['/larevuedurable/abonnements']" class="item-body item-button">
+            <a routerLink="/larevuedurable/abonnements" mat-button class="item-body item-button">
                 {{ cart.subscription.subscription.name }}, {{ cart.subscription.type | enum: 'ProductType' | async }}
             </a>
 
@@ -81,7 +81,14 @@
                 <app-price [product]="cart.subscription.subscription" class="price mat-body-strong"></app-price>
             </div>
 
-            <div></div>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                <button (click)="cart.unsetSubscription()" color="warn" mat-icon-button mat-raised-button>
+                    <natural-icon name="delete"></natural-icon>
+                </button>
+                <button routerLink="/larevuedurable/abonnements" mat-icon-button mat-raised-button>
+                    <natural-icon name="edit"></natural-icon>
+                </button>
+            </div>
         </div>
 
         <!-- Donation -->

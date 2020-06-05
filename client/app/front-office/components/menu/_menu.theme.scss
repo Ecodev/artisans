@@ -24,6 +24,10 @@
             & > li.hasMenu::after {
                 background: mat-color($bg, card);
             }
+
+            a.active {
+                color: mat-color($primary) !important;
+            }
         }
     }
 }

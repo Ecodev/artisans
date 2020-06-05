@@ -7,7 +7,14 @@
 <ng-template #navigationTemplate let-navigation>
     <ul *ngIf="navigation?.length">
         <li *ngFor="let item of navigation" [class.hasMenu]="item.children?.length" [class.open]="item.open">
-            <a (click)="item.open = !item.open" [routerLink]="item.link" *ngIf="!item.highlight">{{ item.display }}</a>
+            <a
+                (click)="item.open = !item.open"
+                [routerLink]="item.link"
+                *ngIf="!item.highlight"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}"
+                >{{ item.display }}</a
+            >
             <a
                 (click)="item.open = !item.open"
                 [routerLink]="item.link"

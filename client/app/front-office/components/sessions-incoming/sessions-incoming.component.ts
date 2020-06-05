@@ -6,11 +6,11 @@ import {SessionService} from '../../../admin/sessions/services/session.service';
 import {SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 
 @Component({
-    selector: 'app-next-sessions',
-    templateUrl: './next-sessions.component.html',
-    styleUrls: ['./next-sessions.component.scss'],
+    selector: 'app-sessions-incoming',
+    templateUrl: './sessions-incoming.component.html',
+    styleUrls: ['./sessions-incoming.component.scss'],
 })
-export class NextSessionsComponent implements OnInit {
+export class SessionsIncomingComponent implements OnInit {
     /**
      * Regions to display in first step (in mat-select)
      */

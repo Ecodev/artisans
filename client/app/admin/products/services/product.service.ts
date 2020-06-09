@@ -36,6 +36,8 @@ export class ProductService extends NaturalAbstractModelService<
     UpdateProductVariables,
     DeleteProducts
 > {
+    public static readonly MEMBERSHIP_FEE_PRODUCT_ID = '1307';
+
     public static articlesSorting: ProductSorting[] = [
         {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
         {field: ProductSortingField.illustration, order: SortingOrder.DESC},
@@ -68,6 +70,10 @@ export class ProductService extends NaturalAbstractModelService<
         return super.getInput(object);
     }
 
+    public getMembershipProduct() {
+        return this.getOne(ProductService.MEMBERSHIP_FEE_PRODUCT_ID);
+    }
+
     protected getDefaultForServer(): ProductInput {
         return {
             name: '',
@@ -78,7 +84,7 @@ export class ProductService extends NaturalAbstractModelService<
             pricePerUnitEUR: '0',
             internalRemarks: '',
             isActive: true,
-            isHighlighted: null,
+            isHighlighted: false,
             image: null,
             illustration: null,
             releaseDate: null,

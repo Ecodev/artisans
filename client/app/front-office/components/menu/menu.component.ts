@@ -55,4 +55,18 @@ export class MenuComponent {
     public startAnimation(): void {
         this.panelAnimationState = 'enter';
     }
+
+    /**
+     * Toggle open parent nodes, and allow navigation only on children
+     */
+    public clickAction(item, event: Event) {
+        if (item.children?.length) {
+            // Open / close
+            item.open = !item.open;
+
+            // Prevent router link
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }
 }

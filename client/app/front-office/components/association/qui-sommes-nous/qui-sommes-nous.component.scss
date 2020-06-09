@@ -1,0 +1,17 @@
+.person {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px !important;
+
+    img {
+        display: block;
+        height: 152px;
+        float: left;
+    }
+
+    .person-data {
+        flex: 1;
+        padding: 20px;
+        align-self: flex-end;
+    }
+}

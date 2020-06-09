@@ -33,6 +33,32 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         {
             display: "L'association",
             link: '/association',
+            children: [
+                {
+                    display: 'Nos convictions',
+                    link: '/association/nos-convictions',
+                },
+                {
+                    display: 'Qui sommes-nous ?',
+                    link: '/association/qui-sommes-nous',
+                },
+                {
+                    display: 'Comité et status',
+                    link: '/association/status',
+                },
+                {
+                    display: 'Partenariats et coopérations',
+                    link: '/association/partenariats',
+                },
+                {
+                    display: 'Actualités',
+                    link: 'actualite',
+                },
+                {
+                    display: 'Contact',
+                    link: 'contact',
+                },
+            ],
         },
         {
             display: 'La revue durable',
@@ -40,6 +66,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             children: [
                 {
                     display: 'Notre projet',
+                    link: '/larevuedurable/projet',
                 },
                 {
                     display: 'Tous les articles',
@@ -51,12 +78,11 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 },
                 {
                     display: 'Nos points de vente',
-                    // link: '/' ???
+                    link: '/larevuedurable/points-de-vente',
                 },
                 {
                     display: "S'abonner",
                     link: '/larevuedurable/abonnements',
-                    highlight: true,
                 },
             ],
         },
@@ -64,18 +90,21 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             display: 'Agir avec nous',
             link: '/agir-avec-nous',
             children: [
-                {display: 'Toutes nos actions'},
-                {display: 'Calculer son bilan carbone'},
                 {
-                    display: 'Conversations carbone',
+                    display: 'Toutes nos actions',
+                    link: '/agir-avec-nous/toutes-nos-actions',
+                },
+                {
+                    display: 'Participer à une Conversation carbone',
+                    link: '/agir-avec-nous/conversation-carbone',
                     children: [
                         {
                             display: 'La méthode',
-                            link: '/agir-avec-nous/conversation-carbone',
+                            link: '/agir-avec-nous/conversation-carbone/methode',
                         },
                         {
                             display: 'Prochaines sessions',
-                            link: '/agir-avec-nous/prochaines-conversations-carbone',
+                            link: '/agir-avec-nous/conversation-carbone/prochaines',
                         },
                         {
                             display: 'Pour les organisations',
@@ -87,12 +116,53 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                         },
                     ],
                 },
-                {display: 'Les conversations carbone'},
+                {
+                    display: 'Calculer son empreinte carbone',
+                    link: '/agir-avec-nous/calculer-empreinte-carbone',
+                },
+                {
+                    display: "Desinvestir de l'industrie des énergies fossiles",
+                    link: '/agir-avec-nous/desinvestir-industrie-energies-fossiles',
+                },
+                {
+                    display: 'Numérique éthique',
+                    link: '/agir-avec-nous/numerique-ethique',
+                },
+                {
+                    display: 'Alimentation',
+                    link: '/agir-avec-nous/alimentation',
+                },
+                {
+                    display: 'Agir au quotidien',
+                    link: '/agir-avec-nous/agir-au-quotidien',
+                },
             ],
         },
         {
             display: 'Nous soutenir',
             link: '/nous-soutenir',
+            children: [
+                {
+                    display: 'Faire un don',
+                    link: '/nous-soutenir/faire-un-don',
+                },
+                {
+                    display: "Rejoindre l'association",
+                    link: '/nous-soutenir/rejoindre-association',
+                },
+                {
+                    display: "S'abonner",
+                    link: '/larevuedurable/abonnements',
+                },
+                {
+                    display: 'Offrir LaRevueDurable',
+                    link: '/nous-soutenir/offrir-la-revue-durable',
+                },
+                {
+                    display: 'Nous faire connaître',
+                    link: '/nous-soutenir/nous-faire-connaitre',
+                },
+            ],
         },
     ];
 

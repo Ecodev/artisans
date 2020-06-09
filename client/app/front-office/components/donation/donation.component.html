@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Faire une don</h2>
+<h2 mat-dialog-title>Faire un don</h2>
 
 <mat-dialog-content>
     <mat-form-field>
@@ -15,7 +15,7 @@
     </mat-form-field>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
     <button [mat-dialog-close] mat-button>Annuler</button>
-    <button [mat-dialog-close]="amount" mat-stroked-button>Valider</button>
+    <button [mat-dialog-close]="amount" mat-flat-button color="primary">Valider</button>
 </mat-dialog-actions>

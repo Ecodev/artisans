@@ -26,6 +26,23 @@ import {FrontOfficeRoutingModule} from './front-office-routing.module';
 import {FrontOfficeComponent} from './front-office.component';
 import {ShopModule} from './modules/shop/shop.module';
 import {SessionSideColumnComponent} from './components/session-side-column/session-side-column.component';
+import {ConvictionsComponent} from './components/association/convictions/convictions.component';
+import {QuiSommesNousComponent} from './components/association/qui-sommes-nous/qui-sommes-nous.component';
+import {ComiteStatusComponent} from './components/association/comite-status/comite-status.component';
+import {PartenariatsComponent} from './components/association/partenariats/partenariats.component';
+import {ContactComponent} from './components/contact/contact.component';
+import {ProjetComponent} from './la-revue-durable/projet/projet.component';
+import {PointsDeVenteComponent} from './la-revue-durable/points-de-vente/points-de-vente.component';
+import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
+import {CalculerEmpreinteCarboneComponent} from './components/agir-avec-nous/calculer-empreinte-carbone/calculer-empreinte-carbone.component';
+import {DesinvestirFossileComponent} from './components/agir-avec-nous/desinvestir-fossile/desinvestir-fossile.component';
+import {NumeriqueEthiqueComponent} from './components/agir-avec-nous/numerique-ethique/numerique-ethique.component';
+import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
+import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
+import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-association/rejoindre-association.component';
+import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
+import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-connaitre/nous-faire-connaitre.component';
+import {FaireUnDonComponent} from './nous-soutenir/faire-un-don/faire-un-don.component';
 
 @NgModule({
     declarations: [
@@ -46,6 +63,23 @@ import {SessionSideColumnComponent} from './components/session-side-column/sessi
         SessionFacilitatorComponent,
         SessionOrganisationComponent,
         SessionSideColumnComponent,
+        ConvictionsComponent,
+        QuiSommesNousComponent,
+        ComiteStatusComponent,
+        PartenariatsComponent,
+        ContactComponent,
+        ProjetComponent,
+        PointsDeVenteComponent,
+        ActionsComponent,
+        CalculerEmpreinteCarboneComponent,
+        DesinvestirFossileComponent,
+        NumeriqueEthiqueComponent,
+        AlimentationComponent,
+        AgirAuQuotidienComponent,
+        RejoindreAssociationComponent,
+        OffrirLaRevueComponent,
+        NousFaireConnaitreComponent,
+        FaireUnDonComponent,
     ],
     imports: [
         CommonModule,

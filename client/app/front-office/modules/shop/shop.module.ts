@@ -20,5 +20,6 @@ import {EmailsComponent} from './components/emails/emails.component';
         EmailsComponent,
     ],
     imports: [CommonModule, ArtisansModule, ShopRoutingModule, CartModule],
+    exports: [AddToCartComponent],
 })
 export class ShopModule {}

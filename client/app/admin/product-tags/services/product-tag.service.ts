@@ -12,6 +12,8 @@ import {map} from 'rxjs/operators';
 import {
     CreateProductTag,
     CreateProductTagVariables,
+    DeleteProductTags,
+    DeleteProductTagsVariables,
     ProductTag,
     ProductTag_productTag,
     ProductTagInput,
@@ -41,7 +43,8 @@ export class ProductTagService extends NaturalAbstractModelService<
     CreateProductTagVariables,
     UpdateProductTag['updateProductTag'],
     UpdateProductTagVariables,
-    any
+    DeleteProductTags,
+    DeleteProductTagsVariables
 > {
     constructor(apollo: Apollo) {
         super(

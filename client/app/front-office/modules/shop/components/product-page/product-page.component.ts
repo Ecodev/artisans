@@ -7,6 +7,8 @@ import {
     CreateProduct,
     CreateProductVariables,
     CurrentUserForProfile,
+    DeleteProducts,
+    DeleteProductsVariables,
     Product,
     Products_products_items,
     ProductsVariables,
@@ -31,7 +33,8 @@ export class ProductPageComponent
         CreateProductVariables,
         UpdateProduct['updateProduct'],
         UpdateProductVariables,
-        any
+        DeleteProducts,
+        DeleteProductsVariables
     >
     implements OnInit {
     @ViewChild(ProductsPageComponent, {static: false}) relatedProducts: ProductsPageComponent;

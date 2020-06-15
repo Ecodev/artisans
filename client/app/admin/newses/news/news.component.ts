@@ -4,6 +4,8 @@ import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateNews,
     CreateNewsVariables,
+    DeleteNewses,
+    DeleteNewsesVariables,
     News,
     NewsVariables,
     UpdateNews,
@@ -26,7 +28,8 @@ export class NewsComponent
         CreateNewsVariables,
         UpdateNews['updateNews'],
         UpdateNewsVariables,
-        any
+        DeleteNewses,
+        DeleteNewsesVariables
     >
     implements OnInit {
     constructor(

@@ -6,6 +6,7 @@ import {
     CreateSession,
     CreateSessionVariables,
     DeleteSessions,
+    DeleteSessionsVariables,
     Session,
     SessionInput,
     Sessions,
@@ -28,7 +29,8 @@ export class SessionService extends NaturalAbstractModelService<
     CreateSessionVariables,
     UpdateSession['updateSession'],
     UpdateSessionVariables,
-    DeleteSessions
+    DeleteSessions,
+    DeleteSessionsVariables
 > {
     constructor(apollo: Apollo) {
         super(apollo, 'session', sessionQuery, sessionsQuery, createSession, updateSession, deleteSessions);

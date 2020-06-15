@@ -20,6 +20,7 @@ export class PurchaseService extends NaturalAbstractModelService<
     never,
     never,
     never,
+    never,
     never
 > {
     constructor(apollo: Apollo) {

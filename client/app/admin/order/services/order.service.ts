@@ -26,6 +26,7 @@ export class OrderService extends NaturalAbstractModelService<
     CreateOrderVariables,
     any,
     any,
+    any,
     any
 > {
     constructor(apollo: Apollo, private orderLineService: OrderLineService) {

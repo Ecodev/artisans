@@ -5,6 +5,8 @@ import gql from 'graphql-tag';
 import {
     CreateUser,
     CreateUserVariables,
+    DeleteUsers,
+    DeleteUsersVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -25,7 +27,8 @@ export class RegisterComponent
         CreateUserVariables,
         UpdateUser['updateUser'],
         UpdateUserVariables,
-        any
+        DeleteUsers,
+        DeleteUsersVariables
     >
     implements OnInit {
     public step;

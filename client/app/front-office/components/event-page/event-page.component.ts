@@ -5,6 +5,8 @@ import {EventService} from '../../../admin/events/services/event.service';
 import {
     CreateEvent,
     CreateEventVariables,
+    DeleteEvents,
+    DeleteEventsVariables,
     Event,
     EventVariables,
     UpdateEvent,
@@ -27,7 +29,8 @@ export class EventPageComponent
         CreateEventVariables,
         UpdateEvent['updateEvent'],
         UpdateEventVariables,
-        any
+        DeleteEvents,
+        DeleteEventsVariables
     >
     implements OnInit {
     constructor(

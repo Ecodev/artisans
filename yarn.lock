@@ -1171,10 +1171,10 @@
   resolved "https://registry.yarnpkg.com/@ecodev/fab-speed-dial/-/fab-speed-dial-5.0.3.tgz#06ce04277fade89c83569fe75a934643bd7087cb"
   integrity sha512-kt0nLSNaRM5MZCIKALvSJkTtgjjdheG98n3Ty0l6jtKYrod3VDDUBtf/ZaoUjikS34RLN4NfRx2L39T2mlqk7w==
 
-"@ecodev/natural@^16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@ecodev/natural/-/natural-16.0.0.tgz#d1373acd499a8c6b0ddf50673aa974297364cb22"
-  integrity sha512-bs6UGZz1mnFVnr9OJl9zjuE72uVPVmD3rc6wFhOp9Cowa4MKSbEejVtx1uOKABEnYXA3GV7aGX+kmvaI1RYQjQ==
+"@ecodev/natural@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@ecodev/natural/-/natural-17.0.0.tgz#3534474d0e04c5a1e34a94cebc0451ff81f7e2ee"
+  integrity sha512-uDaGqaZR8szlAWPQ6CrIhCG59prwxEJ2hccLy5ZJ53BHQNxzSpJ0lB0Vi39yYGG4Xi5jWz9Kqjg/BgFJ2x65Gw==
 
 "@endemolshinegroup/cosmiconfig-typescript-loader@^1.0.0":
   version "1.0.1"

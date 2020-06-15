@@ -25,6 +25,7 @@ export class OrderLineComponent
         never,
         UpdateOrderLine['updateOrderLine'],
         UpdateOrderLineVariables,
+        never,
         never
     >
     implements OnInit {

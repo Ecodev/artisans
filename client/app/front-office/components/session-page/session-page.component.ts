@@ -31,6 +31,7 @@ export class SessionPageComponent
         CreateSessionVariables,
         UpdateSession['updateSession'],
         UpdateSessionVariables,
+        any,
         any
     >
     implements OnInit {

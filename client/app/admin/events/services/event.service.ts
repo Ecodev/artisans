@@ -6,6 +6,7 @@ import {
     CreateEvent,
     CreateEventVariables,
     DeleteEvents,
+    DeleteEventsVariables,
     Event,
     EventInput,
     Events,
@@ -28,7 +29,8 @@ export class EventService extends NaturalAbstractModelService<
     CreateEventVariables,
     UpdateEvent['updateEvent'],
     UpdateEventVariables,
-    DeleteEvents['deleteEvents']
+    DeleteEvents,
+    DeleteEventsVariables
 > {
     constructor(apollo: Apollo) {
         super(apollo, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);

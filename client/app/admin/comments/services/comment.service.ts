@@ -11,6 +11,7 @@ import {
     CreateComment,
     CreateCommentVariables,
     DeleteComments,
+    DeleteCommentsVariables,
     UpdateComment,
     UpdateCommentVariables,
 } from '../../../shared/generated-types';
@@ -28,7 +29,8 @@ export class CommentService extends NaturalAbstractModelService<
     CreateCommentVariables,
     UpdateComment['updateComment'],
     UpdateCommentVariables,
-    DeleteComments['deleteComments']
+    DeleteComments,
+    DeleteCommentsVariables
 > {
     constructor(apollo: Apollo) {
         super(apollo, 'comment', commentQuery, commentsQuery, createComment, updateComment, deleteComments);

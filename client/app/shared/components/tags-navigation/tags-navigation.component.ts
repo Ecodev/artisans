@@ -15,7 +15,7 @@ export class TagsNavigationComponent implements OnInit {
     /**
      * Service to use to get items
      */
-    @Input() public service: NaturalAbstractModelService<any, any, any, any, any, any, any, any, any>;
+    @Input() public service: NaturalAbstractModelService<any, any, any, any, any, any, any, any, any, any>;
 
     /**
      * Url base

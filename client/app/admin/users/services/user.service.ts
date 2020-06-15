@@ -15,6 +15,8 @@ import {
     CreateUserVariables,
     CurrentUserForProfile,
     CurrentUserForProfile_viewer,
+    DeleteUsers,
+    DeleteUsersVariables,
     Login,
     LoginVariables,
     Logout,
@@ -65,7 +67,8 @@ export class UserService extends NaturalAbstractModelService<
     CreateUserVariables,
     UpdateUser['updateUser'],
     UpdateUserVariables,
-    any
+    DeleteUsers,
+    DeleteUsersVariables
 > {
     /**
      * Should be used only by fetchViewer and cacheViewer

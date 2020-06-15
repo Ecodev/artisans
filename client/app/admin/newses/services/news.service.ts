@@ -6,6 +6,7 @@ import {
     CreateNews,
     CreateNewsVariables,
     DeleteNewses,
+    DeleteNewsesVariables,
     News,
     Newses,
     NewsesVariables,
@@ -28,7 +29,8 @@ export class NewsService extends NaturalAbstractModelService<
     CreateNewsVariables,
     UpdateNews['updateNews'],
     UpdateNewsVariables,
-    DeleteNewses['deleteNewses']
+    DeleteNewses,
+    DeleteNewsesVariables
 > {
     constructor(apollo: Apollo) {
         super(apollo, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);

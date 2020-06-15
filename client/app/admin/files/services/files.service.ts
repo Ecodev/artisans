@@ -1,7 +1,13 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
-import {CreateFile, CreateFileVariables, DeleteFile, FileInput} from '../../../shared/generated-types';
+import {
+    CreateFile,
+    CreateFileVariables,
+    DeleteFile,
+    DeleteFileVariables,
+    FileInput,
+} from '../../../shared/generated-types';
 
 import {createFileMutation, deleteFileMutation} from './files.queries';
 
@@ -17,7 +23,8 @@ export class FilesService extends NaturalAbstractModelService<
     CreateFileVariables,
     any,
     any,
-    DeleteFile
+    DeleteFile,
+    DeleteFileVariables
 > {
     constructor(apollo: Apollo) {
         super(apollo, 'file', null, null, createFileMutation, null, deleteFileMutation);

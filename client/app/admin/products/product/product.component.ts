@@ -3,6 +3,8 @@ import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateProduct,
     CreateProductVariables,
+    DeleteProducts,
+    DeleteProductsVariables,
     Product,
     ProductVariables,
     UpdateProduct,
@@ -27,7 +29,8 @@ export class ProductComponent
         CreateProductVariables,
         UpdateProduct['updateProduct'],
         UpdateProductVariables,
-        any
+        DeleteProducts,
+        DeleteProductsVariables
     >
     implements OnInit {
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');

@@ -6,6 +6,8 @@ import {
     CommentVariables,
     CreateComment,
     CreateCommentVariables,
+    DeleteComments,
+    DeleteCommentsVariables,
     UpdateComment,
     UpdateCommentVariables,
 } from '../../../shared/generated-types';
@@ -28,7 +30,8 @@ export class CommentComponent
         CreateCommentVariables,
         UpdateComment['updateComment'],
         UpdateCommentVariables,
-        any
+        DeleteComments,
+        DeleteCommentsVariables
     >
     implements OnInit {
     constructor(

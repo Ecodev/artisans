@@ -4,6 +4,8 @@ import {UserService} from '../../../admin/users/services/user.service';
 import {
     CreateUser,
     CreateUserVariables,
+    DeleteUsers,
+    DeleteUsersVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -23,7 +25,8 @@ export class AccountComponent
         CreateUserVariables,
         UpdateUser['updateUser'],
         UpdateUserVariables,
-        any
+        DeleteUsers,
+        DeleteUsersVariables
     >
     implements OnInit {
     public UserService = UserService;

@@ -5,6 +5,8 @@ import {NewsService} from '../../../admin/newses/services/news.service';
 import {
     CreateNews,
     CreateNewsVariables,
+    DeleteNewses,
+    DeleteNewsesVariables,
     News,
     NewsVariables,
     UpdateNews,
@@ -26,7 +28,8 @@ export class NewsPageComponent
         CreateNewsVariables,
         UpdateNews['updateNews'],
         UpdateNewsVariables,
-        any
+        DeleteNewses,
+        DeleteNewsesVariables
     >
     implements OnInit {
     constructor(

@@ -4,6 +4,8 @@ import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateEvent,
     CreateEventVariables,
+    DeleteEvents,
+    DeleteEventsVariables,
     Event,
     EventVariables,
     UpdateEvent,
@@ -26,7 +28,8 @@ export class EventComponent
         CreateEventVariables,
         UpdateEvent['updateEvent'],
         UpdateEventVariables,
-        any
+        DeleteEvents,
+        DeleteEventsVariables
     >
     implements OnInit {
     constructor(

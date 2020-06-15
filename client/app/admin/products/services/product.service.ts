@@ -6,6 +6,7 @@ import {
     CreateProduct,
     CreateProductVariables,
     DeleteProducts,
+    DeleteProductsVariables,
     Product,
     Product_product,
     ProductInput,
@@ -34,7 +35,8 @@ export class ProductService extends NaturalAbstractModelService<
     CreateProductVariables,
     UpdateProduct['updateProduct'],
     UpdateProductVariables,
-    DeleteProducts
+    DeleteProducts,
+    DeleteProductsVariables
 > {
     public static readonly MEMBERSHIP_FEE_PRODUCT_ID = '1307';
 

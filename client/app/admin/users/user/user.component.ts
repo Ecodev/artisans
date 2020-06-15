@@ -3,6 +3,8 @@ import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateUser,
     CreateUserVariables,
+    DeleteUsers,
+    DeleteUsersVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -24,7 +26,8 @@ export class UserComponent
         CreateUserVariables,
         UpdateUser['updateUser'],
         UpdateUserVariables,
-        any
+        DeleteUsers,
+        DeleteUsersVariables
     >
     implements OnInit {
     public UserService = UserService;

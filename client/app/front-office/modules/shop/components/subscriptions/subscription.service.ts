@@ -6,6 +6,7 @@ import {
     CreateSubscription,
     CreateSubscriptionVariables,
     DeleteSubscriptions,
+    DeleteSubscriptionsVariables,
     ProductType,
     Subscription,
     Subscription_subscription,
@@ -36,7 +37,8 @@ export class SubscriptionService extends NaturalAbstractModelService<
     CreateSubscriptionVariables,
     UpdateSubscription['updateSubscription'],
     UpdateSubscriptionVariables,
-    DeleteSubscriptions
+    DeleteSubscriptions,
+    DeleteSubscriptionsVariables
 > {
     constructor(apollo: Apollo) {
         super(

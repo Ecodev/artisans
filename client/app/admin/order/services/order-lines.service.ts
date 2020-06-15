@@ -27,6 +27,7 @@ export class OrderLineService extends NaturalAbstractModelService<
     never,
     UpdateOrderLine['updateOrderLine'],
     UpdateOrderLineVariables,
+    never,
     never
 > {
     constructor(apollo: Apollo) {

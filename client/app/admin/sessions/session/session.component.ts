@@ -4,6 +4,8 @@ import {NaturalAbstractDetail} from '@ecodev/natural';
 import {
     CreateSession,
     CreateSessionVariables,
+    DeleteSessions,
+    DeleteSessionsVariables,
     Session,
     SessionVariables,
     UpdateSession,
@@ -25,7 +27,8 @@ export class SessionComponent
         CreateSessionVariables,
         UpdateSession['updateSession'],
         UpdateSessionVariables,
-        any
+        DeleteSessions,
+        DeleteSessionsVariables
     >
     implements OnInit {
     /**

@@ -40,6 +40,7 @@ abstract class CreateOrder implements FieldInterface
 
                 $input = $args['input'];
                 $input['orderLines'] = array_map(fn ($line) => Utility::entityIdToModel($line), $input['orderLines']);
+                $input['country'] = isset($input['country']) ? $input['country']->getEntity() : null;
 
                 /** @var Invoicer $invoicer */
                 $invoicer = $container->get(Invoicer::class);

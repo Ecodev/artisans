@@ -74,18 +74,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=191, options={"default" = ""})
-     */
-    private $firstName = '';
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=191, options={"default" = ""})
-     */
-    private $lastName = '';
-
-    /**
-     * @var string
      * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
@@ -142,42 +130,6 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
         $this->role = $role;
         $this->sessions = new ArrayCollection();
         $this->users = new ArrayCollection();
-    }
-
-    /**
-     * Set first name
-     *
-     * @param string $firstName
-     */
-    public function setFirstName($firstName): void
-    {
-        $this->firstName = $firstName;
-    }
-
-    /**
-     * Get first name
-     */
-    public function getFirstName(): string
-    {
-        return (string) $this->firstName;
-    }
-
-    /**
-     * Set last name
-     *
-     * @param string $lastName
-     */
-    public function setLastName($lastName): void
-    {
-        $this->lastName = $lastName;
-    }
-
-    /**
-     * Get last name
-     */
-    public function getLastName(): string
-    {
-        return (string) $this->lastName;
     }
 
     /**

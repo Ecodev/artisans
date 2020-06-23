@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {Literal, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {OrderService} from '../../../../admin/order/services/order.service';
 import {
@@ -62,7 +62,11 @@ export class CartService {
         }
     }
 
-    public save(cart: Cart, paymentMethod: PaymentMethod): Observable<CreateOrder_createOrder | null> {
+    public save(
+        cart: Cart,
+        paymentMethod: PaymentMethod,
+        billingAddress: Literal,
+    ): Observable<CreateOrder_createOrder | null> {
         const isCHF = this.currencyService.current.value === Currency.CHF;
         const orderLines: OrderLineInput[] = cart.productLines.map(line => {
             return {
@@ -96,6 +100,12 @@ export class CartService {
         const input: OrderInput = {
             paymentMethod: paymentMethod,
             orderLines: orderLines,
+            firstName: billingAddress.firstName ?? '',
+            lastName: billingAddress.lastName ?? '',
+            street: billingAddress.street ?? '',
+            locality: billingAddress.locality ?? '',
+            postcode: billingAddress.postcode ?? '',
+            country: billingAddress.country.id ?? '',
         };
 
         return this.orderService.create(input);

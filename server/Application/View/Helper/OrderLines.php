@@ -25,6 +25,11 @@ class OrderLines extends AbstractHelper
                 $label = '<a href="' . $url . '">' . $label . '</a>';
             }
 
+            if ($line->getSubscription()) {
+                $url = $this->view->serverUrl . '/larevuedurable/abonnements';
+                $label = '<a href="' . $url . '">' . $label . '</a>';
+            }
+
             $extra = '';
             if ($line->getAdditionalEmails()) {
                 $extra .= '<ul>';

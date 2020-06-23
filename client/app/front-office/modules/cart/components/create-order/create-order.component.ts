@@ -135,7 +135,7 @@ export class CreateOrderComponent implements OnInit {
             return;
         }
 
-        this.cartService.save(this.cart, paymentMethod.value).subscribe(order => {
+        this.cartService.save(this.cart, paymentMethod.value, this.billingForm.getRawValue()).subscribe(order => {
             if (!order) {
                 return;
             }

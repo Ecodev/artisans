@@ -14,6 +14,18 @@ trait HasAddress
 {
     /**
      * @var string
+     * @ORM\Column(type="string", length=191, options={"default" = ""})
+     */
+    private $firstName = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", length=191, options={"default" = ""})
+     */
+    private $lastName = '';
+
+    /**
+     * @var string
      * @ORM\Column(type="string", options={"default" = ""})
      */
     private $street = '';
@@ -36,6 +48,42 @@ trait HasAddress
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $country;
+
+    /**
+     * Set first name
+     *
+     * @param string $firstName
+     */
+    public function setFirstName($firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * Get first name
+     */
+    public function getFirstName(): string
+    {
+        return (string) $this->firstName;
+    }
+
+    /**
+     * Set last name
+     *
+     * @param string $lastName
+     */
+    public function setLastName($lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * Get last name
+     */
+    public function getLastName(): string
+    {
+        return (string) $this->lastName;
+    }
 
     public function getStreet(): string
     {

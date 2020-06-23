@@ -16,6 +16,9 @@ $url = $this->serverUrl . '/admin/order/' . $this->order->getId();
 <h2>Client : </h2>
 <?php echo $this->userInfos($this->order->getOwner()); ?>
 
+<h2>Adresse de facturation : </h2>
+<?php echo $this->orderBillingAddress($this->order); ?>
+
 <h2>La commande :</h2>
 <?php echo $this->orderLines($this->order); ?>
 <p>Voir le détail sur <a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a>.</p>

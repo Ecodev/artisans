@@ -46,6 +46,12 @@ class Invoicer
 
         $order = new Order();
         $order->setPaymentMethod($orderInput['paymentMethod']);
+        $order->setFirstName($orderInput['firstName'] ?? '');
+        $order->setLastName($orderInput['lastName'] ?? '');
+        $order->setStreet($orderInput['street'] ?? '');
+        $order->setLocality($orderInput['locality'] ?? '');
+        $order->setPostcode($orderInput['postcode'] ?? '');
+        $order->setCountry($orderInput['country'] ?? null);
 
         $this->userRepository->getAclFilter()->runWithoutAcl(function () use ($lines, $order): void {
             $this->entityManager->persist($order);

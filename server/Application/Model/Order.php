@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Traits\HasAddress;
 use Application\Traits\HasAutomaticBalance;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,6 +24,7 @@ class Order extends AbstractModel
     const STATUS_PENDING = 'pending';
     const STATUS_VALIDATED = 'validated';
 
+    use HasAddress;
     use HasAutomaticBalance;
     use HasInternalRemarks;
 

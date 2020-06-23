@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 $url = $this->serverUrl . '/user/confirm/' . $this->token;
 ?>
-<p>
-    Une demande de création de compte Les Artisans de la Transition a été faite pour l'adresse email <?php echo $this->escapeHtml($this->email) ?>.
-    Pour terminer le processus d'adhésion, merci de cliquer sur le lien ci-dessous :
-</p>
+
+<p>L’adresse <?php echo $this->escapeHtml($this->email) ?> a demandé la création d’un compte sur le site Artisans de la transition.</p>
+<p>Pour la valider, vous devez cliquer sur le lien ci-dessous :</p>
 
 <p style="text-align:center;margin:40px 0">
     <a href="<?php echo $url ?>" style="padding:10px; text-decoration:none; color:white; background:#EF6031;">
@@ -12,7 +11,4 @@ $url = $this->serverUrl . '/user/confirm/' . $this->token;
     </a>
 </p>
 
-<p>
-    Si vous n'êtes pas à l'origine de cette demande, vous pouvez simplement ignorer cet email.
-</p>
-
+<p>Si vous n’êtes pas à l’origine de cette demande, vous pouvez ignorer ce message.</p>

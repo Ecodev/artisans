@@ -12,5 +12,9 @@
                 color: inherit !important;
             }
         }
+
+        .active {
+            background: mat-color($primary, 400);
+        }
     }
 }

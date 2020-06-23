@@ -32,6 +32,8 @@
     </div>
 </div>
 
+<div id="profile-content"></div>
+
 <div class="body container">
     <div fxLayout="row" fxLayoutGap="60px">
         <div fxFlex="25" fxLayout="column" fxLayoutGap="30px">
@@ -39,9 +41,27 @@
                 <div class="mat-h2 padding">Mon compte</div>
                 <mat-nav-list>
                     <!-- @formatter:off -->
-                    <a mat-list-item routerLink="/mon-compte/articles-achetes">Articles et revues achetées</a>
-                    <a mat-list-item routerLink="/mon-compte/donnees-personnelles">Données personnelles</a>
-                    <a mat-list-item routerLink="/mon-compte/commandes">Commandes</a>
+                    <a
+                        mat-list-item
+                        routerLink="/mon-compte/articles-achetes"
+                        routerLinkActive="active"
+                        fragment="profile-content"
+                        >Articles et revues achetées</a
+                    >
+                    <a
+                        mat-list-item
+                        routerLink="/mon-compte/donnees-personnelles"
+                        routerLinkActive="active"
+                        fragment="profile-content"
+                        >Données personnelles</a
+                    >
+                    <a
+                        mat-list-item
+                        routerLink="/mon-compte/commandes"
+                        routerLinkActive="active"
+                        fragment="profile-content"
+                        >Commandes</a
+                    >
                     <!-- @formatter:on -->
                 </mat-nav-list>
             </div>

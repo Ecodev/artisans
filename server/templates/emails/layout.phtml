@@ -40,7 +40,7 @@
 
         <div style="padding:30px 20px">
             <div style="max-width:650px; width:100%; margin: auto;">
-                <p>Bonjour<?php echo $this->escapeHtml($this->user && $this->user->getFirstName() ? ' ' . $this->user->getFirstName() : '') ?>,</p>
+                <p>Bonjour<?php echo $this->escapeHtml($this->user && $this->user->getName() ? ' ' . $this->user->getName() : '') ?>,</p>
                 <?php echo $this->content; ?>
             </div>
         </div>

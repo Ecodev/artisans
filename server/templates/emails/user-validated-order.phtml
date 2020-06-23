@@ -1,8 +1,17 @@
 <?php declare(strict_types=1);
 $url = $this->serverUrl . '/mon-compte/commandes/' . $this->order->getId();
 ?>
-<p>La commande suivante a été validée :</p>
+<p>Votre commande a été validée et nous vous en remercions.</p>
+<p>
+    Important : les abonnements démarrent avec le dernier numéro paru au
+    moment de la commande. Vous souhaitez commencer votre abonnement avec un autre numéro ? Merci de le signaler à
+    abos@larevuedurable.com.
+</p>
+<p>Détail de la commande :</p>
 
 <?php echo $this->orderLines($this->order); ?>
 
-<p>Voir le détail sur <a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a>.</p>
+<p>Voir le détail sur
+    <a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a>
+    .
+</p>

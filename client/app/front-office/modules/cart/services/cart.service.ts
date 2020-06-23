@@ -105,7 +105,7 @@ export class CartService {
             street: billingAddress.street ?? '',
             locality: billingAddress.locality ?? '',
             postcode: billingAddress.postcode ?? '',
-            country: billingAddress.country.id ?? '',
+            country: billingAddress.country?.id ?? null,
         };
 
         return this.orderService.create(input);

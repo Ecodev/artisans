@@ -338,7 +338,7 @@ class InvoicerTest extends TestCase
                 ],
                 [
                     [
-                        'Donation',
+                        'Don',
                         '1',
                         '10000',
                         '0',
@@ -370,7 +370,7 @@ class InvoicerTest extends TestCase
         /** @var OrderLine $orderLine */
         foreach ($order->getOrderLines() as $orderLine) {
             $abstractProduct = $orderLine->getProduct() ?: $orderLine->getSubscription();
-            $expectedName = $abstractProduct ? $abstractProduct->getName() : 'Donation';
+            $expectedName = $abstractProduct ? $abstractProduct->getName() : 'Don';
             self::assertSame($expectedName, $orderLine->getName());
 
             $actualOrderLines[] = [

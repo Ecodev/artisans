@@ -131,7 +131,7 @@ class OrderLine extends AbstractModel
     {
         $this->product = null;
         $this->subscription = null;
-        $this->setName('Donation');
+        $this->setName('Don');
     }
 
     /**

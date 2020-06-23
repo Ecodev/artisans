@@ -196,7 +196,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $subscriptionLine2->setAdditionalEmails(['alice@example.com', 'bob@example.com', 'carol@example.com']);
 
         $donationLine = new OrderLine();
-        $donationLine->setName('Donation');
+        $donationLine->setName('Don');
 
         $lines = new ArrayCollection([$productLine, $subscriptionLine, $subscriptionLine2, $donationLine]);
 

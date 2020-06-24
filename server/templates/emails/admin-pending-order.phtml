@@ -21,4 +21,6 @@ $url = $this->serverUrl . '/admin/order/' . $this->order->getId();
 
 <h2>La commande :</h2>
 <?php echo $this->orderLines($this->order); ?>
+
+<strong>Total : <?php echo $this->escapeHtml($this->order->getFormattedBalance()) ?></strong>
 <p>Voir le détail sur <a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a>.</p>

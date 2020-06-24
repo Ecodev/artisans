@@ -6,11 +6,13 @@ namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
 use Application\DBAL\Types\PaymentMethodType;
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Country;
 use Application\Model\Message;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
+use Application\Model\Subscription;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -182,21 +184,39 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
             ->willReturn(1);
 
         $product->expects(self::any())
+            ->method('getCode')
+            ->willReturn('xxx-yyy');
+
+        $product->expects(self::any())
             ->method('getName')
             ->willReturn('Article 1');
 
         $productLine = new OrderLine();
         $productLine->setProduct($product);
+        $productLine->setBalanceCHF(Money::CHF(500));
+        $productLine->setBalanceEUR(Money::EUR(0));
+        $productLine->setType(ProductTypeType::PAPER);
 
         $subscriptionLine = new OrderLine();
+        $subscriptionLine->setSubscription(new Subscription());
         $subscriptionLine->setName('Abonnement standard papier');
+        $subscriptionLine->setBalanceCHF(Money::CHF(1500));
+        $subscriptionLine->setBalanceEUR(Money::EUR(0));
+        $subscriptionLine->setType(ProductTypeType::BOTH);
 
         $subscriptionLine2 = new OrderLine();
+        $subscriptionLine2->setSubscription(new Subscription());
         $subscriptionLine2->setName('Abonnement institutionnel numérique');
         $subscriptionLine2->setAdditionalEmails(['alice@example.com', 'bob@example.com', 'carol@example.com']);
+        $subscriptionLine2->setBalanceCHF(Money::CHF(2500));
+        $subscriptionLine2->setBalanceEUR(Money::EUR(0));
+        $subscriptionLine2->setType(ProductTypeType::DIGITAL);
 
         $donationLine = new OrderLine();
         $donationLine->setName('Don');
+        $donationLine->setBalanceCHF(Money::CHF(3500));
+        $donationLine->setBalanceEUR(Money::EUR(0));
+        $donationLine->setType(ProductTypeType::OTHER);
 
         $lines = new ArrayCollection([$productLine, $subscriptionLine, $subscriptionLine2, $donationLine]);
 

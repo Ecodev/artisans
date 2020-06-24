@@ -129,8 +129,6 @@ export class UserService extends NaturalAbstractModelService<
                         proxy.writeQuery({query: currentUserForProfileQuery, data});
                         this.permissionsService.setUser(login);
 
-                        // Be sure that we don't have leftovers from another user
-                        this.cartService.clearCarts();
                         this.currencyService.updateLockedStatus(login);
                     },
                 })
@@ -152,6 +150,8 @@ export class UserService extends NaturalAbstractModelService<
                 .subscribe(result => {
                     const v = (result.data as Logout).logout;
 
+                    // Be sure that we don't have leftovers from another user
+                    this.cartService.clearCarts();
                     this.viewer.next(null);
                     this.currencyService.updateLockedStatus(null);
                     (this.apollo.getClient().resetStore() as Promise<null>).then(() => {

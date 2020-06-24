@@ -12,6 +12,7 @@ export const orderLineMetaFragment = gql`
         }
         balanceCHF
         balanceEUR
+        type
         product {
             id
             name

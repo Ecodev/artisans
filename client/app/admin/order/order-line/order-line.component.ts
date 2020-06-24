@@ -1,4 +1,5 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NaturalAbstractDetail, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
 import {merge, omit} from 'lodash';
@@ -48,6 +49,8 @@ export class OrderLineComponent
             this.data = merge({model: this.service.getConsolidatedForClient()}, data[key]);
             this.data = merge(this.data, omit(data, [key]));
             this.initForm();
+
+            this.form.get('quantity')?.setValidators(Validators.required);
         });
     }
 }

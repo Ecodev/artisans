@@ -8,6 +8,8 @@
             placeholder="Produit"
         ></natural-select>
 
+        <div class="mat-h2">ou</div>
+
         <natural-select
             [service]="subscriptionService"
             [showIcon]="false"
@@ -20,12 +22,22 @@
             rien du tout.
         </p>
 
-        <div fxLayout="row">
-            <mat-form-field [style.padding-top.em]="1.34375" [style.width.px]="90">
+        <mat-divider class="margin"></mat-divider>
+
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start top">
+            <mat-form-field [style.width.px]="90">
                 <mat-label>Quantité</mat-label>
-                <input [required]="true" formControlName="quantity" matInput min="0" step="1" type="number" />
+                <input formControlName="quantity" matInput min="0" step="1" type="number" />
                 <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
             </mat-form-field>
+
+            <!-- Show only for products -->
+            <natural-select-enum
+                *ngIf="form.get('product')?.value && !form.get('subscription')?.value"
+                formControlName="type"
+                enumName="ProductType"
+                placeholder="Type"
+            ></natural-select-enum>
         </div>
     </div>
 </mat-dialog-content>

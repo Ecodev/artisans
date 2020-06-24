@@ -20,6 +20,7 @@ const routes: Routes = [
         data: {
             breadcrumbs: [],
             title: 'Résultats la recherche',
+            showNoResults: true,
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,

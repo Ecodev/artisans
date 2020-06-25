@@ -58,12 +58,10 @@ export class BreadcrumbsComponent extends NaturalAbstractController implements O
             route = this.router.routerState.root;
         }
 
-        const breadcrumbs = route['snapshot']['data'].breadcrumbs || [];
-
         if (route?.firstChild) {
-            return [...breadcrumbs, ...this.getMergedBreadcrumbs(route?.firstChild)];
+            return this.getMergedBreadcrumbs(route?.firstChild);
         } else {
-            return breadcrumbs;
+            return route['snapshot']['data'].breadcrumbs || [];
         }
     }
 }

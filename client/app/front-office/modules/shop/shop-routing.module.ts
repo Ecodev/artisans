@@ -30,7 +30,7 @@ const routes: Routes = [
         path: 'articles',
         component: ProductsPageComponent,
         data: {
-            breadcrumbs: [],
+            breadcrumbs: [{label: 'La Revue Durable'}],
             showTagsOnProducts: true,
             showTagsNavigation: true,
             viewMode: ProductsViewMode.grid,
@@ -58,7 +58,10 @@ const routes: Routes = [
             productTag: ProductTagByNameResolver,
         },
         data: {
-            breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
+            breadcrumbs: [
+                {link: '/larevuedurable', label: 'La Revue Durable'},
+                {link: '/larevuedurable/articles', label: 'Articles'},
+            ],
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.grid,
@@ -83,7 +86,7 @@ const routes: Routes = [
         path: 'numeros',
         component: ProductsPageComponent,
         data: {
-            breadcrumbs: [],
+            breadcrumbs: [{label: 'La Revue Durable'}],
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,
@@ -114,7 +117,10 @@ const routes: Routes = [
         data: {
             showTagsOnProducts: true,
             showTagsNavigation: false,
-            breadcrumbs: [{link: '/larevuedurable/articles', label: 'Articles'}],
+            breadcrumbs: [
+                {link: '/larevuedurable', label: 'La Revue Durable'},
+                {link: '/larevuedurable/articles', label: 'Articles'},
+            ],
         },
     },
     {
@@ -126,12 +132,16 @@ const routes: Routes = [
         data: {
             showTagsOnProducts: true,
             showTagsNavigation: false,
-            breadcrumbs: [{link: '/larevuedurable/numeros', label: 'Numéros'}],
+            breadcrumbs: [
+                {link: '/larevuedurable', label: 'La Revue Durable'},
+                {link: '/larevuedurable/numeros', label: 'Numéros'},
+            ],
         },
     },
     {
         path: 'abonnements',
         component: SubscriptionsComponent,
+        data: {breadcrumbs: [{label: 'La Revue Durable'}]},
     },
 ];
 @NgModule({

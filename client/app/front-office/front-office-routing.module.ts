@@ -49,7 +49,7 @@ const routes: Routes = [
         path: 'agenda',
         component: EventsPageComponent,
         data: {
-            breadcrumbs: [{link: '/association', label: "L'association"}],
+            breadcrumbs: [{label: "L'association"}],
             contextVariables: {
                 filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: new Date()}}}]}]},
                 sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
@@ -61,17 +61,14 @@ const routes: Routes = [
         component: EventPageComponent,
         resolve: {event: EventResolver},
         data: {
-            breadcrumbs: [
-                {link: '/association', label: "L'association"},
-                {link: '/agenda', label: 'Agenda'},
-            ],
+            breadcrumbs: [{label: "L'association"}, {link: '/agenda', label: 'Agenda'}],
         },
     },
     {
         path: 'actualite',
         component: NewsesPageComponent,
         data: {
-            breadcrumbs: [{link: '/association', label: "L'association"}],
+            breadcrumbs: [{label: "L'association"}],
             contextVariables: {
                 filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
                 sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
@@ -83,15 +80,13 @@ const routes: Routes = [
         component: NewsPageComponent,
         resolve: {news: NewsResolver},
         data: {
-            breadcrumbs: [
-                {link: '/association', label: "L'association"},
-                {link: '/actualite', label: 'Actualités'},
-            ],
+            breadcrumbs: [{label: "L'association"}, {link: '/actualite', label: 'Actualités'}],
         },
     },
     {
         path: 'contact',
         component: ContactComponent,
+        data: {breadcrumbs: [{label: "L'association"}]},
     },
     {
         path: 'association',
@@ -99,18 +94,22 @@ const routes: Routes = [
             {
                 path: 'nos-convictions',
                 component: ConvictionsComponent,
+                data: {breadcrumbs: [{label: "L'association"}]},
             },
             {
                 path: 'qui-sommes-nous',
                 component: QuiSommesNousComponent,
+                data: {breadcrumbs: [{label: "L'association"}]},
             },
             {
                 path: 'partenariats',
                 component: PartenariatsComponent,
+                data: {breadcrumbs: [{label: "L'association"}]},
             },
             {
                 path: 'status',
                 component: ComiteStatusComponent,
+                data: {breadcrumbs: [{label: "L'association"}]},
             },
         ],
     },
@@ -129,7 +128,7 @@ const routes: Routes = [
                         path: 'methode',
                         component: SessionMethodComponent,
                         data: {
-                            breadcrumbs: [{link: '/agir-avec-nous', label: 'Agir avec nous'}],
+                            breadcrumbs: [{label: 'Agir avec nous'}],
                         },
                     },
                     {
@@ -137,7 +136,7 @@ const routes: Routes = [
                         component: SessionFacilitatorComponent,
                         data: {
                             breadcrumbs: [
-                                {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                                {label: 'Agir avec nous'},
                                 {link: '/agir-avec-nous/conversation-carbone', label: 'Conversations carbone'},
                             ],
                         },
@@ -147,7 +146,7 @@ const routes: Routes = [
                         component: SessionOrganisationComponent,
                         data: {
                             breadcrumbs: [
-                                {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                                {label: 'Agir avec nous'},
                                 {link: '/agir-avec-nous/conversation-carbone', label: 'Conversations carbone'},
                             ],
                         },
@@ -157,7 +156,7 @@ const routes: Routes = [
                         component: SessionsIncomingComponent,
                         data: {
                             breadcrumbs: [
-                                {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                                {label: 'Agir avec nous'},
                                 {link: '/agir-avec-nous/conversation-carbone', label: 'Conversations carbone'},
                             ],
                         },
@@ -168,7 +167,7 @@ const routes: Routes = [
                         resolve: {session: SessionResolver},
                         data: {
                             breadcrumbs: [
-                                {link: '/agir-avec-nous', label: 'Agir avec nous'},
+                                {label: 'Agir avec nous'},
                                 {
                                     link: '/agir-avec-nous/conversation-carbone/prochaines',
                                     label: 'Conversations carbone',
@@ -181,26 +180,32 @@ const routes: Routes = [
             {
                 path: 'toutes-nos-actions',
                 component: ActionsComponent,
+                data: {breadcrumbs: [{label: 'Agir avec nous'}]},
             },
             {
                 path: 'calculer-empreinte-carbone',
                 component: CalculerEmpreinteCarboneComponent,
+                data: {breadcrumbs: [{label: 'Agir avec nous'}]},
             },
             {
                 path: 'desinvestir-industrie-energies-fossiles',
                 component: DesinvestirFossileComponent,
+                data: {breadcrumbs: [{label: 'Agir avec nous'}]},
             },
             {
                 path: 'numerique-ethique',
                 component: NumeriqueEthiqueComponent,
+                data: {breadcrumbs: [{label: 'Agir avec nous'}]},
             },
             {
                 path: 'alimentation',
                 component: AlimentationComponent,
+                data: {breadcrumbs: [{label: 'Agir avec nous'}]},
             },
             {
                 path: 'agir-au-quotidien',
                 component: AgirAuQuotidienComponent,
+                data: {breadcrumbs: [{label: 'Agir avec nous'}]},
             },
         ],
     },
@@ -210,18 +215,22 @@ const routes: Routes = [
             {
                 path: 'faire-un-don',
                 component: FaireUnDonComponent,
+                data: {breadcrumbs: [{label: 'Nous soutenir'}]},
             },
             {
                 path: 'rejoindre-association',
                 component: RejoindreAssociationComponent,
+                data: {breadcrumbs: [{label: 'Nous soutenir'}]},
             },
             {
                 path: 'offrir-la-revue-durable',
                 component: OffrirLaRevueComponent,
+                data: {breadcrumbs: [{label: 'Nous soutenir'}]},
             },
             {
                 path: 'nous-faire-connaitre',
                 component: NousFaireConnaitreComponent,
+                data: {breadcrumbs: [{label: 'Nous soutenir'}]},
             },
         ],
     },
@@ -246,16 +255,11 @@ const routes: Routes = [
                 component: PointsDeVenteComponent,
             },
         ],
-        data: {
-            breadcrumbs: [{link: '/larevuedurable', label: 'La Revue Durable'}],
-        },
+        data: {breadcrumbs: [{label: 'La Revue Durable'}]},
     },
     {
         path: 'larevuedurable',
         loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
-        data: {
-            breadcrumbs: [{link: '/larevuedurable', label: 'La Revue Durable'}],
-        },
     },
     {
         path: 'panier',

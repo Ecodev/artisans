@@ -27,4 +27,15 @@ class ProductRepository extends AbstractRepository implements LimitedAccessSubQu
 
         return 'SELECT id FROM product WHERE product.is_active';
     }
+
+    // Set random sorting on all products
+    public function randomizeSorting(): void
+    {
+        $count = $this->getCount();
+
+        if ($count) {
+            $connection = $this->getEntityManager()->getConnection();
+            $connection->executeUpdate('UPDATE ' . $this->getClassMetadata()->getTableName() . ' SET sorting = FLOOR(1 + RAND() * ?)', [$count]);
+        }
+    }
 }

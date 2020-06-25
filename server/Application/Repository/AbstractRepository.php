@@ -15,4 +15,18 @@ use Doctrine\ORM\EntityRepository;
 abstract class AbstractRepository extends EntityRepository
 {
     use \Ecodev\Felix\Repository\Traits\Repository;
+
+    /**
+     * Count the total number of objects
+     */
+    public function getCount(): int
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $query = $connection->createQueryBuilder()
+            ->select('COUNT(*)')
+            ->from($connection->quoteIdentifier($this->getClassMetadata()->getTableName()));
+
+        return (int) $query->execute()->fetchColumn();
+    }
 }

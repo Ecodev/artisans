@@ -151,11 +151,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     link: '/nous-soutenir/rejoindre-association',
                 },
                 {
-                    display: "S'abonner",
-                    link: '/larevuedurable/abonnements',
-                },
-                {
-                    display: 'Offrir LaRevueDurable',
+                    display: "Offrir ou s'offrir LaRevueDurable ",
                     link: '/nous-soutenir/offrir-la-revue-durable',
                 },
                 {

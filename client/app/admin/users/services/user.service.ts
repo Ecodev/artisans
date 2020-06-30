@@ -25,8 +25,6 @@ import {
     RequestPasswordResetVariables,
     SubscribeNewsletter,
     SubscribeNewsletterVariables,
-    Unregister,
-    UnregisterVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -46,7 +44,6 @@ import {
     deleteUsers,
     loginMutation,
     logoutMutation,
-    unregisterMutation,
     updateUser,
     userByTokenQuery,
     userQuery,
@@ -229,17 +226,6 @@ export class UserService extends NaturalAbstractModelService<
                     return {model: result.data.userByToken};
                 }),
             );
-    }
-
-    public unregister(user): Observable<Unregister['unregister']> {
-        return this.apollo
-            .mutate<Unregister, UnregisterVariables>({
-                mutation: unregisterMutation,
-                variables: {
-                    id: user.id,
-                },
-            })
-            .pipe(map(result => (result.data as Unregister).unregister));
     }
 
     public requestPasswordReset(email): Observable<RequestPasswordReset['requestPasswordReset']> {

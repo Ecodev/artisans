@@ -9,7 +9,6 @@ use Ecodev\Felix\DBAL\Types\EnumType;
 class MessageTypeType extends EnumType
 {
     const REGISTER = 'register';
-    const UNREGISTER = 'unregister';
     const RESET_PASSWORD = 'reset_password';
     const UPDATED_USER = 'updated_user';
     const CONFIRMED_REGISTRATION = 'confirmed_registration';
@@ -24,7 +23,6 @@ class MessageTypeType extends EnumType
     {
         return [
             self::REGISTER,
-            self::UNREGISTER,
             self::RESET_PASSWORD,
             self::UPDATED_USER,
             self::CONFIRMED_REGISTRATION,

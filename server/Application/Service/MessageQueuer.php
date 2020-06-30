@@ -50,18 +50,6 @@ class MessageQueuer
         return $message;
     }
 
-    public function queueUnregister(User $admin, User $unregisteredUser): Message
-    {
-        $subject = 'Démission';
-        $mailParams = [
-            'unregisteredUser' => $unregisteredUser,
-        ];
-
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::UNREGISTER, $mailParams);
-
-        return $message;
-    }
-
     /**
      * Queue a reset password email to specified user
      *

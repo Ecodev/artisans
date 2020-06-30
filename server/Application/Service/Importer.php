@@ -136,6 +136,7 @@ class Importer
                 $firstName,
                 $lastName,
                 $street,
+                // $wtf,
                 $postcode,
                 $locality,
                 $country,
@@ -177,7 +178,7 @@ class Importer
                     $lastReviewId
                 );
             } else {
-                $this->throw("L'email suivant n'est ni une addresse email valide, ni un expression régulière valide: " . $email);
+                $this->throw("L'email suivant n'est ni une addresse email valide, ni un expression régulière valide : " . $email);
             }
         }
     }
@@ -189,7 +190,7 @@ class Importer
         }
 
         if (!preg_match('~^\d{4}-\d{2}-\d{2}$~', $date)) {
-            $this->throw('La date devrait avoir le format YYYY-MM-DD, mais est: ' . $date);
+            $this->throw('La date devrait avoir le format YYYY-MM-DD, mais est : ' . $date);
         }
 
         return $date;
@@ -199,7 +200,7 @@ class Importer
     {
         $validator = new EmailAddress();
         if (!$validator->isValid($email)) {
-            $this->throw("Ce n'est pas une addresse email valide: " . $email);
+            $this->throw("Ce n'est pas une addresse email valide : " . $email);
         }
 
         if (array_key_exists($email, $this->seenEmails)) {
@@ -212,7 +213,7 @@ class Importer
     private function assertPattern(string $pattern): void
     {
         if (@preg_match('~' . $pattern . '~', '') === false) {
-            $this->throw("Ce n'est pas une expression régulière valide: " . $pattern);
+            $this->throw("Ce n'est pas une expression régulière valide : " . $pattern);
         }
 
         if (array_key_exists($pattern, $this->seenPatterns)) {
@@ -229,12 +230,12 @@ class Importer
         }
 
         if ($reviewNumber && !preg_match('~^\d+$~', $reviewNumber)) {
-            $this->throw('Un numéro de revue doit être entièrement numérique, mais est: ' . $reviewNumber);
+            $this->throw('Un numéro de revue doit être entièrement numérique, mais est : ' . $reviewNumber);
         }
 
         $reviewNumberNumeric = (int) $reviewNumber;
         if (!array_key_exists($reviewNumberNumeric, $this->reviewByNumber)) {
-            $this->throw('Revue introuvable pour le numéro de revue: ' . $reviewNumber);
+            $this->throw('Revue introuvable pour le numéro de revue : ' . $reviewNumber);
         }
 
         return $this->reviewByNumber[$reviewNumberNumeric];
@@ -268,7 +269,7 @@ class Importer
 
     private function throw(string $message): void
     {
-        throw new Exception('A la ligne ' . $this->lineNumber . ': ' . $message);
+        throw new Exception('A la ligne ' . $this->lineNumber . ' : ' . $message);
     }
 
     private function deleteOldOrganizations(): void
@@ -279,11 +280,21 @@ class Importer
 
     private function readMembership($membership): string
     {
-        if (!in_array($membership, [MembershipType::NONE, MembershipType::DUE, MembershipType::PAYED], true)) {
-            $this->throw('Le membership aux artisans est invalide: ' . $membership);
+        if ($membership === '' || $membership === 'Non membre') {
+            return MembershipType::NONE;
         }
 
-        return $membership;
+        if ($membership === 'Membre (cotisation pay&#233;e)') {
+            return MembershipType::PAYED;
+        }
+
+        if ($membership === 'Membre (cotistaion due)') {
+            return MembershipType::DUE;
+        }
+
+        $this->throw('Le membership aux artisans est invalide : ' . $membership);
+
+        return MembershipType::NONE;
     }
 
     private function readSubscriptionType(string $subscriptionType): ?string
@@ -292,11 +303,19 @@ class Importer
             return null;
         }
 
-        if (!in_array($subscriptionType, [ProductTypeType::PAPER, ProductTypeType::DIGITAL, ProductTypeType::BOTH], true)) {
-            $this->throw('Le subscriptionType est invalide: ' . $subscriptionType);
+        if ($subscriptionType === 'Web') {
+            return ProductTypeType::DIGITAL;
         }
 
-        return $subscriptionType;
+        if ($subscriptionType === 'Papier') {
+            return ProductTypeType::PAPER;
+        }
+
+        if ($subscriptionType === 'Papier&#47;web') {
+            return ProductTypeType::BOTH;
+        }
+
+        $this->throw('Le subscriptionType est invalide : ' . $subscriptionType);
     }
 
     private function updateUser(...$args): void

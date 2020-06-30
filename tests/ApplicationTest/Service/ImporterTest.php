@@ -14,55 +14,55 @@ class ImporterTest extends TestCase
 
     public function testInvalidEmail(): void
     {
-        $this->expectErrorMessage("A la ligne 1: Ce n'est pas une addresse email valide: fo[o");
+        $this->expectErrorMessage("A la ligne 1 : Ce n'est pas une addresse email valide : fo[o");
         $this->import('tests/data/importer/invalid-email.csv');
     }
 
     public function testInvalidMembership(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Le membership aux artisans est invalide: foo');
+        $this->expectErrorMessage('A la ligne 1 : Le membership aux artisans est invalide : foo');
         $this->import('tests/data/importer/invalid-membership.csv');
     }
 
     public function testInvalidEmpty(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Il faut soit un email, soit un pattern, mais aucun existe');
+        $this->expectErrorMessage('A la ligne 1 : Il faut soit un email, soit un pattern, mais aucun existe');
         $this->import('tests/data/importer/invalid-empty.csv');
     }
 
     public function testInvalidDuplicatedEmail(): void
     {
-        $this->expectErrorMessage("A la ligne 3: L'email \"foo@example.com\" est dupliqué et a déjà été vu à la ligne 1");
+        $this->expectErrorMessage("A la ligne 3 : L'email \"foo@example.com\" est dupliqué et a déjà été vu à la ligne 1");
         $this->import('tests/data/importer/invalid-duplicated-email.csv');
     }
 
     public function testInvalidReviewNumber(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Un numéro de revue doit être entièrement numérique, mais est: foo');
+        $this->expectErrorMessage('A la ligne 1 : Un numéro de revue doit être entièrement numérique, mais est : foo');
         $this->import('tests/data/importer/invalid-review-number.csv');
     }
 
     public function testInvalidMissingReviewNumber(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Revue introuvable pour le numéro de revue: 123');
+        $this->expectErrorMessage('A la ligne 1 : Revue introuvable pour le numéro de revue : 123');
         $this->import('tests/data/importer/invalid-missing-review-number.csv');
     }
 
     public function testInvalidColumnCount(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Doit avoir exactement 12 colonnes, mais en a 5');
+        $this->expectErrorMessage('A la ligne 1 : Doit avoir exactement 12 colonnes, mais en a 5');
         $this->import('tests/data/importer/invalid-column-count.csv');
     }
 
     public function testInvalidSubscriptionType(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Le subscriptionType est invalide: foo');
+        $this->expectErrorMessage('A la ligne 1 : Le subscriptionType est invalide : foo');
         $this->import('tests/data/importer/invalid-subscription-type.csv');
     }
 
     public function testFuzzyCountry(): void
     {
-        $this->expectErrorMessage('A la ligne 1: Pays "suise" introuvable. Vouliez-vous dire "Suisse" ?');
+        $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "Suisse" ?');
 
         $this->import('tests/data/importer/invalid-country.csv');
     }

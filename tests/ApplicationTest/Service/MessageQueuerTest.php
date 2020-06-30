@@ -58,6 +58,16 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::CONFIRMED_REGISTRATION, 'Nouveau membre');
     }
 
+    public function testQueueUnregister(): void
+    {
+        $unregisteredUser = $this->createMockUser();
+        $admin = $this->createMockUserAdmin();
+        $messageQueuer = $this->createMockMessageQueuer();
+        $message = $messageQueuer->queueUnregister($admin, $unregisteredUser);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::UNREGISTER, 'Démission');
+    }
+
     public function testQueueResetPassword(): void
     {
         $user = $this->createMockUser();

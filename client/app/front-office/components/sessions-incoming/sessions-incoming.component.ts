@@ -3,7 +3,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {forkJoin} from 'rxjs';
 import {SessionService} from '../../../admin/sessions/services/session.service';
-import {SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
+import {
+    Sessions_sessions_items,
+    SessionSortingField,
+    SessionsVariables,
+    SortingOrder,
+} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-sessions-incoming',
@@ -11,109 +16,20 @@ import {SessionSortingField, SessionsVariables, SortingOrder} from '../../../sha
     styleUrls: ['./sessions-incoming.component.scss'],
 })
 export class SessionsIncomingComponent implements OnInit {
-    /**
-     * Regions to display in first step (in mat-select)
-     */
-    public regions: string[] = [];
-
-    /**
-     * List of only next session for each city matching the wanted region
-     */
-    public localities: {name: string; id: string}[] = [];
+    public sessions: Sessions_sessions_items[];
 
     constructor(private sessionService: SessionService, public router: Router, public route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        // Get regions
+        // Get sessions
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
-        const variables: SessionsVariables = {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                region: {group: {}}, // distinct
-                                startDate: {greater: {value: new Date()}},
-                            },
-                        ],
-                    },
-                ],
-            },
+
+        qvm.set('variables', {
+            filter: {groups: [{conditions: [{startDate: {greater: {value: new Date()}}}]}]},
             pagination: {pageIndex: 0, pageSize: 999},
-            sorting: [{field: SessionSortingField.region, order: SortingOrder.ASC}],
-        };
-
-        qvm.set('variables', variables);
-        this.sessionService.getAll(qvm).subscribe(data => (this.regions = data.items.map(i => i.region)));
-
-        this.fetchLocalitiesAndSessions();
-    }
-
-    /**
-     * Get the next (in the future) session
-     */
-    public fetchLocalitiesAndSessions() {
-        const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
-        const localityVariables: SessionsVariables = {
-            filter: {
-                groups: [
-                    {
-                        conditions: [
-                            {
-                                locality: {group: {}}, // distinct
-                                startDate: {greaterOrEqual: {value: new Date()}},
-                            },
-                        ],
-                    },
-                ],
-            },
-            pagination: {pageIndex: 0, pageSize: 999},
-            sorting: [
-                {field: SessionSortingField.locality, order: SortingOrder.ASC},
-                {field: SessionSortingField.startDate, order: SortingOrder.ASC},
-            ],
-        };
-
-        qvm.set('variables', localityVariables);
-
-        this.sessionService.getAll(qvm).subscribe(data => {
-            // Query next session for each locality
-            const observables = data.items.map(session => {
-                const sessionVariables: SessionsVariables = {
-                    filter: {
-                        groups: [
-                            {
-                                conditions: [
-                                    {
-                                        locality: {equal: {value: session.locality}},
-                                        startDate: {greaterOrEqual: {value: new Date()}},
-                                    },
-                                ],
-                            },
-                        ],
-                    },
-                    pagination: {pageIndex: 0, pageSize: 1}, // only the next one
-                    sorting: [{field: SessionSortingField.startDate, order: SortingOrder.ASC}],
-                };
-
-                const localityQvm = new NaturalQueryVariablesManager<SessionsVariables>();
-                localityQvm.set('variables', sessionVariables);
-
-                return this.sessionService.getAll(localityQvm);
-            });
-
-            forkJoin(observables).subscribe(result => {
-                const localities: {name: string; id: string}[] = [];
-
-                result.forEach(sessionsResult => {
-                    const session = sessionsResult.items.length ? sessionsResult.items[0] : null;
-                    if (session) {
-                        localities.push({name: session.locality, id: session.id});
-                    }
-                });
-
-                this.localities = localities;
-            });
+            sorting: [{field: SessionSortingField.name, order: SortingOrder.ASC}],
         });
+
+        this.sessionService.getAll(qvm).subscribe(data => (this.sessions = data.items));
     }
 }

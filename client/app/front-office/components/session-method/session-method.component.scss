@@ -18,6 +18,7 @@
         padding: 0 0 0 10px;
         border-left-width: 5px;
         margin-bottom: 30px;
+        display: inline-block; // prevents columns to break paragraph (from bottom to top of next column)
 
         img {
             float: left;

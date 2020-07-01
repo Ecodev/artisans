@@ -18,7 +18,6 @@ const routes: Routes = [
         path: 'recherche',
         component: ProductsPageComponent,
         data: {
-            breadcrumbs: [],
             title: 'Résultats la recherche',
             showNoResults: true,
             showTagsOnProducts: false,
@@ -30,7 +29,6 @@ const routes: Routes = [
         path: 'articles',
         component: ProductsPageComponent,
         data: {
-            breadcrumbs: [{label: 'La Revue Durable'}],
             showTagsOnProducts: true,
             showTagsNavigation: true,
             viewMode: ProductsViewMode.grid,
@@ -86,7 +84,6 @@ const routes: Routes = [
         path: 'numeros',
         component: ProductsPageComponent,
         data: {
-            breadcrumbs: [{label: 'La Revue Durable'}],
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,

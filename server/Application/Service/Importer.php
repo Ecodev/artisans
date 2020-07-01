@@ -293,8 +293,6 @@ class Importer
         }
 
         $this->throw('Le membership aux artisans est invalide : ' . $membership);
-
-        return MembershipType::NONE;
     }
 
     private function readSubscriptionType(string $subscriptionType): ?string

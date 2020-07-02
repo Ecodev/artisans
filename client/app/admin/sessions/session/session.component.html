@@ -49,6 +49,22 @@
                                     sessions</mat-hint
                                 >
                             </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Date d'envoi de l'appel à contribution</mat-label>
+                                <input
+                                    [matDatepicker]="picker2"
+                                    formControlName="endDate"
+                                    matInput
+                                    (dateChange)="update()"
+                                />
+                                <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-hint
+                                    >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins
+                                    d'administration</mat-hint
+                                >
+                            </mat-form-field>
                         </div>
 
                         <div *ngIf="datesForm" formArrayName="dates">

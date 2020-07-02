@@ -63,7 +63,7 @@ export class SessionPageComponent
 
         this.route.data.subscribe(data => {
             if (data.session) {
-                this.refreshFacilitators(data.session.model);
+                // this.refreshFacilitators(data.session.model);
                 this.refreshOtherSessions(data.session.model);
             }
         });
@@ -72,11 +72,11 @@ export class SessionPageComponent
     /**
      * Get related facilitators
      */
-    private refreshFacilitators(session: Session_session) {
-        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-        qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [session.id]}}}]}]}});
-        this.userService.getAll(qvm).subscribe(result => (this.facilitators = result.items));
-    }
+    // private refreshFacilitators(session: Session_session) {
+    //     const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+    //     qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [session.id]}}}]}]}});
+    //     this.userService.getAll(qvm).subscribe(result => (this.facilitators = result.items));
+    // }
 
     /**
      * Fetch other future sessions (5 max) in same locality

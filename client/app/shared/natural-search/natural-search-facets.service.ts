@@ -256,6 +256,22 @@ export class NaturalSearchFacetsService {
             } as DropdownFacet<TypeNumberConfiguration>,
             this.creationDate,
         ],
+        sessions: [
+            {
+                display: "Date d'appel à contribution",
+                field: 'endDate',
+                component: TypeDateComponent,
+            },
+            {
+                display: 'Facilitateur',
+                field: 'facilitators',
+                component: TypeNaturalSelectComponent,
+                configuration: {
+                    service: this.userService,
+                    placeholder: 'Facilitateur',
+                },
+            },
+        ],
     };
 
     constructor(

@@ -192,7 +192,10 @@ const routes: Routes = [
             {
                 path: 'session', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: SessionsComponent,
-                data: {title: 'Événements'},
+                data: {
+                    title: 'Conversations carbone',
+                    contextColumns: ['name', 'endDate', 'facilitators'],
+                },
             },
             {
                 path: 'session',

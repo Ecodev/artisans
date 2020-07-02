@@ -75,6 +75,15 @@ class Session extends AbstractModel
     private $startDate;
 
     /**
+     * Used for filter + sorting. Represents the first date
+     *
+     * @var Date
+     *
+     * @ORM\Column(type="date")
+     */
+    private $endDate;
+
+    /**
      * @var Collection
      * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
      */
@@ -166,6 +175,16 @@ class Session extends AbstractModel
     public function setStartDate(Date $startDate): void
     {
         $this->startDate = $startDate;
+    }
+
+    public function getEndDate(): Date
+    {
+        return $this->endDate;
+    }
+
+    public function setEndDate(Date $endDate): void
+    {
+        $this->endDate = $endDate;
     }
 
     public function getFacilitators(): Collection

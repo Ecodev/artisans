@@ -7,6 +7,7 @@ import {
     CreateSessionVariables,
     DeleteSessions,
     DeleteSessionsVariables,
+    JoinType,
     Session,
     SessionInput,
     Sessions,
@@ -58,7 +59,22 @@ export class SessionService extends NaturalAbstractModelService<
             availability: '',
             dates: [], // todo
             startDate: null,
+            endDate: null,
             description: '',
+        };
+    }
+
+    public getContextForAll(): Partial<SessionsVariables> {
+        return {
+            filter: {
+                groups: [
+                    {
+                        joins: {
+                            facilitators: {type: JoinType.leftJoin},
+                        },
+                    },
+                ],
+            },
         };
     }
 }

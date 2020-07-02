@@ -20,6 +20,8 @@
                 >
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="startDate">Première date</span>
+                    <span naturalColumnsPickerColumn="endDate">Date d'appel à contribution</span>
+                    <span naturalColumnsPickerColumn="facilitators">Facilitateurs</span>
                     <span naturalColumnsPickerColumn="street">Rue</span>
                     <span naturalColumnsPickerColumn="locality">Ville</span>
                     <span naturalColumnsPickerColumn="region">Canton</span>
@@ -28,7 +30,7 @@
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
-            <table (matSortChange)="sorting($event)" [dataSource]="dataSource" mat-table matSort>
+            <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
@@ -43,9 +45,24 @@
                     </td>
                 </ng-container>
 
+                <ng-container matColumnDef="facilitators">
+                    <th *matHeaderCellDef mat-header-cell>Facilitateurs</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <div *ngFor="let f of element.facilitators" fxLayout="row">
+                            <ngx-avatar [name]="f.name" [gravatarId]="f.email" [size]="36"></ngx-avatar>
+                            <a mat-button [routerLink]="['/admin/user', f.id]">{{ f.name }}</a>
+                        </div>
+                    </td>
+                </ng-container>
+
                 <ng-container matColumnDef="startDate">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
                     <td *matCellDef="let element" mat-cell>{{ element.startDate | date: 'dd.MM.y' }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="endDate">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Date contrib.</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.endDate | date: 'dd.MM.y' }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="street">

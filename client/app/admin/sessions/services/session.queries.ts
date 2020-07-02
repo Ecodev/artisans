@@ -12,8 +12,14 @@ export const sessionMetaFragment = gql`
         availability
         dates
         startDate
+        endDate
         description
         creationDate
+        facilitators {
+            id
+            name
+            email
+        }
         creator {
             ...userMeta
         }

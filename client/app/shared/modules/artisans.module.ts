@@ -36,6 +36,8 @@ import {PriceComponent} from '../components/price/price.component';
 import {ProsemirrorComponent} from '../components/proseMirror/proseMirror.component';
 import {TagsNavigationComponent} from '../components/tags-navigation/tags-navigation.component';
 import {FocusDirective} from '../directives/focus';
+import {StripTagsPipe} from '../pipes/strip-tags.pipe';
+import {TruncatePipe} from '../pipes/truncate.pipe';
 import {MaterialModule} from './material.module';
 
 const iconsConfig: NaturalIconsConfig = {};
@@ -53,6 +55,8 @@ const declarations = [
     PriceComponent,
     BreadcrumbsComponent,
     ProsemirrorComponent,
+    TruncatePipe,
+    StripTagsPipe,
 ];
 
 const imports = [

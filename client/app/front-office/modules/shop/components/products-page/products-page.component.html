@@ -91,7 +91,10 @@
                             </span>
                         </div>
                         <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
-                        <div class="product-name mat-h3" [innerHTML]="product.description"></div>
+                        <div
+                            class="product-name mat-h3"
+                            [innerHTML]="product.description | stripTags | truncate: ['570', '...']"
+                        ></div>
                     </div>
 
                     <div class="product-price" fxLayout="column" fxLayoutGap="15px">

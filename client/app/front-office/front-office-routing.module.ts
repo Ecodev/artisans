@@ -36,9 +36,9 @@ import {SessionsIncomingComponent} from './components/sessions-incoming/sessions
 import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-connaitre/nous-faire-connaitre.component';
 import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
 import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-association/rejoindre-association.component';
-import {PointsDeVenteComponent} from './la-revue-durable/points-de-vente/points-de-vente.component';
-import {ProjetComponent} from './la-revue-durable/projet/projet.component';
-import {FaireUnDonComponent} from './nous-soutenir/faire-un-don/faire-un-don.component';
+import {PointsDeVenteComponent} from './components/points-de-vente/points-de-vente.component';
+import {ProjetComponent} from './components/projet/projet.component';
+import {FaireUnDonComponent} from './components/faire-un-don/faire-un-don.component';
 
 const routes: Routes = [
     {

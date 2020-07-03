@@ -14,6 +14,7 @@ import {
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
+import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
 import {CalculerEmpreinteCarboneComponent} from './components/agir-avec-nous/calculer-empreinte-carbone/calculer-empreinte-carbone.component';
 import {DesinvestirFossileComponent} from './components/agir-avec-nous/desinvestir-fossile/desinvestir-fossile.component';
 import {NumeriqueEthiqueComponent} from './components/agir-avec-nous/numerique-ethique/numerique-ethique.component';
@@ -145,6 +146,10 @@ const routes: Routes = [
             {
                 path: 'desinvestir-industrie-energies-fossiles',
                 component: DesinvestirFossileComponent,
+            },
+            {
+                path: 'rapport-bns',
+                component: BnsComponent,
             },
             {
                 path: 'numerique-ethique',

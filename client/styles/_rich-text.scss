@@ -26,7 +26,7 @@
         color: inherit;
         border-bottom: 2px solid mat-color($primary);
 
-        &:hover {
+        &:not(.mat-button-base):hover {
             color: mat-color($primary);
         }
     }

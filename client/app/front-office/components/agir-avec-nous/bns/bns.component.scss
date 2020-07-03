@@ -1,0 +1,37 @@
+:host {
+    h1.mat-h1 {
+        clear: both;
+        margin-top: 3em;
+    }
+
+    h2.mat-h2 {
+        clear: both;
+        margin-top: 2em;
+    }
+
+    .rich-text > :first-child {
+        margin-top: 0;
+    }
+
+    .cover {
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        height: 150px;
+        display: block;
+    }
+
+    .mat-flat-button {
+        clear: both;
+    }
+
+    #lang-menu {
+        position: sticky;
+        top: 20px;
+    }
+
+    .illustration {
+        max-width: 100%;
+        margin: 30px 0;
+    }
+}

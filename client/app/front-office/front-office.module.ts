@@ -43,6 +43,7 @@ import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-ass
 import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
 import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-connaitre/nous-faire-connaitre.component';
 import {FaireUnDonComponent} from './components/faire-un-don/faire-un-don.component';
+import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
 
 @NgModule({
     declarations: [
@@ -80,6 +81,7 @@ import {FaireUnDonComponent} from './components/faire-un-don/faire-un-don.compon
         OffrirLaRevueComponent,
         NousFaireConnaitreComponent,
         FaireUnDonComponent,
+        BnsComponent,
     ],
     imports: [
         CommonModule,

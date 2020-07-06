@@ -17,8 +17,10 @@
         ul {
             list-style: none;
             position: relative;
+
             li {
                 margin-left: 0;
+
                 &::before {
                     content: '➔';
                     position: absolute;
@@ -46,11 +48,13 @@
 
     .rich-text a,
     a.app-link {
-        color: inherit;
-        border-bottom: 2px solid mat-color($primary);
+        &:not(.mat-button-base):not(.no-style) {
+            color: inherit;
+            border-bottom: 2px solid mat-color($primary);
 
-        &:not(.mat-button-base):hover {
-            color: mat-color($primary);
+            &:hover {
+                color: mat-color($primary);
+            }
         }
     }
 

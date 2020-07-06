@@ -10,6 +10,8 @@ import {
     OrderStatus,
     OrdersVariables,
     OrderVariables,
+    UpdateOrderStatus,
+    UpdateOrderStatusVariables,
 } from '../../../shared/generated-types';
 import {OrderLineService} from './order-lines.service';
 import {createOrder, orderQuery, ordersQuery, updateOrderStatus} from './order.queries';
@@ -42,7 +44,7 @@ export class OrderService extends NaturalAbstractModelService<
 
     public changeStatus(id: string, status: OrderStatus) {
         return this.apollo
-            .mutate({
+            .mutate<UpdateOrderStatus, UpdateOrderStatusVariables>({
                 mutation: updateOrderStatus,
                 variables: {id, status},
             })

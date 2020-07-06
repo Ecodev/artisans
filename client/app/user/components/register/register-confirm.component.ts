@@ -6,6 +6,7 @@ import {pick} from 'lodash';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {NewUserService} from './new-user.service';
 import {RegisterComponent} from './register.component';
+import {ConfirmRegistration, ConfirmRegistrationVariables} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-confirm',
@@ -52,7 +53,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
 
         const input = pick(relationsToIds(this.form.value), fieldWhitelist);
         this.apollo
-            .mutate({
+            .mutate<ConfirmRegistration, ConfirmRegistrationVariables>({
                 mutation: mutation,
                 variables: {
                     token: this.route.snapshot.params.token,

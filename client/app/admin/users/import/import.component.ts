@@ -85,7 +85,7 @@ export class ImportComponent implements OnInit {
                 result => {
                     this.importing = false;
 
-                    this.result = (result.data as Import).import;
+                    this.result = result.data!.import;
                     this.alertService.info(this.result.totalLines + ' lignes importées', 5000);
 
                     const qvm = new NaturalQueryVariablesManager<UsersVariables>();

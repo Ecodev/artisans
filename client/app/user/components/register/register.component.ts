@@ -7,6 +7,8 @@ import {
     CreateUserVariables,
     DeleteUsers,
     DeleteUsersVariables,
+    Register,
+    RegisterVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -71,7 +73,7 @@ export class RegisterComponent
         `;
 
         this.apollo
-            .mutate({
+            .mutate<Register, RegisterVariables>({
                 mutation: mutation,
                 variables: this.form.value,
             })

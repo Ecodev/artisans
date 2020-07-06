@@ -3,7 +3,7 @@ import {Apollo} from 'apollo-angular';
 import {NetworkStatus} from 'apollo-client';
 import {Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {Configuration} from '../../shared/generated-types';
+import {Configuration, UpdateConfiguration, UpdateConfigurationVariables} from '../../shared/generated-types';
 import {configurationQuery, updateConfiguration} from './configuration.queries';
 
 @Injectable({
@@ -35,7 +35,7 @@ export class ConfigurationService {
 
     public set(key: string, value: string): void {
         this.apollo
-            .mutate({
+            .mutate<UpdateConfiguration, UpdateConfigurationVariables>({
                 mutation: updateConfiguration,
                 variables: {key, value},
             })

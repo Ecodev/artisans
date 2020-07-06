@@ -54,7 +54,7 @@ export class NavigationService {
                 .top(offsetTop + 'px')
                 .centerHorizontally(),
             hasBackdrop: true,
-            backdropClass: 'cdk-overlay-transparent-backdrop',
+            // backdropClass: 'cdk-overlay-transparent-backdrop',
         });
 
         // Container

@@ -40,15 +40,34 @@
     }
 
     #head-of-footer {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: stretch;
         height: 300px;
+        background: #4d6e99;
 
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
+        #footer-logo {
+            position: relative;
+            z-index: 2;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            z-index: 0;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+
+            opacity: 0.5;
+            background-image: url('../../assets/images/footer-1_cc_artisansdelatransition.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
 
         & > div {
             width: 100%;
@@ -60,11 +79,11 @@
     }
 
     #newsletter-zone {
-        padding: 20px 0 5px 0;
+        padding: 15px 0 0 0;
     }
 
     #front-office-body {
-        margin-bottom: 100px;
+        margin-bottom: 150px;
     }
 
     #header-top {
@@ -92,7 +111,7 @@
 
     .section-logo {
         max-width: 100%;
-        width: 700px;
+        width: 545px;
         margin-bottom: 15px;
     }
 

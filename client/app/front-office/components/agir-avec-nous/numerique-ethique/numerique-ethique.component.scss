@@ -1,0 +1,6 @@
+@import '../../../../../styles/mixins';
+@include page-with-illustration();
+
+.page-illustration {
+    background-position: right center;
+}

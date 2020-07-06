@@ -52,11 +52,13 @@
         }
 
         #newsletter-zone {
-            background: mat-color($primary, A700);
-            color: mat-color($primary, default-contrast);
+            background: mat-color($accent);
+            color: mat-color($accent, default-contrast);
         }
 
         #footer {
+            background: #e1e1e3;
+
             .mat-form-field,
             .mat-form-field * {
                 color: mat-color($primary, default-contrast) !important;

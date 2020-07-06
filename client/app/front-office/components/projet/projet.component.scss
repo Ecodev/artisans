@@ -1,2 +1,14 @@
 @import '../../../../styles/mixins';
 @include page-with-illustration();
+
+.page-illustration-content {
+    top: -300px;
+    margin-bottom: -250px;
+
+    img {
+        display: block;
+        width: 100% !important;
+        margin-bottom: 5px;
+        height: auto !important;
+    }
+}

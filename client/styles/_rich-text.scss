@@ -14,6 +14,19 @@
             font-weight: bold;
         }
 
+        ul {
+            list-style: none;
+            position: relative;
+            li {
+                margin-left: 0;
+                &::before {
+                    content: '➔';
+                    position: absolute;
+                    left: 0;
+                }
+            }
+        }
+
         h1,
         h2,
         h3 {

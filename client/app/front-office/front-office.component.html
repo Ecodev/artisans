@@ -120,12 +120,10 @@
 
         <!-- THE FOOTER IS HERE -->
         <div id="footer">
-            <div
-                id="head-of-footer"
-                [style.backgroundImage]="'url(assets/images/footer-1_cc_artisansdelatransition.jpg)'"
-            >
+            <div id="head-of-footer">
                 <div class="container">
                     <img
+                        id="footer-logo"
                         alt="logo"
                         class="section-logo"
                         src="assets/logo-artisans-de-la-transition-blanc.svg"
@@ -146,7 +144,7 @@
                 >
                     <div class="mat-h1">Inscrivez-vous à la lettre d'info !</div>
 
-                    <mat-form-field color="accent" id="newsletter-subscription">
+                    <mat-form-field id="newsletter-subscription">
                         <mat-label>Adresse e-mail</mat-label>
                         <input matInput formControlName="email" />
                         <mat-error *ngIf="newsletterForm.controls.email?.errors"
@@ -167,28 +165,21 @@
             <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px" id="footer-body">
                 <div class="mat-h3" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
                     <mat-nav-list fxFlex.gt-sm="33">
-                        <a mat-list-item routerLink="product">L'association</a>
-                        <a mat-list-item routerLink="product-tag">La Revue Durable</a>
-                        <a mat-list-item routerLink="product-tag">Agir avec nous</a>
-                        <a mat-list-item routerLink="product-tag">Abonnements</a>
-                        <a mat-list-item routerLink="product-tag">Faire un don</a>
-                    </mat-nav-list>
-
-                    <mat-nav-list fxFlex.gt-sm="33">
                         <a mat-list-item routerLink="product">Livraison</a>
                         <a mat-list-item routerLink="product-tag">Mentions légales</a>
                         <a mat-list-item routerLink="product-tag">Conditions générales de vente</a>
                         <a mat-list-item routerLink="product-tag">Annonceurs</a>
                     </mat-nav-list>
 
-                    <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px" class="padding">
-                        <div>
-                            <div class="mat-h2 no-margin-bottom">
-                                Association<br />
-                                Artisans de la transition
-                            </div>
-                            <div class="mat-h2">La Revue durable</div>
+                    <div>
+                        <div class="mat-h2 no-margin-bottom">
+                            Association<br />
+                            Artisans de la transition
                         </div>
+                        <div class="mat-h2">La Revue durable</div>
+                    </div>
+
+                    <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px">
                         <div>
                             Rue de Lausanne 23
                             <br />

@@ -1,0 +1,13 @@
+@import '../../../../../styles/mixins';
+@include page-with-illustration();
+
+:host {
+    .page-illustration {
+        height: 400px;
+    }
+
+    #introduction {
+        position: relative;
+        top: -50px;
+    }
+}

@@ -175,3 +175,27 @@ input[type='number'] {
 .mat-flat-button {
     border-radius: 0 !important;
 }
+
+.page-illustration {
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.page-illustration-content {
+    display: none;
+    width: 100%;
+    text-align: left;
+    position: relative;
+    top: -200px;
+
+    & > img {
+        max-width: 100%;
+        margin-bottom: -150px;
+    }
+
+    @media screen and (min-width: 600px) {
+        display: block;
+    }
+}

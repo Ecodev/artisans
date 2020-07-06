@@ -19,6 +19,16 @@
         h3 {
             margin-top: 1.3em;
         }
+
+        img {
+            max-width: 100%;
+            margin: 1em 0;
+        }
+
+        .image-before-title {
+            position: relative;
+            top: 2.5em;
+        }
     }
 
     .rich-text a,

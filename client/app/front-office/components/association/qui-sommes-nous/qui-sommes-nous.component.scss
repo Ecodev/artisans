@@ -11,7 +11,11 @@
 
     .person-data {
         flex: 1;
-        padding: 20px;
+
         align-self: flex-end;
+    }
+
+    img + .person-data {
+        padding: 20px;
     }
 }

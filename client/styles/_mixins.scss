@@ -21,3 +21,13 @@
         }
     }
 }
+
+@mixin page-with-illustration() {
+    :host {
+        margin-top: 0 !important;
+        .page-illustration-content img {
+            width: 300px;
+            height: 300px;
+        }
+    }
+}

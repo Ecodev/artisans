@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {FormAsyncValidators, FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
+import {deliverableEmail, FormAsyncValidators, FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import {DataProxy} from 'apollo-cache';
 import gql from 'graphql-tag';
@@ -96,7 +96,7 @@ export class UserService extends NaturalAbstractModelService<
         return {
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
-            email: [Validators.email],
+            email: [deliverableEmail],
             locality: [Validators.required],
             street: [Validators.required],
             postcode: [Validators.required],

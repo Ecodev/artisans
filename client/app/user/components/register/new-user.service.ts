@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {FormValidators, Literal} from '@ecodev/natural';
+import {deliverableEmail, FormValidators, Literal} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {AnonymousUserService} from './anonymous-user.service';
@@ -26,7 +26,7 @@ export class NewUserService extends AnonymousUserService {
         return {
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
-            email: [Validators.required, Validators.email],
+            email: [Validators.required, deliverableEmail],
             locality: [Validators.required],
             street: [Validators.required],
             postcode: [Validators.required],

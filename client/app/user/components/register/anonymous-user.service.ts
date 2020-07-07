@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {FormValidators, Literal} from '@ecodev/natural';
+import {deliverableEmail, FormValidators, Literal} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import {UserService} from '../../../admin/users/services/user.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -24,7 +24,7 @@ export class AnonymousUserService extends UserService {
 
     public getFormValidators(): FormValidators {
         return {
-            email: [Validators.required, Validators.email],
+            email: [Validators.required, deliverableEmail],
             // termsAgreement: [], // todo : restore ?
         };
     }

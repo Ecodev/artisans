@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {deliverableEmail} from '@ecodev/natural';
 
 @Component({
     selector: 'app-emails',
@@ -18,7 +19,7 @@ export class EmailsComponent {
     constructor(@Inject(MAT_DIALOG_DATA) private dialogData) {
         // Prefill e-mails list with viewer
         const emails: string[] = [dialogData.user ? dialogData.user.email : '', '', ''];
-        this.emailsControl = new FormArray(emails.map(email => new FormControl(email, Validators.email)));
+        this.emailsControl = new FormArray(emails.map(email => new FormControl(email, deliverableEmail)));
         this.form.setControl('emails', this.emailsControl);
     }
 

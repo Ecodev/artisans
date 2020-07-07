@@ -2,7 +2,13 @@ import {DOCUMENT} from '@angular/common';
 import {Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {NaturalAbstractController, NaturalAlertService, NaturalSearchSelections, toUrl} from '@ecodev/natural';
+import {
+    deliverableEmail,
+    NaturalAbstractController,
+    NaturalAlertService,
+    NaturalSearchSelections,
+    toUrl,
+} from '@ecodev/natural';
 import {differenceBy} from 'lodash';
 import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
@@ -217,7 +223,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     ) {
         super();
         this.newsletterForm = fb.group({
-            email: ['', [Validators.required, Validators.email, Validators.maxLength(191)]],
+            email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
         });
 
         // We can have multiple parallel carts

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Emails des bénéficiaires de l'abonnement profesionnel</h2>
+<h2 mat-dialog-title>{{ dialogData.title }}</h2>
 <mat-dialog-content [formGroup]="form">
     <div formArrayName="emails">
         <div
@@ -8,7 +8,7 @@
             fxLayoutGap="15px"
         >
             <mat-form-field fxFlex>
-                <mat-label>Email {{ i }}</mat-label>
+                <mat-label>Email</mat-label>
                 <input [formControl]="control" matInput />
                 <mat-error *ngIf="control.hasError('email')" i18n>Adresse email invalide</mat-error>
             </mat-form-field>

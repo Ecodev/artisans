@@ -47,6 +47,13 @@ class Session extends AbstractModel
      *
      * @ORM\Column(type="string", options={"default" = ""})
      */
+    private $mailingList = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", options={"default" = ""})
+     */
     private $price = '';
 
     /**
@@ -125,6 +132,16 @@ class Session extends AbstractModel
     public function setStreet(string $street): void
     {
         $this->street = $street;
+    }
+
+    public function getMailingList(): string
+    {
+        return $this->mailingList;
+    }
+
+    public function setMailingList(string $mailingList): void
+    {
+        $this->mailingList = $mailingList;
     }
 
     public function getPrice(): string

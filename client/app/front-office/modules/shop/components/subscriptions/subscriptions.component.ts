@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {keyBy} from 'lodash';
 import {ProductType, Subscriptions_subscriptions_items} from '../../../../../shared/generated-types';
-import {Cart} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
@@ -44,7 +43,13 @@ export class SubscriptionsComponent implements OnInit {
             subscribeFn();
         } else {
             const viewer = this.route.snapshot.data.viewer;
-            const dialogData: MatDialogConfig = {data: {user: viewer ? viewer.model : null}};
+
+            const dialogData: MatDialogConfig = {
+                data: {
+                    emails: [viewer ? viewer.model.email : '', '', ''], // prefill with user email if logged in
+                    title: "Emails des bénéficiaires de l'abonnement profesionnel",
+                },
+            };
 
             this.dialog
                 .open(EmailsComponent, dialogData)

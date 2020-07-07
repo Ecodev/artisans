@@ -16,9 +16,8 @@ export class EmailsComponent {
      */
     public readonly emailsControl: FormArray;
 
-    constructor(@Inject(MAT_DIALOG_DATA) private dialogData) {
-        // Prefill e-mails list with viewer
-        const emails: string[] = [dialogData.user ? dialogData.user.email : '', '', ''];
+    constructor(@Inject(MAT_DIALOG_DATA) public dialogData) {
+        const emails: string[] = dialogData.emails ?? [''];
         this.emailsControl = new FormArray(emails.map(email => new FormControl(email, deliverableEmail)));
         this.form.setControl('emails', this.emailsControl);
     }

@@ -42,6 +42,7 @@
                                     matInput
                                     (dateChange)="update()"
                                 />
+                                <mat-error *ngIf="form.get('startDate')?.hasError('required')">Requis</mat-error>
                                 <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                                 <mat-hint
@@ -58,6 +59,7 @@
                                     matInput
                                     (dateChange)="update()"
                                 />
+                                <mat-error *ngIf="form.get('endDate')?.hasError('required')">Requis</mat-error>
                                 <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
                                 <mat-hint
@@ -140,6 +142,28 @@
                         <mat-form-field>
                             <mat-label>Disponibilité</mat-label>
                             <input (change)="update()" formControlName="availability" matInput />
+                        </mat-form-field>
+
+                        <mat-divider class="margin-v"></mat-divider>
+
+                        <h2 class="mat-h2" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex>Inscription infomaniak</div>
+                            <a
+                                mat-stroked-button
+                                href="https://newsletter.infomaniak.com/mailinglists/index"
+                                target="_blank"
+                                >Voir les listes</a
+                            >
+                        </h2>
+
+                        <mat-form-field>
+                            <mat-label>Identifant de la liste de contact</mat-label>
+                            <input (change)="update()" formControlName="mailingList" matInput />
+                            <mat-hint
+                                >Les identifiants apparaissent en chiffres à la fin de la barre d'adresse du navigateur
+                                lorsque l'on se rend sur le détail d'une liste. <br />P.ex
+                                newsletter.infomaniak.com/mailinglists/show/61350</mat-hint
+                            >
                         </mat-form-field>
                     </div>
                 </div>

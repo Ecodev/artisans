@@ -41,6 +41,7 @@ export class SessionService extends NaturalAbstractModelService<
         return {
             name: [Validators.required, Validators.maxLength(100)],
             startDate: [Validators.required],
+            endDate: [Validators.required],
         };
     }
 
@@ -61,6 +62,7 @@ export class SessionService extends NaturalAbstractModelService<
             startDate: null,
             endDate: null,
             description: '',
+            mailingList: '',
         };
     }
 

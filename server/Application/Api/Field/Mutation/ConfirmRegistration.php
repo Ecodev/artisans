@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Organization;
 use Application\Model\User;
 use Application\Repository\OrganizationRepository;
@@ -23,7 +24,7 @@ abstract class ConfirmRegistration implements FieldInterface
         return [
             'name' => 'confirmRegistration',
             'type' => Type::nonNull(Type::boolean()),
-            'description' => 'First step to register as a new user.',
+            'description' => 'Second step to register as a new user.',
             'args' => [
                 'token' => Type::nonNull(_types()->get('Token')),
                 'input' => Type::nonNull(_types()->get('ConfirmRegistrationInput')),
@@ -66,6 +67,7 @@ abstract class ConfirmRegistration implements FieldInterface
                 $organization = $organizationRepository->getBestMatchingOrganization($user->getEmail());
                 if ($organization) {
                     $user->setSubscriptionLastReview($organization->getSubscriptionLastReview());
+                    $user->setSubscriptionType(ProductTypeType::DIGITAL);
                 }
 
                 // Login

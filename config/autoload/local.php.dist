@@ -45,4 +45,6 @@ return [
     'datatrans' => [
         'key' => '', // Used for HMAC-SHA256 request signing: https://api-reference.datatrans.ch/#request-signing
     ],
+    'infomaniak-api' => '',
+    'infomaniak-secret' => '',
 ];

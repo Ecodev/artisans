@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api;
 
+use Application\Api\Field\Mutation\AddToMailingList;
 use Application\Api\Field\Mutation\ConfirmRegistration;
 use Application\Api\Field\Mutation\CreateOrder;
 use Application\Api\Field\Mutation\Import;
@@ -52,6 +53,7 @@ class MutationType extends ObjectType
             RequestMembershipEnd::build(),
             SubscribeNewsletter::build(),
             Import::build(),
+            AddToMailingList::build(),
         ];
 
         $fields = array_merge(

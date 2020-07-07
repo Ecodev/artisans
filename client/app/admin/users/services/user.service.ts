@@ -8,9 +8,10 @@ import gql from 'graphql-tag';
 import {Observable, of, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CartService} from '../../../front-office/modules/cart/services/cart.service';
-import {CurrencyService} from '../../../shared/services/currency.service';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
+    AddToMailingList,
+    AddToMailingListVariables,
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
@@ -23,8 +24,6 @@ import {
     RequestMembershipEnd,
     RequestPasswordReset,
     RequestPasswordResetVariables,
-    SubscribeNewsletter,
-    SubscribeNewsletterVariables,
     Unregister,
     UnregisterVariables,
     UpdateUser,
@@ -39,6 +38,7 @@ import {
     UsersVariables,
     UserVariables,
 } from '../../../shared/generated-types';
+import {CurrencyService} from '../../../shared/services/currency.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {
     createUser,
@@ -273,21 +273,26 @@ export class UserService extends NaturalAbstractModelService<
             .pipe(map(result => result.data!.requestMembershipEnd));
     }
 
-    public subscribeNewsletter(email: string): Observable<SubscribeNewsletter['subscribeNewsletter']> {
+    public subscribeNewsletter(email: string): Observable<AddToMailingList['addToMailingList']> {
+        return this.addToMailingList('55475', email);
+    }
+
+    public addToMailingList(destination: string, email: string): Observable<AddToMailingList['addToMailingList']> {
         const mutation = gql`
-            mutation SubscribeNewsletter($email: Email!) {
-                subscribeNewsletter(email: $email)
+            mutation AddToMailingList($destination: String!, $email: String!) {
+                addToMailingList(destination: $destination, email: $email)
             }
         `;
 
         return this.apollo
-            .mutate<SubscribeNewsletter, SubscribeNewsletterVariables>({
+            .mutate<AddToMailingList, AddToMailingListVariables>({
                 mutation: mutation,
                 variables: {
-                    email,
+                    destination: destination,
+                    email: email,
                 },
             })
-            .pipe(map(result => result.data!.subscribeNewsletter));
+            .pipe(map(result => result.data!.addToMailingList));
     }
 
     protected getDefaultForServer(): UserInput {

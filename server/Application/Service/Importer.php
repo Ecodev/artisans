@@ -57,6 +57,10 @@ class Importer
         $this->seenEmails = [];
         $this->seenPatterns = [];
 
+        if (!file_exists($filename)) {
+            throw new Exception('File not found: ' . $filename);
+        }
+
         $file = fopen($filename, 'rb');
         if ($file === false) {
             throw new Exception('Could not read file: ' . $filename);

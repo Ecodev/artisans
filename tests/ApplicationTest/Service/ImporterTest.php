@@ -12,10 +12,22 @@ class ImporterTest extends TestCase
 {
     use TestWithTransactionAndUser;
 
+    public function testInvalidFilename(): void
+    {
+        $this->expectErrorMessage('File not found: non-existing-filename.csv');
+        $this->import('non-existing-filename.csv');
+    }
+
     public function testInvalidEmail(): void
     {
         $this->expectErrorMessage("A la ligne 1 : Ce n'est pas une addresse email valide : fo[o");
         $this->import('tests/data/importer/invalid-email.csv');
+    }
+
+    public function testInvalidPattern(): void
+    {
+        $this->expectErrorMessage('A la ligne 1 : Ce n\'est pas une expression régulière valide : fo[o');
+        $this->import('tests/data/importer/invalid-pattern.csv');
     }
 
     public function testInvalidMembership(): void
@@ -34,6 +46,12 @@ class ImporterTest extends TestCase
     {
         $this->expectErrorMessage("A la ligne 3 : L'email \"foo@example.com\" est dupliqué et a déjà été vu à la ligne 1");
         $this->import('tests/data/importer/invalid-duplicated-email.csv');
+    }
+
+    public function testInvalidDuplicatedPattern(): void
+    {
+        $this->expectErrorMessage('A la ligne 2 : Le pattern ".*@university.com" est dupliqué et a déjà été vu à la ligne 1');
+        $this->import('tests/data/importer/invalid-duplicated-pattern.csv');
     }
 
     public function testInvalidReviewNumber(): void

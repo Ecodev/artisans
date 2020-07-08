@@ -183,19 +183,6 @@ class Importer
         }
     }
 
-    private function readDate(string $date): ?string
-    {
-        if (!$date) {
-            return null;
-        }
-
-        if (!preg_match('~^\d{4}-\d{2}-\d{2}$~', $date)) {
-            $this->throw('La date devrait avoir le format YYYY-MM-DD, mais est : ' . $date);
-        }
-
-        return $date;
-    }
-
     private function assertEmail(string $email): void
     {
         $validator = new EmailAddress();

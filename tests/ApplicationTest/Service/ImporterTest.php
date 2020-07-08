@@ -177,6 +177,48 @@ class ImporterTest extends TestCase
         $this->assertUser($otherMember);
     }
 
+    public function testImportBothInOneLine(): void
+    {
+        $this->assertShouldDeleteUserCount(0);
+        $actual = $this->import('tests/data/importer/both-in-one-line.csv');
+
+        self::assertArrayHasKey('time', $actual);
+        unset($actual['time']);
+
+        $expected = [
+            'updatedUsers' => 1,
+            'updatedOrganizations' => 1,
+            'deletedOrganizations' => 2,
+            'totalUsers' => 5,
+            'totalOrganizations' => 1,
+            'totalLines' => 1,
+        ];
+        self::assertSame($expected, $actual);
+
+        $this->assertShouldDeleteUserCount(4);
+
+        $this->assertUser([
+            'email' => 'new@example.com',
+            'subscription_type' => 'digital',
+            'subscription_last_review_id' => '3001',
+            'membership' => 'none',
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'street' => 'Main street',
+            'postcode' => '8000',
+            'locality' => 'Zurich',
+            'country_id' => '1',
+            'phone' => '837 28 73',
+            'web_temporary_access' => '0',
+            'password' => '',
+        ]);
+
+        $this->assertOrganization([
+            'pattern' => '.*@university.com',
+            'subscription_last_review_id' => '3001',
+        ]);
+    }
+
     private function assertShouldDeleteUserCount(int $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();

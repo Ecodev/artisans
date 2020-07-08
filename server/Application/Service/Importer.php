@@ -143,9 +143,7 @@ class Importer
                 $phone,
             ] = $line;
 
-            if ($email && $pattern) {
-                $this->throw('Il faut soit un email, soit un pattern, mais les deux existent');
-            } elseif (!$email && !$pattern) {
+            if (!$email && !$pattern) {
                 $this->throw('Il faut soit un email, soit un pattern, mais aucun existe');
             }
 
@@ -170,15 +168,15 @@ class Importer
                     $country,
                     $phone
                 );
-            } elseif ($pattern) {
+            }
+
+            if ($pattern) {
                 $this->assertPattern($pattern);
 
                 $this->updateOrganization(
                     $pattern,
                     $lastReviewId
                 );
-            } else {
-                $this->throw("L'email suivant n'est ni une addresse email valide, ni un expression régulière valide : " . $email);
             }
         }
     }

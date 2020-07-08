@@ -61,19 +61,15 @@ abstract class ConfirmRegistration implements FieldInterface
                 // Active the member
                 $user->initialize();
 
-                // Give user automatic access via organization
-                /** @var OrganizationRepository $organizationRepository */
-                $organizationRepository = _em()->getRepository(Organization::class);
-                $organization = $organizationRepository->getBestMatchingOrganization($user->getEmail());
-                if ($organization) {
-                    $user->setSubscriptionLastReview($organization->getSubscriptionLastReview());
-                    $user->setSubscriptionType(ProductTypeType::DIGITAL);
-                }
-
                 // Login
                 User::setCurrent($user);
 
                 _em()->flush();
+
+                // Give user automatic access via organization
+                /** @var OrganizationRepository $organizationRepository */
+                $organizationRepository = _em()->getRepository(Organization::class);
+                $organizationRepository->applyOrganizationAccesses();
 
                 /** @var UserRepository $repository */
                 $repository = _em()->getRepository(User::class);

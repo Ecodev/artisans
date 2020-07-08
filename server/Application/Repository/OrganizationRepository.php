@@ -4,33 +4,34 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
-use Application\Model\Organization;
-use Application\Model\Product;
-use Doctrine\ORM\Query\ResultSetMappingBuilder;
-
 class OrganizationRepository extends AbstractRepository
 {
     /**
-     * Get the organization that is matching with the most recent review available
+     * Apply the organizations accesses to all users
+     *
+     * - If a user email matches the org pattern and the org access is better, then user will get the org access
+     * - If many organizations match then only the best one is used
      */
-    public function getBestMatchingOrganization(string $email): ?Organization
+    public function applyOrganizationAccesses(): void
     {
-        $rsm = new ResultSetMappingBuilder($this->getEntityManager());
-        $rsm->addRootEntityFromClassMetadata(Organization::class, 'organization');
-        $rsm->addJoinedEntityFromClassMetadata(Product::class, 'product', 'organization', 'subscriptionLastReview', [], ResultSetMappingBuilder::COLUMN_RENAMING_INCREMENT);
+        $connection = $this->getEntityManager()->getConnection();
 
-        $sql = 'SELECT ' . $rsm->generateSelectClause() . ' FROM organization
-INNER JOIN product ON product.id = organization.subscription_last_review_id
-WHERE :email REGEXP pattern
-ORDER BY product.review_number DESC
-LIMIT 1';
+        $sqlUpgrade = <<<STRING
+                UPDATE user
+                INNER JOIN (
+                    SELECT user.email, MAX(product.review_number) AS bestReviewNumber
+                    FROM organization
+                    INNER JOIN product ON organization.subscription_last_review_id = product.id
+                    INNER JOIN user ON user.email REGEXP organization.pattern
+                    GROUP BY user.email
+                ) AS bestMatch ON user.email = bestMatch.email
+                INNER JOIN product AS orgProduct ON orgProduct.review_number = bestMatch.bestReviewNumber
+                LEFT JOIN product AS userProduct ON userProduct.id = user.subscription_last_review_id
+                SET
+                    user.subscription_last_review_id = IF(userProduct.id IS NULL OR orgProduct.review_number > userProduct.review_number, orgProduct.id, userProduct.id),
+                    user.subscription_type = IF(user.subscription_type IN ('paper', 'both'), 'both', 'digital')
+            STRING;
 
-        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
-        $query->setParameters([
-            'email' => $email,
-        ]);
-        $result = $query->getOneOrNullResult();
-
-        return $result;
+        $connection->executeUpdate($sqlUpgrade);
     }
 }

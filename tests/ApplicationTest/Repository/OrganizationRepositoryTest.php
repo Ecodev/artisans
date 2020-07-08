@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Repository;
 
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Organization;
 use Application\Repository\OrganizationRepository;
 
 class OrganizationRepositoryTest extends AbstractRepositoryTest
 {
-    /**
-     * @var OrganizationRepository
-     */
-    private $repository;
+    private OrganizationRepository $repository;
 
     protected function setUp(): void
     {
@@ -20,11 +18,82 @@ class OrganizationRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Organization::class);
     }
 
-    public function testGetBestMatchingOrganization(): void
+    /**
+     * @dataProvider providerApplyOrganizationAccesses
+     */
+    public function testApplyOrganizationAccesses(array $users): void
     {
-        self::assertNull($this->repository->getBestMatchingOrganization('foo@example.com'));
-        self::assertSame(50000, $this->repository->getBestMatchingOrganization('foo@university.com')->getId());
-        self::assertSame(50000, $this->repository->getBestMatchingOrganization('foo@students.university.com')->getId());
-        self::assertSame(50001, $this->repository->getBestMatchingOrganization('foo@teachers.university.com')->getId());
+        // Insert all test users
+        $connection = $this->getEntityManager()->getConnection();
+        foreach ($users as $email => $data) {
+            $user = $data[0];
+            $user['email'] = $email;
+            $connection->delete('user', ['email' => $email]);
+            $connection->insert('user', $user);
+        }
+
+        $this->repository->applyOrganizationAccesses();
+
+        // Assert each user
+        foreach ($users as $email => $data) {
+            $sql = 'SELECT subscription_last_review_id, subscription_type FROM user WHERE user.email = :email';
+            $actual = $connection->fetchAssoc($sql, ['email' => $email]);
+
+            self::assertEquals($data[1], $actual);
+        }
+    }
+
+    public function providerApplyOrganizationAccesses(): array
+    {
+        return [
+            'no matching org, no subscription' => [
+                [
+                    'foo@example.com' => [
+                        ['subscription_last_review_id' => null, 'subscription_type' => null],
+                        ['subscription_last_review_id' => null, 'subscription_type' => null],
+                    ],
+                ],
+            ],
+            'no matching org, with subscription' => [
+                [
+                    'foo@example.com' => [
+                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
+                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
+                    ],
+                ],
+            ],
+            'matching org, no subscription' => [
+                [
+                    'foo@university.com' => [
+                        ['subscription_last_review_id' => null, 'subscription_type' => null],
+                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::DIGITAL],
+                    ],
+                ],
+            ],
+            'matching org, with subscription should upgrade type' => [
+                [
+                    'foo@students.university.com' => [
+                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::PAPER],
+                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::BOTH],
+                    ],
+                ],
+            ],
+            'matching better org, with subscription should upgrade everything' => [
+                [
+                    'foo@teachers.university.com' => [
+                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::PAPER],
+                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::BOTH],
+                    ],
+                ],
+            ],
+            'matching worse org, with subscription should not downgrade' => [
+                [
+                    'foo@university.com' => [
+                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
+                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
+                    ],
+                ],
+            ],
+        ];
     }
 }

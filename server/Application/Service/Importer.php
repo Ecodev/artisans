@@ -6,7 +6,9 @@ namespace Application\Service;
 
 use Application\DBAL\Types\MembershipType;
 use Application\DBAL\Types\ProductTypeType;
+use Application\Model\Organization;
 use Application\Model\User;
+use Application\Repository\OrganizationRepository;
 use Doctrine\DBAL\Connection;
 use Ecodev\Felix\Api\Exception;
 use Laminas\Validator\EmailAddress;
@@ -73,6 +75,12 @@ class Importer
             $this->markToDelete();
             $this->read($file);
             $this->deleteOldOrganizations();
+
+            // Give user automatic access via organization
+            /** @var OrganizationRepository $organizationRepository */
+            $organizationRepository = _em()->getRepository(Organization::class);
+            $organizationRepository->applyOrganizationAccesses();
+
             $this->connection->commit();
         } catch (Throwable $exception) {
             $this->connection->rollBack();

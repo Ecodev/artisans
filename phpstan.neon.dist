@@ -17,7 +17,6 @@ parameters:
         - '~^Parameter \#1 \$wrappedType of static method GraphQL\\Type\\Definition\\Type\:\:nonNull\(\) expects GraphQL\\Type\\Definition\\NullableType, GraphQL\\Type\\Definition\\.* given\.$~'
         - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         - '~^Call to an undefined method Laminas\\View\\Renderer\\RendererInterface\:\:.*\(\)\.$~'
-        - '~^Parameter \#1 \$parameters of method Doctrine\\ORM\\AbstractQuery\:\:setParameters\(\) expects Doctrine\\Common\\Collections\\ArrayCollection&iterable, array\<string, string\> given\.$~'
         -
             message: '~^If condition is always true\.$~'
             path: server/Application/Model/OrderLine.php

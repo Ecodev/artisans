@@ -28,7 +28,6 @@ class OrganizationRepositoryTest extends AbstractRepositoryTest
         foreach ($users as $email => $data) {
             $user = $data[0];
             $user['email'] = $email;
-            $connection->delete('user', ['email' => $email]);
             $connection->insert('user', $user);
         }
 

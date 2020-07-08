@@ -66,6 +66,8 @@ class Importer
             throw new Exception('Could not read file: ' . $filename);
         }
 
+        $this->skipBOM($file);
+
         try {
             $this->connection->beginTransaction();
             $this->markToDelete();
@@ -113,6 +115,17 @@ class Importer
         $this->countryByName = [];
         foreach ($records as $r) {
             $this->countryByName[$r['upper']] = $r;
+        }
+    }
+
+    /**
+     * @param resource $file
+     */
+    private function skipBOM($file): void
+    {
+        // Consume BOM, but if not BOM, rewind to beginning
+        if (fgets($file, 4) !== "\xEF\xBB\xBF") {
+            rewind($file);
         }
     }
 

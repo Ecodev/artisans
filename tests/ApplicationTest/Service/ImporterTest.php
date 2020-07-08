@@ -237,6 +237,27 @@ class ImporterTest extends TestCase
         ]);
     }
 
+    public function testBomIsSkipped(): void
+    {
+        $this->import('tests/data/importer/bom.csv');
+
+        $this->assertUser([
+            'email' => 'bom@example.com',
+            'subscription_type' => null,
+            'subscription_last_review_id' => null,
+            'membership' => 'none',
+            'first_name' => '',
+            'last_name' => '',
+            'street' => '',
+            'postcode' => '',
+            'locality' => '',
+            'country_id' => null,
+            'phone' => '',
+            'web_temporary_access' => '0',
+            'password' => '',
+        ]);
+    }
+
     private function assertShouldDeleteUserCount(int $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();

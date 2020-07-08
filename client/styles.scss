@@ -177,14 +177,18 @@ input[type='number'] {
 }
 
 .page-illustration {
-    height: 300px;
+    display: none;
+    height: 500px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    @media (min-width: 600px) {
+        display: block;
+    }
 }
 
 .page-illustration-content {
-    display: none;
     width: 100%;
     text-align: left;
     position: relative;
@@ -193,9 +197,5 @@ input[type='number'] {
     & > img {
         max-width: 100%;
         margin-bottom: -150px;
-    }
-
-    @media screen and (min-width: 600px) {
-        display: block;
     }
 }

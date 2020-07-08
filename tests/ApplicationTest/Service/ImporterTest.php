@@ -50,7 +50,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidDuplicatedPattern(): void
     {
-        $this->expectErrorMessage('A la ligne 2 : Le pattern ".*@university.com" est dupliqué et a déjà été vu à la ligne 1');
+        $this->expectErrorMessage('A la ligne 2 : Le pattern ".*@university\.com" est dupliqué et a déjà été vu à la ligne 1');
         $this->import('tests/data/importer/invalid-duplicated-pattern.csv');
     }
 
@@ -187,7 +187,7 @@ class ImporterTest extends TestCase
         ]);
 
         $this->assertOrganization([
-            'pattern' => '.*@university.com',
+            'pattern' => '.*@university\.com',
             'subscription_last_review_id' => '3001',
         ]);
 
@@ -232,7 +232,7 @@ class ImporterTest extends TestCase
         ]);
 
         $this->assertOrganization([
-            'pattern' => '.*@university.com',
+            'pattern' => '.*@university\.com',
             'subscription_last_review_id' => '3001',
         ]);
     }

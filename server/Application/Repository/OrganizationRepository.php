@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\DBAL\Types\ProductTypeType;
+
 class OrganizationRepository extends AbstractRepository
 {
     /**
@@ -29,9 +31,15 @@ class OrganizationRepository extends AbstractRepository
                 LEFT JOIN product AS userProduct ON userProduct.id = user.subscription_last_review_id
                 SET
                     user.subscription_last_review_id = IF(userProduct.id IS NULL OR orgProduct.review_number > userProduct.review_number, orgProduct.id, userProduct.id),
-                    user.subscription_type = IF(user.subscription_type IN ('paper', 'both'), 'both', 'digital')
+                    user.subscription_type = IF(user.subscription_type IN (:paper, :both), :both, :digital)
             STRING;
 
-        $connection->executeUpdate($sqlUpgrade);
+        $params = [
+            'paper' => ProductTypeType::PAPER,
+            'both' => ProductTypeType::BOTH,
+            'digital' => ProductTypeType::DIGITAL,
+        ];
+
+        $connection->executeUpdate($sqlUpgrade, $params);
     }
 }

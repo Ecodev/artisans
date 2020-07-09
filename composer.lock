@@ -1325,16 +1325,16 @@
         },
         {
             "name": "ecodev/felix",
-            "version": "2.0.1",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ecodev/felix.git",
-                "reference": "1e501ac47741c429c245fd245866d9e8803034b4"
+                "reference": "c14b50e50d9cb2fbd0f62d837db5fbf0ea14337a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ecodev/felix/zipball/1e501ac47741c429c245fd245866d9e8803034b4",
-                "reference": "1e501ac47741c429c245fd245866d9e8803034b4",
+                "url": "https://api.github.com/repos/Ecodev/felix/zipball/c14b50e50d9cb2fbd0f62d837db5fbf0ea14337a",
+                "reference": "c14b50e50d9cb2fbd0f62d837db5fbf0ea14337a",
                 "shasum": ""
             },
             "require": {
@@ -1359,6 +1359,7 @@
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "@stable",
+                "mikey179/vfsstream": "@stable",
                 "phpstan/phpstan": "@stable",
                 "phpunit/phpunit": "@stable"
             },
@@ -1376,7 +1377,7 @@
                 "MIT"
             ],
             "description": "Various utilities tailored for our ecosystem",
-            "time": "2020-07-08T07:28:59+00:00"
+            "time": "2020-07-09T08:44:40+00:00"
         },
         {
             "name": "ecodev/graphql-doctrine",
@@ -5902,6 +5903,52 @@
                 "psr-7"
             ],
             "time": "2019-12-31T15:48:32+00:00"
+        },
+        {
+            "name": "mikey179/vfsstream",
+            "version": "v1.6.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bovigo/vfsStream.git",
+                "reference": "231c73783ebb7dd9ec77916c10037eff5a2b6efe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bovigo/vfsStream/zipball/231c73783ebb7dd9ec77916c10037eff5a2b6efe",
+                "reference": "231c73783ebb7dd9ec77916c10037eff5a2b6efe",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.5|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "org\\bovigo\\vfs\\": "src/main/php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Frank Kleine",
+                    "homepage": "http://frankkleine.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Virtual file system to mock the real file system in unit tests.",
+            "homepage": "http://vfs.bovigo.org/",
+            "time": "2019-10-30T15:31:00+00:00"
         },
         {
             "name": "myclabs/deep-copy",

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../../admin/products/services/product.service';
-import {ProductType} from '../../../../shared/generated-types';
+import {Product, ProductType} from '../../../../shared/generated-types';
 
 @Component({
     selector: 'app-rejoindre-association',
@@ -10,7 +10,7 @@ import {ProductType} from '../../../../shared/generated-types';
 export class RejoindreAssociationComponent implements OnInit {
     public ProductType = ProductType;
 
-    public membershipProduct;
+    public membershipProduct: Product['product'];
 
     constructor(public productService: ProductService) {}
 

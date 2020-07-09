@@ -22,6 +22,7 @@ import {
 } from '../../../shared/generated-types';
 import {xorValidator} from '../../../shared/validators';
 import {createProduct, deleteProducts, productQuery, productsQuery, updateProduct} from './product.queries';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -72,7 +73,7 @@ export class ProductService extends NaturalAbstractModelService<
         return super.getInput(object);
     }
 
-    public getMembershipProduct() {
+    public getMembershipProduct(): Observable<Product['product']> {
         return this.getOne(ProductService.MEMBERSHIP_FEE_PRODUCT_ID);
     }
 

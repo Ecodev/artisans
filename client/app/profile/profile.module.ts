@@ -8,10 +8,11 @@ import {HistoryComponent} from './components/history/history.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {PurchasesComponent} from './components/purchases/purchases.component';
 import {ProfileRoutingModule} from './profile-routing.module';
+import {ShopModule} from '../front-office/modules/shop/shop.module';
 
 @NgModule({
     declarations: [ProfileComponent, HistoryComponent, PurchasesComponent, AccountComponent],
-    imports: [CommonModule, ProfileRoutingModule, MaterialModule, ArtisansModule, OrderModule],
+    imports: [CommonModule, ProfileRoutingModule, MaterialModule, ArtisansModule, OrderModule, ShopModule],
     exports: [],
 })
 export class ProfileModule {}

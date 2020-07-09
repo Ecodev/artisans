@@ -17,7 +17,7 @@ export class AddToCartComponent implements OnInit {
     /**
      * Button background color
      */
-    @Input() buttonColor: 'primary' | 'accent' | 'warn' = 'primary';
+    @Input() buttonColor: 'primary' | 'accent' | 'warn' | null = 'primary';
 
     /**
      * Product to add to cart

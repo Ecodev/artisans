@@ -34,6 +34,10 @@
                 [buttonColor]="null"
                 label="Payer la cotisation"
             ></app-add-to-cart>
+
+            <a *ngIf="viewer.membership !== Membership.none" mat-flat-button (click)="requestMembershipEnd()"
+                >Arrêter les cotisations</a
+            >
         </div>
     </div>
 </div>

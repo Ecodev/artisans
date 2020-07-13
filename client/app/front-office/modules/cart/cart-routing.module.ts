@@ -11,14 +11,17 @@ const routes: Routes = [
         component: CreateOrderComponent,
         resolve: {viewer: ViewerResolver},
         canActivate: [AuthGuard],
+        data: {seo: {title: 'Panier'}},
     },
     {
         path: '',
         component: CartComponent,
+        data: {seo: {title: 'Panier'}},
     },
     {
         path: ':cartId',
         component: CartComponent,
+        data: {seo: {title: 'Panier'}},
     },
 ];
 

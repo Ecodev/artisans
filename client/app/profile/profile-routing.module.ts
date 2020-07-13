@@ -27,6 +27,7 @@ const routes: Routes = [
                 path: 'commandes',
                 component: HistoryComponent,
                 resolve: {viewer: ViewerResolver},
+                data: {seo: {title: 'Mes commandes'}},
                 children: [
                     {
                         path: ':orderId',
@@ -51,10 +52,12 @@ const routes: Routes = [
                 path: 'donnees-personnelles',
                 component: AccountComponent,
                 resolve: {user: ViewerResolver},
+                data: {seo: {title: 'Données personnelles'}},
             },
             {
                 path: 'articles-achetes',
                 component: PurchasesComponent,
+                data: {seo: {title: 'Articles achetés'}},
             },
         ],
     },

@@ -4,6 +4,7 @@ import {ProductTagByNameResolver} from '../../../admin/product-tags/services/pro
 import {ProductResolver} from '../../../admin/products/services/product.resolver';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {ProductSortingField, ProductsVariables, SortingOrder} from '../../../shared/generated-types';
+import {SEO} from '../../../shared/services/seo.service';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent, ProductsViewMode} from './components/products-page/products-page.component';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
         path: 'recherche',
         component: ProductsPageComponent,
         data: {
+            seo: {title: 'Résultats de la recherche'} as SEO,
             title: 'Résultats la recherche',
             showNoResults: true,
             showTagsOnProducts: false,
@@ -29,6 +31,7 @@ const routes: Routes = [
         path: 'articles',
         component: ProductsPageComponent,
         data: {
+            seo: {title: 'Tous les articles'},
             showTagsOnProducts: true,
             showTagsNavigation: true,
             viewMode: ProductsViewMode.grid,
@@ -52,9 +55,7 @@ const routes: Routes = [
     {
         path: 'articles/:productTagName',
         component: ProductsPageComponent,
-        resolve: {
-            productTag: ProductTagByNameResolver,
-        },
+        resolve: {productTag: ProductTagByNameResolver},
         data: {
             breadcrumbs: [
                 {link: '/larevuedurable', label: 'La Revue Durable'},
@@ -84,6 +85,7 @@ const routes: Routes = [
         path: 'numeros',
         component: ProductsPageComponent,
         data: {
+            seo: {title: 'Tous les numéros'},
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,
@@ -108,9 +110,7 @@ const routes: Routes = [
     {
         path: 'article/:productId',
         component: ProductPageComponent,
-        resolve: {
-            product: ProductResolver,
-        },
+        resolve: {product: ProductResolver},
         data: {
             showTagsOnProducts: true,
             showTagsNavigation: false,
@@ -123,9 +123,7 @@ const routes: Routes = [
     {
         path: 'numero/:productId',
         component: ProductPageComponent,
-        resolve: {
-            product: ProductResolver,
-        },
+        resolve: {product: ProductResolver},
         data: {
             showTagsOnProducts: true,
             showTagsNavigation: false,
@@ -138,9 +136,13 @@ const routes: Routes = [
     {
         path: 'abonnements',
         component: SubscriptionsComponent,
-        data: {breadcrumbs: [{label: 'La Revue Durable'}]},
+        data: {
+            seo: {title: 'Abonnements'},
+            breadcrumbs: [{label: 'La Revue Durable'}],
+        },
     },
 ];
+
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],

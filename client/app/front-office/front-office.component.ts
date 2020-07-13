@@ -14,6 +14,7 @@ import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile_viewer, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
+import {SeoService} from '../shared/services/seo.service';
 import {CartService} from './modules/cart/services/cart.service';
 import {MenuItem, NavigationService} from './services/navigation.service';
 
@@ -220,6 +221,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         @Inject(DOCUMENT) private readonly document: Document,
         fb: FormBuilder,
         private alertService: NaturalAlertService,
+        private seoService: SeoService, // injection required, but works as stand alone
     ) {
         super();
         this.newsletterForm = fb.group({

@@ -31,7 +31,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
         $all = [1000, 1001, 1002, 1003];
 
         return [
-            ['anonymous', []],
+            ['anonymous', [1001]],
             ['member', $all],
             ['facilitator', $all],
             ['administrator', $all],

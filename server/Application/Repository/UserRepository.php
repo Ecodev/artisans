@@ -17,7 +17,9 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
         if (!$user) {
-            return '-1';
+            $facilitator = $this->getEntityManager()->getConnection()->quote(User::ROLE_FACILITATOR);
+
+            return 'SELECT id FROM user WHERE role = ' . $facilitator;
         }
 
         return $this->getAllIdsQuery();

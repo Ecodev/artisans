@@ -317,13 +317,10 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
      * Override parent to prevents users created from administration to be family of the administrator
      *
      * The owner must be explicitly set for all users.
-     *
-     * @ORM\PrePersist
      */
-    public function timestampCreation(): void
+    protected function getOwnerForCreation(): ?self
     {
-        $this->setCreationDate(new Chronos());
-        $this->setCreator(self::getCurrent());
+        return null;
     }
 
     /**

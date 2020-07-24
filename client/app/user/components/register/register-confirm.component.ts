@@ -2,7 +2,7 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {relationsToIds} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {pick} from 'lodash';
+import {pick} from 'lodash-es';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {NewUserService} from './new-user.service';
 import {RegisterComponent} from './register.component';

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Literal} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
-import {isEqual} from 'lodash';
+import {isEqual} from 'lodash-es';
 import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter, skip, take} from 'rxjs/operators';
 import {Permissions, Permissions_permissions, Permissions_permissions_crud} from '../generated-types';

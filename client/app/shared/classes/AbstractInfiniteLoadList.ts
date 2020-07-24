@@ -1,7 +1,7 @@
 import {Injector, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables} from '@ecodev/natural';
-import {defaults, isEqual, pick} from 'lodash';
+import {defaults, isEqual, pick} from 'lodash-es';
 import {takeUntil} from 'rxjs/operators';
 
 export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall extends QueryVariables>

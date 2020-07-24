@@ -9,7 +9,7 @@ import {
     NaturalSearchSelections,
     toUrl,
 } from '@ecodev/natural';
-import {differenceBy} from 'lodash';
+import {differenceBy} from 'lodash-es';
 import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile_viewer, UserRole} from '../shared/generated-types';

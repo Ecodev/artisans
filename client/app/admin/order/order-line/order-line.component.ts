@@ -2,7 +2,7 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NaturalAbstractDetail, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
-import {merge, omit} from 'lodash';
+import {merge, omit} from 'lodash-es';
 import {
     OrderLine,
     OrderLineVariables,

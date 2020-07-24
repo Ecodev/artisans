@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
-import {keyBy} from 'lodash';
+import {keyBy} from 'lodash-es';
 import {ProductType, Subscriptions_subscriptions_items} from '../../../../../shared/generated-types';
 import {CartService} from '../../../cart/services/cart.service';
 import {EmailsComponent} from '../emails/emails.component';

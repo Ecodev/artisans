@@ -51,7 +51,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
             'country',
         ];
 
-        const input = pick(relationsToIds(this.form.value), fieldWhitelist);
+        const input = pick(relationsToIds(this.form.value), fieldWhitelist) as ConfirmRegistrationVariables['input'];
         this.apollo
             .mutate<ConfirmRegistration, ConfirmRegistrationVariables>({
                 mutation: mutation,

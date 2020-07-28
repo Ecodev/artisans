@@ -7,7 +7,7 @@
         <a mat-stroked-button color="primary" (click)="addComment()" [disabled]="publishing">Publier</a>
     </div>
 
-    <div fxLayout="column" fxLayoutGap="30px" *ngIf="dataSource.data?.items?.length">
+    <div fxLayout="column" fxLayoutGap="30px" *ngIf="dataSource?.data?.items?.length">
         <div
             *ngFor="let comment of dataSource.data.items"
             fxLayout="column"
@@ -37,7 +37,7 @@
         </div>
     </div>
 
-    <div *ngIf="!dataSource.data?.items?.length" class="mat-h3">
+    <div *ngIf="!dataSource?.data?.items?.length" class="mat-h3">
         Aucun commentaire
     </div>
 </div>

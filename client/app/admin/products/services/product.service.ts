@@ -57,6 +57,8 @@ export class ProductService extends NaturalAbstractModelService<
 
     public getFormValidators(): FormValidators {
         return {
+            pricePerUnitCHF: [Validators.required],
+            pricePerUnitEUR: [Validators.required],
             code: [Validators.maxLength(25)],
             name: [Validators.required, Validators.maxLength(100)],
         };

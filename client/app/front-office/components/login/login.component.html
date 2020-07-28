@@ -12,7 +12,6 @@
                 <input
                     matInput
                     formControlName="email"
-                    required="required"
                     autofocus
                     autocorrect="off"
                     autocapitalize="off"
@@ -28,7 +27,7 @@
 
             <mat-form-field>
                 <mat-label>Mot de passe</mat-label>
-                <input matInput formControlName="password" required="required" type="password" />
+                <input matInput formControlName="password" type="password" />
                 <mat-error *ngIf="form.get('password')?.hasError('required')" i18n>Requis</mat-error>
             </mat-form-field>
 

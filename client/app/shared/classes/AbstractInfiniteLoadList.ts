@@ -17,7 +17,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
     ngOnInit(): void {
         super.ngOnInit();
 
-        this.dataSource.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        this.dataSource?.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
             if (!result) {
                 return;
             }
@@ -31,7 +31,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
     }
 
     public loadMore() {
-        if (this.dataSource.data) {
+        if (this.dataSource?.data) {
             this.pagination({pageIndex: this.dataSource.data.pageIndex + 1});
         }
     }

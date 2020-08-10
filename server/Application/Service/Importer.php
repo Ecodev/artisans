@@ -152,6 +152,9 @@ class Importer
                 $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
             }
 
+            // un-escape all fields
+            $line = array_map(fn ($r) => html_entity_decode($r), $line);
+
             [
                 $email,
                 $pattern,
@@ -294,7 +297,7 @@ class Importer
             return MembershipType::NONE;
         }
 
-        if ($membership === 'Membre (cotisation pay&#233;e)') {
+        if ($membership === 'Membre (cotisation payée)') {
             return MembershipType::PAYED;
         }
 
@@ -319,7 +322,7 @@ class Importer
             return ProductTypeType::PAPER;
         }
 
-        if ($subscriptionType === 'Papier&#47;web') {
+        if ($subscriptionType === 'Papier/web') {
             return ProductTypeType::BOTH;
         }
 

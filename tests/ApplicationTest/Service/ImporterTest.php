@@ -172,7 +172,7 @@ class ImporterTest extends TestCase
 
         $this->assertUser([
             'email' => 'member@example.com',
-            'subscription_type' => null,
+            'subscription_type' => 'both',
             'subscription_last_review_id' => null,
             'membership' => 'payed',
             'first_name' => 'Roger "Bob"',
@@ -248,6 +248,27 @@ class ImporterTest extends TestCase
             'membership' => 'none',
             'first_name' => '',
             'last_name' => '',
+            'street' => '',
+            'postcode' => '',
+            'locality' => '',
+            'country_id' => null,
+            'phone' => '',
+            'web_temporary_access' => '0',
+            'password' => '',
+        ]);
+    }
+
+    public function testEscapedSequences(): void
+    {
+        $this->import('tests/data/importer/escaped.csv');
+
+        $this->assertUser([
+            'email' => 'escaped@example.com',
+            'subscription_type' => null,
+            'subscription_last_review_id' => null,
+            'membership' => 'none',
+            'first_name' => 'test"test\'test\test',
+            'last_name' => 'test"test\'test\test',
             'street' => '',
             'postcode' => '',
             'locality' => '',

@@ -71,7 +71,7 @@ export class CartService {
         const orderLines: OrderLineInput[] = cart.productLines.map(line => {
             return {
                 product: line.product.id,
-                quantity: line.quantity + '',
+                quantity: line.quantity,
                 type: line.type,
                 isCHF: isCHF,
             };
@@ -81,7 +81,7 @@ export class CartService {
             orderLines.push({
                 subscription: cart.subscription.subscription,
                 type: cart.subscription.type,
-                quantity: '1',
+                quantity: 1,
                 additionalEmails: cart.subscription.emails,
                 isCHF: isCHF,
             });
@@ -90,7 +90,7 @@ export class CartService {
         // Add donation if any
         if (cart.donationAmount) {
             orderLines.push({
-                quantity: '1',
+                quantity: 1,
                 type: ProductType.digital,
                 isCHF: isCHF,
                 pricePerUnit: cart.donationAmount,

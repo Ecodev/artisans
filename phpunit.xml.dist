@@ -8,11 +8,10 @@
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
-
-    <filter>
-        <whitelist>
+    <coverage>
+        <include>
             <!-- Include only our own code for code coverage statistics -->
             <directory>./server</directory>
-        </whitelist>
-    </filter>
+        </include>
+    </coverage>
 </phpunit>

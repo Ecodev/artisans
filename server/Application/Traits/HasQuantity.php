@@ -4,31 +4,32 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 trait HasQuantity
 {
     /**
-     * @var string
+     * @var int
      *
-     * @ORM\Column(type="decimal", precision=10, scale=3, options={"default" = "0.00"})
+     * @ORM\Column(type="smallint",  options={"unsigned" = true, "default" = 0})
      */
-    private $quantity = '0';
+    private $quantity = 0;
 
     /**
-     * Quantity currently in stock
+     * Quantity ordered
      */
-    public function getQuantity(): string
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
     /**
-     * Quantity currently in stock
+     * Quantity ordered
      *
      * @API\Exclude
      */
-    public function setQuantity(string $quantity): void
+    public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
     }

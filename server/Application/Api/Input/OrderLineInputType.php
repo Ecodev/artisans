@@ -17,7 +17,7 @@ class OrderLineInputType extends InputObjectType
             'fields' => function (): array {
                 return [
                     'quantity' => [
-                        'type' => self::nonNull(self::string()),
+                        'type' => self::nonNull(self::int()),
                     ],
                     'type' => [
                         'type' => self::nonNull(_types()->get('ProductType')),

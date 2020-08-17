@@ -48,13 +48,13 @@ return [
                 'balanceEUR' => '0.00',
                 'orderLines' => [
                     [
-                        'quantity' => '250',
+                        'quantity' => 250,
                         'type' => ProductTypeType::DIGITAL,
                         'balanceCHF' => '3750.00',
                         'balanceEUR' => '0.00',
                     ],
                     [
-                        'quantity' => '1',
+                        'quantity' => 1,
                         'type' => ProductTypeType::PAPER,
                         'balanceCHF' => '15.00',
                         'balanceEUR' => '0.00',

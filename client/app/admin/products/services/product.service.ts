@@ -1,6 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
-import {FormAsyncValidators, FormValidators, Literal, NaturalAbstractModelService, unique} from '@ecodev/natural';
+import {
+    FormAsyncValidators,
+    FormValidators,
+    Literal,
+    money,
+    NaturalAbstractModelService,
+    unique,
+} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import {
     CreateProduct,
@@ -57,8 +64,8 @@ export class ProductService extends NaturalAbstractModelService<
 
     public getFormValidators(): FormValidators {
         return {
-            pricePerUnitCHF: [Validators.required],
-            pricePerUnitEUR: [Validators.required],
+            pricePerUnitCHF: [Validators.required, money],
+            pricePerUnitEUR: [Validators.required, money],
             code: [Validators.maxLength(25)],
             name: [Validators.required, Validators.maxLength(100)],
         };

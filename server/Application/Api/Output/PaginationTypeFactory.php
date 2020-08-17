@@ -40,7 +40,7 @@ class PaginationTypeFactory extends \Ecodev\Felix\Api\Output\PaginationTypeFacto
                 'description' => 'The total balance',
             ];
             $fields['totalQuantity'] = [
-                'type' => Type::string(),
+                'type' => Type::int(),
                 'description' => 'The total quantity',
             ];
         } elseif ($class === Order::class) {

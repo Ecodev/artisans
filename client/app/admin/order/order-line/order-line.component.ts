@@ -49,8 +49,6 @@ export class OrderLineComponent
             this.data = merge({model: this.service.getConsolidatedForClient()}, data[key]);
             this.data = merge(this.data, omit(data, [key]));
             this.initForm();
-
-            this.form.get('quantity')?.setValidators(Validators.required);
         });
     }
 }

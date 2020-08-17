@@ -56,7 +56,7 @@ class InvoicerTest extends TestCase
         }
 
         $line = [
-            'quantity' => '100',
+            'quantity' => 100,
             'isCHF' => true,
             'type' => ProductTypeType::DIGITAL,
             'product' => $product,
@@ -78,7 +78,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My product 1',
-                        '100',
+                        100,
                         '27500',
                         '0',
                         true,
@@ -86,7 +86,7 @@ class InvoicerTest extends TestCase
                     ],
                     [
                         'My product 2',
-                        '1',
+                        1,
                         '20000',
                         '0',
                         true,
@@ -104,7 +104,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My negative product',
-                        '100',
+                        100,
                         '-1000000',
                         '0',
                         true,
@@ -112,7 +112,7 @@ class InvoicerTest extends TestCase
                     ],
                     [
                         'My product 2',
-                        '1',
+                        1,
                         '20000',
                         '0',
                         true,
@@ -130,7 +130,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My positive product',
-                        '100',
+                        100,
                         '1000000',
                         '0',
                         true,
@@ -149,7 +149,7 @@ class InvoicerTest extends TestCase
                     'paymentMethod' => PaymentMethodType::BVR,
                     'orderLines' => [
                         [
-                            'quantity' => '1',
+                            'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
                             'product' => [
@@ -164,7 +164,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My product',
-                        '1',
+                        1,
                         '0',
                         '0',
                         true,
@@ -177,7 +177,7 @@ class InvoicerTest extends TestCase
                     'paymentMethod' => PaymentMethodType::BVR,
                     'orderLines' => [
                         [
-                            'quantity' => '3.100',
+                            'quantity' => 3,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
                             'product' => [
@@ -188,7 +188,7 @@ class InvoicerTest extends TestCase
                             'additionalEmails' => [],
                         ],
                         [
-                            'quantity' => '1',
+                            'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
                             'product' => [
@@ -203,15 +203,15 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My product 1',
-                        '3.100',
-                        '853',
+                        3,
+                        '825',
                         '0',
                         true,
                         ProductTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
-                        '1',
+                        1,
                         '20000',
                         '0',
                         true,
@@ -224,7 +224,7 @@ class InvoicerTest extends TestCase
                     'paymentMethod' => PaymentMethodType::BVR,
                     'orderLines' => [
                         [
-                            'quantity' => '3.100',
+                            'quantity' => 3,
                             'isCHF' => false,
                             'type' => ProductTypeType::DIGITAL,
                             'product' => [
@@ -235,7 +235,7 @@ class InvoicerTest extends TestCase
                             'additionalEmails' => [],
                         ],
                         [
-                            'quantity' => '1',
+                            'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::PAPER,
                             'product' => [
@@ -250,15 +250,15 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My product 1',
-                        '3.100',
+                        3,
                         '0',
-                        '868',
+                        '840',
                         false,
                         ProductTypeType::DIGITAL,
                     ],
                     [
                         'My product 2',
-                        '1',
+                        1,
                         '20000',
                         '0',
                         true,
@@ -271,7 +271,7 @@ class InvoicerTest extends TestCase
                     'paymentMethod' => PaymentMethodType::BVR,
                     'orderLines' => [
                         [
-                            'quantity' => '1',
+                            'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
                             'product' => [
@@ -286,7 +286,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My product',
-                        '1',
+                        1,
                         '-10000',
                         '0',
                         true,
@@ -299,7 +299,7 @@ class InvoicerTest extends TestCase
                     'paymentMethod' => PaymentMethodType::BVR,
                     'orderLines' => [
                         [
-                            'quantity' => '1',
+                            'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
                             'subscription' => [
@@ -315,7 +315,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'My subscription',
-                        '1',
+                        1,
                         '10000',
                         '0',
                         true,
@@ -328,7 +328,7 @@ class InvoicerTest extends TestCase
                     'paymentMethod' => PaymentMethodType::BVR,
                     'orderLines' => [
                         [
-                            'quantity' => '1',
+                            'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
                             'pricePerUnit' => 100,
@@ -339,7 +339,7 @@ class InvoicerTest extends TestCase
                 [
                     [
                         'Don',
-                        '1',
+                        1,
                         '10000',
                         '0',
                         true,

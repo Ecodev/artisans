@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
-import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {FormValidators, integer, Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import {
     OrderLine,
@@ -40,7 +40,7 @@ export class OrderLineService extends NaturalAbstractModelService<
 
     public getFormValidators(): FormValidators {
         return {
-            quantity: [Validators.required, Validators.min(0)],
+            quantity: [Validators.required, integer],
         };
     }
 
@@ -49,7 +49,7 @@ export class OrderLineService extends NaturalAbstractModelService<
             product: null,
             subscription: null,
             pricePerUnit: null,
-            quantity: '0',
+            quantity: 0,
             isCHF: true,
             type: ProductType.digital,
             additionalEmails: [],

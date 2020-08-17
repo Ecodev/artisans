@@ -47,7 +47,7 @@ return [
                 'balanceEUR' => '0.00',
                 'orderLines' => [
                     [
-                        'quantity' => '1',
+                        'quantity' => 1,
                         'type' => ProductTypeType::BOTH,
                         'balanceCHF' => '185.00',
                         'balanceEUR' => '0.00',

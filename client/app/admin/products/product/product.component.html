@@ -61,11 +61,11 @@
                     <div fxFlex="33" fxLayout="column" fxLayoutGap="20px">
                         <div fxLayout="column" class="margin-bottom" fxLayoutGap="20px">
                             <mat-slide-toggle (change)="update()" formControlName="isActive"
-                                >Disponible à la vente</mat-slide-toggle
-                            >
+                                >Disponible à la vente
+                            </mat-slide-toggle>
                             <mat-slide-toggle (change)="update()" formControlName="isHighlighted"
-                                >Mettre en avant</mat-slide-toggle
-                            >
+                                >Mettre en avant
+                            </mat-slide-toggle>
                         </div>
 
                         <natural-select-enum
@@ -142,6 +142,9 @@
                             />
                             <div matSuffix>CHF</div>
                             <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('money')"
+                                >Le montant doit être un nombre avec un maximum de deux décimales
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field>
@@ -155,6 +158,9 @@
                             />
                             <div matSuffix>EUR</div>
                             <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('required')">Requis</mat-error>
+                            <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('money')"
+                                >Le montant doit être un nombre avec un maximum de deux décimales
+                            </mat-error>
                         </mat-form-field>
 
                         <mat-form-field class="margin-top">

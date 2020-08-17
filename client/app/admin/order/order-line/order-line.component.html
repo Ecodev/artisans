@@ -29,6 +29,7 @@
                 <mat-label>Quantité</mat-label>
                 <input formControlName="quantity" matInput min="0" step="1" type="number" />
                 <mat-error *ngIf="form.get('quantity')?.hasError('required')">Requis</mat-error>
+                <mat-error *ngIf="form.get('quantity')?.hasError('integer')">Doit être un nombre entier</mat-error>
             </mat-form-field>
 
             <!-- Show only for products -->
@@ -38,6 +39,8 @@
                 enumName="ProductType"
                 placeholder="Type"
             ></natural-select-enum>
+            <pre>{{ form.controls.quantity.value | json }}</pre>
+            <pre>{{ form.controls.quantity.errors | json }}</pre>
         </div>
     </div>
 </mat-dialog-content>

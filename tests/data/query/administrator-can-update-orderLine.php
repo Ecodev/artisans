@@ -24,7 +24,7 @@ return [
         'variables' => [
             'input' => [
                 'product' => 3001,
-                'quantity' => '20',
+                'quantity' => 20,
                 'isCHF' => true,
                 'type' => ProductTypeType::DIGITAL,
             ],
@@ -36,7 +36,7 @@ return [
                 'product' => [
                     'id' => '3001',
                 ],
-                'quantity' => '20.000',
+                'quantity' => 20,
                 'balanceCHF' => '300.00',
                 'balanceEUR' => '0.00',
                 'type' => ProductTypeType::DIGITAL,

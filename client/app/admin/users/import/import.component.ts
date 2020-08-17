@@ -4,13 +4,7 @@ import {NaturalAlertService, NaturalQueryVariablesManager, toUrl} from '@ecodev/
 import {Apollo} from 'apollo-angular';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
-import {
-    Import,
-    ImportVariables,
-    UserFilterGroupCondition,
-    Users_users_items,
-    UsersVariables,
-} from '../../../shared/generated-types';
+import {Import, ImportVariables, Users_users_items, UsersVariables} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 
 @Component({

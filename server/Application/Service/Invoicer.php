@@ -68,7 +68,7 @@ class Invoicer
         return $order;
     }
 
-    private function createOrderLine(Order $order, ?AbstractProduct $product, Money $pricePerUnit, string $quantity, bool $isCHF, string $type, array $additionalEmails): OrderLine
+    private function createOrderLine(Order $order, ?AbstractProduct $product, Money $pricePerUnit, int $quantity, bool $isCHF, string $type, array $additionalEmails): OrderLine
     {
         $orderLine = new OrderLine();
         $this->entityManager->persist($orderLine);
@@ -135,7 +135,7 @@ class Invoicer
         });
     }
 
-    private function updateOrderLine(OrderLine $orderLine, ?AbstractProduct $product, Money $pricePerUnit, string $quantity, bool $isCHF, string $type, array $additionalEmails): void
+    private function updateOrderLine(OrderLine $orderLine, ?AbstractProduct $product, Money $pricePerUnit, int $quantity, bool $isCHF, string $type, array $additionalEmails): void
     {
         if ($isCHF) {
             $balanceCHF = $pricePerUnit->multiply($quantity);

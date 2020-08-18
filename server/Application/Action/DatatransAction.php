@@ -6,6 +6,7 @@ namespace Application\Action;
 
 use Application\Model\Order;
 use Application\Model\User;
+use Application\Repository\LogRepository;
 use Application\Repository\OrderRepository;
 use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
@@ -65,8 +66,10 @@ class DatatransAction extends AbstractAction
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $request->getMethod();
         $body = $request->getParsedBody();
+        $extraToLog = is_array($body) ? $body : ['rawBody' => $request->getBody()->getContents()];
+
+        _log()->info(LogRepository::DATATRANS_WEBHOOK_BEGIN, $extraToLog);
 
         try {
             if (!is_array($body)) {
@@ -86,6 +89,8 @@ class DatatransAction extends AbstractAction
         $viewModel = [
             'message' => $message,
         ];
+
+        _log()->info(LogRepository::DATATRANS_WEBHOOK_END, $message);
 
         return new HtmlResponse($this->template->render('app::datatrans', $viewModel));
     }

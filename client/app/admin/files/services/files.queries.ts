@@ -6,7 +6,7 @@ export const createFileMutation = gql`
         createFile(input: $input) {
             id
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

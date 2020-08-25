@@ -28,11 +28,11 @@ export const eventQuery = gql`
             creationDate
             date
             creator {
-                ...userMeta
+                ...UserMeta
             }
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
             permissions {
                 update
@@ -49,7 +49,7 @@ export const createEvent = gql`
             id
             creationDate
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -61,7 +61,7 @@ export const updateEvent = gql`
         updateEvent(id: $id, input: $input) {
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

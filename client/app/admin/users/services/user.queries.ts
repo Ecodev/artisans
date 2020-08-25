@@ -3,7 +3,7 @@ import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fra
 
 // Fragment for single display usage. Too much data for listings, and unused fields for mutations.
 export const userFieldsFragment = gql`
-    fragment userFields on User {
+    fragment UserFields on User {
         id
         email
         firstName
@@ -35,11 +35,11 @@ export const userFieldsFragment = gql`
         }
         creationDate
         creator {
-            ...userMeta
+            ...UserMeta
         }
         updateDate
         updater {
-            ...userMeta
+            ...UserMeta
         }
     }
 `;
@@ -79,9 +79,9 @@ export const emailUsersQuery = gql`
 export const userQuery = gql`
     query User($id: UserID!) {
         user(id: $id) {
-            ...userFields
+            ...UserFields
             permissions {
-                ...permissions
+                ...PermissionsRUD
             }
         }
     }
@@ -93,7 +93,7 @@ export const userQuery = gql`
 export const userByTokenQuery = gql`
     query UserByToken($token: Token!) {
         userByToken(token: $token) {
-            ...userFields
+            ...UserFields
         }
     }
     ${userFieldsFragment}
@@ -107,7 +107,7 @@ export const updateUser = gql`
             name
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -126,7 +126,7 @@ export const createUser = gql`
             id
             name
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -142,7 +142,7 @@ export const logoutMutation = gql`
 export const loginMutation = gql`
     mutation Login($email: Email!, $password: String!) {
         login(email: $email, password: $password) {
-            ...userFields
+            ...UserFields
         }
     }
     ${userFieldsFragment}
@@ -152,7 +152,7 @@ export const loginMutation = gql`
 export const currentUserForProfileQuery = gql`
     query CurrentUserForProfile {
         viewer {
-            ...userFields
+            ...UserFields
         }
     }
     ${userFieldsFragment}

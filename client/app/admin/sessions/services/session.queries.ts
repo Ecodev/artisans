@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const sessionMetaFragment = gql`
-    fragment sessionMeta on Session {
+    fragment SessionMeta on Session {
         id
         name
         street
@@ -22,11 +22,11 @@ export const sessionMetaFragment = gql`
             email
         }
         creator {
-            ...userMeta
+            ...UserMeta
         }
         updateDate
         updater {
-            ...userMeta
+            ...UserMeta
         }
     }
     ${userMetaFragment}
@@ -36,7 +36,7 @@ export const sessionsQuery = gql`
     query Sessions($filter: SessionFilter, $sorting: [SessionSorting!], $pagination: PaginationInput) {
         sessions(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
-                ...sessionMeta
+                ...SessionMeta
             }
             pageSize
             pageIndex
@@ -49,9 +49,9 @@ export const sessionsQuery = gql`
 export const sessionQuery = gql`
     query Session($id: SessionID!) {
         session(id: $id) {
-            ...sessionMeta
+            ...SessionMeta
             permissions {
-                ...permissions
+                ...PermissionsRUD
             }
         }
     }
@@ -64,7 +64,7 @@ export const createSession = gql`
         createSession(input: $input) {
             id
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -77,7 +77,7 @@ export const updateSession = gql`
             id
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

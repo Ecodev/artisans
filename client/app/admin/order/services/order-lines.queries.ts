@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const orderLineMetaFragment = gql`
-    fragment orderLineMeta on OrderLine {
+    fragment OrderLineMeta on OrderLine {
         id
         name
         order {
@@ -32,12 +32,12 @@ export const orderLinesQuery = gql`
     query OrderLines($filter: OrderLineFilter, $sorting: [OrderLineSorting!], $pagination: PaginationInput) {
         orderLines(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
-                ...orderLineMeta
+                ...OrderLineMeta
                 permissions {
-                    ...permissions
+                    ...PermissionsRUD
                 }
                 owner {
-                    ...userMeta
+                    ...UserMeta
                 }
             }
             pageSize
@@ -57,17 +57,17 @@ export const orderLineQuery = gql`
     query OrderLine($id: OrderLineID!) {
         orderLine(id: $id) {
             id
-            ...orderLineMeta
+            ...OrderLineMeta
             creationDate
             creator {
-                ...userMeta
+                ...UserMeta
             }
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
             permissions {
-                ...permissions
+                ...PermissionsRUD
             }
         }
     }
@@ -79,10 +79,10 @@ export const orderLineQuery = gql`
 export const updateOrderLine = gql`
     mutation UpdateOrderLine($id: OrderLineID!, $input: OrderLineInput!) {
         updateOrderLine(id: $id, input: $input) {
-            ...orderLineMeta
+            ...OrderLineMeta
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

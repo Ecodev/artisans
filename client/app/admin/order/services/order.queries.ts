@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const orderMetaFragment = gql`
-    fragment orderMeta on Order {
+    fragment OrderMeta on Order {
         id
         balanceCHF
         balanceEUR
@@ -12,7 +12,7 @@ export const orderMetaFragment = gql`
             id
         }
         owner {
-            ...userMeta
+            ...UserMeta
         }
     }
     ${userMetaFragment}
@@ -22,7 +22,7 @@ export const ordersQuery = gql`
     query Orders($filter: OrderFilter, $sorting: [OrderSorting!], $pagination: PaginationInput) {
         orders(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
-                ...orderMeta
+                ...OrderMeta
             }
             pageSize
             pageIndex
@@ -38,17 +38,17 @@ export const orderQuery = gql`
     query Order($id: OrderID!) {
         order(id: $id) {
             id
-            ...orderMeta
+            ...OrderMeta
             creationDate
             creator {
-                ...userMeta
+                ...UserMeta
             }
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
             permissions {
-                ...permissions
+                ...PermissionsRUD
             }
         }
     }
@@ -62,7 +62,7 @@ export const createOrder = gql`
         createOrder(input: $input) {
             id
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -75,7 +75,7 @@ export const updateOrderStatus = gql`
             id
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

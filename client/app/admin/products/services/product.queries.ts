@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const productMetaFragment = gql`
-    fragment productMeta on Product {
+    fragment ProductMeta on Product {
         id
         name
         description
@@ -32,11 +32,11 @@ export const productMetaFragment = gql`
         }
         creationDate
         creator {
-            ...userMeta
+            ...UserMeta
         }
         updateDate
         updater {
-            ...userMeta
+            ...UserMeta
         }
     }
     ${userMetaFragment}
@@ -46,7 +46,7 @@ export const productsQuery = gql`
     query Products($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {
         products(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
-                ...productMeta
+                ...ProductMeta
             }
             pageSize
             pageIndex
@@ -61,7 +61,7 @@ export const productsQuery = gql`
 export const productQuery = gql`
     query Product($id: ProductID!) {
         product(id: $id) {
-            ...productMeta
+            ...ProductMeta
             content
             review {
                 id
@@ -73,7 +73,7 @@ export const productQuery = gql`
                 releaseDate
             }
             permissions {
-                ...permissions
+                ...PermissionsRUD
             }
         }
     }
@@ -86,7 +86,7 @@ export const createProduct = gql`
         createProduct(input: $input) {
             id
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -99,7 +99,7 @@ export const updateProduct = gql`
             id
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

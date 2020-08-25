@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 const commentMetaFragment = gql`
-    fragment commentMeta on Comment {
+    fragment CommentMeta on Comment {
         id
         description
         authorName
@@ -15,15 +15,15 @@ const commentMetaFragment = gql`
             name
         }
         creator {
-            ...userMeta
+            ...UserMeta
         }
         creationDate
         updateDate
         updater {
-            ...userMeta
+            ...UserMeta
         }
         permissions {
-            ...permissions
+            ...PermissionsRUD
         }
     }
     ${userMetaFragment}
@@ -34,7 +34,7 @@ export const commentsQuery = gql`
     query Comments($filter: CommentFilter, $sorting: [CommentSorting!], $pagination: PaginationInput) {
         comments(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
-                ...commentMeta
+                ...CommentMeta
             }
             pageSize
             pageIndex
@@ -47,7 +47,7 @@ export const commentsQuery = gql`
 export const commentQuery = gql`
     query Comment($id: CommentID!) {
         comment(id: $id) {
-            ...commentMeta
+            ...CommentMeta
             permissions {
                 update
                 delete
@@ -63,7 +63,7 @@ export const createComment = gql`
             id
             creationDate
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -75,7 +75,7 @@ export const updateComment = gql`
         updateComment(id: $id, input: $input) {
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

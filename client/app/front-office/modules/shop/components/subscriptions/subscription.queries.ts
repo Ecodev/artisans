@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import {permissionsFragment, userMetaFragment} from '../../../../../shared/queries/fragments';
 
 export const subscriptionMetaFragment = gql`
-    fragment subscriptionMeta on Subscription {
+    fragment SubscriptionMeta on Subscription {
         id
         name
         description
@@ -17,11 +17,11 @@ export const subscriptionMetaFragment = gql`
         }
         creationDate
         creator {
-            ...userMeta
+            ...UserMeta
         }
         updateDate
         updater {
-            ...userMeta
+            ...UserMeta
         }
     }
     ${userMetaFragment}
@@ -31,7 +31,7 @@ export const subscriptionsQuery = gql`
     query Subscriptions($filter: SubscriptionFilter, $sorting: [SubscriptionSorting!], $pagination: PaginationInput) {
         subscriptions(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
-                ...subscriptionMeta
+                ...SubscriptionMeta
             }
             pageSize
             pageIndex
@@ -44,9 +44,9 @@ export const subscriptionsQuery = gql`
 export const subscriptionQuery = gql`
     query Subscription($id: SubscriptionID!) {
         subscription(id: $id) {
-            ...subscriptionMeta
+            ...SubscriptionMeta
             permissions {
-                ...permissions
+                ...PermissionsRUD
             }
         }
     }
@@ -59,7 +59,7 @@ export const createSubscription = gql`
         createSubscription(input: $input) {
             id
             creator {
-                ...userMeta
+                ...UserMeta
             }
         }
     }
@@ -72,7 +72,7 @@ export const updateSubscription = gql`
             id
             updateDate
             updater {
-                ...userMeta
+                ...UserMeta
             }
         }
     }

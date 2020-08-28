@@ -283,7 +283,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     public subscribeNewsletter(): void {
-        if (this.newsletterForm.invalid) {
+        if (!this.newsletterForm.valid) {
             return;
         }
 

@@ -152,11 +152,7 @@
                         >
                     </mat-form-field>
 
-                    <button
-                        mat-flat-button
-                        *ngIf="!(newsletterForm.disabled || newsletterForm.invalid)"
-                        (click)="subscribeNewsletter()"
-                    >
+                    <button mat-flat-button *ngIf="newsletterForm.valid" (click)="subscribeNewsletter()">
                         S'inscrire
                     </button>
                 </form>

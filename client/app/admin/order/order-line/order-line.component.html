@@ -45,7 +45,7 @@
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
     <button mat-button mat-dialog-close>Fermer</button>
 
-    <button (click)="update(true)" [disabled]="form.invalid" color="primary" mat-dialog-close mat-flat-button>
+    <button (click)="update(true)" [disabled]="!form.valid" color="primary" mat-dialog-close mat-flat-button>
         Mettre à jour
     </button>
 </mat-dialog-actions>

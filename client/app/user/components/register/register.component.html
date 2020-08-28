@@ -56,12 +56,7 @@
         <div></div>
 
         <div fxLayout="row" fxLayoutAlign="center">
-            <button
-                (click)="submit()"
-                [color]="form.invalid ? 'warn' : 'primary'"
-                [disabled]="sending"
-                mat-raised-button
-            >
+            <button (click)="submit()" [color]="form.valid ? 'primary' : 'warn'" [disabled]="sending" mat-raised-button>
                 Créer votre compte
             </button>
         </div>

@@ -71,7 +71,7 @@
             <div class="mat-display-1">{{ cart.totalTaxInc | currency: currencyService.current.value }}</div>
         </div>
 
-        <button (click)="createOrder()" [disabled]="billingForm.invalid || shippingForm.invalid" mat-flat-button>
+        <button (click)="createOrder()" [disabled]="!billingForm.valid || !shippingForm.valid" mat-flat-button>
             Terminer la commande
         </button>
     </div>

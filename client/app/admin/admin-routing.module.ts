@@ -194,7 +194,7 @@ const routes: Routes = [
                 component: SessionsComponent,
                 data: {
                     title: 'Conversations carbone',
-                    contextColumns: ['name', 'endDate', 'facilitators'],
+                    initialColumns: ['name', 'endDate', 'facilitators'],
                 },
             },
             {

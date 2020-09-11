@@ -15,7 +15,7 @@ import {OrderService} from '../services/order.service';
     styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnInit {
-    public contextVariables: OrderLinesVariables;
+    public forcedVariables: OrderLinesVariables;
 
     /**
      * Preserves usual model that extends AbstractDetail where main object in stored in data.model
@@ -45,7 +45,7 @@ export class OrderComponent implements OnInit {
         this.data = dialogData.activatedRoute.snapshot.data.order;
 
         // Filter productLines for this current order
-        this.contextVariables = {filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]}};
+        this.forcedVariables = {filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]}};
     }
 
     public ngOnInit(): void {}

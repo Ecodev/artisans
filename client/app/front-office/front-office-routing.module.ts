@@ -50,7 +50,7 @@ const routes: Routes = [
         component: EventsPageComponent,
         data: {
             seo: {title: 'Agenda'} as SEO,
-            contextVariables: {
+            forcedVariables: {
                 filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: new Date()}}}]}]},
                 sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
             } as EventsVariables,
@@ -66,7 +66,7 @@ const routes: Routes = [
         component: NewsesPageComponent,
         data: {
             seo: {title: 'Actualités'} as SEO,
-            contextVariables: {
+            forcedVariables: {
                 filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
                 sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
             } as NewsesVariables,

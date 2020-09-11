@@ -12,8 +12,8 @@
 
 <mat-dialog-content fxLayout="column" fxLayoutGap="30px">
     <app-order-lines
-        [contextColumns]="['name', 'quantity', 'balance']"
-        [contextVariables]="contextVariables"
+        [initialColumns]="['name', 'quantity', 'balance']"
+        [forcedVariables]="forcedVariables"
         [hideHeader]="true"
         [hidePaginator]="true"
         [pageSizeOptions]="[999]"

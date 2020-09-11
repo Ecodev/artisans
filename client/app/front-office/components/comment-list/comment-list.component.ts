@@ -49,13 +49,13 @@ export class CommentListComponent extends NaturalAbstractList<Comments['comments
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.event) {
-            this.variablesManager.set('context', {
+            this.variablesManager.set('partial-variables', {
                 filter: {groups: [{conditions: [{event: {in: {values: [this.event.id]}}}]}]},
             });
         }
 
         if (this.news) {
-            this.variablesManager.set('context', {
+            this.variablesManager.set('partial-variables', {
                 filter: {groups: [{conditions: [{news: {in: {values: [this.news.id]}}}]}]},
             });
         }

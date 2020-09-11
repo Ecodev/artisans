@@ -66,7 +66,7 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public getContextForAll(): Partial<SessionsVariables> {
+    public getPartialVariablesForAll(): Partial<SessionsVariables> {
         return {
             filter: {
                 groups: [

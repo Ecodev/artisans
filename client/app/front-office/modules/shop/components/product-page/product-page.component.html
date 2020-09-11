@@ -219,7 +219,7 @@
     <div [fxShow]="relatedProducts?.dataSource?.data?.length">
         <div class="mat-title">Pour continuer votre lecture ...</div>
         <app-products-page
-            [contextVariables]="{
+            [forcedVariables]="{
                 filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}
             }"
             [highlightFirstItems]="false"

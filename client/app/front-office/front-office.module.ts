@@ -6,6 +6,7 @@ import {ProfileModule} from '../profile/profile.module';
 import {ArtisansModule} from '../shared/modules/artisans.module';
 import {MaterialModule} from '../shared/modules/material.module';
 import {ssrCompatibleStorageProvider} from '../shared/utils';
+import {AperoDivestComponent} from './components/agir-avec-nous/apero-divest/apero-divest.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
 import {DonationComponent} from './components/donation/donation.component';
 import {EventPageComponent} from './components/event-page/event-page.component';
@@ -82,6 +83,7 @@ import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
         NousFaireConnaitreComponent,
         FaireUnDonComponent,
         BnsComponent,
+        AperoDivestComponent,
     ],
     imports: [
         CommonModule,

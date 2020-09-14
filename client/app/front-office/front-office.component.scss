@@ -20,13 +20,13 @@
         font-size: 16px;
 
         #logo-link {
-            width: 50%;
+            width: 530px;
             max-width: 80%;
         }
 
         #slogan {
             margin: auto;
-            padding-left: 110px;
+            padding-left: 90px;
         }
     }
 
@@ -35,8 +35,16 @@
     }
 
     #footer-body {
-        padding: 50px 0;
+        padding: 50px 0 40px;
         text-transform: uppercase;
+
+        * {
+            line-height: 48px;
+        }
+    }
+
+    .footer-right-column {
+        margin-top: 5px;
     }
 
     #head-of-footer {
@@ -83,7 +91,7 @@
     }
 
     #front-office-body {
-        margin-bottom: 150px;
+        margin-bottom: 300px;
     }
 
     #header-top {
@@ -111,7 +119,7 @@
 
     .section-logo {
         max-width: 100%;
-        width: 545px;
+        width: 390px;
         margin-bottom: 15px;
     }
 

@@ -43,7 +43,6 @@ export class SeoService {
 
     public updateSeo(seo: SEO, resolved: {name?: string; description?: string} | null) {
         // Title
-        console.log([resolved?.name || seo?.title, this.defaultTitle]);
         const dynamicName = resolved?.name || seo?.title;
         this.titleService.setTitle(dynamicName ? dynamicName + ' - ' + this.defaultTitle : this.defaultTitle);
 

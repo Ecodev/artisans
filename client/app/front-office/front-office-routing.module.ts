@@ -14,6 +14,7 @@ import {SEO} from '../shared/services/seo.service';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
+import {AperoDivestComponent} from './components/agir-avec-nous/apero-divest/apero-divest.component';
 import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
 import {CalculerEmpreinteCarboneComponent} from './components/agir-avec-nous/calculer-empreinte-carbone/calculer-empreinte-carbone.component';
 import {DesinvestirFossileComponent} from './components/agir-avec-nous/desinvestir-fossile/desinvestir-fossile.component';
@@ -159,6 +160,11 @@ const routes: Routes = [
                 path: 'desinvestir-industrie-energies-fossiles',
                 component: DesinvestirFossileComponent,
                 data: {seo: {title: "Desinvestir de l'industrie des énergies fossiles"} as SEO},
+            },
+            {
+                path: 'apero-divest',
+                component: AperoDivestComponent,
+                data: {seo: {title: 'Apero divest'} as SEO},
             },
             {
                 path: 'rapport-bns',

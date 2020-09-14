@@ -39,7 +39,6 @@ import {UserComponent} from './users/user/user.component';
     imports: [
         CommonModule,
         AdminRoutingModule,
-        MaterialModule,
         ArtisansModule,
         AvatarModule,
         ProfileModule,

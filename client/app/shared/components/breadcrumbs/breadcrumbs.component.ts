@@ -16,20 +16,7 @@ export interface Breadcrumb {
 export class BreadcrumbsComponent extends NaturalAbstractController implements OnInit {
     @HostBinding('class.mat-body') isBody = true;
 
-    @Input() breadcrumbs: Breadcrumb[] = [
-        {
-            link: '/',
-            label: 'asdf',
-        },
-        {
-            link: '/',
-            label: 'asdf',
-        },
-        {
-            link: '/',
-            label: 'asdf',
-        },
-    ];
+    @Input() breadcrumbs: Breadcrumb[] = [];
 
     constructor(private router: Router) {
         super();

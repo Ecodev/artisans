@@ -133,6 +133,10 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     link: '/agir-avec-nous/desinvestir-industrie-energies-fossiles',
                 },
                 {
+                    display: 'Apéros divest',
+                    link: '/agir-avec-nous/apero-divest',
+                },
+                {
                     display: 'Numérique éthique',
                     link: '/agir-avec-nous/numerique-ethique',
                 },

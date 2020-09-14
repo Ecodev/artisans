@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {SessionsVariables} from '../../../shared/generated-types';
@@ -10,6 +10,8 @@ import {SessionsVariables} from '../../../shared/generated-types';
 })
 export class SessionSideColumnComponent implements OnInit {
     public number = 0;
+
+    @Input() hiddenBlocName: string;
 
     constructor(private sessionService: SessionService) {}
 

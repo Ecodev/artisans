@@ -1,4 +1,10 @@
-<div class="frame-primary padding">
+<div class="frame-stroked-primary padding" *ngIf="hiddenBlocName !== 'methode'">
+    <h1 class="mat-h2">La méthode</h1>
+
+    <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/methode">En savoir plus</a>
+</div>
+
+<div class="frame-primary padding" *ngIf="hiddenBlocName !== 'prochaines'">
     <h1 class="mat-h2">Prochaines sessions</h1>
 
     <p>
@@ -9,7 +15,7 @@
     <a mat-flat-button routerLink="/agir-avec-nous/conversation-carbone/prochaines">Voir les sessions</a>
 </div>
 
-<div class="frame-stroked-primary padding">
+<div class="frame-stroked-primary padding" *ngIf="hiddenBlocName !== 'organisations'">
     <h1 class="mat-h2">Pour les organisations</h1>
 
     <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/organisations"
@@ -17,7 +23,7 @@
     >
 </div>
 
-<div class="frame-stroked-primary padding">
+<div class="frame-stroked-primary padding" *ngIf="hiddenBlocName !== 'facilitateurs'">
     <h1 class="mat-h2">Facilitateurs</h1>
     <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/facilitateurs"
         >Devenir facilitateur</a

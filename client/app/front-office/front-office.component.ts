@@ -130,11 +130,20 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 },
                 {
                     display: "Desinvestir de l'industrie des énergies fossiles",
-                    link: '/agir-avec-nous/desinvestir-industrie-energies-fossiles',
-                },
-                {
-                    display: 'Apéros divest',
-                    link: '/agir-avec-nous/apero-divest',
+                    children: [
+                        {
+                            display: 'La campagne',
+                            link: '/agir-avec-nous/desinvestir-industrie-energies-fossiles',
+                        },
+                        {
+                            display: 'Rapports BNS',
+                            link: 'agir-avec-nous/rapport-bns',
+                        },
+                        {
+                            display: 'APERO-DIVEST',
+                            link: '/agir-avec-nous/apero-divest',
+                        },
+                    ],
                 },
                 {
                     display: 'Numérique éthique',

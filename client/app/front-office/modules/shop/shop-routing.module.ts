@@ -142,7 +142,6 @@ const routes: Routes = [
                 description:
                     'Plus de 1000 articles de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays. LaRevueDurable constitue l’une des plus importantes base de données disponibles sur la durabilité et la transition écologique en français.',
             },
-            breadcrumbs: [{label: 'La Revue Durable'}],
         },
     },
 ];

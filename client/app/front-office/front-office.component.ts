@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {
     deliverableEmail,
+    ifValid,
     NaturalAbstractController,
     NaturalAlertService,
     NaturalSearchSelections,
@@ -283,23 +284,21 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     public subscribeNewsletter(): void {
-        if (!this.newsletterForm.valid) {
-            return;
-        }
-
-        this.newsletterForm.disable();
-        this.userService
-            .subscribeNewsletter(this.newsletterForm.value.email)
-            .pipe(finalize(() => this.newsletterForm.enable()))
-            .subscribe(() => {
-                // Exceptionally show a dialog, instead of snackbar, because
-                // we want to be triple sure that the user saw it worked and
-                // avoid him to re-submit the same email again
-                this.alertService.confirm(
-                    'Inscription résussie',
-                    'Merci de vous être inscrit à la newsletter',
-                    'Fermer',
-                );
-            });
+        ifValid(this.newsletterForm).subscribe(() => {
+            this.newsletterForm.disable();
+            this.userService
+                .subscribeNewsletter(this.newsletterForm.value.email)
+                .pipe(finalize(() => this.newsletterForm.enable()))
+                .subscribe(() => {
+                    // Exceptionally show a dialog, instead of snackbar, because
+                    // we want to be triple sure that the user saw it worked and
+                    // avoid him to re-submit the same email again
+                    this.alertService.confirm(
+                        'Inscription résussie',
+                        'Merci de vous être inscrit à la newsletter',
+                        'Fermer',
+                    );
+                });
+        });
     }
 }

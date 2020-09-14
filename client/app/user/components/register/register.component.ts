@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {NaturalAbstractDetail, validateAllFormControls} from '@ecodev/natural';
+import {ifValid, NaturalAbstractDetail, validateAllFormControls} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import {
@@ -54,11 +54,7 @@ export class RegisterComponent
     public submit(): void {
         validateAllFormControls(this.form);
 
-        if (!this.form.valid) {
-            return;
-        }
-
-        this.doSubmit();
+        ifValid(this.form).subscribe(() => this.doSubmit());
     }
 
     /**

@@ -11,7 +11,7 @@
         </a>
     </natural-detail-header>
 
-    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+    <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
@@ -248,7 +248,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab *ngIf="data.model.id" label="Ventes">
+        <mat-tab naturalLinkableTabName="order-line" *ngIf="data.model.id" label="Ventes">
             <app-order-lines
                 [initialColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
                 [forcedVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
@@ -257,7 +257,7 @@
             ></app-order-lines>
         </mat-tab>
 
-        <mat-tab *ngIf="data.model.id" label="Produits similaires">
+        <mat-tab naturalLinkableTabName="product" *ngIf="data.model.id" label="Produits similaires">
             <div class="padding-top">
                 <natural-relations
                     [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"

@@ -5,10 +5,6 @@
         label="Session conv. carbone"
         newLabel="Nouvelle session carbone"
     >
-        <a [routerLink]="['/agir-avec-nous/conversation-carbone', data.model.id]" color="primary" mat-raised-button>
-            <natural-icon name="remove_red_eye"></natural-icon>
-            Aperçu
-        </a>
     </natural-detail-header>
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">

@@ -64,14 +64,6 @@ export class SessionsIncomingComponent implements OnInit {
             'Être averti',
         );
     }
-    public subscribeToSession(session: {mailingList: string; name: string}) {
-        this.subscribe(
-            session,
-            "S'inscrire à : ",
-            'Je confirme mon inscription à la conversation carbone : ',
-            "S'inscrire",
-        );
-    }
 
     public subscribe(
         session: {mailingList: string; name: string},

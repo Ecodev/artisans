@@ -147,23 +147,17 @@
                         <mat-divider class="margin-v"></mat-divider>
 
                         <h2 class="mat-h2" fxLayout="row" fxLayoutAlign="start start">
-                            <div fxFlex>Inscription infomaniak</div>
-                            <a
-                                mat-stroked-button
-                                href="https://newsletter.infomaniak.com/mailinglists/index"
-                                target="_blank"
-                                >Voir les listes</a
-                            >
+                            <div fxFlex>Formulaire d'inscription</div>
                         </h2>
 
                         <mat-form-field>
-                            <mat-label>Identifant de la liste de contact</mat-label>
-                            <input (change)="update()" formControlName="mailingList" matInput />
-                            <mat-hint
-                                >Les identifiants apparaissent en chiffres à la fin de la barre d'adresse du navigateur
-                                lorsque l'on se rend sur le détail d'une liste. <br />P.ex
-                                newsletter.infomaniak.com/mailinglists/show/61350</mat-hint
-                            >
+                            <mat-label>Url du formulaire</mat-label>
+                            <input
+                                (change)="update()"
+                                [naturalHttpPrefix]="form.get('mailingList')"
+                                formControlName="mailingList"
+                                matInput
+                            />
                         </mat-form-field>
                     </div>
                 </div>

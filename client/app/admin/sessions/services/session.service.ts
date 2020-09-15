@@ -41,7 +41,6 @@ export class SessionService extends NaturalAbstractModelService<
         return {
             name: [Validators.required, Validators.maxLength(100)],
             startDate: [Validators.required],
-            endDate: [Validators.required],
         };
     }
 

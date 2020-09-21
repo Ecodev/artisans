@@ -10,7 +10,8 @@ import {getDownloadLink} from '../../../shared/components/file/file.component';
     templateUrl: './purchases.component.html',
     styleUrls: ['./purchases.component.scss'],
 })
-export class PurchasesComponent extends NaturalAbstractList<Purchases['purchases'], PurchasesVariables>
+export class PurchasesComponent
+    extends NaturalAbstractList<Purchases['purchases'], PurchasesVariables>
     implements OnInit {
     public ProductType = ProductType;
 

@@ -26,7 +26,8 @@ export enum ProductsViewMode {
         memoryStorageProvider,
     ],
 })
-export class ProductsPageComponent extends AbstractInfiniteLoadList<Products['products'], ProductsVariables>
+export class ProductsPageComponent
+    extends AbstractInfiniteLoadList<Products['products'], ProductsVariables>
     implements OnInit {
     /**
      * If true, the three first items of grid have highlighted layout

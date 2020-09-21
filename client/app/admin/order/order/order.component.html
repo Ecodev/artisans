@@ -24,10 +24,10 @@
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
         <div class="mat-h1">
             <div>Total :</div>
-            <div *ngIf="data.model.balanceCHF > 0" style="text-align: right;">
+            <div *ngIf="data.model.balanceCHF > 0" style="text-align: right">
                 {{ data.model.balanceCHF | currency: 'CHF' }}
             </div>
-            <div *ngIf="data.model.balanceEUR > 0" style="text-align: right;">
+            <div *ngIf="data.model.balanceEUR > 0" style="text-align: right">
                 {{ data.model.balanceEUR | currency: 'EUR' }}
             </div>
         </div>

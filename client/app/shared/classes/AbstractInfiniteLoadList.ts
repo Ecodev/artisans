@@ -1,3 +1,4 @@
+// tslint:disable:directive-class-suffix
 import {Injector, OnInit, Directive} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables} from '@ecodev/natural';

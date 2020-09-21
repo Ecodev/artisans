@@ -31,7 +31,10 @@ export class SeoService {
             const seo = data.seo ?? {};
 
             const resolved = this.resolvedItems.reduce((result, name) => {
-                if (result) return result;
+                if (result) {
+                    return result;
+                }
+
                 return data[name]
                     ? {name: data[name].model.name, description: striptags(data[name].model.description)}
                     : null;

@@ -1,14 +1,27 @@
 @import '../../../../styles/mixins';
 @include page-with-illustration();
 
-.page-illustration-content {
-    top: -450px;
-    margin-bottom: -400px;
+:host {
+    .page-illustration-content {
+        top: -450px;
+        margin-bottom: -400px;
 
-    img {
+        .illustration {
+            display: block;
+            width: 100% !important;
+            margin-bottom: 5px;
+            height: auto !important;
+        }
+    }
+
+    .vignette {
         display: block;
-        width: 100% !important;
-        margin-bottom: 5px;
-        height: auto !important;
+        width: 300px;
+        margin: 0;
+    }
+
+    audio {
+        width: 400px;
+        flex: none !important;
     }
 }

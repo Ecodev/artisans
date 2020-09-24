@@ -1,3 +1,6 @@
+@import '../../../../styles/mixins';
+@include page-with-illustration();
+
 :host {
     .facilitators {
         display: grid;

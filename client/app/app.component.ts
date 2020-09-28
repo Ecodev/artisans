@@ -10,9 +10,5 @@ export class AppComponent implements OnInit {
 
     public initialized = false;
 
-    constructor() {
-        console.log($localize`super test chocolat2`);
-    }
-
     public ngOnInit(): void {}
 }

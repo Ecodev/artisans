@@ -9,6 +9,7 @@ import {
     NaturalDetailHeaderModule,
     NaturalDialogTriggerModule,
     NaturalDropdownComponentsModule,
+    NaturalFileModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
     NaturalHierarchicSelectorModule,
@@ -21,15 +22,12 @@ import {
     NaturalStampModule,
     NaturalTableButtonModule,
 } from '@ecodev/natural';
-import {ngfModule} from 'angular-file';
 import {AvatarModule} from 'ngx-avatar';
 import {ProductsComponent} from '../../admin/products/products/products.component';
 import {UsersComponent} from '../../admin/users/users/users.component';
 import {AddressComponent} from '../components/address/address.component';
 import {BreadcrumbsComponent} from '../components/breadcrumbs/breadcrumbs.component';
 import {CardComponent} from '../components/card/card.component';
-import {FileComponent} from '../components/file/file.component';
-import {FileDropDirective} from '../components/file/services/file-drop.directive';
 import {MoneyComponent} from '../components/money/money.component';
 import {PriceComponent} from '../components/price/price.component';
 import {ProsemirrorComponent} from '../components/proseMirror/proseMirror.component';
@@ -44,8 +42,6 @@ const declarations = [
     AddressComponent,
     MoneyComponent,
     CardComponent,
-    FileDropDirective,
-    FileComponent,
     UsersComponent,
     ProductsComponent,
     TagsNavigationComponent,
@@ -63,9 +59,9 @@ const imports = [
     ReactiveFormsModule,
     RouterModule,
     AvatarModule,
-    ngfModule,
     NaturalSearchModule,
     NaturalCommonModule,
+    NaturalFileModule,
     NaturalHierarchicSelectorModule,
     NaturalSidenavModule,
     NaturalSelectModule,

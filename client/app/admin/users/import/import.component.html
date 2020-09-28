@@ -11,9 +11,8 @@
             <p>
                 <button
                     mat-raised-button
-                    ngfSelect
-                    [accept]="'text/csv'"
-                    [ngfFixOrientation]="false"
+                    naturalFileSelect
+                    accept="text/csv"
                     (fileChange)="uploadFile($event)"
                     [disabled]="!permissionsService.crud?.organization.create || importing"
                 >

@@ -32,7 +32,7 @@
                     <div>x {{ line.quantity }}</div>
                 </ng-container>
 
-                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap;">
+                <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
                     <div class="price mat-body-strong">
                         {{ line.totalTaxInc | currency: currencyService.current.value }}
                     </div>
@@ -77,7 +77,7 @@
 
             <div *ngIf="cart.subscription.emails">{{ cart.subscription.emails.join(', ') }}</div>
 
-            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap;">
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
                 <app-price [product]="cart.subscription.subscription" class="price mat-body-strong"></app-price>
             </div>
 
@@ -94,13 +94,13 @@
         <!-- Donation -->
         <div *ngIf="cart.donationAmount" class="cart-item">
             <div
-                style="width: 70px; height: 70px;"
+                style="width: 70px; height: 70px"
                 [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"
             ></div>
 
             <a mat-button class="item-body">Don</a>
 
-            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap;">
+            <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
                 <div class="price mat-body-strong">
                     {{ cart.donationAmount | currency: currencyService.current.value }}
                 </div>

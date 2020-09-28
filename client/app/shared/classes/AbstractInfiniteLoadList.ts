@@ -1,9 +1,11 @@
-import {Injector, OnInit} from '@angular/core';
+// tslint:disable:directive-class-suffix
+import {Injector, OnInit, Directive} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables} from '@ecodev/natural';
 import {defaults, isEqual, pick} from 'lodash-es';
 import {takeUntil} from 'rxjs/operators';
 
+@Directive()
 export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall extends QueryVariables>
     extends NaturalAbstractList<Tall, Vall>
     implements OnInit {

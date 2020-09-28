@@ -1,7 +1,7 @@
 import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
-import {ComponentPortal, PortalInjector} from '@angular/cdk/portal';
+import {ComponentPortal} from '@angular/cdk/portal';
 import {DOCUMENT} from '@angular/common';
-import {ComponentRef, ElementRef, Inject, Injectable, Injector} from '@angular/core';
+import {ComponentRef, ElementRef, Inject, Injectable, Injector, StaticProvider} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'lodash-es';
 import {merge, Observable, Subject} from 'rxjs';
@@ -36,13 +36,18 @@ export class NavigationService {
         nbOfItems = Math.max(nbOfItems, items.length);
 
         // Container data
-        const injectionTokens = new WeakMap<any, any>();
-        injectionTokens.set(APP_MENU_DATA, {
-            items: cloneDeep(items),
-            originalNativeElement: connectedElement.nativeElement,
-            contentHeight: nbOfItems * 38,
-        });
-        const containerInjector = new PortalInjector(this.injector, injectionTokens);
+        const providers: StaticProvider[] = [
+            {
+                provide: APP_MENU_DATA,
+                useValue: {
+                    items: cloneDeep(items),
+                    originalNativeElement: connectedElement.nativeElement,
+                    contentHeight: nbOfItems * 38,
+                },
+            },
+        ];
+
+        const containerInjector = Injector.create({providers: providers, parent: this.injector});
 
         const overlayConfig: OverlayConfig = new OverlayConfig({
             width: 'calc(100vw - 40px)',

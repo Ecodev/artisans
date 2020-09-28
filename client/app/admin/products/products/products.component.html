@@ -42,13 +42,13 @@
                 <ng-container matColumnDef="image">
                     <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
                     <td *matCellDef="let element" mat-cell>
-                        <app-file
+                        <natural-file
                             *ngIf="element.image"
                             [height]="40"
                             [model]="element.image"
                             [style.borderRadius.px]="40"
                             [style.width.px]="40"
-                        ></app-file>
+                        ></natural-file>
                     </td>
                 </ng-container>
 

@@ -1,16 +1,16 @@
 :host {
     .products.grid {
-        @media screen and (max-width: 700px) {
+        @media screen and (max-width: 960px) {
             .product {
                 margin-bottom: 40px;
             }
         }
 
-        @media screen and (min-width: 700px) {
+        @media screen and (min-width: 960px) {
             display: grid;
             grid-template-columns: minmax(auto, 33%) minmax(auto, 33%) minmax(auto, 33%);
-            grid-auto-rows: 20px;
-            grid-gap: 30px;
+            grid-auto-rows: 30px;
+            grid-gap: 35px;
 
             .product {
                 grid-row: span 5;

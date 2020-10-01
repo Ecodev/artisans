@@ -12,7 +12,7 @@ export class SessionResolver implements Resolve<SessionResolve> {
     constructor(private sessionService: SessionService, private errorService: ErrorService) {}
 
     /**
-     * Resolve session data for router and panels service
+     * Resolve session data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<SessionResolve> {
         const observable = this.sessionService.resolve(route.params.sessionId);

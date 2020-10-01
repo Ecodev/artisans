@@ -12,7 +12,7 @@ export class ProductResolver implements Resolve<ProductResolve> {
     constructor(private productService: ProductService, private errorService: ErrorService) {}
 
     /**
-     * Resolve product data for router and panels service
+     * Resolve product data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<ProductResolve> {
         const observable = this.productService.resolve(route.params.productId);

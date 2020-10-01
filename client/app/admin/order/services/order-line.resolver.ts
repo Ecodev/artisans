@@ -12,7 +12,7 @@ export class OrderLineResolver implements Resolve<OrderLineResolve> {
     constructor(private orderLineService: OrderLineService, private errorService: ErrorService) {}
 
     /**
-     * Resolve orderLine data for router and panels service
+     * Resolve orderLine data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<OrderLineResolve> {
         const observable = this.orderLineService.resolve(route.params.orderLineId);

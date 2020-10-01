@@ -12,7 +12,7 @@ export class ProductTagByNameResolver implements Resolve<{model: ProductTags_pro
     constructor(private productTagService: ProductTagService, private errorService: ErrorService) {}
 
     /**
-     * Resolve productTag data for router and panels service
+     * Resolve productTag data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<{model: ProductTags_productTags_items}> {
         const observable = this.productTagService.resolveByName(route.params.productTagName);

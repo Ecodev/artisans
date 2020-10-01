@@ -12,7 +12,7 @@ export class NewsResolver implements Resolve<NewsResolve> {
     constructor(private productService: NewsService, private errorService: ErrorService) {}
 
     /**
-     * Resolve product data for router and panels service
+     * Resolve product data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<NewsResolve> {
         const observable = this.productService.resolve(route.params.newsId);

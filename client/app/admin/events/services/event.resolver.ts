@@ -12,7 +12,7 @@ export class EventResolver implements Resolve<EventResolve> {
     constructor(private productService: EventService, private errorService: ErrorService) {}
 
     /**
-     * Resolve product data for router and panels service
+     * Resolve product data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<EventResolve> {
         const observable = this.productService.resolve(route.params.eventId);

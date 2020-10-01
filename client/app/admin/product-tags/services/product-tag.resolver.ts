@@ -12,7 +12,7 @@ export class ProductTagResolver implements Resolve<ProductTagResolve> {
     constructor(private productTagService: ProductTagService, private errorService: ErrorService) {}
 
     /**
-     * Resolve productTag data for router and panels service
+     * Resolve productTag data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<ProductTagResolve> {
         const observable = this.productTagService.resolve(route.params.productTagId);

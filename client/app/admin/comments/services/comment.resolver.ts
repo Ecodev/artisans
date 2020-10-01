@@ -12,7 +12,7 @@ export class CommentResolver implements Resolve<CommentResolve> {
     constructor(private productService: CommentService, private errorService: ErrorService) {}
 
     /**
-     * Resolve product data for router and panels service
+     * Resolve product data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<CommentResolve> {
         const observable = this.productService.resolve(route.params.commentId);

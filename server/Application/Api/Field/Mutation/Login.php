@@ -55,7 +55,7 @@ abstract class Login implements FieldInterface
 
                 _log()->info(LogRepository::LOGIN_FAILED);
 
-                throw new Exception("L'email ou le mot de passe est incorrect !");
+                throw new Exception("L'email ou le mot de passe est incorrect");
             },
         ];
     }

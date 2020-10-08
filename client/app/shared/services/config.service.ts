@@ -25,7 +25,7 @@ export class ConfigService {
             .get<FrontEndConfig>(this.configUrl)
             .pipe(
                 catchError(() => {
-                    console.error("La configuration front-end n'a pas pu être chargée !");
+                    console.error("La configuration front-end n'a pas pu être chargée");
                     return of(null);
                 }),
             )

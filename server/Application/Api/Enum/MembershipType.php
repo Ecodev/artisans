@@ -12,8 +12,7 @@ class MembershipType extends EnumType
     {
         $config = [
             \Application\DBAL\Types\MembershipType::NONE => 'Non membre',
-            \Application\DBAL\Types\MembershipType::DUE => 'Membre (côtisation dûe)',
-            \Application\DBAL\Types\MembershipType::PAYED => 'Membre (côtisation payée)',
+            \Application\DBAL\Types\MembershipType::MEMBER => 'Membre',
         ];
 
         parent::__construct($config);

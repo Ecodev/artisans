@@ -30,12 +30,6 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-pattern.csv');
     }
 
-    public function testInvalidMembership(): void
-    {
-        $this->expectErrorMessage('A la ligne 1 : Le membership aux artisans est invalide : foo');
-        $this->import('tests/data/importer/invalid-membership.csv');
-    }
-
     public function testInvalidEmpty(): void
     {
         $this->expectErrorMessage('A la ligne 1 : Il faut soit un email, soit un pattern, mais aucun existe');
@@ -68,7 +62,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidColumnCount(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Doit avoir exactement 12 colonnes, mais en a 5');
+        $this->expectErrorMessage('A la ligne 1 : Doit avoir exactement 14 colonnes, mais en a 5');
         $this->import('tests/data/importer/invalid-column-count.csv');
     }
 
@@ -107,7 +101,7 @@ class ImporterTest extends TestCase
             'email' => 'othermember@example.com',
             'subscription_type' => 'digital',
             'subscription_last_review_id' => '3001',
-            'membership' => 'payed',
+            'membership' => 'member',
             'first_name' => 'Elizabeth',
             'last_name' => 'Swann',
             'street' => '',
@@ -158,7 +152,7 @@ class ImporterTest extends TestCase
             'email' => 'théo@example.com',
             'subscription_type' => 'paper',
             'subscription_last_review_id' => '3000',
-            'membership' => 'due',
+            'membership' => 'member',
             'first_name' => '',
             'last_name' => '',
             'street' => '',
@@ -174,7 +168,7 @@ class ImporterTest extends TestCase
             'email' => 'member@example.com',
             'subscription_type' => 'both',
             'subscription_last_review_id' => null,
-            'membership' => 'payed',
+            'membership' => 'member',
             'first_name' => 'Roger "Bob"',
             'last_name' => 'Doe',
             'street' => 'Main street',

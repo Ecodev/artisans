@@ -143,8 +143,8 @@ class Importer
     private function read($file): void
     {
         $this->lineNumber = 0;
-        $expectedColumnCount = 12;
-        while ($line = fgetcsv($file)) {
+        $expectedColumnCount = 14;
+        while ($line = fgetcsv($file, null, "\t")) {
             ++$this->lineNumber;
 
             $actualColumnCount = count($line);
@@ -160,15 +160,16 @@ class Importer
                 $pattern,
                 $subscriptionType,
                 $lastReviewNumber,
-                $membership,
+                $ignored,
                 $firstName,
                 $lastName,
                 $street,
-                // $wtf,
+                $street2,
                 $postcode,
                 $locality,
                 $country,
                 $phone,
+                $membership
             ] = $line;
 
             if (!$email && !$pattern) {
@@ -190,7 +191,7 @@ class Importer
                     $membership,
                     $firstName,
                     $lastName,
-                    $street,
+                    trim(implode(' ', [$street, $street2])),
                     $postcode,
                     $locality,
                     $country,
@@ -293,19 +294,11 @@ class Importer
 
     private function readMembership($membership): string
     {
-        if ($membership === '' || $membership === 'Non membre') {
-            return MembershipType::NONE;
+        if ($membership === '1') {
+            return MembershipType::MEMBER;
         }
 
-        if ($membership === 'Membre (cotisation payée)') {
-            return MembershipType::PAYED;
-        }
-
-        if ($membership === 'Membre (cotistaion due)') {
-            return MembershipType::DUE;
-        }
-
-        $this->throw('Le membership aux artisans est invalide : ' . $membership);
+        return MembershipType::NONE;
     }
 
     private function readSubscriptionType(string $subscriptionType): ?string

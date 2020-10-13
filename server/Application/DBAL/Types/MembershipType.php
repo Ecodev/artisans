@@ -9,15 +9,13 @@ use Ecodev\Felix\DBAL\Types\EnumType;
 class MembershipType extends EnumType
 {
     const NONE = 'none';
-    const DUE = 'due';
-    const PAYED = 'payed';
+    const MEMBER = 'member';
 
     protected function getPossibleValues(): array
     {
         return [
             self::NONE,
-            self::DUE,
-            self::PAYED,
+            self::MEMBER,
         ];
     }
 }

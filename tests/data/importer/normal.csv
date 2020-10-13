@@ -1,5 +1,5 @@
-new@example.com,,,,Non membre,,,,,,,
-théo@example.com,,Papier,61,Membre (cotistaion due),,,,,,,
-member@example.com,,Papier&#47;web,,Membre (cotisation pay&#233;e),"Roger ""Bob""",Doe,Main street,2000,New York,France,032 987 65 43
-,.*@university\.com,,62,Non membre,,,,,,,
-othermember@example.com,,Web,62,Membre (cotisation pay&#233;e),Elizabeth,Swann,,,,SUISSE,
+new@example.com													0
+théo@example.com		Papier	61										1
+member@example.com		Papier/web			"Roger ""Bob"""	Doe	Main street		2000	New York	France	032 987 65 43	1
+	.*@university\.com		62										1
+othermember@example.com		Web	62		Elizabeth	Swann					SUISSE		1

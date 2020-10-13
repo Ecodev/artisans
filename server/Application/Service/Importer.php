@@ -144,7 +144,7 @@ class Importer
     {
         $this->lineNumber = 0;
         $expectedColumnCount = 14;
-        while ($line = fgetcsv($file, null, "\t")) {
+        while ($line = fgetcsv($file, 0, "\t")) {
             ++$this->lineNumber;
 
             $actualColumnCount = count($line);

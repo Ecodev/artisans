@@ -13,6 +13,6 @@ class Version20201013150806 extends IrreversibleMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql("ALTER TABLE user MODIFY COLUMN membership ENUM('none', 'member') NOT NULL DEFAULT 'none'");
+        $this->addSql("ALTER TABLE user CHANGE membership membership ENUM('none', 'member') DEFAULT 'none' NOT NULL COMMENT '(DC2Type:Membership)'");
     }
 }

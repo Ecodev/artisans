@@ -8,6 +8,7 @@ if (environment.production) {
     enableProdMode();
 }
 
+// tslint:disable-next-line:no-restricted-globals
 document.addEventListener('DOMContentLoaded', () => {
     platformBrowserDynamic()
         .bootstrapModule(AppModule)

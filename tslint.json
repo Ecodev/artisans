@@ -104,7 +104,20 @@
                 "check-type",
                 "check-typecast"
             ]
-        }
+        },
+        "no-restricted-globals": [
+            true,
+            "document",
+            "event",
+            "history",
+            "length",
+            "localStorage",
+            "location",
+            "name",
+            "navigator",
+            "sessionStorage",
+            "window"
+        ]
     },
     "rulesDirectory": ["codelyzer"]
 }

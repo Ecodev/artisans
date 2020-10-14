@@ -1,10 +1,22 @@
-import {Component, ElementRef, EventEmitter, OnDestroy, OnInit, Optional, Output, Self, ViewChild} from '@angular/core';
+import {
+    Component,
+    ElementRef,
+    EventEmitter,
+    Inject,
+    OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    Self,
+    ViewChild,
+} from '@angular/core';
 import {ControlValueAccessor, NgControl} from '@angular/forms';
 import {exampleSetup} from 'prosemirror-example-setup';
 import {DOMParser, DOMSerializer} from 'prosemirror-model';
 import {EditorState} from 'prosemirror-state';
 import {EditorView} from 'prosemirror-view';
 import {schema} from './schema';
+import {DOCUMENT} from '@angular/common';
 
 /**
  * Prosemirror component
@@ -34,7 +46,10 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
      */
     private content = '';
 
-    constructor(@Optional() @Self() public ngControl: NgControl) {
+    constructor(
+        @Optional() @Self() public ngControl: NgControl,
+        @Inject(DOCUMENT) private readonly document: Document,
+    ) {
         if (this.ngControl !== null) {
             this.ngControl.valueAccessor = this;
         }
@@ -53,7 +68,7 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
 
                 // Transform doc into HTML string
                 const dom = serializer.serializeFragment(this.view.state.doc);
-                const el = document.createElement('_');
+                const el = this.document.createElement('_');
                 el.appendChild(dom);
 
                 const newContent = el.innerHTML;
@@ -83,7 +98,7 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
     }
 
     private createState() {
-        const template = document.createElement('_');
+        const template = this.document.createElement('_');
         template.innerHTML = '<div>' + this.content + '</div>';
 
         const parser = DOMParser.fromSchema(schema);

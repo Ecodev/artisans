@@ -25,5 +25,6 @@ export function copy(document: Document, value: string): void {
  */
 export const ssrCompatibleStorageProvider: Provider = {
     provide: SESSION_STORAGE,
+    // tslint:disable-next-line:no-restricted-globals
     useFactory: () => (typeof sessionStorage === 'undefined' ? new NaturalMemoryStorage() : sessionStorage),
 };

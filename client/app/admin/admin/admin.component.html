@@ -1,6 +1,6 @@
 <div fxFlexFill fxLayout="column">
     <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
-        <button (click)="NaturalSidenavService?.sideNavs?.get('adminMenu')?.toggle()" mat-icon-button>
+        <button (click)="menu.toggle()" mat-icon-button>
             <natural-icon name="menu"></natural-icon>
         </button>
 
@@ -13,7 +13,7 @@
         <div fxFlex></div>
     </mat-toolbar>
 
-    <natural-sidenav-container [noScroll]="true" fxFlex name="adminMenu">
+    <natural-sidenav-container [noScroll]="true" fxFlex name="adminMenu" #menu>
         <natural-sidenav>
             <div class="margin overflow">
                 <mat-accordion displayMode="flat">

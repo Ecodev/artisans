@@ -41,7 +41,7 @@ export class ProductService extends NaturalAbstractModelService<
 > {
     public static readonly MEMBERSHIP_FEE_PRODUCT_ID = '1307';
 
-    public static articlesSorting: ProductSorting[] = [
+    public static readonly articlesSorting: ProductSorting[] = [
         {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},
         {field: ProductSortingField.illustration, order: SortingOrder.DESC},
         {field: ProductSortingField.sorting, order: SortingOrder.ASC},

@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {getDownloadLink, NaturalAbstractList} from '@ecodev/natural';
+import {NaturalAbstractList, NaturalFileService} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PurchaseService} from './purchase.service';
 import {ProductType, Purchases, Purchases_purchases_items, PurchasesVariables} from '../../../shared/generated-types';
@@ -14,7 +14,12 @@ export class PurchasesComponent
     implements OnInit {
     public ProductType = ProductType;
 
-    constructor(service: PurchaseService, naturalSearchFacetsService: NaturalSearchFacetsService, injector: Injector) {
+    constructor(
+        service: PurchaseService,
+        naturalSearchFacetsService: NaturalSearchFacetsService,
+        injector: Injector,
+        private readonly naturalFileService: NaturalFileService,
+    ) {
         super(service, injector);
 
         this.persistSearch = false;
@@ -22,7 +27,7 @@ export class PurchasesComponent
 
     public getDownloadLink(orderLine: Purchases_purchases_items): null | string {
         if (orderLine.product && orderLine.product.file) {
-            return getDownloadLink(orderLine.product.file);
+            return this.naturalFileService.getDownloadLink(orderLine.product.file);
         }
 
         return null;

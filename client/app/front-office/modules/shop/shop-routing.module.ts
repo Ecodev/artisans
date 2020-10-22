@@ -4,7 +4,7 @@ import {ProductTagByNameResolver} from '../../../admin/product-tags/services/pro
 import {ProductResolver} from '../../../admin/products/services/product.resolver';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {ProductSortingField, ProductsVariables, SortingOrder} from '../../../shared/generated-types';
-import {SEO} from '../../../shared/services/seo.service';
+import {NaturalSeo} from '@ecodev/natural';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent, ProductsViewMode} from './components/products-page/products-page.component';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component';
@@ -19,8 +19,7 @@ const routes: Routes = [
         path: 'recherche',
         component: ProductsPageComponent,
         data: {
-            seo: {title: 'Résultats de la recherche'} as SEO,
-            title: 'Résultats la recherche',
+            seo: {title: 'Résultats de la recherche'} as NaturalSeo,
             showNoResults: true,
             showTagsOnProducts: false,
             showTagsNavigation: false,
@@ -31,7 +30,7 @@ const routes: Routes = [
         path: 'articles',
         component: ProductsPageComponent,
         data: {
-            seo: {title: 'Tous les articles'},
+            seo: {title: 'Tous les articles'} as NaturalSeo,
             showTagsOnProducts: true,
             showTagsNavigation: true,
             viewMode: ProductsViewMode.grid,
@@ -57,6 +56,7 @@ const routes: Routes = [
         component: ProductsPageComponent,
         resolve: {productTag: ProductTagByNameResolver},
         data: {
+            seo: {resolveKey: 'productTag'} as NaturalSeo,
             breadcrumbs: [
                 {link: '/larevuedurable', label: 'La Revue Durable'},
                 {link: '/larevuedurable/articles', label: 'Articles'},
@@ -85,7 +85,7 @@ const routes: Routes = [
         path: 'numeros',
         component: ProductsPageComponent,
         data: {
-            seo: {title: 'Tous les numéros'},
+            seo: {title: 'Tous les numéros'} as NaturalSeo,
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,
@@ -112,6 +112,9 @@ const routes: Routes = [
         component: ProductPageComponent,
         resolve: {product: ProductResolver},
         data: {
+            seo: {
+                resolveKey: 'product',
+            } as NaturalSeo,
             showTagsOnProducts: true,
             showTagsNavigation: false,
             breadcrumbs: [
@@ -125,6 +128,9 @@ const routes: Routes = [
         component: ProductPageComponent,
         resolve: {product: ProductResolver},
         data: {
+            seo: {
+                resolveKey: 'product',
+            } as NaturalSeo,
             showTagsOnProducts: true,
             showTagsNavigation: false,
             breadcrumbs: [
@@ -141,7 +147,7 @@ const routes: Routes = [
                 title: 'Abonnements',
                 description:
                     'Plus de 1000 articles de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays. LaRevueDurable constitue l’une des plus importantes base de données disponibles sur la durabilité et la transition écologique en français.',
-            },
+            } as NaturalSeo,
         },
     },
 ];

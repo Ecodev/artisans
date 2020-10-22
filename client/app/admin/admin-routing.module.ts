@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
-import {MatDialogConfig} from '@angular/material/dialog';
 import {RouterModule, Routes} from '@angular/router';
-import {NaturalDialogTriggerComponent} from '@ecodev/natural';
+import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
 import {AdministrationGuard} from '../shared/guards/administration.guard';
 import {AdminComponent} from './admin/admin.component';
 import {CommentComponent} from './comments/comment/comment.component';
@@ -45,7 +44,9 @@ const routes: Routes = [
                 path: 'product', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: ProductsComponent,
                 data: {
-                    title: 'Produits',
+                    seo: {
+                        title: 'Produits',
+                    } as NaturalSeo,
                 },
             },
             {
@@ -57,12 +58,22 @@ const routes: Routes = [
                         resolve: {
                             product: ProductResolver,
                         },
+                        data: {
+                            seo: {
+                                title: 'Nouveau produit',
+                            } as NaturalSeo,
+                        },
                     },
                     {
                         path: ':productId', // last
                         component: ProductComponent,
                         resolve: {
                             product: ProductResolver,
+                        },
+                        data: {
+                            seo: {
+                                resolveKey: 'product',
+                            } as NaturalSeo,
                         },
                     },
                 ],
@@ -71,24 +82,24 @@ const routes: Routes = [
                 path: 'user', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: UsersComponent,
                 data: {
-                    title: 'Tous les utilisateurs',
+                    seo: {
+                        title: 'Tous les utilisateurs',
+                    } as NaturalSeo,
                 },
             },
             {
                 path: 'user',
                 children: [
                     {
-                        path: 'new',
-                        component: UserComponent,
-                        resolve: {
-                            user: UserResolver,
-                        },
-                    },
-                    {
                         path: ':userId', // last
                         component: UserComponent,
                         resolve: {
                             user: UserResolver,
+                        },
+                        data: {
+                            seo: {
+                                resolveKey: 'user',
+                            } as NaturalSeo,
                         },
                     },
                 ],
@@ -97,13 +108,19 @@ const routes: Routes = [
                 path: 'import',
                 component: ImportComponent,
                 data: {
-                    title: 'Import',
+                    seo: {
+                        title: 'Import',
+                    } as NaturalSeo,
                 },
             },
             {
                 path: 'order', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: OrdersComponent,
-                data: {title: 'Ventes'},
+                data: {
+                    seo: {
+                        title: 'Ventes',
+                    } as NaturalSeo,
+                },
                 children: [
                     {
                         path: ':orderId',
@@ -113,13 +130,17 @@ const routes: Routes = [
                             viewer: ViewerResolver,
                         },
                         data: {
-                            component: OrderComponent,
-                            dialogConfig: {
-                                data: {},
-                                width: '600px',
-                                maxWidth: '95vw',
-                                maxHeight: '97vh',
-                            } as MatDialogConfig,
+                            trigger: {
+                                component: OrderComponent,
+                                dialogConfig: {
+                                    width: '600px',
+                                    maxWidth: '95vw',
+                                    maxHeight: '97vh',
+                                },
+                            } as NaturalDialogTriggerRoutingData,
+                            seo: {
+                                title: 'Commande',
+                            } as NaturalSeo,
                         },
                     },
                     {
@@ -129,14 +150,18 @@ const routes: Routes = [
                             orderLine: OrderLineResolver,
                         },
                         data: {
-                            component: OrderLineComponent,
-                            dialogConfig: {
-                                data: {},
-                                width: '600px',
-                                maxWidth: '95vw',
-                                maxHeight: '97vh',
-                                autoFocus: false,
-                            } as MatDialogConfig,
+                            trigger: {
+                                component: OrderLineComponent,
+                                dialogConfig: {
+                                    width: '600px',
+                                    maxWidth: '95vw',
+                                    maxHeight: '97vh',
+                                    autoFocus: false,
+                                },
+                            } as NaturalDialogTriggerRoutingData,
+                            seo: {
+                                title: "Modification de la vente d'un produit",
+                            } as NaturalSeo,
                         },
                     },
                 ],
@@ -145,7 +170,9 @@ const routes: Routes = [
                 path: 'news', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: NewsesComponent,
                 data: {
-                    title: 'Actualités et articles',
+                    seo: {
+                        title: 'Actualités et articles',
+                    } as NaturalSeo,
                 },
             },
             {
@@ -157,12 +184,22 @@ const routes: Routes = [
                         resolve: {
                             news: NewsResolver,
                         },
+                        data: {
+                            seo: {
+                                title: 'Nouvelle actualité',
+                            } as NaturalSeo,
+                        },
                     },
                     {
                         path: ':newsId', // last
                         component: NewsComponent,
                         resolve: {
                             news: NewsResolver,
+                        },
+                        data: {
+                            seo: {
+                                resolveKey: 'news',
+                            } as NaturalSeo,
                         },
                     },
                 ],
@@ -171,7 +208,9 @@ const routes: Routes = [
                 path: 'event', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: EventsComponent,
                 data: {
-                    title: 'Événements',
+                    seo: {
+                        title: 'Événements',
+                    } as NaturalSeo,
                 },
             },
             {
@@ -181,11 +220,21 @@ const routes: Routes = [
                         path: 'new',
                         component: EventComponent,
                         resolve: {event: EventResolver},
+                        data: {
+                            seo: {
+                                title: 'Nouvel événement',
+                            } as NaturalSeo,
+                        },
                     },
                     {
                         path: ':eventId', // last
                         component: EventComponent,
                         resolve: {event: EventResolver},
+                        data: {
+                            seo: {
+                                resolveKey: 'event',
+                            } as NaturalSeo,
+                        },
                     },
                 ],
             },
@@ -193,8 +242,10 @@ const routes: Routes = [
                 path: 'session', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: SessionsComponent,
                 data: {
-                    title: 'Conversations carbone',
                     initialColumns: ['name', 'endDate', 'facilitators'],
+                    seo: {
+                        title: 'Conversations carbone',
+                    } as NaturalSeo,
                 },
             },
             {
@@ -204,18 +255,32 @@ const routes: Routes = [
                         path: 'new',
                         component: SessionComponent,
                         resolve: {session: SessionResolver},
+                        data: {
+                            seo: {
+                                title: 'Nouvelle session carbone',
+                            } as NaturalSeo,
+                        },
                     },
                     {
                         path: ':sessionId', // last
                         component: SessionComponent,
                         resolve: {session: SessionResolver},
+                        data: {
+                            seo: {
+                                resolveKey: 'session',
+                            } as NaturalSeo,
+                        },
                     },
                 ],
             },
             {
                 path: 'comment', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: CommentsComponent,
-                data: {title: 'Commentaires'},
+                data: {
+                    seo: {
+                        title: 'Commentaires',
+                    } as NaturalSeo,
+                },
             },
             {
                 path: 'comment',
@@ -224,17 +289,28 @@ const routes: Routes = [
                         path: 'new',
                         component: CommentComponent,
                         resolve: {comment: CommentResolver},
+                        data: {
+                            seo: {
+                                title: 'Nouveau commentaire',
+                            } as NaturalSeo,
+                        },
                     },
                     {
                         path: ':commentId', // last
                         component: CommentComponent,
                         resolve: {comment: CommentResolver},
+                        data: {
+                            seo: {
+                                resolveKey: 'comment',
+                            } as NaturalSeo,
+                        },
                     },
                 ],
             },
         ],
     },
 ];
+
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],

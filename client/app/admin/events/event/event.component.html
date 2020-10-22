@@ -3,7 +3,7 @@
         [listRoute]="['admin', 'event']"
         [model]="data.model"
         label="Événement"
-        newLabel="Nouvel événement"
+        [newLabel]="data.seo.title"
     >
         <a [routerLink]="['/agenda', data.model.id]" color="primary" mat-raised-button>
             <natural-icon name="remove_red_eye"></natural-icon>

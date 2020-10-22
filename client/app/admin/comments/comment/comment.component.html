@@ -3,7 +3,7 @@
         [listRoute]="['admin', 'comment']"
         [model]="data.model"
         label="Événement"
-        newLabel="Nouveau commentaire"
+        [newLabel]="data.seo.title"
     ></natural-detail-header>
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">

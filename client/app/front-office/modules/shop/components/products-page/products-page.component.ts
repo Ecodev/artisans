@@ -83,7 +83,7 @@ export class ProductsPageComponent
     ngOnInit(): void {
         super.ngOnInit();
 
-        this.title = this.route.snapshot.params.productTagName || this.route.snapshot.data.title;
+        this.title = this.route.snapshot.params.productTagName || this.route.snapshot.data.seo.title;
 
         this.route.data.subscribe(data => {
             this.showTagsOnProducts = !!data.showTagsOnProducts;

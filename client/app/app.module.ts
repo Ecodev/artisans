@@ -9,7 +9,13 @@ import {MatIconRegistry} from '@angular/material/icon';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NaturalAlertService, NaturalSwissParsingDateAdapter} from '@ecodev/natural';
+import {
+    NaturalAlertService,
+    NaturalSwissParsingDateAdapter,
+    NATURAL_SEO_CONFIG,
+    NaturalSeoConfig,
+    NaturalSeoService,
+} from '@ecodev/natural';
 import {Apollo, ApolloModule} from 'apollo-angular';
 import {HttpBatchLink, HttpBatchLinkModule} from 'apollo-angular-link-http-batch';
 import {InMemoryCache} from 'apollo-cache-inmemory';
@@ -75,6 +81,14 @@ registerLocaleData(localeFRCH);
             useClass: LocalizedPaginatorIntlService,
         },
         ssrCompatibleStorageProvider,
+        {
+            provide: NATURAL_SEO_CONFIG,
+            useValue: {
+                applicationName: 'Les artisans de la transition',
+                defaultDescription: 'Comprendre l’urgence écologique, Des pistes pour y répondre',
+                defaultRobots: 'all, index, follow',
+            } as NaturalSeoConfig,
+        },
     ],
     bootstrap: [AppComponent],
 })
@@ -87,6 +101,7 @@ export class AppModule {
         dateAdapter: DateAdapter<Date>,
         // tslint:disable-next-line:ban-types
         @Inject(PLATFORM_ID) readonly platformId: Object,
+        naturalSeoService: NaturalSeoService, // injection required, but works as stand alone
     ) {
         // tells if it's browser or server
         const isBrowser = isPlatformBrowser(platformId);

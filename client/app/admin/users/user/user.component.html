@@ -3,7 +3,7 @@
         [listRoute]="['admin', 'user']"
         [model]="data.model"
         label="Utilisateur"
-        newLabel="Nouvel utilisateur"
+        [newLabel]="data.seo.title"
     ></natural-detail-header>
 
     <mat-toolbar color="warn" *ngIf="data.model.shouldDelete"

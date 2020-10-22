@@ -3,7 +3,7 @@
         [listRoute]="['admin', 'product']"
         [model]="data.model"
         label="Produit"
-        newLabel="Nouveau produit"
+        [newLabel]="data.seo.title"
     >
         <a [routerLink]="['/larevuedurable/article', data.model.id]" color="primary" mat-raised-button>
             <natural-icon name="remove_red_eye"></natural-icon>

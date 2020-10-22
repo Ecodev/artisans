@@ -1,11 +1,5 @@
 <div *ngIf="dataSource" fxLayout="column">
     <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            {{ routeData?.title }}
-        </div>
-    </div>
-
-    <div fxLayout="column">
         <div [fxShow]="!hideHeader" class="margin-v overflow" fxLayout="row">
             <natural-search
                 (selectionChange)="search($event)"

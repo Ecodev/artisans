@@ -4,6 +4,7 @@ import {ViewerResolver} from '../../../admin/users/services/viewer.resolver';
 import {AuthGuard} from '../../../shared/guards/auth.guard';
 import {CartComponent} from './components/cart/cart.component';
 import {CreateOrderComponent} from './components/create-order/create-order.component';
+import {NaturalSeo} from '@ecodev/natural';
 
 const routes: Routes = [
     {
@@ -11,17 +12,17 @@ const routes: Routes = [
         component: CreateOrderComponent,
         resolve: {viewer: ViewerResolver},
         canActivate: [AuthGuard],
-        data: {seo: {title: 'Panier'}},
+        data: {seo: {title: 'Panier'} as NaturalSeo},
     },
     {
         path: '',
         component: CartComponent,
-        data: {seo: {title: 'Panier'}},
+        data: {seo: {title: 'Panier'} as NaturalSeo},
     },
     {
         path: ':cartId',
         component: CartComponent,
-        data: {seo: {title: 'Panier'}},
+        data: {seo: {title: 'Panier'} as NaturalSeo},
     },
 ];
 

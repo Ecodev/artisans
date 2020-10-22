@@ -3,7 +3,7 @@
         [listRoute]="['admin', 'news']"
         [model]="data.model"
         label="Actualité"
-        newLabel="Nouvelle actualité"
+        [newLabel]="data.seo.title"
     >
         <a [routerLink]="['/actualite', data.model.id]" color="primary" mat-raised-button>
             <natural-icon name="remove_red_eye"></natural-icon>

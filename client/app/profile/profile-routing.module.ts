@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {MatDialogConfig} from '@angular/material/dialog';
 import {RouterModule, Routes} from '@angular/router';
 import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData} from '@ecodev/natural';
 import {OrderComponent} from '../admin/order/order/order.component';
@@ -10,6 +9,7 @@ import {AccountComponent} from './components/account/account.component';
 import {HistoryComponent} from './components/history/history.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {PurchasesComponent} from './components/purchases/purchases.component';
+import {NaturalSeo} from '@ecodev/natural';
 
 const routes: Routes = [
     {
@@ -27,7 +27,7 @@ const routes: Routes = [
                 path: 'commandes',
                 component: HistoryComponent,
                 resolve: {viewer: ViewerResolver},
-                data: {seo: {title: 'Mes commandes'}},
+                data: {seo: {title: 'Mes commandes'} as NaturalSeo},
                 children: [
                     {
                         path: ':orderId',
@@ -37,14 +37,15 @@ const routes: Routes = [
                             viewer: ViewerResolver,
                         },
                         data: {
-                            component: OrderComponent,
-                            dialogConfig: {
-                                data: {},
-                                width: '600px',
-                                maxWidth: '95vw',
-                                maxHeight: '97vh',
-                            } as MatDialogConfig,
-                        } as NaturalDialogTriggerRoutingData,
+                            trigger: {
+                                component: OrderComponent,
+                                dialogConfig: {
+                                    width: '600px',
+                                    maxWidth: '95vw',
+                                    maxHeight: '97vh',
+                                },
+                            } as NaturalDialogTriggerRoutingData,
+                        },
                     },
                 ],
             },
@@ -52,12 +53,12 @@ const routes: Routes = [
                 path: 'donnees-personnelles',
                 component: AccountComponent,
                 resolve: {user: ViewerResolver},
-                data: {seo: {title: 'Données personnelles'}},
+                data: {seo: {title: 'Données personnelles'} as NaturalSeo},
             },
             {
                 path: 'articles-achetes',
                 component: PurchasesComponent,
-                data: {seo: {title: 'Articles achetés'}},
+                data: {seo: {title: 'Articles achetés'} as NaturalSeo},
             },
         ],
     },

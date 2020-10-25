@@ -5,6 +5,7 @@
  * A script to update image size data in DB from file on disk
  */
 use Application\Model\Image;
+use Application\Repository\ImageRepository;
 use Imagine\Image\ImagineInterface;
 
 require_once 'server/cli.php';
@@ -15,7 +16,10 @@ global $container;
 $imagine = $container->get(ImagineInterface::class);
 
 $connection = _em()->getConnection();
-$filesInDb = _em()->getRepository(Image::class)->getFilenamesForDimensionUpdate();
+
+/** @var ImageRepository $imageRepository */
+$imageRepository = _em()->getRepository(Image::class);
+$filesInDb = $imageRepository->getFilenamesForDimensionUpdate();
 $count = 0;
 $total = count($filesInDb);
 foreach ($filesInDb as $i => $row) {
@@ -31,7 +35,7 @@ foreach ($filesInDb as $i => $row) {
     $size = $image->getSize();
 
     // To force clearing the cache of Imagick
-    $image->__destruct();
+    unset($image);
 
     $width = $size->getWidth();
     $height = $size->getHeight();

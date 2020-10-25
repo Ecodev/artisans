@@ -27,7 +27,6 @@ function cleanRichText(string $description): string
 
     $pregReplacements = [
         '~<p><a href="[^"]*">Aller à la version numérique</a></p>~' => '',
-        '~<p><a href="[^"]*">Aller à la version numérique</a></p>~' => '',
         '~<p class="petit"><a href="[^"]*">Aller à la version numérique</a></p>~' => '',
         '~<a href="[^"]*" target="_blank">Aller à la version numérique</a></p>~' => '',
         '~ style="[^"]*"~' => '',

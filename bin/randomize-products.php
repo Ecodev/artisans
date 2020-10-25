@@ -2,7 +2,10 @@
 <?php
 
 use Application\Model\Product;
+use Application\Repository\ProductRepository;
 
 require_once 'server/cli.php';
 
-_em()->getRepository(Product::class)->randomizeSorting();
+/** @var ProductRepository $repository */
+$repository = _em()->getRepository(Product::class);
+$repository->randomizeSorting();

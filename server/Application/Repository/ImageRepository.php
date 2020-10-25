@@ -27,7 +27,7 @@ class ImageRepository extends AbstractRepository
     /**
      * Returns all filename in DB and their id and sizes
      *
-     * @return string[]
+     * @return string[][]
      */
     public function getFilenamesForDimensionUpdate(): array
     {

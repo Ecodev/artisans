@@ -500,7 +500,7 @@ class Version20200506092701 extends IrreversibleMigration
 (26, "ES", "Espagne"),
 (27, "SE", "Suède"),
 (28, "TR", "Turquie"),
-(29, "GB", "Angleterre"),
+(29, "GB", "Royaume-Uni"),
 (30, "US", "États-Unis"),
 (31, "AX", "Îles Åland"),
 (32, "AF", "Afghanistan"),

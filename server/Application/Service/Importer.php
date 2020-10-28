@@ -118,11 +118,12 @@ class Importer
 
     private function fetchCountries(): void
     {
-        $records = $this->connection->fetchAll('SELECT id, name, UPPER(name) AS upper FROM country');
+        $records = $this->connection->fetchAll('SELECT id, LOWER(name) AS name FROM country');
 
         $this->countryByName = [];
         foreach ($records as $r) {
-            $this->countryByName[$r['upper']] = $r;
+            $r['name'] = $this->toUpper($r['name']);
+            $this->countryByName[$r['name']] = $r;
         }
     }
 
@@ -169,7 +170,7 @@ class Importer
                 $locality,
                 $country,
                 $phone,
-                $membership
+                $membership,
             ] = $line;
 
             if (!$email && !$pattern) {
@@ -262,7 +263,7 @@ class Importer
         }
 
         // Case insensitive match
-        $upper = trim(mb_strtoupper($country));
+        $upper = $this->toUpper($country);
         if (array_key_exists($upper, $this->countryByName)) {
             return $this->countryByName[$upper]['id'];
         }
@@ -271,7 +272,7 @@ class Importer
         $best = 0;
         $bestGuess = 0;
         foreach ($this->countryByName as $r) {
-            similar_text($upper, $r['upper'], $percent);
+            similar_text($upper, $r['name'], $percent);
             if ($percent > $best) {
                 $best = $percent;
                 $bestGuess = $r;
@@ -397,5 +398,15 @@ class Importer
     {
         $this->connection->executeUpdate('UPDATE user SET should_delete = 1');
         $this->connection->executeUpdate('UPDATE organization SET should_delete = 1');
+    }
+
+    /**
+     * To upper without any accent
+     */
+    private function toUpper(string $name): string
+    {
+        $withoutAccent = iconv('UTF-8', 'ASCII//TRANSLIT', mb_strtolower($name));
+
+        return trim(mb_strtoupper($withoutAccent));
     }
 }

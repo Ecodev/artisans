@@ -48,6 +48,7 @@
     "require": {
         "php": "^7.4",
         "ext-bcmath": "*",
+        "ext-iconv": "*",
         "ext-fileinfo": "*",
         "ext-json": "*",
         "ext-pdo": "*",

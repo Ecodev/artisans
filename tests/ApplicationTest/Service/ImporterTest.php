@@ -74,9 +74,62 @@ class ImporterTest extends TestCase
 
     public function testFuzzyCountry(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "Suisse" ?');
+        $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?');
 
         $this->import('tests/data/importer/invalid-country.csv');
+    }
+
+    public function testCountryWithAccent(): void
+    {
+        $this->import('tests/data/importer/valid-country.csv');
+
+        $this->assertUser([
+            'email' => 'b@example.com',
+            'subscription_type' => null,
+            'subscription_last_review_id' => null,
+            'membership' => 'none',
+            'first_name' => '',
+            'last_name' => '',
+            'street' => '',
+            'postcode' => '',
+            'locality' => '',
+            'country_id' => '51',
+            'phone' => '',
+            'web_temporary_access' => '0',
+            'password' => '',
+        ]);
+
+        $this->assertUser([
+            'email' => 'c@example.com',
+            'subscription_type' => null,
+            'subscription_last_review_id' => null,
+            'membership' => 'none',
+            'first_name' => '',
+            'last_name' => '',
+            'street' => '',
+            'postcode' => '',
+            'locality' => '',
+            'country_id' => '51',
+            'phone' => '',
+            'web_temporary_access' => '0',
+            'password' => '',
+        ]);
+
+        $this->assertUser([
+            'email' => 'd@example.com',
+            'subscription_type' => null,
+            'subscription_last_review_id' => null,
+            'membership' => 'none',
+            'first_name' => '',
+            'last_name' => '',
+            'street' => '',
+            'postcode' => '',
+            'locality' => '',
+            'country_id' => '29',
+            'phone' => '',
+            'web_temporary_access' => '0',
+            'password' => '',
+        ]);
     }
 
     public function testImport(): void

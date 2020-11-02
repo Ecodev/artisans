@@ -46,6 +46,8 @@ class Importer
 
     private ?int $currentUser;
 
+    private array $errors = [];
+
     public function import(string $filename): array
     {
         $start = microtime(true);
@@ -75,6 +77,10 @@ class Importer
             $this->markToDelete();
             $this->read($file);
             $this->deleteOldOrganizations();
+
+            if ($this->errors) {
+                throw new Exception(implode(PHP_EOL, $this->errors));
+            }
 
             // Give user automatic access via organization
             /** @var OrganizationRepository $organizationRepository */
@@ -151,6 +157,8 @@ class Importer
             $actualColumnCount = count($line);
             if ($actualColumnCount !== $expectedColumnCount) {
                 $this->throw("Doit avoir exactement $expectedColumnCount colonnes, mais en a " . $actualColumnCount);
+
+                continue;
             }
 
             // un-escape all fields
@@ -175,6 +183,8 @@ class Importer
 
             if (!$email && !$pattern) {
                 $this->throw('Il faut soit un email, soit un pattern, mais aucun existe');
+
+                continue;
             }
 
             $lastReviewId = $this->readReviewId($lastReviewNumber);
@@ -216,10 +226,14 @@ class Importer
         $validator = new EmailAddress();
         if (!$validator->isValid($email)) {
             $this->throw("Ce n'est pas une addresse email valide : " . $email);
+
+            return;
         }
 
         if (array_key_exists($email, $this->seenEmails)) {
             $this->throw('L\'email "' . $email . '" est dupliqué et a déjà été vu à la ligne ' . $this->seenEmails[$email]);
+
+            return;
         }
 
         $this->seenEmails[$email] = $this->lineNumber;
@@ -229,10 +243,14 @@ class Importer
     {
         if (@preg_match('~' . $pattern . '~', '') === false) {
             $this->throw("Ce n'est pas une expression régulière valide : " . $pattern);
+
+            return;
         }
 
         if (array_key_exists($pattern, $this->seenPatterns)) {
             $this->throw('Le pattern "' . $pattern . '" est dupliqué et a déjà été vu à la ligne ' . $this->seenPatterns[$pattern]);
+
+            return;
         }
 
         $this->seenPatterns[$pattern] = $this->lineNumber;
@@ -246,11 +264,15 @@ class Importer
 
         if ($reviewNumber && !preg_match('~^\d+$~', $reviewNumber)) {
             $this->throw('Un numéro de revue doit être entièrement numérique, mais est : ' . $reviewNumber);
+
+            return null;
         }
 
         $reviewNumberNumeric = (int) $reviewNumber;
         if (!array_key_exists($reviewNumberNumeric, $this->reviewByNumber)) {
             $this->throw('Revue introuvable pour le numéro de revue : ' . $reviewNumber);
+
+            return null;
         }
 
         return $this->reviewByNumber[$reviewNumberNumeric];
@@ -280,11 +302,13 @@ class Importer
         }
 
         $this->throw('Pays "' . $country . '" introuvable. Vouliez-vous dire "' . $bestGuess['name'] . '" ?');
+
+        return null;
     }
 
     private function throw(string $message): void
     {
-        throw new Exception('A la ligne ' . $this->lineNumber . ' : ' . $message);
+        $this->errors[] = ('A la ligne ' . $this->lineNumber . ' : ' . $message);
     }
 
     private function deleteOldOrganizations(): void
@@ -321,6 +345,8 @@ class Importer
         }
 
         $this->throw('Le subscriptionType est invalide : ' . $subscriptionType);
+
+        return null;
     }
 
     private function updateUser(...$args): void

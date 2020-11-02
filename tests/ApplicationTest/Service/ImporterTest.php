@@ -72,6 +72,13 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-subscription-type.csv');
     }
 
+    public function testInvalidMultipleErrors(): void
+    {
+        $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?
+A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
+        $this->import('tests/data/importer/invalid-multiple-errors.csv');
+    }
+
     public function testFuzzyCountry(): void
     {
         $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?');

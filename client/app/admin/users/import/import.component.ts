@@ -18,7 +18,7 @@ export class ImportComponent implements OnInit {
     public routeData: Data;
 
     public importing = false;
-    public error: Error | null = null;
+    public errors: string[] = [];
     public result: Import['import'] | null = null;
     public users: Users_users_items[] = [];
 
@@ -50,7 +50,7 @@ export class ImportComponent implements OnInit {
 
     uploadFile(file: File): void {
         this.importing = true;
-        this.error = null;
+        this.errors = [];
         this.result = null;
         this.users = [];
 
@@ -87,8 +87,8 @@ export class ImportComponent implements OnInit {
                     this.userService.getAll(qvm).subscribe(users => (this.users = users.items));
                 },
                 error => {
-                    error.message = error.message.replace(/^GraphQL error: /, '');
-                    this.error = error;
+                    const message = error.message.replace(/^GraphQL error: /, '');
+                    this.errors = message.split('\n');
                     this.importing = false;
                 },
             );

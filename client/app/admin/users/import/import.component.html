@@ -11,9 +11,10 @@
             <p>
                 <button
                     mat-raised-button
-                    naturalFileSelect
+                    naturalFileDrop
+                    [selectable]="true"
                     accept="text/csv"
-                    (fileChange)="uploadFile($event)"
+                    (filesChange)="uploadFile($event)"
                     [disabled]="!permissionsService.crud?.organization.create || importing"
                 >
                     <natural-icon name="file_upload"></natural-icon>

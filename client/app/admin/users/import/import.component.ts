@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Router} from '@angular/router';
-import {NaturalAlertService, NaturalQueryVariablesManager, toUrl} from '@ecodev/natural';
+import {FileSelection, NaturalAlertService, NaturalQueryVariablesManager, toUrl} from '@ecodev/natural';
 import {Apollo} from 'apollo-angular';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import gql from 'graphql-tag';
@@ -48,11 +48,18 @@ export class ImportComponent implements OnInit {
         this.routeData = this.route.snapshot.data;
     }
 
-    uploadFile(file: File): void {
-        this.importing = true;
+    uploadFile(selection: FileSelection): void {
         this.errors = [];
         this.result = null;
         this.users = [];
+
+        if (!selection.valid.length) {
+            this.errors.push('Le fichier séléctionné ne semble pas être un CSV');
+            return;
+        }
+
+        const file = selection.valid[0];
+        this.importing = true;
 
         const mutation = gql`
             mutation Import($file: Upload!) {

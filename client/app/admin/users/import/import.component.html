@@ -13,7 +13,7 @@
                     mat-raised-button
                     naturalFileDrop
                     [selectable]="true"
-                    accept="text/csv"
+                    accept=".csv"
                     (filesChange)="uploadFile($event)"
                     [disabled]="!permissionsService.crud?.organization.create || importing"
                 >

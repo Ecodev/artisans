@@ -181,6 +181,9 @@ class Importer
                 $membership,
             ] = $line;
 
+            $email = trim($email);
+            $pattern = trim($pattern);
+
             if (!$email && !$pattern) {
                 $this->throw('Il faut soit un email, soit un pattern, mais aucun existe');
 

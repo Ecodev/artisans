@@ -7,9 +7,6 @@ parameters:
     doctrine:
         repositoryClass: Application\Repository\AbstractRepository
     inferPrivatePropertyTypeFromConstructor: true
-    earlyTerminatingMethodCalls:
-        Application\Service\Importer:
-            - throw
 
     ignoreErrors:
         - '~^Call to an undefined method Application\\Repository\\.*Repository::find(One)?By.*\(\)\.$~'

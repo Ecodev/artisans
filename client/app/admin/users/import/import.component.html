@@ -22,6 +22,8 @@
                 </button>
             </p>
 
+            <mat-spinner *ngIf="importing" diameter="32"></mat-spinner>
+
             <div *ngIf="result">
                 <p>
                     L'import de {{ result.totalLines }} lignes s'est terminé avec succès en {{ result.time }} secondes.

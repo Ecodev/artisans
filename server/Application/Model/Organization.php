@@ -17,6 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
  * This only concern digital version, never paper.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrganizationRepository")
+ *
+ * @ORM\Table(uniqueConstraints={
+ *     @ORM\UniqueConstraint(name="unique_pattern", columns={"pattern"}, options={"lengths" = {768}}),
+ * })
  */
 class Organization extends AbstractModel
 {
@@ -27,7 +31,7 @@ class Organization extends AbstractModel
      * A regexp pattern that match email address
      *
      * @var string
-     * @ORM\Column(type="string", length=191, unique=true)
+     * @ORM\Column(type="text")
      */
     private $pattern;
 

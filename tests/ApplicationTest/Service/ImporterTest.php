@@ -20,13 +20,13 @@ class ImporterTest extends TestCase
 
     public function testInvalidEmail(): void
     {
-        $this->expectErrorMessage("A la ligne 1 : Ce n'est pas une addresse email valide : fo[o");
+        $this->expectErrorMessage('A la ligne 1 : Ce n\'est pas une addresse email valide : "fo[o"');
         $this->import('tests/data/importer/invalid-email.csv');
     }
 
     public function testInvalidPattern(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Ce n\'est pas une expression régulière valide : fo[o');
+        $this->expectErrorMessage('A la ligne 1 : Ce n\'est pas une expression régulière valide : "fo[o"');
         $this->import('tests/data/importer/invalid-pattern.csv');
     }
 
@@ -50,7 +50,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidReviewNumber(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Un numéro de revue doit être entièrement numérique, mais est : foo');
+        $this->expectErrorMessage('A la ligne 1 : Un numéro de revue doit être entièrement numérique, mais est : "foo"');
         $this->import('tests/data/importer/invalid-review-number.csv');
     }
 
@@ -68,7 +68,7 @@ class ImporterTest extends TestCase
 
     public function testInvalidSubscriptionType(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Le subscriptionType est invalide : foo');
+        $this->expectErrorMessage('A la ligne 1 : Le subscriptionType est invalide : "foo"');
         $this->import('tests/data/importer/invalid-subscription-type.csv');
     }
 

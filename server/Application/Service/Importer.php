@@ -225,7 +225,7 @@ class Importer
     {
         $validator = new EmailAddress();
         if (!$validator->isValid($email)) {
-            $this->throw("Ce n'est pas une addresse email valide : " . $email);
+            $this->throw('Ce n\'est pas une addresse email valide : "' . $email . '"');
 
             return;
         }
@@ -242,7 +242,7 @@ class Importer
     private function assertPattern(string $pattern): void
     {
         if (@preg_match('~' . $pattern . '~', '') === false) {
-            $this->throw("Ce n'est pas une expression régulière valide : " . $pattern);
+            $this->throw('Ce n\'est pas une expression régulière valide : "' . $pattern . '"');
 
             return;
         }
@@ -263,7 +263,7 @@ class Importer
         }
 
         if ($reviewNumber && !preg_match('~^\d+$~', $reviewNumber)) {
-            $this->throw('Un numéro de revue doit être entièrement numérique, mais est : ' . $reviewNumber);
+            $this->throw('Un numéro de revue doit être entièrement numérique, mais est : "' . $reviewNumber . '"');
 
             return null;
         }
@@ -344,7 +344,7 @@ class Importer
             return ProductTypeType::BOTH;
         }
 
-        $this->throw('Le subscriptionType est invalide : ' . $subscriptionType);
+        $this->throw('Le subscriptionType est invalide : "' . $subscriptionType . '"');
 
         return null;
     }

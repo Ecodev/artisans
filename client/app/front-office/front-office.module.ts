@@ -22,7 +22,6 @@ import {SessionFacilitatorComponent} from './components/session-facilitator/sess
 import {SessionMethodComponent} from './components/session-method/session-method.component';
 import {SessionOrganisationComponent} from './components/session-organisation/session-organisation.component';
 import {SessionPageComponent} from './components/session-page/session-page.component';
-
 import {FrontOfficeRoutingModule} from './front-office-routing.module';
 import {FrontOfficeComponent} from './front-office.component';
 import {ShopModule} from './modules/shop/shop.module';

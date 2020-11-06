@@ -1,9 +1,8 @@
+import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {FileSelection, NaturalAlertService, NaturalQueryVariablesManager, toUrl} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import gql from 'graphql-tag';
 import {Import, ImportVariables, Users_users_items, UsersVariables} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 

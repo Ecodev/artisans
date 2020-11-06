@@ -5,7 +5,6 @@ import {AvatarModule} from 'ngx-avatar';
 import {ProfileModule} from '../profile/profile.module';
 import {ArtisansModule} from '../shared/modules/artisans.module';
 import {MaterialModule} from '../shared/modules/material.module';
-
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin/admin.component';
 import {CommentComponent} from './comments/comment/comment.component';

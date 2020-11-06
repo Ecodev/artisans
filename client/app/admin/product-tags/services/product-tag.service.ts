@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {
@@ -7,7 +8,6 @@ import {
     NaturalQueryVariablesManager,
     unique,
 } from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
 import {map} from 'rxjs/operators';
 import {
     CreateProductTag,

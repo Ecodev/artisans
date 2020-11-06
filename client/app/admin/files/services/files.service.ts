@@ -1,6 +1,6 @@
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
 import {
     CreateFile,
     CreateFileVariables,
@@ -8,7 +8,6 @@ import {
     DeleteFileVariables,
     FileInput,
 } from '../../../shared/generated-types';
-
 import {createFileMutation, deleteFileMutation} from './files.queries';
 
 @Injectable({

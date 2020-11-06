@@ -1,5 +1,4 @@
 import {waitForAsync, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {SubscribeComponent} from './subscribe.component';
 
 describe('SubscribeComponent', () => {

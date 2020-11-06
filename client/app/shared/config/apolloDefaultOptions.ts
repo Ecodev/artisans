@@ -1,8 +1,7 @@
+import {HttpBatchLink} from 'apollo-angular/http';
+import {ApolloLink, DefaultOptions} from '@apollo/client/core';
+import {onError} from '@apollo/client/link/error';
 import {hasFilesAndProcessDate, NaturalAlertService} from '@ecodev/natural';
-import {HttpBatchLink} from 'apollo-angular-link-http-batch';
-import {DefaultOptions} from 'apollo-client/ApolloClient';
-import {ApolloLink} from 'apollo-link';
-import {onError} from 'apollo-link-error';
 import {createUploadLink} from 'apollo-upload-client';
 import {NetworkActivityService} from '../services/network-activity.service';
 

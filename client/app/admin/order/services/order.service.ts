@@ -1,6 +1,6 @@
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
 import {map} from 'rxjs/operators';
 import {
     CreateOrder,
@@ -50,7 +50,7 @@ export class OrderService extends NaturalAbstractModelService<
             })
             .pipe(
                 map(result => {
-                    this.apollo.getClient().reFetchObservableQueries();
+                    this.apollo.client.reFetchObservableQueries();
                     return result;
                 }),
             );

@@ -1,8 +1,10 @@
+import {Apollo} from 'apollo-angular';
+import {HttpBatchLink} from 'apollo-angular/http';
+import {InMemoryCache} from '@apollo/client/core';
 import {isPlatformBrowser, registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {Inject, LOCALE_ID, NgModule, PLATFORM_ID} from '@angular/core';
-
 import {DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatIconRegistry} from '@angular/material/icon';
@@ -16,9 +18,6 @@ import {
     NaturalSeoConfig,
     NaturalSeoService,
 } from '@ecodev/natural';
-import {Apollo, ApolloModule} from 'apollo-angular';
-import {HttpBatchLink, HttpBatchLinkModule} from 'apollo-angular-link-http-batch';
-import {InMemoryCache} from 'apollo-cache-inmemory';
 import {NgProgressModule} from 'ngx-progressbar';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -44,10 +43,8 @@ registerLocaleData(localeFRCH);
         MaterialModule,
         ArtisansModule,
         NgProgressModule,
-        ApolloModule,
         AppRoutingModule,
         HttpClientModule,
-        HttpBatchLinkModule,
         FrontOfficeModule,
     ],
     providers: [

@@ -1,5 +1,4 @@
 import {waitForAsync, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {BnsComponent} from './bns.component';
 
 describe('BnsComponent', () => {

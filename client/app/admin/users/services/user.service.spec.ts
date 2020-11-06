@@ -1,7 +1,7 @@
+import {Apollo} from 'apollo-angular';
 import {fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Apollo} from 'apollo-angular';
 import {CartService} from '../../../front-office/modules/cart/services/cart.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {mockApolloProvider} from '../../../shared/testing/MockApolloProvider';
@@ -38,7 +38,7 @@ describe('UserService', () => {
     it('should login', fakeAsync(
         inject([UserService, Apollo], (service: UserService, apollo: Apollo) => {
             // Spy on resetStore
-            const resetStore = spyOn(apollo.getClient(), 'resetStore').and.callThrough();
+            const resetStore = spyOn(apollo.client, 'resetStore').and.callThrough();
 
             let actual: any = null;
             service.login({email: 'foo@example.com', password: 'bar'}).subscribe(v => (actual = v));
@@ -52,7 +52,7 @@ describe('UserService', () => {
     it('should logout and redirect to /login', fakeAsync(
         inject([UserService, Apollo, Router], (service: UserService, apollo: Apollo, router: Router) => {
             // Spy on resetStore
-            const resetStore = spyOn(apollo.getClient(), 'resetStore').and.callThrough();
+            const resetStore = spyOn(apollo.client, 'resetStore').and.callThrough();
 
             // Mock router to do nothing when navigating
             const navigate = spyOn(router, 'navigate').and.callFake(() => Promise.resolve(true));

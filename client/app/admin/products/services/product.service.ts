@@ -1,3 +1,4 @@
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
 import {
@@ -8,7 +9,6 @@ import {
     NaturalAbstractModelService,
     unique,
 } from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
 import {
     CreateProduct,
     CreateProductVariables,

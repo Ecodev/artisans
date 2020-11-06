@@ -1,7 +1,7 @@
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
 import {FormValidators, integer, Literal, NaturalAbstractModelService} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
 import {
     OrderLine,
     OrderLineInput,

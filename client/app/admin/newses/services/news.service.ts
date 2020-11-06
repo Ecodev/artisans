@@ -1,7 +1,6 @@
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
-
 import {
     CreateNews,
     CreateNewsVariables,

@@ -1,7 +1,6 @@
+import {Apollo, gql} from 'apollo-angular';
 import {Component, Injector, OnInit} from '@angular/core';
 import {ifValid, NaturalAbstractDetail, validateAllFormControls} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
-import gql from 'graphql-tag';
 import {
     CreateUser,
     CreateUserVariables,

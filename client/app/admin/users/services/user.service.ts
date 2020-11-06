@@ -1,10 +1,9 @@
+import {Apollo, gql} from 'apollo-angular';
+import {DataProxy} from '@apollo/client/core';
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {deliverableEmail, FormAsyncValidators, FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
-import {DataProxy} from 'apollo-cache';
-import gql from 'graphql-tag';
 import {Observable, of, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {CartService} from '../../../front-office/modules/cart/services/cart.service';
@@ -115,7 +114,7 @@ export class UserService extends NaturalAbstractModelService<
         const subject = new Subject<Login['login']>();
 
         // Be sure to destroy all Apollo data, before changing user
-        (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
+        (this.apollo.client.resetStore() as Promise<null>).then(() => {
             this.apollo
                 .mutate<Login, LoginVariables>({
                     mutation: loginMutation,
@@ -154,7 +153,7 @@ export class UserService extends NaturalAbstractModelService<
                     this.cartService.clearCarts();
                     this.viewer.next(null);
                     this.currencyService.updateLockedStatus(null);
-                    (this.apollo.getClient().resetStore() as Promise<null>).then(() => {
+                    (this.apollo.client.resetStore() as Promise<null>).then(() => {
                         subject.next(v);
                     });
                 });

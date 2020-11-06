@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import {gql} from 'apollo-angular';
 
 export const purchasesQuery = gql`
     query Purchases($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {

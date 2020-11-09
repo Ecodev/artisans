@@ -43,7 +43,6 @@
 
         &,
         a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
-            border: 1px solid red !important;
             color: mat-color($accent, default-contrast);
         }
     }

@@ -29,6 +29,51 @@ import {UserComponent} from './users/user/user.component';
 import {UsersComponent} from './users/users/users.component';
 import {ImportComponent} from './users/import/import.component';
 
+const orderDetails = [
+    {
+        path: ':orderId',
+        component: NaturalDialogTriggerComponent,
+        resolve: {
+            order: OrderResolver,
+            viewer: ViewerResolver,
+        },
+        data: {
+            trigger: {
+                component: OrderComponent,
+                dialogConfig: {
+                    width: '600px',
+                    maxWidth: '95vw',
+                    maxHeight: '97vh',
+                },
+            } as NaturalDialogTriggerRoutingData,
+            seo: {
+                title: 'Commande',
+            } as NaturalSeo,
+        },
+    },
+    {
+        path: 'order-line/:orderLineId',
+        component: NaturalDialogTriggerComponent,
+        resolve: {
+            orderLine: OrderLineResolver,
+        },
+        data: {
+            trigger: {
+                component: OrderLineComponent,
+                dialogConfig: {
+                    width: '600px',
+                    maxWidth: '95vw',
+                    maxHeight: '97vh',
+                    autoFocus: false,
+                },
+            } as NaturalDialogTriggerRoutingData,
+            seo: {
+                title: "Modification de la vente d'un produit",
+            } as NaturalSeo,
+        },
+    },
+];
+
 const routes: Routes = [
     {
         path: '',
@@ -101,6 +146,7 @@ const routes: Routes = [
                                 resolveKey: 'user',
                             } as NaturalSeo,
                         },
+                        children: orderDetails,
                     },
                 ],
             },
@@ -121,50 +167,7 @@ const routes: Routes = [
                         title: 'Ventes',
                     } as NaturalSeo,
                 },
-                children: [
-                    {
-                        path: ':orderId',
-                        component: NaturalDialogTriggerComponent,
-                        resolve: {
-                            order: OrderResolver,
-                            viewer: ViewerResolver,
-                        },
-                        data: {
-                            trigger: {
-                                component: OrderComponent,
-                                dialogConfig: {
-                                    width: '600px',
-                                    maxWidth: '95vw',
-                                    maxHeight: '97vh',
-                                },
-                            } as NaturalDialogTriggerRoutingData,
-                            seo: {
-                                title: 'Commande',
-                            } as NaturalSeo,
-                        },
-                    },
-                    {
-                        path: 'order-line/:orderLineId',
-                        component: NaturalDialogTriggerComponent,
-                        resolve: {
-                            orderLine: OrderLineResolver,
-                        },
-                        data: {
-                            trigger: {
-                                component: OrderLineComponent,
-                                dialogConfig: {
-                                    width: '600px',
-                                    maxWidth: '95vw',
-                                    maxHeight: '97vh',
-                                    autoFocus: false,
-                                },
-                            } as NaturalDialogTriggerRoutingData,
-                            seo: {
-                                title: "Modification de la vente d'un produit",
-                            } as NaturalSeo,
-                        },
-                    },
-                ],
+                children: orderDetails,
             },
             {
                 path: 'news', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674

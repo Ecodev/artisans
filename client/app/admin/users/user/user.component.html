@@ -4,14 +4,32 @@
         [model]="data.model"
         label="Utilisateur"
         [newLabel]="data.seo.title"
-    ></natural-detail-header>
+    >
+        <div fxLayout="column" fxLayoutGap="5px">
+            <div>
+                <span class="mat-body-2">Status de l'abonnement : </span>
+                <ng-container *ngIf="data.model.subscriptionLastReview">
+                    Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
+                    {{ data.model.subscriptionLastReview.reviewNumber }}
+                </ng-container>
+
+                <ng-container *ngIf="!data.model.subscriptionLastReview">N'est pas abonné</ng-container>
+            </div>
+
+            <div>
+                <span class="mat-body-2">Status d'adhérant : </span>
+                {{ data.model.membership | enum: 'Membership' | async }}
+            </div>
+        </div>
+    </natural-detail-header>
 
     <mat-toolbar color="warn" *ngIf="data.model.shouldDelete"
         >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
         définitivement ici.</mat-toolbar
     >
 
-    <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+    <!-- naturalLinkableTab conflicts with order detail page (child route) -->
+    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab id="general" label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
@@ -95,6 +113,19 @@
                 </div>
             </div>
         </mat-tab>
+
+        <mat-tab id="orders" label="Commandes" *ngIf="data.model.id">
+            <div class="padding-top">
+                <div>
+                    <app-orders
+                        [forcedVariables]="{
+                            filter: {groups: [{conditions: [{owner: {equal: {value: data.model.id}}}]}]}
+                        }"
+                        [initialColumns]="['creationDate', 'lines', 'status', 'balanceCHF', 'balanceEUR']"
+                    ></app-orders>
+                </div>
+            </div>
+        </mat-tab>
     </mat-tab-group>
 
     <natural-fixed-button-detail
@@ -105,3 +136,5 @@
         [model]="data.model"
     ></natural-fixed-button-detail>
 </div>
+
+<router-outlet></router-outlet>

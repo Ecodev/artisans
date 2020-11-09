@@ -56,7 +56,7 @@
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <ngx-avatar [name]="element.name" [gravatarId]="element.email" [size]="36"></ngx-avatar>
                             <natural-table-button
-                                [label]="element.name"
+                                [label]="element.name || 'Sans nom'"
                                 [navigate]="['/admin/user', element.id]"
                                 matTooltip="Éditer"
                             ></natural-table-button>

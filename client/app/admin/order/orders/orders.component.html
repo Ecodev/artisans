@@ -73,7 +73,7 @@
                 </ng-container>
 
                 <ng-container matColumnDef="status">
-                    <th *matHeaderCellDef mat-header-cell>Status</th>
+                    <th *matHeaderCellDef mat-header-cell>Statut</th>
                     <td *matCellDef="let element" mat-cell>{{ element.status | enum: 'OrderStatus' | async }}</td>
                     <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>

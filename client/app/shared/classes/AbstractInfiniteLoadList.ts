@@ -25,7 +25,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
             }
 
             if (result.pageIndex === 0) {
-                this.items = result.items; // When page index is 0, it means "new list" so replace all results.
+                this.items = [...result.items]; // When page index is 0, it means "new list" so replace all results.
             } else {
                 this.items.push(...result.items); // Complete existing list with new items
             }
@@ -39,12 +39,15 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
     }
 
     /**
-     * Override parent function to deal with the "load more" mechanism. When the user load more pages, the url parameters refers to what is
-     * required to show the entire page result. If good for SEO purposes and reload/sharing pages.
+     * Override parent function to deal with the "load more" mechanism. When the user load more pages, the url
+     * parameters refers to what is required to show the entire page result. If good for SEO purposes and
+     * reload/sharing pages.
      *
-     * For example : With pageSize:5 and 3 more loaded pages(= 15 items ), the persisted parameters show pageIndex:0 and pageSize: 15
+     * For example : With pageSize:5 and 3 more loaded pages(= 15 items ), the persisted parameters show pageIndex:0
+     * and pageSize: 15
      *
-     * Todo : could be improved to restore default pageSize:5 after initialisation otherwise pageSize:15 will apply for further paginations
+     * Todo : could be improved to restore default pageSize:5 after initialisation otherwise pageSize:15 will apply for
+     * further paginations
      */
     public pagination(event: PaginationInput | PageEvent, defer?: Promise<unknown>): void {
         let pagination: PaginationInput = this.defaultPagination;

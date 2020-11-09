@@ -124,7 +124,7 @@
 
         <div fxLayout="row" fxLayoutAlign="center" id="end-of-list">
             <a (click)="loadMore()" color="primary" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">
-                Afficher plus d'articles
+                {{ route.snapshot.data.showMoreLabel }}
             </a>
         </div>
     </ng-container>

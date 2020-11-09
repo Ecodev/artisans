@@ -34,6 +34,7 @@ const routes: Routes = [
             showTagsOnProducts: true,
             showTagsNavigation: true,
             viewMode: ProductsViewMode.grid,
+            showMoreLabel: "Afficher plus d'articles",
             forcedVariables: {
                 filter: {
                     groups: [
@@ -64,6 +65,7 @@ const routes: Routes = [
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.grid,
+            showMoreLabel: "Afficher plus d'articles",
             forcedVariables: {
                 filter: {
                     groups: [
@@ -90,6 +92,7 @@ const routes: Routes = [
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,
             title: 'Tous les numéros',
+            showMoreLabel: 'Afficher plus de numéros',
             forcedVariables: {
                 filter: {
                     groups: [

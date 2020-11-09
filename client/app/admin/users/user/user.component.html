@@ -7,7 +7,7 @@
     >
         <div fxLayout="column" fxLayoutGap="5px">
             <div>
-                <span class="mat-body-2">Status de l'abonnement : </span>
+                <span class="mat-body-2">Statut de l'abonnement : </span>
                 <ng-container *ngIf="data.model.subscriptionLastReview">
                     Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
                     {{ data.model.subscriptionLastReview.reviewNumber }}
@@ -17,7 +17,7 @@
             </div>
 
             <div>
-                <span class="mat-body-2">Status d'adhérant : </span>
+                <span class="mat-body-2">Statut d'adhérant : </span>
                 {{ data.model.membership | enum: 'Membership' | async }}
             </div>
         </div>

@@ -126,11 +126,11 @@ const routes: Routes = [
                 },
             },
             {
-                path: 'status',
+                path: 'statuts',
                 component: ComiteStatusComponent,
                 data: {
                     seo: {
-                        title: 'Status',
+                        title: 'Statuts',
                         description:
                             'Président : Yvan Maillard Ardenti pilote le programme « Justice climatique » à la fondation Pain pour le prochain. Secrétaire : Jacques Eschmann, géographe. Membres du comité : Daniel Chambaz, Pietro Majno, Aurianne Stroude et Berthe d’Arras.',
                     } as NaturalSeo,

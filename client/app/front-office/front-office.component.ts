@@ -50,8 +50,8 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     link: '/association/qui-sommes-nous',
                 },
                 {
-                    display: 'Comité et status',
-                    link: '/association/status',
+                    display: 'Comité et statuts',
+                    link: '/association/statuts',
                 },
                 {
                     display: 'Partenariats et coopérations',
@@ -188,7 +188,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             link: '/agenda',
         },
         {
-            display: 'Actualité',
+            display: 'Actualités',
             link: '/actualite',
         },
         {

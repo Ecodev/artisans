@@ -222,38 +222,50 @@ const routes: Routes = [
                     } as NaturalSeo,
                 },
             },
+
             {
-                path: 'desinvestir-industrie-energies-fossiles',
-                component: DesinvestirFossileComponent,
-                data: {
-                    seo: {
-                        title: "Desinvestir de l'industrie des énergies fossiles",
-                        description:
-                            'Les Artisans de la transition animent la campagne de désinvestissement des énergies fossiles. Elle est particulièrement pertinente en Suisse, au 70e rang en termes d’émissions directes de CO2, au 7e rang en termes d’émissions générées par sa place financière.',
-                    } as NaturalSeo,
-                },
-            },
-            {
-                path: 'apero-divest',
-                component: AperoDivestComponent,
-                data: {
-                    seo: {
-                        title: 'Apero divest',
-                        description:
-                            'Le principe de l’Apéro-Divest est très simple : vous réunissez une dizaine de personnes en cercle sans rien au centre dans votre salon et faites appel à un ou deux facilitateurs ou facilitatrices formé-e-s par les Artisans de la transition pour assurer l’animation.',
-                    } as NaturalSeo,
-                },
-            },
-            {
-                path: 'rapport-bns',
-                component: BnsComponent,
-                data: {
-                    seo: {
-                        title: 'Rapports BNS',
-                        description:
-                            'Depuis 2016, l’association a publié trois rapports sur les investissements de la Banque Nationale Suisse dans l’industrie des énergies fossiles, dont les deux premiers ont donné lieu à de nombreuses motions parlementaires, y compris au niveau fédéral.',
-                    } as NaturalSeo,
-                },
+                path: 'desinvestir',
+
+                children: [
+                    {
+                        path: '',
+                        redirectTo: 'desinvestir/industrie-energies-fossiles',
+                        pathMatch: 'full',
+                    },
+                    {
+                        path: 'industrie-energies-fossiles',
+                        component: DesinvestirFossileComponent,
+                        data: {
+                            seo: {
+                                title: "Desinvestir de l'industrie des énergies fossiles",
+                                description:
+                                    'Les Artisans de la transition animent la campagne de désinvestissement des énergies fossiles. Elle est particulièrement pertinente en Suisse, au 70e rang en termes d’émissions directes de CO2, au 7e rang en termes d’émissions générées par sa place financière.',
+                            } as NaturalSeo,
+                        },
+                    },
+                    {
+                        path: 'apero-divest',
+                        component: AperoDivestComponent,
+                        data: {
+                            seo: {
+                                title: 'Apero divest',
+                                description:
+                                    'Le principe de l’Apéro-Divest est très simple : vous réunissez une dizaine de personnes en cercle sans rien au centre dans votre salon et faites appel à un ou deux facilitateurs ou facilitatrices formé-e-s par les Artisans de la transition pour assurer l’animation.',
+                            } as NaturalSeo,
+                        },
+                    },
+                    {
+                        path: 'rapport-bns',
+                        component: BnsComponent,
+                        data: {
+                            seo: {
+                                title: 'Rapports BNS',
+                                description:
+                                    'Depuis 2016, l’association a publié trois rapports sur les investissements de la Banque Nationale Suisse dans l’industrie des énergies fossiles, dont les deux premiers ont donné lieu à de nombreuses motions parlementaires, y compris au niveau fédéral.',
+                            } as NaturalSeo,
+                        },
+                    },
+                ],
             },
             {
                 path: 'numerique-ethique',

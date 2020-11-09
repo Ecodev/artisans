@@ -60,6 +60,8 @@ export class MenuComponent {
      * Toggle open parent nodes, and allow navigation only on children
      */
     public clickAction(item, event: Event) {
+        this.data.items.forEach(item => (item?.open = false));
+
         if (item.children?.length) {
             // Open / close
             item.open = !item.open;

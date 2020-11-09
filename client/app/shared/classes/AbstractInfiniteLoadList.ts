@@ -13,10 +13,11 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
 
     constructor(service: any, injector: Injector) {
         super(service, injector);
-        // this.persistSearch = false;
+        this.persistSearch = false;
     }
 
     ngOnInit(): void {
+        console.log('init');
         super.ngOnInit();
 
         this.dataSource?.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {

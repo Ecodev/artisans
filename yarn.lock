@@ -8055,13 +8055,6 @@ ngx-progressbar@^6.0.3:
   dependencies:
     tslib "^1.10.0"
 
-ngx-timeago@^1.0.1:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/ngx-timeago/-/ngx-timeago-1.0.4.tgz#351514242c1ad637f8d76693a1dba720cc699285"
-  integrity sha512-/UkF2ETQBRdJ2k3xFoI8uNXNqrzWll2gZB17Ear1pvKyQ0bJczYY4qPa5IzSqurLLTmNxOK447+RMxeuXX+mrQ==
-  dependencies:
-    tslib "^1.9.0"
-
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"

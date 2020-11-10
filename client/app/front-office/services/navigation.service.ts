@@ -13,6 +13,7 @@ export interface MenuItem {
     children?: MenuItem[];
     link?: RouterLink['routerLink'];
     highlight?: boolean;
+    open?: boolean;
 }
 
 @Injectable({

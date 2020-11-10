@@ -53,24 +53,24 @@
         "ext-json": "*",
         "ext-pdo": "*",
         "beberlei/doctrineextensions": "^1.2",
-        "ecodev/felix": "^3.1",
+        "ecodev/felix": "^3.3",
         "ecodev/graphql-upload": "^6.0",
         "infomaniak/client-api-newsletter": "^1.0",
-        "laminas/laminas-component-installer": "^2.2",
+        "laminas/laminas-component-installer": "^2.3",
         "laminas/laminas-config-aggregator": "^1.3",
-        "laminas/laminas-http": "^2.12",
+        "laminas/laminas-http": "^2.13",
         "mezzio/mezzio": "^3.2",
         "mezzio/mezzio-fastroute": "^3.0",
         "mezzio/mezzio-helpers": "^5.3",
         "mezzio/mezzio-laminasviewrenderer": "^2.2",
-        "mezzio/mezzio-session-ext": "^1.9",
+        "mezzio/mezzio-session-ext": "^1.10",
         "roave/psr-container-doctrine": "^2.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "laminas/laminas-development-mode": "^3.2",
         "mezzio/mezzio-tooling": "^1.3",
-        "phpstan/phpstan-doctrine": "^0.12.19",
-        "phpunit/phpunit": "^9.2"
+        "phpstan/phpstan-doctrine": "^0.12.22",
+        "phpunit/phpunit": "^9.4"
     }
 }

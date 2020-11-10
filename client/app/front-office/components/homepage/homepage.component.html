@@ -100,7 +100,7 @@
 
 <div class="la-revue section" *ngIf="currentReview">
     <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
-        <a [routerLink]="['/larevuedurable/article', currentReview.id]">
+        <a [routerLink]="['/larevuedurable/article', currentReview.id]" *ngIf="currentReview.image">
             <img
                 [attr.src]="'/image/' + currentReview.image.id + '/470'"
                 alt="illustration du dernier numéro paru"

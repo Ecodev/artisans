@@ -11,7 +11,7 @@ return [
     'fromEmail' => 'noreply@artisans.lan',
     'emailOverride' => null,
     'smtp' => null,
-    'phpPath' => '/usr/bin/php',
+    'phpPath' => '/usr/bin/php7.4',
     'templates' => [
         'paths' => [
             'app' => ['server/templates/app'],

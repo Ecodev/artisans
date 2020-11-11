@@ -29,6 +29,7 @@
             <div>{{ viewer.membership | enum: 'Membership' | async }}</div>
 
             <app-add-to-cart
+                *ngIf="membershipProduct"
                 [product]="membershipProduct"
                 [type]="ProductType.other"
                 [buttonColor]="null"

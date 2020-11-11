@@ -27,8 +27,6 @@ import {ProductsComponent} from '../../admin/products/products/products.componen
 import {UsersComponent} from '../../admin/users/users/users.component';
 import {AddressComponent} from '../components/address/address.component';
 import {BreadcrumbsComponent} from '../components/breadcrumbs/breadcrumbs.component';
-import {CardComponent} from '../components/card/card.component';
-import {MoneyComponent} from '../components/money/money.component';
 import {PriceComponent} from '../components/price/price.component';
 import {ProsemirrorComponent} from '../components/proseMirror/proseMirror.component';
 import {TagsNavigationComponent} from '../components/tags-navigation/tags-navigation.component';
@@ -40,8 +38,6 @@ const iconsConfig: NaturalIconsConfig = {};
 
 const declarations = [
     AddressComponent,
-    MoneyComponent,
-    CardComponent,
     UsersComponent,
     ProductsComponent,
     TagsNavigationComponent,

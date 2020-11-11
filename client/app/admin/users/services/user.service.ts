@@ -230,7 +230,7 @@ export class UserService extends NaturalAbstractModelService<
             );
     }
 
-    public unregister(user): Observable<Unregister['unregister']> {
+    public unregister(user: User_user): Observable<Unregister['unregister']> {
         return this.apollo
             .mutate<Unregister, UnregisterVariables>({
                 mutation: unregisterMutation,
@@ -241,7 +241,7 @@ export class UserService extends NaturalAbstractModelService<
             .pipe(map(result => result.data!.unregister));
     }
 
-    public requestPasswordReset(email): Observable<RequestPasswordReset['requestPasswordReset']> {
+    public requestPasswordReset(email: string): Observable<RequestPasswordReset['requestPasswordReset']> {
         const mutation = gql`
             mutation RequestPasswordReset($email: Email!) {
                 requestPasswordReset(email: $email)

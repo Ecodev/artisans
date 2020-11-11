@@ -9,7 +9,6 @@
 @import 'rich-text';
 @import 'mixins';
 @import 'artisans.theme';
-@import '../app/shared/components/money/money.theme';
 @import '../app/shared/components/breadcrumbs/breadcrumbs.theme';
 @import '../app/shared/components/tags-navigation/tags-navigation.theme';
 @import '../app/admin/products/product/product.theme';
@@ -34,7 +33,6 @@
     @include natural($theme);
     @include artisans($theme);
     @include page-header($theme);
-    @include money($theme);
     @include product($theme);
     @include rich-text($theme);
     @include profile($theme);

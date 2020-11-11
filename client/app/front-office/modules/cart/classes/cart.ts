@@ -51,7 +51,7 @@ export class Cart {
     /**
      * Total including taxes
      */
-    public totalTaxInc: number;
+    public totalTaxInc = 0;
 
     /**
      * Single donation amount
@@ -128,15 +128,23 @@ export class Cart {
 
             return cart;
         }
+
+        return;
     }
 
-    private static getPriceTaxInc(product: {pricePerUnitCHF?; pricePerUnitEUR?}, quantity: number): number {
+    private static getPriceTaxInc(
+        product: {pricePerUnitCHF: Decimal.Value; pricePerUnitEUR: Decimal.Value},
+        quantity: number,
+    ): number {
         // todo : drop decimaljs ?
         const quantifiedPrice = Decimal.mul(Cart.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
     }
 
-    private static getPriceByCurrency(product: {pricePerUnitCHF?; pricePerUnitEUR?}): Decimal.Value {
+    private static getPriceByCurrency(product: {
+        pricePerUnitCHF: Decimal.Value;
+        pricePerUnitEUR: Decimal.Value;
+    }): Decimal.Value {
         if (this.currency === Currency.CHF) {
             return product.pricePerUnitCHF;
         } else if (this.currency === Currency.EUR) {

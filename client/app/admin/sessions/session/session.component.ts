@@ -1,18 +1,20 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {FormArray, FormControl} from '@angular/forms';
-import {NaturalAbstractDetail} from '@ecodev/natural';
+import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
 import {
     CreateSession,
     CreateSessionVariables,
     DeleteSessions,
     DeleteSessionsVariables,
     Session,
+    Session_session,
     SessionVariables,
     UpdateSession,
     UpdateSessionVariables,
 } from '../../../shared/generated-types';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';
+import {SessionResolve} from '../session';
 
 @Component({
     selector: 'app-session',
@@ -34,7 +36,12 @@ export class SessionComponent
     /**
      * Array of form controls dedicated to dates display
      */
-    public datesForm: FormArray;
+    public datesForm!: FormArray;
+
+    /**
+     * Override parent just to type it
+     */
+    public data!: SessionResolve & {seo: NaturalSeoBasic};
 
     constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);

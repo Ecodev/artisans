@@ -1,7 +1,12 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, Inject} from '@angular/core';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {deliverableEmail} from '@ecodev/natural';
+
+type EmailsData = {
+    title: string;
+    emails?: string[];
+};
 
 @Component({
     selector: 'app-emails',
@@ -16,7 +21,7 @@ export class EmailsComponent {
      */
     public readonly emailsControl: FormArray;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public dialogData) {
+    constructor(@Inject(MAT_DIALOG_DATA) public dialogData: EmailsData) {
         const emails: string[] = dialogData.emails ?? [''];
         this.emailsControl = new FormArray(emails.map(email => new FormControl(email, deliverableEmail)));
         this.form.setControl('emails', this.emailsControl);

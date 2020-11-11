@@ -59,7 +59,7 @@ export class ProductsPageComponent
     /**
      * Page main title
      */
-    public title: string;
+    public title = '';
 
     /**
      * Template access
@@ -105,7 +105,7 @@ export class ProductsPageComponent
         });
     }
 
-    public getDetailLink(product) {
+    public getDetailLink(product: Products_products_items) {
         return ['/larevuedurable', product.reviewNumber ? 'numero' : 'article', product.id];
     }
 }

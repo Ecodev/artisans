@@ -3,7 +3,7 @@
 
     <div fxLayout="column">
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
-            <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table>
+            <table [dataSource]="dataSource" mat-table>
                 <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
 
@@ -50,7 +50,7 @@
             [length]="dataSource.data?.length"
             [pageIndex]="dataSource.data?.pageIndex"
             [pageSizeOptions]="[25]"
-            [pageSize]="[25]"
+            [pageSize]="25"
         ></mat-paginator>
     </div>
 </div>

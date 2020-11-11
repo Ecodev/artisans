@@ -20,7 +20,7 @@
                             <input (change)="update()" formControlName="name" matInput />
                             <mat-label>Nom</mat-label>
                             <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                Maximum {{ form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
@@ -29,7 +29,7 @@
                             <input (change)="update()" formControlName="place" matInput />
                             <mat-label>Lieu</mat-label>
                             <mat-error *ngIf="form.get('place')?.hasError('maxlength')">
-                                Maximum {{ form.get('place')?.errors.maxlength.requiredLength }} caractères
+                                Maximum {{ form.get('place')?.errors?.maxlength?.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('place')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
@@ -38,7 +38,7 @@
                             <input (change)="update()" formControlName="type" matInput />
                             <mat-label>Type</mat-label>
                             <mat-error *ngIf="form.get('type')?.hasError('maxlength')">
-                                Maximum {{ form.get('type')?.errors.maxlength.requiredLength }} caractères
+                                Maximum {{ form.get('type')?.errors?.maxlength?.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('type')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>

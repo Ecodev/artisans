@@ -1,8 +1,8 @@
 <div *ngIf="!editMode" class="bloc">
-    <div class="mat-h1 title">{{ form.get('title').value }}</div>
-    <div class="bloc-description mat-h4">{{ form.get('description').value }}</div>
-    <a mat-flat-button routerLink="{{ form.get('buttonLink').value }}">
-        {{ form.get('buttonLabel').value }}
+    <div class="mat-h1 title">{{ form.get('title')?.value }}</div>
+    <div class="bloc-description mat-h4">{{ form.get('description')?.value }}</div>
+    <a mat-flat-button routerLink="{{ form.get('buttonLink')?.value }}">
+        {{ form.get('buttonLabel')?.value }}
     </a>
     <button
         (click)="editMode = true"
@@ -19,11 +19,16 @@
     <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
         <mat-form-field>
             <mat-label>Titre</mat-label>
-            <textarea [matAutosizeMinRows]="1" formControlName="title" matInput matTextareaAutosize></textarea>
+            <textarea [matAutosizeMinRows]="1" formControlName="title" matInput [matTextareaAutosize]="true"></textarea>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Description</mat-label>
-            <textarea [matAutosizeMinRows]="1" formControlName="description" matInput matTextareaAutosize></textarea>
+            <textarea
+                [matAutosizeMinRows]="1"
+                formControlName="description"
+                matInput
+                [matTextareaAutosize]="true"
+            ></textarea>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Nom du bouton</mat-label>

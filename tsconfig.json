@@ -16,5 +16,12 @@
         "typeRoots": ["node_modules/@types"],
         "lib": ["es2018", "dom"],
         "allowSyntheticDefaultImports": true
+    },
+    "angularCompilerOptions": {
+        "strictInjectionParameters": true,
+        "strictInputAccessModifiers": true,
+        "strictTemplates": true,
+        // Remove this when https://github.com/angular/angular/issues/37619 is fixed
+        "strictSafeNavigationTypes": false
     }
 }

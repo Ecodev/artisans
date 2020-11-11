@@ -19,7 +19,7 @@ import {EmailsComponent} from '../../modules/shop/components/emails/emails.compo
     styleUrls: ['./sessions-incoming.component.scss'],
 })
 export class SessionsIncomingComponent implements OnInit {
-    public sessions: Sessions_sessions_items[];
+    public sessions: Sessions_sessions_items[] = [];
 
     public queues: {mailingList: string; name: string}[] = [
         {name: 'Région Bienne', mailingList: '61355'},

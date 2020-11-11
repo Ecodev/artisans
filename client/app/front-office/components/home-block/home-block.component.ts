@@ -4,19 +4,26 @@ import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 
+interface Block {
+    title: string;
+    description: string;
+    buttonLabel: string;
+    buttonLink: string;
+}
+
 @Component({
     selector: 'app-home-block',
     templateUrl: './home-block.component.html',
     styleUrls: ['./home-block.component.scss'],
 })
 export class HomeBlockComponent implements OnInit {
-    @Input() key: string;
+    @Input() key!: string;
 
     public editMode = false;
 
-    public form: FormGroup;
+    public form!: FormGroup;
 
-    public lastValue;
+    public lastValue: Block | null = null;
 
     constructor(private configService: ConfigurationService, public permissionService: PermissionsService) {}
 
@@ -55,7 +62,9 @@ export class HomeBlockComponent implements OnInit {
     }
 
     public reset() {
-        this.form.setValue(this.lastValue);
+        if (this.lastValue) {
+            this.form.setValue(this.lastValue);
+        }
         this.editMode = false;
     }
 }

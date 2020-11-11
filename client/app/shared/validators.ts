@@ -1,4 +1,12 @@
-import {FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {
+    AbstractControl,
+    FormControl,
+    FormGroup,
+    FormGroupDirective,
+    NgForm,
+    ValidationErrors,
+    ValidatorFn,
+} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 /**
@@ -6,7 +14,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
  * Typically it should be used on the form itself, not on a control
  */
 export function xorValidator(errorKey: string, paths: string[]): ValidatorFn {
-    return (control: FormGroup): ValidationErrors | null => {
+    return (control: AbstractControl): ValidationErrors | null => {
         const nonEmptyValues = paths.filter(path => control.get(path)?.value);
 
         if (nonEmptyValues.length > 1) {

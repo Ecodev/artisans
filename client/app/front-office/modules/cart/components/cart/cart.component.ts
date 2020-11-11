@@ -13,8 +13,6 @@ import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
     styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-    public mode;
-
     /**
      * For template usage
      */
@@ -23,7 +21,7 @@ export class CartComponent implements OnInit {
     /**
      * Eligible cart for Order
      */
-    public cart: Cart;
+    public cart?: Cart;
 
     constructor(
         public alertService: NaturalAlertService,
@@ -54,16 +52,16 @@ export class CartComponent implements OnInit {
             )
             .subscribe(confirm => {
                 if (confirm) {
-                    this.cart.empty();
+                    this.cart?.empty();
                 }
             });
     }
 
     public increase(product: CartLineProduct, type: ProductType): void {
-        this.cart.addProduct(product, type, 1);
+        this.cart?.addProduct(product, type, 1);
     }
 
     public decrease(product: CartLineProduct, type: ProductType): void {
-        this.cart.removeProduct(product, type, 1);
+        this.cart?.removeProduct(product, type, 1);
     }
 }

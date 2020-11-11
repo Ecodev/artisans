@@ -20,7 +20,7 @@
                             <input (change)="update()" formControlName="name" matInput />
                             <mat-label>Nom</mat-label>
                             <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                Maximum {{ form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>
@@ -32,7 +32,7 @@
                                 [matAutosizeMinRows]="1"
                                 formControlName="description"
                                 matInput
-                                matTextareaAutosize
+                                [matTextareaAutosize]="true"
                             ></textarea>
                         </mat-form-field>
 

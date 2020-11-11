@@ -14,7 +14,7 @@ import {SubscriptionService} from './subscription.service';
     styleUrls: ['./subscriptions.component.scss'],
 })
 export class SubscriptionsComponent implements OnInit {
-    public subscriptions: {[key: string]: Subscriptions_subscriptions_items};
+    public subscriptions: {[key: string]: Subscriptions_subscriptions_items} = {};
 
     public ProductType = ProductType;
 

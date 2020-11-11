@@ -15,7 +15,7 @@
                             <textarea (change)="update()" formControlName="description" matInput></textarea>
                             <mat-label>Commentaire</mat-label>
                             <mat-error *ngIf="form.get('description')?.hasError('maxlength')">
-                                Maximum {{ form.get('description')?.errors.maxlength.requiredLength }} caractères
+                                Maximum {{ form.get('description')?.errors?.maxlength?.requiredLength }} caractères
                             </mat-error>
                             <mat-error *ngIf="form.get('description')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>

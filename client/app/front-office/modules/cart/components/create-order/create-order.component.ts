@@ -8,6 +8,7 @@ import {ConfigService, FrontEndConfig} from '../../../../../shared/services/conf
 import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
 import {NavigationService} from '../../../../services/navigation.service';
 import {Cart} from '../../classes/cart';
+// @ts-ignore
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import {CartService} from '../../services/cart.service';
 
@@ -20,12 +21,7 @@ export class CreateOrderComponent implements OnInit {
     /**
      * Eligible cart for order
      */
-    public cart: Cart;
-
-    /**
-     * Selected payment method
-     */
-    public paymentMethod: PaymentMethod;
+    public cart?: Cart;
 
     /**
      * True if no product is paper. Hides shipment address for virtual only cart.
@@ -35,12 +31,12 @@ export class CreateOrderComponent implements OnInit {
     /**
      * Step 1 form
      */
-    public billingForm: FormGroup;
+    public billingForm!: FormGroup;
 
     /**
      * Step 2 form
      */
-    public shippingForm: FormGroup;
+    public shippingForm!: FormGroup;
 
     /**
      * For template usage
@@ -56,7 +52,7 @@ export class CreateOrderComponent implements OnInit {
      * If true, cart is hidden and confirmation message is shown.
      * We could use dedicated "empty" component but this way we spare some app weight. We can as well use previous form values.
      */
-    public showConfirmationMessage: boolean;
+    public showConfirmationMessage = false;
 
     /**
      * Banking payment config
@@ -131,12 +127,12 @@ export class CreateOrderComponent implements OnInit {
 
     public createOrder(): void {
         const paymentMethod = this.shippingForm.get('paymentMethod');
-        if (!paymentMethod) {
+        if (!paymentMethod || !this.cart) {
             return;
         }
 
         this.cartService.save(this.cart, paymentMethod.value, this.billingForm.getRawValue()).subscribe(order => {
-            if (!order) {
+            if (!order || !this.cart) {
                 return;
             }
 
@@ -150,7 +146,7 @@ export class CreateOrderComponent implements OnInit {
     }
 
     public confirmationRedirect() {
-        this.cart.empty();
+        this.cart?.empty();
         this.showConfirmationMessage = true;
         this.navigationService.scrollToTop();
     }
@@ -183,7 +179,7 @@ export class CreateOrderComponent implements OnInit {
                 this.confirmationRedirect();
                 this.alertService.info('Paiement réussi');
             },
-            error: data => {
+            error: (data: {message: string}) => {
                 this.alertService.error("Le paiement n'a pas abouti: " + data.message);
             },
             cancel: () => {

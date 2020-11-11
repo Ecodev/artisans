@@ -12,7 +12,7 @@ export class AddToCartComponent implements OnInit {
     /**
      * Button label
      */
-    @Input() label: string;
+    @Input() label!: string;
 
     /**
      * Button background color
@@ -22,12 +22,12 @@ export class AddToCartComponent implements OnInit {
     /**
      * Product to add to cart
      */
-    @Input() product: CartLineProduct;
+    @Input() product!: CartLineProduct;
 
     /**
      * Type variant to add to cart
      */
-    @Input() type: ProductType;
+    @Input() type!: ProductType;
 
     public inCart = false;
 

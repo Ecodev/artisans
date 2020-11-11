@@ -7,6 +7,7 @@ import {ProductTagService} from '../../../admin/product-tags/services/product-ta
 import {ProductService} from '../../../admin/products/services/product.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
+    CurrentUserForProfile_viewer,
     Events_events_items,
     EventSortingField,
     EventsVariables,
@@ -29,22 +30,22 @@ import {CartService} from '../../modules/cart/services/cart.service';
 export class HomepageComponent implements OnInit {
     public title = 'Les artisans de la transition';
 
-    public viewer;
+    public viewer: CurrentUserForProfile_viewer | null = null;
 
     /**
      * Last newses
      */
-    public newses: Newses_newses_items[];
+    public newses: Newses_newses_items[] = [];
 
     /**
      * Next events
      */
-    public events: Events_events_items[];
+    public events: Events_events_items[] = [];
 
     /**
      * Currently active review
      */
-    public currentReview: Products_products_items;
+    public currentReview: Products_products_items | null = null;
 
     constructor(
         public userService: UserService,

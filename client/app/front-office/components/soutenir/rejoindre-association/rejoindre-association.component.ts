@@ -10,7 +10,7 @@ import {Product, ProductType} from '../../../../shared/generated-types';
 export class RejoindreAssociationComponent implements OnInit {
     public ProductType = ProductType;
 
-    public membershipProduct: Product['product'];
+    public membershipProduct!: Product['product'];
 
     constructor(public productService: ProductService) {}
 

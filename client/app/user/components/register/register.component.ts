@@ -32,7 +32,7 @@ export class RegisterComponent
         DeleteUsersVariables
     >
     implements OnInit {
-    public step;
+    public step = 1;
     public sending = false;
 
     constructor(userService: AnonymousUserService, injector: Injector, protected apollo: Apollo) {

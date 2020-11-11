@@ -36,7 +36,7 @@ export class OrderService extends NaturalAbstractModelService<
     }
 
     public getInput(object: Literal) {
-        const orderLinesInput = object.orderLines.map(line => this.orderLineService.getInput(line));
+        const orderLinesInput = object.orderLines.map((line: Literal) => this.orderLineService.getInput(line));
         object.orderLines = orderLinesInput;
 
         return object;

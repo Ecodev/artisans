@@ -23,12 +23,12 @@ export class CommentListComponent
     /**
      * Event related to displayed comments
      */
-    @Input() event: Event_event | Events_events_items;
+    @Input() event?: Event_event | Events_events_items;
 
     /**
      * News related to displayed comments
      */
-    @Input() news: News_news | Newses_newses_items;
+    @Input() news?: News_news | Newses_newses_items;
 
     /**
      * Antichronologic sorting by creation date to no change in case of update

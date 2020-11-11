@@ -29,7 +29,7 @@ export class AddressComponent {
     /**
      * Form group to manage field values
      */
-    @Input() form: FormGroup;
+    @Input() form!: FormGroup;
 
     /**
      * Emits when form changes

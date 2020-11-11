@@ -33,12 +33,12 @@ export class OrderLinesComponent
     /**
      * Force page size
      */
-    @Input() paginatorPageSize;
+    @Input() paginatorPageSize?: number;
 
     /**
      * Override page size options list
      */
-    @Input() pageSizeOptions;
+    @Input() pageSizeOptions = [5, 10, 25, 50, 100, 200];
 
     constructor(
         service: OrderLineService,

@@ -50,7 +50,7 @@ export class SessionPageComponent
      */
     public UserRole = UserRole;
 
-    public viewer: CurrentUserForProfile_viewer;
+    public viewer: CurrentUserForProfile_viewer | null = null;
 
     constructor(private sessionService: SessionService, injector: Injector, public userService: UserService) {
         super('session', sessionService, injector);

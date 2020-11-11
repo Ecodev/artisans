@@ -11,9 +11,10 @@ import {
     ViewChild,
 } from '@angular/core';
 import {ControlValueAccessor, NgControl} from '@angular/forms';
+// @ts-ignore
 import {exampleSetup} from 'prosemirror-example-setup';
 import {DOMParser, DOMSerializer} from 'prosemirror-model';
-import {EditorState} from 'prosemirror-state';
+import {EditorState, Transaction} from 'prosemirror-state';
 import {EditorView} from 'prosemirror-view';
 import {schema} from './schema';
 import {DOCUMENT} from '@angular/common';
@@ -29,9 +30,9 @@ import {DOCUMENT} from '@angular/common';
     styleUrls: ['./proseMirror.component.scss'],
 })
 export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAccessor {
-    private view: EditorView = null;
+    private view: EditorView | null = null;
 
-    @ViewChild('editor', {read: ElementRef, static: true}) editor: ElementRef;
+    @ViewChild('editor', {read: ElementRef, static: true}) editor!: ElementRef;
 
     @Output() contentChange = new EventEmitter<string>();
 
@@ -39,7 +40,7 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
      * Interface with ControlValueAccessor
      * Notifies parent model / form controller
      */
-    private onChange;
+    private onChange?: (value: string | null) => void;
 
     /**
      * HTML string
@@ -62,12 +63,16 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
         this.view = new EditorView(this.editor.nativeElement, {
             state: state,
 
-            dispatchTransaction: transaction => {
+            dispatchTransaction: (transaction: Transaction) => {
+                if (!this.view) {
+                    return;
+                }
+
                 const newState = this.view.state.apply(transaction);
                 this.view.updateState(newState);
 
                 // Transform doc into HTML string
-                const dom = serializer.serializeFragment(this.view.state.doc);
+                const dom = serializer.serializeFragment(this.view.state.doc as any);
                 const el = this.document.createElement('_');
                 el.appendChild(dom);
 
@@ -102,7 +107,7 @@ export class ProsemirrorComponent implements OnInit, OnDestroy, ControlValueAcce
         template.innerHTML = '<div>' + this.content + '</div>';
 
         const parser = DOMParser.fromSchema(schema);
-        const doc = parser.parse(template.firstChild);
+        const doc = parser.parse(template.firstChild!);
 
         return EditorState.create({
             doc: doc,

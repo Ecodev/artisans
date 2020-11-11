@@ -22,7 +22,7 @@
                                     <mat-label>Nom</mat-label>
                                     <input (change)="update()" formControlName="name" matInput />
                                     <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                        Maximum {{ form.get('name')?.errors.maxlength.requiredLength }} caractères
+                                        Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
                                     </mat-error>
                                     <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
                                 </mat-form-field>
@@ -31,7 +31,7 @@
                                     <mat-label>Code</mat-label>
                                     <input (change)="update()" formControlName="code" matInput maxlength="20" />
                                     <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
-                                        Maximum {{ form.get('code')?.errors.maxlength.requiredLength }} caractères
+                                        Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
                                     </mat-error>
                                     <mat-error *ngIf="form.get('code')?.hasError('duplicateValue')">
                                         Ce code est déjà attribué à un produit
@@ -53,7 +53,7 @@
                                 [matAutosizeMinRows]="1"
                                 formControlName="content"
                                 matInput
-                                matTextareaAutosize
+                                [matTextareaAutosize]="true"
                             ></textarea>
                         </mat-form-field>
                     </div>
@@ -170,7 +170,7 @@
                                 [matAutosizeMaxRows]="3"
                                 formControlName="internalRemarks"
                                 matInput
-                                matTextareaAutosize
+                                [matTextareaAutosize]="true"
                             ></textarea>
                         </mat-form-field>
                     </div>

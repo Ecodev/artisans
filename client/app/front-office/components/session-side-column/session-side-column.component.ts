@@ -11,7 +11,7 @@ import {SessionsVariables} from '../../../shared/generated-types';
 export class SessionSideColumnComponent implements OnInit {
     public number = 0;
 
-    @Input() hiddenBlocName: string;
+    @Input() hiddenBlocName?: string;
 
     constructor(private sessionService: SessionService) {}
 

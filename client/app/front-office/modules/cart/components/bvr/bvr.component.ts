@@ -20,12 +20,11 @@ const q = gql`
     styleUrls: ['./bvr.component.scss'],
 })
 export class BvrComponent {
-    public bankingInfos: BankingInfos_bankingInfos;
+    public bankingInfos?: BankingInfos_bankingInfos;
 
     constructor(private apollo: Apollo) {}
 
     @Input() set bankingData(data: BankingInfosVariables) {
-        console.log('bankingData', data);
         this.apollo
             .query<BankingInfos, BankingInfosVariables>({
                 query: q,

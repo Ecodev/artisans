@@ -8,7 +8,7 @@ import {CurrencyService} from '../../../shared/services/currency.service';
     styleUrls: ['./donation.component.scss'],
 })
 export class DonationComponent implements OnInit {
-    public amount: number;
+    public amount?: number;
 
     constructor(public currencyService: CurrencyService, public dialogRef: MatDialogRef<any>) {}
 

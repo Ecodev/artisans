@@ -28,7 +28,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public searchTerm = '';
     public menuOpened = false;
 
-    public viewer: CurrentUserForProfile_viewer | null;
+    public viewer: CurrentUserForProfile_viewer | null = null;
     public readonly newsletterForm: FormGroup;
 
     /**

@@ -25,7 +25,7 @@ export class OrderComponent implements OnInit {
     /**
      * Currently connected user
      */
-    public viewer: CurrentUserForProfile_viewer | null;
+    public viewer: CurrentUserForProfile_viewer | null = null;
 
     /**
      * Template usage
@@ -50,8 +50,12 @@ export class OrderComponent implements OnInit {
 
     public ngOnInit(): void {}
 
-    public updateStatus(status: OrderStatus) {
-        this.orderService.changeStatus(this.data.model.id, status).subscribe(result => {
+    public updateStatus(status: string | null): void {
+        if (!status) {
+            return;
+        }
+
+        this.orderService.changeStatus(this.data.model.id, status as OrderStatus).subscribe(() => {
             this.alertService.info('Commande mise à jour');
         });
     }

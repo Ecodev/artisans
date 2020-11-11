@@ -113,9 +113,7 @@
         <div *ngIf="!viewer" class="mat-h3" fxLayout="row wrap" fxLayoutAlign="start baseline" fxLayoutGap="15px">
             <div class="mat-h1 no-margin-bottom">Intéressé par ce contenu ?</div>
             <div>Si vous êtes déjà abonnés à la version digitale</div>
-            <a mat-flat-button color="primary" routerLink="/login" [queryParams]="{returnUrl: router.url}"
-                >connectez-vous !</a
-            >
+            <a mat-flat-button color="primary" routerLink="/login" [queryParams]="{returnUrl: url}">connectez-vous !</a>
         </div>
 
         <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="30px" fxLayoutAlign="center">

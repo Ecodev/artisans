@@ -6,7 +6,7 @@ import {PurchaseService} from '../../../../../profile/components/purchases/purch
 import {
     CreateProduct,
     CreateProductVariables,
-    CurrentUserForProfile,
+    CurrentUserForProfile_viewer,
     DeleteProducts,
     DeleteProductsVariables,
     Product,
@@ -37,7 +37,7 @@ export class ProductPageComponent
         DeleteProductsVariables
     >
     implements OnInit {
-    @ViewChild(ProductsPageComponent, {static: false}) relatedProducts: ProductsPageComponent;
+    @ViewChild(ProductsPageComponent, {static: false}) relatedProducts!: ProductsPageComponent;
 
     public ProductType = ProductType;
 
@@ -65,7 +65,7 @@ export class ProductPageComponent
      * Combination of form controls of the page
      */
     public formGroup = new FormGroup({quantity: this.quantityForm});
-    public viewer: CurrentUserForProfile['viewer'];
+    public viewer: CurrentUserForProfile_viewer | null = null;
 
     /**
      * Hide buy digital version if it has already been bought as it can be bought only once.
@@ -87,13 +87,11 @@ export class ProductPageComponent
      */
     public showBuyPaper = false;
 
-    /**
-     *
-     */
-    public relatedProductsCount: number;
+    public url: string;
 
     constructor(private productService: ProductService, private purchaseService: PurchaseService, injector: Injector) {
         super('product', productService, injector);
+        this.url = this.router.url;
     }
 
     ngOnInit(): void {
@@ -101,7 +99,6 @@ export class ProductPageComponent
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 
         this.route.data.subscribe(data => {
-            this.relatedProductsCount = 0;
             this.articlesMenuOpen = false;
 
             const reviewProduct = data.product.model.review || data.product.model;

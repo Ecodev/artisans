@@ -19,7 +19,7 @@
                     type="email"
                 />
                 <mat-error *ngIf="form.get('email')?.hasError('maxlength')" i18n
-                    >Maximum {{ form.get('email').errors.maxlength.requiredLength }} caractères</mat-error
+                    >Maximum {{ form.get('email')?.errors?.maxlength?.requiredLength }} caractères</mat-error
                 >
                 <mat-error *ngIf="form.get('email')?.hasError('email')" i18n>Courriel invalide</mat-error>
                 <mat-error *ngIf="form.get('email')?.hasError('required')" i18n>Requis</mat-error>

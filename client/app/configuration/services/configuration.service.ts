@@ -3,7 +3,12 @@ import {NetworkStatus} from '@apollo/client/core';
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {Configuration, UpdateConfiguration, UpdateConfigurationVariables} from '../../shared/generated-types';
+import {
+    Configuration,
+    ConfigurationVariables,
+    UpdateConfiguration,
+    UpdateConfigurationVariables,
+} from '../../shared/generated-types';
 import {configurationQuery, updateConfiguration} from './configuration.queries';
 
 @Injectable({
@@ -15,14 +20,14 @@ export class ConfigurationService {
     public get(key: string): Observable<string> {
         const resultObservable = new Subject<string>();
 
-        const queryRef = this.apollo.watchQuery<Configuration['configuration']>({
+        const queryRef = this.apollo.watchQuery<Configuration, ConfigurationVariables>({
             query: configurationQuery,
             variables: {key},
             fetchPolicy: 'cache-and-network',
         });
 
         const subscription = queryRef.valueChanges.pipe(filter(r => !!r.data)).subscribe(result => {
-            const data = result.data['configuration'];
+            const data = result.data.configuration;
             resultObservable.next(data);
             if (result.networkStatus === NetworkStatus.ready) {
                 resultObservable.complete();

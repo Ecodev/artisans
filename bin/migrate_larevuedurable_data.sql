@@ -12,7 +12,7 @@
 -- Files can be migrated with something like the following. It will only copy the original image, no thumbs, into current project:
 --
 --     find /sites/larevuedurable.com/htdocs/img/p/ -regextype posix-extended -regex '.*/[0-9]+\..[a-zA-Z]+' -exec cp {} data/images/ \;
---     cp /sites/larevuedurable.lan/htdocs/download/* data/file/ && rm data/file/index.php
+--     cp /sites/larevuedurable.com/htdocs/download/* data/file/ && rm data/file/index.php
 --
 -- Later on things can be cleaned up with the help of `./bin/check-files.php`
 

@@ -23,11 +23,13 @@ import {ComiteStatusComponent} from './components/association/comite-status/comi
 import {ConvictionsComponent} from './components/association/convictions/convictions.component';
 import {PartenariatsComponent} from './components/association/partenariats/partenariats.component';
 import {QuiSommesNousComponent} from './components/association/qui-sommes-nous/qui-sommes-nous.component';
+import {ConditionsGeneralesVenteComponent} from './components/conditions-generales-vente/conditions-generales-vente.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {EventPageComponent} from './components/event-page/event-page.component';
 import {EventsPageComponent} from './components/events-page/events-page.component';
 import {FaireUnDonComponent} from './components/faire-un-don/faire-un-don.component';
 import {HomepageComponent} from './components/homepage/homepage.component';
+import {LegalMentionsComponent} from './components/legal-mentions/legal-mentions.component';
 import {LoginComponent} from './components/login/login.component';
 import {NewsPageComponent} from './components/news-page/news-page.component';
 import {NewsesPageComponent} from './components/newses-page/newses-page.component';
@@ -394,6 +396,14 @@ const routes: Routes = [
     {
         path: 'panier',
         loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
+    },
+    {
+        path: 'mentions-legales',
+        component: LegalMentionsComponent,
+    },
+    {
+        path: 'cgv',
+        component: ConditionsGeneralesVenteComponent,
     },
 ];
 

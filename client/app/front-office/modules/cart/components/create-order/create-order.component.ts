@@ -75,7 +75,7 @@ export class CreateOrderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         const cart = Cart.getById(this.sessionStorage, +this.route.snapshot.params['cartId']);
         if (cart) {
             this.cart = cart;

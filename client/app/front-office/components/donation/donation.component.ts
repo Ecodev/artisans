@@ -12,5 +12,5 @@ export class DonationComponent implements OnInit {
 
     constructor(public currencyService: CurrencyService, public dialogRef: MatDialogRef<any>) {}
 
-    ngOnInit() {}
+    public ngOnInit() {}
 }

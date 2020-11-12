@@ -47,7 +47,7 @@ export class ImportComponent implements OnInit {
         this.routeData = this.route.snapshot.data;
     }
 
-    uploadFile(selection: FileSelection): void {
+    public uploadFile(selection: FileSelection): void {
         this.errors = [];
         this.result = null;
         this.users = [];

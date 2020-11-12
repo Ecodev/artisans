@@ -12,28 +12,28 @@ export class AddToCartComponent implements OnInit {
     /**
      * Button label
      */
-    @Input() label!: string;
+    @Input() public label!: string;
 
     /**
      * Button background color
      */
-    @Input() buttonColor: 'primary' | 'accent' | 'warn' | null = 'primary';
+    @Input() public buttonColor: 'primary' | 'accent' | 'warn' | null = 'primary';
 
     /**
      * Product to add to cart
      */
-    @Input() product!: CartLineProduct;
+    @Input() public product!: CartLineProduct;
 
     /**
      * Type variant to add to cart
      */
-    @Input() type!: ProductType;
+    @Input() public type!: ProductType;
 
     public inCart = false;
 
     constructor(private cartService: CartService) {}
 
-    ngOnInit() {}
+    public ngOnInit() {}
 
     public click() {
         this.cartService.addProduct(this.product, this.type, 1);

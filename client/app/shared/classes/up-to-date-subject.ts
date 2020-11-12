@@ -8,12 +8,12 @@ export class UpToDateSubject<T> extends BehaviorSubject<T> {
         this.time = new Date();
     }
 
-    next(value: T): void {
+    public next(value: T): void {
         super.next(value);
         this.time = new Date();
     }
 
-    getUpToDateValue(expiration: number): T | null {
+    public getUpToDateValue(expiration: number): T | null {
         const diff = +new Date() - +this.time;
         if (diff < expiration) {
             return this.value;

@@ -24,17 +24,17 @@ export class AddressComponent {
     /**
      * If true, all fields are displayed vertically
      */
-    @Input() vertical = false;
+    @Input() public vertical = false;
 
     /**
      * Form group to manage field values
      */
-    @Input() form!: FormGroup;
+    @Input() public form!: FormGroup;
 
     /**
      * Emits when form changes
      */
-    @Output() change: EventEmitter<void> = new EventEmitter<void>();
+    @Output() public change: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(public countryService: CountryService) {}
 

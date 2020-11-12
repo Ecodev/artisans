@@ -8,5 +8,5 @@ import {Component, OnInit} from '@angular/core';
 export class BnsComponent implements OnInit {
     constructor() {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {}
 }

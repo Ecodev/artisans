@@ -9,7 +9,7 @@ import {UserService} from './user.service';
 import {memoryStorageProvider} from '@ecodev/natural';
 
 class MockCartService {
-    clearCarts() {}
+    private clearCarts() {}
 }
 
 describe('UserService', () => {

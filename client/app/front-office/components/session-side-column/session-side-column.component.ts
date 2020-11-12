@@ -11,11 +11,11 @@ import {SessionsVariables} from '../../../shared/generated-types';
 export class SessionSideColumnComponent implements OnInit {
     public number = 0;
 
-    @Input() hiddenBlocName?: string;
+    @Input() public hiddenBlocName?: string;
 
     constructor(private sessionService: SessionService) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{startDate: {greater: {value: new Date()}}}]}]},

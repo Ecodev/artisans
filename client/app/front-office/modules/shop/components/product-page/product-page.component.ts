@@ -37,7 +37,7 @@ export class ProductPageComponent
         DeleteProductsVariables
     >
     implements OnInit {
-    @ViewChild(ProductsPageComponent, {static: false}) relatedProducts!: ProductsPageComponent;
+    @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts!: ProductsPageComponent;
 
     public ProductType = ProductType;
 
@@ -94,7 +94,7 @@ export class ProductPageComponent
         this.url = this.router.url;
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         super.ngOnInit();
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 

@@ -43,7 +43,7 @@ export class SessionsIncomingComponent implements OnInit {
         private snackbar: MatSnackBar,
     ) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         // Get sessions
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
 

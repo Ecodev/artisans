@@ -14,15 +14,15 @@ export interface Breadcrumb {
     styleUrls: ['./breadcrumbs.component.scss'],
 })
 export class BreadcrumbsComponent extends NaturalAbstractController implements OnInit {
-    @HostBinding('class.mat-body') isBody = true;
+    @HostBinding('class.mat-body') private isBody = true;
 
-    @Input() breadcrumbs: Breadcrumb[] = [];
+    @Input() public breadcrumbs: Breadcrumb[] = [];
 
     constructor(private router: Router) {
         super();
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.update();
         this.router.events
             .pipe(

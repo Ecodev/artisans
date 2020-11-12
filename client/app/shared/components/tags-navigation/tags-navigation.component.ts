@@ -22,11 +22,11 @@ export class TagsNavigationComponent implements OnInit {
     /**
      * Url base
      */
-    @Input() linkBase: any[] = [];
+    @Input() public linkBase: any[] = [];
 
     constructor() {}
 
-    ngOnInit() {
+    public ngOnInit() {
         if (this.service) {
             const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
             this.service.getAll(qvm).subscribe(result => {
@@ -35,7 +35,7 @@ export class TagsNavigationComponent implements OnInit {
         }
     }
 
-    getLink(item: ProductTags_productTags_items) {
+    public getLink(item: ProductTags_productTags_items) {
         return [...this.linkBase, item.name];
     }
 }

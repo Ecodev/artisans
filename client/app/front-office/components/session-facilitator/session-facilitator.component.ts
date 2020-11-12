@@ -19,7 +19,7 @@ export class SessionFacilitatorComponent implements OnInit {
 
     constructor(public userService: UserService) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{role: {in: {values: [UserRole.facilitator]}}}]}]},

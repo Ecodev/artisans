@@ -23,12 +23,12 @@ export class CommentListComponent
     /**
      * Event related to displayed comments
      */
-    @Input() event?: Event_event | Events_events_items;
+    @Input() public event?: Event_event | Events_events_items;
 
     /**
      * News related to displayed comments
      */
-    @Input() news?: News_news | Newses_newses_items;
+    @Input() public news?: News_news | Newses_newses_items;
 
     /**
      * Antichronologic sorting by creation date to no change in case of update
@@ -44,11 +44,11 @@ export class CommentListComponent
         this.persistSearch = false;
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         super.ngOnInit();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    public ngOnChanges(changes: SimpleChanges): void {
         if (this.event) {
             this.variablesManager.set('partial-variables', {
                 filter: {groups: [{conditions: [{event: {in: {values: [this.event.id]}}}]}]},

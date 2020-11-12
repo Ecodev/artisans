@@ -9,5 +9,5 @@ import {CartService} from '../../modules/cart/services/cart.service';
 export class FaireUnDonComponent implements OnInit {
     constructor(public cartService: CartService) {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {}
 }

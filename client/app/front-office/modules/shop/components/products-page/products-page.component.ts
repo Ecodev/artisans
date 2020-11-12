@@ -32,7 +32,7 @@ export class ProductsPageComponent
     /**
      * If true, the three first items of grid have highlighted layout
      */
-    @Input() highlightFirstItems = true;
+    @Input() public highlightFirstItems = true;
 
     /**
      * Display tags over products
@@ -80,7 +80,7 @@ export class ProductsPageComponent
         super(productService, injector);
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         super.ngOnInit();
 
         this.title = this.route.snapshot.params.productTagName || this.route.snapshot.data.seo.title;

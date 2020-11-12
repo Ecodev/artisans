@@ -14,7 +14,7 @@ export class RejoindreAssociationComponent implements OnInit {
 
     constructor(public productService: ProductService) {}
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.productService.getMembershipProduct().subscribe(product => (this.membershipProduct = product));
     }
 }

@@ -16,7 +16,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
         this.persistSearch = false;
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         super.ngOnInit();
 
         this.dataSource?.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {

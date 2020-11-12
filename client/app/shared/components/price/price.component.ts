@@ -11,7 +11,7 @@ import {Currency, CurrencyService} from '../../services/currency.service';
     styleUrls: ['./price.component.scss'],
 })
 export class PriceComponent extends NaturalAbstractController implements OnInit {
-    @Input() product!: CartLineProduct | Subscriptions_subscriptions_items;
+    @Input() public product!: CartLineProduct | Subscriptions_subscriptions_items;
 
     public price!: string;
 
@@ -19,7 +19,7 @@ export class PriceComponent extends NaturalAbstractController implements OnInit 
         super();
     }
 
-    ngOnInit() {
+    public ngOnInit() {
         this.currencyService.current.pipe(takeUntil(this.ngUnsubscribe)).subscribe(currency => {
             if (currency === Currency.CHF) {
                 this.price = this.product.pricePerUnitCHF;

@@ -22,7 +22,7 @@ function samePasswordsValidator(formGroup: AbstractControl): ValidationErrors | 
 }
 
 class ConfirmPasswordStateMatcher implements ErrorStateMatcher {
-    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    public isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
         if (control && control.parent && control.parent instanceof FormGroup) {
             return !!samePasswordsValidator(control.parent) && control.dirty;
         }
@@ -37,7 +37,7 @@ class ConfirmPasswordStateMatcher implements ErrorStateMatcher {
     styleUrls: ['./password.component.scss'],
 })
 export class PasswordComponent implements OnInit {
-    @Input() form!: FormGroup;
+    @Input() public form!: FormGroup;
     public confirmPasswordStateMatcher = new ConfirmPasswordStateMatcher();
 
     constructor() {}

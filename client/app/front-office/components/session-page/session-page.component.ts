@@ -56,7 +56,7 @@ export class SessionPageComponent
         super('session', sessionService, injector);
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         super.ngOnInit();
 
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;

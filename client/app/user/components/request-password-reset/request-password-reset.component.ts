@@ -23,7 +23,7 @@ export class RequestPasswordResetComponent {
         this.form = new FormGroup({email: new FormControl('', userService.getFormValidators().email)});
     }
 
-    submit(): void {
+    public submit(): void {
         this.sending = true;
 
         this.userService.requestPasswordReset(this.form.value.email).subscribe(

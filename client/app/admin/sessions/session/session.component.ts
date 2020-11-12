@@ -47,7 +47,7 @@ export class SessionComponent
         super('session', sessionService, injector);
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         super.ngOnInit();
 
         // Overrides form with array by array of forms

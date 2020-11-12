@@ -15,19 +15,19 @@ import {
 import {Currency, CurrencyService} from '../../../../shared/services/currency.service';
 import {DonationComponent} from '../../../components/donation/donation.component';
 import {Cart, CartLineProduct} from '../classes/cart';
+import {GlobalCartService} from './global-cart.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CartService {
-    public static _globalCart: Cart;
-
     constructor(
         private orderService: OrderService,
         private dialogService: MatDialog,
         private currencyService: CurrencyService,
         private snackbar: MatSnackBar,
         private router: Router,
+        private readonly globalCartService: GlobalCartService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
@@ -43,23 +43,9 @@ export class CartService {
         this.currencyService.current.subscribe(currency => Cart.setCurrency(currency));
     }
 
-    public static get globalCart(): Cart {
-        return CartService._globalCart;
-    }
-
     public clearCarts() {
         Cart.clearCarts(this.sessionStorage);
-        this.initGlobalCart();
-    }
-
-    public initGlobalCart() {
-        const persistedCart = Cart.getById(this.sessionStorage, 0);
-
-        if (persistedCart) {
-            CartService._globalCart = persistedCart;
-        } else {
-            CartService._globalCart = new Cart(this.sessionStorage, 0);
-        }
+        this.globalCartService.initializeFromStorage();
     }
 
     public save(
@@ -121,7 +107,7 @@ export class CartService {
             .subscribe(amount => {
                 if (amount != null) {
                     if (!cart) {
-                        cart = CartService.globalCart;
+                        cart = this.globalCartService.cart;
                     }
 
                     cart.setDonation(amount);
@@ -137,7 +123,7 @@ export class CartService {
      * Add product to cart and show alert for cart redirection
      */
     public addProduct(product: CartLineProduct, type: ProductType, quantiy: number) {
-        CartService.globalCart.addProduct(product, type, quantiy);
+        this.globalCartService.cart.addProduct(product, type, quantiy);
         this.notificationCartRedirect();
     }
 

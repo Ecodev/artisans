@@ -4,9 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {keyBy} from 'lodash-es';
 import {ProductType, Subscriptions_subscriptions_items} from '../../../../../shared/generated-types';
-import {CartService} from '../../../cart/services/cart.service';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
+import {GlobalCartService} from '../../../cart/services/global-cart.service';
 
 @Component({
     selector: 'app-subscriptions',
@@ -24,6 +24,7 @@ export class SubscriptionsComponent implements OnInit {
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
         public dialog: MatDialog,
         private route: ActivatedRoute,
+        private readonly globalCartService: GlobalCartService,
     ) {}
 
     public ngOnInit() {
@@ -34,7 +35,7 @@ export class SubscriptionsComponent implements OnInit {
 
     public order(id: string, type: ProductType, withEmails?: boolean) {
         const subscribeFn = (emails?: string[]) => {
-            const cart = CartService.globalCart;
+            const cart = this.globalCartService.cart;
             cart.setSubscription(this.subscriptions[id], type, emails);
             this.router.navigateByUrl('/panier/' + cart.id);
         };

@@ -15,7 +15,6 @@ import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile_viewer, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
-import {CartService} from './modules/cart/services/cart.service';
 import {MenuItem, NavigationService} from './services/navigation.service';
 
 @Component({
@@ -231,7 +230,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         private navigationService: NavigationService,
         public userService: UserService,
         public currencyService: CurrencyService,
-        cartService: CartService,
         @Inject(DOCUMENT) private readonly document: Document,
         fb: FormBuilder,
         private alertService: NaturalAlertService,
@@ -240,10 +238,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         this.newsletterForm = fb.group({
             email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
         });
-
-        // We can have multiple parallel carts
-        // We have to call first a cart that will stay at index zero of list of carts. BOComponent is earliest place for that.
-        cartService.initGlobalCart();
     }
 
     public ngOnInit(): void {

@@ -6,6 +6,7 @@ import {ProductType} from '../../../../../shared/generated-types';
 import {Cart, CartLineProduct} from '../../classes/cart';
 import {CartService} from '../../services/cart.service';
 import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {GlobalCartService} from '../../services/global-cart.service';
 
 @Component({
     selector: 'app-cart',
@@ -29,6 +30,7 @@ export class CartComponent implements OnInit {
         private route: ActivatedRoute,
         public cartService: CartService,
         public currencyService: CurrencyService,
+        private readonly globalCartService: GlobalCartService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {}
 
@@ -39,7 +41,7 @@ export class CartComponent implements OnInit {
                 this.cart = cart;
             }
         } else {
-            this.cart = CartService.globalCart;
+            this.cart = this.globalCartService.cart;
         }
     }
 

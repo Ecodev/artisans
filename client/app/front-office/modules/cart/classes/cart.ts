@@ -1,4 +1,3 @@
-import {NaturalStorage} from '@ecodev/natural';
 import Decimal from 'decimal.js';
 import {
     Product_product,
@@ -9,6 +8,7 @@ import {
 } from '../../../../shared/generated-types';
 import {Currency} from '../../../../shared/services/currency.service';
 import {moneyRoundUp} from '../../../../shared/utils';
+import {CartCollectionService} from '../services/cart-collection.service';
 
 export type CartLineProduct = Products_products_items | Product_product;
 
@@ -37,12 +37,6 @@ export interface CartLine {
 }
 
 export class Cart {
-    private static readonly storageKey = 'carts';
-
-    private static carts: Cart[] = [];
-
-    private static currency: Currency = Currency.CHF;
-
     /**
      * Cart detail
      */
@@ -68,104 +62,44 @@ export class Cart {
      */
     private readonly _id: number;
 
-    private static getPersistedCarts(storage: NaturalStorage): any[] {
-        const serializedStoredCarts = storage.getItem(Cart.storageKey);
-        if (serializedStoredCarts) {
-            return JSON.parse(serializedStoredCarts) as any[];
-        }
-
-        return [];
-    }
-
-    /**
-     * Set current currency and trigger re-computing of all carts
-     */
-    public static setCurrency(currency: Currency): void {
-        this.currency = currency;
-        this.carts.forEach(cart => cart.computeTotals());
-    }
-
-    /**
-     * Delete all carts from memory and storage
-     */
-    public static clearCarts(storage: NaturalStorage): void {
-        this.carts.forEach(c => c.empty());
-        this.carts.length = 0;
-        storage.setItem(Cart.storageKey, '');
-    }
-
     /**
      * On new cart, never recover from session storage
      * @param id Use id param only for global cart
      */
-    public constructor(private readonly storage: NaturalStorage, id?: number) {
-        this._id = id || Cart.carts.length;
-        Cart.carts.push(this);
+    public constructor(private readonly cartCollectionService: CartCollectionService, id?: number) {
+        this._id = id ?? this.cartCollectionService.length;
+        this.cartCollectionService.add(this);
     }
 
     public get id(): number {
         return this._id;
     }
 
-    /**
-     * Get cart from memory if exists, or from storage if not
-     */
-    public static getById(storage: NaturalStorage, id: number): Cart | undefined {
-        let cart = Cart.carts.find(c => c._id === id);
-
-        if (cart) {
-            return cart;
-        }
-
-        const carts = this.getPersistedCarts(storage);
-
-        if (carts[id]) {
-            cart = new Cart(storage, id);
-            cart.productLines = carts[id].productLines || [];
-            cart.subscription = carts[id].subscription;
-            cart.donationAmount = carts[id].donationAmount;
-            cart.computeTotals();
-
-            return cart;
-        }
-
-        return;
-    }
-
-    private static getPriceTaxInc(
+    private getPriceTaxInc(
         product: {pricePerUnitCHF: Decimal.Value; pricePerUnitEUR: Decimal.Value},
         quantity: number,
     ): number {
-        // todo : drop decimaljs ?
-        const quantifiedPrice = Decimal.mul(Cart.getPriceByCurrency(product), quantity);
+        const quantifiedPrice = Decimal.mul(this.getPriceByCurrency(product), quantity);
         return moneyRoundUp(+quantifiedPrice);
     }
 
-    private static getPriceByCurrency(product: {
+    private getPriceByCurrency(product: {
         pricePerUnitCHF: Decimal.Value;
         pricePerUnitEUR: Decimal.Value;
     }): Decimal.Value {
-        if (this.currency === Currency.CHF) {
+        const currency = this.cartCollectionService.currency;
+        if (currency === Currency.CHF) {
             return product.pricePerUnitCHF;
-        } else if (this.currency === Currency.EUR) {
+        } else if (currency === Currency.EUR) {
             return product.pricePerUnitEUR;
         }
 
-        throw new Error('Unsupported currency: ' + this.currency);
+        throw new Error('Unsupported currency: ' + currency);
     }
 
     public update() {
         this.computeTotals();
-
-        const carts = Cart.getPersistedCarts(this.storage);
-
-        carts[this._id] = {
-            productLines: this.productLines,
-            subscription: this.subscription,
-            donationAmount: this.donationAmount,
-        };
-
-        this.storage.setItem(Cart.storageKey, JSON.stringify(carts));
+        this.cartCollectionService.persist(this);
     }
 
     /**
@@ -178,14 +112,14 @@ export class Cart {
 
         if (line) {
             line.quantity += quantity;
-            line.totalTaxInc = Cart.getPriceTaxInc(product, line.quantity);
+            line.totalTaxInc = this.getPriceTaxInc(product, line.quantity);
         } else {
             isNewItem = true;
             this.productLines.push({
                 product: product,
                 type: type,
                 quantity: quantity,
-                totalTaxInc: Cart.getPriceTaxInc(product, quantity),
+                totalTaxInc: this.getPriceTaxInc(product, quantity),
             });
         }
 
@@ -206,7 +140,7 @@ export class Cart {
             } else {
                 // If product exist and quantity is truey, update existing entry
                 line.quantity = newQuantity;
-                line.totalTaxInc = Cart.getPriceTaxInc(line.product, line.quantity);
+                line.totalTaxInc = this.getPriceTaxInc(line.product, line.quantity);
             }
         }
 
@@ -266,12 +200,12 @@ export class Cart {
 
     public computeTotals() {
         let totals = this.productLines.reduce((a, line) => {
-            line.totalTaxInc = Cart.getPriceTaxInc(line.product, line.quantity); // update line total
+            line.totalTaxInc = this.getPriceTaxInc(line.product, line.quantity); // update line total
             return a + line.totalTaxInc; // stack for cart total
         }, 0);
 
         if (this.subscription) {
-            totals += Cart.getPriceTaxInc(this.subscription.subscription, 1);
+            totals += this.getPriceTaxInc(this.subscription.subscription, 1);
         }
 
         if (this.donationAmount > 0) {

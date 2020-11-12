@@ -1,6 +1,6 @@
-import {Inject, Injectable} from '@angular/core';
-import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {Injectable} from '@angular/core';
 import {Cart} from '../classes/cart';
+import {CartCollectionService} from './cart-collection.service';
 
 @Injectable({
     providedIn: 'root',
@@ -8,7 +8,7 @@ import {Cart} from '../classes/cart';
 export class GlobalCartService {
     private _cart: Cart;
 
-    constructor(@Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage) {
+    constructor(private readonly cartCollectionService: CartCollectionService) {
         this.initializeFromStorage();
     }
 
@@ -17,12 +17,12 @@ export class GlobalCartService {
     }
 
     public initializeFromStorage(): void {
-        const persistedCart = Cart.getById(this.sessionStorage, 0);
+        const persistedCart = this.cartCollectionService.getById(0);
 
         if (persistedCart) {
             this._cart = persistedCart;
         } else {
-            this._cart = new Cart(this.sessionStorage, 0);
+            this._cart = new Cart(this.cartCollectionService, 0);
         }
     }
 }

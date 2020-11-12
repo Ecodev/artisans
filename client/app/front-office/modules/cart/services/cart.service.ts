@@ -16,6 +16,7 @@ import {Currency, CurrencyService} from '../../../../shared/services/currency.se
 import {DonationComponent} from '../../../components/donation/donation.component';
 import {Cart, CartLineProduct} from '../classes/cart';
 import {GlobalCartService} from './global-cart.service';
+import {CartCollectionService} from './cart-collection.service';
 
 @Injectable({
     providedIn: 'root',
@@ -28,6 +29,7 @@ export class CartService {
         private snackbar: MatSnackBar,
         private router: Router,
         private readonly globalCartService: GlobalCartService,
+        private readonly cartCollectionService: CartCollectionService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
         // If our cart changes in another browser tab, reload it from storage to keep it in sync
@@ -40,11 +42,11 @@ export class CartService {
         // ).subscribe();
 
         // On currency change, update carts totals
-        this.currencyService.current.subscribe(currency => Cart.setCurrency(currency));
+        this.currencyService.current.subscribe(currency => (this.cartCollectionService.currency = currency));
     }
 
     public clearCarts() {
-        Cart.clearCarts(this.sessionStorage);
+        this.cartCollectionService.clearCarts();
         this.globalCartService.initializeFromStorage();
     }
 

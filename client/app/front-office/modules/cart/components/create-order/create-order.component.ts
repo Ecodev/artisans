@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NaturalAlertService, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {NaturalAlertService} from '@ecodev/natural';
 import {UserService} from '../../../../../admin/users/services/user.service';
 import {CreateOrder_createOrder, PaymentMethod} from '../../../../../shared/generated-types';
 import {ConfigService, FrontEndConfig} from '../../../../../shared/services/config.service';
@@ -11,6 +11,7 @@ import {Cart} from '../../classes/cart';
 // @ts-ignore
 import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import {CartService} from '../../services/cart.service';
+import {CartCollectionService} from '../../services/cart-collection.service';
 
 @Component({
     selector: 'app-create-order',
@@ -67,7 +68,7 @@ export class CreateOrderComponent implements OnInit {
         public userService: UserService,
         configService: ConfigService,
         public currencyService: CurrencyService,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
+        private readonly cartCollectionService: CartCollectionService,
         public navigationService: NavigationService,
     ) {
         configService.get().subscribe(paymentConfig => {
@@ -76,7 +77,7 @@ export class CreateOrderComponent implements OnInit {
     }
 
     public ngOnInit() {
-        const cart = Cart.getById(this.sessionStorage, +this.route.snapshot.params['cartId']);
+        const cart = this.cartCollectionService.getById(+this.route.snapshot.params['cartId']);
         if (cart) {
             this.cart = cart;
 

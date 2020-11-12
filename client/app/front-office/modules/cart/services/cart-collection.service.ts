@@ -1,0 +1,90 @@
+import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {Currency} from '../../../../shared/services/currency.service';
+import {Inject, Injectable} from '@angular/core';
+import {Cart} from '../classes/cart';
+
+@Injectable({
+    providedIn: 'root',
+})
+export class CartCollectionService {
+    public get currency(): Currency {
+        return this._currency;
+    }
+
+    /**
+     * Set current currency and trigger re-computing of all carts
+     */
+    public set currency(currency: Currency) {
+        this._currency = currency;
+        this.carts.forEach(cart => cart.computeTotals());
+    }
+
+    private _currency: Currency = Currency.CHF;
+    private readonly storageKey = 'carts';
+    private readonly carts: Cart[] = [];
+
+    public constructor(@Inject(SESSION_STORAGE) private readonly storage: NaturalStorage) {}
+
+    private getPersistedCarts(): any[] {
+        const serializedStoredCarts = this.storage.getItem(this.storageKey);
+        if (serializedStoredCarts) {
+            return JSON.parse(serializedStoredCarts) as any[];
+        }
+
+        return [];
+    }
+
+    public add(cart: Cart): void {
+        this.carts.push(cart);
+    }
+
+    public get length(): number {
+        return this.carts.length;
+    }
+
+    public persist(cart: Cart): void {
+        const persistedCarts = this.getPersistedCarts();
+
+        persistedCarts[cart.id] = {
+            productLines: cart.productLines,
+            subscription: cart.subscription,
+            donationAmount: cart.donationAmount,
+        };
+
+        this.storage.setItem(this.storageKey, JSON.stringify(persistedCarts));
+    }
+
+    /**
+     * Delete all carts from memory and storage
+     */
+    public clearCarts(): void {
+        this.carts.forEach(c => c.empty());
+        this.carts.length = 0;
+        this.storage.setItem(this.storageKey, '');
+    }
+
+    /**
+     * Get cart from memory if exists, or from storage if not
+     */
+    public getById(id: number): Cart | undefined {
+        let cart = this.carts.find(c => c.id === id);
+
+        if (cart) {
+            return cart;
+        }
+
+        const carts = this.getPersistedCarts();
+
+        if (carts[id]) {
+            cart = new Cart(this, id);
+            cart.productLines = carts[id].productLines || [];
+            cart.subscription = carts[id].subscription;
+            cart.donationAmount = carts[id].donationAmount;
+            cart.computeTotals();
+
+            return cart;
+        }
+
+        return;
+    }
+}

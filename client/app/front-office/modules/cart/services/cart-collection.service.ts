@@ -2,11 +2,14 @@ import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {Currency} from '../../../../shared/services/currency.service';
 import {Inject, Injectable} from '@angular/core';
 import {Cart} from '../classes/cart';
+import {Subject} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CartCollectionService {
+    public readonly cleared = new Subject<void>();
+
     public get currency(): Currency {
         return this._currency;
     }
@@ -34,6 +37,9 @@ export class CartCollectionService {
         return [];
     }
 
+    /**
+     * Register new cart (but don't persist)
+     */
     public add(cart: Cart): void {
         this.carts.push(cart);
     }
@@ -42,6 +48,9 @@ export class CartCollectionService {
         return this.carts.length;
     }
 
+    /**
+     * Persist existing cart into storage
+     */
     public persist(cart: Cart): void {
         const persistedCarts = this.getPersistedCarts();
 
@@ -57,10 +66,11 @@ export class CartCollectionService {
     /**
      * Delete all carts from memory and storage
      */
-    public clearCarts(): void {
+    public clear(): void {
         this.carts.forEach(c => c.empty());
         this.carts.length = 0;
         this.storage.setItem(this.storageKey, '');
+        this.cleared.next();
     }
 
     /**

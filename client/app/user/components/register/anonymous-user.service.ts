@@ -6,7 +6,7 @@ import {deliverableEmail, FormValidators, Literal} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {CurrencyService} from '../../../shared/services/currency.service';
-import {CartService} from '../../../front-office/modules/cart/services/cart.service';
+import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 
 @Injectable({
     providedIn: 'root',
@@ -17,9 +17,9 @@ export class AnonymousUserService extends UserService {
         router: Router,
         permissionsService: PermissionsService,
         currencyService: CurrencyService,
-        cartService: CartService,
+        cartCollectionService: CartCollectionService,
     ) {
-        super(apollo, router, permissionsService, currencyService, cartService);
+        super(apollo, router, permissionsService, currencyService, cartCollectionService);
     }
 
     public getFormValidators(): FormValidators {

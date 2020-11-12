@@ -45,11 +45,6 @@ export class CartService {
         this.currencyService.current.subscribe(currency => (this.cartCollectionService.currency = currency));
     }
 
-    public clearCarts() {
-        this.cartCollectionService.clearCarts();
-        this.globalCartService.initializeFromStorage();
-    }
-
     public save(
         cart: Cart,
         paymentMethod: PaymentMethod,

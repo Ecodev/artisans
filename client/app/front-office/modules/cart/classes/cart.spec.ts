@@ -3,6 +3,7 @@ import {Product, ProductType} from '../../../../shared/generated-types';
 import {CartService} from '../services/cart.service';
 import {Cart, CartLine} from './cart';
 import {NaturalMemoryStorage, NaturalStorage} from '@ecodev/natural';
+import {CartCollectionService} from '../services/cart-collection.service';
 
 /**
  * Todo : add tests with combinations (same product with web or paper declination)
@@ -26,9 +27,8 @@ describe('CartService', () => {
     } as unknown) as Product['product'];
 
     beforeEach(() => {
-        cart = new Cart(new NaturalMemoryStorage());
-        // Ensure that we always test in CHF
-        Cart.setCurrency(Currency.CHF);
+        const cartCollectionService = new CartCollectionService(new NaturalMemoryStorage());
+        cart = new Cart(cartCollectionService);
     });
 
     it('should be created', () => {

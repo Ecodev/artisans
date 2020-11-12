@@ -2,21 +2,28 @@ import {Apollo} from 'apollo-angular';
 import {fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
-import {CartService} from '../../../front-office/modules/cart/services/cart.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {mockApolloProvider} from '../../../shared/testing/MockApolloProvider';
 import {UserService} from './user.service';
 import {memoryStorageProvider} from '@ecodev/natural';
+import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 
-class MockCartService {
-    private clearCarts() {}
+class MockCartCollectionService {
+    private clear() {}
 }
 
 describe('UserService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [RouterTestingModule],
-            providers: [mockApolloProvider, {provide: CartService, useClass: MockCartService}, memoryStorageProvider],
+            providers: [
+                mockApolloProvider,
+                {
+                    provide: CartCollectionService,
+                    useClass: MockCartCollectionService,
+                },
+                memoryStorageProvider,
+            ],
         });
 
         // Mock permissions service

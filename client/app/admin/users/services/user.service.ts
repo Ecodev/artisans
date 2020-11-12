@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 import {deliverableEmail, FormAsyncValidators, FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
 import {Observable, of, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {CartService} from '../../../front-office/modules/cart/services/cart.service';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
     AddToMailingList,
@@ -51,6 +50,7 @@ import {
     userQuery,
     usersQuery,
 } from './user.queries';
+import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 
 export type UserLike = User_user | CurrentUserForProfile_viewer;
 
@@ -79,7 +79,7 @@ export class UserService extends NaturalAbstractModelService<
         protected router: Router,
         private permissionsService: PermissionsService,
         private currencyService: CurrencyService,
-        private cartService: CartService,
+        private readonly cartCollectionService: CartCollectionService,
     ) {
         super(apollo, 'user', userQuery, usersQuery, createUser, updateUser, deleteUsers);
     }
@@ -150,7 +150,7 @@ export class UserService extends NaturalAbstractModelService<
                     const v = result.data!.logout;
 
                     // Be sure that we don't have leftovers from another user
-                    this.cartService.clearCarts();
+                    this.cartCollectionService.clear();
                     this.viewer.next(null);
                     this.currencyService.updateLockedStatus(null);
                     (this.apollo.client.resetStore() as Promise<null>).then(() => {

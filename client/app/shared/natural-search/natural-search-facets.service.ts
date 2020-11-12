@@ -166,44 +166,6 @@ export class NaturalSearchFacetsService {
                     step: 0.01,
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Marge de profit',
-                field: 'margin',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.1,
-                },
-                transform: percentage,
-            } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Taux de TVA',
-                field: 'vatRate',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.1,
-                },
-                transform: percentage,
-            } as DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Fournisseur',
-                field: 'supplier',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
-            {
-                display: 'Code produit chez le fournisseur',
-                field: 'supplierReference',
-                component: TypeTextComponent,
-                transform: wrapLike,
-            } as DropdownFacet<never>,
-            {
-                display: 'Prix payé au fournisseur',
-                field: 'supplierPrice',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } as DropdownFacet<TypeNumberConfiguration>,
             this.creationDate,
             this.updateDate,
         ],

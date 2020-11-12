@@ -77,6 +77,12 @@ export class NaturalSearchFacetsService {
         condition: {equal: {value: true}} as ProductFilterGroupCondition,
     };
 
+    private readonly productHasNoFile: FlagFacet = {
+        display: 'Sans produit dématérialisé',
+        field: 'file',
+        condition: {empty: {not: false}} as ProductFilterGroupCondition,
+    };
+
     private readonly code: DropdownFacet<never> = {
         display: 'Code',
         field: 'code',
@@ -166,6 +172,7 @@ export class NaturalSearchFacetsService {
                     step: 0.01,
                 },
             } as DropdownFacet<TypeNumberConfiguration>,
+            this.productHasNoFile,
             this.creationDate,
             this.updateDate,
         ],

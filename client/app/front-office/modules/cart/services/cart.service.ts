@@ -13,7 +13,7 @@ import {
     ProductType,
 } from '../../../../shared/generated-types';
 import {Currency, CurrencyService} from '../../../../shared/services/currency.service';
-import {DonationComponent} from '../../../components/donation/donation.component';
+import {DonationComponent, DonationData} from '../../../components/donation/donation.component';
 import {Cart, CartLineProduct} from '../classes/cart';
 import {GlobalCartService} from './global-cart.service';
 import {CartCollectionService} from './cart-collection.service';
@@ -99,7 +99,11 @@ export class CartService {
      */
     public inputDonation(notify: boolean, cart?: Cart) {
         this.dialogService
-            .open(DonationComponent)
+            .open<DonationComponent, DonationData, number | null>(DonationComponent, {
+                data: {
+                    amount: cart?.donationAmount ?? null,
+                },
+            })
             .afterClosed()
             .subscribe(amount => {
                 if (amount != null) {

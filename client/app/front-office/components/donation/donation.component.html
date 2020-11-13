@@ -4,18 +4,25 @@
     <mat-form-field>
         <mat-label>Montant</mat-label>
         <input
-            [(ngModel)]="amount"
+            [formControl]="amount"
             matInput
             type="number"
-            min="0.000001"
+            min="0"
             step="1"
-            (keydown.enter)="dialogRef.close(amount)"
+            (keydown.enter)="dialogRef.close(amount.value)"
         />
         <div matSuffix>{{ currencyService.current.value }}</div>
+        <mat-error *ngIf="amount.hasError('required')">Requis</mat-error>
+        <mat-error *ngIf="amount.hasError('money')"
+            >Le montant doit être un nombre avec un maximum de deux décimales
+        </mat-error>
+        <mat-error *ngIf="amount.hasError('min')">Le montant doit être positif</mat-error>
     </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
     <button [mat-dialog-close] mat-button>Annuler</button>
-    <button [mat-dialog-close]="amount" mat-flat-button color="primary">Valider</button>
+    <button [mat-dialog-close]="amount.value" mat-flat-button color="primary" [disabled]="!amount.valid">
+        Valider
+    </button>
 </mat-dialog-actions>

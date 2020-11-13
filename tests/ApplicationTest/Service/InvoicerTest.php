@@ -331,7 +331,7 @@ class InvoicerTest extends TestCase
                             'quantity' => 1,
                             'isCHF' => true,
                             'type' => ProductTypeType::DIGITAL,
-                            'pricePerUnit' => 100,
+                            'pricePerUnit' => Money::CHF(10000),
                             'additionalEmails' => [],
                         ],
                     ],

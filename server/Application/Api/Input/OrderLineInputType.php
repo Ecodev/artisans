@@ -6,6 +6,7 @@ namespace Application\Api\Input;
 
 use Application\Model\Product;
 use Application\Model\Subscription;
+use Ecodev\Felix\Api\Scalar\CHFType;
 use GraphQL\Type\Definition\InputObjectType;
 
 class OrderLineInputType extends InputObjectType
@@ -36,7 +37,7 @@ class OrderLineInputType extends InputObjectType
                         'defaultValue' => [],
                     ],
                     'pricePerUnit' => [
-                        'type' => self::float(),
+                        'type' => _types()->get(CHFType::class),
                     ],
                 ];
             },

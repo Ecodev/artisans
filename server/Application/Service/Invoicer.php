@@ -165,7 +165,7 @@ class Invoicer
         $this->createTemporaryUsers($orderLine);
     }
 
-    private function getPricePerUnit(?AbstractProduct $product, ?float $pricePerUnit, bool $isCHF): Money
+    private function getPricePerUnit(?AbstractProduct $product, ?Money $pricePerUnit, bool $isCHF): Money
     {
         if ($product && $isCHF) {
             return $product->getPricePerUnitCHF();
@@ -175,16 +175,16 @@ class Invoicer
             return $product->getPricePerUnitEUR();
         }
 
-        if ($pricePerUnit === null || $pricePerUnit <= 0) {
+        if ($pricePerUnit === null || !$pricePerUnit->isPositive()) {
             throw new Exception('A donation must have strictly positive price');
         }
 
-        $pricePerUnit = bcmul((string) $pricePerUnit, '100', 2);
-        if ($isCHF) {
-            return Money::CHF($pricePerUnit);
+        // The API always assume CHF, but if the client specifically say it is EUR, we need to convert
+        if (!$isCHF) {
+            return Money::EUR($pricePerUnit->getAmount());
         }
 
-        return Money::EUR($pricePerUnit);
+        return $pricePerUnit;
     }
 
     /**

@@ -11,6 +11,7 @@
 @import 'artisans.theme';
 @import '../app/shared/components/breadcrumbs/breadcrumbs.theme';
 @import '../app/shared/components/tags-navigation/tags-navigation.theme';
+@import '../app/admin/admin/admin.theme';
 @import '../app/admin/products/product/product.theme';
 @import '../app/admin/order/order-line/order-line.theme';
 @import '../app/profile/components/profile/profile.theme';
@@ -48,6 +49,7 @@
     @include purchases($theme);
     @include session-facilitator($theme);
     @include session-method($theme);
+    @include admin($theme);
 }
 
 $artisans-blue: (

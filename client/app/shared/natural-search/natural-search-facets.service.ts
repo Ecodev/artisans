@@ -4,7 +4,6 @@ import {
     FlagFacet,
     NaturalEnumService,
     NaturalSearchFacets,
-    NaturalSearchSelection,
     TypeDateComponent,
     TypeDateConfiguration,
     TypeNaturalSelectComponent,
@@ -20,29 +19,6 @@ import {ProductTagService} from '../../admin/product-tags/services/product-tag.s
 import {ProductService} from '../../admin/products/services/product.service';
 import {UserService} from '../../admin/users/services/user.service';
 import {ProductFilterGroupCondition, UserFilterGroupCondition} from '../generated-types';
-
-/**
- * Convert percentage for server
- */
-function percentage(selection: NaturalSearchSelection): NaturalSearchSelection {
-    Object.keys(selection.condition).forEach(key => {
-        if (selection.condition && selection.condition[key]) {
-            const condition = selection.condition[key];
-            if (condition && condition.value) {
-                condition.value = condition.value / 100;
-            }
-        }
-    });
-
-    return selection;
-}
-
-function dontHave(selection: NaturalSearchSelection): NaturalSearchSelection {
-    if (selection.condition && selection.condition.have) {
-        selection.condition.have.not = true;
-    }
-    return selection;
-}
 
 /**
  * Collection of facets for natural-search accessible by the object name

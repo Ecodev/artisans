@@ -9,7 +9,7 @@ import {takeUntil} from 'rxjs/operators';
 export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall extends QueryVariables>
     extends NaturalAbstractList<Tall, Vall>
     implements OnInit {
-    public items: Tall['items'] = [];
+    public items: Tall['items'] | null = null;
 
     constructor(service: any, injector: Injector) {
         super(service, injector);
@@ -22,6 +22,10 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
         this.dataSource?.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
             if (!result) {
                 return;
+            }
+
+            if (!this.items) {
+                this.items = [];
             }
 
             if (result.pageIndex === 0) {

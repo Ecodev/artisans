@@ -10,7 +10,7 @@
     </div>
 
     <div>
-        <a (click)="loadMore()" color="primary" mat-flat-button *ngIf="dataSource?.data?.length > items.length"
+        <a (click)="loadMore()" color="primary" mat-flat-button *ngIf="items && dataSource?.data?.length > items.length"
             >Voir plus</a
         >
     </div>

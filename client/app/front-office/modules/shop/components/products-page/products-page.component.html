@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px">
     <div *ngIf="title" class="mat-display-1">{{ title }}</div>
 
-    <ng-container *ngIf="items.length">
+    <ng-container *ngIf="items && items.length">
         <app-tags-navigation
             *ngIf="showTagsNavigation"
             [service]="productTagService"
@@ -123,13 +123,18 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center" id="end-of-list">
-            <a (click)="loadMore()" color="primary" mat-stroked-button *ngIf="dataSource?.data?.length > items.length">
+            <a
+                (click)="loadMore()"
+                color="primary"
+                mat-stroked-button
+                *ngIf="items && dataSource?.data?.length > items.length"
+            >
                 {{ route.snapshot.data.showMoreLabel }}
             </a>
         </div>
     </ng-container>
 
-    <div class="mat-h2" *ngIf="items.length === 0 && route.snapshot.data.showNoResults">
+    <div class="mat-h2" *ngIf="items && items.length === 0 && route.snapshot.data.showNoResults">
         Aucun résultat n'a été trouvé.
     </div>
 </div>

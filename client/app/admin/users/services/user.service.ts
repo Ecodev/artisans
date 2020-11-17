@@ -190,7 +190,7 @@ export class UserService extends NaturalAbstractModelService<
      *
      * @param expirationTolerance If provided, return cached viewer more recently than the given delay in ms
      */
-    public getViewerValue(expirationTolerance?: number) {
+    public getViewerValue(expirationTolerance?: number): CurrentUserForProfile['viewer'] | null {
         return this.viewer.getUpToDateValue(expirationTolerance || 0);
     }
 

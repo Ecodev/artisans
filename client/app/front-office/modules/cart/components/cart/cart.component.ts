@@ -45,7 +45,7 @@ export class CartComponent implements OnInit {
         }
     }
 
-    public empty() {
+    public empty(): void {
         this.alertService
             .confirm(
                 'Vider le panier',

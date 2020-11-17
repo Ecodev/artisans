@@ -10,6 +10,7 @@ import {
     Newses,
     NewsesVariables,
     NewsInput,
+    NewsPartialInput,
     NewsVariables,
     UpdateNews,
     UpdateNewsVariables,
@@ -35,11 +36,11 @@ export class NewsService extends NaturalAbstractModelService<
         super(apollo, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
     }
 
-    public getDefaultForClient() {
+    public getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 
-    public getInput(object: Literal) {
+    public getInput(object: Literal): NewsInput | NewsPartialInput {
         object.content = object.content || '';
         return super.getInput(object);
     }

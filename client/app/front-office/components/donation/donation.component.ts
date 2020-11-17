@@ -24,5 +24,5 @@ export class DonationComponent implements OnInit {
         this.amount.setValue(dialogData.amount);
     }
 
-    public ngOnInit() {}
+    public ngOnInit(): void {}
 }

@@ -10,6 +10,7 @@ import {
     JoinType,
     Session,
     SessionInput,
+    SessionPartialInput,
     Sessions,
     SessionsVariables,
     SessionVariables,
@@ -44,7 +45,7 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public getInput(object: Literal) {
+    public getInput(object: Literal): SessionInput | SessionPartialInput {
         object.description = object.description || '';
         return super.getInput(object);
     }

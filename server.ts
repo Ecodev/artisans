@@ -6,9 +6,10 @@ import {createProxyMiddleware, Options} from 'http-proxy-middleware';
 import {AppServerModule} from './client/main.server';
 import {APP_BASE_HREF} from '@angular/common';
 import {existsSync, readFileSync} from 'fs';
+import {Express} from 'express';
 
 // The Express app is exported so that it can be used by serverless Functions.
-export function app() {
+export function app(): Express {
     const server = express();
     const distFolder = join(process.cwd(), 'htdocs');
     const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
@@ -49,7 +50,7 @@ export function app() {
     return server;
 }
 
-function run() {
+function run(): void {
     const port = process.env.PORT || 9002;
 
     // Start up the Node server

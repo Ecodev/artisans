@@ -1,5 +1,5 @@
 import {Component, Injector, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {fromUrl, memoryStorageProvider, NaturalPersistenceService} from '@ecodev/natural';
 import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../../../admin/products/services/product.service';
@@ -105,7 +105,7 @@ export class ProductsPageComponent
         });
     }
 
-    public getDetailLink(product: Products_products_items) {
+    public getDetailLink(product: Products_products_items): RouterLink['routerLink'] {
         return ['/larevuedurable', product.reviewNumber ? 'numero' : 'article', product.id];
     }
 }

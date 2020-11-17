@@ -70,18 +70,9 @@ export class SessionPageComponent
     }
 
     /**
-     * Get related facilitators
-     */
-    // private refreshFacilitators(session: Session_session) {
-    //     const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-    //     qvm.set('variables', {filter: {groups: [{conditions: [{sessions: {have: {values: [session.id]}}}]}]}});
-    //     this.userService.getAll(qvm).subscribe(result => (this.facilitators = result.items));
-    // }
-
-    /**
      * Fetch other future sessions (5 max) in same locality
      */
-    private refreshOtherSessions(session: Session_session) {
+    private refreshOtherSessions(session: Session_session): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
         qvm.set('variables', {
             filter: {

@@ -83,7 +83,7 @@ export class NavigationService {
         return onClose;
     }
 
-    public scrollToTop(fragment?: string) {
+    public scrollToTop(fragment?: string): void {
         const contentContainer = this.document.querySelector('.mat-sidenav-content');
         if (contentContainer) {
             const top = fragment ? this.document.getElementById(fragment)?.offsetTop || 0 : 0;

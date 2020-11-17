@@ -254,7 +254,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     /**
      * To reuse some implemented mechanics, the search is just a redirection that converts the search string into a global natural search
      */
-    public search() {
+    public search(): void {
         const search: NaturalSearchSelections = [
             [
                 {
@@ -267,7 +267,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         this.router.navigate(['/larevuedurable/recherche', {ns: JSON.stringify(toUrl(search))}]);
     }
 
-    public openMenuDropdown(items: MenuItem[], event: MouseEvent) {
+    public openMenuDropdown(items: MenuItem[], event: MouseEvent): void {
         if (!items || !items.length) {
             return;
         }

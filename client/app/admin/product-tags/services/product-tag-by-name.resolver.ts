@@ -5,16 +5,20 @@ import {ErrorService} from '../../../shared/components/error/error.service';
 import {ProductTags_productTags_items} from '../../../shared/generated-types';
 import {ProductTagService} from './product-tag.service';
 
+export interface ProductTagByNameResolve {
+    model: ProductTags_productTags_items;
+}
+
 @Injectable({
     providedIn: 'root',
 })
-export class ProductTagByNameResolver implements Resolve<{model: ProductTags_productTags_items}> {
+export class ProductTagByNameResolver implements Resolve<ProductTagByNameResolve> {
     constructor(private productTagService: ProductTagService, private errorService: ErrorService) {}
 
     /**
      * Resolve productTag data for router
      */
-    public resolve(route: ActivatedRouteSnapshot): Observable<{model: ProductTags_productTags_items}> {
+    public resolve(route: ActivatedRouteSnapshot): Observable<ProductTagByNameResolve> {
         const observable = this.productTagService.resolveByName(route.params.productTagName);
 
         return this.errorService.redirectIfError(observable);

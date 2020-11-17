@@ -33,9 +33,9 @@ export class AddToCartComponent implements OnInit {
 
     constructor(private cartService: CartService) {}
 
-    public ngOnInit() {}
+    public ngOnInit(): void {}
 
-    public click() {
+    public click(): void {
         this.cartService.addProduct(this.product, this.type, 1);
         setTimeout(() => (this.inCart = true), 300);
     }

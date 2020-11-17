@@ -32,7 +32,7 @@ export class BreadcrumbsComponent extends NaturalAbstractController implements O
             .subscribe(() => this.update());
     }
 
-    private update() {
+    private update(): void {
         const breadcrumbs = this.getMergedBreadcrumbs(this.router.routerState.root.snapshot);
         this.breadcrumbs = breadcrumbs || [];
     }

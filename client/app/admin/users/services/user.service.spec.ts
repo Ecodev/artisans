@@ -9,7 +9,7 @@ import {memoryStorageProvider} from '@ecodev/natural';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 
 class MockCartCollectionService {
-    private clear() {}
+    private clear(): void {}
 }
 
 describe('UserService', () => {

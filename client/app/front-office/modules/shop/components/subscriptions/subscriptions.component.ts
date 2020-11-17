@@ -27,13 +27,13 @@ export class SubscriptionsComponent implements OnInit {
         private readonly globalCartService: GlobalCartService,
     ) {}
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.subscriptionService
             .getAll(new NaturalQueryVariablesManager())
             .subscribe(res => (this.subscriptions = keyBy(res.items, 'id')));
     }
 
-    public order(id: string, type: ProductType, withEmails?: boolean) {
+    public order(id: string, type: ProductType, withEmails?: boolean): void {
         const subscribeFn = (emails?: string[]) => {
             const cart = this.globalCartService.cart;
             cart.setSubscription(this.subscriptions[id], type, emails);

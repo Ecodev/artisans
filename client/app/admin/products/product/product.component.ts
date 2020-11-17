@@ -49,7 +49,7 @@ export class ProductComponent
         super.ngOnInit();
     }
 
-    public setFormValue(value: any, fieldName: string) {
+    public setFormValue(value: any, fieldName: string): void {
         const field = this.form.get(fieldName);
         if (field) {
             field.setValue(value);

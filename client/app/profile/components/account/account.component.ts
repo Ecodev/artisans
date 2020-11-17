@@ -50,7 +50,7 @@ export class AccountComponent
         }
     }
 
-    public requestPasswordReset() {
+    public requestPasswordReset(): void {
         this.userService.requestPasswordReset(this.form.value.email).subscribe(
             () => {
                 this.passwordMailSending = false;

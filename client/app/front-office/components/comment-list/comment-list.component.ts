@@ -62,7 +62,7 @@ export class CommentListComponent
         }
     }
 
-    public addComment() {
+    public addComment(): void {
         this.publishing = true;
         const comment = {
             description: this.newCommentValue,

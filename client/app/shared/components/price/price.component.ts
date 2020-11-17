@@ -19,7 +19,7 @@ export class PriceComponent extends NaturalAbstractController implements OnInit 
         super();
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         this.currencyService.current.pipe(takeUntil(this.ngUnsubscribe)).subscribe(currency => {
             if (currency === Currency.CHF) {
                 this.price = this.product.pricePerUnitCHF;

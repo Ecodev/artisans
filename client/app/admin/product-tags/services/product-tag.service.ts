@@ -8,6 +8,7 @@ import {
     NaturalQueryVariablesManager,
     unique,
 } from '@ecodev/natural';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
     CreateProductTag,
@@ -30,6 +31,8 @@ import {
     productTagsQuery,
     updateProductTag,
 } from './product-tag.queries';
+import {ProductTagResolve} from '../productTag';
+import {ProductTagByNameResolve} from './product-tag-by-name.resolver';
 
 @Injectable({
     providedIn: 'root',
@@ -70,7 +73,7 @@ export class ProductTagService extends NaturalAbstractModelService<
         };
     }
 
-    public resolveByName(name: string) {
+    public resolveByName(name: string): Observable<ProductTagByNameResolve> {
         const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
         qvm.set('variables', {filter: {groups: [{conditions: [{name: {equal: {value: name}}}]}]}});
         return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));

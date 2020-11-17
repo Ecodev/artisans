@@ -56,7 +56,7 @@ export class SessionsIncomingComponent implements OnInit {
         this.sessionService.getAll(qvm).subscribe(data => (this.sessions = data.items));
     }
 
-    public subscribeToQueue(queue: {mailingList: string; name: string}) {
+    public subscribeToQueue(queue: {mailingList: string; name: string}): void {
         this.subscribe(
             queue,
             'Être averti pour : ',
@@ -70,7 +70,7 @@ export class SessionsIncomingComponent implements OnInit {
         loggedOutModalTitle: string,
         loggedInConfirmMessage: string,
         confirmMessage: string,
-    ) {
+    ): void {
         const subscribeFn = (email: string) => {
             this.userService.addToMailingList(session.mailingList, email).subscribe(() => {});
             this.snackbar.open('Inscription confirmée', undefined, {

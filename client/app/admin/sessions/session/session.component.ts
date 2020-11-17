@@ -56,7 +56,7 @@ export class SessionComponent
         this.form.setControl('dates', this.datesForm);
     }
 
-    public addDate() {
+    public addDate(): void {
         this.datesForm.push(new FormControl(''));
     }
 }

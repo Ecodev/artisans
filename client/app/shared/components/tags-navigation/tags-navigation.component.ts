@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
 import {ProductTags_productTags_items, ProductTagsVariables} from '../../generated-types';
+import {RouterLink} from '@angular/router';
 
 @Component({
     selector: 'app-tags-navigation',
@@ -26,7 +27,7 @@ export class TagsNavigationComponent implements OnInit {
 
     constructor() {}
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         if (this.service) {
             const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
             this.service.getAll(qvm).subscribe(result => {
@@ -35,7 +36,7 @@ export class TagsNavigationComponent implements OnInit {
         }
     }
 
-    public getLink(item: ProductTags_productTags_items) {
+    public getLink(item: ProductTags_productTags_items): RouterLink['routerLink'] {
         return [...this.linkBase, item.name];
     }
 }

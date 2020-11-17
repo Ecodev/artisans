@@ -17,6 +17,7 @@ import {
     Product,
     Product_product,
     ProductInput,
+    ProductPartialInput,
     Products,
     ProductSorting,
     ProductSortingField,
@@ -77,7 +78,7 @@ export class ProductService extends NaturalAbstractModelService<
         };
     }
 
-    public getInput(object: Literal) {
+    public getInput(object: Literal): ProductInput | ProductPartialInput {
         object.description = object.description || '';
         return super.getInput(object);
     }

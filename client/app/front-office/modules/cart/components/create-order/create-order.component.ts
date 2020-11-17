@@ -76,7 +76,7 @@ export class CreateOrderComponent implements OnInit {
         });
     }
 
-    public ngOnInit() {
+    public ngOnInit(): void {
         const cart = this.cartCollectionService.getById(+this.route.snapshot.params['cartId']);
         if (cart) {
             this.cart = cart;
@@ -115,7 +115,7 @@ export class CreateOrderComponent implements OnInit {
     /**
      * Set shipping address mandatory if "same address" is unchecked
      */
-    public updateAddressRequirements(required: boolean, form: FormGroup) {
+    public updateAddressRequirements(required: boolean, form: FormGroup): void {
         const fields = ['firstName', 'lastName', 'street', 'locality', 'postcode']; // todo : add country
         fields.forEach(fieldName => {
             const control = form.get(fieldName);
@@ -146,7 +146,7 @@ export class CreateOrderComponent implements OnInit {
         });
     }
 
-    public confirmationRedirect() {
+    public confirmationRedirect(): void {
         this.cart?.empty();
         this.showConfirmationMessage = true;
         this.navigationService.scrollToTop();

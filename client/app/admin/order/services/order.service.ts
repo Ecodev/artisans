@@ -1,11 +1,13 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
     CreateOrder,
     CreateOrderVariables,
     Order,
+    OrderInput,
     Orders,
     OrderStatus,
     OrdersVariables,
@@ -35,23 +37,24 @@ export class OrderService extends NaturalAbstractModelService<
         super(apollo, 'order', orderQuery, ordersQuery, createOrder, null, null);
     }
 
-    public getInput(object: Literal) {
+    public getInput(object: Literal): OrderInput {
         const orderLinesInput = object.orderLines.map((line: Literal) => this.orderLineService.getInput(line));
         object.orderLines = orderLinesInput;
 
-        return object;
+        return object as OrderInput;
     }
 
-    public changeStatus(id: string, status: OrderStatus) {
+    public changeStatus(id: string, status: OrderStatus): Observable<void> {
         return this.apollo
             .mutate<UpdateOrderStatus, UpdateOrderStatusVariables>({
                 mutation: updateOrderStatus,
                 variables: {id, status},
             })
             .pipe(
-                map(result => {
+                map(() => {
                     this.apollo.client.reFetchObservableQueries();
-                    return result;
+
+                    return;
                 }),
             );
     }

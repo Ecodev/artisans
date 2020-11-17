@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {NaturalAbstractModelService} from '@ecodev/natural';
+import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateEvent,
     CreateEventVariables,
@@ -35,7 +35,7 @@ export class EventService extends NaturalAbstractModelService<
         super(apollo, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
     }
 
-    public getDefaultForClient() {
+    public getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 

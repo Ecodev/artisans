@@ -97,7 +97,7 @@ export class Cart {
         throw new Error('Unsupported currency: ' + currency);
     }
 
-    public update() {
+    public update(): void {
         this.computeTotals();
         this.cartCollectionService.persist(this);
     }
@@ -128,7 +128,7 @@ export class Cart {
         return isNewItem;
     }
 
-    public removeProduct(product: CartLineProduct, type: ProductType, quantity: number) {
+    public removeProduct(product: CartLineProduct, type: ProductType, quantity: number): void {
         const line = this.getLineByProduct(product, type);
 
         if (line) {
@@ -150,12 +150,12 @@ export class Cart {
     /**
      * A subscription is a standalone buy. There can't be more than one, and should not share order with products
      */
-    public setSubscription(subscription: CartLineSubscription, type: ProductType, emails?: string[]) {
+    public setSubscription(subscription: CartLineSubscription, type: ProductType, emails?: string[]): void {
         this.subscription = {subscription, type, emails};
         this.update();
     }
 
-    public unsetSubscription() {
+    public unsetSubscription(): void {
         this.subscription = null;
         this.update();
     }
@@ -163,12 +163,12 @@ export class Cart {
     /**
      * A donation is a unique amount in an order.
      */
-    public setDonation(value: number) {
+    public setDonation(value: number): void {
         this.donationAmount = value;
         this.update();
     }
 
-    public unsetDonation() {
+    public unsetDonation(): void {
         this.donationAmount = 0;
         this.update();
     }
@@ -180,25 +180,25 @@ export class Cart {
         return this.productLines.find(line => line.product.id === product.id && line.type === type);
     }
 
-    public remove(product: CartLineProduct) {
+    public remove(product: CartLineProduct): void {
         const index = this.productLines.findIndex(line => line.product.id === product.id);
         this.productLines.splice(index, 1);
         this.update();
     }
 
-    public empty() {
+    public empty(): void {
         this.productLines = [];
         this.donationAmount = 0;
         this.subscription = null;
         this.update();
     }
 
-    public setLines(lines: CartLine[]) {
+    public setLines(lines: CartLine[]): void {
         this.productLines = lines;
         this.computeTotals();
     }
 
-    public computeTotals() {
+    public computeTotals(): void {
         let totals = this.productLines.reduce((a, line) => {
             line.totalTaxInc = this.getPriceTaxInc(line.product, line.quantity); // update line total
             return a + line.totalTaxInc; // stack for cart total

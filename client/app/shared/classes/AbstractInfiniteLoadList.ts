@@ -36,7 +36,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
         });
     }
 
-    public loadMore() {
+    public loadMore(): void {
         if (this.dataSource?.data) {
             this.pagination({pageIndex: this.dataSource.data.pageIndex + 1});
         }

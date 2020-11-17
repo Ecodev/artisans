@@ -97,7 +97,7 @@ export class CartService {
     /**
      * Prompts the user to manually set the donation amount
      */
-    public inputDonation(notify: boolean, cart?: Cart) {
+    public inputDonation(notify: boolean, cart?: Cart): void {
         this.dialogService
             .open<DonationComponent, DonationData, number | null>(DonationComponent, {
                 data: {
@@ -123,12 +123,12 @@ export class CartService {
     /**
      * Add product to cart and show alert for cart redirection
      */
-    public addProduct(product: CartLineProduct, type: ProductType, quantiy: number) {
+    public addProduct(product: CartLineProduct, type: ProductType, quantiy: number): void {
         this.globalCartService.cart.addProduct(product, type, quantiy);
         this.notificationCartRedirect();
     }
 
-    public notificationCartRedirect() {
+    public notificationCartRedirect(): void {
         const snackbar = this.snackbar.open('Produit ajouté', 'Voir le panier', {
             duration: 5000,
             verticalPosition: 'top',

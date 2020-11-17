@@ -53,7 +53,7 @@ export class HomeBlockComponent implements OnInit {
         });
     }
 
-    public update() {
+    public update(): void {
         this.configService.set(this.key + '-title', this.form.getRawValue().title);
         this.configService.set(this.key + '-description', this.form.getRawValue().description);
         this.configService.set(this.key + '-button-label', this.form.getRawValue().buttonLabel);
@@ -61,7 +61,7 @@ export class HomeBlockComponent implements OnInit {
         this.lastValue = this.form.getRawValue();
     }
 
-    public reset() {
+    public reset(): void {
         if (this.lastValue) {
             this.form.setValue(this.lastValue);
         }

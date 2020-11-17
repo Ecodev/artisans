@@ -89,7 +89,10 @@ export class ImportComponent implements OnInit {
                     this.alertService.info(this.result.totalLines + ' lignes importées', 5000);
 
                     const qvm = new NaturalQueryVariablesManager<UsersVariables>();
-                    qvm.set('variables', {filter: {groups: [{conditions: [{shouldDelete: {equal: {value: true}}}]}]}});
+                    qvm.set('variables', {
+                        filter: {groups: [{conditions: [{shouldDelete: {equal: {value: true}}}]}]},
+                        pagination: {pageSize: 0, pageIndex: 9999},
+                    });
                     this.userService.getAll(qvm).subscribe(users => (this.users = users.items));
                 },
                 error => {

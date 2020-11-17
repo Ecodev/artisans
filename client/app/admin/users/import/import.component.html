@@ -46,18 +46,20 @@
                         créer ces utilisateurs dans Crésus puis re-importer, soit supprimer définitivement les
                         utilisateurs de notre BD.
                     </p>
+
+                    <div fxLayout="row" fxLayoutGap="10px">
+                        <a [routerLink]="['/admin/user', this.params]" mat-button style="margin-right: 3em"
+                            >Voir le détail</a
+                        >
+                        <button mat-raised-button color="warn" (click)="deleteAll()">
+                            <natural-icon name="delete"></natural-icon>
+                            Supprimer tous
+                        </button>
+                    </div>
+
                     <ul>
                         <li *ngFor="let user of users">{{ user.name }}</li>
                     </ul>
-
-                    <a [routerLink]="['/admin/user', this.params]" mat-button style="margin-right: 3em"
-                        >Voir le détail</a
-                    >
-
-                    <button mat-raised-button color="warn" (click)="deleteAll()">
-                        <natural-icon name="delete"></natural-icon>
-                        Supprimer tous
-                    </button>
                 </div>
             </div>
 

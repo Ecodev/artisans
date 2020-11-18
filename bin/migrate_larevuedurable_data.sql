@@ -430,12 +430,25 @@ SET product.review_id = review.id_product
 WHERE article.reference REGEXP '^\\d\\d\\d-\\d\\d\\d$' -- Only articles
 ;
 
--- Link products to their PDF
--- Here we must join on filename, because some ID are missing in our DB because of duplicated records in PrestaShop
+-- When linking product and their PDF, we cannot rely on product ID because some ID are missing in our DB because of duplicated records in PrestaShop
+
+-- Link products to their PDF via exact reference
 UPDATE product
-    INNER JOIN ps_product_download ppd ON product.id = ppd.id_product
-    INNER JOIN file ON file.filename = ppd.filename
-SET product.file_id = file.id;
+    INNER JOIN ps_product ON ps_product.reference = product.code
+    INNER JOIN ps_product_download ON ps_product_download.id_product = ps_product.id_product AND
+                                      ps_product_download.active = 1
+    INNER JOIN file ON file.filename = ps_product_download.filename
+SET product.file_id = file.id
+WHERE product.file_id IS NULL;
+
+-- Link products to their PDF via reference of the digital version
+UPDATE product
+    INNER JOIN ps_product ON ps_product.reference = CONCAT(product.code, 'e')
+    INNER JOIN ps_product_download ON ps_product_download.id_product = ps_product.id_product AND
+                                      ps_product_download.active = 1
+    INNER JOIN file ON file.filename = ps_product_download.filename
+SET product.file_id = file.id
+WHERE product.file_id IS NULL;
 
 
 INSERT INTO `order` (id, creator_id, owner_id, updater_id, creation_date, update_date, balance_chf, balance_eur, status,

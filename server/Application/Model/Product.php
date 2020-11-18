@@ -45,7 +45,7 @@ class Product extends AbstractProduct
     /**
      * @var null|File
      * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="CASCADE")
+     * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private $file;
 

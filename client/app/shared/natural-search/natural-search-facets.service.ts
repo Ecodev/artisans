@@ -53,6 +53,13 @@ export class NaturalSearchFacetsService {
         condition: {equal: {value: true}} as ProductFilterGroupCondition,
     };
 
+    private readonly productIsNotActive: FlagFacet = {
+        display: 'Non actif',
+        field: 'isActive',
+        name: 'isNotActive',
+        condition: {equal: {value: false}} as ProductFilterGroupCondition,
+    };
+
     private readonly productHasNoFile: FlagFacet = {
         display: 'Sans produit dématérialisé',
         field: 'file',
@@ -123,6 +130,7 @@ export class NaturalSearchFacetsService {
             this.name,
             this.code,
             this.productIsActive,
+            this.productIsNotActive,
             this.productTags,
             {
                 display: 'Type',

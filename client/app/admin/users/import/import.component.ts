@@ -3,7 +3,13 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Router} from '@angular/router';
 import {FileSelection, NaturalAlertService, NaturalQueryVariablesManager, toUrl} from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {Import, ImportVariables, Users_users_items, UsersVariables} from '../../../shared/generated-types';
+import {
+    Import,
+    ImportVariables,
+    Users_users_items,
+    UserSortingField,
+    UsersVariables,
+} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 
 @Component({
@@ -91,7 +97,8 @@ export class ImportComponent implements OnInit {
                     const qvm = new NaturalQueryVariablesManager<UsersVariables>();
                     qvm.set('variables', {
                         filter: {groups: [{conditions: [{shouldDelete: {equal: {value: true}}}]}]},
-                        pagination: {pageSize: 0, pageIndex: 9999},
+                        pagination: {pageSize: 9999},
+                        sorting: [{field: UserSortingField.firstName}, {field: UserSortingField.lastName}],
                     });
                     this.userService.getAll(qvm).subscribe(users => (this.users = users.items));
                 },

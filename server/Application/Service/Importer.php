@@ -421,6 +421,7 @@ class Importer
     private function updateOrganization(...$args): void
     {
         $params = $args;
+        $params[] = false; // should_delete
         $params[] = $this->currentUser;
 
         array_push($this->organizationsParams, ...$params);
@@ -434,14 +435,15 @@ class Importer
             return;
         }
 
-        $placeholders = $this->placeholders($this->updatedOrganizations, '(?, ?, ?, NOW())');
+        $placeholders = $this->placeholders($this->updatedOrganizations, '(?, ?, ?, ?, NOW())');
 
-        $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creator_id, creation_date)
+        $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, should_delete, creator_id, creation_date)
                         VALUES ' . $placeholders . '
                         ON DUPLICATE KEY UPDATE
                         pattern = VALUES(pattern),
                         subscription_last_review_id = VALUES(subscription_last_review_id),
                         updater_id = VALUES(creator_id),
+                        should_delete = VALUES(should_delete),
                         update_date = NOW()';
 
         $this->connection->executeUpdate($sql, $this->organizationsParams);

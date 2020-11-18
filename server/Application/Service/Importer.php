@@ -48,6 +48,10 @@ class Importer
 
     private array $errors = [];
 
+    private array $usersParams = [];
+
+    private array $organizationsParams = [];
+
     public function import(string $filename): array
     {
         $start = microtime(true);
@@ -74,8 +78,11 @@ class Importer
 
         try {
             $this->connection->beginTransaction();
-            $this->markToDelete();
             $this->read($file);
+
+            $this->markToDelete();
+            $this->updateAllUsers();
+            $this->updateAllOrganizations();
             $this->deleteOldOrganizations();
 
             if ($this->errors) {
@@ -354,6 +361,24 @@ class Importer
 
     private function updateUser(...$args): void
     {
+        $params = $args;
+        $params[] = false; // web_temporary_access
+        $params[] = false; // should_delete
+        $params[] = ''; // password
+        $params[] = $this->currentUser;
+
+        array_push($this->usersParams, ...$params);
+        ++$this->updatedUsers;
+    }
+
+    private function updateAllUsers(): void
+    {
+        if (!$this->updatedUsers) {
+            return;
+        }
+
+        $placeholders = $this->placeholders($this->updatedUsers, '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())');
+
         $sql = 'INSERT INTO user (
                             email,
                             subscription_type,
@@ -372,7 +397,7 @@ class Importer
                             creator_id,
                             creation_date
                         )
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())
+                        VALUES ' . $placeholders . '
                         ON DUPLICATE KEY UPDATE
                             email = VALUES(email),
                             subscription_type = VALUES(subscription_type),
@@ -390,37 +415,36 @@ class Importer
                             updater_id = VALUES(creator_id),
                             update_date = NOW()';
 
-        $params = $args;
-        $params[] = false; // web_temporary_access
-        $params[] = false; // should_delete
-        $params[] = ''; // password
-        $params[] = $this->currentUser;
-
-        $changed = $this->connection->executeUpdate($sql, $params);
-
-        if ($changed) {
-            ++$this->updatedUsers;
-        }
+        $this->connection->executeUpdate($sql, $this->usersParams);
     }
 
     private function updateOrganization(...$args): void
     {
+        $params = $args;
+        $params[] = $this->currentUser;
+
+        array_push($this->organizationsParams, ...$params);
+
+        ++$this->updatedOrganizations;
+    }
+
+    private function updateAllOrganizations(): void
+    {
+        if (!$this->updatedOrganizations) {
+            return;
+        }
+
+        $placeholders = $this->placeholders($this->updatedOrganizations, '(?, ?, ?, NOW())');
+
         $sql = 'INSERT INTO organization (pattern, subscription_last_review_id, creator_id, creation_date)
-                        VALUES (?, ?, ?, NOW())
+                        VALUES ' . $placeholders . '
                         ON DUPLICATE KEY UPDATE
                         pattern = VALUES(pattern),
                         subscription_last_review_id = VALUES(subscription_last_review_id),
                         updater_id = VALUES(creator_id),
                         update_date = NOW()';
 
-        $params = $args;
-        $params[] = $this->currentUser;
-
-        $changed = $this->connection->executeUpdate($sql, $params);
-
-        if ($changed) {
-            ++$this->updatedOrganizations;
-        }
+        $this->connection->executeUpdate($sql, $this->organizationsParams);
     }
 
     private function markToDelete(): void
@@ -437,5 +461,10 @@ class Importer
         $withoutAccent = iconv('UTF-8', 'ASCII//TRANSLIT', mb_strtolower($name));
 
         return trim(mb_strtoupper($withoutAccent));
+    }
+
+    private function placeholders(int $count, string $placeholder): string
+    {
+        return implode(',' . PHP_EOL, array_fill(0, $count, $placeholder));
     }
 }

@@ -5,28 +5,12 @@
         label="Utilisateur"
         [newLabel]="data.seo.title"
     >
-        <div fxLayout="column" fxLayoutGap="5px">
-            <div>
-                <span class="mat-body-2">Statut de l'abonnement : </span>
-                <ng-container *ngIf="data.model.subscriptionLastReview">
-                    Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
-                    {{ data.model.subscriptionLastReview.reviewNumber }}
-                </ng-container>
-
-                <ng-container *ngIf="!data.model.subscriptionLastReview">N'est pas abonné</ng-container>
-            </div>
-
-            <div>
-                <span class="mat-body-2">Statut d'adhérant : </span>
-                {{ data.model.membership | enum: 'Membership' | async }}
-            </div>
-        </div>
     </natural-detail-header>
 
     <mat-toolbar color="warn" *ngIf="data.model.shouldDelete"
         >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
-        définitivement ici.</mat-toolbar
-    >
+        définitivement ici.
+    </mat-toolbar>
 
     <!-- naturalLinkableTab conflicts with order detail page (child route) -->
     <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
@@ -62,11 +46,29 @@
                             placeholder="Rôle"
                         ></natural-select-enum>
 
+                        <h2 class="mat-h2">Statut</h2>
                         <natural-select-enum
                             enumName="Membership"
                             formControlName="membership"
                             placeholder="Membre des artisans"
                         ></natural-select-enum>
+
+                        <div>
+                            <span class="mat-body-2">Abonnement : </span>
+                            <ng-container *ngIf="data.model.subscriptionLastReview">
+                                Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
+                                {{ data.model.subscriptionLastReview.reviewNumber }}
+                            </ng-container>
+
+                            <ng-container *ngIf="!data.model.subscriptionLastReview">N'est pas abonné</ng-container>
+                        </div>
+
+                        <div
+                            matTooltip="L'accès temporaire donne accès au contenu numérique en attendant le prochain import de Crésus qui confirmera les accès disponible"
+                        >
+                            <span class="mat-body-2">Accès temporaire : </span>
+                            {{ data.model.webTemporaryAccess ? 'oui' : 'non' }}
+                        </div>
                     </div>
                 </div>
 
@@ -104,11 +106,6 @@
                     <div>
                         <span class="mat-body-strong">Dernière connexion :</span>
                         {{ data.model.lastLogin | swissDate }}
-                    </div>
-
-                    <div *ngIf="data.model.resignDate && data.model.status == 'archived'">
-                        <span class="mat-body-strong">Démission le :</span>
-                        {{ data.model.resignDate | swissDate }}
                     </div>
                 </div>
             </div>

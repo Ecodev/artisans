@@ -14,6 +14,7 @@ export const userFieldsFragment = gql`
         street
         locality
         shouldDelete
+        webTemporaryAccess
         country {
             id
             name

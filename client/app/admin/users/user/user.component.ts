@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {NaturalAbstractDetail} from '@ecodev/natural';
+import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
 import {
     CreateUser,
     CreateUserVariables,
@@ -12,6 +12,7 @@ import {
 } from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
+import {UserResolve} from '../user';
 
 @Component({
     selector: 'app-user',
@@ -31,6 +32,11 @@ export class UserComponent
     >
     implements OnInit {
     public UserService = UserService;
+
+    /**
+     * Override parent just to type it
+     */
+    public data!: UserResolve & {seo: NaturalSeoBasic};
 
     constructor(private userService: UserService, injector: Injector, public sessionService: SessionService) {
         super('user', userService, injector);

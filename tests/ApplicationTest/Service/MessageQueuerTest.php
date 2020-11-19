@@ -132,6 +132,18 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR');
     }
 
+    public function testQueueAdminPendingOrderWithoutSubscription(): void
+    {
+        $admin = $this->createMockUserAdmin();
+        $user = $this->createMockUser();
+        $order = $this->createMockOrder($user, false);
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $message = $messageQueuer->queueAdminPendingOrder($admin, $order);
+
+        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR', 'without-subscription');
+    }
+
     public function testQueueAdminValidatedOrder(): void
     {
         $admin = $this->createMockUserAdmin();
@@ -176,7 +188,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::NEWSLETTER_SUBSCRIPTION, 'Demande d\'inscription à la newsletter');
     }
 
-    private function createMockOrder(?User $owner): Order
+    private function createMockOrder(?User $owner, bool $withSubscription = true): Order
     {
         $product = $this->createMock(Product::class);
         $product->expects(self::any())
@@ -218,16 +230,23 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $donationLine->setBalanceEUR(Money::EUR(0));
         $donationLine->setType(ProductTypeType::OTHER);
 
-        $lines = new ArrayCollection([$productLine, $subscriptionLine, $subscriptionLine2, $donationLine]);
+        if ($withSubscription) {
+            $lines = new ArrayCollection([$productLine, $subscriptionLine, $subscriptionLine2, $donationLine]);
+        } else {
+            $lines = new ArrayCollection([$productLine, $donationLine]);
+        }
 
-        $order = $this->createMock(Order::class);
+        $order = $this->createPartialMock(Order::class, ['getId', 'getBalanceCHF', 'getBalanceEUR', 'getOrderLines']);
+        $order->setOwner($owner);
+        $order->setPaymentMethod(PaymentMethodType::BVR);
+
         $order->expects(self::any())
             ->method('getId')
             ->willReturn(456);
 
         $order->expects(self::any())
             ->method('getBalanceCHF')
-            ->willReturn(Money::CHF(1500));
+            ->willReturn(Money::CHF(3300));
 
         $order->expects(self::any())
             ->method('getBalanceEUR')
@@ -236,18 +255,6 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order->expects(self::any())
             ->method('getOrderLines')
             ->willReturn($lines);
-
-        $order->expects(self::any())
-            ->method('getOwner')
-            ->willReturn($owner);
-
-        $order->expects(self::any())
-            ->method('getFormattedBalance')
-            ->willReturn('33.00 CHF');
-
-        $order->expects(self::any())
-            ->method('getPaymentMethod')
-            ->willReturn(PaymentMethodType::BVR);
 
         return $order;
     }

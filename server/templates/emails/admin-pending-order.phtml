@@ -5,13 +5,18 @@ use Application\DBAL\Types\PaymentMethodType;
 $url = $this->serverUrl . '/admin/order/' . $this->order->getId();
 
 ?>
-<p>Une commande a été initiée pour un total de <strong><?php echo $this->escapeHtml($this->order->getFormattedBalance()) ?></strong>.
+<p>Une commande a été initiée pour un total de
+    <strong><?php echo $this->escapeHtml($this->order->getFormattedBalance()) ?></strong>.
     <?php if ($this->order->getPaymentMethod() === PaymentMethodType::BVR) { ?>
         Cette commande a besoin d'un BVR.
     <?php } else { ?>
         Cette commande a besoin d'informations pour un transfert bancaire.
     <?php } ?>
 </p>
+
+<?php if ($this->order->hasSubscription()) { ?>
+    <p>L'abonnement doit être renseigné dans Crésus, puis les utilisateurs re-importé dans le site, pour que l'abonnement apparaisse correctement.</p>
+<?php } ?>
 
 <h2>Client : </h2>
 <?php echo $this->userInfos($this->order->getOwner()); ?>

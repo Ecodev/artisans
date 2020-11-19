@@ -113,4 +113,21 @@ class Order extends AbstractModel
     {
         $this->paymentMethod = $paymentMethod;
     }
+
+    /**
+     * Return whether there is at least one subscription in the order
+     *
+     * @API\Exclude
+     */
+    public function hasSubscription(): bool
+    {
+        /** @var OrderLine $line */
+        foreach ($this->getOrderLines() as $line) {
+            if ($line->getSubscription()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -129,7 +129,7 @@
 
             <!-- If has access -->
             <div *ngIf="currentReview.file">
-                <a mat-flat-button color="accent" [routerLink]="['/file/', currentReview.file.id]">
+                <a mat-flat-button color="accent" [href]="'/file/' + currentReview.file.id" target="_blank">
                     Télécharger le numéro
                 </a>
             </div>

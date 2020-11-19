@@ -18,7 +18,11 @@
                 <a mat-flat-button routerLink="/larevuedurable/abonnements">Renouveller</a>
             </ng-container>
 
-            <ng-container *ngIf="!viewer.subscriptionLastReview">
+            <ng-container *ngIf="viewer.webTemporaryAccess">
+                <div>Abonnement actif</div>
+            </ng-container>
+
+            <ng-container *ngIf="!viewer.subscriptionLastReview && !viewer.webTemporaryAccess">
                 <div>N'est pas abonné.</div>
                 <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
             </ng-container>

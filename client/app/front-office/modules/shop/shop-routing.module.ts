@@ -24,6 +24,10 @@ const routes: Routes = [
             showTagsOnProducts: false,
             showTagsNavigation: false,
             viewMode: ProductsViewMode.list,
+            showMoreLabel: 'Afficher plus de résultats',
+            forcedVariables: {
+                sorting: [{field: ProductSortingField.creationDate, order: SortingOrder.DESC}],
+            } as ProductsVariables,
         },
     },
     {

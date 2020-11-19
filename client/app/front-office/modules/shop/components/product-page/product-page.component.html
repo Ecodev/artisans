@@ -127,10 +127,16 @@
             >
                 <div style="max-width: 300px">
                     <h2 class="mat-h2">Téléchargement</h2>
-                    <p class="mat-body">Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
+                    <p class="mat-body" *ngIf="data.model.reviewNumber">
+                        Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)
+                    </p>
+                    <p class="mat-body" *ngIf="!data.model.reviewNumber">
+                        Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
+                    </p>
                     <a mat-flat-button [href]="'/file/' + data.model.file.id" target="_blank">
                         <natural-icon name="get_app"></natural-icon>
-                        Télécharger cette revue
+                        <span *ngIf="data.model.reviewNumber">Télécharger cette revue</span>
+                        <span *ngIf="!data.model.reviewNumber">Télécharger cet article</span>
                     </a>
                 </div>
             </div>

@@ -18,7 +18,12 @@ import {
 import {ProductTagService} from '../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../admin/products/services/product.service';
 import {UserService} from '../../admin/users/services/user.service';
-import {ProductFilterGroupCondition, UserFilterGroupCondition} from '../generated-types';
+import {
+    ProductFilterGroupConditionFile,
+    ProductFilterGroupConditionIsActive,
+    UserFilterGroupConditionShouldDelete,
+    UserFilterGroupConditionSubscriptionLastReview,
+} from '../generated-types';
 
 /**
  * Collection of facets for natural-search accessible by the object name
@@ -50,20 +55,20 @@ export class NaturalSearchFacetsService {
     private readonly productIsActive: FlagFacet = {
         display: 'Actif',
         field: 'isActive',
-        condition: {equal: {value: true}} as ProductFilterGroupCondition,
+        condition: {equal: {value: true}} as ProductFilterGroupConditionIsActive,
     };
 
     private readonly productIsNotActive: FlagFacet = {
         display: 'Non actif',
         field: 'isActive',
         name: 'isNotActive',
-        condition: {equal: {value: false}} as ProductFilterGroupCondition,
+        condition: {equal: {value: false}} as ProductFilterGroupConditionIsActive,
     };
 
     private readonly productHasNoFile: FlagFacet = {
         display: 'Sans produit dématérialisé',
         field: 'file',
-        condition: {empty: {not: false}} as ProductFilterGroupCondition,
+        condition: {empty: {not: false}} as ProductFilterGroupConditionFile,
     };
 
     private readonly code: DropdownFacet<never> = {
@@ -111,10 +116,29 @@ export class NaturalSearchFacetsService {
             {
                 display: 'Existe pas dans Crésus',
                 field: 'shouldDelete',
-                condition: {equal: {value: true}} as UserFilterGroupCondition,
+                condition: {equal: {value: true}} as UserFilterGroupConditionShouldDelete,
             } as FlagFacet,
             this.firstName,
             this.lastName,
+            {
+                display: 'Membre des artisans',
+                field: 'membership',
+                component: TypeSelectComponent,
+                configuration: {
+                    items: this.enumService.get('Membership'),
+                },
+            } as DropdownFacet<TypeSelectConfiguration>,
+            {
+                display: 'Abonné',
+                field: 'subscriptionLastReview',
+                condition: {empty: {not: true}} as UserFilterGroupConditionSubscriptionLastReview,
+            } as FlagFacet,
+            {
+                display: 'Non abonné',
+                field: 'subscriptionLastReview',
+                name: 'noSubscriptionLastReview',
+                condition: {empty: {not: false}} as UserFilterGroupConditionSubscriptionLastReview,
+            } as FlagFacet,
             {
                 display: 'Rôle',
                 field: 'role',

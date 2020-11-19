@@ -457,7 +457,9 @@ SELECT id_order,
     NULL,
     id_customer,
     NULL,
-    date_add,
+    -- Creation date cannot be trusted, because it sometimes is far in the future (!), so instead we first try the invoice date,
+    -- then only take creation date if not in the future, if all fails, use update date as creation date
+    IF(invoice_date IS NOT NULL, invoice_date, IF(date_add <= date_upd, date_add, date_upd)),
     date_upd,
     IF(id_currency = 1, total_products_wt, 0) * 100,
     IF(id_currency = 2, total_products_wt, 0) * 100,
@@ -480,7 +482,9 @@ INSERT INTO order_line (id, owner_id, creation_date, update_date, order_id, name
                         type, product_id, subscription_id, quantity)
 SELECT id_order_detail,
     ps_orders.id_customer,
-    ps_orders.date_add,
+    -- Creation date cannot be trusted, because it sometimes is far in the future (!), so instead we first try the invoice date,
+    -- then only take creation date if not in the future, if all fails, use update date as creation date
+    IF(ps_orders.invoice_date IS NOT NULL, ps_orders.invoice_date, IF(ps_orders.date_add <= ps_orders.date_upd, ps_orders.date_add, ps_orders.date_upd)),
     ps_orders.date_upd,
     ps_orders.id_order,
     ps_order_detail.product_name,

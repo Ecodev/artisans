@@ -8,9 +8,6 @@ use Application\Model\Product;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
 
-/**
- * Trait for all objects with a name
- */
 trait HasSubscriptionLastReview
 {
     /**

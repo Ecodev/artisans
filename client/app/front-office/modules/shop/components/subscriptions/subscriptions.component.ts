@@ -14,7 +14,7 @@ import {GlobalCartService} from '../../../cart/services/global-cart.service';
     styleUrls: ['./subscriptions.component.scss'],
 })
 export class SubscriptionsComponent implements OnInit {
-    public subscriptions: {[key: string]: Subscriptions_subscriptions_items} = {};
+    public subscriptions: {[key: string]: Subscriptions_subscriptions_items} | null = null;
 
     public ProductType = ProductType;
 
@@ -35,6 +35,9 @@ export class SubscriptionsComponent implements OnInit {
 
     public order(id: string, type: ProductType, withEmails?: boolean): void {
         const subscribeFn = (emails?: string[]) => {
+            if (!this.subscriptions) {
+                return;
+            }
             const cart = this.globalCartService.cart;
             cart.setSubscription(this.subscriptions[id], type, emails);
             this.router.navigateByUrl('/panier/' + cart.id);

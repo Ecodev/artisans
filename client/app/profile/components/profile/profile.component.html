@@ -9,13 +9,13 @@
         </div>
 
         <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
-            <div class="mat-h2">Mon compte de La Revue</div>
+            <div class="mat-h2">Mon abonnement à LaRevueDurable</div>
             <ng-container *ngIf="viewer.subscriptionLastReview">
                 <div>
                     Abonné {{ viewer.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
                     {{ viewer.subscriptionLastReview.reviewNumber }}
                 </div>
-                <a mat-flat-button routerLink="/larevuedurable/abonnements">Renouveller</a>
+                <a mat-flat-button routerLink="/larevuedurable/abonnements">Renouveler</a>
             </ng-container>
 
             <ng-container *ngIf="viewer.webTemporaryAccess">

@@ -22,7 +22,7 @@ export class SessionFacilitatorComponent implements OnInit {
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();
         qvm.set('variables', {
-            filter: {groups: [{conditions: [{role: {in: {values: [UserRole.facilitator]}}}]}]},
+            filter: {groups: [{conditions: [{isPublicFacilitator: {equal: {value: true}}}]}]},
             pagination: {pageSize: 999, pageIndex: 0},
             sorting: [{field: UserSortingField.locality, order: SortingOrder.ASC}],
         });

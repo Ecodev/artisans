@@ -46,12 +46,28 @@
                             placeholder="Rôle"
                         ></natural-select-enum>
 
+                        <mat-slide-toggle
+                            formControlName="isPublicFacilitator"
+                            (change)="update()"
+                            class="margin-bottom"
+                        >
+                            Facilitateur public
+                        </mat-slide-toggle>
+
                         <h2 class="mat-h2">Statut</h2>
                         <natural-select-enum
                             enumName="Membership"
                             formControlName="membership"
                             placeholder="Membre des artisans"
                         ></natural-select-enum>
+
+                        <mat-slide-toggle
+                            formControlName="isPublicFacilitator"
+                            (change)="update()"
+                            class="margin-bottom"
+                        >
+                            Facilitateur public
+                        </mat-slide-toggle>
 
                         <div>
                             <span class="mat-body-2">Abonnement : </span>

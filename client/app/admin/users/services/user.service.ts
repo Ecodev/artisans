@@ -306,6 +306,7 @@ export class UserService extends NaturalAbstractModelService<
             phone: '',
             owner: null,
             country: null,
+            isPublicFacilitator: false,
         };
     }
 }

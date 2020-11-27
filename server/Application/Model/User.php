@@ -109,6 +109,12 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     private $webTemporaryAccess = false;
 
     /**
+     * @var bool
+     * @ORM\Column(type="boolean", options={"default" = 0})
+     */
+    private $isPublicFacilitator = false;
+
+    /**
      * @var Collection
      * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
@@ -289,6 +295,16 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     public function setWebTemporaryAccess(bool $webTemporaryAccess): void
     {
         $this->webTemporaryAccess = $webTemporaryAccess;
+    }
+
+    public function setIsPublicFacilitator(bool $isPublicFacilitator): void
+    {
+        $this->isPublicFacilitator = $isPublicFacilitator;
+    }
+
+    public function isPublicFacilitator(): bool
+    {
+        return $this->isPublicFacilitator;
     }
 
     /**

@@ -15,6 +15,7 @@ export const userFieldsFragment = gql`
         locality
         shouldDelete
         webTemporaryAccess
+        isPublicFacilitator
         country {
             id
             name

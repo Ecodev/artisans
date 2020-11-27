@@ -16,6 +16,7 @@ export const sessionMetaFragment = gql`
         description
         mailingList
         creationDate
+        internalRemarks
         facilitators {
             id
             name

@@ -9,6 +9,7 @@ use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Model\Traits\HasInternalRemarks;
 use Ecodev\Felix\Model\Traits\HasName;
 
 /**
@@ -20,6 +21,7 @@ class Session extends AbstractModel
 {
     use HasName;
     use HasRichTextDescription;
+    use HasInternalRemarks;
 
     /**
      * @var string

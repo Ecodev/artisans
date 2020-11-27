@@ -63,6 +63,7 @@ export class SessionService extends NaturalAbstractModelService<
             endDate: null,
             description: '',
             mailingList: '',
+            internalRemarks: '',
         };
     }
 

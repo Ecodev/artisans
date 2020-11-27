@@ -63,6 +63,17 @@
                                     d'administration</mat-hint
                                 >
                             </mat-form-field>
+
+                            <mat-form-field class="margin-top">
+                                <mat-label>Remarques internes</mat-label>
+                                <textarea
+                                    (change)="update()"
+                                    [matAutosizeMaxRows]="3"
+                                    formControlName="internalRemarks"
+                                    matInput
+                                    [matTextareaAutosize]="true"
+                                ></textarea>
+                            </mat-form-field>
                         </div>
 
                         <div *ngIf="datesForm" formArrayName="dates">

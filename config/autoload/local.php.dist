@@ -47,4 +47,7 @@ return [
     ],
     'infomaniak-api' => '',
     'infomaniak-secret' => '',
+    'log' => [
+        'emails' => [], // List of developer emails to send bugs to
+    ],
 ];

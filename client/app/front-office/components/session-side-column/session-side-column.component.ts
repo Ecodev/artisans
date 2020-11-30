@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
+import {UserService} from '../../../admin/users/services/user.service';
 import {SessionsVariables} from '../../../shared/generated-types';
 
 @Component({
@@ -13,7 +15,7 @@ export class SessionSideColumnComponent implements OnInit {
 
     @Input() public hiddenBlocName?: string;
 
-    constructor(private sessionService: SessionService) {}
+    constructor(private sessionService: SessionService, private route: ActivatedRoute) {}
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
@@ -24,5 +26,10 @@ export class SessionSideColumnComponent implements OnInit {
         this.sessionService.getAll(qvm).subscribe(result => {
             this.number = result.length;
         });
+    }
+
+    public canAccessFacilitatorPrivate(): boolean {
+        console.log(this.route.snapshot.data);
+        return UserService.canAccessFacilitatorPrivate(this.route.snapshot.data?.viewer?.model);
     }
 }

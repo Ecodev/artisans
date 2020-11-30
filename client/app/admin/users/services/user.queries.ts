@@ -52,6 +52,7 @@ export const usersQuery = gql`
             items {
                 id
                 email
+                phone
                 name
                 locality
                 membership

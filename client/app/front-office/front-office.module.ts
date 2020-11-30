@@ -46,6 +46,7 @@ import {FaireUnDonComponent} from './components/faire-un-don/faire-un-don.compon
 import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
 import {LegalMentionsComponent} from './components/legal-mentions/legal-mentions.component';
 import {ConditionsGeneralesVenteComponent} from './components/conditions-generales-vente/conditions-generales-vente.component';
+import {SessionFacilitatorPrivateComponent} from './components/session-facilitator-private/session-facilitator-private.component';
 
 @NgModule({
     declarations: [
@@ -87,6 +88,7 @@ import {ConditionsGeneralesVenteComponent} from './components/conditions-general
         AperoDivestComponent,
         LegalMentionsComponent,
         ConditionsGeneralesVenteComponent,
+        SessionFacilitatorPrivateComponent,
     ],
     imports: [
         CommonModule,

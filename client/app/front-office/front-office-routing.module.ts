@@ -11,6 +11,7 @@ import {
     SortingOrder,
 } from '../shared/generated-types';
 import {NaturalSeo} from '@ecodev/natural';
+import {FacilitatorGuard} from '../shared/guards/facilitator.guard';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
@@ -35,6 +36,7 @@ import {NewsPageComponent} from './components/news-page/news-page.component';
 import {NewsesPageComponent} from './components/newses-page/newses-page.component';
 import {PointsDeVenteComponent} from './components/points-de-vente/points-de-vente.component';
 import {ProjetComponent} from './components/projet/projet.component';
+import {SessionFacilitatorPrivateComponent} from './components/session-facilitator-private/session-facilitator-private.component';
 import {SessionFacilitatorComponent} from './components/session-facilitator/session-facilitator.component';
 import {SessionMethodComponent} from './components/session-method/session-method.component';
 import {SessionOrganisationComponent} from './components/session-organisation/session-organisation.component';
@@ -142,6 +144,7 @@ const routes: Routes = [
     },
     {
         path: 'agir-avec-nous',
+        resolve: {viewer: ViewerResolver},
         children: [
             {
                 path: 'conversation-carbone',
@@ -172,6 +175,12 @@ const routes: Routes = [
                                     'Si vous aimez le contact, faites preuve d’empathie et d’écoute non jugeante et avez envie de vous engager pour le climat, nous vous proposons de devenir facilitateur.trice de Conversations carbone. ',
                             } as NaturalSeo,
                         },
+                    },
+                    {
+                        path: 'facilitateurs-prive',
+                        component: SessionFacilitatorPrivateComponent,
+                        canActivate: [FacilitatorGuard],
+                        data: {seo: {title: 'Facilitateurs - Conversations carbone'} as NaturalSeo},
                     },
                     {
                         path: 'organisations',

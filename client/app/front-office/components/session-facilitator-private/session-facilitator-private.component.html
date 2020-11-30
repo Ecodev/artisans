@@ -1,0 +1,25 @@
+<div
+    class="page-illustration"
+    [style.backgroundImage]="'url(assets/images/illustration-pages/conversations-carbones_artisans2.jpg)'"
+></div>
+
+<div class="container">
+    <h1 class="mat-display-1">Page réservée aux facilitateurs</h1>
+
+    <div fxLayout="row" fxLayoutGap="30px">
+        <div fxFlex.gt-sm="66" class="page-body rich-text mat-h3">
+            <h2 class="mat-h2">Liste des facilitateurs</h2>
+            <div class="facilitators">
+                <div *ngFor="let user of facilitators" class="facilitator">
+                    <strong>{{ user.name }}</strong>
+                    <div>{{ user.email }}</div>
+                    <div>{{ user.phone }}</div>
+                </div>
+            </div>
+        </div>
+
+        <div fxFlex fxHide.lt-md>
+            <app-session-side-column hiddenBlocName="facilitateurs"></app-session-side-column>
+        </div>
+    </div>
+</div>

@@ -88,6 +88,13 @@ export class UserService extends NaturalAbstractModelService<
         if (!user) {
             return false;
         }
+        return [UserRole.administrator].includes(user.role);
+    }
+
+    public static canAccessFacilitatorPrivate(user: CurrentUserForProfile['viewer']): boolean {
+        if (!user) {
+            return false;
+        }
         return [UserRole.facilitator, UserRole.administrator].includes(user.role);
     }
 

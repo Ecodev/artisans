@@ -23,8 +23,10 @@ return [
             ],
         ],
     ],
-    'fromEmail' => 'noreply@artisans.lan',
-    'emailOverride' => 'your@email.com',
+    'email' => [
+        'from' => 'noreply@artisans.lan',
+        'toOverride' => 'your@email.com',
+    ],
     'smtp' => [
         'name' => 'mail.example.com',
         'host' => 'mail.example.com',

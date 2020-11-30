@@ -8,8 +8,10 @@ declare(strict_types=1);
  */
 return [
     'hostname' => 'artisans.lan',
-    'fromEmail' => 'noreply@artisans.lan',
-    'emailOverride' => null,
+    'email' => [
+        'from' => 'noreply@artisans.lan',
+        'toOverride' => null,
+    ],
     'smtp' => null,
     'phpPath' => '/usr/bin/php7.4',
     'templates' => [

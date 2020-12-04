@@ -61,14 +61,6 @@
                             placeholder="Membre des artisans"
                         ></natural-select-enum>
 
-                        <mat-slide-toggle
-                            formControlName="isPublicFacilitator"
-                            (change)="update()"
-                            class="margin-bottom"
-                        >
-                            Facilitateur public
-                        </mat-slide-toggle>
-
                         <div>
                             <span class="mat-body-2">Abonnement : </span>
                             <ng-container *ngIf="data.model.subscriptionLastReview">

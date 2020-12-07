@@ -117,7 +117,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                             link: '/agir-avec-nous/conversation-carbone/organisations',
                         },
                         {
-                            display: 'Facilitateurs',
+                            display: 'Les facilitateurs',
                             link: '/agir-avec-nous/conversation-carbone/facilitateurs',
                         },
                     ],
@@ -135,7 +135,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                             link: '/agir-avec-nous/desinvestir/industrie-energies-fossiles',
                         },
                         {
-                            display: 'Rapports BNS',
+                            display: 'Rapports sur la BNS',
                             link: 'agir-avec-nous/desinvestir/rapport-bns',
                         },
                         {

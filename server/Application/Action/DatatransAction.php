@@ -223,14 +223,18 @@ class DatatransAction extends AbstractAction
      */
     private function notify(Order $order): void
     {
+        /** @var UserRepository $repository */
+        $repository = $this->entityManager->getRepository(User::class);
+
         $user = $order->getOwner();
+
         if ($user) {
-            $message = $this->messageQueuer->queueUserValidatedOrder($user, $order);
+            $message = $repository->getAclFilter()->runWithoutAcl(function () use ($user, $order) {
+                return $this->messageQueuer->queueUserValidatedOrder($user, $order);
+            });
             $this->mailer->sendMessageAsync($message);
         }
 
-        /** @var UserRepository $repository */
-        $repository = $this->entityManager->getRepository(User::class);
         $admins = $repository->getAllAdministratorsToNotify();
         foreach ($admins as $admin) {
             $message = $this->messageQueuer->queueAdminValidatedOrder($admin, $order);

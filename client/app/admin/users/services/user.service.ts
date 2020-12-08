@@ -3,7 +3,13 @@ import {DataProxy} from '@apollo/client/core';
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {deliverableEmail, FormAsyncValidators, FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
+import {
+    deliverableEmail,
+    FormAsyncValidators,
+    FormValidators,
+    NaturalAbstractModelService,
+    unique,
+} from '@ecodev/natural';
 import {Observable, of, Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
@@ -110,7 +116,7 @@ export class UserService extends NaturalAbstractModelService<
 
     public getFormAsyncValidators(model: User_user): FormAsyncValidators {
         return {
-            // code: [unique('code', model.id, this)], // ?? todo : replace by e-mail ?
+            email: [unique('email', model.id, this)],
         };
     }
 

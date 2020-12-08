@@ -51,7 +51,6 @@ export class SessionComponent
         super.ngOnInit();
 
         // Overrides form with array by array of forms
-        // Todo in natural : maybe complete AbstractDetailService.getFormConfig() to dynamically consider arrays
         this.datesForm = new FormArray(this.data.model.dates.map(date => new FormControl(date)));
         this.form.setControl('dates', this.datesForm);
     }

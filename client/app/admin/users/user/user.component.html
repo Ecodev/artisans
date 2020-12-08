@@ -37,6 +37,10 @@
                             <input (change)="update()" formControlName="email" matInput />
                             <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
+                            <mat-error *ngIf="form.get('')?.hasError('email')">Adresse email invalide</mat-error>
+                            <mat-error *ngIf="form.get('email')?.hasError('duplicateValue')">
+                                Cet email est déjà attribué</mat-error
+                            >
                         </mat-form-field>
 
                         <natural-select-enum

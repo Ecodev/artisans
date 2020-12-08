@@ -58,7 +58,7 @@ export class SessionService extends NaturalAbstractModelService<
             region: '',
             price: '',
             availability: '',
-            dates: [], // todo
+            dates: [],
             startDate: null,
             endDate: null,
             description: '',

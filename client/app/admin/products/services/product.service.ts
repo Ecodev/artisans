@@ -47,7 +47,7 @@ export class ProductService extends NaturalAbstractModelService<
     DeleteProducts,
     DeleteProductsVariables
 > {
-    public static readonly MEMBERSHIP_FEE_PRODUCT_ID = '1307';
+    public static readonly MEMBERSHIP_FEE_PRODUCT_ID = '1314';
 
     public static readonly articlesSorting: ProductSorting[] = [
         {field: ProductSortingField.isHighlighted, order: SortingOrder.DESC, nullAsHighest: true},

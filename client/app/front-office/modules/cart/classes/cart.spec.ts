@@ -1,8 +1,7 @@
-import {Currency} from '../../../../shared/services/currency.service';
 import {Product, ProductType} from '../../../../shared/generated-types';
 import {CartService} from '../services/cart.service';
 import {Cart, CartLine} from './cart';
-import {NaturalMemoryStorage, NaturalStorage} from '@ecodev/natural';
+import {NaturalMemoryStorage} from '@ecodev/natural';
 import {CartCollectionService} from '../services/cart-collection.service';
 
 /**

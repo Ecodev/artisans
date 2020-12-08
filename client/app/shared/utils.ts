@@ -2,7 +2,6 @@ import Decimal from 'decimal.js';
 import {Provider} from '@angular/core';
 import {NaturalMemoryStorage, SESSION_STORAGE} from '@ecodev/natural';
 
-// todo : drop decimaljs ?
 export function moneyRoundUp(amount: number): number {
     return Math.ceil(+Decimal.mul(amount, 100)) / 100;
 }

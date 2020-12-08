@@ -25,13 +25,6 @@ export class AnonymousUserService extends UserService {
     public getFormValidators(): FormValidators {
         return {
             email: [Validators.required, deliverableEmail],
-            // termsAgreement: [], // todo : restore ?
-        };
-    }
-
-    protected getDefaultForClient(): Literal {
-        return {
-            // termsAgreement: false, // todo : restore ?
         };
     }
 }

@@ -116,7 +116,7 @@ export class CreateOrderComponent implements OnInit {
      * Set shipping address mandatory if "same address" is unchecked
      */
     public updateAddressRequirements(required: boolean, form: FormGroup): void {
-        const fields = ['firstName', 'lastName', 'street', 'locality', 'postcode']; // todo : add country
+        const fields = ['firstName', 'lastName', 'street', 'locality', 'postcode', 'country'];
         fields.forEach(fieldName => {
             const control = form.get(fieldName);
             if (control) {

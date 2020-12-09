@@ -31,6 +31,11 @@ export const routes: Routes = [
             },
         ],
     },
+    {
+        // 404 redirects to home
+        path: '**',
+        redirectTo: '',
+    },
 ];
 
 @NgModule({

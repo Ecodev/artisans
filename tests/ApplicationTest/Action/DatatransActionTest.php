@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ApplicationTest\Action;
 
 use Application\Action\DatatransAction;
+use Application\DBAL\Types\MessageTypeType;
 use Application\Model\Message;
 use Application\Model\Order;
 use Application\Service\MessageQueuer;
@@ -18,6 +19,63 @@ use Psr\Http\Server\RequestHandlerInterface;
 class DatatransActionTest extends TestCase
 {
     use TestWithTransactionAndUser;
+
+    public function testNotifications(): void
+    {
+        // Valid request
+        $request = new ServerRequest();
+        $request = $request->withParsedBody([
+            'uppTransactionId' => '123456789012345678',
+            'status' => 'success',
+            'refno' => '16001',
+            'amount' => '1000',
+            'currency' => 'CHF',
+            'responseMessage' => 'Payment was successful',
+        ]);
+
+        // Mailer will not actually send the message, but it will still flush it in DB as usual
+        $mailer = $this->createMock(Mailer::class);
+        $mailer->expects(self::exactly(2))
+            ->method('sendMessageAsync')
+            ->willReturnCallback(function (): void {
+                _em()->flush();
+            });
+
+        global $container;
+        $renderer = $container->get(TemplateRendererInterface::class);
+        $messageQueuer = $container->get(MessageQueuer::class);
+        $handler = $this->createMock(RequestHandlerInterface::class);
+
+        $action = new DatatransAction(_em(), $renderer, [], $mailer, $messageQueuer);
+
+        // Before we have no notifications at all
+        self::assertFalse($this->hasUserNotification());
+        self::assertFalse($this->hasAdminNotification());
+
+        $action->process($request, $handler);
+
+        // After we have exactly 1 notification for user and 1 for admin
+        self::assertTrue($this->hasUserNotification());
+        self::assertTrue($this->hasAdminNotification());
+    }
+
+    private function hasUserNotification(): bool
+    {
+        return $this->hasMessage('othermember@example.com', MessageTypeType::USER_VALIDATED_ORDER);
+    }
+
+    private function hasAdminNotification(): bool
+    {
+        return $this->hasMessage('administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER);
+    }
+
+    private function hasMessage(string $email, string $type): bool
+    {
+        $sql = "SELECT COUNT(*) = 1 FROM message WHERE email = '$email' AND type = '$type'";
+        $result = (bool) _em()->getConnection()->fetchOne($sql);
+
+        return $result;
+    }
 
     /**
      * @dataProvider providerProcess

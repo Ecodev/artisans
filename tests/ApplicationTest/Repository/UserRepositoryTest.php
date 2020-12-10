@@ -60,10 +60,4 @@ class UserRepositoryTest extends AbstractRepositoryTest
         self::assertNotNull($user);
         self::assertSame(1000, $user->getId());
     }
-
-    public function testGetAllAdministratorsToNotify(): void
-    {
-        $actual = $this->repository->getAllAdministratorsToNotify();
-        self::assertCount(1, $actual);
-    }
 }

@@ -103,23 +103,4 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
 
         return $user;
     }
-
-    /**
-     * Get all administrators to notify by email
-     *
-     * @return User[]
-     */
-    public function getAllAdministratorsToNotify(): array
-    {
-        $qb = $this->createQueryBuilder('user')
-            ->andWhere('user.role = :role')
-            ->andWhere("user.email IS NOT NULL AND user.email != ''")
-            ->setParameter('role', User::ROLE_ADMINISTRATOR);
-
-        $result = $this->getAclFilter()->runWithoutAcl(function () use ($qb) {
-            return $qb->getQuery()->getResult();
-        });
-
-        return $result;
-    }
 }

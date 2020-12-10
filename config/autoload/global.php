@@ -11,6 +11,7 @@ return [
     'email' => [
         'from' => 'noreply@artisans.lan',
         'toOverride' => null,
+        'admins' => [], // admin emails to notify of orders, members and newsletter subscriptions...
     ],
     'smtp' => null,
     'phpPath' => '/usr/bin/php7.4',

@@ -240,9 +240,8 @@ class DatatransAction extends AbstractAction
             $this->mailer->sendMessageAsync($message);
         }
 
-        $admins = $repository->getAllAdministratorsToNotify();
-        foreach ($admins as $admin) {
-            $message = $this->messageQueuer->queueAdminValidatedOrder($admin, $order);
+        foreach ($this->messageQueuer->getAllEmailsToNotify() as $adminEmail) {
+            $message = $this->messageQueuer->queueAdminValidatedOrder($adminEmail, $order);
             $this->mailer->sendMessageAsync($message);
         }
     }

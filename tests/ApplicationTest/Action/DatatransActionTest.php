@@ -99,6 +99,9 @@ class DatatransActionTest extends TestCase
         $mailer = $this->createMock(Mailer::class);
 
         $messageQueuer = $this->createMock(MessageQueuer::class);
+        $messageQueuer->expects(self::any())
+            ->method('getAllEmailsToNotify')
+            ->willReturn(['administrator@example.com']);
         if ($expectedViewModel['message']['status'] === 'success') {
             $messageQueuer->expects(self::once())->method('queueUserValidatedOrder')->willReturn(new Message());
             $messageQueuer->expects(self::once())->method('queueAdminValidatedOrder')->willReturn(new Message());

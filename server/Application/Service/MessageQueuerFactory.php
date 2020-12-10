@@ -17,10 +17,12 @@ class MessageQueuerFactory
     {
         $entityManager = $container->get(EntityManager::class);
         $renderer = $container->get(MessageRenderer::class);
+        $config = $container->get('config');
 
         return new MessageQueuer(
             $entityManager,
             $renderer,
+            $config,
         );
     }
 }

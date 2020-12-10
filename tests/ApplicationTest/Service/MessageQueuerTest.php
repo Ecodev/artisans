@@ -30,10 +30,19 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $entityManager = $container->get(EntityManager::class);
         $viewRenderer = $container->get(RendererInterface::class);
         $messageRenderer = new MessageRenderer($viewRenderer, 'artisans.lan');
+        $config = [
+            'email' => [
+                'admins' => [
+                    'john.doe@example.com',
+                    'jane.doe@@example.com',
+                ],
+            ],
+        ];
 
         $messageQueuer = new MessageQueuer(
             $entityManager,
             $messageRenderer,
+            $config,
         );
 
         return $messageQueuer;
@@ -53,9 +62,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $registeredUser = $this->createMockUser();
         $admin = $this->createMockUserAdmin();
         $messageQueuer = $this->createMockMessageQueuer();
-        $message = $messageQueuer->queueConfirmedRegistration($admin, $registeredUser);
+        $message = $messageQueuer->queueConfirmedRegistration($admin->getEmail(), $registeredUser);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::CONFIRMED_REGISTRATION, 'Nouveau membre');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::CONFIRMED_REGISTRATION, 'Nouveau membre');
     }
 
     public function testQueueResetPassword(): void
@@ -83,9 +92,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
             'Nom de famille ' => 'Connor',
         ];
 
-        $message = $messageQueuer->queueUpdatedUser($admin, $updatedUser, $before, $after);
+        $message = $messageQueuer->queueUpdatedUser($admin->getEmail(), $updatedUser, $before, $after);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::UPDATED_USER, 'Un utilisateur a modifié ses données personnelles');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::UPDATED_USER, 'Un utilisateur a modifié ses données personnelles');
     }
 
     public function testQueueUserPendingOrder(): void
@@ -117,9 +126,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order = $this->createMockOrder($user);
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueAdminPendingOrder($admin, $order);
+        $message = $messageQueuer->queueAdminPendingOrder($admin->getEmail(), $order);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR');
     }
 
     public function testQueueAdminPendingOrderWithoutSubscription(): void
@@ -129,9 +138,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order = $this->createMockOrder($user, false);
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueAdminPendingOrder($admin, $order);
+        $message = $messageQueuer->queueAdminPendingOrder($admin->getEmail(), $order);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR', 'without-subscription');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::ADMIN_PENDING_ORDER, 'Une commande a besoin d\'un BVR', 'without-subscription');
     }
 
     public function testQueueAdminValidatedOrder(): void
@@ -141,9 +150,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order = $this->createMockOrder($user);
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueAdminValidatedOrder($admin, $order);
+        $message = $messageQueuer->queueAdminValidatedOrder($admin->getEmail(), $order);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser');
     }
 
     public function testQueueAdminValidatedOrderWithoutOwner(): void
@@ -152,9 +161,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $order = $this->createMockOrder(null);
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueAdminValidatedOrder($admin, $order);
+        $message = $messageQueuer->queueAdminValidatedOrder($admin->getEmail(), $order);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser', 'without-owner');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::ADMIN_VALIDATED_ORDER, 'Commande à comptabiliser', 'without-owner');
     }
 
     public function testQueueRequestMembershipEnd(): void
@@ -163,9 +172,9 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $user = $this->createMockUser();
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueRequestMembershipEnd($admin, $user);
+        $message = $messageQueuer->queueRequestMembershipEnd($admin->getEmail(), $user);
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::REQUEST_MEMBERSHIP_END, 'Demande d\'arrêt de cotisations');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::REQUEST_MEMBERSHIP_END, 'Demande d\'arrêt de cotisations');
     }
 
     public function testQueueNewsletterSubscription(): void
@@ -173,9 +182,19 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $admin = $this->createMockUserAdmin();
         $messageQueuer = $this->createMockMessageQueuer();
 
-        $message = $messageQueuer->queueNewsletterSubscription($admin, 'john.doe@example.com');
+        $message = $messageQueuer->queueNewsletterSubscription($admin->getEmail(), 'john.doe@example.com');
 
-        $this->assertMessage($message, $admin, 'administrator@example.com', MessageTypeType::NEWSLETTER_SUBSCRIPTION, 'Demande d\'inscription à la newsletter');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::NEWSLETTER_SUBSCRIPTION, 'Demande d\'inscription à la newsletter');
+    }
+
+    public function testGetEmailsToNotify(): void
+    {
+        $messageQueuer = $this->createMockMessageQueuer();
+
+        $emails = $messageQueuer->getAllEmailsToNotify();
+
+        self::assertCount(2, $emails);
+        self::assertContains('john.doe@example.com', $emails);
     }
 
     private function createMockOrder(?User $owner, bool $withSubscription = true): Order

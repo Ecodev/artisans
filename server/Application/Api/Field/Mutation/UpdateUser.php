@@ -49,9 +49,8 @@ abstract class UpdateUser implements FieldInterface
                 if ($before !== $after) {
                     /** @var UserRepository $repository */
                     $repository = _em()->getRepository(User::class);
-                    $admins = $repository->getAllAdministratorsToNotify();
-                    foreach ($admins as $admin) {
-                        $message = $messageQueuer->queueUpdatedUser($admin, $user, $before, $after);
+                    foreach ($messageQueuer->getAllEmailsToNotify() as $adminEmail) {
+                        $message = $messageQueuer->queueUpdatedUser($adminEmail, $user, $before, $after);
                         $mailer->sendMessageAsync($message);
                     }
                 }

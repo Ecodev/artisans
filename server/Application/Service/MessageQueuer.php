@@ -20,10 +20,13 @@ class MessageQueuer
 
     private MessageRenderer $messageRenderer;
 
-    public function __construct(EntityManager $entityManager, MessageRenderer $messageRenderer)
+    private array $config;
+
+    public function __construct(EntityManager $entityManager, MessageRenderer $messageRenderer, array $config)
     {
         $this->entityManager = $entityManager;
         $this->messageRenderer = $messageRenderer;
+        $this->config = $config;
     }
 
     public function queueRegister(User $user): Message
@@ -38,14 +41,14 @@ class MessageQueuer
         return $message;
     }
 
-    public function queueConfirmedRegistration(User $admin, User $registeredUser): Message
+    public function queueConfirmedRegistration(string $adminEmail, User $registeredUser): Message
     {
         $subject = 'Nouveau membre';
         $mailParams = [
             'registeredUser' => $registeredUser,
         ];
 
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::CONFIRMED_REGISTRATION, $mailParams);
+        $message = $this->createMessage(null, $adminEmail, $subject, MessageTypeType::CONFIRMED_REGISTRATION, $mailParams);
 
         return $message;
     }
@@ -68,7 +71,7 @@ class MessageQueuer
         return $message;
     }
 
-    public function queueUpdatedUser(User $admin, User $updatedUser, array $before, array $after): Message
+    public function queueUpdatedUser(string $adminEmail, User $updatedUser, array $before, array $after): Message
     {
         $subject = 'Un utilisateur a modifié ses données personnelles';
         $mailParams = [
@@ -77,7 +80,7 @@ class MessageQueuer
             'after' => $after,
         ];
 
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::UPDATED_USER, $mailParams);
+        $message = $this->createMessage(null, $adminEmail, $subject, MessageTypeType::UPDATED_USER, $mailParams);
 
         return $message;
     }
@@ -106,52 +109,60 @@ class MessageQueuer
         return $message;
     }
 
-    public function queueAdminPendingOrder(User $admin, Order $order): Message
+    public function queueAdminPendingOrder(string $adminEmail, Order $order): Message
     {
         $subject = 'Une commande a besoin d\'un BVR';
         $mailParams = [
             'order' => $order,
         ];
 
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::ADMIN_PENDING_ORDER, $mailParams);
+        $message = $this->createMessage(null, $adminEmail, $subject, MessageTypeType::ADMIN_PENDING_ORDER, $mailParams);
 
         return $message;
     }
 
-    public function queueAdminValidatedOrder(User $admin, Order $order): Message
+    public function queueAdminValidatedOrder(string $email, Order $order): Message
     {
         $subject = 'Commande à comptabiliser';
         $mailParams = [
             'order' => $order,
         ];
 
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::ADMIN_VALIDATED_ORDER, $mailParams);
+        $message = $this->createMessage(null, $email, $subject, MessageTypeType::ADMIN_VALIDATED_ORDER, $mailParams);
 
         return $message;
     }
 
-    public function queueRequestMembershipEnd(User $admin, User $member): Message
+    public function queueRequestMembershipEnd(string $adminEmail, User $member): Message
     {
         $subject = 'Demande d\'arrêt de cotisations';
         $mailParams = [
             'member' => $member,
         ];
 
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::REQUEST_MEMBERSHIP_END, $mailParams);
+        $message = $this->createMessage(null, $adminEmail, $subject, MessageTypeType::REQUEST_MEMBERSHIP_END, $mailParams);
 
         return $message;
     }
 
-    public function queueNewsletterSubscription(User $admin, string $email): Message
+    public function queueNewsletterSubscription(string $adminEmail, string $email): Message
     {
         $subject = 'Demande d\'inscription à la newsletter';
         $mailParams = [
             'newsletterEmail' => $email,
         ];
 
-        $message = $this->createMessage($admin, $admin->getEmail(), $subject, MessageTypeType::NEWSLETTER_SUBSCRIPTION, $mailParams);
+        $message = $this->createMessage(null, $adminEmail, $subject, MessageTypeType::NEWSLETTER_SUBSCRIPTION, $mailParams);
 
         return $message;
+    }
+
+    /**
+     * Get all admin emails to notify
+     */
+    public function getAllEmailsToNotify(): array
+    {
+        return $this->config['email']['admins'];
     }
 
     /**

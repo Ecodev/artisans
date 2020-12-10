@@ -10,7 +10,9 @@ use Application\Model\Message;
 use Application\Model\Order;
 use Application\Service\MessageQueuer;
 use ApplicationTest\Traits\TestWithTransactionAndUser;
+use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Service\Mailer;
+use Ecodev\Felix\Service\MessageRenderer;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
@@ -43,7 +45,17 @@ class DatatransActionTest extends TestCase
 
         global $container;
         $renderer = $container->get(TemplateRendererInterface::class);
-        $messageQueuer = $container->get(MessageQueuer::class);
+
+        $entityManager = $container->get(EntityManager::class);
+        $messageRenderer = $container->get(MessageRenderer::class);
+        $config = $container->get('config');
+
+        $messageQueuer = new MessageQueuer(
+            $entityManager,
+            $messageRenderer,
+            ['email' => ['admins' => ['administrator@example.com']]],
+        );
+
         $handler = $this->createMock(RequestHandlerInterface::class);
 
         $action = new DatatransAction(_em(), $renderer, [], $mailer, $messageQueuer);

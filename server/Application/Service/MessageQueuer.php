@@ -43,7 +43,7 @@ class MessageQueuer
 
     public function queueConfirmedRegistration(string $adminEmail, User $registeredUser): Message
     {
-        $subject = 'Nouveau membre';
+        $subject = 'Nouvel utilisateur';
         $mailParams = [
             'registeredUser' => $registeredUser,
         ];

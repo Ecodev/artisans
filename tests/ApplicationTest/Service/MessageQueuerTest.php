@@ -64,7 +64,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $messageQueuer = $this->createMockMessageQueuer();
         $message = $messageQueuer->queueConfirmedRegistration($admin->getEmail(), $registeredUser);
 
-        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::CONFIRMED_REGISTRATION, 'Nouveau membre');
+        $this->assertMessage($message, null, 'administrator@example.com', MessageTypeType::CONFIRMED_REGISTRATION, 'Nouvel utilisateur');
     }
 
     public function testQueueResetPassword(): void

@@ -375,6 +375,11 @@ const routes: Routes = [
         path: 'larevuedurable',
         children: [
             {
+                path: '',
+                pathMatch: 'full',
+                redirectTo: '/larevuedurable/articles',
+            },
+            {
                 path: 'projet',
                 component: ProjetComponent,
                 data: {

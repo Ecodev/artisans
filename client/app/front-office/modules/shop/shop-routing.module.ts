@@ -11,11 +11,6 @@ import {SubscriptionsComponent} from './components/subscriptions/subscriptions.c
 
 const routes: Routes = [
     {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/larevudurable/articles',
-    },
-    {
         path: 'recherche',
         component: ProductsPageComponent,
         data: {

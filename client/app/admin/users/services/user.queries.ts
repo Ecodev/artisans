@@ -23,10 +23,7 @@ export const userFieldsFragment = gql`
         }
         role
         subscriptionType
-        subscriptionLastReview {
-            id
-            reviewNumber
-        }
+        subscriptionLastReviewNumber
         membership
         firstLogin
         lastLogin

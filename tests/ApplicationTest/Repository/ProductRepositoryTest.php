@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Repository;
 
+use Application\Model\Organization;
 use Application\Model\Product;
+use Application\Model\User;
 use Application\Repository\ProductRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
@@ -38,5 +40,20 @@ class ProductRepositoryTest extends AbstractRepositoryTest
             ['facilitator', $all],
             ['administrator', $all],
         ];
+    }
+
+    public function testGetSubscriptionLastReviewNumber(): void
+    {
+        $user = $this->getEntityManager()->getReference(User::class, 1000);
+        $actual = $this->repository->getSubscriptionLastReviewNumber($user);
+        self::assertNull($actual);
+
+        $user = $this->getEntityManager()->getReference(User::class, 1003);
+        $actual = $this->repository->getSubscriptionLastReviewNumber($user);
+        self::assertSame(62, $actual);
+
+        $organization = $this->getEntityManager()->getReference(Organization::class, 50000);
+        $actual = $this->repository->getSubscriptionLastReviewNumber($organization);
+        self::assertSame(61, $actual);
     }
 }

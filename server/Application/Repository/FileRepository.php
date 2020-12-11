@@ -32,7 +32,8 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
         $queries = [];
 
         $connection = $this->getEntityManager()->getConnection();
-        $hasSubscription = $user && ProductTypeType::includesDigital($user->getSubscriptionType()) && $user->getSubscriptionLastReview() && $user->getSubscriptionLastReview()->getReviewNumber();
+        $subscriptionLastReviewNumber = $user ? $user->getSubscriptionLastReviewNumber() : null;
+        $hasSubscription = $user && ProductTypeType::includesDigital($user->getSubscriptionType()) && $subscriptionLastReviewNumber;
         $digitalTypes = implode(',', array_map(function (string $val) use ($connection): string {
             return $connection->quote($val);
         }, ProductTypeType::getDigitalTypes()));
@@ -46,7 +47,7 @@ product.is_active
 AND product.file_id IS NOT NULL
 AND product.type IN (' . $digitalTypes . ')';
         } elseif ($hasSubscription) {
-            $allowedReviewNumber = $connection->quote($user->getSubscriptionLastReview()->getReviewNumber());
+            $allowedReviewNumber = $connection->quote($subscriptionLastReviewNumber);
 
             // Files for web subscription
             $queries[] = '

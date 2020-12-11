@@ -67,12 +67,14 @@
 
                         <div>
                             <span class="mat-body-2">Abonnement : </span>
-                            <ng-container *ngIf="data.model.subscriptionLastReview">
+                            <ng-container *ngIf="data.model.subscriptionLastReviewNumber">
                                 Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
-                                {{ data.model.subscriptionLastReview.reviewNumber }}
+                                {{ data.model.subscriptionLastReviewNumber }}
                             </ng-container>
 
-                            <ng-container *ngIf="!data.model.subscriptionLastReview">N'est pas abonné</ng-container>
+                            <ng-container *ngIf="!data.model.subscriptionLastReviewNumber"
+                                >N'est pas abonné</ng-container
+                            >
                         </div>
 
                         <div

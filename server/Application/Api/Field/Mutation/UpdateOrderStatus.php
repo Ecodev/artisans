@@ -52,8 +52,6 @@ abstract class UpdateOrderStatus implements FieldInterface
                     }
 
                     // Notify admins
-                    /** @var UserRepository $repository */
-                    $repository = _em()->getRepository(User::class);
                     foreach ($messageQueuer->getAllEmailsToNotify() as $adminEmail) {
                         $message = $messageQueuer->queueAdminValidatedOrder($adminEmail, $order);
                         $mailer->sendMessageAsync($message);

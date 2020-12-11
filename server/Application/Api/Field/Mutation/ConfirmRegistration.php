@@ -71,8 +71,6 @@ abstract class ConfirmRegistration implements FieldInterface
                 $organizationRepository = _em()->getRepository(Organization::class);
                 $organizationRepository->applyOrganizationAccesses();
 
-                /** @var UserRepository $repository */
-                $repository = _em()->getRepository(User::class);
                 foreach ($messageQueuer->getAllEmailsToNotify() as $adminEmail) {
                     $message = $messageQueuer->queueConfirmedRegistration($adminEmail, $user);
                     $mailer->sendMessageAsync($message);

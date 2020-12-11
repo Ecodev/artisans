@@ -38,8 +38,6 @@ abstract class RequestMembershipEnd implements FieldInterface
                 /** @var MessageQueuer $messageQueuer */
                 $messageQueuer = $container->get(MessageQueuer::class);
 
-                /** @var UserRepository $repository */
-                $repository = _em()->getRepository(User::class);
                 foreach ($messageQueuer->getAllEmailsToNotify() as $adminEmail) {
                     $message = $messageQueuer->queueRequestMembershipEnd($adminEmail, $user);
                     $mailer->sendMessageAsync($message);

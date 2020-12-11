@@ -59,8 +59,6 @@ abstract class CreateOrder implements FieldInterface
                             $mailer->sendMessageAsync($message);
                         }
 
-                        /** @var UserRepository $repository */
-                        $repository = _em()->getRepository(User::class);
                         foreach ($messageQueuer->getAllEmailsToNotify() as $adminEmail) {
                             $message = $messageQueuer->queueAdminPendingOrder($adminEmail, $order);
                             $mailer->sendMessageAsync($message);

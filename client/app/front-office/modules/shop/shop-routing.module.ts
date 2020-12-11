@@ -13,7 +13,7 @@ const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'articles',
+        redirectTo: '/larevudurable/articles',
     },
     {
         path: 'recherche',

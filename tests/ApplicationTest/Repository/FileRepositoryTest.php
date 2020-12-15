@@ -33,7 +33,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
     {
         $all = [9000, 9001, 9002, 9003];
         $articlesAndReviewsViaSubscriptions = [9000, 9001, 9002, 9003];
-        $directPurchases = [9001];
+        $directPurchases = [9001, 9003];
 
         return [
             ['anonymous', [9003]],

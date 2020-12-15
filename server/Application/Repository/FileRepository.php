@@ -72,16 +72,16 @@ WHERE
 product.is_active
 AND product.file_id IS NOT NULL
 ';
-        } else {
-            // Free product are accessible to everybody
-            $queries[] = '
+        }
+
+        // Free product are accessible to everybody
+        $queries[] = '
 SELECT product.file_id FROM product
 WHERE
 product.is_active
 AND product.file_id IS NOT NULL
 AND product.price_per_unit_chf = 0
 AND product.price_per_unit_eur = 0';
-        }
 
         return implode(' UNION ', $queries);
     }

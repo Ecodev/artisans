@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ApplicationTest\Action;
+namespace ApplicationTest\Handler;
 
-use Application\Action\DatatransAction;
 use Application\DBAL\Types\MessageTypeType;
+use Application\Handler\DatatransHandler;
 use Application\Model\Message;
 use Application\Model\Order;
 use Application\Service\MessageQueuer;
@@ -16,9 +16,8 @@ use Ecodev\Felix\Service\MessageRenderer;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Server\RequestHandlerInterface;
 
-class DatatransActionTest extends TestCase
+class DatatransHandlerTest extends TestCase
 {
     use TestWithTransactionAndUser;
 
@@ -56,15 +55,13 @@ class DatatransActionTest extends TestCase
             ['email' => ['admins' => ['administrator@example.com']]],
         );
 
-        $handler = $this->createMock(RequestHandlerInterface::class);
-
-        $action = new DatatransAction(_em(), $renderer, [], $mailer, $messageQueuer);
+        $handler = new DatatransHandler(_em(), $renderer, [], $mailer, $messageQueuer);
 
         // Before we have no notifications at all
         self::assertFalse($this->hasUserNotification());
         self::assertFalse($this->hasAdminNotification());
 
-        $action->process($request, $handler);
+        $handler->handle($request);
 
         // After we have exactly 1 notification for user and 1 for admin
         self::assertTrue($this->hasUserNotification());
@@ -99,8 +96,6 @@ class DatatransActionTest extends TestCase
         $renderer = $this->createMock(TemplateRendererInterface::class);
         $renderer->expects(self::once())->method('render')->with('app::datatrans', $expectedViewModel)->willReturn('');
 
-        $handler = $this->createMock(RequestHandlerInterface::class);
-
         $request = new ServerRequest();
         $request = $request->withParsedBody($data);
 
@@ -119,8 +114,8 @@ class DatatransActionTest extends TestCase
             $messageQueuer->expects(self::once())->method('queueAdminValidatedOrder')->willReturn(new Message());
         }
 
-        $action = new DatatransAction(_em(), $renderer, $config, $mailer, $messageQueuer);
-        $action->process($request, $handler);
+        $handler = new DatatransHandler(_em(), $renderer, $config, $mailer, $messageQueuer);
+        $handler->handle($request);
 
         $orderId = $data['refno'] ?? null;
         if ($orderId) {

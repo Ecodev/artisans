@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Ecodev\Felix\Action\GraphQLAction;
+use Ecodev\Felix\Handler\GraphQLHandler;
 use GraphQL\Upload\UploadMiddleware;
 use Mezzio\Application;
 use Mezzio\Helper\BodyParams\BodyParamsMiddleware;
@@ -39,19 +39,19 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
     $app->post('/graphql', [
         BodyParamsMiddleware::class,
         UploadMiddleware::class,
-        GraphQLAction::class,
+        GraphQLHandler::class,
     ], 'graphql');
 
     $app->get('/image/{id:\d+}[/{maxHeight:\d+}]', [
-        \Ecodev\Felix\Action\ImageAction::class,
+        \Ecodev\Felix\Handler\ImageHandler::class,
     ], 'image');
 
     $app->get('/file/{id:\d+}', [
-        \Ecodev\Felix\Action\FileAction::class,
+        \Ecodev\Felix\Handler\FileHandler::class,
     ], 'file');
 
     $app->post('/datatrans', [
         BodyParamsMiddleware::class,
-        \Application\Action\DatatransAction::class,
+        \Application\Handler\DatatransHandler::class,
     ], 'datatrans');
 };

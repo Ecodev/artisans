@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Application\Action;
+namespace Application\Handler;
 
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
@@ -20,6 +20,6 @@ class DatatransFactory
         $mailer = $container->get(Mailer::class);
         $messageQueuer = $container->get(MessageQueuer::class);
 
-        return new DatatransAction($entityManager, $rendered, $config['datatrans'], $mailer, $messageQueuer);
+        return new DatatransHandler($entityManager, $rendered, $config['datatrans'], $mailer, $messageQueuer);
     }
 }

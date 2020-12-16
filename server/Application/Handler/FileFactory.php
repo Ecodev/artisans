@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Application\Action;
+namespace Application\Handler;
 
 use Application\Model\File;
 use Doctrine\ORM\EntityManager;
-use Ecodev\Felix\Action\FileAction;
+use Ecodev\Felix\Handler\FileHandler;
 use Interop\Container\ContainerInterface;
 
 class FileFactory
@@ -15,6 +15,6 @@ class FileFactory
     {
         $entityManager = $container->get(EntityManager::class);
 
-        return new FileAction($entityManager->getRepository(File::class));
+        return new FileHandler($entityManager->getRepository(File::class));
     }
 }

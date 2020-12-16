@@ -8,19 +8,21 @@
 
     <div fxLayout="row" fxLayoutGap="30px">
         <div fxFlex.gt-sm="66" class="page-body rich-text mat-h3">
-            <div class="facilitators">
-                <div *ngFor="let user of facilitators" class="facilitator">
-                    <strong>{{ user.name }}</strong>
-                    <div>{{ user.locality }}</div>
-                </div>
-            </div>
-
-            <p>&nbsp;</p>
+            <p>
+                Les Conversations carbone sont une méthode très qualitative conçue pour aider à agir en phase avec les
+                exigences du climat. Il faut deux facilitateurs.trices pour accompagner un groupe de huit participants.
+                Dans l’idéal et le plus souvent, les facilitateurs.trices interviennent de façon bénévole. Les
+                Conversations carbone existent notamment grâce à l’engagement de ces femmes et de ces hommes.
+                Ci-dessous, figure une liste d’une partie des personnes qui rendent possible le programme que les
+                <strong>Artisans de la transition</strong> ont mis en œuvre pour diffuser cette méthode en Suisse
+                romande.
+            </p>
 
             <h2 class="mat-h2">Devenir facilitateurs·trices</h2>
-            <p></p>
-            L’intérêt pour les Conversations carbone grandit. Pour les <strong>Artisans de la transition</strong>, il
-            est essentiel de former de nouveaux·elles facilitateurs·trices pour répondre à cet intérêt croissant.
+            <p>
+                L’intérêt pour les Conversations carbone grandit. Pour les <strong>Artisans de la transition</strong>,
+                il est essentiel de former de nouveaux·elles facilitateurs·trices pour répondre à cet intérêt croissant.
+            </p>
             <p>
                 Les clefs de la facilitation résident moins dans la capacité à transmettre des contenus que dans la mise
                 en place et l’animation d’une dynamique de groupe favorable aux échanges horizontaux bienveillants : les
@@ -56,6 +58,14 @@
                     >philippe.solms@artisansdelatransition.org
                 </a>
             </p>
+
+            <p>&nbsp;</p>
+            <div class="facilitators">
+                <div *ngFor="let user of facilitators" class="facilitator">
+                    <strong>{{ user.name }}</strong>
+                    <div>{{ user.locality }}</div>
+                </div>
+            </div>
         </div>
 
         <div fxFlex fxHide.lt-md>

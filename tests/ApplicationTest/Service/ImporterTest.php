@@ -211,7 +211,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
         $this->assertUser([
             'email' => 'théo@example.com',
             'subscription_type' => 'paper',
-            'subscription_last_review_id' => '3000',
+            'subscription_last_review_id' => null,
             'membership' => 'member',
             'first_name' => '',
             'last_name' => '',

@@ -28,6 +28,8 @@ class Importer
 {
     private int $lineNumber = 0;
 
+    private int $lastReview = 0;
+
     private array $reviewByNumber = [];
 
     private array $countryByName = [];
@@ -57,6 +59,7 @@ class Importer
         $start = microtime(true);
         $this->connection = _em()->getConnection();
         $this->fetchReviews();
+        $this->fetchLastReview();
         $this->fetchCountries();
         $this->currentUser = User::getCurrent() ? User::getCurrent()->getId() : null;
         $this->updatedUsers = 0;
@@ -129,6 +132,12 @@ class Importer
         }
     }
 
+    private function fetchLastReview(): void
+    {
+        $records = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL AND is_active = 1 ORDER BY review_number DESC limit 1');
+        $this->lastReview = (int) $records[0]['review_number'];
+    }
+
     private function fetchCountries(): void
     {
         $records = $this->connection->fetchAll('SELECT id, LOWER(name) AS name FROM country');
@@ -197,7 +206,7 @@ class Importer
                 continue;
             }
 
-            $lastReviewId = $this->readReviewId($lastReviewNumber);
+            $lastReviewId = $lastReviewNumber >= $this->lastReview ? $this->readReviewId($lastReviewNumber) : null;
 
             if ($email) {
                 $this->assertEmail($email);

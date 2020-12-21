@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Mutation;
 
+use Application\Model\Log;
 use Application\Model\User;
+use Application\Repository\LogRepository;
 use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
+use Ecodev\Felix\Api\ExceptionWithoutMailLogging;
 use Ecodev\Felix\Api\Field\FieldInterface;
 use Ecodev\Felix\Api\Scalar\EmailType;
 use Ecodev\Felix\Service\Mailer;
@@ -26,6 +29,15 @@ abstract class RequestPasswordReset implements FieldInterface
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
                 global $container;
+
+                _log()->info(LogRepository::REQUEST_PASSWORD_RESET);
+
+                /** @var LogRepository $logRepository */
+                $logRepository = _em()->getRepository(Log::class);
+                if ($logRepository->requestPasswordResetOften()) {
+                    throw new ExceptionWithoutMailLogging('Trop de tentatives de changement de mot de passe. Veuillez réessayer plus tard.');
+                }
+
                 /** @var Mailer $mailer */
                 $mailer = $container->get(Mailer::class);
 

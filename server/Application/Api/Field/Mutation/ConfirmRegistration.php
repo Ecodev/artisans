@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
-use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Organization;
 use Application\Model\User;
 use Application\Repository\OrganizationRepository;
 use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
-use Ecodev\Felix\Api\Exception;
+use Ecodev\Felix\Api\ExceptionWithoutMailLogging;
 use Ecodev\Felix\Api\Field\FieldInterface;
 use Ecodev\Felix\Service\Mailer;
 use GraphQL\Type\Definition\Type;
@@ -46,11 +45,11 @@ abstract class ConfirmRegistration implements FieldInterface
                 });
 
                 if (!$user) {
-                    throw new Exception('Cannot confirm registration with an invalid token');
+                    throw new ExceptionWithoutMailLogging('La session a expiré ou le lien n\'est pas valable. Veuillez effectuer une nouvelle demande.');
                 }
 
                 if (!$user->isTokenValid()) {
-                    throw new Exception('Le lien que vous avez suivi est périmé. Veuillez effectuer une nouvelle demande.');
+                    throw new ExceptionWithoutMailLogging('Le lien que vous avez suivi est périmé. Veuillez effectuer une nouvelle demande.');
                 }
 
                 $input = $args['input'];

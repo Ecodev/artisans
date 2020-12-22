@@ -206,7 +206,7 @@ class Importer
                 continue;
             }
 
-            $lastReviewId = $lastReviewNumber >= $this->lastReview ? $this->readReviewId($lastReviewNumber) : null;
+            $lastReviewId = $this->readReviewId($lastReviewNumber);
 
             if ($email) {
                 $this->assertEmail($email);
@@ -294,7 +294,7 @@ class Importer
             return null;
         }
 
-        return $this->reviewByNumber[$reviewNumberNumeric];
+        return $reviewNumberNumeric >= $this->lastReview ? $this->reviewByNumber[$reviewNumberNumeric] : null;
     }
 
     private function readCountryId(string $country): ?string

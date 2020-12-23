@@ -41,7 +41,7 @@ const orderDetails = [
             trigger: {
                 component: OrderComponent,
                 dialogConfig: {
-                    width: '600px',
+                    minWidth: '600px',
                     maxWidth: '95vw',
                     maxHeight: '97vh',
                 },

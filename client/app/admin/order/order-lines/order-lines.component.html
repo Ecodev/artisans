@@ -15,6 +15,7 @@
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
                     <span naturalColumnsPickerColumn="quantity">Quantité</span>
                     <span naturalColumnsPickerColumn="name">Nom</span>
+                    <span naturalColumnsPickerColumn="productType">Type</span>
                     <span [checked]="false" [hidden]="true" naturalColumnsPickerColumn="open">Nom</span>
                     <span naturalColumnsPickerColumn="owner">Utilisateur</span>
                     <span naturalColumnsPickerColumn="balance">Montant</span>
@@ -42,6 +43,12 @@
                         ></natural-table-button>
                         <span *ngIf="!element.permissions.update">{{ element.name }}</span>
                     </td>
+                    <td *matFooterCellDef mat-footer-cell></td>
+                </ng-container>
+
+                <ng-container matColumnDef="productType">
+                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
+                    <td *matCellDef="let element" mat-cell>{{ element.type | enum: 'ProductType' | async }}</td>
                     <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 

@@ -96,6 +96,14 @@ class Order extends AbstractModel implements HasBalanceInterface
      */
     public function setStatus(string $status): void
     {
+        // If we change from non-confirmed to confirmed, then give temporary access (until explicit import of users)
+        if ($this->status !== self::STATUS_VALIDATED && $status === self::STATUS_VALIDATED) {
+            /** @var OrderLine $orderLine */
+            foreach ($this->getOrderLines() as $orderLine) {
+                $orderLine->maybeGiveTemporaryAccess();
+            }
+        }
+
         $this->status = $status;
     }
 

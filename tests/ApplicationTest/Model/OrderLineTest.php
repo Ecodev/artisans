@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Model;
 
+use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Order;
 use Application\Model\OrderLine;
+use Application\Model\Subscription;
+use Application\Model\User;
 use PHPUnit\Framework\TestCase;
 
 class OrderLineTest extends TestCase
@@ -27,5 +30,35 @@ class OrderLineTest extends TestCase
 
         self::assertCount(1, $order1->getOrderLines());
         self::assertCount(1, $order2->getOrderLines());
+    }
+
+    public function testMaybeGiveTemporaryAccess(): void
+    {
+        $creator = new User();
+        User::setCurrent($creator);
+
+        $orderLine = new OrderLine();
+        $orderLine->timestampCreation();
+
+        $orderLine->maybeGiveTemporaryAccess();
+        self::assertFalse($creator->getWebTemporaryAccess(), 'no access because not a subscription');
+
+        $subscription = new Subscription();
+        $subscription->setType(ProductTypeType::PAPER);
+        $orderLine->setSubscription($subscription);
+        $orderLine->maybeGiveTemporaryAccess();
+        self::assertFalse($creator->getWebTemporaryAccess(), 'no access because paper subscription');
+
+        $subscription->setType(ProductTypeType::BOTH);
+        $orderLine->maybeGiveTemporaryAccess();
+        self::assertTrue($creator->getWebTemporaryAccess(), 'access because subscription includes digital');
+
+        /** @var User $beneficiary */
+        $beneficiary = _em()->getReference(User::class, 1000);
+        self::assertFalse($beneficiary->getWebTemporaryAccess(), 'originally no access');
+
+        $orderLine->setAdditionalEmails(['administrator@example.com']);
+        $orderLine->maybeGiveTemporaryAccess();
+        self::assertTrue($beneficiary->getWebTemporaryAccess(), 'automatically given access via his email');
     }
 }

@@ -161,8 +161,6 @@ class Invoicer
         $orderLine->setBalanceCHF($balanceCHF);
         $orderLine->setBalanceEUR($balanceEUR);
         $orderLine->setAdditionalEmails($additionalEmails);
-
-        $this->createTemporaryUsers($orderLine);
     }
 
     private function getPricePerUnit(?AbstractProduct $product, ?Money $pricePerUnit, bool $isCHF): Money

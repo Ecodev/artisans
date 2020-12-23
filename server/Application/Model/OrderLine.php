@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\DBAL\Types\ProductTypeType;
+use Application\Repository\UserRepository;
 use Application\Traits\HasBalance;
 use Application\Traits\HasBalanceInterface;
 use Application\Traits\HasProductType;
@@ -153,5 +155,29 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     public function setAdditionalEmails(array $additionalEmails): void
     {
         $this->additionalEmails = $additionalEmails;
+    }
+
+    /**
+     * Create temporary users to give them immediate access to web,
+     * until their access is confirmed permanently via a CSV import
+     */
+    public function maybeGiveTemporaryAccess(): void
+    {
+        $isDigital = $this->getSubscription() && ProductTypeType::includesDigital($this->getSubscription()->getType());
+        if (!$isDigital) {
+            return;
+        }
+
+        foreach ($this->getAdditionalEmails() as $email) {
+            /** @var UserRepository $userRepository */
+            $userRepository = _em()->getRepository(User::class);
+            $user = $userRepository->getOrCreate($email);
+
+            $user->setWebTemporaryAccess(true);
+        }
+
+        if ($this->getOwner()) {
+            $this->getOwner()->setWebTemporaryAccess(true);
+        }
     }
 }

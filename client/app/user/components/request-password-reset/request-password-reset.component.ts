@@ -2,7 +2,7 @@ import {Apollo} from 'apollo-angular';
 import {Component} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {NaturalAlertService} from '@ecodev/natural';
+import {ifValid, NaturalAlertService, validateAllFormControls} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 
 @Component({
@@ -24,18 +24,21 @@ export class RequestPasswordResetComponent {
     }
 
     public submit(): void {
-        this.sending = true;
+        validateAllFormControls(this.form);
+        ifValid(this.form).subscribe(() => {
+            this.sending = true;
 
-        this.userService.requestPasswordReset(this.form.value.email).subscribe(
-            () => {
-                this.sending = false;
+            this.userService.requestPasswordReset(this.form.value.email).subscribe(
+                () => {
+                    this.sending = false;
 
-                const message = 'Un email avec des instructions a été envoyé';
+                    const message = 'Un email avec des instructions a été envoyé';
 
-                this.alertService.info(message, 5000);
-                this.router.navigate(['/login']);
-            },
-            () => (this.sending = false),
-        );
+                    this.alertService.info(message, 5000);
+                    this.router.navigate(['/login']);
+                },
+                () => (this.sending = false),
+            );
+        });
     }
 }

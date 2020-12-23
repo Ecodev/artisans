@@ -22,7 +22,7 @@ class OrderLines extends AbstractHelper
         /** @var OrderLine $line */
         foreach ($order->getOrderLines() as $line) {
             $label = $this->view->escapeHtml($line->getName());
-            $price = ' <strong>' . Utility::getFormattedBalance($line) . '</strong>';
+            $price = ' <strong>' . $line->getFormattedBalance() . '</strong>';
 
             $type = '';
             switch ($line->getType()) {

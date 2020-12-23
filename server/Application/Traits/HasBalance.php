@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use Application\Utility;
 use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
@@ -74,5 +75,13 @@ trait HasBalance
     public function setIsCHF(bool $isCHF): void
     {
         $this->isCHF = $isCHF;
+    }
+
+    /**
+     * Returns the non-zero balance formatted as string
+     */
+    public function getFormattedBalance(): string
+    {
+        return Utility::getFormattedBalance($this);
     }
 }

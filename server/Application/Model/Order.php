@@ -6,6 +6,7 @@ namespace Application\Model;
 
 use Application\Traits\HasAddress;
 use Application\Traits\HasAutomaticBalance;
+use Application\Traits\HasBalanceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +20,7 @@ use Money\Money;
  * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
  */
-class Order extends AbstractModel
+class Order extends AbstractModel implements HasBalanceInterface
 {
     const STATUS_PENDING = 'pending';
     const STATUS_VALIDATED = 'validated';

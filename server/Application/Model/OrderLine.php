@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\Traits\HasBalance;
+use Application\Traits\HasBalanceInterface;
 use Application\Traits\HasProductType;
 use Application\Traits\HasQuantity;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,7 +17,7 @@ use GraphQL\Doctrine\Annotation as API;
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderLineRepository")
  */
-class OrderLine extends AbstractModel
+class OrderLine extends AbstractModel implements HasBalanceInterface
 {
     use HasName;
     use HasQuantity;

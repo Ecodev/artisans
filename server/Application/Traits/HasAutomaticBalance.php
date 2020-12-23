@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use Application\Utility;
+use Ecodev\Felix\Format;
 use GraphQL\Doctrine\Annotation as API;
 use Money\Currencies\ISOCurrencies;
 use Money\Formatter\DecimalMoneyFormatter;
@@ -54,10 +56,6 @@ trait HasAutomaticBalance
      */
     public function getFormattedBalance(): string
     {
-        $money = $this->getBalanceEUR()->isZero() ? $this->getBalanceCHF() : $this->getBalanceEUR();
-        $currencies = new ISOCurrencies();
-        $moneyFormatter = new DecimalMoneyFormatter($currencies);
-
-        return $moneyFormatter->format($money) . ' ' . $money->getCurrency()->getCode();
+        return Utility::getFormattedBalance($this);
     }
 }

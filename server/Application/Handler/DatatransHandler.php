@@ -11,6 +11,7 @@ use Application\Repository\OrderRepository;
 use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
+use Ecodev\Felix\Format;
 use Ecodev\Felix\Handler\AbstractHandler;
 use Ecodev\Felix\Service\Mailer;
 use Exception;
@@ -197,10 +198,7 @@ class DatatransHandler extends AbstractHandler
 
     private function formatMoney(Money $money): string
     {
-        $currencies = new ISOCurrencies();
-        $moneyFormatter = new DecimalMoneyFormatter($currencies);
-
-        return $moneyFormatter->format($money) . ' ' . $money->getCurrency()->getCode();
+        return Format::money($money) . ' ' . $money->getCurrency()->getCode();
     }
 
     private function getMoney(array $body): Money

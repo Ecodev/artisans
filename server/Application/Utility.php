@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Application;
 
-use Application\Model\Order;
-use Money\Currencies\ISOCurrencies;
-use Money\Formatter\DecimalMoneyFormatter;
+use Application\Traits\HasBalanceInterface;
+use Ecodev\Felix\Format;
 
 abstract class Utility
 {
@@ -17,12 +16,10 @@ abstract class Utility
         return $sanitized;
     }
 
-    public static function getFormattedBalance($object): string
+    public static function getFormattedBalance(HasBalanceInterface $hasBalance): string
     {
-        $money = $object->getBalanceEUR()->isZero() ? $object->getBalanceCHF() : $object->getBalanceEUR();
-        $currencies = new ISOCurrencies();
-        $moneyFormatter = new DecimalMoneyFormatter($currencies);
+        $money = $hasBalance->getBalanceEUR()->isZero() ? $hasBalance->getBalanceCHF() : $hasBalance->getBalanceEUR();
 
-        return $moneyFormatter->format($money) . ' ' . $money->getCurrency()->getCode();
+        return Format::money($money) . ' ' . $money->getCurrency()->getCode();
     }
 }

@@ -74,7 +74,7 @@
                     fxLayoutGap="60px"
                 >
                     <a class="product-image" *ngIf="product.image" [routerLink]="getDetailLink(product)">
-                        <img [attr.src]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
+                        <img [naturalSrcDensity]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
                     </a>
 
                     <div fxLayout="column" fxLayoutGap="10px" fxFlex>

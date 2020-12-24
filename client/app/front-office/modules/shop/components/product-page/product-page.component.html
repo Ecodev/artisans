@@ -55,7 +55,7 @@
                 <img
                     class="product-image"
                     *ngIf="data.model.image"
-                    [attr.src]="'/image/' + data.model.image.id + '/300'"
+                    [naturalSrcDensity]="'/image/' + data.model.image.id + '/300'"
                     alt="aperçu de l'article"
                 />
             </div>
@@ -98,7 +98,10 @@
             fxFlexOrder.lt-md="1"
         >
             <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
-                <img [attr.src]="'/image/' + data.model.review.image.id + '/300'" alt="couverture de la revue" />
+                <img
+                    [naturalSrcDensity]="'/image/' + data.model.review.image.id + '/300'"
+                    alt="couverture de la revue"
+                />
             </a>
             <span class="mat-h4">Article issu de la revue</span>
             <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">

@@ -102,7 +102,7 @@
     <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
         <a [routerLink]="['/larevuedurable/article', currentReview.id]" *ngIf="currentReview.image">
             <img
-                [attr.src]="'/image/' + currentReview.image.id + '/470'"
+                [naturalSrcDensity]="'/image/' + currentReview.image.id + '/470'"
                 alt="illustration du dernier numéro paru"
                 class="mat-elevation-z5 last-product-thumbnail"
             />

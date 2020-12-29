@@ -19,7 +19,7 @@ export class DonationComponent implements OnInit {
     constructor(
         @Inject(MAT_DIALOG_DATA) dialogData: DonationData,
         public currencyService: CurrencyService,
-        public dialogRef: MatDialogRef<any>,
+        public dialogRef: MatDialogRef<DonationComponent>,
     ) {
         this.amount.setValue(dialogData.amount);
     }

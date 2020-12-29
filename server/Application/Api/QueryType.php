@@ -9,6 +9,7 @@ use Application\Api\Field\Query\Configuration;
 use Application\Api\Field\Query\Permissions;
 use Application\Api\Field\Query\Purchases;
 use Application\Api\Field\Query\UserByToken;
+use Application\Api\Field\Query\UserRolesAvailable;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
 use Application\Model\Comment;
@@ -38,6 +39,7 @@ class QueryType extends ObjectType
             Purchases::build(),
             BankingInfos::build(),
             Configuration::build(),
+            UserRolesAvailable::build(),
         ];
 
         $fields = array_merge(

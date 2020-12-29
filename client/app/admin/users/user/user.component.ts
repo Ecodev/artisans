@@ -8,11 +8,13 @@ import {
     UpdateUser,
     UpdateUserVariables,
     User,
+    UserRole,
     UserVariables,
 } from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
 import {UserResolve} from '../user';
+import {IEnum} from '@ecodev/natural/lib/services/enum.service';
 
 @Component({
     selector: 'app-user',
@@ -32,6 +34,7 @@ export class UserComponent
     >
     implements OnInit {
     public UserService = UserService;
+    private userRolesAvailable: UserRole[] = [];
 
     /**
      * Override parent just to type it
@@ -52,5 +55,19 @@ export class UserComponent
                 control.disable();
             }
         });
+    }
+
+    protected initForm(): void {
+        super.initForm();
+
+        this.userService.getUserRolesAvailable(this.data.model).subscribe(userRoles => {
+            this.userRolesAvailable = userRoles;
+        });
+    }
+
+    public roleDisabled(): (item: IEnum) => boolean {
+        return item => {
+            return !this.userRolesAvailable.includes(item.value as UserRole);
+        };
     }
 }

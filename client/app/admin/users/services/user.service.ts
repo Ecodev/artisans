@@ -36,6 +36,8 @@ import {
     UserByTokenVariables,
     UserInput,
     UserRole,
+    UserRolesAvailables,
+    UserRolesAvailablesVariables,
     Users,
     UsersVariables,
     UserVariables,
@@ -51,6 +53,7 @@ import {
     updateUser,
     userByTokenQuery,
     userQuery,
+    userRolesAvailableQuery,
     usersQuery,
 } from './user.queries';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
@@ -192,6 +195,21 @@ export class UserService extends NaturalAbstractModelService<
                 map(result => {
                     this.viewer.next(result.data.viewer);
                     return result.data.viewer;
+                }),
+            );
+    }
+
+    public getUserRolesAvailable(user: User_user | null): Observable<UserRole[]> {
+        return this.apollo
+            .query<UserRolesAvailables, UserRolesAvailablesVariables>({
+                query: userRolesAvailableQuery,
+                variables: {
+                    user: user?.id,
+                },
+            })
+            .pipe(
+                map(result => {
+                    return result.data.userRolesAvailable;
                 }),
             );
     }

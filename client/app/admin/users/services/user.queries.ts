@@ -158,3 +158,9 @@ export const currentUserForProfileQuery = gql`
     ${userFieldsFragment}
     ${userMetaFragment}
 `;
+
+export const userRolesAvailableQuery = gql`
+    query UserRolesAvailables($user: UserID) {
+        userRolesAvailable(user: $user)
+    }
+`;

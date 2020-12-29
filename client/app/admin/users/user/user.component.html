@@ -48,6 +48,7 @@
                             enumName="UserRole"
                             formControlName="role"
                             placeholder="Rôle"
+                            [optionDisabled]="roleDisabled()"
                         ></natural-select-enum>
 
                         <mat-slide-toggle

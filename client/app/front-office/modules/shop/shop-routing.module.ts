@@ -8,6 +8,7 @@ import {NaturalSeo} from '@ecodev/natural';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent, ProductsViewMode} from './components/products-page/products-page.component';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component';
+import {ErrorComponent} from '../../../shared/components/error/error.component';
 
 const routes: Routes = [
     {
@@ -151,6 +152,11 @@ const routes: Routes = [
                     'Plus de 1000 articles de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays. LaRevueDurable constitue l’une des plus importantes base de données disponibles sur la durabilité et la transition écologique en français.',
             } as NaturalSeo,
         },
+    },
+    {
+        path: '**',
+        component: ErrorComponent,
+        data: {notFound: true},
     },
 ];
 

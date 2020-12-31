@@ -44,6 +44,7 @@ import {SessionsIncomingComponent} from './components/sessions-incoming/sessions
 import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-connaitre/nous-faire-connaitre.component';
 import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
 import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-association/rejoindre-association.component';
+import {ErrorComponent} from '../shared/components/error/error.component';
 
 const routes: Routes = [
     {
@@ -418,6 +419,15 @@ const routes: Routes = [
     {
         path: 'cgv',
         component: ConditionsGeneralesVenteComponent,
+    },
+    {
+        path: 'error',
+        component: ErrorComponent,
+    },
+    {
+        path: '**',
+        component: ErrorComponent,
+        data: {notFound: true},
     },
 ];
 

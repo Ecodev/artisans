@@ -21,18 +21,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     templateUrl: './event-page.component.html',
     styleUrls: ['./event-page.component.scss'],
 })
-export class EventPageComponent
-    extends NaturalAbstractDetail<
-        Event['event'],
-        EventVariables,
-        CreateEvent['createEvent'],
-        CreateEventVariables,
-        UpdateEvent['updateEvent'],
-        UpdateEventVariables,
-        DeleteEvents,
-        DeleteEventsVariables
-    >
-    implements OnInit {
+export class EventPageComponent extends NaturalAbstractDetail<EventService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         eventService: EventService,

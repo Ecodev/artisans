@@ -20,18 +20,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     templateUrl: './news-page.component.html',
     styleUrls: ['./news-page.component.scss'],
 })
-export class NewsPageComponent
-    extends NaturalAbstractDetail<
-        News['news'],
-        NewsVariables,
-        CreateNews['createNews'],
-        CreateNewsVariables,
-        UpdateNews['updateNews'],
-        UpdateNewsVariables,
-        DeleteNewses,
-        DeleteNewsesVariables
-    >
-    implements OnInit {
+export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         newsService: NewsService,

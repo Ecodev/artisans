@@ -10,7 +10,7 @@ import {CommentService} from '../services/comment.service';
     templateUrl: './comments.component.html',
     styleUrls: ['./comments.component.scss'],
 })
-export class CommentsComponent extends NaturalAbstractList<Comments['comments'], CommentsVariables> implements OnInit {
+export class CommentsComponent extends NaturalAbstractList<CommentService> implements OnInit {
     public displayedColumns = ['name'];
 
     constructor(

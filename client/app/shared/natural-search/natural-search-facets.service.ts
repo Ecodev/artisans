@@ -32,7 +32,7 @@ import {
     providedIn: 'root',
 })
 export class NaturalSearchFacetsService {
-    private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration> = {
+    private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration<UserService>> = {
         display: 'Utilisateur',
         field: 'owner',
         component: TypeNaturalSelectComponent,
@@ -42,7 +42,7 @@ export class NaturalSearchFacetsService {
         },
     };
 
-    private readonly productTags: DropdownFacet<TypeSelectNaturalConfiguration> = {
+    private readonly productTags: DropdownFacet<TypeSelectNaturalConfiguration<ProductTagService>> = {
         display: 'Tags',
         field: 'productTags',
         component: TypeNaturalSelectComponent,

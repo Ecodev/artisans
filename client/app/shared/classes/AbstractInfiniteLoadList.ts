@@ -1,15 +1,37 @@
 // tslint:disable:directive-class-suffix
-import {Injector, OnInit, Directive} from '@angular/core';
+import {Directive, Injector, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
-import {NaturalAbstractList, PaginatedData, PaginationInput, QueryVariables} from '@ecodev/natural';
+import {
+    ExtractTall,
+    ExtractVall,
+    NaturalAbstractList,
+    PaginatedData,
+    PaginationInput,
+    QueryVariables,
+} from '@ecodev/natural';
 import {defaults, isEqual, pick} from 'lodash-es';
 import {takeUntil} from 'rxjs/operators';
+import {NaturalAbstractModelService} from '@ecodev/natural/lib/services/abstract-model.service';
+import {Literal} from '@ecodev/natural/lib/types/types';
 
 @Directive()
-export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall extends QueryVariables>
-    extends NaturalAbstractList<Tall, Vall>
+export class AbstractInfiniteLoadList<
+        TService extends NaturalAbstractModelService<
+            any,
+            any,
+            PaginatedData<Literal>,
+            QueryVariables,
+            any,
+            any,
+            any,
+            any,
+            any,
+            any
+        >
+    >
+    extends NaturalAbstractList<TService>
     implements OnInit {
-    public items: Tall['items'] | null = null;
+    public items: ExtractTall<TService>['items'] | null = null;
 
     constructor(service: any, injector: Injector) {
         super(service, injector);
@@ -73,7 +95,7 @@ export class AbstractInfiniteLoadList<Tall extends PaginatedData<any>, Vall exte
             }
         }
 
-        this.variablesManager.set('pagination', {pagination} as Vall);
+        this.variablesManager.set('pagination', {pagination} as ExtractVall<TService>);
 
         this.persistPagination(forPersistence, defer, {fragment: 'end-of-list'});
     }

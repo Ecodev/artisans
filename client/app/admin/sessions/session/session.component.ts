@@ -21,18 +21,7 @@ import {SessionResolve} from '../session';
     templateUrl: './session.component.html',
     styleUrls: ['./session.component.scss'],
 })
-export class SessionComponent
-    extends NaturalAbstractDetail<
-        Session['session'],
-        SessionVariables,
-        CreateSession['createSession'],
-        CreateSessionVariables,
-        UpdateSession['updateSession'],
-        UpdateSessionVariables,
-        DeleteSessions,
-        DeleteSessionsVariables
-    >
-    implements OnInit {
+export class SessionComponent extends NaturalAbstractDetail<SessionService> implements OnInit {
     /**
      * Array of form controls dedicated to dates display
      */

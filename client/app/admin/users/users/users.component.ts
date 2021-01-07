@@ -15,7 +15,7 @@ import {DOCUMENT} from '@angular/common';
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
 })
-export class UsersComponent extends NaturalAbstractList<Users['users'], UsersVariables> implements OnInit {
+export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
     public initialColumns = ['name', 'email', 'creationDate', 'updateDate', 'membership'];
 
     public usersEmail: string | null = null;

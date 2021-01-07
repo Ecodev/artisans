@@ -25,18 +25,7 @@ import {ProductsPageComponent} from '../products-page/products-page.component';
     templateUrl: './product-page.component.html',
     styleUrls: ['./product-page.component.scss'],
 })
-export class ProductPageComponent
-    extends NaturalAbstractDetail<
-        Product['product'],
-        ProductVariables,
-        CreateProduct['createProduct'],
-        CreateProductVariables,
-        UpdateProduct['updateProduct'],
-        UpdateProductVariables,
-        DeleteProducts,
-        DeleteProductsVariables
-    >
-    implements OnInit {
+export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts!: ProductsPageComponent;
 
     public ProductType = ProductType;

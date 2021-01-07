@@ -1,16 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
-import {
-    CreateUser,
-    CreateUserVariables,
-    DeleteUsers,
-    DeleteUsersVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    User,
-    UserRole,
-    UserVariables,
-} from '../../../shared/generated-types';
+import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
 import {UserResolve} from '../user';
@@ -21,18 +11,7 @@ import {IEnum} from '@ecodev/natural/lib/services/enum.service';
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
 })
-export class UserComponent
-    extends NaturalAbstractDetail<
-        User['user'],
-        UserVariables,
-        CreateUser['createUser'],
-        CreateUserVariables,
-        UpdateUser['updateUser'],
-        UpdateUserVariables,
-        DeleteUsers,
-        DeleteUsersVariables
-    >
-    implements OnInit {
+export class UserComponent extends NaturalAbstractDetail<UserService> implements OnInit {
     public UserService = UserService;
     private userRolesAvailable: UserRole[] = [];
 

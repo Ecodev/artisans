@@ -20,18 +20,7 @@ import {EventService} from '../services/event.service';
     templateUrl: './event.component.html',
     styleUrls: ['./event.component.scss'],
 })
-export class EventComponent
-    extends NaturalAbstractDetail<
-        Event['event'],
-        EventVariables,
-        CreateEvent['createEvent'],
-        CreateEventVariables,
-        UpdateEvent['updateEvent'],
-        UpdateEventVariables,
-        DeleteEvents,
-        DeleteEventsVariables
-    >
-    implements OnInit {
+export class EventComponent extends NaturalAbstractDetail<EventService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         eventService: EventService,

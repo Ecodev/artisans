@@ -11,7 +11,7 @@ import {ProductService} from '../services/product.service';
     templateUrl: './products.component.html',
     styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent extends NaturalAbstractList<Products['products'], ProductsVariables> implements OnInit {
+export class ProductsComponent extends NaturalAbstractList<ProductService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         productService: ProductService,

@@ -9,9 +9,7 @@ import {ProductType, Purchases, Purchases_purchases_items, PurchasesVariables} f
     templateUrl: './purchases.component.html',
     styleUrls: ['./purchases.component.scss'],
 })
-export class PurchasesComponent
-    extends NaturalAbstractList<Purchases['purchases'], PurchasesVariables>
-    implements OnInit {
+export class PurchasesComponent extends NaturalAbstractList<PurchaseService> implements OnInit {
     public ProductType = ProductType;
 
     constructor(

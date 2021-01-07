@@ -18,18 +18,7 @@ import {SubscriptionService} from '../../../front-office/modules/shop/components
     templateUrl: './order-line.component.html',
     styleUrls: ['./order-line.component.scss'],
 })
-export class OrderLineComponent
-    extends NaturalAbstractDetail<
-        OrderLine['orderLine'],
-        OrderLineVariables,
-        never,
-        never,
-        UpdateOrderLine['updateOrderLine'],
-        UpdateOrderLineVariables,
-        never,
-        never
-    >
-    implements OnInit {
+export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> implements OnInit {
     constructor(
         private orderLineService: OrderLineService,
         public productService: ProductService,

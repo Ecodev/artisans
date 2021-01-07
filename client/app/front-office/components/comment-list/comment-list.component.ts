@@ -17,9 +17,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     templateUrl: './comment-list.component.html',
     styleUrls: ['./comment-list.component.scss'],
 })
-export class CommentListComponent
-    extends NaturalAbstractList<Comments['comments'], CommentsVariables>
-    implements OnInit, OnChanges {
+export class CommentListComponent extends NaturalAbstractList<CommentService> implements OnInit, OnChanges {
     /**
      * Event related to displayed comments
      */

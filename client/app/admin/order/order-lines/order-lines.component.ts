@@ -10,9 +10,7 @@ import {OrderLineService} from '../services/order-lines.service';
     templateUrl: './order-lines.component.html',
     styleUrls: ['./order-lines.component.scss'],
 })
-export class OrderLinesComponent
-    extends NaturalAbstractList<OrderLines['orderLines'], OrderLinesVariables>
-    implements OnInit {
+export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
     @Output() public select = new EventEmitter();
 
     /**

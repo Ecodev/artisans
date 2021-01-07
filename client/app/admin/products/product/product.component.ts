@@ -21,18 +21,7 @@ import {ProductService} from '../services/product.service';
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent
-    extends NaturalAbstractDetail<
-        Product['product'],
-        ProductVariables,
-        CreateProduct['createProduct'],
-        CreateProductVariables,
-        UpdateProduct['updateProduct'],
-        UpdateProductVariables,
-        DeleteProducts,
-        DeleteProductsVariables
-    >
-    implements OnInit {
+export class ProductComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     constructor(

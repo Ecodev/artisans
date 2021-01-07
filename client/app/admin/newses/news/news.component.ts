@@ -20,18 +20,7 @@ import {NewsService} from '../services/news.service';
     templateUrl: './news.component.html',
     styleUrls: ['./news.component.scss'],
 })
-export class NewsComponent
-    extends NaturalAbstractDetail<
-        News['news'],
-        NewsVariables,
-        CreateNews['createNews'],
-        CreateNewsVariables,
-        UpdateNews['updateNews'],
-        UpdateNewsVariables,
-        DeleteNewses,
-        DeleteNewsesVariables
-    >
-    implements OnInit {
+export class NewsComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         newsService: NewsService,

@@ -10,7 +10,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     templateUrl: './history.component.html',
     styleUrls: ['./history.component.scss'],
 })
-export class HistoryComponent extends NaturalAbstractList<Orders['orders'], OrdersVariables> implements OnInit {
+export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
     public selectedColumns = ['creationDate', 'status', 'balance'];
 
     constructor(

@@ -11,7 +11,7 @@ import {SessionService} from '../services/session.service';
     templateUrl: './sessions.component.html',
     styleUrls: ['./sessions.component.scss'],
 })
-export class SessionsComponent extends NaturalAbstractList<Sessions['sessions'], SessionsVariables> implements OnInit {
+export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         sessionService: SessionService,

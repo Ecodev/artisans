@@ -1,16 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractDetail} from '@ecodev/natural';
-import {
-    Comment,
-    CommentVariables,
-    CreateComment,
-    CreateCommentVariables,
-    DeleteComments,
-    DeleteCommentsVariables,
-    UpdateComment,
-    UpdateCommentVariables,
-} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../../events/services/event.service';
@@ -22,18 +12,7 @@ import {CommentService} from '../services/comment.service';
     templateUrl: './comment.component.html',
     styleUrls: ['./comment.component.scss'],
 })
-export class CommentComponent
-    extends NaturalAbstractDetail<
-        Comment['comment'],
-        CommentVariables,
-        CreateComment['createComment'],
-        CreateCommentVariables,
-        UpdateComment['updateComment'],
-        UpdateCommentVariables,
-        DeleteComments,
-        DeleteCommentsVariables
-    >
-    implements OnInit {
+export class CommentComponent extends NaturalAbstractDetail<CommentService> implements OnInit {
     constructor(
         route: ActivatedRoute,
         commentService: CommentService,

@@ -4,7 +4,7 @@ import {fromUrl, memoryStorageProvider, NaturalPersistenceService} from '@ecodev
 import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
-import {Products, Products_products_items, ProductsVariables} from '../../../../../shared/generated-types';
+import {Products_products_items} from '../../../../../shared/generated-types';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -26,9 +26,7 @@ export enum ProductsViewMode {
         memoryStorageProvider,
     ],
 })
-export class ProductsPageComponent
-    extends AbstractInfiniteLoadList<Products['products'], ProductsVariables>
-    implements OnInit {
+export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductService> implements OnInit {
     /**
      * If true, the three first items of grid have highlighted layout
      */

@@ -10,7 +10,7 @@ import {NewsService} from '../services/news.service';
     templateUrl: './newses.component.html',
     styleUrls: ['./newses.component.scss'],
 })
-export class NewsesComponent extends NaturalAbstractList<Newses['newses'], NewsesVariables> implements OnInit {
+export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
     public displayedColumns = ['name'];
 
     constructor(

@@ -1,18 +1,7 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component, Injector, OnInit} from '@angular/core';
 import {ifValid, NaturalAbstractDetail, validateAllFormControls} from '@ecodev/natural';
-import {
-    CreateUser,
-    CreateUserVariables,
-    DeleteUsers,
-    DeleteUsersVariables,
-    Register,
-    RegisterVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    User,
-    UserVariables,
-} from '../../../shared/generated-types';
+import {Register, RegisterVariables} from '../../../shared/generated-types';
 import {AnonymousUserService} from './anonymous-user.service';
 
 @Component({
@@ -20,18 +9,7 @@ import {AnonymousUserService} from './anonymous-user.service';
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent
-    extends NaturalAbstractDetail<
-        User['user'],
-        UserVariables,
-        CreateUser['createUser'],
-        CreateUserVariables,
-        UpdateUser['updateUser'],
-        UpdateUserVariables,
-        DeleteUsers,
-        DeleteUsersVariables
-    >
-    implements OnInit {
+export class RegisterComponent extends NaturalAbstractDetail<AnonymousUserService> implements OnInit {
     public step = 1;
     public sending = false;
 

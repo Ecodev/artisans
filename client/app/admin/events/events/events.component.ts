@@ -10,7 +10,7 @@ import {EventService} from '../services/event.service';
     templateUrl: './events.component.html',
     styleUrls: ['./events.component.scss'],
 })
-export class EventsComponent extends NaturalAbstractList<Events['events'], EventsVariables> implements OnInit {
+export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
     public displayedColumns = ['name'];
 
     constructor(

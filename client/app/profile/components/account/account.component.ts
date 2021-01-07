@@ -17,18 +17,7 @@ import {
     templateUrl: './account.component.html',
     styleUrls: ['./account.component.scss'],
 })
-export class AccountComponent
-    extends NaturalAbstractDetail<
-        User['user'],
-        UserVariables,
-        CreateUser['createUser'],
-        CreateUserVariables,
-        UpdateUser['updateUser'],
-        UpdateUserVariables,
-        DeleteUsers,
-        DeleteUsersVariables
-    >
-    implements OnInit {
+export class AccountComponent extends NaturalAbstractDetail<UserService> implements OnInit {
     public UserService = UserService;
 
     /**

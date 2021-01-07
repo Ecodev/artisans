@@ -23,18 +23,7 @@ import {
     templateUrl: './session-page.component.html',
     styleUrls: ['./session-page.component.scss'],
 })
-export class SessionPageComponent
-    extends NaturalAbstractDetail<
-        Session['session'],
-        SessionVariables,
-        CreateSession['createSession'],
-        CreateSessionVariables,
-        UpdateSession['updateSession'],
-        UpdateSessionVariables,
-        any,
-        any
-    >
-    implements OnInit {
+export class SessionPageComponent extends NaturalAbstractDetail<SessionService> implements OnInit {
     /**
      * Session animators/facilitators
      */

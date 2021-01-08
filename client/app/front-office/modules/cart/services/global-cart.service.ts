@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs';
     providedIn: 'root',
 })
 export class GlobalCartService implements OnDestroy {
-    private _cart: Cart;
+    private _cart!: Cart;
     private readonly subscription: Subscription;
 
     constructor(private readonly cartCollectionService: CartCollectionService) {

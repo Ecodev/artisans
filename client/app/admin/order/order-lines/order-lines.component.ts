@@ -11,7 +11,7 @@ import {OrderLineService} from '../services/order-lines.service';
     styleUrls: ['./order-lines.component.scss'],
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
-    @Output() public select = new EventEmitter();
+    @Output() public readonly select = new EventEmitter();
 
     /**
      *

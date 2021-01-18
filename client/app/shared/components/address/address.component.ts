@@ -34,7 +34,7 @@ export class AddressComponent {
     /**
      * Emits when form changes
      */
-    @Output() public change: EventEmitter<void> = new EventEmitter<void>();
+    @Output() public readonly change: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(public countryService: CountryService) {}
 

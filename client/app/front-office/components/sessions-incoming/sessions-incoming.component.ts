@@ -11,7 +11,7 @@ import {
     SessionsVariables,
     SortingOrder,
 } from '../../../shared/generated-types';
-import {EmailsComponent} from '../../modules/shop/components/emails/emails.component';
+import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/emails.component';
 
 @Component({
     selector: 'app-sessions-incoming',
@@ -93,7 +93,12 @@ export class SessionsIncomingComponent implements OnInit {
                 });
         } else {
             // If logged out, ask for e-mail. This modal is a kind of confirmation.
-            const dialogData: MatDialogConfig = {data: {title: loggedOutModalTitle + session.name}};
+            const dialogData: MatDialogConfig<EmailsData> = {
+                data: {
+                    title: loggedOutModalTitle + session.name,
+                    required: true,
+                },
+            };
 
             this.dialog
                 .open(EmailsComponent, dialogData)

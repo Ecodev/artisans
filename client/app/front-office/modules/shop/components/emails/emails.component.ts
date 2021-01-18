@@ -1,11 +1,12 @@
 import {Component, Inject} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {deliverableEmail} from '@ecodev/natural';
 
-type EmailsData = {
+export type EmailsData = {
     title: string;
     emails?: string[];
+    required?: boolean;
 };
 
 @Component({
@@ -23,7 +24,8 @@ export class EmailsComponent {
 
     constructor(@Inject(MAT_DIALOG_DATA) public dialogData: EmailsData) {
         const emails: string[] = dialogData.emails ?? [''];
-        this.emailsControl = new FormArray(emails.map(email => new FormControl(email, deliverableEmail)));
+        const validators = dialogData.required ? [Validators.required, deliverableEmail] : [deliverableEmail];
+        this.emailsControl = new FormArray(emails.map(email => new FormControl(email, validators)));
         this.form.setControl('emails', this.emailsControl);
     }
 

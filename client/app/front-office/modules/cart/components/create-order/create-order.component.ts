@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalAlertService} from '@ecodev/natural';
+import {finalize} from 'rxjs/operators';
 import {UserService} from '../../../../../admin/users/services/user.service';
 import {CreateOrder_createOrder, PaymentMethod} from '../../../../../shared/generated-types';
 import {ConfigService, FrontEndConfig} from '../../../../../shared/services/config.service';
@@ -59,6 +60,11 @@ export class CreateOrderComponent implements OnInit {
      * Banking payment config
      */
     private paymentConfig: FrontEndConfig | null = null;
+
+    /**
+     * True when creating order has been sent
+     */
+    public pending = false;
 
     constructor(
         public cartService: CartService,
@@ -132,18 +138,22 @@ export class CreateOrderComponent implements OnInit {
             return;
         }
 
-        this.cartService.save(this.cart, paymentMethod.value, this.billingForm.getRawValue()).subscribe(order => {
-            if (!order || !this.cart) {
-                return;
-            }
+        this.pending = true;
+        this.cartService
+            .save(this.cart, paymentMethod.value, this.billingForm.getRawValue())
+            .pipe(finalize(() => (this.pending = false)))
+            .subscribe(order => {
+                if (!order || !this.cart) {
+                    return;
+                }
 
-            // For datatrans, we ask for payment immediately
-            if (paymentMethod.value === PaymentMethod.datatrans) {
-                this.datatrans(order, this.cart.totalTaxInc, this.currencyService.current.value);
-            } else {
-                this.confirmationRedirect();
-            }
-        });
+                // For datatrans, we ask for payment immediately
+                if (paymentMethod.value === PaymentMethod.datatrans) {
+                    this.datatrans(order, this.cart.totalTaxInc, this.currencyService.current.value);
+                } else {
+                    this.confirmationRedirect();
+                }
+            });
     }
 
     public confirmationRedirect(): void {

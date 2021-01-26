@@ -73,7 +73,11 @@
             </div>
         </div>
 
-        <button (click)="createOrder()" [disabled]="!billingForm.valid || !shippingForm.valid" mat-flat-button>
+        <button
+            (click)="createOrder()"
+            [disabled]="!billingForm.valid || !shippingForm.valid || pending"
+            mat-flat-button
+        >
             Terminer la commande
         </button>
     </div>

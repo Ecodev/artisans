@@ -11,6 +11,7 @@ use Application\Model\User;
 use Application\Repository\OrganizationRepository;
 use Doctrine\DBAL\Connection;
 use Ecodev\Felix\Api\Exception;
+use Ecodev\Felix\Api\ExceptionWithoutMailLogging;
 use Laminas\Validator\EmailAddress;
 use Throwable;
 
@@ -89,7 +90,7 @@ class Importer
             $this->deleteOldOrganizations();
 
             if ($this->errors) {
-                throw new Exception(implode(PHP_EOL, $this->errors));
+                throw new ExceptionWithoutMailLogging(implode(PHP_EOL, $this->errors));
             }
 
             // Give user automatic access via organization
@@ -134,7 +135,7 @@ class Importer
 
     private function fetchLastReview(): void
     {
-        $records = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL AND is_active = 1 ORDER BY review_number DESC limit 1');
+        $records = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL AND is_active = 1 ORDER BY review_number DESC LIMIT 1');
         $this->lastReview = (int) $records[0]['review_number'];
     }
 

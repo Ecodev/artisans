@@ -24,6 +24,7 @@ class Order extends AbstractModel implements HasBalanceInterface
 {
     const STATUS_PENDING = 'pending';
     const STATUS_VALIDATED = 'validated';
+    const STATUS_CANCELED = 'canceled';
 
     use HasAddress;
     use HasAutomaticBalance;

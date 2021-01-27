@@ -14,6 +14,7 @@ class OrderStatusType extends EnumType
         $config = [
             Order::STATUS_PENDING => 'Paiement en attente',
             Order::STATUS_VALIDATED => 'Validée',
+            Order::STATUS_CANCELED => 'Annulée',
         ];
 
         parent::__construct($config);

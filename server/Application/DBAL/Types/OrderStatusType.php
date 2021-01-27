@@ -14,6 +14,7 @@ class OrderStatusType extends EnumType
         return [
             Order::STATUS_PENDING,
             Order::STATUS_VALIDATED,
+            Order::STATUS_CANCELED,
         ];
     }
 }

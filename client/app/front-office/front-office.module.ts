@@ -5,7 +5,7 @@ import {OrderModule} from '../admin/order/order.module';
 import {ProfileModule} from '../profile/profile.module';
 import {ArtisansModule} from '../shared/modules/artisans.module';
 import {MaterialModule} from '../shared/modules/material.module';
-import {ssrCompatibleStorageProvider} from '../shared/utils';
+import {ssrCompatibleSessionStorageProvider} from '../shared/utils';
 import {AperoDivestComponent} from './components/agir-avec-nous/apero-divest/apero-divest.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
 import {DonationComponent} from './components/donation/donation.component';
@@ -100,6 +100,6 @@ import {SessionFacilitatorPrivateComponent} from './components/session-facilitat
         EcoFabSpeedDialModule,
         ShopModule,
     ],
-    providers: [ssrCompatibleStorageProvider],
+    providers: [ssrCompatibleSessionStorageProvider],
 })
 export class FrontOfficeModule {}

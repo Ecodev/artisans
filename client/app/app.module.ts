@@ -30,7 +30,7 @@ import {MaterialModule} from './shared/modules/material.module';
 import {LocalizedPaginatorIntlService} from './shared/services/localized-paginator-intl.service';
 import {NetworkActivityService} from './shared/services/network-activity.service';
 import {NetworkInterceptorService} from './shared/services/network-interceptor.service';
-import {ssrCompatibleStorageProvider} from './shared/utils';
+import {ssrCompatibleLocalStorageProvider, ssrCompatibleSessionStorageProvider} from './shared/utils';
 
 registerLocaleData(localeFRCH);
 
@@ -77,7 +77,8 @@ registerLocaleData(localeFRCH);
             provide: MatPaginatorIntl,
             useClass: LocalizedPaginatorIntlService,
         },
-        ssrCompatibleStorageProvider,
+        ssrCompatibleSessionStorageProvider,
+        ssrCompatibleLocalStorageProvider,
         {
             provide: NATURAL_SEO_CONFIG,
             useValue: {

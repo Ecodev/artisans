@@ -1281,10 +1281,10 @@
   dependencies:
     tslib "^2.0.0"
 
-"@ecodev/natural@^28.2.0":
-  version "28.2.0"
-  resolved "https://registry.yarnpkg.com/@ecodev/natural/-/natural-28.2.0.tgz#489326de1ab82d56ad6b9f81043dba0317653e8e"
-  integrity sha512-RbHWnDyY7bdFpy6++FTZ6unyDJp1yQsT43LSVgGA4m/NI3aKmMgMY/E84soOIw2UkJP3OPvP/ak6RqSfScC0AA==
+"@ecodev/natural@^28.2.1":
+  version "28.2.1"
+  resolved "https://registry.yarnpkg.com/@ecodev/natural/-/natural-28.2.1.tgz#9840db6245c99394675e86a34a1f7b4f9a996f1c"
+  integrity sha512-su4vtOBPI/fxEREOnI6YgwxZGmPROB7gG9HhnFWzGbIgUsd195XXgtSLF4QnG62RG+ZGfrZMjmiTTQS2yPeEWQ==
   dependencies:
     tslib "^2.0.0"
 

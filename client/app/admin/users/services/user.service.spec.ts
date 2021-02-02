@@ -5,7 +5,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {mockApolloProvider} from '../../../shared/testing/MockApolloProvider';
 import {UserService} from './user.service';
-import {LOCAL_STORAGE, memoryStorageProvider, NaturalMemoryStorage} from '@ecodev/natural';
+import {memoryLocalStorageProvider, memorySessionStorageProvider} from '@ecodev/natural';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 
 class MockCartCollectionService {
@@ -22,11 +22,8 @@ describe('UserService', () => {
                     provide: CartCollectionService,
                     useClass: MockCartCollectionService,
                 },
-                memoryStorageProvider,
-                {
-                    provide: LOCAL_STORAGE,
-                    useClass: NaturalMemoryStorage,
-                },
+                memorySessionStorageProvider,
+                memoryLocalStorageProvider,
             ],
         });
 

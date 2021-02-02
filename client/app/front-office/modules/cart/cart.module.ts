@@ -5,11 +5,9 @@ import {ArtisansModule} from '../../../shared/modules/artisans.module';
 import {CartRoutingModule} from './cart-routing.module';
 import {CartComponent} from './components/cart/cart.component';
 import {CreateOrderComponent} from './components/create-order/create-order.component';
-import {ssrCompatibleSessionStorageProvider} from '../../../shared/utils';
 
 @NgModule({
     declarations: [CartComponent, CreateOrderComponent, BvrComponent],
     imports: [CommonModule, CartRoutingModule, ArtisansModule],
-    providers: [ssrCompatibleSessionStorageProvider],
 })
 export class CartModule {}

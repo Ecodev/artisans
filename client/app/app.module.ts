@@ -12,11 +12,11 @@ import {MatPaginatorIntl} from '@angular/material/paginator';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-    NaturalAlertService,
-    NaturalSwissParsingDateAdapter,
     NATURAL_SEO_CONFIG,
+    NaturalAlertService,
     NaturalSeoConfig,
     NaturalSeoService,
+    NaturalSwissParsingDateAdapter,
 } from '@ecodev/natural';
 import {NgProgressModule} from 'ngx-progressbar';
 import {AppRoutingModule} from './app-routing.module';
@@ -30,7 +30,6 @@ import {MaterialModule} from './shared/modules/material.module';
 import {LocalizedPaginatorIntlService} from './shared/services/localized-paginator-intl.service';
 import {NetworkActivityService} from './shared/services/network-activity.service';
 import {NetworkInterceptorService} from './shared/services/network-interceptor.service';
-import {ssrCompatibleLocalStorageProvider, ssrCompatibleSessionStorageProvider} from './shared/utils';
 
 registerLocaleData(localeFRCH);
 
@@ -77,8 +76,6 @@ registerLocaleData(localeFRCH);
             provide: MatPaginatorIntl,
             useClass: LocalizedPaginatorIntlService,
         },
-        ssrCompatibleSessionStorageProvider,
-        ssrCompatibleLocalStorageProvider,
         {
             provide: NATURAL_SEO_CONFIG,
             useValue: {

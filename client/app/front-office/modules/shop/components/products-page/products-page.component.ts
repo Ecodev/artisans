@@ -1,6 +1,6 @@
 import {Component, Injector, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {fromUrl, memoryStorageProvider, NaturalPersistenceService} from '@ecodev/natural';
+import {fromUrl, memorySessionStorageProvider, NaturalPersistenceService} from '@ecodev/natural';
 import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
@@ -23,7 +23,7 @@ export enum ProductsViewMode {
             provide: NaturalPersistenceService,
             useClass: NaturalPersistenceService,
         },
-        memoryStorageProvider,
+        memorySessionStorageProvider,
     ],
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductService> implements OnInit {

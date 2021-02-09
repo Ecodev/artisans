@@ -116,6 +116,10 @@ mat-form-field.no-bottom-spacing {
     margin-top: 88px !important;
 }
 
+.line-break {
+    white-space: pre-wrap;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */

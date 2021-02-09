@@ -37,7 +37,7 @@
                 <div *ngFor="let news of newses" class="news">
                     <div class="mat-body-strong text-light">{{ news.date | date: 'EEE dd.MM.yy' | capitalize }}</div>
                     <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
-                    <div [innerHTML]="news.description" class="mat-h3 description"></div>
+                    <div class="mat-h3 description line-break">{{ news.description }}</div>
                 </div>
             </div>
 

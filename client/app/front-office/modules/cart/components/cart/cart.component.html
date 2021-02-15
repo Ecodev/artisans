@@ -20,7 +20,7 @@
                 <a
                     class="product-image"
                     [routerLink]="['/larevuedurable/article', line.product.id]"
-                    [style.backgroundImage]="'url(/image/' + line.product.image?.id + '/70)'"
+                    [style.backgroundImage]="'url(/api/image/' + line.product.image?.id + '/70)'"
                 ></a>
 
                 <a [routerLink]="['/larevuedurable/article', line.product.id]" class="item-body item-button" mat-button>
@@ -68,7 +68,7 @@
             <a
                 class="product-image"
                 routerLink="/larevuedurable/abonnements"
-                [style.backgroundImage]="'url(/image/' + cart.subscription.subscription.image?.id + '/70)'"
+                [style.backgroundImage]="'url(/api/image/' + cart.subscription.subscription.image?.id + '/70)'"
             ></a>
 
             <a routerLink="/larevuedurable/abonnements" mat-button class="item-body item-button">

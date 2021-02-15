@@ -102,7 +102,7 @@
     <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
         <a [routerLink]="['/larevuedurable/article', currentReview.id]" *ngIf="currentReview.image">
             <img
-                [naturalSrcDensity]="'/image/' + currentReview.image.id + '/470'"
+                [naturalSrcDensity]="'/api/image/' + currentReview.image.id + '/470'"
                 alt="illustration du dernier numéro paru"
                 class="mat-elevation-z5 last-product-thumbnail"
             />
@@ -129,7 +129,7 @@
 
             <!-- If has access -->
             <div *ngIf="currentReview.file">
-                <a mat-flat-button color="accent" [href]="'/file/' + currentReview.file.id" target="_blank">
+                <a mat-flat-button color="accent" [href]="'/api/file/' + currentReview.file.id" target="_blank">
                     Télécharger le numéro
                 </a>
             </div>

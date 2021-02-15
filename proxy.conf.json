@@ -3,11 +3,7 @@
         "target": "https://artisans.lan",
         "secure": false
     },
-    "/image": {
-        "target": "https://artisans.lan",
-        "secure": false
-    },
-    "/file": {
+    "/api": {
         "target": "https://artisans.lan",
         "secure": false
     }

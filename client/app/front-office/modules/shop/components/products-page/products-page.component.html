@@ -32,7 +32,7 @@
                     *ngIf="index <= 1 && product.illustration"
                     [routerLink]="['/larevuedurable/', product.reviewNumber ? 'numero' : 'article', product.id]"
                     [style.backgroundImage]="
-                        'url(/image/' + product.illustration.id + '/' + (index === 0 ? '550' : '260') + ')'
+                        'url(/api/image/' + product.illustration.id + '/' + (index === 0 ? '550' : '260') + ')'
                     "
                     class="product-illustration"
                     fxFlex
@@ -51,7 +51,7 @@
                         mat-flat-button
                         color="accent"
                         *ngIf="product.file"
-                        [href]="'/file/' + product.file.id"
+                        [href]="'/api/file/' + product.file.id"
                         class="product-file-button"
                         target="_blank"
                     >
@@ -74,7 +74,7 @@
                     fxLayoutGap="60px"
                 >
                     <a class="product-image" *ngIf="product.image" [routerLink]="getDetailLink(product)">
-                        <img [naturalSrcDensity]="'/image/' + product.image.id + '/200'" alt="aperçu du produit" />
+                        <img [naturalSrcDensity]="'/api/image/' + product.image.id + '/200'" alt="aperçu du produit" />
                     </a>
 
                     <div fxLayout="column" fxLayoutGap="10px" fxFlex>
@@ -112,7 +112,7 @@
                             mat-flat-button
                             color="accent"
                             *ngIf="product.file"
-                            [href]="'/file/' + product.file.id"
+                            [href]="'/api/file/' + product.file.id"
                             class="product-file-button"
                             target="_blank"
                         >

@@ -42,15 +42,15 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         GraphQLHandler::class,
     ], 'graphql');
 
-    $app->get('/image/{id:\d+}[/{maxHeight:\d+}]', [
+    $app->get('/api/image/{id:\d+}[/{maxHeight:\d+}]', [
         \Ecodev\Felix\Handler\ImageHandler::class,
     ], 'image');
 
-    $app->get('/file/{id:\d+}', [
+    $app->get('/api/file/{id:\d+}', [
         \Ecodev\Felix\Handler\FileHandler::class,
     ], 'file');
 
-    $app->post('/datatrans', [
+    $app->post('/api/datatrans', [
         BodyParamsMiddleware::class,
         \Application\Handler\DatatransHandler::class,
     ], 'datatrans');

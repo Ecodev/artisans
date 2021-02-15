@@ -55,7 +55,7 @@
                 <img
                     class="product-image"
                     *ngIf="data.model.image"
-                    [naturalSrcDensity]="'/image/' + data.model.image.id + '/300'"
+                    [naturalSrcDensity]="'/api/image/' + data.model.image.id + '/300'"
                     alt="aperçu de l'article"
                 />
             </div>
@@ -99,7 +99,7 @@
         >
             <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
                 <img
-                    [naturalSrcDensity]="'/image/' + data.model.review.image.id + '/300'"
+                    [naturalSrcDensity]="'/api/image/' + data.model.review.image.id + '/300'"
                     alt="couverture de la revue"
                 />
             </a>
@@ -136,7 +136,7 @@
                     <p class="mat-body" *ngIf="!data.model.reviewNumber">
                         Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
                     </p>
-                    <a mat-flat-button [href]="'/file/' + data.model.file.id" target="_blank">
+                    <a mat-flat-button [href]="'/api/file/' + data.model.file.id" target="_blank">
                         <natural-icon name="get_app"></natural-icon>
                         <span *ngIf="data.model.reviewNumber">Télécharger cette revue</span>
                         <span *ngIf="!data.model.reviewNumber">Télécharger cet article</span>

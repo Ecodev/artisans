@@ -18,7 +18,10 @@
                     *ngIf="orderLine.product.image"
                     [routerLink]="['/larevuedurable/article', orderLine.product.id]"
                 >
-                    <img [naturalSrcDensity]="'/image/' + orderLine.product.image.id + '/90'" alt="aperçu du produit" />
+                    <img
+                        [naturalSrcDensity]="'/api/image/' + orderLine.product.image.id + '/90'"
+                        alt="aperçu du produit"
+                    />
                 </a>
 
                 <div fxFlex fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">

@@ -27,6 +27,7 @@ export const routes: Routes = [
         RouterModule.forRoot(routes, {
             paramsInheritanceStrategy: 'always',
             scrollPositionRestoration: 'top',
+            relativeLinkResolution: 'legacy',
         }),
     ],
     exports: [RouterModule],

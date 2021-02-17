@@ -15,7 +15,8 @@
                 fxFlex
             >
                 <natural-columns-picker
-                    (selectionChange)="selectedColumns = $event"
+                    (selectionChange)="selectColumns($event)"
+                    (availableColumnsChange)="availableColumns = $event"
                     [initialSelection]="initialColumns"
                 >
                     <span naturalColumnsPickerColumn="creationDate">Date</span>
@@ -38,11 +39,11 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
                     <td *matCellDef="let element" mat-cell>
                         <div *ngIf="element.owner" fxLayout="row" fxLayoutAlign="start center">
-                            <ngx-avatar
-                                [name]="element.owner?.name"
-                                [gravatarId]="element.owner?.email"
+                            <natural-avatar
+                                [initials]="element.owner?.name"
+                                [gravatar]="element.owner?.email"
                                 [size]="36"
-                            ></ngx-avatar>
+                            ></natural-avatar>
                             <natural-table-button
                                 [label]="element.owner?.name"
                                 [navigate]="['/admin/user', element.owner?.id]"

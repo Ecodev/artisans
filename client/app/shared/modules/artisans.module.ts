@@ -4,6 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {
     NaturalAlertModule,
+    NaturalAvatarModule,
     NaturalColumnsPickerModule,
     NaturalCommonModule,
     NaturalDetailHeaderModule,
@@ -22,7 +23,6 @@ import {
     NaturalStampModule,
     NaturalTableButtonModule,
 } from '@ecodev/natural';
-import {AvatarModule} from 'ngx-avatar';
 import {ProductsComponent} from '../../admin/products/products/products.component';
 import {UsersComponent} from '../../admin/users/users/users.component';
 import {AddressComponent} from '../components/address/address.component';
@@ -54,7 +54,7 @@ const imports = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    AvatarModule,
+    NaturalAvatarModule,
     NaturalSearchModule,
     NaturalCommonModule,
     NaturalFileModule,

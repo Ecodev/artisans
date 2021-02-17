@@ -15,7 +15,8 @@
                 fxFlex
             >
                 <natural-columns-picker
-                    (selectionChange)="selectedColumns = $event"
+                    (selectionChange)="selectColumns($event)"
+                    (availableColumnsChange)="availableColumns = $event"
                     [initialSelection]="initialColumns"
                 >
                     <span naturalColumnsPickerColumn="name">Nom</span>
@@ -49,7 +50,7 @@
                     <th *matHeaderCellDef mat-header-cell>Facilitateurs</th>
                     <td *matCellDef="let element" mat-cell>
                         <div *ngFor="let f of element.facilitators" fxLayout="row">
-                            <ngx-avatar [name]="f.name" [gravatarId]="f.email" [size]="36"></ngx-avatar>
+                            <natural-avatar [initials]="f.name" [gravatar]="f.email" [size]="36"></natural-avatar>
                             <a mat-button [routerLink]="['/admin/user', f.id]">{{ f.name }}</a>
                         </div>
                     </td>

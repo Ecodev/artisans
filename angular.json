@@ -42,7 +42,7 @@
                         ],
                         "styles": ["client/styles/_themes.scss", "client/styles.scss"],
                         "scripts": [],
-                        "allowedCommonJsDependencies": ["striptags", "zen-observable"]
+                        "allowedCommonJsDependencies": ["decimal.js", "striptags", "zen-observable"]
                     },
                     "configurations": {
                         "production": {
@@ -55,7 +55,6 @@
                             "optimization": true,
                             "outputHashing": "all",
                             "sourceMap": false,
-                            "extractCss": true,
                             "namedChunks": false,
                             "extractLicenses": true,
                             "vendorChunk": false,

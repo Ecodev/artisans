@@ -1,10 +1,8 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {EcoFabSpeedDialModule} from '@ecodev/fab-speed-dial';
-import {AvatarModule} from 'ngx-avatar';
 import {ProfileModule} from '../profile/profile.module';
 import {ArtisansModule} from '../shared/modules/artisans.module';
-import {MaterialModule} from '../shared/modules/material.module';
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin/admin.component';
 import {CommentComponent} from './comments/comment/comment.component';
@@ -35,14 +33,6 @@ import {UserComponent} from './users/user/user.component';
         CommentsComponent,
         ImportComponent,
     ],
-    imports: [
-        CommonModule,
-        AdminRoutingModule,
-        ArtisansModule,
-        AvatarModule,
-        ProfileModule,
-        OrderModule,
-        EcoFabSpeedDialModule,
-    ],
+    imports: [CommonModule, AdminRoutingModule, ArtisansModule, ProfileModule, OrderModule, EcoFabSpeedDialModule],
 })
 export class AdminModule {}

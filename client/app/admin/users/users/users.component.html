@@ -32,7 +32,8 @@
                 </button>
 
                 <natural-columns-picker
-                    (selectionChange)="selectedColumns = $event"
+                    (selectionChange)="selectColumns($event)"
+                    (availableColumnsChange)="availableColumns = $event"
                     [initialSelection]="initialColumns"
                 >
                     <span naturalColumnsPickerColumn="name">Nom</span>
@@ -54,7 +55,11 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <ngx-avatar [name]="element.name" [gravatarId]="element.email" [size]="36"></ngx-avatar>
+                            <natural-avatar
+                                [initials]="element.name"
+                                [gravatar]="element.email"
+                                [size]="36"
+                            ></natural-avatar>
                             <natural-table-button
                                 [label]="element.name || 'Sans nom'"
                                 [navigate]="['/admin/user', element.id]"

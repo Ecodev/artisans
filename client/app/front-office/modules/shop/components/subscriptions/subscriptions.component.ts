@@ -50,7 +50,7 @@ export class SubscriptionsComponent implements OnInit {
 
             const dialogData: MatDialogConfig = {
                 data: {
-                    emails: [viewer ? viewer.model.email : '', '', ''], // prefill with user email if logged in
+                    emails: [viewer?.model ? viewer.model.email : '', '', ''], // prefill with user email if logged in
                     title: "Emails des bénéficiaires de l'abonnement profesionnel",
                 },
             };

@@ -1,7 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractList} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
-import {Orders, OrdersVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 
@@ -11,8 +10,6 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
-    public selectedColumns = ['creationDate', 'status', 'balance'];
-
     constructor(
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
@@ -20,6 +17,7 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
         injector: Injector,
     ) {
         super(service, injector);
+        this.selectedColumns = ['creationDate', 'status', 'balance'];
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
     }

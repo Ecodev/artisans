@@ -15,7 +15,6 @@ parameters:
         - '~^Property .* does not accept Application\\Repository\\AbstractRepository\<Application\\Model\\.*\>\.$~'
         - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         - '~^Call to an undefined method Laminas\\View\\Renderer\\RendererInterface\:\:.*\(\)\.$~'
-        - '~^Cannot call method (fetchOne|fetchAssociative|fetchFirstColumn)\(\) on Doctrine\\DBAL\\Driver\\ResultStatement\|int\.$~'
         - '~^Call to an undefined method Doctrine\\DBAL\\Driver\\ResultStatement\:\:(fetchOne|fetchAssociative|fetchFirstColumn)\(\)\.$~'
         -
             message: '~^If condition is always true\.$~'

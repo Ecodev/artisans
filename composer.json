@@ -59,7 +59,7 @@
         "laminas/laminas-component-installer": "^2.4",
         "laminas/laminas-config-aggregator": "^1.4",
         "laminas/laminas-http": "^2.14",
-        "mezzio/mezzio": "^3.2",
+        "mezzio/mezzio": "^3.3",
         "mezzio/mezzio-fastroute": "^3.1",
         "mezzio/mezzio-helpers": "^5.4",
         "mezzio/mezzio-laminasviewrenderer": "^2.2",
@@ -67,9 +67,9 @@
         "roave/psr-container-doctrine": "^2.2"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.17",
+        "friendsofphp/php-cs-fixer": "^2.18",
         "laminas/laminas-development-mode": "^3.3",
-        "phpstan/phpstan-doctrine": "^0.12.27",
+        "phpstan/phpstan-doctrine": "^0.12.33",
         "phpunit/phpunit": "^9.5"
     }
 }

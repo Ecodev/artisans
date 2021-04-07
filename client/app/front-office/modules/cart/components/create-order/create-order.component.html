@@ -85,6 +85,10 @@
 
 <div *ngIf="showConfirmationMessage" class="container">
     <h1 class="mat-display-1">Merci pour votre commande</h1>
+    <p class="mat-h3 rich-text">
+        Consulter les articles et revues achetées dans
+        <a routerLink="/mon-compte/articles-achetes" fragment="profile-content">mon compte</a>.
+    </p>
 </div>
 
 <router-outlet></router-outlet>

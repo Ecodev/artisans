@@ -9,7 +9,7 @@ import {UserService} from './user.service';
     providedIn: 'root',
 })
 export class UserResolver implements Resolve<UserResolve> {
-    constructor(private userService: UserService, private errorService: ErrorService) {}
+    constructor(private readonly userService: UserService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve sites for routing service only at the moment

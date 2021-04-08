@@ -93,9 +93,9 @@ export class UserService
 
     constructor(
         apollo: Apollo,
-        protected router: Router,
-        private permissionsService: PermissionsService,
-        private currencyService: CurrencyService,
+        protected readonly router: Router,
+        private readonly permissionsService: PermissionsService,
+        private readonly currencyService: CurrencyService,
         private readonly cartCollectionService: CartCollectionService,
         @Inject(DOCUMENT) private readonly document: Document,
         @Inject(LOCAL_STORAGE) private readonly storage: NaturalStorage,

@@ -13,7 +13,7 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
     constructor(
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(service, injector);

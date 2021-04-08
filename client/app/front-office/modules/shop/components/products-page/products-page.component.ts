@@ -70,10 +70,10 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     public defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
 
     constructor(
-        public route: ActivatedRoute,
+        public readonly route: ActivatedRoute,
         productService: ProductService,
         injector: Injector,
-        public productTagService: ProductTagService,
+        public readonly productTagService: ProductTagService,
     ) {
         super(productService, injector);
     }

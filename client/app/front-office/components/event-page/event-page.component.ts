@@ -26,7 +26,7 @@ export class EventPageComponent extends NaturalAbstractDetail<EventService> impl
         route: ActivatedRoute,
         eventService: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super('event', eventService, injector);

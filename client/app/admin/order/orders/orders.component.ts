@@ -16,7 +16,7 @@ export class OrdersComponent extends NaturalAbstractList<OrderService> implement
     constructor(
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(service, injector);

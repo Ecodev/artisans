@@ -19,8 +19,8 @@ export class SubscriptionsComponent implements OnInit {
     public ProductType = ProductType;
 
     constructor(
-        private subscriptionService: SubscriptionService,
-        private router: Router,
+        private readonly subscriptionService: SubscriptionService,
+        private readonly router: Router,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
         public dialog: MatDialog,
         private route: ActivatedRoute,

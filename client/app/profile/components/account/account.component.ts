@@ -25,7 +25,7 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
      */
     public passwordMailSending = false;
 
-    constructor(private userService: UserService, injector: Injector) {
+    constructor(private readonly userService: UserService, injector: Injector) {
         super('user', userService, injector);
     }
 

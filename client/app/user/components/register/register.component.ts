@@ -13,7 +13,7 @@ export class RegisterComponent extends NaturalAbstractDetail<AnonymousUserServic
     public step = 1;
     public sending = false;
 
-    constructor(userService: AnonymousUserService, injector: Injector, protected apollo: Apollo) {
+    constructor(userService: AnonymousUserService, injector: Injector, protected readonly apollo: Apollo) {
         super('user', userService, injector);
     }
 

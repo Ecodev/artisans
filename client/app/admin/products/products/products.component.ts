@@ -16,7 +16,7 @@ export class ProductsComponent extends NaturalAbstractList<ProductService> imple
         route: ActivatedRoute,
         productService: ProductService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(productService, injector);

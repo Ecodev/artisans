@@ -41,7 +41,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
     constructor(
         service: OrderLineService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(service, injector);

@@ -9,7 +9,7 @@ import {SessionService} from './session.service';
     providedIn: 'root',
 })
 export class SessionResolver implements Resolve<SessionResolve> {
-    constructor(private sessionService: SessionService, private errorService: ErrorService) {}
+    constructor(private readonly sessionService: SessionService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve session data for router

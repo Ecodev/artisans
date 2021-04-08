@@ -16,7 +16,7 @@ export class CommentsComponent extends NaturalAbstractList<CommentService> imple
     constructor(
         service: CommentService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(service, injector);

@@ -21,10 +21,10 @@ export interface MenuItem {
 })
 export class NavigationService {
     constructor(
-        private overlay: Overlay,
-        private injector: Injector,
-        private router: Router,
-        private route: ActivatedRoute,
+        private readonly overlay: Overlay,
+        private readonly injector: Injector,
+        private readonly router: Router,
+        private readonly route: ActivatedRoute,
         @Inject(DOCUMENT) private readonly document: Document,
     ) {}
 

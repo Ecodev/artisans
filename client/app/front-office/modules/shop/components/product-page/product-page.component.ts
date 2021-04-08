@@ -78,7 +78,11 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
 
     public url: string;
 
-    constructor(private productService: ProductService, private purchaseService: PurchaseService, injector: Injector) {
+    constructor(
+        private readonly productService: ProductService,
+        private readonly purchaseService: PurchaseService,
+        injector: Injector,
+    ) {
         super('product', productService, injector);
         this.url = this.router.url;
     }

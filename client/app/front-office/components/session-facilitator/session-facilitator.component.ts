@@ -17,7 +17,7 @@ import {
 export class SessionFacilitatorComponent implements OnInit {
     public facilitators: Users_users_items[] = [];
 
-    constructor(public userService: UserService) {}
+    constructor(public readonly userService: UserService) {}
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();

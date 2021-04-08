@@ -19,11 +19,11 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
     public form: FormGroup;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private userService: UserService,
-        public alertService: NaturalAlertService,
-        public snackBar: MatSnackBar,
+        private readonly route: ActivatedRoute,
+        private readonly router: Router,
+        private readonly userService: UserService,
+        public readonly alertService: NaturalAlertService,
+        public readonly snackBar: MatSnackBar,
         private readonly fb: FormBuilder,
     ) {
         super();

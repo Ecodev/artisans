@@ -7,7 +7,7 @@ import {CartService} from '../../modules/cart/services/cart.service';
     styleUrls: ['./faire-un-don.component.scss'],
 })
 export class FaireUnDonComponent implements OnInit {
-    constructor(public cartService: CartService) {}
+    constructor(public readonly cartService: CartService) {}
 
     public ngOnInit(): void {}
 }

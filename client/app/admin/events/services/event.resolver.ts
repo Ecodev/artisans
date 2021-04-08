@@ -9,7 +9,7 @@ import {EventService} from './event.service';
     providedIn: 'root',
 })
 export class EventResolver implements Resolve<EventResolve> {
-    constructor(private productService: EventService, private errorService: ErrorService) {}
+    constructor(private readonly productService: EventService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve product data for router

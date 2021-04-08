@@ -25,7 +25,7 @@ export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implem
         route: ActivatedRoute,
         newsService: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super('news', newsService, injector);

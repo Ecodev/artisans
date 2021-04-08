@@ -18,7 +18,7 @@ export class BreadcrumbsComponent extends NaturalAbstractController implements O
 
     @Input() public breadcrumbs: Breadcrumb[] = [];
 
-    constructor(private router: Router) {
+    constructor(private readonly router: Router) {
         super();
     }
 

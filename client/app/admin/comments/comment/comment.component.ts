@@ -18,9 +18,9 @@ export class CommentComponent extends NaturalAbstractDetail<CommentService> impl
         commentService: CommentService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         injector: Injector,
-        public newsService: NewsService,
-        public eventService: EventService,
-        public permissionsService: PermissionsService,
+        public readonly newsService: NewsService,
+        public readonly eventService: EventService,
+        public readonly permissionsService: PermissionsService,
     ) {
         super('comment', commentService, injector);
     }

@@ -15,7 +15,7 @@ export class PriceComponent extends NaturalAbstractController implements OnInit 
 
     public price!: string;
 
-    constructor(public currencyService: CurrencyService) {
+    constructor(public readonly currencyService: CurrencyService) {
         super();
     }
 

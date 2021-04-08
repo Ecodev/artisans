@@ -31,7 +31,7 @@ export class AddToCartComponent implements OnInit {
 
     public inCart = false;
 
-    constructor(private cartService: CartService) {}
+    constructor(private readonly cartService: CartService) {}
 
     public ngOnInit(): void {}
 

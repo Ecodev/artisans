@@ -23,11 +23,11 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
 
     constructor(
         route: ActivatedRoute,
-        private userService: UserService,
+        private readonly userService: UserService,
         injector: Injector,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
-        private apollo: Apollo,
+        public readonly permissionsService: PermissionsService,
+        private readonly apollo: Apollo,
         @Inject(DOCUMENT) private readonly document: Document,
     ) {
         super(userService, injector);

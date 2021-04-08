@@ -16,7 +16,7 @@ export class SessionsComponent extends NaturalAbstractList<SessionService> imple
         route: ActivatedRoute,
         sessionService: SessionService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(sessionService, injector);

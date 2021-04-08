@@ -23,11 +23,11 @@ import {CartCollectionService} from './cart-collection.service';
 })
 export class CartService {
     constructor(
-        private orderService: OrderService,
-        private dialogService: MatDialog,
-        private currencyService: CurrencyService,
-        private snackbar: MatSnackBar,
-        private router: Router,
+        private readonly orderService: OrderService,
+        private readonly dialogService: MatDialog,
+        private readonly currencyService: CurrencyService,
+        private readonly snackbar: MatSnackBar,
+        private readonly router: Router,
         private readonly globalCartService: GlobalCartService,
         private readonly cartCollectionService: CartCollectionService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,

@@ -20,9 +20,9 @@ import {SubscriptionService} from '../../../front-office/modules/shop/components
 })
 export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> implements OnInit {
     constructor(
-        private orderLineService: OrderLineService,
-        public productService: ProductService,
-        public subscriptionService: SubscriptionService,
+        private readonly orderLineService: OrderLineService,
+        public readonly productService: ProductService,
+        public readonly subscriptionService: SubscriptionService,
         injector: Injector,
         @Inject(MAT_DIALOG_DATA) private dialogData: NaturalDialogTriggerProvidedData,
     ) {

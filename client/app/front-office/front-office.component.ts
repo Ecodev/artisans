@@ -225,11 +225,11 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public UserRole = UserRole;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private navigationService: NavigationService,
-        public userService: UserService,
-        public currencyService: CurrencyService,
+        private readonly route: ActivatedRoute,
+        private readonly router: Router,
+        private readonly navigationService: NavigationService,
+        public readonly userService: UserService,
+        public readonly currencyService: CurrencyService,
         @Inject(DOCUMENT) private readonly document: Document,
         fb: FormBuilder,
         private alertService: NaturalAlertService,

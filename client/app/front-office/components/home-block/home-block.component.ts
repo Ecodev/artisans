@@ -25,7 +25,10 @@ export class HomeBlockComponent implements OnInit {
 
     public lastValue: Block | null = null;
 
-    constructor(private configService: ConfigurationService, public permissionService: PermissionsService) {}
+    constructor(
+        private readonly configService: ConfigurationService,
+        public readonly permissionService: PermissionsService,
+    ) {}
 
     public ngOnInit(): void {
         this.form = new FormGroup({

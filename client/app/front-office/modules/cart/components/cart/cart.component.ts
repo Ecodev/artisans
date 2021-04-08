@@ -25,11 +25,11 @@ export class CartComponent implements OnInit {
     public cart?: Cart;
 
     constructor(
-        public alertService: NaturalAlertService,
-        public router: Router,
-        private route: ActivatedRoute,
-        public cartService: CartService,
-        public currencyService: CurrencyService,
+        public readonly alertService: NaturalAlertService,
+        public readonly router: Router,
+        private readonly route: ActivatedRoute,
+        public readonly cartService: CartService,
+        public readonly currencyService: CurrencyService,
         private readonly globalCartService: GlobalCartService,
         private readonly cartCollectionService: CartCollectionService,
     ) {}

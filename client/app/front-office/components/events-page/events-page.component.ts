@@ -20,7 +20,7 @@ export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> 
     constructor(
         service: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(service, injector);

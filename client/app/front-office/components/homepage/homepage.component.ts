@@ -51,11 +51,11 @@ export class HomepageComponent implements OnInit {
         public userService: UserService,
         private route: ActivatedRoute,
         private newsService: NewsService,
-        private eventService: EventService,
-        private productService: ProductService,
-        public permissionService: PermissionsService,
-        public productTagService: ProductTagService,
-        public cartService: CartService,
+        private readonly eventService: EventService,
+        private readonly productService: ProductService,
+        public readonly permissionService: PermissionsService,
+        public readonly productTagService: ProductTagService,
+        public readonly cartService: CartService,
     ) {}
 
     public ngOnInit(): void {

@@ -16,7 +16,7 @@ export class NewsesComponent extends NaturalAbstractList<NewsService> implements
     constructor(
         service: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super(service, injector);

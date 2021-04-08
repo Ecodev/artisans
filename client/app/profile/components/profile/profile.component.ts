@@ -18,10 +18,10 @@ export class ProfileComponent implements OnInit {
     public membershipProduct: Product['product'] | null = null;
 
     constructor(
-        public userService: UserService,
-        private alertService: NaturalAlertService,
-        private route: ActivatedRoute,
-        public productService: ProductService,
+        public readonly userService: UserService,
+        private readonly alertService: NaturalAlertService,
+        private readonly route: ActivatedRoute,
+        public readonly productService: ProductService,
     ) {}
 
     public ngOnInit(): void {

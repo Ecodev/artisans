@@ -36,11 +36,11 @@ export class SessionsIncomingComponent implements OnInit {
     constructor(
         private sessionService: SessionService,
         public router: Router,
-        public route: ActivatedRoute,
-        public userService: UserService,
-        public dialog: MatDialog,
-        public alertService: NaturalAlertService,
-        private snackbar: MatSnackBar,
+        public readonly route: ActivatedRoute,
+        public readonly userService: UserService,
+        public readonly dialog: MatDialog,
+        public readonly alertService: NaturalAlertService,
+        private readonly snackbar: MatSnackBar,
     ) {}
 
     public ngOnInit(): void {

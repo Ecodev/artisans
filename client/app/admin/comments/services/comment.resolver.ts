@@ -9,7 +9,7 @@ import {CommentService} from './comment.service';
     providedIn: 'root',
 })
 export class CommentResolver implements Resolve<CommentResolve> {
-    constructor(private productService: CommentService, private errorService: ErrorService) {}
+    constructor(private readonly productService: CommentService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve product data for router

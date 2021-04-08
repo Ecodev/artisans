@@ -69,13 +69,13 @@ export class CreateOrderComponent implements OnInit {
     constructor(
         public cartService: CartService,
         public alertService: NaturalAlertService,
-        public router: Router,
-        private route: ActivatedRoute,
-        public userService: UserService,
+        public readonly router: Router,
+        private readonly route: ActivatedRoute,
+        public readonly userService: UserService,
         configService: ConfigService,
-        public currencyService: CurrencyService,
+        public readonly currencyService: CurrencyService,
         private readonly cartCollectionService: CartCollectionService,
-        public navigationService: NavigationService,
+        public readonly navigationService: NavigationService,
     ) {
         configService.get().subscribe(paymentConfig => {
             this.paymentConfig = paymentConfig;

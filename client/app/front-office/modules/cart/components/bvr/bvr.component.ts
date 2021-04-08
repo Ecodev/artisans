@@ -22,7 +22,7 @@ const q = gql`
 export class BvrComponent {
     public bankingInfos?: BankingInfos_bankingInfos;
 
-    constructor(private apollo: Apollo) {}
+    constructor(private readonly apollo: Apollo) {}
 
     @Input() set bankingData(data: BankingInfosVariables) {
         this.apollo

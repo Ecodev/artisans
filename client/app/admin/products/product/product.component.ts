@@ -25,11 +25,11 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService> impl
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     constructor(
-        public productService: ProductService,
+        public readonly productService: ProductService,
         injector: Injector,
-        public productTagService: ProductTagService,
-        public imageService: ImageService,
-        public fileService: FilesService,
+        public readonly productTagService: ProductTagService,
+        public readonly imageService: ImageService,
+        public readonly fileService: FilesService,
     ) {
         super('product', productService, injector);
     }

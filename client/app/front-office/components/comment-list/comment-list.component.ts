@@ -37,7 +37,7 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
 
     public newCommentValue = '';
 
-    constructor(service: CommentService, injector: Injector, public permissionsService: PermissionsService) {
+    constructor(service: CommentService, injector: Injector, public readonly permissionsService: PermissionsService) {
         super(service, injector);
         this.persistSearch = false;
     }

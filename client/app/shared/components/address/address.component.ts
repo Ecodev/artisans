@@ -36,7 +36,7 @@ export class AddressComponent {
      */
     @Output() public readonly change: EventEmitter<void> = new EventEmitter<void>();
 
-    constructor(public countryService: CountryService) {}
+    constructor(public readonly countryService: CountryService) {}
 
     public update(): void {
         this.change.emit();

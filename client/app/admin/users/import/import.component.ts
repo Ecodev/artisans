@@ -42,11 +42,11 @@ export class ImportComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
-        private router: Router,
-        public permissionsService: PermissionsService,
-        private apollo: Apollo,
-        private alertService: NaturalAlertService,
-        private userService: UserService,
+        private readonly router: Router,
+        public readonly permissionsService: PermissionsService,
+        private readonly apollo: Apollo,
+        private readonly alertService: NaturalAlertService,
+        private readonly userService: UserService,
     ) {}
 
     public ngOnInit(): void {

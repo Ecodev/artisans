@@ -25,7 +25,7 @@ export class EventComponent extends NaturalAbstractDetail<EventService> implemen
         route: ActivatedRoute,
         eventService: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        public permissionsService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
         injector: Injector,
     ) {
         super('event', eventService, injector);

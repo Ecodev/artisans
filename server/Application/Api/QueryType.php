@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Api;
 
-use Application\Api\Field\Query\BankingInfos;
 use Application\Api\Field\Query\Configuration;
 use Application\Api\Field\Query\Permissions;
 use Application\Api\Field\Query\Purchases;
@@ -37,7 +36,6 @@ class QueryType extends ObjectType
             UserByToken::build(),
             Permissions::build(),
             Purchases::build(),
-            BankingInfos::build(),
             Configuration::build(),
             UserRolesAvailable::build(),
         ];

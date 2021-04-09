@@ -1,14 +1,7 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NaturalAbstractDetail, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
 import {merge, omit} from 'lodash-es';
-import {
-    OrderLine,
-    OrderLineVariables,
-    UpdateOrderLine,
-    UpdateOrderLineVariables,
-} from '../../../shared/generated-types';
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {SubscriptionService} from '../../../front-office/modules/shop/components/subscriptions/subscription.service';
@@ -24,7 +17,7 @@ export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> 
         public readonly productService: ProductService,
         public readonly subscriptionService: SubscriptionService,
         injector: Injector,
-        @Inject(MAT_DIALOG_DATA) private dialogData: NaturalDialogTriggerProvidedData,
+        @Inject(MAT_DIALOG_DATA) private readonly dialogData: NaturalDialogTriggerProvidedData,
     ) {
         super('orderLine', orderLineService, injector);
     }

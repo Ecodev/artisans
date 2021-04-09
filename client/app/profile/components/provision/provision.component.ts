@@ -10,7 +10,7 @@ import {BankingInfosVariables} from '../../../shared/generated-types';
 export class ProvisionComponent implements OnInit {
     public bvrData: BankingInfosVariables;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: BankingInfosVariables) {
+    constructor(@Inject(MAT_DIALOG_DATA) public readonly data: BankingInfosVariables) {
         this.bvrData = this.data;
     }
 

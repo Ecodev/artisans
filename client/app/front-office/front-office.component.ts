@@ -232,7 +232,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         public readonly currencyService: CurrencyService,
         @Inject(DOCUMENT) private readonly document: Document,
         fb: FormBuilder,
-        private alertService: NaturalAlertService,
+        private readonly alertService: NaturalAlertService,
     ) {
         super();
         this.newsletterForm = fb.group({

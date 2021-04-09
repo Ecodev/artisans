@@ -2,7 +2,7 @@ import {Apollo} from 'apollo-angular';
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractList, NaturalQueryVariablesManager, NaturalSearchSelections} from '@ecodev/natural';
-import {EmailUsers, EmailUsersVariables, Users, UsersVariables} from '../../../shared/generated-types';
+import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {copy} from '../../../shared/utils';

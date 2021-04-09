@@ -33,9 +33,9 @@ export class OrderComponent implements OnInit {
     public UserRole = UserRole;
 
     constructor(
-        @Optional() @Inject(MAT_DIALOG_DATA) public dialogData: NaturalDialogTriggerProvidedData,
-        public orderService: OrderService,
-        public alertService: NaturalAlertService,
+        @Optional() @Inject(MAT_DIALOG_DATA) public readonly dialogData: NaturalDialogTriggerProvidedData,
+        public readonly orderService: OrderService,
+        public readonly alertService: NaturalAlertService,
     ) {
         this.viewer = dialogData.activatedRoute.snapshot.data.viewer
             ? dialogData.activatedRoute.snapshot.data.viewer.model

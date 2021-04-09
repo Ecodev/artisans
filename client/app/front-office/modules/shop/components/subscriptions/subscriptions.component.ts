@@ -22,8 +22,8 @@ export class SubscriptionsComponent implements OnInit {
         private readonly subscriptionService: SubscriptionService,
         private readonly router: Router,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
-        public dialog: MatDialog,
-        private route: ActivatedRoute,
+        public readonly dialog: MatDialog,
+        private readonly route: ActivatedRoute,
         private readonly globalCartService: GlobalCartService,
     ) {}
 

@@ -4,19 +4,11 @@ import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natur
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
 import {
-    CreateProduct,
-    CreateProductVariables,
     CurrentUserForProfile_viewer,
-    DeleteProducts,
-    DeleteProductsVariables,
-    Product,
     Products_products_items,
     ProductsVariables,
     ProductType,
-    ProductVariables,
     PurchasesVariables,
-    UpdateProduct,
-    UpdateProductVariables,
 } from '../../../../../shared/generated-types';
 import {ProductsPageComponent} from '../products-page/products-page.component';
 

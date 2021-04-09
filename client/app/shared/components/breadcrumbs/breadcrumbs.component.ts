@@ -1,5 +1,5 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {NaturalAbstractController} from '@ecodev/natural';
 import {filter, takeUntil} from 'rxjs/operators';
 

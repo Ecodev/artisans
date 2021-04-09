@@ -1,16 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {
-    CreateUser,
-    CreateUserVariables,
-    DeleteUsers,
-    DeleteUsersVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    User,
-    UserVariables,
-} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-account',

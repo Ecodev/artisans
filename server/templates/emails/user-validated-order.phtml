@@ -1,5 +1,6 @@
 <?php declare(strict_types=1);
 $url = $this->serverUrl . '/mon-compte/commandes/' . $this->order->getId();
+$urlPurchases = $this->serverUrl . '/mon-compte/articles-achetes#profile-content';
 ?>
 <p>Votre commande a été validée et nous vous en remercions.</p>
 <p>
@@ -13,5 +14,10 @@ $url = $this->serverUrl . '/mon-compte/commandes/' . $this->order->getId();
 
 <p>Voir le détail sur
     <a href="<?php echo $url ?>"><?php echo $this->escapeHtml($url) ?></a>
+    .
+</p>
+
+<p>Consulter les articles et revues achetées sur
+    <a href="<?php echo $urlPurchases ?>"><?php echo $this->escapeHtml($urlPurchases) ?></a>
     .
 </p>

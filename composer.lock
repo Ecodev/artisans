@@ -2494,16 +2494,16 @@
         },
         {
             "name": "laminas/laminas-eventmanager",
-            "version": "3.3.0",
+            "version": "3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-eventmanager.git",
-                "reference": "1940ccf30e058b2fd66f5a9d696f1b5e0027b082"
+                "reference": "966c859b67867b179fde1eff0cd38df51472ce4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-eventmanager/zipball/1940ccf30e058b2fd66f5a9d696f1b5e0027b082",
-                "reference": "1940ccf30e058b2fd66f5a9d696f1b5e0027b082",
+                "url": "https://api.github.com/repos/laminas/laminas-eventmanager/zipball/966c859b67867b179fde1eff0cd38df51472ce4a",
+                "reference": "966c859b67867b179fde1eff0cd38df51472ce4a",
                 "shasum": ""
             },
             "require": {
@@ -2525,12 +2525,6 @@
                 "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.3.x-dev",
-                    "dev-develop": "3.4.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Laminas\\EventManager\\": "src/"
@@ -2562,7 +2556,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-08-25T11:10:44+00:00"
+            "time": "2021-03-08T15:24:29+00:00"
         },
         {
             "name": "laminas/laminas-http",
@@ -3840,16 +3834,16 @@
         },
         {
             "name": "mezzio/mezzio-helpers",
-            "version": "5.4.0",
+            "version": "5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-helpers.git",
-                "reference": "cead6d7edd15de0496e6ad3e3093286234af2522"
+                "reference": "d0dfb5f447faf7e019436976adec5128a0379132"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-helpers/zipball/cead6d7edd15de0496e6ad3e3093286234af2522",
-                "reference": "cead6d7edd15de0496e6ad3e3093286234af2522",
+                "url": "https://api.github.com/repos/mezzio/mezzio-helpers/zipball/d0dfb5f447faf7e019436976adec5128a0379132",
+                "reference": "d0dfb5f447faf7e019436976adec5128a0379132",
                 "shasum": ""
             },
             "require": {
@@ -3864,12 +3858,18 @@
                 "zendframework/zend-expressive-helpers": "^5.3.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "ext-json": "*",
+                "laminas/laminas-coding-standard": "~2.1.0",
                 "laminas/laminas-diactoros": "^1.7.1",
                 "malukenho/docheader": "^0.1.8",
                 "mockery/mockery": "^1.4.2",
                 "phpspec/prophecy-phpunit": "^2.0",
-                "phpunit/phpunit": "^9.4.2"
+                "phpunit/phpunit": "^9.4.2",
+                "psalm/plugin-phpunit": "^0.15.1",
+                "vimeo/psalm": "^4.7"
+            },
+            "suggest": {
+                "ext-json": "If you wish to use the JsonStrategy with BodyParamsMiddleware"
             },
             "type": "library",
             "extra": {
@@ -3910,30 +3910,30 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2020-11-18T13:59:04+00:00"
+            "time": "2021-04-23T14:12:21+00:00"
         },
         {
             "name": "mezzio/mezzio-laminasviewrenderer",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-laminasviewrenderer.git",
-                "reference": "aeef652954bf253499a0b71b4057a5bb565b447e"
+                "reference": "6f710b5a4cac2e457aa1adc81e24197ae6e2b3d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-laminasviewrenderer/zipball/aeef652954bf253499a0b71b4057a5bb565b447e",
-                "reference": "aeef652954bf253499a0b71b4057a5bb565b447e",
+                "url": "https://api.github.com/repos/mezzio/mezzio-laminasviewrenderer/zipball/6f710b5a4cac2e457aa1adc81e24197ae6e2b3d8",
+                "reference": "6f710b5a4cac2e457aa1adc81e24197ae6e2b3d8",
                 "shasum": ""
             },
             "require": {
-                "laminas/laminas-servicemanager": "^2.7.8 || ^3.3",
-                "laminas/laminas-view": "^2.11.1",
+                "laminas/laminas-servicemanager": "^2.7.8 || ^3.4",
+                "laminas/laminas-view": "^2.12.0",
                 "laminas/laminas-zendframework-bridge": "^1.0",
                 "mezzio/mezzio-helpers": "^5.0",
                 "mezzio/mezzio-router": "^3.0",
                 "mezzio/mezzio-template": "^2.0",
-                "php": "^7.1",
+                "php": "^7.3 || ~8.0.0",
                 "psr/container": "^1.0",
                 "psr/http-message": "^1.0.1"
             },
@@ -3941,19 +3941,16 @@
                 "container-interop/container-interop": "<1.2.0"
             },
             "replace": {
-                "zendframework/zend-expressive-zendviewrenderer": "self.version"
+                "zendframework/zend-expressive-zendviewrenderer": "^2.2.0"
             },
             "require-dev": {
-                "laminas/laminas-coding-standard": "~1.0.0",
+                "laminas/laminas-coding-standard": "~2.1.4",
                 "malukenho/docheader": "^0.1.5",
-                "phpunit/phpunit": "^7.0.2"
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.5"
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2.x-dev",
-                    "dev-develop": "3.0.x-dev"
-                },
                 "laminas": {
                     "config-provider": "Mezzio\\LaminasView\\ConfigProvider"
                 }
@@ -3979,13 +3976,19 @@
             ],
             "support": {
                 "chat": "https://laminas.dev/chat",
-                "docs": "https://docs.mezzio.dev/mezzio-laminasviewrenderer/",
+                "docs": "https://docs.mezzio.dev/mezzio/features/template/laminas-view/",
                 "forum": "https://discourse.laminas.dev",
                 "issues": "https://github.com/mezzio/mezzio-laminasviewrenderer/issues",
                 "rss": "https://github.com/mezzio/mezzio-laminasviewrenderer/releases.atom",
                 "source": "https://github.com/mezzio/mezzio-laminasviewrenderer"
             },
-            "time": "2019-12-31T15:45:19+00:00"
+            "funding": [
+                {
+                    "url": "https://funding.communitybridge.org/projects/laminas-project",
+                    "type": "community_bridge"
+                }
+            ],
+            "time": "2021-04-19T22:16:16+00:00"
         },
         {
             "name": "mezzio/mezzio-router",
@@ -6795,16 +6798,16 @@
         },
         {
             "name": "phpspec/prophecy",
-            "version": "1.12.2",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "245710e971a030f42e08f4912863805570f23d39"
+                "reference": "be1996ed8adc35c3fd795488a653f4b518be70ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/245710e971a030f42e08f4912863805570f23d39",
-                "reference": "245710e971a030f42e08f4912863805570f23d39",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/be1996ed8adc35c3fd795488a653f4b518be70ea",
+                "reference": "be1996ed8adc35c3fd795488a653f4b518be70ea",
                 "shasum": ""
             },
             "require": {
@@ -6856,9 +6859,9 @@
             ],
             "support": {
                 "issues": "https://github.com/phpspec/prophecy/issues",
-                "source": "https://github.com/phpspec/prophecy/tree/1.12.2"
+                "source": "https://github.com/phpspec/prophecy/tree/1.13.0"
             },
-            "time": "2020-12-19T10:15:11+00:00"
+            "time": "2021-03-17T13:42:18+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -8966,30 +8969,35 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.9.1",
+            "version": "1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389"
+                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/bafc69caeb4d49c39fd0779086c03a3738cbb389",
-                "reference": "bafc69caeb4d49c39fd0779086c03a3738cbb389",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6964c76c7804814a842473e0c8fd15bab0f18e25",
+                "reference": "6964c76c7804814a842473e0c8fd15bab0f18e25",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0 || ^8.0",
+                "php": "^7.2 || ^8.0",
                 "symfony/polyfill-ctype": "^1.8"
             },
             "conflict": {
                 "phpstan/phpstan": "<0.12.20",
-                "vimeo/psalm": "<3.9.1"
+                "vimeo/psalm": "<4.6.1 || 4.6.2"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.36 || ^7.5.13"
+                "phpunit/phpunit": "^8.5.13"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.10-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Webmozart\\Assert\\": "src/"
@@ -9013,9 +9021,9 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/1.9.1"
+                "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
-            "time": "2020-07-08T17:02:28+00:00"
+            "time": "2021-03-09T10:59:23+00:00"
         }
     ],
     "aliases": [],

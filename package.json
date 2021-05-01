@@ -32,7 +32,7 @@
         "@angular/platform-browser-dynamic": "~11.2.0",
         "@angular/platform-server": "^11.2.0",
         "@angular/router": "~11.2.0",
-        "@apollo/client": "^3.3.11",
+        "@apollo/client": "^3.3.16",
         "@ecodev/fab-speed-dial": "^7.0.0",
         "@ecodev/natural": "^33.0.0",
         "@graphql-tools/mock": "^8.0.0",

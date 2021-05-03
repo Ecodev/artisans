@@ -96,15 +96,17 @@ export const userByTokenQuery = gql`
     query UserByToken($token: Token!) {
         userByToken(token: $token) {
             id
-            login
             firstName
             lastName
             email
             locality
             street
             postcode
-            code
-            birthday
+            country {
+                id
+                name
+                code
+            }
         }
     }
 `;

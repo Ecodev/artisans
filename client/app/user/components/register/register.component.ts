@@ -1,31 +1,36 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, Injector, OnInit} from '@angular/core';
-import {ifValid, NaturalAbstractDetail, validateAllFormControls} from '@ecodev/natural';
+import {Component, OnInit} from '@angular/core';
+import {deliverableEmail, ifValid, NaturalAlertService, validateAllFormControls} from '@ecodev/natural';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
-import {AnonymousUserService} from './anonymous-user.service';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent extends NaturalAbstractDetail<AnonymousUserService> implements OnInit {
+export class RegisterComponent implements OnInit {
     public step = 1;
     public sending = false;
+    public form!: FormGroup;
 
-    constructor(userService: AnonymousUserService, injector: Injector, protected readonly apollo: Apollo) {
-        super('user', userService, injector);
-    }
+    constructor(
+        protected readonly apollo: Apollo,
+        protected readonly route: ActivatedRoute,
+        protected readonly fb: FormBuilder,
+        protected readonly router: Router,
+        protected readonly alertService: NaturalAlertService,
+    ) {}
 
     public ngOnInit(): void {
-        this.step = +this.route.snapshot.data.step;
+        this.initForm();
+    }
 
-        super.ngOnInit();
-
-        const email = this.form.get('email');
-        if (email && this.step === 1) {
-            email.setValue(this.route.snapshot.params.email);
-        }
+    private initForm(): void {
+        this.form = this.fb.group({
+            email: [this.route.snapshot.params.email, [Validators.required, deliverableEmail]],
+        });
     }
 
     public submit(): void {

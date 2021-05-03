@@ -1,11 +1,16 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, Injector, OnInit} from '@angular/core';
-import {relationsToIds} from '@ecodev/natural';
+import {Component, OnInit} from '@angular/core';
+import {deliverableEmail, NaturalAlertService, relationsToIds} from '@ecodev/natural';
 import {pick} from 'lodash-es';
-import {ProductService} from '../../../admin/products/services/product.service';
-import {NewUserService} from './new-user.service';
 import {RegisterComponent} from './register.component';
-import {ConfirmRegistration, ConfirmRegistrationVariables} from '../../../shared/generated-types';
+import {FormBuilder, Validators} from '@angular/forms';
+import {UserByTokenResolve} from '../../../admin/users/user';
+import {ActivatedRoute, Router} from '@angular/router';
+import {
+    ConfirmRegistration,
+    ConfirmRegistrationVariables,
+    UserByToken_userByToken,
+} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-confirm',
@@ -13,18 +18,35 @@ import {ConfirmRegistration, ConfirmRegistrationVariables} from '../../../shared
     styleUrls: ['./register.component.scss'],
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
-    constructor(userService: NewUserService, productService: ProductService, apollo: Apollo, injector: Injector) {
-        super(userService, injector, apollo);
+    constructor(
+        apollo: Apollo,
+        route: ActivatedRoute,
+        fb: FormBuilder,
+        router: Router,
+        alertService: NaturalAlertService,
+    ) {
+        super(apollo, route, fb, router, alertService);
+        this.step = 2;
     }
 
-    protected initForm(): void {
-        super.initForm();
+    public ngOnInit(): void {
+        this.route.data.subscribe(data => {
+            this.initFormFromModel((data['user'] as UserByTokenResolve)['model']);
+        });
+    }
 
-        // Lock e-mail, this field must not be changed
-        const email = this.form.get('email');
-        if (email) {
-            email.disable();
-        }
+    private initFormFromModel(model: UserByToken_userByToken): void {
+        this.form = this.fb.group({
+            // Lock e-mail, this field must not be changed
+            email: [{value: model.email, disabled: true}, [Validators.required, deliverableEmail]],
+            password: [''],
+            firstName: [model.firstName, [Validators.required, Validators.maxLength(100)]],
+            lastName: [model.lastName, [Validators.required, Validators.maxLength(100)]],
+            street: [model.street, [Validators.required]],
+            postcode: [model.postcode, [Validators.required]],
+            locality: [model.locality, [Validators.required]],
+            country: [model.country, [Validators.required]],
+        });
     }
 
     /**

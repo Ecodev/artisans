@@ -8,7 +8,7 @@ import {
     NaturalAbstractController,
     NaturalAlertService,
     NaturalSearchSelections,
-    toUrl,
+    toNavigationParameters,
 } from '@ecodev/natural';
 import {differenceBy} from 'lodash-es';
 import {filter, finalize} from 'rxjs/operators';
@@ -264,7 +264,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
             ],
         ];
 
-        this.router.navigate(['/larevuedurable/recherche', {ns: JSON.stringify(toUrl(search))}]);
+        this.router.navigate(['/larevuedurable/recherche', toNavigationParameters(search)]);
     }
 
     public openMenuDropdown(items: MenuItem[], event: MouseEvent): void {

@@ -1,7 +1,12 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Data, Router} from '@angular/router';
-import {FileSelection, NaturalAlertService, NaturalQueryVariablesManager, toUrl} from '@ecodev/natural';
+import {
+    FileSelection,
+    NaturalAlertService,
+    NaturalQueryVariablesManager,
+    toNavigationParameters,
+} from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {
     Import,
@@ -27,18 +32,14 @@ export class ImportComponent implements OnInit {
     public result: Import['import'] | null = null;
     public users: Users_users_items[] = [];
 
-    public readonly params = {
-        ns: JSON.stringify(
-            toUrl([
-                [
-                    {
-                        field: 'shouldDelete',
-                        condition: {equal: {value: true}},
-                    },
-                ],
-            ]),
-        ),
-    };
+    public readonly params = toNavigationParameters([
+        [
+            {
+                field: 'shouldDelete',
+                condition: {equal: {value: true}},
+            },
+        ],
+    ]);
 
     constructor(
         private route: ActivatedRoute,

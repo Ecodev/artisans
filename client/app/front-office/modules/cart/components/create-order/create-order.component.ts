@@ -9,10 +9,9 @@ import {ConfigService, FrontEndConfig} from '../../../../../shared/services/conf
 import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
 import {NavigationService} from '../../../../services/navigation.service';
 import {Cart} from '../../classes/cart';
-// @ts-ignore
-import * as Datatrans from '../../classes/datatrans-2.0.0-ecodev.js';
 import {CartService} from '../../services/cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';
+import {DatatransService} from '../../services/datatrans.service';
 
 @Component({
     selector: 'app-create-order',
@@ -76,6 +75,7 @@ export class CreateOrderComponent implements OnInit {
         public readonly currencyService: CurrencyService,
         private readonly cartCollectionService: CartCollectionService,
         public readonly navigationService: NavigationService,
+        private readonly datatransService: DatatransService,
     ) {
         configService.get().subscribe(paymentConfig => {
             this.paymentConfig = paymentConfig;
@@ -167,7 +167,7 @@ export class CreateOrderComponent implements OnInit {
             return;
         }
 
-        const sign = Datatrans.getHexaSHA256Signature(
+        const sign = this.datatransService.getHexaSHA256Signature(
             '',
             this.paymentConfig.datatrans.key,
             this.paymentConfig.datatrans.merchantId,
@@ -176,7 +176,7 @@ export class CreateOrderComponent implements OnInit {
             order.id,
         );
 
-        Datatrans.startPayment({
+        this.datatransService.startPayment({
             params: {
                 production: this.paymentConfig.datatrans.production,
                 merchantId: this.paymentConfig.datatrans.merchantId,
@@ -190,7 +190,7 @@ export class CreateOrderComponent implements OnInit {
                 this.confirmationRedirect();
                 this.alertService.info('Paiement réussi');
             },
-            error: (data: {message: string}) => {
+            error: data => {
                 this.alertService.error("Le paiement n'a pas abouti: " + data.message);
             },
             cancel: () => {

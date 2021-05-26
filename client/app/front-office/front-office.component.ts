@@ -247,7 +247,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];
 
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-            this.navigationService.scrollToTop(this.route.snapshot.fragment);
+            this.navigationService.scrollToTop(this.route.snapshot.fragment!);
         });
     }
 

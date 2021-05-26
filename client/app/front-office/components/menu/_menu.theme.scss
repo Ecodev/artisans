@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @mixin menu($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
@@ -6,27 +7,27 @@
     $fg: map-get($theme, foreground);
 
     .mega-menu {
-        background: mat-color($bg, base);
+        background: mat.get-color-from-palette($bg, base);
 
         ul {
             a {
-                color: lighten(mat-color($fg, text), 20%);
+                color: lighten(mat.get-color-from-palette($fg, text), 20%);
             }
 
             a:hover {
-                color: mat-color($primary) !important;
+                color: mat.get-color-from-palette($primary) !important;
             }
 
             li:hover > a {
-                border-color: mat-color($primary) !important;
+                border-color: mat.get-color-from-palette($primary) !important;
             }
 
             & > li.hasMenu::after {
-                background: mat-color($bg, card);
+                background: mat.get-color-from-palette($bg, card);
             }
 
             a.active {
-                color: mat-color($primary) !important;
+                color: mat.get-color-from-palette($primary) !important;
             }
         }
     }

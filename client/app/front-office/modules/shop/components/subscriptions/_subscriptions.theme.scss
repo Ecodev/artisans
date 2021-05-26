@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @mixin subscriptions($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
@@ -7,17 +8,17 @@
 
     app-subscriptions {
         .subscription.standard {
-            background: mat-color($primary);
-            color: mat-color($primary, default-contrast);
+            background: mat.get-color-from-palette($primary);
+            color: mat.get-color-from-palette($primary, default-contrast);
         }
 
         .subscription.pro {
-            background: mat-color($accent);
-            color: mat-color($accent, default-contrast);
+            background: mat.get-color-from-palette($accent);
+            color: mat.get-color-from-palette($accent, default-contrast);
         }
 
         .subscription.popular {
-            border: 10px solid mat-color($bg, card);
+            border: 10px solid mat.get-color-from-palette($bg, card);
         }
     }
 }

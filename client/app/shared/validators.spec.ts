@@ -32,13 +32,13 @@ describe('xorValidator', () => {
     });
 
     it('with invalid form', () => {
-        expect(empty(invalidForm)).toBeNull('empty validator is valid');
+        expect(empty(invalidForm)).withContext('empty validator is valid').toBeNull();
         expect(normal(invalidForm)).toEqual({myKey2: ['foo', 'bar']});
     });
 
     it('with valid form', () => {
-        expect(empty(validForm)).toBeNull('empty validator is valid');
-        expect(normal(validForm)).toBeNull('valid because only one is set');
-        expect(normal(validForm2)).toBeNull('valid because none are set');
+        expect(empty(validForm)).withContext('empty validator is valid').toBeNull();
+        expect(normal(validForm)).withContext('valid because only one is set').toBeNull();
+        expect(normal(validForm2)).withContext('valid because none are set').toBeNull();
     });
 });

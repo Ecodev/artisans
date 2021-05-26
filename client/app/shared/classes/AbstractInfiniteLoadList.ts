@@ -27,10 +27,11 @@ export class AbstractInfiniteLoadList<
             any,
             any,
             any
-        >
+        >,
     >
     extends NaturalAbstractList<TService>
-    implements OnInit {
+    implements OnInit
+{
     public items: ExtractTall<TService>['items'] | null = null;
 
     constructor(service: any, injector: Injector) {

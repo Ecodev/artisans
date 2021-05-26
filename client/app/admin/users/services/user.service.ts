@@ -78,7 +78,8 @@ export class UserService
         DeleteUsers,
         DeleteUsersVariables
     >
-    implements OnDestroy {
+    implements OnDestroy
+{
     /**
      * Should be used only by fetchViewer and cacheViewer
      */

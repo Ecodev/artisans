@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @mixin homepage($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
@@ -7,22 +8,22 @@
 
     app-homepage {
         a.mat-display-1 {
-            color: mat-color($fg, base);
+            color: mat.get-color-from-palette($fg, base);
 
             &:hover {
-                color: mat-color($primary);
+                color: mat.get-color-from-palette($primary);
             }
         }
 
         .description {
-            color: mat-color($fg, base, 0.75);
+            color: mat.get-color-from-palette($fg, base, 0.75);
         }
 
         .events {
-            background: mat-color($accent, A100);
+            background: mat.get-color-from-palette($accent, A100);
 
             mat-divider {
-                border-color: mat-color($accent);
+                border-color: mat.get-color-from-palette($accent);
             }
         }
     }

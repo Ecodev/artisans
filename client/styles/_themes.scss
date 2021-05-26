@@ -3,7 +3,7 @@
  * See source doc here https://github.com/angular/material2/tree/master/src/lib/core/theming
  */
 // Import theming files full relative way or karma will display warning
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 @import '~@ecodev/natural/theming/natural.theme';
 @import '../app/app.theme';
 @import 'rich-text';
@@ -27,7 +27,7 @@
 @import '../app/front-office/components/session-method/session-method.theme';
 
 // Include material core (only once !)
-@include mat-core();
+@include mat.core();
 
 // Include components themes
 @mixin components-theme($theme) {
@@ -70,20 +70,20 @@ $artisans-blue: (
     A400: #2979ff,
     A700: #466287,
     contrast: (
-        50: $dark-primary-text,
-        100: $dark-primary-text,
-        200: $dark-primary-text,
-        300: $dark-primary-text,
-        400: $dark-primary-text,
-        500: $light-primary-text,
-        600: $light-primary-text,
-        700: $light-primary-text,
-        800: $light-primary-text,
-        900: $light-primary-text,
-        A100: $dark-primary-text,
-        A200: $light-primary-text,
-        A400: $light-primary-text,
-        A700: $light-primary-text,
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: rgba(black, 0.87),
+        A200: white,
+        A400: white,
+        A700: white,
     ),
 );
 
@@ -103,20 +103,20 @@ $artisans-orange: (
     A400: #ff3d00,
     A700: #dd2c00,
     contrast: (
-        50: $dark-primary-text,
-        100: $dark-primary-text,
-        200: $dark-primary-text,
-        300: $dark-primary-text,
-        400: $dark-primary-text,
-        500: $light-primary-text,
-        600: $light-primary-text,
-        700: $light-primary-text,
-        800: $light-primary-text,
-        900: $light-primary-text,
-        A100: $dark-primary-text,
-        A200: $dark-primary-text,
-        A400: $light-primary-text,
-        A700: $light-primary-text,
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: rgba(black, 0.87),
+        A200: rgba(black, 0.87),
+        A400: white,
+        A700: white,
     ),
 );
 
@@ -136,28 +136,28 @@ $artisans-green: (
     A400: #1de9b6,
     A700: #00bfa5,
     contrast: (
-        50: $dark-primary-text,
-        100: $dark-primary-text,
-        200: $dark-primary-text,
-        300: $dark-primary-text,
-        400: $dark-primary-text,
-        500: $light-primary-text,
-        600: $light-primary-text,
-        700: $light-primary-text,
-        800: $light-primary-text,
-        900: $light-primary-text,
-        A100: $dark-primary-text,
-        A200: $dark-primary-text,
-        A400: $dark-primary-text,
-        A700: $dark-primary-text,
+        50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+        A100: rgba(black, 0.87),
+        A200: rgba(black, 0.87),
+        A400: rgba(black, 0.87),
+        A700: rgba(black, 0.87),
     ),
 );
 
 // Configure themes
-$artisans-primary: mat-palette($artisans-blue);
-$artisans-accent: mat-palette($artisans-orange);
-$artisans-warn: mat-palette($mat-red);
-$artisans-theme: mat-light-theme($artisans-primary, $artisans-accent, $artisans-warn);
+$artisans-primary: mat.define-palette($artisans-blue);
+$artisans-accent: mat.define-palette($artisans-orange);
+$artisans-warn: mat.define-palette(mat.$red-palette);
+$artisans-theme: mat.define-light-theme($artisans-primary, $artisans-accent, $artisans-warn);
 
-@include angular-material-theme($artisans-theme);
+@include mat.all-component-themes($artisans-theme);
 @include components-theme($artisans-theme);

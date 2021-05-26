@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 /**
  * For some rich text editor or for static text oriented front-office pages content
  */
@@ -50,10 +51,10 @@
     a.app-link {
         &:not(.mat-button-base):not(.no-style) {
             color: inherit;
-            border-bottom: 2px solid mat-color($primary);
+            border-bottom: 2px solid mat.get-color-from-palette($primary);
 
             &:hover {
-                color: mat-color($primary);
+                color: mat.get-color-from-palette($primary);
             }
         }
     }
@@ -62,13 +63,13 @@
     .rich-text.admin-editor {
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
-        background: mat-color(
+        background: mat.get-color-from-palette(
             $foreground,
             base,
             if(map-get($theme, is-dark), 0.1, 0.04)
         ); // match official mat-form-field component style
         padding: 10px 10px 0 10px;
-        border-bottom: 1px solid mat-color($foreground, base, 0.5);
+        border-bottom: 1px solid mat.get-color-from-palette($foreground, base, 0.5);
         font-size: 13px;
 
         .ql-editor {

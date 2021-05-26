@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @mixin products-page($theme) {
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
@@ -7,15 +8,15 @@
 
     app-products-page {
         .products.grid .product {
-            border-color: mat-color($primary) !important;
+            border-color: mat.get-color-from-palette($primary) !important;
         }
 
         .product-name {
-            color: mat-color($fg, base);
+            color: mat.get-color-from-palette($fg, base);
         }
 
         .product-tag {
-            color: mat-color($primary);
+            color: mat.get-color-from-palette($primary);
         }
     }
 }

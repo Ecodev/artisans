@@ -10,20 +10,20 @@ import {CartCollectionService} from '../services/cart-collection.service';
 describe('CartService', () => {
     let cart: Cart;
 
-    const product1 = ({
+    const product1 = {
         id: '1',
         pricePerUnitCHF: '10',
-    } as unknown) as Product['product'];
+    } as unknown as Product['product'];
 
-    const product2 = ({
+    const product2 = {
         id: '2',
         pricePerUnitCHF: '100',
-    } as unknown) as Product['product'];
+    } as unknown as Product['product'];
 
-    const product3 = ({
+    const product3 = {
         id: '3',
         pricePerUnitCHF: '1000',
-    } as unknown) as Product['product'];
+    } as unknown as Product['product'];
 
     beforeEach(() => {
         const cartCollectionService = new CartCollectionService(new NaturalMemoryStorage());
@@ -35,13 +35,13 @@ describe('CartService', () => {
     });
 
     it('should add to cart', () => {
-        expect(cart.productLines).toEqual([], 'cart to be empty');
+        expect(cart.productLines).withContext('cart to be empty').toEqual([]);
 
         cart.addProduct(product1, ProductType.paper, 1);
 
         const expectedCart = [{product: product1, quantity: 1, totalTaxInc: 10, type: ProductType.paper}] as CartLine[];
 
-        expect(cart.productLines).toEqual(expectedCart, 'cart have one product');
+        expect(cart.productLines).withContext('cart have one product').toEqual(expectedCart);
     });
 
     it('should addProduct quantity for existing product into cart', () => {
@@ -50,7 +50,7 @@ describe('CartService', () => {
 
         const expectedCart = [{product: product1, quantity: 2, totalTaxInc: 20, type: ProductType.paper}] as CartLine[];
 
-        expect(cart.productLines).toEqual(expectedCart, 'cart have one product');
+        expect(cart.productLines).withContext('cart have one product').toEqual(expectedCart);
         expect(cart.totalTaxInc).toEqual(20);
     });
 

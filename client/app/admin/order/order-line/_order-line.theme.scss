@@ -1,9 +1,10 @@
+@use '~@angular/material' as mat;
 @mixin order-line($theme) {
     $warn: map-get($theme, warn);
 
     app-order-line {
         .warning {
-            color: mat-color($warn);
+            color: mat.get-color-from-palette($warn);
         }
     }
 }

@@ -7,7 +7,7 @@
             [formControl]="amount"
             matInput
             type="number"
-            min="0"
+            [attr.min]="0"
             step="1"
             (keydown.enter)="dialogRef.close(amount.value)"
         />

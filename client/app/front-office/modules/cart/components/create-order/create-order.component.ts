@@ -66,8 +66,8 @@ export class CreateOrderComponent implements OnInit {
     public pending = false;
 
     constructor(
-        public cartService: CartService,
-        public alertService: NaturalAlertService,
+        public readonly cartService: CartService,
+        public readonly alertService: NaturalAlertService,
         public readonly router: Router,
         private readonly route: ActivatedRoute,
         public readonly userService: UserService,

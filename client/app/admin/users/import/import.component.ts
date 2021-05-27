@@ -42,7 +42,7 @@ export class ImportComponent implements OnInit {
     ]);
 
     constructor(
-        private route: ActivatedRoute,
+        private readonly route: ActivatedRoute,
         private readonly router: Router,
         public readonly permissionsService: PermissionsService,
         private readonly apollo: Apollo,

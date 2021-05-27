@@ -34,8 +34,8 @@ export class SessionsIncomingComponent implements OnInit {
     ];
 
     constructor(
-        private sessionService: SessionService,
-        public router: Router,
+        private readonly sessionService: SessionService,
+        public readonly router: Router,
         public readonly route: ActivatedRoute,
         public readonly userService: UserService,
         public readonly dialog: MatDialog,

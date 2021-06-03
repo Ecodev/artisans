@@ -10,12 +10,7 @@
         <div [formGroup]="shippingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
             <h1 class="mat-display-1">MÉTHODE DE PAIEMENT</h1>
 
-            <mat-radio-group
-                aria-label="Select an option"
-                formControlName="paymentMethod"
-                fxLayout="column"
-                fxLayoutGap="20px"
-            >
+            <mat-radio-group formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
                 <div class="payment-method">
                     <mat-radio-button [value]="PaymentMethod.datatrans">Paiement par carte de crédit</mat-radio-button>
                 </div>

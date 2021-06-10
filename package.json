@@ -6,7 +6,7 @@
         "ng": "ng",
         "prerequisite": "mkdir -p htdocs/ && cp -v server/index.php htdocs/ && yarn codegen",
         "dev": "yarn prerequisite && ng serve",
-        "prod": "yarn prerequisite && ng build && ng run artisans:server:production && rm -rf htdocs/ && mv -v data/tmp/build htdocs",
+        "prod": "yarn prerequisite && ng build && ng run artisans:server:production && find data/tmp/build -type f -not -name '*.gz' -exec gzip --keep --best {} \\; && rm -rf htdocs/ && mv -v data/tmp/build htdocs",
         "test": "yarn prerequisite && ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",

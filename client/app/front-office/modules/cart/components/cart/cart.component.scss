@@ -1,11 +1,11 @@
-@import '../../../../../../styles/responsive';
+@use '../../../../../../styles/responsive';
 
 :host {
     .cart-buttons .mat-flat-button[color] {
         min-width: 200px;
     }
 
-    @include responsive($lt-md) {
+    @include responsive.responsive(responsive.$lt-md) {
         .cart-buttons > * {
             min-width: 300px !important;
         }
@@ -16,7 +16,7 @@
         flex-direction: column;
 
         // Small
-        @include responsive($xs) {
+        @include responsive.responsive(responsive.$xs) {
             align-items: flex-start;
             margin-bottom: 30px;
 
@@ -26,7 +26,7 @@
         }
 
         // Large
-        @include responsive($gt-xs) {
+        @include responsive.responsive(responsive.$gt-xs) {
             flex-direction: row;
             align-items: center;
 

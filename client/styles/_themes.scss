@@ -4,54 +4,54 @@
  */
 // Import theming files full relative way or karma will display warning
 @use '~@angular/material' as mat;
-@import '~@ecodev/natural/theming/natural.theme';
-@import '../app/app.theme';
-@import 'rich-text';
-@import 'mixins';
-@import 'artisans.theme';
-@import '../app/shared/components/breadcrumbs/breadcrumbs.theme';
-@import '../app/shared/components/tags-navigation/tags-navigation.theme';
-@import '../app/admin/admin/admin.theme';
-@import '../app/admin/products/product/product.theme';
-@import '../app/admin/order/order-line/order-line.theme';
-@import '../app/profile/components/profile/profile.theme';
-@import '../app/profile/components/purchases/purchases.theme';
-@import '../app/front-office/components/homepage/homepage.theme';
-@import '../app/front-office/front-office.theme';
-@import '../app/front-office/components/menu/menu.theme';
-@import '../app/front-office/components/session-facilitator/session-facilitator.theme';
-@import '../app/front-office/components/session-facilitator-private/session-facilitator-private.theme';
-@import '../app/front-office/modules/shop/components/products-page/products-page.theme';
-@import '../app/front-office/modules/shop/components/product-page/product-page.theme';
-@import '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
-@import '../app/front-office/components/session-method/session-method.theme';
+@use '~@ecodev/natural/theming/natural.theme';
+@use '../app/app.theme';
+@use 'rich-text';
+@use 'mixins';
+@use 'artisans.theme';
+@use '../app/shared/components/breadcrumbs/breadcrumbs.theme';
+@use '../app/shared/components/tags-navigation/tags-navigation.theme';
+@use '../app/admin/admin/admin.theme';
+@use '../app/admin/products/product/product.theme';
+@use '../app/admin/order/order-line/order-line.theme';
+@use '../app/profile/components/profile/profile.theme';
+@use '../app/profile/components/purchases/purchases.theme';
+@use '../app/front-office/components/homepage/homepage.theme';
+@use '../app/front-office/front-office.theme';
+@use '../app/front-office/components/menu/menu.theme';
+@use '../app/front-office/components/session-facilitator/session-facilitator.theme';
+@use '../app/front-office/components/session-facilitator-private/session-facilitator-private.theme';
+@use '../app/front-office/modules/shop/components/products-page/products-page.theme';
+@use '../app/front-office/modules/shop/components/product-page/product-page.theme';
+@use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
+@use '../app/front-office/components/session-method/session-method.theme';
 
 // Include material core (only once !)
 @include mat.core();
 
 // Include components themes
 @mixin components-theme($theme) {
-    @include app($theme);
-    @include natural($theme);
-    @include artisans($theme);
-    @include page-header($theme);
-    @include product($theme);
-    @include rich-text($theme);
-    @include profile($theme);
-    @include homepage($theme);
-    @include front-office($theme);
-    @include products-page($theme);
-    @include product-page($theme);
-    @include tags-navigation($theme);
-    @include menu($theme);
-    @include breadcrumbs($theme);
-    @include order-line($theme);
-    @include subscriptions($theme);
-    @include purchases($theme);
-    @include session-facilitator($theme);
-    @include session-facilitator-private($theme);
-    @include session-method($theme);
-    @include admin($theme);
+    @include app.app($theme);
+    @include natural.natural($theme);
+    @include artisans.artisans($theme);
+    @include mixins.page-header($theme);
+    @include product.product($theme);
+    @include rich-text.rich-text($theme);
+    @include profile.profile($theme);
+    @include homepage.homepage($theme);
+    @include front-office.front-office($theme);
+    @include products-page.products-page($theme);
+    @include product-page.product-page($theme);
+    @include tags-navigation.tags-navigation($theme);
+    @include menu.menu($theme);
+    @include breadcrumbs.breadcrumbs($theme);
+    @include order-line.order-line($theme);
+    @include subscriptions.subscriptions($theme);
+    @include purchases.purchases($theme);
+    @include session-facilitator.session-facilitator($theme);
+    @include session-facilitator-private.session-facilitator-private($theme);
+    @include session-method.session-method($theme);
+    @include admin.admin($theme);
 }
 
 $artisans-blue: (

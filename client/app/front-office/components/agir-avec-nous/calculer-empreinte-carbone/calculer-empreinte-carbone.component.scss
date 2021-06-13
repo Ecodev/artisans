@@ -1,2 +1,2 @@
-@import '../../../../../styles/mixins';
-@include page-with-illustration();
+@use '../../../../../styles/mixins';
+@include mixins.page-with-illustration();

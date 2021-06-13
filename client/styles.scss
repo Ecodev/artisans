@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'app/shared/components/boot-loader/boot-loader.external';
-@import 'styles/responsive';
+@use 'app/shared/components/boot-loader/boot-loader.external';
+@use 'styles/responsive';
 
 body {
     margin: 0;

@@ -1,12 +1,13 @@
+@use "sass:map";
 @use '~@angular/material' as mat;
 /**
  * For some rich text editor or for static text oriented front-office pages content
  */
 @mixin rich-text($theme) {
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
-    $background: map-get($theme, background);
-    $foreground: map-get($theme, foreground);
+    $primary: map.get($theme, primary);
+    $accent: map.get($theme, accent);
+    $background: map.get($theme, background);
+    $foreground: map.get($theme, foreground);
 
     .rich-text {
         line-height: 1.6em;
@@ -66,7 +67,7 @@
         background: mat.get-color-from-palette(
             $foreground,
             base,
-            if(map-get($theme, is-dark), 0.1, 0.04)
+            if(map.get($theme, is-dark), 0.1, 0.04)
         ); // match official mat-form-field component style
         padding: 10px 10px 0 10px;
         border-bottom: 1px solid mat.get-color-from-palette($foreground, base, 0.5);

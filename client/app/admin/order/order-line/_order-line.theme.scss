@@ -1,6 +1,7 @@
+@use "sass:map";
 @use '~@angular/material' as mat;
 @mixin order-line($theme) {
-    $warn: map-get($theme, warn);
+    $warn: map.get($theme, warn);
 
     app-order-line {
         .warning {

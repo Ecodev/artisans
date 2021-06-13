@@ -1,15 +1,17 @@
+@use "sass:color";
+@use "sass:map";
 @use '~@angular/material' as mat;
 @mixin front-office($theme) {
-    $primary: map-get($theme, primary);
-    $accent: map-get($theme, accent);
-    $warn: map-get($theme, warn);
-    $bg: map-get($theme, background);
-    $fg: map-get($theme, foreground);
+    $primary: map.get($theme, primary);
+    $accent: map.get($theme, accent);
+    $warn: map.get($theme, warn);
+    $bg: map.get($theme, background);
+    $fg: map.get($theme, foreground);
 
     app-front-office {
         #header-top {
-            background: darken(mat.get-color-from-palette($bg, app-bar), 5%);
-            color: lighten(mat.get-color-from-palette($fg, text), 35%);
+            background: color.adjust(mat.get-color-from-palette($bg, app-bar), $lightness: -5%);
+            color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 35%);
         }
 
         #mobile-menu .mat-expansion-panel-body {
@@ -26,7 +28,7 @@
 
         #menu-main > ul {
             a {
-                color: lighten(mat.get-color-from-palette($fg, text), 20%);
+                color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 20%);
             }
 
             li:hover > a,

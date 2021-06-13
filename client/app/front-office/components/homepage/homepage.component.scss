@@ -1,5 +1,5 @@
-@import '../../../../styles/responsive';
-@import '../../../../styles/variables';
+@use '../../../../styles/responsive';
+@use '../../../../styles/variables';
 
 :host {
     margin-top: 0 !important; // overrides global top margin
@@ -10,7 +10,7 @@
 
     .splash-image,
     .la-revue-splash {
-        background-color: lighten($app-orange, 20%);
+        background-color: lighten(variables.$app-orange, 20%);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -19,7 +19,7 @@
     .splash-image {
         display: none;
 
-        @include responsive($gt-sm) {
+        @include responsive.responsive(responsive.$gt-sm) {
             display: block;
             height: 550px;
             margin-bottom: 0;
@@ -27,28 +27,28 @@
     }
 
     .introduction-blocs {
-        @include responsive($gt-sm) {
+        @include responsive.responsive(responsive.$gt-sm) {
             margin-top: -150px;
         }
 
-        @include responsive($lt-md) {
+        @include responsive.responsive(responsive.$lt-md) {
             padding-left: 50px;
             padding-right: 50px;
         }
 
         #bloc1 {
             color: white;
-            background: $app-orange;
+            background: variables.$app-orange;
         }
 
         #bloc2 {
             color: white;
-            background: $app-blue;
+            background: variables.$app-blue;
         }
 
         #bloc3 {
             color: white;
-            background: $app-green;
+            background: variables.$app-green;
         }
     }
 
@@ -86,7 +86,7 @@
     }
 
     .la-revue-splash {
-        @include responsive($gt-sm) {
+        @include responsive.responsive(responsive.$gt-sm) {
             height: 550px;
         }
 
@@ -107,7 +107,7 @@
             width: 365px;
             margin: auto;
 
-            @include responsive($gt-sm) {
+            @include responsive.responsive(responsive.$gt-sm) {
                 margin-top: -170px;
             }
         }
@@ -115,7 +115,7 @@
         .la-revue-body {
             padding: 30px 0 0 0;
 
-            @include responsive($gt-xs) {
+            @include responsive.responsive(responsive.$gt-xs) {
                 padding: 30px 0 0 30px;
             }
 
@@ -135,7 +135,7 @@
             display: flex;
             flex-direction: column;
             max-width: 350px;
-            @include responsive($lt-md) {
+            @include responsive.responsive(responsive.$lt-md) {
                 margin: auto;
             }
         }
@@ -143,7 +143,7 @@
         .support-image {
             width: 100%;
             padding-top: 80%;
-            background-color: lighten($app-orange, 20%);
+            background-color: lighten(variables.$app-orange, 20%);
             background-position: center;
             background-size: cover;
         }
@@ -166,17 +166,17 @@
 
         #support-column-1 {
             color: white;
-            background: $app-blue;
+            background: variables.$app-blue;
         }
 
         #support-column-2 {
             color: white;
-            background: $app-orange;
+            background: variables.$app-orange;
         }
 
         #support-column-3 {
             color: white;
-            background: $app-green;
+            background: variables.$app-green;
         }
     }
 }

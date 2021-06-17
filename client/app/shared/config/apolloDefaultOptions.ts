@@ -51,10 +51,7 @@ function createErrorLink(
  * This function will only be executed in Node environment, so we can access `process`
  */
 export function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloLink {
-    let hostname = process.cwd().split('/').pop() || 'dev.larevuedurable.com';
-    if (hostname === 'artisansdelatransition.org') {
-        hostname = 'www.artisansdelatransition.org';
-    }
+    const hostname = process.cwd().split('/').pop() || 'dev.larevuedurable.com';
 
     const options = {
         uri: 'https://' + hostname + '/graphql', // Must be absolute URL

@@ -12,7 +12,7 @@ module.exports = {
             './configuration',
         ],
         out_file: './logs/angular-universal-ssr.log',
-        max_memory_restart: '100M',
+        max_memory_restart: '500M',
         env: {
             NODE_ENV: 'development',
         },

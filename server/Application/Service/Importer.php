@@ -12,7 +12,7 @@ use Application\Repository\OrganizationRepository;
 use Doctrine\DBAL\Connection;
 use Ecodev\Felix\Api\Exception;
 use Ecodev\Felix\Api\ExceptionWithoutMailLogging;
-use Ecodev\Felix\Validator\DeliverableEmail;
+use Laminas\Validator\EmailAddress;
 use Throwable;
 
 /**
@@ -243,7 +243,7 @@ class Importer
 
     private function assertEmail(string $email): void
     {
-        $validator = new DeliverableEmail();
+        $validator = new EmailAddress();
         if (!$validator->isValid($email)) {
             $this->throw('Ce n\'est pas une addresse email valide : "' . $email . '"');
 

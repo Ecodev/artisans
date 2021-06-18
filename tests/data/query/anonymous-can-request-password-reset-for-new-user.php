@@ -9,7 +9,7 @@ use PHPUnit\Framework\Assert;
 return [
     [
         'query' => 'mutation {
-            requestPasswordReset(email: "administrator@example.com")
+            requestPasswordReset(email: "member@example.com")
         }',
     ],
     [
@@ -17,13 +17,18 @@ return [
             'requestPasswordReset' => true,
         ],
     ],
-    null,
+    function (Connection $connection): void {
+        $connection->executeStatement(
+            'UPDATE user SET password = "" WHERE email = :email',
+            ['email' => 'member@example.com']
+        );
+    },
     function (Connection $connection): void {
         $count = $connection->executeQuery(
             'SELECT COUNT(*) FROM message WHERE type = :type AND email = :email',
-            ['type' => MessageTypeType::RESET_PASSWORD, 'email' => 'administrator@example.com']
+            ['type' => MessageTypeType::REGISTER, 'email' => 'member@example.com']
         )->fetchOne();
 
-        Assert::assertSame('1', $count, 'should have sent 1 email to reset password');
+        Assert::assertSame('1', $count, 'should have sent 1 email to confirm registration');
     },
 ];

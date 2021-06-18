@@ -53,8 +53,15 @@ abstract class RequestPasswordReset implements FieldInterface
                 if ($user) {
                     $email = $user->getEmail();
 
-                    if ($email) {
+                    // If never had password, it means it was not confirmed yet
+                    $message = null;
+                    if (!$user->getPassword()) {
+                        $message = $messageQueuer->queueRegister($user);
+                    } elseif ($email) {
                         $message = $messageQueuer->queueResetPassword($user, $email);
+                    }
+
+                    if ($message) {
                         $mailer->sendMessageAsync($message);
                     }
                 }

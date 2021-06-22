@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateEvent,
     CreateEventVariables,
@@ -15,6 +15,7 @@ import {
     UpdateEventVariables,
 } from '../../../shared/generated-types';
 import {createEvent, deleteEvents, eventQuery, eventsQuery, updateEvent} from './event.queries';
+import {Validators} from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
@@ -45,6 +46,13 @@ export class EventService extends NaturalAbstractModelService<
             place: '',
             type: '',
             date: new Date(),
+        };
+    }
+
+    public getFormValidators(model?: Literal): FormValidators {
+        return {
+            name: [Validators.required],
+            date: [Validators.required],
         };
     }
 }

@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateNews,
     CreateNewsVariables,
@@ -16,6 +16,7 @@ import {
     UpdateNewsVariables,
 } from '../../../shared/generated-types';
 import {createNews, deleteNewses, newsesQuery, newsQuery, updateNews} from './news.queries';
+import {Validators} from '@angular/forms';
 
 @Injectable({
     providedIn: 'root',
@@ -52,6 +53,13 @@ export class NewsService extends NaturalAbstractModelService<
             description: '',
             content: '',
             date: new Date(),
+        };
+    }
+
+    public getFormValidators(model?: Literal): FormValidators {
+        return {
+            name: [Validators.required],
+            date: [Validators.required],
         };
     }
 }

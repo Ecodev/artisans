@@ -255,7 +255,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public ngAfterViewInit(): void {
         // First load
         if (this.route.snapshot.fragment) {
-            setTimeout(() => this.goToFragment(), 500);
+            setTimeout(() => this.goToFragment(), 1000);
         }
     }
 

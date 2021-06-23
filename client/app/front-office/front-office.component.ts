@@ -1,5 +1,5 @@
 import {DOCUMENT} from '@angular/common';
-import {Component, ElementRef, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {
@@ -23,7 +23,7 @@ import {MenuItem, NavigationService} from './services/navigation.service';
     styleUrls: ['./front-office.component.scss'],
     animations: [],
 })
-export class FrontOfficeComponent extends NaturalAbstractController implements OnInit {
+export class FrontOfficeComponent extends NaturalAbstractController implements OnInit, AfterViewInit {
     public searchTerm = '';
     public menuOpened = false;
 
@@ -246,13 +246,26 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         // Setup mobile menu with items from top menu that are missing on main menu
         this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];
 
+        // Further navigations
         this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-            this.navigationService.scrollToTop(this.route.snapshot.fragment!);
+            this.goToFragment();
         });
     }
 
+    public ngAfterViewInit(): void {
+        // First load
+        if (this.route.snapshot.fragment) {
+            setTimeout(() => this.goToFragment(), 500);
+        }
+    }
+
+    private goToFragment(): void {
+        this.navigationService.scrollToTop(this.route.snapshot.fragment!);
+    }
+
     /**
-     * To reuse some implemented mechanics, the search is just a redirection that converts the search string into a global natural search
+     * To reuse some implemented mechanics, the search is just a redirection that converts the search string into a
+     * global natural search
      */
     public search(): void {
         const search: NaturalSearchSelections = [

@@ -234,10 +234,8 @@ const routes: Routes = [
                     } as NaturalSeo,
                 },
             },
-
             {
                 path: 'desinvestir',
-
                 children: [
                     {
                         path: '',

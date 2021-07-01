@@ -36,7 +36,7 @@
         "@nguniversal/express-engine": "^12.0.0",
         "apollo": "^2.33.4",
         "apollo-angular": "^2.6.0",
-        "apollo-upload-client": "^15.0.0",
+        "apollo-upload-client": "^16.0.0",
         "crypto-es": "^1.2.7",
         "decimal.js": "^10.2.1",
         "express": "^4.17.1",

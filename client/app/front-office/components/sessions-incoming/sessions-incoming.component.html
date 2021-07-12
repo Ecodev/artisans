@@ -50,17 +50,6 @@
                 </p>
             </div>
 
-            <div class="frame-stroked-primary padding rich-text">
-                <h2 class="mat-h2 no-margin-top">Si vous êtes huit personnes intéressées</h2>
-                <p>
-                    Si vous êtes un petit groupe de personnes motivées ou si vous pensez pouvoir mobiliser autour de
-                    vous huit personnes pour suivre une Conversation carbone, vous pouvez prendre contact avec
-                    <a href="mailto:philippe.solms@artisansdelatransition.org"
-                        >philippe.solms@artisansdelatransition.org</a
-                    >
-                </p>
-            </div>
-
             <div *ngFor="let session of sessions">
                 <div class="mat-h2">{{ session.name }}</div>
                 <div class="rich-text" [innerHtml]="session.description"></div>

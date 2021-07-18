@@ -108,6 +108,8 @@
         },
         "no-restricted-globals": [
             true,
+            "atob",
+            "bota",
             "document",
             "event",
             "history",

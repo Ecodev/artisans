@@ -1,5 +1,9 @@
 <div [formGroup]="form" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'" fxLayout="column">
-    <div [fxLayout.gt-sm]="vertical ? 'column' : 'row'" [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'" fxLayout="row">
+    <div
+        [fxLayout.gt-sm]="vertical ? 'column' : 'row'"
+        [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'"
+        fxLayout="column"
+    >
         <mat-form-field fxFlex.gt-sm>
             <mat-label>Prénom</mat-label>
             <input (change)="update()" formControlName="firstName" matInput />

@@ -2,12 +2,13 @@
     *ngIf="cart"
     [fxShow]="!showConfirmationMessage"
     class="container"
-    fxLayout="row"
+    fxLayout="column"
+    fxLayout.gt-sm="row"
     fxLayoutGap="60px"
     fxLayoutAlign="start start"
 >
-    <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
-        <div [formGroup]="shippingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+    <div fxFlex.gt-sm fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+        <div [formGroup]="shippingForm" fxLayout="column" fxLayoutGap="60px" debug>
             <h1 class="mat-display-1">MÉTHODE DE PAIEMENT</h1>
 
             <mat-radio-group formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">

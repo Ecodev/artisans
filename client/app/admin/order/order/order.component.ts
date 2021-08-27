@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
     public UserRole = UserRole;
 
     constructor(
-        @Optional() @Inject(MAT_DIALOG_DATA) public readonly dialogData: NaturalDialogTriggerProvidedData,
+        @Optional() @Inject(MAT_DIALOG_DATA) public readonly dialogData: NaturalDialogTriggerProvidedData<never>,
         public readonly orderService: OrderService,
         public readonly alertService: NaturalAlertService,
     ) {

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData} from '@ecodev/natural';
+import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
 import {OrderComponent} from '../admin/order/order/order.component';
 import {OrderResolver} from '../admin/order/services/order.resolver';
 import {ViewerResolver} from '../admin/users/services/viewer.resolver';
@@ -9,7 +9,6 @@ import {AccountComponent} from './components/account/account.component';
 import {HistoryComponent} from './components/history/history.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {PurchasesComponent} from './components/purchases/purchases.component';
-import {NaturalSeo} from '@ecodev/natural';
 
 const routes: Routes = [
     {
@@ -44,7 +43,7 @@ const routes: Routes = [
                                     maxWidth: '95vw',
                                     maxHeight: '97vh',
                                 },
-                            } as NaturalDialogTriggerRoutingData,
+                            } as NaturalDialogTriggerRoutingData<OrderComponent, never>,
                         },
                     },
                 ],

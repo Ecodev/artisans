@@ -45,7 +45,7 @@ const orderDetails = [
                     maxWidth: '95vw',
                     maxHeight: '97vh',
                 },
-            } as NaturalDialogTriggerRoutingData,
+            } as NaturalDialogTriggerRoutingData<OrderComponent, never>,
             seo: {
                 title: 'Commande',
             } as NaturalSeo,
@@ -66,7 +66,7 @@ const orderDetails = [
                     maxHeight: '97vh',
                     autoFocus: false,
                 },
-            } as NaturalDialogTriggerRoutingData,
+            } as NaturalDialogTriggerRoutingData<OrderLineComponent, never>,
             seo: {
                 title: "Modification de la vente d'un produit",
             } as NaturalSeo,

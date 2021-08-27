@@ -17,7 +17,7 @@ export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> 
         public readonly productService: ProductService,
         public readonly subscriptionService: SubscriptionService,
         injector: Injector,
-        @Inject(MAT_DIALOG_DATA) private readonly dialogData: NaturalDialogTriggerProvidedData,
+        @Inject(MAT_DIALOG_DATA) private readonly dialogData: NaturalDialogTriggerProvidedData<never>,
     ) {
         super('orderLine', orderLineService, injector);
     }

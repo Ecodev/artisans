@@ -4,15 +4,15 @@ import {PageEvent} from '@angular/material/paginator';
 import {
     ExtractTall,
     ExtractVall,
+    Literal,
     NaturalAbstractList,
+    NaturalAbstractModelService,
     PaginatedData,
     PaginationInput,
     QueryVariables,
 } from '@ecodev/natural';
 import {defaults, isEqual, pick} from 'lodash-es';
 import {takeUntil} from 'rxjs/operators';
-import {NaturalAbstractModelService} from '@ecodev/natural/lib/services/abstract-model.service';
-import {Literal} from '@ecodev/natural/lib/types/types';
 
 @Directive()
 export class AbstractInfiniteLoadList<

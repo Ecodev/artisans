@@ -1,10 +1,9 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
+import {IEnum, NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
 import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
 import {UserResolve} from '../user';
-import {IEnum} from '@ecodev/natural/lib/services/enum.service';
 
 @Component({
     selector: 'app-user',

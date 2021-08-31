@@ -2,8 +2,6 @@
     <div fxLayout="column" fxLayoutGap="10px">
         <div fxLayout="row" fxLayoutGap="15px" class="mat-h3 text-light">
             <div>{{ data.model.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
-            <div>{{ data.model.place }}</div>
-            <div>{{ data.model.type }}</div>
         </div>
 
         <h1 class="mat-display-1 no-margin-bottom">
@@ -17,6 +15,11 @@
                 <natural-icon name="edit"></natural-icon>
             </a>
         </h1>
+
+        <div fxLayout="column" fxLayoutGap="20px">
+            <div class="mat-body-2">{{ data.model.type }}</div>
+            <div class="mat-h2">{{ data.model.place }}</div>
+        </div>
     </div>
 
     <div fxLayout="column" fxLayoutGap="30px">

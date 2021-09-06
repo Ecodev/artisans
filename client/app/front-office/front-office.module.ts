@@ -6,6 +6,7 @@ import {ProfileModule} from '../profile/profile.module';
 import {ArtisansModule} from '../shared/modules/artisans.module';
 import {MaterialModule} from '../shared/modules/material.module';
 import {AperoDivestComponent} from './components/agir-avec-nous/apero-divest/apero-divest.component';
+import {CircuitsCourtsComponent} from './components/circuits-courts/circuits-courts.component';
 import {CommentListComponent} from './components/comment-list/comment-list.component';
 import {DonationComponent} from './components/donation/donation.component';
 import {EventPageComponent} from './components/event-page/event-page.component';
@@ -88,6 +89,7 @@ import {SessionFacilitatorPrivateComponent} from './components/session-facilitat
         LegalMentionsComponent,
         ConditionsGeneralesVenteComponent,
         SessionFacilitatorPrivateComponent,
+        CircuitsCourtsComponent,
     ],
     imports: [
         CommonModule,

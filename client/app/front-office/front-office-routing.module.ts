@@ -24,6 +24,7 @@ import {ComiteStatusComponent} from './components/association/comite-status/comi
 import {ConvictionsComponent} from './components/association/convictions/convictions.component';
 import {PartenariatsComponent} from './components/association/partenariats/partenariats.component';
 import {QuiSommesNousComponent} from './components/association/qui-sommes-nous/qui-sommes-nous.component';
+import {CircuitsCourtsComponent} from './components/circuits-courts/circuits-courts.component';
 import {ConditionsGeneralesVenteComponent} from './components/conditions-generales-vente/conditions-generales-vente.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {EventPageComponent} from './components/event-page/event-page.component';
@@ -142,6 +143,15 @@ const routes: Routes = [
                 },
             },
         ],
+    },
+    {
+        path: 'alimentation',
+        component: CircuitsCourtsComponent,
+        data: {
+            seo: {
+                title: 'Construire ensemble des circuits courts',
+            } as NaturalSeo,
+        },
     },
     {
         path: 'agir-avec-nous',

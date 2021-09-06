@@ -267,6 +267,12 @@ class Importer
             return;
         }
 
+        if (preg_match('~^\|~', $pattern) || preg_match('~\|$~', $pattern)) {
+            $this->throw('L\'expression régulière ne peut pas commencer ou terminer par `|`, car c\'est trop dangeureux: "' . $pattern . '"');
+
+            return;
+        }
+
         if (array_key_exists($pattern, $this->seenPatterns)) {
             $this->throw('Le pattern "' . $pattern . '" est dupliqué et a déjà été vu à la ligne ' . $this->seenPatterns[$pattern]);
 

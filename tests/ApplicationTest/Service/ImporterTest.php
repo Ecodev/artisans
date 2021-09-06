@@ -30,6 +30,12 @@ class ImporterTest extends TestCase
         $this->import('tests/data/importer/invalid-pattern.csv');
     }
 
+    public function testInvalidPatternEnding(): void
+    {
+        $this->expectErrorMessage('A la ligne 1 : L\'expression régulière ne peut pas commencer ou terminer par `|`, car c\'est trop dangeureux: "foo|"');
+        $this->import('tests/data/importer/invalid-pattern-ending.csv');
+    }
+
     public function testInvalidEmpty(): void
     {
         $this->expectErrorMessage('A la ligne 1 : Il faut soit un email, soit un pattern, mais aucun existe');

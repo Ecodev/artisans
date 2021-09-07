@@ -107,8 +107,8 @@ class Importer
             fclose($file);
         }
 
-        $totalUsers = (int) $this->connection->fetchColumn('SELECT COUNT(*) FROM user');
-        $totalOrganizations = (int) $this->connection->fetchColumn('SELECT COUNT(*) FROM organization');
+        $totalUsers = (int) $this->connection->fetchOne('SELECT COUNT(*) FROM user');
+        $totalOrganizations = (int) $this->connection->fetchOne('SELECT COUNT(*) FROM organization');
 
         $time = round(microtime(true) - $start, 1);
 
@@ -125,7 +125,7 @@ class Importer
 
     private function fetchReviews(): void
     {
-        $records = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL');
+        $records = $this->connection->fetchAllAssociative('SELECT id, review_number FROM product WHERE review_number IS NOT NULL');
 
         $this->reviewByNumber = [];
         foreach ($records as $r) {
@@ -135,13 +135,13 @@ class Importer
 
     private function fetchLastReview(): void
     {
-        $records = $this->connection->fetchAll('SELECT id, review_number FROM product WHERE review_number IS NOT NULL AND is_active = 1 ORDER BY review_number DESC LIMIT 1');
+        $records = $this->connection->fetchAllAssociative('SELECT id, review_number FROM product WHERE review_number IS NOT NULL AND is_active = 1 ORDER BY review_number DESC LIMIT 1');
         $this->lastReview = (int) $records[0]['review_number'];
     }
 
     private function fetchCountries(): void
     {
-        $records = $this->connection->fetchAll('SELECT id, LOWER(name) AS name FROM country');
+        $records = $this->connection->fetchAllAssociative('SELECT id, LOWER(name) AS name FROM country');
 
         $this->countryByName = [];
         foreach ($records as $r) {
@@ -349,7 +349,7 @@ class Importer
     private function deleteOldOrganizations(): void
     {
         $sql = 'DELETE FROM organization WHERE should_delete';
-        $this->deletedOrganizations += $this->connection->executeUpdate($sql);
+        $this->deletedOrganizations += $this->connection->executeStatement($sql);
     }
 
     private function readMembership($membership): string
@@ -440,7 +440,7 @@ class Importer
                             updater_id = VALUES(creator_id),
                             update_date = NOW()';
 
-        $this->connection->executeUpdate($sql, $this->usersParams);
+        $this->connection->executeStatement($sql, $this->usersParams);
     }
 
     private function updateOrganization(...$args): void
@@ -471,13 +471,13 @@ class Importer
                         should_delete = VALUES(should_delete),
                         update_date = NOW()';
 
-        $this->connection->executeUpdate($sql, $this->organizationsParams);
+        $this->connection->executeStatement($sql, $this->organizationsParams);
     }
 
     private function markToDelete(): void
     {
-        $this->connection->executeUpdate('UPDATE user SET should_delete = 1');
-        $this->connection->executeUpdate('UPDATE organization SET should_delete = 1');
+        $this->connection->executeStatement('UPDATE user SET should_delete = 1');
+        $this->connection->executeStatement('UPDATE organization SET should_delete = 1');
     }
 
     /**

@@ -36,7 +36,7 @@ class OrganizationRepositoryTest extends AbstractRepositoryTest
         // Assert each user
         foreach ($users as $email => $data) {
             $sql = 'SELECT subscription_last_review_id, subscription_type FROM user WHERE user.email = :email';
-            $actual = $connection->fetchAssoc($sql, ['email' => $email]);
+            $actual = $connection->fetchAssociative($sql, ['email' => $email]);
 
             self::assertEquals($data[1], $actual);
         }

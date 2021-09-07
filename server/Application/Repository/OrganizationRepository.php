@@ -40,6 +40,6 @@ class OrganizationRepository extends AbstractRepository
             'digital' => ProductTypeType::DIGITAL,
         ];
 
-        $connection->executeUpdate($sqlUpgrade, $params);
+        $connection->executeStatement($sqlUpgrade, $params);
     }
 }

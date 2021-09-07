@@ -342,7 +342,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
     private function assertShouldDeleteUserCount(int $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();
-        $actual = (int) $connection->fetchColumn('SELECT COUNT(*) FROM user WHERE should_delete');
+        $actual = (int) $connection->fetchOne('SELECT COUNT(*) FROM user WHERE should_delete');
 
         self::assertSame($expected, $actual);
     }
@@ -350,7 +350,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
     private function assertUser(array $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();
-        $actual = $connection->fetchAssoc('SELECT email, subscription_type, subscription_last_review_id, membership, first_name, last_name, street, postcode, locality, country_id, phone, web_temporary_access, password FROM user WHERE email = ?', [$expected['email']]);
+        $actual = $connection->fetchAssociative('SELECT email, subscription_type, subscription_last_review_id, membership, first_name, last_name, street, postcode, locality, country_id, phone, web_temporary_access, password FROM user WHERE email = ?', [$expected['email']]);
 
         self::assertSame($expected, $actual);
     }
@@ -358,7 +358,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
     private function assertOrganization(array $expected): void
     {
         $connection = $this->getEntityManager()->getConnection();
-        $actual = $connection->fetchAssoc('SELECT pattern, subscription_last_review_id FROM organization WHERE pattern = ?', [$expected['pattern']]);
+        $actual = $connection->fetchAssociative('SELECT pattern, subscription_last_review_id FROM organization WHERE pattern = ?', [$expected['pattern']]);
 
         self::assertSame($expected, $actual);
     }

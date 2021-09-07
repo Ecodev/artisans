@@ -37,7 +37,7 @@ class ProductRepository extends AbstractRepository implements LimitedAccessSubQu
 
         if ($count) {
             $connection = $this->getEntityManager()->getConnection();
-            $connection->executeUpdate('UPDATE ' . $this->getClassMetadata()->getTableName() . ' SET sorting = FLOOR(1 + RAND() * ?)', [$count]);
+            $connection->executeStatement('UPDATE ' . $this->getClassMetadata()->getTableName() . ' SET sorting = FLOOR(1 + RAND() * ?)', [$count]);
         }
     }
 

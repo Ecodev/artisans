@@ -27,6 +27,6 @@ abstract class AbstractRepository extends EntityRepository
             ->select('COUNT(*)')
             ->from($connection->quoteIdentifier($this->getClassMetadata()->getTableName()));
 
-        return (int) $query->execute()->fetchColumn();
+        return (int) $query->execute()->fetchOne();
     }
 }

@@ -120,7 +120,7 @@ class DatatransHandlerTest extends TestCase
         $orderId = $data['refno'] ?? null;
         if ($orderId) {
             $expectedStatus = $expectedViewModel['message']['status'] === 'success' || $orderId === '16002' ? Order::STATUS_VALIDATED : Order::STATUS_PENDING;
-            $actualStatus = _em()->getConnection()->fetchColumn('SELECT status FROM `order` WHERE id = ' . $orderId);
+            $actualStatus = _em()->getConnection()->fetchOne('SELECT status FROM `order` WHERE id = ' . $orderId);
             self::assertSame($expectedStatus, $actualStatus);
         }
 

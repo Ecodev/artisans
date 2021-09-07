@@ -58,7 +58,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         // Make one image usable
         $this->getEntityManager()->getConnection()->update('product', ['image_id' => null], ['image_id' => 5007]);
-        $this->getEntityManager()->getConnection()->exec('REPLACE INTO image (id, filename, width, height) VALUES(5999, \'foo.svg\', 113, 86);');
+        $this->getEntityManager()->getConnection()->executeStatement('REPLACE INTO image (id, filename, width, height) VALUES(5999, \'foo.svg\', 113, 86);');
 
         $paths = [
             'data/images/train.jpg',
@@ -73,7 +73,7 @@ class ImageRepositoryTest extends AbstractRepositoryTest
 
         // Image that will be orphaned must exist in DB
         $imageToBeOrphanedQuery = 'SELECT COUNT(*) FROM image WHERE id = 5000';
-        self::assertSame('1', $this->getEntityManager()->getConnection()->fetchColumn($imageToBeOrphanedQuery));
+        self::assertSame('1', $this->getEntityManager()->getConnection()->fetchOne($imageToBeOrphanedQuery));
 
         // Affect existing image to an existing product
         $product = $this->getEntityManager()->find(Product::class, 3000);
@@ -95,6 +95,6 @@ class ImageRepositoryTest extends AbstractRepositoryTest
         }
 
         // Orphaned image was deleted from DB
-        self::assertSame('0', $this->getEntityManager()->getConnection()->fetchColumn($imageToBeOrphanedQuery));
+        self::assertSame('0', $this->getEntityManager()->getConnection()->fetchOne($imageToBeOrphanedQuery));
     }
 }

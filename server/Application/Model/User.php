@@ -28,6 +28,9 @@ use GraphQL\Doctrine\Annotation as API;
  * @ORM\AssociationOverrides({
  *     @ORM\AssociationOverride(name="owner", inversedBy="users")
  * })
+ * @API\Filters({
+ *     @API\Filter(field="custom", operator="Application\Api\Input\Operator\RegexpOperatorType", type="string"),
+ * })
  */
 class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {

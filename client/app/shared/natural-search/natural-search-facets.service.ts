@@ -4,6 +4,7 @@ import {
     FlagFacet,
     NaturalEnumService,
     NaturalSearchFacets,
+    replaceOperatorByName,
     TypeDateComponent,
     TypeDateConfiguration,
     TypeNaturalSelectComponent,
@@ -118,6 +119,13 @@ export class NaturalSearchFacetsService {
                 field: 'shouldDelete',
                 condition: {equal: {value: true}} as UserFilterGroupConditionShouldDelete,
             } as FlagFacet,
+            {
+                display: 'Liste de bénéficiaires',
+                field: 'custom',
+                component: TypeTextComponent,
+                name: 'regexp',
+                transform: replaceOperatorByName,
+            } as DropdownFacet<TypeTextComponent>,
             this.firstName,
             this.lastName,
             {

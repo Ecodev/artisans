@@ -50,6 +50,7 @@ return [
                     'if' => \DoctrineExtensions\Query\Mysql\IfElse::class,
                     'ifnull' => \DoctrineExtensions\Query\Mysql\IfNull::class,
                     'find_in_set' => \DoctrineExtensions\Query\Mysql\FindInSet::class,
+                    'regexp' => \DoctrineExtensions\Query\Mysql\Regexp::class,
                 ],
                 'numeric_functions' => [],
             ],

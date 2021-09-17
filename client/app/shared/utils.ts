@@ -1,7 +1,7 @@
-import Decimal from 'decimal.js';
+import Big from 'big.js';
 
 export function moneyRoundUp(amount: number): number {
-    return Math.ceil(+Decimal.mul(amount, 100)) / 100;
+    return Math.ceil(+Big(amount).times(100)) / 100;
 }
 
 /**

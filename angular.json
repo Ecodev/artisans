@@ -41,7 +41,7 @@
                         ],
                         "styles": ["client/styles/_themes.scss", "client/styles.scss"],
                         "scripts": [],
-                        "allowedCommonJsDependencies": ["decimal.js", "striptags", "zen-observable"]
+                        "allowedCommonJsDependencies": ["striptags", "zen-observable"]
                     },
                     "configurations": {
                         "production": {

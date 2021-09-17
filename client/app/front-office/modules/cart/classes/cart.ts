@@ -1,4 +1,4 @@
-import Decimal from 'decimal.js';
+import Big from 'big.js';
 import {
     Product_product,
     Products_products_items,
@@ -75,18 +75,12 @@ export class Cart {
         return this._id;
     }
 
-    private getPriceTaxInc(
-        product: {pricePerUnitCHF: Decimal.Value; pricePerUnitEUR: Decimal.Value},
-        quantity: number,
-    ): number {
-        const quantifiedPrice = Decimal.mul(this.getPriceByCurrency(product), quantity);
+    private getPriceTaxInc(product: {pricePerUnitCHF: Big; pricePerUnitEUR: Big}, quantity: number): number {
+        const quantifiedPrice = Big(this.getPriceByCurrency(product)).times(quantity);
         return moneyRoundUp(+quantifiedPrice);
     }
 
-    private getPriceByCurrency(product: {
-        pricePerUnitCHF: Decimal.Value;
-        pricePerUnitEUR: Decimal.Value;
-    }): Decimal.Value {
+    private getPriceByCurrency(product: {pricePerUnitCHF: Big; pricePerUnitEUR: Big}): Big {
         const currency = this.cartCollectionService.currency;
         if (currency === Currency.CHF) {
             return product.pricePerUnitCHF;

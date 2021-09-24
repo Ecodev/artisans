@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {formatIsoDateTime, NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
@@ -74,7 +74,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
                         conditions: [
                             {locality: {in: {values: [session.locality]}}},
                             {id: {in: {values: [session.id], not: true}}},
-                            {startDate: {greaterOrEqual: {value: new Date()}}},
+                            {startDate: {greaterOrEqual: {value: formatIsoDateTime(new Date())}}},
                         ],
                     },
                 ],

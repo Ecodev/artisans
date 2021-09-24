@@ -31,7 +31,7 @@ export class FilesService extends NaturalAbstractModelService<
 
     protected getDefaultForServer(): FileInput {
         return {
-            file: '',
+            file: null as unknown as File,
         };
     }
 }

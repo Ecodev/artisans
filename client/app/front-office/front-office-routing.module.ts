@@ -10,7 +10,7 @@ import {
     NewsSortingField,
     SortingOrder,
 } from '../shared/generated-types';
-import {NaturalSeo} from '@ecodev/natural';
+import {formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
 import {FacilitatorGuard} from '../shared/guards/facilitator.guard';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
@@ -58,7 +58,7 @@ const routes: Routes = [
         data: {
             seo: {title: 'Agenda'} as NaturalSeo,
             forcedVariables: {
-                filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: new Date()}}}]}]},
+                filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: formatIsoDateTime(new Date())}}}]}]},
                 sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
             } as EventsVariables,
         },
@@ -77,7 +77,7 @@ const routes: Routes = [
         data: {
             seo: {title: 'Actualités'} as NaturalSeo,
             forcedVariables: {
-                filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
+                filter: {groups: [{conditions: [{date: {less: {value: formatIsoDateTime(new Date())}}}]}]},
                 sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
             } as NewsesVariables,
         },

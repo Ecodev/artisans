@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NaturalAlertService, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {formatIsoDateTime, NaturalAlertService, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
@@ -48,7 +48,7 @@ export class SessionsIncomingComponent implements OnInit {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
 
         qvm.set('variables', {
-            filter: {groups: [{conditions: [{startDate: {greater: {value: new Date()}}}]}]},
+            filter: {groups: [{conditions: [{startDate: {greater: {value: formatIsoDateTime(new Date())}}}]}]},
             pagination: {pageIndex: 0, pageSize: 999},
             sorting: [{field: SessionSortingField.name, order: SortingOrder.ASC}],
         });

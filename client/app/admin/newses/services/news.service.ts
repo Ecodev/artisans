@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {formatIsoDateTime, FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateNews,
     CreateNewsVariables,
@@ -52,7 +52,7 @@ export class NewsService extends NaturalAbstractModelService<
             name: '',
             description: '',
             content: '',
-            date: new Date(),
+            date: formatIsoDateTime(new Date()),
         };
     }
 

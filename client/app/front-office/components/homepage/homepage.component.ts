@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {NaturalQueryVariablesManager} from '@ecodev/natural';
+import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
@@ -64,7 +64,7 @@ export class HomepageComponent implements OnInit {
         // News
         const qvmNews = new NaturalQueryVariablesManager<NewsesVariables>();
         qvmNews.set('variables', {
-            filter: {groups: [{conditions: [{date: {less: {value: new Date()}}}]}]},
+            filter: {groups: [{conditions: [{date: {less: {value: formatIsoDateTime(new Date())}}}]}]},
             pagination: {pageSize: 3, pageIndex: 0},
             sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
         });
@@ -73,7 +73,7 @@ export class HomepageComponent implements OnInit {
         // Events
         const qvmEvents = new NaturalQueryVariablesManager<EventsVariables>();
         qvmEvents.set('variables', {
-            filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: new Date()}}}]}]},
+            filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: formatIsoDateTime(new Date())}}}]}]},
             pagination: {pageSize: 5, pageIndex: 0},
             sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
         });
@@ -88,7 +88,7 @@ export class HomepageComponent implements OnInit {
                         conditions: [
                             {
                                 reviewNumber: {null: {not: true}},
-                                releaseDate: {lessOrEqual: {value: new Date()}},
+                                releaseDate: {lessOrEqual: {value: formatIsoDateTime(new Date())}},
                                 isActive: {equal: {value: true}},
                             },
                         ],

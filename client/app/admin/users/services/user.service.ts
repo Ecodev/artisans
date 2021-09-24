@@ -384,7 +384,7 @@ export class UserService
 
     protected getDefaultForServer(): UserInput {
         return {
-            email: null,
+            email: '',
             firstName: '',
             lastName: '',
             street: '',

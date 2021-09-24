@@ -76,7 +76,7 @@ export class CartService {
                 quantity: 1,
                 type: ProductType.digital,
                 isCHF: isCHF,
-                pricePerUnit: cart.donationAmount,
+                pricePerUnit: cart.donationAmount.toFixed(2),
             });
         }
 

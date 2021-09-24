@@ -1,4 +1,4 @@
-import Big from 'big.js';
+import Big, {BigSource} from 'big.js';
 import {
     Product_product,
     Products_products_items,
@@ -75,17 +75,20 @@ export class Cart {
         return this._id;
     }
 
-    private getPriceTaxInc(product: {pricePerUnitCHF: Big; pricePerUnitEUR: Big}, quantity: number): number {
+    private getPriceTaxInc(
+        product: {pricePerUnitCHF: BigSource; pricePerUnitEUR: BigSource},
+        quantity: number,
+    ): number {
         const quantifiedPrice = Big(this.getPriceByCurrency(product)).times(quantity);
-        return moneyRoundUp(+quantifiedPrice);
+        return moneyRoundUp(quantifiedPrice);
     }
 
-    private getPriceByCurrency(product: {pricePerUnitCHF: Big; pricePerUnitEUR: Big}): Big {
+    private getPriceByCurrency(product: {pricePerUnitCHF: BigSource; pricePerUnitEUR: BigSource}): Big {
         const currency = this.cartCollectionService.currency;
         if (currency === Currency.CHF) {
-            return product.pricePerUnitCHF;
+            return Big(product.pricePerUnitCHF);
         } else if (currency === Currency.EUR) {
-            return product.pricePerUnitEUR;
+            return Big(product.pricePerUnitEUR);
         }
 
         throw new Error('Unsupported currency: ' + currency);

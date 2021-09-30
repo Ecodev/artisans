@@ -58,6 +58,8 @@
                 </p>
             </div>
 
+            <h2 *ngIf="sessions?.length" class="mat-h1 no-margin-top">Sessions agendées</h2>
+
             <div *ngFor="let session of sessions">
                 <div class="mat-h2">{{ session.name }}</div>
                 <div class="rich-text" [innerHtml]="session.description"></div>
@@ -86,7 +88,7 @@
                         rêves et ses cauchemars. Il rend difficile de penser concrètement à ce que nous voulons et à ce
                         qui est envisageable dans un avenir sobre en carbone.&nbsp;"
                     </p>
-                    <p>Facilitation Conversations carbone Artisans de la trandition&Rosemary Randall</p>
+                    <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
                 </div>
             </div>
         </div>

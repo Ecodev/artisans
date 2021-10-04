@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
-use Application\DBAL\Types\ProductTypeType;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
 use Application\Model\OrderLine;
@@ -183,26 +182,5 @@ class Invoicer
         }
 
         return $pricePerUnit;
-    }
-
-    /**
-     * Create temporary users to give them immediate access to web,
-     * until their access is confirmed permanently via a CSV import
-     */
-    private function createTemporaryUsers(OrderLine $orderLine): void
-    {
-        $isDigital = $orderLine->getSubscription() && ProductTypeType::includesDigital($orderLine->getSubscription()->getType());
-
-        foreach ($orderLine->getAdditionalEmails() as $email) {
-            $user = $this->userRepository->getOrCreate($email);
-
-            if ($isDigital) {
-                $user->setWebTemporaryAccess(true);
-            }
-        }
-
-        if ($isDigital && $orderLine->getOwner()) {
-            $orderLine->getOwner()->setWebTemporaryAccess(true);
-        }
     }
 }

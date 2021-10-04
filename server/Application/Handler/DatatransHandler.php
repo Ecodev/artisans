@@ -17,8 +17,6 @@ use Ecodev\Felix\Service\Mailer;
 use Exception;
 use Laminas\Diactoros\Response\HtmlResponse;
 use Mezzio\Template\TemplateRendererInterface;
-use Money\Currencies\ISOCurrencies;
-use Money\Formatter\DecimalMoneyFormatter;
 use Money\Money;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -188,8 +186,10 @@ class DatatransHandler extends AbstractHandler
         }
 
         // Actually validate
-        $order->setStatus(Order::STATUS_VALIDATED);
-        $order->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
+        $orderRepository->getAclFilter()->runWithoutAcl(function () use ($order, $body): void {
+            $order->setStatus(Order::STATUS_VALIDATED);
+            $order->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
+        });
 
         $this->entityManager->flush();
 

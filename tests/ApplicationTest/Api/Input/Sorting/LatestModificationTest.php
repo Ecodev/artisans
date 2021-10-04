@@ -23,6 +23,7 @@ class LatestModificationTest extends AbstractSorting
 
         $result = $this->getSortedQueryResult(_types(), Order::class, 'latestModification');
         self::assertSame([
+            16004,
             16000,
         ], $result);
     }

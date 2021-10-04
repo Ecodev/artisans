@@ -47,7 +47,6 @@ class DatatransHandlerTest extends TestCase
 
         $entityManager = $container->get(EntityManager::class);
         $messageRenderer = $container->get(MessageRenderer::class);
-        $config = $container->get('config');
 
         $messageQueuer = new MessageQueuer(
             $entityManager,
@@ -89,7 +88,7 @@ class DatatransHandlerTest extends TestCase
     /**
      * @dataProvider providerProcess
      */
-    public function testProcess(?array $data, array $expectedViewModel): void
+    public function testProcess(?array $data, array $expectedViewModel, bool $expectedWebTemporaryAccess): void
     {
         // Message always include input data
         $expectedViewModel['message']['detail'] = $data ?? [];
@@ -122,6 +121,9 @@ class DatatransHandlerTest extends TestCase
             $expectedStatus = $expectedViewModel['message']['status'] === 'success' || $orderId === '16002' ? Order::STATUS_VALIDATED : Order::STATUS_PENDING;
             $actualStatus = _em()->getConnection()->fetchOne('SELECT status FROM `order` WHERE id = ' . $orderId);
             self::assertSame($expectedStatus, $actualStatus);
+
+            $actualWebTemporaryAccess = _em()->getConnection()->fetchOne('SELECT web_temporary_access FROM `user` INNER JOIN `order` ON `user`.id = `order`.owner_id WHERE `order`.id = ' . $orderId);
+            self::assertEquals($expectedWebTemporaryAccess ? '1' : '0', $actualWebTemporaryAccess);
         }
 
         self::assertTrue(true); // Workaround when we only assert via mock
@@ -146,6 +148,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Payment was successful',
                     ],
                 ],
+                false,
             ],
             'invalid HMAC signature' => [
                 [
@@ -163,6 +166,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Invalid HMAC signature',
                     ],
                 ],
+                false,
             ],
             'missing HMAC signature' => [
                 [
@@ -179,6 +183,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Missing HMAC signature',
                     ],
                 ],
+                false,
             ],
             'error' => [
                 [
@@ -194,6 +199,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
                     ],
                 ],
+                false,
             ],
             'cancel' => [
                 [
@@ -208,6 +214,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Cancelled',
                     ],
                 ],
+                false,
             ],
             'invalid body' => [
                 null,
@@ -217,6 +224,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Parsed body is expected to be an array but got: NULL',
                     ],
                 ],
+                false,
             ],
             'invalid status' => [
                 [
@@ -234,6 +242,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Unsupported status in Datatrans data: non-existing-status',
                     ],
                 ],
+                false,
             ],
             'non-existing order' => [
                 [
@@ -250,6 +259,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Cannot validate an order without a valid order ID',
                     ],
                 ],
+                false,
             ],
             'non-existing amount' => [
                 [
@@ -266,6 +276,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Cannot validate an order without an amount',
                     ],
                 ],
+                false,
             ],
             'invalid currency' => [
                 [
@@ -283,6 +294,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Can only accept payment in CHF or EUR, but got: USD',
                     ],
                 ],
+                false,
             ],
             'incorrect amount' => [
                 [
@@ -300,6 +312,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Cannot validate an order with incorrect balance. Expected 10.00 CHF, or 0.00 EUR, but got: 11.11 CHF',
                     ],
                 ],
+                false,
             ],
             'incorrect payment method' => [
                 [
@@ -317,6 +330,7 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Cannot validate an order whose payment method is: ebanking',
                     ],
                 ],
+                false,
             ],
             'incorrect status' => [
                 [
@@ -334,6 +348,25 @@ class DatatransHandlerTest extends TestCase
                         'message' => 'Cannot validate an order which is already validated',
                     ],
                 ],
+                false,
+            ],
+            'validating numeric subscription will give webTemporaryAccess' => [
+                [
+                    'uppTransactionId' => '123456789012345678',
+                    'status' => 'success',
+                    'refno' => '16004',
+                    'amount' => '8000',
+                    'currency' => 'CHF',
+                    'responseMessage' => 'Payment was successful',
+                    'sign' => 'a54523b461058df8d61cdbe2328bcd161bae411ec9e6206bbf4da773e3c88493',
+                ],
+                [
+                    'message' => [
+                        'status' => 'success',
+                        'message' => 'Payment was successful',
+                    ],
+                ],
+                true,
             ],
         ];
     }

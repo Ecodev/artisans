@@ -1,4 +1,4 @@
-@use "sass:map";
+@use 'sass:map';
 @mixin product($theme) {
     $primary: map.get($theme, primary);
     $accent: map.get($theme, accent);

@@ -1,5 +1,5 @@
-@use "sass:color";
-@use "sass:map";
+@use 'sass:color';
+@use 'sass:map';
 @use '~@angular/material' as mat;
 @mixin menu($theme) {
     $primary: map.get($theme, primary);

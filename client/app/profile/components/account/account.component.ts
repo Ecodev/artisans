@@ -30,12 +30,12 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
     }
 
     public requestPasswordReset(): void {
-        this.userService.requestPasswordReset(this.form.get('email')?.value).subscribe(
-            () => {
+        this.userService.requestPasswordReset(this.form.get('email')?.value).subscribe({
+            next: () => {
                 this.passwordMailSending = false;
                 this.alertService.info('Un email avec des instructions a été envoyé', 6000);
             },
-            () => (this.passwordMailSending = false),
-        );
+            error: () => (this.passwordMailSending = false),
+        });
     }
 }

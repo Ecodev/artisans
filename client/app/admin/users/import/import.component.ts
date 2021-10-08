@@ -88,8 +88,8 @@ export class ImportComponent implements OnInit {
                     file: file,
                 },
             })
-            .subscribe(
-                result => {
+            .subscribe({
+                next: result => {
                     this.importing = false;
 
                     this.result = result.data!.import;
@@ -103,12 +103,12 @@ export class ImportComponent implements OnInit {
                     });
                     this.userService.getAll(qvm).subscribe(users => (this.users = users.items));
                 },
-                error => {
+                error: error => {
                     const message = error.message.replace(/^GraphQL error: /, '');
                     this.errors = message.split('\n');
                     this.importing = false;
                 },
-            );
+            });
     }
 
     public deleteAll(): void {

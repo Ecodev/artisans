@@ -28,8 +28,8 @@ export class RequestPasswordResetComponent {
         ifValid(this.form).subscribe(() => {
             this.sending = true;
 
-            this.userService.requestPasswordReset(this.form.value.email).subscribe(
-                () => {
+            this.userService.requestPasswordReset(this.form.value.email).subscribe({
+                next: () => {
                     this.sending = false;
 
                     const message = 'Un email avec des instructions a été envoyé';
@@ -37,8 +37,8 @@ export class RequestPasswordResetComponent {
                     this.alertService.info(message, 5000);
                     this.router.navigate(['/login']);
                 },
-                () => (this.sending = false),
-            );
+                error: () => (this.sending = false),
+            });
         });
     }
 }

@@ -81,8 +81,8 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
                     input: input,
                 },
             })
-            .subscribe(
-                () => {
+            .subscribe({
+                next: () => {
                     this.sending = false;
 
                     const message =
@@ -91,7 +91,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
                     this.alertService.info(message, 5000);
                     this.router.navigate(['/mon-compte']);
                 },
-                () => (this.sending = false),
-            );
+                error: () => (this.sending = false),
+            });
     }
 }

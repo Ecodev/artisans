@@ -55,8 +55,8 @@ export class RegisterComponent implements OnInit {
                 mutation: mutation,
                 variables: this.form.value,
             })
-            .subscribe(
-                () => {
+            .subscribe({
+                next: () => {
                     this.sending = false;
 
                     const message = 'Un email avec des instructions a été envoyé';
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
                     this.alertService.info(message, 5000);
                     this.router.navigate(['/login']);
                 },
-                () => (this.sending = false),
-            );
+                error: () => (this.sending = false),
+            });
     }
 }

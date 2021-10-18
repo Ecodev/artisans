@@ -1,7 +1,7 @@
 <div class="container" fxLayout="column" fxLayoutGap="30px">
     <div fxLayout="column" fxLayoutGap="10px">
         <div fxLayout="row" fxLayoutGap="15px" class="mat-h3 text-light">
-            <div>{{ data.model.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
+            <div>{{ data.model.date | date: 'EEEE d MMMM yyyy':'UTC+1' | capitalize }}</div>
         </div>
 
         <h1 class="mat-display-1 no-margin-bottom">

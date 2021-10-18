@@ -48,7 +48,7 @@
             <div class="mat-h2">Les autres sessions à {{ data.model.locality | lowercase }}</div>
             <div *ngFor="let session of otherSessions">
                 <a [routerLink]="['../', session.id]" class="mat-body-strong">{{ session.name }}</a>
-                <div>à partir du {{ session.startDate | date: 'EEE d MMMM y' }}</div>
+                <div>à partir du {{ session.startDate | date: 'EEE d MMMM y':'UTC+1' }}</div>
             </div>
         </div>
     </div>

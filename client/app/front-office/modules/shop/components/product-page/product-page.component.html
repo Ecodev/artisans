@@ -15,7 +15,7 @@
 
                 <!-- Release date -->
                 <div class="mat-h2 text-light no-margin-bottom" *ngIf="data.model.releaseDate">
-                    {{ data.model.releaseDate | date: 'MMMM yyyy' | capitalize }}
+                    {{ data.model.releaseDate | date: 'MMMM yyyy':'UTC+1' | capitalize }}
                 </div>
 
                 <a
@@ -108,7 +108,7 @@
                 <span class="text-primary">N° {{ data.model.review.reviewNumber }}</span>
                 {{ data.model.review.name }}
             </a>
-            <span class="text-light">{{ data.model.review.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
+            <span class="text-light">{{ data.model.review.releaseDate | date: 'MMMM yyyy':'UTC+1' | capitalize }}</span>
         </div>
     </section>
 

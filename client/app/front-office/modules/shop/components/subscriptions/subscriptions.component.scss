@@ -1,48 +1,46 @@
-:host {
-    .content {
-        max-width: 600px;
+.content {
+    max-width: 600px;
+}
+
+.subscription {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: center;
+    padding: 30px;
+
+    &.popular {
+        padding: 20px;
     }
 
-    .subscription {
+    & > *:not(:last-child) {
+        margin-bottom: 40px;
+    }
+
+    & > *:not(.mat-h1) {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        flex: 1;
-        text-align: center;
-        padding: 30px;
+        align-items: center;
+    }
 
-        &.popular {
-            padding: 20px;
+    .title {
+        height: 64px;
+    }
+
+    .buy-zone {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+
+        app-price {
+            font-size: 30px;
         }
 
         & > *:not(:last-child) {
-            margin-bottom: 40px;
-        }
-
-        & > *:not(.mat-h1) {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .title {
-            height: 64px;
-        }
-
-        .buy-zone {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-end;
-
-            app-price {
-                font-size: 30px;
-            }
-
-            & > *:not(:last-child) {
-                margin-bottom: 14px;
-            }
+            margin-bottom: 14px;
         }
     }
 }

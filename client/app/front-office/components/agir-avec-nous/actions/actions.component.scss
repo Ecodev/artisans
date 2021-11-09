@@ -1,13 +1,11 @@
 @use '../../../../../styles/mixins';
 @include mixins.page-with-illustration();
 
-:host {
-    .page-illustration {
-        height: 500px;
-    }
+.page-illustration {
+    height: 500px;
+}
 
-    #introduction {
-        position: relative;
-        top: -100px;
-    }
+#introduction {
+    position: relative;
+    top: -100px;
 }

@@ -7,176 +7,176 @@
     & > :not(:last-child) {
         margin-bottom: 150px;
     }
+}
 
-    .splash-image,
-    .la-revue-splash {
-        background-color: lighten(variables.$app-orange, 20%);
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+.splash-image,
+.la-revue-splash {
+    background-color: lighten(variables.$app-orange, 20%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.splash-image {
+    display: none;
+
+    @include responsive.responsive(responsive.$gt-sm) {
+        display: block;
+        height: 550px;
+        margin-bottom: 0;
+    }
+}
+
+.introduction-blocs {
+    @include responsive.responsive(responsive.$gt-sm) {
+        margin-top: -150px;
     }
 
-    .splash-image {
-        display: none;
-
-        @include responsive.responsive(responsive.$gt-sm) {
-            display: block;
-            height: 550px;
-            margin-bottom: 0;
-        }
+    @include responsive.responsive(responsive.$lt-md) {
+        padding-left: 50px;
+        padding-right: 50px;
     }
 
-    .introduction-blocs {
-        @include responsive.responsive(responsive.$gt-sm) {
-            margin-top: -150px;
-        }
+    #bloc1 {
+        color: white;
+        background: variables.$app-orange;
+    }
 
-        @include responsive.responsive(responsive.$lt-md) {
-            padding-left: 50px;
-            padding-right: 50px;
-        }
+    #bloc2 {
+        color: white;
+        background: variables.$app-blue;
+    }
 
-        #bloc1 {
-            color: white;
-            background: variables.$app-orange;
-        }
+    #bloc3 {
+        color: white;
+        background: variables.$app-green;
+    }
+}
 
-        #bloc2 {
-            color: white;
-            background: variables.$app-blue;
-        }
+.section-logo {
+    max-width: 100%;
+    width: 390px;
+}
 
-        #bloc3 {
-            color: white;
-            background: variables.$app-green;
+.section {
+    .section-introduction {
+        max-width: 50vw;
+        text-align: center;
+        margin: auto;
+
+        .mat-display-2 {
+            margin-bottom: 30px;
         }
+    }
+}
+
+.news,
+.event {
+    a {
+        margin-bottom: 10px;
+    }
+}
+
+.newses,
+.events {
+    padding: 10px;
+
+    .section-title {
+        margin-bottom: 20px;
+    }
+}
+
+.la-revue-splash {
+    @include responsive.responsive(responsive.$gt-sm) {
+        height: 550px;
+    }
+
+    margin-bottom: 0;
+
+    .mat-display-3 {
+        padding-top: 120px;
     }
 
     .section-logo {
-        max-width: 100%;
-        width: 390px;
+        margin-top: 40px;
+    }
+}
+
+.la-revue.section {
+    .last-product-thumbnail {
+        height: 475px;
+        width: 365px;
+        margin: auto;
+
+        @include responsive.responsive(responsive.$gt-sm) {
+            margin-top: -170px;
+        }
     }
 
-    .section {
-        .section-introduction {
-            max-width: 50vw;
-            text-align: center;
+    .la-revue-body {
+        padding: 30px 0 0 0;
+
+        @include responsive.responsive(responsive.$gt-xs) {
+            padding: 30px 0 0 30px;
+        }
+
+        .mat-display-1 {
+            min-height: 120px;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.support.section {
+    .mat-h1 {
+        min-height: 64px;
+    }
+
+    .support-column {
+        display: flex;
+        flex-direction: column;
+        max-width: 350px;
+        @include responsive.responsive(responsive.$lt-md) {
             margin: auto;
-
-            .mat-display-2 {
-                margin-bottom: 30px;
-            }
         }
     }
 
-    .news,
-    .event {
-        a {
-            margin-bottom: 10px;
-        }
+    .support-image {
+        width: 100%;
+        padding-top: 80%;
+        background-color: lighten(variables.$app-orange, 20%);
+        background-position: center;
+        background-size: cover;
     }
 
-    .newses,
-    .events {
-        padding: 10px;
+    .support-column-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
 
-        .section-title {
+        & > :not(:last-child) {
             margin-bottom: 20px;
         }
     }
 
-    .la-revue-splash {
-        @include responsive.responsive(responsive.$gt-sm) {
-            height: 550px;
-        }
-
-        margin-bottom: 0;
-
-        .mat-display-3 {
-            padding-top: 120px;
-        }
-
-        .section-logo {
-            margin-top: 40px;
-        }
+    .support-column-content {
+        flex: 1;
     }
 
-    .la-revue.section {
-        .last-product-thumbnail {
-            height: 475px;
-            width: 365px;
-            margin: auto;
-
-            @include responsive.responsive(responsive.$gt-sm) {
-                margin-top: -170px;
-            }
-        }
-
-        .la-revue-body {
-            padding: 30px 0 0 0;
-
-            @include responsive.responsive(responsive.$gt-xs) {
-                padding: 30px 0 0 30px;
-            }
-
-            .mat-display-1 {
-                min-height: 120px;
-                margin-bottom: 0;
-            }
-        }
+    #support-column-1 {
+        color: white;
+        background: variables.$app-blue;
     }
 
-    .support.section {
-        .mat-h1 {
-            min-height: 64px;
-        }
+    #support-column-2 {
+        color: white;
+        background: variables.$app-orange;
+    }
 
-        .support-column {
-            display: flex;
-            flex-direction: column;
-            max-width: 350px;
-            @include responsive.responsive(responsive.$lt-md) {
-                margin: auto;
-            }
-        }
-
-        .support-image {
-            width: 100%;
-            padding-top: 80%;
-            background-color: lighten(variables.$app-orange, 20%);
-            background-position: center;
-            background-size: cover;
-        }
-
-        .support-column-body {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 20px;
-
-            & > :not(:last-child) {
-                margin-bottom: 20px;
-            }
-        }
-
-        .support-column-content {
-            flex: 1;
-        }
-
-        #support-column-1 {
-            color: white;
-            background: variables.$app-blue;
-        }
-
-        #support-column-2 {
-            color: white;
-            background: variables.$app-orange;
-        }
-
-        #support-column-3 {
-            color: white;
-            background: variables.$app-green;
-        }
+    #support-column-3 {
+        color: white;
+        background: variables.$app-green;
     }
 }

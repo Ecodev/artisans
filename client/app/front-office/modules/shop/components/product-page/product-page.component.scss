@@ -1,52 +1,52 @@
 :host {
     margin-top: 0 !important; // override default and generalized top margin
+}
 
-    .frame {
-        padding: 30px;
+.frame {
+    padding: 30px;
+}
+
+.body {
+    margin-top: 40px;
+}
+
+#title-prefix {
+    margin-bottom: 10px !important;
+}
+
+.product-image {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+
+    img {
+        max-width: 100%;
+    }
+}
+
+.review {
+    a {
+        font-weight: bold;
     }
 
-    .body {
-        margin-top: 40px;
+    img {
+        max-width: 100%;
     }
+}
 
-    #title-prefix {
-        margin-bottom: 10px !important;
-    }
+.show-products-of-review-button {
+    padding: 5px 10px;
+}
 
-    .product-image {
-        display: block;
-        width: 100%;
-        margin-top: 50px;
+.illustration {
+    height: 350px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 
-        img {
-            max-width: 100%;
-        }
-    }
-
-    .review {
-        a {
-            font-weight: bold;
-        }
-
-        img {
-            max-width: 100%;
-        }
-    }
-
-    .show-products-of-review-button {
-        padding: 5px 10px;
-    }
-
-    .illustration {
-        height: 350px;
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-    }
-
-    @media screen and (min-width: 700px) {
-        .description {
-            max-width: 66%;
-        }
+@media screen and (min-width: 700px) {
+    .description {
+        max-width: 66%;
     }
 }

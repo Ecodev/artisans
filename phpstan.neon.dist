@@ -18,7 +18,9 @@ parameters:
         -
             message: '~^If condition is always true\.$~'
             path: server/Application/Model/OrderLine.php
+        - '~^Property Application\\Model\\AbstractModel\:\:\$id is never written, only read\.$~'
 
 includes:
+    - phpstan-baseline.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-doctrine/rules.neon

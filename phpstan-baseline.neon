@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Property Application\\\\Model\\\\Organization\\:\\:\\$pattern is never read, only written\\.$#"
+			count: 1
+			path: server/Application/Model/Organization.php
+
+		-
+			message: "#^Property Application\\\\Model\\\\Product\\:\\:\\$sorting is never read, only written\\.$#"
+			count: 1
+			path: server/Application/Model/Product.php
+
+		-
+			message: "#^Property Application\\\\Model\\\\User\\:\\:\\$users is never read, only written\\.$#"
+			count: 1
+			path: server/Application/Model/User.php
+

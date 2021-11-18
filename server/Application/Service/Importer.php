@@ -297,7 +297,7 @@ class Importer
             return null;
         }
 
-        if ($reviewNumber && !preg_match('~^\d+$~', $reviewNumber)) {
+        if (!preg_match('~^\d+$~', $reviewNumber)) {
             $this->throw('Un numéro de revue doit être entièrement numérique, mais est : "' . $reviewNumber . '"');
 
             return null;

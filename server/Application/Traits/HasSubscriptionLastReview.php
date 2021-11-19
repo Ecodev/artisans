@@ -22,7 +22,7 @@ trait HasSubscriptionLastReview
     private $subscriptionLastReview;
 
     /**
-     * Get last review number available through a subscription, bypassing all ACL so it also work even if review is not active yet
+     * Get last review number available through a subscription, bypassing all ACL so it also work even if review is not active yet.
      */
     public function getSubscriptionLastReviewNumber(): ?int
     {
@@ -33,7 +33,7 @@ trait HasSubscriptionLastReview
     }
 
     /**
-     * Set last review available through a subscription
+     * Set last review available through a subscription.
      *
      * @API\Exclude
      */

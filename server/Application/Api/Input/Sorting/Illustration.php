@@ -10,7 +10,7 @@ use GraphQL\Doctrine\Factory\UniqueNameFactory;
 use GraphQL\Doctrine\Sorting\SortingInterface;
 
 /**
- * Sort product with an illustration first
+ * Sort product with an illustration first.
  */
 class Illustration implements SortingInterface
 {

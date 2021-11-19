@@ -32,7 +32,7 @@ trait HasBalance
     private $balanceEUR;
 
     /**
-     * Set balance
+     * Set balance.
      *
      * @API\Input(type="CHF")
      */
@@ -50,7 +50,7 @@ trait HasBalance
     }
 
     /**
-     * Set balance
+     * Set balance.
      *
      * @API\Input(type="EUR")
      */
@@ -78,7 +78,7 @@ trait HasBalance
     }
 
     /**
-     * Returns the non-zero balance formatted as string
+     * Returns the non-zero balance formatted as string.
      */
     public function getFormattedBalance(): string
     {

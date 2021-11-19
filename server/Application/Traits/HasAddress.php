@@ -50,7 +50,7 @@ trait HasAddress
     private $country;
 
     /**
-     * Set first name
+     * Set first name.
      *
      * @param string $firstName
      */
@@ -60,7 +60,7 @@ trait HasAddress
     }
 
     /**
-     * Get first name
+     * Get first name.
      */
     public function getFirstName(): string
     {
@@ -68,7 +68,7 @@ trait HasAddress
     }
 
     /**
-     * Set last name
+     * Set last name.
      *
      * @param string $lastName
      */
@@ -78,7 +78,7 @@ trait HasAddress
     }
 
     /**
-     * Get last name
+     * Get last name.
      */
     public function getLastName(): string
     {

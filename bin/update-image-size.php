@@ -2,7 +2,7 @@
 <?php
 
 /**
- * A script to update image size data in DB from file on disk
+ * A script to update image size data in DB from file on disk.
  */
 use Application\Model\Image;
 use Application\Repository\ImageRepository;

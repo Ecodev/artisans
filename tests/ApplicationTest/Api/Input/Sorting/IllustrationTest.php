@@ -12,9 +12,7 @@ class IllustrationTest extends AbstractSorting
 {
     public function testSorting(): void
     {
-        $result = _em()->getRepository(User::class)->getAclFilter()->runWithoutAcl(function () {
-            return $this->getSortedQueryResult(_types(), Product::class, 'illustration');
-        });
+        $result = _em()->getRepository(User::class)->getAclFilter()->runWithoutAcl(fn () => $this->getSortedQueryResult(_types(), Product::class, 'illustration'));
 
         self::assertSame([
             3000,

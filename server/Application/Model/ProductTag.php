@@ -20,8 +20,8 @@ use Ecodev\Felix\Model\Traits\HasName;
  */
 class ProductTag extends AbstractModel
 {
-    use HasName;
     use HasColor;
+    use HasName;
 
     /**
      * @var Collection<Product>
@@ -30,7 +30,7 @@ class ProductTag extends AbstractModel
     private $products;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -43,7 +43,7 @@ class ProductTag extends AbstractModel
     }
 
     /**
-     * Add product
+     * Add product.
      */
     public function addProduct(Product $product): void
     {
@@ -54,7 +54,7 @@ class ProductTag extends AbstractModel
     }
 
     /**
-     * Remove product
+     * Remove product.
      */
     public function removeProduct(Product $product): void
     {

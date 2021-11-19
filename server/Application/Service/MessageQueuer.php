@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Service\MessageRenderer;
 
 /**
- * Service to queue new message for pre-defined purposes
+ * Service to queue new message for pre-defined purposes.
  */
 class MessageQueuer
 {
@@ -54,7 +54,7 @@ class MessageQueuer
     }
 
     /**
-     * Queue a reset password email to specified user
+     * Queue a reset password email to specified user.
      *
      * @param User $user The user for which a password reset will be done
      * @param string $email the address to send the email to. Might be different than the user's email
@@ -158,7 +158,7 @@ class MessageQueuer
     }
 
     /**
-     * Get all admin emails to notify
+     * Get all admin emails to notify.
      */
     public function getAllEmailsToNotify(): array
     {
@@ -166,7 +166,7 @@ class MessageQueuer
     }
 
     /**
-     * Create a message by rendering the template
+     * Create a message by rendering the template.
      */
     private function createMessage(?User $user, string $email, string $subject, string $type, array $mailParams): Message
     {

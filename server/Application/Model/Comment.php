@@ -8,7 +8,7 @@ use Application\Traits\HasRichTextDescription;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * A comment
+ * A comment.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\CommentRepository")
  */
@@ -27,7 +27,7 @@ class Comment extends AbstractModel
     private $event;
 
     /**
-     * Set event
+     * Set event.
      */
     public function setEvent(?Event $event): void
     {
@@ -43,7 +43,7 @@ class Comment extends AbstractModel
     }
 
     /**
-     * Get event
+     * Get event.
      */
     public function getEvent(): ?Event
     {
@@ -61,7 +61,7 @@ class Comment extends AbstractModel
     private $news;
 
     /**
-     * Set news
+     * Set news.
      */
     public function setNews(?News $news): void
     {
@@ -77,7 +77,7 @@ class Comment extends AbstractModel
     }
 
     /**
-     * Get news
+     * Get news.
      */
     public function getNews(): ?News
     {
@@ -85,7 +85,7 @@ class Comment extends AbstractModel
     }
 
     /**
-     * Get owner name
+     * Get owner name.
      */
     public function getAuthorName(): string
     {

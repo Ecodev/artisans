@@ -2,7 +2,7 @@
 <?php
 
 /**
- * Script to test the most important nginx rules
+ * Script to test the most important nginx rules.
  */
 function run(string $cmd): string
 {

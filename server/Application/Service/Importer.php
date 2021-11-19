@@ -482,7 +482,7 @@ class Importer
     }
 
     /**
-     * To upper without any accent
+     * To upper without any accent.
      */
     private function toUpper(string $name): string
     {

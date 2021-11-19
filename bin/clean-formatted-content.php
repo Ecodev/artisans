@@ -2,7 +2,7 @@
 <?php
 
 /**
- * A script to clean product formatted content in DB
+ * A script to clean product formatted content in DB.
  */
 use Application\Model\Product;
 use Application\Utility;

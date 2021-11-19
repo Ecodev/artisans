@@ -15,7 +15,7 @@ use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
 /**
- * An order made by a users
+ * An order made by a users.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
@@ -49,7 +49,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     private $paymentMethod;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $status status for new order
      */
@@ -63,7 +63,7 @@ class Order extends AbstractModel implements HasBalanceInterface
 
     /**
      * Notify when a order line is added
-     * This should only be called by OrderLine::setOrder()
+     * This should only be called by OrderLine::setOrder().
      */
     public function orderLineAdded(OrderLine $orderLine): void
     {
@@ -72,7 +72,7 @@ class Order extends AbstractModel implements HasBalanceInterface
 
     /**
      * Notify when a order line is removed
-     * This should only be called by OrderLine::setOrder()
+     * This should only be called by OrderLine::setOrder().
      */
     public function orderLineRemoved(OrderLine $orderLine): void
     {
@@ -125,7 +125,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Return whether there is at least one subscription in the order
+     * Return whether there is at least one subscription in the order.
      *
      * @API\Exclude
      */

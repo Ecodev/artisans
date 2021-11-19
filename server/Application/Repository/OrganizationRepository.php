@@ -9,7 +9,7 @@ use Application\DBAL\Types\ProductTypeType;
 class OrganizationRepository extends AbstractRepository
 {
     /**
-     * Apply the organizations accesses to all users
+     * Apply the organizations accesses to all users.
      *
      * - If a user email matches the org pattern and the org access is better, then user will get the org access
      * - If many organizations match then only the best one is used

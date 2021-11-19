@@ -8,7 +8,7 @@ use Application\Model\AbstractModel;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Class AbstractRepository
+ * Class AbstractRepository.
  *
  * @method null|AbstractModel findOneById(integer $id)
  */
@@ -17,7 +17,7 @@ abstract class AbstractRepository extends EntityRepository
     use \Ecodev\Felix\Repository\Traits\Repository;
 
     /**
-     * Count the total number of objects
+     * Count the total number of objects.
      */
     public function getCount(): int
     {

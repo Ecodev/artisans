@@ -14,12 +14,12 @@ use Money\Money;
 use ReflectionClass;
 
 /**
- * Provide easy way to build standard fields to query and mutate objects
+ * Provide easy way to build standard fields to query and mutate objects.
  */
 abstract class Standard
 {
     /**
-     * Returns standard fields to query the object
+     * Returns standard fields to query the object.
      */
     public static function buildQuery(string $class): array
     {
@@ -77,7 +77,7 @@ abstract class Standard
     }
 
     /**
-     * Returns standard fields to mutate the object
+     * Returns standard fields to mutate the object.
      */
     public static function buildMutation(string $class): array
     {
@@ -158,7 +158,7 @@ abstract class Standard
     }
 
     /**
-     * Returns standard mutations to manage many-to-many relations between two given class
+     * Returns standard mutations to manage many-to-many relations between two given class.
      *
      * @param string $ownerClass The class owning the relation
      * @param string $otherClass The other class, not-owning the relation
@@ -194,8 +194,8 @@ abstract class Standard
             [
                 'name' => 'link' . $ownerName . $otherName,
                 'type' => Type::nonNull(_types()->getOutput($ownerClass)),
-                'description' => 'Create a relation between ' . $ownerName . ' and ' . $otherClassName . $semantic . '.' . PHP_EOL . PHP_EOL .
-                    'If the relation already exists, it will have no effect.',
+                'description' => 'Create a relation between ' . $ownerName . ' and ' . $otherClassName . $semantic . '.' . PHP_EOL . PHP_EOL
+                    . 'If the relation already exists, it will have no effect.',
                 'args' => $args,
                 'resolve' => function ($root, array $args) use ($lowerOwnerName, $lowerOtherName, $otherName): AbstractModel {
                     $owner = $args[$lowerOwnerName]->getEntity();
@@ -215,8 +215,8 @@ abstract class Standard
             [
                 'name' => 'unlink' . $ownerName . $otherName,
                 'type' => Type::nonNull(_types()->getOutput($ownerClass)),
-                'description' => 'Delete a relation between ' . $ownerName . ' and ' . $otherClassName . $semantic . '.' . PHP_EOL . PHP_EOL .
-                    'If the relation does not exist, it will have no effect.',
+                'description' => 'Delete a relation between ' . $ownerName . ' and ' . $otherClassName . $semantic . '.' . PHP_EOL . PHP_EOL
+                    . 'If the relation does not exist, it will have no effect.',
                 'args' => $args,
                 'resolve' => function ($root, array $args) use ($lowerOwnerName, $lowerOtherName, $otherName): AbstractModel {
                     $owner = $args[$lowerOwnerName]->getEntity();
@@ -239,7 +239,7 @@ abstract class Standard
     }
 
     /**
-     * Returns the plural form of the given name
+     * Returns the plural form of the given name.
      */
     private static function makePlural(string $name): string
     {
@@ -251,7 +251,7 @@ abstract class Standard
     }
 
     /**
-     * Return arguments used for the list
+     * Return arguments used for the list.
      */
     private static function getListArguments(ClassMetadata $class): array
     {
@@ -273,7 +273,7 @@ abstract class Standard
     }
 
     /**
-     * Return arguments used for single item
+     * Return arguments used for single item.
      */
     private static function getSingleArguments(string $class): array
     {
@@ -285,7 +285,7 @@ abstract class Standard
     }
 
     /**
-     * Get default sorting values with some fallback for some special cases
+     * Get default sorting values with some fallback for some special cases.
      */
     private static function getDefaultSorting(ClassMetadata $metadata): array
     {
@@ -304,7 +304,7 @@ abstract class Standard
 
     /**
      * Recursively convert custom scalars that don't implement __toString() to their scalar
-     * representation to injected back into DQL/SQL
+     * representation to injected back into DQL/SQL.
      */
     private static function customTypesToScalar(array $args): array
     {

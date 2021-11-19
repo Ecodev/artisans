@@ -28,7 +28,7 @@ trait HasAutomaticBalance
     private $balanceEUR;
 
     /**
-     * Get total balance
+     * Get total balance.
      *
      * Read only, computed by SQL triggers
      *
@@ -40,7 +40,7 @@ trait HasAutomaticBalance
     }
 
     /**
-     * Get total balance
+     * Get total balance.
      *
      * Read only, computed by SQL triggers
      *
@@ -52,7 +52,7 @@ trait HasAutomaticBalance
     }
 
     /**
-     * Returns the non-zero balance formatted as string
+     * Returns the non-zero balance formatted as string.
      */
     public function getFormattedBalance(): string
     {

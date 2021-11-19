@@ -15,19 +15,19 @@ use Ecodev\Felix\Model\Traits\HasName;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A single line in the shopping cart when making an order
+ * A single line in the shopping cart when making an order.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderLineRepository")
  */
 class OrderLine extends AbstractModel implements HasBalanceInterface
 {
-    use HasName;
-    use HasQuantity;
     use HasBalance;
+    use HasName;
     use HasProductType;
+    use HasQuantity;
 
     /**
-     * Additional emails for subscription for a company
+     * Additional emails for subscription for a company.
      *
      * @var string[]
      * @ORM\Column(type="json", options={"default" = "[]"})
@@ -65,7 +65,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     private $subscription;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -90,7 +90,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Get related product, if it still exists in DB
+     * Get related product, if it still exists in DB.
      */
     public function getProduct(): ?Product
     {
@@ -98,7 +98,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Set related product
+     * Set related product.
      */
     public function setProduct(?Product $product): void
     {
@@ -110,7 +110,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Get related subscription, if it still exists in DB
+     * Get related subscription, if it still exists in DB.
      */
     public function getSubscription(): ?Subscription
     {
@@ -118,7 +118,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Set related subscription
+     * Set related subscription.
      */
     public function setSubscription(?Subscription $subscription): void
     {
@@ -138,7 +138,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Additional emails for subscription for a company
+     * Additional emails for subscription for a company.
      *
      * @return string[]
      */
@@ -148,7 +148,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Additional emails for subscription for a company
+     * Additional emails for subscription for a company.
      *
      * @param string[] $additionalEmails
      */
@@ -159,7 +159,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
 
     /**
      * Create temporary users to give them immediate access to web,
-     * until their access is confirmed permanently via a CSV import
+     * until their access is confirmed permanently via a CSV import.
      */
     public function maybeGiveTemporaryAccess(): void
     {

@@ -8,7 +8,7 @@ use Application\Model\User;
 use Ecodev\Felix\Testing\Traits\TestWithTransaction;
 
 /**
- * Allow to run test within a database transaction, so database will be unchanged after test
+ * Allow to run test within a database transaction, so database will be unchanged after test.
  */
 trait TestWithTransactionAndUser
 {
@@ -18,7 +18,7 @@ trait TestWithTransactionAndUser
     }
 
     /**
-     * Start transaction
+     * Start transaction.
      */
     protected function setUp(): void
     {
@@ -27,7 +27,7 @@ trait TestWithTransactionAndUser
     }
 
     /**
-     * Cancel transaction, to undo all changes made
+     * Cancel transaction, to undo all changes made.
      */
     protected function tearDown(): void
     {

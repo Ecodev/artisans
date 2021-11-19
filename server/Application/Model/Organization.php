@@ -9,7 +9,7 @@ use Application\Traits\IsImportable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * An organization
+ * An organization.
  *
  * The sole purpose of an organization is to define a pattern that can match email address.
  * When a user is created with a matching email, then he will inherit access from that organization.
@@ -28,7 +28,7 @@ class Organization extends AbstractModel
     use IsImportable;
 
     /**
-     * A regexp pattern that match email address
+     * A regexp pattern that match email address.
      *
      * @var string
      * @ORM\Column(type="text")

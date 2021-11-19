@@ -13,15 +13,15 @@ use Ecodev\Felix\Model\Traits\HasInternalRemarks;
 use Ecodev\Felix\Model\Traits\HasName;
 
 /**
- * A session that a human can physically go to
+ * A session that a human can physically go to.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\SessionRepository")
  */
 class Session extends AbstractModel
 {
+    use HasInternalRemarks;
     use HasName;
     use HasRichTextDescription;
-    use HasInternalRemarks;
 
     /**
      * @var string
@@ -66,7 +66,7 @@ class Session extends AbstractModel
     private $availability = '';
 
     /**
-     * Used for display
+     * Used for display.
      *
      * @var string[]
      *
@@ -75,7 +75,7 @@ class Session extends AbstractModel
     private $dates = [];
 
     /**
-     * Used for filter + sorting. Represents the first date
+     * Used for filter + sorting. Represents the first date.
      *
      * @var Date
      *
@@ -84,7 +84,7 @@ class Session extends AbstractModel
     private $startDate;
 
     /**
-     * Used for filter + sorting. Represents the first date
+     * Used for filter + sorting. Represents the first date.
      *
      * @var Date
      *
@@ -99,7 +99,7 @@ class Session extends AbstractModel
     private $facilitators;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -167,7 +167,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * List of dates
+     * List of dates.
      *
      * @return string[]
      */
@@ -177,7 +177,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * List of dates
+     * List of dates.
      *
      * @param string[] $dates
      */
@@ -212,7 +212,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * Add facilitator
+     * Add facilitator.
      */
     public function addFacilitator(User $facilitator): void
     {
@@ -223,7 +223,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * Remove facilitator
+     * Remove facilitator.
      */
     public function removeFacilitator(User $facilitator): void
     {

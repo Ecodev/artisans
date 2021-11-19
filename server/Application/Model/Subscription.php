@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A subscription
+ * A subscription.
  *
  * @ORM\Entity(repositoryClass="\Application\Repository\SubscriptionRepository")
  */

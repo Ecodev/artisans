@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * Trait for all objects with an type
+ * Trait for all objects with an type.
  */
 trait HasProductType
 {
@@ -19,7 +19,7 @@ trait HasProductType
     private $type;
 
     /**
-     * Set type
+     * Set type.
      *
      * @API\Input(type="ProductType")
      */
@@ -29,7 +29,7 @@ trait HasProductType
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @API\Field(type="ProductType")
      */

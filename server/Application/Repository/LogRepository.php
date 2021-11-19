@@ -7,11 +7,11 @@ namespace Application\Repository;
 class LogRepository extends AbstractRepository implements \Ecodev\Felix\Repository\LogRepository
 {
     /**
-     * Log message to be used when the datatrans webhook starts
+     * Log message to be used when the datatrans webhook starts.
      */
     public const DATATRANS_WEBHOOK_BEGIN = 'datatrans webhook begin';
     /**
-     * Log message to be used when the datatrans webhook finishes
+     * Log message to be used when the datatrans webhook finishes.
      */
     public const DATATRANS_WEBHOOK_END = 'datatrans webhook end';
 

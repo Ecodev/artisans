@@ -14,17 +14,17 @@ use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
 /**
- * An item that can be booked by a user
+ * An item that can be booked by a user.
  *
  * @ORM\MappedSuperclass
  */
 abstract class AbstractProduct extends AbstractModel
 {
-    use HasName;
-    use HasRichTextDescription;
     use HasCode;
     use HasInternalRemarks;
+    use HasName;
     use HasProductType;
+    use HasRichTextDescription;
 
     /**
      * @var Money
@@ -62,7 +62,7 @@ abstract class AbstractProduct extends AbstractModel
     private $illustration;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(string $name = '')
     {
@@ -104,7 +104,7 @@ abstract class AbstractProduct extends AbstractModel
     }
 
     /**
-     * Whether this product can be bought
+     * Whether this product can be bought.
      */
     public function isActive(): bool
     {
@@ -112,7 +112,7 @@ abstract class AbstractProduct extends AbstractModel
     }
 
     /**
-     * Whether this product can be bought
+     * Whether this product can be bought.
      */
     public function setIsActive(bool $isActive): void
     {

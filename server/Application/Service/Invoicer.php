@@ -16,7 +16,7 @@ use Ecodev\Felix\Api\Exception;
 use Money\Money;
 
 /**
- * Service to create order and transactions for products and their quantity
+ * Service to create order and transactions for products and their quantity.
  */
 class Invoicer
 {
@@ -117,9 +117,7 @@ class Invoicer
 
     private function assertExactlyOneNotNull(...$args): void
     {
-        $onlyNotNull = array_filter($args, function ($val) {
-            return $val !== null;
-        });
+        $onlyNotNull = array_filter($args, fn ($val) => $val !== null);
 
         if (count($onlyNotNull) !== 1) {
             throw new Exception('Must have a product, or a subscription, or a pricePerUnit. And not a mixed of those.');

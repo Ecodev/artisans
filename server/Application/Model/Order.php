@@ -22,9 +22,9 @@ use Money\Money;
  */
 class Order extends AbstractModel implements HasBalanceInterface
 {
-    const STATUS_PENDING = 'pending';
-    const STATUS_VALIDATED = 'validated';
-    const STATUS_CANCELED = 'canceled';
+    public const STATUS_PENDING = 'pending';
+    public const STATUS_VALIDATED = 'validated';
+    public const STATUS_CANCELED = 'canceled';
 
     use HasAddress;
     use HasAutomaticBalance;

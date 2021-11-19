@@ -34,10 +34,10 @@ use GraphQL\Doctrine\Annotation as API;
  */
 class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {
-    const ROLE_ANONYMOUS = 'anonymous';
-    const ROLE_MEMBER = 'member';
-    const ROLE_FACILITATOR = 'facilitator';
-    const ROLE_ADMINISTRATOR = 'administrator';
+    public const ROLE_ANONYMOUS = 'anonymous';
+    public const ROLE_MEMBER = 'member';
+    public const ROLE_FACILITATOR = 'facilitator';
+    public const ROLE_ADMINISTRATOR = 'administrator';
 
     use HasAddress;
     use HasSubscriptionLastReview;

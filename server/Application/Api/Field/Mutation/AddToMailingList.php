@@ -36,7 +36,8 @@ abstract class AddToMailingList implements FieldInterface
 
                 $client = new Client($key, $secret);
 
-                $response = $client->post(Client::MAILINGLIST,
+                $response = $client->post(
+                    Client::MAILINGLIST,
                     [
                         'id' => $destination,
                         'action' => Action::IMPORTCONTACT,
@@ -45,7 +46,8 @@ abstract class AddToMailingList implements FieldInterface
                                 ['email' => $email],
                             ],
                         ],
-                    ]);
+                    ]
+                );
 
                 return $response->success();
             },

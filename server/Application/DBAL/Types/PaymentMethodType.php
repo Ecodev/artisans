@@ -8,9 +8,9 @@ use Ecodev\Felix\DBAL\Types\EnumType;
 
 class PaymentMethodType extends EnumType
 {
-    const DATATRANS = 'datatrans';
-    const EBANKING = 'ebanking';
-    const BVR = 'bvr';
+    public const DATATRANS = 'datatrans';
+    public const EBANKING = 'ebanking';
+    public const BVR = 'bvr';
 
     protected function getPossibleValues(): array
     {

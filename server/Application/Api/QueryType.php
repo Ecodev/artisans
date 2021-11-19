@@ -42,7 +42,6 @@ class QueryType extends ObjectType
 
         $fields = array_merge(
             $specializedFields,
-
             Standard::buildQuery(Event::class),
             Standard::buildQuery(File::class),
             Standard::buildQuery(Image::class),

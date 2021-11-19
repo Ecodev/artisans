@@ -282,9 +282,10 @@ class Importer
         $count = $this->connection->executeQuery('SELECT COUNT(*) FROM user WHERE email REGEXP :pattern', ['pattern' => $pattern])->fetchOne();
         $maximumUserPerPattern = 100;
         if ($count > $maximumUserPerPattern) {
-            $this->throw(<<<STRING
-                L'expression régulière "$pattern" affecte $count utilisateurs, ce qui est supérieur à la limite de $maximumUserPerPattern. Si c'est vraiment voulu, il faut contacter Ecodev.
-                STRING
+            $this->throw(
+                <<<STRING
+                    L'expression régulière "$pattern" affecte $count utilisateurs, ce qui est supérieur à la limite de $maximumUserPerPattern. Si c'est vraiment voulu, il faut contacter Ecodev.
+                    STRING
             );
         }
 

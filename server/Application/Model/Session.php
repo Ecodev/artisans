@@ -93,7 +93,7 @@ class Session extends AbstractModel
     private $endDate;
 
     /**
-     * @var Collection
+     * @var Collection<User>
      * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
      */
     private $facilitators;

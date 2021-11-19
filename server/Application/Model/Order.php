@@ -31,7 +31,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     use HasInternalRemarks;
 
     /**
-     * @var Collection
+     * @var Collection<OrderLine>
      * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
     private $orderLines;

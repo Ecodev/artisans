@@ -7,20 +7,17 @@ parameters:
         - tests/
     doctrine:
         repositoryClass: Application\Repository\AbstractRepository
+        objectManagerLoader: tests/object-manager.php
     inferPrivatePropertyTypeFromConstructor: true
 
     ignoreErrors:
         - '~^Call to an undefined method Application\\Repository\\.*Repository::find(One)?By.*\(\)\.$~'
-        - '~^Call to an undefined method Application\\Repository\\AbstractRepository\<Application\\Model\\User\>::(getOneByEmail|getOneById)\(\)\.$~'
-        - '~^Property .* does not accept Application\\Repository\\AbstractRepository\<Application\\Model\\.*\>\.$~'
         - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         - '~^Call to an undefined method Laminas\\View\\Renderer\\RendererInterface\:\:.*\(\)\.$~'
         -
             message: '~^If condition is always true\.$~'
             path: server/Application/Model/OrderLine.php
-        - '~^Property Application\\Model\\AbstractModel\:\:\$id is never written, only read\.$~'
 
 includes:
-    - phpstan-baseline.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-doctrine/rules.neon

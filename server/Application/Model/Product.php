@@ -60,14 +60,14 @@ class Product extends AbstractProduct
     private $review;
 
     /**
-     * @var Collection
+     * @var Collection<ProductTag>
      *
      * @ORM\ManyToMany(targetEntity="ProductTag", mappedBy="products")
      */
     private $productTags;
 
     /**
-     * @var Collection
+     * @var Collection<Product>
      *
      * @ORM\ManyToMany(targetEntity="Product")
      */
@@ -88,7 +88,7 @@ class Product extends AbstractProduct
     private $content = '';
 
     /**
-     * @var null|int
+     * @var int
      *
      * @ORM\Column(type="smallint", options={"default" = 0})
      */

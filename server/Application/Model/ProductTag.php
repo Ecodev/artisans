@@ -24,7 +24,7 @@ class ProductTag extends AbstractModel
     use HasColor;
 
     /**
-     * @var Collection
+     * @var Collection<Product>
      * @ORM\ManyToMany(targetEntity="Product", inversedBy="productTags")
      */
     private $products;

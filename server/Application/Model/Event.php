@@ -21,7 +21,7 @@ class Event extends AbstractModel
     use HasDate;
 
     /**
-     * @var Collection
+     * @var Collection<Comment>
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
      */
     private $comments;

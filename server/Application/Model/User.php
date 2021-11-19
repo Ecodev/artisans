@@ -119,13 +119,13 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     private $isPublicFacilitator = false;
 
     /**
-     * @var Collection
+     * @var Collection<Session>
      * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
     private $sessions;
 
     /**
-     * @var Collection
+     * @var Collection<User>
      * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
      */
     private $users;

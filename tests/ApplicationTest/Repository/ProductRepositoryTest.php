@@ -10,9 +10,6 @@ use Application\Model\User;
 use Application\Repository\ProductRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
-/**
- * @group Repository
- */
 class ProductRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;

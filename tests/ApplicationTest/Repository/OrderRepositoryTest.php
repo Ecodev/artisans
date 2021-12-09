@@ -8,9 +8,6 @@ use Application\Model\Order;
 use Application\Repository\OrderRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
-/**
- * @group Repository
- */
 class OrderRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;

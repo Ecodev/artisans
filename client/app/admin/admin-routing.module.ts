@@ -245,7 +245,7 @@ const routes: Routes = [
                 path: 'session', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
                 component: SessionsComponent,
                 data: {
-                    initialColumns: ['name', 'endDate', 'facilitators'],
+                    selectedColumns: ['name', 'endDate', 'facilitators'],
                     seo: {
                         title: 'Conversations carbone',
                     } as NaturalSeo,

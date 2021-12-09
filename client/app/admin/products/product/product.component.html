@@ -268,7 +268,7 @@
 
         <mat-tab id="order-line" *ngIf="data.model.id" label="Ventes">
             <app-order-lines
-                [initialColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
+                [selectedColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
                 [forcedVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
                 [persistSearch]="false"
                 [showTotals]="true"

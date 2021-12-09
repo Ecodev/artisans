@@ -14,7 +14,7 @@
                 [selections]="naturalSearchSelections"
                 fxFlex
             >
-                <natural-columns-picker [(selection)]="selectedColumns" [initialSelection]="initialColumns">
+                <natural-columns-picker (selectionChange)="selectColumns($event)" [selections]="selectedColumns">
                     <span naturalColumnsPickerColumn="description">Commentaire</span>
                     <span naturalColumnsPickerColumn="event">News</span>
                     <span naturalColumnsPickerColumn="news">Actualité</span>
@@ -24,8 +24,8 @@
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-                <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
+                <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
                 <ng-container matColumnDef="description">
                     <th *matHeaderCellDef mat-header-cell>Commentaire</th>

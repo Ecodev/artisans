@@ -10,6 +10,7 @@ import {
     NaturalDetailHeaderModule,
     NaturalDialogTriggerModule,
     NaturalDropdownComponentsModule,
+    NaturalEditorModule,
     NaturalFileModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
@@ -28,7 +29,6 @@ import {UsersComponent} from '../../admin/users/users/users.component';
 import {AddressComponent} from '../components/address/address.component';
 import {BreadcrumbsComponent} from '../components/breadcrumbs/breadcrumbs.component';
 import {PriceComponent} from '../components/price/price.component';
-import {ProsemirrorComponent} from '../components/proseMirror/proseMirror.component';
 import {TagsNavigationComponent} from '../components/tags-navigation/tags-navigation.component';
 import {StripTagsPipe} from '../pipes/strip-tags.pipe';
 import {TruncatePipe} from '../pipes/truncate.pipe';
@@ -43,7 +43,6 @@ const declarations = [
     TagsNavigationComponent,
     PriceComponent,
     BreadcrumbsComponent,
-    ProsemirrorComponent,
     TruncatePipe,
     StripTagsPipe,
 ];
@@ -71,6 +70,7 @@ const imports = [
     NaturalFixedButtonDetailModule,
     NaturalDropdownComponentsModule,
     NaturalDialogTriggerModule,
+    NaturalEditorModule,
 ];
 
 @NgModule({

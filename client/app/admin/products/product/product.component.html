@@ -49,10 +49,10 @@
                             </div>
                         </div>
 
-                        <div class="margin-bottom rich-text admin-editor">
-                            <div class="label">Description</div>
-                            <app-prosemirror formControlName="description" (contentChange)="update()"></app-prosemirror>
-                        </div>
+                        <div class="mat-body-1">Description</div>
+                        <natural-editor formControlName="description" (contentChange)="update()"></natural-editor>
+
+                        <br />
 
                         <mat-form-field>
                             <mat-label>Contenu complet</mat-label>
@@ -268,7 +268,7 @@
 
         <mat-tab id="order-line" *ngIf="data.model.id" label="Ventes">
             <app-order-lines
-                [selectedColumns]="['creationDate', 'quantity', 'owner', 'balanceCHF', 'balanceEUR']"
+                [selectedColumns]="['creationDate', 'quantity', 'owner', 'balance']"
                 [forcedVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
                 [persistSearch]="false"
                 [showTotals]="true"

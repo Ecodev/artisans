@@ -36,10 +36,8 @@
                             ></textarea>
                         </mat-form-field>
 
-                        <div class="margin-bottom rich-text admin-editor">
-                            <div class="label">Contenu</div>
-                            <app-prosemirror formControlName="content" (contentChange)="update()"></app-prosemirror>
-                        </div>
+                        <div class="mat-body-1">Contenu</div>
+                        <natural-editor formControlName="content" (contentChange)="update()"></natural-editor>
                     </div>
 
                     <div fxFlex="33" fxLayout="column">

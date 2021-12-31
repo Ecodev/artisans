@@ -10,7 +10,6 @@ import {
     NaturalDetailHeaderModule,
     NaturalDialogTriggerModule,
     NaturalDropdownComponentsModule,
-    NaturalEditorModule,
     NaturalFileModule,
     NaturalFixedButtonDetailModule,
     NaturalFixedButtonModule,
@@ -24,6 +23,7 @@ import {
     NaturalStampModule,
     NaturalTableButtonModule,
 } from '@ecodev/natural';
+import {NaturalEditorModule} from '@ecodev/natural-editor';
 import {ProductsComponent} from '../../admin/products/products/products.component';
 import {UsersComponent} from '../../admin/users/users/users.component';
 import {AddressComponent} from '../components/address/address.component';

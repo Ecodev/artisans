@@ -24,38 +24,8 @@ use Throwable;
 
 class DatatransHandler extends AbstractHandler
 {
-    /**
-     * @var TemplateRendererInterface
-     */
-    private $template;
-
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     * @var array
-     */
-    private $config;
-
-    /**
-     * @var Mailer
-     */
-    private $mailer;
-
-    /**
-     * @var MessageQueuer
-     */
-    private $messageQueuer;
-
-    public function __construct(EntityManager $entityManager, TemplateRendererInterface $template, array $config, Mailer $mailer, MessageQueuer $messageQueuer)
+    public function __construct(private readonly EntityManager $entityManager, private readonly TemplateRendererInterface $template, private readonly array $config, private readonly Mailer $mailer, private readonly MessageQueuer $messageQueuer)
     {
-        $this->entityManager = $entityManager;
-        $this->template = $template;
-        $this->config = $config;
-        $this->mailer = $mailer;
-        $this->messageQueuer = $messageQueuer;
     }
 
     /**

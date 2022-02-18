@@ -24,46 +24,34 @@ class Session extends AbstractModel
     use HasRichTextDescription;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $region = '';
+    private string $region = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $locality = '';
+    private string $locality = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $street = '';
+    private string $street = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $mailingList = '';
+    private string $mailingList = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $price = '';
+    private string $price = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $availability = '';
+    private string $availability = '';
 
     /**
      * Used for display.
@@ -72,31 +60,27 @@ class Session extends AbstractModel
      *
      * @ORM\Column(type="json")
      */
-    private $dates = [];
+    private array $dates = [];
 
     /**
      * Used for filter + sorting. Represents the first date.
      *
-     * @var Date
-     *
      * @ORM\Column(type="date")
      */
-    private $startDate;
+    private \Cake\Chronos\Date $startDate;
 
     /**
      * Used for filter + sorting. Represents the first date.
      *
-     * @var Date
-     *
      * @ORM\Column(type="date")
      */
-    private $endDate;
+    private \Cake\Chronos\Date $endDate;
 
     /**
      * @var Collection<User>
      * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
      */
-    private $facilitators;
+    private Collection $facilitators;
 
     /**
      * Constructor.

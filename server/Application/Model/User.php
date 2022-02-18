@@ -34,20 +34,17 @@ use GraphQL\Doctrine\Annotation as API;
  */
 class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {
-    public const ROLE_ANONYMOUS = 'anonymous';
-    public const ROLE_MEMBER = 'member';
-    public const ROLE_FACILITATOR = 'facilitator';
-    public const ROLE_ADMINISTRATOR = 'administrator';
+    final public const ROLE_ANONYMOUS = 'anonymous';
+    final public const ROLE_MEMBER = 'member';
+    final public const ROLE_FACILITATOR = 'facilitator';
+    final public const ROLE_ADMINISTRATOR = 'administrator';
 
     use HasAddress;
     use HasPassword;
     use HasSubscriptionLastReview;
     use IsImportable;
 
-    /**
-     * @var User
-     */
-    private static $currentUser;
+    private static ?\Application\Model\User $currentUser = null;
 
     /**
      * Set currently logged in user
@@ -77,58 +74,51 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
 
     /**
-     * @var string
      * @ORM\Column(type="UserRole", options={"default" = User::ROLE_MEMBER})
      */
-    private $role = self::ROLE_MEMBER;
+    private string $role = self::ROLE_MEMBER;
 
     /**
-     * @var string
      * @ORM\Column(type="Membership", options={"default" = MembershipType::NONE})
      */
-    private $membership = MembershipType::NONE;
+    private string $membership = MembershipType::NONE;
 
     /**
-     * @var null|string
      * @ORM\Column(type="ProductType", nullable=true)
      */
-    private $subscriptionType;
+    private ?string $subscriptionType = null;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=25, options={"default" = ""})
      */
-    private $phone = '';
+    private string $phone = '';
 
     /**
-     * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $webTemporaryAccess = false;
+    private bool $webTemporaryAccess = false;
 
     /**
-     * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isPublicFacilitator = false;
+    private bool $isPublicFacilitator = false;
 
     /**
      * @var Collection<Session>
      * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
-    private $sessions;
+    private Collection $sessions;
 
     /**
      * @var Collection<User>
      * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
      */
-    private $users;
+    private Collection $users;
 
     /**
      * Constructor.

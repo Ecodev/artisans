@@ -17,14 +17,12 @@ class Comment extends AbstractModel
     use HasRichTextDescription;
 
     /**
-     * @var null|Event
-     *
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * })
      */
-    private $event;
+    private ?\Application\Model\Event $event = null;
 
     /**
      * Set event.
@@ -51,14 +49,12 @@ class Comment extends AbstractModel
     }
 
     /**
-     * @var null|News
-     *
      * @ORM\ManyToOne(targetEntity="News", inversedBy="comments")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * })
      */
-    private $news;
+    private ?\Application\Model\News $news = null;
 
     /**
      * Set news.

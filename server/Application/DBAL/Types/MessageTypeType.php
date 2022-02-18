@@ -8,16 +8,16 @@ use Ecodev\Felix\DBAL\Types\EnumType;
 
 class MessageTypeType extends EnumType
 {
-    public const REGISTER = 'register';
-    public const RESET_PASSWORD = 'reset_password';
-    public const UPDATED_USER = 'updated_user';
-    public const CONFIRMED_REGISTRATION = 'confirmed_registration';
-    public const USER_PENDING_ORDER = 'user_pending_order';
-    public const USER_VALIDATED_ORDER = 'user_validated_order';
-    public const ADMIN_PENDING_ORDER = 'admin_pending_order';
-    public const ADMIN_VALIDATED_ORDER = 'admin_validated_order';
-    public const REQUEST_MEMBERSHIP_END = 'request_membership_end';
-    public const NEWSLETTER_SUBSCRIPTION = 'newsletter_subscription';
+    final public const REGISTER = 'register';
+    final public const RESET_PASSWORD = 'reset_password';
+    final public const UPDATED_USER = 'updated_user';
+    final public const CONFIRMED_REGISTRATION = 'confirmed_registration';
+    final public const USER_PENDING_ORDER = 'user_pending_order';
+    final public const USER_VALIDATED_ORDER = 'user_validated_order';
+    final public const ADMIN_PENDING_ORDER = 'admin_pending_order';
+    final public const ADMIN_VALIDATED_ORDER = 'admin_validated_order';
+    final public const REQUEST_MEMBERSHIP_END = 'request_membership_end';
+    final public const NEWSLETTER_SUBSCRIPTION = 'newsletter_subscription';
 
     protected function getPossibleValues(): array
     {

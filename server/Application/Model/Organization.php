@@ -30,18 +30,14 @@ class Organization extends AbstractModel
     /**
      * A regexp pattern that match email address.
      *
-     * @var string
      * @ORM\Column(type="text")
      */
-    private $pattern;
+    private string $pattern;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return Organization
-     */
     public function setPattern(string $pattern): self
     {
         $this->pattern = $pattern;

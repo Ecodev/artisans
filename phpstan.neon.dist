@@ -14,9 +14,9 @@ parameters:
         - '~^Call to an undefined method Application\\Repository\\.*Repository::find(One)?By.*\(\)\.$~'
         - '~^Access to an undefined property Laminas\\View\\Renderer\\RendererInterface\:\:\$serverUrl\.$~'
         - '~^Call to an undefined method Laminas\\View\\Renderer\\RendererInterface\:\:.*\(\)\.$~'
-        -
-            message: '~^If condition is always true\.$~'
-            path: server/Application/Model/OrderLine.php
+
+        # Tolerate a permissive model, but strict DB
+        - '~^Property Application\\Model\\.*\:\:\$.* type mapping mismatch\: property can contain Application\\Model\\.*\|null but database expects Application\\Model\\.*\.$~'
 
 includes:
     - vendor/phpstan/phpstan-doctrine/extension.neon

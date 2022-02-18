@@ -27,7 +27,7 @@ class ProductTag extends AbstractModel
      * @var Collection<Product>
      * @ORM\ManyToMany(targetEntity="Product", inversedBy="productTags")
      */
-    private $products;
+    private Collection $products;
 
     /**
      * Constructor.

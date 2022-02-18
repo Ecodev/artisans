@@ -24,7 +24,7 @@ class Event extends AbstractModel
      * @var Collection<Comment>
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {
@@ -32,10 +32,9 @@ class Event extends AbstractModel
     }
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $place;
+    private string $place;
 
     /**
      * Set place.
@@ -56,10 +55,9 @@ class Event extends AbstractModel
     }
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $type;
+    private string $type;
 
     /**
      * Set type.

@@ -16,17 +16,8 @@ use Ecodev\Felix\Service\MessageRenderer;
  */
 class MessageQueuer
 {
-    private EntityManager $entityManager;
-
-    private MessageRenderer $messageRenderer;
-
-    private array $config;
-
-    public function __construct(EntityManager $entityManager, MessageRenderer $messageRenderer, array $config)
+    public function __construct(private readonly EntityManager $entityManager, private readonly MessageRenderer $messageRenderer, private readonly array $config)
     {
-        $this->entityManager = $entityManager;
-        $this->messageRenderer = $messageRenderer;
-        $this->config = $config;
     }
 
     public function queueRegister(User $user): Message

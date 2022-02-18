@@ -20,19 +20,10 @@ use Money\Money;
  */
 class Invoicer
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
+    private readonly \Application\Repository\UserRepository $userRepository;
 
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-
-    public function __construct(EntityManager $entityManager)
+    public function __construct(private readonly EntityManager $entityManager)
     {
-        $this->entityManager = $entityManager;
         $this->userRepository = $this->entityManager->getRepository(User::class);
     }
 

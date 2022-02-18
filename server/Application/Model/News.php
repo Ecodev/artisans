@@ -23,24 +23,20 @@ class News extends AbstractModel
     use HasRichTextDescription;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isActive = false;
+    private bool $isActive = false;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535, options={"default" = ""})
      */
-    private $content = '';
+    private string $content = '';
 
     /**
      * @var Collection<Comment>
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="news")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {

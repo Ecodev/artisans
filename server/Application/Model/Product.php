@@ -22,77 +22,62 @@ use InvalidArgumentException;
 class Product extends AbstractProduct
 {
     /**
-     * @var null|int
-     *
      * @ORM\Column(type="smallint", nullable=true, options={"unsigned" = true})
      */
-    private $readingDuration;
+    private ?int $readingDuration = null;
 
     /**
-     * @var Date
-     *
      * @ORM\Column(type="date", nullable=true)
      */
-    private $releaseDate;
+    private ?\Cake\Chronos\Date $releaseDate = null;
 
     /**
-     * @var null|int
-     *
      * @ORM\Column(type="smallint", nullable=true, unique=true, options={"unsigned" = true})
      */
-    private $reviewNumber;
+    private ?int $reviewNumber = null;
 
     /**
-     * @var null|File
      * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private $file;
+    private ?\Application\Model\File $file = null;
 
     /**
-     * @var null|Product
-     *
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="CASCADE")
      * })
      */
-    private $review;
+    private ?\Application\Model\Product $review = null;
 
     /**
      * @var Collection<ProductTag>
      *
      * @ORM\ManyToMany(targetEntity="ProductTag", mappedBy="products")
      */
-    private $productTags;
+    private Collection $productTags;
 
     /**
      * @var Collection<Product>
      *
      * @ORM\ManyToMany(targetEntity="Product")
      */
-    private $relatedProducts;
+    private Collection $relatedProducts;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isHighlighted = false;
+    private bool $isHighlighted = false;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535)
      */
-    private $content = '';
+    private string $content = '';
 
     /**
-     * @var int
-     *
      * @ORM\Column(type="smallint", options={"default" = 0})
      */
-    private $sorting = 0;
+    private int $sorting = 0;
 
     /**
      * Constructor.
@@ -191,8 +176,6 @@ class Product extends AbstractProduct
 
     /**
      * Add related product.
-     *
-     * @param Product $product
      */
     public function addRelatedProduct(self $product): void
     {
@@ -207,8 +190,6 @@ class Product extends AbstractProduct
 
     /**
      * Remove related product.
-     *
-     * @param Product $product
      */
     public function removeRelatedProduct(self $product): void
     {

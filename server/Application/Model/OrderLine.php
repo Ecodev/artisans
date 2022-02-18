@@ -32,37 +32,31 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      * @var string[]
      * @ORM\Column(type="json", options={"default" = "[]"})
      */
-    private $additionalEmails = [];
+    private array $additionalEmails = [];
 
     /**
-     * @var Order
-     *
      * @ORM\ManyToOne(targetEntity="Order", inversedBy="orderLines")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      * })
      */
-    private $order;
+    private ?Order $order = null;
 
     /**
-     * @var null|Product
-     *
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
-    private $product;
+    private ?\Application\Model\Product $product = null;
 
     /**
-     * @var null|Subscription
-     *
      * @ORM\ManyToOne(targetEntity="Subscription")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
-    private $subscription;
+    private ?\Application\Model\Subscription $subscription = null;
 
     /**
      * Constructor.

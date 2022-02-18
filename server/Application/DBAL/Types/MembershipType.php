@@ -8,8 +8,8 @@ use Ecodev\Felix\DBAL\Types\EnumType;
 
 class MembershipType extends EnumType
 {
-    public const NONE = 'none';
-    public const MEMBER = 'member';
+    final public const NONE = 'none';
+    final public const MEMBER = 'member';
 
     protected function getPossibleValues(): array
     {

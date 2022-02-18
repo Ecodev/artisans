@@ -22,9 +22,9 @@ use Money\Money;
  */
 class Order extends AbstractModel implements HasBalanceInterface
 {
-    public const STATUS_PENDING = 'pending';
-    public const STATUS_VALIDATED = 'validated';
-    public const STATUS_CANCELED = 'canceled';
+    final public const STATUS_PENDING = 'pending';
+    final public const STATUS_VALIDATED = 'validated';
+    final public const STATUS_CANCELED = 'canceled';
 
     use HasAddress;
     use HasAutomaticBalance;
@@ -34,28 +34,24 @@ class Order extends AbstractModel implements HasBalanceInterface
      * @var Collection<OrderLine>
      * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
-    private $orderLines;
+    private Collection $orderLines;
 
     /**
-     * @var string
-     * @ORM\Column(type="OrderStatus", options={"default" = Order::STATUS_PENDING})
-     */
-    private $status = self::STATUS_PENDING;
-
-    /**
-     * @var string
      * @ORM\Column(type="PaymentMethod")
      */
-    private $paymentMethod;
+    private string $paymentMethod;
 
     /**
      * Constructor.
      *
      * @param string $status status for new order
      */
-    public function __construct(string $status = self::STATUS_PENDING)
+    public function __construct(/**
+     * @ORM\Column(type="OrderStatus", options={"default" = Order::STATUS_PENDING})
+     */
+    private string $status = self::STATUS_PENDING
+    )
     {
-        $this->status = $status;
         $this->orderLines = new ArrayCollection();
         $this->balanceCHF = Money::CHF(0);
         $this->balanceEUR = Money::EUR(0);

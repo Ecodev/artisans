@@ -47,7 +47,7 @@ class Importer
 
     private array $seenPatterns = [];
 
-    private ?int $currentUser;
+    private ?int $currentUser = null;
 
     private array $errors = [];
 

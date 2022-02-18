@@ -27,39 +27,31 @@ abstract class AbstractProduct extends AbstractModel
     use HasRichTextDescription;
 
     /**
-     * @var Money
-     *
      * @ORM\Column(type="CHF", options={"default" = "0"})
      */
-    private $pricePerUnitCHF;
+    private \Money\Money $pricePerUnitCHF;
 
     /**
-     * @var Money
-     *
      * @ORM\Column(type="EUR", options={"default" = "0"})
      */
-    private $pricePerUnitEUR;
+    private \Money\Money $pricePerUnitEUR;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 1})
      */
-    private $isActive = true;
+    private bool $isActive = true;
 
     /**
-     * @var null|Image
      * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $image;
+    private ?\Application\Model\Image $image = null;
 
     /**
-     * @var null|Image
      * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $illustration;
+    private ?\Application\Model\Image $illustration = null;
 
     /**
      * Constructor.

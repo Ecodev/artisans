@@ -15,32 +15,30 @@ class OrderLineInputType extends InputObjectType
     {
         $config = [
             'description' => 'A shopping cart item when making an order. It can be for a product or a subscription, or a donation, but not a mix of those',
-            'fields' => function (): array {
-                return [
-                    'quantity' => [
-                        'type' => self::nonNull(self::int()),
-                    ],
-                    'type' => [
-                        'type' => self::nonNull(_types()->get('ProductType')),
-                    ],
-                    'isCHF' => [
-                        'type' => self::nonNull(self::boolean()),
-                    ],
-                    'product' => [
-                        'type' => _types()->getId(Product::class),
-                    ],
-                    'subscription' => [
-                        'type' => _types()->getId(Subscription::class),
-                    ],
-                    'additionalEmails' => [
-                        'type' => self::listOf(self::nonNull(_types()->get('Email'))),
-                        'defaultValue' => [],
-                    ],
-                    'pricePerUnit' => [
-                        'type' => _types()->get(CHFType::class),
-                    ],
-                ];
-            },
+            'fields' => fn (): array => [
+                'quantity' => [
+                    'type' => self::nonNull(self::int()),
+                ],
+                'type' => [
+                    'type' => self::nonNull(_types()->get('ProductType')),
+                ],
+                'isCHF' => [
+                    'type' => self::nonNull(self::boolean()),
+                ],
+                'product' => [
+                    'type' => _types()->getId(Product::class),
+                ],
+                'subscription' => [
+                    'type' => _types()->getId(Subscription::class),
+                ],
+                'additionalEmails' => [
+                    'type' => self::listOf(self::nonNull(_types()->get('Email'))),
+                    'defaultValue' => [],
+                ],
+                'pricePerUnit' => [
+                    'type' => _types()->get(CHFType::class),
+                ],
+            ],
         ];
 
         parent::__construct($config);

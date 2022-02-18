@@ -14,7 +14,7 @@ return [
         'admins' => [], // admin emails to notify of orders, members and newsletter subscriptions...
     ],
     'smtp' => null,
-    'phpPath' => '/usr/bin/php7.4',
+    'phpPath' => '/usr/bin/php8.1',
     'templates' => [
         'paths' => [
             'app' => ['server/templates/app'],

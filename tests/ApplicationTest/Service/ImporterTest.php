@@ -106,9 +106,9 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'street' => '',
             'postcode' => '',
             'locality' => '',
-            'country_id' => '51',
+            'country_id' => 51,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
 
@@ -122,9 +122,9 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'street' => '',
             'postcode' => '',
             'locality' => '',
-            'country_id' => '51',
+            'country_id' => 51,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
 
@@ -138,9 +138,9 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'street' => '',
             'postcode' => '',
             'locality' => '',
-            'country_id' => '29',
+            'country_id' => 29,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
     }
@@ -157,25 +157,25 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'street' => '',
             'postcode' => '',
             'locality' => '',
-            'country_id' => '1',
+            'country_id' => 1,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => 'aa08769cdcb26674c6706093503ff0a3',
         ]);
 
         $otherMember = [
             'email' => 'othermember@example.com',
             'subscription_type' => 'digital',
-            'subscription_last_review_id' => '3001',
+            'subscription_last_review_id' => 3001,
             'membership' => 'member',
             'first_name' => 'Elizabeth',
             'last_name' => 'Swann',
             'street' => '',
             'postcode' => '',
             'locality' => '',
-            'country_id' => '1',
+            'country_id' => 1,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '1895eaf4aad48bd97ec1a2fd15336591',
         ];
         $this->assertUser($otherMember);
@@ -210,7 +210,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'locality' => '',
             'country_id' => null,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
 
@@ -226,7 +226,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'locality' => '',
             'country_id' => null,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
 
@@ -240,15 +240,15 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'street' => 'Main street',
             'postcode' => '2000',
             'locality' => 'New York',
-            'country_id' => '2',
+            'country_id' => 2,
             'phone' => '032 987 65 43',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => 'aa08769cdcb26674c6706093503ff0a3',
         ]);
 
         $this->assertOrganization([
             'pattern' => '.*@university\.com',
-            'subscription_last_review_id' => '3001',
+            'subscription_last_review_id' => 3001,
         ]);
 
         // Unchanged
@@ -278,22 +278,22 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
         $this->assertUser([
             'email' => 'new@example.com',
             'subscription_type' => 'digital',
-            'subscription_last_review_id' => '3001',
+            'subscription_last_review_id' => 3001,
             'membership' => 'none',
             'first_name' => 'John',
             'last_name' => 'Doe',
             'street' => 'Main street',
             'postcode' => '8000',
             'locality' => 'Zurich',
-            'country_id' => '1',
+            'country_id' => 1,
             'phone' => '837 28 73',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
 
         $this->assertOrganization([
             'pattern' => '.*@university\.com',
-            'subscription_last_review_id' => '3001',
+            'subscription_last_review_id' => 3001,
         ]);
     }
 
@@ -313,7 +313,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'locality' => '',
             'country_id' => null,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
     }
@@ -334,7 +334,7 @@ A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
             'locality' => '',
             'country_id' => null,
             'phone' => '',
-            'web_temporary_access' => '0',
+            'web_temporary_access' => 0,
             'password' => '',
         ]);
     }

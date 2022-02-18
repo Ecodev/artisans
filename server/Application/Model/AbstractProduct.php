@@ -29,14 +29,14 @@ abstract class AbstractProduct extends AbstractModel
     /**
      * @var Money
      *
-     * @ORM\Column(type="CHF", options={"default" = "0.00"})
+     * @ORM\Column(type="CHF", options={"default" = "0"})
      */
     private $pricePerUnitCHF;
 
     /**
      * @var Money
      *
-     * @ORM\Column(type="EUR", options={"default" = "0.00"})
+     * @ORM\Column(type="EUR", options={"default" = "0"})
      */
     private $pricePerUnitEUR;
 

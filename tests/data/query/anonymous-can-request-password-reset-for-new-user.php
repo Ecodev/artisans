@@ -29,6 +29,6 @@ return [
             ['type' => MessageTypeType::REGISTER, 'email' => 'member@example.com']
         )->fetchOne();
 
-        Assert::assertSame('1', $count, 'should have sent 1 email to confirm registration');
+        Assert::assertSame(1, $count, 'should have sent 1 email to confirm registration');
     },
 ];

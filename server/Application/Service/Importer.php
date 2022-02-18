@@ -292,7 +292,7 @@ class Importer
         $this->seenPatterns[$pattern] = $this->lineNumber;
     }
 
-    private function readReviewId(string $reviewNumber): ?string
+    private function readReviewId(string $reviewNumber): ?int
     {
         if (!$reviewNumber) {
             return null;
@@ -314,7 +314,7 @@ class Importer
         return $reviewNumberNumeric >= $this->lastReview ? $this->reviewByNumber[$reviewNumberNumeric] : null;
     }
 
-    private function readCountryId(string $country): ?string
+    private function readCountryId(string $country): ?int
     {
         if (!$country) {
             return null;

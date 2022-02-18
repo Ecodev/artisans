@@ -32,7 +32,7 @@ function test(bool $loggedIn, string $url): void
 
     // Assert HTML content
     $content = run("curl --insecure --silent '$url' $cookie");
-    if (mb_strpos($content, $pattern) === false) {
+    if (!str_contains($content, $pattern)) {
         echo "FAILED PATTERN: '$pattern': $message" . PHP_EOL;
         exit(1);
     }

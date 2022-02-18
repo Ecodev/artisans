@@ -31,6 +31,11 @@ class Order extends AbstractModel implements HasBalanceInterface
     use HasInternalRemarks;
 
     /**
+     * @ORM\Column(type="OrderStatus", options={"default" = Order::STATUS_PENDING})
+     */
+    private string $status = self::STATUS_PENDING;
+
+    /**
      * @var Collection<OrderLine>
      * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
@@ -46,12 +51,9 @@ class Order extends AbstractModel implements HasBalanceInterface
      *
      * @param string $status status for new order
      */
-    public function __construct(/**
-     * @ORM\Column(type="OrderStatus", options={"default" = Order::STATUS_PENDING})
-     */
-    private string $status = self::STATUS_PENDING
-    )
+    public function __construct(string $status = self::STATUS_PENDING)
     {
+        $this->status = $status;
         $this->orderLines = new ArrayCollection();
         $this->balanceCHF = Money::CHF(0);
         $this->balanceEUR = Money::EUR(0);

@@ -29,7 +29,7 @@ class Product extends AbstractProduct
     /**
      * @ORM\Column(type="date", nullable=true)
      */
-    private ?\Cake\Chronos\Date $releaseDate = null;
+    private ?Date $releaseDate = null;
 
     /**
      * @ORM\Column(type="smallint", nullable=true, unique=true, options={"unsigned" = true})
@@ -40,7 +40,7 @@ class Product extends AbstractProduct
      * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private ?\Application\Model\File $file = null;
+    private ?File $file = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Product")
@@ -48,7 +48,7 @@ class Product extends AbstractProduct
      *     @ORM\JoinColumn(onDelete="CASCADE")
      * })
      */
-    private ?\Application\Model\Product $review = null;
+    private ?Product $review = null;
 
     /**
      * @var Collection<ProductTag>

@@ -29,12 +29,12 @@ abstract class AbstractProduct extends AbstractModel
     /**
      * @ORM\Column(type="CHF", options={"default" = "0"})
      */
-    private \Money\Money $pricePerUnitCHF;
+    private Money $pricePerUnitCHF;
 
     /**
      * @ORM\Column(type="EUR", options={"default" = "0"})
      */
-    private \Money\Money $pricePerUnitEUR;
+    private Money $pricePerUnitEUR;
 
     /**
      * @ORM\Column(type="boolean", options={"default" = 1})
@@ -45,13 +45,13 @@ abstract class AbstractProduct extends AbstractModel
      * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private ?\Application\Model\Image $image = null;
+    private ?Image $image = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private ?\Application\Model\Image $illustration = null;
+    private ?Image $illustration = null;
 
     /**
      * Constructor.

@@ -44,13 +44,13 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     use HasSubscriptionLastReview;
     use IsImportable;
 
-    private static ?\Application\Model\User $currentUser = null;
+    private static ?User $currentUser = null;
 
     /**
      * Set currently logged in user
      * WARNING: this method should only be called from \Application\Authentication\AuthenticationListener.
      *
-     * @param \Application\Model\User $user
+     * @param User $user
      */
     public static function setCurrent(?self $user): void
     {

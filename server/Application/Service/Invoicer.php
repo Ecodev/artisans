@@ -20,7 +20,7 @@ use Money\Money;
  */
 class Invoicer
 {
-    private readonly \Application\Repository\UserRepository $userRepository;
+    private readonly UserRepository $userRepository;
 
     public function __construct(private readonly EntityManager $entityManager)
     {

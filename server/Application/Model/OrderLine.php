@@ -48,7 +48,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
-    private ?\Application\Model\Product $product = null;
+    private ?Product $product = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Subscription")
@@ -56,7 +56,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      * })
      */
-    private ?\Application\Model\Subscription $subscription = null;
+    private ?Subscription $subscription = null;
 
     /**
      * Constructor.

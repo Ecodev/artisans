@@ -22,7 +22,7 @@ class Comment extends AbstractModel
      *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * })
      */
-    private ?\Application\Model\Event $event = null;
+    private ?Event $event = null;
 
     /**
      * Set event.
@@ -54,7 +54,7 @@ class Comment extends AbstractModel
      *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      * })
      */
-    private ?\Application\Model\News $news = null;
+    private ?News $news = null;
 
     /**
      * Set news.

@@ -67,14 +67,14 @@ class Session extends AbstractModel
      *
      * @ORM\Column(type="date")
      */
-    private \Cake\Chronos\Date $startDate;
+    private Date $startDate;
 
     /**
      * Used for filter + sorting. Represents the first date.
      *
      * @ORM\Column(type="date")
      */
-    private \Cake\Chronos\Date $endDate;
+    private Date $endDate;
 
     /**
      * @var Collection<User>

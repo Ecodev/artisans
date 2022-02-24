@@ -29,7 +29,7 @@ if id "$DEPLOY_USER" >/dev/null 2>&1; then
 
     if [ ! "$DEPLOY_USER" == "$USER" ]; then
         echo "Restarting script with user '$DEPLOY_USER'"
-        sudo -H -u $DEPLOY_USER "${BASH_SOURCE}"
+        sudo -EH -u $DEPLOY_USER "${BASH_SOURCE}"
         exit
     fi
 
@@ -37,8 +37,8 @@ if id "$DEPLOY_USER" >/dev/null 2>&1; then
     export HOME="/tmp/$DEPLOY_USER"
 fi
 
-# Try to use PHP 7.4, or fallback to default version
-PHP=`which php7.4` || PHP='php'
+# Try to use PHP 8.1, or fallback to default version
+PHP=`which php8.1` || PHP='php'
 COMPOSER="$PHP `which composer`"
 
 # Exit script on any error
@@ -54,7 +54,7 @@ echo "Updating all PHP dependencies via composer..."
 $COMPOSER install --classmap-authoritative $NO_PROGRESS
 
 echo "Clear cache"
-$COMPOSER clear-config-cache
+$PHP ./bin/clear-config-cache.php
 
 echo "Updating database..."
 $PHP ./vendor/bin/doctrine-migrations migrations:migrate --no-interaction

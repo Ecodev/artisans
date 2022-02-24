@@ -16,7 +16,7 @@ trait HasRichTextDescription
     private $description = '';
 
     /**
-     * Set description
+     * Set description.
      */
     public function setDescription(string $description): void
     {
@@ -24,7 +24,7 @@ trait HasRichTextDescription
     }
 
     /**
-     * Get description
+     * Get description.
      */
     public function getDescription(): string
     {

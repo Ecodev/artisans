@@ -2,7 +2,7 @@
 <?php
 
 /**
- * A script to clean product formatted content in DB
+ * A script to clean product formatted content in DB.
  */
 use Application\Model\Product;
 use Application\Utility;
@@ -50,7 +50,7 @@ function cleanOneTable(string $table, array $fields): void
         $qb->addSelect($name);
     }
 
-    $products = $qb->execute()->fetchAll();
+    $products = $qb->execute()->fetchAllAssociative();
 
     $count = 0;
     $total = count($products);

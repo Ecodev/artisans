@@ -8,9 +8,6 @@ use Application\Model\OrderLine;
 use Application\Repository\OrderLineRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
-/**
- * @group Repository
- */
 class OrderLineRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;

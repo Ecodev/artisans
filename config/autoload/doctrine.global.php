@@ -6,7 +6,7 @@ return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
-                'driverClass' => Doctrine\DBAL\Driver\PDOMySql\Driver::class,
+                'driverClass' => Doctrine\DBAL\Driver\PDO\MySQL\Driver::class,
                 'params' => [
                     'host' => 'localhost',
                     'dbname' => 'artisans',
@@ -14,7 +14,7 @@ return [
                     'password' => '',
                     'port' => 3306,
                     'driverOptions' => [
-                        \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
+                        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4',
                     ],
                     'defaultTableOptions' => [
                         'charset' => 'utf8mb4',
@@ -68,10 +68,15 @@ return [
             'Membership' => Application\DBAL\Types\MembershipType::class,
         ],
         // migrations configuration
-        'migrations_configuration' => [
+        'migrations' => [
             'orm_default' => [
-                'directory' => 'server/Application/Migration',
-                'namespace' => 'Application\Migration',
+                'table_storage' => [
+                    'table_name' => 'doctrine_migration_versions',
+                ],
+                'custom_template' => 'config/migration-template.txt',
+                'migrations_paths' => [
+                    'Application\Migration' => 'server/Application/Migration',
+                ],
             ],
         ],
     ],

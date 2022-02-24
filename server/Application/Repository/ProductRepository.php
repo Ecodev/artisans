@@ -41,12 +41,9 @@ class ProductRepository extends AbstractRepository implements LimitedAccessSubQu
         }
     }
 
-    /**
-     * @param Organization|User $hasSubscriptionLastReview
-     */
-    public function getSubscriptionLastReviewNumber(AbstractModel $hasSubscriptionLastReview): ?int
+    public function getSubscriptionLastReviewNumber(Organization|User $hasSubscriptionLastReview): ?int
     {
-        $class = get_class($hasSubscriptionLastReview);
+        $class = $hasSubscriptionLastReview::class;
         $table = $this->getEntityManager()->getClassMetadata($class)->getTableName();
 
         $connection = $this->getEntityManager()->getConnection();

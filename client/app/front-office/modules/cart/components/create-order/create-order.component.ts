@@ -12,6 +12,7 @@ import {Cart} from '../../classes/cart';
 import {CartService} from '../../services/cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';
 import {DatatransService} from '../../services/datatrans.service';
+import {Big} from 'big.js';
 
 @Component({
     selector: 'app-create-order',
@@ -167,11 +168,14 @@ export class CreateOrderComponent implements OnInit {
             return;
         }
 
+        // Convert the decimal amount in cents
+        const roundedAmount = Big(amount).times(100).toFixed(0);
+
         const sign = this.datatransService.getHexaSHA256Signature(
             '',
             this.paymentConfig.datatrans.key,
             this.paymentConfig.datatrans.merchantId,
-            amount * 100,
+            roundedAmount,
             currency,
             order.id,
         );
@@ -182,7 +186,7 @@ export class CreateOrderComponent implements OnInit {
                 merchantId: this.paymentConfig.datatrans.merchantId,
                 sign: sign,
                 refno: order.id,
-                amount: amount * 100,
+                amount: roundedAmount,
                 currency: currency,
                 endpoint: this.paymentConfig.datatrans.endpoint,
             },

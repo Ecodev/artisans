@@ -1,74 +1,74 @@
 @use '../../../../../../styles/responsive';
 
-:host {
-    .cart-buttons .mat-flat-button[color] {
-        min-width: 200px;
-    }
+.cart-buttons .mat-flat-button[color] {
+    min-width: 200px;
+}
 
+:host {
     @include responsive.responsive(responsive.$lt-md) {
         .cart-buttons > * {
             min-width: 300px !important;
         }
     }
+}
 
-    .cart-item {
-        display: flex;
-        flex-direction: column;
+.cart-item {
+    display: flex;
+    flex-direction: column;
 
-        // Small
-        @include responsive.responsive(responsive.$xs) {
-            align-items: flex-start;
-            margin-bottom: 30px;
+    // Small
+    @include responsive.responsive(responsive.$xs) {
+        align-items: flex-start;
+        margin-bottom: 30px;
 
-            & > *:not(:last-child) {
-                margin-bottom: 10px;
-            }
-        }
-
-        // Large
-        @include responsive.responsive(responsive.$gt-xs) {
-            flex-direction: row;
-            align-items: center;
-
-            & > *:not(:last-child) {
-                margin-right: 10px;
-            }
-        }
-
-        a.mat-button {
-            text-align: left;
-            white-space: normal;
-        }
-
-        .item-body {
-            flex: 1;
-        }
-
-        .product-image {
-            display: block;
-            width: 70px;
-            height: 70px;
-
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-
-            img {
-                max-height: 70px;
-                max-width: 70px;
-            }
+        & > *:not(:last-child) {
+            margin-bottom: 10px;
         }
     }
 
-    .totals {
-        & > div > span {
-            display: inline-block;
-            width: 80px;
-            text-align: right;
+    // Large
+    @include responsive.responsive(responsive.$gt-xs) {
+        flex-direction: row;
+        align-items: center;
 
-            &:first-child {
-                text-align: left;
-            }
+        & > *:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+
+    a.mat-button {
+        text-align: left;
+        white-space: normal;
+    }
+
+    .item-body {
+        flex: 1;
+    }
+
+    .product-image {
+        display: block;
+        width: 70px;
+        height: 70px;
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        img {
+            max-height: 70px;
+            max-width: 70px;
+        }
+    }
+}
+
+.totals {
+    & > div > span {
+        display: inline-block;
+        width: 80px;
+        text-align: right;
+
+        &:first-child {
+            text-align: left;
         }
     }
 }

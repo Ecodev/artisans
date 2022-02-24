@@ -34,9 +34,7 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
         $connection = $this->getEntityManager()->getConnection();
         $subscriptionLastReviewNumber = $user ? $user->getSubscriptionLastReviewNumber() : null;
         $hasSubscription = $user && ProductTypeType::includesDigital($user->getSubscriptionType()) && $subscriptionLastReviewNumber;
-        $digitalTypes = implode(',', array_map(function (string $val) use ($connection): string {
-            return $connection->quote($val);
-        }, ProductTypeType::getDigitalTypes()));
+        $digitalTypes = implode(',', array_map(fn (string $val): string => $connection->quote($val), ProductTypeType::getDigitalTypes()));
 
         if ($user && $user->getWebTemporaryAccess()) {
             // Files for webTemporaryAccess

@@ -12,7 +12,7 @@ use GraphQL\Doctrine\Annotation as API;
 use InvalidArgumentException;
 
 /**
- * An item that can be booked by a user
+ * An item that can be booked by a user.
  *
  * @ORM\Entity(repositoryClass="\Application\Repository\ProductRepository")
  * @API\Sorting({
@@ -22,80 +22,65 @@ use InvalidArgumentException;
 class Product extends AbstractProduct
 {
     /**
-     * @var null|int
-     *
      * @ORM\Column(type="smallint", nullable=true, options={"unsigned" = true})
      */
-    private $readingDuration;
+    private ?int $readingDuration = null;
 
     /**
-     * @var Date
-     *
      * @ORM\Column(type="date", nullable=true)
      */
-    private $releaseDate;
+    private ?Date $releaseDate = null;
 
     /**
-     * @var null|int
-     *
      * @ORM\Column(type="smallint", nullable=true, unique=true, options={"unsigned" = true})
      */
-    private $reviewNumber;
+    private ?int $reviewNumber = null;
 
     /**
-     * @var null|File
      * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
-    private $file;
+    private ?File $file = null;
 
     /**
-     * @var null|Product
-     *
      * @ORM\ManyToOne(targetEntity="Product")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="CASCADE")
      * })
      */
-    private $review;
+    private ?Product $review = null;
 
     /**
-     * @var Collection
+     * @var Collection<ProductTag>
      *
      * @ORM\ManyToMany(targetEntity="ProductTag", mappedBy="products")
      */
-    private $productTags;
+    private Collection $productTags;
 
     /**
-     * @var Collection
+     * @var Collection<Product>
      *
      * @ORM\ManyToMany(targetEntity="Product")
      */
-    private $relatedProducts;
+    private Collection $relatedProducts;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isHighlighted = false;
+    private bool $isHighlighted = false;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535)
      */
-    private $content = '';
+    private string $content = '';
 
     /**
-     * @var null|int
-     *
      * @ORM\Column(type="smallint", options={"default" = 0})
      */
-    private $sorting = 0;
+    private int $sorting = 0;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(string $name = '')
     {
@@ -111,7 +96,7 @@ class Product extends AbstractProduct
 
     /**
      * Notify the user that it has a new productTag.
-     * This should only be called by ProductTag::addUser()
+     * This should only be called by ProductTag::addUser().
      */
     public function productTagAdded(ProductTag $productTag): void
     {
@@ -120,7 +105,7 @@ class Product extends AbstractProduct
 
     /**
      * Notify the user that it a productTag was removed.
-     * This should only be called by ProductTag::removeUser()
+     * This should only be called by ProductTag::removeUser().
      */
     public function productTagRemoved(ProductTag $productTag): void
     {
@@ -128,7 +113,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Reading duration in minutes
+     * Reading duration in minutes.
      */
     public function getReadingDuration(): ?int
     {
@@ -136,7 +121,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Reading duration in minutes
+     * Reading duration in minutes.
      */
     public function setReadingDuration(?int $readingDuration): void
     {
@@ -180,7 +165,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Get related products
+     * Get related products.
      *
      * @API\Field(type="Product[]")
      */
@@ -190,9 +175,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Add related product
-     *
-     * @param Product $product
+     * Add related product.
      */
     public function addRelatedProduct(self $product): void
     {
@@ -206,9 +189,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Remove related product
-     *
-     * @param Product $product
+     * Remove related product.
      */
     public function removeRelatedProduct(self $product): void
     {
@@ -232,7 +213,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Whether this product has more visibility
+     * Whether this product has more visibility.
      */
     public function isHighlighted(): bool
     {
@@ -240,7 +221,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     *Whether this product has more visibility
+     *Whether this product has more visibility.
      */
     public function setIsHighlighted(bool $isHighlighted): void
     {
@@ -248,7 +229,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Set content
+     * Set content.
      */
     public function setContent(string $content): void
     {
@@ -257,7 +238,7 @@ class Product extends AbstractProduct
     }
 
     /**
-     * Get content
+     * Get content.
      */
     public function getContent(): string
     {

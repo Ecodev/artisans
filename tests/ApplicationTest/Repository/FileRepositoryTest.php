@@ -11,9 +11,6 @@ use Application\Repository\FileRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 use Cake\Chronos\Date;
 
-/**
- * @group Repository
- */
 class FileRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;

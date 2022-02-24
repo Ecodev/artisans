@@ -8,10 +8,10 @@ use Ecodev\Felix\DBAL\Types\EnumType;
 
 class ProductTypeType extends EnumType
 {
-    const OTHER = 'other';
-    const PAPER = 'paper';
-    const DIGITAL = 'digital';
-    const BOTH = 'both';
+    final public const OTHER = 'other';
+    final public const PAPER = 'paper';
+    final public const DIGITAL = 'digital';
+    final public const BOTH = 'both';
 
     protected function getPossibleValues(): array
     {

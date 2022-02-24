@@ -90,10 +90,6 @@ return [
         'permissions' => '0750',
     ],
     [
-        'path' => 'bin/update-image-size.php',
-        'permissions' => '0750',
-    ],
-    [
         'path' => 'node_modules/.bin/*',
         'permissions' => '0750',
     ],

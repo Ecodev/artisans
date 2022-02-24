@@ -8,15 +8,9 @@ use Application\Model\Log;
 use Application\Model\User;
 use Application\Repository\LogRepository;
 
-/**
- * @group Repository
- */
 class LogRepositoryTest extends AbstractRepositoryTest
 {
-    /**
-     * @var LogRepository
-     */
-    private $repository;
+    private LogRepository $repository;
 
     protected function setUp(): void
     {
@@ -58,7 +52,9 @@ class LogRepositoryTest extends AbstractRepositoryTest
 
     public function testDeleteOldLogs(): void
     {
+        _em()->rollBack();
         $result = $this->repository->deleteOldLogs();
+        _em()->beginTransaction();
         self::assertSame(0, $result);
     }
 

@@ -13,93 +13,77 @@ use Ecodev\Felix\Model\Traits\HasInternalRemarks;
 use Ecodev\Felix\Model\Traits\HasName;
 
 /**
- * A session that a human can physically go to
+ * A session that a human can physically go to.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\SessionRepository")
  */
 class Session extends AbstractModel
 {
+    use HasInternalRemarks;
     use HasName;
     use HasRichTextDescription;
-    use HasInternalRemarks;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $region = '';
+    private string $region = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $locality = '';
+    private string $locality = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $street = '';
+    private string $street = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $mailingList = '';
+    private string $mailingList = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $price = '';
+    private string $price = '';
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
-    private $availability = '';
+    private string $availability = '';
 
     /**
-     * Used for display
+     * Used for display.
      *
      * @var string[]
      *
      * @ORM\Column(type="json")
      */
-    private $dates = [];
+    private array $dates = [];
 
     /**
-     * Used for filter + sorting. Represents the first date
-     *
-     * @var Date
+     * Used for filter + sorting. Represents the first date.
      *
      * @ORM\Column(type="date")
      */
-    private $startDate;
+    private Date $startDate;
 
     /**
-     * Used for filter + sorting. Represents the first date
-     *
-     * @var Date
+     * Used for filter + sorting. Represents the first date.
      *
      * @ORM\Column(type="date")
      */
-    private $endDate;
+    private Date $endDate;
 
     /**
-     * @var Collection
+     * @var Collection<User>
      * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
      */
-    private $facilitators;
+    private Collection $facilitators;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -167,7 +151,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * List of dates
+     * List of dates.
      *
      * @return string[]
      */
@@ -177,7 +161,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * List of dates
+     * List of dates.
      *
      * @param string[] $dates
      */
@@ -212,7 +196,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * Add facilitator
+     * Add facilitator.
      */
     public function addFacilitator(User $facilitator): void
     {
@@ -223,7 +207,7 @@ class Session extends AbstractModel
     }
 
     /**
-     * Remove facilitator
+     * Remove facilitator.
      */
     public function removeFacilitator(User $facilitator): void
     {

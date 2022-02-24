@@ -366,14 +366,14 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * Custom assert that will not produce gigantic diff
+     * Custom assert that will not produce gigantic diff.
      */
     private function assertFile(string $file, string $actual): void
     {
         // Log actual result for easier comparison with external diff tools
         $logFile = 'logs/' . $file;
         $dir = dirname($logFile);
-        @mkdir($dir, 0777, true);
+        @mkdir($dir, 0o777, true);
         file_put_contents($logFile, $actual);
 
         self::assertFileExists($file, 'Expected file must exist on disk, fix it with: cp ' . $logFile . ' ' . $file);

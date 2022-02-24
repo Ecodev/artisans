@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A message sent to a user
+ * A message sent to a user.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\MessageRepository")
  */
@@ -17,17 +17,15 @@ class Message extends AbstractModel implements \Ecodev\Felix\Model\Message
     use \Ecodev\Felix\Model\Traits\Message;
 
     /**
-     * @var null|User
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="CASCADE")
      * })
      */
-    private $recipient;
+    private ?User $recipient = null;
 
     /**
-     * Set recipient
+     * Set recipient.
      */
     public function setRecipient(?User $recipient): void
     {
@@ -36,7 +34,7 @@ class Message extends AbstractModel implements \Ecodev\Felix\Model\Message
     }
 
     /**
-     * Get recipient
+     * Get recipient.
      */
     public function getRecipient(): ?User
     {

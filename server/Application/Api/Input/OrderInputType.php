@@ -14,36 +14,34 @@ class OrderInputType extends InputObjectType
     {
         $config = [
             'description' => 'A shopping cart order.',
-            'fields' => function (): array {
-                return [
-                    'paymentMethod' => [
-                        'type' => self::nonNull(_types()->get('PaymentMethod')),
-                    ],
-                    'orderLines' => [
-                        'type' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get('OrderLineInput')))),
-                    ],
+            'fields' => fn (): array => [
+                'paymentMethod' => [
+                    'type' => self::nonNull(_types()->get('PaymentMethod')),
+                ],
+                'orderLines' => [
+                    'type' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get('OrderLineInput')))),
+                ],
 
-                    // Billing address
-                    'firstName' => [
-                        'type' => self::string(),
-                    ],
-                    'lastName' => [
-                        'type' => self::string(),
-                    ],
-                    'street' => [
-                        'type' => self::string(),
-                    ],
-                    'postcode' => [
-                        'type' => self::string(),
-                    ],
-                    'locality' => [
-                        'type' => self::string(),
-                    ],
-                    'country' => [
-                        'type' => _types()->getId(Country::class),
-                    ],
-                ];
-            },
+                // Billing address
+                'firstName' => [
+                    'type' => self::string(),
+                ],
+                'lastName' => [
+                    'type' => self::string(),
+                ],
+                'street' => [
+                    'type' => self::string(),
+                ],
+                'postcode' => [
+                    'type' => self::string(),
+                ],
+                'locality' => [
+                    'type' => self::string(),
+                ],
+                'country' => [
+                    'type' => _types()->getId(Country::class),
+                ],
+            ],
         ];
 
         parent::__construct($config);

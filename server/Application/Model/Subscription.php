@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * A subscription
+ * A subscription.
  *
  * @ORM\Entity(repositoryClass="\Application\Repository\SubscriptionRepository")
  */
@@ -19,6 +19,6 @@ class Subscription extends AbstractProduct
      */
     public function isPro(): bool
     {
-        return (bool) preg_match('~^abo-pro-~', $this->getCode());
+        return (bool) preg_match('~^abo-pro-~', (string) $this->getCode());
     }
 }

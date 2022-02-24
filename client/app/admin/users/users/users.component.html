@@ -31,7 +31,7 @@
                     <natural-icon name="file_copy"></natural-icon>
                 </button>
 
-                <natural-columns-picker [(selection)]="selectedColumns" [initialSelection]="initialColumns">
+                <natural-columns-picker (selectionChange)="selectColumns($event)" [selections]="selectedColumns">
                     <span naturalColumnsPickerColumn="name">Nom</span>
                     <span naturalColumnsPickerColumn="creationDate">Créé le</span>
                     <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
@@ -44,8 +44,8 @@
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-                <tr *matHeaderRowDef="selectedColumns" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: selectedColumns" mat-row></tr>
+                <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
                 <ng-container matColumnDef="name">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>

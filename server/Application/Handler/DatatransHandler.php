@@ -24,42 +24,12 @@ use Throwable;
 
 class DatatransHandler extends AbstractHandler
 {
-    /**
-     * @var TemplateRendererInterface
-     */
-    private $template;
-
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
-     * @var array
-     */
-    private $config;
-
-    /**
-     * @var Mailer
-     */
-    private $mailer;
-
-    /**
-     * @var MessageQueuer
-     */
-    private $messageQueuer;
-
-    public function __construct(EntityManager $entityManager, TemplateRendererInterface $template, array $config, Mailer $mailer, MessageQueuer $messageQueuer)
+    public function __construct(private readonly EntityManager $entityManager, private readonly TemplateRendererInterface $template, private readonly array $config, private readonly Mailer $mailer, private readonly MessageQueuer $messageQueuer)
     {
-        $this->entityManager = $entityManager;
-        $this->template = $template;
-        $this->config = $config;
-        $this->mailer = $mailer;
-        $this->messageQueuer = $messageQueuer;
     }
 
     /**
-     * Webhook called by datatrans when a payment was made
+     * Webhook called by datatrans when a payment was made.
      *
      * See documentation: https://api-reference.datatrans.ch/#failed-unsuccessful-authorization-response
      */
@@ -95,7 +65,7 @@ class DatatransHandler extends AbstractHandler
     }
 
     /**
-     * Make sure the signature protecting important body fields is valid
+     * Make sure the signature protecting important body fields is valid.
      *
      * @param string $key HMAC-SHA256 signing key in hexadecimal format
      */
@@ -114,7 +84,7 @@ class DatatransHandler extends AbstractHandler
     }
 
     /**
-     * Create a message in a coherent way
+     * Create a message in a coherent way.
      */
     private function createMessage(string $status, string $message, array $detail): array
     {
@@ -126,7 +96,7 @@ class DatatransHandler extends AbstractHandler
     }
 
     /**
-     * Dispatch the data received from Datatrans to take appropriate actions
+     * Dispatch the data received from Datatrans to take appropriate actions.
      */
     private function dispatch(string $status, array $body): array
     {
@@ -159,9 +129,7 @@ class DatatransHandler extends AbstractHandler
         $orderRepository = $this->entityManager->getRepository(Order::class);
 
         /** @var null|Order $order */
-        $order = $orderRepository->getAclFilter()->runWithoutAcl(function () use ($orderRepository, $orderId) {
-            return $orderRepository->findOneById($orderId);
-        });
+        $order = $orderRepository->getAclFilter()->runWithoutAcl(fn () => $orderRepository->findOneById($orderId));
 
         if (!$order) {
             throw new Exception('Cannot validate an order without a valid order ID');
@@ -222,7 +190,7 @@ class DatatransHandler extends AbstractHandler
     }
 
     /**
-     * Notify the user and the admins
+     * Notify the user and the admins.
      */
     private function notify(Order $order): void
     {
@@ -232,9 +200,7 @@ class DatatransHandler extends AbstractHandler
         $user = $order->getOwner();
 
         if ($user) {
-            $message = $repository->getAclFilter()->runWithoutAcl(function () use ($user, $order) {
-                return $this->messageQueuer->queueUserValidatedOrder($user, $order);
-            });
+            $message = $repository->getAclFilter()->runWithoutAcl(fn () => $this->messageQueuer->queueUserValidatedOrder($user, $order));
             $this->mailer->sendMessageAsync($message);
         }
 

@@ -12,35 +12,31 @@ use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasName;
 
 /**
- * A news
+ * A news.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\NewsRepository")
  */
 class News extends AbstractModel
 {
+    use HasDate;
     use HasName;
     use HasRichTextDescription;
-    use HasDate;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isActive = false;
+    private bool $isActive = false;
 
     /**
-     * @var string
-     *
      * @ORM\Column(type="text", length=65535, options={"default" = ""})
      */
-    private $content = '';
+    private string $content = '';
 
     /**
-     * @var Collection
+     * @var Collection<Comment>
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="news")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {
@@ -48,7 +44,7 @@ class News extends AbstractModel
     }
 
     /**
-     * Whether this news is shown
+     * Whether this news is shown.
      */
     public function isActive(): bool
     {
@@ -56,7 +52,7 @@ class News extends AbstractModel
     }
 
     /**
-     * Whether this news is shown
+     * Whether this news is shown.
      */
     public function setIsActive(bool $isActive): void
     {
@@ -64,7 +60,7 @@ class News extends AbstractModel
     }
 
     /**
-     * Get comments sent to the news
+     * Get comments sent to the news.
      */
     public function getComments(): Collection
     {
@@ -73,7 +69,7 @@ class News extends AbstractModel
 
     /**
      * Notify the news that it has a new comment
-     * This should only be called by Comment::setNews()
+     * This should only be called by Comment::setNews().
      */
     public function commentAdded(Comment $comment): void
     {
@@ -82,7 +78,7 @@ class News extends AbstractModel
 
     /**
      * Notify the news that a comment was removed
-     * This should only be called by Comment::setNews()
+     * This should only be called by Comment::setNews().
      */
     public function commentRemoved(Comment $comment): void
     {

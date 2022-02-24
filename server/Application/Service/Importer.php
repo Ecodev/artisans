@@ -47,7 +47,7 @@ class Importer
 
     private array $seenPatterns = [];
 
-    private ?int $currentUser;
+    private ?int $currentUser = null;
 
     private array $errors = [];
 
@@ -282,22 +282,23 @@ class Importer
         $count = $this->connection->executeQuery('SELECT COUNT(*) FROM user WHERE email REGEXP :pattern', ['pattern' => $pattern])->fetchOne();
         $maximumUserPerPattern = 100;
         if ($count > $maximumUserPerPattern) {
-            $this->throw(<<<STRING
-                L'expression régulière "$pattern" affecte $count utilisateurs, ce qui est supérieur à la limite de $maximumUserPerPattern. Si c'est vraiment voulu, il faut contacter Ecodev.
-                STRING
+            $this->throw(
+                <<<STRING
+                    L'expression régulière "$pattern" affecte $count utilisateurs, ce qui est supérieur à la limite de $maximumUserPerPattern. Si c'est vraiment voulu, il faut contacter Ecodev.
+                    STRING
             );
         }
 
         $this->seenPatterns[$pattern] = $this->lineNumber;
     }
 
-    private function readReviewId(string $reviewNumber): ?string
+    private function readReviewId(string $reviewNumber): ?int
     {
         if (!$reviewNumber) {
             return null;
         }
 
-        if ($reviewNumber && !preg_match('~^\d+$~', $reviewNumber)) {
+        if (!preg_match('~^\d+$~', $reviewNumber)) {
             $this->throw('Un numéro de revue doit être entièrement numérique, mais est : "' . $reviewNumber . '"');
 
             return null;
@@ -313,7 +314,7 @@ class Importer
         return $reviewNumberNumeric >= $this->lastReview ? $this->reviewByNumber[$reviewNumberNumeric] : null;
     }
 
-    private function readCountryId(string $country): ?string
+    private function readCountryId(string $country): ?int
     {
         if (!$country) {
             return null;
@@ -481,7 +482,7 @@ class Importer
     }
 
     /**
-     * To upper without any accent
+     * To upper without any accent.
      */
     private function toUpper(string $name): string
     {

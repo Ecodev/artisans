@@ -30,60 +30,48 @@ use GraphQL\Doctrine\Annotation as API;
 abstract class AbstractModel implements HasOwner, Model
 {
     /**
-     * @var int
-     *
      * @ORM\Column(type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var null|Chronos
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $creationDate;
+    private ?Chronos $creationDate = null;
 
     /**
-     * @var null|Chronos
-     *
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $updateDate;
+    private ?Chronos $updateDate = null;
 
     /**
-     * @var null|User
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="SET NULL")
      * })
      */
-    private $creator;
+    private ?User $creator = null;
 
     /**
-     * @var null|User
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="SET NULL")
      * })
      */
-    private $owner;
+    private ?User $owner = null;
 
     /**
-     * @var null|User
-     *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumns({
      *     @ORM\JoinColumn(onDelete="SET NULL")
      * })
      */
-    private $updater;
+    private ?User $updater = null;
 
     /**
-     * Get id
+     * Get id.
      */
     public function getId(): ?int
     {
@@ -91,7 +79,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Set creation date
+     * Set creation date.
      */
     private function setCreationDate(Chronos $creationDate): void
     {
@@ -99,7 +87,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get creation date
+     * Get creation date.
      */
     public function getCreationDate(): ?Chronos
     {
@@ -107,7 +95,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Set update date
+     * Set update date.
      */
     private function setUpdateDate(Chronos $updateDate): void
     {
@@ -115,7 +103,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get update date
+     * Get update date.
      */
     public function getUpdateDate(): ?Chronos
     {
@@ -123,7 +111,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Set creator
+     * Set creator.
      */
     private function setCreator(?User $creator): void
     {
@@ -131,7 +119,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get creator
+     * Get creator.
      */
     public function getCreator(): ?User
     {
@@ -139,7 +127,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Set owner
+     * Set owner.
      */
     public function setOwner(?User $owner): void
     {
@@ -163,7 +151,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get owner
+     * Get owner.
      */
     public function getOwner(): ?User
     {
@@ -171,7 +159,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Set updater
+     * Set updater.
      */
     private function setUpdater(?User $updater): void
     {
@@ -179,7 +167,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get updater
+     * Get updater.
      */
     public function getUpdater(): ?User
     {
@@ -187,7 +175,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get default owner for creation
+     * Get default owner for creation.
      */
     protected function getOwnerForCreation(): ?User
     {
@@ -195,7 +183,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Automatically called by Doctrine when the object is saved for the first time
+     * Automatically called by Doctrine when the object is saved for the first time.
      *
      * @ORM\PrePersist
      */
@@ -210,7 +198,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Automatically called by Doctrine when the object is updated
+     * Automatically called by Doctrine when the object is updated.
      *
      * @ORM\PreUpdate
      */
@@ -221,7 +209,7 @@ abstract class AbstractModel implements HasOwner, Model
     }
 
     /**
-     * Get permissions on this object for the current user
+     * Get permissions on this object for the current user.
      *
      * @API\Field(type="Permissions")
      */

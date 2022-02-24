@@ -21,7 +21,7 @@ use Ecodev\Felix\Model\Traits\HasPassword;
 use GraphQL\Doctrine\Annotation as API;
 
 /**
- * User
+ * User.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks
@@ -34,26 +34,23 @@ use GraphQL\Doctrine\Annotation as API;
  */
 class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {
-    const ROLE_ANONYMOUS = 'anonymous';
-    const ROLE_MEMBER = 'member';
-    const ROLE_FACILITATOR = 'facilitator';
-    const ROLE_ADMINISTRATOR = 'administrator';
+    final public const ROLE_ANONYMOUS = 'anonymous';
+    final public const ROLE_MEMBER = 'member';
+    final public const ROLE_FACILITATOR = 'facilitator';
+    final public const ROLE_ADMINISTRATOR = 'administrator';
 
     use HasAddress;
-    use HasSubscriptionLastReview;
     use HasPassword;
+    use HasSubscriptionLastReview;
     use IsImportable;
 
-    /**
-     * @var User
-     */
-    private static $currentUser;
+    private static ?User $currentUser = null;
 
     /**
      * Set currently logged in user
-     * WARNING: this method should only be called from \Application\Authentication\AuthenticationListener
+     * WARNING: this method should only be called from \Application\Authentication\AuthenticationListener.
      *
-     * @param \Application\Model\User $user
+     * @param User $user
      */
     public static function setCurrent(?self $user): void
     {
@@ -69,7 +66,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Returns currently logged user or null
+     * Returns currently logged user or null.
      */
     public static function getCurrent(): ?self
     {
@@ -77,61 +74,54 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
 
     /**
-     * @var string
      * @ORM\Column(type="UserRole", options={"default" = User::ROLE_MEMBER})
      */
-    private $role = self::ROLE_MEMBER;
+    private string $role = self::ROLE_MEMBER;
 
     /**
-     * @var string
      * @ORM\Column(type="Membership", options={"default" = MembershipType::NONE})
      */
-    private $membership = MembershipType::NONE;
+    private string $membership = MembershipType::NONE;
 
     /**
-     * @var null|string
      * @ORM\Column(type="ProductType", nullable=true)
      */
-    private $subscriptionType;
+    private ?string $subscriptionType = null;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=25, options={"default" = ""})
      */
-    private $phone = '';
+    private string $phone = '';
 
     /**
-     * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $webTemporaryAccess = false;
+    private bool $webTemporaryAccess = false;
 
     /**
-     * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
      */
-    private $isPublicFacilitator = false;
+    private bool $isPublicFacilitator = false;
 
     /**
-     * @var Collection
+     * @var Collection<Session>
      * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
-    private $sessions;
+    private Collection $sessions;
 
     /**
-     * @var Collection
+     * @var Collection<User>
      * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
      */
-    private $users;
+    private Collection $users;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $role role for new user
      */
@@ -143,7 +133,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Get full name
+     * Get full name.
      */
     public function getName(): string
     {
@@ -151,7 +141,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @API\Input(type="Email")
      *
@@ -163,7 +153,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @API\Field(type="Email")
      */
@@ -173,7 +163,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Use email as technical identifier of user
+     * Use email as technical identifier of user.
      *
      * @API\Exclude
      */
@@ -183,7 +173,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Get the user role
+     * Get the user role.
      *
      * @API\Field(type="UserRole")
      */
@@ -193,7 +183,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Sets the user role
+     * Sets the user role.
      *
      * @API\Input(type="UserRole")
      */
@@ -230,7 +220,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Notify the user that it has a new session.
-     * This should only be called by Session::addFacilitator()
+     * This should only be called by Session::addFacilitator().
      */
     public function sessionAdded(Session $session): void
     {
@@ -239,7 +229,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Notify the user that a session was removed.
-     * This should only be called by Session::removeFacilitator()
+     * This should only be called by Session::removeFacilitator().
      */
     public function sessionRemoved(Session $session): void
     {
@@ -283,7 +273,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Get the first login date
+     * Get the first login date.
      */
     public function getFirstLogin(): ?Chronos
     {
@@ -294,7 +284,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Get the last login date
+     * Get the last login date.
      */
     public function getLastLogin(): ?Chronos
     {
@@ -305,7 +295,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Override parent to prevents users created from administration to be family of the administrator
+     * Override parent to prevents users created from administration to be family of the administrator.
      *
      * The owner must be explicitly set for all users.
      */
@@ -315,7 +305,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Set subscription type
+     * Set subscription type.
      *
      * @API\Exclude
      */
@@ -325,7 +315,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Get subscription type
+     * Get subscription type.
      *
      * @API\Field(type="?ProductType")
      */

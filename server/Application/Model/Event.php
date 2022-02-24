@@ -11,20 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasName;
 
 /**
- * An event
+ * An event.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\EventRepository")
  */
 class Event extends AbstractModel
 {
-    use HasName;
     use HasDate;
+    use HasName;
 
     /**
-     * @var Collection
+     * @var Collection<Comment>
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
      */
-    private $comments;
+    private Collection $comments;
 
     public function __construct()
     {
@@ -32,13 +32,12 @@ class Event extends AbstractModel
     }
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $place;
+    private string $place;
 
     /**
-     * Set place
+     * Set place.
      *
      * @param string $place
      */
@@ -48,7 +47,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get place
+     * Get place.
      */
     public function getPlace(): string
     {
@@ -56,13 +55,12 @@ class Event extends AbstractModel
     }
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=191)
      */
-    private $type;
+    private string $type;
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
      */
@@ -72,7 +70,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get type
+     * Get type.
      */
     public function getType(): string
     {
@@ -80,7 +78,7 @@ class Event extends AbstractModel
     }
 
     /**
-     * Get comments sent to the event
+     * Get comments sent to the event.
      */
     public function getComments(): Collection
     {
@@ -89,7 +87,7 @@ class Event extends AbstractModel
 
     /**
      * Notify the event that it has a new comment
-     * This should only be called by Comment::setEvent()
+     * This should only be called by Comment::setEvent().
      */
     public function commentAdded(Comment $comment): void
     {
@@ -98,7 +96,7 @@ class Event extends AbstractModel
 
     /**
      * Notify the event that a comment was removed
-     * This should only be called by Comment::setEvent()
+     * This should only be called by Comment::setEvent().
      */
     public function commentRemoved(Comment $comment): void
     {

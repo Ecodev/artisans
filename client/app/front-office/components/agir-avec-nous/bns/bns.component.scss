@@ -1,39 +1,37 @@
-:host {
-    h1.mat-h1 {
-        clear: both;
-        margin-top: 3em;
-    }
+h1.mat-h1 {
+    clear: both;
+    margin-top: 3em;
+}
 
-    h2.mat-h2 {
-        clear: both;
-        margin-top: 2em;
-    }
+h2.mat-h2 {
+    clear: both;
+    margin-top: 2em;
+}
 
-    .rich-text > :first-child {
-        margin-top: 0;
-    }
+.rich-text > :first-child {
+    margin-top: 0;
+}
 
-    .cover {
-        float: left;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        height: 150px;
-        display: block;
-    }
+.cover {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    height: 150px;
+    display: block;
+}
 
-    .mat-flat-button {
-        clear: both;
-        display: block;
-        width: 300px;
-    }
+.mat-flat-button {
+    clear: both;
+    display: block;
+    width: 300px;
+}
 
-    #lang-menu {
-        position: sticky;
-        top: 20px;
-    }
+#lang-menu {
+    position: sticky;
+    top: 20px;
+}
 
-    .illustration {
-        max-width: 100%;
-        margin: 30px 0;
-    }
+.illustration {
+    max-width: 100%;
+    margin: 30px 0;
 }

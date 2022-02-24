@@ -17,7 +17,7 @@ trait HasQuantity
     private $quantity = 0;
 
     /**
-     * Quantity ordered
+     * Quantity ordered.
      */
     public function getQuantity(): int
     {
@@ -25,7 +25,7 @@ trait HasQuantity
     }
 
     /**
-     * Quantity ordered
+     * Quantity ordered.
      *
      * @API\Exclude
      */

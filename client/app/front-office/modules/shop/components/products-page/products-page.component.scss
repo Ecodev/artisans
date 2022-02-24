@@ -1,101 +1,99 @@
-:host {
-    .products.grid {
-        @media screen and (max-width: 960px) {
-            .product {
-                margin-bottom: 40px;
-            }
+.products.grid {
+    @media screen and (max-width: 960px) {
+        .product {
+            margin-bottom: 40px;
         }
+    }
 
-        @media screen and (min-width: 960px) {
-            display: grid;
-            grid-template-columns: minmax(auto, 33%) minmax(auto, 33%) minmax(auto, 33%);
-            grid-auto-rows: 30px;
-            grid-gap: 35px;
-
-            .product {
-                grid-row: span 5;
-            }
-
-            .target-customer {
-                display: inline-block;
-                height: 36px;
-                line-height: 36px;
-                padding: 0 16px !important;
-            }
-
-            &.highlight-first-items .product {
-                &:nth-child(1) {
-                    grid-column: span 2;
-                    grid-row: span 11;
-                }
-
-                &:nth-child(2) {
-                    grid-row: span 7;
-                }
-
-                &:nth-child(1),
-                &:nth-child(2) {
-                    .image-placeholder {
-                        display: none;
-                    }
-                }
-
-                &:nth-child(3) {
-                    grid-row: span 4;
-                }
-
-                .product-illustration {
-                    display: block;
-                    background-size: cover;
-                    background-position: center;
-                }
-            }
-        }
+    @media screen and (min-width: 960px) {
+        display: grid;
+        grid-template-columns: minmax(auto, 33%) minmax(auto, 33%) minmax(auto, 33%);
+        grid-auto-rows: 30px;
+        grid-gap: 35px;
 
         .product {
-            border-left: 6px solid transparent;
-            padding: 5px 0 5px 30px;
+            grid-row: span 5;
+        }
+
+        .target-customer {
+            display: inline-block;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 16px !important;
+        }
+
+        &.highlight-first-items .product {
+            &:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 11;
+            }
+
+            &:nth-child(2) {
+                grid-row: span 7;
+            }
+
+            &:nth-child(1),
+            &:nth-child(2) {
+                .image-placeholder {
+                    display: none;
+                }
+            }
+
+            &:nth-child(3) {
+                grid-row: span 4;
+            }
 
             .product-illustration {
-                display: none;
-            }
-
-            .image-placeholder {
-                flex: 1;
-            }
-
-            .pusher {
-                flex: 1;
-            }
-
-            .product-image img {
-                max-width: 100%;
-            }
-
-            .product-tag {
-                margin-right: 10px;
-            }
-
-            .product-price {
-                .frame-primary {
-                    padding: 5px;
-                    margin-right: 5px;
-                }
+                display: block;
+                background-size: cover;
+                background-position: center;
             }
         }
     }
 
-    .products.list {
-        .product-image {
-            max-width: 150px;
+    .product {
+        border-left: 6px solid transparent;
+        padding: 5px 0 5px 30px;
 
-            img {
-                max-width: 100%;
+        .product-illustration {
+            display: none;
+        }
+
+        .image-placeholder {
+            flex: 1;
+        }
+
+        .pusher {
+            flex: 1;
+        }
+
+        .product-image img {
+            max-width: 100%;
+        }
+
+        .product-tag {
+            margin-right: 10px;
+        }
+
+        .product-price {
+            .frame-primary {
+                padding: 5px;
+                margin-right: 5px;
             }
         }
+    }
+}
 
-        & > :not(:last-child) {
-            margin-bottom: 30px;
+.products.list {
+    .product-image {
+        max-width: 150px;
+
+        img {
+            max-width: 100%;
         }
+    }
+
+    & > :not(:last-child) {
+        margin-bottom: 30px;
     }
 }

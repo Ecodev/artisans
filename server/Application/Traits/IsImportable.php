@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 trait IsImportable
 {
     /**
-     * Whether this should be deleted because it did not exist in last import
+     * Whether this should be deleted because it did not exist in last import.
      *
      * @var bool
      * @ORM\Column(type="boolean", options={"default" = 0})
@@ -17,7 +17,7 @@ trait IsImportable
     private $shouldDelete = false;
 
     /**
-     * Whether this was found in last import
+     * Whether this was found in last import.
      */
     public function getShouldDelete(): bool
     {

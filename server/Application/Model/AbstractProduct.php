@@ -14,55 +14,47 @@ use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
 /**
- * An item that can be booked by a user
+ * An item that can be booked by a user.
  *
  * @ORM\MappedSuperclass
  */
 abstract class AbstractProduct extends AbstractModel
 {
-    use HasName;
-    use HasRichTextDescription;
     use HasCode;
     use HasInternalRemarks;
+    use HasName;
     use HasProductType;
+    use HasRichTextDescription;
 
     /**
-     * @var Money
-     *
-     * @ORM\Column(type="CHF", options={"default" = "0.00"})
+     * @ORM\Column(type="CHF", options={"default" = "0"})
      */
-    private $pricePerUnitCHF;
+    private Money $pricePerUnitCHF;
 
     /**
-     * @var Money
-     *
-     * @ORM\Column(type="EUR", options={"default" = "0.00"})
+     * @ORM\Column(type="EUR", options={"default" = "0"})
      */
-    private $pricePerUnitEUR;
+    private Money $pricePerUnitEUR;
 
     /**
-     * @var bool
-     *
      * @ORM\Column(type="boolean", options={"default" = 1})
      */
-    private $isActive = true;
+    private bool $isActive = true;
 
     /**
-     * @var null|Image
      * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $image;
+    private ?Image $image = null;
 
     /**
-     * @var null|Image
      * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $illustration;
+    private ?Image $illustration = null;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(string $name = '')
     {
@@ -104,7 +96,7 @@ abstract class AbstractProduct extends AbstractModel
     }
 
     /**
-     * Whether this product can be bought
+     * Whether this product can be bought.
      */
     public function isActive(): bool
     {
@@ -112,7 +104,7 @@ abstract class AbstractProduct extends AbstractModel
     }
 
     /**
-     * Whether this product can be bought
+     * Whether this product can be bought.
      */
     public function setIsActive(bool $isActive): void
     {

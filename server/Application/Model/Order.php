@@ -15,41 +15,39 @@ use GraphQL\Doctrine\Annotation as API;
 use Money\Money;
 
 /**
- * An order made by a users
+ * An order made by a users.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
  * @ORM\Table(name="`order`")
  */
 class Order extends AbstractModel implements HasBalanceInterface
 {
-    const STATUS_PENDING = 'pending';
-    const STATUS_VALIDATED = 'validated';
-    const STATUS_CANCELED = 'canceled';
+    final public const STATUS_PENDING = 'pending';
+    final public const STATUS_VALIDATED = 'validated';
+    final public const STATUS_CANCELED = 'canceled';
 
     use HasAddress;
     use HasAutomaticBalance;
     use HasInternalRemarks;
 
     /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
-     */
-    private $orderLines;
-
-    /**
-     * @var string
      * @ORM\Column(type="OrderStatus", options={"default" = Order::STATUS_PENDING})
      */
-    private $status = self::STATUS_PENDING;
+    private string $status = self::STATUS_PENDING;
 
     /**
-     * @var string
+     * @var Collection<OrderLine>
+     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
+     */
+    private Collection $orderLines;
+
+    /**
      * @ORM\Column(type="PaymentMethod")
      */
-    private $paymentMethod;
+    private string $paymentMethod;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param string $status status for new order
      */
@@ -63,7 +61,7 @@ class Order extends AbstractModel implements HasBalanceInterface
 
     /**
      * Notify when a order line is added
-     * This should only be called by OrderLine::setOrder()
+     * This should only be called by OrderLine::setOrder().
      */
     public function orderLineAdded(OrderLine $orderLine): void
     {
@@ -72,7 +70,7 @@ class Order extends AbstractModel implements HasBalanceInterface
 
     /**
      * Notify when a order line is removed
-     * This should only be called by OrderLine::setOrder()
+     * This should only be called by OrderLine::setOrder().
      */
     public function orderLineRemoved(OrderLine $orderLine): void
     {
@@ -125,7 +123,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     }
 
     /**
-     * Return whether there is at least one subscription in the order
+     * Return whether there is at least one subscription in the order.
      *
      * @API\Exclude
      */

@@ -1,11 +1,15 @@
 import {Apollo} from 'apollo-angular';
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {NaturalAbstractList, NaturalQueryVariablesManager, NaturalSearchSelections} from '@ecodev/natural';
+import {
+    copyToClipboard,
+    NaturalAbstractList,
+    NaturalQueryVariablesManager,
+    NaturalSearchSelections,
+} from '@ecodev/natural';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {copy} from '../../../shared/utils';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';
 import {DOCUMENT} from '@angular/common';
@@ -16,7 +20,7 @@ import {DOCUMENT} from '@angular/common';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
-    public initialColumns = ['name', 'email', 'creationDate', 'updateDate', 'membership'];
+    public selectedColumns = ['name', 'email', 'creationDate', 'updateDate', 'membership'];
 
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;
@@ -63,7 +67,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         }
     }
 
-    public copy(data: string): void {
-        copy(this.document, data);
+    public copy(text: string): void {
+        copyToClipboard(this.document, text);
     }
 }

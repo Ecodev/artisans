@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasDescription;
 
 /**
- * Configuration
+ * Configuration.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\ConfigurationRepository")
  */
@@ -17,26 +17,20 @@ class Configuration extends AbstractModel
     use HasDescription;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="`key`", type="string", length=191, unique=true)
-     */
-    private $key;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="text")
      */
-    private $value = '';
+    private string $value = '';
 
-    public function __construct(string $key = '')
-    {
-        $this->key = $key;
+    public function __construct(
+        /**
+         * @ORM\Column(name="`key`", type="string", length=191, unique=true)
+         */
+        private string $key = ''
+    ) {
     }
 
     /**
-     * Get key
+     * Get key.
      */
     public function getKey(): string
     {
@@ -44,7 +38,7 @@ class Configuration extends AbstractModel
     }
 
     /**
-     * Set value
+     * Set value.
      */
     public function setValue(string $value): void
     {
@@ -52,7 +46,7 @@ class Configuration extends AbstractModel
     }
 
     /**
-     * Get value
+     * Get value.
      */
     public function getValue(): string
     {

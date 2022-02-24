@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Injector, Input, OnInit, Output} from '@angular/core';
+import {Component, Injector, Input, OnInit} from '@angular/core';
 import {NaturalAbstractList} from '@ecodev/natural';
-import {OrderLines, OrderLinesVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderLineService} from '../services/order-lines.service';

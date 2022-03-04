@@ -10,7 +10,7 @@ export class GlobalCartService implements OnDestroy {
     private _cart!: Cart;
     private readonly subscription: Subscription;
 
-    constructor(private readonly cartCollectionService: CartCollectionService) {
+    public constructor(private readonly cartCollectionService: CartCollectionService) {
         // Whenever carts are cleared, we reload an empty global cart
         this.subscription = this.cartCollectionService.cleared.subscribe(() => this.initializeFromStorage());
         this.initializeFromStorage();

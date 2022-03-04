@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
     public sending = false;
     public form!: FormGroup;
 
-    constructor(
+    public constructor(
         protected readonly apollo: Apollo,
         protected readonly route: ActivatedRoute,
         protected readonly fb: FormBuilder,

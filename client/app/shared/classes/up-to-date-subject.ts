@@ -3,7 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 export class UpToDateSubject<T> extends BehaviorSubject<T> {
     public time: Date;
 
-    constructor(_value: T) {
+    public constructor(_value: T) {
         super(_value);
         this.time = new Date();
     }

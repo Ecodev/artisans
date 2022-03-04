@@ -31,7 +31,7 @@ export class CommentService extends NaturalAbstractModelService<
     DeleteComments,
     DeleteCommentsVariables
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'comment', commentQuery, commentsQuery, createComment, updateComment, deleteComments);
     }
 

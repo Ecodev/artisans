@@ -58,10 +58,10 @@
                             <mat-label>Contenu complet</mat-label>
                             <textarea
                                 (change)="update()"
-                                [matAutosizeMinRows]="1"
+                                [cdkAutosizeMinRows]="1"
                                 formControlName="content"
                                 matInput
-                                [matTextareaAutosize]="true"
+                                [cdkTextareaAutosize]="true"
                             ></textarea>
                         </mat-form-field>
                     </div>
@@ -175,10 +175,10 @@
                             <mat-label>Remarques internes</mat-label>
                             <textarea
                                 (change)="update()"
-                                [matAutosizeMaxRows]="3"
+                                [cdkAutosizeMaxRows]="3"
                                 formControlName="internalRemarks"
                                 matInput
-                                [matTextareaAutosize]="true"
+                                [cdkTextareaAutosize]="true"
                             ></textarea>
                         </mat-form-field>
                     </div>

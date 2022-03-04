@@ -49,7 +49,7 @@ export class ProductTagService extends NaturalAbstractModelService<
     DeleteProductTags,
     DeleteProductTagsVariables
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(
             apollo,
             'productTag',

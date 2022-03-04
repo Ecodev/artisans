@@ -33,7 +33,7 @@ export class SessionsIncomingComponent implements OnInit {
         {name: 'Région Valais central', mailingList: '61360'},
     ];
 
-    constructor(
+    public constructor(
         private readonly sessionService: SessionService,
         public readonly router: Router,
         public readonly route: ActivatedRoute,
@@ -71,7 +71,7 @@ export class SessionsIncomingComponent implements OnInit {
         loggedInConfirmMessage: string,
         confirmMessage: string,
     ): void {
-        const subscribeFn = (email: string) => {
+        const subscribeFn = (email: string): void => {
             this.userService.addToMailingList(session.mailingList, email).subscribe(() => {});
             this.snackbar.open('Inscription confirmée', undefined, {
                 duration: 5000,

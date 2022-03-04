@@ -25,7 +25,7 @@ export class TagsNavigationComponent implements OnInit {
      */
     @Input() public linkBase: any[] = [];
 
-    constructor() {}
+    public constructor() {}
 
     public ngOnInit(): void {
         if (this.service) {

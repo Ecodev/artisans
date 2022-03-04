@@ -13,7 +13,7 @@ import {CommentService} from '../services/comment.service';
 export class CommentsComponent extends NaturalAbstractList<CommentService> implements OnInit {
     public displayedColumns = ['name'];
 
-    constructor(
+    public constructor(
         service: CommentService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

@@ -30,7 +30,7 @@ export class OrderLineService extends NaturalAbstractModelService<
     never,
     never
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'orderLine', orderLineQuery, orderLinesQuery, null, updateOrderLine, null);
     }
 

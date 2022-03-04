@@ -13,7 +13,7 @@ import {CommentService} from '../services/comment.service';
     styleUrls: ['./comment.component.scss'],
 })
 export class CommentComponent extends NaturalAbstractDetail<CommentService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         commentService: CommentService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

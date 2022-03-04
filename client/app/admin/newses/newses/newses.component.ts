@@ -13,7 +13,7 @@ import {NewsService} from '../services/news.service';
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
     public displayedColumns = ['name'];
 
-    constructor(
+    public constructor(
         service: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

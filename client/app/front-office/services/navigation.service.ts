@@ -20,7 +20,7 @@ export interface MenuItem {
     providedIn: 'root',
 })
 export class NavigationService {
-    constructor(
+    public constructor(
         private readonly overlay: Overlay,
         private readonly injector: Injector,
         private readonly router: Router,

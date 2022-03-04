@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './desinvestir-fossile.component.html',
     styleUrls: ['./desinvestir-fossile.component.scss'],
 })
-export class DesinvestirFossileComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class DesinvestirFossileComponent {}

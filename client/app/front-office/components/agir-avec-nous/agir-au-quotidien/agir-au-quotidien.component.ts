@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './agir-au-quotidien.component.html',
     styleUrls: ['./agir-au-quotidien.component.scss'],
 })
-export class AgirAuQuotidienComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class AgirAuQuotidienComponent {}

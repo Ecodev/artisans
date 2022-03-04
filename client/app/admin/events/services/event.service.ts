@@ -32,7 +32,7 @@ export class EventService extends NaturalAbstractModelService<
     DeleteEvents,
     DeleteEventsVariables
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
     }
 

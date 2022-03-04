@@ -25,7 +25,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;
 
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         private readonly userService: UserService,
         injector: Injector,

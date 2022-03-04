@@ -1,4 +1,3 @@
-// tslint:disable:directive-class-suffix
 import {Directive, Injector, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {
@@ -34,7 +33,7 @@ export class AbstractInfiniteLoadList<
 {
     public items: ExtractTall<TService>['items'] | null = null;
 
-    constructor(service: any, injector: Injector) {
+    public constructor(service: any, injector: Injector) {
         super(service, injector);
         this.persistSearch = false;
     }

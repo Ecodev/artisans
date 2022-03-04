@@ -17,7 +17,7 @@ export class ProfileComponent implements OnInit {
 
     public membershipProduct: Product['product'] | null = null;
 
-    constructor(
+    public constructor(
         public readonly userService: UserService,
         private readonly alertService: NaturalAlertService,
         private readonly route: ActivatedRoute,

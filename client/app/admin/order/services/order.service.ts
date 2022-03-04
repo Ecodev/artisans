@@ -33,7 +33,7 @@ export class OrderService extends NaturalAbstractModelService<
     any,
     any
 > {
-    constructor(apollo: Apollo, private readonly orderLineService: OrderLineService) {
+    public constructor(apollo: Apollo, private readonly orderLineService: OrderLineService) {
         super(apollo, 'order', orderQuery, ordersQuery, createOrder, null, null);
     }
 

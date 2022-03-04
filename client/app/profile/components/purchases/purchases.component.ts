@@ -12,7 +12,7 @@ import {ProductType, Purchases_purchases_items} from '../../../shared/generated-
 export class PurchasesComponent extends NaturalAbstractList<PurchaseService> implements OnInit {
     public ProductType = ProductType;
 
-    constructor(
+    public constructor(
         service: PurchaseService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         injector: Injector,

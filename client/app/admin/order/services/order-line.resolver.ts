@@ -9,7 +9,10 @@ import {OrderLineService} from './order-lines.service';
     providedIn: 'root',
 })
 export class OrderLineResolver implements Resolve<OrderLineResolve> {
-    constructor(private readonly orderLineService: OrderLineService, private readonly errorService: ErrorService) {}
+    public constructor(
+        private readonly orderLineService: OrderLineService,
+        private readonly errorService: ErrorService,
+    ) {}
 
     /**
      * Resolve orderLine data for router

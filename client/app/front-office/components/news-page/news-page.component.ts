@@ -21,7 +21,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     styleUrls: ['./news-page.component.scss'],
 })
 export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         newsService: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

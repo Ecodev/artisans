@@ -17,7 +17,7 @@ export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
         offset: null,
     };
 
-    constructor(
+    public constructor(
         service: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

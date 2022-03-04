@@ -34,7 +34,7 @@ export class SessionService extends NaturalAbstractModelService<
     DeleteSessions,
     DeleteSessionsVariables
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'session', sessionQuery, sessionsQuery, createSession, updateSession, deleteSessions);
     }
 

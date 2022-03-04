@@ -19,7 +19,7 @@ export class ConfigService {
     private configUrl = 'assets/config/config.local.json';
     private config = new BehaviorSubject<FrontEndConfig | null>(null);
 
-    constructor(private readonly http: HttpClient) {
+    public constructor(private readonly http: HttpClient) {
         this.http
             .get<FrontEndConfig>(this.configUrl)
             .pipe(

@@ -22,7 +22,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     styleUrls: ['./event-page.component.scss'],
 })
 export class EventPageComponent extends NaturalAbstractDetail<EventService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         eventService: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

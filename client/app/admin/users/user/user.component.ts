@@ -19,7 +19,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService> implements
      */
     public data!: UserResolve & {seo: NaturalSeoBasic};
 
-    constructor(
+    public constructor(
         private readonly userService: UserService,
         injector: Injector,
         public readonly sessionService: SessionService,

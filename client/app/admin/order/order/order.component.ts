@@ -14,7 +14,7 @@ import {OrderService} from '../services/order.service';
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.scss'],
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent {
     public forcedVariables: OrderLinesVariables;
 
     /**
@@ -32,7 +32,7 @@ export class OrderComponent implements OnInit {
      */
     public UserRole = UserRole;
 
-    constructor(
+    public constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public readonly dialogData: NaturalDialogTriggerProvidedData<never>,
         public readonly orderService: OrderService,
         public readonly alertService: NaturalAlertService,
@@ -47,8 +47,6 @@ export class OrderComponent implements OnInit {
         // Filter productLines for this current order
         this.forcedVariables = {filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]}};
     }
-
-    public ngOnInit(): void {}
 
     public updateStatus(status: string | null): void {
         if (!status) {

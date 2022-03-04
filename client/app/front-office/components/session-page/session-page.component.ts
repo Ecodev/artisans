@@ -41,7 +41,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
 
     public viewer: CurrentUserForProfile_viewer | null = null;
 
-    constructor(
+    public constructor(
         private readonly sessionService: SessionService,
         injector: Injector,
         public readonly userService: UserService,

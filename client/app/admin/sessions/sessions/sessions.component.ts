@@ -12,7 +12,7 @@ import {SessionService} from '../services/session.service';
     styleUrls: ['./sessions.component.scss'],
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         sessionService: SessionService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

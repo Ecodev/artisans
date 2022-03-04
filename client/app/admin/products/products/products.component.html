@@ -69,7 +69,7 @@
                 <ng-container matColumnDef="pricePerUnitCHF">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix CHF</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
-                        <span *ngIf="element.pricePerUnitCHF != '0.00'">{{
+                        <span *ngIf="element.pricePerUnitCHF !== '0.00'">{{
                             element.pricePerUnitCHF | currency: 'CHF'
                         }}</span>
                     </td>
@@ -78,7 +78,7 @@
                 <ng-container matColumnDef="pricePerUnitEUR">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix EUR</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
-                        <span *ngIf="element.pricePerUnitEUR != '0.00'">{{
+                        <span *ngIf="element.pricePerUnitEUR !== '0.00'">{{
                             element.pricePerUnitEUR | currency: 'EUR'
                         }}</span>
                     </td>

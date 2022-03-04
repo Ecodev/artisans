@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './comite-status.component.html',
     styleUrls: ['./comite-status.component.scss'],
 })
-export class ComiteStatusComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class ComiteStatusComponent {}

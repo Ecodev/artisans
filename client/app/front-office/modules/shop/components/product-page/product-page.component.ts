@@ -70,7 +70,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
 
     public url: string;
 
-    constructor(
+    public constructor(
         private readonly productService: ProductService,
         private readonly purchaseService: PurchaseService,
         injector: Injector,

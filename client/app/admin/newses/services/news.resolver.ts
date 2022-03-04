@@ -9,7 +9,7 @@ import {NewsService} from './news.service';
     providedIn: 'root',
 })
 export class NewsResolver implements Resolve<NewsResolve> {
-    constructor(private readonly productService: NewsService, private readonly errorService: ErrorService) {}
+    public constructor(private readonly productService: NewsService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve product data for router

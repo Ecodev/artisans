@@ -34,9 +34,10 @@ export class AddressComponent {
     /**
      * Emits when form changes
      */
-    @Output() public readonly change: EventEmitter<void> = new EventEmitter<void>();
+    // eslint-disable-next-line @angular-eslint/no-output-native
+    @Output() public readonly change = new EventEmitter<void>();
 
-    constructor(public readonly countryService: CountryService) {}
+    public constructor(public readonly countryService: CountryService) {}
 
     public update(): void {
         this.change.emit();

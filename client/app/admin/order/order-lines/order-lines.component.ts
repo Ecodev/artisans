@@ -35,7 +35,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
      */
     @Input() public pageSizeOptions = [5, 10, 25, 50, 100, 200];
 
-    constructor(
+    public constructor(
         service: OrderLineService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

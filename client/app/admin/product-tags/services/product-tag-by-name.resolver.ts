@@ -13,7 +13,10 @@ export interface ProductTagByNameResolve {
     providedIn: 'root',
 })
 export class ProductTagByNameResolver implements Resolve<ProductTagByNameResolve> {
-    constructor(private readonly productTagService: ProductTagService, private readonly errorService: ErrorService) {}
+    public constructor(
+        private readonly productTagService: ProductTagService,
+        private readonly errorService: ErrorService,
+    ) {}
 
     /**
      * Resolve productTag data for router

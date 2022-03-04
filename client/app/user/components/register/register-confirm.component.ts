@@ -18,7 +18,7 @@ import {
     styleUrls: ['./register.component.scss'],
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
-    constructor(
+    public constructor(
         apollo: Apollo,
         route: ActivatedRoute,
         fb: FormBuilder,

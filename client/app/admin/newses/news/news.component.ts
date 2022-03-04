@@ -21,7 +21,7 @@ import {NewsService} from '../services/news.service';
     styleUrls: ['./news.component.scss'],
 })
 export class NewsComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         newsService: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

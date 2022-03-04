@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './numerique-ethique.component.html',
     styleUrls: ['./numerique-ethique.component.scss'],
 })
-export class NumeriqueEthiqueComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class NumeriqueEthiqueComponent {}

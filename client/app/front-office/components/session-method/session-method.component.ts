@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './session-method-2.component.html',
     styleUrls: ['./session-method.component.scss'],
 })
-export class SessionMethodComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class SessionMethodComponent {}

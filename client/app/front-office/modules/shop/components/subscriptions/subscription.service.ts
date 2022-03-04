@@ -40,7 +40,7 @@ export class SubscriptionService extends NaturalAbstractModelService<
     DeleteSubscriptions,
     DeleteSubscriptionsVariables
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(
             apollo,
             'subscription',

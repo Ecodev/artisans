@@ -32,7 +32,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
      */
     public data!: SessionResolve & {seo: NaturalSeoBasic};
 
-    constructor(
+    public constructor(
         private readonly sessionService: SessionService,
         injector: Injector,
         public readonly userService: UserService,

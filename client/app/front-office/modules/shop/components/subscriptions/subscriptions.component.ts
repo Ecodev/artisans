@@ -18,7 +18,7 @@ export class SubscriptionsComponent implements OnInit {
 
     public ProductType = ProductType;
 
-    constructor(
+    public constructor(
         private readonly subscriptionService: SubscriptionService,
         private readonly router: Router,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
@@ -34,7 +34,7 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     public order(id: string, type: ProductType, withEmails?: boolean): void {
-        const subscribeFn = (emails?: string[]) => {
+        const subscribeFn = (emails?: string[]): void => {
             if (!this.subscriptions) {
                 return;
             }

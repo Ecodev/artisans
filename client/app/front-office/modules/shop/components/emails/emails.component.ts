@@ -22,7 +22,7 @@ export class EmailsComponent {
      */
     public readonly emailsControl: FormArray;
 
-    constructor(@Inject(MAT_DIALOG_DATA) public readonly dialogData: EmailsData) {
+    public constructor(@Inject(MAT_DIALOG_DATA) public readonly dialogData: EmailsData) {
         const emails: string[] = dialogData.emails ?? [''];
         const validators = dialogData.required ? [Validators.required, deliverableEmail] : [deliverableEmail];
         this.emailsControl = new FormArray(emails.map(email => new FormControl(email, validators)));

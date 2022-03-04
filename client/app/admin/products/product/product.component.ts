@@ -24,7 +24,7 @@ import {ProductService} from '../services/product.service';
 export class ProductComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
-    constructor(
+    public constructor(
         public readonly productService: ProductService,
         injector: Injector,
         public readonly productTagService: ProductTagService,

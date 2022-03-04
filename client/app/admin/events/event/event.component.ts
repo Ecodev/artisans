@@ -21,7 +21,7 @@ import {EventService} from '../services/event.service';
     styleUrls: ['./event.component.scss'],
 })
 export class EventComponent extends NaturalAbstractDetail<EventService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         eventService: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

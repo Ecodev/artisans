@@ -25,7 +25,7 @@ export class HomeBlockComponent implements OnInit {
 
     public lastValue: Block | null = null;
 
-    constructor(
+    public constructor(
         private readonly configService: ConfigurationService,
         public readonly permissionService: PermissionsService,
     ) {}

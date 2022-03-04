@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './apero-divest.component.html',
     styleUrls: ['./apero-divest.component.scss'],
 })
-export class AperoDivestComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class AperoDivestComponent {}

@@ -9,7 +9,10 @@ import {ProductTagService} from './product-tag.service';
     providedIn: 'root',
 })
 export class ProductTagResolver implements Resolve<ProductTagResolve> {
-    constructor(private readonly productTagService: ProductTagService, private readonly errorService: ErrorService) {}
+    public constructor(
+        private readonly productTagService: ProductTagService,
+        private readonly errorService: ErrorService,
+    ) {}
 
     /**
      * Resolve productTag data for router

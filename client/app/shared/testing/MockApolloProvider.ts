@@ -14,7 +14,7 @@ import {schema as introspectionResult} from './../../../../data/tmp/schema';
     providedIn: 'root',
 })
 class MockApollo extends Apollo {
-    constructor(ngZone: NgZone) {
+    public constructor(ngZone: NgZone) {
         super(ngZone);
         this.client = this.createMockClient();
     }

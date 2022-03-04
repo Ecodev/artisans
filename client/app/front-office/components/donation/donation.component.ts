@@ -13,16 +13,14 @@ export type DonationData = {
     templateUrl: './donation.component.html',
     styleUrls: ['./donation.component.scss'],
 })
-export class DonationComponent implements OnInit {
+export class DonationComponent {
     public amount = new FormControl(null, [Validators.required, Validators.min(0), money]);
 
-    constructor(
+    public constructor(
         @Inject(MAT_DIALOG_DATA) dialogData: DonationData,
         public readonly currencyService: CurrencyService,
         public readonly dialogRef: MatDialogRef<DonationComponent, number | null>,
     ) {
         this.amount.setValue(dialogData.amount);
     }
-
-    public ngOnInit(): void {}
 }

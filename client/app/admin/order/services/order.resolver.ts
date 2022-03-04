@@ -9,7 +9,7 @@ import {OrderService} from './order.service';
     providedIn: 'root',
 })
 export class OrderResolver implements Resolve<OrderResolve> {
-    constructor(private readonly orderService: OrderService, private readonly errorService: ErrorService) {}
+    public constructor(private readonly orderService: OrderService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve order data for router

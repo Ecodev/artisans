@@ -22,7 +22,7 @@ import {CartCollectionService} from './cart-collection.service';
     providedIn: 'root',
 })
 export class CartService {
-    constructor(
+    public constructor(
         private readonly orderService: OrderService,
         private readonly dialogService: MatDialog,
         private readonly currencyService: CurrencyService,

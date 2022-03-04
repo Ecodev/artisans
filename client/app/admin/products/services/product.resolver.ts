@@ -9,7 +9,7 @@ import {ProductService} from './product.service';
     providedIn: 'root',
 })
 export class ProductResolver implements Resolve<ProductResolve> {
-    constructor(private readonly productService: ProductService, private readonly errorService: ErrorService) {}
+    public constructor(private readonly productService: ProductService, private readonly errorService: ErrorService) {}
 
     /**
      * Resolve product data for router

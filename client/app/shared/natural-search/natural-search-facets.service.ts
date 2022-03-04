@@ -259,7 +259,7 @@ export class NaturalSearchFacetsService {
         ],
     };
 
-    constructor(
+    public constructor(
         private readonly enumService: NaturalEnumService,
         private readonly productService: ProductService,
         private readonly productTagService: ProductTagService,

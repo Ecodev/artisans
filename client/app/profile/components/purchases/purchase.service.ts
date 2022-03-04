@@ -23,7 +23,7 @@ export class PurchaseService extends NaturalAbstractModelService<
     never,
     never
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'purchase', null, purchasesQuery, null, null, null);
     }
 }

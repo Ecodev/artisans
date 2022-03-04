@@ -12,7 +12,7 @@ import {SubscriptionService} from '../../../front-office/modules/shop/components
     styleUrls: ['./order-line.component.scss'],
 })
 export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> implements OnInit {
-    constructor(
+    public constructor(
         private readonly orderLineService: OrderLineService,
         public readonly productService: ProductService,
         public readonly subscriptionService: SubscriptionService,

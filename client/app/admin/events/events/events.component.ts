@@ -13,7 +13,7 @@ import {EventService} from '../services/event.service';
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
     public displayedColumns = ['name'];
 
-    constructor(
+    public constructor(
         service: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

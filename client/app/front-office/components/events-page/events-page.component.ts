@@ -17,7 +17,7 @@ export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> 
         offset: null,
     };
 
-    constructor(
+    public constructor(
         service: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

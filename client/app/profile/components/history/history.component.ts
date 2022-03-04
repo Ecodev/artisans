@@ -10,7 +10,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     styleUrls: ['./history.component.scss'],
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
-    constructor(
+    public constructor(
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

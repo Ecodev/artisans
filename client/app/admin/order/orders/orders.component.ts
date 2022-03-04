@@ -13,7 +13,7 @@ import {OrderService} from '../services/order.service';
 export class OrdersComponent extends NaturalAbstractList<OrderService> implements OnInit {
     public defaultSorting = [{field: OrderSortingField.creationDate, order: SortingOrder.DESC}];
 
-    constructor(
+    public constructor(
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

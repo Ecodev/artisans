@@ -11,7 +11,7 @@ import {CurrentUserForProfile_viewer} from '../../shared/generated-types';
 export class AdminComponent extends NaturalAbstractController implements OnInit {
     public viewer: CurrentUserForProfile_viewer | null = null;
 
-    constructor(private readonly route: ActivatedRoute) {
+    public constructor(private readonly route: ActivatedRoute) {
         super();
     }
 

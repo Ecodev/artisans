@@ -19,15 +19,15 @@
     <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
         <mat-form-field>
             <mat-label>Titre</mat-label>
-            <textarea [matAutosizeMinRows]="1" formControlName="title" matInput [matTextareaAutosize]="true"></textarea>
+            <textarea [cdkAutosizeMinRows]="1" formControlName="title" matInput [cdkTextareaAutosize]="true"></textarea>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Description</mat-label>
             <textarea
-                [matAutosizeMinRows]="1"
+                [cdkAutosizeMinRows]="1"
                 formControlName="description"
                 matInput
-                [matTextareaAutosize]="true"
+                [cdkTextareaAutosize]="true"
             ></textarea>
         </mat-form-field>
         <mat-form-field>

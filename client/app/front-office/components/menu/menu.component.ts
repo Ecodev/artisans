@@ -48,7 +48,7 @@ export class MenuComponent {
      */
     public panelAnimationState: 'void' | 'enter' = 'void';
 
-    constructor(@Inject(APP_MENU_DATA) public readonly data: MenuDropdownData) {
+    public constructor(@Inject(APP_MENU_DATA) public readonly data: MenuDropdownData) {
         this.offsetLeft = data.originalNativeElement.offsetLeft - 20;
     }
 

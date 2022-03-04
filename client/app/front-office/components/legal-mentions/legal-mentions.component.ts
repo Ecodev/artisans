@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './legal-mentions.component.html',
     styleUrls: ['./legal-mentions.component.scss'],
 })
-export class LegalMentionsComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class LegalMentionsComponent {}

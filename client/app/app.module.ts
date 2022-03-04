@@ -1,4 +1,4 @@
-import {Apollo} from 'apollo-angular';
+import {Apollo, ApolloModule} from 'apollo-angular';
 import {HttpBatchLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
 import {isPlatformBrowser, registerLocaleData} from '@angular/common';
@@ -36,6 +36,7 @@ registerLocaleData(localeFRCH);
 @NgModule({
     declarations: [AppComponent, BootLoaderComponent, ErrorComponent],
     imports: [
+        ApolloModule,
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserModule,
         BrowserAnimationsModule,
@@ -88,14 +89,14 @@ registerLocaleData(localeFRCH);
     bootstrap: [AppComponent],
 })
 export class AppModule {
-    constructor(
+    public constructor(
         apollo: Apollo,
         networkActivityService: NetworkActivityService,
         alertService: NaturalAlertService,
         httpBatchLink: HttpBatchLink,
         dateAdapter: DateAdapter<Date>,
-        // tslint:disable-next-line:ban-types
-        @Inject(PLATFORM_ID) readonly platformId: Object,
+        // eslint-disable-next-line @typescript-eslint/ban-types
+        @Inject(PLATFORM_ID) platformId: Object,
         naturalSeoService: NaturalSeoService, // injection required, but works as stand alone
     ) {
         // tells if it's browser or server

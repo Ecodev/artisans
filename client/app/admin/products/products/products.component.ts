@@ -12,7 +12,7 @@ import {ProductService} from '../services/product.service';
     styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent extends NaturalAbstractList<ProductService> implements OnInit {
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         productService: ProductService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

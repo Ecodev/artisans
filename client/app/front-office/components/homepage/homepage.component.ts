@@ -47,7 +47,7 @@ export class HomepageComponent implements OnInit {
      */
     public currentReview: Products_products_items | null = null;
 
-    constructor(
+    public constructor(
         public readonly userService: UserService,
         private readonly route: ActivatedRoute,
         private readonly newsService: NewsService,

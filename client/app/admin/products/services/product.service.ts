@@ -55,7 +55,7 @@ export class ProductService extends NaturalAbstractModelService<
         {field: ProductSortingField.sorting, order: SortingOrder.ASC},
     ];
 
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'product', productQuery, productsQuery, createProduct, updateProduct, deleteProducts);
     }
 

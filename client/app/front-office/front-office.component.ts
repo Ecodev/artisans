@@ -224,7 +224,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public Currency = Currency;
     public UserRole = UserRole;
 
-    constructor(
+    public constructor(
         private readonly route: ActivatedRoute,
         private readonly router: Router,
         private readonly navigationService: NavigationService,

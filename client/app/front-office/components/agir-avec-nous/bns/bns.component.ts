@@ -5,8 +5,4 @@ import {Component, OnInit} from '@angular/core';
     templateUrl: './bns.component.html',
     styleUrls: ['./bns.component.scss'],
 })
-export class BnsComponent implements OnInit {
-    constructor() {}
-
-    public ngOnInit(): void {}
-}
+export class BnsComponent {}

@@ -8,7 +8,7 @@ import {CartService} from '../../../cart/services/cart.service';
     templateUrl: './add-to-cart.component.html',
     styleUrls: ['./add-to-cart.component.scss'],
 })
-export class AddToCartComponent implements OnInit {
+export class AddToCartComponent {
     /**
      * Button label
      */
@@ -31,9 +31,7 @@ export class AddToCartComponent implements OnInit {
 
     public inCart = false;
 
-    constructor(private readonly cartService: CartService) {}
-
-    public ngOnInit(): void {}
+    public constructor(private readonly cartService: CartService) {}
 
     public click(): void {
         this.cartService.addProduct(this.product, this.type, 1);

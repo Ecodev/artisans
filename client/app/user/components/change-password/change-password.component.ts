@@ -16,7 +16,7 @@ export class ChangePasswordComponent {
     public sending = false;
     private readonly token: string;
 
-    constructor(
+    public constructor(
         route: ActivatedRoute,
         private readonly apollo: Apollo,
         private readonly alertService: NaturalAlertService,

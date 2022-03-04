@@ -33,7 +33,7 @@ export class NewsService extends NaturalAbstractModelService<
     DeleteNewses,
     DeleteNewsesVariables
 > {
-    constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo) {
         super(apollo, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
     }
 

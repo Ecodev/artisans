@@ -1,19 +1,15 @@
-import {waitForAsync, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BnsComponent} from './bns.component';
 
 describe('BnsComponent', () => {
     let component: BnsComponent;
     let fixture: ComponentFixture<BnsComponent>;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [BnsComponent],
-            }).compileComponents();
-        }),
-    );
-
     beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [BnsComponent],
+        }).compileComponents();
+
         fixture = TestBed.createComponent(BnsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

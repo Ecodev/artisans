@@ -10,9 +10,7 @@ describe('CircuitsCourtsComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [CircuitsCourtsComponent],
         }).compileComponents();
-    });
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(CircuitsCourtsComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

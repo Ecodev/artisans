@@ -5,8 +5,8 @@ describe('BnsComponent', () => {
     let component: BnsComponent;
     let fixture: ComponentFixture<BnsComponent>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [BnsComponent],
         }).compileComponents();
 

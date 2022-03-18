@@ -5,8 +5,8 @@ describe('SubscribeComponent', () => {
     let component: SubscribeComponent;
     let fixture: ComponentFixture<SubscribeComponent>;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
             declarations: [SubscribeComponent],
         }).compileComponents();
 

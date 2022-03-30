@@ -40,9 +40,13 @@ registerLocaleData(localeFRCH);
         BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserModule,
         BrowserAnimationsModule.withConfig({
-            // Disable animations if not supported (on iPhone 6 / Safari 13)
+            // Disable animations if not supported (on iPhone 6 / Safari 13, or SSR)
             disableAnimations:
+                // eslint-disable-next-line no-restricted-globals
+                typeof document === 'undefined' ||
+                // eslint-disable-next-line no-restricted-globals
                 !('animate' in document.documentElement) ||
+                // eslint-disable-next-line no-restricted-globals
                 (navigator && /iPhone OS (8|9|10|11|12|13)_/.test(navigator.userAgent)),
         }),
         MaterialModule,

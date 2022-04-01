@@ -41,7 +41,7 @@
         "big.js": "^6.1.1",
         "crypto-es": "^1.2.7",
         "express": "^4.17.1",
-        "graphql": "^15.6.1",
+        "graphql": "^16.3.0",
         "lodash-es": "^4.17.21",
         "lodash.template": "^4.5.0",
         "ngx-progressbar": "^8.0.0",

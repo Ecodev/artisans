@@ -159,15 +159,6 @@ const routes: Routes = [
         ],
     },
     {
-        path: 'alimentation',
-        component: CircuitsCourtsComponent,
-        data: {
-            seo: {
-                title: 'Construire ensemble des circuits courts',
-            } as NaturalSeo,
-        },
-    },
-    {
         path: 'agir-avec-nous',
         resolve: {viewer: ViewerResolver},
         children: [

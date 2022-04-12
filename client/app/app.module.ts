@@ -1,7 +1,7 @@
 import {Apollo, ApolloModule} from 'apollo-angular';
 import {HttpBatchLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
-import {isPlatformBrowser, registerLocaleData} from '@angular/common';
+import {DATE_PIPE_DEFAULT_TIMEZONE, isPlatformBrowser, registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {Inject, LOCALE_ID, NgModule, PLATFORM_ID} from '@angular/core';
@@ -80,6 +80,10 @@ registerLocaleData(localeFRCH);
         },
         {
             provide: LOCALE_ID,
+            useValue: 'fr-CH',
+        },
+        {
+            provide: DATE_PIPE_DEFAULT_TIMEZONE,
             useValue: 'fr-CH',
         },
         {

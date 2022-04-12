@@ -58,7 +58,21 @@ const routes: Routes = [
         data: {
             seo: {title: 'Agenda'} as NaturalSeo,
             forcedVariables: {
-                filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: formatIsoDateTime(new Date())}}}]}]},
+                filter: {
+                    groups: [
+                        {
+                            conditions: [
+                                {
+                                    date: {
+                                        greaterOrEqual: {
+                                            value: formatIsoDateTime(new Date(new Date().setHours(0, 0, 0, 0))),
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
                 sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
             } as EventsVariables,
         },

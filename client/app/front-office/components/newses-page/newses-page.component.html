@@ -3,7 +3,7 @@
 
     <div fxLayout="column" fxLayoutGap="60px">
         <div *ngFor="let news of items">
-            <div class="text-light">{{ news.date | date: 'EEEE d MMMM yyyy':'UTC+1' | capitalize }}</div>
+            <div class="text-light">{{ news.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
             <a [routerLink]="[news.id]" class="mat-h2">{{ news.name }}</a>
             <div class="mat-body">{{ news.description }}</div>
         </div>

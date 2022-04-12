@@ -1,6 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractList} from '@ecodev/natural';
-import {Events, EventsVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../services/event.service';

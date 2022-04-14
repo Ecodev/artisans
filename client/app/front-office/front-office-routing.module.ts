@@ -418,6 +418,15 @@ const routes: Routes = [
         ],
     },
     {
+        path: 'manger-c-est-politique',
+        component: CircuitsCourtsComponent,
+        data: {
+            seo: {
+                title: "Manger c'est politique",
+            } as NaturalSeo,
+        },
+    },
+    {
         path: 'larevuedurable',
         loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
     },

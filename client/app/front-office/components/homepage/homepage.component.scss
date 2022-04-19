@@ -29,7 +29,7 @@
 
 .introduction-blocs {
     @include responsive.responsive(responsive.$gt-sm) {
-        margin-top: -150px;
+        margin-top: -300px;
     }
 
     @include responsive.responsive(responsive.$lt-md) {

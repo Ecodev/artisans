@@ -64,7 +64,18 @@ export class HomepageComponent implements OnInit {
         // News
         const qvmNews = new NaturalQueryVariablesManager<NewsesVariables>();
         qvmNews.set('variables', {
-            filter: {groups: [{conditions: [{date: {less: {value: formatIsoDateTime(new Date())}}}]}]},
+            filter: {
+                groups: [
+                    {
+                        conditions: [
+                            {
+                                date: {less: {value: formatIsoDateTime(new Date())}},
+                                isActive: {equal: {value: true}},
+                            },
+                        ],
+                    },
+                ],
+            },
             pagination: {pageSize: 3, pageIndex: 0},
             sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
         });

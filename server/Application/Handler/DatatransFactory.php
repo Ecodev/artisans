@@ -7,8 +7,8 @@ namespace Application\Handler;
 use Application\Service\MessageQueuer;
 use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Service\Mailer;
-use Interop\Container\ContainerInterface;
 use Mezzio\Template\TemplateRendererInterface;
+use Psr\Container\ContainerInterface;
 
 class DatatransFactory
 {

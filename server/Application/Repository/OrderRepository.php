@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\Model\Order;
 use Application\Model\User;
+
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
+/**
+ * @extends AbstractRepository<Order>
+ */
 class OrderRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**

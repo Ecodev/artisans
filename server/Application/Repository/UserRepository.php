@@ -7,6 +7,9 @@ namespace Application\Repository;
 use Application\Model\User;
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
+/**
+ * @extends AbstractRepository<User>
+ */
 class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**

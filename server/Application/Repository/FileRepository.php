@@ -5,10 +5,15 @@ declare(strict_types=1);
 namespace Application\Repository;
 
 use Application\DBAL\Types\ProductTypeType;
+use Application\Model\File;
 use Application\Model\Order;
 use Application\Model\User;
+
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
+/**
+ * @extends AbstractRepository<File>
+ */
 class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**

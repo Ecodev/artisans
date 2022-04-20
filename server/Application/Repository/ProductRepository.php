@@ -6,9 +6,14 @@ namespace Application\Repository;
 
 use Application\Model\AbstractModel;
 use Application\Model\Organization;
+use Application\Model\Product;
 use Application\Model\User;
+
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
+/**
+ * @extends AbstractRepository<Product>
+ */
 class ProductRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**

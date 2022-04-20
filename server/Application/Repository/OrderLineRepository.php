@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace Application\Repository;
 
 use Application\Model\Order;
+use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\User;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
+
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
+/**
+ * @extends AbstractRepository<OrderLine>
+ */
 class OrderLineRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**

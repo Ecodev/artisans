@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\Model\News;
 use Application\Model\User;
+
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 
+/**
+ * @extends AbstractRepository<News>
+ */
 class NewsRepository extends AbstractRepository implements LimitedAccessSubQuery
 {
     /**

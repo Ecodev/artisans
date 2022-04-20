@@ -6,6 +6,11 @@ namespace Application\Repository;
 
 use Application\DBAL\Types\ProductTypeType;
 
+use Application\Model\Organization;
+
+/**
+ * @extends AbstractRepository<Organization>
+ */
 class OrganizationRepository extends AbstractRepository
 {
     /**

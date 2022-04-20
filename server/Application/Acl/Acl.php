@@ -26,6 +26,8 @@ class Acl extends \Ecodev\Felix\Acl\Acl
 {
     public function __construct()
     {
+        parent::__construct();
+
         // Each role is strictly "stronger" than the last one
         $this->addRole(User::ROLE_ANONYMOUS);
         $this->addRole(User::ROLE_MEMBER, User::ROLE_ANONYMOUS);

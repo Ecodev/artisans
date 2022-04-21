@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NaturalAlertService, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
 import {
@@ -48,8 +48,8 @@ export class OrderComponent {
         this.forcedVariables = {filter: {groups: [{conditions: [{order: {equal: {value: this.data.model.id}}}]}]}};
     }
 
-    public updateStatus(status: string | null): void {
-        if (!status) {
+    public updateStatus(status: string | string[] | null): void {
+        if (typeof status !== 'string') {
             return;
         }
 

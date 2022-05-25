@@ -1,9 +1,18 @@
 import {HttpBatchLink} from 'apollo-angular/http';
-import {ApolloLink, DefaultOptions} from '@apollo/client/core';
+import {
+    ApolloClientOptions,
+    ApolloLink,
+    DefaultOptions,
+    InMemoryCache,
+    NormalizedCacheObject,
+} from '@apollo/client/core';
 import {onError} from '@apollo/client/link/error';
 import {hasFilesAndProcessDate, NaturalAlertService} from '@ecodev/natural';
 import {createUploadLink} from 'apollo-upload-client';
 import {NetworkActivityService} from '../services/network-activity.service';
+import {isPlatformBrowser} from '@angular/common';
+import {APOLLO_OPTIONS} from 'apollo-angular';
+import {PLATFORM_ID, Provider} from '@angular/core';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
@@ -50,7 +59,7 @@ function createErrorLink(
  *
  * This function will only be executed in Node environment, so we can access `process`
  */
-export function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloLink {
+function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloLink {
     const hostname = process.cwd().split('/').pop() || 'dev.larevuedurable.com';
 
     const options = {
@@ -68,7 +77,7 @@ export function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloL
     return httpBatchLink.create(options);
 }
 
-export function createApolloLink(
+function createApolloLink(
     networkActivityService: NetworkActivityService,
     alertService: NaturalAlertService,
     httpBatchLink: HttpBatchLink,
@@ -102,3 +111,30 @@ export function createApolloLink(
 
     return errorLink.concat(httpLink);
 }
+
+function apolloOptionsFactory(
+    networkActivityService: NetworkActivityService,
+    alertService: NaturalAlertService,
+    httpBatchLink: HttpBatchLink,
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    platformId: Object,
+): ApolloClientOptions<NormalizedCacheObject> {
+    // tells if it's browser or server
+    const isBrowser = isPlatformBrowser(platformId);
+
+    const link = isBrowser
+        ? createApolloLink(networkActivityService, alertService, httpBatchLink)
+        : createApolloLinkForServer(httpBatchLink);
+    return {
+        link: link,
+        cache: new InMemoryCache(),
+        defaultOptions: apolloDefaultOptions,
+        ssrMode: !isBrowser,
+    };
+}
+
+export const apolloOptionsProvider: Provider = {
+    provide: APOLLO_OPTIONS,
+    useFactory: apolloOptionsFactory,
+    deps: [NetworkActivityService, NaturalAlertService, HttpBatchLink, PLATFORM_ID],
+};

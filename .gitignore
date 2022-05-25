@@ -22,6 +22,7 @@
 /phpunit.xml
 /.pm2/
 /vendor/
+/client/app/shared/generated-config.ts
 /client/app/shared/generated-schema.graphql
 /client/app/shared/generated-types.ts
 /client/assets/config/*.local.json

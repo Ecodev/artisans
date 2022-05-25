@@ -35,4 +35,8 @@ return [
         'paymentTo' => '',
         'paymentFor' => '',
     ],
+    'log' => [
+        'url' => null, // URL to log server
+        'emails' => [], // List of developer emails to send bugs to
+    ],
 ];

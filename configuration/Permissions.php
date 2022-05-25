@@ -66,6 +66,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'bin/generate-client-configuration.php',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'bin/graphql.php',
         'permissions' => '0750',
     ],

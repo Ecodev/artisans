@@ -1,10 +1,8 @@
-import {Apollo, ApolloModule} from 'apollo-angular';
-import {HttpBatchLink} from 'apollo-angular/http';
-import {InMemoryCache} from '@apollo/client/core';
-import {DATE_PIPE_DEFAULT_TIMEZONE, isPlatformBrowser, registerLocaleData} from '@angular/common';
+import {ApolloModule} from 'apollo-angular';
+import {DATE_PIPE_DEFAULT_TIMEZONE, registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
-import {Inject, LOCALE_ID, NgModule, PLATFORM_ID} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatIconRegistry} from '@angular/material/icon';
@@ -13,7 +11,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
     NATURAL_SEO_CONFIG,
-    NaturalAlertService,
+    NaturalErrorModule,
     NaturalSeoConfig,
     NaturalSeoService,
     NaturalSwissParsingDateAdapter,
@@ -24,12 +22,13 @@ import {AppComponent} from './app.component';
 import {FrontOfficeModule} from './front-office/front-office.module';
 import {BootLoaderComponent} from './shared/components/boot-loader/boot-loader.component';
 import {ErrorComponent} from './shared/components/error/error.component';
-import {apolloDefaultOptions, createApolloLink, createApolloLinkForServer} from './shared/config/apolloDefaultOptions';
+import {apolloOptionsProvider} from './shared/config/apolloDefaultOptions';
 import {ArtisansModule} from './shared/modules/artisans.module';
 import {MaterialModule} from './shared/modules/material.module';
 import {LocalizedPaginatorIntlService} from './shared/services/localized-paginator-intl.service';
-import {NetworkActivityService} from './shared/services/network-activity.service';
 import {NetworkInterceptorService} from './shared/services/network-interceptor.service';
+import {LoggerExtraService} from './shared/services/logger-extra.service';
+import {localConfig} from './shared/generated-config';
 
 registerLocaleData(localeFRCH);
 
@@ -55,6 +54,7 @@ registerLocaleData(localeFRCH);
         AppRoutingModule,
         HttpClientModule,
         FrontOfficeModule,
+        NaturalErrorModule.forRoot(localConfig.log.url, LoggerExtraService),
     ],
     providers: [
         MatIconRegistry,
@@ -98,34 +98,15 @@ registerLocaleData(localeFRCH);
                 defaultRobots: 'all, index, follow',
             } as NaturalSeoConfig,
         },
+        apolloOptionsProvider,
     ],
     bootstrap: [AppComponent],
 })
 export class AppModule {
     public constructor(
-        apollo: Apollo,
-        networkActivityService: NetworkActivityService,
-        alertService: NaturalAlertService,
-        httpBatchLink: HttpBatchLink,
         dateAdapter: DateAdapter<Date>,
-        // eslint-disable-next-line @typescript-eslint/ban-types
-        @Inject(PLATFORM_ID) platformId: Object,
         naturalSeoService: NaturalSeoService, // injection required, but works as stand alone
     ) {
-        // tells if it's browser or server
-        const isBrowser = isPlatformBrowser(platformId);
-
         dateAdapter.setLocale('fr-ch');
-
-        const link = isBrowser
-            ? createApolloLink(networkActivityService, alertService, httpBatchLink)
-            : createApolloLinkForServer(httpBatchLink);
-
-        apollo.create({
-            link: link,
-            cache: new InMemoryCache(),
-            defaultOptions: apolloDefaultOptions,
-            ssrMode: !isBrowser,
-        });
     }
 }

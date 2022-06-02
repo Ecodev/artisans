@@ -1,3 +1,4 @@
+import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/material/tooltip';
 import {ApolloModule} from 'apollo-angular';
 import {DATE_PIPE_DEFAULT_TIMEZONE, registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -31,6 +32,13 @@ import {LoggerExtraService} from './shared/services/logger-extra.service';
 import {localConfig} from './shared/generated-config';
 
 registerLocaleData(localeFRCH);
+
+export const matTooltipCustomConfig: MatTooltipDefaultOptions = {
+    showDelay: 5,
+    hideDelay: 5,
+    touchendHideDelay: 5,
+    touchGestures: 'off',
+};
 
 @NgModule({
     declarations: [AppComponent, BootLoaderComponent, ErrorComponent],
@@ -99,6 +107,7 @@ registerLocaleData(localeFRCH);
             } as NaturalSeoConfig,
         },
         apolloOptionsProvider,
+        {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: matTooltipCustomConfig},
     ],
     bootstrap: [AppComponent],
 })

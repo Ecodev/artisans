@@ -45,7 +45,7 @@
         "graphql": "^15.6.1",
         "lodash-es": "^4.17.21",
         "lodash.template": "^4.5.0",
-        "ngx-progressbar": "^8.0.0",
+        "ngx-progressbar": "^9.0.0",
         "rxjs": "~7.5.4",
         "striptags": "^3.2.0",
         "tslib": "^2.3.1",

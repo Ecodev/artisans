@@ -1,0 +1,20 @@
+#incoming-sessions-list {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 20px;
+
+    & > div {
+        border-radius: 5px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    @media screen and (max-width: 650px) {
+        grid-template-columns: 100%;
+    }
+}
+
+img {
+    max-width: 100%;
+}

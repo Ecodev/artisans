@@ -7,50 +7,53 @@
                 <h2 class="mat-h1 no-margin-top">Infos pratiques</h2>
 
                 <p>
-                    En fonction de vos disponibilités, nous constituons des groupes dans votre région et nous vous
-                    contactons dès qu’un groupe est prêt à démarrer.
+                    Vous pouvez rejoindre l’une des sessions agendées ci-dessous ou constituer un groupe de huit à dix
+                    personnes pour mettre en route une Conversation carbone. Si aucune de ces deux options ne vous
+                    convient, vous pouvez vous inscrire sur une liste d’attente et nous vous contacterons dès qu’un
+                    groupe sera prêt à démarrer :
+                    <a
+                        mat-flat-button
+                        color="accent"
+                        [attr.href]="'https://framaforms.org/inscription-aux-conversations-carbone-1623749988'"
+                        target="_blank"
+                    >
+                        Liste d'attente
+                    </a>
                 </p>
+            </div>
 
-                <h2 class="mat-h1 no-margin-top">
-                    Inscrivez-vous en indiquant dans le formulaire vos préférences de jours et de lieu !
-                </h2>
-                <a
-                    mat-flat-button
-                    color="accent"
-                    [attr.href]="'https://framaforms.org/inscription-aux-conversations-carbone-1623749988'"
-                    target="_blank"
-                >
-                    Je m'inscris
-                </a>
+            <div id="incoming-sessions-list">
+                <div *ngFor="let session of sessions" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+                    <div class="mat-h2">{{ session.name }}</div>
+                    <div class="rich-text" [innerHtml]="session.description"></div>
+                    <a
+                        mat-flat-button
+                        color="accent"
+                        [attr.href]="session.mailingList"
+                        *ngIf="session.mailingList"
+                        target="_blank"
+                    >
+                        Infos
+                    </a>
+                </div>
+            </div>
 
-                <p>&nbsp;</p>
-
+            <div class="rich-text mat-h3">
                 <p>
-                    Pour tirer tout le bénéfice d’une Conversation carbone, il est important d’en suivre les six
-                    ateliers <strong>pour explorer les grandes thématiques de son quotidien carbone</strong>.
+                    Le nombre de participants à une Conversation carbone est limité afin de garantir une dynamique de
+                    groupe optimale. Si vous deviez vous désister avant le début de la session, merci de nous en
+                    informer aussi vite que possible afin qu’une autre personne puisse profiter de la place libérée !
                 </p>
                 <p>
-                    Les principales sources d’émissions de gaz à effet de serre de tous les jours sont explorées et
-                    discutées en groupe. Les jeux et exercices permettent de trouver des solutions tout en prenant du
-                    plaisir et aident à construire un discours positif sur l’avenir.
-                </p>
-                <p>
-                    Le nombre de participants par Conversation carbone est limité. Ceci nous permet de garantir une
-                    dynamique de groupe optimale. Si vous deviez vous désister avant le début de la session, merci de
-                    nous en informer aussi vite que possible afin qu’une autre personne puisse profiter de la place
-                    libérée !
-                </p>
-                <p>
-                    Le matériel didactique vous est fourni et comprend un cahier de pratique et le guide « Prêt à temps
-                    pour demain&nbsp;?&nbsp;» disponible sur ce lien :
+                    Du matériel théorique et didactique vous est fourni. Il comprend un cahier d’exercices pratiques et
+                    un guide disponible sur ce lien :
                     <a href="/assets/images/conversation-carbon/le-guide-des-conversations-carbone.pdf" target="_blank"
                         >« Prêt à temps pour demain ?&nbsp;»
                     </a>
                 </p>
-
                 <p>
-                    Vous souhaitez organiser une Conversation carbone et vous avez la possibilité de réunir un groupe de
-                    huit à 10 personnes ? Ecrivez alors directement à
+                    Vous souhaitez organiser une Conversation carbone et vous pouvez réunir un groupe de huit à dix
+                    personnes ? Écrivez directement à
                     <a href="mailto:marie.lendais@artisansdelatransition.org"
                         >marie.lendais@artisansdelatransition.org</a
                     >
@@ -58,69 +61,32 @@
                 </p>
             </div>
 
-            <h2 *ngIf="sessions?.length" class="mat-h1 no-margin-top">Sessions agendées</h2>
-
-            <div *ngFor="let session of sessions">
-                <div class="mat-h2">{{ session.name }}</div>
-                <div class="rich-text" [innerHtml]="session.description"></div>
-                <a
-                    mat-flat-button
-                    color="accent"
-                    [attr.href]="session.mailingList"
-                    *ngIf="session.mailingList"
-                    target="_blank"
-                >
-                    Infos
-                </a>
-            </div>
             <div fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex="50" class="frame-primary padding">
                     <p>
-                        "&nbsp;La crise climatique est alarmante et il est facile de se sentir impuissant. Nous essayons
-                        de commencer là où les gens en sont aujourd’hui, pas là où nous aimerions qu’ils soient
+                        "La crise climatique est alarmante et il est facile de se sentir impuissant. Nous essayons de
+                        commencer là où les gens en sont aujourd’hui, pas là où nous aimerions qu’ils soient
                         demain.&nbsp;"
                     </p>
                     <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
                 </div>
                 <div fxFlex="50" class="frame-primary padding">
                     <p>
-                        "&nbsp;L'incertitude que la crise climatique engendre peut pousser à trop se concentrer sur ses
-                        rêves et ses cauchemars. Il rend difficile de penser concrètement à ce que nous voulons et à ce
-                        qui est envisageable dans un avenir sobre en carbone.&nbsp;"
+                        "L'incertitude que la crise climatique engendre peut pousser à trop se concentrer sur ses rêves
+                        et ses cauchemars. Il rend difficile de penser concrètement à ce que nous voulons et à ce qui
+                        est envisageable dans un avenir sobre en carbone.&nbsp;"
                     </p>
                     <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
                 </div>
+            </div>
+
+            <div>
+                <img src="assets/images/conversation-carbon/schema_conversations_carbone_6-ateliers.jpg" />
             </div>
         </div>
 
         <div fxFlex fxHide.lt-md>
             <app-session-side-column hiddenBlocName="prochaines"></app-session-side-column>
-
-            <div class="frame-stroked-primary padding rich-text">
-                <h2 class="mat-h2 no-margin-top">Recherche sur les comportements proclimat</h2>
-
-                <p>
-                    Les Artisans de la transition s’associent au Centre pour le développement et l’environnement (CDE)
-                    de l’Université de Berne pour étudier les effets des Conversations carbone entre août et décembre
-                    2021.
-                </p>
-
-                <p>
-                    Vous pouvez réunir un groupe de huit à dix personnes pour lancer une Conversation carbone ? Cela
-                    nous aiderait énormément ! Écrivez à
-                    <a href="mailto:marie.lendais@artisansdelatransition.org"
-                        >marie.lendais@artisansdelatransition.org</a
-                    >
-                    pour trouver deux facilitateurs pour animer ce groupe.
-                </p>
-
-                Retrouvez ces informations sur
-                <a
-                    href="/assets/images/conversation-carbon/cherchons_volontaires_recherche-conversations-carbone.pdf"
-                    target="_blank"
-                    >un flyer de présentation</a
-                >
-            </div>
         </div>
     </div>
 </div>

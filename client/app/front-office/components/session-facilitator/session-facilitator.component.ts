@@ -1,13 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {
-    SortingOrder,
-    UserRole,
-    Users_users_items,
-    UserSortingField,
-    UsersVariables,
-} from '../../../shared/generated-types';
+import {SortingOrder, Users_users_items, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-session-facilitator',

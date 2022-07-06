@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
 import {EventResolver} from '../admin/events/services/event.resolver';
 import {NewsResolver} from '../admin/newses/services/news.resolver';
 import {ViewerResolver} from '../admin/users/services/viewer.resolver';
+import {ErrorComponent} from '../shared/components/error/error.component';
 import {
     EventSortingField,
     EventsVariables,
@@ -10,7 +12,6 @@ import {
     NewsSortingField,
     SortingOrder,
 } from '../shared/generated-types';
-import {formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
 import {FacilitatorGuard} from '../shared/guards/facilitator.guard';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
@@ -45,7 +46,6 @@ import {SessionsIncomingComponent} from './components/sessions-incoming/sessions
 import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-connaitre/nous-faire-connaitre.component';
 import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
 import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-association/rejoindre-association.component';
-import {ErrorComponent} from '../shared/components/error/error.component';
 
 const routes: Routes = [
     {
@@ -269,13 +269,13 @@ const routes: Routes = [
                         },
                     },
                     {
-                        path: 'apero-divest',
+                        path: 'atelier-finance',
                         component: AperoDivestComponent,
                         data: {
                             seo: {
-                                title: 'Apero divest',
+                                title: 'atelier-finance',
                                 description:
-                                    'Le principe de l’Apéro-Divest est très simple : vous réunissez une dizaine de personnes en cercle sans rien au centre dans votre salon et faites appel à un ou deux facilitateurs ou facilitatrices formé-e-s par les Artisans de la transition pour assurer l’animation.',
+                                    'Le principe de l’atelier finance est très simple : vous réunissez une dizaine de personnes en cercle sans rien au centre dans votre salon et faites appel à un ou deux facilitateurs ou facilitatrices formé-e-s par les Artisans de la transition pour assurer l’animation.',
                             } as NaturalSeo,
                         },
                     },

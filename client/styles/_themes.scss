@@ -25,7 +25,6 @@
 @use '../app/front-office/modules/shop/components/products-page/products-page.theme';
 @use '../app/front-office/modules/shop/components/product-page/product-page.theme';
 @use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
-@use '../app/front-office/components/session-method/session-method.theme';
 
 // Include material core (only once !)
 @include mat.core();
@@ -52,7 +51,6 @@
     @include purchases.purchases($theme);
     @include session-facilitator.session-facilitator($theme);
     @include session-facilitator-private.session-facilitator-private($theme);
-    @include session-method.session-method($theme);
     @include admin.admin($theme);
 }
 

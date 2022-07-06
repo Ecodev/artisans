@@ -139,8 +139,8 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                             link: 'agir-avec-nous/desinvestir/rapport-bns',
                         },
                         {
-                            display: 'APERO-DIVEST',
-                            link: '/agir-avec-nous/desinvestir/apero-divest',
+                            display: 'Atelier finance',
+                            link: '/agir-avec-nous/desinvestir/atelier-finance',
                         },
                     ],
                 },

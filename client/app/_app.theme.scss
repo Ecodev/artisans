@@ -29,4 +29,24 @@
             box-shadow: mat.get-color-from-palette($accent) 0 0 20px !important;
         }
     }
+
+    .witnesses {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 20px;
+
+        @media screen and (max-width: 700px) {
+            grid-template-columns: 100%;
+        }
+    }
+
+    .witness {
+        border-width: 0;
+        border-style: solid;
+        padding: 0 0 0 10px;
+        border-left-width: 5px;
+        margin-bottom: 30px;
+        display: inline-block; // prevents columns to break paragraph (from bottom to top of next column)
+        border-color: mat.get-color-from-palette($primary);
+    }
 }

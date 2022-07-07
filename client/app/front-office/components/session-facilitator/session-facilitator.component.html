@@ -50,14 +50,6 @@
             </p>
 
             <p>&nbsp;</p>
-            <div class="facilitators">
-                <div *ngFor="let user of facilitators" class="facilitator">
-                    <strong>{{ user.name }}</strong>
-                    <div>{{ user.locality }}</div>
-                </div>
-            </div>
-
-            <p>&nbsp;</p>
 
             <h2 class="mat-h2">Des facilitatrices et facilitateurs ont fait le pas</h2>
             <div class="witnesses">
@@ -85,11 +77,19 @@
                     <br />
                     <br />
                     « Les Conversations carbone renforcent ma confiance dans mes compétences à accompagner un groupe à
-                    deux avec une certaine spontanéité. J ai adoré quand une participante a réalisé qu'elle pouvait
-                    continuer à aimer ses proches même s ils ne sont pas aussi sensibles aux enjeux
+                    deux avec une certaine spontanéité. J' 'ai adoré quand une participante a réalisé qu'elle pouvait
+                    continuer à aimer ses proches même s' 'ils ne sont pas aussi sensibles aux enjeux
                     environnementaux.&nbsp;»
                     <strong>Prisca, facilitatrice</strong>
                 </p>
+            </div>
+
+            <p>&nbsp;</p>
+            <div class="facilitators">
+                <div *ngFor="let user of facilitators" class="facilitator">
+                    <strong>{{ user.name }}</strong>
+                    <div>{{ user.locality }}</div>
+                </div>
             </div>
         </div>
 

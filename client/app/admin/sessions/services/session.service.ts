@@ -18,6 +18,7 @@ import {
     UpdateSessionVariables,
 } from '../../../shared/generated-types';
 import {createSession, deleteSessions, sessionQuery, sessionsQuery, updateSession} from './session.queries';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -68,8 +69,8 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public getPartialVariablesForAll(): Partial<SessionsVariables> {
-        return {
+    public getPartialVariablesForAll(): Observable<Partial<SessionsVariables>> {
+        return of({
             filter: {
                 groups: [
                     {
@@ -79,6 +80,6 @@ export class SessionService extends NaturalAbstractModelService<
                     },
                 ],
             },
-        };
+        });
     }
 }

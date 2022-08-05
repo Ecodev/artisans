@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {deliverableEmail} from '@ecodev/natural';
 
@@ -15,17 +15,17 @@ export type EmailsData = {
     styleUrls: ['./emails.component.scss'],
 })
 export class EmailsComponent {
-    public readonly form: FormGroup = new FormGroup({});
+    public readonly form: UntypedFormGroup = new UntypedFormGroup({});
 
     /**
      * Array of form controls dedicated to emails
      */
-    public readonly emailsControl: FormArray;
+    public readonly emailsControl: UntypedFormArray;
 
     public constructor(@Inject(MAT_DIALOG_DATA) public readonly dialogData: EmailsData) {
         const emails: string[] = dialogData.emails ?? [''];
         const validators = dialogData.required ? [Validators.required, deliverableEmail] : [deliverableEmail];
-        this.emailsControl = new FormArray(emails.map(email => new FormControl(email, validators)));
+        this.emailsControl = new UntypedFormArray(emails.map(email => new UntypedFormControl(email, validators)));
         this.form.setControl('emails', this.emailsControl);
     }
 

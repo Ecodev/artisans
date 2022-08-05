@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -21,7 +21,7 @@ export class HomeBlockComponent implements OnInit {
 
     public editMode = false;
 
-    public form!: FormGroup;
+    public form!: UntypedFormGroup;
 
     public lastValue: Block | null = null;
 
@@ -31,11 +31,11 @@ export class HomeBlockComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.form = new FormGroup({
-            title: new FormControl(''),
-            description: new FormControl(''),
-            buttonLabel: new FormControl(''),
-            buttonLink: new FormControl(''),
+        this.form = new UntypedFormGroup({
+            title: new UntypedFormControl(''),
+            description: new UntypedFormControl(''),
+            buttonLabel: new UntypedFormControl(''),
+            buttonLink: new UntypedFormControl(''),
         });
 
         const observables = [

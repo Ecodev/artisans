@@ -2,7 +2,7 @@ import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
 import {deliverableEmail, ifValid, NaturalAlertService, validateAllFormControls} from '@ecodev/natural';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
 
 @Component({
@@ -13,12 +13,12 @@ import {Register, RegisterVariables} from '../../../shared/generated-types';
 export class RegisterComponent implements OnInit {
     public step = 1;
     public sending = false;
-    public form!: FormGroup;
+    public form!: UntypedFormGroup;
 
     public constructor(
         protected readonly apollo: Apollo,
         protected readonly route: ActivatedRoute,
-        protected readonly fb: FormBuilder,
+        protected readonly fb: UntypedFormBuilder,
         protected readonly router: Router,
         protected readonly alertService: NaturalAlertService,
     ) {}

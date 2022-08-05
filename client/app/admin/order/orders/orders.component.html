@@ -86,7 +86,7 @@
                     </td>
                     <td *matFooterCellDef mat-footer-cell natural-align-right>
                         <span *ngIf="dataSource?.data?.totalBalanceCHF > 0">{{
-                            dataSource?.data?.totalBalanceCHF | currency: 'CHF'
+                            dataSource.data?.totalBalanceCHF | currency: 'CHF'
                         }}</span>
                     </td>
                 </ng-container>
@@ -102,7 +102,7 @@
                     </td>
                     <td *matFooterCellDef mat-footer-cell natural-align-right>
                         <span *ngIf="dataSource?.data?.totalBalanceEUR > 0">{{
-                            dataSource?.data?.totalBalanceEUR | currency: 'EUR'
+                            dataSource.data?.totalBalanceEUR | currency: 'EUR'
                         }}</span>
                     </td>
                 </ng-container>

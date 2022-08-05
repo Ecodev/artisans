@@ -1,6 +1,6 @@
 import {
     AbstractControl,
-    FormControl,
+    UntypedFormControl,
     FormGroup,
     FormGroupDirective,
     NgForm,
@@ -31,7 +31,7 @@ export function xorValidator(errorKey: string, paths: string[]): ValidatorFn {
 export class XorErrorStateMatcher implements ErrorStateMatcher {
     public constructor(private readonly errorKey: string) {}
 
-    public isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    public isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
         if (!form) {
             return false;
         }

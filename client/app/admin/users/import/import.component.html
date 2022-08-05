@@ -1,7 +1,7 @@
 <div fxLayout="column">
     <div fxLayout="column">
         <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-            {{ routeData?.seo.title }}
+            {{ routeData.seo.title }}
         </div>
     </div>
 
@@ -48,7 +48,7 @@
                     </p>
 
                     <div fxLayout="row" fxLayoutGap="10px">
-                        <a [routerLink]="['/admin/user', this.params]" mat-button style="margin-right: 3em"
+                        <a [routerLink]="['/admin/user', params]" mat-button style="margin-right: 3em"
                             >Voir le détail</a
                         >
                         <button mat-raised-button color="warn" (click)="deleteAll()">

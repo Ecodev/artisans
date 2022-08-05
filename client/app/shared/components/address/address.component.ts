@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {CountryService} from './country.service';
 
 @Component({
@@ -29,7 +29,7 @@ export class AddressComponent {
     /**
      * Form group to manage field values
      */
-    @Input() public form!: FormGroup;
+    @Input() public form!: UntypedFormGroup;
 
     /**
      * Emits when form changes

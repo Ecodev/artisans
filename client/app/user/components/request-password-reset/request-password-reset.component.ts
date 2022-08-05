@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Component} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ifValid, NaturalAlertService, validateAllFormControls} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
@@ -11,7 +11,7 @@ import {UserService} from '../../../admin/users/services/user.service';
     styleUrls: ['./request-password-reset.component.scss'],
 })
 export class RequestPasswordResetComponent {
-    public readonly form: FormGroup;
+    public readonly form: UntypedFormGroup;
     public sending = false;
 
     public constructor(
@@ -20,7 +20,7 @@ export class RequestPasswordResetComponent {
         private readonly router: Router,
         private readonly userService: UserService,
     ) {
-        this.form = new FormGroup({email: new FormControl('', userService.getFormValidators().email)});
+        this.form = new UntypedFormGroup({email: new UntypedFormControl('', userService.getFormValidators().email)});
     }
 
     public submit(): void {

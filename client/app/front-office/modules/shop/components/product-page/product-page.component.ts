@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
@@ -18,7 +18,7 @@ import {ProductsPageComponent} from '../products-page/products-page.component';
     styleUrls: ['./product-page.component.scss'],
 })
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
-    @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts!: ProductsPageComponent;
+    @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts: ProductsPageComponent | null = null;
 
     public ProductType = ProductType;
 
@@ -40,12 +40,12 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     /**
      * Form controller for quantity
      */
-    public quantityForm = new FormControl(null, [Validators.required, Validators.min(0)]);
+    public quantityForm = new UntypedFormControl(null, [Validators.required, Validators.min(0)]);
 
     /**
      * Combination of form controls of the page
      */
-    public formGroup = new FormGroup({quantity: this.quantityForm});
+    public formGroup = new UntypedFormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile_viewer | null = null;
 
     /**

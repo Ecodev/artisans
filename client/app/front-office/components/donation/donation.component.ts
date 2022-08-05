@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {CurrencyService} from '../../../shared/services/currency.service';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import {money} from '@ecodev/natural';
 
 export type DonationData = {
@@ -14,7 +14,7 @@ export type DonationData = {
     styleUrls: ['./donation.component.scss'],
 })
 export class DonationComponent {
-    public amount = new FormControl(null, [Validators.required, Validators.min(0), money]);
+    public amount = new UntypedFormControl(null, [Validators.required, Validators.min(0), money]);
 
     public constructor(
         @Inject(MAT_DIALOG_DATA) dialogData: DonationData,

@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {deliverableEmail, ifValid, NaturalAbstractController, NaturalAlertService} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {finalize} from 'rxjs/operators';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +16,7 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
      * Stores the received redirect URL until we need to use it (when login is successfull)
      */
     public returnUrl = '/';
-    public form: FormGroup;
+    public form: UntypedFormGroup;
 
     public constructor(
         private readonly route: ActivatedRoute,
@@ -24,7 +24,7 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
         private readonly userService: UserService,
         public readonly alertService: NaturalAlertService,
         public readonly snackBar: MatSnackBar,
-        private readonly fb: FormBuilder,
+        private readonly fb: UntypedFormBuilder,
     ) {
         super();
         this.form = this.fb.group({

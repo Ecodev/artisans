@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalAlertService} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
@@ -33,12 +33,12 @@ export class CreateOrderComponent implements OnInit {
     /**
      * Step 1 form
      */
-    public billingForm!: FormGroup;
+    public billingForm!: UntypedFormGroup;
 
     /**
      * Step 2 form
      */
-    public shippingForm!: FormGroup;
+    public shippingForm!: UntypedFormGroup;
 
     /**
      * For template usage
@@ -98,31 +98,31 @@ export class CreateOrderComponent implements OnInit {
 
         const viewer = this.route.snapshot.data.viewer.model;
 
-        this.shippingForm = new FormGroup({
-            paymentMethod: new FormControl('', [Validators.required]),
-            firstName: new FormControl(viewer.firstName, [Validators.required]),
-            lastName: new FormControl(viewer.lastName, [Validators.required]),
-            street: new FormControl(viewer.street, [Validators.required]),
-            locality: new FormControl(viewer.locality, [Validators.required]),
-            postcode: new FormControl(viewer.postcode, [Validators.required]),
-            country: new FormControl(viewer.country, [Validators.required]),
+        this.shippingForm = new UntypedFormGroup({
+            paymentMethod: new UntypedFormControl('', [Validators.required]),
+            firstName: new UntypedFormControl(viewer.firstName, [Validators.required]),
+            lastName: new UntypedFormControl(viewer.lastName, [Validators.required]),
+            street: new UntypedFormControl(viewer.street, [Validators.required]),
+            locality: new UntypedFormControl(viewer.locality, [Validators.required]),
+            postcode: new UntypedFormControl(viewer.postcode, [Validators.required]),
+            country: new UntypedFormControl(viewer.country, [Validators.required]),
         });
 
-        this.billingForm = new FormGroup({
-            sameAsBilling: new FormControl(true),
-            firstName: new FormControl(),
-            lastName: new FormControl(),
-            street: new FormControl(),
-            locality: new FormControl(),
-            postcode: new FormControl(),
-            country: new FormControl(),
+        this.billingForm = new UntypedFormGroup({
+            sameAsBilling: new UntypedFormControl(true),
+            firstName: new UntypedFormControl(),
+            lastName: new UntypedFormControl(),
+            street: new UntypedFormControl(),
+            locality: new UntypedFormControl(),
+            postcode: new UntypedFormControl(),
+            country: new UntypedFormControl(),
         });
     }
 
     /**
      * Set shipping address mandatory if "same address" is unchecked
      */
-    public updateAddressRequirements(required: boolean, form: FormGroup): void {
+    public updateAddressRequirements(required: boolean, form: UntypedFormGroup): void {
         const fields = ['firstName', 'lastName', 'street', 'locality', 'postcode', 'country'];
         fields.forEach(fieldName => {
             const control = form.get(fieldName);

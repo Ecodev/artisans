@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {FormArray, FormControl} from '@angular/forms';
+import {UntypedFormArray, UntypedFormControl} from '@angular/forms';
 import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
 import {
     CreateSession,
@@ -25,7 +25,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
     /**
      * Array of form controls dedicated to dates display
      */
-    public datesForm!: FormArray;
+    public datesForm!: UntypedFormArray;
 
     /**
      * Override parent just to type it
@@ -44,11 +44,11 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
         super.ngOnInit();
 
         // Overrides form with array by array of forms
-        this.datesForm = new FormArray(this.data.model.dates.map(date => new FormControl(date)));
+        this.datesForm = new UntypedFormArray(this.data.model.dates.map(date => new UntypedFormControl(date)));
         this.form.setControl('dates', this.datesForm);
     }
 
     public addDate(): void {
-        this.datesForm.push(new FormControl(''));
+        this.datesForm.push(new UntypedFormControl(''));
     }
 }

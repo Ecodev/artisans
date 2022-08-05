@@ -1,6 +1,6 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {UntypedFormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalAlertService} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
@@ -12,7 +12,7 @@ import {UpdatePassword, UpdatePasswordVariables} from '../../../shared/generated
     styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent {
-    public readonly form: FormGroup;
+    public readonly form: UntypedFormGroup;
     public sending = false;
     private readonly token: string;
 
@@ -23,7 +23,7 @@ export class ChangePasswordComponent {
         private readonly router: Router,
     ) {
         this.token = route.snapshot.params.token;
-        this.form = new FormGroup({});
+        this.form = new UntypedFormGroup({});
     }
 
     public submit(): void {

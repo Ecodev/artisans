@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Observable} from 'rxjs';
+import {last, Observable} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
 import {NewsResolve} from '../news';
 import {NewsService} from './news.service';
@@ -15,7 +15,7 @@ export class NewsResolver implements Resolve<NewsResolve> {
      * Resolve product data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<NewsResolve> {
-        const observable = this.productService.resolve(route.params.newsId);
+        const observable = this.productService.resolve(route.params.newsId).pipe(last());
 
         return this.errorService.redirectIfError(observable);
     }

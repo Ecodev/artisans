@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Observable} from 'rxjs';
+import {last, Observable} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
 import {ProductTags_productTags_items} from '../../../shared/generated-types';
 import {ProductTagService} from './product-tag.service';
@@ -22,7 +22,7 @@ export class ProductTagByNameResolver implements Resolve<ProductTagByNameResolve
      * Resolve productTag data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<ProductTagByNameResolve> {
-        const observable = this.productTagService.resolveByName(route.params.productTagName);
+        const observable = this.productTagService.resolveByName(route.params.productTagName).pipe(last());
 
         return this.errorService.redirectIfError(observable);
     }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Observable} from 'rxjs';
+import {last, Observable} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
 import {UserResolve} from '../user';
 import {UserService} from './user.service';
@@ -15,7 +15,7 @@ export class UserResolver implements Resolve<UserResolve> {
      * Resolve sites for routing service only at the moment
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<UserResolve> {
-        const observable = this.userService.resolve(route.params.userId);
+        const observable = this.userService.resolve(route.params.userId).pipe(last());
 
         return this.errorService.redirectIfError(observable);
     }

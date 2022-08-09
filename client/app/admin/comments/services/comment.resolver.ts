@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
-import {Observable} from 'rxjs';
+import {last, Observable} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
 import {CommentResolve} from '../comment';
 import {CommentService} from './comment.service';
@@ -15,7 +15,7 @@ export class CommentResolver implements Resolve<CommentResolve> {
      * Resolve product data for router
      */
     public resolve(route: ActivatedRouteSnapshot): Observable<CommentResolve> {
-        const observable = this.productService.resolve(route.params.commentId);
+        const observable = this.productService.resolve(route.params.commentId).pipe(last());
 
         return this.errorService.redirectIfError(observable);
     }

@@ -31,7 +31,7 @@ export class AbstractInfiniteLoadList<
     extends NaturalAbstractList<TService>
     implements OnInit
 {
-    public items: ExtractTall<TService>['items'] | null = null;
+    public items: ExtractTall<TService>['items'][0][] | null = null;
 
     public constructor(service: any, injector: Injector) {
         super(service, injector);

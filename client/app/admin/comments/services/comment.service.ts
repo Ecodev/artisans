@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {Literal, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
 import {
     Comment,
     CommentInput,
@@ -31,8 +31,17 @@ export class CommentService extends NaturalAbstractModelService<
     DeleteComments,
     DeleteCommentsVariables
 > {
-    public constructor(apollo: Apollo) {
-        super(apollo, 'comment', commentQuery, commentsQuery, createComment, updateComment, deleteComments);
+    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+        super(
+            apollo,
+            naturalDebounceService,
+            'comment',
+            commentQuery,
+            commentsQuery,
+            createComment,
+            updateComment,
+            deleteComments,
+        );
     }
 
     public getDefaultForClient(): Literal {

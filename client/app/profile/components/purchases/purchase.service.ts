@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {NaturalAbstractModelService} from '@ecodev/natural';
+import {NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
 import {Purchases, PurchasesVariables} from '../../../shared/generated-types';
 import {purchasesQuery} from './purchase.queries';
 
@@ -23,7 +23,7 @@ export class PurchaseService extends NaturalAbstractModelService<
     never,
     never
 > {
-    public constructor(apollo: Apollo) {
-        super(apollo, 'purchase', null, purchasesQuery, null, null, null);
+    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+        super(apollo, naturalDebounceService, 'purchase', null, purchasesQuery, null, null, null);
     }
 }

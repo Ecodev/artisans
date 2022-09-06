@@ -5,6 +5,7 @@ import {
     FormAsyncValidators,
     FormValidators,
     NaturalAbstractModelService,
+    NaturalDebounceService,
     NaturalQueryVariablesManager,
     unique,
 } from '@ecodev/natural';
@@ -49,9 +50,10 @@ export class ProductTagService extends NaturalAbstractModelService<
     DeleteProductTags,
     DeleteProductTagsVariables
 > {
-    public constructor(apollo: Apollo) {
+    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
         super(
             apollo,
+            naturalDebounceService,
             'productTag',
             productTagQuery,
             productTagsQuery,

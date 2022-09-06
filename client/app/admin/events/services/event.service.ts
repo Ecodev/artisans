@@ -1,6 +1,12 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {formatIsoDateTime, FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {
+    formatIsoDateTime,
+    FormValidators,
+    Literal,
+    NaturalAbstractModelService,
+    NaturalDebounceService,
+} from '@ecodev/natural';
 import {
     CreateEvent,
     CreateEventVariables,
@@ -32,8 +38,8 @@ export class EventService extends NaturalAbstractModelService<
     DeleteEvents,
     DeleteEventsVariables
 > {
-    public constructor(apollo: Apollo) {
-        super(apollo, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
+    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+        super(apollo, naturalDebounceService, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
     }
 
     public getDefaultForClient(): Literal {

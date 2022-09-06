@@ -7,6 +7,7 @@ import {
     Literal,
     money,
     NaturalAbstractModelService,
+    NaturalDebounceService,
     unique,
 } from '@ecodev/natural';
 import {
@@ -55,8 +56,17 @@ export class ProductService extends NaturalAbstractModelService<
         {field: ProductSortingField.sorting, order: SortingOrder.ASC},
     ];
 
-    public constructor(apollo: Apollo) {
-        super(apollo, 'product', productQuery, productsQuery, createProduct, updateProduct, deleteProducts);
+    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+        super(
+            apollo,
+            naturalDebounceService,
+            'product',
+            productQuery,
+            productsQuery,
+            createProduct,
+            updateProduct,
+            deleteProducts,
+        );
     }
 
     public getFormGroupValidators(model?: Literal): ValidatorFn[] {

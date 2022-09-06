@@ -8,10 +8,11 @@ import {
     FormValidators,
     LOCAL_STORAGE,
     NaturalAbstractModelService,
+    NaturalDebounceService,
     NaturalStorage,
     unique,
 } from '@ecodev/natural';
-import {fromEvent, Observable, of, Subject} from 'rxjs';
+import {fromEvent, Observable, of, Subject, switchMap} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
@@ -94,6 +95,7 @@ export class UserService
 
     public constructor(
         apollo: Apollo,
+        naturalDebounceService: NaturalDebounceService,
         protected readonly router: Router,
         private readonly permissionsService: PermissionsService,
         private readonly currencyService: CurrencyService,
@@ -101,7 +103,7 @@ export class UserService
         @Inject(DOCUMENT) private readonly document: Document,
         @Inject(LOCAL_STORAGE) private readonly storage: NaturalStorage,
     ) {
-        super(apollo, 'user', userQuery, usersQuery, createUser, updateUser, deleteUsers);
+        super(apollo, naturalDebounceService, 'user', userQuery, usersQuery, createUser, updateUser, deleteUsers);
         this.keepViewerSyncedAcrossBrowserTabs();
     }
 
@@ -221,27 +223,32 @@ export class UserService
     public logout(): Observable<Logout['logout']> {
         const subject = new Subject<Logout['logout']>();
 
-        this.router.navigate(['/login'], {queryParams: {logout: true}}).then(() => {
-            this.apollo
-                .mutate<Logout>({
-                    mutation: logoutMutation,
-                })
-                .subscribe(result => {
-                    const v = result.data!.logout;
+        this.naturalDebounceService
+            .flush()
+            .pipe(
+                switchMap(() => this.router.navigate(['/login'], {queryParams: {logout: true}})),
+                switchMap(() =>
+                    this.apollo.mutate<Logout>({
+                        mutation: logoutMutation,
+                    }),
+                ),
+            )
+            .subscribe(result => {
+                const v = result.data!.logout;
 
-                    // Be sure that we don't have leftovers from another user
-                    this.cartCollectionService.clear();
-                    this.viewer.next(null);
-                    this.currencyService.updateLockedStatus(null);
+                // Be sure that we don't have leftovers from another user
+                this.cartCollectionService.clear();
+                this.viewer.next(null);
+                this.currencyService.updateLockedStatus(null);
 
-                    // Broadcast logout to other browser tabs
-                    this.storage.setItem(this.storageKey, '');
+                // Broadcast logout to other browser tabs
+                this.storage.setItem(this.storageKey, '');
 
-                    this.apollo.client.resetStore().then(() => {
-                        subject.next(v);
-                    });
+                this.apollo.client.resetStore().then(() => {
+                    subject.next(v);
+                    subject.complete();
                 });
-        });
+            });
 
         return subject;
     }

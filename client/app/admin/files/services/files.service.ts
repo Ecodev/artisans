@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {NaturalAbstractModelService} from '@ecodev/natural';
+import {NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
 import {
     CreateFile,
     CreateFileVariables,
@@ -25,8 +25,8 @@ export class FilesService extends NaturalAbstractModelService<
     DeleteFile,
     DeleteFileVariables
 > {
-    public constructor(apollo: Apollo) {
-        super(apollo, 'file', null, null, createFileMutation, null, deleteFileMutation);
+    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+        super(apollo, naturalDebounceService, 'file', null, null, createFileMutation, null, deleteFileMutation);
     }
 
     protected getDefaultForServer(): FileInput {

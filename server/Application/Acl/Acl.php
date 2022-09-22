@@ -8,6 +8,7 @@ use Application\Model\Comment;
 use Application\Model\Configuration;
 use Application\Model\Country;
 use Application\Model\Event;
+use Application\Model\FacilitatorDocument;
 use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\Message;
@@ -50,6 +51,7 @@ class Acl extends \Ecodev\Felix\Acl\Acl
         $session = $this->createModelResource(Session::class);
         $subscription = $this->createModelResource(Subscription::class);
         $user = $this->createModelResource(User::class);
+        $facilitatorDocument = $this->createModelResource(FacilitatorDocument::class);
 
         $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country, $comment], ['read']);
 
@@ -63,8 +65,9 @@ class Acl extends \Ecodev\Felix\Acl\Acl
 
         $this->allow(User::ROLE_FACILITATOR, [$file], ['read', 'update']);
         $this->allow(User::ROLE_FACILITATOR, [$user], ['update']);
+        $this->allow(User::ROLE_FACILITATOR, [$facilitatorDocument], ['read']);
 
-        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment, $facilitatorDocument], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$configuration, $organization], ['create']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$user], ['create', 'delete']);

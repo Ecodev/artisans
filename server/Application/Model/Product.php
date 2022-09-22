@@ -79,9 +79,6 @@ class Product extends AbstractProduct
      */
     private int $sorting = 0;
 
-    /**
-     * Constructor.
-     */
     public function __construct(string $name = '')
     {
         parent::__construct($name);

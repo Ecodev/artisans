@@ -9,6 +9,9 @@ import {CommentResolver} from './comments/services/comment.resolver';
 import {EventComponent} from './events/event/event.component';
 import {EventsComponent} from './events/events/events.component';
 import {EventResolver} from './events/services/event.resolver';
+import {FacilitatorDocumentComponent} from './facilitator-documents/facilitator-document/facilitator-document.component';
+import {FacilitatorDocumentsComponent} from './facilitator-documents/facilitator-documents/facilitator-documents.component';
+import {FacilitatorDocumentResolver} from './facilitator-documents/services/facilitator-document.resolver';
 import {NewsComponent} from './newses/news/news.component';
 import {NewsesComponent} from './newses/newses/newses.component';
 import {NewsResolver} from './newses/services/news.resolver';
@@ -305,6 +308,44 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'comment',
+                            } as NaturalSeo,
+                        },
+                    },
+                ],
+            },
+            {
+                path: 'facilitator-document', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
+                component: FacilitatorDocumentsComponent,
+                data: {
+                    seo: {
+                        title: 'Documents facilitateurs',
+                    } as NaturalSeo,
+                },
+            },
+            {
+                path: 'facilitator-document',
+                children: [
+                    {
+                        path: 'new',
+                        component: FacilitatorDocumentComponent,
+                        resolve: {
+                            facilitatorDocument: FacilitatorDocumentResolver,
+                        },
+                        data: {
+                            seo: {
+                                title: 'Nouveau document',
+                            } as NaturalSeo,
+                        },
+                    },
+                    {
+                        path: ':facilitatorDocumentId', // last
+                        component: FacilitatorDocumentComponent,
+                        resolve: {
+                            facilitatorDocument: FacilitatorDocumentResolver,
+                        },
+                        data: {
+                            seo: {
+                                resolveKey: 'facilitatorDocument',
                             } as NaturalSeo,
                         },
                     },

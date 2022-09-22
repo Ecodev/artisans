@@ -53,9 +53,6 @@ abstract class AbstractProduct extends AbstractModel
      */
     private ?Image $illustration = null;
 
-    /**
-     * Constructor.
-     */
     public function __construct(string $name = '')
     {
         $this->setName($name);

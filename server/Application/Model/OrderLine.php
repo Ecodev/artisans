@@ -58,9 +58,6 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      */
     private ?Subscription $subscription = null;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
     }

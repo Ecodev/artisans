@@ -46,6 +46,9 @@ const permissions = gql`
                 user {
                     create
                 }
+                facilitatorDocument {
+                    create
+                }
             }
         }
     }

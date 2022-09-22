@@ -1,15 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
-import {
-    CreateProduct,
-    CreateProductVariables,
-    DeleteProducts,
-    DeleteProductsVariables,
-    Product,
-    ProductVariables,
-    UpdateProduct,
-    UpdateProductVariables,
-} from '../../../shared/generated-types';
 import {XorErrorStateMatcher} from '../../../shared/validators';
 import {FilesService} from '../../files/services/files.service';
 import {ProductTagService} from '../../product-tags/services/product-tag.service';

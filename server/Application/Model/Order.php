@@ -47,8 +47,6 @@ class Order extends AbstractModel implements HasBalanceInterface
     private string $paymentMethod;
 
     /**
-     * Constructor.
-     *
      * @param string $status status for new order
      */
     public function __construct(string $status = self::STATUS_PENDING)

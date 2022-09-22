@@ -29,9 +29,6 @@ class ProductTag extends AbstractModel
      */
     private Collection $products;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->products = new ArrayCollection();

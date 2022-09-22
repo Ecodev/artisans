@@ -82,9 +82,6 @@ class Session extends AbstractModel
      */
     private Collection $facilitators;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->facilitators = new ArrayCollection();

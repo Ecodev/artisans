@@ -17,3 +17,38 @@
         justify-content: center;
     }
 }
+
+.categories {
+    padding: 0;
+
+    h3 {
+        margin-bottom: 5px;
+    }
+
+    ul,
+    li {
+        list-style: none;
+        display: block;
+    }
+
+    .category {
+        border-left-width: 6px;
+        border-left-style: solid;
+        padding: 5px 0 5px 10px;
+        margin: 0 0 5px 0;
+
+        & > li {
+            font-weight: bold;
+        }
+    }
+
+    .documents {
+        padding: 0;
+    }
+
+    .document {
+        display: block;
+        margin: 0 0 3px 0;
+        padding: 3px 5px;
+    }
+}

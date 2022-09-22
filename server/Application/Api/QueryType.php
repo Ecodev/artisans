@@ -14,6 +14,7 @@ use Application\Api\Field\Standard;
 use Application\Model\Comment;
 use Application\Model\Country;
 use Application\Model\Event;
+use Application\Model\FacilitatorDocument;
 use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\Message;
@@ -56,6 +57,7 @@ class QueryType extends ObjectType
             Standard::buildQuery(User::class),
             Standard::buildQuery(Country::class),
             Standard::buildQuery(Comment::class),
+            Standard::buildQuery(FacilitatorDocument::class),
         );
 
         $config = [

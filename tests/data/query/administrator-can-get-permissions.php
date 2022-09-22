@@ -16,6 +16,7 @@ return [
                     image { create }
                     message { create }
                     user { create }
+                    facilitatorDocument { create }
                 }
             }
         }',
@@ -51,6 +52,9 @@ return [
                         'create' => false,
                     ],
                     'user' => [
+                        'create' => true,
+                    ],
+                    'facilitatorDocument' => [
                         'create' => true,
                     ],
                 ],

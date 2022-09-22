@@ -1,0 +1,73 @@
+<div [formGroup]="form" class="detail-body">
+    <natural-detail-header
+        [listRoute]="['admin', 'facilitator-document']"
+        [model]="data.model"
+        label="Documents facilitateurs"
+        [newLabel]="data.seo.title"
+    >
+        <a
+            routerLink="/agir-avec-nous/conversation-carbone/facilitateurs-prive"
+            color="primary"
+            mat-raised-button
+            *ngIf="data.model.id"
+        >
+            <natural-icon name="remove_red_eye"></natural-icon>
+            Voir la page
+        </a>
+    </natural-detail-header>
+
+    <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+        <mat-tab id="general" label="Général">
+            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
+                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                    <div fxFlex="66" fxLayout="column">
+                        <mat-form-field>
+                            <mat-label>Nom</mat-label>
+                            <input (change)="update()" formControlName="name" matInput />
+                            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
+                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Rubrique</mat-label>
+                            <input (change)="update()" formControlName="category" matInput />
+                            <mat-error *ngIf="form.get('category')?.hasError('maxlength')">
+                                Maximum {{ form.get('category')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                            <mat-error *ngIf="form.get('category')?.hasError('required')">Requis</mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div fxFlex="33" fxLayout="column" fxLayoutGap="20px">
+                        <h2 class="mat-h2">Document</h2>
+
+                        <natural-file
+                            (modelChange)="setFormValue($event, 'file')"
+                            [height]="300"
+                            [model]="data.model.file"
+                            [service]="fileService"
+                            [style.borderRadius.px]="4"
+                            [style.marginLeft.px]="2"
+                            action="upload"
+                            class="mat-elevation-z2"
+                            accept="application/pdf,pplication/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                        ></natural-file>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <natural-stamp [item]="data.model"></natural-stamp>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+
+    <natural-fixed-button-detail
+        (create)="create()"
+        (delete)="delete()"
+        *ngIf="showFabButton"
+        [form]="form"
+        [model]="data.model"
+    ></natural-fixed-button-detail>
+</div>

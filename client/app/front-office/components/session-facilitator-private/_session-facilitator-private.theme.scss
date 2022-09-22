@@ -11,5 +11,14 @@
         .facilitator {
             border-left-color: mat.get-color-from-palette($primary);
         }
+
+        .category {
+            border-left-color: mat.get-color-from-palette($accent);
+        }
+
+        .document:hover {
+            background: mat.get-color-from-palette($primary);
+            color: mat.get-color-from-palette($primary, default-contrast);
+        }
     }
 }

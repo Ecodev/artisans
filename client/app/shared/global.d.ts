@@ -27,3 +27,4 @@ type AppProductTagID = string | any;
 type AppSessionID = string | any;
 type AppSubscriptionID = string | any;
 type AppUserID = string | any;
+type AppFacilitatorDocumentID = string | any;

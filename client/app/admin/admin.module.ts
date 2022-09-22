@@ -9,6 +9,8 @@ import {CommentComponent} from './comments/comment/comment.component';
 import {CommentsComponent} from './comments/comments/comments.component';
 import {EventComponent} from './events/event/event.component';
 import {EventsComponent} from './events/events/events.component';
+import {FacilitatorDocumentComponent} from './facilitator-documents/facilitator-document/facilitator-document.component';
+import {FacilitatorDocumentsComponent} from './facilitator-documents/facilitator-documents/facilitator-documents.component';
 import {NewsComponent} from './newses/news/news.component';
 import {NewsesComponent} from './newses/newses/newses.component';
 import {OrderModule} from './order/order.module';
@@ -32,6 +34,8 @@ import {UserComponent} from './users/user/user.component';
         CommentComponent,
         CommentsComponent,
         ImportComponent,
+        FacilitatorDocumentComponent,
+        FacilitatorDocumentsComponent,
     ],
     imports: [CommonModule, AdminRoutingModule, ArtisansModule, ProfileModule, OrderModule, EcoFabSpeedDialModule],
 })

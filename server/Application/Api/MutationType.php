@@ -22,6 +22,7 @@ use Application\Api\Field\Mutation\UpdateUser;
 use Application\Api\Field\Standard;
 use Application\Model\Comment;
 use Application\Model\Event;
+use Application\Model\FacilitatorDocument;
 use Application\Model\File;
 use Application\Model\Image;
 use Application\Model\News;
@@ -66,6 +67,7 @@ class MutationType extends ObjectType
             Standard::buildMutation(Subscription::class),
             Standard::buildMutation(User::class),
             Standard::buildMutation(Comment::class),
+            Standard::buildMutation(FacilitatorDocument::class),
             Standard::buildRelationMutation(Product::class, Product::class, 'RelatedProduct'),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),

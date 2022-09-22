@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
+import {formatIsoDate, formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
 import {EventResolver} from '../admin/events/services/event.resolver';
 import {NewsResolver} from '../admin/newses/services/news.resolver';
 import {ViewerResolver} from '../admin/users/services/viewer.resolver';
@@ -65,7 +65,7 @@ const routes: Routes = [
                                 {
                                     date: {
                                         greaterOrEqual: {
-                                            value: formatIsoDateTime(new Date(new Date().setHours(0, 0, 0, 0))),
+                                            value: formatIsoDate(new Date()),
                                         },
                                     },
                                 },

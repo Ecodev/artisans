@@ -46,7 +46,6 @@ return [
                 ],
                 'datetime_functions' => [],
                 'string_functions' => [
-                    'greatest' => \DoctrineExtensions\Query\Mysql\Greatest::class,
                     'if' => \DoctrineExtensions\Query\Mysql\IfElse::class,
                     'ifnull' => \DoctrineExtensions\Query\Mysql\IfNull::class,
                     'find_in_set' => \DoctrineExtensions\Query\Mysql\FindInSet::class,

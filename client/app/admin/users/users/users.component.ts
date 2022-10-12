@@ -46,25 +46,23 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
     }
 
     public download(): void {
-        if (this.apollo) {
-            const qvm = new NaturalQueryVariablesManager(this.variablesManager);
-            qvm.set('pagination', {pagination: {pageIndex: 0, pageSize: 9999}});
-            qvm.set('emailFilter', {
-                filter: {groups: [{conditions: [{email: {null: {not: true}}}]}]},
-            } as UsersVariables);
+        const qvm = new NaturalQueryVariablesManager(this.variablesManager);
+        qvm.set('pagination', {pagination: {pageIndex: 0, pageSize: 9999}});
+        qvm.set('emailFilter', {
+            filter: {groups: [{conditions: [{email: {null: {not: true}}}]}]},
+        } as UsersVariables);
 
-            this.apollo
-                .query<EmailUsers, EmailUsersVariables>({
-                    query: emailUsersQuery,
-                    variables: qvm.variables.value,
-                })
-                .subscribe(result => {
-                    this.usersEmail = result.data['users'].items.map(u => u.email).join(' ;,'); // all separators for different mailboxes
-                    this.usersEmailAndName = result.data['users'].items
-                        .map(u => [u.email, u.firstName, u.lastName].join(';'))
-                        .join('\n');
-                });
-        }
+        this.apollo
+            .query<EmailUsers, EmailUsersVariables>({
+                query: emailUsersQuery,
+                variables: qvm.variables.value,
+            })
+            .subscribe(result => {
+                this.usersEmail = result.data['users'].items.map(u => u.email).join(' ;,'); // all separators for different mailboxes
+                this.usersEmailAndName = result.data['users'].items
+                    .map(u => [u.email, u.firstName, u.lastName].join(';'))
+                    .join('\n');
+            });
     }
 
     public copy(text: string): void {

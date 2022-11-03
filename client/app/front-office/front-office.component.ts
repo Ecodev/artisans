@@ -11,7 +11,7 @@ import {
     toNavigationParameters,
 } from '@ecodev/natural';
 import {differenceBy} from 'lodash-es';
-import {filter, finalize} from 'rxjs/operators';
+import {filter, finalize, takeUntil} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile_viewer, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
@@ -247,9 +247,14 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];
 
         // Further navigations
-        this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-            this.goToFragment();
-        });
+        this.router.events
+            .pipe(
+                takeUntil(this.ngUnsubscribe),
+                filter(event => event instanceof NavigationEnd),
+            )
+            .subscribe(() => {
+                this.goToFragment();
+            });
     }
 
     public ngAfterViewInit(): void {

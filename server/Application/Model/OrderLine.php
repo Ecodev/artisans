@@ -30,6 +30,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      * Additional emails for subscription for a company.
      *
      * @var string[]
+     *
      * @ORM\Column(type="json", options={"default" = "[]"})
      */
     private array $additionalEmails = [];

@@ -34,6 +34,7 @@ class News extends AbstractModel
 
     /**
      * @var Collection<Comment>
+     *
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="news")
      */
     private Collection $comments;

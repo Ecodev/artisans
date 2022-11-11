@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
  * This only concern digital version, never paper.
  *
  * @ORM\Entity(repositoryClass="Application\Repository\OrganizationRepository")
- *
  * @ORM\Table(uniqueConstraints={
  *     @ORM\UniqueConstraint(name="unique_pattern", columns={"pattern"}, options={"lengths" = {768}}),
  * })

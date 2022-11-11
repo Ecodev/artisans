@@ -193,17 +193,11 @@ class Product extends AbstractProduct
         $this->relatedProducts->removeElement($product);
     }
 
-    /**
-     * @return null|Product
-     */
     public function getReview(): ?self
     {
         return $this->review;
     }
 
-    /**
-     * @param null|Product $review
-     */
     public function setReview(?self $review): void
     {
         $this->review = $review;

@@ -14,6 +14,7 @@ trait HasProductType
 {
     /**
      * @var string
+     *
      * @ORM\Column(type="ProductType")
      */
     private $type;

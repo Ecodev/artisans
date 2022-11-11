@@ -25,7 +25,6 @@ abstract class Import implements FieldInterface
                 'file' => Type::nonNull(_types()->get(UploadType::class)),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): array {
-
                 // Check ACL
                 $fakeOrganization = new Organization();
                 Helper::throwIfDenied($fakeOrganization, 'create');

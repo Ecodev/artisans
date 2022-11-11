@@ -78,6 +78,7 @@ class Session extends AbstractModel
 
     /**
      * @var Collection<User>
+     *
      * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
      */
     private Collection $facilitators;

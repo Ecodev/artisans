@@ -4,7 +4,7 @@
 --
 -- A quick way to ensure all those assumptions and do the migration are the following commands:
 --
---     ./vendor/bin/doctrine-migrations migrations:migrate --no-interaction
+--     ./bin/doctrine migrations:migrate --no-interaction
 --     gunzip -c data/cache/larevuedurable.com.sql.gz | mysql -u artisans -p artisans
 --     more bin/migrate_larevuedurable_data.sql | mysql -u artisans -p artisans
 --     ./bin/clean-formatted-content.php

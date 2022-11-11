@@ -22,6 +22,7 @@ class Event extends AbstractModel
 
     /**
      * @var Collection<Comment>
+     *
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
      */
     private Collection $comments;

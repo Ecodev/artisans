@@ -14,36 +14,42 @@ trait HasAddress
 {
     /**
      * @var string
+     *
      * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
     private $firstName = '';
 
     /**
      * @var string
+     *
      * @ORM\Column(type="string", length=191, options={"default" = ""})
      */
     private $lastName = '';
 
     /**
      * @var string
+     *
      * @ORM\Column(type="string", options={"default" = ""})
      */
     private $street = '';
 
     /**
      * @var string
+     *
      * @ORM\Column(type="string", length=20, options={"default" = ""})
      */
     private $postcode = '';
 
     /**
      * @var string
+     *
      * @ORM\Column(type="string", length=255, options={"default" = ""})
      */
     private $locality = '';
 
     /**
      * @var null|Country
+     *
      * @ORM\ManyToOne(targetEntity="Country")
      * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */

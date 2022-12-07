@@ -42,55 +42,53 @@ class OrganizationRepositoryTest extends AbstractRepositoryTest
         }
     }
 
-    public function providerApplyOrganizationAccesses(): array
+    public function providerApplyOrganizationAccesses(): iterable
     {
-        return [
-            'no matching org, no subscription' => [
-                [
-                    'foo@example.com' => [
-                        ['subscription_last_review_id' => null, 'subscription_type' => null],
-                        ['subscription_last_review_id' => null, 'subscription_type' => null],
-                    ],
+        yield 'no matching org, no subscription' => [
+            [
+                'foo@example.com' => [
+                    ['subscription_last_review_id' => null, 'subscription_type' => null],
+                    ['subscription_last_review_id' => null, 'subscription_type' => null],
                 ],
             ],
-            'no matching org, with subscription' => [
-                [
-                    'foo@example.com' => [
-                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
-                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
-                    ],
+        ];
+        yield 'no matching org, with subscription' => [
+            [
+                'foo@example.com' => [
+                    ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
+                    ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
                 ],
             ],
-            'matching org, no subscription' => [
-                [
-                    'foo@university.com' => [
-                        ['subscription_last_review_id' => null, 'subscription_type' => null],
-                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::DIGITAL],
-                    ],
+        ];
+        yield 'matching org, no subscription' => [
+            [
+                'foo@university.com' => [
+                    ['subscription_last_review_id' => null, 'subscription_type' => null],
+                    ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::DIGITAL],
                 ],
             ],
-            'matching org, with subscription should upgrade type' => [
-                [
-                    'foo@students.university.com' => [
-                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::PAPER],
-                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::BOTH],
-                    ],
+        ];
+        yield 'matching org, with subscription should upgrade type' => [
+            [
+                'foo@students.university.com' => [
+                    ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::PAPER],
+                    ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::BOTH],
                 ],
             ],
-            'matching better org, with subscription should upgrade everything' => [
-                [
-                    'foo@teachers.university.com' => [
-                        ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::PAPER],
-                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::BOTH],
-                    ],
+        ];
+        yield 'matching better org, with subscription should upgrade everything' => [
+            [
+                'foo@teachers.university.com' => [
+                    ['subscription_last_review_id' => 3000, 'subscription_type' => ProductTypeType::PAPER],
+                    ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::BOTH],
                 ],
             ],
-            'matching worse org, with subscription should not downgrade' => [
-                [
-                    'foo@university.com' => [
-                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
-                        ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
-                    ],
+        ];
+        yield 'matching worse org, with subscription should not downgrade' => [
+            [
+                'foo@university.com' => [
+                    ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
+                    ['subscription_last_review_id' => 3001, 'subscription_type' => ProductTypeType::DIGITAL],
                 ],
             ],
         ];

@@ -29,14 +29,12 @@ class OrderTest extends TestCase
         self::assertSame($expected, $order->getFormattedBalance());
     }
 
-    public function providerGetFormattedBalance(): array
+    public function providerGetFormattedBalance(): iterable
     {
-        return [
-            [0, 0, '0.00 CHF'],
-            [150, 0, '1.50 CHF'],
-            [0, 275, '2.75 EUR'],
-            [150, 275, '2.75 EUR'], // should not happen
-        ];
+        yield [0, 0, '0.00 CHF'];
+        yield [150, 0, '1.50 CHF'];
+        yield [0, 275, '2.75 EUR'];
+        yield [150, 275, '2.75 EUR'];
     }
 
     public function testSetStatusWillGiveAccess(): void

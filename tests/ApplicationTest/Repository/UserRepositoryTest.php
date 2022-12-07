@@ -23,16 +23,13 @@ class UserRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(User::class);
     }
 
-    public function providerGetAccessibleSubQuery(): array
+    public function providerGetAccessibleSubQuery(): iterable
     {
         $all = [1000, 1001, 1002, 1003];
-
-        return [
-            ['anonymous', [1001]],
-            ['member', $all],
-            ['facilitator', $all],
-            ['administrator', $all],
-        ];
+        yield ['anonymous', [1001]];
+        yield ['member', $all];
+        yield ['facilitator', $all];
+        yield ['administrator', $all];
     }
 
     public function testGetOneByEmailPassword(): void

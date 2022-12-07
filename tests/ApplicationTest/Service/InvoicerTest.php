@@ -69,73 +69,71 @@ class InvoicerTest extends TestCase
         self::assertSame($expectedOrderLines, $actualOrderLines);
     }
 
-    public function providerUpdateOrderLineAndTransactionLine(): array
+    public function providerUpdateOrderLineAndTransactionLine(): iterable
     {
-        return [
-            'more quantity of same product' => [
-                'normal',
-                null,
+        yield 'more quantity of same product' => [
+            'normal',
+            null,
+            [
                 [
-                    [
-                        'My product 1',
-                        100,
-                        '27500',
-                        '0',
-                        true,
-                        ProductTypeType::DIGITAL,
-                    ],
-                    [
-                        'My product 2',
-                        1,
-                        '20000',
-                        '0',
-                        true,
-                        ProductTypeType::DIGITAL,
-                    ],
+                    'My product 1',
+                    100,
+                    '27500',
+                    '0',
+                    true,
+                    ProductTypeType::DIGITAL,
+                ],
+                [
+                    'My product 2',
+                    1,
+                    '20000',
+                    '0',
+                    true,
+                    ProductTypeType::DIGITAL,
                 ],
             ],
-            'more quantity of different, negative product' => [
-                'normal',
+        ];
+        yield 'more quantity of different, negative product' => [
+            'normal',
+            [
+                'name' => 'My negative product',
+                'pricePerUnitCHF' => Money::CHF(-10000),
+                'pricePerUnitEUR' => Money::EUR(-15000),
+            ],
+            [
                 [
-                    'name' => 'My negative product',
-                    'pricePerUnitCHF' => Money::CHF(-10000),
-                    'pricePerUnitEUR' => Money::EUR(-15000),
+                    'My negative product',
+                    100,
+                    '-1000000',
+                    '0',
+                    true,
+                    ProductTypeType::DIGITAL,
                 ],
                 [
-                    [
-                        'My negative product',
-                        100,
-                        '-1000000',
-                        '0',
-                        true,
-                        ProductTypeType::DIGITAL,
-                    ],
-                    [
-                        'My product 2',
-                        1,
-                        '20000',
-                        '0',
-                        true,
-                        ProductTypeType::DIGITAL,
-                    ],
+                    'My product 2',
+                    1,
+                    '20000',
+                    '0',
+                    true,
+                    ProductTypeType::DIGITAL,
                 ],
             ],
-            'from negative goes back to positive' => [
-                'negative balance should swap accounts',
+        ];
+        yield 'from negative goes back to positive' => [
+            'negative balance should swap accounts',
+            [
+                'name' => 'My positive product',
+                'pricePerUnitCHF' => Money::CHF(10000),
+                'pricePerUnitEUR' => Money::EUR(15000),
+            ],
+            [
                 [
-                    'name' => 'My positive product',
-                    'pricePerUnitCHF' => Money::CHF(10000),
-                    'pricePerUnitEUR' => Money::EUR(15000),
-                ],
-                [
-                    [
-                        'My positive product',
-                        100,
-                        '1000000',
-                        '0',
-                        true,
-                        ProductTypeType::DIGITAL,
-                    ],
+                    'My positive product',
+                    100,
+                    '1000000',
+                    '0',
+                    true,
+                    ProductTypeType::DIGITAL,
                 ],
             ],
         ];

@@ -25,18 +25,15 @@ class ProductRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Product::class);
     }
 
-    public function providerGetAccessibleSubQuery(): array
+    public function providerGetAccessibleSubQuery(): iterable
     {
         $all = range(3000, 3011);
         $actives = array_values(array_diff($all, [3010]));
-
-        return [
-            ['anonymous', $actives],
-            ['member', $actives],
-            ['othermember', $actives],
-            ['facilitator', $all],
-            ['administrator', $all],
-        ];
+        yield ['anonymous', $actives];
+        yield ['member', $actives];
+        yield ['othermember', $actives];
+        yield ['facilitator', $all];
+        yield ['administrator', $all];
     }
 
     public function testGetSubscriptionLastReviewNumber(): void

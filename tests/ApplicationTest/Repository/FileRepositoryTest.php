@@ -26,19 +26,16 @@ class FileRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(File::class);
     }
 
-    public function providerGetAccessibleSubQuery(): array
+    public function providerGetAccessibleSubQuery(): iterable
     {
         $all = [9000, 9001, 9002, 9003];
         $articlesAndReviewsViaSubscriptions = [9000, 9001, 9002, 9003];
         $directPurchases = [9001, 9003];
-
-        return [
-            ['anonymous', [9003]],
-            ['member', $directPurchases],
-            ['othermember', $articlesAndReviewsViaSubscriptions],
-            ['facilitator', $all],
-            ['administrator', $all],
-        ];
+        yield ['anonymous', [9003]];
+        yield ['member', $directPurchases];
+        yield ['othermember', $articlesAndReviewsViaSubscriptions];
+        yield ['facilitator', $all];
+        yield ['administrator', $all];
     }
 
     public function testFileOnDiskIsDeletedWhenRecordInDbIsDeleted(): void

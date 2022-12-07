@@ -129,245 +129,243 @@ class DatatransHandlerTest extends TestCase
         self::assertTrue(true); // Workaround when we only assert via mock
     }
 
-    public function providerProcess(): array
+    public function providerProcess(): iterable
     {
-        return [
-            'normal' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16001',
-                    'amount' => '1000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => 'c0a817ad85a2bc830f8fd9d4f1cd0f3a2a8757239f98ec1700a182e7f182c6a7',
-                ],
-                [
-                    'message' => [
-                        'status' => 'success',
-                        'message' => 'Payment was successful',
-                    ],
-                ],
-                false,
+        yield 'normal' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16001',
+                'amount' => '1000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => 'c0a817ad85a2bc830f8fd9d4f1cd0f3a2a8757239f98ec1700a182e7f182c6a7',
             ],
-            'invalid HMAC signature' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
+            [
+                'message' => [
                     'status' => 'success',
-                    'refno' => '16001',
-                    'amount' => '1000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => 'a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
+                    'message' => 'Payment was successful',
                 ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Invalid HMAC signature',
-                    ],
-                ],
-                false,
             ],
-            'missing HMAC signature' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16001',
-                    'amount' => '1000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Missing HMAC signature',
-                    ],
-                ],
-                false,
+            false,
+        ];
+        yield 'invalid HMAC signature' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16001',
+                'amount' => '1000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => 'a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0',
             ],
-            'error' => [
-                [
-                    'uppTransactionId' => '876543210987654321',
+            [
+                'message' => [
                     'status' => 'error',
-                    'refno' => '16001',
-                    'errorMessage' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
-                    'sign' => '8015e6fef2caf41bb11cd2f54077bedb6339bd1aecf418091f77662ee13f81eb',
+                    'message' => 'Invalid HMAC signature',
                 ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
-                    ],
-                ],
-                false,
             ],
-            'cancel' => [
-                [
-                    'uppTransactionId' => '876543210987654321',
+            false,
+        ];
+        yield 'missing HMAC signature' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16001',
+                'amount' => '1000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Missing HMAC signature',
+                ],
+            ],
+            false,
+        ];
+        yield 'error' => [
+            [
+                'uppTransactionId' => '876543210987654321',
+                'status' => 'error',
+                'refno' => '16001',
+                'errorMessage' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
+                'sign' => '8015e6fef2caf41bb11cd2f54077bedb6339bd1aecf418091f77662ee13f81eb',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Dear Sir/Madam, Fire! fire! help me! All the best, Maurice Moss.',
+                ],
+            ],
+            false,
+        ];
+        yield 'cancel' => [
+            [
+                'uppTransactionId' => '876543210987654321',
+                'status' => 'cancel',
+                'refno' => '16001',
+                'sign' => '8015e6fef2caf41bb11cd2f54077bedb6339bd1aecf418091f77662ee13f81eb',
+            ],
+            [
+                'message' => [
                     'status' => 'cancel',
-                    'refno' => '16001',
-                    'sign' => '8015e6fef2caf41bb11cd2f54077bedb6339bd1aecf418091f77662ee13f81eb',
+                    'message' => 'Cancelled',
                 ],
-                [
-                    'message' => [
-                        'status' => 'cancel',
-                        'message' => 'Cancelled',
-                    ],
-                ],
-                false,
             ],
-            'invalid body' => [
-                null,
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Parsed body is expected to be an array but got: NULL',
-                    ],
+            false,
+        ];
+        yield 'invalid body' => [
+            null,
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Parsed body is expected to be an array but got: NULL',
                 ],
-                false,
             ],
-            'invalid status' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'non-existing-status',
-                    'refno' => '16001',
-                    'amount' => '10000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => '811cb0cd3333311a242adb9907052b74d1c462fb94b071ef4d8790faa7f7fd72',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Unsupported status in Datatrans data: non-existing-status',
-                    ],
-                ],
-                false,
+            false,
+        ];
+        yield 'invalid status' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'non-existing-status',
+                'refno' => '16001',
+                'amount' => '10000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => '811cb0cd3333311a242adb9907052b74d1c462fb94b071ef4d8790faa7f7fd72',
             ],
-            'non-existing order' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Unsupported status in Datatrans data: non-existing-status',
+                ],
+            ],
+            false,
+        ];
+        yield 'non-existing order' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'amount' => '10000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => 'd7f9a1716b1538e2cd8f239230526435bc0dcf289a1769f7426badcbaa0efbc8',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Cannot validate an order without a valid order ID',
+                ],
+            ],
+            false,
+        ];
+        yield 'non-existing amount' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16001',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => 'd3f6f15797038879787e6d79e8041a7e9a9cb5cd1d7c5dabdd62ac8d3052db34',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Cannot validate an order without an amount',
+                ],
+            ],
+            false,
+        ];
+        yield 'invalid currency' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16001',
+                'amount' => '10000',
+                'currency' => 'USD',
+                'responseMessage' => 'Payment was successful',
+                'sign' => '8583b8d14fb4efa85d905ad8646074ce3ce1abe16464299e116e4cb68dd44752',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Can only accept payment in CHF or EUR, but got: USD',
+                ],
+            ],
+            false,
+        ];
+        yield 'incorrect amount' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16001',
+                'amount' => '1111',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => '2f2bb61733d8b95101c8c938290acf0efb17daf359266262d73b67165c3ce30b',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Cannot validate an order with incorrect balance. Expected 10.00 CHF, or 0.00 EUR, but got: 11.11 CHF',
+                ],
+            ],
+            false,
+        ];
+        yield 'incorrect payment method' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16003',
+                'amount' => '10000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => '3111e1c3e63a77a13d9ae067690d52523c00c992b7aba262ab41de7f6e81bdad',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Cannot validate an order whose payment method is: ebanking',
+                ],
+            ],
+            false,
+        ];
+        yield 'incorrect status' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16002',
+                'amount' => '10000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => 'f19af94a1cafd91e8da390308e2d4a1f8bfc4ac1e2e18cf2963e1de63cec37f8',
+            ],
+            [
+                'message' => [
+                    'status' => 'error',
+                    'message' => 'Cannot validate an order which is already validated',
+                ],
+            ],
+            false,
+        ];
+        yield 'validating numeric subscription will give webTemporaryAccess' => [
+            [
+                'uppTransactionId' => '123456789012345678',
+                'status' => 'success',
+                'refno' => '16004',
+                'amount' => '8000',
+                'currency' => 'CHF',
+                'responseMessage' => 'Payment was successful',
+                'sign' => 'a54523b461058df8d61cdbe2328bcd161bae411ec9e6206bbf4da773e3c88493',
+            ],
+            [
+                'message' => [
                     'status' => 'success',
-                    'amount' => '10000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => 'd7f9a1716b1538e2cd8f239230526435bc0dcf289a1769f7426badcbaa0efbc8',
+                    'message' => 'Payment was successful',
                 ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Cannot validate an order without a valid order ID',
-                    ],
-                ],
-                false,
             ],
-            'non-existing amount' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16001',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => 'd3f6f15797038879787e6d79e8041a7e9a9cb5cd1d7c5dabdd62ac8d3052db34',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Cannot validate an order without an amount',
-                    ],
-                ],
-                false,
-            ],
-            'invalid currency' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16001',
-                    'amount' => '10000',
-                    'currency' => 'USD',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => '8583b8d14fb4efa85d905ad8646074ce3ce1abe16464299e116e4cb68dd44752',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Can only accept payment in CHF or EUR, but got: USD',
-                    ],
-                ],
-                false,
-            ],
-            'incorrect amount' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16001',
-                    'amount' => '1111',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => '2f2bb61733d8b95101c8c938290acf0efb17daf359266262d73b67165c3ce30b',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Cannot validate an order with incorrect balance. Expected 10.00 CHF, or 0.00 EUR, but got: 11.11 CHF',
-                    ],
-                ],
-                false,
-            ],
-            'incorrect payment method' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16003',
-                    'amount' => '10000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => '3111e1c3e63a77a13d9ae067690d52523c00c992b7aba262ab41de7f6e81bdad',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Cannot validate an order whose payment method is: ebanking',
-                    ],
-                ],
-                false,
-            ],
-            'incorrect status' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16002',
-                    'amount' => '10000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => 'f19af94a1cafd91e8da390308e2d4a1f8bfc4ac1e2e18cf2963e1de63cec37f8',
-                ],
-                [
-                    'message' => [
-                        'status' => 'error',
-                        'message' => 'Cannot validate an order which is already validated',
-                    ],
-                ],
-                false,
-            ],
-            'validating numeric subscription will give webTemporaryAccess' => [
-                [
-                    'uppTransactionId' => '123456789012345678',
-                    'status' => 'success',
-                    'refno' => '16004',
-                    'amount' => '8000',
-                    'currency' => 'CHF',
-                    'responseMessage' => 'Payment was successful',
-                    'sign' => 'a54523b461058df8d61cdbe2328bcd161bae411ec9e6206bbf4da773e3c88493',
-                ],
-                [
-                    'message' => [
-                        'status' => 'success',
-                        'message' => 'Payment was successful',
-                    ],
-                ],
-                true,
-            ],
+            true,
         ];
     }
 }

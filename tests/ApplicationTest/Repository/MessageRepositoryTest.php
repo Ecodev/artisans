@@ -23,16 +23,13 @@ class MessageRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Message::class);
     }
 
-    public function providerGetAccessibleSubQuery(): array
+    public function providerGetAccessibleSubQuery(): iterable
     {
         // Nobody can see all messages for now, even administrator, because it's useless
         $all = [11001, 11002];
-
-        return [
-            ['anonymous', []],
-            ['member', [11001]],
-            ['facilitator', [11002]],
-            ['administrator', []],
-        ];
+        yield ['anonymous', []];
+        yield ['member', [11001]];
+        yield ['facilitator', [11002]];
+        yield ['administrator', []];
     }
 }

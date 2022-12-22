@@ -18,7 +18,6 @@ import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quot
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
 import {AperoDivestComponent} from './components/agir-avec-nous/apero-divest/apero-divest.component';
 import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
-import {CalculerEmpreinteCarboneComponent} from './components/agir-avec-nous/calculer-empreinte-carbone/calculer-empreinte-carbone.component';
 import {DesinvestirFossileComponent} from './components/agir-avec-nous/desinvestir-fossile/desinvestir-fossile.component';
 import {NumeriqueEthiqueComponent} from './components/agir-avec-nous/numerique-ethique/numerique-ethique.component';
 import {ComiteStatusComponent} from './components/association/comite-status/comite-status.component';
@@ -235,17 +234,6 @@ const routes: Routes = [
                         title: 'Nos actions',
                         description:
                             'Les actions de l’association sont structurées en trois axes selon une logique progressive. On commence par s’informer, puis on se sent concerné au point de vouloir s’impliquer, et on se met à agir.',
-                    } as NaturalSeo,
-                },
-            },
-            {
-                path: 'calculer-empreinte-carbone',
-                component: CalculerEmpreinteCarboneComponent,
-                data: {
-                    seo: {
-                        title: 'Calculer son empreinte carbone',
-                        description:
-                            'Calculer ses émissions personnelles de CO2 et comprendre où l’on se situe par rapport à la moyenne nationale et à la contrainte climatique est un premier pas dans l’engagement pour la préservation des équilibres climatiques.',
                     } as NaturalSeo,
                 },
             },

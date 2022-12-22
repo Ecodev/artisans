@@ -123,10 +123,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     ],
                 },
                 {
-                    display: 'Calculer son empreinte carbone',
-                    link: '/agir-avec-nous/calculer-empreinte-carbone',
-                },
-                {
                     display: "Desinvestir de l'industrie des énergies fossiles",
                     link: '/agir-avec-nous/desinvestir',
                     children: [

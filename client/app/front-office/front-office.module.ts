@@ -34,7 +34,6 @@ import {ContactComponent} from './components/contact/contact.component';
 import {ProjetComponent} from './components/projet/projet.component';
 import {PointsDeVenteComponent} from './components/points-de-vente/points-de-vente.component';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
-import {CalculerEmpreinteCarboneComponent} from './components/agir-avec-nous/calculer-empreinte-carbone/calculer-empreinte-carbone.component';
 import {DesinvestirFossileComponent} from './components/agir-avec-nous/desinvestir-fossile/desinvestir-fossile.component';
 import {NumeriqueEthiqueComponent} from './components/agir-avec-nous/numerique-ethique/numerique-ethique.component';
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
@@ -75,7 +74,6 @@ import {SessionFacilitatorPrivateComponent} from './components/session-facilitat
         ProjetComponent,
         PointsDeVenteComponent,
         ActionsComponent,
-        CalculerEmpreinteCarboneComponent,
         DesinvestirFossileComponent,
         NumeriqueEthiqueComponent,
         AlimentationComponent,

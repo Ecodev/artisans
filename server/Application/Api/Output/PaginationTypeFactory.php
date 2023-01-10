@@ -6,7 +6,6 @@ namespace Application\Api\Output;
 
 use Application\Model\Order;
 use Application\Model\OrderLine;
-use Application\Model\Product;
 use GraphQL\Type\Definition\Type;
 
 /**
@@ -21,16 +20,7 @@ class PaginationTypeFactory extends \Ecodev\Felix\Api\Output\PaginationTypeFacto
     {
         $fields = [];
         // Add specific total fields if needed
-        if ($class === Product::class) {
-            $fields['totalPricePerUnitCHF'] = [
-                'type' => _types()->get('CHF'),
-                'description' => 'The total price per unit in CHF',
-            ];
-            $fields['totalPricePerUnitEUR'] = [
-                'type' => _types()->get('EUR'),
-                'description' => 'The total price per unit in EUR',
-            ];
-        } elseif ($class === OrderLine::class) {
+        if ($class === OrderLine::class) {
             $fields['totalBalanceCHF'] = [
                 'type' => _types()->get('CHF'),
                 'description' => 'The total balance',

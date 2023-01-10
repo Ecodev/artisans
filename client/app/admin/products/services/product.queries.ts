@@ -51,8 +51,6 @@ export const productsQuery = gql`
             pageSize
             pageIndex
             length
-            totalPricePerUnitCHF
-            totalPricePerUnitEUR
         }
     }
     ${productMetaFragment}

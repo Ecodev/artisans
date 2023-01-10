@@ -29,7 +29,7 @@
             <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                 <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
-                <tr *matFooterRowDef="selectedColumns" mat-footer-row></tr>
+                <tr *matFooterRowDef="columnsForTable" mat-footer-row></tr>
 
                 <ng-container matColumnDef="owner">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>

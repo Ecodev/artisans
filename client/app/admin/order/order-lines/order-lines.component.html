@@ -26,7 +26,7 @@
                 <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
                 <ng-container *ngIf="showTotals">
-                    <tr *matFooterRowDef="selectedColumns" mat-footer-row></tr>
+                    <tr *matFooterRowDef="columnsForTable" mat-footer-row></tr>
                 </ng-container>
 
                 <ng-container matColumnDef="name">

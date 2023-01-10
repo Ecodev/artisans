@@ -8,7 +8,6 @@ use Application\Acl\Acl;
 use Application\Model\AbstractModel;
 use Application\Model\Order;
 use Application\Model\OrderLine;
-use Application\Model\Product;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Ecodev\Felix\Api\Exception;
@@ -61,18 +60,11 @@ abstract class Helper
     {
         $result = [];
 
-        if ($class === Product::class) {
-            $qb->resetDQLPart('select')
-                ->resetDQLPart('orderBy')
-                ->addSelect('SUM(product1.pricePerUnitCHF) AS totalPricePerUnitCHF')
-                ->addSelect('SUM(product1.pricePerUnitEUR) AS totalPricePerUnitEUR');
-
-            $result = $qb->getQuery()->getResult()[0];
-        } elseif ($class === OrderLine::class) {
+        if ($class === OrderLine::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
                 ->addSelect('SUM(orderLine1.balanceCHF) AS totalBalanceCHF')
-                ->addSelect('SUM(orderLine1.balanceEUR  ) AS totalBalanceEUR')
+                ->addSelect('SUM(orderLine1.balanceEUR) AS totalBalanceEUR')
                 ->addSelect('SUM(orderLine1.quantity) AS totalQuantity');
 
             $result = $qb->getQuery()->getResult()[0];

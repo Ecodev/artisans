@@ -3,19 +3,12 @@ import {formatIsoDateTime, NaturalAbstractDetail, NaturalQueryVariablesManager} 
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
-    CreateSession,
-    CreateSessionVariables,
     CurrentUserForProfile_viewer,
-    Session,
     Session_session,
     Sessions_sessions_items,
     SessionsVariables,
-    SessionVariables,
-    UpdateSession,
-    UpdateSessionVariables,
     UserRole,
     Users_users_items,
-    UsersVariables,
 } from '../../../shared/generated-types';
 
 @Component({

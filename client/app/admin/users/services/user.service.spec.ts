@@ -1,5 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import {fakeAsync, inject, TestBed, tick} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -11,7 +11,9 @@ import {Observable} from 'rxjs';
 import {Permissions_permissions} from 'client/app/shared/generated-types';
 
 class MockCartCollectionService {
-    private clear(): void {}
+    private clear(): void {
+        // noop
+    }
 }
 
 describe('UserService', () => {

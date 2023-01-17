@@ -1,17 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {UntypedFormArray, UntypedFormControl} from '@angular/forms';
 import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
-import {
-    CreateSession,
-    CreateSessionVariables,
-    DeleteSessions,
-    DeleteSessionsVariables,
-    Session,
-    Session_session,
-    SessionVariables,
-    UpdateSession,
-    UpdateSessionVariables,
-} from '../../../shared/generated-types';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';
 import {SessionResolve} from '../session';

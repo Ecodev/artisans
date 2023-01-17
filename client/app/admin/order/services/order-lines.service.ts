@@ -1,7 +1,7 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
-import {FormValidators, integer, Literal, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
+import {FormValidators, integer, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
 import {
     OrderLine,
     OrderLineInput,
@@ -43,7 +43,7 @@ export class OrderLineService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormGroupValidators(model?: Literal): ValidatorFn[] {
+    public getFormGroupValidators(): ValidatorFn[] {
         return [xorValidator('productXorSubscription', ['product', 'subscription'])];
     }
 

@@ -2,7 +2,7 @@ import {animate, group, query, sequence, state, style, transition, trigger} from
 import {ChangeDetectionStrategy, Component, Inject, InjectionToken} from '@angular/core';
 import {MenuItem} from '../../services/navigation.service';
 
-export interface MenuDropdownData<C = any> {
+export interface MenuDropdownData {
     items: MenuItem[];
     originalNativeElement: HTMLElement;
     contentHeight: number;

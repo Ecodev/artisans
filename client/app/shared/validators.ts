@@ -1,9 +1,8 @@
 import {
     AbstractControl,
-    UntypedFormControl,
-    FormGroup,
     FormGroupDirective,
     NgForm,
+    UntypedFormControl,
     ValidationErrors,
     ValidatorFn,
 } from '@angular/forms';

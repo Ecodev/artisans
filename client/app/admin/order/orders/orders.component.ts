@@ -1,6 +1,6 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractList} from '@ecodev/natural';
-import {Orders, OrderSortingField, OrdersVariables, SortingOrder} from '../../../shared/generated-types';
+import {OrderSortingField, SortingOrder} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderService} from '../services/order.service';

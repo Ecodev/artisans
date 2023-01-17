@@ -2,16 +2,6 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
-import {
-    CreateNews,
-    CreateNewsVariables,
-    DeleteNewses,
-    DeleteNewsesVariables,
-    News,
-    NewsVariables,
-    UpdateNews,
-    UpdateNewsVariables,
-} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 

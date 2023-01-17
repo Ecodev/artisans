@@ -9,7 +9,7 @@ import {UserService} from '../../admin/users/services/user.service';
 export class LoggerExtraService implements NaturalLoggerExtra {
     public constructor(private readonly userService: UserService) {}
 
-    public getExtras(error: unknown): Observable<Partial<NaturalLoggerType>> {
+    public getExtras(): Observable<Partial<NaturalLoggerType>> {
         return of({viewer: this.userService.getViewerValue(Infinity)?.email});
     }
 }

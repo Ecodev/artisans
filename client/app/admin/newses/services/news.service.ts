@@ -62,7 +62,7 @@ export class NewsService extends NaturalAbstractModelService<
         };
     }
 
-    public getFormValidators(model?: Literal): FormValidators {
+    public getFormValidators(): FormValidators {
         return {
             name: [Validators.required],
             date: [Validators.required],

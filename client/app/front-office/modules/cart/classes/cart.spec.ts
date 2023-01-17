@@ -1,5 +1,4 @@
 import {Product, ProductType} from '../../../../shared/generated-types';
-import {CartService} from '../services/cart.service';
 import {Cart, CartLine} from './cart';
 import {NaturalMemoryStorage} from '@ecodev/natural';
 import {CartCollectionService} from '../services/cart-collection.service';
@@ -7,7 +6,7 @@ import {CartCollectionService} from '../services/cart-collection.service';
 /**
  * Todo : add tests with combinations (same product with web or paper declination)
  */
-describe('CartService', () => {
+describe('Cart', () => {
     let cart: Cart;
 
     const product1 = {

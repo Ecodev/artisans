@@ -1,10 +1,8 @@
-import {Component, Injector, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Injector, Input, OnChanges, OnInit} from '@angular/core';
 import {NaturalAbstractList, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {
-    Comments,
     CommentSortingField,
-    CommentsVariables,
     Event_event,
     Events_events_items,
     News_news,
@@ -50,7 +48,7 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
         super.ngOnInit();
     }
 
-    public ngOnChanges(changes: SimpleChanges): void {
+    public ngOnChanges(): void {
         if (this.event) {
             this.variablesManager.set('partial-variables', {
                 filter: {groups: [{conditions: [{event: {in: {values: [this.event.id]}}}]}]},

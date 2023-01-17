@@ -103,7 +103,7 @@ export class Cart {
      * Add product to cart or increase quantity of existing product
      * Return true if the product is inserted into cart (opposed to increment from already existing in cart)
      */
-    public addProduct(product: CartLineProduct, type: ProductType, quantity: number = 1): boolean {
+    public addProduct(product: CartLineProduct, type: ProductType, quantity = 1): boolean {
         let isNewItem = false;
         const line = this.getLineByProduct(product, type);
 

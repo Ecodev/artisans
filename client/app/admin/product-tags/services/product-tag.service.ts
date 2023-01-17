@@ -32,7 +32,6 @@ import {
     productTagsQuery,
     updateProductTag,
 } from './product-tag.queries';
-import {ProductTagResolve} from '../productTag';
 import {ProductTagByNameResolve} from './product-tag-by-name.resolver';
 
 @Injectable({

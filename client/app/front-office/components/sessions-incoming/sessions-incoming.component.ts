@@ -72,7 +72,7 @@ export class SessionsIncomingComponent implements OnInit {
         confirmMessage: string,
     ): void {
         const subscribeFn = (email: string): void => {
-            this.userService.addToMailingList(session.mailingList, email).subscribe(() => {});
+            this.userService.addToMailingList(session.mailingList, email).subscribe();
             this.snackbar.open('Inscription confirmée', undefined, {
                 duration: 5000,
                 verticalPosition: 'top',

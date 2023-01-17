@@ -1,6 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractList} from '@ecodev/natural';
-import {Comments, CommentsVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {CommentService} from '../services/comment.service';

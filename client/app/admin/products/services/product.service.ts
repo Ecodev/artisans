@@ -69,7 +69,7 @@ export class ProductService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormGroupValidators(model?: Literal): ValidatorFn[] {
+    public getFormGroupValidators(): ValidatorFn[] {
         return [xorValidator('reviewXorArticle', ['reviewNumber', 'review'])];
     }
 

@@ -120,7 +120,7 @@ export class ImportComponent implements OnInit {
             )
             .subscribe(confirmed => {
                 if (confirmed) {
-                    this.userService.delete(this.users).subscribe(v => {
+                    this.userService.delete(this.users).subscribe(() => {
                         this.alertService.info(this.users.length + ' utilisateurs supprimés');
                         this.users = [];
                     });

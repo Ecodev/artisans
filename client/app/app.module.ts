@@ -114,6 +114,7 @@ export const matTooltipCustomConfig: MatTooltipDefaultOptions = {
 export class AppModule {
     public constructor(
         dateAdapter: DateAdapter<Date>,
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         naturalSeoService: NaturalSeoService, // injection required, but works as stand alone
     ) {
         dateAdapter.setLocale('fr-ch');

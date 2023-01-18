@@ -121,7 +121,7 @@ export class UserService
         return [UserRole.facilitator, UserRole.administrator].includes(user.role);
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             firstName: [Validators.required, Validators.maxLength(100)],
             lastName: [Validators.required, Validators.maxLength(100)],
@@ -134,7 +134,7 @@ export class UserService
         };
     }
 
-    public getFormAsyncValidators(model: User_user): FormAsyncValidators {
+    public override getFormAsyncValidators(model: User_user): FormAsyncValidators {
         return {
             email: [unique('email', model.id, this)],
         };
@@ -389,7 +389,7 @@ export class UserService
             .pipe(map(result => result.data!.addToMailingList));
     }
 
-    protected getDefaultForServer(): UserInput {
+    protected override getDefaultForServer(): UserInput {
         return {
             email: '',
             firstName: '',

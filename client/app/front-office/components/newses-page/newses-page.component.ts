@@ -11,7 +11,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     styleUrls: ['./newses-page.component.scss'],
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
-    protected defaultPagination: Required<PaginationInput> = {
+    protected override defaultPagination: Required<PaginationInput> = {
         pageSize: 5,
         pageIndex: 0,
         offset: null,

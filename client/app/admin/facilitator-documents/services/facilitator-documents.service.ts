@@ -50,7 +50,7 @@ export class FacilitatorDocumentsService extends NaturalAbstractModelService<
         );
     }
 
-    protected getDefaultForServer(): FacilitatorDocumentInput {
+    protected override getDefaultForServer(): FacilitatorDocumentInput {
         return {
             name: '',
             file: null,

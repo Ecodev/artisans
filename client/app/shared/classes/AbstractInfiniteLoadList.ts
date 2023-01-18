@@ -38,7 +38,7 @@ export class AbstractInfiniteLoadList<
         this.persistSearch = false;
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
 
         this.dataSource?.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
@@ -75,7 +75,7 @@ export class AbstractInfiniteLoadList<
      * Todo : could be improved to restore default pageSize:5 after initialisation otherwise pageSize:15 will apply for
      * further paginations
      */
-    public pagination(event: PaginationInput | PageEvent, defer?: Promise<unknown>): void {
+    public override pagination(event: PaginationInput | PageEvent, defer?: Promise<unknown>): void {
         let pagination: PaginationInput = this.defaultPagination;
         let forPersistence: PaginationInput | null = null;
 

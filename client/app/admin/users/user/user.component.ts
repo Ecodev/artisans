@@ -17,7 +17,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService> implements
     /**
      * Override parent just to type it
      */
-    public data!: UserResolve & {seo: NaturalSeoBasic};
+    public override data!: UserResolve & {seo: NaturalSeoBasic};
 
     public constructor(
         private readonly userService: UserService,
@@ -27,7 +27,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService> implements
         super('user', userService, injector);
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
 
         // Disable fields that should be imported from Cresus
@@ -39,7 +39,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService> implements
         });
     }
 
-    protected initForm(): void {
+    protected override initForm(): void {
         super.initForm();
 
         this.userService.getUserRolesAvailable(this.data.model).subscribe(userRoles => {

@@ -20,7 +20,7 @@ import {DOCUMENT} from '@angular/common';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
-    public selectedColumns = ['name', 'email', 'creationDate', 'updateDate', 'membership'];
+    public override selectedColumns = ['name', 'email', 'creationDate', 'updateDate', 'membership'];
 
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;
@@ -39,7 +39,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         this.naturalSearchFacets = naturalSearchFacetsService.get('users');
     }
 
-    public search(naturalSearchSelections: NaturalSearchSelections): void {
+    public override search(naturalSearchSelections: NaturalSearchSelections): void {
         this.usersEmail = null;
         this.usersEmailAndName = null;
         super.search(naturalSearchSelections);

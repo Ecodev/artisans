@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, Injector} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {XorErrorStateMatcher} from '../../../shared/validators';
 import {FilesService} from '../../files/services/files.service';
@@ -11,7 +11,7 @@ import {ProductService} from '../services/product.service';
     templateUrl: './product.component.html',
     styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
+export class ProductComponent extends NaturalAbstractDetail<ProductService> {
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     public constructor(
@@ -22,10 +22,6 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService> impl
         public readonly fileService: FilesService,
     ) {
         super('product', productService, injector);
-    }
-
-    public ngOnInit(): void {
-        super.ngOnInit();
     }
 
     public setFormValue(value: any, fieldName: string): void {

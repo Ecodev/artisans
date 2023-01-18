@@ -59,7 +59,7 @@ export class SubscriptionService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             code: [Validators.maxLength(25)],
             name: [Validators.required, Validators.maxLength(100)],
@@ -67,13 +67,13 @@ export class SubscriptionService extends NaturalAbstractModelService<
         };
     }
 
-    public getFormAsyncValidators(model: Subscription_subscription): FormAsyncValidators {
+    public override getFormAsyncValidators(model: Subscription_subscription): FormAsyncValidators {
         return {
             code: [unique('code', model.id, this)],
         };
     }
 
-    protected getDefaultForServer(): SubscriptionInput {
+    protected override getDefaultForServer(): SubscriptionInput {
         return {
             name: '',
             code: null,

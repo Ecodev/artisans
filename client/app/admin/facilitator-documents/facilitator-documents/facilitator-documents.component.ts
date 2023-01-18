@@ -11,7 +11,7 @@ import {FacilitatorDocumentsService} from '../services/facilitator-documents.ser
     styleUrls: ['./facilitator-documents.component.scss'],
 })
 export class FacilitatorDocumentsComponent extends NaturalAbstractList<FacilitatorDocumentsService> implements OnInit {
-    public columnsForTable = ['name', 'category', 'file'];
+    public override columnsForTable = ['name', 'category', 'file'];
 
     public constructor(
         route: ActivatedRoute,

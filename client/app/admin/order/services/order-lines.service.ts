@@ -43,17 +43,17 @@ export class OrderLineService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormGroupValidators(): ValidatorFn[] {
+    public override getFormGroupValidators(): ValidatorFn[] {
         return [xorValidator('productXorSubscription', ['product', 'subscription'])];
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             quantity: [Validators.required, integer],
         };
     }
 
-    protected getDefaultForServer(): OrderLineInput {
+    protected override getDefaultForServer(): OrderLineInput {
         return {
             product: null,
             subscription: null,

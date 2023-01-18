@@ -42,7 +42,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
         super('session', sessionService, injector);
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
 
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;

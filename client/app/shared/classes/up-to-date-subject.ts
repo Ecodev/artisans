@@ -8,7 +8,7 @@ export class UpToDateSubject<T> extends BehaviorSubject<T> {
         this.time = new Date();
     }
 
-    public next(value: T): void {
+    public override next(value: T): void {
         super.next(value);
         this.time = new Date();
     }

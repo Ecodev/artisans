@@ -10,8 +10,6 @@ import {EventService} from '../services/event.service';
     styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
-    public displayedColumns = ['name'];
-
     public constructor(
         service: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

@@ -10,8 +10,6 @@ import {CommentService} from '../services/comment.service';
     styleUrls: ['./comments.component.scss'],
 })
 export class CommentsComponent extends NaturalAbstractList<CommentService> implements OnInit {
-    public displayedColumns = ['name'];
-
     public constructor(
         service: CommentService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

@@ -10,8 +10,6 @@ import {NewsService} from '../services/news.service';
     styleUrls: ['./newses.component.scss'],
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
-    public displayedColumns = ['name'];
-
     public constructor(
         service: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

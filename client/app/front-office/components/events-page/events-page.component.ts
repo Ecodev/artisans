@@ -11,7 +11,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
     styleUrls: ['./events-page.component.scss'],
 })
 export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> implements OnInit {
-    protected defaultPagination: Required<PaginationInput> = {
+    protected override defaultPagination: Required<PaginationInput> = {
         pageSize: 5,
         pageIndex: 0,
         offset: null,

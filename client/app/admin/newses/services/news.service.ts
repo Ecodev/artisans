@@ -43,16 +43,16 @@ export class NewsService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
     }
 
-    public getDefaultForClient(): Literal {
+    public override getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 
-    public getInput(object: Literal): NewsInput | NewsPartialInput {
+    public override getInput(object: Literal): NewsInput | NewsPartialInput {
         object.content = object.content || '';
         return super.getInput(object);
     }
 
-    public getDefaultForServer(): NewsInput {
+    public override getDefaultForServer(): NewsInput {
         return {
             isActive: false,
             name: '',
@@ -62,7 +62,7 @@ export class NewsService extends NaturalAbstractModelService<
         };
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             name: [Validators.required],
             date: [Validators.required],

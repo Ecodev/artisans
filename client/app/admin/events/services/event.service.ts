@@ -42,11 +42,11 @@ export class EventService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
     }
 
-    public getDefaultForClient(): Literal {
+    public override getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 
-    public getDefaultForServer(): EventInput {
+    public override getDefaultForServer(): EventInput {
         return {
             name: '',
             place: '',
@@ -55,7 +55,7 @@ export class EventService extends NaturalAbstractModelService<
         };
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             name: [Validators.required],
             date: [Validators.required],

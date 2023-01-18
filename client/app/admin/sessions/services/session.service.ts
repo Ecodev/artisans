@@ -48,7 +48,7 @@ export class SessionService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
             startDate: [Validators.required],
@@ -56,12 +56,12 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public getInput(object: Literal): SessionInput | SessionPartialInput {
+    public override getInput(object: Literal): SessionInput | SessionPartialInput {
         object.description = object.description || '';
         return super.getInput(object);
     }
 
-    protected getDefaultForServer(): SessionInput {
+    protected override getDefaultForServer(): SessionInput {
         return {
             name: '',
             street: '',
@@ -78,7 +78,7 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public getPartialVariablesForAll(): Observable<Partial<SessionsVariables>> {
+    public override getPartialVariablesForAll(): Observable<Partial<SessionsVariables>> {
         return of({
             filter: {
                 groups: [

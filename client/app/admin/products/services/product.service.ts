@@ -69,11 +69,11 @@ export class ProductService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormGroupValidators(): ValidatorFn[] {
+    public override getFormGroupValidators(): ValidatorFn[] {
         return [xorValidator('reviewXorArticle', ['reviewNumber', 'review'])];
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             pricePerUnitCHF: [Validators.required, money],
             pricePerUnitEUR: [Validators.required, money],
@@ -82,13 +82,13 @@ export class ProductService extends NaturalAbstractModelService<
         };
     }
 
-    public getFormAsyncValidators(model: Product_product): FormAsyncValidators {
+    public override getFormAsyncValidators(model: Product_product): FormAsyncValidators {
         return {
             code: [unique('code', model.id, this)],
         };
     }
 
-    public getInput(object: Literal): ProductInput | ProductPartialInput {
+    public override getInput(object: Literal): ProductInput | ProductPartialInput {
         object.description = object.description || '';
         return super.getInput(object);
     }
@@ -97,7 +97,7 @@ export class ProductService extends NaturalAbstractModelService<
         return this.getOne(ProductService.MEMBERSHIP_FEE_PRODUCT_ID);
     }
 
-    protected getDefaultForServer(): ProductInput {
+    protected override getDefaultForServer(): ProductInput {
         return {
             name: '',
             code: null,

@@ -62,13 +62,13 @@ export class ProductTagService extends NaturalAbstractModelService<
         );
     }
 
-    public getFormValidators(): FormValidators {
+    public override getFormValidators(): FormValidators {
         return {
             name: [Validators.required, Validators.maxLength(100)],
         };
     }
 
-    public getFormAsyncValidators(model: ProductTag_productTag): FormAsyncValidators {
+    public override getFormAsyncValidators(model: ProductTag_productTag): FormAsyncValidators {
         return {
             name: [unique('name', model.id, this)],
         };
@@ -80,7 +80,7 @@ export class ProductTagService extends NaturalAbstractModelService<
         return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));
     }
 
-    protected getDefaultForServer(): ProductTagInput {
+    protected override getDefaultForServer(): ProductTagInput {
         return {
             name: '',
             color: '',

@@ -25,7 +25,7 @@ export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> 
     /**
      * Override parent to populate data from dialog data instead of standard route data
      */
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         this.dialogData.activatedRoute.data.subscribe(data => {
             const key = 'orderLine';
             this.data = merge({model: this.service.getConsolidatedForClient()}, data[key]);

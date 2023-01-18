@@ -19,7 +19,7 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
         super('user', userService, injector);
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
 
         // Always disable email

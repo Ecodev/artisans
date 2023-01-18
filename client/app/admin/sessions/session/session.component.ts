@@ -19,7 +19,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
     /**
      * Override parent just to type it
      */
-    public data!: SessionResolve & {seo: NaturalSeoBasic};
+    public override data!: SessionResolve & {seo: NaturalSeoBasic};
 
     public constructor(
         private readonly sessionService: SessionService,
@@ -29,7 +29,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
         super('session', sessionService, injector);
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
 
         // Overrides form with array by array of forms

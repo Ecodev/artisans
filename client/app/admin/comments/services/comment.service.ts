@@ -44,11 +44,11 @@ export class CommentService extends NaturalAbstractModelService<
         );
     }
 
-    public getDefaultForClient(): Literal {
+    public override getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 
-    public getDefaultForServer(): CommentInput {
+    public override getDefaultForServer(): CommentInput {
         return {
             description: '',
             event: null,

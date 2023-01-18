@@ -11,7 +11,7 @@ import {OrderService} from '../services/order.service';
     styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent extends NaturalAbstractList<OrderService> implements OnInit {
-    public defaultSorting = [{field: OrderSortingField.creationDate, order: SortingOrder.DESC}];
+    public override defaultSorting = [{field: OrderSortingField.creationDate, order: SortingOrder.DESC}];
 
     public constructor(
         service: OrderService,

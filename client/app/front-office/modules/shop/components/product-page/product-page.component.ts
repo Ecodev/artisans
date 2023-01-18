@@ -25,7 +25,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     /**
      * Resolved model product. Called data to stay compliant with usual providing naming and usage in template
      */
-    public data: any;
+    public override data: any;
 
     /**
      * True if we are in edition mode after selecting an existing cart line from cart list. Activates some special layout for line update
@@ -79,7 +79,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
         this.url = this.router.url;
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 

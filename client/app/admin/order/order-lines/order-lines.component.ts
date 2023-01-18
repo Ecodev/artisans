@@ -33,7 +33,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
     /**
      * Override page size options list
      */
-    @Input() public pageSizeOptions = [5, 10, 25, 50, 100, 200];
+    @Input() public override pageSizeOptions = [5, 10, 25, 50, 100, 200];
 
     public constructor(
         service: OrderLineService,

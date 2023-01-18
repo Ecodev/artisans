@@ -29,7 +29,7 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
     /**
      * Antichronologic sorting by creation date to no change in case of update
      */
-    public defaultSorting = [{field: CommentSortingField.creationDate, order: SortingOrder.DESC}];
+    public override defaultSorting = [{field: CommentSortingField.creationDate, order: SortingOrder.DESC}];
 
     public publishing = false;
 
@@ -42,10 +42,6 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
     ) {
         super(service, injector);
         this.persistSearch = false;
-    }
-
-    public ngOnInit(): void {
-        super.ngOnInit();
     }
 
     public ngOnChanges(): void {

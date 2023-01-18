@@ -67,10 +67,10 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     /**
      * Pagination with page size as multiple of 3 to end correctly before "show more" button.
      */
-    public defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
+    public override defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
 
     public constructor(
-        public readonly route: ActivatedRoute,
+        public override readonly route: ActivatedRoute,
         productService: ProductService,
         injector: Injector,
         public readonly productTagService: ProductTagService,
@@ -78,7 +78,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
         super(productService, injector);
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         super.ngOnInit();
 
         this.title = this.route.snapshot.params.productTagName || this.route.snapshot.data.seo.title;

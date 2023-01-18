@@ -22,7 +22,7 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
     }
 
-    public ngOnInit(): void {
+    public override ngOnInit(): void {
         this.variablesManager.set('viewer', {
             filter: {groups: [{conditions: [{owner: {in: {values: [this.route.snapshot.data.viewer.model.id]}}}]}]},
         });

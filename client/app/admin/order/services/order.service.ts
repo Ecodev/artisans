@@ -41,7 +41,7 @@ export class OrderService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'order', orderQuery, ordersQuery, createOrder, null, null);
     }
 
-    public getInput(object: Literal): OrderInput {
+    public override getInput(object: Literal): OrderInput {
         const orderLinesInput = object.orderLines.map((line: Literal) => this.orderLineService.getInput(line));
         object.orderLines = orderLinesInput;
 

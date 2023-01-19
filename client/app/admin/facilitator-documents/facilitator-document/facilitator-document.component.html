@@ -43,10 +43,10 @@
                         <h2 class="mat-h2">Document</h2>
 
                         <natural-file
-                            (modelChange)="setFormValue($event, 'file')"
-                            [height]="300"
                             [model]="data.model.file"
-                            [service]="fileService"
+                            [formCtrl]="form.get('file')"
+                            [uploader]="createFileAndLink.bind(this)"
+                            [height]="300"
                             [style.borderRadius.px]="4"
                             [style.marginLeft.px]="2"
                             action="upload"

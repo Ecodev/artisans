@@ -2,6 +2,8 @@ import {Component, Injector} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
+import {CreateFile_createFile} from '../../../shared/generated-types';
+import {map, Observable, of, switchMap} from 'rxjs';
 
 @Component({
     selector: 'app-facilitator-document',
@@ -12,18 +14,24 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<Facilita
     public constructor(
         public readonly facilitatorDocumentService: FacilitatorDocumentsService,
         injector: Injector,
-        public readonly fileService: FilesService,
+        private readonly fileService: FilesService,
     ) {
         super('facilitatorDocument', facilitatorDocumentService, injector);
     }
 
-    public setFormValue(value: any, fieldName: string): void {
-        const field = this.form.get(fieldName);
-        if (field) {
-            field.setValue(value);
-            if (this.data.model.id) {
-                this.update();
-            }
-        }
+    public createFileAndLink(file: File): Observable<CreateFile_createFile> {
+        return this.fileService.create({file}).pipe(
+            switchMap(newFile => {
+                const id = this.data.model.id;
+                return id
+                    ? this.service
+                          .updatePartially({
+                              id,
+                              file: newFile,
+                          })
+                          .pipe(map(() => newFile))
+                    : of(newFile);
+            }),
+        );
     }
 }

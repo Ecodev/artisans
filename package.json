@@ -10,7 +10,7 @@
         "dev": "yarn prerequisite && ng serve",
         "prod": "yarn prerequisite && ng build && ng run artisans:server:production && find data/tmp/build -type f -not -name '*.gz' -exec gzip --keep --best {} \\; && rm -rf htdocs/ && mv -v data/tmp/build htdocs",
         "test": "yarn prerequisite && ng test",
-        "lint": "ng lint",
+        "lint": "ng lint --max-warnings 0",
         "codegen": "./bin/dump-schema && apollo client:codegen --suppressDeprecationWarning -c apollo.config.js --passthroughCustomScalars --customScalarsPrefix=App --outputFlat --target typescript client/app/shared/generated-types.ts",
         "dev-ssr": "ng run artisans:serve-ssr",
         "serve-ssr": "node data/tmp/server/main.js",

@@ -35,9 +35,9 @@
                             N° {{ orderLine.product.reviewNumber }}
                         </span>
                         <span *ngIf="orderLine.product.releaseDate">
-                            {{ orderLine.product.releaseDate | date: 'MMMM yyyy' | capitalize }}
+                            {{ orderLine.product.releaseDate | date : 'MMMM yyyy' | capitalize }}
                         </span>
-                        <span>{{ orderLine.type | enum: 'ProductType' | async }}</span>
+                        <span>{{ orderLine.type | enum : 'ProductType' | async }}</span>
                     </div>
 
                     <a [routerLink]="['/larevuedurable/article', orderLine.product.id]" matRipple class="mat-h3">

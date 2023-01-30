@@ -1,5 +1,5 @@
 import {Component, Inject, Injector, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
 import {NaturalAbstractDetail, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
 import {merge, omit} from 'lodash-es';
 import {ProductService} from '../../products/services/product.service';

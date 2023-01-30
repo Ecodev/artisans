@@ -33,7 +33,7 @@
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
                 <div *ngFor="let news of newses" class="news">
                     <div class="mat-body-strong text-light">
-                        {{ news.date | date: 'EEE dd.MM.yy' | capitalize }}
+                        {{ news.date | date : 'EEE dd.MM.yy' | capitalize }}
                     </div>
                     <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
                     <div class="mat-h3 description line-break">{{ news.description }}</div>
@@ -69,7 +69,7 @@
                             event.name
                         }}</a>
                         <div class="mat-h3 no-margin-bottom">
-                            <span class="text-light">{{ event.date | date: 'EEE dd.MM.yy' | capitalize }}</span>
+                            <span class="text-light">{{ event.date | date : 'EEE dd.MM.yy' | capitalize }}</span>
                             <span class="description"> - {{ event.place }} - {{ event.type }}</span>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
             <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
                 <span>{{ currentReview.reviewNumber }}</span>
                 <span>|</span>
-                <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
+                <span>{{ currentReview.releaseDate | date : 'MMMM yyyy' | capitalize }}</span>
             </div>
             <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-display-1">{{
                 currentReview.name

@@ -21,17 +21,17 @@
 
                 <ng-container matColumnDef="status">
                     <th *matHeaderCellDef mat-header-cell>Statut</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.status | enum: 'OrderStatus' | async }}</td>
+                    <td *matCellDef="let element" mat-cell>{{ element.status | enum : 'OrderStatus' | async }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="balance">
                     <th *matHeaderCellDef mat-header-cell natural-5em-column natural-align-right>Total</th>
                     <td *matCellDef="let element" mat-cell natural-align-right>
                         <ng-container *ngIf="element.balanceCHF > 0">{{
-                            element.balanceCHF | currency: 'CHF'
+                            element.balanceCHF | currency : 'CHF'
                         }}</ng-container>
                         <ng-container *ngIf="element.balanceEUR > 0">{{
-                            element.balanceEUR | currency: 'EUR'
+                            element.balanceEUR | currency : 'EUR'
                         }}</ng-container>
                     </td>
                 </ng-container>

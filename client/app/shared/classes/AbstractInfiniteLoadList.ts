@@ -1,5 +1,5 @@
 import {Directive, Injector, OnInit} from '@angular/core';
-import {PageEvent} from '@angular/material/paginator';
+import {LegacyPageEvent as PageEvent} from '@angular/material/legacy-paginator';
 import {
     ExtractTall,
     ExtractVall,

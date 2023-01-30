@@ -3,12 +3,12 @@
  * See source doc here https://github.com/angular/material2/tree/master/src/lib/core/theming
  */
 // Import theming files full relative way or karma will display warning
+@use 'sass:map';
 @use '@angular/material' as mat;
 @use '@ecodev/natural';
 @use '@ecodev/natural-editor';
 @use '../app/app.theme';
 @use 'rich-text';
-@use 'mixins';
 @use 'artisans.theme';
 @use '../app/shared/components/breadcrumbs/breadcrumbs.theme';
 @use '../app/shared/components/tags-navigation/tags-navigation.theme';
@@ -27,7 +27,32 @@
 @use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
 
 // Include material core (only once !)
-@include mat.core();
+@include mat.all-legacy-component-typographies();
+@include mat.legacy-core();
+
+@mixin page-header($theme) {
+    $primary: map.get($theme, primary);
+    $accent: map.get($theme, accent);
+    $background: map.get($theme, background);
+    $foreground: map.get($theme, foreground);
+
+    .pageHeader {
+        padding-top: 20px;
+
+        .pageTitle {
+            position: relative;
+            min-width: 300px;
+
+            & > span {
+                position: absolute;
+                top: -1.7em;
+                left: 0;
+                font-size: 0.6em;
+                color: mat.get-color-from-palette($primary);
+            }
+        }
+    }
+}
 
 // Include components themes
 @mixin components-theme($theme) {
@@ -35,7 +60,7 @@
     @include natural.natural($theme);
     @include natural-editor.natural-editor($theme);
     @include artisans.artisans($theme);
-    @include mixins.page-header($theme);
+    @include page-header($theme);
     @include product.product($theme);
     @include rich-text.rich-text($theme);
     @include profile.profile($theme);
@@ -157,7 +182,15 @@ $artisans-green: (
 $artisans-primary: mat.define-palette($artisans-blue);
 $artisans-accent: mat.define-palette($artisans-orange);
 $artisans-warn: mat.define-palette(mat.$red-palette);
-$artisans-theme: mat.define-light-theme($artisans-primary, $artisans-accent, $artisans-warn);
+$artisans-theme: mat.define-light-theme(
+    (
+        color: (
+            primary: $artisans-primary,
+            accent: $artisans-accent,
+            warn: $artisans-warn,
+        ),
+    )
+);
 
-@include mat.all-component-themes($artisans-theme);
+@include mat.all-legacy-component-themes($artisans-theme);
 @include components-theme($artisans-theme);

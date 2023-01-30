@@ -24,7 +24,7 @@
                 ></a>
 
                 <a [routerLink]="['/larevuedurable/article', line.product.id]" class="item-body item-button" mat-button>
-                    {{ line.product.name }}, {{ line.type | enum: 'ProductType' | async }}
+                    {{ line.product.name }}, {{ line.type | enum : 'ProductType' | async }}
                 </a>
 
                 <ng-container *ngIf="line.quantity > 1">
@@ -34,7 +34,7 @@
 
                 <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
                     <div class="price mat-body-strong">
-                        {{ line.totalTaxInc | currency: currencyService.current.value }}
+                        {{ line.totalTaxInc | currency : currencyService.current.value }}
                     </div>
                 </div>
 
@@ -72,7 +72,7 @@
             ></a>
 
             <a routerLink="/larevuedurable/abonnements" mat-button class="item-body item-button">
-                {{ cart.subscription.subscription.name }}, {{ cart.subscription.type | enum: 'ProductType' | async }}
+                {{ cart.subscription.subscription.name }}, {{ cart.subscription.type | enum : 'ProductType' | async }}
             </a>
 
             <div *ngIf="cart.subscription.emails">{{ cart.subscription.emails.join(', ') }}</div>
@@ -102,7 +102,7 @@
 
             <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
                 <div class="price mat-body-strong">
-                    {{ cart.donationAmount | currency: currencyService.current.value }}
+                    {{ cart.donationAmount | currency : currencyService.current.value }}
                 </div>
             </div>
 
@@ -121,7 +121,7 @@
 
             <div fxLayout="row" fxLayoutAlign="end">
                 <div class="mat-h1 padding-v">
-                    Total TTC : {{ cart.totalTaxInc | currency: currencyService.current.value }}
+                    Total TTC : {{ cart.totalTaxInc | currency : currencyService.current.value }}
                 </div>
             </div>
 

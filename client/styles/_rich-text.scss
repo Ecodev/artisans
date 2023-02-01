@@ -50,7 +50,7 @@
 
     .rich-text a,
     a.app-link {
-        &:not(.mat-button-base):not(.no-style) {
+        &:not(.mat-mdc-button-base):not(.no-style) {
             color: inherit;
             border-bottom: 2px solid mat.get-color-from-palette($primary);
 

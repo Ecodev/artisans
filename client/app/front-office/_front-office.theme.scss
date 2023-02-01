@@ -17,7 +17,7 @@
         #mobile-menu .mat-expansion-panel-body {
             padding-right: 0 !important;
         }
-
+        /* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
         #search-field .mat-form-field-underline {
             display: none;
         }
@@ -62,7 +62,7 @@
         #footer {
             background: #e1e1e3;
 
-            .mat-form-field,
+            .mat-mdc-form-field,
             .mat-form-field * {
                 color: mat.get-color-from-palette($primary, default-contrast) !important;
                 border-bottom-color: mat.get-color-from-palette($primary, default-contrast) !important;

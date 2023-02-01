@@ -1,6 +1,6 @@
 @use '../../../../../../styles/responsive';
 
-.cart-buttons .mat-flat-button[color] {
+.cart-buttons .mat-mdc-unelevated-button[color] {
     min-width: 200px;
 }
 
@@ -36,7 +36,7 @@
         }
     }
 
-    a.mat-button {
+    a.mat-mdc-button {
         text-align: left;
         white-space: normal;
     }

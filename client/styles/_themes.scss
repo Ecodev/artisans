@@ -27,8 +27,8 @@
 @use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
 
 // Include material core (only once !)
-@include mat.all-legacy-component-typographies();
-@include mat.legacy-core();
+@include mat.all-component-typographies();
+@include mat.core();
 
 @mixin page-header($theme) {
     $primary: map.get($theme, primary);
@@ -192,5 +192,5 @@ $artisans-theme: mat.define-light-theme(
     )
 );
 
-@include mat.all-legacy-component-themes($artisans-theme);
+@include mat.all-component-themes($artisans-theme);
 @include components-theme($artisans-theme);

@@ -1,7 +1,7 @@
 <div class="introduction frame-primary" *ngIf="viewer">
     <div class="container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="40px">
         <div fxFlex="25" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-            <div class="mat-display-1 no-margin" fxFlex>Bonjour {{ viewer.firstName }},</div>
+            <div class="mat-headline-4 no-margin" fxFlex>Bonjour {{ viewer.firstName }},</div>
             <button (click)="userService.logout()" mat-flat-button>
                 <natural-icon name="exit_to_app"></natural-icon>
                 Se déconnecter

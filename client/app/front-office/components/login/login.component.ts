@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router} from '@angular/router';
 import {deliverableEmail, ifValid, NaturalAbstractController, NaturalAlertService} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';

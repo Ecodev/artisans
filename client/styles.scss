@@ -112,7 +112,7 @@ mat-form-field.no-bottom-spacing {
     text-align: right;
 }
 
-.mat-snack-bar-container {
+.mat-mdc-snack-bar-container {
     margin-top: 88px !important;
 }
 
@@ -161,11 +161,13 @@ input[type='number'] {
 }
 
 // Allow mat-checkbox with long labels to wrap, see https://github.com/angular/components/issues/8416
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
 .mat-checkbox-layout {
     white-space: normal !important;
 }
 
 // Keep the mat-checkbox's checkbox on the first line, see https://github.com/angular/components/issues/8416
+/* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
 .mat-checkbox-inner-container {
     margin-top: 4px !important;
 }
@@ -174,9 +176,9 @@ input[type='number'] {
     width: 14em;
 }
 
-.mat-button,
-.mat-stroked-button,
-.mat-flat-button {
+.mat-mdc-button,
+.mat-mdc-outlined-button,
+.mat-mdc-unelevated-button {
     border-radius: 0 !important;
 }
 

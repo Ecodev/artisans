@@ -9,7 +9,7 @@
 >
     <div fxFlex.gt-sm fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
         <div [formGroup]="shippingForm" fxLayout="column" fxLayoutGap="60px">
-            <h1 class="mat-display-1">MÉTHODE DE PAIEMENT</h1>
+            <h1 class="mat-headline-4">MÉTHODE DE PAIEMENT</h1>
 
             <mat-radio-group formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
                 <div class="payment-method">
@@ -22,7 +22,7 @@
 
             <!--        <mat-error *ngIf="firstStepForm.get('paymentMethod')?.hasError('required')">Requis</mat-error>-->
 
-            <h1 class="mat-display-1">Votre adresse</h1>
+            <h1 class="mat-headline-4">Votre adresse</h1>
 
             <div>
                 <app-address [form]="shippingForm" [disabled]="true"></app-address>
@@ -31,7 +31,7 @@
         </div>
 
         <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
-            <h1 class="mat-display-1">Adresse de facturation</h1>
+            <h1 class="mat-headline-4">Adresse de facturation</h1>
 
             <mat-checkbox
                 (change)="updateAddressRequirements(!$event.checked, billingForm)"
@@ -80,7 +80,7 @@
 </div>
 
 <div *ngIf="showConfirmationMessage" class="container">
-    <h1 class="mat-display-1">Merci pour votre commande</h1>
+    <h1 class="mat-headline-4">Merci pour votre commande</h1>
     <p class="mat-h3 rich-text">
         Consulter les articles et revues achetées dans
         <a routerLink="/mon-compte/articles-achetes" fragment="profile-content">mon compte</a>.

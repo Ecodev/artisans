@@ -7,7 +7,7 @@
     $foreground: map.get($theme, foreground);
 
     app-breadcrumbs {
-        .mat-button {
+        .mat-mdc-button {
             padding-left: 7px;
             padding-right: 7px;
         }

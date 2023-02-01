@@ -28,7 +28,7 @@
                 </a>
             </div>
 
-            <h1 class="mat-display-1">{{ data.model.name }}</h1>
+            <h1 class="mat-headline-4">{{ data.model.name }}</h1>
 
             <!-- Reading duration -->
             <div fxLayout="row" fxLayoutGap="20px">
@@ -72,7 +72,7 @@
                 fxLayoutGap="5px"
                 fxLayoutAlign="start center"
             >
-                <span class="mat-title show-products-of-review-button no-margin-bottom"
+                <span class="mat-headline-6 show-products-of-review-button no-margin-bottom"
                     >Voir les articles de ce numéro</span
                 >
                 <natural-icon name="expand_more"></natural-icon>
@@ -198,23 +198,23 @@
 
                 <p>
                     Un accès à
-                    <span class="mat-body-2">toute la base de données</span>
+                    <span class="mat-subtitle-2">toute la base de données</span>
                     avec près de
-                    <span class="mat-body-2">1000 articles</span>
+                    <span class="mat-subtitle-2">1000 articles</span>
                     de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays
                 </p>
                 <p>
                     Un travail rédactionnel
-                    <span class="mat-body-2">indépendant</span>
+                    <span class="mat-subtitle-2">indépendant</span>
                     . Aucun partenariat ni soutient financier n'y porte atteinte.
                 </p>
                 <p>
                     L'envie de
-                    <span class="mat-body-2">comprendre</span>
+                    <span class="mat-subtitle-2">comprendre</span>
                     et le pouvoir d'
-                    <span class="mat-body-2">agir</span>
+                    <span class="mat-subtitle-2">agir</span>
                     pour
-                    <span class="mat-body-2">construire</span>
+                    <span class="mat-subtitle-2">construire</span>
                     une société écologique et solidaire.
                 </p>
 
@@ -224,7 +224,7 @@
     </div>
 
     <div [fxShow]="relatedProducts?.dataSource?.data?.length">
-        <div class="mat-title">Pour continuer votre lecture ...</div>
+        <div class="mat-headline-6">Pour continuer votre lecture ...</div>
         <app-products-page
             [forcedVariables]="{
                 filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}

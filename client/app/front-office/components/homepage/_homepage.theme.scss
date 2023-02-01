@@ -8,7 +8,7 @@
     $fg: map.get($theme, foreground);
 
     app-homepage {
-        a.mat-display-1 {
+        a.mat-headline-4 {
             color: mat.get-color-from-palette($fg, base);
 
             &:hover {

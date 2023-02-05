@@ -7,7 +7,7 @@
                 *ngIf="viewer?.role === UserRole.administrator || viewer?.role === UserRole.facilitator"
                 [routerLink]="['/admin/session/', data.model.id]"
                 mat-icon-button
-                mat-raised-button
+                class="mat-elevation-z4"
             >
                 <natural-icon name="edit"></natural-icon>
             </a>

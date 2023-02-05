@@ -91,7 +91,7 @@
                                 matInput
                                 (change)="update()"
                             />
-                            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
 
@@ -148,7 +148,7 @@
                                 step="0.01"
                                 type="number"
                             />
-                            <div matSuffix>CHF</div>
+                            <div matTextSuffix>CHF</div>
                             <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('money')"
                                 >Le montant doit être un nombre avec un maximum de deux décimales
@@ -164,7 +164,7 @@
                                 step="0.01"
                                 type="number"
                             />
-                            <div matSuffix>EUR</div>
+                            <div matTextSuffix>EUR</div>
                             <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('required')">Requis</mat-error>
                             <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('money')"
                                 >Le montant doit être un nombre avec un maximum de deux décimales

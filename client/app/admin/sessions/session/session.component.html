@@ -35,7 +35,7 @@
                                     (dateChange)="update()"
                                 />
                                 <mat-error *ngIf="form.get('startDate')?.hasError('required')">Requis</mat-error>
-                                <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                                <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>
                                 <mat-hint
                                     >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des
@@ -52,7 +52,7 @@
                                     (dateChange)="update()"
                                 />
                                 <mat-error *ngIf="form.get('endDate')?.hasError('required')">Requis</mat-error>
-                                <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+                                <mat-datepicker-toggle [for]="picker2" matIconSuffix></mat-datepicker-toggle>
                                 <mat-datepicker #picker2></mat-datepicker>
                                 <mat-hint
                                     >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins

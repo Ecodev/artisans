@@ -11,7 +11,7 @@
             step="1"
             (keydown.enter)="dialogRef.close(amount.value)"
         />
-        <div matSuffix>{{ currencyService.current.value }}</div>
+        <div matTextSuffix>{{ currencyService.current.value }}</div>
         <mat-error *ngIf="amount.hasError('required')">Requis</mat-error>
         <mat-error *ngIf="amount.hasError('money')"
             >Le montant doit être un nombre avec un maximum de deux décimales

@@ -48,7 +48,7 @@
                         <mat-form-field>
                             <mat-label>Date</mat-label>
                             <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()" />
-                            <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                            <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                             <mat-error *ngIf="form.get('date')?.hasError('required')">Requis</mat-error>
                         </mat-form-field>

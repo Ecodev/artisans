@@ -15,14 +15,7 @@
     </button>
 </div>
 
-<mat-card
-    appearance="outlined"
-    *ngIf="editMode"
-    class="bloc"
-    fxLayout="column"
-    fxLayoutAlign="start stretch"
-    fxLayoutGap="20px"
->
+<mat-card *ngIf="editMode" class="bloc" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
     <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
         <mat-form-field>
             <mat-label>Titre</mat-label>

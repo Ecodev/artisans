@@ -5,7 +5,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatIconRegistry} from '@angular/material/icon';
 import {MatPaginatorIntl} from '@angular/material/paginator';
 import {BrowserModule} from '@angular/platform-browser';
@@ -74,12 +73,6 @@ export const matTooltipCustomConfig: MatTooltipDefaultOptions = {
             // Use OnDirty instead of default OnTouched, that allows to validate while editing. Touched is updated after blur.
             provide: ErrorStateMatcher,
             useClass: ShowOnDirtyErrorStateMatcher,
-        },
-        {
-            provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-            useValue: {
-                appearance: 'fill',
-            },
         },
         {
             provide: HTTP_INTERCEPTORS,

@@ -11,7 +11,12 @@
         </a>
     </natural-detail-header>
 
-    <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+    <mat-tab-group
+        mat-stretch-tabs="false"
+        naturalLinkableTab
+        (selectedIndexChange)="changeTab($event)"
+        [dynamicHeight]="true"
+    >
         <mat-tab id="general" label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">

@@ -203,6 +203,6 @@ input[type='number'] {
 
 // It is possible that the server returns error message on multiple line (eg: when ACL with multiple assertions fail),
 // so we try to preserve that formatting, while still wrapping if necessary
-simple-snack-bar > span {
+.mat-mdc-snack-bar-label {
     white-space: pre-wrap;
 }

@@ -27,7 +27,7 @@
 @use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
 
 // Include material core (only once !)
-@include mat.all-component-typographies();
+@include mat.all-component-typographies(natural.$typography);
 @include mat.core();
 
 @mixin page-header($theme) {

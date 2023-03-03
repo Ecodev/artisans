@@ -49,7 +49,7 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
                     <td *matCellDef="let element" mat-cell>
                         <div fxLayout="row" fxLayoutAlign="start center">
-                            <natural-icon *ngIf="element.isActive" name="done"></natural-icon>
+                            <mat-icon *ngIf="element.isActive" naturalIcon="done"></mat-icon>
                         </div>
                     </td>
                 </ng-container>

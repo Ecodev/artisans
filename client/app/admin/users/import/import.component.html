@@ -17,7 +17,7 @@
                     (filesChange)="uploadFile($event)"
                     [disabled]="!permissionsService.crud?.organization.create || importing"
                 >
-                    <natural-icon name="file_upload"></natural-icon>
+                    <mat-icon naturalIcon="file_upload"></mat-icon>
                     Uploader
                 </button>
             </p>
@@ -52,7 +52,7 @@
                             >Voir le détail</a
                         >
                         <button mat-raised-button color="warn" (click)="deleteAll()">
-                            <natural-icon name="delete"></natural-icon>
+                            <mat-icon naturalIcon="delete"></mat-icon>
                             Supprimer tous
                         </button>
                     </div>

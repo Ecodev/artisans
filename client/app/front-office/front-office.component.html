@@ -49,7 +49,7 @@
             <div fxFlex></div>
 
             <button (click)="menu.toggle()" mat-icon-button>
-                <natural-icon name="menu"></natural-icon>
+                <mat-icon naturalIcon="menu"></mat-icon>
             </button>
         </mat-toolbar>
 
@@ -60,7 +60,7 @@
                     <div fxFlex></div>
                     <a *ngIf="!currencyService.locked" [matMenuTriggerFor]="deviseMenu" mat-button>
                         {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
-                        <natural-icon name="keyboard_arrow_down"></natural-icon>
+                        <mat-icon naturalIcon="keyboard_arrow_down"></mat-icon>
                     </a>
                     <mat-menu #deviseMenu="matMenu">
                         <button (click)="currencyService.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
@@ -102,7 +102,7 @@
                             matInput
                         />
                         <button (click)="search()" mat-icon-button matIconSuffix>
-                            <natural-icon name="search"></natural-icon>
+                            <mat-icon naturalIcon="search"></mat-icon>
                         </button>
                     </mat-form-field>
                 </div>

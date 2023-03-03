@@ -19,7 +19,7 @@ function test(bool $loggedIn, string $url): void
         $message = 'logged in user should get raw Angular';
     } else {
         $cookie = '';
-        $pattern = '<natural-icon';
+        $pattern = '<mat-icon';
         $message = 'anonymous should get pre-rendered page by SSR';
     }
 

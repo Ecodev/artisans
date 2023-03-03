@@ -15,11 +15,11 @@
                 fxFlex
             >
                 <button (click)="download()" *ngIf="!usersEmail" mat-icon-button>
-                    <natural-icon name="email"></natural-icon>
+                    <mat-icon naturalIcon="email"></mat-icon>
                 </button>
 
                 <button (click)="copy(usersEmail)" *ngIf="usersEmail" mat-icon-button matTooltip="Copier les e-mails">
-                    <natural-icon name="alternate_email"></natural-icon>
+                    <mat-icon naturalIcon="alternate_email"></mat-icon>
                 </button>
 
                 <button
@@ -28,7 +28,7 @@
                     mat-icon-button
                     matTooltip="Copier les e-mails et les noms"
                 >
-                    <natural-icon name="file_copy"></natural-icon>
+                    <mat-icon naturalIcon="file_copy"></mat-icon>
                 </button>
 
                 <natural-columns-picker (selectionChange)="selectColumns($event)" [selections]="selectedColumns">

@@ -24,7 +24,7 @@
                     class="mat-elevation-z4"
                     *ngIf="data.model.permissions?.update"
                 >
-                    <natural-icon name="edit"></natural-icon>
+                    <mat-icon naturalIcon="edit"></mat-icon>
                 </a>
             </div>
 
@@ -39,7 +39,7 @@
                     fxLayoutGap="10px"
                     class="mat-h3"
                 >
-                    <natural-icon name="alarm"></natural-icon>
+                    <mat-icon naturalIcon="alarm"></mat-icon>
                     <div>
                         {{ data.model.readingDuration }} {{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }} de
                         lecture
@@ -75,7 +75,7 @@
                 <span class="mat-headline-6 show-products-of-review-button no-margin-bottom"
                     >Voir les articles de ce numéro</span
                 >
-                <natural-icon name="expand_more"></natural-icon>
+                <mat-icon naturalIcon="expand_more"></mat-icon>
             </div>
             <mat-nav-list *ngIf="articlesMenuOpen">
                 <a
@@ -137,7 +137,7 @@
                         Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
                     </p>
                     <a mat-flat-button [href]="'/api/file/' + data.model.file.id" target="_blank">
-                        <natural-icon name="get_app"></natural-icon>
+                        <mat-icon naturalIcon="get_app"></mat-icon>
                         <span *ngIf="data.model.reviewNumber">Télécharger cette revue</span>
                         <span *ngIf="!data.model.reviewNumber">Télécharger cet article</span>
                     </a>

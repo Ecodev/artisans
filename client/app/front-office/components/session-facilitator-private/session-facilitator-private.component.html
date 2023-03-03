@@ -25,7 +25,7 @@
                     <h3 class="mat-h3">{{ category.key }}</h3>
                     <mat-nav-list *ngFor="let document of category.value" class="documents">
                         <a mat-list-item *ngIf="document.file" [href]="'/api/file/' + document.file.id" target="_blank">
-                            <natural-icon name="download"></natural-icon>
+                            <mat-icon naturalIcon="download"></mat-icon>
                             {{ document.name }}</a
                         >
                         <a mat-list-item *ngIf="!document.file">{{ document.name }}</a>

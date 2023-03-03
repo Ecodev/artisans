@@ -46,7 +46,7 @@
                         mat-icon-button
                         class="mat-elevation-z4"
                     >
-                        <natural-icon name="delete"></natural-icon>
+                        <mat-icon naturalIcon="delete"></mat-icon>
                     </button>
                     <button
                         (click)="decrease(line.product, line.type)"
@@ -54,10 +54,10 @@
                         mat-icon-button
                         class="mat-elevation-z4"
                     >
-                        <natural-icon name="remove"></natural-icon>
+                        <mat-icon naturalIcon="remove"></mat-icon>
                     </button>
                     <button (click)="increase(line.product, line.type)" mat-icon-button class="mat-elevation-z4">
-                        <natural-icon name="add"></natural-icon>
+                        <mat-icon naturalIcon="add"></mat-icon>
                     </button>
                 </div>
             </div>
@@ -83,10 +83,10 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                 <button (click)="cart.unsetSubscription()" color="warn" mat-icon-button class="mat-elevation-z4">
-                    <natural-icon name="delete"></natural-icon>
+                    <mat-icon naturalIcon="delete"></mat-icon>
                 </button>
                 <button routerLink="/larevuedurable/abonnements" mat-icon-button class="mat-elevation-z4">
-                    <natural-icon name="edit"></natural-icon>
+                    <mat-icon naturalIcon="edit"></mat-icon>
                 </button>
             </div>
         </div>
@@ -108,10 +108,10 @@
 
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                 <button (click)="cart.unsetDonation()" color="warn" mat-icon-button class="mat-elevation-z4">
-                    <natural-icon name="delete"></natural-icon>
+                    <mat-icon naturalIcon="delete"></mat-icon>
                 </button>
                 <button (click)="cartService.inputDonation(false, cart)" mat-icon-button class="mat-elevation-z4">
-                    <natural-icon name="edit"></natural-icon>
+                    <mat-icon naturalIcon="edit"></mat-icon>
                 </button>
             </div>
         </div>

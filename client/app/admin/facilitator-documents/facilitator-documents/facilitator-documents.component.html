@@ -45,7 +45,7 @@
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Télécharger</th>
                     <td *matCellDef="let element" mat-cell>
                         <a *ngIf="element.file" [href]="'/api/file/' + element.file.id" target="_blank">
-                            <natural-icon name="download"></natural-icon
+                            <mat-icon naturalIcon="download"></mat-icon
                         ></a>
                     </td>
                 </ng-container>

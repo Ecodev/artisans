@@ -99,7 +99,7 @@ export const matTooltipCustomConfig: MatTooltipDefaultOptions = {
                 applicationName: 'Les artisans de la transition',
                 defaultDescription: 'Comprendre l’urgence écologique, Des pistes pour y répondre',
                 defaultRobots: 'all, index, follow',
-            } as NaturalSeoConfig,
+            } satisfies NaturalSeoConfig,
         },
         apolloOptionsProvider,
         {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: matTooltipCustomConfig},

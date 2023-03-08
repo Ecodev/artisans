@@ -48,10 +48,10 @@ const orderDetails = [
                     maxWidth: '95vw',
                     maxHeight: '97vh',
                 },
-            } as NaturalDialogTriggerRoutingData<OrderComponent, never>,
+            } satisfies NaturalDialogTriggerRoutingData<OrderComponent, never>,
             seo: {
                 title: 'Commande',
-            } as NaturalSeo,
+            } satisfies NaturalSeo,
         },
     },
     {
@@ -69,10 +69,10 @@ const orderDetails = [
                     maxHeight: '97vh',
                     autoFocus: false,
                 },
-            } as NaturalDialogTriggerRoutingData<OrderLineComponent, never>,
+            } satisfies NaturalDialogTriggerRoutingData<OrderLineComponent, never>,
             seo: {
                 title: "Modification de la vente d'un produit",
-            } as NaturalSeo,
+            } satisfies NaturalSeo,
         },
     },
 ];
@@ -94,7 +94,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Produits',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -109,7 +109,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 title: 'Nouveau produit',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                     {
@@ -121,7 +121,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'product',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                 ],
@@ -132,7 +132,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Tous les utilisateurs',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -147,7 +147,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'user',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                         children: orderDetails,
                     },
@@ -159,7 +159,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Import',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -168,7 +168,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Ventes',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
                 children: orderDetails,
             },
@@ -178,7 +178,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Actualités et articles',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -193,7 +193,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 title: 'Nouvelle actualité',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                     {
@@ -205,7 +205,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'news',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                 ],
@@ -216,7 +216,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Événements',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -229,7 +229,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 title: 'Nouvel événement',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                     {
@@ -239,7 +239,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'event',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                 ],
@@ -251,7 +251,7 @@ const routes: Routes = [
                     selectedColumns: ['name', 'endDate', 'facilitators'],
                     seo: {
                         title: 'Conversations carbone',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -264,7 +264,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 title: 'Nouvelle session carbone',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                     {
@@ -274,7 +274,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'session',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                 ],
@@ -285,7 +285,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Commentaires',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -298,7 +298,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 title: 'Nouveau commentaire',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                     {
@@ -308,7 +308,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'comment',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                 ],
@@ -319,7 +319,7 @@ const routes: Routes = [
                 data: {
                     seo: {
                         title: 'Documents facilitateurs',
-                    } as NaturalSeo,
+                    } satisfies NaturalSeo,
                 },
             },
             {
@@ -334,7 +334,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 title: 'Nouveau document',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                     {
@@ -346,7 +346,7 @@ const routes: Routes = [
                         data: {
                             seo: {
                                 resolveKey: 'facilitatorDocument',
-                            } as NaturalSeo,
+                            } satisfies NaturalSeo,
                         },
                     },
                 ],

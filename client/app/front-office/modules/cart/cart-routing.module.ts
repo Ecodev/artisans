@@ -12,17 +12,17 @@ const routes: Routes = [
         component: CreateOrderComponent,
         resolve: {viewer: ViewerResolver},
         canActivate: [AuthGuard],
-        data: {seo: {title: 'Panier'} as NaturalSeo},
+        data: {seo: {title: 'Panier'} satisfies NaturalSeo},
     },
     {
         path: '',
         component: CartComponent,
-        data: {seo: {title: 'Panier'} as NaturalSeo},
+        data: {seo: {title: 'Panier'} satisfies NaturalSeo},
     },
     {
         path: ':cartId',
         component: CartComponent,
-        data: {seo: {title: 'Panier'} as NaturalSeo},
+        data: {seo: {title: 'Panier'} satisfies NaturalSeo},
     },
 ];
 

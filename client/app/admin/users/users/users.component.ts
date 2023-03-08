@@ -50,7 +50,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         qvm.set('pagination', {pagination: {pageIndex: 0, pageSize: 9999}});
         qvm.set('emailFilter', {
             filter: {groups: [{conditions: [{email: {null: {not: true}}}]}]},
-        } as UsersVariables);
+        } satisfies UsersVariables);
 
         this.apollo
             .query<EmailUsers, EmailUsersVariables>({

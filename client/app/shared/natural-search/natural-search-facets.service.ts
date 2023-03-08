@@ -53,23 +53,23 @@ export class NaturalSearchFacetsService {
         },
     };
 
-    private readonly productIsActive: FlagFacet = {
+    private readonly productIsActive: FlagFacet<ProductFilterGroupConditionIsActive> = {
         display: 'Actif',
         field: 'isActive',
-        condition: {equal: {value: true}} as ProductFilterGroupConditionIsActive,
+        condition: {equal: {value: true}},
     };
 
-    private readonly productIsNotActive: FlagFacet = {
+    private readonly productIsNotActive: FlagFacet<ProductFilterGroupConditionIsActive> = {
         display: 'Non actif',
         field: 'isActive',
         name: 'isNotActive',
-        condition: {equal: {value: false}} as ProductFilterGroupConditionIsActive,
+        condition: {equal: {value: false}},
     };
 
-    private readonly productHasNoFile: FlagFacet = {
+    private readonly productHasNoFile: FlagFacet<ProductFilterGroupConditionFile> = {
         display: 'Sans produit dématérialisé',
         field: 'file',
-        condition: {empty: {not: false}} as ProductFilterGroupConditionFile,
+        condition: {empty: {not: false}},
     };
 
     private readonly code: DropdownFacet<never> = {
@@ -117,15 +117,15 @@ export class NaturalSearchFacetsService {
             {
                 display: 'Existe pas dans Crésus',
                 field: 'shouldDelete',
-                condition: {equal: {value: true}} as UserFilterGroupConditionShouldDelete,
-            } as FlagFacet,
+                condition: {equal: {value: true}},
+            } satisfies FlagFacet<UserFilterGroupConditionShouldDelete>,
             {
                 display: 'Liste de bénéficiaires',
                 field: 'custom',
                 component: TypeTextComponent,
                 name: 'regexp',
                 transform: replaceOperatorByName,
-            } as DropdownFacet<TypeTextComponent>,
+            } satisfies DropdownFacet<never>,
             this.firstName,
             this.lastName,
             {
@@ -135,18 +135,18 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     items: this.enumService.get('Membership'),
                 },
-            } as DropdownFacet<TypeSelectConfiguration>,
+            } satisfies DropdownFacet<TypeSelectConfiguration>,
             {
                 display: 'Abonné',
                 field: 'subscriptionLastReview',
-                condition: {empty: {not: true}} as UserFilterGroupConditionSubscriptionLastReview,
-            } as FlagFacet,
+                condition: {empty: {not: true}},
+            } satisfies FlagFacet<UserFilterGroupConditionSubscriptionLastReview>,
             {
                 display: 'Non abonné',
                 field: 'subscriptionLastReview',
                 name: 'noSubscriptionLastReview',
-                condition: {empty: {not: false}} as UserFilterGroupConditionSubscriptionLastReview,
-            } as FlagFacet,
+                condition: {empty: {not: false}},
+            } satisfies FlagFacet<UserFilterGroupConditionSubscriptionLastReview>,
             {
                 display: 'Rôle',
                 field: 'role',
@@ -154,7 +154,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     items: this.enumService.get('UserRole'),
                 },
-            } as DropdownFacet<TypeSelectConfiguration>,
+            } satisfies DropdownFacet<TypeSelectConfiguration>,
             this.creationDate,
             this.updateDate,
         ],
@@ -171,7 +171,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     items: this.enumService.get('ProductType'),
                 },
-            } as DropdownFacet<TypeSelectConfiguration>,
+            } satisfies DropdownFacet<TypeSelectConfiguration>,
             {
                 display: 'Prix CHF',
                 field: 'pricePerUnitCHF',
@@ -179,7 +179,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             {
                 display: 'Prix EUR',
                 field: 'pricePerUnitEUR',
@@ -187,7 +187,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             this.productHasNoFile,
             this.creationDate,
             this.updateDate,
@@ -200,7 +200,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             {
                 display: 'Total EUR',
                 field: 'balanceEUR',
@@ -208,7 +208,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             this.owner,
             this.creationDate,
             this.updateDate,
@@ -222,7 +222,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             {
                 display: 'Montant EUR',
                 field: 'balanceEUR',
@@ -230,7 +230,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             {
                 display: 'Quantité',
                 field: 'quantity',
@@ -238,7 +238,7 @@ export class NaturalSearchFacetsService {
                 configuration: {
                     step: 0.01,
                 },
-            } as DropdownFacet<TypeNumberConfiguration>,
+            } satisfies DropdownFacet<TypeNumberConfiguration>,
             this.creationDate,
         ],
         sessions: [
@@ -246,7 +246,7 @@ export class NaturalSearchFacetsService {
                 display: "Date d'appel à contribution",
                 field: 'endDate',
                 component: TypeDateComponent,
-            },
+            } satisfies DropdownFacet<TypeDateConfiguration>,
             {
                 display: 'Facilitateur',
                 field: 'facilitators',
@@ -255,7 +255,7 @@ export class NaturalSearchFacetsService {
                     service: this.userService,
                     placeholder: 'Facilitateur',
                 },
-            },
+            } satisfies DropdownFacet<TypeSelectNaturalConfiguration<UserService>>,
         ],
     };
 

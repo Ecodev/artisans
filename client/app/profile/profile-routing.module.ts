@@ -26,7 +26,7 @@ const routes: Routes = [
                 path: 'commandes',
                 component: HistoryComponent,
                 resolve: {viewer: ViewerResolver},
-                data: {seo: {title: 'Mes commandes'} as NaturalSeo},
+                data: {seo: {title: 'Mes commandes'} satisfies NaturalSeo},
                 children: [
                     {
                         path: ':orderId',
@@ -43,7 +43,7 @@ const routes: Routes = [
                                     maxWidth: '95vw',
                                     maxHeight: '97vh',
                                 },
-                            } as NaturalDialogTriggerRoutingData<OrderComponent, never>,
+                            } satisfies NaturalDialogTriggerRoutingData<OrderComponent, never>,
                         },
                     },
                 ],
@@ -52,12 +52,12 @@ const routes: Routes = [
                 path: 'donnees-personnelles',
                 component: AccountComponent,
                 resolve: {user: ViewerResolver},
-                data: {seo: {title: 'Données personnelles'} as NaturalSeo},
+                data: {seo: {title: 'Données personnelles'} satisfies NaturalSeo},
             },
             {
                 path: 'articles-achetes',
                 component: PurchasesComponent,
-                data: {seo: {title: 'Articles achetés'} as NaturalSeo},
+                data: {seo: {title: 'Articles achetés'} satisfies NaturalSeo},
             },
         ],
     },

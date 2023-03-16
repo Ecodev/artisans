@@ -15,7 +15,7 @@
         </div>
     </div>
 </mat-dialog-content>
-<mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+<mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Annuler</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
     <button mat-stroked-button [mat-dialog-close]="validEmails()" [disabled]="!form.valid">Valider</button>

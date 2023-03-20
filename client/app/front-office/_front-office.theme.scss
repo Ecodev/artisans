@@ -11,7 +11,9 @@
     app-front-office {
         #header-top {
             background: color.adjust(mat.get-color-from-palette($bg, app-bar), $lightness: -5%);
-            color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 35%);
+            .mat-mdc-button:not(:disabled) {
+                color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 35%);
+            }
         }
 
         #mobile-menu .mat-expansion-panel-body {
@@ -76,6 +78,10 @@
         #footer-body {
             a:hover {
                 color: mat.get-color-from-palette($accent);
+            }
+
+            .mdc-list-item__primary-text {
+                text-transform: uppercase;
             }
         }
     }

@@ -1,0 +1,76 @@
+/**
+ * !!! NEVER INCLUDE THIS FILE IN A SCSS FILE
+ * See source doc here https://github.com/angular/material2/tree/master/src/lib/core/theming
+ */
+// Import theming files full relative way or karma will display warning
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '@ecodev/natural';
+@use '@ecodev/natural-editor';
+@use '../app/app.theme';
+@use 'rich-text';
+@use 'artisans.theme';
+@use '../app/shared/components/breadcrumbs/breadcrumbs.theme';
+@use '../app/shared/components/tags-navigation/tags-navigation.theme';
+@use '../app/admin/admin/admin.theme';
+@use '../app/admin/products/product/product.theme';
+@use '../app/admin/order/order-line/order-line.theme';
+@use '../app/profile/components/profile/profile.theme';
+@use '../app/profile/components/purchases/purchases.theme';
+@use '../app/front-office/components/homepage/homepage.theme';
+@use '../app/front-office/front-office.theme';
+@use '../app/front-office/components/menu/menu.theme';
+@use '../app/front-office/components/session-facilitator/session-facilitator.theme';
+@use '../app/front-office/components/session-facilitator-private/session-facilitator-private.theme';
+@use '../app/front-office/modules/shop/components/products-page/products-page.theme';
+@use '../app/front-office/modules/shop/components/product-page/product-page.theme';
+@use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
+
+@mixin page-header($theme) {
+    $primary: map.get($theme, primary);
+    $accent: map.get($theme, accent);
+    $background: map.get($theme, background);
+    $foreground: map.get($theme, foreground);
+
+    .pageHeader {
+        padding-top: 20px;
+
+        .pageTitle {
+            position: relative;
+            min-width: 300px;
+
+            & > span {
+                position: absolute;
+                top: -1.7em;
+                left: 0;
+                font-size: 0.6em;
+                color: mat.get-color-from-palette($primary);
+            }
+        }
+    }
+}
+
+// Include components themes
+@mixin components-theme($theme) {
+    @include app.app($theme);
+    @include natural.natural($theme);
+    @include natural-editor.natural-editor($theme);
+    @include artisans.artisans($theme);
+    @include page-header($theme);
+    @include product.product($theme);
+    @include rich-text.rich-text($theme);
+    @include profile.profile($theme);
+    @include homepage.homepage($theme);
+    @include front-office.front-office($theme);
+    @include products-page.products-page($theme);
+    @include product-page.product-page($theme);
+    @include tags-navigation.tags-navigation($theme);
+    @include menu.menu($theme);
+    @include breadcrumbs.breadcrumbs($theme);
+    @include order-line.order-line($theme);
+    @include subscriptions.subscriptions($theme);
+    @include purchases.purchases($theme);
+    @include session-facilitator.session-facilitator($theme);
+    @include session-facilitator-private.session-facilitator-private($theme);
+    @include admin.admin($theme);
+}

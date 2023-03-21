@@ -6,78 +6,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '@ecodev/natural';
-@use '@ecodev/natural-editor';
-@use '../app/app.theme';
-@use 'rich-text';
-@use 'artisans.theme';
-@use '../app/shared/components/breadcrumbs/breadcrumbs.theme';
-@use '../app/shared/components/tags-navigation/tags-navigation.theme';
-@use '../app/admin/admin/admin.theme';
-@use '../app/admin/products/product/product.theme';
-@use '../app/admin/order/order-line/order-line.theme';
-@use '../app/profile/components/profile/profile.theme';
-@use '../app/profile/components/purchases/purchases.theme';
-@use '../app/front-office/components/homepage/homepage.theme';
-@use '../app/front-office/front-office.theme';
-@use '../app/front-office/components/menu/menu.theme';
-@use '../app/front-office/components/session-facilitator/session-facilitator.theme';
-@use '../app/front-office/components/session-facilitator-private/session-facilitator-private.theme';
-@use '../app/front-office/modules/shop/components/products-page/products-page.theme';
-@use '../app/front-office/modules/shop/components/product-page/product-page.theme';
-@use '../app/front-office/modules/shop/components/subscriptions/subscriptions.theme';
-
-// Include material core (only once !)
-@include mat.all-component-typographies(natural.$typography);
-@include mat.core();
-
-@mixin page-header($theme) {
-    $primary: map.get($theme, primary);
-    $accent: map.get($theme, accent);
-    $background: map.get($theme, background);
-    $foreground: map.get($theme, foreground);
-
-    .pageHeader {
-        padding-top: 20px;
-
-        .pageTitle {
-            position: relative;
-            min-width: 300px;
-
-            & > span {
-                position: absolute;
-                top: -1.7em;
-                left: 0;
-                font-size: 0.6em;
-                color: mat.get-color-from-palette($primary);
-            }
-        }
-    }
-}
-
-// Include components themes
-@mixin components-theme($theme) {
-    @include app.app($theme);
-    @include natural.natural($theme);
-    @include natural-editor.natural-editor($theme);
-    @include artisans.artisans($theme);
-    @include page-header($theme);
-    @include product.product($theme);
-    @include rich-text.rich-text($theme);
-    @include profile.profile($theme);
-    @include homepage.homepage($theme);
-    @include front-office.front-office($theme);
-    @include products-page.products-page($theme);
-    @include product-page.product-page($theme);
-    @include tags-navigation.tags-navigation($theme);
-    @include menu.menu($theme);
-    @include breadcrumbs.breadcrumbs($theme);
-    @include order-line.order-line($theme);
-    @include subscriptions.subscriptions($theme);
-    @include purchases.purchases($theme);
-    @include session-facilitator.session-facilitator($theme);
-    @include session-facilitator-private.session-facilitator-private($theme);
-    @include admin.admin($theme);
-}
+@use 'components';
 
 $artisans-blue: (
     50: #e3f2fd,
@@ -192,5 +121,112 @@ $artisans-theme: mat.define-light-theme(
     )
 );
 
-@include mat.all-component-themes($artisans-theme);
-@include components-theme($artisans-theme);
+@mixin applyTheme($theme) {
+    @include mat.autocomplete-color($theme);
+    @include mat.button-color($theme);
+    @include mat.button-toggle-color($theme);
+    @include mat.card-color($theme);
+    @include mat.checkbox-color($theme);
+    @include mat.chips-color($theme);
+    @include mat.core-color($theme);
+    @include mat.datepicker-color($theme);
+    @include mat.dialog-color($theme);
+    @include mat.divider-color($theme);
+    @include mat.expansion-color($theme);
+    @include mat.fab-color($theme);
+    @include mat.form-field-color($theme);
+    @include mat.icon-color($theme);
+    @include mat.icon-button-color($theme);
+    @include mat.input-color($theme);
+    @include mat.list-color($theme);
+    @include mat.menu-color($theme);
+    @include mat.paginator-color($theme);
+    @include mat.progress-spinner-color($theme);
+    @include mat.radio-color($theme);
+    @include mat.select-color($theme);
+    @include mat.sidenav-color($theme);
+    @include mat.slide-toggle-color($theme);
+    @include mat.slider-color($theme);
+    @include mat.snack-bar-color($theme);
+    @include mat.sort-color($theme);
+    @include mat.table-color($theme);
+    @include mat.tabs-color($theme);
+    @include mat.toolbar-color($theme);
+    @include mat.tooltip-color($theme);
+    @include mat.tree-color($theme);
+
+    @include components.components-theme($theme);
+}
+
+// Include Material densities, typographies and  core (only once !)
+// Only 32 modules used on a total of 37 modules
+@include mat.autocomplete-density(0);
+@include mat.button-density(0);
+@include mat.button-toggle-density(0);
+@include mat.card-density(0);
+@include mat.checkbox-density(0);
+@include mat.chips-density(0);
+@include mat.core-density(0);
+@include mat.datepicker-density(0);
+@include mat.dialog-density(0);
+@include mat.divider-density(0);
+@include mat.expansion-density(0);
+@include mat.fab-density(0);
+@include mat.form-field-density(0);
+@include mat.icon-density(0);
+@include mat.icon-button-density(0);
+@include mat.input-density(0);
+@include mat.list-density(0);
+@include mat.menu-density(0);
+@include mat.paginator-density(0);
+@include mat.progress-spinner-density(0);
+@include mat.radio-density(0);
+@include mat.select-density(0);
+@include mat.sidenav-density(0);
+@include mat.slide-toggle-density(0);
+@include mat.slider-density(0);
+@include mat.snack-bar-density(0);
+@include mat.sort-density(0);
+@include mat.table-density(0);
+@include mat.tabs-density(0);
+@include mat.toolbar-density(0);
+@include mat.tooltip-density(0);
+@include mat.tree-density(0);
+
+@include mat.typography-hierarchy(natural.$typography);
+@include mat.autocomplete-typography(natural.$typography);
+@include mat.button-typography(natural.$typography);
+@include mat.button-toggle-typography(natural.$typography);
+@include mat.card-typography(natural.$typography);
+@include mat.checkbox-typography(natural.$typography);
+@include mat.chips-typography(natural.$typography);
+@include mat.core-typography(natural.$typography);
+@include mat.datepicker-typography(natural.$typography);
+@include mat.dialog-typography(natural.$typography);
+@include mat.divider-typography(natural.$typography);
+@include mat.expansion-typography(natural.$typography);
+@include mat.fab-typography(natural.$typography);
+@include mat.form-field-typography(natural.$typography);
+@include mat.icon-typography(natural.$typography);
+@include mat.icon-button-typography(natural.$typography);
+@include mat.input-typography(natural.$typography);
+@include mat.list-typography(natural.$typography);
+@include mat.menu-typography(natural.$typography);
+@include mat.paginator-typography(natural.$typography);
+@include mat.progress-spinner-typography(natural.$typography);
+@include mat.radio-typography(natural.$typography);
+@include mat.select-typography(natural.$typography);
+@include mat.sidenav-typography(natural.$typography);
+@include mat.slide-toggle-typography(natural.$typography);
+@include mat.slider-typography(natural.$typography);
+@include mat.snack-bar-typography(natural.$typography);
+@include mat.sort-typography(natural.$typography);
+@include mat.table-typography(natural.$typography);
+@include mat.tabs-typography(natural.$typography);
+@include mat.toolbar-typography(natural.$typography);
+@include mat.tooltip-typography(natural.$typography);
+@include mat.tree-typography(natural.$typography);
+
+@include mat.core();
+
+@include applyTheme($artisans-theme);

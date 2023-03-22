@@ -229,4 +229,6 @@ $artisans-theme: mat.define-light-theme(
 
 @include mat.core();
 
-@include applyTheme($artisans-theme);
+body {
+    @include applyTheme($artisans-theme);
+}

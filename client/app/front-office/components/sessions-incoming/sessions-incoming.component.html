@@ -1,5 +1,5 @@
 <div class="container">
-    <h1 class="mat-display-1">PROCHAINES SESSIONS</h1>
+    <h1 class="mat-headline-4">PROCHAINES SESSIONS</h1>
 
     <div fxLayout="row" fxLayoutGap="30px">
         <div fxFlex.gt-sm="70" class="page-body" fxLayout="column" fxLayoutGap="60px">
@@ -7,77 +7,81 @@
                 <h2 class="mat-h1 no-margin-top">Infos pratiques</h2>
 
                 <p>
-                    Pour tirer tout le bénéfice d'une Conversation carbone, il est important d'en suivre les six
-                    ateliers. Nous vous invitons à vous rendre disponible pour chacune des dates indiquées plus bas.
+                    Vous pouvez rejoindre l’une des sessions agendées ci-dessous ou constituer un groupe de huit à dix
+                    personnes pour mettre en route une Conversation carbone. Si aucune de ces deux options ne vous
+                    convient, vous pouvez vous inscrire sur une liste d’attente et nous vous contacterons dès qu’un
+                    groupe sera prêt à démarrer :
+                    <a
+                        mat-flat-button
+                        color="accent"
+                        [attr.href]="'https://framaforms.org/inscription-aux-conversations-carbone-1623749988'"
+                        target="_blank"
+                    >
+                        Liste d'attente
+                    </a>
+                </p>
+            </div>
+
+            <div id="incoming-sessions-list">
+                <div *ngFor="let session of sessions" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+                    <div class="mat-h2">{{ session.name }}</div>
+                    <div class="rich-text" [innerHtml]="session.description"></div>
+                    <a
+                        mat-flat-button
+                        color="accent"
+                        [attr.href]="session.mailingList"
+                        *ngIf="session.mailingList"
+                        target="_blank"
+                    >
+                        Infos
+                    </a>
+                </div>
+            </div>
+
+            <div class="rich-text mat-h3">
+                <p>
+                    Le nombre de participants à une Conversation carbone est limité afin de garantir une dynamique de
+                    groupe optimale. Si vous deviez vous désister avant le début de la session, merci de nous en
+                    informer aussi vite que possible afin qu’une autre personne puisse profiter de la place libérée !
                 </p>
                 <p>
-                    Le <strong>nombre limité de participants</strong> vise à garantir une dynamique de groupe optimale.
-                    Si vous deviez vous désister avant le début de la session, merci de nous en informer aussi vite que
-                    possible afin qu’une autre personne puisse profiter de la place libérée.
-                </p>
-                <p>
-                    Le matériel didactique fourni comprend un cahier d’exercices et le guide « Prêt à temps pour
-                    demain&nbsp;?&nbsp;» disponible sur ce lien :
+                    Du matériel théorique et didactique vous est fourni. Il comprend un cahier d’exercices pratiques et
+                    un guide disponible sur ce lien :
                     <a href="/assets/images/conversation-carbon/le-guide-des-conversations-carbone.pdf" target="_blank"
                         >« Prêt à temps pour demain ?&nbsp;»
                     </a>
                 </p>
-
-                <h2 class="mat-h1 no-margin-top">Recherche sur les comportements en faveur du climat</h2>
                 <p>
-                    Les
-                    <strong>Artisans de la transition</strong> s’associent au Centre pour le développement et
-                    l’environnement (CDE) de l’Université de Berne pour étudier les effets des Conversations carbone.
-                    Pour atteindre le nombre critique de participants, une dizaine de nouveaux groupes vont être
-                    progressivement lancés entre août et décembre 2021. N’hésitez pas à vous inscrire sur les listes
-                    d’attente par région si vous ne trouvez pas de session à votre convenance. Nous vous préviendrons
-                    dès que de nouveaux groupes démarrent.
-                </p>
-                <p>
-                    Si vous avez la possibilité de réunir un groupe de huit à dix personnes pour lancer une Conversation
-                    carbone, cela nous aiderait énormément ! Ecrivez à
+                    Vous souhaitez organiser une Conversation carbone et vous pouvez réunir un groupe de huit à dix
+                    personnes ? Écrivez directement à
                     <a href="mailto:marie.lendais@artisansdelatransition.org"
                         >marie.lendais@artisansdelatransition.org</a
                     >
-                    qui se fera un plaisir de vous trouver deux facilitateurs pour animer ce groupe.
-                </p>
-                <p>
-                    Et si vous pouvez faire passer le mot au sujet de cette recherche sur les comportements en faveur du
-                    climat et nous aider ainsi à recruter 150 participants et 150 personnes pour le groupe témoin, voici
-                    <a
-                        href="/assets/images/conversation-carbon/cherchons_volontaires_recherche-conversations-carbone.pdf"
-                        target="_blank"
-                        >un flyer de présentation</a
-                    >.
+                    afin de coordonner la facilitation de votre groupe !
                 </p>
             </div>
 
-            <div *ngFor="let session of sessions">
-                <div class="mat-h2">{{ session.name }}</div>
-                <div class="rich-text" [innerHtml]="session.description"></div>
-                <a
-                    mat-flat-button
-                    color="accent"
-                    [attr.href]="session.mailingList"
-                    *ngIf="session.mailingList"
-                    target="_blank"
-                >
-                    S'inscrire
-                </a>
-            </div>
-
-            <div class="page-body mat-h3">
-                <div class="mat-h2">Si vous n’avez pas trouvé de session qui vous convienne :</div>
-                <p>
-                    Je désire être averti·e des prochaines sessions pour les régions suivantes (plusieurs choix
-                    possibles) :
-                </p>
-                <div fxLayout="column" fxLayoutGap="10px">
-                    <div *ngFor="let queue of queues" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
-                        <button color="accent" mat-flat-button (click)="subscribeToQueue(queue)">M'avertir</button>
-                        <div>{{ queue.name }}</div>
-                    </div>
+            <div fxLayout="row" fxLayoutGap="30px">
+                <div fxFlex="50" class="frame-primary padding">
+                    <p>
+                        " La crise climatique est alarmante et il est facile de se sentir impuissant. Nous essayons de
+                        commencer là où les gens en sont aujourd’hui, pas là où nous aimerions qu’ils soient
+                        demain.&nbsp;"
+                    </p>
+                    <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
                 </div>
+                <div fxFlex="50" class="frame-primary padding">
+                    <p>
+                        " L'incertitude que la crise climatique engendre peut pousser à trop se concentrer sur ses rêves
+                        et ses cauchemars. Il rend difficile de penser concrètement à ce que nous voulons et à ce qui
+                        est envisageable dans un avenir sobre en carbone.&nbsp;"
+                    </p>
+                    <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
+                </div>
+            </div>
+
+            <div>
+                <img src="assets/images/conversation-carbon/schema_conversations_carbone_6-ateliers.jpg" />
             </div>
         </div>
 

@@ -15,7 +15,7 @@ import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/
 
 @Component({
     selector: 'app-sessions-incoming',
-    templateUrl: './sessions-incoming-2.component.html',
+    templateUrl: './sessions-incoming.component.html',
     styleUrls: ['./sessions-incoming.component.scss'],
 })
 export class SessionsIncomingComponent implements OnInit {

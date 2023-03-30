@@ -14,10 +14,11 @@
                 [selections]="naturalSearchSelections"
                 fxFlex
             >
-                <natural-columns-picker (selectionChange)="selectColumns($event)" [selections]="selectedColumns">
-                    <span naturalColumnsPickerColumn="date">Date</span>
-                    <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="isActive">Active</span>
+                <natural-columns-picker
+                    [availableColumns]="availableColumns"
+                    [selections]="selectedColumns"
+                    (selectionChange)="selectColumns($event)"
+                >
                 </natural-columns-picker>
             </natural-search>
         </div>

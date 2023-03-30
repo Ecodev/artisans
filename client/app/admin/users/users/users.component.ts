@@ -2,6 +2,7 @@ import {Apollo} from 'apollo-angular';
 import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {
+    AvailableColumn,
     copyToClipboard,
     NaturalAbstractList,
     NaturalQueryVariablesManager,
@@ -20,7 +21,14 @@ import {DOCUMENT} from '@angular/common';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
-    public override selectedColumns = ['name', 'email', 'creationDate', 'updateDate', 'membership'];
+    public override availableColumns: AvailableColumn[] = [
+        {id: 'name', label: 'Nom'},
+        {id: 'creationDate', label: 'Créé le'},
+        {id: 'updateDate', label: 'Modifié le'},
+        {id: 'membership', label: 'Membre des artisans'},
+        {id: 'email', label: 'Email'},
+        {id: 'phone', label: 'Téléphone', checked: false},
+    ];
 
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;

@@ -1,5 +1,5 @@
 import {Component, Injector, Input, OnInit} from '@angular/core';
-import {NaturalAbstractList} from '@ecodev/natural';
+import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderLineService} from '../services/order-lines.service';
@@ -10,9 +10,16 @@ import {OrderLineService} from '../services/order-lines.service';
     styleUrls: ['./order-lines.component.scss'],
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
-    /**
-     *
-     */
+    public override availableColumns: AvailableColumn[] = [
+        {id: 'creationDate', label: 'Date'},
+        {id: 'quantity', label: 'Quantité'},
+        {id: 'name', label: 'Nom'},
+        {id: 'productType', label: 'Type'},
+        {id: 'open', label: 'Nom', checked: false, hidden: true},
+        {id: 'owner', label: 'Utilisateur'},
+        {id: 'balance', label: 'Montant'},
+    ];
+
     @Input() public showTotals = false;
 
     /**

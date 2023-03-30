@@ -8,14 +8,11 @@
                 [selections]="naturalSearchSelections"
                 fxFlex
             >
-                <natural-columns-picker (selectionChange)="selectColumns($event)" [selections]="selectedColumns">
-                    <span naturalColumnsPickerColumn="creationDate">Date</span>
-                    <span naturalColumnsPickerColumn="quantity">Quantité</span>
-                    <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="productType">Type</span>
-                    <span [checked]="false" [hidden]="true" naturalColumnsPickerColumn="open">Nom</span>
-                    <span naturalColumnsPickerColumn="owner">Utilisateur</span>
-                    <span naturalColumnsPickerColumn="balance">Montant</span>
+                <natural-columns-picker
+                    [availableColumns]="availableColumns"
+                    [selections]="selectedColumns"
+                    (selectionChange)="selectColumns($event)"
+                >
                 </natural-columns-picker>
             </natural-search>
         </div>

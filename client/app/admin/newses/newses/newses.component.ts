@@ -1,5 +1,5 @@
 import {Component, Injector, OnInit} from '@angular/core';
-import {NaturalAbstractList} from '@ecodev/natural';
+import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';
@@ -10,6 +10,11 @@ import {NewsService} from '../services/news.service';
     styleUrls: ['./newses.component.scss'],
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
+    public override availableColumns: AvailableColumn[] = [
+        {id: 'date', label: 'Date'},
+        {id: 'name', label: 'Nom'},
+        {id: 'isActive', label: 'Active'},
+    ];
     public constructor(
         service: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,

@@ -31,13 +31,11 @@
                     <mat-icon naturalIcon="file_copy"></mat-icon>
                 </button>
 
-                <natural-columns-picker (selectionChange)="selectColumns($event)" [selections]="selectedColumns">
-                    <span naturalColumnsPickerColumn="name">Nom</span>
-                    <span naturalColumnsPickerColumn="creationDate">Créé le</span>
-                    <span naturalColumnsPickerColumn="updateDate">Modifié le</span>
-                    <span naturalColumnsPickerColumn="membership">Membre des artisans</span>
-                    <span naturalColumnsPickerColumn="email">Email</span>
-                    <span naturalColumnsPickerColumn="phone">Téléphone</span>
+                <natural-columns-picker
+                    [availableColumns]="availableColumns"
+                    [selections]="selectedColumns"
+                    (selectionChange)="selectColumns($event)"
+                >
                 </natural-columns-picker>
             </natural-search>
         </div>

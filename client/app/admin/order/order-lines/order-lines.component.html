@@ -7,14 +7,12 @@
                 [multipleGroups]="true"
                 [selections]="naturalSearchSelections"
                 fxFlex
-            >
-                <natural-columns-picker
-                    [availableColumns]="availableColumns"
-                    [selections]="selectedColumns"
-                    (selectionChange)="selectColumns($event)"
-                >
-                </natural-columns-picker>
-            </natural-search>
+            />
+            <natural-columns-picker
+                [availableColumns]="availableColumns"
+                [selections]="selectedColumns"
+                (selectionChange)="selectColumns($event)"
+            />
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">

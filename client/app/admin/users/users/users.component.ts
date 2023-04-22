@@ -3,6 +3,7 @@ import {Component, Inject, Injector, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {
     AvailableColumn,
+    Button,
     copyToClipboard,
     NaturalAbstractList,
     NaturalQueryVariablesManager,
@@ -30,6 +31,26 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         {id: 'phone', label: 'Téléphone', checked: false},
     ];
 
+    public readonly buttons: Button[] = [
+        {
+            label: 'Copier...',
+            icon: 'email',
+            click: (button: Button): void => this.download(button),
+            buttons: [
+                {
+                    label: 'Copier les e-mails',
+                    disabled: true,
+                    click: (): void => this.copy(this.usersEmail),
+                },
+                {
+                    label: 'Copier les e-mails et les noms',
+                    disabled: true,
+                    click: (): void => this.copy(this.usersEmailAndName),
+                },
+            ],
+        },
+    ];
+
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;
 
@@ -53,12 +74,14 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         super.search(naturalSearchSelections);
     }
 
-    public download(): void {
+    private download(button: Button): void {
         const qvm = new NaturalQueryVariablesManager(this.variablesManager);
         qvm.set('pagination', {pagination: {pageIndex: 0, pageSize: 9999}});
         qvm.set('emailFilter', {
             filter: {groups: [{conditions: [{email: {null: {not: true}}}]}]},
         } satisfies UsersVariables);
+
+        button.buttons?.forEach(subButton => (subButton.disabled = true));
 
         this.apollo
             .query<EmailUsers, EmailUsersVariables>({
@@ -70,10 +93,14 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
                 this.usersEmailAndName = result.data['users'].items
                     .map(u => [u.email, u.firstName, u.lastName].join(';'))
                     .join('\n');
+
+                button.buttons?.forEach(subButton => (subButton.disabled = false));
             });
     }
 
-    public copy(text: string): void {
-        copyToClipboard(this.document, text);
+    private copy(text: string | null): void {
+        if (text) {
+            copyToClipboard(this.document, text);
+        }
     }
 }

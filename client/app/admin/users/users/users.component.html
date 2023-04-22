@@ -1,8 +1,14 @@
 <div *ngIf="dataSource" fxLayout="column">
-    <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <div fxLayout="row">
+        <div class="mat-h1 no-margin" fxFlex>
             {{ routeData?.seo.title }}
         </div>
+        <natural-columns-picker
+            [availableColumns]="availableColumns"
+            [selections]="selectedColumns"
+            (selectionChange)="selectColumns($event)"
+            [buttons]="buttons"
+        />
     </div>
 
     <div fxLayout="column">
@@ -13,31 +19,7 @@
                 [multipleGroups]="true"
                 [selections]="naturalSearchSelections"
                 fxFlex
-            >
-                <button (click)="download()" *ngIf="!usersEmail" mat-icon-button>
-                    <mat-icon naturalIcon="email"></mat-icon>
-                </button>
-
-                <button (click)="copy(usersEmail)" *ngIf="usersEmail" mat-icon-button matTooltip="Copier les e-mails">
-                    <mat-icon naturalIcon="alternate_email"></mat-icon>
-                </button>
-
-                <button
-                    (click)="copy(usersEmailAndName)"
-                    *ngIf="usersEmailAndName"
-                    mat-icon-button
-                    matTooltip="Copier les e-mails et les noms"
-                >
-                    <mat-icon naturalIcon="file_copy"></mat-icon>
-                </button>
-
-                <natural-columns-picker
-                    [availableColumns]="availableColumns"
-                    [selections]="selectedColumns"
-                    (selectionChange)="selectColumns($event)"
-                >
-                </natural-columns-picker>
-            </natural-search>
+            />
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">

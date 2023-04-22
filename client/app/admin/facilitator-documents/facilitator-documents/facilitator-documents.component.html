@@ -1,6 +1,6 @@
 <div *ngIf="dataSource" fxLayout="column">
-    <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <div fxLayout="row">
+        <div class="mat-h1 no-margin" fxFlex>
             {{ routeData?.seo.title }}
         </div>
     </div>
@@ -13,8 +13,7 @@
                 [multipleGroups]="true"
                 [selections]="naturalSearchSelections"
                 fxFlex
-            >
-            </natural-search>
+            />
         </div>
 
         <div [fxShow]="dataSource.data?.length > 0 || false" class="responsive-table">

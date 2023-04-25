@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Mutation;
 
-use Application\Model\User;
-use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
 use Ecodev\Felix\Api\Field\FieldInterface;
 use Ecodev\Felix\Api\Scalar\EmailType;

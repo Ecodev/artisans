@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait HasCode
 {
     /**
      * @var null|string
-     *
-     * @ORM\Column(type="string", length=25, nullable=true, unique=true)
      */
+    #[ORM\Column(type: 'string', length: 25, nullable: true, unique: true)]
     private $code;
 
     /**

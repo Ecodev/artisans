@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
-use Application\Model\AbstractModel;
 use Application\Model\Organization;
 use Application\Model\Product;
 use Application\Model\User;

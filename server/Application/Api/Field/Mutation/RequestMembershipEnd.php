@@ -6,7 +6,6 @@ namespace Application\Api\Field\Mutation;
 
 use Application\DBAL\Types\MembershipType;
 use Application\Model\User;
-use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
 use Ecodev\Felix\Api\Exception;
 use Ecodev\Felix\Api\Field\FieldInterface;

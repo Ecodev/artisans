@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\OrderRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasAutomaticBalance;
 use Application\Traits\HasBalanceInterface;
@@ -11,15 +12,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasInternalRemarks;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 use Money\Money;
 
 /**
  * An order made by a users.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\OrderRepository")
- * @ORM\Table(name="`order`")
  */
+#[ORM\Table('`order`')]
+#[ORM\Entity(OrderRepository::class)]
 class Order extends AbstractModel implements HasBalanceInterface
 {
     final public const STATUS_PENDING = 'pending';
@@ -30,21 +30,16 @@ class Order extends AbstractModel implements HasBalanceInterface
     use HasAutomaticBalance;
     use HasInternalRemarks;
 
-    /**
-     * @ORM\Column(type="OrderStatus", options={"default" = Order::STATUS_PENDING})
-     */
+    #[ORM\Column(type: 'OrderStatus', options: ['default' => self::STATUS_PENDING])]
     private string $status = self::STATUS_PENDING;
 
     /**
      * @var Collection<OrderLine>
-     *
-     * @ORM\OneToMany(targetEntity="OrderLine", mappedBy="order")
      */
+    #[ORM\OneToMany(targetEntity: OrderLine::class, mappedBy: 'order')]
     private Collection $orderLines;
 
-    /**
-     * @ORM\Column(type="PaymentMethod")
-     */
+    #[ORM\Column(type: 'PaymentMethod')]
     private string $paymentMethod;
 
     /**
@@ -81,17 +76,13 @@ class Order extends AbstractModel implements HasBalanceInterface
         return $this->orderLines;
     }
 
-    /**
-     * @API\Field(type="OrderStatus")
-     */
+    #[API\Field(type: 'OrderStatus')]
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @API\Input(type="OrderStatusType")
-     */
+    #[API\Input(type: 'OrderStatusType')]
     public function setStatus(string $status): void
     {
         // If we change from non-confirmed to confirmed, then give temporary access (until explicit import of users)
@@ -105,17 +96,13 @@ class Order extends AbstractModel implements HasBalanceInterface
         $this->status = $status;
     }
 
-    /**
-     * @API\Field(type="PaymentMethod")
-     */
+    #[API\Field(type: 'PaymentMethod')]
     public function getPaymentMethod(): string
     {
         return $this->paymentMethod;
     }
 
-    /**
-     * @API\Input(type="PaymentMethod")
-     */
+    #[API\Input(type: 'PaymentMethod')]
     public function setPaymentMethod(string $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
@@ -123,9 +110,8 @@ class Order extends AbstractModel implements HasBalanceInterface
 
     /**
      * Return whether there is at least one subscription in the order.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function hasSubscription(): bool
     {
         /** @var OrderLine $line */

@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Application\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 
 trait HasQuantity
 {
     /**
      * @var int
-     *
-     * @ORM\Column(type="smallint",  options={"unsigned" = true, "default" = 0})
      */
+    #[ORM\Column(type: 'smallint', options: ['unsigned' => true, 'default' => 0])]
     private $quantity = 0;
 
     /**
@@ -26,9 +25,8 @@ trait HasQuantity
 
     /**
      * Quantity ordered.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;

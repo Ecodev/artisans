@@ -7,7 +7,6 @@ namespace ApplicationTest\Repository;
 use Application\Model\Image;
 use Application\Model\Product;
 use Application\Model\User;
-use Application\Repository\ImageRepository;
 use Ecodev\Felix\Service\AbstractDatabase;
 
 class ImageRepositoryTest extends AbstractRepositoryTest

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\OrganizationRepository;
 use Application\Traits\HasSubscriptionLastReview;
 use Application\Traits\IsImportable;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,12 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
  * When a user is created with a matching email, then he will inherit access from that organization.
  *
  * This only concern digital version, never paper.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\OrganizationRepository")
- * @ORM\Table(uniqueConstraints={
- *     @ORM\UniqueConstraint(name="unique_pattern", columns={"pattern"}, options={"lengths" = {768}}),
- * })
  */
+#[ORM\UniqueConstraint(name: 'unique_pattern', columns: ['pattern'], options: ['lengths' => [768]])]
+#[ORM\Entity(OrganizationRepository::class)]
 class Organization extends AbstractModel
 {
     use HasSubscriptionLastReview;
@@ -28,9 +26,8 @@ class Organization extends AbstractModel
 
     /**
      * A regexp pattern that match email address.
-     *
-     * @ORM\Column(type="text")
      */
+    #[ORM\Column(type: 'text')]
     private string $pattern;
 
     public function __construct()

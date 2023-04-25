@@ -6,7 +6,6 @@ namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
 use Application\Model\User;
-use Application\Repository\UserRepository;
 use Application\Service\MessageQueuer;
 use Ecodev\Felix\Api\Field\FieldInterface;
 use Ecodev\Felix\Service\Mailer;

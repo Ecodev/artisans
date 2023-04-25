@@ -4,79 +4,58 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Api\Input\Sorting\Illustration;
+use Application\Repository\ProductRepository;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 use InvalidArgumentException;
 
 /**
  * An item that can be booked by a user.
- *
- * @ORM\Entity(repositoryClass="\Application\Repository\ProductRepository")
- * @API\Sorting({
- *     "Application\Api\Input\Sorting\Illustration"
- * })
  */
+#[API\Sorting(Illustration::class)]
+#[ORM\Entity(ProductRepository::class)]
 class Product extends AbstractProduct
 {
-    /**
-     * @ORM\Column(type="smallint", nullable=true, options={"unsigned" = true})
-     */
+    #[ORM\Column(type: 'smallint', nullable: true, options: ['unsigned' => true])]
     private ?int $readingDuration = null;
 
-    /**
-     * @ORM\Column(type="date", nullable=true)
-     */
+    #[ORM\Column(type: 'date', nullable: true)]
     private ?Date $releaseDate = null;
 
-    /**
-     * @ORM\Column(type="smallint", nullable=true, unique=true, options={"unsigned" = true})
-     */
+    #[ORM\Column(type: 'smallint', nullable: true, unique: true, options: ['unsigned' => true])]
     private ?int $reviewNumber = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
+    #[ORM\OneToOne(targetEntity: File::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?File $file = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Product")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(onDelete="CASCADE")
-     * })
-     */
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
+    #[ORM\ManyToOne(targetEntity: self::class)]
     private ?Product $review = null;
 
     /**
      * @var Collection<ProductTag>
-     *
-     * @ORM\ManyToMany(targetEntity="ProductTag", mappedBy="products")
      */
+    #[ORM\ManyToMany(targetEntity: ProductTag::class, mappedBy: 'products')]
     private Collection $productTags;
 
     /**
      * @var Collection<Product>
-     *
-     * @ORM\ManyToMany(targetEntity="Product")
      */
+    #[ORM\ManyToMany(targetEntity: self::class)]
     private Collection $relatedProducts;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $isHighlighted = false;
 
-    /**
-     * @ORM\Column(type="text", length=65535)
-     */
+    #[ORM\Column(type: 'text', length: 65535)]
     private string $content = '';
 
-    /**
-     * @ORM\Column(type="smallint", options={"default" = 0})
-     */
+    #[ORM\Column(type: 'smallint', options: ['default' => 0])]
     private int $sorting = 0;
 
     public function __construct(string $name = '')
@@ -163,9 +142,8 @@ class Product extends AbstractProduct
 
     /**
      * Get related products.
-     *
-     * @API\Field(type="Product[]")
      */
+    #[API\Field(type: 'Product[]')]
     public function getRelatedProducts(): Collection
     {
         return $this->relatedProducts;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\ProductTagRepository;
 use Application\Traits\HasColor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,12 +13,9 @@ use Ecodev\Felix\Model\Traits\HasName;
 
 /**
  * A type of product.
- *
- * @ORM\Entity(repositoryClass="\Application\Repository\ProductTagRepository")
- * @ORM\Table(uniqueConstraints={
- *     @ORM\UniqueConstraint(name="unique_name", columns={"name"})
- * })
  */
+#[ORM\UniqueConstraint(name: 'unique_name', columns: ['name'])]
+#[ORM\Entity(ProductTagRepository::class)]
 class ProductTag extends AbstractModel
 {
     use HasColor;
@@ -25,9 +23,8 @@ class ProductTag extends AbstractModel
 
     /**
      * @var Collection<Product>
-     *
-     * @ORM\ManyToMany(targetEntity="Product", inversedBy="productTags")
      */
+    #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'productTags')]
     private Collection $products;
 
     public function __construct()

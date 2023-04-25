@@ -4,27 +4,23 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\FacilitatorDocumentRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasName;
 
 /**
  * An item that can be booked by a user.
- *
- * @ORM\Entity(repositoryClass="\Application\Repository\FacilitatorDocumentRepository")
  */
+#[ORM\Entity(FacilitatorDocumentRepository::class)]
 class FacilitatorDocument extends AbstractModel
 {
     use HasName;
 
-    /**
-     * @ORM\OneToOne(targetEntity="File", orphanRemoval=true)
-     * @ORM\JoinColumn(onDelete="SET NULL")
-     */
+    #[ORM\OneToOne(targetEntity: File::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     private ?File $file = null;
 
-    /**
-     * @ORM\Column(type="string", length=191)
-     */
+    #[ORM\Column(type: 'string', length: 191)]
     private string $category = '';
 
     public function getFile(): ?File

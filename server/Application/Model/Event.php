@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\EventRepository;
 use Application\Traits\HasDate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,9 +13,8 @@ use Ecodev\Felix\Model\Traits\HasName;
 
 /**
  * An event.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\EventRepository")
  */
+#[ORM\Entity(EventRepository::class)]
 class Event extends AbstractModel
 {
     use HasDate;
@@ -22,9 +22,8 @@ class Event extends AbstractModel
 
     /**
      * @var Collection<Comment>
-     *
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
      */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'event')]
     private Collection $comments;
 
     public function __construct()
@@ -32,9 +31,7 @@ class Event extends AbstractModel
         $this->comments = new ArrayCollection();
     }
 
-    /**
-     * @ORM\Column(type="string", length=191)
-     */
+    #[ORM\Column(type: 'string', length: 191)]
     private string $place;
 
     /**
@@ -55,9 +52,7 @@ class Event extends AbstractModel
         return (string) $this->place;
     }
 
-    /**
-     * @ORM\Column(type="string", length=191)
-     */
+    #[ORM\Column(type: 'string', length: 191)]
     private string $type;
 
     /**

@@ -10,14 +10,13 @@ use Application\Traits\HasRichTextDescription;
 use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasInternalRemarks;
 use Ecodev\Felix\Model\Traits\HasName;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 use Money\Money;
 
 /**
  * An item that can be booked by a user.
- *
- * @ORM\MappedSuperclass
  */
+#[ORM\MappedSuperclass]
 abstract class AbstractProduct extends AbstractModel
 {
     use HasCode;
@@ -26,31 +25,21 @@ abstract class AbstractProduct extends AbstractModel
     use HasProductType;
     use HasRichTextDescription;
 
-    /**
-     * @ORM\Column(type="CHF", options={"default" = "0"})
-     */
+    #[ORM\Column(type: 'CHF', options: ['default' => 0])]
     private Money $pricePerUnitCHF;
 
-    /**
-     * @ORM\Column(type="EUR", options={"default" = "0"})
-     */
+    #[ORM\Column(type: 'EUR', options: ['default' => 0])]
     private Money $pricePerUnitEUR;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 1})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 1])]
     private bool $isActive = true;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
-     */
+    #[ORM\OneToOne(targetEntity: Image::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(name: 'image_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?Image $image = null;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Image", orphanRemoval=true)
-     * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", onDelete="CASCADE")
-     */
+    #[ORM\OneToOne(targetEntity: Image::class, orphanRemoval: true)]
+    #[ORM\JoinColumn(name: 'illustration_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?Image $illustration = null;
 
     public function __construct(string $name = '')
@@ -60,33 +49,25 @@ abstract class AbstractProduct extends AbstractModel
         $this->pricePerUnitEUR = Money::EUR(0);
     }
 
-    /**
-     * @API\Field(type="CHF")
-     */
+    #[API\Field(type: 'CHF')]
     public function getPricePerUnitCHF(): Money
     {
         return $this->pricePerUnitCHF;
     }
 
-    /**
-     * @API\Input(type="CHF")
-     */
+    #[API\Input(type: 'CHF')]
     public function setPricePerUnitCHF(Money $pricePerUnitCHF): void
     {
         $this->pricePerUnitCHF = $pricePerUnitCHF;
     }
 
-    /**
-     * @API\Field(type="EUR")
-     */
+    #[API\Field(type: 'EUR')]
     public function getPricePerUnitEUR(): Money
     {
         return $this->pricePerUnitEUR;
     }
 
-    /**
-     * @API\Input(type="EUR")
-     */
+    #[API\Input(type: 'EUR')]
     public function setPricePerUnitEUR(Money $pricePerUnitEUR): void
     {
         $this->pricePerUnitEUR = $pricePerUnitEUR;

@@ -7,18 +7,16 @@ namespace Application\Traits;
 use Application\Model\Product;
 use Application\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use GraphQL\Doctrine\Attribute as API;
 use InvalidArgumentException;
 
 trait HasSubscriptionLastReview
 {
     /**
      * @var null|Product
-     *
-     * @ORM\ManyToOne(targetEntity="Product")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     * })
      */
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     private $subscriptionLastReview;
 
     /**
@@ -34,9 +32,8 @@ trait HasSubscriptionLastReview
 
     /**
      * Set last review available through a subscription.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setSubscriptionLastReview(?Product $subscriptionLastReview): void
     {
         if ($subscriptionLastReview && !$subscriptionLastReview->getReviewNumber()) {

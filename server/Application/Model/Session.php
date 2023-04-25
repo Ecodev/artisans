@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\SessionRepository;
 use Application\Traits\HasRichTextDescription;
 use Cake\Chronos\Date;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -14,73 +15,56 @@ use Ecodev\Felix\Model\Traits\HasName;
 
 /**
  * A session that a human can physically go to.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\SessionRepository")
  */
+#[ORM\Entity(SessionRepository::class)]
 class Session extends AbstractModel
 {
     use HasInternalRemarks;
     use HasName;
     use HasRichTextDescription;
 
-    /**
-     * @ORM\Column(type="string", options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
     private string $region = '';
 
-    /**
-     * @ORM\Column(type="string", options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
     private string $locality = '';
 
-    /**
-     * @ORM\Column(type="string", options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
     private string $street = '';
 
-    /**
-     * @ORM\Column(type="string", options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
     private string $mailingList = '';
 
-    /**
-     * @ORM\Column(type="string", options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
     private string $price = '';
 
-    /**
-     * @ORM\Column(type="string", options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', options: ['default' => ''])]
     private string $availability = '';
 
     /**
      * Used for display.
      *
      * @var string[]
-     *
-     * @ORM\Column(type="json")
      */
+    #[ORM\Column(type: 'json')]
     private array $dates = [];
 
     /**
      * Used for filter + sorting. Represents the first date.
-     *
-     * @ORM\Column(type="date")
      */
+    #[ORM\Column(type: 'date')]
     private Date $startDate;
 
     /**
      * Used for filter + sorting. Represents the first date.
-     *
-     * @ORM\Column(type="date")
      */
+    #[ORM\Column(type: 'date')]
     private Date $endDate;
 
     /**
      * @var Collection<User>
-     *
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="sessions")
      */
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sessions')]
     private Collection $facilitators;
 
     public function __construct()

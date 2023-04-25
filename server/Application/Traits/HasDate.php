@@ -6,13 +6,14 @@ namespace Application\Traits;
 
 use Cake\Chronos\Chronos;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait HasDate
 {
     /**
      * @var Chronos
-     *
-     * @ORM\Column(type="datetime")
      */
+    #[ORM\Column(type: 'datetime')]
     private $date;
 
     public function getDate(): Chronos

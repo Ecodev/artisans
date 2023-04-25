@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Model;
 
 use Application\DBAL\Types\ProductTypeType;
+use Application\Repository\OrderLineRepository;
 use Application\Repository\UserRepository;
 use Application\Traits\HasBalance;
 use Application\Traits\HasBalanceInterface;
@@ -12,13 +13,12 @@ use Application\Traits\HasProductType;
 use Application\Traits\HasQuantity;
 use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasName;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 
 /**
  * A single line in the shopping cart when making an order.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\OrderLineRepository")
  */
+#[ORM\Entity(OrderLineRepository::class)]
 class OrderLine extends AbstractModel implements HasBalanceInterface
 {
     use HasBalance;
@@ -30,42 +30,27 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      * Additional emails for subscription for a company.
      *
      * @var string[]
-     *
-     * @ORM\Column(type="json", options={"default" = "[]"})
      */
+    #[ORM\Column(type: 'json', options: ['default' => '[]'])]
     private array $additionalEmails = [];
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Order", inversedBy="orderLines")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     * })
-     */
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderLines')]
     private ?Order $order = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Product")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     * })
-     */
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     private ?Product $product = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Subscription")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
-     * })
-     */
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\ManyToOne(targetEntity: Subscription::class)]
     private ?Subscription $subscription = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @API\Exclude
-     */
+    #[API\Exclude]
     public function setOrder(Order $order): void
     {
         if ($this->order) {

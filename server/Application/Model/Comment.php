@@ -4,24 +4,20 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\CommentRepository;
 use Application\Traits\HasRichTextDescription;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * A comment.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\CommentRepository")
  */
+#[ORM\Entity(CommentRepository::class)]
 class Comment extends AbstractModel
 {
     use HasRichTextDescription;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
-     * })
-     */
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'comments')]
     private ?Event $event = null;
 
     /**
@@ -48,12 +44,8 @@ class Comment extends AbstractModel
         return $this->event;
     }
 
-    /**
-     * @ORM\ManyToOne(targetEntity="News", inversedBy="comments")
-     * @ORM\JoinColumns({
-     *     @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
-     * })
-     */
+    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    #[ORM\ManyToOne(targetEntity: News::class, inversedBy: 'comments')]
     private ?News $news = null;
 
     /**

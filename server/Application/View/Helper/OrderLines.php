@@ -7,7 +7,6 @@ namespace Application\View\Helper;
 use Application\DBAL\Types\ProductTypeType;
 use Application\Model\Order;
 use Application\Model\OrderLine;
-use Application\Utility;
 use Laminas\View\Helper\AbstractHelper;
 
 class OrderLines extends AbstractHelper

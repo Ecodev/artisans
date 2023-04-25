@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Repository\NewsRepository;
 use Application\Traits\HasDate;
 use Application\Traits\HasRichTextDescription;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,30 +14,24 @@ use Ecodev\Felix\Model\Traits\HasName;
 
 /**
  * A news.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\NewsRepository")
  */
+#[ORM\Entity(NewsRepository::class)]
 class News extends AbstractModel
 {
     use HasDate;
     use HasName;
     use HasRichTextDescription;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $isActive = false;
 
-    /**
-     * @ORM\Column(type="text", length=65535, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'text', length: 65535, options: ['default' => ''])]
     private string $content = '';
 
     /**
      * @var Collection<Comment>
-     *
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="news")
      */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'news')]
     private Collection $comments;
 
     public function __construct()

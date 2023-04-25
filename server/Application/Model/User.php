@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Api\Input\Operator\RegexpOperatorType;
 use Application\DBAL\Types\MembershipType;
 use Application\Repository\LogRepository;
 use Application\Repository\UserRepository;
@@ -18,20 +19,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Api\Exception;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\Traits\HasPassword;
-use GraphQL\Doctrine\Annotation as API;
+use GraphQL\Doctrine\Attribute as API;
 
 /**
  * User.
- *
- * @ORM\Entity(repositoryClass="Application\Repository\UserRepository")
- * @ORM\HasLifecycleCallbacks
- * @ORM\AssociationOverrides({
- *     @ORM\AssociationOverride(name="owner", inversedBy="users")
- * })
- * @API\Filters({
- *     @API\Filter(field="custom", operator="Application\Api\Input\Operator\RegexpOperatorType", type="string"),
- * })
  */
+#[API\Filter(field: 'custom', operator: RegexpOperatorType::class, type: 'string')]
+#[ORM\Entity(UserRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\AssociationOverrides([new ORM\AssociationOverride(name: 'owner', inversedBy: 'users')])]
 class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {
     final public const ROLE_ANONYMOUS = 'anonymous';
@@ -73,63 +69,43 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
         return self::$currentUser;
     }
 
-    /**
-     * @ORM\Column(type="string", length=191, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 191, unique: true)]
     private $email;
 
-    /**
-     * @ORM\Column(type="UserRole", options={"default" = User::ROLE_MEMBER})
-     */
+    #[ORM\Column(type: 'UserRole', options: ['default' => self::ROLE_MEMBER])]
     private string $role = self::ROLE_MEMBER;
 
-    /**
-     * @ORM\Column(type="Membership", options={"default" = MembershipType::NONE})
-     */
+    #[ORM\Column(type: 'Membership', options: ['default' => MembershipType::NONE])]
     private string $membership = MembershipType::NONE;
 
-    /**
-     * @ORM\Column(type="ProductType", nullable=true)
-     */
+    #[ORM\Column(type: 'ProductType', nullable: true)]
     private ?string $subscriptionType = null;
 
-    /**
-     * @ORM\Column(type="string", length=25, options={"default" = ""})
-     */
+    #[ORM\Column(type: 'string', length: 25, options: ['default' => ''])]
     private string $phone = '';
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $webTemporaryAccess = false;
 
-    /**
-     * @ORM\Column(type="boolean", options={"default" = 0})
-     */
+    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $isPublicFacilitator = false;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?Chronos $firstLogin = null;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private ?Chronos $lastLogin = null;
 
     /**
      * @var Collection<Session>
-     *
-     * @ORM\ManyToMany(targetEntity="Session", mappedBy="facilitators")
      */
+    #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'facilitators')]
     private Collection $sessions;
 
     /**
      * @var Collection<User>
-     *
-     * @ORM\OneToMany(targetEntity="User", mappedBy="owner")
      */
+    #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'owner')]
     private Collection $users;
 
     /**
@@ -153,10 +129,9 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     /**
      * Set email.
      *
-     * @API\Input(type="Email")
-     *
      * @param string $email
      */
+    #[API\Input(type: 'Email')]
     public function setEmail(?string $email): void
     {
         $this->email = $email;
@@ -164,9 +139,8 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Get email.
-     *
-     * @API\Field(type="Email")
      */
+    #[API\Field(type: 'Email')]
     public function getEmail(): ?string
     {
         return $this->email;
@@ -174,9 +148,8 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Use email as technical identifier of user.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function getLogin(): ?string
     {
         return $this->getEmail();
@@ -184,9 +157,8 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Get the user role.
-     *
-     * @API\Field(type="UserRole")
      */
+    #[API\Field(type: 'UserRole')]
     public function getRole(): string
     {
         return $this->role;
@@ -194,9 +166,8 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Sets the user role.
-     *
-     * @API\Input(type="UserRole")
      */
+    #[API\Input(type: 'UserRole')]
     public function setRole(string $role): void
     {
         if (!Role::canUpdate(self::getCurrent(), $this->role, $role)) {
@@ -251,9 +222,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
         return $this->membership;
     }
 
-    /**
-     * @API\Exclude
-     */
+    #[API\Exclude]
     public function setMembership(string $membership): void
     {
         $this->membership = $membership;
@@ -264,9 +233,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
         return $this->webTemporaryAccess;
     }
 
-    /**
-     * @API\Exclude
-     */
+    #[API\Exclude]
     public function setWebTemporaryAccess(bool $webTemporaryAccess): void
     {
         $this->webTemporaryAccess = $webTemporaryAccess;
@@ -322,9 +289,8 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Set subscription type.
-     *
-     * @API\Exclude
      */
+    #[API\Exclude]
     public function setSubscriptionType(?string $subscriptionType): void
     {
         $this->subscriptionType = $subscriptionType;
@@ -332,9 +298,8 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
 
     /**
      * Get subscription type.
-     *
-     * @API\Field(type="?ProductType")
      */
+    #[API\Field(type: '?ProductType')]
     public function getSubscriptionType(): ?string
     {
         return $this->subscriptionType;

@@ -209,6 +209,14 @@ export class NaturalSearchFacetsService {
                     step: 0.01,
                 },
             } satisfies DropdownFacet<TypeNumberConfiguration>,
+            {
+                display: 'Statut',
+                field: 'status',
+                component: TypeSelectComponent,
+                configuration: {
+                    items: this.enumService.get('OrderStatus'),
+                },
+            } satisfies DropdownFacet<TypeSelectConfiguration>,
             this.owner,
             this.creationDate,
             this.updateDate,

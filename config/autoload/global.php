@@ -8,6 +8,12 @@ declare(strict_types=1);
  */
 return [
     'hostname' => 'artisans.lan',
+    'datatrans' => [
+        'merchantId' => '',
+        'key' => 'secret-HMAC-key',
+        'production' => false,
+        'endpoint' => 'https://pay.sandbox.datatrans.com',
+    ],
     'email' => [
         'from' => 'noreply@artisans.lan',
         'toOverride' => null,

@@ -6,6 +6,7 @@ $container = require_once 'server/cli.php';
 $config = $container->get('config');
 
 $clientKeys = [
+    'datatrans',
 ];
 
 $clientConfig = array_intersect_key($config, array_flip($clientKeys));

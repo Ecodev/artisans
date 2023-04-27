@@ -5,7 +5,6 @@ import {NaturalAlertService} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
 import {UserService} from '../../../../../admin/users/services/user.service';
 import {CreateOrder_createOrder, PaymentMethod} from '../../../../../shared/generated-types';
-import {ConfigService, FrontEndConfig} from '../../../../../shared/services/config.service';
 import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
 import {NavigationService} from '../../../../services/navigation.service';
 import {Cart} from '../../classes/cart';
@@ -13,6 +12,7 @@ import {CartService} from '../../services/cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';
 import {DatatransService} from '../../services/datatrans.service';
 import {Big} from 'big.js';
+import {localConfig} from '../../../../../shared/generated-config';
 
 @Component({
     selector: 'app-create-order',
@@ -43,11 +43,6 @@ export class CreateOrderComponent implements OnInit {
     /**
      * For template usage
      */
-    public CartService = CartService;
-
-    /**
-     * For template usage
-     */
     public PaymentMethod = PaymentMethod;
 
     /**
@@ -55,11 +50,6 @@ export class CreateOrderComponent implements OnInit {
      * We could use dedicated "empty" component but this way we spare some app weight. We can as well use previous form values.
      */
     public showConfirmationMessage = false;
-
-    /**
-     * Banking payment config
-     */
-    private paymentConfig: FrontEndConfig | null = null;
 
     /**
      * True when creating order has been sent
@@ -72,16 +62,11 @@ export class CreateOrderComponent implements OnInit {
         public readonly router: Router,
         private readonly route: ActivatedRoute,
         public readonly userService: UserService,
-        configService: ConfigService,
         public readonly currencyService: CurrencyService,
         private readonly cartCollectionService: CartCollectionService,
         public readonly navigationService: NavigationService,
         private readonly datatransService: DatatransService,
-    ) {
-        configService.get().subscribe(paymentConfig => {
-            this.paymentConfig = paymentConfig;
-        });
-    }
+    ) {}
 
     public ngOnInit(): void {
         const cart = this.cartCollectionService.getById(+this.route.snapshot.params['cartId']);
@@ -164,17 +149,13 @@ export class CreateOrderComponent implements OnInit {
     }
 
     private datatrans(order: CreateOrder_createOrder, amount: number, currency: Currency): void {
-        if (!this.paymentConfig) {
-            return;
-        }
-
         // Convert the decimal amount in cents
         const roundedAmount = Big(amount).times(100).toFixed(0);
 
         const sign = this.datatransService.getHexaSHA256Signature(
             '',
-            this.paymentConfig.datatrans.key,
-            this.paymentConfig.datatrans.merchantId,
+            localConfig.datatrans.key,
+            localConfig.datatrans.merchantId,
             roundedAmount,
             currency,
             order.id,
@@ -182,13 +163,13 @@ export class CreateOrderComponent implements OnInit {
 
         this.datatransService.startPayment({
             params: {
-                production: this.paymentConfig.datatrans.production,
-                merchantId: this.paymentConfig.datatrans.merchantId,
+                production: localConfig.datatrans.production,
+                merchantId: localConfig.datatrans.merchantId,
                 sign: sign,
                 refno: order.id,
                 amount: roundedAmount,
                 currency: currency,
-                endpoint: this.paymentConfig.datatrans.endpoint,
+                endpoint: localConfig.datatrans.endpoint,
             },
             success: () => {
                 this.confirmationRedirect();

@@ -12,12 +12,14 @@ import {
     NaturalStorage,
     unique,
 } from '@ecodev/natural';
-import {fromEvent, Observable, of, Subject, switchMap} from 'rxjs';
+import {fromEvent, Observable, of, Subject, switchMap, tap} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
     AddToMailingList,
     AddToMailingListVariables,
+    ConfirmRegistration,
+    ConfirmRegistrationVariables,
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
@@ -163,19 +165,25 @@ export class UserService
                     return;
                 }
 
-                this.fetchViewer().subscribe(viewer => {
-                    if (viewer) {
-                        this.apollo.client.resetStore().then(() => {
-                            this.postLogin(viewer);
-
-                            // Navigate away from login page
-                            this.router.navigateByUrl('/');
-                        });
-                    } else {
-                        this.logout();
-                    }
-                });
+                this.refetchViewerAndGoToHome().subscribe();
             });
+    }
+
+    private refetchViewerAndGoToHome(homeUrl = '/'): Observable<unknown> {
+        return this.fetchViewer().pipe(
+            tap(viewer => {
+                if (viewer) {
+                    this.apollo.client.resetStore().then(() => {
+                        this.postLogin(viewer);
+
+                        // Navigate away from login page
+                        this.router.navigateByUrl(homeUrl);
+                    });
+                } else {
+                    this.logout();
+                }
+            }),
+        );
     }
 
     public login(loginData: LoginVariables): Observable<Login['login']> {
@@ -200,6 +208,21 @@ export class UserService
         });
 
         return subject;
+    }
+
+    public confirmRegistration(variables: ConfirmRegistrationVariables): Observable<unknown> {
+        const mutation = gql`
+            mutation ConfirmRegistration($token: Token!, $input: ConfirmRegistrationInput!) {
+                confirmRegistration(token: $token, input: $input)
+            }
+        `;
+
+        return this.apollo
+            .mutate<ConfirmRegistration, ConfirmRegistrationVariables>({
+                mutation: mutation,
+                variables: variables,
+            })
+            .pipe(switchMap(() => this.refetchViewerAndGoToHome('/mon-compte')));
     }
 
     private postLogin(viewer: CurrentUserForProfile_viewer): void {

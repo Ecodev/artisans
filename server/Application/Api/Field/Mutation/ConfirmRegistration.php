@@ -59,7 +59,7 @@ abstract class ConfirmRegistration implements FieldInterface
                 $user->initialize();
 
                 // Login
-                User::setCurrent($user);
+                Login::doLogin($session, $user);
 
                 _em()->flush();
 

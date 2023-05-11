@@ -1,4 +1,4 @@
-import {Apollo, gql} from 'apollo-angular';
+import {Apollo} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
 import {deliverableEmail, NaturalAlertService, relationsToIds} from '@ecodev/natural';
 import {pick} from 'lodash-es';
@@ -6,11 +6,8 @@ import {RegisterComponent} from './register.component';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
 import {UserByTokenResolve} from '../../../admin/users/user';
 import {ActivatedRoute, Router} from '@angular/router';
-import {
-    ConfirmRegistration,
-    ConfirmRegistrationVariables,
-    UserByToken_userByToken,
-} from '../../../shared/generated-types';
+import {ConfirmRegistrationVariables, UserByToken_userByToken} from '../../../shared/generated-types';
+import {UserService} from '../../../admin/users/services/user.service';
 
 @Component({
     selector: 'app-confirm',
@@ -24,6 +21,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
         fb: UntypedFormBuilder,
         router: Router,
         alertService: NaturalAlertService,
+        private readonly userService: UserService,
     ) {
         super(apollo, route, fb, router, alertService);
         this.step = 2;
@@ -54,11 +52,6 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
      */
     protected override doSubmit(): void {
         this.sending = true;
-        const mutation = gql`
-            mutation ConfirmRegistration($token: Token!, $input: ConfirmRegistrationInput!) {
-                confirmRegistration(token: $token, input: $input)
-            }
-        `;
 
         const fieldWhitelist = [
             'login',
@@ -73,24 +66,13 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
         ];
 
         const input = pick(relationsToIds(this.form.value), fieldWhitelist) as ConfirmRegistrationVariables['input'];
-        this.apollo
-            .mutate<ConfirmRegistration, ConfirmRegistrationVariables>({
-                mutation: mutation,
-                variables: {
-                    token: this.route.snapshot.params.token,
-                    input: input,
-                },
+        this.userService
+            .confirmRegistration({
+                token: this.route.snapshot.params.token,
+                input: input,
             })
             .subscribe({
-                next: () => {
-                    this.sending = false;
-
-                    const message =
-                        'Vous pouvez maintenant vous connecter avec le login et mot de passe que vous avez choisi';
-
-                    this.alertService.info(message, 5000);
-                    this.router.navigate(['/mon-compte']);
-                },
+                next: () => this.alertService.info("Merci d'avoir confirmé votre compte", 5000),
                 error: () => (this.sending = false),
             });
     }

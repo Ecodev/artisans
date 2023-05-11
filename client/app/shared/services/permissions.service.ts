@@ -1,58 +1,11 @@
-import {Apollo, gql} from 'apollo-angular';
+import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Literal} from '@ecodev/natural';
 import {isEqual} from 'lodash-es';
 import {BehaviorSubject, Observable, of, ReplaySubject} from 'rxjs';
 import {debounceTime, distinctUntilChanged, filter, skip, take} from 'rxjs/operators';
 import {Permissions, Permissions_permissions, Permissions_permissions_crud} from '../generated-types';
-
-const permissions = gql`
-    query Permissions {
-        permissions {
-            crud {
-                comment {
-                    create
-                }
-                configuration {
-                    create
-                }
-                event {
-                    create
-                }
-                image {
-                    create
-                }
-                message {
-                    create
-                }
-                news {
-                    create
-                }
-                organization {
-                    create
-                }
-                product {
-                    create
-                }
-                productTag {
-                    create
-                }
-                session {
-                    create
-                }
-                subscription {
-                    create
-                }
-                user {
-                    create
-                }
-                facilitatorDocument {
-                    create
-                }
-            }
-        }
-    }
-`;
+import {permissionsQuery} from './permissions.queries';
 
 interface Contexts {
     user: string | null;
@@ -89,7 +42,7 @@ export class PermissionsService {
             // Fetch global permissions
             apollo
                 .query<Permissions>({
-                    query: permissions,
+                    query: permissionsQuery,
                 })
                 .pipe(filter(result => !result.loading))
                 .subscribe(result => {

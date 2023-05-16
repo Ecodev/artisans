@@ -7,7 +7,7 @@ import {
     NormalizedCacheObject,
 } from '@apollo/client/core';
 import {onError} from '@apollo/client/link/error';
-import {hasFilesAndProcessDate, NaturalAlertService} from '@ecodev/natural';
+import {hasFilesAndProcessDate, NaturalAlertService, isMutation} from '@ecodev/natural';
 import {createUploadLink} from 'apollo-upload-client';
 import {NetworkActivityService} from '../services/network-activity.service';
 import {isPlatformBrowser} from '@angular/common';
@@ -67,7 +67,7 @@ function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloLink {
         credentials: 'include',
     };
 
-    // We must allow to connect to self-signed certificate for development environment
+    // We must allow connecting to self-signed certificate for development environment
     // Unfortunately, this is only possible to do it globally for the entire process, instead of specifically to our API endpoint
     // See https://github.com/apollographql/apollo-angular/issues/1354#issue-503860648
     if (hostname.match(/\.lan$/)) {
@@ -102,7 +102,7 @@ function createApolloLink(
 
     // If query has no file, batch it, otherwise upload only that query
     const httpLink = ApolloLink.split(
-        ({variables}) => hasFilesAndProcessDate(variables),
+        operation => hasFilesAndProcessDate(operation.variables) || isMutation(operation.query),
         uploadInterceptor.concat(createUploadLink(options)),
         httpBatchLink.create(options),
     );

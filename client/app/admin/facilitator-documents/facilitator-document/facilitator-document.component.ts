@@ -2,7 +2,7 @@ import {Component, Injector} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
-import {CreateFile_createFile} from '../../../shared/generated-types';
+import {CreateFile} from '../../../shared/generated-types';
 import {map, Observable, of, switchMap} from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<Facilita
         super('facilitatorDocument', facilitatorDocumentService, injector);
     }
 
-    public createFileAndLink(file: File): Observable<CreateFile_createFile> {
+    public createFileAndLink(file: File): Observable<CreateFile['createFile']> {
         return this.fileService.create({file}).pipe(
             switchMap(newFile => {
                 const id = this.data.model.id;

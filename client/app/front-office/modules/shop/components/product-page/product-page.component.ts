@@ -4,8 +4,8 @@ import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natur
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
 import {
-    CurrentUserForProfile_viewer,
-    Products_products_items,
+    CurrentUserForProfile,
+    Products,
     ProductsVariables,
     ProductType,
     PurchasesVariables,
@@ -46,7 +46,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
      * Combination of form controls of the page
      */
     public formGroup = new UntypedFormGroup({quantity: this.quantityForm});
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
 
     /**
      * Hide buy digital version if it has already been bought as it can be bought only once.
@@ -56,7 +56,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     /**
      * List of articles contained in current number
      */
-    public articles: Products_products_items[] = [];
+    public articles: Products['products']['items'][0][] = [];
 
     /**
      * Boolean that represents the sub-articles navigation menu visibility

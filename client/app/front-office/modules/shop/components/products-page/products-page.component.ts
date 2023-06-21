@@ -4,7 +4,7 @@ import {fromUrl, memorySessionStorageProvider, NaturalPersistenceService} from '
 import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
-import {Products_products_items} from '../../../../../shared/generated-types';
+import {Products} from '../../../../../shared/generated-types';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -52,7 +52,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     /**
      * Items to display
      */
-    public products: Products_products_items[] = [];
+    public products: Products['products']['items'][0][] = [];
 
     /**
      * Page main title
@@ -103,7 +103,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
         });
     }
 
-    public getDetailLink(product: Products_products_items): RouterLink['routerLink'] {
+    public getDetailLink(product: Products['products']['items'][0]): RouterLink['routerLink'] {
         return ['/larevuedurable', product.reviewNumber ? 'numero' : 'article', product.id];
     }
 }

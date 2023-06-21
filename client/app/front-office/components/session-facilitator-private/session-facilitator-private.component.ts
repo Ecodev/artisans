@@ -3,13 +3,7 @@ import {Literal, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {groupBy, sortBy} from 'lodash-es';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
 import {UserService} from '../../../admin/users/services/user.service';
-import {
-    SortingOrder,
-    UserRole,
-    Users_users_items,
-    UserSortingField,
-    UsersVariables,
-} from '../../../shared/generated-types';
+import {SortingOrder, UserRole, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-session-facilitator-private',
@@ -17,7 +11,7 @@ import {
     styleUrls: ['./session-facilitator-private.component.scss'],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
-    public facilitators: Users_users_items[] = [];
+    public facilitators: Users['users']['items'][0][] = [];
     public categories: Literal = {};
 
     public constructor(

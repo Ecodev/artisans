@@ -8,13 +8,7 @@ import {
     toNavigationParameters,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {
-    Import,
-    ImportVariables,
-    Users_users_items,
-    UserSortingField,
-    UsersVariables,
-} from '../../../shared/generated-types';
+import {Import, ImportVariables, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 
 @Component({
@@ -30,7 +24,7 @@ export class ImportComponent implements OnInit {
     public importing = false;
     public errors: string[] = [];
     public result: Import['import'] | null = null;
-    public users: Users_users_items[] = [];
+    public users: Users['users']['items'][0][] = [];
 
     public readonly params = toNavigationParameters([
         [

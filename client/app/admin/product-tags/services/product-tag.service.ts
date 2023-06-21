@@ -17,7 +17,6 @@ import {
     DeleteProductTags,
     DeleteProductTagsVariables,
     ProductTag,
-    ProductTag_productTag,
     ProductTagInput,
     ProductTags,
     ProductTagsVariables,
@@ -68,7 +67,7 @@ export class ProductTagService extends NaturalAbstractModelService<
         };
     }
 
-    public override getFormAsyncValidators(model: ProductTag_productTag): FormAsyncValidators {
+    public override getFormAsyncValidators(model: ProductTag['productTag']): FormAsyncValidators {
         return {
             name: [unique('name', model.id, this)],
         };

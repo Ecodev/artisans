@@ -13,7 +13,7 @@ import {
 import {differenceBy} from 'lodash-es';
 import {filter, finalize, takeUntil} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
-import {CurrentUserForProfile_viewer, UserRole} from '../shared/generated-types';
+import {CurrentUserForProfile, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
 import {MenuItem, NavigationService} from './services/navigation.service';
 
@@ -27,7 +27,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public searchTerm = '';
     public menuOpened = false;
 
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
     public readonly newsletterForm: UntypedFormGroup;
 
     /**

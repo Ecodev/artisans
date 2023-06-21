@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
-import {ProductTags_productTags_items, ProductTagsVariables} from '../../generated-types';
+import {ProductTags, ProductTagsVariables} from '../../generated-types';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class TagsNavigationComponent implements OnInit {
     /**
      * Items to list
      */
-    @Input() public items: ProductTags_productTags_items[] = [];
+    @Input() public items: ProductTags['productTags']['items'][0][] = [];
 
     /**
      * Service to use to get items
@@ -34,7 +34,7 @@ export class TagsNavigationComponent implements OnInit {
         }
     }
 
-    public getLink(item: ProductTags_productTags_items): RouterLink['routerLink'] {
+    public getLink(item: ProductTags['productTags']['items'][0]): RouterLink['routerLink'] {
         return [...this.linkBase, item.name];
     }
 }

@@ -7,14 +7,14 @@ import {ProductTagService} from '../../../admin/product-tags/services/product-ta
 import {ProductService} from '../../../admin/products/services/product.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
-    CurrentUserForProfile_viewer,
-    Events_events_items,
+    CurrentUserForProfile,
+    Events,
     EventSortingField,
     EventsVariables,
-    Newses_newses_items,
+    Newses,
     NewsesVariables,
     NewsSortingField,
-    Products_products_items,
+    Products,
     ProductSortingField,
     ProductsVariables,
     SortingOrder,
@@ -30,22 +30,22 @@ import {CartService} from '../../modules/cart/services/cart.service';
 export class HomepageComponent implements OnInit {
     public title = 'Les artisans de la transition';
 
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
 
     /**
      * Last newses
      */
-    public newses: Newses_newses_items[] = [];
+    public newses: Newses['newses']['items'][0][] = [];
 
     /**
      * Next events
      */
-    public events: Events_events_items[] = [];
+    public events: Events['events']['items'][0][] = [];
 
     /**
      * Currently active review
      */
-    public currentReview: Products_products_items | null = null;
+    public currentReview: Products['products']['items'][0] | null = null;
 
     public constructor(
         public readonly userService: UserService,

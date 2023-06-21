@@ -23,7 +23,6 @@ import {
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfile,
-    CurrentUserForProfile_viewer,
     DeleteUsers,
     DeleteUsersVariables,
     Login,
@@ -35,7 +34,6 @@ import {
     UpdateUser,
     UpdateUserVariables,
     User,
-    User_user,
     UserByToken,
     UserByTokenVariables,
     UserInput,
@@ -63,7 +61,7 @@ import {
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 import {DOCUMENT} from '@angular/common';
 
-export type UserLike = User_user | CurrentUserForProfile_viewer;
+export type UserLike = User['user'] | NonNullable<CurrentUserForProfile['viewer']>;
 
 @Injectable({
     providedIn: 'root',
@@ -136,7 +134,7 @@ export class UserService
         };
     }
 
-    public override getFormAsyncValidators(model: User_user): FormAsyncValidators {
+    public override getFormAsyncValidators(model: User['user']): FormAsyncValidators {
         return {
             email: [unique('email', model.id, this)],
         };
@@ -225,7 +223,7 @@ export class UserService
             .pipe(switchMap(() => this.refetchViewerAndGoToHome('/mon-compte')));
     }
 
-    private postLogin(viewer: CurrentUserForProfile_viewer): void {
+    private postLogin(viewer: NonNullable<CurrentUserForProfile['viewer']>): void {
         this.viewer.next(viewer);
 
         // Inject the freshly logged in user as the current user into Apollo data store
@@ -300,7 +298,7 @@ export class UserService
             );
     }
 
-    public getUserRolesAvailable(user: User_user | null): Observable<UserRole[]> {
+    public getUserRolesAvailable(user: User['user'] | null): Observable<UserRole[]> {
         return this.apollo
             .query<UserRolesAvailables, UserRolesAvailablesVariables>({
                 query: userRolesAvailableQuery,
@@ -319,7 +317,7 @@ export class UserService
      *
      * @param expirationTolerance If provided, return cached viewer more recently than the given delay in ms
      */
-    public getViewerValue(expirationTolerance?: number): CurrentUserForProfile['viewer'] | null {
+    public getViewerValue(expirationTolerance?: number): CurrentUserForProfile['viewer'] {
         return this.viewer.getUpToDateValue(expirationTolerance || 0);
     }
 

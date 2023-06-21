@@ -5,13 +5,7 @@ import {Router} from '@angular/router';
 import {Literal, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {OrderService} from '../../../../admin/order/services/order.service';
-import {
-    CreateOrder_createOrder,
-    OrderInput,
-    OrderLineInput,
-    PaymentMethod,
-    ProductType,
-} from '../../../../shared/generated-types';
+import {CreateOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType} from '../../../../shared/generated-types';
 import {Currency, CurrencyService} from '../../../../shared/services/currency.service';
 import {DonationComponent, DonationData} from '../../../components/donation/donation.component';
 import {Cart, CartLineProduct} from '../classes/cart';
@@ -49,7 +43,7 @@ export class CartService {
         cart: Cart,
         paymentMethod: PaymentMethod,
         billingAddress: Literal,
-    ): Observable<CreateOrder_createOrder | null> {
+    ): Observable<CreateOrder['createOrder'] | null> {
         const isCHF = this.currencyService.current.value === Currency.CHF;
         const orderLines: OrderLineInput[] = cart.productLines.map(line => {
             return {

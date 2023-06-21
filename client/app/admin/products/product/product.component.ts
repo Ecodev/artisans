@@ -6,7 +6,7 @@ import {ProductTagService} from '../../product-tags/services/product-tag.service
 import {ImageService} from '../services/image.service';
 import {ProductService} from '../services/product.service';
 import {map, Observable, of, switchMap} from 'rxjs';
-import {CreateFile_createFile, CreateImage_createImage, ProductPartialInput} from '../../../shared/generated-types';
+import {CreateFile, CreateImage, ProductPartialInput} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-product',
@@ -26,7 +26,7 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService> {
         super('product', productService, injector);
     }
 
-    public createFileAndLink(file: File): Observable<CreateFile_createFile> {
+    public createFileAndLink(file: File): Observable<CreateFile['createFile']> {
         return this.fileService.create({file}).pipe(
             switchMap(newFile => {
                 const id = this.data.model.id;
@@ -42,7 +42,7 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService> {
         );
     }
 
-    public createImageAndLink(key: 'illustration' | 'image'): (file: File) => Observable<CreateImage_createImage> {
+    public createImageAndLink(key: 'illustration' | 'image'): (file: File) => Observable<CreateImage['createImage']> {
         return file =>
             this.imageService.create({file}).pipe(
                 switchMap(image => {

@@ -15,7 +15,6 @@ import {
     DeleteSubscriptionsVariables,
     ProductType,
     Subscription,
-    Subscription_subscription,
     SubscriptionInput,
     Subscriptions,
     SubscriptionsVariables,
@@ -67,7 +66,7 @@ export class SubscriptionService extends NaturalAbstractModelService<
         };
     }
 
-    public override getFormAsyncValidators(model: Subscription_subscription): FormAsyncValidators {
+    public override getFormAsyncValidators(model: Subscription['subscription']): FormAsyncValidators {
         return {
             code: [unique('code', model.id, this)],
         };

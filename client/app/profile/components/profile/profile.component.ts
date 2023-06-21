@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAlertService} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {CurrentUserForProfile_viewer, Membership, Product, ProductType} from '../../../shared/generated-types';
+import {CurrentUserForProfile, Membership, Product, ProductType} from '../../../shared/generated-types';
 import {ProductService} from '../../../admin/products/services/product.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {ProductService} from '../../../admin/products/services/product.service';
     styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
     public ProductType = ProductType;
     public Membership = Membership;
 

@@ -1,13 +1,7 @@
 import {Component, Injector, Input, OnChanges, OnInit} from '@angular/core';
 import {NaturalAbstractList, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
-import {
-    CommentSortingField,
-    Event_event,
-    Events_events_items,
-    News_news,
-    Newses_newses_items,
-} from '../../../shared/generated-types';
+import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 
 @Component({
@@ -19,12 +13,12 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
     /**
      * Event related to displayed comments
      */
-    @Input() public event?: Event_event | Events_events_items;
+    @Input() public event?: Event['event'] | Events['events']['items'][0];
 
     /**
      * News related to displayed comments
      */
-    @Input() public news?: News_news | Newses_newses_items;
+    @Input() public news?: News['news'] | Newses['newses']['items'][0];
 
     /**
      * Antichronologic sorting by creation date to no change in case of update

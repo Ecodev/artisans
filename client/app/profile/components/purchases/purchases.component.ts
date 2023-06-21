@@ -2,7 +2,7 @@ import {Component, Injector, OnInit} from '@angular/core';
 import {NaturalAbstractList, NaturalFileService} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PurchaseService} from './purchase.service';
-import {ProductType, Purchases_purchases_items} from '../../../shared/generated-types';
+import {ProductType, Purchases} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-purchases',
@@ -23,7 +23,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
         this.persistSearch = false;
     }
 
-    public getDownloadLink(orderLine: Purchases_purchases_items): null | string {
+    public getDownloadLink(orderLine: Purchases['purchases']['items'][0]): null | string {
         if (orderLine.product && orderLine.product.file) {
             return this.naturalFileService.getDownloadLink(orderLine.product.file);
         }
@@ -31,7 +31,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
         return null;
     }
 
-    public canDownload(orderLine: Purchases_purchases_items): boolean {
+    public canDownload(orderLine: Purchases['purchases']['items'][0]): boolean {
         const isDigital = orderLine.type === ProductType.both || orderLine.type === ProductType.digital;
         const hasFile = orderLine.product && orderLine.product.file;
 

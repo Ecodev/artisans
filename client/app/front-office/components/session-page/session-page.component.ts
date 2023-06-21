@@ -3,12 +3,12 @@ import {formatIsoDateTime, NaturalAbstractDetail, NaturalQueryVariablesManager} 
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
-    CurrentUserForProfile_viewer,
-    Session_session,
-    Sessions_sessions_items,
+    CurrentUserForProfile,
+    Session,
+    Sessions,
     SessionsVariables,
     UserRole,
-    Users_users_items,
+    Users,
 } from '../../../shared/generated-types';
 
 @Component({
@@ -20,19 +20,19 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
     /**
      * Session animators/facilitators
      */
-    public facilitators: Users_users_items[] = [];
+    public facilitators: Users['users']['items'][0][] = [];
 
     /**
      * Other sessions in same place
      */
-    public otherSessions: Sessions_sessions_items[] = [];
+    public otherSessions: Sessions['sessions']['items'][0][] = [];
 
     /**
      * For template usage
      */
     public UserRole = UserRole;
 
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
 
     public constructor(
         private readonly sessionService: SessionService,
@@ -58,7 +58,7 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
     /**
      * Fetch other future sessions (5 max) in same locality
      */
-    private refreshOtherSessions(session: Session_session): void {
+    private refreshOtherSessions(session: Session['session']): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
         qvm.set('variables', {
             filter: {

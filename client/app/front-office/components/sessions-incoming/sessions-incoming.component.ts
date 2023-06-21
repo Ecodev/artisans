@@ -5,12 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {formatIsoDateTime, NaturalAlertService, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
-import {
-    Sessions_sessions_items,
-    SessionSortingField,
-    SessionsVariables,
-    SortingOrder,
-} from '../../../shared/generated-types';
+import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/emails.component';
 
 @Component({
@@ -19,7 +14,7 @@ import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/
     styleUrls: ['./sessions-incoming.component.scss'],
 })
 export class SessionsIncomingComponent implements OnInit {
-    public sessions: Sessions_sessions_items[] = [];
+    public sessions: Sessions['sessions']['items'][0][] = [];
 
     public queues: {mailingList: string; name: string}[] = [
         {name: 'Région Bienne', mailingList: '61355'},

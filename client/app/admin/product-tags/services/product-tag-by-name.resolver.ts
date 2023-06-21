@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
 import {last, Observable} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
-import {ProductTags_productTags_items} from '../../../shared/generated-types';
+import {ProductTags} from '../../../shared/generated-types';
 import {ProductTagService} from './product-tag.service';
 
 export interface ProductTagByNameResolve {
-    model: ProductTags_productTags_items;
+    model: ProductTags['productTags']['items'][0];
 }
 
 @Injectable({

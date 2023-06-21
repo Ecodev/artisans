@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractController} from '@ecodev/natural';
-import {CurrentUserForProfile_viewer} from '../../shared/generated-types';
+import {CurrentUserForProfile} from '../../shared/generated-types';
 
 @Component({
     selector: 'app-admin',
@@ -9,7 +9,7 @@ import {CurrentUserForProfile_viewer} from '../../shared/generated-types';
     styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent extends NaturalAbstractController implements OnInit {
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
 
     public constructor(private readonly route: ActivatedRoute) {
         super();

@@ -1,18 +1,12 @@
 import Big, {BigSource} from 'big.js';
-import {
-    Product_product,
-    Products_products_items,
-    ProductType,
-    Subscription_subscription,
-    Subscriptions_subscriptions_items,
-} from '../../../../shared/generated-types';
+import {Product, Products, ProductType, Subscription, Subscriptions} from '../../../../shared/generated-types';
 import {Currency} from '../../../../shared/services/currency.service';
 import {moneyRoundUp} from '../../../../shared/utils';
 import {CartCollectionService} from '../services/cart-collection.service';
 
-export type CartLineProduct = Products_products_items | Product_product;
+export type CartLineProduct = Products['products']['items'][0] | Product['product'];
 
-export type CartLineSubscription = Subscriptions_subscriptions_items | Subscription_subscription;
+export type CartLineSubscription = Subscriptions['subscriptions']['items'][0] | Subscription['subscription'];
 
 export interface CartLine {
     /**

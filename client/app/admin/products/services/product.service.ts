@@ -16,7 +16,6 @@ import {
     DeleteProducts,
     DeleteProductsVariables,
     Product,
-    Product_product,
     ProductInput,
     ProductPartialInput,
     Products,
@@ -82,7 +81,7 @@ export class ProductService extends NaturalAbstractModelService<
         };
     }
 
-    public override getFormAsyncValidators(model: Product_product): FormAsyncValidators {
+    public override getFormAsyncValidators(model: Product['product']): FormAsyncValidators {
         return {
             code: [unique('code', model.id, this)],
         };

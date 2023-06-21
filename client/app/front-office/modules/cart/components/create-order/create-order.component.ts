@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalAlertService} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
 import {UserService} from '../../../../../admin/users/services/user.service';
-import {CreateOrder_createOrder, PaymentMethod} from '../../../../../shared/generated-types';
+import {CreateOrder, PaymentMethod} from '../../../../../shared/generated-types';
 import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
 import {NavigationService} from '../../../../services/navigation.service';
 import {Cart} from '../../classes/cart';
@@ -148,7 +148,7 @@ export class CreateOrderComponent implements OnInit {
         this.navigationService.scrollToTop();
     }
 
-    private datatrans(order: CreateOrder_createOrder, amount: number, currency: Currency): void {
+    private datatrans(order: NonNullable<CreateOrder['createOrder']>, amount: number, currency: Currency): void {
         // Convert the decimal amount in cents
         const roundedAmount = Big(amount).times(100).toFixed(0);
 

@@ -3,7 +3,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {keyBy} from 'lodash-es';
-import {ProductType, Subscriptions_subscriptions_items} from '../../../../../shared/generated-types';
+import {ProductType, Subscriptions} from '../../../../../shared/generated-types';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
 import {GlobalCartService} from '../../../cart/services/global-cart.service';
@@ -14,7 +14,7 @@ import {GlobalCartService} from '../../../cart/services/global-cart.service';
     styleUrls: ['./subscriptions.component.scss'],
 })
 export class SubscriptionsComponent implements OnInit {
-    public subscriptions: {[key: string]: Subscriptions_subscriptions_items} | null = null;
+    public subscriptions: {[key: string]: Subscriptions['subscriptions']['items'][0]} | null = null;
 
     public ProductType = ProductType;
 

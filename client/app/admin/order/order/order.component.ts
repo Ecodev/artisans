@@ -1,12 +1,7 @@
 import {Component, Inject, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NaturalAlertService, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
-import {
-    CurrentUserForProfile_viewer,
-    OrderLinesVariables,
-    OrderStatus,
-    UserRole,
-} from '../../../shared/generated-types';
+import {CurrentUserForProfile, OrderLinesVariables, OrderStatus, UserRole} from '../../../shared/generated-types';
 import {OrderService} from '../services/order.service';
 
 @Component({
@@ -25,7 +20,7 @@ export class OrderComponent {
     /**
      * Currently connected user
      */
-    public viewer: CurrentUserForProfile_viewer | null = null;
+    public viewer: CurrentUserForProfile['viewer'] = null;
 
     /**
      * Template usage

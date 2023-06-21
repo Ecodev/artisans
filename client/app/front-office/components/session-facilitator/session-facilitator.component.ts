@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {SortingOrder, Users_users_items, UserSortingField, UsersVariables} from '../../../shared/generated-types';
+import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 
 @Component({
     selector: 'app-session-facilitator',
@@ -9,7 +9,7 @@ import {SortingOrder, Users_users_items, UserSortingField, UsersVariables} from 
     styleUrls: ['./session-facilitator.component.scss'],
 })
 export class SessionFacilitatorComponent implements OnInit {
-    public facilitators: Users_users_items[] = [];
+    public facilitators: Users['users']['items'][0][] = [];
 
     public constructor(public readonly userService: UserService) {}
 

@@ -67,14 +67,21 @@ abstract class Helper
                 ->addSelect('SUM(orderLine1.balanceEUR) AS totalBalanceEUR')
                 ->addSelect('SUM(orderLine1.quantity) AS totalQuantity');
 
-            $result = $qb->getQuery()->getResult()[0];
+            $result = $qb->getQuery()->getResult()[0] ?? [
+                'totalBalanceCHF' => null,
+                'totalBalanceEUR' => null,
+                'totalQuantity' => null,
+            ];
         } elseif ($class === Order::class) {
             $qb->resetDQLPart('select')
                 ->resetDQLPart('orderBy')
                 ->addSelect('SUM(order1.balanceCHF) AS totalBalanceCHF')
                 ->addSelect('SUM(order1.balanceEUR) AS totalBalanceEUR');
 
-            $result = $qb->getQuery()->getResult()[0];
+            $result = $qb->getQuery()->getResult()[0] ?? [
+                'totalBalanceCHF' => null,
+                'totalBalanceEUR' => null,
+            ];
         }
 
         return $result;

@@ -10,6 +10,7 @@ use Application\Model\Order;
 use Application\Model\User;
 
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
+use Ecodev\Felix\Utility;
 
 /**
  * @extends AbstractRepository<File>
@@ -39,7 +40,7 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
         $connection = $this->getEntityManager()->getConnection();
         $subscriptionLastReviewNumber = $user ? $user->getSubscriptionLastReviewNumber() : null;
         $hasSubscription = $user && ProductTypeType::includesDigital($user->getSubscriptionType()) && $subscriptionLastReviewNumber;
-        $digitalTypes = implode(',', array_map(fn (string $val): string => $connection->quote($val), ProductTypeType::getDigitalTypes()));
+        $digitalTypes = Utility::quoteArray(ProductTypeType::getDigitalTypes());
 
         if ($user && $user->getWebTemporaryAccess()) {
             // Files for webTemporaryAccess

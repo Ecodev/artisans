@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {NaturalSeo} from '@ecodev/natural';
-import {UserByTokenResolver} from '../admin/users/services/userByToken.resolver';
+import {resolveUserByToken} from '../admin/users/services/userByToken.resolver';
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
 import {RegisterConfirmComponent} from './components/register/register-confirm.component';
 import {RegisterComponent} from './components/register/register.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
         path: 'confirm/:token',
         component: RegisterConfirmComponent,
         resolve: {
-            user: UserByTokenResolver,
+            user: resolveUserByToken,
         },
         data: {
             seo: {
@@ -42,7 +42,7 @@ const routes: Routes = [
         path: 'change-password/:token',
         component: ChangePasswordComponent,
         resolve: {
-            user: UserByTokenResolver,
+            user: resolveUserByToken,
         },
         data: {
             seo: {

@@ -1,25 +1,17 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, Resolve} from '@angular/router';
+import {inject} from '@angular/core';
+import {ActivatedRouteSnapshot} from '@angular/router';
 import {last, Observable} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
 import {OrderLineResolve} from '../order-line';
 import {OrderLineService} from './order-lines.service';
 
-@Injectable({
-    providedIn: 'root',
-})
-export class OrderLineResolver implements Resolve<OrderLineResolve> {
-    public constructor(
-        private readonly orderLineService: OrderLineService,
-        private readonly errorService: ErrorService,
-    ) {}
+/**
+ * Resolve orderLine data for router
+ */
+export function resolveOrderLine(route: ActivatedRouteSnapshot): Observable<OrderLineResolve> {
+    const orderLineService = inject(OrderLineService);
+    const errorService = inject(ErrorService);
+    const observable = orderLineService.resolve(route.params.orderLineId).pipe(last());
 
-    /**
-     * Resolve orderLine data for router
-     */
-    public resolve(route: ActivatedRouteSnapshot): Observable<OrderLineResolve> {
-        const observable = this.orderLineService.resolve(route.params.orderLineId).pipe(last());
-
-        return this.errorService.redirectIfError(observable);
-    }
+    return errorService.redirectIfError(observable);
 }

@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {formatIsoDate, formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
-import {EventResolver} from '../admin/events/services/event.resolver';
-import {NewsResolver} from '../admin/newses/services/news.resolver';
-import {ViewerResolver} from '../admin/users/services/viewer.resolver';
+import {resolveEvent} from '../admin/events/services/event.resolver';
+import {resolveNews} from '../admin/newses/services/news.resolver';
+import {resolveViewer} from '../admin/users/services/viewer.resolver';
 import {ErrorComponent} from '../shared/components/error/error.component';
 import {
     EventSortingField,
@@ -12,7 +12,7 @@ import {
     NewsSortingField,
     SortingOrder,
 } from '../shared/generated-types';
-import {FacilitatorGuard} from '../shared/guards/facilitator.guard';
+import {canActivateFacilitator} from '../shared/guards/facilitator.guard';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
@@ -79,7 +79,7 @@ const routes: Routes = [
     {
         path: 'agenda/:eventId',
         component: EventPageComponent,
-        resolve: {event: EventResolver},
+        resolve: {event: resolveEvent},
         data: {
             seo: {resolveKey: 'event'} satisfies NaturalSeo,
         },
@@ -98,7 +98,7 @@ const routes: Routes = [
     {
         path: 'actualite/:newsId',
         component: NewsPageComponent,
-        resolve: {news: NewsResolver},
+        resolve: {news: resolveNews},
         data: {
             seo: {resolveKey: 'news'} satisfies NaturalSeo,
         },
@@ -159,7 +159,7 @@ const routes: Routes = [
     },
     {
         path: 'agir-avec-nous',
-        resolve: {viewer: ViewerResolver},
+        resolve: {viewer: resolveViewer},
         children: [
             {
                 path: 'conversation-carbone',
@@ -194,7 +194,7 @@ const routes: Routes = [
                     {
                         path: 'facilitateurs-prive',
                         component: SessionFacilitatorPrivateComponent,
-                        canActivate: [FacilitatorGuard],
+                        canActivate: [canActivateFacilitator],
                         data: {seo: {title: 'Facilitateurs - Conversations carbone'} satisfies NaturalSeo},
                     },
                     {
@@ -222,7 +222,7 @@ const routes: Routes = [
                     // {
                     //     path: ':sessionId',
                     //     component: SessionPageComponent,
-                    //     resolve: {session: SessionResolver},
+                    //     resolve: {session: resolveSession},
                     // },
                 ],
             },
@@ -367,7 +367,7 @@ const routes: Routes = [
     {
         path: 'login',
         component: LoginComponent,
-        resolve: {viewer: ViewerResolver},
+        resolve: {viewer: resolveViewer},
     },
     {
         path: 'mon-compte',

@@ -1,33 +1,33 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
-import {AdministrationGuard} from '../shared/guards/administration.guard';
+import {canActivateAdministration} from '../shared/guards/administration.guard';
 import {AdminComponent} from './admin/admin.component';
 import {CommentComponent} from './comments/comment/comment.component';
 import {CommentsComponent} from './comments/comments/comments.component';
-import {CommentResolver} from './comments/services/comment.resolver';
+import {resolveComment} from './comments/services/comment.resolver';
 import {EventComponent} from './events/event/event.component';
 import {EventsComponent} from './events/events/events.component';
-import {EventResolver} from './events/services/event.resolver';
+import {resolveEvent} from './events/services/event.resolver';
 import {FacilitatorDocumentComponent} from './facilitator-documents/facilitator-document/facilitator-document.component';
 import {FacilitatorDocumentsComponent} from './facilitator-documents/facilitator-documents/facilitator-documents.component';
-import {FacilitatorDocumentResolver} from './facilitator-documents/services/facilitator-document.resolver';
+import {resolveFacilitatorDocument} from './facilitator-documents/services/facilitator-document.resolver';
 import {NewsComponent} from './newses/news/news.component';
 import {NewsesComponent} from './newses/newses/newses.component';
-import {NewsResolver} from './newses/services/news.resolver';
+import {resolveNews} from './newses/services/news.resolver';
 import {OrderLineComponent} from './order/order-line/order-line.component';
 import {OrderComponent} from './order/order/order.component';
 import {OrdersComponent} from './order/orders/orders.component';
-import {OrderLineResolver} from './order/services/order-line.resolver';
-import {OrderResolver} from './order/services/order.resolver';
+import {resolveOrderLine} from './order/services/order-line.resolver';
+import {resolveOrder} from './order/services/order.resolver';
 import {ProductComponent} from './products/product/product.component';
 import {ProductsComponent} from './products/products/products.component';
-import {ProductResolver} from './products/services/product.resolver';
-import {SessionResolver} from './sessions/services/session.resolver';
+import {resolveProduct} from './products/services/product.resolver';
+import {resolveSession} from './sessions/services/session.resolver';
 import {SessionComponent} from './sessions/session/session.component';
 import {SessionsComponent} from './sessions/sessions/sessions.component';
-import {UserResolver} from './users/services/user.resolver';
-import {ViewerResolver} from './users/services/viewer.resolver';
+import {resolveUser} from './users/services/user.resolver';
+import {resolveViewer} from './users/services/viewer.resolver';
 import {UserComponent} from './users/user/user.component';
 import {UsersComponent} from './users/users/users.component';
 import {ImportComponent} from './users/import/import.component';
@@ -37,8 +37,8 @@ const orderDetails = [
         path: ':orderId',
         component: NaturalDialogTriggerComponent,
         resolve: {
-            order: OrderResolver,
-            viewer: ViewerResolver,
+            order: resolveOrder,
+            viewer: resolveViewer,
         },
         data: {
             trigger: {
@@ -58,7 +58,7 @@ const orderDetails = [
         path: 'order-line/:orderLineId',
         component: NaturalDialogTriggerComponent,
         resolve: {
-            orderLine: OrderLineResolver,
+            orderLine: resolveOrderLine,
         },
         data: {
             trigger: {
@@ -81,7 +81,7 @@ const routes: Routes = [
     {
         path: '',
         component: AdminComponent,
-        canActivate: [AdministrationGuard],
+        canActivate: [canActivateAdministration],
         children: [
             {
                 path: '',
@@ -104,7 +104,7 @@ const routes: Routes = [
                         path: 'new',
                         component: ProductComponent,
                         resolve: {
-                            product: ProductResolver,
+                            product: resolveProduct,
                         },
                         data: {
                             seo: {
@@ -116,7 +116,7 @@ const routes: Routes = [
                         path: ':productId', // last
                         component: ProductComponent,
                         resolve: {
-                            product: ProductResolver,
+                            product: resolveProduct,
                         },
                         data: {
                             seo: {
@@ -142,7 +142,7 @@ const routes: Routes = [
                         path: ':userId', // last
                         component: UserComponent,
                         resolve: {
-                            user: UserResolver,
+                            user: resolveUser,
                         },
                         data: {
                             seo: {
@@ -188,7 +188,7 @@ const routes: Routes = [
                         path: 'new',
                         component: NewsComponent,
                         resolve: {
-                            news: NewsResolver,
+                            news: resolveNews,
                         },
                         data: {
                             seo: {
@@ -200,7 +200,7 @@ const routes: Routes = [
                         path: ':newsId', // last
                         component: NewsComponent,
                         resolve: {
-                            news: NewsResolver,
+                            news: resolveNews,
                         },
                         data: {
                             seo: {
@@ -225,7 +225,7 @@ const routes: Routes = [
                     {
                         path: 'new',
                         component: EventComponent,
-                        resolve: {event: EventResolver},
+                        resolve: {event: resolveEvent},
                         data: {
                             seo: {
                                 title: 'Nouvel événement',
@@ -235,7 +235,7 @@ const routes: Routes = [
                     {
                         path: ':eventId', // last
                         component: EventComponent,
-                        resolve: {event: EventResolver},
+                        resolve: {event: resolveEvent},
                         data: {
                             seo: {
                                 resolveKey: 'event',
@@ -260,7 +260,7 @@ const routes: Routes = [
                     {
                         path: 'new',
                         component: SessionComponent,
-                        resolve: {session: SessionResolver},
+                        resolve: {session: resolveSession},
                         data: {
                             seo: {
                                 title: 'Nouvelle session carbone',
@@ -270,7 +270,7 @@ const routes: Routes = [
                     {
                         path: ':sessionId', // last
                         component: SessionComponent,
-                        resolve: {session: SessionResolver},
+                        resolve: {session: resolveSession},
                         data: {
                             seo: {
                                 resolveKey: 'session',
@@ -294,7 +294,7 @@ const routes: Routes = [
                     {
                         path: 'new',
                         component: CommentComponent,
-                        resolve: {comment: CommentResolver},
+                        resolve: {comment: resolveComment},
                         data: {
                             seo: {
                                 title: 'Nouveau commentaire',
@@ -304,7 +304,7 @@ const routes: Routes = [
                     {
                         path: ':commentId', // last
                         component: CommentComponent,
-                        resolve: {comment: CommentResolver},
+                        resolve: {comment: resolveComment},
                         data: {
                             seo: {
                                 resolveKey: 'comment',
@@ -329,7 +329,7 @@ const routes: Routes = [
                         path: 'new',
                         component: FacilitatorDocumentComponent,
                         resolve: {
-                            facilitatorDocument: FacilitatorDocumentResolver,
+                            facilitatorDocument: resolveFacilitatorDocument,
                         },
                         data: {
                             seo: {
@@ -341,7 +341,7 @@ const routes: Routes = [
                         path: ':facilitatorDocumentId', // last
                         component: FacilitatorDocumentComponent,
                         resolve: {
-                            facilitatorDocument: FacilitatorDocumentResolver,
+                            facilitatorDocument: resolveFacilitatorDocument,
                         },
                         data: {
                             seo: {

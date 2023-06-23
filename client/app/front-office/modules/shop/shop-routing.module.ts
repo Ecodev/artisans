@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ProductTagByNameResolver} from '../../../admin/product-tags/services/product-tag-by-name.resolver';
-import {ProductResolver} from '../../../admin/products/services/product.resolver';
+import {resolveProductTagByName} from '../../../admin/product-tags/services/product-tag-by-name.resolver';
+import {resolveProduct} from '../../../admin/products/services/product.resolver';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {ProductSortingField, ProductsVariables, SortingOrder} from '../../../shared/generated-types';
 import {NaturalSeo} from '@ecodev/natural';
@@ -55,7 +55,7 @@ const routes: Routes = [
     {
         path: 'articles/:productTagName',
         component: ProductsPageComponent,
-        resolve: {productTag: ProductTagByNameResolver},
+        resolve: {productTag: resolveProductTagByName},
         data: {
             seo: {resolveKey: 'productTag'} satisfies NaturalSeo,
             breadcrumbs: [
@@ -113,7 +113,7 @@ const routes: Routes = [
     {
         path: 'article/:productId',
         component: ProductPageComponent,
-        resolve: {product: ProductResolver},
+        resolve: {product: resolveProduct},
         data: {
             seo: {
                 resolveKey: 'product',
@@ -129,7 +129,7 @@ const routes: Routes = [
     {
         path: 'numero/:productId',
         component: ProductPageComponent,
-        resolve: {product: ProductResolver},
+        resolve: {product: resolveProduct},
         data: {
             seo: {
                 resolveKey: 'product',

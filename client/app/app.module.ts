@@ -3,7 +3,7 @@ import {ApolloModule} from 'apollo-angular';
 import {DATE_PIPE_DEFAULT_OPTIONS, registerLocaleData} from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import localeFRCH from '@angular/common/locales/fr-CH';
-import {LOCALE_ID, NgModule} from '@angular/core';
+import {APP_ID, LOCALE_ID, NgModule} from '@angular/core';
 import {DateAdapter, ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorIntl} from '@angular/material/paginator';
@@ -43,7 +43,6 @@ export const matTooltipCustomConfig: MatTooltipDefaultOptions = {
     declarations: [AppComponent, BootLoaderComponent, ErrorComponent],
     imports: [
         ApolloModule,
-        BrowserModule.withServerTransition({appId: 'serverApp'}),
         BrowserModule,
         BrowserAnimationsModule.withConfig({
             // Disable animations if not supported (on iPhone 6 / Safari 13, or SSR)
@@ -64,6 +63,7 @@ export const matTooltipCustomConfig: MatTooltipDefaultOptions = {
         NaturalErrorModule.forRoot(localConfig.log.url, LoggerExtraService),
     ],
     providers: [
+        {provide: APP_ID, useValue: 'serverApp'},
         MatIconRegistry,
         {
             provide: DateAdapter,

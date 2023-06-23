@@ -128,58 +128,6 @@
                         ]
                     }
                 },
-                "server": {
-                    "builder": "@angular-devkit/build-angular:server",
-                    "options": {
-                        "outputPath": "data/tmp/server",
-                        "main": "server.ts",
-                        "tsConfig": "client/tsconfig.server.json",
-                        "deleteOutputPath": false,
-                        "sourceMap": true,
-                        "optimization": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "outputHashing": "media",
-                            "fileReplacements": [
-                                {
-                                    "replace": "client/environments/environment.ts",
-                                    "with": "client/environments/environment.prod.ts"
-                                }
-                            ]
-                        },
-                        "development": {
-                            "vendorChunk": true
-                        }
-                    },
-                    "defaultConfiguration": "production"
-                },
-                "serve-ssr": {
-                    "builder": "@nguniversal/builders:ssr-dev-server",
-                    "options": {},
-                    "configurations": {
-                        "production": {
-                            "browserTarget": "artisans:build:production",
-                            "serverTarget": "artisans:server:production"
-                        },
-                        "development": {
-                            "serverTarget": "artisans:server:development",
-                            "browserTarget": "artisans:build:development"
-                        }
-                    },
-                    "defaultConfiguration": "development"
-                },
-                "prerender": {
-                    "builder": "@nguniversal/builders:prerender",
-                    "options": {
-                        "browserTarget": "artisans:build:production",
-                        "serverTarget": "artisans:server:production",
-                        "routes": ["/"]
-                    },
-                    "configurations": {
-                        "production": {}
-                    }
-                },
                 "lint": {
                     "builder": "@angular-eslint/builder:lint",
                     "options": {

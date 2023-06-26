@@ -1,6 +1,5 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';
 
@@ -15,12 +14,8 @@ export class NewsesComponent extends NaturalAbstractList<NewsService> implements
         {id: 'name', label: 'Nom'},
         {id: 'isActive', label: 'Active'},
     ];
-    public constructor(
-        service: NewsService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-        injector: Injector,
-    ) {
-        super(service, injector);
+
+    public constructor(service: NewsService, public readonly permissionsService: PermissionsService) {
+        super(service);
     }
 }

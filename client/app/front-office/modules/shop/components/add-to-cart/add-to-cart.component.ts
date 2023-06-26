@@ -12,7 +12,7 @@ export class AddToCartComponent {
     /**
      * Button label
      */
-    @Input() public label!: string;
+    @Input({required: true}) public label!: string;
 
     /**
      * Button background color
@@ -22,12 +22,12 @@ export class AddToCartComponent {
     /**
      * Product to add to cart
      */
-    @Input() public product!: CartLineProduct;
+    @Input({required: true}) public product!: CartLineProduct;
 
     /**
      * Type variant to add to cart
      */
-    @Input() public type!: ProductType;
+    @Input({required: true}) public type!: ProductType;
 
     public inCart = false;
 

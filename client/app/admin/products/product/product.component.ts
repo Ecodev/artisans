@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {NaturalAbstractDetail, WithId} from '@ecodev/natural';
 import {XorErrorStateMatcher} from '../../../shared/validators';
 import {FilesService} from '../../files/services/files.service';
@@ -18,12 +18,11 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService> {
 
     public constructor(
         public readonly productService: ProductService,
-        injector: Injector,
         public readonly productTagService: ProductTagService,
         private readonly imageService: ImageService,
         private readonly fileService: FilesService,
     ) {
-        super('product', productService, injector);
+        super('product', productService);
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

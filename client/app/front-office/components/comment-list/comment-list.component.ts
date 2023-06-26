@@ -1,4 +1,4 @@
-import {Component, Injector, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {NaturalAbstractList, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
@@ -29,12 +29,8 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
 
     public newCommentValue = '';
 
-    public constructor(
-        service: CommentService,
-        injector: Injector,
-        public readonly permissionsService: PermissionsService,
-    ) {
-        super(service, injector);
+    public constructor(service: CommentService, public readonly permissionsService: PermissionsService) {
+        super(service);
         this.persistSearch = false;
     }
 

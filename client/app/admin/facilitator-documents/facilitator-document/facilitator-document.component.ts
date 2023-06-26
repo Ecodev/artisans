@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
@@ -13,10 +13,9 @@ import {map, Observable, of, switchMap} from 'rxjs';
 export class FacilitatorDocumentComponent extends NaturalAbstractDetail<FacilitatorDocumentsService> {
     public constructor(
         public readonly facilitatorDocumentService: FacilitatorDocumentsService,
-        injector: Injector,
         private readonly fileService: FilesService,
     ) {
-        super('facilitatorDocument', facilitatorDocumentService, injector);
+        super('facilitatorDocument', facilitatorDocumentService);
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

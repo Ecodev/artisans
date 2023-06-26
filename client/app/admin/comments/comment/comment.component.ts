@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -17,11 +17,10 @@ export class CommentComponent extends NaturalAbstractDetail<CommentService> impl
         route: ActivatedRoute,
         commentService: CommentService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        injector: Injector,
         public readonly newsService: NewsService,
         public readonly eventService: EventService,
         public readonly permissionsService: PermissionsService,
     ) {
-        super('comment', commentService, injector);
+        super('comment', commentService);
     }
 }

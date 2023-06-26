@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NaturalAbstractList} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -14,9 +14,8 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(service, injector);
+        super(service);
         this.selectedColumns = ['creationDate', 'status', 'balance'];
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');

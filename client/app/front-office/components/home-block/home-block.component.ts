@@ -17,7 +17,7 @@ interface Block {
     styleUrls: ['./home-block.component.scss'],
 })
 export class HomeBlockComponent implements OnInit {
-    @Input() public key!: string;
+    @Input({required: true}) public key!: string;
 
     public editMode = false;
 

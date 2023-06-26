@@ -18,7 +18,7 @@ export class TagsNavigationComponent implements OnInit {
     /**
      * Service to use to get items
      */
-    @Input() public service!: ProductTagService;
+    @Input({required: true}) public service!: ProductTagService;
 
     /**
      * Url base

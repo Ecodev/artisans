@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -20,14 +20,14 @@ export class SessionsComponent extends NaturalAbstractList<SessionService> imple
         {id: 'locality', label: 'Ville'},
         {id: 'region', label: 'Canton'},
     ];
+
     public constructor(
         route: ActivatedRoute,
         sessionService: SessionService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(sessionService, injector);
+        super(sessionService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('sessions');
     }

@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 
@@ -15,8 +15,8 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
      */
     public passwordMailSending = false;
 
-    public constructor(private readonly userService: UserService, injector: Injector) {
-        super('user', userService, injector);
+    public constructor(private readonly userService: UserService) {
+        super('user', userService);
     }
 
     public override ngOnInit(): void {

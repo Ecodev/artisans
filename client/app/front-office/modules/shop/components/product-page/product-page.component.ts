@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductService} from '../../../../../admin/products/services/product.service';
@@ -73,9 +73,8 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     public constructor(
         private readonly productService: ProductService,
         private readonly purchaseService: PurchaseService,
-        injector: Injector,
     ) {
-        super('product', productService, injector);
+        super('product', productService);
         this.url = this.router.url;
     }
 

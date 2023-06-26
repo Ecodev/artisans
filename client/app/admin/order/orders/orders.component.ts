@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
 import {OrderSortingField, SortingOrder} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -25,9 +25,8 @@ export class OrdersComponent extends NaturalAbstractList<OrderService> implement
         service: OrderService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(service, injector);
+        super(service);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
     }

@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NaturalAbstractList, NaturalFileService} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PurchaseService} from './purchase.service';
@@ -15,10 +15,9 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
     public constructor(
         service: PurchaseService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
-        injector: Injector,
         private readonly naturalFileService: NaturalFileService,
     ) {
-        super(service, injector);
+        super(service);
 
         this.persistSearch = false;
     }

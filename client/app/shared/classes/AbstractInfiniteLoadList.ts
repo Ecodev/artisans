@@ -1,4 +1,4 @@
-import {Directive, Injector, OnInit} from '@angular/core';
+import {Directive, OnInit} from '@angular/core';
 import {PageEvent} from '@angular/material/paginator';
 import {
     ExtractTall,
@@ -33,8 +33,8 @@ export class AbstractInfiniteLoadList<
 {
     public items: ExtractTall<TService>['items'][0][] | null = null;
 
-    public constructor(service: any, injector: Injector) {
-        super(service, injector);
+    public constructor(service: any) {
+        super(service);
         this.persistSearch = false;
     }
 

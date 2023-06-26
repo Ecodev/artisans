@@ -1,4 +1,4 @@
-import {Component, Injector} from '@angular/core';
+import {Component} from '@angular/core';
 import {PaginationInput} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
@@ -21,8 +21,7 @@ export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
         service: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(service, injector);
+        super(service);
     }
 }

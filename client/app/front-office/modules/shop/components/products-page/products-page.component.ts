@@ -1,4 +1,4 @@
-import {Component, Injector, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {fromUrl, memorySessionStorageProvider, NaturalPersistenceService} from '@ecodev/natural';
 import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
@@ -72,10 +72,9 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     public constructor(
         public override readonly route: ActivatedRoute,
         productService: ProductService,
-        injector: Injector,
         public readonly productTagService: ProductTagService,
     ) {
-        super(productService, injector);
+        super(productService);
     }
 
     public override ngOnInit(): void {

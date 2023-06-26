@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {formatIsoDateTime, NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
@@ -34,12 +34,8 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
 
     public viewer: CurrentUserForProfile['viewer'] = null;
 
-    public constructor(
-        private readonly sessionService: SessionService,
-        injector: Injector,
-        public readonly userService: UserService,
-    ) {
-        super('session', sessionService, injector);
+    public constructor(private readonly sessionService: SessionService, public readonly userService: UserService) {
+        super('session', sessionService);
     }
 
     public override ngOnInit(): void {

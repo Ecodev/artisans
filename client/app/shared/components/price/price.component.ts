@@ -11,7 +11,7 @@ import {Currency, CurrencyService} from '../../services/currency.service';
     styleUrls: ['./price.component.scss'],
 })
 export class PriceComponent extends NaturalAbstractController implements OnInit {
-    @Input() public product!: CartLineProduct | Subscriptions['subscriptions']['items'][0];
+    @Input({required: true}) public product!: CartLineProduct | Subscriptions['subscriptions']['items'][0];
 
     public price!: string;
 

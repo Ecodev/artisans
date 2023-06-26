@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -16,8 +16,7 @@ export class NewsComponent extends NaturalAbstractDetail<NewsService> implements
         newsService: NewsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super('news', newsService, injector);
+        super('news', newsService);
     }
 }

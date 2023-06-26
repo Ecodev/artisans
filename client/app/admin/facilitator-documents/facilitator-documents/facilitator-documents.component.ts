@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractList} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -18,9 +18,8 @@ export class FacilitatorDocumentsComponent extends NaturalAbstractList<Facilitat
         facilitatorDocumentService: FacilitatorDocumentsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(facilitatorDocumentService, injector);
+        super(facilitatorDocumentService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('facilitatorDocumentsAdmin');
     }

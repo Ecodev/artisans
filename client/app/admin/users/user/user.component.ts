@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IEnum, NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
 import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
@@ -19,12 +19,8 @@ export class UserComponent extends NaturalAbstractDetail<UserService> implements
      */
     public override data!: UserResolve & {seo: NaturalSeoBasic};
 
-    public constructor(
-        private readonly userService: UserService,
-        injector: Injector,
-        public readonly sessionService: SessionService,
-    ) {
-        super('user', userService, injector);
+    public constructor(private readonly userService: UserService, public readonly sessionService: SessionService) {
+        super('user', userService);
     }
 
     public override ngOnInit(): void {

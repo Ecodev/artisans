@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PaginationInput} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
@@ -21,8 +21,7 @@ export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> 
         service: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(service, injector);
+        super(service);
     }
 }

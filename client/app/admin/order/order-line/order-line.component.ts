@@ -1,4 +1,4 @@
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {NaturalAbstractDetail, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
 import {merge, omit} from 'lodash-es';
@@ -16,10 +16,9 @@ export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> 
         private readonly orderLineService: OrderLineService,
         public readonly productService: ProductService,
         public readonly subscriptionService: SubscriptionService,
-        injector: Injector,
         @Inject(MAT_DIALOG_DATA) private readonly dialogData: NaturalDialogTriggerProvidedData<never>,
     ) {
-        super('orderLine', orderLineService, injector);
+        super('orderLine', orderLineService);
     }
 
     /**

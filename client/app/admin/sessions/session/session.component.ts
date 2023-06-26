@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UntypedFormArray, UntypedFormControl} from '@angular/forms';
 import {NaturalAbstractDetail, NaturalSeoBasic} from '@ecodev/natural';
 import {UserService} from '../../users/services/user.service';
@@ -21,12 +21,8 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
      */
     public override data!: SessionResolve & {seo: NaturalSeoBasic};
 
-    public constructor(
-        private readonly sessionService: SessionService,
-        injector: Injector,
-        public readonly userService: UserService,
-    ) {
-        super('session', sessionService, injector);
+    public constructor(private readonly sessionService: SessionService, public readonly userService: UserService) {
+        super('session', sessionService);
     }
 
     public override ngOnInit(): void {

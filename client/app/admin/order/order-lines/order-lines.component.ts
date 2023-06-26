@@ -1,4 +1,4 @@
-import {Component, Injector, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -46,9 +46,8 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
         service: OrderLineService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super(service, injector);
+        super(service);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orderLines');
     }

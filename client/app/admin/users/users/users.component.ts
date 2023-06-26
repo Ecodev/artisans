@@ -1,5 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import {Component, Inject, Injector, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {
     AvailableColumn,
@@ -57,13 +57,12 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
     public constructor(
         route: ActivatedRoute,
         private readonly userService: UserService,
-        injector: Injector,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
         private readonly apollo: Apollo,
         @Inject(DOCUMENT) private readonly document: Document,
     ) {
-        super(userService, injector);
+        super(userService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('users');
     }

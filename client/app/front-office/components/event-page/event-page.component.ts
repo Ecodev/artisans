@@ -1,4 +1,4 @@
-import {Component, Injector, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {NaturalAbstractDetail} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
@@ -16,8 +16,7 @@ export class EventPageComponent extends NaturalAbstractDetail<EventService> impl
         eventService: EventService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
-        injector: Injector,
     ) {
-        super('event', eventService, injector);
+        super('event', eventService);
     }
 }

@@ -1,13 +1,35 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
-import {NaturalAbstractList, SortingOrder} from '@ecodev/natural';
+import {NaturalAbstractList, SortingOrder, NaturalIconDirective} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-comment-list',
     templateUrl: './comment-list.component.html',
     styleUrls: ['./comment-list.component.scss'],
+    standalone: true,
+    imports: [
+        FlexModule,
+        NgIf,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonModule,
+        NgFor,
+        RouterLink,
+        MatIconModule,
+        NaturalIconDirective,
+        DatePipe,
+    ],
 })
 export class CommentListComponent extends NaturalAbstractList<CommentService> implements OnInit, OnChanges {
     /**

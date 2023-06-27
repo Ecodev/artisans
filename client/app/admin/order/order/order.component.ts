@@ -1,13 +1,35 @@
 import {Component, Inject, Optional} from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {NaturalAlertService, NaturalDialogTriggerProvidedData} from '@ecodev/natural';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import {
+    NaturalAlertService,
+    NaturalDialogTriggerProvidedData,
+    NaturalSelectEnumComponent,
+    NaturalSwissDatePipe,
+} from '@ecodev/natural';
 import {CurrentUserForProfile, OrderLinesVariables, OrderStatus, UserRole} from '../../../shared/generated-types';
 import {OrderService} from '../services/order.service';
+import {MatButtonModule} from '@angular/material/button';
+import {OrderLinesComponent} from '../order-lines/order-lines.component';
+import {FormsModule} from '@angular/forms';
+import {NgIf, CurrencyPipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.scss'],
+    standalone: true,
+    imports: [
+        FlexModule,
+        MatDialogModule,
+        NgIf,
+        NaturalSelectEnumComponent,
+        FormsModule,
+        OrderLinesComponent,
+        MatButtonModule,
+        CurrencyPipe,
+        NaturalSwissDatePipe,
+    ],
 })
 export class OrderComponent {
     public forcedVariables: OrderLinesVariables;

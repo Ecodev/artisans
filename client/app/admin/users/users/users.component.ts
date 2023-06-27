@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     AvailableColumn,
     Button,
@@ -8,18 +8,52 @@ import {
     NaturalAbstractList,
     NaturalQueryVariablesManager,
     NaturalSearchSelections,
+    NaturalColumnsPickerComponent,
+    NaturalSearchComponent,
+    NaturalAvatarComponent,
+    NaturalTableButtonComponent,
+    NaturalFixedButtonComponent,
+    NaturalEnumPipe,
+    NaturalSwissDatePipe,
 } from '@ecodev/natural';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';
-import {DOCUMENT} from '@angular/common';
+import {DOCUMENT, NgIf, AsyncPipe} from '@angular/common';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        NaturalColumnsPickerComponent,
+        NaturalSearchComponent,
+        ExtendedModule,
+        MatTableModule,
+        MatSortModule,
+        NaturalAvatarComponent,
+        NaturalTableButtonComponent,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        NaturalFixedButtonComponent,
+        RouterLink,
+        AsyncPipe,
+        NaturalEnumPipe,
+        NaturalSwissDatePipe,
+    ],
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
     public override availableColumns: AvailableColumn[] = [

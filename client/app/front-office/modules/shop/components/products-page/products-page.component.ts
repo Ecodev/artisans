@@ -1,10 +1,23 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {fromUrl, memorySessionStorageProvider, NaturalPersistenceService} from '@ecodev/natural';
+import {
+    fromUrl,
+    memorySessionStorageProvider,
+    NaturalPersistenceService,
+    NaturalSrcDensityDirective,
+    NaturalCapitalizePipe,
+} from '@ecodev/natural';
 import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
 import {Products} from '../../../../../shared/generated-types';
+import {StripTagsPipe} from '../../../../../shared/pipes/strip-tags.pipe';
+import {TruncatePipe} from '../../../../../shared/pipes/truncate.pipe';
+import {MatButtonModule} from '@angular/material/button';
+import {PriceComponent} from '../../../../../shared/components/price/price.component';
+import {TagsNavigationComponent} from '../../../../../shared/components/tags-navigation/tags-navigation.component';
+import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -24,6 +37,21 @@ export enum ProductsViewMode {
             useClass: NaturalPersistenceService,
         },
         memorySessionStorageProvider,
+    ],
+    standalone: true,
+    imports: [
+        FlexModule,
+        NgIf,
+        TagsNavigationComponent,
+        NgFor,
+        RouterLink,
+        PriceComponent,
+        MatButtonModule,
+        NaturalSrcDensityDirective,
+        DatePipe,
+        NaturalCapitalizePipe,
+        TruncatePipe,
+        StripTagsPipe,
     ],
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductService> implements OnInit {

@@ -1,17 +1,39 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NaturalAlertService} from '@ecodev/natural';
+import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
+import {NaturalAlertService, NaturalIconDirective, NaturalEnumPipe} from '@ecodev/natural';
 import {CurrencyService} from '../../../../../shared/services/currency.service';
 import {ProductType} from '../../../../../shared/generated-types';
 import {Cart, CartLineProduct} from '../../classes/cart';
 import {CartService} from '../../services/cart.service';
 import {GlobalCartService} from '../../services/global-cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {PriceComponent} from '../../../../../shared/components/price/price.component';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-cart',
     templateUrl: './cart.component.html',
     styleUrls: ['./cart.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        MatButtonModule,
+        RouterLink,
+        NgFor,
+        PriceComponent,
+        MatIconModule,
+        NaturalIconDirective,
+        MatDividerModule,
+        RouterOutlet,
+        AsyncPipe,
+        CurrencyPipe,
+        NaturalEnumPipe,
+    ],
 })
 export class CartComponent implements OnInit {
     /**

@@ -1,13 +1,47 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
+import {
+    AvailableColumn,
+    NaturalAbstractList,
+    NaturalSearchComponent,
+    NaturalColumnsPickerComponent,
+    NaturalTableButtonComponent,
+    NaturalEnumPipe,
+    NaturalSwissDatePipe,
+} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderLineService} from '../services/order-lines.service';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-order-lines',
     templateUrl: './order-lines.component.html',
     styleUrls: ['./order-lines.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        ExtendedModule,
+        NaturalSearchComponent,
+        NaturalColumnsPickerComponent,
+        MatTableModule,
+        MatSortModule,
+        NaturalTableButtonComponent,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        AsyncPipe,
+        CurrencyPipe,
+        NaturalEnumPipe,
+        NaturalSwissDatePipe,
+    ],
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
     public override availableColumns: AvailableColumn[] = [

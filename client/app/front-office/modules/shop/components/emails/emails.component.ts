@@ -1,7 +1,19 @@
 import {Component, Inject} from '@angular/core';
-import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {
+    UntypedFormArray,
+    UntypedFormControl,
+    UntypedFormGroup,
+    Validators,
+    FormsModule,
+    ReactiveFormsModule,
+} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {deliverableEmail} from '@ecodev/natural';
+import {MatButtonModule} from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgFor, NgIf} from '@angular/common';
 
 export type EmailsData = {
     title: string;
@@ -13,6 +25,18 @@ export type EmailsData = {
     selector: 'app-emails',
     templateUrl: './emails.component.html',
     styleUrls: ['./emails.component.scss'],
+    standalone: true,
+    imports: [
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgFor,
+        FlexModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NgIf,
+        MatButtonModule,
+    ],
 })
 export class EmailsComponent {
     public readonly form: UntypedFormGroup = new UntypedFormGroup({});

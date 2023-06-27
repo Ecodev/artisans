@@ -1,14 +1,18 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SessionsVariables} from '../../../shared/generated-types';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf} from '@angular/common';
 
 @Component({
     selector: 'app-session-side-column',
     templateUrl: './session-side-column.component.html',
     styleUrls: ['./session-side-column.component.scss'],
+    standalone: true,
+    imports: [NgIf, MatButtonModule, RouterLink],
 })
 export class SessionSideColumnComponent implements OnInit {
     public number = 0;

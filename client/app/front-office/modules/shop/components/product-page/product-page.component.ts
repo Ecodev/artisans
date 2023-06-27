@@ -1,6 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {
+    NaturalAbstractDetail,
+    NaturalQueryVariablesManager,
+    NaturalIconDirective,
+    NaturalSrcDensityDirective,
+    NaturalCapitalizePipe,
+} from '@ecodev/natural';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
 import {
@@ -11,11 +17,40 @@ import {
     PurchasesVariables,
 } from '../../../../../shared/generated-types';
 import {ProductsPageComponent} from '../products-page/products-page.component';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {AddToCartComponent} from '../add-to-cart/add-to-cart.component';
+import {PriceComponent} from '../../../../../shared/components/price/price.component';
+import {MatListModule} from '@angular/material/list';
+import {MatRippleModule} from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-product-page',
     templateUrl: './product-page.component.html',
     styleUrls: ['./product-page.component.scss'],
+    standalone: true,
+    imports: [
+        FlexModule,
+        NgIf,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        NaturalIconDirective,
+        NaturalSrcDensityDirective,
+        MatRippleModule,
+        MatListModule,
+        NgFor,
+        PriceComponent,
+        AddToCartComponent,
+        ExtendedModule,
+        ProductsPageComponent,
+        DatePipe,
+        NaturalCapitalizePipe,
+    ],
 })
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts: ProductsPageComponent | null = null;

@@ -1,7 +1,7 @@
-import {DOCUMENT} from '@angular/common';
+import {DOCUMENT, NgIf, NgFor, NgTemplateOutlet} from '@angular/common';
 import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     deliverableEmail,
     ifValid,
@@ -9,6 +9,7 @@ import {
     NaturalAlertService,
     NaturalSearchSelections,
     toNavigationParameters,
+    NaturalIconDirective,
 } from '@ecodev/natural';
 import {differenceBy} from 'lodash-es';
 import {filter, finalize, takeUntil} from 'rxjs/operators';
@@ -16,12 +17,48 @@ import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
 import {MenuItem, NavigationService} from './services/navigation.service';
+import {MatListModule} from '@angular/material/list';
+import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatRippleModule} from '@angular/material/core';
 
 @Component({
     selector: 'app-front-office',
     templateUrl: './front-office.component.html',
     styleUrls: ['./front-office.component.scss'],
     animations: [],
+    standalone: true,
+    imports: [
+        NgIf,
+        NgFor,
+        MatRippleModule,
+        RouterLink,
+        NgTemplateOutlet,
+        RouterLinkActive,
+        MatSidenavModule,
+        MatToolbarModule,
+        ExtendedModule,
+        FlexModule,
+        MatButtonModule,
+        MatIconModule,
+        NaturalIconDirective,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        BreadcrumbsComponent,
+        RouterOutlet,
+        ReactiveFormsModule,
+        MatListModule,
+    ],
 })
 export class FrontOfficeComponent extends NaturalAbstractController implements OnInit, AfterViewInit {
     public searchTerm = '';

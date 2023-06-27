@@ -1,14 +1,44 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
-import {deliverableEmail, ifValid, NaturalAlertService, validateAllFormControls} from '@ecodev/natural';
+import {
+    deliverableEmail,
+    ifValid,
+    NaturalAlertService,
+    validateAllFormControls,
+    NaturalIconDirective,
+} from '@ecodev/natural';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
+import {MatButtonModule} from '@angular/material/button';
+import {AddressComponent} from '../../../shared/components/address/address.component';
+import {PasswordComponent} from '../password/password.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {NgIf} from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FlexModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        NaturalIconDirective,
+        NgIf,
+        MatDividerModule,
+        PasswordComponent,
+        AddressComponent,
+        MatButtonModule,
+    ],
 })
 export class RegisterComponent implements OnInit {
     public step = 1;

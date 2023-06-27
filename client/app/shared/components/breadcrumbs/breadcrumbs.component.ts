@@ -1,7 +1,9 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {NaturalAbstractController} from '@ecodev/natural';
 import {filter, takeUntil} from 'rxjs/operators';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf, NgFor} from '@angular/common';
 
 export interface Breadcrumb {
     link: any[] | string;
@@ -12,6 +14,8 @@ export interface Breadcrumb {
     selector: 'app-breadcrumbs',
     templateUrl: './breadcrumbs.component.html',
     styleUrls: ['./breadcrumbs.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor, MatButtonModule, RouterLink],
 })
 export class BreadcrumbsComponent extends NaturalAbstractController implements OnInit {
     @HostBinding('class.mat-body') private isBody = true;

@@ -1,5 +1,4 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 import {formatIsoDate, formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
 import {resolveEvent} from '../admin/events/services/event.resolver';
 import {resolveNews} from '../admin/newses/services/news.resolver';
@@ -46,7 +45,7 @@ import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-conn
 import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
 import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-association/rejoindre-association.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         component: HomepageComponent,
@@ -371,7 +370,7 @@ const routes: Routes = [
     },
     {
         path: 'mon-compte',
-        loadChildren: () => import('../profile/profile.module').then(m => m.ProfileModule),
+        loadChildren: () => import('../profile/profile-routing.module').then(m => m.routes),
     },
     {
         path: 'larevuedurable',
@@ -416,11 +415,11 @@ const routes: Routes = [
     },
     {
         path: 'larevuedurable',
-        loadChildren: () => import('./modules/shop/shop.module').then(m => m.ShopModule),
+        loadChildren: () => import('./modules/shop/shop-routing.module').then(m => m.routes),
     },
     {
         path: 'panier',
-        loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule),
+        loadChildren: () => import('./modules/cart/cart-routing.module').then(m => m.routes),
     },
     {
         path: 'mentions-legales',
@@ -440,9 +439,3 @@ const routes: Routes = [
         data: {notFound: true},
     },
 ];
-
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-})
-export class FrontOfficeRoutingModule {}

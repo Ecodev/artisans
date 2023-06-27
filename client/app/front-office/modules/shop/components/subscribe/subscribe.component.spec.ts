@@ -7,7 +7,7 @@ describe('SubscribeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [SubscribeComponent],
+            imports: [SubscribeComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(SubscribeComponent);

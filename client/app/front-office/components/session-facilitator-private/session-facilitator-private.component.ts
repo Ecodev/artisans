@@ -1,14 +1,32 @@
 import {Component, OnInit} from '@angular/core';
-import {Literal, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {Literal, NaturalQueryVariablesManager, NaturalIconDirective} from '@ecodev/natural';
 import {groupBy, sortBy} from 'lodash-es';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, UserRole, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
+import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {NgFor, NgIf, KeyValuePipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-session-facilitator-private',
     templateUrl: './session-facilitator-private.component.html',
     styleUrls: ['./session-facilitator-private.component.scss'],
+    standalone: true,
+    imports: [
+        FlexModule,
+        NgFor,
+        ExtendedModule,
+        MatListModule,
+        NgIf,
+        MatIconModule,
+        NaturalIconDirective,
+        SessionSideColumnComponent,
+        KeyValuePipe,
+    ],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
     public facilitators: Users['users']['items'][0][] = [];

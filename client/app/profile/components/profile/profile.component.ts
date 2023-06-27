@@ -1,14 +1,37 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {NaturalAlertService} from '@ecodev/natural';
+import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {NaturalAlertService, NaturalIconDirective, NaturalEnumPipe} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {CurrentUserForProfile, Membership, Product, ProductType} from '../../../shared/generated-types';
 import {ProductService} from '../../../admin/products/services/product.service';
+import {MatListModule} from '@angular/material/list';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {AddToCartComponent} from '../../../front-office/modules/shop/components/add-to-cart/add-to-cart.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        MatButtonModule,
+        MatIconModule,
+        NaturalIconDirective,
+        RouterLink,
+        AddToCartComponent,
+        ExtendedModule,
+        MatListModule,
+        RouterLinkActive,
+        RouterOutlet,
+        AsyncPipe,
+        NaturalEnumPipe,
+    ],
 })
 export class ProfileComponent implements OnInit {
     public viewer: CurrentUserForProfile['viewer'] = null;

@@ -1,6 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {
+    formatIsoDateTime,
+    NaturalQueryVariablesManager,
+    NaturalIconDirective,
+    NaturalSrcDensityDirective,
+    NaturalCapitalizePipe,
+} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
@@ -21,11 +27,38 @@ import {
 } from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {CartService} from '../../modules/cart/services/cart.service';
+import {TagsNavigationComponent} from '../../../shared/components/tags-navigation/tags-navigation.component';
+import {PriceComponent} from '../../../shared/components/price/price.component';
+import {MatRippleModule} from '@angular/material/core';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {HomeBlockComponent} from '../home-block/home-block.component';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-homepage',
     templateUrl: './homepage.component.html',
     styleUrls: ['./homepage.component.scss'],
+    standalone: true,
+    imports: [
+        FlexModule,
+        HomeBlockComponent,
+        NgIf,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        NaturalIconDirective,
+        MatDividerModule,
+        NgFor,
+        MatRippleModule,
+        NaturalSrcDensityDirective,
+        PriceComponent,
+        TagsNavigationComponent,
+        DatePipe,
+        NaturalCapitalizePipe,
+    ],
 })
 export class HomepageComponent implements OnInit {
     public title = 'Les artisans de la transition';

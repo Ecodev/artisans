@@ -1,15 +1,29 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component} from '@angular/core';
-import {UntypedFormGroup} from '@angular/forms';
+import {UntypedFormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NaturalAlertService} from '@ecodev/natural';
+import {NaturalAlertService, NaturalIconDirective} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
 import {UpdatePassword, UpdatePasswordVariables} from '../../../shared/generated-types';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {PasswordComponent} from '../password/password.component';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-change-password',
     templateUrl: './change-password.component.html',
     styleUrls: ['./change-password.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FlexModule,
+        PasswordComponent,
+        MatButtonModule,
+        MatIconModule,
+        NaturalIconDirective,
+    ],
 })
 export class ChangePasswordComponent {
     public readonly form: UntypedFormGroup;

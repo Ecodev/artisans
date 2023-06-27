@@ -1,13 +1,37 @@
 import {Component, OnInit} from '@angular/core';
-import {NaturalAbstractList} from '@ecodev/natural';
+import {NaturalAbstractList, NaturalTableButtonComponent, NaturalEnumPipe, NaturalSwissDatePipe} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
+import {RouterOutlet} from '@angular/router';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatTableModule} from '@angular/material/table';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html',
     styleUrls: ['./history.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        ExtendedModule,
+        MatTableModule,
+        NaturalTableButtonComponent,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        RouterOutlet,
+        AsyncPipe,
+        CurrencyPipe,
+        NaturalEnumPipe,
+        NaturalSwissDatePipe,
+    ],
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
     public constructor(

@@ -1,19 +1,38 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Data, Router} from '@angular/router';
+import {ActivatedRoute, Data, Router, RouterLink} from '@angular/router';
 import {
     FileSelection,
     NaturalAlertService,
     NaturalQueryVariablesManager,
     toNavigationParameters,
+    NaturalFileDropDirective,
+    NaturalIconDirective,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {Import, ImportVariables, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgIf, NgFor} from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-import',
     templateUrl: './import.component.html',
+    standalone: true,
+    imports: [
+        FlexModule,
+        MatButtonModule,
+        NaturalFileDropDirective,
+        MatIconModule,
+        NaturalIconDirective,
+        NgIf,
+        MatProgressSpinnerModule,
+        RouterLink,
+        NgFor,
+    ],
 })
 export class ImportComponent implements OnInit {
     /**

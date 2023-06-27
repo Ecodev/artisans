@@ -1,8 +1,18 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
+import {TextFieldModule} from '@angular/cdk/text-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {MatCardModule} from '@angular/material/card';
+import {NaturalIconDirective} from '@ecodev/natural';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf} from '@angular/common';
 
 interface Block {
     title: string;
@@ -15,6 +25,21 @@ interface Block {
     selector: 'app-home-block',
     templateUrl: './home-block.component.html',
     styleUrls: ['./home-block.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        NaturalIconDirective,
+        MatCardModule,
+        FlexModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        TextFieldModule,
+    ],
 })
 export class HomeBlockComponent implements OnInit {
     @Input({required: true}) public key!: string;

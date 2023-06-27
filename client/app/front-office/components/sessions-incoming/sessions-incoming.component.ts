@@ -7,11 +7,18 @@ import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/emails.component';
+import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {NgFor, NgIf} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-sessions-incoming',
     templateUrl: './sessions-incoming.component.html',
     styleUrls: ['./sessions-incoming.component.scss'],
+    standalone: true,
+    imports: [FlexModule, MatButtonModule, NgFor, NgIf, ExtendedModule, SessionSideColumnComponent],
 })
 export class SessionsIncomingComponent implements OnInit {
     public sessions: Sessions['sessions']['items'][0][] = [];

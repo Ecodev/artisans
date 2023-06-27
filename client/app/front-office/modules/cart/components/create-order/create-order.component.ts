@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NaturalAlertService} from '@ecodev/natural';
+import {UntypedFormControl, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
+import {NaturalAlertService, NaturalEnumPipe} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
 import {UserService} from '../../../../../admin/users/services/user.service';
 import {CreateOrder, PaymentMethod} from '../../../../../shared/generated-types';
@@ -13,11 +13,36 @@ import {CartCollectionService} from '../../services/cart-collection.service';
 import {DatatransService} from '../../services/datatrans.service';
 import {Big} from 'big.js';
 import {localConfig} from '../../../../../shared/generated-config';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import {AddressComponent} from '../../../../../shared/components/address/address.component';
+import {MatRadioModule} from '@angular/material/radio';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-create-order',
     templateUrl: './create-order.component.html',
     styleUrls: ['./create-order.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        ExtendedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatRadioModule,
+        AddressComponent,
+        MatButtonModule,
+        RouterLink,
+        MatCheckboxModule,
+        NgFor,
+        RouterOutlet,
+        AsyncPipe,
+        CurrencyPipe,
+        NaturalEnumPipe,
+    ],
 })
 export class CreateOrderComponent implements OnInit {
     /**

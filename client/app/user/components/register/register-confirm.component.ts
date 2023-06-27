@@ -1,18 +1,42 @@
 import {Apollo} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
-import {deliverableEmail, NaturalAlertService, relationsToIds} from '@ecodev/natural';
+import {deliverableEmail, NaturalAlertService, relationsToIds, NaturalIconDirective} from '@ecodev/natural';
 import {pick} from 'lodash-es';
 import {RegisterComponent} from './register.component';
-import {UntypedFormBuilder, Validators} from '@angular/forms';
+import {UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserByTokenResolve} from '../../../admin/users/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ConfirmRegistrationVariables, UserByToken} from '../../../shared/generated-types';
 import {UserService} from '../../../admin/users/services/user.service';
+import {MatButtonModule} from '@angular/material/button';
+import {AddressComponent} from '../../../shared/components/address/address.component';
+import {PasswordComponent} from '../password/password.component';
+import {MatDividerModule} from '@angular/material/divider';
+import {NgIf} from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-confirm',
-    templateUrl: './register.component.html', // Use same template as parent class
+    templateUrl: './register.component.html',
     styleUrls: ['./register.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        FlexModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        NaturalIconDirective,
+        NgIf,
+        MatDividerModule,
+        PasswordComponent,
+        AddressComponent,
+        MatButtonModule,
+    ],
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
     public constructor(

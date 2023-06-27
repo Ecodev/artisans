@@ -1,14 +1,52 @@
 import {Component} from '@angular/core';
-import {NaturalAbstractDetail} from '@ecodev/natural';
+import {
+    NaturalAbstractDetail,
+    NaturalDetailHeaderComponent,
+    NaturalIconDirective,
+    NaturalLinkableTabDirective,
+    NaturalFileComponent,
+    NaturalStampComponent,
+    NaturalFixedButtonDetailComponent,
+} from '@ecodev/natural';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
 import {CreateFile} from '../../../shared/generated-types';
 import {map, Observable, of, switchMap} from 'rxjs';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-facilitator-document',
     templateUrl: './facilitator-document.component.html',
     styleUrls: ['./facilitator-document.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        NaturalDetailHeaderComponent,
+        NgIf,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        NaturalIconDirective,
+        MatTabsModule,
+        NaturalLinkableTabDirective,
+        FlexModule,
+        MatFormFieldModule,
+        MatInputModule,
+        NaturalFileComponent,
+        MatDividerModule,
+        NaturalStampComponent,
+        NaturalFixedButtonDetailComponent,
+    ],
 })
 export class FacilitatorDocumentComponent extends NaturalAbstractDetail<FacilitatorDocumentsService> {
     public constructor(

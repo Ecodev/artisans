@@ -2,11 +2,17 @@ import {Component, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
+import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {NgFor} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-session-facilitator',
     templateUrl: './session-facilitator.component.html',
     styleUrls: ['./session-facilitator.component.scss'],
+    standalone: true,
+    imports: [FlexModule, NgFor, ExtendedModule, SessionSideColumnComponent],
 })
 export class SessionFacilitatorComponent implements OnInit {
     public facilitators: Users['users']['items'][0][] = [];

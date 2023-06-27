@@ -1,5 +1,4 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
 import {canActivateAdministration} from '../shared/guards/administration.guard';
 import {AdminComponent} from './admin/admin.component';
@@ -77,7 +76,7 @@ const orderDetails = [
     },
 ];
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         component: AdminComponent,
@@ -354,9 +353,3 @@ const routes: Routes = [
         ],
     },
 ];
-
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-})
-export class AdminRoutingModule {}

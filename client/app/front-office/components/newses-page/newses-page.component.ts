@@ -1,14 +1,20 @@
 import {Component} from '@angular/core';
-import {PaginationInput} from '@ecodev/natural';
+import {PaginationInput, NaturalCapitalizePipe} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterLink} from '@angular/router';
+import {NgFor, NgIf, DatePipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-newses-page',
     templateUrl: './newses-page.component.html',
     styleUrls: ['./newses-page.component.scss'],
+    standalone: true,
+    imports: [FlexModule, NgFor, RouterLink, NgIf, MatButtonModule, DatePipe, NaturalCapitalizePipe],
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
     protected override defaultPagination: Required<PaginationInput> = {

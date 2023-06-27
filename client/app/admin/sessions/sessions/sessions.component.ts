@@ -1,14 +1,51 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
+import {ActivatedRoute, RouterLink} from '@angular/router';
+import {
+    AvailableColumn,
+    NaturalAbstractList,
+    NaturalColumnsPickerComponent,
+    NaturalSearchComponent,
+    NaturalTableButtonComponent,
+    NaturalAvatarComponent,
+    NaturalFixedButtonComponent,
+} from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {SessionService} from '../services/session.service';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, NgFor, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-sessions',
     templateUrl: './sessions.component.html',
     styleUrls: ['./sessions.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        NaturalColumnsPickerComponent,
+        NaturalSearchComponent,
+        ExtendedModule,
+        MatTableModule,
+        MatSortModule,
+        NaturalTableButtonComponent,
+        MatTooltipModule,
+        NgFor,
+        NaturalAvatarComponent,
+        MatButtonModule,
+        RouterLink,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        NaturalFixedButtonComponent,
+        DatePipe,
+    ],
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
     public override availableColumns: AvailableColumn[] = [

@@ -1,5 +1,4 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
 import {OrderComponent} from '../admin/order/order/order.component';
 import {resolveOrder} from '../admin/order/services/order.resolver';
@@ -10,7 +9,7 @@ import {HistoryComponent} from './components/history/history.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {PurchasesComponent} from './components/purchases/purchases.component';
 
-const routes: Routes = [
+export const routes: Routes = [
     {
         path: '',
         component: ProfileComponent,
@@ -62,9 +61,3 @@ const routes: Routes = [
         ],
     },
 ];
-
-@NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-})
-export class ProfileRoutingModule {}

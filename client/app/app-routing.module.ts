@@ -1,34 +1,22 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 import {resolveViewer} from './admin/users/services/viewer.resolver';
 import {FrontOfficeComponent} from './front-office/front-office.component';
 
 export const routes: Routes = [
     {
         path: 'admin',
-        loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+        loadChildren: () => import('./admin/admin-routing.module').then(m => m.routes),
     },
     {
         // Registration
         path: 'user',
         component: FrontOfficeComponent,
-        loadChildren: () => import('./user/user.module').then(m => m.UserModule),
+        loadChildren: () => import('./user/user-routing.module').then(m => m.routes),
     },
     {
         path: '',
         component: FrontOfficeComponent,
         resolve: {viewer: resolveViewer},
-        loadChildren: () => import('./front-office/front-office.module').then(m => m.FrontOfficeModule),
+        loadChildren: () => import('./front-office/front-office-routing.module').then(m => m.routes),
     },
 ];
-
-@NgModule({
-    imports: [
-        RouterModule.forRoot(routes, {
-            paramsInheritanceStrategy: 'always',
-            scrollPositionRestoration: 'top',
-        }),
-    ],
-    exports: [RouterModule],
-})
-export class AppRoutingModule {}

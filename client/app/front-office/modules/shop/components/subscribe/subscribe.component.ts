@@ -4,5 +4,6 @@ import {Component} from '@angular/core';
     selector: 'app-subscribe',
     templateUrl: './subscribe.component.html',
     styleUrls: ['./subscribe.component.scss'],
+    standalone: true,
 })
 export class SubscribeComponent {}

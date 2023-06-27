@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {formatIsoDateTime, NaturalAbstractDetail, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {
+    formatIsoDateTime,
+    NaturalAbstractDetail,
+    NaturalQueryVariablesManager,
+    NaturalIconDirective,
+} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
@@ -10,11 +15,28 @@ import {
     UserRole,
     Users,
 } from '../../../shared/generated-types';
+import {MatIconModule} from '@angular/material/icon';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {NgIf, NgFor, LowerCasePipe, DatePipe} from '@angular/common';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-session-page',
     templateUrl: './session-page.component.html',
     styleUrls: ['./session-page.component.scss'],
+    standalone: true,
+    imports: [
+        FlexModule,
+        NgIf,
+        MatButtonModule,
+        RouterLink,
+        MatIconModule,
+        NaturalIconDirective,
+        NgFor,
+        LowerCasePipe,
+        DatePipe,
+    ],
 })
 export class SessionPageComponent extends NaturalAbstractDetail<SessionService> implements OnInit {
     /**

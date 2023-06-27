@@ -1,12 +1,45 @@
 import {Component, OnInit} from '@angular/core';
-import {AvailableColumn, NaturalAbstractList} from '@ecodev/natural';
+import {
+    AvailableColumn,
+    NaturalAbstractList,
+    NaturalColumnsPickerComponent,
+    NaturalSearchComponent,
+    NaturalTableButtonComponent,
+    NaturalFixedButtonComponent,
+} from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../services/event.service';
+import {RouterLink} from '@angular/router';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+import {FlexModule} from '@ngbracket/ngx-layout/flex';
+import {NgIf, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-events',
     templateUrl: './events.component.html',
     styleUrls: ['./events.component.scss'],
+    standalone: true,
+    imports: [
+        NgIf,
+        FlexModule,
+        NaturalColumnsPickerComponent,
+        NaturalSearchComponent,
+        ExtendedModule,
+        MatTableModule,
+        MatSortModule,
+        NaturalTableButtonComponent,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        NaturalFixedButtonComponent,
+        RouterLink,
+        DatePipe,
+    ],
 })
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
     public override availableColumns: AvailableColumn[] = [

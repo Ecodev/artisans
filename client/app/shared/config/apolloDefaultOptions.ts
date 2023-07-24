@@ -1,4 +1,4 @@
-import {HttpBatchLink} from 'apollo-angular/http';
+import {HttpBatchLink, HttpLink} from 'apollo-angular/http';
 import {
     ApolloClientOptions,
     ApolloLink,
@@ -7,12 +7,10 @@ import {
     NormalizedCacheObject,
 } from '@apollo/client/core';
 import {onError} from '@apollo/client/link/error';
-import {hasFilesAndProcessDate, NaturalAlertService, isMutation} from '@ecodev/natural';
-import {createUploadLink} from 'apollo-upload-client';
+import {createHttpLink, NaturalAlertService} from '@ecodev/natural';
 import {NetworkActivityService} from '../services/network-activity.service';
-import {isPlatformBrowser} from '@angular/common';
 import {APOLLO_OPTIONS} from 'apollo-angular';
-import {PLATFORM_ID, Provider} from '@angular/core';
+import {inject, PLATFORM_ID, Provider} from '@angular/core';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
@@ -54,82 +52,32 @@ function createErrorLink(
     });
 }
 
-/**
- * Create a simple Apollo link for server side rendering without network activity, nor upload, nor error alerts
- *
- * This function will only be executed in Node environment, so we can access `process`
- */
-function createApolloLinkForServer(httpBatchLink: HttpBatchLink): ApolloLink {
-    const hostname = process.cwd().split('/').pop() || 'dev.larevuedurable.com';
-
-    const options = {
-        uri: 'https://' + hostname + '/graphql', // Must be absolute URL
-        credentials: 'include',
-    };
-
-    // We must allow connecting to self-signed certificate for development environment
-    // Unfortunately, this is only possible to do it globally for the entire process, instead of specifically to our API endpoint
-    // See https://github.com/apollographql/apollo-angular/issues/1354#issue-503860648
-    if (hostname.match(/\.lan$/)) {
-        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-    }
-
-    return httpBatchLink.create(options);
-}
-
 function createApolloLink(
     networkActivityService: NetworkActivityService,
     alertService: NaturalAlertService,
+    httpLink: HttpLink,
     httpBatchLink: HttpBatchLink,
 ): ApolloLink {
-    const options = {
-        uri: '/graphql',
-        credentials: 'include',
-    };
-
-    const uploadInterceptor = new ApolloLink((operation, forward) => {
-        networkActivityService.increase();
-
-        if (forward) {
-            return forward(operation).map(response => {
-                networkActivityService.decrease();
-                return response;
-            });
-        } else {
-            return null;
-        }
-    });
-
-    // If query has no file, batch it, otherwise upload only that query
-    const httpLink = ApolloLink.split(
-        operation => hasFilesAndProcessDate(operation.variables) || isMutation(operation.query),
-        uploadInterceptor.concat(createUploadLink(options)),
-        httpBatchLink.create(options),
-    );
-
     const errorLink = createErrorLink(networkActivityService, alertService);
 
-    return errorLink.concat(httpLink);
+    return errorLink.concat(
+        createHttpLink(httpLink, httpBatchLink, {
+            uri: '/graphql',
+        }),
+    );
 }
 
-function apolloOptionsFactory(
-    networkActivityService: NetworkActivityService,
-    alertService: NaturalAlertService,
-    httpBatchLink: HttpBatchLink,
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    platformId: Object,
-): ApolloClientOptions<NormalizedCacheObject> {
-    // tells if it's browser or server
-    const isBrowser = isPlatformBrowser(platformId);
+function apolloOptionsFactory(): ApolloClientOptions<NormalizedCacheObject> {
+    const networkActivityService = inject(NetworkActivityService);
+    const alertService = inject(NaturalAlertService);
+    const httpLink = inject(HttpLink);
+    const httpBatchLink = inject(HttpBatchLink);
 
-    const link = isBrowser
-        ? createApolloLink(networkActivityService, alertService, httpBatchLink)
-        : createApolloLinkForServer(httpBatchLink);
+    const link = createApolloLink(networkActivityService, alertService, httpLink, httpBatchLink);
     return {
         link: link,
         cache: new InMemoryCache(),
         defaultOptions: apolloDefaultOptions,
-        ssrMode: !isBrowser,
     };
 }
 

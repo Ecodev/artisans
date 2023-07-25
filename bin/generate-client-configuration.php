@@ -11,6 +11,7 @@ $clientKeys = [
 
 $clientConfig = array_intersect_key($config, array_flip($clientKeys));
 $clientConfig['log']['url'] = $config['log']['url'];
+$clientConfig['signedQueries']['key'] = $config['signedQueries']['keys'][0] ?? '';
 
 $json = json_encode($clientConfig, JSON_PRETTY_PRINT);
 $code = <<<STRING

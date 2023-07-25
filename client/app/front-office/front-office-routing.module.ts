@@ -430,10 +430,6 @@ export const routes: Routes = [
         component: ConditionsGeneralesVenteComponent,
     },
     {
-        path: 'error',
-        component: ErrorComponent,
-    },
-    {
         path: '**',
         component: ErrorComponent,
         data: {notFound: true},

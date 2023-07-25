@@ -21,6 +21,7 @@ import {
 import {LoggerExtraService} from './app/shared/services/logger-extra.service';
 import {localConfig} from './app/shared/generated-config';
 import {
+    graphqlQuerySigner,
     naturalProviders,
     NaturalSwissParsingDateAdapter,
     provideErrorHandler,
@@ -98,7 +99,7 @@ bootstrapApplication(AppComponent, {
         },
         apolloOptionsProvider,
         {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: matTooltipCustomConfig},
-        provideHttpClient(withInterceptors([activityInterceptor])),
+        provideHttpClient(withInterceptors([activityInterceptor, graphqlQuerySigner(localConfig.signedQueries.key)])),
         provideRouter(
             routes,
             withRouterConfig({

@@ -19,7 +19,7 @@ class RegexpOperatorType extends AbstractOperator
             'fields' => [
                 [
                     'name' => 'value',
-                    'type' => self::getNullableType(self::string()),
+                    'type' => self::string(),
                 ],
             ],
         ];

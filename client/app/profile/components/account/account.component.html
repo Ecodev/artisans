@@ -6,7 +6,8 @@
             <h2 class="mat-h2">Compte</h2>
 
             <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
-                <mat-form-field fxFlex>
+                <mat-form-field fxFlex.gt-sm
+                    ><!-- row child -->
                     <mat-label>email</mat-label>
                     <input formControlName="email" matInput type="email" />
                 </mat-form-field>
@@ -31,7 +32,7 @@
 
             <app-address [form]="form"></app-address>
 
-            <mat-form-field fxFlex>
+            <mat-form-field>
                 <mat-label>Téléphone</mat-label>
                 <input formControlName="phone" matInput />
             </mat-form-field>

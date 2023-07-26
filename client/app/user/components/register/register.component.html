@@ -2,17 +2,13 @@
     <div fxLayout="column" fxLayoutGap="30px">
         <h1 class="mat-headline-4">{{ route.snapshot.data.seo.title }}</h1>
 
-        <div fxLayout="column">
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
-                <mat-form-field fxFlex>
-                    <mat-label>email</mat-label>
-                    <input formControlName="email" matInput />
-                    <mat-icon matIconPrefix naturalIcon="alternate_email"></mat-icon>
-                    <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
-                    <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
-                </mat-form-field>
-            </div>
-        </div>
+        <mat-form-field>
+            <mat-label>email</mat-label>
+            <input formControlName="email" matInput />
+            <mat-icon matIconPrefix naturalIcon="alternate_email"></mat-icon>
+            <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
+            <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
+        </mat-form-field>
 
         <div *ngIf="step === 2" fxLayout="column" fxLayoutGap="30px">
             <mat-divider></mat-divider>
@@ -29,13 +25,6 @@
 
             <app-address [form]="form"></app-address>
         </div>
-
-        <!-- Spacer-->
-        <div *ngIf="step === 1"></div>
-
-        <!-- Spacer-->
-
-        <div></div>
 
         <div fxLayout="row" fxLayoutAlign="center">
             <button (click)="submit()" [color]="form.valid ? 'primary' : 'warn'" [disabled]="sending" mat-raised-button>

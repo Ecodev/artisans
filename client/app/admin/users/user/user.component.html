@@ -19,15 +19,11 @@
                 <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
                         <h2 class="mat-h2">Coordonnées</h2>
-
                         <app-address [form]="form" [disabled]="true"></app-address>
-
-                        <div fxLayout="row" fxLayoutGap="10px">
-                            <mat-form-field fxFlex>
-                                <mat-label>Téléphone</mat-label>
-                                <input formControlName="phone" matInput />
-                            </mat-form-field>
-                        </div>
+                        <mat-form-field>
+                            <mat-label>Téléphone</mat-label>
+                            <input formControlName="phone" matInput />
+                        </mat-form-field>
                     </div>
 
                     <div fxFlex="33" fxLayout="column">

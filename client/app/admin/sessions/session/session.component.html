@@ -82,20 +82,16 @@
                             <div
                                 *ngFor="let date of datesForm.controls; let i = index"
                                 fxLayout="row"
-                                fxLayoutAlign="start center"
+                                fxLayoutAlign="start top"
                                 fxLayoutGap="15px"
                             >
-                                <mat-form-field fxFlex>
+                                <mat-form-field fxFlex
+                                    ><!-- row child -->
                                     <mat-label>Date</mat-label>
                                     <input (change)="update()" [formControlName]="i" matInput />
                                 </mat-form-field>
-                                <button
-                                    (click)="datesForm.removeAt(i); update()"
-                                    color="warn"
-                                    mat-icon-button
-                                    class="mat-elevation-z4"
-                                >
-                                    <mat-icon naturalIcon="remove"></mat-icon>
+                                <button (click)="datesForm.removeAt(i); update()" color="warn" mat-icon-button>
+                                    <mat-icon naturalIcon="delete"></mat-icon>
                                 </button>
                             </div>
 

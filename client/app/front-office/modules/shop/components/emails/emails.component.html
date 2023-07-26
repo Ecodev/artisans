@@ -7,7 +7,8 @@
             fxLayoutAlign="start center"
             fxLayoutGap="15px"
         >
-            <mat-form-field fxFlex>
+            <mat-form-field fxFlex
+                ><!-- row child -->
                 <mat-label>Email</mat-label>
                 <input [formControl]="$any(control)" matInput />
                 <mat-error *ngIf="control.hasError('email')" i18n>Courriel invalide</mat-error>

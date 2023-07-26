@@ -4,13 +4,15 @@
         [fxLayoutGap.gt-sm]="vertical ? '0px' : '10px'"
         fxLayout="column"
     >
-        <mat-form-field fxFlex.gt-sm>
+        <mat-form-field [fxFlex.gt-sm]="!vertical"
+            ><!-- row child -->
             <mat-label>Prénom</mat-label>
             <input (change)="update()" formControlName="firstName" matInput />
             <mat-error *ngIf="form.get('firstName')?.hasError('required')">Requis</mat-error>
         </mat-form-field>
 
-        <mat-form-field fxFlex.gt-sm>
+        <mat-form-field [fxFlex.gt-sm]="!vertical"
+            ><!-- row child -->
             <mat-label>Nom de famille</mat-label>
             <input (change)="update()" formControlName="lastName" matInput />
             <mat-error *ngIf="form.get('lastName')?.hasError('required')">Requis</mat-error>
@@ -36,7 +38,8 @@
             </mat-form-field>
         </div>
 
-        <mat-form-field [fxFlex]="!vertical">
+        <mat-form-field [fxFlex]="!vertical"
+            ><!-- row child -->
             <mat-label>Localité</mat-label>
             <input (change)="update()" formControlName="locality" matInput />
             <mat-error *ngIf="form.get('locality')?.hasError('required')">Requis</mat-error>

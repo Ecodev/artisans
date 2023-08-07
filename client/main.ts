@@ -8,10 +8,10 @@ import {Apollo} from 'apollo-angular';
 import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/material/tooltip';
 import {apolloOptionsProvider} from './app/shared/config/apolloDefaultOptions';
 import {LocalizedPaginatorIntlService} from './app/shared/services/localized-paginator-intl.service';
-import {DATE_PIPE_DEFAULT_OPTIONS, registerLocaleData} from '@angular/common';
+import {DATE_PIPE_DEFAULT_OPTIONS, DatePipeConfig, registerLocaleData} from '@angular/common';
 import {activityInterceptor} from './app/shared/services/activity-interceptor';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorIntl} from '@angular/material/paginator';
+import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions, MatPaginatorIntl} from '@angular/material/paginator';
 import {
     DateAdapter,
     ErrorStateMatcher,
@@ -81,7 +81,7 @@ bootstrapApplication(AppComponent, {
             provide: MAT_PAGINATOR_DEFAULT_OPTIONS,
             useValue: {
                 formFieldAppearance: 'fill',
-            },
+            } satisfies MatPaginatorDefaultOptions,
         },
         {
             provide: LOCALE_ID,
@@ -91,7 +91,7 @@ bootstrapApplication(AppComponent, {
             provide: DATE_PIPE_DEFAULT_OPTIONS,
             useValue: {
                 timezone: 'fr-CH',
-            },
+            } satisfies Partial<DatePipeConfig>, // See https://github.com/angular/angular/pull/51287
         },
         {
             provide: MatPaginatorIntl,

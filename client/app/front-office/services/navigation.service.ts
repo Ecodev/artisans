@@ -6,7 +6,7 @@ import {ActivatedRoute, NavigationEnd, Router, RouterLink} from '@angular/router
 import {cloneDeep} from 'lodash-es';
 import {merge, Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {APP_MENU_DATA, MenuComponent} from '../components/menu/menu.component';
+import {APP_MENU_DATA, MenuComponent, MenuDropdownData} from '../components/menu/menu.component';
 
 export interface MenuItem {
     display: string;
@@ -44,7 +44,7 @@ export class NavigationService {
                     items: cloneDeep(items),
                     originalNativeElement: connectedElement.nativeElement,
                     contentHeight: nbOfItems * 38,
-                },
+                } satisfies MenuDropdownData,
             },
         ];
 

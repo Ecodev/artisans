@@ -63,7 +63,7 @@
                     <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>
                         Membre des artisans
                     </th>
-                    <td *matCellDef="let element" mat-cell>{{ element.membership | enum : 'Membership' | async }}</td>
+                    <td *matCellDef="let element" mat-cell>{{ element.membership | enum: 'Membership' | async }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="phone">

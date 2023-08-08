@@ -49,7 +49,10 @@ export class EventsComponent extends NaturalAbstractList<EventService> implement
         {id: 'type', label: 'Type'},
     ];
 
-    public constructor(service: EventService, public readonly permissionsService: PermissionsService) {
+    public constructor(
+        service: EventService,
+        public readonly permissionsService: PermissionsService,
+    ) {
         super(service);
     }
 }

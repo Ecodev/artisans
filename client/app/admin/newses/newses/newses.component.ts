@@ -52,7 +52,10 @@ export class NewsesComponent extends NaturalAbstractList<NewsService> implements
         {id: 'isActive', label: 'Active'},
     ];
 
-    public constructor(service: NewsService, public readonly permissionsService: PermissionsService) {
+    public constructor(
+        service: NewsService,
+        public readonly permissionsService: PermissionsService,
+    ) {
         super(service);
     }
 }

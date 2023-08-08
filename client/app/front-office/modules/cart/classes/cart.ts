@@ -60,7 +60,10 @@ export class Cart {
      * On new cart, never recover from session storage
      * @param id Use id param only for global cart
      */
-    public constructor(private readonly cartCollectionService: CartCollectionService, id?: number) {
+    public constructor(
+        private readonly cartCollectionService: CartCollectionService,
+        id?: number,
+    ) {
         this._id = id ?? this.cartCollectionService.length;
         this.cartCollectionService.add(this);
     }

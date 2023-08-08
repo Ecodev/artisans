@@ -88,13 +88,13 @@
                                 N° {{ product.reviewNumber }}
                             </span>
                             <span *ngIf="product.releaseDate">
-                                {{ product.releaseDate | date : 'MMMM yyyy' | capitalize }}
+                                {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
                             </span>
                         </div>
                         <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
                         <div
                             class="product-name mat-h3"
-                            [innerHTML]="product.description | stripTags | truncate : ['570', '...']"
+                            [innerHTML]="product.description | stripTags | truncate: ['570', '...']"
                         ></div>
                     </div>
 

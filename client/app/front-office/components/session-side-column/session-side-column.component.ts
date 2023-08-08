@@ -19,7 +19,10 @@ export class SessionSideColumnComponent implements OnInit {
 
     @Input() public hiddenBlocName?: string;
 
-    public constructor(private readonly sessionService: SessionService, private readonly route: ActivatedRoute) {}
+    public constructor(
+        private readonly sessionService: SessionService,
+        private readonly route: ActivatedRoute,
+    ) {}
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();

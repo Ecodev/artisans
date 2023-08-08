@@ -22,7 +22,7 @@
                 fxLayoutAlign="start baseline"
             >
                 <span>{{ comment.authorName }}</span>
-                <span class="mat-body text-light"> Posté le {{ comment.creationDate | date : 'longDate' }}</span>
+                <span class="mat-body text-light"> Posté le {{ comment.creationDate | date: 'longDate' }}</span>
                 <a
                     [routerLink]="['/admin/comment', comment.id]"
                     mat-icon-button

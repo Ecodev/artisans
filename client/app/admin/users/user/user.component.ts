@@ -72,7 +72,10 @@ export class UserComponent extends NaturalAbstractDetail<UserService> implements
      */
     public override data!: UserResolve & {seo: NaturalSeoBasic};
 
-    public constructor(private readonly userService: UserService, public readonly sessionService: SessionService) {
+    public constructor(
+        private readonly userService: UserService,
+        public readonly sessionService: SessionService,
+    ) {
         super('user', userService);
     }
 

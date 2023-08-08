@@ -56,7 +56,10 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
 
     public viewer: CurrentUserForProfile['viewer'] = null;
 
-    public constructor(private readonly sessionService: SessionService, public readonly userService: UserService) {
+    public constructor(
+        private readonly sessionService: SessionService,
+        public readonly userService: UserService,
+    ) {
         super('session', sessionService);
     }
 

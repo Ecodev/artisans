@@ -68,7 +68,10 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
      */
     public override data!: SessionResolve & {seo: NaturalSeoBasic};
 
-    public constructor(private readonly sessionService: SessionService, public readonly userService: UserService) {
+    public constructor(
+        private readonly sessionService: SessionService,
+        public readonly userService: UserService,
+    ) {
         super('session', sessionService);
     }
 

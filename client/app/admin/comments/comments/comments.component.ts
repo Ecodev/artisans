@@ -43,7 +43,10 @@ export class CommentsComponent extends NaturalAbstractList<CommentService> imple
         {id: 'news', label: 'Actualité'},
     ];
 
-    public constructor(service: CommentService, public readonly permissionsService: PermissionsService) {
+    public constructor(
+        service: CommentService,
+        public readonly permissionsService: PermissionsService,
+    ) {
         super(service);
     }
 }

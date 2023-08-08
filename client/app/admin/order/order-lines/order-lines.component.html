@@ -40,7 +40,7 @@
 
                 <ng-container matColumnDef="productType">
                     <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.type | enum : 'ProductType' | async }}</td>
+                    <td *matCellDef="let element" mat-cell>{{ element.type | enum: 'ProductType' | async }}</td>
                     <td *matFooterCellDef mat-footer-cell></td>
                 </ng-container>
 
@@ -72,15 +72,15 @@
                     <th *matHeaderCellDef mat-header-cell natural-5em-column>Montant</th>
                     <td *matCellDef="let element" mat-cell>
                         <ng-container *ngIf="element.balanceCHF > 0">{{
-                            element.balanceCHF | currency : 'CHF'
+                            element.balanceCHF | currency: 'CHF'
                         }}</ng-container>
                         <ng-container *ngIf="element.balanceEUR > 0">{{
-                            element.balanceEUR | currency : 'EUR'
+                            element.balanceEUR | currency: 'EUR'
                         }}</ng-container>
                     </td>
                     <td *matFooterCellDef mat-footer-cell>
                         <span *ngIf="dataSource?.data?.totalBalanceCHF > 0">{{
-                            dataSource.data?.totalBalanceCHF | currency : 'CHF'
+                            dataSource.data?.totalBalanceCHF | currency: 'CHF'
                         }}</span>
                         <ng-container
                             *ngIf="dataSource?.data?.totalBalanceCHF > 0 && dataSource?.data.totalBalanceEUR > 0"
@@ -88,7 +88,7 @@
                             -
                         </ng-container>
                         <span *ngIf="dataSource?.data?.totalBalanceEUR > 0">{{
-                            dataSource.data?.totalBalanceEUR | currency : 'EUR'
+                            dataSource.data?.totalBalanceEUR | currency: 'EUR'
                         }}</span>
                     </td>
                 </ng-container>

@@ -4,7 +4,7 @@
     <div fxLayout="column" fxLayoutGap="30px">
         <div *ngFor="let event of items" fxLayout="column" fxLayoutGap="5px">
             <a [routerLink]="[event.id]" class="mat-h2">{{ event.name }}</a>
-            <div class="text-light">{{ event.date | date : 'EEEE d MMMM yyyy' | capitalize }}</div>
+            <div class="text-light">{{ event.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
             <div>{{ event.place }}</div>
             <div>{{ event.type }}</div>
         </div>

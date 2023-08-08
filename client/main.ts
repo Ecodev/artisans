@@ -30,6 +30,7 @@ import {
 } from '@ecodev/natural';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {provideRouter, withInMemoryScrolling, withRouterConfig} from '@angular/router';
+import {MAT_TABS_CONFIG, MatTabsConfig} from '@angular/material/tabs';
 
 if (environment.production) {
     enableProdMode();
@@ -82,6 +83,12 @@ bootstrapApplication(AppComponent, {
             useValue: {
                 formFieldAppearance: 'fill',
             } satisfies MatPaginatorDefaultOptions,
+        },
+        {
+            provide: MAT_TABS_CONFIG,
+            useValue: {
+                stretchTabs: false,
+            } satisfies MatTabsConfig,
         },
         {
             provide: LOCALE_ID,

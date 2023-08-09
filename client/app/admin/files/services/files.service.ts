@@ -14,14 +14,14 @@ import {createFileMutation, deleteFileMutation} from './files.queries';
     providedIn: 'root',
 })
 export class FilesService extends NaturalAbstractModelService<
-    any,
-    any,
-    any,
-    any,
+    never,
+    never,
+    never,
+    never,
     CreateFile['createFile'],
     CreateFileVariables,
-    any,
-    any,
+    never,
+    never,
     DeleteFile,
     DeleteFileVariables
 > {

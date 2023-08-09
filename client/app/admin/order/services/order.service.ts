@@ -28,10 +28,10 @@ export class OrderService extends NaturalAbstractModelService<
     OrdersVariables,
     CreateOrder['createOrder'],
     CreateOrderVariables,
-    any,
-    any,
-    any,
-    any
+    never,
+    never,
+    never,
+    never
 > {
     public constructor(
         apollo: Apollo,

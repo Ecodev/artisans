@@ -354,8 +354,7 @@ class Version20221110170227 extends AbstractMigration
                   CONSTRAINT `FK_9CE58EE17E3C61F9` FOREIGN KEY (`owner_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
                   CONSTRAINT `FK_9CE58EE18D9F6D38` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`) ON DELETE CASCADE,
                   CONSTRAINT `FK_9CE58EE19A1887DC` FOREIGN KEY (`subscription_id`) REFERENCES `subscription` (`id`) ON DELETE SET NULL,
-                  CONSTRAINT `FK_9CE58EE1E37ECFB0` FOREIGN KEY (`updater_id`) REFERENCES `user` (`id`) ON DELETE SET NULL,
-                  CONSTRAINT `not_product_and_subscription` CHECK (`product_id` IS NULL OR `subscription_id` IS NULL)
+                  CONSTRAINT `FK_9CE58EE1E37ECFB0` FOREIGN KEY (`updater_id`) REFERENCES `user` (`id`) ON DELETE SET NULL
                 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
                 SQL
         );

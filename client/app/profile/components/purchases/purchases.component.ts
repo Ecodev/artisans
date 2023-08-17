@@ -19,7 +19,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {RouterLink} from '@angular/router';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, NgFor, AsyncPipe, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-purchases',
@@ -27,11 +27,10 @@ import {NgIf, NgFor, AsyncPipe, DatePipe} from '@angular/common';
     styleUrls: ['./purchases.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         NaturalSearchComponent,
         ExtendedModule,
-        NgFor,
         RouterLink,
         NaturalSrcDensityDirective,
         MatRippleModule,
@@ -40,8 +39,6 @@ import {NgIf, NgFor, AsyncPipe, DatePipe} from '@angular/common';
         NaturalIconDirective,
         MatProgressSpinnerModule,
         MatPaginatorModule,
-        AsyncPipe,
-        DatePipe,
         NaturalCapitalizePipe,
         NaturalEnumPipe,
     ],

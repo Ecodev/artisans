@@ -15,7 +15,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-comments',
@@ -23,7 +23,7 @@ import {NgIf} from '@angular/common';
     styleUrls: ['./comments.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,

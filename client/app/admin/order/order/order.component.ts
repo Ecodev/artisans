@@ -11,7 +11,7 @@ import {OrderService} from '../services/order.service';
 import {MatButtonModule} from '@angular/material/button';
 import {OrderLinesComponent} from '../order-lines/order-lines.component';
 import {FormsModule} from '@angular/forms';
-import {NgIf, CurrencyPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -22,12 +22,11 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     imports: [
         FlexModule,
         MatDialogModule,
-        NgIf,
+        CommonModule,
         NaturalSelectEnumComponent,
         FormsModule,
         OrderLinesComponent,
         MatButtonModule,
-        CurrencyPipe,
         NaturalSwissDatePipe,
     ],
 })

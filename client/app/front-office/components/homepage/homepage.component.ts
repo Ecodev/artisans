@@ -33,7 +33,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {HomeBlockComponent} from '../home-block/home-block.component';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
@@ -45,18 +45,16 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     imports: [
         FlexModule,
         HomeBlockComponent,
-        NgIf,
+        CommonModule,
         MatButtonModule,
         RouterLink,
         MatIconModule,
         NaturalIconDirective,
         MatDividerModule,
-        NgFor,
         MatRippleModule,
         NaturalSrcDensityDirective,
         PriceComponent,
         TagsNavigationComponent,
-        DatePipe,
         NaturalCapitalizePipe,
     ],
 })

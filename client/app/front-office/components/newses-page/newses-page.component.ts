@@ -6,7 +6,7 @@ import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
-import {NgFor, NgIf, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -14,7 +14,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     templateUrl: './newses-page.component.html',
     styleUrls: ['./newses-page.component.scss'],
     standalone: true,
-    imports: [FlexModule, NgFor, RouterLink, NgIf, MatButtonModule, DatePipe, NaturalCapitalizePipe],
+    imports: [FlexModule, CommonModule, RouterLink, MatButtonModule, NaturalCapitalizePipe],
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
     protected override defaultPagination: Required<PaginationInput> = {

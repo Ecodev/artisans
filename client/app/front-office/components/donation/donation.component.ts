@@ -4,7 +4,7 @@ import {CurrencyService} from '../../../shared/services/currency.service';
 import {UntypedFormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {money} from '@ecodev/natural';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
@@ -23,7 +23,7 @@ export type DonationData = {
         MatInputModule,
         FormsModule,
         ReactiveFormsModule,
-        NgIf,
+        CommonModule,
         MatButtonModule,
     ],
 })

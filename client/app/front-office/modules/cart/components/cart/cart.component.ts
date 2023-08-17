@@ -12,7 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-cart',
@@ -20,18 +20,15 @@ import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
     styleUrls: ['./cart.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         MatButtonModule,
         RouterLink,
-        NgFor,
         PriceComponent,
         MatIconModule,
         NaturalIconDirective,
         MatDividerModule,
         RouterOutlet,
-        AsyncPipe,
-        CurrencyPipe,
         NaturalEnumPipe,
     ],
 })

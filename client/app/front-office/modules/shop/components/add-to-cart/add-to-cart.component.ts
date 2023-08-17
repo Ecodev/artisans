@@ -4,14 +4,14 @@ import {CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-add-to-cart',
     templateUrl: './add-to-cart.component.html',
     styleUrls: ['./add-to-cart.component.scss'],
     standalone: true,
-    imports: [NgIf, MatButtonModule, RouterLink],
+    imports: [CommonModule, MatButtonModule, RouterLink],
 })
 export class AddToCartComponent {
     /**

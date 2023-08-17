@@ -15,7 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 import {MatDividerModule} from '@angular/material/divider';
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -28,7 +28,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         NaturalSelectComponent,
-        NgIf,
+        CommonModule,
         MatDividerModule,
         FlexModule,
         MatFormFieldModule,

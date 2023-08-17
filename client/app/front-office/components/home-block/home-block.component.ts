@@ -12,7 +12,7 @@ import {NaturalIconDirective} from '@ecodev/natural';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 interface Block {
     title: string;
@@ -27,7 +27,7 @@ interface Block {
     styleUrls: ['./home-block.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         MatButtonModule,
         RouterLink,
         MatIconModule,

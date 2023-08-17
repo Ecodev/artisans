@@ -25,7 +25,7 @@ import {MatRippleModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -35,7 +35,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     standalone: true,
     imports: [
         FlexModule,
-        NgIf,
+        CommonModule,
         MatButtonModule,
         RouterLink,
         MatIconModule,
@@ -43,12 +43,10 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
         NaturalSrcDensityDirective,
         MatRippleModule,
         MatListModule,
-        NgFor,
         PriceComponent,
         AddToCartComponent,
         ExtendedModule,
         ProductsPageComponent,
-        DatePipe,
         NaturalCapitalizePipe,
     ],
 })

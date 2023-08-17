@@ -10,7 +10,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-history',
@@ -18,7 +18,7 @@ import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
     styleUrls: ['./history.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         ExtendedModule,
         MatTableModule,
@@ -27,8 +27,6 @@ import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
         MatProgressSpinnerModule,
         MatPaginatorModule,
         RouterOutlet,
-        AsyncPipe,
-        CurrencyPipe,
         NaturalEnumPipe,
         NaturalSwissDatePipe,
     ],

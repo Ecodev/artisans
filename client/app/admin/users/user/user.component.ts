@@ -28,7 +28,7 @@ import {AddressComponent} from '../../../shared/components/address/address.compo
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {NgIf, AsyncPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -40,7 +40,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        NgIf,
+        CommonModule,
         MatToolbarModule,
         MatTabsModule,
         FlexModule,
@@ -57,7 +57,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         OrdersComponent,
         NaturalFixedButtonDetailComponent,
         RouterOutlet,
-        AsyncPipe,
         NaturalEnumPipe,
         NaturalSwissDatePipe,
         NaturalTimeAgoPipe,

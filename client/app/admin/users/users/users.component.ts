@@ -21,7 +21,7 @@ import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';
-import {DOCUMENT, NgIf, AsyncPipe} from '@angular/common';
+import {DOCUMENT, CommonModule} from '@angular/common';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -36,7 +36,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrls: ['./users.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,
@@ -50,7 +50,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
         MatPaginatorModule,
         NaturalFixedButtonComponent,
         RouterLink,
-        AsyncPipe,
         NaturalEnumPipe,
         NaturalSwissDatePipe,
     ],

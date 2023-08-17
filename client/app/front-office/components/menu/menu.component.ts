@@ -2,7 +2,7 @@ import {animate, group, query, sequence, state, style, transition, trigger} from
 import {ChangeDetectionStrategy, Component, Inject, InjectionToken} from '@angular/core';
 import {MenuItem} from '../../services/navigation.service';
 import {RouterLinkActive, RouterLink} from '@angular/router';
-import {NgTemplateOutlet, NgIf, NgFor} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 export interface MenuDropdownData {
     items: MenuItem[];
@@ -39,7 +39,7 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
         ]),
     ],
     standalone: true,
-    imports: [NgTemplateOutlet, NgIf, NgFor, RouterLinkActive, RouterLink],
+    imports: [CommonModule, RouterLinkActive, RouterLink],
 })
 export class MenuComponent {
     /**

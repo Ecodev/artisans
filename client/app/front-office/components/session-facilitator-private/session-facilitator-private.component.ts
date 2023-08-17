@@ -8,7 +8,7 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-import {NgFor, NgIf, KeyValuePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -18,14 +18,12 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     standalone: true,
     imports: [
         FlexModule,
-        NgFor,
+        CommonModule,
         ExtendedModule,
         MatListModule,
-        NgIf,
         MatIconModule,
         NaturalIconDirective,
         SessionSideColumnComponent,
-        KeyValuePipe,
     ],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {

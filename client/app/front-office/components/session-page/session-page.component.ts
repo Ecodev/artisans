@@ -18,7 +18,7 @@ import {
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf, NgFor, LowerCasePipe, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -26,17 +26,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     templateUrl: './session-page.component.html',
     styleUrls: ['./session-page.component.scss'],
     standalone: true,
-    imports: [
-        FlexModule,
-        NgIf,
-        MatButtonModule,
-        RouterLink,
-        MatIconModule,
-        NaturalIconDirective,
-        NgFor,
-        LowerCasePipe,
-        DatePipe,
-    ],
+    imports: [FlexModule, CommonModule, MatButtonModule, RouterLink, MatIconModule, NaturalIconDirective],
 })
 export class SessionPageComponent extends NaturalAbstractDetail<SessionService> implements OnInit {
     /**

@@ -19,7 +19,7 @@ import {AddressComponent} from '../../../../../shared/components/address/address
 import {MatRadioModule} from '@angular/material/radio';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-create-order',
@@ -27,7 +27,7 @@ import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
     styleUrls: ['./create-order.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         ExtendedModule,
         FormsModule,
@@ -37,10 +37,7 @@ import {NgIf, NgFor, AsyncPipe, CurrencyPipe} from '@angular/common';
         MatButtonModule,
         RouterLink,
         MatCheckboxModule,
-        NgFor,
         RouterOutlet,
-        AsyncPipe,
-        CurrencyPipe,
         NaturalEnumPipe,
     ],
 })

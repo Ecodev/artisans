@@ -18,7 +18,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -30,7 +30,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        NgIf,
+        CommonModule,
         MatButtonModule,
         RouterLink,
         MatIconModule,

@@ -7,7 +7,7 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
 import {CommentListComponent} from '../comment-list/comment-list.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {NgIf, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -17,13 +17,12 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     standalone: true,
     imports: [
         FlexModule,
-        NgIf,
+        CommonModule,
         MatButtonModule,
         RouterLink,
         MatIconModule,
         NaturalIconDirective,
         CommentListComponent,
-        DatePipe,
         NaturalCapitalizePipe,
     ],
 })

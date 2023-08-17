@@ -10,7 +10,7 @@ import {AddToCartComponent} from '../../../front-office/modules/shop/components/
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, AsyncPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-profile',
@@ -18,7 +18,7 @@ import {NgIf, AsyncPipe} from '@angular/common';
     styleUrls: ['./profile.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         MatButtonModule,
         MatIconModule,
@@ -29,7 +29,6 @@ import {NgIf, AsyncPipe} from '@angular/common';
         MatListModule,
         RouterLinkActive,
         RouterOutlet,
-        AsyncPipe,
         NaturalEnumPipe,
     ],
 })

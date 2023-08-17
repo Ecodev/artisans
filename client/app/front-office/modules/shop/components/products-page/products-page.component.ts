@@ -16,7 +16,7 @@ import {TruncatePipe} from '../../../../../shared/pipes/truncate.pipe';
 import {MatButtonModule} from '@angular/material/button';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {TagsNavigationComponent} from '../../../../../shared/components/tags-navigation/tags-navigation.component';
-import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 export enum ProductsViewMode {
@@ -41,14 +41,12 @@ export enum ProductsViewMode {
     standalone: true,
     imports: [
         FlexModule,
-        NgIf,
+        CommonModule,
         TagsNavigationComponent,
-        NgFor,
         RouterLink,
         PriceComponent,
         MatButtonModule,
         NaturalSrcDensityDirective,
-        DatePipe,
         NaturalCapitalizePipe,
         TruncatePipe,
         StripTagsPipe,

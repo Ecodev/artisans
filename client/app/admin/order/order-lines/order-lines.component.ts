@@ -18,7 +18,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-order-lines',
@@ -26,7 +26,7 @@ import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
     styleUrls: ['./order-lines.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         ExtendedModule,
         NaturalSearchComponent,
@@ -37,8 +37,6 @@ import {NgIf, AsyncPipe, CurrencyPipe} from '@angular/common';
         MatTooltipModule,
         MatProgressSpinnerModule,
         MatPaginatorModule,
-        AsyncPipe,
-        CurrencyPipe,
         NaturalEnumPipe,
         NaturalSwissDatePipe,
     ],

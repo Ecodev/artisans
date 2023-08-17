@@ -19,7 +19,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-newses',
@@ -27,7 +27,7 @@ import {NgIf, DatePipe} from '@angular/common';
     styleUrls: ['./newses.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,
@@ -42,7 +42,6 @@ import {NgIf, DatePipe} from '@angular/common';
         MatPaginatorModule,
         NaturalFixedButtonComponent,
         RouterLink,
-        DatePipe,
     ],
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {

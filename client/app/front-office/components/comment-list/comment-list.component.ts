@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -19,16 +19,14 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     standalone: true,
     imports: [
         FlexModule,
-        NgIf,
+        CommonModule,
         MatFormFieldModule,
         MatInputModule,
         FormsModule,
         MatButtonModule,
-        NgFor,
         RouterLink,
         MatIconModule,
         NaturalIconDirective,
-        DatePipe,
     ],
 })
 export class CommentListComponent extends NaturalAbstractList<CommentService> implements OnInit, OnChanges {

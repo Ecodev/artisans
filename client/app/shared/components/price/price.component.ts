@@ -4,14 +4,14 @@ import {takeUntil} from 'rxjs/operators';
 import {CartLineProduct} from '../../../front-office/modules/cart/classes/cart';
 import {Subscriptions} from '../../generated-types';
 import {Currency, CurrencyService} from '../../services/currency.service';
-import {NgIf, CurrencyPipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-price',
     templateUrl: './price.component.html',
     styleUrls: ['./price.component.scss'],
     standalone: true,
-    imports: [NgIf, CurrencyPipe],
+    imports: [CommonModule],
 })
 export class PriceComponent extends NaturalAbstractController implements OnInit {
     @Input({required: true}) public product!: CartLineProduct | Subscriptions['subscriptions']['items'][0];

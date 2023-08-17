@@ -1,4 +1,4 @@
-import {DOCUMENT, NgIf, NgFor, NgTemplateOutlet} from '@angular/common';
+import {DOCUMENT, CommonModule} from '@angular/common';
 import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
 import {UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
@@ -37,11 +37,9 @@ import {MatRippleModule} from '@angular/material/core';
     animations: [],
     standalone: true,
     imports: [
-        NgIf,
-        NgFor,
+        CommonModule,
         MatRippleModule,
         RouterLink,
-        NgTemplateOutlet,
         RouterLinkActive,
         MatSidenavModule,
         MatToolbarModule,

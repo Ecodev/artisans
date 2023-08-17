@@ -20,7 +20,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {NgIf, NgFor, DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-sessions',
@@ -28,7 +28,7 @@ import {NgIf, NgFor, DatePipe} from '@angular/common';
     styleUrls: ['./sessions.component.scss'],
     standalone: true,
     imports: [
-        NgIf,
+        CommonModule,
         FlexModule,
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,
@@ -37,14 +37,12 @@ import {NgIf, NgFor, DatePipe} from '@angular/common';
         MatSortModule,
         NaturalTableButtonComponent,
         MatTooltipModule,
-        NgFor,
         NaturalAvatarComponent,
         MatButtonModule,
         RouterLink,
         MatProgressSpinnerModule,
         MatPaginatorModule,
         NaturalFixedButtonComponent,
-        DatePipe,
     ],
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {

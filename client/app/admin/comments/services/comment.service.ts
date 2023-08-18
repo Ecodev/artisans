@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {Literal, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
+import {NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
 import {
     Comment,
     CommentInput,
@@ -42,10 +42,6 @@ export class CommentService extends NaturalAbstractModelService<
             updateComment,
             deleteComments,
         );
-    }
-
-    protected override getDefaultForClient(): Literal {
-        return this.getDefaultForServer();
     }
 
     protected override getDefaultForServer(): CommentInput {

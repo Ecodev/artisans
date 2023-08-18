@@ -42,11 +42,11 @@ export class EventService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'event', eventQuery, eventsQuery, createEvent, updateEvent, deleteEvents);
     }
 
-    public override getDefaultForClient(): Literal {
+    protected override getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 
-    public override getDefaultForServer(): EventInput {
+    protected override getDefaultForServer(): EventInput {
         return {
             name: '',
             place: '',

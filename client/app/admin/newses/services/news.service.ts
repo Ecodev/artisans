@@ -43,7 +43,7 @@ export class NewsService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
     }
 
-    public override getDefaultForClient(): Literal {
+    protected override getDefaultForClient(): Literal {
         return this.getDefaultForServer();
     }
 
@@ -52,7 +52,7 @@ export class NewsService extends NaturalAbstractModelService<
         return super.getInput(object);
     }
 
-    public override getDefaultForServer(): NewsInput {
+    protected override getDefaultForServer(): NewsInput {
         return {
             isActive: false,
             name: '',

@@ -2,21 +2,20 @@ import {Component, OnInit} from '@angular/core';
 import {
     IEnum,
     NaturalAbstractDetail,
-    NaturalSeoBasic,
     NaturalDetailHeaderComponent,
-    NaturalSelectEnumComponent,
-    NaturalRelationsComponent,
-    NaturalTableButtonComponent,
-    NaturalStampComponent,
-    NaturalFixedButtonDetailComponent,
     NaturalEnumPipe,
+    NaturalFixedButtonDetailComponent,
+    NaturalRelationsComponent,
+    NaturalSelectEnumComponent,
+    NaturalSeoResolveData,
+    NaturalStampComponent,
     NaturalSwissDatePipe,
+    NaturalTableButtonComponent,
     NaturalTimeAgoPipe,
 } from '@ecodev/natural';
 import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
-import {UserResolve} from '../user';
 import {RouterOutlet} from '@angular/router';
 import {OrdersComponent} from '../../order/orders/orders.component';
 import {MatDividerModule} from '@angular/material/divider';
@@ -62,14 +61,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalTimeAgoPipe,
     ],
 })
-export class UserComponent extends NaturalAbstractDetail<UserService> implements OnInit {
+export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeoResolveData> implements OnInit {
     public UserService = UserService;
     private userRolesAvailable: UserRole[] = [];
-
-    /**
-     * Override parent just to type it
-     */
-    public override data!: UserResolve & {seo: NaturalSeoBasic};
 
     public constructor(
         private readonly userService: UserService,

@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
     NaturalLinkableTabDirective,
+    NaturalSeoResolveData,
     NaturalStampComponent,
-    NaturalFixedButtonDetailComponent,
 } from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -51,11 +51,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalFixedButtonDetailComponent,
     ],
 })
-export class NewsComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
+export class NewsComponent extends NaturalAbstractDetail<NewsService, NaturalSeoResolveData> implements OnInit {
     public constructor(
-        route: ActivatedRoute,
         newsService: NewsService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
     ) {
         super('news', newsService);

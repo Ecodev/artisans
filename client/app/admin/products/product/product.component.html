@@ -7,12 +7,12 @@
     >
         <a
             [routerLink]="[
-                data.model?.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
+                data.model.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
                 data.model.id
             ]"
             color="primary"
             mat-raised-button
-            *ngIf="data.model.id"
+            *ngIf="isUpdatePage()"
         >
             <mat-icon naturalIcon="remove_red_eye"></mat-icon>
             Voir la page
@@ -112,7 +112,7 @@
                         </mat-form-field>
 
                         <natural-select
-                            *ngIf="data.model?.id"
+                            *ngIf="isUpdatePage()"
                             (selectionChange)="update()"
                             [service]="productService"
                             formControlName="review"
@@ -236,7 +236,7 @@
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-                        <div *ngIf="data.model.id">
+                        <div *ngIf="isUpdatePage()">
                             <h2 class="mat-h2">Tags</h2>
                             <natural-relations
                                 [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
@@ -263,11 +263,11 @@
                     </div>
                 </div>
 
-                <natural-stamp [item]="data.model"></natural-stamp>
+                <natural-stamp *ngIf="isUpdatePage()" [item]="data.model"></natural-stamp>
             </div>
         </mat-tab>
 
-        <mat-tab id="order-line" *ngIf="data.model.id" label="Ventes">
+        <mat-tab id="order-line" *ngIf="isUpdatePage()" label="Ventes">
             <app-order-lines
                 [selectedColumns]="['creationDate', 'quantity', 'owner', 'balance']"
                 [forcedVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
@@ -276,7 +276,7 @@
             ></app-order-lines>
         </mat-tab>
 
-        <mat-tab id="product" *ngIf="data.model.id" label="Produits similaires">
+        <mat-tab id="product" *ngIf="isUpdatePage()" label="Produits similaires">
             <div class="padding-top">
                 <natural-relations
                     [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"

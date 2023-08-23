@@ -29,7 +29,7 @@ export class FilesService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'file', null, null, createFileMutation, null, deleteFileMutation);
     }
 
-    protected override getDefaultForServer(): FileInput {
+    public override getDefaultForServer(): FileInput {
         return {
             file: null as unknown as File,
         };

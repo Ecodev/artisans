@@ -48,7 +48,7 @@ export class NewsService extends NaturalAbstractModelService<
         return super.getInput(object);
     }
 
-    protected override getDefaultForServer(): NewsInput {
+    public override getDefaultForServer(): NewsInput {
         return {
             isActive: false,
             name: '',

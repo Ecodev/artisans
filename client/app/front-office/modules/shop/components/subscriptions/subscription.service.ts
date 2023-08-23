@@ -72,7 +72,7 @@ export class SubscriptionService extends NaturalAbstractModelService<
         };
     }
 
-    protected override getDefaultForServer(): SubscriptionInput {
+    public override getDefaultForServer(): SubscriptionInput {
         return {
             name: '',
             code: null,

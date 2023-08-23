@@ -1,18 +1,19 @@
 import {Component} from '@angular/core';
 import {
     NaturalAbstractDetail,
-    WithId,
+    NaturalAvatarComponent,
     NaturalDetailHeaderComponent,
+    NaturalFileComponent,
+    NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
     NaturalLinkableTabDirective,
-    NaturalSelectEnumComponent,
-    NaturalSelectComponent,
-    NaturalFileComponent,
     NaturalRelationsComponent,
-    NaturalAvatarComponent,
-    NaturalTableButtonComponent,
+    NaturalSelectComponent,
+    NaturalSelectEnumComponent,
+    NaturalSeoResolveData,
     NaturalStampComponent,
-    NaturalFixedButtonDetailComponent,
+    NaturalTableButtonComponent,
+    WithId,
 } from '@ecodev/natural';
 import {XorErrorStateMatcher} from '../../../shared/validators';
 import {FilesService} from '../../files/services/files.service';
@@ -72,7 +73,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalFixedButtonDetailComponent,
     ],
 })
-export class ProductComponent extends NaturalAbstractDetail<ProductService> {
+export class ProductComponent extends NaturalAbstractDetail<ProductService, NaturalSeoResolveData> {
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     public constructor(
@@ -105,12 +106,16 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService> {
             this.imageService.create({file}).pipe(
                 switchMap(image => {
                     const id = this.data.model.id;
+                    if (!id) {
+                        return of(image);
+                    }
+
                     const object: WithId<ProductPartialInput> = {
                         id,
                     };
                     object[key] = image;
 
-                    return id ? this.service.updatePartially(object).pipe(map(() => image)) : of(image);
+                    return this.service.updatePartially(object).pipe(map(() => image));
                 }),
             );
     }

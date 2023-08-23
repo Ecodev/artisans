@@ -7,6 +7,7 @@ import {
     NaturalFileComponent,
     NaturalStampComponent,
     NaturalFixedButtonDetailComponent,
+    NaturalSeoResolveData,
 } from '@ecodev/natural';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
@@ -48,7 +49,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalFixedButtonDetailComponent,
     ],
 })
-export class FacilitatorDocumentComponent extends NaturalAbstractDetail<FacilitatorDocumentsService> {
+export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
+    FacilitatorDocumentsService,
+    NaturalSeoResolveData
+> {
     public constructor(
         public readonly facilitatorDocumentService: FacilitatorDocumentsService,
         private readonly fileService: FilesService,

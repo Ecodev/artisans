@@ -5,6 +5,7 @@ import {
     NaturalDialogTriggerProvidedData,
     NaturalSelectComponent,
     NaturalSelectEnumComponent,
+    NaturalSeoResolveData,
 } from '@ecodev/natural';
 import {merge, omit} from 'lodash-es';
 import {ProductService} from '../../products/services/product.service';
@@ -37,7 +38,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatButtonModule,
     ],
 })
-export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> implements OnInit {
+export class OrderLineComponent
+    extends NaturalAbstractDetail<OrderLineService, NaturalSeoResolveData>
+    implements OnInit
+{
     public constructor(
         private readonly orderLineService: OrderLineService,
         public readonly productService: ProductService,
@@ -53,7 +57,7 @@ export class OrderLineComponent extends NaturalAbstractDetail<OrderLineService> 
     public override ngOnInit(): void {
         this.dialogData.activatedRoute.data.subscribe(data => {
             const key = 'orderLine';
-            this.data = merge({model: this.service.getConsolidatedForClient()}, data[key]);
+            this.data = merge({model: this.service.getDefaultForServer()}, data[key]);
             this.data = merge(this.data, omit(data, [key]));
             this.initForm();
         });

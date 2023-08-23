@@ -24,7 +24,7 @@ export class OrderLineService extends NaturalAbstractModelService<
     OrderLines['orderLines'],
     OrderLinesVariables,
     never,
-    never,
+    UpdateOrderLineVariables,
     UpdateOrderLine['updateOrderLine'],
     UpdateOrderLineVariables,
     never,
@@ -53,7 +53,7 @@ export class OrderLineService extends NaturalAbstractModelService<
         };
     }
 
-    protected override getDefaultForServer(): OrderLineInput {
+    public override getDefaultForServer(): OrderLineInput {
         return {
             product: null,
             subscription: null,

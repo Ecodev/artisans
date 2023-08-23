@@ -96,7 +96,7 @@ export class ProductService extends NaturalAbstractModelService<
         return this.getOne(ProductService.MEMBERSHIP_FEE_PRODUCT_ID);
     }
 
-    protected override getDefaultForServer(): ProductInput {
+    public override getDefaultForServer(): ProductInput {
         return {
             name: '',
             code: null,

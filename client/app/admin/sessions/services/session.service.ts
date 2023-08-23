@@ -61,7 +61,7 @@ export class SessionService extends NaturalAbstractModelService<
         return super.getInput(object);
     }
 
-    protected override getDefaultForServer(): SessionInput {
+    public override getDefaultForServer(): SessionInput {
         return {
             name: '',
             street: '',

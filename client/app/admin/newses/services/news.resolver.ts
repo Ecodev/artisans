@@ -1,14 +1,13 @@
 import {inject} from '@angular/core';
 import {ActivatedRouteSnapshot} from '@angular/router';
-import {last, Observable} from 'rxjs';
+import {last} from 'rxjs';
 import {ErrorService} from '../../../shared/components/error/error.service';
-import {NewsResolve} from '../news';
 import {NewsService} from './news.service';
 
 /**
  * Resolve product data for router
  */
-export function resolveNews(route: ActivatedRouteSnapshot): Observable<NewsResolve> {
+export function resolveNews(route: ActivatedRouteSnapshot): ReturnType<NewsService['resolve']> {
     const productService = inject(NewsService);
     const errorService = inject(ErrorService);
 

@@ -8,7 +8,7 @@
                 mat-icon-button
                 class="mat-elevation-z4"
                 [routerLink]="['/admin/news', data.model.id]"
-                *ngIf="data.model.permissions.update"
+                *ngIf="isUpdatePage() && data.model.permissions.update"
             >
                 <mat-icon naturalIcon="edit"></mat-icon>
             </a>
@@ -19,6 +19,6 @@
 
     <div fxLayout="column" fxLayoutGap="30px">
         <h2 class="mat-h1">Commentaires</h2>
-        <app-comment-list [news]="data.model"></app-comment-list>
+        <app-comment-list *ngIf="isUpdatePage()" [news]="data.model"></app-comment-list>
     </div>
 </div>

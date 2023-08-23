@@ -44,7 +44,7 @@ export class CommentService extends NaturalAbstractModelService<
         );
     }
 
-    protected override getDefaultForServer(): CommentInput {
+    public override getDefaultForServer(): CommentInput {
         return {
             description: '',
             event: null,

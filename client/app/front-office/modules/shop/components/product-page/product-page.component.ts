@@ -56,11 +56,6 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     public ProductType = ProductType;
 
     /**
-     * Resolved model product. Called data to stay compliant with usual providing naming and usage in template
-     */
-    public override data: any;
-
-    /**
      * True if we are in edition mode after selecting an existing cart line from cart list. Activates some special layout for line update
      */
     public edit = false;
@@ -131,7 +126,9 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
             }
 
             const qvm = new NaturalQueryVariablesManager<PurchasesVariables>();
-            qvm.set('variables', {filter: {groups: [{conditions: [{id: {equal: {value: this.data.model.id}}}]}]}});
+            if (this.isUpdatePage()) {
+                qvm.set('variables', {filter: {groups: [{conditions: [{id: {equal: {value: this.data.model.id}}}]}]}});
+            }
 
             // Show button to buy only if we didn't already bought those version
             this.purchaseService.getAll(qvm).subscribe(purchases => {

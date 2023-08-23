@@ -79,7 +79,7 @@ export class ProductTagService extends NaturalAbstractModelService<
         return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));
     }
 
-    protected override getDefaultForServer(): ProductTagInput {
+    public override getDefaultForServer(): ProductTagInput {
         return {
             name: '',
             color: '',

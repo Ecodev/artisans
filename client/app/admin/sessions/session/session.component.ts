@@ -1,20 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {UntypedFormArray, UntypedFormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl} from '@angular/forms';
 import {
     NaturalAbstractDetail,
-    NaturalSeoBasic,
     NaturalDetailHeaderComponent,
-    NaturalLinkableTabDirective,
-    NaturalIconDirective,
-    NaturalRelationsComponent,
-    NaturalTableButtonComponent,
-    NaturalHttpPrefixDirective,
-    NaturalStampComponent,
     NaturalFixedButtonDetailComponent,
+    NaturalHttpPrefixDirective,
+    NaturalIconDirective,
+    NaturalLinkableTabDirective,
+    NaturalRelationsComponent,
+    NaturalSeoResolveData,
+    NaturalStampComponent,
+    NaturalTableButtonComponent,
 } from '@ecodev/natural';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';
-import {SessionResolve} from '../session';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -56,19 +55,14 @@ import {MatTabsModule} from '@angular/material/tabs';
         NaturalFixedButtonDetailComponent,
     ],
 })
-export class SessionComponent extends NaturalAbstractDetail<SessionService> implements OnInit {
+export class SessionComponent extends NaturalAbstractDetail<SessionService, NaturalSeoResolveData> implements OnInit {
     /**
      * Array of form controls dedicated to dates display
      */
     public datesForm!: UntypedFormArray;
 
-    /**
-     * Override parent just to type it
-     */
-    public override data!: SessionResolve & {seo: NaturalSeoBasic};
-
     public constructor(
-        private readonly sessionService: SessionService,
+        sessionService: SessionService,
         public readonly userService: UserService,
     ) {
         super('session', sessionService);
@@ -78,7 +72,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService> impl
         super.ngOnInit();
 
         // Overrides form with array by array of forms
-        this.datesForm = new UntypedFormArray(this.data.model.dates.map(date => new UntypedFormControl(date)));
+        this.datesForm = new UntypedFormArray(this.data.model.dates?.map(date => new UntypedFormControl(date)) ?? []);
         this.form.setControl('dates', this.datesForm);
     }
 

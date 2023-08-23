@@ -1,5 +1,5 @@
-import {FacilitatorDocument} from '../../shared/generated-types';
+import {FacilitatorDocument, FacilitatorDocumentInput} from '../../shared/generated-types';
 
 export interface FacilitatorDocumentResolve {
-    model: FacilitatorDocument['facilitatorDocument'];
+    model: FacilitatorDocument['facilitatorDocument'] | FacilitatorDocumentInput;
 }

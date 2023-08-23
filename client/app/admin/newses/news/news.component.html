@@ -5,7 +5,7 @@
         label="Actualité"
         [newLabel]="data.seo.title"
     >
-        <a [routerLink]="['/actualite', data.model.id]" color="primary" mat-raised-button *ngIf="data.model.id">
+        <a [routerLink]="['/actualite', data.model.id]" color="primary" mat-raised-button *ngIf="isUpdatePage()">
             <mat-icon naturalIcon="remove_red_eye"></mat-icon>
             Voir la page
         </a>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <natural-stamp [item]="data.model"></natural-stamp>
+                <natural-stamp *ngIf="isUpdatePage()" [item]="data.model"></natural-stamp>
             </div>
         </mat-tab>
     </mat-tab-group>

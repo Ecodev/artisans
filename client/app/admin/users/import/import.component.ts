@@ -1,13 +1,14 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Data, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {
     FileSelection,
     NaturalAlertService,
-    NaturalQueryVariablesManager,
-    toNavigationParameters,
     NaturalFileDropDirective,
     NaturalIconDirective,
+    NaturalQueryVariablesManager,
+    NaturalSeoResolveData,
+    toNavigationParameters,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {Import, ImportVariables, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
@@ -37,7 +38,7 @@ export class ImportComponent implements OnInit {
     /**
      * Data attribute provided by activated route snapshot
      */
-    public routeData!: Data;
+    public routeData!: NaturalSeoResolveData;
 
     public importing = false;
     public errors: string[] = [];
@@ -63,7 +64,7 @@ export class ImportComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.routeData = this.route.snapshot.data;
+        this.routeData = this.route.snapshot.data as NaturalSeoResolveData;
     }
 
     public uploadFile(selection: FileSelection): void {

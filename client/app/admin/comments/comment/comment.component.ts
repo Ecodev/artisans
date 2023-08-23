@@ -3,12 +3,12 @@ import {ActivatedRoute} from '@angular/router';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalFixedButtonDetailComponent,
     NaturalLinkableTabDirective,
     NaturalSelectComponent,
+    NaturalSeoResolveData,
     NaturalStampComponent,
-    NaturalFixedButtonDetailComponent,
 } from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../../events/services/event.service';
 import {NewsService} from '../../newses/services/news.service';
@@ -40,11 +40,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalFixedButtonDetailComponent,
     ],
 })
-export class CommentComponent extends NaturalAbstractDetail<CommentService> implements OnInit {
+export class CommentComponent extends NaturalAbstractDetail<CommentService, NaturalSeoResolveData> implements OnInit {
     public constructor(
         route: ActivatedRoute,
         commentService: CommentService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly newsService: NewsService,
         public readonly eventService: EventService,
         public readonly permissionsService: PermissionsService,

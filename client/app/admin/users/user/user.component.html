@@ -7,13 +7,13 @@
     >
     </natural-detail-header>
 
-    <mat-toolbar color="warn" *ngIf="data.model.shouldDelete"
+    <mat-toolbar color="warn" *ngIf="isUpdatePage() && data.model.shouldDelete"
         >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
         définitivement ici.
     </mat-toolbar>
 
     <!-- naturalLinkableTab conflicts with order detail page (child route) -->
-    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true" *ngIf="isUpdatePage()">
         <mat-tab id="general" label="Général">
             <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
                 <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
@@ -106,7 +106,7 @@
 
                 <mat-divider></mat-divider>
 
-                <div fxLayout="column" fxLayoutGap="15px">
+                <div *ngIf="isUpdatePage()" fxLayout="column" fxLayoutGap="15px">
                     <natural-stamp [item]="data.model"></natural-stamp>
 
                     <div *ngIf="data.model.firstLogin">
@@ -122,7 +122,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab id="orders" label="Commandes" *ngIf="data.model.id">
+        <mat-tab id="orders" label="Commandes" *ngIf="isUpdatePage()">
             <div class="padding-top">
                 <div>
                     <app-orders

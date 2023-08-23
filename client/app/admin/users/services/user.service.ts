@@ -298,12 +298,12 @@ export class UserService
             );
     }
 
-    public getUserRolesAvailable(user: User['user'] | null): Observable<UserRole[]> {
+    public getUserRolesAvailable(user: User['user'] | UserInput | null): Observable<UserRole[]> {
         return this.apollo
             .query<UserRolesAvailables, UserRolesAvailablesVariables>({
                 query: userRolesAvailableQuery,
                 variables: {
-                    user: user?.id,
+                    user: user && 'id' in user ? user.id : undefined,
                 },
             })
             .pipe(
@@ -410,7 +410,7 @@ export class UserService
             .pipe(map(result => result.data!.addToMailingList));
     }
 
-    protected override getDefaultForServer(): UserInput {
+    public override getDefaultForServer(): UserInput {
         return {
             email: '',
             firstName: '',

@@ -96,7 +96,7 @@
                             </button>
                         </div>
 
-                        <div *ngIf="data.model?.id">
+                        <div *ngIf="isUpdatePage()">
                             <h2 class="mat-h2 no-margin-bottom">Facilitateurs</h2>
                             <natural-relations
                                 [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
@@ -163,7 +163,7 @@
 
                 <mat-divider></mat-divider>
 
-                <natural-stamp [item]="data.model"></natural-stamp>
+                <natural-stamp *ngIf="isUpdatePage()" [item]="data.model"></natural-stamp>
             </div>
         </mat-tab>
     </mat-tab-group>

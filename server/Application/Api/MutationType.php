@@ -58,7 +58,6 @@ class MutationType extends ObjectType
         $fields = array_merge(
             Standard::buildMutation(Event::class),
             Standard::buildMutation(File::class),
-            Standard::buildMutation(File::class),
             Standard::buildMutation(Image::class),
             Standard::buildMutation(News::class),
             Standard::buildMutation(Product::class),

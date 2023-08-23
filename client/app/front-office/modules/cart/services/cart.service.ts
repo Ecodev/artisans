@@ -26,15 +26,6 @@ export class CartService {
         private readonly cartCollectionService: CartCollectionService,
         @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
-        // If our cart changes in another browser tab, reload it from storage to keep it in sync
-        // fromEvent<StorageEvent>(window, 'storage').pipe(
-        //     map(event => {
-        //         if (event.key === CartService.globalCartStorageKey && event.newValue !== null) {
-        //             CartService.globalCart.setLines(JSON.parse(event.newValue));
-        //         }
-        //     }),
-        // ).subscribe();
-
         // On currency change, update carts totals
         this.currencyService.current.subscribe(currency => (this.cartCollectionService.currency = currency));
     }

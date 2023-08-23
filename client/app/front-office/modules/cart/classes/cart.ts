@@ -187,11 +187,6 @@ export class Cart {
         this.update();
     }
 
-    public setLines(lines: CartLine[]): void {
-        this.productLines = lines;
-        this.computeTotals();
-    }
-
     public computeTotals(): void {
         let totals = this.productLines.reduce((a, line) => {
             line.totalTaxInc = this.getPriceTaxInc(line.product, line.quantity); // update line total

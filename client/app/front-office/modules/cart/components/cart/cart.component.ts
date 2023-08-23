@@ -34,11 +34,6 @@ import {CommonModule} from '@angular/common';
 })
 export class CartComponent implements OnInit {
     /**
-     * For template usage
-     */
-    public CartService = CartService;
-
-    /**
      * Eligible cart for Order
      */
     public cart?: Cart;

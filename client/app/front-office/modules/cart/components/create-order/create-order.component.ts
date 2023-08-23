@@ -48,11 +48,6 @@ export class CreateOrderComponent implements OnInit {
     public cart?: Cart;
 
     /**
-     * True if no product is paper. Hides shipment address for virtual only cart.
-     */
-    public virtualOnly = false;
-
-    /**
      * Step 1 form
      */
     public billingForm!: UntypedFormGroup;
@@ -98,9 +93,6 @@ export class CreateOrderComponent implements OnInit {
             if (cart.isEmpty()) {
                 this.router.navigateByUrl('/panier/0');
             }
-
-            // Not used for now, but we'll maybe need it soon
-            // this.virtualOnly = !cart.productLines.some(line => line.type === ProductType.paper || line.type === ProductType.both);
         }
 
         const viewer = this.route.snapshot.data.viewer.model;

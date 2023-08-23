@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
-import {PaginationInput, NaturalCapitalizePipe} from '@ecodev/natural';
+import {NaturalCapitalizePipe, PaginationInput} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
-import {PermissionsService} from '../../../shared/services/permissions.service';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -23,11 +21,7 @@ export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
         offset: null,
     };
 
-    public constructor(
-        service: NewsService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor(service: NewsService) {
         super(service);
     }
 }

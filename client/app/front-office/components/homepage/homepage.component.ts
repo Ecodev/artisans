@@ -2,14 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     formatIsoDateTime,
-    NaturalQueryVariablesManager,
-    NaturalIconDirective,
-    NaturalSrcDensityDirective,
     NaturalCapitalizePipe,
+    NaturalIconDirective,
+    NaturalQueryVariablesManager,
+    NaturalSrcDensityDirective,
 } from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {NewsService} from '../../../admin/newses/services/news.service';
-import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
@@ -26,7 +25,6 @@ import {
     SortingOrder,
 } from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {CartService} from '../../modules/cart/services/cart.service';
 import {TagsNavigationComponent} from '../../../shared/components/tags-navigation/tags-navigation.component';
 import {PriceComponent} from '../../../shared/components/price/price.component';
 import {MatRippleModule} from '@angular/material/core';
@@ -85,8 +83,6 @@ export class HomepageComponent implements OnInit {
         private readonly eventService: EventService,
         private readonly productService: ProductService,
         public readonly permissionService: PermissionsService,
-        public readonly productTagService: ProductTagService,
-        public readonly cartService: CartService,
     ) {}
 
     public ngOnInit(): void {

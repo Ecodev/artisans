@@ -3,11 +3,10 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     fromUrl,
     memorySessionStorageProvider,
+    NaturalCapitalizePipe,
     NaturalPersistenceService,
     NaturalSrcDensityDirective,
-    NaturalCapitalizePipe,
 } from '@ecodev/natural';
-import {ProductTagService} from '../../../../../admin/product-tags/services/product-tag.service';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
 import {Products} from '../../../../../shared/generated-types';
@@ -98,7 +97,6 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     public constructor(
         public override readonly route: ActivatedRoute,
         productService: ProductService,
-        public readonly productTagService: ProductTagService,
     ) {
         super(productService);
     }

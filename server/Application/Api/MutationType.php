@@ -62,7 +62,6 @@ class MutationType extends ObjectType
             Standard::buildMutation(Image::class),
             Standard::buildMutation(News::class),
             Standard::buildMutation(Product::class),
-            Standard::buildMutation(ProductTag::class),
             Standard::buildMutation(Session::class),
             Standard::buildMutation(Subscription::class),
             Standard::buildMutation(User::class),

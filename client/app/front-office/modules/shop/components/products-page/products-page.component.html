@@ -2,11 +2,7 @@
     <div *ngIf="title" class="mat-headline-4">{{ title }}</div>
 
     <ng-container *ngIf="items && items.length">
-        <app-tags-navigation
-            *ngIf="showTagsNavigation"
-            [service]="productTagService"
-            [linkBase]="['/larevuedurable/articles']"
-        ></app-tags-navigation>
+        <app-tags-navigation *ngIf="showTagsNavigation" [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
 
         <!--
         GRID

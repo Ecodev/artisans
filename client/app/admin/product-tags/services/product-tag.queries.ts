@@ -38,34 +38,3 @@ export const productTagQuery = gql`
     ${userMetaFragment}
     ${permissionsFragment}
 `;
-
-export const createProductTag = gql`
-    mutation CreateProductTag($input: ProductTagInput!) {
-        createProductTag(input: $input) {
-            id
-            creator {
-                ...UserMeta
-            }
-        }
-    }
-    ${userMetaFragment}
-`;
-
-export const updateProductTag = gql`
-    mutation UpdateProductTag($id: ProductTagID!, $input: ProductTagPartialInput!) {
-        updateProductTag(id: $id, input: $input) {
-            id
-            updateDate
-            updater {
-                ...UserMeta
-            }
-        }
-    }
-    ${userMetaFragment}
-`;
-
-export const deleteProductTags = gql`
-    mutation DeleteProductTags($ids: [ProductTagID!]!) {
-        deleteProductTags(ids: $ids)
-    }
-`;

@@ -60,7 +60,6 @@ export class SessionPageComponent extends NaturalAbstractDetail<SessionService> 
 
         this.route.data.subscribe(data => {
             if (data.session) {
-                // this.refreshFacilitators(data.session.model);
                 this.refreshOtherSessions(data.session.model);
             }
         });

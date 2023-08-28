@@ -24,14 +24,13 @@ return [
             'confirmRegistration' => true,
         ],
     ],
-    function (\Doctrine\DBAL\Connection $connection): void {
-
+    function (Doctrine\DBAL\Connection $connection): void {
         // create a valid token for right now
         $connection->update(
             'user',
             [
                 'token' => '09876543210987654321098765432109',
-                'token_creation_date' => \Cake\Chronos\Chronos::now()->subMinute(1)->toIso8601String(),
+                'token_creation_date' => \Cake\Chronos\Chronos::now()->subMinutes(1)->toIso8601String(),
             ],
             [
                 'email' => 'administrator@example.com',

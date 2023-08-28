@@ -6,7 +6,7 @@ namespace Application\Model;
 
 use Application\Api\Input\Sorting\Illustration;
 use Application\Repository\ProductRepository;
-use Cake\Chronos\Date;
+use Cake\Chronos\ChronosDate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -24,7 +24,7 @@ class Product extends AbstractProduct
     private ?int $readingDuration = null;
 
     #[ORM\Column(type: 'date', nullable: true)]
-    private ?Date $releaseDate = null;
+    private ?ChronosDate $releaseDate = null;
 
     #[ORM\Column(type: 'smallint', nullable: true, unique: true, options: ['unsigned' => true])]
     private ?int $reviewNumber = null;
@@ -104,12 +104,12 @@ class Product extends AbstractProduct
         $this->readingDuration = $readingDuration;
     }
 
-    public function getReleaseDate(): ?Date
+    public function getReleaseDate(): ?ChronosDate
     {
         return $this->releaseDate;
     }
 
-    public function setReleaseDate(?Date $releaseDate): void
+    public function setReleaseDate(?ChronosDate $releaseDate): void
     {
         $this->releaseDate = $releaseDate;
     }

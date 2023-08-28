@@ -14,80 +14,80 @@ class ImporterTest extends TestCase
 
     public function testInvalidFilename(): void
     {
-        $this->expectErrorMessage('File not found: non-existing-filename.csv');
+        $this->expectExceptionMessage('File not found: non-existing-filename.csv');
         $this->import('non-existing-filename.csv');
     }
 
     public function testInvalidEmail(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Ce n\'est pas une addresse email valide : "fo[o"');
+        $this->expectExceptionMessage('A la ligne 1 : Ce n\'est pas une addresse email valide : "fo[o"');
         $this->import('tests/data/importer/invalid-email.csv');
     }
 
     public function testInvalidPattern(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Ce n\'est pas une expression régulière valide : "fo[o"');
+        $this->expectExceptionMessage('A la ligne 1 : Ce n\'est pas une expression régulière valide : "fo[o"');
         $this->import('tests/data/importer/invalid-pattern.csv');
     }
 
     public function testInvalidPatternEnding(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : L\'expression régulière ne peut pas commencer ou terminer par `|`, car c\'est trop dangeureux: "foo|"');
+        $this->expectExceptionMessage('A la ligne 1 : L\'expression régulière ne peut pas commencer ou terminer par `|`, car c\'est trop dangeureux: "foo|"');
         $this->import('tests/data/importer/invalid-pattern-ending.csv');
     }
 
     public function testInvalidEmpty(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Il faut soit un email, soit un pattern, mais aucun existe');
+        $this->expectExceptionMessage('A la ligne 1 : Il faut soit un email, soit un pattern, mais aucun existe');
         $this->import('tests/data/importer/invalid-empty.csv');
     }
 
     public function testInvalidDuplicatedEmail(): void
     {
-        $this->expectErrorMessage("A la ligne 3 : L'email \"foo@example.com\" est dupliqué et a déjà été vu à la ligne 1");
+        $this->expectExceptionMessage("A la ligne 3 : L'email \"foo@example.com\" est dupliqué et a déjà été vu à la ligne 1");
         $this->import('tests/data/importer/invalid-duplicated-email.csv');
     }
 
     public function testInvalidDuplicatedPattern(): void
     {
-        $this->expectErrorMessage('A la ligne 2 : Le pattern ".*@university\.com" est dupliqué et a déjà été vu à la ligne 1');
+        $this->expectExceptionMessage('A la ligne 2 : Le pattern ".*@university\.com" est dupliqué et a déjà été vu à la ligne 1');
         $this->import('tests/data/importer/invalid-duplicated-pattern.csv');
     }
 
     public function testInvalidReviewNumber(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Un numéro de revue doit être entièrement numérique, mais est : "foo"');
+        $this->expectExceptionMessage('A la ligne 1 : Un numéro de revue doit être entièrement numérique, mais est : "foo"');
         $this->import('tests/data/importer/invalid-review-number.csv');
     }
 
     public function testInvalidMissingReviewNumber(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Revue introuvable pour le numéro de revue : 123');
+        $this->expectExceptionMessage('A la ligne 1 : Revue introuvable pour le numéro de revue : 123');
         $this->import('tests/data/importer/invalid-missing-review-number.csv');
     }
 
     public function testInvalidColumnCount(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Doit avoir exactement 14 colonnes, mais en a 5');
+        $this->expectExceptionMessage('A la ligne 1 : Doit avoir exactement 14 colonnes, mais en a 5');
         $this->import('tests/data/importer/invalid-column-count.csv');
     }
 
     public function testInvalidSubscriptionType(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Le subscriptionType est invalide : "foo"');
+        $this->expectExceptionMessage('A la ligne 1 : Le subscriptionType est invalide : "foo"');
         $this->import('tests/data/importer/invalid-subscription-type.csv');
     }
 
     public function testInvalidMultipleErrors(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?
+        $this->expectExceptionMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?
 A la ligne 2 : Revue introuvable pour le numéro de revue : 123');
         $this->import('tests/data/importer/invalid-multiple-errors.csv');
     }
 
     public function testFuzzyCountry(): void
     {
-        $this->expectErrorMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?');
+        $this->expectExceptionMessage('A la ligne 1 : Pays "suise" introuvable. Vouliez-vous dire "SUISSE" ?');
 
         $this->import('tests/data/importer/invalid-country.csv');
     }

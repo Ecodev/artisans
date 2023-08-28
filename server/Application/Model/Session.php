@@ -6,7 +6,7 @@ namespace Application\Model;
 
 use Application\Repository\SessionRepository;
 use Application\Traits\HasRichTextDescription;
-use Cake\Chronos\Date;
+use Cake\Chronos\ChronosDate;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -53,13 +53,13 @@ class Session extends AbstractModel
      * Used for filter + sorting. Represents the first date.
      */
     #[ORM\Column(type: 'date')]
-    private Date $startDate;
+    private ChronosDate $startDate;
 
     /**
      * Used for filter + sorting. Represents the first date.
      */
     #[ORM\Column(type: 'date')]
-    private Date $endDate;
+    private ChronosDate $endDate;
 
     /**
      * @var Collection<User>
@@ -152,22 +152,22 @@ class Session extends AbstractModel
         $this->dates = $dates;
     }
 
-    public function getStartDate(): Date
+    public function getStartDate(): ChronosDate
     {
         return $this->startDate;
     }
 
-    public function setStartDate(Date $startDate): void
+    public function setStartDate(ChronosDate $startDate): void
     {
         $this->startDate = $startDate;
     }
 
-    public function getEndDate(): Date
+    public function getEndDate(): ChronosDate
     {
         return $this->endDate;
     }
 
-    public function setEndDate(Date $endDate): void
+    public function setEndDate(ChronosDate $endDate): void
     {
         $this->endDate = $endDate;
     }

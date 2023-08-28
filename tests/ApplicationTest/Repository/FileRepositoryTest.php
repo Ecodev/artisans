@@ -9,7 +9,7 @@ use Application\Model\File;
 use Application\Model\Product;
 use Application\Repository\FileRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
-use Cake\Chronos\Date;
+use Cake\Chronos\ChronosDate;
 
 class FileRepositoryTest extends AbstractRepositoryTest
 {
@@ -41,7 +41,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
     public function testFileOnDiskIsDeletedWhenRecordInDbIsDeleted(): void
     {
         $product = new Product('p1');
-        $product->setReleaseDate(new Date());
+        $product->setReleaseDate(new ChronosDate());
         $product->setReviewNumber(1);
         $product->setType(ProductTypeType::BOTH);
         $file = new File();

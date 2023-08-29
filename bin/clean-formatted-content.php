@@ -50,7 +50,7 @@ function cleanOneTable(string $table, array $fields): void
         $qb->addSelect($name);
     }
 
-    $products = $qb->execute()->fetchAllAssociative();
+    $products = $qb->fetchAllAssociative();
 
     $count = 0;
     $total = count($products);

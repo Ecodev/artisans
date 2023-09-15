@@ -19,7 +19,7 @@ export async function naturalSelect(page: Page, selector: string, value: string)
 }
 
 function getPhpBinary(): string {
-    return execSync('which php8.1 || which php').toString().trim();
+    return execSync('which php8.2 || which php').toString().trim();
 }
 
 /**

@@ -26,7 +26,7 @@ class OrderRepository extends AbstractRepository implements LimitedAccessSubQuer
         }
 
         if (in_array($user->getRole(), [User::ROLE_FACILITATOR, User::ROLE_ADMINISTRATOR], true)) {
-            return $this->getAllIdsQuery();
+            return '';
         }
 
         return $this->getAllIdsForOwnerQuery($user);

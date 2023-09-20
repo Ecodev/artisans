@@ -27,7 +27,7 @@ class NewsRepository extends AbstractRepository implements LimitedAccessSubQuery
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
         if ($user && $user->getRole() === User::ROLE_ADMINISTRATOR) {
-            return $this->getAllIdsQuery();
+            return '';
         }
 
         return 'SELECT id FROM news WHERE is_active';

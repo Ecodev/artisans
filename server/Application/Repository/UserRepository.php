@@ -25,7 +25,7 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
             return 'SELECT id FROM user WHERE role = ' . $facilitator;
         }
 
-        return $this->getAllIdsQuery();
+        return '';
     }
 
     /**

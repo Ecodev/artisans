@@ -28,7 +28,7 @@ class ProductRepository extends AbstractRepository implements LimitedAccessSubQu
     public function getAccessibleSubQuery(?\Ecodev\Felix\Model\User $user): string
     {
         if ($user && in_array($user->getRole(), [User::ROLE_FACILITATOR, User::ROLE_ADMINISTRATOR], true)) {
-            return $this->getAllIdsQuery();
+            return '';
         }
 
         return 'SELECT id FROM product WHERE product.is_active';

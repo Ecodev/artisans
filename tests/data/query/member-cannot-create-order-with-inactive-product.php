@@ -31,7 +31,7 @@ return [
             [
                 'message' => 'Entity not found for class `Application\\Model\\Product` and ID `3010`.',
                 'extensions' => [
-                    'category' => 'graphql',
+                    'category' => 'user',
                 ],
                 'locations' => [
                     [

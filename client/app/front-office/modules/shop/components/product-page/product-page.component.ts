@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
 import {
     NaturalAbstractDetail,
     NaturalQueryVariablesManager,
@@ -73,7 +73,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     /**
      * Combination of form controls of the page
      */
-    public formGroup = new UntypedFormGroup({quantity: this.quantityForm});
+    public readonly formGroup = new FormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile['viewer'] = null;
 
     /**

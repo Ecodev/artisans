@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {deliverableEmail, NaturalAlertService, relationsToIds, NaturalIconDirective} from '@ecodev/natural';
 import {pick} from 'lodash-es';
 import {RegisterComponent} from './register.component';
-import {UntypedFormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserByTokenResolve} from '../../../admin/users/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ConfirmRegistrationVariables, UserByToken} from '../../../shared/generated-types';
@@ -42,7 +42,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
     public constructor(
         apollo: Apollo,
         route: ActivatedRoute,
-        fb: UntypedFormBuilder,
+        fb: NonNullableFormBuilder,
         router: Router,
         alertService: NaturalAlertService,
         private readonly userService: UserService,

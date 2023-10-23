@@ -4,7 +4,7 @@ import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {deliverableEmail, ifValid, NaturalAbstractController, NaturalAlertService} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {finalize} from 'rxjs/operators';
-import {UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, NonNullableFormBuilder, Validators} from '@angular/forms';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
@@ -34,7 +34,10 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
      * Stores the received redirect URL until we need to use it (when login is successfull)
      */
     public returnUrl = '/';
-    public form: UntypedFormGroup;
+    public readonly form = this.fb.group({
+        email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
+        password: ['', [Validators.required]],
+    });
 
     public constructor(
         private readonly route: ActivatedRoute,
@@ -42,13 +45,9 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
         private readonly userService: UserService,
         public readonly alertService: NaturalAlertService,
         public readonly snackBar: MatSnackBar,
-        private readonly fb: UntypedFormBuilder,
+        private readonly fb: NonNullableFormBuilder,
     ) {
         super();
-        this.form = this.fb.group({
-            email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
-            password: ['', [Validators.required]],
-        });
     }
 
     public ngOnInit(): void {
@@ -75,7 +74,7 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
         this.form.disable();
 
         this.userService
-            .login(this.form.value)
+            .login(this.form.getRawValue())
             .pipe(finalize(() => this.form.enable()))
             .subscribe(() => {
                 this.redirect();

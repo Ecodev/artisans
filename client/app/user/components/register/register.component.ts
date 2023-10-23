@@ -8,7 +8,7 @@ import {
     NaturalIconDirective,
 } from '@ecodev/natural';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UntypedFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NonNullableFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
 import {MatButtonModule} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
     public constructor(
         protected readonly apollo: Apollo,
         protected readonly route: ActivatedRoute,
-        protected readonly fb: UntypedFormBuilder,
+        protected readonly fb: NonNullableFormBuilder,
         protected readonly router: Router,
         protected readonly alertService: NaturalAlertService,
     ) {}

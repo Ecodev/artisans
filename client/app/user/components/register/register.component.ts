@@ -8,7 +8,7 @@ import {
     NaturalIconDirective,
 } from '@ecodev/natural';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NonNullableFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NonNullableFormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
 import {MatButtonModule} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
@@ -43,7 +43,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 export class RegisterComponent implements OnInit {
     public step = 1;
     public sending = false;
-    public form!: UntypedFormGroup;
+    public form!: FormGroup;
 
     public constructor(
         protected readonly apollo: Apollo,

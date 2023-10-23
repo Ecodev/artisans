@@ -1,6 +1,6 @@
 import {DOCUMENT, CommonModule} from '@angular/common';
 import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
-import {NonNullableFormBuilder, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NonNullableFormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     deliverableEmail,
@@ -63,7 +63,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public menuOpened = false;
 
     public viewer: CurrentUserForProfile['viewer'] = null;
-    public readonly newsletterForm: UntypedFormGroup;
+    public readonly newsletterForm: FormGroup;
 
     /**
      * In case of change, check CSS dimensions :

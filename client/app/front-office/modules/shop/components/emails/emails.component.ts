@@ -1,12 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {
-    UntypedFormArray,
-    UntypedFormControl,
-    UntypedFormGroup,
-    Validators,
-    FormsModule,
-    ReactiveFormsModule,
-} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {deliverableEmail} from '@ecodev/natural';
 import {MatButtonModule} from '@angular/material/button';
@@ -38,17 +31,17 @@ export type EmailsData = {
     ],
 })
 export class EmailsComponent {
-    public readonly form: UntypedFormGroup = new UntypedFormGroup({});
+    public readonly form: FormGroup = new FormGroup({});
 
     /**
      * Array of form controls dedicated to emails
      */
-    public readonly emailsControl: UntypedFormArray;
+    public readonly emailsControl: FormArray;
 
     public constructor(@Inject(MAT_DIALOG_DATA) public readonly dialogData: EmailsData) {
         const emails: string[] = dialogData.emails ?? [''];
         const validators = dialogData.required ? [Validators.required, deliverableEmail] : [deliverableEmail];
-        this.emailsControl = new UntypedFormArray(emails.map(email => new UntypedFormControl(email, validators)));
+        this.emailsControl = new FormArray(emails.map(email => new FormControl(email, validators)));
         this.form.setControl('emails', this.emailsControl);
     }
 

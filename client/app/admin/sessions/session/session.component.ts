@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, FormArray, FormControl} from '@angular/forms';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
@@ -59,7 +59,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService, Natu
     /**
      * Array of form controls dedicated to dates display
      */
-    public datesForm!: UntypedFormArray;
+    public datesForm!: FormArray;
 
     public constructor(
         sessionService: SessionService,
@@ -72,11 +72,11 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService, Natu
         super.ngOnInit();
 
         // Overrides form with array by array of forms
-        this.datesForm = new UntypedFormArray(this.data.model.dates?.map(date => new UntypedFormControl(date)) ?? []);
+        this.datesForm = new FormArray(this.data.model.dates?.map(date => new FormControl(date)) ?? []);
         this.form.setControl('dates', this.datesForm);
     }
 
     public addDate(): void {
-        this.datesForm.push(new UntypedFormControl(''));
+        this.datesForm.push(new FormControl(''));
     }
 }

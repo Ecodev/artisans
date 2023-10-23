@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {CurrencyService} from '../../../shared/services/currency.service';
-import {UntypedFormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {money} from '@ecodev/natural';
 import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
@@ -28,7 +28,7 @@ export type DonationData = {
     ],
 })
 export class DonationComponent {
-    public amount = new UntypedFormControl(null, [Validators.required, Validators.min(0), money]);
+    public amount = new FormControl<number | null>(null, [Validators.required, Validators.min(0), money]);
 
     public constructor(
         @Inject(MAT_DIALOG_DATA) dialogData: DonationData,

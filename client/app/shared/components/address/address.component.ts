@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {UntypedFormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CountryService} from './country.service';
 import {NaturalSelectComponent} from '@ecodev/natural';
 import {CommonModule} from '@angular/common';
@@ -44,7 +44,7 @@ export class AddressComponent {
     /**
      * Form group to manage field values
      */
-    @Input({required: true}) public form!: UntypedFormGroup;
+    @Input({required: true}) public form!: FormGroup;
 
     /**
      * Emits when form changes

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormGroup, UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {
     NaturalAbstractDetail,
     NaturalQueryVariablesManager,
@@ -68,7 +68,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     /**
      * Form controller for quantity
      */
-    public quantityForm = new UntypedFormControl(null, [Validators.required, Validators.min(0)]);
+    public quantityForm = new FormControl(null, [Validators.required, Validators.min(0)]);
 
     /**
      * Combination of form controls of the page

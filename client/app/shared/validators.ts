@@ -1,11 +1,4 @@
-import {
-    AbstractControl,
-    FormGroupDirective,
-    NgForm,
-    UntypedFormControl,
-    ValidationErrors,
-    ValidatorFn,
-} from '@angular/forms';
+import {AbstractControl, FormGroupDirective, NgForm, FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 /**
@@ -30,7 +23,7 @@ export function xorValidator(errorKey: string, paths: string[]): ValidatorFn {
 export class XorErrorStateMatcher implements ErrorStateMatcher {
     public constructor(private readonly errorKey: string) {}
 
-    public isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    public isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
         if (!form) {
             return false;
         }

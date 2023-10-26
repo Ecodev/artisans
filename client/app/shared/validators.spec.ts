@@ -1,8 +1,8 @@
 import {xorValidator} from './validators';
-import {NonNullableFormBuilder} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 
 describe('xorValidator', () => {
-    const fb = new NonNullableFormBuilder();
+    const fb = new FormBuilder().nonNullable;
     const emptyForm = fb.group({});
 
     const invalidForm = fb.group({

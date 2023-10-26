@@ -20,7 +20,7 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
      *
-     * A user can access a file if at least one of the following condition is true:
+     * A user can access a file if at least one of the following conditions is true:
      *
      * - he has flag webTemporaryAccess
      * - he has web subscription (digital/both) and the product reviewNumber is included in that subscription

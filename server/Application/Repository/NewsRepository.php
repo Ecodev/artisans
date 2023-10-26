@@ -17,7 +17,7 @@ class NewsRepository extends AbstractRepository implements LimitedAccessSubQuery
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
      *
-     * A user can access a news if at least one of the following condition is true:
+     * A user can access a news if at least one of the following conditions is true:
      *
      * - he is administrator
      * - the news is active

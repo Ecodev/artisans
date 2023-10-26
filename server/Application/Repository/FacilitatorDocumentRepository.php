@@ -17,7 +17,7 @@ class FacilitatorDocumentRepository extends AbstractRepository implements Limite
     /**
      * Returns pure SQL to get ID of all objects that are accessible to given user.
      *
-     * A user can access a file if at least one of the following condition is true:
+     * A user can access a file if at least one of the following conditions is true:
      *
      * - he is facilitator or administrator
      *

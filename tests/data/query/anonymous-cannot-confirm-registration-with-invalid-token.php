@@ -24,7 +24,7 @@ return [
             [
                 'message' => "La session a expiré ou le lien n'est pas valable. Veuillez effectuer une nouvelle demande.",
                 'extensions' => [
-                    'category' => 'Permissions',
+                    'showSnack' => true,
                 ],
                 'locations' => [
                     [

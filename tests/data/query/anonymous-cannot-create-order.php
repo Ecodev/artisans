@@ -11,7 +11,7 @@ return [
             [
                 'message' => 'Non-logged user with role anonymous is not allowed on resource "Order#null" with privilege "create"',
                 'extensions' => [
-                    'category' => 'Permissions',
+                    'showSnack' => true,
                 ],
                 'locations' => [
                     [

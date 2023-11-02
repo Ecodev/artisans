@@ -39,7 +39,7 @@ return [
             [
                 'message' => 'A donation must have strictly positive price',
                 'extensions' => [
-                    'category' => 'Permissions',
+                    'showSnack' => true,
                 ],
                 'locations' => [
                     [

@@ -6,6 +6,8 @@ namespace Application\Traits;
 
 use Application\Utility;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Api\Scalar\CHFType;
+use Ecodev\Felix\Api\Scalar\EURType;
 use GraphQL\Doctrine\Attribute as API;
 use Money\Money;
 
@@ -28,7 +30,7 @@ trait HasAutomaticBalance
      *
      * Read only, computed by SQL triggers
      */
-    #[API\Field(type: 'CHF')]
+    #[API\Field(type: CHFType::class)]
     public function getBalanceCHF(): Money
     {
         return $this->balanceCHF;
@@ -39,7 +41,7 @@ trait HasAutomaticBalance
      *
      * Read only, computed by SQL triggers
      */
-    #[API\Field(type: 'EUR')]
+    #[API\Field(type: EURType::class)]
     public function getBalanceEUR(): Money
     {
         return $this->balanceEUR;

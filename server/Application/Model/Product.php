@@ -143,7 +143,6 @@ class Product extends AbstractProduct
     /**
      * Get related products.
      */
-    #[API\Field(type: 'Product[]')]
     public function getRelatedProducts(): Collection
     {
         return $this->relatedProducts;

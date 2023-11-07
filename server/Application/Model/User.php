@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Api\Enum\UserRoleType;
 use Application\Api\Input\Operator\RegexpOperatorType;
 use Application\DBAL\Types\MembershipType;
 use Application\Repository\LogRepository;
@@ -17,6 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Api\Exception;
+use Ecodev\Felix\Api\Scalar\EmailType;
 use Ecodev\Felix\Model\CurrentUser;
 use Ecodev\Felix\Model\Traits\HasPassword;
 use GraphQL\Doctrine\Attribute as API;
@@ -127,7 +129,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     /**
      * Set email.
      */
-    #[API\Input(type: 'Email')]
+    #[API\Input(type: EmailType::class)]
     public function setEmail(?string $email): void
     {
         $this->email = $email;
@@ -136,7 +138,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     /**
      * Get email.
      */
-    #[API\Field(type: 'Email')]
+    #[API\Field(type: EmailType::class)]
     public function getEmail(): ?string
     {
         return $this->email;
@@ -154,7 +156,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     /**
      * Get the user role.
      */
-    #[API\Field(type: 'UserRole')]
+    #[API\Field(type: UserRoleType::class)]
     public function getRole(): string
     {
         return $this->role;
@@ -163,7 +165,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     /**
      * Sets the user role.
      */
-    #[API\Input(type: 'UserRole')]
+    #[API\Input(type: UserRoleType::class)]
     public function setRole(string $role): void
     {
         if (!Role::canUpdate(self::getCurrent(), $this->role, $role)) {

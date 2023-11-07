@@ -8,6 +8,8 @@ use Application\Traits\HasCode;
 use Application\Traits\HasProductType;
 use Application\Traits\HasRichTextDescription;
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Api\Scalar\CHFType;
+use Ecodev\Felix\Api\Scalar\EURType;
 use Ecodev\Felix\Model\Traits\HasInternalRemarks;
 use Ecodev\Felix\Model\Traits\HasName;
 use GraphQL\Doctrine\Attribute as API;
@@ -49,25 +51,25 @@ abstract class AbstractProduct extends AbstractModel
         $this->pricePerUnitEUR = Money::EUR(0);
     }
 
-    #[API\Field(type: 'CHF')]
+    #[API\Field(type: CHFType::class)]
     public function getPricePerUnitCHF(): Money
     {
         return $this->pricePerUnitCHF;
     }
 
-    #[API\Input(type: 'CHF')]
+    #[API\Input(type: CHFType::class)]
     public function setPricePerUnitCHF(Money $pricePerUnitCHF): void
     {
         $this->pricePerUnitCHF = $pricePerUnitCHF;
     }
 
-    #[API\Field(type: 'EUR')]
+    #[API\Field(type: EURType::class)]
     public function getPricePerUnitEUR(): Money
     {
         return $this->pricePerUnitEUR;
     }
 
-    #[API\Input(type: 'EUR')]
+    #[API\Input(type: EURType::class)]
     public function setPricePerUnitEUR(Money $pricePerUnitEUR): void
     {
         $this->pricePerUnitEUR = $pricePerUnitEUR;

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
+use Application\Api\Enum\OrderStatusType;
+use Application\Api\Enum\PaymentMethodType;
 use Application\Repository\OrderRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasAutomaticBalance;
@@ -76,13 +78,13 @@ class Order extends AbstractModel implements HasBalanceInterface
         return $this->orderLines;
     }
 
-    #[API\Field(type: 'OrderStatus')]
+    #[API\Field(type: OrderStatusType::class)]
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    #[API\Input(type: 'OrderStatusType')]
+    #[API\Input(type: OrderStatusType::class)]
     public function setStatus(string $status): void
     {
         // If we change from non-confirmed to confirmed, then give temporary access (until explicit import of users)
@@ -96,13 +98,13 @@ class Order extends AbstractModel implements HasBalanceInterface
         $this->status = $status;
     }
 
-    #[API\Field(type: 'PaymentMethod')]
+    #[API\Field(type: PaymentMethodType::class)]
     public function getPaymentMethod(): string
     {
         return $this->paymentMethod;
     }
 
-    #[API\Input(type: 'PaymentMethod')]
+    #[API\Input(type: PaymentMethodType::class)]
     public function setPaymentMethod(string $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;

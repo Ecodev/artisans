@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace Application\Traits;
 
 use Application\Utility;
-
 use Doctrine\ORM\Mapping as ORM;
+use Ecodev\Felix\Api\Scalar\CHFType;
+use Ecodev\Felix\Api\Scalar\EURType;
 use GraphQL\Doctrine\Attribute as API;
 use Money\Money;
 
@@ -33,13 +34,13 @@ trait HasBalance
     /**
      * Set balance.
      */
-    #[API\Input(type: 'CHF')]
+    #[API\Input(type: CHFType::class)]
     public function setBalanceCHF(Money $balanceCHF): void
     {
         $this->balanceCHF = $balanceCHF;
     }
 
-    #[API\Field(type: 'CHF')]
+    #[API\Field(type: CHFType::class)]
     public function getBalanceCHF(): Money
     {
         return $this->balanceCHF;
@@ -48,13 +49,13 @@ trait HasBalance
     /**
      * Set balance.
      */
-    #[API\Input(type: 'EUR')]
+    #[API\Input(type: EURType::class)]
     public function setBalanceEUR(Money $balanceEUR): void
     {
         $this->balanceEUR = $balanceEUR;
     }
 
-    #[API\Field(type: 'EUR')]
+    #[API\Field(type: EURType::class)]
     public function getBalanceEUR(): Money
     {
         return $this->balanceEUR;

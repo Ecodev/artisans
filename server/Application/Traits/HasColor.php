@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Ecodev\Felix\Api\Scalar\ColorType;
 use GraphQL\Doctrine\Attribute as API;
 
 trait HasColor
@@ -19,7 +19,7 @@ trait HasColor
     /**
      * Set color.
      */
-    #[API\Input(type: 'Color')]
+    #[API\Input(type: ColorType::class)]
     public function setColor(string $color): void
     {
         $this->color = $color;
@@ -28,7 +28,7 @@ trait HasColor
     /**
      * Get color.
      */
-    #[API\Field(type: 'Color')]
+    #[API\Field(type: ColorType::class)]
     public function getColor(): string
     {
         return $this->color;

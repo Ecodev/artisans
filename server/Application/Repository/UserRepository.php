@@ -55,7 +55,7 @@ class UserRepository extends AbstractRepository implements LimitedAccessSubQuery
                 $user->setPassword($password);
             }
             $user->revokeToken();
-            _em()->flush();
+            $this->getEntityManager()->flush();
 
             return $user;
         }

@@ -12,12 +12,9 @@ use InvalidArgumentException;
 
 trait HasSubscriptionLastReview
 {
-    /**
-     * @var null|Product
-     */
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     #[ORM\ManyToOne(targetEntity: Product::class)]
-    private $subscriptionLastReview;
+    private ?Product $subscriptionLastReview = null;
 
     /**
      * Get last review number available through a subscription, bypassing all ACL so it also work even if review is not active yet.

@@ -10,11 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait HasDate
 {
-    /**
-     * @var Chronos
-     */
     #[ORM\Column(type: 'datetime')]
-    private $date;
+    private Chronos $date;
 
     public function getDate(): Chronos
     {

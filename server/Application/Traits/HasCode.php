@@ -8,11 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait HasCode
 {
-    /**
-     * @var null|string
-     */
     #[ORM\Column(type: 'string', length: 25, nullable: true, unique: true)]
-    private $code;
+    private ?string $code = null;
 
     /**
      * Set code.

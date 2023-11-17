@@ -14,10 +14,7 @@ class ProductRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;
 
-    /**
-     * @var ProductRepository
-     */
-    private $repository;
+    private ProductRepository $repository;
 
     protected function setUp(): void
     {

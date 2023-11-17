@@ -13,17 +13,11 @@ use Money\Money;
 
 trait HasAutomaticBalance
 {
-    /**
-     * @var Money
-     */
     #[ORM\Column(type: 'CHF', options: ['default' => 0])]
-    private $balanceCHF;
+    private Money $balanceCHF;
 
-    /**
-     * @var Money
-     */
     #[ORM\Column(type: 'EUR', options: ['default' => 0])]
-    private $balanceEUR;
+    private Money $balanceEUR;
 
     /**
      * Get total balance.

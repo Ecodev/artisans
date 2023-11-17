@@ -10,11 +10,8 @@ use GraphQL\Doctrine\Attribute as API;
 
 trait HasColor
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'string', length: 7, options: ['default' => ''])]
-    private $color = '';
+    private string $color = '';
 
     /**
      * Set color.

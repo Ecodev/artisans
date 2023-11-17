@@ -14,6 +14,7 @@ use Application\Traits\HasQuantity;
 use Doctrine\ORM\Mapping as ORM;
 use Ecodev\Felix\Model\Traits\HasName;
 use GraphQL\Doctrine\Attribute as API;
+use Money\Money;
 
 /**
  * A single line in the shopping cart when making an order.
@@ -48,6 +49,8 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
 
     public function __construct()
     {
+        $this->balanceCHF = Money::CHF(0);
+        $this->balanceEUR = Money::EUR(0);
     }
 
     #[API\Exclude]

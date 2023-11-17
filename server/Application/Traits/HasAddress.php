@@ -12,42 +12,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasAddress
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'string', length: 191, options: ['default' => ''])]
-    private $firstName = '';
+    private string $firstName = '';
 
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'string', length: 191, options: ['default' => ''])]
-    private $lastName = '';
+    private string $lastName = '';
 
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'string', options: ['default' => ''])]
-    private $street = '';
+    private string $street = '';
 
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'string', length: 20, options: ['default' => ''])]
-    private $postcode = '';
+    private string $postcode = '';
 
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'string', length: 255, options: ['default' => ''])]
-    private $locality = '';
+    private string $locality = '';
 
-    /**
-     * @var null|Country
-     */
     #[ORM\ManyToOne(targetEntity: Country::class)]
     #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
-    private $country;
+    private ?Country $country = null;
 
     /**
      * Set first name.

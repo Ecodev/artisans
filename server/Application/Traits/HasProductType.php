@@ -13,11 +13,8 @@ use GraphQL\Doctrine\Attribute as API;
  */
 trait HasProductType
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'ProductType')]
-    private $type;
+    private string $type;
 
     /**
      * Set type.

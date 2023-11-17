@@ -13,23 +13,14 @@ use Money\Money;
 
 trait HasBalance
 {
-    /**
-     * @var bool
-     */
     #[ORM\Column(type: 'boolean', options: ['default' => 1])]
-    private $isCHF = true;
+    private bool $isCHF = true;
 
-    /**
-     * @var Money
-     */
     #[ORM\Column(type: 'CHF')]
-    private $balanceCHF;
+    private Money $balanceCHF;
 
-    /**
-     * @var Money
-     */
     #[ORM\Column(type: 'EUR')]
-    private $balanceEUR;
+    private Money $balanceEUR;
 
     /**
      * Set balance.

@@ -9,11 +9,8 @@ use GraphQL\Doctrine\Attribute as API;
 
 trait HasQuantity
 {
-    /**
-     * @var int
-     */
     #[ORM\Column(type: 'smallint', options: ['unsigned' => true, 'default' => 0])]
-    private $quantity = 0;
+    private int $quantity = 0;
 
     /**
      * Quantity ordered.

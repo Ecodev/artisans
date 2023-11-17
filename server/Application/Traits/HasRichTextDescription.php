@@ -10,11 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 trait HasRichTextDescription
 {
-    /**
-     * @var string
-     */
     #[ORM\Column(type: 'text', length: 65535)]
-    private $description = '';
+    private string $description = '';
 
     /**
      * Set description.

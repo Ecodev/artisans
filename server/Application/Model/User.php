@@ -70,7 +70,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     #[ORM\Column(type: 'string', length: 191, unique: true)]
-    private $email;
+    private ?string $email = null;
 
     #[ORM\Column(type: 'UserRole', options: ['default' => self::ROLE_MEMBER])]
     private string $role = self::ROLE_MEMBER;
@@ -145,7 +145,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     }
 
     /**
-     * Use email as technical identifier of user.
+     * Use email as a technical identifier of user.
      */
     #[API\Exclude]
     public function getLogin(): ?string

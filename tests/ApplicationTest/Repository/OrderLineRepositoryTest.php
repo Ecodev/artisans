@@ -12,10 +12,7 @@ class OrderLineRepositoryTest extends AbstractRepositoryTest
 {
     use LimitedAccessSubQuery;
 
-    /**
-     * @var OrderLineRepository
-     */
-    private $repository;
+    private OrderLineRepository $repository;
 
     protected function setUp(): void
     {

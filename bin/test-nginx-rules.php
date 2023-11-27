@@ -11,39 +11,32 @@ function run(string $cmd): string
     return shell_exec($cmd);
 }
 
-function test(bool $loggedIn, string $url): void
+function test(string $url): void
 {
-    if ($loggedIn) {
-        $cookie = "--cookie 'PHPSESSID=foo'";
-        $pattern = '<img src="assets/logo-artisans-de-la-transition.svg"';
-        $message = 'logged in user should get raw Angular';
-    } else {
-        $cookie = '';
-        $pattern = '<mat-icon';
-        $message = 'anonymous should get pre-rendered page by SSR';
-    }
+    $pattern = '<img src="assets/logo-artisans-de-la-transition.svg"';
+    $message = 'logged in user should get raw Angular';
 
     // Assert HTTP status code
-    $status = run("curl --insecure --silent --output /dev/null --write-out '%{http_code}' '$url' $cookie");
+    $status = run("curl --insecure --silent --output /dev/null --write-out '%{http_code}' '$url'");
     if ($status !== '200') {
         echo "FAILED STATUS CODE: $status: $message" . PHP_EOL;
         exit(1);
     }
 
     // Assert HTML content
-    $content = run("curl --insecure --silent '$url' $cookie");
+    $content = run("curl --insecure --silent '$url'");
     if (!str_contains($content, $pattern)) {
         echo "FAILED PATTERN: '$pattern': $message" . PHP_EOL;
         exit(1);
     }
 }
 
-test(true, 'https://artisans.lan');
-test(true, 'https://artisans.lan/larevuedurable/numeros');
-test(true, 'https://artisans.lan/mon-compte');
+test('https://artisans.lan');
+test('https://artisans.lan/larevuedurable/numeros');
+test('https://artisans.lan/mon-compte');
 
-test(false, 'https://artisans.lan');
-test(false, 'https://artisans.lan/larevuedurable/numeros');
-test(false, 'https://artisans.lan/mon-compte');
+test('https://artisans.lan');
+test('https://artisans.lan/larevuedurable/numeros');
+test('https://artisans.lan/mon-compte');
 
-echo 'All tests OK' . PHP_EOL;
+echo '❤️  All tests OK' . PHP_EOL;

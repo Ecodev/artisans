@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="start center">
-    <h2 fxFlex mat-dialog-title>Commande du {{ data.model.creationDate | swissDate }}</h2>
+    <h2 mat-dialog-title fxFlex>Commande du {{ data.model.creationDate | swissDate }}</h2>
 
     <natural-select-enum
         (selectionChange)="updateStatus($event)"

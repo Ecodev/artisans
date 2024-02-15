@@ -37,6 +37,11 @@
                                 "input": "server/",
                                 "glob": "index.php",
                                 "output": "/"
+                            },
+                            {
+                                "input": "client/",
+                                "glob": "robots.txt",
+                                "output": "/"
                             }
                         ],
                         "styles": ["client/styles/_themes.scss", "client/styles.scss"],

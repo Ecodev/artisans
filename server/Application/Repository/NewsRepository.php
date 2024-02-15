@@ -32,4 +32,18 @@ class NewsRepository extends AbstractRepository implements LimitedAccessSubQuery
 
         return 'SELECT id FROM news WHERE is_active';
     }
+
+    public function getIds(): array
+    {
+        $query = $this->createQueryBuilder('news')
+            ->select('news.id')
+            ->where('news.date < CURRENT_TIMESTAMP()')
+            ->andWhere('news.is_active = true')
+            ->orderBy('news.id')
+            ->getQuery();
+
+        $result = $query->getArrayResult();
+
+        return $result;
+    }
 }

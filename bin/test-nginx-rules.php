@@ -38,5 +38,6 @@ test('https://artisans.lan/mon-compte');
 test('https://artisans.lan');
 test('https://artisans.lan/larevuedurable/numeros');
 test('https://artisans.lan/mon-compte');
+test('https://artisans.lan/sitemap.xml');
 
 echo '❤️  All tests OK' . PHP_EOL;

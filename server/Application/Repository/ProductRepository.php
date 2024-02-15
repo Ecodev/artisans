@@ -63,4 +63,17 @@ class ProductRepository extends AbstractRepository implements LimitedAccessSubQu
 
         return $result;
     }
+
+    public function getIds(): array
+    {
+        $query = $this->createQueryBuilder('product')
+            ->select('product.id, product.reviewNumber')
+            ->where('product.isActive = true')
+            ->orderBy('product.id')
+            ->getQuery();
+
+        $result = $query->getArrayResult();
+
+        return $result;
+    }
 }

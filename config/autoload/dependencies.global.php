@@ -33,6 +33,7 @@ return [
             \Ecodev\Felix\Log\Writer\Db::class => \Application\Log\DbWriterFactory::class,
             \Ecodev\Felix\Service\Mailer::class => \Application\Service\MailerFactory::class,
             \GraphQL\Doctrine\Types::class => \Application\Api\TypesFactory::class,
+            \Application\Handler\SitemapHandler::class => \Application\Handler\SitemapFactory::class,
         ],
     ],
 ];

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Application\Handler\SitemapHandler;
 use Ecodev\Felix\Handler\GraphQLHandler;
 use GraphQL\Upload\UploadMiddleware;
 use Mezzio\Application;
@@ -55,4 +56,8 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         BodyParamsMiddleware::class,
         \Application\Handler\DatatransHandler::class,
     ], 'datatrans');
+
+    $app->get('/sitemap.xml', [
+        SitemapHandler::class,
+    ], 'sitemap');
 };

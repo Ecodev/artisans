@@ -55,6 +55,7 @@
         "ext-iconv": "*",
         "ext-json": "*",
         "ext-pdo": "*",
+        "ext-dom": "*",
         "beberlei/doctrineextensions": "^1.3",
         "ecodev/felix": "^13.2",
         "ecodev/graphql-doctrine": "^9.0",

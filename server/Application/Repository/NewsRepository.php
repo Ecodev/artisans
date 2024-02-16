@@ -38,7 +38,7 @@ class NewsRepository extends AbstractRepository implements LimitedAccessSubQuery
         $query = $this->createQueryBuilder('news')
             ->select('news.id')
             ->where('news.date < CURRENT_TIMESTAMP()')
-            ->andWhere('news.is_active = true')
+            ->andWhere('news.isActive = true')
             ->orderBy('news.id')
             ->getQuery();
 

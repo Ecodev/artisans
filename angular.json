@@ -92,10 +92,10 @@
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "artisans:build:production"
+                            "buildTarget": "artisans:build:production"
                         },
                         "development": {
-                            "browserTarget": "artisans:build:development"
+                            "buildTarget": "artisans:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -103,7 +103,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "artisans:build"
+                        "buildTarget": "artisans:build"
                     }
                 },
                 "test": {

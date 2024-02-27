@@ -1,4 +1,4 @@
-import {APP_ID, APP_INITIALIZER, enableProdMode, importProvidersFrom, inject, LOCALE_ID} from '@angular/core';
+import {APP_ID, APP_INITIALIZER, enableProdMode, inject, LOCALE_ID} from '@angular/core';
 import {environment} from './environments/environment';
 import {AppComponent} from './app/app.component';
 import {routes} from './app/app-routing.module';
@@ -15,7 +15,7 @@ import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions, MatPaginatorI
 import {
     DateAdapter,
     ErrorStateMatcher,
-    MatNativeDateModule,
+    provideNativeDateAdapter,
     ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
 import {LoggerExtraService} from './app/shared/services/logger-extra.service';
@@ -47,7 +47,7 @@ const matTooltipCustomConfig: MatTooltipDefaultOptions = {
 
 bootstrapApplication(AppComponent, {
     providers: [
-        importProvidersFrom(MatNativeDateModule),
+        provideNativeDateAdapter(),
         Apollo,
         provideAnimations(),
         naturalProviders,

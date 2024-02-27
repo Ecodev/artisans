@@ -8,7 +8,7 @@
         "client-config": "`which php8.2 || which php` ./bin/generate-client-configuration.php",
         "prerequisite": "mkdir -p htdocs/ && cp -v server/index.php htdocs/ && yarn client-config && yarn codegen",
         "dev": "yarn prerequisite && ng serve",
-        "prod": "yarn prerequisite && ng build && find data/tmp/build -type f -not -name '*.gz' -exec gzip --keep --best {} \\; && rm -rf htdocs/ && mv -v data/tmp/build htdocs",
+        "prod": "yarn prerequisite && ng build && find data/tmp/build/browser -type f -not -name '*.gz' -exec gzip --keep --best {} \\; && rm -rf htdocs/ && mv -v data/tmp/build/browser htdocs",
         "test": "yarn prerequisite && ng test",
         "lint": "ng lint --max-warnings 0",
         "e2e": "playwright test",
@@ -43,7 +43,7 @@
         "lodash.template": "^4.5.0",
         "ngx-progressbar": "^11.0.0",
         "rxjs": "~7.8.1",
-        "striptags": "^3.2.0",
+        "striptags": "^4.0.0-alpha.4",
         "tslib": "^2.6.2",
         "zone.js": "~0.14.4"
     },

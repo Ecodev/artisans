@@ -18,13 +18,13 @@
             },
             "architect": {
                 "build": {
-                    "builder": "@angular-devkit/build-angular:browser",
+                    "builder": "@angular-devkit/build-angular:application",
                     "options": {
                         "preserveSymlinks": true,
                         "outputPath": "data/tmp/build",
                         "index": "client/index.html",
-                        "main": "client/main.ts",
-                        "polyfills": "client/polyfills.ts",
+                        "browser": "client/main.ts",
+                        "polyfills": ["zone.js"],
                         "tsConfig": "client/tsconfig.app.json",
                         "assets": [
                             "client/assets",
@@ -70,9 +70,7 @@
                             ]
                         },
                         "development": {
-                            "buildOptimizer": false,
                             "optimization": false,
-                            "vendorChunk": true,
                             "extractLicenses": false,
                             "sourceMap": true,
                             "namedChunks": true
@@ -110,7 +108,7 @@
                     "builder": "@angular-devkit/build-angular:karma",
                     "options": {
                         "main": "client/test.ts",
-                        "polyfills": "client/polyfills.ts",
+                        "polyfills": ["zone.js", "zone.js/testing"],
                         "tsConfig": "client/tsconfig.spec.json",
                         "karmaConfig": "client/karma.conf.js",
                         "styles": [

@@ -83,14 +83,18 @@
                         @if (datesForm) {
                             <div formArrayName="dates">
                                 <h2 class="mat-h2">Dates de la session</h2>
-                                @for (date of datesForm.controls; track date; let i = $index) {
+                                @for (date of datesForm.controls; track date) {
                                     <div fxLayout="row" fxLayoutAlign="start top" fxLayoutGap="15px">
                                         <mat-form-field fxFlex
                                             ><!-- row child -->
                                             <mat-label>Date</mat-label>
-                                            <input (change)="update()" [formControlName]="i" matInput />
+                                            <input (change)="update()" [formControlName]="$index" matInput />
                                         </mat-form-field>
-                                        <button (click)="datesForm.removeAt(i); update()" color="warn" mat-icon-button>
+                                        <button
+                                            (click)="datesForm.removeAt($index); update()"
+                                            color="warn"
+                                            mat-icon-button
+                                        >
                                             <mat-icon naturalIcon="delete"></mat-icon>
                                         </button>
                                     </div>

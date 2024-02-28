@@ -12,7 +12,7 @@
     -->
         @if (viewMode === ProductsViewMode.grid) {
             <div class="grid products" [class.highlight-first-items]="highlightFirstItems">
-                @for (product of items; track product; let index = $index) {
+                @for (product of items; track product) {
                     <div class="product" fxLayout="column" fxLayoutGap="10px">
                         @if (showTagsOnProducts) {
                             <div class="product-tags">
@@ -26,7 +26,7 @@
                             </div>
                         }
                         <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
-                        @if (index <= 1 && product.illustration) {
+                        @if ($index <= 1 && product.illustration) {
                             <a
                                 [routerLink]="[
                                     '/larevuedurable/',
@@ -37,7 +37,7 @@
                                     'url(/api/image/' +
                                     product.illustration.id +
                                     '/' +
-                                    (index === 0 ? '550' : '260') +
+                                    ($index === 0 ? '550' : '260') +
                                     ')'
                                 "
                                 class="product-illustration"

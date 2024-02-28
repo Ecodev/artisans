@@ -5,12 +5,18 @@
 </div>
 
 <ng-template #navigationTemplate let-navigation>
-    <ul *ngIf="navigation?.length">
-        <li *ngFor="let item of navigation" [class.hasMenu]="item.children?.length" [class.open]="item.open">
-            <a [routerLink]="item.link" routerLinkActive="active">
-                <span (click)="clickAction(item, $event)">{{ item.display }}</span></a
-            >
-            <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}"></ng-container>
-        </li>
-    </ul>
+    @if (navigation?.length) {
+        <ul>
+            @for (item of navigation; track item) {
+                <li [class.hasMenu]="item.children?.length" [class.open]="item.open">
+                    <a [routerLink]="item.link" routerLinkActive="active">
+                        <span (click)="clickAction(item, $event)">{{ item.display }}</span></a
+                    >
+                    <ng-container
+                        *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}"
+                    ></ng-container>
+                </li>
+            }
+        </ul>
+    }
 </ng-template>

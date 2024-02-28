@@ -5,14 +5,13 @@ import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SessionsVariables} from '../../../shared/generated-types';
 import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-session-side-column',
     templateUrl: './session-side-column.component.html',
     styleUrls: ['./session-side-column.component.scss'],
     standalone: true,
-    imports: [CommonModule, MatButtonModule, RouterLink],
+    imports: [MatButtonModule, RouterLink],
 })
 export class SessionSideColumnComponent implements OnInit {
     public number = 0;

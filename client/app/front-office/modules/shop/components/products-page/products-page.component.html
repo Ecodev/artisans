@@ -1,137 +1,150 @@
 <div class="container" fxLayout="column" fxLayoutGap="60px">
-    <div *ngIf="title" class="mat-headline-4">{{ title }}</div>
+    @if (title) {
+        <div class="mat-headline-4">{{ title }}</div>
+    }
 
-    <ng-container *ngIf="items && items.length">
-        <app-tags-navigation *ngIf="showTagsNavigation" [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
-
+    @if (items && items.length) {
+        @if (showTagsNavigation) {
+            <app-tags-navigation [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
+        }
         <!--
-        GRID
-        -->
-        <div
-            class="grid products"
-            [class.highlight-first-items]="highlightFirstItems"
-            *ngIf="viewMode === ProductsViewMode.grid"
-        >
-            <div *ngFor="let product of items; let index = index" class="product" fxLayout="column" fxLayoutGap="10px">
-                <div class="product-tags" *ngIf="showTagsOnProducts">
-                    <a
-                        *ngFor="let tag of product.productTags"
-                        [routerLink]="['/larevuedurable/articles', tag.name]"
-                        class="product-tag mat-body"
-                        >{{ tag.name }}
-                    </a>
-                </div>
-
-                <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
-
-                <a
-                    *ngIf="index <= 1 && product.illustration"
-                    [routerLink]="['/larevuedurable/', product.reviewNumber ? 'numero' : 'article', product.id]"
-                    [style.backgroundImage]="
-                        'url(/api/image/' + product.illustration.id + '/' + (index === 0 ? '550' : '260') + ')'
-                    "
-                    class="product-illustration"
-                    fxFlex
-                ></a>
-
-                <div class="image-placeholder"></div>
-
-                <div>
-                    <div class="product-price mat-body-strong" *ngIf="!product.file">
-                        <span class="frame-primary target-customer">Abonné</span>
-                        ou
-                        <app-price [product]="product" class="mat-h3"></app-price>
-                    </div>
-
-                    <a
-                        mat-flat-button
-                        color="accent"
-                        *ngIf="product.file"
-                        [href]="'/api/file/' + product.file.id"
-                        class="product-file-button"
-                        target="_blank"
-                    >
-                        Télécharger
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!--
-        LIST
-        -->
-        <div *ngIf="viewMode === ProductsViewMode.list">
-            <div class="list products" fxLayout="column" fxLayoutGap="60px">
-                <div
-                    *ngFor="let product of items"
-                    class="product"
-                    fxLayout="column"
-                    fxLayout.gt-sm="row"
-                    fxLayoutGap="60px"
-                >
-                    <a class="product-image" *ngIf="product.image" [routerLink]="getDetailLink(product)">
-                        <img [naturalSrcDensity]="'/api/image/' + product.image.id + '/200'" alt="aperçu du produit" />
-                    </a>
-
-                    <div fxLayout="column" fxLayoutGap="10px" fxFlex>
-                        <div
-                            fxLayout="row"
-                            fxLayoutGap="15px"
-                            fxLayoutAlign="start baseline"
-                            class="mat-h2 no-margin-bottom text-light"
-                        >
-                            <span *ngIf="product.reviewNumber" class="text-primary">
-                                N° {{ product.reviewNumber }}
-                            </span>
-                            <span *ngIf="product.releaseDate">
-                                {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
-                            </span>
-                        </div>
+    GRID
+    -->
+        @if (viewMode === ProductsViewMode.grid) {
+            <div class="grid products" [class.highlight-first-items]="highlightFirstItems">
+                @for (product of items; track product; let index = $index) {
+                    <div class="product" fxLayout="column" fxLayoutGap="10px">
+                        @if (showTagsOnProducts) {
+                            <div class="product-tags">
+                                @for (tag of product.productTags; track tag) {
+                                    <a
+                                        [routerLink]="['/larevuedurable/articles', tag.name]"
+                                        class="product-tag mat-body"
+                                        >{{ tag.name }}
+                                    </a>
+                                }
+                            </div>
+                        }
                         <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
-                        <div
-                            class="product-name mat-h3"
-                            [innerHTML]="product.description | stripTags | truncate: ['570', '...']"
-                        ></div>
+                        @if (index <= 1 && product.illustration) {
+                            <a
+                                [routerLink]="[
+                                    '/larevuedurable/',
+                                    product.reviewNumber ? 'numero' : 'article',
+                                    product.id
+                                ]"
+                                [style.backgroundImage]="
+                                    'url(/api/image/' +
+                                    product.illustration.id +
+                                    '/' +
+                                    (index === 0 ? '550' : '260') +
+                                    ')'
+                                "
+                                class="product-illustration"
+                                fxFlex
+                            ></a>
+                        }
+                        <div class="image-placeholder"></div>
+                        <div>
+                            @if (!product.file) {
+                                <div class="product-price mat-body-strong">
+                                    <span class="frame-primary target-customer">Abonné</span>
+                                    ou
+                                    <app-price [product]="product" class="mat-h3"></app-price>
+                                </div>
+                            }
+                            @if (product.file) {
+                                <a
+                                    mat-flat-button
+                                    color="accent"
+                                    [href]="'/api/file/' + product.file.id"
+                                    class="product-file-button"
+                                    target="_blank"
+                                >
+                                    Télécharger
+                                </a>
+                            }
+                        </div>
                     </div>
-
-                    <div class="product-price" fxLayout="column" fxLayoutGap="15px">
-                        <app-price [product]="product" class="mat-h1"></app-price>
-                        <a
-                            mat-flat-button
-                            color="primary"
-                            [routerLink]="getDetailLink(product)"
-                            class="product-detail-button"
-                            >Voir le détail
-                        </a>
-
-                        <a
-                            mat-flat-button
-                            color="accent"
-                            *ngIf="product.file"
-                            [href]="'/api/file/' + product.file.id"
-                            class="product-file-button"
-                            target="_blank"
-                        >
-                            Télécharger
-                        </a>
-                    </div>
+                }
+            </div>
+        }
+        <!--
+    LIST
+    -->
+        @if (viewMode === ProductsViewMode.list) {
+            <div>
+                <div class="list products" fxLayout="column" fxLayoutGap="60px">
+                    @for (product of items; track product) {
+                        <div class="product" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="60px">
+                            @if (product.image) {
+                                <a class="product-image" [routerLink]="getDetailLink(product)">
+                                    <img
+                                        [naturalSrcDensity]="'/api/image/' + product.image.id + '/200'"
+                                        alt="aperçu du produit"
+                                    />
+                                </a>
+                            }
+                            <div fxLayout="column" fxLayoutGap="10px" fxFlex>
+                                <div
+                                    fxLayout="row"
+                                    fxLayoutGap="15px"
+                                    fxLayoutAlign="start baseline"
+                                    class="mat-h2 no-margin-bottom text-light"
+                                >
+                                    @if (product.reviewNumber) {
+                                        <span class="text-primary"> N° {{ product.reviewNumber }} </span>
+                                    }
+                                    @if (product.releaseDate) {
+                                        <span>
+                                            {{ product.releaseDate | date: 'MMMM yyyy' | capitalize }}
+                                        </span>
+                                    }
+                                </div>
+                                <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{
+                                    product.name
+                                }}</a>
+                                <div
+                                    class="product-name mat-h3"
+                                    [innerHTML]="product.description | stripTags | truncate: ['570', '...']"
+                                ></div>
+                            </div>
+                            <div class="product-price" fxLayout="column" fxLayoutGap="15px">
+                                <app-price [product]="product" class="mat-h1"></app-price>
+                                <a
+                                    mat-flat-button
+                                    color="primary"
+                                    [routerLink]="getDetailLink(product)"
+                                    class="product-detail-button"
+                                    >Voir le détail
+                                </a>
+                                @if (product.file) {
+                                    <a
+                                        mat-flat-button
+                                        color="accent"
+                                        [href]="'/api/file/' + product.file.id"
+                                        class="product-file-button"
+                                        target="_blank"
+                                    >
+                                        Télécharger
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
-        </div>
-
+        }
         <div fxLayout="row" fxLayoutAlign="center" id="end-of-list">
-            <a
-                (click)="loadMore()"
-                color="primary"
-                mat-stroked-button
-                *ngIf="items && dataSource?.data?.length > items.length"
-            >
-                {{ route.snapshot.data.showMoreLabel }}
-            </a>
+            @if (items && dataSource?.data?.length > items.length) {
+                <a (click)="loadMore()" color="primary" mat-stroked-button>
+                    {{ route.snapshot.data.showMoreLabel }}
+                </a>
+            }
         </div>
-    </ng-container>
+    }
 
-    <div class="mat-h2" *ngIf="items && items.length === 0 && route.snapshot.data.showNoResults">
-        Aucun résultat n'a été trouvé.
-    </div>
+    @if (items && items.length === 0 && route.snapshot.data.showNoResults) {
+        <div class="mat-h2">Aucun résultat n'a été trouvé.</div>
+    }
 </div>

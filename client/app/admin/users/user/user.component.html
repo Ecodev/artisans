@@ -7,142 +7,147 @@
     >
     </natural-detail-header>
 
-    <mat-toolbar color="warn" *ngIf="isUpdatePage() && data.model.shouldDelete"
-        >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
-        définitivement ici.
-    </mat-toolbar>
+    @if (isUpdatePage() && data.model.shouldDelete) {
+        <mat-toolbar color="warn"
+            >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
+            définitivement ici.
+        </mat-toolbar>
+    }
 
     <!-- naturalLinkableTab conflicts with order detail page (child route) -->
-    <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true" *ngIf="isUpdatePage()">
-        <mat-tab id="general" label="Général">
-            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-                <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
-                        <h2 class="mat-h2">Coordonnées</h2>
-                        <app-address [form]="form" [disabled]="true"></app-address>
-                        <mat-form-field>
-                            <mat-label>Téléphone</mat-label>
-                            <input formControlName="phone" matInput />
-                        </mat-form-field>
-                    </div>
-
-                    <div fxFlex="33" fxLayout="column">
-                        <h2 class="mat-h2">Compte</h2>
-                        <mat-form-field>
-                            <mat-label>email</mat-label>
-                            <input (change)="update()" formControlName="email" matInput />
-                            <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
-                            <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
-                            <mat-error *ngIf="form.get('')?.hasError('email')">Adresse email invalide</mat-error>
-                            <mat-error *ngIf="form.get('email')?.hasError('duplicateValue')">
-                                Cet email est déjà attribué</mat-error
+    @if (isUpdatePage()) {
+        <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+            <mat-tab id="general" label="Général">
+                <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
+                    <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
+                        <div fxFlex="66" fxLayout="column">
+                            <h2 class="mat-h2">Coordonnées</h2>
+                            <app-address [form]="form" [disabled]="true"></app-address>
+                            <mat-form-field>
+                                <mat-label>Téléphone</mat-label>
+                                <input formControlName="phone" matInput />
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="33" fxLayout="column">
+                            <h2 class="mat-h2">Compte</h2>
+                            <mat-form-field>
+                                <mat-label>email</mat-label>
+                                <input (change)="update()" formControlName="email" matInput />
+                                @if (form.get('email')?.hasError('required')) {
+                                    <mat-error>Requis</mat-error>
+                                }
+                                @if (form.get('email')?.hasError('email')) {
+                                    <mat-error>Adresse email invalide</mat-error>
+                                }
+                                @if (form.get('')?.hasError('email')) {
+                                    <mat-error>Adresse email invalide</mat-error>
+                                }
+                                @if (form.get('email')?.hasError('duplicateValue')) {
+                                    <mat-error> Cet email est déjà attribué</mat-error>
+                                }
+                            </mat-form-field>
+                            <natural-select-enum
+                                (selectionChange)="update()"
+                                enumName="UserRole"
+                                formControlName="role"
+                                placeholder="Rôle"
+                                [optionDisabled]="roleDisabled()"
+                            ></natural-select-enum>
+                            <mat-slide-toggle
+                                formControlName="isPublicFacilitator"
+                                (change)="update()"
+                                class="margin-bottom"
                             >
-                        </mat-form-field>
-
-                        <natural-select-enum
-                            (selectionChange)="update()"
-                            enumName="UserRole"
-                            formControlName="role"
-                            placeholder="Rôle"
-                            [optionDisabled]="roleDisabled()"
-                        ></natural-select-enum>
-
-                        <mat-slide-toggle
-                            formControlName="isPublicFacilitator"
-                            (change)="update()"
-                            class="margin-bottom"
-                        >
-                            Facilitateur public
-                        </mat-slide-toggle>
-
-                        <h2 class="mat-h2">Statut</h2>
-                        <natural-select-enum
-                            enumName="Membership"
-                            formControlName="membership"
-                            placeholder="Membre des artisans"
-                        ></natural-select-enum>
-
+                                Facilitateur public
+                            </mat-slide-toggle>
+                            <h2 class="mat-h2">Statut</h2>
+                            <natural-select-enum
+                                enumName="Membership"
+                                formControlName="membership"
+                                placeholder="Membre des artisans"
+                            ></natural-select-enum>
+                            <div>
+                                <span class="mat-subtitle-2">Abonnement : </span>
+                                @if (data.model.subscriptionLastReviewNumber) {
+                                    Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au
+                                    numéro
+                                    {{ data.model.subscriptionLastReviewNumber }}
+                                }
+                                @if (!data.model.subscriptionLastReviewNumber) {
+                                    N'est pas abonné
+                                }
+                            </div>
+                            <div
+                                matTooltip="L'accès temporaire donne accès au contenu numérique en attendant le prochain import de Crésus qui confirmera les accès disponible"
+                            >
+                                <span class="mat-subtitle-2">Accès temporaire : </span>
+                                {{ data.model.webTemporaryAccess ? 'oui' : 'non' }}
+                            </div>
+                        </div>
+                    </div>
+                    <mat-divider></mat-divider>
+                    <h2 class="mat-h2">Conversations carbone animées</h2>
+                    <natural-relations
+                        [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
+                        [main]="data.model"
+                        [service]="sessionService"
+                        otherName="facilitator"
+                        placeholder="Conversations carbone"
+                    >
+                        <ng-template let-item="item">
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                <natural-table-button
+                                    [label]="item.name"
+                                    [navigate]="['/admin/session/', item.id]"
+                                ></natural-table-button>
+                            </div>
+                        </ng-template>
+                    </natural-relations>
+                    <mat-divider></mat-divider>
+                    @if (isUpdatePage()) {
+                        <div fxLayout="column" fxLayoutGap="15px">
+                            <natural-stamp [item]="data.model"></natural-stamp>
+                            @if (data.model.firstLogin) {
+                                <div>
+                                    <span class="mat-body-strong">Première connexion :</span>
+                                    {{ data.model.firstLogin | swissDate }} ({{ data.model.firstLogin | timeAgo }})
+                                </div>
+                            }
+                            @if (data.model.lastLogin) {
+                                <div>
+                                    <span class="mat-body-strong">Dernière connexion :</span>
+                                    {{ data.model.lastLogin | swissDate }} ({{ data.model.lastLogin | timeAgo }})
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </mat-tab>
+            @if (isUpdatePage()) {
+                <mat-tab id="orders" label="Commandes">
+                    <div class="padding-top">
                         <div>
-                            <span class="mat-subtitle-2">Abonnement : </span>
-                            <ng-container *ngIf="data.model.subscriptionLastReviewNumber">
-                                Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
-                                {{ data.model.subscriptionLastReviewNumber }}
-                            </ng-container>
-
-                            <ng-container *ngIf="!data.model.subscriptionLastReviewNumber"
-                                >N'est pas abonné</ng-container
-                            >
-                        </div>
-
-                        <div
-                            matTooltip="L'accès temporaire donne accès au contenu numérique en attendant le prochain import de Crésus qui confirmera les accès disponible"
-                        >
-                            <span class="mat-subtitle-2">Accès temporaire : </span>
-                            {{ data.model.webTemporaryAccess ? 'oui' : 'non' }}
+                            <app-orders
+                                [forcedVariables]="{
+                                    filter: {groups: [{conditions: [{owner: {equal: {value: data.model.id}}}]}]}
+                                }"
+                                [selectedColumns]="['creationDate', 'lines', 'status', 'balanceCHF', 'balanceEUR']"
+                            ></app-orders>
                         </div>
                     </div>
-                </div>
+                </mat-tab>
+            }
+        </mat-tab-group>
+    }
 
-                <mat-divider></mat-divider>
-
-                <h2 class="mat-h2">Conversations carbone animées</h2>
-
-                <natural-relations
-                    [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
-                    [main]="data.model"
-                    [service]="sessionService"
-                    otherName="facilitator"
-                    placeholder="Conversations carbone"
-                >
-                    <ng-template let-item="item">
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                            <natural-table-button
-                                [label]="item.name"
-                                [navigate]="['/admin/session/', item.id]"
-                            ></natural-table-button>
-                        </div>
-                    </ng-template>
-                </natural-relations>
-
-                <mat-divider></mat-divider>
-
-                <div *ngIf="isUpdatePage()" fxLayout="column" fxLayoutGap="15px">
-                    <natural-stamp [item]="data.model"></natural-stamp>
-
-                    <div *ngIf="data.model.firstLogin">
-                        <span class="mat-body-strong">Première connexion :</span>
-                        {{ data.model.firstLogin | swissDate }} ({{ data.model.firstLogin | timeAgo }})
-                    </div>
-
-                    <div *ngIf="data.model.lastLogin">
-                        <span class="mat-body-strong">Dernière connexion :</span>
-                        {{ data.model.lastLogin | swissDate }} ({{ data.model.lastLogin | timeAgo }})
-                    </div>
-                </div>
-            </div>
-        </mat-tab>
-
-        <mat-tab id="orders" label="Commandes" *ngIf="isUpdatePage()">
-            <div class="padding-top">
-                <div>
-                    <app-orders
-                        [forcedVariables]="{
-                            filter: {groups: [{conditions: [{owner: {equal: {value: data.model.id}}}]}]}
-                        }"
-                        [selectedColumns]="['creationDate', 'lines', 'status', 'balanceCHF', 'balanceEUR']"
-                    ></app-orders>
-                </div>
-            </div>
-        </mat-tab>
-    </mat-tab-group>
-
-    <natural-fixed-button-detail
-        (create)="create()"
-        (delete)="delete()"
-        *ngIf="showFabButton"
-        [form]="form"
-        [model]="data.model"
-    ></natural-fixed-button-detail>
+    @if (showFabButton) {
+        <natural-fixed-button-detail
+            (create)="create()"
+            (delete)="delete()"
+            [form]="form"
+            [model]="data.model"
+        ></natural-fixed-button-detail>
+    }
 </div>
 
 <router-outlet></router-outlet>

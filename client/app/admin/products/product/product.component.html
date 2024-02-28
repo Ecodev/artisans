@@ -5,18 +5,19 @@
         label="Produit"
         [newLabel]="data.seo.title"
     >
-        <a
-            [routerLink]="[
-                data.model.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
-                data.model.id
-            ]"
-            color="primary"
-            mat-raised-button
-            *ngIf="isUpdatePage()"
-        >
-            <mat-icon naturalIcon="remove_red_eye"></mat-icon>
-            Voir la page
-        </a>
+        @if (isUpdatePage()) {
+            <a
+                [routerLink]="[
+                    data.model.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
+                    data.model.id
+                ]"
+                color="primary"
+                mat-raised-button
+            >
+                <mat-icon naturalIcon="remove_red_eye"></mat-icon>
+                Voir la page
+            </a>
+        }
     </natural-detail-header>
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
@@ -29,22 +30,30 @@
                                 <mat-form-field>
                                     <mat-label>Nom</mat-label>
                                     <input (change)="update()" formControlName="name" matInput />
-                                    <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                        Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                                    </mat-error>
-                                    <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
+                                    @if (form.get('name')?.hasError('maxlength')) {
+                                        <mat-error>
+                                            Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                                        </mat-error>
+                                    }
+                                    @if (form.get('name')?.hasError('required')) {
+                                        <mat-error>Requis</mat-error>
+                                    }
                                 </mat-form-field>
 
                                 <mat-form-field>
                                     <mat-label>Code</mat-label>
                                     <input (change)="update()" formControlName="code" matInput maxlength="20" />
-                                    <mat-error *ngIf="form.get('code')?.hasError('maxlength')">
-                                        Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
-                                    </mat-error>
-                                    <mat-error *ngIf="form.get('code')?.hasError('duplicateValue')">
-                                        Ce code est déjà attribué à un produit
-                                    </mat-error>
-                                    <mat-error *ngIf="form.get('code')?.hasError('required')">Requis</mat-error>
+                                    @if (form.get('code')?.hasError('maxlength')) {
+                                        <mat-error>
+                                            Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
+                                        </mat-error>
+                                    }
+                                    @if (form.get('code')?.hasError('duplicateValue')) {
+                                        <mat-error> Ce code est déjà attribué à un produit </mat-error>
+                                    }
+                                    @if (form.get('code')?.hasError('required')) {
+                                        <mat-error>Requis</mat-error>
+                                    }
                                 </mat-form-field>
                             </div>
                         </div>
@@ -105,30 +114,33 @@
                                 [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
                             />
                             <mat-hint>Seulement pour les revues</mat-hint>
-                            <mat-error *ngIf="form.hasError('reviewXorArticle')"
-                                >Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer un
-                                numéro de revue pour une revue, soit choisir une revue existante pour un article.
-                            </mat-error>
+                            @if (form.hasError('reviewXorArticle')) {
+                                <mat-error
+                                    >Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer
+                                    un numéro de revue pour une revue, soit choisir une revue existante pour un article.
+                                </mat-error>
+                            }
                         </mat-form-field>
 
-                        <natural-select
-                            *ngIf="isUpdatePage()"
-                            (selectionChange)="update()"
-                            [service]="productService"
-                            formControlName="review"
-                            placeholder="Revue dont est extrait cet article"
-                            [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
-                            [filter]="{
-                                groups: [
-                                    {
-                                        conditions: [
-                                            {id: {equal: {value: data.model.id, not: true}}},
-                                            {reviewNumber: {null: {not: true}}}
-                                        ]
-                                    }
-                                ]
-                            }"
-                        ></natural-select>
+                        @if (isUpdatePage()) {
+                            <natural-select
+                                (selectionChange)="update()"
+                                [service]="productService"
+                                formControlName="review"
+                                placeholder="Revue dont est extrait cet article"
+                                [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
+                                [filter]="{
+                                    groups: [
+                                        {
+                                            conditions: [
+                                                {id: {equal: {value: data.model.id, not: true}}},
+                                                {reviewNumber: {null: {not: true}}}
+                                            ]
+                                        }
+                                    ]
+                                }"
+                            ></natural-select>
+                        }
 
                         <mat-form-field>
                             <mat-label>Durée de lecture</mat-label>
@@ -150,10 +162,12 @@
                                 type="number"
                             />
                             <div matTextSuffix>CHF</div>
-                            <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('required')">Requis</mat-error>
-                            <mat-error *ngIf="form.get('pricePerUnitCHF')?.hasError('money')"
-                                >Le montant doit être un nombre avec un maximum de deux décimales
-                            </mat-error>
+                            @if (form.get('pricePerUnitCHF')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
+                            @if (form.get('pricePerUnitCHF')?.hasError('money')) {
+                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales </mat-error>
+                            }
                         </mat-form-field>
 
                         <mat-form-field>
@@ -166,10 +180,12 @@
                                 type="number"
                             />
                             <div matTextSuffix>EUR</div>
-                            <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('required')">Requis</mat-error>
-                            <mat-error *ngIf="form.get('pricePerUnitEUR')?.hasError('money')"
-                                >Le montant doit être un nombre avec un maximum de deux décimales
-                            </mat-error>
+                            @if (form.get('pricePerUnitEUR')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
+                            @if (form.get('pricePerUnitEUR')?.hasError('money')) {
+                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales </mat-error>
+                            }
                         </mat-form-field>
 
                         <mat-form-field class="margin-top">
@@ -236,73 +252,82 @@
 
                 <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                     <div fxFlex="66" fxLayout="column">
-                        <div *ngIf="isUpdatePage()">
-                            <h2 class="mat-h2">Tags</h2>
-                            <natural-relations
-                                [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
-                                [main]="data.model"
-                                [service]="productTagService"
-                                placeholder="Ajouter un tag"
-                            >
-                                <ng-template let-item="item">
-                                    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                        <!-- TODO : link to products list filtred by tag -->
-                                        <natural-avatar
-                                            [bgColor]="item.color"
-                                            [initials]="item.name"
-                                            [size]="32"
-                                        ></natural-avatar>
-                                        <natural-table-button
-                                            [label]="item.name"
-                                            [navigate]="['/admin/product']"
-                                        ></natural-table-button>
-                                    </div>
-                                </ng-template>
-                            </natural-relations>
-                        </div>
+                        @if (isUpdatePage()) {
+                            <div>
+                                <h2 class="mat-h2">Tags</h2>
+                                <natural-relations
+                                    [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
+                                    [main]="data.model"
+                                    [service]="productTagService"
+                                    placeholder="Ajouter un tag"
+                                >
+                                    <ng-template let-item="item">
+                                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                            <!-- TODO : link to products list filtred by tag -->
+                                            <natural-avatar
+                                                [bgColor]="item.color"
+                                                [initials]="item.name"
+                                                [size]="32"
+                                            ></natural-avatar>
+                                            <natural-table-button
+                                                [label]="item.name"
+                                                [navigate]="['/admin/product']"
+                                            ></natural-table-button>
+                                        </div>
+                                    </ng-template>
+                                </natural-relations>
+                            </div>
+                        }
                     </div>
                 </div>
 
-                <natural-stamp *ngIf="isUpdatePage()" [item]="data.model"></natural-stamp>
+                @if (isUpdatePage()) {
+                    <natural-stamp [item]="data.model"></natural-stamp>
+                }
             </div>
         </mat-tab>
 
-        <mat-tab id="order-line" *ngIf="isUpdatePage()" label="Ventes">
-            <app-order-lines
-                [selectedColumns]="['creationDate', 'quantity', 'owner', 'balance']"
-                [forcedVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
-                [persistSearch]="false"
-                [showTotals]="true"
-            ></app-order-lines>
-        </mat-tab>
+        @if (isUpdatePage()) {
+            <mat-tab id="order-line" label="Ventes">
+                <app-order-lines
+                    [selectedColumns]="['creationDate', 'quantity', 'owner', 'balance']"
+                    [forcedVariables]="{filter: {groups: [{conditions: [{product: {equal: {value: data.model.id}}}]}]}}"
+                    [persistSearch]="false"
+                    [showTotals]="true"
+                ></app-order-lines>
+            </mat-tab>
+        }
 
-        <mat-tab id="product" *ngIf="isUpdatePage()" label="Produits similaires">
-            <div class="padding-top">
-                <natural-relations
-                    [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"
-                    [main]="data.model"
-                    [service]="productService"
-                    otherName="relatedProduct"
-                    placeholder="Produit similaire"
-                >
-                    <ng-template let-item="item">
-                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                            <natural-table-button
-                                [label]="item.name"
-                                [navigate]="['/admin/product/', item.id]"
-                            ></natural-table-button>
-                        </div>
-                    </ng-template>
-                </natural-relations>
-            </div>
-        </mat-tab>
+        @if (isUpdatePage()) {
+            <mat-tab id="product" label="Produits similaires">
+                <div class="padding-top">
+                    <natural-relations
+                        [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"
+                        [main]="data.model"
+                        [service]="productService"
+                        otherName="relatedProduct"
+                        placeholder="Produit similaire"
+                    >
+                        <ng-template let-item="item">
+                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                <natural-table-button
+                                    [label]="item.name"
+                                    [navigate]="['/admin/product/', item.id]"
+                                ></natural-table-button>
+                            </div>
+                        </ng-template>
+                    </natural-relations>
+                </div>
+            </mat-tab>
+        }
     </mat-tab-group>
 
-    <natural-fixed-button-detail
-        (create)="create()"
-        (delete)="delete()"
-        *ngIf="showFabButton"
-        [form]="form"
-        [model]="data.model"
-    ></natural-fixed-button-detail>
+    @if (showFabButton) {
+        <natural-fixed-button-detail
+            (create)="create()"
+            (delete)="delete()"
+            [form]="form"
+            [model]="data.model"
+        ></natural-fixed-button-detail>
+    }
 </div>

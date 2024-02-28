@@ -4,7 +4,7 @@ import {CurrencyService} from '../../../shared/services/currency.service';
 import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {money} from '@ecodev/natural';
 import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
@@ -17,15 +17,7 @@ export type DonationData = {
     templateUrl: './donation.component.html',
     styleUrls: ['./donation.component.scss'],
     standalone: true,
-    imports: [
-        MatDialogModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-        ReactiveFormsModule,
-        CommonModule,
-        MatButtonModule,
-    ],
+    imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule],
 })
 export class DonationComponent {
     public amount = new FormControl<number | null>(null, [Validators.required, Validators.min(0), money]);

@@ -1,13 +1,14 @@
 <div fxLayout="row" fxLayoutAlign="start center">
     <h2 mat-dialog-title fxFlex>Commande du {{ data.model.creationDate | swissDate }}</h2>
 
-    <natural-select-enum
-        (selectionChange)="updateStatus($event)"
-        *ngIf="viewer?.role === UserRole.administrator"
-        [ngModel]="data.model.status"
-        enumName="OrderStatus"
-        placeholder="Statut"
-    ></natural-select-enum>
+    @if (viewer?.role === UserRole.administrator) {
+        <natural-select-enum
+            (selectionChange)="updateStatus($event)"
+            [ngModel]="data.model.status"
+            enumName="OrderStatus"
+            placeholder="Statut"
+        ></natural-select-enum>
+    }
 </div>
 
 <mat-dialog-content fxLayout="column" fxLayoutGap="30px">
@@ -24,12 +25,16 @@
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
         <div class="mat-h1">
             <div>Total :</div>
-            <div *ngIf="data.model.balanceCHF > 0" style="text-align: right">
-                {{ data.model.balanceCHF | currency: 'CHF' }}
-            </div>
-            <div *ngIf="data.model.balanceEUR > 0" style="text-align: right">
-                {{ data.model.balanceEUR | currency: 'EUR' }}
-            </div>
+            @if (data.model.balanceCHF > 0) {
+                <div style="text-align: right">
+                    {{ data.model.balanceCHF | currency: 'CHF' }}
+                </div>
+            }
+            @if (data.model.balanceEUR > 0) {
+                <div style="text-align: right">
+                    {{ data.model.balanceEUR | currency: 'EUR' }}
+                </div>
+            }
         </div>
     </div>
 </mat-dialog-content>

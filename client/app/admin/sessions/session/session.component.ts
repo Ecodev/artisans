@@ -20,7 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NaturalEditorComponent} from '@ecodev/natural-editor';
-import {CommonModule} from '@angular/common';
+
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
@@ -40,7 +40,6 @@ import {MatTabsModule} from '@angular/material/tabs';
         FlexModule,
         MatFormFieldModule,
         MatInputModule,
-        CommonModule,
         NaturalEditorComponent,
         MatDatepickerModule,
         TextFieldModule,

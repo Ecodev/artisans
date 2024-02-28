@@ -1,27 +1,37 @@
 <!-- Mobile menu template -->
 <ng-template #mobileNavigationTemplate let-navigation>
-    <ul *ngIf="navigation?.length">
-        <li *ngFor="let item of navigation" [class.opened]="item.opened">
-            <a (click)="menu.close()" *ngIf="!item.children?.length" [routerLink]="item.link" matRipple>{{
-                item.display
-            }}</a>
-            <a (click)="item.opened = !item.opened" *ngIf="item.children?.length" matRipple>{{ item.display }}</a>
-            <ng-container
-                *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}"
-            ></ng-container>
-        </li>
-    </ul>
+    @if (navigation?.length) {
+        <ul>
+            @for (item of navigation; track item) {
+                <li [class.opened]="item.opened">
+                    @if (!item.children?.length) {
+                        <a (click)="menu.close()" [routerLink]="item.link" matRipple>{{ item.display }}</a>
+                    }
+                    @if (item.children?.length) {
+                        <a (click)="item.opened = !item.opened" matRipple>{{ item.display }}</a>
+                    }
+                    <ng-container
+                        *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}"
+                    ></ng-container>
+                </li>
+            }
+        </ul>
+    }
 </ng-template>
 
 <!-- Main menu template -->
 <ng-template #navigationTemplate let-navigation>
-    <ul *ngIf="navigation?.length">
-        <li *ngFor="let item of navigation" [class.hasMenu]="item.children?.length">
-            <a [routerLink]="item.link" matRipple routerLinkActive="active">
-                <span (click)="openMenuDropdown(item.children, $event)">{{ item.display }}</span>
-            </a>
-        </li>
-    </ul>
+    @if (navigation?.length) {
+        <ul>
+            @for (item of navigation; track item) {
+                <li [class.hasMenu]="item.children?.length">
+                    <a [routerLink]="item.link" matRipple routerLinkActive="active">
+                        <span (click)="openMenuDropdown(item.children, $event)">{{ item.display }}</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    }
 </ng-template>
 
 <mat-sidenav-container>
@@ -32,11 +42,13 @@
                 *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: mobileNavigation}"
             ></ng-container>
 
-            <ul *ngIf="viewer?.role === UserRole.administrator">
-                <li>
-                    <a routerLink="/admin" matRipple>Admnistration</a>
-                </li>
-            </ul>
+            @if (viewer?.role === UserRole.administrator) {
+                <ul>
+                    <li>
+                        <a routerLink="/admin" matRipple>Admnistration</a>
+                    </li>
+                </ul>
+            }
         </div>
     </mat-sidenav>
 
@@ -58,16 +70,22 @@
             <div id="header-top">
                 <div class="container" fxLayout="row">
                     <div fxFlex></div>
-                    <a *ngIf="!currencyService.locked" [matMenuTriggerFor]="deviseMenu" mat-button>
-                        {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
-                        <mat-icon naturalIcon="keyboard_arrow_down"></mat-icon>
-                    </a>
+                    @if (!currencyService.locked) {
+                        <a [matMenuTriggerFor]="deviseMenu" mat-button>
+                            {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
+                            <mat-icon naturalIcon="keyboard_arrow_down"></mat-icon>
+                        </a>
+                    }
                     <mat-menu #deviseMenu="matMenu">
                         <button (click)="currencyService.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
                         <button (click)="currencyService.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
                     </mat-menu>
-                    <a *ngIf="viewer?.role === UserRole.administrator" routerLink="/admin" mat-button>Admnistration</a>
-                    <a *ngFor="let item of topNavigation" [routerLink]="item.link" mat-button> {{ item.display }}</a>
+                    @if (viewer?.role === UserRole.administrator) {
+                        <a routerLink="/admin" mat-button>Admnistration</a>
+                    }
+                    @for (item of topNavigation; track item) {
+                        <a [routerLink]="item.link" mat-button> {{ item.display }}</a>
+                    }
                 </div>
             </div>
 
@@ -147,14 +165,14 @@
                     <mat-form-field id="newsletter-subscription">
                         <mat-label>Adresse e-mail</mat-label>
                         <input matInput formControlName="email" />
-                        <mat-error *ngIf="newsletterForm.controls.email?.errors"
-                            >Veuillez indiquer une addresse courriel valide</mat-error
-                        >
+                        @if (newsletterForm.controls.email.errors) {
+                            <mat-error>Veuillez indiquer une addresse courriel valide</mat-error>
+                        }
                     </mat-form-field>
 
-                    <button mat-flat-button *ngIf="newsletterForm.valid" (click)="subscribeNewsletter()">
-                        S'inscrire
-                    </button>
+                    @if (newsletterForm.valid) {
+                        <button mat-flat-button (click)="subscribeNewsletter()">S'inscrire</button>
+                    }
                 </form>
             </div>
 

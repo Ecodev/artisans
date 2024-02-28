@@ -1,90 +1,92 @@
-<div
-    *ngIf="cart"
-    [fxShow]="!showConfirmationMessage"
-    class="container"
-    fxLayout="column"
-    fxLayout.gt-sm="row"
-    fxLayoutGap="60px"
-    fxLayoutAlign="start start"
->
-    <div fxFlex.gt-sm fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
-        <div [formGroup]="shippingForm" fxLayout="column" fxLayoutGap="60px">
-            <h1 class="mat-headline-4">MÉTHODE DE PAIEMENT</h1>
-
-            <mat-radio-group formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
-                <div class="payment-method">
-                    <mat-radio-button [value]="PaymentMethod.datatrans">Paiement par carte de crédit</mat-radio-button>
-                </div>
+@if (cart) {
+    <div
+        [fxShow]="!showConfirmationMessage"
+        class="container"
+        fxLayout="column"
+        fxLayout.gt-sm="row"
+        fxLayoutGap="60px"
+        fxLayoutAlign="start start"
+    >
+        <div fxFlex.gt-sm fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+            <div [formGroup]="shippingForm" fxLayout="column" fxLayoutGap="60px">
+                <h1 class="mat-headline-4">MÉTHODE DE PAIEMENT</h1>
+                <mat-radio-group formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
+                    <div class="payment-method">
+                        <mat-radio-button [value]="PaymentMethod.datatrans"
+                            >Paiement par carte de crédit</mat-radio-button
+                        >
+                    </div>
+                    <div>
+                        <mat-radio-button [value]="PaymentMethod.bvr">Recevoir une facture</mat-radio-button>
+                    </div>
+                </mat-radio-group>
+                <h1 class="mat-headline-4">Votre adresse</h1>
                 <div>
-                    <mat-radio-button [value]="PaymentMethod.bvr">Recevoir une facture</mat-radio-button>
+                    <app-address [form]="shippingForm" [disabled]="true"></app-address>
+                    <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
                 </div>
-            </mat-radio-group>
-
-            <!--        <mat-error *ngIf="firstStepForm.get('paymentMethod')?.hasError('required')">Requis</mat-error>-->
-
-            <h1 class="mat-headline-4">Votre adresse</h1>
-
-            <div>
-                <app-address [form]="shippingForm" [disabled]="true"></app-address>
-                <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
+            </div>
+            <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
+                <h1 class="mat-headline-4">Adresse de facturation</h1>
+                <mat-checkbox
+                    (change)="updateAddressRequirements(!$event.checked, billingForm)"
+                    formControlName="sameAsBilling"
+                >
+                    Identique à mon adresse
+                </mat-checkbox>
+                @if (!billingForm.get('sameAsBilling')?.value) {
+                    <app-address [form]="billingForm"></app-address>
+                }
             </div>
         </div>
-
-        <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
-            <h1 class="mat-headline-4">Adresse de facturation</h1>
-
-            <mat-checkbox
-                (change)="updateAddressRequirements(!$event.checked, billingForm)"
-                formControlName="sameAsBilling"
+        <div fxFlex="20" fxLayout="column" fxLayoutGap="20px" class="frame-primary padding">
+            <!-- Regular products -->
+            @for (line of cart.productLines; track line) {
+                <div class="cart-item">
+                    <a [routerLink]="['/larevuedurable/product', line.product.id]">{{ line.product.name }}</a>
+                    <div>Version : {{ line.type | enum: 'ProductType' | async }}</div>
+                    <div>Quantité : {{ line.quantity }}</div>
+                </div>
+            }
+            <!-- Subscription -->
+            @if (cart.subscription) {
+                <div class="cart-item">
+                    <a [routerLink]="['/larevuedurable/abonnements']">{{ cart.subscription.subscription.name }}</a>
+                    <div>Version : {{ cart.subscription.type | enum: 'ProductType' | async }}</div>
+                    @if (cart.subscription.emails) {
+                        <div>{{ cart.subscription.emails.join(', ') }}</div>
+                    }
+                </div>
+            }
+            <!-- Donation -->
+            @if (cart.donationAmount) {
+                <div class="cart-item">Don</div>
+            }
+            <div fxLayout="column" fxLayoutAlign="start end" class="text-right">
+                <div class="mat-h2">Prix total</div>
+                <div class="mat-h1" fxFlexFill style="word-break: break-word">
+                    {{ cart.totalTaxInc | currency: currencyService.current.value }}
+                </div>
+            </div>
+            <button
+                (click)="createOrder()"
+                [disabled]="!billingForm.valid || !shippingForm.valid || pending"
+                mat-flat-button
             >
-                Identique à mon adresse
-            </mat-checkbox>
-
-            <app-address *ngIf="!billingForm.get('sameAsBilling')?.value" [form]="billingForm"></app-address>
+                Terminer la commande
+            </button>
         </div>
     </div>
+}
 
-    <div fxFlex="20" fxLayout="column" fxLayoutGap="20px" class="frame-primary padding">
-        <!-- Regular products -->
-        <div *ngFor="let line of cart?.productLines" class="cart-item">
-            <a [routerLink]="['/larevuedurable/product', line.product.id]">{{ line.product.name }}</a>
-            <div>Version : {{ line.type | enum: 'ProductType' | async }}</div>
-            <div>Quantité : {{ line.quantity }}</div>
-        </div>
-
-        <!-- Subscription -->
-        <div *ngIf="cart.subscription" class="cart-item">
-            <a [routerLink]="['/larevuedurable/abonnements']">{{ cart.subscription.subscription.name }}</a>
-            <div>Version : {{ cart.subscription.type | enum: 'ProductType' | async }}</div>
-            <div *ngIf="cart.subscription.emails">{{ cart.subscription.emails.join(', ') }}</div>
-        </div>
-
-        <!-- Donation -->
-        <div *ngIf="cart.donationAmount" class="cart-item">Don</div>
-
-        <div fxLayout="column" fxLayoutAlign="start end" class="text-right">
-            <div class="mat-h2">Prix total</div>
-            <div class="mat-h1" fxFlexFill style="word-break: break-word">
-                {{ cart.totalTaxInc | currency: currencyService.current.value }}
-            </div>
-        </div>
-
-        <button
-            (click)="createOrder()"
-            [disabled]="!billingForm.valid || !shippingForm.valid || pending"
-            mat-flat-button
-        >
-            Terminer la commande
-        </button>
+@if (showConfirmationMessage) {
+    <div class="container">
+        <h1 class="mat-headline-4">Merci pour votre commande</h1>
+        <p class="mat-h3 rich-text">
+            Consulter les articles et revues achetées dans
+            <a routerLink="/mon-compte/articles-achetes" fragment="profile-content">mon compte</a>.
+        </p>
     </div>
-</div>
-
-<div *ngIf="showConfirmationMessage" class="container">
-    <h1 class="mat-headline-4">Merci pour votre commande</h1>
-    <p class="mat-h3 rich-text">
-        Consulter les articles et revues achetées dans
-        <a routerLink="/mon-compte/articles-achetes" fragment="profile-content">mon compte</a>.
-    </p>
-</div>
+}
 
 <router-outlet></router-outlet>

@@ -18,7 +18,6 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-facilitator-documents',
@@ -26,7 +25,6 @@ import {CommonModule} from '@angular/common';
     styleUrls: ['./facilitator-documents.component.scss'],
     standalone: true,
     imports: [
-        CommonModule,
         FlexModule,
         NaturalSearchComponent,
         ExtendedModule,

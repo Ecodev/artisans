@@ -1,50 +1,46 @@
-<div class="frame-stroked-primary padding" *ngIf="hiddenBlocName !== 'methode'">
-    <h2 class="mat-h2">La méthode</h2>
-    <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/methode">En savoir plus</a>
-</div>
+@if (hiddenBlocName !== 'methode') {
+    <div class="frame-stroked-primary padding">
+        <h2 class="mat-h2">La méthode</h2>
+        <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/methode"
+            >En savoir plus</a
+        >
+    </div>
+}
 
-<!--
-<div class="frame-primary padding" *ngIf="hiddenBlocName !== 'prochaines'">
-    <h2 class="mat-h2">Prochaines sessions</h2>
+@if (hiddenBlocName !== 'prochaines') {
+    <div class="frame-primary padding">
+        <h2 class="mat-h2">Rejoignez une conversation carbone !</h2>
+        <p>
+            Des Conversations carbone sont organisées dans différentes localités de
+            <strong>Suisse Romande</strong>.
+        </p>
+        <a mat-flat-button routerLink="/agir-avec-nous/conversation-carbone/prochaines">Je vais voir</a>
+    </div>
+}
 
-    <p>
-        {{ number }} sessions de Conversations carbone sont organisées dans différentes villes de
-        <strong>Suisse Romande</strong>.
-    </p>
+@if (hiddenBlocName !== 'organisations') {
+    <div class="frame-stroked-primary padding">
+        <h2 class="mat-h2">Pour les organisations</h2>
+        <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/organisations"
+            >En savoir plus</a
+        >
+    </div>
+}
 
-    <a mat-flat-button routerLink="/agir-avec-nous/conversation-carbone/prochaines">Voir les sessions</a>
-</div>
--->
+@if (hiddenBlocName !== 'facilitateurs') {
+    <div class="frame-stroked-primary padding">
+        <h2 class="mat-h2">Les facilitateurs</h2>
+        <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/facilitateurs"
+            >En savoir plus</a
+        >
+    </div>
+}
 
-<div class="frame-primary padding" *ngIf="hiddenBlocName !== 'prochaines'">
-    <h2 class="mat-h2">Rejoignez une conversation carbone !</h2>
-
-    <p>
-        Des Conversations carbone sont organisées dans différentes localités de
-        <strong>Suisse Romande</strong>.
-    </p>
-
-    <a mat-flat-button routerLink="/agir-avec-nous/conversation-carbone/prochaines">Je vais voir</a>
-</div>
-
-<div class="frame-stroked-primary padding" *ngIf="hiddenBlocName !== 'organisations'">
-    <h2 class="mat-h2">Pour les organisations</h2>
-
-    <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/organisations"
-        >En savoir plus</a
-    >
-</div>
-
-<div class="frame-stroked-primary padding" *ngIf="hiddenBlocName !== 'facilitateurs'">
-    <h2 class="mat-h2">Les facilitateurs</h2>
-    <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/facilitateurs"
-        >En savoir plus</a
-    >
-</div>
-
-<div class="frame-stroked-primary padding" *ngIf="canAccessFacilitatorPrivate()">
-    <h2 class="mat-h2">Accès réservé aux facilitateurs</h2>
-    <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/facilitateurs-prive"
-        >Accéder</a
-    >
-</div>
+@if (canAccessFacilitatorPrivate()) {
+    <div class="frame-stroked-primary padding">
+        <h2 class="mat-h2">Accès réservé aux facilitateurs</h2>
+        <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/facilitateurs-prive"
+            >Accéder</a
+        >
+    </div>
+}

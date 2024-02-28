@@ -3,7 +3,6 @@ import {ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angula
 import {NaturalAbstractController} from '@ecodev/natural';
 import {filter, takeUntil} from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
 
 export interface Breadcrumb {
     link: any[] | string;
@@ -15,7 +14,7 @@ export interface Breadcrumb {
     templateUrl: './breadcrumbs.component.html',
     styleUrls: ['./breadcrumbs.component.scss'],
     standalone: true,
-    imports: [CommonModule, MatButtonModule, RouterLink],
+    imports: [MatButtonModule, RouterLink],
 })
 export class BreadcrumbsComponent extends NaturalAbstractController implements OnInit {
     @HostBinding('class.mat-body') private isBody = true;

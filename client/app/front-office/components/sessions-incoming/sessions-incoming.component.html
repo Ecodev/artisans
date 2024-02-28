@@ -23,19 +23,17 @@
             </div>
 
             <div id="incoming-sessions-list">
-                <div *ngFor="let session of sessions" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
-                    <div class="mat-h2">{{ session.name }}</div>
-                    <div class="rich-text" [innerHtml]="session.description"></div>
-                    <a
-                        mat-flat-button
-                        color="accent"
-                        [attr.href]="session.mailingList"
-                        *ngIf="session.mailingList"
-                        target="_blank"
-                    >
-                        Infos
-                    </a>
-                </div>
+                @for (session of sessions; track session) {
+                    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+                        <div class="mat-h2">{{ session.name }}</div>
+                        <div class="rich-text" [innerHtml]="session.description"></div>
+                        @if (session.mailingList) {
+                            <a mat-flat-button color="accent" [attr.href]="session.mailingList" target="_blank">
+                                Infos
+                            </a>
+                        }
+                    </div>
+                }
             </div>
 
             <div class="rich-text mat-h3">

@@ -4,7 +4,7 @@ import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-import {CommonModule} from '@angular/common';
+
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
@@ -12,7 +12,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     templateUrl: './session-facilitator.component.html',
     styleUrls: ['./session-facilitator.component.scss'],
     standalone: true,
-    imports: [FlexModule, CommonModule, ExtendedModule, SessionSideColumnComponent],
+    imports: [FlexModule, ExtendedModule, SessionSideColumnComponent],
 })
 export class SessionFacilitatorComponent implements OnInit {
     public facilitators: Users['users']['items'][0][] = [];

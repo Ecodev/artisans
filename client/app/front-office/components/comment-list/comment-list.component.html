@@ -1,41 +1,42 @@
 <div fxLayout="column" fxLayoutGap="30px">
-    <div fxLayout="column" fxLayoutAlign="start start" *ngIf="permissionsService.crud?.comment?.create">
-        <mat-form-field [style.width]="'100%'">
-            <mat-label>Rédiger un commentaire</mat-label>
-            <textarea matInput [(ngModel)]="newCommentValue"></textarea>
-        </mat-form-field>
-        <a mat-stroked-button color="primary" (click)="addComment()" [disabled]="publishing">Publier</a>
-    </div>
-
-    <div fxLayout="column" fxLayoutGap="30px" *ngIf="dataSource?.data?.items?.length">
-        <div
-            *ngFor="let comment of dataSource?.data?.items"
-            fxLayout="column"
-            fxLayoutGap="5px"
-            fxLayoutAlign="start start"
-        >
-            <div
-                class="mat-h2"
-                *ngIf="comment.authorName"
-                fxLayout="row wrap"
-                fxLayoutGap="15px"
-                fxLayoutAlign="start baseline"
-            >
-                <span>{{ comment.authorName }}</span>
-                <span class="mat-body text-light"> Posté le {{ comment.creationDate | date: 'longDate' }}</span>
-                <a
-                    [routerLink]="['/admin/comment', comment.id]"
-                    mat-icon-button
-                    class="mat-elevation-z4"
-                    *ngIf="comment.permissions?.update"
-                >
-                    <mat-icon naturalIcon="edit"></mat-icon>
-                </a>
-            </div>
-
-            <div class="mat-h3 line-break">{{ comment.description }}</div>
+    @if (permissionsService.crud?.comment?.create) {
+        <div fxLayout="column" fxLayoutAlign="start start">
+            <mat-form-field [style.width]="'100%'">
+                <mat-label>Rédiger un commentaire</mat-label>
+                <textarea matInput [(ngModel)]="newCommentValue"></textarea>
+            </mat-form-field>
+            <a mat-stroked-button color="primary" (click)="addComment()" [disabled]="publishing">Publier</a>
         </div>
-    </div>
+    }
 
-    <div *ngIf="!dataSource?.data?.items?.length" class="mat-h3">Aucun commentaire</div>
+    @if (dataSource?.data?.items?.length) {
+        <div fxLayout="column" fxLayoutGap="30px">
+            @for (comment of dataSource?.data?.items; track comment) {
+                <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+                    @if (comment.authorName) {
+                        <div class="mat-h2" fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="start baseline">
+                            <span>{{ comment.authorName }}</span>
+                            <span class="mat-body text-light">
+                                Posté le {{ comment.creationDate | date: 'longDate' }}</span
+                            >
+                            @if (comment.permissions?.update) {
+                                <a
+                                    [routerLink]="['/admin/comment', comment.id]"
+                                    mat-icon-button
+                                    class="mat-elevation-z4"
+                                >
+                                    <mat-icon naturalIcon="edit"></mat-icon>
+                                </a>
+                            }
+                        </div>
+                    }
+                    <div class="mat-h3 line-break">{{ comment.description }}</div>
+                </div>
+            }
+        </div>
+    }
+
+    @if (!dataSource?.data?.items?.length) {
+        <div class="mat-h3">Aucun commentaire</div>
+    }
 </div>

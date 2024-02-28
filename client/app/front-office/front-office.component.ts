@@ -1,15 +1,15 @@
-import {DOCUMENT, CommonModule} from '@angular/common';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
-import {NonNullableFormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     deliverableEmail,
     ifValid,
     NaturalAbstractController,
     NaturalAlertService,
+    NaturalIconDirective,
     NaturalSearchSelections,
     toNavigationParameters,
-    NaturalIconDirective,
 } from '@ecodev/natural';
 import {differenceBy} from 'lodash-es';
 import {filter, finalize, takeUntil} from 'rxjs/operators';
@@ -63,7 +63,9 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     public menuOpened = false;
 
     public viewer: CurrentUserForProfile['viewer'] = null;
-    public readonly newsletterForm: FormGroup;
+    public readonly newsletterForm = this.fb.group({
+        email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
+    });
 
     /**
      * In case of change, check CSS dimensions :
@@ -262,13 +264,10 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         public readonly userService: UserService,
         public readonly currencyService: CurrencyService,
         @Inject(DOCUMENT) private readonly document: Document,
-        fb: NonNullableFormBuilder,
+        private readonly fb: NonNullableFormBuilder,
         private readonly alertService: NaturalAlertService,
     ) {
         super();
-        this.newsletterForm = fb.group({
-            email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
-        });
     }
 
     public ngOnInit(): void {
@@ -342,7 +341,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         ifValid(this.newsletterForm).subscribe(() => {
             this.newsletterForm.disable();
             this.userService
-                .subscribeNewsletter(this.newsletterForm.value.email)
+                .subscribeNewsletter(this.newsletterForm.getRawValue().email)
                 .pipe(finalize(() => this.newsletterForm.enable()))
                 .subscribe(() => {
                     // Exceptionally show a dialog, instead of snackbar, because

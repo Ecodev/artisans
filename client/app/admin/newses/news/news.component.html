@@ -5,10 +5,12 @@
         label="Actualité"
         [newLabel]="data.seo.title"
     >
-        <a [routerLink]="['/actualite', data.model.id]" color="primary" mat-raised-button *ngIf="isUpdatePage()">
-            <mat-icon naturalIcon="remove_red_eye"></mat-icon>
-            Voir la page
-        </a>
+        @if (isUpdatePage()) {
+            <a [routerLink]="['/actualite', data.model.id]" color="primary" mat-raised-button>
+                <mat-icon naturalIcon="remove_red_eye"></mat-icon>
+                Voir la page
+            </a>
+        }
     </natural-detail-header>
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
@@ -19,10 +21,14 @@
                         <mat-form-field>
                             <input (change)="update()" formControlName="name" matInput />
                             <mat-label>Nom</mat-label>
-                            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
+                            @if (form.get('name')?.hasError('maxlength')) {
+                                <mat-error>
+                                    Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                                </mat-error>
+                            }
+                            @if (form.get('name')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
                         </mat-form-field>
 
                         <mat-form-field>
@@ -50,21 +56,26 @@
                             <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()" />
                             <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                            <mat-error *ngIf="form.get('date')?.hasError('required')">Requis</mat-error>
+                            @if (form.get('date')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
                         </mat-form-field>
                     </div>
                 </div>
 
-                <natural-stamp *ngIf="isUpdatePage()" [item]="data.model"></natural-stamp>
+                @if (isUpdatePage()) {
+                    <natural-stamp [item]="data.model"></natural-stamp>
+                }
             </div>
         </mat-tab>
     </mat-tab-group>
 
-    <natural-fixed-button-detail
-        (create)="create()"
-        (delete)="delete()"
-        *ngIf="showFabButton"
-        [form]="form"
-        [model]="data.model"
-    ></natural-fixed-button-detail>
+    @if (showFabButton) {
+        <natural-fixed-button-detail
+            (create)="create()"
+            (delete)="delete()"
+            [form]="form"
+            [model]="data.model"
+        ></natural-fixed-button-detail>
+    }
 </div>

@@ -8,21 +8,27 @@
             ><!-- row child -->
             <mat-label>Prénom</mat-label>
             <input (change)="update()" formControlName="firstName" matInput />
-            <mat-error *ngIf="form.get('firstName')?.hasError('required')">Requis</mat-error>
+            @if (form.get('firstName')?.hasError('required')) {
+                <mat-error>Requis</mat-error>
+            }
         </mat-form-field>
 
         <mat-form-field [fxFlex.gt-sm]="!vertical"
             ><!-- row child -->
             <mat-label>Nom de famille</mat-label>
             <input (change)="update()" formControlName="lastName" matInput />
-            <mat-error *ngIf="form.get('lastName')?.hasError('required')">Requis</mat-error>
+            @if (form.get('lastName')?.hasError('required')) {
+                <mat-error>Requis</mat-error>
+            }
         </mat-form-field>
     </div>
 
     <mat-form-field>
         <mat-label>Rue</mat-label>
         <input (change)="update()" formControlName="street" matInput />
-        <mat-error *ngIf="form.get('street')?.hasError('required')">Requis</mat-error>
+        @if (form.get('street')?.hasError('required')) {
+            <mat-error>Requis</mat-error>
+        }
     </mat-form-field>
 
     <div
@@ -34,7 +40,9 @@
             <mat-form-field [style.width.px]="100">
                 <mat-label>NPA</mat-label>
                 <input (change)="update()" formControlName="postcode" matInput />
-                <mat-error *ngIf="form.get('postcode')?.hasError('required')">Requis</mat-error>
+                @if (form.get('postcode')?.hasError('required')) {
+                    <mat-error>Requis</mat-error>
+                }
             </mat-form-field>
         </div>
 
@@ -42,7 +50,9 @@
             ><!-- row child -->
             <mat-label>Localité</mat-label>
             <input (change)="update()" formControlName="locality" matInput />
-            <mat-error *ngIf="form.get('locality')?.hasError('required')">Requis</mat-error>
+            @if (form.get('locality')?.hasError('required')) {
+                <mat-error>Requis</mat-error>
+            }
         </mat-form-field>
 
         <natural-select

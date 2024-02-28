@@ -21,27 +21,30 @@
             <div class="mat-headline-4 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>ACTUALITÉS</div>
                 <div class="relative">
-                    <button
-                        *ngIf="permissionService?.crud?.news?.create"
-                        class="absolute"
-                        color="none"
-                        style="color: black; background-color: white"
-                        mat-fab
-                        routerLink="/admin/news"
-                    >
-                        <mat-icon naturalIcon="edit"></mat-icon>
-                    </button>
+                    @if (permissionService.crud?.news.create) {
+                        <button
+                            class="absolute"
+                            color="none"
+                            style="color: black; background-color: white"
+                            mat-fab
+                            routerLink="/admin/news"
+                        >
+                            <mat-icon naturalIcon="edit"></mat-icon>
+                        </button>
+                    }
                 </div>
             </div>
             <mat-divider></mat-divider>
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
-                <div *ngFor="let news of newses" class="news">
-                    <div class="mat-body-strong text-light">
-                        {{ news.date | date: 'EEE dd.MM.yy' | capitalize }}
+                @for (news of newses; track news) {
+                    <div class="news">
+                        <div class="mat-body-strong text-light">
+                            {{ news.date | date: 'EEE dd.MM.yy' | capitalize }}
+                        </div>
+                        <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
+                        <div class="mat-h3 description line-break">{{ news.description }}</div>
                     </div>
-                    <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
-                    <div class="mat-h3 description line-break">{{ news.description }}</div>
-                </div>
+                }
             </div>
 
             <div>
@@ -54,20 +57,21 @@
             <div class="mat-headline-4 section-title" fxLayout="row" fxLayoutGap="30px">
                 <div fxFlex>AGENDA</div>
                 <div class="relative">
-                    <button
-                        *ngIf="permissionService?.crud?.event?.create"
-                        class="absolute"
-                        color="none"
-                        style="color: black; background-color: white"
-                        mat-fab
-                        routerLink="/admin/event"
-                    >
-                        <mat-icon naturalIcon="edit"></mat-icon>
-                    </button>
+                    @if (permissionService.crud?.event.create) {
+                        <button
+                            class="absolute"
+                            color="none"
+                            style="color: black; background-color: white"
+                            mat-fab
+                            routerLink="/admin/event"
+                        >
+                            <mat-icon naturalIcon="edit"></mat-icon>
+                        </button>
+                    }
                 </div>
             </div>
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
-                <ng-container *ngFor="let event of events">
+                @for (event of events; track event) {
                     <mat-divider></mat-divider>
                     <div class="event">
                         <a class="mat-h2 no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple>{{
@@ -78,7 +82,7 @@
                             <span class="description"> - {{ event.place }} - {{ event.type }}</span>
                         </div>
                     </div>
-                </ng-container>
+                }
             </div>
             <div>
                 <a color="accent" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
@@ -99,44 +103,49 @@
     </div>
 </div>
 
-<div class="la-revue section" *ngIf="currentReview">
-    <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
-        <a [routerLink]="['/larevuedurable/article', currentReview.id]" *ngIf="currentReview.image">
-            <img
-                [naturalSrcDensity]="'/api/image/' + currentReview.image.id + '/470'"
-                alt="illustration du dernier numéro paru"
-                class="mat-elevation-z5 last-product-thumbnail"
-            />
-        </a>
-
-        <div class="la-revue-body" fxLayout="column" fxLayoutGap="10px">
-            <div class="mat-h1 text-primary text-bold">Le dernier numéro</div>
-            <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
-                <span>{{ currentReview.reviewNumber }}</span>
-                <span>|</span>
-                <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
-            </div>
-            <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-headline-4">{{
-                currentReview.name
-            }}</a>
-
-            <!-- If has not access -->
-            <div class="mat-h3" *ngIf="!currentReview.file">
-                Disponible en versions papier ou PDF avec votre abonnnement
-                <br />
-                <app-price [product]="currentReview"></app-price>
-                pour non abonnés
-            </div>
-
-            <!-- If has access -->
-            <div *ngIf="currentReview.file">
-                <a mat-flat-button color="accent" [href]="'/api/file/' + currentReview.file.id" target="_blank">
-                    Télécharger le numéro
+@if (currentReview) {
+    <div class="la-revue section">
+        <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+            @if (currentReview.image) {
+                <a [routerLink]="['/larevuedurable/article', currentReview.id]">
+                    <img
+                        [naturalSrcDensity]="'/api/image/' + currentReview.image.id + '/470'"
+                        alt="illustration du dernier numéro paru"
+                        class="mat-elevation-z5 last-product-thumbnail"
+                    />
                 </a>
+            }
+            <div class="la-revue-body" fxLayout="column" fxLayoutGap="10px">
+                <div class="mat-h1 text-primary text-bold">Le dernier numéro</div>
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
+                    <span>{{ currentReview.reviewNumber }}</span>
+                    <span>|</span>
+                    <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
+                </div>
+                <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-headline-4">{{
+                    currentReview.name
+                }}</a>
+                <!-- If has not access -->
+                @if (!currentReview.file) {
+                    <div class="mat-h3">
+                        Disponible en versions papier ou PDF avec votre abonnnement
+                        <br />
+                        <app-price [product]="currentReview"></app-price>
+                        pour non abonnés
+                    </div>
+                }
+                <!-- If has access -->
+                @if (currentReview.file) {
+                    <div>
+                        <a mat-flat-button color="accent" [href]="'/api/file/' + currentReview.file.id" target="_blank">
+                            Télécharger le numéro
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
-</div>
+}
 
 <div class="categories section">
     <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px">

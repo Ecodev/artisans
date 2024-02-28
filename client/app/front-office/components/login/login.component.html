@@ -19,17 +19,23 @@
                     type="email"
                     (keydown.enter)="maybeConfirm()"
                 />
-                <mat-error *ngIf="form.get('email')?.hasError('maxlength')" i18n
-                    >Maximum {{ form.get('email')?.errors?.maxlength?.requiredLength }} caractères</mat-error
-                >
-                <mat-error *ngIf="form.get('email')?.hasError('email')" i18n>Courriel invalide</mat-error>
-                <mat-error *ngIf="form.get('email')?.hasError('required')" i18n>Requis</mat-error>
+                @if (form.get('email')?.hasError('maxlength')) {
+                    <mat-error>Maximum {{ form.get('email')?.errors?.maxlength?.requiredLength }} caractères</mat-error>
+                }
+                @if (form.get('email')?.hasError('email')) {
+                    <mat-error>Courriel invalide</mat-error>
+                }
+                @if (form.get('email')?.hasError('required')) {
+                    <mat-error>Requis</mat-error>
+                }
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Mot de passe</mat-label>
                 <input matInput formControlName="password" type="password" (keydown.enter)="maybeConfirm()" />
-                <mat-error *ngIf="form.get('password')?.hasError('required')" i18n>Requis</mat-error>
+                @if (form.get('password')?.hasError('required')) {
+                    <mat-error>Requis</mat-error>
+                }
             </mat-form-field>
 
             <div fxFlex="none" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
@@ -38,7 +44,6 @@
                     (click)="maybeConfirm()"
                     [disabled]="!form.valid"
                     color="primary"
-                    i18n
                     mat-raised-button
                     type="submit"
                 >

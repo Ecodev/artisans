@@ -1,58 +1,58 @@
-<div *ngIf="dataSource" fxLayout="column" fxLayoutGap="30px">
-    <h2 class="mat-headline-4">Commandes</h2>
-
-    <div fxLayout="column">
-        <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
-            <table [dataSource]="dataSource" mat-table>
-                <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
-
-                <ng-container matColumnDef="creationDate">
-                    <th *matHeaderCellDef class="app-date-column" mat-header-cell>Date</th>
-                    <td *matCellDef="let element" mat-cell>
-                        <natural-table-button
-                            [label]="element.creationDate | swissDate"
-                            [navigate]="[element.id]"
-                            icon="open_in_new"
-                            matTooltip="Éditer"
-                        ></natural-table-button>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="status">
-                    <th *matHeaderCellDef mat-header-cell>Statut</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.status | enum: 'OrderStatus' | async }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="balance">
-                    <th *matHeaderCellDef mat-header-cell natural-5em-column natural-align-right>Total</th>
-                    <td *matCellDef="let element" mat-cell natural-align-right>
-                        <ng-container *ngIf="element.balanceCHF > 0">{{
-                            element.balanceCHF | currency: 'CHF'
-                        }}</ng-container>
-                        <ng-container *ngIf="element.balanceEUR > 0">{{
-                            element.balanceEUR | currency: 'EUR'
-                        }}</ng-container>
-                    </td>
-                </ng-container>
-            </table>
+@if (dataSource) {
+    <div fxLayout="column" fxLayoutGap="30px">
+        <h2 class="mat-headline-4">Commandes</h2>
+        <div fxLayout="column">
+            <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
+                <table [dataSource]="dataSource" mat-table>
+                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+                    <ng-container matColumnDef="creationDate">
+                        <th *matHeaderCellDef class="app-date-column" mat-header-cell>Date</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <natural-table-button
+                                [label]="element.creationDate | swissDate"
+                                [navigate]="[element.id]"
+                                icon="open_in_new"
+                                matTooltip="Éditer"
+                            ></natural-table-button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th *matHeaderCellDef mat-header-cell>Statut</th>
+                        <td *matCellDef="let element" mat-cell>{{ element.status | enum: 'OrderStatus' | async }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="balance">
+                        <th *matHeaderCellDef mat-header-cell natural-5em-column natural-align-right>Total</th>
+                        <td *matCellDef="let element" mat-cell natural-align-right>
+                            @if (element.balanceCHF > 0) {
+                                {{ element.balanceCHF | currency: 'CHF' }}
+                            }
+                            @if (element.balanceEUR > 0) {
+                                {{ element.balanceEUR | currency: 'EUR' }}
+                            }
+                        </td>
+                    </ng-container>
+                </table>
+            </div>
+            @if (dataSource.data?.length === 0) {
+                <div class="margin mat-h4">Aucun résultat</div>
+            }
+            @if (!dataSource.data) {
+                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                </div>
+            }
+            @if (dataSource.data?.length) {
+                <mat-paginator
+                    (page)="pagination($event)"
+                    [length]="dataSource.data?.length"
+                    [pageIndex]="dataSource.data?.pageIndex"
+                    [pageSizeOptions]="[25]"
+                    [pageSize]="25"
+                ></mat-paginator>
+            }
         </div>
-
-        <div *ngIf="dataSource.data?.length === 0" class="margin mat-h4">Aucun résultat</div>
-
-        <div *ngIf="!dataSource?.data" class="margin" fxLayout="column" fxLayoutAlign="center center">
-            <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
-        </div>
-
-        <mat-paginator
-            (page)="pagination($event)"
-            *ngIf="dataSource.data?.length"
-            [length]="dataSource.data?.length"
-            [pageIndex]="dataSource.data?.pageIndex"
-            [pageSizeOptions]="[25]"
-            [pageSize]="25"
-        ></mat-paginator>
     </div>
-</div>
+}
 
 <router-outlet></router-outlet>

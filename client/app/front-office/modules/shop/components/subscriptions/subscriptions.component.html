@@ -1,100 +1,97 @@
-<div class="container" fxLayout="column" fxLayoutGap="60px" *ngIf="subscriptions">
-    <div class="content rich-text">
-        <h1 class="mat-headline-4 margin-bottom">S'ABONNER</h1>
-
-        <p class="mat-h3">
-            Plus de 1000 articles de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays.
-            <strong>LaRevueDurable</strong> constitue l’une des plus importantes bases de données disponibles sur la
-            durabilité et la transition écologique en français. Voici nos formules d’abonnement.
-        </p>
-
-        <p class="mat-h3">
-            Si vous souhaitez offrir un abonnement, merci de contacter directement
-            <a href="mailto:courriel@artisansdelatransition.org">courriel&#64;artisansdelatransition.org</a>
-        </p>
-    </div>
-
-    <!--
-   Abonnements personnels
-   -->
-    <div id="subscriptions">
-        <h1 class="mat-headline-4 margin-bottom">Abonnement personnel</h1>
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px">
-            <div class="subscription standard">
-                <div class="mat-h1 title">Abonnement papier</div>
-                <p>Arrive directement dans votre boîte aux lettres</p>
-                <div class="buy-zone">
-                    <p>Pour 2 ans = 4 numéros</p>
-                    <app-price [product]="subscriptions['19000']"></app-price>
-                    <a (click)="order('19000', ProductType.paper)" mat-flat-button>Acheter cet abonnement</a>
+@if (subscriptions) {
+    <div class="container" fxLayout="column" fxLayoutGap="60px">
+        <div class="content rich-text">
+            <h1 class="mat-headline-4 margin-bottom">S'ABONNER</h1>
+            <p class="mat-h3">
+                Plus de 1000 articles de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de
+                pays.
+                <strong>LaRevueDurable</strong> constitue l’une des plus importantes bases de données disponibles sur la
+                durabilité et la transition écologique en français. Voici nos formules d’abonnement.
+            </p>
+            <p class="mat-h3">
+                Si vous souhaitez offrir un abonnement, merci de contacter directement
+                <a href="mailto:courriel@artisansdelatransition.org">courriel&#64;artisansdelatransition.org</a>
+            </p>
+        </div>
+        <!--
+    Abonnements personnels
+    -->
+        <div id="subscriptions">
+            <h1 class="mat-headline-4 margin-bottom">Abonnement personnel</h1>
+            <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px">
+                <div class="subscription standard">
+                    <div class="mat-h1 title">Abonnement papier</div>
+                    <p>Arrive directement dans votre boîte aux lettres</p>
+                    <div class="buy-zone">
+                        <p>Pour 2 ans = 4 numéros</p>
+                        <app-price [product]="subscriptions['19000']"></app-price>
+                        <a (click)="order('19000', ProductType.paper)" mat-flat-button>Acheter cet abonnement</a>
+                    </div>
+                </div>
+                <div class="subscription standard mat-elevation-z6">
+                    <div class="mat-h1 title">
+                        Abonnement numérique
+                        <div class="mat-h3">Disponible en format pdf</div>
+                    </div>
+                    <p>Vous êtes prévenu des nouvelles parutions par courriel</p>
+                    <p>Accès illimité et instantané à plus de 1000 articles</p>
+                    <div class="buy-zone">
+                        <p>Pour 2 ans = 4 numéros</p>
+                        <app-price [product]="subscriptions['19001']"></app-price>
+                        <a (click)="order('19001', ProductType.digital)" mat-flat-button>Acheter cet abonnement</a>
+                    </div>
+                </div>
+                <div class="subscription standard">
+                    <div class="mat-h1 title">Abonnement papier et numérique (pdf)</div>
+                    <p>Vous offre le confort de la lecture sur papier et l’accès illimité à plus de 1000 articles</p>
+                    <div class="buy-zone">
+                        <p>Pour 2 ans = 4 numéros</p>
+                        <app-price [product]="subscriptions['19002']"></app-price>
+                        <a (click)="order('19002', ProductType.both)" mat-flat-button>Acheter cet abonnement</a>
+                    </div>
                 </div>
             </div>
-
-            <div class="subscription standard mat-elevation-z6">
-                <div class="mat-h1 title">
-                    Abonnement numérique
-                    <div class="mat-h3">Disponible en format pdf</div>
+        </div>
+        <!--
+    Abonnements profesionnels
+    -->
+        <div>
+            <h1 class="mat-headline-4 margin-bottom">Abonnement professionnel</h1>
+            <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px">
+                <div class="subscription pro">
+                    <div class="mat-h1 title">Abonnement papier</div>
+                    <p>Arrive directement dans votre entreprise, collectivité, association</p>
+                    <div class="buy-zone">
+                        <p>Pour 2 ans = 4 numéros</p>
+                        <app-price [product]="subscriptions['19003']"></app-price>
+                        <a (click)="order('19003', ProductType.paper, true)" mat-flat-button>Acheter cet abonnement</a>
+                    </div>
                 </div>
-                <p>Vous êtes prévenu des nouvelles parutions par courriel</p>
-                <p>Accès illimité et instantané à plus de 1000 articles</p>
-                <div class="buy-zone">
-                    <p>Pour 2 ans = 4 numéros</p>
-                    <app-price [product]="subscriptions['19001']"></app-price>
-                    <a (click)="order('19001', ProductType.digital)" mat-flat-button>Acheter cet abonnement</a>
+                <div class="subscription pro">
+                    <div class="mat-h1 title">Abonnement numérique</div>
+                    <p>Vous êtes prévenu des nouvelles parutions par courriel</p>
+                    <p>Accès illimité et instantané à plus de 1000 articles pour trois utilisateurs</p>
+                    <p>Sur demande, il est possibilité d’ajouter des utilisateurs supplémentaires</p>
+                    <div class="buy-zone">
+                        <p>Pour 2 ans = 4 numéros</p>
+                        <app-price [product]="subscriptions['19004']"></app-price>
+                        <a (click)="order('19004', ProductType.digital, true)" mat-flat-button
+                            >Acheter cet abonnement</a
+                        >
+                    </div>
                 </div>
-            </div>
-
-            <div class="subscription standard">
-                <div class="mat-h1 title">Abonnement papier et numérique (pdf)</div>
-                <p>Vous offre le confort de la lecture sur papier et l’accès illimité à plus de 1000 articles</p>
-                <div class="buy-zone">
-                    <p>Pour 2 ans = 4 numéros</p>
-                    <app-price [product]="subscriptions['19002']"></app-price>
-                    <a (click)="order('19002', ProductType.both)" mat-flat-button>Acheter cet abonnement</a>
+                <div class="subscription pro">
+                    <div class="mat-h1 title">Abonnement papier et numérique (pdf)</div>
+                    <p>Vous offre le confort de la lecture sur papier et l’accès illimité à plus de 1000 articles</p>
+                    <p>Accès illimité et instantané à plus de 1000 articles pour trois utilisateurs</p>
+                    <p>Sur demande, il est possibilité d’ajouter des utilisateurs supplémentaires</p>
+                    <div class="buy-zone">
+                        <p>Pour 2 ans = 4 numéros</p>
+                        <app-price [product]="subscriptions['19005']"></app-price>
+                        <a (click)="order('19005', ProductType.both, true)" mat-flat-button>Acheter cet abonnement</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <!--
-   Abonnements profesionnels
-   -->
-    <div>
-        <h1 class="mat-headline-4 margin-bottom">Abonnement professionnel</h1>
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm="60px" fxLayout="column" fxLayoutGap="30px">
-            <div class="subscription pro">
-                <div class="mat-h1 title">Abonnement papier</div>
-                <p>Arrive directement dans votre entreprise, collectivité, association</p>
-                <div class="buy-zone">
-                    <p>Pour 2 ans = 4 numéros</p>
-                    <app-price [product]="subscriptions['19003']"></app-price>
-                    <a (click)="order('19003', ProductType.paper, true)" mat-flat-button>Acheter cet abonnement</a>
-                </div>
-            </div>
-
-            <div class="subscription pro">
-                <div class="mat-h1 title">Abonnement numérique</div>
-                <p>Vous êtes prévenu des nouvelles parutions par courriel</p>
-                <p>Accès illimité et instantané à plus de 1000 articles pour trois utilisateurs</p>
-                <p>Sur demande, il est possibilité d’ajouter des utilisateurs supplémentaires</p>
-                <div class="buy-zone">
-                    <p>Pour 2 ans = 4 numéros</p>
-                    <app-price [product]="subscriptions['19004']"></app-price>
-                    <a (click)="order('19004', ProductType.digital, true)" mat-flat-button>Acheter cet abonnement</a>
-                </div>
-            </div>
-
-            <div class="subscription pro">
-                <div class="mat-h1 title">Abonnement papier et numérique (pdf)</div>
-                <p>Vous offre le confort de la lecture sur papier et l’accès illimité à plus de 1000 articles</p>
-                <p>Accès illimité et instantané à plus de 1000 articles pour trois utilisateurs</p>
-                <p>Sur demande, il est possibilité d’ajouter des utilisateurs supplémentaires</p>
-                <div class="buy-zone">
-                    <p>Pour 2 ans = 4 numéros</p>
-                    <app-price [product]="subscriptions['19005']"></app-price>
-                    <a (click)="order('19005', ProductType.both, true)" mat-flat-button>Acheter cet abonnement</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+}

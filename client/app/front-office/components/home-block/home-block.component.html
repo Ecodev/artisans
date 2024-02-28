@@ -1,54 +1,62 @@
-<div *ngIf="!editMode" class="bloc">
-    <div class="mat-h1 title">{{ form.get('title')?.value }}</div>
-    <div class="bloc-description mat-h4">{{ form.get('description')?.value }}</div>
-    <a mat-flat-button routerLink="{{ form.get('buttonLink')?.value }}">
-        {{ form.get('buttonLabel')?.value }}
-    </a>
-    <button
-        (click)="editMode = true"
-        *ngIf="permissionService?.crud?.configuration?.create"
-        class="edit-button"
-        color="none"
-        style="color: black; background-color: white"
-        mat-fab
-    >
-        <mat-icon naturalIcon="edit"></mat-icon>
-    </button>
-</div>
-
-<mat-card *ngIf="editMode" class="bloc" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
-    <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
-        <mat-form-field>
-            <mat-label>Titre</mat-label>
-            <textarea [cdkAutosizeMinRows]="1" formControlName="title" matInput [cdkTextareaAutosize]="true"></textarea>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Description</mat-label>
-            <textarea
-                [cdkAutosizeMinRows]="1"
-                formControlName="description"
-                matInput
-                [cdkTextareaAutosize]="true"
-            ></textarea>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Nom du bouton</mat-label>
-            <input formControlName="buttonLabel" matInput />
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Lien du bouton</mat-label>
-            <input formControlName="buttonLink" matInput />
-            <mat-hint>URL absolue débutant par un slash "/"</mat-hint>
-        </mat-form-field>
-    </form>
-
-    <div fxLayout="row">
-        <div fxFlex></div>
-        <button (click)="reset()" mat-button>Annuler</button>
-
-        <button (click)="update(); editMode = false" color="primary" mat-flat-button>
-            <mat-icon naturalIcon="save"></mat-icon>
-            Sauvegarder
-        </button>
+@if (!editMode) {
+    <div class="bloc">
+        <div class="mat-h1 title">{{ form.get('title')?.value }}</div>
+        <div class="bloc-description mat-h4">{{ form.get('description')?.value }}</div>
+        <a mat-flat-button routerLink="{{ form.get('buttonLink')?.value }}">
+            {{ form.get('buttonLabel')?.value }}
+        </a>
+        @if (permissionService.crud?.configuration.create) {
+            <button
+                (click)="editMode = true"
+                class="edit-button"
+                color="none"
+                style="color: black; background-color: white"
+                mat-fab
+            >
+                <mat-icon naturalIcon="edit"></mat-icon>
+            </button>
+        }
     </div>
-</mat-card>
+}
+
+@if (editMode) {
+    <mat-card class="bloc" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="20px">
+        <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+            <mat-form-field>
+                <mat-label>Titre</mat-label>
+                <textarea
+                    [cdkAutosizeMinRows]="1"
+                    formControlName="title"
+                    matInput
+                    [cdkTextareaAutosize]="true"
+                ></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <textarea
+                    [cdkAutosizeMinRows]="1"
+                    formControlName="description"
+                    matInput
+                    [cdkTextareaAutosize]="true"
+                ></textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Nom du bouton</mat-label>
+                <input formControlName="buttonLabel" matInput />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Lien du bouton</mat-label>
+                <input formControlName="buttonLink" matInput />
+                <mat-hint>URL absolue débutant par un slash "/"</mat-hint>
+            </mat-form-field>
+        </form>
+        <div fxLayout="row">
+            <div fxFlex></div>
+            <button (click)="reset()" mat-button>Annuler</button>
+            <button (click)="update(); editMode = false" color="primary" mat-flat-button>
+                <mat-icon naturalIcon="save"></mat-icon>
+                Sauvegarder
+            </button>
+        </div>
+    </mat-card>
+}

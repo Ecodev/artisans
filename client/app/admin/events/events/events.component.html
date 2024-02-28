@@ -1,82 +1,78 @@
-<div *ngIf="dataSource" fxLayout="column">
-    <div fxLayout="row">
-        <div class="mat-h1 no-margin" fxFlex>
-            {{ routeData?.seo.title }}
-        </div>
-        <natural-columns-picker
-            [availableColumns]="availableColumns"
-            [selections]="selectedColumns"
-            (selectionChange)="selectColumns($event)"
-        />
-    </div>
-
+@if (dataSource) {
     <div fxLayout="column">
-        <div class="margin-v overflow" fxLayout="row">
-            <natural-search
-                (selectionChange)="search($event)"
-                [facets]="naturalSearchFacets"
-                [multipleGroups]="true"
-                [selections]="naturalSearchSelections"
-                fxFlex
+        <div fxLayout="row">
+            <div class="mat-h1 no-margin" fxFlex>
+                {{ routeData?.seo.title }}
+            </div>
+            <natural-columns-picker
+                [availableColumns]="availableColumns"
+                [selections]="selectedColumns"
+                (selectionChange)="selectColumns($event)"
             />
         </div>
-
-        <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
-            <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
-                <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
-
-                <ng-container matColumnDef="date">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="name">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nom</th>
-                    <td *matCellDef="let element" mat-cell>
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <natural-table-button
-                                [label]="element.name"
-                                [navigate]="['/admin/event', element.id]"
-                                matTooltip="Éditer"
-                            ></natural-table-button>
-                        </div>
-                    </td>
-                </ng-container>
-
-                <ng-container matColumnDef="place">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="place">Lieu</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.place }}</td>
-                </ng-container>
-
-                <ng-container matColumnDef="type">
-                    <th *matHeaderCellDef mat-header-cell mat-sort-header="type">Type</th>
-                    <td *matCellDef="let element" mat-cell>{{ element.type }}</td>
-                </ng-container>
-            </table>
+        <div fxLayout="column">
+            <div class="margin-v overflow" fxLayout="row">
+                <natural-search
+                    (selectionChange)="search($event)"
+                    [facets]="naturalSearchFacets"
+                    [multipleGroups]="true"
+                    [selections]="naturalSearchSelections"
+                    fxFlex
+                />
+            </div>
+            <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
+                <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
+                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+                    <ng-container matColumnDef="date">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
+                        <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nom</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <div fxLayout="row" fxLayoutAlign="start center">
+                                <natural-table-button
+                                    [label]="element.name"
+                                    [navigate]="['/admin/event', element.id]"
+                                    matTooltip="Éditer"
+                                ></natural-table-button>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="place">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header="place">Lieu</th>
+                        <td *matCellDef="let element" mat-cell>{{ element.place }}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="type">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header="type">Type</th>
+                        <td *matCellDef="let element" mat-cell>{{ element.type }}</td>
+                    </ng-container>
+                </table>
+            </div>
+            @if (dataSource.data?.length === 0) {
+                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                    <div>Pas de résultats</div>
+                </div>
+            }
+            @if (!dataSource.data) {
+                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                </div>
+            }
+            @if (dataSource.data?.length) {
+                <mat-paginator
+                    (page)="pagination($event)"
+                    [length]="dataSource.data?.length"
+                    [pageIndex]="dataSource.data?.pageIndex"
+                    [pageSizeOptions]="pageSizeOptions"
+                    [pageSize]="dataSource.data?.pageSize"
+                ></mat-paginator>
+            }
         </div>
-
-        <div *ngIf="dataSource.data?.length === 0" class="margin" fxLayout="column" fxLayoutAlign="center center">
-            <div>Pas de résultats</div>
-        </div>
-
-        <div *ngIf="!dataSource?.data" class="margin" fxLayout="column" fxLayoutAlign="center center">
-            <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
-        </div>
-
-        <mat-paginator
-            (page)="pagination($event)"
-            *ngIf="dataSource.data?.length"
-            [length]="dataSource.data?.length"
-            [pageIndex]="dataSource.data?.pageIndex"
-            [pageSizeOptions]="pageSizeOptions"
-            [pageSize]="dataSource.data?.pageSize"
-        ></mat-paginator>
     </div>
-</div>
+}
 
-<natural-fixed-button
-    *ngIf="permissionsService.crud?.event.create"
-    [routerLink]="['/admin/event/new']"
-    icon="add"
-></natural-fixed-button>
+@if (permissionsService.crud?.event.create) {
+    <natural-fixed-button [routerLink]="['/admin/event/new']" icon="add"></natural-fixed-button>
+}

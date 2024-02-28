@@ -6,25 +6,26 @@
             <mat-label>email</mat-label>
             <input formControlName="email" matInput />
             <mat-icon matIconPrefix naturalIcon="alternate_email"></mat-icon>
-            <mat-error *ngIf="form.get('email')?.hasError('required')">Requis</mat-error>
-            <mat-error *ngIf="form.get('email')?.hasError('email')">Adresse email invalide</mat-error>
+            @if (form.get('email')?.hasError('required')) {
+                <mat-error>Requis</mat-error>
+            }
+            @if (form.get('email')?.hasError('email')) {
+                <mat-error>Adresse email invalide</mat-error>
+            }
         </mat-form-field>
 
-        <div *ngIf="step === 2" fxLayout="column" fxLayoutGap="30px">
-            <mat-divider></mat-divider>
-
-            <h2 class="mat-h2">Compte</h2>
-
-            <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
-                <app-password fxFlex [form]="form"></app-password>
+        @if (step === 2) {
+            <div fxLayout="column" fxLayoutGap="30px">
+                <mat-divider></mat-divider>
+                <h2 class="mat-h2">Compte</h2>
+                <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
+                    <app-password fxFlex [form]="form"></app-password>
+                </div>
+                <mat-divider></mat-divider>
+                <h2 class="mat-h2">Coordonnées</h2>
+                <app-address [form]="form"></app-address>
             </div>
-
-            <mat-divider></mat-divider>
-
-            <h2 class="mat-h2">Coordonnées</h2>
-
-            <app-address [form]="form"></app-address>
-        </div>
+        }
 
         <div fxLayout="row" fxLayoutAlign="center">
             <button (click)="submit()" [color]="form.valid ? 'primary' : 'warn'" [disabled]="sending" mat-raised-button>

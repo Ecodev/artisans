@@ -22,57 +22,68 @@
                 </button>
             </p>
 
-            <mat-spinner *ngIf="importing" diameter="32"></mat-spinner>
+            @if (importing) {
+                <mat-spinner diameter="32"></mat-spinner>
+            }
 
-            <div *ngIf="result">
-                <p>
-                    L'import de {{ result.totalLines }} lignes s'est terminé avec succès en {{ result.time }} secondes.
-                </p>
-                <ul>
-                    <li>Utilisateurs modifiés: {{ result.updatedUsers }}</li>
-                    <li>Organisations modifiées: {{ result.updatedOrganizations }}</li>
-                    <li>Organisations supprimées: {{ result.deletedOrganizations }}</li>
-                </ul>
-
-                <ul>
-                    <li>Total d'utilisateurs existants: {{ result.totalUsers }}</li>
-                    <li>Total d'organisations existants: {{ result.totalOrganizations }}</li>
-                </ul>
-
-                <p *ngIf="!users.length">Tout est OK</p>
-                <div *ngIf="users.length">
+            @if (result) {
+                <div>
                     <p>
-                        Il existe {{ users.length }} utilisateurs dans notre BD qui n'ont pas été importés. Il faut soit
-                        créer ces utilisateurs dans Crésus puis re-importer, soit supprimer définitivement les
-                        utilisateurs de notre BD.
+                        L'import de {{ result.totalLines }} lignes s'est terminé avec succès en
+                        {{ result.time }} secondes.
                     </p>
-
-                    <div fxLayout="row" fxLayoutGap="10px">
-                        <a [routerLink]="['/admin/user', params]" mat-button style="margin-right: 3em"
-                            >Voir le détail</a
-                        >
-                        <button mat-raised-button color="warn" (click)="deleteAll()">
-                            <mat-icon naturalIcon="delete"></mat-icon>
-                            Supprimer tous
-                        </button>
-                    </div>
-
                     <ul>
-                        <li *ngFor="let user of users">{{ user.name }}</li>
+                        <li>Utilisateurs modifiés: {{ result.updatedUsers }}</li>
+                        <li>Organisations modifiées: {{ result.updatedOrganizations }}</li>
+                        <li>Organisations supprimées: {{ result.deletedOrganizations }}</li>
                     </ul>
+                    <ul>
+                        <li>Total d'utilisateurs existants: {{ result.totalUsers }}</li>
+                        <li>Total d'organisations existants: {{ result.totalOrganizations }}</li>
+                    </ul>
+                    @if (!users.length) {
+                        <p>Tout est OK</p>
+                    }
+                    @if (users.length) {
+                        <div>
+                            <p>
+                                Il existe {{ users.length }} utilisateurs dans notre BD qui n'ont pas été importés. Il
+                                faut soit créer ces utilisateurs dans Crésus puis re-importer, soit supprimer
+                                définitivement les utilisateurs de notre BD.
+                            </p>
+                            <div fxLayout="row" fxLayoutGap="10px">
+                                <a [routerLink]="['/admin/user', params]" mat-button style="margin-right: 3em"
+                                    >Voir le détail</a
+                                >
+                                <button mat-raised-button color="warn" (click)="deleteAll()">
+                                    <mat-icon naturalIcon="delete"></mat-icon>
+                                    Supprimer tous
+                                </button>
+                            </div>
+                            <ul>
+                                @for (user of users; track user) {
+                                    <li>{{ user.name }}</li>
+                                }
+                            </ul>
+                        </div>
+                    }
                 </div>
-            </div>
+            }
 
-            <div *ngIf="errors.length">
-                <p>
-                    {{ errors.length }} erreurs se sont produitent durant l'import. Tout le processus a été complétement
-                    annulé.
-                </p>
-                <p *ngFor="let error of errors">
-                    <mat-icon color="warn" fontIcon="error"></mat-icon>
-                    {{ error }}
-                </p>
-            </div>
+            @if (errors.length) {
+                <div>
+                    <p>
+                        {{ errors.length }} erreurs se sont produitent durant l'import. Tout le processus a été
+                        complétement annulé.
+                    </p>
+                    @for (error of errors; track error) {
+                        <p>
+                            <mat-icon color="warn" fontIcon="error"></mat-icon>
+                            {{ error }}
+                        </p>
+                    }
+                </div>
+            }
         </div>
     </div>
 </div>

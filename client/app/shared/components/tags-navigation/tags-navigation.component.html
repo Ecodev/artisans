@@ -1,4 +1,4 @@
-<ng-container *ngFor="let item of items">
+@for (item of items; track item) {
     <a [routerLink]="getLink(item)">{{ item.name }}</a>
     <span class="dot"></span>
-</ng-container>
+}

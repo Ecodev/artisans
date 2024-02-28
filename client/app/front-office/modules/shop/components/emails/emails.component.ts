@@ -6,7 +6,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {CommonModule} from '@angular/common';
 
 export type EmailsData = {
     title: string;
@@ -23,7 +22,6 @@ export type EmailsData = {
         MatDialogModule,
         FormsModule,
         ReactiveFormsModule,
-        CommonModule,
         FlexModule,
         MatFormFieldModule,
         MatInputModule,

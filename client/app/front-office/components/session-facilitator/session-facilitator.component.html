@@ -86,10 +86,12 @@
 
             <p>&nbsp;</p>
             <div class="facilitators">
-                <div *ngFor="let user of facilitators" class="facilitator">
-                    <strong>{{ user.name }}</strong>
-                    <div>{{ user.locality }}</div>
-                </div>
+                @for (user of facilitators; track user) {
+                    <div class="facilitator">
+                        <strong>{{ user.name }}</strong>
+                        <div>{{ user.locality }}</div>
+                    </div>
+                }
             </div>
         </div>
 

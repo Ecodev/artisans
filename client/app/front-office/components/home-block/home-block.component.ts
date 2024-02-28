@@ -12,7 +12,6 @@ import {NaturalIconDirective} from '@ecodev/natural';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
 
 interface Block {
     title: string;
@@ -27,7 +26,6 @@ interface Block {
     styleUrls: ['./home-block.component.scss'],
     standalone: true,
     imports: [
-        CommonModule,
         MatButtonModule,
         RouterLink,
         MatIconModule,

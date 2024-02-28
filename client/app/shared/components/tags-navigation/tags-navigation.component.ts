@@ -3,14 +3,13 @@ import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
 import {ProductTags, ProductTagsVariables} from '../../generated-types';
 import {RouterLink} from '@angular/router';
-import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-tags-navigation',
     templateUrl: './tags-navigation.component.html',
     styleUrls: ['./tags-navigation.component.scss'],
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [RouterLink],
 })
 export class TagsNavigationComponent {
     /**

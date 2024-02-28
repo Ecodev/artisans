@@ -5,15 +5,12 @@
         label="Documents facilitateurs"
         [newLabel]="data.seo.title"
     >
-        <a
-            routerLink="/agir-avec-nous/conversation-carbone/facilitateurs-prive"
-            color="primary"
-            mat-raised-button
-            *ngIf="isUpdatePage()"
-        >
-            <mat-icon naturalIcon="remove_red_eye"></mat-icon>
-            Voir la page
-        </a>
+        @if (isUpdatePage()) {
+            <a routerLink="/agir-avec-nous/conversation-carbone/facilitateurs-prive" color="primary" mat-raised-button>
+                <mat-icon naturalIcon="remove_red_eye"></mat-icon>
+                Voir la page
+            </a>
+        }
     </natural-detail-header>
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
@@ -24,18 +21,26 @@
                         <mat-form-field>
                             <mat-label>Nom</mat-label>
                             <input (change)="update()" formControlName="name" matInput />
-                            <mat-error *ngIf="form.get('name')?.hasError('maxlength')">
-                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('name')?.hasError('required')">Requis</mat-error>
+                            @if (form.get('name')?.hasError('maxlength')) {
+                                <mat-error>
+                                    Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                                </mat-error>
+                            }
+                            @if (form.get('name')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Rubrique</mat-label>
                             <input (change)="update()" formControlName="category" matInput />
-                            <mat-error *ngIf="form.get('category')?.hasError('maxlength')">
-                                Maximum {{ form.get('category')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                            <mat-error *ngIf="form.get('category')?.hasError('required')">Requis</mat-error>
+                            @if (form.get('category')?.hasError('maxlength')) {
+                                <mat-error>
+                                    Maximum {{ form.get('category')?.errors?.maxlength?.requiredLength }} caractères
+                                </mat-error>
+                            }
+                            @if (form.get('category')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
                         </mat-form-field>
                     </div>
 
@@ -58,16 +63,19 @@
 
                 <mat-divider></mat-divider>
 
-                <natural-stamp *ngIf="isUpdatePage()" [item]="data.model"></natural-stamp>
+                @if (isUpdatePage()) {
+                    <natural-stamp [item]="data.model"></natural-stamp>
+                }
             </div>
         </mat-tab>
     </mat-tab-group>
 
-    <natural-fixed-button-detail
-        (create)="create()"
-        (delete)="delete()"
-        *ngIf="showFabButton"
-        [form]="form"
-        [model]="data.model"
-    ></natural-fixed-button-detail>
+    @if (showFabButton) {
+        <natural-fixed-button-detail
+            (create)="create()"
+            (delete)="delete()"
+            [form]="form"
+            [model]="data.model"
+        ></natural-fixed-button-detail>
+    }
 </div>

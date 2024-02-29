@@ -7,7 +7,7 @@
     >
         @if (isUpdatePage()) {
             <a routerLink="/agir-avec-nous/conversation-carbone/facilitateurs-prive" color="primary" mat-raised-button>
-                <mat-icon naturalIcon="remove_red_eye"></mat-icon>
+                <mat-icon naturalIcon="remove_red_eye" />
                 Voir la page
             </a>
         }
@@ -57,25 +57,20 @@
                             action="upload"
                             class="mat-elevation-z2"
                             accept="application/pdf,pplication/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                        ></natural-file>
+                        />
                     </div>
                 </div>
 
-                <mat-divider></mat-divider>
+                <mat-divider />
 
                 @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model"></natural-stamp>
+                    <natural-stamp [item]="data.model" />
                 }
             </div>
         </mat-tab>
     </mat-tab-group>
 
     @if (showFabButton) {
-        <natural-fixed-button-detail
-            (create)="create()"
-            (delete)="delete()"
-            [form]="form"
-            [model]="data.model"
-        ></natural-fixed-button-detail>
+        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
     }
 </div>

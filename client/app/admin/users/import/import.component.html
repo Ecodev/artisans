@@ -17,13 +17,13 @@
                     (filesChange)="uploadFile($event)"
                     [disabled]="!permissionsService.crud?.organization.create || importing"
                 >
-                    <mat-icon naturalIcon="file_upload"></mat-icon>
+                    <mat-icon naturalIcon="file_upload" />
                     Uploader
                 </button>
             </p>
 
             @if (importing) {
-                <mat-spinner diameter="32"></mat-spinner>
+                <mat-spinner diameter="32" />
             }
 
             @if (result) {
@@ -56,7 +56,7 @@
                                     >Voir le détail</a
                                 >
                                 <button mat-raised-button color="warn" (click)="deleteAll()">
-                                    <mat-icon naturalIcon="delete"></mat-icon>
+                                    <mat-icon naturalIcon="delete" />
                                     Supprimer tous
                                 </button>
                             </div>
@@ -78,7 +78,7 @@
                     </p>
                     @for (error of errors; track error) {
                         <p>
-                            <mat-icon color="warn" fontIcon="error"></mat-icon>
+                            <mat-icon color="warn" fontIcon="error" />
                             {{ error }}
                         </p>
                     }

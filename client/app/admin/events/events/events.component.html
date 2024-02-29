@@ -36,7 +36,7 @@
                                     [label]="element.name"
                                     [navigate]="['/admin/event', element.id]"
                                     matTooltip="Éditer"
-                                ></natural-table-button>
+                                />
                             </div>
                         </td>
                     </ng-container>
@@ -57,7 +57,7 @@
             }
             @if (!dataSource.data) {
                 <div class="margin" fxLayout="column" fxLayoutAlign="center center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }
             @if (dataSource.data?.length) {
@@ -67,12 +67,12 @@
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"
                     [pageSize]="dataSource.data?.pageSize"
-                ></mat-paginator>
+                />
             }
         </div>
     </div>
 }
 
 @if (permissionsService.crud?.event.create) {
-    <natural-fixed-button [routerLink]="['/admin/event/new']" icon="add"></natural-fixed-button>
+    <natural-fixed-button [routerLink]="['/admin/event/new']" icon="add" />
 }

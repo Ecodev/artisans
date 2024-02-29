@@ -7,9 +7,9 @@ import {debounceTime, distinctUntilChanged, filter, skip, take} from 'rxjs/opera
 import {Permissions} from '../generated-types';
 import {permissionsQuery} from './permissions.queries';
 
-interface Contexts {
+type Contexts = {
     user: string | null;
-}
+};
 
 /**
  * A service to fetch permissions and use them in templates.

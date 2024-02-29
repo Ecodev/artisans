@@ -32,7 +32,7 @@
                                     [label]="element.description"
                                     [navigate]="['/admin/comment', element.id]"
                                     matTooltip="Éditer"
-                                ></natural-table-button>
+                                />
                             </div>
                         </td>
                     </ng-container>
@@ -45,7 +45,7 @@
                                         [label]="element.event.name"
                                         [navigate]="['/admin/event', element.event.id]"
                                         matTooltip="Éditer"
-                                    ></natural-table-button>
+                                    />
                                 </div>
                             }
                         </td>
@@ -59,7 +59,7 @@
                                         [label]="element.news.name"
                                         [navigate]="['/admin/news', element.news.id]"
                                         matTooltip="Éditer"
-                                    ></natural-table-button>
+                                    />
                                 </div>
                             }
                         </td>
@@ -73,7 +73,7 @@
             }
             @if (!dataSource.data) {
                 <div class="margin" fxLayout="column" fxLayoutAlign="center center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }
             @if (dataSource.data?.length) {
@@ -83,7 +83,7 @@
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"
                     [pageSize]="dataSource.data?.pageSize"
-                ></mat-paginator>
+                />
             }
         </div>
     </div>

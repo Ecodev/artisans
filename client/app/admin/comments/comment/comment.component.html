@@ -4,7 +4,7 @@
         [model]="data.model"
         label="Commentaire"
         [newLabel]="data.seo.title"
-    ></natural-detail-header>
+    />
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab id="general" label="Général">
@@ -32,7 +32,7 @@
                             placeholder="Événement"
                             [navigateTo]="['/admin/event', form.get('event')?.value?.id]"
                             [disabled]="true"
-                        ></natural-select>
+                        />
 
                         <natural-select
                             [service]="eventService"
@@ -40,23 +40,18 @@
                             placeholder="Actualité"
                             [navigateTo]="['/admin/news', form.get('event')?.value?.id]"
                             [disabled]="true"
-                        ></natural-select>
+                        />
                     </div>
                 </div>
 
                 @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model"></natural-stamp>
+                    <natural-stamp [item]="data.model" />
                 }
             </div>
         </mat-tab>
     </mat-tab-group>
 
     @if (showFabButton) {
-        <natural-fixed-button-detail
-            (create)="create()"
-            (delete)="delete()"
-            [form]="form"
-            [model]="data.model"
-        ></natural-fixed-button-detail>
+        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
     }
 </div>

@@ -27,7 +27,7 @@
                                 [label]="element.name"
                                 [navigate]="['/admin/facilitator-document', element.id]"
                                 matTooltip="Éditer"
-                            ></natural-table-button>
+                            />
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="category">
@@ -41,8 +41,8 @@
                         <td *matCellDef="let element" mat-cell>
                             @if (element.file) {
                                 <a [href]="'/api/file/' + element.file.id" target="_blank">
-                                    <mat-icon naturalIcon="download"></mat-icon
-                                ></a>
+                                    <mat-icon naturalIcon="download"
+                                /></a>
                             }
                         </td>
                     </ng-container>
@@ -55,7 +55,7 @@
             }
             @if (!dataSource.data) {
                 <div class="margin" fxLayout="column" fxLayoutAlign="center center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }
             @if (dataSource.data?.length) {
@@ -65,12 +65,12 @@
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"
                     [pageSize]="dataSource.data?.pageSize"
-                ></mat-paginator>
+                />
             }
         </div>
     </div>
 }
 
 @if (permissionsService.crud?.facilitatorDocument.create) {
-    <natural-fixed-button [routerLink]="['/admin/facilitator-document/new']" icon="add"></natural-fixed-button>
+    <natural-fixed-button [routerLink]="['/admin/facilitator-document/new']" icon="add" />
 }

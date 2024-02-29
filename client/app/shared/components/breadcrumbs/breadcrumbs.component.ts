@@ -4,10 +4,10 @@ import {NaturalAbstractController} from '@ecodev/natural';
 import {filter, takeUntil} from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
 
-export interface Breadcrumb {
+export type Breadcrumb = {
     link: any[] | string;
     label: string;
-}
+};
 
 @Component({
     selector: 'app-breadcrumbs',

@@ -2,7 +2,7 @@
     <div class="bloc">
         <div class="mat-h1 title">{{ form.get('title')?.value }}</div>
         <div class="bloc-description mat-h4">{{ form.get('description')?.value }}</div>
-        <a mat-flat-button routerLink="{{ form.get('buttonLink')?.value }}">
+        <a mat-flat-button [routerLink]="form.get('buttonLink')?.value">
             {{ form.get('buttonLabel')?.value }}
         </a>
         @if (permissionService.crud?.configuration.create) {
@@ -13,7 +13,7 @@
                 style="color: black; background-color: white"
                 mat-fab
             >
-                <mat-icon naturalIcon="edit"></mat-icon>
+                <mat-icon naturalIcon="edit" />
             </button>
         }
     </div>
@@ -54,7 +54,7 @@
             <div fxFlex></div>
             <button (click)="reset()" mat-button>Annuler</button>
             <button (click)="update(); editMode = false" color="primary" mat-flat-button>
-                <mat-icon naturalIcon="save"></mat-icon>
+                <mat-icon naturalIcon="save" />
                 Sauvegarder
             </button>
         </div>

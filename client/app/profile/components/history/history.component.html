@@ -14,7 +14,7 @@
                                 [navigate]="[element.id]"
                                 icon="open_in_new"
                                 matTooltip="Éditer"
-                            ></natural-table-button>
+                            />
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="status">
@@ -39,7 +39,7 @@
             }
             @if (!dataSource.data) {
                 <div class="margin" fxLayout="column" fxLayoutAlign="center center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }
             @if (dataSource.data?.length) {
@@ -49,10 +49,10 @@
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="[25]"
                     [pageSize]="25"
-                ></mat-paginator>
+                />
             }
         </div>
     </div>
 }
 
-<router-outlet></router-outlet>
+<router-outlet />

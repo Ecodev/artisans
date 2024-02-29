@@ -57,7 +57,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
     }
 
     public getDownloadLink(orderLine: Purchases['purchases']['items'][0]): null | string {
-        if (orderLine.product && orderLine.product.file) {
+        if (orderLine.product?.file) {
             return this.naturalFileService.getDownloadLink(orderLine.product.file);
         }
 
@@ -66,7 +66,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
 
     public canDownload(orderLine: Purchases['purchases']['items'][0]): boolean {
         const isDigital = orderLine.type === ProductType.both || orderLine.type === ProductType.digital;
-        const hasFile = orderLine.product && orderLine.product.file;
+        const hasFile = orderLine.product?.file;
 
         return isDigital && !!hasFile;
     }

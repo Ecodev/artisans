@@ -121,8 +121,8 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
                 variables: qvm.variables.value,
             })
             .subscribe(result => {
-                this.usersEmail = result.data['users'].items.map(u => u.email).join(' ;,'); // all separators for different mailboxes
-                this.usersEmailAndName = result.data['users'].items
+                this.usersEmail = result.data.users.items.map(u => u.email).join(' ;,'); // all separators for different mailboxes
+                this.usersEmailAndName = result.data.users.items
                     .map(u => [u.email, u.firstName, u.lastName].join(';'))
                     .join('\n');
 

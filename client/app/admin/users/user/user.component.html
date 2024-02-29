@@ -4,8 +4,7 @@
         [model]="data.model"
         label="Utilisateur"
         [newLabel]="data.seo.title"
-    >
-    </natural-detail-header>
+    />
 
     @if (isUpdatePage() && data.model.shouldDelete) {
         <mat-toolbar color="warn"
@@ -22,7 +21,7 @@
                     <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
                         <div fxFlex="66" fxLayout="column">
                             <h2 class="mat-h2">Coordonnées</h2>
-                            <app-address [form]="form" [disabled]="true"></app-address>
+                            <app-address [form]="form" [disabled]="true" />
                             <mat-form-field>
                                 <mat-label>Téléphone</mat-label>
                                 <input formControlName="phone" matInput />
@@ -52,7 +51,7 @@
                                 formControlName="role"
                                 placeholder="Rôle"
                                 [optionDisabled]="roleDisabled()"
-                            ></natural-select-enum>
+                            />
                             <mat-slide-toggle
                                 formControlName="isPublicFacilitator"
                                 (change)="update()"
@@ -65,7 +64,7 @@
                                 enumName="Membership"
                                 formControlName="membership"
                                 placeholder="Membre des artisans"
-                            ></natural-select-enum>
+                            />
                             <div>
                                 <span class="mat-subtitle-2">Abonnement : </span>
                                 @if (data.model.subscriptionLastReviewNumber) {
@@ -85,7 +84,7 @@
                             </div>
                         </div>
                     </div>
-                    <mat-divider></mat-divider>
+                    <mat-divider />
                     <h2 class="mat-h2">Conversations carbone animées</h2>
                     <natural-relations
                         [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
@@ -96,17 +95,14 @@
                     >
                         <ng-template let-item="item">
                             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                <natural-table-button
-                                    [label]="item.name"
-                                    [navigate]="['/admin/session/', item.id]"
-                                ></natural-table-button>
+                                <natural-table-button [label]="item.name" [navigate]="['/admin/session/', item.id]" />
                             </div>
                         </ng-template>
                     </natural-relations>
-                    <mat-divider></mat-divider>
+                    <mat-divider />
                     @if (isUpdatePage()) {
                         <div fxLayout="column" fxLayoutGap="15px">
-                            <natural-stamp [item]="data.model"></natural-stamp>
+                            <natural-stamp [item]="data.model" />
                             @if (data.model.firstLogin) {
                                 <div>
                                     <span class="mat-body-strong">Première connexion :</span>
@@ -132,7 +128,7 @@
                                     filter: {groups: [{conditions: [{owner: {equal: {value: data.model.id}}}]}]}
                                 }"
                                 [selectedColumns]="['creationDate', 'lines', 'status', 'balanceCHF', 'balanceEUR']"
-                            ></app-orders>
+                            />
                         </div>
                     </div>
                 </mat-tab>
@@ -141,13 +137,8 @@
     }
 
     @if (showFabButton) {
-        <natural-fixed-button-detail
-            (create)="create()"
-            (delete)="delete()"
-            [form]="form"
-            [model]="data.model"
-        ></natural-fixed-button-detail>
+        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
     }
 </div>
 
-<router-outlet></router-outlet>
+<router-outlet />

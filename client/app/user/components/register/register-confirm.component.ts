@@ -53,7 +53,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
 
     public override ngOnInit(): void {
         this.route.data.subscribe(data => {
-            this.initFormFromModel((data['user'] as UserByTokenResolve)['model']);
+            this.initFormFromModel((data.user as UserByTokenResolve).model);
         });
     }
 

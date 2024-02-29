@@ -1,12 +1,7 @@
 <h2 mat-dialog-title>{{ data.seo.title }}</h2>
 <mat-dialog-content>
     <div [formGroup]="form">
-        <natural-select
-            [service]="productService"
-            [showIcon]="false"
-            formControlName="product"
-            placeholder="Produit"
-        ></natural-select>
+        <natural-select [service]="productService" [showIcon]="false" formControlName="product" placeholder="Produit" />
 
         <div class="mat-h2">ou</div>
 
@@ -15,7 +10,7 @@
             [showIcon]="false"
             formControlName="subscription"
             placeholder="Abonnement"
-        ></natural-select>
+        />
 
         @if (form.hasError('productXorSubscription')) {
             <p class="warning mat-body">
@@ -24,7 +19,7 @@
             </p>
         }
 
-        <mat-divider class="margin"></mat-divider>
+        <mat-divider class="margin" />
 
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start top">
             <mat-form-field [style.width.px]="90">
@@ -43,11 +38,7 @@
 
             <!-- Show only for products -->
             @if (form.get('product')?.value && !form.get('subscription')?.value) {
-                <natural-select-enum
-                    formControlName="type"
-                    enumName="ProductType"
-                    placeholder="Type"
-                ></natural-select-enum>
+                <natural-select-enum formControlName="type" enumName="ProductType" placeholder="Type" />
             }
         </div>
     </div>

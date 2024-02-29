@@ -4,11 +4,11 @@ import {MenuItem} from '../../services/navigation.service';
 import {RouterLinkActive, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
 
-export interface MenuDropdownData {
+export type MenuDropdownData = {
     items: MenuItem[];
     originalNativeElement: HTMLElement;
     contentHeight: number;
-}
+};
 
 export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownData');
 

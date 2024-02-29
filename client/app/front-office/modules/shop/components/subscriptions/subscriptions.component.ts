@@ -19,7 +19,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     imports: [FlexModule, PriceComponent, MatButtonModule],
 })
 export class SubscriptionsComponent implements OnInit {
-    public subscriptions: {[key: string]: Subscriptions['subscriptions']['items'][0]} | null = null;
+    public subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;
 
     public ProductType = ProductType;
 

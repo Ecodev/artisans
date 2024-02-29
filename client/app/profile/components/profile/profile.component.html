@@ -4,7 +4,7 @@
             <div fxFlex="25" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
                 <div class="mat-headline-4 no-margin" fxFlex>Bonjour {{ viewer.firstName }},</div>
                 <button (click)="userService.logout()" mat-flat-button>
-                    <mat-icon naturalIcon="exit_to_app"></mat-icon>
+                    <mat-icon naturalIcon="exit_to_app" />
                     Se déconnecter
                 </button>
             </div>
@@ -34,7 +34,7 @@
                         [type]="ProductType.other"
                         [buttonColor]="null"
                         label="Payer la cotisation"
-                    ></app-add-to-cart>
+                    />
                 }
                 @if (viewer.membership !== Membership.none) {
                     <a mat-flat-button (click)="requestMembershipEnd()">Arrêter les cotisations</a>
@@ -77,7 +77,7 @@
             </div>
         </div>
         <div fxFlex>
-            <router-outlet></router-outlet>
+            <router-outlet />
         </div>
     </div>
 </div>

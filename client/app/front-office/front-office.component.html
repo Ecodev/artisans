@@ -10,9 +10,7 @@
                     @if (item.children?.length) {
                         <a (click)="item.opened = !item.opened" matRipple>{{ item.display }}</a>
                     }
-                    <ng-container
-                        *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}"
-                    ></ng-container>
+                    <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}" />
                 </li>
             }
         </ul>
@@ -38,9 +36,7 @@
     <mat-sidenav #menu [opened]="menuOpened" position="end">
         <!-- menu mobile -->
         <div id="mobile-menu">
-            <ng-container
-                *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: mobileNavigation}"
-            ></ng-container>
+            <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: mobileNavigation}" />
 
             @if (viewer?.role === UserRole.administrator) {
                 <ul>
@@ -61,7 +57,7 @@
             <div fxFlex></div>
 
             <button (click)="menu.toggle()" mat-icon-button>
-                <mat-icon naturalIcon="menu"></mat-icon>
+                <mat-icon naturalIcon="menu" />
             </button>
         </mat-toolbar>
 
@@ -73,7 +69,7 @@
                     @if (!currencyService.locked) {
                         <a [matMenuTriggerFor]="deviseMenu" mat-button>
                             {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
-                            <mat-icon naturalIcon="keyboard_arrow_down"></mat-icon>
+                            <mat-icon naturalIcon="keyboard_arrow_down" />
                         </a>
                     }
                     <mat-menu #deviseMenu="matMenu">
@@ -106,9 +102,7 @@
             <div id="header-bottom">
                 <div class="container" fxLayout="row" fxLayoutAlign="start end" id="menu-main-container">
                     <div fxFlex id="menu-main">
-                        <ng-container
-                            *ngTemplateOutlet="navigationTemplate; context: {$implicit: navigation}"
-                        ></ng-container>
+                        <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: navigation}" />
                     </div>
 
                     <mat-form-field id="search-field">
@@ -120,7 +114,7 @@
                             matInput
                         />
                         <button (click)="search()" mat-icon-button matIconSuffix>
-                            <mat-icon naturalIcon="search"></mat-icon>
+                            <mat-icon naturalIcon="search" />
                         </button>
                     </mat-form-field>
                 </div>
@@ -130,10 +124,10 @@
         <!-- THE BODY IS HERE -->
         <div id="front-office-body">
             <div class="container">
-                <app-breadcrumbs></app-breadcrumbs>
+                <app-breadcrumbs />
             </div>
 
-            <router-outlet></router-outlet>
+            <router-outlet />
         </div>
 
         <!-- THE FOOTER IS HERE -->

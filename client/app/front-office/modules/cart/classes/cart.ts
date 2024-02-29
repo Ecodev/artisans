@@ -8,7 +8,7 @@ export type CartLineProduct = Products['products']['items'][0] | Product['produc
 
 export type CartLineSubscription = Subscriptions['subscriptions']['items'][0] | Subscription['subscription'];
 
-export interface CartLine {
+export type CartLine = {
     /**
      * Related product
      */
@@ -28,7 +28,7 @@ export interface CartLine {
      * Total in current currency
      */
     totalTaxInc: number;
-}
+};
 
 export class Cart {
     /**
@@ -88,7 +88,7 @@ export class Cart {
             return Big(product.pricePerUnitEUR);
         }
 
-        throw new Error('Unsupported currency: ' + currency);
+        throw new Error('Unsupported currency: ' + (currency as string));
     }
 
     public update(): void {

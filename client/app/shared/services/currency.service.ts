@@ -45,7 +45,7 @@ export class CurrencyService {
      * Consider the given user country to (un)lock currency change
      */
     public updateLockedStatus(user: UserLike | null): void {
-        if (!user || !user.country) {
+        if (!user?.country) {
             this.locked = false;
             return;
         }

@@ -7,7 +7,7 @@
     >
         @if (isUpdatePage()) {
             <a [routerLink]="['/agenda', data.model.id]" color="primary" mat-raised-button>
-                <mat-icon naturalIcon="remove_red_eye"></mat-icon>
+                <mat-icon naturalIcon="remove_red_eye" />
                 Voir la page
             </a>
         }
@@ -62,8 +62,8 @@
                         <mat-form-field>
                             <mat-label>Date</mat-label>
                             <input [matDatepicker]="picker" formControlName="date" matInput (change)="update()" />
-                            <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-datepicker-toggle [for]="picker" matIconSuffix />
+                            <mat-datepicker #picker />
                             @if (form.get('date')?.hasError('required')) {
                                 <mat-error>Requis</mat-error>
                             }
@@ -72,18 +72,13 @@
                 </div>
 
                 @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model"></natural-stamp>
+                    <natural-stamp [item]="data.model" />
                 }
             </div>
         </mat-tab>
     </mat-tab-group>
 
     @if (showFabButton) {
-        <natural-fixed-button-detail
-            (create)="create()"
-            (delete)="delete()"
-            [form]="form"
-            [model]="data.model"
-        ></natural-fixed-button-detail>
+        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
     }
 </div>

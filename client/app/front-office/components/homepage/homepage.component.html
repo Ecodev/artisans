@@ -5,9 +5,9 @@
 
 <div class="introduction-blocs">
     <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutAlign="start stretch" fxLayoutGap="50px">
-        <app-home-block fxFlex.gt-sm id="bloc1" key="home-block-1"></app-home-block>
-        <app-home-block fxFlex.gt-sm id="bloc2" key="home-block-2"></app-home-block>
-        <app-home-block fxFlex.gt-sm id="bloc3" key="home-block-3"></app-home-block>
+        <app-home-block fxFlex.gt-sm id="bloc1" key="home-block-1" />
+        <app-home-block fxFlex.gt-sm id="bloc2" key="home-block-2" />
+        <app-home-block fxFlex.gt-sm id="bloc3" key="home-block-3" />
     </div>
 </div>
 
@@ -29,12 +29,12 @@
                             mat-fab
                             routerLink="/admin/news"
                         >
-                            <mat-icon naturalIcon="edit"></mat-icon>
+                            <mat-icon naturalIcon="edit" />
                         </button>
                     }
                 </div>
             </div>
-            <mat-divider></mat-divider>
+            <mat-divider />
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
                 @for (news of newses; track news) {
                     <div class="news">
@@ -65,14 +65,14 @@
                             mat-fab
                             routerLink="/admin/event"
                         >
-                            <mat-icon naturalIcon="edit"></mat-icon>
+                            <mat-icon naturalIcon="edit" />
                         </button>
                     }
                 </div>
             </div>
             <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
                 @for (event of events; track event) {
-                    <mat-divider></mat-divider>
+                    <mat-divider />
                     <div class="event">
                         <a class="mat-h2 no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple>{{
                             event.name
@@ -130,7 +130,7 @@
                     <div class="mat-h3">
                         Disponible en versions papier ou PDF avec votre abonnnement
                         <br />
-                        <app-price [product]="currentReview"></app-price>
+                        <app-price [product]="currentReview" />
                         pour non abonnés
                     </div>
                 }
@@ -150,7 +150,7 @@
 <div class="categories section">
     <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px">
         <div class="mat-headline-4">NOS THEMES</div>
-        <app-tags-navigation [linkBase]="['/larevuedurable/articles']"></app-tags-navigation>
+        <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
         <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
     </div>
 </div>

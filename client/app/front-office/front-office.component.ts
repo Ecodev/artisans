@@ -316,7 +316,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
     }
 
     public openMenuDropdown(items: MenuItem[], event: MouseEvent): void {
-        if (!items || !items.length) {
+        if (!items?.length) {
             return;
         }
 

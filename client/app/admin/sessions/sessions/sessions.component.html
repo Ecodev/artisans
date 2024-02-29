@@ -31,7 +31,7 @@
                                 [label]="element.name"
                                 [navigate]="['/admin/session', element.id]"
                                 matTooltip="Éditer"
-                            ></natural-table-button>
+                            />
                         </td>
                     </ng-container>
                     <ng-container matColumnDef="facilitators">
@@ -39,11 +39,7 @@
                         <td *matCellDef="let element" mat-cell>
                             @for (f of element.facilitators; track f) {
                                 <div fxLayout="row">
-                                    <natural-avatar
-                                        [initials]="f.name"
-                                        [gravatar]="f.email"
-                                        [size]="36"
-                                    ></natural-avatar>
+                                    <natural-avatar [initials]="f.name" [gravatar]="f.email" [size]="36" />
                                     <a mat-button [routerLink]="['/admin/user', f.id]">{{ f.name }}</a>
                                 </div>
                             }
@@ -78,7 +74,7 @@
             }
             @if (!dataSource.data) {
                 <div class="margin" fxLayout="column" fxLayoutAlign="center center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate"></mat-progress-spinner>
+                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }
             @if (dataSource.data?.length) {
@@ -88,12 +84,12 @@
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"
                     [pageSize]="dataSource.data?.pageSize"
-                ></mat-paginator>
+                />
             }
         </div>
     </div>
 }
 
 @if (permissionsService.crud?.session.create) {
-    <natural-fixed-button [routerLink]="['/admin/session/new']" icon="add"></natural-fixed-button>
+    <natural-fixed-button [routerLink]="['/admin/session/new']" icon="add" />
 }

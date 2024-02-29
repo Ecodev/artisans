@@ -33,7 +33,7 @@
                                 {{ line.product.name }}, {{ line.type | enum: 'ProductType' | async }}
                             </a>
                             @if (line.quantity > 1) {
-                                <app-price [product]="line.product"></app-price>
+                                <app-price [product]="line.product" />
                                 <div>x {{ line.quantity }}</div>
                             }
                             <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
@@ -49,7 +49,7 @@
                                         mat-icon-button
                                         class="mat-elevation-z4"
                                     >
-                                        <mat-icon naturalIcon="delete"></mat-icon>
+                                        <mat-icon naturalIcon="delete" />
                                     </button>
                                 }
                                 @if (line.quantity > 1) {
@@ -58,7 +58,7 @@
                                         mat-icon-button
                                         class="mat-elevation-z4"
                                     >
-                                        <mat-icon naturalIcon="remove"></mat-icon>
+                                        <mat-icon naturalIcon="remove" />
                                     </button>
                                 }
                                 <button
@@ -66,7 +66,7 @@
                                     mat-icon-button
                                     class="mat-elevation-z4"
                                 >
-                                    <mat-icon naturalIcon="add"></mat-icon>
+                                    <mat-icon naturalIcon="add" />
                                 </button>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         <div>{{ cart.subscription.emails.join(', ') }}</div>
                     }
                     <div fxLayout="row" fxLayoutAlign="start end" fxLayoutGap="5px" style="white-space: nowrap">
-                        <app-price [product]="cart.subscription.subscription" class="price mat-body-strong"></app-price>
+                        <app-price [product]="cart.subscription.subscription" class="price mat-body-strong" />
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                         <button
@@ -98,10 +98,10 @@
                             mat-icon-button
                             class="mat-elevation-z4"
                         >
-                            <mat-icon naturalIcon="delete"></mat-icon>
+                            <mat-icon naturalIcon="delete" />
                         </button>
                         <button routerLink="/larevuedurable/abonnements" mat-icon-button class="mat-elevation-z4">
-                            <mat-icon naturalIcon="edit"></mat-icon>
+                            <mat-icon naturalIcon="edit" />
                         </button>
                     </div>
                 </div>
@@ -121,20 +121,20 @@
                     </div>
                     <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
                         <button (click)="cart.unsetDonation()" color="warn" mat-icon-button class="mat-elevation-z4">
-                            <mat-icon naturalIcon="delete"></mat-icon>
+                            <mat-icon naturalIcon="delete" />
                         </button>
                         <button
                             (click)="cartService.inputDonation(false, cart)"
                             mat-icon-button
                             class="mat-elevation-z4"
                         >
-                            <mat-icon naturalIcon="edit"></mat-icon>
+                            <mat-icon naturalIcon="edit" />
                         </button>
                     </div>
                 </div>
             }
             @if (!cart.isEmpty()) {
-                <mat-divider></mat-divider>
+                <mat-divider />
                 <div fxLayout="row" fxLayoutAlign="end">
                     <div class="mat-h1 padding-v">
                         Total TTC : {{ cart.totalTaxInc | currency: currencyService.current.value }}
@@ -165,4 +165,4 @@
     </div>
 }
 
-<router-outlet></router-outlet>
+<router-outlet />

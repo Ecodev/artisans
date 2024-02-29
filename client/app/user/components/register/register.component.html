@@ -5,7 +5,7 @@
         <mat-form-field>
             <mat-label>email</mat-label>
             <input formControlName="email" matInput />
-            <mat-icon matIconPrefix naturalIcon="alternate_email"></mat-icon>
+            <mat-icon matIconPrefix naturalIcon="alternate_email" />
             @if (form.get('email')?.hasError('required')) {
                 <mat-error>Requis</mat-error>
             }
@@ -16,14 +16,14 @@
 
         @if (step === 2) {
             <div fxLayout="column" fxLayoutGap="30px">
-                <mat-divider></mat-divider>
+                <mat-divider />
                 <h2 class="mat-h2">Compte</h2>
                 <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="10px">
-                    <app-password fxFlex [form]="form"></app-password>
+                    <app-password fxFlex [form]="form" />
                 </div>
-                <mat-divider></mat-divider>
+                <mat-divider />
                 <h2 class="mat-h2">Coordonnées</h2>
-                <app-address [form]="form"></app-address>
+                <app-address [form]="form" />
             </div>
         }
 

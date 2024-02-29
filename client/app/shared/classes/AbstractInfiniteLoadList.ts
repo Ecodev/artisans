@@ -86,7 +86,7 @@ export class AbstractInfiniteLoadList<
         if (!isEqual(naturalEvent, this.defaultPagination)) {
             pagination = naturalEvent;
 
-            if (pagination && pagination.pageSize && pagination.pageIndex) {
+            if (pagination?.pageSize && pagination.pageIndex) {
                 forPersistence = {
                     offset: null,
                     pageSize: pagination.pageSize * (pagination.pageIndex + 1),

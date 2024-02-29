@@ -112,7 +112,7 @@ export class NaturalSearchFacetsService {
         component: TypeDateComponent,
     };
 
-    private readonly allFacets: {[key: string]: NaturalSearchFacets} = {
+    private readonly allFacets: Record<string, NaturalSearchFacets> = {
         users: [
             {
                 display: 'Existe pas dans Crésus',

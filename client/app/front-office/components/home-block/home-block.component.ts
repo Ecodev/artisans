@@ -13,12 +13,12 @@ import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 
-interface Block {
+type Block = {
     title: string;
     description: string;
     buttonLabel: string;
     buttonLink: string;
-}
+};
 
 @Component({
     selector: 'app-home-block',

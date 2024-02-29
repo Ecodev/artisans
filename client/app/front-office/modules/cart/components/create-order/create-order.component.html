@@ -22,7 +22,7 @@
                 </mat-radio-group>
                 <h1 class="mat-headline-4">Votre adresse</h1>
                 <div>
-                    <app-address [form]="shippingForm" [disabled]="true"></app-address>
+                    <app-address [form]="shippingForm" [disabled]="true" />
                     <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     Identique à mon adresse
                 </mat-checkbox>
                 @if (!billingForm.get('sameAsBilling')?.value) {
-                    <app-address [form]="billingForm"></app-address>
+                    <app-address [form]="billingForm" />
                 }
             </div>
         </div>
@@ -89,4 +89,4 @@
     </div>
 }
 
-<router-outlet></router-outlet>
+<router-outlet />

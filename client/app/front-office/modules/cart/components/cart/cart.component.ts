@@ -49,8 +49,8 @@ export class CartComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        if (this.route.snapshot.params['cartId']) {
-            const cart = this.cartCollectionService.getById(+this.route.snapshot.params['cartId']);
+        if (this.route.snapshot.params.cartId) {
+            const cart = this.cartCollectionService.getById(+this.route.snapshot.params.cartId);
             if (cart) {
                 this.cart = cart;
             }

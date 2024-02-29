@@ -4,8 +4,7 @@
         [model]="data.model"
         label="Session conv. carbone"
         [newLabel]="data.seo.title"
-    >
-    </natural-detail-header>
+    />
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab id="general" label="Général">
@@ -27,7 +26,7 @@
                             </mat-form-field>
 
                             <div class="mat-body-2">Description</div>
-                            <natural-editor formControlName="description" (contentChange)="update()"></natural-editor>
+                            <natural-editor formControlName="description" (contentChange)="update()" />
                             <br />
 
                             <mat-form-field>
@@ -41,8 +40,8 @@
                                 @if (form.get('startDate')?.hasError('required')) {
                                     <mat-error>Requis</mat-error>
                                 }
-                                <mat-datepicker-toggle [for]="picker" matIconSuffix></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-datepicker-toggle [for]="picker" matIconSuffix />
+                                <mat-datepicker #picker />
                                 <mat-hint
                                     >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des
                                     sessions</mat-hint
@@ -60,8 +59,8 @@
                                 @if (form.get('endDate')?.hasError('required')) {
                                     <mat-error>Requis</mat-error>
                                 }
-                                <mat-datepicker-toggle [for]="picker2" matIconSuffix></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-datepicker-toggle [for]="picker2" matIconSuffix />
+                                <mat-datepicker #picker2 />
                                 <mat-hint
                                     >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins
                                     d'administration</mat-hint
@@ -95,12 +94,12 @@
                                             color="warn"
                                             mat-icon-button
                                         >
-                                            <mat-icon naturalIcon="delete"></mat-icon>
+                                            <mat-icon naturalIcon="delete" />
                                         </button>
                                     </div>
                                 }
                                 <button (click)="addDate()" color="primary" mat-flat-button>
-                                    <mat-icon naturalIcon="add"></mat-icon>
+                                    <mat-icon naturalIcon="add" />
                                     Ajouter une date
                                 </button>
                             </div>
@@ -121,7 +120,7 @@
                                             <natural-table-button
                                                 [label]="item.name"
                                                 [navigate]="['/admin/user/', item.id]"
-                                            ></natural-table-button>
+                                            />
                                         </div>
                                     </ng-template>
                                 </natural-relations>
@@ -155,7 +154,7 @@
                             <input (change)="update()" formControlName="availability" matInput />
                         </mat-form-field>
 
-                        <mat-divider class="margin-v"></mat-divider>
+                        <mat-divider class="margin-v" />
 
                         <h2 class="mat-h2" fxLayout="row" fxLayoutAlign="start start">
                             <div fxFlex>Formulaire d'inscription</div>
@@ -173,21 +172,16 @@
                     </div>
                 </div>
 
-                <mat-divider></mat-divider>
+                <mat-divider />
 
                 @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model"></natural-stamp>
+                    <natural-stamp [item]="data.model" />
                 }
             </div>
         </mat-tab>
     </mat-tab-group>
 
     @if (showFabButton) {
-        <natural-fixed-button-detail
-            (create)="create()"
-            (delete)="delete()"
-            [form]="form"
-            [model]="data.model"
-        ></natural-fixed-button-detail>
+        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
     }
 </div>

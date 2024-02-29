@@ -1,6 +1,6 @@
 <div [@transformMenu]="panelAnimationState" class="mega-menu mat-elevation-z4" role="menu">
     <div [style.min-height.px]="data.contentHeight" [style.padding-left.px]="offsetLeft" class="mega-menu-content">
-        <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: data.items}"></ng-container>
+        <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: data.items}" />
     </div>
 </div>
 
@@ -12,9 +12,7 @@
                     <a [routerLink]="item.link" routerLinkActive="active">
                         <span (click)="clickAction(item, $event)">{{ item.display }}</span></a
                     >
-                    <ng-container
-                        *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}"
-                    ></ng-container>
+                    <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}" />
                 </li>
             }
         </ul>

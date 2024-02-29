@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <mat-divider></mat-divider>
+        <mat-divider />
 
         <div fxLayout="column" fxLayoutGap="15px">
             <h2 class="mat-h2">Adresse</h2>
@@ -30,7 +30,7 @@
                 commandes vous pourrez définir une adresse de facturation différente.
             </p>
 
-            <app-address [form]="form"></app-address>
+            <app-address [form]="form" />
 
             <mat-form-field>
                 <mat-label>Téléphone</mat-label>
@@ -41,7 +41,7 @@
 
     <div fxLayout="row" fxLayoutAlign="end">
         <button (click)="update(true)" [disabled]="!form.valid" color="primary" mat-flat-button>
-            <mat-icon naturalIcon="save"></mat-icon>
+            <mat-icon naturalIcon="save" />
             Enregistrer
         </button>
     </div>

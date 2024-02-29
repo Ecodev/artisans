@@ -8,13 +8,13 @@ import {merge, Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {APP_MENU_DATA, MenuComponent, MenuDropdownData} from '../components/menu/menu.component';
 
-export interface MenuItem {
+export type MenuItem = {
     display: string;
     children?: MenuItem[];
     link?: RouterLink['routerLink'];
     highlight?: boolean;
     open?: boolean;
-}
+};
 
 @Injectable({
     providedIn: 'root',

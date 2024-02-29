@@ -24,6 +24,7 @@
                 <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                         <td *matCellDef="let element" mat-cell>
@@ -34,6 +35,7 @@
                             />
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="facilitators">
                         <th *matHeaderCellDef mat-header-cell>Facilitateurs</th>
                         <td *matCellDef="let element" mat-cell>
@@ -45,22 +47,27 @@
                             }
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="startDate">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
                         <td *matCellDef="let element" mat-cell>{{ element.startDate | date: 'dd.MM.y' }}</td>
                     </ng-container>
+
                     <ng-container matColumnDef="endDate">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Date contrib.</th>
                         <td *matCellDef="let element" mat-cell>{{ element.endDate | date: 'dd.MM.y' }}</td>
                     </ng-container>
+
                     <ng-container matColumnDef="street">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Rue</th>
                         <td *matCellDef="let element" mat-cell>{{ element.street }}</td>
                     </ng-container>
+
                     <ng-container matColumnDef="locality">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Ville</th>
                         <td *matCellDef="let element" mat-cell>{{ element.locality }}</td>
                     </ng-container>
+
                     <ng-container matColumnDef="region">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Canton</th>
                         <td *matCellDef="let element" mat-cell>{{ element.region }}</td>

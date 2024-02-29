@@ -19,6 +19,7 @@
                 <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                         <td *matCellDef="let element" mat-cell>
@@ -30,12 +31,14 @@
                             />
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="category">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Rubrique</th>
                         <td *matCellDef="let element" mat-cell>
                             {{ element.category }}
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="file">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Télécharger</th>
                         <td *matCellDef="let element" mat-cell>

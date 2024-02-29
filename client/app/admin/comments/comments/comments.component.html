@@ -24,6 +24,7 @@
                 <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+
                     <ng-container matColumnDef="description">
                         <th *matHeaderCellDef mat-header-cell>Commentaire</th>
                         <td *matCellDef="let element" mat-cell>
@@ -36,6 +37,7 @@
                             </div>
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="event">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="event">Événement</th>
                         <td *matCellDef="let element" mat-cell>
@@ -50,6 +52,7 @@
                             }
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="news">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
                         <td *matCellDef="let element" mat-cell>

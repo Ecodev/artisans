@@ -24,10 +24,12 @@
                 <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+
                     <ng-container matColumnDef="date">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
                         <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
                     </ng-container>
+
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                         <td *matCellDef="let element" mat-cell>
@@ -40,6 +42,7 @@
                             </div>
                         </td>
                     </ng-container>
+
                     <ng-container matColumnDef="isActive">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
                         <td *matCellDef="let element" mat-cell>

@@ -4,7 +4,6 @@ import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({

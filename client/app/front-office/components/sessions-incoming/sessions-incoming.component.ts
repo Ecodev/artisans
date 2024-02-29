@@ -9,7 +9,6 @@ import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '..
 import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/emails.component';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 

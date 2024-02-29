@@ -14,7 +14,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
 import {PasswordComponent} from '../password/password.component';
 import {MatDividerModule} from '@angular/material/divider';
-
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';

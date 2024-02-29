@@ -14,7 +14,6 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
 import {Import, ImportVariables, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';

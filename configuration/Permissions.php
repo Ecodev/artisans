@@ -102,6 +102,10 @@ return [
         'permissions' => '0750',
     ],
     [
+        'path' => 'node_modules/@esbuild/linux-x64/bin/*',
+        'permissions' => '0750',
+    ],
+    [
         'path' => 'vendor/bin/*',
         'permissions' => '0750',
     ],

@@ -9,7 +9,7 @@ import {CommonModule} from '@angular/common';
 @Component({
     selector: 'app-price',
     templateUrl: './price.component.html',
-    styleUrls: ['./price.component.scss'],
+    styleUrl: './price.component.scss',
     standalone: true,
     imports: [CommonModule],
 })

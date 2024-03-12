@@ -15,7 +15,7 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
 @Component({
     selector: 'app-menu',
     templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.scss'],
+    styleUrl: './menu.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: false,
     animations: [

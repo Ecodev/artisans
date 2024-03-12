@@ -7,7 +7,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-rejoindre-association',
     templateUrl: './rejoindre-association.component.html',
-    styleUrls: ['./rejoindre-association.component.scss'],
+    styleUrl: './rejoindre-association.component.scss',
     standalone: true,
     imports: [FlexModule, AddToCartComponent],
 })

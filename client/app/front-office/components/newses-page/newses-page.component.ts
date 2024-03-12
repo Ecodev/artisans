@@ -10,7 +10,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-newses-page',
     templateUrl: './newses-page.component.html',
-    styleUrls: ['./newses-page.component.scss'],
+    styleUrl: './newses-page.component.scss',
     standalone: true,
     imports: [FlexModule, CommonModule, RouterLink, MatButtonModule, NaturalCapitalizePipe],
 })

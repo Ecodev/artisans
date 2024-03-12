@@ -5,7 +5,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-alimentation',
     templateUrl: './alimentation.component.html',
-    styleUrls: ['./alimentation.component.scss'],
+    styleUrl: './alimentation.component.scss',
     standalone: true,
     imports: [FlexModule, RouterLink],
 })

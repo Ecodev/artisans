@@ -33,7 +33,7 @@ import {MatRippleModule} from '@angular/material/core';
 @Component({
     selector: 'app-front-office',
     templateUrl: './front-office.component.html',
-    styleUrls: ['./front-office.component.scss'],
+    styleUrl: './front-office.component.scss',
     animations: [],
     standalone: true,
     imports: [

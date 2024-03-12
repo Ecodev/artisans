@@ -13,7 +13,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-account',
     templateUrl: './account.component.html',
-    styleUrls: ['./account.component.scss'],
+    styleUrl: './account.component.scss',
     standalone: true,
     imports: [
         FlexModule,

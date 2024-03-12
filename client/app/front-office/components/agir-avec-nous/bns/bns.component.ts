@@ -7,7 +7,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-bns',
     templateUrl: './bns.component.html',
-    styleUrls: ['./bns.component.scss'],
+    styleUrl: './bns.component.scss',
     standalone: true,
     imports: [FlexModule, MatButtonModule, ExtendedModule, RouterLink],
 })

@@ -23,7 +23,7 @@ type Block = {
 @Component({
     selector: 'app-home-block',
     templateUrl: './home-block.component.html',
-    styleUrls: ['./home-block.component.scss'],
+    styleUrl: './home-block.component.scss',
     standalone: true,
     imports: [
         MatButtonModule,

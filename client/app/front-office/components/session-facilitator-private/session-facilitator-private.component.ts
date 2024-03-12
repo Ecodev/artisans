@@ -14,7 +14,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-session-facilitator-private',
     templateUrl: './session-facilitator-private.component.html',
-    styleUrls: ['./session-facilitator-private.component.scss'],
+    styleUrl: './session-facilitator-private.component.scss',
     standalone: true,
     imports: [
         FlexModule,

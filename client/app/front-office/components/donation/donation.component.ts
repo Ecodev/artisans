@@ -14,7 +14,7 @@ export type DonationData = {
 @Component({
     selector: 'app-donation',
     templateUrl: './donation.component.html',
-    styleUrls: ['./donation.component.scss'],
+    styleUrl: './donation.component.scss',
     standalone: true,
     imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule],
 })

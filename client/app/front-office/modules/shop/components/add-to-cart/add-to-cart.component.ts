@@ -8,7 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 @Component({
     selector: 'app-add-to-cart',
     templateUrl: './add-to-cart.component.html',
-    styleUrls: ['./add-to-cart.component.scss'],
+    styleUrl: './add-to-cart.component.scss',
     standalone: true,
     imports: [MatButtonModule, RouterLink],
 })

@@ -11,7 +11,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-events-page',
     templateUrl: './events-page.component.html',
-    styleUrls: ['./events-page.component.scss'],
+    styleUrl: './events-page.component.scss',
     standalone: true,
     imports: [FlexModule, RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
 })

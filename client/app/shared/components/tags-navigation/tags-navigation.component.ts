@@ -7,7 +7,7 @@ import {RouterLink} from '@angular/router';
 @Component({
     selector: 'app-tags-navigation',
     templateUrl: './tags-navigation.component.html',
-    styleUrls: ['./tags-navigation.component.scss'],
+    styleUrl: './tags-navigation.component.scss',
     standalone: true,
     imports: [RouterLink],
 })

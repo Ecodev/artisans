@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 @Component({
     selector: 'app-session-side-column',
     templateUrl: './session-side-column.component.html',
-    styleUrls: ['./session-side-column.component.scss'],
+    styleUrl: './session-side-column.component.scss',
     standalone: true,
     imports: [MatButtonModule, RouterLink],
 })

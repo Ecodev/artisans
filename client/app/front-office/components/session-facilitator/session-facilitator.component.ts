@@ -9,7 +9,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-session-facilitator',
     templateUrl: './session-facilitator.component.html',
-    styleUrls: ['./session-facilitator.component.scss'],
+    styleUrl: './session-facilitator.component.scss',
     standalone: true,
     imports: [FlexModule, ExtendedModule, SessionSideColumnComponent],
 })

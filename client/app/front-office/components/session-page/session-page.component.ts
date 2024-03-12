@@ -24,7 +24,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-session-page',
     templateUrl: './session-page.component.html',
-    styleUrls: ['./session-page.component.scss'],
+    styleUrl: './session-page.component.scss',
     standalone: true,
     imports: [FlexModule, CommonModule, MatButtonModule, RouterLink, MatIconModule, NaturalIconDirective],
 })

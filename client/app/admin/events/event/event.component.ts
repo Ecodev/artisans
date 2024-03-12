@@ -23,7 +23,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
     selector: 'app-event',
     templateUrl: './event.component.html',
-    styleUrls: ['./event.component.scss'],
+    styleUrl: './event.component.scss',
     standalone: true,
     imports: [
         FormsModule,

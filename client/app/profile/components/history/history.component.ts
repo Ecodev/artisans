@@ -15,7 +15,7 @@ import {CommonModule} from '@angular/common';
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html',
-    styleUrls: ['./history.component.scss'],
+    styleUrl: './history.component.scss',
     standalone: true,
     imports: [
         CommonModule,

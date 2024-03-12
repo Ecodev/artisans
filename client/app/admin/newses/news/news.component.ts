@@ -26,7 +26,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
     selector: 'app-news',
     templateUrl: './news.component.html',
-    styleUrls: ['./news.component.scss'],
+    styleUrl: './news.component.scss',
     standalone: true,
     imports: [
         FormsModule,

@@ -22,7 +22,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-facilitator-documents',
     templateUrl: './facilitator-documents.component.html',
-    styleUrls: ['./facilitator-documents.component.scss'],
+    styleUrl: './facilitator-documents.component.scss',
     standalone: true,
     imports: [
         FlexModule,

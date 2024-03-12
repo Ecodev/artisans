@@ -12,7 +12,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-news-page',
     templateUrl: './news-page.component.html',
-    styleUrls: ['./news-page.component.scss'],
+    styleUrl: './news-page.component.scss',
     standalone: true,
     imports: [
         FlexModule,

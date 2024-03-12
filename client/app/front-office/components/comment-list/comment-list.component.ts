@@ -15,7 +15,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-comment-list',
     templateUrl: './comment-list.component.html',
-    styleUrls: ['./comment-list.component.scss'],
+    styleUrl: './comment-list.component.scss',
     standalone: true,
     imports: [
         FlexModule,

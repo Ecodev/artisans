@@ -22,7 +22,7 @@ import {CommonModule} from '@angular/common';
 @Component({
     selector: 'app-events',
     templateUrl: './events.component.html',
-    styleUrls: ['./events.component.scss'],
+    styleUrl: './events.component.scss',
     standalone: true,
     imports: [
         CommonModule,

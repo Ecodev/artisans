@@ -6,7 +6,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-offrir-la-revue',
     templateUrl: './offrir-la-revue.component.html',
-    styleUrls: ['./offrir-la-revue.component.scss'],
+    styleUrl: './offrir-la-revue.component.scss',
     standalone: true,
     imports: [FlexModule, MatButtonModule, RouterLink],
 })

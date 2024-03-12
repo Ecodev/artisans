@@ -14,7 +14,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-subscriptions',
     templateUrl: './subscriptions.component.html',
-    styleUrls: ['./subscriptions.component.scss'],
+    styleUrl: './subscriptions.component.scss',
     standalone: true,
     imports: [FlexModule, PriceComponent, MatButtonModule],
 })

@@ -17,7 +17,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
-    styleUrls: ['./order.component.scss'],
+    styleUrl: './order.component.scss',
     standalone: true,
     imports: [
         FlexModule,

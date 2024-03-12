@@ -12,7 +12,7 @@ export type Breadcrumb = {
 @Component({
     selector: 'app-breadcrumbs',
     templateUrl: './breadcrumbs.component.html',
-    styleUrls: ['./breadcrumbs.component.scss'],
+    styleUrl: './breadcrumbs.component.scss',
     standalone: true,
     imports: [MatButtonModule, RouterLink],
 })

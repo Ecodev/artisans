@@ -33,7 +33,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
     selector: 'app-user',
     templateUrl: './user.component.html',
-    styleUrls: ['./user.component.scss'],
+    styleUrl: './user.component.scss',
     standalone: true,
     imports: [
         FormsModule,

@@ -24,7 +24,7 @@ import {CommonModule} from '@angular/common';
 @Component({
     selector: 'app-create-order',
     templateUrl: './create-order.component.html',
-    styleUrls: ['./create-order.component.scss'],
+    styleUrl: './create-order.component.scss',
     standalone: true,
     imports: [
         CommonModule,

@@ -4,7 +4,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-partenariats',
     templateUrl: './partenariats.component.html',
-    styleUrls: ['./partenariats.component.scss'],
+    styleUrl: './partenariats.component.scss',
     standalone: true,
     imports: [FlexModule],
 })

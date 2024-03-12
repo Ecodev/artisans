@@ -5,7 +5,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-legal-mentions',
     templateUrl: './legal-mentions.component.html',
-    styleUrls: ['./legal-mentions.component.scss'],
+    styleUrl: './legal-mentions.component.scss',
     standalone: true,
     imports: [FlexModule, RouterLink],
 })

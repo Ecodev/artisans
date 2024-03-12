@@ -16,7 +16,7 @@ export type EmailsData = {
 @Component({
     selector: 'app-emails',
     templateUrl: './emails.component.html',
-    styleUrls: ['./emails.component.scss'],
+    styleUrl: './emails.component.scss',
     standalone: true,
     imports: [
         MatDialogModule,

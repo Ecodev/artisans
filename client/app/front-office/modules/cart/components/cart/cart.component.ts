@@ -17,7 +17,7 @@ import {CommonModule} from '@angular/common';
 @Component({
     selector: 'app-cart',
     templateUrl: './cart.component.html',
-    styleUrls: ['./cart.component.scss'],
+    styleUrl: './cart.component.scss',
     standalone: true,
     imports: [
         CommonModule,

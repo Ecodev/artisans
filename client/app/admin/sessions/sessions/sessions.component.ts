@@ -25,7 +25,7 @@ import {CommonModule} from '@angular/common';
 @Component({
     selector: 'app-sessions',
     templateUrl: './sessions.component.html',
-    styleUrls: ['./sessions.component.scss'],
+    styleUrl: './sessions.component.scss',
     standalone: true,
     imports: [
         CommonModule,

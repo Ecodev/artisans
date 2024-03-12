@@ -7,7 +7,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-faire-un-don',
     templateUrl: './faire-un-don.component.html',
-    styleUrls: ['./faire-un-don.component.scss'],
+    styleUrl: './faire-un-don.component.scss',
     standalone: true,
     imports: [FlexModule, RouterLink, MatButtonModule],
 })

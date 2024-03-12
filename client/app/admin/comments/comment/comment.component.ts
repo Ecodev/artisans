@@ -22,7 +22,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
     selector: 'app-comment',
     templateUrl: './comment.component.html',
-    styleUrls: ['./comment.component.scss'],
+    styleUrl: './comment.component.scss',
     standalone: true,
     imports: [
         FormsModule,

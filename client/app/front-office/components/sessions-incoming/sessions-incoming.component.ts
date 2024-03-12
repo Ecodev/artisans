@@ -15,7 +15,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-sessions-incoming',
     templateUrl: './sessions-incoming.component.html',
-    styleUrls: ['./sessions-incoming.component.scss'],
+    styleUrl: './sessions-incoming.component.scss',
     standalone: true,
     imports: [FlexModule, MatButtonModule, ExtendedModule, SessionSideColumnComponent],
 })

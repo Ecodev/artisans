@@ -33,7 +33,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-users',
     templateUrl: './users.component.html',
-    styleUrls: ['./users.component.scss'],
+    styleUrl: './users.component.scss',
     standalone: true,
     imports: [
         CommonModule,

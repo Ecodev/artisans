@@ -18,7 +18,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
-    styleUrls: ['./admin.component.scss'],
+    styleUrl: './admin.component.scss',
     standalone: true,
     imports: [
         FlexModule,

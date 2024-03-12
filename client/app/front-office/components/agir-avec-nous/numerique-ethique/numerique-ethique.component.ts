@@ -5,7 +5,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-numerique-ethique',
     templateUrl: './numerique-ethique.component.html',
-    styleUrls: ['./numerique-ethique.component.scss'],
+    styleUrl: './numerique-ethique.component.scss',
     standalone: true,
     imports: [FlexModule, RouterLink],
 })

@@ -26,7 +26,7 @@ export enum ProductsViewMode {
 @Component({
     selector: 'app-products-page',
     templateUrl: './products-page.component.html',
-    styleUrls: ['./products-page.component.scss'],
+    styleUrl: './products-page.component.scss',
     providers: [
         // Provide a NaturalPersistenceService instance only for this component,
         // but with a memoryStorage to avoid storing pagination in session and

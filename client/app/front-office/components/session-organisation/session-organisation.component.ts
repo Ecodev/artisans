@@ -6,7 +6,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-session-organisation',
     templateUrl: './session-organisation.component.html',
-    styleUrls: ['./session-organisation.component.scss'],
+    styleUrl: './session-organisation.component.scss',
     standalone: true,
     imports: [FlexModule, ExtendedModule, SessionSideColumnComponent],
 })

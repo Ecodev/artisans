@@ -21,7 +21,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @Component({
     selector: 'app-order-line',
     templateUrl: './order-line.component.html',
-    styleUrls: ['./order-line.component.scss'],
+    styleUrl: './order-line.component.scss',
     standalone: true,
     imports: [
         MatDialogModule,

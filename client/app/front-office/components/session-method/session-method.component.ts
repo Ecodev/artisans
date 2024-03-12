@@ -7,7 +7,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
 @Component({
     selector: 'app-session-method',
     templateUrl: './session-method.component.html',
-    styleUrls: ['./session-method.component.scss'],
+    styleUrl: './session-method.component.scss',
     standalone: true,
     imports: [FlexModule, RouterLink, ExtendedModule, SessionSideColumnComponent],
 })

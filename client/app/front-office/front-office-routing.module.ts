@@ -218,11 +218,6 @@ export const routes: Routes = [
                             } satisfies NaturalSeo,
                         },
                     },
-                    // {
-                    //     path: ':sessionId',
-                    //     component: SessionPageComponent,
-                    //     resolve: {session: resolveSession},
-                    // },
                 ],
             },
             {

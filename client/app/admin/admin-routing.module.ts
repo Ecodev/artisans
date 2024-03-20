@@ -36,7 +36,7 @@ const orderDetails = [
         path: ':orderId',
         component: NaturalDialogTriggerComponent,
         resolve: {
-            order: resolveOrder,
+            model: resolveOrder,
             viewer: resolveViewer,
         },
         data: {
@@ -57,7 +57,7 @@ const orderDetails = [
         path: 'order-line/:orderLineId',
         component: NaturalDialogTriggerComponent,
         resolve: {
-            orderLine: resolveOrderLine,
+            model: resolveOrderLine,
         },
         data: {
             trigger: {
@@ -103,7 +103,7 @@ export const routes: Routes = [
                         path: 'new',
                         component: ProductComponent,
                         resolve: {
-                            product: resolveProduct,
+                            model: resolveProduct,
                         },
                         data: {
                             seo: {
@@ -115,11 +115,11 @@ export const routes: Routes = [
                         path: ':productId', // last
                         component: ProductComponent,
                         resolve: {
-                            product: resolveProduct,
+                            model: resolveProduct,
                         },
                         data: {
                             seo: {
-                                resolveKey: 'product',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                     },
@@ -141,11 +141,11 @@ export const routes: Routes = [
                         path: ':userId', // last
                         component: UserComponent,
                         resolve: {
-                            user: resolveUser,
+                            model: resolveUser,
                         },
                         data: {
                             seo: {
-                                resolveKey: 'user',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                         children: orderDetails,
@@ -187,7 +187,7 @@ export const routes: Routes = [
                         path: 'new',
                         component: NewsComponent,
                         resolve: {
-                            news: resolveNews,
+                            model: resolveNews,
                         },
                         data: {
                             seo: {
@@ -199,11 +199,11 @@ export const routes: Routes = [
                         path: ':newsId', // last
                         component: NewsComponent,
                         resolve: {
-                            news: resolveNews,
+                            model: resolveNews,
                         },
                         data: {
                             seo: {
-                                resolveKey: 'news',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                     },
@@ -224,7 +224,7 @@ export const routes: Routes = [
                     {
                         path: 'new',
                         component: EventComponent,
-                        resolve: {event: resolveEvent},
+                        resolve: {model: resolveEvent},
                         data: {
                             seo: {
                                 title: 'Nouvel événement',
@@ -234,10 +234,10 @@ export const routes: Routes = [
                     {
                         path: ':eventId', // last
                         component: EventComponent,
-                        resolve: {event: resolveEvent},
+                        resolve: {model: resolveEvent},
                         data: {
                             seo: {
-                                resolveKey: 'event',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                     },
@@ -259,7 +259,7 @@ export const routes: Routes = [
                     {
                         path: 'new',
                         component: SessionComponent,
-                        resolve: {session: resolveSession},
+                        resolve: {model: resolveSession},
                         data: {
                             seo: {
                                 title: 'Nouvelle session carbone',
@@ -269,10 +269,10 @@ export const routes: Routes = [
                     {
                         path: ':sessionId', // last
                         component: SessionComponent,
-                        resolve: {session: resolveSession},
+                        resolve: {model: resolveSession},
                         data: {
                             seo: {
-                                resolveKey: 'session',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                     },
@@ -293,7 +293,7 @@ export const routes: Routes = [
                     {
                         path: 'new',
                         component: CommentComponent,
-                        resolve: {comment: resolveComment},
+                        resolve: {model: resolveComment},
                         data: {
                             seo: {
                                 title: 'Nouveau commentaire',
@@ -303,10 +303,10 @@ export const routes: Routes = [
                     {
                         path: ':commentId', // last
                         component: CommentComponent,
-                        resolve: {comment: resolveComment},
+                        resolve: {model: resolveComment},
                         data: {
                             seo: {
-                                resolveKey: 'comment',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                     },
@@ -328,7 +328,7 @@ export const routes: Routes = [
                         path: 'new',
                         component: FacilitatorDocumentComponent,
                         resolve: {
-                            facilitatorDocument: resolveFacilitatorDocument,
+                            model: resolveFacilitatorDocument,
                         },
                         data: {
                             seo: {
@@ -340,11 +340,11 @@ export const routes: Routes = [
                         path: ':facilitatorDocumentId', // last
                         component: FacilitatorDocumentComponent,
                         resolve: {
-                            facilitatorDocument: resolveFacilitatorDocument,
+                            model: resolveFacilitatorDocument,
                         },
                         data: {
                             seo: {
-                                resolveKey: 'facilitatorDocument',
+                                resolve: true,
                             } satisfies NaturalSeo,
                         },
                     },

@@ -110,10 +110,10 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
         super.ngOnInit();
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
 
-        this.route.data.subscribe(data => {
+        this.route.data.subscribe(() => {
             this.articlesMenuOpen = false;
 
-            const reviewProduct = data.product.model.review || data.product.model;
+            const reviewProduct = this.data.model.review || this.data.model;
 
             if (reviewProduct) {
                 const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();

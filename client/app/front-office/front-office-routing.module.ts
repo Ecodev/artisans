@@ -78,9 +78,9 @@ export const routes: Routes = [
     {
         path: 'agenda/:eventId',
         component: EventPageComponent,
-        resolve: {event: resolveEvent},
+        resolve: {model: resolveEvent},
         data: {
-            seo: {resolveKey: 'event'} satisfies NaturalSeo,
+            seo: {resolve: true} satisfies NaturalSeo,
         },
     },
     {
@@ -97,9 +97,9 @@ export const routes: Routes = [
     {
         path: 'actualite/:newsId',
         component: NewsPageComponent,
-        resolve: {news: resolveNews},
+        resolve: {model: resolveNews},
         data: {
-            seo: {resolveKey: 'news'} satisfies NaturalSeo,
+            seo: {resolve: true} satisfies NaturalSeo,
         },
     },
     {

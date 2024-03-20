@@ -31,7 +31,7 @@ export const routes: Routes = [
                         path: ':orderId',
                         component: NaturalDialogTriggerComponent,
                         resolve: {
-                            order: resolveOrder,
+                            model: resolveOrder,
                             viewer: resolveViewer,
                         },
                         data: {
@@ -50,7 +50,7 @@ export const routes: Routes = [
             {
                 path: 'donnees-personnelles',
                 component: AccountComponent,
-                resolve: {user: resolveViewer},
+                resolve: {viewer: resolveViewer},
                 data: {seo: {title: 'Données personnelles'} satisfies NaturalSeo},
             },
             {

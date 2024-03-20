@@ -5,7 +5,6 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ProductTag, ProductTags, ProductTagsVariables, ProductTagVariables} from '../../../shared/generated-types';
 import {productTagQuery, productTagsQuery} from './product-tag.queries';
-import {ProductTagByNameResolve} from './product-tag-by-name.resolver';
 
 @Injectable({
     providedIn: 'root',
@@ -26,9 +25,9 @@ export class ProductTagService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'productTag', productTagQuery, productTagsQuery, null, null, null);
     }
 
-    public resolveByName(name: string): Observable<ProductTagByNameResolve> {
+    public resolveByName(name: string): Observable<ProductTags['productTags']['items'][0]> {
         const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
         qvm.set('variables', {filter: {groups: [{conditions: [{name: {equal: {value: name}}}]}]}});
-        return this.getAll(qvm).pipe(map(res => ({model: res.items[0]})));
+        return this.getAll(qvm).pipe(map(res => res.items[0]));
     }
 }

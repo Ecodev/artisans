@@ -87,9 +87,9 @@ export class ProductService extends NaturalAbstractModelService<
         };
     }
 
-    public override getInput(object: Literal): ProductInput | ProductPartialInput {
+    public override getInput(object: Literal, forCreation: boolean): ProductInput | ProductPartialInput {
         object.description = object.description || '';
-        return super.getInput(object);
+        return super.getInput(object, forCreation);
     }
 
     public getMembershipProduct(): Observable<Product['product']> {

@@ -56,9 +56,9 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public override getInput(object: Literal): SessionInput | SessionPartialInput {
+    public override getInput(object: Literal, forCreation: boolean): SessionInput | SessionPartialInput {
         object.description = object.description || '';
-        return super.getInput(object);
+        return super.getInput(object, forCreation);
     }
 
     public override getDefaultForServer(): SessionInput {

@@ -89,7 +89,7 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService, Natu
                 const id = this.data.model.id;
                 return id
                     ? this.service
-                          .updatePartially({
+                          .updateNow({
                               id,
                               file: newFile,
                           })
@@ -113,7 +113,7 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService, Natu
                     };
                     object[key] = image;
 
-                    return this.service.updatePartially(object).pipe(map(() => image));
+                    return this.service.updateNow(object).pipe(map(() => image));
                 }),
             );
     }

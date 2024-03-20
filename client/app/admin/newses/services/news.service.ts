@@ -43,9 +43,9 @@ export class NewsService extends NaturalAbstractModelService<
         super(apollo, naturalDebounceService, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
     }
 
-    public override getInput(object: Literal): NewsInput | NewsPartialInput {
+    public override getInput(object: Literal, forCreation: boolean): NewsInput | NewsPartialInput {
         object.content = object.content || '';
-        return super.getInput(object);
+        return super.getInput(object, forCreation);
     }
 
     public override getDefaultForServer(): NewsInput {

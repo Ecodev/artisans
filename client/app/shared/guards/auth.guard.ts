@@ -13,7 +13,7 @@ export function canActivateAuth(route: ActivatedRouteSnapshot, state: RouterStat
     const userService = inject(UserService);
     return userService.resolveViewer().pipe(
         map(user => {
-            if (!user.model) {
+            if (!user) {
                 router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
                 return false;
             }

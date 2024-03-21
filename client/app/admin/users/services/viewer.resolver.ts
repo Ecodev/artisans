@@ -4,7 +4,7 @@ import {ErrorService} from '../../../shared/components/error/error.service';
 import {CurrentUserForProfile} from '../../../shared/generated-types';
 import {UserService} from './user.service';
 
-export function resolveViewer(): Observable<{model: CurrentUserForProfile['viewer']}> {
+export function resolveViewer(): Observable<CurrentUserForProfile['viewer']> {
     const userService = inject(UserService);
     const errorService = inject(ErrorService);
     const observable = userService.resolveViewer().pipe(last());
@@ -15,7 +15,7 @@ export function resolveViewer(): Observable<{model: CurrentUserForProfile['viewe
 export function resolveViewerForProfile(): ReturnType<UserService['resolve']> {
     const userService = inject(UserService);
     const errorService = inject(ErrorService);
-    const observable = userService.resolveViewer().pipe(switchMap(viewer => userService.resolve(viewer.model?.id)));
+    const observable = userService.resolveViewer().pipe(switchMap(viewer => userService.resolve(viewer?.id)));
 
     return errorService.redirectIfError(observable);
 }

@@ -35,6 +35,6 @@ export class SessionSideColumnComponent implements OnInit {
     }
 
     public canAccessFacilitatorPrivate(): boolean {
-        return UserService.canAccessFacilitatorPrivate(this.route.snapshot.data?.viewer?.model);
+        return UserService.canAccessFacilitatorPrivate(this.route.snapshot.data?.viewer);
     }
 }

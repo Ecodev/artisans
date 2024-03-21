@@ -95,7 +95,7 @@ export class CreateOrderComponent implements OnInit {
             }
         }
 
-        const viewer = this.route.snapshot.data.viewer.model;
+        const viewer = this.route.snapshot.data.viewer;
 
         this.shippingForm = new FormGroup({
             paymentMethod: new FormControl('', [Validators.required]),

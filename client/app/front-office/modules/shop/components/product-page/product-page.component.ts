@@ -108,7 +108,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
 
     public override ngOnInit(): void {
         super.ngOnInit();
-        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
+        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer : null;
 
         this.route.data.subscribe(() => {
             this.articlesMenuOpen = false;

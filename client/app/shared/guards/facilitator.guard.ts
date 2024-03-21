@@ -13,7 +13,7 @@ export function canActivateFacilitator(route: ActivatedRouteSnapshot, state: Rou
     const userService = inject(UserService);
     return userService.resolveViewer().pipe(
         map(user => {
-            const granted = UserService.canAccessFacilitatorPrivate(user.model);
+            const granted = UserService.canAccessFacilitatorPrivate(user);
 
             if (!granted) {
                 router.navigate(['/login'], {queryParams: {returnUrl: state.url}});

@@ -333,16 +333,17 @@ export class UserService
     /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
-    public resolveViewer(): Observable<{model: CurrentUserForProfile['viewer']}> {
+    public resolveViewer(): Observable<CurrentUserForProfile['viewer']> {
         return this.fetchViewer(1000).pipe(
             map(result => {
                 this.currencyService.updateLockedStatus(result);
-                return {model: result};
+
+                return result;
             }),
         );
     }
 
-    public resolveByToken(token: string): Observable<{model: UserByToken['userByToken']}> {
+    public resolveByToken(token: string): Observable<UserByToken['userByToken']> {
         return this.apollo
             .query<UserByToken, UserByTokenVariables>({
                 query: userByTokenQuery,
@@ -350,11 +351,7 @@ export class UserService
                     token: token,
                 },
             })
-            .pipe(
-                map(result => {
-                    return {model: result.data.userByToken};
-                }),
-            );
+            .pipe(map(result => result.data.userByToken));
     }
 
     public requestPasswordReset(email: string): Observable<RequestPasswordReset['requestPasswordReset']> {

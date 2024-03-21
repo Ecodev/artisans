@@ -54,7 +54,7 @@ export class OrderComponent {
         public readonly alertService: NaturalAlertService,
     ) {
         this.viewer = dialogData.activatedRoute.snapshot.data.viewer
-            ? dialogData.activatedRoute.snapshot.data.viewer.model
+            ? dialogData.activatedRoute.snapshot.data.viewer
             : null;
 
         // Initialize resolved item

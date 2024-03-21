@@ -6,8 +6,8 @@ import {
     NaturalSelectComponent,
     NaturalSelectEnumComponent,
     NaturalSeoResolveData,
+    ResolvedData,
 } from '@ecodev/natural';
-import {merge, omit} from 'lodash-es';
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {SubscriptionService} from '../../../front-office/modules/shop/components/subscriptions/subscription.service';
@@ -17,6 +17,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FlexModule} from '@ngbracket/ngx-layout/flex';
 import {MatDividerModule} from '@angular/material/divider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Observable, Subscription, takeUntil} from 'rxjs';
+import {orderLineResolvers} from '../services/order-line.resolver';
 
 @Component({
     selector: 'app-order-line',
@@ -40,8 +42,10 @@ export class OrderLineComponent
     extends NaturalAbstractDetail<OrderLineService, NaturalSeoResolveData>
     implements OnInit
 {
+    #modelSub: Subscription | null = null;
+
     public constructor(
-        private readonly orderLineService: OrderLineService,
+        orderLineService: OrderLineService,
         public readonly productService: ProductService,
         public readonly subscriptionService: SubscriptionService,
         @Inject(MAT_DIALOG_DATA) private readonly dialogData: NaturalDialogTriggerProvidedData<never>,
@@ -53,10 +57,24 @@ export class OrderLineComponent
      * Override parent to populate data from dialog data instead of standard route data
      */
     public override ngOnInit(): void {
-        this.dialogData.activatedRoute.data.subscribe(data => {
-            const key = 'orderLine';
-            this.data = merge({model: this.service.getDefaultForServer()}, data[key]);
-            this.data = merge(this.data, omit(data, [key]));
+        this.dialogData.activatedRoute.data.subscribe(incomingData => {
+            if (!(incomingData.model instanceof Observable)) {
+                throw new Error(
+                    'Resolved data must include the key `model`, and it must be an observable (usually one from Apollo).',
+                );
+            }
+
+            // Subscribe to model to know when Apollo cache is changed, so we can reflect it into `data.model`
+            this.#modelSub?.unsubscribe();
+            this.#modelSub = (incomingData.model as ResolvedData<typeof orderLineResolvers>['model'])
+                .pipe(takeUntil(this.ngUnsubscribe))
+                .subscribe(model => {
+                    this.data = {
+                        ...(incomingData as NaturalSeoResolveData),
+                        model: model,
+                    };
+                });
+
             this.initForm();
         });
     }

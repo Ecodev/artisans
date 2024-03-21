@@ -17,7 +17,7 @@ import {resolveNews} from './newses/services/news.resolver';
 import {OrderLineComponent} from './order/order-line/order-line.component';
 import {OrderComponent} from './order/order/order.component';
 import {OrdersComponent} from './order/orders/orders.component';
-import {resolveOrderLine} from './order/services/order-line.resolver';
+import {orderLineResolvers} from './order/services/order-line.resolver';
 import {resolveOrder} from './order/services/order.resolver';
 import {ProductComponent} from './products/product/product.component';
 import {ProductsComponent} from './products/products/products.component';
@@ -57,7 +57,7 @@ const orderDetails = [
         path: 'order-line/:orderLineId',
         component: NaturalDialogTriggerComponent,
         resolve: {
-            model: resolveOrderLine,
+            ...orderLineResolvers,
         },
         data: {
             trigger: {

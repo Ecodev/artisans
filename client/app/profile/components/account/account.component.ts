@@ -29,8 +29,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     ],
 })
 export class AccountComponent extends NaturalAbstractDetail<UserService> implements OnInit {
-    public UserService = UserService;
-
     /**
      * True while password request is pending
      */

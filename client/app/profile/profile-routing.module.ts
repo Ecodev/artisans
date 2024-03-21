@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
 import {OrderComponent} from '../admin/order/order/order.component';
 import {resolveOrder} from '../admin/order/services/order.resolver';
-import {resolveViewer} from '../admin/users/services/viewer.resolver';
+import {resolveViewer, resolveViewerForProfile} from '../admin/users/services/viewer.resolver';
 import {canActivateAuth} from '../shared/guards/auth.guard';
 import {AccountComponent} from './components/account/account.component';
 import {HistoryComponent} from './components/history/history.component';
@@ -50,7 +50,7 @@ export const routes: Routes = [
             {
                 path: 'donnees-personnelles',
                 component: AccountComponent,
-                resolve: {viewer: resolveViewer},
+                resolve: {model: resolveViewerForProfile},
                 data: {seo: {title: 'Données personnelles'} satisfies NaturalSeo},
             },
             {

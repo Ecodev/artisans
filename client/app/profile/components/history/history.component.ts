@@ -38,7 +38,7 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
         public readonly permissionsService: PermissionsService,
     ) {
         super(service);
-        this.selectedColumns = ['creationDate', 'status', 'balance'];
+        this.columnsForTable = ['creationDate', 'status', 'balance'];
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
     }

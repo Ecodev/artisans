@@ -1,6 +1,5 @@
-import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {Literal, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
+import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
@@ -33,12 +32,8 @@ export class OrderService extends NaturalAbstractModelService<
     never,
     never
 > {
-    public constructor(
-        apollo: Apollo,
-        naturalDebounceService: NaturalDebounceService,
-        private readonly orderLineService: OrderLineService,
-    ) {
-        super(apollo, naturalDebounceService, 'order', orderQuery, ordersQuery, createOrder, null, null);
+    public constructor(private readonly orderLineService: OrderLineService) {
+        super('order', orderQuery, ordersQuery, createOrder, null, null);
     }
 
     public override getInput(object: Literal, forCreation: boolean): OrderInput {

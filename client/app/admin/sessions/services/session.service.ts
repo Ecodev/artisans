@@ -1,7 +1,6 @@
-import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
-import {FormValidators, Literal, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
+import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateSession,
     CreateSessionVariables,
@@ -35,17 +34,8 @@ export class SessionService extends NaturalAbstractModelService<
     DeleteSessions,
     DeleteSessionsVariables
 > {
-    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
-        super(
-            apollo,
-            naturalDebounceService,
-            'session',
-            sessionQuery,
-            sessionsQuery,
-            createSession,
-            updateSession,
-            deleteSessions,
-        );
+    public constructor() {
+        super('session', sessionQuery, sessionsQuery, createSession, updateSession, deleteSessions);
     }
 
     public override getFormValidators(): FormValidators {

@@ -1,6 +1,5 @@
-import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {NaturalAbstractModelService, NaturalDebounceService, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {NaturalAbstractModelService, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {ProductTag, ProductTags, ProductTagsVariables, ProductTagVariables} from '../../../shared/generated-types';
@@ -21,8 +20,8 @@ export class ProductTagService extends NaturalAbstractModelService<
     never,
     never
 > {
-    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
-        super(apollo, naturalDebounceService, 'productTag', productTagQuery, productTagsQuery, null, null, null);
+    public constructor() {
+        super('productTag', productTagQuery, productTagsQuery, null, null, null);
     }
 
     public resolveByName(name: string): Observable<ProductTags['productTags']['items'][0]> {

@@ -25,12 +25,12 @@
     <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
         <div class="mat-h1">
             <div>Total :</div>
-            @if (data.model.balanceCHF > 0) {
+            @if (data.model.balanceCHF !== '0.00') {
                 <div style="text-align: right">
                     {{ data.model.balanceCHF | currency: 'CHF' }}
                 </div>
             }
-            @if (data.model.balanceEUR > 0) {
+            @if (data.model.balanceEUR !== '0.00') {
                 <div style="text-align: right">
                     {{ data.model.balanceEUR | currency: 'EUR' }}
                 </div>

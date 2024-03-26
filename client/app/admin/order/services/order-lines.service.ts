@@ -1,7 +1,6 @@
-import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
-import {FormValidators, integer, NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
+import {FormValidators, integer, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     OrderLine,
     OrderLineInput,
@@ -30,17 +29,8 @@ export class OrderLineService extends NaturalAbstractModelService<
     never,
     never
 > {
-    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
-        super(
-            apollo,
-            naturalDebounceService,
-            'orderLine',
-            orderLineQuery,
-            orderLinesQuery,
-            null,
-            updateOrderLine,
-            null,
-        );
+    public constructor() {
+        super('orderLine', orderLineQuery, orderLinesQuery, null, updateOrderLine, null);
     }
 
     public override getFormGroupValidators(): ValidatorFn[] {

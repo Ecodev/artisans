@@ -1,13 +1,11 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import {Component, OnInit} from '@angular/core';
+import {MatDialogModule} from '@angular/material/dialog';
 import {
     NaturalAbstractDetail,
-    NaturalDialogTriggerProvidedData,
     NaturalSelectComponent,
     NaturalSelectEnumComponent,
     NaturalSeoResolveData,
 } from '@ecodev/natural';
-import {merge, omit} from 'lodash-es';
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {SubscriptionService} from '../../../front-office/modules/shop/components/subscriptions/subscription.service';
@@ -41,23 +39,10 @@ export class OrderLineComponent
     implements OnInit
 {
     public constructor(
-        private readonly orderLineService: OrderLineService,
+        orderLineService: OrderLineService,
         public readonly productService: ProductService,
         public readonly subscriptionService: SubscriptionService,
-        @Inject(MAT_DIALOG_DATA) private readonly dialogData: NaturalDialogTriggerProvidedData<never>,
     ) {
         super('orderLine', orderLineService);
-    }
-
-    /**
-     * Override parent to populate data from dialog data instead of standard route data
-     */
-    public override ngOnInit(): void {
-        this.dialogData.activatedRoute.data.subscribe(data => {
-            const key = 'orderLine';
-            this.data = merge({model: this.service.getDefaultForServer()}, data[key]);
-            this.data = merge(this.data, omit(data, [key]));
-            this.initForm();
-        });
     }
 }

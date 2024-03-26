@@ -16,7 +16,7 @@ export function canActivateAdministration(
     const userService = inject(UserService);
     return userService.resolveViewer().pipe(
         map(user => {
-            const granted = UserService.canAccessAdmin(user.model);
+            const granted = UserService.canAccessAdmin(user);
 
             if (!granted) {
                 router.navigate(['/login'], {queryParams: {returnUrl: state.url}});

@@ -111,10 +111,10 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
             this.showTagsNavigation = !!data.showTagsNavigation;
             this.viewMode = data.viewMode || ProductsViewMode.grid;
 
-            if (data.productTag?.model) {
+            if (data.productTag) {
                 this.pagination({offset: null, pageIndex: 0, pageSize: 10});
                 this.variablesManager.set('category', {
-                    filter: {groups: [{conditions: [{productTags: {have: {values: [data.productTag.model.id]}}}]}]},
+                    filter: {groups: [{conditions: [{productTags: {have: {values: [data.productTag.id]}}}]}]},
                 });
             }
         });

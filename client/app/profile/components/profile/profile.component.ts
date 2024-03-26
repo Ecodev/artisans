@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
     ) {}
 
     public ngOnInit(): void {
-        this.viewer = this.route.snapshot.data.viewer.model;
+        this.viewer = this.route.snapshot.data.viewer;
         this.productService.getMembershipProduct().subscribe(product => (this.membershipProduct = product));
     }
 

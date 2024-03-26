@@ -54,9 +54,11 @@ export const routes: Routes = [
     {
         path: 'articles/:productTagName',
         component: ProductsPageComponent,
-        resolve: {productTag: resolveProductTagByName},
+        resolve: {
+            productTag: resolveProductTagByName,
+        },
         data: {
-            seo: {resolveKey: 'productTag'} satisfies NaturalSeo,
+            seo: {resolve: true} satisfies NaturalSeo,
             breadcrumbs: [
                 {link: '/larevuedurable', label: 'La Revue Durable'},
                 {link: '/larevuedurable/articles', label: 'Articles'},
@@ -112,10 +114,10 @@ export const routes: Routes = [
     {
         path: 'article/:productId',
         component: ProductPageComponent,
-        resolve: {product: resolveProduct},
+        resolve: {model: resolveProduct},
         data: {
             seo: {
-                resolveKey: 'product',
+                resolve: true,
             } satisfies NaturalSeo,
             showTagsOnProducts: true,
             showTagsNavigation: false,
@@ -128,10 +130,10 @@ export const routes: Routes = [
     {
         path: 'numero/:productId',
         component: ProductPageComponent,
-        resolve: {product: resolveProduct},
+        resolve: {model: resolveProduct},
         data: {
             seo: {
-                resolveKey: 'product',
+                resolve: true,
             } satisfies NaturalSeo,
             showTagsOnProducts: true,
             showTagsNavigation: false,

@@ -64,7 +64,7 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
                 const id = this.data.model.id;
                 return id
                     ? this.service
-                          .updatePartially({
+                          .updateNow({
                               id,
                               file: newFile,
                           })

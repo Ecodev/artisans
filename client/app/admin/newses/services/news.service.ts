@@ -1,12 +1,5 @@
-import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
-import {
-    formatIsoDateTime,
-    FormValidators,
-    Literal,
-    NaturalAbstractModelService,
-    NaturalDebounceService,
-} from '@ecodev/natural';
+import {formatIsoDateTime, FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateNews,
     CreateNewsVariables,
@@ -39,13 +32,13 @@ export class NewsService extends NaturalAbstractModelService<
     DeleteNewses,
     DeleteNewsesVariables
 > {
-    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
-        super(apollo, naturalDebounceService, 'news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
+    public constructor() {
+        super('news', newsQuery, newsesQuery, createNews, updateNews, deleteNewses);
     }
 
-    public override getInput(object: Literal): NewsInput | NewsPartialInput {
+    public override getInput(object: Literal, forCreation: boolean): NewsInput | NewsPartialInput {
         object.content = object.content || '';
-        return super.getInput(object);
+        return super.getInput(object, forCreation);
     }
 
     public override getDefaultForServer(): NewsInput {

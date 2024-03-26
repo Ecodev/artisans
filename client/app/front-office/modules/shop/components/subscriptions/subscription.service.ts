@@ -1,13 +1,6 @@
-import {Apollo} from 'apollo-angular';
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
-import {
-    FormAsyncValidators,
-    FormValidators,
-    NaturalAbstractModelService,
-    NaturalDebounceService,
-    unique,
-} from '@ecodev/natural';
+import {FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique} from '@ecodev/natural';
 import {
     CreateSubscription,
     CreateSubscriptionVariables,
@@ -45,10 +38,8 @@ export class SubscriptionService extends NaturalAbstractModelService<
     DeleteSubscriptions,
     DeleteSubscriptionsVariables
 > {
-    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+    public constructor() {
         super(
-            apollo,
-            naturalDebounceService,
             'subscription',
             subscriptionQuery,
             subscriptionsQuery,

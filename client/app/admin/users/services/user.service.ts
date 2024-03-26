@@ -1,4 +1,4 @@
-import {Apollo, gql} from 'apollo-angular';
+import {gql} from 'apollo-angular';
 import {Inject, Injectable, OnDestroy} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -8,7 +8,6 @@ import {
     FormValidators,
     LOCAL_STORAGE,
     NaturalAbstractModelService,
-    NaturalDebounceService,
     NaturalStorage,
     unique,
 } from '@ecodev/natural';
@@ -94,8 +93,6 @@ export class UserService
     private readonly onDestroy = new Subject<void>();
 
     public constructor(
-        apollo: Apollo,
-        naturalDebounceService: NaturalDebounceService,
         protected readonly router: Router,
         private readonly permissionsService: PermissionsService,
         private readonly currencyService: CurrencyService,
@@ -103,7 +100,7 @@ export class UserService
         @Inject(DOCUMENT) private readonly document: Document,
         @Inject(LOCAL_STORAGE) private readonly storage: NaturalStorage,
     ) {
-        super(apollo, naturalDebounceService, 'user', userQuery, usersQuery, createUser, updateUser, deleteUsers);
+        super('user', userQuery, usersQuery, createUser, updateUser, deleteUsers);
         this.keepViewerSyncedAcrossBrowserTabs();
     }
 
@@ -333,16 +330,17 @@ export class UserService
     /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
-    public resolveViewer(): Observable<{model: CurrentUserForProfile['viewer']}> {
+    public resolveViewer(): Observable<CurrentUserForProfile['viewer']> {
         return this.fetchViewer(1000).pipe(
             map(result => {
                 this.currencyService.updateLockedStatus(result);
-                return {model: result};
+
+                return result;
             }),
         );
     }
 
-    public resolveByToken(token: string): Observable<{model: UserByToken['userByToken']}> {
+    public resolveByToken(token: string): Observable<UserByToken['userByToken']> {
         return this.apollo
             .query<UserByToken, UserByTokenVariables>({
                 query: userByTokenQuery,
@@ -350,11 +348,7 @@ export class UserService
                     token: token,
                 },
             })
-            .pipe(
-                map(result => {
-                    return {model: result.data.userByToken};
-                }),
-            );
+            .pipe(map(result => result.data.userByToken));
     }
 
     public requestPasswordReset(email: string): Observable<RequestPasswordReset['requestPasswordReset']> {

@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {NaturalAbstractModelService, NaturalDebounceService} from '@ecodev/natural';
-import {Apollo} from 'apollo-angular';
+import {NaturalAbstractModelService} from '@ecodev/natural';
 import {
     CreateFacilitatorDocument,
     CreateFacilitatorDocumentVariables,
@@ -37,10 +36,8 @@ export class FacilitatorDocumentsService extends NaturalAbstractModelService<
     DeleteFacilitatorDocuments,
     DeleteFacilitatorDocumentsVariables
 > {
-    public constructor(apollo: Apollo, naturalDebounceService: NaturalDebounceService) {
+    public constructor() {
         super(
-            apollo,
-            naturalDebounceService,
             'facilitatorDocument',
             facilitatorDocumentQuery,
             facilitatorDocumentsQuery,

@@ -81,7 +81,7 @@ export class SessionsIncomingComponent implements OnInit {
             });
         };
 
-        const viewer = this.route.snapshot.data.viewer?.model;
+        const viewer = this.route.snapshot.data.viewer;
 
         if (viewer) {
             // If logged in, confirm with user e-mail

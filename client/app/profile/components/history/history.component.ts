@@ -38,14 +38,14 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
         public readonly permissionsService: PermissionsService,
     ) {
         super(service);
-        this.selectedColumns = ['creationDate', 'status', 'balance'];
+        this.columnsForTable = ['creationDate', 'status', 'balance'];
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
     }
 
     public override ngOnInit(): void {
         this.variablesManager.set('viewer', {
-            filter: {groups: [{conditions: [{owner: {in: {values: [this.route.snapshot.data.viewer.model.id]}}}]}]},
+            filter: {groups: [{conditions: [{owner: {in: {values: [this.route.snapshot.data.viewer.id]}}}]}]},
         });
 
         super.ngOnInit();

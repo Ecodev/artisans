@@ -7,10 +7,14 @@ import {OrderLineService} from './order-lines.service';
 /**
  * Resolve orderLine data for router
  */
-export function resolveOrderLine(route: ActivatedRouteSnapshot): ReturnType<OrderLineService['resolve']> {
+function resolveOrderLine(route: ActivatedRouteSnapshot): ReturnType<OrderLineService['resolve']> {
     const orderLineService = inject(OrderLineService);
     const errorService = inject(ErrorService);
     const observable = orderLineService.resolve(route.params.orderLineId).pipe(last());
 
     return errorService.redirectIfError(observable);
 }
+
+export const orderLineResolvers = {
+    model: resolveOrderLine,
+} as const;

@@ -41,7 +41,7 @@
             @if (viewer?.role === UserRole.administrator) {
                 <ul>
                     <li>
-                        <a routerLink="/admin" matRipple>Admnistration</a>
+                        <a routerLink="/admin" matRipple>Administration</a>
                     </li>
                 </ul>
             }
@@ -77,7 +77,7 @@
                         <button (click)="currencyService.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
                     </mat-menu>
                     @if (viewer?.role === UserRole.administrator) {
-                        <a routerLink="/admin" mat-button>Admnistration</a>
+                        <a routerLink="/admin" mat-button>Administration</a>
                     }
                     @for (item of topNavigation; track item) {
                         <a [routerLink]="item.link" mat-button> {{ item.display }}</a>

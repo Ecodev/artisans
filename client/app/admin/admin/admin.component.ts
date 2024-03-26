@@ -44,6 +44,6 @@ export class AdminComponent extends NaturalAbstractController implements OnInit 
     }
 
     public ngOnInit(): void {
-        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer.model : null;
+        this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer : null;
     }
 }

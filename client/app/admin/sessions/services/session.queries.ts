@@ -76,6 +76,7 @@ export const updateSession = gql`
     mutation UpdateSession($id: SessionID!, $input: SessionPartialInput!) {
         updateSession(id: $id, input: $input) {
             id
+            name
             updateDate
             updater {
                 ...UserMeta

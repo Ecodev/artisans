@@ -59,6 +59,8 @@ export const createEvent = gql`
 export const updateEvent = gql`
     mutation UpdateEvent($id: EventID!, $input: EventPartialInput!) {
         updateEvent(id: $id, input: $input) {
+            id
+            name
             updateDate
             updater {
                 ...UserMeta

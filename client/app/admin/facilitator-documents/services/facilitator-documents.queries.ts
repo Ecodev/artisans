@@ -69,6 +69,7 @@ export const updateFacilitatorDocument = gql`
     mutation UpdateFacilitatorDocument($id: FacilitatorDocumentID!, $input: FacilitatorDocumentPartialInput!) {
         updateFacilitatorDocument(id: $id, input: $input) {
             id
+            name
             updateDate
             updater {
                 ...UserMeta

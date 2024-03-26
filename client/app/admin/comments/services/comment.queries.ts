@@ -73,6 +73,7 @@ export const createComment = gql`
 export const updateComment = gql`
     mutation UpdateComment($id: CommentID!, $input: CommentPartialInput!) {
         updateComment(id: $id, input: $input) {
+            id
             updateDate
             updater {
                 ...UserMeta

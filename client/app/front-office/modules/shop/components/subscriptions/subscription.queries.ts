@@ -70,6 +70,7 @@ export const updateSubscription = gql`
     mutation UpdateSubscription($id: SubscriptionID!, $input: SubscriptionPartialInput!) {
         updateSubscription(id: $id, input: $input) {
             id
+            name
             updateDate
             updater {
                 ...UserMeta

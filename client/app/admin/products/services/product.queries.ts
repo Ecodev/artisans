@@ -95,6 +95,7 @@ export const updateProduct = gql`
     mutation UpdateProduct($id: ProductID!, $input: ProductPartialInput!) {
         updateProduct(id: $id, input: $input) {
             id
+            name
             updateDate
             updater {
                 ...UserMeta

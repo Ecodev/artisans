@@ -60,6 +60,8 @@ export const createNews = gql`
 export const updateNews = gql`
     mutation UpdateNews($id: NewsID!, $input: NewsPartialInput!) {
         updateNews(id: $id, input: $input) {
+            id
+            name
             updateDate
             updater {
                 ...UserMeta

@@ -49,7 +49,7 @@
                                         </mat-error>
                                     }
                                     @if (form.get('code')?.hasError('duplicateValue')) {
-                                        <mat-error> Ce code est déjà attribué à un produit </mat-error>
+                                        <mat-error> Ce code est déjà attribué à un produit</mat-error>
                                     }
                                     @if (form.get('code')?.hasError('required')) {
                                         <mat-error>Requis</mat-error>
@@ -166,7 +166,7 @@
                                 <mat-error>Requis</mat-error>
                             }
                             @if (form.get('pricePerUnitCHF')?.hasError('money')) {
-                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales </mat-error>
+                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
                             }
                         </mat-form-field>
 
@@ -184,7 +184,7 @@
                                 <mat-error>Requis</mat-error>
                             }
                             @if (form.get('pricePerUnitEUR')?.hasError('money')) {
-                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales </mat-error>
+                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
                             }
                         </mat-form-field>
 
@@ -295,6 +295,9 @@
             <mat-tab id="product" label="Produits similaires">
                 <div class="padding-top">
                     <natural-relations
+                        [autocompleteSelectorFilter]="{
+                            groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}]}]
+                        }"
                         [filter]="{
                             groups: [{conditions: [{inversedRelatedProducts: {have: {values: [data.model.id]}}}]}]
                         }"

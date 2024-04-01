@@ -16,7 +16,7 @@ class Comment extends AbstractModel
 {
     use HasRichTextDescription;
 
-    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'comments')]
     private ?Event $event = null;
 
@@ -44,7 +44,7 @@ class Comment extends AbstractModel
         return $this->event;
     }
 
-    #[ORM\JoinColumn(nullable: true, onDelete: 'CASCADE')]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     #[ORM\ManyToOne(targetEntity: News::class, inversedBy: 'comments')]
     private ?News $news = null;
 

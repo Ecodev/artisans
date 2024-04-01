@@ -39,11 +39,11 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
     #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'orderLines')]
     private ?Order $order = null;
 
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[ORM\ManyToOne(targetEntity: Product::class)]
     private ?Product $product = null;
 
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[ORM\ManyToOne(targetEntity: Subscription::class)]
     private ?Subscription $subscription = null;
 

@@ -12,7 +12,7 @@ use InvalidArgumentException;
 
 trait HasSubscriptionLastReview
 {
-    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[ORM\ManyToOne(targetEntity: Product::class)]
     private ?Product $subscriptionLastReview = null;
 

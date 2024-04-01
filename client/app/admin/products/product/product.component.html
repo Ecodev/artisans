@@ -295,7 +295,9 @@
             <mat-tab id="product" label="Produits similaires">
                 <div class="padding-top">
                     <natural-relations
-                        [filter]="{groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}"
+                        [filter]="{
+                            groups: [{conditions: [{inversedRelatedProducts: {have: {values: [data.model.id]}}}]}]
+                        }"
                         [main]="data.model"
                         [service]="productService"
                         otherName="relatedProduct"

@@ -46,8 +46,14 @@ class Product extends AbstractProduct
     /**
      * @var Collection<Product>
      */
-    #[ORM\ManyToMany(targetEntity: self::class)]
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'inversedRelatedProducts')]
     private Collection $relatedProducts;
+
+    /**
+     * @var Collection<Product>
+     */
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'relatedProducts')]
+    private Collection $inversedRelatedProducts;
 
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $isHighlighted = false;
@@ -63,6 +69,7 @@ class Product extends AbstractProduct
         parent::__construct($name);
         $this->productTags = new ArrayCollection();
         $this->relatedProducts = new ArrayCollection();
+        $this->inversedRelatedProducts = new ArrayCollection();
     }
 
     public function getProductTags(): Collection

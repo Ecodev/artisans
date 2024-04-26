@@ -17,7 +17,6 @@ import {
     wrapLike,
 } from '@ecodev/natural';
 import {ProductTagService} from '../../admin/product-tags/services/product-tag.service';
-import {ProductService} from '../../admin/products/services/product.service';
 import {UserService} from '../../admin/users/services/user.service';
 import {
     ProductFilterGroupConditionFile,
@@ -269,7 +268,6 @@ export class NaturalSearchFacetsService {
 
     public constructor(
         private readonly enumService: NaturalEnumService,
-        private readonly productService: ProductService,
         private readonly productTagService: ProductTagService,
         private readonly userService: UserService,
     ) {}

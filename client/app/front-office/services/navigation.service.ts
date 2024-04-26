@@ -2,7 +2,7 @@ import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {DOCUMENT} from '@angular/common';
 import {ComponentRef, ElementRef, Inject, Injectable, Injector, StaticProvider} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, RouterLink} from '@angular/router';
+import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'lodash-es';
 import {merge, Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
@@ -24,7 +24,6 @@ export class NavigationService {
         private readonly overlay: Overlay,
         private readonly injector: Injector,
         private readonly router: Router,
-        private readonly route: ActivatedRoute,
         @Inject(DOCUMENT) private readonly document: Document,
     ) {}
 

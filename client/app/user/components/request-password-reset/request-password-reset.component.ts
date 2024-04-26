@@ -1,8 +1,7 @@
-import {Apollo} from 'apollo-angular';
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ifValid, NaturalAlertService, validateAllFormControls, NaturalIconDirective} from '@ecodev/natural';
+import {ifValid, NaturalAlertService, NaturalIconDirective, validateAllFormControls} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -31,7 +30,6 @@ export class RequestPasswordResetComponent {
     public sending = false;
 
     public constructor(
-        private readonly apollo: Apollo,
         private readonly alertService: NaturalAlertService,
         private readonly router: Router,
         private readonly userService: UserService,

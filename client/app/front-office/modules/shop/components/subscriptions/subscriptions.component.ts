@@ -1,7 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NaturalQueryVariablesManager, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {keyBy} from 'lodash-es';
 import {ProductType, Subscriptions} from '../../../../../shared/generated-types';
 import {EmailsComponent} from '../emails/emails.component';
@@ -26,7 +26,6 @@ export class SubscriptionsComponent implements OnInit {
     public constructor(
         private readonly subscriptionService: SubscriptionService,
         private readonly router: Router,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
         public readonly dialog: MatDialog,
         private readonly route: ActivatedRoute,
         private readonly globalCartService: GlobalCartService,

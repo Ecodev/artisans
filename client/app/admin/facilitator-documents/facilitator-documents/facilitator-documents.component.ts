@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractList,
+    NaturalFixedButtonComponent,
+    NaturalIconDirective,
     NaturalSearchComponent,
     NaturalTableButtonComponent,
-    NaturalIconDirective,
-    NaturalFixedButtonComponent,
 } from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -44,7 +44,6 @@ export class FacilitatorDocumentsComponent extends NaturalAbstractList<Facilitat
     public override columnsForTable = ['name', 'category', 'file'];
 
     public constructor(
-        route: ActivatedRoute,
         facilitatorDocumentService: FacilitatorDocumentsService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

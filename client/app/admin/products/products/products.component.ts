@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {
     AvailableColumn,
     NaturalAbstractList,
     NaturalColumnsPickerComponent,
-    NaturalSearchComponent,
-    NaturalFileComponent,
-    NaturalTableButtonComponent,
-    NaturalIconDirective,
-    NaturalFixedButtonComponent,
     NaturalEnumPipe,
+    NaturalFileComponent,
+    NaturalFixedButtonComponent,
+    NaturalIconDirective,
+    NaturalSearchComponent,
+    NaturalTableButtonComponent,
 } from '@ecodev/natural';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -61,7 +61,6 @@ export class ProductsComponent extends NaturalAbstractList<ProductService> imple
     ];
 
     public constructor(
-        route: ActivatedRoute,
         productService: ProductService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,

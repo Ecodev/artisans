@@ -1,14 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {
     NaturalAbstractList,
-    NaturalFileService,
-    NaturalSearchComponent,
-    NaturalSrcDensityDirective,
-    NaturalIconDirective,
     NaturalCapitalizePipe,
     NaturalEnumPipe,
+    NaturalFileService,
+    NaturalIconDirective,
+    NaturalSearchComponent,
+    NaturalSrcDensityDirective,
 } from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PurchaseService} from './purchase.service';
 import {ProductType, Purchases} from '../../../shared/generated-types';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -48,7 +47,6 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
 
     public constructor(
         service: PurchaseService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
         private readonly naturalFileService: NaturalFileService,
     ) {
         super(service);

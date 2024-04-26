@@ -1,5 +1,5 @@
-import {CommonModule, DOCUMENT} from '@angular/common';
-import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
@@ -263,7 +263,6 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         private readonly navigationService: NavigationService,
         public readonly userService: UserService,
         public readonly currencyService: CurrencyService,
-        @Inject(DOCUMENT) private readonly document: Document,
         private readonly fb: NonNullableFormBuilder,
         private readonly alertService: NaturalAlertService,
     ) {

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
@@ -40,7 +39,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 })
 export class CommentComponent extends NaturalAbstractDetail<CommentService, NaturalSeoResolveData> implements OnInit {
     public constructor(
-        route: ActivatedRoute,
         commentService: CommentService,
         public readonly newsService: NewsService,
         public readonly eventService: EventService,

@@ -1,27 +1,27 @@
 import {Apollo} from 'apollo-angular';
 import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {RouterLink} from '@angular/router';
 import {
     AvailableColumn,
     Button,
     copyToClipboard,
     NaturalAbstractList,
-    NaturalQueryVariablesManager,
-    NaturalSearchSelections,
-    NaturalColumnsPickerComponent,
-    NaturalSearchComponent,
     NaturalAvatarComponent,
-    NaturalTableButtonComponent,
-    NaturalFixedButtonComponent,
+    NaturalColumnsPickerComponent,
     NaturalEnumPipe,
+    NaturalFixedButtonComponent,
+    NaturalQueryVariablesManager,
+    NaturalSearchComponent,
+    NaturalSearchSelections,
     NaturalSwissDatePipe,
+    NaturalTableButtonComponent,
 } from '@ecodev/natural';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';
-import {DOCUMENT, CommonModule} from '@angular/common';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -88,8 +88,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
     public usersEmailAndName: string | null = null;
 
     public constructor(
-        route: ActivatedRoute,
-        private readonly userService: UserService,
+        userService: UserService,
         naturalSearchFacetsService: NaturalSearchFacetsService,
         public readonly permissionsService: PermissionsService,
         private readonly apollo: Apollo,

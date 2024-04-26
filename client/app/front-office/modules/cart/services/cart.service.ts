@@ -1,8 +1,8 @@
-import {Inject, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {Literal, NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {Literal} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {OrderService} from '../../../../admin/order/services/order.service';
 import {CreateOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType} from '../../../../shared/generated-types';
@@ -24,7 +24,6 @@ export class CartService {
         private readonly router: Router,
         private readonly globalCartService: GlobalCartService,
         private readonly cartCollectionService: CartCollectionService,
-        @Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage,
     ) {
         // On currency change, update carts totals
         this.currencyService.current.subscribe(currency => (this.cartCollectionService.currency = currency));

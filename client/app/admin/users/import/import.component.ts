@@ -1,6 +1,6 @@
 import {Apollo, gql} from 'apollo-angular';
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     FileSelection,
     NaturalAlertService,
@@ -54,7 +54,6 @@ export class ImportComponent implements OnInit {
 
     public constructor(
         private readonly route: ActivatedRoute,
-        private readonly router: Router,
         public readonly permissionsService: PermissionsService,
         private readonly apollo: Apollo,
         private readonly alertService: NaturalAlertService,

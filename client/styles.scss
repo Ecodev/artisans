@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'app/shared/components/boot-loader/boot-loader.external';
 @use 'styles/responsive';
+@use '@ecodev/natural-layout' as nat;
 
 body {
     margin: 0;
@@ -205,4 +206,33 @@ input[type='number'] {
 // so we try to preserve that formatting, while still wrapping if necessary
 .mat-mdc-snack-bar-label {
     white-space: pre-wrap;
+}
+
+@include nat.media(md) {
+    .app-md-expand-70 {
+        flex: 1 1 1e-9px;
+        max-width: 70%;
+    }
+    .app-md-gap-60 {
+        gap: 60px;
+    }
+    .app-md-gap-50 {
+        gap: 50px;
+    }
+}
+
+.app-expand-30 {
+    flex: 30;
+}
+
+.app-gap-40 {
+    gap: 40px;
+}
+
+.app-gap-50 {
+    gap: 50px;
+}
+
+.app-gap-60 {
+    gap: 60px;
 }

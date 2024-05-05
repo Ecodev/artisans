@@ -6,14 +6,13 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-events-page',
     templateUrl: './events-page.component.html',
     styleUrl: './events-page.component.scss',
     standalone: true,
-    imports: [FlexModule, RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
+    imports: [RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
 })
 export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> implements OnInit {
     protected override defaultPagination: Required<PaginationInput> = {

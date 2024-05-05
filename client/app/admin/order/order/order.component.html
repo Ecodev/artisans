@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="start center">
-    <h2 mat-dialog-title fxFlex>Commande du {{ data.model.creationDate | swissDate }}</h2>
+<div class="nat-horizontal nat-left nat-center">
+    <h2 mat-dialog-title class="nat-expand">Commande du {{ data.model.creationDate | swissDate }}</h2>
 
     @if (viewer?.role === UserRole.administrator) {
         <natural-select-enum
@@ -10,31 +10,32 @@
         />
     }
 </div>
+<mat-dialog-content>
+    <div class="nat-vertical nat-gap-30">
+        <app-order-lines
+            [selectedColumns]="['name', 'productType', 'quantity', 'balance']"
+            [forcedVariables]="forcedVariables"
+            [hideHeader]="true"
+            [hidePaginator]="true"
+            [pageSizeOptions]="[999]"
+            [paginatorPageSize]="999"
+            [showTotals]="false"
+        />
 
-<mat-dialog-content fxLayout="column" fxLayoutGap="30px">
-    <app-order-lines
-        [selectedColumns]="['name', 'productType', 'quantity', 'balance']"
-        [forcedVariables]="forcedVariables"
-        [hideHeader]="true"
-        [hidePaginator]="true"
-        [pageSizeOptions]="[999]"
-        [paginatorPageSize]="999"
-        [showTotals]="false"
-    />
-
-    <div class="natural-table" fxLayout="column" fxLayoutAlign="start end">
-        <div class="mat-h1">
-            <div>Total :</div>
-            @if (data.model.balanceCHF !== '0.00') {
-                <div style="text-align: right">
-                    {{ data.model.balanceCHF | currency: 'CHF' }}
-                </div>
-            }
-            @if (data.model.balanceEUR !== '0.00') {
-                <div style="text-align: right">
-                    {{ data.model.balanceEUR | currency: 'EUR' }}
-                </div>
-            }
+        <div class="natural-table nat-vertical nat-right">
+            <div class="mat-h1">
+                <div>Total :</div>
+                @if (data.model.balanceCHF !== '0.00') {
+                    <div style="text-align: right">
+                        {{ data.model.balanceCHF | currency: 'CHF' }}
+                    </div>
+                }
+                @if (data.model.balanceEUR !== '0.00') {
+                    <div style="text-align: right">
+                        {{ data.model.balanceEUR | currency: 'EUR' }}
+                    </div>
+                }
+            </div>
         </div>
     </div>
 </mat-dialog-content>

@@ -14,7 +14,7 @@ import {NewsService} from '../../newses/services/news.service';
 import {CommentService} from '../services/comment.service';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -29,7 +29,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalDetailHeaderComponent,
         MatTabsModule,
         NaturalLinkableTabDirective,
-        FlexModule,
+
         MatFormFieldModule,
         MatInputModule,
         NaturalSelectComponent,

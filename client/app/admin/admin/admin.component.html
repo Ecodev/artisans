@@ -1,21 +1,21 @@
-<div fxFlexFill fxLayout="column">
-    <mat-toolbar fxFlex="none" fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
+<div class="nat-fill nat-vertical">
+    <mat-toolbar class="nat-horizontal nat-left nat-center" id="header-mobile">
         <button (click)="menu.toggle()" mat-icon-button>
             <mat-icon naturalIcon="menu" />
         </button>
 
-        <div fxFlex></div>
+        <div class="nat-expand"></div>
 
-        <a fxLayout="row" fxLayoutAlign="center center" routerLink="/">
+        <a class="nat-horizontal nat-center" routerLink="/">
             <img alt="logo" height="50" src="assets/logo-artisans-de-la-transition.svg" />
         </a>
 
-        <div fxFlex></div>
+        <div class="nat-expand"></div>
     </mat-toolbar>
 
-    <natural-sidenav-container [noScroll]="true" fxFlex name="adminMenu" #menu>
+    <natural-sidenav-container [noScroll]="true" class="nat-expand" name="adminMenu" #menu>
         <natural-sidenav>
-            <div class="margin overflow">
+            <div class="nat-margin overflow">
                 <mat-accordion displayMode="flat">
                     <mat-expansion-panel class="mat-elevation-z0">
                         <mat-expansion-panel-header>
@@ -63,7 +63,7 @@
             </div>
         </natural-sidenav>
         <natural-sidenav-content>
-            <div fxFlex fxLayout="column" class="admin-body">
+            <div class="nat-expand admin-body nat-vertical">
                 <router-outlet />
             </div>
         </natural-sidenav-content>

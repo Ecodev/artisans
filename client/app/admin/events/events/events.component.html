@@ -1,7 +1,7 @@
 @if (dataSource) {
-    <div fxLayout="column">
-        <div fxLayout="row">
-            <div class="mat-h1 no-margin" fxFlex>
+    <div class="nat-vertical">
+        <div class="nat-horizontal">
+            <div class="mat-h1 nat-no-margin nat-expand">
                 {{ routeData?.seo.title }}
             </div>
             <natural-columns-picker
@@ -10,17 +10,17 @@
                 (selectionChange)="selectColumns($event)"
             />
         </div>
-        <div fxLayout="column">
-            <div class="margin-v overflow" fxLayout="row">
+        <div class="nat-vertical">
+            <div class="nat-margin-vertical overflow nat-horizontal">
                 <natural-search
                     (selectionChange)="search($event)"
                     [facets]="naturalSearchFacets"
                     [multipleGroups]="true"
                     [selections]="naturalSearchSelections"
-                    fxFlex
+                    class="nat-expand"
                 />
             </div>
-            <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
+            <div [class.nat-show]="dataSource.data?.length > 0" class="responsive-table">
                 <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
@@ -33,7 +33,7 @@
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nom</th>
                         <td *matCellDef="let element" mat-cell>
-                            <div fxLayout="row" fxLayoutAlign="start center">
+                            <div class="nat-horizontal nat-left nat-center">
                                 <natural-table-button
                                     [label]="element.name"
                                     [navigate]="['/admin/event', element.id]"
@@ -55,12 +55,12 @@
                 </table>
             </div>
             @if (dataSource.data?.length === 0) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <div>Pas de résultats</div>
                 </div>
             }
             @if (!dataSource.data) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }

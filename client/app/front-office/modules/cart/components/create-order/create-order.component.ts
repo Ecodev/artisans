@@ -17,8 +17,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {AddressComponent} from '../../../../../shared/components/address/address.component';
 import {MatRadioModule} from '@angular/material/radio';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {CommonModule} from '@angular/common';
 
 @Component({
@@ -28,8 +27,7 @@ import {CommonModule} from '@angular/common';
     standalone: true,
     imports: [
         CommonModule,
-        FlexModule,
-        ExtendedModule,
+
         FormsModule,
         ReactiveFormsModule,
         MatRadioModule,

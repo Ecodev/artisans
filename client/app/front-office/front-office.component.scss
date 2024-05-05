@@ -1,3 +1,5 @@
+@use '@ecodev/natural-layout' as nat;
+
 mat-sidenav-container {
     height: 100%;
     min-height: 100%;
@@ -86,6 +88,12 @@ app-breadcrumbs {
 
 #newsletter-zone {
     padding: 15px 0 0 0;
+
+    @include nat.media(md) {
+        .container {
+            align-items: center;
+        }
+    }
 }
 
 #front-office-body {

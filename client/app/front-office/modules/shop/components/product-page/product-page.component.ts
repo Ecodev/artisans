@@ -17,7 +17,7 @@ import {
     PurchasesVariables,
 } from '../../../../../shared/generated-types';
 import {ProductsPageComponent} from '../products-page/products-page.component';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+
 import {AddToCartComponent} from '../add-to-cart/add-to-cart.component';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {MatListModule} from '@angular/material/list';
@@ -26,7 +26,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-product-page',
@@ -34,7 +33,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './product-page.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         CommonModule,
         MatButtonModule,
         RouterLink,
@@ -45,7 +43,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
         MatListModule,
         PriceComponent,
         AddToCartComponent,
-        ExtendedModule,
+
         ProductsPageComponent,
         NaturalCapitalizePipe,
     ],

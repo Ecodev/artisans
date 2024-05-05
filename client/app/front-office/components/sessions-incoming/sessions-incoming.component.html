@@ -1,10 +1,10 @@
 <div class="container">
     <h1 class="mat-headline-4">PROCHAINES SESSIONS</h1>
 
-    <div fxLayout="row" fxLayoutGap="30px">
-        <div fxFlex.gt-sm="70" class="page-body" fxLayout="column" fxLayoutGap="60px">
+    <div class="nat-horizontal nat-gap-30">
+        <div class="app-md-expand-70 app-gap-60 nat-vertical page-body">
             <div class="rich-text mat-h3">
-                <h2 class="mat-h1 no-margin-top">Infos pratiques</h2>
+                <h2 class="mat-h1 nat-no-margin-top">Infos pratiques</h2>
 
                 <p>
                     Vous pouvez rejoindre l’une des sessions agendées ci-dessous ou constituer un groupe de huit à dix
@@ -24,7 +24,7 @@
 
             <div id="incoming-sessions-list">
                 @for (session of sessions; track session) {
-                    <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+                    <div class="nat-vertical nat-gap-10 nat-left">
                         <div class="mat-h2">{{ session.name }}</div>
                         <div class="rich-text" [innerHtml]="session.description"></div>
                         @if (session.mailingList) {
@@ -57,8 +57,8 @@
                 </p>
             </div>
 
-            <div fxLayout="row" fxLayoutGap="30px">
-                <div fxFlex="50" class="frame-primary padding">
+            <div class="nat-horizontal nat-gap-30">
+                <div class="nat-expand-50 frame-primary nat-padding">
                     <p>
                         " La crise climatique est alarmante et il est facile de se sentir impuissant. Nous essayons de
                         commencer là où les gens en sont aujourd’hui, pas là où nous aimerions qu’ils soient
@@ -66,7 +66,7 @@
                     </p>
                     <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
                 </div>
-                <div fxFlex="50" class="frame-primary padding">
+                <div class="nat-expand-50 frame-primary nat-padding">
                     <p>
                         " L'incertitude que la crise climatique engendre peut pousser à trop se concentrer sur ses rêves
                         et ses cauchemars. Il rend difficile de penser concrètement à ce que nous voulons et à ce qui
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div fxFlex fxHide.lt-md>
+        <div class="nat-expand-30 nat-hide nat-md-show">
             <app-session-side-column hiddenBlocName="prochaines" />
         </div>
     </div>

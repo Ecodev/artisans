@@ -8,176 +8,165 @@
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab id="general" label="Général">
-            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column" fxLayoutGap="30px">
-                        <div fxLayout="column">
-                            <mat-form-field>
-                                <input (change)="update()" formControlName="name" matInput />
-                                <mat-label>Nom</mat-label>
-                                @if (form.get('name')?.hasError('maxlength')) {
-                                    <mat-error>
-                                        Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                                    </mat-error>
-                                }
-                                @if (form.get('name')?.hasError('required')) {
-                                    <mat-error>Requis</mat-error>
-                                }
-                            </mat-form-field>
-
-                            <div class="mat-body-2">Description</div>
-                            <natural-editor formControlName="description" (contentChange)="update()" />
-                            <br />
-
-                            <mat-form-field>
-                                <mat-label>Première date</mat-label>
-                                <input
-                                    [matDatepicker]="picker"
-                                    formControlName="startDate"
-                                    matInput
-                                    (dateChange)="update()"
-                                />
-                                @if (form.get('startDate')?.hasError('required')) {
-                                    <mat-error>Requis</mat-error>
-                                }
-                                <mat-datepicker-toggle [for]="picker" matIconSuffix />
-                                <mat-datepicker #picker />
-                                <mat-hint
-                                    >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des
-                                    sessions</mat-hint
-                                >
-                            </mat-form-field>
-
-                            <mat-form-field>
-                                <mat-label>Date d'envoi de l'appel à contribution</mat-label>
-                                <input
-                                    [matDatepicker]="picker2"
-                                    formControlName="endDate"
-                                    matInput
-                                    (dateChange)="update()"
-                                />
-                                @if (form.get('endDate')?.hasError('required')) {
-                                    <mat-error>Requis</mat-error>
-                                }
-                                <mat-datepicker-toggle [for]="picker2" matIconSuffix />
-                                <mat-datepicker #picker2 />
-                                <mat-hint
-                                    >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins
-                                    d'administration</mat-hint
-                                >
-                            </mat-form-field>
-
-                            <mat-form-field class="margin-top">
-                                <mat-label>Remarques internes</mat-label>
-                                <textarea
-                                    (change)="update()"
-                                    [cdkAutosizeMaxRows]="3"
-                                    formControlName="internalRemarks"
-                                    matInput
-                                    [cdkTextareaAutosize]="true"
-                                ></textarea>
-                            </mat-form-field>
-                        </div>
-
-                        @if (datesForm) {
-                            <div formArrayName="dates">
-                                <h2 class="mat-h2">Dates de la session</h2>
-                                @for (date of datesForm.controls; track date) {
-                                    <div fxLayout="row" fxLayoutAlign="start top" fxLayoutGap="15px">
-                                        <mat-form-field fxFlex
-                                            ><!-- row child -->
-                                            <mat-label>Date</mat-label>
-                                            <input (change)="update()" [formControlName]="$index" matInput />
-                                        </mat-form-field>
-                                        <button
-                                            (click)="datesForm.removeAt($index); update()"
-                                            color="warn"
-                                            mat-icon-button
-                                        >
-                                            <mat-icon naturalIcon="delete" />
-                                        </button>
-                                    </div>
-                                }
-                                <button (click)="addDate()" color="primary" mat-flat-button>
-                                    <mat-icon naturalIcon="add" />
-                                    Ajouter une date
-                                </button>
-                            </div>
-                        }
-
-                        @if (isUpdatePage()) {
-                            <div>
-                                <h2 class="mat-h2 no-margin-bottom">Facilitateurs</h2>
-                                <natural-relations
-                                    [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
-                                    [main]="data.model"
-                                    [service]="userService"
-                                    otherName="facilitator"
-                                    placeholder="Facilitateur"
-                                >
-                                    <ng-template let-item="item">
-                                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
-                                            <natural-table-button
-                                                [label]="item.name"
-                                                [navigate]="['/admin/user/', item.id]"
-                                            />
-                                        </div>
-                                    </ng-template>
-                                </natural-relations>
-                            </div>
-                        }
-                    </div>
-
-                    <div fxFlex="33" fxLayout="column">
+            <div class="nat-padding-top nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
+                <div class="nat-expand-66 nat-gap-30 nat-vertical">
+                    <div class="nat-vertical">
                         <mat-form-field>
-                            <mat-label>Canton</mat-label>
-                            <input (change)="update()" formControlName="region" matInput />
+                            <input (change)="update()" formControlName="name" matInput />
+                            <mat-label>Nom</mat-label>
+                            @if (form.get('name')?.hasError('maxlength')) {
+                                <mat-error>
+                                    Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                                </mat-error>
+                            }
+                            @if (form.get('name')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
                         </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Ville</mat-label>
-                            <input (change)="update()" formControlName="locality" matInput />
-                        </mat-form-field>
+                        <div class="mat-body-2">Description</div>
+                        <natural-editor formControlName="description" (contentChange)="update()" />
+                        <br />
 
                         <mat-form-field>
-                            <mat-label>Rue</mat-label>
-                            <input (change)="update()" formControlName="street" matInput />
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Prix</mat-label>
-                            <input (change)="update()" formControlName="price" matInput />
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Disponibilité</mat-label>
-                            <input (change)="update()" formControlName="availability" matInput />
-                        </mat-form-field>
-
-                        <mat-divider class="margin-v" />
-
-                        <h2 class="mat-h2" fxLayout="row" fxLayoutAlign="start start">
-                            <div fxFlex>Formulaire d'inscription</div>
-                        </h2>
-
-                        <mat-form-field>
-                            <mat-label>Url du formulaire</mat-label>
+                            <mat-label>Première date</mat-label>
                             <input
-                                (change)="update()"
-                                [naturalHttpPrefix]="form.get('mailingList')"
-                                formControlName="mailingList"
+                                [matDatepicker]="picker"
+                                formControlName="startDate"
                                 matInput
+                                (dateChange)="update()"
                             />
+                            @if (form.get('startDate')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
+                            <mat-datepicker-toggle [for]="picker" matIconSuffix />
+                            <mat-datepicker #picker />
+                            <mat-hint
+                                >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des sessions
+                            </mat-hint>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Date d'envoi de l'appel à contribution</mat-label>
+                            <input
+                                [matDatepicker]="picker2"
+                                formControlName="endDate"
+                                matInput
+                                (dateChange)="update()"
+                            />
+                            @if (form.get('endDate')?.hasError('required')) {
+                                <mat-error>Requis</mat-error>
+                            }
+                            <mat-datepicker-toggle [for]="picker2" matIconSuffix />
+                            <mat-datepicker #picker2 />
+                            <mat-hint
+                                >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins d'administration
+                            </mat-hint>
+                        </mat-form-field>
+
+                        <mat-form-field class="nat-margin-top">
+                            <mat-label>Remarques internes</mat-label>
+                            <textarea
+                                (change)="update()"
+                                [cdkAutosizeMaxRows]="3"
+                                formControlName="internalRemarks"
+                                matInput
+                                [cdkTextareaAutosize]="true"
+                            ></textarea>
                         </mat-form-field>
                     </div>
+
+                    @if (datesForm) {
+                        <div formArrayName="dates">
+                            <h2 class="mat-h2">Dates de la session</h2>
+                            @for (date of datesForm.controls; track date) {
+                                <div class="nat-horizontal nat-gap-15">
+                                    <mat-form-field class="nat-expand">
+                                        <mat-label>Date</mat-label>
+                                        <input (change)="update()" [formControlName]="$index" matInput />
+                                    </mat-form-field>
+                                    <button (click)="datesForm.removeAt($index); update()" color="warn" mat-icon-button>
+                                        <mat-icon naturalIcon="delete" />
+                                    </button>
+                                </div>
+                            }
+                            <button (click)="addDate()" color="primary" mat-flat-button>
+                                <mat-icon naturalIcon="add" />
+                                Ajouter une date
+                            </button>
+                        </div>
+                    }
+
+                    @if (isUpdatePage()) {
+                        <div>
+                            <h2 class="mat-h2 nat-no-margin-bottom">Facilitateurs</h2>
+                            <natural-relations
+                                [filter]="{groups: [{conditions: [{sessions: {have: {values: [data.model.id]}}}]}]}"
+                                [main]="data.model"
+                                [service]="userService"
+                                otherName="facilitator"
+                                placeholder="Facilitateur"
+                            >
+                                <ng-template let-item="item">
+                                    <div class="nat-horizontal nat-left nat-center nat-gap-10">
+                                        <natural-table-button
+                                            [label]="item.name"
+                                            [navigate]="['/admin/user/', item.id]"
+                                        />
+                                    </div>
+                                </ng-template>
+                            </natural-relations>
+                        </div>
+                    }
                 </div>
 
-                <mat-divider />
+                <div class="nat-expand-33 nat-vertical">
+                    <mat-form-field>
+                        <mat-label>Canton</mat-label>
+                        <input (change)="update()" formControlName="region" matInput />
+                    </mat-form-field>
 
-                @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model" />
-                }
+                    <mat-form-field>
+                        <mat-label>Ville</mat-label>
+                        <input (change)="update()" formControlName="locality" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Rue</mat-label>
+                        <input (change)="update()" formControlName="street" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Prix</mat-label>
+                        <input (change)="update()" formControlName="price" matInput />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Disponibilité</mat-label>
+                        <input (change)="update()" formControlName="availability" matInput />
+                    </mat-form-field>
+
+                    <mat-divider class="nat-margin-vertical" />
+
+                    <h2 class="mat-h2">Formulaire d'inscription</h2>
+
+                    <mat-form-field>
+                        <mat-label>Url du formulaire</mat-label>
+                        <input
+                            (change)="update()"
+                            [naturalHttpPrefix]="form.get('mailingList')"
+                            formControlName="mailingList"
+                            matInput
+                        />
+                    </mat-form-field>
+                </div>
             </div>
+
+            <mat-divider />
+
+            @if (isUpdatePage()) {
+                <natural-stamp [item]="data.model" />
+            }
         </mat-tab>
     </mat-tab-group>
 

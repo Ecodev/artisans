@@ -8,9 +8,9 @@
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab id="general" label="Général">
-            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
+            <div class="nat-padding-top nat-gap-30 nat-vertical">
+                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
+                    <div class="nat-expand-66 nat-vertical">
                         <mat-form-field>
                             <textarea (change)="update()" formControlName="description" matInput></textarea>
                             <mat-label>Commentaire</mat-label>
@@ -25,7 +25,7 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="33">
+                    <div class="nat-expand-33">
                         <natural-select
                             [service]="newsService"
                             formControlName="event"

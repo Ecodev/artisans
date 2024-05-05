@@ -1,9 +1,9 @@
-<div class="container" fxLayout="column" fxLayoutGap="60px">
+<div class="container app-gap-60 nat-vertical">
     <h1 class="mat-headline-4">AGENDA</h1>
 
-    <div fxLayout="column" fxLayoutGap="30px">
+    <div class="nat-vertical nat-gap-30">
         @for (event of items; track event) {
-            <div fxLayout="column" fxLayoutGap="5px">
+            <div class="nat-vertical nat-gap-5">
                 <a [routerLink]="[event.id]" class="mat-h2">{{ event.name }}</a>
                 <div class="text-light">{{ event.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
                 <div>{{ event.place }}</div>

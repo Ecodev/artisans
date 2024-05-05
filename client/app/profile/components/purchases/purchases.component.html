@@ -1,18 +1,18 @@
 @if (dataSource) {
-    <div fxLayout="column" fxLayoutGap="30px">
-        <h2 class="mat-headline-4">Articles achetés</h2>
-        <div fxLayout="column" fxLayoutGap="20px">
-            <div class="margin-v overflow" fxLayout="row">
+    <div class="nat-vertical nat-gap-30">
+        <h2 class="mat-headline-4 nat-no-margin-bottom">Articles achetés</h2>
+        <div class="nat-vertical nat-gap">
+            <div class="nat-margin-vertical overflow nat-horizontal">
                 <natural-search
                     (selectionChange)="search($event)"
                     [multipleGroups]="false"
                     [selections]="naturalSearchSelections"
-                    fxFlex
+                    class="nat-expand"
                 />
             </div>
-            <div [fxShow]="dataSource.data?.length > 0" class="responsive-table" fxLayout="column" fxLayoutGap="30px">
+            <div [class.nat-show]="dataSource.data?.length > 0" class="responsive-table nat-gap-30 nat-vertical">
                 @for (orderLine of dataSource.data?.items; track orderLine) {
-                    <div class="product" fxLayout="row" fxLayoutGap="20px">
+                    <div class="product nat-gap nat-horizontal">
                         @if (orderLine.product.image) {
                             <a class="product-image" [routerLink]="['/larevuedurable/article', orderLine.product.id]">
                                 <img
@@ -21,15 +21,12 @@
                                 />
                             </a>
                         }
-                        <div fxFlex fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+                        <div class="nat-expand nat-gap-5 nat-vertical nat-top nat-left">
                             <div
-                                fxLayout="row"
-                                fxLayoutGap="15px"
-                                fxLayoutAlign="start baseline"
-                                class="mat-body no-margin-bottom text-light"
+                                class="nat-horizontal mat-body nat-no-margin-bottom text-light nat-gap-15 nat-left nat-baseline"
                             >
                                 @if (orderLine.product.reviewNumber) {
-                                    <span class="text-primary"> N° {{ orderLine.product.reviewNumber }} </span>
+                                    <span class="text-primary"> N° {{ orderLine.product.reviewNumber }}</span>
                                 }
                                 @if (orderLine.product.releaseDate) {
                                     <span>
@@ -56,12 +53,12 @@
                 }
             </div>
             @if (dataSource.data?.length === 0) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <div>Pas de résultats</div>
                 </div>
             }
             @if (!dataSource.data) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }

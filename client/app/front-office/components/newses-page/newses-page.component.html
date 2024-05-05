@@ -1,7 +1,7 @@
-<div class="container" fxLayout="column" fxLayoutGap="60px">
+<div class="container app-gap-60 nat-vertical">
     <h1 class="mat-headline-4">ACTUALITÉS</h1>
 
-    <div fxLayout="column" fxLayoutGap="60px">
+    <div class="nat-vertical app-gap-60">
         @for (news of items; track news) {
             <div>
                 <div class="text-light">{{ news.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>

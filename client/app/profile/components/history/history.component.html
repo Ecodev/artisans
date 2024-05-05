@@ -1,8 +1,8 @@
 @if (dataSource) {
-    <div fxLayout="column" fxLayoutGap="30px">
-        <h2 class="mat-headline-4">Commandes</h2>
-        <div fxLayout="column">
-            <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
+    <div class="nat-vertical nat-gap-30">
+        <h2 class="mat-headline-4 nat-no-margin-bottom">Commandes</h2>
+        <div class="nat-vertical">
+            <div [class.nat-show]="dataSource.data?.length > 0" class="responsive-table">
                 <table [dataSource]="dataSource" mat-table>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
@@ -38,10 +38,10 @@
                 </table>
             </div>
             @if (dataSource.data?.length === 0) {
-                <div class="margin mat-h4">Aucun résultat</div>
+                <div class="nat-margin mat-h4">Aucun résultat</div>
             }
             @if (!dataSource.data) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }

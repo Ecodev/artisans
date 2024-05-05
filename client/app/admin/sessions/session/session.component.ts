@@ -22,7 +22,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NaturalEditorComponent} from '@ecodev/natural-editor';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
@@ -36,7 +36,7 @@ import {MatTabsModule} from '@angular/material/tabs';
         NaturalDetailHeaderComponent,
         MatTabsModule,
         NaturalLinkableTabDirective,
-        FlexModule,
+
         MatFormFieldModule,
         MatInputModule,
         NaturalEditorComponent,

@@ -24,7 +24,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {AddressComponent} from '../../../shared/components/address/address.component';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {CommonModule} from '@angular/common';
@@ -42,7 +42,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         CommonModule,
         MatToolbarModule,
         MatTabsModule,
-        FlexModule,
+
         AddressComponent,
         MatFormFieldModule,
         MatInputModule,

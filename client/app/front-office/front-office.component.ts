@@ -24,8 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRippleModule} from '@angular/material/core';
@@ -43,8 +42,7 @@ import {MatRippleModule} from '@angular/material/core';
         RouterLinkActive,
         MatSidenavModule,
         MatToolbarModule,
-        ExtendedModule,
-        FlexModule,
+
         MatButtonModule,
         MatIconModule,
         NaturalIconDirective,

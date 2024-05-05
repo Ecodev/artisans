@@ -16,14 +16,12 @@ import {UserService} from '../services/user.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-import',
     templateUrl: './import.component.html',
     standalone: true,
     imports: [
-        FlexModule,
         MatButtonModule,
         NaturalFileDropDirective,
         MatIconModule,

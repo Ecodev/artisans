@@ -1,33 +1,29 @@
 @if (cart) {
     <div
-        [fxShow]="!showConfirmationMessage"
-        class="container"
-        fxLayout="column"
-        fxLayout.gt-sm="row"
-        fxLayoutGap="60px"
-        fxLayoutAlign="start start"
+        [class.nat-show]="!showConfirmationMessage"
+        class="container app-gap-60 nat-md-horizontal nat-vertical nat-top"
     >
-        <div fxFlex.gt-sm fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
-            <div [formGroup]="shippingForm" fxLayout="column" fxLayoutGap="60px">
-                <h1 class="mat-headline-4">MÉTHODE DE PAIEMENT</h1>
-                <mat-radio-group formControlName="paymentMethod" fxLayout="column" fxLayoutGap="20px">
+        <div class="nat-md-expand app-gap-60 nat-vertical">
+            <div [formGroup]="shippingForm" class="nat-vertical app-gap-60">
+                <h1 class="mat-headline-4 nat-no-margin-bottom nat-no-margin-bottom">MÉTHODE DE PAIEMENT</h1>
+                <mat-radio-group formControlName="paymentMethod" class="nat-vertical nat-gap-10">
                     <div class="payment-method">
                         <mat-radio-button [value]="PaymentMethod.datatrans"
-                            >Paiement par carte de crédit</mat-radio-button
-                        >
+                            >Paiement par carte de crédit
+                        </mat-radio-button>
                     </div>
                     <div>
                         <mat-radio-button [value]="PaymentMethod.bvr">Recevoir une facture</mat-radio-button>
                     </div>
                 </mat-radio-group>
-                <h1 class="mat-headline-4">Votre adresse</h1>
+                <h1 class="mat-headline-4 nat-no-margin-bottom">Votre adresse</h1>
                 <div>
                     <app-address [form]="shippingForm" [disabled]="true" />
                     <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
                 </div>
             </div>
-            <div [formGroup]="billingForm" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="60px">
-                <h1 class="mat-headline-4">Adresse de facturation</h1>
+            <div [formGroup]="billingForm" class="nat-vertical app-gap-60">
+                <h1 class="mat-headline-4 nat-no-margin-bottom">Adresse de facturation</h1>
                 <mat-checkbox
                     (change)="updateAddressRequirements(!$event.checked, billingForm)"
                     formControlName="sameAsBilling"
@@ -39,7 +35,7 @@
                 }
             </div>
         </div>
-        <div fxFlex="20" fxLayout="column" fxLayoutGap="20px" class="frame-primary padding">
+        <div class="nat-expand-20 frame-primary nat-padding nat-gap nat-vertical">
             <!-- Regular products -->
             @for (line of cart.productLines; track line) {
                 <div class="cart-item">
@@ -62,9 +58,9 @@
             @if (cart.donationAmount) {
                 <div class="cart-item">Don</div>
             }
-            <div fxLayout="column" fxLayoutAlign="start end" class="text-right">
+            <div class="nat-vertical text-right">
                 <div class="mat-h2">Prix total</div>
-                <div class="mat-h1" fxFlexFill style="word-break: break-word">
+                <div class="mat-h1 nat-fill" style="word-break: break-word">
                     {{ cart.totalTaxInc | currency: currencyService.current.value }}
                 </div>
             </div>
@@ -81,10 +77,11 @@
 
 @if (showConfirmationMessage) {
     <div class="container">
-        <h1 class="mat-headline-4">Merci pour votre commande</h1>
+        <h1 class="mat-headline-4 nat-no-margin-bottom">Merci pour votre commande</h1>
         <p class="mat-h3 rich-text">
             Consulter les articles et revues achetées dans
-            <a routerLink="/mon-compte/articles-achetes" fragment="profile-content">mon compte</a>.
+            <a routerLink="/mon-compte/articles-achetes" fragment="profile-content">mon compte</a>
+            .
         </p>
     </div>
 }

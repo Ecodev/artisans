@@ -1,3 +1,5 @@
+@use '@ecodev/natural-layout' as nat;
+
 :host {
     margin-top: 0 !important; // override default and generalized top margin
 }
@@ -10,18 +12,10 @@
     margin-top: 40px;
 }
 
-#title-prefix {
-    margin-bottom: 10px !important;
-}
-
 .product-image {
     display: block;
-    width: 100%;
     margin-top: 50px;
-
-    img {
-        max-width: 100%;
-    }
+    max-width: 220px;
 }
 
 .review {
@@ -48,5 +42,20 @@
 @media screen and (min-width: 700px) {
     .description {
         max-width: 66%;
+    }
+}
+
+@include nat.media(null, md) {
+    #see-more {
+        order: 2;
+    }
+    #related-review {
+        order: 1;
+    }
+}
+
+@include nat.media(md) {
+    .image-preview {
+        flex: 0 1 230px;
     }
 }

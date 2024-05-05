@@ -16,8 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatRippleModule} from '@angular/material/core';
 import {RouterLink} from '@angular/router';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {CommonModule} from '@angular/common';
 
 @Component({
@@ -27,9 +26,9 @@ import {CommonModule} from '@angular/common';
     standalone: true,
     imports: [
         CommonModule,
-        FlexModule,
+
         NaturalSearchComponent,
-        ExtendedModule,
+
         RouterLink,
         NaturalSrcDensityDirective,
         MatRippleModule,

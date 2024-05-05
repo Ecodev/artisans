@@ -11,7 +11,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatIconModule} from '@angular/material/icon';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {MatButtonModule} from '@angular/material/button';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {CommonModule} from '@angular/common';
 
 @Component({
@@ -21,7 +21,7 @@ import {CommonModule} from '@angular/common';
     standalone: true,
     imports: [
         CommonModule,
-        FlexModule,
+
         MatButtonModule,
         RouterLink,
         PriceComponent,

@@ -1,21 +1,22 @@
 @if (dataSource) {
-    <div fxLayout="column">
-        <div fxLayout="column">
-            <div [fxShow]="!hideHeader" class="margin-v overflow" fxLayout="row">
+    <div class="nat-vertical">
+        <div class="nat-vertical">
+            <div [class.nat-show]="!hideHeader" class="nat-hide nat-margin-vertical overflow nat-horizontal">
                 <natural-search
                     (selectionChange)="search($event)"
                     [facets]="naturalSearchFacets"
                     [multipleGroups]="true"
                     [selections]="naturalSearchSelections"
-                    fxFlex
+                    class="nat-expand"
                 />
+
                 <natural-columns-picker
                     [availableColumns]="availableColumns"
                     [selections]="selectedColumns"
                     (selectionChange)="selectColumns($event)"
                 />
             </div>
-            <div [fxShow]="dataSource.data?.length > 0" class="responsive-table">
+            <div [class.nat-show]="dataSource.data?.length > 0" class="responsive-table">
                 <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
@@ -95,19 +96,20 @@
                 </table>
             </div>
             @if (dataSource.data?.length === 0) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <div>Pas de résultats</div>
                 </div>
             }
             @if (!dataSource.data) {
-                <div class="margin" fxLayout="column" fxLayoutAlign="center center">
+                <div class="nat-margin nat-vertical nat-center">
                     <mat-progress-spinner [diameter]="40" mode="indeterminate" />
                 </div>
             }
             @if (dataSource.data?.length) {
                 <mat-paginator
                     (page)="pagination($event)"
-                    [fxShow]="!hidePaginator"
+                    class="nat-hide"
+                    [class.nat-show]="!hidePaginator"
                     [length]="dataSource.data?.length"
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"

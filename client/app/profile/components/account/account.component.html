@@ -1,13 +1,12 @@
-<div [formGroup]="form" fxLayout="column" fxLayoutGap="30px">
-    <h2 class="mat-headline-4">Données personnelles</h2>
+<div [formGroup]="form">
+    <h2 class="mat-headline-4 nat-no-margin-bottom">Données personnelles</h2>
 
-    <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-        <div fxFlex="33" fxLayout="column">
+    <div class="nat-padding-top nat-gap-30 nat-vertical">
+        <div class="nat-vertical">
             <h2 class="mat-h2">Compte</h2>
 
-            <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="20px">
-                <mat-form-field fxFlex.gt-sm
-                    ><!-- row child -->
+            <div class="nat-vertical nat-gap nat-md-horizontal">
+                <mat-form-field class="nat-expand">
                     <mat-label>email</mat-label>
                     <input formControlName="email" matInput type="email" />
                 </mat-form-field>
@@ -22,7 +21,7 @@
 
         <mat-divider />
 
-        <div fxLayout="column" fxLayoutGap="15px">
+        <div class="nat-vertical nat-gap-15">
             <h2 class="mat-h2">Adresse</h2>
 
             <p class="mat-body">
@@ -39,7 +38,7 @@
         </div>
     </div>
 
-    <div fxLayout="row" fxLayoutAlign="end">
+    <div class="nat-horizontal">
         <button (click)="update(true)" [disabled]="!form.valid" color="primary" mat-flat-button>
             <mat-icon naturalIcon="save" />
             Enregistrer

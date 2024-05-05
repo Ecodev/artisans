@@ -7,7 +7,6 @@ import {CommentListComponent} from '../comment-list/comment-list.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-news-page',
@@ -15,7 +14,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './news-page.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         CommonModule,
         MatButtonModule,
         RouterLink,

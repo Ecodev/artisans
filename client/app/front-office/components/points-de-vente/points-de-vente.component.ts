@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
 import {MatDividerModule} from '@angular/material/divider';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-points-de-vente',
     templateUrl: './points-de-vente.component.html',
     styleUrl: './points-de-vente.component.scss',
     standalone: true,
-    imports: [FlexModule, MatDividerModule],
+    imports: [MatDividerModule],
 })
 export class PointsDeVenteComponent {}

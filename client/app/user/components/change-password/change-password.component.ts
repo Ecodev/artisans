@@ -8,7 +8,6 @@ import {UpdatePassword, UpdatePasswordVariables} from '../../../shared/generated
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {PasswordComponent} from '../password/password.component';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-change-password',
@@ -18,7 +17,7 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        FlexModule,
+
         PasswordComponent,
         MatButtonModule,
         MatIconModule,

@@ -9,7 +9,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-login',
@@ -17,7 +16,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './login.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,

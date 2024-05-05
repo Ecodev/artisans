@@ -33,7 +33,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {CommonModule} from '@angular/common';
 import {HomeBlockComponent} from '../home-block/home-block.component';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-homepage',
@@ -41,7 +40,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './homepage.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         HomeBlockComponent,
         CommonModule,
         MatButtonModule,

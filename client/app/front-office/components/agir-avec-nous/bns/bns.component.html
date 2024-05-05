@@ -1,7 +1,7 @@
 <div class="container">
     <h1 class="mat-headline-4">RAPPORTS BNS</h1>
-    <div fxLayout="row" fxLayoutGap="30px">
-        <div fxFlex.gt-sm="70" class="page-body mat-h3 rich-text">
+    <div class="nat-horizontal nat-gap-30 nat-distribute">
+        <div class="app-md-expand-70 mat-h3 rich-text">
             <p>
                 Depuis 2016, l’association a publié trois rapports sur les investissements de la Banque Nationale Suisse
                 dans l’industrie des énergies fossiles, dont les deux premiers ont donné lieu à de nombreuses motions
@@ -34,8 +34,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-fr-1.pdf" target="_blank"
-                >Rapport BNS 2020 (pdf)</a
-            >
+                >Rapport BNS 2020 (pdf)
+            </a>
 
             <h2 class="mat-h2">
                 Les investissements de la BNS dans l’industrie des énergies fossiles sont contraires aux intérêts de la
@@ -54,8 +54,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-fr-2.pdf" target="_blank"
-                >Rapport BNS 2018 (pdf)</a
-            >
+                >Rapport BNS 2018 (pdf)
+            </a>
 
             <img class="illustration" src="assets/images/bns/bns-rapport-2-fr-illustration.jpg" />
 
@@ -86,8 +86,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-fr-3.pdf" target="_blank"
-                >Rapport BNS 2016 (pdf)</a
-            >
+                >Rapport BNS 2016 (pdf)
+            </a>
 
             <h1 class="mat-h1 text-primary" id="allemand">Deutsch</h1>
 
@@ -98,11 +98,12 @@
             <p>
                 21. April 2020. Die Schweizerische Nationalbank (SNB) hat nach wie vor nicht begriffen, welch enormes
                 Risiko der Klimawandel für das Schweizer Finanzsystem und die gesamte Wirtschaft darstellt. Zu diesem
-                Schluss kommt eine Studie, welche der Verein <strong>Artisans de la transition</strong> gemeinsam mit
-                der Klima-Allianz Schweiz drei Tage vor der Generalversammlung der SNB publiziert. Gemäss der SNB stellt
-                der Klimawandel für die Schweizer Wirtschaft und das Finanzsystem nur ein moderates Risiko dar: Die
-                Schweiz liege nicht am Meer, ihre Sachwerte seien gut versichert, die Redundanz der Bankrechenzentren
-                sei gewährleistet und sie habe kaum Schwerindustrie.
+                Schluss kommt eine Studie, welche der Verein
+                <strong>Artisans de la transition</strong> gemeinsam mit der Klima-Allianz Schweiz drei Tage vor der
+                Generalversammlung der SNB publiziert. Gemäss der SNB stellt der Klimawandel für die Schweizer
+                Wirtschaft und das Finanzsystem nur ein moderates Risiko dar: Die Schweiz liege nicht am Meer, ihre
+                Sachwerte seien gut versichert, die Redundanz der Bankrechenzentren sei gewährleistet und sie habe kaum
+                Schwerindustrie.
             </p>
 
             <p>
@@ -114,8 +115,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-de-1.pdf" target="_blank"
-                >SNB Investitionen-Bericht 2020 (pdf)</a
-            >
+                >SNB Investitionen-Bericht 2020 (pdf)
+            </a>
             <h2 class="mat-h2">Prädikat klimaschädlich Studie zur Anlagepolitik der Schweizerischen Nationalbank</h2>
             <img src="assets/images/bns/bns-rapport-2.png" class="cover" />
 
@@ -128,8 +129,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-de-2.pdf" target="_blank"
-                >SNB Investitionen-Bericht 2018 (pdf)</a
-            >
+                >SNB Investitionen-Bericht 2018 (pdf)
+            </a>
 
             <img class="illustration" src="assets/images/bns/bns-rapport-2-de-illustration.jpg" />
 
@@ -145,8 +146,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-de-3.pdf" target="_blank"
-                >SNB Investitionen-Bericht 2016 (pdf)</a
-            >
+                >SNB Investitionen-Bericht 2016 (pdf)
+            </a>
 
             <h1 class="mat-h1 text-primary" id="anglais">English</h1>
 
@@ -170,8 +171,8 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-en-1.pdf" target="_blank"
-                >SNB Investment’s 2020 report (pdf)</a
-            >
+                >SNB Investment’s 2020 report (pdf)
+            </a>
 
             <h2 class="mat-h2">
                 The Swiss National Bank’s Investments in the Fossil Fuel Industry Inflicts Heavy Losses to Switzerland
@@ -207,15 +208,13 @@
             </p>
 
             <a mat-flat-button color="primary" href="assets/images/bns/bns-en-2.pdf" target="_blank"
-                >SNB Investment’s 2018 report (pdf)</a
-            >
+                >SNB Investment’s 2018 report (pdf)
+            </a>
         </div>
-        <div fxFlex fxHide.lt-md fxLayout="column" fxLayoutAlign="start end">
-            <div fxLayout="column" fxLayoutGap="10px" id="lang-menu">
-                <a mat-stroked-button color="primary" routerLink="." fragment="francais">Français</a>
-                <a mat-stroked-button color="primary" routerLink="." fragment="allemand">Deutsch</a>
-                <a mat-stroked-button color="primary" routerLink="." fragment="anglais">English</a>
-            </div>
+        <div class="nat-vertical nat-gap-10 nat-hide nat-md-show">
+            <a mat-stroked-button color="primary" routerLink="." fragment="francais">Français</a>
+            <a mat-stroked-button color="primary" routerLink="." fragment="allemand">Deutsch</a>
+            <a mat-stroked-button color="primary" routerLink="." fragment="anglais">English</a>
         </div>
     </div>
 </div>

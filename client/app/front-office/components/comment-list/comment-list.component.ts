@@ -10,7 +10,6 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-comment-list',
@@ -18,7 +17,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './comment-list.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         CommonModule,
         MatFormFieldModule,
         MatInputModule,

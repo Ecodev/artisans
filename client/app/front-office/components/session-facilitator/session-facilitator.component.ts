@@ -3,15 +3,13 @@ import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-session-facilitator',
     templateUrl: './session-facilitator.component.html',
     styleUrl: './session-facilitator.component.scss',
     standalone: true,
-    imports: [FlexModule, ExtendedModule, SessionSideColumnComponent],
+    imports: [SessionSideColumnComponent],
 })
 export class SessionFacilitatorComponent implements OnInit {
     public facilitators: Users['users']['items'][0][] = [];

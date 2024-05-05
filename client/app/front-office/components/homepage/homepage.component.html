@@ -4,10 +4,10 @@
 ></div>
 
 <div class="introduction-blocs">
-    <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
-        <app-home-block fxFlex.gt-sm id="bloc1" key="home-block-1" />
-        <app-home-block fxFlex.gt-sm id="bloc2" key="home-block-2" />
-        <app-home-block fxFlex.gt-sm id="bloc3" key="home-block-3" />
+    <div class="container app-gap-50 nat-md-horizontal nat-vertical">
+        <app-home-block class="nat-md-expand" id="bloc1" key="home-block-1" />
+        <app-home-block class="nat-md-expand" id="bloc2" key="home-block-2" />
+        <app-home-block class="nat-md-expand" id="bloc3" key="home-block-3" />
     </div>
 </div>
 
@@ -15,11 +15,11 @@
 
 <!-- News + Events -->
 <div class="posts">
-    <div class="container" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="50px">
+    <div class="container app-gap-50 nat-md-horizontal nat-vertical">
         <!-- News -->
-        <div class="newses" fxFlex.gt-sm="66" fxLayout="column" fxLayoutGap="30px">
-            <div class="mat-headline-4 section-title" fxLayout="row" fxLayoutGap="30px">
-                <div fxFlex>ACTUALITÉS</div>
+        <div class="newses nat-gap-30 nat-vertical nat-md-expand-66">
+            <div class="mat-headline-4 section-title nat-gap-30 nat-horizontal">
+                <div class="nat-expand">ACTUALITÉS</div>
                 <div class="relative">
                     @if (permissionService.crud?.news.create) {
                         <button
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <mat-divider />
-            <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
+            <div class="newses-list nat-gap nat-vertical">
                 @for (news of newses; track news) {
                     <div class="news">
                         <div class="mat-body-strong text-light">
@@ -53,9 +53,9 @@
         </div>
 
         <!-- Events -->
-        <div class="events" fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="30px">
-            <div class="mat-headline-4 section-title" fxLayout="row" fxLayoutGap="30px">
-                <div fxFlex>AGENDA</div>
+        <div class="events nat-gap-30 nat-vertical nat-md-expand-33">
+            <div class="mat-headline-4 section-title nat-gap-30 nat-horizontal">
+                <div class="nat-expand">AGENDA</div>
                 <div class="relative">
                     @if (permissionService.crud?.event.create) {
                         <button
@@ -70,14 +70,14 @@
                     }
                 </div>
             </div>
-            <div class="newses-list" fxLayout="column" fxLayoutGap="20px">
+            <div class="newses-list nat-gap nat-vertical">
                 @for (event of events; track event) {
                     <mat-divider />
                     <div class="event">
-                        <a class="mat-h2 no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple>{{
-                            event.name
-                        }}</a>
-                        <div class="mat-h3 no-margin-bottom">
+                        <a class="mat-h2 nat-no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple
+                            >{{ event.name }}
+                        </a>
+                        <div class="mat-h3 nat-no-margin-bottom">
                             <span class="text-light">{{ event.date | date: 'EEE dd.MM.yy' | capitalize }}</span>
                             <span class="description"> - {{ event.place }} - {{ event.type }}</span>
                         </div>
@@ -105,7 +105,7 @@
 
 @if (currentReview) {
     <div class="la-revue section">
-        <div class="container" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start">
+        <div class="container nat-md-horizontal nat-top nat-left">
             @if (currentReview.image) {
                 <a [routerLink]="['/larevuedurable/article', currentReview.id]">
                     <img
@@ -115,16 +115,16 @@
                     />
                 </a>
             }
-            <div class="la-revue-body" fxLayout="column" fxLayoutGap="10px">
+            <div class="la-revue-body nat-vertical">
                 <div class="mat-h1 text-primary text-bold">Le dernier numéro</div>
-                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="start baseline" class="mat-h2 text-thin">
+                <div class="nat-horizontal mat-h2 text-thin nat-gap-10 nat-left nat-baseline">
                     <span>{{ currentReview.reviewNumber }}</span>
                     <span>|</span>
                     <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
                 </div>
-                <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-headline-4">{{
-                    currentReview.name
-                }}</a>
+                <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-headline-4"
+                    >{{ currentReview.name }}
+                </a>
                 <!-- If has not access -->
                 @if (!currentReview.file) {
                     <div class="mat-h3">
@@ -148,7 +148,7 @@
 }
 
 <div class="categories section">
-    <div class="container" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="40px">
+    <div class="container app-gap-40 nat-vertical nat-top nat-left">
         <div class="mat-headline-4">NOS THEMES</div>
         <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
         <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
@@ -157,16 +157,10 @@
 
 <div class="support section">
     <div class="container">
-        <div class="mat-headline-4 margin-bottom">NOUS SOUTENIR</div>
+        <div class="mat-headline-4 nat-margin-bottom">NOUS SOUTENIR</div>
 
-        <div
-            fxLayout="column"
-            fxLayout.gt-sm="row"
-            fxLayoutAlign.gt-sm="start stretch"
-            fxLayoutGap="30px"
-            fxLayoutGap.gt-sm="60px"
-        >
-            <div class="support-column" fxFlex.gt-sm="33" id="support-column-1">
+        <div class="nat-vertical app-md-gap-60 nat-gap-30 nat-md-horizontal">
+            <div class="support-column nat-md-expand-33" id="support-column-1">
                 <div
                     class="support-image"
                     [style.backgroundImage]="'url(assets/images/homepage/larevuedurable-jehan.khodl-1.jpg)'"
@@ -183,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="support-column" fxFlex.gt-sm="33" id="support-column-2">
+            <div class="support-column nat-md-expand-33" id="support-column-2">
                 <div
                     class="support-image"
                     [style.backgroundImage]="'url(assets/images/homepage/larevuedurable-jehan.khodl-4.jpg)'"
@@ -192,15 +186,14 @@
                     <div class="mat-h1">Rejoindre l’association</div>
                     <div class="support-column-content mat-h3">
                         <p>
-                            Devenir membre des
-                            <strong>Artisans de la transition</strong> permet un lien direct et privilégié avec notre
-                            action. Et nous donne plus de légitimité et de poids.
+                            Devenir membre des <strong>Artisans de la transition</strong> permet un lien direct et
+                            privilégié avec notre action. Et nous donne plus de légitimité et de poids.
                         </p>
                     </div>
                     <a mat-flat-button routerLink="/nous-soutenir/rejoindre-association">Découvrir l'association</a>
                 </div>
             </div>
-            <div class="support-column" fxFlex.gt-sm="33" id="support-column-3">
+            <div class="support-column nat-md-expand-33" id="support-column-3">
                 <div
                     class="support-image"
                     [style.backgroundImage]="'url(assets/images/homepage/larevuedurable-jehan.khodl-6.jpg)'"

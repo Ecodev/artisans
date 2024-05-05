@@ -13,7 +13,6 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-admin',
@@ -21,7 +20,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './admin.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,

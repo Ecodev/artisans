@@ -17,7 +17,7 @@ import {NaturalEditorComponent} from '@ecodev/natural-editor';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
+
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
@@ -38,7 +38,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalIconDirective,
         MatTabsModule,
         NaturalLinkableTabDirective,
-        FlexModule,
+
         MatFormFieldModule,
         MatInputModule,
         TextFieldModule,

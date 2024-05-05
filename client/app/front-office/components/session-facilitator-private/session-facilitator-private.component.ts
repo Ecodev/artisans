@@ -7,24 +7,15 @@ import {SortingOrder, UserRole, Users, UserSortingField, UsersVariables} from '.
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+
 import {CommonModule} from '@angular/common';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-session-facilitator-private',
     templateUrl: './session-facilitator-private.component.html',
     styleUrl: './session-facilitator-private.component.scss',
     standalone: true,
-    imports: [
-        FlexModule,
-        CommonModule,
-        ExtendedModule,
-        MatListModule,
-        MatIconModule,
-        NaturalIconDirective,
-        SessionSideColumnComponent,
-    ],
+    imports: [CommonModule, MatListModule, MatIconModule, NaturalIconDirective, SessionSideColumnComponent],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
     public facilitators: Users['users']['items'][0][] = [];

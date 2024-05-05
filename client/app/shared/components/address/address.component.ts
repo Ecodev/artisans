@@ -4,14 +4,13 @@ import {CountryService} from './country.service';
 import {NaturalSelectComponent} from '@ecodev/natural';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-address',
     templateUrl: './address.component.html',
     styleUrl: './address.component.scss',
     standalone: true,
-    imports: [FlexModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NaturalSelectComponent],
+    imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NaturalSelectComponent],
 })
 export class AddressComponent {
     /**
@@ -26,11 +25,6 @@ export class AddressComponent {
             }
         });
     }
-
-    /**
-     * If true, all fields are displayed vertically
-     */
-    @Input() public vertical = false;
 
     /**
      * Form group to manage field values

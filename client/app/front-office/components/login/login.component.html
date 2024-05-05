@@ -1,6 +1,6 @@
-<div fxFlexAlign="center center" fxFlexFill fxLayout="column" class="overflow">
-    <div class="padding" fxFlex="1 0 auto" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-        <form [formGroup]="form" fxLayout="column" fxLayoutGap="15px" style="min-width: 300px">
+<div class="nat-fill overflow nat-vertical">
+    <div class="nat-padding nat-vertical nat-center">
+        <form [formGroup]="form" class="nat-vertical nat-gap-10" style="min-width: 300px">
             <mat-form-field>
                 <mat-label>Courriel</mat-label>
                 <input
@@ -32,7 +32,7 @@
                 }
             </mat-form-field>
 
-            <div fxFlex="none" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="10px">
+            <div class="nat-horizontal nat-gap-10">
                 <a mat-button routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
                 <button
                     (click)="maybeConfirm()"
@@ -45,7 +45,7 @@
                 </button>
             </div>
 
-            <mat-divider class="margin" />
+            <mat-divider class="nat-margin" />
             <div class="mat-h3" style="text-align: center">Pas encore de compte ?</div>
             <a mat-stroked-button routerLink="/user/new" type="submit">Créer un compte</a>
         </form>

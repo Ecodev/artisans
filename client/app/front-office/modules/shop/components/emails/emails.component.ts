@@ -5,7 +5,6 @@ import {deliverableEmail} from '@ecodev/natural';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 export type EmailsData = {
     title: string;
@@ -18,15 +17,7 @@ export type EmailsData = {
     templateUrl: './emails.component.html',
     styleUrl: './emails.component.scss',
     standalone: true,
-    imports: [
-        MatDialogModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FlexModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-    ],
+    imports: [MatDialogModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class EmailsComponent {
     public readonly form: FormGroup = new FormGroup({});

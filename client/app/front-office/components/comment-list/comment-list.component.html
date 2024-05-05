@@ -1,6 +1,6 @@
-<div fxLayout="column" fxLayoutGap="30px">
+<div class="nat-vertical nat-gap-30">
     @if (permissionsService.crud?.comment?.create) {
-        <div fxLayout="column" fxLayoutAlign="start start">
+        <div class="nat-vertical nat-left">
             <mat-form-field [style.width]="'100%'">
                 <mat-label>Rédiger un commentaire</mat-label>
                 <textarea matInput [(ngModel)]="newCommentValue"></textarea>
@@ -10,15 +10,15 @@
     }
 
     @if (dataSource?.data?.items?.length) {
-        <div fxLayout="column" fxLayoutGap="30px">
+        <div class="nat-vertical nat-gap-30">
             @for (comment of dataSource?.data?.items; track comment) {
-                <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="start start">
+                <div class="nat-vertical nat-gap-5 nat-left">
                     @if (comment.authorName) {
-                        <div class="mat-h2" fxLayout="row wrap" fxLayoutGap="15px" fxLayoutAlign="start baseline">
+                        <div class="mat-h2 nat-gap-15 nat-horizontal nat-wrap nat-left nat-center">
                             <span>{{ comment.authorName }}</span>
                             <span class="mat-body text-light">
-                                Posté le {{ comment.creationDate | date: 'longDate' }}</span
-                            >
+                                Posté le {{ comment.creationDate | date: 'longDate' }}
+                            </span>
                             @if (comment.permissions?.update) {
                                 <a
                                     [routerLink]="['/admin/comment', comment.id]"

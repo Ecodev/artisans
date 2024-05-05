@@ -9,14 +9,13 @@ import {SubscriptionService} from './subscription.service';
 import {GlobalCartService} from '../../../cart/services/global-cart.service';
 import {MatButtonModule} from '@angular/material/button';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-subscriptions',
     templateUrl: './subscriptions.component.html',
     styleUrl: './subscriptions.component.scss',
     standalone: true,
-    imports: [FlexModule, PriceComponent, MatButtonModule],
+    imports: [PriceComponent, MatButtonModule],
 })
 export class SubscriptionsComponent implements OnInit {
     public subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;

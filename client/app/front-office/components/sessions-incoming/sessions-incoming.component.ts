@@ -8,16 +8,15 @@ import {UserService} from '../../../admin/users/services/user.service';
 import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 import {EmailsComponent, EmailsData} from '../../modules/shop/components/emails/emails.component';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
+
 import {MatButtonModule} from '@angular/material/button';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-sessions-incoming',
     templateUrl: './sessions-incoming.component.html',
     styleUrl: './sessions-incoming.component.scss',
     standalone: true,
-    imports: [FlexModule, MatButtonModule, ExtendedModule, SessionSideColumnComponent],
+    imports: [MatButtonModule, SessionSideColumnComponent],
 })
 export class SessionsIncomingComponent implements OnInit {
     public sessions: Sessions['sessions']['items'][0][] = [];

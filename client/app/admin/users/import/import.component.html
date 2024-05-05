@@ -1,12 +1,12 @@
-<div fxLayout="column">
-    <div fxLayout="column">
-        <div class="mat-h1 no-margin" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+<div class="nat-vertical">
+    <div class="nat-vertical">
+        <div class="mat-h1 nat-no-margin nat-gap-5 nat-horizontal nat-left nat-center">
             {{ routeData.seo.title }}
         </div>
     </div>
 
-    <div fxLayout="column">
-        <div class="margin-v overflow">
+    <div class="nat-vertical">
+        <div class="nat-margin-vertical overflow">
             <p class="mat-body">Uploadez un fichier CSV pour importer les utilisateurs et leur accès:</p>
             <p>
                 <button
@@ -51,7 +51,7 @@
                                 faut soit créer ces utilisateurs dans Crésus puis re-importer, soit supprimer
                                 définitivement les utilisateurs de notre BD.
                             </p>
-                            <div fxLayout="row" fxLayoutGap="10px">
+                            <div class="nat-horizontal nat-gap-10">
                                 <a [routerLink]="['/admin/user', params]" mat-button style="margin-right: 3em"
                                     >Voir le détail</a
                                 >

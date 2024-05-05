@@ -8,7 +8,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-account',
@@ -16,7 +15,6 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './account.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,

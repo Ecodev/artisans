@@ -20,8 +20,8 @@
 }
 
 @if (editMode) {
-    <mat-card class="bloc" fxLayout="column" fxLayoutGap="20px">
-        <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start stretch">
+    <mat-card class="bloc nat-gap nat-vertical">
+        <form [formGroup]="form" class="nat-vertical">
             <mat-form-field>
                 <mat-label>Titre</mat-label>
                 <textarea
@@ -50,8 +50,8 @@
                 <mat-hint>URL absolue débutant par un slash "/"</mat-hint>
             </mat-form-field>
         </form>
-        <div fxLayout="row">
-            <div fxFlex></div>
+        <div class="nat-horizontal">
+            <div class="nat-expand"></div>
             <button (click)="reset()" mat-button>Annuler</button>
             <button (click)="update(); editMode = false" color="primary" mat-flat-button>
                 <mat-icon naturalIcon="save" />

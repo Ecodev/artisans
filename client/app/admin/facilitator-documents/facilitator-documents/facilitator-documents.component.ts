@@ -16,8 +16,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
-import {ExtendedModule} from '@ngbracket/ngx-layout/extended';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 @Component({
     selector: 'app-facilitator-documents',
@@ -25,9 +23,8 @@ import {FlexModule} from '@ngbracket/ngx-layout/flex';
     styleUrl: './facilitator-documents.component.scss',
     standalone: true,
     imports: [
-        FlexModule,
         NaturalSearchComponent,
-        ExtendedModule,
+
         MatTableModule,
         MatSortModule,
         NaturalTableButtonComponent,

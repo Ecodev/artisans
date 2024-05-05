@@ -17,9 +17,9 @@
     @if (isUpdatePage()) {
         <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
             <mat-tab id="general" label="Général">
-                <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-                    <div fxLayout="column" fxLayout.gt-md="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                        <div fxFlex="66" fxLayout="column">
+                <div class="nat-padding-top nat-gap-30 nat-vertical">
+                    <div class="nat-vertical nat-md-gap-30 nat-gap-0 nat-lg-horizontal">
+                        <div class="nat-expand-66 nat-vertical">
                             <h2 class="mat-h2">Coordonnées</h2>
                             <app-address [form]="form" [disabled]="true" />
                             <mat-form-field>
@@ -27,7 +27,7 @@
                                 <input formControlName="phone" matInput />
                             </mat-form-field>
                         </div>
-                        <div fxFlex="33" fxLayout="column">
+                        <div class="nat-expand-33 nat-vertical">
                             <h2 class="mat-h2">Compte</h2>
                             <mat-form-field>
                                 <mat-label>email</mat-label>
@@ -55,7 +55,7 @@
                             <mat-slide-toggle
                                 formControlName="isPublicFacilitator"
                                 (change)="update()"
-                                class="margin-bottom"
+                                class="nat-margin-bottom"
                             >
                                 Facilitateur public
                             </mat-slide-toggle>
@@ -66,11 +66,10 @@
                                 placeholder="Membre des artisans"
                             />
                             <div>
-                                <span class="mat-subtitle-2">Abonnement : </span>
+                                <span class="mat-subtitle-2">Abonnement :</span>
                                 @if (data.model.subscriptionLastReviewNumber) {
                                     Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au
-                                    numéro
-                                    {{ data.model.subscriptionLastReviewNumber }}
+                                    numéro{{ data.model.subscriptionLastReviewNumber }}
                                 }
                                 @if (!data.model.subscriptionLastReviewNumber) {
                                     N'est pas abonné
@@ -79,7 +78,7 @@
                             <div
                                 matTooltip="L'accès temporaire donne accès au contenu numérique en attendant le prochain import de Crésus qui confirmera les accès disponible"
                             >
-                                <span class="mat-subtitle-2">Accès temporaire : </span>
+                                <span class="mat-subtitle-2">Accès temporaire :</span>
                                 {{ data.model.webTemporaryAccess ? 'oui' : 'non' }}
                             </div>
                         </div>
@@ -94,14 +93,14 @@
                         placeholder="Conversations carbone"
                     >
                         <ng-template let-item="item">
-                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <div class="nat-horizontal nat-left nat-center nat-gap-10">
                                 <natural-table-button [label]="item.name" [navigate]="['/admin/session/', item.id]" />
                             </div>
                         </ng-template>
                     </natural-relations>
                     <mat-divider />
                     @if (isUpdatePage()) {
-                        <div fxLayout="column" fxLayoutGap="15px">
+                        <div class="nat-vertical nat-gap-15">
                             <natural-stamp [item]="data.model" />
                             @if (data.model.firstLogin) {
                                 <div>
@@ -121,7 +120,7 @@
             </mat-tab>
             @if (isUpdatePage()) {
                 <mat-tab id="orders" label="Commandes">
-                    <div class="padding-top">
+                    <div class="nat-padding-top">
                         <div>
                             <app-orders
                                 [forcedVariables]="{

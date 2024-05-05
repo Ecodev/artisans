@@ -49,23 +49,23 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <mat-toolbar fxHide.gt-sm fxLayout="row" fxLayoutAlign="start center" id="header-mobile">
-            <div fxFlex></div>
+        <mat-toolbar class="nat-horizontal nat-left nat-center nat-md-hide" id="header-mobile">
+            <div class="nat-expand"></div>
 
             <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
 
-            <div fxFlex></div>
+            <div class="nat-expand"></div>
 
             <button (click)="menu.toggle()" mat-icon-button>
                 <mat-icon naturalIcon="menu" />
             </button>
         </mat-toolbar>
 
-        <div fxHide.lt-md id="header">
+        <div id="header" class="nat-hide nat-md-show">
             <!-- header : 1s line -->
             <div id="header-top">
-                <div class="container" fxLayout="row">
-                    <div fxFlex></div>
+                <div class="container nat-horizontal">
+                    <div class="nat-expand"></div>
                     @if (!currencyService.locked) {
                         <a [matMenuTriggerFor]="deviseMenu" mat-button>
                             {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
@@ -100,8 +100,8 @@
 
             <!-- header : 3rd line -->
             <div id="header-bottom">
-                <div class="container" fxLayout="row" fxLayoutAlign="start end" id="menu-main-container">
-                    <div fxFlex id="menu-main">
+                <div class="container nat-horizontal nat-right" id="menu-main-container">
+                    <div class="nat-expand" id="menu-main">
                         <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: navigation}" />
                     </div>
 
@@ -145,15 +145,7 @@
             </div>
 
             <div id="newsletter-zone">
-                <form
-                    fxLayout.gt-sm="row"
-                    fxLayout="column"
-                    fxLayoutAlign.gt-sm="start center"
-                    fxLayoutAlign="start start"
-                    fxLayoutGap.gt-sm="20px"
-                    [formGroup]="newsletterForm"
-                    class="container"
-                >
+                <form class="container nat-vertical nat-md-horizontal nat-md-gap-20" [formGroup]="newsletterForm">
                     <div class="mat-h1" id="newsletter">Inscrivez-vous à la lettre d'info !</div>
 
                     <mat-form-field id="newsletter-subscription">
@@ -170,24 +162,23 @@
                 </form>
             </div>
 
-            <div class="container" fxLayout="column" fxLayoutGap.gt-sm="60px" fxLayoutGap="30px" id="footer-body">
-                <div class="mat-h3" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-sm="50px">
-                    <mat-nav-list fxFlex.gt-sm="33">
-                        <!--                        <a mat-list-item routerLink="product">Livraison</a>-->
+            <div class="container nat-gap-30 app-md-gap-60 nat-vertical" id="footer-body">
+                <div class="mat-h3 app-md-gap-50 nat-md-horizontal nat-vertical">
+                    <mat-nav-list class="nat-md-expand-33">
                         <a mat-list-item routerLink="mentions-legales">Mentions légales</a>
                         <a mat-list-item routerLink="cgv">Conditions générales de vente</a>
-                        <!--                        <a mat-list-item routerLink="product-tag">Annonceurs</a>-->
                     </mat-nav-list>
 
                     <div class="footer-right-column">
-                        <div class="mat-h2 no-margin-bottom">
-                            Association<br />
+                        <div class="mat-h2 nat-no-margin-bottom">
+                            Association
+                            <br />
                             Artisans de la transition
                         </div>
                         <div class="mat-h2">La Revue durable</div>
                     </div>
 
-                    <div fxFlex.gt-sm="33" fxLayout="column" fxLayoutGap="10px" class="footer-right-column">
+                    <div class="nat-md-expand-33 footer-right-column nat-gap-10 nat-vertical">
                         <div>
                             Rue de Lausanne 23
                             <br />
@@ -198,8 +189,8 @@
                             Tél: +41 26 321 37 11
                             <br />
                             <a href="mailto:courriel@artisansdelatransition.org" style="text-transform: lowercase"
-                                >courriel&#64;artisansdelatransition.org</a
-                            >
+                                >courriel&#64;artisansdelatransition.org
+                            </a>
                             <br />
                             IBAN CH2300768300140932307
                         </div>

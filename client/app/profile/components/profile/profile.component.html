@@ -1,19 +1,20 @@
 @if (viewer) {
     <div class="introduction frame-primary">
-        <div class="container" fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap="40px">
-            <div fxFlex="25" fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="10px">
-                <div class="mat-headline-4 no-margin" fxFlex>Bonjour {{ viewer.firstName }},</div>
+        <div class="container app-gap-40 nat-sm-horizontal nat-vertical">
+            <div class="nat-expand-33 nat-gap-10 nat-vertical nat-left">
+                <div class="mat-headline-4 nat-no-margin nat-expand">Bonjour {{ viewer.firstName }},</div>
                 <button (click)="userService.logout()" mat-flat-button>
                     <mat-icon naturalIcon="exit_to_app" />
                     Se déconnecter
                 </button>
             </div>
-            <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
+            <div class="nat-expand-33 nat-gap-30 nat-vertical nat-left">
                 <div class="mat-h2">Mon abonnement à LaRevueDurable</div>
                 @if (viewer.subscriptionLastReviewNumber) {
                     <div>
-                        Abonné {{ viewer.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro
-                        {{ viewer.subscriptionLastReviewNumber }}
+                        Abonné {{ viewer.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro{{
+                            viewer.subscriptionLastReviewNumber
+                        }}
                     </div>
                     <a mat-flat-button routerLink="/larevuedurable/abonnements">Renouveler</a>
                 }
@@ -25,7 +26,7 @@
                     <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
                 }
             </div>
-            <div fxFlex fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="30px">
+            <div class="nat-expand-33 nat-gap-30 nat-vertical nat-left">
                 <div class="mat-h2">Mon statut Artisans de la transition</div>
                 <div>{{ viewer.membership | enum: 'Membership' | async }}</div>
                 @if (membershipProduct) {
@@ -46,38 +47,30 @@
 
 <div id="profile-content"></div>
 
-<div class="body container">
-    <div fxLayout="row" fxLayoutGap="60px">
-        <div fxFlex="25" fxLayout="column" fxLayoutGap="30px">
-            <div class="frame-primary" fxShow.gt-sm>
-                <div class="mat-h2 padding">Mon compte</div>
-                <mat-nav-list>
-                    <a
-                        mat-list-item
-                        routerLink="/mon-compte/articles-achetes"
-                        routerLinkActive="active"
-                        fragment="profile-content"
-                        >Articles et revues achetées</a
-                    >
-                    <a
-                        mat-list-item
-                        routerLink="/mon-compte/donnees-personnelles"
-                        routerLinkActive="active"
-                        fragment="profile-content"
-                        >Données personnelles</a
-                    >
-                    <a
-                        mat-list-item
-                        routerLink="/mon-compte/commandes"
-                        routerLinkActive="active"
-                        fragment="profile-content"
-                        >Commandes</a
-                    >
-                </mat-nav-list>
-            </div>
-        </div>
-        <div fxFlex>
-            <router-outlet />
-        </div>
+<div class="body container nat-vertical nat-md-horizontal nat-top app-gap-60">
+    <div class="frame-primary">
+        <div class="mat-h2 nat-padding">Mon compte</div>
+        <mat-nav-list>
+            <a
+                mat-list-item
+                routerLink="/mon-compte/articles-achetes"
+                routerLinkActive="active"
+                fragment="profile-content"
+                >Articles et revues achetées
+            </a>
+            <a
+                mat-list-item
+                routerLink="/mon-compte/donnees-personnelles"
+                routerLinkActive="active"
+                fragment="profile-content"
+                >Données personnelles
+            </a>
+            <a mat-list-item routerLink="/mon-compte/commandes" routerLinkActive="active" fragment="profile-content"
+                >Commandes
+            </a>
+        </mat-nav-list>
+    </div>
+    <div class="nat-expand-75 nat-vertical">
+        <router-outlet />
     </div>
 </div>

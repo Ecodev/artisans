@@ -16,7 +16,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {TagsNavigationComponent} from '../../../../../shared/components/tags-navigation/tags-navigation.component';
 import {CommonModule} from '@angular/common';
-import {FlexModule} from '@ngbracket/ngx-layout/flex';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -39,7 +38,6 @@ export enum ProductsViewMode {
     ],
     standalone: true,
     imports: [
-        FlexModule,
         CommonModule,
         TagsNavigationComponent,
         RouterLink,

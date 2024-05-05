@@ -22,11 +22,11 @@
 
     <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
         <mat-tab id="general" label="Général">
-            <div class="padding-top" fxLayout="column" fxLayoutGap="30px">
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
-                        <div class="margin-bottom" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
-                            <div fxFlex fxLayout="column">
+            <div class="nat-padding-top nat-gap-30 nat-vertical">
+                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
+                    <div class="nat-expand-66 nat-vertical">
+                        <div class="nat-margin-bottom nat-gap nat-horizontal">
+                            <div class="nat-expand nat-vertical">
                                 <mat-form-field>
                                     <mat-label>Nom</mat-label>
                                     <input (change)="update()" formControlName="name" matInput />
@@ -75,8 +75,8 @@
                         </mat-form-field>
                     </div>
 
-                    <div fxFlex="33" fxLayout="column" fxLayoutGap="20px">
-                        <div fxLayout="column" class="margin-bottom" fxLayoutGap="20px">
+                    <div class="nat-expand-33 nat-gap nat-vertical">
+                        <div class="nat-vertical nat-gap nat-margin-bottom">
                             <mat-slide-toggle (change)="update()" formControlName="isActive"
                                 >Disponible à la vente
                             </mat-slide-toggle>
@@ -188,7 +188,7 @@
                             }
                         </mat-form-field>
 
-                        <mat-form-field class="margin-top">
+                        <mat-form-field class="nat-margin-top">
                             <mat-label>Remarques internes</mat-label>
                             <textarea
                                 (change)="update()"
@@ -203,8 +203,8 @@
 
                 <mat-divider />
 
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="25" fxLayout="column">
+                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
+                    <div class="nat-expand-25 nat-vertical">
                         <h2 class="mat-h2">Produit dématérialisé (PDF)</h2>
                         <natural-file
                             [model]="data.model.file"
@@ -219,7 +219,7 @@
                         />
                     </div>
 
-                    <div fxFlex="50" fxLayout="column">
+                    <div class="nat-expand-50 nat-vertical">
                         <h2 class="mat-h2">Illustration</h2>
                         <natural-file
                             [model]="data.model.illustration"
@@ -233,7 +233,7 @@
                         />
                     </div>
 
-                    <div fxFlex="25" fxLayout="column">
+                    <div class="nat-expand-25 nat-vertical">
                         <h2 class="mat-h2">Aperçu du produit</h2>
                         <natural-file
                             [model]="data.model.image"
@@ -250,8 +250,8 @@
 
                 <mat-divider />
 
-                <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="0" fxLayoutGap.gt-sm="30px">
-                    <div fxFlex="66" fxLayout="column">
+                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
+                    <div class="nat-expand-66 nat-vertical">
                         @if (isUpdatePage()) {
                             <div>
                                 <h2 class="mat-h2">Tags</h2>
@@ -262,7 +262,7 @@
                                     placeholder="Ajouter un tag"
                                 >
                                     <ng-template let-item="item">
-                                        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                                        <div class="nat-horizontal nat-left nat-center nat-gap-10">
                                             <!-- TODO : link to products list filtred by tag -->
                                             <natural-avatar [bgColor]="item.color" [initials]="item.name" [size]="32" />
                                             <natural-table-button [label]="item.name" [navigate]="['/admin/product']" />
@@ -293,7 +293,7 @@
 
         @if (isUpdatePage()) {
             <mat-tab id="product" label="Produits similaires">
-                <div class="padding-top">
+                <div class="nat-padding-top">
                     <natural-relations
                         [autocompleteSelectorFilter]="{
                             groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}]}]
@@ -307,7 +307,7 @@
                         placeholder="Produit similaire"
                     >
                         <ng-template let-item="item">
-                            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px">
+                            <div class="nat-horizontal nat-left nat-center nat-gap-10">
                                 <natural-table-button [label]="item.name" [navigate]="['/admin/product/', item.id]" />
                             </div>
                         </ng-template>

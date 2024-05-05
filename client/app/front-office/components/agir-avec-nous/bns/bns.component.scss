@@ -13,20 +13,20 @@ h2.mat-h2 {
 }
 
 .cover {
+    display: block;
     float: left;
     margin-right: 20px;
     margin-bottom: 20px;
     height: 150px;
-    display: block;
 }
 
 .mat-mdc-unelevated-button {
-    clear: both;
     display: block;
+    clear: both;
     width: 300px;
 }
 
 .illustration {
-    max-width: 100%;
     margin: 30px 0;
+    max-width: 100%;
 }

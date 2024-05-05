@@ -1,13 +1,13 @@
 :host {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
 }
 
 .bloc {
-    flex: 1;
-    position: relative;
     display: flex;
+    position: relative;
+    flex: 1;
     flex-direction: column;
     align-items: flex-start;
     padding: 20px;

@@ -1,33 +1,33 @@
 :host {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: row;
 }
 .mega-menu {
-    flex: 1;
     display: block;
+    flex: 1;
+    border-radius: 5px;
     background: white;
     padding-top: 15px;
     padding-bottom: 15px;
     overflow: auto;
-    border-radius: 5px;
 
     ul {
         display: block;
-        list-style: none;
-        padding-left: 0;
-        padding-right: 0;
+        position: relative;
         margin-right: 0;
+        padding-right: 0;
+        padding-left: 0;
         width: 100%;
         max-width: 25vw;
-        position: relative;
+        list-style: none;
 
         a {
-            position: relative; // to limit ripple
             display: inline-block;
+            position: relative; // to limit ripple
             cursor: pointer;
-            font-size: 16px;
             padding: 10px;
+            font-size: 16px;
             text-transform: uppercase;
 
             &.highlighted {
@@ -46,9 +46,9 @@
 
             &.open > ul {
                 display: block;
-                margin-left: 100%;
-                top: 0;
                 position: absolute;
+                top: 0;
+                margin-left: 100%;
             }
         }
     }

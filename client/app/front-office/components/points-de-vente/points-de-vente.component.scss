@@ -2,7 +2,7 @@
 @include mixins.page-with-illustration();
 
 .list > div {
+    flex: 0 0 200px;
     margin-bottom: 20px;
     width: 200px;
-    flex: 0 0 200px;
 }

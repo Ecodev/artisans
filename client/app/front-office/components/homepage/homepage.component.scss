@@ -11,10 +11,10 @@
 
 .splash-image,
 .la-revue-splash {
-    background-color: lighten(variables.$app-orange, 20%);
-    background-size: cover;
     background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-color: lighten(variables.$app-orange, 20%);
 }
 
 .splash-image {
@@ -22,8 +22,8 @@
 
     @include responsive.responsive(responsive.$gt-sm) {
         display: block;
-        height: 550px;
         margin-bottom: 0;
+        height: 550px;
     }
 }
 
@@ -33,36 +33,36 @@
     }
 
     @include responsive.responsive(responsive.$lt-md) {
-        padding-left: 50px;
         padding-right: 50px;
+        padding-left: 50px;
     }
 
     #bloc1 {
-        color: white;
         background: variables.$app-orange;
+        color: white;
     }
 
     #bloc2 {
-        color: white;
         background: variables.$app-blue;
+        color: white;
     }
 
     #bloc3 {
-        color: white;
         background: variables.$app-green;
+        color: white;
     }
 }
 
 .section-logo {
-    max-width: 100%;
     width: 390px;
+    max-width: 100%;
 }
 
 .section {
     .section-introduction {
+        margin: auto;
         max-width: 50vw;
         text-align: center;
-        margin: auto;
 
         .mat-headline-3 {
             margin-bottom: 30px;
@@ -104,9 +104,9 @@
 
 .la-revue.section {
     .last-product-thumbnail {
-        height: 475px;
-        width: 365px;
         margin: auto;
+        width: 365px;
+        height: 475px;
 
         @include responsive.responsive(responsive.$gt-sm) {
             margin-top: -170px;
@@ -121,8 +121,8 @@
         }
 
         .mat-headline-4 {
-            min-height: 120px;
             margin-bottom: 0;
+            min-height: 120px;
         }
     }
 }
@@ -142,16 +142,16 @@
     }
 
     .support-image {
-        width: 100%;
-        padding-top: 80%;
-        background-color: lighten(variables.$app-orange, 20%);
         background-position: center;
         background-size: cover;
+        background-color: lighten(variables.$app-orange, 20%);
+        padding-top: 80%;
+        width: 100%;
     }
 
     .support-column-body {
-        flex: 1;
         display: flex;
+        flex: 1;
         flex-direction: column;
         align-items: flex-start;
         padding: 20px;
@@ -166,17 +166,17 @@
     }
 
     #support-column-1 {
-        color: white;
         background: variables.$app-blue;
+        color: white;
     }
 
     #support-column-2 {
-        color: white;
         background: variables.$app-orange;
+        color: white;
     }
 
     #support-column-3 {
-        color: white;
         background: variables.$app-green;
+        color: white;
     }
 }

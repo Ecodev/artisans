@@ -17,16 +17,16 @@
         }
 
         ul {
-            list-style: none;
             position: relative;
+            list-style: none;
 
             li {
                 margin-left: 0;
 
                 &::before {
-                    content: '➔';
                     position: absolute;
                     left: 0;
+                    content: '➔';
                 }
             }
         }
@@ -38,8 +38,8 @@
         }
 
         img {
-            max-width: 100%;
             margin: 1em 0;
+            max-width: 100%;
         }
 
         .image-before-title {
@@ -51,8 +51,8 @@
     .rich-text a,
     a.app-link {
         &:not(.mat-mdc-button-base):not(.no-style) {
-            color: inherit;
             border-bottom: 2px solid mat.get-color-from-palette($primary);
+            color: inherit;
 
             &:hover {
                 color: mat.get-color-from-palette($primary);
@@ -62,15 +62,15 @@
 
     // Admin part
     .rich-text.admin-editor {
-        border-top-left-radius: 4px;
+        border-bottom: 1px solid mat.get-color-from-palette($foreground, base, 0.5);
         border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
         background: mat.get-color-from-palette(
             $foreground,
             base,
             if(map.get($theme, is-dark), 0.1, 0.04)
         ); // match official mat-form-field component style
         padding: 10px 10px 0 10px;
-        border-bottom: 1px solid mat.get-color-from-palette($foreground, base, 0.5);
         font-size: 13px;
 
         .ql-editor {
@@ -82,8 +82,8 @@
         }
 
         .label {
-            font-size: 0.9em;
             opacity: 0.6;
+            font-size: 0.9em;
         }
     }
 }

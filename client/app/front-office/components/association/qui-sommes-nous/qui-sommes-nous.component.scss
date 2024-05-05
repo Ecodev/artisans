@@ -19,16 +19,16 @@
 
     img {
         display: block;
-        width: 162px !important;
-        height: 217px !important;
-        max-width: none !important;
         float: left;
+        width: 162px !important;
+        max-width: none !important;
+        height: 217px !important;
     }
 
     .person-data {
         flex: 1;
-        font-weight: bold;
         align-self: flex-end;
+        font-weight: bold;
     }
 
     img + .person-data {

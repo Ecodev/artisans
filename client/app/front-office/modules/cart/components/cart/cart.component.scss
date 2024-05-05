@@ -47,16 +47,16 @@
 
     .product-image {
         display: block;
+        background-position: center;
+
+        background-size: cover;
+        background-repeat: no-repeat;
         width: 70px;
         height: 70px;
 
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-
         img {
-            max-height: 70px;
             max-width: 70px;
+            max-height: 70px;
         }
     }
 }

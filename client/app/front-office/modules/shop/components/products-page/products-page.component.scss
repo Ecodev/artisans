@@ -17,15 +17,15 @@
 
         .target-customer {
             display: inline-block;
+            padding: 0 16px !important;
             height: 36px;
             line-height: 36px;
-            padding: 0 16px !important;
         }
 
         &.highlight-first-items .product {
             &:nth-child(1) {
-                grid-column: span 2;
                 grid-row: span 11;
+                grid-column: span 2;
             }
 
             &:nth-child(2) {
@@ -45,8 +45,8 @@
 
             .product-illustration {
                 display: block;
-                background-size: cover;
                 background-position: center;
+                background-size: cover;
             }
         }
     }
@@ -77,8 +77,8 @@
 
         .product-price {
             .frame-primary {
-                padding: 5px;
                 margin-right: 5px;
+                padding: 5px;
             }
         }
     }

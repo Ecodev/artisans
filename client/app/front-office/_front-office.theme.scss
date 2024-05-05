@@ -66,8 +66,8 @@
 
             .mat-mdc-form-field,
             mat-form-field * {
-                color: mat.get-color-from-palette($primary, default-contrast) !important;
                 border-bottom-color: mat.get-color-from-palette($primary, default-contrast) !important;
+                color: mat.get-color-from-palette($primary, default-contrast) !important;
             }
 
             mat-form-field .mat-mdc-text-field-wrapper {

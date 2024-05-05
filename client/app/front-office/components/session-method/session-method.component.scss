@@ -2,8 +2,8 @@
 @include mixins.page-with-illustration();
 
 .slogan {
+    margin: 0 0 30px 0;
+    font-style: italic;
     font-size: 1.5em;
     line-height: 1.3em;
-    font-style: italic;
-    margin: 0 0 30px 0;
 }

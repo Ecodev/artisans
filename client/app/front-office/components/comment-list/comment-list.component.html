@@ -5,7 +5,7 @@
                 <mat-label>Rédiger un commentaire</mat-label>
                 <textarea matInput [(ngModel)]="newCommentValue"></textarea>
             </mat-form-field>
-            <a mat-stroked-button color="primary" (click)="addComment()" [disabled]="publishing">Publier</a>
+            <a mat-stroked-button color="primary" [disabled]="publishing" (click)="addComment()">Publier</a>
         </div>
     }
 
@@ -21,9 +21,9 @@
                             </span>
                             @if (comment.permissions?.update) {
                                 <a
-                                    [routerLink]="['/admin/comment', comment.id]"
                                     mat-icon-button
                                     class="mat-elevation-z4"
+                                    [routerLink]="['/admin/comment', comment.id]"
                                 >
                                     <mat-icon naturalIcon="edit" />
                                 </a>

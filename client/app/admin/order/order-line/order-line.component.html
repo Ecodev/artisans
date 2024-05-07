@@ -1,15 +1,15 @@
 <h2 mat-dialog-title>{{ data.seo.title }}</h2>
 <mat-dialog-content>
     <div [formGroup]="form">
-        <natural-select [service]="productService" [showIcon]="false" formControlName="product" placeholder="Produit" />
+        <natural-select formControlName="product" placeholder="Produit" [service]="productService" [showIcon]="false" />
 
         <div class="mat-h2">ou</div>
 
         <natural-select
-            [service]="subscriptionService"
-            [showIcon]="false"
             formControlName="subscription"
             placeholder="Abonnement"
+            [service]="subscriptionService"
+            [showIcon]="false"
         />
 
         @if (form.hasError('productXorSubscription')) {
@@ -24,7 +24,7 @@
         <div class="nat-horizontal nat-gap">
             <mat-form-field [style.width.px]="90">
                 <mat-label>Quantité</mat-label>
-                <input formControlName="quantity" matInput [attr.min]="0" step="1" type="number" />
+                <input formControlName="quantity" matInput step="1" type="number" [attr.min]="0" />
                 @if (form.get('quantity')?.hasError('required')) {
                     <mat-error>Requis</mat-error>
                 }
@@ -47,7 +47,7 @@
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Fermer</button>
 
-    <button (click)="update(true, true)" [disabled]="!form.valid" color="primary" mat-dialog-close mat-flat-button>
+    <button color="primary" mat-dialog-close mat-flat-button [disabled]="!form.valid" (click)="update(true, true)">
         Mettre à jour
     </button>
 </mat-dialog-actions>

@@ -1,5 +1,5 @@
-<div [@transformMenu]="panelAnimationState" class="mega-menu mat-elevation-z4" role="menu">
-    <div [style.min-height.px]="data.contentHeight" [style.padding-left.px]="offsetLeft" class="mega-menu-content">
+<div class="mega-menu mat-elevation-z4" role="menu" [@transformMenu]="panelAnimationState">
+    <div class="mega-menu-content" [style.min-height.px]="data.contentHeight" [style.padding-left.px]="offsetLeft">
         <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: data.items}" />
     </div>
 </div>
@@ -9,7 +9,7 @@
         <ul>
             @for (item of navigation; track item) {
                 <li [class.hasMenu]="item.children?.length" [class.open]="item.open">
-                    <a [routerLink]="item.link" routerLinkActive="active">
+                    <a routerLinkActive="active" [routerLink]="item.link">
                         <span (click)="clickAction(item, $event)">{{ item.display }}</span></a
                     >
                     <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}" />

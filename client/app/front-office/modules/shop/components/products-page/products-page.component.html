@@ -18,8 +18,8 @@
                             <div class="product-tags">
                                 @for (tag of product.productTags; track tag) {
                                     <a
-                                        [routerLink]="['/larevuedurable/articles', tag.name]"
                                         class="product-tag mat-body"
+                                        [routerLink]="['/larevuedurable/articles', tag.name]"
                                         >{{ tag.name }}
                                     </a>
                                 }
@@ -28,6 +28,7 @@
                         <a class="product-name mat-h1" [routerLink]="getDetailLink(product)">{{ product.name }}</a>
                         @if ($index <= 1 && product.illustration) {
                             <a
+                                class="product-illustration nat-expand"
                                 [routerLink]="[
                                     '/larevuedurable/',
                                     product.reviewNumber ? 'numero' : 'article',
@@ -40,7 +41,6 @@
                                     ($index === 0 ? '550' : '260') +
                                     ')'
                                 "
-                                class="product-illustration nat-expand"
                             ></a>
                         }
                         <div class="image-placeholder"></div>
@@ -49,16 +49,16 @@
                                 <div class="product-price mat-body-strong">
                                     <span class="frame-primary target-customer">Abonné</span>
                                     ou
-                                    <app-price [product]="product" class="mat-h3" />
+                                    <app-price class="mat-h3" [product]="product" />
                                 </div>
                             }
                             @if (product.file) {
                                 <a
                                     mat-flat-button
                                     color="accent"
-                                    [href]="'/api/file/' + product.file.id"
                                     class="product-file-button"
                                     target="_blank"
+                                    [href]="'/api/file/' + product.file.id"
                                 >
                                     Télécharger
                                 </a>
@@ -79,8 +79,8 @@
                             @if (product.image) {
                                 <a class="product-image" [routerLink]="getDetailLink(product)">
                                     <img
-                                        [naturalSrcDensity]="'/api/image/' + product.image.id + '/200'"
                                         alt="aperçu du produit"
+                                        [naturalSrcDensity]="'/api/image/' + product.image.id + '/200'"
                                     />
                                 </a>
                             }
@@ -106,21 +106,21 @@
                                 ></div>
                             </div>
                             <div class="product-price nat-gap-15 nat-vertical">
-                                <app-price [product]="product" class="mat-h1" />
+                                <app-price class="mat-h1" [product]="product" />
                                 <a
                                     mat-flat-button
                                     color="primary"
-                                    [routerLink]="getDetailLink(product)"
                                     class="product-detail-button"
+                                    [routerLink]="getDetailLink(product)"
                                     >Voir le détail
                                 </a>
                                 @if (product.file) {
                                     <a
                                         mat-flat-button
                                         color="accent"
-                                        [href]="'/api/file/' + product.file.id"
                                         class="product-file-button"
                                         target="_blank"
+                                        [href]="'/api/file/' + product.file.id"
                                     >
                                         Télécharger
                                     </a>
@@ -133,7 +133,7 @@
         }
         <div class="nat-horizontal nat-center" id="end-of-list">
             @if (items && dataSource?.data?.length > items.length) {
-                <a (click)="loadMore()" color="primary" mat-stroked-button>
+                <a color="primary" mat-stroked-button (click)="loadMore()">
                     {{ route.snapshot.data.showMoreLabel }}
                 </a>
             }

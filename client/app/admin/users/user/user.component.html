@@ -1,8 +1,8 @@
-<div [formGroup]="form" class="detail-body">
+<div class="detail-body" [formGroup]="form">
     <natural-detail-header
+        label="Utilisateur"
         [listRoute]="['admin', 'user']"
         [model]="data.model"
-        label="Utilisateur"
         [newLabel]="data.seo.title"
     />
 
@@ -15,7 +15,7 @@
 
     <!-- naturalLinkableTab conflicts with order detail page (child route) -->
     @if (isUpdatePage()) {
-        <mat-tab-group (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+        <mat-tab-group [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
             <mat-tab id="general" label="Général">
                 <div class="nat-padding-top nat-gap-30 nat-vertical">
                     <div class="nat-vertical nat-md-gap-30 nat-gap-0 nat-lg-horizontal">
@@ -31,7 +31,7 @@
                             <h2 class="mat-h2">Compte</h2>
                             <mat-form-field>
                                 <mat-label>email</mat-label>
-                                <input (change)="update()" formControlName="email" matInput />
+                                <input formControlName="email" matInput (change)="update()" />
                                 @if (form.get('email')?.hasError('required')) {
                                     <mat-error>Requis</mat-error>
                                 }
@@ -46,16 +46,16 @@
                                 }
                             </mat-form-field>
                             <natural-select-enum
-                                (selectionChange)="update()"
                                 enumName="UserRole"
                                 formControlName="role"
                                 placeholder="Rôle"
                                 [optionDisabled]="roleDisabled()"
+                                (selectionChange)="update()"
                             />
                             <mat-slide-toggle
                                 formControlName="isPublicFacilitator"
-                                (change)="update()"
                                 class="nat-margin-bottom"
+                                (change)="update()"
                             >
                                 Facilitateur public
                             </mat-slide-toggle>
@@ -86,11 +86,11 @@
                     <mat-divider />
                     <h2 class="mat-h2">Conversations carbone animées</h2>
                     <natural-relations
+                        otherName="facilitator"
+                        placeholder="Conversations carbone"
                         [filter]="{groups: [{conditions: [{facilitators: {have: {values: [data.model.id]}}}]}]}"
                         [main]="data.model"
                         [service]="sessionService"
-                        otherName="facilitator"
-                        placeholder="Conversations carbone"
                     >
                         <ng-template let-item="item">
                             <div class="nat-horizontal nat-left nat-center nat-gap-10">
@@ -136,7 +136,7 @@
     }
 
     @if (showFabButton) {
-        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
+        <natural-fixed-button-detail [form]="form" [model]="data.model" (create)="create()" (delete)="delete()" />
     }
 </div>
 

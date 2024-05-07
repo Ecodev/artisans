@@ -3,7 +3,7 @@
         <div class="container app-gap-40 nat-sm-horizontal nat-vertical">
             <div class="nat-expand-33 nat-gap-10 nat-vertical nat-left">
                 <div class="mat-headline-4 nat-no-margin nat-expand">Bonjour {{ viewer.firstName }},</div>
-                <button (click)="userService.logout()" mat-flat-button>
+                <button mat-flat-button (click)="userService.logout()">
                     <mat-icon naturalIcon="exit_to_app" />
                     Se déconnecter
                 </button>
@@ -31,10 +31,10 @@
                 <div>{{ viewer.membership | enum: 'Membership' | async }}</div>
                 @if (membershipProduct) {
                     <app-add-to-cart
+                        label="Payer la cotisation"
                         [product]="membershipProduct"
                         [type]="ProductType.other"
                         [buttonColor]="null"
-                        label="Payer la cotisation"
                     />
                 }
                 @if (viewer.membership !== Membership.none) {

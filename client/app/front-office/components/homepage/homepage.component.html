@@ -41,7 +41,7 @@
                         <div class="mat-body-strong text-light">
                             {{ news.date | date: 'EEE dd.MM.yy' | capitalize }}
                         </div>
-                        <a class="mat-h2" [routerLink]="['/actualite', news.id]" matRipple>{{ news.name }}</a>
+                        <a class="mat-h2" matRipple [routerLink]="['/actualite', news.id]">{{ news.name }}</a>
                         <div class="mat-h3 description line-break">{{ news.description }}</div>
                     </div>
                 }
@@ -74,7 +74,7 @@
                 @for (event of events; track event) {
                     <mat-divider />
                     <div class="event">
-                        <a class="mat-h2 nat-no-margin-bottom" [routerLink]="['/agenda', event.id]" matRipple
+                        <a class="mat-h2 nat-no-margin-bottom" matRipple [routerLink]="['/agenda', event.id]"
                             >{{ event.name }}
                         </a>
                         <div class="mat-h3 nat-no-margin-bottom">
@@ -109,9 +109,9 @@
             @if (currentReview.image) {
                 <a [routerLink]="['/larevuedurable/article', currentReview.id]">
                     <img
-                        [naturalSrcDensity]="'/api/image/' + currentReview.image.id + '/470'"
                         alt="illustration du dernier numéro paru"
                         class="mat-elevation-z5 last-product-thumbnail"
+                        [naturalSrcDensity]="'/api/image/' + currentReview.image.id + '/470'"
                     />
                 </a>
             }
@@ -122,7 +122,7 @@
                     <span>|</span>
                     <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
                 </div>
-                <a [routerLink]="['/larevuedurable/article', currentReview.id]" class="mat-headline-4"
+                <a class="mat-headline-4" [routerLink]="['/larevuedurable/article', currentReview.id]"
                     >{{ currentReview.name }}
                 </a>
                 <!-- If has not access -->
@@ -137,7 +137,7 @@
                 <!-- If has access -->
                 @if (currentReview.file) {
                     <div>
-                        <a mat-flat-button color="accent" [href]="'/api/file/' + currentReview.file.id" target="_blank">
+                        <a mat-flat-button color="accent" target="_blank" [href]="'/api/file/' + currentReview.file.id">
                             Télécharger le numéro
                         </a>
                     </div>

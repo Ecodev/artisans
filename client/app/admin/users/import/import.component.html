@@ -12,10 +12,10 @@
                 <button
                     mat-raised-button
                     naturalFileDrop
-                    [selectable]="true"
                     accept=".csv"
-                    (filesChange)="uploadFile($event)"
+                    [selectable]="true"
                     [disabled]="!permissionsService.crud?.organization.create || importing"
+                    (filesChange)="uploadFile($event)"
                 >
                     <mat-icon naturalIcon="file_upload" />
                     Uploader
@@ -52,7 +52,7 @@
                                 définitivement les utilisateurs de notre BD.
                             </p>
                             <div class="nat-horizontal nat-gap-10">
-                                <a [routerLink]="['/admin/user', params]" mat-button style="margin-right: 3em"
+                                <a mat-button style="margin-right: 3em" [routerLink]="['/admin/user', params]"
                                     >Voir le détail</a
                                 >
                                 <button mat-raised-button color="warn" (click)="deleteAll()">

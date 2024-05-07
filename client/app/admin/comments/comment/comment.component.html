@@ -1,18 +1,18 @@
-<div [formGroup]="form" class="detail-body">
+<div class="detail-body" [formGroup]="form">
     <natural-detail-header
+        label="Commentaire"
         [listRoute]="['admin', 'comment']"
         [model]="data.model"
-        label="Commentaire"
         [newLabel]="data.seo.title"
     />
 
-    <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+    <mat-tab-group naturalLinkableTab [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab id="general" label="Général">
             <div class="nat-padding-top nat-gap-30 nat-vertical">
                 <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
                     <div class="nat-expand-66 nat-vertical">
                         <mat-form-field>
-                            <textarea (change)="update()" formControlName="description" matInput></textarea>
+                            <textarea formControlName="description" matInput (change)="update()"></textarea>
                             <mat-label>Commentaire</mat-label>
                             @if (form.get('description')?.hasError('maxlength')) {
                                 <mat-error>
@@ -27,17 +27,17 @@
 
                     <div class="nat-expand-33">
                         <natural-select
-                            [service]="newsService"
                             formControlName="event"
                             placeholder="Événement"
+                            [service]="newsService"
                             [navigateTo]="['/admin/event', form.get('event')?.value?.id]"
                             [disabled]="true"
                         />
 
                         <natural-select
-                            [service]="eventService"
                             formControlName="news"
                             placeholder="Actualité"
+                            [service]="eventService"
                             [navigateTo]="['/admin/news', form.get('event')?.value?.id]"
                             [disabled]="true"
                         />
@@ -52,6 +52,6 @@
     </mat-tab-group>
 
     @if (showFabButton) {
-        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
+        <natural-fixed-button-detail [form]="form" [model]="data.model" (create)="create()" (delete)="delete()" />
     }
 </div>

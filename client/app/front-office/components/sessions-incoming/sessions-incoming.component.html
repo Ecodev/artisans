@@ -14,8 +14,8 @@
                     <a
                         mat-flat-button
                         color="accent"
-                        [attr.href]="'https://framaforms.org/inscription-aux-conversations-carbone-1623749988'"
                         target="_blank"
+                        [attr.href]="'https://framaforms.org/inscription-aux-conversations-carbone-1623749988'"
                     >
                         Liste d'attente
                     </a>
@@ -28,7 +28,7 @@
                         <div class="mat-h2">{{ session.name }}</div>
                         <div class="rich-text" [innerHtml]="session.description"></div>
                         @if (session.mailingList) {
-                            <a mat-flat-button color="accent" [attr.href]="session.mailingList" target="_blank">
+                            <a mat-flat-button color="accent" target="_blank" [attr.href]="session.mailingList">
                                 Infos
                             </a>
                         }

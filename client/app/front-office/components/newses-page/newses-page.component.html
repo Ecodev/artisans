@@ -5,7 +5,7 @@
         @for (news of items; track news) {
             <div>
                 <div class="text-light">{{ news.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
-                <a [routerLink]="[news.id]" class="mat-h2">{{ news.name }}</a>
+                <a class="mat-h2" [routerLink]="[news.id]">{{ news.name }}</a>
                 <div class="mat-body">{{ news.description }}</div>
             </div>
         }
@@ -13,7 +13,7 @@
 
     <div>
         @if (items && dataSource?.data?.length > items.length) {
-            <a (click)="loadMore()" color="primary" mat-flat-button>Voir plus</a>
+            <a color="primary" mat-flat-button (click)="loadMore()">Voir plus</a>
         }
     </div>
 </div>

@@ -1,5 +1,5 @@
 @if (!inCart) {
-    <a (click)="click()" [color]="buttonColor" mat-flat-button>{{ label || "Acheter l'article" }}</a>
+    <a mat-flat-button [color]="buttonColor" (click)="click()">{{ label || "Acheter l'article" }}</a>
 }
 @if (inCart) {
     <a color="accent" mat-flat-button routerLink="/panier">{{ 'Voir le panier' }}</a>

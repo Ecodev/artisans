@@ -13,15 +13,15 @@
         <div class="nat-vertical">
             <div class="nat-margin-vertical overflow nat-horizontal">
                 <natural-search
-                    (selectionChange)="search($event)"
+                    class="nat-expand"
                     [facets]="naturalSearchFacets"
                     [multipleGroups]="true"
                     [selections]="naturalSearchSelections"
-                    class="nat-expand"
+                    (selectionChange)="search($event)"
                 />
             </div>
-            <div [class.nat-show]="dataSource.data?.length > 0" class="responsive-table">
-                <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
+            <div class="responsive-table" [class.nat-show]="dataSource.data?.length > 0">
+                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
@@ -30,9 +30,9 @@
                         <td *matCellDef="let element" mat-cell>
                             <div class="nat-horizontal nat-left nat-center">
                                 <natural-table-button
+                                    matTooltip="Éditer"
                                     [label]="element.description"
                                     [navigate]="['/admin/comment', element.id]"
-                                    matTooltip="Éditer"
                                 />
                             </div>
                         </td>
@@ -44,9 +44,9 @@
                             @if (element.event) {
                                 <div class="nat-horizontal nat-left nat-center">
                                     <natural-table-button
+                                        matTooltip="Éditer"
                                         [label]="element.event.name"
                                         [navigate]="['/admin/event', element.event.id]"
-                                        matTooltip="Éditer"
                                     />
                                 </div>
                             }
@@ -59,9 +59,9 @@
                             @if (element.news) {
                                 <div class="nat-horizontal nat-left nat-center">
                                     <natural-table-button
+                                        matTooltip="Éditer"
                                         [label]="element.news.name"
                                         [navigate]="['/admin/news', element.news.id]"
-                                        matTooltip="Éditer"
                                     />
                                 </div>
                             }
@@ -76,16 +76,16 @@
             }
             @if (!dataSource.data) {
                 <div class="nat-margin nat-vertical nat-center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
+                    <mat-progress-spinner mode="indeterminate" [diameter]="40" />
                 </div>
             }
             @if (dataSource.data?.length) {
                 <mat-paginator
-                    (page)="pagination($event)"
                     [length]="dataSource.data?.length"
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"
                     [pageSize]="dataSource.data?.pageSize"
+                    (page)="pagination($event)"
                 />
             }
         </div>

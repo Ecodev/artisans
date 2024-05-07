@@ -7,11 +7,11 @@
         </a>
         @if (permissionService.crud?.configuration.create) {
             <button
-                (click)="editMode = true"
                 class="edit-button"
                 color="none"
                 style="color: black; background-color: white"
                 mat-fab
+                (click)="editMode = true"
             >
                 <mat-icon naturalIcon="edit" />
             </button>
@@ -21,22 +21,22 @@
 
 @if (editMode) {
     <mat-card class="bloc nat-gap nat-vertical">
-        <form [formGroup]="form" class="nat-vertical">
+        <form class="nat-vertical" [formGroup]="form">
             <mat-form-field>
                 <mat-label>Titre</mat-label>
                 <textarea
-                    [cdkAutosizeMinRows]="1"
                     formControlName="title"
                     matInput
+                    [cdkAutosizeMinRows]="1"
                     [cdkTextareaAutosize]="true"
                 ></textarea>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Description</mat-label>
                 <textarea
-                    [cdkAutosizeMinRows]="1"
                     formControlName="description"
                     matInput
+                    [cdkAutosizeMinRows]="1"
                     [cdkTextareaAutosize]="true"
                 ></textarea>
             </mat-form-field>
@@ -52,8 +52,8 @@
         </form>
         <div class="nat-horizontal">
             <div class="nat-expand"></div>
-            <button (click)="reset()" mat-button>Annuler</button>
-            <button (click)="update(); editMode = false" color="primary" mat-flat-button>
+            <button mat-button (click)="reset()">Annuler</button>
+            <button color="primary" mat-flat-button (click)="update(); editMode = false">
                 <mat-icon naturalIcon="save" />
                 Sauvegarder
             </button>

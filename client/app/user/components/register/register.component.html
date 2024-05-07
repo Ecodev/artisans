@@ -1,4 +1,4 @@
-<form [formGroup]="form" class="body nat-padding">
+<form class="body nat-padding" [formGroup]="form">
     <div class="nat-vertical nat-gap-30">
         <h1 class="mat-headline-4">{{ route.snapshot.data.seo.title }}</h1>
 
@@ -28,7 +28,7 @@
         }
 
         <div class="nat-horizontal nat-center">
-            <button (click)="submit()" [color]="form.valid ? 'primary' : 'warn'" [disabled]="sending" mat-raised-button>
+            <button mat-raised-button [color]="form.valid ? 'primary' : 'warn'" [disabled]="sending" (click)="submit()">
                 Créer votre compte
             </button>
         </div>

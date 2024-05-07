@@ -16,7 +16,7 @@
                         </div>
                     }
                     @if (data.model.permissions.update) {
-                        <a [routerLink]="['/admin/product', data.model.id]" mat-icon-button class="mat-elevation-z4">
+                        <a mat-icon-button class="mat-elevation-z4" [routerLink]="['/admin/product', data.model.id]">
                             <mat-icon naturalIcon="edit" />
                         </a>
                     }
@@ -34,15 +34,15 @@
                         </div>
                     }
                 </div>
-                <div [innerHTML]="data.model.description" class="description mat-h3 rich-text"></div>
+                <div class="description mat-h3 rich-text" [innerHTML]="data.model.description"></div>
             </div>
             <div class="image-preview nat-vertical app-gap-40">
                 <!-- Product image (preview) -->
                 @if (data.model.image) {
                     <img
                         class="product-image"
-                        [naturalSrcDensity]="'/api/image/' + data.model.image.id + '/300'"
                         alt="aperçu de l'article"
+                        [naturalSrcDensity]="'/api/image/' + data.model.image.id + '/300'"
                     />
                 }
             </div>
@@ -76,8 +76,8 @@
                 <div id="related-review" class="image-preview nat-vertical review nat-gap-10">
                     <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
                         <img
-                            [naturalSrcDensity]="'/api/image/' + data.model.review.image.id + '/300'"
                             alt="couverture de la revue"
+                            [naturalSrcDensity]="'/api/image/' + data.model.review.image.id + '/300'"
                         />
                     </a>
                     <span class="mat-h4 nat-no-margin-bottom">Article issu de la revue</span>
@@ -118,7 +118,7 @@
                                     Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
                                 </p>
                             }
-                            <a mat-flat-button [href]="'/api/file/' + data.model.file.id" target="_blank">
+                            <a mat-flat-button target="_blank" [href]="'/api/file/' + data.model.file.id">
                                 <mat-icon naturalIcon="get_app" />
                                 @if (data.model.reviewNumber) {
                                     <span>Télécharger cette revue</span>
@@ -145,10 +145,10 @@
                                         <app-price [product]="data.model" />
                                     </div>
                                     <app-add-to-cart
+                                        label="Version papier"
                                         [buttonColor]="null"
                                         [product]="data.model"
                                         [type]="ProductType.paper"
-                                        label="Version papier"
                                     />
                                 </div>
                             }
@@ -158,10 +158,10 @@
                                         <app-price [product]="data.model" />
                                     </div>
                                     <app-add-to-cart
+                                        label="Version numérique"
                                         [buttonColor]="null"
                                         [product]="data.model"
                                         [type]="ProductType.digital"
-                                        label="Version numérique"
                                     />
                                 </div>
                             }

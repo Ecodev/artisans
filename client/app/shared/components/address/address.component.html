@@ -1,8 +1,8 @@
-<div [formGroup]="form" class="nat-vertical">
+<div class="nat-vertical" [formGroup]="form">
     <div class="nat-vertical nat-sm-horizontal nat-gap-horizontal-10">
         <mat-form-field class="nat-expand">
             <mat-label>Prénom</mat-label>
-            <input (change)="update()" formControlName="firstName" matInput />
+            <input formControlName="firstName" matInput (change)="update()" />
             @if (form.get('firstName')?.hasError('required')) {
                 <mat-error>Requis</mat-error>
             }
@@ -10,7 +10,7 @@
 
         <mat-form-field class="nat-expand">
             <mat-label>Nom de famille</mat-label>
-            <input (change)="update()" formControlName="lastName" matInput />
+            <input formControlName="lastName" matInput (change)="update()" />
             @if (form.get('lastName')?.hasError('required')) {
                 <mat-error>Requis</mat-error>
             }
@@ -19,7 +19,7 @@
 
     <mat-form-field>
         <mat-label>Rue</mat-label>
-        <input (change)="update()" formControlName="street" matInput />
+        <input formControlName="street" matInput (change)="update()" />
         @if (form.get('street')?.hasError('required')) {
             <mat-error>Requis</mat-error>
         }
@@ -28,7 +28,7 @@
     <div class="nat-vertical nat-sm-horizontal nat-gap-horizontal-10">
         <mat-form-field [style.width.px]="100">
             <mat-label>NPA</mat-label>
-            <input (change)="update()" formControlName="postcode" matInput />
+            <input formControlName="postcode" matInput (change)="update()" />
             @if (form.get('postcode')?.hasError('required')) {
                 <mat-error>Requis</mat-error>
             }
@@ -36,12 +36,12 @@
 
         <mat-form-field class="nat-expand">
             <mat-label>Localité</mat-label>
-            <input (change)="update()" formControlName="locality" matInput />
+            <input formControlName="locality" matInput (change)="update()" />
             @if (form.get('locality')?.hasError('required')) {
                 <mat-error>Requis</mat-error>
             }
         </mat-form-field>
 
-        <natural-select formControlName="country" [service]="countryService" [showIcon]="false" placeholder="Pays" />
+        <natural-select formControlName="country" placeholder="Pays" [service]="countryService" [showIcon]="false" />
     </div>
 </div>

@@ -4,11 +4,11 @@
     <mat-form-field>
         <mat-label>Montant</mat-label>
         <input
-            [formControl]="amount"
             matInput
             type="number"
-            [attr.min]="0"
             step="1"
+            [formControl]="amount"
+            [attr.min]="0"
             (keydown.enter)="dialogRef.close(amount.value)"
         />
         <div matTextSuffix>{{ currencyService.current.value }}</div>
@@ -26,7 +26,7 @@
 
 <mat-dialog-actions align="end">
     <button mat-dialog-close mat-button>Annuler</button>
-    <button [mat-dialog-close]="amount.value" mat-flat-button color="primary" [disabled]="!amount.valid">
+    <button mat-flat-button color="primary" [mat-dialog-close]="amount.value" [disabled]="!amount.valid">
         Valider
     </button>
 </mat-dialog-actions>

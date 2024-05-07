@@ -3,10 +3,10 @@
 
     @if (viewer?.role === UserRole.administrator) {
         <natural-select-enum
-            (selectionChange)="updateStatus($event)"
-            [ngModel]="data.model.status"
             enumName="OrderStatus"
             placeholder="Statut"
+            [ngModel]="data.model.status"
+            (selectionChange)="updateStatus($event)"
         />
     }
 </div>

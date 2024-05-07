@@ -29,7 +29,7 @@
                         @for (document of category.value; track document) {
                             <mat-nav-list class="documents">
                                 @if (document.file) {
-                                    <a mat-list-item [href]="'/api/file/' + document.file.id" target="_blank">
+                                    <a mat-list-item target="_blank" [href]="'/api/file/' + document.file.id">
                                         <mat-icon naturalIcon="download" />
                                         {{ document.name }}
                                     </a>

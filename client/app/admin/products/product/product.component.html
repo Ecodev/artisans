@@ -1,18 +1,18 @@
-<div [formGroup]="form" class="detail-body">
+<div class="detail-body" [formGroup]="form">
     <natural-detail-header
+        label="Produit"
         [listRoute]="['admin', 'product']"
         [model]="data.model"
-        label="Produit"
         [newLabel]="data.seo.title"
     >
         @if (isUpdatePage()) {
             <a
+                color="primary"
+                mat-raised-button
                 [routerLink]="[
                     data.model.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
                     data.model.id
                 ]"
-                color="primary"
-                mat-raised-button
             >
                 <mat-icon naturalIcon="remove_red_eye" />
                 Voir la page
@@ -20,7 +20,7 @@
         }
     </natural-detail-header>
 
-    <mat-tab-group naturalLinkableTab (selectedIndexChange)="changeTab($event)" [dynamicHeight]="true">
+    <mat-tab-group naturalLinkableTab [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab id="general" label="Général">
             <div class="nat-padding-top nat-gap-30 nat-vertical">
                 <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
@@ -29,7 +29,7 @@
                             <div class="nat-expand nat-vertical">
                                 <mat-form-field>
                                     <mat-label>Nom</mat-label>
-                                    <input (change)="update()" formControlName="name" matInput />
+                                    <input formControlName="name" matInput (change)="update()" />
                                     @if (form.get('name')?.hasError('maxlength')) {
                                         <mat-error>
                                             Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
@@ -42,7 +42,7 @@
 
                                 <mat-form-field>
                                     <mat-label>Code</mat-label>
-                                    <input (change)="update()" formControlName="code" matInput maxlength="20" />
+                                    <input formControlName="code" matInput maxlength="20" (change)="update()" />
                                     @if (form.get('code')?.hasError('maxlength')) {
                                         <mat-error>
                                             Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
@@ -66,52 +66,52 @@
                         <mat-form-field>
                             <mat-label>Contenu complet</mat-label>
                             <textarea
-                                (change)="update()"
-                                [cdkAutosizeMinRows]="1"
                                 formControlName="content"
                                 matInput
+                                [cdkAutosizeMinRows]="1"
                                 [cdkTextareaAutosize]="true"
+                                (change)="update()"
                             ></textarea>
                         </mat-form-field>
                     </div>
 
                     <div class="nat-expand-33 nat-gap nat-vertical">
                         <div class="nat-vertical nat-gap nat-margin-bottom">
-                            <mat-slide-toggle (change)="update()" formControlName="isActive"
+                            <mat-slide-toggle formControlName="isActive" (change)="update()"
                                 >Disponible à la vente
                             </mat-slide-toggle>
-                            <mat-slide-toggle (change)="update()" formControlName="isHighlighted"
+                            <mat-slide-toggle formControlName="isHighlighted" (change)="update()"
                                 >Mettre en avant
                             </mat-slide-toggle>
                         </div>
 
                         <natural-select-enum
-                            (selectionChange)="update()"
                             formControlName="type"
                             enumName="ProductType"
                             placeholder="Type"
+                            (selectionChange)="update()"
                         />
 
                         <mat-form-field>
                             <mat-label>Date de publication</mat-label>
                             <input
-                                [matDatepicker]="picker"
                                 formControlName="releaseDate"
                                 matInput
+                                [matDatepicker]="picker"
                                 (change)="update()"
                             />
-                            <mat-datepicker-toggle [for]="picker" matIconSuffix />
+                            <mat-datepicker-toggle matIconSuffix [for]="picker" />
                             <mat-datepicker #picker />
                         </mat-form-field>
 
                         <mat-form-field>
                             <mat-label>Numéro de revue</mat-label>
                             <input
-                                (change)="update()"
                                 formControlName="reviewNumber"
                                 matInput
                                 type="number"
                                 [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
+                                (change)="update()"
                             />
                             <mat-hint>Seulement pour les revues</mat-hint>
                             @if (form.hasError('reviewXorArticle')) {
@@ -124,10 +124,9 @@
 
                         @if (isUpdatePage()) {
                             <natural-select
-                                (selectionChange)="update()"
-                                [service]="productService"
                                 formControlName="review"
                                 placeholder="Revue dont est extrait cet article"
+                                [service]="productService"
                                 [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
                                 [filter]="{
                                     groups: [
@@ -139,12 +138,13 @@
                                         }
                                     ]
                                 }"
+                                (selectionChange)="update()"
                             />
                         }
 
                         <mat-form-field>
                             <mat-label>Durée de lecture</mat-label>
-                            <input (change)="update()" formControlName="readingDuration" matInput type="number" />
+                            <input formControlName="readingDuration" matInput type="number" (change)="update()" />
                             <mat-hint>Saisir un nombre de minutes</mat-hint>
                         </mat-form-field>
 
@@ -155,11 +155,11 @@
                         <mat-form-field>
                             <mat-label>Prix par unité CHF</mat-label>
                             <input
-                                (change)="update()"
                                 formControlName="pricePerUnitCHF"
                                 matInput
                                 step="0.01"
                                 type="number"
+                                (change)="update()"
                             />
                             <div matTextSuffix>CHF</div>
                             @if (form.get('pricePerUnitCHF')?.hasError('required')) {
@@ -173,11 +173,11 @@
                         <mat-form-field>
                             <mat-label>Prix par unité EUR</mat-label>
                             <input
-                                (change)="update()"
                                 formControlName="pricePerUnitEUR"
                                 matInput
                                 step="0.01"
                                 type="number"
+                                (change)="update()"
                             />
                             <div matTextSuffix>EUR</div>
                             @if (form.get('pricePerUnitEUR')?.hasError('required')) {
@@ -191,11 +191,11 @@
                         <mat-form-field class="nat-margin-top">
                             <mat-label>Remarques internes</mat-label>
                             <textarea
-                                (change)="update()"
-                                [cdkAutosizeMaxRows]="3"
                                 formControlName="internalRemarks"
                                 matInput
+                                [cdkAutosizeMaxRows]="3"
                                 [cdkTextareaAutosize]="true"
+                                (change)="update()"
                             ></textarea>
                         </mat-form-field>
                     </div>
@@ -207,43 +207,43 @@
                     <div class="nat-expand-25 nat-vertical">
                         <h2 class="mat-h2">Produit dématérialisé (PDF)</h2>
                         <natural-file
+                            action="upload"
+                            class="mat-elevation-z2"
+                            accept="application/pdf"
                             [model]="data.model.file"
                             [formCtrl]="form.get('file')"
                             [uploader]="createFileAndLink.bind(this)"
                             [height]="300"
                             [style.borderRadius.px]="4"
                             [style.marginLeft.px]="2"
-                            action="upload"
-                            class="mat-elevation-z2"
-                            accept="application/pdf"
                         />
                     </div>
 
                     <div class="nat-expand-50 nat-vertical">
                         <h2 class="mat-h2">Illustration</h2>
                         <natural-file
+                            action="upload"
+                            class="mat-elevation-z2"
                             [model]="data.model.illustration"
                             [formCtrl]="form.get('illustration')"
                             [uploader]="createImageAndLink('illustration')"
                             [height]="300"
                             [style.borderRadius.px]="4"
                             [style.marginLeft.px]="2"
-                            action="upload"
-                            class="mat-elevation-z2"
                         />
                     </div>
 
                     <div class="nat-expand-25 nat-vertical">
                         <h2 class="mat-h2">Aperçu du produit</h2>
                         <natural-file
+                            action="upload"
+                            class="mat-elevation-z2"
                             [model]="data.model.image"
                             [formCtrl]="form.get('image')"
                             [uploader]="createImageAndLink('image')"
                             [height]="300"
                             [style.borderRadius.px]="4"
                             [style.marginLeft.px]="2"
-                            action="upload"
-                            class="mat-elevation-z2"
                         />
                     </div>
                 </div>
@@ -256,10 +256,10 @@
                             <div>
                                 <h2 class="mat-h2">Tags</h2>
                                 <natural-relations
+                                    placeholder="Ajouter un tag"
                                     [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
                                     [main]="data.model"
                                     [service]="productTagService"
-                                    placeholder="Ajouter un tag"
                                 >
                                     <ng-template let-item="item">
                                         <div class="nat-horizontal nat-left nat-center nat-gap-10">
@@ -295,6 +295,8 @@
             <mat-tab id="product" label="Produits similaires">
                 <div class="nat-padding-top">
                     <natural-relations
+                        otherName="relatedProduct"
+                        placeholder="Produit similaire"
                         [autocompleteSelectorFilter]="{
                             groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}]}]
                         }"
@@ -303,8 +305,6 @@
                         }"
                         [main]="data.model"
                         [service]="productService"
-                        otherName="relatedProduct"
-                        placeholder="Produit similaire"
                     >
                         <ng-template let-item="item">
                             <div class="nat-horizontal nat-left nat-center nat-gap-10">
@@ -318,6 +318,6 @@
     </mat-tab-group>
 
     @if (showFabButton) {
-        <natural-fixed-button-detail (create)="create()" (delete)="delete()" [form]="form" [model]="data.model" />
+        <natural-fixed-button-detail [form]="form" [model]="data.model" (create)="create()" (delete)="delete()" />
     }
 </div>

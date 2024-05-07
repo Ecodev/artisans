@@ -4,7 +4,7 @@
     <div class="nat-vertical nat-gap-30">
         @for (event of items; track event) {
             <div class="nat-vertical nat-gap-5">
-                <a [routerLink]="[event.id]" class="mat-h2">{{ event.name }}</a>
+                <a class="mat-h2" [routerLink]="[event.id]">{{ event.name }}</a>
                 <div class="text-light">{{ event.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
                 <div>{{ event.place }}</div>
                 <div>{{ event.type }}</div>
@@ -14,7 +14,7 @@
 
     <div>
         @if (items && dataSource?.data?.length > items.length) {
-            <a (click)="loadMore()" color="primary" mat-flat-button>Voir plus</a>
+            <a color="primary" mat-flat-button (click)="loadMore()">Voir plus</a>
         }
     </div>
 </div>

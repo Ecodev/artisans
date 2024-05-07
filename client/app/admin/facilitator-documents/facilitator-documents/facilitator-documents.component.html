@@ -8,15 +8,15 @@
         <div class="nat-vertical">
             <div class="nat-margin-vertical overflow nat-horizontal">
                 <natural-search
-                    (selectionChange)="search($event)"
+                    class="nat-expand"
                     [facets]="naturalSearchFacets"
                     [multipleGroups]="true"
                     [selections]="naturalSearchSelections"
-                    class="nat-expand"
+                    (selectionChange)="search($event)"
                 />
             </div>
-            <div [class.nat-show]="dataSource.data?.length > 0 || false" class="responsive-table">
-                <table (matSortChange)="sorting([$event])" [dataSource]="dataSource" mat-table matSort>
+            <div class="responsive-table" [class.nat-show]="dataSource.data?.length > 0 || false">
+                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
@@ -24,10 +24,10 @@
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
                         <td *matCellDef="let element" mat-cell>
                             <natural-table-button
+                                matTooltip="Éditer"
                                 [class]="!element.isActive ? 'inactive' : ''"
                                 [label]="element.name"
                                 [navigate]="['/admin/facilitator-document', element.id]"
-                                matTooltip="Éditer"
                             />
                         </td>
                     </ng-container>
@@ -43,7 +43,7 @@
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Télécharger</th>
                         <td *matCellDef="let element" mat-cell>
                             @if (element.file) {
-                                <a [href]="'/api/file/' + element.file.id" target="_blank">
+                                <a target="_blank" [href]="'/api/file/' + element.file.id">
                                     <mat-icon naturalIcon="download"
                                 /></a>
                             }
@@ -58,16 +58,16 @@
             }
             @if (!dataSource.data) {
                 <div class="nat-margin nat-vertical nat-center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
+                    <mat-progress-spinner mode="indeterminate" [diameter]="40" />
                 </div>
             }
             @if (dataSource.data?.length) {
                 <mat-paginator
-                    (page)="pagination($event)"
                     [length]="dataSource.data?.length"
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="pageSizeOptions"
                     [pageSize]="dataSource.data?.pageSize"
+                    (page)="pagination($event)"
                 />
             }
         </div>
@@ -75,5 +75,5 @@
 }
 
 @if (permissionsService.crud?.facilitatorDocument.create) {
-    <natural-fixed-button [routerLink]="['/admin/facilitator-document/new']" icon="add" />
+    <natural-fixed-button icon="add" [routerLink]="['/admin/facilitator-document/new']" />
 }

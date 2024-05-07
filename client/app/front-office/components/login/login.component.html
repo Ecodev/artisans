@@ -1,6 +1,6 @@
 <div class="nat-fill overflow nat-vertical">
     <div class="nat-padding nat-vertical nat-center">
-        <form [formGroup]="form" class="nat-vertical nat-gap-10" style="min-width: 300px">
+        <form class="nat-vertical nat-gap-10" style="min-width: 300px" [formGroup]="form">
             <mat-form-field>
                 <mat-label>Courriel</mat-label>
                 <input
@@ -35,11 +35,11 @@
             <div class="nat-horizontal nat-gap-10">
                 <a mat-button routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
                 <button
-                    (click)="maybeConfirm()"
-                    [disabled]="!form.valid"
                     color="primary"
                     mat-raised-button
                     type="submit"
+                    [disabled]="!form.valid"
+                    (click)="maybeConfirm()"
                 >
                     Se connecter
                 </button>

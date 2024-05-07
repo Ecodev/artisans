@@ -2,8 +2,8 @@
     <div class="nat-vertical nat-gap-30">
         <h2 class="mat-headline-4 nat-no-margin-bottom">Commandes</h2>
         <div class="nat-vertical">
-            <div [class.nat-show]="dataSource.data?.length > 0" class="responsive-table">
-                <table [dataSource]="dataSource" mat-table>
+            <div class="responsive-table" [class.nat-show]="dataSource.data?.length > 0">
+                <table mat-table [dataSource]="dataSource">
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
@@ -11,10 +11,10 @@
                         <th *matHeaderCellDef class="app-date-column" mat-header-cell>Date</th>
                         <td *matCellDef="let element" mat-cell>
                             <natural-table-button
-                                [label]="element.creationDate | swissDate"
-                                [navigate]="[element.id]"
                                 icon="open_in_new"
                                 matTooltip="Éditer"
+                                [label]="element.creationDate | swissDate"
+                                [navigate]="[element.id]"
                             />
                         </td>
                     </ng-container>
@@ -42,16 +42,16 @@
             }
             @if (!dataSource.data) {
                 <div class="nat-margin nat-vertical nat-center">
-                    <mat-progress-spinner [diameter]="40" mode="indeterminate" />
+                    <mat-progress-spinner mode="indeterminate" [diameter]="40" />
                 </div>
             }
             @if (dataSource.data?.length) {
                 <mat-paginator
-                    (page)="pagination($event)"
                     [length]="dataSource.data?.length"
                     [pageIndex]="dataSource.data?.pageIndex"
                     [pageSizeOptions]="[25]"
                     [pageSize]="25"
+                    (page)="pagination($event)"
                 />
             }
         </div>

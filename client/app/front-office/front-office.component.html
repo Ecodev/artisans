@@ -5,10 +5,10 @@
             @for (item of navigation; track item) {
                 <li [class.opened]="item.opened">
                     @if (!item.children?.length) {
-                        <a (click)="menu.close()" [routerLink]="item.link" matRipple>{{ item.display }}</a>
+                        <a matRipple [routerLink]="item.link" (click)="menu.close()">{{ item.display }}</a>
                     }
                     @if (item.children?.length) {
-                        <a (click)="item.opened = !item.opened" matRipple>{{ item.display }}</a>
+                        <a matRipple (click)="item.opened = !item.opened">{{ item.display }}</a>
                     }
                     <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}" />
                 </li>
@@ -23,7 +23,7 @@
         <ul>
             @for (item of navigation; track item) {
                 <li [class.hasMenu]="item.children?.length">
-                    <a [routerLink]="item.link" matRipple routerLinkActive="active">
+                    <a matRipple routerLinkActive="active" [routerLink]="item.link">
                         <span (click)="openMenuDropdown(item.children, $event)">{{ item.display }}</span>
                     </a>
                 </li>
@@ -33,7 +33,7 @@
 </ng-template>
 
 <mat-sidenav-container>
-    <mat-sidenav #menu [opened]="menuOpened" position="end">
+    <mat-sidenav #menu position="end" [opened]="menuOpened">
         <!-- menu mobile -->
         <div id="mobile-menu">
             <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: mobileNavigation}" />
@@ -56,7 +56,7 @@
 
             <div class="nat-expand"></div>
 
-            <button (click)="menu.toggle()" mat-icon-button>
+            <button mat-icon-button (click)="menu.toggle()">
                 <mat-icon naturalIcon="menu" />
             </button>
         </mat-toolbar>
@@ -67,20 +67,20 @@
                 <div class="container nat-horizontal">
                     <div class="nat-expand"></div>
                     @if (!currencyService.locked) {
-                        <a [matMenuTriggerFor]="deviseMenu" mat-button>
+                        <a mat-button [matMenuTriggerFor]="deviseMenu">
                             {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
                             <mat-icon naturalIcon="keyboard_arrow_down" />
                         </a>
                     }
                     <mat-menu #deviseMenu="matMenu">
-                        <button (click)="currencyService.setCurrency(Currency.CHF)" mat-menu-item>Suisse (CHF)</button>
-                        <button (click)="currencyService.setCurrency(Currency.EUR)" mat-menu-item>Europe (EUR)</button>
+                        <button mat-menu-item (click)="currencyService.setCurrency(Currency.CHF)">Suisse (CHF)</button>
+                        <button mat-menu-item (click)="currencyService.setCurrency(Currency.EUR)">Europe (EUR)</button>
                     </mat-menu>
                     @if (viewer?.role === UserRole.administrator) {
                         <a routerLink="/admin" mat-button>Administration</a>
                     }
                     @for (item of topNavigation; track item) {
-                        <a [routerLink]="item.link" mat-button> {{ item.display }}</a>
+                        <a mat-button [routerLink]="item.link"> {{ item.display }}</a>
                     }
                 </div>
             </div>
@@ -108,12 +108,12 @@
                     <mat-form-field id="search-field">
                         <mat-label>Rechercher</mat-label>
                         <input
+                            matInput
+                            [(ngModel)]="searchTerm"
                             (keydown.enter)="search()"
                             (keydown.esc)="searchTerm = ''"
-                            [(ngModel)]="searchTerm"
-                            matInput
                         />
-                        <button (click)="search()" mat-icon-button matIconSuffix>
+                        <button mat-icon-button matIconSuffix (click)="search()">
                             <mat-icon naturalIcon="search" />
                         </button>
                     </mat-form-field>

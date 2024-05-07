@@ -1,10 +1,10 @@
 @if (cart) {
     <div
-        [class.nat-show]="!showConfirmationMessage"
         class="container app-gap-60 nat-md-horizontal nat-vertical nat-top"
+        [class.nat-show]="!showConfirmationMessage"
     >
         <div class="nat-md-expand app-gap-60 nat-vertical">
-            <div [formGroup]="shippingForm" class="nat-vertical app-gap-60">
+            <div class="nat-vertical app-gap-60" [formGroup]="shippingForm">
                 <h1 class="mat-headline-4 nat-no-margin-bottom nat-no-margin-bottom">MÉTHODE DE PAIEMENT</h1>
                 <mat-radio-group formControlName="paymentMethod" class="nat-vertical nat-gap-10">
                     <div class="payment-method">
@@ -22,11 +22,11 @@
                     <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
                 </div>
             </div>
-            <div [formGroup]="billingForm" class="nat-vertical app-gap-60">
+            <div class="nat-vertical app-gap-60" [formGroup]="billingForm">
                 <h1 class="mat-headline-4 nat-no-margin-bottom">Adresse de facturation</h1>
                 <mat-checkbox
-                    (change)="updateAddressRequirements(!$event.checked, billingForm)"
                     formControlName="sameAsBilling"
+                    (change)="updateAddressRequirements(!$event.checked, billingForm)"
                 >
                     Identique à mon adresse
                 </mat-checkbox>
@@ -65,9 +65,9 @@
                 </div>
             </div>
             <button
-                (click)="createOrder()"
-                [disabled]="!billingForm.valid || !shippingForm.valid || pending"
                 mat-flat-button
+                [disabled]="!billingForm.valid || !shippingForm.valid || pending"
+                (click)="createOrder()"
             >
                 Terminer la commande
             </button>

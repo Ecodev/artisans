@@ -105,7 +105,7 @@
 
 @if (currentReview) {
     <div class="la-revue section">
-        <div class="container nat-md-horizontal nat-top nat-left">
+        <div class="container nat-md-horizontal nat-md-top nat-md-left">
             @if (currentReview.image) {
                 <a [routerLink]="['/larevuedurable/article', currentReview.id]">
                     <img
@@ -148,7 +148,7 @@
 }
 
 <div class="categories section">
-    <div class="container app-gap-40 nat-vertical nat-top nat-left">
+    <div class="container nat-gap-30 nat-vertical nat-top nat-left">
         <div class="mat-headline-4">NOS THEMES</div>
         <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
         <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>

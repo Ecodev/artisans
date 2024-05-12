@@ -4,7 +4,7 @@
         @if (cart.isEmpty()) {
             <div class="nat-vertical nat-center">
                 <div class="mat-h1">Aucun article dans le panier</div>
-                <div class="nat-horizontal nat-gap-30">
+                <div class="nat-vertical nat-sm-horizontal nat-wrap nat-gap-30">
                     <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Consulter nos articles</a>
                     <a color="primary" mat-flat-button routerLink="/larevuedurable/numeros">Consulter nos revues</a>
                     <a color="primary" mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
@@ -39,7 +39,7 @@
                             <div class="price mat-body-strong" style="white-space: nowrap">
                                 {{ line.totalTaxInc | currency: currencyService.current.value }}
                             </div>
-                            <div class="nat-horizontal nat-left nat-center nat-gap-10">
+                            <div class="nat-horizontal nat-align nat-gap-10">
                                 @if (line.quantity === 1) {
                                     <button
                                         color="warn"
@@ -90,7 +90,7 @@
                     <div style="white-space: nowrap">
                         <app-price class="price mat-body-strong" [product]="cart.subscription.subscription" />
                     </div>
-                    <div class="nat-horizontal nat-left nat-center nat-gap-10">
+                    <div class="nat-horizontal nat-align nat-gap-10">
                         <button
                             color="warn"
                             mat-icon-button
@@ -116,7 +116,7 @@
                     <div class="price mat-body-strong" style="white-space: nowrap">
                         {{ cart.donationAmount | currency: currencyService.current.value }}
                     </div>
-                    <div class="nat-horizontal nat-left nat-center nat-gap-10">
+                    <div class="nat-horizontal nat-align nat-gap-10">
                         <button color="warn" mat-icon-button class="mat-elevation-z4" (click)="cart.unsetDonation()">
                             <mat-icon naturalIcon="delete" />
                         </button>
@@ -137,7 +137,7 @@
                         Total TTC : {{ cart.totalTaxInc | currency: currencyService.current.value }}
                     </div>
                 </div>
-                <div class="nat-vertical cart-buttons nat-gap-10 nat-md-gap-20 nat-md-horizontal nat-right">
+                <div class="nat-vertical nat-right cart-buttons nat-gap-10 nat-md-gap-20 nat-md-horizontal">
                     <a mat-stroked-button routerLink="/larevuedurable/articles">Continuer mes achats</a>
                     <button mat-stroked-button (click)="empty()">Vider le panier</button>
                     <div class="nat-md-expand"></div>

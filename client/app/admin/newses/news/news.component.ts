@@ -22,6 +22,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
     selector: 'app-news',
@@ -38,7 +39,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalIconDirective,
         MatTabsModule,
         NaturalLinkableTabDirective,
-
+        MatDividerModule,
         MatFormFieldModule,
         MatInputModule,
         TextFieldModule,

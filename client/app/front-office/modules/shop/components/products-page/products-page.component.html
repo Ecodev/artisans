@@ -1,15 +1,14 @@
-<div class="container app-gap-60 nat-vertical">
+<div class="container nat-gap-30 nat-vertical">
     @if (title) {
-        <div class="mat-headline-4 nat-no-margin-bottom">{{ title }}</div>
+        <div class="mat-headline-4">{{ title }}</div>
     }
 
     @if (items && items.length) {
         @if (showTagsNavigation) {
             <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
         }
-        <!--
-    GRID
-    -->
+
+        <!-- GRID -->
         @if (viewMode === ProductsViewMode.grid) {
             <div class="grid products" [class.highlight-first-items]="highlightFirstItems">
                 @for (product of items; track product) {
@@ -85,9 +84,7 @@
                                 </a>
                             }
                             <div class="nat-vertical nat-expand nat-gap-10">
-                                <div
-                                    class="nat-horizontal mat-h2 nat-no-margin-bottom text-light nat-gap-15 nat-left nat-center"
-                                >
+                                <div class="nat-horizontal mat-h2 text-light nat-gap-15 nat-align">
                                     @if (product.reviewNumber) {
                                         <span class="text-primary"> N° {{ product.reviewNumber }}</span>
                                     }

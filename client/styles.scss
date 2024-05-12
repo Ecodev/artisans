@@ -213,6 +213,10 @@ input[type='number'] {
         flex: 1 1 1e-9px;
         max-width: 70%;
     }
+    .app-md-expand-30 {
+        flex: 1 1 1e-9px;
+        max-width: 30%;
+    }
     .app-md-gap-60 {
         gap: 60px;
     }
@@ -222,11 +226,8 @@ input[type='number'] {
 }
 
 .app-expand-30 {
-    flex: 30;
-}
-
-.app-gap-40 {
-    gap: 40px;
+    flex: 1 1 1e-9px;
+    max-width: 30%;
 }
 
 .app-gap-50 {
@@ -235,4 +236,12 @@ input[type='number'] {
 
 .app-gap-60 {
     gap: 60px;
+}
+
+[class*='-horizontal'][class*='-gap-'] > * {
+    margin-right: 0 !important;
+}
+
+[class*='-vertical'][class*='-gap-'] > * {
+    margin-bottom: 0 !important;
 }

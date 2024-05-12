@@ -15,66 +15,65 @@
 
     <mat-tab-group naturalLinkableTab [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab id="general" label="Général">
-            <div class="nat-padding-top nat-gap-30 nat-vertical">
-                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
-                    <div class="nat-expand-66 nat-vertical">
-                        <mat-form-field>
-                            <input formControlName="name" matInput (change)="update()" />
-                            <mat-label>Nom</mat-label>
-                            @if (form.get('name')?.hasError('maxlength')) {
-                                <mat-error>
-                                    Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                                </mat-error>
-                            }
-                            @if (form.get('name')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                        </mat-form-field>
+            <div class="nat-vertical nat-padding-top nat-gap-horizontal nat-md-horizontal">
+                <div class="nat-vertical nat-md-expand-66">
+                    <mat-form-field>
+                        <input formControlName="name" matInput (change)="update()" />
+                        <mat-label>Nom</mat-label>
+                        @if (form.get('name')?.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                        }
+                        @if (form.get('name')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
 
-                        <mat-form-field>
-                            <input formControlName="place" matInput (change)="update()" />
-                            <mat-label>Lieu</mat-label>
-                            @if (form.get('place')?.hasError('maxlength')) {
-                                <mat-error>
-                                    Maximum {{ form.get('place')?.errors?.maxlength?.requiredLength }} caractères
-                                </mat-error>
-                            }
-                            @if (form.get('place')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                        </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="place" matInput (change)="update()" />
+                        <mat-label>Lieu</mat-label>
+                        @if (form.get('place')?.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum {{ form.get('place')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                        }
+                        @if (form.get('place')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
 
-                        <mat-form-field>
-                            <input formControlName="type" matInput (change)="update()" />
-                            <mat-label>Type</mat-label>
-                            @if (form.get('type')?.hasError('maxlength')) {
-                                <mat-error>
-                                    Maximum {{ form.get('type')?.errors?.maxlength?.requiredLength }} caractères
-                                </mat-error>
-                            }
-                            @if (form.get('type')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                        </mat-form-field>
-                    </div>
-
-                    <div class="nat-expand-33 nat-vertical">
-                        <mat-form-field>
-                            <mat-label>Date</mat-label>
-                            <input formControlName="date" matInput [matDatepicker]="picker" (change)="update()" />
-                            <mat-datepicker-toggle matIconSuffix [for]="picker" />
-                            <mat-datepicker #picker />
-                            @if (form.get('date')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                        </mat-form-field>
-                    </div>
+                    <mat-form-field>
+                        <input formControlName="type" matInput (change)="update()" />
+                        <mat-label>Type</mat-label>
+                        @if (form.get('type')?.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum {{ form.get('type')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                        }
+                        @if (form.get('type')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
                 </div>
 
-                @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model" />
-                }
+                <div class="nat-md-expand-33 nat-vertical">
+                    <mat-form-field>
+                        <mat-label>Date</mat-label>
+                        <input formControlName="date" matInput [matDatepicker]="picker" (change)="update()" />
+                        <mat-datepicker-toggle matIconSuffix [for]="picker" />
+                        <mat-datepicker #picker />
+                        @if (form.get('date')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
             </div>
+
+            @if (isUpdatePage()) {
+                <mat-divider class="nat-margin-vertical" />
+                <natural-stamp [item]="data.model" />
+            }
         </mat-tab>
     </mat-tab-group>
 

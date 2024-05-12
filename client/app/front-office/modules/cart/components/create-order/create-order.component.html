@@ -1,11 +1,8 @@
-@if (cart) {
-    <div
-        class="container app-gap-60 nat-md-horizontal nat-vertical nat-top"
-        [class.nat-show]="!showConfirmationMessage"
-    >
+@if (cart && !showConfirmationMessage) {
+    <div class="container app-gap-60 nat-vertical nat-md-horizontal nat-md-top">
         <div class="nat-md-expand app-gap-60 nat-vertical">
             <div class="nat-vertical app-gap-60" [formGroup]="shippingForm">
-                <h1 class="mat-headline-4 nat-no-margin-bottom nat-no-margin-bottom">MÉTHODE DE PAIEMENT</h1>
+                <h1 class="mat-headline-4">MÉTHODE DE PAIEMENT</h1>
                 <mat-radio-group formControlName="paymentMethod" class="nat-vertical nat-gap-10">
                     <div class="payment-method">
                         <mat-radio-button [value]="PaymentMethod.datatrans"
@@ -16,14 +13,14 @@
                         <mat-radio-button [value]="PaymentMethod.bvr">Recevoir une facture</mat-radio-button>
                     </div>
                 </mat-radio-group>
-                <h1 class="mat-headline-4 nat-no-margin-bottom">Votre adresse</h1>
+                <h1 class="mat-headline-4">Votre adresse</h1>
                 <div>
                     <app-address [form]="shippingForm" [disabled]="true" />
                     <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
                 </div>
             </div>
             <div class="nat-vertical app-gap-60" [formGroup]="billingForm">
-                <h1 class="mat-headline-4 nat-no-margin-bottom">Adresse de facturation</h1>
+                <h1 class="mat-headline-4">Adresse de facturation</h1>
                 <mat-checkbox
                     formControlName="sameAsBilling"
                     (change)="updateAddressRequirements(!$event.checked, billingForm)"
@@ -35,7 +32,7 @@
                 }
             </div>
         </div>
-        <div class="nat-expand-20 frame-primary nat-padding nat-gap nat-vertical">
+        <div class="nat-md-expand-33 frame-primary nat-padding nat-gap nat-vertical">
             <!-- Regular products -->
             @for (line of cart.productLines; track line) {
                 <div class="cart-item">

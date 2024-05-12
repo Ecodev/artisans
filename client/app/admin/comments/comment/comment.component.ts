@@ -14,9 +14,9 @@ import {NewsService} from '../../newses/services/news.service';
 import {CommentService} from '../services/comment.service';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
 import {MatTabsModule} from '@angular/material/tabs';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
     selector: 'app-comment',
@@ -29,7 +29,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalDetailHeaderComponent,
         MatTabsModule,
         NaturalLinkableTabDirective,
-
+        MatDividerModule,
         MatFormFieldModule,
         MatInputModule,
         NaturalSelectComponent,

@@ -22,262 +22,251 @@
 
     <mat-tab-group naturalLinkableTab [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab id="general" label="Général">
-            <div class="nat-padding-top nat-gap-30 nat-vertical">
-                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
-                    <div class="nat-expand-66 nat-vertical">
-                        <div class="nat-margin-bottom nat-gap nat-horizontal">
-                            <div class="nat-expand nat-vertical">
-                                <mat-form-field>
-                                    <mat-label>Nom</mat-label>
-                                    <input formControlName="name" matInput (change)="update()" />
-                                    @if (form.get('name')?.hasError('maxlength')) {
-                                        <mat-error>
-                                            Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                                        </mat-error>
-                                    }
-                                    @if (form.get('name')?.hasError('required')) {
-                                        <mat-error>Requis</mat-error>
-                                    }
-                                </mat-form-field>
+            <div class="nat-vertical nat-padding-top nat-gap-horizontal nat-md-horizontal">
+                <div class="nat-vertical nat-md-expand-66">
+                    <mat-form-field>
+                        <mat-label>Nom</mat-label>
+                        <input formControlName="name" matInput (change)="update()" />
+                        @if (form.get('name')?.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                        }
+                        @if (form.get('name')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
 
-                                <mat-form-field>
-                                    <mat-label>Code</mat-label>
-                                    <input formControlName="code" matInput maxlength="20" (change)="update()" />
-                                    @if (form.get('code')?.hasError('maxlength')) {
-                                        <mat-error>
-                                            Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
-                                        </mat-error>
-                                    }
-                                    @if (form.get('code')?.hasError('duplicateValue')) {
-                                        <mat-error> Ce code est déjà attribué à un produit</mat-error>
-                                    }
-                                    @if (form.get('code')?.hasError('required')) {
-                                        <mat-error>Requis</mat-error>
-                                    }
-                                </mat-form-field>
-                            </div>
-                        </div>
+                    <mat-form-field>
+                        <mat-label>Code</mat-label>
+                        <input formControlName="code" matInput maxlength="20" (change)="update()" />
+                        @if (form.get('code')?.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                        }
+                        @if (form.get('code')?.hasError('duplicateValue')) {
+                            <mat-error> Ce code est déjà attribué à un produit</mat-error>
+                        }
+                        @if (form.get('code')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
 
-                        <div class="mat-body-2">Description</div>
-                        <natural-editor formControlName="description" (contentChange)="update()" />
+                    <div class="mat-body-2">Description</div>
+                    <natural-editor formControlName="description" (contentChange)="update()" />
 
-                        <br />
+                    <br />
+                    <mat-form-field>
+                        <mat-label>Contenu complet</mat-label>
+                        <textarea
+                            formControlName="content"
+                            matInput
+                            [cdkAutosizeMinRows]="1"
+                            [cdkTextareaAutosize]="true"
+                            (change)="update()"
+                        ></textarea>
+                    </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Contenu complet</mat-label>
-                            <textarea
-                                formControlName="content"
-                                matInput
-                                [cdkAutosizeMinRows]="1"
-                                [cdkTextareaAutosize]="true"
-                                (change)="update()"
-                            ></textarea>
-                        </mat-form-field>
+                    <mat-form-field class="nat-margin-top">
+                        <mat-label>Remarques internes</mat-label>
+                        <textarea
+                            formControlName="internalRemarks"
+                            matInput
+                            [cdkAutosizeMaxRows]="3"
+                            [cdkTextareaAutosize]="true"
+                            (change)="update()"
+                        ></textarea>
+                    </mat-form-field>
+                </div>
+
+                <div class="nat-md-expand-33 nat-gap nat-vertical">
+                    <div class="nat-vertical nat-gap nat-margin-bottom">
+                        <mat-slide-toggle formControlName="isActive" (change)="update()"
+                            >Disponible à la vente
+                        </mat-slide-toggle>
+                        <mat-slide-toggle formControlName="isHighlighted" (change)="update()"
+                            >Mettre en avant
+                        </mat-slide-toggle>
                     </div>
 
-                    <div class="nat-expand-33 nat-gap nat-vertical">
-                        <div class="nat-vertical nat-gap nat-margin-bottom">
-                            <mat-slide-toggle formControlName="isActive" (change)="update()"
-                                >Disponible à la vente
-                            </mat-slide-toggle>
-                            <mat-slide-toggle formControlName="isHighlighted" (change)="update()"
-                                >Mettre en avant
-                            </mat-slide-toggle>
-                        </div>
+                    <natural-select-enum
+                        formControlName="type"
+                        enumName="ProductType"
+                        placeholder="Type"
+                        (selectionChange)="update()"
+                    />
 
-                        <natural-select-enum
-                            formControlName="type"
-                            enumName="ProductType"
-                            placeholder="Type"
+                    <mat-form-field>
+                        <mat-label>Date de publication</mat-label>
+                        <input formControlName="releaseDate" matInput [matDatepicker]="picker" (change)="update()" />
+                        <mat-datepicker-toggle matIconSuffix [for]="picker" />
+                        <mat-datepicker #picker />
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Numéro de revue</mat-label>
+                        <input
+                            formControlName="reviewNumber"
+                            matInput
+                            type="number"
+                            [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
+                            (change)="update()"
+                        />
+                        <mat-hint>Seulement pour les revues</mat-hint>
+                        @if (form.hasError('reviewXorArticle')) {
+                            <mat-error
+                                >Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer un
+                                numéro de revue pour une revue, soit choisir une revue existante pour un article.
+                            </mat-error>
+                        }
+                    </mat-form-field>
+
+                    @if (isUpdatePage()) {
+                        <natural-select
+                            formControlName="review"
+                            placeholder="Revue dont est extrait cet article"
+                            [service]="productService"
+                            [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
+                            [filter]="{
+                                groups: [
+                                    {
+                                        conditions: [
+                                            {id: {equal: {value: data.model.id, not: true}}},
+                                            {reviewNumber: {null: {not: true}}}
+                                        ]
+                                    }
+                                ]
+                            }"
                             (selectionChange)="update()"
                         />
+                    }
 
-                        <mat-form-field>
-                            <mat-label>Date de publication</mat-label>
-                            <input
-                                formControlName="releaseDate"
-                                matInput
-                                [matDatepicker]="picker"
-                                (change)="update()"
-                            />
-                            <mat-datepicker-toggle matIconSuffix [for]="picker" />
-                            <mat-datepicker #picker />
-                        </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Durée de lecture</mat-label>
+                        <input formControlName="readingDuration" matInput type="number" (change)="update()" />
+                        <mat-hint>Saisir un nombre de minutes</mat-hint>
+                    </mat-form-field>
 
-                        <mat-form-field>
-                            <mat-label>Numéro de revue</mat-label>
-                            <input
-                                formControlName="reviewNumber"
-                                matInput
-                                type="number"
-                                [errorStateMatcher]="reviewXorArticleErrorStateMatcher"
-                                (change)="update()"
-                            />
-                            <mat-hint>Seulement pour les revues</mat-hint>
-                            @if (form.hasError('reviewXorArticle')) {
-                                <mat-error
-                                    >Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer
-                                    un numéro de revue pour une revue, soit choisir une revue existante pour un article.
-                                </mat-error>
-                            }
-                        </mat-form-field>
+                    <mat-divider class="nat-margin-vertical" />
 
-                        @if (isUpdatePage()) {
-                            <natural-select
-                                formControlName="review"
-                                placeholder="Revue dont est extrait cet article"
-                                [service]="productService"
-                                [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
-                                [filter]="{
-                                    groups: [
-                                        {
-                                            conditions: [
-                                                {id: {equal: {value: data.model.id, not: true}}},
-                                                {reviewNumber: {null: {not: true}}}
-                                            ]
-                                        }
-                                    ]
-                                }"
-                                (selectionChange)="update()"
-                            />
+                    <h2 class="mat-h2">Prix</h2>
+
+                    <mat-form-field>
+                        <mat-label>Prix par unité CHF</mat-label>
+                        <input
+                            formControlName="pricePerUnitCHF"
+                            matInput
+                            step="0.01"
+                            type="number"
+                            (change)="update()"
+                        />
+                        <div matTextSuffix>CHF</div>
+                        @if (form.get('pricePerUnitCHF')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
                         }
-
-                        <mat-form-field>
-                            <mat-label>Durée de lecture</mat-label>
-                            <input formControlName="readingDuration" matInput type="number" (change)="update()" />
-                            <mat-hint>Saisir un nombre de minutes</mat-hint>
-                        </mat-form-field>
-
-                        <mat-divider />
-
-                        <h2 class="mat-h2">Prix</h2>
-
-                        <mat-form-field>
-                            <mat-label>Prix par unité CHF</mat-label>
-                            <input
-                                formControlName="pricePerUnitCHF"
-                                matInput
-                                step="0.01"
-                                type="number"
-                                (change)="update()"
-                            />
-                            <div matTextSuffix>CHF</div>
-                            @if (form.get('pricePerUnitCHF')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                            @if (form.get('pricePerUnitCHF')?.hasError('money')) {
-                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
-                            }
-                        </mat-form-field>
-
-                        <mat-form-field>
-                            <mat-label>Prix par unité EUR</mat-label>
-                            <input
-                                formControlName="pricePerUnitEUR"
-                                matInput
-                                step="0.01"
-                                type="number"
-                                (change)="update()"
-                            />
-                            <div matTextSuffix>EUR</div>
-                            @if (form.get('pricePerUnitEUR')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                            @if (form.get('pricePerUnitEUR')?.hasError('money')) {
-                                <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
-                            }
-                        </mat-form-field>
-
-                        <mat-form-field class="nat-margin-top">
-                            <mat-label>Remarques internes</mat-label>
-                            <textarea
-                                formControlName="internalRemarks"
-                                matInput
-                                [cdkAutosizeMaxRows]="3"
-                                [cdkTextareaAutosize]="true"
-                                (change)="update()"
-                            ></textarea>
-                        </mat-form-field>
-                    </div>
-                </div>
-
-                <mat-divider />
-
-                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
-                    <div class="nat-expand-25 nat-vertical">
-                        <h2 class="mat-h2">Produit dématérialisé (PDF)</h2>
-                        <natural-file
-                            action="upload"
-                            class="mat-elevation-z2"
-                            accept="application/pdf"
-                            [model]="data.model.file"
-                            [formCtrl]="form.get('file')"
-                            [uploader]="createFileAndLink.bind(this)"
-                            [height]="300"
-                            [style.borderRadius.px]="4"
-                            [style.marginLeft.px]="2"
-                        />
-                    </div>
-
-                    <div class="nat-expand-50 nat-vertical">
-                        <h2 class="mat-h2">Illustration</h2>
-                        <natural-file
-                            action="upload"
-                            class="mat-elevation-z2"
-                            [model]="data.model.illustration"
-                            [formCtrl]="form.get('illustration')"
-                            [uploader]="createImageAndLink('illustration')"
-                            [height]="300"
-                            [style.borderRadius.px]="4"
-                            [style.marginLeft.px]="2"
-                        />
-                    </div>
-
-                    <div class="nat-expand-25 nat-vertical">
-                        <h2 class="mat-h2">Aperçu du produit</h2>
-                        <natural-file
-                            action="upload"
-                            class="mat-elevation-z2"
-                            [model]="data.model.image"
-                            [formCtrl]="form.get('image')"
-                            [uploader]="createImageAndLink('image')"
-                            [height]="300"
-                            [style.borderRadius.px]="4"
-                            [style.marginLeft.px]="2"
-                        />
-                    </div>
-                </div>
-
-                <mat-divider />
-
-                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
-                    <div class="nat-expand-66 nat-vertical">
-                        @if (isUpdatePage()) {
-                            <div>
-                                <h2 class="mat-h2">Tags</h2>
-                                <natural-relations
-                                    placeholder="Ajouter un tag"
-                                    [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
-                                    [main]="data.model"
-                                    [service]="productTagService"
-                                >
-                                    <ng-template let-item="item">
-                                        <div class="nat-horizontal nat-left nat-center nat-gap-10">
-                                            <!-- TODO : link to products list filtred by tag -->
-                                            <natural-avatar [bgColor]="item.color" [initials]="item.name" [size]="32" />
-                                            <natural-table-button [label]="item.name" [navigate]="['/admin/product']" />
-                                        </div>
-                                    </ng-template>
-                                </natural-relations>
-                            </div>
+                        @if (form.get('pricePerUnitCHF')?.hasError('money')) {
+                            <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
                         }
-                    </div>
-                </div>
+                    </mat-form-field>
 
-                @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model" />
-                }
+                    <mat-form-field>
+                        <mat-label>Prix par unité EUR</mat-label>
+                        <input
+                            formControlName="pricePerUnitEUR"
+                            matInput
+                            step="0.01"
+                            type="number"
+                            (change)="update()"
+                        />
+                        <div matTextSuffix>EUR</div>
+                        @if (form.get('pricePerUnitEUR')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                        @if (form.get('pricePerUnitEUR')?.hasError('money')) {
+                            <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
             </div>
+
+            <mat-divider class="nat-margin-vertical" />
+
+            <div class="nat-vertical nat-md-horizontal nat-gap-horizontal-30">
+                <div class="nat-md-expand-33 nat-vertical">
+                    <h2 class="mat-h2">Produit dématérialisé (PDF)</h2>
+                    <natural-file
+                        action="upload"
+                        class="mat-elevation-z2"
+                        accept="application/pdf"
+                        [model]="data.model.file"
+                        [formCtrl]="form.get('file')"
+                        [uploader]="createFileAndLink.bind(this)"
+                        [height]="300"
+                        [style.borderRadius.px]="4"
+                        [style.marginLeft.px]="2"
+                    />
+                </div>
+
+                <div class="nat-md-expand-3 nat-vertical">
+                    <h2 class="mat-h2">Illustration</h2>
+                    <natural-file
+                        action="upload"
+                        class="mat-elevation-z2"
+                        [model]="data.model.illustration"
+                        [formCtrl]="form.get('illustration')"
+                        [uploader]="createImageAndLink('illustration')"
+                        [height]="300"
+                        [style.borderRadius.px]="4"
+                        [style.marginLeft.px]="2"
+                    />
+                </div>
+
+                <div class="nat-md-expand-33 nat-vertical">
+                    <h2 class="mat-h2">Aperçu du produit</h2>
+                    <natural-file
+                        action="upload"
+                        class="mat-elevation-z2"
+                        [model]="data.model.image"
+                        [formCtrl]="form.get('image')"
+                        [uploader]="createImageAndLink('image')"
+                        [height]="300"
+                        [style.borderRadius.px]="4"
+                        [style.marginLeft.px]="2"
+                    />
+                </div>
+            </div>
+
+            <mat-divider class="nat-margin-vertical" />
+
+            <div class="nat-vertical nat-md-horizontal nat-gap-horizontal-30">
+                <div class="nat-md-expand-66 nat-vertical">
+                    @if (isUpdatePage()) {
+                        <div>
+                            <h2 class="mat-h2">Tags</h2>
+                            <natural-relations
+                                placeholder="Ajouter un tag"
+                                [filter]="{groups: [{conditions: [{products: {have: {values: [data.model.id]}}}]}]}"
+                                [main]="data.model"
+                                [service]="productTagService"
+                            >
+                                <ng-template let-item="item">
+                                    <div class="nat-horizontal nat-align nat-gap-10">
+                                        <!-- TODO : link to products list filtred by tag -->
+                                        <natural-avatar [bgColor]="item.color" [initials]="item.name" [size]="32" />
+                                        <natural-table-button [label]="item.name" [navigate]="['/admin/product']" />
+                                    </div>
+                                </ng-template>
+                            </natural-relations>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @if (isUpdatePage()) {
+                <mat-divider class="nat-margin-vertical" />
+                <natural-stamp [item]="data.model" />
+            }
         </mat-tab>
 
         @if (isUpdatePage()) {
@@ -307,7 +296,7 @@
                         [service]="productService"
                     >
                         <ng-template let-item="item">
-                            <div class="nat-horizontal nat-left nat-center nat-gap-10">
+                            <div class="nat-horizontal nat-align nat-gap-10">
                                 <natural-table-button [label]="item.name" [navigate]="['/admin/product/', item.id]" />
                             </div>
                         </ng-template>

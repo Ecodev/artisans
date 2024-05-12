@@ -2,7 +2,7 @@
     <div class="container body app-gap-60 nat-vertical">
         <section class="nat-vertical nat-gap app-md-gap-60 nat-md-horizontal">
             <div class="nat-md-expand nat-gap-10 nat-vertical">
-                <div class="nat-horizontal nat-gap-15 nat-left nat-center">
+                <div class="nat-horizontal nat-gap-15 nat-align">
                     <!-- Review number -->
                     @if (data.model.reviewNumber) {
                         <div class="text-primary text-bold mat-h1 nat-no-margin-bottom">
@@ -21,11 +21,11 @@
                         </a>
                     }
                 </div>
-                <h1 class="mat-headline-4 nat-no-margin-bottom">{{ data.model.name }}</h1>
+                <h1 class="mat-headline-4">{{ data.model.name }}</h1>
                 <!-- Reading duration -->
                 <div class="nat-horizontal nat-gap">
                     @if (data.model.readingDuration) {
-                        <div class="nat-horizontal nat-left nat-center nat-gap-10 mat-h3">
+                        <div class="nat-horizontal nat-align nat-gap-10 mat-h3">
                             <mat-icon naturalIcon="alarm" />
                             <div>
                                 {{ data.model.readingDuration
@@ -36,7 +36,7 @@
                 </div>
                 <div class="description mat-h3 rich-text" [innerHTML]="data.model.description"></div>
             </div>
-            <div class="image-preview nat-vertical app-gap-40">
+            <div class="image-preview nat-vertical nat-gap-30">
                 <!-- Product image (preview) -->
                 @if (data.model.image) {
                     <img
@@ -47,12 +47,12 @@
                 }
             </div>
         </section>
-        <section class="nat-vertical nat-md-horizontal nat-top nat-left app-gap-60">
+        <section class="nat-vertical nat-md-horizontal nat-md-top nat-md-left app-gap-60">
             @if (articles.length) {
                 <div id="see-more" class="nat-expand nat-vertical">
                     <div
                         matRipple
-                        class="text-primary nat-gap-5 nat-horizontal nat-left nat-center"
+                        class="text-primary nat-gap-5 nat-horizontal nat-align"
                         (click)="articlesMenuOpen = !articlesMenuOpen"
                     >
                         <span class="mat-headline-6 show-products-of-review-button nat-no-margin-bottom"
@@ -80,11 +80,8 @@
                             [naturalSrcDensity]="'/api/image/' + data.model.review.image.id + '/300'"
                         />
                     </a>
-                    <span class="mat-h4 nat-no-margin-bottom">Article issu de la revue</span>
-                    <a
-                        class="mat-h3 nat-no-margin-bottom"
-                        [routerLink]="['/larevuedurable/article', data.model.review.id]"
-                    >
+                    <span class="mat-h4">Article issu de la revue</span>
+                    <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">
                         <span class="text-primary">N° {{ data.model.review.reviewNumber }}</span>
                         {{ data.model.review.name }}
                     </a>
@@ -94,7 +91,7 @@
         </section>
         <div class="nat-vertical nat-gap-30">
             @if (!viewer) {
-                <div class="mat-h3 nat-gap-15 nat-horizontal nat-wrap nat-left nat-center">
+                <div class="mat-h3 nat-gap-15 nat-horizontal nat-wrap nat-align">
                     <div class="mat-h1 nat-no-margin-bottom">Intéressé par ce contenu ?</div>
                     <div>Si vous êtes déjà abonné à la version numérique</div>
                     <a mat-flat-button color="primary" routerLink="/login" [queryParams]="{returnUrl: url}"
@@ -141,7 +138,7 @@
                         <div class="nat-horizontal nat-wrap nat-gap-30">
                             @if (showBuyPaper) {
                                 <div class="nat-vertical nat-gap-10">
-                                    <div class="mat-h2 price nat-center nat-no-margin-bottom">
+                                    <div class="mat-h2 price nat-center">
                                         <app-price [product]="data.model" />
                                     </div>
                                     <app-add-to-cart
@@ -154,7 +151,7 @@
                             }
                             @if (showBuyDigital) {
                                 <div class="nat-vertical nat-gap-10 nat-center">
-                                    <div class="mat-h2 price nat-no-margin-bottom">
+                                    <div class="mat-h2 price">
                                         <app-price [product]="data.model" />
                                     </div>
                                     <app-add-to-cart
@@ -200,7 +197,7 @@
                 }
             </div>
         </div>
-        <div [class.nat-show]="relatedProducts?.dataSource?.data?.length">
+        <div [class.nat-hide]="!relatedProducts?.dataSource?.data?.length">
             <div class="mat-headline-6">Pour continuer votre lecture ...</div>
             <app-products-page
                 [forcedVariables]="{

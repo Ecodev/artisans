@@ -20,81 +20,82 @@
                     (selectionChange)="search($event)"
                 />
             </div>
-            <div class="responsive-table" [class.nat-show]="dataSource.data?.length > 0 || false">
-                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
-                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+            @if (showTable()) {
+                <div class="responsive-table">
+                    <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
+                        <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
-                    <ng-container matColumnDef="code">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.code }}</td>
-                    </ng-container>
+                        <ng-container matColumnDef="code">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
+                            <td *matCellDef="let element" mat-cell>{{ element.code }}</td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="image">
-                        <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
-                        <td *matCellDef="let element" mat-cell>
-                            @if (element.image) {
-                                <natural-file
-                                    [height]="40"
-                                    [model]="element.image"
-                                    [style.borderRadius.px]="40"
-                                    [style.width.px]="40"
-                                />
-                            }
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="name">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
-                        <td *matCellDef="let element" mat-cell>
-                            <natural-table-button
-                                matTooltip="Éditer"
-                                [class]="!element.isActive ? 'inactive' : ''"
-                                [label]="element.name"
-                                [navigate]="['/admin/product', element.id]"
-                            />
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="type">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.type | enum: 'ProductType' | async }}</td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="pricePerUnitCHF">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix CHF</th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
-                            @if (element.pricePerUnitCHF !== '0.00') {
-                                <span>{{ element.pricePerUnitCHF | currency: 'CHF' }}</span>
-                            }
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="pricePerUnitEUR">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix EUR</th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
-                            @if (element.pricePerUnitEUR !== '0.00') {
-                                <span>{{ element.pricePerUnitEUR | currency: 'EUR' }}</span>
-                            }
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="isActive">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
-                        <td *matCellDef="let element" mat-cell>
-                            <div class="nat-horizontal nat-left nat-center">
-                                @if (element.isActive) {
-                                    <mat-icon naturalIcon="done" />
+                        <ng-container matColumnDef="image">
+                            <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
+                            <td *matCellDef="let element" mat-cell>
+                                @if (element.image) {
+                                    <natural-file
+                                        [height]="40"
+                                        [model]="element.image"
+                                        [style.borderRadius.px]="40"
+                                        [style.width.px]="40"
+                                    />
                                 }
-                            </div>
-                        </td>
-                    </ng-container>
-                </table>
-            </div>
-            @if (dataSource.data?.length === 0) {
-                <div class="nat-margin nat-vertical nat-center">
-                    <div>Pas de résultats</div>
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="name">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
+                            <td *matCellDef="let element" mat-cell>
+                                <natural-table-button
+                                    matTooltip="Éditer"
+                                    [class]="!element.isActive ? 'inactive' : ''"
+                                    [label]="element.name"
+                                    [navigate]="['/admin/product', element.id]"
+                                />
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="type">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
+                            <td *matCellDef="let element" mat-cell>{{ element.type | enum: 'ProductType' | async }}</td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="pricePerUnitCHF">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix CHF</th>
+                            <td *matCellDef="let element" mat-cell natural-align-right>
+                                @if (element.pricePerUnitCHF !== '0.00') {
+                                    <span>{{ element.pricePerUnitCHF | currency: 'CHF' }}</span>
+                                }
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="pricePerUnitEUR">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix EUR</th>
+                            <td *matCellDef="let element" mat-cell natural-align-right>
+                                @if (element.pricePerUnitEUR !== '0.00') {
+                                    <span>{{ element.pricePerUnitEUR | currency: 'EUR' }}</span>
+                                }
+                            </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="isActive">
+                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
+                            <td *matCellDef="let element" mat-cell>
+                                <div class="nat-horizontal nat-align">
+                                    @if (element.isActive) {
+                                        <mat-icon naturalIcon="done" />
+                                    }
+                                </div>
+                            </td>
+                        </ng-container>
+                    </table>
                 </div>
+            }
+
+            @if (showNoResults()) {
+                <div class="nat-margin text-center">Pas de résultats</div>
             }
             @if (!dataSource.data) {
                 <div class="nat-margin nat-vertical nat-center">

@@ -4,7 +4,7 @@
             <div>{{ data.model.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
         </div>
 
-        <h1 class="mat-headline-4 nat-no-margin-bottom">
+        <h1 class="mat-headline-4">
             {{ data.model.name }}
             @if (isUpdatePage() && data.model.permissions.update) {
                 <a mat-icon-button class="mat-elevation-z4" [routerLink]="['/admin/event', data.model.id]">

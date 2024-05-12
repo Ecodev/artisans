@@ -26,9 +26,7 @@ import {CommonModule} from '@angular/common';
     standalone: true,
     imports: [
         CommonModule,
-
         NaturalSearchComponent,
-
         RouterLink,
         NaturalSrcDensityDirective,
         MatRippleModule,

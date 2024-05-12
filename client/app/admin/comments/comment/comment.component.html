@@ -8,46 +8,45 @@
 
     <mat-tab-group naturalLinkableTab [dynamicHeight]="true" (selectedIndexChange)="changeTab($event)">
         <mat-tab id="general" label="Général">
-            <div class="nat-padding-top nat-gap-30 nat-vertical">
-                <div class="nat-vertical nat-sm-horizontal nat-gap-0 nat-sm-gap-30">
-                    <div class="nat-expand-66 nat-vertical">
-                        <mat-form-field>
-                            <textarea formControlName="description" matInput (change)="update()"></textarea>
-                            <mat-label>Commentaire</mat-label>
-                            @if (form.get('description')?.hasError('maxlength')) {
-                                <mat-error>
-                                    Maximum {{ form.get('description')?.errors?.maxlength?.requiredLength }} caractères
-                                </mat-error>
-                            }
-                            @if (form.get('description')?.hasError('required')) {
-                                <mat-error>Requis</mat-error>
-                            }
-                        </mat-form-field>
-                    </div>
-
-                    <div class="nat-expand-33">
-                        <natural-select
-                            formControlName="event"
-                            placeholder="Événement"
-                            [service]="newsService"
-                            [navigateTo]="['/admin/event', form.get('event')?.value?.id]"
-                            [disabled]="true"
-                        />
-
-                        <natural-select
-                            formControlName="news"
-                            placeholder="Actualité"
-                            [service]="eventService"
-                            [navigateTo]="['/admin/news', form.get('event')?.value?.id]"
-                            [disabled]="true"
-                        />
-                    </div>
+            <div class="nat-vertical nat-padding-top nat-gap-horizontal nat-md-horizontal">
+                <div class="nat-vertical nat-md-expand-66">
+                    <mat-form-field>
+                        <textarea formControlName="description" matInput (change)="update()"></textarea>
+                        <mat-label>Commentaire</mat-label>
+                        @if (form.get('description')?.hasError('maxlength')) {
+                            <mat-error>
+                                Maximum {{ form.get('description')?.errors?.maxlength?.requiredLength }} caractères
+                            </mat-error>
+                        }
+                        @if (form.get('description')?.hasError('required')) {
+                            <mat-error>Requis</mat-error>
+                        }
+                    </mat-form-field>
                 </div>
 
-                @if (isUpdatePage()) {
-                    <natural-stamp [item]="data.model" />
-                }
+                <div class="nat-md-expand-33">
+                    <natural-select
+                        formControlName="event"
+                        placeholder="Événement"
+                        [service]="newsService"
+                        [navigateTo]="['/admin/event', form.get('event')?.value?.id]"
+                        [disabled]="true"
+                    />
+
+                    <natural-select
+                        formControlName="news"
+                        placeholder="Actualité"
+                        [service]="eventService"
+                        [navigateTo]="['/admin/news', form.get('event')?.value?.id]"
+                        [disabled]="true"
+                    />
+                </div>
             </div>
+
+            @if (isUpdatePage()) {
+                <mat-divider class="nat-margin-vertical" />
+                <natural-stamp [item]="data.model" />
+            }
         </mat-tab>
     </mat-tab-group>
 

@@ -14,7 +14,7 @@
             @for (comment of dataSource?.data?.items; track comment) {
                 <div class="nat-vertical nat-gap-5 nat-left">
                     @if (comment.authorName) {
-                        <div class="mat-h2 nat-gap-15 nat-horizontal nat-wrap nat-left nat-center">
+                        <div class="mat-h2 nat-gap-15 nat-horizontal nat-wrap nat-align">
                             <span>{{ comment.authorName }}</span>
                             <span class="mat-body text-light">
                                 Posté le {{ comment.creationDate | date: 'longDate' }}

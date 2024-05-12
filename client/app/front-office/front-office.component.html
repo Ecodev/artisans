@@ -49,7 +49,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-        <mat-toolbar class="nat-horizontal nat-left nat-center nat-md-hide" id="header-mobile">
+        <mat-toolbar class="nat-horizontal nat-align nat-md-hide" id="header-mobile">
             <div class="nat-expand"></div>
 
             <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
@@ -61,7 +61,7 @@
             </button>
         </mat-toolbar>
 
-        <div id="header" class="nat-hide nat-md-show">
+        <div id="header" class="nat-md-show">
             <!-- header : 1s line -->
             <div id="header-top">
                 <div class="container nat-horizontal">
@@ -101,7 +101,7 @@
             <!-- header : 3rd line -->
             <div id="header-bottom">
                 <div class="container nat-horizontal nat-right" id="menu-main-container">
-                    <div class="nat-expand" id="menu-main">
+                    <div class="nat-expand nat-horizontal nat-align" id="menu-main">
                         <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: navigation}" />
                     </div>
 

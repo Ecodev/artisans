@@ -26,7 +26,15 @@
 
             <mat-form-field>
                 <mat-label>Mot de passe</mat-label>
-                <input matInput formControlName="password" type="password" (keydown.enter)="maybeConfirm()" />
+                <input
+                    matInput
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    formControlName="password"
+                    type="password"
+                    (keydown.enter)="maybeConfirm()"
+                />
                 @if (form.get('password')?.hasError('required')) {
                     <mat-error>Requis</mat-error>
                 }

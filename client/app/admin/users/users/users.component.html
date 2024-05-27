@@ -21,69 +21,67 @@
                     (selectionChange)="search($event)"
                 />
             </div>
-            @if (showTable()) {
-                <div class="responsive-table">
-                    <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
-                        <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                        <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+            <div class="responsive-table">
+                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
+                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
-                        <ng-container matColumnDef="name">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>
-                            <td *matCellDef="let element" mat-cell>
-                                <div class="nat-horizontal nat-align">
-                                    <natural-avatar [initials]="element.name" [gravatar]="element.email" [size]="36" />
-                                    <natural-table-button
-                                        matTooltip="Éditer"
-                                        [label]="element.name || 'Sans nom'"
-                                        [navigate]="['/admin/user', element.id]"
-                                    />
-                                </div>
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header="lastName">Nom</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <div class="nat-horizontal nat-align">
+                                <natural-avatar [initials]="element.name" [gravatar]="element.email" [size]="36" />
+                                <natural-table-button
+                                    matTooltip="Éditer"
+                                    [label]="element.name || 'Sans nom'"
+                                    [navigate]="['/admin/user', element.id]"
+                                />
+                            </div>
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="creationDate">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Créé le</th>
-                            <td *matCellDef="let element" mat-cell>
-                                {{ element.creationDate | swissDate }}
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="creationDate">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Créé le</th>
+                        <td *matCellDef="let element" mat-cell>
+                            {{ element.creationDate | swissDate }}
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="updateDate">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Modifié le</th>
-                            <td *matCellDef="let element" mat-cell>
-                                {{ element.updateDate | swissDate }}
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="updateDate">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Modifié le</th>
+                        <td *matCellDef="let element" mat-cell>
+                            {{ element.updateDate | swissDate }}
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="membership">
-                            <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>
-                                Membre des artisans
-                            </th>
-                            <td *matCellDef="let element" mat-cell>
-                                {{ element.membership | enum: 'Membership' | async }}
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="membership">
+                        <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>
+                            Membre des artisans
+                        </th>
+                        <td *matCellDef="let element" mat-cell>
+                            {{ element.membership | enum: 'Membership' | async }}
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="phone">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Tél.</th>
-                            <td *matCellDef="let element" mat-cell>
-                                @if (element.phone) {
-                                    <a class="app-link" [href]="'tel:' + element.phone">{{ element.phone }}</a>
-                                }
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="phone">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Tél.</th>
+                        <td *matCellDef="let element" mat-cell>
+                            @if (element.phone) {
+                                <a class="app-link" [href]="'tel:' + element.phone">{{ element.phone }}</a>
+                            }
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="email">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>e-mail</th>
-                            <td *matCellDef="let element" mat-cell>
-                                @if (element.email) {
-                                    <a class="app-link" [href]="'mailto:' + element.email">{{ element.email }}</a>
-                                }
-                            </td>
-                        </ng-container>
-                    </table>
-                </div>
-            }
+                    <ng-container matColumnDef="email">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>e-mail</th>
+                        <td *matCellDef="let element" mat-cell>
+                            @if (element.email) {
+                                <a class="app-link" [href]="'mailto:' + element.email">{{ element.email }}</a>
+                            }
+                        </td>
+                    </ng-container>
+                </table>
+            </div>
 
             @if (showNoResults()) {
                 <div class="nat-margin text-center">Pas de résultats</div>

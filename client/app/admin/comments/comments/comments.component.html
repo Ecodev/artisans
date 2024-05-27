@@ -21,57 +21,55 @@
                 />
             </div>
 
-            @if (showTable()) {
-                <div class="responsive-table">
-                    <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
-                        <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                        <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+            <div class="responsive-table">
+                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
+                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
-                        <ng-container matColumnDef="description">
-                            <th *matHeaderCellDef mat-header-cell>Commentaire</th>
-                            <td *matCellDef="let element" mat-cell>
+                    <ng-container matColumnDef="description">
+                        <th *matHeaderCellDef mat-header-cell>Commentaire</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <div class="nat-horizontal nat-align">
+                                <natural-table-button
+                                    matTooltip="Éditer"
+                                    [label]="element.description"
+                                    [navigate]="['/admin/comment', element.id]"
+                                />
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="event">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header="event">Événement</th>
+                        <td *matCellDef="let element" mat-cell>
+                            @if (element.event) {
                                 <div class="nat-horizontal nat-align">
                                     <natural-table-button
                                         matTooltip="Éditer"
-                                        [label]="element.description"
-                                        [navigate]="['/admin/comment', element.id]"
+                                        [label]="element.event.name"
+                                        [navigate]="['/admin/event', element.event.id]"
                                     />
                                 </div>
-                            </td>
-                        </ng-container>
+                            }
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="event">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header="event">Événement</th>
-                            <td *matCellDef="let element" mat-cell>
-                                @if (element.event) {
-                                    <div class="nat-horizontal nat-align">
-                                        <natural-table-button
-                                            matTooltip="Éditer"
-                                            [label]="element.event.name"
-                                            [navigate]="['/admin/event', element.event.id]"
-                                        />
-                                    </div>
-                                }
-                            </td>
-                        </ng-container>
-
-                        <ng-container matColumnDef="news">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
-                            <td *matCellDef="let element" mat-cell>
-                                @if (element.news) {
-                                    <div class="nat-horizontal nat-align">
-                                        <natural-table-button
-                                            matTooltip="Éditer"
-                                            [label]="element.news.name"
-                                            [navigate]="['/admin/news', element.news.id]"
-                                        />
-                                    </div>
-                                }
-                            </td>
-                        </ng-container>
-                    </table>
-                </div>
-            }
+                    <ng-container matColumnDef="news">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
+                        <td *matCellDef="let element" mat-cell>
+                            @if (element.news) {
+                                <div class="nat-horizontal nat-align">
+                                    <natural-table-button
+                                        matTooltip="Éditer"
+                                        [label]="element.news.name"
+                                        [navigate]="['/admin/news', element.news.id]"
+                                    />
+                                </div>
+                            }
+                        </td>
+                    </ng-container>
+                </table>
+            </div>
 
             @if (showNoResults()) {
                 <div class="nat-margin text-center">Pas de résultats</div>

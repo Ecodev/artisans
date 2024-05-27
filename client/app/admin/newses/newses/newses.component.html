@@ -20,43 +20,41 @@
                     (selectionChange)="search($event)"
                 />
             </div>
-            @if (showTable()) {
-                <div class="responsive-table">
-                    <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
-                        <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                        <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+            <div class="responsive-table">
+                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
+                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
 
-                        <ng-container matColumnDef="date">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
-                            <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
-                        </ng-container>
+                    <ng-container matColumnDef="date">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
+                        <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="name">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
-                            <td *matCellDef="let element" mat-cell>
-                                <div class="nat-horizontal nat-align">
-                                    <natural-table-button
-                                        matTooltip="Éditer"
-                                        [label]="element.name"
-                                        [navigate]="['/admin/news', element.id]"
-                                    />
-                                </div>
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="name">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <div class="nat-horizontal nat-align">
+                                <natural-table-button
+                                    matTooltip="Éditer"
+                                    [label]="element.name"
+                                    [navigate]="['/admin/news', element.id]"
+                                />
+                            </div>
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="isActive">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
-                            <td *matCellDef="let element" mat-cell>
-                                <div class="nat-horizontal nat-align">
-                                    @if (element.isActive) {
-                                        <mat-icon naturalIcon="done" />
-                                    }
-                                </div>
-                            </td>
-                        </ng-container>
-                    </table>
-                </div>
-            }
+                    <ng-container matColumnDef="isActive">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <div class="nat-horizontal nat-align">
+                                @if (element.isActive) {
+                                    <mat-icon naturalIcon="done" />
+                                }
+                            </div>
+                        </td>
+                    </ng-container>
+                </table>
+            </div>
 
             @if (showNoResults()) {
                 <div class="nat-margin text-center">Pas de résultats</div>

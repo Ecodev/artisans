@@ -20,107 +20,93 @@
                     (selectionChange)="search($event)"
                 />
             </div>
-            @if (showTable()) {
-                <div class="responsive-table">
-                    <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
-                        <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
-                        <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
-                        <tr *matFooterRowDef="columnsForTable" mat-footer-row></tr>
+            <div class="responsive-table">
+                <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
+                    <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
+                    <tr *matFooterRowDef="columnsForTable" mat-footer-row></tr>
 
-                        <ng-container matColumnDef="owner">
-                            <th *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
-                            <td *matCellDef="let element" mat-cell>
-                                @if (element.owner) {
-                                    <div class="nat-horizontal nat-align">
-                                        <natural-avatar
-                                            [initials]="element.owner?.name"
-                                            [gravatar]="element.owner?.email"
-                                            [size]="36"
-                                        />
-                                        <natural-table-button
-                                            matTooltip="Éditer"
-                                            [label]="element.owner?.name"
-                                            [navigate]="['/admin/user', element.owner?.id]"
-                                        />
-                                    </div>
-                                }
-                            </td>
-                            <td *matFooterCellDef mat-footer-cell></td>
-                        </ng-container>
+                    <ng-container matColumnDef="owner">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header>Utilisateur</th>
+                        <td *matCellDef="let element" mat-cell>
+                            @if (element.owner) {
+                                <div class="nat-horizontal nat-align">
+                                    <natural-avatar
+                                        [initials]="element.owner?.name"
+                                        [gravatar]="element.owner?.email"
+                                        [size]="36"
+                                    />
+                                    <natural-table-button
+                                        matTooltip="Éditer"
+                                        [label]="element.owner?.name"
+                                        [navigate]="['/admin/user', element.owner?.id]"
+                                    />
+                                </div>
+                            }
+                        </td>
+                        <td *matFooterCellDef mat-footer-cell></td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="creationDate">
-                            <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date</th>
-                            <td *matCellDef="let element" mat-cell>
-                                <natural-table-button
-                                    matTooltip="Éditer"
-                                    icon="open_in_new"
-                                    [label]="element.creationDate | swissDate"
-                                    [navigate]="[element.id]"
-                                />
-                            </td>
-                            <td *matFooterCellDef mat-footer-cell></td>
-                        </ng-container>
+                    <ng-container matColumnDef="creationDate">
+                        <th *matHeaderCellDef class="app-date-column" mat-header-cell mat-sort-header>Date</th>
+                        <td *matCellDef="let element" mat-cell>
+                            <natural-table-button
+                                matTooltip="Éditer"
+                                icon="open_in_new"
+                                [label]="element.creationDate | swissDate"
+                                [navigate]="[element.id]"
+                            />
+                        </td>
+                        <td *matFooterCellDef mat-footer-cell></td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="lines">
-                            <th *matHeaderCellDef mat-header-cell>Entrées</th>
-                            <td *matCellDef="let element" mat-cell>{{ element.orderLines.length }}</td>
-                            <td *matFooterCellDef mat-footer-cell></td>
-                        </ng-container>
+                    <ng-container matColumnDef="lines">
+                        <th *matHeaderCellDef mat-header-cell>Entrées</th>
+                        <td *matCellDef="let element" mat-cell>{{ element.orderLines.length }}</td>
+                        <td *matFooterCellDef mat-footer-cell></td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="status">
-                            <th *matHeaderCellDef mat-header-cell>Statut</th>
-                            <td *matCellDef="let element" mat-cell>
-                                {{ element.status | enum: 'OrderStatus' | async }}
-                            </td>
-                            <td *matFooterCellDef mat-footer-cell></td>
-                        </ng-container>
+                    <ng-container matColumnDef="status">
+                        <th *matHeaderCellDef mat-header-cell>Statut</th>
+                        <td *matCellDef="let element" mat-cell>
+                            {{ element.status | enum: 'OrderStatus' | async }}
+                        </td>
+                        <td *matFooterCellDef mat-footer-cell></td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="balanceCHF">
-                            <th
-                                *matHeaderCellDef
-                                mat-header-cell
-                                mat-sort-header
-                                natural-7em-column
-                                natural-align-right
-                            >
-                                Total CHF
-                            </th>
-                            <td *matCellDef="let element" mat-cell natural-align-right>
-                                @if (element.balanceCHF > 0) {
-                                    {{ element.balanceCHF | currency: 'CHF' }}
-                                }
-                            </td>
-                            <td *matFooterCellDef mat-footer-cell natural-align-right>
-                                @if (dataSource.data?.totalBalanceCHF > 0) {
-                                    <span>{{ dataSource.data?.totalBalanceCHF | currency: 'CHF' }}</span>
-                                }
-                            </td>
-                        </ng-container>
+                    <ng-container matColumnDef="balanceCHF">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column natural-align-right>
+                            Total CHF
+                        </th>
+                        <td *matCellDef="let element" mat-cell natural-align-right>
+                            @if (element.balanceCHF > 0) {
+                                {{ element.balanceCHF | currency: 'CHF' }}
+                            }
+                        </td>
+                        <td *matFooterCellDef mat-footer-cell natural-align-right>
+                            @if (dataSource.data?.totalBalanceCHF > 0) {
+                                <span>{{ dataSource.data?.totalBalanceCHF | currency: 'CHF' }}</span>
+                            }
+                        </td>
+                    </ng-container>
 
-                        <ng-container matColumnDef="balanceEUR">
-                            <th
-                                *matHeaderCellDef
-                                mat-header-cell
-                                mat-sort-header
-                                natural-7em-column
-                                natural-align-right
-                            >
-                                Total EUR
-                            </th>
-                            <td *matCellDef="let element" mat-cell natural-align-right>
-                                @if (element.balanceEUR > 0) {
-                                    {{ element.balanceEUR | currency: 'EUR' }}
-                                }
-                            </td>
-                            <td *matFooterCellDef mat-footer-cell natural-align-right>
-                                @if (dataSource.data?.totalBalanceEUR > 0) {
-                                    <span>{{ dataSource.data?.totalBalanceEUR | currency: 'EUR' }}</span>
-                                }
-                            </td>
-                        </ng-container>
-                    </table>
-                </div>
-            }
+                    <ng-container matColumnDef="balanceEUR">
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column natural-align-right>
+                            Total EUR
+                        </th>
+                        <td *matCellDef="let element" mat-cell natural-align-right>
+                            @if (element.balanceEUR > 0) {
+                                {{ element.balanceEUR | currency: 'EUR' }}
+                            }
+                        </td>
+                        <td *matFooterCellDef mat-footer-cell natural-align-right>
+                            @if (dataSource.data?.totalBalanceEUR > 0) {
+                                <span>{{ dataSource.data?.totalBalanceEUR | currency: 'EUR' }}</span>
+                            }
+                        </td>
+                    </ng-container>
+                </table>
+            </div>
 
             @if (showNoResults()) {
                 <div class="nat-margin text-center">Pas de résultats</div>

@@ -341,11 +341,14 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                 .subscribeNewsletter(this.newsletterForm.getRawValue().email)
                 .pipe(finalize(() => this.newsletterForm.enable()))
                 .subscribe(() => {
+                    this.newsletterForm.controls.email.setValue('');
+                    this.newsletterForm.controls.email.markAsPristine();
+
                     // Exceptionally show a dialog, instead of snackbar, because
                     // we want to be triple sure that the user saw it worked and
                     // avoid him to re-submit the same email again
                     this.alertService.confirm(
-                        'Inscription résussie',
+                        'Inscription réussie',
                         'Merci de vous être inscrit à la newsletter',
                         'Fermer',
                     );

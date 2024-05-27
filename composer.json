@@ -60,7 +60,6 @@
         "ecodev/felix": "^13.4",
         "ecodev/graphql-doctrine": "^9.0",
         "ecodev/graphql-upload": "^7.0",
-        "infomaniak/client-api-newsletter": "^1.0",
         "laminas/laminas-config-aggregator": "^1.13",
         "laminas/laminas-http": "^2.18",
         "laminas/laminas-servicemanager": "^3.21",

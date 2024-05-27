@@ -15,8 +15,6 @@ import {fromEvent, Observable, of, Subject, switchMap, tap} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
-    AddToMailingList,
-    AddToMailingListVariables,
     ConfirmRegistration,
     ConfirmRegistrationVariables,
     CreateUser,
@@ -30,6 +28,8 @@ import {
     RequestMembershipEnd,
     RequestPasswordReset,
     RequestPasswordResetVariables,
+    SubscribeNewsletter,
+    SubscribeNewsletterVariables,
     UpdateUser,
     UpdateUserVariables,
     User,
@@ -382,26 +382,21 @@ export class UserService
             .pipe(map(result => result.data!.requestMembershipEnd));
     }
 
-    public subscribeNewsletter(email: string): Observable<AddToMailingList['addToMailingList']> {
-        return this.addToMailingList('55475', email);
-    }
-
-    public addToMailingList(destination: string, email: string): Observable<AddToMailingList['addToMailingList']> {
+    public subscribeNewsletter(email: string): Observable<SubscribeNewsletter['subscribeNewsletter']> {
         const mutation = gql`
-            mutation AddToMailingList($destination: String!, $email: String!) {
-                addToMailingList(destination: $destination, email: $email)
+            mutation SubscribeNewsletter($email: Email!) {
+                subscribeNewsletter(email: $email)
             }
         `;
 
         return this.apollo
-            .mutate<AddToMailingList, AddToMailingListVariables>({
+            .mutate<SubscribeNewsletter, SubscribeNewsletterVariables>({
                 mutation: mutation,
                 variables: {
-                    destination: destination,
                     email: email,
                 },
             })
-            .pipe(map(result => result.data!.addToMailingList));
+            .pipe(map(result => result.data!.subscribeNewsletter));
     }
 
     public override getDefaultForServer(): UserInput {

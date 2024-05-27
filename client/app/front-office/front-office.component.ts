@@ -347,7 +347,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
                     // we want to be triple sure that the user saw it worked and
                     // avoid him to re-submit the same email again
                     this.alertService.confirm(
-                        'Inscription résussie',
+                        'Inscription réussie',
                         'Merci de vous être inscrit à la newsletter',
                         'Fermer',
                     );

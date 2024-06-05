@@ -52,7 +52,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalIconDirective,
         MatTabsModule,
         NaturalLinkableTabDirective,
-
         MatFormFieldModule,
         MatInputModule,
         NaturalEditorComponent,

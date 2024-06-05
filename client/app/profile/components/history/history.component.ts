@@ -18,7 +18,6 @@ import {CommonModule} from '@angular/common';
     standalone: true,
     imports: [
         CommonModule,
-
         MatTableModule,
         NaturalTableButtonComponent,
         MatTooltipModule,

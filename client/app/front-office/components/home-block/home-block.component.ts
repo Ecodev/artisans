@@ -31,7 +31,6 @@ type Block = {
         MatIconModule,
         NaturalIconDirective,
         MatCardModule,
-
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,

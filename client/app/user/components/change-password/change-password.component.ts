@@ -17,7 +17,6 @@ import {PasswordComponent} from '../password/password.component';
     imports: [
         FormsModule,
         ReactiveFormsModule,
-
         PasswordComponent,
         MatButtonModule,
         MatIconModule,

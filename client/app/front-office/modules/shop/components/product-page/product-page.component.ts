@@ -43,7 +43,6 @@ import {CommonModule} from '@angular/common';
         MatListModule,
         PriceComponent,
         AddToCartComponent,
-
         ProductsPageComponent,
         NaturalCapitalizePipe,
     ],

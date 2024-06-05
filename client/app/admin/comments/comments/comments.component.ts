@@ -22,7 +22,6 @@ import {MatTableModule} from '@angular/material/table';
     imports: [
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,
-
         MatTableModule,
         MatSortModule,
         NaturalTableButtonComponent,

@@ -36,7 +36,6 @@ import {MatTabsModule} from '@angular/material/tabs';
         NaturalDetailHeaderComponent,
         MatTabsModule,
         NaturalLinkableTabDirective,
-
         MatFormFieldModule,
         MatInputModule,
         NaturalEditorComponent,

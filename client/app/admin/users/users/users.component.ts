@@ -35,10 +35,8 @@ import {MatTableModule} from '@angular/material/table';
     standalone: true,
     imports: [
         CommonModule,
-
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,
-
         MatTableModule,
         MatSortModule,
         NaturalAvatarComponent,

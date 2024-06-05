@@ -42,7 +42,6 @@ import {MatRippleModule} from '@angular/material/core';
         RouterLinkActive,
         MatSidenavModule,
         MatToolbarModule,
-
         MatButtonModule,
         MatIconModule,
         NaturalIconDirective,

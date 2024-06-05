@@ -19,13 +19,11 @@ import {CommonModule} from '@angular/common';
     standalone: true,
     imports: [
         CommonModule,
-
         MatButtonModule,
         MatIconModule,
         NaturalIconDirective,
         RouterLink,
         AddToCartComponent,
-
         MatListModule,
         RouterLinkActive,
         RouterOutlet,

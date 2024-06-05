@@ -7,7 +7,6 @@ import {SortingOrder, UserRole, Users, UserSortingField, UsersVariables} from '.
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
-
 import {CommonModule} from '@angular/common';
 
 @Component({

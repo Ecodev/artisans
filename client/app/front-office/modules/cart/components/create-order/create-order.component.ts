@@ -17,7 +17,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {AddressComponent} from '../../../../../shared/components/address/address.component';
 import {MatRadioModule} from '@angular/material/radio';
-
 import {CommonModule} from '@angular/common';
 
 @Component({

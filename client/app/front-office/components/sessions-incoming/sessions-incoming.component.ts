@@ -3,7 +3,6 @@ import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
-
 import {MatButtonModule} from '@angular/material/button';
 
 @Component({

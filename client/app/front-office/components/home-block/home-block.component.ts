@@ -6,7 +6,6 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
 import {MatCardModule} from '@angular/material/card';
 import {NaturalIconDirective} from '@ecodev/natural';
 import {MatIconModule} from '@angular/material/icon';

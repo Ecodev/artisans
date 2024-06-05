@@ -17,7 +17,6 @@ import {
     PurchasesVariables,
 } from '../../../../../shared/generated-types';
 import {ProductsPageComponent} from '../products-page/products-page.component';
-
 import {AddToCartComponent} from '../add-to-cart/add-to-cart.component';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {MatListModule} from '@angular/material/list';

@@ -6,9 +6,7 @@ describe('SubscribeComponent', () => {
     let fixture: ComponentFixture<SubscribeComponent>;
 
     beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [SubscribeComponent],
-        }).compileComponents();
+        await TestBed.configureTestingModule({}).compileComponents();
 
         fixture = TestBed.createComponent(SubscribeComponent);
         component = fixture.componentInstance;

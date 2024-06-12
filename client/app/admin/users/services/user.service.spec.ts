@@ -1,7 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-import {Router} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter, Router} from '@angular/router';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {mockApolloProvider} from '../../../shared/testing/MockApolloProvider';
 import {UserService} from './user.service';
@@ -23,8 +22,8 @@ describe('UserService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [RouterTestingModule],
             providers: [
+                provideRouter([]),
                 mockApolloProvider,
                 {
                     provide: CartCollectionService,

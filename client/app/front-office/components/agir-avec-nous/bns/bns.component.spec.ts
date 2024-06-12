@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {BnsComponent} from './bns.component';
-import {RouterTestingModule} from '@angular/router/testing';
+import {provideRouter} from '@angular/router';
 
 describe('BnsComponent', () => {
     let component: BnsComponent;
@@ -8,7 +8,7 @@ describe('BnsComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [RouterTestingModule],
+            providers: [provideRouter([])],
         }).compileComponents();
 
         fixture = TestBed.createComponent(BnsComponent);

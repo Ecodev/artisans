@@ -1,11 +1,7 @@
 import {Component, Inject, Optional} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import {
-    NaturalAlertService,
-    NaturalDialogTriggerProvidedData,
-    NaturalSelectEnumComponent,
-    NaturalSwissDatePipe,
-} from '@ecodev/natural';
+import {NaturalAlertService, NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
+import {CommonModule, DatePipe} from '@angular/common';
 import {
     CurrentUserForProfile,
     Order,
@@ -17,7 +13,6 @@ import {OrderService} from '../services/order.service';
 import {MatButtonModule} from '@angular/material/button';
 import {OrderLinesComponent} from '../order-lines/order-lines.component';
 import {FormsModule} from '@angular/forms';
-import {CommonModule} from '@angular/common';
 import {Observable} from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
@@ -33,7 +28,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
         FormsModule,
         OrderLinesComponent,
         MatButtonModule,
-        NaturalSwissDatePipe,
+        DatePipe,
     ],
 })
 export class OrderComponent {

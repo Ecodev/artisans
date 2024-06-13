@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NaturalAbstractList, NaturalTableButtonComponent, NaturalEnumPipe, NaturalSwissDatePipe} from '@ecodev/natural';
+import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -8,7 +8,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTableModule} from '@angular/material/table';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-history',
@@ -24,7 +24,7 @@ import {CommonModule} from '@angular/common';
         MatPaginatorModule,
         RouterOutlet,
         NaturalEnumPipe,
-        NaturalSwissDatePipe,
+        DatePipe,
     ],
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {

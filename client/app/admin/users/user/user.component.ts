@@ -9,10 +9,10 @@ import {
     NaturalSelectEnumComponent,
     NaturalSeoResolveData,
     NaturalStampComponent,
-    NaturalSwissDatePipe,
     NaturalTableButtonComponent,
     NaturalTimeAgoPipe,
 } from '@ecodev/natural';
+import {CommonModule, DatePipe} from '@angular/common';
 import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
@@ -26,7 +26,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {AddressComponent} from '../../../shared/components/address/address.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -55,7 +54,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalFixedButtonDetailComponent,
         RouterOutlet,
         NaturalEnumPipe,
-        NaturalSwissDatePipe,
+        DatePipe,
         NaturalTimeAgoPipe,
     ],
 })

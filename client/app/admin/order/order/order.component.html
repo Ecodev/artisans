@@ -1,5 +1,5 @@
 <div class="nat-horizontal nat-align">
-    <h2 mat-dialog-title class="nat-expand">Commande du {{ data.model.creationDate | swissDate }}</h2>
+    <h2 mat-dialog-title class="nat-expand">Commande du {{ data.model.creationDate | date }}</h2>
 
     @if (viewer?.role === UserRole.administrator) {
         <natural-select-enum

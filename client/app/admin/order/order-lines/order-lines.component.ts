@@ -2,12 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
-    NaturalSearchComponent,
     NaturalColumnsPickerComponent,
-    NaturalTableButtonComponent,
     NaturalEnumPipe,
-    NaturalSwissDatePipe,
+    NaturalSearchComponent,
+    NaturalTableButtonComponent,
 } from '@ecodev/natural';
+import {CommonModule, DatePipe} from '@angular/common';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderLineService} from '../services/order-lines.service';
@@ -16,7 +16,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
-import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-order-lines',
@@ -34,7 +33,7 @@ import {CommonModule} from '@angular/common';
         MatProgressSpinnerModule,
         MatPaginatorModule,
         NaturalEnumPipe,
-        NaturalSwissDatePipe,
+        DatePipe,
     ],
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {

@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
-    NaturalColumnsPickerComponent,
-    NaturalSearchComponent,
     NaturalAvatarComponent,
-    NaturalTableButtonComponent,
+    NaturalColumnsPickerComponent,
     NaturalEnumPipe,
-    NaturalSwissDatePipe,
+    NaturalSearchComponent,
+    NaturalTableButtonComponent,
 } from '@ecodev/natural';
+import {CommonModule, DatePipe} from '@angular/common';
 import {OrderSortingField, SortingOrder} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -19,7 +19,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
-import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-orders',
@@ -39,7 +38,7 @@ import {CommonModule} from '@angular/common';
         MatPaginatorModule,
         RouterOutlet,
         NaturalEnumPipe,
-        NaturalSwissDatePipe,
+        DatePipe,
     ],
 })
 export class OrdersComponent extends NaturalAbstractList<OrderService> implements OnInit {

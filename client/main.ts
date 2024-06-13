@@ -64,6 +64,10 @@ bootstrapApplication(AppComponent, {
             useClass: NaturalSwissParsingDateAdapter,
         },
         {
+            provide: DATE_PIPE_DEFAULT_OPTIONS,
+            useValue: {dateFormat: 'dd.MM.y HH:mm'} satisfies DatePipeConfig,
+        },
+        {
             // Use OnDirty instead of default OnTouched, that allows to validate while editing. Touched is updated after blur.
             provide: ErrorStateMatcher,
             useClass: ShowOnDirtyErrorStateMatcher,

@@ -13,15 +13,14 @@ import {
     NaturalQueryVariablesManager,
     NaturalSearchComponent,
     NaturalSearchSelections,
-    NaturalSwissDatePipe,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
+import {CommonModule, DatePipe, DOCUMENT} from '@angular/common';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';
-import {CommonModule, DOCUMENT} from '@angular/common';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -47,7 +46,7 @@ import {MatTableModule} from '@angular/material/table';
         NaturalFixedButtonComponent,
         RouterLink,
         NaturalEnumPipe,
-        NaturalSwissDatePipe,
+        DatePipe,
     ],
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {

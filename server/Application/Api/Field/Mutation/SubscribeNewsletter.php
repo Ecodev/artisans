@@ -13,10 +13,9 @@ use Mezzio\Session\SessionInterface;
 
 abstract class SubscribeNewsletter implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'subscribeNewsletter',
+        yield 'subscribeNewsletter' => fn () => [
             'type' => Type::nonNull(Type::boolean()),
             'description' => 'Subscribe to newsletter.',
             'args' => [

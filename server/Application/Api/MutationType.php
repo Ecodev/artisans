@@ -30,13 +30,15 @@ use Application\Model\ProductTag;
 use Application\Model\Session;
 use Application\Model\Subscription;
 use Application\Model\User;
+use Ecodev\Felix\Utility;
 use GraphQL\Type\Definition\ObjectType;
 
 class MutationType extends ObjectType
 {
     public function __construct()
     {
-        $specializedFields = [
+        $fields = Utility::concat(
+            // Specialized fields
             Login::build(),
             Logout::build(),
             RequestPasswordReset::build(),
@@ -51,9 +53,8 @@ class MutationType extends ObjectType
             RequestMembershipEnd::build(),
             SubscribeNewsletter::build(),
             Import::build(),
-        ];
 
-        $fields = array_merge(
+            // Standard fields
             Standard::buildMutation(Event::class),
             Standard::buildMutation(File::class),
             Standard::buildMutation(Image::class),
@@ -67,7 +68,6 @@ class MutationType extends ObjectType
             Standard::buildRelationMutation(Product::class, Product::class, 'RelatedProduct'),
             Standard::buildRelationMutation(ProductTag::class, Product::class),
             Standard::buildRelationMutation(Session::class, User::class, 'Facilitator'),
-            $specializedFields,
         );
 
         $config = [

@@ -14,10 +14,9 @@ use Mezzio\Session\SessionInterface;
 
 abstract class UpdateOrderStatus implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'updateOrderStatus',
+        yield 'updateOrderStatus' => fn () => [
             'type' => Type::nonNull(_types()->getOutput(Order::class)),
             'description' => 'Validate an order',
             'args' => [

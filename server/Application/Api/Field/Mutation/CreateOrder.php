@@ -17,10 +17,9 @@ use Mezzio\Session\SessionInterface;
 
 abstract class CreateOrder implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'createOrder',
+        yield 'createOrder' => fn () => [
             'type' => _types()->getOutput(Order::class),
             'description' => 'Make an order to the shop.',
             'args' => [

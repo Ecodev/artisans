@@ -15,10 +15,9 @@ use Mezzio\Session\SessionInterface;
 
 abstract class RequestMembershipEnd implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'requestMembershipEnd',
+        yield 'requestMembershipEnd' => fn () => [
             'type' => Type::nonNull(Type::boolean()),
             'description' => 'Stop the use membership.',
             'args' => [

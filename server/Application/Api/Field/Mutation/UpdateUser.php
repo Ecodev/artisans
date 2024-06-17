@@ -14,10 +14,9 @@ use Mezzio\Session\SessionInterface;
 
 abstract class UpdateUser implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'updateUser',
+        yield 'updateUser' => fn () => [
             'type' => Type::nonNull(_types()->getOutput(User::class)),
             'description' => 'Update an existing orderLine.',
             'args' => [

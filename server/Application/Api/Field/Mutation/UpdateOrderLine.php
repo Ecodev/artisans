@@ -14,10 +14,9 @@ use Mezzio\Session\SessionInterface;
 
 abstract class UpdateOrderLine implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'updateOrderLine',
+        yield 'updateOrderLine' => fn () => [
             'type' => Type::nonNull(_types()->getOutput(OrderLine::class)),
             'description' => 'Update an existing orderLine.',
             'args' => [

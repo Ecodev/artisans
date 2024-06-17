@@ -15,10 +15,9 @@ use Psr\Http\Message\UploadedFileInterface;
 
 abstract class Import implements FieldInterface
 {
-    public static function build(): array
+    public static function build(): iterable
     {
-        return [
-            'name' => 'import',
+        yield 'import' => fn () => [
             'type' => Type::nonNull(_types()->get('ImportResult')),
             'description' => 'Import a CSV file containing users',
             'args' => [

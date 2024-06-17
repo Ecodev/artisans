@@ -26,23 +26,23 @@ use Application\Model\ProductTag;
 use Application\Model\Session;
 use Application\Model\Subscription;
 use Application\Model\User;
+use Ecodev\Felix\Utility;
 use GraphQL\Type\Definition\ObjectType;
 
 class QueryType extends ObjectType
 {
     public function __construct()
     {
-        $specializedFields = [
+        $fields = Utility::concat(
+            // Specialized fields
             Viewer::build(),
             UserByToken::build(),
             Permissions::build(),
             Purchases::build(),
             Configuration::build(),
             UserRolesAvailable::build(),
-        ];
 
-        $fields = array_merge(
-            $specializedFields,
+            // Standard fields
             Standard::buildQuery(Event::class),
             Standard::buildQuery(File::class),
             Standard::buildQuery(Image::class),

@@ -34,9 +34,15 @@ const config: CodegenConfig = {
         omitOperationSuffix: true,
         scalars: {
             CHF: 'string',
-            Chronos: 'string',
+            Chronos: {
+                output: 'string',
+                input: 'string | Date',
+            },
             Color: 'string',
-            Date: 'string',
+            Date: {
+                output: 'string',
+                input: 'string | Date',
+            },
             EUR: 'string',
             Email: 'string',
             Password: 'string',

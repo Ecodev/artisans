@@ -39,7 +39,7 @@ export class LoginComponent extends NaturalAbstractController implements OnInit,
         private readonly route: ActivatedRoute,
         private readonly router: Router,
         private readonly userService: UserService,
-        public readonly snackBar: MatSnackBar,
+        private readonly snackBar: MatSnackBar,
         private readonly fb: NonNullableFormBuilder,
     ) {
         super();

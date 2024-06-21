@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
     public cart?: Cart;
 
     public constructor(
-        public readonly alertService: NaturalAlertService,
+        private readonly alertService: NaturalAlertService,
         public readonly router: Router,
         private readonly route: ActivatedRoute,
         public readonly cartService: CartService,

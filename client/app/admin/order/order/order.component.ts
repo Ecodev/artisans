@@ -52,7 +52,7 @@ export class OrderComponent {
     public constructor(
         @Optional() @Inject(MAT_DIALOG_DATA) public readonly dialogData: NaturalDialogTriggerProvidedData<never>,
         public readonly orderService: OrderService,
-        public readonly alertService: NaturalAlertService,
+        private readonly alertService: NaturalAlertService,
     ) {
         this.viewer = dialogData.activatedRoute.snapshot.data.viewer
             ? dialogData.activatedRoute.snapshot.data.viewer

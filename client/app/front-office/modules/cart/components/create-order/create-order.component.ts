@@ -71,7 +71,7 @@ export class CreateOrderComponent implements OnInit {
 
     public constructor(
         public readonly cartService: CartService,
-        public readonly alertService: NaturalAlertService,
+        private readonly alertService: NaturalAlertService,
         public readonly router: Router,
         private readonly route: ActivatedRoute,
         public readonly userService: UserService,

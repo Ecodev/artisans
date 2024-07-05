@@ -58,7 +58,7 @@ class Product extends AbstractProduct
     #[ORM\Column(type: 'boolean', options: ['default' => 0])]
     private bool $isHighlighted = false;
 
-    #[ORM\Column(type: 'text', length: 65535)]
+    #[ORM\Column(type: 'text', length: 65535, options: ['default' => ''])]
     private string $content = '';
 
     #[ORM\Column(type: 'smallint', options: ['default' => 0])]

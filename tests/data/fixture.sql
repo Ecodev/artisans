@@ -1,5 +1,7 @@
 START TRANSACTION;
 
+SET sql_mode = 'STRICT_TRANS_TABLES';
+
 REPLACE INTO product_tag (id, name) VALUES
 (6000, 'Agriculture et alimentation'),
 (6001, 'Biodiversité'),
@@ -60,7 +62,7 @@ REPLACE INTO subscription (id, is_active, image_id, price_per_unit_chf, price_pe
 (19005, 1, NULL, 18500, 12000, 'Abonnement institutionnel papier et numérique', 'abo-pro-web-papier', 'both', 'Donec ullamcorper nulla non metus auctor fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit.');
 
 REPLACE INTO message (id, creator_id, owner_id, recipient_id, type, date_sent, email, subject, body) VALUES
-(11001, 1000, 1000, 1002, 'balance', '2019-01-01 12:00:00','member@example.com', 'Avertissement de crédit négatif', 'Bonjour, nous vous informons que votre compte Artisans présente un solde négatif'),
+(11001, 1000, 1000, 1002, 'updated_user', '2019-01-01 12:00:00','member@example.com', 'Modification', 'Bonjour, un utilisateur a été modifié'),
 (11002, 1001, 1001, 1001, 'reset_password', NULL,'inactive@example.com', 'Nettoyage local', 'Bonjour, nous vous invitons à venir nous aider pour le nettoyage de printemps du local');
 
 REPLACE INTO `order` (id, owner_id, creator_id, creation_date, status, payment_method) VALUES
@@ -92,14 +94,14 @@ REPLACE INTO `configuration` (id, `key`, `value`) VALUES
 (18010, 'home-block-3-button-label', 'Label bouton bloc 3'),
 (18011, 'home-block-3-button-link', '/larevuedurable/articles');
 
-REPLACE INTO session (id, start_date, name, region, locality, street, dates) VALUES
-(20000, '2032-02-01', 'Lausanne 2032-2', 'Vaud', 'Lausanne', 'Rue de lausanne 1', '["1er fevrier", "14 février", "31 février"]'),
-(20001, '2032-03-01', 'Lausanne 2032-3', 'Vaud', 'Lausanne', 'Rue de lausanne 2', '["1er mars", "14 mars", "31 mars"]'),
-(20002, '2032-04-01', 'Lausanne 2032-4', 'Vaud', 'Lausanne', 'Rue de lausanne 3', '["1er avril", "14 avril", "31 avril"]'),
-(20003, '2032-03-01', 'Lutry 2032-3', 'Vaud', 'Lutry', 'Rue de lutry 1', '["2 mars", "15 mars", "30 mars"]'),
-(20004, '2032-05-01', 'Lutry 2032-4', 'Vaud', 'Lutry', 'Rue de lutry 2', '["2 mai", "15 mai", "30 mai"]'),
-(20005, '2032-03-01', 'Neuchâtel 2032-3', 'Neuchâtel', 'Neuchâtel', 'Rue de neuchâtel 2', '["2 mars", "15 mars", "30 mars"]'),
-(20006, '2016-04-01', 'Lausanne 2016-4 (passé)', 'Vaud', 'Lausanne', 'Rue de lausanne 3', '["1er avril", "14 avril", "31 avril"]');
+REPLACE INTO session (id, start_date, end_date, name, region, locality, street, dates) VALUES
+(20000, '2032-02-01', '2032-02-02', 'Lausanne 2032-2', 'Vaud', 'Lausanne', 'Rue de lausanne 1', '["1er fevrier", "14 février", "31 février"]'),
+(20001, '2032-03-01', '2032-03-02', 'Lausanne 2032-3', 'Vaud', 'Lausanne', 'Rue de lausanne 2', '["1er mars", "14 mars", "31 mars"]'),
+(20002, '2032-04-01', '2032-04-02', 'Lausanne 2032-4', 'Vaud', 'Lausanne', 'Rue de lausanne 3', '["1er avril", "14 avril", "31 avril"]'),
+(20003, '2032-03-01', '2032-03-02', 'Lutry 2032-3', 'Vaud', 'Lutry', 'Rue de lutry 1', '["2 mars", "15 mars", "30 mars"]'),
+(20004, '2032-05-01', '2032-05-02', 'Lutry 2032-4', 'Vaud', 'Lutry', 'Rue de lutry 2', '["2 mai", "15 mai", "30 mai"]'),
+(20005, '2032-03-01', '2032-03-02', 'Neuchâtel 2032-3', 'Neuchâtel', 'Neuchâtel', 'Rue de neuchâtel 2', '["2 mars", "15 mars", "30 mars"]'),
+(20006, '2016-04-01', '2016-04-02', 'Lausanne 2016-4 (passé)', 'Vaud', 'Lausanne', 'Rue de lausanne 3', '["1er avril", "14 avril", "31 avril"]');
 
 REPLACE INTO news (id, is_active, date, name, description, content) VALUES
 (30000, TRUE, '2019-01-01', 'Maecenas sed diam eget', 'Maecenas sed diam eget risus varius blandit sit amet non magna.', 'Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non metus auctor fringilla.'),

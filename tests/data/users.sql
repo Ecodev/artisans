@@ -1,5 +1,7 @@
 START TRANSACTION;
 
+SET sql_mode = 'STRICT_TRANS_TABLES';
+
 REPLACE INTO user (id, owner_id, first_name, last_name, email, password, role, country_id) VALUES
 (1000, NULL, 'Jack', 'Sparrow', 'administrator@example.com', MD5('administrator'), 'administrator', 1),
 (1001, NULL, 'Will', 'Turner', 'facilitator@example.com', MD5('facilitator'), 'facilitator', 2),

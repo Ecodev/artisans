@@ -40,7 +40,7 @@ return [
         [
             'data' => [
                 'message' => [
-                    'subject' => 'Avertissement de crédit négatif',
+                    'subject' => 'Modification',
                 ],
             ],
         ],

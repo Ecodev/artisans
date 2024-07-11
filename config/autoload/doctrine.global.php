@@ -38,18 +38,18 @@ return [
         ],
         'configuration' => [
             'orm_default' => [
-                'naming_strategy' => \Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class,
+                'naming_strategy' => Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class,
                 'proxy_dir' => 'data/cache/DoctrineORMModule/Proxy',
                 'generate_proxies' => false,
                 'filters' => [
-                    \Ecodev\Felix\ORM\Query\Filter\AclFilter::class => \Ecodev\Felix\ORM\Query\Filter\AclFilter::class,
+                    Ecodev\Felix\ORM\Query\Filter\AclFilter::class => Ecodev\Felix\ORM\Query\Filter\AclFilter::class,
                 ],
                 'datetime_functions' => [],
                 'string_functions' => [
-                    'if' => \DoctrineExtensions\Query\Mysql\IfElse::class,
-                    'ifnull' => \DoctrineExtensions\Query\Mysql\IfNull::class,
-                    'find_in_set' => \DoctrineExtensions\Query\Mysql\FindInSet::class,
-                    'regexp' => \DoctrineExtensions\Query\Mysql\Regexp::class,
+                    'if' => DoctrineExtensions\Query\Mysql\IfElse::class,
+                    'ifnull' => DoctrineExtensions\Query\Mysql\IfNull::class,
+                    'find_in_set' => DoctrineExtensions\Query\Mysql\FindInSet::class,
+                    'regexp' => DoctrineExtensions\Query\Mysql\Regexp::class,
                 ],
                 'numeric_functions' => [],
             ],

@@ -31,9 +31,9 @@ return [
     ],
     'view_helpers' => [
         'invokables' => [
-            'orderLines' => \Application\View\Helper\OrderLines::class,
-            'userInfos' => \Application\View\Helper\UserInfos::class,
-            'orderBillingAddress' => \Application\View\Helper\OrderBillingAddress::class,
+            'orderLines' => Application\View\Helper\OrderLines::class,
+            'userInfos' => Application\View\Helper\UserInfos::class,
+            'orderBillingAddress' => Application\View\Helper\OrderBillingAddress::class,
         ],
     ],
     'banking' => [

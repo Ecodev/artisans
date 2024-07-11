@@ -76,10 +76,10 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     #[ORM\Column(type: 'UserRole', options: ['default' => self::ROLE_MEMBER])]
     private string $role = self::ROLE_MEMBER;
 
-    #[ORM\Column(type: 'Membership', options: ['default' => Membership::None])]
+    #[ORM\Column(type: 'enum', options: ['default' => Membership::None])]
     private Membership $membership = Membership::None;
 
-    #[ORM\Column(type: 'ProductType', nullable: true)]
+    #[ORM\Column(type: 'enum', nullable: true)]
     private ?ProductType $subscriptionType = null;
 
     #[ORM\Column(type: 'string', length: 25, options: ['default' => ''])]

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 trait HasProductType
 {
-    #[ORM\Column(type: 'ProductType')]
+    #[ORM\Column(type: 'enum')]
     private ProductType $type;
 
     /**

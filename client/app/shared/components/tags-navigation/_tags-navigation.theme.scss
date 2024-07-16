@@ -10,15 +10,15 @@
         &,
         a {
             // explicit a gives more ponderation to css selector
-            color: mat.get-color-from-palette($foreground, text, 0.25);
+            color: mat.m2-get-color-from-palette($foreground, text, 0.25);
         }
 
         .dot {
-            background-color: mat.get-color-from-palette($foreground, text, 0.15);
+            background-color: mat.m2-get-color-from-palette($foreground, text, 0.15);
         }
 
         a:hover {
-            color: mat.get-color-from-palette($primary);
+            color: mat.m2-get-color-from-palette($primary);
         }
     }
 }

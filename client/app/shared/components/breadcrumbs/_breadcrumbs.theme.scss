@@ -13,13 +13,13 @@
         }
 
         * {
-            color: mat.get-color-from-palette($foreground, text, 0.7);
+            color: mat.m2-get-color-from-palette($foreground, text, 0.7);
         }
 
         .separator {
             &::before,
             &::after {
-                border-color: mat.get-color-from-palette($foreground, text, 0.3);
+                border-color: mat.m2-get-color-from-palette($foreground, text, 0.3);
             }
         }
     }

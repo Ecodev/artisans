@@ -8,19 +8,19 @@
     $fg: map.get($theme, foreground);
 
     .text-primary {
-        color: mat.get-color-from-palette($primary);
+        color: mat.m2-get-color-from-palette($primary);
     }
 
     .text-accent {
-        color: mat.get-color-from-palette($accent);
+        color: mat.m2-get-color-from-palette($accent);
     }
 
     .text-warn {
-        color: mat.get-color-from-palette($warn);
+        color: mat.m2-get-color-from-palette($warn);
     }
 
     .text-light {
-        color: mat.get-color-from-palette($fg, base, 0.5);
+        color: mat.m2-get-color-from-palette($fg, base, 0.5);
     }
 
     .text-bold {
@@ -32,29 +32,29 @@
     }
 
     .frame-primary {
-        background: mat.get-color-from-palette($primary);
+        background: mat.m2-get-color-from-palette($primary);
 
         &,
         a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
-            color: mat.get-color-from-palette($primary, default-contrast);
+            color: mat.m2-get-color-from-palette($primary, default-contrast);
         }
     }
 
     .frame-accent {
-        background: mat.get-color-from-palette($accent);
+        background: mat.m2-get-color-from-palette($accent);
 
         &,
         a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
-            color: mat.get-color-from-palette($accent, default-contrast);
+            color: mat.m2-get-color-from-palette($accent, default-contrast);
         }
     }
 
     .frame-warn {
-        background: mat.get-color-from-palette($warn);
+        background: mat.m2-get-color-from-palette($warn);
 
         &,
         a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
-            color: mat.get-color-from-palette($warn, default-contrast);
+            color: mat.m2-get-color-from-palette($warn, default-contrast);
         }
     }
 
@@ -68,15 +68,15 @@
     }
 
     .frame-stroked-primary {
-        border: 1px solid mat.get-color-from-palette($primary);
+        border: 1px solid mat.m2-get-color-from-palette($primary);
     }
 
     .frame-stroked-accent {
-        border: 1px solid mat.get-color-from-palette($accent);
+        border: 1px solid mat.m2-get-color-from-palette($accent);
     }
 
     .frame-stroked-warn {
-        border: 1px solid mat.get-color-from-palette($warn);
+        border: 1px solid mat.m2-get-color-from-palette($warn);
     }
 
     .frame-padding {
@@ -84,6 +84,6 @@
     }
 
     a {
-        color: mat.get-color-from-palette($primary);
+        color: mat.m2-get-color-from-palette($primary);
     }
 }

@@ -9,16 +9,16 @@
 
     app-session-facilitator-private {
         .facilitator {
-            border-left-color: mat.get-color-from-palette($primary);
+            border-left-color: mat.m2-get-color-from-palette($primary);
         }
 
         .category {
-            border-left-color: mat.get-color-from-palette($accent);
+            border-left-color: mat.m2-get-color-from-palette($accent);
         }
 
         .document:hover {
-            background: mat.get-color-from-palette($primary);
-            color: mat.get-color-from-palette($primary, default-contrast);
+            background: mat.m2-get-color-from-palette($primary);
+            color: mat.m2-get-color-from-palette($primary, default-contrast);
         }
     }
 }

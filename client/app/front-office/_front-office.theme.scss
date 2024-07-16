@@ -10,9 +10,9 @@
 
     app-front-office {
         #header-top {
-            background: color.adjust(mat.get-color-from-palette($bg, app-bar), $lightness: -5%);
+            background: color.adjust(mat.m2-get-color-from-palette($bg, app-bar), $lightness: -5%);
             .mat-mdc-button:not(:disabled) {
-                color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 35%);
+                color: color.adjust(mat.m2-get-color-from-palette($fg, text), $lightness: 35%);
             }
         }
 
@@ -25,40 +25,40 @@
         }
 
         #logo-slogan {
-            color: mat.get-color-from-palette($accent);
+            color: mat.m2-get-color-from-palette($accent);
         }
 
         #menu-main > ul {
             a {
-                color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 20%);
+                color: color.adjust(mat.m2-get-color-from-palette($fg, text), $lightness: 20%);
             }
 
             li:hover > a,
             a.open,
             a.active {
                 span {
-                    border-color: mat.get-color-from-palette($primary) !important;
+                    border-color: mat.m2-get-color-from-palette($primary) !important;
                 }
             }
 
             & > li.hasMenu::after {
-                background: mat.get-color-from-palette($bg, card);
+                background: mat.m2-get-color-from-palette($bg, card);
             }
 
             ul a:hover,
             a.open,
             a.active {
-                color: mat.get-color-from-palette($primary);
+                color: mat.m2-get-color-from-palette($primary);
             }
         }
 
         #mobile-menu a:hover {
-            color: mat.get-color-from-palette($primary) !important;
+            color: mat.m2-get-color-from-palette($primary) !important;
         }
 
         #newsletter-zone {
-            background: mat.get-color-from-palette($accent);
-            color: mat.get-color-from-palette($accent, default-contrast);
+            background: mat.m2-get-color-from-palette($accent);
+            color: mat.m2-get-color-from-palette($accent, default-contrast);
         }
 
         #footer {
@@ -66,8 +66,8 @@
 
             .mat-mdc-form-field,
             mat-form-field * {
-                border-bottom-color: mat.get-color-from-palette($primary, default-contrast) !important;
-                color: mat.get-color-from-palette($primary, default-contrast) !important;
+                border-bottom-color: mat.m2-get-color-from-palette($primary, default-contrast) !important;
+                color: mat.m2-get-color-from-palette($primary, default-contrast) !important;
             }
 
             mat-form-field .mat-mdc-text-field-wrapper {
@@ -77,7 +77,7 @@
 
         #footer-body {
             a:hover {
-                color: mat.get-color-from-palette($accent);
+                color: mat.m2-get-color-from-palette($accent);
             }
 
             .mdc-list-item__primary-text {

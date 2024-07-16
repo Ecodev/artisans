@@ -5,7 +5,7 @@
 
     app-order-line {
         .warning {
-            color: mat.get-color-from-palette($warn);
+            color: mat.m2-get-color-from-palette($warn);
         }
     }
 }

@@ -9,15 +9,15 @@
 
     app-products-page {
         .products.grid .product {
-            border-color: mat.get-color-from-palette($primary) !important;
+            border-color: mat.m2-get-color-from-palette($primary) !important;
         }
 
         .product-name {
-            color: mat.get-color-from-palette($fg, base);
+            color: mat.m2-get-color-from-palette($fg, base);
         }
 
         .product-tag {
-            color: mat.get-color-from-palette($primary);
+            color: mat.m2-get-color-from-palette($primary);
         }
     }
 }

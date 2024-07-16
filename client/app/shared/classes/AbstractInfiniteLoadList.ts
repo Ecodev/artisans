@@ -13,7 +13,7 @@ import {
 import {defaults, isEqual, pick} from 'lodash-es';
 import {takeUntil} from 'rxjs/operators';
 
-@Directive()
+@Directive({standalone: true})
 export class AbstractInfiniteLoadList<
         TService extends NaturalAbstractModelService<
             any,

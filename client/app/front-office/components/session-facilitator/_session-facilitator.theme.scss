@@ -9,7 +9,7 @@
 
     app-session-facilitator {
         .facilitator {
-            border-left-color: mat.get-color-from-palette($primary);
+            border-left-color: mat.m2-get-color-from-palette($primary);
         }
     }
 }

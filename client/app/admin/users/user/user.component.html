@@ -124,7 +124,7 @@
                         <div>
                             <app-orders
                                 [forcedVariables]="{
-                                    filter: {groups: [{conditions: [{owner: {equal: {value: data.model.id}}}]}]}
+                                    filter: {groups: [{conditions: [{owner: {equal: {value: data.model.id}}}]}]},
                                 }"
                                 [selectedColumns]="['creationDate', 'lines', 'status', 'balanceCHF', 'balanceEUR']"
                             />

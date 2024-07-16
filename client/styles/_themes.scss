@@ -108,10 +108,10 @@ $artisans-green: (
 );
 
 // Configure themes
-$artisans-primary: mat.define-palette($artisans-blue);
-$artisans-accent: mat.define-palette($artisans-orange);
-$artisans-warn: mat.define-palette(mat.$red-palette);
-$artisans-theme: mat.define-light-theme(
+$artisans-primary: mat.m2-define-palette($artisans-blue);
+$artisans-accent: mat.m2-define-palette($artisans-orange);
+$artisans-warn: mat.m2-define-palette(mat.$m2-red-palette);
+$artisans-theme: mat.m2-define-light-theme(
     (
         color: (
             primary: $artisans-primary,
@@ -161,11 +161,11 @@ $artisans-theme: mat.define-light-theme(
 // Only 31 modules used on a total of 37 modules
 
 // This fake theme is only use to tell Material we use Material v2, and not v3. Colors are never used.
-$fake-material-v2-theme: mat.define-light-theme(
+$fake-material-v2-theme: mat.m2-define-light-theme(
     (
         color: (
-            primary: mat.define-palette(mat.$indigo-palette),
-            accent: mat.define-palette(mat.$indigo-palette),
+            primary: mat.m2-define-palette(mat.$m2-indigo-palette),
+            accent: mat.m2-define-palette(mat.$m2-indigo-palette),
         ),
     )
 );

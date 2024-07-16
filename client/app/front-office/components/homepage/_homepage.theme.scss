@@ -9,22 +9,22 @@
 
     app-homepage {
         a.mat-headline-4 {
-            color: mat.get-color-from-palette($fg, base);
+            color: mat.m2-get-color-from-palette($fg, base);
 
             &:hover {
-                color: mat.get-color-from-palette($primary);
+                color: mat.m2-get-color-from-palette($primary);
             }
         }
 
         .description {
-            color: mat.get-color-from-palette($fg, base, 0.75);
+            color: mat.m2-get-color-from-palette($fg, base, 0.75);
         }
 
         .events {
-            background: mat.get-color-from-palette($accent, A100);
+            background: mat.m2-get-color-from-palette($accent, A100);
 
             mat-divider {
-                border-color: mat.get-color-from-palette($accent);
+                border-color: mat.m2-get-color-from-palette($accent);
             }
         }
     }

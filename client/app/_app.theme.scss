@@ -10,14 +10,14 @@
     // and they need to have the correct background color in dark mode (otherwise we get black text on black background)
     @at-root app-root > div {
         & > div {
-            background: mat.get-color-from-palette($background, background);
+            background: mat.m2-get-color-from-palette($background, background);
         }
     }
 
     ng-progress {
         .ng-bar {
-            box-shadow: mat.get-color-from-palette($accent) 0 0 5px !important;
-            background-color: mat.get-color-from-palette($accent) !important;
+            box-shadow: mat.m2-get-color-from-palette($accent) 0 0 5px !important;
+            background-color: mat.m2-get-color-from-palette($accent) !important;
             height: 3px !important;
         }
 
@@ -25,7 +25,7 @@
             top: 0 !important;
             transform: none !important;
             opacity: 1 !important;
-            box-shadow: mat.get-color-from-palette($accent) 0 0 20px !important;
+            box-shadow: mat.m2-get-color-from-palette($accent) 0 0 20px !important;
             width: 25px !important;
         }
     }
@@ -46,7 +46,7 @@
         border-width: 0;
         border-left-width: 5px;
         border-style: solid;
-        border-color: mat.get-color-from-palette($primary);
+        border-color: mat.m2-get-color-from-palette($primary);
         padding: 0 0 0 10px;
     }
 }

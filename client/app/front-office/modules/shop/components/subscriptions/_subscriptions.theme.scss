@@ -9,17 +9,17 @@
 
     app-subscriptions {
         .subscription.standard {
-            background: mat.get-color-from-palette($primary);
-            color: mat.get-color-from-palette($primary, default-contrast);
+            background: mat.m2-get-color-from-palette($primary);
+            color: mat.m2-get-color-from-palette($primary, default-contrast);
         }
 
         .subscription.pro {
-            background: mat.get-color-from-palette($accent);
-            color: mat.get-color-from-palette($accent, default-contrast);
+            background: mat.m2-get-color-from-palette($accent);
+            color: mat.m2-get-color-from-palette($accent, default-contrast);
         }
 
         .subscription.popular {
-            border: 10px solid mat.get-color-from-palette($bg, card);
+            border: 10px solid mat.m2-get-color-from-palette($bg, card);
         }
     }
 }

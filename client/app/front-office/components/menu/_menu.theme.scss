@@ -9,27 +9,27 @@
     $fg: map.get($theme, foreground);
 
     .mega-menu {
-        background: mat.get-color-from-palette($bg, base);
+        background: mat.m2-get-color-from-palette($bg, base);
 
         ul {
             a {
-                color: color.adjust(mat.get-color-from-palette($fg, text), $lightness: 20%);
+                color: color.adjust(mat.m2-get-color-from-palette($fg, text), $lightness: 20%);
             }
 
             a:hover {
-                color: mat.get-color-from-palette($primary) !important;
+                color: mat.m2-get-color-from-palette($primary) !important;
             }
 
             li:hover > a {
-                border-color: mat.get-color-from-palette($primary) !important;
+                border-color: mat.m2-get-color-from-palette($primary) !important;
             }
 
             & > li.hasMenu::after {
-                background: mat.get-color-from-palette($bg, card);
+                background: mat.m2-get-color-from-palette($bg, card);
             }
 
             a.active {
-                color: mat.get-color-from-palette($primary) !important;
+                color: mat.m2-get-color-from-palette($primary) !important;
             }
         }
     }

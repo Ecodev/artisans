@@ -16,7 +16,7 @@
         }
 
         .active {
-            background: mat.get-color-from-palette($primary, 400);
+            background: mat.m2-get-color-from-palette($primary, 400);
         }
     }
 }

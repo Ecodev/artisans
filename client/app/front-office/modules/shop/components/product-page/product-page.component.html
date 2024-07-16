@@ -201,7 +201,7 @@
             <div class="mat-headline-6">Pour continuer votre lecture ...</div>
             <app-products-page
                 [forcedVariables]="{
-                    filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]}
+                    filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]},
                 }"
                 [highlightFirstItems]="false"
             />

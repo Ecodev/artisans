@@ -10,7 +10,7 @@
     app-product-page {
         .review {
             a {
-                color: mat.get-color-from-palette($fg, text);
+                color: mat.m2-get-color-from-palette($fg, text);
             }
         }
 

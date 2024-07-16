@@ -11,7 +11,7 @@
                 mat-raised-button
                 [routerLink]="[
                     data.model.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
-                    data.model.id
+                    data.model.id,
                 ]"
             >
                 <mat-icon naturalIcon="remove_red_eye" />
@@ -133,10 +133,10 @@
                                     {
                                         conditions: [
                                             {id: {equal: {value: data.model.id, not: true}}},
-                                            {reviewNumber: {null: {not: true}}}
-                                        ]
-                                    }
-                                ]
+                                            {reviewNumber: {null: {not: true}}},
+                                        ],
+                                    },
+                                ],
                             }"
                             (selectionChange)="update()"
                         />
@@ -287,10 +287,10 @@
                         otherName="relatedProduct"
                         placeholder="Produit similaire"
                         [autocompleteSelectorFilter]="{
-                            groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}]}]
+                            groups: [{conditions: [{id: {equal: {value: data.model.id, not: true}}}]}],
                         }"
                         [filter]="{
-                            groups: [{conditions: [{inversedRelatedProducts: {have: {values: [data.model.id]}}}]}]
+                            groups: [{conditions: [{inversedRelatedProducts: {have: {values: [data.model.id]}}}]}],
                         }"
                         [main]="data.model"
                         [service]="productService"

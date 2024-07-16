@@ -1,4 +1,4 @@
-import {APP_ID, APP_INITIALIZER, enableProdMode, inject, LOCALE_ID} from '@angular/core';
+import {APP_ID, APP_INITIALIZER, enableProdMode, inject, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
 import {environment} from './environments/environment';
 import {AppComponent} from './app/app.component';
 import {routes} from './app/app-routing.module';
@@ -47,6 +47,7 @@ const matTooltipCustomConfig: MatTooltipDefaultOptions = {
 
 bootstrapApplication(AppComponent, {
     providers: [
+        provideZoneChangeDetection({eventCoalescing: true}),
         provideNativeDateAdapter(),
         Apollo,
         provideAnimationsAsync(),

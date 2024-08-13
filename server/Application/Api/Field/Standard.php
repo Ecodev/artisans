@@ -295,7 +295,7 @@ abstract class Standard
      * Recursively convert custom scalars that don't implement __toString() to their scalar
      * representation to injected back into DQL/SQL.
      */
-    private static function customTypesToScalar(array $args): array
+    public static function customTypesToScalar(array $args): array
     {
         foreach ($args as &$p) {
             if (is_array($p)) {

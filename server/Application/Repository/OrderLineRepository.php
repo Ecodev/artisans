@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
+use Application\Api\Field\Standard;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\User;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
 
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
@@ -38,7 +40,7 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
 
     public function createPurchaseQueryBuilder(array $filters, array $sortings): QueryBuilder
     {
-        $qbProduct = _types()->createFilteredQueryBuilder(Product::class, $filters, []);
+        $qbProduct = _types()->createFilteredQueryBuilder(Product::class, Standard::customTypesToScalar($filters), []);
 
         $qb = $this->createQueryBuilder('orderLine')
             ->addSelect('product')
@@ -53,7 +55,7 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
             $qb->addOrderBy('product.' . $sorting['field'], $sorting['order']);
         }
 
-        /** @var \Doctrine\ORM\Query\Parameter $parameter */
+        /** @var Parameter $parameter */
         foreach ($qbProduct->getParameters() as $parameter) {
             $qb->setParameter($parameter->getName(), $parameter->getValue(), $parameter->getType());
         }

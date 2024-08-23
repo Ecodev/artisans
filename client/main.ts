@@ -1,5 +1,4 @@
-import {APP_ID, APP_INITIALIZER, enableProdMode, inject, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
-import {environment} from './environments/environment';
+import {APP_ID, APP_INITIALIZER, inject, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
 import {AppComponent} from './app/app.component';
 import {routes} from './app/app-routing.module';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
@@ -31,10 +30,6 @@ import {
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {provideRouter, withInMemoryScrolling, withRouterConfig} from '@angular/router';
 import {MAT_TABS_CONFIG, MatTabsConfig} from '@angular/material/tabs';
-
-if (environment.production) {
-    enableProdMode();
-}
 
 registerLocaleData(localeFRCH);
 

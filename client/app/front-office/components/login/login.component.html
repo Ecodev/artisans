@@ -7,6 +7,7 @@
                     matInput
                     formControlName="email"
                     autofocus
+                    autocomplete="username"
                     autocorrect="off"
                     autocapitalize="off"
                     spellcheck="false"
@@ -28,10 +29,11 @@
                 <mat-label>Mot de passe</mat-label>
                 <input
                     matInput
+                    formControlName="password"
+                    autocomplete="current-password"
                     autocorrect="off"
                     autocapitalize="off"
                     spellcheck="false"
-                    formControlName="password"
                     type="password"
                     (keydown.enter)="maybeConfirm()"
                 />

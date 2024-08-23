@@ -40,7 +40,6 @@
         "crypto-es": "^2.1.0",
         "graphql": "^16.9.0",
         "lodash-es": "^4.17.21",
-        "lodash.template": "^4.5.0",
         "ngx-progressbar": "^11.0.0",
         "rxjs": "~7.8.1",
         "striptags": "^4.0.0-alpha.4",

@@ -3,6 +3,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     fromUrl,
     memorySessionStorageProvider,
+    NaturalBackgroundDensityDirective,
     NaturalCapitalizePipe,
     NaturalPersistenceService,
     NaturalSrcDensityDirective,
@@ -47,6 +48,7 @@ export enum ProductsViewMode {
         NaturalCapitalizePipe,
         TruncatePipe,
         StripTagsPipe,
+        NaturalBackgroundDensityDirective,
     ],
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductService> implements OnInit {

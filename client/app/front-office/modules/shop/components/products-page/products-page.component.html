@@ -33,12 +33,8 @@
                                     product.reviewNumber ? 'numero' : 'article',
                                     product.id,
                                 ]"
-                                [style.backgroundImage]="
-                                    'url(/api/image/' +
-                                    product.illustration.id +
-                                    '/' +
-                                    ($index === 0 ? '550' : '260') +
-                                    ')'
+                                [naturalBackgroundDensity]="
+                                    '/api/image/' + product.illustration.id + '/' + ($index === 0 ? '550' : '260')
                                 "
                             ></a>
                         }

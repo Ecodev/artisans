@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
-import {NaturalAlertService, NaturalIconDirective, NaturalEnumPipe} from '@ecodev/natural';
+import {
+    NaturalAlertService,
+    NaturalIconDirective,
+    NaturalEnumPipe,
+    NaturalBackgroundDensityDirective,
+} from '@ecodev/natural';
 import {CurrencyService} from '../../../../../shared/services/currency.service';
 import {ProductType} from '../../../../../shared/generated-types';
 import {Cart, CartLineProduct} from '../../classes/cart';
@@ -28,6 +33,7 @@ import {CommonModule} from '@angular/common';
         MatDividerModule,
         RouterOutlet,
         NaturalEnumPipe,
+        NaturalBackgroundDensityDirective,
     ],
 })
 export class CartComponent implements OnInit {

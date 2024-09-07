@@ -35,7 +35,7 @@ abstract class Helper
             ->setFirstResult($offset ?: $pageSize * $pageIndex)
             ->setMaxResults($pageSize);
 
-        $pagination['length'] = $paginator->count();
+        $pagination['length'] = fn () => $paginator->count();
         $pagination['items'] = $paginator->getIterator();
 
         return $pagination;

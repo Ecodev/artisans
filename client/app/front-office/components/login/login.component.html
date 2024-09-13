@@ -14,13 +14,15 @@
                     type="email"
                     (keydown.enter)="maybeConfirm()"
                 />
-                @if (form.get('email')?.hasError('maxlength')) {
-                    <mat-error>Maximum {{ form.get('email')?.errors?.maxlength?.requiredLength }} caractères</mat-error>
+                @if (form.controls.email.hasError('maxlength')) {
+                    <mat-error
+                        >Maximum {{ form.controls.email.errors?.maxlength?.requiredLength }} caractères</mat-error
+                    >
                 }
-                @if (form.get('email')?.hasError('email')) {
+                @if (form.controls.email.hasError('email')) {
                     <mat-error>Courriel invalide</mat-error>
                 }
-                @if (form.get('email')?.hasError('required')) {
+                @if (form.controls.email.hasError('required')) {
                     <mat-error>Requis</mat-error>
                 }
             </mat-form-field>
@@ -37,7 +39,7 @@
                     type="password"
                     (keydown.enter)="maybeConfirm()"
                 />
-                @if (form.get('password')?.hasError('required')) {
+                @if (form.controls.password.hasError('required')) {
                     <mat-error>Requis</mat-error>
                 }
             </mat-form-field>

@@ -122,6 +122,9 @@ $artisans-theme: mat.m2-define-light-theme(
 );
 
 @mixin applyTheme($theme) {
+    $foreground: map.get($theme, foreground);
+    color: mat.m2-get-color-from-palette($foreground, text);
+
     @include mat.autocomplete-color($theme);
     @include mat.button-color($theme);
     @include mat.button-toggle-color($theme);

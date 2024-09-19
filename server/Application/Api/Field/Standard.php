@@ -7,6 +7,7 @@ namespace Application\Api\Field;
 use Application\Api\Helper;
 use Application\Model\AbstractModel;
 use Application\Model\Order;
+use BackedEnum;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Ecodev\Felix\Api\Field\FieldInterface;
 use Ecodev\Felix\Api\Input\PaginationInputType;
@@ -302,6 +303,8 @@ abstract class Standard
                 $p = self::customTypesToScalar($p);
             } elseif ($p instanceof Money) {
                 $p = $p->getAmount();
+            } elseif ($p instanceof BackedEnum) {
+                $p = $p->value;
             }
         }
 

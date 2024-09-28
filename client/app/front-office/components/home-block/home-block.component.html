@@ -5,7 +5,7 @@
         <a mat-flat-button [routerLink]="form.get('buttonLink')?.value">
             {{ form.get('buttonLabel')?.value }}
         </a>
-        @if (permissionService.crud?.configuration.create) {
+        @if ((permissionsService.crud | async)?.configuration.create) {
             <button
                 class="edit-button"
                 color="none"

@@ -21,7 +21,7 @@
             <div class="mat-headline-4 section-title nat-gap-30 nat-horizontal">
                 <div class="nat-expand">ACTUALITÉS</div>
                 <div class="relative">
-                    @if (permissionService.crud?.news.create) {
+                    @if ((permissionsService.crud | async)?.news.create) {
                         <button
                             class="absolute"
                             color="none"
@@ -57,7 +57,7 @@
             <div class="mat-headline-4 section-title nat-gap-30 nat-horizontal">
                 <div class="nat-expand">AGENDA</div>
                 <div class="relative">
-                    @if (permissionService.crud?.event.create) {
+                    @if ((permissionsService.crud | async)?.event.create) {
                         <button
                             class="absolute"
                             color="none"

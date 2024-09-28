@@ -96,6 +96,6 @@
     </div>
 }
 
-@if (permissionsService.crud?.session.create) {
+@if ((permissionsService.crud | async)?.session.create) {
     <natural-fixed-button icon="add" [routerLink]="['/admin/session/new']" />
 }

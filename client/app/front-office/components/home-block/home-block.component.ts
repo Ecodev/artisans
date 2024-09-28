@@ -11,6 +11,7 @@ import {NaturalIconDirective} from '@ecodev/natural';
 import {MatIconModule} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
+import {AsyncPipe} from '@angular/common';
 
 type Block = {
     title: string;
@@ -35,6 +36,7 @@ type Block = {
         MatFormFieldModule,
         MatInputModule,
         TextFieldModule,
+        AsyncPipe,
     ],
 })
 export class HomeBlockComponent implements OnInit {
@@ -48,7 +50,7 @@ export class HomeBlockComponent implements OnInit {
 
     public constructor(
         private readonly configService: ConfigurationService,
-        public readonly permissionService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
     ) {}
 
     public ngOnInit(): void {

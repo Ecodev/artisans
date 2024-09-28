@@ -1,5 +1,5 @@
 <div class="nat-vertical nat-gap-30">
-    @if (permissionsService.crud?.comment?.create) {
+    @if ((permissionsService.crud | async)?.comment?.create) {
         <div class="nat-vertical nat-left">
             <mat-form-field [style.width]="'100%'">
                 <mat-label>Rédiger un commentaire</mat-label>

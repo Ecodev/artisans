@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTableModule} from '@angular/material/table';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-facilitator-documents',
@@ -34,6 +35,7 @@ import {MatTableModule} from '@angular/material/table';
         MatPaginatorModule,
         NaturalFixedButtonComponent,
         RouterLink,
+        AsyncPipe,
     ],
 })
 export class FacilitatorDocumentsComponent extends NaturalAbstractList<FacilitatorDocumentsService> implements OnInit {

@@ -16,6 +16,7 @@ import {UserService} from '../services/user.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-import',
@@ -28,6 +29,7 @@ import {MatButtonModule} from '@angular/material/button';
         NaturalIconDirective,
         MatProgressSpinnerModule,
         RouterLink,
+        AsyncPipe,
     ],
 })
 export class ImportComponent implements OnInit {

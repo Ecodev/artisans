@@ -104,6 +104,6 @@
     </div>
 }
 
-@if (routeData?.isAdmin && permissionsService.crud?.user.create) {
+@if (routeData?.isAdmin && (permissionsService.crud | async)?.user.create) {
     <natural-fixed-button icon="add" [routerLink]="['/admin/user/new']" />
 }

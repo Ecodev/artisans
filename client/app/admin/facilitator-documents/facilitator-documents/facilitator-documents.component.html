@@ -73,6 +73,6 @@
     </div>
 }
 
-@if (permissionsService.crud?.facilitatorDocument.create) {
+@if ((permissionsService.crud | async)?.facilitatorDocument.create) {
     <natural-fixed-button icon="add" [routerLink]="['/admin/facilitator-document/new']" />
 }

@@ -113,6 +113,6 @@
     </div>
 }
 
-@if (permissionsService.crud?.product.create) {
+@if ((permissionsService.crud | async)?.product.create) {
     <natural-fixed-button icon="add" [routerLink]="['/admin/product/new']" />
 }

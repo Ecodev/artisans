@@ -80,7 +80,7 @@ export class HomepageComponent implements OnInit {
         private readonly newsService: NewsService,
         private readonly eventService: EventService,
         private readonly productService: ProductService,
-        public readonly permissionService: PermissionsService,
+        public readonly permissionsService: PermissionsService,
     ) {}
 
     public ngOnInit(): void {

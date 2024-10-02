@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
-    NaturalAbstractController,
     NaturalIconDirective,
-    NaturalSidenavContainerComponent,
     NaturalSidenavComponent,
+    NaturalSidenavContainerComponent,
     NaturalSidenavContentComponent,
 } from '@ecodev/natural';
 import {CurrentUserForProfile} from '../../shared/generated-types';
@@ -34,12 +33,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
         RouterOutlet,
     ],
 })
-export class AdminComponent extends NaturalAbstractController implements OnInit {
+export class AdminComponent implements OnInit {
     public viewer: CurrentUserForProfile['viewer'] = null;
 
-    public constructor(private readonly route: ActivatedRoute) {
-        super();
-    }
+    public constructor(private readonly route: ActivatedRoute) {}
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer : null;

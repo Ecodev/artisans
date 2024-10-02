@@ -11,7 +11,7 @@ import {
     QueryVariables,
 } from '@ecodev/natural';
 import {defaults, isEqual, pick} from 'lodash-es';
-import {takeUntil} from 'rxjs/operators';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Directive({standalone: true})
 export class AbstractInfiniteLoadList<
@@ -41,7 +41,7 @@ export class AbstractInfiniteLoadList<
     public override ngOnInit(): void {
         super.ngOnInit();
 
-        this.dataSource?.internalDataObservable.pipe(takeUntil(this.ngUnsubscribe)).subscribe(result => {
+        this.dataSource?.internalDataObservable.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
             if (!result) {
                 return;
             }

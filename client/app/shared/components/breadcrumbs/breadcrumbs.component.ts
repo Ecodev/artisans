@@ -1,8 +1,8 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, DestroyRef, HostBinding, inject, Input, OnInit} from '@angular/core';
 import {ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
-import {NaturalAbstractController} from '@ecodev/natural';
-import {filter, takeUntil} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {MatButtonModule} from '@angular/material/button';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 export type Breadcrumb = {
     link: any[] | string;
@@ -16,20 +16,19 @@ export type Breadcrumb = {
     standalone: true,
     imports: [MatButtonModule, RouterLink],
 })
-export class BreadcrumbsComponent extends NaturalAbstractController implements OnInit {
+export class BreadcrumbsComponent implements OnInit {
+    private readonly destroyRef = inject(DestroyRef);
     @HostBinding('class.mat-body') private isBody = true;
 
     @Input() public breadcrumbs: Breadcrumb[] = [];
 
-    public constructor(private readonly router: Router) {
-        super();
-    }
+    public constructor(private readonly router: Router) {}
 
     public ngOnInit(): void {
         this.update();
         this.router.events
             .pipe(
-                takeUntil(this.ngUnsubscribe),
+                takeUntilDestroyed(this.destroyRef),
                 filter(event => event instanceof NavigationEnd),
             )
             .subscribe(() => this.update());

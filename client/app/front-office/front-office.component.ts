@@ -1,18 +1,17 @@
 import {CommonModule} from '@angular/common';
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {AfterViewInit, Component, DestroyRef, ElementRef, inject, OnInit} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     deliverableEmail,
     ifValid,
-    NaturalAbstractController,
     NaturalAlertService,
     NaturalIconDirective,
     NaturalSearchSelections,
     toNavigationParameters,
 } from '@ecodev/natural';
 import {differenceBy} from 'lodash-es';
-import {filter, finalize, takeUntil} from 'rxjs/operators';
+import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
@@ -27,6 +26,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatRippleModule} from '@angular/material/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-front-office',
@@ -54,7 +54,8 @@ import {MatRippleModule} from '@angular/material/core';
         MatListModule,
     ],
 })
-export class FrontOfficeComponent extends NaturalAbstractController implements OnInit, AfterViewInit {
+export class FrontOfficeComponent implements OnInit, AfterViewInit {
+    private readonly destroyRef = inject(DestroyRef);
     public searchTerm = '';
     public menuOpened = false;
 
@@ -261,9 +262,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         public readonly currencyService: CurrencyService,
         private readonly fb: NonNullableFormBuilder,
         private readonly alertService: NaturalAlertService,
-    ) {
-        super();
-    }
+    ) {}
 
     public ngOnInit(): void {
         this.userService.getViewerObservable().subscribe(viewer => (this.viewer = viewer));
@@ -274,7 +273,7 @@ export class FrontOfficeComponent extends NaturalAbstractController implements O
         // Further navigations
         this.router.events
             .pipe(
-                takeUntil(this.ngUnsubscribe),
+                takeUntilDestroyed(this.destroyRef),
                 filter(event => event instanceof NavigationEnd),
             )
             .subscribe(() => {

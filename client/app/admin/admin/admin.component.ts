@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     NaturalIconDirective,
@@ -34,9 +34,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     ],
 })
 export class AdminComponent implements OnInit {
-    public viewer: CurrentUserForProfile['viewer'] = null;
+    private readonly route = inject(ActivatedRoute);
 
-    public constructor(private readonly route: ActivatedRoute) {}
+    public viewer: CurrentUserForProfile['viewer'] = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer : null;

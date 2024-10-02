@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
@@ -49,11 +49,14 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
     FacilitatorDocumentsService,
     NaturalSeoResolveData
 > {
-    public constructor(
-        public readonly facilitatorDocumentService: FacilitatorDocumentsService,
-        private readonly fileService: FilesService,
-    ) {
+    public readonly facilitatorDocumentService: FacilitatorDocumentsService;
+    private readonly fileService = inject(FilesService);
+
+    public constructor() {
+        const facilitatorDocumentService = inject(FacilitatorDocumentsService);
+
         super('facilitatorDocument', facilitatorDocumentService);
+        this.facilitatorDocumentService = facilitatorDocumentService;
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
@@ -41,16 +41,17 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'date', label: 'Date'},
         {id: 'name', label: 'Nom'},
         {id: 'isActive', label: 'Active'},
     ];
 
-    public constructor(
-        service: NewsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const service = inject(NewsService);
+
         super(service);
     }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     IEnum,
     NaturalAbstractDetail,
@@ -59,14 +59,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
 })
 export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeoResolveData> implements OnInit {
+    private readonly userService: UserService;
+    public readonly sessionService = inject(SessionService);
+
     public UserService = UserService;
     private userRolesAvailable: UserRole[] = [];
 
-    public constructor(
-        private readonly userService: UserService,
-        public readonly sessionService: SessionService,
-    ) {
+    public constructor() {
+        const userService = inject(UserService);
+
         super('user', userService);
+        this.userService = userService;
     }
 
     public override ngOnInit(): void {

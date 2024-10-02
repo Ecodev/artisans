@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {FormsModule, ReactiveFormsModule, FormArray, FormControl} from '@angular/forms';
 import {
     NaturalAbstractDetail,
@@ -52,15 +52,16 @@ import {MatTabsModule} from '@angular/material/tabs';
     ],
 })
 export class SessionComponent extends NaturalAbstractDetail<SessionService, NaturalSeoResolveData> implements OnInit {
+    public readonly userService = inject(UserService);
+
     /**
      * Array of form controls dedicated to dates display
      */
     public datesForm!: FormArray;
 
-    public constructor(
-        sessionService: SessionService,
-        public readonly userService: UserService,
-    ) {
+    public constructor() {
+        const sessionService = inject(SessionService);
+
         super('session', sessionService);
     }
 

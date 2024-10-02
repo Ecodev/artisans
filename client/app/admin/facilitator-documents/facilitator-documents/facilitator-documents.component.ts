@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractList,
@@ -39,13 +39,14 @@ import {AsyncPipe} from '@angular/common';
     ],
 })
 export class FacilitatorDocumentsComponent extends NaturalAbstractList<FacilitatorDocumentsService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override columnsForTable = ['name', 'category', 'file'];
 
-    public constructor(
-        facilitatorDocumentService: FacilitatorDocumentsService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const facilitatorDocumentService = inject(FacilitatorDocumentsService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(facilitatorDocumentService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('facilitatorDocumentsAdmin');

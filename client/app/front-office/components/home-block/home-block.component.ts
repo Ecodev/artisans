@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
@@ -40,6 +40,9 @@ type Block = {
     ],
 })
 export class HomeBlockComponent implements OnInit {
+    private readonly configService = inject(ConfigurationService);
+    public readonly permissionsService = inject(PermissionsService);
+
     @Input({required: true}) public key!: string;
 
     public editMode = false;
@@ -47,11 +50,6 @@ export class HomeBlockComponent implements OnInit {
     public form!: FormGroup;
 
     public lastValue: Block | null = null;
-
-    public constructor(
-        private readonly configService: ConfigurationService,
-        public readonly permissionsService: PermissionsService,
-    ) {}
 
     public ngOnInit(): void {
         this.form = new FormGroup({

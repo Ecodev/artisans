@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {Component, inject, Input, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
 import {
     fromUrl,
     memorySessionStorageProvider,
@@ -94,10 +94,9 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
      */
     public override defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
 
-    public constructor(
-        public override readonly route: ActivatedRoute,
-        productService: ProductService,
-    ) {
+    public constructor() {
+        const productService = inject(ProductService);
+
         super(productService);
     }
 

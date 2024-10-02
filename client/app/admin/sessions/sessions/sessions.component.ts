@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     AvailableColumn,
@@ -42,6 +42,8 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'name', label: 'Nom'},
         {id: 'startDate', label: 'Première date'},
@@ -52,11 +54,10 @@ export class SessionsComponent extends NaturalAbstractList<SessionService> imple
         {id: 'region', label: 'Canton'},
     ];
 
-    public constructor(
-        sessionService: SessionService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const sessionService = inject(SessionService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(sessionService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('sessions');

@@ -1,6 +1,6 @@
 import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 import {Currency} from '../../../../shared/services/currency.service';
-import {Inject, Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {Subject} from 'rxjs';
 
@@ -8,6 +8,8 @@ import {Subject} from 'rxjs';
     providedIn: 'root',
 })
 export class CartCollectionService {
+    private readonly storage = inject<NaturalStorage>(SESSION_STORAGE);
+
     public readonly cleared = new Subject<void>();
 
     public get currency(): Currency {
@@ -25,8 +27,6 @@ export class CartCollectionService {
     private _currency: Currency = Currency.CHF;
     private readonly storageKey = 'carts';
     private readonly carts: Cart[] = [];
-
-    public constructor(@Inject(SESSION_STORAGE) private readonly storage: NaturalStorage) {}
 
     private getPersistedCarts(): any[] {
         const serializedStoredCarts = this.storage.getItem(this.storageKey);

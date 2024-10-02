@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     formatIsoDateTime,
@@ -55,6 +55,13 @@ import {HomeBlockComponent} from '../home-block/home-block.component';
     ],
 })
 export class HomepageComponent implements OnInit {
+    public readonly userService = inject(UserService);
+    private readonly route = inject(ActivatedRoute);
+    private readonly newsService = inject(NewsService);
+    private readonly eventService = inject(EventService);
+    private readonly productService = inject(ProductService);
+    public readonly permissionsService = inject(PermissionsService);
+
     public title = 'Les artisans de la transition';
 
     public viewer: CurrentUserForProfile['viewer'] = null;
@@ -73,15 +80,6 @@ export class HomepageComponent implements OnInit {
      * Currently active review
      */
     public currentReview: Products['products']['items'][0] | null = null;
-
-    public constructor(
-        public readonly userService: UserService,
-        private readonly route: ActivatedRoute,
-        private readonly newsService: NewsService,
-        private readonly eventService: EventService,
-        private readonly productService: ProductService,
-        public readonly permissionsService: PermissionsService,
-    ) {}
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer;

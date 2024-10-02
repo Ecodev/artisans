@@ -1,5 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     AvailableColumn,
@@ -50,6 +50,10 @@ import {MatTableModule} from '@angular/material/table';
     ],
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+    private readonly apollo = inject(Apollo);
+    private readonly document = inject<Document>(DOCUMENT);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'name', label: 'Nom'},
         {id: 'creationDate', label: 'Créé le'},
@@ -82,13 +86,10 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
     public usersEmail: string | null = null;
     public usersEmailAndName: string | null = null;
 
-    public constructor(
-        userService: UserService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-        private readonly apollo: Apollo,
-        @Inject(DOCUMENT) private readonly document: Document,
-    ) {
+    public constructor() {
+        const userService = inject(UserService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(userService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('users');

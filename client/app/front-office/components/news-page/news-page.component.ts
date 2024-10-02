@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
@@ -24,10 +24,11 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
-    public constructor(
-        newsService: NewsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public readonly permissionsService = inject(PermissionsService);
+
+    public constructor() {
+        const newsService = inject(NewsService);
+
         super('news', newsService);
     }
 }

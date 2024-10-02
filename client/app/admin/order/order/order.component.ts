@@ -1,4 +1,4 @@
-import {Component, Inject, Optional} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {NaturalAlertService, NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
 import {CommonModule, DatePipe} from '@angular/common';
@@ -32,6 +32,10 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     ],
 })
 export class OrderComponent {
+    public readonly dialogData = inject<NaturalDialogTriggerProvidedData<never>>(MAT_DIALOG_DATA);
+    public readonly orderService = inject(OrderService);
+    private readonly alertService = inject(NaturalAlertService);
+
     public forcedVariables: OrderLinesVariables = {};
 
     /**
@@ -49,17 +53,13 @@ export class OrderComponent {
      */
     public UserRole = UserRole;
 
-    public constructor(
-        @Optional() @Inject(MAT_DIALOG_DATA) public readonly dialogData: NaturalDialogTriggerProvidedData<never>,
-        public readonly orderService: OrderService,
-        private readonly alertService: NaturalAlertService,
-    ) {
-        this.viewer = dialogData.activatedRoute.snapshot.data.viewer
-            ? dialogData.activatedRoute.snapshot.data.viewer
+    public constructor() {
+        this.viewer = this.dialogData.activatedRoute.snapshot.data.viewer
+            ? this.dialogData.activatedRoute.snapshot.data.viewer
             : null;
 
         // Initialize resolved item
-        const model$ = dialogData.activatedRoute.snapshot.data.model as Observable<Order['order']>;
+        const model$ = this.dialogData.activatedRoute.snapshot.data.model as Observable<Order['order']>;
         model$.pipe(takeUntilDestroyed()).subscribe(order => {
             this.data = {model: order};
             // Filter productLines for this current order

@@ -1,14 +1,14 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {
     deliverableEmail,
     ifValid,
     NaturalAlertService,
-    validateAllFormControls,
     NaturalIconDirective,
+    validateAllFormControls,
 } from '@ecodev/natural';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NonNullableFormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
 import {MatButtonModule} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
@@ -37,17 +37,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ],
 })
 export class RegisterComponent implements OnInit {
+    protected readonly apollo = inject(Apollo);
+    protected readonly route = inject(ActivatedRoute);
+    protected readonly fb = inject(NonNullableFormBuilder);
+    protected readonly router = inject(Router);
+    protected readonly alertService = inject(NaturalAlertService);
+
     public step = 1;
     public sending = false;
     public form!: FormGroup;
-
-    public constructor(
-        protected readonly apollo: Apollo,
-        protected readonly route: ActivatedRoute,
-        protected readonly fb: NonNullableFormBuilder,
-        protected readonly router: Router,
-        protected readonly alertService: NaturalAlertService,
-    ) {}
 
     public ngOnInit(): void {
         this.initForm();

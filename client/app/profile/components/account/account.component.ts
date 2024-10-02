@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {NaturalAbstractDetail, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatIconModule} from '@angular/material/icon';
@@ -27,13 +27,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
 })
 export class AccountComponent extends NaturalAbstractDetail<UserService> implements OnInit {
+    private readonly userService: UserService;
+
     /**
      * True while password request is pending
      */
     public passwordMailSending = false;
 
-    public constructor(private readonly userService: UserService) {
+    public constructor() {
+        const userService = inject(UserService);
+
         super('user', userService);
+        this.userService = userService;
     }
 
     public override ngOnInit(): void {

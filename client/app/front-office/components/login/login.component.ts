@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {deliverableEmail, ifValid} from '@ecodev/natural';
@@ -26,6 +26,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ],
 })
 export class LoginComponent implements OnInit {
+    private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
+    private readonly userService = inject(UserService);
+    private readonly snackBar = inject(MatSnackBar);
+    private readonly fb = inject(NonNullableFormBuilder);
+
     /**
      * Stores the received redirect URL until we need to use it (when login is successfull)
      */
@@ -34,14 +40,6 @@ export class LoginComponent implements OnInit {
         email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
         password: ['', [Validators.required]],
     });
-
-    public constructor(
-        private readonly route: ActivatedRoute,
-        private readonly router: Router,
-        private readonly userService: UserService,
-        private readonly snackBar: MatSnackBar,
-        private readonly fb: NonNullableFormBuilder,
-    ) {}
 
     public ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';

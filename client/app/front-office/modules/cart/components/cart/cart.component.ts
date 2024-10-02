@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {
     NaturalAlertService,
@@ -37,20 +37,18 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class CartComponent implements OnInit {
+    private readonly alertService = inject(NaturalAlertService);
+    public readonly router = inject(Router);
+    private readonly route = inject(ActivatedRoute);
+    public readonly cartService = inject(CartService);
+    public readonly currencyService = inject(CurrencyService);
+    private readonly globalCartService = inject(GlobalCartService);
+    private readonly cartCollectionService = inject(CartCollectionService);
+
     /**
      * Eligible cart for Order
      */
     public cart?: Cart;
-
-    public constructor(
-        private readonly alertService: NaturalAlertService,
-        public readonly router: Router,
-        private readonly route: ActivatedRoute,
-        public readonly cartService: CartService,
-        public readonly currencyService: CurrencyService,
-        private readonly globalCartService: GlobalCartService,
-        private readonly cartCollectionService: CartCollectionService,
-    ) {}
 
     public ngOnInit(): void {
         if (this.route.snapshot.params.cartId) {

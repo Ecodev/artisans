@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     NaturalAbstractList,
     NaturalCapitalizePipe,
@@ -39,12 +39,13 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class PurchasesComponent extends NaturalAbstractList<PurchaseService> implements OnInit {
+    private readonly naturalFileService = inject(NaturalFileService);
+
     public ProductType = ProductType;
 
-    public constructor(
-        service: PurchaseService,
-        private readonly naturalFileService: NaturalFileService,
-    ) {
+    public constructor() {
+        const service = inject(PurchaseService);
+
         super(service);
 
         this.persistSearch = false;

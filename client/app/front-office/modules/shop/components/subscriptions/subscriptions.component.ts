@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
@@ -18,17 +18,15 @@ import {PriceComponent} from '../../../../../shared/components/price/price.compo
     imports: [PriceComponent, MatButtonModule],
 })
 export class SubscriptionsComponent implements OnInit {
+    private readonly subscriptionService = inject(SubscriptionService);
+    private readonly router = inject(Router);
+    public readonly dialog = inject(MatDialog);
+    private readonly route = inject(ActivatedRoute);
+    private readonly globalCartService = inject(GlobalCartService);
+
     public subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;
 
     public ProductType = ProductType;
-
-    public constructor(
-        private readonly subscriptionService: SubscriptionService,
-        private readonly router: Router,
-        public readonly dialog: MatDialog,
-        private readonly route: ActivatedRoute,
-        private readonly globalCartService: GlobalCartService,
-    ) {}
 
     public ngOnInit(): void {
         this.subscriptionService

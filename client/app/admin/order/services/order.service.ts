@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -32,7 +32,9 @@ export class OrderService extends NaturalAbstractModelService<
     never,
     never
 > {
-    public constructor(private readonly orderLineService: OrderLineService) {
+    private readonly orderLineService = inject(OrderLineService);
+
+    public constructor() {
         super('order', orderQuery, ordersQuery, createOrder, null, null);
     }
 

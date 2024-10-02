@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe} from '@ecodev/natural';
@@ -38,6 +38,16 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class CreateOrderComponent implements OnInit {
+    public readonly cartService = inject(CartService);
+    private readonly alertService = inject(NaturalAlertService);
+    public readonly router = inject(Router);
+    private readonly route = inject(ActivatedRoute);
+    public readonly userService = inject(UserService);
+    public readonly currencyService = inject(CurrencyService);
+    private readonly cartCollectionService = inject(CartCollectionService);
+    public readonly navigationService = inject(NavigationService);
+    private readonly datatransService = inject(DatatransService);
+
     /**
      * Eligible cart for order
      */
@@ -68,18 +78,6 @@ export class CreateOrderComponent implements OnInit {
      * True when creating order has been sent
      */
     public pending = false;
-
-    public constructor(
-        public readonly cartService: CartService,
-        private readonly alertService: NaturalAlertService,
-        public readonly router: Router,
-        private readonly route: ActivatedRoute,
-        public readonly userService: UserService,
-        public readonly currencyService: CurrencyService,
-        private readonly cartCollectionService: CartCollectionService,
-        public readonly navigationService: NavigationService,
-        private readonly datatransService: DatatransService,
-    ) {}
 
     public ngOnInit(): void {
         const cart = this.cartCollectionService.getById(+this.route.snapshot.params.cartId);

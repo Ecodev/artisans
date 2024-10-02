@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {CartService} from '../../modules/cart/services/cart.service';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
@@ -11,5 +11,5 @@ import {RouterLink} from '@angular/router';
     imports: [RouterLink, MatButtonModule],
 })
 export class FaireUnDonComponent {
-    public constructor(public readonly cartService: CartService) {}
+    public readonly cartService = inject(CartService);
 }

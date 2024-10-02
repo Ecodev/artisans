@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, inject} from '@angular/core';
 import {ProductType} from '../../../../../shared/generated-types';
 import {CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
@@ -13,6 +13,8 @@ import {MatButtonModule} from '@angular/material/button';
     imports: [MatButtonModule, RouterLink],
 })
 export class AddToCartComponent {
+    private readonly cartService = inject(CartService);
+
     /**
      * Button label
      */
@@ -34,8 +36,6 @@ export class AddToCartComponent {
     @Input({required: true}) public type!: ProductType;
 
     public inCart = false;
-
-    public constructor(private readonly cartService: CartService) {}
 
     public click(): void {
         this.cartService.addProduct(this.product, this.type, 1);

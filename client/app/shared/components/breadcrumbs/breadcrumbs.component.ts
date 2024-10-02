@@ -17,12 +17,12 @@ export type Breadcrumb = {
     imports: [MatButtonModule, RouterLink],
 })
 export class BreadcrumbsComponent implements OnInit {
+    private readonly router = inject(Router);
+
     private readonly destroyRef = inject(DestroyRef);
     @HostBinding('class.mat-body') private isBody = true;
 
     @Input() public breadcrumbs: Breadcrumb[] = [];
-
-    public constructor(private readonly router: Router) {}
 
     public ngOnInit(): void {
         this.update();

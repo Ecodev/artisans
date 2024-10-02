@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {Literal, NaturalQueryVariablesManager, NaturalIconDirective} from '@ecodev/natural';
 import {groupBy, sortBy} from 'lodash-es';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
@@ -17,13 +17,11 @@ import {CommonModule} from '@angular/common';
     imports: [CommonModule, MatListModule, MatIconModule, NaturalIconDirective, SessionSideColumnComponent],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
+    public readonly userService = inject(UserService);
+    private readonly facilitatorDocumentService = inject(FacilitatorDocumentsService);
+
     public facilitators: Users['users']['items'][0][] = [];
     public categories: Literal = {};
-
-    public constructor(
-        public readonly userService: UserService,
-        private readonly facilitatorDocumentService: FacilitatorDocumentsService,
-    ) {}
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();

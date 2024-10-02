@@ -55,6 +55,14 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     ],
 })
 export class FrontOfficeComponent implements OnInit, AfterViewInit {
+    private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
+    private readonly navigationService = inject(NavigationService);
+    public readonly userService = inject(UserService);
+    public readonly currencyService = inject(CurrencyService);
+    private readonly fb = inject(NonNullableFormBuilder);
+    private readonly alertService = inject(NaturalAlertService);
+
     private readonly destroyRef = inject(DestroyRef);
     public searchTerm = '';
     public menuOpened = false;
@@ -253,16 +261,6 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
 
     public Currency = Currency;
     public UserRole = UserRole;
-
-    public constructor(
-        private readonly route: ActivatedRoute,
-        private readonly router: Router,
-        private readonly navigationService: NavigationService,
-        public readonly userService: UserService,
-        public readonly currencyService: CurrencyService,
-        private readonly fb: NonNullableFormBuilder,
-        private readonly alertService: NaturalAlertService,
-    ) {}
 
     public ngOnInit(): void {
         this.userService.getViewerObservable().subscribe(viewer => (this.viewer = viewer));

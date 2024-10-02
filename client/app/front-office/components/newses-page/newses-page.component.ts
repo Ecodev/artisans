@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {NaturalCapitalizePipe, PaginationInput} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
@@ -20,7 +20,9 @@ export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
         offset: null,
     };
 
-    public constructor(service: NewsService) {
+    public constructor() {
+        const service = inject(NewsService);
+
         super(service);
     }
 }

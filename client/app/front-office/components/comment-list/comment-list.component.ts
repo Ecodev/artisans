@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, inject} from '@angular/core';
 import {NaturalAbstractList, SortingOrder, NaturalIconDirective} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
@@ -28,6 +28,8 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class CommentListComponent extends NaturalAbstractList<CommentService> implements OnInit, OnChanges {
+    public readonly permissionsService = inject(PermissionsService);
+
     /**
      * Event related to displayed comments
      */
@@ -47,10 +49,9 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
 
     public newCommentValue = '';
 
-    public constructor(
-        service: CommentService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const service = inject(CommentService);
+
         super(service);
         this.persistSearch = false;
     }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
@@ -37,6 +37,8 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'date', label: 'Date'},
         {id: 'name', label: 'Nom'},
@@ -44,10 +46,9 @@ export class EventsComponent extends NaturalAbstractList<EventService> implement
         {id: 'type', label: 'Type'},
     ];
 
-    public constructor(
-        service: EventService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const service = inject(EventService);
+
         super(service);
     }
 }

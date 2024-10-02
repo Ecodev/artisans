@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -16,15 +16,15 @@ import {CartCollectionService} from './cart-collection.service';
     providedIn: 'root',
 })
 export class CartService {
-    public constructor(
-        private readonly orderService: OrderService,
-        private readonly dialogService: MatDialog,
-        private readonly currencyService: CurrencyService,
-        private readonly snackbar: MatSnackBar,
-        private readonly router: Router,
-        private readonly globalCartService: GlobalCartService,
-        private readonly cartCollectionService: CartCollectionService,
-    ) {
+    private readonly orderService = inject(OrderService);
+    private readonly dialogService = inject(MatDialog);
+    private readonly currencyService = inject(CurrencyService);
+    private readonly snackbar = inject(MatSnackBar);
+    private readonly router = inject(Router);
+    private readonly globalCartService = inject(GlobalCartService);
+    private readonly cartCollectionService = inject(CartCollectionService);
+
+    public constructor() {
         // On currency change, update carts totals
         this.currencyService.current.subscribe(currency => (this.cartCollectionService.currency = currency));
     }

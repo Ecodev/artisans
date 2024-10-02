@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
@@ -23,7 +23,9 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class EventPageComponent extends NaturalAbstractDetail<EventService> implements OnInit {
-    public constructor(eventService: EventService) {
+    public constructor() {
+        const eventService = inject(EventService);
+
         super('event', eventService);
     }
 }

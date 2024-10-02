@@ -13,12 +13,12 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     imports: [CommonModule],
 })
 export class PriceComponent implements OnInit {
+    public readonly currencyService = inject(CurrencyService);
+
     private readonly destroyRef = inject(DestroyRef);
     @Input({required: true}) public product!: CartLineProduct | Subscriptions['subscriptions']['items'][0];
 
     public price!: string;
-
-    public constructor(public readonly currencyService: CurrencyService) {}
 
     public ngOnInit(): void {
         this.currencyService.current.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(currency => {

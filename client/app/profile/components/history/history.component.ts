@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
@@ -28,11 +28,12 @@ import {CommonModule, DatePipe} from '@angular/common';
     ],
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
-    public constructor(
-        service: OrderService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public readonly permissionsService = inject(PermissionsService);
+
+    public constructor() {
+        const service = inject(OrderService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(service);
         this.columnsForTable = ['creationDate', 'status', 'balance'];
 

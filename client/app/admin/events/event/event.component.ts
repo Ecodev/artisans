@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractDetail,
@@ -44,10 +44,11 @@ import {MatDividerModule} from '@angular/material/divider';
     ],
 })
 export class EventComponent extends NaturalAbstractDetail<EventService, NaturalSeoResolveData> implements OnInit {
-    public constructor(
-        eventService: EventService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public readonly permissionsService = inject(PermissionsService);
+
+    public constructor() {
+        const eventService = inject(EventService);
+
         super('event', eventService);
     }
 }

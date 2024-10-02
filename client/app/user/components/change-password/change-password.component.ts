@@ -1,5 +1,5 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ifValid, NaturalAlertService, NaturalIconDirective} from '@ecodev/natural';
@@ -24,16 +24,17 @@ import {PasswordComponent} from '../password/password.component';
     ],
 })
 export class ChangePasswordComponent {
+    private readonly apollo = inject(Apollo);
+    private readonly alertService = inject(NaturalAlertService);
+    private readonly router = inject(Router);
+    private readonly fb = inject(NonNullableFormBuilder);
+
     public readonly form = this.fb.group({password: ['']});
     private readonly token: string;
 
-    public constructor(
-        route: ActivatedRoute,
-        private readonly apollo: Apollo,
-        private readonly alertService: NaturalAlertService,
-        private readonly router: Router,
-        private readonly fb: NonNullableFormBuilder,
-    ) {
+    public constructor() {
+        const route = inject(ActivatedRoute);
+
         this.token = route.snapshot.params.token;
     }
 

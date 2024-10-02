@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, inject} from '@angular/core';
 import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CountryService} from './country.service';
 import {NaturalSelectComponent} from '@ecodev/natural';
@@ -13,6 +13,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NaturalSelectComponent],
 })
 export class AddressComponent {
+    public readonly countryService = inject(CountryService);
+
     /**
      * If fields are editable or not
      */
@@ -35,8 +37,6 @@ export class AddressComponent {
      * Emits when form changes
      */
     @Output() public readonly addressChange = new EventEmitter<void>();
-
-    public constructor(public readonly countryService: CountryService) {}
 
     public update(): void {
         this.addressChange.emit();

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     AvailableColumn,
@@ -46,6 +46,8 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class ProductsComponent extends NaturalAbstractList<ProductService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'code', label: 'Code'},
         {id: 'image', label: 'Image'},
@@ -56,11 +58,10 @@ export class ProductsComponent extends NaturalAbstractList<ProductService> imple
         {id: 'isActive', label: 'Actif'},
     ];
 
-    public constructor(
-        productService: ProductService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const productService = inject(ProductService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(productService);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('productsAdmin');

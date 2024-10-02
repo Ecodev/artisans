@@ -1,11 +1,9 @@
-import {Apollo} from 'apollo-angular';
-import {Component, OnInit} from '@angular/core';
-import {deliverableEmail, NaturalAlertService, relationsToIds, NaturalIconDirective} from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
+import {deliverableEmail, NaturalIconDirective, relationsToIds} from '@ecodev/natural';
 import {pick} from 'lodash-es';
 import {RegisterComponent} from './register.component';
-import {NonNullableFormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserByTokenResolve} from '../../../admin/users/user';
-import {ActivatedRoute, Router} from '@angular/router';
 import {ConfirmRegistrationVariables, UserByToken} from '../../../shared/generated-types';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatButtonModule} from '@angular/material/button';
@@ -37,15 +35,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ],
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
-    public constructor(
-        apollo: Apollo,
-        route: ActivatedRoute,
-        fb: NonNullableFormBuilder,
-        router: Router,
-        alertService: NaturalAlertService,
-        private readonly userService: UserService,
-    ) {
-        super(apollo, route, fb, router, alertService);
+    private readonly userService = inject(UserService);
+
+    public constructor() {
+        super();
         this.step = 2;
     }
 

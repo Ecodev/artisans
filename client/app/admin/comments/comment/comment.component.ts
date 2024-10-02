@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
@@ -38,12 +38,13 @@ import {MatDividerModule} from '@angular/material/divider';
     ],
 })
 export class CommentComponent extends NaturalAbstractDetail<CommentService, NaturalSeoResolveData> implements OnInit {
-    public constructor(
-        commentService: CommentService,
-        public readonly newsService: NewsService,
-        public readonly eventService: EventService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public readonly newsService = inject(NewsService);
+    public readonly eventService = inject(EventService);
+    public readonly permissionsService = inject(PermissionsService);
+
+    public constructor() {
+        const commentService = inject(CommentService);
+
         super('comment', commentService);
     }
 }

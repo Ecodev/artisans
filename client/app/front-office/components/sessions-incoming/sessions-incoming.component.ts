@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
@@ -13,9 +13,9 @@ import {MatButtonModule} from '@angular/material/button';
     imports: [MatButtonModule, SessionSideColumnComponent],
 })
 export class SessionsIncomingComponent implements OnInit {
-    public sessions: Sessions['sessions']['items'][0][] = [];
+    private readonly sessionService = inject(SessionService);
 
-    public constructor(private readonly sessionService: SessionService) {}
+    public sessions: Sessions['sessions']['items'][0][] = [];
 
     public ngOnInit(): void {
         // Get sessions

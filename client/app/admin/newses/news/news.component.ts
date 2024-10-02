@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractDetail,
@@ -50,10 +50,11 @@ import {MatDividerModule} from '@angular/material/divider';
     ],
 })
 export class NewsComponent extends NaturalAbstractDetail<NewsService, NaturalSeoResolveData> implements OnInit {
-    public constructor(
-        newsService: NewsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public readonly permissionsService = inject(PermissionsService);
+
+    public constructor() {
+        const newsService = inject(NewsService);
+
         super('news', newsService);
     }
 }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
@@ -14,14 +14,12 @@ import {MatButtonModule} from '@angular/material/button';
     imports: [MatButtonModule, RouterLink],
 })
 export class SessionSideColumnComponent implements OnInit {
+    private readonly sessionService = inject(SessionService);
+    private readonly route = inject(ActivatedRoute);
+
     public number = 0;
 
     @Input() public hiddenBlocName?: string;
-
-    public constructor(
-        private readonly sessionService: SessionService,
-        private readonly route: ActivatedRoute,
-    ) {}
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();

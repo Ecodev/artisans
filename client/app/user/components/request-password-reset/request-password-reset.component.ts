@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ifValid, NaturalAlertService, NaturalIconDirective, validateAllFormControls} from '@ecodev/natural';
@@ -24,14 +24,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ],
 })
 export class RequestPasswordResetComponent {
+    private readonly alertService = inject(NaturalAlertService);
+    private readonly router = inject(Router);
+    private readonly userService = inject(UserService);
+
     public readonly form: FormGroup;
     public sending = false;
 
-    public constructor(
-        private readonly alertService: NaturalAlertService,
-        private readonly router: Router,
-        private readonly userService: UserService,
-    ) {
+    public constructor() {
+        const userService = this.userService;
+
         this.form = new FormGroup({email: new FormControl('', userService.getFormValidators().email)});
     }
 

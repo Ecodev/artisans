@@ -1,5 +1,5 @@
 import {animate, group, query, sequence, state, style, transition, trigger} from '@angular/animations';
-import {ChangeDetectionStrategy, Component, Inject, InjectionToken} from '@angular/core';
+import {ChangeDetectionStrategy, Component, InjectionToken, inject} from '@angular/core';
 import {MenuItem} from '../../services/navigation.service';
 import {RouterLinkActive, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -42,6 +42,8 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
     imports: [CommonModule, RouterLinkActive, RouterLink],
 })
 export class MenuComponent {
+    public readonly data = inject<MenuDropdownData>(APP_MENU_DATA);
+
     /**
      * Align with main menu button
      */
@@ -52,7 +54,9 @@ export class MenuComponent {
      */
     public panelAnimationState: 'void' | 'enter' = 'void';
 
-    public constructor(@Inject(APP_MENU_DATA) public readonly data: MenuDropdownData) {
+    public constructor() {
+        const data = this.data;
+
         this.offsetLeft = data.originalNativeElement.offsetLeft - 20;
     }
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
@@ -31,16 +31,17 @@ import {MatTableModule} from '@angular/material/table';
     ],
 })
 export class CommentsComponent extends NaturalAbstractList<CommentService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'description', label: 'Commentaire'},
         {id: 'event', label: 'News'},
         {id: 'news', label: 'Actualité'},
     ];
 
-    public constructor(
-        service: CommentService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const service = inject(CommentService);
+
         super(service);
     }
 }

@@ -1,7 +1,7 @@
 import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {DOCUMENT} from '@angular/common';
-import {ComponentRef, ElementRef, Inject, Injectable, Injector, StaticProvider} from '@angular/core';
+import {ComponentRef, ElementRef, Injectable, Injector, StaticProvider, inject} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'lodash-es';
 import {merge, Observable, Subject} from 'rxjs';
@@ -20,12 +20,10 @@ export type MenuItem = {
     providedIn: 'root',
 })
 export class NavigationService {
-    public constructor(
-        private readonly overlay: Overlay,
-        private readonly injector: Injector,
-        private readonly router: Router,
-        @Inject(DOCUMENT) private readonly document: Document,
-    ) {}
+    private readonly overlay = inject(Overlay);
+    private readonly injector = inject(Injector);
+    private readonly router = inject(Router);
+    private readonly document = inject<Document>(DOCUMENT);
 
     /**
      * Open menu

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
@@ -12,9 +12,9 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
     imports: [SessionSideColumnComponent],
 })
 export class SessionFacilitatorComponent implements OnInit {
-    public facilitators: Users['users']['items'][0][] = [];
+    public readonly userService = inject(UserService);
 
-    public constructor(public readonly userService: UserService) {}
+    public facilitators: Users['users']['items'][0][] = [];
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();

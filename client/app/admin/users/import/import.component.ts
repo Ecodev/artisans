@@ -1,5 +1,5 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     FileSelection,
@@ -33,6 +33,12 @@ import {AsyncPipe} from '@angular/common';
     ],
 })
 export class ImportComponent implements OnInit {
+    private readonly route = inject(ActivatedRoute);
+    public readonly permissionsService = inject(PermissionsService);
+    private readonly apollo = inject(Apollo);
+    private readonly alertService = inject(NaturalAlertService);
+    private readonly userService = inject(UserService);
+
     /**
      * Data attribute provided by activated route snapshot
      */
@@ -51,14 +57,6 @@ export class ImportComponent implements OnInit {
             },
         ],
     ]);
-
-    public constructor(
-        private readonly route: ActivatedRoute,
-        public readonly permissionsService: PermissionsService,
-        private readonly apollo: Apollo,
-        private readonly alertService: NaturalAlertService,
-        private readonly userService: UserService,
-    ) {}
 
     public ngOnInit(): void {
         this.routeData = this.route.snapshot.data as NaturalSeoResolveData;

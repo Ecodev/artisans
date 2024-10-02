@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {
     NaturalAbstractDetail,
@@ -36,11 +36,12 @@ export class OrderLineComponent
     extends NaturalAbstractDetail<OrderLineService, NaturalSeoResolveData>
     implements OnInit
 {
-    public constructor(
-        orderLineService: OrderLineService,
-        public readonly productService: ProductService,
-        public readonly subscriptionService: SubscriptionService,
-    ) {
+    public readonly productService = inject(ProductService);
+    public readonly subscriptionService = inject(SubscriptionService);
+
+    public constructor() {
+        const orderLineService = inject(OrderLineService);
+
         super('orderLine', orderLineService);
     }
 }

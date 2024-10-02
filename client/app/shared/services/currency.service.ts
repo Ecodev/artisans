@@ -1,6 +1,6 @@
 import {BehaviorSubject} from 'rxjs';
 import {UserLike} from '../../admin/users/services/user.service';
-import {Inject, Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
 
 /**
@@ -15,9 +15,11 @@ export enum Currency {
     providedIn: 'root',
 })
 export class CurrencyService {
+    private readonly sessionStorage = inject<NaturalStorage>(SESSION_STORAGE);
+
     public readonly current: BehaviorSubject<Currency> = new BehaviorSubject<Currency>(Currency.CHF);
 
-    public constructor(@Inject(SESSION_STORAGE) private readonly sessionStorage: NaturalStorage) {
+    public constructor() {
         const stored = this.sessionStorage.getItem('currency');
 
         if (stored === 'CHF') {

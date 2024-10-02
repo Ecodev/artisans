@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, inject} from '@angular/core';
 import {
     DropdownFacet,
     FlagFacet,
@@ -32,6 +32,10 @@ import {
     providedIn: 'root',
 })
 export class NaturalSearchFacetsService {
+    private readonly enumService = inject(NaturalEnumService);
+    private readonly productTagService = inject(ProductTagService);
+    private readonly userService = inject(UserService);
+
     private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration<UserService>> = {
         display: 'Utilisateur',
         field: 'owner',
@@ -265,12 +269,6 @@ export class NaturalSearchFacetsService {
             } satisfies DropdownFacet<TypeSelectNaturalConfiguration<UserService>>,
         ],
     };
-
-    public constructor(
-        private readonly enumService: NaturalEnumService,
-        private readonly productTagService: ProductTagService,
-        private readonly userService: UserService,
-    ) {}
 
     /**
      * Returns the natural search configuration for given, or null if non-existent

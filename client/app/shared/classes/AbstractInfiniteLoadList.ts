@@ -33,7 +33,7 @@ export class AbstractInfiniteLoadList<
 {
     public items: ExtractTall<TService>['items'][0][] | null = null;
 
-    public constructor(service: any) {
+    public constructor(service: TService) {
         super(service);
         this.persistSearch = false;
     }

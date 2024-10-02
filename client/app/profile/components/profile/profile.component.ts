@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalIconDirective, NaturalEnumPipe} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
@@ -29,18 +29,16 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class ProfileComponent implements OnInit {
+    public readonly userService = inject(UserService);
+    private readonly alertService = inject(NaturalAlertService);
+    private readonly route = inject(ActivatedRoute);
+    public readonly productService = inject(ProductService);
+
     public viewer: CurrentUserForProfile['viewer'] = null;
     public ProductType = ProductType;
     public Membership = Membership;
 
     public membershipProduct: Product['product'] | null = null;
-
-    public constructor(
-        public readonly userService: UserService,
-        private readonly alertService: NaturalAlertService,
-        private readonly route: ActivatedRoute,
-        public readonly productService: ProductService,
-    ) {}
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer;

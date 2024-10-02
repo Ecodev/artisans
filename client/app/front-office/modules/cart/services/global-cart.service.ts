@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy} from '@angular/core';
+import {Injectable, OnDestroy, inject} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {CartCollectionService} from './cart-collection.service';
 import {Subscription} from 'rxjs';
@@ -7,10 +7,12 @@ import {Subscription} from 'rxjs';
     providedIn: 'root',
 })
 export class GlobalCartService implements OnDestroy {
+    private readonly cartCollectionService = inject(CartCollectionService);
+
     private _cart!: Cart;
     private readonly subscription: Subscription;
 
-    public constructor(private readonly cartCollectionService: CartCollectionService) {
+    public constructor() {
         // Whenever carts are cleared, we reload an empty global cart
         this.subscription = this.cartCollectionService.cleared.subscribe(() => this.initializeFromStorage());
         this.initializeFromStorage();

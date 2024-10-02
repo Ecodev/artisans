@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, inject} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
@@ -42,6 +42,8 @@ import {MatTableModule} from '@angular/material/table';
     ],
 })
 export class OrdersComponent extends NaturalAbstractList<OrderService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override defaultSorting = [{field: OrderSortingField.creationDate, order: SortingOrder.DESC}];
     public override availableColumns: AvailableColumn[] = [
         {id: 'creationDate', label: 'Date'},
@@ -52,11 +54,10 @@ export class OrdersComponent extends NaturalAbstractList<OrderService> implement
         {id: 'balanceEUR', label: 'Total EUR'},
     ];
 
-    public constructor(
-        service: OrderService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const service = inject(OrderService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(service);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orders');

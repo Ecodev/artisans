@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalAvatarComponent,
@@ -70,15 +70,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
 })
 export class ProductComponent extends NaturalAbstractDetail<ProductService, NaturalSeoResolveData> {
+    public readonly productService: ProductService;
+    public readonly productTagService = inject(ProductTagService);
+    private readonly imageService = inject(ImageService);
+    private readonly fileService = inject(FilesService);
+
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
-    public constructor(
-        public readonly productService: ProductService,
-        public readonly productTagService: ProductTagService,
-        private readonly imageService: ImageService,
-        private readonly fileService: FilesService,
-    ) {
+    public constructor() {
+        const productService = inject(ProductService);
+
         super('product', productService);
+        this.productService = productService;
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

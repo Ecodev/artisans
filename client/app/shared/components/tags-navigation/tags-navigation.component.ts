@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, inject} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
 import {ProductTags, ProductTagsVariables} from '../../generated-types';
@@ -22,7 +22,9 @@ export class TagsNavigationComponent {
      */
     @Input() public linkBase: any[] = [];
 
-    public constructor(productTagService: ProductTagService) {
+    public constructor() {
+        const productTagService = inject(ProductTagService);
+
         const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
         productTagService.getAll(qvm).subscribe(result => {
             this.items = result.items;

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, inject} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
@@ -37,6 +37,8 @@ import {MatTableModule} from '@angular/material/table';
     ],
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
+    public readonly permissionsService = inject(PermissionsService);
+
     public override availableColumns: AvailableColumn[] = [
         {id: 'creationDate', label: 'Date'},
         {id: 'quantity', label: 'Quantité'},
@@ -69,11 +71,10 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
      */
     @Input() public override pageSizeOptions = [5, 25, 50, 100, 200];
 
-    public constructor(
-        service: OrderLineService,
-        naturalSearchFacetsService: NaturalSearchFacetsService,
-        public readonly permissionsService: PermissionsService,
-    ) {
+    public constructor() {
+        const service = inject(OrderLineService);
+        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
+
         super(service);
 
         this.naturalSearchFacets = naturalSearchFacetsService.get('orderLines');

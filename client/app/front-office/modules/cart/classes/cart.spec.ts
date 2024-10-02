@@ -1,7 +1,8 @@
 import {Product, ProductType} from '../../../../shared/generated-types';
 import {Cart, CartLine} from './cart';
-import {NaturalMemoryStorage} from '@ecodev/natural';
 import {CartCollectionService} from '../services/cart-collection.service';
+import {memorySessionStorageProvider} from '@ecodev/natural';
+import {TestBed} from '@angular/core/testing';
 
 /**
  * Todo : add tests with combinations (same product with web or paper declination)
@@ -25,7 +26,11 @@ describe('Cart', () => {
     } as unknown as Product['product'];
 
     beforeEach(() => {
-        const cartCollectionService = new CartCollectionService(new NaturalMemoryStorage());
+        TestBed.configureTestingModule({
+            providers: [memorySessionStorageProvider],
+        });
+
+        const cartCollectionService = TestBed.inject(CartCollectionService);
         cart = new Cart(cartCollectionService);
     });
 

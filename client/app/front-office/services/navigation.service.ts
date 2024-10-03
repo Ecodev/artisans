@@ -23,7 +23,7 @@ export class NavigationService {
     private readonly overlay = inject(Overlay);
     private readonly injector = inject(Injector);
     private readonly router = inject(Router);
-    private readonly document = inject<Document>(DOCUMENT);
+    private readonly document = inject(DOCUMENT);
 
     /**
      * Open menu

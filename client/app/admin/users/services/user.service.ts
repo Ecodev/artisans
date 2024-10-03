@@ -1,5 +1,5 @@
 import {gql} from 'apollo-angular';
-import {Injectable, OnDestroy, inject} from '@angular/core';
+import {inject, Injectable, OnDestroy} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {
@@ -8,7 +8,6 @@ import {
     FormValidators,
     LOCAL_STORAGE,
     NaturalAbstractModelService,
-    NaturalStorage,
     unique,
 } from '@ecodev/natural';
 import {fromEvent, Observable, of, Subject, switchMap, tap} from 'rxjs';
@@ -84,8 +83,8 @@ export class UserService
     private readonly permissionsService = inject(PermissionsService);
     private readonly currencyService = inject(CurrencyService);
     private readonly cartCollectionService = inject(CartCollectionService);
-    private readonly document = inject<Document>(DOCUMENT);
-    private readonly storage = inject<NaturalStorage>(LOCAL_STORAGE);
+    private readonly document = inject(DOCUMENT);
+    private readonly storage = inject(LOCAL_STORAGE);
 
     /**
      * Should be used only by fetchViewer and cacheViewer

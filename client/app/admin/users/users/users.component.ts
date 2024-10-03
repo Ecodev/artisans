@@ -52,7 +52,7 @@ import {MatTableModule} from '@angular/material/table';
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);
     private readonly apollo = inject(Apollo);
-    private readonly document = inject<Document>(DOCUMENT);
+    private readonly document = inject(DOCUMENT);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'name', label: 'Nom'},

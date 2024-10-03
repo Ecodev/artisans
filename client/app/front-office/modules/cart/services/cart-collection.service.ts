@@ -1,6 +1,6 @@
-import {NaturalStorage, SESSION_STORAGE} from '@ecodev/natural';
+import {SESSION_STORAGE} from '@ecodev/natural';
 import {Currency} from '../../../../shared/services/currency.service';
-import {Injectable, inject} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {Subject} from 'rxjs';
 
@@ -8,7 +8,7 @@ import {Subject} from 'rxjs';
     providedIn: 'root',
 })
 export class CartCollectionService {
-    private readonly storage = inject<NaturalStorage>(SESSION_STORAGE);
+    private readonly storage = inject(SESSION_STORAGE);
 
     public readonly cleared = new Subject<void>();
 

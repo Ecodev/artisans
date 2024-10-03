@@ -42,7 +42,7 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
     imports: [CommonModule, RouterLinkActive, RouterLink],
 })
 export class MenuComponent {
-    public readonly data = inject<MenuDropdownData>(APP_MENU_DATA);
+    public readonly data = inject(APP_MENU_DATA);
 
     /**
      * Align with main menu button

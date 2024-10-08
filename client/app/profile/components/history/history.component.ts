@@ -1,7 +1,7 @@
 import {Component, OnInit, inject} from '@angular/core';
 import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
+import {orders} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {RouterOutlet} from '@angular/router';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -32,12 +32,11 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
 
     public constructor() {
         const service = inject(OrderService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(service);
         this.columnsForTable = ['creationDate', 'status', 'balance'];
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
+        this.naturalSearchFacets = orders();
     }
 
     public override ngOnInit(): void {

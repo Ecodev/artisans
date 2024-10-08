@@ -9,7 +9,7 @@ import {
     NaturalSearchComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
+import {sessions} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {SessionService} from '../services/session.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -56,10 +56,9 @@ export class SessionsComponent extends NaturalAbstractList<SessionService> imple
 
     public constructor() {
         const sessionService = inject(SessionService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(sessionService);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('sessions');
+        this.naturalSearchFacets = sessions();
     }
 }

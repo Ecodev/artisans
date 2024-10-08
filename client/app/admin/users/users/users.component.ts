@@ -17,7 +17,7 @@ import {
 } from '@ecodev/natural';
 import {CommonModule, DatePipe, DOCUMENT} from '@angular/common';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
+import {users} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';
@@ -88,11 +88,10 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
 
     public constructor() {
         const userService = inject(UserService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(userService);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('users');
+        this.naturalSearchFacets = users();
     }
 
     public override search(naturalSearchSelections: NaturalSearchSelections): void {

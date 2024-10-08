@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractList,
@@ -7,7 +7,6 @@ import {
     NaturalSearchComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -45,10 +44,7 @@ export class FacilitatorDocumentsComponent extends NaturalAbstractList<Facilitat
 
     public constructor() {
         const facilitatorDocumentService = inject(FacilitatorDocumentsService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(facilitatorDocumentService);
-
-        this.naturalSearchFacets = naturalSearchFacetsService.get('facilitatorDocumentsAdmin');
     }
 }

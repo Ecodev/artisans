@@ -10,7 +10,7 @@ import {
 } from '@ecodev/natural';
 import {CommonModule, DatePipe} from '@angular/common';
 import {OrderSortingField, SortingOrder} from '../../../shared/generated-types';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
+import {orders} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderService} from '../services/order.service';
 import {RouterOutlet} from '@angular/router';
@@ -56,10 +56,9 @@ export class OrdersComponent extends NaturalAbstractList<OrderService> implement
 
     public constructor() {
         const service = inject(OrderService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(service);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('orders');
+        this.naturalSearchFacets = orders();
     }
 }

@@ -11,7 +11,7 @@ import {
     NaturalSearchComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
+import {productsAdmin} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {ProductService} from '../services/product.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -60,10 +60,9 @@ export class ProductsComponent extends NaturalAbstractList<ProductService> imple
 
     public constructor() {
         const productService = inject(ProductService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(productService);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('productsAdmin');
+        this.naturalSearchFacets = productsAdmin();
     }
 }

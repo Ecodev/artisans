@@ -8,7 +8,7 @@ import {
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
 import {CommonModule, DatePipe} from '@angular/common';
-import {NaturalSearchFacetsService} from '../../../shared/natural-search/natural-search-facets.service';
+import {orderLines} from '../../../shared/natural-search/natural-search-facets.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -73,10 +73,9 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
 
     public constructor() {
         const service = inject(OrderLineService);
-        const naturalSearchFacetsService = inject(NaturalSearchFacetsService);
 
         super(service);
 
-        this.naturalSearchFacets = naturalSearchFacetsService.get('orderLines');
+        this.naturalSearchFacets = orderLines();
     }
 }

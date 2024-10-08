@@ -1,4 +1,4 @@
-import {Injectable, inject} from '@angular/core';
+import {assertInInjectionContext, inject} from '@angular/core';
 import {
     DropdownFacet,
     FlagFacet,
@@ -25,255 +25,262 @@ import {
     UserFilterGroupConditionSubscriptionLastReview,
 } from '../generated-types';
 
-/**
- * Collection of facets for natural-search accessible by the object name
- */
-@Injectable({
-    providedIn: 'root',
-})
-export class NaturalSearchFacetsService {
-    private readonly enumService = inject(NaturalEnumService);
-    private readonly productTagService = inject(ProductTagService);
-    private readonly userService = inject(UserService);
-
-    private readonly owner: DropdownFacet<TypeSelectNaturalConfiguration<UserService>> = {
+function owner(): DropdownFacet<TypeSelectNaturalConfiguration<UserService>> {
+    return {
         display: 'Utilisateur',
         field: 'owner',
         component: TypeNaturalSelectComponent,
         configuration: {
-            service: this.userService,
+            service: inject(UserService),
             placeholder: 'Utilisateur',
         },
     };
+}
 
-    private readonly productTags: DropdownFacet<TypeSelectNaturalConfiguration<ProductTagService>> = {
+function productTags(): DropdownFacet<TypeSelectNaturalConfiguration<ProductTagService>> {
+    return {
         display: 'Tags',
         field: 'productTags',
         component: TypeNaturalSelectComponent,
         configuration: {
-            service: this.productTagService,
+            service: inject(ProductTagService),
             placeholder: 'Tags',
         },
     };
+}
 
-    private readonly productIsActive: FlagFacet<ProductFilterGroupConditionIsActive> = {
-        display: 'Actif',
-        field: 'isActive',
-        condition: {equal: {value: true}},
-    };
+const productIsActive: FlagFacet<ProductFilterGroupConditionIsActive> = {
+    display: 'Actif',
+    field: 'isActive',
+    condition: {equal: {value: true}},
+};
 
-    private readonly productIsNotActive: FlagFacet<ProductFilterGroupConditionIsActive> = {
-        display: 'Non actif',
-        field: 'isActive',
-        name: 'isNotActive',
-        condition: {equal: {value: false}},
-    };
+const productIsNotActive: FlagFacet<ProductFilterGroupConditionIsActive> = {
+    display: 'Non actif',
+    field: 'isActive',
+    name: 'isNotActive',
+    condition: {equal: {value: false}},
+};
 
-    private readonly productHasNoFile: FlagFacet<ProductFilterGroupConditionFile> = {
-        display: 'Sans produit dématérialisé',
-        field: 'file',
-        condition: {empty: {not: false}},
-    };
+const productHasNoFile: FlagFacet<ProductFilterGroupConditionFile> = {
+    display: 'Sans produit dématérialisé',
+    field: 'file',
+    condition: {empty: {not: false}},
+};
 
-    private readonly code: DropdownFacet<never> = {
-        display: 'Code',
-        field: 'code',
-        component: TypeTextComponent,
-        transform: wrapLike,
-    };
+const code: DropdownFacet<never> = {
+    display: 'Code',
+    field: 'code',
+    component: TypeTextComponent,
+    transform: wrapLike,
+};
 
-    private readonly firstName: DropdownFacet<never> = {
-        display: 'Prénom',
-        field: 'firstName',
-        component: TypeTextComponent,
-        transform: wrapLike,
-    };
+const firstName: DropdownFacet<never> = {
+    display: 'Prénom',
+    field: 'firstName',
+    component: TypeTextComponent,
+    transform: wrapLike,
+};
 
-    private readonly lastName: DropdownFacet<never> = {
-        display: 'Nom de famille',
-        field: 'lastName',
-        component: TypeTextComponent,
-        transform: wrapLike,
-    };
+const lastName: DropdownFacet<never> = {
+    display: 'Nom de famille',
+    field: 'lastName',
+    component: TypeTextComponent,
+    transform: wrapLike,
+};
 
-    private readonly name: DropdownFacet<never> = {
-        display: 'Nom',
-        field: 'name',
-        component: TypeTextComponent,
-        transform: wrapLike,
-    };
+const name: DropdownFacet<never> = {
+    display: 'Nom',
+    field: 'name',
+    component: TypeTextComponent,
+    transform: wrapLike,
+};
 
-    private readonly creationDate: DropdownFacet<TypeDateConfiguration> = {
-        display: 'Date de création',
-        field: 'creationDate',
-        component: TypeDateComponent,
-    };
+const creationDate: DropdownFacet<TypeDateConfiguration> = {
+    display: 'Date de création',
+    field: 'creationDate',
+    component: TypeDateComponent,
+};
 
-    private readonly updateDate: DropdownFacet<TypeDateConfiguration> = {
-        display: 'Date de modification',
-        field: 'updateDate',
-        component: TypeDateComponent,
-    };
+const updateDate: DropdownFacet<TypeDateConfiguration> = {
+    display: 'Date de modification',
+    field: 'updateDate',
+    component: TypeDateComponent,
+};
 
-    private readonly allFacets: Record<string, NaturalSearchFacets> = {
-        users: [
-            {
-                display: 'Existe pas dans Crésus',
-                field: 'shouldDelete',
-                condition: {equal: {value: true}},
-            } satisfies FlagFacet<UserFilterGroupConditionShouldDelete>,
-            {
-                display: 'Liste de bénéficiaires',
-                field: 'custom',
-                component: TypeTextComponent,
-                name: 'regexp',
-                transform: replaceOperatorByName,
-            } satisfies DropdownFacet<never>,
-            this.firstName,
-            this.lastName,
-            {
-                display: 'Membre des artisans',
-                field: 'membership',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('Membership'),
-                },
-            } satisfies DropdownFacet<TypeSelectConfiguration>,
-            {
-                display: 'Abonné',
-                field: 'subscriptionLastReview',
-                condition: {empty: {not: true}},
-            } satisfies FlagFacet<UserFilterGroupConditionSubscriptionLastReview>,
-            {
-                display: 'Non abonné',
-                field: 'subscriptionLastReview',
-                name: 'noSubscriptionLastReview',
-                condition: {empty: {not: false}},
-            } satisfies FlagFacet<UserFilterGroupConditionSubscriptionLastReview>,
-            {
-                display: 'Rôle',
-                field: 'role',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('UserRole'),
-                },
-            } satisfies DropdownFacet<TypeSelectConfiguration>,
-            this.creationDate,
-            this.updateDate,
-        ],
-        productsAdmin: [
-            this.name,
-            this.code,
-            this.productIsActive,
-            this.productIsNotActive,
-            this.productTags,
-            {
-                display: 'Type',
-                field: 'type',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('ProductType'),
-                },
-            } satisfies DropdownFacet<TypeSelectConfiguration>,
-            {
-                display: 'Prix CHF',
-                field: 'pricePerUnitCHF',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Prix EUR',
-                field: 'pricePerUnitEUR',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            this.productHasNoFile,
-            this.creationDate,
-            this.updateDate,
-        ],
-        orders: [
-            {
-                display: 'Total CHF',
-                field: 'balanceCHF',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Total EUR',
-                field: 'balanceEUR',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Statut',
-                field: 'status',
-                component: TypeSelectComponent,
-                configuration: {
-                    items: this.enumService.get('OrderStatus'),
-                },
-            } satisfies DropdownFacet<TypeSelectConfiguration>,
-            this.owner,
-            this.creationDate,
-            this.updateDate,
-        ],
-        orderLines: [
-            this.owner,
-            {
-                display: 'Montant CHF',
-                field: 'balanceCHF',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Montant EUR',
-                field: 'balanceEUR',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            {
-                display: 'Quantité',
-                field: 'quantity',
-                component: TypeNumberComponent,
-                configuration: {
-                    step: 0.01,
-                },
-            } satisfies DropdownFacet<TypeNumberConfiguration>,
-            this.creationDate,
-        ],
-        sessions: [
-            {
-                display: "Date d'appel à contribution",
-                field: 'endDate',
-                component: TypeDateComponent,
-            } satisfies DropdownFacet<TypeDateConfiguration>,
-            {
-                display: 'Facilitateur',
-                field: 'facilitators',
-                component: TypeNaturalSelectComponent,
-                configuration: {
-                    service: this.userService,
-                    placeholder: 'Facilitateur',
-                },
-            } satisfies DropdownFacet<TypeSelectNaturalConfiguration<UserService>>,
-        ],
-    };
+export function users(): NaturalSearchFacets {
+    assertInInjectionContext(users);
 
-    /**
-     * Returns the natural search configuration for given, or null if non-existent
-     */
-    public get(key: string): NaturalSearchFacets {
-        return this.allFacets[key] || [];
-    }
+    return [
+        {
+            display: 'Existe pas dans Crésus',
+            field: 'shouldDelete',
+            condition: {equal: {value: true}},
+        } satisfies FlagFacet<UserFilterGroupConditionShouldDelete>,
+        {
+            display: 'Liste de bénéficiaires',
+            field: 'custom',
+            component: TypeTextComponent,
+            name: 'regexp',
+            transform: replaceOperatorByName,
+        } satisfies DropdownFacet<never>,
+        firstName,
+        lastName,
+        {
+            display: 'Membre des artisans',
+            field: 'membership',
+            component: TypeSelectComponent,
+            configuration: {
+                items: inject(NaturalEnumService).get('Membership'),
+            },
+        } satisfies DropdownFacet<TypeSelectConfiguration>,
+        {
+            display: 'Abonné',
+            field: 'subscriptionLastReview',
+            condition: {empty: {not: true}},
+        } satisfies FlagFacet<UserFilterGroupConditionSubscriptionLastReview>,
+        {
+            display: 'Non abonné',
+            field: 'subscriptionLastReview',
+            name: 'noSubscriptionLastReview',
+            condition: {empty: {not: false}},
+        } satisfies FlagFacet<UserFilterGroupConditionSubscriptionLastReview>,
+        {
+            display: 'Rôle',
+            field: 'role',
+            component: TypeSelectComponent,
+            configuration: {
+                items: inject(NaturalEnumService).get('UserRole'),
+            },
+        } satisfies DropdownFacet<TypeSelectConfiguration>,
+        creationDate,
+        updateDate,
+    ];
+}
+
+export function productsAdmin(): NaturalSearchFacets {
+    assertInInjectionContext(productsAdmin);
+
+    return [
+        name,
+        code,
+        productIsActive,
+        productIsNotActive,
+        productTags(),
+        {
+            display: 'Type',
+            field: 'type',
+            component: TypeSelectComponent,
+            configuration: {
+                items: inject(NaturalEnumService).get('ProductType'),
+            },
+        } satisfies DropdownFacet<TypeSelectConfiguration>,
+        {
+            display: 'Prix CHF',
+            field: 'pricePerUnitCHF',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        {
+            display: 'Prix EUR',
+            field: 'pricePerUnitEUR',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        productHasNoFile,
+        creationDate,
+        updateDate,
+    ];
+}
+
+export function orders(): NaturalSearchFacets {
+    assertInInjectionContext(orders);
+
+    return [
+        {
+            display: 'Total CHF',
+            field: 'balanceCHF',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        {
+            display: 'Total EUR',
+            field: 'balanceEUR',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        {
+            display: 'Statut',
+            field: 'status',
+            component: TypeSelectComponent,
+            configuration: {
+                items: inject(NaturalEnumService).get('OrderStatus'),
+            },
+        } satisfies DropdownFacet<TypeSelectConfiguration>,
+        owner(),
+        creationDate,
+        updateDate,
+    ];
+}
+
+export function orderLines(): NaturalSearchFacets {
+    assertInInjectionContext(orderLines);
+
+    return [
+        owner(),
+        {
+            display: 'Montant CHF',
+            field: 'balanceCHF',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        {
+            display: 'Montant EUR',
+            field: 'balanceEUR',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        {
+            display: 'Quantité',
+            field: 'quantity',
+            component: TypeNumberComponent,
+            configuration: {
+                step: 0.01,
+            },
+        } satisfies DropdownFacet<TypeNumberConfiguration>,
+        creationDate,
+    ];
+}
+
+export function sessions(): NaturalSearchFacets {
+    assertInInjectionContext(sessions);
+
+    return [
+        {
+            display: "Date d'appel à contribution",
+            field: 'endDate',
+            component: TypeDateComponent,
+        } satisfies DropdownFacet<TypeDateConfiguration>,
+        {
+            display: 'Facilitateur',
+            field: 'facilitators',
+            component: TypeNaturalSelectComponent,
+            configuration: {
+                service: inject(UserService),
+                placeholder: 'Facilitateur',
+            },
+        } satisfies DropdownFacet<TypeSelectNaturalConfiguration<UserService>>,
+    ];
 }

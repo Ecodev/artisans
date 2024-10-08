@@ -47,8 +47,6 @@ export class EventComponent extends NaturalAbstractDetail<EventService, NaturalS
     public readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
-        const eventService = inject(EventService);
-
-        super('event', eventService);
+        super('event', inject(EventService));
     }
 }

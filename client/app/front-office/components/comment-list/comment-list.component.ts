@@ -50,9 +50,7 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
     public newCommentValue = '';
 
     public constructor() {
-        const service = inject(CommentService);
-
-        super(service);
+        super(inject(CommentService));
         this.persistSearch = false;
     }
 

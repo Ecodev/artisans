@@ -55,9 +55,7 @@ export class OrdersComponent extends NaturalAbstractList<OrderService> implement
     ];
 
     public constructor() {
-        const service = inject(OrderService);
-
-        super(service);
+        super(inject(OrderService));
 
         this.naturalSearchFacets = orders();
     }

@@ -50,8 +50,6 @@ export class NewsesComponent extends NaturalAbstractList<NewsService> implements
     ];
 
     public constructor() {
-        const service = inject(NewsService);
-
-        super(service);
+        super(inject(NewsService));
     }
 }

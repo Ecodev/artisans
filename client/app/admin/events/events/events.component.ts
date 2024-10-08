@@ -47,8 +47,6 @@ export class EventsComponent extends NaturalAbstractList<EventService> implement
     ];
 
     public constructor() {
-        const service = inject(EventService);
-
-        super(service);
+        super(inject(EventService));
     }
 }

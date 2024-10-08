@@ -95,9 +95,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     public override defaultPagination = {pageSize: 12, pageIndex: 0, offset: null};
 
     public constructor() {
-        const productService = inject(ProductService);
-
-        super(productService);
+        super(inject(ProductService));
     }
 
     public override ngOnInit(): void {

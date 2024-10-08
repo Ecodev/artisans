@@ -55,9 +55,7 @@ export class SessionsComponent extends NaturalAbstractList<SessionService> imple
     ];
 
     public constructor() {
-        const sessionService = inject(SessionService);
-
-        super(sessionService);
+        super(inject(SessionService));
 
         this.naturalSearchFacets = sessions();
     }

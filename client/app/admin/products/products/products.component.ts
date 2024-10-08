@@ -59,9 +59,7 @@ export class ProductsComponent extends NaturalAbstractList<ProductService> imple
     ];
 
     public constructor() {
-        const productService = inject(ProductService);
-
-        super(productService);
+        super(inject(ProductService));
 
         this.naturalSearchFacets = productsAdmin();
     }

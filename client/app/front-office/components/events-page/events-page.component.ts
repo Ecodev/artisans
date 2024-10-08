@@ -24,8 +24,6 @@ export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> 
     };
 
     public constructor() {
-        const service = inject(EventService);
-
-        super(service);
+        super(inject(EventService));
     }
 }

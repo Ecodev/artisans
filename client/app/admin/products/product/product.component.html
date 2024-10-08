@@ -126,7 +126,7 @@
                         <natural-select
                             formControlName="review"
                             placeholder="Revue dont est extrait cet article"
-                            [service]="productService"
+                            [service]="service"
                             [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
                             [filter]="{
                                 groups: [
@@ -293,7 +293,7 @@
                             groups: [{conditions: [{inversedRelatedProducts: {have: {values: [data.model.id]}}}]}],
                         }"
                         [main]="data.model"
-                        [service]="productService"
+                        [service]="service"
                     >
                         <ng-template let-item="item">
                             <div class="nat-horizontal nat-align nat-gap-10">

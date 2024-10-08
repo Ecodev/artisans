@@ -65,9 +65,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeo
     private userRolesAvailable: UserRole[] = [];
 
     public constructor() {
-        const userService = inject(UserService);
-
-        super('user', userService);
+        super('user', inject(UserService));
     }
 
     public override ngOnInit(): void {

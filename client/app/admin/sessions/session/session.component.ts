@@ -60,9 +60,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService, Natu
     public datesForm!: FormArray;
 
     public constructor() {
-        const sessionService = inject(SessionService);
-
-        super('session', sessionService);
+        super('session', inject(SessionService));
     }
 
     public override ngOnInit(): void {

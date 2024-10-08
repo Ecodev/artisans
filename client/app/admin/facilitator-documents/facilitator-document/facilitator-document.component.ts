@@ -52,9 +52,7 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
     private readonly fileService = inject(FilesService);
 
     public constructor() {
-        const facilitatorDocumentService = inject(FacilitatorDocumentsService);
-
-        super('facilitatorDocument', facilitatorDocumentService);
+        super('facilitatorDocument', inject(FacilitatorDocumentsService));
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

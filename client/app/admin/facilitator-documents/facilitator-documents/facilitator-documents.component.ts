@@ -43,8 +43,6 @@ export class FacilitatorDocumentsComponent extends NaturalAbstractList<Facilitat
     public override columnsForTable = ['name', 'category', 'file'];
 
     public constructor() {
-        const facilitatorDocumentService = inject(FacilitatorDocumentsService);
-
-        super(facilitatorDocumentService);
+        super(inject(FacilitatorDocumentsService));
     }
 }

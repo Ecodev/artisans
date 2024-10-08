@@ -21,8 +21,6 @@ export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
     };
 
     public constructor() {
-        const service = inject(NewsService);
-
-        super(service);
+        super(inject(NewsService));
     }
 }

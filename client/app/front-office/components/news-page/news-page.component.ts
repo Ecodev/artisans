@@ -27,8 +27,6 @@ export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implem
     public readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
-        const newsService = inject(NewsService);
-
-        super('news', newsService);
+        super('news', inject(NewsService));
     }
 }

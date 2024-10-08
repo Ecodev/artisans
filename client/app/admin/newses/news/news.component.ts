@@ -53,8 +53,6 @@ export class NewsComponent extends NaturalAbstractDetail<NewsService, NaturalSeo
     public readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
-        const newsService = inject(NewsService);
-
-        super('news', newsService);
+        super('news', inject(NewsService));
     }
 }

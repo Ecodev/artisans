@@ -87,9 +87,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
     public usersEmailAndName: string | null = null;
 
     public constructor() {
-        const userService = inject(UserService);
-
-        super(userService);
+        super(inject(UserService));
 
         this.naturalSearchFacets = users();
     }

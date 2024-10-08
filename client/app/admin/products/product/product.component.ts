@@ -77,9 +77,7 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService, Natu
     public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     public constructor() {
-        const productService = inject(ProductService);
-
-        super('product', productService);
+        super('product', inject(ProductService));
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

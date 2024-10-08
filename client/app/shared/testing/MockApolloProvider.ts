@@ -15,9 +15,7 @@ import {schema as introspectionResult} from './../../../../data/tmp/schema';
 })
 class MockApollo extends Apollo {
     public constructor() {
-        const ngZone = inject(NgZone);
-
-        super(ngZone);
+        super(inject(NgZone));
         this.client = this.createMockClient();
     }
 

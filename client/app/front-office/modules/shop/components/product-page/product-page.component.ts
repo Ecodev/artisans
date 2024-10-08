@@ -97,9 +97,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     public url: string;
 
     public constructor() {
-        const productService = inject(ProductService);
-
-        super('product', productService);
+        super('product', inject(ProductService));
 
         this.url = this.router.url;
     }

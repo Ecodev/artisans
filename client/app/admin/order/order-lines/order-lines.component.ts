@@ -72,9 +72,7 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
     @Input() public override pageSizeOptions = [5, 25, 50, 100, 200];
 
     public constructor() {
-        const service = inject(OrderLineService);
-
-        super(service);
+        super(inject(OrderLineService));
 
         this.naturalSearchFacets = orderLines();
     }

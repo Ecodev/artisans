@@ -33,9 +33,7 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
     public passwordMailSending = false;
 
     public constructor() {
-        const userService = inject(UserService);
-
-        super('user', userService);
+        super('user', inject(UserService));
     }
 
     public override ngOnInit(): void {

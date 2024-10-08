@@ -44,9 +44,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
     public ProductType = ProductType;
 
     public constructor() {
-        const service = inject(PurchaseService);
-
-        super(service);
+        super(inject(PurchaseService));
 
         this.persistSearch = false;
     }

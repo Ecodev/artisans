@@ -40,8 +40,6 @@ export class CommentsComponent extends NaturalAbstractList<CommentService> imple
     ];
 
     public constructor() {
-        const service = inject(CommentService);
-
-        super(service);
+        super(inject(CommentService));
     }
 }

@@ -40,8 +40,6 @@ export class OrderLineComponent
     public readonly subscriptionService = inject(SubscriptionService);
 
     public constructor() {
-        const orderLineService = inject(OrderLineService);
-
-        super('orderLine', orderLineService);
+        super('orderLine', inject(OrderLineService));
     }
 }

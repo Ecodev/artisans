@@ -24,8 +24,6 @@ import {CommonModule} from '@angular/common';
 })
 export class EventPageComponent extends NaturalAbstractDetail<EventService> implements OnInit {
     public constructor() {
-        const eventService = inject(EventService);
-
-        super('event', eventService);
+        super('event', inject(EventService));
     }
 }

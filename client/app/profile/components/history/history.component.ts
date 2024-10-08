@@ -31,9 +31,7 @@ export class HistoryComponent extends NaturalAbstractList<OrderService> implemen
     public readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
-        const service = inject(OrderService);
-
-        super(service);
+        super(inject(OrderService));
         this.columnsForTable = ['creationDate', 'status', 'balance'];
 
         this.naturalSearchFacets = orders();

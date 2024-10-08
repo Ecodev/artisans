@@ -43,8 +43,6 @@ export class CommentComponent extends NaturalAbstractDetail<CommentService, Natu
     public readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
-        const commentService = inject(CommentService);
-
-        super('comment', commentService);
+        super('comment', inject(CommentService));
     }
 }

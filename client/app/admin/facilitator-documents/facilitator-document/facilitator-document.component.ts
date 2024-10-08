@@ -49,14 +49,12 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
     FacilitatorDocumentsService,
     NaturalSeoResolveData
 > {
-    public readonly facilitatorDocumentService: FacilitatorDocumentsService;
     private readonly fileService = inject(FilesService);
 
     public constructor() {
         const facilitatorDocumentService = inject(FacilitatorDocumentsService);
 
         super('facilitatorDocument', facilitatorDocumentService);
-        this.facilitatorDocumentService = facilitatorDocumentService;
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

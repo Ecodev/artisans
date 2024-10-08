@@ -70,7 +70,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
 })
 export class ProductComponent extends NaturalAbstractDetail<ProductService, NaturalSeoResolveData> {
-    public readonly productService: ProductService;
     public readonly productTagService = inject(ProductTagService);
     private readonly imageService = inject(ImageService);
     private readonly fileService = inject(FilesService);
@@ -81,7 +80,6 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService, Natu
         const productService = inject(ProductService);
 
         super('product', productService);
-        this.productService = productService;
     }
 
     public createFileAndLink(file: File): Observable<CreateFile['createFile']> {

@@ -47,7 +47,6 @@ import {CommonModule} from '@angular/common';
     ],
 })
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
-    private readonly productService: ProductService;
     private readonly purchaseService = inject(PurchaseService);
 
     @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts: ProductsPageComponent | null = null;
@@ -101,7 +100,6 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
         const productService = inject(ProductService);
 
         super('product', productService);
-        this.productService = productService;
 
         this.url = this.router.url;
     }
@@ -120,7 +118,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
                 qvmArticles.set('variables', {
                     filter: {groups: [{conditions: [{review: {in: {values: [reviewProduct.id]}}}]}]},
                 });
-                this.productService.getAll(qvmArticles).subscribe(result => (this.articles = result.items));
+                this.service.getAll(qvmArticles).subscribe(result => (this.articles = result.items));
             } else {
                 this.articles = [];
             }

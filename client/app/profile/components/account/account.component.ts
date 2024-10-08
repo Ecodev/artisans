@@ -27,8 +27,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
 })
 export class AccountComponent extends NaturalAbstractDetail<UserService> implements OnInit {
-    private readonly userService: UserService;
-
     /**
      * True while password request is pending
      */
@@ -38,7 +36,6 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
         const userService = inject(UserService);
 
         super('user', userService);
-        this.userService = userService;
     }
 
     public override ngOnInit(): void {
@@ -52,7 +49,7 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
     }
 
     public requestPasswordReset(): void {
-        this.userService.requestPasswordReset(this.form.get('email')?.value).subscribe({
+        this.service.requestPasswordReset(this.form.get('email')?.value).subscribe({
             next: () => {
                 this.passwordMailSending = false;
                 this.alertService.info('Un email avec des instructions a été envoyé', 6000);

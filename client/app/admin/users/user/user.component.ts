@@ -59,7 +59,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
 })
 export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeoResolveData> implements OnInit {
-    private readonly userService: UserService;
     public readonly sessionService = inject(SessionService);
 
     public UserService = UserService;
@@ -69,7 +68,6 @@ export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeo
         const userService = inject(UserService);
 
         super('user', userService);
-        this.userService = userService;
     }
 
     public override ngOnInit(): void {
@@ -87,7 +85,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeo
     protected override initForm(): void {
         super.initForm();
 
-        this.userService.getUserRolesAvailable(this.data.model).subscribe(userRoles => {
+        this.service.getUserRolesAvailable(this.data.model).subscribe(userRoles => {
             this.userRolesAvailable = userRoles;
         });
     }

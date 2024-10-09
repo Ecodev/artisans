@@ -9,6 +9,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
     selector: 'app-login',
@@ -23,6 +24,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         MatButtonModule,
         RouterLink,
         MatDividerModule,
+        MatIcon,
     ],
 })
 export class LoginComponent implements OnInit {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
         email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
         password: ['', [Validators.required]],
     });
+    public hidePassword = true;
 
     public ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
@@ -63,6 +66,7 @@ export class LoginComponent implements OnInit {
     private login(): void {
         this.snackBar.dismiss();
         this.form.disable();
+        this.hidePassword = true;
 
         this.userService
             .login(this.form.getRawValue())

@@ -17,7 +17,7 @@ import {
 } from '@ecodev/natural';
 import {CommonModule, DatePipe, DOCUMENT} from '@angular/common';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
-import {users} from '../../../shared/natural-search/natural-search-facets.service';
+import {users} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
 import {UserService} from '../services/user.service';

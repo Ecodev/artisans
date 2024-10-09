@@ -8,7 +8,7 @@ import {
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
 import {CommonModule, DatePipe} from '@angular/common';
-import {orderLines} from '../../../shared/natural-search/natural-search-facets.service';
+import {orderLines} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {MatPaginatorModule} from '@angular/material/paginator';

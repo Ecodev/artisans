@@ -1,7 +1,7 @@
 import {Component, OnInit, inject} from '@angular/core';
 import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
-import {orders} from '../../../shared/natural-search/natural-search-facets.service';
+import {orders} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {RouterOutlet} from '@angular/router';
 import {MatPaginatorModule} from '@angular/material/paginator';

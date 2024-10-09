@@ -11,7 +11,7 @@ import {
     NaturalSearchComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {productsAdmin} from '../../../shared/natural-search/natural-search-facets.service';
+import {productsAdmin} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {ProductService} from '../services/product.service';
 import {MatPaginatorModule} from '@angular/material/paginator';

@@ -10,7 +10,7 @@ import {
 } from '@ecodev/natural';
 import {CommonModule, DatePipe} from '@angular/common';
 import {OrderSortingField, SortingOrder} from '../../../shared/generated-types';
-import {orders} from '../../../shared/natural-search/natural-search-facets.service';
+import {orders} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {OrderService} from '../services/order.service';
 import {RouterOutlet} from '@angular/router';

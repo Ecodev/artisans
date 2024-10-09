@@ -9,7 +9,7 @@ import {
     NaturalSearchComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {sessions} from '../../../shared/natural-search/natural-search-facets.service';
+import {sessions} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {SessionService} from '../services/session.service';
 import {MatPaginatorModule} from '@angular/material/paginator';

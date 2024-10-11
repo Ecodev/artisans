@@ -32,7 +32,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     selector: 'app-front-office',
     templateUrl: './front-office.component.html',
     styleUrl: './front-office.component.scss',
-    animations: [],
     standalone: true,
     imports: [
         CommonModule,

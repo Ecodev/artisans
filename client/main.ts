@@ -40,12 +40,14 @@ const matTooltipCustomConfig: MatTooltipDefaultOptions = {
     touchGestures: 'off',
 };
 
+const prefersReducedMotion = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion)').matches : false;
+
 bootstrapApplication(AppComponent, {
     providers: [
         provideZoneChangeDetection({eventCoalescing: true}),
         provideNativeDateAdapter(),
         Apollo,
-        provideAnimationsAsync(),
+        provideAnimationsAsync(prefersReducedMotion ? 'noop' : 'animations'),
         naturalProviders,
         provideErrorHandler(localConfig.log.url, LoggerExtraService),
         provideSeo({

@@ -1,8 +1,6 @@
 DELIMITER ~~
 
-DROP PROCEDURE IF EXISTS update_order_balance;
-
-CREATE PROCEDURE update_order_balance (IN orderId INT)
+CREATE OR REPLACE PROCEDURE update_order_balance (IN orderId INT)
 BEGIN
 
     UPDATE `order`
@@ -13,8 +11,7 @@ BEGIN
 END ~~
 
 
-DROP TRIGGER IF EXISTS order_line_after_insert;
-CREATE TRIGGER order_line_after_insert
+CREATE OR REPLACE TRIGGER order_line_after_insert
   AFTER INSERT
   ON order_line
   FOR EACH ROW
@@ -23,8 +20,7 @@ CREATE TRIGGER order_line_after_insert
   END; ~~
 
 
-DROP TRIGGER IF EXISTS order_line_after_update;
-CREATE TRIGGER order_line_after_update
+CREATE OR REPLACE TRIGGER order_line_after_update
   AFTER UPDATE
   ON order_line
   FOR EACH ROW
@@ -34,8 +30,7 @@ CREATE TRIGGER order_line_after_update
   END; ~~
 
 
-DROP TRIGGER IF EXISTS order_line_after_delete;
-CREATE TRIGGER order_line_after_delete
+CREATE OR REPLACE TRIGGER order_line_after_delete
   AFTER DELETE
   ON order_line
   FOR EACH ROW

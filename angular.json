@@ -54,6 +54,9 @@
                     },
                     "configurations": {
                         "production": {
+                            "define": {
+                                "globalThis.__DEV__": "false"
+                            },
                             "outputHashing": "all",
                             "budgets": [
                                 {

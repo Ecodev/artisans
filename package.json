@@ -6,7 +6,7 @@
         "ng": "ng",
         "postinstall": "playwright install chromium",
         "client-config": "`which php8.2 || which php` ./bin/generate-client-configuration.php",
-        "prerequisite": "mkdir -p htdocs/ && cp -v server/index.php htdocs/ && yarn client-config && yarn codegen",
+        "prerequisite": "mkdir -p htdocs/ && cp -v server/index.php htdocs/ && cp -v server/download-file.php htdocs/ && yarn client-config && yarn codegen",
         "dev": "yarn prerequisite && ng serve",
         "prod": "yarn prerequisite && ng build && find data/tmp/build/browser -type f -not -name '*.gz' -exec gzip --keep --best {} \\; && rm -rf htdocs/ && mv -v data/tmp/build/browser htdocs",
         "test": "yarn prerequisite && ng test",

@@ -28,7 +28,8 @@
 /client/assets/images/*
 !/client/assets/images/.gitkeep
 .DS_Store
-
+data/download-file-counter/*
+!data/download-file-counter/.gitkeep
 
 # keep it at the end of the file
 !.gitkeep

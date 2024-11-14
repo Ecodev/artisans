@@ -15,7 +15,6 @@ import {canActivateFacilitator} from '../shared/guards/facilitator.guard';
 import {ActionsComponent} from './components/agir-avec-nous/actions/actions.component';
 import {AgirAuQuotidienComponent} from './components/agir-avec-nous/agir-au-quotidien/agir-au-quotidien.component';
 import {AlimentationComponent} from './components/agir-avec-nous/alimentation/alimentation.component';
-import {AperoDivestComponent} from './components/agir-avec-nous/apero-divest/apero-divest.component';
 import {BnsComponent} from './components/agir-avec-nous/bns/bns.component';
 import {DesinvestirFossileComponent} from './components/agir-avec-nous/desinvestir-fossile/desinvestir-fossile.component';
 import {NumeriqueEthiqueComponent} from './components/agir-avec-nous/numerique-ethique/numerique-ethique.component';
@@ -44,6 +43,8 @@ import {SessionsIncomingComponent} from './components/sessions-incoming/sessions
 import {NousFaireConnaitreComponent} from './components/soutenir/nous-faire-connaitre/nous-faire-connaitre.component';
 import {OffrirLaRevueComponent} from './components/soutenir/offrir-la-revue/offrir-la-revue.component';
 import {RejoindreAssociationComponent} from './components/soutenir/rejoindre-association/rejoindre-association.component';
+import {IrremplacablesEpiceriesComponent} from './components/agir-avec-nous/irremplacables-epiceries/irremplacables-epiceries.component';
+import {RapportEpiceriesAlternativesComponent} from './components/agir-avec-nous/rapport-epiceries-alternatives/rapport-epiceries-alternatives.component';
 
 export const routes: Routes = [
     {
@@ -250,17 +251,17 @@ export const routes: Routes = [
                             } satisfies NaturalSeo,
                         },
                     },
-                    {
-                        path: 'atelier-finance',
-                        component: AperoDivestComponent,
-                        data: {
-                            seo: {
-                                title: 'atelier-finance',
-                                description:
-                                    'Le principe de l’atelier finance est très simple : vous réunissez une dizaine de personnes en cercle sans rien au centre dans votre salon et faites appel à un ou deux facilitateurs ou facilitatrices formé-e-s par les Artisans de la transition pour assurer l’animation.',
-                            } satisfies NaturalSeo,
-                        },
-                    },
+                    /*                    {
+                     path: 'atelier-finance',
+                     component: AperoDivestComponent,
+                     data: {
+                     seo: {
+                     title: 'atelier-finance',
+                     description:
+                     'Le principe de l’atelier finance est très simple : vous réunissez une dizaine de personnes en cercle sans rien au centre dans votre salon et faites appel à un ou deux facilitateurs ou facilitatrices formé-e-s par les Artisans de la transition pour assurer l’animation.',
+                     } satisfies NaturalSeo,
+                     },
+                     },*/
                     {
                         path: 'rapport-bns',
                         component: BnsComponent,
@@ -293,6 +294,26 @@ export const routes: Routes = [
                         title: 'Alimentation',
                         description:
                             'Les Artisans de la transition veulent dynamiser la transition agroécologique et paysanne en tissant des liens entre ces acteurs, en soutenant leurs actions, en augmentant leur nombre et leur poids politique pour, in fine, œuvrer à un changement du système alimentaire.',
+                    } satisfies NaturalSeo,
+                },
+            },
+            {
+                path: 'irremplacables-epiceries',
+                component: IrremplacablesEpiceriesComponent,
+                data: {
+                    seo: {
+                        title: 'Irremplaçables épiceries',
+                        description: '',
+                    } satisfies NaturalSeo,
+                },
+            },
+            {
+                path: 'epiceries-alternatives-rapport-2024',
+                component: RapportEpiceriesAlternativesComponent,
+                data: {
+                    seo: {
+                        title: 'Rapport épiceries alternatives 2024',
+                        description: '',
                     } satisfies NaturalSeo,
                 },
             },

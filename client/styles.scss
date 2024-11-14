@@ -132,6 +132,11 @@ input[type='number'] {
     -moz-appearance: textfield; /* Firefox */
 }
 
+.mdc-button {
+    height: auto !important;
+    min-height: var(--mdc-filled-button-container-height);
+}
+
 .natural-table {
     display: table;
 

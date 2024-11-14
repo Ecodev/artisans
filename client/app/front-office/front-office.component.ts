@@ -138,6 +138,10 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
             link: '/agir-avec-nous',
             children: [
                 {
+                    display: 'Alimentation',
+                    link: '/agir-avec-nous/alimentation',
+                },
+                {
                     display: 'Toutes nos actions',
                     link: '/agir-avec-nous/toutes-nos-actions',
                 },
@@ -175,19 +179,16 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
                             display: 'Rapports sur la BNS',
                             link: 'agir-avec-nous/desinvestir/rapport-bns',
                         },
-                        {
-                            display: 'Atelier finance',
-                            link: '/agir-avec-nous/desinvestir/atelier-finance',
-                        },
+                        // Disable
+                        // {
+                        //     display: 'Atelier finance',
+                        //     link: '/agir-avec-nous/desinvestir/atelier-finance',
+                        // },
                     ],
                 },
                 {
                     display: 'Numérique éthique',
                     link: '/agir-avec-nous/numerique-ethique',
-                },
-                {
-                    display: 'Alimentation',
-                    link: '/agir-avec-nous/alimentation',
                 },
                 {
                     display: 'Agir au quotidien',

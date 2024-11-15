@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild, inject} from '@angular/core';
-import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {
     NaturalAbstractDetail,
-    NaturalQueryVariablesManager,
-    NaturalIconDirective,
-    NaturalSrcDensityDirective,
     NaturalCapitalizePipe,
+    NaturalIconDirective,
+    NaturalQueryVariablesManager,
+    NaturalSrcDensityDirective,
 } from '@ecodev/natural';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';

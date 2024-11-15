@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';

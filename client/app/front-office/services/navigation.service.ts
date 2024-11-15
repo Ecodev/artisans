@@ -1,7 +1,7 @@
 import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {DOCUMENT} from '@angular/common';
-import {ComponentRef, ElementRef, Injectable, Injector, StaticProvider, inject} from '@angular/core';
+import {ComponentRef, ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'lodash-es';
 import {merge, Observable, Subject} from 'rxjs';

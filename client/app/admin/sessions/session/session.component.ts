@@ -1,5 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
-import {FormsModule, ReactiveFormsModule, FormArray, FormControl} from '@angular/forms';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,

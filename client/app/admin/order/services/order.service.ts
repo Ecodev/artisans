@@ -1,4 +1,4 @@
-import {Injectable, inject} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';

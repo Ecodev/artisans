@@ -1,12 +1,12 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
     NaturalColumnsPickerComponent,
+    NaturalFixedButtonComponent,
+    NaturalIconDirective,
     NaturalSearchComponent,
     NaturalTableButtonComponent,
-    NaturalIconDirective,
-    NaturalFixedButtonComponent,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';

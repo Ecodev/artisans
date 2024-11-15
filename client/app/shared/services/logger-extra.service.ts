@@ -1,4 +1,4 @@
-import {Injectable, inject} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {NaturalLoggerExtra, NaturalLoggerType} from '@ecodev/natural';
 import {Observable, of} from 'rxjs';
 import {UserService} from '../../admin/users/services/user.service';

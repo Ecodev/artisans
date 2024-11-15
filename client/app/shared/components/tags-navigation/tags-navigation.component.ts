@@ -1,4 +1,4 @@
-import {Component, Input, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
 import {ProductTags, ProductTagsVariables} from '../../generated-types';

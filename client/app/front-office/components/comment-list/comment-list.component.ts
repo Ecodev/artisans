@@ -1,5 +1,5 @@
-import {Component, Input, OnChanges, OnInit, inject} from '@angular/core';
-import {NaturalAbstractList, SortingOrder, NaturalIconDirective} from '@ecodev/natural';
+import {Component, inject, Input, OnChanges, OnInit} from '@angular/core';
+import {NaturalAbstractList, NaturalIconDirective, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';

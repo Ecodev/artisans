@@ -2,12 +2,12 @@ import {Component, inject} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalFileComponent,
+    NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
     NaturalLinkableTabDirective,
-    NaturalFileComponent,
-    NaturalStampComponent,
-    NaturalFixedButtonDetailComponent,
     NaturalSeoResolveData,
+    NaturalStampComponent,
 } from '@ecodev/natural';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';

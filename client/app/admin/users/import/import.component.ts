@@ -1,5 +1,5 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     FileSelection,

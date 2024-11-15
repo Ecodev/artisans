@@ -1,4 +1,4 @@
-import {Injectable, OnDestroy, inject} from '@angular/core';
+import {inject, Injectable, OnDestroy} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {CartCollectionService} from './cart-collection.service';
 import {Subscription} from 'rxjs';

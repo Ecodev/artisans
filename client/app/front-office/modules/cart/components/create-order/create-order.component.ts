@@ -1,5 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
-import {FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';

@@ -1,4 +1,4 @@
-import {Component, Input, inject} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {ProductType} from '../../../../../shared/generated-types';
 import {CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';

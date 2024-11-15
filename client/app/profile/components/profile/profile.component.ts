@@ -1,6 +1,6 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
-import {NaturalAlertService, NaturalIconDirective, NaturalEnumPipe} from '@ecodev/natural';
+import {NaturalAlertService, NaturalEnumPipe, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {CurrentUserForProfile, Membership, Product, ProductType} from '../../../shared/generated-types';
 import {ProductService} from '../../../admin/products/services/product.service';

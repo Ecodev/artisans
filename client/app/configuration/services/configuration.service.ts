@@ -1,6 +1,6 @@
 import {Apollo} from 'apollo-angular';
 import {NetworkStatus} from '@apollo/client/core';
-import {Injectable, inject} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {

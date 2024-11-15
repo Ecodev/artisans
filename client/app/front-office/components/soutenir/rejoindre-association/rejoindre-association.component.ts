@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ProductService} from '../../../../admin/products/services/product.service';
 import {Product, ProductType} from '../../../../shared/generated-types';
 import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/add-to-cart.component';

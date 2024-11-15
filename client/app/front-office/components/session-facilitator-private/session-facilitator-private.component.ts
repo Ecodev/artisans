@@ -1,5 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
-import {Literal, NaturalQueryVariablesManager, NaturalIconDirective} from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
+import {Literal, NaturalIconDirective, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {groupBy, sortBy} from 'lodash-es';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
 import {UserService} from '../../../admin/users/services/user.service';

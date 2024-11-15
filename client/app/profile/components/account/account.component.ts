@@ -1,4 +1,4 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {NaturalAbstractDetail, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatIconModule} from '@angular/material/icon';

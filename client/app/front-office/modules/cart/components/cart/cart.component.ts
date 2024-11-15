@@ -1,10 +1,10 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {
     NaturalAlertService,
-    NaturalIconDirective,
-    NaturalEnumPipe,
     NaturalBackgroundDensityDirective,
+    NaturalEnumPipe,
+    NaturalIconDirective,
 } from '@ecodev/natural';
 import {CurrencyService} from '../../../../../shared/services/currency.service';
 import {ProductType} from '../../../../../shared/generated-types';

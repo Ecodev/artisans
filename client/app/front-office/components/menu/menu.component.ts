@@ -1,7 +1,7 @@
 import {animate, group, query, sequence, state, style, transition, trigger} from '@angular/animations';
-import {ChangeDetectionStrategy, Component, InjectionToken, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, InjectionToken} from '@angular/core';
 import {MenuItem} from '../../services/navigation.service';
-import {RouterLinkActive, RouterLink} from '@angular/router';
+import {RouterLink, RouterLinkActive} from '@angular/router';
 import {CommonModule} from '@angular/common';
 
 export type MenuDropdownData = {

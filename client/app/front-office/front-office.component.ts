@@ -138,12 +138,12 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
             link: '/agir-avec-nous',
             children: [
                 {
-                    display: 'Alimentation',
-                    link: '/agir-avec-nous/alimentation',
-                },
-                {
                     display: 'Toutes nos actions',
                     link: '/agir-avec-nous/toutes-nos-actions',
+                },
+                {
+                    display: 'Alimentation',
+                    link: '/agir-avec-nous/alimentation',
                 },
                 {
                     display: 'Participer à une Conversation carbone',

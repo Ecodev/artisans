@@ -57,6 +57,14 @@ return function (Application $app, MiddlewareFactory $factory, ContainerInterfac
         \Application\Handler\DatatransHandler::class,
     ], 'datatrans');
 
+    $app->get('/api/download-file', [
+        \Application\Handler\DownloadFile::class,
+    ]);
+
+    $app->get('/api/download-counter', [
+        \Application\Handler\DownloadCounter::class,
+    ]);
+
     $app->get('/sitemap.xml', [
         SitemapHandler::class,
     ], 'sitemap');

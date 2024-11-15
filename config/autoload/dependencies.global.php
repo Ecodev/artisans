@@ -17,6 +17,8 @@ return [
         // class name.
         'invokables' => [
             Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class => Doctrine\ORM\Mapping\UnderscoreNamingStrategy::class,
+            Application\Handler\DownloadFile::class => Application\Handler\DownloadFile::class,
+            Application\Handler\DownloadCounter::class => Application\Handler\DownloadCounter::class,
         ],
         // Use 'factories' for services provided by callbacks/factory classes.
         'factories' => [

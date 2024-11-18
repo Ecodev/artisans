@@ -15,7 +15,7 @@ class DownloadFile extends AbstractHandler
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $path = 'data/download-file-counter/file.pdf';
+        $path = 'data/download-file-counter/alternative_groceries_report_nov_2024.pdf';
         $cookie_name = 'artisans_pdf_download_2';
 
         // Increment counter if no cookie = first visit

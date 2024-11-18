@@ -16,20 +16,20 @@ class DownloadFile extends AbstractHandler
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         $path = 'data/download-file-counter/alternative_groceries_report_nov_2024.pdf';
-        $cookie_name = 'artisans_pdf_download_2';
+        $cookie_name = 'artisans_pdf_download_1';
 
         // Increment counter if no cookie = first visit
-        if (!isset($_COOKIE[$cookie_name]) && isset($_REQUEST['press'])) {
+        if (!isset($_COOKIE[$cookie_name])) {
             $download_count = 0;
             if (file_exists(self::COUNTER_PATH)) {
                 $download_count = (int) (file_get_contents(self::COUNTER_PATH));
             }
             ++$download_count;
             file_put_contents(self::COUNTER_PATH, $download_count);
-
-            // Flag cookie
-            setcookie($cookie_name, 'true', time() + (86400 * 1000), '/'); // 1000 days
         }
+
+        // Flag cookie
+        setcookie($cookie_name, 'true', time() + (86400 * 60), '/'); // 60 days
 
         if (!is_readable($path)) {
             return $this->createError('File not found on disk, or not readable');

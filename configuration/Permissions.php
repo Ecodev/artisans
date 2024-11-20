@@ -35,6 +35,7 @@ return [
     ],
     [
         'path' => 'data/session',
+        'owner' => $webserver,
         'permissions' => '0770',
         'recursive' => true,
     ],

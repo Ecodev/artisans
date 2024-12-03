@@ -218,7 +218,7 @@ export function orders(): NaturalSearchFacets {
             },
         } satisfies DropdownFacet<TypeNumberConfiguration>,
         {
-            display: 'Statut',
+            display: 'État',
             field: 'status',
             component: TypeSelectComponent,
             configuration: {

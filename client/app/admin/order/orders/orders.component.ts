@@ -49,7 +49,7 @@ export class OrdersComponent extends NaturalAbstractList<OrderService> implement
         {id: 'creationDate', label: 'Date'},
         {id: 'owner', label: 'Utilisateur'},
         {id: 'lines', label: 'Entrées'},
-        {id: 'status', label: 'Statut'},
+        {id: 'status', label: 'État'},
         {id: 'balanceCHF', label: 'Total CHF'},
         {id: 'balanceEUR', label: 'Total EUR'},
     ];

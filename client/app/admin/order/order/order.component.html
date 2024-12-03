@@ -4,7 +4,7 @@
     @if (viewer?.role === UserRole.administrator) {
         <natural-select-enum
             enumName="OrderStatus"
-            placeholder="Statut"
+            placeholder="État"
             [ngModel]="data.model.status"
             (selectionChange)="updateStatus($event)"
         />

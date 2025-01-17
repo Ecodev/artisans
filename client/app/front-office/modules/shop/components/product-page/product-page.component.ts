@@ -128,8 +128,8 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
 
             // Show button to buy only if we didn't already bought those version
             this.purchaseService.getAll(qvm).subscribe(purchases => {
-                const digital = [ProductType.both, ProductType.digital];
-                const paper = [ProductType.both, ProductType.paper];
+                const digital = [ProductType.Both, ProductType.Digital];
+                const paper = [ProductType.Both, ProductType.Paper];
 
                 this.showBuyDigital =
                     digital.includes(this.data.model.type) &&

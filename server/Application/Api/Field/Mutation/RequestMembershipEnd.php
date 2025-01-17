@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Mutation;
 
-use Application\DBAL\Types\MembershipType;
+use Application\Enum\Membership;
 use Application\Model\User;
 use Application\Service\MessageQueuer;
 use Ecodev\Felix\Api\Exception;
@@ -25,7 +25,7 @@ abstract class RequestMembershipEnd implements FieldInterface
             'resolve' => function ($root, array $args, SessionInterface $session): bool {
                 $user = User::getCurrent();
 
-                if (!$user || $user->getMembership() === MembershipType::NONE) {
+                if (!$user || $user->getMembership() === Membership::None) {
                     throw new Exception('Must be logged in and have a membership');
                 }
 

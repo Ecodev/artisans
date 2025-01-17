@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-use Ecodev\Felix\DBAL\Types\EnumType;
+use Application\Enum\Membership;
+use Ecodev\Felix\DBAL\Types\PhpEnumType;
 
-class MembershipType extends EnumType
+class MembershipType extends PhpEnumType
 {
-    final public const NONE = 'none';
-    final public const MEMBER = 'member';
-
-    protected function getPossibleValues(): array
+    protected function getEnumType(): string
     {
-        return [
-            self::NONE,
-            self::MEMBER,
-        ];
+        return Membership::class;
     }
 }

@@ -73,7 +73,7 @@ export class SubscriptionService extends NaturalAbstractModelService<
             internalRemarks: '',
             isActive: true,
             image: null,
-            type: ProductType.digital,
+            type: ProductType.Digital,
         };
     }
 }

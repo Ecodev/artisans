@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
-use Application\DBAL\Types\MembershipType;
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\Membership;
+use Application\Enum\ProductType;
 use Application\Model\Organization;
 use Application\Model\User;
 use Application\Repository\OrganizationRepository;
@@ -217,9 +217,9 @@ class Importer
 
                 $this->updateUser(
                     $email,
-                    $subscriptionType,
+                    $subscriptionType?->value,
                     $lastReviewId,
-                    $membership,
+                    $membership->value,
                     $firstName,
                     $lastName,
                     trim(implode(' ', [$street, $street2])),
@@ -353,31 +353,31 @@ class Importer
         $this->deletedOrganizations += $this->connection->executeStatement($sql);
     }
 
-    private function readMembership($membership): string
+    private function readMembership($membership): Membership
     {
         if ($membership === '1') {
-            return MembershipType::MEMBER;
+            return Membership::Member;
         }
 
-        return MembershipType::NONE;
+        return Membership::None;
     }
 
-    private function readSubscriptionType(string $subscriptionType): ?string
+    private function readSubscriptionType(string $subscriptionType): ?ProductType
     {
         if (!$subscriptionType) {
             return null;
         }
 
         if ($subscriptionType === 'Web') {
-            return ProductTypeType::DIGITAL;
+            return ProductType::Digital;
         }
 
         if ($subscriptionType === 'Papier') {
-            return ProductTypeType::PAPER;
+            return ProductType::Paper;
         }
 
         if ($subscriptionType === 'Papier/web') {
-            return ProductTypeType::BOTH;
+            return ProductType::Both;
         }
 
         $this->throw('Le subscriptionType est invalide : "' . $subscriptionType . '"');

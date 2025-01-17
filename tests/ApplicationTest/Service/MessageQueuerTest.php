@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace ApplicationTest\Service;
 
 use Application\DBAL\Types\MessageTypeType;
-use Application\DBAL\Types\PaymentMethodType;
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\PaymentMethod;
+use Application\Enum\ProductType;
 use Application\Model\Country;
 use Application\Model\Message;
 use Application\Model\Order;
@@ -20,8 +20,9 @@ use Doctrine\ORM\EntityManager;
 use Ecodev\Felix\Service\MessageRenderer;
 use Laminas\View\Renderer\RendererInterface;
 use Money\Money;
+use PHPUnit\Framework\TestCase;
 
-class MessageQueuerTest extends \PHPUnit\Framework\TestCase
+class MessageQueuerTest extends TestCase
 {
     private function createMockMessageQueuer(): MessageQueuer
     {
@@ -216,14 +217,14 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $productLine->setProduct($product);
         $productLine->setBalanceCHF(Money::CHF(500));
         $productLine->setBalanceEUR(Money::EUR(0));
-        $productLine->setType(ProductTypeType::PAPER);
+        $productLine->setType(ProductType::Paper);
 
         $subscriptionLine = new OrderLine();
         $subscriptionLine->setSubscription(new Subscription());
         $subscriptionLine->setName('Abonnement standard papier');
         $subscriptionLine->setBalanceCHF(Money::CHF(1500));
         $subscriptionLine->setBalanceEUR(Money::EUR(0));
-        $subscriptionLine->setType(ProductTypeType::BOTH);
+        $subscriptionLine->setType(ProductType::Both);
 
         $subscriptionLine2 = new OrderLine();
         $subscriptionLine2->setSubscription(new Subscription());
@@ -231,13 +232,13 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
         $subscriptionLine2->setAdditionalEmails(['alice@example.com', 'bob@example.com', 'carol@example.com']);
         $subscriptionLine2->setBalanceCHF(Money::CHF(2500));
         $subscriptionLine2->setBalanceEUR(Money::EUR(0));
-        $subscriptionLine2->setType(ProductTypeType::DIGITAL);
+        $subscriptionLine2->setType(ProductType::Digital);
 
         $donationLine = new OrderLine();
         $donationLine->setName('Don');
         $donationLine->setBalanceCHF(Money::CHF(3500));
         $donationLine->setBalanceEUR(Money::EUR(0));
-        $donationLine->setType(ProductTypeType::OTHER);
+        $donationLine->setType(ProductType::Other);
 
         if ($withSubscription) {
             $lines = new ArrayCollection([$productLine, $subscriptionLine, $subscriptionLine2, $donationLine]);
@@ -247,7 +248,7 @@ class MessageQueuerTest extends \PHPUnit\Framework\TestCase
 
         $order = $this->createPartialMock(Order::class, ['getId', 'getBalanceCHF', 'getBalanceEUR', 'getOrderLines']);
         $order->setOwner($owner);
-        $order->setPaymentMethod(PaymentMethodType::BVR);
+        $order->setPaymentMethod(PaymentMethod::Bvr);
 
         $order->expects(self::any())
             ->method('getId')

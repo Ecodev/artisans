@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
-use Application\DBAL\Types\PaymentMethodType;
+use Application\Enum\PaymentMethod;
 use Application\Model\Order;
 use Application\Service\Invoicer;
 use Application\Service\MessageQueuer;
@@ -49,7 +49,7 @@ abstract class CreateOrder implements FieldInterface
                     _em()->refresh($order);
 
                     // Notify people now if payment is not instantaneous
-                    if ($order->getPaymentMethod() !== PaymentMethodType::DATATRANS) {
+                    if ($order->getPaymentMethod() !== PaymentMethod::Datatrans) {
                         $user = $order->getOwner();
                         if ($user) {
                             $message = $messageQueuer->queueUserPendingOrder($user, $order);

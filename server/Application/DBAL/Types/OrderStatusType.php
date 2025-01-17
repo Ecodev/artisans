@@ -4,17 +4,13 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-use Application\Model\Order;
-use Ecodev\Felix\DBAL\Types\EnumType;
+use Application\Enum\OrderStatus;
+use Ecodev\Felix\DBAL\Types\PhpEnumType;
 
-class OrderStatusType extends EnumType
+class OrderStatusType extends PhpEnumType
 {
-    protected function getPossibleValues(): array
+    protected function getEnumType(): string
     {
-        return [
-            Order::STATUS_PENDING,
-            Order::STATUS_VALIDATED,
-            Order::STATUS_CANCELED,
-        ];
+        return OrderStatus::class;
     }
 }

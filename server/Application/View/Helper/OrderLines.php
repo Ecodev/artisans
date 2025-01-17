@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\View\Helper;
 
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\ProductType;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Laminas\View\Helper\AbstractHelper;
@@ -25,15 +25,15 @@ class OrderLines extends AbstractHelper
 
             $type = '';
             switch ($line->getType()) {
-                case ProductTypeType::BOTH:
+                case ProductType::Both:
                     $type = ', papier et numérique';
 
                     break;
-                case ProductTypeType::DIGITAL:
+                case ProductType::Digital:
                     $type = ', numérique';
 
                     break;
-                case ProductTypeType::PAPER:
+                case ProductType::Paper:
                     $type = ', papier';
 
                     break;

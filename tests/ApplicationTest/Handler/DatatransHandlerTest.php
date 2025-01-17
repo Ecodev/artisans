@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace ApplicationTest\Handler;
 
 use Application\DBAL\Types\MessageTypeType;
+use Application\Enum\OrderStatus;
 use Application\Handler\DatatransHandler;
 use Application\Model\Message;
-use Application\Model\Order;
 use Application\Service\MessageQueuer;
 use ApplicationTest\Traits\TestWithTransactionAndUser;
 use Doctrine\ORM\EntityManager;
@@ -118,9 +118,9 @@ class DatatransHandlerTest extends TestCase
 
         $orderId = $data['refno'] ?? null;
         if ($orderId) {
-            $expectedStatus = $expectedViewModel['message']['status'] === 'success' || $orderId === '16002' ? Order::STATUS_VALIDATED : Order::STATUS_PENDING;
+            $expectedStatus = $expectedViewModel['message']['status'] === 'success' || $orderId === '16002' ? OrderStatus::Validated : OrderStatus::Pending;
             $actualStatus = _em()->getConnection()->fetchOne('SELECT status FROM `order` WHERE id = ' . $orderId);
-            self::assertSame($expectedStatus, $actualStatus);
+            self::assertSame($expectedStatus->value, $actualStatus);
 
             $actualWebTemporaryAccess = _em()->getConnection()->fetchOne('SELECT web_temporary_access FROM `user` INNER JOIN `order` ON `user`.id = `order`.owner_id WHERE `order`.id = ' . $orderId);
             self::assertEquals($expectedWebTemporaryAccess ? '1' : '0', $actualWebTemporaryAccess);

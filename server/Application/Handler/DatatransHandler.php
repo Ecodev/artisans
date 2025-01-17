@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Handler;
 
+use Application\Enum\OrderStatus;
+use Application\Enum\PaymentMethod;
 use Application\Model\Order;
 use Application\Model\User;
 use Application\Repository\LogRepository;
@@ -135,11 +137,11 @@ class DatatransHandler extends AbstractHandler
             throw new Exception('Cannot validate an order without a valid order ID');
         }
 
-        if ($order->getPaymentMethod() !== \Application\DBAL\Types\PaymentMethodType::DATATRANS) {
-            throw new Exception('Cannot validate an order whose payment method is: ' . $order->getPaymentMethod());
+        if ($order->getPaymentMethod() !== PaymentMethod::Datatrans) {
+            throw new Exception('Cannot validate an order whose payment method is: ' . $order->getPaymentMethod()->value);
         }
 
-        if ($order->getStatus() === Order::STATUS_VALIDATED) {
+        if ($order->getStatus() === OrderStatus::Validated) {
             throw new Exception('Cannot validate an order which is already validated');
         }
 
@@ -155,7 +157,7 @@ class DatatransHandler extends AbstractHandler
 
         // Actually validate
         $orderRepository->getAclFilter()->runWithoutAcl(function () use ($order, $body): void {
-            $order->setStatus(Order::STATUS_VALIDATED);
+            $order->setStatus(OrderStatus::Validated);
             $order->setInternalRemarks(json_encode($body, JSON_PRETTY_PRINT));
         });
 

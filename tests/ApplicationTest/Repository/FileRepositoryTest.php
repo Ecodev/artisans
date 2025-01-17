@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Repository;
 
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\ProductType;
 use Application\Model\File;
 use Application\Model\Product;
 use Application\Repository\FileRepository;
@@ -40,7 +40,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
         $product = new Product('p1');
         $product->setReleaseDate(new ChronosDate());
         $product->setReviewNumber(1);
-        $product->setType(ProductTypeType::BOTH);
+        $product->setType(ProductType::Both);
         $file = new File();
 
         $file->setFilename('test document.pdf');

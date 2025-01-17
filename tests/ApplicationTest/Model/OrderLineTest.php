@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Model;
 
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\ProductType;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Application\Model\Subscription;
@@ -44,12 +44,12 @@ class OrderLineTest extends TestCase
         self::assertFalse($creator->getWebTemporaryAccess(), 'no access because not a subscription');
 
         $subscription = new Subscription();
-        $subscription->setType(ProductTypeType::PAPER);
+        $subscription->setType(ProductType::Paper);
         $orderLine->setSubscription($subscription);
         $orderLine->maybeGiveTemporaryAccess();
         self::assertFalse($creator->getWebTemporaryAccess(), 'no access because paper subscription');
 
-        $subscription->setType(ProductTypeType::BOTH);
+        $subscription->setType(ProductType::Both);
         $orderLine->maybeGiveTemporaryAccess();
         self::assertTrue($creator->getWebTemporaryAccess(), 'access because subscription includes digital');
 

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
-use Application\DBAL\Types\ProductTypeType;
-
+use Application\Enum\ProductType;
 use Application\Model\Organization;
 
 /**
@@ -40,9 +39,9 @@ class OrganizationRepository extends AbstractRepository
             STRING;
 
         $params = [
-            'paper' => ProductTypeType::PAPER,
-            'both' => ProductTypeType::BOTH,
-            'digital' => ProductTypeType::DIGITAL,
+            'paper' => ProductType::Paper->value,
+            'both' => ProductType::Both->value,
+            'digital' => ProductType::Digital->value,
         ];
 
         $connection->executeStatement($sqlUpgrade, $params);

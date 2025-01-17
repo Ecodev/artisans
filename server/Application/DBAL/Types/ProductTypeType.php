@@ -4,32 +4,13 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-use Ecodev\Felix\DBAL\Types\EnumType;
+use Application\Enum\ProductType;
+use Ecodev\Felix\DBAL\Types\PhpEnumType;
 
-class ProductTypeType extends EnumType
+class ProductTypeType extends PhpEnumType
 {
-    final public const OTHER = 'other';
-    final public const PAPER = 'paper';
-    final public const DIGITAL = 'digital';
-    final public const BOTH = 'both';
-
-    protected function getPossibleValues(): array
+    protected function getEnumType(): string
     {
-        return [
-            self::OTHER,
-            self::PAPER,
-            self::DIGITAL,
-            self::BOTH,
-        ];
-    }
-
-    public static function getDigitalTypes(): array
-    {
-        return [self::BOTH, self::DIGITAL];
-    }
-
-    public static function includesDigital(?string $type): bool
-    {
-        return in_array($type, self::getDigitalTypes(), true);
+        return ProductType::class;
     }
 }

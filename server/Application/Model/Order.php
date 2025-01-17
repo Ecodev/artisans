@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\Api\Enum\OrderStatusType;
-use Application\Api\Enum\PaymentMethodType;
+use Application\Enum\OrderStatus;
+use Application\Enum\PaymentMethod;
 use Application\Repository\OrderRepository;
 use Application\Traits\HasAddress;
 use Application\Traits\HasAutomaticBalance;
@@ -24,16 +24,12 @@ use Money\Money;
 #[ORM\Entity(OrderRepository::class)]
 class Order extends AbstractModel implements HasBalanceInterface
 {
-    final public const STATUS_PENDING = 'pending';
-    final public const STATUS_VALIDATED = 'validated';
-    final public const STATUS_CANCELED = 'canceled';
-
     use HasAddress;
     use HasAutomaticBalance;
     use HasInternalRemarks;
 
-    #[ORM\Column(type: 'OrderStatus', options: ['default' => self::STATUS_PENDING])]
-    private string $status = self::STATUS_PENDING;
+    #[ORM\Column(type: 'OrderStatus', options: ['default' => OrderStatus::Pending])]
+    private OrderStatus $status = OrderStatus::Pending;
 
     /**
      * @var Collection<OrderLine>
@@ -42,12 +38,12 @@ class Order extends AbstractModel implements HasBalanceInterface
     private Collection $orderLines;
 
     #[ORM\Column(type: 'PaymentMethod')]
-    private string $paymentMethod;
+    private PaymentMethod $paymentMethod;
 
     /**
-     * @param string $status status for new order
+     * @param OrderStatus $status status for new order
      */
-    public function __construct(string $status = self::STATUS_PENDING)
+    public function __construct(OrderStatus $status = OrderStatus::Pending)
     {
         $this->status = $status;
         $this->orderLines = new ArrayCollection();
@@ -78,17 +74,15 @@ class Order extends AbstractModel implements HasBalanceInterface
         return $this->orderLines;
     }
 
-    #[API\Field(type: OrderStatusType::class)]
-    public function getStatus(): string
+    public function getStatus(): OrderStatus
     {
         return $this->status;
     }
 
-    #[API\Input(type: OrderStatusType::class)]
-    public function setStatus(string $status): void
+    public function setStatus(OrderStatus $status): void
     {
         // If we change from non-confirmed to confirmed, then give temporary access (until explicit import of users)
-        if ($this->status !== self::STATUS_VALIDATED && $status === self::STATUS_VALIDATED) {
+        if ($this->status !== OrderStatus::Validated && $status === OrderStatus::Validated) {
             /** @var OrderLine $orderLine */
             foreach ($this->getOrderLines() as $orderLine) {
                 $orderLine->maybeGiveTemporaryAccess();
@@ -98,14 +92,12 @@ class Order extends AbstractModel implements HasBalanceInterface
         $this->status = $status;
     }
 
-    #[API\Field(type: PaymentMethodType::class)]
-    public function getPaymentMethod(): string
+    public function getPaymentMethod(): PaymentMethod
     {
         return $this->paymentMethod;
     }
 
-    #[API\Input(type: PaymentMethodType::class)]
-    public function setPaymentMethod(string $paymentMethod): void
+    public function setPaymentMethod(PaymentMethod $paymentMethod): void
     {
         $this->paymentMethod = $paymentMethod;
     }

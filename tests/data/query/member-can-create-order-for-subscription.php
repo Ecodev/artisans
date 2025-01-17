@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use Application\DBAL\Types\PaymentMethodType;
-use Application\DBAL\Types\ProductTypeType;
-
 return [
     [
         'query' => 'mutation ($input: OrderInput!) {
@@ -23,13 +20,13 @@ return [
         }',
         'variables' => [
             'input' => [
-                'paymentMethod' => PaymentMethodType::BVR,
+                'paymentMethod' => 'Bvr',
                 'orderLines' => [
                     [
                         'subscription' => 19005,
                         'quantity' => 1,
                         'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
+                        'type' => 'Digital',
                         'additionalEmails' => [
                             'foo@example.com',
                             'bar@example.com',
@@ -42,13 +39,13 @@ return [
     [
         'data' => [
             'createOrder' => [
-                'paymentMethod' => PaymentMethodType::BVR,
+                'paymentMethod' => 'Bvr',
                 'balanceCHF' => '185.00',
                 'balanceEUR' => '0.00',
                 'orderLines' => [
                     [
                         'quantity' => 1,
-                        'type' => ProductTypeType::BOTH,
+                        'type' => 'Both',
                         'balanceCHF' => '185.00',
                         'balanceEUR' => '0.00',
                         'additionalEmails' => [

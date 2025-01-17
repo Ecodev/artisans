@@ -101,7 +101,7 @@ export class ProductService extends NaturalAbstractModelService<
             releaseDate: null,
             review: null,
             reviewNumber: null,
-            type: ProductType.digital,
+            type: ProductType.Digital,
             readingDuration: null,
             file: null,
         };

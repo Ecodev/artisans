@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Application\Repository;
 
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\OrderStatus;
+use Application\Enum\ProductType;
 use Application\Model\File;
-use Application\Model\Order;
 use Application\Model\User;
-
 use Ecodev\Felix\Repository\LimitedAccessSubQuery;
 use Ecodev\Felix\Utility;
 
@@ -39,8 +38,8 @@ class FileRepository extends AbstractRepository implements LimitedAccessSubQuery
 
         $connection = $this->getEntityManager()->getConnection();
         $subscriptionLastReviewNumber = $user ? $user->getSubscriptionLastReviewNumber() : null;
-        $hasSubscription = $user && ProductTypeType::includesDigital($user->getSubscriptionType()) && $subscriptionLastReviewNumber;
-        $digitalTypes = Utility::quoteArray(ProductTypeType::getDigitalTypes());
+        $hasSubscription = $user && ProductType::includesDigital($user->getSubscriptionType()) && $subscriptionLastReviewNumber;
+        $digitalTypes = Utility::quoteArray(array_map(fn ($a) => $a->value, ProductType::getDigitalTypes()));
 
         if ($user && $user->getWebTemporaryAccess()) {
             // Files for webTemporaryAccess
@@ -70,7 +69,7 @@ AND (product.review_number <= ' . $allowedReviewNumber . ' OR review.review_numb
 SELECT product.file_id FROM product
 INNER JOIN order_line ON product.id = order_line.product_id
 INNER JOIN `order` ON order_line.order_id = `order`.id
-AND `order`.status = ' . $connection->quote(Order::STATUS_VALIDATED) . '
+AND `order`.status = ' . $connection->quote(OrderStatus::Validated->value) . '
 AND `order`.owner_id =  ' . $user->getId() . '
 WHERE
 product.is_active

@@ -18,10 +18,6 @@ class TypesFactory
         $invokables = [
             Enum\UserRoleType::class,
             Enum\MessageTypeType::class,
-            Enum\PaymentMethodType::class,
-            Enum\MembershipType::class,
-            Enum\ProductTypeType::class,
-            Enum\OrderStatusType::class,
             Input\ConfirmRegistrationInputType::class,
             \Ecodev\Felix\Api\Input\PaginationInputType::class,
             Input\OrderLineInputType::class,
@@ -74,6 +70,7 @@ class TypesFactory
             ],
             'abstract_factories' => [
                 Output\PaginationTypeFactory::class,
+                \Ecodev\Felix\Api\Enum\EnumAbstractFactory::class,
             ],
         ]);
 

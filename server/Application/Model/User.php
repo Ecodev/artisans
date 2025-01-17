@@ -6,7 +6,8 @@ namespace Application\Model;
 
 use Application\Api\Enum\UserRoleType;
 use Application\Api\Input\Operator\RegexpOperatorType;
-use Application\DBAL\Types\MembershipType;
+use Application\Enum\Membership;
+use Application\Enum\ProductType;
 use Application\Repository\LogRepository;
 use Application\Repository\UserRepository;
 use Application\Service\Role;
@@ -75,11 +76,11 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     #[ORM\Column(type: 'UserRole', options: ['default' => self::ROLE_MEMBER])]
     private string $role = self::ROLE_MEMBER;
 
-    #[ORM\Column(type: 'Membership', options: ['default' => MembershipType::NONE])]
-    private string $membership = MembershipType::NONE;
+    #[ORM\Column(type: 'Membership', options: ['default' => Membership::None])]
+    private Membership $membership = Membership::None;
 
     #[ORM\Column(type: 'ProductType', nullable: true)]
-    private ?string $subscriptionType = null;
+    private ?ProductType $subscriptionType = null;
 
     #[ORM\Column(type: 'string', length: 25, options: ['default' => ''])]
     private string $phone = '';
@@ -215,13 +216,13 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
         $this->sessions->removeElement($session);
     }
 
-    public function getMembership(): string
+    public function getMembership(): Membership
     {
         return $this->membership;
     }
 
     #[API\Exclude]
-    public function setMembership(string $membership): void
+    public function setMembership(Membership $membership): void
     {
         $this->membership = $membership;
     }
@@ -289,7 +290,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
      * Set subscription type.
      */
     #[API\Exclude]
-    public function setSubscriptionType(?string $subscriptionType): void
+    public function setSubscriptionType(?ProductType $subscriptionType): void
     {
         $this->subscriptionType = $subscriptionType;
     }
@@ -297,8 +298,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     /**
      * Get subscription type.
      */
-    #[API\Field(type: '?ProductType')]
-    public function getSubscriptionType(): ?string
+    public function getSubscriptionType(): ?ProductType
     {
         return $this->subscriptionType;
     }

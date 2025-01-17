@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Api\Field\Mutation;
 
-use Application\Api\Enum\OrderStatusType;
+use Application\Enum\OrderStatus;
 use Application\Model\Order;
 use Application\Service\MessageQueuer;
 use Ecodev\Felix\Api\Field\FieldInterface;
@@ -21,7 +21,7 @@ abstract class UpdateOrderStatus implements FieldInterface
             'description' => 'Validate an order',
             'args' => [
                 'id' => Type::nonNull(_types()->getId(Order::class)),
-                'status' => Type::nonNull(_types()->get(OrderStatusType::class)),
+                'status' => Type::nonNull(_types()->get(OrderStatus::class)),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): Order {
                 global $container;
@@ -35,7 +35,7 @@ abstract class UpdateOrderStatus implements FieldInterface
                 _em()->flush();
                 _em()->refresh($order);
 
-                if ($status === Order::STATUS_VALIDATED) {
+                if ($status === OrderStatus::Validated) {
                     /** @var Mailer $mailer */
                     $mailer = $container->get(Mailer::class);
 

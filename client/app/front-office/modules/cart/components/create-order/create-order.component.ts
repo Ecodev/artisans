@@ -142,7 +142,7 @@ export class CreateOrderComponent implements OnInit {
                 }
 
                 // For datatrans, we ask for payment immediately
-                if (paymentMethod.value === PaymentMethod.datatrans) {
+                if (paymentMethod.value === PaymentMethod.Datatrans) {
                     this.datatrans(order, this.cart.totalTaxInc, this.currencyService.current.value);
                 } else {
                     this.confirmationRedirect();

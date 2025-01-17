@@ -58,7 +58,7 @@ export class CartService {
         if (cart.donationAmount) {
             orderLines.push({
                 quantity: 1,
-                type: ProductType.digital,
+                type: ProductType.Digital,
                 isCHF: isCHF,
                 pricePerUnit: cart.donationAmount.toFixed(2),
             });

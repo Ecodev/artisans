@@ -4,20 +4,13 @@ declare(strict_types=1);
 
 namespace Application\DBAL\Types;
 
-use Ecodev\Felix\DBAL\Types\EnumType;
+use Application\Enum\PaymentMethod;
+use Ecodev\Felix\DBAL\Types\PhpEnumType;
 
-class PaymentMethodType extends EnumType
+class PaymentMethodType extends PhpEnumType
 {
-    final public const DATATRANS = 'datatrans';
-    final public const EBANKING = 'ebanking';
-    final public const BVR = 'bvr';
-
-    protected function getPossibleValues(): array
+    protected function getEnumType(): string
     {
-        return [
-            self::DATATRANS,
-            self::EBANKING,
-            self::BVR,
-        ];
+        return PaymentMethod::class;
     }
 }

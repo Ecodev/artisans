@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Application\Repository;
 
 use Application\Api\Field\Standard;
-use Application\Model\Order;
+use Application\Enum\OrderStatus;
 use Application\Model\OrderLine;
 use Application\Model\Product;
 use Application\Model\User;
@@ -47,7 +47,7 @@ class OrderLineRepository extends AbstractRepository implements LimitedAccessSub
             ->innerJoin('orderLine.order', 'o', Join::WITH, 'o.status = :status AND o.owner = :user')
             ->innerJoin('orderLine.product', 'product', Join::WITH, 'product.isActive = TRUE')
             ->andWhere('orderLine.product IN (' . $qbProduct->getDQL() . ')')
-            ->setParameter('status', Order::STATUS_VALIDATED)
+            ->setParameter('status', OrderStatus::Validated->value)
             ->setParameter('user', User::getCurrent());
 
         // Apply sort on products

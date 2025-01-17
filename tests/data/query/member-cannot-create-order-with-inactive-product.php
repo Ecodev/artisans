@@ -2,9 +2,6 @@
 
 declare(strict_types=1);
 
-use Application\DBAL\Types\PaymentMethodType;
-use Application\DBAL\Types\ProductTypeType;
-
 return [
     [
         'query' => 'mutation ($input: OrderInput!) {
@@ -14,13 +11,13 @@ return [
         }',
         'variables' => [
             'input' => [
-                'paymentMethod' => PaymentMethodType::BVR,
+                'paymentMethod' => Application\Enum\PaymentMethod::Bvr,
                 'orderLines' => [
                     [
                         'product' => 3010,
                         'quantity' => 250,
                         'isCHF' => true,
-                        'type' => ProductTypeType::DIGITAL,
+                        'type' => Application\Enum\ProductType::Digital,
                     ],
                 ],
             ],

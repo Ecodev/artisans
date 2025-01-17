@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Traits;
 
-use Application\Api\Enum\ProductTypeType;
+use Application\Enum\ProductType;
 use Doctrine\ORM\Mapping as ORM;
-use GraphQL\Doctrine\Attribute as API;
 
 /**
  * Trait for all objects with an type.
@@ -14,13 +13,12 @@ use GraphQL\Doctrine\Attribute as API;
 trait HasProductType
 {
     #[ORM\Column(type: 'ProductType')]
-    private string $type;
+    private ProductType $type;
 
     /**
      * Set type.
      */
-    #[API\Input(type: ProductTypeType::class)]
-    public function setType(string $type): void
+    public function setType(ProductType $type): void
     {
         $this->type = $type;
     }
@@ -28,8 +26,7 @@ trait HasProductType
     /**
      * Get type.
      */
-    #[API\Field(type: ProductTypeType::class)]
-    public function getType(): string
+    public function getType(): ProductType
     {
         return $this->type;
     }

@@ -33,11 +33,11 @@
                     <app-add-to-cart
                         label="Payer la cotisation"
                         [product]="membershipProduct"
-                        [type]="ProductType.other"
+                        [type]="ProductType.Other"
                         [buttonColor]="null"
                     />
                 }
-                @if (viewer.membership !== Membership.none) {
+                @if (viewer.membership !== Membership.None) {
                     <a mat-flat-button (click)="requestMembershipEnd()">Arrêter les cotisations</a>
                 }
             </div>

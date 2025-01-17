@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Model;
 
+use Application\Enum\OrderStatus;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Money\Money;
@@ -49,7 +50,7 @@ class OrderTest extends TestCase
         $order = new Order();
         $orderLine->setOrder($order);
 
-        $order->setStatus(Order::STATUS_VALIDATED);
+        $order->setStatus(OrderStatus::Validated);
     }
 
     public function testSetStatusWillNotGiveAccessIfGoingBackToPending(): void
@@ -62,10 +63,10 @@ class OrderTest extends TestCase
             ->method('maybeGiveTemporaryAccess');
 
         $order = new Order();
-        $order->setStatus(Order::STATUS_VALIDATED);
+        $order->setStatus(OrderStatus::Validated);
         $orderLine->setOrder($order);
 
-        $order->setStatus(Order::STATUS_PENDING);
+        $order->setStatus(OrderStatus::Pending);
     }
 
     public function testSetStatusWillNotGiveAccessIfStayingValidated(): void
@@ -78,9 +79,9 @@ class OrderTest extends TestCase
             ->method('maybeGiveTemporaryAccess');
 
         $order = new Order();
-        $order->setStatus(Order::STATUS_VALIDATED);
+        $order->setStatus(OrderStatus::Validated);
         $orderLine->setOrder($order);
 
-        $order->setStatus(Order::STATUS_VALIDATED);
+        $order->setStatus(OrderStatus::Validated);
     }
 }

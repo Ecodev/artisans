@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Service;
 
+use Application\Enum\ProductType;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
 use Application\Model\OrderLine;
@@ -58,7 +59,7 @@ class Invoicer
         return $order;
     }
 
-    private function createOrderLine(Order $order, ?AbstractProduct $product, Money $pricePerUnit, int $quantity, bool $isCHF, string $type, array $additionalEmails): OrderLine
+    private function createOrderLine(Order $order, ?AbstractProduct $product, Money $pricePerUnit, int $quantity, bool $isCHF, ProductType $type, array $additionalEmails): OrderLine
     {
         $orderLine = new OrderLine();
         $this->entityManager->persist($orderLine);
@@ -123,7 +124,7 @@ class Invoicer
         });
     }
 
-    private function updateOrderLine(OrderLine $orderLine, ?AbstractProduct $product, Money $pricePerUnit, int $quantity, bool $isCHF, string $type, array $additionalEmails): void
+    private function updateOrderLine(OrderLine $orderLine, ?AbstractProduct $product, Money $pricePerUnit, int $quantity, bool $isCHF, ProductType $type, array $additionalEmails): void
     {
         if ($isCHF) {
             $balanceCHF = $pricePerUnit->multiply($quantity);

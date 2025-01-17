@@ -58,7 +58,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
     }
 
     public canDownload(orderLine: Purchases['purchases']['items'][0]): boolean {
-        const isDigital = orderLine.type === ProductType.both || orderLine.type === ProductType.digital;
+        const isDigital = orderLine.type === ProductType.Both || orderLine.type === ProductType.Digital;
         const hasFile = orderLine.product?.file;
 
         return isDigital && !!hasFile;

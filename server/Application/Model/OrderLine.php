@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Application\Model;
 
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\ProductType;
 use Application\Repository\OrderLineRepository;
 use Application\Repository\UserRepository;
 use Application\Traits\HasBalance;
@@ -143,7 +143,7 @@ class OrderLine extends AbstractModel implements HasBalanceInterface
      */
     public function maybeGiveTemporaryAccess(): void
     {
-        $isDigital = $this->getSubscription() && ProductTypeType::includesDigital($this->getSubscription()->getType());
+        $isDigital = $this->getSubscription() && ProductType::includesDigital($this->getSubscription()->getType());
         if (!$isDigital) {
             return;
         }

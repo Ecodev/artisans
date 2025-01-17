@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace ApplicationTest\Service;
 
-use Application\DBAL\Types\PaymentMethodType;
-use Application\DBAL\Types\ProductTypeType;
+use Application\Enum\PaymentMethod;
+use Application\Enum\ProductType;
 use Application\Model\AbstractProduct;
 use Application\Model\Order;
 use Application\Model\OrderLine;
@@ -58,7 +58,7 @@ class InvoicerTest extends TestCase
         $line = [
             'quantity' => 100,
             'isCHF' => true,
-            'type' => ProductTypeType::DIGITAL,
+            'type' => ProductType::Digital,
             'product' => $product,
             'additionalEmails' => [],
         ];
@@ -81,7 +81,7 @@ class InvoicerTest extends TestCase
                     '27500',
                     '0',
                     true,
-                    ProductTypeType::DIGITAL,
+                    ProductType::Digital,
                 ],
                 [
                     'My product 2',
@@ -89,7 +89,7 @@ class InvoicerTest extends TestCase
                     '20000',
                     '0',
                     true,
-                    ProductTypeType::DIGITAL,
+                    ProductType::Digital,
                 ],
             ],
         ];
@@ -107,7 +107,7 @@ class InvoicerTest extends TestCase
                     '-1000000',
                     '0',
                     true,
-                    ProductTypeType::DIGITAL,
+                    ProductType::Digital,
                 ],
                 [
                     'My product 2',
@@ -115,7 +115,7 @@ class InvoicerTest extends TestCase
                     '20000',
                     '0',
                     true,
-                    ProductTypeType::DIGITAL,
+                    ProductType::Digital,
                 ],
             ],
         ];
@@ -133,7 +133,7 @@ class InvoicerTest extends TestCase
                     '1000000',
                     '0',
                     true,
-                    ProductTypeType::DIGITAL,
+                    ProductType::Digital,
                 ],
             ],
         ];
@@ -144,12 +144,12 @@ class InvoicerTest extends TestCase
         return [
             'free product should create order, even with transactions for zero dollars' => [
                 [
-                    'paymentMethod' => PaymentMethodType::BVR,
+                    'paymentMethod' => PaymentMethod::Bvr,
                     'orderLines' => [
                         [
                             'quantity' => 1,
                             'isCHF' => true,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'product' => [
                                 'name' => 'My product',
                                 'pricePerUnitCHF' => Money::CHF(0),
@@ -166,18 +166,18 @@ class InvoicerTest extends TestCase
                         '0',
                         '0',
                         true,
-                        ProductTypeType::DIGITAL,
+                        ProductType::Digital,
                     ],
                 ],
             ],
             'normal' => [
                 [
-                    'paymentMethod' => PaymentMethodType::BVR,
+                    'paymentMethod' => PaymentMethod::Bvr,
                     'orderLines' => [
                         [
                             'quantity' => 3,
                             'isCHF' => true,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'product' => [
                                 'name' => 'My product 1',
                                 'pricePerUnitCHF' => Money::CHF(275),
@@ -188,7 +188,7 @@ class InvoicerTest extends TestCase
                         [
                             'quantity' => 1,
                             'isCHF' => true,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'product' => [
                                 'name' => 'My product 2',
                                 'pricePerUnitCHF' => Money::CHF(20000),
@@ -205,7 +205,7 @@ class InvoicerTest extends TestCase
                         '825',
                         '0',
                         true,
-                        ProductTypeType::DIGITAL,
+                        ProductType::Digital,
                     ],
                     [
                         'My product 2',
@@ -213,18 +213,18 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0',
                         true,
-                        ProductTypeType::DIGITAL,
+                        ProductType::Digital,
                     ],
                 ],
             ],
             'with mixed CHF/EURO prices' => [
                 [
-                    'paymentMethod' => PaymentMethodType::BVR,
+                    'paymentMethod' => PaymentMethod::Bvr,
                     'orderLines' => [
                         [
                             'quantity' => 3,
                             'isCHF' => false,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'product' => [
                                 'name' => 'My product 1',
                                 'pricePerUnitCHF' => Money::CHF(275),
@@ -235,7 +235,7 @@ class InvoicerTest extends TestCase
                         [
                             'quantity' => 1,
                             'isCHF' => true,
-                            'type' => ProductTypeType::PAPER,
+                            'type' => ProductType::Paper,
                             'product' => [
                                 'name' => 'My product 2',
                                 'pricePerUnitCHF' => Money::CHF(20000),
@@ -252,7 +252,7 @@ class InvoicerTest extends TestCase
                         '0',
                         '840',
                         false,
-                        ProductTypeType::DIGITAL,
+                        ProductType::Digital,
                     ],
                     [
                         'My product 2',
@@ -260,18 +260,18 @@ class InvoicerTest extends TestCase
                         '20000',
                         '0',
                         true,
-                        ProductTypeType::PAPER,
+                        ProductType::Paper,
                     ],
                 ],
             ],
             'negative balance should swap accounts' => [
                 [
-                    'paymentMethod' => PaymentMethodType::BVR,
+                    'paymentMethod' => PaymentMethod::Bvr,
                     'orderLines' => [
                         [
                             'quantity' => 1,
                             'isCHF' => true,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'product' => [
                                 'name' => 'My product',
                                 'pricePerUnitCHF' => Money::CHF(-10000),
@@ -288,23 +288,23 @@ class InvoicerTest extends TestCase
                         '-10000',
                         '0',
                         true,
-                        ProductTypeType::DIGITAL,
+                        ProductType::Digital,
                     ],
                 ],
             ],
             'can create order for subscription' => [
                 [
-                    'paymentMethod' => PaymentMethodType::BVR,
+                    'paymentMethod' => PaymentMethod::Bvr,
                     'orderLines' => [
                         [
                             'quantity' => 1,
                             'isCHF' => true,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'subscription' => [
                                 'name' => 'My subscription',
                                 'pricePerUnitCHF' => Money::CHF(10000),
                                 'pricePerUnitEUR' => Money::EUR(15000),
-                                'type' => ProductTypeType::BOTH,
+                                'type' => ProductType::Both,
                             ],
                             'additionalEmails' => [],
                         ],
@@ -317,18 +317,18 @@ class InvoicerTest extends TestCase
                         '10000',
                         '0',
                         true,
-                        ProductTypeType::BOTH,
+                        ProductType::Both,
                     ],
                 ],
             ],
             'can create order for donation' => [
                 [
-                    'paymentMethod' => PaymentMethodType::BVR,
+                    'paymentMethod' => PaymentMethod::Bvr,
                     'orderLines' => [
                         [
                             'quantity' => 1,
                             'isCHF' => true,
-                            'type' => ProductTypeType::DIGITAL,
+                            'type' => ProductType::Digital,
                             'pricePerUnit' => Money::CHF(10000),
                             'additionalEmails' => [],
                         ],
@@ -341,7 +341,7 @@ class InvoicerTest extends TestCase
                         '10000',
                         '0',
                         true,
-                        ProductTypeType::DIGITAL,
+                        ProductType::Digital,
                     ],
                 ],
             ],
@@ -405,6 +405,6 @@ class InvoicerTest extends TestCase
         $product->setName($p['name']);
         $product->setPricePerUnitCHF($p['pricePerUnitCHF']);
         $product->setPricePerUnitEUR($p['pricePerUnitEUR']);
-        $product->setType($p['type'] ?? ProductTypeType::DIGITAL);
+        $product->setType($p['type'] ?? ProductType::Digital);
     }
 }

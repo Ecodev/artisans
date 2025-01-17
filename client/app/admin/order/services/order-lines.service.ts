@@ -50,7 +50,7 @@ export class OrderLineService extends NaturalAbstractModelService<
             pricePerUnit: null,
             quantity: 0,
             isCHF: true,
-            type: ProductType.digital,
+            type: ProductType.Digital,
             additionalEmails: [],
         };
     }

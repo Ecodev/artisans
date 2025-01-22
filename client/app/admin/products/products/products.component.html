@@ -31,7 +31,7 @@
                     </ng-container>
 
                     <ng-container matColumnDef="image">
-                        <th *matHeaderCellDef mat-header-cell natural-2em-column></th>
+                        <th *matHeaderCellDef mat-header-cell class="natural-2em-column"></th>
                         <td *matCellDef="let element" mat-cell>
                             @if (element.image) {
                                 <natural-file
@@ -62,8 +62,16 @@
                     </ng-container>
 
                     <ng-container matColumnDef="pricePerUnitCHF">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix CHF</th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
+                        <th
+                            *matHeaderCellDef
+                            mat-header-cell
+                            mat-sort-header
+                            class="natural-align-right"
+                            arrowPosition="before"
+                        >
+                            Prix CHF
+                        </th>
+                        <td *matCellDef="let element" mat-cell class="natural-align-right">
                             @if (element.pricePerUnitCHF !== '0.00') {
                                 <span>{{ element.pricePerUnitCHF | currency: 'CHF' }}</span>
                             }
@@ -71,8 +79,16 @@
                     </ng-container>
 
                     <ng-container matColumnDef="pricePerUnitEUR">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-align-right>Prix EUR</th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
+                        <th
+                            *matHeaderCellDef
+                            mat-header-cell
+                            mat-sort-header
+                            class="natural-align-right"
+                            arrowPosition="before"
+                        >
+                            Prix EUR
+                        </th>
+                        <td *matCellDef="let element" mat-cell class="natural-align-right">
                             @if (element.pricePerUnitEUR !== '0.00') {
                                 <span>{{ element.pricePerUnitEUR | currency: 'EUR' }}</span>
                             }

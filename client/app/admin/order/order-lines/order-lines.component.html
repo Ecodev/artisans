@@ -60,7 +60,7 @@
                     </ng-container>
 
                     <ng-container matColumnDef="quantity">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column>Quantité</th>
+                        <th *matHeaderCellDef mat-header-cell mat-sort-header class="natural-7em-column">Quantité</th>
                         <td *matCellDef="let element" mat-cell>
                             {{ +element.quantity }}
                         </td>
@@ -72,7 +72,7 @@
                     </ng-container>
 
                     <ng-container matColumnDef="balance">
-                        <th *matHeaderCellDef mat-header-cell natural-5em-column>Montant</th>
+                        <th *matHeaderCellDef mat-header-cell class="natural-5em-column">Montant</th>
                         <td *matCellDef="let element" mat-cell>
                             @if (element.balanceCHF > 0) {
                                 {{ element.balanceCHF | currency: 'CHF' }}

@@ -27,8 +27,8 @@
                     </ng-container>
 
                     <ng-container matColumnDef="balance">
-                        <th *matHeaderCellDef mat-header-cell natural-5em-column natural-align-right>Total</th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
+                        <th *matHeaderCellDef mat-header-cell class="natural-5em-column natural-align-right">Total</th>
+                        <td *matCellDef="let element" mat-cell class="natural-align-right">
                             @if (element.balanceCHF > 0) {
                                 {{ element.balanceCHF | currency: 'CHF' }}
                             }

@@ -75,15 +75,21 @@
                     </ng-container>
 
                     <ng-container matColumnDef="balanceCHF">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column natural-align-right>
+                        <th
+                            *matHeaderCellDef
+                            mat-header-cell
+                            mat-sort-header
+                            class="natural-7em-column natural-align-right"
+                            arrowPosition="before"
+                        >
                             Total CHF
                         </th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
+                        <td *matCellDef="let element" mat-cell class="natural-align-right">
                             @if (element.balanceCHF > 0) {
                                 {{ element.balanceCHF | currency: 'CHF' }}
                             }
                         </td>
-                        <td *matFooterCellDef mat-footer-cell natural-align-right>
+                        <td *matFooterCellDef mat-footer-cell class="natural-align-right">
                             @if (dataSource.data?.totalBalanceCHF > 0) {
                                 <span>{{ dataSource.data?.totalBalanceCHF | currency: 'CHF' }}</span>
                             }
@@ -91,15 +97,21 @@
                     </ng-container>
 
                     <ng-container matColumnDef="balanceEUR">
-                        <th *matHeaderCellDef mat-header-cell mat-sort-header natural-7em-column natural-align-right>
+                        <th
+                            *matHeaderCellDef
+                            mat-header-cell
+                            mat-sort-header
+                            class="natural-7em-column natural-align-right"
+                            arrowPosition="before"
+                        >
                             Total EUR
                         </th>
-                        <td *matCellDef="let element" mat-cell natural-align-right>
+                        <td *matCellDef="let element" mat-cell class="natural-align-right">
                             @if (element.balanceEUR > 0) {
                                 {{ element.balanceEUR | currency: 'EUR' }}
                             }
                         </td>
-                        <td *matFooterCellDef mat-footer-cell natural-align-right>
+                        <td *matFooterCellDef mat-footer-cell class="natural-align-right">
                             @if (dataSource.data?.totalBalanceEUR > 0) {
                                 <span>{{ dataSource.data?.totalBalanceEUR | currency: 'EUR' }}</span>
                             }

@@ -17,7 +17,6 @@ use Application\Model\Event;
 use Application\Model\FacilitatorDocument;
 use Application\Model\File;
 use Application\Model\Image;
-use Application\Model\Message;
 use Application\Model\News;
 use Application\Model\Order;
 use Application\Model\OrderLine;
@@ -46,7 +45,6 @@ class QueryType extends ObjectType
             Standard::buildQuery(Event::class),
             Standard::buildQuery(File::class),
             Standard::buildQuery(Image::class),
-            Standard::buildQuery(Message::class),
             Standard::buildQuery(News::class),
             Standard::buildQuery(Order::class),
             Standard::buildQuery(OrderLine::class),

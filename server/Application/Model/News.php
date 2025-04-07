@@ -29,7 +29,7 @@ class News extends AbstractModel
     private string $content = '';
 
     /**
-     * @var Collection<Comment>
+     * @var Collection<int, Comment>
      */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'news')]
     private Collection $comments;

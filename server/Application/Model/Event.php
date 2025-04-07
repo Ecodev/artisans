@@ -21,7 +21,7 @@ class Event extends AbstractModel
     use HasName;
 
     /**
-     * @var Collection<Comment>
+     * @var Collection<int, Comment>
      */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'event')]
     private Collection $comments;

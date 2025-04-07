@@ -32,7 +32,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     private OrderStatus $status = OrderStatus::Pending;
 
     /**
-     * @var Collection<OrderLine>
+     * @var Collection<int, OrderLine>
      */
     #[ORM\OneToMany(targetEntity: OrderLine::class, mappedBy: 'order')]
     private Collection $orderLines;

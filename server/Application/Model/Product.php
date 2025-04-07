@@ -38,19 +38,19 @@ class Product extends AbstractProduct
     private ?Product $review = null;
 
     /**
-     * @var Collection<ProductTag>
+     * @var Collection<int, ProductTag>
      */
     #[ORM\ManyToMany(targetEntity: ProductTag::class, mappedBy: 'products')]
     private Collection $productTags;
 
     /**
-     * @var Collection<Product>
+     * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'inversedRelatedProducts')]
     private Collection $relatedProducts;
 
     /**
-     * @var Collection<Product>
+     * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'relatedProducts')]
     private Collection $inversedRelatedProducts;

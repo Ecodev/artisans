@@ -98,13 +98,13 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     private ?Chronos $lastLogin = null;
 
     /**
-     * @var Collection<Session>
+     * @var Collection<int, Session>
      */
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'facilitators')]
     private Collection $sessions;
 
     /**
-     * @var Collection<User>
+     * @var Collection<int, User>
      */
     #[ORM\OneToMany(targetEntity: self::class, mappedBy: 'owner')]
     private Collection $users;

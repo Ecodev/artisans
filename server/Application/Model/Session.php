@@ -62,7 +62,7 @@ class Session extends AbstractModel
     private ChronosDate $endDate;
 
     /**
-     * @var Collection<User>
+     * @var Collection<int, User>
      */
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'sessions')]
     private Collection $facilitators;

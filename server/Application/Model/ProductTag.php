@@ -22,7 +22,7 @@ class ProductTag extends AbstractModel
     use HasName;
 
     /**
-     * @var Collection<Product>
+     * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: Product::class, inversedBy: 'productTags')]
     private Collection $products;

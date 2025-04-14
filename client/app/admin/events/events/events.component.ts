@@ -21,7 +21,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-events',
     templateUrl: './events.component.html',
     styleUrl: './events.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,

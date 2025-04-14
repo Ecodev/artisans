@@ -13,7 +13,6 @@ export type Breadcrumb = {
     selector: 'app-breadcrumbs',
     templateUrl: './breadcrumbs.component.html',
     styleUrl: './breadcrumbs.component.scss',
-    standalone: true,
     imports: [MatButtonModule, RouterLink],
 })
 export class BreadcrumbsComponent implements OnInit {

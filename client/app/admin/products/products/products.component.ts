@@ -26,7 +26,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-products',
     templateUrl: './products.component.html',
     styleUrl: './products.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,

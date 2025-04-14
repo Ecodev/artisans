@@ -15,7 +15,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-comment-list',
     templateUrl: './comment-list.component.html',
     styleUrl: './comment-list.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatFormFieldModule,

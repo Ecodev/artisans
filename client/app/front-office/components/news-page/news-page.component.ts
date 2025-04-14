@@ -12,7 +12,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-news-page',
     templateUrl: './news-page.component.html',
     styleUrl: './news-page.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatButtonModule,

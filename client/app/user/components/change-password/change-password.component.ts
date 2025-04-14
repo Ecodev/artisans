@@ -13,7 +13,6 @@ import {PasswordComponent} from '../password/password.component';
     selector: 'app-change-password',
     templateUrl: './change-password.component.html',
     styleUrl: './change-password.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

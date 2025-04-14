@@ -21,7 +21,6 @@ import {MatTableModule} from '@angular/material/table';
     selector: 'app-order-lines',
     templateUrl: './order-lines.component.html',
     styleUrl: './order-lines.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalSearchComponent,

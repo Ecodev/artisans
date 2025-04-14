@@ -16,9 +16,8 @@ $clientConfig = array_intersect_key($config, array_flip($clientKeys));
 $clientConfig['log']['url'] = $config['log']['url'];
 $clientConfig['signedQueries']['key'] = $config['signedQueries']['keys'][0] ?? '';
 
-$json = json_encode($clientConfig, JSON_PRETTY_PRINT);
+$json = json_encode($clientConfig, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 $code = <<<STRING
-    /* eslint-disable */
     export const localConfig = $json as const;
     STRING;
 

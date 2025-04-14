@@ -301,9 +301,11 @@ class MessageQueuerTest extends TestCase
             ->method('getLocality')
             ->willReturn('Locality');
 
+        $country = new Country();
+        $country->setName('Wookaya');
         $user->expects(self::any())
             ->method('getCountry')
-            ->willReturn(new Country('Wookaya'));
+            ->willReturn($country);
 
         $user->expects(self::any())
             ->method('getPhone')

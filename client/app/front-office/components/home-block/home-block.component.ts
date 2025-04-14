@@ -24,7 +24,6 @@ type Block = {
     selector: 'app-home-block',
     templateUrl: './home-block.component.html',
     styleUrl: './home-block.component.scss',
-    standalone: true,
     imports: [
         MatButtonModule,
         RouterLink,

@@ -6,7 +6,6 @@ import {MatButtonModule} from '@angular/material/button';
     selector: 'app-offrir-la-revue',
     templateUrl: './offrir-la-revue.component.html',
     styleUrl: './offrir-la-revue.component.scss',
-    standalone: true,
     imports: [MatButtonModule, RouterLink],
 })
 export class OffrirLaRevueComponent {}

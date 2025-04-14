@@ -16,7 +16,6 @@ export type EmailsData = {
     selector: 'app-emails',
     templateUrl: './emails.component.html',
     styleUrl: './emails.component.scss',
-    standalone: true,
     imports: [MatDialogModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class EmailsComponent {

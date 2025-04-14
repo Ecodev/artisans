@@ -11,7 +11,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-event-page',
     templateUrl: './event-page.component.html',
     styleUrl: './event-page.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatButtonModule,

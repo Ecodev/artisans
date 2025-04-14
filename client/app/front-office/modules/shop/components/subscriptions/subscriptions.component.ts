@@ -14,7 +14,6 @@ import {PriceComponent} from '../../../../../shared/components/price/price.compo
     selector: 'app-subscriptions',
     templateUrl: './subscriptions.component.html',
     styleUrl: './subscriptions.component.scss',
-    standalone: true,
     imports: [PriceComponent, MatButtonModule],
 })
 export class SubscriptionsComponent implements OnInit {

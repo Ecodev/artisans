@@ -24,7 +24,6 @@ import {MatDividerModule} from '@angular/material/divider';
     selector: 'app-event',
     templateUrl: './event.component.html',
     styleUrl: './event.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

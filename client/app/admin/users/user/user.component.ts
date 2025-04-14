@@ -32,7 +32,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrl: './user.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -61,7 +60,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeoResolveData> implements OnInit {
     public readonly sessionService = inject(SessionService);
 
-    public UserService = UserService;
     private userRolesAvailable: UserRole[] = [];
 
     public constructor() {

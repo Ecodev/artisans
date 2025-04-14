@@ -28,7 +28,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     selector: 'app-session',
     templateUrl: './session.component.html',
     styleUrl: './session.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

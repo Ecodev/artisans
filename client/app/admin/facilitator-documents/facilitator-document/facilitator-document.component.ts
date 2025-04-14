@@ -26,7 +26,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     selector: 'app-facilitator-document',
     templateUrl: './facilitator-document.component.html',
     styleUrl: './facilitator-document.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

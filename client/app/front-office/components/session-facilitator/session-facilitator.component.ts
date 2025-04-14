@@ -8,7 +8,6 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
     selector: 'app-session-facilitator',
     templateUrl: './session-facilitator.component.html',
     styleUrl: './session-facilitator.component.scss',
-    standalone: true,
     imports: [SessionSideColumnComponent],
 })
 export class SessionFacilitatorComponent implements OnInit {

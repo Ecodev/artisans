@@ -24,7 +24,6 @@ import {MatTableModule} from '@angular/material/table';
     selector: 'app-orders',
     templateUrl: './orders.component.html',
     styleUrl: './orders.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,

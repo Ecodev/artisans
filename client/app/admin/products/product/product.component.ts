@@ -40,7 +40,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     selector: 'app-product',
     templateUrl: './product.component.html',
     styleUrl: './product.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

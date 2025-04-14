@@ -7,7 +7,6 @@ import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/a
     selector: 'app-rejoindre-association',
     templateUrl: './rejoindre-association.component.html',
     styleUrl: './rejoindre-association.component.scss',
-    standalone: true,
     imports: [AddToCartComponent],
 })
 export class RejoindreAssociationComponent implements OnInit {

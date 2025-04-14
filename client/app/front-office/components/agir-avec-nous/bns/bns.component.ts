@@ -6,7 +6,6 @@ import {MatButtonModule} from '@angular/material/button';
     selector: 'app-bns',
     templateUrl: './bns.component.html',
     styleUrl: './bns.component.scss',
-    standalone: true,
     imports: [MatButtonModule, RouterLink],
 })
 export class BnsComponent {}

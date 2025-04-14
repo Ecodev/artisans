@@ -24,7 +24,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-sessions',
     templateUrl: './sessions.component.html',
     styleUrl: './sessions.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,

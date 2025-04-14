@@ -9,7 +9,6 @@ import {MatButtonModule} from '@angular/material/button';
     selector: 'app-sessions-incoming',
     templateUrl: './sessions-incoming.component.html',
     styleUrl: './sessions-incoming.component.scss',
-    standalone: true,
     imports: [MatButtonModule, SessionSideColumnComponent],
 })
 export class SessionsIncomingComponent implements OnInit {

@@ -23,7 +23,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-newses',
     templateUrl: './newses.component.html',
     styleUrl: './newses.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,

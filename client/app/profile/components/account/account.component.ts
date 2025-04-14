@@ -13,7 +13,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     selector: 'app-account',
     templateUrl: './account.component.html',
     styleUrl: './account.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

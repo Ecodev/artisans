@@ -13,7 +13,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-session-facilitator-private',
     templateUrl: './session-facilitator-private.component.html',
     styleUrl: './session-facilitator-private.component.scss',
-    standalone: true,
     imports: [CommonModule, MatListModule, MatIconModule, NaturalIconDirective, SessionSideColumnComponent],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {

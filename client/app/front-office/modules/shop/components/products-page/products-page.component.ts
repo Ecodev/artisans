@@ -37,7 +37,6 @@ export enum ProductsViewMode {
         },
         memorySessionStorageProvider,
     ],
-    standalone: true,
     imports: [
         CommonModule,
         TagsNavigationComponent,

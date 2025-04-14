@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @use '../../../../styles/responsive';
 @use '../../../../styles/variables';
 
@@ -14,7 +16,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: lighten(variables.$app-orange, 20%);
+    background-color: color.adjust(variables.$app-orange, $lightness: 20%, $space: hsl);
 }
 
 .splash-image {
@@ -87,11 +89,11 @@
 }
 
 .la-revue-splash {
+    margin-bottom: 0;
+
     @include responsive.responsive(responsive.$gt-sm) {
         height: 550px;
     }
-
-    margin-bottom: 0;
 
     .mat-headline-2 {
         padding-top: 120px;
@@ -144,7 +146,7 @@
     .support-image {
         background-position: center;
         background-size: cover;
-        background-color: lighten(variables.$app-orange, 20%);
+        background-color: color.adjust(variables.$app-orange, $lightness: 20%, $space: hsl);
         padding-top: 80%;
         width: 100%;
     }

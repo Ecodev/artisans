@@ -31,7 +31,6 @@ import {MatTableModule} from '@angular/material/table';
     selector: 'app-users',
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,

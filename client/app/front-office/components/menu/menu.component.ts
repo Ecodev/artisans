@@ -38,7 +38,6 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
             transition('* => void', animate('150ms 50ms linear', style({opacity: 0}))),
         ]),
     ],
-    standalone: true,
     imports: [CommonModule, RouterLinkActive, RouterLink],
 })
 export class MenuComponent {

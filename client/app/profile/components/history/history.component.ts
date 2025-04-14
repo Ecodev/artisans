@@ -14,7 +14,6 @@ import {CommonModule, DatePipe} from '@angular/common';
     selector: 'app-history',
     templateUrl: './history.component.html',
     styleUrl: './history.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatTableModule,

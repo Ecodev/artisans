@@ -6,7 +6,6 @@ import {RouterLink} from '@angular/router';
     selector: 'app-desinvestir-fossile',
     templateUrl: './desinvestir-fossile.component.html',
     styleUrl: './desinvestir-fossile.component.scss',
-    standalone: true,
     imports: [RouterLink, MatButtonModule],
 })
 export class DesinvestirFossileComponent {}

@@ -5,7 +5,6 @@ import {MatDividerModule} from '@angular/material/divider';
     selector: 'app-points-de-vente',
     templateUrl: './points-de-vente.component.html',
     styleUrl: './points-de-vente.component.scss',
-    standalone: true,
     imports: [MatDividerModule],
 })
 export class PointsDeVenteComponent {}

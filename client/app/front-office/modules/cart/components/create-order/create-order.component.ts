@@ -23,7 +23,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-create-order',
     templateUrl: './create-order.component.html',
     styleUrl: './create-order.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         FormsModule,

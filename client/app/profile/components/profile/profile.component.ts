@@ -14,7 +14,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatButtonModule,

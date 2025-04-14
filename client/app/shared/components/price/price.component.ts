@@ -9,7 +9,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     selector: 'app-price',
     templateUrl: './price.component.html',
     styleUrl: './price.component.scss',
-    standalone: true,
     imports: [CommonModule],
 })
 export class PriceComponent implements OnInit {

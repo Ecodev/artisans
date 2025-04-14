@@ -38,7 +38,6 @@ import {HomeBlockComponent} from '../home-block/home-block.component';
     selector: 'app-homepage',
     templateUrl: './homepage.component.html',
     styleUrl: './homepage.component.scss',
-    standalone: true,
     imports: [
         HomeBlockComponent,
         CommonModule,

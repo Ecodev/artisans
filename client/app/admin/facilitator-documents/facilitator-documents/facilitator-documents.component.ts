@@ -21,7 +21,6 @@ import {AsyncPipe} from '@angular/common';
     selector: 'app-facilitator-documents',
     templateUrl: './facilitator-documents.component.html',
     styleUrl: './facilitator-documents.component.scss',
-    standalone: true,
     imports: [
         NaturalSearchComponent,
         MatTableModule,

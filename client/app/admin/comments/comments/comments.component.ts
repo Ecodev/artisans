@@ -18,7 +18,6 @@ import {MatTableModule} from '@angular/material/table';
     selector: 'app-comments',
     templateUrl: './comments.component.html',
     styleUrl: './comments.component.scss',
-    standalone: true,
     imports: [
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,

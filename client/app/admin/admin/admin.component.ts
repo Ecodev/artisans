@@ -17,7 +17,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss',
-    standalone: true,
     imports: [
         MatToolbarModule,
         MatButtonModule,

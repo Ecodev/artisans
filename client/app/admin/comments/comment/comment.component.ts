@@ -22,7 +22,6 @@ import {MatDividerModule} from '@angular/material/divider';
     selector: 'app-comment',
     templateUrl: './comment.component.html',
     styleUrl: './comment.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

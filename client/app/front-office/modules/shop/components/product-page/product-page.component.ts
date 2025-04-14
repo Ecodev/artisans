@@ -30,7 +30,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-product-page',
     templateUrl: './product-page.component.html',
     styleUrl: './product-page.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatButtonModule,

@@ -7,7 +7,6 @@ import {RouterLink} from '@angular/router';
     selector: 'app-faire-un-don',
     templateUrl: './faire-un-don.component.html',
     styleUrl: './faire-un-don.component.scss',
-    standalone: true,
     imports: [RouterLink, MatButtonModule],
 })
 export class FaireUnDonComponent {

@@ -22,7 +22,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-cart',
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         MatButtonModule,

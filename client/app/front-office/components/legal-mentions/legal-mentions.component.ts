@@ -5,7 +5,6 @@ import {RouterLink} from '@angular/router';
     selector: 'app-legal-mentions',
     templateUrl: './legal-mentions.component.html',
     styleUrl: './legal-mentions.component.scss',
-    standalone: true,
     imports: [RouterLink],
 })
 export class LegalMentionsComponent {}

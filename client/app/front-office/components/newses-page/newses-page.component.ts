@@ -10,7 +10,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-newses-page',
     templateUrl: './newses-page.component.html',
     styleUrl: './newses-page.component.scss',
-    standalone: true,
     imports: [CommonModule, RouterLink, MatButtonModule, NaturalCapitalizePipe],
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {

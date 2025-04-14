@@ -20,7 +20,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrl: './order.component.scss',
-    standalone: true,
     imports: [
         MatDialogModule,
         CommonModule,

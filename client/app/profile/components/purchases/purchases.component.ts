@@ -22,7 +22,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-purchases',
     templateUrl: './purchases.component.html',
     styleUrl: './purchases.component.scss',
-    standalone: true,
     imports: [
         CommonModule,
         NaturalSearchComponent,

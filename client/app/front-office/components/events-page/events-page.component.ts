@@ -11,7 +11,6 @@ import {CommonModule} from '@angular/common';
     selector: 'app-events-page',
     templateUrl: './events-page.component.html',
     styleUrl: './events-page.component.scss',
-    standalone: true,
     imports: [RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
 })
 export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> implements OnInit {

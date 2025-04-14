@@ -21,7 +21,6 @@ import {AsyncPipe} from '@angular/common';
 @Component({
     selector: 'app-import',
     templateUrl: './import.component.html',
-    standalone: true,
     imports: [
         MatButtonModule,
         NaturalFileDropDirective,

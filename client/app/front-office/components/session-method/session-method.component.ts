@@ -6,7 +6,6 @@ import {RouterLink} from '@angular/router';
     selector: 'app-session-method',
     templateUrl: './session-method.component.html',
     styleUrl: './session-method.component.scss',
-    standalone: true,
     imports: [RouterLink, SessionSideColumnComponent],
 })
 export class SessionMethodComponent {}

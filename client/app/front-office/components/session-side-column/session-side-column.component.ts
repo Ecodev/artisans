@@ -10,7 +10,6 @@ import {MatButtonModule} from '@angular/material/button';
     selector: 'app-session-side-column',
     templateUrl: './session-side-column.component.html',
     styleUrl: './session-side-column.component.scss',
-    standalone: true,
     imports: [MatButtonModule, RouterLink],
 })
 export class SessionSideColumnComponent implements OnInit {

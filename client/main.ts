@@ -1,4 +1,4 @@
-import {APP_ID, APP_INITIALIZER, inject, LOCALE_ID, provideZoneChangeDetection} from '@angular/core';
+import {APP_ID, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection} from '@angular/core';
 import {AppComponent} from './app/app.component';
 import {routes} from './app/app-routing.module';
 import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
@@ -8,7 +8,15 @@ import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/ma
 import {apolloOptionsProvider} from './app/shared/config/apollo-options.provider';
 import {LocalizedPaginatorIntlService} from './app/shared/services/localized-paginator-intl.service';
 import {DATE_PIPE_DEFAULT_OPTIONS, DatePipeConfig, registerLocaleData} from '@angular/common';
-import {activityInterceptor} from './app/shared/services/activity-interceptor';
+import {
+    activityInterceptor,
+    graphqlQuerySigner,
+    naturalProviders,
+    NaturalSwissParsingDateAdapter,
+    provideErrorHandler,
+    provideIcons,
+    provideSeo,
+} from '@ecodev/natural';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {MAT_PAGINATOR_DEFAULT_OPTIONS, MatPaginatorDefaultOptions, MatPaginatorIntl} from '@angular/material/paginator';
 import {
@@ -19,14 +27,6 @@ import {
 } from '@angular/material/core';
 import {LoggerExtraService} from './app/shared/services/logger-extra.service';
 import {localConfig} from './app/shared/generated-config';
-import {
-    graphqlQuerySigner,
-    naturalProviders,
-    NaturalSwissParsingDateAdapter,
-    provideErrorHandler,
-    provideIcons,
-    provideSeo,
-} from '@ecodev/natural';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {provideRouter, withInMemoryScrolling, withRouterConfig} from '@angular/router';
 import {MAT_TABS_CONFIG, MatTabsConfig} from '@angular/material/tabs';
@@ -109,15 +109,10 @@ bootstrapApplication(AppComponent, {
                 scrollPositionRestoration: 'top',
             }),
         ),
-        {
-            provide: APP_INITIALIZER,
-            multi: true,
-            useFactory: (): (() => void) => {
-                const dateAdapter = inject(DateAdapter);
-
-                return () => dateAdapter.setLocale('fr-ch');
-            },
-        },
+        provideAppInitializer(() => {
+            const dateAdapter = inject(DateAdapter);
+            dateAdapter.setLocale('fr-ch');
+        }),
     ],
 }).catch((err: unknown) => {
     console.error(err);

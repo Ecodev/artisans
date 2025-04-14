@@ -15,7 +15,6 @@ import {MatIcon} from '@angular/material/icon';
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

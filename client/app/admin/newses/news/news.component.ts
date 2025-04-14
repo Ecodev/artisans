@@ -27,7 +27,6 @@ import {MatDividerModule} from '@angular/material/divider';
     selector: 'app-news',
     templateUrl: './news.component.html',
     styleUrl: './news.component.scss',
-    standalone: true,
     imports: [
         FormsModule,
         ReactiveFormsModule,

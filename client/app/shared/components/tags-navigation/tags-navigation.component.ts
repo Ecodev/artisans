@@ -8,7 +8,6 @@ import {RouterLink} from '@angular/router';
     selector: 'app-tags-navigation',
     templateUrl: './tags-navigation.component.html',
     styleUrl: './tags-navigation.component.scss',
-    standalone: true,
     imports: [RouterLink],
 })
 export class TagsNavigationComponent {

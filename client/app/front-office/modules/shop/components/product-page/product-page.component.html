@@ -200,6 +200,7 @@
         <div [class.nat-hide]="!relatedProducts?.dataSource?.data?.length">
             <div class="mat-headline-6">Pour continuer votre lecture ...</div>
             <app-products-page
+                #relatedProducts
                 [forcedVariables]="{
                     filter: {groups: [{conditions: [{relatedProducts: {have: {values: [data.model.id]}}}]}]},
                 }"

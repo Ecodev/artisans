@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, ViewChild} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {
     NaturalAbstractDetail,
@@ -47,8 +47,6 @@ import {CommonModule} from '@angular/common';
 })
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     private readonly purchaseService = inject(PurchaseService);
-
-    @ViewChild(ProductsPageComponent, {static: false}) public relatedProducts: ProductsPageComponent | null = null;
 
     public ProductType = ProductType;
 

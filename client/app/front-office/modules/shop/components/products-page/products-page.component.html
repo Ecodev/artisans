@@ -34,7 +34,7 @@
                                     product.id,
                                 ]"
                                 [naturalBackgroundDensity]="
-                                    '/api/image/' + product.illustration.id + '/' + ($index === 0 ? '550' : '260')
+                                    '/api/image/' + product.illustration.id + '/' + ($first ? '550' : '260')
                                 "
                             ></a>
                         }

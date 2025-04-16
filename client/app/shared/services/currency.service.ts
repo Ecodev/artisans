@@ -17,7 +17,7 @@ export enum Currency {
 export class CurrencyService {
     private readonly sessionStorage = inject(SESSION_STORAGE);
 
-    public readonly current: BehaviorSubject<Currency> = new BehaviorSubject<Currency>(Currency.CHF);
+    public readonly current = new BehaviorSubject<Currency>(Currency.CHF);
 
     public constructor() {
         const stored = this.sessionStorage.getItem('currency');

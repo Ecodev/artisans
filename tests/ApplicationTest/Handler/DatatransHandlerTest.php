@@ -126,6 +126,7 @@ class DatatransHandlerTest extends TestCase
             self::assertEquals($expectedWebTemporaryAccess ? '1' : '0', $actualWebTemporaryAccess);
         }
 
+        // @phpstan-ignore-next-line
         self::assertTrue(true); // Workaround when we only assert via mock
     }
 

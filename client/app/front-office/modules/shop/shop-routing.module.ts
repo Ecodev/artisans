@@ -55,7 +55,7 @@ export const routes: Routes = [
         path: 'articles/:productTagName',
         component: ProductsPageComponent,
         resolve: {
-            productTag: resolveProductTagByName,
+            model: resolveProductTagByName,
         },
         data: {
             seo: {resolve: true} satisfies NaturalSeo,

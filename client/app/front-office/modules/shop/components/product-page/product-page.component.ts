@@ -1,5 +1,4 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {
     NaturalAbstractDetail,
     NaturalCapitalizePipe,
@@ -48,27 +47,8 @@ import {CommonModule} from '@angular/common';
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     private readonly purchaseService = inject(PurchaseService);
 
-    public ProductType = ProductType;
+    public readonly ProductType = ProductType;
 
-    /**
-     * True if we are in edition mode after selecting an existing cart line from cart list. Activates some special layout for line update
-     */
-    public edit = false;
-
-    /**
-     * Formatted displayed price
-     */
-    public price = 0;
-
-    /**
-     * Form controller for quantity
-     */
-    public quantityForm = new FormControl(null, [Validators.required, Validators.min(0)]);
-
-    /**
-     * Combination of form controls of the page
-     */
-    public readonly formGroup = new FormGroup({quantity: this.quantityForm});
     public viewer: CurrentUserForProfile['viewer'] = null;
 
     /**

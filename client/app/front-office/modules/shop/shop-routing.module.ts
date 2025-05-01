@@ -3,11 +3,12 @@ import {resolveProductTagByName} from '../../../admin/product-tags/services/prod
 import {resolveProduct} from '../../../admin/products/services/product.resolver';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {ProductSortingField, ProductsVariables, SortingOrder} from '../../../shared/generated-types';
-import {NaturalSeo} from '@ecodev/natural';
+import {NaturalSeo, type NaturalSeoCallback} from '@ecodev/natural';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent, ProductsViewMode} from './components/products-page/products-page.component';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component';
 import {ErrorComponent} from '../../../shared/components/error/error.component';
+import {type ObservedValueOf} from 'rxjs';
 
 export const routes: Routes = [
     {
@@ -58,7 +59,13 @@ export const routes: Routes = [
             productTag: resolveProductTagByName,
         },
         data: {
-            seo: {resolve: true} satisfies NaturalSeo,
+            seo: (routeData => {
+                const productTag = routeData.productTag as ObservedValueOf<ReturnType<typeof resolveProductTagByName>>;
+
+                return {
+                    title: productTag.name,
+                };
+            }) satisfies NaturalSeoCallback,
             breadcrumbs: [
                 {link: '/larevuedurable', label: 'La Revue Durable'},
                 {link: '/larevuedurable/articles', label: 'Articles'},

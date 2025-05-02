@@ -61,10 +61,6 @@ return [
             'CHF' => Ecodev\Felix\DBAL\Types\CHFType::class,
             'EUR' => Ecodev\Felix\DBAL\Types\EURType::class,
             'MessageType' => Application\DBAL\Types\MessageTypeType::class,
-            'ProductType' => Application\DBAL\Types\ProductTypeType::class,
-            'OrderStatus' => Application\DBAL\Types\OrderStatusType::class,
-            'PaymentMethod' => Application\DBAL\Types\PaymentMethodType::class,
-            'Membership' => Application\DBAL\Types\MembershipType::class,
         ],
         // migrations configuration
         'migrations' => [

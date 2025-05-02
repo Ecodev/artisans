@@ -1,7 +1,7 @@
 @if (breadcrumbs.length) {
     <div class="separator"></div>
 }
-@for (breadcrumb of breadcrumbs; track breadcrumb) {
+@for (breadcrumb of breadcrumbs; track $index) {
     <a mat-button [routerLink]="breadcrumb.link">{{ breadcrumb.label }}</a>
     <div class="separator"></div>
 }

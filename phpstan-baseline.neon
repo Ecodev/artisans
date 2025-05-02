@@ -9,3 +9,9 @@ parameters:
 			message: "#^Property Application\\\\Model\\\\User\\:\\:\\$email type mapping mismatch\\: property can contain string\\|null but database expects string\\.$#"
 			count: 1
 			path: server/Application/Model/User.php
+
+		-
+			message: '#^Call to static method PHPUnit\\Framework\\Assert\:\:assertTrue\(\) with true and ''schema passes…'' will always evaluate to true\.$#'
+			identifier: staticMethod.alreadyNarrowedType
+			count: 1
+			path: tests/ApplicationTest/Api/SchemaTest.php

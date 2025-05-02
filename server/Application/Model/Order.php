@@ -28,7 +28,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     use HasAutomaticBalance;
     use HasInternalRemarks;
 
-    #[ORM\Column(type: 'OrderStatus', options: ['default' => OrderStatus::Pending])]
+    #[ORM\Column(type: 'enum', options: ['default' => OrderStatus::Pending])]
     private OrderStatus $status = OrderStatus::Pending;
 
     /**
@@ -37,7 +37,7 @@ class Order extends AbstractModel implements HasBalanceInterface
     #[ORM\OneToMany(targetEntity: OrderLine::class, mappedBy: 'order')]
     private Collection $orderLines;
 
-    #[ORM\Column(type: 'PaymentMethod')]
+    #[ORM\Column(type: 'enum')]
     private PaymentMethod $paymentMethod;
 
     /**

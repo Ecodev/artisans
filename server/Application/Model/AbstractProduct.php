@@ -33,7 +33,7 @@ abstract class AbstractProduct extends AbstractModel
     #[ORM\Column(type: 'EUR', options: ['default' => 0])]
     private Money $pricePerUnitEUR;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 1])]
+    #[ORM\Column(type: 'boolean', options: ['default' => true])]
     private bool $isActive = true;
 
     #[ORM\OneToOne(targetEntity: Image::class, orphanRemoval: true)]

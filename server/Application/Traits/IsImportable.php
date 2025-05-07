@@ -11,7 +11,7 @@ trait IsImportable
     /**
      * Whether this should be deleted because it did not exist in last import.
      */
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $shouldDelete = false;
 
     /**

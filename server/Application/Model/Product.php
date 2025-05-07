@@ -55,7 +55,7 @@ class Product extends AbstractProduct
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'relatedProducts')]
     private Collection $inversedRelatedProducts;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isHighlighted = false;
 
     #[ORM\Column(type: 'text', length: 65535, options: ['default' => ''])]

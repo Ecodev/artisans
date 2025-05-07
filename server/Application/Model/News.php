@@ -22,7 +22,7 @@ class News extends AbstractModel
     use HasName;
     use HasRichTextDescription;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isActive = false;
 
     #[ORM\Column(type: 'text', length: 65535, options: ['default' => ''])]

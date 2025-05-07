@@ -13,7 +13,7 @@ use Money\Money;
 
 trait HasBalance
 {
-    #[ORM\Column(type: 'boolean', options: ['default' => 1])]
+    #[ORM\Column(type: 'boolean', options: ['default' => true])]
     private bool $isCHF = true;
 
     #[ORM\Column(type: 'CHF')]

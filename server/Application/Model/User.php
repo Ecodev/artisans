@@ -85,10 +85,10 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     #[ORM\Column(type: 'string', length: 25, options: ['default' => ''])]
     private string $phone = '';
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $webTemporaryAccess = false;
 
-    #[ORM\Column(type: 'boolean', options: ['default' => 0])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $isPublicFacilitator = false;
 
     #[ORM\Column(type: 'datetime', nullable: true)]

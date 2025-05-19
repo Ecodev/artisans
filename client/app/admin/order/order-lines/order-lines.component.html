@@ -20,9 +20,11 @@
                 <table mat-table matSort [dataSource]="dataSource" (matSortChange)="sorting([$event])">
                     <tr *matHeaderRowDef="columnsForTable" mat-header-row></tr>
                     <tr *matRowDef="let row; columns: columnsForTable" mat-row></tr>
-                    @if (showTotals) {
-                        <tr *matFooterRowDef="columnsForTable" mat-footer-row></tr>
-                    }
+                    <tr
+                        *matFooterRowDef="columnsForTable"
+                        mat-footer-row
+                        [hidden]="!dataSource.data?.length || !showTotals"
+                    ></tr>
 
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Produit</th>

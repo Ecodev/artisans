@@ -91,7 +91,7 @@ bootstrapApplication(AppComponent, {
             provide: DATE_PIPE_DEFAULT_OPTIONS,
             useValue: {
                 timezone: 'fr-CH',
-            } satisfies Partial<DatePipeConfig>, // See https://github.com/angular/angular/pull/51287
+            } satisfies DatePipeConfig,
         },
         {
             provide: MatPaginatorIntl,

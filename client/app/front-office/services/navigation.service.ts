@@ -1,7 +1,7 @@
 import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {DOCUMENT} from '@angular/common';
-import {ComponentRef, ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
+import {ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'lodash-es';
 import {merge, Observable, Subject} from 'rxjs';
@@ -57,16 +57,12 @@ export class NavigationService {
                 .top(offsetTop + 'px')
                 .centerHorizontally(),
             hasBackdrop: true,
-            // backdropClass: 'cdk-overlay-transparent-backdrop',
         });
 
         // Container
         const overlayRef = this.overlay.create(overlayConfig);
         const containerPortal = new ComponentPortal(MenuComponent, undefined, containerInjector);
-        const containerRef: ComponentRef<MenuComponent> = overlayRef.attach(containerPortal);
-
-        // Start animation that shows menu
-        containerRef.instance.startAnimation();
+        overlayRef.attach(containerPortal);
 
         // use subject because backdropClick() subscription don't allow two subscriptions (
         const onBackdropClick = new Subject<void>();

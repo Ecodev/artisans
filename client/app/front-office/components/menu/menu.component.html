@@ -1,4 +1,4 @@
-<div class="mega-menu mat-elevation-z4" role="menu" [@transformMenu]="panelAnimationState">
+<div class="mega-menu mat-elevation-z4" role="menu">
     <div class="mega-menu-content" [style.min-height.px]="data.contentHeight" [style.padding-left.px]="offsetLeft">
         <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: data.items}" />
     </div>

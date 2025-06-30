@@ -1,7 +1,6 @@
 import {APP_ID, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection} from '@angular/core';
 import {AppComponent} from './app/app.component';
 import {routes} from './app/app-routing.module';
-import {provideAnimationsAsync} from '@angular/platform-browser/animations/async';
 import {bootstrapApplication} from '@angular/platform-browser';
 import {Apollo} from 'apollo-angular';
 import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/material/tooltip';
@@ -40,14 +39,11 @@ const matTooltipCustomConfig: MatTooltipDefaultOptions = {
     touchGestures: 'off',
 };
 
-const prefersReducedMotion = typeof matchMedia === 'function' ? matchMedia('(prefers-reduced-motion)').matches : false;
-
 bootstrapApplication(AppComponent, {
     providers: [
         provideZoneChangeDetection({eventCoalescing: true}),
         provideNativeDateAdapter(),
         Apollo,
-        provideAnimationsAsync(prefersReducedMotion ? 'noop' : 'animations'),
         naturalProviders,
         provideErrorHandler(localConfig.log.url, LoggerExtraService),
         provideSeo({

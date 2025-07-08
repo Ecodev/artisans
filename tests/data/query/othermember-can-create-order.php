@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
- return [
+return [
     [
         'query' => 'mutation {
             requestMembershipEnd

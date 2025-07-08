@@ -9,6 +9,4 @@ use Application\Model\Comment;
 /**
  * @extends AbstractRepository<Comment>
  */
-class CommentRepository extends AbstractRepository
-{
-}
+class CommentRepository extends AbstractRepository {}

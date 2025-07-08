@@ -14,9 +14,12 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class SitemapHandler implements \Psr\Http\Server\RequestHandlerInterface
 {
-    public function __construct(private readonly ProductRepository $productRepository, private readonly NewsRepository $newsRepository, private readonly string $baseUrl, private readonly array $sitemapStaticUrls)
-    {
-    }
+    public function __construct(
+        private readonly ProductRepository $productRepository,
+        private readonly NewsRepository $newsRepository,
+        private readonly string $baseUrl,
+        private readonly array $sitemapStaticUrls,
+    ) {}
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {

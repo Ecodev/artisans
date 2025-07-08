@@ -226,7 +226,7 @@ class Importer
                     $postcode,
                     $locality,
                     $country,
-                    $phone
+                    $phone,
                 );
             }
 
@@ -235,7 +235,7 @@ class Importer
 
                 $this->updateOrganization(
                     $pattern,
-                    $lastReviewId
+                    $lastReviewId,
                 );
             }
         }

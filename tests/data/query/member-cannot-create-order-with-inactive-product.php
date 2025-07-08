@@ -26,7 +26,7 @@ return [
     [
         'errors' => [
             [
-                'message' => 'Entity not found for class `Application\\Model\\Product` and ID `3010`.',
+                'message' => 'Entity not found for class `Application\Model\Product` and ID `3010`.',
                 'extensions' => [
                     'objectNotFound' => true,
                 ],

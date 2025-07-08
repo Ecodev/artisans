@@ -30,9 +30,7 @@ class Organization extends AbstractModel
     #[ORM\Column(type: 'text')]
     private string $pattern;
 
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     public function setPattern(string $pattern): self
     {

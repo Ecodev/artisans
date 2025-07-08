@@ -26,9 +26,13 @@ use Throwable;
 
 class DatatransHandler extends AbstractHandler
 {
-    public function __construct(private readonly EntityManager $entityManager, private readonly TemplateRendererInterface $template, private readonly array $config, private readonly Mailer $mailer, private readonly MessageQueuer $messageQueuer)
-    {
-    }
+    public function __construct(
+        private readonly EntityManager $entityManager,
+        private readonly TemplateRendererInterface $template,
+        private readonly array $config,
+        private readonly Mailer $mailer,
+        private readonly MessageQueuer $messageQueuer,
+    ) {}
 
     /**
      * Webhook called by datatrans when a payment was made.

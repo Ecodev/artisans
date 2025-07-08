@@ -9,6 +9,4 @@ use Application\Model\ProductTag;
 /**
  * @extends AbstractRepository<ProductTag>
  */
-class ProductTagRepository extends AbstractRepository
-{
-}
+class ProductTagRepository extends AbstractRepository {}

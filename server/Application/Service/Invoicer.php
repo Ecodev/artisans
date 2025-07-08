@@ -23,8 +23,9 @@ class Invoicer
 {
     private readonly UserRepository $userRepository;
 
-    public function __construct(private readonly EntityManager $entityManager)
-    {
+    public function __construct(
+        private readonly EntityManager $entityManager,
+    ) {
         $this->userRepository = $this->entityManager->getRepository(User::class);
     }
 

@@ -9,6 +9,4 @@ use Application\Model\Subscription;
 /**
  * @extends AbstractRepository<Subscription>
  */
-class SubscriptionRepository extends AbstractRepository
-{
-}
+class SubscriptionRepository extends AbstractRepository {}

@@ -9,6 +9,4 @@ use Application\Model\Session;
 /**
  * @extends AbstractRepository<Session>
  */
-class SessionRepository extends AbstractRepository
-{
-}
+class SessionRepository extends AbstractRepository {}

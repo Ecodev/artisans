@@ -36,110 +36,7 @@ class InvoicerTest extends TestCase
         self::assertSame($expectedOrderLines, $actualOrderLines);
     }
 
-    /**
-     * @dataProvider providerUpdateOrderLineAndTransactionLine
-     */
-    public function testUpdateOrderLineAndTransactionLine(string $originalOrder, ?array $newProduct, array $expectedOrderLines): void
-    {
-        $input = $this->providerCreateOrder()[$originalOrder][0];
-        $input['orderLines'] = $this->hydrateTestData($input['orderLines']);
-
-        global $container;
-        /** @var Invoicer $invoicer */
-        $invoicer = $container->get(Invoicer::class);
-        $order = $invoicer->createOrder($input);
-
-        if ($newProduct) {
-            $product = $this->hydrateProduct($newProduct);
-        } else {
-            $product = $input['orderLines'][0]['product'];
-        }
-
-        $line = [
-            'quantity' => 100,
-            'isCHF' => true,
-            'type' => ProductType::Digital,
-            'product' => $product,
-            'additionalEmails' => [],
-        ];
-
-        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $line);
-
-        $actualOrderLines = $this->extractOrderLines($order);
-        self::assertSame($expectedOrderLines, $actualOrderLines);
-    }
-
-    public function providerUpdateOrderLineAndTransactionLine(): iterable
-    {
-        yield 'more quantity of same product' => [
-            'normal',
-            null,
-            [
-                [
-                    'My product 1',
-                    100,
-                    '27500',
-                    '0',
-                    true,
-                    ProductType::Digital,
-                ],
-                [
-                    'My product 2',
-                    1,
-                    '20000',
-                    '0',
-                    true,
-                    ProductType::Digital,
-                ],
-            ],
-        ];
-        yield 'more quantity of different, negative product' => [
-            'normal',
-            [
-                'name' => 'My negative product',
-                'pricePerUnitCHF' => Money::CHF(-10000),
-                'pricePerUnitEUR' => Money::EUR(-15000),
-            ],
-            [
-                [
-                    'My negative product',
-                    100,
-                    '-1000000',
-                    '0',
-                    true,
-                    ProductType::Digital,
-                ],
-                [
-                    'My product 2',
-                    1,
-                    '20000',
-                    '0',
-                    true,
-                    ProductType::Digital,
-                ],
-            ],
-        ];
-        yield 'from negative goes back to positive' => [
-            'negative balance should swap accounts',
-            [
-                'name' => 'My positive product',
-                'pricePerUnitCHF' => Money::CHF(10000),
-                'pricePerUnitEUR' => Money::EUR(15000),
-            ],
-            [
-                [
-                    'My positive product',
-                    100,
-                    '1000000',
-                    '0',
-                    true,
-                    ProductType::Digital,
-                ],
-            ],
-        ];
-    }
-
-    public function providerCreateOrder(): array
+    public static function providerCreateOrder(): iterable
     {
         return [
             'free product should create order, even with transactions for zero dollars' => [
@@ -343,6 +240,109 @@ class InvoicerTest extends TestCase
                         true,
                         ProductType::Digital,
                     ],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider providerUpdateOrderLineAndTransactionLine
+     */
+    public function testUpdateOrderLineAndTransactionLine(string $originalOrder, ?array $newProduct, array $expectedOrderLines): void
+    {
+        $input = $this->providerCreateOrder()[$originalOrder][0];
+        $input['orderLines'] = $this->hydrateTestData($input['orderLines']);
+
+        global $container;
+        /** @var Invoicer $invoicer */
+        $invoicer = $container->get(Invoicer::class);
+        $order = $invoicer->createOrder($input);
+
+        if ($newProduct) {
+            $product = $this->hydrateProduct($newProduct);
+        } else {
+            $product = $input['orderLines'][0]['product'];
+        }
+
+        $line = [
+            'quantity' => 100,
+            'isCHF' => true,
+            'type' => ProductType::Digital,
+            'product' => $product,
+            'additionalEmails' => [],
+        ];
+
+        $invoicer->updateOrderLineAndTransactionLine($order->getOrderLines()->first(), $line);
+
+        $actualOrderLines = $this->extractOrderLines($order);
+        self::assertSame($expectedOrderLines, $actualOrderLines);
+    }
+
+    public static function providerUpdateOrderLineAndTransactionLine(): iterable
+    {
+        yield 'more quantity of same product' => [
+            'normal',
+            null,
+            [
+                [
+                    'My product 1',
+                    100,
+                    '27500',
+                    '0',
+                    true,
+                    ProductType::Digital,
+                ],
+                [
+                    'My product 2',
+                    1,
+                    '20000',
+                    '0',
+                    true,
+                    ProductType::Digital,
+                ],
+            ],
+        ];
+        yield 'more quantity of different, negative product' => [
+            'normal',
+            [
+                'name' => 'My negative product',
+                'pricePerUnitCHF' => Money::CHF(-10000),
+                'pricePerUnitEUR' => Money::EUR(-15000),
+            ],
+            [
+                [
+                    'My negative product',
+                    100,
+                    '-1000000',
+                    '0',
+                    true,
+                    ProductType::Digital,
+                ],
+                [
+                    'My product 2',
+                    1,
+                    '20000',
+                    '0',
+                    true,
+                    ProductType::Digital,
+                ],
+            ],
+        ];
+        yield 'from negative goes back to positive' => [
+            'negative balance should swap accounts',
+            [
+                'name' => 'My positive product',
+                'pricePerUnitCHF' => Money::CHF(10000),
+                'pricePerUnitEUR' => Money::EUR(15000),
+            ],
+            [
+                [
+                    'My positive product',
+                    100,
+                    '1000000',
+                    '0',
+                    true,
+                    ProductType::Digital,
                 ],
             ],
         ];

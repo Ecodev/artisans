@@ -42,7 +42,7 @@ class OrganizationRepositoryTest extends AbstractRepositoryTest
         }
     }
 
-    public function providerApplyOrganizationAccesses(): iterable
+    public static function providerApplyOrganizationAccesses(): iterable
     {
         yield 'no matching org, no subscription' => [
             [

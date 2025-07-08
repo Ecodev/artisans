@@ -36,7 +36,7 @@ class UserTest extends TestCase
         self::assertSame($newRole, $user2->getRole());
     }
 
-    public function providerSetRole(): iterable
+    public static function providerSetRole(): iterable
     {
         yield [User::ROLE_ANONYMOUS, User::ROLE_ADMINISTRATOR, User::ROLE_MEMBER, 'anonymous is not allowed to change role from administrator to member'];
         yield [User::ROLE_ANONYMOUS, User::ROLE_MEMBER, User::ROLE_ADMINISTRATOR, 'anonymous is not allowed to change role from member to administrator'];
@@ -67,7 +67,7 @@ class UserTest extends TestCase
         self::assertSame($newOwner, $subject->getOwner());
     }
 
-    public function providerSetOwner(): iterable
+    public static function providerSetOwner(): iterable
     {
         $u1 = new User();
         $u1->setFirstName('u1');

@@ -9,6 +9,4 @@ use Application\Model\Event;
 /**
  * @extends AbstractRepository<Event>
  */
-class EventRepository extends AbstractRepository
-{
-}
+class EventRepository extends AbstractRepository {}

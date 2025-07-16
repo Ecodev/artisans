@@ -3,7 +3,7 @@ import {ComponentPortal} from '@angular/cdk/portal';
 import {DOCUMENT} from '@angular/common';
 import {ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from '@angular/router';
-import {cloneDeep} from 'lodash-es';
+import {cloneDeep} from 'es-toolkit';
 import {merge, Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {APP_MENU_DATA, MenuComponent, MenuDropdownData} from '../components/menu/menu.component';

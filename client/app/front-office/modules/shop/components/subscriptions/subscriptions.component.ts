@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
-import {keyBy} from 'lodash-es';
+import {keyBy} from 'es-toolkit';
 import {ProductType, Subscriptions} from '../../../../../shared/generated-types';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
@@ -30,7 +30,7 @@ export class SubscriptionsComponent implements OnInit {
     public ngOnInit(): void {
         this.subscriptionService
             .getAll(new NaturalQueryVariablesManager())
-            .subscribe(res => (this.subscriptions = keyBy(res.items, 'id')));
+            .subscribe(res => (this.subscriptions = keyBy(res.items, i => i.id)));
     }
 
     public order(id: string, type: ProductType, withEmails?: boolean): void {

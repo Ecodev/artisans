@@ -10,7 +10,7 @@ import {
     NaturalSearchSelections,
     toNavigationParameters,
 } from '@ecodev/natural';
-import {differenceBy} from 'lodash-es';
+import {differenceBy} from 'es-toolkit';
 import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile, UserRole} from '../shared/generated-types';
@@ -265,7 +265,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
         this.userService.getViewerObservable().subscribe(viewer => (this.viewer = viewer));
 
         // Setup mobile menu with items from top menu that are missing on main menu
-        this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, 'link')];
+        this.mobileNavigation = [...this.navigation, ...differenceBy(this.topNavigation, this.navigation, n => n.link)];
 
         // Further navigations
         this.router.events

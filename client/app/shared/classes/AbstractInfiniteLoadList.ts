@@ -10,7 +10,8 @@ import {
     PaginationInput,
     QueryVariables,
 } from '@ecodev/natural';
-import {defaults, isEqual, pick} from 'lodash-es';
+import {defaults, pick} from 'es-toolkit/compat';
+import {isEqual} from 'es-toolkit';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Directive({standalone: true})

@@ -32,7 +32,6 @@ export class SessionFacilitatorPrivateComponent implements OnInit {
 
         this.userService.getAll(qvm).subscribe(result => (this.facilitators = result.items));
         this.facilitatorDocumentService.getAll(new NaturalQueryVariablesManager()).subscribe(documents => {
-            console.log(documents);
             this.categories = groupBy(sortBy(documents.items, [d => d.category]), d => d.category);
         });
     }

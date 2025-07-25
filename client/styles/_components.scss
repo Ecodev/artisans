@@ -13,7 +13,6 @@
 @use '../app/shared/components/breadcrumbs/breadcrumbs.theme';
 @use '../app/shared/components/tags-navigation/tags-navigation.theme';
 @use '../app/admin/admin/admin.theme';
-@use '../app/admin/products/product/product.theme';
 @use '../app/admin/order/order-line/order-line.theme';
 @use '../app/profile/components/profile/profile.theme';
 @use '../app/profile/components/purchases/purchases.theme';
@@ -57,7 +56,6 @@
     @include natural-editor.natural-editor($theme);
     @include artisans.artisans($theme);
     @include page-header($theme);
-    @include product.product($theme);
     @include rich-text.rich-text($theme);
     @include profile.profile($theme);
     @include homepage.homepage($theme);

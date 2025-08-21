@@ -19,7 +19,7 @@ class OrderInputType extends InputObjectType
                     'type' => self::nonNull(_types()->get('PaymentMethod')),
                 ],
                 'orderLines' => [
-                    'type' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get('OrderLineInput')))),
+                    'type' => Type::nonNull(Type::listOf(Type::nonNull(_types()->get(OrderLineInputType::class)))),
                 ],
 
                 // Billing address

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
+use Application\Api\Input\OrderLineInputType;
 use Application\Model\OrderLine;
 use Application\Service\Invoicer;
 use Ecodev\Felix\Api\Field\FieldInterface;
@@ -21,7 +22,7 @@ abstract class UpdateOrderLine implements FieldInterface
             'description' => 'Update an existing orderLine.',
             'args' => [
                 'id' => Type::nonNull(_types()->getId(OrderLine::class)),
-                'input' => Type::nonNull(_types()->get('OrderLineInput')),
+                'input' => Type::nonNull(_types()->get(OrderLineInputType::class)),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): OrderLine {
                 global $container;

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
+use Application\Api\Output\ImportResultType;
 use Application\Model\Organization;
 use Application\Service\Importer;
 use Ecodev\Felix\Api\Field\FieldInterface;
@@ -18,7 +19,7 @@ abstract class Import implements FieldInterface
     public static function build(): iterable
     {
         yield 'import' => fn () => [
-            'type' => Type::nonNull(_types()->get('ImportResult')),
+            'type' => Type::nonNull(_types()->get(ImportResultType::class)),
             'description' => 'Import a CSV file containing users',
             'args' => [
                 'file' => Type::nonNull(_types()->get(UploadType::class)),

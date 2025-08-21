@@ -7,6 +7,7 @@ namespace Application\Api\Input;
 use Application\Model\Product;
 use Application\Model\Subscription;
 use Ecodev\Felix\Api\Scalar\CHFType;
+use Ecodev\Felix\Api\Scalar\EmailType;
 use GraphQL\Type\Definition\InputObjectType;
 
 class OrderLineInputType extends InputObjectType
@@ -32,7 +33,7 @@ class OrderLineInputType extends InputObjectType
                     'type' => _types()->getId(Subscription::class),
                 ],
                 'additionalEmails' => [
-                    'type' => self::listOf(self::nonNull(_types()->get('Email'))),
+                    'type' => self::listOf(self::nonNull(_types()->get(EmailType::class))),
                     'defaultValue' => [],
                 ],
                 'pricePerUnit' => [

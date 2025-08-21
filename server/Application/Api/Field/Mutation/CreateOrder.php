@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Field\Mutation;
 
 use Application\Api\Helper;
+use Application\Api\Input\OrderInputType;
 use Application\Enum\PaymentMethod;
 use Application\Model\Order;
 use Application\Service\Invoicer;
@@ -23,7 +24,7 @@ abstract class CreateOrder implements FieldInterface
             'type' => _types()->getOutput(Order::class),
             'description' => 'Make an order to the shop.',
             'args' => [
-                'input' => Type::nonNull(_types()->get('OrderInput')),
+                'input' => Type::nonNull(_types()->get(OrderInputType::class)),
             ],
             'resolve' => function ($root, array $args, SessionInterface $session): ?Order {
                 global $container;

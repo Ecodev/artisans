@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Application\Api\Input;
 
 use Application\Model\Country;
+use Ecodev\Felix\Api\Scalar\PasswordType;
 use GraphQL\Type\Definition\InputObjectType;
 
 class ConfirmRegistrationInputType extends InputObjectType
@@ -15,7 +16,7 @@ class ConfirmRegistrationInputType extends InputObjectType
             'description' => 'Mandatory fields to complete a user registration',
             'fields' => fn (): array => [
                 'password' => [
-                    'type' => self::nonNull(_types()->get('Password')),
+                    'type' => self::nonNull(_types()->get(PasswordType::class)),
                 ],
                 'firstName' => [
                     'type' => self::nonNull(self::string()),

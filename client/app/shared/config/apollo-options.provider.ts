@@ -11,6 +11,7 @@ import {createHttpLink, NaturalAlertService, NetworkActivityService} from '@ecod
 import {APOLLO_OPTIONS} from 'apollo-angular';
 import {inject, PLATFORM_ID, Provider} from '@angular/core';
 import {localConfig} from '../generated-config';
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const apolloDefaultOptions: DefaultOptions = {
     query: {
@@ -30,9 +31,23 @@ function createErrorLink(
 ): ApolloLink {
     return onError(errorResponse => {
         // Network errors are not caught by uploadInterceptor, so we need to decrease pending queries
-        if (errorResponse.networkError) {
-            alertService.error('Une erreur est survenue sur le réseau');
+        const networkError = errorResponse.networkError;
+        if (networkError) {
             networkActivityService.decrease();
+
+            // Show the error message if is:
+            // - an 413 error from `graphql-upload` about `post_max_size`
+            // - a 500 error about max_execution_time
+            if (
+                networkError instanceof HttpErrorResponse &&
+                [413, 500].includes(networkError.status) &&
+                typeof networkError.error?.message === 'string'
+            ) {
+                alertService.error(networkError.error.message, 5000);
+                networkActivityService.addErrors([networkError.error]);
+            } else {
+                alertService.error(`Une erreur est survenue sur le réseau`);
+            }
         }
 
         // Show Graphql responses with errors to end-users (but do not decrease pending queries because it is done by uploadInterceptor)

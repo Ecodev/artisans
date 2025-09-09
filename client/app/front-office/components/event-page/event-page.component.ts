@@ -9,8 +9,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-event-page',
-    templateUrl: './event-page.component.html',
-    styleUrl: './event-page.component.scss',
     imports: [
         CommonModule,
         MatButtonModule,
@@ -20,6 +18,8 @@ import {CommonModule} from '@angular/common';
         CommentListComponent,
         NaturalCapitalizePipe,
     ],
+    templateUrl: './event-page.component.html',
+    styleUrl: './event-page.component.scss',
 })
 export class EventPageComponent extends NaturalAbstractDetail<EventService> implements OnInit {
     public constructor() {

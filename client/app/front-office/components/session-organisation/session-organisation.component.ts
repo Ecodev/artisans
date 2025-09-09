@@ -3,8 +3,8 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
 
 @Component({
     selector: 'app-session-organisation',
+    imports: [SessionSideColumnComponent],
     templateUrl: './session-organisation.component.html',
     styleUrl: './session-organisation.component.scss',
-    imports: [SessionSideColumnComponent],
 })
 export class SessionOrganisationComponent {}

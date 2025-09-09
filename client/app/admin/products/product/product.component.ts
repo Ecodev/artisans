@@ -38,8 +38,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-product',
-    templateUrl: './product.component.html',
-    styleUrl: './product.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -67,6 +65,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         OrderLinesComponent,
         NaturalFixedButtonDetailComponent,
     ],
+    templateUrl: './product.component.html',
+    styleUrl: './product.component.scss',
 })
 export class ProductComponent extends NaturalAbstractDetail<ProductService, NaturalSeoResolveData> {
     public readonly productTagService = inject(ProductTagService);

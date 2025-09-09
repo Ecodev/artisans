@@ -4,8 +4,8 @@ import {NaturalSrcDensityDirective} from '@ecodev/natural';
 
 @Component({
     selector: 'app-circuits-courts',
+    imports: [RouterLink, NaturalSrcDensityDirective],
     templateUrl: './circuits-courts.component.html',
     styleUrl: './circuits-courts.component.scss',
-    imports: [RouterLink, NaturalSrcDensityDirective],
 })
 export class CircuitsCourtsComponent {}

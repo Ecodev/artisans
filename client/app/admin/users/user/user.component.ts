@@ -30,8 +30,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-user',
-    templateUrl: './user.component.html',
-    styleUrl: './user.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -56,6 +54,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         DatePipe,
         NaturalTimeAgoPipe,
     ],
+    templateUrl: './user.component.html',
+    styleUrl: './user.component.scss',
 })
 export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeoResolveData> implements OnInit {
     public readonly sessionService = inject(SessionService);

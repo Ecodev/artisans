@@ -43,7 +43,7 @@
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Télécharger</th>
                         <td *matCellDef="let element" mat-cell>
                             @if (element.file) {
-                                <a target="_blank" [href]="'/api/file/' + element.file.id">
+                                <a target="_blank" [href]="`/api/file/${element.file.id}`">
                                     <mat-icon naturalIcon="download" />
                                 </a>
                             }

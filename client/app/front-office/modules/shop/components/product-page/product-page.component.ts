@@ -27,8 +27,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-product-page',
-    templateUrl: './product-page.component.html',
-    styleUrl: './product-page.component.scss',
     imports: [
         CommonModule,
         MatButtonModule,
@@ -43,6 +41,8 @@ import {CommonModule} from '@angular/common';
         ProductsPageComponent,
         NaturalCapitalizePipe,
     ],
+    templateUrl: './product-page.component.html',
+    styleUrl: './product-page.component.scss',
 })
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     private readonly purchaseService = inject(PurchaseService);

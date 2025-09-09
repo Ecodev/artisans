@@ -12,9 +12,9 @@ import {PriceComponent} from '../../../../../shared/components/price/price.compo
 
 @Component({
     selector: 'app-subscriptions',
+    imports: [PriceComponent, MatButtonModule],
     templateUrl: './subscriptions.component.html',
     styleUrl: './subscriptions.component.scss',
-    imports: [PriceComponent, MatButtonModule],
 })
 export class SubscriptionsComponent implements OnInit {
     private readonly subscriptionService = inject(SubscriptionService);

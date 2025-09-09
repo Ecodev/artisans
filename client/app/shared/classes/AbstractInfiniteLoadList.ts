@@ -34,6 +34,7 @@ export class AbstractInfiniteLoadList<
 {
     public items: ExtractTall<TService>['items'][0][] | null = null;
 
+    // eslint-disable-next-line @angular-eslint/prefer-inject
     public constructor(service: TService) {
         super(service);
         this.persistSearch = false;

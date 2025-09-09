@@ -17,8 +17,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
     selector: 'app-confirm',
-    templateUrl: './register.component.html',
-    styleUrl: './register.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -32,6 +30,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         AddressComponent,
         MatButtonModule,
     ],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.scss',
 })
 export class RegisterConfirmComponent extends RegisterComponent implements OnInit {
     private readonly userService = inject(UserService);

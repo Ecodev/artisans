@@ -20,7 +20,6 @@ import {AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-import',
-    templateUrl: './import.component.html',
     imports: [
         MatButtonModule,
         NaturalFileDropDirective,
@@ -30,6 +29,7 @@ import {AsyncPipe} from '@angular/common';
         RouterLink,
         AsyncPipe,
     ],
+    templateUrl: './import.component.html',
 })
 export class ImportComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);

@@ -10,8 +10,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-news-page',
-    templateUrl: './news-page.component.html',
-    styleUrl: './news-page.component.scss',
     imports: [
         CommonModule,
         MatButtonModule,
@@ -21,6 +19,8 @@ import {CommonModule} from '@angular/common';
         CommentListComponent,
         NaturalCapitalizePipe,
     ],
+    templateUrl: './news-page.component.html',
+    styleUrl: './news-page.component.scss',
 })
 export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

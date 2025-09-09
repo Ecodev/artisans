@@ -24,8 +24,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-products',
-    templateUrl: './products.component.html',
-    styleUrl: './products.component.scss',
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,
@@ -43,6 +41,8 @@ import {CommonModule} from '@angular/common';
         RouterLink,
         NaturalEnumPipe,
     ],
+    templateUrl: './products.component.html',
+    styleUrl: './products.component.scss',
 })
 export class ProductsComponent extends NaturalAbstractList<ProductService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

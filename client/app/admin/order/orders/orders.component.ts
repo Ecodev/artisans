@@ -22,8 +22,6 @@ import {MatTableModule} from '@angular/material/table';
 
 @Component({
     selector: 'app-orders',
-    templateUrl: './orders.component.html',
-    styleUrl: './orders.component.scss',
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,
@@ -39,6 +37,8 @@ import {MatTableModule} from '@angular/material/table';
         NaturalEnumPipe,
         DatePipe,
     ],
+    templateUrl: './orders.component.html',
+    styleUrl: './orders.component.scss',
 })
 export class OrdersComponent extends NaturalAbstractList<OrderService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

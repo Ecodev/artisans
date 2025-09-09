@@ -5,9 +5,9 @@ import {RouterLink} from '@angular/router';
 
 @Component({
     selector: 'app-faire-un-don',
+    imports: [RouterLink, MatButtonModule],
     templateUrl: './faire-un-don.component.html',
     styleUrl: './faire-un-don.component.scss',
-    imports: [RouterLink, MatButtonModule],
 })
 export class FaireUnDonComponent {
     public readonly cartService = inject(CartService);

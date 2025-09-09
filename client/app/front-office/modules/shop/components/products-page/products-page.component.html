@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 <div class="container nat-gap-30 nat-vertical">
     @if (title) {
         <div class="mat-headline-4">{{ title }}</div>
@@ -34,7 +35,7 @@
                                     product.id,
                                 ]"
                                 [naturalBackgroundDensity]="
-                                    '/api/image/' + product.illustration.id + '/' + ($first ? '550' : '260')
+                                    `/api/image/${product.illustration.id}/${$first ? '550' : '260'}`
                                 "
                             ></a>
                         }
@@ -53,7 +54,7 @@
                                     color="accent"
                                     class="product-file-button"
                                     target="_blank"
-                                    [href]="'/api/file/' + product.file.id"
+                                    [href]="`/api/file/${product.file.id}`"
                                 >
                                     Télécharger
                                 </a>
@@ -75,7 +76,7 @@
                                 <a class="product-image" [routerLink]="getDetailLink(product)">
                                     <img
                                         alt="aperçu du produit"
-                                        [naturalSrcDensity]="'/api/image/' + product.image.id + '/200'"
+                                        [naturalSrcDensity]="`/api/image/${product.image.id}/200`"
                                     />
                                 </a>
                             }
@@ -113,7 +114,7 @@
                                         color="accent"
                                         class="product-file-button"
                                         target="_blank"
-                                        [href]="'/api/file/' + product.file.id"
+                                        [href]="`/api/file/${product.file.id}`"
                                     >
                                         Télécharger
                                     </a>

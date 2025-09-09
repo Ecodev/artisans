@@ -25,18 +25,6 @@ export enum ProductsViewMode {
 
 @Component({
     selector: 'app-products-page',
-    templateUrl: './products-page.component.html',
-    styleUrl: './products-page.component.scss',
-    providers: [
-        // Provide a NaturalPersistenceService instance only for this component,
-        // but with a memoryStorage to avoid storing pagination in session and
-        // keep it only in URL instead
-        {
-            provide: NaturalPersistenceService,
-            useClass: NaturalPersistenceService,
-        },
-        memorySessionStorageProvider,
-    ],
     imports: [
         CommonModule,
         TagsNavigationComponent,
@@ -48,6 +36,18 @@ export enum ProductsViewMode {
         TruncatePipe,
         StripTagsPipe,
         NaturalBackgroundDensityDirective,
+    ],
+    templateUrl: './products-page.component.html',
+    styleUrl: './products-page.component.scss',
+    providers: [
+        // Provide a NaturalPersistenceService instance only for this component,
+        // but with a memoryStorage to avoid storing pagination in session and
+        // keep it only in URL instead
+        {
+            provide: NaturalPersistenceService,
+            useClass: NaturalPersistenceService,
+        },
+        memorySessionStorageProvider,
     ],
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductService> implements OnInit {

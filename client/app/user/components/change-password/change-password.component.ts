@@ -11,8 +11,6 @@ import {PasswordComponent} from '../password/password.component';
 
 @Component({
     selector: 'app-change-password',
-    templateUrl: './change-password.component.html',
-    styleUrl: './change-password.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -21,6 +19,8 @@ import {PasswordComponent} from '../password/password.component';
         MatIconModule,
         NaturalIconDirective,
     ],
+    templateUrl: './change-password.component.html',
+    styleUrl: './change-password.component.scss',
 })
 export class ChangePasswordComponent {
     private readonly apollo = inject(Apollo);

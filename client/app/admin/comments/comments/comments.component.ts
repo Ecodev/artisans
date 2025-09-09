@@ -16,8 +16,6 @@ import {MatTableModule} from '@angular/material/table';
 
 @Component({
     selector: 'app-comments',
-    templateUrl: './comments.component.html',
-    styleUrl: './comments.component.scss',
     imports: [
         NaturalColumnsPickerComponent,
         NaturalSearchComponent,
@@ -28,6 +26,8 @@ import {MatTableModule} from '@angular/material/table';
         MatProgressSpinnerModule,
         MatPaginatorModule,
     ],
+    templateUrl: './comments.component.html',
+    styleUrl: './comments.component.scss',
 })
 export class CommentsComponent extends NaturalAbstractList<CommentService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

@@ -7,9 +7,9 @@ import {MatButtonModule} from '@angular/material/button';
 
 @Component({
     selector: 'app-add-to-cart',
+    imports: [MatButtonModule, RouterLink],
     templateUrl: './add-to-cart.component.html',
     styleUrl: './add-to-cart.component.scss',
-    imports: [MatButtonModule, RouterLink],
 })
 export class AddToCartComponent {
     private readonly cartService = inject(CartService);

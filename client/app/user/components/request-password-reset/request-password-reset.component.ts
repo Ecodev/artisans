@@ -10,8 +10,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 
 @Component({
     selector: 'app-request-password-reset',
-    templateUrl: './request-password-reset.component.html',
-    styleUrl: './request-password-reset.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -21,6 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
         NaturalIconDirective,
         MatButtonModule,
     ],
+    templateUrl: './request-password-reset.component.html',
+    styleUrl: './request-password-reset.component.scss',
 })
 export class RequestPasswordResetComponent {
     private readonly alertService = inject(NaturalAlertService);

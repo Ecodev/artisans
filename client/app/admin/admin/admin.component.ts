@@ -15,8 +15,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 @Component({
     selector: 'app-admin',
-    templateUrl: './admin.component.html',
-    styleUrl: './admin.component.scss',
     imports: [
         MatToolbarModule,
         MatButtonModule,
@@ -31,6 +29,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
         NaturalSidenavContentComponent,
         RouterOutlet,
     ],
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.scss',
 })
 export class AdminComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);

@@ -67,7 +67,7 @@
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Tél.</th>
                         <td *matCellDef="let element" mat-cell>
                             @if (element.phone) {
-                                <a class="app-link" [href]="'tel:' + element.phone">{{ element.phone }}</a>
+                                <a class="app-link" [href]="`tel:${element.phone}`">{{ element.phone }}</a>
                             }
                         </td>
                     </ng-container>
@@ -76,7 +76,7 @@
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>e-mail</th>
                         <td *matCellDef="let element" mat-cell>
                             @if (element.email) {
-                                <a class="app-link" [href]="'mailto:' + element.email">{{ element.email }}</a>
+                                <a class="app-link" [href]="`mailto:${element.email}`">{{ element.email }}</a>
                             }
                         </td>
                     </ng-container>

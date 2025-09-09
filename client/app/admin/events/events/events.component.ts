@@ -19,8 +19,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-events',
-    templateUrl: './events.component.html',
-    styleUrl: './events.component.scss',
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,
@@ -34,6 +32,8 @@ import {CommonModule} from '@angular/common';
         NaturalFixedButtonComponent,
         RouterLink,
     ],
+    templateUrl: './events.component.html',
+    styleUrl: './events.component.scss',
 })
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

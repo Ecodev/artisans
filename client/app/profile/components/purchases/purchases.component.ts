@@ -20,8 +20,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-purchases',
-    templateUrl: './purchases.component.html',
-    styleUrl: './purchases.component.scss',
     imports: [
         CommonModule,
         NaturalSearchComponent,
@@ -36,6 +34,8 @@ import {CommonModule} from '@angular/common';
         NaturalCapitalizePipe,
         NaturalEnumPipe,
     ],
+    templateUrl: './purchases.component.html',
+    styleUrl: './purchases.component.scss',
 })
 export class PurchasesComponent extends NaturalAbstractList<PurchaseService> implements OnInit {
     private readonly naturalFileService = inject(NaturalFileService);

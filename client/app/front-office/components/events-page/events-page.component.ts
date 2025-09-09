@@ -9,9 +9,9 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-events-page',
+    imports: [RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
     templateUrl: './events-page.component.html',
     styleUrl: './events-page.component.scss',
-    imports: [RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
 })
 export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

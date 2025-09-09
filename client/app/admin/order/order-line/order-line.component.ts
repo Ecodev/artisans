@@ -17,8 +17,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-order-line',
-    templateUrl: './order-line.component.html',
-    styleUrl: './order-line.component.scss',
     imports: [
         MatDialogModule,
         FormsModule,
@@ -30,6 +28,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalSelectEnumComponent,
         MatButtonModule,
     ],
+    templateUrl: './order-line.component.html',
+    styleUrl: './order-line.component.scss',
 })
 export class OrderLineComponent
     extends NaturalAbstractDetail<OrderLineService, NaturalSeoResolveData>

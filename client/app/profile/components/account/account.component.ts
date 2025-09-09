@@ -11,8 +11,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-account',
-    templateUrl: './account.component.html',
-    styleUrl: './account.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -24,6 +22,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatIconModule,
         NaturalIconDirective,
     ],
+    templateUrl: './account.component.html',
+    styleUrl: './account.component.scss',
 })
 export class AccountComponent extends NaturalAbstractDetail<UserService> implements OnInit {
     /**

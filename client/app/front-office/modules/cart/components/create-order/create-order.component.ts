@@ -21,8 +21,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-create-order',
-    templateUrl: './create-order.component.html',
-    styleUrl: './create-order.component.scss',
     imports: [
         CommonModule,
         FormsModule,
@@ -35,6 +33,8 @@ import {CommonModule} from '@angular/common';
         RouterOutlet,
         NaturalEnumPipe,
     ],
+    templateUrl: './create-order.component.html',
+    styleUrl: './create-order.component.scss',
 })
 export class CreateOrderComponent implements OnInit {
     public readonly cartService = inject(CartService);

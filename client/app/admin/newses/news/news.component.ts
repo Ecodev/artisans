@@ -25,8 +25,6 @@ import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
     selector: 'app-news',
-    templateUrl: './news.component.html',
-    styleUrl: './news.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -47,6 +45,8 @@ import {MatDividerModule} from '@angular/material/divider';
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,
     ],
+    templateUrl: './news.component.html',
+    styleUrl: './news.component.scss',
 })
 export class NewsComponent extends NaturalAbstractDetail<NewsService, NaturalSeoResolveData> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

@@ -4,8 +4,8 @@ import {MatButtonModule} from '@angular/material/button';
 
 @Component({
     selector: 'app-bns',
+    imports: [MatButtonModule, RouterLink],
     templateUrl: './bns.component.html',
     styleUrl: './bns.component.scss',
-    imports: [MatButtonModule, RouterLink],
 })
 export class BnsComponent {}

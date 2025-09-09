@@ -111,7 +111,7 @@
                     <img
                         alt="illustration du dernier numéro paru"
                         class="mat-elevation-z5 last-product-thumbnail"
-                        [naturalSrcDensity]="'/api/image/' + currentReview.image.id + '/470'"
+                        [naturalSrcDensity]="`/api/image/${currentReview.image.id}/470`"
                     />
                 </a>
             }
@@ -137,7 +137,7 @@
                 <!-- If has access -->
                 @if (currentReview.file) {
                     <div>
-                        <a mat-flat-button color="accent" target="_blank" [href]="'/api/file/' + currentReview.file.id">
+                        <a mat-flat-button color="accent" target="_blank" [href]="`/api/file/${currentReview.file.id}`">
                             Télécharger le numéro
                         </a>
                     </div>

@@ -18,8 +18,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-order',
-    templateUrl: './order.component.html',
-    styleUrl: './order.component.scss',
     imports: [
         MatDialogModule,
         CommonModule,
@@ -29,6 +27,8 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
         MatButtonModule,
         DatePipe,
     ],
+    templateUrl: './order.component.html',
+    styleUrl: './order.component.scss',
 })
 export class OrderComponent {
     public readonly dialogData = inject<NaturalDialogTriggerProvidedData<never>>(MAT_DIALOG_DATA);

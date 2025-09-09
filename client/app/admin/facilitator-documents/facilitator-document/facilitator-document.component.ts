@@ -24,8 +24,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-facilitator-document',
-    templateUrl: './facilitator-document.component.html',
-    styleUrl: './facilitator-document.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -43,6 +41,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,
     ],
+    templateUrl: './facilitator-document.component.html',
+    styleUrl: './facilitator-document.component.scss',
 })
 export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
     FacilitatorDocumentsService,

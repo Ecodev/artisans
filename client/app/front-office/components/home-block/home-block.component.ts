@@ -22,8 +22,6 @@ type Block = {
 
 @Component({
     selector: 'app-home-block',
-    templateUrl: './home-block.component.html',
-    styleUrl: './home-block.component.scss',
     imports: [
         MatButtonModule,
         RouterLink,
@@ -37,6 +35,8 @@ type Block = {
         TextFieldModule,
         AsyncPipe,
     ],
+    templateUrl: './home-block.component.html',
+    styleUrl: './home-block.component.scss',
 })
 export class HomeBlockComponent implements OnInit {
     private readonly configService = inject(ConfigurationService);

@@ -14,9 +14,9 @@ export type EmailsData = {
 
 @Component({
     selector: 'app-emails',
+    imports: [MatDialogModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
     templateUrl: './emails.component.html',
     styleUrl: './emails.component.scss',
-    imports: [MatDialogModule, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class EmailsComponent {
     public readonly dialogData = inject<EmailsData>(MAT_DIALOG_DATA);

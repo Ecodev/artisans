@@ -20,8 +20,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-cart',
-    templateUrl: './cart.component.html',
-    styleUrl: './cart.component.scss',
     imports: [
         CommonModule,
         MatButtonModule,
@@ -34,6 +32,8 @@ import {CommonModule} from '@angular/common';
         NaturalEnumPipe,
         NaturalBackgroundDensityDirective,
     ],
+    templateUrl: './cart.component.html',
+    styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
     private readonly alertService = inject(NaturalAlertService);

@@ -8,9 +8,9 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-newses-page',
+    imports: [CommonModule, RouterLink, MatButtonModule, NaturalCapitalizePipe],
     templateUrl: './newses-page.component.html',
     styleUrl: './newses-page.component.scss',
-    imports: [CommonModule, RouterLink, MatButtonModule, NaturalCapitalizePipe],
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
     protected override defaultPagination: Required<PaginationInput> = {

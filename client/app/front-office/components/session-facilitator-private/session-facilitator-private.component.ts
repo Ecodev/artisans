@@ -11,9 +11,9 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-session-facilitator-private',
+    imports: [CommonModule, MatListModule, MatIconModule, NaturalIconDirective, SessionSideColumnComponent],
     templateUrl: './session-facilitator-private.component.html',
     styleUrl: './session-facilitator-private.component.scss',
-    imports: [CommonModule, MatListModule, MatIconModule, NaturalIconDirective, SessionSideColumnComponent],
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
     public readonly userService = inject(UserService);

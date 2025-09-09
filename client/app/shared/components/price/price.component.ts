@@ -7,9 +7,9 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-price',
+    imports: [CommonModule],
     templateUrl: './price.component.html',
     styleUrl: './price.component.scss',
-    imports: [CommonModule],
 })
 export class PriceComponent implements OnInit {
     public readonly currencyService = inject(CurrencyService);

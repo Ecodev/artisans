@@ -29,8 +29,6 @@ import {MatTableModule} from '@angular/material/table';
 
 @Component({
     selector: 'app-users',
-    templateUrl: './users.component.html',
-    styleUrl: './users.component.scss',
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,
@@ -47,6 +45,8 @@ import {MatTableModule} from '@angular/material/table';
         NaturalEnumPipe,
         DatePipe,
     ],
+    templateUrl: './users.component.html',
+    styleUrl: './users.component.scss',
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

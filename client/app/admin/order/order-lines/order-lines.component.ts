@@ -19,8 +19,6 @@ import {MatTableModule} from '@angular/material/table';
 
 @Component({
     selector: 'app-order-lines',
-    templateUrl: './order-lines.component.html',
-    styleUrl: './order-lines.component.scss',
     imports: [
         CommonModule,
         NaturalSearchComponent,
@@ -34,6 +32,8 @@ import {MatTableModule} from '@angular/material/table';
         NaturalEnumPipe,
         DatePipe,
     ],
+    templateUrl: './order-lines.component.html',
+    styleUrl: './order-lines.component.scss',
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

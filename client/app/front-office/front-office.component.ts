@@ -30,8 +30,6 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-front-office',
-    templateUrl: './front-office.component.html',
-    styleUrl: './front-office.component.scss',
     imports: [
         CommonModule,
         MatRippleModule,
@@ -51,6 +49,8 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
         ReactiveFormsModule,
         MatListModule,
     ],
+    templateUrl: './front-office.component.html',
+    styleUrl: './front-office.component.scss',
 })
 export class FrontOfficeComponent implements OnInit, AfterViewInit {
     private readonly route = inject(ActivatedRoute);

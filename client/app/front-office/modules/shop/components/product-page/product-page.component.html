@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 @if (isUpdatePage()) {
     <div class="container body app-gap-60 nat-vertical">
         <section class="nat-vertical nat-gap app-md-gap-60 nat-md-horizontal">
@@ -42,7 +43,7 @@
                     <img
                         class="product-image"
                         alt="aperçu de l'article"
-                        [naturalSrcDensity]="'/api/image/' + data.model.image.id + '/300'"
+                        [naturalSrcDensity]="`/api/image/${data.model.image.id}/300`"
                     />
                 }
             </div>
@@ -77,7 +78,7 @@
                     <a [routerLink]="['/larevuedurable/article', data.model.review.id]">
                         <img
                             alt="couverture de la revue"
-                            [naturalSrcDensity]="'/api/image/' + data.model.review.image.id + '/300'"
+                            [naturalSrcDensity]="`/api/image/${data.model.review.image.id}/300`"
                         />
                     </a>
                     <span class="mat-h4">Article issu de la revue</span>
@@ -115,7 +116,7 @@
                                     Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
                                 </p>
                             }
-                            <a mat-flat-button target="_blank" [href]="'/api/file/' + data.model.file.id">
+                            <a mat-flat-button target="_blank" [href]="`/api/file/${data.model.file.id}`">
                                 <mat-icon naturalIcon="get_app" />
                                 @if (data.model.reviewNumber) {
                                     <span>Télécharger cette revue</span>

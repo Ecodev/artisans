@@ -4,8 +4,8 @@ import {MatButtonModule} from '@angular/material/button';
 
 @Component({
     selector: 'app-offrir-la-revue',
+    imports: [MatButtonModule, RouterLink],
     templateUrl: './offrir-la-revue.component.html',
     styleUrl: './offrir-la-revue.component.scss',
-    imports: [MatButtonModule, RouterLink],
 })
 export class OffrirLaRevueComponent {}

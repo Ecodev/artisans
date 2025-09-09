@@ -12,8 +12,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrl: './profile.component.scss',
     imports: [
         CommonModule,
         MatButtonModule,
@@ -26,6 +24,8 @@ import {CommonModule} from '@angular/common';
         RouterOutlet,
         NaturalEnumPipe,
     ],
+    templateUrl: './profile.component.html',
+    styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
     public readonly userService = inject(UserService);

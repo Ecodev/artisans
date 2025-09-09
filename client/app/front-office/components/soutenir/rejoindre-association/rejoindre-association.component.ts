@@ -5,9 +5,9 @@ import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/a
 
 @Component({
     selector: 'app-rejoindre-association',
+    imports: [AddToCartComponent],
     templateUrl: './rejoindre-association.component.html',
     styleUrl: './rejoindre-association.component.scss',
-    imports: [AddToCartComponent],
 })
 export class RejoindreAssociationComponent implements OnInit {
     public readonly productService = inject(ProductService);

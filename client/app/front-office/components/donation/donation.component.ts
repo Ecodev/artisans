@@ -13,9 +13,9 @@ export type DonationData = {
 
 @Component({
     selector: 'app-donation',
+    imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule],
     templateUrl: './donation.component.html',
     styleUrl: './donation.component.scss',
-    imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule],
 })
 export class DonationComponent {
     public readonly currencyService = inject(CurrencyService);

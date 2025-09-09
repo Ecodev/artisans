@@ -21,8 +21,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-newses',
-    templateUrl: './newses.component.html',
-    styleUrl: './newses.component.scss',
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,
@@ -38,6 +36,8 @@ import {CommonModule} from '@angular/common';
         NaturalFixedButtonComponent,
         RouterLink,
     ],
+    templateUrl: './newses.component.html',
+    styleUrl: './newses.component.scss',
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

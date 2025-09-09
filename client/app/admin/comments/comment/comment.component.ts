@@ -20,8 +20,6 @@ import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
     selector: 'app-comment',
-    templateUrl: './comment.component.html',
-    styleUrl: './comment.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -35,6 +33,8 @@ import {MatDividerModule} from '@angular/material/divider';
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,
     ],
+    templateUrl: './comment.component.html',
+    styleUrl: './comment.component.scss',
 })
 export class CommentComponent extends NaturalAbstractDetail<CommentService, NaturalSeoResolveData> implements OnInit {
     public readonly newsService = inject(NewsService);

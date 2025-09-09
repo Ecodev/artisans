@@ -26,8 +26,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 @Component({
     selector: 'app-session',
-    templateUrl: './session.component.html',
-    styleUrl: './session.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -49,6 +47,8 @@ import {MatTabsModule} from '@angular/material/tabs';
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,
     ],
+    templateUrl: './session.component.html',
+    styleUrl: './session.component.scss',
 })
 export class SessionComponent extends NaturalAbstractDetail<SessionService, NaturalSeoResolveData> implements OnInit {
     public readonly userService = inject(UserService);

@@ -19,8 +19,6 @@ import {AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-facilitator-documents',
-    templateUrl: './facilitator-documents.component.html',
-    styleUrl: './facilitator-documents.component.scss',
     imports: [
         NaturalSearchComponent,
         MatTableModule,
@@ -35,6 +33,8 @@ import {AsyncPipe} from '@angular/common';
         RouterLink,
         AsyncPipe,
     ],
+    templateUrl: './facilitator-documents.component.html',
+    styleUrl: './facilitator-documents.component.scss',
 })
 export class FacilitatorDocumentsComponent extends NaturalAbstractList<FacilitatorDocumentsService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

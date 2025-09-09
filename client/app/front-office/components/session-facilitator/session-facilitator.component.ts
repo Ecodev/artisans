@@ -6,9 +6,9 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
 
 @Component({
     selector: 'app-session-facilitator',
+    imports: [SessionSideColumnComponent],
     templateUrl: './session-facilitator.component.html',
     styleUrl: './session-facilitator.component.scss',
-    imports: [SessionSideColumnComponent],
 })
 export class SessionFacilitatorComponent implements OnInit {
     public readonly userService = inject(UserService);

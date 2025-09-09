@@ -11,9 +11,9 @@ export type Breadcrumb = {
 
 @Component({
     selector: 'app-breadcrumbs',
+    imports: [MatButtonModule, RouterLink],
     templateUrl: './breadcrumbs.component.html',
     styleUrl: './breadcrumbs.component.scss',
-    imports: [MatButtonModule, RouterLink],
 })
 export class BreadcrumbsComponent implements OnInit {
     private readonly router = inject(Router);

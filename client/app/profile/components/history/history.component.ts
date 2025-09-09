@@ -12,8 +12,6 @@ import {CommonModule, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-history',
-    templateUrl: './history.component.html',
-    styleUrl: './history.component.scss',
     imports: [
         CommonModule,
         MatTableModule,
@@ -25,6 +23,8 @@ import {CommonModule, DatePipe} from '@angular/common';
         NaturalEnumPipe,
         DatePipe,
     ],
+    templateUrl: './history.component.html',
+    styleUrl: './history.component.scss',
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

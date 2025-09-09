@@ -22,8 +22,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-sessions',
-    templateUrl: './sessions.component.html',
-    styleUrl: './sessions.component.scss',
     imports: [
         CommonModule,
         NaturalColumnsPickerComponent,
@@ -39,6 +37,8 @@ import {CommonModule} from '@angular/common';
         MatPaginatorModule,
         NaturalFixedButtonComponent,
     ],
+    templateUrl: './sessions.component.html',
+    styleUrl: './sessions.component.scss',
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

@@ -7,9 +7,9 @@ import {MatButtonModule} from '@angular/material/button';
 
 @Component({
     selector: 'app-sessions-incoming',
+    imports: [MatButtonModule, SessionSideColumnComponent],
     templateUrl: './sessions-incoming.component.html',
     styleUrl: './sessions-incoming.component.scss',
-    imports: [MatButtonModule, SessionSideColumnComponent],
 })
 export class SessionsIncomingComponent implements OnInit {
     private readonly sessionService = inject(SessionService);

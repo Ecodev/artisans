@@ -22,8 +22,6 @@ import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
     selector: 'app-event',
-    templateUrl: './event.component.html',
-    styleUrl: './event.component.scss',
     imports: [
         FormsModule,
         ReactiveFormsModule,
@@ -41,6 +39,8 @@ import {MatDividerModule} from '@angular/material/divider';
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,
     ],
+    templateUrl: './event.component.html',
+    styleUrl: './event.component.scss',
 })
 export class EventComponent extends NaturalAbstractDetail<EventService, NaturalSeoResolveData> implements OnInit {
     public readonly permissionsService = inject(PermissionsService);

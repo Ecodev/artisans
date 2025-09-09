@@ -13,11 +13,11 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
 
 @Component({
     selector: 'app-menu',
+    imports: [CommonModule, RouterLinkActive, RouterLink],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
     preserveWhitespaces: false,
-    imports: [CommonModule, RouterLinkActive, RouterLink],
 })
 export class MenuComponent {
     public readonly data = inject(APP_MENU_DATA);

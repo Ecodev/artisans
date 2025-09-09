@@ -13,8 +13,6 @@ import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'app-comment-list',
-    templateUrl: './comment-list.component.html',
-    styleUrl: './comment-list.component.scss',
     imports: [
         CommonModule,
         MatFormFieldModule,
@@ -25,6 +23,8 @@ import {CommonModule} from '@angular/common';
         MatIconModule,
         NaturalIconDirective,
     ],
+    templateUrl: './comment-list.component.html',
+    styleUrl: './comment-list.component.scss',
 })
 export class CommentListComponent extends NaturalAbstractList<CommentService> implements OnInit, OnChanges {
     public readonly permissionsService = inject(PermissionsService);

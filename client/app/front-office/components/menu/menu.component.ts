@@ -17,7 +17,6 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    preserveWhitespaces: false,
 })
 export class MenuComponent {
     public readonly data = inject(APP_MENU_DATA);

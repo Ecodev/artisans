@@ -14,6 +14,7 @@
 !/data/images/train.jpg
 !/data/images/revue61.jpg
 !/data/images/revue62.jpg
+/dist/
 /*.backup.sql.gz
 /htdocs/
 /.idea/

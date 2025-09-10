@@ -31,6 +31,7 @@ function createErrorLink(
 ): ApolloLink {
     return onError(errorResponse => {
         // Network errors are not caught by uploadInterceptor, so we need to decrease pending queries
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         const networkError = errorResponse.networkError;
         if (networkError) {
             networkActivityService.decrease();
@@ -51,7 +52,9 @@ function createErrorLink(
         }
 
         // Show Graphql responses with errors to end-users (but do not decrease pending queries because it is done by uploadInterceptor)
+        // eslint-disable-next-line @typescript-eslint/no-deprecated
         if (errorResponse.graphQLErrors) {
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             errorResponse.graphQLErrors.forEach(error => {
                 if ('extensions' in error && error.extensions?.showSnack) {
                     // Show whatever server prepared for end-user, with a bit more time to read
@@ -62,6 +65,7 @@ function createErrorLink(
                 }
             });
 
+            // eslint-disable-next-line @typescript-eslint/no-deprecated
             networkActivityService.addErrors(errorResponse.graphQLErrors);
         }
     });

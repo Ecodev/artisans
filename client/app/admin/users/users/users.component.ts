@@ -1,5 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit, DOCUMENT} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     AvailableColumn,
@@ -15,7 +15,7 @@ import {
     NaturalSearchSelections,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {CommonModule, DatePipe, DOCUMENT} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
 import {users} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';

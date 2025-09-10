@@ -1,5 +1,5 @@
 import {gql} from 'apollo-angular';
-import {inject, Injectable, OnDestroy} from '@angular/core';
+import {inject, Injectable, OnDestroy, DOCUMENT} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {
@@ -57,7 +57,6 @@ import {
     usersQuery,
 } from './user.queries';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
-import {DOCUMENT} from '@angular/common';
 
 export type UserLike = User['user'] | NonNullable<CurrentUserForProfile['viewer']>;
 

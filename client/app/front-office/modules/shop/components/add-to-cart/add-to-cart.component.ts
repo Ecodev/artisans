@@ -1,4 +1,4 @@
-import {Component, inject, Input} from '@angular/core';
+import {Component, inject, input} from '@angular/core';
 import {ProductType} from '../../../../../shared/generated-types';
 import {CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
@@ -17,27 +17,27 @@ export class AddToCartComponent {
     /**
      * Button label
      */
-    @Input({required: true}) public label!: string;
+    public readonly label = input.required<string>();
 
     /**
      * Button background color
      */
-    @Input() public buttonColor: 'primary' | 'accent' | 'warn' | null = 'primary';
+    public readonly buttonColor = input<'primary' | 'accent' | 'warn' | null>('primary');
 
     /**
      * Product to add to cart
      */
-    @Input({required: true}) public product!: CartLineProduct;
+    public readonly product = input.required<CartLineProduct>();
 
     /**
      * Type variant to add to cart
      */
-    @Input({required: true}) public type!: ProductType;
+    public readonly type = input.required<ProductType>();
 
     public inCart = false;
 
     public click(): void {
-        this.cartService.addProduct(this.product, this.type, 1);
+        this.cartService.addProduct(this.product(), this.type(), 1);
         setTimeout(() => (this.inCart = true), 300);
     }
 }

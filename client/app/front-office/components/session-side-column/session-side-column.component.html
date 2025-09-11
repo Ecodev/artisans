@@ -1,4 +1,4 @@
-@if (hiddenBlocName !== 'methode') {
+@if (hiddenBlocName() !== 'methode') {
     <div class="frame-stroked-primary nat-padding">
         <h2 class="mat-h2">La méthode</h2>
         <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/methode"
@@ -7,7 +7,7 @@
     </div>
 }
 
-@if (hiddenBlocName !== 'prochaines') {
+@if (hiddenBlocName() !== 'prochaines') {
     <div class="frame-primary nat-padding">
         <h2 class="mat-h2">Rejoignez une conversation carbone !</h2>
         <p>
@@ -18,7 +18,7 @@
     </div>
 }
 
-@if (hiddenBlocName !== 'organisations') {
+@if (hiddenBlocName() !== 'organisations') {
     <div class="frame-stroked-primary nat-padding">
         <h2 class="mat-h2">Pour les organisations</h2>
         <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/organisations"
@@ -27,7 +27,7 @@
     </div>
 }
 
-@if (hiddenBlocName !== 'facilitateurs') {
+@if (hiddenBlocName() !== 'facilitateurs') {
     <div class="frame-stroked-primary nat-padding">
         <h2 class="mat-h2">Les facilitateurs</h2>
         <a mat-stroked-button color="primary" routerLink="/agir-avec-nous/conversation-carbone/facilitateurs"

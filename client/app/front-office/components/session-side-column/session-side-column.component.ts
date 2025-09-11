@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, OnInit, input} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
@@ -18,7 +18,7 @@ export class SessionSideColumnComponent implements OnInit {
 
     public number = 0;
 
-    @Input() public hiddenBlocName?: string;
+    public readonly hiddenBlocName = input<string>();
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<SessionsVariables>();

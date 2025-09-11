@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit, input} from '@angular/core';
 import {
     AvailableColumn,
     NaturalAbstractList,
@@ -48,17 +48,17 @@ export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> i
         {id: 'balance', label: 'Montant'},
     ];
 
-    @Input() public showTotals = false;
+    public readonly showTotals = input(false);
 
     /**
      * If true, hides natural search and transcluded components
      */
-    @Input() public hideHeader = false;
+    public readonly hideHeader = input(false);
 
     /**
      * If true, hides pagination
      */
-    @Input() public hidePaginator = false;
+    public readonly hidePaginator = input(false);
 
     /**
      * Force page size

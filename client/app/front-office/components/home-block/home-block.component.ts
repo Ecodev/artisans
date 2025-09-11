@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, OnInit, input} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
@@ -42,7 +42,7 @@ export class HomeBlockComponent implements OnInit {
     private readonly configService = inject(ConfigurationService);
     public readonly permissionsService = inject(PermissionsService);
 
-    @Input({required: true}) public key!: string;
+    public readonly key = input.required<string>();
 
     public editMode = false;
 
@@ -59,10 +59,10 @@ export class HomeBlockComponent implements OnInit {
         });
 
         const observables = [
-            this.configService.get(this.key + '-title'),
-            this.configService.get(this.key + '-description'),
-            this.configService.get(this.key + '-button-label'),
-            this.configService.get(this.key + '-button-link'),
+            this.configService.get(this.key() + '-title'),
+            this.configService.get(this.key() + '-description'),
+            this.configService.get(this.key() + '-button-label'),
+            this.configService.get(this.key() + '-button-link'),
         ];
 
         forkJoin(observables).subscribe(values => {
@@ -77,10 +77,11 @@ export class HomeBlockComponent implements OnInit {
     }
 
     public update(): void {
-        this.configService.set(this.key + '-title', this.form.getRawValue().title);
-        this.configService.set(this.key + '-description', this.form.getRawValue().description);
-        this.configService.set(this.key + '-button-label', this.form.getRawValue().buttonLabel);
-        this.configService.set(this.key + '-button-link', this.form.getRawValue().buttonLink);
+        const key = this.key();
+        this.configService.set(key + '-title', this.form.getRawValue().title);
+        this.configService.set(key + '-description', this.form.getRawValue().description);
+        this.configService.set(key + '-button-label', this.form.getRawValue().buttonLabel);
+        this.configService.set(key + '-button-link', this.form.getRawValue().buttonLink);
         this.lastValue = this.form.getRawValue();
     }
 

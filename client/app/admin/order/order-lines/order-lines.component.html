@@ -2,7 +2,7 @@
 @if (dataSource) {
     <div class="nat-vertical">
         <div class="nat-vertical">
-            <div class="nat-margin-vertical overflow nat-horizontal" [class.nat-hide]="hideHeader">
+            <div class="nat-margin-vertical overflow nat-horizontal" [class.nat-hide]="hideHeader()">
                 <natural-search
                     class="nat-expand"
                     [facets]="naturalSearchFacets"
@@ -24,7 +24,7 @@
                     <tr
                         *matFooterRowDef="columnsForTable"
                         mat-footer-row
-                        [hidden]="!dataSource.data?.length || !showTotals"
+                        [hidden]="!dataSource.data?.length || !showTotals()"
                     ></tr>
 
                     <ng-container matColumnDef="name">
@@ -107,7 +107,7 @@
                     <mat-progress-spinner mode="indeterminate" [diameter]="40" />
                 </div>
             }
-            @if (dataSource.data?.length && !hidePaginator) {
+            @if (dataSource.data?.length && !hidePaginator()) {
                 <mat-paginator
                     [length]="dataSource.data?.length"
                     [pageIndex]="dataSource.data?.pageIndex"

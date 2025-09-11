@@ -11,7 +11,7 @@
 
         <!-- GRID -->
         @if (viewMode === ProductsViewMode.grid) {
-            <div class="grid products" [class.highlight-first-items]="highlightFirstItems">
+            <div class="grid products" [class.highlight-first-items]="highlightFirstItems()">
                 @for (product of items; track product) {
                     <div class="product nat-gap-10 nat-vertical">
                         @if (showTagsOnProducts) {

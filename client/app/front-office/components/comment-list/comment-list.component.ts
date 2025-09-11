@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, inject, OnChanges, OnInit, input} from '@angular/core';
 import {NaturalAbstractList, NaturalIconDirective, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
@@ -32,12 +32,12 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
     /**
      * Event related to displayed comments
      */
-    @Input() public event?: Event['event'] | Events['events']['items'][0];
+    public readonly event = input<Event['event'] | Events['events']['items'][0]>();
 
     /**
      * News related to displayed comments
      */
-    @Input() public news?: News['news'] | Newses['newses']['items'][0];
+    public readonly news = input<News['news'] | Newses['newses']['items'][0]>();
 
     /**
      * Antichronologic sorting by creation date to no change in case of update
@@ -54,15 +54,17 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
     }
 
     public ngOnChanges(): void {
-        if (this.event) {
+        const event = this.event();
+        if (event) {
             this.variablesManager.set('partial-variables', {
-                filter: {groups: [{conditions: [{event: {in: {values: [this.event.id]}}}]}]},
+                filter: {groups: [{conditions: [{event: {in: {values: [event.id]}}}]}]},
             });
         }
 
-        if (this.news) {
+        const news = this.news();
+        if (news) {
             this.variablesManager.set('partial-variables', {
-                filter: {groups: [{conditions: [{news: {in: {values: [this.news.id]}}}]}]},
+                filter: {groups: [{conditions: [{news: {in: {values: [news.id]}}}]}]},
             });
         }
     }
@@ -71,8 +73,8 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
         this.publishing = true;
         const comment = {
             description: this.newCommentValue,
-            event: this.event,
-            news: this.news,
+            event: this.event(),
+            news: this.news(),
         };
 
         this.service.create(comment).subscribe(() => {

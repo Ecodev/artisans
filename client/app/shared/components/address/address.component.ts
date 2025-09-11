@@ -1,4 +1,4 @@
-import {Component, inject, Input, output} from '@angular/core';
+import {Component, inject, Input, output, input} from '@angular/core';
 import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CountryService} from './country.service';
 import {NaturalSelectComponent} from '@ecodev/natural';
@@ -20,7 +20,7 @@ export class AddressComponent {
     @Input()
     public set disabled(value: boolean) {
         ['firstName', 'lastName', 'street', 'postcode', 'locality', 'country'].forEach(name => {
-            const control = this.form.get(name);
+            const control = this.form().get(name);
             if (control) {
                 value ? control.disable() : control.enable();
             }
@@ -30,7 +30,7 @@ export class AddressComponent {
     /**
      * Form group to manage field values
      */
-    @Input({required: true}) public form!: FormGroup;
+    public readonly form = input.required<FormGroup>();
 
     /**
      * Emits when form changes

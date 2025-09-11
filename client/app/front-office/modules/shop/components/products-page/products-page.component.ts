@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit} from '@angular/core';
+import {Component, inject, OnInit, input} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     fromUrl,
@@ -54,7 +54,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     /**
      * If true, the three first items of grid have highlighted layout
      */
-    @Input() public highlightFirstItems = true;
+    public readonly highlightFirstItems = input(true);
 
     /**
      * Display tags over products

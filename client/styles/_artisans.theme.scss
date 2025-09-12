@@ -35,7 +35,7 @@
         background: mat.m2-get-color-from-palette($primary);
 
         &,
-        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        a:not(.mat-mdc-unelevated-button):not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-tonal-button) {
             color: mat.m2-get-color-from-palette($primary, default-contrast);
         }
     }
@@ -44,7 +44,7 @@
         background: mat.m2-get-color-from-palette($accent);
 
         &,
-        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        a:not(.mat-mdc-unelevated-button):not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-tonal-button) {
             color: mat.m2-get-color-from-palette($accent, default-contrast);
         }
     }
@@ -53,7 +53,7 @@
         background: mat.m2-get-color-from-palette($warn);
 
         &,
-        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        a:not(.mat-mdc-unelevated-button):not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-tonal-button) {
             color: mat.m2-get-color-from-palette($warn, default-contrast);
         }
     }
@@ -62,7 +62,7 @@
         background: #00ae8c;
 
         &,
-        a:not([mat-flat-button]):not([mat-button]):not([mat-raised-button]) {
+        a:not(.mat-mdc-unelevated-button):not(.mat-mdc-button):not(.mat-mdc-raised-button):not(.mat-tonal-button) {
             color: #ffffff;
         }
     }

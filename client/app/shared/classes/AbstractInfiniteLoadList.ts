@@ -13,6 +13,7 @@ import {
 import {defaults, pick} from 'es-toolkit/compat';
 import {isEqual} from 'es-toolkit';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {distinctUntilChanged} from 'rxjs';
 
 @Directive()
 export class AbstractInfiniteLoadList<
@@ -43,21 +44,23 @@ export class AbstractInfiniteLoadList<
     public override ngOnInit(): void {
         super.ngOnInit();
 
-        this.dataSource?.internalDataObservable.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(result => {
-            if (!result) {
-                return;
-            }
+        this.dataSource?.internalDataObservable
+            .pipe(takeUntilDestroyed(this.destroyRef), distinctUntilChanged())
+            .subscribe(result => {
+                if (!result) {
+                    return;
+                }
 
-            if (!this.items) {
-                this.items = [];
-            }
+                if (!this.items) {
+                    this.items = [];
+                }
 
-            if (result.pageIndex === 0) {
-                this.items = [...result.items]; // When page index is 0, it means "new list" so replace all results.
-            } else {
-                this.items.push(...result.items); // Complete existing list with new items
-            }
-        });
+                if (result.pageIndex === 0) {
+                    this.items = [...result.items]; // When page index is 0, it means "new list" so replace all results.
+                } else {
+                    this.items.push(...result.items); // Complete existing list with new items
+                }
+            });
     }
 
     public loadMore(): void {

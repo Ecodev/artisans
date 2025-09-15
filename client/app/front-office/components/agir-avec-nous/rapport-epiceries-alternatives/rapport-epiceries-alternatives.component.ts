@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {MatAnchor} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 
 @Component({
     selector: 'app-rapport-epiceries-alternatives',
-    imports: [MatAnchor],
+    imports: [MatButton],
     templateUrl: './rapport-epiceries-alternatives.component.html',
     styleUrl: './rapport-epiceries-alternatives.component.scss',
 })

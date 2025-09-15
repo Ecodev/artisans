@@ -1,7 +1,7 @@
-import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
+import {createGlobalPositionStrategy, createOverlayRef, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
 
-import {ElementRef, inject, Injectable, Injector, StaticProvider, DOCUMENT} from '@angular/core';
+import {DOCUMENT, ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'es-toolkit';
 import {merge, Observable, Subject} from 'rxjs';
@@ -20,7 +20,6 @@ export type MenuItem = {
     providedIn: 'root',
 })
 export class NavigationService {
-    private readonly overlay = inject(Overlay);
     private readonly injector = inject(Injector);
     private readonly router = inject(Router);
     private readonly document = inject(DOCUMENT);
@@ -51,16 +50,14 @@ export class NavigationService {
             width: 'calc(100vw - 40px)',
             maxHeight: 'calc(100vh - ' + (offsetTop + 20) + 'px)',
             disposeOnNavigation: true,
-            positionStrategy: this.overlay
-                .position()
-                .global()
+            positionStrategy: createGlobalPositionStrategy(this.injector)
                 .top(offsetTop + 'px')
                 .centerHorizontally(),
             hasBackdrop: true,
         });
 
         // Container
-        const overlayRef = this.overlay.create(overlayConfig);
+        const overlayRef = createOverlayRef(this.injector, overlayConfig);
         const containerPortal = new ComponentPortal(MenuComponent, undefined, containerInjector);
         overlayRef.attach(containerPortal);
 

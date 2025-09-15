@@ -17,7 +17,7 @@ export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> 
     public readonly permissionsService = inject(PermissionsService);
 
     protected override defaultPagination: Required<PaginationInput> = {
-        pageSize: 5,
+        pageSize: 200,
         pageIndex: 0,
         offset: null,
     };

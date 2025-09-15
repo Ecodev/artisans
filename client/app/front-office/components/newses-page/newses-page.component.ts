@@ -14,7 +14,7 @@ import {CommonModule} from '@angular/common';
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
     protected override defaultPagination: Required<PaginationInput> = {
-        pageSize: 5,
+        pageSize: 200,
         pageIndex: 0,
         offset: null,
     };

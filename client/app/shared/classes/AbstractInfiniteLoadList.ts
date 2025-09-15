@@ -14,7 +14,7 @@ import {defaults, pick} from 'es-toolkit/compat';
 import {isEqual} from 'es-toolkit';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
-@Directive({standalone: true})
+@Directive()
 export class AbstractInfiniteLoadList<
         TService extends NaturalAbstractModelService<
             any,

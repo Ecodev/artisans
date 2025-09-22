@@ -1,6 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
+    formatIsoDate,
     formatIsoDateTime,
     NaturalCapitalizePipe,
     NaturalIconDirective,
@@ -106,7 +107,7 @@ export class HomepageComponent implements OnInit {
         // Events
         const qvmEvents = new NaturalQueryVariablesManager<EventsVariables>();
         qvmEvents.set('variables', {
-            filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: formatIsoDateTime(new Date())}}}]}]},
+            filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: formatIsoDate(new Date())}}}]}]},
             pagination: {pageSize: 5, pageIndex: 0},
             sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
         });

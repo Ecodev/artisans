@@ -9,10 +9,10 @@ import {
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {SubscriptionService} from '../../../front-office/modules/shop/components/subscriptions/subscription.service';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDividerModule} from '@angular/material/divider';
+import {MatButton} from '@angular/material/button';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatDivider} from '@angular/material/divider';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -22,11 +22,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         NaturalSelectComponent,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatInputModule,
+        MatDivider,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatInput,
         NaturalSelectEnumComponent,
-        MatButtonModule,
+        MatButton,
     ],
     templateUrl: './order-line.component.html',
     styleUrl: './order-line.component.scss',

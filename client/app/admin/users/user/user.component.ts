@@ -12,20 +12,20 @@ import {
     NaturalTableButtonComponent,
     NaturalTimeAgoPipe,
 } from '@ecodev/natural';
-import {CommonModule, DatePipe} from '@angular/common';
+import {AsyncPipe, DatePipe} from '@angular/common';
 import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
 import {RouterOutlet} from '@angular/router';
 import {OrdersComponent} from '../../order/orders/orders.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDivider} from '@angular/material/divider';
+import {MatTooltip} from '@angular/material/tooltip';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 import {AddressComponent} from '../../../shared/components/address/address.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {MatToolbar} from '@angular/material/toolbar';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -34,16 +34,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        CommonModule,
-        MatToolbarModule,
-        MatTabsModule,
+        AsyncPipe,
+        DatePipe,
+        MatToolbar,
+        MatTab,
+        MatTabGroup,
         AddressComponent,
-        MatFormFieldModule,
-        MatInputModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatInput,
         NaturalSelectEnumComponent,
-        MatSlideToggleModule,
-        MatTooltipModule,
-        MatDividerModule,
+        MatSlideToggle,
+        MatTooltip,
+        MatDivider,
         NaturalRelationsComponent,
         NaturalTableButtonComponent,
         NaturalStampComponent,
@@ -51,7 +55,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         NaturalFixedButtonDetailComponent,
         RouterOutlet,
         NaturalEnumPipe,
-        DatePipe,
         NaturalTimeAgoPipe,
     ],
     templateUrl: './user.component.html',

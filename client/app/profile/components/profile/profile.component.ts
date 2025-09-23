@@ -4,22 +4,23 @@ import {NaturalAlertService, NaturalEnumPipe, NaturalIconDirective} from '@ecode
 import {UserService} from '../../../admin/users/services/user.service';
 import {CurrentUserForProfile, Membership, Product, ProductType} from '../../../shared/generated-types';
 import {ProductService} from '../../../admin/products/services/product.service';
-import {MatListModule} from '@angular/material/list';
+import {MatListItem, MatNavList} from '@angular/material/list';
 import {AddToCartComponent} from '../../../front-office/modules/shop/components/add-to-cart/add-to-cart.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
+import {AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-profile',
     imports: [
-        CommonModule,
-        MatButtonModule,
-        MatIconModule,
+        AsyncPipe,
+        MatButton,
+        MatIcon,
         NaturalIconDirective,
         RouterLink,
         AddToCartComponent,
-        MatListModule,
+        MatNavList,
+        MatListItem,
         RouterLinkActive,
         RouterOutlet,
         NaturalEnumPipe,

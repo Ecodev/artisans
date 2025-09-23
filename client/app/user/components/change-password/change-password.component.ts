@@ -5,20 +5,13 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ifValid, NaturalAlertService, NaturalIconDirective} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
 import {UpdatePassword, UpdatePasswordVariables} from '../../../shared/generated-types';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
 import {PasswordComponent} from '../password/password.component';
 
 @Component({
     selector: 'app-change-password',
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        PasswordComponent,
-        MatButtonModule,
-        MatIconModule,
-        NaturalIconDirective,
-    ],
+    imports: [FormsModule, ReactiveFormsModule, PasswordComponent, MatButton, MatIcon, NaturalIconDirective],
     templateUrl: './change-password.component.html',
     styleUrl: './change-password.component.scss',
 })

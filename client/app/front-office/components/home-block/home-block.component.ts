@@ -1,16 +1,16 @@
-import {Component, inject, OnInit, input} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatCardModule} from '@angular/material/card';
+import {CdkTextareaAutosize} from '@angular/cdk/text-field';
+import {MatInput} from '@angular/material/input';
+import {MatFormField, MatHint, MatLabel} from '@angular/material/form-field';
+import {MatCard} from '@angular/material/card';
 import {NaturalIconDirective} from '@ecodev/natural';
-import {MatIconModule} from '@angular/material/icon';
+import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatFabButton} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
 
 type Block = {
@@ -23,16 +23,19 @@ type Block = {
 @Component({
     selector: 'app-home-block',
     imports: [
-        MatButtonModule,
+        MatButton,
+        MatFabButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
-        MatCardModule,
+        MatCard,
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        TextFieldModule,
+        MatFormField,
+        MatLabel,
+        MatHint,
+        MatInput,
+        CdkTextareaAutosize,
         AsyncPipe,
     ],
     templateUrl: './home-block.component.html',

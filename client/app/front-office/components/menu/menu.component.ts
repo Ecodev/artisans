@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, inject, InjectionToken} from '@angular/core';
 import {MenuItem} from '../../services/navigation.service';
 import {RouterLink, RouterLinkActive} from '@angular/router';
-import {CommonModule} from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 
 export type MenuDropdownData = {
     items: MenuItem[];
@@ -13,7 +13,7 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
 
 @Component({
     selector: 'app-menu',
-    imports: [CommonModule, RouterLinkActive, RouterLink],
+    imports: [NgTemplateOutlet, RouterLinkActive, RouterLink],
     templateUrl: './menu.component.html',
     styleUrl: './menu.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,

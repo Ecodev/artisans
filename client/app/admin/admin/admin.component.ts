@@ -7,24 +7,33 @@ import {
     NaturalSidenavContentComponent,
 } from '@ecodev/natural';
 import {CurrentUserForProfile} from '../../shared/generated-types';
-import {MatListModule} from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListItem, MatNavList} from '@angular/material/list';
+import {
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+} from '@angular/material/expansion';
+import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
+import {MatToolbar} from '@angular/material/toolbar';
 
 @Component({
     selector: 'app-admin',
     imports: [
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
+        MatToolbar,
+        MatIconButton,
+        MatIcon,
         NaturalIconDirective,
         RouterLink,
         NaturalSidenavContainerComponent,
         NaturalSidenavComponent,
-        MatExpansionModule,
-        MatListModule,
+        MatAccordion,
+        MatExpansionPanel,
+        MatExpansionPanelHeader,
+        MatExpansionPanelTitle,
+        MatNavList,
+        MatListItem,
         RouterLinkActive,
         NaturalSidenavContentComponent,
         RouterOutlet,

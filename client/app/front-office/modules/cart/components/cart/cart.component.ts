@@ -12,22 +12,24 @@ import {Cart, CartLineProduct} from '../../classes/cart';
 import {CartService} from '../../services/cart.service';
 import {GlobalCartService} from '../../services/global-cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
+import {MatDivider} from '@angular/material/divider';
+import {MatIcon} from '@angular/material/icon';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-cart',
     imports: [
-        CommonModule,
-        MatButtonModule,
+        AsyncPipe,
+        CurrencyPipe,
+        MatButton,
+        MatIconButton,
         RouterLink,
         PriceComponent,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
-        MatDividerModule,
+        MatDivider,
         RouterOutlet,
         NaturalEnumPipe,
         NaturalBackgroundDensityDirective,

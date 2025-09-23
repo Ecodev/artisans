@@ -13,23 +13,25 @@ import {CartCollectionService} from '../../services/cart-collection.service';
 import {DatatransService} from '../../services/datatrans.service';
 import {Big} from 'big.js';
 import {localConfig} from '../../../../../shared/generated-config';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
+import {MatCheckbox} from '@angular/material/checkbox';
+import {MatButton} from '@angular/material/button';
 import {AddressComponent} from '../../../../../shared/components/address/address.component';
-import {MatRadioModule} from '@angular/material/radio';
-import {CommonModule} from '@angular/common';
+import {MatRadioButton, MatRadioGroup} from '@angular/material/radio';
+import {AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
     selector: 'app-create-order',
     imports: [
-        CommonModule,
+        AsyncPipe,
+        CurrencyPipe,
         FormsModule,
         ReactiveFormsModule,
-        MatRadioModule,
+        MatRadioGroup,
+        MatRadioButton,
         AddressComponent,
-        MatButtonModule,
+        MatButton,
         RouterLink,
-        MatCheckboxModule,
+        MatCheckbox,
         RouterOutlet,
         NaturalEnumPipe,
     ],

@@ -10,27 +10,28 @@ import {
 } from '@ecodev/natural';
 import {PurchaseService} from './purchase.service';
 import {ProductType, Purchases} from '../../../shared/generated-types';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatRippleModule} from '@angular/material/core';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
+import {MatRipple} from '@angular/material/core';
 import {RouterLink} from '@angular/router';
-import {CommonModule} from '@angular/common';
+import {AsyncPipe, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-purchases',
     imports: [
-        CommonModule,
+        AsyncPipe,
+        DatePipe,
         NaturalSearchComponent,
         RouterLink,
         NaturalSrcDensityDirective,
-        MatRippleModule,
-        MatButtonModule,
-        MatIconModule,
+        MatRipple,
+        MatButton,
+        MatIcon,
         NaturalIconDirective,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
+        MatProgressSpinner,
+        MatPaginator,
         NaturalCapitalizePipe,
         NaturalEnumPipe,
     ],

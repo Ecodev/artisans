@@ -1,6 +1,5 @@
 import {createGlobalPositionStrategy, createOverlayRef, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
-
 import {DOCUMENT, ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
 import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {cloneDeep} from 'es-toolkit';

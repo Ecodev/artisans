@@ -3,11 +3,11 @@ import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 
 @Component({
     selector: 'app-sessions-incoming',
-    imports: [MatButtonModule, SessionSideColumnComponent],
+    imports: [MatButton, SessionSideColumnComponent],
     templateUrl: './sessions-incoming.component.html',
     styleUrl: './sessions-incoming.component.scss',
 })

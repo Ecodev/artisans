@@ -1,5 +1,5 @@
 import {gql} from 'apollo-angular';
-import {inject, Injectable, OnDestroy, DOCUMENT} from '@angular/core';
+import {DOCUMENT, inject, Injectable, OnDestroy} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {

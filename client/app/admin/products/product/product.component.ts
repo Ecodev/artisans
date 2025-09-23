@@ -23,17 +23,17 @@ import {ProductService} from '../services/product.service';
 import {map, Observable, of, switchMap} from 'rxjs';
 import {CreateFile, CreateImage, ProductPartialInput} from '../../../shared/generated-types';
 import {OrderLinesComponent} from '../../order/order-lines/order-lines.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {TextFieldModule} from '@angular/cdk/text-field';
+import {MatDivider} from '@angular/material/divider';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+import {MatSlideToggle} from '@angular/material/slide-toggle';
+import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import {NaturalEditorComponent} from '@ecodev/natural-editor';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatIconModule} from '@angular/material/icon';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatHint, MatLabel, MatSuffix} from '@angular/material/form-field';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -42,21 +42,28 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        MatButtonModule,
+        MatButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
-        MatTabsModule,
+        MatTab,
+        MatTabGroup,
         NaturalLinkableTabDirective,
-        MatFormFieldModule,
-        MatInputModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatHint,
+        MatSuffix,
+        MatInput,
         NaturalEditorComponent,
-        TextFieldModule,
-        MatSlideToggleModule,
+        CdkTextareaAutosize,
+        MatSlideToggle,
         NaturalSelectEnumComponent,
-        MatDatepickerModule,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
         NaturalSelectComponent,
-        MatDividerModule,
+        MatDivider,
         NaturalFileComponent,
         NaturalRelationsComponent,
         NaturalAvatarComponent,

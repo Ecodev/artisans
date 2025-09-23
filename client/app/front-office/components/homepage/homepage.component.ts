@@ -28,24 +28,26 @@ import {
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {TagsNavigationComponent} from '../../../shared/components/tags-navigation/tags-navigation.component';
 import {PriceComponent} from '../../../shared/components/price/price.component';
-import {MatRippleModule} from '@angular/material/core';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+import {MatRipple} from '@angular/material/core';
+import {MatDivider} from '@angular/material/divider';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton, MatFabButton} from '@angular/material/button';
+import {AsyncPipe, DatePipe} from '@angular/common';
 import {HomeBlockComponent} from '../home-block/home-block.component';
 
 @Component({
     selector: 'app-homepage',
     imports: [
         HomeBlockComponent,
-        CommonModule,
-        MatButtonModule,
+        AsyncPipe,
+        DatePipe,
+        MatButton,
+        MatFabButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
-        MatDividerModule,
-        MatRippleModule,
+        MatDivider,
+        MatRipple,
         NaturalSrcDensityDirective,
         PriceComponent,
         TagsNavigationComponent,

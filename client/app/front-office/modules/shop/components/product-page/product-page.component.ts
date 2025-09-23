@@ -18,24 +18,26 @@ import {
 import {ProductsPageComponent} from '../products-page/products-page.component';
 import {AddToCartComponent} from '../add-to-cart/add-to-cart.component';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
-import {MatListModule} from '@angular/material/list';
-import {MatRippleModule} from '@angular/material/core';
-import {MatIconModule} from '@angular/material/icon';
+import {MatListItem, MatNavList} from '@angular/material/list';
+import {MatRipple} from '@angular/material/core';
+import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-product-page',
     imports: [
-        CommonModule,
-        MatButtonModule,
+        DatePipe,
+        MatButton,
+        MatIconButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
         NaturalSrcDensityDirective,
-        MatRippleModule,
-        MatListModule,
+        MatRipple,
+        MatNavList,
+        MatListItem,
         PriceComponent,
         AddToCartComponent,
         ProductsPageComponent,

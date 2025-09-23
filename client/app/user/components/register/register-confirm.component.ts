@@ -6,29 +6,30 @@ import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserByTokenResolve} from '../../../admin/users/user';
 import {ConfirmRegistrationVariables, UserByToken} from '../../../shared/generated-types';
 import {UserService} from '../../../admin/users/services/user.service';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
 import {PasswordComponent} from '../password/password.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {CommonModule} from '@angular/common';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDivider} from '@angular/material/divider';
+import {MatIcon} from '@angular/material/icon';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel, MatPrefix} from '@angular/material/form-field';
 
 @Component({
     selector: 'app-confirm',
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatPrefix,
+        MatInput,
+        MatIcon,
         NaturalIconDirective,
-        CommonModule,
-        MatDividerModule,
+        MatDivider,
         PasswordComponent,
         AddressComponent,
-        MatButtonModule,
+        MatButton,
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',

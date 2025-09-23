@@ -14,15 +14,15 @@ import {
 } from '@ecodev/natural';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDivider} from '@angular/material/divider';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {CdkTextareaAutosize} from '@angular/cdk/text-field';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
 import {NaturalEditorComponent} from '@ecodev/natural-editor';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTabsModule} from '@angular/material/tabs';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatHint, MatLabel, MatSuffix} from '@angular/material/form-field';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
 
 @Component({
     selector: 'app-session',
@@ -30,19 +30,27 @@ import {MatTabsModule} from '@angular/material/tabs';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        MatTabsModule,
+        MatTab,
+        MatTabGroup,
         NaturalLinkableTabDirective,
-        MatFormFieldModule,
-        MatInputModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatHint,
+        MatSuffix,
+        MatInput,
         NaturalEditorComponent,
-        MatDatepickerModule,
-        TextFieldModule,
-        MatButtonModule,
-        MatIconModule,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
+        CdkTextareaAutosize,
+        MatButton,
+        MatIconButton,
+        MatIcon,
         NaturalIconDirective,
         NaturalRelationsComponent,
         NaturalTableButtonComponent,
-        MatDividerModule,
+        MatDivider,
         NaturalHttpPrefixDirective,
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,

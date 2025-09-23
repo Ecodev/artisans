@@ -1,14 +1,14 @@
-import {Component, inject, OnInit, input} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {SessionsVariables} from '../../../shared/generated-types';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 
 @Component({
     selector: 'app-session-side-column',
-    imports: [MatButtonModule, RouterLink],
+    imports: [MatButton, RouterLink],
     templateUrl: './session-side-column.component.html',
     styleUrl: './session-side-column.component.scss',
 })

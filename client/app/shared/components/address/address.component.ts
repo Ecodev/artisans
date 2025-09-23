@@ -1,13 +1,13 @@
-import {Component, inject, Input, output, input} from '@angular/core';
+import {Component, inject, Input, input, output} from '@angular/core';
 import {FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CountryService} from './country.service';
 import {NaturalSelectComponent} from '@ecodev/natural';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
 
 @Component({
     selector: 'app-address',
-    imports: [FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NaturalSelectComponent],
+    imports: [FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatError, MatInput, NaturalSelectComponent],
     templateUrl: './address.component.html',
     styleUrl: './address.component.scss',
 })

@@ -4,17 +4,17 @@ import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {CommentListComponent} from '../comment-list/comment-list.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-news-page',
     imports: [
-        CommonModule,
-        MatButtonModule,
+        DatePipe,
+        MatIconButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
         CommentListComponent,
         NaturalCapitalizePipe,

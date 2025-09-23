@@ -1,26 +1,29 @@
-import {Component, inject, OnChanges, OnInit, input} from '@angular/core';
+import {Component, inject, input, OnChanges, OnInit} from '@angular/core';
 import {NaturalAbstractList, NaturalIconDirective, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
 import {CommentSortingField, Event, Events, News, Newses} from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {MatIconModule} from '@angular/material/icon';
+import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {CommonModule} from '@angular/common';
+import {MatInput} from '@angular/material/input';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {AsyncPipe, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-comment-list',
     imports: [
-        CommonModule,
-        MatFormFieldModule,
-        MatInputModule,
+        AsyncPipe,
+        DatePipe,
+        MatFormField,
+        MatLabel,
+        MatInput,
         FormsModule,
-        MatButtonModule,
+        MatButton,
+        MatIconButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
     ],
     templateUrl: './comment-list.component.html',

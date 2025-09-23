@@ -7,12 +7,12 @@ import {ProductType, Subscriptions} from '../../../../../shared/generated-types'
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
 import {GlobalCartService} from '../../../cart/services/global-cart.service';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 
 @Component({
     selector: 'app-subscriptions',
-    imports: [PriceComponent, MatButtonModule],
+    imports: [PriceComponent, MatButton],
     templateUrl: './subscriptions.component.html',
     styleUrl: './subscriptions.component.scss',
 })

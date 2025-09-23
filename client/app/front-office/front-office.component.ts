@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 import {AfterViewInit, Component, DestroyRef, ElementRef, inject, OnInit} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
@@ -16,38 +16,47 @@ import {UserService} from '../admin/users/services/user.service';
 import {CurrentUserForProfile, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
 import {MenuItem, NavigationService} from './services/navigation.service';
-import {MatListModule} from '@angular/material/list';
+import {MatListItem, MatNavList} from '@angular/material/list';
 import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatRippleModule} from '@angular/material/core';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
+import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatToolbar} from '@angular/material/toolbar';
+import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
+import {MatRipple} from '@angular/material/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-front-office',
     imports: [
-        CommonModule,
-        MatRippleModule,
+        NgTemplateOutlet,
+        MatRipple,
         RouterLink,
         RouterLinkActive,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
+        MatSidenav,
+        MatSidenavContainer,
+        MatSidenavContent,
+        MatToolbar,
+        MatButton,
+        MatIconButton,
+        MatIcon,
         NaturalIconDirective,
-        MatMenuModule,
-        MatFormFieldModule,
-        MatInputModule,
+        MatMenu,
+        MatMenuItem,
+        MatMenuTrigger,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatSuffix,
+        MatInput,
         FormsModule,
         BreadcrumbsComponent,
         RouterOutlet,
         ReactiveFormsModule,
-        MatListModule,
+        MatNavList,
+        MatListItem,
     ],
     templateUrl: './front-office.component.html',
     styleUrl: './front-office.component.scss',

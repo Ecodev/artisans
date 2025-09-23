@@ -13,19 +13,19 @@ import {
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {Import, ImportVariables, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
 import {AsyncPipe} from '@angular/common';
 
 @Component({
     selector: 'app-import',
     imports: [
-        MatButtonModule,
+        MatButton,
         NaturalFileDropDirective,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
-        MatProgressSpinnerModule,
+        MatProgressSpinner,
         RouterLink,
         AsyncPipe,
     ],

@@ -1,7 +1,7 @@
 import {Component, DestroyRef, HostBinding, inject, Input, OnInit} from '@angular/core';
 import {ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {filter} from 'rxjs/operators';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 export type Breadcrumb = {
@@ -11,7 +11,7 @@ export type Breadcrumb = {
 
 @Component({
     selector: 'app-breadcrumbs',
-    imports: [MatButtonModule, RouterLink],
+    imports: [MatButton, RouterLink],
     templateUrl: './breadcrumbs.component.html',
     styleUrl: './breadcrumbs.component.scss',
 })

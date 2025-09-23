@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {NaturalAlertService, NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CurrencyPipe, DatePipe} from '@angular/common';
 import {
     CurrentUserForProfile,
     Order,
@@ -10,7 +10,7 @@ import {
     UserRole,
 } from '../../../shared/generated-types';
 import {OrderService} from '../services/order.service';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {OrderLinesComponent} from '../order-lines/order-lines.component';
 import {FormsModule} from '@angular/forms';
 import {Observable} from 'rxjs';
@@ -20,12 +20,12 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     selector: 'app-order',
     imports: [
         MatDialogModule,
-        CommonModule,
+        CurrencyPipe,
+        DatePipe,
         NaturalSelectEnumComponent,
         FormsModule,
         OrderLinesComponent,
-        MatButtonModule,
-        DatePipe,
+        MatButton,
     ],
     templateUrl: './order.component.html',
     styleUrl: './order.component.scss',

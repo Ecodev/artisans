@@ -4,24 +4,45 @@ import {OrderService} from '../../../admin/order/services/order.service';
 import {orders} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {RouterOutlet} from '@angular/router';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatTableModule} from '@angular/material/table';
-import {CommonModule, DatePipe} from '@angular/common';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatProgressSpinner} from '@angular/material/progress-spinner';
+import {MatTooltip} from '@angular/material/tooltip';
+import {
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderCellDef,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatRow,
+    MatRowDef,
+    MatTable,
+} from '@angular/material/table';
+import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-history',
     imports: [
-        CommonModule,
-        MatTableModule,
+        AsyncPipe,
+        CurrencyPipe,
+        DatePipe,
+        MatTable,
+        MatHeaderCellDef,
+        MatHeaderRowDef,
+        MatColumnDef,
+        MatCellDef,
+        MatRowDef,
+        MatHeaderCell,
+        MatCell,
+        MatHeaderRow,
+        MatRow,
         NaturalTableButtonComponent,
-        MatTooltipModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
+        MatTooltip,
+        MatProgressSpinner,
+        MatPaginator,
         RouterOutlet,
         NaturalEnumPipe,
-        DatePipe,
     ],
     templateUrl: './history.component.html',
     styleUrl: './history.component.scss',

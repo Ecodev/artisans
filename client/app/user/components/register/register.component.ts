@@ -10,27 +10,30 @@ import {
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
 import {PasswordComponent} from '../password/password.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDivider} from '@angular/material/divider';
+import {MatIcon} from '@angular/material/icon';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel, MatPrefix} from '@angular/material/form-field';
 
 @Component({
     selector: 'app-register',
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatPrefix,
+        MatInput,
+        MatIcon,
         NaturalIconDirective,
-        MatDividerModule,
+        MatDivider,
         PasswordComponent,
         AddressComponent,
-        MatButtonModule,
+        MatButton,
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',

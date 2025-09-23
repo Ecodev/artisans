@@ -3,9 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
 import {CurrencyService} from '../../../shared/services/currency.service';
 import {FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {money} from '@ecodev/natural';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButton} from '@angular/material/button';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
 
 export type DonationData = {
     amount: number | null;
@@ -13,7 +13,17 @@ export type DonationData = {
 
 @Component({
     selector: 'app-donation',
-    imports: [MatDialogModule, MatFormFieldModule, MatInputModule, FormsModule, ReactiveFormsModule, MatButtonModule],
+    imports: [
+        MatDialogModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatSuffix,
+        MatInput,
+        FormsModule,
+        ReactiveFormsModule,
+        MatButton,
+    ],
     templateUrl: './donation.component.html',
     styleUrl: './donation.component.scss',
 })

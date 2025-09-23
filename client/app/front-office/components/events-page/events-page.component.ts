@@ -3,13 +3,12 @@ import {NaturalCapitalizePipe, PaginationInput} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
-import {CommonModule} from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-events-page',
-    imports: [RouterLink, CommonModule, MatButtonModule, NaturalCapitalizePipe],
+    imports: [RouterLink, DatePipe, NaturalCapitalizePipe],
     templateUrl: './events-page.component.html',
     styleUrl: './events-page.component.scss',
 })

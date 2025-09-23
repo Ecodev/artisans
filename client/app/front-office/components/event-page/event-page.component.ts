@@ -3,17 +3,17 @@ import {RouterLink} from '@angular/router';
 import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {CommentListComponent} from '../comment-list/comment-list.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {CommonModule} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {MatIconButton} from '@angular/material/button';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-event-page',
     imports: [
-        CommonModule,
-        MatButtonModule,
+        DatePipe,
+        MatIconButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
         CommentListComponent,
         NaturalCapitalizePipe,

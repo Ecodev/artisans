@@ -1,12 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NaturalAbstractDetail, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {MatIconModule} from '@angular/material/icon';
+import {MatIcon} from '@angular/material/icon';
 import {AddressComponent} from '../../../shared/components/address/address.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDivider} from '@angular/material/divider';
+import {MatButton} from '@angular/material/button';
+import {MatInput} from '@angular/material/input';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -14,12 +14,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatDividerModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatButton,
+        MatDivider,
         AddressComponent,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
     ],
     templateUrl: './account.component.html',

@@ -5,10 +5,10 @@ import {deliverableEmail, ifValid} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {finalize} from 'rxjs/operators';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDivider} from '@angular/material/divider';
+import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
 
 @Component({
@@ -16,11 +16,15 @@ import {MatIcon} from '@angular/material/icon';
     imports: [
         FormsModule,
         ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatSuffix,
+        MatInput,
+        MatButton,
+        MatIconButton,
         RouterLink,
-        MatDividerModule,
+        MatDivider,
         MatIcon,
     ],
     templateUrl: './login.component.html',

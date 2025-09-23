@@ -1,13 +1,13 @@
-import {Component, DestroyRef, inject, OnInit, input} from '@angular/core';
+import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {CartLineProduct} from '../../../front-office/modules/cart/classes/cart';
 import {Subscriptions} from '../../generated-types';
 import {Currency, CurrencyService} from '../../services/currency.service';
-import {CommonModule} from '@angular/common';
+import {CurrencyPipe} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-price',
-    imports: [CommonModule],
+    imports: [CurrencyPipe],
     templateUrl: './price.component.html',
     styleUrl: './price.component.scss',
 })

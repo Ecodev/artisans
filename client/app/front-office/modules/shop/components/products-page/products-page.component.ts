@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, input} from '@angular/core';
+import {Component, inject, input, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     fromUrl,
@@ -13,10 +13,10 @@ import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractIn
 import {Products} from '../../../../../shared/generated-types';
 import {StripTagsPipe} from '../../../../../shared/pipes/strip-tags.pipe';
 import {TruncatePipe} from '../../../../../shared/pipes/truncate.pipe';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
 import {TagsNavigationComponent} from '../../../../../shared/components/tags-navigation/tags-navigation.component';
-import {CommonModule} from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 export enum ProductsViewMode {
     grid = 'grid',
@@ -26,11 +26,11 @@ export enum ProductsViewMode {
 @Component({
     selector: 'app-products-page',
     imports: [
-        CommonModule,
+        DatePipe,
         TagsNavigationComponent,
         RouterLink,
         PriceComponent,
-        MatButtonModule,
+        MatButton,
         NaturalSrcDensityDirective,
         NaturalCapitalizePipe,
         TruncatePipe,

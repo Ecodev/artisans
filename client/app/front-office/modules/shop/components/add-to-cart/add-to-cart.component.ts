@@ -3,11 +3,11 @@ import {ProductType} from '../../../../../shared/generated-types';
 import {CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
 import {RouterLink} from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButton} from '@angular/material/button';
 
 @Component({
     selector: 'app-add-to-cart',
-    imports: [MatButtonModule, RouterLink],
+    imports: [MatButton, RouterLink],
     templateUrl: './add-to-cart.component.html',
     styleUrl: './add-to-cart.component.scss',
 })

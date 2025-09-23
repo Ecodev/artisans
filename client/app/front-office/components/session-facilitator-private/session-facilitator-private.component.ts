@@ -5,13 +5,13 @@ import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/
 import {UserService} from '../../../admin/users/services/user.service';
 import {SortingOrder, UserRole, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {CommonModule} from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
+import {MatListItem, MatNavList} from '@angular/material/list';
+import {KeyValuePipe} from '@angular/common';
 
 @Component({
     selector: 'app-session-facilitator-private',
-    imports: [CommonModule, MatListModule, MatIconModule, NaturalIconDirective, SessionSideColumnComponent],
+    imports: [KeyValuePipe, MatNavList, MatListItem, MatIcon, NaturalIconDirective, SessionSideColumnComponent],
     templateUrl: './session-facilitator-private.component.html',
     styleUrl: './session-facilitator-private.component.scss',
 })

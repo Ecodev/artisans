@@ -2,13 +2,12 @@ import {Component, inject} from '@angular/core';
 import {NaturalCapitalizePipe, PaginationInput} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
-import {MatButtonModule} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
-import {CommonModule} from '@angular/common';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-newses-page',
-    imports: [CommonModule, RouterLink, MatButtonModule, NaturalCapitalizePipe],
+    imports: [DatePipe, RouterLink, NaturalCapitalizePipe],
     templateUrl: './newses-page.component.html',
     styleUrl: './newses-page.component.scss',
 })

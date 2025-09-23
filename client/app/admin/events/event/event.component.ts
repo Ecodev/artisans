@@ -11,14 +11,14 @@ import {
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../services/event.service';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel, MatSuffix} from '@angular/material/form-field';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {MatIcon} from '@angular/material/icon';
+import {MatButton} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDividerModule} from '@angular/material/divider';
+import {MatDivider} from '@angular/material/divider';
 
 @Component({
     selector: 'app-event',
@@ -26,16 +26,22 @@ import {MatDividerModule} from '@angular/material/divider';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        MatButtonModule,
+        MatButton,
         RouterLink,
-        MatIconModule,
+        MatIcon,
         NaturalIconDirective,
-        MatTabsModule,
+        MatTab,
+        MatTabGroup,
         NaturalLinkableTabDirective,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
+        MatDivider,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatSuffix,
+        MatInput,
+        MatDatepicker,
+        MatDatepickerInput,
+        MatDatepickerToggle,
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,
     ],

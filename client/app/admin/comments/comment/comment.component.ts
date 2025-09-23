@@ -12,11 +12,11 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../../events/services/event.service';
 import {NewsService} from '../../newses/services/news.service';
 import {CommentService} from '../services/comment.service';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatTabsModule} from '@angular/material/tabs';
+import {MatInput} from '@angular/material/input';
+import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDividerModule} from '@angular/material/divider';
+import {MatDivider} from '@angular/material/divider';
 
 @Component({
     selector: 'app-comment',
@@ -24,11 +24,14 @@ import {MatDividerModule} from '@angular/material/divider';
         FormsModule,
         ReactiveFormsModule,
         NaturalDetailHeaderComponent,
-        MatTabsModule,
+        MatTab,
+        MatTabGroup,
         NaturalLinkableTabDirective,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatInputModule,
+        MatDivider,
+        MatFormField,
+        MatLabel,
+        MatError,
+        MatInput,
         NaturalSelectComponent,
         NaturalStampComponent,
         NaturalFixedButtonDetailComponent,

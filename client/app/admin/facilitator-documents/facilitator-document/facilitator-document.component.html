@@ -20,26 +20,12 @@
                     <mat-form-field>
                         <mat-label>Nom</mat-label>
                         <input formControlName="name" matInput (change)="update()" />
-                        @if (form.get('name')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('name')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('name')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Rubrique</mat-label>
                         <input formControlName="category" matInput (change)="update()" />
-                        @if (form.get('category')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('category')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('category')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('category')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
                 </div>
 

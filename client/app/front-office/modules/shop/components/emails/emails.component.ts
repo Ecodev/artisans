@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
@@ -14,7 +15,17 @@ export type EmailsData = {
 
 @Component({
     selector: 'app-emails',
-    imports: [MatDialogModule, FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatError, MatInput, MatButton],
+    imports: [
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatError,
+        NaturalErrorMessagePipe,
+        MatInput,
+        MatButton,
+    ],
     templateUrl: './emails.component.html',
     styleUrl: './emails.component.scss',
 })

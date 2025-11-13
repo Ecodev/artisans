@@ -13,14 +13,7 @@
                     <mat-form-field>
                         <input formControlName="name" matInput (change)="update()" />
                         <mat-label>Nom</mat-label>
-                        @if (form.get('name')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('name')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('name')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
                     <div class="mat-body-2">Description</div>
@@ -30,9 +23,7 @@
                     <mat-form-field>
                         <mat-label>Première date</mat-label>
                         <input formControlName="startDate" matInput [matDatepicker]="picker" (dateChange)="update()" />
-                        @if (form.get('startDate')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('startDate')?.errors | errorMessage }}</mat-error>
                         <mat-datepicker-toggle matIconSuffix [for]="picker" />
                         <mat-datepicker #picker />
                         <mat-hint
@@ -43,9 +34,7 @@
                     <mat-form-field>
                         <mat-label>Date d'envoi de l'appel à contribution</mat-label>
                         <input formControlName="endDate" matInput [matDatepicker]="picker2" (dateChange)="update()" />
-                        @if (form.get('endDate')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('endDate')?.errors | errorMessage }}</mat-error>
                         <mat-datepicker-toggle matIconSuffix [for]="picker2" />
                         <mat-datepicker #picker2 />
                         <mat-hint

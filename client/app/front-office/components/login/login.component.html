@@ -14,17 +14,7 @@
                     type="email"
                     (keydown.enter)="maybeConfirm()"
                 />
-                @if (form.controls.email.hasError('maxlength')) {
-                    <mat-error
-                        >Maximum {{ form.controls.email.errors?.maxlength?.requiredLength }} caractères</mat-error
-                    >
-                }
-                @if (form.controls.email.hasError('email')) {
-                    <mat-error>Courriel invalide</mat-error>
-                }
-                @if (form.controls.email.hasError('required')) {
-                    <mat-error>Requis</mat-error>
-                }
+                <mat-error>{{ form.controls.email.errors | errorMessage }}</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -42,9 +32,7 @@
                 <button mat-icon-button matIconSuffix (click)="hidePassword = !hidePassword">
                     <mat-icon [fontIcon]="hidePassword ? 'visibility' : 'visibility_off'" />
                 </button>
-                @if (form.controls.password.hasError('required')) {
-                    <mat-error>Requis</mat-error>
-                }
+                <mat-error>{{ form.controls.password.errors | errorMessage }}</mat-error>
             </mat-form-field>
 
             <div class="nat-horizontal nat-gap-10">

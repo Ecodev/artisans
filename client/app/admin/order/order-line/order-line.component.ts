@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject, OnInit} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {
@@ -26,6 +27,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatFormField,
         MatLabel,
         MatError,
+        NaturalErrorMessagePipe,
         MatInput,
         NaturalSelectEnumComponent,
         MatButton,

@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 <div class="detail-body" [formGroup]="form">
     <natural-detail-header
         label="Produit"
@@ -28,29 +27,16 @@
                     <mat-form-field>
                         <mat-label>Nom</mat-label>
                         <input formControlName="name" matInput (change)="update()" />
-                        @if (form.get('name')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('name')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('name')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
                         <mat-label>Code</mat-label>
                         <input formControlName="code" matInput maxlength="20" (change)="update()" />
-                        @if (form.get('code')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('code')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
                         @if (form.get('code')?.hasError('duplicateValue')) {
                             <mat-error> Ce code est déjà attribué à un produit</mat-error>
-                        }
-                        @if (form.get('code')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
+                        } @else {
+                            <mat-error>{{ form.get('code')?.errors | errorMessage }}</mat-error>
                         }
                     </mat-form-field>
 
@@ -163,12 +149,7 @@
                             (change)="update()"
                         />
                         <div matTextSuffix>CHF</div>
-                        @if (form.get('pricePerUnitCHF')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
-                        @if (form.get('pricePerUnitCHF')?.hasError('money')) {
-                            <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
-                        }
+                        <mat-error>{{ form.get('pricePerUnitCHF')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
@@ -181,12 +162,7 @@
                             (change)="update()"
                         />
                         <div matTextSuffix>EUR</div>
-                        @if (form.get('pricePerUnitEUR')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
-                        @if (form.get('pricePerUnitEUR')?.hasError('money')) {
-                            <mat-error>Le montant doit être un nombre avec un maximum de deux décimales</mat-error>
-                        }
+                        <mat-error>{{ form.get('pricePerUnitEUR')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
                 </div>
             </div>

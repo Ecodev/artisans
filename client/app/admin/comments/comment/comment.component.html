@@ -13,14 +13,7 @@
                     <mat-form-field>
                         <textarea formControlName="description" matInput (change)="update()"></textarea>
                         <mat-label>Commentaire</mat-label>
-                        @if (form.get('description')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('description')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('description')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('description')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
                 </div>
 

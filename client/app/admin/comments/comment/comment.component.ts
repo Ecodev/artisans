@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject, OnInit} from '@angular/core';
 import {
     NaturalAbstractDetail,
@@ -31,6 +32,7 @@ import {MatDivider} from '@angular/material/divider';
         MatFormField,
         MatLabel,
         MatError,
+        NaturalErrorMessagePipe,
         MatInput,
         NaturalSelectComponent,
         NaturalStampComponent,

@@ -6,9 +6,7 @@
                 <mat-form-field class="nat-expand">
                     <mat-label>Email</mat-label>
                     <input matInput [formControl]="$any(control)" />
-                    @if (control.hasError('email')) {
-                        <mat-error>Courriel invalide</mat-error>
-                    }
+                    <mat-error>{{ control.errors | errorMessage }}</mat-error>
                 </mat-form-field>
             </div>
         }

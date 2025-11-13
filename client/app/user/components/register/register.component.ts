@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Apollo, gql} from 'apollo-angular';
 import {Component, inject, OnInit} from '@angular/core';
 import {
@@ -26,6 +27,7 @@ import {MatError, MatFormField, MatLabel, MatPrefix} from '@angular/material/for
         MatFormField,
         MatLabel,
         MatError,
+        NaturalErrorMessagePipe,
         MatPrefix,
         MatInput,
         MatIcon,

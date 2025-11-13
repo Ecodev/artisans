@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {NgTemplateOutlet} from '@angular/common';
 import {AfterViewInit, Component, DestroyRef, ElementRef, inject, OnInit} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -49,6 +50,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
         MatFormField,
         MatLabel,
         MatError,
+        NaturalErrorMessagePipe,
         MatSuffix,
         MatInput,
         FormsModule,

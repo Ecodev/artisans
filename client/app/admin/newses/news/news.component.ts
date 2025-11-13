@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject, OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
@@ -40,6 +41,7 @@ import {MatDivider} from '@angular/material/divider';
         MatFormField,
         MatLabel,
         MatError,
+        NaturalErrorMessagePipe,
         MatSuffix,
         MatInput,
         CdkTextareaAutosize,

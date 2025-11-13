@@ -12,15 +12,7 @@
             (keydown.enter)="dialogRef.close(amount.value)"
         />
         <div matTextSuffix>{{ currencyService.current.value }}</div>
-        @if (amount.hasError('required')) {
-            <mat-error>Requis</mat-error>
-        }
-        @if (amount.hasError('money')) {
-            <mat-error>Le montant doit être un nombre avec un maximum de deux décimales </mat-error>
-        }
-        @if (amount.hasError('min')) {
-            <mat-error>Le montant doit être positif</mat-error>
-        }
+        <mat-error>{{ amount.errors | errorMessage }}</mat-error>
     </mat-form-field>
 </mat-dialog-content>
 

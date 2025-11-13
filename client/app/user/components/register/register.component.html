@@ -6,12 +6,7 @@
             <mat-label>email</mat-label>
             <input formControlName="email" matInput />
             <mat-icon matIconPrefix naturalIcon="alternate_email" />
-            @if (form.get('email')?.hasError('required')) {
-                <mat-error>Requis</mat-error>
-            }
-            @if (form.get('email')?.hasError('email')) {
-                <mat-error>Adresse email invalide</mat-error>
-            }
+            <mat-error>{{ form.get('email')?.errors | errorMessage }}</mat-error>
         </mat-form-field>
 
         @if (step === 2) {

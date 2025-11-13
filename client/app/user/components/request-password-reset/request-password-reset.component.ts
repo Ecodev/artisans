@@ -1,3 +1,4 @@
+import {NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
@@ -16,6 +17,7 @@ import {MatError, MatFormField, MatLabel, MatPrefix} from '@angular/material/for
         MatFormField,
         MatLabel,
         MatError,
+        NaturalErrorMessagePipe,
         MatPrefix,
         MatInput,
         MatIcon,

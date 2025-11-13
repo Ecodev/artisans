@@ -20,40 +20,19 @@
                     <mat-form-field>
                         <input formControlName="name" matInput (change)="update()" />
                         <mat-label>Nom</mat-label>
-                        @if (form.get('name')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('name')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('name')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('name')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
                         <input formControlName="place" matInput (change)="update()" />
                         <mat-label>Lieu</mat-label>
-                        @if (form.get('place')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('place')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('place')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('place')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
                     <mat-form-field>
                         <input formControlName="type" matInput (change)="update()" />
                         <mat-label>Type</mat-label>
-                        @if (form.get('type')?.hasError('maxlength')) {
-                            <mat-error>
-                                Maximum {{ form.get('type')?.errors?.maxlength?.requiredLength }} caractères
-                            </mat-error>
-                        }
-                        @if (form.get('type')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('type')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
                 </div>
 
@@ -63,9 +42,7 @@
                         <input formControlName="date" matInput [matDatepicker]="picker" (change)="update()" />
                         <mat-datepicker-toggle matIconSuffix [for]="picker" />
                         <mat-datepicker #picker />
-                        @if (form.get('date')?.hasError('required')) {
-                            <mat-error>Requis</mat-error>
-                        }
+                        <mat-error>{{ form.get('date')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
                 </div>
             </div>

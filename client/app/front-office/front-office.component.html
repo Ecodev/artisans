@@ -152,9 +152,7 @@
                     <mat-form-field id="newsletter-subscription">
                         <mat-label>Adresse e-mail</mat-label>
                         <input matInput formControlName="email" />
-                        @if (newsletterForm.controls.email.errors) {
-                            <mat-error>Veuillez indiquer une addresse courriel valide</mat-error>
-                        }
+                        <mat-error>{{ newsletterForm.controls.email.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
                     @if (newsletterForm.valid) {

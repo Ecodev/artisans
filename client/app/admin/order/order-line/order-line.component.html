@@ -25,15 +25,7 @@
             <mat-form-field [style.width.px]="90">
                 <mat-label>Quantité</mat-label>
                 <input formControlName="quantity" matInput step="1" type="number" [attr.min]="0" />
-                @if (form.get('quantity')?.hasError('required')) {
-                    <mat-error>Requis</mat-error>
-                }
-                @if (form.get('quantity')?.hasError('integer')) {
-                    <mat-error>Doit être un nombre entier</mat-error>
-                }
-                @if (form.get('quantity')?.hasError('min')) {
-                    <mat-error>Valeur positive</mat-error>
-                }
+                <mat-error>{{ form.get('quantity')?.errors | errorMessage }}</mat-error>
             </mat-form-field>
 
             <!-- Show only for products -->

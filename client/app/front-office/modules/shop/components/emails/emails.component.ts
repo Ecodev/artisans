@@ -48,7 +48,7 @@ export class EmailsComponent {
         this.form.setControl('emails', this.emailsControl);
     }
 
-    public validEmails(): string[] {
+    protected validEmails(): string[] {
         return this.emailsControl.getRawValue().filter(email => email);
     }
 }

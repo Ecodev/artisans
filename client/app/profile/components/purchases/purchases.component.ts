@@ -49,7 +49,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
         this.persistSearch = false;
     }
 
-    public getDownloadLink(orderLine: Purchases['purchases']['items'][0]): null | string {
+    protected getDownloadLink(orderLine: Purchases['purchases']['items'][0]): null | string {
         if (orderLine.product?.file) {
             return this.naturalFileService.getDownloadLink(orderLine.product.file);
         }
@@ -57,7 +57,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
         return null;
     }
 
-    public canDownload(orderLine: Purchases['purchases']['items'][0]): boolean {
+    protected canDownload(orderLine: Purchases['purchases']['items'][0]): boolean {
         const isDigital = orderLine.type === ProductType.Both || orderLine.type === ProductType.Digital;
         const hasFile = orderLine.product?.file;
 

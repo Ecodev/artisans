@@ -116,7 +116,7 @@ export class CreateOrderComponent implements OnInit {
     /**
      * Set shipping address mandatory if "same address" is unchecked
      */
-    public updateAddressRequirements(required: boolean, form: FormGroup): void {
+    protected updateAddressRequirements(required: boolean, form: FormGroup): void {
         const fields = ['firstName', 'lastName', 'street', 'locality', 'postcode', 'country'];
         fields.forEach(fieldName => {
             const control = form.get(fieldName);
@@ -127,7 +127,7 @@ export class CreateOrderComponent implements OnInit {
         });
     }
 
-    public createOrder(): void {
+    protected createOrder(): void {
         const paymentMethod = this.shippingForm.get('paymentMethod');
         if (!paymentMethod || !this.cart) {
             return;
@@ -151,7 +151,7 @@ export class CreateOrderComponent implements OnInit {
             });
     }
 
-    public confirmationRedirect(): void {
+    protected confirmationRedirect(): void {
         this.cart?.empty();
         this.showConfirmationMessage = true;
         this.navigationService.scrollToTop();

@@ -122,7 +122,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
         });
     }
 
-    public getDetailLink(product: Products['products']['items'][0]): RouterLink['routerLink'] {
+    protected getDetailLink(product: Products['products']['items'][0]): RouterLink['routerLink'] {
         return ['/larevuedurable', product.reviewNumber ? 'numero' : 'article', product.id];
     }
 }

@@ -30,7 +30,7 @@ export class TagsNavigationComponent {
         });
     }
 
-    public getLink(item: ProductTags['productTags']['items'][0]): RouterLink['routerLink'] {
+    protected getLink(item: ProductTags['productTags']['items'][0]): RouterLink['routerLink'] {
         return [...this.linkBase(), item.name];
     }
 }

@@ -88,7 +88,7 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService, Natu
         super('product', inject(ProductService));
     }
 
-    public createFileAndLink(file: File): Observable<CreateFile['createFile']> {
+    protected createFileAndLink(file: File): Observable<CreateFile['createFile']> {
         return this.fileService.create({file}).pipe(
             switchMap(newFile => {
                 const id = this.data.model.id;
@@ -104,7 +104,9 @@ export class ProductComponent extends NaturalAbstractDetail<ProductService, Natu
         );
     }
 
-    public createImageAndLink(key: 'illustration' | 'image'): (file: File) => Observable<CreateImage['createImage']> {
+    protected createImageAndLink(
+        key: 'illustration' | 'image',
+    ): (file: File) => Observable<CreateImage['createImage']> {
         return file =>
             this.imageService.create({file}).pipe(
                 switchMap(image => {

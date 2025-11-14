@@ -46,7 +46,7 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
         }
     }
 
-    public requestPasswordReset(): void {
+    protected requestPasswordReset(): void {
         this.service.requestPasswordReset(this.form.get('email')?.value).subscribe({
             next: () => {
                 this.passwordMailSending = false;

@@ -59,7 +59,7 @@ export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
         super('facilitatorDocument', inject(FacilitatorDocumentsService));
     }
 
-    public createFileAndLink(file: File): Observable<CreateFile['createFile']> {
+    protected createFileAndLink(file: File): Observable<CreateFile['createFile']> {
         return this.fileService.create({file}).pipe(
             switchMap(newFile => {
                 const id = this.data.model.id;

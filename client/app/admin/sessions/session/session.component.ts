@@ -80,7 +80,7 @@ export class SessionComponent extends NaturalAbstractDetail<SessionService, Natu
         this.form.setControl('dates', this.datesForm);
     }
 
-    public addDate(): void {
+    protected addDate(): void {
         this.datesForm.push(new FormControl(''));
     }
 }

@@ -72,7 +72,7 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
         }
     }
 
-    public addComment(): void {
+    protected addComment(): void {
         this.publishing = true;
         const comment = {
             description: this.newCommentValue,

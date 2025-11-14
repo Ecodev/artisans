@@ -304,7 +304,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
      * To reuse some implemented mechanics, the search is just a redirection that converts the search string into a
      * global natural search
      */
-    public search(): void {
+    protected search(): void {
         const search: NaturalSearchSelections = [
             [
                 {
@@ -317,7 +317,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
         this.router.navigate(['/larevuedurable/recherche', toNavigationParameters(search)]);
     }
 
-    public openMenuDropdown(items: MenuItem[], event: MouseEvent): void {
+    protected openMenuDropdown(items: MenuItem[], event: MouseEvent): void {
         if (!items?.length) {
             return;
         }
@@ -339,7 +339,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
             .subscribe(() => target.classList.remove(openClass));
     }
 
-    public subscribeNewsletter(): void {
+    protected subscribeNewsletter(): void {
         ifValid(this.newsletterForm).subscribe(() => {
             this.newsletterForm.disable();
             this.userService

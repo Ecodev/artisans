@@ -62,7 +62,7 @@ export class CartComponent implements OnInit {
         }
     }
 
-    public empty(): void {
+    protected empty(): void {
         this.alertService
             .confirm(
                 'Vider le panier',
@@ -76,11 +76,11 @@ export class CartComponent implements OnInit {
             });
     }
 
-    public increase(product: CartLineProduct, type: ProductType): void {
+    protected increase(product: CartLineProduct, type: ProductType): void {
         this.cart?.addProduct(product, type, 1);
     }
 
-    public decrease(product: CartLineProduct, type: ProductType): void {
+    protected decrease(product: CartLineProduct, type: ProductType): void {
         this.cart?.removeProduct(product, type, 1);
     }
 }

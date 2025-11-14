@@ -68,7 +68,7 @@ export class OrderComponent {
         });
     }
 
-    public updateStatus(status: string | string[] | null): void {
+    protected updateStatus(status: string | string[] | null): void {
         if (typeof status !== 'string') {
             return;
         }

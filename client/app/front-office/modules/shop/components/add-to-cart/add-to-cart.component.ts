@@ -36,7 +36,7 @@ export class AddToCartComponent {
 
     public inCart = false;
 
-    public click(): void {
+    protected click(): void {
         this.cartService.addProduct(this.product(), this.type(), 1);
         setTimeout(() => (this.inCart = true), 300);
     }

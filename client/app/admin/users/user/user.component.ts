@@ -91,7 +91,7 @@ export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeo
         });
     }
 
-    public roleDisabled(): (item: IEnum) => boolean {
+    protected roleDisabled(): (item: IEnum) => boolean {
         return item => {
             return !this.userRolesAvailable.includes(item.value as UserRole);
         };

@@ -61,7 +61,7 @@ export class ImportComponent implements OnInit {
         this.routeData = this.route.snapshot.data as NaturalSeoResolveData;
     }
 
-    public uploadFile(selection: FileSelection): void {
+    protected uploadFile(selection: FileSelection): void {
         this.errors = [];
         this.result = null;
         this.users = [];
@@ -118,7 +118,7 @@ export class ImportComponent implements OnInit {
             });
     }
 
-    public deleteAll(): void {
+    protected deleteAll(): void {
         this.alertService
             .confirm(
                 'Suppression',

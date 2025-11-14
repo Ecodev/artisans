@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    public maybeConfirm(): void {
+    protected maybeConfirm(): void {
         ifValid(this.form).subscribe(() => this.login());
     }
 

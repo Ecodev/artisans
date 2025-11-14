@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
         this.productService.getMembershipProduct().subscribe(product => (this.membershipProduct = product));
     }
 
-    public requestMembershipEnd(): void {
+    protected requestMembershipEnd(): void {
         this.alertService
             .confirm(
                 'Arrêter les cotisations',

@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    public submit(): void {
+    protected submit(): void {
         validateAllFormControls(this.form);
 
         ifValid(this.form).subscribe(() => this.doSubmit());

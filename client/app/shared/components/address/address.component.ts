@@ -47,7 +47,7 @@ export class AddressComponent {
      */
     public readonly addressChange = output();
 
-    public update(): void {
+    protected update(): void {
         this.addressChange.emit();
     }
 }

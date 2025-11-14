@@ -33,7 +33,7 @@ export class SubscriptionsComponent implements OnInit {
             .subscribe(res => (this.subscriptions = keyBy(res.items, i => i.id)));
     }
 
-    public order(id: string, type: ProductType, withEmails?: boolean): void {
+    protected order(id: string, type: ProductType, withEmails?: boolean): void {
         const subscribeFn = (emails?: string[]): void => {
             if (!this.subscriptions) {
                 return;

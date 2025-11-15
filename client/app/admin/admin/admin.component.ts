@@ -44,7 +44,7 @@ import {MatToolbar} from '@angular/material/toolbar';
 export class AdminComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);
 
-    public viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfile['viewer'] = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer : null;

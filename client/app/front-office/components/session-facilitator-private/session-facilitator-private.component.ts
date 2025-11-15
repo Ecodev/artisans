@@ -16,11 +16,11 @@ import {KeyValuePipe} from '@angular/common';
     styleUrl: './session-facilitator-private.component.scss',
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
-    public readonly userService = inject(UserService);
+    protected readonly userService = inject(UserService);
     private readonly facilitatorDocumentService = inject(FacilitatorDocumentsService);
 
-    public facilitators: Users['users']['items'][0][] = [];
-    public categories: Literal = {};
+    protected facilitators: Users['users']['items'][0][] = [];
+    protected categories: Literal = {};
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();

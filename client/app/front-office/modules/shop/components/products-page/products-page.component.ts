@@ -60,33 +60,33 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
      * Display tags over products
      * Configurable by routing
      */
-    public showTagsOnProducts = true;
+    protected showTagsOnProducts = true;
 
     /**
      * Display tag navigation
      * Configurable by routing
      */
-    public showTagsNavigation = true;
+    protected showTagsNavigation = true;
 
     /**
      * Display as grid or as list
      */
-    public viewMode: ProductsViewMode = ProductsViewMode.grid;
+    protected viewMode: ProductsViewMode = ProductsViewMode.grid;
 
     /**
      * Items to display
      */
-    public products: Products['products']['items'][0][] = [];
+    protected products: Products['products']['items'][0][] = [];
 
     /**
      * Page main title
      */
-    public title = '';
+    protected title = '';
 
     /**
      * Template access
      */
-    public ProductsViewMode = ProductsViewMode;
+    protected ProductsViewMode = ProductsViewMode;
 
     /**
      * Pagination with page size as multiple of 3 to end correctly before "show more" button.

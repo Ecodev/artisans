@@ -43,15 +43,15 @@ type Block = {
 })
 export class HomeBlockComponent implements OnInit {
     private readonly configService = inject(ConfigurationService);
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public readonly key = input.required<string>();
 
-    public editMode = false;
+    protected editMode = false;
 
-    public form!: FormGroup;
+    protected form!: FormGroup;
 
-    public lastValue: Block | null = null;
+    protected lastValue: Block | null = null;
 
     public ngOnInit(): void {
         this.form = new FormGroup({

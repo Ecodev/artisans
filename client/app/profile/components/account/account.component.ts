@@ -30,7 +30,7 @@ export class AccountComponent extends NaturalAbstractDetail<UserService> impleme
     /**
      * True while password request is pending
      */
-    public passwordMailSending = false;
+    protected passwordMailSending = false;
 
     public constructor() {
         super('user', inject(UserService));

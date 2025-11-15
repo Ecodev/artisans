@@ -47,9 +47,9 @@ export class RegisterComponent implements OnInit {
     protected readonly router = inject(Router);
     protected readonly alertService = inject(NaturalAlertService);
 
-    public step = 1;
-    public sending = false;
-    public form!: FormGroup;
+    protected step = 1;
+    protected sending = false;
+    protected form!: FormGroup;
 
     public ngOnInit(): void {
         this.initForm();

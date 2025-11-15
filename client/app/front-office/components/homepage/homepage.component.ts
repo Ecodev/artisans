@@ -57,31 +57,31 @@ import {HomeBlockComponent} from '../home-block/home-block.component';
     styleUrl: './homepage.component.scss',
 })
 export class HomepageComponent implements OnInit {
-    public readonly userService = inject(UserService);
+    protected readonly userService = inject(UserService);
     private readonly route = inject(ActivatedRoute);
     private readonly newsService = inject(NewsService);
     private readonly eventService = inject(EventService);
     private readonly productService = inject(ProductService);
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
-    public title = 'Les artisans de la transition';
+    protected title = 'Les artisans de la transition';
 
-    public viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfile['viewer'] = null;
 
     /**
      * Last newses
      */
-    public newses: Newses['newses']['items'][0][] = [];
+    protected newses: Newses['newses']['items'][0][] = [];
 
     /**
      * Next events
      */
-    public events: Events['events']['items'][0][] = [];
+    protected events: Events['events']['items'][0][] = [];
 
     /**
      * Currently active review
      */
-    public currentReview: Products['products']['items'][0] | null = null;
+    protected currentReview: Products['products']['items'][0] | null = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer;

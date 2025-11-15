@@ -58,7 +58,7 @@ import {AsyncPipe} from '@angular/common';
     styleUrl: './facilitator-documents.component.scss',
 })
 export class FacilitatorDocumentsComponent extends NaturalAbstractList<FacilitatorDocumentsService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override columnsForTable = ['name', 'category', 'file'];
 

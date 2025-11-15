@@ -42,9 +42,9 @@ import {MatDivider} from '@angular/material/divider';
     styleUrl: './comment.component.scss',
 })
 export class CommentComponent extends NaturalAbstractDetail<CommentService, NaturalSeoResolveData> implements OnInit {
-    public readonly newsService = inject(NewsService);
-    public readonly eventService = inject(EventService);
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly newsService = inject(NewsService);
+    protected readonly eventService = inject(EventService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
         super('comment', inject(CommentService));

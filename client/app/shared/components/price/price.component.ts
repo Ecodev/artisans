@@ -12,12 +12,12 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     styleUrl: './price.component.scss',
 })
 export class PriceComponent implements OnInit {
-    public readonly currencyService = inject(CurrencyService);
+    protected readonly currencyService = inject(CurrencyService);
 
     private readonly destroyRef = inject(DestroyRef);
     public readonly product = input.required<CartLineProduct | Subscriptions['subscriptions']['items'][0]>();
 
-    public price!: string;
+    protected price!: string;
 
     public ngOnInit(): void {
         this.currencyService.current.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(currency => {

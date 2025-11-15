@@ -30,14 +30,14 @@ export type EmailsData = {
     styleUrl: './emails.component.scss',
 })
 export class EmailsComponent {
-    public readonly dialogData = inject<EmailsData>(MAT_DIALOG_DATA);
+    protected readonly dialogData = inject<EmailsData>(MAT_DIALOG_DATA);
 
-    public readonly form: FormGroup = new FormGroup({});
+    protected readonly form: FormGroup = new FormGroup({});
 
     /**
      * Array of form controls dedicated to emails
      */
-    public readonly emailsControl: FormArray;
+    protected readonly emailsControl: FormArray;
 
     public constructor() {
         const dialogData = this.dialogData;

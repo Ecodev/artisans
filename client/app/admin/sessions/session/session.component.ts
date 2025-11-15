@@ -61,12 +61,12 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     styleUrl: './session.component.scss',
 })
 export class SessionComponent extends NaturalAbstractDetail<SessionService, NaturalSeoResolveData> implements OnInit {
-    public readonly userService = inject(UserService);
+    protected readonly userService = inject(UserService);
 
     /**
      * Array of form controls dedicated to dates display
      */
-    public datesForm!: FormArray;
+    protected datesForm!: FormArray;
 
     public constructor() {
         super('session', inject(SessionService));

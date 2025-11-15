@@ -70,7 +70,7 @@ import {
     styleUrl: './users.component.scss',
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
     private readonly apollo = inject(Apollo);
     private readonly document = inject(DOCUMENT);
 
@@ -83,7 +83,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         {id: 'phone', label: 'Téléphone', checked: false},
     ];
 
-    public readonly buttons: Button[] = [
+    protected readonly buttons: Button[] = [
         {
             label: 'Copier...',
             icon: 'email',
@@ -103,8 +103,8 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         },
     ];
 
-    public usersEmail: string | null = null;
-    public usersEmailAndName: string | null = null;
+    protected usersEmail: string | null = null;
+    protected usersEmailAndName: string | null = null;
 
     public constructor() {
         super(inject(UserService));

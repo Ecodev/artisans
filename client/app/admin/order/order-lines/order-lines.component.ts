@@ -66,7 +66,7 @@ import {
     styleUrl: './order-lines.component.scss',
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'creationDate', label: 'Date'},

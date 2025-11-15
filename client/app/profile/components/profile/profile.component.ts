@@ -29,16 +29,16 @@ import {AsyncPipe} from '@angular/common';
     styleUrl: './profile.component.scss',
 })
 export class ProfileComponent implements OnInit {
-    public readonly userService = inject(UserService);
+    protected readonly userService = inject(UserService);
     private readonly alertService = inject(NaturalAlertService);
     private readonly route = inject(ActivatedRoute);
-    public readonly productService = inject(ProductService);
+    protected readonly productService = inject(ProductService);
 
-    public viewer: CurrentUserForProfile['viewer'] = null;
-    public ProductType = ProductType;
-    public Membership = Membership;
+    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected ProductType = ProductType;
+    protected Membership = Membership;
 
-    public membershipProduct: Product['product'] | null = null;
+    protected membershipProduct: Product['product'] | null = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer;

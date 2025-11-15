@@ -51,7 +51,7 @@ import {
     styleUrl: './comments.component.scss',
 })
 export class CommentsComponent extends NaturalAbstractList<CommentService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'description', label: 'Commentaire'},

@@ -63,7 +63,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     styleUrl: './sessions.component.scss',
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'name', label: 'Nom'},

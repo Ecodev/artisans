@@ -14,7 +14,7 @@ export class TagsNavigationComponent {
     /**
      * Items to list
      */
-    public items: ProductTags['productTags']['items'][0][] = [];
+    protected items: ProductTags['productTags']['items'][0][] = [];
 
     /**
      * Url base

@@ -13,7 +13,7 @@ import {DatePipe} from '@angular/common';
     styleUrl: './events-page.component.scss',
 })
 export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     protected override defaultPagination: Required<PaginationInput> = {
         pageSize: 200,

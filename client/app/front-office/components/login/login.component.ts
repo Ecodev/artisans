@@ -42,12 +42,12 @@ export class LoginComponent implements OnInit {
     /**
      * Stores the received redirect URL until we need to use it (when login is successfull)
      */
-    public returnUrl = '/';
-    public readonly form = this.fb.group({
+    protected returnUrl = '/';
+    protected readonly form = this.fb.group({
         email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
         password: ['', [Validators.required]],
     });
-    public hidePassword = true;
+    protected hidePassword = true;
 
     public ngOnInit(): void {
         this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';

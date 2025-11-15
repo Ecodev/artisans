@@ -41,7 +41,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
 export class PurchasesComponent extends NaturalAbstractList<PurchaseService> implements OnInit {
     private readonly naturalFileService = inject(NaturalFileService);
 
-    public ProductType = ProductType;
+    protected ProductType = ProductType;
 
     public constructor() {
         super(inject(PurchaseService));

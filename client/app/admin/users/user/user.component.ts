@@ -63,7 +63,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     styleUrl: './user.component.scss',
 })
 export class UserComponent extends NaturalAbstractDetail<UserService, NaturalSeoResolveData> implements OnInit {
-    public readonly sessionService = inject(SessionService);
+    protected readonly sessionService = inject(SessionService);
 
     private userRolesAvailable: UserRole[] = [];
 

@@ -57,7 +57,7 @@ import {MatDivider} from '@angular/material/divider';
     styleUrl: './news.component.scss',
 })
 export class NewsComponent extends NaturalAbstractDetail<NewsService, NaturalSeoResolveData> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
         super('news', inject(NewsService));

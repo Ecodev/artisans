@@ -67,17 +67,17 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
     private readonly route = inject(ActivatedRoute);
     private readonly router = inject(Router);
     private readonly navigationService = inject(NavigationService);
-    public readonly userService = inject(UserService);
-    public readonly currencyService = inject(CurrencyService);
+    protected readonly userService = inject(UserService);
+    protected readonly currencyService = inject(CurrencyService);
     private readonly fb = inject(NonNullableFormBuilder);
     private readonly alertService = inject(NaturalAlertService);
 
     private readonly destroyRef = inject(DestroyRef);
-    public searchTerm = '';
-    public menuOpened = false;
+    protected searchTerm = '';
+    protected menuOpened = false;
 
-    public viewer: CurrentUserForProfile['viewer'] = null;
-    public readonly newsletterForm = this.fb.group({
+    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected readonly newsletterForm = this.fb.group({
         email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
     });
 
@@ -86,7 +86,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
      * li.opened > ul {max-height: 400px} // mobile menu for transition
      * .hasMenu { height: 300px} // white background on mega menu
      */
-    public navigation: MenuItem[] = [
+    protected navigation: MenuItem[] = [
         {
             display: "L'association",
             link: '/association',
@@ -230,7 +230,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
         },
     ];
 
-    public topNavigation: MenuItem[] = [
+    protected topNavigation: MenuItem[] = [
         {
             display: 'Agenda',
             link: '/agenda',
@@ -267,10 +267,10 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
         },
     ];
 
-    public mobileNavigation: MenuItem[] = [];
+    protected mobileNavigation: MenuItem[] = [];
 
-    public Currency = Currency;
-    public UserRole = UserRole;
+    protected Currency = Currency;
+    protected UserRole = UserRole;
 
     public ngOnInit(): void {
         this.userService.getViewerObservable().subscribe(viewer => (this.viewer = viewer));

@@ -10,11 +10,11 @@ import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/a
     styleUrl: './rejoindre-association.component.scss',
 })
 export class RejoindreAssociationComponent implements OnInit {
-    public readonly productService = inject(ProductService);
+    protected readonly productService = inject(ProductService);
 
-    public ProductType = ProductType;
+    protected ProductType = ProductType;
 
-    public membershipProduct!: Product['product'];
+    protected membershipProduct!: Product['product'];
 
     public ngOnInit(): void {
         this.productService.getMembershipProduct().subscribe(product => (this.membershipProduct = product));

@@ -39,46 +39,46 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
     styleUrl: './create-order.component.scss',
 })
 export class CreateOrderComponent implements OnInit {
-    public readonly cartService = inject(CartService);
+    protected readonly cartService = inject(CartService);
     private readonly alertService = inject(NaturalAlertService);
-    public readonly router = inject(Router);
+    protected readonly router = inject(Router);
     private readonly route = inject(ActivatedRoute);
-    public readonly userService = inject(UserService);
-    public readonly currencyService = inject(CurrencyService);
+    protected readonly userService = inject(UserService);
+    protected readonly currencyService = inject(CurrencyService);
     private readonly cartCollectionService = inject(CartCollectionService);
-    public readonly navigationService = inject(NavigationService);
+    protected readonly navigationService = inject(NavigationService);
     private readonly datatransService = inject(DatatransService);
 
     /**
      * Eligible cart for order
      */
-    public cart?: Cart;
+    protected cart?: Cart;
 
     /**
      * Step 1 form
      */
-    public billingForm!: FormGroup;
+    protected billingForm!: FormGroup;
 
     /**
      * Step 2 form
      */
-    public shippingForm!: FormGroup;
+    protected shippingForm!: FormGroup;
 
     /**
      * For template usage
      */
-    public PaymentMethod = PaymentMethod;
+    protected PaymentMethod = PaymentMethod;
 
     /**
      * If true, cart is hidden and confirmation message is shown.
      * We could use dedicated "empty" component but this way we spare some app weight. We can as well use previous form values.
      */
-    public showConfirmationMessage = false;
+    protected showConfirmationMessage = false;
 
     /**
      * True when creating order has been sent
      */
-    public pending = false;
+    protected pending = false;
 
     public ngOnInit(): void {
         const cart = this.cartCollectionService.getById(+this.route.snapshot.params.cartId);

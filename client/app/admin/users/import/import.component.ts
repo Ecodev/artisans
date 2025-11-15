@@ -33,7 +33,7 @@ import {AsyncPipe} from '@angular/common';
 })
 export class ImportComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
     private readonly apollo = inject(Apollo);
     private readonly alertService = inject(NaturalAlertService);
     private readonly userService = inject(UserService);
@@ -41,14 +41,14 @@ export class ImportComponent implements OnInit {
     /**
      * Data attribute provided by activated route snapshot
      */
-    public routeData!: NaturalSeoResolveData;
+    protected routeData!: NaturalSeoResolveData;
 
-    public importing = false;
-    public errors: string[] = [];
-    public result: Import['import'] | null = null;
-    public users: Users['users']['items'][0][] = [];
+    protected importing = false;
+    protected errors: string[] = [];
+    protected result: Import['import'] | null = null;
+    protected users: Users['users']['items'][0][] = [];
 
-    public readonly params = toNavigationParameters([
+    protected readonly params = toNavigationParameters([
         [
             {
                 field: 'shouldDelete',

@@ -21,7 +21,7 @@ export class ChangePasswordComponent {
     private readonly router = inject(Router);
     private readonly fb = inject(NonNullableFormBuilder);
 
-    public readonly form = this.fb.group({password: ['']});
+    protected readonly form = this.fb.group({password: ['']});
     private readonly token: string;
 
     public constructor() {

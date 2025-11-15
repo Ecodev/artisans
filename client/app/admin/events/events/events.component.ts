@@ -58,7 +58,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     styleUrl: './events.component.scss',
 })
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'date', label: 'Date'},

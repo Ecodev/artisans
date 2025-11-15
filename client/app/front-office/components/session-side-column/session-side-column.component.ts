@@ -16,7 +16,7 @@ export class SessionSideColumnComponent implements OnInit {
     private readonly sessionService = inject(SessionService);
     private readonly route = inject(ActivatedRoute);
 
-    public number = 0;
+    protected number = 0;
 
     public readonly hiddenBlocName = input<string>();
 

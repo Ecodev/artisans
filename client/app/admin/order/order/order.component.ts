@@ -31,26 +31,26 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     styleUrl: './order.component.scss',
 })
 export class OrderComponent {
-    public readonly dialogData = inject<NaturalDialogTriggerProvidedData<never>>(MAT_DIALOG_DATA);
-    public readonly orderService = inject(OrderService);
+    protected readonly dialogData = inject<NaturalDialogTriggerProvidedData<never>>(MAT_DIALOG_DATA);
+    protected readonly orderService = inject(OrderService);
     private readonly alertService = inject(NaturalAlertService);
 
-    public forcedVariables: OrderLinesVariables = {};
+    protected forcedVariables: OrderLinesVariables = {};
 
     /**
      * Preserves usual model that extends AbstractDetail where main object in stored in data.model
      */
-    public data!: {model: Order['order']};
+    protected data!: {model: Order['order']};
 
     /**
      * Currently connected user
      */
-    public viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfile['viewer'] = null;
 
     /**
      * Template usage
      */
-    public UserRole = UserRole;
+    protected UserRole = UserRole;
 
     public constructor() {
         this.viewer = this.dialogData.activatedRoute.snapshot.data.viewer

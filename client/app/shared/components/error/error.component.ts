@@ -12,7 +12,7 @@ import {MatIcon} from '@angular/material/icon';
     styleUrl: './error.component.scss',
 })
 export class ErrorComponent {
-    public readonly error: Error | null;
+    protected readonly error: Error | null;
 
     public constructor() {
         const errorService = inject(ErrorService);

@@ -30,7 +30,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     styleUrl: './comment-list.component.scss',
 })
 export class CommentListComponent extends NaturalAbstractList<CommentService> implements OnInit, OnChanges {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     /**
      * Event related to displayed comments
@@ -47,9 +47,9 @@ export class CommentListComponent extends NaturalAbstractList<CommentService> im
      */
     public override defaultSorting = [{field: CommentSortingField.creationDate, order: SortingOrder.DESC}];
 
-    public publishing = false;
+    protected publishing = false;
 
-    public newCommentValue = '';
+    protected newCommentValue = '';
 
     public constructor() {
         super(inject(CommentService));

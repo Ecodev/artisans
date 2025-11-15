@@ -34,7 +34,7 @@ export class AddToCartComponent {
      */
     public readonly type = input.required<ProductType>();
 
-    public inCart = false;
+    protected inCart = false;
 
     protected click(): void {
         this.cartService.addProduct(this.product(), this.type(), 1);

@@ -19,12 +19,12 @@ export const APP_MENU_DATA = new InjectionToken<MenuDropdownData>('MenuDropdownD
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent {
-    public readonly data = inject(APP_MENU_DATA);
+    protected readonly data = inject(APP_MENU_DATA);
 
     /**
      * Align with main menu button
      */
-    public offsetLeft = 0;
+    protected offsetLeft = 0;
 
     public constructor() {
         const data = this.data;

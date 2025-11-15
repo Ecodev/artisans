@@ -71,7 +71,7 @@ import {
     styleUrl: './orders.component.scss',
 })
 export class OrdersComponent extends NaturalAbstractList<OrderService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override defaultSorting = [{field: OrderSortingField.creationDate, order: SortingOrder.DESC}];
     public override availableColumns: AvailableColumn[] = [

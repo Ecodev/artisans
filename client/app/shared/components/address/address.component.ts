@@ -22,7 +22,7 @@ import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
     styleUrl: './address.component.scss',
 })
 export class AddressComponent {
-    public readonly countryService = inject(CountryService);
+    protected readonly countryService = inject(CountryService);
 
     /**
      * If fields are editable or not
@@ -45,7 +45,7 @@ export class AddressComponent {
     /**
      * Emits when form changes
      */
-    public readonly addressChange = output();
+    protected readonly addressChange = output();
 
     protected update(): void {
         this.addressChange.emit();

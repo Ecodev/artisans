@@ -14,7 +14,7 @@ import {MatButton} from '@angular/material/button';
 export class SessionsIncomingComponent implements OnInit {
     private readonly sessionService = inject(SessionService);
 
-    public sessions: Sessions['sessions']['items'][0][] = [];
+    protected sessions: Sessions['sessions']['items'][0][] = [];
 
     public ngOnInit(): void {
         // Get sessions

@@ -49,31 +49,31 @@ import {DatePipe} from '@angular/common';
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     private readonly purchaseService = inject(PurchaseService);
 
-    public readonly ProductType = ProductType;
+    protected readonly ProductType = ProductType;
 
-    public viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfile['viewer'] = null;
 
     /**
      * Hide buy digital version if it has already been bought as it can be bought only once.
      */
-    public showBuyDigital = false;
+    protected showBuyDigital = false;
 
     /**
      * List of articles contained in current number
      */
-    public articles: Products['products']['items'][0][] = [];
+    protected articles: Products['products']['items'][0][] = [];
 
     /**
      * Boolean that represents the sub-articles navigation menu visibility
      */
-    public articlesMenuOpen = false;
+    protected articlesMenuOpen = false;
 
     /**
      * Hide buy paper version if it has already been bought as it can be bought only once.
      */
-    public showBuyPaper = false;
+    protected showBuyPaper = false;
 
-    public url: string;
+    protected url: string;
 
     public constructor() {
         super('product', inject(ProductService));

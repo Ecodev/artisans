@@ -48,7 +48,7 @@ import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
     styleUrl: './history.component.scss',
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
         super(inject(OrderService));

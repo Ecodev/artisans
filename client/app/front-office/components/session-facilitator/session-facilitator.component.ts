@@ -11,9 +11,9 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
     styleUrl: './session-facilitator.component.scss',
 })
 export class SessionFacilitatorComponent implements OnInit {
-    public readonly userService = inject(UserService);
+    protected readonly userService = inject(UserService);
 
-    public facilitators: Users['users']['items'][0][] = [];
+    protected facilitators: Users['users']['items'][0][] = [];
 
     public ngOnInit(): void {
         const qvm = new NaturalQueryVariablesManager<UsersVariables>();

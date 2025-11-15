@@ -19,13 +19,13 @@ import {PriceComponent} from '../../../../../shared/components/price/price.compo
 export class SubscriptionsComponent implements OnInit {
     private readonly subscriptionService = inject(SubscriptionService);
     private readonly router = inject(Router);
-    public readonly dialog = inject(MatDialog);
+    protected readonly dialog = inject(MatDialog);
     private readonly route = inject(ActivatedRoute);
     private readonly globalCartService = inject(GlobalCartService);
 
-    public subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;
+    protected subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;
 
-    public ProductType = ProductType;
+    protected ProductType = ProductType;
 
     public ngOnInit(): void {
         this.subscriptionService

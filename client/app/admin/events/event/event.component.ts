@@ -51,7 +51,7 @@ import {MatDivider} from '@angular/material/divider';
     styleUrl: './event.component.scss',
 })
 export class EventComponent extends NaturalAbstractDetail<EventService, NaturalSeoResolveData> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public constructor() {
         super('event', inject(EventService));

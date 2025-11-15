@@ -62,7 +62,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     styleUrl: './newses.component.scss',
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'date', label: 'Date'},

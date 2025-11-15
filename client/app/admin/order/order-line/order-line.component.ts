@@ -39,8 +39,8 @@ export class OrderLineComponent
     extends NaturalAbstractDetail<OrderLineService, NaturalSeoResolveData>
     implements OnInit
 {
-    public readonly productService = inject(ProductService);
-    public readonly subscriptionService = inject(SubscriptionService);
+    protected readonly productService = inject(ProductService);
+    protected readonly subscriptionService = inject(SubscriptionService);
 
     public constructor() {
         super('orderLine', inject(OrderLineService));

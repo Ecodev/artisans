@@ -39,17 +39,17 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
 })
 export class CartComponent implements OnInit {
     private readonly alertService = inject(NaturalAlertService);
-    public readonly router = inject(Router);
+    protected readonly router = inject(Router);
     private readonly route = inject(ActivatedRoute);
-    public readonly cartService = inject(CartService);
-    public readonly currencyService = inject(CurrencyService);
+    protected readonly cartService = inject(CartService);
+    protected readonly currencyService = inject(CurrencyService);
     private readonly globalCartService = inject(GlobalCartService);
     private readonly cartCollectionService = inject(CartCollectionService);
 
     /**
      * Eligible cart for Order
      */
-    public cart?: Cart;
+    protected cart?: Cart;
 
     public ngOnInit(): void {
         if (this.route.snapshot.params.cartId) {

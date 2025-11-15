@@ -10,5 +10,5 @@ import {RouterLink} from '@angular/router';
     styleUrl: './faire-un-don.component.scss',
 })
 export class FaireUnDonComponent {
-    public readonly cartService = inject(CartService);
+    protected readonly cartService = inject(CartService);
 }

@@ -67,7 +67,7 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
     styleUrl: './products.component.scss',
 })
 export class ProductsComponent extends NaturalAbstractList<ProductService> implements OnInit {
-    public readonly permissionsService = inject(PermissionsService);
+    protected readonly permissionsService = inject(PermissionsService);
 
     public override availableColumns: AvailableColumn[] = [
         {id: 'code', label: 'Code'},

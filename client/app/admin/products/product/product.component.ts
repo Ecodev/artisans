@@ -78,11 +78,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     styleUrl: './product.component.scss',
 })
 export class ProductComponent extends NaturalAbstractDetail<ProductService, NaturalSeoResolveData> {
-    public readonly productTagService = inject(ProductTagService);
+    protected readonly productTagService = inject(ProductTagService);
     private readonly imageService = inject(ImageService);
     private readonly fileService = inject(FilesService);
 
-    public reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
+    protected reviewXorArticleErrorStateMatcher = new XorErrorStateMatcher('reviewXorArticle');
 
     public constructor() {
         super('product', inject(ProductService));

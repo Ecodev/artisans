@@ -30,10 +30,10 @@ export type DonationData = {
     styleUrl: './donation.component.scss',
 })
 export class DonationComponent {
-    public readonly currencyService = inject(CurrencyService);
-    public readonly dialogRef = inject<MatDialogRef<DonationComponent, number | null>>(MatDialogRef);
+    protected readonly currencyService = inject(CurrencyService);
+    protected readonly dialogRef = inject<MatDialogRef<DonationComponent, number | null>>(MatDialogRef);
 
-    public amount = new FormControl<number | null>(null, [Validators.required, Validators.min(0), money]);
+    protected amount = new FormControl<number | null>(null, [Validators.required, Validators.min(0), money]);
 
     public constructor() {
         const dialogData = inject<DonationData>(MAT_DIALOG_DATA);

@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .introduction {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -9,4 +11,29 @@
 
 #profile-content {
     margin-bottom: 50px;
+}
+
+mat-nav-list {
+    padding-top: 0 !important; // override native .mat-list-base
+    * {
+        color: inherit !important;
+    }
+
+    @include mat.list-overrides(
+        (
+            list-item-hover-label-text-color: var(--mat-sys-on-primary-container),
+            list-item-focus-label-text-color: var(--mat-sys-on-primary-container),
+            list-item-label-text-color: var(--mat-sys-on-primary-container),
+            active-indicator-shape: 0,
+        )
+    );
+}
+
+.active {
+    @include mat.list-overrides(
+        (
+            list-item-container-color: rgba(255, 255, 255, 0.3),
+            list-item-container-shape: 0,
+        )
+    );
 }

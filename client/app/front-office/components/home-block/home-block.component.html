@@ -2,7 +2,7 @@
     <div class="bloc">
         <div class="mat-h1 title">{{ form.get('title')?.value }}</div>
         <div class="bloc-description mat-h4">{{ form.get('description')?.value }}</div>
-        <a mat-flat-button [routerLink]="form.get('buttonLink')?.value">
+        <a matButton="filled" [routerLink]="form.get('buttonLink')?.value">
             {{ form.get('buttonLabel')?.value }}
         </a>
         @if ((permissionsService.crud | async)?.configuration.create) {
@@ -53,7 +53,7 @@
         <div class="nat-horizontal">
             <div class="nat-expand"></div>
             <button mat-button (click)="reset()">Annuler</button>
-            <button color="primary" mat-flat-button (click)="update(); editMode = false">
+            <button color="primary" matButton="filled" (click)="update(); editMode = false">
                 <mat-icon naturalIcon="save" />
                 Sauvegarder
             </button>

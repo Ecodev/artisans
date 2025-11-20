@@ -76,7 +76,7 @@
         }
 
         .product-price {
-            .frame-primary {
+            .nat-frame-primary {
                 margin-right: 5px;
                 padding: 5px;
             }
@@ -96,4 +96,16 @@
     & > :not(:last-child) {
         margin-bottom: 30px;
     }
+}
+
+.products.grid .product {
+    border-color: var(--mat-sys-primary-container) !important;
+}
+
+.product-name {
+    color: var(--mat-sys-on-surface);
+}
+
+.product-tag {
+    color: var(--mat-sys-primary-container);
 }

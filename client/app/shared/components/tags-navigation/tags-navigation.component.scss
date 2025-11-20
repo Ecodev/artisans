@@ -27,3 +27,19 @@
         top: -3px;
     }
 }
+
+:host {
+    &,
+    a {
+        // explicit a gives more ponderation to css selector
+        color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 40%, white);
+    }
+
+    .dot {
+        background-color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 30%, white);
+    }
+
+    a:hover {
+        color: var(--mat-sys-primary-container);
+    }
+}

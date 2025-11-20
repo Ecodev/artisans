@@ -18,7 +18,7 @@
                         <div class="mat-h2">{{ session.name }}</div>
                         <div class="rich-text" [innerHtml]="session.description"></div>
                         @if (session.mailingList) {
-                            <a mat-flat-button color="accent" target="_blank" [attr.href]="session.mailingList">
+                            <a matButton="filled" color="tertiary" target="_blank" [attr.href]="session.mailingList">
                                 Infos
                             </a>
                         }
@@ -48,7 +48,7 @@
             </div>
 
             <div class="nat-horizontal nat-gap-30">
-                <div class="nat-expand-50 frame-primary nat-padding">
+                <div class="nat-expand-50 nat-frame-primary nat-padding">
                     <p>
                         " La crise climatique est alarmante et il est facile de se sentir impuissant. Nous essayons de
                         commencer là où les gens en sont aujourd’hui, pas là où nous aimerions qu’ils soient
@@ -56,7 +56,7 @@
                     </p>
                     <p>Rosemary Randall, co-fondatrice des Conversations carbone</p>
                 </div>
-                <div class="nat-expand-50 frame-primary nat-padding">
+                <div class="nat-expand-50 nat-frame-primary nat-padding">
                     <p>
                         " L'incertitude que la crise climatique engendre peut pousser à trop se concentrer sur ses rêves
                         et ses cauchemars. Il rend difficile de penser concrètement à ce que nous voulons et à ce qui

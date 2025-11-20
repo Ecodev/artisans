@@ -6,7 +6,7 @@
                 <div class="nat-horizontal nat-gap-15 nat-align">
                     <!-- Review number -->
                     @if (data.model.reviewNumber) {
-                        <div class="text-primary text-bold mat-h1 nat-no-margin-bottom">
+                        <div class="nat-text-primary text-bold mat-h1 nat-no-margin-bottom">
                             N° {{ data.model.reviewNumber }}
                         </div>
                     }
@@ -53,7 +53,7 @@
                 <div id="see-more" class="nat-expand nat-vertical">
                     <div
                         matRipple
-                        class="text-primary nat-gap-5 nat-horizontal nat-align"
+                        class="nat-text-primary nat-gap-5 nat-horizontal nat-align"
                         (click)="articlesMenuOpen = !articlesMenuOpen"
                     >
                         <span class="mat-headline-6 show-products-of-review-button nat-no-margin-bottom"
@@ -83,7 +83,7 @@
                     </a>
                     <span class="mat-h4">Article issu de la revue</span>
                     <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">
-                        <span class="text-primary">N° {{ data.model.review.reviewNumber }}</span>
+                        <span class="nat-text-primary">N° {{ data.model.review.reviewNumber }}</span>
                         {{ data.model.review.name }}
                     </a>
                     <span class="text-light">{{ data.model.review.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
@@ -95,7 +95,7 @@
                 <div class="mat-h3 nat-gap-15 nat-horizontal nat-wrap nat-align">
                     <div class="mat-h1 nat-no-margin-bottom">Intéressé par ce contenu ?</div>
                     <div>Si vous êtes déjà abonné à la version numérique</div>
-                    <a mat-flat-button color="primary" routerLink="/login" [queryParams]="{returnUrl: url}"
+                    <a matButton="filled" color="primary" routerLink="/login" [queryParams]="{returnUrl: url}"
                         >connectez-vous !
                     </a>
                 </div>
@@ -103,7 +103,7 @@
             <div class="nat-vertical nat-gap-30 nat-md-horizontal">
                 <!-- Download -->
                 @if (data.model.file) {
-                    <div class="frame-accent nat-padding nat-vertical nat-center nat-md-expand-50">
+                    <div class="nat-frame-tertiary nat-padding nat-vertical nat-center nat-md-expand-50">
                         <div style="max-width: 300px">
                             <h2 class="mat-h2">Téléchargement</h2>
                             @if (data.model.reviewNumber) {
@@ -116,7 +116,7 @@
                                     Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
                                 </p>
                             }
-                            <a mat-flat-button target="_blank" [href]="`/api/file/${data.model.file.id}`">
+                            <a matButton="filled" target="_blank" [href]="`/api/file/${data.model.file.id}`">
                                 <mat-icon naturalIcon="get_app" />
                                 @if (data.model.reviewNumber) {
                                     <span>Télécharger cette revue</span>
@@ -170,7 +170,7 @@
                     </div>
                 }
                 @if (!viewer?.subscriptionType) {
-                    <div class="nat-md-expand-50 nat-vertical frame-primary frame nat-left">
+                    <div class="nat-md-expand-50 nat-vertical nat-frame-primary frame nat-left">
                         <h1 class="mat-h1">S'abonner</h1>
                         <p>
                             Un accès à
@@ -193,7 +193,7 @@
                             <span class="mat-subtitle-2">construire</span>
                             une société écologique et solidaire.
                         </p>
-                        <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
+                        <a matButton="filled" routerLink="/larevuedurable/abonnements">S'abonner</a>
                     </div>
                 }
             </div>

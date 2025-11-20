@@ -1,7 +1,5 @@
-<div class="mat-body nat-fill">
-    <ng-progress [trickleSpeed]="1000" />
-    <router-outlet (activate)="initialized = true" />
-    @if (!initialized) {
-        <app-boot-loader />
-    }
-</div>
+<ng-progress [trickleSpeed]="1000" />
+<router-outlet class="app-page-reference" (activate)="initialized = true" />
+@if (!initialized) {
+    <app-boot-loader />
+}

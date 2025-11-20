@@ -1,9 +1,9 @@
 @if (viewer) {
-    <div class="introduction frame-primary">
+    <div class="introduction nat-frame-primary">
         <div class="container nat-gap-30 nat-sm-horizontal nat-vertical">
             <div class="nat-expand-33 nat-gap-10 nat-vertical nat-left">
                 <div class="mat-headline-4 nat-no-margin nat-expand">Bonjour {{ viewer.firstName }},</div>
-                <button mat-flat-button (click)="userService.logout()">
+                <button matButton="filled" (click)="userService.logout()">
                     <mat-icon naturalIcon="exit_to_app" />
                     Se déconnecter
                 </button>
@@ -16,14 +16,14 @@
                             viewer.subscriptionLastReviewNumber
                         }}
                     </div>
-                    <a mat-flat-button routerLink="/larevuedurable/abonnements">Renouveler</a>
+                    <a matButton="filled" routerLink="/larevuedurable/abonnements">Renouveler</a>
                 }
                 @if (viewer.webTemporaryAccess) {
                     <div>Abonnement actif</div>
                 }
                 @if (!viewer.subscriptionLastReviewNumber && !viewer.webTemporaryAccess) {
                     <div>N'est pas abonné.</div>
-                    <a mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
+                    <a matButton="filled" routerLink="/larevuedurable/abonnements">S'abonner</a>
                 }
             </div>
             <div class="nat-expand-33 nat-gap-30 nat-vertical nat-left">
@@ -38,7 +38,7 @@
                     />
                 }
                 @if (viewer.membership !== Membership.None) {
-                    <a mat-flat-button (click)="requestMembershipEnd()">Arrêter les cotisations</a>
+                    <a matButton="filled" (click)="requestMembershipEnd()">Arrêter les cotisations</a>
                 }
             </div>
         </div>
@@ -48,7 +48,7 @@
 <div id="profile-content"></div>
 
 <div class="body container nat-vertical nat-md-horizontal nat-md-top app-gap-60">
-    <div class="frame-primary">
+    <div class="nat-frame-primary">
         <div class="mat-h2 nat-padding">Mon compte</div>
         <mat-nav-list>
             <a

@@ -1,15 +1,54 @@
-/* You can add global styles to this file, and also import other style files */
-@use 'app/shared/components/boot-loader/boot-loader.external';
 @use 'styles/responsive';
+@use '@ecodev/natural';
 @use '@ecodev/natural-layout' as nat;
+@use '@angular/material' as mat;
 
-body {
-    margin: 0;
+html {
+    @include mat.theme(
+        (
+            color: (),
+            typography: Roboto,
+            density: 0,
+        )
+    );
 }
 
 html,
-body {
+body,
+app-root {
+    margin: 0;
     height: 100%;
+    min-height: 100%;
+}
+
+app-root {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-body-medium);
+
+    @include mat.table-overrides(
+        (
+            row-item-outline-color: var(--mat-sys-outline-variant),
+        )
+    );
+
+    @include mat.sidenav-overrides(
+        (
+            container-background-color: var(--mat-sys-surface-container),
+            content-background-color: var(--mat-sys-surface-container),
+        )
+    );
+}
+
+natural-sidenav-container {
+    margin: 0;
 }
 
 .container {
@@ -89,11 +128,6 @@ input[type='number'] {
     -moz-appearance: textfield; /* Firefox */
 }
 
-.mdc-button {
-    height: auto !important;
-    min-height: var(--mat-button-filled-container-height);
-}
-
 .natural-table {
     display: table;
 
@@ -132,12 +166,6 @@ input[type='number'] {
 
 .app-date-column {
     width: 14em;
-}
-
-.mat-mdc-button,
-.mat-mdc-outlined-button,
-.mat-mdc-unelevated-button {
-    border-radius: 0 !important;
 }
 
 .page-illustration {
@@ -207,3 +235,187 @@ input[type='number'] {
 [class*='-vertical'][class*='-gap-'] > * {
     margin-bottom: 0 !important;
 }
+
+ng-progress {
+    .ng-bar {
+        box-shadow: var(--mat-sys-tertiary-container) 0 0 5px !important;
+        background-color: var(--mat-sys-tertiary-container) !important;
+        height: 3px !important;
+    }
+
+    .ng-meteor {
+        top: 0 !important;
+        transform: none !important;
+        opacity: 1 !important;
+        box-shadow: var(--mat-sys-tertiary-container) 0 0 20px !important;
+        width: 25px !important;
+    }
+}
+
+.pageHeader {
+    padding-top: 20px;
+    .pageTitle {
+        position: relative;
+        min-width: 300px;
+
+        & > span {
+            position: absolute;
+            top: -1.7em;
+            left: 0;
+            color: var(--mat-sys-primary-container);
+            font-size: 0.6em;
+        }
+    }
+}
+
+app-admin router-outlet + * {
+    padding-bottom: 100px;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.text-thin {
+    font-weight: 100 !important;
+}
+
+.frame-green {
+    background: #00ae8c;
+    color: white;
+}
+
+.frame-stroked-primary {
+    border: 1px solid var(--mat-sys-primary-container);
+}
+
+.frame-stroked-accent {
+    border: 1px solid var(--mat-sys-tertiary-container);
+}
+
+.frame-stroked-warn {
+    border: 1px solid var(--mat-sys-error-container);
+}
+
+.frame-padding {
+    padding: 30px;
+}
+
+a {
+    color: var(--mat-sys-primary-container);
+}
+
+[matButton='filled'][color='tertiary'] {
+    @include mat.button-overrides(
+        (
+            filled-container-shape: 0,
+            filled-container-color: var(--mat-sys-tertiary-container),
+        )
+    );
+}
+
+.rich-text {
+    line-height: 1.6em;
+
+    .strong {
+        font-weight: bold;
+    }
+
+    ul {
+        position: relative;
+        list-style: none;
+
+        li {
+            margin-left: 0;
+
+            &::before {
+                position: absolute;
+                left: 0;
+                content: '➔';
+            }
+        }
+    }
+
+    h1,
+    h2,
+    h3 {
+        margin-top: 1.3em;
+    }
+
+    img {
+        margin: 1em 0;
+        max-width: 100%;
+    }
+
+    .image-before-title {
+        position: relative;
+        top: 2.5em;
+    }
+}
+
+app-home-block,
+app-subscriptions,
+.nat-frame-primary,
+.nat-frame-tertiary,
+.frame-green {
+    @include mat.button-overrides(
+        (
+            filled-container-color: white,
+            filled-label-text-color: black,
+            text-label-text-color: black,
+        )
+    );
+}
+
+//.rich-text a,
+//a.app-link {
+//    &:not(.mat-mdc-button-base):not(.no-style) {
+//        border-bottom: 2px solid mat.m2-get-color-from-palette($primary);
+//        color: inherit;
+//
+//        &:hover {
+//            color: mat.m2-get-color-from-palette($primary);
+//        }
+//    }
+//}
+
+.rich-text a,
+a.app-link {
+    //&:not(.mat-mdc-button-base):not(.no-style) {
+    cursor: pointer;
+    border-bottom: 2px solid var(--mat-sys-primary-container);
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        color: var(--mat-sys-primary-container);
+    }
+    //}
+}
+
+// Admin part
+//.rich-text.admin-editor {
+//    border-bottom: 1px solid mat.m2-get-color-from-palette($foreground, base, 0.5);
+//    border-top-right-radius: 4px;
+//    border-top-left-radius: 4px;
+//    background: mat.m2-get-color-from-palette(
+//                    $foreground,
+//                    base,
+//                    if(map.get($theme, is-dark), 0.1, 0.04)
+//    ); // match official mat-form-field component style
+//    padding: 10px 10px 0 10px;
+//    font-size: 13px;
+//
+//    .ql-editor {
+//        padding: 0.25em 0 0.75em 0;
+//
+//        p {
+//            margin-bottom: 0;
+//        }
+//    }
+//
+//    .label {
+//        opacity: 0.6;
+//        font-size: 0.9em;
+//    }
+//}

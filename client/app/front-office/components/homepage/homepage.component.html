@@ -48,7 +48,7 @@
             </div>
 
             <div>
-                <a color="primary" mat-flat-button routerLink="/actualite">Voir toutes nos actualités</a>
+                <a color="primary" matButton="filled" routerLink="/actualite">Voir toutes nos actualités</a>
             </div>
         </div>
 
@@ -85,7 +85,7 @@
                 }
             </div>
             <div>
-                <a color="accent" mat-flat-button routerLink="/agenda">Voir tout l'agenda</a>
+                <a color="tertiary" matButton="filled" routerLink="/agenda">Voir tout l'agenda</a>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                 </a>
             }
             <div class="la-revue-body nat-vertical">
-                <div class="mat-h1 text-primary text-bold">Le dernier numéro</div>
+                <div class="mat-h1 nat-text-primary text-bold">Le dernier numéro</div>
                 <div class="nat-horizontal mat-h2 text-thin nat-gap-10 nat-left nat-baseline">
                     <span>{{ currentReview.reviewNumber }}</span>
                     <span>|</span>
@@ -137,7 +137,12 @@
                 <!-- If has access -->
                 @if (currentReview.file) {
                     <div>
-                        <a mat-flat-button color="accent" target="_blank" [href]="`/api/file/${currentReview.file.id}`">
+                        <a
+                            matButton="filled"
+                            color="tertiary"
+                            target="_blank"
+                            [href]="`/api/file/${currentReview.file.id}`"
+                        >
                             Télécharger le numéro
                         </a>
                     </div>
@@ -151,7 +156,9 @@
     <div class="container nat-gap-30 nat-vertical nat-top nat-left">
         <div class="mat-headline-4">NOS THEMES</div>
         <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
-        <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
+        <a color="primary" matButton="filled" routerLink="/larevuedurable/articles"
+            >Voir tous nos articles et dossiers</a
+        >
     </div>
 </div>
 
@@ -159,7 +166,7 @@
     <div class="container">
         <div class="mat-headline-4 nat-margin-bottom">NOUS SOUTENIR</div>
 
-        <div class="nat-vertical app-md-gap-60 nat-gap-30 nat-md-horizontal">
+        <div id="bottom-blocks" class="nat-vertical app-md-gap-60 nat-gap-30 nat-md-horizontal">
             <div class="support-column nat-md-expand-33" id="support-column-1">
                 <div
                     class="support-image"
@@ -173,7 +180,7 @@
                             sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays.
                         </p>
                     </div>
-                    <a mat-flat-button routerLink="/larevuedurable/abonnements"> Voir les abonnements</a>
+                    <a matButton="filled" routerLink="/larevuedurable/abonnements"> Voir les abonnements</a>
                 </div>
             </div>
 
@@ -190,7 +197,7 @@
                             privilégié avec notre action. Et nous donne plus de légitimité et de poids.
                         </p>
                     </div>
-                    <a mat-flat-button routerLink="/nous-soutenir/rejoindre-association">Découvrir l'association</a>
+                    <a matButton="filled" routerLink="/nous-soutenir/rejoindre-association">Découvrir l'association</a>
                 </div>
             </div>
             <div class="support-column nat-md-expand-33" id="support-column-3">
@@ -207,7 +214,7 @@
                             compétente.
                         </p>
                     </div>
-                    <a mat-flat-button routerLink="/nous-soutenir/faire-un-don">Faire un don</a>
+                    <a matButton="filled" routerLink="/nous-soutenir/faire-un-don">Faire un don</a>
                 </div>
             </div>
         </div>

@@ -59,3 +59,14 @@
         flex: 0 1 230px;
     }
 }
+
+.review {
+    a {
+        color: var(--mat-sys-on-surface);
+    }
+}
+
+.container {
+    padding-right: 0;
+    padding-left: 0;
+}

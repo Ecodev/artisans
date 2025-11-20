@@ -106,7 +106,7 @@
                         <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: navigation}" />
                     </div>
 
-                    <mat-form-field id="search-field">
+                    <mat-form-field id="search-field" subscriptSizing="dynamic">
                         <mat-label>Rechercher</mat-label>
                         <input
                             matInput
@@ -156,7 +156,7 @@
                     </mat-form-field>
 
                     @if (newsletterForm.valid) {
-                        <button mat-flat-button (click)="subscribeNewsletter()">S'inscrire</button>
+                        <button matButton="filled" (click)="subscribeNewsletter()">S'inscrire</button>
                     }
                 </form>
             </div>

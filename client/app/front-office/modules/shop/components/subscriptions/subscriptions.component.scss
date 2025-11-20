@@ -44,3 +44,17 @@
         }
     }
 }
+
+.subscription.standard {
+    background: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+}
+
+.subscription.pro {
+    background: var(--mat-sys-tertiary-container);
+    color: var(--mat-sys-on-tertiary-container);
+}
+
+.subscription.popular {
+    border: 10px solid var(--mat-sys-surface-container-lowest);
+}

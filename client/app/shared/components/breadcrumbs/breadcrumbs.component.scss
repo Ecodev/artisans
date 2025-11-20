@@ -1,8 +1,21 @@
+@use '@angular/material' as mat;
+
 :host {
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    @include mat.button-overrides(
+        (
+            text-label-text-color: color-mix(in srgb, var(--mat-sys-on-surface) 80%, transparent),
+        )
+    );
 }
+
+* {
+    color: color-mix(in srgb, var(--mat-sys-on-surface) 50%, transparent);
+}
+
 mat-icon {
     transform: scale(0.66);
 }
@@ -38,4 +51,9 @@ mat-icon {
         border-bottom-color: transparent;
         border-left-color: transparent;
     }
+}
+
+.mat-mdc-button {
+    padding-right: 7px;
+    padding-left: 7px;
 }

@@ -32,7 +32,7 @@
                 }
             </div>
         </div>
-        <div class="nat-md-expand-33 frame-primary nat-padding nat-gap nat-vertical">
+        <div class="nat-md-expand-33 nat-frame-primary nat-padding nat-gap nat-vertical">
             <!-- Regular products -->
             @for (line of cart.productLines; track line) {
                 <div class="cart-item">
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <button
-                mat-flat-button
+                matButton="filled"
                 [disabled]="!billingForm.valid || !shippingForm.valid || pending"
                 (click)="createOrder()"
             >

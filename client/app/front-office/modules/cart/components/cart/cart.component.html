@@ -6,10 +6,12 @@
             <div class="nat-vertical nat-center">
                 <div class="mat-h1">Aucun article dans le panier</div>
                 <div class="nat-vertical nat-sm-horizontal nat-wrap nat-gap-30">
-                    <a color="primary" mat-flat-button routerLink="/larevuedurable/articles">Consulter nos articles</a>
-                    <a color="primary" mat-flat-button routerLink="/larevuedurable/numeros">Consulter nos revues</a>
-                    <a color="primary" mat-flat-button routerLink="/larevuedurable/abonnements">S'abonner</a>
-                    <button color="primary" mat-flat-button (click)="cartService.inputDonation(false, cart)">
+                    <a color="primary" matButton="filled" routerLink="/larevuedurable/articles"
+                        >Consulter nos articles</a
+                    >
+                    <a color="primary" matButton="filled" routerLink="/larevuedurable/numeros">Consulter nos revues</a>
+                    <a color="primary" matButton="filled" routerLink="/larevuedurable/abonnements">S'abonner</a>
+                    <button color="primary" matButton="filled" (click)="cartService.inputDonation(false, cart)">
                         Faire un don
                     </button>
                 </div>
@@ -143,11 +145,11 @@
                     <button mat-stroked-button (click)="empty()">Vider le panier</button>
                     <div class="nat-md-expand"></div>
                     @if (!cart.donationAmount) {
-                        <button mat-flat-button color="accent" (click)="cartService.inputDonation(false, cart)">
+                        <button matButton="filled" color="tertiary" (click)="cartService.inputDonation(false, cart)">
                             Faire un don
                         </button>
                     }
-                    <button mat-flat-button color="primary" [routerLink]="['/panier/commande', cart.id]">
+                    <button matButton="filled" color="primary" [routerLink]="['/panier/commande', cart.id]">
                         Commander
                     </button>
                 </div>

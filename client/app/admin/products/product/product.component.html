@@ -7,8 +7,7 @@
     >
         @if (isUpdatePage()) {
             <a
-                color="primary"
-                mat-raised-button
+                matButton="filled"
                 [routerLink]="[
                     data.model.reviewNumber ? '/larevuedurable/numero' : '/larevuedurable/article',
                     data.model.id,

@@ -1,0 +1,75 @@
+/*
+ * Theme 1 (light ):
+ *   Seed: #0E7ECB
+ *   Core Colors:
+ *     Primary: #0E7ECB
+ *     Tertiary: #EF6031
+ *     Neutral: #FFFFFF
+ *     Neutral Variant: #FFFFFF
+ *
+ * Theme 1 Builder Link:
+ *   http://material-foundation.github.io/material-theme-builder/?primary=0E7ECB&tertiary=EF6031&neutral=FFFFFF&neutralVariant=FFFFFF
+ */
+
+@use '@angular/material' as mat;
+/* prettier-ignore */
+:root, :host,
+[data-theme="artisansdelatransition"] {
+    @include mat.theme-overrides((
+            primary: #005F9D,
+            primary-container: #0079C4,
+            primary-fixed: #D0E4FF,
+            primary-fixed-dim: #9CCAFF,
+            on-primary: #FFFFFF,
+            on-primary-container: #FDFCFF,
+            on-primary-fixed: #001D35,
+            on-primary-fixed-variant: #00497A,
+            inverse-primary: #9CCAFF,
+
+            secondary: #45617F,
+            secondary-container: #BDDAFE,
+            secondary-fixed: #D0E4FF,
+            secondary-fixed-dim: #ACC9EC,
+            on-secondary: #FFFFFF,
+            on-secondary-container: #445F7E,
+            on-secondary-fixed: #001D35,
+            on-secondary-fixed-variant: #2C4966,
+
+            tertiary: #AA3000,
+            tertiary-container: #EF6031, // not generated, set manually to match branding
+            tertiary-fixed: #FFDBD0,
+            tertiary-fixed-dim: #FFB59E,
+            on-tertiary: #FFFFFF,
+            on-tertiary-container: #FFFBFF,
+            on-tertiary-fixed: #3A0B00,
+            on-tertiary-fixed-variant: #852400,
+
+            error: #BA1A1A,
+            error-container: #FFDAD6,
+            on-error: #FFFFFF,
+            on-error-container: #93000A,
+
+            surface: #FCF8F8,
+            surface-variant: #E0E3E3,
+            on-surface: #1C1B1B,
+            on-surface-variant: #444748,
+            surface-dim: #DDD9D9,
+            surface-bright: #FCF8F8,
+            surface-container-lowest: #FFFFFF,
+            surface-container-low: #F6F3F2,
+            surface-container: #F1EDEC,
+            surface-container-high: #EBE7E7,
+            surface-container-highest: #E5E2E1,
+            surface-tint: #0062A1,
+            inverse-surface: #313030,
+            inverse-on-surface: #F4F0EF,
+
+            background: #F8F9FF,
+            on-background: #181C21,
+
+            outline: #747878,
+            outline-variant: #C4C7C8,
+            shadow: #000000,
+            scrim: #000000
+    ));
+}

@@ -6,7 +6,7 @@
         [newLabel]="data.seo.title"
     >
         @if (isUpdatePage()) {
-            <a color="primary" mat-raised-button [routerLink]="['/actualite', data.model.id]">
+            <a matButton="filled" [routerLink]="['/actualite', data.model.id]">
                 <mat-icon naturalIcon="remove_red_eye" />
                 Voir la page
             </a>

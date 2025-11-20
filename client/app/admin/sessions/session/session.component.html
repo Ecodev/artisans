@@ -53,30 +53,29 @@
                         ></textarea>
                     </mat-form-field>
                 </div>
+                <div>
+                    @if (datesForm) {
+                        <div formArrayName="dates" class="nat-margin-bottom">
+                            <h2 class="mat-h2">Dates de la session</h2>
+                            @for (date of datesForm.controls; track date) {
+                                <div class="nat-horizontal nat-gap-15">
+                                    <mat-form-field class="nat-expand">
+                                        <mat-label>Date</mat-label>
+                                        <input matInput [formControlName]="$index" (change)="update()" />
+                                    </mat-form-field>
+                                    <button color="warn" mat-icon-button (click)="datesForm.removeAt($index); update()">
+                                        <mat-icon naturalIcon="delete" />
+                                    </button>
+                                </div>
+                            }
+                            <button color="primary" matButton="filled" (click)="addDate()">
+                                <mat-icon naturalIcon="add" />
+                                Ajouter une date
+                            </button>
+                        </div>
+                    }
 
-                @if (datesForm) {
-                    <div formArrayName="dates">
-                        <h2 class="mat-h2">Dates de la session</h2>
-                        @for (date of datesForm.controls; track date) {
-                            <div class="nat-horizontal nat-gap-15">
-                                <mat-form-field class="nat-expand">
-                                    <mat-label>Date</mat-label>
-                                    <input matInput [formControlName]="$index" (change)="update()" />
-                                </mat-form-field>
-                                <button color="warn" mat-icon-button (click)="datesForm.removeAt($index); update()">
-                                    <mat-icon naturalIcon="delete" />
-                                </button>
-                            </div>
-                        }
-                        <button color="primary" mat-flat-button (click)="addDate()">
-                            <mat-icon naturalIcon="add" />
-                            Ajouter une date
-                        </button>
-                    </div>
-                }
-
-                @if (isUpdatePage()) {
-                    <div>
+                    @if (isUpdatePage()) {
                         <h2 class="mat-h2 nat-no-margin-bottom">Facilitateurs</h2>
                         <natural-relations
                             otherName="facilitator"
@@ -91,8 +90,8 @@
                                 </div>
                             </ng-template>
                         </natural-relations>
-                    </div>
-                }
+                    }
+                </div>
             </div>
 
             <div class="nat-md-expand-33 nat-vertical">

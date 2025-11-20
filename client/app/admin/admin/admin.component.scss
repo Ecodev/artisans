@@ -1,4 +1,37 @@
-.admin-body {
-    padding: 20px;
+@use '@angular/material' as mat;
+
+natural-sidenav-container {
+    @include mat.sidenav-overrides(
+        (
+            container-width: 280px,
+        )
+    );
+}
+
+mat-accordion {
+    @include mat.expansion-overrides(
+        (
+            container-background-color: transparent,
+        )
+    );
+}
+
+natural-sidenav-content {
+    border-top-left-radius: var(--mat-sys-corner-large);
+    background-color: var(--mat-sys-surface-bright);
+    padding: 20px clamp(5px, 2vw, 20px);
+    min-height: calc(100vh - 160px);
     overflow: auto;
+    @media (max-width: 400px) {
+        padding: 6px;
+    }
+}
+
+.header-toolbar {
+    @include mat.toolbar-overrides(
+        (
+            container-background-color: --mat-sys-surface-container,
+            container-text-color: --mat-sys-on-surface,
+        )
+    );
 }

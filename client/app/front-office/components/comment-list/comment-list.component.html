@@ -14,11 +14,9 @@
             @for (comment of dataSource?.data?.items; track comment) {
                 <div class="nat-vertical nat-gap-5 nat-left">
                     @if (comment.authorName) {
-                        <div class="mat-h2 nat-gap-15 nat-horizontal nat-wrap nat-align">
+                        <div class="mat-font-title-lg nat-gap-15 nat-horizontal nat-wrap nat-align">
                             <span>{{ comment.authorName }}</span>
-                            <span class="mat-body text-light">
-                                Posté le {{ comment.creationDate | date: 'longDate' }}
-                            </span>
+                            <span class="text-light"> Posté le {{ comment.creationDate | date: 'longDate' }} </span>
                             @if (comment.permissions?.update) {
                                 <a
                                     mat-icon-button
@@ -30,13 +28,13 @@
                             }
                         </div>
                     }
-                    <div class="mat-h3 line-break">{{ comment.description }}</div>
+                    <div class="mat-font-title-md line-break">{{ comment.description }}</div>
                 </div>
             }
         </div>
     }
 
     @if (!dataSource?.data?.items?.length) {
-        <div class="mat-h3">Aucun commentaire</div>
+        <div class="mat-font-title-md">Aucun commentaire</div>
     }
 </div>

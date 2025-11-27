@@ -3,7 +3,7 @@
     <div [formGroup]="form">
         <natural-select formControlName="product" placeholder="Produit" [service]="productService" [showIcon]="false" />
 
-        <div class="mat-h2">ou</div>
+        <div class="mat-font-title-lg">ou</div>
 
         <natural-select
             formControlName="subscription"
@@ -13,7 +13,7 @@
         />
 
         @if (form.hasError('productXorSubscription')) {
-            <p class="warning mat-body">
+            <p class="warning">
                 Une vente ne peut pas concerner à la fois un produit et un abonnement. C'est soit l'un, soit l'autre,
                 soit rien du tout.
             </p>

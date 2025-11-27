@@ -19,7 +19,7 @@ export class BreadcrumbsComponent implements OnInit {
     private readonly router = inject(Router);
 
     private readonly destroyRef = inject(DestroyRef);
-    @HostBinding('class.mat-body') private isBody = true;
+    @HostBinding('class.') private isBody = true;
 
     @Input() public breadcrumbs: Breadcrumb[] = [];
 

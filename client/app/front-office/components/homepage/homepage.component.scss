@@ -67,7 +67,7 @@
         max-width: 50vw;
         text-align: center;
 
-        .mat-headline-3 {
+        .mat-font-display-md {
             margin-bottom: 30px;
         }
     }
@@ -96,7 +96,7 @@
         height: 550px;
     }
 
-    .mat-headline-2 {
+    .mat-font-display-lg {
         padding-top: 120px;
     }
 
@@ -123,7 +123,7 @@
             padding: 30px 0 0 30px;
         }
 
-        .mat-headline-4 {
+        .mat-font-headline-lg {
             margin-bottom: 0;
             min-height: 120px;
         }
@@ -131,7 +131,7 @@
 }
 
 .support.section {
-    .mat-h1 {
+    .mat-font-headline-sm {
         min-height: 64px;
     }
 
@@ -184,7 +184,7 @@
     }
 }
 
-a.mat-headline-4 {
+a.mat-font-headline-lg {
     color: var(--mat-sys-on-surface);
 
     &:hover {

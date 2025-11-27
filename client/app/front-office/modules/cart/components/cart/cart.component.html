@@ -1,10 +1,10 @@
 <!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 @if (cart) {
     <div class="container nat-vertical">
-        <div class="mat-headline-4">Panier</div>
+        <div class="mat-font-headline-lg">Panier</div>
         @if (cart.isEmpty()) {
             <div class="nat-vertical nat-center">
-                <div class="mat-h1">Aucun article dans le panier</div>
+                <div class="mat-font-headline-sm">Aucun article dans le panier</div>
                 <div class="nat-vertical nat-sm-horizontal nat-wrap nat-gap-30">
                     <a color="primary" matButton="filled" routerLink="/larevuedurable/articles"
                         >Consulter nos articles</a
@@ -39,7 +39,7 @@
                                 <app-price [product]="line.product" />
                                 <div>x {{ line.quantity }}</div>
                             }
-                            <div class="price mat-body-strong" style="white-space: nowrap">
+                            <div class="price -strong" style="white-space: nowrap">
                                 {{ line.totalTaxInc | currency: currencyService.current.value }}
                             </div>
                             <div class="nat-horizontal nat-align nat-gap-10">
@@ -91,7 +91,7 @@
                         <div>{{ cart.subscription.emails.join(', ') }}</div>
                     }
                     <div style="white-space: nowrap">
-                        <app-price class="price mat-body-strong" [product]="cart.subscription.subscription" />
+                        <app-price class="price -strong" [product]="cart.subscription.subscription" />
                     </div>
                     <div class="nat-horizontal nat-align nat-gap-10">
                         <button
@@ -116,7 +116,7 @@
                         [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"
                     ></div>
                     <a mat-button class="item-body">Don</a>
-                    <div class="price mat-body-strong" style="white-space: nowrap">
+                    <div class="price -strong" style="white-space: nowrap">
                         {{ cart.donationAmount | currency: currencyService.current.value }}
                     </div>
                     <div class="nat-horizontal nat-align nat-gap-10">
@@ -136,7 +136,7 @@
             @if (!cart.isEmpty()) {
                 <mat-divider />
                 <div class="nat-horizontal nat-right">
-                    <div class="mat-h1 nat-padding-vertical">
+                    <div class="mat-font-headline-sm nat-padding-vertical">
                         Total TTC : {{ cart.totalTaxInc | currency: currencyService.current.value }}
                     </div>
                 </div>

@@ -18,7 +18,7 @@
     <div class="container app-gap-50 nat-md-horizontal nat-vertical">
         <!-- News -->
         <div class="newses nat-gap-30 nat-vertical nat-md-expand-66">
-            <div class="mat-headline-4 section-title nat-gap-30 nat-horizontal">
+            <div class="mat-font-headline-lg section-title nat-gap-30 nat-horizontal">
                 <div class="nat-expand">ACTUALITÉS</div>
                 <div class="relative">
                     @if ((permissionsService.crud | async)?.news.create) {
@@ -38,11 +38,13 @@
             <div class="newses-list nat-gap nat-vertical">
                 @for (news of newses; track news) {
                     <div class="news">
-                        <div class="mat-body-strong text-light">
+                        <div class="-strong text-light">
                             {{ news.date | date: 'EEE dd.MM.yy' | capitalize }}
                         </div>
-                        <a class="mat-h2" matRipple [routerLink]="['/actualite', news.id]">{{ news.name }}</a>
-                        <div class="mat-h3 description line-break">{{ news.description }}</div>
+                        <a class="mat-font-title-lg" matRipple [routerLink]="['/actualite', news.id]">{{
+                            news.name
+                        }}</a>
+                        <div class="mat-font-title-md description line-break">{{ news.description }}</div>
                     </div>
                 }
             </div>
@@ -54,7 +56,7 @@
 
         <!-- Events -->
         <div class="events nat-gap-30 nat-vertical nat-md-expand-33">
-            <div class="mat-headline-4 section-title nat-gap-30 nat-horizontal">
+            <div class="mat-font-headline-lg section-title nat-gap-30 nat-horizontal">
                 <div class="nat-expand">AGENDA</div>
                 <div class="relative">
                     @if ((permissionsService.crud | async)?.event.create) {
@@ -74,10 +76,10 @@
                 @for (event of events; track event) {
                     <mat-divider />
                     <div class="event">
-                        <a class="mat-h2 nat-no-margin-bottom" matRipple [routerLink]="['/agenda', event.id]"
+                        <a class="mat-font-title-lg nat-no-margin-bottom" matRipple [routerLink]="['/agenda', event.id]"
                             >{{ event.name }}
                         </a>
-                        <div class="mat-h3 nat-no-margin-bottom">
+                        <div class="mat-font-title-md nat-no-margin-bottom">
                             <span class="text-light">{{ event.date | date: 'EEE dd.MM.yy' | capitalize }}</span>
                             <span class="description"> - {{ event.place }} - {{ event.type }}</span>
                         </div>
@@ -116,18 +118,18 @@
                 </a>
             }
             <div class="la-revue-body nat-vertical">
-                <div class="mat-h1 nat-text-primary text-bold">Le dernier numéro</div>
-                <div class="nat-horizontal mat-h2 text-thin nat-gap-10 nat-left nat-baseline">
+                <div class="mat-font-headline-sm nat-text-primary text-bold">Le dernier numéro</div>
+                <div class="nat-horizontal mat-font-title-lg text-thin nat-gap-10 nat-left nat-baseline">
                     <span>{{ currentReview.reviewNumber }}</span>
                     <span>|</span>
                     <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
                 </div>
-                <a class="mat-headline-4" [routerLink]="['/larevuedurable/article', currentReview.id]"
+                <a class="mat-font-headline-lg" [routerLink]="['/larevuedurable/article', currentReview.id]"
                     >{{ currentReview.name }}
                 </a>
                 <!-- If has not access -->
                 @if (!currentReview.file) {
-                    <div class="mat-h3">
+                    <div class="mat-font-title-md">
                         Disponible en versions papier ou PDF avec votre abonnnement
                         <br />
                         <app-price [product]="currentReview" />
@@ -154,7 +156,7 @@
 
 <div class="categories section">
     <div class="container nat-gap-30 nat-vertical nat-top nat-left">
-        <div class="mat-headline-4">NOS THEMES</div>
+        <div class="mat-font-headline-lg">NOS THEMES</div>
         <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
         <a color="primary" matButton="filled" routerLink="/larevuedurable/articles"
             >Voir tous nos articles et dossiers</a
@@ -164,7 +166,7 @@
 
 <div class="support section">
     <div class="container">
-        <div class="mat-headline-4 nat-margin-bottom">NOUS SOUTENIR</div>
+        <div class="mat-font-headline-lg nat-margin-bottom">NOUS SOUTENIR</div>
 
         <div id="bottom-blocks" class="nat-vertical app-md-gap-60 nat-gap-30 nat-md-horizontal">
             <div class="support-column nat-md-expand-33" id="support-column-1">
@@ -173,8 +175,8 @@
                     [style.backgroundImage]="'url(assets/images/homepage/larevuedurable-jehan.khodl-1.jpg)'"
                 ></div>
                 <div class="support-column-body">
-                    <div class="mat-h1">S'abonner</div>
-                    <div class="support-column-content mat-h3">
+                    <div class="mat-font-headline-sm">S'abonner</div>
+                    <div class="support-column-content mat-font-title-md">
                         <p>
                             En presque vingt ans, <strong>LaRevueDurable</strong> a publié plus de 1100 articles de fond
                             sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays.
@@ -190,8 +192,8 @@
                     [style.backgroundImage]="'url(assets/images/homepage/larevuedurable-jehan.khodl-4.jpg)'"
                 ></div>
                 <div class="support-column-body">
-                    <div class="mat-h1">Rejoindre l’association</div>
-                    <div class="support-column-content mat-h3">
+                    <div class="mat-font-headline-sm">Rejoindre l’association</div>
+                    <div class="support-column-content mat-font-title-md">
                         <p>
                             Devenir membre des <strong>Artisans de la transition</strong> permet un lien direct et
                             privilégié avec notre action. Et nous donne plus de légitimité et de poids.
@@ -206,8 +208,8 @@
                     [style.backgroundImage]="'url(assets/images/homepage/larevuedurable-jehan.khodl-6.jpg)'"
                 ></div>
                 <div class="support-column-body">
-                    <div class="mat-h1">Faire un don</div>
-                    <div class="support-column-content mat-h3">
+                    <div class="mat-font-headline-sm">Faire un don</div>
+                    <div class="support-column-content mat-font-title-md">
                         <p>
                             Les dons composent la moitié des revenus de l’association. Ils garantissent son
                             indépendance. En faisant un don à l’association, vous soutenez une petite équipe motivée et

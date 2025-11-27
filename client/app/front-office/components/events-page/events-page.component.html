@@ -1,10 +1,10 @@
 <div class="container app-gap-60 nat-vertical">
-    <h1 class="mat-headline-4">AGENDA</h1>
+    <h1 class="mat-font-headline-lg">AGENDA</h1>
 
     <div class="nat-vertical nat-gap-30">
         @for (event of items; track event) {
             <div class="nat-vertical nat-gap-5">
-                <a class="mat-h2" [routerLink]="[event.id]">{{ event.name }}</a>
+                <a class="mat-font-title-lg" [routerLink]="[event.id]">{{ event.name }}</a>
                 <div class="text-light">{{ event.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
                 <div>{{ event.place }}</div>
                 <div>{{ event.type }}</div>

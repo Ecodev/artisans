@@ -19,7 +19,7 @@
             <mat-tab label="Général">
                 <div class="nat-vertical nat-padding-top nat-gap-horizontal nat-md-horizontal">
                     <div class="nat-vertical nat-md-expand-66">
-                        <h2 class="mat-h2">Coordonnées</h2>
+                        <h2 class="mat-font-title-lg">Coordonnées</h2>
                         <app-address [form]="form" [disabled]="true" />
                         <mat-form-field>
                             <mat-label>Téléphone</mat-label>
@@ -27,7 +27,7 @@
                         </mat-form-field>
                     </div>
                     <div class="nat-md-expand-33 nat-vertical">
-                        <h2 class="mat-h2">Compte</h2>
+                        <h2 class="mat-font-title-lg">Compte</h2>
                         <mat-form-field>
                             <mat-label>email</mat-label>
                             <input formControlName="email" matInput (change)="update()" />
@@ -51,14 +51,14 @@
                         >
                             Facilitateur public
                         </mat-slide-toggle>
-                        <h2 class="mat-h2">État</h2>
+                        <h2 class="mat-font-title-lg">État</h2>
                         <natural-select-enum
                             enumName="Membership"
                             formControlName="membership"
                             placeholder="Membre des artisans"
                         />
                         <div>
-                            <span class="mat-subtitle-2">Abonnement :</span>
+                            <span class="mat-font-title-sm nat-bold">Abonnement :</span>
                             @if (data.model.subscriptionLastReviewNumber) {
                                 Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro{{
                                     data.model.subscriptionLastReviewNumber
@@ -71,13 +71,13 @@
                         <div
                             matTooltip="L'accès temporaire donne accès au contenu numérique en attendant le prochain import de Crésus qui confirmera les accès disponible"
                         >
-                            <span class="mat-subtitle-2">Accès temporaire :</span>
+                            <span class="mat-font-title-sm nat-bold">Accès temporaire :</span>
                             {{ data.model.webTemporaryAccess ? 'oui' : 'non' }}
                         </div>
                     </div>
                 </div>
                 <mat-divider class="nat-margin-vertical" />
-                <h2 class="mat-h2">Conversations carbone animées</h2>
+                <h2 class="mat-font-title-lg">Conversations carbone animées</h2>
                 <natural-relations
                     otherName="facilitator"
                     placeholder="Conversations carbone"
@@ -97,13 +97,13 @@
                         <natural-stamp [item]="data.model" />
                         @if (data.model.firstLogin) {
                             <div>
-                                <span class="mat-body-strong">Première connexion :</span>
+                                <span class="-strong">Première connexion :</span>
                                 {{ data.model.firstLogin | date }} ({{ data.model.firstLogin | timeAgo }})
                             </div>
                         }
                         @if (data.model.lastLogin) {
                             <div>
-                                <span class="mat-body-strong">Dernière connexion :</span>
+                                <span class="-strong">Dernière connexion :</span>
                                 {{ data.model.lastLogin | date }} ({{ data.model.lastLogin | timeAgo }})
                             </div>
                         }

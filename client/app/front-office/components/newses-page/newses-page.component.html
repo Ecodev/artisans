@@ -1,12 +1,12 @@
 <div class="container nat-gap-30 nat-vertical">
-    <h1 class="mat-headline-4">ACTUALITÉS</h1>
+    <h1 class="mat-font-headline-lg">ACTUALITÉS</h1>
 
     <div class="nat-vertical app-gap-60">
         @for (news of items; track news) {
             <div>
                 <div class="text-light">{{ news.date | date: 'EEEE d MMMM yyyy' | capitalize }}</div>
-                <a class="mat-h2" [routerLink]="[news.id]">{{ news.name }}</a>
-                <div class="mat-body">{{ news.description }}</div>
+                <a class="mat-font-title-lg" [routerLink]="[news.id]">{{ news.name }}</a>
+                <div>{{ news.description }}</div>
             </div>
         }
     </div>

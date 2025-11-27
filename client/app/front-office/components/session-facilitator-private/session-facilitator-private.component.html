@@ -4,11 +4,11 @@
 ></div>
 
 <div class="container">
-    <h1 class="mat-headline-4">Page réservée aux facilitateurs</h1>
+    <h1 class="mat-font-headline-lg">Page réservée aux facilitateurs</h1>
 
     <div class="nat-horizontal nat-gap-30">
-        <div class="app-md-expand-70 page-body rich-text mat-h3">
-            <h2 class="mat-h2">Liste des facilitateurs</h2>
+        <div class="app-md-expand-70 page-body rich-text mat-font-title-md">
+            <h2 class="mat-font-title-lg">Liste des facilitateurs</h2>
             <div class="facilitators">
                 @for (user of facilitators; track user) {
                     <div class="facilitator">
@@ -21,11 +21,11 @@
         </div>
 
         <div class="app-md-expand-30 nat-md-show">
-            <h2 class="mat-h2">Documents</h2>
+            <h2 class="mat-font-title-lg">Documents</h2>
             <ul class="categories">
                 @for (category of categories | keyvalue; track category) {
                     <li class="category">
-                        <h3 class="mat-h3">{{ category.key }}</h3>
+                        <h3 class="mat-font-title-md">{{ category.key }}</h3>
                         @for (document of category.value; track document) {
                             <mat-nav-list class="documents">
                                 @if (document.file) {

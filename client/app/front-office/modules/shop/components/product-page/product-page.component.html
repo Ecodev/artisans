@@ -6,13 +6,13 @@
                 <div class="nat-horizontal nat-gap-15 nat-align">
                     <!-- Review number -->
                     @if (data.model.reviewNumber) {
-                        <div class="nat-text-primary text-bold mat-h1 nat-no-margin-bottom">
+                        <div class="nat-text-primary text-bold mat-font-headline-sm nat-no-margin-bottom">
                             N° {{ data.model.reviewNumber }}
                         </div>
                     }
                     <!-- Release date -->
                     @if (data.model.releaseDate) {
-                        <div class="mat-h2 text-light nat-no-margin-bottom">
+                        <div class="mat-font-title-lg text-light nat-no-margin-bottom">
                             {{ data.model.releaseDate | date: 'MMMM yyyy' | capitalize }}
                         </div>
                     }
@@ -22,11 +22,11 @@
                         </a>
                     }
                 </div>
-                <h1 class="mat-headline-4">{{ data.model.name }}</h1>
+                <h1 class="mat-font-headline-lg">{{ data.model.name }}</h1>
                 <!-- Reading duration -->
                 <div class="nat-horizontal nat-gap">
                     @if (data.model.readingDuration) {
-                        <div class="nat-horizontal nat-align nat-gap-10 mat-h3">
+                        <div class="nat-horizontal nat-align nat-gap-10 mat-font-title-md">
                             <mat-icon naturalIcon="alarm" />
                             <div>
                                 {{ data.model.readingDuration
@@ -35,7 +35,7 @@
                         </div>
                     }
                 </div>
-                <div class="description mat-h3 rich-text" [innerHTML]="data.model.description"></div>
+                <div class="description mat-font-title-md rich-text" [innerHTML]="data.model.description"></div>
             </div>
             <div class="image-preview nat-vertical nat-gap-30">
                 <!-- Product image (preview) -->
@@ -56,7 +56,7 @@
                         class="nat-text-primary nat-gap-5 nat-horizontal nat-align"
                         (click)="articlesMenuOpen = !articlesMenuOpen"
                     >
-                        <span class="mat-headline-6 show-products-of-review-button nat-no-margin-bottom"
+                        <span class="mat-font-title-lg show-products-of-review-button nat-no-margin-bottom"
                             >Voir les articles de ce numéro
                         </span>
                         <mat-icon naturalIcon="expand_more" />
@@ -81,8 +81,8 @@
                             [naturalSrcDensity]="`/api/image/${data.model.review.image.id}/300`"
                         />
                     </a>
-                    <span class="mat-h4">Article issu de la revue</span>
-                    <a class="mat-h3" [routerLink]="['/larevuedurable/article', data.model.review.id]">
+                    <span class="mat-font-title-md">Article issu de la revue</span>
+                    <a class="mat-font-title-md" [routerLink]="['/larevuedurable/article', data.model.review.id]">
                         <span class="nat-text-primary">N° {{ data.model.review.reviewNumber }}</span>
                         {{ data.model.review.name }}
                     </a>
@@ -92,8 +92,8 @@
         </section>
         <div class="nat-vertical nat-gap-30">
             @if (!viewer) {
-                <div class="mat-h3 nat-gap-15 nat-horizontal nat-wrap nat-align">
-                    <div class="mat-h1 nat-no-margin-bottom">Intéressé par ce contenu ?</div>
+                <div class="mat-font-title-md nat-gap-15 nat-horizontal nat-wrap nat-align">
+                    <div class="mat-font-headline-sm nat-no-margin-bottom">Intéressé par ce contenu ?</div>
                     <div>Si vous êtes déjà abonné à la version numérique</div>
                     <a matButton="filled" color="primary" routerLink="/login" [queryParams]="{returnUrl: url}"
                         >connectez-vous !
@@ -105,16 +105,12 @@
                 @if (data.model.file) {
                     <div class="nat-frame-tertiary nat-padding nat-vertical nat-center nat-md-expand-50">
                         <div style="max-width: 300px">
-                            <h2 class="mat-h2">Téléchargement</h2>
+                            <h2 class="mat-font-title-lg">Téléchargement</h2>
                             @if (data.model.reviewNumber) {
-                                <p class="mat-body">
-                                    Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)
-                                </p>
+                                <p>Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
                             }
                             @if (!data.model.reviewNumber) {
-                                <p class="mat-body">
-                                    Vous pouvez dès à présent télécharger cet article en format numérique (PDF)
-                                </p>
+                                <p>Vous pouvez dès à présent télécharger cet article en format numérique (PDF)</p>
                             }
                             <a matButton="filled" target="_blank" [href]="`/api/file/${data.model.file.id}`">
                                 <mat-icon naturalIcon="get_app" />
@@ -131,15 +127,15 @@
                 @if (showBuyPaper || showBuyDigital) {
                     <div class="nat-md-expand-50 nat-gap-30 frame-green frame nat-center nat-vertical">
                         @if (data.model.reviewNumber) {
-                            <div class="mat-h1">Acheter le numéro</div>
+                            <div class="mat-font-headline-sm">Acheter le numéro</div>
                         }
                         @if (!data.model.reviewNumber) {
-                            <div class="mat-h1">Acheter cet article</div>
+                            <div class="mat-font-headline-sm">Acheter cet article</div>
                         }
                         <div class="nat-horizontal nat-wrap nat-gap-30">
                             @if (showBuyPaper) {
                                 <div class="nat-vertical nat-gap-10">
-                                    <div class="mat-h2 price nat-center">
+                                    <div class="mat-font-title-lg price nat-center">
                                         <app-price [product]="data.model" />
                                     </div>
                                     <app-add-to-cart
@@ -152,7 +148,7 @@
                             }
                             @if (showBuyDigital) {
                                 <div class="nat-vertical nat-gap-10 nat-center">
-                                    <div class="mat-h2 price">
+                                    <div class="mat-font-title-lg price">
                                         <app-price [product]="data.model" />
                                     </div>
                                     <app-add-to-cart
@@ -171,26 +167,26 @@
                 }
                 @if (!viewer?.subscriptionType) {
                     <div class="nat-md-expand-50 nat-vertical nat-frame-primary frame nat-left">
-                        <h1 class="mat-h1">S'abonner</h1>
+                        <h1 class="mat-font-headline-sm">S'abonner</h1>
                         <p>
                             Un accès à
-                            <span class="mat-subtitle-2">toute la base de données</span>
+                            <span class="mat-font-title-sm nat-bold">toute la base de données</span>
                             avec près de
-                            <span class="mat-subtitle-2">1000 articles</span>
+                            <span class="mat-font-title-sm nat-bold">1000 articles</span>
                             de fond sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays
                         </p>
                         <p>
                             Un travail rédactionnel
-                            <span class="mat-subtitle-2">indépendant</span>
+                            <span class="mat-font-title-sm nat-bold">indépendant</span>
                             . Aucun partenariat ni soutient financier n'y porte atteinte.
                         </p>
                         <p>
                             L'envie de
-                            <span class="mat-subtitle-2">comprendre</span>
+                            <span class="mat-font-title-sm nat-bold">comprendre</span>
                             et le pouvoir d'
-                            <span class="mat-subtitle-2">agir</span>
+                            <span class="mat-font-title-sm nat-bold">agir</span>
                             pour
-                            <span class="mat-subtitle-2">construire</span>
+                            <span class="mat-font-title-sm nat-bold">construire</span>
                             une société écologique et solidaire.
                         </p>
                         <a matButton="filled" routerLink="/larevuedurable/abonnements">S'abonner</a>
@@ -199,7 +195,7 @@
             </div>
         </div>
         <div [class.nat-hide]="!relatedProducts?.dataSource?.data?.length">
-            <div class="mat-headline-6">Pour continuer votre lecture ...</div>
+            <div class="mat-font-title-lg">Pour continuer votre lecture ...</div>
             <app-products-page
                 #relatedProducts
                 [forcedVariables]="{

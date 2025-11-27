@@ -1,6 +1,6 @@
 @if (dataSource) {
     <div class="nat-vertical nat-gap-30">
-        <h2 class="mat-headline-4">Articles achetés</h2>
+        <h2 class="mat-font-headline-lg">Articles achetés</h2>
         <div class="nat-vertical nat-gap">
             <div class="nat-margin-vertical overflow nat-horizontal">
                 <natural-search
@@ -22,7 +22,7 @@
                             </a>
                         }
                         <div class="nat-expand nat-gap-5 nat-vertical nat-top nat-left">
-                            <div class="nat-horizontal mat-body text-light nat-gap-15 nat-left nat-baseline">
+                            <div class="nat-horizontal text-light nat-gap-15 nat-left nat-baseline">
                                 @if (orderLine.product.reviewNumber) {
                                     <span class="nat-text-primary"> N° {{ orderLine.product.reviewNumber }}</span>
                                 }
@@ -35,7 +35,7 @@
                             </div>
                             <a
                                 matRipple
-                                class="mat-h3"
+                                class="mat-font-title-md"
                                 [routerLink]="['/larevuedurable/article', orderLine.product.id]"
                             >
                                 {{ orderLine.product.name }}

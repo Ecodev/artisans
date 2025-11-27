@@ -1,7 +1,7 @@
 @if (!editMode) {
     <div class="bloc">
-        <div class="mat-h1 title">{{ form.get('title')?.value }}</div>
-        <div class="bloc-description mat-h4">{{ form.get('description')?.value }}</div>
+        <div class="mat-font-headline-sm title">{{ form.get('title')?.value }}</div>
+        <div class="bloc-description mat-font-title-md">{{ form.get('description')?.value }}</div>
         <a matButton="filled" [routerLink]="form.get('buttonLink')?.value">
             {{ form.get('buttonLabel')?.value }}
         </a>

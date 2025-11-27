@@ -16,7 +16,7 @@
                         <mat-error>{{ form.get('name')?.errors | errorMessage }}</mat-error>
                     </mat-form-field>
 
-                    <div class="mat-body-2">Description</div>
+                    <div class="nat-bold">Description</div>
                     <natural-editor formControlName="description" (contentChange)="update()" />
                     <br />
 
@@ -56,7 +56,7 @@
                 <div>
                     @if (datesForm) {
                         <div formArrayName="dates" class="nat-margin-bottom">
-                            <h2 class="mat-h2">Dates de la session</h2>
+                            <h2 class="mat-font-title-lg">Dates de la session</h2>
                             @for (date of datesForm.controls; track date) {
                                 <div class="nat-horizontal nat-gap-15">
                                     <mat-form-field class="nat-expand">
@@ -76,7 +76,7 @@
                     }
 
                     @if (isUpdatePage()) {
-                        <h2 class="mat-h2 nat-no-margin-bottom">Facilitateurs</h2>
+                        <h2 class="mat-font-title-lg nat-no-margin-bottom">Facilitateurs</h2>
                         <natural-relations
                             otherName="facilitator"
                             placeholder="Facilitateur"
@@ -122,7 +122,7 @@
 
                 <mat-divider class="nat-margin-vertical" />
 
-                <h2 class="mat-h2">Formulaire d'inscription</h2>
+                <h2 class="mat-font-title-lg">Formulaire d'inscription</h2>
 
                 <mat-form-field>
                     <mat-label>Url du formulaire</mat-label>

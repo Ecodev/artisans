@@ -1,10 +1,10 @@
 <div class="container">
-    <h1 class="mat-headline-4">PROCHAINES SESSIONS</h1>
+    <h1 class="mat-font-headline-lg">PROCHAINES SESSIONS</h1>
 
     <div class="nat-horizontal nat-gap-30">
         <div class="app-md-expand-70 app-gap-60 nat-vertical page-body">
-            <div class="rich-text mat-h3">
-                <h2 class="mat-h1 nat-no-margin-top">Infos pratiques</h2>
+            <div class="rich-text mat-font-title-md">
+                <h2 class="mat-font-headline-sm nat-no-margin-top">Infos pratiques</h2>
 
                 <p>
                     Vous pouvez rejoindre l’une des sessions agendées ci-dessous ou constituer un groupe de huit à dix
@@ -15,7 +15,7 @@
             <div id="incoming-sessions-list">
                 @for (session of sessions; track session) {
                     <div class="nat-vertical nat-gap-10 nat-left">
-                        <div class="mat-h2">{{ session.name }}</div>
+                        <div class="mat-font-title-lg">{{ session.name }}</div>
                         <div class="rich-text" [innerHtml]="session.description"></div>
                         @if (session.mailingList) {
                             <a matButton="filled" color="tertiary" target="_blank" [attr.href]="session.mailingList">
@@ -26,7 +26,7 @@
                 }
             </div>
 
-            <div class="rich-text mat-h3">
+            <div class="rich-text mat-font-title-md">
                 <p>
                     Le nombre de participants à une Conversation carbone est limité afin de garantir une dynamique de
                     groupe optimale. Si vous deviez vous désister avant le début de la session, merci de nous en

@@ -76,10 +76,10 @@
                 @for (event of events; track event) {
                     <mat-divider />
                     <div class="event">
-                        <a class="mat-font-title-lg nat-no-margin-bottom" matRipple [routerLink]="['/agenda', event.id]"
+                        <a class="mat-font-title-lg" matRipple [routerLink]="['/agenda', event.id]"
                             >{{ event.name }}
                         </a>
-                        <div class="mat-font-title-md nat-no-margin-bottom">
+                        <div class="mat-font-title-md">
                             <span class="text-light">{{ event.date | date: 'EEE dd.MM.yy' | capitalize }}</span>
                             <span class="description"> - {{ event.place }} - {{ event.type }}</span>
                         </div>

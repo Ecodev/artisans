@@ -6,13 +6,13 @@
                 <div class="nat-horizontal nat-gap-15 nat-align">
                     <!-- Review number -->
                     @if (data.model.reviewNumber) {
-                        <div class="nat-text-primary text-bold mat-font-headline-sm nat-no-margin-bottom">
+                        <div class="nat-text-primary text-bold mat-font-headline-sm">
                             N° {{ data.model.reviewNumber }}
                         </div>
                     }
                     <!-- Release date -->
                     @if (data.model.releaseDate) {
-                        <div class="mat-font-title-lg text-light nat-no-margin-bottom">
+                        <div class="mat-font-title-lg text-light">
                             {{ data.model.releaseDate | date: 'MMMM yyyy' | capitalize }}
                         </div>
                     }
@@ -93,7 +93,7 @@
         <div class="nat-vertical nat-gap-30">
             @if (!viewer) {
                 <div class="mat-font-title-md nat-gap-15 nat-horizontal nat-wrap nat-align">
-                    <div class="mat-font-headline-sm nat-no-margin-bottom">Intéressé par ce contenu ?</div>
+                    <div class="mat-font-headline-sm">Intéressé par ce contenu ?</div>
                     <div>Si vous êtes déjà abonné à la version numérique</div>
                     <a matButton="filled" color="primary" routerLink="/login" [queryParams]="{returnUrl: url}"
                         >connectez-vous !

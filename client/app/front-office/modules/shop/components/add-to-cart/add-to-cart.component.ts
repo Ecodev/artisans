@@ -20,11 +20,6 @@ export class AddToCartComponent {
     public readonly label = input.required<string>();
 
     /**
-     * Button background color
-     */
-    public readonly buttonColor = input<'primary' | 'accent' | 'warn' | null>('primary');
-
-    /**
      * Product to add to cart
      */
     public readonly product = input.required<CartLineProduct>();

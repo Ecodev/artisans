@@ -57,7 +57,7 @@
 
             <div class="nat-expand"></div>
 
-            <button mat-icon-button (click)="menu.toggle()">
+            <button matIconButton (click)="menu.toggle()">
                 <mat-icon naturalIcon="menu" />
             </button>
         </mat-toolbar>
@@ -68,7 +68,7 @@
                 <div class="container nat-horizontal">
                     <div class="nat-expand"></div>
                     @if (!currencyService.locked) {
-                        <a mat-button [matMenuTriggerFor]="deviseMenu">
+                        <a matButton [matMenuTriggerFor]="deviseMenu">
                             {{ currencyService.current.value === Currency.CHF ? 'Suisse (CHF)' : 'Europe (EUR)' }}
                             <mat-icon naturalIcon="keyboard_arrow_down" />
                         </a>
@@ -81,7 +81,7 @@
                         <a routerLink="/admin" mat-button>Administration</a>
                     }
                     @for (item of topNavigation; track item) {
-                        <a mat-button [routerLink]="item.link"> {{ item.display }}</a>
+                        <a matButton [routerLink]="item.link">{{ item.display }}</a>
                     }
                 </div>
             </div>
@@ -114,7 +114,7 @@
                             (keydown.enter)="search()"
                             (keydown.esc)="searchTerm = ''"
                         />
-                        <button mat-icon-button matIconSuffix (click)="search()">
+                        <button matIconButton matIconSuffix (click)="search()">
                             <mat-icon naturalIcon="search" />
                         </button>
                     </mat-form-field>
@@ -188,8 +188,8 @@
                             Tél: +41 26 321 37 11
                             <br />
                             <a href="mailto:courriel@artisansdelatransition.org" style="text-transform: lowercase"
-                                >courriel&#64;artisansdelatransition.org
-                            </a>
+                                >courriel&#64;artisansdelatransition.org</a
+                            >
                             <br />
                             IBAN CH2300768300140932307
                         </div>

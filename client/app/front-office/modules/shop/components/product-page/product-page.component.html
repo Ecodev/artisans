@@ -17,7 +17,7 @@
                         </div>
                     }
                     @if (data.model.permissions.update) {
-                        <a mat-icon-button class="mat-elevation-z4" [routerLink]="['/admin/product', data.model.id]">
+                        <a matMiniFab class="nat-rounded nat-flat" [routerLink]="['/admin/product', data.model.id]">
                             <mat-icon naturalIcon="edit" />
                         </a>
                     }
@@ -57,8 +57,8 @@
                         (click)="articlesMenuOpen = !articlesMenuOpen"
                     >
                         <span class="mat-font-title-lg show-products-of-review-button nat-no-margin-bottom"
-                            >Voir les articles de ce numéro
-                        </span>
+                            >Voir les articles de ce numéro</span
+                        >
                         <mat-icon naturalIcon="expand_more" />
                     </div>
                     @if (articlesMenuOpen) {
@@ -95,9 +95,7 @@
                 <div class="mat-font-title-md nat-gap-15 nat-horizontal nat-wrap nat-align">
                     <div class="mat-font-headline-sm">Intéressé par ce contenu ?</div>
                     <div>Si vous êtes déjà abonné à la version numérique</div>
-                    <a matButton="filled" color="primary" routerLink="/login" [queryParams]="{returnUrl: url}"
-                        >connectez-vous !
-                    </a>
+                    <a matButton="filled" routerLink="/login" [queryParams]="{returnUrl: url}">connectez-vous !</a>
                 </div>
             }
             <div class="nat-vertical nat-gap-30 nat-md-horizontal">
@@ -161,7 +159,7 @@
                             }
                         </div>
                         @if (data.model.reviewNumber) {
-                            <a mat-button routerLink="/larevuedurable/articles">ou acheter par articles</a>
+                            <a matButton routerLink="/larevuedurable/articles">ou acheter par articles</a>
                         }
                     </div>
                 }

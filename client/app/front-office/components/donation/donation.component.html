@@ -18,7 +18,5 @@
 
 <mat-dialog-actions align="end">
     <button mat-dialog-close mat-button>Annuler</button>
-    <button matButton="filled" color="primary" [mat-dialog-close]="amount.value" [disabled]="!amount.valid">
-        Valider
-    </button>
+    <button matButton="filled" [mat-dialog-close]="amount.value" [disabled]="!amount.valid">Valider</button>
 </mat-dialog-actions>

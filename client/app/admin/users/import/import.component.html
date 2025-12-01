@@ -5,7 +5,7 @@
             <p>Uploadez un fichier CSV pour importer les utilisateurs et leur accès:</p>
             <p>
                 <button
-                    mat-raised-button
+                    matButton="tonal"
                     naturalFileDrop
                     accept=".csv"
                     [selectable]="true"
@@ -47,10 +47,10 @@
                                 définitivement les utilisateurs de notre BD.
                             </p>
                             <div class="nat-horizontal nat-gap-10">
-                                <a mat-button style="margin-right: 3em" [routerLink]="['/admin/user', params]"
+                                <a matButton style="margin-right: 3em" [routerLink]="['/admin/user', params]"
                                     >Voir le détail</a
                                 >
-                                <button mat-raised-button color="warn" (click)="deleteAll()">
+                                <button matButton="filled" color="error" (click)="deleteAll()">
                                     <mat-icon naturalIcon="delete" />
                                     Supprimer tous
                                 </button>
@@ -73,7 +73,7 @@
                     </p>
                     @for (error of errors; track error) {
                         <p>
-                            <mat-icon color="warn" fontIcon="error" />
+                            <mat-icon color="error" fontIcon="error" />
                             {{ error }}
                         </p>
                     }

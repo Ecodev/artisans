@@ -7,7 +7,7 @@
         <h1 class="mat-font-headline-lg">
             {{ data.model.name }}
             @if (isUpdatePage() && data.model.permissions.update) {
-                <a mat-icon-button class="mat-elevation-z4" [routerLink]="['/admin/event', data.model.id]">
+                <a matMiniFab class="nat-rounded nat-flat" [routerLink]="['/admin/event', data.model.id]">
                     <mat-icon naturalIcon="edit" />
                 </a>
             }

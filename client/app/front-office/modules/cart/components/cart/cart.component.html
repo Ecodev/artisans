@@ -6,14 +6,10 @@
             <div class="nat-vertical nat-center">
                 <div class="mat-font-headline-sm">Aucun article dans le panier</div>
                 <div class="nat-vertical nat-sm-horizontal nat-wrap nat-gap-30">
-                    <a color="primary" matButton="filled" routerLink="/larevuedurable/articles"
-                        >Consulter nos articles</a
-                    >
-                    <a color="primary" matButton="filled" routerLink="/larevuedurable/numeros">Consulter nos revues</a>
-                    <a color="primary" matButton="filled" routerLink="/larevuedurable/abonnements">S'abonner</a>
-                    <button color="primary" matButton="filled" (click)="cartService.inputDonation(false, cart)">
-                        Faire un don
-                    </button>
+                    <a matButton="filled" routerLink="/larevuedurable/articles">Consulter nos articles</a>
+                    <a matButton="filled" routerLink="/larevuedurable/numeros">Consulter nos revues</a>
+                    <a matButton="filled" routerLink="/larevuedurable/abonnements">S'abonner</a>
+                    <button matButton="filled" (click)="cartService.inputDonation(false, cart)">Faire un don</button>
                 </div>
             </div>
         }
@@ -30,24 +26,22 @@
                             ></a>
                             <a
                                 class="item-body item-button"
-                                mat-button
+                                matButton
                                 [routerLink]="['/larevuedurable/article', line.product.id]"
+                                >{{ line.product.name }}, {{ line.type | enum: 'ProductType' | async }}</a
                             >
-                                {{ line.product.name }}, {{ line.type | enum: 'ProductType' | async }}
-                            </a>
                             @if (line.quantity > 1) {
                                 <app-price [product]="line.product" />
                                 <div>x {{ line.quantity }}</div>
                             }
-                            <div class="price -strong" style="white-space: nowrap">
+                            <div class="price nat-bold" style="white-space: nowrap">
                                 {{ line.totalTaxInc | currency: currencyService.current.value }}
                             </div>
                             <div class="nat-horizontal nat-align nat-gap-10">
                                 @if (line.quantity === 1) {
                                     <button
-                                        color="warn"
-                                        mat-icon-button
-                                        class="mat-elevation-z4"
+                                        matMiniFab
+                                        class="nat-rounded nat-flat"
                                         (click)="decrease(line.product, line.type)"
                                     >
                                         <mat-icon naturalIcon="delete" />
@@ -55,16 +49,16 @@
                                 }
                                 @if (line.quantity > 1) {
                                     <button
-                                        mat-icon-button
-                                        class="mat-elevation-z4"
+                                        matMiniFab
+                                        class="nat-rounded nat-flat"
                                         (click)="decrease(line.product, line.type)"
                                     >
                                         <mat-icon naturalIcon="remove" />
                                     </button>
                                 }
                                 <button
-                                    mat-icon-button
-                                    class="mat-elevation-z4"
+                                    matMiniFab
+                                    class="nat-rounded nat-flat"
                                     (click)="increase(line.product, line.type)"
                                 >
                                     <mat-icon naturalIcon="add" />
@@ -82,27 +76,22 @@
                         routerLink="/larevuedurable/abonnements"
                         [naturalBackgroundDensity]="`/api/image/${cart.subscription.subscription.image?.id}/70`"
                     ></a>
-                    <a routerLink="/larevuedurable/abonnements" mat-button class="item-body item-button">
-                        {{ cart.subscription.subscription.name }},{{
+                    <a routerLink="/larevuedurable/abonnements" matButton class="item-body item-button"
+                        >{{ cart.subscription.subscription.name }},{{
                             cart.subscription.type | enum: 'ProductType' | async
-                        }}
-                    </a>
+                        }}</a
+                    >
                     @if (cart.subscription.emails) {
                         <div>{{ cart.subscription.emails.join(', ') }}</div>
                     }
                     <div style="white-space: nowrap">
-                        <app-price class="price -strong" [product]="cart.subscription.subscription" />
+                        <app-price class="price nat-bold" [product]="cart.subscription.subscription" />
                     </div>
                     <div class="nat-horizontal nat-align nat-gap-10">
-                        <button
-                            color="warn"
-                            mat-icon-button
-                            class="mat-elevation-z4"
-                            (click)="cart.unsetSubscription()"
-                        >
+                        <button matMiniFab class="nat-rounded nat-flat" (click)="cart.unsetSubscription()">
                             <mat-icon naturalIcon="delete" />
                         </button>
-                        <button routerLink="/larevuedurable/abonnements" mat-icon-button class="mat-elevation-z4">
+                        <button routerLink="/larevuedurable/abonnements" matMiniFab class="nat-rounded nat-flat">
                             <mat-icon naturalIcon="edit" />
                         </button>
                     </div>
@@ -115,17 +104,17 @@
                         style="width: 70px; height: 70px"
                         [style.backgroundImage]="'url(assets/images/homepage/la-revue-durable_faire-un-don.jpg)'"
                     ></div>
-                    <a mat-button class="item-body">Don</a>
-                    <div class="price -strong" style="white-space: nowrap">
+                    <a matButton class="item-body">Don</a>
+                    <div class="price nat-bold" style="white-space: nowrap">
                         {{ cart.donationAmount | currency: currencyService.current.value }}
                     </div>
                     <div class="nat-horizontal nat-align nat-gap-10">
-                        <button color="warn" mat-icon-button class="mat-elevation-z4" (click)="cart.unsetDonation()">
+                        <button matMiniFab class="nat-rounded nat-flat" (click)="cart.unsetDonation()">
                             <mat-icon naturalIcon="delete" />
                         </button>
                         <button
-                            mat-icon-button
-                            class="mat-elevation-z4"
+                            matMiniFab
+                            class="nat-rounded nat-flat"
                             (click)="cartService.inputDonation(false, cart)"
                         >
                             <mat-icon naturalIcon="edit" />
@@ -141,17 +130,15 @@
                     </div>
                 </div>
                 <div class="nat-vertical nat-right cart-buttons nat-gap-10 nat-md-gap-20 nat-md-horizontal">
-                    <a mat-stroked-button routerLink="/larevuedurable/articles">Continuer mes achats</a>
-                    <button mat-stroked-button (click)="empty()">Vider le panier</button>
+                    <a matButton="outlined" routerLink="/larevuedurable/articles">Continuer mes achats</a>
+                    <button matButton="outlined" (click)="empty()">Vider le panier</button>
                     <div class="nat-md-expand"></div>
                     @if (!cart.donationAmount) {
                         <button matButton="filled" color="tertiary" (click)="cartService.inputDonation(false, cart)">
                             Faire un don
                         </button>
                     }
-                    <button matButton="filled" color="primary" [routerLink]="['/panier/commande', cart.id]">
-                        Commander
-                    </button>
+                    <button matButton="filled" [routerLink]="['/panier/commande', cart.id]">Commander</button>
                 </div>
             }
         </div>

@@ -27,8 +27,8 @@
                         <mat-datepicker-toggle matIconSuffix [for]="picker" />
                         <mat-datepicker #picker />
                         <mat-hint
-                            >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des sessions
-                        </mat-hint>
+                            >Ce champ est masqué à l'utilisateur mais est utilisé pour l'ordre des sessions</mat-hint
+                        >
                     </mat-form-field>
 
                     <mat-form-field>
@@ -38,8 +38,9 @@
                         <mat-datepicker-toggle matIconSuffix [for]="picker2" />
                         <mat-datepicker #picker2 />
                         <mat-hint
-                            >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins d'administration
-                        </mat-hint>
+                            >Ce champ est masqué à l'utilisateur mais il est utilisé à des fins
+                            d'administration</mat-hint
+                        >
                     </mat-form-field>
 
                     <mat-form-field class="nat-margin-top">
@@ -63,12 +64,12 @@
                                         <mat-label>Date</mat-label>
                                         <input matInput [formControlName]="$index" (change)="update()" />
                                     </mat-form-field>
-                                    <button color="warn" mat-icon-button (click)="datesForm.removeAt($index); update()">
+                                    <button color="error" matIconButton (click)="datesForm.removeAt($index); update()">
                                         <mat-icon naturalIcon="delete" />
                                     </button>
                                 </div>
                             }
-                            <button color="primary" matButton="filled" (click)="addDate()">
+                            <button matButton="filled" (click)="addDate()">
                                 <mat-icon naturalIcon="add" />
                                 Ajouter une date
                             </button>

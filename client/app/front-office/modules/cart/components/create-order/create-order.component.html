@@ -6,8 +6,8 @@
                 <mat-radio-group formControlName="paymentMethod" class="nat-vertical nat-gap-10">
                     <div class="payment-method">
                         <mat-radio-button [value]="PaymentMethod.Datatrans"
-                            >Paiement par carte de crédit
-                        </mat-radio-button>
+                            >Paiement par carte de crédit</mat-radio-button
+                        >
                     </div>
                     <div>
                         <mat-radio-button [value]="PaymentMethod.Bvr">Recevoir une facture</mat-radio-button>
@@ -16,7 +16,7 @@
                 <h1 class="mat-font-headline-lg">Votre adresse</h1>
                 <div>
                     <app-address [form]="shippingForm" [disabled]="true" />
-                    <a mat-button routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
+                    <a matButton routerLink="/mon-compte/donnees-personnelles">Modifier l'adresse</a>
                 </div>
             </div>
             <div class="nat-vertical app-gap-60" [formGroup]="billingForm">
@@ -24,9 +24,8 @@
                 <mat-checkbox
                     formControlName="sameAsBilling"
                     (change)="updateAddressRequirements(!$event.checked, billingForm)"
+                    >Identique à mon adresse</mat-checkbox
                 >
-                    Identique à mon adresse
-                </mat-checkbox>
                 @if (!billingForm.get('sameAsBilling')?.value) {
                     <app-address [form]="billingForm" />
                 }
@@ -36,7 +35,9 @@
             <!-- Regular products -->
             @for (line of cart.productLines; track line) {
                 <div class="cart-item">
-                    <a [routerLink]="['/larevuedurable/product', line.product.id]">{{ line.product.name }}</a>
+                    <a class="mat-font-body-lg nat-bold" [routerLink]="['/larevuedurable/product', line.product.id]">{{
+                        line.product.name
+                    }}</a>
                     <div>Version : {{ line.type | enum: 'ProductType' | async }}</div>
                     <div>Quantité : {{ line.quantity }}</div>
                 </div>

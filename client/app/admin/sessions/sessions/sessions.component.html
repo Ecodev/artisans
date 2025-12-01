@@ -42,7 +42,7 @@
                             @for (f of element.facilitators; track f) {
                                 <div class="nat-horizontal">
                                     <natural-avatar [initials]="f.name" [gravatar]="f.email" [size]="36" />
-                                    <a mat-button [routerLink]="['/admin/user', f.id]">{{ f.name }}</a>
+                                    <a matButton [routerLink]="['/admin/user', f.id]">{{ f.name }}</a>
                                 </div>
                             }
                         </td>

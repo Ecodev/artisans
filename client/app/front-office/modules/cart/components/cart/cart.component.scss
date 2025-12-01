@@ -1,7 +1,15 @@
 @use '../../../../../../styles/responsive';
 
+.mat-font-headline-lg {
+    margin-bottom: 0.5em;
+}
+
 .cart-buttons .mat-mdc-unelevated-button[color] {
     min-width: 200px;
+}
+
+.cart-item .mat-mdc-button-base:not(.mdc-fab) {
+    justify-content: start;
 }
 
 :host {

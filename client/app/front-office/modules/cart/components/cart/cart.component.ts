@@ -15,7 +15,7 @@ import {CartCollectionService} from '../../services/cart-collection.service';
 import {MatDivider} from '@angular/material/divider';
 import {MatIcon} from '@angular/material/icon';
 import {PriceComponent} from '../../../../../shared/components/price/price.component';
-import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatButton, MatMiniFabButton} from '@angular/material/button';
 import {AsyncPipe, CurrencyPipe} from '@angular/common';
 
 @Component({
@@ -24,7 +24,6 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
         AsyncPipe,
         CurrencyPipe,
         MatButton,
-        MatIconButton,
         RouterLink,
         PriceComponent,
         MatIcon,
@@ -33,6 +32,7 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
         RouterOutlet,
         NaturalEnumPipe,
         NaturalBackgroundDensityDirective,
+        MatMiniFabButton,
     ],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss',

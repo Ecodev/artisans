@@ -22,7 +22,7 @@ import {MatListItem, MatNavList} from '@angular/material/list';
 import {MatRipple} from '@angular/material/core';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';
-import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatButton, MatMiniFabButton} from '@angular/material/button';
 import {DatePipe} from '@angular/common';
 
 @Component({
@@ -30,7 +30,6 @@ import {DatePipe} from '@angular/common';
     imports: [
         DatePipe,
         MatButton,
-        MatIconButton,
         RouterLink,
         MatIcon,
         NaturalIconDirective,
@@ -42,6 +41,7 @@ import {DatePipe} from '@angular/common';
         AddToCartComponent,
         ProductsPageComponent,
         NaturalCapitalizePipe,
+        MatMiniFabButton,
     ],
     templateUrl: './product-page.component.html',
     styleUrl: './product-page.component.scss',

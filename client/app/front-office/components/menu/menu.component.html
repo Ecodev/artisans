@@ -10,8 +10,8 @@
             @for (item of navigation; track item) {
                 <li [class.hasMenu]="item.children?.length" [class.open]="item.open">
                     <a routerLinkActive="active" [routerLink]="item.link">
-                        <span (click)="clickAction(item, $event)">{{ item.display }}</span></a
-                    >
+                        <span (click)="clickAction(item, $event)">{{ item.display }}</span>
+                    </a>
                     <ng-container *ngTemplateOutlet="navigationTemplate; context: {$implicit: item.children}" />
                 </li>
             }

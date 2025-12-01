@@ -12,7 +12,7 @@
                 </mat-form-field>
 
                 <div>
-                    <button mat-button [disabled]="passwordMailSending" (click)="requestPasswordReset()">
+                    <button matButton [disabled]="passwordMailSending" (click)="requestPasswordReset()">
                         Changer de mot de passe
                     </button>
                 </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="nat-horizontal">
-        <button color="primary" matButton="filled" [disabled]="!form.valid" (click)="update(true)">
+        <button matButton="filled" [disabled]="!form.valid" (click)="update(true)">
             <mat-icon naturalIcon="save" />
             Enregistrer
         </button>

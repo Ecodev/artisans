@@ -17,9 +17,9 @@
                         @if (showTagsOnProducts) {
                             <div class="product-tags">
                                 @for (tag of product.productTags; track tag) {
-                                    <a class="product-tag" [routerLink]="['/larevuedurable/articles', tag.name]"
-                                        >{{ tag.name }}
-                                    </a>
+                                    <a class="product-tag" [routerLink]="['/larevuedurable/articles', tag.name]">{{
+                                        tag.name
+                                    }}</a>
                                 }
                             </div>
                         }
@@ -55,9 +55,8 @@
                                     class="product-file-button"
                                     target="_blank"
                                     [href]="`/api/file/${product.file.id}`"
+                                    >Télécharger</a
                                 >
-                                    Télécharger
-                                </a>
                             }
                         </div>
                     </div>
@@ -83,7 +82,7 @@
                             <div class="nat-vertical nat-expand nat-gap-10">
                                 <div class="nat-horizontal mat-font-title-lg text-light nat-gap-15 nat-align">
                                     @if (product.reviewNumber) {
-                                        <span class="nat-text-primary"> N° {{ product.reviewNumber }}</span>
+                                        <span class="nat-text-primary">N° {{ product.reviewNumber }}</span>
                                     }
                                     @if (product.releaseDate) {
                                         <span>
@@ -91,9 +90,9 @@
                                         </span>
                                     }
                                 </div>
-                                <a class="product-name mat-font-headline-sm" [routerLink]="getDetailLink(product)"
-                                    >{{ product.name }}
-                                </a>
+                                <a class="product-name mat-font-headline-sm" [routerLink]="getDetailLink(product)">{{
+                                    product.name
+                                }}</a>
                                 <div
                                     class="product-name mat-font-title-md"
                                     [innerHTML]="product.description | stripTags | truncate: ['570', '...']"
@@ -103,11 +102,10 @@
                                 <app-price class="mat-font-headline-sm" [product]="product" />
                                 <a
                                     matButton="filled"
-                                    color="primary"
                                     class="product-detail-button"
                                     [routerLink]="getDetailLink(product)"
-                                    >Voir le détail
-                                </a>
+                                    >Voir le détail</a
+                                >
                                 @if (product.file) {
                                     <a
                                         matButton="filled"
@@ -115,9 +113,8 @@
                                         class="product-file-button"
                                         target="_blank"
                                         [href]="`/api/file/${product.file.id}`"
+                                        >Télécharger</a
                                     >
-                                        Télécharger
-                                    </a>
                                 }
                             </div>
                         </div>
@@ -127,7 +124,7 @@
         }
         <div class="nat-horizontal nat-center" id="end-of-list">
             @if (items && dataSource?.data?.length > items.length) {
-                <a color="primary" mat-stroked-button (click)="loadMore()">
+                <a matButton="outlined" (click)="loadMore()">
                     {{ route.snapshot.data.showMoreLabel }}
                 </a>
             }

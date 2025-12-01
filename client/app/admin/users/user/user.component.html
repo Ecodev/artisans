@@ -7,10 +7,10 @@
     />
 
     @if (isUpdatePage() && data.model.shouldDelete) {
-        <mat-toolbar color="warn"
+        <mat-toolbar color="error"
             >Cet utilisateur n'existe pas dans Crésus. Il doit soit être ajouté dans Crésus, soit être supprimé
-            définitivement ici.
-        </mat-toolbar>
+            définitivement ici.</mat-toolbar
+        >
     }
 
     <!-- naturalLinkableTab conflicts with order detail page (child route) -->
@@ -32,7 +32,7 @@
                             <mat-label>email</mat-label>
                             <input formControlName="email" matInput (change)="update()" />
                             @if (form.get('email')?.hasError('duplicateValue')) {
-                                <mat-error> Cet email est déjà attribué</mat-error>
+                                <mat-error>Cet email est déjà attribué</mat-error>
                             } @else {
                                 <mat-error>{{ form.get('email')?.errors | errorMessage }}</mat-error>
                             }
@@ -48,9 +48,8 @@
                             formControlName="isPublicFacilitator"
                             class="nat-margin-bottom"
                             (change)="update()"
+                            >Facilitateur public</mat-slide-toggle
                         >
-                            Facilitateur public
-                        </mat-slide-toggle>
                         <h2 class="mat-font-title-lg">État</h2>
                         <natural-select-enum
                             enumName="Membership"

@@ -33,7 +33,7 @@
                         <mat-label>Code</mat-label>
                         <input formControlName="code" matInput maxlength="20" (change)="update()" />
                         @if (form.get('code')?.hasError('duplicateValue')) {
-                            <mat-error> Ce code est déjà attribué à un produit</mat-error>
+                            <mat-error>Ce code est déjà attribué à un produit</mat-error>
                         } @else {
                             <mat-error>{{ form.get('code')?.errors | errorMessage }}</mat-error>
                         }
@@ -69,11 +69,11 @@
                 <div class="nat-md-expand-33 nat-gap nat-vertical">
                     <div class="nat-vertical nat-gap nat-margin-bottom">
                         <mat-slide-toggle formControlName="isActive" (change)="update()"
-                            >Disponible à la vente
-                        </mat-slide-toggle>
+                            >Disponible à la vente</mat-slide-toggle
+                        >
                         <mat-slide-toggle formControlName="isHighlighted" (change)="update()"
-                            >Mettre en avant
-                        </mat-slide-toggle>
+                            >Mettre en avant</mat-slide-toggle
+                        >
                     </div>
 
                     <natural-select-enum
@@ -103,8 +103,9 @@
                         @if (form.hasError('reviewXorArticle')) {
                             <mat-error
                                 >Un produit ne peut pas être à la fois une revue et un article. Il faut soit entrer un
-                                numéro de revue pour une revue, soit choisir une revue existante pour un article.
-                            </mat-error>
+                                numéro de revue pour une revue, soit choisir une revue existante pour un
+                                article.</mat-error
+                            >
                         }
                     </mat-form-field>
 

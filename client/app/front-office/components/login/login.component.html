@@ -29,28 +29,22 @@
                     [type]="hidePassword ? 'password' : 'text'"
                     (keydown.enter)="maybeConfirm()"
                 />
-                <button mat-icon-button matIconSuffix (click)="hidePassword = !hidePassword">
+                <button matIconButton matIconSuffix (click)="hidePassword = !hidePassword">
                     <mat-icon [fontIcon]="hidePassword ? 'visibility' : 'visibility_off'" />
                 </button>
                 <mat-error>{{ form.controls.password.errors | errorMessage }}</mat-error>
             </mat-form-field>
 
             <div class="nat-horizontal nat-gap-10">
-                <a mat-button routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
-                <button
-                    color="primary"
-                    mat-raised-button
-                    type="submit"
-                    [disabled]="!form.valid"
-                    (click)="maybeConfirm()"
-                >
+                <a matButton routerLink="/user/request-password-reset">Mot de passe oublié ?</a>
+                <button matButton="filled" type="submit" [disabled]="!form.valid" (click)="maybeConfirm()">
                     Se connecter
                 </button>
             </div>
 
             <mat-divider class="nat-margin" />
             <div class="mat-font-title-md" style="text-align: center">Pas encore de compte ?</div>
-            <a mat-stroked-button routerLink="/user/new" type="submit">Créer un compte</a>
+            <a matButton="outlined" routerLink="/user/new" type="submit">Créer un compte</a>
         </form>
     </div>
 </div>

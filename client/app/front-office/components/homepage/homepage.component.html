@@ -50,7 +50,7 @@
             </div>
 
             <div>
-                <a color="primary" matButton="filled" routerLink="/actualite">Voir toutes nos actualités</a>
+                <a matButton="filled" routerLink="/actualite">Voir toutes nos actualités</a>
             </div>
         </div>
 
@@ -76,12 +76,10 @@
                 @for (event of events; track event) {
                     <mat-divider />
                     <div class="event">
-                        <a class="mat-font-title-lg" matRipple [routerLink]="['/agenda', event.id]"
-                            >{{ event.name }}
-                        </a>
+                        <a class="mat-font-title-lg" matRipple [routerLink]="['/agenda', event.id]">{{ event.name }}</a>
                         <div class="mat-font-title-md">
                             <span class="text-light">{{ event.date | date: 'EEE dd.MM.yy' | capitalize }}</span>
-                            <span class="description"> - {{ event.place }} - {{ event.type }}</span>
+                            <span class="description">- {{ event.place }} - {{ event.type }}</span>
                         </div>
                     </div>
                 }
@@ -124,9 +122,9 @@
                     <span>|</span>
                     <span>{{ currentReview.releaseDate | date: 'MMMM yyyy' | capitalize }}</span>
                 </div>
-                <a class="mat-font-headline-lg" [routerLink]="['/larevuedurable/article', currentReview.id]"
-                    >{{ currentReview.name }}
-                </a>
+                <a class="mat-font-headline-lg" [routerLink]="['/larevuedurable/article', currentReview.id]">{{
+                    currentReview.name
+                }}</a>
                 <!-- If has not access -->
                 @if (!currentReview.file) {
                     <div class="mat-font-title-md">
@@ -144,9 +142,8 @@
                             color="tertiary"
                             target="_blank"
                             [href]="`/api/file/${currentReview.file.id}`"
+                            >Télécharger le numéro</a
                         >
-                            Télécharger le numéro
-                        </a>
                     </div>
                 }
             </div>
@@ -158,9 +155,7 @@
     <div class="container nat-gap-30 nat-vertical nat-top nat-left">
         <div class="mat-font-headline-lg">NOS THEMES</div>
         <app-tags-navigation [linkBase]="['/larevuedurable/articles']" />
-        <a color="primary" matButton="filled" routerLink="/larevuedurable/articles"
-            >Voir tous nos articles et dossiers</a
-        >
+        <a matButton="filled" routerLink="/larevuedurable/articles">Voir tous nos articles et dossiers</a>
     </div>
 </div>
 
@@ -178,11 +173,13 @@
                     <div class="mat-font-headline-sm">S'abonner</div>
                     <div class="support-column-content mat-font-title-md">
                         <p>
-                            En presque vingt ans, <strong>LaRevueDurable</strong> a publié plus de 1100 articles de fond
-                            sur tous les thèmes qui touchent à la durabilité dans une soixantaine de pays.
+                            En presque vingt ans,
+                            <strong>LaRevueDurable</strong>
+                            a publié plus de 1100 articles de fond sur tous les thèmes qui touchent à la durabilité dans
+                            une soixantaine de pays.
                         </p>
                     </div>
-                    <a matButton="filled" routerLink="/larevuedurable/abonnements"> Voir les abonnements</a>
+                    <a matButton="filled" routerLink="/larevuedurable/abonnements">Voir les abonnements</a>
                 </div>
             </div>
 
@@ -195,8 +192,10 @@
                     <div class="mat-font-headline-sm">Rejoindre l’association</div>
                     <div class="support-column-content mat-font-title-md">
                         <p>
-                            Devenir membre des <strong>Artisans de la transition</strong> permet un lien direct et
-                            privilégié avec notre action. Et nous donne plus de légitimité et de poids.
+                            Devenir membre des
+                            <strong>Artisans de la transition</strong>
+                            permet un lien direct et privilégié avec notre action. Et nous donne plus de légitimité et
+                            de poids.
                         </p>
                     </div>
                     <a matButton="filled" routerLink="/nous-soutenir/rejoindre-association">Découvrir l'association</a>

@@ -100,12 +100,18 @@ const creationDate: DropdownFacet<TypeDateConfiguration> = {
     display: 'Date de création',
     field: 'creationDate',
     component: TypeDateComponent,
+    configuration: {
+        nullable: true,
+    },
 };
 
 const updateDate: DropdownFacet<TypeDateConfiguration> = {
     display: 'Date de modification',
     field: 'updateDate',
     component: TypeDateComponent,
+    configuration: {
+        nullable: true,
+    },
 };
 
 export function users(): NaturalSearchFacets {

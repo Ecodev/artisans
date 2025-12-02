@@ -96,13 +96,13 @@
                         <natural-stamp [item]="data.model" />
                         @if (data.model.firstLogin) {
                             <div>
-                                <span class="-strong">Première connexion :</span>
+                                <span class="nat-bold">Première connexion :</span>
                                 {{ data.model.firstLogin | date }} ({{ data.model.firstLogin | timeAgo }})
                             </div>
                         }
                         @if (data.model.lastLogin) {
                             <div>
-                                <span class="-strong">Dernière connexion :</span>
+                                <span class="nat-bold">Dernière connexion :</span>
                                 {{ data.model.lastLogin | date }} ({{ data.model.lastLogin | timeAgo }})
                             </div>
                         }

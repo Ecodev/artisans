@@ -13,23 +13,3 @@
         }
     }
 }
-
-.witnesses {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 20px;
-
-    @media screen and (max-width: 700px) {
-        grid-template-columns: 100%;
-    }
-}
-
-.witness {
-    display: inline-block; // prevents columns to break paragraph (from bottom to top of next column)
-    margin-bottom: 30px;
-    border-width: 0;
-    border-left-width: 5px;
-    border-style: solid;
-    border-color: var(--mat-sys-primary-container);
-    padding: 0 0 0 10px;
-}

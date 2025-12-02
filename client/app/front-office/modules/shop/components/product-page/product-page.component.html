@@ -23,19 +23,18 @@
                     }
                 </div>
                 <h1 class="mat-font-headline-lg">{{ data.model.name }}</h1>
+
                 <!-- Reading duration -->
-                <div class="nat-horizontal nat-gap">
+                <div class="nat-horizontal nat-gap duration nat-align mat-font-title-md nat-gap-10">
                     @if (data.model.readingDuration) {
-                        <div class="nat-horizontal nat-align nat-gap-10 mat-font-title-md">
-                            <mat-icon naturalIcon="alarm" />
-                            <div>
-                                {{ data.model.readingDuration
-                                }}{{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }} de lecture
-                            </div>
-                        </div>
+                        <mat-icon naturalIcon="alarm" />
+                        <span>
+                            {{ data.model.readingDuration }}{{ data.model.readingDuration > 1 ? 'minutes' : 'minute' }}
+                            de lecture
+                        </span>
                     }
                 </div>
-                <div class="description mat-font-title-md rich-text" [innerHTML]="data.model.description"></div>
+                <div class="description mat-font-body-lg rich-text" [innerHTML]="data.model.description"></div>
             </div>
             <div class="image-preview nat-vertical nat-gap-30">
                 <!-- Product image (preview) -->
@@ -57,8 +56,8 @@
                         (click)="articlesMenuOpen = !articlesMenuOpen"
                     >
                         <span class="mat-font-title-lg show-products-of-review-button nat-no-margin-bottom"
-                            >Voir les articles de ce numéro</span
-                        >
+                            >Voir les articles de ce numéro
+                        </span>
                         <mat-icon naturalIcon="expand_more" />
                     </div>
                     @if (articlesMenuOpen) {
@@ -98,7 +97,7 @@
                     <a matButton="filled" routerLink="/login" [queryParams]="{returnUrl: url}">connectez-vous !</a>
                 </div>
             }
-            <div class="nat-vertical nat-gap-30 nat-md-horizontal">
+            <div class="nat-vertical nat-gap-30 nat-md-horizontal rich-text">
                 <!-- Download -->
                 @if (data.model.file) {
                     <div class="nat-frame-tertiary nat-padding nat-vertical nat-center nat-md-expand-50">

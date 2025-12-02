@@ -38,7 +38,7 @@
             <div class="newses-list nat-gap nat-vertical">
                 @for (news of newses; track news) {
                     <div class="news">
-                        <div class="-strong text-light">
+                        <div class="nat-bold text-light">
                             {{ news.date | date: 'EEE dd.MM.yy' | capitalize }}
                         </div>
                         <a class="mat-font-title-lg" matRipple [routerLink]="['/actualite', news.id]">{{

@@ -1,5 +1,5 @@
 /*
- * Theme 1 (light ):
+ * Theme 1 (light + dark):
  *   Seed: #0E7ECB
  *   Core Colors:
  *     Primary: #0E7ECB
@@ -8,7 +8,7 @@
  *     Neutral Variant: #FFFFFF
  *
  * Theme 1 Builder Link:
- *   http://material-foundation.github.io/material-theme-builder/?primary=0E7ECB&tertiary=EF6031&neutral=FFFFFF&neutralVariant=FFFFFF
+ *   http://material-foundation.github.io/material-theme-builder/?primary=0E7ECB&tertiary=EF6031&neutral=FFFFFF&neutralVariant=FFFFFF&colorMatch=true
  */
 
 @use '@angular/material' as mat;
@@ -44,10 +44,10 @@
             on-tertiary-fixed: #3A0B00,
             on-tertiary-fixed-variant: #852400,
 
-            error: #BA1A1A,
-            error-container: #FFDAD6,
+            error: #BC0100,
+            error-container: #EB0000,
             on-error: #FFFFFF,
-            on-error-container: #93000A,
+            on-error-container: #FFFBFF,
 
             surface: #FCF8F8,
             surface-variant: #E0E3E3,

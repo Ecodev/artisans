@@ -1,4 +1,4 @@
-import {Component, DestroyRef, HostBinding, inject, Input, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
 import {ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {MatButton} from '@angular/material/button';
@@ -17,11 +17,9 @@ export type Breadcrumb = {
 })
 export class BreadcrumbsComponent implements OnInit {
     private readonly router = inject(Router);
-
     private readonly destroyRef = inject(DestroyRef);
-    @HostBinding('class.') private isBody = true;
 
-    @Input() public breadcrumbs: Breadcrumb[] = [];
+    protected breadcrumbs: Breadcrumb[] = [];
 
     public ngOnInit(): void {
         this.update();

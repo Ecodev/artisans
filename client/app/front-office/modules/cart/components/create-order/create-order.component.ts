@@ -67,7 +67,7 @@ export class CreateOrderComponent implements OnInit {
     /**
      * For template usage
      */
-    protected PaymentMethod = PaymentMethod;
+    protected readonly PaymentMethod = PaymentMethod;
 
     /**
      * If true, cart is hidden and confirmation message is shown.

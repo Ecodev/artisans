@@ -86,7 +86,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     /**
      * Template access
      */
-    protected ProductsViewMode = ProductsViewMode;
+    protected readonly ProductsViewMode = ProductsViewMode;
 
     /**
      * Pagination with page size as multiple of 3 to end correctly before "show more" button.

@@ -50,7 +50,7 @@ export class OrderComponent {
     /**
      * Template usage
      */
-    protected UserRole = UserRole;
+    protected readonly UserRole = UserRole;
 
     public constructor() {
         this.viewer = this.dialogData.activatedRoute.snapshot.data.viewer

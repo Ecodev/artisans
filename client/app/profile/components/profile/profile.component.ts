@@ -35,8 +35,8 @@ export class ProfileComponent implements OnInit {
     protected readonly productService = inject(ProductService);
 
     protected viewer: CurrentUserForProfile['viewer'] = null;
-    protected ProductType = ProductType;
-    protected Membership = Membership;
+    protected readonly ProductType = ProductType;
+    protected readonly Membership = Membership;
 
     protected membershipProduct: Product['product'] | null = null;
 

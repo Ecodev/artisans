@@ -269,8 +269,8 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
 
     protected mobileNavigation: MenuItem[] = [];
 
-    protected Currency = Currency;
-    protected UserRole = UserRole;
+    protected readonly Currency = Currency;
+    protected readonly UserRole = UserRole;
 
     public ngOnInit(): void {
         this.userService.getViewerObservable().subscribe(viewer => (this.viewer = viewer));

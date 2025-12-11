@@ -25,7 +25,7 @@ export class SubscriptionsComponent implements OnInit {
 
     protected subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;
 
-    protected ProductType = ProductType;
+    protected readonly ProductType = ProductType;
 
     public ngOnInit(): void {
         this.subscriptionService

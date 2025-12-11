@@ -12,7 +12,7 @@ import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/a
 export class RejoindreAssociationComponent implements OnInit {
     protected readonly productService = inject(ProductService);
 
-    protected ProductType = ProductType;
+    protected readonly ProductType = ProductType;
 
     protected membershipProduct!: Product['product'];
 

@@ -1,6 +1,6 @@
 import {APP_ID, inject, LOCALE_ID, provideAppInitializer, provideZoneChangeDetection} from '@angular/core';
 import {AppComponent} from './app/app.component';
-import {routes} from './app/app-routing.module';
+import {routes} from './app/app.routes';
 import {bootstrapApplication} from '@angular/platform-browser';
 import {Apollo} from 'apollo-angular';
 import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/material/tooltip';

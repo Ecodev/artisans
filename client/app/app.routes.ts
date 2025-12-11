@@ -12,18 +12,18 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        loadChildren: () => import('./admin/admin-routing.module').then(m => m.routes),
+        loadChildren: () => import('./admin/admin.routes').then(m => m.routes),
     },
     {
         // Registration
         path: 'user',
         component: FrontOfficeComponent,
-        loadChildren: () => import('./user/user-routing.module').then(m => m.routes),
+        loadChildren: () => import('./user/user.routes').then(m => m.routes),
     },
     {
         path: '',
         component: FrontOfficeComponent,
         resolve: {viewer: resolveViewer},
-        loadChildren: () => import('./front-office/front-office-routing.module').then(m => m.routes),
+        loadChildren: () => import('./front-office/front-office.routes').then(m => m.routes),
     },
 ];

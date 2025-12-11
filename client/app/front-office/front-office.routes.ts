@@ -386,7 +386,7 @@ export const routes: Routes = [
     },
     {
         path: 'mon-compte',
-        loadChildren: () => import('../profile/profile-routing.module').then(m => m.routes),
+        loadChildren: () => import('../profile/profile.routes').then(m => m.routes),
     },
     {
         path: 'larevuedurable',
@@ -431,11 +431,11 @@ export const routes: Routes = [
     },
     {
         path: 'larevuedurable',
-        loadChildren: () => import('./modules/shop/shop-routing.module').then(m => m.routes),
+        loadChildren: () => import('./modules/shop/shop.routes').then(m => m.routes),
     },
     {
         path: 'panier',
-        loadChildren: () => import('./modules/cart/cart-routing.module').then(m => m.routes),
+        loadChildren: () => import('./modules/cart/cart.routes').then(m => m.routes),
     },
     {
         path: 'mentions-legales',

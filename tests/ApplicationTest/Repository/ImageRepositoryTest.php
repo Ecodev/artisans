@@ -9,7 +9,7 @@ use Application\Model\Product;
 use Application\Model\User;
 use Ecodev\Felix\Service\AbstractDatabase;
 
-class ImageRepositoryTest extends AbstractRepositoryTest
+class ImageRepositoryTest extends AbstractRepository
 {
     protected function tearDown(): void
     {

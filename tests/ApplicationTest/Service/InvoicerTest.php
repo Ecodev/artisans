@@ -14,15 +14,14 @@ use Application\Model\Subscription;
 use Application\Service\Invoicer;
 use ApplicationTest\Traits\TestWithTransactionAndUser;
 use Money\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class InvoicerTest extends TestCase
 {
     use TestWithTransactionAndUser;
 
-    /**
-     * @dataProvider providerCreateOrder
-     */
+    #[DataProvider('providerCreateOrder')]
     public function testCreateOrder(array $input, array $expectedOrderLines): void
     {
         $input['orderLines'] = $this->hydrateTestData($input['orderLines']);
@@ -245,9 +244,7 @@ class InvoicerTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider providerUpdateOrderLineAndTransactionLine
-     */
+    #[DataProvider('providerUpdateOrderLineAndTransactionLine')]
     public function testUpdateOrderLineAndTransactionLine(string $originalOrder, ?array $newProduct, array $expectedOrderLines): void
     {
         $input = $this->providerCreateOrder()[$originalOrder][0];

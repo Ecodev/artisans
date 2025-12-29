@@ -10,7 +10,7 @@ use Application\Model\User;
 use Application\Repository\ProductRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
-class ProductRepositoryTest extends AbstractRepositoryTest
+class ProductRepositoryTest extends AbstractRepository
 {
     use LimitedAccessSubQuery;
 
@@ -22,7 +22,7 @@ class ProductRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Product::class);
     }
 
-    public function providerGetAccessibleSubQuery(): iterable
+    public static function providerGetAccessibleSubQuery(): iterable
     {
         $all = range(3000, 3011);
         $actives = array_values(array_diff($all, [3010]));

@@ -15,6 +15,7 @@ use Ecodev\Felix\Service\Mailer;
 use Ecodev\Felix\Service\MessageRenderer;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DatatransHandlerTest extends TestCase
@@ -85,9 +86,7 @@ class DatatransHandlerTest extends TestCase
         return $result;
     }
 
-    /**
-     * @dataProvider providerProcess
-     */
+    #[DataProvider('providerProcess')]
     public function testProcess(?array $data, array $expectedViewModel, bool $expectedWebTemporaryAccess): void
     {
         // Message always include input data

@@ -8,13 +8,12 @@ use Application\Enum\OrderStatus;
 use Application\Model\Order;
 use Application\Model\OrderLine;
 use Money\Money;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
 {
-    /**
-     * @dataProvider providerGetFormattedBalance
-     */
+    #[DataProvider('providerGetFormattedBalance')]
     public function testGetFormattedBalance(int $chf, int $eur, string $expected): void
     {
         $order = $this->getMockBuilder(Order::class)->onlyMethods(['getBalanceCHF', 'getBalanceEUR'])->getMock();

@@ -6,6 +6,7 @@ namespace ApplicationTest\Model;
 
 use Application\Model\Product;
 use Application\Model\User;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
@@ -15,9 +16,7 @@ class UserTest extends TestCase
         User::setCurrent(null);
     }
 
-    /**
-     * @dataProvider providerSetRole
-     */
+    #[DataProvider('providerSetRole')]
     public function testSetRole(string $currentRole, string $oldRole, string $newRole, ?string $exception): void
     {
         User::setCurrent(null);
@@ -46,9 +45,7 @@ class UserTest extends TestCase
         yield [User::ROLE_ADMINISTRATOR, User::ROLE_ADMINISTRATOR, User::ROLE_MEMBER, null];
     }
 
-    /**
-     * @dataProvider providerSetOwner
-     */
+    #[DataProvider('providerSetOwner')]
     public function testSetOwner(?User $currentUser, ?User $originalOwner, ?User $newOwner, ?string $exception = null): void
     {
         User::setCurrent($currentUser);

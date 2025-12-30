@@ -168,7 +168,7 @@ class Importer
     {
         $this->lineNumber = 0;
         $expectedColumnCount = 14;
-        while ($line = fgetcsv($file, 0, "\t")) {
+        while ($line = fgetcsv($file, 0, "\t", escape: '')) {
             ++$this->lineNumber;
 
             $actualColumnCount = count($line);
@@ -198,8 +198,8 @@ class Importer
                 $membership,
             ] = $line;
 
-            $email = trim($email);
-            $pattern = trim($pattern);
+            $email = mb_trim($email);
+            $pattern = mb_trim($pattern);
 
             if (!$email && !$pattern) {
                 $this->throw('Il faut soit un email, soit un pattern, mais aucun existe');
@@ -222,7 +222,7 @@ class Importer
                     $membership->value,
                     $firstName,
                     $lastName,
-                    trim(implode(' ', [$street, $street2])),
+                    mb_trim(implode(' ', [$street, $street2])),
                     $postcode,
                     $locality,
                     $country,
@@ -488,7 +488,7 @@ class Importer
     {
         $withoutAccent = iconv('UTF-8', 'ASCII//TRANSLIT', mb_strtolower($name));
 
-        return trim(mb_strtoupper($withoutAccent));
+        return mb_trim(mb_strtoupper($withoutAccent));
     }
 
     private function placeholders(int $count, string $placeholder): string

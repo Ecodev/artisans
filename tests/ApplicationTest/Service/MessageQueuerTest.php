@@ -200,18 +200,10 @@ class MessageQueuerTest extends TestCase
 
     private function createMockOrder(?User $owner, bool $withSubscription = true): Order
     {
-        $product = $this->createMock(Product::class);
-        $product->expects(self::any())
-            ->method('getId')
-            ->willReturn(1);
-
-        $product->expects(self::any())
-            ->method('getCode')
-            ->willReturn('xxx-yyy');
-
-        $product->expects(self::any())
-            ->method('getName')
-            ->willReturn('Article 1');
+        $product = self::createStub(Product::class);
+        $product->method('getId')->willReturn(1);
+        $product->method('getCode')->willReturn('xxx-yyy');
+        $product->method('getName')->willReturn('Article 1');
 
         $productLine = new OrderLine();
         $productLine->setProduct($product);
@@ -246,111 +238,56 @@ class MessageQueuerTest extends TestCase
             $lines = new ArrayCollection([$productLine, $donationLine]);
         }
 
-        $order = $this->createPartialMock(Order::class, ['getId', 'getBalanceCHF', 'getBalanceEUR', 'getOrderLines']);
+        $order = self::getStubBuilder(Order::class)->onlyMethods(['getId', 'getBalanceCHF', 'getBalanceEUR', 'getOrderLines'])->getStub();
         $order->setOwner($owner);
         $order->setPaymentMethod(PaymentMethod::Bvr);
 
-        $order->expects(self::any())
-            ->method('getId')
-            ->willReturn(456);
-
-        $order->expects(self::any())
-            ->method('getBalanceCHF')
-            ->willReturn(Money::CHF(3300));
-
-        $order->expects(self::any())
-            ->method('getBalanceEUR')
-            ->willReturn(Money::EUR(0));
-
-        $order->expects(self::any())
-            ->method('getOrderLines')
-            ->willReturn($lines);
+        $order->method('getId')->willReturn(456);
+        $order->method('getBalanceCHF')->willReturn(Money::CHF(3300));
+        $order->method('getBalanceEUR')->willReturn(Money::EUR(0));
+        $order->method('getOrderLines')->willReturn($lines);
 
         return $order;
     }
 
     private function createMockUser(): User
     {
-        $user = $this->createMock(User::class);
+        $user = self::createStub(User::class);
 
-        $user->expects(self::any())
-            ->method('getId')
-            ->willReturn(123);
-
-        $user->expects(self::any())
-            ->method('getFirstName')
-            ->willReturn('John');
-
-        $user->expects(self::any())
-            ->method('getLastName')
-            ->willReturn('Doe');
-
-        $user->expects(self::any())
-            ->method('getName')
-            ->willReturn('John Doe');
-
-        $user->expects(self::any())
-            ->method('getStreet')
-            ->willReturn('Main street');
-
-        $user->expects(self::any())
-            ->method('getPostcode')
-            ->willReturn('2020');
-
-        $user->expects(self::any())
-            ->method('getLocality')
-            ->willReturn('Locality');
+        $user->method('getId')->willReturn(123);
+        $user->method('getFirstName')->willReturn('John');
+        $user->method('getLastName')->willReturn('Doe');
+        $user->method('getName')->willReturn('John Doe');
+        $user->method('getStreet')->willReturn('Main street');
+        $user->method('getPostcode')->willReturn('2020');
+        $user->method('getLocality')->willReturn('Locality');
 
         $country = new Country();
         $country->setName('Wookaya');
-        $user->expects(self::any())
-            ->method('getCountry')
-            ->willReturn($country);
-
-        $user->expects(self::any())
-            ->method('getPhone')
-            ->willReturn('123 456 87 98');
-
-        $user->expects(self::any())
-            ->method('getEmail')
-            ->willReturn('john.doe@example.com');
-
-        $user->expects(self::any())
-            ->method('createToken')
-            ->willReturn(str_repeat('X', 32));
+        $user->method('getCountry')->willReturn($country);
+        $user->method('getPhone')->willReturn('123 456 87 98');
+        $user->method('getEmail')->willReturn('john.doe@example.com');
+        $user->method('createToken')->willReturn(str_repeat('X', 32));
 
         return $user;
     }
 
     private function createMockUserAdmin(): User
     {
-        $user = $this->createMock(User::class);
+        $user = self::createStub(User::class);
 
-        $user->expects(self::any())
-            ->method('getFirstName')
-            ->willReturn('Admin');
-
-        $user->expects(self::any())
-            ->method('getLastName')
-            ->willReturn('Istrator');
-
-        $user->expects(self::any())
-            ->method('getEmail')
-            ->willReturn('administrator@example.com');
+        $user->method('getFirstName')->willReturn('Admin');
+        $user->method('getLastName')->willReturn('Istrator');
+        $user->method('getEmail')->willReturn('administrator@example.com');
 
         return $user;
     }
 
     private function createMockUserMinimal(): User
     {
-        $user = $this->createMock(User::class);
-        $user->expects(self::any())
-            ->method('getEmail')
-            ->willReturn('minimal@example.com');
-
-        $user->expects(self::any())
-            ->method('createToken')
-            ->willReturn(str_repeat('X', 32));
+        $user = self::createStub(User::class);
+        $user->method('getEmail')->willReturn('minimal@example.com');
+        $user->method('createToken')->willReturn(str_repeat('X', 32));
 
         return $user;
     }

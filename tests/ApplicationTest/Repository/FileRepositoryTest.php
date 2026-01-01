@@ -11,7 +11,7 @@ use Application\Repository\FileRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 use Cake\Chronos\ChronosDate;
 
-class FileRepositoryTest extends AbstractRepositoryTest
+class FileRepositoryTest extends AbstractRepository
 {
     use LimitedAccessSubQuery;
 
@@ -23,7 +23,7 @@ class FileRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(File::class);
     }
 
-    public function providerGetAccessibleSubQuery(): iterable
+    public static function providerGetAccessibleSubQuery(): iterable
     {
         $all = [9000, 9001, 9002, 9003];
         $articlesAndReviewsViaSubscriptions = [9000, 9001, 9002, 9003];

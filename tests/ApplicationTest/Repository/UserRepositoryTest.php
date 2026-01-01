@@ -8,7 +8,7 @@ use Application\Model\User;
 use Application\Repository\UserRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
-class UserRepositoryTest extends AbstractRepositoryTest
+class UserRepositoryTest extends AbstractRepository
 {
     use LimitedAccessSubQuery;
 
@@ -20,7 +20,7 @@ class UserRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(User::class);
     }
 
-    public function providerGetAccessibleSubQuery(): iterable
+    public static function providerGetAccessibleSubQuery(): iterable
     {
         $all = [1000, 1001, 1002, 1003];
         yield ['anonymous', [1001]];

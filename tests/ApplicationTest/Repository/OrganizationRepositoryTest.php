@@ -7,8 +7,9 @@ namespace ApplicationTest\Repository;
 use Application\Enum\ProductType;
 use Application\Model\Organization;
 use Application\Repository\OrganizationRepository;
+use PHPUnit\Framework\Attributes\DataProvider;
 
-class OrganizationRepositoryTest extends AbstractRepositoryTest
+class OrganizationRepositoryTest extends AbstractRepository
 {
     private OrganizationRepository $repository;
 
@@ -18,9 +19,7 @@ class OrganizationRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Organization::class);
     }
 
-    /**
-     * @dataProvider providerApplyOrganizationAccesses
-     */
+    #[DataProvider('providerApplyOrganizationAccesses')]
     public function testApplyOrganizationAccesses(array $users): void
     {
         // Insert all test users

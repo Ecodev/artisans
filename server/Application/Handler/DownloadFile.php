@@ -44,7 +44,7 @@ class DownloadFile extends AbstractHandler
         $response = new Response($resource, 200, [
             'content-type' => 'application/pdf',
             'Content-Disposition' => 'attachment; filename="' . basename($path) . '"',
-            'content-length' => $size,
+            'content-length' => (string) $size,
         ]);
 
         return $response;

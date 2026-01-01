@@ -8,7 +8,7 @@ use Application\Model\Order;
 use Application\Repository\OrderRepository;
 use ApplicationTest\Traits\LimitedAccessSubQuery;
 
-class OrderRepositoryTest extends AbstractRepositoryTest
+class OrderRepositoryTest extends AbstractRepository
 {
     use LimitedAccessSubQuery;
 
@@ -20,7 +20,7 @@ class OrderRepositoryTest extends AbstractRepositoryTest
         $this->repository = _em()->getRepository(Order::class);
     }
 
-    public function providerGetAccessibleSubQuery(): iterable
+    public static function providerGetAccessibleSubQuery(): iterable
     {
         $all = [16000, 16001, 16002, 16003, 16004];
         $family = $all;

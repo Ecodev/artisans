@@ -33,10 +33,10 @@ use GraphQL\Doctrine\Attribute as API;
 #[ORM\AssociationOverrides([new ORM\AssociationOverride(name: 'owner', inversedBy: 'users')])]
 class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ecodev\Felix\Model\User
 {
-    final public const ROLE_ANONYMOUS = 'anonymous';
-    final public const ROLE_MEMBER = 'member';
-    final public const ROLE_FACILITATOR = 'facilitator';
-    final public const ROLE_ADMINISTRATOR = 'administrator';
+    final public const string ROLE_ANONYMOUS = 'anonymous';
+    final public const string ROLE_MEMBER = 'member';
+    final public const string ROLE_FACILITATOR = 'facilitator';
+    final public const string ROLE_ADMINISTRATOR = 'administrator';
 
     use HasAddress;
     use HasPassword;

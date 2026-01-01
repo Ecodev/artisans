@@ -15,6 +15,7 @@ use Ecodev\Felix\Service\Mailer;
 use Ecodev\Felix\Service\MessageRenderer;
 use Laminas\Diactoros\ServerRequest;
 use Mezzio\Template\TemplateRendererInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DatatransHandlerTest extends TestCase
@@ -85,9 +86,7 @@ class DatatransHandlerTest extends TestCase
         return $result;
     }
 
-    /**
-     * @dataProvider providerProcess
-     */
+    #[DataProvider('providerProcess')]
     public function testProcess(?array $data, array $expectedViewModel, bool $expectedWebTemporaryAccess): void
     {
         // Message always include input data
@@ -102,23 +101,23 @@ class DatatransHandlerTest extends TestCase
             'key' => '1a03b7bcf2752c8c8a1b46616b0c12658d2c7643403e655450bedb7c78bb2d2f659c2ff4e647e4ea72d37ef6745ebda6733c7b859439107069f291cda98f4844',
         ];
 
-        $mailer = $this->createMock(Mailer::class);
+        $mailer = self::createStub(Mailer::class);
 
         $messageQueuer = $this->createMock(MessageQueuer::class);
         $messageQueuer->expects(self::any())
             ->method('getAllEmailsToNotify')
             ->willReturn(['administrator@example.com']);
-        if ($expectedViewModel['message']['status'] === 'success') {
-            $messageQueuer->expects(self::once())->method('queueUserValidatedOrder')->willReturn(new Message());
-            $messageQueuer->expects(self::once())->method('queueAdminValidatedOrder')->willReturn(new Message());
-        }
+
+        $expectSuccess = $expectedViewModel['message']['status'] === 'success';
+        $messageQueuer->expects($expectSuccess ? self::once() : self::never())->method('queueUserValidatedOrder')->willReturn(new Message());
+        $messageQueuer->expects($expectSuccess ? self::once() : self::never())->method('queueAdminValidatedOrder')->willReturn(new Message());
 
         $handler = new DatatransHandler(_em(), $renderer, $config, $mailer, $messageQueuer);
         $handler->handle($request);
 
         $orderId = $data['refno'] ?? null;
         if ($orderId) {
-            $expectedStatus = $expectedViewModel['message']['status'] === 'success' || $orderId === '16002' ? OrderStatus::Validated : OrderStatus::Pending;
+            $expectedStatus = $expectSuccess || $orderId === '16002' ? OrderStatus::Validated : OrderStatus::Pending;
             $actualStatus = _em()->getConnection()->fetchOne('SELECT status FROM `order` WHERE id = ' . $orderId);
             self::assertSame($expectedStatus->value, $actualStatus);
 

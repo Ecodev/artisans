@@ -43,7 +43,7 @@ export const productMetaFragment = gql`
 `;
 
 export const productsQuery = gql`
-    query Products($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {
+    query ProductsQuery($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {
         products(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...ProductMeta
@@ -57,7 +57,7 @@ export const productsQuery = gql`
 `;
 
 export const productQuery = gql`
-    query Product($id: ProductID!) {
+    query ProductQuery($id: ProductID!) {
         product(id: $id) {
             ...ProductMeta
             content

@@ -1,7 +1,12 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
-import {Sessions, SessionSortingField, SessionsVariables, SortingOrder} from '../../../shared/generated-types';
+import {
+    SessionsQuery,
+    SessionSortingField,
+    SessionsQueryVariables,
+    SortingOrder,
+} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {MatButton} from '@angular/material/button';
 
@@ -14,11 +19,11 @@ import {MatButton} from '@angular/material/button';
 export class SessionsIncomingComponent implements OnInit {
     private readonly sessionService = inject(SessionService);
 
-    protected sessions: Sessions['sessions']['items'][0][] = [];
+    protected sessions: SessionsQuery['sessions']['items'][0][] = [];
 
     public ngOnInit(): void {
         // Get sessions
-        const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
+        const qvm = new NaturalQueryVariablesManager<SessionsQueryVariables>();
 
         qvm.set('variables', {
             filter: {groups: [{conditions: [{startDate: {greater: {value: formatIsoDateTime(new Date())}}}]}]},

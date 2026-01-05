@@ -28,7 +28,11 @@ export const subscriptionMetaFragment = gql`
 `;
 
 export const subscriptionsQuery = gql`
-    query Subscriptions($filter: SubscriptionFilter, $sorting: [SubscriptionSorting!], $pagination: PaginationInput) {
+    query SubscriptionsQuery(
+        $filter: SubscriptionFilter
+        $sorting: [SubscriptionSorting!]
+        $pagination: PaginationInput
+    ) {
         subscriptions(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...SubscriptionMeta
@@ -42,7 +46,7 @@ export const subscriptionsQuery = gql`
 `;
 
 export const subscriptionQuery = gql`
-    query Subscription($id: SubscriptionID!) {
+    query SubscriptionQuery($id: SubscriptionID!) {
         subscription(id: $id) {
             ...SubscriptionMeta
             permissions {

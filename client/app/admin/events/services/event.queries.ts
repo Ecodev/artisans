@@ -2,7 +2,7 @@ import {gql} from '@apollo/client/core';
 import {userMetaFragment} from '../../../shared/queries/fragments';
 
 export const eventsQuery = gql`
-    query Events($filter: EventFilter, $sorting: [EventSorting!], $pagination: PaginationInput) {
+    query EventsQuery($filter: EventFilter, $sorting: [EventSorting!], $pagination: PaginationInput) {
         events(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 id
@@ -19,7 +19,7 @@ export const eventsQuery = gql`
 `;
 
 export const eventQuery = gql`
-    query Event($id: EventID!) {
+    query EventQuery($id: EventID!) {
         event(id: $id) {
             id
             name

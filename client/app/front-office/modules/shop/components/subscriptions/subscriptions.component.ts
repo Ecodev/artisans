@@ -3,7 +3,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {keyBy} from 'es-toolkit';
-import {ProductType, Subscriptions} from '../../../../../shared/generated-types';
+import {ProductType, SubscriptionsQuery} from '../../../../../shared/generated-types';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
 import {GlobalCartService} from '../../../cart/services/global-cart.service';
@@ -23,7 +23,7 @@ export class SubscriptionsComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);
     private readonly globalCartService = inject(GlobalCartService);
 
-    protected subscriptions: Record<string, Subscriptions['subscriptions']['items'][0]> | null = null;
+    protected subscriptions: Record<string, SubscriptionsQuery['subscriptions']['items'][0]> | null = null;
 
     protected readonly ProductType = ProductType;
 

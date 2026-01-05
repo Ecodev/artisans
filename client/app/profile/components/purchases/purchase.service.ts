@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
-import {Purchases, PurchasesVariables} from '../../../shared/generated-types';
+import {PurchasesQuery, PurchasesQueryVariables} from '../../../shared/generated-types';
 import {purchasesQuery} from './purchase.queries';
 
 /**
@@ -13,8 +13,8 @@ import {purchasesQuery} from './purchase.queries';
 export class PurchaseService extends NaturalAbstractModelService<
     never,
     never,
-    Purchases['purchases'],
-    PurchasesVariables,
+    PurchasesQuery['purchases'],
+    PurchasesQueryVariables,
     never,
     never,
     never,

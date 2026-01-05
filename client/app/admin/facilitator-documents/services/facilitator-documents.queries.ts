@@ -23,7 +23,7 @@ export const facilitatorDocumentMetaFragment = gql`
 `;
 
 export const facilitatorDocumentsQuery = gql`
-    query FacilitatorDocuments(
+    query FacilitatorDocumentsQuery(
         $filter: FacilitatorDocumentFilter
         $sorting: [FacilitatorDocumentSorting!]
         $pagination: PaginationInput
@@ -41,7 +41,7 @@ export const facilitatorDocumentsQuery = gql`
 `;
 
 export const facilitatorDocumentQuery = gql`
-    query FacilitatorDocument($id: FacilitatorDocumentID!) {
+    query FacilitatorDocumentQuery($id: FacilitatorDocumentID!) {
         facilitatorDocument(id: $id) {
             ...FacilitatorDocumentMeta
             permissions {

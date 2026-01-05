@@ -16,7 +16,7 @@ import {
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
 import {AsyncPipe, DatePipe} from '@angular/common';
-import {EmailUsers, EmailUsersVariables, UsersVariables} from '../../../shared/generated-types';
+import {EmailUsersQuery, EmailUsersQueryVariables, UsersQueryVariables} from '../../../shared/generated-types';
 import {users} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';
@@ -123,12 +123,12 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
         qvm.set('pagination', {pagination: {pageIndex: 0, pageSize: 9999}});
         qvm.set('emailFilter', {
             filter: {groups: [{conditions: [{email: {null: {not: true}}}]}]},
-        } satisfies UsersVariables);
+        } satisfies UsersQueryVariables);
 
         button.buttons?.forEach(subButton => (subButton.disabled = true));
 
         this.apollo
-            .query<EmailUsers, EmailUsersVariables>({
+            .query<EmailUsersQuery, EmailUsersQueryVariables>({
                 query: emailUsersQuery,
                 variables: qvm.variables.value,
             })

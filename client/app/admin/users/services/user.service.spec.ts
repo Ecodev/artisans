@@ -7,7 +7,7 @@ import {UserService} from './user.service';
 import {memoryLocalStorageProvider, memorySessionStorageProvider} from '@ecodev/natural';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 import {Observable} from 'rxjs';
-import {Permissions} from 'client/app/shared/generated-types';
+import {PermissionsQuery} from 'client/app/shared/generated-types';
 
 class MockCartCollectionService {
     private clear(): void {
@@ -40,7 +40,7 @@ describe('UserService', () => {
 
         // Mock permissions service
         const permissionsService = TestBed.inject(PermissionsService);
-        permissionsService.setUser = () => null as unknown as Observable<Permissions['permissions']>;
+        permissionsService.setUser = () => null as unknown as Observable<PermissionsQuery['permissions']>;
     });
 
     it('should get current user', fakeAsync(() => {

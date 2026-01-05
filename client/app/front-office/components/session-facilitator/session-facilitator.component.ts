@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {SortingOrder, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
+import {SortingOrder, UsersQuery, UserSortingField, UsersQueryVariables} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 
 @Component({
@@ -13,10 +13,10 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
 export class SessionFacilitatorComponent implements OnInit {
     protected readonly userService = inject(UserService);
 
-    protected facilitators: Users['users']['items'][0][] = [];
+    protected facilitators: UsersQuery['users']['items'][0][] = [];
 
     public ngOnInit(): void {
-        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+        const qvm = new NaturalQueryVariablesManager<UsersQueryVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{isPublicFacilitator: {equal: {value: true}}}]}]},
             pagination: {pageSize: 999, pageIndex: 0},

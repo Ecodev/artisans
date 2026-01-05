@@ -34,7 +34,7 @@ export const sessionMetaFragment = gql`
 `;
 
 export const sessionsQuery = gql`
-    query Sessions($filter: SessionFilter, $sorting: [SessionSorting!], $pagination: PaginationInput) {
+    query SessionsQuery($filter: SessionFilter, $sorting: [SessionSorting!], $pagination: PaginationInput) {
         sessions(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...SessionMeta
@@ -48,7 +48,7 @@ export const sessionsQuery = gql`
 `;
 
 export const sessionQuery = gql`
-    query Session($id: SessionID!) {
+    query SessionQuery($id: SessionID!) {
         session(id: $id) {
             ...SessionMeta
             permissions {

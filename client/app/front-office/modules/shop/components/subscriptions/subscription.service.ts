@@ -7,11 +7,11 @@ import {
     DeleteSubscriptions,
     DeleteSubscriptionsVariables,
     ProductType,
-    Subscription,
+    SubscriptionQuery,
     SubscriptionInput,
-    Subscriptions,
-    SubscriptionsVariables,
-    SubscriptionVariables,
+    SubscriptionsQuery,
+    SubscriptionsQueryVariables,
+    SubscriptionQueryVariables,
     UpdateSubscription,
     UpdateSubscriptionVariables,
 } from '../../../../../shared/generated-types';
@@ -27,10 +27,10 @@ import {
     providedIn: 'root',
 })
 export class SubscriptionService extends NaturalAbstractModelService<
-    Subscription['subscription'],
-    SubscriptionVariables,
-    Subscriptions['subscriptions'],
-    SubscriptionsVariables,
+    SubscriptionQuery['subscription'],
+    SubscriptionQueryVariables,
+    SubscriptionsQuery['subscriptions'],
+    SubscriptionsQueryVariables,
     CreateSubscription['createSubscription'],
     CreateSubscriptionVariables,
     UpdateSubscription['updateSubscription'],
@@ -57,7 +57,7 @@ export class SubscriptionService extends NaturalAbstractModelService<
         };
     }
 
-    public override getFormAsyncValidators(model: Subscription['subscription']): FormAsyncValidators {
+    public override getFormAsyncValidators(model: SubscriptionQuery['subscription']): FormAsyncValidators {
         return {
             code: [unique('code', model.id, this)],
         };

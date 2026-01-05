@@ -4,8 +4,8 @@ import {inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {
-    Configuration,
-    ConfigurationVariables,
+    ConfigurationQuery,
+    ConfigurationQueryVariables,
     UpdateConfiguration,
     UpdateConfigurationVariables,
 } from '../../shared/generated-types';
@@ -20,7 +20,7 @@ export class ConfigurationService {
     public get(key: string): Observable<string> {
         const resultObservable = new Subject<string>();
 
-        const queryRef = this.apollo.watchQuery<Configuration, ConfigurationVariables>({
+        const queryRef = this.apollo.watchQuery<ConfigurationQuery, ConfigurationQueryVariables>({
             query: configurationQuery,
             variables: {key},
             fetchPolicy: 'cache-and-network',

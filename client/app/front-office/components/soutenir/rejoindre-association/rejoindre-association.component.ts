@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ProductService} from '../../../../admin/products/services/product.service';
-import {Product, ProductType} from '../../../../shared/generated-types';
+import {ProductQuery, ProductType} from '../../../../shared/generated-types';
 import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/add-to-cart.component';
 
 @Component({
@@ -14,7 +14,7 @@ export class RejoindreAssociationComponent implements OnInit {
 
     protected readonly ProductType = ProductType;
 
-    protected membershipProduct!: Product['product'];
+    protected membershipProduct!: ProductQuery['product'];
 
     public ngOnInit(): void {
         this.productService.getMembershipProduct().subscribe(product => (this.membershipProduct = product));

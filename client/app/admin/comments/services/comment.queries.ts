@@ -31,7 +31,7 @@ const commentMetaFragment = gql`
 `;
 
 export const commentsQuery = gql`
-    query Comments($filter: CommentFilter, $sorting: [CommentSorting!], $pagination: PaginationInput) {
+    query CommentsQuery($filter: CommentFilter, $sorting: [CommentSorting!], $pagination: PaginationInput) {
         comments(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...CommentMeta
@@ -45,7 +45,7 @@ export const commentsQuery = gql`
 `;
 
 export const commentQuery = gql`
-    query Comment($id: CommentID!) {
+    query CommentQuery($id: CommentID!) {
         comment(id: $id) {
             ...CommentMeta
             permissions {

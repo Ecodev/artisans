@@ -2,7 +2,7 @@ import {gql} from '@apollo/client/core';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 export const productTagsQuery = gql`
-    query ProductTags($filter: ProductTagFilter, $sorting: [ProductTagSorting!], $pagination: PaginationInput) {
+    query ProductTagsQuery($filter: ProductTagFilter, $sorting: [ProductTagSorting!], $pagination: PaginationInput) {
         productTags(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 id
@@ -17,7 +17,7 @@ export const productTagsQuery = gql`
 `;
 
 export const productTagQuery = gql`
-    query ProductTag($id: ProductTagID!) {
+    query ProductTagQuery($id: ProductTagID!) {
         productTag(id: $id) {
             id
             name

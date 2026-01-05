@@ -3,7 +3,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
-import {SessionsVariables} from '../../../shared/generated-types';
+import {SessionsQueryVariables} from '../../../shared/generated-types';
 import {MatButton} from '@angular/material/button';
 
 @Component({
@@ -21,7 +21,7 @@ export class SessionSideColumnComponent implements OnInit {
     public readonly hiddenBlocName = input<string>();
 
     public ngOnInit(): void {
-        const qvm = new NaturalQueryVariablesManager<SessionsVariables>();
+        const qvm = new NaturalQueryVariablesManager<SessionsQueryVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{startDate: {greater: {value: formatIsoDateTime(new Date())}}}]}]},
             pagination: {pageIndex: 0, pageSize: 0},

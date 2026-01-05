@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
 import {FormValidators, integer, NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    OrderLine,
+    OrderLineQuery,
     OrderLineInput,
-    OrderLines,
-    OrderLinesVariables,
-    OrderLineVariables,
+    OrderLinesQuery,
+    OrderLinesQueryVariables,
+    OrderLineQueryVariables,
     ProductType,
     UpdateOrderLine,
     UpdateOrderLineVariables,
@@ -18,10 +18,10 @@ import {xorValidator} from '../../../shared/validators';
     providedIn: 'root',
 })
 export class OrderLineService extends NaturalAbstractModelService<
-    OrderLine['orderLine'],
-    OrderLineVariables,
-    OrderLines['orderLines'],
-    OrderLinesVariables,
+    OrderLineQuery['orderLine'],
+    OrderLineQueryVariables,
+    OrderLinesQuery['orderLines'],
+    OrderLinesQueryVariables,
     never,
     UpdateOrderLineVariables,
     UpdateOrderLine['updateOrderLine'],

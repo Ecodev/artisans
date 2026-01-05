@@ -2,7 +2,7 @@ import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {CurrentUserForProfile, Membership, Product, ProductType} from '../../../shared/generated-types';
+import {CurrentUserForProfileQuery, Membership, ProductQuery, ProductType} from '../../../shared/generated-types';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {AddToCartComponent} from '../../../front-office/modules/shop/components/add-to-cart/add-to-cart.component';
@@ -34,11 +34,11 @@ export class ProfileComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);
     protected readonly productService = inject(ProductService);
 
-    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfileQuery['viewer'] = null;
     protected readonly ProductType = ProductType;
     protected readonly Membership = Membership;
 
-    protected membershipProduct: Product['product'] | null = null;
+    protected membershipProduct: ProductQuery['product'] | null = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer;

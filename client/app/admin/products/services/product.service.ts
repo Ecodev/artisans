@@ -13,15 +13,15 @@ import {
     CreateProductVariables,
     DeleteProducts,
     DeleteProductsVariables,
-    Product,
+    ProductQuery,
     ProductInput,
     ProductPartialInput,
-    Products,
+    ProductsQuery,
     ProductSorting,
     ProductSortingField,
-    ProductsVariables,
+    ProductsQueryVariables,
     ProductType,
-    ProductVariables,
+    ProductQueryVariables,
     SortingOrder,
     UpdateProduct,
     UpdateProductVariables,
@@ -34,10 +34,10 @@ import {Observable} from 'rxjs';
     providedIn: 'root',
 })
 export class ProductService extends NaturalAbstractModelService<
-    Product['product'],
-    ProductVariables,
-    Products['products'],
-    ProductsVariables,
+    ProductQuery['product'],
+    ProductQueryVariables,
+    ProductsQuery['products'],
+    ProductsQueryVariables,
     CreateProduct['createProduct'],
     CreateProductVariables,
     UpdateProduct['updateProduct'],
@@ -70,7 +70,7 @@ export class ProductService extends NaturalAbstractModelService<
         };
     }
 
-    public override getFormAsyncValidators(model: Product['product']): FormAsyncValidators {
+    public override getFormAsyncValidators(model: ProductQuery['product']): FormAsyncValidators {
         return {
             code: [unique('code', model.id, this)],
         };
@@ -81,7 +81,7 @@ export class ProductService extends NaturalAbstractModelService<
         return super.getInput(object, forCreation);
     }
 
-    public getMembershipProduct(): Observable<Product['product']> {
+    public getMembershipProduct(): Observable<ProductQuery['product']> {
         return this.getOne(ProductService.MEMBERSHIP_FEE_PRODUCT_ID);
     }
 

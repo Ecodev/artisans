@@ -5,7 +5,7 @@ import {pick} from 'es-toolkit';
 import {RegisterComponent} from './register.component';
 import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserByTokenResolve} from '../../../admin/users/user';
-import {ConfirmRegistrationVariables, UserByToken} from '../../../shared/generated-types';
+import {ConfirmRegistrationVariables, UserByTokenQuery} from '../../../shared/generated-types';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatButton} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
@@ -50,7 +50,7 @@ export class RegisterConfirmComponent extends RegisterComponent implements OnIni
         });
     }
 
-    private initFormFromModel(model: UserByToken['userByToken']): void {
+    private initFormFromModel(model: UserByTokenQuery['userByToken']): void {
         this.form = this.fb.group({
             // Lock e-mail, this field must not be changed
             email: [{value: model.email, disabled: true}, [Validators.required, deliverableEmail]],

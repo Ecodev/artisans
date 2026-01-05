@@ -13,16 +13,16 @@ import {NewsService} from '../../../admin/newses/services/news.service';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
-    CurrentUserForProfile,
-    Events,
+    CurrentUserForProfileQuery,
+    EventsQuery,
     EventSortingField,
-    EventsVariables,
-    Newses,
-    NewsesVariables,
+    EventsQueryVariables,
+    NewsesQuery,
+    NewsesQueryVariables,
     NewsSortingField,
-    Products,
+    ProductsQuery,
     ProductSortingField,
-    ProductsVariables,
+    ProductsQueryVariables,
     SortingOrder,
 } from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -66,28 +66,28 @@ export class HomepageComponent implements OnInit {
 
     protected title = 'Les artisans de la transition';
 
-    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfileQuery['viewer'] = null;
 
     /**
      * Last newses
      */
-    protected newses: Newses['newses']['items'][0][] = [];
+    protected newses: NewsesQuery['newses']['items'][0][] = [];
 
     /**
      * Next events
      */
-    protected events: Events['events']['items'][0][] = [];
+    protected events: EventsQuery['events']['items'][0][] = [];
 
     /**
      * Currently active review
      */
-    protected currentReview: Products['products']['items'][0] | null = null;
+    protected currentReview: ProductsQuery['products']['items'][0] | null = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer;
 
         // News
-        const qvmNews = new NaturalQueryVariablesManager<NewsesVariables>();
+        const qvmNews = new NaturalQueryVariablesManager<NewsesQueryVariables>();
         qvmNews.set('variables', {
             filter: {
                 groups: [
@@ -107,7 +107,7 @@ export class HomepageComponent implements OnInit {
         this.newsService.getAll(qvmNews).subscribe(result => (this.newses = result.items));
 
         // Events
-        const qvmEvents = new NaturalQueryVariablesManager<EventsVariables>();
+        const qvmEvents = new NaturalQueryVariablesManager<EventsQueryVariables>();
         qvmEvents.set('variables', {
             filter: {groups: [{conditions: [{date: {greaterOrEqual: {value: formatIsoDate(new Date())}}}]}]},
             pagination: {pageSize: 5, pageIndex: 0},
@@ -116,7 +116,7 @@ export class HomepageComponent implements OnInit {
         this.eventService.getAll(qvmEvents).subscribe(result => (this.events = result.items));
 
         // Current active review : next product with review number and already released (and active
-        const qvmProduct = new NaturalQueryVariablesManager<ProductsVariables>();
+        const qvmProduct = new NaturalQueryVariablesManager<ProductsQueryVariables>();
         qvmProduct.set('variables', {
             filter: {
                 groups: [

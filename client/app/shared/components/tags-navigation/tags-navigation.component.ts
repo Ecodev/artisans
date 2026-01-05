@@ -1,7 +1,7 @@
 import {Component, inject, input} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
-import {ProductTags, ProductTagsVariables} from '../../generated-types';
+import {ProductTagsQuery, ProductTagsQueryVariables} from '../../generated-types';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class TagsNavigationComponent {
     /**
      * Items to list
      */
-    protected items: ProductTags['productTags']['items'][0][] = [];
+    protected items: ProductTagsQuery['productTags']['items'][0][] = [];
 
     /**
      * Url base
@@ -24,13 +24,13 @@ export class TagsNavigationComponent {
     public constructor() {
         const productTagService = inject(ProductTagService);
 
-        const qvm = new NaturalQueryVariablesManager<ProductTagsVariables>();
+        const qvm = new NaturalQueryVariablesManager<ProductTagsQueryVariables>();
         productTagService.getAll(qvm).subscribe(result => {
             this.items = result.items;
         });
     }
 
-    protected getLink(item: ProductTags['productTags']['items'][0]): RouterLink['routerLink'] {
+    protected getLink(item: ProductTagsQuery['productTags']['items'][0]): RouterLink['routerLink'] {
         return [...this.linkBase(), item.name];
     }
 }

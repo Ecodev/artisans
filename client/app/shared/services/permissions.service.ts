@@ -3,7 +3,7 @@ import {inject, Injectable} from '@angular/core';
 import {Literal} from '@ecodev/natural';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {concatMap, debounceTime, distinctUntilChanged, filter, map, shareReplay} from 'rxjs/operators';
-import {Permissions} from '../generated-types';
+import {PermissionsQuery} from '../generated-types';
 import {isEqual} from 'es-toolkit';
 import {permissionsQuery} from './permissions.queries';
 
@@ -21,12 +21,12 @@ export class PermissionsService {
     /**
      * Observable of CRUD permissions, usually for object creations
      */
-    public readonly crud: Observable<Permissions['permissions']['crud']>;
+    public readonly crud: Observable<PermissionsQuery['permissions']['crud']>;
 
     /**
      * Observable of changed permissions
      */
-    public readonly changes: Observable<Permissions['permissions']>;
+    public readonly changes: Observable<PermissionsQuery['permissions']>;
 
     private readonly currentContexts = new BehaviorSubject<Contexts>({
         user: null,
@@ -40,7 +40,7 @@ export class PermissionsService {
             distinctUntilChanged(isEqual),
             debounceTime(5),
             concatMap(() =>
-                apollo.query<Permissions>({query: permissionsQuery}).pipe(filter(result => !result.loading)),
+                apollo.query<PermissionsQuery>({query: permissionsQuery}).pipe(filter(result => !result.loading)),
             ),
             shareReplay(), // new subscriber will get the most recent available permissions
         );

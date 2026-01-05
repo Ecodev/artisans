@@ -9,7 +9,7 @@ import {
     NaturalSrcDensityDirective,
 } from '@ecodev/natural';
 import {PurchaseService} from './purchase.service';
-import {ProductType, Purchases} from '../../../shared/generated-types';
+import {ProductType, PurchasesQuery} from '../../../shared/generated-types';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatIcon} from '@angular/material/icon';
@@ -49,7 +49,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
         this.persistSearch = false;
     }
 
-    protected getDownloadLink(orderLine: Purchases['purchases']['items'][0]): null | string {
+    protected getDownloadLink(orderLine: PurchasesQuery['purchases']['items'][0]): null | string {
         if (orderLine.product?.file) {
             return this.naturalFileService.getDownloadLink(orderLine.product.file);
         }
@@ -57,7 +57,7 @@ export class PurchasesComponent extends NaturalAbstractList<PurchaseService> imp
         return null;
     }
 
-    protected canDownload(orderLine: Purchases['purchases']['items'][0]): boolean {
+    protected canDownload(orderLine: PurchasesQuery['purchases']['items'][0]): boolean {
         const isDigital = orderLine.type === ProductType.Both || orderLine.type === ProductType.Digital;
         const hasFile = orderLine.product?.file;
 

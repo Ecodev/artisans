@@ -3,7 +3,13 @@ import {Literal, NaturalIconDirective, NaturalQueryVariablesManager} from '@ecod
 import {groupBy, sortBy} from 'es-toolkit';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
 import {UserService} from '../../../admin/users/services/user.service';
-import {SortingOrder, UserRole, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
+import {
+    SortingOrder,
+    UserRole,
+    UsersQuery,
+    UserSortingField,
+    UsersQueryVariables,
+} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {MatIcon} from '@angular/material/icon';
 import {MatListItem, MatNavList} from '@angular/material/list';
@@ -19,11 +25,11 @@ export class SessionFacilitatorPrivateComponent implements OnInit {
     protected readonly userService = inject(UserService);
     private readonly facilitatorDocumentService = inject(FacilitatorDocumentsService);
 
-    protected facilitators: Users['users']['items'][0][] = [];
+    protected facilitators: UsersQuery['users']['items'][0][] = [];
     protected categories: Literal = {};
 
     public ngOnInit(): void {
-        const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+        const qvm = new NaturalQueryVariablesManager<UsersQueryVariables>();
         qvm.set('variables', {
             filter: {groups: [{conditions: [{role: {in: {values: [UserRole.facilitator]}}}]}]},
             pagination: {pageSize: 999, pageIndex: 0},

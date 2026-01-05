@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client/core';
 
 export const purchasesQuery = gql`
-    query Purchases($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {
+    query PurchasesQuery($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {
         purchases(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 id

@@ -1,4 +1,4 @@
-import {Product, ProductType} from '../../../../shared/generated-types';
+import {ProductQuery, ProductType} from '../../../../shared/generated-types';
 import {Cart, CartLine} from './cart';
 import {CartCollectionService} from '../services/cart-collection.service';
 import {memorySessionStorageProvider} from '@ecodev/natural';
@@ -13,17 +13,17 @@ describe('Cart', () => {
     const product1 = {
         id: '1',
         pricePerUnitCHF: '10',
-    } as unknown as Product['product'];
+    } as unknown as ProductQuery['product'];
 
     const product2 = {
         id: '2',
         pricePerUnitCHF: '100',
-    } as unknown as Product['product'];
+    } as unknown as ProductQuery['product'];
 
     const product3 = {
         id: '3',
         pricePerUnitCHF: '1000',
-    } as unknown as Product['product'];
+    } as unknown as ProductQuery['product'];
 
     beforeEach(() => {
         TestBed.configureTestingModule({

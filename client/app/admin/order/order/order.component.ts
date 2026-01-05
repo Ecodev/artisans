@@ -3,9 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {NaturalAlertService, NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {
-    CurrentUserForProfile,
-    Order,
-    OrderLinesVariables,
+    CurrentUserForProfileQuery,
+    OrderQuery,
+    OrderLinesQueryVariables,
     OrderStatus,
     UserRole,
 } from '../../../shared/generated-types';
@@ -35,17 +35,17 @@ export class OrderComponent {
     protected readonly orderService = inject(OrderService);
     private readonly alertService = inject(NaturalAlertService);
 
-    protected forcedVariables: OrderLinesVariables = {};
+    protected forcedVariables: OrderLinesQueryVariables = {};
 
     /**
      * Preserves usual model that extends AbstractDetail where main object in stored in data.model
      */
-    protected data!: {model: Order['order']};
+    protected data!: {model: OrderQuery['order']};
 
     /**
      * Currently connected user
      */
-    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfileQuery['viewer'] = null;
 
     /**
      * Template usage
@@ -58,7 +58,7 @@ export class OrderComponent {
             : null;
 
         // Initialize resolved item
-        const model$ = this.dialogData.activatedRoute.snapshot.data.model as Observable<Order['order']>;
+        const model$ = this.dialogData.activatedRoute.snapshot.data.model as Observable<OrderQuery['order']>;
         model$.pipe(takeUntilDestroyed()).subscribe(order => {
             this.data = {model: order};
             // Filter productLines for this current order

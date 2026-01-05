@@ -11,7 +11,13 @@ import {
     toNavigationParameters,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {Import, ImportVariables, Users, UserSortingField, UsersVariables} from '../../../shared/generated-types';
+import {
+    Import,
+    ImportVariables,
+    UsersQuery,
+    UserSortingField,
+    UsersQueryVariables,
+} from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatIcon} from '@angular/material/icon';
@@ -46,7 +52,7 @@ export class ImportComponent implements OnInit {
     protected importing = false;
     protected errors: string[] = [];
     protected result: Import['import'] | null = null;
-    protected users: Users['users']['items'][0][] = [];
+    protected users: UsersQuery['users']['items'][0][] = [];
 
     protected readonly params = toNavigationParameters([
         [
@@ -102,7 +108,7 @@ export class ImportComponent implements OnInit {
                     this.result = result.data!.import;
                     this.alertService.info(this.result.totalLines + ' lignes importées', 5000);
 
-                    const qvm = new NaturalQueryVariablesManager<UsersVariables>();
+                    const qvm = new NaturalQueryVariablesManager<UsersQueryVariables>();
                     qvm.set('variables', {
                         filter: {groups: [{conditions: [{shouldDelete: {equal: {value: true}}}]}]},
                         pagination: {pageSize: 9999},

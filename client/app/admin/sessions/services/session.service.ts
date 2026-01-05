@@ -7,12 +7,12 @@ import {
     DeleteSessions,
     DeleteSessionsVariables,
     JoinType,
-    Session,
+    SessionQuery,
     SessionInput,
     SessionPartialInput,
-    Sessions,
-    SessionsVariables,
-    SessionVariables,
+    SessionsQuery,
+    SessionsQueryVariables,
+    SessionQueryVariables,
     UpdateSession,
     UpdateSessionVariables,
 } from '../../../shared/generated-types';
@@ -23,10 +23,10 @@ import {Observable, of} from 'rxjs';
     providedIn: 'root',
 })
 export class SessionService extends NaturalAbstractModelService<
-    Session['session'],
-    SessionVariables,
-    Sessions['sessions'],
-    SessionsVariables,
+    SessionQuery['session'],
+    SessionQueryVariables,
+    SessionsQuery['sessions'],
+    SessionsQueryVariables,
     CreateSession['createSession'],
     CreateSessionVariables,
     UpdateSession['updateSession'],
@@ -68,7 +68,7 @@ export class SessionService extends NaturalAbstractModelService<
         };
     }
 
-    public override getPartialVariablesForAll(): Observable<Partial<SessionsVariables>> {
+    public override getPartialVariablesForAll(): Observable<Partial<SessionsQueryVariables>> {
         return of({
             filter: {
                 groups: [

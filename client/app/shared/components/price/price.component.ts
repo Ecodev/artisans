@@ -1,6 +1,6 @@
 import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
 import {CartLineProduct} from '../../../front-office/modules/cart/classes/cart';
-import {Subscriptions} from '../../generated-types';
+import {SubscriptionsQuery} from '../../generated-types';
 import {Currency, CurrencyService} from '../../services/currency.service';
 import {CurrencyPipe} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -15,7 +15,7 @@ export class PriceComponent implements OnInit {
     protected readonly currencyService = inject(CurrencyService);
 
     private readonly destroyRef = inject(DestroyRef);
-    public readonly product = input.required<CartLineProduct | Subscriptions['subscriptions']['items'][0]>();
+    public readonly product = input.required<CartLineProduct | SubscriptionsQuery['subscriptions']['items'][0]>();
 
     protected price!: string;
 

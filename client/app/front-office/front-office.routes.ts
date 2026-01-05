@@ -6,8 +6,8 @@ import {resolveViewer} from '../admin/users/services/viewer.resolver';
 import {ErrorComponent} from '../shared/components/error/error.component';
 import {
     EventSortingField,
-    EventsVariables,
-    NewsesVariables,
+    EventsQueryVariables,
+    NewsesQueryVariables,
     NewsSortingField,
     SortingOrder,
 } from '../shared/generated-types';
@@ -73,7 +73,7 @@ export const routes: Routes = [
                     ],
                 },
                 sorting: [{field: EventSortingField.date, order: SortingOrder.ASC}],
-            } satisfies EventsVariables,
+            } satisfies EventsQueryVariables,
         },
     },
     {
@@ -92,7 +92,7 @@ export const routes: Routes = [
             forcedVariables: {
                 filter: {groups: [{conditions: [{date: {less: {value: formatIsoDateTime(new Date())}}}]}]},
                 sorting: [{field: NewsSortingField.date, order: SortingOrder.DESC}],
-            } satisfies NewsesVariables,
+            } satisfies NewsesQueryVariables,
         },
     },
     {

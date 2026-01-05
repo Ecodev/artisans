@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import {resolveProductTagByName} from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import {resolveProduct} from '../../../admin/products/services/product.resolver';
 import {ProductService} from '../../../admin/products/services/product.service';
-import {ProductSortingField, ProductsVariables, SortingOrder} from '../../../shared/generated-types';
+import {ProductSortingField, ProductsQueryVariables, SortingOrder} from '../../../shared/generated-types';
 import {NaturalSeo, type NaturalSeoCallback} from '@ecodev/natural';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent, ProductsViewMode} from './components/products-page/products-page.component';
@@ -23,7 +23,7 @@ export const routes: Routes = [
             showMoreLabel: 'Afficher plus de résultats',
             forcedVariables: {
                 sorting: [{field: ProductSortingField.creationDate, order: SortingOrder.DESC}],
-            } satisfies ProductsVariables,
+            } satisfies ProductsQueryVariables,
         },
     },
     {
@@ -49,7 +49,7 @@ export const routes: Routes = [
                     ],
                 },
                 sorting: ProductService.articlesSorting,
-            } satisfies ProductsVariables,
+            } satisfies ProductsQueryVariables,
         },
     },
     {
@@ -88,7 +88,7 @@ export const routes: Routes = [
                     ],
                 },
                 sorting: ProductService.articlesSorting,
-            } satisfies ProductsVariables,
+            } satisfies ProductsQueryVariables,
         },
     },
     {
@@ -115,7 +115,7 @@ export const routes: Routes = [
                     ],
                 },
                 sorting: [{field: ProductSortingField.releaseDate, order: SortingOrder.DESC}],
-            } satisfies ProductsVariables,
+            } satisfies ProductsQueryVariables,
         },
     },
     {

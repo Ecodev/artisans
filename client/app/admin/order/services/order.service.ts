@@ -5,12 +5,12 @@ import {map} from 'rxjs/operators';
 import {
     CreateOrder,
     CreateOrderVariables,
-    Order,
+    OrderQuery,
     OrderInput,
-    Orders,
+    OrdersQuery,
     OrderStatus,
-    OrdersVariables,
-    OrderVariables,
+    OrdersQueryVariables,
+    OrderQueryVariables,
     UpdateOrderStatus,
     UpdateOrderStatusVariables,
 } from '../../../shared/generated-types';
@@ -21,10 +21,10 @@ import {createOrder, orderQuery, ordersQuery, updateOrderStatus} from './order.q
     providedIn: 'root',
 })
 export class OrderService extends NaturalAbstractModelService<
-    Order['order'],
-    OrderVariables,
-    Orders['orders'],
-    OrdersVariables,
+    OrderQuery['order'],
+    OrderQueryVariables,
+    OrdersQuery['orders'],
+    OrdersQueryVariables,
     CreateOrder['createOrder'],
     CreateOrderVariables,
     never,

@@ -18,7 +18,7 @@ import {
     ConfirmRegistrationVariables,
     CreateUser,
     CreateUserVariables,
-    CurrentUserForProfile,
+    CurrentUserForProfileQuery,
     DeleteUsers,
     DeleteUsersVariables,
     Login,
@@ -31,16 +31,16 @@ import {
     SubscribeNewsletterVariables,
     UpdateUser,
     UpdateUserVariables,
-    User,
-    UserByToken,
-    UserByTokenVariables,
+    UserQuery,
+    UserByTokenQuery,
+    UserByTokenQueryVariables,
     UserInput,
     UserRole,
-    UserRolesAvailables,
-    UserRolesAvailablesVariables,
-    Users,
-    UsersVariables,
-    UserVariables,
+    UserRolesAvailablesQuery,
+    UserRolesAvailablesQueryVariables,
+    UsersQuery,
+    UsersQueryVariables,
+    UserQueryVariables,
 } from '../../../shared/generated-types';
 import {CurrencyService} from '../../../shared/services/currency.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -58,17 +58,17 @@ import {
 } from './user.queries';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 
-export type UserLike = User['user'] | NonNullable<CurrentUserForProfile['viewer']>;
+export type UserLike = UserQuery['user'] | NonNullable<CurrentUserForProfileQuery['viewer']>;
 
 @Injectable({
     providedIn: 'root',
 })
 export class UserService
     extends NaturalAbstractModelService<
-        User['user'],
-        UserVariables,
-        Users['users'],
-        UsersVariables,
+        UserQuery['user'],
+        UserQueryVariables,
+        UsersQuery['users'],
+        UsersQueryVariables,
         CreateUser['createUser'],
         CreateUserVariables,
         UpdateUser['updateUser'],
@@ -88,7 +88,7 @@ export class UserService
     /**
      * Should be used only by fetchViewer and cacheViewer
      */
-    private readonly viewer = new UpToDateSubject<CurrentUserForProfile['viewer']>(null);
+    private readonly viewer = new UpToDateSubject<CurrentUserForProfileQuery['viewer']>(null);
 
     /**
      * This key will be used to store the viewer ID, but that value should never
@@ -102,14 +102,14 @@ export class UserService
         this.keepViewerSyncedAcrossBrowserTabs();
     }
 
-    public static canAccessAdmin(user: CurrentUserForProfile['viewer']): boolean {
+    public static canAccessAdmin(user: CurrentUserForProfileQuery['viewer']): boolean {
         if (!user) {
             return false;
         }
         return [UserRole.administrator].includes(user.role);
     }
 
-    public static canAccessFacilitatorPrivate(user: CurrentUserForProfile['viewer']): boolean {
+    public static canAccessFacilitatorPrivate(user: CurrentUserForProfileQuery['viewer']): boolean {
         if (!user) {
             return false;
         }
@@ -129,7 +129,7 @@ export class UserService
         };
     }
 
-    public override getFormAsyncValidators(model: User['user']): FormAsyncValidators {
+    public override getFormAsyncValidators(model: UserQuery['user']): FormAsyncValidators {
         return {
             email: [unique('email', model.id, this)],
         };
@@ -218,12 +218,12 @@ export class UserService
             .pipe(switchMap(() => this.refetchViewerAndGoToHome('/mon-compte')));
     }
 
-    private postLogin(viewer: NonNullable<CurrentUserForProfile['viewer']>): void {
+    private postLogin(viewer: NonNullable<CurrentUserForProfileQuery['viewer']>): void {
         this.viewer.next(viewer);
 
         // Inject the freshly logged in user as the current user into Apollo data store
         const data = {viewer: viewer};
-        this.apollo.client.writeQuery<CurrentUserForProfile, never>({
+        this.apollo.client.writeQuery<CurrentUserForProfileQuery, never>({
             query: currentUserForProfileQuery,
             data,
         });
@@ -274,7 +274,7 @@ export class UserService
      *
      * @param expirationTolerance If provided, return cached viewer if it has been fetched more recently than the given delay in ms
      */
-    public fetchViewer(expirationTolerance?: number): Observable<CurrentUserForProfile['viewer']> {
+    public fetchViewer(expirationTolerance?: number): Observable<CurrentUserForProfileQuery['viewer']> {
         const viewer = this.getViewerValue(expirationTolerance);
 
         if (viewer) {
@@ -282,7 +282,7 @@ export class UserService
         }
 
         return this.apollo
-            .query<CurrentUserForProfile>({
+            .query<CurrentUserForProfileQuery>({
                 query: currentUserForProfileQuery,
             })
             .pipe(
@@ -293,9 +293,9 @@ export class UserService
             );
     }
 
-    public getUserRolesAvailable(user: User['user'] | UserInput | null): Observable<UserRole[]> {
+    public getUserRolesAvailable(user: UserQuery['user'] | UserInput | null): Observable<UserRole[]> {
         return this.apollo
-            .query<UserRolesAvailables, UserRolesAvailablesVariables>({
+            .query<UserRolesAvailablesQuery, UserRolesAvailablesQueryVariables>({
                 query: userRolesAvailableQuery,
                 variables: {
                     user: user && 'id' in user ? user.id : undefined,
@@ -312,7 +312,7 @@ export class UserService
      *
      * @param expirationTolerance If provided, return cached viewer more recently than the given delay in ms
      */
-    public getViewerValue(expirationTolerance?: number): CurrentUserForProfile['viewer'] {
+    public getViewerValue(expirationTolerance?: number): CurrentUserForProfileQuery['viewer'] {
         return this.viewer.getUpToDateValue(expirationTolerance || 0);
     }
 
@@ -321,14 +321,14 @@ export class UserService
      *
      * Each refetch from the **server** update the viewer. "Refetches" from cache don't update the viewer
      */
-    public getViewerObservable(): Observable<CurrentUserForProfile['viewer']> {
+    public getViewerObservable(): Observable<CurrentUserForProfileQuery['viewer']> {
         return this.viewer.asObservable();
     }
 
     /**
      * Resolve items related to users, and the user if the id is provided, in order to show a form
      */
-    public resolveViewer(): Observable<CurrentUserForProfile['viewer']> {
+    public resolveViewer(): Observable<CurrentUserForProfileQuery['viewer']> {
         return this.fetchViewer(1000).pipe(
             map(result => {
                 this.currencyService.updateLockedStatus(result);
@@ -338,9 +338,9 @@ export class UserService
         );
     }
 
-    public resolveByToken(token: string): Observable<UserByToken['userByToken']> {
+    public resolveByToken(token: string): Observable<UserByTokenQuery['userByToken']> {
         return this.apollo
-            .query<UserByToken, UserByTokenVariables>({
+            .query<UserByTokenQuery, UserByTokenQueryVariables>({
                 query: userByTokenQuery,
                 variables: {
                     token: token,

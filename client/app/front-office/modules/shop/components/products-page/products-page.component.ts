@@ -10,7 +10,7 @@ import {
 } from '@ecodev/natural';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
-import {Products} from '../../../../../shared/generated-types';
+import {ProductsQuery} from '../../../../../shared/generated-types';
 import {StripTagsPipe} from '../../../../../shared/pipes/strip-tags.pipe';
 import {TruncatePipe} from '../../../../../shared/pipes/truncate.pipe';
 import {MatButton} from '@angular/material/button';
@@ -76,7 +76,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
     /**
      * Items to display
      */
-    protected products: Products['products']['items'][0][] = [];
+    protected products: ProductsQuery['products']['items'][0][] = [];
 
     /**
      * Page main title
@@ -122,7 +122,7 @@ export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductServi
         });
     }
 
-    protected getDetailLink(product: Products['products']['items'][0]): RouterLink['routerLink'] {
+    protected getDetailLink(product: ProductsQuery['products']['items'][0]): RouterLink['routerLink'] {
         return ['/larevuedurable', product.reviewNumber ? 'numero' : 'article', product.id];
     }
 }

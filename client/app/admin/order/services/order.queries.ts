@@ -19,7 +19,7 @@ export const orderMetaFragment = gql`
 `;
 
 export const ordersQuery = gql`
-    query Orders($filter: OrderFilter, $sorting: [OrderSorting!], $pagination: PaginationInput) {
+    query OrdersQuery($filter: OrderFilter, $sorting: [OrderSorting!], $pagination: PaginationInput) {
         orders(filter: $filter, sorting: $sorting, pagination: $pagination) {
             items {
                 ...OrderMeta
@@ -35,7 +35,7 @@ export const ordersQuery = gql`
 `;
 
 export const orderQuery = gql`
-    query Order($id: OrderID!) {
+    query OrderQuery($id: OrderID!) {
         order(id: $id) {
             id
             ...OrderMeta

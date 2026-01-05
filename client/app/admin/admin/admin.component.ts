@@ -6,7 +6,7 @@ import {
     NaturalSidenavContainerComponent,
     NaturalSidenavContentComponent,
 } from '@ecodev/natural';
-import {CurrentUserForProfile} from '../../shared/generated-types';
+import {CurrentUserForProfileQuery} from '../../shared/generated-types';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {
     MatAccordion,
@@ -44,7 +44,7 @@ import {MatToolbar} from '@angular/material/toolbar';
 export class AdminComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);
 
-    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfileQuery['viewer'] = null;
 
     public ngOnInit(): void {
         this.viewer = this.route.snapshot.data.viewer ? this.route.snapshot.data.viewer : null;

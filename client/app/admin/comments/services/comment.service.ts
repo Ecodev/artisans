@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    Comment,
+    CommentQuery,
     CommentInput,
-    Comments,
-    CommentsVariables,
-    CommentVariables,
+    CommentsQuery,
+    CommentsQueryVariables,
+    CommentQueryVariables,
     CreateComment,
     CreateCommentVariables,
     DeleteComments,
@@ -19,10 +19,10 @@ import {commentQuery, commentsQuery, createComment, deleteComments, updateCommen
     providedIn: 'root',
 })
 export class CommentService extends NaturalAbstractModelService<
-    Comment['comment'],
-    CommentVariables,
-    Comments['comments'],
-    CommentsVariables,
+    CommentQuery['comment'],
+    CommentQueryVariables,
+    CommentsQuery['comments'],
+    CommentsQueryVariables,
     CreateComment['createComment'],
     CreateCommentVariables,
     UpdateComment['updateComment'],

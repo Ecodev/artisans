@@ -9,11 +9,11 @@ import {
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
 import {
-    CurrentUserForProfile,
-    Products,
-    ProductsVariables,
+    CurrentUserForProfileQuery,
+    ProductsQuery,
+    ProductsQueryVariables,
     ProductType,
-    PurchasesVariables,
+    PurchasesQueryVariables,
 } from '../../../../../shared/generated-types';
 import {ProductsPageComponent} from '../products-page/products-page.component';
 import {AddToCartComponent} from '../add-to-cart/add-to-cart.component';
@@ -51,7 +51,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
 
     protected readonly ProductType = ProductType;
 
-    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfileQuery['viewer'] = null;
 
     /**
      * Hide buy digital version if it has already been bought as it can be bought only once.
@@ -61,7 +61,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
     /**
      * List of articles contained in current number
      */
-    protected articles: Products['products']['items'][0][] = [];
+    protected articles: ProductsQuery['products']['items'][0][] = [];
 
     /**
      * Boolean that represents the sub-articles navigation menu visibility
@@ -91,7 +91,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
             const reviewProduct = this.data.model.review || this.data.model;
 
             if (reviewProduct) {
-                const qvmArticles = new NaturalQueryVariablesManager<ProductsVariables>();
+                const qvmArticles = new NaturalQueryVariablesManager<ProductsQueryVariables>();
                 qvmArticles.set('variables', {
                     filter: {groups: [{conditions: [{review: {in: {values: [reviewProduct.id]}}}]}]},
                 });
@@ -100,7 +100,7 @@ export class ProductPageComponent extends NaturalAbstractDetail<ProductService> 
                 this.articles = [];
             }
 
-            const qvm = new NaturalQueryVariablesManager<PurchasesVariables>();
+            const qvm = new NaturalQueryVariablesManager<PurchasesQueryVariables>();
             if (this.isUpdatePage()) {
                 qvm.set('variables', {filter: {groups: [{conditions: [{id: {equal: {value: this.data.model.id}}}]}]}});
             }

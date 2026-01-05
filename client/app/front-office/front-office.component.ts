@@ -14,7 +14,7 @@ import {
 import {differenceBy} from 'es-toolkit';
 import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
-import {CurrentUserForProfile, UserRole} from '../shared/generated-types';
+import {CurrentUserForProfileQuery, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
 import {MenuItem, NavigationService} from './services/navigation.service';
 import {MatListItem, MatNavList} from '@angular/material/list';
@@ -76,7 +76,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
     protected searchTerm = '';
     protected menuOpened = false;
 
-    protected viewer: CurrentUserForProfile['viewer'] = null;
+    protected viewer: CurrentUserForProfileQuery['viewer'] = null;
     protected readonly newsletterForm = this.fb.group({
         email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
     });

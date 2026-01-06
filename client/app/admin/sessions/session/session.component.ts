@@ -1,9 +1,7 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalErrorMessagePipe,
     NaturalFixedButtonDetailComponent,
     NaturalHttpPrefixDirective,
     NaturalIconDirective,
@@ -13,6 +11,8 @@ import {
     NaturalStampComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';
 import {MatDivider} from '@angular/material/divider';

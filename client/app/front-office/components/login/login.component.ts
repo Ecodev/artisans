@@ -1,8 +1,7 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
+import {deliverableEmail, ifValid, NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {deliverableEmail, ifValid} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {finalize} from 'rxjs/operators';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';

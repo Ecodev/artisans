@@ -28,7 +28,7 @@
 
                     <ng-container matColumnDef="description">
                         <th *matHeaderCellDef mat-header-cell>Commentaire</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             <div class="nat-horizontal nat-align">
                                 <natural-table-button
                                     matTooltip="Éditer"
@@ -41,7 +41,7 @@
 
                     <ng-container matColumnDef="event">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="event">Événement</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             @if (element.event) {
                                 <div class="nat-horizontal nat-align">
                                     <natural-table-button
@@ -56,7 +56,7 @@
 
                     <ng-container matColumnDef="news">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="news">Actualité</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             @if (element.news) {
                                 <div class="nat-horizontal nat-align">
                                     <natural-table-button

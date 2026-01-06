@@ -6,6 +6,7 @@ import {
     NaturalEnumPipe,
     NaturalSearchComponent,
     NaturalTableButtonComponent,
+    TypedMatCellDef,
 } from '@ecodev/natural';
 import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
 import {orderLines} from '../../../shared/natural-search/natural-search-facets';
@@ -17,7 +18,6 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {
     MatCell,
-    MatCellDef,
     MatColumnDef,
     MatFooterCell,
     MatFooterCellDef,
@@ -44,7 +44,7 @@ import {
         MatHeaderCellDef,
         MatHeaderRowDef,
         MatColumnDef,
-        MatCellDef,
+        TypedMatCellDef,
         MatRowDef,
         MatFooterCellDef,
         MatFooterRowDef,

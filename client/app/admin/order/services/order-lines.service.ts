@@ -2,11 +2,11 @@ import {Injectable} from '@angular/core';
 import {ValidatorFn, Validators} from '@angular/forms';
 import {FormValidators, integer, NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    OrderLineQuery,
     OrderLineInput,
+    OrderLineQuery,
+    OrderLineQueryVariables,
     OrderLinesQuery,
     OrderLinesQueryVariables,
-    OrderLineQueryVariables,
     ProductType,
     UpdateOrderLine,
     UpdateOrderLineVariables,

@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    CommentQuery,
     CommentInput,
+    CommentQuery,
+    CommentQueryVariables,
     CommentsQuery,
     CommentsQueryVariables,
-    CommentQueryVariables,
     CreateComment,
     CreateCommentVariables,
     DeleteComments,

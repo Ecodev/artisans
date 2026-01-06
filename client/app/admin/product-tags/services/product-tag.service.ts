@@ -4,9 +4,9 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
     ProductTagQuery,
+    ProductTagQueryVariables,
     ProductTagsQuery,
     ProductTagsQueryVariables,
-    ProductTagQueryVariables,
 } from '../../../shared/generated-types';
 import {productTagQuery, productTagsQuery} from './product-tag.queries';
 

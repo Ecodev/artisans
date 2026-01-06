@@ -27,7 +27,7 @@
 
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             <natural-table-button
                                 matTooltip="Éditer"
                                 [label]="element.name"
@@ -38,7 +38,7 @@
 
                     <ng-container matColumnDef="facilitators">
                         <th *matHeaderCellDef mat-header-cell>Facilitateurs</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             @for (f of element.facilitators; track f) {
                                 <div class="nat-horizontal">
                                     <natural-avatar [initials]="f.name" [gravatar]="f.email" [size]="36" />
@@ -50,27 +50,31 @@
 
                     <ng-container matColumnDef="startDate">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.startDate | date: 'dd.MM.y' }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
+                            {{ element.startDate | date: 'dd.MM.y' }}
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="endDate">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Date contrib.</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.endDate | date: 'dd.MM.y' }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
+                            {{ element.endDate | date: 'dd.MM.y' }}
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="street">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Rue</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.street }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>{{ element.street }}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="locality">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Ville</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.locality }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>{{ element.locality }}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="region">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Canton</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.region }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>{{ element.region }}</td>
                     </ng-container>
                 </table>
             </div>

@@ -7,11 +7,11 @@ import {
     DeleteSubscriptions,
     DeleteSubscriptionsVariables,
     ProductType,
-    SubscriptionQuery,
     SubscriptionInput,
+    SubscriptionQuery,
+    SubscriptionQueryVariables,
     SubscriptionsQuery,
     SubscriptionsQueryVariables,
-    SubscriptionQueryVariables,
     UpdateSubscription,
     UpdateSubscriptionVariables,
 } from '../../../../../shared/generated-types';

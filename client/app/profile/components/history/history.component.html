@@ -9,7 +9,7 @@
 
                     <ng-container matColumnDef="creationDate">
                         <th *matHeaderCellDef class="app-date-column" mat-header-cell>Date</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             <natural-table-button
                                 icon="open_in_new"
                                 matTooltip="Éditer"
@@ -21,18 +21,18 @@
 
                     <ng-container matColumnDef="status">
                         <th *matHeaderCellDef mat-header-cell>État</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             {{ element.status | enum: 'OrderStatus' | async }}
                         </td>
                     </ng-container>
 
                     <ng-container matColumnDef="balance">
                         <th *matHeaderCellDef mat-header-cell class="natural-5em-column natural-align-right">Total</th>
-                        <td *matCellDef="let element" mat-cell class="natural-align-right">
-                            @if (element.balanceCHF > 0) {
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell class="natural-align-right">
+                            @if (+element.balanceCHF > 0) {
                                 {{ element.balanceCHF | currency: 'CHF' }}
                             }
-                            @if (element.balanceEUR > 0) {
+                            @if (+element.balanceEUR > 0) {
                                 {{ element.balanceEUR | currency: 'EUR' }}
                             }
                         </td>

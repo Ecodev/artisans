@@ -2,8 +2,8 @@ import {Component, inject, OnInit} from '@angular/core';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {
-    SessionsQuery,
     SessionSortingField,
+    SessionsQuery,
     SessionsQueryVariables,
     SortingOrder,
 } from '../../../shared/generated-types';

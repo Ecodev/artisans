@@ -1,8 +1,7 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalErrorMessagePipe,
     NaturalFileComponent,
     NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
@@ -10,6 +9,7 @@ import {
     NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
+import {Component, inject} from '@angular/core';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
 import {CreateFile} from '../../../shared/generated-types';

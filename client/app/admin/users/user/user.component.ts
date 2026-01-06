@@ -1,10 +1,9 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
 import {
     IEnum,
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
     NaturalEnumPipe,
+    NaturalErrorMessagePipe,
     NaturalFixedButtonDetailComponent,
     NaturalRelationsComponent,
     NaturalSelectEnumComponent,
@@ -13,6 +12,7 @@ import {
     NaturalTableButtonComponent,
     NaturalTimeAgoPipe,
 } from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
 import {AsyncPipe, DatePipe} from '@angular/common';
 import {UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';

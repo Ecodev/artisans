@@ -1,7 +1,7 @@
 import {Component, inject, input, OnChanges, OnInit} from '@angular/core';
 import {NaturalAbstractList, NaturalIconDirective, SortingOrder} from '@ecodev/natural';
 import {CommentService} from '../../../admin/comments/services/comment.service';
-import {CommentSortingField, EventQuery, EventsQuery, NewsQuery, NewsesQuery} from '../../../shared/generated-types';
+import {CommentSortingField, EventQuery, EventsQuery, NewsesQuery, NewsQuery} from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {MatIcon} from '@angular/material/icon';
 import {RouterLink} from '@angular/router';

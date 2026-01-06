@@ -1,13 +1,13 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Apollo, gql} from 'apollo-angular';
-import {Component, inject, OnInit} from '@angular/core';
 import {
     deliverableEmail,
     ifValid,
     NaturalAlertService,
+    NaturalErrorMessagePipe,
     NaturalIconDirective,
     validateAllFormControls,
 } from '@ecodev/natural';
+import {Apollo, gql} from 'apollo-angular';
+import {Component, inject, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Register, RegisterVariables} from '../../../shared/generated-types';

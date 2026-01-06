@@ -4,8 +4,8 @@ import {NaturalAlertService, NaturalDialogTriggerProvidedData, NaturalSelectEnum
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {
     CurrentUserForProfileQuery,
-    OrderQuery,
     OrderLinesQueryVariables,
+    OrderQuery,
     OrderStatus,
     UserRole,
 } from '../../../shared/generated-types';

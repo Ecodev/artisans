@@ -1,15 +1,15 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
-import {RouterLink} from '@angular/router';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalErrorMessagePipe,
     NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
     NaturalLinkableTabDirective,
     NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';

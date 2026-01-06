@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent} from '@ecodev/natural';
+import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent, TypedMatCellDef} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {orders} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -9,7 +9,6 @@ import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatTooltip} from '@angular/material/tooltip';
 import {
     MatCell,
-    MatCellDef,
     MatColumnDef,
     MatHeaderCell,
     MatHeaderCellDef,
@@ -31,7 +30,7 @@ import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
         MatHeaderCellDef,
         MatHeaderRowDef,
         MatColumnDef,
-        MatCellDef,
+        TypedMatCellDef,
         MatRowDef,
         MatHeaderCell,
         MatCell,

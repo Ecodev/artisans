@@ -31,16 +31,16 @@ import {
     SubscribeNewsletterVariables,
     UpdateUser,
     UpdateUserVariables,
-    UserQuery,
     UserByTokenQuery,
     UserByTokenQueryVariables,
     UserInput,
+    UserQuery,
+    UserQueryVariables,
     UserRole,
     UserRolesAvailablesQuery,
     UserRolesAvailablesQueryVariables,
     UsersQuery,
     UsersQueryVariables,
-    UserQueryVariables,
 } from '../../../shared/generated-types';
 import {CurrencyService} from '../../../shared/services/currency.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';

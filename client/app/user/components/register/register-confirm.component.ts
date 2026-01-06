@@ -1,6 +1,5 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
+import {deliverableEmail, NaturalErrorMessagePipe, NaturalIconDirective, relationsToIds} from '@ecodev/natural';
 import {Component, inject, OnInit} from '@angular/core';
-import {deliverableEmail, NaturalIconDirective, relationsToIds} from '@ecodev/natural';
 import {pick} from 'es-toolkit';
 import {RegisterComponent} from './register.component';
 import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';

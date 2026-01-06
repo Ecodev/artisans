@@ -6,8 +6,8 @@ import {UserService} from '../../../admin/users/services/user.service';
 import {
     SortingOrder,
     UserRole,
-    UsersQuery,
     UserSortingField,
+    UsersQuery,
     UsersQueryVariables,
 } from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';

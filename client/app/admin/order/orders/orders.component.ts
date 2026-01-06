@@ -7,6 +7,7 @@ import {
     NaturalEnumPipe,
     NaturalSearchComponent,
     NaturalTableButtonComponent,
+    TypedMatCellDef,
 } from '@ecodev/natural';
 import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
 import {OrderSortingField, SortingOrder} from '../../../shared/generated-types';
@@ -20,7 +21,6 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {
     MatCell,
-    MatCellDef,
     MatColumnDef,
     MatFooterCell,
     MatFooterCellDef,
@@ -47,7 +47,7 @@ import {
         MatHeaderCellDef,
         MatHeaderRowDef,
         MatColumnDef,
-        MatCellDef,
+        TypedMatCellDef,
         MatRowDef,
         MatFooterCellDef,
         MatFooterRowDef,

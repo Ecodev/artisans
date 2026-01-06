@@ -10,6 +10,7 @@ import {
     NaturalIconDirective,
     NaturalSearchComponent,
     NaturalTableButtonComponent,
+    TypedMatCellDef,
 } from '@ecodev/natural';
 import {productsAdmin} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -21,7 +22,6 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {
     MatCell,
-    MatCellDef,
     MatColumnDef,
     MatHeaderCell,
     MatHeaderCellDef,
@@ -44,7 +44,7 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
         MatHeaderCellDef,
         MatHeaderRowDef,
         MatColumnDef,
-        MatCellDef,
+        TypedMatCellDef,
         MatRowDef,
         MatHeaderCell,
         MatCell,

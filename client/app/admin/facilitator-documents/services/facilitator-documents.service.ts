@@ -5,11 +5,11 @@ import {
     CreateFacilitatorDocumentVariables,
     DeleteFacilitatorDocuments,
     DeleteFacilitatorDocumentsVariables,
-    FacilitatorDocumentQuery,
     FacilitatorDocumentInput,
+    FacilitatorDocumentQuery,
+    FacilitatorDocumentQueryVariables,
     FacilitatorDocumentsQuery,
     FacilitatorDocumentsQueryVariables,
-    FacilitatorDocumentQueryVariables,
     UpdateFacilitatorDocument,
     UpdateFacilitatorDocumentVariables,
 } from '../../../shared/generated-types';

@@ -27,12 +27,12 @@
 
                     <ng-container matColumnDef="code">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Code</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.code }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>{{ element.code }}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="image">
                         <th *matHeaderCellDef mat-header-cell class="natural-2em-column"></th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             @if (element.image) {
                                 <natural-file
                                     [height]="40"
@@ -46,7 +46,7 @@
 
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Nom</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             <natural-table-button
                                 matTooltip="Éditer"
                                 [class]="!element.isActive ? 'inactive' : ''"
@@ -58,7 +58,9 @@
 
                     <ng-container matColumnDef="type">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Type</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.type | enum: 'ProductType' | async }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
+                            {{ element.type | enum: 'ProductType' | async }}
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="pricePerUnitCHF">
@@ -71,7 +73,7 @@
                         >
                             Prix CHF
                         </th>
-                        <td *matCellDef="let element" mat-cell class="natural-align-right">
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell class="natural-align-right">
                             @if (element.pricePerUnitCHF !== '0.00') {
                                 <span>{{ element.pricePerUnitCHF | currency: 'CHF' }}</span>
                             }
@@ -88,7 +90,7 @@
                         >
                             Prix EUR
                         </th>
-                        <td *matCellDef="let element" mat-cell class="natural-align-right">
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell class="natural-align-right">
                             @if (element.pricePerUnitEUR !== '0.00') {
                                 <span>{{ element.pricePerUnitEUR | currency: 'EUR' }}</span>
                             }
@@ -97,7 +99,7 @@
 
                     <ng-container matColumnDef="isActive">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Active</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             <div class="nat-horizontal nat-align">
                                 @if (element.isActive) {
                                     <mat-icon naturalIcon="done" />

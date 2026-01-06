@@ -1,9 +1,8 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalAvatarComponent,
     NaturalDetailHeaderComponent,
+    NaturalErrorMessagePipe,
     NaturalFileComponent,
     NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
@@ -16,6 +15,7 @@ import {
     NaturalTableButtonComponent,
     WithId,
 } from '@ecodev/natural';
+import {Component, inject} from '@angular/core';
 import {XorErrorStateMatcher} from '../../../shared/validators';
 import {FilesService} from '../../files/services/files.service';
 import {ProductTagService} from '../../product-tags/services/product-tag.service';

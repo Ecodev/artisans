@@ -1,14 +1,14 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
+    NaturalErrorMessagePipe,
     NaturalFixedButtonDetailComponent,
     NaturalLinkableTabDirective,
     NaturalSelectComponent,
     NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../../events/services/event.service';
 import {NewsService} from '../../newses/services/news.service';

@@ -1,12 +1,12 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
-import {MatDialogModule} from '@angular/material/dialog';
 import {
     NaturalAbstractDetail,
+    NaturalErrorMessagePipe,
     NaturalSelectComponent,
     NaturalSelectEnumComponent,
     NaturalSeoResolveData,
 } from '@ecodev/natural';
+import {Component, inject, OnInit} from '@angular/core';
+import {MatDialogModule} from '@angular/material/dialog';
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';
 import {SubscriptionService} from '../../../front-office/modules/shop/components/subscriptions/subscription.service';

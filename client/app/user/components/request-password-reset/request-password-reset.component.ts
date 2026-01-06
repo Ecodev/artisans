@@ -1,8 +1,13 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
+import {
+    ifValid,
+    NaturalAlertService,
+    NaturalErrorMessagePipe,
+    NaturalIconDirective,
+    validateAllFormControls,
+} from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {ifValid, NaturalAlertService, NaturalIconDirective, validateAllFormControls} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';

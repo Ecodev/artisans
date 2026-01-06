@@ -5,11 +5,11 @@ import {
     CreateEventVariables,
     DeleteEvents,
     DeleteEventsVariables,
-    EventQuery,
     EventInput,
+    EventQuery,
+    EventQueryVariables,
     EventsQuery,
     EventsQueryVariables,
-    EventQueryVariables,
     UpdateEvent,
     UpdateEventVariables,
 } from '../../../shared/generated-types';

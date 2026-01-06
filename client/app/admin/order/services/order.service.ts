@@ -5,12 +5,12 @@ import {map} from 'rxjs/operators';
 import {
     CreateOrder,
     CreateOrderVariables,
-    OrderQuery,
     OrderInput,
-    OrdersQuery,
-    OrderStatus,
-    OrdersQueryVariables,
+    OrderQuery,
     OrderQueryVariables,
+    OrdersQuery,
+    OrdersQueryVariables,
+    OrderStatus,
     UpdateOrderStatus,
     UpdateOrderStatusVariables,
 } from '../../../shared/generated-types';

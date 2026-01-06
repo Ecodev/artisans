@@ -27,12 +27,14 @@
 
                     <ng-container matColumnDef="date">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.date | date: 'dd.MM.y' }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
+                            {{ element.date | date: 'dd.MM.y' }}
+                        </td>
                     </ng-container>
 
                     <ng-container matColumnDef="name">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nom</th>
-                        <td *matCellDef="let element" mat-cell>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>
                             <div class="nat-horizontal nat-align">
                                 <natural-table-button
                                     matTooltip="Éditer"
@@ -45,12 +47,12 @@
 
                     <ng-container matColumnDef="place">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="place">Lieu</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.place }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>{{ element.place }}</td>
                     </ng-container>
 
                     <ng-container matColumnDef="type">
                         <th *matHeaderCellDef mat-header-cell mat-sort-header="type">Type</th>
-                        <td *matCellDef="let element" mat-cell>{{ element.type }}</td>
+                        <td *matCellDef="let element; dataSource: dataSource" mat-cell>{{ element.type }}</td>
                     </ng-container>
                 </table>
             </div>

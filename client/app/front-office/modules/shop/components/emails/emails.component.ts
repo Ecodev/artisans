@@ -1,8 +1,7 @@
-import {NaturalErrorMessagePipe} from '@ecodev/natural';
+import {deliverableEmail, NaturalErrorMessagePipe} from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import {deliverableEmail} from '@ecodev/natural';
 import {MatButton} from '@angular/material/button';
 import {MatInput} from '@angular/material/input';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';

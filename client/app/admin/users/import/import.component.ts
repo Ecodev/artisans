@@ -14,8 +14,8 @@ import {PermissionsService} from '../../../shared/services/permissions.service';
 import {
     Import,
     ImportVariables,
-    UsersQuery,
     UserSortingField,
+    UsersQuery,
     UsersQueryVariables,
 } from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';

@@ -14,14 +14,14 @@ import {ProductService} from '../../../admin/products/services/product.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
     CurrentUserForProfileQuery,
-    EventsQuery,
     EventSortingField,
+    EventsQuery,
     EventsQueryVariables,
     NewsesQuery,
     NewsesQueryVariables,
     NewsSortingField,
-    ProductsQuery,
     ProductSortingField,
+    ProductsQuery,
     ProductsQueryVariables,
     SortingOrder,
 } from '../../../shared/generated-types';

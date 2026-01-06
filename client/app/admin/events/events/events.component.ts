@@ -6,6 +6,7 @@ import {
     NaturalFixedButtonComponent,
     NaturalSearchComponent,
     NaturalTableButtonComponent,
+    TypedMatCellDef,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../services/event.service';
@@ -16,7 +17,6 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {
     MatCell,
-    MatCellDef,
     MatColumnDef,
     MatHeaderCell,
     MatHeaderCellDef,
@@ -39,7 +39,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
         MatHeaderCellDef,
         MatHeaderRowDef,
         MatColumnDef,
-        MatCellDef,
+        TypedMatCellDef,
         MatRowDef,
         MatHeaderCell,
         MatCell,

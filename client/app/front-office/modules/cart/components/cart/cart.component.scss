@@ -15,7 +15,7 @@
 :host {
     @include responsive.responsive(responsive.$lt-md) {
         .cart-buttons > * {
-            min-width: 300px !important;
+            min-width: 100% !important;
         }
     }
 }

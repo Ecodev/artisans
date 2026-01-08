@@ -181,17 +181,25 @@ input[type='number'] {
 }
 
 .page-illustration-content {
-    position: relative;
-    top: -350px;
-    width: 100%;
-    text-align: left;
-
+    top: 0;
     & > img {
-        margin-bottom: -300px;
-        max-width: 100%;
+        margin-bottom: 0;
     }
 }
 
+@include nat.media(sm) {
+    .page-illustration-content {
+        position: relative;
+        top: -350px;
+        width: 100%;
+        text-align: left;
+
+        & > img {
+            margin-bottom: -300px;
+            max-width: 100%;
+        }
+    }
+}
 // It is possible that the server returns error message on multiple line (eg: when ACL with multiple assertions fail),
 // so we try to preserve that formatting, while still wrapping if necessary
 .mat-mdc-snack-bar-label {

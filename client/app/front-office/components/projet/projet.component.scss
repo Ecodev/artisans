@@ -1,4 +1,5 @@
 @use '../../../../styles/mixins';
+@use '@ecodev/natural-layout' as nat;
 @include mixins.page-with-illustration();
 
 .page-illustration-content {
@@ -9,10 +10,24 @@
 .vignette {
     display: block;
     margin: 0;
-    width: 300px;
 }
 
 audio {
     flex: none !important;
-    width: 400px;
+}
+
+audio,
+.vignette {
+    width: 100%;
+    max-width: 300px;
+}
+
+@include nat.media(null, sm) {
+    ul {
+        padding-left: 0;
+
+        li::before {
+            content: '';
+        }
+    }
 }

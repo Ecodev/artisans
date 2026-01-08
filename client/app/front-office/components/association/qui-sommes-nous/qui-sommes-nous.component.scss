@@ -1,14 +1,18 @@
 @use '../../../../../styles/mixins';
+@use '@ecodev/natural-layout' as nat;
+
 @include mixins.page-with-illustration();
 
 .page-illustration {
     height: 350px;
 }
 
-.page-illustration-content {
-    top: -300px;
-    & > img {
-        margin-bottom: -250px;
+@include nat.media(sm) {
+    .page-illustration-content {
+        top: -300px;
+        & > img {
+            margin-bottom: -250px;
+        }
     }
 }
 

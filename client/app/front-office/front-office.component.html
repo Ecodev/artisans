@@ -34,7 +34,11 @@
 </ng-template>
 
 <mat-sidenav-container>
-    <mat-sidenav #menu position="end" [opened]="menuOpened">
+    <mat-sidenav #menu id="mobile-menu-sidenav" position="end" [opened]="menuOpened">
+        <button id="mobile-hamburger-menu" matIconButton (click)="menu.toggle()">
+            <mat-icon naturalIcon="menu" />
+        </button>
+
         <!-- menu mobile -->
         <div id="mobile-menu">
             <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: mobileNavigation}" />
@@ -51,13 +55,15 @@
 
     <mat-sidenav-content>
         <mat-toolbar class="nat-horizontal nat-align nat-md-hide" id="header-mobile">
+            <div class="nat-expand nat-sm-show"></div>
+
+            <a id="mobile-menu-logo" routerLink="/"
+                ><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg"
+            /></a>
+
             <div class="nat-expand"></div>
 
-            <a routerLink="/"><img alt="logo" height="30" src="assets/logo-artisans-de-la-transition.svg" /></a>
-
-            <div class="nat-expand"></div>
-
-            <button matIconButton (click)="menu.toggle()">
+            <button id="hamburger-menu" matIconButton (click)="menu.toggle()">
                 <mat-icon naturalIcon="menu" />
             </button>
         </mat-toolbar>

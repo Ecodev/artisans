@@ -206,6 +206,15 @@ app-breadcrumbs {
     }
 }
 
+#mobile-menu-sidenav {
+    @include mat.sidenav-overrides(
+        (
+            container-width: 100%,
+            container-shape: 0,
+        )
+    );
+}
+
 #mobile-menu {
     margin-top: 20px;
     min-width: 300px;
@@ -216,7 +225,6 @@ app-breadcrumbs {
         align-items: center;
         cursor: pointer;
         padding: 0 24px;
-
         height: 48px;
         color: black;
         font-size: 16px;
@@ -240,6 +248,17 @@ app-breadcrumbs {
     li.opened > ul {
         max-height: 400px;
     }
+}
+
+#mobile-menu-logo {
+    img {
+        max-width: calc(100vw - 80px);
+    }
+}
+
+#mobile-hamburger-menu {
+    float: right;
+    margin-right: 20px;
 }
 
 #mobile-menu .mat-expansion-panel-body {

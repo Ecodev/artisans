@@ -22,7 +22,7 @@
                 <div class="nat-expand">ACTUALITÉS</div>
                 <div class="relative">
                     @if ((permissionsService.crud | async)?.news.create) {
-                        <button
+                        <a
                             class="absolute"
                             color="none"
                             style="color: black; background-color: white"
@@ -30,7 +30,7 @@
                             routerLink="/admin/news"
                         >
                             <mat-icon naturalIcon="edit" />
-                        </button>
+                        </a>
                     }
                 </div>
             </div>
@@ -60,7 +60,7 @@
                 <div class="nat-expand">AGENDA</div>
                 <div class="relative">
                     @if ((permissionsService.crud | async)?.event.create) {
-                        <button
+                        <a
                             class="absolute"
                             color="none"
                             style="color: black; background-color: white"
@@ -68,7 +68,7 @@
                             routerLink="/admin/event"
                         >
                             <mat-icon naturalIcon="edit" />
-                        </button>
+                        </a>
                     }
                 </div>
             </div>

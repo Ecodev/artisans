@@ -91,9 +91,9 @@
                         <button matMiniFab class="nat-rounded nat-flat" (click)="cart.unsetSubscription()">
                             <mat-icon naturalIcon="delete" />
                         </button>
-                        <button routerLink="/larevuedurable/abonnements" matMiniFab class="nat-rounded nat-flat">
+                        <a routerLink="/larevuedurable/abonnements" matMiniFab class="nat-rounded nat-flat">
                             <mat-icon naturalIcon="edit" />
-                        </button>
+                        </a>
                     </div>
                 </div>
             }
@@ -138,7 +138,7 @@
                             Faire un don
                         </button>
                     }
-                    <button matButton="filled" [routerLink]="['/panier/commande', cart.id]">Commander</button>
+                    <a matButton="filled" [routerLink]="['/panier/commande', cart.id]">Commander</a>
                 </div>
             }
         </div>

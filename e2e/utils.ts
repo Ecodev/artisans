@@ -8,7 +8,7 @@ export function formControlName(name: string): string {
 }
 
 export function buttonLabel(label: string): string {
-    return `//*[@matButton and contains(., '${label}')]`;
+    return `//button[contains(., '${label}')] | //*[@matButton and contains(., '${label}')]`;
 }
 
 export async function naturalSelect(page: Page, selector: string, value: string): Promise<unknown> {

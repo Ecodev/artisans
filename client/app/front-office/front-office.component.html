@@ -84,7 +84,7 @@
                         <button mat-menu-item (click)="currencyService.setCurrency(Currency.EUR)">Europe (EUR)</button>
                     </mat-menu>
                     @if (viewer?.role === UserRole.administrator) {
-                        <a routerLink="/admin" mat-button>Administration</a>
+                        <a routerLink="/admin" matButton>Administration</a>
                     }
                     @for (item of topNavigation; track item) {
                         <a matButton [routerLink]="item.link">{{ item.display }}</a>

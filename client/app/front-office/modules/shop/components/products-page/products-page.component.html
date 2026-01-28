@@ -47,8 +47,7 @@
                                     ou
                                     <app-price class="mat-font-title-md" [product]="product" />
                                 </div>
-                            }
-                            @if (product.file) {
+                            } @else {
                                 <a
                                     matButton="filled"
                                     color="tertiary"

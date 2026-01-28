@@ -105,16 +105,14 @@
                             <h2 class="mat-font-title-lg">Téléchargement</h2>
                             @if (data.model.reviewNumber) {
                                 <p>Vous pouvez dès à présent télécharger cette revue en format numérique (PDF)</p>
-                            }
-                            @if (!data.model.reviewNumber) {
+                            } @else {
                                 <p>Vous pouvez dès à présent télécharger cet article en format numérique (PDF)</p>
                             }
                             <a matButton="filled" target="_blank" [href]="`/api/file/${data.model.file.id}`">
                                 <mat-icon naturalIcon="get_app" />
                                 @if (data.model.reviewNumber) {
                                     <span>Télécharger cette revue</span>
-                                }
-                                @if (!data.model.reviewNumber) {
+                                } @else {
                                     <span>Télécharger cet article</span>
                                 }
                             </a>
@@ -125,8 +123,7 @@
                     <div class="nat-md-expand-50 nat-gap-30 frame-green frame nat-center nat-vertical">
                         @if (data.model.reviewNumber) {
                             <div class="mat-font-headline-sm">Acheter le numéro</div>
-                        }
-                        @if (!data.model.reviewNumber) {
+                        } @else {
                             <div class="mat-font-headline-sm">Acheter cet article</div>
                         }
                         <div class="nat-horizontal nat-wrap nat-gap-30">

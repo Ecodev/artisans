@@ -33,8 +33,7 @@
                                         <mat-icon naturalIcon="download" />
                                         {{ document.name }}
                                     </a>
-                                }
-                                @if (!document.file) {
+                                } @else {
                                     <a mat-list-item>{{ document.name }}</a>
                                 }
                             </mat-nav-list>

@@ -38,8 +38,7 @@
                     </ul>
                     @if (!users.length) {
                         <p>Tout est OK</p>
-                    }
-                    @if (users.length) {
+                    } @else {
                         <div>
                             <p>
                                 Il existe {{ users.length }} utilisateurs dans notre BD qui n'ont pas été importés. Il

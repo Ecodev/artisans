@@ -1,4 +1,3 @@
-<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 <!-- Mobile menu template -->
 <ng-template #mobileNavigationTemplate let-navigation>
     @if (navigation?.length) {
@@ -7,8 +6,7 @@
                 <li [class.opened]="item.opened">
                     @if (!item.children?.length) {
                         <a matRipple [routerLink]="item.link" (click)="menu.close()">{{ item.display }}</a>
-                    }
-                    @if (item.children?.length) {
+                    } @else {
                         <a matRipple (click)="item.opened = !item.opened">{{ item.display }}</a>
                     }
                     <ng-container *ngTemplateOutlet="mobileNavigationTemplate; context: {$implicit: item.children}" />

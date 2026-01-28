@@ -37,8 +37,7 @@
                                     [label]="element.name"
                                     [navigate]="['/admin/order/order-line/', element.id]"
                                 />
-                            }
-                            @if (!element.permissions.update) {
+                            } @else {
                                 <span>{{ element.name }}</span>
                             }
                         </td>

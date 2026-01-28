@@ -62,8 +62,7 @@
                                 Abonné {{ data.model.subscriptionType | enum: 'ProductType' | async }} jusqu'au numéro{{
                                     data.model.subscriptionLastReviewNumber
                                 }}
-                            }
-                            @if (!data.model.subscriptionLastReviewNumber) {
+                            } @else {
                                 N'est pas abonné
                             }
                         </div>

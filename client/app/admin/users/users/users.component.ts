@@ -37,6 +37,7 @@ import {
     MatRowDef,
     MatTable,
 } from '@angular/material/table';
+import {MatButton} from '@angular/material/button';
 
 @Component({
     selector: 'app-users',
@@ -65,6 +66,7 @@ import {
         NaturalFixedButtonComponent,
         RouterLink,
         NaturalEnumPipe,
+        MatButton,
     ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss',

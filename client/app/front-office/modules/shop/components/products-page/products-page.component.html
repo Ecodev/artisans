@@ -34,9 +34,7 @@
                                     product.reviewNumber ? 'numero' : 'article',
                                     product.id,
                                 ]"
-                                [naturalBackgroundDensity]="
-                                    `/api/image/${product.illustration.id}/${$first ? '550' : '260'}`
-                                "
+                                [naturalBackgroundDensity]="`/api/image/${product.illustration.id}/${$first ? '550' : '260'}`"
                             ></a>
                         }
                         <div class="image-placeholder"></div>

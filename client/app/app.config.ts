@@ -30,7 +30,7 @@ import {
     ShowOnDirtyErrorStateMatcher,
 } from '@angular/material/core';
 import {LoggerExtraService} from './shared/services/logger-extra.service';
-import {localConfig} from './shared/generated-config';
+import {localConfig, signedQueriesKey} from './shared/generated-config';
 import localeFRCH from '@angular/common/locales/fr-CH';
 import {provideRouter, withInMemoryScrolling, withRouterConfig} from '@angular/router';
 import {MAT_TABS_CONFIG, MatTabsConfig} from '@angular/material/tabs';
@@ -100,7 +100,7 @@ export const appConfig: ApplicationConfig = {
         },
         apolloOptionsProvider,
         {provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: matTooltipCustomConfig},
-        provideHttpClient(withInterceptors([activityInterceptor, graphqlQuerySigner(localConfig.signedQueries.key)])),
+        provideHttpClient(withInterceptors([activityInterceptor, graphqlQuerySigner(signedQueriesKey)])),
         provideRouter(
             routes,
             withRouterConfig({

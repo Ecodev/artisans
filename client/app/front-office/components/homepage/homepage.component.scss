@@ -90,7 +90,7 @@
 }
 
 .la-revue-splash {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
 
     @include responsive.responsive(responsive.$gt-sm) {
         height: 550px;

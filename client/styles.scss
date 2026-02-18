@@ -332,14 +332,17 @@ app-home-block,
 app-subscriptions,
 .nat-frame-primary,
 .nat-frame-tertiary,
-.frame-green {
-    @include mat.button-overrides(
-        (
-            filled-container-color: white,
-            filled-label-text-color: black,
-            text-label-text-color: black,
-        )
-    );
+.frame-green,
+.support-column {
+    .mdc-button {
+        @include mat.button-overrides(
+            (
+                filled-container-color: white,
+                filled-label-text-color: black,
+                text-label-text-color: black,
+            )
+        );
+    }
 }
 
 .rich-text a,

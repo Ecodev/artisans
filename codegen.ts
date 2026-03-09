@@ -35,13 +35,13 @@ const config: CodegenConfig = {
         scalars: {
             CHF: 'string',
             Chronos: {
-                output: 'string',
                 input: 'string | Date',
+                output: 'string',
             },
             Color: 'string',
             Date: {
-                output: 'string',
                 input: 'string | Date',
+                output: 'string',
             },
             EUR: 'string',
             Email: 'string',
@@ -52,23 +52,74 @@ const config: CodegenConfig = {
             // All IDs
             // Ideally we should not use `any` at all, but we want to be able
             // to use either a string or an entire subobject.
-            CommentID: 'string | any',
-            CountryID: 'string | any',
-            EventID: 'string | any',
-            FileID: 'string | any',
-            ImageID: 'string | any',
-            LogID: 'string | any',
-            MessageID: 'string | any',
-            NewsID: 'string | any',
-            OrderLineID: 'string | any',
-            OrderID: 'string | any',
-            OrganizationID: 'string | any',
-            ProductID: 'string | any',
-            ProductTagID: 'string | any',
-            SessionID: 'string | any',
-            SubscriptionID: 'string | any',
-            UserID: 'string | any',
-            FacilitatorDocumentID: 'string | any',
+            CommentID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            CountryID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            EventID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            FileID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            ImageID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            LogID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            MessageID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            NewsID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            OrderLineID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            OrderID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            OrganizationID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            ProductID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            ProductTagID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            SessionID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            SubscriptionID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            UserID: {
+                input: 'string | any',
+                output: 'string',
+            },
+            FacilitatorDocumentID: {
+                input: 'string | any',
+                output: 'string',
+            },
         },
     },
 };

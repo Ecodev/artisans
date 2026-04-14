@@ -46,7 +46,7 @@ $ composer clear-config-cache
 
 ### Client
 
-Run `yarn dev` for a dev server. Navigate to `http://artisans.lan:4210/`. The app will
+Run `pnpm dev` for a dev server. Navigate to `http://artisans.lan:4210/`. The app will
 automatically reload if you change any of the source files.
 
 ## Testing

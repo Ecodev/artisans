@@ -13,11 +13,11 @@ function run(string $cmd): string
     return shell_exec($cmd);
 }
 
-function test(string $url): void
-{
-    $pattern = '<img src="assets/logo-artisans-de-la-transition.svg"';
-    $message = 'logged in user should get raw Angular';
-
+function test(
+    string $url,
+    string $pattern = '<img class="boot-logo" src="assets/logo-artisans-de-la-transition.svg"',
+    string $message = 'should get raw Angular',
+): void {
     // Assert HTTP status code
     $status = run("curl --insecure --silent --output /dev/null --write-out '%{http_code}' '$url'");
     if ($status !== '200') {
@@ -40,6 +40,6 @@ test('https://artisans.lan/mon-compte');
 test('https://artisans.lan');
 test('https://artisans.lan/larevuedurable/numeros');
 test('https://artisans.lan/mon-compte');
-test('https://artisans.lan/sitemap.xml');
+test('https://artisans.lan/sitemap.xml', '<loc>https://artisans.lan/association/nos-convictions</loc>', 'should get sitemap');
 
 echo '❤️  All tests OK' . PHP_EOL;

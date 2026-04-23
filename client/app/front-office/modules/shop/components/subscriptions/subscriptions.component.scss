@@ -17,7 +17,7 @@
         margin-bottom: 40px;
     }
 
-    & > *:not(.mat-font-headline-sm) {
+    & > *:not(.title) {
         display: flex;
         flex: 1;
         flex-direction: column;

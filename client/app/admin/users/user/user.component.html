@@ -19,7 +19,7 @@
             <mat-tab label="Général">
                 <div class="nat-vertical nat-padding-top nat-gap-horizontal nat-md-horizontal">
                     <div class="nat-vertical nat-md-expand-66">
-                        <h2 class="mat-font-title-lg">Coordonnées</h2>
+                        <h2>Coordonnées</h2>
                         <app-address [form]="form" [disabled]="true" />
                         <mat-form-field>
                             <mat-label>Téléphone</mat-label>
@@ -27,7 +27,7 @@
                         </mat-form-field>
                     </div>
                     <div class="nat-md-expand-33 nat-vertical">
-                        <h2 class="mat-font-title-lg">Compte</h2>
+                        <h2>Compte</h2>
                         <mat-form-field>
                             <mat-label>email</mat-label>
                             <input formControlName="email" matInput (change)="update()" />
@@ -50,7 +50,7 @@
                             (change)="update()"
                             >Facilitateur public</mat-slide-toggle
                         >
-                        <h2 class="mat-font-title-lg">État</h2>
+                        <h2>État</h2>
                         <natural-select-enum
                             enumName="Membership"
                             formControlName="membership"
@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <mat-divider class="nat-margin-vertical" />
-                <h2 class="mat-font-title-lg">Conversations carbone animées</h2>
+                <h2>Conversations carbone animées</h2>
                 <natural-relations
                     otherName="facilitator"
                     placeholder="Conversations carbone"

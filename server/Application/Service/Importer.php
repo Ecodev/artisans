@@ -388,8 +388,8 @@ class Importer
     private function updateUser(...$args): void
     {
         $params = $args;
-        $params[] = false; // web_temporary_access
-        $params[] = false; // should_delete
+        $params[] = 0; // web_temporary_access
+        $params[] = 0; // should_delete
         $params[] = ''; // password
         $params[] = $this->currentUser;
 
@@ -447,7 +447,7 @@ class Importer
     private function updateOrganization(...$args): void
     {
         $params = $args;
-        $params[] = false; // should_delete
+        $params[] = 0; // should_delete
         $params[] = $this->currentUser;
 
         array_push($this->organizationsParams, ...$params);

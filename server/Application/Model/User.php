@@ -82,7 +82,7 @@ class User extends AbstractModel implements \Ecodev\Felix\Model\HasPassword, \Ec
     #[ORM\Column(type: 'enum', nullable: true)]
     private ?ProductType $subscriptionType = null;
 
-    #[ORM\Column(type: 'string', length: 25, options: ['default' => ''])]
+    #[ORM\Column(type: 'string', length: 100, options: ['default' => ''])]
     private string $phone = '';
 
     #[ORM\Column(type: 'boolean', options: ['default' => false])]

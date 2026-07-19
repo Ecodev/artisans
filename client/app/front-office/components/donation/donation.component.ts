@@ -1,4 +1,4 @@
-import {money, NaturalErrorMessagePipe} from '@ecodev/natural';
+import {NaturalErrorMessagePipe, unsignedMoney} from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {CurrencyService} from '../../../shared/services/currency.service';
@@ -32,7 +32,7 @@ export class DonationComponent {
     protected readonly currencyService = inject(CurrencyService);
     protected readonly dialogRef = inject<MatDialogRef<DonationComponent, number | null>>(MatDialogRef);
 
-    protected amount = new FormControl<number | null>(null, [Validators.required, Validators.min(0), money]);
+    protected amount = new FormControl<number | null>(null, [Validators.required, unsignedMoney]);
 
     public constructor() {
         const dialogData = inject<DonationData>(MAT_DIALOG_DATA);

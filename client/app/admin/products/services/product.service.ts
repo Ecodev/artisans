@@ -4,8 +4,8 @@ import {
     FormAsyncValidators,
     FormValidators,
     Literal,
-    money,
     NaturalAbstractModelService,
+    signedMoney,
     unique,
 } from '@ecodev/natural';
 import {
@@ -63,8 +63,8 @@ export class ProductService extends NaturalAbstractModelService<
 
     public override getFormValidators(): FormValidators {
         return {
-            pricePerUnitCHF: [Validators.required, money],
-            pricePerUnitEUR: [Validators.required, money],
+            pricePerUnitCHF: [Validators.required, signedMoney],
+            pricePerUnitEUR: [Validators.required, signedMoney],
             code: [Validators.maxLength(25)],
             name: [Validators.required, Validators.maxLength(100)],
         };

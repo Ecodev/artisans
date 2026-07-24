@@ -2,13 +2,19 @@ import {inject, Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
-import {Literal} from '@ecodev/natural';
-import {Observable} from 'rxjs';
+import {type Literal} from '@ecodev/natural';
+import {type Observable} from 'rxjs';
 import {OrderService} from '../../../../admin/order/services/order.service';
-import {CreateOrder, OrderInput, OrderLineInput, PaymentMethod, ProductType} from '../../../../shared/generated-types';
+import {
+    type CreateOrder,
+    type OrderInput,
+    type OrderLineInput,
+    type PaymentMethod,
+    ProductType,
+} from '../../../../shared/generated-types';
 import {Currency, CurrencyService} from '../../../../shared/services/currency.service';
-import {DonationComponent, DonationData} from '../../../components/donation/donation.component';
-import {Cart, CartLineProduct} from '../classes/cart';
+import {DonationComponent, type DonationData} from '../../../components/donation/donation.component';
+import {type Cart, type CartLineProduct} from '../classes/cart';
 import {GlobalCartService} from './global-cart.service';
 import {CartCollectionService} from './cart-collection.service';
 

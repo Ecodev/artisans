@@ -1,8 +1,8 @@
 import {inject} from '@angular/core';
-import {ActivatedRouteSnapshot} from '@angular/router';
-import {last, Observable} from 'rxjs';
-import {ErrorService} from '../../../shared/components/error/error.service';
-import {UserByTokenResolve} from '../user';
+import {type ActivatedRouteSnapshot} from '@angular/router';
+import {last, type Observable} from 'rxjs';
+import {ErrorService} from '@ecodev/natural';
+import {type UserByTokenResolve} from '../user';
 import {UserService} from './user.service';
 
 export function resolveUserByToken(route: ActivatedRouteSnapshot): Observable<UserByTokenResolve> {

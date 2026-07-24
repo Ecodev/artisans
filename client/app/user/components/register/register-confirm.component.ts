@@ -1,10 +1,10 @@
 import {deliverableEmail, NaturalErrorMessagePipe, NaturalIconDirective, relationsToIds} from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {pick} from 'es-toolkit';
 import {RegisterComponent} from './register.component';
 import {FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {UserByTokenResolve} from '../../../admin/users/user';
-import {ConfirmRegistrationVariables, UserByTokenQuery} from '../../../shared/generated-types';
+import {type UserByTokenResolve} from '../../../admin/users/user';
+import {type ConfirmRegistrationVariables, type UserByTokenQuery} from '../../../shared/generated-types';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatButton} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';

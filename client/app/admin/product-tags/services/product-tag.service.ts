@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService, NaturalQueryVariablesManager} from '@ecodev/natural';
-import {Observable} from 'rxjs';
+import {type Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
-    ProductTagQuery,
-    ProductTagQueryVariables,
-    ProductTagsQuery,
-    ProductTagsQueryVariables,
+    type ProductTagQuery,
+    type ProductTagQueryVariables,
+    type ProductTagsQuery,
+    type ProductTagsQueryVariables,
 } from '../../../shared/generated-types';
 import {productTagQuery, productTagsQuery} from './product-tag.queries';
 

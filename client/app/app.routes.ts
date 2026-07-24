@@ -1,4 +1,4 @@
-import {Routes} from '@angular/router';
+import {type Routes} from '@angular/router';
 import {resolveViewer} from './admin/users/services/viewer.resolver';
 import {FrontOfficeComponent} from './front-office/front-office.component';
 import {ErrorComponent} from './shared/components/error/error.component';

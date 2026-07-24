@@ -1,10 +1,10 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {
     SessionSortingField,
-    SessionsQuery,
-    SessionsQueryVariables,
+    type SessionsQuery,
+    type SessionsQueryVariables,
     SortingOrder,
 } from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';

@@ -5,10 +5,10 @@ import {
     NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
     NaturalLinkableTabDirective,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';

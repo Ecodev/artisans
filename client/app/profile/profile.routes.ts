@@ -1,5 +1,5 @@
-import {Routes} from '@angular/router';
-import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
+import {type Routes} from '@angular/router';
+import {NaturalDialogTriggerComponent, type NaturalDialogTriggerRoutingData, type NaturalSeo} from '@ecodev/natural';
 import {OrderComponent} from '../admin/order/order/order.component';
 import {resolveOrder} from '../admin/order/services/order.resolver';
 import {resolveViewer, resolveViewerForProfile} from '../admin/users/services/viewer.resolver';

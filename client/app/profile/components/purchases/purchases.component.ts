@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {
     NaturalAbstractList,
     NaturalCapitalizePipe,
@@ -9,7 +9,7 @@ import {
     NaturalSrcDensityDirective,
 } from '@ecodev/natural';
 import {PurchaseService} from './purchase.service';
-import {ProductType, PurchasesQuery} from '../../../shared/generated-types';
+import {ProductType, type PurchasesQuery} from '../../../shared/generated-types';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatIcon} from '@angular/material/icon';

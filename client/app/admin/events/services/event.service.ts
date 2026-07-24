@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
-import {formatIsoDateTime, FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
+import {formatIsoDateTime, type FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    CreateEvent,
-    CreateEventVariables,
-    DeleteEvents,
-    DeleteEventsVariables,
-    EventInput,
-    EventQuery,
-    EventQueryVariables,
-    EventsQuery,
-    EventsQueryVariables,
-    UpdateEvent,
-    UpdateEventVariables,
+    type CreateEvent,
+    type CreateEventVariables,
+    type DeleteEvents,
+    type DeleteEventsVariables,
+    type EventInput,
+    type EventQuery,
+    type EventQueryVariables,
+    type EventsQuery,
+    type EventsQueryVariables,
+    type UpdateEvent,
+    type UpdateEventVariables,
 } from '../../../shared/generated-types';
 import {createEvent, deleteEvents, eventQuery, eventsQuery, updateEvent} from './event.queries';
 import {Validators} from '@angular/forms';

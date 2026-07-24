@@ -1,9 +1,9 @@
-import {Routes} from '@angular/router';
+import {type Routes} from '@angular/router';
 import {resolveViewer} from '../../../admin/users/services/viewer.resolver';
 import {canActivateAuth} from '../../../shared/guards/auth.guard';
 import {CartComponent} from './components/cart/cart.component';
 import {CreateOrderComponent} from './components/create-order/create-order.component';
-import {NaturalSeo} from '@ecodev/natural';
+import {type NaturalSeo} from '@ecodev/natural';
 
 export const routes: Routes = [
     {

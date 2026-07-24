@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {NaturalCapitalizePipe, PaginationInput} from '@ecodev/natural';
+import {NaturalCapitalizePipe, type PaginationInput} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
 import {RouterLink} from '@angular/router';

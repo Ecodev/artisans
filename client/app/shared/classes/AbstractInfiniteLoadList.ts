@@ -1,14 +1,14 @@
-import {Directive, OnInit} from '@angular/core';
-import {PageEvent} from '@angular/material/paginator';
+import {Directive, type OnInit} from '@angular/core';
+import {type PageEvent} from '@angular/material/paginator';
 import {
-    ExtractTall,
-    ExtractVall,
-    Literal,
+    type ExtractTall,
+    type ExtractVall,
+    type Literal,
     NaturalAbstractList,
-    NaturalAbstractModelService,
-    PaginatedData,
-    PaginationInput,
-    QueryVariables,
+    type NaturalAbstractModelService,
+    type PaginatedData,
+    type PaginationInput,
+    type QueryVariables,
 } from '@ecodev/natural';
 import {defaults, pick} from 'es-toolkit/compat';
 import {isEqual} from 'es-toolkit';

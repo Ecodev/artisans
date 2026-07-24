@@ -1,7 +1,7 @@
-import {inject, Injectable, OnDestroy} from '@angular/core';
+import {inject, Injectable, type OnDestroy} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {CartCollectionService} from './cart-collection.service';
-import {Subscription} from 'rxjs';
+import {type Subscription} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

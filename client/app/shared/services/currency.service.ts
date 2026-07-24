@@ -1,5 +1,5 @@
 import {BehaviorSubject} from 'rxjs';
-import {UserLike} from '../../admin/users/services/user.service';
+import {type UserLike} from '../../admin/users/services/user.service';
 import {inject, Injectable} from '@angular/core';
 import {SESSION_STORAGE} from '@ecodev/natural';
 

@@ -1,7 +1,7 @@
 import {Component, inject, input} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
-import {ProductTagsQuery, ProductTagsQueryVariables} from '../../generated-types';
+import {type ProductTagsQuery, type ProductTagsQueryVariables} from '../../generated-types';
 import {RouterLink} from '@angular/router';
 
 @Component({

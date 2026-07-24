@@ -1,46 +1,49 @@
 import {gql} from 'apollo-angular';
-import {DOCUMENT, inject, Injectable, OnDestroy} from '@angular/core';
+import {DOCUMENT, inject, Injectable, type OnDestroy} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {
     deliverableEmail,
-    FormAsyncValidators,
-    FormValidators,
+    type FormAsyncValidators,
+    type FormValidators,
+    ignoreErrors,
     LOCAL_STORAGE,
     NaturalAbstractModelService,
     unique,
 } from '@ecodev/natural';
-import {fromEvent, Observable, of, Subject, switchMap, tap} from 'rxjs';
+import {fromEvent, type Observable, of, Subject, switchMap, tap} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
-    ConfirmRegistration,
-    ConfirmRegistrationVariables,
-    CreateUser,
-    CreateUserVariables,
-    CurrentUserForProfileQuery,
-    DeleteUsers,
-    DeleteUsersVariables,
-    Login,
-    LoginVariables,
-    Logout,
-    RequestMembershipEnd,
-    RequestPasswordReset,
-    RequestPasswordResetVariables,
-    SubscribeNewsletter,
-    SubscribeNewsletterVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    UserByTokenQuery,
-    UserByTokenQueryVariables,
-    UserInput,
-    UserQuery,
-    UserQueryVariables,
+    type ConfirmRegistration,
+    type ConfirmRegistrationVariables,
+    type CreateUser,
+    type CreateUserVariables,
+    type CurrentUserForProfileQuery,
+    type CurrentUserForProfileQueryVariables,
+    type DeleteUsers,
+    type DeleteUsersVariables,
+    type Login,
+    type LoginVariables,
+    type Logout,
+    type RequestMembershipEnd,
+    type RequestMembershipEndVariables,
+    type RequestPasswordReset,
+    type RequestPasswordResetVariables,
+    type SubscribeNewsletter,
+    type SubscribeNewsletterVariables,
+    type UpdateUser,
+    type UpdateUserVariables,
+    type UserByTokenQuery,
+    type UserByTokenQueryVariables,
+    type UserInput,
+    type UserQuery,
+    type UserQueryVariables,
     UserRole,
-    UserRolesAvailablesQuery,
-    UserRolesAvailablesQueryVariables,
-    UsersQuery,
-    UsersQueryVariables,
+    type UserRolesAvailablesQuery,
+    type UserRolesAvailablesQueryVariables,
+    type UsersQuery,
+    type UsersQueryVariables,
 } from '../../../shared/generated-types';
 import {CurrencyService} from '../../../shared/services/currency.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
@@ -223,7 +226,7 @@ export class UserService
 
         // Inject the freshly logged in user as the current user into Apollo data store
         const data = {viewer: viewer};
-        this.apollo.client.writeQuery<CurrentUserForProfileQuery, never>({
+        this.apollo.client.writeQuery<CurrentUserForProfileQuery, CurrentUserForProfileQueryVariables>({
             query: currentUserForProfileQuery,
             data,
         });
@@ -286,6 +289,7 @@ export class UserService
                 query: currentUserForProfileQuery,
             })
             .pipe(
+                ignoreErrors(),
                 map(result => {
                     this.viewer.next(result.data.viewer);
                     return result.data.viewer;
@@ -302,6 +306,7 @@ export class UserService
                 },
             })
             .pipe(
+                ignoreErrors(),
                 map(result => {
                     return result.data.userRolesAvailable;
                 }),
@@ -346,7 +351,10 @@ export class UserService
                     token: token,
                 },
             })
-            .pipe(map(result => result.data.userByToken));
+            .pipe(
+                ignoreErrors(),
+                map(result => result.data.userByToken),
+            );
     }
 
     public requestPasswordReset(email: string): Observable<RequestPasswordReset['requestPasswordReset']> {
@@ -374,7 +382,7 @@ export class UserService
         `;
 
         return this.apollo
-            .mutate<RequestMembershipEnd, never>({
+            .mutate<RequestMembershipEnd, RequestMembershipEndVariables>({
                 mutation: mutation,
             })
             .pipe(map(result => result.data!.requestMembershipEnd));

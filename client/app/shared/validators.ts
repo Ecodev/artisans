@@ -1,5 +1,12 @@
-import {AbstractControl, FormControl, FormGroupDirective, NgForm, ValidationErrors, ValidatorFn} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {
+    type AbstractControl,
+    type FormControl,
+    type FormGroupDirective,
+    type NgForm,
+    type ValidationErrors,
+    type ValidatorFn,
+} from '@angular/forms';
+import {type ErrorStateMatcher} from '@angular/material/core';
 
 /**
  * Returns a validator that validates that there is never more than 1 value set for all given paths.

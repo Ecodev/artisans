@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {type ComponentFixture, TestBed} from '@angular/core/testing';
 import {CircuitsCourtsComponent} from './circuits-courts.component';
 import {provideRouter} from '@angular/router';
 

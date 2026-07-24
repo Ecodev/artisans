@@ -1,8 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {CurrentUserForProfileQuery, Membership, ProductQuery, ProductType} from '../../../shared/generated-types';
+import {
+    type CurrentUserForProfileQuery,
+    Membership,
+    type ProductQuery,
+    ProductType,
+} from '../../../shared/generated-types';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {AddToCartComponent} from '../../../front-office/modules/shop/components/add-to-cart/add-to-cart.component';

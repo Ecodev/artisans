@@ -1,5 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {Literal, NaturalIconDirective, NaturalQueryVariablesManager} from '@ecodev/natural';
+import {Component, inject, type OnInit} from '@angular/core';
+import {type Literal, NaturalIconDirective, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {groupBy, sortBy} from 'es-toolkit';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
 import {UserService} from '../../../admin/users/services/user.service';
@@ -7,8 +7,8 @@ import {
     SortingOrder,
     UserRole,
     UserSortingField,
-    UsersQuery,
-    UsersQueryVariables,
+    type UsersQuery,
+    type UsersQueryVariables,
 } from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {MatIcon} from '@angular/material/icon';

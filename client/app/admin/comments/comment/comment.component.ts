@@ -5,10 +5,10 @@ import {
     NaturalFixedButtonDetailComponent,
     NaturalLinkableTabDirective,
     NaturalSelectComponent,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../../events/services/event.service';
 import {NewsService} from '../../newses/services/news.service';

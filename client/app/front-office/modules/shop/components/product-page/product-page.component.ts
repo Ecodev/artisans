@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalCapitalizePipe,
@@ -9,11 +9,11 @@ import {
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {PurchaseService} from '../../../../../profile/components/purchases/purchase.service';
 import {
-    CurrentUserForProfileQuery,
-    ProductsQuery,
-    ProductsQueryVariables,
+    type CurrentUserForProfileQuery,
+    type ProductsQuery,
+    type ProductsQueryVariables,
     ProductType,
-    PurchasesQueryVariables,
+    type PurchasesQueryVariables,
 } from '../../../../../shared/generated-types';
 import {ProductsPageComponent} from '../products-page/products-page.component';
 import {AddToCartComponent} from '../add-to-cart/add-to-cart.component';

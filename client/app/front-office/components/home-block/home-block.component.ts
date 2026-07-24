@@ -1,4 +1,4 @@
-import {Component, inject, input, OnInit} from '@angular/core';
+import {Component, inject, input, type OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';

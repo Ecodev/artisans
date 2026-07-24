@@ -1,6 +1,6 @@
-import {Component, DestroyRef, inject, input, OnInit} from '@angular/core';
-import {CartLineProduct} from '../../../front-office/modules/cart/classes/cart';
-import {SubscriptionsQuery} from '../../generated-types';
+import {Component, DestroyRef, inject, input, type OnInit} from '@angular/core';
+import {type CartLineProduct} from '../../../front-office/modules/cart/classes/cart';
+import {type SubscriptionsQuery} from '../../generated-types';
 import {Currency, CurrencyService} from '../../services/currency.service';
 import {CurrencyPipe} from '@angular/common';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';

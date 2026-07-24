@@ -1,14 +1,14 @@
-import Big, {BigSource} from 'big.js';
+import Big, {type BigSource} from 'big.js';
 import {
-    ProductQuery,
-    ProductsQuery,
-    ProductType,
-    SubscriptionQuery,
-    SubscriptionsQuery,
+    type ProductQuery,
+    type ProductsQuery,
+    type ProductType,
+    type SubscriptionQuery,
+    type SubscriptionsQuery,
 } from '../../../../shared/generated-types';
 import {Currency} from '../../../../shared/services/currency.service';
 import {moneyRoundUp} from '../../../../shared/utils';
-import {CartCollectionService} from '../services/cart-collection.service';
+import {type CartCollectionService} from '../services/cart-collection.service';
 
 export type CartLineProduct = ProductsQuery['products']['items'][0] | ProductQuery['product'];
 

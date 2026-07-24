@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    CreateFacilitatorDocument,
-    CreateFacilitatorDocumentVariables,
-    DeleteFacilitatorDocuments,
-    DeleteFacilitatorDocumentsVariables,
-    FacilitatorDocumentInput,
-    FacilitatorDocumentQuery,
-    FacilitatorDocumentQueryVariables,
-    FacilitatorDocumentsQuery,
-    FacilitatorDocumentsQueryVariables,
-    UpdateFacilitatorDocument,
-    UpdateFacilitatorDocumentVariables,
+    type CreateFacilitatorDocument,
+    type CreateFacilitatorDocumentVariables,
+    type DeleteFacilitatorDocuments,
+    type DeleteFacilitatorDocumentsVariables,
+    type FacilitatorDocumentInput,
+    type FacilitatorDocumentQuery,
+    type FacilitatorDocumentQueryVariables,
+    type FacilitatorDocumentsQuery,
+    type FacilitatorDocumentsQueryVariables,
+    type UpdateFacilitatorDocument,
+    type UpdateFacilitatorDocumentVariables,
 } from '../../../shared/generated-types';
 import {
     createFacilitatorDocument,

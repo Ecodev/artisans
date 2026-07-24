@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent, TypedMatCellDef} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {orders} from '../../../shared/natural-search/natural-search-facets';

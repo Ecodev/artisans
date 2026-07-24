@@ -1,6 +1,6 @@
 import {inject} from '@angular/core';
-import {ActivatedRouteSnapshot} from '@angular/router';
-import {ErrorService} from '../../../shared/components/error/error.service';
+import {type ActivatedRouteSnapshot} from '@angular/router';
+import {ErrorService} from '@ecodev/natural';
 import {FacilitatorDocumentsService} from './facilitator-documents.service';
 
 /**

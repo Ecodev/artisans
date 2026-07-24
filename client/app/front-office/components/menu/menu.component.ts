@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, inject, InjectionToken} from '@angular/core';
-import {MenuItem} from '../../services/navigation.service';
+import {type MenuItem} from '../../services/navigation.service';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgTemplateOutlet} from '@angular/common';
 

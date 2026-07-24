@@ -1,13 +1,13 @@
-import {Routes} from '@angular/router';
-import {formatIsoDate, formatIsoDateTime, NaturalSeo} from '@ecodev/natural';
+import {type Routes} from '@angular/router';
+import {formatIsoDate, formatIsoDateTime, type NaturalSeo} from '@ecodev/natural';
 import {resolveEvent} from '../admin/events/services/event.resolver';
 import {resolveNews} from '../admin/newses/services/news.resolver';
 import {resolveViewer} from '../admin/users/services/viewer.resolver';
 import {ErrorComponent} from '../shared/components/error/error.component';
 import {
     EventSortingField,
-    EventsQueryVariables,
-    NewsesQueryVariables,
+    type EventsQueryVariables,
+    type NewsesQueryVariables,
     NewsSortingField,
     SortingOrder,
 } from '../shared/generated-types';

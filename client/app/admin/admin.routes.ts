@@ -1,5 +1,5 @@
-import {Routes} from '@angular/router';
-import {NaturalDialogTriggerComponent, NaturalDialogTriggerRoutingData, NaturalSeo} from '@ecodev/natural';
+import {type Routes} from '@angular/router';
+import {NaturalDialogTriggerComponent, type NaturalDialogTriggerRoutingData, type NaturalSeo} from '@ecodev/natural';
 import {canActivateAdministration} from '../shared/guards/administration.guard';
 import {AdminComponent} from './admin/admin.component';
 import {CommentComponent} from './comments/comment/comment.component';

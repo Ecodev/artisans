@@ -1,9 +1,9 @@
-import {Routes} from '@angular/router';
+import {type Routes} from '@angular/router';
 import {resolveProductTagByName} from '../../../admin/product-tags/services/product-tag-by-name.resolver';
 import {resolveProduct} from '../../../admin/products/services/product.resolver';
 import {ProductService} from '../../../admin/products/services/product.service';
-import {ProductSortingField, ProductsQueryVariables, SortingOrder} from '../../../shared/generated-types';
-import {NaturalSeo, type NaturalSeoCallback} from '@ecodev/natural';
+import {ProductSortingField, type ProductsQueryVariables, SortingOrder} from '../../../shared/generated-types';
+import {type NaturalSeo, type NaturalSeoCallback} from '@ecodev/natural';
 import {ProductPageComponent} from './components/product-page/product-page.component';
 import {ProductsPageComponent, ProductsViewMode} from './components/products-page/products-page.component';
 import {SubscriptionsComponent} from './components/subscriptions/subscriptions.component';

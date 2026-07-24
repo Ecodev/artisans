@@ -1,4 +1,4 @@
-import {Component, inject, input, OnInit} from '@angular/core';
+import {Component, inject, input, type OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     fromUrl,
@@ -10,7 +10,7 @@ import {
 } from '@ecodev/natural';
 import {ProductService} from '../../../../../admin/products/services/product.service';
 import {AbstractInfiniteLoadList} from '../../../../../shared/classes/AbstractInfiniteLoadList';
-import {ProductsQuery} from '../../../../../shared/generated-types';
+import {type ProductsQuery} from '../../../../../shared/generated-types';
 import {StripTagsPipe} from '../../../../../shared/pipes/strip-tags.pipe';
 import {TruncatePipe} from '../../../../../shared/pipes/truncate.pipe';
 import {MatButton} from '@angular/material/button';

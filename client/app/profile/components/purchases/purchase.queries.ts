@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client/core';
+import {gql} from '@apollo/client';
 
 export const purchasesQuery = gql`
     query PurchasesQuery($filter: ProductFilter, $sorting: [ProductSorting!], $pagination: PaginationInput) {

@@ -1,6 +1,6 @@
 import {inject} from '@angular/core';
 import {last, Observable, switchMap} from 'rxjs';
-import {ErrorService} from '../../../shared/components/error/error.service';
+import {ErrorService} from '@ecodev/natural';
 import {CurrentUserForProfileQuery} from '../../../shared/generated-types';
 import {UserService} from './user.service';
 

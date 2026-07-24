@@ -6,6 +6,7 @@ import {
     deliverableEmail,
     FormAsyncValidators,
     FormValidators,
+    ignoreErrors,
     LOCAL_STORAGE,
     NaturalAbstractModelService,
     unique,
@@ -19,12 +20,14 @@ import {
     CreateUser,
     CreateUserVariables,
     CurrentUserForProfileQuery,
+    CurrentUserForProfileQueryVariables,
     DeleteUsers,
     DeleteUsersVariables,
     Login,
     LoginVariables,
     Logout,
     RequestMembershipEnd,
+    RequestMembershipEndVariables,
     RequestPasswordReset,
     RequestPasswordResetVariables,
     SubscribeNewsletter,
@@ -223,7 +226,7 @@ export class UserService
 
         // Inject the freshly logged in user as the current user into Apollo data store
         const data = {viewer: viewer};
-        this.apollo.client.writeQuery<CurrentUserForProfileQuery, never>({
+        this.apollo.client.writeQuery<CurrentUserForProfileQuery, CurrentUserForProfileQueryVariables>({
             query: currentUserForProfileQuery,
             data,
         });
@@ -286,6 +289,7 @@ export class UserService
                 query: currentUserForProfileQuery,
             })
             .pipe(
+                ignoreErrors(),
                 map(result => {
                     this.viewer.next(result.data.viewer);
                     return result.data.viewer;
@@ -302,6 +306,7 @@ export class UserService
                 },
             })
             .pipe(
+                ignoreErrors(),
                 map(result => {
                     return result.data.userRolesAvailable;
                 }),
@@ -346,7 +351,10 @@ export class UserService
                     token: token,
                 },
             })
-            .pipe(map(result => result.data.userByToken));
+            .pipe(
+                ignoreErrors(),
+                map(result => result.data.userByToken),
+            );
     }
 
     public requestPasswordReset(email: string): Observable<RequestPasswordReset['requestPasswordReset']> {
@@ -374,7 +382,7 @@ export class UserService
         `;
 
         return this.apollo
-            .mutate<RequestMembershipEnd, never>({
+            .mutate<RequestMembershipEnd, RequestMembershipEndVariables>({
                 mutation: mutation,
             })
             .pipe(map(result => result.data!.requestMembershipEnd));

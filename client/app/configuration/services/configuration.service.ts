@@ -1,8 +1,7 @@
-import {Apollo} from 'apollo-angular';
-import {NetworkStatus} from '@apollo/client/core';
+import {Apollo, onlyCompleteData} from 'apollo-angular';
+import {NetworkStatus} from '@apollo/client';
 import {inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {filter} from 'rxjs/operators';
 import {
     ConfigurationQuery,
     ConfigurationQueryVariables,
@@ -24,9 +23,10 @@ export class ConfigurationService {
             query: configurationQuery,
             variables: {key},
             fetchPolicy: 'cache-and-network',
+            notifyOnNetworkStatusChange: false,
         });
 
-        const subscription = queryRef.valueChanges.pipe(filter(r => !!r.data)).subscribe(result => {
+        const subscription = queryRef.valueChanges.pipe(onlyCompleteData()).subscribe(result => {
             const data = result.data.configuration;
             resultObservable.next(data);
             if (result.networkStatus === NetworkStatus.ready) {

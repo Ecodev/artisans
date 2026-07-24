@@ -1,4 +1,4 @@
-import {gql} from '@apollo/client/core';
+import {gql} from '@apollo/client';
 import {permissionsFragment, userMetaFragment} from '../../../shared/queries/fragments';
 
 // Fragment for single display usage. Too much data for listings, and unused fields for mutations.

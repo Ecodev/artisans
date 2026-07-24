@@ -55,7 +55,7 @@ export class OrderService extends NaturalAbstractModelService<
             })
             .pipe(
                 map(() => {
-                    this.apollo.client.reFetchObservableQueries();
+                    this.apollo.client.refetchObservableQueries();
 
                     return;
                 }),

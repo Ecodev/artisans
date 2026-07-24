@@ -5,6 +5,7 @@ import {
     AvailableColumn,
     Button,
     copyToClipboard,
+    ignoreErrors,
     NaturalAbstractList,
     NaturalAvatarComponent,
     NaturalColumnsPickerComponent,
@@ -134,6 +135,7 @@ export class UsersComponent extends NaturalAbstractList<UserService> implements 
                 query: emailUsersQuery,
                 variables: qvm.variables.value,
             })
+            .pipe(ignoreErrors())
             .subscribe(result => {
                 this.usersEmail = result.data.users.items.map(u => u.email).join(' ;,'); // all separators for different mailboxes
                 this.usersEmailAndName = result.data.users.items

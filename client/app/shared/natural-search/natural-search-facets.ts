@@ -1,28 +1,28 @@
 import {assertInInjectionContext, inject} from '@angular/core';
 import {
-    DropdownFacet,
-    FlagFacet,
+    type DropdownFacet,
+    type FlagFacet,
     NaturalEnumService,
-    NaturalSearchFacets,
+    type NaturalSearchFacets,
     replaceOperatorByName,
     TypeDateComponent,
-    TypeDateConfiguration,
+    type TypeDateConfiguration,
     TypeNaturalSelectComponent,
     TypeNumberComponent,
-    TypeNumberConfiguration,
+    type TypeNumberConfiguration,
     TypeSelectComponent,
-    TypeSelectConfiguration,
-    TypeSelectNaturalConfiguration,
+    type TypeSelectConfiguration,
+    type TypeSelectNaturalConfiguration,
     TypeTextComponent,
     wrapLike,
 } from '@ecodev/natural';
 import {ProductTagService} from '../../admin/product-tags/services/product-tag.service';
 import {UserService} from '../../admin/users/services/user.service';
 import {
-    ProductFilterGroupConditionFile,
-    ProductFilterGroupConditionIsActive,
-    UserFilterGroupConditionShouldDelete,
-    UserFilterGroupConditionSubscriptionLastReview,
+    type ProductFilterGroupConditionFile,
+    type ProductFilterGroupConditionIsActive,
+    type UserFilterGroupConditionShouldDelete,
+    type UserFilterGroupConditionSubscriptionLastReview,
 } from '../generated-types';
 
 function owner(): DropdownFacet<TypeSelectNaturalConfiguration<UserService>> {

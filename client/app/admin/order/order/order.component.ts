@@ -1,19 +1,19 @@
 import {Component, inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import {NaturalAlertService, NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
+import {NaturalAlertService, type NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {
-    CurrentUserForProfileQuery,
-    OrderLinesQueryVariables,
-    OrderQuery,
-    OrderStatus,
+    type CurrentUserForProfileQuery,
+    type OrderLinesQueryVariables,
+    type OrderQuery,
+    type OrderStatus,
     UserRole,
 } from '../../../shared/generated-types';
 import {OrderService} from '../services/order.service';
 import {MatButton} from '@angular/material/button';
 import {OrderLinesComponent} from '../order-lines/order-lines.component';
 import {FormsModule} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {type Observable} from 'rxjs';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({

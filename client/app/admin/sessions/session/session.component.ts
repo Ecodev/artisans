@@ -7,11 +7,11 @@ import {
     NaturalIconDirective,
     NaturalLinkableTabDirective,
     NaturalRelationsComponent,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     NaturalStampComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {FormArray, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';

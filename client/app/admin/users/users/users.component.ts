@@ -1,9 +1,9 @@
 import {Apollo} from 'apollo-angular';
-import {Component, DOCUMENT, inject, OnInit} from '@angular/core';
+import {Component, DOCUMENT, inject, type OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
-    AvailableColumn,
-    Button,
+    type AvailableColumn,
+    type Button,
     copyToClipboard,
     ignoreErrors,
     NaturalAbstractList,
@@ -13,12 +13,16 @@ import {
     NaturalFixedButtonComponent,
     NaturalQueryVariablesManager,
     NaturalSearchComponent,
-    NaturalSearchSelections,
+    type NaturalSearchSelections,
     NaturalTableButtonComponent,
     TypedMatCellDef,
 } from '@ecodev/natural';
 import {AsyncPipe, DatePipe} from '@angular/common';
-import {EmailUsersQuery, EmailUsersQueryVariables, UsersQueryVariables} from '../../../shared/generated-types';
+import {
+    type EmailUsersQuery,
+    type EmailUsersQueryVariables,
+    type UsersQueryVariables,
+} from '../../../shared/generated-types';
 import {users} from '../../../shared/natural-search/natural-search-facets';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {emailUsersQuery} from '../services/user.queries';

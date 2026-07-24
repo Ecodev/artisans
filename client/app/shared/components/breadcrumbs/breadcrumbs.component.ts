@@ -1,5 +1,5 @@
-import {Component, DestroyRef, inject, OnInit} from '@angular/core';
-import {ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
+import {Component, DestroyRef, inject, type OnInit} from '@angular/core';
+import {type ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {MatButton} from '@angular/material/button';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';

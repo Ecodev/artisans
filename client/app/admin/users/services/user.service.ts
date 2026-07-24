@@ -1,49 +1,49 @@
 import {gql} from 'apollo-angular';
-import {DOCUMENT, inject, Injectable, OnDestroy} from '@angular/core';
+import {DOCUMENT, inject, Injectable, type OnDestroy} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {
     deliverableEmail,
-    FormAsyncValidators,
-    FormValidators,
+    type FormAsyncValidators,
+    type FormValidators,
     ignoreErrors,
     LOCAL_STORAGE,
     NaturalAbstractModelService,
     unique,
 } from '@ecodev/natural';
-import {fromEvent, Observable, of, Subject, switchMap, tap} from 'rxjs';
+import {fromEvent, type Observable, of, Subject, switchMap, tap} from 'rxjs';
 import {map, takeUntil} from 'rxjs/operators';
 import {UpToDateSubject} from '../../../shared/classes/up-to-date-subject';
 import {
-    ConfirmRegistration,
-    ConfirmRegistrationVariables,
-    CreateUser,
-    CreateUserVariables,
-    CurrentUserForProfileQuery,
-    CurrentUserForProfileQueryVariables,
-    DeleteUsers,
-    DeleteUsersVariables,
-    Login,
-    LoginVariables,
-    Logout,
-    RequestMembershipEnd,
-    RequestMembershipEndVariables,
-    RequestPasswordReset,
-    RequestPasswordResetVariables,
-    SubscribeNewsletter,
-    SubscribeNewsletterVariables,
-    UpdateUser,
-    UpdateUserVariables,
-    UserByTokenQuery,
-    UserByTokenQueryVariables,
-    UserInput,
-    UserQuery,
-    UserQueryVariables,
+    type ConfirmRegistration,
+    type ConfirmRegistrationVariables,
+    type CreateUser,
+    type CreateUserVariables,
+    type CurrentUserForProfileQuery,
+    type CurrentUserForProfileQueryVariables,
+    type DeleteUsers,
+    type DeleteUsersVariables,
+    type Login,
+    type LoginVariables,
+    type Logout,
+    type RequestMembershipEnd,
+    type RequestMembershipEndVariables,
+    type RequestPasswordReset,
+    type RequestPasswordResetVariables,
+    type SubscribeNewsletter,
+    type SubscribeNewsletterVariables,
+    type UpdateUser,
+    type UpdateUserVariables,
+    type UserByTokenQuery,
+    type UserByTokenQueryVariables,
+    type UserInput,
+    type UserQuery,
+    type UserQueryVariables,
     UserRole,
-    UserRolesAvailablesQuery,
-    UserRolesAvailablesQueryVariables,
-    UsersQuery,
-    UsersQueryVariables,
+    type UserRolesAvailablesQuery,
+    type UserRolesAvailablesQueryVariables,
+    type UsersQuery,
+    type UsersQueryVariables,
 } from '../../../shared/generated-types';
 import {CurrencyService} from '../../../shared/services/currency.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';

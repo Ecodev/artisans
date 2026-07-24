@@ -1,22 +1,22 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
-    FileSelection,
+    type FileSelection,
     NaturalAlertService,
     NaturalFileDropDirective,
     NaturalIconDirective,
     NaturalQueryVariablesManager,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     toNavigationParameters,
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {
-    Import,
-    ImportVariables,
+    type Import,
+    type ImportVariables,
     UserSortingField,
-    UsersQuery,
-    UsersQueryVariables,
+    type UsersQuery,
+    type UsersQueryVariables,
 } from '../../../shared/generated-types';
 import {UserService} from '../services/user.service';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';

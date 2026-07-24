@@ -1,6 +1,6 @@
-import {Component, inject, Input, input, OnInit} from '@angular/core';
+import {Component, inject, Input, input, type OnInit} from '@angular/core';
 import {
-    AvailableColumn,
+    type AvailableColumn,
     NaturalAbstractList,
     NaturalColumnsPickerComponent,
     NaturalEnumPipe,

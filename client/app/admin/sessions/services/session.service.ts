@@ -1,23 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
-import {FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {type FormValidators, type Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    CreateSession,
-    CreateSessionVariables,
-    DeleteSessions,
-    DeleteSessionsVariables,
+    type CreateSession,
+    type CreateSessionVariables,
+    type DeleteSessions,
+    type DeleteSessionsVariables,
     JoinType,
-    SessionInput,
-    SessionPartialInput,
-    SessionQuery,
-    SessionQueryVariables,
-    SessionsQuery,
-    SessionsQueryVariables,
-    UpdateSession,
-    UpdateSessionVariables,
+    type SessionInput,
+    type SessionPartialInput,
+    type SessionQuery,
+    type SessionQueryVariables,
+    type SessionsQuery,
+    type SessionsQueryVariables,
+    type UpdateSession,
+    type UpdateSessionVariables,
 } from '../../../shared/generated-types';
 import {createSession, deleteSessions, sessionQuery, sessionsQuery, updateSession} from './session.queries';
-import {Observable, of} from 'rxjs';
+import {type Observable, of} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

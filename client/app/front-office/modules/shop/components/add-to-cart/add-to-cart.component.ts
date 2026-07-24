@@ -1,6 +1,6 @@
 import {Component, inject, input} from '@angular/core';
-import {ProductType} from '../../../../../shared/generated-types';
-import {CartLineProduct} from '../../../cart/classes/cart';
+import {type ProductType} from '../../../../../shared/generated-types';
+import {type CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
 import {RouterLink} from '@angular/router';
 import {MatButton} from '@angular/material/button';

@@ -6,14 +6,14 @@ import {
     NaturalFixedButtonDetailComponent,
     NaturalIconDirective,
     NaturalLinkableTabDirective,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
-import {CreateFile} from '../../../shared/generated-types';
-import {map, Observable, of, switchMap} from 'rxjs';
+import {type CreateFile} from '../../../shared/generated-types';
+import {map, type Observable, of, switchMap} from 'rxjs';
 import {MatDivider} from '@angular/material/divider';
 import {MatInput} from '@angular/material/input';
 import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';

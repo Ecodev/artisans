@@ -1,34 +1,34 @@
 import {Injectable} from '@angular/core';
-import {ValidatorFn, Validators} from '@angular/forms';
+import {type ValidatorFn, Validators} from '@angular/forms';
 import {
-    FormAsyncValidators,
-    FormValidators,
-    Literal,
+    type FormAsyncValidators,
+    type FormValidators,
+    type Literal,
     NaturalAbstractModelService,
     signedMoney,
     unique,
 } from '@ecodev/natural';
 import {
-    CreateProduct,
-    CreateProductVariables,
-    DeleteProducts,
-    DeleteProductsVariables,
-    ProductInput,
-    ProductPartialInput,
-    ProductQuery,
-    ProductQueryVariables,
-    ProductSorting,
+    type CreateProduct,
+    type CreateProductVariables,
+    type DeleteProducts,
+    type DeleteProductsVariables,
+    type ProductInput,
+    type ProductPartialInput,
+    type ProductQuery,
+    type ProductQueryVariables,
+    type ProductSorting,
     ProductSortingField,
-    ProductsQuery,
-    ProductsQueryVariables,
+    type ProductsQuery,
+    type ProductsQueryVariables,
     ProductType,
     SortingOrder,
-    UpdateProduct,
-    UpdateProductVariables,
+    type UpdateProduct,
+    type UpdateProductVariables,
 } from '../../../shared/generated-types';
 import {xorValidator} from '../../../shared/validators';
 import {createProduct, deleteProducts, productQuery, productsQuery, updateProduct} from './product.queries';
-import {Observable} from 'rxjs';
+import {type Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',

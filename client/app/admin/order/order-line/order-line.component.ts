@@ -3,9 +3,9 @@ import {
     NaturalErrorMessagePipe,
     NaturalSelectComponent,
     NaturalSelectEnumComponent,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
 } from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';

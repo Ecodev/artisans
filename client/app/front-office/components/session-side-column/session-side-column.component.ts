@@ -1,9 +1,9 @@
-import {Component, inject, input, OnInit} from '@angular/core';
+import {Component, inject, input, type OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
 import {UserService} from '../../../admin/users/services/user.service';
-import {SessionsQueryVariables} from '../../../shared/generated-types';
+import {type SessionsQueryVariables} from '../../../shared/generated-types';
 import {MatButton} from '@angular/material/button';
 
 @Component({

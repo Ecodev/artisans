@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Validators} from '@angular/forms';
-import {FormAsyncValidators, FormValidators, NaturalAbstractModelService, unique} from '@ecodev/natural';
+import {type FormAsyncValidators, type FormValidators, NaturalAbstractModelService, unique} from '@ecodev/natural';
 import {
-    CreateSubscription,
-    CreateSubscriptionVariables,
-    DeleteSubscriptions,
-    DeleteSubscriptionsVariables,
+    type CreateSubscription,
+    type CreateSubscriptionVariables,
+    type DeleteSubscriptions,
+    type DeleteSubscriptionsVariables,
     ProductType,
-    SubscriptionInput,
-    SubscriptionQuery,
-    SubscriptionQueryVariables,
-    SubscriptionsQuery,
-    SubscriptionsQueryVariables,
-    UpdateSubscription,
-    UpdateSubscriptionVariables,
+    type SubscriptionInput,
+    type SubscriptionQuery,
+    type SubscriptionQueryVariables,
+    type SubscriptionsQuery,
+    type SubscriptionsQueryVariables,
+    type UpdateSubscription,
+    type UpdateSubscriptionVariables,
 } from '../../../../../shared/generated-types';
 import {
     createSubscription,

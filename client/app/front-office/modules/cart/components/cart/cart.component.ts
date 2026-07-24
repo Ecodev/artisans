@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {
     NaturalAlertService,
@@ -7,8 +7,8 @@ import {
     NaturalIconDirective,
 } from '@ecodev/natural';
 import {CurrencyService} from '../../../../../shared/services/currency.service';
-import {ProductType} from '../../../../../shared/generated-types';
-import {Cart, CartLineProduct} from '../../classes/cart';
+import {type ProductType} from '../../../../../shared/generated-types';
+import {type Cart, type CartLineProduct} from '../../classes/cart';
 import {CartService} from '../../services/cart.service';
 import {GlobalCartService} from '../../services/global-cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';

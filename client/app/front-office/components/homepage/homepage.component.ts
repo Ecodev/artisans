@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     formatIsoDate,
@@ -13,16 +13,16 @@ import {NewsService} from '../../../admin/newses/services/news.service';
 import {ProductService} from '../../../admin/products/services/product.service';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
-    CurrentUserForProfileQuery,
+    type CurrentUserForProfileQuery,
     EventSortingField,
-    EventsQuery,
-    EventsQueryVariables,
-    NewsesQuery,
-    NewsesQueryVariables,
+    type EventsQuery,
+    type EventsQueryVariables,
+    type NewsesQuery,
+    type NewsesQueryVariables,
     NewsSortingField,
     ProductSortingField,
-    ProductsQuery,
-    ProductsQueryVariables,
+    type ProductsQuery,
+    type ProductsQueryVariables,
     SortingOrder,
 } from '../../../shared/generated-types';
 import {PermissionsService} from '../../../shared/services/permissions.service';

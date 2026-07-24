@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
-import {formatIsoDateTime, FormValidators, Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {formatIsoDateTime, type FormValidators, type Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    CreateNews,
-    CreateNewsVariables,
-    DeleteNewses,
-    DeleteNewsesVariables,
-    NewsesQuery,
-    NewsesQueryVariables,
-    NewsInput,
-    NewsPartialInput,
-    NewsQuery,
-    NewsQueryVariables,
-    UpdateNews,
-    UpdateNewsVariables,
+    type CreateNews,
+    type CreateNewsVariables,
+    type DeleteNewses,
+    type DeleteNewsesVariables,
+    type NewsesQuery,
+    type NewsesQueryVariables,
+    type NewsInput,
+    type NewsPartialInput,
+    type NewsQuery,
+    type NewsQueryVariables,
+    type UpdateNews,
+    type UpdateNewsVariables,
 } from '../../../shared/generated-types';
 import {createNews, deleteNewses, newsesQuery, newsQuery, updateNews} from './news.queries';
 import {Validators} from '@angular/forms';

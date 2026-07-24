@@ -4,19 +4,19 @@ import {
     NaturalAlertService,
     NaturalErrorMessagePipe,
     NaturalIconDirective,
-    NaturalSearchSelections,
+    type NaturalSearchSelections,
     toNavigationParameters,
 } from '@ecodev/natural';
 import {NgTemplateOutlet} from '@angular/common';
-import {AfterViewInit, Component, DestroyRef, ElementRef, inject, OnInit} from '@angular/core';
+import {type AfterViewInit, Component, DestroyRef, ElementRef, inject, type OnInit} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {differenceBy} from 'es-toolkit';
 import {filter, finalize} from 'rxjs/operators';
 import {UserService} from '../admin/users/services/user.service';
-import {CurrentUserForProfileQuery, UserRole} from '../shared/generated-types';
+import {type CurrentUserForProfileQuery, UserRole} from '../shared/generated-types';
 import {Currency, CurrencyService} from '../shared/services/currency.service';
-import {MenuItem, NavigationService} from './services/navigation.service';
+import {type MenuItem, NavigationService} from './services/navigation.service';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
 import {MatInput} from '@angular/material/input';

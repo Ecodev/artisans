@@ -1,5 +1,5 @@
-import {Routes} from '@angular/router';
-import {NaturalSeo} from '@ecodev/natural';
+import {type Routes} from '@angular/router';
+import {type NaturalSeo} from '@ecodev/natural';
 import {resolveUserByToken} from '../admin/users/services/userByToken.resolver';
 import {ChangePasswordComponent} from './components/change-password/change-password.component';
 import {RegisterConfirmComponent} from './components/register/register-confirm.component';

@@ -1,9 +1,9 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {Component, inject, type OnInit} from '@angular/core';
+import {MatDialog, type MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {keyBy} from 'es-toolkit';
-import {ProductType, SubscriptionsQuery} from '../../../../../shared/generated-types';
+import {ProductType, type SubscriptionsQuery} from '../../../../../shared/generated-types';
 import {EmailsComponent} from '../emails/emails.component';
 import {SubscriptionService} from './subscription.service';
 import {GlobalCartService} from '../../../cart/services/global-cart.service';

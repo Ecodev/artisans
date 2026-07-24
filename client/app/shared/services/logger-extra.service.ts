@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
-import {NaturalLoggerExtra, NaturalLoggerType} from '@ecodev/natural';
-import {Observable, of} from 'rxjs';
+import {type NaturalLoggerExtra, type NaturalLoggerType} from '@ecodev/natural';
+import {type Observable, of} from 'rxjs';
 import {UserService} from '../../admin/users/services/user.service';
 import {localConfig} from '../generated-config';
 

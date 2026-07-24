@@ -1,7 +1,7 @@
 import {inject} from '@angular/core';
-import {last, Observable, switchMap} from 'rxjs';
+import {last, type Observable, switchMap} from 'rxjs';
 import {ErrorService} from '@ecodev/natural';
-import {CurrentUserForProfileQuery} from '../../../shared/generated-types';
+import {type CurrentUserForProfileQuery} from '../../../shared/generated-types';
 import {UserService} from './user.service';
 
 export function resolveViewer(): Observable<CurrentUserForProfileQuery['viewer']> {

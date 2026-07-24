@@ -1,5 +1,5 @@
 import {
-    IEnum,
+    type IEnum,
     NaturalAbstractDetail,
     NaturalDetailHeaderComponent,
     NaturalEnumPipe,
@@ -7,14 +7,14 @@ import {
     NaturalFixedButtonDetailComponent,
     NaturalRelationsComponent,
     NaturalSelectEnumComponent,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     NaturalStampComponent,
     NaturalTableButtonComponent,
     NaturalTimeAgoPipe,
 } from '@ecodev/natural';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {AsyncPipe, DatePipe} from '@angular/common';
-import {UserRole} from '../../../shared/generated-types';
+import {type UserRole} from '../../../shared/generated-types';
 import {SessionService} from '../../sessions/services/session.service';
 import {UserService} from '../services/user.service';
 import {RouterOutlet} from '@angular/router';

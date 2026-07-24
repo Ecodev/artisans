@@ -1,5 +1,5 @@
-import {ProductQuery, ProductType} from '../../../../shared/generated-types';
-import {Cart, CartLine} from './cart';
+import {type ProductQuery, ProductType} from '../../../../shared/generated-types';
+import {Cart, type CartLine} from './cart';
 import {CartCollectionService} from '../services/cart-collection.service';
 import {memorySessionStorageProvider} from '@ecodev/natural';
 import {TestBed} from '@angular/core/testing';

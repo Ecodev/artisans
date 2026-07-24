@@ -1,5 +1,5 @@
 import {HttpBatchLink, HttpLink} from 'apollo-angular/http';
-import {ApolloClient, ApolloLink, InMemoryCache} from '@apollo/client';
+import {type ApolloClient, type ApolloLink, InMemoryCache} from '@apollo/client';
 import {
     createErrorLink,
     createHttpLink,
@@ -8,7 +8,7 @@ import {
     NetworkActivityService,
 } from '@ecodev/natural';
 import {APOLLO_OPTIONS} from 'apollo-angular';
-import {inject, PLATFORM_ID, Provider} from '@angular/core';
+import {inject, PLATFORM_ID, type Provider} from '@angular/core';
 import {localConfig} from '../generated-config';
 
 export const apolloDefaultOptions: ApolloClient.Options['defaultOptions'] = {

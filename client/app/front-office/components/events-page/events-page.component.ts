@@ -1,5 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {NaturalCapitalizePipe, PaginationInput} from '@ecodev/natural';
+import {Component, inject, type OnInit} from '@angular/core';
+import {NaturalCapitalizePipe, type PaginationInput} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
 import {PermissionsService} from '../../../shared/services/permissions.service';

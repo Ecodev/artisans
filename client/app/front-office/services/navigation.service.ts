@@ -1,11 +1,11 @@
 import {createGlobalPositionStrategy, createOverlayRef, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
-import {DOCUMENT, ElementRef, inject, Injectable, Injector, StaticProvider} from '@angular/core';
-import {NavigationEnd, Router, RouterLink} from '@angular/router';
+import {DOCUMENT, type ElementRef, inject, Injectable, Injector, type StaticProvider} from '@angular/core';
+import {NavigationEnd, Router, type RouterLink} from '@angular/router';
 import {cloneDeep} from 'es-toolkit';
-import {merge, Observable, Subject} from 'rxjs';
+import {merge, type Observable, Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {APP_MENU_DATA, MenuComponent, MenuDropdownData} from '../components/menu/menu.component';
+import {APP_MENU_DATA, MenuComponent, type MenuDropdownData} from '../components/menu/menu.component';
 
 export type MenuItem = {
     display: string;

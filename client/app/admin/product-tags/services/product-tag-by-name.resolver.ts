@@ -1,8 +1,8 @@
 import {inject} from '@angular/core';
-import {ActivatedRouteSnapshot} from '@angular/router';
-import {last, Observable} from 'rxjs';
+import {type ActivatedRouteSnapshot} from '@angular/router';
+import {last, type Observable} from 'rxjs';
 import {ErrorService} from '@ecodev/natural';
-import {ProductTagsQuery} from '../../../shared/generated-types';
+import {type ProductTagsQuery} from '../../../shared/generated-types';
 import {ProductTagService} from './product-tag.service';
 
 /**

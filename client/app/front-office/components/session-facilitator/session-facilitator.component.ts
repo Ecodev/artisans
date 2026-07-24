@@ -1,7 +1,12 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
-import {SortingOrder, UserSortingField, UsersQuery, UsersQueryVariables} from '../../../shared/generated-types';
+import {
+    SortingOrder,
+    UserSortingField,
+    type UsersQuery,
+    type UsersQueryVariables,
+} from '../../../shared/generated-types';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 
 @Component({

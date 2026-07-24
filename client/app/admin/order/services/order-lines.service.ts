@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {ValidatorFn, Validators} from '@angular/forms';
-import {FormValidators, integer, NaturalAbstractModelService} from '@ecodev/natural';
+import {type ValidatorFn, Validators} from '@angular/forms';
+import {type FormValidators, integer, NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    OrderLineInput,
-    OrderLineQuery,
-    OrderLineQueryVariables,
-    OrderLinesQuery,
-    OrderLinesQueryVariables,
+    type OrderLineInput,
+    type OrderLineQuery,
+    type OrderLineQueryVariables,
+    type OrderLinesQuery,
+    type OrderLinesQueryVariables,
     ProductType,
-    UpdateOrderLine,
-    UpdateOrderLineVariables,
+    type UpdateOrderLine,
+    type UpdateOrderLineVariables,
 } from '../../../shared/generated-types';
 import {orderLineQuery, orderLinesQuery, updateOrderLine} from './order-lines.queries';
 import {xorValidator} from '../../../shared/validators';

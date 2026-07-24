@@ -10,10 +10,10 @@ import {
     NaturalRelationsComponent,
     NaturalSelectComponent,
     NaturalSelectEnumComponent,
-    NaturalSeoResolveData,
+    type NaturalSeoResolveData,
     NaturalStampComponent,
     NaturalTableButtonComponent,
-    WithId,
+    type WithId,
 } from '@ecodev/natural';
 import {Component, inject} from '@angular/core';
 import {XorErrorStateMatcher} from '../../../shared/validators';
@@ -21,8 +21,8 @@ import {FilesService} from '../../files/services/files.service';
 import {ProductTagService} from '../../product-tags/services/product-tag.service';
 import {ImageService} from '../services/image.service';
 import {ProductService} from '../services/product.service';
-import {map, Observable, of, switchMap} from 'rxjs';
-import {CreateFile, CreateImage, ProductPartialInput} from '../../../shared/generated-types';
+import {map, type Observable, of, switchMap} from 'rxjs';
+import {type CreateFile, type CreateImage, type ProductPartialInput} from '../../../shared/generated-types';
 import {OrderLinesComponent} from '../../order/order-lines/order-lines.component';
 import {MatDivider} from '@angular/material/divider';
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from '@angular/material/datepicker';

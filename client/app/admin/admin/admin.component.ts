@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     NaturalIconDirective,
@@ -6,7 +6,7 @@ import {
     NaturalSidenavContainerComponent,
     NaturalSidenavContentComponent,
 } from '@ecodev/natural';
-import {CurrentUserForProfileQuery} from '../../shared/generated-types';
+import {type CurrentUserForProfileQuery} from '../../shared/generated-types';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {
     MatAccordion,

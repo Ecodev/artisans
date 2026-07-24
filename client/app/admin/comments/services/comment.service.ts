@@ -1,17 +1,17 @@
 import {Injectable} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {
-    CommentInput,
-    CommentQuery,
-    CommentQueryVariables,
-    CommentsQuery,
-    CommentsQueryVariables,
-    CreateComment,
-    CreateCommentVariables,
-    DeleteComments,
-    DeleteCommentsVariables,
-    UpdateComment,
-    UpdateCommentVariables,
+    type CommentInput,
+    type CommentQuery,
+    type CommentQueryVariables,
+    type CommentsQuery,
+    type CommentsQueryVariables,
+    type CreateComment,
+    type CreateCommentVariables,
+    type DeleteComments,
+    type DeleteCommentsVariables,
+    type UpdateComment,
+    type UpdateCommentVariables,
 } from '../../../shared/generated-types';
 import {commentQuery, commentsQuery, createComment, deleteComments, updateComment} from './comment.queries';
 

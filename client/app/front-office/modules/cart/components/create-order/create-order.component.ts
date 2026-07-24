@@ -1,13 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe} from '@ecodev/natural';
 import {finalize} from 'rxjs/operators';
 import {UserService} from '../../../../../admin/users/services/user.service';
-import {CreateOrder, PaymentMethod} from '../../../../../shared/generated-types';
-import {Currency, CurrencyService} from '../../../../../shared/services/currency.service';
+import {type CreateOrder, PaymentMethod} from '../../../../../shared/generated-types';
+import {type Currency, CurrencyService} from '../../../../../shared/services/currency.service';
 import {NavigationService} from '../../../../services/navigation.service';
-import {Cart} from '../../classes/cart';
+import {type Cart} from '../../classes/cart';
 import {CartService} from '../../services/cart.service';
 import {CartCollectionService} from '../../services/cart-collection.service';
 import {DatatransService} from '../../services/datatrans.service';

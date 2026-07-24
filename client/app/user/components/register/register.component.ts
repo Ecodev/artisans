@@ -7,10 +7,10 @@ import {
     validateAllFormControls,
 } from '@ecodev/natural';
 import {Apollo, gql} from 'apollo-angular';
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, inject, type OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {Register, RegisterVariables} from '../../../shared/generated-types';
+import {type FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {type Register, type RegisterVariables} from '../../../shared/generated-types';
 import {MatButton} from '@angular/material/button';
 import {AddressComponent} from '../../../shared/components/address/address.component';
 import {PasswordComponent} from '../password/password.component';

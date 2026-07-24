@@ -1,18 +1,18 @@
 import {inject, Injectable} from '@angular/core';
-import {Literal, NaturalAbstractModelService} from '@ecodev/natural';
-import {Observable} from 'rxjs';
+import {type Literal, NaturalAbstractModelService} from '@ecodev/natural';
+import {type Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
-    CreateOrder,
-    CreateOrderVariables,
-    OrderInput,
-    OrderQuery,
-    OrderQueryVariables,
-    OrdersQuery,
-    OrdersQueryVariables,
-    OrderStatus,
-    UpdateOrderStatus,
-    UpdateOrderStatusVariables,
+    type CreateOrder,
+    type CreateOrderVariables,
+    type OrderInput,
+    type OrderQuery,
+    type OrderQueryVariables,
+    type OrdersQuery,
+    type OrdersQueryVariables,
+    type OrderStatus,
+    type UpdateOrderStatus,
+    type UpdateOrderStatusVariables,
 } from '../../../shared/generated-types';
 import {OrderLineService} from './order-lines.service';
 import {createOrder, orderQuery, ordersQuery, updateOrderStatus} from './order.queries';

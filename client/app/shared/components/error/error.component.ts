@@ -4,7 +4,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 import {NaturalIconDirective} from '@ecodev/natural';
 import {MatIcon} from '@angular/material/icon';
-import {GraphQLFormattedError} from 'graphql';
+import {type GraphQLFormattedError} from 'graphql';
 
 @Component({
     selector: 'app-error',

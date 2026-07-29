@@ -1,5 +1,4 @@
 import {execFileSync, execSync} from 'node:child_process';
-import {DocumentNode} from '@apollo/client/core';
 import {Page, Response} from '@playwright/test';
 import {DocumentNode, getOperationAST} from 'graphql';
 

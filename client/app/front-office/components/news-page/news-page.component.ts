@@ -3,22 +3,13 @@ import {RouterLink} from '@angular/router';
 import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {PermissionsService} from '../../../shared/services/permissions.service';
-import {CommentListComponent} from '../comment-list/comment-list.component';
 import {MatIcon} from '@angular/material/icon';
 import {MatMiniFabButton} from '@angular/material/button';
 import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'app-news-page',
-    imports: [
-        DatePipe,
-        RouterLink,
-        MatIcon,
-        NaturalIconDirective,
-        CommentListComponent,
-        NaturalCapitalizePipe,
-        MatMiniFabButton,
-    ],
+    imports: [DatePipe, RouterLink, MatIcon, NaturalIconDirective, NaturalCapitalizePipe, MatMiniFabButton],
     templateUrl: './news-page.component.html',
     styleUrl: './news-page.component.scss',
 })

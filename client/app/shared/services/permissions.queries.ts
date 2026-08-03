@@ -4,9 +4,6 @@ export const permissionsQuery = gql`
     query PermissionsQuery {
         permissions {
             crud {
-                comment {
-                    create
-                }
                 configuration {
                     create
                 }

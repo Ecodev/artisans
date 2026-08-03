@@ -2,9 +2,6 @@ import {type Routes} from '@angular/router';
 import {NaturalDialogTriggerComponent, type NaturalDialogTriggerRoutingData, type NaturalSeo} from '@ecodev/natural';
 import {canActivateAdministration} from '../shared/guards/administration.guard';
 import {AdminComponent} from './admin/admin.component';
-import {CommentComponent} from './comments/comment/comment.component';
-import {CommentsComponent} from './comments/comments/comments.component';
-import {resolveComment} from './comments/services/comment.resolver';
 import {EventComponent} from './events/event/event.component';
 import {EventsComponent} from './events/events/events.component';
 import {resolveEvent} from './events/services/event.resolver';
@@ -270,40 +267,6 @@ export const routes: Routes = [
                         path: ':sessionId', // last
                         component: SessionComponent,
                         resolve: {model: resolveSession},
-                        data: {
-                            seo: {
-                                resolve: true,
-                            } satisfies NaturalSeo,
-                        },
-                    },
-                ],
-            },
-            {
-                path: 'comment', // Separated from other similar routes because of https://github.com/angular/angular/issues/27674
-                component: CommentsComponent,
-                data: {
-                    seo: {
-                        title: 'Commentaires',
-                    } satisfies NaturalSeo,
-                },
-            },
-            {
-                path: 'comment',
-                children: [
-                    {
-                        path: 'new',
-                        component: CommentComponent,
-                        resolve: {model: resolveComment},
-                        data: {
-                            seo: {
-                                title: 'Nouveau commentaire',
-                            } satisfies NaturalSeo,
-                        },
-                    },
-                    {
-                        path: ':commentId', // last
-                        component: CommentComponent,
-                        resolve: {model: resolveComment},
                         data: {
                             seo: {
                                 resolve: true,

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Application\Acl;
 
-use Application\Model\Comment;
 use Application\Model\Configuration;
 use Application\Model\Country;
 use Application\Model\Event;
@@ -35,7 +34,6 @@ class Acl extends \Ecodev\Felix\Acl\Acl
         $this->addRole(User::ROLE_FACILITATOR, User::ROLE_MEMBER);
         $this->addRole(User::ROLE_ADMINISTRATOR, User::ROLE_FACILITATOR);
 
-        $comment = $this->createModelResource(Comment::class);
         $configuration = $this->createModelResource(Configuration::class);
         $country = $this->createModelResource(Country::class);
         $event = $this->createModelResource(Event::class);
@@ -53,7 +51,7 @@ class Acl extends \Ecodev\Felix\Acl\Acl
         $user = $this->createModelResource(User::class);
         $facilitatorDocument = $this->createModelResource(FacilitatorDocument::class);
 
-        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country, $comment], ['read']);
+        $this->allow(User::ROLE_ANONYMOUS, [$configuration, $event, $news, $session, $product, $subscription, $productTag, $image, $country], ['read']);
 
         $this->allow(User::ROLE_MEMBER, [$user], ['read']);
         $this->allow(User::ROLE_MEMBER, [$user], ['update'], new IsMyself());
@@ -61,13 +59,12 @@ class Acl extends \Ecodev\Felix\Acl\Acl
         $this->allow(User::ROLE_MEMBER, [$message], ['read']);
         $this->allow(User::ROLE_MEMBER, [$order, $orderLine], ['read']);
         $this->allow(User::ROLE_MEMBER, [$order], ['create']);
-        $this->allow(User::ROLE_MEMBER, [$comment], ['create']); // if grant update, care to GUI button that sends to admin
 
         $this->allow(User::ROLE_FACILITATOR, [$file], ['read', 'update']);
         $this->allow(User::ROLE_FACILITATOR, [$user], ['update']);
         $this->allow(User::ROLE_FACILITATOR, [$facilitatorDocument], ['read']);
 
-        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $comment, $facilitatorDocument], ['create', 'update', 'delete']);
+        $this->allow(User::ROLE_ADMINISTRATOR, [$file, $event, $news, $session, $subscription, $product, $productTag, $country, $image, $facilitatorDocument], ['create', 'update', 'delete']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$orderLine], ['update']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$configuration, $organization], ['create']);
         $this->allow(User::ROLE_ADMINISTRATOR, [$user], ['create', 'delete']);

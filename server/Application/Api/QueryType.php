@@ -11,7 +11,6 @@ use Application\Api\Field\Query\UserByToken;
 use Application\Api\Field\Query\UserRolesAvailable;
 use Application\Api\Field\Query\Viewer;
 use Application\Api\Field\Standard;
-use Application\Model\Comment;
 use Application\Model\Country;
 use Application\Model\Event;
 use Application\Model\FacilitatorDocument;
@@ -54,7 +53,6 @@ class QueryType extends ObjectType
             Standard::buildQuery(Subscription::class),
             Standard::buildQuery(User::class),
             Standard::buildQuery(Country::class),
-            Standard::buildQuery(Comment::class),
             Standard::buildQuery(FacilitatorDocument::class),
         );
 

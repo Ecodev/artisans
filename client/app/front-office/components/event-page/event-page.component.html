@@ -18,11 +18,4 @@
             <div class="mat-font-title-lg">{{ data.model.place }}</div>
         </div>
     </div>
-
-    <div class="nat-vertical nat-gap-30">
-        <h2 class="mat-font-headline-sm">Commentaires</h2>
-        @if (isUpdatePage()) {
-            <app-comment-list [event]="data.model" />
-        }
-    </div>
 </div>

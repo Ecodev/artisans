@@ -52,10 +52,6 @@ const config: CodegenConfig = {
             // All IDs
             // Ideally we should not use `any` at all, but we want to be able
             // to use either a string or an entire subobject.
-            CommentID: {
-                input: 'string | any',
-                output: 'string',
-            },
             CountryID: {
                 input: 'string | any',
                 output: 'string',

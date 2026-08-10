@@ -2,7 +2,7 @@
     <div class="bloc">
         <div class="mat-font-headline-sm title">{{ form.get('title')?.value }}</div>
         <div class="bloc-description mat-font-body-md">{{ form.get('description')?.value }}</div>
-        <a matButton="filled" [routerLink]="$safeNavigationMigration(form.get('buttonLink')?.value)">
+        <a matButton="filled" [routerLink]="form.get('buttonLink')?.value">
             {{ form.get('buttonLabel')?.value }}
         </a>
         @if ((permissionsService.crud | async)?.configuration.create) {

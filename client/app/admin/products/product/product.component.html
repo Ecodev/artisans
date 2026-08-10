@@ -117,7 +117,7 @@
                             formControlName="review"
                             placeholder="Revue dont est extrait cet article"
                             [service]="service"
-                            [navigateTo]="['/admin/product', $safeNavigationMigration(form.get('event')?.value?.id)]"
+                            [navigateTo]="['/admin/product', form.get('event')?.value?.id]"
                             [filter]="{
                                 groups: [
                                     {

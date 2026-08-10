@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalCapitalizePipe, type PaginationInput} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
@@ -10,6 +10,7 @@ import {DatePipe} from '@angular/common';
     imports: [DatePipe, RouterLink, NaturalCapitalizePipe],
     templateUrl: './newses-page.component.html',
     styleUrl: './newses-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class NewsesPageComponent extends AbstractInfiniteLoadList<NewsService> {
     protected override defaultPagination: Required<PaginationInput> = {

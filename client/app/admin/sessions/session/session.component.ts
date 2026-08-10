@@ -11,7 +11,7 @@ import {
     NaturalStampComponent,
     NaturalTableButtonComponent,
 } from '@ecodev/natural';
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormArray, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserService} from '../../users/services/user.service';
 import {SessionService} from '../services/session.service';
@@ -59,6 +59,7 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     ],
     templateUrl: './session.component.html',
     styleUrl: './session.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SessionComponent extends NaturalAbstractDetail<SessionService, NaturalSeoResolveData> implements OnInit {
     protected readonly userService = inject(UserService);

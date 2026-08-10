@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {MatButton} from '@angular/material/button';
 
@@ -7,5 +7,6 @@ import {MatButton} from '@angular/material/button';
     imports: [MatButton, RouterLink],
     templateUrl: './bns.component.html',
     styleUrl: './bns.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class BnsComponent {}

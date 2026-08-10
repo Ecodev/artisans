@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
     NaturalAbstractList,
     NaturalCapitalizePipe,
@@ -37,6 +37,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     ],
     templateUrl: './purchases.component.html',
     styleUrl: './purchases.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PurchasesComponent extends NaturalAbstractList<PurchaseService> implements OnInit {
     private readonly naturalFileService = inject(NaturalFileService);

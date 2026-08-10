@@ -15,7 +15,7 @@ import {
     NaturalTableButtonComponent,
     type WithId,
 } from '@ecodev/natural';
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {XorErrorStateMatcher} from '../../../shared/validators';
 import {FilesService} from '../../files/services/files.service';
 import {ProductTagService} from '../../product-tags/services/product-tag.service';
@@ -76,6 +76,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
     templateUrl: './product.component.html',
     styleUrl: './product.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ProductComponent extends NaturalAbstractDetail<ProductService, NaturalSeoResolveData> {
     protected readonly productTagService = inject(ProductTagService);

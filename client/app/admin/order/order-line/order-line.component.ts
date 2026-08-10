@@ -5,7 +5,7 @@ import {
     NaturalSelectEnumComponent,
     type NaturalSeoResolveData,
 } from '@ecodev/natural';
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ProductService} from '../../products/services/product.service';
 import {OrderLineService} from '../services/order-lines.service';
@@ -34,6 +34,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
     templateUrl: './order-line.component.html',
     styleUrl: './order-line.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class OrderLineComponent
     extends NaturalAbstractDetail<OrderLineService, NaturalSeoResolveData>

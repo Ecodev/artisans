@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {type PurchasesQuery, type PurchasesQueryVariables} from '../../../shared/generated-types';
 import {purchasesQuery} from './purchase.queries';
@@ -7,9 +7,7 @@ import {purchasesQuery} from './purchase.queries';
  * A special service that accept Product variables but return OrderLine that were
  * purchased by current user.
  */
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class PurchaseService extends NaturalAbstractModelService<
     never,
     never,

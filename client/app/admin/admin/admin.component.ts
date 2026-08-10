@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {
     NaturalIconDirective,
@@ -40,6 +40,7 @@ import {MatToolbar} from '@angular/material/toolbar';
     ],
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class AdminComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);

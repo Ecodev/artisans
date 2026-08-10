@@ -7,7 +7,7 @@ import {
     validateAllFormControls,
 } from '@ecodev/natural';
 import {Apollo, gql} from 'apollo-angular';
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {type FormGroup, FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {type Register, type RegisterVariables} from '../../../shared/generated-types';
@@ -39,6 +39,7 @@ import {MatError, MatFormField, MatLabel, MatPrefix} from '@angular/material/for
     ],
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class RegisterComponent implements OnInit {
     protected readonly apollo = inject(Apollo);

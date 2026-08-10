@@ -9,7 +9,7 @@ import {
     type NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {FilesService} from '../../files/services/files.service';
 import {FacilitatorDocumentsService} from '../services/facilitator-documents.service';
 import {type CreateFile} from '../../../shared/generated-types';
@@ -48,6 +48,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
     templateUrl: './facilitator-document.component.html',
     styleUrl: './facilitator-document.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class FacilitatorDocumentComponent extends NaturalAbstractDetail<
     FacilitatorDocumentsService,

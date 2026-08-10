@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {NaturalAlertService, type NaturalDialogTriggerProvidedData, NaturalSelectEnumComponent} from '@ecodev/natural';
 import {CurrencyPipe, DatePipe} from '@angular/common';
@@ -29,6 +29,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     ],
     templateUrl: './order.component.html',
     styleUrl: './order.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class OrderComponent {
     protected readonly dialogData = inject<NaturalDialogTriggerProvidedData<never>>(MAT_DIALOG_DATA);

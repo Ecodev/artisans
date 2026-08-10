@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
@@ -32,6 +32,7 @@ import {AsyncPipe} from '@angular/common';
     ],
     templateUrl: './profile.component.html',
     styleUrl: './profile.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ProfileComponent implements OnInit {
     protected readonly userService = inject(UserService);

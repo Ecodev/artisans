@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {type Literal, NaturalIconDirective, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {groupBy, sortBy} from 'es-toolkit';
 import {FacilitatorDocumentsService} from '../../../admin/facilitator-documents/services/facilitator-documents.service';
@@ -20,6 +20,7 @@ import {KeyValuePipe} from '@angular/common';
     imports: [KeyValuePipe, MatNavList, MatListItem, MatIcon, NaturalIconDirective, SessionSideColumnComponent],
     templateUrl: './session-facilitator-private.component.html',
     styleUrl: './session-facilitator-private.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SessionFacilitatorPrivateComponent implements OnInit {
     protected readonly userService = inject(UserService);

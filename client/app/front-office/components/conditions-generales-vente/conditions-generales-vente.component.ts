@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -6,5 +6,6 @@ import {RouterLink} from '@angular/router';
     imports: [RouterLink],
     templateUrl: './conditions-generales-vente.component.html',
     styleUrl: './conditions-generales-vente.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ConditionsGeneralesVenteComponent {}

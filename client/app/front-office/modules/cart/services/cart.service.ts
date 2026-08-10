@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Service} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
@@ -18,9 +18,7 @@ import {type Cart, type CartLineProduct} from '../classes/cart';
 import {GlobalCartService} from './global-cart.service';
 import {CartCollectionService} from './cart-collection.service';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class CartService {
     private readonly orderService = inject(OrderService);
     private readonly dialogService = inject(MatDialog);

@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {CartService} from '../../modules/cart/services/cart.service';
 import {MatButton} from '@angular/material/button';
 import {RouterLink} from '@angular/router';
@@ -8,6 +8,7 @@ import {RouterLink} from '@angular/router';
     imports: [RouterLink, MatButton],
     templateUrl: './faire-un-don.component.html',
     styleUrl: './faire-un-don.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class FaireUnDonComponent {
     protected readonly cartService = inject(CartService);

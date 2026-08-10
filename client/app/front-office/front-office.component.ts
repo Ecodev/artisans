@@ -8,7 +8,15 @@ import {
     toNavigationParameters,
 } from '@ecodev/natural';
 import {NgTemplateOutlet} from '@angular/common';
-import {type AfterViewInit, Component, DestroyRef, ElementRef, inject, type OnInit} from '@angular/core';
+import {
+    type AfterViewInit,
+    Component,
+    DestroyRef,
+    ElementRef,
+    inject,
+    type OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import {FormsModule, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {differenceBy} from 'es-toolkit';
@@ -62,6 +70,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     ],
     templateUrl: './front-office.component.html',
     styleUrl: './front-office.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class FrontOfficeComponent implements OnInit, AfterViewInit {
     private readonly route = inject(ActivatedRoute);

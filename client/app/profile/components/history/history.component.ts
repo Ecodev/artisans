@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalAbstractList, NaturalEnumPipe, NaturalTableButtonComponent, TypedMatCellDef} from '@ecodev/natural';
 import {OrderService} from '../../../admin/order/services/order.service';
 import {orders} from '../../../shared/natural-search/natural-search-facets';
@@ -45,6 +45,7 @@ import {AsyncPipe, CurrencyPipe, DatePipe} from '@angular/common';
     ],
     templateUrl: './history.component.html',
     styleUrl: './history.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class HistoryComponent extends NaturalAbstractList<OrderService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

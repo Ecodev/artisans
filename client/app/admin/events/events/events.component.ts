@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
     type AvailableColumn,
     NaturalAbstractList,
@@ -56,6 +56,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     ],
     templateUrl: './events.component.html',
     styleUrl: './events.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class EventsComponent extends NaturalAbstractList<EventService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

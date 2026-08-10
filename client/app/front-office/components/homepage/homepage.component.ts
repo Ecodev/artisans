@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     formatIsoDate,
@@ -55,6 +55,7 @@ import {HomeBlockComponent} from '../home-block/home-block.component';
     ],
     templateUrl: './homepage.component.html',
     styleUrl: './homepage.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class HomepageComponent implements OnInit {
     protected readonly userService = inject(UserService);

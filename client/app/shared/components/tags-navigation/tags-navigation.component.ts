@@ -1,4 +1,4 @@
-import {Component, inject, input} from '@angular/core';
+import {Component, inject, input, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {ProductTagService} from '../../../admin/product-tags/services/product-tag.service';
 import {type ProductTagsQuery, type ProductTagsQueryVariables} from '../../generated-types';
@@ -9,6 +9,7 @@ import {RouterLink} from '@angular/router';
     imports: [RouterLink],
     templateUrl: './tags-navigation.component.html',
     styleUrl: './tags-navigation.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class TagsNavigationComponent {
     /**

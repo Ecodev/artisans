@@ -1,11 +1,9 @@
-import {inject, Injectable, type OnDestroy} from '@angular/core';
+import {inject, Service, type OnDestroy} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {CartCollectionService} from './cart-collection.service';
 import {type Subscription} from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class GlobalCartService implements OnDestroy {
     private readonly cartCollectionService = inject(CartCollectionService);
 

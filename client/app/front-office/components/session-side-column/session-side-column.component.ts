@@ -1,4 +1,4 @@
-import {Component, inject, input, type OnInit} from '@angular/core';
+import {Component, inject, input, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {formatIsoDateTime, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {SessionService} from '../../../admin/sessions/services/session.service';
@@ -11,6 +11,7 @@ import {MatButton} from '@angular/material/button';
     imports: [MatButton, RouterLink],
     templateUrl: './session-side-column.component.html',
     styleUrl: './session-side-column.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SessionSideColumnComponent implements OnInit {
     private readonly sessionService = inject(SessionService);

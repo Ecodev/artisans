@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     type AvailableColumn,
@@ -61,6 +61,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     ],
     templateUrl: './sessions.component.html',
     styleUrl: './sessions.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SessionsComponent extends NaturalAbstractList<SessionService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {type FormAsyncValidators, type FormValidators, NaturalAbstractModelService, unique} from '@ecodev/natural';
 import {
@@ -23,9 +23,7 @@ import {
     updateSubscription,
 } from './subscription.queries';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class SubscriptionService extends NaturalAbstractModelService<
     SubscriptionQuery['subscription'],
     SubscriptionQueryVariables,

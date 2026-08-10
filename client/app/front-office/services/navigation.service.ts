@@ -1,6 +1,6 @@
 import {createGlobalPositionStrategy, createOverlayRef, OverlayConfig} from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
-import {DOCUMENT, type ElementRef, inject, Injectable, Injector, type StaticProvider} from '@angular/core';
+import {DOCUMENT, type ElementRef, inject, Service, Injector, type StaticProvider} from '@angular/core';
 import {NavigationEnd, Router, type RouterLink} from '@angular/router';
 import {cloneDeep} from 'es-toolkit';
 import {merge, type Observable, Subject} from 'rxjs';
@@ -15,9 +15,7 @@ export type MenuItem = {
     open?: boolean;
 };
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class NavigationService {
     private readonly injector = inject(Injector);
     private readonly router = inject(Router);

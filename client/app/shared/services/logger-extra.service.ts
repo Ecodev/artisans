@@ -1,12 +1,10 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Service} from '@angular/core';
 import {type NaturalLoggerExtra, type NaturalLoggerType} from '@ecodev/natural';
 import {type Observable, of} from 'rxjs';
 import {UserService} from '../../admin/users/services/user.service';
 import {localConfig} from '../generated-config';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class LoggerExtraService implements NaturalLoggerExtra {
     private readonly userService = inject(UserService);
 

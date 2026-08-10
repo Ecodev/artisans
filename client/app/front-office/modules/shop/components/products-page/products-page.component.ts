@@ -1,4 +1,4 @@
-import {Component, inject, input, type OnInit} from '@angular/core';
+import {Component, inject, input, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     fromUrl,
@@ -49,6 +49,7 @@ export enum ProductsViewMode {
         },
         memorySessionStorageProvider,
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ProductsPageComponent extends AbstractInfiniteLoadList<ProductService> implements OnInit {
     /**

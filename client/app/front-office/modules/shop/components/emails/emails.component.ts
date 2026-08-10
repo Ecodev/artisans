@@ -1,5 +1,5 @@
 import {deliverableEmail, NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject} from '@angular/core';
+import {Component, inject, ChangeDetectionStrategy} from '@angular/core';
 import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import {MatButton} from '@angular/material/button';
@@ -27,6 +27,7 @@ export type EmailsData = {
     ],
     templateUrl: './emails.component.html',
     styleUrl: './emails.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class EmailsComponent {
     protected readonly dialogData = inject<EmailsData>(MAT_DIALOG_DATA);

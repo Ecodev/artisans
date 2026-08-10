@@ -1,6 +1,6 @@
 import {Apollo, onlyCompleteData} from 'apollo-angular';
 import {NetworkStatus} from '@apollo/client';
-import {inject, Injectable} from '@angular/core';
+import {inject, Service} from '@angular/core';
 import {type Observable, Subject} from 'rxjs';
 import {
     type ConfigurationQuery,
@@ -10,9 +10,7 @@ import {
 } from '../../shared/generated-types';
 import {configurationQuery, updateConfiguration} from './configuration.queries';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class ConfigurationService {
     private readonly apollo = inject(Apollo);
 

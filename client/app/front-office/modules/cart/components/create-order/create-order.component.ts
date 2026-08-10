@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {NaturalAlertService, NaturalEnumPipe} from '@ecodev/natural';
@@ -37,6 +37,7 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
     ],
     templateUrl: './create-order.component.html',
     styleUrl: './create-order.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class CreateOrderComponent implements OnInit {
     protected readonly cartService = inject(CartService);

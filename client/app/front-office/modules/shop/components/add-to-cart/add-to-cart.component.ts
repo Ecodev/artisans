@@ -1,4 +1,4 @@
-import {Component, inject, input} from '@angular/core';
+import {Component, inject, input, ChangeDetectionStrategy} from '@angular/core';
 import {type ProductType} from '../../../../../shared/generated-types';
 import {type CartLineProduct} from '../../../cart/classes/cart';
 import {CartService} from '../../../cart/services/cart.service';
@@ -10,6 +10,7 @@ import {MatButton} from '@angular/material/button';
     imports: [MatButton, RouterLink],
     templateUrl: './add-to-cart.component.html',
     styleUrl: './add-to-cart.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class AddToCartComponent {
     private readonly cartService = inject(CartService);

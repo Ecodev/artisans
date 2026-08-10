@@ -1,6 +1,6 @@
 import {BehaviorSubject} from 'rxjs';
 import {type UserLike} from '../../admin/users/services/user.service';
-import {inject, Injectable} from '@angular/core';
+import {inject, Service} from '@angular/core';
 import {SESSION_STORAGE} from '@ecodev/natural';
 
 /**
@@ -11,9 +11,7 @@ export enum Currency {
     EUR = 'EUR',
 }
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class CurrencyService {
     private readonly sessionStorage = inject(SESSION_STORAGE);
 

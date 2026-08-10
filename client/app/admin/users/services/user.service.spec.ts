@@ -7,7 +7,7 @@ import {UserService} from './user.service';
 import {memoryLocalStorageProvider, memorySessionStorageProvider} from '@ecodev/natural';
 import {CartCollectionService} from '../../../front-office/modules/cart/services/cart-collection.service';
 import {type Observable} from 'rxjs';
-import {type PermissionsQuery} from 'client/app/shared/generated-types';
+import {type PermissionsQuery} from '../../../shared/generated-types';
 
 class MockCartCollectionService {
     private clear(): void {

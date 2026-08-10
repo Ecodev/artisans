@@ -1,5 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import {Component, DOCUMENT, inject, type OnInit} from '@angular/core';
+import {Component, DOCUMENT, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     type AvailableColumn,
@@ -75,6 +75,7 @@ import {MatButton} from '@angular/material/button';
     ],
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class UsersComponent extends NaturalAbstractList<UserService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

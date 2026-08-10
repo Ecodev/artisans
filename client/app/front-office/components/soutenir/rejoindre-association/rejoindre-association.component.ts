@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ProductService} from '../../../../admin/products/services/product.service';
 import {type ProductQuery, ProductType} from '../../../../shared/generated-types';
 import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/add-to-cart.component';
@@ -8,6 +8,7 @@ import {AddToCartComponent} from '../../../modules/shop/components/add-to-cart/a
     imports: [AddToCartComponent],
     templateUrl: './rejoindre-association.component.html',
     styleUrl: './rejoindre-association.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class RejoindreAssociationComponent implements OnInit {
     protected readonly productService = inject(ProductService);

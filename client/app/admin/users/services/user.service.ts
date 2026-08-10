@@ -1,5 +1,5 @@
 import {gql} from 'apollo-angular';
-import {DOCUMENT, inject, Injectable, type OnDestroy} from '@angular/core';
+import {DOCUMENT, inject, Service, type OnDestroy} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {
@@ -63,9 +63,7 @@ import {CartCollectionService} from '../../../front-office/modules/cart/services
 
 export type UserLike = UserQuery['user'] | NonNullable<CurrentUserForProfileQuery['viewer']>;
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class UserService
     extends NaturalAbstractModelService<
         UserQuery['user'],

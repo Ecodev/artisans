@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {NaturalAbstractModelService, NaturalQueryVariablesManager} from '@ecodev/natural';
 import {type Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -10,9 +10,7 @@ import {
 } from '../../../shared/generated-types';
 import {productTagQuery, productTagsQuery} from './product-tag.queries';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class ProductTagService extends NaturalAbstractModelService<
     ProductTagQuery['productTag'],
     ProductTagQueryVariables,

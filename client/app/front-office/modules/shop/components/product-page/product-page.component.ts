@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
     NaturalAbstractDetail,
     NaturalCapitalizePipe,
@@ -45,6 +45,7 @@ import {DatePipe} from '@angular/common';
     ],
     templateUrl: './product-page.component.html',
     styleUrl: './product-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ProductPageComponent extends NaturalAbstractDetail<ProductService> implements OnInit {
     private readonly purchaseService = inject(PurchaseService);

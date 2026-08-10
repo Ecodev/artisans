@@ -22,7 +22,7 @@
                             <a
                                 class="product-image"
                                 [routerLink]="['/larevuedurable/article', line.product.id]"
-                                [naturalBackgroundDensity]="`/api/image/${line.product.image?.id}/70`"
+                                [naturalBackgroundDensity]="`/api/image/${$safeNavigationMigration(line.product.image?.id)}/70`"
                             ></a>
                             <a
                                 class="item-body item-button"
@@ -74,7 +74,7 @@
                     <a
                         class="product-image"
                         routerLink="/larevuedurable/abonnements"
-                        [naturalBackgroundDensity]="`/api/image/${cart.subscription.subscription.image?.id}/70`"
+                        [naturalBackgroundDensity]="`/api/image/${$safeNavigationMigration(cart.subscription.subscription.image?.id)}/70`"
                     ></a>
                     <a routerLink="/larevuedurable/abonnements" matButton class="item-body item-button"
                         >{{ cart.subscription.subscription.name }},{{

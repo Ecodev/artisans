@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {
@@ -14,6 +14,7 @@ import {SessionSideColumnComponent} from '../session-side-column/session-side-co
     imports: [SessionSideColumnComponent],
     templateUrl: './session-facilitator.component.html',
     styleUrl: './session-facilitator.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SessionFacilitatorComponent implements OnInit {
     protected readonly userService = inject(UserService);

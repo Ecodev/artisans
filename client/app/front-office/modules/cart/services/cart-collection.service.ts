@@ -1,12 +1,10 @@
 import {SESSION_STORAGE} from '@ecodev/natural';
 import {Currency} from '../../../../shared/services/currency.service';
-import {inject, Injectable} from '@angular/core';
+import {inject, Service} from '@angular/core';
 import {Cart} from '../classes/cart';
 import {Subject} from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class CartCollectionService {
     private readonly storage = inject(SESSION_STORAGE);
 

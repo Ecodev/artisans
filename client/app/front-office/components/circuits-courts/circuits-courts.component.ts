@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NaturalSrcDensityDirective} from '@ecodev/natural';
 
@@ -7,5 +7,6 @@ import {NaturalSrcDensityDirective} from '@ecodev/natural';
     imports: [RouterLink, NaturalSrcDensityDirective],
     templateUrl: './circuits-courts.component.html',
     styleUrl: './circuits-courts.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class CircuitsCourtsComponent {}

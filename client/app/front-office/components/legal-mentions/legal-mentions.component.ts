@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -6,5 +6,6 @@ import {RouterLink} from '@angular/router';
     imports: [RouterLink],
     templateUrl: './legal-mentions.component.html',
     styleUrl: './legal-mentions.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class LegalMentionsComponent {}

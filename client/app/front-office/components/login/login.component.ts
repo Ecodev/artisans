@@ -1,5 +1,5 @@
 import {deliverableEmail, ifValid, NaturalErrorMessagePipe} from '@ecodev/natural';
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {UserService} from '../../../admin/users/services/user.service';
@@ -30,6 +30,7 @@ import {MatIcon} from '@angular/material/icon';
     ],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class LoginComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);

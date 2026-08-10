@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {Validators} from '@angular/forms';
 import {type FormValidators, type Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
@@ -19,9 +19,7 @@ import {
 import {createSession, deleteSessions, sessionQuery, sessionsQuery, updateSession} from './session.queries';
 import {type Observable, of} from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class SessionService extends NaturalAbstractModelService<
     SessionQuery['session'],
     SessionQueryVariables,

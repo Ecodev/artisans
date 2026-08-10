@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {formatIsoDateTime, type FormValidators, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     type CreateEvent,
@@ -16,9 +16,7 @@ import {
 import {createEvent, deleteEvents, eventQuery, eventsQuery, updateEvent} from './event.queries';
 import {Validators} from '@angular/forms';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class EventService extends NaturalAbstractModelService<
     EventQuery['event'],
     EventQueryVariables,

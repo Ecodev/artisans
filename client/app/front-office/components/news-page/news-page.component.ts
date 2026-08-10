@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from '@ecodev/natural';
 import {NewsService} from '../../../admin/newses/services/news.service';
@@ -12,6 +12,7 @@ import {DatePipe} from '@angular/common';
     imports: [DatePipe, RouterLink, MatIcon, NaturalIconDirective, NaturalCapitalizePipe, MatMiniFabButton],
     templateUrl: './news-page.component.html',
     styleUrl: './news-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class NewsPageComponent extends NaturalAbstractDetail<NewsService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

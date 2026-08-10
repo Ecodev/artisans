@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {NaturalAbstractDetail, NaturalCapitalizePipe, NaturalIconDirective} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
@@ -11,6 +11,7 @@ import {DatePipe} from '@angular/common';
     imports: [DatePipe, RouterLink, MatIcon, NaturalIconDirective, NaturalCapitalizePipe, MatMiniFabButton],
     templateUrl: './event-page.component.html',
     styleUrl: './event-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class EventPageComponent extends NaturalAbstractDetail<EventService> implements OnInit {
     public constructor() {

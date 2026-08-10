@@ -8,7 +8,7 @@ import {
     type NaturalSeoResolveData,
     NaturalStampComponent,
 } from '@ecodev/natural';
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';
@@ -55,6 +55,7 @@ import {MatDivider} from '@angular/material/divider';
     ],
     templateUrl: './news.component.html',
     styleUrl: './news.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class NewsComponent extends NaturalAbstractDetail<NewsService, NaturalSeoResolveData> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {NaturalAbstractModelService} from '@ecodev/natural';
 import {
     type CreateFacilitatorDocument,
@@ -21,9 +21,7 @@ import {
     updateFacilitatorDocument,
 } from './facilitator-documents.queries';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class FacilitatorDocumentsService extends NaturalAbstractModelService<
     FacilitatorDocumentQuery['facilitatorDocument'],
     FacilitatorDocumentQueryVariables,

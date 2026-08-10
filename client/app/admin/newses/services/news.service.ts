@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {formatIsoDateTime, type FormValidators, type Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {
     type CreateNews,
@@ -17,9 +17,7 @@ import {
 import {createNews, deleteNewses, newsesQuery, newsQuery, updateNews} from './news.queries';
 import {Validators} from '@angular/forms';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class NewsService extends NaturalAbstractModelService<
     NewsQuery['news'],
     NewsQueryVariables,

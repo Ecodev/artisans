@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterOutlet} from '@angular/router';
 import {
     NaturalAlertService,
@@ -36,6 +36,7 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
     ],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class CartComponent implements OnInit {
     private readonly alertService = inject(NaturalAlertService);

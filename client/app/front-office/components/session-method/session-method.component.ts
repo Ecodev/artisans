@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {SessionSideColumnComponent} from '../session-side-column/session-side-column.component';
 import {RouterLink} from '@angular/router';
 
@@ -7,5 +7,6 @@ import {RouterLink} from '@angular/router';
     imports: [RouterLink, SessionSideColumnComponent],
     templateUrl: './session-method.component.html',
     styleUrl: './session-method.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SessionMethodComponent {}

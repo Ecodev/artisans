@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, input, type OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, input, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {type CartLineProduct} from '../../../front-office/modules/cart/classes/cart';
 import {type SubscriptionsQuery} from '../../generated-types';
 import {Currency, CurrencyService} from '../../services/currency.service';
@@ -10,6 +10,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     imports: [CurrencyPipe],
     templateUrl: './price.component.html',
     styleUrl: './price.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class PriceComponent implements OnInit {
     protected readonly currencyService = inject(CurrencyService);

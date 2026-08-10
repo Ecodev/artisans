@@ -1,4 +1,4 @@
-import {Component, inject, input, type OnInit} from '@angular/core';
+import {Component, inject, input, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {forkJoin} from 'rxjs';
 import {ConfigurationService} from '../../../configuration/services/configuration.service';
@@ -40,6 +40,7 @@ type Block = {
     ],
     templateUrl: './home-block.component.html',
     styleUrl: './home-block.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class HomeBlockComponent implements OnInit {
     private readonly configService = inject(ConfigurationService);

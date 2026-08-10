@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalCapitalizePipe, type PaginationInput} from '@ecodev/natural';
 import {EventService} from '../../../admin/events/services/event.service';
 import {AbstractInfiniteLoadList} from '../../../shared/classes/AbstractInfiniteLoadList';
@@ -11,6 +11,7 @@ import {DatePipe} from '@angular/common';
     imports: [RouterLink, DatePipe, NaturalCapitalizePipe],
     templateUrl: './events-page.component.html',
     styleUrl: './events-page.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class EventsPageComponent extends AbstractInfiniteLoadList<EventService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

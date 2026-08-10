@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {type ValidatorFn, Validators} from '@angular/forms';
 import {
     type FormAsyncValidators,
@@ -30,9 +30,7 @@ import {xorValidator} from '../../../shared/validators';
 import {createProduct, deleteProducts, productQuery, productsQuery, updateProduct} from './product.queries';
 import {type Observable} from 'rxjs';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class ProductService extends NaturalAbstractModelService<
     ProductQuery['product'],
     ProductQueryVariables,

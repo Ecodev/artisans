@@ -1,5 +1,5 @@
 import {Apollo, gql} from 'apollo-angular';
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {
     type FileSelection,
@@ -36,6 +36,7 @@ import {AsyncPipe} from '@angular/common';
         AsyncPipe,
     ],
     templateUrl: './import.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ImportComponent implements OnInit {
     private readonly route = inject(ActivatedRoute);

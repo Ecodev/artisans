@@ -93,7 +93,9 @@
                         </td>
                         <td *matFooterCellDef mat-footer-cell class="natural-align-right">
                             @if (dataSource.data?.totalBalanceCHF > 0) {
-                                <span>{{ dataSource.data?.totalBalanceCHF | currency: 'CHF' }}</span>
+                                <span>{{
+                                    $safeNavigationMigration(dataSource.data?.totalBalanceCHF) | currency: 'CHF'
+                                }}</span>
                             }
                         </td>
                     </ng-container>
@@ -115,7 +117,9 @@
                         </td>
                         <td *matFooterCellDef mat-footer-cell class="natural-align-right">
                             @if (dataSource.data?.totalBalanceEUR > 0) {
-                                <span>{{ dataSource.data?.totalBalanceEUR | currency: 'EUR' }}</span>
+                                <span>{{
+                                    $safeNavigationMigration(dataSource.data?.totalBalanceEUR) | currency: 'EUR'
+                                }}</span>
                             }
                         </td>
                     </ng-container>
@@ -132,10 +136,10 @@
             }
             @if (dataSource.data?.length) {
                 <mat-paginator
-                    [length]="dataSource.data?.length"
-                    [pageIndex]="dataSource.data?.pageIndex"
+                    [length]="$safeNavigationMigration(dataSource.data?.length)"
+                    [pageIndex]="$safeNavigationMigration(dataSource.data?.pageIndex)"
                     [pageSizeOptions]="pageSizeOptions"
-                    [pageSize]="dataSource.data?.pageSize"
+                    [pageSize]="$safeNavigationMigration(dataSource.data?.pageSize)"
                     (page)="pagination($event)"
                 />
             }

@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
     type AvailableColumn,
     NaturalAbstractList,
@@ -60,6 +60,7 @@ import {AsyncPipe, DatePipe} from '@angular/common';
     ],
     templateUrl: './newses.component.html',
     styleUrl: './newses.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class NewsesComponent extends NaturalAbstractList<NewsService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

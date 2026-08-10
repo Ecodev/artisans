@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {inject, Service} from '@angular/core';
 import {type Literal, NaturalAbstractModelService} from '@ecodev/natural';
 import {type Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -17,9 +17,7 @@ import {
 import {OrderLineService} from './order-lines.service';
 import {createOrder, orderQuery, ordersQuery, updateOrderStatus} from './order.queries';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class OrderService extends NaturalAbstractModelService<
     OrderQuery['order'],
     OrderQueryVariables,

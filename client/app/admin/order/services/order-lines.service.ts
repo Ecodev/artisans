@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Service} from '@angular/core';
 import {type ValidatorFn, Validators} from '@angular/forms';
 import {type FormValidators, integer, NaturalAbstractModelService} from '@ecodev/natural';
 import {
@@ -14,9 +14,7 @@ import {
 import {orderLineQuery, orderLinesQuery, updateOrderLine} from './order-lines.queries';
 import {xorValidator} from '../../../shared/validators';
 
-@Injectable({
-    providedIn: 'root',
-})
+@Service()
 export class OrderLineService extends NaturalAbstractModelService<
     OrderLineQuery['orderLine'],
     OrderLineQueryVariables,

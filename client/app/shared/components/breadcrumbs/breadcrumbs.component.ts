@@ -1,4 +1,4 @@
-import {Component, DestroyRef, inject, type OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {type ActivatedRouteSnapshot, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {filter} from 'rxjs/operators';
 import {MatButton} from '@angular/material/button';
@@ -14,6 +14,7 @@ export type Breadcrumb = {
     imports: [MatButton, RouterLink],
     templateUrl: './breadcrumbs.component.html',
     styleUrl: './breadcrumbs.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class BreadcrumbsComponent implements OnInit {
     private readonly router = inject(Router);

@@ -1,4 +1,4 @@
-import {Component, inject, Input, input, type OnInit} from '@angular/core';
+import {Component, inject, Input, input, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {
     type AvailableColumn,
     NaturalAbstractList,
@@ -64,6 +64,7 @@ import {
     ],
     templateUrl: './order-lines.component.html',
     styleUrl: './order-lines.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class OrderLinesComponent extends NaturalAbstractList<OrderLineService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

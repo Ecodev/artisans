@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     type AvailableColumn,
@@ -65,6 +65,7 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
     ],
     templateUrl: './products.component.html',
     styleUrl: './products.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class ProductsComponent extends NaturalAbstractList<ProductService> implements OnInit {
     protected readonly permissionsService = inject(PermissionsService);

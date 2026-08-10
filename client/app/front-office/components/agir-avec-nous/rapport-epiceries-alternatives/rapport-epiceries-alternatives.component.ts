@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 
 @Component({
@@ -6,5 +6,6 @@ import {MatButton} from '@angular/material/button';
     imports: [MatButton],
     templateUrl: './rapport-epiceries-alternatives.component.html',
     styleUrl: './rapport-epiceries-alternatives.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class RapportEpiceriesAlternativesComponent {}

@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalAbstractDetail, NaturalIconDirective} from '@ecodev/natural';
 import {UserService} from '../../../admin/users/services/user.service';
 import {MatIcon} from '@angular/material/icon';
@@ -25,6 +25,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ],
     templateUrl: './account.component.html',
     styleUrl: './account.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class AccountComponent extends NaturalAbstractDetail<UserService> implements OnInit {
     /**

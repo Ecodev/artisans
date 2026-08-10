@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {NaturalSrcDensityDirective} from '@ecodev/natural';
 import {RouterLink} from '@angular/router';
 
@@ -7,5 +7,6 @@ import {RouterLink} from '@angular/router';
     imports: [NaturalSrcDensityDirective, RouterLink],
     templateUrl: './irremplacables-epiceries.component.html',
     styleUrl: './irremplacables-epiceries.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class IrremplacablesEpiceriesComponent {}

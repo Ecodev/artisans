@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit} from '@angular/core';
+import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
 import {MatDialog, type MatDialogConfig} from '@angular/material/dialog';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NaturalQueryVariablesManager} from '@ecodev/natural';
@@ -15,6 +15,7 @@ import {PriceComponent} from '../../../../../shared/components/price/price.compo
     imports: [PriceComponent, MatButton],
     templateUrl: './subscriptions.component.html',
     styleUrl: './subscriptions.component.scss',
+    changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class SubscriptionsComponent implements OnInit {
     private readonly subscriptionService = inject(SubscriptionService);

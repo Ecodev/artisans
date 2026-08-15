@@ -104,7 +104,7 @@ class DatatransHandlerTest extends TestCase
         $mailer = self::createStub(Mailer::class);
 
         $messageQueuer = $this->createMock(MessageQueuer::class);
-        $messageQueuer->expects(self::any())
+        $messageQueuer
             ->method('getAllEmailsToNotify')
             ->willReturn(['administrator@example.com']);
 

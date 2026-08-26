@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
      */
     protected returnUrl = '/';
     protected readonly form = this.fb.group({
-        email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
+        email: ['', [Validators.required, deliverableEmail]],
         password: ['', [Validators.required]],
     });
     protected hidePassword = true;

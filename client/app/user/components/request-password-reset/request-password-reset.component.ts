@@ -41,7 +41,7 @@ export class RequestPasswordResetComponent {
     private readonly fb = inject(NonNullableFormBuilder);
 
     protected readonly form = this.fb.group({
-        email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
+        email: ['', [Validators.required, deliverableEmail]],
     });
     protected sending = false;
 

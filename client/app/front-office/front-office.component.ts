@@ -87,7 +87,7 @@ export class FrontOfficeComponent implements OnInit, AfterViewInit {
 
     protected viewer: CurrentUserForProfileQuery['viewer'] = null;
     protected readonly newsletterForm = this.fb.group({
-        email: ['', [Validators.required, deliverableEmail, Validators.maxLength(191)]],
+        email: ['', [Validators.required, deliverableEmail]],
     });
 
     /**

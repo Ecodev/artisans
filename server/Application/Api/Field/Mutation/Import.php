@@ -34,7 +34,7 @@ abstract class Import implements FieldInterface
 
                 // Move file to tmp dir
                 $dir = 'data/tmp/import';
-                @mkdir($dir);
+                @mkdir($dir, recursive: true);
                 $path = $dir . '/' . uniqid() . '.csv';
                 $file->moveTo($path);
 

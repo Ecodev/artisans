@@ -120,7 +120,7 @@
             </div>
         }
         <div class="nat-horizontal nat-center" id="end-of-list">
-            @if (items && dataSource?.data?.length > items.length) {
+            @if (items && (dataSource?.data?.length ?? 0) > items.length) {
                 <a matButton="outlined" (click)="loadMore()">
                     {{ route.snapshot.data.showMoreLabel }}
                 </a>

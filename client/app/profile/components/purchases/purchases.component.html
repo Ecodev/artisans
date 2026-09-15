@@ -12,42 +12,47 @@
             </div>
             <div class="responsive-table nat-gap-30 nat-vertical">
                 @for (orderLine of dataSource.data?.items; track orderLine) {
-                    <div class="product nat-gap nat-horizontal">
-                        @if (orderLine.product.image) {
-                            <a class="product-image" [routerLink]="['/larevuedurable/article', orderLine.product.id]">
-                                <img
-                                    alt="aperçu du produit"
-                                    [naturalSrcDensity]="`/api/image/${orderLine.product.image.id}/90`"
-                                />
-                            </a>
-                        }
-                        <div class="nat-expand nat-gap-5 nat-vertical nat-top nat-left">
-                            <div class="nat-horizontal text-light nat-gap-15 nat-left nat-baseline">
-                                @if (orderLine.product.reviewNumber) {
-                                    <span class="nat-text-primary">N° {{ orderLine.product.reviewNumber }}</span>
-                                }
-                                @if (orderLine.product.releaseDate) {
-                                    <span>
-                                        {{ orderLine.product.releaseDate | date: 'MMMM yyyy' | capitalize }}
-                                    </span>
-                                }
-                                <span>{{ orderLine.type | enum: 'ProductType' | async }}</span>
-                            </div>
-                            <a
-                                matRipple
-                                class="mat-font-title-md"
-                                [routerLink]="['/larevuedurable/article', orderLine.product.id]"
-                            >
-                                {{ orderLine.product.name }}
-                            </a>
-                            @if (canDownload(orderLine)) {
-                                <a matButton="outlined" color="tertiary" [href]="getDownloadLink(orderLine)">
-                                    <mat-icon naturalIcon="get_app" />
-                                    Télécharger
+                    @if (orderLine.product) {
+                        <div class="product nat-gap nat-horizontal">
+                            @if (orderLine.product.image) {
+                                <a
+                                    class="product-image"
+                                    [routerLink]="['/larevuedurable/article', orderLine.product.id]"
+                                >
+                                    <img
+                                        alt="aperçu du produit"
+                                        [naturalSrcDensity]="`/api/image/${orderLine.product.image.id}/90`"
+                                    />
                                 </a>
                             }
+                            <div class="nat-expand nat-gap-5 nat-vertical nat-top nat-left">
+                                <div class="nat-horizontal text-light nat-gap-15 nat-left nat-baseline">
+                                    @if (orderLine.product.reviewNumber) {
+                                        <span class="nat-text-primary">N° {{ orderLine.product.reviewNumber }}</span>
+                                    }
+                                    @if (orderLine.product.releaseDate) {
+                                        <span>
+                                            {{ orderLine.product.releaseDate | date: 'MMMM yyyy' | capitalize }}
+                                        </span>
+                                    }
+                                    <span>{{ orderLine.type | enum: 'ProductType' | async }}</span>
+                                </div>
+                                <a
+                                    matRipple
+                                    class="mat-font-title-md"
+                                    [routerLink]="['/larevuedurable/article', orderLine.product.id]"
+                                >
+                                    {{ orderLine.product.name }}
+                                </a>
+                                @if (canDownload(orderLine)) {
+                                    <a matButton="outlined" color="tertiary" [href]="getDownloadLink(orderLine)">
+                                        <mat-icon naturalIcon="get_app" />
+                                        Télécharger
+                                    </a>
+                                }
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
             </div>
 
@@ -61,8 +66,8 @@
             }
             @if (dataSource.data?.length) {
                 <mat-paginator
-                    [length]="dataSource.data?.length"
-                    [pageIndex]="dataSource.data?.pageIndex"
+                    [length]="dataSource.data.length"
+                    [pageIndex]="dataSource.data.pageIndex"
                     [pageSizeOptions]="[25]"
                     [pageSize]="25"
                     (page)="pagination($event)"

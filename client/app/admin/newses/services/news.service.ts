@@ -35,7 +35,10 @@ export class NewsService extends NaturalAbstractModelService<
     }
 
     public override getInput(object: Literal, forCreation: boolean): NewsInput | NewsPartialInput {
-        object.content = object.content || '';
+        if ('content' in object) {
+            object.content = object.content || '';
+        }
+
         return super.getInput(object, forCreation);
     }
 

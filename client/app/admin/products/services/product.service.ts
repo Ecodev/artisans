@@ -75,7 +75,10 @@ export class ProductService extends NaturalAbstractModelService<
     }
 
     public override getInput(object: Literal, forCreation: boolean): ProductInput | ProductPartialInput {
-        object.description = object.description || '';
+        if ('description' in object) {
+            object.description = object.description || '';
+        }
+
         return super.getInput(object, forCreation);
     }
 

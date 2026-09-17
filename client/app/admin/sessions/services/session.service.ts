@@ -45,7 +45,10 @@ export class SessionService extends NaturalAbstractModelService<
     }
 
     public override getInput(object: Literal, forCreation: boolean): SessionInput | SessionPartialInput {
-        object.description = object.description || '';
+        if ('description' in object) {
+            object.description = object.description || '';
+        }
+
         return super.getInput(object, forCreation);
     }
 

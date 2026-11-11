@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bc78ff4b4cee50e45ec77f90e3fa9f2",
+    "content-hash": "cd9265805a2303af524d307545aa60fa",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -6966,7 +6966,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-04T22:21:45+00:00"
+            "time": "2026-08-04T22:21:45+00:00",
+            "published-time": "2026-08-04T22:21:59+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -9713,5 +9714,5 @@
         "ext-pdo": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }

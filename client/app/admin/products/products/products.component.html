@@ -132,5 +132,5 @@
 }
 
 @if ((permissionsService.crud | async)?.product.create) {
-    <natural-fixed-button icon="add" [routerLink]="['/admin/product/new']" />
+    <natural-fixed-button icon="add" [navigate]="['/admin/product/new']" />
 }

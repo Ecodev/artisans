@@ -73,5 +73,5 @@
 }
 
 @if ((permissionsService.crud | async)?.facilitatorDocument.create) {
-    <natural-fixed-button icon="add" [routerLink]="['/admin/facilitator-document/new']" />
+    <natural-fixed-button icon="add" [navigate]="['/admin/facilitator-document/new']" />
 }

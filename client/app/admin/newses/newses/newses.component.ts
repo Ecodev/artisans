@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, type OnInit} from '@angular/core';
 import {
     type AvailableColumn,
     NaturalAbstractList,
@@ -11,7 +11,6 @@ import {
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {NewsService} from '../services/news.service';
-import {RouterLink} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatIcon} from '@angular/material/icon';
@@ -56,7 +55,6 @@ import {AsyncPipe, DatePipe} from '@angular/common';
         MatProgressSpinner,
         MatPaginator,
         NaturalFixedButtonComponent,
-        RouterLink,
     ],
     templateUrl: './newses.component.html',
     styleUrl: './newses.component.scss',

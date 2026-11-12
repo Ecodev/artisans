@@ -80,5 +80,5 @@
 }
 
 @if ((permissionsService.crud | async)?.news.create) {
-    <natural-fixed-button icon="add" [routerLink]="['/admin/news/new']" />
+    <natural-fixed-button icon="add" [navigate]="['/admin/news/new']" />
 }

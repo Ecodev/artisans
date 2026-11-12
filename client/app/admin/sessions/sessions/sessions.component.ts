@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, type OnInit} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {
     type AvailableColumn,

@@ -1,5 +1,4 @@
-import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {ChangeDetectionStrategy, Component, inject, type OnInit} from '@angular/core';
 import {
     type AvailableColumn,
     NaturalAbstractList,
@@ -60,7 +59,6 @@ import {AsyncPipe, CurrencyPipe} from '@angular/common';
         MatProgressSpinner,
         MatPaginator,
         NaturalFixedButtonComponent,
-        RouterLink,
         NaturalEnumPipe,
     ],
     templateUrl: './products.component.html',

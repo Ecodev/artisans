@@ -1,6 +1,5 @@
 import {Apollo} from 'apollo-angular';
-import {Component, DOCUMENT, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {ChangeDetectionStrategy, Component, DOCUMENT, inject, type OnInit} from '@angular/core';
 import {
     type AvailableColumn,
     type Button,
@@ -69,7 +68,6 @@ import {MatButton} from '@angular/material/button';
         MatProgressSpinner,
         MatPaginator,
         NaturalFixedButtonComponent,
-        RouterLink,
         NaturalEnumPipe,
         MatButton,
     ],

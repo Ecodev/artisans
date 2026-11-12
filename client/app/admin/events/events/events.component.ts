@@ -1,4 +1,4 @@
-import {Component, inject, type OnInit, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, type OnInit} from '@angular/core';
 import {
     type AvailableColumn,
     NaturalAbstractList,
@@ -10,7 +10,6 @@ import {
 } from '@ecodev/natural';
 import {PermissionsService} from '../../../shared/services/permissions.service';
 import {EventService} from '../services/event.service';
-import {RouterLink} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatProgressSpinner} from '@angular/material/progress-spinner';
 import {MatTooltip} from '@angular/material/tooltip';
@@ -52,7 +51,6 @@ import {AsyncPipe, DatePipe} from '@angular/common';
         MatProgressSpinner,
         MatPaginator,
         NaturalFixedButtonComponent,
-        RouterLink,
     ],
     templateUrl: './events.component.html',
     styleUrl: './events.component.scss',
